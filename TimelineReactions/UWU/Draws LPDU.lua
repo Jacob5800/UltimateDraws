@@ -122,38 +122,6 @@ local tbl =
 			},
 			objectType = "folder",
 		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Alert",
-							alertDuration = 8000,
-							alertPriority = 2,
-							alertTTS = true,
-							alertText = "OT first Mistral; party north-south line. MT drag Garuda south after.",
-							uuid = "e875a908-ce58-1586-bb9c-14c41411504e",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-				},
-				displayPath = "[Raid calls]",
-				mechanicTime = 12,
-				name = "[Raid Call][Garuda] Opening Mistral",
-				timelineIndex = 3,
-				timerOffset = -1,
-				uuid = "0e667ac5-e4bf-7392-b70f-94446d683743",
-				version = 2,
-			},
-		},
 	},
 	[4] = 
 	{
@@ -605,6 +573,14 @@ local tbl =
 							alertPriority = 2,
 							alertTTS = true,
 							alertText = "Get hit by friction",
+							conditions = 
+							{
+								
+								{
+									"f356668c-bb3c-8866-a374-433db8366df1",
+									true,
+								},
+							},
 							uuid = "7869fda0-949e-eac8-bd87-9ab475330567",
 							version = 2.1,
 						},
@@ -616,8 +592,10 @@ local tbl =
 					{
 						data = 
 						{
-							category = "Self",
+							category = "Lua",
+							conditionLua = "local role = AnyoneCore.Roster.mySlot()\nreturn role == \"OT\" or role == \"M1\" or role == \"M2\"",
 							conditionType = 9,
+							name = "OT, M1, M2",
 							partyTargetType = "Melee DPS",
 							uuid = "f356668c-bb3c-8866-a374-433db8366df1",
 							version = 3,
@@ -814,7 +792,7 @@ local tbl =
 							aType = "Alert",
 							alertPriority = 2,
 							alertTTS = true,
-							alertText = "Stay for second hit",
+							alertText = "Move outside and get hit by Friction",
 							uuid = "4dce1523-144f-d707-a5c6-26b3446a33af",
 							version = 2.1,
 						},
@@ -822,20 +800,9 @@ local tbl =
 				},
 				conditions = 
 				{
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 9,
-							partyTargetType = "Melee DPS",
-							uuid = "218e90ee-20c9-df39-a6f4-a6e0ab809051",
-							version = 3,
-						},
-					},
 				},
 				mechanicTime = 57,
-				name = "Melee TTS",
+				name = "Second Friction",
 				timelineIndex = 13,
 				timerOffset = -2.5,
 				uuid = "f00db3a6-4df6-093a-bde3-5383605e73e9",
@@ -856,6 +823,14 @@ local tbl =
 							alertPriority = 2,
 							alertTTS = true,
 							alertText = "Cleanse Debuff M1 first.",
+							conditions = 
+							{
+								
+								{
+									"45f19d2b-a640-d33b-8e69-5d4f7961e4ef",
+									true,
+								},
+							},
 							uuid = "c3e1ec47-be81-c8fd-bbea-7ae501a8142c",
 							version = 2.1,
 						},
@@ -867,8 +842,10 @@ local tbl =
 					{
 						data = 
 						{
-							category = "Self",
+							category = "Lua",
+							conditionLua = "local role = AnyoneCore.Roster.mySlot()\nreturn role == \"M1\" or role == \"M2\"",
 							conditionType = 9,
+							name = "M1/M2 Only",
 							partyTargetType = "Melee DPS",
 							uuid = "45f19d2b-a640-d33b-8e69-5d4f7961e4ef",
 							version = 3,
@@ -975,6 +952,14 @@ local tbl =
 							alertTTS = true,
 							alertText = "MOVE",
 							alertVolume = 81,
+							conditions = 
+							{
+								
+								{
+									"cd5f5a07-89a6-19f3-86a1-a7b5e20387cd",
+									true,
+								},
+							},
 							uuid = "cbda6130-e490-7f91-8e2d-aa7defa89bd1",
 							version = 2.1,
 						},
@@ -982,7 +967,22 @@ local tbl =
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventArgType = 2,
+							eventSpellName = "Feather Rain",
+							name = "Feather Rain cast",
+							uuid = "cd5f5a07-89a6-19f3-86a1-a7b5e20387cd",
+							version = 3,
+						},
+					},
 				},
+				eventType = 3,
 				mechanicTime = 93,
 				name = "MOVE!",
 				timelineIndex = 18,
@@ -1280,7 +1280,15 @@ local tbl =
 							alertDuration = 8000,
 							alertPriority = 2,
 							alertTTS = true,
-							alertText = "Caster west; Thermal Low tank east. Only one Mesohigh cleanse.",
+							alertText = "Caster take west tether",
+							conditions = 
+							{
+								
+								{
+									"799dfc4e-c873-f1fd-b00d-f5a73c189eea",
+									true,
+								},
+							},
 							uuid = "17ccdb0f-7f7c-158c-b5cb-9f252ac8578c",
 							version = 2.1,
 						},
@@ -1288,6 +1296,17 @@ local tbl =
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return AnyoneCore.Roster.mySlot() == \"R2\"",
+							name = "R2 Only",
+							uuid = "799dfc4e-c873-f1fd-b00d-f5a73c189eea",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "[Raid calls]",
 				mechanicTime = 124,
@@ -1295,6 +1314,57 @@ local tbl =
 				timelineIndex = 26,
 				timerOffset = -1,
 				uuid = "2bc7ce40-829a-1e5d-8791-50992f76d1e7",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 8000,
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = "Tank take East Tether",
+							conditions = 
+							{
+								
+								{
+									"105aa17b-27b9-f298-8c2e-ad12b3d436e1",
+									true,
+								},
+							},
+							uuid = "6a861670-424e-bba8-8195-091ad38d9b77",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return AnyoneCore.Roster.mySlot() == \"OT\"",
+							name = "OT Only",
+							uuid = "105aa17b-27b9-f298-8c2e-ad12b3d436e1",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "[Raid calls]",
+				mechanicTime = 124,
+				name = "[Raid Call][Garuda] Mesohigh - OT",
+				timelineIndex = 26,
+				timerOffset = -1,
+				uuid = "4514e727-5740-a6a2-bf4e-4ce6e7137062",
 				version = 2,
 			},
 		},
@@ -1367,6 +1437,14 @@ local tbl =
 						{
 							aType = "Lua",
 							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then\n    self.used = true\n    return\nend\n\nlocal target = {x = x, y = y, z = z}\nlocal distance = TensorCore.getDistance2d(player.pos, target)\nif distance > 0.25 then\n    local tipLength = math.min(2.0, distance * 0.4)\n    local drawer = TensorCore.getCachedDrawer(\n        0xFFB8FF88,\n        0xFF55FF55,\n        0xFF2A8A2A,\n        0xFFFFFFFF,\n        3\n    )\n    drawer:addTimedArrow(\n        8000,\n        player.pos.x, player.pos.y, player.pos.z,\n        TensorCore.getHeadingToTarget(player.pos, target),\n        math.max(0.1, distance - tipLength),\n        1.4,\n        tipLength,\n        2.6,\n        0,\n        false,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\n    drawer:addTimedCircle(\n        8000,\n        target.x, target.y, target.z,\n        1.7,\n        0,\n        false,\n        true\n    )\nend\n\nTensorCore.addAlertText(5000, \"PICK UP LIGHT PUDDLE\", 1.0, 2, false)\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"40d0eb71-a56d-4b7f-9e9f-e8788975391b",
+									true,
+								},
+							},
 							displayPath = "Draws - Garuda",
 							name = "Alert and arrow to light puddle",
 							uuid = "01dce23e-3b58-d3ac-a3f6-743b26d1cdcf",
@@ -1470,7 +1548,8 @@ local tbl =
 				name = "[Draw] Ifrit Transition - Player Safe Side Arrow",
 				timeRange = true,
 				timelineIndex = 28,
-				timerEndOffset = 10,
+				timerEndOffset = 45,
+				timerStartOffset = -10,
 				uuid = "fd6dd169-23ea-ba63-a252-d37a22ef62bf",
 				version = 2,
 			},
@@ -2292,7 +2371,7 @@ local tbl =
 							aType = "Alert",
 							alertDuration = 6000,
 							alertPriority = 2,
-							alertScale = 0.9,
+							alertScale = 0.89999997615814,
 							alertTTS = true,
 							alertText = "MELEE: BURN DPS-CLOSE NAIL TO 40%, THEN FOLLOW ORDER",
 							conditions = 
@@ -2400,7 +2479,7 @@ local tbl =
 							alertDuration = 8000,
 							alertPriority = 2,
 							alertTTS = true,
-							alertText = "DPS hold nails low; Reverse Z, kill each after two Eruptions.",
+							alertText = "DPS nails low then follow order",
 							uuid = "ff67f309-11bd-9c44-8a0d-467f368abeef",
 							version = 2.1,
 						},
@@ -2732,6 +2811,68 @@ local tbl =
 			},
 		},
 	},
+	[47] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ifrit",
+				uuid = "949fca65-5ee6-206f-805a-a36c3e3009a9",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local role = GetCurrentRole()\nif role ~= \"R1\" and role ~= \"R2\" then self.used = true; return end\n\nlocal state = data.uwu_relative_nails\nif not state or not state.nails then self.used = true; return end\n\nlocal nails = {}\nfor _, nail in pairs(state.nails) do\n    if nail and nail.id and nail.x and nail.z then\n        nails[#nails + 1] = { id = nail.id, x = nail.x, z = nail.z }\n    end\nend\nif #nails ~= 4 then self.used = true; return end\n\nlocal northAIndex, northBIndex = 1, 2\nlocal minDistanceSquared = math.huge\nfor i = 1, 3 do\n    for j = i + 1, 4 do\n        local dx = nails[i].x - nails[j].x\n        local dz = nails[i].z - nails[j].z\n        local distanceSquared = dx * dx + dz * dz\n        if distanceSquared < minDistanceSquared then\n            minDistanceSquared = distanceSquared\n            northAIndex = i\n            northBIndex = j\n        end\n    end\nend\n\nlocal northA = nails[northAIndex]\nlocal northB = nails[northBIndex]\nlocal southA, southB\nfor i = 1, 4 do\n    if i ~= northAIndex and i ~= northBIndex then\n        if not southA then southA = nails[i] else southB = nails[i] end\n    end\nend\n\nlocal northCenterX = (northA.x + northB.x) * 0.5\nlocal northCenterZ = (northA.z + northB.z) * 0.5\nlocal southCenterX = (southA.x + southB.x) * 0.5\nlocal southCenterZ = (southA.z + southB.z) * 0.5\nlocal northX = northCenterX - southCenterX\nlocal northZ = northCenterZ - southCenterZ\nlocal northLength = math.sqrt(northX * northX + northZ * northZ)\nif northLength < 0.01 then self.used = true; return end\n\nlocal eastX = -northZ / northLength\nlocal eastZ = northX / northLength\nlocal relative = {}\n\nlocal northASide = (northA.x - northCenterX) * eastX + (northA.z - northCenterZ) * eastZ\nlocal northBSide = (northB.x - northCenterX) * eastX + (northB.z - northCenterZ) * eastZ\nlocal southASide = (southA.x - southCenterX) * eastX + (southA.z - southCenterZ) * eastZ\nlocal southBSide = (southB.x - southCenterX) * eastX + (southB.z - southCenterZ) * eastZ\n\nrelative[northASide >= 0 and \"NE\" or \"NW\"] = northA\nrelative[northBSide >= 0 and \"NE\" or \"NW\"] = northB\nrelative[southASide >= 0 and \"SE\" or \"SW\"] = southA\nrelative[southBSide >= 0 and \"SE\" or \"SW\"] = southB\n\nlocal first = role == \"R1\" and relative.SE or relative.SW\nlocal second = role == \"R1\" and relative.NE or relative.NW\nlocal player = TensorCore.mGetPlayer()\nif not first or not second or not player or not player.pos then self.used = true; return end\n\nlocal centerX, centerZ = 100, 100\nlocal edgeRadius = 17.0\nlocal middleX = role == \"R1\" and eastX or -eastX\nlocal middleZ = role == \"R1\" and eastZ or -eastZ\n\nlocal function outerEdgePosition(nail, tangentOffset)\n    local dx = nail.x - centerX\n    local dz = nail.z - centerZ\n    local radialLength = math.sqrt(dx * dx + dz * dz)\n    if radialLength < 0.1 then return nil end\n\n    local radialX = dx / radialLength\n    local radialZ = dz / radialLength\n    local projection = middleX * radialX + middleZ * radialZ\n    local tangentX = middleX - projection * radialX\n    local tangentZ = middleZ - projection * radialZ\n    local tangentLength = math.sqrt(tangentX * tangentX + tangentZ * tangentZ)\n    if tangentLength < 0.1 then return nil end\n\n    local radialAtPoint = math.sqrt(edgeRadius * edgeRadius - tangentOffset * tangentOffset)\n    return {\n        x = centerX + radialX * radialAtPoint + tangentX / tangentLength * tangentOffset,\n        y = player.pos.y,\n        z = centerZ + radialZ * radialAtPoint + tangentZ / tangentLength * tangentOffset\n    }\nend\n\nlocal hit1 = outerEdgePosition(first, -2.0)\nlocal hit2 = outerEdgePosition(first, 2.0)\nlocal hit3 = outerEdgePosition(second, 2.0)\nlocal hit4 = outerEdgePosition(second, -2.0)\nif not hit1 or not hit2 or not hit3 or not hit4 then self.used = true; return end\n\nlocal middlePosition = {\n    x = centerX + middleX * edgeRadius,\n    y = player.pos.y,\n    z = centerZ + middleZ * edgeRadius\n}\nlocal groupPosition = {\n    x = centerX,\n    y = player.pos.y,\n    z = centerZ\n}\n\nlocal duration = 12000\nlocal drawer = TensorCore.getCachedDrawer(0xFF66FF99, 0xFF00AA66, 0xFF006644, 0xFFFFFFFF, 2)\ndrawer:addTimedCircle(\n    duration, hit1.x, hit1.y, hit1.z, 0.85, 0, false, true,\n    Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n)\n\nlocal function drawMoveArrow(fromPosition, toPosition)\n    local distance = TensorCore.getDistance2d(fromPosition, toPosition)\n    if not distance or distance <= 0.25 then return end\n    local tipLength = math.min(1.5, distance * 0.35)\n    drawer:addTimedArrow(\n        duration, fromPosition.x, fromPosition.y, fromPosition.z,\n        TensorCore.getHeadingToTarget(fromPosition, toPosition),\n        math.max(0.1, distance - tipLength), 1.0, tipLength, 2.3, 0, false,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\n\ndrawMoveArrow(player.pos, hit1)\ndrawMoveArrow(hit1, hit2)\ndrawMoveArrow(hit2, middlePosition)\ndrawMoveArrow(middlePosition, hit3)\ndrawMoveArrow(hit3, hit4)\ndrawMoveArrow(hit4, groupPosition)\n\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"7156ff68-ed31-b21f-b280-fbae4b3aa5b2",
+									true,
+								},
+							},
+							name = "Draw - Four eruption positions on outer edge",
+							uuid = "049fec56-c008-b98c-b9c2-afa8a900095d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local role = GetCurrentRole()\nreturn role == \"R1\" or role == \"R2\"",
+							name = "R1/R2 only",
+							uuid = "7156ff68-ed31-b21f-b280-fbae4b3aa5b2",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Ifrit",
+				mechanicTime = 345,
+				name = "[Draw] Eruption Bait Route - R1/R2",
+				timelineIndex = 47,
+				timerOffset = -4,
+				uuid = "8aafec30-970f-8806-b17e-8932d35cc4ee",
+				version = 2,
+			},
+		},
+	},
 	[52] = 
 	{
 		
@@ -2891,7 +3032,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local player = TensorCore.mGetPlayer()\nlocal ifrit = TensorCore.mGetEntity(eventArgs.ownerID)\nlocal state = data.uwu_ifrit_last_nail\nlocal last = state and state.last\nif not player or not ifrit or not last then\n    self.used = true\n    return\nend\n\nlocal party = TensorCore.getEntityGroupList(\"Party\")\nlocal firstID\nlocal secondID\nlocal firstDistance = -1\nlocal secondDistance = -1\n\nfor _, member in pairs(party or {}) do\n    if member and member.id ~= eventArgs.entityID and member.hp and member.hp.current > 0 then\n        local distance = TensorCore.getDistance2d(member.pos, ifrit.pos)\n        if distance > firstDistance then\n            secondID = firstID\n            secondDistance = firstDistance\n            firstID = member.id\n            firstDistance = distance\n        elseif distance > secondDistance then\n            secondID = member.id\n            secondDistance = distance\n        end\n    end\nend\n\nif player.id ~= firstID and player.id ~= secondID then\n    self.used = true\n    return\nend\n\nlocal northX = last.x - 100\nlocal northZ = last.z - 100\nlocal northLength = math.sqrt(northX * northX + northZ * northZ)\nif northLength < 0.1 then\n    self.used = true\n    return\nend\n\nnorthX = northX / northLength\nnorthZ = northZ / northLength\nlocal eastX = -northZ\nlocal eastZ = northX\n\nlocal southeast = {\n    x = 100 + eastX * 13.5 - northX * 13.5,\n    y = player.pos.y,\n    z = 100 + eastZ * 13.5 - northZ * 13.5\n}\nlocal northAlongEastWall = {\n    x = 100 + eastX * 16 + northX * 9.5,\n    y = player.pos.y,\n    z = 100 + eastZ * 16 + northZ * 9.5\n}\n\nlocal toStartDistance = TensorCore.getDistance2d(player.pos, southeast)\nlocal routeDistance = TensorCore.getDistance2d(southeast, northAlongEastWall)\nlocal startDrawer = TensorCore.getCachedDrawer(\n    0xFFFFE070, 0xFFFFB000, 0xFFFFFFFF, 0xFF000000, 4\n)\nlocal routeDrawer = TensorCore.getCachedDrawer(\n    0xFF70F0FF, 0xFF00B8FF, 0xFFFFFFFF, 0xFF000000, 4\n)\n\nif toStartDistance > 0.2 then\n    local tipLength = math.min(2.5, toStartDistance * 0.4)\n    startDrawer:addTimedArrow(\n        3200, player.pos.x, player.pos.y, player.pos.z,\n        TensorCore.getHeadingToTarget(player.pos, southeast),\n        math.max(0.1, toStartDistance - tipLength), 1.4, tipLength, 3.0,\n        0, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\n\nif routeDistance > 0.2 then\n    local tipLength = math.min(2.5, routeDistance * 0.35)\n    routeDrawer:addTimedArrow(\n        6500, southeast.x, southeast.y, southeast.z,\n        TensorCore.getHeadingToTarget(southeast, northAlongEastWall),\n        math.max(0.1, routeDistance - tipLength), 1.5, tipLength, 3.2,\n        2000, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\n\nself.used = true",
+							actionLua = "local player = TensorCore.mGetPlayer()\nlocal ifrit = TensorCore.mGetEntity(eventArgs.ownerID)\nlocal nailState = data.uwu_relative_nails\nif not player or not player.pos or not ifrit or not ifrit.pos or not nailState or not nailState.nails then\n    self.used = true\n    return\nend\n\nlocal role = AnyoneCore.Roster.mySlot()\nlocal firstNumber\nlocal secondNumber\nif role == \"R1\" then\n    firstNumber = 1\n    secondNumber = 3\nelseif role == \"R2\" then\n    firstNumber = 2\n    secondNumber = 4\nelse\n    self.used = true\n    return\nend\n\nlocal party = TensorCore.getEntityGroupList(\"Party\")\nlocal firstID\nlocal secondID\nlocal firstDistance = -1\nlocal secondDistance = -1\nfor _, member in pairs(party or {}) do\n    if member and member.id ~= eventArgs.entityID and member.pos and member.hp and member.hp.current > 0 then\n        local distance = TensorCore.getDistance2d(member.pos, ifrit.pos)\n        if distance > firstDistance then\n            secondID = firstID\n            secondDistance = firstDistance\n            firstID = member.id\n            firstDistance = distance\n        elseif distance > secondDistance then\n            secondID = member.id\n            secondDistance = distance\n        end\n    end\nend\n\nif player.id ~= firstID and player.id ~= secondID then\n    self.used = true\n    return\nend\n\nlocal nails = {}\nfor _, nail in pairs(nailState.nails) do\n    if nail and nail.x and nail.z then\n        nails[#nails + 1] = nail\n    end\nend\nif #nails ~= 4 then\n    self.used = true\n    return\nend\n\nlocal northAIndex = 1\nlocal northBIndex = 2\nlocal minDistanceSquared = math.huge\nfor i = 1, 3 do\n    for j = i + 1, 4 do\n        local dx = nails[i].x - nails[j].x\n        local dz = nails[i].z - nails[j].z\n        local distanceSquared = dx * dx + dz * dz\n        if distanceSquared < minDistanceSquared then\n            minDistanceSquared = distanceSquared\n            northAIndex = i\n            northBIndex = j\n        end\n    end\nend\n\nlocal northA = nails[northAIndex]\nlocal northB = nails[northBIndex]\nlocal southA\nlocal southB\nfor i = 1, 4 do\n    if i ~= northAIndex and i ~= northBIndex then\n        if not southA then\n            southA = nails[i]\n        else\n            southB = nails[i]\n        end\n    end\nend\n\nlocal northCenterX = (northA.x + northB.x) * 0.5\nlocal northCenterZ = (northA.z + northB.z) * 0.5\nlocal southCenterX = (southA.x + southB.x) * 0.5\nlocal southCenterZ = (southA.z + southB.z) * 0.5\nlocal northX = northCenterX - southCenterX\nlocal northZ = northCenterZ - southCenterZ\nlocal northLength = math.sqrt(northX * northX + northZ * northZ)\nif northLength < 0.01 then\n    self.used = true\n    return\nend\n\nlocal eastX = -northZ / northLength\nlocal eastZ = northX / northLength\n\nlocal nailByNumber = {}\nfor i, nail in ipairs(nails) do\n    local isNorthPair = i == northAIndex or i == northBIndex\n    local referenceX = isNorthPair and northCenterX or southCenterX\n    local referenceZ = isNorthPair and northCenterZ or southCenterZ\n    local eastSide = (nail.x - referenceX) * eastX + (nail.z - referenceZ) * eastZ\n    local number\n    if isNorthPair then\n        number = eastSide >= 0 and 3 or 4\n    else\n        number = eastSide >= 0 and 1 or 2\n    end\n    nailByNumber[number] = nail\nend\n\nlocal firstNail = nailByNumber[firstNumber]\nlocal secondNail = nailByNumber[secondNumber]\nif not firstNail or not secondNail then\n    self.used = true\n    return\nend\n\nlocal sideSign = role == \"R1\" and 1 or -1\nlocal hitOffset = 6.0\nlocal sideOffset = 5.7\nlocal function getHitPosition(nail, northOffset, eastOffset)\n    return {\n        x = nail.x + northX / northLength * northOffset + eastX * eastOffset,\n        y = player.pos.y,\n        z = nail.z + northZ / northLength * northOffset + eastZ * eastOffset\n    }\nend\n\nlocal hitPositions = {\n    getHitPosition(firstNail, -hitOffset, 0),\n    getHitPosition(firstNail, -2.0, sideSign * sideOffset),\n    getHitPosition(secondNail, -2.0, sideSign * sideOffset),\n    getHitPosition(secondNail, 5.0, sideSign * 3.0)\n}\n\nlocal positionDrawer = TensorCore.getCachedDrawer(\n    0x5530E080, 0x5530E080, 0x5530E080, 0xFF30E080, 2.0\n)\nlocal routeDrawer = TensorCore.getCachedDrawer(\n    0xFF70F0FF, 0xFF00B8FF, 0xFFFFFFFF, 0xFF000000, 4\n)\n\npositionDrawer:addTimedCircle(\n    8500, hitPositions[1].x, hitPositions[1].y, hitPositions[1].z, 0.8,\n    0, false, true, Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n)\n\nlocal function drawMoveArrow(fromPosition, toPosition)\n    local distance = TensorCore.getDistance2d(fromPosition, toPosition)\n    if distance <= 0.2 then\n        return\n    end\n    local tipLength = math.min(2.0, distance * 0.35)\n    routeDrawer:addTimedArrow(\n        8500, fromPosition.x, fromPosition.y, fromPosition.z,\n        TensorCore.getHeadingToTarget(fromPosition, toPosition),\n        math.max(0.1, distance - tipLength), 1.5, tipLength, 3.2,\n        0, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\n\ndrawMoveArrow(hitPositions[1], hitPositions[2])\ndrawMoveArrow(hitPositions[2], hitPositions[3])\ndrawMoveArrow(hitPositions[3], hitPositions[4])\n\nself.used = true",
 							conditions = 
 							{
 								
