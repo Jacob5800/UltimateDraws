@@ -110,6 +110,51 @@ local tbl =
 			},
 		},
 	},
+	[3] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "0c47e76a-5939-d46a-b10a-53c7b78521a8",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 8000,
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = "OT first Mistral; party north-south line. MT drag Garuda south after.",
+							uuid = "e875a908-ce58-1586-bb9c-14c41411504e",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "[Raid calls]",
+				mechanicTime = 12,
+				name = "[Raid Call][Garuda] Opening Mistral",
+				timelineIndex = 3,
+				timerOffset = -1,
+				uuid = "0e667ac5-e4bf-7392-b70f-94446d683743",
+				version = 2,
+			},
+		},
+	},
 	[4] = 
 	{
 		
@@ -235,6 +280,50 @@ local tbl =
 				timerEndOffset = 4,
 				timerStartOffset = -1,
 				uuid = "806bbd81-eb3d-c6fb-9b32-9b718947cb12",
+				version = 2,
+			},
+		},
+	},
+	[8] = 
+	{
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = "Move!",
+							uuid = "a985ee6f-3880-d50d-9869-2a7c7ba253a3",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 9,
+							partyTargetType = "Melee DPS",
+							uuid = "0788ac77-19c0-2564-a8aa-b6a5fc46c54b",
+							version = 3,
+						},
+					},
+				},
+				mechanicTime = 34,
+				name = "Melee TTS",
+				timelineIndex = 8,
+				timerOffset = 0.5,
+				uuid = "d0ae0670-a75b-b8fe-b2ed-a384ed6acebc",
 				version = 2,
 			},
 		},
@@ -389,6 +478,37 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertPriority = 3,
+							alertTTS = true,
+							alertText = "Move under barrier",
+							alertVolume = 81,
+							uuid = "dcae8059-54d7-af3f-a3da-cce6291a52ce",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				mechanicTime = 42,
+				name = "MOVE!",
+				timelineIndex = 11,
+				timerOffset = -1.1000000238419,
+				uuid = "76f26f8c-03bd-55de-b389-a67ff56092e7",
+				version = 2,
+			},
+		},
 	},
 	[12] = 
 	{
@@ -468,6 +588,47 @@ local tbl =
 				timelineIndex = 12,
 				timerStartOffset = -3,
 				uuid = "b2ac0a56-be0e-0f06-8860-a41653959e84",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = "Get hit by friction",
+							uuid = "7869fda0-949e-eac8-bd87-9ab475330567",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 9,
+							partyTargetType = "Melee DPS",
+							uuid = "f356668c-bb3c-8866-a374-433db8366df1",
+							version = 3,
+						},
+					},
+				},
+				mechanicTime = 51,
+				name = "Melee TTS",
+				timelineIndex = 12,
+				timerOffset = -2.5,
+				uuid = "5fd81d2c-7a23-e404-940b-c8c68c02b3d8",
 				version = 2,
 			},
 		},
@@ -640,6 +801,122 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = "Stay for second hit",
+							uuid = "4dce1523-144f-d707-a5c6-26b3446a33af",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 9,
+							partyTargetType = "Melee DPS",
+							uuid = "218e90ee-20c9-df39-a6f4-a6e0ab809051",
+							version = 3,
+						},
+					},
+				},
+				mechanicTime = 57,
+				name = "Melee TTS",
+				timelineIndex = 13,
+				timerOffset = -2.5,
+				uuid = "f00db3a6-4df6-093a-bde3-5383605e73e9",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = "Cleanse Debuff M1 first.",
+							uuid = "c3e1ec47-be81-c8fd-bbea-7ae501a8142c",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 9,
+							partyTargetType = "Melee DPS",
+							uuid = "45f19d2b-a640-d33b-8e69-5d4f7961e4ef",
+							version = 3,
+						},
+					},
+				},
+				mechanicTime = 57,
+				name = "Melee TTS",
+				timelineIndex = 13,
+				timerOffset = 1,
+				uuid = "9a326430-8413-a0b4-a5ed-aa0043f625ed",
+				version = 2,
+			},
+		},
+	},
+	[14] = 
+	{
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertPriority = 3,
+							alertTTS = true,
+							alertText = "MOVE",
+							alertVolume = 81,
+							uuid = "44636adf-d8b8-1ae4-92a8-7e5bc28fe41f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				mechanicTime = 69,
+				name = "MOVE!",
+				timelineIndex = 14,
+				timerOffset = 0.5,
+				uuid = "482b9860-fe7b-97d4-a78c-88771acdf739",
+				version = 2,
+			},
+		},
 	},
 	[18] = 
 	{
@@ -680,6 +957,81 @@ local tbl =
 				timelineIndex = 18,
 				timerOffset = -12.5,
 				uuid = "8466c926-0c10-a9c0-9f0f-6a65768b6791",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertPriority = 3,
+							alertTTS = true,
+							alertText = "MOVE",
+							alertVolume = 81,
+							uuid = "cbda6130-e490-7f91-8e2d-aa7defa89bd1",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				mechanicTime = 93,
+				name = "MOVE!",
+				timelineIndex = 18,
+				uuid = "cb193897-47a1-eecb-87eb-41788a04c223",
+				version = 2,
+			},
+		},
+	},
+	[19] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "147e4fbc-7fd3-f817-97b1-bbea3a4e768f",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 8000,
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = "Party southeast; MT prioritizes north, west, east; OT south, east, west.",
+							uuid = "8c62e06d-eddc-65d3-8626-db29a9c4ec94",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "[Raid calls]",
+				mechanicTime = 100,
+				name = "[Raid Call][Garuda] Double Mistral",
+				timelineIndex = 19,
+				timerOffset = -1,
+				uuid = "17cd5836-d9c6-7195-8de4-93d3203a2db3",
 				version = 2,
 			},
 		},
@@ -814,6 +1166,37 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertPriority = 3,
+							alertTTS = true,
+							alertText = "Dodge Feather rain",
+							alertVolume = 81,
+							uuid = "3fa2b07a-dff9-e95c-b72b-0fb00a00bdf3",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				mechanicTime = 104,
+				name = "MOVE!",
+				timelineIndex = 22,
+				timerOffset = -1.5,
+				uuid = "7f48da43-3f8d-d9f0-a412-de548f2ce168",
+				version = 2,
+			},
+		},
 	},
 	[23] = 
 	{
@@ -867,6 +1250,85 @@ local tbl =
 				timerEndOffset = 7,
 				timerStartOffset = 4,
 				uuid = "ca9d74b9-2689-ba1e-aafe-cd665fcb139f",
+				version = 2,
+			},
+		},
+	},
+	[26] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "4856cb4e-93a9-714b-9f42-e99e31d54358",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 8000,
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = "Caster west; Thermal Low tank east. Only one Mesohigh cleanse.",
+							uuid = "17ccdb0f-7f7c-158c-b5cb-9f252ac8578c",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "[Raid calls]",
+				mechanicTime = 124,
+				name = "[Raid Call][Garuda] Mesohigh",
+				timelineIndex = 26,
+				timerOffset = -1,
+				uuid = "2bc7ce40-829a-1e5d-8791-50992f76d1e7",
+				version = 2,
+			},
+		},
+	},
+	[27] = 
+	{
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertPriority = 3,
+							alertTTS = true,
+							alertText = "Kill adds & stack middle.",
+							alertVolume = 81,
+							uuid = "8d25e8ad-1263-0299-a7f1-51f9deed2666",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				mechanicTime = 124,
+				name = "MOVE!",
+				timelineIndex = 27,
+				timerOffset = -7.5,
+				uuid = "ce907935-d722-6345-871f-151417190aec",
 				version = 2,
 			},
 		},
@@ -1010,6 +1472,37 @@ local tbl =
 				timelineIndex = 28,
 				timerEndOffset = 10,
 				uuid = "fd6dd169-23ea-ba63-a252-d37a22ef62bf",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertPriority = 3,
+							alertTTS = true,
+							alertText = "Dodge Feather Rain",
+							alertVolume = 81,
+							uuid = "d264fd39-7a80-917b-a2ae-42867ab601bc",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				mechanicTime = 129,
+				name = "MOVE!",
+				timelineIndex = 28,
+				timerOffset = -2.5,
+				uuid = "f4b8ece1-a7a1-ff53-96e8-7d270ffd8fc1",
 				version = 2,
 			},
 		},
@@ -1546,7 +2039,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local labels = data.uwu_relative_nails\nif not labels or not labels.nails or not labels.textIDs then\n    self.used = true\n    return\nend\n\nlocal list = {}\nfor _, nail in pairs(labels.nails) do\n    list[#list + 1] = nail\nend\nif #list ~= 4 then\n    self.used = true\n    return\nend\n\nlocal northAIndex, northBIndex = 1, 2\nlocal minDistanceSquared = math.huge\nfor i = 1, 3 do\n    for j = i + 1, 4 do\n        local dx = list[i].x - list[j].x\n        local dz = list[i].z - list[j].z\n        local distanceSquared = dx * dx + dz * dz\n        if distanceSquared < minDistanceSquared then\n            minDistanceSquared = distanceSquared\n            northAIndex = i\n            northBIndex = j\n        end\n    end\nend\n\nlocal northA = list[northAIndex]\nlocal northB = list[northBIndex]\nlocal southA\nlocal southB\nfor i = 1, 4 do\n    if i ~= northAIndex and i ~= northBIndex then\n        if not southA then\n            southA = list[i]\n        else\n            southB = list[i]\n        end\n    end\nend\n\nlocal northCenterX = (northA.x + northB.x) * 0.5\nlocal northCenterZ = (northA.z + northB.z) * 0.5\nlocal southCenterX = (southA.x + southB.x) * 0.5\nlocal southCenterZ = (southA.z + southB.z) * 0.5\nlocal northX = northCenterX - southCenterX\nlocal northZ = northCenterZ - southCenterZ\nlocal northLength = math.sqrt(northX * northX + northZ * northZ)\nif northLength < 0.01 then\n    self.used = true\n    return\nend\n\nlocal eastX = -northZ / northLength\nlocal eastZ = northX / northLength\nlocal numbers = {}\n\nlocal northASide = (northA.x - northCenterX) * eastX + (northA.z - northCenterZ) * eastZ\nnumbers[northA.id] = northASide >= 0 and 3 or 4\nlocal northBSide = (northB.x - northCenterX) * eastX + (northB.z - northCenterZ) * eastZ\nnumbers[northB.id] = northBSide >= 0 and 3 or 4\nlocal southASide = (southA.x - southCenterX) * eastX + (southA.z - southCenterZ) * eastZ\nnumbers[southA.id] = southASide >= 0 and 1 or 2\nlocal southBSide = (southB.x - southCenterX) * eastX + (southB.z - southCenterZ) * eastZ\nnumbers[southB.id] = southBSide >= 0 and 1 or 2\n\nlocal living = {}\nlocal lowestLivingNumber = 5\nfor entityID, number in pairs(numbers) do\n    local entity = TensorCore.mGetEntity(entityID)\n    if labels.textIDs[entityID] and entity and entity.hp and entity.hp.current > 0 then\n        living[entityID] = { entity = entity, number = number }\n        if number < lowestLivingNumber then\n            lowestLivingNumber = number\n        end\n    end\nend\n\nif lowestLivingNumber == 5 then\n    self.used = true\n    return\nend\n\nlocal greenDrawer = TensorCore.getCachedDrawer(\n    0x6600FF00, 0xBB00FF00, 0xFF00FF00, 0xFF000000, 3\n)\nlocal redDrawer = TensorCore.getCachedDrawer(\n    0x660000FF, 0xBB0000FF, 0xFF0000FF, 0xFF000000, 3\n)\n\nfor _, entry in pairs(living) do\n    local isActive = entry.number == lowestLivingNumber\n    local drawer = isActive and greenDrawer or redDrawer\n    local radius = isActive and 2.6 or 1.25\n    drawer:addTimedCircleOnEnt(\n        700, entry.entity.id, radius,\n        0, false, true, Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\n\nself.used = true",
+							actionLua = "local labels = data.uwu_relative_nails\nif not labels or not labels.nails or not labels.textIDs then\n    self.used = true\n    return\nend\n\nlocal list = {}\nfor _, nail in pairs(labels.nails) do\n    list[#list + 1] = nail\nend\nif #list ~= 4 then\n    self.used = true\n    return\nend\n\nlocal northAIndex, northBIndex = 1, 2\nlocal minDistanceSquared = math.huge\nfor i = 1, 3 do\n    for j = i + 1, 4 do\n        local dx = list[i].x - list[j].x\n        local dz = list[i].z - list[j].z\n        local distanceSquared = dx * dx + dz * dz\n        if distanceSquared < minDistanceSquared then\n            minDistanceSquared = distanceSquared\n            northAIndex = i\n            northBIndex = j\n        end\n    end\nend\n\nlocal northA = list[northAIndex]\nlocal northB = list[northBIndex]\nlocal southA\nlocal southB\nfor i = 1, 4 do\n    if i ~= northAIndex and i ~= northBIndex then\n        if not southA then\n            southA = list[i]\n        else\n            southB = list[i]\n        end\n    end\nend\n\nlocal northCenterX = (northA.x + northB.x) * 0.5\nlocal northCenterZ = (northA.z + northB.z) * 0.5\nlocal southCenterX = (southA.x + southB.x) * 0.5\nlocal southCenterZ = (southA.z + southB.z) * 0.5\nlocal northX = northCenterX - southCenterX\nlocal northZ = northCenterZ - southCenterZ\nlocal northLength = math.sqrt(northX * northX + northZ * northZ)\nif northLength < 0.01 then\n    self.used = true\n    return\nend\n\nlocal eastX = -northZ / northLength\nlocal eastZ = northX / northLength\nlocal numbers = {}\n\nlocal northASide = (northA.x - northCenterX) * eastX + (northA.z - northCenterZ) * eastZ\nnumbers[northA.id] = northASide >= 0 and 3 or 4\nlocal northBSide = (northB.x - northCenterX) * eastX + (northB.z - northCenterZ) * eastZ\nnumbers[northB.id] = northBSide >= 0 and 3 or 4\nlocal southASide = (southA.x - southCenterX) * eastX + (southA.z - southCenterZ) * eastZ\nnumbers[southA.id] = southASide >= 0 and 1 or 2\nlocal southBSide = (southB.x - southCenterX) * eastX + (southB.z - southCenterZ) * eastZ\nnumbers[southB.id] = southBSide >= 0 and 1 or 2\n\nlocal role = AnyoneCore.Roster.mySlot()\nlocal meleeOrTank = role == \"T1\" or role == \"T2\" or role == \"M1\" or role == \"M2\" or role == \"MT\" or role == \"OT\"\nlocal living = {}\nlocal lowestLivingNumber = 5\nlocal northAboveForty = false\n\nfor entityID, number in pairs(numbers) do\n    local entity = TensorCore.mGetEntity(entityID)\n    local percent = entity and entity.hp and entity.hp.percent or 0\n    if labels.textIDs[entityID] and entity and entity.hp and entity.hp.current > 0 then\n        living[entityID] = { entity = entity, number = number, percent = percent }\n        if number < lowestLivingNumber then\n            lowestLivingNumber = number\n        end\n        if meleeOrTank and (number == 3 or number == 4) and percent > 40 then\n            northAboveForty = true\n        end\n    end\nend\n\nif lowestLivingNumber == 5 then\n    self.used = true\n    return\nend\n\nlocal greenDrawer = TensorCore.getCachedDrawer(\n    0x6600FF00, 0xBB00FF00, 0xFF00FF00, 0xFF000000, 3\n)\nlocal redDrawer = TensorCore.getCachedDrawer(\n    0x660000FF, 0xBB0000FF, 0xFF0000FF, 0xFF000000, 3\n)\n\nfor _, entry in pairs(living) do\n    local isActive\n    if meleeOrTank and northAboveForty then\n        isActive = (entry.number == 3 or entry.number == 4) and entry.percent > 40\n    else\n        isActive = entry.number == lowestLivingNumber\n    end\n    local drawer = isActive and greenDrawer or redDrawer\n    local radius = isActive and 2.6 or 1.25\n    drawer:addTimedCircleOnEnt(\n        700, entry.entity.id, radius,\n        0, false, true, Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\n\nself.used = true",
 							name = "Nail Prep and Priority Circles",
 							uuid = "6c87a696-e415-cdae-a841-227915a4f1e1",
 							version = 2.1,
@@ -1880,6 +2373,48 @@ local tbl =
 				timelineIndex = 43,
 				timerOffset = 3,
 				uuid = "3f19af91-6517-294d-a6a0-7cad90b71e4d",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "844abfe1-1154-706b-a437-576e5d7cf524",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 8000,
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = "DPS hold nails low; Reverse Z, kill each after two Eruptions.",
+							uuid = "ff67f309-11bd-9c44-8a0d-467f368abeef",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "[Raid calls]",
+				mechanicTime = 328,
+				name = "[Raid Call][Ifrit] Reverse Z Nails",
+				timelineIndex = 43,
+				timerOffset = -1,
+				uuid = "ecc05467-4e29-34b6-9449-fa97df47a5b8",
 				version = 2,
 			},
 		},
@@ -2486,6 +3021,117 @@ local tbl =
 			},
 		},
 	},
+	[54] = 
+	{
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = "Ifrit is new north. Eruptions start SE move ccw. Searing goes West ",
+							alertVolume = 81,
+							uuid = "c572b646-4af7-1a61-811f-8bd5dc568c54",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				mechanicTime = 383,
+				name = "MOVE!",
+				timelineIndex = 54,
+				timerOffset = -3.5,
+				uuid = "270d20c7-bef9-3b79-a7cd-253cc6117a58",
+				version = 2,
+			},
+		},
+	},
+	[57] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ifrit",
+				uuid = "a91ae58a-ba9d-e055-a944-7bc596d80f26",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Ifrit",
+							uuid = "e097f0e7-ce96-6446-aaf4-146e0e9661a9",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player = TensorCore.mGetPlayer()\nlocal boss = TensorCore.mGetEntity(eventArgs.entityID)\nif not player or not player.pos or not boss or not boss.pos then\n    self.used = true\n    return\nend\nlocal h = eventArgs.heading or boss.pos.h or 0\nlocal sx = math.cos(h)\nlocal sz = -math.sin(h)\nlocal right = { x = boss.pos.x + sx * 18, y = player.pos.y, z = boss.pos.z + sz * 18 }\nlocal left = { x = boss.pos.x - sx * 18, y = player.pos.y, z = boss.pos.z - sz * 18 }\nlocal dest = right\nif TensorCore.getDistance2d(player.pos, left) < TensorCore.getDistance2d(player.pos, right) then\n    dest = left\nend\nlocal distance = TensorCore.getDistance2d(player.pos, dest)\nif distance > 0.2 then\n    local tip = math.min(2.5, distance * 0.35)\n    local drawer = TensorCore.getCachedDrawer(0xFFFFD080, 0xFFFFA000, 0xFFFFFFFF, 0xFF000000, 4)\n    drawer:addTimedArrow(7000, player.pos.x, player.pos.y, player.pos.z, TensorCore.getHeadingToTarget(player.pos, dest), math.max(0.1, distance - tip), 1.4, tip, 3.0, 0, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nAnyoneCore.addTimedWorldText(7000, \"CRIMSON: SAFE SIDE\", { x = dest.x, y = dest.y + 1.2, z = dest.z }, 0xFFFFD080, true, 1.1)\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"924b1eed-2cda-72e3-8df4-78b8c46c4c3b",
+									true,
+								},
+							},
+							displayPath = "Draws - Ifrit",
+							name = "Crimson Safe Side 390",
+							uuid = "f4f8c464-d03a-a7a3-be1e-d5a0326e0136",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.spellID==11103 and eventArgs.entityContentID==1185",
+							dequeueIfLuaFalse = true,
+							name = "Crimson Cyclone Cast",
+							uuid = "924b1eed-2cda-72e3-8df4-78b8c46c4c3b",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Ifrit",
+				eventType = 3,
+				mechanicTime = 390,
+				name = "[Draw][LPDU][Ifrit] Crimson Cyclone Safe Side 390",
+				timeRange = true,
+				timelineIndex = 57,
+				timerEndOffset = 5,
+				timerStartOffset = -1,
+				uuid = "118d7beb-dfb5-b32b-9478-06c778502941",
+				version = 2,
+			},
+		},
+	},
 	[58] = 
 	{
 		
@@ -2845,10 +3491,62 @@ local tbl =
 					{
 						data = 
 						{
-							aType = "Lua",
-							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then\n    self.used = true\n    return\nend\n\nlocal center = { x = 100, y = player.pos.y, z = 100 }\nlocal dx = player.pos.x - center.x\nlocal dz = player.pos.z - center.z\nlocal distanceFromCenter = math.sqrt(dx * dx + dz * dz)\nif distanceFromCenter < 0.1 then\n    dx = 0\n    dz = -1\n    distanceFromCenter = 1\nend\n\nlocal target = {\n    x = center.x + dx / distanceFromCenter * 17.5,\n    y = center.y,\n    z = center.z + dz / distanceFromCenter * 17.5,\n}\nlocal distance = TensorCore.getDistance2d(player.pos, target)\nif distance > 0.2 then\n    local tipLength = math.min(2.0, distance * 0.35)\n    local drawer = TensorCore.getCachedDrawer(\n        0xFF66DDFF,\n        0xFF0088FF,\n        0xFF0044AA,\n        0xFFFFFFFF,\n        2\n    )\n    drawer:addTimedArrow(\n        8500,\n        player.pos.x, player.pos.y, player.pos.z,\n        TensorCore.getHeadingToTarget(player.pos, target),\n        math.max(0.1, distance - tipLength),\n        1.0,\n        tipLength,\n        2.4,\n        0,\n        false,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\n\nlocal drawer = TensorCore.getCachedDrawer(\n    0x5533CCFF,\n    0x5533CCFF,\n    0xAA0088FF,\n    0xFFFFFFFF,\n    2\n)\ndrawer:addTimedCircle(8500, target.x, target.y, target.z, 1.4, 0, false, true)\nAnyoneCore.addTimedWorldText(\n    8500,\n    \"GEocrush: HUG EDGE\",\n    { x = target.x, y = target.y + 1.5, z = target.z },\n    0xFF66DDFF,\n    true,\n    1.0\n)\n\nself.used = true",
-							name = "Guide",
-							uuid = "23026860-6b7f-c477-8798-c4b2618e8d49",
+							aType = "ACR",
+							gVar = "ACR_RikuMNK3_Hotbar_Thunderclap",
+							uuid = "068be982-8f6c-d74d-bc4c-6e5e7f6cc2a8",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "MONK",
+							uuid = "0c44f3b9-3661-0dd7-8bd4-3bee270fcb69",
+							version = 3,
+						},
+					},
+				},
+				mechanicTime = 600,
+				name = "MOVE!",
+				timelineIndex = 74,
+				timerOffset = -1.5,
+				uuid = "2eed8cb6-833c-6385-bbc6-e333f9f61e62",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "4377542a-5521-b13e-9500-bf03068fb3ce",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 8000,
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = "Everyone edge for Geocrush; healers mitigate Earthen Fury.",
+							uuid = "adea9e3e-a89a-0a49-b7c3-7e974dda3c4e",
 							version = 2.1,
 						},
 					},
@@ -2856,14 +3554,46 @@ local tbl =
 				conditions = 
 				{
 				},
-				displayPath = "Draws - Titan LPDU",
+				displayPath = "[Raid calls]",
 				mechanicTime = 600,
-				name = "[Draw][LPDU][Titan] Geocrush Edge",
-				timeRange = true,
+				name = "[Raid Call][Titan] Geocrush",
 				timelineIndex = 74,
-				timerEndOffset = 3,
-				timerStartOffset = -5,
-				uuid = "4c232eeb-4cda-0789-962a-a789fe2d57ae",
+				timerOffset = -1,
+				uuid = "4521d38c-71a9-38f4-a4ef-b428429084e7",
+				version = 2,
+			},
+		},
+	},
+	[78] = 
+	{
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertPriority = 3,
+							alertTTS = true,
+							alertText = "Dodge twice",
+							alertVolume = 81,
+							uuid = "ebb9c709-68be-a091-95d0-9aa3044dd1bd",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				mechanicTime = 621,
+				name = "MOVE!",
+				timelineIndex = 78,
+				timerOffset = -2.9000000953674,
+				uuid = "5ca6e7a9-d879-7a17-b3cc-7de6f8c29b6e",
 				version = 2,
 			},
 		},
@@ -2891,7 +3621,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then\n    self.used = true\n    return\nend\n\nlocal center = { x = 100, y = player.pos.y, z = 100 }\nlocal targetEntity = TensorCore.mGetTarget()\nlocal dx\nlocal dz\nif targetEntity and targetEntity.pos then\n    dx = targetEntity.pos.x - center.x\n    dz = targetEntity.pos.z - center.z\nelse\n    dx = player.pos.x - center.x\n    dz = player.pos.z - center.z\nend\nlocal distanceFromCenter = math.sqrt(dx * dx + dz * dz)\nif distanceFromCenter < 0.1 then\n    dx = 0\n    dz = -1\n    distanceFromCenter = 1\nend\n\nlocal target = {\n    x = center.x - dx / distanceFromCenter * 17.5,\n    y = center.y,\n    z = center.z - dz / distanceFromCenter * 17.5,\n}\nlocal distance = TensorCore.getDistance2d(player.pos, target)\nif distance > 0.2 then\n    local tipLength = math.min(2.0, distance * 0.35)\n    local drawer = TensorCore.getCachedDrawer(\n        0xFFFFCC66,\n        0xFFFF8800,\n        0xFFAA4400,\n        0xFFFFFFFF,\n        2\n    )\n    drawer:addTimedArrow(\n        8500,\n        player.pos.x, player.pos.y, player.pos.z,\n        TensorCore.getHeadingToTarget(player.pos, target),\n        math.max(0.1, distance - tipLength),\n        1.0,\n        tipLength,\n        2.4,\n        0,\n        false,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\n\nlocal drawer = TensorCore.getCachedDrawer(\n    0x55FFAA33,\n    0x55FFAA33,\n    0xFFAA6600,\n    0xFFFFFFFF,\n    2\n)\ndrawer:addTimedCircle(8500, target.x, target.y, target.z, 1.4, 0, false, true)\nAnyoneCore.addTimedWorldText(\n    8500,\n    \"GEocrush 2: OPPOSITE EDGE\",\n    { x = target.x, y = target.y + 1.5, z = target.z },\n    0xFFFFCC66,\n    true,\n    1.0\n)\n\nself.used = true",
+							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then self.used = true return end\nlocal center = { x = 100, y = player.pos.y, z = 100 }\nlocal targetEntity = TensorCore.mGetTarget()\nlocal dx\nlocal dz\nlocal heading = targetEntity and targetEntity.pos and targetEntity.pos.h\nif heading then\n    dx = math.sin(heading)\n    dz = math.cos(heading)\nelseif targetEntity and targetEntity.pos then\n    dx = targetEntity.pos.x - center.x\n    dz = targetEntity.pos.z - center.z\nelse\n    dx = player.pos.x - center.x\n    dz = player.pos.z - center.z\nend\nlocal distanceFromCenter = math.sqrt(dx * dx + dz * dz)\nif distanceFromCenter < 0.1 then dx = 0 dz = -1 distanceFromCenter = 1 end\nlocal target = { x = center.x + dx / distanceFromCenter * 16.5, y = center.y, z = center.z + dz / distanceFromCenter * 16.5 }\nlocal distance = TensorCore.getDistance2d(player.pos, target)\nif distance > 0.2 then\n    local tipLength = math.min(2.0, distance * 0.35)\n    local drawer = TensorCore.getCachedDrawer(0xFFFFCC66,0xFFFF8800,0xFFAA4400,0xFFFFFFFF,2)\n    drawer:addTimedArrow(5500,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,target),math.max(0.1,distance-tipLength),1.0,tipLength,2.4,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nlocal drawer = TensorCore.getCachedDrawer(0x55FFAA33,0x55FFAA33,0xFFAA6600,0xFFFFFFFF,2)\ndrawer:addTimedCircle(5500,target.x,target.y,target.z,1.4,0,false,true)\nAnyoneCore.addTimedWorldText(5500,\"GEocrush 2: OPPOSITE EDGE\",{x=target.x,y=target.y+1.5,z=target.z},0xFFFFCC66,true,1.0)\nself.used = true",
 							name = "Guide",
 							uuid = "3524e5b8-2863-ab54-93fa-e740f72b127d",
 							version = 2.1,
@@ -2909,6 +3639,222 @@ local tbl =
 				timerEndOffset = 3,
 				timerStartOffset = -5,
 				uuid = "cd7b21e1-6c6d-29b9-b419-e83b2e73b258",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertPriority = 3,
+							alertTTS = true,
+							alertText = "Go opposite of safespot",
+							alertVolume = 81,
+							uuid = "1cf5df1d-68f6-aec1-b949-8f2e3f39e09a",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				mechanicTime = 631,
+				name = "MOVE!",
+				timelineIndex = 82,
+				timerOffset = -3.0999999046326,
+				uuid = "44fad792-05cc-d9e9-9cd5-e43b5204e24b",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "69121152-60a8-0f50-9ed2-371d266e94f1",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 8000,
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = "MT pull Titan center; all watch his facing, hug opposite edge.",
+							uuid = "2287b9bf-b126-5dfa-9ccc-cc6e6017fd1e",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "[Raid calls]",
+				mechanicTime = 631,
+				name = "[Raid Call][Titan] Geocrush 2",
+				timelineIndex = 82,
+				timerOffset = -1,
+				uuid = "0bf8ef23-1952-389a-ad41-5f0f92033ea6",
+				version = 2,
+			},
+		},
+	},
+	[84] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Titan LPDU",
+				uuid = "671e1e3b-b0b4-57c0-b290-f44b7a4e0ba0",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Titan LPDU",
+							uuid = "6b06bc3c-0ebe-8986-9174-04167b286231",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then\n    self.used = true\n    return\nend\nlocal center = { x = 100, y = player.pos.y, z = 100 }\nlocal dx = player.pos.x - center.x\nlocal dz = player.pos.z - center.z\nlocal radialLength = math.sqrt(dx * dx + dz * dz)\nif radialLength < 0.1 then\n    dx = 0\n    dz = -1\n    radialLength = 1\nend\nlocal knockbackDistance = 12.0\nlocal target = {\n    x = player.pos.x + dx / radialLength * knockbackDistance,\n    y = player.pos.y,\n    z = player.pos.z + dz / radialLength * knockbackDistance\n}\nlocal drawer = TensorCore.getCachedDrawer(\n    0xFFFFE080,\n    0xFFFFA000,\n    0xFFFF6000,\n    0xFF000000,\n    4\n)\ndrawer:addTimedLine(\n    6500,\n    player.pos.x, player.pos.y, player.pos.z,\n    target.x, target.y, target.z,\n    0.3,\n    0.45,\n    0\n)\nAnyoneCore.addTimedWorldText(\n    6500,\n    \"UPHEAVAL: KNOCKBACK\",\n    { x = target.x, y = target.y + 1.2, z = target.z },\n    0xFFFFE080,\n    true,\n    0.9\n)\nself.used = true",
+							displayPath = "Draws - Titan LPDU",
+							name = "Knockback Line",
+							uuid = "8fed7728-1ef2-1479-b126-a5ae87b33953",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Draws - Titan LPDU",
+				mechanicTime = 637,
+				name = "[Draw][LPDU][Titan] Upheaval Knockback Guide",
+				timeRange = true,
+				timelineIndex = 84,
+				timerEndOffset = 2,
+				timerStartOffset = -3,
+				uuid = "9521059d-3b6a-244e-abb6-0129f350e8d2",
+				version = 2,
+			},
+		},
+	},
+	[85] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Titan LPDU",
+				uuid = "d741b3f0-ea6c-5bbf-bb78-c0a6c3ffe3ae",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player=TensorCore.mGetPlayer()\nif not player or not player.pos then self.used=true return end\nlocal center={x=100,y=player.pos.y,z=100}\nlocal target=TensorCore.mGetTarget()\nlocal dx,dz=0,-1\nif target and target.pos then dx=target.pos.x-center.x dz=target.pos.z-center.z end\nlocal length=math.sqrt(dx*dx+dz*dz)\nif length<0.1 then dx=0 dz=-1 length=1 end\ndx=dx/length dz=dz/length\nlocal markers={{x=center.x+dx*6.0,y=center.y,z=center.z+dz*6.0},{x=center.x,y=center.y,z=center.z},{x=center.x-dx*7.0,y=center.y,z=center.z-dz*7.0}}\nlocal drawer=TensorCore.getCachedDrawer(0xFF66DDFF,0xFF0088FF,0xFF0044AA,0xFFFFFFFF,2)\nfor i,p in ipairs(markers) do\n drawer:addTimedCircle(12000,p.x,p.y,p.z,1.0,0,false,true)\n AnyoneCore.addTimedWorldText(12000,tostring(i),{x=p.x,y=p.y+1.5,z=p.z},0xFF66DDFF,true,1.2)\nend\nself.used=true",
+							name = "Guide",
+							uuid = "17d01ec4-d323-feec-9f0a-cc10c2e090a7",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Draws - Titan LPDU",
+				mechanicTime = 639,
+				name = "[Draw][LPDU][Titan] Gaol 1 Floor Markers",
+				timeRange = true,
+				timelineIndex = 85,
+				timerEndOffset = 10,
+				timerStartOffset = -2,
+				uuid = "dcfa8746-420a-0db8-9daf-e5c4f14b6aed",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "6dc82761-4bb9-76b0-ba6f-17451cf773c3",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 8000,
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = "1 closest Titan, 3 furthest",
+							uuid = "cf5933a6-60c7-6c7d-96a3-4c9784a16321",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "[Raid calls]",
+				mechanicTime = 639,
+				name = "[Raid Call][Titan] Gaols 1",
+				timelineIndex = 85,
+				timerOffset = -1,
+				uuid = "4772929e-21de-1a4c-b18d-faca2de54c30",
 				version = 2,
 			},
 		},
@@ -2936,7 +3882,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then\n    self.used = true\n    return\nend\n\nlocal center = { x = 100, y = player.pos.y, z = 100 }\nlocal dx = player.pos.x - center.x\nlocal dz = player.pos.z - center.z\nlocal radius = math.sqrt(dx * dx + dz * dz)\nif radius < 6 then\n    dx = 0\n    dz = -1\n    radius = 12.5\nelse\n    radius = math.max(10, math.min(15, radius))\nend\n\nlocal angle = math.atan2(dx, dz)\nlocal nextAngle = angle - math.pi / 4\nlocal target = {\n    x = center.x + math.sin(nextAngle) * radius,\n    y = center.y,\n    z = center.z + math.cos(nextAngle) * radius,\n}\nlocal distance = TensorCore.getDistance2d(player.pos, target)\nif distance > 0.2 then\n    local tipLength = math.min(1.8, distance * 0.35)\n    local drawer = TensorCore.getCachedDrawer(\n        0xFF99FF99,\n        0xFF33CC66,\n        0xFF168844,\n        0xFFFFFFFF,\n        2\n    )\n    drawer:addTimedArrow(\n        11000,\n        player.pos.x, player.pos.y, player.pos.z,\n        TensorCore.getHeadingToTarget(player.pos, target),\n        math.max(0.1, distance - tipLength),\n        1.0,\n        tipLength,\n        2.3,\n        0,\n        false,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\n\nlocal drawer = TensorCore.getCachedDrawer(\n    0x5533CC66,\n    0x5533CC66,\n    0xAA33CC66,\n    0xFFFFFFFF,\n    2\n)\ndrawer:addTimedCircle(11000, target.x, target.y, target.z, 1.25, 0, false, true)\nAnyoneCore.addTimedWorldText(\n    11000,\n    \"MARIO KART: ROTATE CLOCKWISE\",\n    { x = target.x, y = target.y + 1.5, z = target.z },\n    0xFF99FF99,\n    true,\n    1.0\n)\n\nself.used = true",
+							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then self.used = true return end\nlocal center = { x = 100, y = player.pos.y, z = 100 }\nlocal dx = player.pos.x - center.x\nlocal dz = player.pos.z - center.z\nlocal radius = math.sqrt(dx * dx + dz * dz)\nif radius < 6 then dx = 0 dz = -1 radius = 12.5 else radius = math.max(10,math.min(15,radius)) end\nlocal angle = math.atan2(dx,dz)\nlocal nextAngle = angle - math.pi / 4\nlocal target = { x = center.x + math.sin(nextAngle) * radius, y = center.y, z = center.z + math.cos(nextAngle) * radius }\nlocal distance = TensorCore.getDistance2d(player.pos,target)\nif distance > 0.2 then\n    local tipLength = math.min(1.8,distance*0.35)\n    local drawer = TensorCore.getCachedDrawer(0xFF99FF99,0xFF33CC66,0xFF168844,0xFFFFFFFF,2)\n    drawer:addTimedArrow(9000,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,target),math.max(0.1,distance-tipLength),1.0,tipLength,2.3,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nlocal drawer = TensorCore.getCachedDrawer(0x5533CC66,0x5533CC66,0xAA33CC66,0xFFFFFFFF,2)\ndrawer:addTimedCircle(9000,target.x,target.y,target.z,1.25,0,false,true)\nAnyoneCore.addTimedWorldText(9000,\"MARIO KART: ROTATE CLOCKWISE\",{x=target.x,y=target.y+1.5,z=target.z},0xFF99FF99,true,1.0)\nself.used = true",
 							name = "Guide",
 							uuid = "19e735dc-2619-7340-b703-c8151484f899",
 							version = 2.1,
@@ -2954,6 +3900,167 @@ local tbl =
 				timerEndOffset = 6,
 				timerStartOffset = -5,
 				uuid = "c21d73db-0dab-5df7-865d-0d64c554430a",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "daee94f3-f2a7-dbd2-b64d-5cc0f70041c1",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 8000,
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = "Party Mario Kart for Weights; dodge first Landslides, step back in.",
+							uuid = "c401c561-335a-4341-aab5-ff12c42af8b1",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "[Raid calls]",
+				mechanicTime = 666,
+				name = "[Raid Call][Titan] Weights and Landslides",
+				timelineIndex = 90,
+				timerOffset = -1,
+				uuid = "ef74ac73-744c-ee89-ad5d-1cfdab04b060",
+				version = 2,
+			},
+		},
+	},
+	[95] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Titan LPDU",
+				uuid = "69729b48-59af-0ad2-9ca7-f57b42aa090d",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player=TensorCore.mGetPlayer()\nif not player or not player.pos then self.used=true return end\nlocal center={x=100,y=player.pos.y,z=100}\nlocal target=TensorCore.mGetTarget()\nlocal dx,dz=0,-1\nif target and target.pos then dx=target.pos.x-center.x dz=target.pos.z-center.z end\nlocal length=math.sqrt(dx*dx+dz*dz)\nif length<0.1 then dx=0 dz=-1 length=1 end\ndx=dx/length dz=dz/length\nlocal markers={{x=center.x+dx*6.0,y=center.y,z=center.z+dz*6.0},{x=center.x,y=center.y,z=center.z},{x=center.x-dx*7.0,y=center.y,z=center.z-dz*7.0}}\nlocal drawer=TensorCore.getCachedDrawer(0xFF66DDFF,0xFF0088FF,0xFF0044AA,0xFFFFFFFF,2)\nfor i,p in ipairs(markers) do\n drawer:addTimedCircle(12000,p.x,p.y,p.z,1.0,0,false,true)\n AnyoneCore.addTimedWorldText(12000,tostring(i),{x=p.x,y=p.y+1.5,z=p.z},0xFF66DDFF,true,1.2)\nend\nself.used=true",
+							name = "Guide",
+							uuid = "9c4abc92-49a7-36c4-bb59-544368b542b2",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Draws - Titan LPDU",
+				enabled = false,
+				mechanicTime = 684,
+				name = "[Draw][LPDU][Titan] Gaol 2 Floor Markers",
+				timeRange = true,
+				timelineIndex = 95,
+				timerEndOffset = 10,
+				timerStartOffset = -2,
+				uuid = "3a62c2d9-6a87-d926-a359-7010f9f1da11",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertPriority = 3,
+							alertTTS = true,
+							alertText = "Opposite of purple",
+							alertVolume = 81,
+							uuid = "2b718efa-38a4-585d-a464-9e9b0cb10ef9",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				mechanicTime = 684,
+				name = "MOVE!",
+				timelineIndex = 95,
+				timerOffset = -2.5,
+				uuid = "4ec54fac-927f-b3c8-b26c-f147e58e68c6",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "196ac706-e2f9-626f-a1e2-e67e8f386a80",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 8000,
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = "Second gaols: marked players hold assigned spots; party ready to break.",
+							uuid = "5a088776-6156-abaf-867e-d4a8528d9e59",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "[Raid calls]",
+				mechanicTime = 684,
+				name = "[Raid Call][Titan] Gaols 2",
+				timelineIndex = 95,
+				timerOffset = -1,
+				uuid = "d494470c-4b37-5705-9b04-124ccb78a25f",
 				version = 2,
 			},
 		},
@@ -2997,8 +4104,50 @@ local tbl =
 				timeRange = true,
 				timelineIndex = 98,
 				timerEndOffset = 8,
-				timerStartOffset = -5,
+				timerStartOffset = -3.5,
 				uuid = "6af9e6ec-42ea-47bd-850c-0bd4e9006ace",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "fd21e0e5-76d1-c257-b06f-2b8834ea804a",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 8000,
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = "Healers mitigate six Tumults; MT take Rock/Mountain Buster alone.",
+							uuid = "e7f71382-0468-7e71-aea1-91ea2df3b844",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "[Raid calls]",
+				mechanicTime = 704,
+				name = "[Raid Call][Titan] Six Tumults",
+				timelineIndex = 98,
+				timerOffset = -1,
+				uuid = "f526509c-ce0f-c60f-aa87-1a319a794337",
 				version = 2,
 			},
 		},
@@ -3026,7 +4175,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then\n    self.used = true\n    return\nend\n\nlocal center = { x = 100, y = player.pos.y, z = 100 }\nlocal dx = player.pos.x - center.x\nlocal dz = player.pos.z - center.z\nlocal radius = math.sqrt(dx * dx + dz * dz)\nif radius < 6 then\n    dx = 0\n    dz = -1\n    radius = 12.5\nelse\n    radius = math.max(10, math.min(15, radius))\nend\n\nlocal angle = math.atan2(dx, dz)\nlocal nextAngle = angle - math.pi / 4\nlocal target = {\n    x = center.x + math.sin(nextAngle) * radius,\n    y = center.y,\n    z = center.z + math.cos(nextAngle) * radius,\n}\nlocal distance = TensorCore.getDistance2d(player.pos, target)\nif distance > 0.2 then\n    local tipLength = math.min(1.8, distance * 0.35)\n    local drawer = TensorCore.getCachedDrawer(\n        0xFF99FF99,\n        0xFF33CC66,\n        0xFF168844,\n        0xFFFFFFFF,\n        2\n    )\n    drawer:addTimedArrow(\n        11000,\n        player.pos.x, player.pos.y, player.pos.z,\n        TensorCore.getHeadingToTarget(player.pos, target),\n        math.max(0.1, distance - tipLength),\n        1.0,\n        tipLength,\n        2.3,\n        0,\n        false,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\n\nlocal drawer = TensorCore.getCachedDrawer(\n    0x5533CC66,\n    0x5533CC66,\n    0xAA33CC66,\n    0xFFFFFFFF,\n    2\n)\ndrawer:addTimedCircle(11000, target.x, target.y, target.z, 1.25, 0, false, true)\nAnyoneCore.addTimedWorldText(\n    11000,\n    \"MARIO KART: ROTATE CLOCKWISE\",\n    { x = target.x, y = target.y + 1.5, z = target.z },\n    0xFF99FF99,\n    true,\n    1.0\n)\n\nself.used = true",
+							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then self.used=true return end\n\nlocal center={x=100,y=player.pos.y,z=100}\nlocal targetEntity=TensorCore.mGetTarget()\nlocal heading=targetEntity and targetEntity.pos and targetEntity.pos.h\nif not heading then heading=math.pi end\n\nlocal slot=AnyoneCore.Roster.mySlot()\nlocal isRanged=(slot==\"H1\" or slot==\"H2\" or slot==\"R1\" or slot==\"R2\")\nlocal roleAngle=heading\nlocal stepSign=1\nif isRanged then\n    roleAngle=heading+math.pi\n    stepSign=-1\nend\n\nlocal radius=12.5\nlocal p0={x=center.x+math.sin(roleAngle)*radius,y=center.y,z=center.z+math.cos(roleAngle)*radius}\nlocal p1Angle=roleAngle+stepSign*math.pi/4\nlocal p1={x=center.x+math.sin(p1Angle)*radius,y=center.y,z=center.z+math.cos(p1Angle)*radius}\nlocal p2={x=center.x+math.sin(roleAngle)*radius,y=center.y,z=center.z+math.cos(roleAngle)*radius}\nlocal p3Angle=roleAngle-stepSign*math.pi/4\nlocal p3={x=center.x+math.sin(p3Angle)*radius,y=center.y,z=center.z+math.cos(p3Angle)*radius}\n\nlocal guide=TensorCore.getCachedDrawer(0xFF99FF99,0xFF33CC66,0xFF168844,0xFFFFFFFF,2)\nlocal firstTimeout=1800\nlocal segmentTimeout=2000\n\nlocal distance=TensorCore.getDistance2d(player.pos,p0)\nif distance>0.2 then\n    local tip=math.min(1.2,distance*0.3)\n    guide:addTimedArrow(\n        firstTimeout,\n        player.pos.x,player.pos.y,player.pos.z,\n        TensorCore.getHeadingToTarget(player.pos,p0),\n        math.max(0.1,distance-tip),\n        0.75,tip,1.7,0,false,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\n\nlocal route1=TensorCore.getDistance2d(p0,p1)\nlocal route2=TensorCore.getDistance2d(p1,p2)\nlocal route3=TensorCore.getDistance2d(p2,p3)\n\nguide:addTimedArrow(\n    segmentTimeout,\n    p0.x,p0.y,p0.z,\n    TensorCore.getHeadingToTarget(p0,p1),\n    math.max(0.1,route1-0.8),\n    0.8,1.0,1.9,1800,false,\n    Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n)\nguide:addTimedArrow(\n    segmentTimeout,\n    p1.x,p1.y,p1.z,\n    TensorCore.getHeadingToTarget(p1,p2),\n    math.max(0.1,route2-0.8),\n    0.8,1.0,1.9,3800,false,\n    Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n)\nguide:addTimedArrow(\n    segmentTimeout,\n    p2.x,p2.y,p2.z,\n    TensorCore.getHeadingToTarget(p2,p3),\n    math.max(0.1,route3-0.8),\n    0.8,1.0,1.9,5800,false,\n    Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n)\n\nAnyoneCore.addTimedWorldText(\n    firstTimeout,\n    isRanged and \"BOMB BOULDER: RANGED/HEALER BACK\" or \"BOMB BOULDER: TANK/MELEE FRONT\",\n    {x=p0.x,y=p0.y+1.5,z=p0.z},\n    0xFF99FF99,true,0.9\n)\nself.used=true",
 							name = "Guide",
 							uuid = "eb61ff72-81f6-6917-bf66-7be072ff92d3",
 							version = 2.1,
@@ -3041,9 +4190,96 @@ local tbl =
 				name = "[Draw][LPDU][Titan] Mario Kart 2",
 				timeRange = true,
 				timelineIndex = 102,
-				timerEndOffset = 6,
-				timerStartOffset = -5,
+				timerEndOffset = 8,
+				timerStartOffset = -3,
 				uuid = "f9fab7e4-908e-c846-aa91-c590a9f89caf",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "57cee788-863b-1700-91a8-951657ca4199",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 8000,
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = "Party follow Mario Kart route; dodge Landslides, step back in.",
+							uuid = "58c006ff-c22d-a954-87ab-7c950bf4320a",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "[Raid calls]",
+				mechanicTime = 722,
+				name = "[Raid Call][Titan] Weights and Landslides 2",
+				timelineIndex = 102,
+				timerOffset = -1,
+				uuid = "afa08f36-d293-dcbe-8929-b481bc407501",
+				version = 2,
+			},
+		},
+	},
+	[107] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Titan LPDU",
+				uuid = "63203d8c-0ac3-257d-a88f-db4ef4058f93",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player=TensorCore.mGetPlayer()\nif not player or not player.pos then self.used=true return end\nlocal center={x=100,y=player.pos.y,z=100}\nlocal channel=Argus2.getNextUnusedChannel(true)\nArgus2.addTimedCircleFilled(6000,center.x,center.y,center.z,17.5,64,0x5533CC66,0x5533CC66,0xAA22FF66,0,nil,0,0,0,0,0,false,true,Argus2.RenderFlags.FLAG_OCCLUSION_BASE,channel,0,0,0)\nArgus2.addTimedDonutFilled(6000,center.x,center.y,center.z,5.5,25.0,64,0,0,0,0,nil,0,0,0,0,0,false,true,Argus2.RenderFlags.FLAG_OCCLUDE,channel,0,0,0)\nlocal distance=TensorCore.getDistance2d(player.pos,center)\nif distance>0.2 then\n local tip=math.min(2.0,distance*0.35)\n local drawer=TensorCore.getCachedDrawer(0xFF99FF99,0xFF33CC66,0xFF168844,0xFFFFFFFF,2)\n drawer:addTimedArrow(6000,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,center),math.max(0.1,distance-tip),1.0,tip,2.4,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nAnyoneCore.addTimedWorldText(6000,\"STACK CENTER\",{x=center.x,y=center.y+1.5,z=center.z},0xFF99FF99,true,1.0)\nself.used=true",
+							name = "Guide",
+							uuid = "cba219cc-fadf-0689-b0a4-c2b4bb9c0042",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Draws - Titan LPDU",
+				mechanicTime = 735,
+				name = "[Draw][LPDU][Titan] Four AOE Safe Center",
+				timeRange = true,
+				timelineIndex = 107,
+				timerEndOffset = 5,
+				timerStartOffset = -1,
+				uuid = "eb339f3b-25e1-fcb8-b1e7-c10670aaf949",
 				version = 2,
 			},
 		},
@@ -3064,16 +4300,481 @@ local tbl =
 		{
 			data = 
 			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "e5bcbff2-b320-97e7-a133-fadc0951b215",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
 				actions = 
 				{
 					
 					{
 						data = 
 						{
+							aType = "Alert",
+							alertDuration = 8000,
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = "Party continue Mario Kart Weights; healers prep eight Tumults.",
+							uuid = "4636f979-5e09-89e6-a468-a62beaef9d32",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "[Raid calls]",
+				mechanicTime = 744,
+				name = "[Raid Call][Titan] Final Weights",
+				timelineIndex = 109,
+				timerOffset = -1,
+				uuid = "77617ea5-5192-0273-a033-da451b3fa1f2",
+				version = 2,
+			},
+		},
+	},
+	[123] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Garuda",
+				uuid = "06218b18-4bf4-d9d8-b160-4fb4c2cd393b",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Garuda",
+							uuid = "94caf00f-2361-9dd5-bf38-76610df86d4c",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
 							aType = "Lua",
-							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then\n    self.used = true\n    return\nend\n\nlocal center = { x = 100, y = player.pos.y, z = 100 }\nlocal dx = player.pos.x - center.x\nlocal dz = player.pos.z - center.z\nlocal radius = math.sqrt(dx * dx + dz * dz)\nif radius < 6 then\n    dx = 0\n    dz = -1\n    radius = 12.5\nelse\n    radius = math.max(10, math.min(15, radius))\nend\n\nlocal angle = math.atan2(dx, dz)\nlocal nextAngle = angle - math.pi / 4\nlocal target = {\n    x = center.x + math.sin(nextAngle) * radius,\n    y = center.y,\n    z = center.z + math.cos(nextAngle) * radius,\n}\nlocal distance = TensorCore.getDistance2d(player.pos, target)\nif distance > 0.2 then\n    local tipLength = math.min(1.8, distance * 0.35)\n    local drawer = TensorCore.getCachedDrawer(\n        0xFF99FF99,\n        0xFF33CC66,\n        0xFF168844,\n        0xFFFFFFFF,\n        2\n    )\n    drawer:addTimedArrow(\n        11000,\n        player.pos.x, player.pos.y, player.pos.z,\n        TensorCore.getHeadingToTarget(player.pos, target),\n        math.max(0.1, distance - tipLength),\n        1.0,\n        tipLength,\n        2.3,\n        0,\n        false,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\n\nlocal drawer = TensorCore.getCachedDrawer(\n    0x5533CC66,\n    0x5533CC66,\n    0xAA33CC66,\n    0xFFFFFFFF,\n    2\n)\ndrawer:addTimedCircle(11000, target.x, target.y, target.z, 1.25, 0, false, true)\nAnyoneCore.addTimedWorldText(\n    11000,\n    \"MARIO KART: ROTATE CLOCKWISE\",\n    { x = target.x, y = target.y + 1.5, z = target.z },\n    0xFF99FF99,\n    true,\n    1.0\n)\n\nself.used = true",
+							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then\n    self.used = true\n    return\nend\n\nlocal center = { x = 100, y = player.pos.y, z = 100 }\nlocal candidates = {\n    { x = 93.5,  y = center.y, z = 82.2  },\n    { x = 106.5, y = center.y, z = 82.2  },\n    { x = 117.8, y = center.y, z = 93.5  },\n    { x = 117.8, y = center.y, z = 106.5 },\n    { x = 106.5, y = center.y, z = 117.8 },\n    { x = 93.5,  y = center.y, z = 117.8 },\n    { x = 82.2,  y = center.y, z = 106.5 },\n    { x = 82.2,  y = center.y, z = 93.5  }\n}\n\nlocal hazards = {}\nlocal seen = {}\nlocal enemies = TensorCore.getEntityGroupList(\"Enemy\")\nfor _, entity in pairs(enemies or {}) do\n    local content = entity and (entity.contentid or entity.contentID)\n    if entity and entity.pos and (content == 1644 or content == 1185 or content == 1801 or content == 2137) then\n        seen[content] = true\n        local radius = 5.5\n        if content == 1644 then\n            radius = 7.0\n        elseif content == 1185 then\n            radius = 7.5\n        elseif content == 2137 then\n            radius = 6.5\n        end\n        hazards[#hazards + 1] = { x = entity.pos.x, z = entity.pos.z, radius = radius }\n    end\nend\n\nif not seen[1644] or not seen[1185] or not seen[1801] or not seen[2137] then\n    self.used = true\n    return\nend\n\nlocal best\nlocal bestClearance = -math.huge\nfor _, candidate in ipairs(candidates) do\n    local clearance = math.huge\n    for _, hazard in ipairs(hazards) do\n        local dx = candidate.x - hazard.x\n        local dz = candidate.z - hazard.z\n        clearance = math.min(clearance, math.sqrt(dx * dx + dz * dz) - hazard.radius)\n    end\n    if clearance > bestClearance then\n        best = candidate\n        bestClearance = clearance\n    end\nend\n\nif not best then\n    self.used = true\n    return\nend\n\nlocal channel = Argus2.getNextUnusedChannel(true)\nArgus2.addTimedCircleFilled(\n    10000,\n    best.x, best.y, best.z,\n    3.3, 64,\n    0x5533CC66, 0x5533CC66, 0xAA22FF66, 0,\n    nil, 0, 0, 0, 0, 0,\n    false, true, Argus2.RenderFlags.FLAG_OCCLUSION_BASE,\n    channel, 0, 0, 0\n)\n\nlocal distance = TensorCore.getDistance2d(player.pos, best)\nif distance > 0.2 then\n    local tip = math.min(1.8, distance * 0.35)\n    local drawer = TensorCore.getCachedDrawer(\n        0xFFB6FFB6, 0xFF55FF55, 0xFFFFFFFF, 0xFF000000, 5\n    )\n    drawer:addTimedArrow(\n        10000,\n        player.pos.x, player.pos.y, player.pos.z,\n        TensorCore.getHeadingToTarget(player.pos, best),\n        math.max(0.1, distance - tip),\n        1.5, tip, 3.2, 0, false,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\n\nAnyoneCore.addTimedWorldText(\n    10000,\n    \"PREDATION: SAFE RUNE\",\n    { x = best.x, y = best.y + 1.2, z = best.z },\n    0xFFB6FFB6, true, 1.25\n)\nself.used = true",
+							displayPath = "Draws - Garuda",
 							name = "Guide",
-							uuid = "3cba2c66-1641-4142-af6d-15fd97a588fe",
+							uuid = "163f8d28-6c36-3c00-b703-942e9d637d52",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Draws - Garuda",
+				mechanicTime = 1023,
+				name = "[Draw] Ultimate Predation - Safe Rune",
+				timeRange = true,
+				timelineIndex = 123,
+				timerEndOffset = 20,
+				timerStartOffset = 7,
+				uuid = "76680eda-e0c2-a582-b172-0adaa0be5daf",
+				version = 2,
+			},
+		},
+	},
+	[132] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Garuda",
+				uuid = "e4aa805e-c073-8bce-aaa0-c6fd4d651462",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Garuda",
+							uuid = "6c40c0b7-7ccd-6ad8-b8b4-c721ae344b47",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 2500,
+							alertPriority = 3,
+							alertScale = 0.9,
+							alertTTS = true,
+							alertText = "MOVE FOR FEATHER RAIN",
+							conditions = 
+							{
+								
+								{
+									"ff2638dc-9eff-472e-83ff-991b4b7f445a",
+									true,
+								},
+								
+								{
+									"501c9f45-1c48-6f84-bfa4-e5381f39d8c5",
+									true,
+								},
+							},
+							displayPath = "Draws - Garuda",
+							name = "[Alert] Feather Rain - Move 1045",
+							uuid = "5b2c9657-06ea-8d91-9af9-9dba2e048c03",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Garuda",
+							uuid = "c0918df2-9205-9100-8681-7c13ef34a186",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							displayPath = "Draws - Garuda",
+							eventArgOptionType = 2,
+							eventEntityContentID = 1644,
+							name = "Garuda Feather Rain source",
+							uuid = "501c9f45-1c48-6f84-bfa4-e5381f39d8c5",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							displayPath = "Draws - Garuda",
+							eventArgType = 2,
+							eventSpellID = 11085,
+							name = "Feather Rain cast ID",
+							uuid = "ff2638dc-9eff-472e-83ff-991b4b7f445a",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Garuda",
+				eventType = 3,
+				mechanicTime = 1045,
+				name = "[Alert] Feather Rain - Move 1045",
+				throttleTime = 1000,
+				timeRange = true,
+				timelineIndex = 132,
+				timerEndOffset = 2,
+				timerStartOffset = -2,
+				uuid = "0c48e42c-c64b-a67f-a5ca-56e9d43a2087",
+				version = 2,
+			},
+		},
+	},
+	[144] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Garuda",
+				uuid = "ed3f9b49-d5d7-3927-b154-108720887911",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Garuda",
+							uuid = "e7d13c7c-b727-a793-a5f6-cd04383f54ea",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 2500,
+							alertPriority = 3,
+							alertScale = 0.9,
+							alertTTS = true,
+							alertText = "MOVE FOR FEATHER RAIN",
+							conditions = 
+							{
+								
+								{
+									"4b3cc45d-f5e5-7f04-b8bf-600f668bf43a",
+									true,
+								},
+								
+								{
+									"65a8fae4-102a-c628-b752-75a63a1ea505",
+									true,
+								},
+							},
+							displayPath = "Draws - Garuda",
+							name = "[Alert] Feather Rain - Move 1091",
+							uuid = "80f72f78-0ca9-104a-a527-5f9967ce0bda",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Garuda",
+							uuid = "cff09bb5-4d69-9e8a-a505-4ada23873a63",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							displayPath = "Draws - Garuda",
+							eventArgOptionType = 2,
+							eventEntityContentID = 1644,
+							name = "Garuda Feather Rain source",
+							uuid = "65a8fae4-102a-c628-b752-75a63a1ea505",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							displayPath = "Draws - Garuda",
+							eventArgType = 2,
+							eventSpellID = 11085,
+							name = "Feather Rain cast ID",
+							uuid = "4b3cc45d-f5e5-7f04-b8bf-600f668bf43a",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Garuda",
+				eventType = 3,
+				mechanicTime = 1091,
+				name = "[Alert] Feather Rain - Move 1091",
+				throttleTime = 1000,
+				timeRange = true,
+				timelineIndex = 144,
+				timerEndOffset = 2,
+				timerStartOffset = -2,
+				uuid = "2a665ab7-7387-7322-870d-c74df5bf6c28",
+				version = 2,
+			},
+		},
+	},
+	[147] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Garuda",
+				uuid = "bd494a44-c9fb-8b54-ad0f-b62c2e030aaf",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Garuda",
+							uuid = "5bb34c78-4f57-2058-81c2-dab79f023996",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 2500,
+							alertPriority = 3,
+							alertScale = 0.9,
+							alertTTS = true,
+							alertText = "MOVE FOR FEATHER RAIN",
+							conditions = 
+							{
+								
+								{
+									"8315b96a-1e9f-2328-93bf-651a8f505fa6",
+									true,
+								},
+								
+								{
+									"354afad0-a760-6c54-97b5-cc951b4afe93",
+									true,
+								},
+							},
+							displayPath = "Draws - Garuda",
+							name = "[Alert] Feather Rain - Move 1095",
+							uuid = "60dffc0d-8b52-0810-9756-c59cea2099cc",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Garuda",
+							uuid = "9d738aa9-03d3-8e64-bb8c-e74a82c8a465",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							displayPath = "Draws - Garuda",
+							eventArgOptionType = 2,
+							eventEntityContentID = 1644,
+							name = "Garuda Feather Rain source",
+							uuid = "354afad0-a760-6c54-97b5-cc951b4afe93",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							displayPath = "Draws - Garuda",
+							eventArgType = 2,
+							eventSpellID = 11085,
+							name = "Feather Rain cast ID",
+							uuid = "8315b96a-1e9f-2328-93bf-651a8f505fa6",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Garuda",
+				eventType = 3,
+				mechanicTime = 1095,
+				name = "[Alert] Feather Rain - Move 1095",
+				throttleTime = 1000,
+				timeRange = true,
+				timelineIndex = 147,
+				timerEndOffset = 2,
+				timerStartOffset = -2,
+				uuid = "d30b85b5-e340-3d1e-bd80-5d691f000785",
+				version = 2,
+			},
+		},
+	},
+	[151] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Titan LPDU",
+				uuid = "aec02ddb-19c3-3dfe-9606-4c37d97ec6cf",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Titan LPDU",
+							uuid = "d4156fdb-7aeb-0eec-b2bf-472d0c08c230",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 2500,
+							alertPriority = 3,
+							alertScale = 0.89999997615814,
+							alertTTS = true,
+							alertText = "DODGE WEIGHT OF THE LAND",
+							displayPath = "Draws - Titan LPDU",
+							name = "[Alert] Weight of the Land - Dodge 1112",
+							uuid = "2751a225-40dc-7375-953b-90d054133b42",
 							version = 2.1,
 						},
 					},
@@ -3082,13 +4783,2043 @@ local tbl =
 				{
 				},
 				displayPath = "Draws - Titan LPDU",
-				mechanicTime = 744,
-				name = "[Draw][LPDU][Titan] Final Mario Kart",
+				mechanicTime = 1112,
+				name = "[Alert] Weight of the Land - Dodge 1112",
 				timeRange = true,
-				timelineIndex = 109,
-				timerEndOffset = 8,
+				timelineIndex = 151,
+				timerEndOffset = 2,
+				uuid = "5f98b4d6-4076-3124-bb9c-355a3d9c15b7",
+				version = 2,
+			},
+		},
+	},
+	[153] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Titan LPDU",
+				uuid = "16629fe3-88d0-36a3-9cec-849ee5fe609f",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Titan LPDU",
+							uuid = "b11068e4-cdcf-e94d-bd64-c6b849ddcfd4",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 2500,
+							alertPriority = 3,
+							alertScale = 0.9,
+							alertTTS = true,
+							alertText = "DODGE WEIGHT OF THE LAND",
+							displayPath = "Draws - Titan LPDU",
+							name = "[Alert] Weight of the Land - Dodge 1115",
+							uuid = "4fef1313-4a70-7681-b617-2bc17b3d85b5",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Draws - Titan LPDU",
+				mechanicTime = 1115,
+				name = "[Alert] Weight of the Land - Dodge 1115",
+				timeRange = true,
+				timelineIndex = 153,
+				timerEndOffset = 2,
+				uuid = "9b89ba5b-0778-55a8-91d1-7c3ff9ffbe53",
+				version = 2,
+			},
+		},
+	},
+	[157] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Titan LPDU",
+				uuid = "1eb43b72-e27b-2b7b-9b2c-308e57068cfe",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Titan LPDU",
+							uuid = "de673b09-86ca-4578-bb89-73d760f09210",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 2500,
+							alertPriority = 3,
+							alertScale = 0.9,
+							alertTTS = true,
+							alertText = "DODGE WEIGHT OF THE LAND",
+							displayPath = "Draws - Titan LPDU",
+							name = "[Alert] Weight of the Land - Dodge 1118",
+							uuid = "e96ce3e6-4eff-f144-b8bf-993904be3e41",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Draws - Titan LPDU",
+				mechanicTime = 1118,
+				name = "[Alert] Weight of the Land - Dodge 1118",
+				timeRange = true,
+				timelineIndex = 157,
+				timerEndOffset = 2,
+				uuid = "eedcc1de-c0df-2e1a-a509-3e36ab1ebb39",
+				version = 2,
+			},
+		},
+	},
+	[159] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Garuda",
+				uuid = "9914dacb-09af-356f-92e0-f9cff76b2b62",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Garuda",
+							uuid = "b9a10670-9378-67e9-83ae-7b1275e51990",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 2500,
+							alertPriority = 3,
+							alertScale = 0.9,
+							alertTTS = true,
+							alertText = "MOVE FOR FEATHER RAIN",
+							conditions = 
+							{
+								
+								{
+									"33bacfbb-bf3c-b254-b03b-f8699730cfe0",
+									true,
+								},
+								
+								{
+									"6ec7ec0c-7c2d-22c8-89f7-64d1a2405c58",
+									true,
+								},
+							},
+							displayPath = "Draws - Garuda",
+							name = "[Alert] Feather Rain - Move 1122",
+							uuid = "1423fe9a-763b-967b-a251-edce2f63149d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Garuda",
+							uuid = "dc9439cc-3dad-6e12-a9d7-1b1b59fff1f5",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							displayPath = "Draws - Garuda",
+							eventArgOptionType = 2,
+							eventEntityContentID = 1644,
+							name = "Garuda Feather Rain source",
+							uuid = "6ec7ec0c-7c2d-22c8-89f7-64d1a2405c58",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							displayPath = "Draws - Garuda",
+							eventArgType = 2,
+							eventSpellID = 11085,
+							name = "Feather Rain cast ID",
+							uuid = "33bacfbb-bf3c-b254-b03b-f8699730cfe0",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Garuda",
+				eventType = 3,
+				mechanicTime = 1122,
+				name = "[Alert] Feather Rain - Move 1122",
+				throttleTime = 1000,
+				timeRange = true,
+				timelineIndex = 159,
+				timerEndOffset = 2,
+				timerStartOffset = -2,
+				uuid = "61bf5409-6d3e-2a0a-b1b9-5b30a2afa081",
+				version = 2,
+			},
+		},
+	},
+	[161] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ifrit",
+				uuid = "5bb56c1f-6c64-f7e6-94d0-0685e18c287f",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Ifrit",
+							uuid = "cab00888-c050-9d0c-84b4-44d89f870870",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player=TensorCore.mGetPlayer()\nif not player or not player.pos then self.used=true return end\nlocal dest={x=100,y=player.pos.y,z=80}\nlocal distance=TensorCore.getDistance2d(player.pos,dest)\nif distance>0.2 then\n local tip=math.min(2.5,distance*0.4)\n local drawer=TensorCore.getCachedDrawer(0xFFFFD080,0xFFFFA000,0xFFFFFFFF,0xFF000000,4)\n drawer:addTimedArrow(7000,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,dest),math.max(0.1,distance-tip),1.4,tip,3.0,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nAnyoneCore.addTimedWorldText(7000,\"SEARING: SOUTH WALL\",{x=dest.x,y=dest.y+1.2,z=dest.z},0xFFFFD080,true,1.15)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"aa387e83-2ce7-daca-b0e1-a8c6b45cbab4",
+									true,
+								},
+							},
+							displayPath = "Draws - Ifrit",
+							name = "South Wall Arrow",
+							uuid = "93381c1c-c9df-ea41-a936-42bf043b6d7d",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 2500,
+							alertPriority = 3,
+							alertScale = 0.9,
+							alertTTS = true,
+							alertText = "SEARING WIND: SOUTH WALL",
+							conditions = 
+							{
+								
+								{
+									"aa387e83-2ce7-daca-b0e1-a8c6b45cbab4",
+									true,
+								},
+							},
+							name = "sw161al",
+							uuid = "624c37de-914e-8ea5-a12f-1a11f37bc3a1",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local player=TensorCore.mGetPlayer() return eventArgs.buffID==1578 and eventArgs.ownerContentID==1185 and player and player.id==eventArgs.entityID",
+							dequeueIfLuaFalse = true,
+							name = "Late Searing Wind Target",
+							uuid = "aa387e83-2ce7-daca-b0e1-a8c6b45cbab4",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Ifrit",
+				eventType = 8,
+				mechanicTime = 1124,
+				name = "[Draw][LPDU][Ifrit] Late Searing Wind 1124",
+				timeRange = true,
+				timelineIndex = 161,
+				timerEndOffset = 5,
+				timerStartOffset = -1,
+				uuid = "8a8af8ab-a5fd-85ec-9623-e73e66466502",
+				version = 2,
+			},
+		},
+	},
+	[162] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ifrit",
+				uuid = "c8eaa061-e6d5-1b59-ad66-27bea5b2ec07",
+			},
+			objectType = "folder",
+		},
+	},
+	[164] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ifrit",
+				uuid = "c8d41f01-ee1f-e38b-b045-a3f5fd2b906b",
+			},
+			objectType = "folder",
+		},
+	},
+	[166] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ifrit",
+				uuid = "a4d743d7-636b-f3e5-b15b-227393047a7a",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Ifrit",
+							uuid = "d47c002d-3bc7-b120-b3be-c25db66bd3bf",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player=TensorCore.mGetPlayer()\nif not player or not player.pos then self.used=true return end\nlocal dest={x=100,y=player.pos.y,z=80}\nlocal distance=TensorCore.getDistance2d(player.pos,dest)\nif distance>0.2 then\n local tip=math.min(2.5,distance*0.4)\n local drawer=TensorCore.getCachedDrawer(0xFFFFD080,0xFFFFA000,0xFFFFFFFF,0xFF000000,4)\n drawer:addTimedArrow(7000,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,dest),math.max(0.1,distance-tip),1.4,tip,3.0,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nAnyoneCore.addTimedWorldText(7000,\"SEARING: SOUTH WALL\",{x=dest.x,y=dest.y+1.2,z=dest.z},0xFFFFD080,true,1.15)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"5235dae1-2fb3-a91c-bb46-5dc6e9d3e8c1",
+									true,
+								},
+							},
+							displayPath = "Draws - Ifrit",
+							name = "South Wall Arrow",
+							uuid = "493b2f83-3ca7-8c4b-b996-de3484b09f52",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 2500,
+							alertPriority = 3,
+							alertScale = 0.9,
+							alertTTS = true,
+							alertText = "SEARING WIND: SOUTH WALL",
+							conditions = 
+							{
+								
+								{
+									"5235dae1-2fb3-a91c-bb46-5dc6e9d3e8c1",
+									true,
+								},
+							},
+							name = "sw166al",
+							uuid = "f94559a7-de23-b8bf-a5ea-c1a9233e329f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local player=TensorCore.mGetPlayer() return eventArgs.buffID==1578 and eventArgs.ownerContentID==1185 and player and player.id==eventArgs.entityID",
+							dequeueIfLuaFalse = true,
+							name = "Late Searing Wind Target",
+							uuid = "5235dae1-2fb3-a91c-bb46-5dc6e9d3e8c1",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Ifrit",
+				eventType = 8,
+				mechanicTime = 1130,
+				name = "[Draw][LPDU][Ifrit] Late Searing Wind 1130",
+				timeRange = true,
+				timelineIndex = 166,
+				timerEndOffset = 5,
+				timerStartOffset = -1,
+				uuid = "2c3c8038-0534-11c6-9b56-4815fcbfa130",
+				version = 2,
+			},
+		},
+	},
+	[171] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ifrit",
+				uuid = "66cead85-dcde-81ca-957f-9a87c73f2a2d",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Ifrit",
+							uuid = "ea7f11c4-f2a5-511d-9243-86b4f08252c4",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 2500,
+							alertPriority = 3,
+							alertScale = 0.9,
+							alertTTS = true,
+							alertText = "SEARING WIND: SOUTH WALL",
+							conditions = 
+							{
+								
+								{
+									"21ab9d50-7d84-0ab2-9943-30fca79d9088",
+									true,
+								},
+							},
+							name = "sw171al",
+							uuid = "69d29a65-df3c-a930-8cf1-587639dec4b8",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local player=TensorCore.mGetPlayer() return eventArgs.buffID==1578 and eventArgs.ownerContentID==1185 and player and player.id==eventArgs.entityID",
+							dequeueIfLuaFalse = true,
+							name = "Late Searing Wind Target",
+							uuid = "21ab9d50-7d84-0ab2-9943-30fca79d9088",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Ifrit",
+				eventType = 8,
+				mechanicTime = 1137,
+				name = "[Draw][LPDU][Ifrit] Late Searing Wind 1137",
+				timeRange = true,
+				timelineIndex = 171,
+				timerEndOffset = 5,
+				timerStartOffset = -1,
+				uuid = "21399574-ec91-94e9-a1bc-b04307087212",
+				version = 2,
+			},
+		},
+	},
+	[173] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Garuda",
+				uuid = "e3080a67-a0a1-df5b-bcbc-4d56c9adea71",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Garuda",
+							uuid = "859949b9-04c6-19da-9c3d-5a2439528133",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 2500,
+							alertPriority = 3,
+							alertScale = 0.9,
+							alertTTS = true,
+							alertText = "MOVE FOR FEATHER RAIN",
+							conditions = 
+							{
+								
+								{
+									"cd5e9ca1-0baf-ba40-912b-67e46ddb5987",
+									true,
+								},
+								
+								{
+									"d69c5147-e88f-c974-9f20-97e944266225",
+									true,
+								},
+							},
+							displayPath = "Draws - Garuda",
+							name = "[Alert] Feather Rain - Move 1141",
+							uuid = "0c968a88-0091-0c10-98be-198853681098",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Garuda",
+							uuid = "3d8b50f6-3fab-3283-9522-dfbf44036a66",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							displayPath = "Draws - Garuda",
+							eventArgOptionType = 2,
+							eventEntityContentID = 1644,
+							name = "Garuda Feather Rain source",
+							uuid = "d69c5147-e88f-c974-9f20-97e944266225",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							displayPath = "Draws - Garuda",
+							eventArgType = 2,
+							eventSpellID = 11085,
+							name = "Feather Rain cast ID",
+							uuid = "cd5e9ca1-0baf-ba40-912b-67e46ddb5987",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Garuda",
+				eventType = 3,
+				mechanicTime = 1141,
+				name = "[Alert] Feather Rain - Move 1141",
+				throttleTime = 1000,
+				timeRange = true,
+				timelineIndex = 173,
+				timerEndOffset = 2,
+				timerStartOffset = -2,
+				uuid = "8a261bc1-1401-9b35-abd5-d80e9d1bfd1e",
+				version = 2,
+			},
+		},
+	},
+	[175] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ifrit",
+				uuid = "3188baf6-c360-3262-9ed6-03c4b65c942a",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Ifrit",
+							uuid = "825a8412-4797-8e5d-b460-8c737782a5bb",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player=TensorCore.mGetPlayer()\nif not player or not player.pos then self.used=true return end\nlocal dest={x=100,y=player.pos.y,z=80}\nlocal distance=TensorCore.getDistance2d(player.pos,dest)\nif distance>0.2 then\n local tip=math.min(2.5,distance*0.4)\n local drawer=TensorCore.getCachedDrawer(0xFFFFD080,0xFFFFA000,0xFFFFFFFF,0xFF000000,4)\n drawer:addTimedArrow(7000,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,dest),math.max(0.1,distance-tip),1.4,tip,3.0,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nAnyoneCore.addTimedWorldText(7000,\"SEARING: SOUTH WALL\",{x=dest.x,y=dest.y+1.2,z=dest.z},0xFFFFD080,true,1.15)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"5f57b02b-46de-9632-8807-2f49f82181e6",
+									true,
+								},
+							},
+							displayPath = "Draws - Ifrit",
+							name = "South Wall Arrow",
+							uuid = "ca80a556-0f07-9568-8be7-d397515e56fe",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 2500,
+							alertPriority = 3,
+							alertScale = 0.9,
+							alertTTS = true,
+							alertText = "SEARING WIND: SOUTH WALL",
+							conditions = 
+							{
+								
+								{
+									"5f57b02b-46de-9632-8807-2f49f82181e6",
+									true,
+								},
+							},
+							name = "sw175al",
+							uuid = "78049cd5-7a82-7d35-a82b-555cb1f31d62",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local player=TensorCore.mGetPlayer() return eventArgs.buffID==1578 and eventArgs.ownerContentID==1185 and player and player.id==eventArgs.entityID",
+							dequeueIfLuaFalse = true,
+							name = "Late Searing Wind Target",
+							uuid = "5f57b02b-46de-9632-8807-2f49f82181e6",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Ifrit",
+				eventType = 8,
+				mechanicTime = 1144,
+				name = "[Draw][LPDU][Ifrit] Late Searing Wind 1144",
+				timeRange = true,
+				timelineIndex = 175,
+				timerEndOffset = 5,
+				timerStartOffset = -1,
+				uuid = "0f6cf4f2-a6a9-4e4f-9288-2a226deb3901",
+				version = 2,
+			},
+		},
+	},
+	[177] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ifrit",
+				uuid = "dff598cb-1453-4c48-9eb0-260761835a50",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Ifrit",
+							uuid = "b25c9393-c9cf-555a-8a4c-c24bcd12dcd3",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player=TensorCore.mGetPlayer()\nif not player or not player.pos then self.used=true return end\nlocal dest={x=100,y=player.pos.y,z=80}\nlocal distance=TensorCore.getDistance2d(player.pos,dest)\nif distance>0.2 then\n local tip=math.min(2.5,distance*0.4)\n local drawer=TensorCore.getCachedDrawer(0xFFFFD080,0xFFFFA000,0xFFFFFFFF,0xFF000000,4)\n drawer:addTimedArrow(7000,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,dest),math.max(0.1,distance-tip),1.4,tip,3.0,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nAnyoneCore.addTimedWorldText(7000,\"SEARING: SOUTH WALL\",{x=dest.x,y=dest.y+1.2,z=dest.z},0xFFFFD080,true,1.15)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"99645b55-c5cf-1109-a2f0-05a3dfd7dd1d",
+									true,
+								},
+							},
+							displayPath = "Draws - Ifrit",
+							name = "South Wall Arrow",
+							uuid = "738f1f0c-b718-a2c7-8034-cc0833406c49",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 2500,
+							alertPriority = 3,
+							alertScale = 0.9,
+							alertTTS = true,
+							alertText = "SEARING WIND: SOUTH WALL",
+							conditions = 
+							{
+								
+								{
+									"99645b55-c5cf-1109-a2f0-05a3dfd7dd1d",
+									true,
+								},
+							},
+							name = "sw177al",
+							uuid = "8c0e3de8-9b9c-bd9a-a117-cdfe4eae9db8",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local player=TensorCore.mGetPlayer() return eventArgs.buffID==1578 and eventArgs.ownerContentID==1185 and player and player.id==eventArgs.entityID",
+							dequeueIfLuaFalse = true,
+							name = "Late Searing Wind Target",
+							uuid = "99645b55-c5cf-1109-a2f0-05a3dfd7dd1d",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Ifrit",
+				eventType = 8,
+				mechanicTime = 1150,
+				name = "[Draw][LPDU][Ifrit] Late Searing Wind 1150",
+				timeRange = true,
+				timelineIndex = 177,
+				timerEndOffset = 5,
+				timerStartOffset = -1,
+				uuid = "d1105d8f-f502-b7b2-ba2b-cbf670836fdf",
+				version = 2,
+			},
+		},
+	},
+	[188] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ultima",
+				uuid = "dedfd89d-2315-0b70-b490-b61bf57fa4de",
+			},
+			objectType = "folder",
+		},
+	},
+	[190] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ifrit",
+				uuid = "de76f1a4-3ea2-1e45-b1ca-a4dab79d1a96",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Ifrit",
+							uuid = "e6a927e7-41f2-8f38-9e4c-4ee3dd540164",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player=TensorCore.mGetPlayer()\nif not player or not player.pos then self.used=true return end\nlocal center={x=100,y=player.pos.y,z=100}\nlocal target=TensorCore.mGetTarget()\nlocal dx,dz\nif target and target.pos then dx=target.pos.x-center.x dz=target.pos.z-center.z else dx=player.pos.x-center.x dz=player.pos.z-center.z end\nlocal length=math.sqrt(dx*dx+dz*dz)\nif length<0.1 then dx=0 dz=-1 length=1 end\nlocal destination={x=center.x-dx/length*17.5,y=center.y,z=center.z-dz/length*17.5}\nlocal distance=TensorCore.getDistance2d(player.pos,destination)\nif distance>0.2 then\n local tip=math.min(2.8,distance*0.38)\n local drawer=TensorCore.getCachedDrawer(0xFFB6FFB6,0xFF55FF55,0xFFFFFFFF,0xFF000000,5)\n drawer:addTimedArrow(7000,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,destination),math.max(0.1,distance-tip),1.5,tip,3.2,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nAnyoneCore.addTimedWorldText(7000,\"SAFE SIDE\",{x=destination.x,y=destination.y+1.2,z=destination.z},0xFFB6FFB6,true,1.2)\nself.used=true",
+							displayPath = "Draws - Ifrit",
+							name = "Guide",
+							uuid = "58fc1355-9f28-5586-aa69-746ebca9a503",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Draws - Ifrit",
+				enabled = false,
+				mechanicTime = 1206,
+				name = "[Draw] Post-Predation - Safe Side Arrow",
+				timeRange = true,
+				timelineIndex = 190,
+				timerEndOffset = 3,
 				timerStartOffset = -5,
-				uuid = "49ca82f7-da0e-3871-8b89-f0be1c9de80f",
+				uuid = "11822bea-810b-5593-ae66-14797e370be1",
+				version = 2,
+			},
+		},
+	},
+	[191] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ifrit",
+				uuid = "3fa712f9-66a3-9293-b98a-c3d9eb75abcf",
+			},
+			objectType = "folder",
+		},
+	},
+	[192] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Garuda",
+				uuid = "80788079-2d5a-4a5e-af1e-f10b6a162b1e",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Garuda",
+							uuid = "9299d0d4-d148-d058-96cf-014dac432b1a",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player=TensorCore.mGetPlayer()\nif not player or not player.pos then self.used=true return end\nlocal hit=false\nfor _,id in pairs(eventArgs.hitTargets or {}) do\n if id==player.id then hit=true break end\nend\nif not hit then self.used=true return end\nlocal dest={x=100,y=player.pos.y,z=114}\nlocal distance=TensorCore.getDistance2d(player.pos,dest)\nif distance>0.2 then\n local tip=math.min(2.5,distance*0.35)\n local drawer=TensorCore.getCachedDrawer(0xFFB6E0FF,0xFF55AAFF,0xFFFFFFFF,0xFF000000,4)\n drawer:addTimedArrow(6000,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,dest),math.max(0.1,distance-tip),1.4,tip,3.0,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nAnyoneCore.addTimedWorldText(6000,\"MISTRAL: BEHIND TANKS\",{x=dest.x,y=dest.y+1.2,z=dest.z},0xFFB6E0FF,true,1.1)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"475e1b23-d512-8066-9f60-9601bf7b919b",
+									true,
+								},
+							},
+							displayPath = "Draws - Garuda",
+							name = "Mistral Role Guide",
+							uuid = "0c71ed8e-6930-bf1d-a08d-22281c26bb71",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return (eventArgs.spellID==11074 or eventArgs.spellID==11083) and (eventArgs.entityContentID==1644 or eventArgs.entityContentID==1645 or eventArgs.entityContentID==1646)",
+							dequeueIfLuaFalse = true,
+							name = "Mistral Song Cast",
+							uuid = "475e1b23-d512-8066-9f60-9601bf7b919b",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Garuda",
+				eventType = 2,
+				mechanicTime = 1210,
+				name = "[Draw][LPDU][Garuda] Mistral Song 1210",
+				timeRange = true,
+				timelineIndex = 192,
+				timerEndOffset = 5,
+				timerStartOffset = -1,
+				uuid = "f9368301-3ca4-ce8e-a6c2-60106ed2083f",
+				version = 2,
+			},
+		},
+	},
+	[193] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Garuda",
+				uuid = "28a385fd-3c90-d6f2-9be8-78e2f068d7e5",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Garuda",
+							uuid = "30d1f0a5-abf6-f0c1-bf69-d4cddd13b827",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player=TensorCore.mGetPlayer()\nif not player or not player.pos then self.used=true return end\nlocal hit=false\nfor _,id in pairs(eventArgs.hitTargets or {}) do\n if id==player.id then hit=true break end\nend\nif not hit then self.used=true return end\nlocal dest={x=100,y=player.pos.y,z=114}\nlocal distance=TensorCore.getDistance2d(player.pos,dest)\nif distance>0.2 then\n local tip=math.min(2.5,distance*0.35)\n local drawer=TensorCore.getCachedDrawer(0xFFB6E0FF,0xFF55AAFF,0xFFFFFFFF,0xFF000000,4)\n drawer:addTimedArrow(6000,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,dest),math.max(0.1,distance-tip),1.4,tip,3.0,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nAnyoneCore.addTimedWorldText(6000,\"MISTRAL: BEHIND TANKS\",{x=dest.x,y=dest.y+1.2,z=dest.z},0xFFB6E0FF,true,1.1)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"c76708b0-b9fe-edd9-a35f-222944a5aeb8",
+									true,
+								},
+							},
+							displayPath = "Draws - Garuda",
+							name = "Mistral Role Guide",
+							uuid = "b3c7bf1d-8e0a-71f2-98e1-65ee44c54944",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return (eventArgs.spellID==11074 or eventArgs.spellID==11083) and (eventArgs.entityContentID==1644 or eventArgs.entityContentID==1645 or eventArgs.entityContentID==1646)",
+							dequeueIfLuaFalse = true,
+							name = "Mistral Song Cast",
+							uuid = "c76708b0-b9fe-edd9-a35f-222944a5aeb8",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Garuda",
+				eventType = 2,
+				mechanicTime = 1212,
+				name = "[Draw][LPDU][Garuda] Mistral Song 1212",
+				timeRange = true,
+				timelineIndex = 193,
+				timerEndOffset = 5,
+				timerStartOffset = -1,
+				uuid = "4aa8fdd2-7302-2d45-89b5-899a63b270c0",
+				version = 2,
+			},
+		},
+	},
+	[194] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Garuda",
+				uuid = "d17f6e6f-1bf0-8ad5-8e21-d311d53d6eb2",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Garuda",
+							uuid = "d9873ec5-5a71-e2f8-90ad-965ec7c985a1",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 2500,
+							alertPriority = 3,
+							alertScale = 0.89999997615814,
+							alertTTS = true,
+							alertText = "MOVE",
+							conditions = 
+							{
+								
+								{
+									"1932a330-e250-d89a-a798-8bd259517b5c",
+									true,
+								},
+								
+								{
+									"d75a28ed-61bf-e4e6-963c-f8f697704ef0",
+									true,
+								},
+							},
+							displayPath = "Draws - Garuda",
+							name = "[Alert] Feather Rain - Move 1215",
+							uuid = "19da62ea-75da-738a-a4a2-6c30cf0a88d0",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Garuda",
+							uuid = "297d3efb-2ffd-d720-ba08-38e7377b74b5",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							displayPath = "Draws - Garuda",
+							eventArgOptionType = 2,
+							eventEntityContentID = 1644,
+							name = "Garuda Feather Rain source",
+							uuid = "d75a28ed-61bf-e4e6-963c-f8f697704ef0",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							displayPath = "Draws - Garuda",
+							eventArgType = 2,
+							eventSpellID = 11085,
+							name = "Feather Rain cast ID",
+							uuid = "1932a330-e250-d89a-a798-8bd259517b5c",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Garuda",
+				eventType = 3,
+				mechanicTime = 1215,
+				name = "[Alert] Feather Rain - Move 1215",
+				throttleTime = 1000,
+				timeRange = true,
+				timelineIndex = 194,
+				timerEndOffset = -0.5,
+				timerStartOffset = -2,
+				uuid = "a6c44fc1-f001-3d5f-bac1-21e85d44e3cf",
+				version = 2,
+			},
+		},
+	},
+	[196] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Garuda",
+				uuid = "14145b3f-1f53-4d76-b8a4-596f4e35a661",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Garuda",
+							uuid = "e3c197bb-27e0-b7c5-8115-2f1c12436f1c",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 2500,
+							alertPriority = 3,
+							alertScale = 0.89999997615814,
+							alertTTS = true,
+							alertText = "MOVE",
+							conditions = 
+							{
+								
+								{
+									"6a45d089-1873-9642-b732-9dc1d1ba530d",
+									true,
+								},
+								
+								{
+									"e0a11489-beab-620f-a61b-16ccef2a15e7",
+									true,
+								},
+							},
+							displayPath = "Draws - Garuda",
+							name = "[Alert] Feather Rain - Move 1216",
+							uuid = "68dd5292-a487-5bf0-9cda-b27182e1a6e5",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Garuda",
+							uuid = "d77d024d-8b28-c58d-bc64-ae7eef52ad03",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							displayPath = "Draws - Garuda",
+							eventArgOptionType = 2,
+							eventEntityContentID = 1644,
+							name = "Garuda Feather Rain source",
+							uuid = "e0a11489-beab-620f-a61b-16ccef2a15e7",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							displayPath = "Draws - Garuda",
+							eventArgType = 2,
+							eventSpellID = 11085,
+							name = "Feather Rain cast ID",
+							uuid = "6a45d089-1873-9642-b732-9dc1d1ba530d",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Garuda",
+				eventType = 3,
+				mechanicTime = 1216,
+				name = "[Alert] Feather Rain - Move 1216",
+				throttleTime = 1000,
+				timeRange = true,
+				timelineIndex = 196,
+				timerEndOffset = 2,
+				timerStartOffset = -2,
+				uuid = "c8e88d7a-34a0-70aa-b5fd-ea29ce85ae1f",
+				version = 2,
+			},
+		},
+	},
+	[204] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Garuda",
+				uuid = "148d2bac-870a-80c2-b046-7be807243acb",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Garuda",
+							uuid = "12e6d78a-73cc-2bb6-9b60-19d126e61969",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 2500,
+							alertPriority = 3,
+							alertScale = 0.9,
+							alertTTS = true,
+							alertText = "MOVE FOR FEATHER RAIN",
+							conditions = 
+							{
+								
+								{
+									"d0ebf02e-014c-4b52-97f3-10036597dbb2",
+									true,
+								},
+								
+								{
+									"9efb22fa-a893-af2e-88f9-c2ed71370341",
+									true,
+								},
+							},
+							displayPath = "Draws - Garuda",
+							name = "Feather Rain Move",
+							uuid = "4d68f5fe-35f8-618b-9a7a-5b4250216c46",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Garuda",
+							uuid = "30603478-875a-cedf-bb2e-8cee352bb2a9",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							displayPath = "Draws - Garuda",
+							eventArgOptionType = 2,
+							eventEntityContentID = 1644,
+							name = "Garuda Feather Rain source",
+							uuid = "9efb22fa-a893-af2e-88f9-c2ed71370341",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							displayPath = "Draws - Garuda",
+							eventArgType = 2,
+							eventSpellID = 11085,
+							name = "Feather Rain cast ID",
+							uuid = "d0ebf02e-014c-4b52-97f3-10036597dbb2",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Garuda",
+				eventType = 3,
+				mechanicTime = 1232,
+				name = "[Alert] Feather Rain - Move 1232",
+				throttleTime = 1000,
+				timeRange = true,
+				timelineIndex = 204,
+				timerEndOffset = 2,
+				timerStartOffset = -2,
+				uuid = "8b6f637e-4b16-650d-bdef-cb0500535b05",
+				version = 2,
+			},
+		},
+	},
+	[207] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ultima",
+				uuid = "45fc0272-6f51-df20-8ba2-4123b52c7a48",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Ultima",
+							uuid = "7cb78d49-be39-a2e5-ad25-e081b8a103d5",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							actionID = 7548,
+							atomicPriority = true,
+							displayPath = "Draws - Ultima",
+							ignoreWeaveRules = true,
+							name = "Arm's Length",
+							uuid = "a49e3fc8-81a3-ff1c-8d8c-3ddb4766e872",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 7559,
+							atomicPriority = true,
+							displayPath = "Draws - Ultima",
+							ignoreWeaveRules = true,
+							name = "Surecast",
+							uuid = "919c15f0-f852-4af9-b32a-92cf2aff6ed3",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Draws - Ultima",
+				mechanicTime = 1253,
+				name = "[Knockback Utility]",
+				timeRange = true,
+				timelineIndex = 207,
+				timerEndOffset = 2,
+				timerStartOffset = -2,
+				uuid = "dd445d82-c1c3-b264-995f-5ef82742bdd3",
+				version = 2,
+			},
+		},
+	},
+	[211] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Garuda",
+				uuid = "634a1373-5c8f-30d3-ac1f-292a63c8519f",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Garuda",
+							uuid = "ebe89120-15e2-5d2c-9bb5-876ca6a0113f",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player=TensorCore.mGetPlayer()\nlocal boss=TensorCore.mGetEntity(eventArgs.entityID)\nif not player or not player.pos or not boss or not boss.pos then self.used=true return end\nlocal dx=player.pos.x-boss.pos.x\nlocal dz=player.pos.z-boss.pos.z\nlocal length=math.sqrt(dx*dx+dz*dz)\nif length<0.1 then dx=0 dz=1 length=1 end\nlocal dest={x=boss.pos.x+dx/length*18,y=player.pos.y,z=boss.pos.z+dz/length*18}\nlocal distance=TensorCore.getDistance2d(player.pos,dest)\nif distance>0.2 then\n local tip=math.min(2.5,distance*0.35)\n local drawer=TensorCore.getCachedDrawer(0xFFB6E0FF,0xFF55AAFF,0xFFFFFFFF,0xFF000000,4)\n drawer:addTimedArrow(6000,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,dest),math.max(0.1,distance-tip),1.4,tip,3.0,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nAnyoneCore.addTimedWorldText(6000,\"WICKED WHEEL: OUT\",{x=dest.x,y=dest.y+1.2,z=dest.z},0xFFB6E0FF,true,1.1)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"26431ccb-3ecc-7821-9958-7627bb554270",
+									true,
+								},
+							},
+							displayPath = "Draws - Garuda",
+							name = "Wicked Wheel Out",
+							uuid = "edaa5567-0f2c-d771-be30-05db46404a07",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.spellID==11086 and eventArgs.entityContentID==1644",
+							dequeueIfLuaFalse = true,
+							name = "Wicked Wheel Cast",
+							uuid = "26431ccb-3ecc-7821-9958-7627bb554270",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Garuda",
+				eventType = 3,
+				mechanicTime = 1307,
+				name = "[Draw][LPDU][Garuda] Wicked Wheel Safe Side",
+				timeRange = true,
+				timelineIndex = 211,
+				timerEndOffset = 5,
+				timerStartOffset = -1,
+				uuid = "0a8c3ec3-0ae1-4d7c-8896-04fb9ea55d47",
+				version = 2,
+			},
+		},
+	},
+	[212] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ultima",
+				uuid = "3e2106da-a245-b3b7-8cb4-d2d61ed52d21",
+			},
+			objectType = "folder",
+		},
+	},
+	[213] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ultima",
+				uuid = "f2d11996-0e00-2260-b63c-2503f6988b18",
+			},
+			objectType = "folder",
+		},
+	},
+	[214] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ultima",
+				uuid = "c3ca5332-22e2-3142-99ca-c0aa4dc0d126",
+			},
+			objectType = "folder",
+		},
+	},
+	[216] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Garuda",
+				uuid = "43958ee1-6523-8ee7-a5d7-f4c68c982b68",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Garuda",
+							uuid = "0a1b3292-aaea-0f3e-a1bf-d6abcc241fc9",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 2500,
+							alertPriority = 3,
+							alertScale = 0.89999997615814,
+							alertTTS = true,
+							alertText = "MOVE FOR FEATHER RAIN",
+							conditions = 
+							{
+								
+								{
+									"4c4c6506-73b6-1369-b2f1-921db92c66f6",
+									true,
+								},
+								
+								{
+									"571aa18c-7c13-5daa-8090-09a66ae7df97",
+									true,
+								},
+							},
+							displayPath = "Draws - Garuda",
+							name = "Feather Rain Move",
+							uuid = "4e70df8a-1710-cdd3-b0be-5244a1fe5bd7",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Garuda",
+							uuid = "7118022b-3e89-f96e-92a5-1ae682bdab11",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							displayPath = "Draws - Garuda",
+							eventArgOptionType = 2,
+							eventEntityContentID = 1644,
+							name = "Garuda Feather Rain source",
+							uuid = "571aa18c-7c13-5daa-8090-09a66ae7df97",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							displayPath = "Draws - Garuda",
+							eventArgType = 2,
+							eventSpellID = 11085,
+							name = "Feather Rain cast ID",
+							uuid = "4c4c6506-73b6-1369-b2f1-921db92c66f6",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Garuda",
+				eventType = 3,
+				mechanicTime = 1322,
+				name = "[Alert] Feather Rain - Move 1322",
+				throttleTime = 1000,
+				timeRange = true,
+				timelineIndex = 216,
+				timerEndOffset = 2,
+				timerStartOffset = -2,
+				uuid = "314bc72d-7951-fe06-88ef-989656d9da93",
+				version = 2,
+			},
+		},
+	},
+	[218] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ifrit",
+				uuid = "588eccf0-a34c-d6db-b04e-5d0f048300d2",
+			},
+			objectType = "folder",
+		},
+	},
+	[219] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ifrit",
+				uuid = "528ec0c2-a2ad-d3f8-802c-c736ec932f48",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Ifrit",
+							uuid = "f67ee4eb-df84-e542-85e0-c370d2c62511",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player=TensorCore.mGetPlayer()\nlocal boss=TensorCore.mGetEntity(eventArgs.entityID)\nif not player or not player.pos or not boss or not boss.pos then self.used=true return end\nlocal h=eventArgs.heading or boss.pos.h or 0\nlocal sx=math.cos(h)\nlocal sz=-math.sin(h)\nlocal right={x=boss.pos.x+sx*18,y=player.pos.y,z=boss.pos.z+sz*18}\nlocal left={x=boss.pos.x-sx*18,y=player.pos.y,z=boss.pos.z-sz*18}\nlocal dest=right\nif TensorCore.getDistance2d(player.pos,left)<TensorCore.getDistance2d(player.pos,right) then dest=left end\nlocal distance=TensorCore.getDistance2d(player.pos,dest)\nif distance>0.2 then\n local tip=math.min(2.5,distance*0.35)\n local drawer=TensorCore.getCachedDrawer(0xFFFFD080,0xFFFFA000,0xFFFFFFFF,0xFF000000,4)\n drawer:addTimedArrow(7000,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,dest),math.max(0.1,distance-tip),1.4,tip,3.0,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nAnyoneCore.addTimedWorldText(7000,\"CRIMSON: SAFE SIDE\",{x=dest.x,y=dest.y+1.2,z=dest.z},0xFFFFD080,true,1.1)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"00d8311c-c4b4-6f87-90e3-b2192f11475b",
+									true,
+								},
+							},
+							displayPath = "Draws - Ifrit",
+							name = "Crimson Safe Side",
+							uuid = "0ed833c0-c802-cb93-ac21-d7811dce7569",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.spellID==11103 and eventArgs.entityContentID==1185",
+							dequeueIfLuaFalse = true,
+							name = "Crimson Cyclone Cast",
+							uuid = "00d8311c-c4b4-6f87-90e3-b2192f11475b",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Ifrit",
+				eventType = 3,
+				mechanicTime = 1408,
+				name = "[Draw][LPDU][Ifrit] Crimson Cyclone Safe Side",
+				timeRange = true,
+				timelineIndex = 219,
+				timerEndOffset = 5,
+				timerStartOffset = -1,
+				uuid = "d6ff1be8-34a2-a743-96f2-74b76e1433b9",
+				version = 2,
+			},
+		},
+	},
+	[220] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ultima",
+				uuid = "bfb26bf5-f924-325b-9d3b-8e91c0569ea0",
+			},
+			objectType = "folder",
+		},
+	},
+	[221] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ultima",
+				uuid = "a16cf4a1-88a5-96cd-8917-2a908c33b7c3",
+			},
+			objectType = "folder",
+		},
+	},
+	[224] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Titan LPDU",
+				uuid = "d5159590-258f-8e4a-af32-ba7163119b23",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Titan LPDU",
+							uuid = "85176514-929d-1b17-acf5-267b8a5107cd",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 2500,
+							alertPriority = 3,
+							alertScale = 0.9,
+							alertTTS = true,
+							alertText = "DODGE WEIGHT OF THE LAND",
+							displayPath = "Draws - Titan LPDU",
+							name = "[Alert] Weight of the Land - Dodge 1505",
+							uuid = "8e20cfcd-b083-127b-bdcc-41777603d3ac",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Draws - Titan LPDU",
+				mechanicTime = 1505,
+				name = "[Alert] Weight of the Land - Dodge 1505",
+				timeRange = true,
+				timelineIndex = 224,
+				timerEndOffset = 2,
+				uuid = "dad11a84-d526-74a8-a17f-29e15d7ece43",
+				version = 2,
+			},
+		},
+	},
+	[225] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Titan LPDU",
+				uuid = "fb2b1a52-c627-2052-91af-9ec5cd4510cd",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Titan LPDU",
+							uuid = "d3939649-e41c-f707-bc76-1538d86cc30c",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 2500,
+							alertPriority = 3,
+							alertScale = 0.9,
+							alertTTS = true,
+							alertText = "DODGE WEIGHT OF THE LAND",
+							displayPath = "Draws - Titan LPDU",
+							name = "[Alert] Weight of the Land - Dodge 1508",
+							uuid = "39f250e5-2538-ad44-a0dc-675af027814d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Draws - Titan LPDU",
+				mechanicTime = 1508,
+				name = "[Alert] Weight of the Land - Dodge 1508",
+				timeRange = true,
+				timelineIndex = 225,
+				timerEndOffset = 2,
+				uuid = "c175fc00-c7c9-cde4-bbc3-1ae624b03e76",
+				version = 2,
+			},
+		},
+	},
+	[226] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ultima",
+				uuid = "fb91044c-fa98-6678-b4eb-804ab457be0d",
+			},
+			objectType = "folder",
+		},
+	},
+	[227] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Titan LPDU",
+				uuid = "cce35ce0-e6a3-8cd5-a9e1-8ab31285ab0a",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Titan LPDU",
+							uuid = "a67ee7ea-8e0c-b6b8-9c15-46f7ca30a006",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 2500,
+							alertPriority = 3,
+							alertScale = 0.9,
+							alertTTS = true,
+							alertText = "DODGE WEIGHT OF THE LAND",
+							displayPath = "Draws - Titan LPDU",
+							name = "[Alert] Weight of the Land - Dodge 1511",
+							uuid = "9e1e8a32-f421-8497-8d1f-6784cb5ff987",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Draws - Titan LPDU",
+				mechanicTime = 1511,
+				name = "[Alert] Weight of the Land - Dodge 1511",
+				timeRange = true,
+				timelineIndex = 227,
+				timerEndOffset = 2,
+				uuid = "dd4e44ac-9e56-e7d4-a6a1-e41d0d189efc",
 				version = 2,
 			},
 		},

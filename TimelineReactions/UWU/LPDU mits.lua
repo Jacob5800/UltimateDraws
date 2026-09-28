@@ -1,7 +1,27 @@
 local tbl = 
 {
-	[8] = 
+	[2] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Mits",
+				uuid = "df72add0-d37e-6e9d-8126-7b9ccf5e9f46",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "Mits",
+				name = "UWU",
+				uuid = "5e317c47-9ba9-721e-ba2f-4c545fb1d294",
+			},
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -12,36 +32,39 @@ local tbl =
 					{
 						data = 
 						{
-							aType = "Alert",
-							alertPriority = 2,
-							alertTTS = true,
-							alertText = "Move!",
-							uuid = "fe1235df-60d8-bb23-b128-8e1218c90cb2",
+							aType = "Lua",
+							actionLua = "AnyoneCore.Settings.Reactions.UWUEnableMitigation = false\nself.used = true",
+							endIfUsed = true,
+							name = "Disable UWU mitigation toggle",
+							uuid = "29c6cc34-8d17-8ed6-8629-eacdf972af21",
 							version = 2.1,
 						},
 					},
 				},
 				conditions = 
 				{
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 9,
-							partyTargetType = "Melee DPS",
-							uuid = "6ed8cea4-3745-0321-9129-f48c0fc266d5",
-							version = 3,
-						},
-					},
 				},
-				mechanicTime = 34,
-				name = "Melee TTS",
-				timelineIndex = 8,
-				timerOffset = 0.5,
-				uuid = "50479487-ec27-ac92-8780-9e8a8f8e49e0",
+				displayPath = "Mits/UWU",
+				mechanicTime = 9,
+				name = "[Init] Disable UWU mitigation toggle",
+				timelineIndex = 2,
+				timerOffset = -9,
+				uuid = "b2fca967-4e55-360d-85c7-61306c849dee",
 				version = 2,
 			},
+		},
+	},
+	[3] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "81a6f846-e2de-3b8a-b25e-6b689e66ba4e",
+			},
+			objectType = "folder",
 		},
 	},
 	[12] = 
@@ -287,17 +310,43 @@ local tbl =
 		{
 			data = 
 			{
+				displayPath = "Mits/UWU",
+				name = "Ranged",
+				uuid = "335f03fd-2cda-2e98-96a1-e479a1204feb",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
 				actions = 
 				{
 					
 					{
 						data = 
 						{
-							aType = "Alert",
-							alertPriority = 2,
-							alertTTS = true,
-							alertText = "Get hit by friction",
-							uuid = "fe1235df-60d8-bb23-b128-8e1218c90cb2",
+							actionID = 16889,
+							conditions = 
+							{
+								
+								{
+									"8db21899-b14c-6c43-868d-aca89173c3d1",
+									true,
+								},
+								
+								{
+									"0d0e0faa-785a-e23c-afb0-16da3cf0c883",
+									true,
+								},
+								
+								{
+									"bea269ab-05f3-492b-9d50-bc290282adda",
+									true,
+								},
+							},
+							name = "Tactician",
+							uuid = "7d710e6f-b3c5-c162-8b37-cd9639d6677d",
 							version = 2.1,
 						},
 					},
@@ -308,19 +357,220 @@ local tbl =
 					{
 						data = 
 						{
+							category = "Lua",
+							conditionLua = "return GetCurrentRole() == \"R1\"",
+							dequeueIfLuaFalse = true,
+							name = "Roster: R1",
+							uuid = "8db21899-b14c-6c43-868d-aca89173c3d1",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
 							category = "Self",
-							conditionType = 9,
-							partyTargetType = "Melee DPS",
-							uuid = "6ed8cea4-3745-0321-9129-f48c0fc266d5",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MACHINIST",
+							name = "Job: MACHINIST",
+							uuid = "0d0e0faa-785a-e23c-afb0-16da3cf0c883",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionCDValue = 1,
+							actionID = 16889,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							name = "Tactician Ready",
+							uuid = "bea269ab-05f3-492b-9d50-bc290282adda",
 							version = 3,
 						},
 					},
 				},
+				displayPath = "Mits/UWU/Ranged",
 				mechanicTime = 51,
-				name = "Melee TTS",
+				name = "UWU Tactician: Friction",
 				timelineIndex = 12,
-				timerOffset = -2.5,
-				uuid = "bbfe11a4-764a-1f0d-a089-8f26c730ca95",
+				timerOffset = -2,
+				uuid = "cae625bd-efd7-cbae-b53f-e3f8ff3ec925",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 7405,
+							conditions = 
+							{
+								
+								{
+									"56f6749f-120d-a355-9f7f-a1a77bbc8e53",
+									true,
+								},
+								
+								{
+									"4d13e153-5f1e-6e73-a002-c236195d6a85",
+									true,
+								},
+								
+								{
+									"80e9f43a-f97f-dd45-ba84-a77e94d94bf8",
+									true,
+								},
+							},
+							name = "Troubadour",
+							uuid = "c68c99f5-2a59-1b35-92a5-b46c20b80906",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return GetCurrentRole() == \"R1\"",
+							dequeueIfLuaFalse = true,
+							name = "Roster: R1",
+							uuid = "56f6749f-120d-a355-9f7f-a1a77bbc8e53",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "Job: BARD",
+							uuid = "4d13e153-5f1e-6e73-a002-c236195d6a85",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionCDValue = 1,
+							actionID = 7405,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							name = "Troubadour Ready",
+							uuid = "80e9f43a-f97f-dd45-ba84-a77e94d94bf8",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Mits/UWU/Ranged",
+				mechanicTime = 51,
+				name = "UWU Troubadour: Friction",
+				timelineIndex = 12,
+				timerOffset = -2,
+				uuid = "e09c384b-c02d-4c5e-af64-6090d51f4fd2",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 16012,
+							conditions = 
+							{
+								
+								{
+									"e109db98-c332-d5b2-b42f-97deef49e42f",
+									true,
+								},
+								
+								{
+									"a1e6a88b-57ae-e47e-b63a-d89e92ee3f7f",
+									true,
+								},
+								
+								{
+									"98717f68-c5fd-a6ae-b102-fb513ba08f6e",
+									true,
+								},
+							},
+							name = "Shield Samba",
+							uuid = "59432a24-e54b-7cc1-afd5-28056b68e521",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return GetCurrentRole() == \"R1\"",
+							dequeueIfLuaFalse = true,
+							name = "Roster: R1",
+							uuid = "e109db98-c332-d5b2-b42f-97deef49e42f",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DANCER",
+							name = "Job: DANCER",
+							uuid = "a1e6a88b-57ae-e47e-b63a-d89e92ee3f7f",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionCDValue = 1,
+							actionID = 16012,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							name = "Shield Samba Ready",
+							uuid = "98717f68-c5fd-a6ae-b102-fb513ba08f6e",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Mits/UWU/Ranged",
+				mechanicTime = 51,
+				name = "UWU Shield Samba: Friction",
+				timelineIndex = 12,
+				timerOffset = -2,
+				uuid = "87bd9d9c-4142-16be-bb04-56b65e57a569",
 				version = 2,
 			},
 		},
@@ -395,7 +645,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return AnyoneCore.Settings.Reactions.UWUEnableMitigation == true",
+							conditionLua = "return GetCurrentRole() == \"M1\"",
 							conditionType = 14,
 							dequeueIfLuaFalse = true,
 							jobIDList = 
@@ -407,7 +657,7 @@ local tbl =
 								39,
 								41,
 							},
-							name = "Primary Mitigation",
+							name = "Roster: M1",
 							uuid = "08e339d9-b655-82fa-bbc2-838b2664bd8a",
 							version = 3,
 						},
@@ -496,125 +746,45 @@ local tbl =
 				version = 2,
 			},
 		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Alert",
-							alertPriority = 2,
-							alertTTS = true,
-							alertText = "Stay for second hit",
-							uuid = "fe1235df-60d8-bb23-b128-8e1218c90cb2",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 9,
-							partyTargetType = "Melee DPS",
-							uuid = "6ed8cea4-3745-0321-9129-f48c0fc266d5",
-							version = 3,
-						},
-					},
-				},
-				mechanicTime = 57,
-				name = "Melee TTS",
-				timelineIndex = 13,
-				timerOffset = -2.5,
-				uuid = "83063f98-b380-b830-b741-fa86a1f9a0f9",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Alert",
-							alertPriority = 2,
-							alertTTS = true,
-							alertText = "Cleanse Debuff M1 first.",
-							uuid = "fe1235df-60d8-bb23-b128-8e1218c90cb2",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 9,
-							partyTargetType = "Melee DPS",
-							uuid = "6ed8cea4-3745-0321-9129-f48c0fc266d5",
-							version = 3,
-						},
-					},
-				},
-				mechanicTime = 57,
-				name = "Melee TTS",
-				timelineIndex = 13,
-				timerOffset = 1,
-				uuid = "387508f0-87e2-b743-9034-1eece2aea255",
-				version = 2,
-			},
-		},
 	},
-	[14] = 
+	[19] = 
 	{
 		
 		{
 			data = 
 			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Alert",
-							alertPriority = 3,
-							alertTTS = true,
-							alertText = "MOVE",
-							alertVolume = 81,
-							uuid = "bb9a5afc-fb2c-0266-bbd7-779ce82d06b4",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-				},
-				mechanicTime = 69,
-				name = "MOVE!",
-				timelineIndex = 14,
-				timerOffset = 0.5,
-				uuid = "f79f20a0-3dd4-ec27-b97c-fad765b11b94",
-				version = 2,
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "d84eb243-aa69-d9d2-abc7-0a4f86987196",
 			},
+			objectType = "folder",
 		},
 	},
-	[18] = 
+	[26] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "809dcbb7-2b00-5aaf-a31c-b15bd3bdd0cb",
+			},
+			objectType = "folder",
+		},
+	},
+	[27] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Movement - Ifrit",
+				uuid = "c0b4374d-b89e-a627-8f82-cc1c8c587e76",
+			},
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -625,23 +795,148 @@ local tbl =
 					{
 						data = 
 						{
-							aType = "Alert",
-							alertPriority = 3,
-							alertTTS = true,
-							alertText = "MOVE",
-							alertVolume = 81,
-							uuid = "bb9a5afc-fb2c-0266-bbd7-779ce82d06b4",
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"ab8f0abe-4ada-cd46-917a-71219b9da1d1",
+									true,
+								},
+							},
+							gVar = "ACR_RikuMNK3_Hotbar_Sprint",
+							name = "Sprint - Transition",
+							uuid = "5aadd72a-b233-7bc2-ae99-7c7f584df633",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local player = TensorCore.mGetPlayer()\nreturn player and not TensorCore.hasBuff(player, 1231)",
+							name = "Not Meditating",
+							uuid = "ab8f0abe-4ada-cd46-917a-71219b9da1d1",
+							version = 3,
+						},
+					},
 				},
-				mechanicTime = 93,
-				name = "MOVE!",
-				timelineIndex = 18,
-				uuid = "8041bce2-c25a-eecf-a85b-5757be048797",
+				displayPath = "Movement - Ifrit",
+				enabled = false,
+				mechanicTime = 124,
+				name = "[Sprint] Ifrit Transition Prep",
+				timeRange = true,
+				timelineIndex = 27,
+				timerEndOffset = 9,
+				timerStartOffset = 3,
+				uuid = "4fca0c63-7e30-af6e-8eb2-ed6061235530",
+				version = 2,
+			},
+		},
+	},
+	[38] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Mits",
+				uuid = "ce7c035a-a2e3-ca56-bfa4-62fd17b75513",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "Mits",
+				name = "UWU",
+				uuid = "86ceee97-4c64-0e99-995d-b9c22afd470a",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "Mits/UWU",
+				name = "Addle",
+				uuid = "2383c0c0-73b0-c3d1-88f2-813421e73edc",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 7560,
+							conditions = 
+							{
+								
+								{
+									"f071f838-4783-11b6-8467-4e0cb2e50ff9",
+									true,
+								},
+								
+								{
+									"285eef9e-7b50-c256-8e73-eb32579b3bba",
+									true,
+								},
+							},
+							name = "Addle",
+							targetType = "Current Target",
+							uuid = "87224c89-efd4-00cf-9665-0073e53b91ac",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return GetCurrentRole() == \"R2\"",
+							dequeueIfLuaFalse = true,
+							name = "Roster: R2",
+							uuid = "f071f838-4783-11b6-8467-4e0cb2e50ff9",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionCDValue = 1,
+							actionID = 7560,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							name = "Addle Ready",
+							uuid = "285eef9e-7b50-c256-8e73-eb32579b3bba",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Mits/UWU/Addle",
+				mechanicTime = 307,
+				name = "UWU Addle: Hellfire 307",
+				timelineIndex = 38,
+				timerOffset = -2,
+				uuid = "436241c7-0ee0-9f80-bf47-c6fc57de262e",
 				version = 2,
 			},
 		},
@@ -677,6 +972,310 @@ local tbl =
 				uuid = "7e9330bb-d61d-ea1f-aa03-c3bd0d21bcfa",
 			},
 			objectType = "folder",
+		},
+	},
+	[43] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "31e5d162-4550-806f-aa93-a8b3e4534ae5",
+			},
+			objectType = "folder",
+		},
+	},
+	[45] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Mits",
+				uuid = "30d6d99e-a3b4-fb50-9da2-9b206d55ce07",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "Mits",
+				name = "UWU",
+				uuid = "7e166f33-26d4-cbf9-aa2a-dea1e4a37f10",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "Mits/UWU",
+				name = "Ranged",
+				uuid = "ecb851d9-3b12-8ee3-9e11-d4a10f8c17a7",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 16889,
+							conditions = 
+							{
+								
+								{
+									"d4f827f7-6979-87a3-b9a9-21d59aa8ceba",
+									true,
+								},
+								
+								{
+									"9e765e30-53c9-a678-b2db-48860de9859e",
+									true,
+								},
+								
+								{
+									"39f41d3e-d1e1-4115-a43f-19e5d4bd1575",
+									true,
+								},
+							},
+							name = "Tactician",
+							uuid = "9412fa53-56b1-3920-8bd4-c3e6c05d1667",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return GetCurrentRole() == \"R1\"",
+							dequeueIfLuaFalse = true,
+							name = "Roster: R1",
+							uuid = "d4f827f7-6979-87a3-b9a9-21d59aa8ceba",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MACHINIST",
+							name = "Job: MACHINIST",
+							uuid = "9e765e30-53c9-a678-b2db-48860de9859e",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionCDValue = 1,
+							actionID = 16889,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							name = "Tactician Ready",
+							uuid = "39f41d3e-d1e1-4115-a43f-19e5d4bd1575",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Mits/UWU/Ranged",
+				mechanicTime = 339,
+				name = "UWU Tactician: Nail detonation",
+				timelineIndex = 45,
+				timerOffset = -2,
+				uuid = "8e1a774c-217d-68c1-ae46-55690d60a8c5",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 7405,
+							conditions = 
+							{
+								
+								{
+									"02aeaeb8-3242-f009-9e55-e5cfdf6af2e5",
+									true,
+								},
+								
+								{
+									"de738d28-cb60-8f19-ba75-f259976f1c3a",
+									true,
+								},
+								
+								{
+									"9bd51fe1-f784-a702-a2c9-df7abcac6ba9",
+									true,
+								},
+							},
+							name = "Troubadour",
+							uuid = "3cbb8168-e3f7-b3ed-a890-1a9a28531b1c",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return GetCurrentRole() == \"R1\"",
+							dequeueIfLuaFalse = true,
+							name = "Roster: R1",
+							uuid = "02aeaeb8-3242-f009-9e55-e5cfdf6af2e5",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "Job: BARD",
+							uuid = "de738d28-cb60-8f19-ba75-f259976f1c3a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionCDValue = 1,
+							actionID = 7405,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							name = "Troubadour Ready",
+							uuid = "9bd51fe1-f784-a702-a2c9-df7abcac6ba9",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Mits/UWU/Ranged",
+				mechanicTime = 339,
+				name = "UWU Troubadour: Nail detonation",
+				timelineIndex = 45,
+				timerOffset = -2,
+				uuid = "32601c45-4e6d-7bc1-9a8d-b2595d1ace08",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 16012,
+							conditions = 
+							{
+								
+								{
+									"82a21272-2edf-08e3-a1d1-5a475b3ca5a7",
+									true,
+								},
+								
+								{
+									"6c53d97d-b098-5f6c-99c6-17ae8d2a0d51",
+									true,
+								},
+								
+								{
+									"5bf985d1-2f07-5c24-8575-c289444f3732",
+									true,
+								},
+							},
+							name = "Shield Samba",
+							uuid = "ee171804-e1fb-bc92-bffd-931e76990b62",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return GetCurrentRole() == \"R1\"",
+							dequeueIfLuaFalse = true,
+							name = "Roster: R1",
+							uuid = "82a21272-2edf-08e3-a1d1-5a475b3ca5a7",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DANCER",
+							name = "Job: DANCER",
+							uuid = "6c53d97d-b098-5f6c-99c6-17ae8d2a0d51",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionCDValue = 1,
+							actionID = 16012,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							name = "Shield Samba Ready",
+							uuid = "5bf985d1-2f07-5c24-8575-c289444f3732",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Mits/UWU/Ranged",
+				mechanicTime = 339,
+				name = "UWU Shield Samba: Nail detonation",
+				timelineIndex = 45,
+				timerOffset = -2,
+				uuid = "50411f00-10d4-8761-b390-19549f16eb2e",
+				version = 2,
+			},
 		},
 	},
 	[61] = 
@@ -749,7 +1348,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return AnyoneCore.Settings.Reactions.UWUEnableMitigation == true",
+							conditionLua = "return GetCurrentRole() == \"M1\"",
 							conditionType = 14,
 							dequeueIfLuaFalse = true,
 							jobIDList = 
@@ -761,7 +1360,7 @@ local tbl =
 								39,
 								41,
 							},
-							name = "Primary Mitigation",
+							name = "Roster: M1",
 							uuid = "37601385-8d1e-97a6-addb-945387e17a6b",
 							version = 3,
 						},
@@ -940,7 +1539,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return AnyoneCore.Settings.Reactions.UWUEnableMitigation == true",
+							conditionLua = "return GetCurrentRole() == \"M1\"",
 							conditionType = 14,
 							dequeueIfLuaFalse = true,
 							jobIDList = 
@@ -952,7 +1551,7 @@ local tbl =
 								39,
 								41,
 							},
-							name = "Primary Mitigation",
+							name = "Roster: M1",
 							uuid = "f9253176-60ef-4521-a9d0-320e2bb287f4",
 							version = 3,
 						},
@@ -980,6 +1579,45 @@ local tbl =
 				uuid = "f147f7be-d743-c83d-bc4a-d1b533203d23",
 				version = 2,
 			},
+		},
+	},
+	[74] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "cc5d386a-7252-a66f-b9bd-0b5fa33721f1",
+			},
+			objectType = "folder",
+		},
+	},
+	[82] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "0fab0377-8662-cdc9-a638-c52ca5f2cdd6",
+			},
+			objectType = "folder",
+		},
+	},
+	[85] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "78fb70a7-445d-9464-8d68-71502952618e",
+			},
+			objectType = "folder",
 		},
 	},
 	[89] = 
@@ -1057,7 +1695,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return AnyoneCore.Settings.Reactions.UWUEnableMitigation == true",
+							conditionLua = "return GetCurrentRole() == \"M1\"",
 							conditionType = 14,
 							dequeueIfLuaFalse = true,
 							jobIDList = 
@@ -1069,7 +1707,7 @@ local tbl =
 								39,
 								41,
 							},
-							name = "Primary Mitigation",
+							name = "Roster: M1",
 							uuid = "d3cbbd38-c897-a801-ad86-2160bcfe0aa5",
 							version = 3,
 						},
@@ -1189,6 +1827,111 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "Mits/UWU",
+				name = "Addle",
+				uuid = "4cf4b4c4-3ecf-2229-8c93-e6bcc0bd3a98",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 7560,
+							conditions = 
+							{
+								
+								{
+									"ff003575-bf65-fefa-b1cd-8fc017a08a71",
+									true,
+								},
+								
+								{
+									"3a075d1e-dd2e-52e9-a389-fb11894a9516",
+									true,
+								},
+							},
+							name = "Addle",
+							targetType = "Current Target",
+							uuid = "78a32546-d12f-1091-9be8-c769800ee183",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return GetCurrentRole() == \"R2\"",
+							dequeueIfLuaFalse = true,
+							name = "Roster: R2",
+							uuid = "ff003575-bf65-fefa-b1cd-8fc017a08a71",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionCDValue = 1,
+							actionID = 7560,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							name = "Addle Ready",
+							uuid = "3a075d1e-dd2e-52e9-a389-fb11894a9516",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Mits/UWU/Addle",
+				mechanicTime = 651,
+				name = "UWU Addle: Tumult x8",
+				timelineIndex = 89,
+				timerOffset = -2,
+				uuid = "765625b2-f143-f7d5-8c05-ecd1cfda6ad7",
+				version = 2,
+			},
+		},
+	},
+	[90] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "46aadd1c-d913-259f-938f-eac769babec3",
+			},
+			objectType = "folder",
+		},
+	},
+	[95] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "2cbe8a5a-7f66-a8ff-91ed-fa56a4ea0ec0",
+			},
+			objectType = "folder",
+		},
 	},
 	[98] = 
 	{
@@ -1222,12 +1965,13 @@ local tbl =
 			},
 			objectType = "folder",
 		},
-{
+		
+		{
 			data = 
 			{
-				displayPath = "",
-				name = "[Raid calls]",
-				uuid = "52b5bf3e-7d4c-a9a1-84a2-5f3f9d5bc21d",
+				displayPath = "Mits/UWU",
+				name = "Ranged",
+				uuid = "44ef5618-fee0-ba78-aa60-9b1add949e4e",
 			},
 			objectType = "folder",
 		},
@@ -1241,29 +1985,265 @@ local tbl =
 					{
 						data = 
 						{
-							aType = "Alert",
-							alertDuration = 8000,
-							alertPriority = 2,
-							alertTTS = true,
-							alertText = "Healers mitigate six Tumults; MT take Rock/Mountain Buster alone.",
-							uuid = "7a832132-7889-2e54-9c35-69d1bc74ea64",
+							actionID = 16889,
+							conditions = 
+							{
+								
+								{
+									"580c2d18-f74b-6917-b343-0d92f90cd444",
+									true,
+								},
+								
+								{
+									"bdfab8e9-4e49-8aef-b6f4-501c528317bb",
+									true,
+								},
+								
+								{
+									"bfcb0d9c-6e18-fd67-b066-0cd0653a2c13",
+									true,
+								},
+							},
+							name = "Tactician",
+							uuid = "31f49b6a-6a9b-56ca-bcfd-17d84536698c",
 							version = 2.1,
 						},
 					},
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return GetCurrentRole() == \"R1\"",
+							dequeueIfLuaFalse = true,
+							name = "Roster: R1",
+							uuid = "580c2d18-f74b-6917-b343-0d92f90cd444",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MACHINIST",
+							name = "Job: MACHINIST",
+							uuid = "bdfab8e9-4e49-8aef-b6f4-501c528317bb",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionCDValue = 1,
+							actionID = 16889,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							name = "Tactician Ready",
+							uuid = "bfcb0d9c-6e18-fd67-b066-0cd0653a2c13",
+							version = 3,
+						},
+					},
 				},
-				displayPath = "[Raid calls]",
+				displayPath = "Mits/UWU/Ranged",
 				mechanicTime = 704,
-				name = "[Raid Call][Titan] Six Tumults",
+				name = "UWU Tactician: Tumult x6",
 				timelineIndex = 98,
-				timerOffset = -1,
-				uuid = "9703da0a-5e56-caea-89b0-e98fee1f730e",
+				timerOffset = -2,
+				uuid = "8a9d896b-03a8-e726-80db-82be86c3d99b",
 				version = 2,
 			},
 		},
-},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 7405,
+							conditions = 
+							{
+								
+								{
+									"48515339-8805-85a0-8a9c-e4c8779eca1f",
+									true,
+								},
+								
+								{
+									"f7d6786d-48c0-27e2-b4dd-4be9f5a5ae61",
+									true,
+								},
+								
+								{
+									"33235fa8-b6c1-2073-9a1b-9ad693fc5d7a",
+									true,
+								},
+							},
+							name = "Troubadour",
+							uuid = "6901d990-47d5-639c-bbd2-9a6fdb420d50",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return GetCurrentRole() == \"R1\"",
+							dequeueIfLuaFalse = true,
+							name = "Roster: R1",
+							uuid = "48515339-8805-85a0-8a9c-e4c8779eca1f",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "Job: BARD",
+							uuid = "f7d6786d-48c0-27e2-b4dd-4be9f5a5ae61",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionCDValue = 1,
+							actionID = 7405,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							name = "Troubadour Ready",
+							uuid = "33235fa8-b6c1-2073-9a1b-9ad693fc5d7a",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Mits/UWU/Ranged",
+				mechanicTime = 704,
+				name = "UWU Troubadour: Tumult x6",
+				timelineIndex = 98,
+				timerOffset = -2,
+				uuid = "81e478d5-ef8c-5849-86b6-5e5831e2fe7a",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 16012,
+							conditions = 
+							{
+								
+								{
+									"cce9a599-f8fb-78e0-94f8-1aeb3e837a58",
+									true,
+								},
+								
+								{
+									"41f270a3-b6b3-67ec-97cf-0ff44914d8a2",
+									true,
+								},
+								
+								{
+									"5c371ad9-1feb-ae7b-a271-938e26adab97",
+									true,
+								},
+							},
+							name = "Shield Samba",
+							uuid = "8ee21cdf-c8f0-8e92-a718-616316507814",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return GetCurrentRole() == \"R1\"",
+							dequeueIfLuaFalse = true,
+							name = "Roster: R1",
+							uuid = "cce9a599-f8fb-78e0-94f8-1aeb3e837a58",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DANCER",
+							name = "Job: DANCER",
+							uuid = "41f270a3-b6b3-67ec-97cf-0ff44914d8a2",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionCDValue = 1,
+							actionID = 16012,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							name = "Shield Samba Ready",
+							uuid = "5c371ad9-1feb-ae7b-a271-938e26adab97",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Mits/UWU/Ranged",
+				mechanicTime = 704,
+				name = "UWU Shield Samba: Tumult x6",
+				timelineIndex = 98,
+				timerOffset = -2,
+				uuid = "887a26b5-1a2f-a78c-b604-4f23f98cc048",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "52b5bf3e-7d4c-a9a1-84a2-5f3f9d5bc21d",
+			},
+			objectType = "folder",
+		},
+	},
 	[99] = 
 	{
 		
@@ -1334,7 +2314,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return AnyoneCore.Settings.Reactions.UWUEnableMitigation == true",
+							conditionLua = "return GetCurrentRole() == \"M1\"",
 							conditionType = 14,
 							dequeueIfLuaFalse = true,
 							jobIDList = 
@@ -1346,7 +2326,7 @@ local tbl =
 								39,
 								41,
 							},
-							name = "Primary Mitigation",
+							name = "Roster: M1",
 							uuid = "248423e2-074e-cad5-9b25-94e9bdfd7fb0",
 							version = 3,
 						},
@@ -1374,6 +2354,32 @@ local tbl =
 				uuid = "5d8fd8fe-a3b6-549f-ac78-a51491e7ccee",
 				version = 2,
 			},
+		},
+	},
+	[102] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "8ba65ee7-7901-bb2e-af1a-f94bd56776e3",
+			},
+			objectType = "folder",
+		},
+	},
+	[109] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "05842289-e405-3a91-a37f-16ca6f900629",
+			},
+			objectType = "folder",
 		},
 	},
 	[121] = 
@@ -1446,9 +2452,9 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return AnyoneCore.Settings.Reactions.UWUEnableMitigation == true",
+							conditionLua = "return GetCurrentRole() == \"M1\"",
 							dequeueIfLuaFalse = true,
-							name = "Primary Mitigation",
+							name = "Roster: M1",
 							uuid = "abc6dd9e-dc57-f50f-9a9e-8a0722c2a83d",
 							version = 3,
 						},
@@ -1474,6 +2480,297 @@ local tbl =
 				timelineIndex = 121,
 				timerOffset = -2,
 				uuid = "64631f7b-0ad5-ff01-907b-5c414fce7a6e",
+				version = 2,
+			},
+		},
+	},
+	[140] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Mits",
+				uuid = "fb961c1a-1818-9f6a-b459-a89988bc2494",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "Mits",
+				name = "UWU",
+				uuid = "27f1c38c-e19a-68ea-a303-cd6f76c6ad27",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "Mits/UWU",
+				name = "Ranged",
+				uuid = "7f107b95-ad14-749d-9754-b7d12059e826",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 16889,
+							conditions = 
+							{
+								
+								{
+									"3b820745-e3cf-dac4-ade3-8c83d0a1e353",
+									true,
+								},
+								
+								{
+									"c09abcfd-d9ad-975b-b4bb-bf9e0c2df2ef",
+									true,
+								},
+								
+								{
+									"0e590241-9893-289f-8adb-4594c2e1a22f",
+									true,
+								},
+							},
+							name = "Tactician",
+							uuid = "cd152c74-8ec7-6452-9eb8-17b6cf57e396",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return GetCurrentRole() == \"R1\"",
+							dequeueIfLuaFalse = true,
+							name = "Roster: R1",
+							uuid = "3b820745-e3cf-dac4-ade3-8c83d0a1e353",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MACHINIST",
+							name = "Job: MACHINIST",
+							uuid = "c09abcfd-d9ad-975b-b4bb-bf9e0c2df2ef",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionCDValue = 1,
+							actionID = 16889,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							name = "Tactician Ready",
+							uuid = "0e590241-9893-289f-8adb-4594c2e1a22f",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Mits/UWU/Ranged",
+				mechanicTime = 1079,
+				name = "UWU Tactician: Tumult x7",
+				timelineIndex = 140,
+				timerOffset = -2,
+				uuid = "9a1ff4ee-7022-ef11-a014-54c8f1e2d642",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 7405,
+							conditions = 
+							{
+								
+								{
+									"a425310d-6c0e-2345-85fa-9cf1fb8249b5",
+									true,
+								},
+								
+								{
+									"088f9e22-5ac9-96cd-8f15-f76bc68c78dd",
+									true,
+								},
+								
+								{
+									"c399051b-1e22-08f0-962c-b6d83107b699",
+									true,
+								},
+							},
+							name = "Troubadour",
+							uuid = "e25a8d5e-0868-d254-b54d-fc08a8b3fd15",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return GetCurrentRole() == \"R1\"",
+							dequeueIfLuaFalse = true,
+							name = "Roster: R1",
+							uuid = "a425310d-6c0e-2345-85fa-9cf1fb8249b5",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "Job: BARD",
+							uuid = "088f9e22-5ac9-96cd-8f15-f76bc68c78dd",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionCDValue = 1,
+							actionID = 7405,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							name = "Troubadour Ready",
+							uuid = "c399051b-1e22-08f0-962c-b6d83107b699",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Mits/UWU/Ranged",
+				mechanicTime = 1079,
+				name = "UWU Troubadour: Tumult x7",
+				timelineIndex = 140,
+				timerOffset = -2,
+				uuid = "66f57e6e-faea-116f-98be-b24113268497",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 16012,
+							conditions = 
+							{
+								
+								{
+									"edbd7e39-a5a1-cb92-9071-af721419d5a4",
+									true,
+								},
+								
+								{
+									"3316c08b-ed95-90c4-9a53-38f0b6227f85",
+									true,
+								},
+								
+								{
+									"e294959c-c2ff-12e5-ba72-0a0d42b518f1",
+									true,
+								},
+							},
+							name = "Shield Samba",
+							uuid = "a5b95c5f-cab1-78c4-b962-a1fedc5b90b2",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return GetCurrentRole() == \"R1\"",
+							dequeueIfLuaFalse = true,
+							name = "Roster: R1",
+							uuid = "edbd7e39-a5a1-cb92-9071-af721419d5a4",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DANCER",
+							name = "Job: DANCER",
+							uuid = "3316c08b-ed95-90c4-9a53-38f0b6227f85",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionCDValue = 1,
+							actionID = 16012,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							name = "Shield Samba Ready",
+							uuid = "e294959c-c2ff-12e5-ba72-0a0d42b518f1",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Mits/UWU/Ranged",
+				mechanicTime = 1079,
+				name = "UWU Shield Samba: Tumult x7",
+				timelineIndex = 140,
+				timerOffset = -2,
+				uuid = "e5cda06a-42a2-d94a-a113-a9276bf6c8b2",
 				version = 2,
 			},
 		},
@@ -1655,8 +2952,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return AnyoneCore.Settings.Reactions.UWUEnableMitigation == false",
-							name = "Secondary Mitigation",
+							conditionLua = "return GetCurrentRole() == \"M2\"",
+							name = "Roster: M2",
 							uuid = "55032bb1-d3c1-66e1-b0c3-71d44c904f91",
 							version = 3,
 						},
@@ -1768,8 +3065,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return AnyoneCore.Settings.Reactions.UWUEnableMitigation == true",
-							name = "Primary Mitigation",
+							conditionLua = "return GetCurrentRole() == \"M1\"",
+							name = "Roster: M1",
 							uuid = "22771dde-4a21-4bf1-a536-854b4bf72dd6",
 							version = 3,
 						},
@@ -1869,8 +3166,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return AnyoneCore.Settings.Reactions.UWUEnableMitigation == false",
-							name = "Secondary Mitigation",
+							conditionLua = "return GetCurrentRole() == \"M2\"",
+							name = "Roster: M2",
 							uuid = "8a9076a6-ada8-d24c-b40c-a7fde29177ae",
 							version = 3,
 						},
@@ -1978,6 +3275,376 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "Mits/UWU",
+				name = "Addle",
+				uuid = "76de7ef4-b435-dded-9926-91b9dab0aad3",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 7560,
+							conditions = 
+							{
+								
+								{
+									"00f533c2-0a09-1e1e-b2e2-205087177bc8",
+									true,
+								},
+								
+								{
+									"9c04a8dd-3362-91fe-9737-f6bd5ebb17ef",
+									true,
+								},
+							},
+							name = "Addle",
+							targetType = "Current Target",
+							uuid = "324f431a-d598-bd86-a178-9c10c32becaf",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return GetCurrentRole() == \"R2\"",
+							dequeueIfLuaFalse = true,
+							name = "Roster: R2",
+							uuid = "00f533c2-0a09-1e1e-b2e2-205087177bc8",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionCDValue = 1,
+							actionID = 7560,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							name = "Addle Ready",
+							uuid = "9c04a8dd-3362-91fe-9737-f6bd5ebb17ef",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Mits/UWU/Addle",
+				mechanicTime = 1243,
+				name = "UWU Addle: Ultima",
+				timelineIndex = 206,
+				timerOffset = -2,
+				uuid = "9650955f-c0f2-1b90-8283-0a3a12a9c7de",
+				version = 2,
+			},
+		},
+	},
+	[215] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Mits",
+				uuid = "c6489fb7-de1a-8547-962f-3dad284578b7",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "Mits",
+				name = "UWU",
+				uuid = "849873fb-a8da-9ea6-bb83-9a27c2d8782a",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "Mits/UWU",
+				name = "Ranged",
+				uuid = "79d661aa-644f-8387-a12b-037bb0471307",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 16889,
+							conditions = 
+							{
+								
+								{
+									"758a827d-86d5-4315-a45f-dba0015e715d",
+									true,
+								},
+								
+								{
+									"bab09484-06ea-726d-87a5-9c6e9b315c7e",
+									true,
+								},
+								
+								{
+									"f6084d50-95b0-6ea8-a224-2ac7e08eb4b8",
+									true,
+								},
+							},
+							name = "Tactician",
+							uuid = "9f9c0a5e-536e-1b41-a14d-a9684b2a0187",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return GetCurrentRole() == \"R1\"",
+							dequeueIfLuaFalse = true,
+							name = "Roster: R1",
+							uuid = "758a827d-86d5-4315-a45f-dba0015e715d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MACHINIST",
+							name = "Job: MACHINIST",
+							uuid = "bab09484-06ea-726d-87a5-9c6e9b315c7e",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionCDValue = 1,
+							actionID = 16889,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							name = "Tactician Ready",
+							uuid = "f6084d50-95b0-6ea8-a224-2ac7e08eb4b8",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Mits/UWU/Ranged",
+				mechanicTime = 1320,
+				name = "UWU Tactician: Primal #2",
+				timelineIndex = 215,
+				timerOffset = -2,
+				uuid = "80afaf08-f67a-ddfe-8982-6bd2575fc99d",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 7405,
+							conditions = 
+							{
+								
+								{
+									"4c35621f-b034-6327-bfb7-0e3461e8715b",
+									true,
+								},
+								
+								{
+									"c7453d66-9576-5f68-af61-3440f0bb86c3",
+									true,
+								},
+								
+								{
+									"0f564a84-232d-d243-b34f-db129a29edbe",
+									true,
+								},
+							},
+							name = "Troubadour",
+							uuid = "4362c939-835a-1d86-b650-5abc4cd95cf7",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return GetCurrentRole() == \"R1\"",
+							dequeueIfLuaFalse = true,
+							name = "Roster: R1",
+							uuid = "4c35621f-b034-6327-bfb7-0e3461e8715b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "Job: BARD",
+							uuid = "c7453d66-9576-5f68-af61-3440f0bb86c3",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionCDValue = 1,
+							actionID = 7405,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							name = "Troubadour Ready",
+							uuid = "0f564a84-232d-d243-b34f-db129a29edbe",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Mits/UWU/Ranged",
+				mechanicTime = 1320,
+				name = "UWU Troubadour: Primal #2",
+				timelineIndex = 215,
+				timerOffset = -2,
+				uuid = "aaa284c7-3fed-9b58-9e2b-d55d838a7e3d",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 16012,
+							conditions = 
+							{
+								
+								{
+									"29d129c3-3391-df45-8a1e-f036e2b76320",
+									true,
+								},
+								
+								{
+									"994c0394-01f9-bad3-a631-07b184d0a314",
+									true,
+								},
+								
+								{
+									"5f5062b0-eb82-b1ee-a1cf-87072b813e71",
+									true,
+								},
+							},
+							name = "Shield Samba",
+							uuid = "50a62f42-ce8e-cd82-8177-d6f19b01158a",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return GetCurrentRole() == \"R1\"",
+							dequeueIfLuaFalse = true,
+							name = "Roster: R1",
+							uuid = "29d129c3-3391-df45-8a1e-f036e2b76320",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DANCER",
+							name = "Job: DANCER",
+							uuid = "994c0394-01f9-bad3-a631-07b184d0a314",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionCDValue = 1,
+							actionID = 16012,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							name = "Shield Samba Ready",
+							uuid = "5f5062b0-eb82-b1ee-a1cf-87072b813e71",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Mits/UWU/Ranged",
+				mechanicTime = 1320,
+				name = "UWU Shield Samba: Primal #2",
+				timelineIndex = 215,
+				timerOffset = -2,
+				uuid = "a94635c7-bdb5-b830-b661-974a78582349",
+				version = 2,
+			},
+		},
 	},
 	[225] = 
 	{
@@ -2049,8 +3716,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return AnyoneCore.Settings.Reactions.UWUEnableMitigation == true",
-							name = "Primary Mitigation",
+							conditionLua = "return GetCurrentRole() == \"M1\"",
+							name = "Roster: M1",
 							uuid = "22771dde-4a21-4bf1-a536-854b4bf72dd6",
 							version = 3,
 						},
@@ -2080,512 +3747,6 @@ local tbl =
 			},
 		},
 	},
-	[109] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "[Raid calls]",
-				uuid = "05842289-e405-3a91-a37f-16ca6f900629",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Alert",
-							alertDuration = 8000,
-							alertPriority = 2,
-							alertTTS = true,
-							alertText = "Party continue Mario Kart Weights; healers prep eight Tumults.",
-							uuid = "d51f1d8c-8d08-da6c-8089-caa4d28dbd9b",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-				},
-				displayPath = "[Raid calls]",
-				mechanicTime = 744,
-				name = "[Raid Call][Titan] Final Weights",
-				timelineIndex = 109,
-				timerOffset = -1,
-				uuid = "8b23b696-64cb-c5ca-9c08-381b3a8327e9",
-				version = 2,
-			},
-		},
-	},
-
-	[102] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "[Raid calls]",
-				uuid = "8ba65ee7-7901-bb2e-af1a-f94bd56776e3",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Alert",
-							alertDuration = 8000,
-							alertPriority = 2,
-							alertTTS = true,
-							alertText = "Party follow Mario Kart route; dodge Landslides, step back in.",
-							uuid = "c0389639-b902-a3bf-b1d3-fc3a960c58b8",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-				},
-				displayPath = "[Raid calls]",
-				mechanicTime = 722,
-				name = "[Raid Call][Titan] Weights and Landslides 2",
-				timelineIndex = 102,
-				timerOffset = -1,
-				uuid = "f25144d7-6264-9b77-9594-2c9b43003758",
-				version = 2,
-			},
-		},
-	},
-
-	[95] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "[Raid calls]",
-				uuid = "2cbe8a5a-7f66-a8ff-91ed-fa56a4ea0ec0",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Alert",
-							alertDuration = 8000,
-							alertPriority = 2,
-							alertTTS = true,
-							alertText = "Second gaols: marked players hold assigned spots; party ready to break.",
-							uuid = "28c5fe0b-e552-5c76-b5f1-6dd5a2d902b4",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-				},
-				displayPath = "[Raid calls]",
-				mechanicTime = 684,
-				name = "[Raid Call][Titan] Gaols 2",
-				timelineIndex = 95,
-				timerOffset = -1,
-				uuid = "fbdf9b3b-da48-cb0f-8570-927549722780",
-				version = 2,
-			},
-		},
-	},
-
-	[90] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "[Raid calls]",
-				uuid = "46aadd1c-d913-259f-938f-eac769babec3",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Alert",
-							alertDuration = 8000,
-							alertPriority = 2,
-							alertTTS = true,
-							alertText = "Party Mario Kart for Weights; dodge first Landslides, step back in.",
-							uuid = "e6019b19-e6a0-081d-8810-5b6fd3f6754b",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-				},
-				displayPath = "[Raid calls]",
-				mechanicTime = 666,
-				name = "[Raid Call][Titan] Weights and Landslides",
-				timelineIndex = 90,
-				timerOffset = -1,
-				uuid = "8eff4325-a807-5bce-bef4-e6e884146c69",
-				version = 2,
-			},
-		},
-	},
-
-	[85] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "[Raid calls]",
-				uuid = "78fb70a7-445d-9464-8d68-71502952618e",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Alert",
-							alertDuration = 8000,
-							alertPriority = 2,
-							alertTTS = true,
-							alertText = "Gaol marks only: 1 closest Titan, 3 closest bombs; others clear.",
-							uuid = "8938bb44-20ea-4d22-966c-c83893ceaf18",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-				},
-				displayPath = "[Raid calls]",
-				mechanicTime = 639,
-				name = "[Raid Call][Titan] Gaols 1",
-				timelineIndex = 85,
-				timerOffset = -1,
-				uuid = "c80a72a8-c880-a18e-80a3-17e3139d85ab",
-				version = 2,
-			},
-		},
-	},
-
-	[82] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "[Raid calls]",
-				uuid = "0fab0377-8662-cdc9-a638-c52ca5f2cdd6",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Alert",
-							alertDuration = 8000,
-							alertPriority = 2,
-							alertTTS = true,
-							alertText = "MT pull Titan center; all watch his facing, hug opposite edge.",
-							uuid = "5c661d6a-4294-67f9-ad50-dd6a083f9441",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-				},
-				displayPath = "[Raid calls]",
-				mechanicTime = 631,
-				name = "[Raid Call][Titan] Geocrush 2",
-				timelineIndex = 82,
-				timerOffset = -1,
-				uuid = "0d3ac96d-4c69-1ee7-88f7-7a18905991f6",
-				version = 2,
-			},
-		},
-	},
-
-	[74] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "[Raid calls]",
-				uuid = "cc5d386a-7252-a66f-b9bd-0b5fa33721f1",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Alert",
-							alertDuration = 8000,
-							alertPriority = 2,
-							alertTTS = true,
-							alertText = "Everyone edge for Geocrush; healers mitigate Earthen Fury.",
-							uuid = "c97069f6-be16-65fc-a7b8-b006f78484f0",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-				},
-				displayPath = "[Raid calls]",
-				mechanicTime = 600,
-				name = "[Raid Call][Titan] Geocrush",
-				timelineIndex = 74,
-				timerOffset = -1,
-				uuid = "222950f3-17e4-d1d6-9f81-096deb8e8f01",
-				version = 2,
-			},
-		},
-	},
-
-	[43] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "[Raid calls]",
-				uuid = "31e5d162-4550-806f-aa93-a8b3e4534ae5",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Alert",
-							alertDuration = 8000,
-							alertPriority = 2,
-							alertTTS = true,
-							alertText = "DPS hold nails low; Reverse Z, kill each after two Eruptions.",
-							uuid = "5ba0189a-6460-a752-823a-e161975555d1",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-				},
-				displayPath = "[Raid calls]",
-				mechanicTime = 328,
-				name = "[Raid Call][Ifrit] Reverse Z Nails",
-				timelineIndex = 43,
-				timerOffset = -1,
-				uuid = "e28640a1-f9fd-1e53-b0a0-2a2aa63f0ef2",
-				version = 2,
-			},
-		},
-	},
-
-	[26] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "[Raid calls]",
-				uuid = "809dcbb7-2b00-5aaf-a31c-b15bd3bdd0cb",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Alert",
-							alertDuration = 8000,
-							alertPriority = 2,
-							alertTTS = true,
-							alertText = "Caster west; Thermal Low tank east. Only one Mesohigh cleanse.",
-							uuid = "cada556e-f226-cb01-9ad5-39910e0c9b0f",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-				},
-				displayPath = "[Raid calls]",
-				mechanicTime = 124,
-				name = "[Raid Call][Garuda] Mesohigh",
-				timelineIndex = 26,
-				timerOffset = -1,
-				uuid = "976dddef-09d3-54af-9ee3-cce2fa7997cd",
-				version = 2,
-			},
-		},
-	},
-
-	[19] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "[Raid calls]",
-				uuid = "d84eb243-aa69-d9d2-abc7-0a4f86987196",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Alert",
-							alertDuration = 8000,
-							alertPriority = 2,
-							alertTTS = true,
-							alertText = "Party southeast; MT prioritizes north, west, east; OT south, east, west.",
-							uuid = "4e79f42c-5e29-08f5-b07f-c7b46bdb8e31",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-				},
-				displayPath = "[Raid calls]",
-				mechanicTime = 100,
-				name = "[Raid Call][Garuda] Double Mistral",
-				timelineIndex = 19,
-				timerOffset = -1,
-				uuid = "a15e17c5-63fa-5437-ab31-66f026d9cebe",
-				version = 2,
-			},
-		},
-	},
-
-	[3] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "[Raid calls]",
-				uuid = "81a6f846-e2de-3b8a-b25e-6b689e66ba4e",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Alert",
-							alertDuration = 8000,
-							alertPriority = 2,
-							alertTTS = true,
-							alertText = "OT first Mistral; party north-south line. MT drag Garuda south after.",
-							uuid = "e394d079-7d1f-4179-93ba-bf5bca048ece",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-				},
-				displayPath = "[Raid calls]",
-				mechanicTime = 12,
-				name = "[Raid Call][Garuda] Opening Mistral",
-				timelineIndex = 3,
-				timerOffset = -1,
-				uuid = "abb0e70d-b161-4a97-b353-64c44c7b8865",
-				version = 2,
-			},
-		},
-	},
-
 	inheritedProfiles = 
 	{
 	},
