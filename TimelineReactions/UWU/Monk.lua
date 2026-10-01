@@ -8,7 +8,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "562591c9-ff4b-528d-1a91-3c1755f065b9",
+				uuid = "fcb9c4aa-5957-5e46-5595-bf444bd3d8fa",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -19,7 +19,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "6edf090f-f87c-d15b-bb7a-18590519e37f",
+				uuid = "7cd7de62-229b-c166-0f45-30a8499c73f2",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -30,7 +30,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "33a801c4-d505-2f90-9c90-5a6ab52d0f74",
+				uuid = "a4265ea9-735e-fbfd-b963-9b23a2b525b9",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -44,7 +44,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "3f9905b2-fd6b-1f76-1d8b-21a8d014db62",
+				uuid = "98fd5d01-25a9-bd1d-d6c8-7713d7fda751",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -55,10 +55,45 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "520d797a-3ec6-9716-b71a-f9f4b91a272a",
+				uuid = "95daf7b7-27ec-5aab-fe34-bbbdb08f24c7",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "[Raid Call][Garuda] Opening Mistral",
+				uuid = "1b8abfb5-458e-4afa-a7f7-e40e63ac5640",
+				version = 2,
+			},
+			inheritedObjectUUID = "abb0e70d-b161-4a97-b353-64c44c7b8865",
+			inheritedOverwrites = 
+			{
+				actions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								name = "",
+								uuid = "daf36298-94ab-bd7e-aa71-d30b210583e3",
+								version = 2.1,
+							},
+							inheritedObjectUUID = "e394d079-7d1f-4179-93ba-bf5bca048ece",
+							inheritedOverwrites = 
+							{
+								alertText = "MT drag Garuda south after.",
+							},
+						},
+					},
+				},
+				enabled = false,
+			},
 		},
 	},
 	[4] = 
@@ -69,7 +104,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "ee302c3f-4fed-728b-f505-f521d71e68ef",
+				uuid = "1c2c1808-c9b2-360c-7e9c-4a3e200e7c18",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -80,10 +115,102 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "256348c6-cc14-e1ea-a580-a81090f82636",
+				uuid = "7a2d8347-1c61-2f63-3e24-25bd7e96e817",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"5f8fd4aa-f7ab-700d-b9a0-d865d395ae9c",
+									false,
+								},
+								
+								{
+									"ea4b8be4-a994-38b4-b885-7d708fd2d81c",
+									true,
+								},
+							},
+							setTarget = true,
+							targetType = "Detection Target",
+							uuid = "bc6a7307-09a2-8a1d-a582-2fce5fc4be45",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 5,
+							name = "Within 5y of Garuda",
+							partyTargetType = "Detection Target",
+							rangeCheckSourceType = "ContentID",
+							rangeSourceContentID = 1644,
+							uuid = "802fdbfe-93cd-9854-9849-91c2ac798b68",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"802fdbfe-93cd-9854-9849-91c2ac798b68",
+									true,
+								},
+							},
+							filterTargetType = "ContentID",
+							name = "Spiny Plume",
+							partyTargetContentID = 2091,
+							uuid = "ea4b8be4-a994-38b4-b885-7d708fd2d81c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							conditionType = 2,
+							contentid = 2091,
+							name = "Already Targeting Spiny",
+							uuid = "5f8fd4aa-f7ab-700d-b9a0-d865d395ae9c",
+							version = 3,
+						},
+					},
+				},
+				mechanicTime = 18,
+				name = "[Target] Spiny Plume - Melee",
+				throttleTime = 250,
+				timeRange = true,
+				timelineIndex = 4,
+				timerEndOffset = 13,
+				timerStartOffset = 9,
+				uuid = "20bd0b57-ff7b-4092-b712-1cc4f2c7e09e",
+				version = 2,
+			},
 		},
 	},
 	[8] = 
@@ -94,7 +221,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "c6fca003-6dfc-8cd7-412f-69cd80d86d33",
+				uuid = "8f3e151c-082c-74f8-9a73-95c2203c28ac",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -105,7 +232,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "8a137fa2-4b3a-2c7e-abf0-a79c0755f292",
+				uuid = "a1e53e23-335f-dd87-bba4-bba995c26cf3",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -119,7 +246,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "c0cff9f4-bc95-9c68-4970-65b60bf351e4",
+				uuid = "1f3243ab-1367-8ba7-e36b-f59914b23efb",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -130,7 +257,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "97d654d9-0c9e-eec5-a62a-b84bac001c89",
+				uuid = "864e0b14-c263-25f8-508f-c9b299920124",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -144,7 +271,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "3d67fffd-dbdb-b7a1-71fd-cb3bff0e82ad",
+				uuid = "e8fbac3a-ecfe-0fc6-5406-8d74f91f730a",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -158,7 +285,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "5af92c91-b669-1f5d-2cfe-268f18246041",
+				uuid = "0a7eb8c8-1d2f-c44c-4438-e0ea511db098",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -169,7 +296,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "eb8f4196-e69e-14aa-6d7f-02cc29ee2a46",
+				uuid = "3737f9f1-c21e-682d-7f54-1c8383beb581",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -183,7 +310,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "5ec3c3f4-8324-6a70-5a75-d4b6409f61a4",
+				uuid = "bb931855-6e5a-b6a9-bd2d-9ff39dff90a5",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -193,88 +320,8 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Draws LPDU",
-				uuid = "9565cefe-c76e-9de2-99fe-4ef8c43ea14a",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "Melee TTS",
-				uuid = "0ec60589-2b09-691e-bef4-9765455014b6",
-				version = 2,
-			},
-			inheritedObjectUUID = "5fd81d2c-7a23-e404-940b-c8c68c02b3d8",
-			inheritedOverwrites = 
-			{
-				actions = 
-				{
-					
-					{
-						type = "add",
-						value = 
-						{
-							data = 
-							{
-								name = "",
-								uuid = "6e29a3f1-6c51-ef4f-ab45-baedf1bfaa35",
-								version = 2.1,
-							},
-							inheritedObjectUUID = "7869fda0-949e-eac8-bd87-9ab475330567",
-							inheritedOverwrites = 
-							{
-								conditions = 
-								{
-									
-									{
-										position = 1,
-										type = "add",
-										value = 
-										{
-											"f356668c-bb3c-8866-a374-433db8366df1",
-											true,
-										},
-									},
-								},
-							},
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						type = "add",
-						value = 
-						{
-							data = 
-							{
-								name = "OT/M1/M2 only",
-								uuid = "a13f5eaf-10f7-eab6-b284-931ac584f574",
-								version = 3,
-							},
-							inheritedObjectUUID = "f356668c-bb3c-8866-a374-433db8366df1",
-							inheritedOverwrites = 
-							{
-								category = "Lua",
-								conditionLua = "local role = GetCurrentRole()\nreturn role == \"OT\" or role == \"T2\" or role == \"M1\" or role == \"M2\"",
-								name = "OT/M1/M2 only",
-							},
-						},
-					},
-				},
-				displayPath = "Draws LPDU",
-			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "d45a1f98-258d-d94c-b885-5d56357548c8",
+				uuid = "2721ac13-1476-d22f-82f5-71dd2febcbe3",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -285,25 +332,10 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "2e5f83cf-ba7e-65f3-f1ae-d569c9ceafbf",
+				uuid = "1461fcb4-3838-e470-3e47-e1fa59836a84",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "[Mit] Friction 1 - M1 Feint",
-				uuid = "a1e102ee-9e94-e865-ae87-d65f94e49b46",
-				version = 2,
-			},
-			inheritedObjectUUID = "0efe6e00-b1db-4cb3-ae45-07a68a83a81f",
-			inheritedOverwrites = 
-			{
-				displayPath = "store\\anyone\\uwu\\main/anyone\\uwu\\modules\\mitigation/Mitigation - Garuda",
-				enabled = false,
-			},
 		},
 	},
 	[13] = 
@@ -314,7 +346,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "64f06a03-6bb7-0c9f-5234-d8cd6a5ba2f3",
+				uuid = "a94fb29e-a0b1-cc92-9371-5ea46a05366e",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -324,140 +356,8 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Draws LPDU",
-				uuid = "8c9bd20b-d830-3b93-9a88-60213a736bfe",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "Second Friction",
-				uuid = "f46c27ac-1269-4ca2-a4cb-4fa9d10917a8",
-				version = 2,
-			},
-			inheritedObjectUUID = "f00db3a6-4df6-093a-bde3-5383605e73e9",
-			inheritedOverwrites = 
-			{
-				actions = 
-				{
-					
-					{
-						type = "add",
-						value = 
-						{
-							data = 
-							{
-								name = "",
-								uuid = "0ea82730-15c1-7b4b-bac8-9f3f7433ce69",
-								version = 2.1,
-							},
-							inheritedObjectUUID = "4dce1523-144f-d707-a5c6-26b3446a33af",
-							inheritedOverwrites = 
-							{
-								alertText = "Get hit by friction",
-							},
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						type = "remove",
-						value = 
-						{
-							data = 
-							{
-								name = "",
-								uuid = "b74d83b3-7e2b-526c-98a0-5e6620859ff8",
-								version = 3,
-							},
-							inheritedObjectUUID = "218e90ee-20c9-df39-a6f4-a6e0ab809051",
-						},
-					},
-				},
-				displayPath = "Draws LPDU",
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "Melee TTS",
-				uuid = "bbe5aa08-e238-7fc7-9ce7-d64c3a6bbac4",
-				version = 2,
-			},
-			inheritedObjectUUID = "9a326430-8413-a0b4-a5ed-aa0043f625ed",
-			inheritedOverwrites = 
-			{
-				actions = 
-				{
-					
-					{
-						type = "add",
-						value = 
-						{
-							data = 
-							{
-								name = "",
-								uuid = "76f57e9c-8723-e0d0-b591-35d7ce279023",
-								version = 2.1,
-							},
-							inheritedObjectUUID = "c3e1ec47-be81-c8fd-bbea-7ae501a8142c",
-							inheritedOverwrites = 
-							{
-								conditions = 
-								{
-									
-									{
-										position = 1,
-										type = "add",
-										value = 
-										{
-											"45f19d2b-a640-d33b-8e69-5d4f7961e4ef",
-											true,
-										},
-									},
-								},
-							},
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						type = "add",
-						value = 
-						{
-							data = 
-							{
-								name = "M1/M2 only",
-								uuid = "48d672a1-fa5c-590e-924a-1c3c70b0a0ef",
-								version = 3,
-							},
-							inheritedObjectUUID = "45f19d2b-a640-d33b-8e69-5d4f7961e4ef",
-							inheritedOverwrites = 
-							{
-								category = "Lua",
-								conditionLua = "local role = GetCurrentRole()\nreturn role == \"M1\" or role == \"M2\"",
-								name = "M1/M2 only",
-							},
-						},
-					},
-				},
-				displayPath = "Draws LPDU",
-			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "07d6316d-80bb-63b1-3a76-709b6a9d42dd",
+				uuid = "f5e4262e-f22d-6c1a-4dcd-77c8881aef3e",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -467,63 +367,8 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "LPDU mits",
-				uuid = "dfe94baa-8543-573a-aa19-0e00d4ad2fa2",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "LPDU mits",
-				name = "Mits",
-				uuid = "fbaebd6c-43e9-3f78-9a4c-cca14f34c345",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "LPDU mits/Mits",
-				name = "UWU",
-				uuid = "98eee756-a6a5-786a-9196-e31dbbbfa9ab",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "LPDU mits/Mits/UWU",
-				name = "Feint",
-				uuid = "a3de2230-d8c4-95cd-aabd-0afdb8d2678a",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "UWU Feint: Friction",
-				uuid = "c9cd4041-619d-3abd-8667-21fbbea6ae19",
-				version = 2,
-			},
-			inheritedObjectUUID = "c9304b47-5fed-28b6-82fa-af1b537be5b1",
-			inheritedOverwrites = 
-			{
-				displayPath = "LPDU mits/Mits/UWU/Feint",
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "30e17ac0-be4d-fa24-c816-57727528fef0",
+				uuid = "ff5ceec3-8cde-953f-af78-8db1b8936153",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -532,16 +377,11 @@ local tbl =
 		{
 			data = 
 			{
-				name = "[Mit] Friction 2 - M2 Feint",
-				uuid = "53e327ba-5319-3c05-9706-452e12eadaca",
-				version = 2,
+				displayPath = "",
+				name = "Draws - Garuda",
+				uuid = "87130f3e-f75b-94c6-9854-a2b3b4eb5e9b",
 			},
-			inheritedObjectUUID = "b0985724-5e05-4f6b-94b2-8f7ddd9bedb6",
-			inheritedOverwrites = 
-			{
-				displayPath = "store\\anyone\\uwu\\main/anyone\\uwu\\modules\\mitigation/Mitigation - Garuda",
-				enabled = false,
-			},
+			objectType = "folder",
 		},
 	},
 	[14] = 
@@ -552,10 +392,24 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "03c5aa2e-94db-df92-dc53-d4bce60f071e",
+				uuid = "2d9c4e73-778c-f99f-4b24-69d5b2e5fa43",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "MOVE!",
+				uuid = "2a91c822-be18-54e0-bf9e-1f4a11357ab8",
+				version = 2,
+			},
+			inheritedObjectUUID = "f79f20a0-3dd4-ec27-b97c-fad765b11b94",
+			inheritedOverwrites = 
+			{
+				timerOffset = 0,
+			},
 		},
 	},
 	[15] = 
@@ -566,7 +420,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "4b8e425a-3673-96a6-999f-7778613c83ca",
+				uuid = "80f40a5d-19dd-cec1-04db-f86f93dcf8ed",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -580,7 +434,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "5783e554-6fa0-c150-3cb8-ae6e3832e344",
+				uuid = "4e8e47af-45c5-d093-2e06-6b1dbbce5eff",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -594,7 +448,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "dd8ccfb2-a061-848e-2e90-90a854650f22",
+				uuid = "6f10872f-e5ae-13e3-6931-86799549a77f",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -603,12 +457,71 @@ local tbl =
 		{
 			data = 
 			{
+				name = "MOVE!",
+				uuid = "b1d1cb2f-b645-24aa-93d8-32142b6cf1d9",
+				version = 2,
+			},
+			inheritedObjectUUID = "cb193897-47a1-eecb-87eb-41788a04c223",
+			inheritedOverwrites = 
+			{
+				timerOffset = -1.5,
+			},
+		},
+		
+		{
+			data = 
+			{
+				name = "MOVE!",
+				uuid = "de098aa5-592c-b5db-8161-102f52e69a20",
+				version = 2,
+			},
+			inheritedObjectUUID = "8041bce2-c25a-eecf-a85b-5757be048797",
+			inheritedOverwrites = 
+			{
+				timerOffset = -1.8999999761581,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "c8ea6db5-c771-1eb9-f39d-80e37bfa47a5",
+				uuid = "381df1d2-e515-0cde-3470-206c5913bf62",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = "Stack in middle",
+							gVar = "ACR_TensorWeeb3_CD",
+							uuid = "a35d8c3d-938e-ce62-8e8e-7a661f58abb6",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				mechanicTime = 93,
+				name = "Stack",
+				timelineIndex = 18,
+				timerOffset = -13.5,
+				uuid = "03c3a66b-e74e-af3c-9688-a1ef098933c5",
+				version = 2,
+			},
 		},
 	},
 	[19] = 
@@ -619,7 +532,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "f4195bc9-6cc5-1745-2b96-ab17165f8979",
+				uuid = "49fc6300-99fb-dbd4-a737-0c2235069cd0",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -628,9 +541,23 @@ local tbl =
 		{
 			data = 
 			{
+				name = "[Raid Call][Garuda] Double Mistral",
+				uuid = "df0c8330-4057-c6eb-af2b-22ee7d46a2e9",
+				version = 2,
+			},
+			inheritedObjectUUID = "17cd5836-d9c6-7195-8de4-93d3203a2db3",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "eb22570f-b5ab-6343-1f40-4d5966b4683f",
+				uuid = "5e6256dc-0372-d1b8-ee84-15eacfb7d36c",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -644,7 +571,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "166d8ca2-d185-18d6-034f-e7841490d2d2",
+				uuid = "7e0dc8b5-68d7-d011-1ed7-672b17883185",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -658,10 +585,40 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "29004082-8dc2-104e-a4b9-2b943eba7eb2",
+				uuid = "e73660e3-21ce-5e87-30a2-4fb96875d673",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = "Move to 3 (SE)",
+							uuid = "a13b87d6-4e61-47c9-a69e-387ac4e87529",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				mechanicTime = 100,
+				name = "Move to the 3 marker",
+				timelineIndex = 21,
+				timerOffset = -4.0999999046326,
+				uuid = "4308abb5-6a74-be8b-94e3-06f1f4bbb30b",
+				version = 2,
+			},
 		},
 	},
 	[22] = 
@@ -672,7 +629,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "84ad70cb-8c2b-97a7-6481-62318454e63b",
+				uuid = "53d56d9a-99c1-442e-0941-539cef81176a",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -683,7 +640,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "d90aef7c-3e96-4d00-a2eb-f00a273cd7ac",
+				uuid = "b28c3c87-21aa-ed63-3203-2cd9220d8617",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -697,7 +654,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "ad903ebc-80f0-80f8-d721-705ab9523fec",
+				uuid = "e38e0071-3e59-9465-9935-822b163e93c1",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -711,7 +668,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "fe3a908f-d1b9-0ea3-1ee0-bc05ed51a53f",
+				uuid = "adbfbe8e-96d3-f83a-d9df-fdc0e4293a9e",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -720,14 +677,34 @@ local tbl =
 		{
 			data = 
 			{
-				name = " ",
-				uuid = "c67bd40d-5254-24ca-8a37-2f9a69b44f52",
+				name = "[Raid Call][Garuda] Mesohigh",
+				uuid = "e891e909-2c82-8217-8745-899702141129",
 				version = 2,
 			},
 			inheritedObjectUUID = "2bc7ce40-829a-1e5d-8791-50992f76d1e7",
 			inheritedOverwrites = 
 			{
-				name = " ",
+				actions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								name = "",
+								uuid = "96ea087f-83e9-3b7e-afe1-4babb2e8a0b9",
+								version = 2.1,
+							},
+							inheritedObjectUUID = "17ccdb0f-7f7c-158c-b5cb-9f252ac8578c",
+							inheritedOverwrites = 
+							{
+								alertText = "Caster west; tank east.",
+							},
+						},
+					},
+				},
 			},
 		},
 		
@@ -736,7 +713,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "40489461-f714-f04d-2ae9-f2035ecab491",
+				uuid = "e937eb9e-e44b-6232-db15-f79c3fb97e2e",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -745,40 +722,46 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "412ccc68-8bd0-9394-3e96-0e8665ba9ed8",
+				name = "[Raid Call][Garuda] Mesohigh",
+				uuid = "28be8436-861e-1009-80ed-cbf601ed8678",
+				version = 2,
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
+			inheritedObjectUUID = "976dddef-09d3-54af-9ee3-cce2fa7997cd",
+			inheritedOverwrites = 
 			{
 				actions = 
 				{
 					
 					{
-						data = 
+						type = "add",
+						value = 
 						{
-							aType = "ACR",
-							gVar = "ACR_TensorMagnum3_CD",
-							gVarValue = 2,
-							uuid = "8cb74bfb-ac41-bc49-8ccc-a8230b66f62f",
-							version = 2.1,
+							data = 
+							{
+								name = "",
+								uuid = "d2aa85c5-cca3-4b20-bc0d-b91eacd364e7",
+								version = 2.1,
+							},
+							inheritedObjectUUID = "cada556e-f226-cb01-9ad5-39910e0c9b0f",
+							inheritedOverwrites = 
+							{
+								alertText = "Caster west; Tank east.",
+							},
 						},
 					},
 				},
-				conditions = 
-				{
-				},
-				mechanicTime = 124,
-				name = "cd",
-				timelineIndex = 26,
-				uuid = "e05bbbcf-e7eb-9ab6-87ce-696c1f3523e7",
-				version = 2,
 			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "19edd8bb-69a0-3dcf-119c-3e25d57fec8b",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
 		},
 	},
 	[27] = 
@@ -789,7 +772,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "c335d060-001b-4294-325f-f94e24dfc290",
+				uuid = "7a235145-f0f4-c691-b1d0-52eff66ca055",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -800,9 +783,19 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "7959e4fc-f9df-b478-d725-e55e1662042c",
+				uuid = "2d208143-43e7-7107-aa8d-810170f70413",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Movement - Ifrit",
+				uuid = "cf4f2692-10d4-f1cc-be36-3e274d814926",
+			},
 			objectType = "folder",
 		},
 	},
@@ -814,7 +807,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "d747ce21-9e6d-c91d-d3bb-b8dbbc26db91",
+				uuid = "1eb8114c-59ad-ad90-76bd-032a5ccdaedc",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -825,7 +818,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "e90baf4a-d7fe-ce2e-a012-503cc56e8d3a",
+				uuid = "f28b5afd-1fbc-41e9-1857-e193133a1a0d",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -839,7 +832,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "f4dd9b1b-5679-217f-2d66-ed9d8d86e78b",
+				uuid = "39b56a9c-639f-b718-c8b5-d4f26f35dcac",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -853,7 +846,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "47f5bd46-3c9a-532a-5120-74e4d42e2176",
+				uuid = "08003a57-2d3d-9433-0ea5-b7a103f87ce7",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -864,32 +857,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "81f1c515-1e69-7801-7eb4-9f03cf8f2c85",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
-	},
-	[38] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWUReactions\\LPDU mits",
-				uuid = "e71bf578-3155-679c-5278-9c76e430a728",
-			},
-			inheritanceRoot = "UWUReactions\\LPDU mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "639efb43-5272-43f7-76a4-90d5f14005f3",
+				uuid = "a97a67fe-ed02-c712-9a3e-f4f892c6bbce",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -898,30 +866,11 @@ local tbl =
 		{
 			data = 
 			{
-				name = "[Mit] Hellfire - Caster Addle",
-				uuid = "7ee3f0ac-4c89-ae05-8c72-70c8f13dd696",
-				version = 2,
+				displayPath = "",
+				name = "Movement - Ifrit",
+				uuid = "88b1bfdb-72fe-88a3-a56b-8cf3042131c2",
 			},
-			inheritedObjectUUID = "ae0c2373-0bea-4fbe-a3ff-0c696566be61",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[Mit] Hellfire - M1 Feint",
-				uuid = "9d6216c1-af82-35a7-87a8-506f25791b98",
-				version = 2,
-			},
-			inheritedObjectUUID = "a832e771-608f-409e-8085-814374408088",
-			inheritedOverwrites = 
-			{
-				displayPath = "store\\anyone\\uwu\\main/anyone\\uwu\\modules\\mitigation/Mitigation - Ifrit",
-				enabled = false,
-			},
+			objectType = "folder",
 		},
 		
 		{
@@ -934,20 +883,118 @@ local tbl =
 						data = 
 						{
 							aType = "ACR",
-							gVar = "ACR_TensorMagnum3_CD",
-							uuid = "762655ad-e4de-4522-896a-8412876ec4e3",
+							conditions = 
+							{
+								
+								{
+									"4c92f0fb-f779-ac91-bbbb-b50c2367a823",
+									true,
+								},
+							},
+							gVar = "ACR_TensorWeeb3_Hotbar_Sprint",
+							name = "Sprint - Transition",
+							uuid = "44a5620f-cbd5-8839-a8f1-4e0a6a745321",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local player = TensorCore.mGetPlayer()\nreturn player and not TensorCore.hasBuff(player, 1231)",
+							name = "Not Meditating",
+							uuid = "4c92f0fb-f779-ac91-bbbb-b50c2367a823",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Movement - Ifrit",
+				enabled = false,
+				mechanicTime = 300,
+				name = "[Sprint] Ifrit Transition Prep",
+				timeRange = true,
+				timelineIndex = 36,
+				timerEndOffset = 9,
+				timerStartOffset = -1,
+				uuid = "28b767b9-6e81-9b84-83b2-c16a59a67498",
+				version = 2,
+			},
+		},
+	},
+	[38] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "UWUReactions\\LPDU mits",
+				uuid = "9d68679f-45da-0d3b-822a-f4e16c46c92f",
+			},
+			inheritanceRoot = "UWUReactions\\LPDU mits",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "b68664e4-bdc6-7060-5961-0d5a38cde2b4",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertTTS = true,
+							alertText = "Use potions",
+							conditions = 
+							{
+								
+								{
+									"62899cc9-9a9c-08ab-ad73-7392df5f284a",
+									true,
+								},
+							},
+							uuid = "6cc88c41-4236-efeb-b6cb-7b3aa36dd7d0",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 9,
+							partyTargetType = "Melee DPS",
+							uuid = "62899cc9-9a9c-08ab-ad73-7392df5f284a",
+							version = 3,
+						},
+					},
 				},
 				mechanicTime = 307,
-				name = "cd on",
+				name = "[Raid Call] Use potions",
 				timelineIndex = 38,
-				timerOffset = -1,
-				uuid = "6c9987b1-f386-d1bf-9e7c-7faabf43ea1e",
+				timerOffset = -3,
+				uuid = "a99f6207-8687-ea7a-9693-893abe5c451d",
 				version = 2,
 			},
 		},
@@ -960,7 +1007,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "e451314d-00cc-f101-75df-a13bd320323d",
+				uuid = "d5751e4a-2273-0876-bb3c-457c49fd631a",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -971,7 +1018,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "78a40934-4b9c-21a8-7821-ab0ef50f9a24",
+				uuid = "f00f8db3-4baf-4eef-3b69-e11123c8d4c3",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -985,7 +1032,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "7364047b-3cc9-347f-6d33-23814663852b",
+				uuid = "00d1323e-3e59-745a-b350-5320f8e1f78e",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -999,7 +1046,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "9ec6e509-b574-0b3d-b5bc-df33ddd052b9",
+				uuid = "66e1fae8-0bf1-2f94-3748-cf764a7d8138",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -1013,7 +1060,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "ef3c99f2-b575-b666-40d7-c3e457f4c862",
+				uuid = "1848eb57-dd8e-fba3-3929-028d14412de7",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -1022,9 +1069,78 @@ local tbl =
 		{
 			data = 
 			{
+				name = "[Alert] Ifrit - Melee DPS Close Nail",
+				uuid = "5422f1ea-5d86-1f5e-8469-fa53b3455eb3",
+				version = 2,
+			},
+			inheritedObjectUUID = "425b653b-3684-14cf-97f0-8a07d7117577",
+			inheritedOverwrites = 
+			{
+				actions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								name = "Melee DPS Close Nail",
+								uuid = "c5ae30b7-b13a-6416-a348-d4a584ae3868",
+								version = 2.1,
+							},
+							inheritedObjectUUID = "244dd9a1-40f5-5dc0-a2b1-209d825c6ecf",
+							inheritedOverwrites = 
+							{
+								alertText = "CLOSE NAIL TO 40%, THEN FOLLOW ORDER",
+							},
+						},
+					},
+				},
+			},
+		},
+		
+		{
+			data = 
+			{
+				name = "[Raid Call][Ifrit] Reverse Z Nails",
+				uuid = "f1edd978-76ce-c7d0-ad5a-4c564af16829",
+				version = 2,
+			},
+			inheritedObjectUUID = "ecc05467-4e29-34b6-9449-fa97df47a5b8",
+			inheritedOverwrites = 
+			{
+				actions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								name = "",
+								uuid = "3724492c-510e-fedc-bdc3-e228a52bf8f7",
+								version = 2.1,
+							},
+							inheritedObjectUUID = "ff67f309-11bd-9c44-8a0d-467f368abeef",
+							inheritedOverwrites = 
+							{
+								alertTTS = false,
+							},
+						},
+					},
+				},
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "180e98ba-eded-0546-2fd2-2b08e4a2a62a",
+				uuid = "c21f8899-608f-6f4d-2476-615be221ea29",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -1035,7 +1151,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "575e5805-7b2c-8101-8937-488fe8c6eef5",
+				uuid = "4cb75efe-4a53-1062-3ece-c2943603b2ce",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -1045,24 +1161,10 @@ local tbl =
 			data = 
 			{
 				name = "[Draw] Relative-North Nail Route",
-				uuid = "662cc265-363f-ef52-bf29-a7901d1837d4",
+				uuid = "aeb555b5-9b80-cd31-8a6e-1d3522ce165b",
 				version = 2,
 			},
 			inheritedObjectUUID = "0f797491-7d62-dc30-bc77-91200709d939",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[Draw] Nail Readiness and Cleanup",
-				uuid = "b8cf3e30-5b75-4292-a517-25e19843eb7c",
-				version = 2,
-			},
-			inheritedObjectUUID = "172b8080-31fb-784d-ab46-78c6dd0db2cd",
 			inheritedOverwrites = 
 			{
 				enabled = false,
@@ -1077,7 +1179,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "c2ec387f-ed41-007b-0fda-3f155efe55ef",
+				uuid = "a5eb408a-9997-fd4e-544e-a57c9ef7a69a",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -1091,7 +1193,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "62a92dd0-f8ca-ea2c-bf1a-a55e870e00c0",
+				uuid = "dae08161-8618-c005-89cb-228b2eb03971",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -1102,7 +1204,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "fba99e6c-a329-fac0-7cfb-82eec2bdc89c",
+				uuid = "2778a457-fae4-5e03-c146-8c45a8fd85a7",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -1116,7 +1218,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "3b970f3d-18a3-e109-c711-0a770d60b62d",
+				uuid = "d7caa744-8cc6-6df8-ac39-cf42e6a661d4",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -1127,7 +1229,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "764eb582-8c37-5d06-3e2f-451475559532",
+				uuid = "09ab1479-e27f-04e5-89d6-c60faffbc8c9",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -1141,7 +1243,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "3b98ba66-6919-95f2-f061-de881234d016",
+				uuid = "58fd5f13-9801-84a7-f532-2f19325899e3",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -1152,29 +1254,9 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "8601ea39-8b4a-c46d-59c6-7823e06a8729",
+				uuid = "4b79eac2-705b-839e-f194-7c00ffc6ced2",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Draws LPDU",
-				uuid = "748248f2-3825-7f9d-a2a0-57adf358d65a",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "Draws LPDU",
-				name = "Draws - Ifrit",
-				uuid = "f3d03c70-e180-2aa1-926b-8c9a6375d108",
-			},
 			objectType = "folder",
 		},
 	},
@@ -1186,7 +1268,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "2e318cd0-edb3-9ebc-8a5d-7fae7557ed00",
+				uuid = "d401fcdf-a9d2-b253-5ca7-1629163724af",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -1200,7 +1282,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "d37e8160-43dc-1404-1f53-433a35287390",
+				uuid = "8fb03811-b96c-dccd-506c-533f15ba0961",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -1211,7 +1293,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "f86987d3-51dd-c96f-e0e6-6ced8cef1d03",
+				uuid = "6759e798-20fa-a60c-e06f-ad4ea4939ce8",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -1225,10 +1307,27 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "0e83418f-2995-5ed3-7974-1191fd9a563f",
+				uuid = "358f69ba-c1ad-d8b6-87fa-7090e0c4c88a",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
+		},
+	},
+	[54] = 
+	{
+		
+		{
+			data = 
+			{
+				name = "MOVE!",
+				uuid = "6293ba4c-076f-145a-9ab7-b166c3cee2ac",
+				version = 2,
+			},
+			inheritedObjectUUID = "270d20c7-bef9-3b79-a7cd-253cc6117a58",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
 		},
 	},
 	[55] = 
@@ -1239,7 +1338,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "1a888459-206b-be35-aa4d-a987658fbbc9",
+				uuid = "33fb3dd8-438b-d8bc-a1d5-2cb2a1bb82e8",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -1250,7 +1349,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "d49fb806-8b49-b2fa-a68c-de843d6ca4b6",
+				uuid = "95672189-0899-dd75-02b0-661b87973259",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -1264,7 +1363,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "94f621cb-86f8-c217-c6d8-df65949d973b",
+				uuid = "387cb5ae-befb-da82-1c6c-edec3baaba3e",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -1275,7 +1374,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "202ba0b0-a108-5e74-4628-e70a848e1a60",
+				uuid = "c820955b-d644-9a47-5a67-c349746b6cab",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -1289,7 +1388,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "1ef319fe-b325-ed82-769f-75ec753c0a2e",
+				uuid = "57de42bb-92ce-af17-6ca6-57653513590b",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -1303,7 +1402,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "01ee778e-81ab-c21a-5f1e-4cb4d68fc0be",
+				uuid = "f9eb2881-7ace-eb75-decb-2f93175d0e11",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -1313,63 +1412,8 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "LPDU mits",
-				uuid = "ba287ff8-68d7-633d-90c6-ffdedab38671",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "LPDU mits",
-				name = "Mits",
-				uuid = "9bbddf3e-2587-1466-aa83-90b35dce05d3",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "LPDU mits/Mits",
-				name = "UWU",
-				uuid = "293c1ece-b2f3-8aa6-9d72-51e20d5d6492",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "LPDU mits/Mits/UWU",
-				name = "Feint",
-				uuid = "f8f8a6dd-da1f-f81f-97b0-13fed5247802",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "UWU Feint: Flaming Crush",
-				uuid = "22f2f67f-b653-f189-9ae9-9636f34134e3",
-				version = 2,
-			},
-			inheritedObjectUUID = "d68bf332-1a1c-b5e0-b579-bed1e6f5f907",
-			inheritedOverwrites = 
-			{
-				displayPath = "LPDU mits/Mits/UWU/Feint",
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "c370971d-0c1f-5e79-992b-8937a74e984d",
+				uuid = "4e0d40e2-8d08-2526-1a30-10e01e49da72",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -1383,7 +1427,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "322aef68-0111-264c-ea95-0bbe53037d18",
+				uuid = "d0a161ad-2479-ce09-6a13-6a37d2ebfe7d",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -1397,7 +1441,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "7134350a-9a28-0786-c18e-80c47ec8d9fa",
+				uuid = "09a430ab-489f-217f-7b3f-0e4192b7cabb",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -1411,7 +1455,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "e970b974-4d16-7d88-23a0-da221cd0d564",
+				uuid = "acc102f7-1112-f473-52b5-84b160cfb207",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -1425,65 +1469,10 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "ae3bd816-3188-63d2-1069-a8bc04b377c6",
+				uuid = "4064df79-5714-bdad-8fe4-e7fbf47b9f09",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "LPDU mits",
-				uuid = "60e6199d-4804-0244-8d10-5ccc60ce2723",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "LPDU mits",
-				name = "Mits",
-				uuid = "65473ec8-e5ca-8a6c-a818-6b65824c0b13",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "LPDU mits/Mits",
-				name = "UWU",
-				uuid = "4e1e829d-6213-40c3-b254-e8581f7b9de0",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "LPDU mits/Mits/UWU",
-				name = "Feint",
-				uuid = "769a493f-53b3-3aef-bb5e-7928cdbd4452",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "UWU Feint: Incinerate (fallback)",
-				uuid = "16efd5ee-7d6e-2649-b34f-ad7d492c7b45",
-				version = 2,
-			},
-			inheritedObjectUUID = "f147f7be-d743-c83d-bc4a-d1b533203d23",
-			inheritedOverwrites = 
-			{
-				displayPath = "LPDU mits/Mits/UWU/Feint",
-				enabled = false,
-			},
 		},
 	},
 	[72] = 
@@ -1494,7 +1483,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "8951640e-f9fe-cfa2-a8eb-24dcf336557e",
+				uuid = "7c1325df-9031-b16b-8368-02f15d18896f",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -1505,7 +1494,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "2f1dc3cd-3f50-23e9-6cdd-177358d5cb7d",
+				uuid = "2bd3d7d6-e541-7bba-2dfe-6bb07b1629e6",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -1519,7 +1508,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "7715ce54-2c55-7800-65ff-75569e425384",
+				uuid = "526225e9-ed20-906d-68f8-f767dbea8639",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -1528,9 +1517,23 @@ local tbl =
 		{
 			data = 
 			{
+				name = "[Raid Call][Titan] Geocrush",
+				uuid = "ba0b1909-975c-8104-ac5c-32ac513b3551",
+				version = 2,
+			},
+			inheritedObjectUUID = "4521d38c-71a9-38f4-a4ef-b428429084e7",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "0c92a538-dfe6-0ddc-91ec-75b600a6e3e8",
+				uuid = "52f4ec6f-c339-9a7b-48ee-eaa9e22d90ff",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -1541,7 +1544,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "de2929b3-583d-7d87-46de-268d01d7fee3",
+				uuid = "e61f5294-f510-bca0-46c8-648a64c9da64",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -1555,7 +1558,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "a4a000e4-e740-c5f8-e8d2-482672f1b0d4",
+				uuid = "01b685a3-4ad4-172f-d167-a7019e530333",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -1569,7 +1572,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "15f0d561-23bf-09b5-5f2a-5c9f4904e191",
+				uuid = "6fdf589a-4905-2af6-a72c-5c04d89892ea",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -1583,7 +1586,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "6c1449f0-e639-2224-3b9e-8d6aa7c1bce0",
+				uuid = "24d43185-c994-0dc1-627a-ef9b60efed95",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -1594,7 +1597,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "b54a5cd7-413e-cf63-79cf-d03918d6ad07",
+				uuid = "a094ff38-470f-c62c-ccc5-241e55a8b208",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -1608,7 +1611,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "957ed888-b258-8154-6a1c-9b82a7d9f578",
+				uuid = "d9fecac7-8ce1-5e1b-3ee8-a56575743657",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -1622,7 +1625,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "b8a6ab65-e678-7771-b2e2-ce67089b1dd5",
+				uuid = "f3975c24-2504-8c98-96ee-5b2224909434",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -1633,7 +1636,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "62b276a3-e7b3-0fa7-2aa0-17a9c6730093",
+				uuid = "9623f448-5f20-4ba4-e77c-eaea53a634d8",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -1647,7 +1650,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "75391b03-cc09-6be7-cd51-d9f17aa453f3",
+				uuid = "9907019e-50c9-e97a-c945-038059bc856e",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -1658,7 +1661,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "2fa920f8-618a-f124-48c8-32c65c9a97e8",
+				uuid = "9dde9fb7-f3d3-c40b-958b-49e95b2db9c7",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -1672,7 +1675,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "6f0c74f4-0245-bf38-3d99-471a50e812a4",
+				uuid = "ab4a6755-dcf3-b7d1-ee59-27af8db6dfa5",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -1683,7 +1686,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "db614a98-1b11-f904-495f-5d523c7c73c8",
+				uuid = "201a8113-9bed-2247-e4dc-01c128e4a0e3",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -1694,7 +1697,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "a0a5d887-5dbb-5cf3-1de8-8b2da7660737",
+				uuid = "53133068-abfd-125c-6bf2-cbf221c3ee38",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -1708,7 +1711,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "6b41dd91-7d0d-c845-d0fa-3a63286d1141",
+				uuid = "fa3607c8-08c0-2134-5e51-17d640d4ff98",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -1722,7 +1725,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "6c2764b5-7f18-aea1-e8a8-b83f1f373ea5",
+				uuid = "bbbab6de-54cc-6682-115b-774cb37c7c2e",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -1736,7 +1739,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "80443a2c-6151-0420-e175-3426fdb3ab5c",
+				uuid = "c76313bf-0fd8-998b-7bee-46dd80bd784f",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -1746,81 +1749,11 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "LPDU mits",
-				uuid = "f7af2b13-b019-9e27-94fe-2dcb9f8da070",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "LPDU mits",
-				name = "Mits",
-				uuid = "8e543f21-6a32-5451-9a72-04b32b23b59f",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "LPDU mits/Mits",
-				name = "UWU",
-				uuid = "b1b3440a-bf06-78ea-944a-0dbe1d7b66fa",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "LPDU mits/Mits/UWU",
-				name = "Feint",
-				uuid = "ccd3125d-e9dd-b0b7-8aa6-803c71a91872",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "UWU Feint: Tumult x8",
-				uuid = "4520bea5-9cc4-92fc-93ef-9f126ba79aa1",
-				version = 2,
-			},
-			inheritedObjectUUID = "b5ebb418-4eff-f981-93b9-dffd86dbd6fe",
-			inheritedOverwrites = 
-			{
-				displayPath = "LPDU mits/Mits/UWU/Feint",
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "89a72a63-468f-d817-bb3b-3ed925f2e213",
+				uuid = "d1e872c4-0caf-3dd0-9c9f-0396674e4194",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "[Mit] Tumult x8 - M1 Feint",
-				uuid = "599e552a-ee07-00fe-af05-43bc58ae01b3",
-				version = 2,
-			},
-			inheritedObjectUUID = "640f8ea2-e733-45b8-b4f3-b17c384817a4",
-			inheritedOverwrites = 
-			{
-				displayPath = "store\\anyone\\uwu\\main/anyone\\uwu\\modules\\mitigation/Mitigation - Titan",
-				enabled = false,
-			},
 		},
 	},
 	[90] = 
@@ -1831,7 +1764,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "1afee392-ac3a-299e-f442-9248aabf5182",
+				uuid = "68cc959f-3c5c-b273-ef2b-a42999a15e2f",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -1842,7 +1775,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "7cf6591a-8576-332e-9728-e6d489dfef0a",
+				uuid = "f12956b1-cb5f-a55d-cc0c-9eaf7e0f0141",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -1856,7 +1789,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "2f3532b7-af9a-d6fb-3284-e371fb3bed67",
+				uuid = "7232194c-cc07-7b58-a429-5ac2ea6c43dc",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -1870,7 +1803,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "c76d58d9-5542-45f5-49db-312f6802c3c9",
+				uuid = "416bc4ee-7add-af52-a351-a388367d413e",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -1884,7 +1817,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "3c8c235d-de4f-82c1-1760-27f3a53053cd",
+				uuid = "0e6f604c-193f-1cc8-3717-93064c84fddc",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -1893,9 +1826,43 @@ local tbl =
 		{
 			data = 
 			{
+				name = "[Raid Call][Titan] Gaols 2",
+				uuid = "a7deaae2-4ad5-9647-805f-99949d412f86",
+				version = 2,
+			},
+			inheritedObjectUUID = "d494470c-4b37-5705-9b04-124ccb78a25f",
+			inheritedOverwrites = 
+			{
+				actions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								name = "",
+								uuid = "9b5631c3-5d0d-ae67-99fe-ed7bda4f5df1",
+								version = 2.1,
+							},
+							inheritedObjectUUID = "5a088776-6156-abaf-867e-d4a8528d9e59",
+							inheritedOverwrites = 
+							{
+								alertText = "Break builder once formed ",
+							},
+						},
+					},
+				},
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "391bcdeb-ab34-f877-6bad-c9dd3965e99b",
+				uuid = "cab7cc20-f6da-c254-f1b5-b1266c52e730",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -1906,7 +1873,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "b9aa83a2-7b3b-c52e-f417-d6a0b7cdc9d2",
+				uuid = "dad0d1b5-2b12-a949-c31d-27d7744b3a85",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -1920,7 +1887,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "cc9a379a-e1f2-ee56-33c0-3c80b5bcd54a",
+				uuid = "b8d643e7-b0c3-136b-62d6-a0f1f4ca3eb7",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -1929,9 +1896,43 @@ local tbl =
 		{
 			data = 
 			{
+				name = "[Raid Call][Titan] Six Tumults",
+				uuid = "cae4f1dd-70c9-d155-b912-131bc349a763",
+				version = 2,
+			},
+			inheritedObjectUUID = "f526509c-ce0f-c60f-aa87-1a319a794337",
+			inheritedOverwrites = 
+			{
+				actions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								name = "",
+								uuid = "2a1a0f69-dd2c-6cb5-bc0a-4cffee30a819",
+								version = 2.1,
+							},
+							inheritedObjectUUID = "e7f71382-0468-7e71-aea1-91ea2df3b844",
+							inheritedOverwrites = 
+							{
+								alertText = "MT take Rock/Mountain Buster alone.",
+							},
+						},
+					},
+				},
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "2cd2fad2-067a-b8b6-f7bd-075c860c4142",
+				uuid = "8a3e3c29-af47-45e5-01bc-30273e9c0339",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -1942,7 +1943,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "2a1aa52d-1f2b-6151-8be8-781b00a3e25d",
+				uuid = "5d74a65a-8f7f-18f6-b272-cbe4c21bc2aa",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -1956,7 +1957,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "d4ef50a7-67cd-717b-d49b-84c1b1c11a17",
+				uuid = "8478c104-2291-4630-599f-da52409c6354",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -1966,63 +1967,8 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "LPDU mits",
-				uuid = "510e17ed-8a4d-e743-a47d-126da0189c77",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "LPDU mits",
-				name = "Mits",
-				uuid = "7789883d-0244-d77c-8f43-97981492e014",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "LPDU mits/Mits",
-				name = "UWU",
-				uuid = "b499732d-cdd2-9432-a1f1-306c402b6f47",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "LPDU mits/Mits/UWU",
-				name = "Feint",
-				uuid = "b811dc39-8d7c-25c3-af38-ac560f1d9de9",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "UWU Feint: Rock Buster (fallback)",
-				uuid = "92e3c129-1e85-63ed-bb9a-5de8c7628649",
-				version = 2,
-			},
-			inheritedObjectUUID = "5d8fd8fe-a3b6-549f-ac78-a51491e7ccee",
-			inheritedOverwrites = 
-			{
-				displayPath = "LPDU mits/Mits/UWU/Feint",
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "54fa4cc6-b8cd-909a-4616-e02ccc6f3376",
+				uuid = "3f7d7a11-c3b3-c7dd-ebfb-f4b3b75965a1",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2036,7 +1982,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "75091c11-d60b-f45d-6d5e-30336a35d881",
+				uuid = "17a08194-3cd5-ae48-24f2-2cd2515ce524",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2050,7 +1996,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "9300485a-a1d7-4576-33d5-0764df96960a",
+				uuid = "3337b4a3-9a8a-f197-d527-26c94d8d50f3",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2064,7 +2010,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "6984552a-f769-edee-7ebd-3030c544355a",
+				uuid = "3263c251-0351-568d-1ce7-53d3d0a9aee1",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2075,7 +2021,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "b7df5be2-36d4-09be-e6d1-2b0c9f066f92",
+				uuid = "ff8d7dc7-7131-3d5b-2fdc-cb7da25d30d7",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -2089,7 +2035,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "a86f0915-9671-9351-8f00-c4db0d038105",
+				uuid = "935c1cee-7662-2342-7d44-9ca8f69a5fbe",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2103,7 +2049,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "8bfcd42b-22ae-5eff-da25-c805c1de7ddb",
+				uuid = "7aa243ac-c09b-a068-a677-e282ba86817c",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2114,7 +2060,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "9e2816a5-b4d9-bb51-34e8-3603b6621615",
+				uuid = "7e532b40-c320-d0b4-5523-ba0a0ffd4d10",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -2128,7 +2074,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "a72cd505-a3a3-4b41-e843-328fb32c6c35",
+				uuid = "3ffacaca-17c2-150e-7442-75f859e74c1a",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2139,7 +2085,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "8774c2ec-edce-07f0-5470-d6b674205ddc",
+				uuid = "aa396601-0c5a-646d-ea75-db170efd5551",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2153,7 +2099,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "baac124e-7ce5-ceea-ad3e-72602b90c3fe",
+				uuid = "e344d4a1-e425-a7c5-7f7d-8ca7e99fdef1",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2164,7 +2110,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "d097b0db-4273-b8bf-52a5-9d9dbbf70f8b",
+				uuid = "1f9a238a-0d46-fd06-8cc0-97c8a89f849a",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2178,7 +2124,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "b91599a7-f5da-8df3-0d79-e4cd19b97017",
+				uuid = "c5b36d84-695d-9eb8-8114-054ea1960754",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2189,7 +2135,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "f9341312-a293-3346-9b92-4c601cefb202",
+				uuid = "df0e11d3-344b-ca7f-dff0-86853a76b1a3",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2203,7 +2149,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "9dde3d09-77b3-8bad-297b-2aef2ca2e6b9",
+				uuid = "7ffe1b04-58d2-e5b0-a222-8d3e1edf7e94",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2217,7 +2163,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "c9f7bc60-c9e0-ccfc-cace-a312d4d28950",
+				uuid = "17ba6465-23a7-0519-01a1-5ff3451439f5",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2231,7 +2177,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "c6e50852-a746-b6d6-a3bf-090445e69b82",
+				uuid = "2f6e494d-d9e5-5a29-226f-c4dbc9d937dd",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2242,7 +2188,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "57e09aef-01da-79ab-6f78-cd0911fd731f",
+				uuid = "a596e31e-d191-2ae2-0570-f4246b0db92e",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2256,7 +2202,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "c1c5e192-9db3-bb16-bfd0-4f4891c240c2",
+				uuid = "27f7c7dd-faca-a3b9-260d-c777c66a8f2d",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2270,7 +2216,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "3d33892f-ce0c-383b-a62d-f5b936d4a39f",
+				uuid = "a4c76b26-49b5-b12a-7e79-ec142cfb4d76",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -2281,7 +2227,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "a47effa0-79cc-c08c-25c4-a02ec8000390",
+				uuid = "c6e85089-fc17-dc1d-6efc-61e3d8e34719",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2295,7 +2241,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "e22cb51b-ea7d-40ef-70e4-aed56f53940b",
+				uuid = "f4b312f0-d369-a79c-1e17-625e4017d9c0",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2309,7 +2255,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "c0160f34-f5ac-e938-8c59-c7324b40fd64",
+				uuid = "f352c455-7d89-feb1-b6f1-b24f1ef96165",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2323,7 +2269,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "94afbeba-8765-772e-182b-e98cbf0fb5ea",
+				uuid = "75f59a27-4d65-8d83-c5fa-2e7de5812ef7",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2337,7 +2283,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "f92f5bc6-6724-9302-5cb4-67dc6bdcccb6",
+				uuid = "08ada14b-5785-e6df-0f6f-dcad00e0c15b",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2351,7 +2297,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "5f6da965-1aa0-6569-7e70-8b670e45b515",
+				uuid = "4338e5d6-6bfd-80b2-9a68-5dfc19ba3c26",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2362,7 +2308,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "446a3070-be55-3edc-0583-bc02b2fe4260",
+				uuid = "3b2c4379-67c5-08cd-da30-09bfce274d89",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2376,7 +2322,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "bad5592e-0cca-a452-b4ac-deb8bd861b5e",
+				uuid = "6321fced-828a-0cc9-cfe4-db0b8ddba3fd",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2390,7 +2336,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "1c001903-4451-655f-98df-96f1b4285533",
+				uuid = "8624955c-5222-c490-7d62-87f682a4c9ec",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2404,7 +2350,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "077414c4-f504-46c8-a8c5-653e9011b5f4",
+				uuid = "3f9d5045-4e98-1a61-9317-4513fa91c155",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2418,7 +2364,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "4333a53f-4488-aca3-7918-efdd0a6e50ef",
+				uuid = "6eaf2748-ed34-74f4-7b96-4a8a29c46b58",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2432,7 +2378,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "19b8dcd0-44d1-2aec-4af4-260acf5ed700",
+				uuid = "a44a7af7-43b1-84db-a9bb-145d5b37f747",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2443,7 +2389,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "a0a4936c-64b4-ec80-e619-ac02f7ce92dc",
+				uuid = "1b68ad79-a303-5315-a88b-b8eb3c2f1049",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -2454,7 +2400,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "f7454f8d-06c6-b2e1-9455-aa17e408fc7d",
+				uuid = "164daaf8-3a0a-4ee4-437e-7ee683625f88",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2468,7 +2414,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "79fbe77f-0fd3-d13b-7fe9-66e1f472fb2f",
+				uuid = "cd9b4f08-5709-f70c-9dc2-ad860c0d5618",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2479,7 +2425,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "99397126-0944-96ea-36a0-66c892303e16",
+				uuid = "874a6287-7393-77b3-b7af-f24da32de3d7",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2493,7 +2439,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "35fd9d2c-b05e-ad90-a5da-17bea7569adc",
+				uuid = "92f64fb3-e615-7c5f-55d6-bea96dd59fc3",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2504,7 +2450,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "3ea19221-1ff3-a14d-47c8-108bd4381291",
+				uuid = "ea2d364c-b6c9-5510-a100-e7ea15b28d9c",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2518,7 +2464,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "a64c48f2-dbe6-9d26-0bea-e0689d082ea2",
+				uuid = "4a6c9401-b301-7e1d-a894-a81bc3fc8151",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2529,7 +2475,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "1d444073-0fb4-7f5f-b873-e7b98d0b2fe3",
+				uuid = "44c48af2-5056-9e66-2d32-2f64843a16c2",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2543,7 +2489,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "55d69409-5008-04fd-bd51-d0d75f02a8f9",
+				uuid = "ae28fbaa-e6af-1f46-04ab-cc4c37d2b2fa",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2554,7 +2500,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "2113d4a4-1234-e490-a8c0-b302fe24e1d4",
+				uuid = "6e5d08e9-c488-11cd-66bb-5833426b4079",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2568,7 +2514,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "80d5d7a4-d1c3-5d98-7fd5-3dca973a7254",
+				uuid = "d4eef681-f497-874d-195e-ba43372fd551",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -2582,7 +2528,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "84fa91c7-519d-0403-0aa9-c3194f9bdbb7",
+				uuid = "114bf640-14ae-f794-93b3-798eeff64250",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2596,7 +2542,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "fe943f56-d32b-0262-9d72-04903d316686",
+				uuid = "b9889b19-3aa3-b82d-5504-422f482b5369",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2607,7 +2553,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "07d40a43-01d8-ecf7-b463-c295e18d2f33",
+				uuid = "bdb9d23a-2436-8696-5cb0-a04060c6c5ca",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2621,7 +2567,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "f172c7ba-c92d-9e1e-1ffb-c7d81bd2beea",
+				uuid = "d41b14c3-6706-c8cf-6937-257d82402d13",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2635,7 +2581,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "69882b00-31a5-909c-c8f9-f42615e51870",
+				uuid = "4e218e8b-8c41-57ef-e4e5-496dcf785bdb",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2649,7 +2595,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "553676f6-a325-2ae2-e17e-00acbe5055e6",
+				uuid = "234c6daf-1f11-7863-5966-3b91c958f1bf",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2663,7 +2609,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "417feedc-0244-3ac0-b74c-c0b2a41a854c",
+				uuid = "e152bd4f-73a6-872b-bf93-eff971dc535f",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2677,7 +2623,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "5341122c-2a66-e5b0-e373-65762b330c1c",
+				uuid = "bd1111c9-0191-b2b5-2938-07079beb7859",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2691,7 +2637,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "c8db7a9e-9f21-402a-d904-23583322328e",
+				uuid = "2ec83ee1-9018-bc15-b02d-22b7603e0531",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2702,7 +2648,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "9912aa1b-05df-ca7f-17a8-145d256d1ccb",
+				uuid = "0cdc17d2-682c-a5ee-b83b-4f788e28a322",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2716,7 +2662,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "b7758605-abcc-3ff1-aead-162bc3751d35",
+				uuid = "2fb219ca-1352-091e-dff3-7834499e9b1a",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2730,7 +2676,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "be2333f8-63c2-6854-c03e-59622cfc06a8",
+				uuid = "9b240753-343b-be37-b427-0ed1dcff8e63",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2741,7 +2687,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "a89a3699-1af0-82ad-4376-99abf335f4c9",
+				uuid = "9eada650-11b2-347c-1f21-c82ed4c81020",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2755,7 +2701,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "6fb63a5a-75fd-fe0e-ef57-91c0612cd04a",
+				uuid = "91fa66b5-4567-6241-4b62-84c76fec7ec5",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2766,7 +2712,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "b5381e77-9e97-eb13-363b-70a5866f1e67",
+				uuid = "15aaf9aa-e27b-97de-1189-118cc4f8cf3a",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2780,7 +2726,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "3d4df594-c799-87b8-7a7e-6116e6e57304",
+				uuid = "f8876a97-979e-a4f3-4919-c3a5bee82267",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2794,7 +2740,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "56f40784-d53f-a0e8-1b7d-acca1f4505b4",
+				uuid = "c7da7185-1744-59c1-1dfb-910ff9acdb95",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2808,7 +2754,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "810ec704-dbb4-9020-e995-4a527f623134",
+				uuid = "4347b723-cf71-2047-2406-643523657bf3",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2822,7 +2768,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "b28fef17-655b-505b-41f7-e8153c4cd247",
+				uuid = "62471b12-42a9-f6be-ec1b-9df49ab01ea2",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -2833,7 +2779,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "2d2bf20c-c4f4-4f40-1e01-3f167fabebfc",
+				uuid = "5b35363d-853c-3d49-9d50-7703cacb570d",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2847,7 +2793,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "fb56244a-5fad-0c76-9210-860cc76bf97a",
+				uuid = "317221b1-cd28-5f25-8a93-6817d12e3941",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2858,7 +2804,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "6f23ba7b-c272-584f-6fd9-fd7db7a598ab",
+				uuid = "0091fdd6-d507-4352-7202-e7f46cbf78a6",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2872,7 +2818,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "c7255aa8-7cb2-e27c-21b5-ae469ba69c98",
+				uuid = "fdba4027-e20e-c8c3-6508-2121c0029537",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2886,7 +2832,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "d602c8fe-d49e-0c42-6e74-7f30b48e226e",
+				uuid = "ebd17b85-3835-aa51-2d30-04d3b15c45d5",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2900,7 +2846,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "7856741a-c398-356e-bede-27788facabca",
+				uuid = "aebcf0c7-9c46-4043-68d5-f509d99ec317",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2914,7 +2860,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "deb444d1-5cfd-4235-2fda-df07853e1141",
+				uuid = "75532538-b14b-4e34-c42b-cb127be97fc8",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2928,7 +2874,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "c3b9ec7c-9841-3dc8-9e47-5ce213b83fec",
+				uuid = "74e14119-af97-5b6d-7862-5023dff4c929",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2942,7 +2888,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "fd64a971-9e34-9115-e930-c1375ce68261",
+				uuid = "b408135c-1cd8-fb38-4a99-3146f8fc672c",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -2953,7 +2899,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "94834fde-0a61-8a02-f624-fca85809480e",
+				uuid = "817f28f7-d44d-c3d3-fd22-dabdb5fbedc7",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2967,7 +2913,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "76a738b7-a968-e78b-3673-5165d92f03a7",
+				uuid = "48d3da1e-14d9-d58a-0f90-d6800e4ab02e",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -2981,7 +2927,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "1cbc9394-0408-cff8-9b0f-c316c6541104",
+				uuid = "81840bf3-f360-4e1f-9395-acd17f27f203",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -2995,7 +2941,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "ee5a5fa3-0f43-e6a7-963b-a92dac0d5bd3",
+				uuid = "57c7caa4-0acd-abf0-076b-de7a78fb4bf4",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -3006,7 +2952,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "d3baac4a-8917-36a6-9eb7-08041d90017a",
+				uuid = "824b08d3-d381-e3f7-7aa3-70a9ddb3a8a3",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -3020,7 +2966,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "b106d159-30af-3ecd-41e4-b4a39b1bde09",
+				uuid = "27045ee6-8df5-fbf2-1abf-2fbc8d37fa76",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -3031,7 +2977,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "1b9077c0-431e-d7ac-e91c-d0326a099430",
+				uuid = "968fbb55-bc28-0289-2438-ad53c2365865",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -3045,7 +2991,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "cfc73e82-38f0-3ab6-7046-e894eb9192f2",
+				uuid = "2702b3bd-3d80-4709-f1dc-61cb8f182d8d",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -3059,7 +3005,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "2b746ecb-0b78-8c8f-300f-1f316fb8fd7b",
+				uuid = "4e14d250-1da7-502c-962f-3182093f7e20",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -3073,7 +3019,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "54573cbc-d073-cc60-a2af-2d5a7b42e72c",
+				uuid = "ae57dcff-121d-667b-776e-c45972eb7c4f",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -3087,7 +3033,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "ca3840cd-177d-cf59-fc57-3da737ec083d",
+				uuid = "daa83e72-da52-1c66-3064-c1600228fa42",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -3098,7 +3044,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "4232e254-819c-9ed8-8287-a92ee3378484",
+				uuid = "6a254789-e892-7655-2773-aaff7c203e19",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -3112,7 +3058,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "a5018e8f-91eb-6ccb-ea6e-7905bf41317f",
+				uuid = "6a5992ac-0162-8fd0-98e1-2fb6aa3dd07c",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -3123,7 +3069,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "363d3f5a-66af-b6ce-f0cf-1b3882d38d0a",
+				uuid = "9cdebb5b-6b35-4c27-ff82-44edcc22356b",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -3137,7 +3083,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "dac4c24a-1be8-64fe-b2a1-e80ca6da977a",
+				uuid = "b70dc625-d568-ced1-0c9e-a2d38a7e89f5",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -3151,7 +3097,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "4bb02852-c2ce-14f6-de43-cdf8cab1bb82",
+				uuid = "a7117e09-d288-f405-6cc3-d28b5df9b319",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -3165,7 +3111,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "4fe277f2-1100-27ce-70e8-47bc2ba399e2",
+				uuid = "225bda2b-5676-539f-78ee-cd511bec083b",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -3179,7 +3125,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "5022eb1d-80b7-7499-2f0c-5ba3c522bdcd",
+				uuid = "43e35366-8ac9-a85a-9649-0320a0105376",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -3190,7 +3136,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "216b97f8-ed6f-48ac-f9be-a71e838139a8",
+				uuid = "1520b125-8586-6021-d3d8-fa0f800bf835",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -3204,7 +3150,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "8336e95f-1550-680b-1d36-c6319fec0b8f",
+				uuid = "6af3c6d0-5861-6394-1a41-7f761c17d720",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -3215,7 +3161,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "dfe83471-7b6d-a0c5-5ea1-09673f6a0d61",
+				uuid = "0d78416c-2919-af78-2612-b716078e3cbc",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -3226,7 +3172,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "c484ceee-dac3-43d2-2b93-d3a851ac0d1e",
+				uuid = "9d4f79b7-6429-0e73-2928-b43db48a6c07",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -3240,7 +3186,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "d08f5d30-dfd3-eafc-8fd6-d45a64e74b60",
+				uuid = "cb36d17f-29ff-2fa3-1c21-b28d85c3d54f",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -3251,7 +3197,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "5de9dbb5-8af8-3dc9-3269-f5f7c3cf8e65",
+				uuid = "52840a68-67f8-a2a4-ce85-7bd6438db478",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -3265,7 +3211,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "10c7f42b-a474-8e9f-687c-c94946a99ddb",
+				uuid = "e33786b8-9c22-3504-84cd-dcb2720c6708",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -3276,7 +3222,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "3ed3c0de-f91f-431a-04a6-9a6ca0e5088e",
+				uuid = "3fb6c1cf-4eb8-d843-d8dc-1aa132c3355f",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -3290,7 +3236,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "22593762-e32e-3a86-cc87-fe6cb186d452",
+				uuid = "5dff8fc5-b9b3-9c21-ca68-443b9184c795",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -3304,7 +3250,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "a834c1b9-ef26-a15d-978a-a4bbbf5c9569",
+				uuid = "919bfd0e-1669-924a-ff65-9dec40c52dde",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -3318,7 +3264,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "51726fc0-4a17-594c-639d-70a636660930",
+				uuid = "cb129f63-df3e-e317-0a9c-77fd376767b3",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -3332,7 +3278,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "6e808701-0923-a155-fea7-c3cb5e925871",
+				uuid = "1e614838-b09b-16f4-0380-1906ac54d088",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -3346,7 +3292,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "dc993f16-cd99-6192-3815-8110e9a73846",
+				uuid = "c76a3ef1-78b1-df35-3365-033feeddac01",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -3357,7 +3303,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "a6040a2b-ba67-408f-477a-8855a5b6ee5b",
+				uuid = "5ce5805a-9c1b-44f6-6ca1-24502c534cea",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -3371,7 +3317,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "5e37ade4-2aba-9038-753b-cbba17a71094",
+				uuid = "5cf1851f-6719-3ecb-023a-39918dad636f",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -3382,7 +3328,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "1bdd1c2d-8d37-90a9-4f8a-9683562a4b1d",
+				uuid = "9dc367f8-9a25-e02c-b4be-4d02a9636c08",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -3396,7 +3342,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "d31cc933-f47e-3ce7-cf5c-9a11e944dca3",
+				uuid = "745ee2f0-8ffc-0cbc-a819-6b3ab5bd0e40",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -3410,10 +3356,86 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "c7fec53f-58fb-9673-0ddf-b5d18f3970ef",
+				uuid = "ab5e34c4-34cc-4ad0-377a-41ea161b0314",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Mitigation - Ultima",
+				uuid = "caf446bb-31cb-b816-af5d-68443737db46",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 7549,
+							conditions = 
+							{
+								
+								{
+									"33010725-ce7b-3879-a5ba-b209c65b3ce3",
+									true,
+								},
+								
+								{
+									"83605d39-75ea-9e46-b374-7c79939217e6",
+									true,
+								},
+							},
+							name = "Feint",
+							targetType = "Current Target",
+							uuid = "fe9f42b1-51c5-4dc0-8a7b-74d71e73abda",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return AnyoneCore.Settings.Reactions.UWUEnableMitigation == true",
+							dequeueIfLuaFalse = true,
+							name = "UWU Primary",
+							uuid = "33010725-ce7b-3879-a5ba-b209c65b3ce3",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return GetCurrentRole() == \"M1\"",
+							dequeueIfLuaFalse = true,
+							name = "Roster: M1",
+							uuid = "83605d39-75ea-9e46-b374-7c79939217e6",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Mitigation - Ultima",
+				mechanicTime = 1409,
+				name = "[Mit] Viscous Aetheroplasm 2 - M1 Feint (Primary)",
+				timelineIndex = 220,
+				uuid = "f5adce2e-8407-2d4e-a013-229acfc41b0c",
+				version = 2,
+			},
 		},
 	},
 	[221] = 
@@ -3424,7 +3446,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "ff8ce290-2f3f-5524-81b5-e77ab7491bc0",
+				uuid = "2c90ec93-950f-557f-5e37-be41e7b8cf23",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -3438,7 +3460,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "5f02063b-f598-afb7-a2d2-6aa5769ea02b",
+				uuid = "3a758868-5111-0b2c-2c22-651e96f04178",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -3449,7 +3471,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
-				uuid = "709e68a6-7758-df0a-4f98-735008208516",
+				uuid = "26ad510b-fc1c-ec77-7c05-60d9abff259b",
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
@@ -3463,7 +3485,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "93ff5fec-35de-00c8-6ed8-106ee6aa719c",
+				uuid = "ebdc78d7-4587-217b-3e65-cad5a22b5827",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -3474,7 +3496,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\LPDU mits",
-				uuid = "e7c30380-6f9e-ce54-4dac-ed3e15329bf0",
+				uuid = "c80c3519-408e-6775-9a1d-bf931957fd69",
 			},
 			inheritanceRoot = "UWUReactions\\LPDU mits",
 			objectType = "folder",
@@ -3488,7 +3510,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "2ff42ac9-e6f2-6055-a51b-2bc70e0b6db9",
+				uuid = "d464bfbe-c15f-b6f2-8d51-6b48a3c1d0ce",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",
@@ -3502,7 +3524,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "UWUReactions\\Draws LPDU",
-				uuid = "19679eb2-d4ae-fa9e-55f0-8a98882fe362",
+				uuid = "78919af5-70ea-0209-4d0c-1a3790429385",
 			},
 			inheritanceRoot = "UWUReactions\\Draws LPDU",
 			objectType = "folder",

@@ -34,6 +34,14 @@ local tbl =
 						{
 							aType = "Lua",
 							actionLua = "AnyoneCore.Settings.Reactions.UWUEnableMitigation = false\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"87984fd8-aa46-6f60-abeb-b29a0c04ecd3",
+									true,
+								},
+							},
 							endIfUsed = true,
 							name = "Disable UWU mitigation toggle",
 							uuid = "29c6cc34-8d17-8ed6-8629-eacdf972af21",
@@ -43,6 +51,17 @@ local tbl =
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local Roster = AnyoneCore.Roster\nif not Roster or not Roster.current() then return false end\nlocal slot = Roster.mySlot()\nreturn slot == \"M1\" or slot == \"M2\" or slot == \"R1\" or slot == \"R2\"",
+							name = "Roster: DPS only",
+							uuid = "87984fd8-aa46-6f60-abeb-b29a0c04ecd3",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "Mits/UWU",
 				mechanicTime = 9,
