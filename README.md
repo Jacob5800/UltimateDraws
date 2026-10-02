@@ -4,7 +4,7 @@ The draws in here are mostly centered around LPDU strats in the Europe region bu
 
 Currently supported:
 
-UWU: LPDU (Beta)
+UWU: LPDU (Beta) — supports ranged, melee, and tanks.
 
 FRU: LPDU (Alpha unfinished, up to P3)
 
