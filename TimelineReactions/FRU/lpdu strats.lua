@@ -6325,6 +6325,68 @@ local tbl =
 				version = 2,
 			},
 		},
+		{
+			data = 
+			{
+				actions = 
+				{
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local a = eventArgs\nif a == nil or type(a.channelTimeMax) ~= \"number\" then self.used = true; return end\nif data.rompotFruMirrorArrowsDrawn then self.used = true; return end\n\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or not roster.current() then self.used = true; return end\nlocal slot = roster.mySlot()\nif slot == \"T1\" then slot = \"MT\" elseif slot == \"T2\" then slot = \"OT\" end\nif slot == nil then self.used = true; return end\n\nlocal mirrors = {}\nlocal elist = TensorCore.entityList(\"contentid=9317\")\nfor _, ent in pairs(elist or {}) do\n    if ent and ent.castinginfo and ent.castinginfo.channelingid == 40205 and ent.pos then\n        table.insert(mirrors, ent)\n    end\nend\nif #mirrors ~= 2 then self.used = true; return end\n\nlocal center = { x = 100, y = 0, z = 100 }\nlocal length = 3\nlocal width = 0.4\nlocal duration = math.floor(a.channelTimeMax * 1000)\nif duration <= 0 then self.used = true; return end\nlocal heading1 = TensorCore.getHeadingToTarget(mirrors[1].pos, center)\nlocal heading2 = TensorCore.getHeadingToTarget(mirrors[2].pos, center)\nlocal drawer = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .4), 2)\nlocal function draw(mirror, heading)\n    drawer:addTimedArrow(duration, mirror.pos.x, 0, mirror.pos.z, heading, length, width, nil, nil, 0, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\n\nif slot == \"M1\" then\n    draw(mirrors[1], heading1)\n    draw(mirrors[2], heading2)\nelseif slot == \"M2\" then\n    local mirrorHeading = TensorCore.getHeadingToTarget(mirrors[1].pos, mirrors[2].pos)\n    local relativeHeading = mirrorHeading - heading1\n    if relativeHeading > 0 then\n        draw(mirrors[1], heading1 - math.rad(45))\n        draw(mirrors[2], heading2 + math.rad(45))\n    else\n        draw(mirrors[1], heading1 + math.rad(45))\n        draw(mirrors[2], heading2 - math.rad(45))\n    end\nelseif slot == \"MT\" or slot == \"OT\" then\n    local mirrorHeading = TensorCore.getHeadingToTarget(mirrors[1].pos, mirrors[2].pos)\n    local relativeHeading\n    if slot == \"MT\" then\n        relativeHeading = mirrorHeading + heading1\n    else\n        relativeHeading = mirrorHeading - heading1\n    end\n    if relativeHeading > 0 then\n        draw(mirrors[1], heading1 - math.rad(75))\n        draw(mirrors[2], heading2 + math.rad(75))\n    else\n        draw(mirrors[1], heading1 + math.rad(75))\n        draw(mirrors[2], heading2 - math.rad(75))\n    end\nelseif slot == \"R1\" then\n    draw(mirrors[1], heading1 + math.rad(75))\n    draw(mirrors[2], heading2 + math.rad(75))\nelseif slot == \"R2\" then\n    draw(mirrors[1], heading1 - math.rad(75))\n    draw(mirrors[2], heading2 - math.rad(75))\nelseif slot == \"H1\" or slot == \"H2\" then\n    local mirrorHeading = TensorCore.getHeadingToTarget(mirrors[1].pos, mirrors[2].pos)\n    local relativeHeading = mirrorHeading - heading1\n    local mirror1OnLeft = relativeHeading > 0\n    for i, mirror in ipairs(mirrors) do\n        local towardCenter = TensorCore.getHeadingToTarget(mirror.pos, center)\n        local isLeftMirror = (i == 1 and mirror1OnLeft) or (i == 2 and not mirror1OnLeft)\n        if slot == \"H1\" then\n            if isLeftMirror then\n                draw(mirror, towardCenter)\n            else\n                draw(mirror, towardCenter + math.rad(22.5))\n            end\n        else\n            if not isLeftMirror then\n                draw(mirror, towardCenter)\n            else\n                draw(mirror, towardCenter - math.rad(22.5))\n            end\n        end\n    end\nend\n\ndata.rompotFruMirrorArrowsDrawn = true\nself.used = true",
+							conditions = 
+							{
+								{ "569b2041-b924-4cc7-9800-127b911ee78c", true },
+								{ "a02d8c42-6ab5-4e66-92de-e386195c33d5", true },
+							},
+							name = "Draw mirror safe-side arrows",
+							uuid = "cc786a52-9849-4c45-b8c0-c1e6b06ca9e7",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventArgType = 1,
+							eventEntityContentID = 9317,
+							name = "Mirror entity",
+							uuid = "569b2041-b924-4cc7-9800-127b911ee78c",
+							version = 3,
+						},
+					},
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventSpellID = 40205,
+							name = "Mirror cast",
+							uuid = "a02d8c42-6ab5-4e66-92de-e386195c33d5",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Draws",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 317.1,
+				name = "Rompot's reactions",
+				timeRange = true,
+				timelineIndex = 76,
+				timerStartOffset = -12,
+				uuid = "e15b8c79-2a40-4d96-a4b6-e3a2f6c84db1",
+				version = 2,
+			},
+		},
+
 	},
 	[77] = 
 	{
