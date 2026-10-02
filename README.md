@@ -1,6 +1,6 @@
-Hi please add https://github.com/Jacob5800/UltimateDraws this to your anyonecore third party sources.
+Hi please add https://github.com/Jacob5800/UltimateDraws this to your AnyoneCore third party sources.
 
-The draws in here are mostly cathered around LPDU strats in the Europe region but may work for other regions, feel free to make your own edits. 
+The draws in here are mostly centered around LPDU strats in the Europe region but may work for other regions, feel free to make your own edits. 
 
 Currently supported:
 
