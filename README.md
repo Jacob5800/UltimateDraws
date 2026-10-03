@@ -15,5 +15,5 @@ TEA: Coming soon by Ton.
 ### UWU: LPDU
 
 - Duty Helper is automatically disabled at the start of the fight. (03-10-2026)
-- Cooldowns are disabled at timeline entry 105 and re-enabled at timeline entry 300. (03-10-2026)
+- RikuDNC3's CD and Flourish Quick Toggles are set False at timeline entry 105 and True at timeline entry 300. (04-10-2026)
 - Arm's Length is used about 2 seconds before Ifrit's Vulcan Burst to prevent knockback. (03-10-2026)

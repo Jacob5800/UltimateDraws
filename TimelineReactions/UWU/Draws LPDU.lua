@@ -1967,13 +1967,35 @@ local tbl =
 			{
 				actions = 
 				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							gVar = "ACR_RikuDNC3_CD",
+							gVarValue = 2,
+							name = "CD Off",
+							uuid = "5a60008a-0bad-8310-b10b-c2e41f1a045b",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							gVar = "ACR_RikuDNC3_Flourish",
+							gVarValue = 2,
+							name = "Flourish Off",
+							uuid = "54a697e9-1526-d59a-bac0-6eb1918a56b4",
+							version = 2.1,
+						},
+					},
 				},
 				conditions = 
 				{
 				},
 				displayPath = "Cooldown Holds",
-				execute = "if AnyoneCore and AnyoneCore.Toggle then\n    AnyoneCore.Toggle(\"cd\", false)\nend\nself.used = true",
-				executeType = 2,
 				mechanicTime = 105,
 				name = "[CD] Disable at 105",
 				timelineIndex = 23,
@@ -2464,13 +2486,33 @@ local tbl =
 			{
 				actions = 
 				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							gVar = "ACR_RikuDNC3_CD",
+							name = "CD On",
+							uuid = "396bfa3f-bb6c-3950-80ec-a2034cab07a8",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							gVar = "ACR_RikuDNC3_Flourish",
+							name = "Flourish On",
+							uuid = "c4e9f1c3-b2bb-7d15-ba51-0a4ca5874680",
+							version = 2.1,
+						},
+					},
 				},
 				conditions = 
 				{
 				},
 				displayPath = "Cooldown Holds",
-				execute = "if AnyoneCore and AnyoneCore.Toggle then\n    AnyoneCore.Toggle(\"cd\", true)\nend\nself.used = true",
-				executeType = 2,
 				mechanicTime = 300,
 				name = "[CD] Enable at 300",
 				timelineIndex = 36,
