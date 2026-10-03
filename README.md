@@ -14,6 +14,6 @@ TEA: Coming soon by Ton.
 
 ### UWU: LPDU
 
-- Duty Helper is automatically disabled at the start of the fight.
-- Cooldowns are disabled at timeline entry 105 and re-enabled at timeline entry 300.
-- Arm's Length is used about 2 seconds before Ifrit's Vulcan Burst to prevent knockback.
+- Duty Helper is automatically disabled at the start of the fight. (2026-10-03)
+- Cooldowns are disabled at timeline entry 105 and re-enabled at timeline entry 300. (2026-10-03)
+- Arm's Length is used about 2 seconds before Ifrit's Vulcan Burst to prevent knockback. (2026-10-03)
