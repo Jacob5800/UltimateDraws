@@ -259,6 +259,26 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				execute = "if AnyoneCore and AnyoneCore.Settings and AnyoneCore.Settings.DutyHelper then\n    AnyoneCore.Settings.DutyHelper.enabled = false\nend\nself.used = true",
+				executeType = 2,
+				mechanicTime = 9,
+				name = "[Start] Disable Duty Helper",
+				timelineIndex = 2,
+				timerOffset = -9,
+				uuid = "e0c65691-bef4-0e2e-ab81-e430e042ca46",
+				version = 2,
+			},
+		},
 	},
 	[3] = 
 	{
@@ -1931,6 +1951,36 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Cooldown Holds",
+				uuid = "a710bf59-9652-50f6-95c5-cb63d840e226",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Cooldown Holds",
+				execute = "if AnyoneCore and AnyoneCore.Toggle then\n    AnyoneCore.Toggle(\"cd\", false)\nend\nself.used = true",
+				executeType = 2,
+				mechanicTime = 105,
+				name = "[CD] Disable at 105",
+				timelineIndex = 23,
+				uuid = "015ac8e1-e188-72b4-923e-58b2da24bca5",
+				version = 2,
+			},
+		},
 	},
 	[26] = 
 	{
@@ -2395,6 +2445,36 @@ local tbl =
 				timerEndOffset = 4,
 				timerStartOffset = 1,
 				uuid = "1261791d-ec4a-6546-8ab8-d7d54c1205f1",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Cooldown Holds",
+				uuid = "09b70b71-5be4-f0db-a898-3b2da66eb512",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Cooldown Holds",
+				execute = "if AnyoneCore and AnyoneCore.Toggle then\n    AnyoneCore.Toggle(\"cd\", true)\nend\nself.used = true",
+				executeType = 2,
+				mechanicTime = 300,
+				name = "[CD] Enable at 300",
+				timelineIndex = 36,
+				uuid = "712f6ecc-347e-0a46-9112-1e32eaf1994f",
 				version = 2,
 			},
 		},
