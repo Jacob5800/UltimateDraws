@@ -2479,6 +2479,49 @@ local tbl =
 			},
 		},
 	},
+	[39] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Knockback",
+				uuid = "80440b9b-babb-9595-84b7-cdee3af10db5",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 7548,
+							endIfUsed = true,
+							name = "Arm's Length before Vulcan Burst",
+							uuid = "930008cd-f06f-b10d-8775-4892522c38fb",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Knockback",
+				mechanicTime = 315,
+				name = "[CD] Arm's Length - Vulcan Burst",
+				timelineIndex = 39,
+				timerOffset = -2,
+				uuid = "358c5d0a-ba4f-36ee-a9c5-765eef5b4d0f",
+				version = 2,
+			},
+		},
+	},
 	[40] = 
 	{
 		
