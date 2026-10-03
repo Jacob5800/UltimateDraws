@@ -15,4 +15,4 @@ TEA: Coming soon by Ton.
 ### UWU: LPDU
 
 - Duty Helper is automatically disabled at the start of the fight.
-- Cooldowns are disabled at 1:45 and re-enabled at 5:00.
+- Cooldowns are disabled at timeline entry 105 and re-enabled at timeline entry 300.
