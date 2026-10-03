@@ -658,7 +658,7 @@ local tbl =
 							aType = "Alert",
 							alertPriority = 2,
 							alertTTS = true,
-							alertText = "Get hit by friction",
+							alertText = "Move out of barrier and Get hit by friction",
 							conditions = 
 							{
 								
@@ -691,7 +691,7 @@ local tbl =
 				mechanicTime = 51,
 				name = "Melee TTS",
 				timelineIndex = 12,
-				timerOffset = -2.5,
+				timerOffset = -2.7000000476837,
 				uuid = "5fd81d2c-7a23-e404-940b-c8c68c02b3d8",
 				version = 2,
 			},
@@ -875,10 +875,81 @@ local tbl =
 					{
 						data = 
 						{
+							displayPath = "",
+							name = "Draws - Garuda",
+							uuid = "e2c7e715-13d1-8da3-9907-8b4c33f92820",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local Roster = AnyoneCore and AnyoneCore.Roster\nif Roster == nil or Roster.current() == nil or not Roster.isReady() then return end\n\nlocal localSlot = Roster.mySlot()\nif localSlot ~= \"M1\" and localSlot ~= \"M2\" then return end\n\nlocal partySlots = {\"H1\", \"H2\", \"M1\", \"M2\", \"R1\", \"R2\"}\nfor i = 1, #partySlots do\n  local slot = partySlots[i]\n  local entityID = Roster.idOf(slot)\n  local entity = Roster.entOf(slot)\n\n  if entityID and entity and entity.pos and TensorCore.getBuff(entity, 1525, nil, 2) then\n    local pos = entity.pos\n    Argus2.addTimedCircleFilled(\n      150,\n      pos.x, pos.y, pos.z,\n      0.55, 32,\n      0x35FF0000, 0x35FF0000, nil, 0,\n      entityID, 0xFFFF0000, 1.5,\n      0, 0.15, 2,\n      false, true, Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\n  end\nend",
+							conditions = 
+							{
+								
+								{
+									"a0f5841e-12e5-b462-8ecc-35d4523597e8",
+									true,
+								},
+							},
+							displayPath = "Draws - Garuda",
+							name = "Red Thermal Low circles - 2 stacks",
+							uuid = "4ac5b8ba-39c4-ce14-82aa-72c13ffb6927",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local Roster = AnyoneCore and AnyoneCore.Roster\nreturn Roster ~= nil\n  and Roster.current() ~= nil\n  and Roster.isReady()\n  and (Roster.mySlot() == \"M1\" or Roster.mySlot() == \"M2\")",
+							dequeueIfLuaFalse = true,
+							name = "Roster ready: M1/M2",
+							uuid = "a0f5841e-12e5-b462-8ecc-35d4523597e8",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Garuda",
+				mechanicTime = 57,
+				name = "Thermal Low - Two Stack Circles (M1/M2)",
+				timeRange = true,
+				timelineIndex = 13,
+				timerEndOffset = 8,
+				timerStartOffset = -7,
+				uuid = "121f565f-1a82-c392-84af-bac17e99a206",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
 							aType = "Alert",
 							alertPriority = 2,
 							alertTTS = true,
 							alertText = "Move outside and get hit by Friction",
+							conditions = 
+							{
+								
+								{
+									"23249288-238b-cd7b-8e52-c0ddbad3a51a",
+									true,
+								},
+							},
 							uuid = "4dce1523-144f-d707-a5c6-26b3446a33af",
 							version = 2.1,
 						},
@@ -886,6 +957,18 @@ local tbl =
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local Roster = AnyoneCore and AnyoneCore.Roster\nif Roster == nil or Roster.current() == nil then\n  return false\nend\n\nlocal slot = Roster.mySlot()\nreturn slot ~= nil and slot ~= \"M1\" and slot ~= \"M2\" and slot ~= \"T2\"",
+							dequeueIfLuaFalse = true,
+							name = "Roster: not M1/M2/OT",
+							uuid = "23249288-238b-cd7b-8e52-c0ddbad3a51a",
+							version = 3,
+						},
+					},
 				},
 				mechanicTime = 57,
 				name = "Second Friction",
@@ -955,6 +1038,56 @@ local tbl =
 				uuid = "156aa6ec-fde5-2f78-8108-fc447d895332",
 			},
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = "Stay outside of barrier and get hit by Friction",
+							conditions = 
+							{
+								
+								{
+									"71eaa0eb-af0f-d515-8cae-6684e739410d",
+									true,
+								},
+							},
+							uuid = "45733463-eb59-4291-8cd9-500aaae84b2e",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local Roster = AnyoneCore and AnyoneCore.Roster\nif Roster == nil or Roster.current() == nil then\n  return false\nend\n\nlocal slot = Roster.mySlot()\nreturn slot == \"M1\" or slot == \"M2\" or slot == \"T2\"",
+							dequeueIfLuaFalse = true,
+							name = "Roster: M1/M2/OT",
+							uuid = "71eaa0eb-af0f-d515-8cae-6684e739410d",
+							version = 3,
+						},
+					},
+				},
+				mechanicTime = 57,
+				name = "Second Friction - M1/M2/OT",
+				timelineIndex = 13,
+				timerOffset = -2.5,
+				uuid = "4a8a694a-02c3-a9b8-81e1-e753d2cfe4de",
+				version = 2,
+			},
 		},
 	},
 	[14] = 
@@ -1147,7 +1280,7 @@ local tbl =
 				mechanicTime = 100,
 				name = "[Raid Call][Garuda] Double Mistral",
 				timelineIndex = 19,
-				timerOffset = -1,
+				timerOffset = -1.8999999761581,
 				uuid = "17cd5836-d9c6-7195-8de4-93d3203a2db3",
 				version = 2,
 			},
@@ -1444,8 +1577,8 @@ local tbl =
 				name = "[Dash] Wicked Wheel - VPR Slither",
 				timeRange = true,
 				timelineIndex = 21,
-				timerEndOffset = -0.35,
-				timerStartOffset = -0.45,
+				timerEndOffset = -0.34999999403954,
+				timerStartOffset = -0.44999998807907,
 				uuid = "38785df2-1fc6-5bc8-b323-c46dd6deb1bb",
 				version = 2,
 			},
@@ -2572,7 +2705,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local labels = data.uwu_relative_nails\nif not labels or not labels.nails or not labels.textIDs then\n    self.used = true\n    return\nend\n\nlocal list = {}\nfor _, nail in pairs(labels.nails) do\n    list[#list + 1] = nail\nend\nif #list ~= 4 then\n    self.used = true\n    return\nend\n\nlocal northAIndex, northBIndex = 1, 2\nlocal minDistanceSquared = math.huge\nfor i = 1, 3 do\n    for j = i + 1, 4 do\n        local dx = list[i].x - list[j].x\n        local dz = list[i].z - list[j].z\n        local distanceSquared = dx * dx + dz * dz\n        if distanceSquared < minDistanceSquared then\n            minDistanceSquared = distanceSquared\n            northAIndex = i\n            northBIndex = j\n        end\n    end\nend\n\nlocal northA = list[northAIndex]\nlocal northB = list[northBIndex]\nlocal southA\nlocal southB\nfor i = 1, 4 do\n    if i ~= northAIndex and i ~= northBIndex then\n        if not southA then\n            southA = list[i]\n        else\n            southB = list[i]\n        end\n    end\nend\n\nlocal northCenterX = (northA.x + northB.x) * 0.5\nlocal northCenterZ = (northA.z + northB.z) * 0.5\nlocal southCenterX = (southA.x + southB.x) * 0.5\nlocal southCenterZ = (southA.z + southB.z) * 0.5\nlocal northX = northCenterX - southCenterX\nlocal northZ = northCenterZ - southCenterZ\nlocal northLength = math.sqrt(northX * northX + northZ * northZ)\nif northLength < 0.01 then\n    self.used = true\n    return\nend\n\nlocal eastX = -northZ / northLength\nlocal eastZ = northX / northLength\nlocal numbers = {}\n\nlocal northASide = (northA.x - northCenterX) * eastX + (northA.z - northCenterZ) * eastZ\nnumbers[northA.id] = northASide >= 0 and 3 or 4\nlocal northBSide = (northB.x - northCenterX) * eastX + (northB.z - northCenterZ) * eastZ\nnumbers[northB.id] = northBSide >= 0 and 3 or 4\nlocal southASide = (southA.x - southCenterX) * eastX + (southA.z - southCenterZ) * eastZ\nnumbers[southA.id] = southASide >= 0 and 1 or 2\nlocal southBSide = (southB.x - southCenterX) * eastX + (southB.z - southCenterZ) * eastZ\nnumbers[southB.id] = southBSide >= 0 and 1 or 2\n\nlocal role = AnyoneCore.Roster.mySlot()\nlocal meleeOrTank = role == \"T1\" or role == \"T2\" or role == \"M1\" or role == \"M2\" or role == \"MT\" or role == \"OT\"\nlocal living = {}\nlocal lowestLivingNumber = 5\nlocal northAboveForty = false\n\nfor entityID, number in pairs(numbers) do\n    local entity = TensorCore.mGetEntity(entityID)\n    local percent = entity and entity.hp and entity.hp.percent or 0\n    if labels.textIDs[entityID] and entity and entity.hp and entity.hp.current > 0 then\n        living[entityID] = { entity = entity, number = number, percent = percent }\n        if number < lowestLivingNumber then\n            lowestLivingNumber = number\n        end\n        if meleeOrTank and (number == 3 or number == 4) and percent > 40 then\n            northAboveForty = true\n        end\n    end\nend\n\nif lowestLivingNumber == 5 then\n    self.used = true\n    return\nend\n\nlocal greenDrawer = TensorCore.getCachedDrawer(\n    0x6600FF00, 0xBB00FF00, 0xFF00FF00, 0xFF000000, 3\n)\nlocal redDrawer = TensorCore.getCachedDrawer(\n    0x660000FF, 0xBB0000FF, 0xFF0000FF, 0xFF000000, 3\n)\n\nfor _, entry in pairs(living) do\n    local isActive\n    if meleeOrTank and northAboveForty then\n        isActive = (entry.number == 3 or entry.number == 4) and entry.percent > 40\n    else\n        isActive = entry.number == lowestLivingNumber\n    end\n    local drawer = isActive and greenDrawer or redDrawer\n    local radius = isActive and 2.6 or 1.25\n    drawer:addTimedCircleOnEnt(\n        700, entry.entity.id, radius,\n        0, false, true, Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\n\nself.used = true",
+							actionLua = "local labels = data.uwu_relative_nails\nif not labels or not labels.nails or not labels.textIDs then\n    self.used = true\n    return\nend\n\nlocal list = {}\nfor _, nail in pairs(labels.nails) do\n    list[#list + 1] = nail\nend\nif #list ~= 4 then\n    self.used = true\n    return\nend\n\nlocal northAIndex, northBIndex = 1, 2\nlocal minDistanceSquared = math.huge\nfor i = 1, 3 do\n    for j = i + 1, 4 do\n        local dx = list[i].x - list[j].x\n        local dz = list[i].z - list[j].z\n        local distanceSquared = dx * dx + dz * dz\n        if distanceSquared < minDistanceSquared then\n            minDistanceSquared = distanceSquared\n            northAIndex = i\n            northBIndex = j\n        end\n    end\nend\n\nlocal northA = list[northAIndex]\nlocal northB = list[northBIndex]\nlocal southA\nlocal southB\nfor i = 1, 4 do\n    if i ~= northAIndex and i ~= northBIndex then\n        if not southA then\n            southA = list[i]\n        else\n            southB = list[i]\n        end\n    end\nend\n\nlocal northCenterX = (northA.x + northB.x) * 0.5\nlocal northCenterZ = (northA.z + northB.z) * 0.5\nlocal southCenterX = (southA.x + southB.x) * 0.5\nlocal southCenterZ = (southA.z + southB.z) * 0.5\nlocal northX = northCenterX - southCenterX\nlocal northZ = northCenterZ - southCenterZ\nlocal northLength = math.sqrt(northX * northX + northZ * northZ)\nif northLength < 0.01 then\n    self.used = true\n    return\nend\n\nlocal eastX = -northZ / northLength\nlocal eastZ = northX / northLength\nlocal numbers = {}\n\nlocal northASide = (northA.x - northCenterX) * eastX + (northA.z - northCenterZ) * eastZ\nnumbers[northA.id] = northASide >= 0 and 3 or 4\nlocal northBSide = (northB.x - northCenterX) * eastX + (northB.z - northCenterZ) * eastZ\nnumbers[northB.id] = northBSide >= 0 and 3 or 4\nlocal southASide = (southA.x - southCenterX) * eastX + (southA.z - southCenterZ) * eastZ\nnumbers[southA.id] = southASide >= 0 and 1 or 2\nlocal southBSide = (southB.x - southCenterX) * eastX + (southB.z - southCenterZ) * eastZ\nnumbers[southB.id] = southBSide >= 0 and 1 or 2\n\nlocal role = AnyoneCore.Roster.mySlot()\nlocal meleeOrTank = role == \"T1\" or role == \"T2\" or role == \"M1\" or role == \"M2\" or role == \"MT\" or role == \"OT\"\nlocal living = {}\nlocal lowestLivingNumber = 5\nlocal northAboveForty = false\n\nfor entityID, number in pairs(numbers) do\n    local entity = TensorCore.mGetEntity(entityID)\n    local percent = entity and entity.hp and entity.hp.percent or 0\n    if labels.textIDs[entityID] and entity and entity.hp and entity.hp.current > 0 then\n        living[entityID] = { entity = entity, number = number, percent = percent }\n        if number < lowestLivingNumber then\n            lowestLivingNumber = number\n        end\n        if meleeOrTank and (number == 3 or number == 4) and percent > 45 then\n            northAboveForty = true\n        end\n    end\nend\n\nif lowestLivingNumber == 5 then\n    self.used = true\n    return\nend\n\nlocal greenDrawer = TensorCore.getCachedDrawer(\n    0x6600FF00, 0xBB00FF00, 0xFF00FF00, 0xFF000000, 3\n)\nlocal redDrawer = TensorCore.getCachedDrawer(\n    0x660000FF, 0xBB0000FF, 0xFF0000FF, 0xFF000000, 3\n)\n\nfor _, entry in pairs(living) do\n    local isActive\n    if meleeOrTank and northAboveForty then\n        isActive = (entry.number == 3 or entry.number == 4) and entry.percent > 45\n    else\n        isActive = entry.number == lowestLivingNumber\n    end\n    local drawer = isActive and greenDrawer or redDrawer\n    local radius = isActive and 2.6 or 1.25\n    drawer:addTimedCircleOnEnt(\n        700, entry.entity.id, radius,\n        0, false, true, Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\n\nself.used = true",
 							name = "Nail Prep and Priority Circles",
 							uuid = "6c87a696-e415-cdae-a841-227915a4f1e1",
 							version = 2.1,
@@ -2827,7 +2960,7 @@ local tbl =
 							alertPriority = 2,
 							alertScale = 0.89999997615814,
 							alertTTS = true,
-							alertText = "MELEE: BURN DPS-CLOSE NAIL TO 40%, THEN FOLLOW ORDER",
+							alertText = "DPS-CLOSE NAIL TO 40%, THEN FOLLOW ORDER",
 							conditions = 
 							{
 								
@@ -2953,6 +3086,14 @@ local tbl =
 							alertPriority = 2,
 							alertTTS = true,
 							alertText = "DPS nails low then follow order",
+							conditions = 
+							{
+								
+								{
+									"6608616e-a34c-28a0-b982-3b5879bf6cdb",
+									true,
+								},
+							},
 							uuid = "ff67f309-11bd-9c44-8a0d-467f368abeef",
 							version = 2.1,
 						},
@@ -2960,6 +3101,17 @@ local tbl =
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local Roster = AnyoneCore and AnyoneCore.Roster\nif not Roster or not Roster.current() or not Roster.isReady() then return false end\nlocal slot = Roster.mySlot()\nif not slot then return false end\nreturn slot ~= \"M1\" and slot ~= \"M2\"",
+							name = "Roster: Everyone except M1/M2",
+							uuid = "6608616e-a34c-28a0-b982-3b5879bf6cdb",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "[Raid calls]",
 				mechanicTime = 328,
@@ -3356,7 +3508,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local role = GetCurrentRole()\nif role ~= \"R1\" and role ~= \"R2\" then self.used = true; return end\n\nlocal route = data.uwu_eruption_bait_route\nif not route or route.role ~= role or not route.step or route.step < 1 or route.step > 4 then\n    self.used = true\n    return\nend\n\nif route.drawIds and Argus and Argus.deleteTimedShape then\n    for _, drawID in ipairs(route.drawIds) do\n        if drawID then pcall(Argus.deleteTimedShape, drawID) end\n    end\nend\nroute.drawIds = {}\n\nlocal duration = 12000\nlocal drawer = TensorCore.getCachedDrawer(\n    0xFF66FF99, 0xFF00AA66, 0xFF006644, 0xFFFFFFFF, 2,\n    nil, Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n)\nlocal function keepDraw(drawID)\n    if drawID then route.drawIds[#route.drawIds + 1] = drawID end\nend\nlocal function drawCircle(position)\n    keepDraw(drawer:addTimedCircle(\n        duration, position.x, position.y, position.z, 0.85, 0, false, true,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    ))\nend\nlocal function drawMoveArrow(fromPosition, toPosition)\n    local distance = TensorCore.getDistance2d(fromPosition, toPosition)\n    if not distance or distance <= 0.25 then return end\n    local tipLength = math.min(1.5, distance * 0.35)\n    keepDraw(drawer:addTimedArrow(\n        duration, fromPosition.x, fromPosition.y, fromPosition.z,\n        TensorCore.getHeadingToTarget(fromPosition, toPosition),\n        math.max(0.1, distance - tipLength), 1.0, tipLength, 2.3, 0, false,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    ))\nend\n\nlocal completedStep = route.step\nroute.step = completedStep + 1\nif completedStep == 1 then\n    drawCircle(route.hit1)\n    drawMoveArrow(route.hit1, route.hit2)\nelseif completedStep == 2 then\n    drawCircle(route.hit2)\n    keepDraw(drawer:addTimedLine(\n        duration,\n        route.hit2.x, route.hit2.y, route.hit2.z,\n        route.middle.x, route.middle.y, route.middle.z,\n        1.0, 1.0, 0\n    ))\n    drawMoveArrow(route.middle, route.hit3)\nelseif completedStep == 3 then\n    drawCircle(route.hit3)\n    drawMoveArrow(route.hit3, route.hit4)\nelse\n    drawCircle(route.hit4)\n    drawMoveArrow(route.hit4, route.group)\nend\n\nself.used = true",
+							actionLua = "local Roster = AnyoneCore and AnyoneCore.Roster\nif not Roster or not Roster.current() or not Roster.isReady() then self.used = true; return end\nlocal role = Roster.mySlot()\nif role ~= \"R1\" and role ~= \"R2\" then self.used = true; return end\nif role ~= \"R1\" and role ~= \"R2\" then self.used = true; return end\n\nlocal route = data.uwu_eruption_bait_route\nif not route or route.role ~= role or not route.step or route.step < 1 or route.step > 4 then\n    self.used = true\n    return\nend\n\nif route.drawIds and Argus and Argus.deleteTimedShape then\n    for _, drawID in ipairs(route.drawIds) do\n        if drawID then pcall(Argus.deleteTimedShape, drawID) end\n    end\nend\nroute.drawIds = {}\n\nlocal duration = 12000\nlocal drawer = TensorCore.getCachedDrawer(\n    0xFF66FF99, 0xFF00AA66, 0xFF006644, 0xFFFFFFFF, 2,\n    nil, Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n)\nlocal function keepDraw(drawID)\n    if drawID then route.drawIds[#route.drawIds + 1] = drawID end\nend\nlocal function drawCircle(position)\n    keepDraw(drawer:addTimedCircle(\n        duration, position.x, position.y, position.z, 0.85, 0, false, true,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    ))\nend\nlocal function drawMoveArrow(fromPosition, toPosition)\n    local distance = TensorCore.getDistance2d(fromPosition, toPosition)\n    if not distance or distance <= 0.25 then return end\n    local tipLength = math.min(1.5, distance * 0.35)\n    keepDraw(drawer:addTimedArrow(\n        duration, fromPosition.x, fromPosition.y, fromPosition.z,\n        TensorCore.getHeadingToTarget(fromPosition, toPosition),\n        math.max(0.1, distance - tipLength), 1.0, tipLength, 2.3, 0, false,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    ))\nend\n\nlocal completedStep = route.step\nroute.step = completedStep + 1\nif completedStep == 1 then\n    drawCircle(route.hit1)\n    drawMoveArrow(route.hit1, route.hit2)\nelseif completedStep == 2 then\n    drawCircle(route.hit2)\n    keepDraw(drawer:addTimedLine(\n        duration,\n        route.hit2.x, route.hit2.y, route.hit2.z,\n        route.middle.x, route.middle.y, route.middle.z,\n        1.0, 1.0, 0\n    ))\n    drawMoveArrow(route.middle, route.hit3)\nelseif completedStep == 3 then\n    drawCircle(route.hit3)\n    drawMoveArrow(route.hit3, route.hit4)\nelse\n    drawCircle(route.hit4)\n    drawMoveArrow(route.hit4, route.group)\nend\n\nself.used = true",
 							conditions = 
 							{
 								
@@ -4535,56 +4687,6 @@ local tbl =
 			},
 			objectType = "folder",
 		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "ACR",
-							gVar = "ACR_RikuMNK3_Hotbar_Thunderclap",
-							uuid = "068be982-8f6c-d74d-bc4c-6e5e7f6cc2a8",
-							variableTogglesType = 2,
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							jobValue = "MONK",
-							uuid = "0c44f3b9-3661-0dd7-8bd4-3bee270fcb69",
-							version = 3,
-						},
-					},
-				},
-				mechanicTime = 600,
-				name = "MOVE!",
-				timelineIndex = 74,
-				timerOffset = -1.5,
-				uuid = "2eed8cb6-833c-6385-bbc6-e333f9f61e62",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "[Raid calls]",
-				uuid = "4377542a-5521-b13e-9500-bf03068fb3ce",
-			},
-			objectType = "folder",
-		},
 	},
 	[78] = 
 	{
@@ -4715,7 +4817,7 @@ local tbl =
 							aType = "Alert",
 							alertPriority = 3,
 							alertTTS = true,
-							alertText = "Go opposite of safespot",
+							alertText = "Go opposite of Titan ",
 							alertVolume = 81,
 							uuid = "1cf5df1d-68f6-aec1-b949-8f2e3f39e09a",
 							version = 2.1,
@@ -4728,7 +4830,7 @@ local tbl =
 				mechanicTime = 631,
 				name = "MOVE!",
 				timelineIndex = 82,
-				timerOffset = -3.0999999046326,
+				timerOffset = -3.7999999523163,
 				uuid = "44fad792-05cc-d9e9-9cd5-e43b5204e24b",
 				version = 2,
 			},
@@ -4834,6 +4936,7 @@ local tbl =
 				{
 				},
 				displayPath = "Draws - Titan LPDU",
+				enabled = false,
 				mechanicTime = 639,
 				name = "[Draw][LPDU][Titan] Gaol 1 Floor Markers",
 				timeRange = true,
@@ -4878,6 +4981,7 @@ local tbl =
 				{
 				},
 				displayPath = "[Raid calls]",
+				enabled = false,
 				mechanicTime = 639,
 				name = "[Raid Call][Titan] Gaols 1",
 				timelineIndex = 85,
@@ -4990,16 +5094,26 @@ local tbl =
 		{
 			data = 
 			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "daee94f3-f2a7-dbd2-b64d-5cc0f70041c1",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
 				actions = 
 				{
 					
 					{
 						data = 
 						{
-							aType = "Lua",
-							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then self.used = true return end\nlocal center = { x = 100, y = player.pos.y, z = 100 }\nlocal dx = player.pos.x - center.x\nlocal dz = player.pos.z - center.z\nlocal radius = math.sqrt(dx * dx + dz * dz)\nif radius < 6 then dx = 0 dz = -1 radius = 12.5 else radius = math.max(10,math.min(15,radius)) end\nlocal angle = math.atan2(dx,dz)\nlocal nextAngle = angle - math.pi / 4\nlocal target = { x = center.x + math.sin(nextAngle) * radius, y = center.y, z = center.z + math.cos(nextAngle) * radius }\nlocal distance = TensorCore.getDistance2d(player.pos,target)\nif distance > 0.2 then\n    local tipLength = math.min(1.8,distance*0.35)\n    local drawer = TensorCore.getCachedDrawer(0xFF99FF99,0xFF33CC66,0xFF168844,0xFFFFFFFF,2)\n    drawer:addTimedArrow(9000,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,target),math.max(0.1,distance-tipLength),1.0,tipLength,2.3,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nlocal drawer = TensorCore.getCachedDrawer(0x5533CC66,0x5533CC66,0xAA33CC66,0xFFFFFFFF,2)\ndrawer:addTimedCircle(9000,target.x,target.y,target.z,1.25,0,false,true)\nAnyoneCore.addTimedWorldText(9000,\"MARIO KART: ROTATE CLOCKWISE\",{x=target.x,y=target.y+1.5,z=target.z},0xFF99FF99,true,1.0)\nself.used = true",
-							name = "Guide",
-							uuid = "19e735dc-2619-7340-b703-c8151484f899",
+							aType = "Alert",
+							alertTTS = true,
+							alertText = "Dodge 2x + landslides",
+							uuid = "dd364a2e-4391-2895-ab8f-1f1d9ef7af30",
 							version = 2.1,
 						},
 					},
@@ -5007,26 +5121,13 @@ local tbl =
 				conditions = 
 				{
 				},
-				displayPath = "Draws - Titan LPDU",
 				mechanicTime = 666,
-				name = "[Draw][LPDU][Titan] Mario Kart 1",
-				timeRange = true,
+				name = "[Raid Call][UWU] Dodge 2x + Landslides 664",
 				timelineIndex = 90,
-				timerEndOffset = 6,
-				timerStartOffset = -5,
-				uuid = "c21d73db-0dab-5df7-865d-0d64c554430a",
+				timerOffset = -2,
+				uuid = "b95ec6d9-9d3a-4ce1-895a-7651729fcbb9",
 				version = 2,
 			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "[Raid calls]",
-				uuid = "daee94f3-f2a7-dbd2-b64d-5cc0f70041c1",
-			},
-			objectType = "folder",
 		},
 	},
 	[95] = 
@@ -5100,7 +5201,7 @@ local tbl =
 				mechanicTime = 684,
 				name = "MOVE!",
 				timelineIndex = 95,
-				timerOffset = -2.5,
+				timerOffset = -3.5,
 				uuid = "4ec54fac-927f-b3c8-b26c-f147e58e68c6",
 				version = 2,
 			},
@@ -5248,6 +5349,48 @@ local tbl =
 			},
 		},
 	},
+	[96] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "0bcf385d-cc45-3ef2-98af-34eadd0469a1",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertText = "Dodge Landslide",
+							uuid = "f7d833fc-fcdb-359b-9dbb-71c19250ac73",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "[Raid calls]",
+				mechanicTime = 699,
+				name = "[Raid Call][Titan] Dodge Landslide 2s early",
+				timelineIndex = 96,
+				timerOffset = -2,
+				uuid = "8ea152dd-978b-b1d4-9b71-396236ad9eea",
+				version = 2,
+			},
+		},
+	},
 	[98] = 
 	{
 		
@@ -5377,7 +5520,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then self.used=true return end\n\nlocal center={x=100,y=player.pos.y,z=100}\nlocal targetEntity=TensorCore.mGetTarget()\nlocal heading=targetEntity and targetEntity.pos and targetEntity.pos.h\nif not heading then heading=math.pi end\n\nlocal slot=AnyoneCore.Roster.mySlot()\nlocal isRanged=(slot==\"H1\" or slot==\"H2\" or slot==\"R1\" or slot==\"R2\")\nlocal roleAngle=heading\nlocal stepSign=1\nif isRanged then\n    roleAngle=heading+math.pi\n    stepSign=-1\nend\n\nlocal radius=12.5\nlocal p0={x=center.x+math.sin(roleAngle)*radius,y=center.y,z=center.z+math.cos(roleAngle)*radius}\nlocal p1Angle=roleAngle+stepSign*math.pi/4\nlocal p1={x=center.x+math.sin(p1Angle)*radius,y=center.y,z=center.z+math.cos(p1Angle)*radius}\nlocal p2={x=center.x+math.sin(roleAngle)*radius,y=center.y,z=center.z+math.cos(roleAngle)*radius}\nlocal p3Angle=roleAngle-stepSign*math.pi/4\nlocal p3={x=center.x+math.sin(p3Angle)*radius,y=center.y,z=center.z+math.cos(p3Angle)*radius}\n\nlocal guide=TensorCore.getCachedDrawer(0xFF99FF99,0xFF33CC66,0xFF168844,0xFFFFFFFF,2)\nlocal firstTimeout=1800\nlocal segmentTimeout=2000\n\nlocal distance=TensorCore.getDistance2d(player.pos,p0)\nif distance>0.2 then\n    local tip=math.min(1.2,distance*0.3)\n    guide:addTimedArrow(\n        firstTimeout,\n        player.pos.x,player.pos.y,player.pos.z,\n        TensorCore.getHeadingToTarget(player.pos,p0),\n        math.max(0.1,distance-tip),\n        0.75,tip,1.7,0,false,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\n\nlocal route1=TensorCore.getDistance2d(p0,p1)\nlocal route2=TensorCore.getDistance2d(p1,p2)\nlocal route3=TensorCore.getDistance2d(p2,p3)\n\nguide:addTimedArrow(\n    segmentTimeout,\n    p0.x,p0.y,p0.z,\n    TensorCore.getHeadingToTarget(p0,p1),\n    math.max(0.1,route1-0.8),\n    0.8,1.0,1.9,1800,false,\n    Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n)\nguide:addTimedArrow(\n    segmentTimeout,\n    p1.x,p1.y,p1.z,\n    TensorCore.getHeadingToTarget(p1,p2),\n    math.max(0.1,route2-0.8),\n    0.8,1.0,1.9,3800,false,\n    Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n)\nguide:addTimedArrow(\n    segmentTimeout,\n    p2.x,p2.y,p2.z,\n    TensorCore.getHeadingToTarget(p2,p3),\n    math.max(0.1,route3-0.8),\n    0.8,1.0,1.9,5800,false,\n    Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n)\n\nAnyoneCore.addTimedWorldText(\n    firstTimeout,\n    isRanged and \"BOMB BOULDER: RANGED/HEALER BACK\" or \"BOMB BOULDER: TANK/MELEE FRONT\",\n    {x=p0.x,y=p0.y+1.5,z=p0.z},\n    0xFF99FF99,true,0.9\n)\nself.used=true",
+							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then self.used=true return end\n\nlocal center={x=100,y=player.pos.y,z=100}\nlocal targetEntity=TensorCore.mGetTarget()\nlocal heading=targetEntity and targetEntity.pos and targetEntity.pos.h\nif not heading then heading=math.pi end\n\nlocal slot=AnyoneCore.Roster.mySlot()\nlocal isRanged=(slot==\"H1\" or slot==\"H2\" or slot==\"R1\" or slot==\"R2\")\nlocal roleAngle=heading\nlocal stepSign=1\nif isRanged then\n    roleAngle=heading+math.pi\n    stepSign=-1\nend\n\nlocal radius=12.5\nlocal p0={x=center.x+math.sin(roleAngle)*radius,y=center.y,z=center.z+math.cos(roleAngle)*radius}\nlocal p1Angle=roleAngle+stepSign*math.pi/4\nlocal p1={x=center.x+math.sin(p1Angle)*radius,y=center.y,z=center.z+math.cos(p1Angle)*radius}\nlocal p2={x=center.x+math.sin(roleAngle)*radius,y=center.y,z=center.z+math.cos(roleAngle)*radius}\nlocal p3Angle=roleAngle-stepSign*math.pi/4\nlocal p3={x=center.x+math.sin(p3Angle)*radius,y=center.y,z=center.z+math.cos(p3Angle)*radius}\n\nlocal guide=TensorCore.getCachedDrawer(0xFF99FF99,0xFF33CC66,0xFF168844,0xFFFFFFFF,2)\nlocal firstTimeout=1800\nlocal segmentTimeout=2000\n\nlocal distance=TensorCore.getDistance2d(player.pos,p0)\nif distance>0.2 then\n    local tip=math.min(1.2,distance*0.3)\n    guide:addTimedArrow(\n        firstTimeout,\n        player.pos.x,player.pos.y,player.pos.z,\n        TensorCore.getHeadingToTarget(player.pos,p0),\n        math.max(0.1,distance-tip),\n        0.75,tip,1.7,0,false,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\n\nlocal route1=TensorCore.getDistance2d(p0,p1)\nlocal route2=TensorCore.getDistance2d(p1,p2)\n\nguide:addTimedArrow(\n    segmentTimeout,\n    p0.x,p0.y,p0.z,\n    TensorCore.getHeadingToTarget(p0,p1),\n    math.max(0.1,route1-0.8),\n    0.8,1.0,1.9,1800,false,\n    Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n)\nguide:addTimedArrow(\n    segmentTimeout,\n    p1.x,p1.y,p1.z,\n    TensorCore.getHeadingToTarget(p1,p2),\n    math.max(0.1,route2-0.8),\n    0.8,1.0,1.9,3800,false,\n    Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n)\n\nAnyoneCore.addTimedWorldText(\n    firstTimeout,\n    isRanged and \"BOMB BOULDER: RANGED/HEALER BACK\" or \"BOMB BOULDER: TANK/MELEE FRONT\",\n    {x=p0.x,y=p0.y+1.5,z=p0.z},\n    0xFF99FF99,true,0.9\n)\nself.used=true",
 							name = "Guide",
 							uuid = "eb61ff72-81f6-6917-bf66-7be072ff92d3",
 							version = 2.1,
@@ -5388,7 +5531,6 @@ local tbl =
 				{
 				},
 				displayPath = "Draws - Titan LPDU",
-				enabled = false,
 				mechanicTime = 722,
 				name = "[Draw][LPDU][Titan] Mario Kart 2",
 				timeRange = true,
@@ -5685,7 +5827,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local player=TensorCore.mGetPlayer()\nif not player or not player.pos then self.used=true return end\nlocal duration=4500\nlocal dest={x=100,y=player.pos.y,z=100}\nlocal distance=TensorCore.getDistance2d(player.pos,dest)\nif distance>0.3 then\n local tip=math.min(1.7,distance*0.35)\n local drawer=TensorCore.getCachedDrawer(0xFF33FF66,0xFF00CC44,0xFFFFFFFF,0xFF000000,4)\n drawer:addTimedArrow(duration,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,dest),math.max(0.1,distance-tip),1.2,tip,2.5,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nAnyoneCore.addTimedWorldText(duration,\"MOVE TO MIDDLE\",{x=dest.x,y=dest.y+1.1,z=dest.z},0xFF33FF66,true,1.1)\nself.used=true",
+							actionLua = "local player=TensorCore.mGetPlayer()\nif not player or not player.pos then self.used=true return end\nlocal duration=6000\nlocal dest={x=100,y=player.pos.y,z=100}\nlocal distance=TensorCore.getDistance2d(player.pos,dest)\nif distance>0.3 then\n local tip=math.min(1.7,distance*0.35)\n local drawer=TensorCore.getCachedDrawer(0xFF33FF66,0xFF00CC44,0xFFFFFFFF,0xFF000000,4)\n drawer:addTimedArrow(duration,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,dest),math.max(0.1,distance-tip),1.2,tip,2.5,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nAnyoneCore.addTimedWorldText(duration,\"MOVE TO MIDDLE\",{x=dest.x,y=dest.y+1.1,z=dest.z},0xFF33FF66,true,1.1)\nself.used=true",
 							name = "Move to Middle Arrow",
 							uuid = "dc04d8cd-7087-1154-ab20-f48382c4e625",
 							version = 2.1,
@@ -6254,15 +6396,15 @@ local tbl =
 			},
 		},
 	},
-	[132] = 
+	[125] = 
 	{
 		
 		{
 			data = 
 			{
 				displayPath = "",
-				name = "Draws - Garuda",
-				uuid = "e4aa805e-c073-8bce-aaa0-c6fd4d651462",
+				name = "Draws - Ifrit",
+				uuid = "c9b80151-2e2d-7ff5-8166-bb8fce98a838",
 			},
 			objectType = "folder",
 		},
@@ -6276,74 +6418,83 @@ local tbl =
 					{
 						data = 
 						{
-							displayPath = "",
-							name = "Draws - Garuda",
-							uuid = "6c40c0b7-7ccd-6ad8-b8b4-c721ae344b47",
-						},
-						objectType = "folder",
-					},
-					
-					{
-						data = 
-						{
-							aType = "Alert",
-							alertDuration = 2500,
-							alertPriority = 3,
-							alertScale = 0.9,
-							alertTTS = true,
-							alertText = "MOVE FOR FEATHER RAIN",
-							conditions = 
-							{
-								
-								{
-									"b3283db7-f36b-2670-ae7d-7b93a95325b2",
-									true,
-								},
-							},
-							displayPath = "Draws - Garuda",
-							name = "[Alert] Feather Rain - Move 1045",
-							uuid = "5b2c9657-06ea-8d91-9af9-9dba2e048c03",
+							aType = "Lua",
+							actionLua = "local center = { x = 100, y = 0, z = 100 }\nlocal ifrit = TensorCore.getWokenEnt(1185)\nlocal garuda = TensorCore.getWokenEnt(1644)\nlocal titan = TensorCore.getWokenEnt(1801)\nlocal ultima = TensorCore.getWokenEnt(2137)\n\nif ifrit and ifrit.pos and garuda and garuda.pos and titan and titan.pos and ultima and ultima.pos then\n  local safeSpots = {}\n  for i = 1, 4 do\n    local angle = i - 1\n    table.insert(safeSpots, TensorCore.getPosInDirection(center, math.rad(angle * 90), 19))\n  end\n\n  local actualSafeSpots = {}\n  local ifritEnd = TensorCore.getPosInDirection(ifrit.pos, ifrit.pos.h, 40)\n  for _, v in pairs(safeSpots) do\n    if TensorCore.getDistance2d(v, garuda.pos) > 20\n      and TensorCore.getDistance2d(v, titan.pos) > 5\n      and TensorCore.getDistance2d(v, ifrit.pos) > 5\n      and TensorCore.getDistance2d(v, ifritEnd) > 5\n      and TensorCore.getDistance2d(v, ultima.pos) > 5 then\n      table.insert(actualSafeSpots, { pos = v, dist = TensorCore.getDistance2d(v, ultima.pos) })\n    end\n  end\n\n  table.sort(actualSafeSpots, function(a, b) return a.dist > b.dist end)\n  if actualSafeSpots[1] then\n    local sPos = actualSafeSpots[1].pos\n    local arrowDrawer = TensorCore.getCachedDrawer(0xAA00FF00, nil, 0xAA00FF00, 0xFFFFFFFF, 2)\n    arrowDrawer:addTimedArrow(5000, center.x, center.y, center.z,\n      TensorCore.getHeadingToTarget(center, sPos), 12, 0.5, nil, nil, nil, true)\n    self.used = true\n  end\nend",
+							name = "Calculate safe spot and draw arrow",
+							uuid = "247e11b0-02cf-0f61-921a-9738c4a949c2",
 							version = 2.1,
 						},
 					},
 				},
 				conditions = 
 				{
+				},
+				displayPath = "Draws - Ifrit",
+				mechanicTime = 1038,
+				name = "[Draw][LPDU][Ifrit] Crimson Cyclone Safe Spot 1038",
+				timeRange = true,
+				timelineIndex = 125,
+				timerEndOffset = 2,
+				timerStartOffset = -2.7999999523163,
+				uuid = "5506deed-8a61-1692-b3ad-53cff37e55b9",
+				version = 2,
+			},
+		},
+	},
+	[130] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ifrit",
+				uuid = "784cfe90-2fc4-6cec-bbf5-409e06ed540a",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
 					
 					{
 						data = 
 						{
-							displayPath = "",
-							name = "Draws - Garuda",
-							uuid = "c0918df2-9205-9100-8681-7c13ef34a186",
-						},
-						objectType = "folder",
-					},
-					
-					{
-						data = 
-						{
-							category = "Lua",
-							conditionLua = "return eventArgs and eventArgs.aoeID == 11085 and eventArgs.contentID == 1644 and eventArgs.friendly == false",
-							dequeueIfLuaFalse = true,
-							name = "Feather Rain AOE",
-							uuid = "b3283db7-f36b-2670-ae7d-7b93a95325b2",
-							version = 3,
+							aType = "Alert",
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = " Wait for Feather rain",
+							uuid = "88058d5c-aa30-28fa-abe3-32fb67e877ad",
+							version = 2.1,
 						},
 					},
 				},
-				displayPath = "Draws - Garuda",
-				eventType = 18,
-				mechanicTime = 1045,
-				name = "[Alert] Feather Rain - Move 1045",
-				throttleTime = 1000,
-				timeRange = true,
-				timelineIndex = 132,
-				timerEndOffset = 2,
-				timerStartOffset = -3,
-				uuid = "0c48e42c-c64b-a67f-a5ca-56e9d43a2087",
+				conditions = 
+				{
+				},
+				mechanicTime = 1040,
+				name = "[Raid Call][UWU] Wait for Feather Rain 1041.5",
+				timelineIndex = 130,
+				timerOffset = 1.5,
+				uuid = "dd60ba94-9588-1ecb-ac80-2485505e45ca",
 				version = 2,
 			},
+		},
+	},
+	[132] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Garuda",
+				uuid = "e4aa805e-c073-8bce-aaa0-c6fd4d651462",
+			},
+			objectType = "folder",
 		},
 	},
 	[133] = 
@@ -7549,6 +7700,60 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "ab340688-5144-19ab-99a0-430dfa53737d",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "LPDU Guidance",
+							uuid = "938d57e4-14e2-5cb5-a8ff-874af7b3da93",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local Roster = AnyoneCore and AnyoneCore.Roster\nif Roster == nil or Roster.current() == nil or not Roster.isReady() then return end\n\nlocal localSlot = Roster.mySlot()\nif localSlot == nil or localSlot == \"T2\" then return end\n\nlocal otID = Roster.idOf(\"T2\")\nlocal ot = Roster.entOf(\"T2\")\nif not otID or not ot or not ot.pos then return end\n\nlocal pos = ot.pos\nArgus2.addTimedCircleFilled(\n    8000,\n    pos.x, pos.y, pos.z,\n    0.55, 32,\n    0x35FF0000, 0x35FF0000, nil, 0,\n    otID, 0xFFFF0000, 1.5,\n    0, 0.15, 2,\n    false, true, Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n)\nself.used = true",
+							displayPath = "LPDU Guidance",
+							name = "Draw OT circle",
+							uuid = "083f1190-4ed3-bb82-a32f-d778916adc1d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				mechanicTime = 1091,
+				name = "[Draw][LPDU] OT Circle 1090-1098",
+				throttleTime = 8000,
+				timeRange = true,
+				timelineIndex = 144,
+				timerEndOffset = 7,
+				timerStartOffset = -1,
+				uuid = "0c196adb-7f69-971c-9d67-7a3a5c584678",
+				version = 2,
+			},
+		},
 	},
 	[146] = 
 	{
@@ -7978,15 +8183,6 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local player=TensorCore.mGetPlayer()\nif not player or not player.pos or type(player.pos.h)~=\"number\" or not eventArgs then self.used=true return end\nlocal durationMs=math.floor(((eventArgs.duration or 2.7)+(eventArgs.delay or 0))*1000)+150\nlocal elapsedMs=0\nif eventArgs.startTime then elapsedMs=TimeSince(eventArgs.startTime) end\nlocal remainingMs=durationMs-elapsedMs\nif remainingMs<=0 then self.used=true return end\nlocal heading=TensorCore.convertHeading(player.pos.h-math.pi/2)\nlocal drawer=TensorCore.getCachedDrawer(0xFF38FF54,0xFF28D940,0xFFFFFFFF,0xFF000000,3)\ndrawer:addTimedArrow(remainingMs,player.pos.x,player.pos.y,player.pos.z,heading,2.4,1.2,1.5,2.6,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nself.used=true",
-							conditions = 
-							{
-								
-								{
-									"bad1e9a1-cbd0-bb9b-bfe7-1ce8d7bb6de0",
-									true,
-								},
-							},
 							displayPath = "Draws - Titan LPDU",
 							name = "[Draw] Titan Weight of the Land - Right",
 							uuid = "80a33fde-d2d2-8f02-97ce-8cc25ef672d0",
@@ -8027,8 +8223,8 @@ local tbl =
 				throttleTime = 1000,
 				timeRange = true,
 				timelineIndex = 151,
-				timerEndOffset = 2,
-				timerStartOffset = -2,
+				timerEndOffset = -2.5,
+				timerStartOffset = -3.5,
 				uuid = "5f98b4d6-4076-3124-bb9c-355a3d9c15b7",
 				version = 2,
 			},
@@ -8120,8 +8316,8 @@ local tbl =
 				throttleTime = 1000,
 				timeRange = true,
 				timelineIndex = 153,
-				timerEndOffset = 2,
-				timerStartOffset = -2,
+				timerEndOffset = -2.5,
+				timerStartOffset = -3.5,
 				uuid = "9b89ba5b-0778-55a8-91d1-7c3ff9ffbe53",
 				version = 2,
 			},
@@ -8213,8 +8409,8 @@ local tbl =
 				throttleTime = 1000,
 				timeRange = true,
 				timelineIndex = 157,
-				timerEndOffset = 2,
-				timerStartOffset = -2,
+				timerEndOffset = -2.5,
+				timerStartOffset = -3.5,
 				uuid = "eedcc1de-c0df-2e1a-a509-3e36ab1ebb39",
 				version = 2,
 			},
@@ -9966,6 +10162,63 @@ local tbl =
 			},
 		},
 	},
+	[203] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "8549af16-527a-72aa-a563-682a8039ed63",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "[Raid calls]",
+							uuid = "c840bd79-0a04-4764-a44e-cd62456670d8",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 3500,
+							alertPriority = 2,
+							alertScale = 0.85000002384186,
+							alertTTS = true,
+							alertText = "Wait for Feather Rain, then move",
+							displayPath = "[Raid calls]",
+							name = "Wait for Feather Rain then move",
+							uuid = "2c717b78-dced-8656-8f29-0f714d170ec7",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "[Raid calls]",
+				mechanicTime = 1227,
+				name = "[Raid Call][UWU] Wait for Feather Rain then Move 1227",
+				timelineIndex = 203,
+				uuid = "0444dc24-ca71-d804-aa25-d7884ee2e1d0",
+				version = 2,
+			},
+		},
+	},
 	[204] = 
 	{
 		
@@ -10267,15 +10520,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "if data.uwu_suppression_aether_south_done then self.used=true return end\ndata.uwu_suppression_aether_south_done=true\nlocal player=TensorCore.mGetPlayer()\nif not player or not player.pos then self.used=true return end\nlocal slot=AnyoneCore.Roster.mySlot() or \"D1\"\nlocal x=(slot==\"T1\" or slot==\"T2\") and 92 or 108\nlocal dest={x=x,y=player.pos.y,z=108}\nlocal distance=TensorCore.getDistance2d(player.pos,dest)\nif distance>0.2 then\n local tip=math.min(2.0,distance*0.35)\n local drawer=TensorCore.getCachedDrawer(0xFFB6E0FF,0xFF55AAFF,0xFFFFFFFF,0xFF000000,4)\n drawer:addTimedArrow(1600,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,dest),math.max(0.1,distance-tip),1.4,tip,3.0,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nlocal label=(slot==\"T1\" or slot==\"T2\") and \"AETHEROPLASM: SOUTH LEFT\" or \"AETHEROPLASM: SOUTH RIGHT\"\nAnyoneCore.addTimedWorldText(1600,label,{x=dest.x,y=dest.y+1.2,z=dest.z},0xFFB6E0FF,true,1.1)\nself.used=true",
-							conditions = 
-							{
-								
-								{
-									"e8b73362-b7af-b600-839f-93da029a59d8",
-									true,
-								},
-							},
+							actionLua = "local state = data.uwu_aether_guidance\nif not state then\n    state = { southDone = false, phase = nil, runPhase = nil }\n    data.uwu_aether_guidance = state\nend\n\nif not state.southDone then\n    local Roster = AnyoneCore and AnyoneCore.Roster\n    if Roster and Roster.current() and Roster.isReady() then\n        local slot = Roster.mySlot()\n        local isTank = slot == \"T1\" or slot == \"T2\"\n        local knownSlot = isTank or slot == \"H1\" or slot == \"H2\" or slot == \"M1\" or slot == \"M2\" or slot == \"R1\" or slot == \"R2\"\n        if knownSlot then\n            local orbs = TensorCore.getEntityGroupList(\"ContentID\", { contentid = 2324, subgroup = \"Number\" }) or {}\n            local orbCount = 0\n            for _, orb in pairs(orbs) do\n                if orb and orb.pos then orbCount = orbCount + 1 end\n            end\n\n            if orbCount >= 4 then\n                local target\n                for _, orb in pairs(orbs) do\n                    if orb and orb.pos and (orb.pos.x < 100) == isTank and orb.pos.z > 100 then\n                        target = orb\n                        break\n                    end\n                end\n\n                local player = Roster.entOf(slot)\n                if target and player and player.pos then\n                    local distance = TensorCore.getDistance2d(player.pos, target.pos)\n                    if distance > 0.2 then\n                        local tip = math.min(2.0, distance * 0.35)\n                        local drawer = TensorCore.getCachedDrawer(0xFFB6E0FF, 0xFF55AAFF, 0xFFFFFFFF, 0xFF000000, 4)\n                        drawer:addTimedArrow(1600, player.pos.x, player.pos.y, player.pos.z, TensorCore.getHeadingToTarget(player.pos, target.pos), math.max(0.1, distance - tip), 1.4, tip, 3.0, 0, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n                    end\n                    state.southDone = true\n                    state.phase = \"south\"\n                    state.runPhase = nil\n                    data.uwu_suppression_aether_south_done = true\n                    TensorCore.addAlertText(10000, \"GO NEAR ORB\", 1.1, 2, false)\n                end\n            end\n        end\n    end\nend\n\nif state.phase and state.runPhase ~= state.phase then\n    local party = TensorCore.getEntityGroupList(\"Party\", { noAliveCheck = true }) or {}\n    local count = 0\n    local allReady = true\n    for _, member in pairs(party) do\n        count = count + 1\n        local percent = member and member.hp and member.hp.percent\n        if type(percent) ~= \"number\" or percent < 80 then\n            allReady = false\n        end\n    end\n\n    if count == 8 and allReady then\n        TensorCore.addAlertText(4000, \"RUN INTO ORB\", 1.1, 2, false)\n        state.runPhase = state.phase\n        if state.phase == \"north\" then self.used = true end\n    end\nend",
 							displayPath = "Draws - Ultima",
 							name = "South Soak Assignment",
 							uuid = "3edff3de-a032-9482-b16e-1d6eb2312139",
@@ -10285,26 +10530,15 @@ local tbl =
 				},
 				conditions = 
 				{
-					
-					{
-						data = 
-						{
-							category = "Lua",
-							conditionLua = "return eventArgs.entityContentID==2324",
-							dequeueIfLuaFalse = true,
-							name = "Ultimaplasm Added",
-							uuid = "e8b73362-b7af-b600-839f-93da029a59d8",
-							version = 3,
-						},
-					},
 				},
 				displayPath = "Draws - Ultima",
-				eventType = 5,
+				loop = true,
 				mechanicTime = 1253,
 				name = "[Draw][LPDU][Ultima] Aetheroplasm South Soak",
+				throttleTime = 250,
 				timeRange = true,
 				timelineIndex = 207,
-				timerEndOffset = 7,
+				timerEndOffset = 20,
 				timerStartOffset = 1,
 				uuid = "ea730cc3-994c-fe3e-82d8-c09ca5377103",
 				version = 2,
@@ -10331,7 +10565,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "if data.uwu_suppression_aether_north_done then self.used=true return end\nlocal orb=TensorCore.mGetEntity(eventArgs.entityID)\nif not orb or not orb.pos or orb.pos.z<=100 then self.used=true return end\ndata.uwu_suppression_aether_north_done=true\nlocal player=TensorCore.mGetPlayer()\nif not player or not player.pos then self.used=true return end\nlocal slot=AnyoneCore.Roster.mySlot() or \"D1\"\nlocal x=(slot==\"T1\" or slot==\"T2\") and 92 or 108\nlocal dest={x=x,y=player.pos.y,z=92}\nlocal distance=TensorCore.getDistance2d(player.pos,dest)\nif distance>0.2 then\n local tip=math.min(2.0,distance*0.35)\n local drawer=TensorCore.getCachedDrawer(0xFFB6E0FF,0xFF55AAFF,0xFFFFFFFF,0xFF000000,4)\n drawer:addTimedArrow(3000,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,dest),math.max(0.1,distance-tip),1.4,tip,3.0,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nlocal label=(slot==\"T1\" or slot==\"T2\") and \"AETHEROPLASM: NORTH LEFT\" or \"AETHEROPLASM: NORTH RIGHT\"\nAnyoneCore.addTimedWorldText(3000,label,{x=dest.x,y=dest.y+1.2,z=dest.z},0xFFB6E0FF,true,1.1)\nself.used=true",
+							actionLua = "if data.uwu_suppression_aether_north_done then self.used = true return end\n\nlocal Roster = AnyoneCore and AnyoneCore.Roster\nif not Roster or not Roster.current() or not Roster.isReady() then return end\n\nlocal slot = Roster.mySlot()\nlocal isTank = slot == \"T1\" or slot == \"T2\"\nlocal knownSlot = isTank or slot == \"H1\" or slot == \"H2\" or slot == \"M1\" or slot == \"M2\" or slot == \"R1\" or slot == \"R2\"\nif not knownSlot then return end\n\nlocal player = Roster.entOf(slot)\nif not player or not player.pos then return end\n\nlocal orbs = TensorCore.getEntityGroupList(\"ContentID\", { contentid = 2324, subgroup = \"Number\" }) or {}\nlocal target\nfor _, orb in pairs(orbs) do\n    if orb and orb.pos and (orb.pos.x < 100) == isTank and orb.pos.z < 100 then\n        target = orb\n        break\n    end\nend\nif not target then return end\n\nlocal distance = TensorCore.getDistance2d(player.pos, target.pos)\nif distance > 0.2 then\n    local tip = math.min(2.0, distance * 0.35)\n    local drawer = TensorCore.getCachedDrawer(0xFFB6E0FF, 0xFF55AAFF, 0xFFFFFFFF, 0xFF000000, 4)\n    drawer:addTimedArrow(3000, player.pos.x, player.pos.y, player.pos.z, TensorCore.getHeadingToTarget(player.pos, target.pos), math.max(0.1, distance - tip), 1.4, tip, 3.0, 0, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\n\nlocal state = data.uwu_aether_guidance\nif not state then\n    state = { southDone = false, phase = nil, runPhase = nil }\n    data.uwu_aether_guidance = state\nend\nstate.phase = \"north\"\nstate.runPhase = nil\ndata.uwu_suppression_aether_north_done = true\nTensorCore.addAlertText(10000, \"GO NEAR ORB\", 1.1, 2, false)\nself.used = true",
 							conditions = 
 							{
 								
@@ -10364,8 +10598,10 @@ local tbl =
 				},
 				displayPath = "Draws - Ultima",
 				eventType = 23,
+				loop = true,
 				mechanicTime = 1253,
 				name = "[Draw][LPDU][Ultima] Aetheroplasm North Soak",
+				throttleTime = 250,
 				timeRange = true,
 				timelineIndex = 207,
 				timerEndOffset = 8,
@@ -10385,7 +10621,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.uwu_post_orb_north = {seen={},count=0,done=false}\nself.used = true",
+							actionLua = "data.uwu_post_orb_north = { seen = {}, count = 0, done = false }\ndata.uwu_aether_guidance = { southDone = false, phase = nil, runPhase = nil }\ndata.uwu_suppression_aether_south_done = false\ndata.uwu_suppression_aether_north_done = false\nself.used = true",
 							conditions = 
 							{
 								
@@ -10885,6 +11121,45 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "[Raid calls]",
+				uuid = "28899742-07f1-5032-855a-fea505a2129f",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertText = "Bait eruptions then move",
+							uuid = "ea15e3a5-556b-c9d3-a895-9d8ca071e664",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "[Raid calls]",
+				mechanicTime = 1408,
+				name = "[Raid Call][UWU] Bait Eruptions then Move 1406",
+				timelineIndex = 218,
+				timerOffset = -2,
+				uuid = "0db4b121-7170-aa03-8c5b-b0e2362051bc",
+				version = 2,
+			},
+		},
 	},
 	[219] = 
 	{
@@ -11063,8 +11338,8 @@ local tbl =
 				name = "[Alert] Weight of the Land - Dodge 1505",
 				timeRange = true,
 				timelineIndex = 224,
-				timerEndOffset = 2,
-				timerStartOffset = -3,
+				timerEndOffset = -2.5,
+				timerStartOffset = -3.2000000476837,
 				uuid = "dad11a84-d526-74a8-a17f-29e15d7ece43",
 				version = 2,
 			},
@@ -11144,8 +11419,8 @@ local tbl =
 				name = "[Alert] Weight of the Land - Dodge 1508",
 				timeRange = true,
 				timelineIndex = 225,
-				timerEndOffset = 2,
-				timerStartOffset = -3,
+				timerEndOffset = -2.5,
+				timerStartOffset = -3.2,
 				uuid = "c175fc00-c7c9-cde4-bbc3-1ae624b03e76",
 				version = 2,
 			},
@@ -11238,8 +11513,8 @@ local tbl =
 				name = "[Alert] Weight of the Land - Dodge 1511",
 				timeRange = true,
 				timelineIndex = 227,
-				timerEndOffset = 2,
-				timerStartOffset = -3,
+				timerEndOffset = -2.5,
+				timerStartOffset = -3.2,
 				uuid = "dd4e44ac-9e56-e7d4-a6a1-e41d0d189efc",
 				version = 2,
 			},

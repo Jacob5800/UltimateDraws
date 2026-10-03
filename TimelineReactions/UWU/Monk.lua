@@ -2254,6 +2254,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "UWUReactions\\Draws LPDU",
+				uuid = "066a8812-2f2f-2116-9fd4-80e410fea162",
+			},
+			inheritanceRoot = "UWUReactions\\Draws LPDU",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "store\\anyone\\uwu\\main",
 				uuid = "f352c455-7d89-feb1-b6f1-b24f1ef96165",
 			},
@@ -2277,6 +2288,17 @@ local tbl =
 	},
 	[130] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "UWUReactions\\Draws LPDU",
+				uuid = "ae2cd180-e695-41ec-f253-87c2ee324c90",
+			},
+			inheritanceRoot = "UWUReactions\\Draws LPDU",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
