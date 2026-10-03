@@ -10,10 +10,6 @@ FRU: LPDU (Alpha unfinished, up to P3)
 
 TEA: Coming soon by Ton.
 
-## Contributor note
-
-When you change user-visible behavior, update the Changelog in this README with a concise entry under the relevant fight/profile. Describe what users will notice, and keep older entries. Commit the README entry with the corresponding change once it is verified.
-
 ## Changelog
 
 ### UWU: LPDU
