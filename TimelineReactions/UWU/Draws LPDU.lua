@@ -908,12 +908,17 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current() == nil or roster.mySlot() ~= \"M2\" then\n  self.used = true\n  return\nend\n\nlocal player = TensorCore.mGetPlayer()\nlocal barrierPos = _G.UWU_GarudaBarrierPosition\n\nif player and barrierPos then\n  local targetPos = barrierPos\n  local dx = 100 - barrierPos.x\n  local dz = 100 - barrierPos.z\n  local distanceToMiddle = math.sqrt(dx * dx + dz * dz)\n\n  if distanceToMiddle > 0.1 then\n    local bossSideShift = math.min(2, distanceToMiddle)\n    targetPos = {\n      x = barrierPos.x + (dx / distanceToMiddle) * bossSideShift,\n      y = barrierPos.y,\n      z = barrierPos.z + (dz / distanceToMiddle) * bossSideShift,\n    }\n  end\n\n  local sourcePos = player.pos\n  local heading = TensorCore.getHeadingToTarget(sourcePos, targetPos)\n  local totalDistance = TensorCore.getDistance2d(sourcePos, targetPos)\n  local scale = math.min(1, totalDistance / 15)\n  local baseWidth = math.max(0.5, scale)\n  local tipWidth = math.max(1.5, 3 * scale)\n  local tipLength = math.max(2, 3 * scale)\n  local baseLength = totalDistance - tipLength\n  local arrowDuration = 3000\n  local postHitDelay = math.floor(eventArgs.duration * 1000) + 3000\n\n  if baseLength > 0 then\n    local drawer = TensorCore.getCachedDrawer(\n      0xFF00FFFF,\n      0xFF0088FF,\n      0xFF0000FF,\n      0xFFFFFFFF,\n      2\n    )\n    drawer:addTimedArrow(\n      postHitDelay + arrowDuration,\n      sourcePos.x, sourcePos.y, sourcePos.z,\n      heading,\n      baseLength, baseWidth, tipLength, tipWidth,\n      postHitDelay, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\n  end\nend\n\nself.used = true",
+							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current() == nil or roster.mySlot() ~= \"M2\" then\n  self.used = true\n  return\nend\n\nlocal player = TensorCore.mGetPlayer()\nlocal barrierPos = _G.UWU_GarudaBarrierPosition\nif not player or not barrierPos then\n  return\nend\n\nlocal targetPos = barrierPos\nlocal dx = 100 - barrierPos.x\nlocal dz = 100 - barrierPos.z\nlocal distanceToMiddle = math.sqrt(dx * dx + dz * dz)\nif distanceToMiddle > 0.1 then\n  local bossSideShift = math.min(2, distanceToMiddle)\n  targetPos = {\n    x = barrierPos.x + (dx / distanceToMiddle) * bossSideShift,\n    y = barrierPos.y,\n    z = barrierPos.z + (dz / distanceToMiddle) * bossSideShift,\n  }\nend\n\nlocal sourcePos = player.pos\nlocal heading = TensorCore.getHeadingToTarget(sourcePos, targetPos)\nlocal totalDistance = TensorCore.getDistance2d(sourcePos, targetPos)\nlocal scale = math.min(1, totalDistance / 15)\nlocal baseWidth = math.max(0.5, scale)\nlocal tipWidth = math.max(1.5, 3 * scale)\nlocal tipLength = math.max(2, 3 * scale)\nlocal baseLength = totalDistance - tipLength\nif baseLength <= 0 then\n  return\nend\n\nlocal arrowDuration = 3000\nlocal drawer = TensorCore.getCachedDrawer(\n  0xFF00FFFF,\n  0xFF0088FF,\n  0xFF0000FF,\n  0xFFFFFFFF,\n  2\n)\ndrawer:addTimedArrow(\n  arrowDuration,\n  sourcePos.x, sourcePos.y, sourcePos.z,\n  heading,\n  baseLength, baseWidth, tipLength, tipWidth,\n  0, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n)\n\nlocal state = data.uwu_friction2_m2_hp_gate\nif state ~= nil then\n  state.arrowDrawn = true\nend\nself.used = true",
 							conditions = 
 							{
 								
 								{
 									"5b478b52-d61e-7bb4-98d1-ef0b4cc3508d",
+									true,
+								},
+								
+								{
+									"c8464ab1-5414-a10f-afec-9583645b29c2",
 									true,
 								},
 							},
@@ -930,21 +935,32 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return eventArgs.aoeID == 11080",
-							dequeueIfLuaFalse = true,
-							name = "Observed Friction AOE",
+							conditionLua = "local state = data.uwu_friction2_m2_hp_gate\nreturn state ~= nil and state.aoeSeen == true and state.arrowDrawn ~= true",
+							name = "Friction AOE seen; arrow pending",
 							uuid = "5b478b52-d61e-7bb4-98d1-ef0b4cc3508d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							conditionType = 2,
+							hpValue = 60,
+							name = "Party HP >=60% (lowest)",
+							partyTargetSubType = "Lowest HP",
+							uuid = "c8464ab1-5414-a10f-afec-9583645b29c2",
 							version = 3,
 						},
 					},
 				},
 				displayPath = "Draws - Garuda",
-				eventType = 18,
 				mechanicTime = 57,
 				name = "[Draw] Friction 2 - M2 Barrier Arrow",
 				timeRange = true,
 				timelineIndex = 13,
-				timerStartOffset = -3,
+				timerEndOffset = 8,
 				uuid = "ebbec822-982e-60fc-b29c-67fb4a4cc5db",
 				version = 2,
 			},
@@ -1009,6 +1025,59 @@ local tbl =
 				timerEndOffset = 8,
 				timerStartOffset = -7,
 				uuid = "121f565f-1a82-c392-84af-bac17e99a206",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local state = data.uwu_friction2_m2_hp_gate\nif state == nil then\n  state = {}\n  data.uwu_friction2_m2_hp_gate = state\nend\nstate.aoeSeen = true\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"37fba76e-489f-9e9b-b3fe-6893d9421b61",
+									true,
+								},
+							},
+							name = "Latch AOE for M2 arrow",
+							uuid = "3acc2e6d-f466-8964-8380-83f4895285f1",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.aoeID == 11080",
+							dequeueIfLuaFalse = true,
+							name = "Friction 2 AOE 11080",
+							uuid = "37fba76e-489f-9e9b-b3fe-6893d9421b61",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Garuda",
+				eventType = 18,
+				mechanicTime = 57,
+				name = "[State] Friction 2 AOE seen for M2 arrow",
+				timeRange = true,
+				timelineIndex = 13,
+				timerEndOffset = 8,
+				timerStartOffset = -3,
+				uuid = "7e53417b-46b1-675f-ac96-3a659a730bc4",
 				version = 2,
 			},
 		},
