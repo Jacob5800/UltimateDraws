@@ -1542,6 +1542,35 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertPriority = 2,
+							alertText = "Wait for Feather Rain",
+							uuid = "2dc3c7e9-bcf5-69d5-a046-96a68282fc2e",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "[Raid calls]",
+				mechanicTime = 100,
+				name = "[Raid Call][Garuda] Wait for Feather Rain",
+				timelineIndex = 19,
+				uuid = "2dbaba35-5788-6850-888d-98e57e9d9bef",
+				version = 2,
+			},
+		},
 	},
 	[21] = 
 	{
@@ -2586,6 +2615,48 @@ local tbl =
 				name = "[CD] Enable at 300",
 				timelineIndex = 36,
 				uuid = "712f6ecc-347e-0a46-9112-1e32eaf1994f",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Titan LPDU",
+				uuid = "8db3468e-1c3b-9d9a-9845-c566c974a34e",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local Roster = AnyoneCore.Roster\nif Roster and Roster.current() ~= nil and Roster.isReady() then\n  local slot = Roster.mySlot()\n\n  if slot == \"T1\" or slot == \"T2\" then\n    self.used = true\n  elseif slot then\n    local playerID = Roster.idOf(slot)\n    local player = Roster.entOf(slot)\n\n    if playerID and player and player.pos then\n      local x, y, z, isActive = Argus.getWaymarkInfo(1)\n\n      if isActive then\n        local sourcePos = player.pos\n        local targetPos = { x = x, y = sourcePos.y, z = z }\n        local heading = TensorCore.getHeadingToTarget(sourcePos, targetPos)\n        local totalDistance = TensorCore.getDistance2d(sourcePos, targetPos)\n\n        if totalDistance > 0.2 then\n          local tipLength = math.min(3.0, totalDistance * 0.4)\n          local baseLength = totalDistance - tipLength\n          local drawer = TensorCore.getStaticDrawer(0xFF32CD32, 3.0, 0)\n\n          if drawer then\n            drawer:addTimedArrow(\n              5000,\n              sourcePos.x, sourcePos.y, sourcePos.z,\n              heading,\n              baseLength, 1.2, tipLength, 2.0,\n              0, false\n            )\n            self.used = true\n          end\n        else\n          self.used = true\n        end\n      end\n    end\n  end\nend",
+							name = "Arrow to A",
+							uuid = "c724fc03-1647-43f1-8600-2f2a8035037c",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Draws - Titan LPDU",
+				mechanicTime = 300,
+				name = "[Draw][LPDU] Non-tanks to A at 302",
+				timeRange = true,
+				timelineIndex = 36,
+				timerEndOffset = 5,
+				timerStartOffset = 2,
+				uuid = "4ced9432-a97e-b246-8ee6-1e23cf4174e2",
 				version = 2,
 			},
 		},
@@ -5241,6 +5312,46 @@ local tbl =
 				uuid = "c0bd4aec-4fb3-8217-83b0-a6044b2d8ada",
 			},
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Cooldown Holds",
+				uuid = "a490ecd0-d1a8-34ab-bbe9-cbe0f9eef86d",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local api = TensorCore.API.TensorACR\nlocal toggles = api and api.getQuickToggles and api.getQuickToggles()\n\nfor _, toggle in ipairs(toggles or {}) do\n  local toggleName = toggle.name\n  if type(toggleName) == \"function\" then\n    toggleName = toggleName()\n  end\n\n  if toggleName == \"CD\" and toggle.var then\n    _G[toggle.var] = false\n    break\n  end\nend\n\nself.used = true",
+							name = "Disable active ACR CD QT",
+							uuid = "aa9db296-e641-d4e3-963b-2bb957ef0558",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Cooldown Holds",
+				mechanicTime = 600,
+				name = "[ACR][UWU] Disable CD Quick Toggle at 602",
+				timelineIndex = 74,
+				timerOffset = 2,
+				uuid = "02bd9099-3567-69f6-84e3-6bd5709902f9",
+				version = 2,
+			},
 		},
 	},
 	[78] = 

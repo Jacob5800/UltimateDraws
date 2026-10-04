@@ -30,3 +30,4 @@ TEA: Coming soon by Ton.
 - Ifrit's Crimson Cyclone safe-spot arrow at 1038 now points toward the observed northeast safe lane. (04-10-2026)
 - At timeline 1130, everyone except the Searing Wind target is guided to the south stack; the affected healer sees “South, away from party.” (04-10-2026)
 - “GO NEAR ORB” now appears as world text over the assigned orb instead of as an alert. (04-10-2026)
+- Added a waymark A arrow for non-tanks at timeline 302, a Feather Rain wait alert at 100, and a reaction at 602 that disables the active ACR CD Quick Toggle. (04-10-2026)
