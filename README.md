@@ -6,11 +6,16 @@ Currently supported:
 
 UWU: LPDU (Beta) — supports ranged, melee, and tanks.
 
-FRU: LPDU (Alpha unfinished, up to P3)
+FRU: LPDU (Alpha, through P5; replay verification pending)
 
 TEA: Coming soon by Ton.
 
 ## Changelog
+
+### FRU: LPDU
+
+- Ultimate Relativity now uses LPDU role priorities and one assigned-side arrow; Apocalypse uses roster-based water-stack flexes and role-side guidance. (04-10-2026)
+- Paradise Regained adds role tower spots and roster-based tank identities; the copied FRU draws are synced, with three AnyoneCore alternatives enabled for replay comparison. (04-10-2026)
 
 ### UWU: LPDU
 

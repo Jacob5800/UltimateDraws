@@ -2017,7 +2017,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local function stop()\n    self.used = true\nend\n\nif data.megaminx_p1flexstack == nil then\n    data.megaminx_p1flexstack = {}\nend\ntable.insert(data.megaminx_p1flexstack, {\n    tetherid = eventArgs.newTargetID,\n    sourceid = eventArgs.sourceEntityID\n})\n\nif #data.megaminx_p1flexstack ~= 2 then\n    stop()\n    return\nend\n\nlocal safeside\nif data.megaminx_p1stackflex == 0 and data.megaminx_p1stackflex_ew == 0 then\n    safeside = 0\nelseif data.megaminx_p1stackflex == 0 and data.megaminx_p1stackflex_ew == 1 then\n    safeside = 1\nelseif data.megaminx_p1stackflex == 1 and data.megaminx_p1stackflex_ew == 1 then\n    safeside = 0\nelseif data.megaminx_p1stackflex == 1 and data.megaminx_p1stackflex_ew == 0 then\n    safeside = 1\nend\nif safeside == nil then\n    stop()\n    return\nend\n\nlocal player = TensorCore.mGetPlayer()\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif player == nil or player.id == nil or roster == nil\n    or roster.current == nil or roster.mySlot == nil\n    or roster.isReady == nil or roster.idOf == nil\n    or roster.current() == nil or not roster.isReady() then\n    stop()\n    return\nend\n\nlocal slots = { \"T1\", \"T2\", \"H1\", \"H2\", \"M1\", \"M2\", \"R1\", \"R2\" }\nlocal idToSlot = {}\nfor _, slot in ipairs(slots) do\n    local id = roster.idOf(slot)\n    if id ~= nil then\n        idToSlot[id] = slot\n    end\nend\n\nlocal preySlots = {}\nlocal preyCounts = { [1] = 0, [2] = 0 }\nfor _, tether in ipairs(data.megaminx_p1flexstack) do\n    local slot = idToSlot[tether.tetherid]\n    if slot == nil then\n        stop()\n        return\n    end\n    local group = (slot == \"T1\" or slot == \"H1\" or slot == \"M1\" or slot == \"R1\") and 1 or 2\n    preyCounts[group] = preyCounts[group] + 1\n    table.insert(preySlots, { slot = slot, group = group })\nend\n\nlocal mySlot = roster.mySlot()\nlocal myGroup\nif mySlot == \"T1\" or mySlot == \"H1\" or mySlot == \"M1\" or mySlot == \"R1\" then\n    myGroup = 1\nelseif mySlot == \"T2\" or mySlot == \"H2\" or mySlot == \"M2\" or mySlot == \"R2\" then\n    myGroup = 2\nelse\n    stop()\n    return\nend\n\n-- LPDU P1: G1 north, G2 south. For two preys in one group,\n-- T > M > R > H selects the prey swapping groups; the tank from\n-- the zero-prey group swaps the other way to keep the light parties even.\nlocal finalGroup = myGroup\nlocal doubledGroup\nif preyCounts[1] == 2 then\n    doubledGroup = 1\nelseif preyCounts[2] == 2 then\n    doubledGroup = 2\nend\nif doubledGroup ~= nil then\n    local priority = {\n        T1 = 1, T2 = 1,\n        M1 = 2, M2 = 2,\n        R1 = 3, R2 = 3,\n        H1 = 4, H2 = 4\n    }\n    local swapPrey\n    local bestPriority = math.huge\n    for _, prey in ipairs(preySlots) do\n        if prey.group == doubledGroup and priority[prey.slot] < bestPriority then\n            swapPrey = prey.slot\n            bestPriority = priority[prey.slot]\n        end\n    end\n    local zeroGroup = 3 - doubledGroup\n    local tankFromZeroGroup = \"T\" .. tostring(zeroGroup)\n    if mySlot == swapPrey then\n        finalGroup = zeroGroup\n    elseif mySlot == tankFromZeroGroup then\n        finalGroup = doubledGroup\n    end\nend\n\nlocal x = safeside == 0 and 95 or 105\nlocal z = finalGroup == 1 and 95 or 105\nlocal target = { x = x, y = 0, z = z }\nlocal center = { x = 100, y = 0, z = 100 }\n-- Match the legacy LPDU stack indicator geometry: the arrow runs from arena center to this player's assigned stack spot.\nlocal heading = TensorCore.getHeadingToTarget(center, target)\nlocal arrowLength = TensorCore.getDistance2d(center, target)\nif arrowLength <= 0.1 then\n    stop()\n    return\nend\n\nlocal green = TensorCore.getStaticDrawer(\n    GUI:ColorConvertFloat4ToU32(0 / 255, 255 / 255, 0 / 255, .25),\n    2\n)\ngreen:addTimedArrow(10000, center.x, center.y, center.z, heading, arrowLength, 1, 1, 1, 0, true)\nstop()",
+							actionLua = "local function stop()\n    self.used = true\nend\n\nif data.megaminx_p1flexstack == nil then\n    data.megaminx_p1flexstack = {}\nend\ntable.insert(data.megaminx_p1flexstack, {\n    tetherid = eventArgs.newTargetID,\n    sourceid = eventArgs.sourceEntityID\n})\n\nif #data.megaminx_p1flexstack ~= 2 then\n    stop()\n    return\nend\n\nlocal safeside\nif data.megaminx_p1stackflex == 0 and data.megaminx_p1stackflex_ew == 0 then\n    safeside = 0\nelseif data.megaminx_p1stackflex == 0 and data.megaminx_p1stackflex_ew == 1 then\n    safeside = 1\nelseif data.megaminx_p1stackflex == 1 and data.megaminx_p1stackflex_ew == 1 then\n    safeside = 0\nelseif data.megaminx_p1stackflex == 1 and data.megaminx_p1stackflex_ew == 0 then\n    safeside = 1\nend\nif safeside == nil then\n    stop()\n    return\nend\n\nlocal player = TensorCore.mGetPlayer()\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif player == nil or player.id == nil or roster == nil\n    or roster.current == nil or roster.mySlot == nil\n    or roster.isReady == nil or roster.idOf == nil\n    or roster.current() == nil or not roster.isReady() then\n    stop()\n    return\nend\n\nlocal slots = { \"T1\", \"T2\", \"H1\", \"H2\", \"M1\", \"M2\", \"R1\", \"R2\" }\nlocal idToSlot = {}\nfor _, slot in ipairs(slots) do\n    local id = roster.idOf(slot)\n    if id ~= nil then\n        idToSlot[id] = slot\n    end\nend\n\nlocal preySlots = {}\nlocal preyCounts = { [1] = 0, [2] = 0 }\nfor _, tether in ipairs(data.megaminx_p1flexstack) do\n    local slot = idToSlot[tether.tetherid]\n    if slot == nil then\n        stop()\n        return\n    end\n    local group = (slot == \"T1\" or slot == \"H1\" or slot == \"M1\" or slot == \"R1\") and 1 or 2\n    preyCounts[group] = preyCounts[group] + 1\n    table.insert(preySlots, { slot = slot, group = group })\nend\n\nlocal mySlot = roster.mySlot()\nlocal myGroup\nif mySlot == \"T1\" or mySlot == \"H1\" or mySlot == \"M1\" or mySlot == \"R1\" then\n    myGroup = 1\nelseif mySlot == \"T2\" or mySlot == \"H2\" or mySlot == \"M2\" or mySlot == \"R2\" then\n    myGroup = 2\nelse\n    stop()\n    return\nend\n\n-- LPDU P1: G1 north, G2 south. For two preys in one group,\n-- T > M > R > H selects the prey swapping groups; the tank from\n-- the zero-prey group swaps the other way to keep the light parties even.\nlocal finalGroup = myGroup\nlocal doubledGroup\nif preyCounts[1] == 2 then\n    doubledGroup = 1\nelseif preyCounts[2] == 2 then\n    doubledGroup = 2\nend\nif doubledGroup ~= nil then\n    local priority = {\n        T1 = 1, T2 = 1,\n        M1 = 2, M2 = 2,\n        R1 = 3, R2 = 3,\n        H1 = 4, H2 = 4\n    }\n    local swapPrey\n    local bestPriority = math.huge\n    for _, prey in ipairs(preySlots) do\n        if prey.group == doubledGroup and priority[prey.slot] < bestPriority then\n            swapPrey = prey.slot\n            bestPriority = priority[prey.slot]\n        end\n    end\n    local zeroGroup = 3 - doubledGroup\n    local tankFromZeroGroup = \"T\" .. tostring(zeroGroup)\n    if mySlot == swapPrey then\n        finalGroup = zeroGroup\n    elseif mySlot == tankFromZeroGroup then\n        finalGroup = doubledGroup\n    end\nend\n\nlocal x = safeside == 0 and 95 or 105\nlocal z = finalGroup == 1 and 95 or 105\nlocal target = { x = x, y = 0, z = z }\nlocal center = { x = 100, y = 0, z = 100 }\n-- Match the legacy LPDU stack indicator geometry: the arrow runs from arena center to this player's assigned stack spot.\nlocal heading = TensorCore.getHeadingToTarget(center, target)\nlocal arrowLength = TensorCore.getDistance2d(center, target)\nif arrowLength <= 0.1 then\n    stop()\n    return\nend\n\nlocal green = TensorCore.getStaticDrawer(\n    GUI:ColorConvertFloat4ToU32(0 / 255, 255 / 255, 0 / 255, .45),\n    2\n)\ngreen:addTimedArrow(10000, center.x, center.y, center.z, heading, arrowLength, 2, 1.5, 3, 0, true)\n\nstop()",
 							conditions = 
 							{
 								
@@ -2374,7 +2374,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local state = data.frup1_lpdu_four_tether\nif state == nil then\n    state = {\n        records = {},\n        positionByOrder = {[1] = 1, [2] = 2, [3] = 3, [4] = 4},\n        partnerByOrder = {[1] = 3, [3] = 1, [2] = 4, [4] = 2}\n    }\n    data.frup1_lpdu_four_tether = state\nend\nstate.records = state.records or {}\nstate.positionByOrder = state.positionByOrder or {[1] = 1, [2] = 2, [3] = 3, [4] = 4}\nstate.partnerByOrder = state.partnerByOrder or {[1] = 3, [3] = 1, [2] = 4, [4] = 2}\n-- Splatoon/LPDU spots: 1 north inner, 2 south inner, 3 north outer, 4 south outer.\n-- Reset each event so a live profile edit also updates existing encounter state.\nstate.tetherPositions = {\n    [1] = {x = 100, y = 0, z = 95},\n    [2] = {x = 100, y = 0, z = 105},\n    [3] = {x = 100, y = 0, z = 93},\n    [4] = {x = 100, y = 0, z = 107}\n}\n\nlocal records = state.records\nlocal positions = state.tetherPositions\nlocal isTetherAdd = (eventArgs.newTetherID == 249 or eventArgs.newTetherID == 287)\n    and eventArgs.newTargetID ~= nil\nlocal isTetherClear = eventArgs.newTetherID == 0\n    and (eventArgs.oldTetherID == 249 or eventArgs.oldTetherID == 287)\n    and eventArgs.oldTargetID ~= nil\nlocal swapFrom = nil\nlocal swapTo = nil\nlocal swapTether = nil\n\nif isTetherAdd then\n    local record = nil\n    for _, existing in ipairs(records) do\n        if existing.id == eventArgs.newTargetID then\n            record = existing\n            break\n        end\n    end\n\n    if record ~= nil then\n        record.tether = eventArgs.newTetherID\n    elseif #records < 4 then\n        table.insert(records, {\n            id = eventArgs.newTargetID,\n            tether = eventArgs.newTetherID,\n            order = #records + 1,\n            resolved = false\n        })\n    end\nend\n\nif isTetherClear then\n    for _, record in ipairs(records) do\n        if record.id == eventArgs.oldTargetID\n            and record.tether == eventArgs.oldTetherID\n            and not record.resolved then\n            record.resolved = true\n            if record.order == 1 and not state.swapped13 then\n                local nextTether = records[3]\n                if nextTether ~= nil and not nextTether.resolved then\n                    swapFrom = positions[state.positionByOrder[3] or 3]\n                    swapTether = nextTether.tether\n                end\n                state.positionByOrder[1], state.positionByOrder[3] =\n                    state.positionByOrder[3], state.positionByOrder[1]\n                if swapFrom ~= nil then\n                    swapTo = positions[state.positionByOrder[3] or 3]\n                end\n                state.swapped13 = true\n            elseif record.order == 2 and not state.swapped24 then\n                local nextTether = records[4]\n                if nextTether ~= nil and not nextTether.resolved then\n                    swapFrom = positions[state.positionByOrder[4] or 4]\n                    swapTether = nextTether.tether\n                end\n                state.positionByOrder[2], state.positionByOrder[4] =\n                    state.positionByOrder[4], state.positionByOrder[2]\n                if swapFrom ~= nil then\n                    swapTo = positions[state.positionByOrder[4] or 4]\n                end\n                state.swapped24 = true\n            end\n            break\n        end\n    end\nend\n\nlocal player = TensorCore.mGetPlayer()\n-- Retire the initial LPDU conga arrow when the tether assignment takes over.\nlocal setupArrow = data.frup1_lpdu_conga_setup\nif type(setupArrow) == \"table\" and setupArrow.arrowUUID ~= nil\n    and ((isTetherAdd and player ~= nil and eventArgs.newTargetID == player.id)\n        or #records >= 4) then\n    Argus.deleteTimedShape(setupArrow.arrowUUID)\n    setupArrow.arrowUUID = nil\nend\nlocal center = {x = 100, y = 0, z = 100}\n-- Red marks fire/stack; blue marks lightning/spread.\nlocal stackRed = TensorCore.getStaticDrawer(\n    GUI:ColorConvertFloat4ToU32(1, .16, .12, .55), 2)\nlocal spreadBlue = TensorCore.getStaticDrawer(\n    GUI:ColorConvertFloat4ToU32(.10, .52, 1, .55), 2)\nlocal green = TensorCore.getStaticDrawer(\n    GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .25), 2)\nlocal markerRadius = 1.0\n\n-- Show only the current tether bait on each side. The second tether takes\n-- the first tether's spot after its tether clears.\nfor order, record in ipairs(records) do\n    local firstOrder = (order == 1 or order == 3) and 1 or 2\n    local secondOrder = firstOrder == 1 and 3 or 4\n    local firstRecord = records[firstOrder]\n    local activeOrder = nil\n    if firstRecord ~= nil and not firstRecord.resolved then\n        activeOrder = firstOrder\n    elseif firstRecord ~= nil and firstRecord.resolved then\n        local secondRecord = records[secondOrder]\n        if secondRecord ~= nil and not secondRecord.resolved then\n            activeOrder = secondOrder\n        end\n    end\n\n    local isActiveBait = order == activeOrder\n    local position = positions[state.positionByOrder[order] or order]\n    local isStack = record.tether == 249\n    local drawer = isStack and stackRed or spreadBlue\n\n    if isActiveBait and position ~= nil then\n        if record.markerUUID ~= nil then\n            local updated = drawer:updateTimedCircle(\n                record.markerUUID, 15000, position.x, position.y, position.z,\n                markerRadius, 0, true, false)\n            if not updated then\n                Argus.deleteTimedShape(record.markerUUID)\n                record.markerUUID = nil\n            end\n        end\n        if record.markerUUID == nil then\n            record.markerUUID = drawer:addTimedCircle(\n                15000, position.x, position.y, position.z, markerRadius, 0, true)\n        end\n    elseif record.markerUUID ~= nil then\n        Argus.deleteTimedShape(record.markerUUID)\n        record.markerUUID = nil\n    end\nend\n\nlocal targetPosition = nil\nlocal myRecord = nil\nif player ~= nil then\n    for _, record in ipairs(records) do\n        if record.id == player.id then\n            myRecord = record\n            break\n        end\n    end\nend\n\n-- The tethered player follows their own prey order and swap.\nif myRecord ~= nil and not myRecord.resolved then\n    targetPosition = positions[state.positionByOrder[myRecord.order] or myRecord.order]\nelseif #records >= 4 and player ~= nil then\n    -- LPDU conga priority: H1, H2, MT, OT, M1, M2, R1, R2.\n    -- Among non-tethered players, the first two go north and the next two south.\n    local anyTetherUnresolved = false\n    local tethered = {}\n    for _, record in ipairs(records) do\n        if not record.resolved then anyTetherUnresolved = true end\n        tethered[record.id] = true\n    end\n\n    local roster = AnyoneCore and AnyoneCore.Roster\n    if anyTetherUnresolved and roster ~= nil and roster.current() ~= nil\n        and roster.isReady() then\n        local slotOrder = {\"H1\", \"H2\", \"T1\", \"T2\", \"M1\", \"M2\", \"R1\", \"R2\"}\n        local fillers = {}\n        for _, slot in ipairs(slotOrder) do\n            local id = roster.idOf(slot)\n            if id ~= nil and not tethered[id] then\n                table.insert(fillers, slot)\n            end\n        end\n\n        local mySlot = roster.mySlot()\n        if #fillers == 4 and mySlot ~= nil then\n            for i, slot in ipairs(fillers) do\n                if slot == mySlot then\n                    targetPosition = i <= 2\n                        and {x = 100, y = 0, z = 92}\n                        or {x = 100, y = 0, z = 108}\n                    break\n                end\n            end\n        end\n    end\nend\n\n-- Color the brief forward-swap arrow for the next tether's element.\nif swapFrom ~= nil and swapTo ~= nil and swapTether ~= nil then\n    local drawer = swapTether == 249 and stackRed or spreadBlue\n    local heading = TensorCore.getHeadingToTarget(swapFrom, swapTo)\n    local distance = TensorCore.getDistance2d(swapFrom, swapTo)\n    drawer:addTimedArrow(\n        3500, swapFrom.x, swapFrom.y, swapFrom.z, heading,\n        distance, .8, .8, .8, 0, true)\nend\n\n-- Recreate the local guidance arrow after circles so it renders above them.\nif state.localArrowUUID ~= nil then\n    Argus.deleteTimedShape(state.localArrowUUID)\n    state.localArrowUUID = nil\nend\nif targetPosition ~= nil then\n    local heading = TensorCore.getHeadingToTarget(center, targetPosition)\n    local distance = TensorCore.getDistance2d(center, targetPosition) - 1\n    state.localArrowUUID = green:addTimedArrow(\n        5000, center.x, center.y, center.z, heading,\n        distance, 1, 1, 1, 0, true)\nend\n\nself.used = true",
+							actionLua = "local state = data.frup1_lpdu_four_tether\nif state == nil then\n    state = {\n        records = {},\n        positionByOrder = {[1] = 1, [2] = 2, [3] = 3, [4] = 4},\n        partnerByOrder = {[1] = 3, [3] = 1, [2] = 4, [4] = 2}\n    }\n    data.frup1_lpdu_four_tether = state\nend\nstate.records = state.records or {}\nstate.positionByOrder = state.positionByOrder or {[1] = 1, [2] = 2, [3] = 3, [4] = 4}\nstate.partnerByOrder = state.partnerByOrder or {[1] = 3, [3] = 1, [2] = 4, [4] = 2}\n-- Splatoon/LPDU spots: 1 north inner, 2 south inner, 3 north outer, 4 south outer.\n-- Reset each event so a live profile edit also updates existing encounter state.\nstate.tetherPositions = {\n    [1] = {x = 100, y = 0, z = 95},\n    [2] = {x = 100, y = 0, z = 105},\n    [3] = {x = 100, y = 0, z = 93},\n    [4] = {x = 100, y = 0, z = 107}\n}\n\nlocal records = state.records\nlocal positions = state.tetherPositions\nlocal isTetherAdd = (eventArgs.newTetherID == 249 or eventArgs.newTetherID == 287)\n    and eventArgs.newTargetID ~= nil\nlocal isTetherClear = eventArgs.newTetherID == 0\n    and (eventArgs.oldTetherID == 249 or eventArgs.oldTetherID == 287)\n    and eventArgs.oldTargetID ~= nil\nlocal swapFrom = nil\nlocal swapTo = nil\nlocal swapTether = nil\n\nif isTetherAdd then\n    local record = nil\n    for _, existing in ipairs(records) do\n        if existing.id == eventArgs.newTargetID then\n            record = existing\n            break\n        end\n    end\n\n    if record ~= nil then\n        record.tether = eventArgs.newTetherID\n    elseif #records < 4 then\n        table.insert(records, {\n            id = eventArgs.newTargetID,\n            tether = eventArgs.newTetherID,\n            order = #records + 1,\n            resolved = false\n        })\n    end\nend\n\nif isTetherClear then\n    for _, record in ipairs(records) do\n        if record.id == eventArgs.oldTargetID\n            and record.tether == eventArgs.oldTetherID\n            and not record.resolved then\n            record.resolved = true\n            if record.order == 1 and not state.swapped13 then\n                local nextTether = records[3]\n                if nextTether ~= nil and not nextTether.resolved then\n                    swapFrom = positions[state.positionByOrder[3] or 3]\n                    swapTether = nextTether.tether\n                end\n                state.positionByOrder[1], state.positionByOrder[3] =\n                    state.positionByOrder[3], state.positionByOrder[1]\n                if swapFrom ~= nil then\n                    swapTo = positions[state.positionByOrder[3] or 3]\n                end\n                state.swapped13 = true\n            elseif record.order == 2 and not state.swapped24 then\n                local nextTether = records[4]\n                if nextTether ~= nil and not nextTether.resolved then\n                    swapFrom = positions[state.positionByOrder[4] or 4]\n                    swapTether = nextTether.tether\n                end\n                state.positionByOrder[2], state.positionByOrder[4] =\n                    state.positionByOrder[4], state.positionByOrder[2]\n                if swapFrom ~= nil then\n                    swapTo = positions[state.positionByOrder[4] or 4]\n                end\n                state.swapped24 = true\n            end\n            break\n        end\n    end\nend\n\nlocal player = TensorCore.mGetPlayer()\n-- Retire the initial LPDU conga arrow when the tether assignment takes over.\nlocal setupArrow = data.frup1_lpdu_conga_setup\nif type(setupArrow) == \"table\" and setupArrow.arrowUUID ~= nil\n    and ((isTetherAdd and player ~= nil and eventArgs.newTargetID == player.id)\n        or #records >= 4) then\n    Argus.deleteTimedShape(setupArrow.arrowUUID)\n    setupArrow.arrowUUID = nil\nend\nlocal center = {x = 100, y = 0, z = 100}\n-- Red marks fire/stack; blue marks lightning/spread.\nlocal stackRed = TensorCore.getStaticDrawer(\n    GUI:ColorConvertFloat4ToU32(1, .16, .12, .55), 2)\nlocal spreadBlue = TensorCore.getStaticDrawer(\n    GUI:ColorConvertFloat4ToU32(.10, .52, 1, .55), 2)\nlocal green = TensorCore.getStaticDrawer(\n    GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .25), 2)\nlocal markerRadius = 1.0\n\n-- Show only the current tether bait on each side. The second tether takes\n-- the first tether's spot after its tether clears.\nfor order, record in ipairs(records) do\n    local firstOrder = (order == 1 or order == 3) and 1 or 2\n    local secondOrder = firstOrder == 1 and 3 or 4\n    local firstRecord = records[firstOrder]\n    local activeOrder = nil\n    if firstRecord ~= nil and not firstRecord.resolved then\n        activeOrder = firstOrder\n    elseif firstRecord ~= nil and firstRecord.resolved then\n        local secondRecord = records[secondOrder]\n        if secondRecord ~= nil and not secondRecord.resolved then\n            activeOrder = secondOrder\n        end\n    end\n\n    local isActiveBait = order == activeOrder\n    local position = positions[state.positionByOrder[order] or order]\n    local isStack = record.tether == 249\n    local drawer = isStack and stackRed or spreadBlue\n\n    if isActiveBait and position ~= nil then\n        if record.markerUUID ~= nil then\n            local updated = drawer:updateTimedCircle(\n                record.markerUUID, 15000, position.x, position.y, position.z,\n                markerRadius, 0, true, false)\n            if not updated then\n                Argus.deleteTimedShape(record.markerUUID)\n                record.markerUUID = nil\n            end\n        end\n        if record.markerUUID == nil then\n            record.markerUUID = drawer:addTimedCircle(\n                15000, position.x, position.y, position.z, markerRadius, 0, true)\n        end\n    elseif record.markerUUID ~= nil then\n        Argus.deleteTimedShape(record.markerUUID)\n        record.markerUUID = nil\n    end\nend\n\nlocal targetPosition = nil\nlocal myRecord = nil\nif player ~= nil then\n    for _, record in ipairs(records) do\n        if record.id == player.id then\n            myRecord = record\n            break\n        end\n    end\nend\n\n-- The tethered player follows their own prey order and swap.\nif myRecord ~= nil and not myRecord.resolved then\n    targetPosition = positions[state.positionByOrder[myRecord.order] or myRecord.order]\nelseif #records >= 4 and player ~= nil then\n    -- LPDU conga priority: H1, H2, MT, OT, M1, M2, R1, R2.\n    -- Among non-tethered players, the first two go north and the next two south.\n    local anyTetherUnresolved = false\n    local tethered = {}\n    for _, record in ipairs(records) do\n        if not record.resolved then anyTetherUnresolved = true end\n        tethered[record.id] = true\n    end\n\n    local roster = AnyoneCore and AnyoneCore.Roster\n    if anyTetherUnresolved and roster ~= nil and roster.current() ~= nil\n        and roster.isReady() then\n        local slotOrder = {\"H1\", \"H2\", \"T1\", \"T2\", \"M1\", \"M2\", \"R1\", \"R2\"}\n        local fillers = {}\n        for _, slot in ipairs(slotOrder) do\n            local id = roster.idOf(slot)\n            if id ~= nil and not tethered[id] then\n                table.insert(fillers, slot)\n            end\n        end\n\n        local mySlot = roster.mySlot()\n        if #fillers == 4 and mySlot ~= nil then\n            for i, slot in ipairs(fillers) do\n                if slot == mySlot then\n                    targetPosition = i <= 2\n                        and {x = 100, y = 0, z = 92}\n                        or {x = 100, y = 0, z = 108}\n                    break\n                end\n            end\n        end\n    end\nend\n\n\n-- Recreate the local guidance arrow after circles so it renders above them.\nif state.localArrowUUID ~= nil then\n    Argus.deleteTimedShape(state.localArrowUUID)\n    state.localArrowUUID = nil\nend\nif targetPosition ~= nil then\n    local heading = TensorCore.getHeadingToTarget(center, targetPosition)\n    local distance = TensorCore.getDistance2d(center, targetPosition) - 1\n    state.localArrowUUID = green:addTimedArrow(\n        5000, center.x, center.y, center.z, heading,\n        distance, 1, 1, 1, 0, true)\nend\n\nself.used = true",
 							conditions = 
 							{
 								
@@ -5423,7 +5423,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local player = TensorCore.mGetPlayer()\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif player == nil or player.pos == nil or roster == nil or roster.current() == nil or not roster.isReady() then\n    self.used = true\n    return\nend\n\nlocal slot = roster.mySlot()\n-- LPDU groups: G1 = T1/H1/M1/R1 (red/purple); G2 = T2/H2/M2/R2 (yellow/blue).\nlocal group1 = slot == \"T1\" or slot == \"MT\" or slot == \"H1\" or slot == \"M1\" or slot == \"R1\"\nlocal group2 = slot == \"T2\" or slot == \"OT\" or slot == \"H2\" or slot == \"M2\" or slot == \"R2\"\nif not group1 and not group2 then\n    self.used = true\n    return\nend\n\n-- The first two Icicle Impacts identify the opposite LPDU landing sides.\nlocal icicles = data.lpdu_p2_DD_icicle\nif icicles == nil or #icicles < 2 then\n    self.used = true\n    return\nend\n\nlocal safeIcicle\nfor i = 1, 2 do\n    local ent = TensorCore.mGetEntity(icicles[i])\n    if ent ~= nil and ent.pos ~= nil then\n        local dx = ent.pos.x - 100\n        local dz = ent.pos.z - 100\n        -- LPDU priority: G1 takes north/west; G2 takes east/south.\n        local safeForG1 = (math.abs(dx) <= 4 and dz < 0) or dx < -4\n        if safeForG1 == group1 then\n            safeIcicle = ent\n            break\n        end\n    end\nend\n\nif safeIcicle == nil or safeIcicle.pos == nil then\n    self.used = true\n    return\nend\n\nlocal center = { x = 100, y = 0, z = 100 }\nlocal impactPos = { x = safeIcicle.pos.x, y = 0, z = safeIcicle.pos.z }\nlocal heading = TensorCore.getHeadingToTarget(center, impactPos)\nif heading == nil then\n    self.used = true\n    return\nend\n\n-- Keep the party tightly grouped near the boss while landing on its assigned safe side.\nlocal standPos = TensorCore.getPosInDirection(center, heading, 2.5)\nif standPos == nil then\n    self.used = true\n    return\nend\n\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0, 1, 0, 0.4), 2)\ngreen:addTimedCircle(3500, standPos.x, 0, standPos.z, 1, 0, true)\n\nlocal playerPos = { x = player.pos.x, y = player.pos.y or 0, z = player.pos.z }\n\n-- Bright player-origin guide to the same role-group safe spot.\nlocal arrowHeading = TensorCore.getHeadingToTarget(playerPos, standPos)\nlocal arrowDistance = TensorCore.getDistance2d(playerPos, standPos)\nif arrowHeading ~= nil and arrowDistance ~= nil and arrowDistance > 0.15 then\n    local tipLength = math.min(1, arrowDistance * 0.4)\n    local baseLength = arrowDistance - tipLength\n    local guide = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.05, 0.95, 1, 1), 2)\n    guide:addTimedArrow(3500, playerPos.x, playerPos.y, playerPos.z, arrowHeading, baseLength, 1.4, tipLength, 3, 0, true)\nend\n\n-- Replay logs measured roughly 14.6-16.2 yalms of outward displacement; show a 15.5-yalm estimate.\nlocal knockbackHeading = TensorCore.getHeadingToTarget(center, playerPos)\nif knockbackHeading ~= nil then\n    local landingEstimate = TensorCore.getPosInDirection(playerPos, knockbackHeading, 15.5)\n    if landingEstimate ~= nil then\n        local knockback = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(1, 0.55, 0.05, 0.9), 2)\n        knockback:addTimedLine(3500, playerPos.x, playerPos.y, playerPos.z, landingEstimate.x, 0, landingEstimate.z, 0.45, 0.75, 0)\n    end\nend\n\nself.used = true",
+							actionLua = "local player = TensorCore.mGetPlayer()\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif player == nil or player.pos == nil or roster == nil or roster.current() == nil or not roster.isReady() then\n    self.used = true\n    return\nend\n\nlocal slot = roster.mySlot()\n-- LPDU groups: G1 = T1/H1/M1/R1; G2 = T2/H2/M2/R2.\nlocal group1 = slot == \"T1\" or slot == \"MT\" or slot == \"H1\" or slot == \"M1\" or slot == \"R1\"\nlocal group2 = slot == \"T2\" or slot == \"OT\" or slot == \"H2\" or slot == \"M2\" or slot == \"R2\"\nif not group1 and not group2 then\n    self.used = true\n    return\nend\n\n-- The first two Icicle Impacts identify the opposite LPDU landing sides.\nlocal icicles = data.lpdu_p2_DD_icicle\nif icicles == nil or #icicles < 2 then\n    self.used = true\n    return\nend\n\nlocal state = data.lpdu_p2_DD_knockback_tether\nif state == nil then\n    state = {\n        center = { x = 100, y = 0, z = 100 },\n        impactPos = {},\n        playerPos = {},\n        safeCircleUUID = nil,\n        landingCircleUUID = nil,\n        tetherUUID = nil\n    }\n    data.lpdu_p2_DD_knockback_tether = state\nend\nlocal center = state.center\nlocal impactPos = state.impactPos\n\nlocal safeIcicle\nfor i = 1, 2 do\n    local ent = TensorCore.mGetEntity(icicles[i])\n    if ent ~= nil and ent.pos ~= nil then\n        impactPos.x = ent.pos.x\n        impactPos.y = 0\n        impactPos.z = ent.pos.z\n        local dx = impactPos.x - center.x\n        local dz = impactPos.z - center.z\n        -- LPDU priority: G1 takes north/west; G2 takes east/south.\n        local safeForG1 = (math.abs(dx) <= 4 and dz < 0) or dx < -4\n        if safeForG1 == group1 then\n            safeIcicle = ent\n            break\n        end\n    end\nend\n\nif safeIcicle == nil or safeIcicle.pos == nil then\n    self.used = true\n    return\nend\n\nimpactPos.x = safeIcicle.pos.x\nimpactPos.y = 0\nimpactPos.z = safeIcicle.pos.z\nlocal sideHeading = TensorCore.getHeadingToTarget(center, impactPos)\nif sideHeading == nil then\n    self.used = true\n    return\nend\n\nlocal standX, standY, standZ = TensorCore.getPosInDirection(center, sideHeading, 2.5, true)\nif standX == nil or standZ == nil then\n    self.used = true\n    return\nend\n\nlocal safeDrawer = state.safeDrawer\nif safeDrawer == nil then\n    safeDrawer = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0, 1, 0, 0.4), 2)\n    state.safeDrawer = safeDrawer\nend\nif state.safeCircleUUID ~= nil then\n    if not safeDrawer:updateTimedCircle(state.safeCircleUUID, 3500, standX, 0, standZ, 1, 0, true) then\n        Argus.deleteTimedShape(state.safeCircleUUID)\n        state.safeCircleUUID = nil\n    end\nend\nif state.safeCircleUUID == nil then\n    state.safeCircleUUID = safeDrawer:addTimedCircle(3500, standX, 0, standZ, 1, 0, true)\nend\n\nlocal playerPos = state.playerPos\nplayerPos.x = player.pos.x\nplayerPos.y = player.pos.y or 0\nplayerPos.z = player.pos.z\n\n-- Heavenly Strike knocks outward from its observed arena-center source.\n-- Previous pull positions measured 14.6-16.2 yalms, so the guide uses 15.5.\nlocal knockbackHeading = TensorCore.getHeadingToTarget(center, playerPos)\nif knockbackHeading == nil then\n    self.used = true\n    return\nend\nlocal landingX, landingY, landingZ = TensorCore.getPosInDirection(playerPos, knockbackHeading, 15.5, true)\nif landingX == nil or landingZ == nil then\n    self.used = true\n    return\nend\n\nlocal tetherDrawer = state.tetherDrawer\nif tetherDrawer == nil then\n    tetherDrawer = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0, 1, 0, 0.98), 2)\n    state.tetherDrawer = tetherDrawer\nend\n\n-- Refresh one player-to-landing tether and endpoint as the player moves.\nif state.tetherUUID ~= nil then\n    if not tetherDrawer:updateTimedLine(\n        state.tetherUUID, 500,\n        playerPos.x, playerPos.y, playerPos.z,\n        landingX, landingY or playerPos.y, landingZ,\n        0.35, 0.9, 0) then\n        Argus.deleteTimedShape(state.tetherUUID)\n        state.tetherUUID = nil\n    end\nend\nif state.tetherUUID == nil then\n    state.tetherUUID = tetherDrawer:addTimedLine(\n        500,\n        playerPos.x, playerPos.y, playerPos.z,\n        landingX, landingY or playerPos.y, landingZ,\n        0.35, 0.9, 0)\nend\n\n-- Keep the landing marker aligned with the refreshed tether endpoint.\nif state.landingCircleUUID ~= nil then\n    if not tetherDrawer:updateTimedCircle(\n        state.landingCircleUUID, 500, landingX, 0, landingZ, 0.9, 0, true) then\n        Argus.deleteTimedShape(state.landingCircleUUID)\n        state.landingCircleUUID = nil\n    end\nend\nif state.landingCircleUUID == nil then\n    state.landingCircleUUID = tetherDrawer:addTimedCircle(500, landingX, 0, landingZ, 0.9, 0, true)\nend\n\n-- Mark this update complete; Loop Reaction refreshes until the impact time.\nself.used = true",
 							name = "[LPDU] Personal knockback bait circle",
 							uuid = "5a58e4d3-f2b5-5095-945e-1bfb1d650194",
 							version = 2.1,
@@ -5434,13 +5434,80 @@ local tbl =
 				{
 				},
 				displayPath = "FRU_LPDU_P2_DD",
+				loop = true,
 				mechanicTime = 251.1,
 				name = "[LPDU] Diamond Dust personal knockback spot [AnyoneCore]",
+				throttleTime = 100,
 				timeRange = true,
 				timelineIndex = 50,
-				timerEndOffset = 0.5,
 				timerStartOffset = -1.5,
 				uuid = "a883042d-b6e0-faa6-bd63-3a48ddf2da61",
+				version = 2,
+			},
+		},
+	},
+	[53] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "FRU_LPDU_P2_DD",
+				uuid = "88aa9791-d6a0-68fe-8b91-3316aa7ac05b",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local a = eventArgs\nif a == nil or a.spellID ~= 40208 or type(a.channelTimeMax) ~= \"number\" then self.used = true; return end\nlocal player = TensorCore.mGetPlayer()\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif player == nil or player.pos == nil or roster == nil or not roster.isReady() then self.used = true; return end\nlocal slot = roster.mySlot()\nlocal group2 = slot == \"T2\" or slot == \"OT\" or slot == \"H2\" or slot == \"M2\" or slot == \"R2\"\nif not group2 and not (slot == \"T1\" or slot == \"MT\" or slot == \"H1\" or slot == \"M1\" or slot == \"R1\") then self.used = true; return end\nlocal center = { x = 100, y = 0, z = 100 }\nlocal north = TensorCore.getHeadingToTarget(center, { x = 100, y = 0, z = 90 })\nlocal groupHeading = group2 and (north + math.pi) or north\nlocal clockwise = true\nlocal shiva = TensorCore.mGetEntity(a.entityID)\nlocal shivaHeading = shiva and shiva.pos and tonumber(shiva.pos.h)\nif group2 and shivaHeading ~= nil then\n    local delta = (shivaHeading - groupHeading) % (2 * math.pi)\n    if delta >= math.pi / 8 and delta <= 3 * math.pi / 8 then clockwise = false end\nend\nlocal moveHeading = groupHeading + (clockwise and math.pi / 2 or -math.pi / 2)\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0, 1, 0, .98), 2)\ngreen:addTimedArrowOnEnt(6800, player.id, 3.5, 1, 1.35, 2.4, nil, 0, false, moveHeading, true)\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"23341b59-442c-5cde-ade5-934aa98f0756",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Green clockwise or counterclockwise arrow",
+							uuid = "c0bdc216-b8a4-7ac5-9b3a-8b16c452e90d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40208",
+							name = "Sinbound Holy cast",
+							uuid = "23341b59-442c-5cde-ade5-934aa98f0756",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "FRU_LPDU_P2_DD",
+				eventType = 3,
+				mechanicTime = 255.1,
+				name = "[LPDU] Diamond Dust puddle direction arrow [AnyoneCore]",
+				timeRange = true,
+				timelineIndex = 53,
+				timerEndOffset = 0.5,
+				timerStartOffset = -6.5,
+				uuid = "7216e268-5c63-2fdd-8636-0bd023581cbc",
 				version = 2,
 			},
 		},
@@ -5541,6 +5608,70 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "d6299a57-d3e5-ceef-bf72-71734bc12b86",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local name = eventArgs.aoeName\nlocal heading = tonumber(eventArgs.heading)\nlocal x, y, z = tonumber(eventArgs.x), tonumber(eventArgs.y), tonumber(eventArgs.z)\nlocal radius = tonumber(eventArgs.aoeLength) or 40\nlocal castDuration = tonumber(eventArgs.duration) or 3.2\n\nif (name ~= \"Twin Silence\" and name ~= \"Twin Stillness\")\n    or heading == nil or x == nil or y == nil or z == nil then\n    self.used = true\n    return\nend\n\nif radius < 1 then\n    radius = 40\nend\nif castDuration < 0.25 then\n    castDuration = 3.2\nend\n\n-- Twin Silence is front-safe first; Twin Stillness is back-safe first.\nlocal safeHeading = heading\nif name == \"Twin Stillness\" then\n    safeHeading = heading + math.pi\nend\nlocal timeout = math.floor(castDuration * 1000 + 750)\n\n-- Invisible blocker on default channel 0, for the safe half only.\nlocal state = data.frup2_lpdu_tts_safe_side\nif state == nil then\n    state = {}\n    data.frup2_lpdu_tts_safe_side = state\nend\nlocal safeSide = TensorCore.getStaticDrawer(\n    GUI:ColorConvertFloat4ToU32(0, 0, 0, 0),\n    2,\n    0,\n    Argus2.RenderFlags.FLAG_OCCLUDE\n)\nlocal updated = false\nif state.safeConeUUID ~= nil then\n    updated = safeSide:updateTimedCone(\n        state.safeConeUUID, timeout, x, y, z, radius, math.pi,\n        safeHeading, 0, false, true, Argus2.RenderFlags.FLAG_OCCLUDE\n    )\nend\nif not updated then\n    state.safeConeUUID = safeSide:addTimedCone(\n        timeout, x, y, z, radius, math.pi, safeHeading,\n        0, false, true, Argus2.RenderFlags.FLAG_OCCLUDE\n    )\nend\n\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"e4490b55-40e8-da7a-887b-7c1561cd33fa",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Transparent safe-side occluder",
+							uuid = "76da5869-cb67-45a2-bfcc-f0cb39127cb7",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.aoeName == \"Twin Silence\" or eventArgs.aoeName == \"Twin Stillness\"",
+							name = "Twin Silence or Stillness AOE",
+							uuid = "e4490b55-40e8-da7a-887b-7c1561cd33fa",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 18,
+				loop = true,
+				mechanicTime = 272.3,
+				name = "[LPDU] Twin Silence Stillness Safe Side",
+				timeRange = true,
+				timelineIndex = 61,
+				timerEndOffset = 5,
+				timerStartOffset = -10,
+				uuid = "0bab49ee-f15c-2fef-b3eb-9a3439929e2a",
+				version = 2,
+			},
 		},
 	},
 	[62] = 
@@ -6100,6 +6231,20 @@ local tbl =
 		{
 			data = 
 			{
+				name = "[Draw] First Mirror Arrows",
+				uuid = "21f30694-eacf-3ed5-926a-f003dd68840d",
+				version = 2,
+			},
+			inheritedObjectUUID = "8e3a1839-08dc-8741-9f23-880c179b2d4c",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "LPDU Draws",
 				uuid = "0f71d979-4652-ecae-a063-a60b0020560b",
@@ -6117,7 +6262,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local a = eventArgs\nif a == nil then self.used = true; return end\nlocal dir = tonumber(a.a1)\nif dir == nil or dir < 1 or dir > 8 then self.used = true; return end\nlocal state = data.lpduFruMirrorDirections\nif state == nil then\n    state = { red = {}, blue = nil }\n    data.lpduFruMirrorDirections = state\nend\nif a.a2 == 256 and a.a3 == 512 then\n    local found = false\n    for _, existing in ipairs(state.red) do\n        if existing == dir then found = true; break end\n    end\n    if not found and #state.red < 2 then table.insert(state.red, dir) end\nelseif a.a2 == 1 and a.a3 == 2 then\n    state.blue = dir\nend\nself.used = true",
+							actionLua = "local a = eventArgs\nif a == nil then return end\nlocal dir = tonumber(a.a1)\nif dir == nil or dir < 1 or dir > 8 then return end\nlocal state = data.lpduFruMirrorDirections\nif state == nil then state = { red = {}, blue = nil }; data.lpduFruMirrorDirections = state end\nif a.a2 == 256 and a.a3 == 512 then\n    for _, existing in ipairs(state.red) do if existing == dir then return end end\n    if #state.red < 2 then table.insert(state.red, dir) end\nelseif a.a2 == 1 and a.a3 == 2 then\n    state.blue = dir\nend",
 							name = "[LPDU] Capture mirror directions",
 							uuid = "a70c5d9c-ccc5-a556-8333-e612e669ae37",
 							version = 2.1,
@@ -6137,6 +6282,92 @@ local tbl =
 				timerEndOffset = 5,
 				timerStartOffset = -3,
 				uuid = "b0a93a44-33a6-b834-827c-1d3630556f4e",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local state = data.lpduFruMirrorDirections\nlocal roster = AnyoneCore and AnyoneCore.Roster\nlocal player = TensorCore.mGetPlayer()\nif state == nil or state.blue == nil or roster == nil or not roster.isReady() or player == nil then return end\nlocal slot = roster.mySlot()\nlocal ranged = slot == \"H1\" or slot == \"H2\" or slot == \"R1\" or slot == \"R2\"\nlocal melee = slot == \"MT\" or slot == \"OT\" or slot == \"T1\" or slot == \"T2\" or slot == \"M1\" or slot == \"M2\"\nif not ranged and not melee then return end\nlocal geometry = data.lpduFruMirrorArrowGeometry\nif geometry == nil then\n    geometry = { center = { x = 100, y = 0, z = 100 } }\n    geometry.north = TensorCore.getHeadingToTarget(geometry.center, { x = 100, y = 0, z = 90 })\n    geometry.drawer = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0, 1, 0, .95), 2)\n    data.lpduFruMirrorArrowGeometry = geometry\nend\nlocal blue = geometry.north - (state.blue - 1) * math.pi / 4\nlocal heading = ranged and blue or (blue + math.pi)\ngeometry.drawer:addTimedArrowOnEnt(1100, player.id, 3.2, .9, 1.25, 2, nil, 0, false, heading, true)\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"e47ba930-99a6-5953-8cd6-0e4b1a7c2389",
+									true,
+								},
+							},
+							name = "Draw role mirror arrow",
+							uuid = "382efa53-2803-c06f-a686-671e99dc191d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local state = data.lpduFruMirrorDirections\nlocal roster = AnyoneCore and AnyoneCore.Roster\nreturn state ~= nil and tonumber(state.blue) ~= nil\n    and roster ~= nil and roster.mySlot ~= nil and roster.isReady ~= nil\n    and roster.isReady()",
+							name = "Blue mirror captured and roster ready",
+							uuid = "e47ba930-99a6-5953-8cd6-0e4b1a7c2389",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Draws",
+				loop = true,
+				mechanicTime = 292.6,
+				name = "[LPDU] Mirror Role Arrow",
+				throttleTime = 1000,
+				timeRange = true,
+				timelineIndex = 68,
+				timerEndOffset = 8,
+				timerStartOffset = -3,
+				uuid = "74aaaaad-f2b5-49e5-87ac-90cb2c063732",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "data.lpduFruMirrorDirections = { red = {}, blue = nil }\ndata.lpduFruRedMirrorDrawn = nil\ndata.lpduFruBlueMirrorDrawn = nil\ndata.lpduFruPartnerSnapshotNeeded = nil\nself.used = true",
+							endIfUsed = true,
+							name = "Clear previous mirror directions",
+							uuid = "86bc1265-d7fc-d889-9012-8883d8094930",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Draws",
+				mechanicTime = 292.6,
+				name = "[LPDU] Reset mirror direction state",
+				timeRange = true,
+				timelineIndex = 68,
+				timerEndOffset = -3.2,
+				timerStartOffset = -5.5,
+				uuid = "6f80e129-253a-e7ef-a367-472a7da27047",
 				version = 2,
 			},
 		},
@@ -6175,7 +6406,15 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local a = eventArgs\nif a == nil or a.spellID ~= 40203 or type(a.channelTimeMax) ~= \"number\" then self.used = true; return end\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or not roster.isReady() then self.used = true; return end\nlocal slot = roster.mySlot()\nlocal state = data.lpduFruMirrorDirections\nlocal blueDir = state and state.blue\nif slot == nil or blueDir == nil or blueDir < 1 or blueDir > 8 then self.used = true; return end\nlocal center = { x = 100, y = 0, z = 100 }\nlocal north = TensorCore.getHeadingToTarget(center, { x = 100, y = 0, z = 90 })\nlocal heading = north + (blueDir - 1) * math.pi / 4\nlocal radial = { x = math.sin(heading), z = -math.cos(heading) }\nlocal tangent = { x = -radial.z, z = radial.x }\nlocal mirror = TensorCore.getPosInDirection(center, heading, 20)\nlocal bossOffsets = { T1 = { -1.54, 1.36 }, T2 = { -2.55, -0.86 }, M1 = { 0.86, 1.81 }, M2 = { 0.02, -1.32 } }\nlocal mirrorOffsets = { H1 = { -2.347, 1.888 }, H2 = { -1.548, -1.671 }, R1 = { -0.556, 3.076 }, R2 = { -0.405, -2.082 } }\nlocal base\nlocal offset\nif bossOffsets[slot] ~= nil then\n    local boss = TensorCore.mGetEntity(a.entityID)\n    if boss == nil or boss.pos == nil then self.used = true; return end\n    base = boss.pos\n    offset = bossOffsets[slot]\nelse\n    base = mirror\n    offset = mirrorOffsets[slot]\nend\nif offset == nil then self.used = true; return end\nlocal target = { x = base.x + radial.x * offset[1] + tangent.x * offset[2], y = 0, z = base.z + radial.z * offset[1] + tangent.z * offset[2] }\nlocal duration = math.floor(a.channelTimeMax * 1000 + 800)\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .4), 2)\ngreen:addTimedCircle(duration, target.x, target.y, target.z, 0.8, 0, true)\nself.used = true",
+							actionLua = "local a = eventArgs\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or not roster.isReady() then return end\nlocal slot = roster.mySlot()\nlocal state = data.lpduFruMirrorDirections\nlocal blueDir = state and state.blue\nif slot == nil or blueDir == nil or blueDir < 1 or blueDir > 8 then return end\n\nlocal geometry = data.lpduFruBlueSpreadGeometry\nif geometry == nil then\n    geometry = {\n        center = { x = 100, y = 0, z = 100 },\n        bossOffsets = { T1 = { -1.54, 1.36 }, MT = { -1.54, 1.36 }, T2 = { -2.55, -0.86 }, OT = { -2.55, -0.86 }, M1 = { 0.86, 1.81 }, M2 = { 0.02, -1.32 } },\n        mirrorOffsets = { H1 = { -2.5, 1.5 }, H2 = { -2.5, -1.5 }, R1 = { -0.35, 3.0 }, R2 = { -0.35, -3.0 } }\n    }\n    geometry.north = TensorCore.getHeadingToTarget(geometry.center, { x = 100, y = 0, z = 90 })\n    data.lpduFruBlueSpreadGeometry = geometry\nend\nlocal center = geometry.center\n-- Map-effect directions are N, NE, E, SE, S, SW, W, NW.\n-- TensorCore headings increase counterclockwise, so subtract the map step.\nlocal heading = geometry.north - (blueDir - 1) * math.pi / 4\nlocal unit = TensorCore.getPosInDirection(center, heading, 1)\nlocal radialX, radialZ = unit.x - center.x, unit.z - center.z\n-- Positive tangent is G1's right when facing the blue mirror.\nlocal tangentX, tangentZ = -radialZ, radialX\nlocal base, offset\nif geometry.bossOffsets[slot] ~= nil then\n    local boss = TensorCore.mGetEntity(a.entityID)\n    if boss == nil or boss.pos == nil then return end\n    base = boss.pos\n    offset = geometry.bossOffsets[slot]\nelse\n    base = TensorCore.getPosInDirection(center, heading, 20)\n    offset = geometry.mirrorOffsets[slot]\nend\nif offset == nil then self.used = true; return end\nlocal targetX = base.x + radialX * offset[1] + tangentX * offset[2]\nlocal targetZ = base.z + radialZ * offset[1] + tangentZ * offset[2]\nlocal duration = math.floor(a.channelTimeMax * 1000 + 850)\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0, 1, 0, .92), 2)\ngreen:addTimedCircle(duration, targetX, 0, targetZ, 1.05, 0, true, true)\nlocal player = TensorCore.mGetPlayer()\nif player ~= nil and player.pos ~= nil then\n    local target = { x = targetX, y = 0, z = targetZ }\n    local arrowHeading = TensorCore.getHeadingToTarget(player.pos, target)\n    local distance = TensorCore.getDistance2d(player.pos, target)\n    if distance > .25 then\n        local tip = math.min(1.25, distance)\n        local arrow = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0, 1, 0, .95), 2)\n        arrow:addTimedArrow(duration, player.pos.x, player.pos.y, player.pos.z, arrowHeading, math.max(.15, distance - tip), .9, tip, 1.9, 0, false)\n    end\nend\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"70bc37ca-be5b-c326-a26b-b4ee9c377440",
+									true,
+								},
+							},
 							name = "[LPDU] Draw blue mirror spot",
 							uuid = "ca585a84-f225-4841-a4d5-aa63757fd493",
 							version = 2.1,
@@ -6184,10 +6423,23 @@ local tbl =
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40203",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventSpellID = 40203,
+							name = "Scythe Kick ID",
+							uuid = "70bc37ca-be5b-c326-a26b-b4ee9c377440",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Draws",
 				eventType = 3,
-				loop = true,
 				mechanicTime = 306.6,
 				name = "[LPDU] Mirror Blue Spread",
 				timeRange = true,
@@ -6195,6 +6447,60 @@ local tbl =
 				timerEndOffset = -1,
 				timerStartOffset = -10,
 				uuid = "afb72b4a-560c-e016-9ff9-f0747d31e86f",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local a = eventArgs\nlocal directions = data.lpduFruMirrorDirections\nlocal blueDir = directions and directions.blue\nif blueDir == nil or blueDir < 1 or blueDir > 8 then return end\nlocal geometry = data.lpduFruMirrorDonutGeometry\nif geometry == nil then\n    geometry = { center = { x = 100, y = 0, z = 100 } }\n    geometry.north = TensorCore.getHeadingToTarget(geometry.center, { x = 100, y = 0, z = 90 })\n    geometry.drawer = TensorCore.getCachedDrawer(\n        GUI:ColorConvertFloat4ToU32(1, .22, .03, .38),\n        GUI:ColorConvertFloat4ToU32(1, .22, .03, .48),\n        GUI:ColorConvertFloat4ToU32(1, .22, .03, .58),\n        GUI:ColorConvertFloat4ToU32(1, .65, .08, 1), 4)\n    data.lpduFruMirrorDonutGeometry = geometry\nend\nlocal heading = geometry.north - (blueDir - 1) * math.pi / 4\nlocal mirror = TensorCore.getPosInDirection(geometry.center, heading, 20)\nlocal duration = math.floor(a.channelTimeMax * 1000 + 250)\n-- FRU Scythe Kick and the blue reflection: 4m safe hole, 20m outer radius.\n-- This overlay is visual only; existing encounter AOE detection remains authoritative.\ngeometry.drawer:addTimedDonutOnEnt(duration, a.entityID, 4, 20, 0, false, true)\ngeometry.drawer:addTimedDonut(duration, mirror.x, 0, mirror.z, 4, 20, 0, false, true)\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"e23fcf0c-5e68-0df4-883f-c92fb5153c5f",
+									true,
+								},
+							},
+							name = "Boss and blue mirror donut danger",
+							uuid = "21e44d3a-328a-78f4-893f-e4d3ff581f56",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventSpellID = 40203,
+							name = "Scythe Kick ID",
+							uuid = "e23fcf0c-5e68-0df4-883f-c92fb5153c5f",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Draws",
+				eventType = 3,
+				mechanicTime = 306.6,
+				name = "[LPDU] Mirror Donut Danger",
+				timeRange = true,
+				timelineIndex = 71,
+				timerEndOffset = -1,
+				timerStartOffset = -10,
+				uuid = "1773583b-c0cc-f7fb-8530-0174fbdb0e25",
 				version = 2,
 			},
 		},
@@ -6303,7 +6609,15 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local a = eventArgs\nif a == nil or a.spellID ~= 40205 or type(a.channelTimeMax) ~= \"number\" then self.used = true; return end\nif data.lpduFruRedMirrorDrawn then self.used = true; return end\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or not roster.isReady() then self.used = true; return end\nlocal slot = roster.mySlot()\nlocal state = data.lpduFruMirrorDirections\nlocal blueDir = state and state.blue\nlocal redDirs = state and state.red\nif slot == nil or blueDir == nil or redDirs == nil or #redDirs < 2 then self.used = true; return end\nlocal center = { x = 100, y = 0, z = 100 }\nlocal north = TensorCore.getHeadingToTarget(center, { x = 100, y = 0, z = 90 })\nlocal blueHeading = north + (blueDir - 1) * math.pi / 4\nlocal bossHeading = blueHeading + math.pi\nlocal function normalize(angle) return angle % (2 * math.pi) end\nlocal redHeading1 = north + (redDirs[1] - 1) * math.pi / 4\nlocal redHeading2 = north + (redDirs[2] - 1) * math.pi / 4\nlocal score1 = math.cos(redHeading1 - bossHeading)\nlocal score2 = math.cos(redHeading2 - bossHeading)\nlocal nearDir\nif score1 > score2 + 0.0001 then\n    nearDir = redDirs[1]\nelseif score2 > score1 + 0.0001 then\n    nearDir = redDirs[2]\nelse\n    local clockwise1 = normalize(redHeading1 - bossHeading)\n    local clockwise2 = normalize(redHeading2 - bossHeading)\n    nearDir = clockwise1 <= clockwise2 and redDirs[1] or redDirs[2]\nend\nlocal farDir = nearDir == redDirs[1] and redDirs[2] or redDirs[1]\nlocal isMeleeTank = slot == \"T1\" or slot == \"T2\" or slot == \"M1\" or slot == \"M2\"\nlocal mirrorDir = isMeleeTank and nearDir or farDir\nlocal offsets = {\n    T1 = { -0.919, 2.876 }, T2 = { -0.644, -3.380 },\n    M1 = { -1.804, 0.130 }, M2 = { -2.414, -2.033 },\n    H1 = { -1.743, 1.182 }, H2 = { -2.059, 0.303 },\n    R1 = { -0.461, 2.647 }, R2 = { -0.461, -2.754 }\n}\nlocal offset = offsets[slot]\nif offset == nil then self.used = true; return end\nlocal heading = north + (mirrorDir - 1) * math.pi / 4\nlocal radial = { x = math.sin(heading), z = -math.cos(heading) }\nlocal tangent = { x = -radial.z, z = radial.x }\nlocal mirror = TensorCore.getPosInDirection(center, heading, 20)\nlocal target = { x = mirror.x + radial.x * offset[1] + tangent.x * offset[2], y = 0, z = mirror.z + radial.z * offset[1] + tangent.z * offset[2] }\nlocal duration = math.floor(a.channelTimeMax * 1000 + 850)\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .4), 2)\ngreen:addTimedCircle(duration, target.x, target.y, target.z, 0.8, 0, true)\ndata.lpduFruRedMirrorDrawn = true\nself.used = true",
+							actionLua = "local a = eventArgs\nif data.lpduFruRedMirrorDrawn then self.used = true; return end\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or not roster.isReady() then return end\nlocal slot = roster.mySlot()\nlocal state = data.lpduFruMirrorDirections\nlocal blueDir = state and state.blue\nlocal redDirs = state and state.red\nif slot == nil or blueDir == nil or redDirs == nil or #redDirs < 2 then return end\n\nlocal geometry = data.lpduFruRedSpreadGeometry\nif geometry == nil then\n    geometry = {\n        center = { x = 100, y = 0, z = 100 },\n        offsets = {\n            T1 = { -0.919, 2.876 }, MT = { -0.919, 2.876 }, T2 = { -0.644, -3.380 }, OT = { -0.644, -3.380 },\n            M1 = { -1.804, 0.130 }, M2 = { -2.414, -2.033 },\n            H1 = { -2.5, 1.5 }, H2 = { -2.5, -1.5 },\n            R1 = { -0.35, 3.0 }, R2 = { -0.35, -3.0 }\n        }\n    }\n    geometry.north = TensorCore.getHeadingToTarget(geometry.center, { x = 100, y = 0, z = 90 })\n    data.lpduFruRedSpreadGeometry = geometry\nend\nlocal center = geometry.center\nlocal blueHeading = geometry.north - (blueDir - 1) * math.pi / 4\nlocal bossHeading = blueHeading + math.pi\nlocal redHeading1 = geometry.north - (redDirs[1] - 1) * math.pi / 4\nlocal redHeading2 = geometry.north - (redDirs[2] - 1) * math.pi / 4\nlocal score1 = math.cos(redHeading1 - bossHeading)\nlocal score2 = math.cos(redHeading2 - bossHeading)\nlocal nearDir\nif score1 > score2 + 0.0001 then\n    nearDir = redDirs[1]\nelseif score2 > score1 + 0.0001 then\n    nearDir = redDirs[2]\nelse\n    -- Clockwise travel decreases TensorCore's heading.\n    local clockwise1 = (bossHeading - redHeading1) % (2 * math.pi)\n    local clockwise2 = (bossHeading - redHeading2) % (2 * math.pi)\n    nearDir = clockwise1 <= clockwise2 and redDirs[1] or redDirs[2]\nend\nlocal farDir = nearDir == redDirs[1] and redDirs[2] or redDirs[1]\nlocal isMeleeTank = slot == \"MT\" or slot == \"OT\" or slot == \"T1\" or slot == \"T2\" or slot == \"M1\" or slot == \"M2\"\nlocal mirrorDir = isMeleeTank and nearDir or farDir\nlocal offset = geometry.offsets[slot]\nif offset == nil then self.used = true; return end\nlocal heading = geometry.north - (mirrorDir - 1) * math.pi / 4\nlocal unit = TensorCore.getPosInDirection(center, heading, 1)\nlocal radialX, radialZ = unit.x - center.x, unit.z - center.z\nlocal tangentX, tangentZ = -radialZ, radialX\nlocal mirror = TensorCore.getPosInDirection(center, heading, 20)\nlocal targetX = mirror.x + radialX * offset[1] + tangentX * offset[2]\nlocal targetZ = mirror.z + radialZ * offset[1] + tangentZ * offset[2]\nlocal duration = math.floor(a.channelTimeMax * 1000 + 850)\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0, 1, 0, .92), 2)\ngreen:addTimedCircle(duration, targetX, 0, targetZ, 1.05, 0, true, true)\nlocal player = TensorCore.mGetPlayer()\nif player ~= nil and player.pos ~= nil then\n    local target = { x = targetX, y = 0, z = targetZ }\n    local arrowHeading = TensorCore.getHeadingToTarget(player.pos, target)\n    local distance = TensorCore.getDistance2d(player.pos, target)\n    if distance > .25 then\n        local tip = math.min(1.25, distance)\n        local arrow = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0, 1, 0, .95), 2)\n        arrow:addTimedArrow(duration, player.pos.x, player.pos.y, player.pos.z, arrowHeading, math.max(.15, distance - tip), .9, tip, 1.9, 0, false)\n    end\nend\ndata.lpduFruRedMirrorDrawn = true\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"784ca35d-3c6a-7cac-974e-9ef25faca95b",
+									true,
+								},
+							},
 							name = "[LPDU] Draw red mirror spot",
 							uuid = "471b48b2-1fdf-c618-af9a-a38b1717f245",
 							version = 2.1,
@@ -6312,10 +6626,23 @@ local tbl =
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40205",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventSpellID = 40205,
+							name = "Reflected Scythe Kick ID",
+							uuid = "784ca35d-3c6a-7cac-974e-9ef25faca95b",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Draws",
 				eventType = 3,
-				loop = true,
 				mechanicTime = 317.1,
 				name = "[LPDU] Mirror Red Spread",
 				timeRange = true,
@@ -6530,39 +6857,6 @@ local tbl =
 				uuid = "9a3ddc04-fb17-6cc4-8bb0-df9b137abf69",
 			},
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "local a = eventArgs\nif a == nil or a.spellID ~= 40220 or type(a.channelTimeMax) ~= \"number\" then self.used = true; return end\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or not roster.isReady() then self.used = true; return end\nlocal slot = roster.mySlot()\nlocal partnerBySlot = { T1 = \"M1\", M1 = \"T1\", T2 = \"M2\", M2 = \"T2\", H1 = \"R1\", R1 = \"H1\", H2 = \"R2\", R2 = \"H2\" }\nlocal partnerSlot = partnerBySlot[slot]\nlocal partnerID = partnerSlot and roster.idOf(partnerSlot)\nlocal player = TensorCore.mGetPlayer()\nlocal partner = partnerID and TensorCore.mGetEntity(partnerID)\nif player == nil or player.pos == nil or partner == nil or partner.pos == nil then self.used = true; return end\nlocal distance = TensorCore.getDistance2d(player.pos, partner.pos)\nlocal heading = TensorCore.getHeadingToTarget(player.pos, partner.pos)\nlocal duration = math.floor(a.channelTimeMax * 1000 + 150)\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .4), 2)\ngreen:addTimedArrow(duration, player.pos.x, player.pos.y, player.pos.z, heading, math.max(0.2, distance - 0.7), 0.45, 0.9, 0.8, 0, true)\nself.used = true",
-							name = "[LPDU] Draw Banish partner arrow",
-							uuid = "f22bf21c-c707-0bbf-8fa0-ace91bf16b6b",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-				},
-				displayPath = "LPDU Draws",
-				eventType = 3,
-				loop = true,
-				mechanicTime = 322.5,
-				name = "[LPDU] Mirror Partner Stack",
-				timeRange = true,
-				timelineIndex = 77,
-				timerStartOffset = -8,
-				uuid = "a69bc50e-7e8b-fc3a-9418-e7b207820de2",
-				version = 2,
-			},
 		},
 	},
 	[80] = 
@@ -7161,6 +7455,68 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Draws",
+				uuid = "87a72ec8-0810-3658-963c-eedcafc6acec",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player = TensorCore.mGetPlayer()\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif player == nil or player.pos == nil or roster == nil or not roster.isReady() then self.used = true; return end\nlocal slot = roster.mySlot()\nlocal supports = slot == \"T1\" or slot == \"T2\" or slot == \"MT\" or slot == \"OT\" or slot == \"H1\" or slot == \"H2\"\nlocal dps = slot == \"M1\" or slot == \"M2\" or slot == \"R1\" or slot == \"R2\"\nif not supports and not dps then self.used = true; return end\nlocal target = { x = 100, y = player.pos.y or 0, z = supports and 85 or 115 }\nlocal heading = TensorCore.getHeadingToTarget(player.pos, target)\nif heading == nil then self.used = true; return end\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0, 1, 0, .98), 2)\ngreen:addTimedArrow(5500, player.pos.x, player.pos.y or 0, player.pos.z, heading, 6, .9, 1.25, 2.2, 0, false)\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"535972b5-d748-9cfd-afcd-196c8c84cf4a",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Guide support north / DPS south",
+							uuid = "74128a73-1652-d0a2-bd33-b26ac92c8bc7",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40212",
+							name = "Light Rampant cast",
+							uuid = "535972b5-d748-9cfd-afcd-196c8c84cf4a",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Draws",
+				eventType = 3,
+				mechanicTime = 331.8,
+				name = "[LPDU] Light Rampant - role side",
+				timeRange = true,
+				timelineIndex = 80,
+				timerStartOffset = -8,
+				uuid = "1f29d389-f98d-7c67-aa92-945a98753a6d",
+				version = 2,
+			},
+		},
 	},
 	[81] = 
 	{
@@ -7276,6 +7632,49 @@ local tbl =
 				enabled = false,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Draws",
+				uuid = "f4de6574-cd64-d5ac-b9f5-0cd7c5f8bc28",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player = TensorCore.mGetPlayer()\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif player == nil or player.pos == nil or roster == nil or not roster.isReady() then self.used = true; return end\nlocal slot = roster.mySlot()\nlocal supports = slot == \"T1\" or slot == \"T2\" or slot == \"MT\" or slot == \"OT\" or slot == \"H1\" or slot == \"H2\"\nlocal dps = slot == \"M1\" or slot == \"M2\" or slot == \"R1\" or slot == \"R2\"\nif not supports and not dps then self.used = true; return end\nlocal target = supports and { x = 107, y = player.pos.y or 0, z = 93 } or { x = 93, y = player.pos.y or 0, z = 107 }\nlocal heading = TensorCore.getHeadingToTarget(player.pos, target)\nlocal distance = TensorCore.getDistance2d(player.pos, target)\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0, 1, 0, .98), 2)\nif heading ~= nil and distance ~= nil and distance > .25 then\n    local tip = math.min(1.25, distance)\n    green:addTimedArrow(5200, player.pos.x, player.pos.y or 0, player.pos.z, heading, math.max(.15, distance - tip), .9, tip, 2.2, 0, false)\nend\ngreen:addTimedCircle(5200, target.x, target.y, target.z, 1.15, 0, false)\nself.used = true",
+							endIfUsed = true,
+							name = "Guide support NE / DPS SW",
+							uuid = "da87ddd0-0d1c-fe80-8304-6ddbec416796",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Draws",
+				mechanicTime = 348.7,
+				name = "[LPDU] Light Rampant - collapse safe side",
+				timeRange = true,
+				timelineIndex = 88,
+				timerEndOffset = -1,
+				timerStartOffset = -3,
+				uuid = "cb4e79f5-3c0f-330d-91d8-06769086f813",
+				version = 2,
+			},
+		},
 	},
 	[90] = 
 	{
@@ -7374,6 +7773,120 @@ local tbl =
 				enabled = false,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Draws",
+				uuid = "f3700a07-324b-724a-9fd6-9d3f09fd72ea",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or not roster.isReady() then self.used = true; return end\nlocal slot = roster.mySlot()\nlocal pair = { T1 = \"R1\", MT = \"R1\", R1 = \"T1\", H1 = \"M1\", M1 = \"H1\", T2 = \"R2\", OT = \"R2\", R2 = \"T2\", H2 = \"M2\", M2 = \"H2\" }\nlocal partnerSlot = pair[slot]\nlocal partnerID = partnerSlot and roster.idOf(partnerSlot)\nlocal player = TensorCore.mGetPlayer()\nlocal partner = partnerID and TensorCore.mGetEntity(partnerID)\nif player == nil or player.pos == nil or player.id == nil or partner == nil or partner.pos == nil then self.used = true; return end\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0, 1, 0, .98), 2)\ngreen:addTimedArrowOnEnt(5600, player.id, 3.5, .9, 1.25, 2.2, partnerID, 0, false)\ngreen:addTimedCircleOnEnt(5600, partnerID, 1.15, 0, false, false)\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"d9316e17-0259-c045-82bb-4c532734f3a2",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Follow assigned partner",
+							uuid = "02f3f589-af1c-35d0-a662-3fc6817fbaf1",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40220",
+							name = "Banish III partner cast",
+							uuid = "d9316e17-0259-c045-82bb-4c532734f3a2",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Draws",
+				eventType = 3,
+				mechanicTime = 360.8,
+				name = "[LPDU] Light Rampant - partner follow",
+				timeRange = true,
+				timelineIndex = 92,
+				timerStartOffset = -8,
+				uuid = "2f21591b-2f69-3621-9483-bb1b1aaa1b26",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or not roster.isReady() then self.used = true; return end\nlocal slot = roster.mySlot()\nlocal offsets = {\n    T1 = { 0, -12 }, MT = { 0, -12 },\n    T2 = { 12, 0 }, OT = { 12, 0 },\n    H1 = { -12, 0 }, H2 = { 0, 12 },\n    R1 = { -8.5, -8.5 }, R2 = { 8.5, -8.5 },\n    M1 = { -8.5, 8.5 }, M2 = { 8.5, 8.5 }\n}\nlocal offset = offsets[slot]\nlocal player = TensorCore.mGetPlayer()\nif offset == nil or player == nil or player.pos == nil then self.used = true; return end\nlocal target = { x = 100 + offset[1], y = player.pos.y or 0, z = 100 + offset[2] }\nlocal heading = TensorCore.getHeadingToTarget(player.pos, target)\nlocal distance = TensorCore.getDistance2d(player.pos, target)\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0, 1, 0, .98), 2)\nif heading ~= nil and distance ~= nil and distance > .25 then\n    local tip = math.min(1.25, distance)\n    green:addTimedArrow(5600, player.pos.x, player.pos.y or 0, player.pos.z, heading, math.max(.15, distance - tip), .9, tip, 2.2, 0, false)\nend\ngreen:addTimedCircle(5600, target.x, target.y, target.z, 1, 0, false)\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"b36c16e5-7d5a-9d5e-baaf-c461b6d3710e",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Guide role spread spot",
+							uuid = "919d2447-0a9d-fd78-aa58-7081e4b5a401",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40221",
+							name = "Banish III spread cast",
+							uuid = "b36c16e5-7d5a-9d5e-baaf-c461b6d3710e",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Draws",
+				eventType = 3,
+				mechanicTime = 360.8,
+				name = "[LPDU] Light Rampant - role spread",
+				timeRange = true,
+				timelineIndex = 92,
+				timerStartOffset = -8,
+				uuid = "8275f35a-1a46-56eb-8862-b218e7ede6d4",
+				version = 2,
+			},
+		},
 	},
 	[93] = 
 	{
@@ -7401,6 +7914,82 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Draws",
+				uuid = "18a0c41c-5b66-f676-9738-dff69adaa8df",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "if ArgusDrawsPlus ~= nil and type(ArgusDrawsPlus.setExtraBrightness) == \"function\" then\n    ArgusDrawsPlus.setExtraBrightness(true)\nend\nself.used = true",
+							endIfUsed = true,
+							name = "Enable extra brightness",
+							uuid = "6a224e74-ef91-324b-bf95-ae56fe32fbd0",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Draws",
+				mechanicTime = 368.8,
+				name = "[LPDU] House of Light - Extra Brightness On",
+				timeRange = true,
+				timelineIndex = 95,
+				timerEndOffset = -4.2,
+				timerStartOffset = -4.8,
+				uuid = "69f3d068-d46d-55b1-a2a2-5df5da624922",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "if ArgusDrawsPlus ~= nil and type(ArgusDrawsPlus.setExtraBrightness) == \"function\" then\n    ArgusDrawsPlus.setExtraBrightness(false)\nend\nself.used = true",
+							endIfUsed = true,
+							name = "Disable extra brightness",
+							uuid = "eda3f18d-163e-1f51-a46a-f832200ed7d0",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Draws",
+				mechanicTime = 368.8,
+				name = "[LPDU] House of Light - Extra Brightness Off",
+				timeRange = true,
+				timelineIndex = 95,
+				timerEndOffset = 4,
+				timerStartOffset = 3.5,
+				uuid = "7b1a7a0a-2245-5084-aa7b-d02e51669a4d",
+				version = 2,
+			},
 		},
 	},
 	[99] = 
@@ -8330,9 +8919,8 @@ local tbl =
 					},
 				},
 				displayPath = "FRU_megaminx_indicator",
-				enabled = false,
 				mechanicTime = 532.4,
-				name = "gray 9 UR indicator [AnyoneCore]",
+				name = "gray 9 UR indicator [AnyoneCore test needed]",
 				timeRange = true,
 				timelineIndex = 123,
 				timerEndOffset = 100,
@@ -8400,9 +8988,8 @@ local tbl =
 					},
 				},
 				displayPath = "FRU_megaminx_indicator",
-				enabled = false,
 				mechanicTime = 532.4,
-				name = "UR indicator active [AnyoneCore]",
+				name = "UR indicator active [AnyoneCore test needed]",
 				timeRange = true,
 				timelineIndex = 123,
 				timerEndOffset = 100,
@@ -8415,52 +9002,11 @@ local tbl =
 		{
 			data = 
 			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "if data.megaminx_p3_ur_hourglass == nil then data.megaminx_p3_ur_hourglass = {} end\ntable.insert(data.megaminx_p3_ur_hourglass,eventArgs.sourceEntityID)\nif table.size(data.megaminx_p3_ur_hourglass) == 3 then\n    --local green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .25), 2)\n    local center = {x = 100, y = 0, z = 100}\n    local ent1 = TensorCore.mGetEntity(data.megaminx_p3_ur_hourglass[1])\n    local ent2 = TensorCore.mGetEntity(data.megaminx_p3_ur_hourglass[2])\n    local ent3 = TensorCore.mGetEntity(data.megaminx_p3_ur_hourglass[3])\n    local function find_most_distant_ent(ents)\n        local max_total_distance = -math.huge\n        local most_distant_ent = nil\n    \n        for i, ent in ipairs(ents) do\n            local total_distance = 0\n            for j, other_ent in ipairs(ents) do\n                if i ~= j then\n                    total_distance = total_distance + TensorCore.getDistance2d(ent.pos, other_ent.pos)\n                end\n            end\n    \n            if total_distance > max_total_distance then\n                max_total_distance = total_distance\n                most_distant_ent = ent\n            end\n        end\n    \n        return most_distant_ent, max_total_distance\n    end\n\n    local most_distant_ent = find_most_distant_ent({ent1,ent2,ent3})\n    if data.megaminx_p3_ur_north == nil and most_distant_ent ~= nil then data.megaminx_p3_ur_north = TensorCore.getHeadingToTarget(center,most_distant_ent.pos) + math.pi end\n    --green:addTimedArrow(10000, 100, 0, 100, data.megaminx_p3_ur_north, 10, 1, 1, 1, 0, true)\nend\nself.used = true",
-							conditions = 
-							{
-								
-								{
-									"b9355b53-f238-16ba-8833-48853f31b0af",
-									true,
-								},
-							},
-							uuid = "41c33b69-acf8-1950-bcb2-4ac0924a74be",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Lua",
-							conditionLua = "return eventArgs.newTetherID == 134",
-							uuid = "b9355b53-f238-16ba-8833-48853f31b0af",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "FRU_megaminx_indicator",
-				eventType = 15,
-				loop = true,
-				mechanicTime = 532.4,
-				name = "get tethers [AnyoneCore]",
-				timeRange = true,
-				timelineIndex = 123,
-				timerEndOffset = 100,
-				timerStartOffset = -100,
-				uuid = "1d6067b3-0bb5-3731-8520-803dbf1ac03d",
-				version = 2,
+				displayPath = "",
+				name = "LPDU",
+				uuid = "136698d7-510d-0e25-b552-edb1606c7d29",
 			},
+			objectType = "folder",
 		},
 		
 		{
@@ -8473,7 +9019,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local index\nlocal p = TensorCore.mGetPlayer()\nlocal roster = AnyoneCore and AnyoneCore.Roster\r\nif roster == nil or roster.current() == nil then\r\n    self.used = true\r\n    return\r\nend\r\nlocal mySlot = roster.mySlot()\r\nlocal myRole = (mySlot == \"T1\" and \"MT\") or (mySlot == \"T2\" and \"OT\") or mySlot\r\nif not roster.isReady() then\r\n    self.used = true\r\n    return\r\nend\r\nif p == nil then self.used = true; return end\r\nif myRole == \"MT\" then index = 1\r\nelseif myRole == \"OT\" then index = 2\r\nelseif myRole == \"H1\" then index = 3\r\nelseif myRole == \"H2\" then index = 4\r\nelseif myRole == \"M1\" then index = 5\r\nelseif myRole == \"M2\" then index = 6\r\nelseif myRole == \"R1\" then index = 7\r\nelseif myRole == \"R2\" then index = 8\r\nelse self.used = true; return end\r\nlocal partyIDs = {\r\n    roster.idOf(\"T1\"),\r\n    roster.idOf(\"T2\"),\r\n    roster.idOf(\"H1\"),\r\n    roster.idOf(\"H2\"),\r\n    roster.idOf(\"M1\"),\r\n    roster.idOf(\"M2\"),\r\n    roster.idOf(\"R1\"),\r\n    roster.idOf(\"R2\")\r\n}local p = TensorCore.mGetEntity(partyIDs[index])\nlocal buffs = {}\r\nlocal fireBuff = TensorCore.getBuff(p, 2455)\r\nlocal iceBuff = TensorCore.getBuff(p, 2462)\r\nif fireBuff then buffs[2455] = fireBuff.duration end\r\nif iceBuff then buffs[2462] = iceBuff.duration end\n\nlocal function checkDebuff(index, startRange, endRange, buffid)\n    local playerEnt  = TensorCore.mGetEntity(partyIDs[index])\n    local playerBuff = TensorCore.getBuff(playerEnt, buffid)\n    --d(playerBuff)\n    local customOrder\n    if startRange == 1 and endRange == 4 then\n        customOrder = {4, 3, 1, 2}\n    else\n        customOrder = {8, 7, 5, 6}\n    end\n    local idxPos = 999 \n    for pos, val in ipairs(customOrder) do\n        if val == index then\n            idxPos = pos\n            break\n        end\n    end\n    d(idxPos)\n\n    for i = startRange, endRange do\n        if i == index then\n            continue\n        end\n\n        local ent  = TensorCore.mGetEntity(partyIDs[i])\n        local buff = TensorCore.getBuff(ent, buffid)\n        --d(buff)\n\n        if playerBuff and buff then\n            if math.abs(buff.duration - playerBuff.duration) < 1 then\n                local iPos = 999\n                for pos, val in ipairs(customOrder) do\n                    if val == i then\n                        iPos = pos\n                        break\n                    end\n                end\n                if idxPos < iPos then\n                    return true\n                else\n                    return false\n                end\n            end\n        end\n    end\n\n    return false\nend\n\n\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .25),2)\nlocal white = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(255/255, 255/255, 255/255, .25),2)\nlocal center = {x = 100, y = 0,z = 100}\nlocal fire = 2455\nlocal ice = 2462\nlocal yellow = 2454\nlocal water = 2461\nlocal dark = 2460\nlocal heading2North = data.megaminx_p3_ur_north\nif TensorCore.isTank(p) or TensorCore.isHealer(p) then --support\n    if TensorCore.hasBuff(p,fire,nil,nil,20) then --long fire\n        --center, ne nw bait, center ice, center(rewind), out, center\n\n        local result = checkDebuff(index, 1, 4, fire)\n        if (result == true) then\n            AnyoneCore.Shotcall(\"left\", true, 40, false)\n        else\n            AnyoneCore.Shotcall(\"right\", true, 40, false)\n        end\n\n        local duration = buffs[2455] * 1000\n\n        white:addTimedArrow(40000, 100, 0, 100, heading2North + math.pi/4, 40, .3, .3, .3,0,true)\n        white:addTimedArrow(40000, 100, 0, 100, heading2North - math.pi/4, 40, .3, .3, .3,0,true) --these 2 lines can be refined after using prio system\n\n        green:addTimedCircle(duration  - 20000,center.x,0,center.z,5,0,true) --center\n\n        green:addTimedArrow(5000, 100, 0, 100, heading2North + math.pi/4, 8.5, 1, 1, 1,duration  - 20000,true) --\n        green:addTimedArrow(5000, 100, 0, 100, heading2North - math.pi/4, 8.5, 1, 1, 1,duration  - 20000,true) --bait hourglass\n\n        green:addTimedCircle(5000,center.x,0,center.z,3,duration  - 20000 + 5000,true) --center ice\n\n        green:addTimedArrow(5000, 100, 0, 100, heading2North + math.pi/4, 2, 1, 1, 1,duration  - 20000 + 5000 + 5000,true) --\n        green:addTimedArrow(5000, 100, 0, 100, heading2North - math.pi/4, 2, 1, 1, 1,duration  - 20000 + 5000 + 5000,true) -- rewind\n\n        green:addTimedArrow(5000, 100, 0, 100, heading2North + math.pi/4, 18, 1, 1, 1,duration  - 20000 + 5000 + 5000 + 5000,true) --\n        green:addTimedArrow(5000, 100, 0, 100, heading2North - math.pi/4, 18, 1, 1, 1,duration  - 20000 + 5000 + 5000 + 5000,true) -- out\n\n        green:addTimedCircle(5000,center.x,0,center.z,5,duration  - 20000 + 5000 + 5000 + 5000 + 5000,true) --center\n    elseif TensorCore.hasBuff(p,fire,nil,nil,10) then --medium fire\n        --center, rewind(dark out water in), out(west (灰9east)), center, center, bait(west (灰9east))\n        local duration = buffs[2455] * 1000\n\n        white:addTimedArrow(40000, 100, 0, 100, heading2North + math.pi/2, 40, .3, .3, .3,0,true)\n        --white:addTimedArrow(40000, 100, 0, 100, heading2North - math.pi/2, 40, .3, .3, .3,0,true) \n\n        green:addTimedCircle(duration  - 10000,center.x,0,center.z,5,0,true) --center\n\n        if TensorCore.hasBuff(p,water) then\n            green:addTimedArrow(5000, 100, 0, 100, heading2North + math.pi/2, 2, 1, 1, 1,duration  - 10000,true) --rewind\n        end\n        if TensorCore.hasBuff(p,dark) then\n            green:addTimedArrow(5000, 100, 0, 100, heading2North + math.pi/2, 7.5, 1, 1, 1,duration  - 10000,true) --rewind\n        end--\n\n        green:addTimedArrow(5000, 100, 0, 100, heading2North + math.pi/2, 18, 1, 1, 1,duration  - 10000 + 5000,true) --out\n        \n\n        green:addTimedCircle(5000,center.x,0,center.z,5,duration  - 10000 + 5000 + 5000,true) --center\n\n        green:addTimedCircle(5000,center.x,0,center.z,5,duration  - 10000 + 5000 + 5000 + 5000,true) --center\n\n        green:addTimedArrow(5000, 100, 0, 100, heading2North + math.pi/2, 8.5, 1, 1, 1,duration  - 10000 + 5000 + 5000 + 5000 + 5000,true) --bait hourglass\n    else -- short fire or ice\n        --(ice center, fire out), rewind(dark out water in), center ice, n bait, center, center\n        local duration\n        local isIce = TensorCore.hasBuff(p,ice)\n        local isFire = TensorCore.hasBuff(p,fire)\n        if isIce then\n            duration = buffs[2462] * 1000 - 10000\n            green:addTimedCircle(duration,center.x,0,center.z,5,0,true) --center if ice\n        end\n        if isFire then\n            duration = buffs[2455] * 1000\n            green:addTimedArrow(duration, 100, 0, 100, heading2North , 18, 1, 1, 1,0,true) --out if fire\n        end\n        white:addTimedArrow(40000, 100, 0, 100, heading2North, 40, .3, .3, .3,0,true)\n\n        if TensorCore.hasBuff(p,water) then\n            green:addTimedArrow(5000, 100, 0, 100, heading2North, 2, 1, 1, 1,duration,true) --rewind\n        end\n        if TensorCore.hasBuff(p,dark) then\n            green:addTimedArrow(5000, 100, 0, 100, heading2North, 7.5, 1, 1, 1,duration,true) --rewind\n        end\n\n        green:addTimedCircle(5000,center.x,0,center.z,3,duration + 5000,true) --center ice\n\n        green:addTimedArrow(5000, 100, 0, 100, heading2North, 8.5, 1, 1, 1,duration + 5000 + 5000,true) --bait hourglass\n\n        green:addTimedCircle(5000,center.x,0,center.z,5,duration + 5000 + 5000 + 5000,true) --center\n\n        green:addTimedCircle(5000,center.x,0,center.z,5,duration + 5000 + 5000 + 5000 + 5000,true) --center\n    end\nelse --dps\n\n    if TensorCore.hasBuff(p,fire,nil,nil,20) or TensorCore.hasBuff(p,ice) then --long fire\n        --center, s bait, center ice, center(rewind), out, center\n        local duration\n        local isIce = TensorCore.hasBuff(p,ice)\n        local isFire = TensorCore.hasBuff(p,fire)\n        if isIce then\n            duration = buffs[2462] * 1000 + 10000\n        end\n        if isFire then\n            duration = buffs[2455] * 1000\n        end\n\n        white:addTimedArrow(40000, 100, 0, 100, heading2North + math.pi, 40, .3, .3, .3,0,true)\n\n        green:addTimedCircle(duration  - 20000,center.x,0,center.z,5,0,true) --center\n\n        green:addTimedArrow(5000, 100, 0, 100, heading2North + math.pi, 8.5, 1, 1, 1,duration  - 20000,true) --bait hourglass\n\n        green:addTimedCircle(5000,center.x,0,center.z,3,duration  - 20000 + 5000,true) --center ice\n\n        green:addTimedArrow(5000, 100, 0, 100, heading2North + math.pi, 2, 1, 1, 1,duration  - 20000 + 5000 + 5000,true) --rewind\n\n        green:addTimedArrow(5000, 100, 0, 100, heading2North + math.pi, 18, 1, 1, 1,duration  - 20000 + 5000 + 5000 + 5000,true) --out\n\n        green:addTimedCircle(5000,center.x,0,center.z,5,duration  - 20000 + 5000 + 5000 + 5000 + 5000,true) --center\n    elseif TensorCore.hasBuff(p,fire,nil,nil,10) then --medium fire\n        --center, rewind(dark out water in), out(east (灰9west)), center, center, bait(east (灰9west))\n        --center, rewind(dark out water in), out(west (灰9east)), center, center, bait(west (灰9east))\n        local duration = buffs[2455] * 1000\n\n        white:addTimedArrow(40000, 100, 0, 100, heading2North - math.pi/2, 40, .3, .3, .3,0,true)\n        --white:addTimedArrow(40000, 100, 0, 100, heading2North - math.pi/2, 40, .3, .3, .3,0,true) \n\n        green:addTimedCircle(duration  - 10000,center.x,0,center.z,5,0,true) --center\n\n        if TensorCore.hasBuff(p,water) then\n            green:addTimedArrow(5000, 100, 0, 100, heading2North - math.pi/2, 2, 1, 1, 1,duration  - 10000,true) --rewind\n        end\n        if TensorCore.hasBuff(p,dark) then\n            green:addTimedArrow(5000, 100, 0, 100, heading2North - math.pi/2, 7.5, 1, 1, 1,duration  - 10000,true) --rewind\n        end--\n\n        green:addTimedArrow(5000, 100, 0, 100, heading2North - math.pi/2, 18, 1, 1, 1,duration  - 10000 + 5000,true) --out\n        \n\n        green:addTimedCircle(5000,center.x,0,center.z,5,duration  - 10000 + 5000 + 5000,true) --center\n\n        green:addTimedCircle(5000,center.x,0,center.z,5,duration  - 10000 + 5000 + 5000 + 5000,true) --center\n\n        green:addTimedArrow(5000, 100, 0, 100, heading2North - math.pi/2, 8.5, 1, 1, 1,duration  - 10000 + 5000 + 5000 + 5000 + 5000,true) --bait hourglass\n    else -- short fire or ice\n        --fire out se sw, rewind(dark out water in), center, sw se bait, center, center\n        --(ice center, fire out), rewind(dark out water in), center ice, n bait, center, center\n        local duration = buffs[2455] * 1000\n\n        local result = checkDebuff(index, 5, 8, fire)\n        if (result == true) then\n            AnyoneCore.Shotcall(\"left\", true, 40, false)\n        else\n            AnyoneCore.Shotcall(\"right\", true, 40, false)\n        end\n\n        white:addTimedArrow(40000, 100, 0, 100, heading2North + math.pi/2 + math.pi/4, 40, .3, .3, .3,0,true)\n        white:addTimedArrow(40000, 100, 0, 100, heading2North - math.pi/2 - math.pi/4, 40, .3, .3, .3,0,true)\n\n        green:addTimedArrow(duration, 100, 0, 100, heading2North + math.pi/2 + math.pi/4 , 18, 1, 1, 1,0,true) --out if fire\n        green:addTimedArrow(duration, 100, 0, 100, heading2North - math.pi/2 - math.pi/4 , 18, 1, 1, 1,0,true) --out if fire\n\n        if TensorCore.hasBuff(p,water) then\n            green:addTimedArrow(5000, 100, 0, 100, heading2North + math.pi/2 + math.pi/4, 2, 1, 1, 1,duration,true) --rewind\n            green:addTimedArrow(5000, 100, 0, 100, heading2North - math.pi/2 - math.pi/4, 2, 1, 1, 1,duration,true) --rewind\n        end\n        if TensorCore.hasBuff(p,dark) then\n            green:addTimedArrow(5000, 100, 0, 100, heading2North + math.pi/2 + math.pi/4, 7.5, 1, 1, 1,duration,true) --rewind\n            green:addTimedArrow(5000, 100, 0, 100, heading2North - math.pi/2 - math.pi/4, 7.5, 1, 1, 1,duration,true) --rewind\n        end\n\n        green:addTimedCircle(5000,center.x,0,center.z,3,duration + 5000,true) --center ice\n\n        green:addTimedArrow(5000, 100, 0, 100, heading2North + math.pi/2 + math.pi/4, 8.5, 1, 1, 1,duration + 5000 + 5000,true) --bait hourglass\n        green:addTimedArrow(5000, 100, 0, 100, heading2North - math.pi/2 - math.pi/4, 8.5, 1, 1, 1,duration + 5000 + 5000,true) --bait hourglass\n\n        green:addTimedCircle(5000,center.x,0,center.z,5,duration + 5000 + 5000 + 5000,true) --center\n\n        green:addTimedCircle(5000,center.x,0,center.z,5,duration + 5000 + 5000 + 5000 + 5000,true) --center\n    end\nend\nself.used = true",
+							actionLua = "local index\nlocal p = TensorCore.mGetPlayer()\nlocal roster = AnyoneCore and AnyoneCore.Roster\r\nif roster == nil or roster.current() == nil then\r\n    self.used = true\r\n    return\r\nend\r\nlocal mySlot = roster.mySlot()\r\nlocal myRole = (mySlot == \"T1\" and \"MT\") or (mySlot == \"T2\" and \"OT\") or mySlot\r\nif not roster.isReady() then\r\n    self.used = true\r\n    return\r\nend\r\nif p == nil then self.used = true; return end\r\nif myRole == \"MT\" then index = 1\r\nelseif myRole == \"OT\" then index = 2\r\nelseif myRole == \"H1\" then index = 3\r\nelseif myRole == \"H2\" then index = 4\r\nelseif myRole == \"M1\" then index = 5\r\nelseif myRole == \"M2\" then index = 6\r\nelseif myRole == \"R1\" then index = 7\r\nelseif myRole == \"R2\" then index = 8\r\nelse self.used = true; return end\r\nlocal partyIDs = {\r\n    roster.idOf(\"T1\"),\r\n    roster.idOf(\"T2\"),\r\n    roster.idOf(\"H1\"),\r\n    roster.idOf(\"H2\"),\r\n    roster.idOf(\"M1\"),\r\n    roster.idOf(\"M2\"),\r\n    roster.idOf(\"R1\"),\r\n    roster.idOf(\"R2\")\r\n}local p = TensorCore.mGetEntity(partyIDs[index])\nlocal buffs = {}\r\nlocal fireBuff = TensorCore.getBuff(p, 2455)\r\nlocal iceBuff = TensorCore.getBuff(p, 2462)\r\nif fireBuff then buffs[2455] = fireBuff.duration end\r\nif iceBuff then buffs[2462] = iceBuff.duration end\n\nlocal function checkDebuff(index, startRange, endRange, buffid)\n    local playerEnt  = TensorCore.mGetEntity(partyIDs[index])\n    local playerBuff = TensorCore.getBuff(playerEnt, buffid)\n    --d(playerBuff)\n    local customOrder\n    if startRange == 1 and endRange == 4 then\n        customOrder = {3, 1, 2, 4}\n    else\n        customOrder = {7, 5, 6, 8}\n    end\n    local idxPos = 999 \n    for pos, val in ipairs(customOrder) do\n        if val == index then\n            idxPos = pos\n            break\n        end\n    end\n\n    for i = startRange, endRange do\n        if i == index then\n            continue\n        end\n\n        local ent  = TensorCore.mGetEntity(partyIDs[i])\n        local buff = TensorCore.getBuff(ent, buffid)\n        --d(buff)\n\n        if playerBuff and buff then\n            if math.abs(buff.duration - playerBuff.duration) < 1 then\n                local iPos = 999\n                for pos, val in ipairs(customOrder) do\n                    if val == i then\n                        iPos = pos\n                        break\n                    end\n                end\n                if idxPos < iPos then\n                    return true\n                else\n                    return false\n                end\n            end\n        end\n    end\n\n    return false\nend\n\n\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .25),2)\nlocal white = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(255/255, 255/255, 255/255, .25),2)\nlocal center = {x = 100, y = 0,z = 100}\nlocal fire = 2455\nlocal ice = 2462\nlocal yellow = 2454\nlocal water = 2461\nlocal dark = 2460\nlocal heading2North = data.megaminx_p3_ur_north\nif TensorCore.isTank(p) or TensorCore.isHealer(p) then --support\n    if TensorCore.hasBuff(p,fire,nil,nil,20) then --long fire\n        --center, ne nw bait, center ice, center(rewind), out, center\n\n        local result = checkDebuff(index, 1, 4, fire)\n        if (result == true) then\n            AnyoneCore.Shotcall(\"left\", true, 40, false)\n        else\n            AnyoneCore.Shotcall(\"right\", true, 40, false)\n        end\n\n        local sideHeading = heading2North + (result and math.pi/4 or -math.pi/4)\n        local duration = buffs[2455] * 1000\n\n        white:addTimedArrow(40000, 100, 0, 100, sideHeading, 40, .3, .3, .3,0,true)\n\n        green:addTimedCircle(duration  - 20000,center.x,0,center.z,5,0,true) --center\n\n        green:addTimedArrow(5000, 100, 0, 100, sideHeading, 8.5, 1, 1, 1,duration  - 20000,true) --\n\n        green:addTimedCircle(5000,center.x,0,center.z,3,duration  - 20000 + 5000,true) --center ice\n\n        green:addTimedArrow(5000, 100, 0, 100, sideHeading, 2, 1, 1, 1,duration  - 20000 + 5000 + 5000,true) --\n\n        green:addTimedArrow(5000, 100, 0, 100, sideHeading, 18, 1, 1, 1,duration  - 20000 + 5000 + 5000 + 5000,true) --\n\n        green:addTimedCircle(5000,center.x,0,center.z,5,duration  - 20000 + 5000 + 5000 + 5000 + 5000,true) --center\n    elseif TensorCore.hasBuff(p,fire,nil,nil,10) then --medium fire\n        --center, rewind(dark out water in), out(west (9east)), center, center, bait(west (9east))\n        local duration = buffs[2455] * 1000\n\n        white:addTimedArrow(40000, 100, 0, 100, heading2North + math.pi/2, 40, .3, .3, .3,0,true)\n        --white:addTimedArrow(40000, 100, 0, 100, heading2North - math.pi/2, 40, .3, .3, .3,0,true) \n\n        green:addTimedCircle(duration  - 10000,center.x,0,center.z,5,0,true) --center\n\n        if TensorCore.hasBuff(p,water) then\n            green:addTimedArrow(5000, 100, 0, 100, heading2North + math.pi/2, 2, 1, 1, 1,duration  - 10000,true) --rewind\n        end\n        if TensorCore.hasBuff(p,dark) then\n            green:addTimedArrow(5000, 100, 0, 100, heading2North + math.pi/2, 7.5, 1, 1, 1,duration  - 10000,true) --rewind\n        end--\n\n        green:addTimedArrow(5000, 100, 0, 100, heading2North + math.pi/2, 18, 1, 1, 1,duration  - 10000 + 5000,true) --out\n        \n\n        green:addTimedCircle(5000,center.x,0,center.z,5,duration  - 10000 + 5000 + 5000,true) --center\n\n        green:addTimedCircle(5000,center.x,0,center.z,5,duration  - 10000 + 5000 + 5000 + 5000,true) --center\n\n        green:addTimedArrow(5000, 100, 0, 100, heading2North + math.pi/2, 8.5, 1, 1, 1,duration  - 10000 + 5000 + 5000 + 5000 + 5000,true) --bait hourglass\n    else -- short fire or ice\n        --(ice center, fire out), rewind(dark out water in), center ice, n bait, center, center\n        local duration\n        local isIce = TensorCore.hasBuff(p,ice)\n        local isFire = TensorCore.hasBuff(p,fire)\n        if isIce then\n            duration = buffs[2462] * 1000 - 10000\n            green:addTimedCircle(duration,center.x,0,center.z,5,0,true) --center if ice\n        end\n        if isFire then\n            duration = buffs[2455] * 1000\n            green:addTimedArrow(duration, 100, 0, 100, heading2North , 18, 1, 1, 1,0,true) --out if fire\n        end\n        white:addTimedArrow(40000, 100, 0, 100, heading2North, 40, .3, .3, .3,0,true)\n\n        if TensorCore.hasBuff(p,water) then\n            green:addTimedArrow(5000, 100, 0, 100, heading2North, 2, 1, 1, 1,duration,true) --rewind\n        end\n        if TensorCore.hasBuff(p,dark) then\n            green:addTimedArrow(5000, 100, 0, 100, heading2North, 7.5, 1, 1, 1,duration,true) --rewind\n        end\n\n        green:addTimedCircle(5000,center.x,0,center.z,3,duration + 5000,true) --center ice\n\n        green:addTimedArrow(5000, 100, 0, 100, heading2North, 8.5, 1, 1, 1,duration + 5000 + 5000,true) --bait hourglass\n\n        green:addTimedCircle(5000,center.x,0,center.z,5,duration + 5000 + 5000 + 5000,true) --center\n\n        green:addTimedCircle(5000,center.x,0,center.z,5,duration + 5000 + 5000 + 5000 + 5000,true) --center\n    end\nelse --dps\n\n    if TensorCore.hasBuff(p,fire,nil,nil,20) or TensorCore.hasBuff(p,ice) then --long fire\n        --center, s bait, center ice, center(rewind), out, center\n        local duration\n        local isIce = TensorCore.hasBuff(p,ice)\n        local isFire = TensorCore.hasBuff(p,fire)\n        if isIce then\n            duration = buffs[2462] * 1000 + 10000\n        end\n        if isFire then\n            duration = buffs[2455] * 1000\n        end\n\n        white:addTimedArrow(40000, 100, 0, 100, heading2North + math.pi, 40, .3, .3, .3,0,true)\n\n        green:addTimedCircle(duration  - 20000,center.x,0,center.z,5,0,true) --center\n\n        green:addTimedArrow(5000, 100, 0, 100, heading2North + math.pi, 8.5, 1, 1, 1,duration  - 20000,true) --bait hourglass\n\n        green:addTimedCircle(5000,center.x,0,center.z,3,duration  - 20000 + 5000,true) --center ice\n\n        green:addTimedArrow(5000, 100, 0, 100, heading2North + math.pi, 2, 1, 1, 1,duration  - 20000 + 5000 + 5000,true) --rewind\n\n        green:addTimedArrow(5000, 100, 0, 100, heading2North + math.pi, 18, 1, 1, 1,duration  - 20000 + 5000 + 5000 + 5000,true) --out\n\n        green:addTimedCircle(5000,center.x,0,center.z,5,duration  - 20000 + 5000 + 5000 + 5000 + 5000,true) --center\n    elseif TensorCore.hasBuff(p,fire,nil,nil,10) then --medium fire\n        --center, rewind(dark out water in), out(east (9west)), center, center, bait(east (9west))\n        --center, rewind(dark out water in), out(west (9east)), center, center, bait(west (9east))\n        local duration = buffs[2455] * 1000\n\n        white:addTimedArrow(40000, 100, 0, 100, heading2North - math.pi/2, 40, .3, .3, .3,0,true)\n        --white:addTimedArrow(40000, 100, 0, 100, heading2North - math.pi/2, 40, .3, .3, .3,0,true) \n\n        green:addTimedCircle(duration  - 10000,center.x,0,center.z,5,0,true) --center\n\n        if TensorCore.hasBuff(p,water) then\n            green:addTimedArrow(5000, 100, 0, 100, heading2North - math.pi/2, 2, 1, 1, 1,duration  - 10000,true) --rewind\n        end\n        if TensorCore.hasBuff(p,dark) then\n            green:addTimedArrow(5000, 100, 0, 100, heading2North - math.pi/2, 7.5, 1, 1, 1,duration  - 10000,true) --rewind\n        end--\n\n        green:addTimedArrow(5000, 100, 0, 100, heading2North - math.pi/2, 18, 1, 1, 1,duration  - 10000 + 5000,true) --out\n        \n\n        green:addTimedCircle(5000,center.x,0,center.z,5,duration  - 10000 + 5000 + 5000,true) --center\n\n        green:addTimedCircle(5000,center.x,0,center.z,5,duration  - 10000 + 5000 + 5000 + 5000,true) --center\n\n        green:addTimedArrow(5000, 100, 0, 100, heading2North - math.pi/2, 8.5, 1, 1, 1,duration  - 10000 + 5000 + 5000 + 5000 + 5000,true) --bait hourglass\n    else -- short fire or ice\n        --fire out se sw, rewind(dark out water in), center, sw se bait, center, center\n        --(ice center, fire out), rewind(dark out water in), center ice, n bait, center, center\n        local duration = buffs[2455] * 1000\n\n        local result = checkDebuff(index, 5, 8, fire)\n        if (result == true) then\n            AnyoneCore.Shotcall(\"left\", true, 40, false)\n        else\n            AnyoneCore.Shotcall(\"right\", true, 40, false)\n        end\n\n        local sideHeading = heading2North + (result and 3*math.pi/4 or -3*math.pi/4)\n        white:addTimedArrow(40000, 100, 0, 100, sideHeading, 40, .3, .3, .3,0,true)\n\n        green:addTimedArrow(duration, 100, 0, 100, sideHeading , 18, 1, 1, 1,0,true) --out if fire\n\n        if TensorCore.hasBuff(p,water) then\n            green:addTimedArrow(5000, 100, 0, 100, sideHeading, 2, 1, 1, 1,duration,true) --rewind\n        end\n        if TensorCore.hasBuff(p,dark) then\n            green:addTimedArrow(5000, 100, 0, 100, sideHeading, 7.5, 1, 1, 1,duration,true) --rewind\n        end\n\n        green:addTimedCircle(5000,center.x,0,center.z,3,duration + 5000,true) --center ice\n\n        green:addTimedArrow(5000, 100, 0, 100, sideHeading, 8.5, 1, 1, 1,duration + 5000 + 5000,true) --bait hourglass\n\n        green:addTimedCircle(5000,center.x,0,center.z,5,duration + 5000 + 5000 + 5000,true) --center\n\n        green:addTimedCircle(5000,center.x,0,center.z,5,duration + 5000 + 5000 + 5000 + 5000,true) --center\n    end\nend\nself.used = true",
 							conditions = 
 							{
 								
@@ -8520,14 +9066,65 @@ local tbl =
 						},
 					},
 				},
-				displayPath = "FRU_megaminx_indicator",
+				displayPath = "LPDU",
 				mechanicTime = 532.4,
-				name = "UR indicator [AnyoneCore]",
+				name = "UR indicator [LPDU]",
 				timeRange = true,
 				timelineIndex = 123,
 				timerEndOffset = 100,
 				timerStartOffset = -100,
 				uuid = "f5e3df53-28f6-4c44-a092-4353df71288e",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "if data.megaminx_p3_ur_hourglass == nil then data.megaminx_p3_ur_hourglass = {} end\ntable.insert(data.megaminx_p3_ur_hourglass,eventArgs.sourceEntityID)\nif table.size(data.megaminx_p3_ur_hourglass) == 3 then\n    --local green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .25), 2)\n    local center = {x = 100, y = 0, z = 100}\n    local ent1 = TensorCore.mGetEntity(data.megaminx_p3_ur_hourglass[1])\n    local ent2 = TensorCore.mGetEntity(data.megaminx_p3_ur_hourglass[2])\n    local ent3 = TensorCore.mGetEntity(data.megaminx_p3_ur_hourglass[3])\n    local function find_most_distant_ent(ents)\n        local max_total_distance = -math.huge\n        local most_distant_ent = nil\n    \n        for i, ent in ipairs(ents) do\n            local total_distance = 0\n            for j, other_ent in ipairs(ents) do\n                if i ~= j then\n                    total_distance = total_distance + TensorCore.getDistance2d(ent.pos, other_ent.pos)\n                end\n            end\n    \n            if total_distance > max_total_distance then\n                max_total_distance = total_distance\n                most_distant_ent = ent\n            end\n        end\n    \n        return most_distant_ent, max_total_distance\n    end\n\n    local most_distant_ent = find_most_distant_ent({ent1,ent2,ent3})\n    if data.megaminx_p3_ur_north == nil and most_distant_ent ~= nil then data.megaminx_p3_ur_north = TensorCore.getHeadingToTarget(center,most_distant_ent.pos) + math.pi end\n    --green:addTimedArrow(10000, 100, 0, 100, data.megaminx_p3_ur_north, 10, 1, 1, 1, 0, true)\nend\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"b9355b53-f238-16ba-8833-48853f31b0af",
+									true,
+								},
+							},
+							uuid = "41c33b69-acf8-1950-bcb2-4ac0924a74be",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.newTetherID == 134",
+							uuid = "b9355b53-f238-16ba-8833-48853f31b0af",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 15,
+				loop = true,
+				mechanicTime = 532.4,
+				name = "get tethers [LPDU]",
+				timeRange = true,
+				timelineIndex = 123,
+				timerEndOffset = 100,
+				timerStartOffset = -100,
+				uuid = "1d6067b3-0bb5-3731-8520-803dbf1ac03d",
 				version = 2,
 			},
 		},
@@ -10089,6 +10686,116 @@ local tbl =
 		{
 			data = 
 			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "7723e9d5-087e-a3f3-b4d4-173991b4bc12",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() or not roster.isReady() then return end\nlocal slot = roster.mySlot()\nlocal player = TensorCore.mGetPlayer()\nif not slot or not player then return end\nlocal side = data.lpdu_p3_apoc_side\nif side ~= \"support\" and side ~= \"dps\" then\n    side = (slot == \"T1\" or slot == \"T2\" or slot == \"H1\" or slot == \"H2\") and \"support\" or \"dps\"\nend\nlocal target\nlocal callout\nif side == \"support\" then\n    target = {x = 92, y = 0, z = 92}\n    callout = \"Support NW: red or purple\"\nelse\n    target = {x = 108, y = 0, z = 108}\n    callout = \"DPS SE: blue or yellow\"\nend\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0, 1, 0, 0.45), 2)\ngreen:addTimedCircle(10000, target.x, 0, target.z, 1.5, 0, true)\nlocal distance = TensorCore.getDistance2d(player.pos, target)\nif distance > 1 then\n    green:addTimedArrow(10000, player.pos.x, 0, player.pos.z, TensorCore.getHeadingToTarget(player.pos, target), distance, 1, 1, 1, 0, true)\nend\nTensorCore.addAlertText(10000, callout, 1, 1, true)\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"4938e21f-4f21-aa8f-a121-ef38571f4846",
+									true,
+								},
+							},
+							uuid = "68a68f0b-ac91-15cd-adb0-58f4126f838b",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return table.size(data.megaminx_p3_apoc_safe) == 8 ",
+							uuid = "4938e21f-4f21-aa8f-a121-ef38571f4846",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				mechanicTime = 619.6,
+				name = "Apocalypse role side [LPDU]",
+				timeRange = true,
+				timelineIndex = 144,
+				timerEndOffset = 100,
+				timerStartOffset = -150,
+				uuid = "2c137f4e-8715-2a36-bdfe-6bcde411aa9c",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() or not roster.isReady() then return end\nlocal mySlot = roster.mySlot()\nif not mySlot then return end\nlocal support = {\"T1\", \"T2\", \"H1\", \"H2\"}\nlocal dps = {\"M1\", \"M2\", \"R1\", \"R2\"}\nlocal water = {}\nlocal countSupport, countDps = 0, 0\nfor _, slot in ipairs(support) do\n    local ent = roster.entOf(slot)\n    if not ent then return end\n    water[slot] = TensorCore.getBuff(ent, 2461) ~= nil\n    if water[slot] then countSupport = countSupport + 1 end\nend\nfor _, slot in ipairs(dps) do\n    local ent = roster.entOf(slot)\n    if not ent then return end\n    water[slot] = TensorCore.getBuff(ent, 2461) ~= nil\n    if water[slot] then countDps = countDps + 1 end\nend\nif countSupport + countDps ~= 6 then return end\nlocal function chosen(list, wantWater, howMany, slot)\n    local found = 0\n    for _, candidate in ipairs(list) do\n        if water[candidate] == wantWater then\n            found = found + 1\n            if candidate == slot then return found <= howMany end\n        end\n    end\n    return false\nend\nlocal flex = false\nlocal currentSide\nif mySlot == \"T1\" or mySlot == \"T2\" or mySlot == \"H1\" or mySlot == \"H2\" then\n    currentSide = \"support\"\n    if countSupport > 3 then\n        flex = chosen(support, true, countSupport - 3, mySlot)\n    elseif countSupport < 3 then\n        flex = chosen(support, false, 3 - countSupport, mySlot)\n    end\nelse\n    currentSide = \"dps\"\n    if countDps > 3 then\n        flex = chosen(dps, true, countDps - 3, mySlot)\n    elseif countDps < 3 then\n        flex = chosen(dps, false, 3 - countDps, mySlot)\n    end\nend\ndata.lpdu_p3_apoc_side = flex and (currentSide == \"support\" and \"dps\" or \"support\") or currentSide\nAnyoneCore.Shotcall(flex and \"flex to opposite side\" or \"stay on your side\", true, 40, false)\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"018a1525-106d-d8e1-94bb-954497d3105f",
+									true,
+								},
+							},
+							uuid = "32caae9d-255a-cc09-9642-84f66a70b6da",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							buffID = 2461,
+							category = "Party",
+							partyTargetNumber = 6,
+							partyTargetSubType = "Number",
+							uuid = "018a1525-106d-d8e1-94bb-954497d3105f",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				mechanicTime = 619.6,
+				name = "Apocalypse flex solver [LPDU]",
+				timeRange = true,
+				timelineIndex = 144,
+				timerEndOffset = 30,
+				timerStartOffset = -30,
+				uuid = "69e9ae29-cd03-194f-81cb-874de08aa504",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
 				actions = 
 				{
 					
@@ -10123,116 +10830,16 @@ local tbl =
 						},
 					},
 				},
-				displayPath = "FRU_megaminx_indicator",
+				displayPath = "LPDU",
 				eventType = 19,
 				loop = true,
 				mechanicTime = 619.6,
-				name = "get apoc pos [AnyoneCore]",
+				name = "get apoc pos [LPDU]",
 				timeRange = true,
 				timelineIndex = 144,
 				timerEndOffset = 100,
 				timerStartOffset = -150,
 				uuid = "20bf9158-a20d-1108-a4af-67195fc6ee0d",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "local function rotateAroundPos(origin,pos,angle)\n    local distance = TensorCore.getDistance2d(origin,pos)\n    local heading = TensorCore.getHeadingToTarget(origin,pos)\n    local pos = TensorCore.getPosInDirection(origin,heading + angle,distance)\n    return pos\nend\nlocal function getHeadingBetween2Pos(midPos,pos1,pos2)\n    local h2T = TensorCore.getHeadingToTarget(midPos,pos1)\n    local h2E = TensorCore.getHeadingToTarget(midPos,pos2)\n    local north = (h2T + h2E) / 2\n    if (math.abs(north - h2T)) < (math.pi /2) then\n        north = north + math.pi\n    end\n    north = north + math.pi\n    return north\nend\nlocal center = {x = 100, y = 0, z = 100}\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .25),2)\nlocal white = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(255/255, 255/255, 255/255, .25),2)\nlocal blue = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0/255, 0/255, 255/255, .25),2)\nlocal pos1,pos2,pos3,pos4 = data.megaminx_p3_apoc_safe[5],data.megaminx_p3_apoc_safe[6],data.megaminx_p3_apoc_safe[7],data.megaminx_p3_apoc_safe[8]\nlocal set1\nlocal set2\nif TensorCore.getDistance2d(pos1,pos3) < TensorCore.getDistance2d(pos1,pos4) then\n    set1 = {pos1,pos3}\n    set2 = {pos2,pos4}\nelse\n    set1 = {pos2,pos3}\n    set2 = {pos1,pos4}\nend\nlocal cross = (set1[1].x - 100) * (set1[2].z-100) - (set1[1].z-100) * (set1[2].x-100)\nif cross > 0 then\n    set1[1] = rotateAroundPos(center, set1[1], math.pi/2) --on the right\n    set1[2] = rotateAroundPos(center, set1[2], math.pi/2) --on the left\nelse\n    set1[1] = rotateAroundPos(center, set1[1], -math.pi/2) --on the left\n    set1[2] = rotateAroundPos(center, set1[2], -math.pi/2) --on the right\nend\nlocal cross2 = (set2[1].x - 100) * (set2[2].z-100) - (set2[1].z-100) * (set2[2].x-100)\nif cross2 > 0 then\n    set2[1] = rotateAroundPos(center, set2[1], math.pi/2)\n    set2[2] = rotateAroundPos(center, set2[2], math.pi/2)\nelse\n    set2[1] = rotateAroundPos(center, set2[1], -math.pi/2)\n    set2[2] = rotateAroundPos(center, set2[2], -math.pi/2)\nend\n--green:addTimedArrow(5000, 100, 0, 100, TensorCore.getHeadingToTarget(center,set1[1]), TensorCore.getDistance2d(center,set1[1]), 1, 1, 1,0,true)\n--green:addTimedArrow(5000, 100, 0, 100, TensorCore.getHeadingToTarget(center,set1[2]), TensorCore.getDistance2d(center,set1[2]), 1, 1, 1,0,true)\n--green:addTimedArrow(5000, 100, 0, 100, getHeadingBetween2Pos(center,set1[1],set1[2]), TensorCore.getDistance2d(center,set1[2]), 1, 1, 1,0,true)\n--green:addTimedArrow(5000, 100, 0, 100, getHeadingBetween2Pos(center,set2[1],set2[2]), TensorCore.getDistance2d(center,set2[2]), 1, 1, 1,0,true)\n--green:addTimedArrow(5000, 100, 0, 100, TensorCore.getHeadingToTarget(center,set2[1]), 10, 1, 1, 1,0,true)\n--green:addTimedArrow(5000, 100, 0, 100, TensorCore.getHeadingToTarget(center,set2[2]), 10, 1, 1, 1,0,true)\n--green:addTimedArrow(5000, 100, 0, 100, getHeadingBetween2Pos(center,set2[1],set2[2]), 15, 1, 1, 1,0,true)\n--green:addTimedArrow(5000, 100, 0, 100, TensorCore.getHeadingToTarget(center,set2[2]) + (-math.pi/16 and cross2 > 0 or math.pi/16), 18, 1, 1, 1,0,true)\nlocal postable1 = {\n    TensorCore.getPosInDirection(center,TensorCore.getHeadingToTarget(center,set1[1]),10),\n    TensorCore.getPosInDirection(center,TensorCore.getHeadingToTarget(center,set1[2]),10),\n    TensorCore.getPosInDirection(center,getHeadingBetween2Pos(center,set1[1],set1[2]), 16),\n    TensorCore.getPosInDirection(center,TensorCore.getHeadingToTarget(center,set1[2]) + (cross > 0 and -math.pi/16 or math.pi/16), 18),\n}\nlocal postable2 = {\n    TensorCore.getPosInDirection(center,TensorCore.getHeadingToTarget(center,set2[1]),10),\n    TensorCore.getPosInDirection(center,TensorCore.getHeadingToTarget(center,set2[2]),10),\n    TensorCore.getPosInDirection(center,getHeadingBetween2Pos(center,set2[1],set2[2]), 16),\n    TensorCore.getPosInDirection(center,TensorCore.getHeadingToTarget(center,set2[2]) + (cross2 > 0  and -math.pi/16 or math.pi/16), 18),\n}\n\n--green:addTimedArrow(10000, 100, 0, 100, getHeadingBetween2Pos(center,set1[1],set1[2]), 10, 1, 1, 1,0,true)\ngreen:addTimedCircle(10000,postable1[1].x,0,postable1[1].z,1,0,true)\ngreen:addTimedCircle(10000,postable1[2].x,0,postable1[2].z,1,0,true)\ngreen:addTimedCircle(10000,postable1[3].x,0,postable1[3].z,1,0,true)\ngreen:addTimedCircle(10000,postable1[4].x,0,postable1[4].z,1,0,true)\n\n--green:addTimedArrow(10000, 100, 0, 100, getHeadingBetween2Pos(center,set2[1],set2[2]), 10, 1, 1, 1,0,true)\ngreen:addTimedCircle(10000,postable2[1].x,0,postable2[1].z,1,0,true)\ngreen:addTimedCircle(10000,postable2[2].x,0,postable2[2].z,1,0,true)\ngreen:addTimedCircle(10000,postable2[3].x,0,postable2[3].z,1,0,true)\ngreen:addTimedCircle(10000,postable2[4].x,0,postable2[4].z,1,0,true)\n\nwhite:addTimedArrow(40000, 100, 0, 100, TensorCore.getHeadingToTarget(center,set1[2]), 40, .3, .3, .3,0,true)\nwhite:addTimedArrow(40000, 100, 0, 100, TensorCore.getHeadingToTarget(center,set2[2]), 40, .3, .3, .3,0,true)\nblue:addTimedArrow(40000, 100, 0, 100, TensorCore.getHeadingToTarget(center,set1[1]), 40, .3, .3, .3,0,true)\nblue:addTimedArrow(40000, 100, 0, 100, TensorCore.getHeadingToTarget(center,set2[1]), 40, .3, .3, .3,0,true)\n\nlocal function findClosestWaymark(pos)\n    local mindist = math.huge    -- Initialize with a very large number\n    local closestIndex = nil     -- To store the index of the closest waymark\n\n    for i = 1, 8 do\n        -- Retrieve waymark information for the current index\n        local WayMarkx, WayMarky, WayMarkz, active = Argus.getWaymarkInfo(i)\n        \n        if active then\n            -- Calculate the 2D distance between the given position and the waymark\n            local dist = TensorCore.getDistance2d(pos, {x = WayMarkx, y = WayMarky, z = WayMarkz})\n            \n            -- If this waymark is closer than any previously checked, update mindist and closestIndex\n            if dist < mindist then\n                mindist = dist\n                closestIndex = i\n            end\n        end\n    end\n\n    return closestIndex  -- Returns the index of the closest active waymark, or nil if none are active\nend\nlocal waymarkGroups = {\n    [1] = \"A C\",\n    [2] = \"B D\",\n    [3] = \"A C\",\n    [4] = \"B D\",\n    [5] = \"1 3\",\n    [6] = \"2 4\",\n    [7] = \"1 3\",\n    [8] = \"2 4\"\n}\n\nlocal waymarkindex = findClosestWaymark(set1[2])\nlocal group = waymarkGroups[waymarkindex]\n\nif group then\n    local direction = cross > 0 and \"right\" or \"left\"\n    local alertMessage = string.format(\"%s %s\", group, direction)\n    TensorCore.addAlertText(10000, alertMessage, 1, 1, true)\n    local alertMessage2 = \"/e \" .. alertMessage\n    SendTextCommand(alertMessage2)\nend\nself.used = true",
-							conditions = 
-							{
-								
-								{
-									"4938e21f-4f21-aa8f-a121-ef38571f4846",
-									true,
-								},
-							},
-							uuid = "68a68f0b-ac91-15cd-adb0-58f4126f838b",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Lua",
-							conditionLua = "return table.size(data.megaminx_p3_apoc_safe) == 8 ",
-							uuid = "4938e21f-4f21-aa8f-a121-ef38571f4846",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "FRU_megaminx_indicator",
-				mechanicTime = 619.6,
-				name = "apoc safe indicator [AnyoneCore]",
-				timeRange = true,
-				timelineIndex = 144,
-				timerEndOffset = 100,
-				timerStartOffset = -150,
-				uuid = "2c137f4e-8715-2a36-bdfe-6bcde411aa9c",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "local p = TensorCore.mGetPlayer()\nlocal center = { x = 100, y = 0, z = 100 }\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .25), 2)\nlocal index\nlocal heading2North = TensorCore.getHeadingToTarget(center, { x = 100, y = 0, z = 70 })\n\nlocal roster = AnyoneCore and AnyoneCore.Roster\r\nif roster == nil or roster.current() == nil then\r\n    self.used = true\r\n    return\r\nend\r\nlocal mySlot = roster.mySlot()\r\nlocal myRole = (mySlot == \"T1\" and \"MT\") or (mySlot == \"T2\" and \"OT\") or mySlot\r\nif not roster.isReady() then\r\n    self.used = true\r\n    return\r\nend\r\nif p == nil then self.used = true; return end\r\nif myRole == \"MT\" then index = 1\r\nelseif myRole == \"OT\" then index = 2\r\nelseif myRole == \"H1\" then index = 3\r\nelseif myRole == \"H2\" then index = 4\r\nelseif myRole == \"M1\" then index = 5\r\nelseif myRole == \"M2\" then index = 6\r\nelseif myRole == \"R1\" then index = 7\r\nelseif myRole == \"R2\" then index = 8\r\nelse self.used = true; return end\r\nlocal partyIDs = {\r\n    roster.idOf(\"T1\"),\r\n    roster.idOf(\"T2\"),\r\n    roster.idOf(\"H1\"),\r\n    roster.idOf(\"H2\"),\r\n    roster.idOf(\"M1\"),\r\n    roster.idOf(\"M2\"),\r\n    roster.idOf(\"R1\"),\r\n    roster.idOf(\"R2\")\r\n}\nlocal function checkDebuff(index, startRange, endRange)\n    local playerEnt = TensorCore.mGetEntity(partyIDs[index])\n    local playerBuff = TensorCore.getBuff(playerEnt, 2461)\n    d(playerBuff)\n\n    for i = startRange, endRange do\n        if i == index then\n            continue\n        end\n        local ent = TensorCore.mGetEntity(partyIDs[i])\n        local buff = TensorCore.getBuff(ent, 2461)\n        d(buff)\n\n        if playerBuff and buff then\n            if math.abs(buff.duration - playerBuff.duration) < 1 then\n                if index < i then\n                    return true\n                else\n                    return false\n                end\n            end\n        elseif not playerBuff and not buff then\n            if index < i then\n                return true\n            else\n                return false\n            end\n        end\n    end\n\n    return false\nend\n\nif index < 5 then\n    local result = checkDebuff(index, 1, 4)\n    if result == true then\n        AnyoneCore.Shotcall(\"flex\", true, 40, false)\n    elseif result == false then\n        AnyoneCore.Shotcall(\"no flex\", true, 40, false)\n    end\nelse\n    local result = checkDebuff(index, 5, 8)\n    if result == true then\n        -- do something\n    elseif result == false then\n        -- do something else\n    end\nend\nself.used = true\n",
-							conditions = 
-							{
-								
-								{
-									"018a1525-106d-d8e1-94bb-954497d3105f",
-									true,
-								},
-							},
-							uuid = "32caae9d-255a-cc09-9642-84f66a70b6da",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							buffID = 2461,
-							category = "Party",
-							partyTargetNumber = 6,
-							partyTargetSubType = "Number",
-							uuid = "018a1525-106d-d8e1-94bb-954497d3105f",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "FRU_megaminx_indicator",
-				mechanicTime = 619.6,
-				name = "flex solver [AnyoneCore]",
-				timeRange = true,
-				timelineIndex = 144,
-				timerEndOffset = 30,
-				timerStartOffset = -30,
-				uuid = "69e9ae29-cd03-194f-81cb-874de08aa504",
 				version = 2,
 			},
 		},
@@ -11174,6 +11781,16 @@ local tbl =
 		{
 			data = 
 			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "83095431-b5a8-43d6-ad1b-f099a99d274b",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
 				actions = 
 				{
 					
@@ -11190,9 +11807,9 @@ local tbl =
 				conditions = 
 				{
 				},
-				displayPath = "FRU_megaminx_indicator",
+				displayPath = "LPDU",
 				mechanicTime = 670.1,
-				name = "where boss is [AnyoneCore]",
+				name = "where boss is [LPDU]",
 				timelineIndex = 154,
 				timerOffset = -5,
 				uuid = "8a255b68-5fa3-4afc-bf3a-499a43f55020",
@@ -11948,6 +12565,16 @@ local tbl =
 		{
 			data = 
 			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "74e9652c-a812-5414-83b7-e0fef541ab31",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
 				actions = 
 				{
 					
@@ -12014,10 +12641,10 @@ local tbl =
 						},
 					},
 				},
-				displayPath = "FRU_megaminx_indicator",
+				displayPath = "LPDU",
 				eventType = 3,
 				mechanicTime = 757.3,
-				name = "draw cleave [AnyoneCore]",
+				name = "draw cleave [LPDU]",
 				timeRange = true,
 				timelineIndex = 170,
 				timerEndOffset = 15,
@@ -14362,6 +14989,74 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
+							actionLua = "if data.p5_exa == nil then data.p5_exa = {} end\nlocal ent = TensorCore.mGetEntity(eventArgs.entityID)\ntable.insert(data.p5_exa,{pos = ent.pos})\nif table.size(data.p5_exa) == 8 then\n    local cross = (data.p5_exa[1].pos.x - 100) * (data.p5_exa[5].pos.z-100) - (data.p5_exa[1].pos.z-100) * (data.p5_exa[5].pos.x-100)\n    if cross < 0 then\n        TensorCore.addAlertText(20000,\"right\",1,1,true)\n    else\n        TensorCore.addAlertText(20000,\"left\",1,1,true)\n    end\nend\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"61efd7d8-6b94-ae3d-96ee-c5e0eeda5d16",
+									true,
+								},
+							},
+							uuid = "feafca53-8758-847e-baa6-31e71e081e82",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							spellIDList = 
+							{
+								40118,
+								40307,
+							},
+							uuid = "61efd7d8-6b94-ae3d-96ee-c5e0eeda5d16",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "FRU_megaminx_indicator",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 984.8,
+				name = "Draw Exasquares2 [AnyoneCore test needed]",
+				timeRange = true,
+				timelineIndex = 209,
+				timerEndOffset = 30,
+				timerStartOffset = -200,
+				uuid = "90296038-c452-055f-948c-55b40c5ba004",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "f374dd05-d80b-ab5a-8b1c-6e2ded1a03dc",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
 							actionLua = "local drawer = TensorCore.getCachedDrawer(1275068160, 1006895359, 1174667519)\nlocal ent = TensorCore.mGetEntity(eventArgs.entityID)\n--drawer:addTimedRect(8000, ent.pos.x, ent.pos.y, ent.pos.z, 40, 10, ent.pos.h, 0, true)\n\nlocal dumbshit = TensorCore.getPosInDirection(ent.pos,ent.pos.h,2.5)\ndrawer:addTimedCenteredRect(7000,dumbshit.x,0,dumbshit.z,5,40,ent.pos.h,0,true)\n\nfor i=1,8 do\n    local pos = TensorCore.getPosInDirection(dumbshit,ent.pos.h,5*(i))\n    drawer:addTimedCenteredRect(2000,pos.x,0,pos.z,5,40,ent.pos.h,7000+(2000*(i-1)),true)\nend\nself.used = true",
 							conditions = 
 							{
@@ -14396,11 +15091,11 @@ local tbl =
 						},
 					},
 				},
-				displayPath = "FRU_megaminx_indicator",
+				displayPath = "LPDU",
 				eventType = 3,
 				loop = true,
 				mechanicTime = 984.8,
-				name = "Draw Exasquares [AnyoneCore]",
+				name = "Draw Exasquares [LPDU]",
 				timeRange = true,
 				timelineIndex = 209,
 				timerEndOffset = 30,
@@ -14454,75 +15149,16 @@ local tbl =
 						},
 					},
 				},
-				displayPath = "FRU_megaminx_indicator",
+				displayPath = "LPDU",
 				eventType = 3,
 				loop = true,
 				mechanicTime = 984.8,
-				name = "Draw Exasquares3 [AnyoneCore]",
+				name = "Draw Exasquares3 [LPDU]",
 				timeRange = true,
 				timelineIndex = 209,
 				timerEndOffset = 30,
 				timerStartOffset = -30,
 				uuid = "4677e4c3-db54-344f-b93c-8211b7a108ba",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "if data.p5_exa == nil then data.p5_exa = {} end\nlocal ent = TensorCore.mGetEntity(eventArgs.entityID)\ntable.insert(data.p5_exa,{pos = ent.pos})\nif table.size(data.p5_exa) == 8 then\n    local cross = (data.p5_exa[1].pos.x - 100) * (data.p5_exa[5].pos.z-100) - (data.p5_exa[1].pos.z-100) * (data.p5_exa[5].pos.x-100)\n    if cross < 0 then\n        TensorCore.addAlertText(20000,\"right\",1,1,true)\n    else\n        TensorCore.addAlertText(20000,\"left\",1,1,true)\n    end\nend\nself.used = true",
-							conditions = 
-							{
-								
-								{
-									"61efd7d8-6b94-ae3d-96ee-c5e0eeda5d16",
-									true,
-								},
-							},
-							uuid = "feafca53-8758-847e-baa6-31e71e081e82",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Event",
-							dequeueIfLuaFalse = true,
-							eventArgOptionType = 3,
-							eventArgType = 2,
-							spellIDList = 
-							{
-								40118,
-								40307,
-							},
-							uuid = "61efd7d8-6b94-ae3d-96ee-c5e0eeda5d16",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "FRU_megaminx_indicator",
-				enabled = false,
-				eventType = 3,
-				loop = true,
-				mechanicTime = 984.8,
-				name = "Draw Exasquares2 [AnyoneCore]",
-				timeRange = true,
-				timelineIndex = 209,
-				timerEndOffset = 30,
-				timerStartOffset = -200,
-				uuid = "90296038-c452-055f-948c-55b40c5ba004",
 				version = 2,
 			},
 		},
@@ -15703,6 +16339,66 @@ local tbl =
 		{
 			data = 
 			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "217cc0bd-9987-23cd-91b7-e0927d66b709",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "if data.megaminx_p5_tb1_startTime == nil then data.megaminx_p5_tb1_startTime = Now() end\nlocal yellow = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(255/255, 255/255, 0/255, .25),2)\nlocal purple = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(255/255, 0/255, 255/255, .25),2)\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .25),2)\nlocal center = {x = 100, y = 0,z = 100}\nlocal p = TensorCore.mGetPlayer()\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.isReady() or not p then return end\nif not data.megaminx_p5_tb1 or not data.megaminx_p5_tb1_tower then return end\nlocal towerpos\nif table.size(data.megaminx_p5_tb1_tower) > 0 then\n    if data.megaminx_p5_tb1_tower[1] == 51 then --nw\n        local heading = TensorCore.getHeadingToTarget(center, {x = 100, y = 0, z = 107})  - math.pi / 3 * 2\n        towerpos = TensorCore.getPosInDirection(center,heading,7)\n    end\n    if data.megaminx_p5_tb1_tower[1] == 52 then --ne\n        local heading = TensorCore.getHeadingToTarget(center, {x = 100, y = 0, z = 107})  + math.pi / 3 * 2\n        towerpos = TensorCore.getPosInDirection(center,heading,7)\n    end\n    if data.megaminx_p5_tb1_tower[1] == 53 then --s\n        towerpos = {x = 100, y = 0, z = 107}\n    end\nend\nlocal mt = TensorCore.mGetEntity(data.megaminx_p5_tb1.mt)\nlocal ot = TensorCore.mGetEntity(data.megaminx_p5_tb1.ot)\nif not towerpos or not mt or not ot then return end\ngreen:addCircle(towerpos.x,towerpos.y,towerpos.z,3,true)\nlocal mySlot = roster.mySlot()\nlocal towerHeading = TensorCore.getHeadingToTarget(center, towerpos)\nlocal rolePos\nif mySlot == \"H1\" or mySlot == \"H2\" then\n    rolePos = towerpos\nelseif mySlot == \"M1\" or mySlot == \"R1\" then\n    rolePos = TensorCore.getPosInDirection(center, towerHeading - 2 * math.pi / 3, 7)\nelseif mySlot == \"M2\" or mySlot == \"R2\" then\n    rolePos = TensorCore.getPosInDirection(center, towerHeading + 2 * math.pi / 3, 7)\nend\nif rolePos then\n    green:addCircle(rolePos.x, 0, rolePos.z, 1.5, true)\n    local length = TensorCore.getDistance2d(p.pos, rolePos)\n    if length > 1 then\n        green:addArrow(p.pos.x, 0, p.pos.z, TensorCore.getHeadingToTarget(p.pos, rolePos), length, 1, 1, 1, true)\n    end\nend\nif TimeSince(data.megaminx_p5_tb1_startTime) < 7000 then\n    --draw first part on mt\n    if data.megaminx_p5_tb1.spell == 40313 then --light\n        yellow:addCone(100,0,100,30,math.pi + math.pi/6,TensorCore.getHeadingToTarget(center,mt.pos) - math.pi/6 + 105 * math.pi/180, true)\n        if p.id == ot.id then\n            if towerpos then\n                local heading = TensorCore.getHeadingToTarget(center,towerpos) +  math.pi/3\n                green:addArrow(100,0,100,heading,8,1,1,1,true)\n            end\n        end\n    end\n    if data.megaminx_p5_tb1.spell == 40233 then --dark\n        purple:addCone(100,0,100,30,math.pi + math.pi/6,TensorCore.getHeadingToTarget(center,mt.pos) + math.pi/6 - 105 * math.pi/180, true)\n        if p.id == ot.id then\n            if towerpos then\n                local heading = TensorCore.getHeadingToTarget(center,towerpos) -  math.pi/3\n                green:addArrow(100,0,100,heading,8,1,1,1,true)\n            end\n        end\n    end\nelse\n    --draw second part on ot\n    if data.megaminx_p5_tb1.spell == 40313 then --light\n        purple:addCone(100,0,100,30,math.pi + math.pi/6,TensorCore.getHeadingToTarget(center,ot.pos) + math.pi/6 - 105 * math.pi/180, true)\n        if p.id == ot.id then\n            if towerpos then\n                local heading = TensorCore.getHeadingToTarget(center,towerpos) +  math.pi/3\n                green:addArrow(100,0,100,heading,8,1,1,1,true)\n            end\n        end\n    end\n    if data.megaminx_p5_tb1.spell == 40233 then --dark\n        yellow:addCone(100,0,100,30,math.pi + math.pi/6,TensorCore.getHeadingToTarget(center,ot.pos) - math.pi/6 + 105 * math.pi/180, true)\n        if p.id == ot.id then\n            if towerpos then\n                local heading = TensorCore.getHeadingToTarget(center,towerpos) -  math.pi/3\n                green:addArrow(100,0,100,heading,8,1,1,1,true)\n            end\n        end\n    end\nend\n--table.insert(data.megaminx_p5_tb1,{spell = eventArgs.spellID, mt = mt.id, ot = ot.id})\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"b3490554-0797-c054-86f1-222cf781bbe6",
+									true,
+								},
+							},
+							uuid = "505a5eb6-99db-64ad-9e8b-8340db7a28a4",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return table.size(data.megaminx_p5_tb1) > 0",
+							dequeueIfLuaFalse = true,
+							uuid = "b3490554-0797-c054-86f1-222cf781bbe6",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 12,
+				mechanicTime = 1033.6,
+				name = "draw TB1 [LPDU]",
+				timeRange = true,
+				timelineIndex = 222,
+				timerStartOffset = -30,
+				uuid = "2c23ea06-cb1c-647c-8c0d-962524b9f4ae",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
 				actions = 
 				{
 					
@@ -15769,120 +16465,14 @@ local tbl =
 						},
 					},
 				},
-				displayPath = "FRU_megaminx_indicator",
+				displayPath = "LPDU",
 				eventType = 3,
 				mechanicTime = 1033.6,
-				name = "channel tts [AnyoneCore]",
+				name = "channel tts [LPDU]",
 				timeRange = true,
 				timelineIndex = 222,
 				timerStartOffset = -20,
 				uuid = "7b9096a4-1c2d-c2ba-9774-8cdddc771f23",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "if data.megaminx_p5_tb1 == nil then data.megaminx_p5_tb1 = {} end\nlocal mt = TensorCore.getEntityByGroup(\"Main Tank\",\"Nearest\")\nlocal ot\nfor k,v in pairs(TensorCore.getEntityGroupList(\"Party\")) do\n    local ent = TensorCore.mGetEntity(v.id)\n    if TensorCore.isTank(ent) and ent.id ~= mt.id then\n        ot = ent\n        break\n    end\nend\n\n\n--     if TensorCore.isTank(ent) and ent.id ~= mt.id then\n--         ot = ent\n--         break\n--     end\n-- end\n-- if eventArgs.spellID == 40313 then\n--     TensorCore.addAlertText(20000, \"Light, go right or out\", 1, 2, true)\n-- end\n-- if eventArgs.spellID == 40233 then\n--     TensorCore.addAlertText(20000, \"Dark, go left or in\", 1, 2, true)\n-- end\n--table.insert(data.megaminx_p5_tb1,{spell = eventArgs.spellID, mt = mt.id, ot = mt.id})\ndata.megaminx_p5_tb1 = {spell = eventArgs.spellID, mt = mt.id, ot = ot.id}\nself.used = true",
-							conditions = 
-							{
-								
-								{
-									"25c03148-e42d-cff4-a7f0-d9bb38335df2",
-									true,
-								},
-							},
-							uuid = "21e6abbb-379b-ceac-a051-0251d219f425",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Event",
-							eventArgOptionType = 3,
-							eventArgType = 2,
-							spellIDList = 
-							{
-								40313,
-								40233,
-							},
-							uuid = "25c03148-e42d-cff4-a7f0-d9bb38335df2",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "FRU_megaminx_indicator",
-				eventType = 3,
-				mechanicTime = 1033.6,
-				name = "get TB1 [AnyoneCore]",
-				timeRange = true,
-				timelineIndex = 222,
-				timerEndOffset = 20,
-				timerStartOffset = -20,
-				uuid = "afc2f6ef-83eb-6425-8748-99f7ed3153bd",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "if data.megaminx_p5_tb1_startTime == nil then data.megaminx_p5_tb1_startTime = Now() end\nlocal yellow = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(255/255, 255/255, 0/255, .25),2)\nlocal purple = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(255/255, 0/255, 255/255, .25),2)\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .25),2)\nlocal center = {x = 100, y = 0,z = 100}\nlocal p = TensorCore.mGetPlayer()\nlocal towerpos\nif table.size(data.megaminx_p5_tb1_tower) > 0 then\n    if data.megaminx_p5_tb1_tower[1] == 51 then --nw\n        local heading = TensorCore.getHeadingToTarget(center, {x = 100, y = 0, z = 107})  - math.pi / 3 * 2\n        towerpos = TensorCore.getPosInDirection(center,heading,7)\n    end\n    if data.megaminx_p5_tb1_tower[1] == 52 then --ne\n        local heading = TensorCore.getHeadingToTarget(center, {x = 100, y = 0, z = 107})  + math.pi / 3 * 2\n        towerpos = TensorCore.getPosInDirection(center,heading,7)\n    end\n    if data.megaminx_p5_tb1_tower[1] == 53 then --s\n        towerpos = {x = 100, y = 0, z = 107}\n    end\nend\nlocal mt = TensorCore.mGetEntity(data.megaminx_p5_tb1.mt)\nlocal ot = TensorCore.mGetEntity(data.megaminx_p5_tb1.ot)\ngreen:addCircle(towerpos.x,towerpos.y,towerpos.z,3,true)\nif TimeSince(data.megaminx_p5_tb1_startTime) < 7000 then\n    --draw first part on mt\n    if data.megaminx_p5_tb1.spell == 40313 then --light\n        yellow:addCone(100,0,100,30,math.pi + math.pi/6,TensorCore.getHeadingToTarget(center,mt.pos) - math.pi/6 + 105 * math.pi/180, true)\n        if p.id == ot.id then\n            if towerpos then\n                local heading = TensorCore.getHeadingToTarget(center,towerpos) +  math.pi/3\n                green:addArrow(100,0,100,heading,8,1,1,1,true)\n            end\n        end\n    end\n    if data.megaminx_p5_tb1.spell == 40233 then --dark\n        purple:addCone(100,0,100,30,math.pi + math.pi/6,TensorCore.getHeadingToTarget(center,mt.pos) + math.pi/6 - 105 * math.pi/180, true)\n        if p.id == ot.id then\n            if towerpos then\n                local heading = TensorCore.getHeadingToTarget(center,towerpos) -  math.pi/3\n                green:addArrow(100,0,100,heading,8,1,1,1,true)\n            end\n        end\n    end\nelse\n    --draw second part on ot\n    if data.megaminx_p5_tb1.spell == 40313 then --light\n        purple:addCone(100,0,100,30,math.pi + math.pi/6,TensorCore.getHeadingToTarget(center,ot.pos) + math.pi/6 - 105 * math.pi/180, true)\n        if p.id == ot.id then\n            if towerpos then\n                local heading = TensorCore.getHeadingToTarget(center,towerpos) +  math.pi/3\n                green:addArrow(100,0,100,heading,8,1,1,1,true)\n            end\n        end\n    end\n    if data.megaminx_p5_tb1.spell == 40233 then --dark\n        yellow:addCone(100,0,100,30,math.pi + math.pi/6,TensorCore.getHeadingToTarget(center,ot.pos) - math.pi/6 + 105 * math.pi/180, true)\n        if p.id == ot.id then\n            if towerpos then\n                local heading = TensorCore.getHeadingToTarget(center,towerpos) -  math.pi/3\n                green:addArrow(100,0,100,heading,8,1,1,1,true)\n            end\n        end\n    end\nend\n--table.insert(data.megaminx_p5_tb1,{spell = eventArgs.spellID, mt = mt.id, ot = ot.id})\nself.used = true",
-							conditions = 
-							{
-								
-								{
-									"b3490554-0797-c054-86f1-222cf781bbe6",
-									true,
-								},
-							},
-							uuid = "505a5eb6-99db-64ad-9e8b-8340db7a28a4",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Lua",
-							conditionLua = "return table.size(data.megaminx_p5_tb1) > 0",
-							dequeueIfLuaFalse = true,
-							uuid = "b3490554-0797-c054-86f1-222cf781bbe6",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "FRU_megaminx_indicator",
-				eventType = 12,
-				mechanicTime = 1033.6,
-				name = "draw TB1 [AnyoneCore]",
-				timeRange = true,
-				timelineIndex = 222,
-				timerStartOffset = -30,
-				uuid = "2c23ea06-cb1c-647c-8c0d-962524b9f4ae",
 				version = 2,
 			},
 		},
@@ -15924,14 +16514,70 @@ local tbl =
 						},
 					},
 				},
-				displayPath = "FRU_megaminx_indicator",
+				displayPath = "LPDU",
 				eventType = 14,
 				mechanicTime = 1033.6,
-				name = "get tower1 [AnyoneCore]",
+				name = "get tower1 [LPDU]",
 				timeRange = true,
 				timelineIndex = 222,
 				timerStartOffset = -20,
 				uuid = "c0c58be4-f5f5-97db-8b61-1a25933c6a51",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return end\nlocal mt = roster.idOf(\"T1\")\nlocal ot = roster.idOf(\"T2\")\nif not mt or not ot then return end\ndata.megaminx_p5_tb1 = {spell = eventArgs.spellID, mt = mt, ot = ot}\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"25c03148-e42d-cff4-a7f0-d9bb38335df2",
+									true,
+								},
+							},
+							uuid = "21e6abbb-379b-ceac-a051-0251d219f425",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							spellIDList = 
+							{
+								40313,
+								40233,
+							},
+							uuid = "25c03148-e42d-cff4-a7f0-d9bb38335df2",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				mechanicTime = 1033.6,
+				name = "get TB1 [LPDU]",
+				timeRange = true,
+				timelineIndex = 222,
+				timerEndOffset = 20,
+				timerStartOffset = -20,
+				uuid = "afc2f6ef-83eb-6425-8748-99f7ed3153bd",
 				version = 2,
 			},
 		},
@@ -16504,6 +17150,16 @@ local tbl =
 		{
 			data = 
 			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "45606824-62f3-1999-9833-ed44cd4773c1",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
 				actions = 
 				{
 					
@@ -16545,11 +17201,11 @@ local tbl =
 						},
 					},
 				},
-				displayPath = "FRU_megaminx_indicator",
+				displayPath = "LPDU",
 				eventType = 3,
 				loop = true,
 				mechanicTime = 1097.4,
-				name = "Draw Exasquares [AnyoneCore]",
+				name = "Draw Exasquares [LPDU]",
 				timeRange = true,
 				timelineIndex = 237,
 				timerEndOffset = 30,
@@ -16603,11 +17259,11 @@ local tbl =
 						},
 					},
 				},
-				displayPath = "FRU_megaminx_indicator",
+				displayPath = "LPDU",
 				eventType = 3,
 				loop = true,
 				mechanicTime = 1097.4,
-				name = "Draw Exasquares3 [AnyoneCore]",
+				name = "Draw Exasquares3 [LPDU]",
 				timeRange = true,
 				timelineIndex = 237,
 				timerEndOffset = 30,
@@ -17610,6 +18266,16 @@ local tbl =
 		{
 			data = 
 			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "b32813aa-1a36-3419-81f5-2264f9c3752a",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
 				actions = 
 				{
 					
@@ -17617,7 +18283,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "if data.megaminx_p5_tb2_startTime == nil then data.megaminx_p5_tb2_startTime = Now() end\nlocal yellow = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(255/255, 255/255, 0/255, .25),2)\nlocal purple = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(255/255, 0/255, 255/255, .25),2)\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .25),2)\nlocal center = {x = 100, y = 0,z = 100}\nlocal p = TensorCore.mGetPlayer()\nlocal towerpos\nif table.size(data.megaminx_p5_tb2_tower) > 0 then\n    if data.megaminx_p5_tb2_tower[1] == 51 then --nw\n        local heading = TensorCore.getHeadingToTarget(center, {x = 100, y = 0, z = 107})  - math.pi / 3 * 2\n        towerpos = TensorCore.getPosInDirection(center,heading,7)\n    end\n    if data.megaminx_p5_tb2_tower[1] == 52 then --ne\n        local heading = TensorCore.getHeadingToTarget(center, {x = 100, y = 0, z = 107})  + math.pi / 3 * 2\n        towerpos = TensorCore.getPosInDirection(center,heading,7)\n    end\n    if data.megaminx_p5_tb2_tower[1] == 53 then --s\n        towerpos = {x = 100, y = 0, z = 107}\n    end\nend\nlocal mt = TensorCore.mGetEntity(data.megaminx_p5_tb2.mt)\nlocal ot = TensorCore.mGetEntity(data.megaminx_p5_tb2.ot)\ngreen:addCircle(towerpos.x,towerpos.y,towerpos.z,3,true)\nif TimeSince(data.megaminx_p5_tb2_startTime) < 7000 then\n    --draw first part on mt\n    if data.megaminx_p5_tb2.spell == 40313 then --light\n        yellow:addCone(100,0,100,30,math.pi + math.pi/6,TensorCore.getHeadingToTarget(center,mt.pos) - math.pi/6 + 105 * math.pi/180, true)\n        if p.id == ot.id then\n            if towerpos then\n                local heading = TensorCore.getHeadingToTarget(center,towerpos) + math.pi/3\n                green:addArrow(100,0,100,heading,8,1,1,1,true)\n            end\n        end\n    end\n    if data.megaminx_p5_tb2.spell == 40233 then --dark\n        purple:addCone(100,0,100,30,math.pi + math.pi/6,TensorCore.getHeadingToTarget(center,mt.pos) + math.pi/6 - 105 * math.pi/180, true)\n        if p.id == ot.id then\n            if towerpos then\n                local heading = TensorCore.getHeadingToTarget(center,towerpos) - math.pi/3\n                green:addArrow(100,0,100,heading,8,1,1,1,true)\n            end\n        end\n    end\nelse\n    --draw second part on ot\n    if data.megaminx_p5_tb2.spell == 40313 then --light\n        purple:addCone(100,0,100,30,math.pi + math.pi/6,TensorCore.getHeadingToTarget(center,ot.pos) + math.pi/6 - 105 * math.pi/180, true)\n        if p.id == ot.id then\n            if towerpos then\n                local heading = TensorCore.getHeadingToTarget(center,towerpos) + math.pi/3\n                green:addArrow(100,0,100,heading,8,1,1,1,true)\n            end\n        end\n        if towerpos then\n            local heading = TensorCore.getHeadingToTarget(center,towerpos) + math.pi/3\n            green:addArrow(100,0,100,heading,8,1,1,1,true)\n        end\n    end\n    if data.megaminx_p5_tb2.spell == 40233 then --dark\n        yellow:addCone(100,0,100,30,math.pi + math.pi/6,TensorCore.getHeadingToTarget(center,ot.pos) - math.pi/6 + 105 * math.pi/180, true)\n        if p.id == ot.id then\n            if towerpos then\n                local heading = TensorCore.getHeadingToTarget(center,towerpos) - math.pi/3\n                green:addArrow(100,0,100,heading,8,1,1,1,true)\n            end\n        end\n        if towerpos then\n            local heading = TensorCore.getHeadingToTarget(center,towerpos) - math.pi/3\n            green:addArrow(100,0,100,heading,8,1,1,1,true)\n        end\n    end\nend\n--table.insert(data.megaminx_p5_tb2,{spell = eventArgs.spellID, mt = mt.id, ot = ot.id})\nself.used = true",
+							actionLua = "if data.megaminx_p5_tb2_startTime == nil then data.megaminx_p5_tb2_startTime = Now() end\nlocal yellow = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(255/255, 255/255, 0/255, .25),2)\nlocal purple = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(255/255, 0/255, 255/255, .25),2)\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .25),2)\nlocal center = {x = 100, y = 0,z = 100}\nlocal p = TensorCore.mGetPlayer()\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.isReady() or not p then return end\nif not data.megaminx_p5_tb2 or not data.megaminx_p5_tb2_tower then return end\nlocal towerpos\nif table.size(data.megaminx_p5_tb2_tower) > 0 then\n    if data.megaminx_p5_tb2_tower[1] == 51 then --nw\n        local heading = TensorCore.getHeadingToTarget(center, {x = 100, y = 0, z = 107})  - math.pi / 3 * 2\n        towerpos = TensorCore.getPosInDirection(center,heading,7)\n    end\n    if data.megaminx_p5_tb2_tower[1] == 52 then --ne\n        local heading = TensorCore.getHeadingToTarget(center, {x = 100, y = 0, z = 107})  + math.pi / 3 * 2\n        towerpos = TensorCore.getPosInDirection(center,heading,7)\n    end\n    if data.megaminx_p5_tb2_tower[1] == 53 then --s\n        towerpos = {x = 100, y = 0, z = 107}\n    end\nend\nlocal mt = TensorCore.mGetEntity(data.megaminx_p5_tb2.mt)\nlocal ot = TensorCore.mGetEntity(data.megaminx_p5_tb2.ot)\nif not towerpos or not mt or not ot then return end\ngreen:addCircle(towerpos.x,towerpos.y,towerpos.z,3,true)\nlocal mySlot = roster.mySlot()\nlocal towerHeading = TensorCore.getHeadingToTarget(center, towerpos)\nlocal rolePos\nif mySlot == \"H1\" or mySlot == \"H2\" then\n    rolePos = towerpos\nelseif mySlot == \"M1\" or mySlot == \"R1\" then\n    rolePos = TensorCore.getPosInDirection(center, towerHeading - 2 * math.pi / 3, 7)\nelseif mySlot == \"M2\" or mySlot == \"R2\" then\n    rolePos = TensorCore.getPosInDirection(center, towerHeading + 2 * math.pi / 3, 7)\nend\nif rolePos then\n    green:addCircle(rolePos.x, 0, rolePos.z, 1.5, true)\n    local length = TensorCore.getDistance2d(p.pos, rolePos)\n    if length > 1 then\n        green:addArrow(p.pos.x, 0, p.pos.z, TensorCore.getHeadingToTarget(p.pos, rolePos), length, 1, 1, 1, true)\n    end\nend\nif TimeSince(data.megaminx_p5_tb2_startTime) < 7000 then\n    --draw first part on mt\n    if data.megaminx_p5_tb2.spell == 40313 then --light\n        yellow:addCone(100,0,100,30,math.pi + math.pi/6,TensorCore.getHeadingToTarget(center,mt.pos) - math.pi/6 + 105 * math.pi/180, true)\n        if p.id == ot.id then\n            if towerpos then\n                local heading = TensorCore.getHeadingToTarget(center,towerpos) + math.pi/3\n                green:addArrow(100,0,100,heading,8,1,1,1,true)\n            end\n        end\n    end\n    if data.megaminx_p5_tb2.spell == 40233 then --dark\n        purple:addCone(100,0,100,30,math.pi + math.pi/6,TensorCore.getHeadingToTarget(center,mt.pos) + math.pi/6 - 105 * math.pi/180, true)\n        if p.id == ot.id then\n            if towerpos then\n                local heading = TensorCore.getHeadingToTarget(center,towerpos) - math.pi/3\n                green:addArrow(100,0,100,heading,8,1,1,1,true)\n            end\n        end\n    end\nelse\n    --draw second part on ot\n    if data.megaminx_p5_tb2.spell == 40313 then --light\n        purple:addCone(100,0,100,30,math.pi + math.pi/6,TensorCore.getHeadingToTarget(center,ot.pos) + math.pi/6 - 105 * math.pi/180, true)\n        if p.id == ot.id then\n            if towerpos then\n                local heading = TensorCore.getHeadingToTarget(center,towerpos) + math.pi/3\n                green:addArrow(100,0,100,heading,8,1,1,1,true)\n            end\n        end\n    end\n    if data.megaminx_p5_tb2.spell == 40233 then --dark\n        yellow:addCone(100,0,100,30,math.pi + math.pi/6,TensorCore.getHeadingToTarget(center,ot.pos) - math.pi/6 + 105 * math.pi/180, true)\n        if p.id == ot.id then\n            if towerpos then\n                local heading = TensorCore.getHeadingToTarget(center,towerpos) - math.pi/3\n                green:addArrow(100,0,100,heading,8,1,1,1,true)\n            end\n        end\n    end\nend\n--table.insert(data.megaminx_p5_tb2,{spell = eventArgs.spellID, mt = mt.id, ot = ot.id})\nself.used = true",
 							conditions = 
 							{
 								
@@ -17645,70 +18311,14 @@ local tbl =
 						},
 					},
 				},
-				displayPath = "FRU_megaminx_indicator",
+				displayPath = "LPDU",
 				eventType = 12,
 				mechanicTime = 1150.3,
-				name = "draw TB2 [AnyoneCore]",
+				name = "draw TB2 [LPDU]",
 				timeRange = true,
 				timelineIndex = 251,
 				timerStartOffset = -30,
 				uuid = "56582cd6-d9fd-9168-aeec-9c317472ca5d",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "if data.megaminx_p5_tb2 == nil then data.megaminx_p5_tb2 = {} end\nlocal mt = TensorCore.getEntityByGroup(\"Main Tank\",\"Nearest\")\nlocal ot\nfor k,v in pairs(TensorCore.getEntityGroupList(\"Party\")) do\n    local ent = TensorCore.mGetEntity(v.id)\n    if TensorCore.isTank(ent) and ent.id ~= mt.id then\n        ot = ent\n        break\n    end\nend\n--table.insert(data.megaminx_p5_tb2,{spell = eventArgs.spellID, mt = mt.id, ot = mt.id})\n-- if eventArgs.spellID == 40313 then\n--     TensorCore.addAlertText(20000, \"Light, go right or out\", 1, 1, true)\n-- end\n-- if eventArgs.spellID == 40233 then\n--     TensorCore.addAlertText(20000, \"Dark, go left or in\", 1, 1, true)\n-- end\ndata.megaminx_p5_tb2 = {spell = eventArgs.spellID, mt = mt.id, ot = ot.id}\nself.used = true",
-							conditions = 
-							{
-								
-								{
-									"231d2ca3-1391-62e0-9380-6fdb3faa03e2",
-									true,
-								},
-							},
-							uuid = "bd7f09d4-64ba-3d23-92bf-7ad14ef6abe2",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Event",
-							eventArgOptionType = 3,
-							eventArgType = 2,
-							spellIDList = 
-							{
-								40313,
-								40233,
-							},
-							uuid = "231d2ca3-1391-62e0-9380-6fdb3faa03e2",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "FRU_megaminx_indicator",
-				eventType = 3,
-				mechanicTime = 1150.3,
-				name = "get TB2 [AnyoneCore]",
-				timeRange = true,
-				timelineIndex = 251,
-				timerEndOffset = 20,
-				timerStartOffset = -20,
-				uuid = "ac16ff56-2a3a-240c-8888-1d3a7da896da",
 				version = 2,
 			},
 		},
@@ -17750,10 +18360,10 @@ local tbl =
 						},
 					},
 				},
-				displayPath = "FRU_megaminx_indicator",
+				displayPath = "LPDU",
 				eventType = 14,
 				mechanicTime = 1150.3,
-				name = "get tower2 [AnyoneCore]",
+				name = "get tower2 [LPDU]",
 				timeRange = true,
 				timelineIndex = 251,
 				timerStartOffset = -20,
@@ -17831,14 +18441,70 @@ local tbl =
 						},
 					},
 				},
-				displayPath = "FRU_megaminx_indicator",
+				displayPath = "LPDU",
 				eventType = 3,
 				mechanicTime = 1150.3,
-				name = "channel tts [AnyoneCore]",
+				name = "channel tts [LPDU]",
 				timeRange = true,
 				timelineIndex = 251,
 				timerStartOffset = -20,
 				uuid = "8a06868f-1831-83b1-92ae-9fe1e97a35bb",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return end\nlocal mt = roster.idOf(\"T1\")\nlocal ot = roster.idOf(\"T2\")\nif not mt or not ot then return end\ndata.megaminx_p5_tb2 = {spell = eventArgs.spellID, mt = mt, ot = ot}\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"231d2ca3-1391-62e0-9380-6fdb3faa03e2",
+									true,
+								},
+							},
+							uuid = "bd7f09d4-64ba-3d23-92bf-7ad14ef6abe2",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							spellIDList = 
+							{
+								40313,
+								40233,
+							},
+							uuid = "231d2ca3-1391-62e0-9380-6fdb3faa03e2",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				mechanicTime = 1150.3,
+				name = "get TB2 [LPDU]",
+				timeRange = true,
+				timelineIndex = 251,
+				timerEndOffset = 20,
+				timerStartOffset = -20,
+				uuid = "ac16ff56-2a3a-240c-8888-1d3a7da896da",
 				version = 2,
 			},
 		},
