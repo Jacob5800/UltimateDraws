@@ -947,8 +947,8 @@ local tbl =
 						{
 							category = "Party",
 							conditionType = 2,
-							hpValue = 60,
-							name = "Party HP >=60% (lowest)",
+							hpValue = 57,
+							name = "Party HP >=57% (lowest)",
 							partyTargetSubType = "Lowest HP",
 							uuid = "c8464ab1-5414-a10f-afec-9583645b29c2",
 							version = 3,
