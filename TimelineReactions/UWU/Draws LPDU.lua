@@ -6864,6 +6864,50 @@ local tbl =
 			},
 		},
 	},
+	[118] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ultima",
+				uuid = "0321d080-7fdc-c0e5-9c27-04cc84617cba",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then return end\nlocal Roster = AnyoneCore and AnyoneCore.Roster\nif not Roster or not Roster.current() or not Roster.isReady() then return end\nlocal slot = Roster.mySlot()\nif not slot then return end\nlocal dest\nif slot == \"T1\" then dest = { x = 95.5, y = 0, z = 90 }\nelseif slot == \"T2\" then dest = { x = 104.5, y = 0, z = 90 }\nelse\n    local x, y, z, isActive = Argus.getWaymarkInfo(8)\n    if not isActive or type(x) ~= \"number\" or type(y) ~= \"number\" or type(z) ~= \"number\" then return end\n    dest = { x = x, y = y, z = z }\nend\nlocal distance = TensorCore.getDistance2d(player.pos, dest)\nif type(distance) ~= \"number\" then return end\nif distance > 0.2 then\n    local tip = math.min(1.7, distance * 0.35)\n    local drawer = TensorCore.getCachedDrawer(0xFF33FF66, 0xFF00CC44, 0xFFFFFFFF, 0xFF000000, 4)\n    drawer:addTimedArrow(5000, player.pos.x, player.pos.y, player.pos.z, TensorCore.getHeadingToTarget(player.pos, dest), math.max(0.1, distance - tip), 1.2, tip, 2.5, 0, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nself.used = true",
+							name = "Guide to assigned 1000 position",
+							uuid = "166e607a-1481-28c4-8905-f011aab5560e",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Draws - Ultima",
+				mechanicTime = 1000,
+				name = "[Draw][LPDU][Ultima] Tank and party positions at 1000",
+				timeRange = true,
+				timelineIndex = 118,
+				timerEndOffset = 5,
+				uuid = "6f1eb624-f581-b3d4-9c61-f59c7fe16e61",
+				version = 2,
+			},
+		},
+	},
 	[119] = 
 	{
 		
@@ -7137,7 +7181,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local center = { x = 100, y = 0, z = 100 }\nlocal ifrit = TensorCore.getWokenEnt(1185)\nif not ifrit or not ifrit.pos then return end\n\nlocal safeHeading = TensorCore.getHeadingToTarget(center, ifrit.pos)\nlocal arrowDrawer = TensorCore.getCachedDrawer(0xAA00FF00, nil, 0xAA00FF00, 0xFFFFFFFF, 2)\narrowDrawer:addTimedArrow(5000, center.x, center.y, center.z,\n    safeHeading, 19, 0.5, nil, nil, nil, true)\nself.used = true",
+							actionLua = "local center = { x = 100, y = 0, z = 100 }\nlocal ifrit = TensorCore.getWokenEnt(1185)\nif not ifrit or not ifrit.pos then return end\n-- Logged safe group was northeast while Ifrit dashed northwest from the southeast.\nlocal safeHeading = TensorCore.getHeadingToTarget(center, ifrit.pos) - math.pi / 2\nlocal arrowDrawer = TensorCore.getCachedDrawer(0xAA00FF00, nil, 0xAA00FF00, 0xFFFFFFFF, 2)\narrowDrawer:addTimedArrow(5000, center.x, center.y, center.z, safeHeading, 19, 0.5, nil, nil, nil, true)\nself.used = true",
 							name = "Calculate safe spot and draw arrow",
 							uuid = "247e11b0-02cf-0f61-921a-9738c4a949c2",
 							version = 2.1,
@@ -9563,7 +9607,7 @@ local tbl =
 							alertPriority = 3,
 							alertScale = 0.9,
 							alertTTS = true,
-							alertText = "SEARING WIND: SOUTH WALL",
+							alertText = "South, away from party",
 							conditions = 
 							{
 								
@@ -9602,6 +9646,86 @@ local tbl =
 				timerEndOffset = 5,
 				timerStartOffset = -1,
 				uuid = "2c3c8038-0534-11c6-9b56-4815fcbfa130",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ultima",
+				uuid = "3584684b-1946-909f-8d25-4e8a11fd4be8",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then self.used = true return end\nlocal dest = { x = 93, y = 0, z = 92 }\nlocal distance = TensorCore.getDistance2d(player.pos, dest)\nif type(distance) ~= \"number\" then self.used = true return end\nif distance > 0.2 then\n    local tip = math.min(1.7, distance * 0.35)\n    local drawer = TensorCore.getCachedDrawer(0xFF33FF66, 0xFF00CC44, 0xFFFFFFFF, 0xFF000000, 4)\n    drawer:addTimedArrow(7000, player.pos.x, player.pos.y, player.pos.z, TensorCore.getHeadingToTarget(player.pos, dest), math.max(0.1, distance - tip), 1.2, tip, 2.5, 0, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"8098e09f-a665-bb43-874f-ace9cacf6269",
+									true,
+								},
+								
+								{
+									"09544183-074e-1013-b872-5a1e227131d7",
+									true,
+								},
+							},
+							name = "Stack near 93,0,92",
+							uuid = "44bb205c-4657-e079-9710-7810e41bebd8",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs and eventArgs.buffID == 1578 and eventArgs.ownerContentID == 1185",
+							dequeueIfLuaFalse = true,
+							name = "Searing Wind from Ifrit",
+							uuid = "8098e09f-a665-bb43-874f-ace9cacf6269",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local player = TensorCore.mGetPlayer() return player and player.id ~= eventArgs.entityID",
+							dequeueIfLuaFalse = true,
+							name = "Not the Searing Wind target",
+							uuid = "09544183-074e-1013-b872-5a1e227131d7",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Ultima",
+				eventType = 8,
+				mechanicTime = 1130,
+				name = "[Draw][LPDU][Ultima] Stack away from Searing Wind at 1130",
+				timeRange = true,
+				timelineIndex = 166,
+				timerEndOffset = 5,
+				timerStartOffset = -1,
+				uuid = "54bfbd0c-1626-4a01-a918-c0ccb0346f88",
 				version = 2,
 			},
 		},
@@ -11426,7 +11550,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local state = data.uwu_aether_guidance\nif not state or state.northArrowDone then\n    self.used = true\n    return\nend\n\nlocal Roster = AnyoneCore and AnyoneCore.Roster\nif not Roster or not Roster.current() or not Roster.isReady() then return end\n\nlocal slot = Roster.mySlot()\nlocal isTank = slot == \"T1\" or slot == \"T2\"\nlocal knownSlot = isTank or slot == \"H1\" or slot == \"H2\" or slot == \"M1\" or slot == \"M2\" or slot == \"R1\" or slot == \"R2\"\nif not knownSlot then\n    self.used = true\n    return\nend\n\nlocal player = Roster.entOf(slot)\nif not player or not player.pos then return end\n\nlocal side = state.orbs and state.orbs.north\nlocal candidates = side and side[isTank and \"left\" or \"right\"]\nif not candidates then return end\n\nlocal target\nfor i = 1, #candidates do\n    local orb = TensorCore.mGetEntity(candidates[i])\n    if orb and orb.pos then\n        target = orb\n        break\n    end\nend\nif not target then return end\n\nlocal distance = TensorCore.getDistance2d(player.pos, target.pos)\nif not distance then return end\nif distance > 0.2 then\n    local tip = math.min(2.0, distance * 0.35)\n    local drawer = TensorCore.getCachedDrawer(0xFFB6E0FF, 0xFF55AAFF, 0xFFFFFFFF, 0xFF000000, 4)\n    drawer:addTimedArrow(5000, player.pos.x, player.pos.y, player.pos.z, TensorCore.getHeadingToTarget(player.pos, target.pos), math.max(0.1, distance - tip), 1.4, tip, 3.0, 0, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\n\nstate.northArrowDone = true\nstate.phase = \"north\"\nstate.runPhase = nil\ndata.uwu_suppression_aether_north_done = true\nTensorCore.addAlertText(10000, \"GO NEAR ORB\", 1.1, 2, false)\nself.used = true",
+							actionLua = "local state = data.uwu_aether_guidance\nif not state or state.northArrowDone then self.used = true return end\nlocal Roster = AnyoneCore and AnyoneCore.Roster\nif not Roster or not Roster.current() or not Roster.isReady() then return end\nlocal slot = Roster.mySlot()\nlocal isTank = slot == \"T1\" or slot == \"T2\"\nlocal knownSlot = isTank or slot == \"H1\" or slot == \"H2\" or slot == \"M1\" or slot == \"M2\" or slot == \"R1\" or slot == \"R2\"\nif not knownSlot then self.used = true return end\nlocal player = Roster.entOf(slot)\nif not player or not player.pos then return end\nlocal side = state.orbs and state.orbs.north\nlocal candidates = side and side[isTank and \"left\" or \"right\"]\nif not candidates then return end\nlocal target\nfor i = 1, #candidates do local orb = TensorCore.mGetEntity(candidates[i]); if orb and orb.pos then target = orb break end end\nif not target then return end\nlocal distance = TensorCore.getDistance2d(player.pos, target.pos)\nif not distance then return end\nif distance > 0.2 then local tip = math.min(2.0, distance * 0.35); local drawer = TensorCore.getCachedDrawer(0xFFB6E0FF, 0xFF55AAFF, 0xFFFFFFFF, 0xFF000000, 4); drawer:addTimedArrow(5000, player.pos.x, player.pos.y, player.pos.z, TensorCore.getHeadingToTarget(player.pos, target.pos), math.max(0.1, distance - tip), 1.4, tip, 3.0, 0, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY) end\nstate.northArrowDone = true\nstate.phase = \"north\"\nstate.runPhase = nil\ndata.uwu_suppression_aether_north_done = true\nAnyoneCore.addTimedWorldText(10000, \"GO NEAR ORB\", {x=target.pos.x, y=target.pos.y+1.2, z=target.pos.z}, 0xFFB6E0FF, true, 1.1)\nself.used = true",
 							conditions = 
 							{
 								
