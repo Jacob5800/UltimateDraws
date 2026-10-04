@@ -20,3 +20,4 @@ TEA: Coming soon by Ton.
 - M1 and M2 barrier-cleansing arrows at Garuda Friction 2 now appear only to their assigned roster slots. (04-10-2026)
 - M2 barrier-cleansing arrow waits for the Friction AOE and appears once all party members reach at least 60% HP, during timeline 57–65. (04-10-2026)
 - M2 barrier arrow party HP threshold lowered from 60% to 57%; it still waits for Friction and checks through timeline 65. (04-10-2026)
+- At Hellfire timeline 308, T1/MT gets a four-second arrow to waymark C; everyone except T1/T2 gets a four-second arrow to waymark A. (04-10-2026)

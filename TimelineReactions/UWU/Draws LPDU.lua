@@ -2590,6 +2590,62 @@ local tbl =
 			},
 		},
 	},
+	[38] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ifrit",
+				uuid = "9bd384a7-44a0-ddb8-b7f2-e6b7eba2228b",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current() == nil or not roster.isReady() then\n  return\nend\nlocal slot = roster.mySlot()\nif slot == nil then\n  return\nend\nif slot == \"T1\" or slot == \"T2\" then\n  self.used = true\n  return\nend\n\nlocal state = data.uwu_hellfire_waymark_guidance\nif state ~= nil and state.aDrawn then\n  self.used = true\n  return\nend\nlocal player = TensorCore.mGetPlayer()\nif not player or not player.pos then\n  return\nend\nlocal x, y, z, active = Argus.getWaymarkInfo(1)\nif not active then\n  return\nend\nlocal sourcePos = player.pos\nlocal targetPos = { x = x, y = y, z = z }\nlocal heading = TensorCore.getHeadingToTarget(sourcePos, targetPos)\nlocal totalDistance = TensorCore.getDistance2d(sourcePos, targetPos)\nif totalDistance < 0.1 then\n  self.used = true\n  return\nend\nlocal scale = math.min(1, totalDistance / 15)\nlocal tipLength = math.min(totalDistance, math.max(2, 3 * scale))\nlocal baseLength = totalDistance - tipLength\nlocal baseWidth = math.max(0.5, scale)\nlocal tipWidth = math.max(1.5, 3 * scale)\nlocal drawer = TensorCore.getCachedDrawer(0xFF00FFFF, 0xFF0088FF, 0xFF0000FF, 0xFFFFFFFF, 2)\ndrawer:addTimedArrow(4000, sourcePos.x, sourcePos.y, sourcePos.z, heading, baseLength, baseWidth, tipLength, tipWidth, 0, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nstate = state or {}\ndata.uwu_hellfire_waymark_guidance = state\nstate.aDrawn = true\nself.used = true",
+							name = "Guide Non-Tanks to A",
+							uuid = "2507ea9f-e8f0-e682-a1bc-3a3aeadb8e6f",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current() == nil or not roster.isReady() then\n  return\nend\nlocal slot = roster.mySlot()\nif slot == nil then\n  return\nend\nif slot ~= \"T1\" then\n  self.used = true\n  return\nend\n\nlocal state = data.uwu_hellfire_waymark_guidance\nif state ~= nil and state.mtDrawn then\n  self.used = true\n  return\nend\nlocal player = TensorCore.mGetPlayer()\nif not player or not player.pos then\n  return\nend\nlocal x, y, z, active = Argus.getWaymarkInfo(3)\nif not active then\n  return\nend\nlocal sourcePos = player.pos\nlocal targetPos = { x = x, y = y, z = z }\nlocal heading = TensorCore.getHeadingToTarget(sourcePos, targetPos)\nlocal totalDistance = TensorCore.getDistance2d(sourcePos, targetPos)\nif totalDistance < 0.1 then\n  self.used = true\n  return\nend\nlocal scale = math.min(1, totalDistance / 15)\nlocal tipLength = math.min(totalDistance, math.max(2, 3 * scale))\nlocal baseLength = totalDistance - tipLength\nlocal baseWidth = math.max(0.5, scale)\nlocal tipWidth = math.max(1.5, 3 * scale)\nlocal drawer = TensorCore.getCachedDrawer(0xFF00FFFF, 0xFF0088FF, 0xFF0000FF, 0xFFFFFFFF, 2)\ndrawer:addTimedArrow(4000, sourcePos.x, sourcePos.y, sourcePos.z, heading, baseLength, baseWidth, tipLength, tipWidth, 0, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nstate = state or {}\ndata.uwu_hellfire_waymark_guidance = state\nstate.mtDrawn = true\nself.used = true",
+							name = "Guide MT to C",
+							uuid = "b99f2add-1e10-6d3b-9927-fb1cf348fb9c",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Draws - Ifrit",
+				mechanicTime = 307,
+				name = "[Draw] Hellfire - Non-Tanks to A / MT to C",
+				timeRange = true,
+				timelineIndex = 38,
+				timerEndOffset = 5,
+				timerStartOffset = 1,
+				uuid = "ffd1e756-3b61-63eb-bab9-2c13c4088f6c",
+				version = 2,
+			},
+		},
+	},
 	[39] = 
 	{
 		
