@@ -1571,6 +1571,107 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Movement - Garuda",
+				uuid = "6a9ee2c4-6ba7-f855-ab4c-92229235f375",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 25762,
+							conditions = 
+							{
+								
+								{
+									"c9daa3c2-58e2-ffd7-ab54-2373dd15d5ba",
+									true,
+								},
+								
+								{
+									"b98b5ff8-c3ef-b6eb-acf2-8d1163919b29",
+									true,
+								},
+								
+								{
+									"b4426e24-2dd4-fc31-961b-a08d8299f523",
+									true,
+								},
+							},
+							ignoreWeaveRules = true,
+							name = "Thunderclap to Garuda after both Mistral hits",
+							targetContentID = 1644,
+							targetType = "ContentID",
+							uuid = "ef3f78c8-e172-4f81-a6a8-fefc1f70f4b6",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								20,
+							},
+							name = "Job = MNK",
+							uuid = "c9daa3c2-58e2-ffd7-ab54-2373dd15d5ba",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							eventArgOptionType = 2,
+							eventEntityContentID = 1645,
+							name = "Event entity = Suparna",
+							uuid = "b98b5ff8-c3ef-b6eb-acf2-8d1163919b29",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							eventArgType = 2,
+							eventSpellID = 11083,
+							name = "Spell = Mistral Song",
+							uuid = "b4426e24-2dd4-fc31-961b-a08d8299f523",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Movement - Garuda",
+				eventType = 2,
+				mechanicTime = 100,
+				name = "[Dash][LPDU][Garuda] Double Mistral Hit - MNK Thunderclap",
+				timeRange = true,
+				timelineIndex = 19,
+				timerEndOffset = 0.5,
+				uuid = "7c7fc348-5998-77fc-bab1-4f8d4bac8089",
+				version = 2,
+			},
+		},
 	},
 	[21] = 
 	{
@@ -2639,7 +2740,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local Roster = AnyoneCore.Roster\nif Roster and Roster.current() ~= nil and Roster.isReady() then\n  local slot = Roster.mySlot()\n\n  if slot == \"T1\" or slot == \"T2\" then\n    self.used = true\n  elseif slot then\n    local playerID = Roster.idOf(slot)\n    local player = Roster.entOf(slot)\n\n    if playerID and player and player.pos then\n      local x, y, z, isActive = Argus.getWaymarkInfo(1)\n\n      if isActive then\n        local sourcePos = player.pos\n        local targetPos = { x = x, y = sourcePos.y, z = z }\n        local heading = TensorCore.getHeadingToTarget(sourcePos, targetPos)\n        local totalDistance = TensorCore.getDistance2d(sourcePos, targetPos)\n\n        if totalDistance > 0.2 then\n          local tipLength = math.min(3.0, totalDistance * 0.4)\n          local baseLength = totalDistance - tipLength\n          local drawer = TensorCore.getStaticDrawer(0xFF32CD32, 3.0, 0)\n\n          if drawer then\n            drawer:addTimedArrow(\n              5000,\n              sourcePos.x, sourcePos.y, sourcePos.z,\n              heading,\n              baseLength, 1.2, tipLength, 2.0,\n              0, false\n            )\n            self.used = true\n          end\n        else\n          self.used = true\n        end\n      end\n    end\n  end\nend",
+							actionLua = "local Roster = AnyoneCore.Roster\nif Roster and Roster.current() ~= nil and Roster.isReady() then\n  local slot = Roster.mySlot()\n\n  if slot == \"T1\" or slot == \"T2\" then\n    self.used = true\n  elseif slot then\n    local playerID = Roster.idOf(slot)\n    local player = Roster.entOf(slot)\n\n    if playerID and player and player.pos then\n      local x, y, z, isActive = Argus.getWaymarkInfo(1)\n\n      if isActive then\n        local sourcePos = player.pos\n        local targetPos = { x = x, y = sourcePos.y, z = z }\n        local heading = TensorCore.getHeadingToTarget(sourcePos, targetPos)\n        local totalDistance = TensorCore.getDistance2d(sourcePos, targetPos)\n\n        if totalDistance > 0.2 then\n          local tipLength = math.min(3.0, totalDistance * 0.4)\n          local baseLength = totalDistance - tipLength\n          local drawer = TensorCore.getStaticDrawer(0xFFFF00FF, 3.0, 0)\n\n          if drawer then\n            drawer:addTimedArrow(\n              5000,\n              sourcePos.x, sourcePos.y, sourcePos.z,\n              heading,\n              baseLength, 1.2, tipLength, 2.0,\n              0, false\n            )\n            self.used = true\n          end\n        else\n          self.used = true\n        end\n      end\n    end\n  end\nend",
 							name = "Arrow to A",
 							uuid = "c724fc03-1647-43f1-8600-2f2a8035037c",
 							version = 2.1,
@@ -5350,6 +5451,284 @@ local tbl =
 				timelineIndex = 74,
 				timerOffset = 2,
 				uuid = "02bd9099-3567-69f6-84e3-6bd5709902f9",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Movement - Titan",
+				uuid = "88dfbb16-bbd1-a2d1-b94c-7ae242cb7c07",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 25762,
+							conditions = 
+							{
+								
+								{
+									"a92fb0da-5cb4-b57c-9de7-99cf3fea2c8c",
+									true,
+								},
+								
+								{
+									"dbfd922a-51ac-588b-9959-a4253058f9f2",
+									true,
+								},
+								
+								{
+									"d9293184-5a40-8bd1-8c2d-b0ea0c9e8d6f",
+									true,
+								},
+							},
+							ignoreWeaveRules = true,
+							name = "Thunderclap to Titan",
+							targetContentID = 1801,
+							targetType = "ContentID",
+							uuid = "b789c8df-1065-2788-a44e-c0c10a29d95c",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								20,
+							},
+							name = "Job = MNK",
+							uuid = "a92fb0da-5cb4-b57c-9de7-99cf3fea2c8c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							eventArgOptionType = 2,
+							eventEntityContentID = 1801,
+							name = "Event entity = Titan",
+							uuid = "dbfd922a-51ac-588b-9959-a4253058f9f2",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.isTargetable == true",
+							dequeueIfLuaFalse = true,
+							name = "Titan became targetable",
+							uuid = "d9293184-5a40-8bd1-8c2d-b0ea0c9e8d6f",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Movement - Titan",
+				eventType = 26,
+				mechanicTime = 600,
+				name = "[Dash][LPDU][Titan] Land - MNK Thunderclap",
+				timeRange = true,
+				timelineIndex = 74,
+				timerEndOffset = 2.7,
+				timerStartOffset = 2.3,
+				uuid = "658ab00f-36cc-f214-98a1-effd45307379",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 34646,
+							conditions = 
+							{
+								
+								{
+									"e182fc6b-30dc-426b-8fd7-4d6908729c44",
+									true,
+								},
+								
+								{
+									"97621fa7-13a1-bf37-9a59-e5df4e974920",
+									true,
+								},
+								
+								{
+									"1001aacc-556c-e8f1-8bc1-d27ea38f2466",
+									true,
+								},
+							},
+							ignoreWeaveRules = true,
+							name = "Slither to Titan",
+							targetContentID = 1801,
+							targetType = "ContentID",
+							uuid = "8aaa304c-b515-6d14-9ffc-5f3fe10e5b02",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								41,
+							},
+							name = "Job = VPR",
+							uuid = "e182fc6b-30dc-426b-8fd7-4d6908729c44",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							eventArgOptionType = 2,
+							eventEntityContentID = 1801,
+							name = "Event entity = Titan",
+							uuid = "97621fa7-13a1-bf37-9a59-e5df4e974920",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.isTargetable == true",
+							dequeueIfLuaFalse = true,
+							name = "Titan became targetable",
+							uuid = "1001aacc-556c-e8f1-8bc1-d27ea38f2466",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Movement - Titan",
+				eventType = 26,
+				mechanicTime = 600,
+				name = "[Dash][LPDU][Titan] Land - VPR Slither",
+				timeRange = true,
+				timelineIndex = 74,
+				timerEndOffset = 2.7,
+				timerStartOffset = 2.3,
+				uuid = "76154c81-e140-e2a8-a7da-0903962d94e5",
+				version = 2,
+			},
+		},
+	},
+	[76] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Titan LPDU",
+				uuid = "078238be-8308-a83c-9d6b-c45af77434bd",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local Roster = AnyoneCore.Roster\nif not Roster or not Roster.current() or not Roster.isReady() then\n  self.used = true\n  return\nend\n\nlocal slot = Roster.mySlot()\nif not slot or slot == \"T1\" or slot == \"T2\" then\n  self.used = true\n  return\nend\n\nlocal targetID = eventArgs and eventArgs.targetID\nlocal target = targetID and TensorCore.mGetEntity(targetID)\nif targetID and target and target.pos then\n  local drawer = TensorCore.getCachedDrawer(\n    0xFFFF3333, 0xFFFF0000, 0xFFAA0000, 0xFFFFFFFF, 3\n  )\n  if drawer then\n    drawer:addTimedCircleOnEnt(\n      7000,\n      targetID,\n      1.5,\n      0,\n      false,\n      true,\n      Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\n  end\nend\n\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"0f430a0e-dcc3-60d2-876c-605d93355b85",
+									true,
+								},
+								
+								{
+									"5f222429-2355-574c-abf9-6804acd7557c",
+									true,
+								},
+							},
+							name = "Red circle around Titan aggro target",
+							uuid = "47f854bb-2155-270c-8065-9f143c3a1363",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							eventArgOptionType = 2,
+							eventEntityContentID = 1801,
+							name = "Event entity = Titan",
+							uuid = "0f430a0e-dcc3-60d2-876c-605d93355b85",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							eventArgType = 2,
+							eventSpellID = 872,
+							name = "Spell = attack",
+							uuid = "5f222429-2355-574c-abf9-6804acd7557c",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Titan LPDU",
+				eventType = 2,
+				mechanicTime = 613,
+				name = "[Draw][LPDU][Titan] Aggro target circle - non-tanks",
+				throttleTime = 9000,
+				timeRange = true,
+				timelineIndex = 76,
+				timerEndOffset = 5,
+				timerStartOffset = -4,
+				uuid = "5610e57a-0734-3355-943f-850247f18b31",
 				version = 2,
 			},
 		},
