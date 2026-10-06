@@ -4,3 +4,8 @@
 - When pruning, delete only Changelog entries whose `(DD-MM-YYYY)` date is more than one calendar month before the current date; never prune descriptive README copy or other sections. Remove empty fight/profile headings left behind by pruning.
 - For a verified reaction update, commit the reaction file and matching README changelog entry together. Push the commit to the configured `origin` branch and verify the push succeeded.
 - Keep implementation notes, workflow steps, and agent-only instructions in this file rather than in the README.
+
+## Discord changelog updater
+
+- `.github/workflows/discord-changelog.yml` posts the README `Changelog` section as a new Discord webhook message whenever `README.md` changes on `main`.
+- Configure the repository Actions secret `DISCORD_WEBHOOK_URL` with the webhook URL.
