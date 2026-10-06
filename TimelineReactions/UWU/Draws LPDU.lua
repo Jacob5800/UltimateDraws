@@ -265,6 +265,59 @@ local tbl =
 			{
 				actions = 
 				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Cooldown Holds",
+							uuid = "e5365be1-4d6d-0a57-bdf5-d97b3ba2c1df",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local api = TensorCore.API.TensorACR\nlocal toggles = api and api.getQuickToggles and api.getQuickToggles()\n\nfor _, toggle in ipairs(toggles or {}) do\n  local toggleName = toggle.name\n  if type(toggleName) == \"function\" then\n    toggleName = toggleName()\n  end\n\n  if toggleName == \"CD\" and toggle.var then\n    _G[toggle.var] = true\n    break\n  end\nend\n\nself.used = true",
+							displayPath = "Cooldown Holds",
+							name = "Enable active ACR CD QT",
+							uuid = "3cd308da-b6b5-ebbd-870a-364363228276",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "TensorDrift_SlidecastForceHold = false\nself.used = true",
+							displayPath = "Cooldown Holds",
+							name = "Reset TensorDrift Slidecast Hold",
+							uuid = "83d1fa50-3f98-470f-8593-1e60e053bf0d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Cooldown Holds",
+				mechanicTime = 9,
+				name = "[Start] Reset CD and Slidecast Hold",
+				timelineIndex = 2,
+				timerOffset = -9,
+				uuid = "5a4b28c9-1f95-35b9-a8bf-d1f098a9bc90",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
 				},
 				conditions = 
 				{
