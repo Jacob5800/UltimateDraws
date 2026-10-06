@@ -19,6 +19,7 @@ TEA: Coming soon by Ton.
 
 ### UWU: LPDU
 
+* Fixed the first-Nails Eruption arrow to use the ready AnyoneCore roster slot, so only assigned R1/R2 see it; melee slots no longer pass the role check. (06-10-2026)
 * R2 now gets an arrow to the west tether add near Mesohigh at timeline 124. (06-10-2026)
 * R2 gets a Light Puddle alert at timeline 600; the ground-effect position captured at 435 drives the later arrow and circle. (06-10-2026)
 * Both R1 and R2 use the same post-Nails Eruption bait route. (06-10-2026)
