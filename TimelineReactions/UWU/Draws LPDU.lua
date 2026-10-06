@@ -2370,6 +2370,67 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Garuda",
+				uuid = "91dba304-5bb8-d785-8d37-a6cff17891c0",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then self.used = true; return end\nlocal target = {x = 85, y = 0, z = 100}\nlocal distance = TensorCore.getDistance2d(player.pos, target)\nif distance > 0.25 then\n    local tipLength = math.min(2.0, distance * 0.4)\n    local drawer = TensorCore.getCachedDrawer(0xFFB8FF88, 0xFF55FF55, 0xFF2A8A2A, 0xFFFFFFFF, 3)\n    drawer:addTimedArrow(6000, player.pos.x, player.pos.y, player.pos.z,\n        TensorCore.getHeadingToTarget(player.pos, target),\n        math.max(0.1, distance - tipLength), 1.4, tipLength, 2.6, 0, false,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"fdaea4a6-7b04-3482-a31c-75b1aee86687",
+									true,
+								},
+							},
+							name = "Arrow to west tether",
+							uuid = "4ea9358b-2c6e-e98e-813b-ceac8b04b0cb",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local roster = AnyoneCore.Roster.current()\nreturn roster ~= nil and AnyoneCore.Roster.mySlot() == \"R2\"",
+							name = "R2 Party Roster",
+							uuid = "fdaea4a6-7b04-3482-a31c-75b1aee86687",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Garuda",
+				mechanicTime = 124,
+				name = "[Draw][Garuda] R2 West Tether Arrow",
+				timeRange = true,
+				timelineIndex = 26,
+				timerEndOffset = 3,
+				timerStartOffset = -1,
+				uuid = "6ad085ab-a8f3-d89b-9cc6-6e3ad1846cd0",
+				version = 2,
+			},
+		},
 	},
 	[27] = 
 	{
@@ -5603,8 +5664,8 @@ local tbl =
 				name = "[Dash][LPDU][Titan] Land - MNK Thunderclap",
 				timeRange = true,
 				timelineIndex = 74,
-				timerEndOffset = 2.7,
-				timerStartOffset = 2.3,
+				timerEndOffset = 2.7000000476837,
+				timerStartOffset = 2.2999999523163,
 				uuid = "658ab00f-36cc-f214-98a1-effd45307379",
 				version = 2,
 			},
@@ -5698,6 +5759,117 @@ local tbl =
 				timerEndOffset = 2.7,
 				timerStartOffset = 2.3,
 				uuid = "76154c81-e140-e2a8-a7da-0903962d94e5",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ifrit",
+				uuid = "cbdbadb1-b3bc-baf3-97e7-a240b7cffc5e",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 8000,
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = "R2 pick up Light Puddle",
+							conditions = 
+							{
+								
+								{
+									"bac29148-406f-18ee-971a-839dd49690ae",
+									true,
+								},
+							},
+							uuid = "6b1f4d6d-cd60-e611-879a-82e36535002d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local roster = AnyoneCore.Roster.current()\nreturn roster ~= nil and AnyoneCore.Roster.mySlot() == \"R2\"",
+							name = "R2 Party Roster",
+							uuid = "bac29148-406f-18ee-971a-839dd49690ae",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Ifrit",
+				mechanicTime = 600,
+				name = "[Call][Ifrit] R2 Pick Up Light Puddle",
+				timelineIndex = 74,
+				uuid = "3012fb03-95bc-3f12-b444-224bc2fb64a6",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then self.used = true; return end\nlocal target = {x = x, y = y, z = z}\nlocal distance = TensorCore.getDistance2d(player.pos, target)\nif distance > 0.25 then\n    local tipLength = math.min(2.0, distance * 0.4)\n    local drawer = TensorCore.getCachedDrawer(0xFFB8FF88, 0xFF55FF55, 0xFF2A8A2A, 0xFFFFFFFF, 3)\n    drawer:addTimedArrow(8000, player.pos.x, player.pos.y, player.pos.z,\n        TensorCore.getHeadingToTarget(player.pos, target),\n        math.max(0.1, distance - tipLength), 1.4, tipLength, 2.6, 0, false,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n    drawer:addTimedCircle(8000, target.x, target.y, target.z, 1.7, 0, false, true)\nend\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"51657952-cfc7-1d60-8a74-49568e422c2e",
+									true,
+								},
+							},
+							name = "Arrow to puddle",
+							uuid = "92de1288-127b-5ba8-8ef8-ff7b15fdda05",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local roster = AnyoneCore.Roster.current()\nreturn roster ~= nil\n    and AnyoneCore.Roster.mySlot() == \"R2\"\n    and entityContentID == 2009481\n    and keyID == 2009481\n    and type == 7\n    and flags == 5\n    and state == 0",
+							name = "R2 light puddle event",
+							uuid = "51657952-cfc7-1d60-8a74-49568e422c2e",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Ifrit",
+				eventType = 29,
+				mechanicTime = 600,
+				name = "[Draw][Ifrit] R2 Light Puddle Arrow",
+				timeRange = true,
+				timelineIndex = 74,
+				timerEndOffset = 8,
+				uuid = "103ae72e-07b2-cfa0-8e89-b2bec4670226",
 				version = 2,
 			},
 		},
