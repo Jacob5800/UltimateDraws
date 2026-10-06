@@ -5432,6 +5432,70 @@ local tbl =
 			},
 		},
 	},
+	[71] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ifrit",
+				uuid = "743d76ca-3596-a29c-9c65-19e3a179e6ff",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local Roster = AnyoneCore and AnyoneCore.Roster\nif not Roster or not Roster.current or not Roster.current() or Roster.mySlot() ~= \"R2\" then\n    self.used = true\n    return\nend\nif not x or not y or not z then\n    self.used = true\n    return\nend\ndata.uwu_ifrit_light_puddle = { x = x, y = y, z = z }\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"51657952-cfc7-1d60-8a74-49568e422c2e",
+									true,
+								},
+							},
+							name = "Remember R2 Light Puddle location",
+							uuid = "92de1288-127b-5ba8-8ef8-ff7b15fdda05",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local roster = AnyoneCore.Roster.current()\nreturn roster ~= nil\n    and AnyoneCore.Roster.mySlot() == \"R2\"\n    and entityContentID == 2009481\n    and keyID == 2009481\n    and type == 7\n    and flags == 5\n    and state == 0",
+							name = "R2 light puddle event",
+							uuid = "51657952-cfc7-1d60-8a74-49568e422c2e",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Ifrit",
+				eventType = 29,
+				mechanicTime = 435,
+				name = "[Draw][Ifrit] R2 Light Puddle Arrow",
+				timeRange = true,
+				timelineIndex = 71,
+				timerEndOffset = 8,
+				uuid = "103ae72e-07b2-cfa0-8e89-b2bec4670226",
+				version = 2,
+			},
+		},
+	},
 	[72] = 
 	{
 		
@@ -5799,6 +5863,25 @@ local tbl =
 							version = 2.1,
 						},
 					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local Roster = AnyoneCore and AnyoneCore.Roster\nif not Roster or not Roster.current or not Roster.current() or not Roster.isReady or not Roster.isReady() or Roster.mySlot() ~= \"R2\" then\n    self.used = true\n    return\nend\nlocal target = data.uwu_ifrit_light_puddle\ndata.uwu_ifrit_light_puddle = nil\nif not target or not target.x or not target.y or not target.z then\n    self.used = true\n    return\nend\nlocal player = Roster.entOf(\"R2\")\nif not player or not player.pos then\n    self.used = true\n    return\nend\nlocal distance = TensorCore.getDistance2d(player.pos, target)\nif distance and distance > 0.25 then\n    local tipLength = math.min(2.0, distance * 0.4)\n    local drawer = TensorCore.getCachedDrawer(0xFFB8FF88, 0xFF55FF55, 0xFF2A8A2A, 0xFFFFFFFF, 3)\n    drawer:addTimedArrow(8000, player.pos.x, player.pos.y, player.pos.z,\n        TensorCore.getHeadingToTarget(player.pos, target),\n        math.max(0.1, distance - tipLength), 1.4, tipLength, 2.6, 0, false,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n    drawer:addTimedCircle(8000, target.x, target.y, target.z, 1.7, 0, false, true)\nend\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"bac29148-406f-18ee-971a-839dd49690ae",
+									true,
+								},
+							},
+							name = "Arrow to captured Light Puddle",
+							uuid = "a3cd1468-ff00-c36b-9732-a0b902964e0f",
+							version = 2.1,
+						},
+					},
 				},
 				conditions = 
 				{
@@ -5819,57 +5902,6 @@ local tbl =
 				name = "[Call][Ifrit] R2 Pick Up Light Puddle",
 				timelineIndex = 74,
 				uuid = "3012fb03-95bc-3f12-b444-224bc2fb64a6",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then self.used = true; return end\nlocal target = {x = x, y = y, z = z}\nlocal distance = TensorCore.getDistance2d(player.pos, target)\nif distance > 0.25 then\n    local tipLength = math.min(2.0, distance * 0.4)\n    local drawer = TensorCore.getCachedDrawer(0xFFB8FF88, 0xFF55FF55, 0xFF2A8A2A, 0xFFFFFFFF, 3)\n    drawer:addTimedArrow(8000, player.pos.x, player.pos.y, player.pos.z,\n        TensorCore.getHeadingToTarget(player.pos, target),\n        math.max(0.1, distance - tipLength), 1.4, tipLength, 2.6, 0, false,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n    drawer:addTimedCircle(8000, target.x, target.y, target.z, 1.7, 0, false, true)\nend\nself.used = true",
-							conditions = 
-							{
-								
-								{
-									"51657952-cfc7-1d60-8a74-49568e422c2e",
-									true,
-								},
-							},
-							name = "Arrow to puddle",
-							uuid = "92de1288-127b-5ba8-8ef8-ff7b15fdda05",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster.current()\nreturn roster ~= nil\n    and AnyoneCore.Roster.mySlot() == \"R2\"\n    and entityContentID == 2009481\n    and keyID == 2009481\n    and type == 7\n    and flags == 5\n    and state == 0",
-							name = "R2 light puddle event",
-							uuid = "51657952-cfc7-1d60-8a74-49568e422c2e",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "Draws - Ifrit",
-				eventType = 29,
-				mechanicTime = 600,
-				name = "[Draw][Ifrit] R2 Light Puddle Arrow",
-				timeRange = true,
-				timelineIndex = 74,
-				timerEndOffset = 8,
-				uuid = "103ae72e-07b2-cfa0-8e89-b2bec4670226",
 				version = 2,
 			},
 		},
@@ -6149,9 +6181,9 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then\n    self.used = true\n    return\nend\nlocal center = { x = 100, y = player.pos.y, z = 100 }\nlocal dx = player.pos.x - center.x\nlocal dz = player.pos.z - center.z\nlocal radialLength = math.sqrt(dx * dx + dz * dz)\nif radialLength < 0.1 then\n    dx = 0\n    dz = -1\n    radialLength = 1\nend\nlocal knockbackDistance = 12.0\nlocal target = {\n    x = player.pos.x + dx / radialLength * knockbackDistance,\n    y = player.pos.y,\n    z = player.pos.z + dz / radialLength * knockbackDistance\n}\nlocal drawer = TensorCore.getCachedDrawer(\n    0xFFFFE080,\n    0xFFFFA000,\n    0xFFFF6000,\n    0xFF000000,\n    4\n)\ndrawer:addTimedLine(\n    6500,\n    player.pos.x, player.pos.y, player.pos.z,\n    target.x, target.y, target.z,\n    0.3,\n    0.45,\n    0\n)\nAnyoneCore.addTimedWorldText(\n    6500,\n    \"UPHEAVAL: KNOCKBACK\",\n    { x = target.x, y = target.y + 1.2, z = target.z },\n    0xFFFFE080,\n    true,\n    0.9\n)\nself.used = true",
+							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then\n    self.used = true\n    return\nend\n\n-- Successful pulls place the safe knockback setup at the north side, around x=100, z=110.\nlocal center = { x = 100, y = player.pos.y, z = 110 }\nlocal drawer = TensorCore.getCachedDrawer(\n    0x5530E080, 0x5530E080, 0x5530E080, 0xFF30E080, 2.0\n)\ndrawer:addTimedCircle(\n    3000, center.x, center.y, center.z, 1.25,\n    0, false, true, Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n)\nAnyoneCore.addTimedWorldText(\n    3000,\n    \"UPHEAVAL: STAND IN GREEN\",\n    { x = center.x, y = center.y + 1.2, z = center.z },\n    0xFF30E080,\n    true,\n    0.9\n)\nself.used = true",
 							displayPath = "Draws - Titan LPDU",
-							name = "Knockback Line",
+							name = "Green safe starting circle",
 							uuid = "8fed7728-1ef2-1479-b126-a5ae87b33953",
 							version = 2.1,
 						},
@@ -6162,10 +6194,9 @@ local tbl =
 				},
 				displayPath = "Draws - Titan LPDU",
 				mechanicTime = 637,
-				name = "[Draw][LPDU][Titan] Upheaval Knockback Guide",
+				name = "[Draw][LPDU][Titan] Upheaval Safe Knockback Spot",
 				timeRange = true,
 				timelineIndex = 84,
-				timerEndOffset = 2,
 				timerStartOffset = -3,
 				uuid = "9521059d-3b6a-244e-abb6-0129f350e8d2",
 				version = 2,
@@ -6381,7 +6412,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local Roster = AnyoneCore and AnyoneCore.Roster\nif not Roster or not Roster.current or not Roster.current() then return end\nif not Roster.isReady or not Roster.isReady() then return end\n\nlocal slot = Roster.mySlot()\nif not slot or slot == \"T1\" then\n    self.used = true\n    return\nend\n\nlocal playerID = Roster.idOf(slot)\nif not playerID then return end\nlocal player = Roster.entOf(slot)\nlocal mt = Roster.entOf(\"T1\")\nif not player or not player.pos or not mt or not mt.pos then return end\n\nlocal distance = TensorCore.getDistance2d(player.pos, mt.pos)\nif distance and distance > 0.2 then\n    local heading = TensorCore.getHeadingToTarget(player.pos, mt.pos)\n    local tipLength = math.min(2.5, distance * 0.4)\n    local drawer = TensorCore.getCachedDrawer(\n        0xFFFFCC33, 0xFFFFA000, 0xFFFFFFFF, 0xFF000000, 4\n    )\n    drawer:addTimedArrow(\n        5000,\n        player.pos.x, player.pos.y, player.pos.z,\n        heading,\n        distance - tipLength, 1.4, tipLength, 3.0,\n        0, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\nself.used = true",
+							actionLua = "local Roster = AnyoneCore and AnyoneCore.Roster\nif not Roster or not Roster.current or not Roster.current() then return end\nif not Roster.isReady or not Roster.isReady() then return end\n\nlocal slot = Roster.mySlot()\nif not slot or slot == \"T1\" then\n    self.used = true\n    return\nend\n\nlocal playerID = Roster.idOf(slot)\nif not playerID then return end\nlocal player = Roster.entOf(slot)\nif not player or not player.pos then return end\n\n-- Successful pulls stack near marker 3 around x=107, z=109.4.\nlocal target = { x = 107.0, y = player.pos.y, z = 109.4 }\nlocal distance = TensorCore.getDistance2d(player.pos, target)\nif distance and distance > 0.2 then\n    local heading = TensorCore.getHeadingToTarget(player.pos, target)\n    local tipLength = math.min(2.5, distance * 0.4)\n    local drawer = TensorCore.getCachedDrawer(\n        0xFFFFCC33, 0xFFFFA000, 0xFFFFFFFF, 0xFF000000, 4\n    )\n    drawer:addTimedArrow(\n        5000,\n        player.pos.x, player.pos.y, player.pos.z,\n        heading,\n        distance - tipLength, 1.4, tipLength, 3.0,\n        0, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\nself.used = true",
 							conditions = 
 							{
 								
@@ -6391,7 +6422,7 @@ local tbl =
 								},
 							},
 							displayPath = "Draws - Titan LPDU",
-							name = "Snapshot arrow toward MT for 5 seconds",
+							name = "Guide to group near marker 3 from rocks",
 							uuid = "6b1f268f-49b8-5434-86d5-eb41055b0cac",
 							version = 2.1,
 						},
@@ -6425,12 +6456,12 @@ local tbl =
 				},
 				displayPath = "Draws - Titan LPDU",
 				mechanicTime = 651,
-				name = "[Draw][LPDU][Titan] Snapshot Arrow to MT 653",
+				name = "[Draw][LPDU][Titan] Guide to group near marker 3",
 				throttleTime = 1000,
 				timeRange = true,
 				timelineIndex = 89,
 				timerEndOffset = 3,
-				timerStartOffset = 2,
+				timerStartOffset = -1,
 				uuid = "e7638d70-3e19-7dc1-a5ca-6b89da59cce8",
 				version = 2,
 			},

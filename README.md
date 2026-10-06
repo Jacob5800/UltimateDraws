@@ -20,7 +20,10 @@ TEA: Coming soon by Ton.
 ### UWU: LPDU
 
 * R2 now gets an arrow to the west tether add near Mesohigh at timeline 124. (06-10-2026)
-* At timeline 600, R2 gets a Light Puddle pickup alert; the matching ground-effect event draws an arrow and marker at its live position. (06-10-2026)
+* R2 gets a Light Puddle alert at timeline 600; the ground-effect position captured at 435 drives the later arrow and circle. (06-10-2026)
+* Both R1 and R2 use the same post-Nails Eruption bait route. (06-10-2026)
+* Upheaval shows a small green circle on the logged safe starting spot from timeline 634 until the hit at 637. (06-10-2026)
+* After the rock explosions, non-MT players get a five-second arrow toward the observed group spot near marker 3. (06-10-2026)
 
 * UWU fight start now enables the active ACR's CD Quick Toggle and clears TensorDrift's slidecast hold. (06-10-2026)
 * Duty Helper is automatically disabled at the start of the fight. (03-10-2026)
