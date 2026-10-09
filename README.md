@@ -92,4 +92,5 @@ TEA: Coming soon by Ton.
 * “GO NEAR ORB” now appears as world text over the assigned orb instead of as an alert. (04-10-2026)
 * Added a waymark A arrow for non-tanks at timeline 302, a Feather Rain wait alert at 100, and a reaction at 602 that disables the active ACR CD Quick Toggle. (04-10-2026)
 * Updated OwOReactions Draws LPDU: MNK Thunderclap now follows the second Mistral Song damage hit at 100 (the safespot dash remains); MNK Thunderclap and VPR Slither target Titan after its landing near 602; non-tanks see a red aggro-target circle during 609–618; the non-tanks-to-A arrow is magenta. (05-10-2026)
+* At Titan's first Rock Throw (timeline entry 639), players without an overhead number see the 6-yalm Granite Gaol blast range when each Gaol appears. (09-10-2026)
 

@@ -6252,6 +6252,79 @@ local tbl =
 		{
 			data = 
 			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Titan LPDU",
+							uuid = "0ec387db-d47f-cb44-99b4-d67a67800b25",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "if not eventArgs or not eventArgs.entityID then self.used = true; return end\nlocal drawer = TensorCore.getMoogleDrawer()\ndrawer:addTimedCircleOnEnt(7000, eventArgs.entityID, 6, 0, false, true)\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"d0f9bb89-f3e9-55d1-b328-f859f0acc17e",
+									true,
+								},
+							},
+							displayPath = "Draws - Titan LPDU",
+							name = "Show 6-yalm Gaol blast range",
+							uuid = "45213fcd-c3bc-43c8-b416-65f9d77185c7",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							displayPath = "",
+							name = "Draws - Titan LPDU",
+							uuid = "4d4fcb35-da34-ef48-abe0-bb3b674fc573",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local player = TensorCore.mGetPlayer(); return eventArgs ~= nil and eventArgs.entityContentID == 1804 and player ~= nil and player.marker == 0",
+							displayPath = "Draws - Titan LPDU",
+							name = "Gaol entity and no overhead marker",
+							uuid = "d0f9bb89-f3e9-55d1-b328-f859f0acc17e",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Titan LPDU",
+				eventType = 5,
+				mechanicTime = 639,
+				name = "[Draw][LPDU][Titan] Gaol blast range for unmarked",
+				timeRange = true,
+				timelineIndex = 85,
+				timerEndOffset = 18,
+				uuid = "d3d012a2-c734-0173-820b-816f2b597bbe",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "[Raid calls]",
 				uuid = "6dc82761-4bb9-76b0-ba6f-17451cf773c3",
