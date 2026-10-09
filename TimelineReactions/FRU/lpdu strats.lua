@@ -15510,7 +15510,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_ct\nif s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end\n  s.shapes={}\n end\n function s.draw(x,z,seconds,text)\n  s.clear();local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then\n   id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end\n  end\n  if text then AnyoneCore.Shotcall(text,true,seconds,false) end\n end\n function s.polar(side,degrees,radius,seconds,text)\n  local angle=side*degrees*math.pi/180\n  s.draw(100+math.sin(angle)*radius,100+math.cos(angle)*radius,seconds,text)\n end\nend\ns.clear();AnyoneCore.Shotcall((slot==\"T1\" or slot==\"T2\") and \"Rewind knockback - tank in front\" or \"Rewind knockback - stay behind your tank\",true,7,false);self.used=true",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_ct\nif s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end\n  s.shapes={}\n end\n function s.draw(x,z,seconds,text)\n  s.clear();local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then\n   id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end\n  end\n  if text then AnyoneCore.Shotcall(text,true,seconds,false) end\n end\n function s.polar(side,degrees,radius,seconds,text)\n  local angle=side*degrees*math.pi/180\n  s.draw(100+math.sin(angle)*radius,100+math.cos(angle)*radius,seconds,text)\n end\nend\ns.clear()\nlocal second=eventArgs.spellID==40230\nAnyoneCore.Shotcall((slot==\"T1\" or slot==\"T2\") and (second and \"Second knockback - tank in front\" or \"Rewind knockback - tank in front\") or (second and \"Second knockback - stay behind your tank\" or \"Rewind knockback - stay behind your tank\"),true,second and 3 or 7,false)\nself.used=true",
 							conditions = 
 							{
 								
@@ -15532,7 +15532,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40229",
+							conditionLua = "return eventArgs ~= nil and (eventArgs.spellID == 40229 or eventArgs.spellID == 40230)",
 							name = "Rewind Tank Formation gate",
 							uuid = "f54e8bd6-33d6-7e73-809e-19b1bd4d32dc",
 							version = 3,
@@ -15541,12 +15541,13 @@ local tbl =
 				},
 				displayPath = "LPDU",
 				eventType = 3,
+				loop = true,
 				mechanicTime = 798.9,
 				name = "[LPDU] P4 Crystallize Time - Rewind Tank Formation",
 				throttleTime = 100,
 				timeRange = true,
 				timelineIndex = 179,
-				timerEndOffset = 38,
+				timerEndOffset = 46,
 				timerStartOffset = 34,
 				uuid = "74baed58-9d20-eda9-89c9-570446adcc3f",
 				version = 2,

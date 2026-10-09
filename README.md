@@ -14,6 +14,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- CT: added the second rewind knockback reminder with a three-second expiry; tank-front and party-behind reminders now cover both hits.
+
 - CT: short-Ice regroup now waits until both the head interception and Ice hit have resolved, regardless of event order.
 
 - Apocalypse: added pattern-derived personal spreads, second Water regroup, OT farthest-bait guidance after Water, knockback sides and final Water regroup with hit cleanup. All rotations and swaps await replay confirmation.
