@@ -14,6 +14,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Correct Apocalypse Water-timer swaps and expire staging arrows before spreads; bring House of Light clockspots just outside melee reach.
+
 - Add personal Light Rampant tower/bait assignments from both overheads, using LPDU conga priority and north tower swaps.
 
 - Replace fixed Light Rampant role-side arrows with the LPDU pre-cast double conga and assignment-driven stack transition.

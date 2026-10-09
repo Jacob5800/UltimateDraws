@@ -8119,7 +8119,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current() == nil or not roster.isReady() then self.used = true; return end\nlocal slot = roster.mySlot()\nlocal offsets = {\n    T1 = { 0, -12 }, MT = { 0, -12 },\n    T2 = { 12, 0 }, OT = { 12, 0 },\n    H1 = { -12, 0 }, H2 = { 0, 12 },\n    R1 = { -8.5, -8.5 }, R2 = { 8.5, -8.5 },\n    M1 = { -8.5, 8.5 }, M2 = { 8.5, 8.5 }\n}\nlocal offset = offsets[slot]\nlocal player = TensorCore.mGetPlayer()\nif offset == nil or player == nil or player.pos == nil then self.used = true; return end\nlocal target = { x = 100 + offset[1], y = player.pos.y or 0, z = 100 + offset[2] }\nlocal heading = TensorCore.getHeadingToTarget(player.pos, target)\nlocal distance = TensorCore.getDistance2d(player.pos, target)\nlocal duration = math.floor(eventArgs.channelTimeMax * 1000) + 800\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0, 1, 0, .98), 2)\nif heading ~= nil and distance ~= nil and distance > .25 then\n    local tip = math.min(1.25, distance)\n    green:addTimedArrow(duration, player.pos.x, player.pos.y or 0, player.pos.z, heading, math.max(.15, distance - tip), .9, tip, 2.2, 0, false)\nend\ngreen:addTimedCircle(duration, target.x, target.y, target.z, 1, 0, false)\nself.used = true",
+							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current() == nil or not roster.isReady() then self.used = true; return end\nlocal slot = roster.mySlot()\nlocal offsets = {\n    T1 = { 0, -12 }, MT = { 0, -12 },\n    T2 = { 12, 0 }, OT = { 12, 0 },\n    H1 = { -12, 0 }, H2 = { 0, 12 },\n    R1 = { -8.5, -8.5 }, R2 = { 8.5, -8.5 },\n    M1 = { -8.5, 8.5 }, M2 = { 8.5, 8.5 }\n}\nlocal offset = offsets[slot]\nlocal player = TensorCore.mGetPlayer()\nif offset == nil or player == nil or player.pos == nil then self.used = true; return end\nlocal boss = TensorCore.mGetEntity(eventArgs.entityID)\nif boss == nil or boss.pos == nil or type(boss.hitradius) ~= \"number\" then self.used = true; return end\n-- Melee actions have 3y reach beyond the hitbox. Stand another .5y out.\nlocal radius = boss.hitradius + 3.5\nlocal length = math.sqrt(offset[1] * offset[1] + offset[2] * offset[2])\nlocal target = {x=boss.pos.x + offset[1] / length * radius, y=player.pos.y or 0, z=boss.pos.z + offset[2] / length * radius}\nlocal heading = TensorCore.getHeadingToTarget(player.pos, target)\nlocal distance = TensorCore.getDistance2d(player.pos, target)\nlocal duration = math.floor(eventArgs.channelTimeMax * 1000) + 800\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0, 1, 0, .98), 2)\nif heading ~= nil and distance ~= nil and distance > .25 then\n    local tip = math.min(1.25, distance)\n    green:addTimedArrow(duration, player.pos.x, player.pos.y or 0, player.pos.z, heading, math.max(.15, distance - tip), .9, tip, 2.2, 0, false)\nend\ngreen:addTimedCircle(duration, target.x, target.y, target.z, 1, 0, false)\nself.used = true",
 							conditions = 
 							{
 								
@@ -10820,6 +10820,34 @@ local tbl =
 		{
 			data = 
 			{
+				name = "[Strat] Static Apoc Arrow",
+				uuid = "be1e59f1-ddef-94ad-b1d7-b909afa0f4bf",
+				version = 2,
+			},
+			inheritedObjectUUID = "d4755f66-1839-39be-967f-2418fe2b8739",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
+				name = "[Strat] Color Apoc Arrow",
+				uuid = "a4217bfb-0e48-db85-865e-95526779536e",
+				version = 2,
+			},
+			inheritedObjectUUID = "157368b2-3791-442b-a480-03f7a5021ba5",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
 				name = "[Strat] Draw Both Apoc Arrows",
 				uuid = "5827548d-106b-d448-b08d-251f3a9914a2",
 				version = 2,
@@ -10904,7 +10932,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() or not roster.isReady() then return end\nlocal slot = roster.mySlot()\nlocal player = TensorCore.mGetPlayer()\nif not slot or not player then return end\nlocal side = data.lpdu_p3_apoc_side\nif side ~= \"support\" and side ~= \"dps\" then\n    side = (slot == \"T1\" or slot == \"T2\" or slot == \"H1\" or slot == \"H2\") and \"support\" or \"dps\"\nend\nlocal target\nlocal callout\nif side == \"support\" then\n    target = {x = 92, y = 0, z = 92}\n    callout = \"Support NW: red or purple\"\nelse\n    target = {x = 108, y = 0, z = 108}\n    callout = \"DPS SE: blue or yellow\"\nend\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0, 1, 0, 0.45), 2)\ngreen:addTimedCircle(10000, target.x, 0, target.z, 1.5, 0, true)\nlocal distance = TensorCore.getDistance2d(player.pos, target)\nif distance > 1 then\n    green:addTimedArrow(10000, player.pos.x, 0, player.pos.z, TensorCore.getHeadingToTarget(player.pos, target), distance, 1, 1, 1, 0, true)\nend\nTensorCore.addAlertText(10000, callout, 1, 1, true)\nself.used = true",
+							actionLua = "local roster=AnyoneCore and AnyoneCore.Roster\nlocal player=TensorCore.mGetPlayer()\nif roster == nil or roster.current() == nil or not roster.isReady() or player == nil or player.pos == nil then return end\nlocal assignment=data.lpdu_p3_apoc_assignment\nif assignment == nil then return end\nlocal slot=roster.mySlot()\nif slot==\"MT\" then slot=\"T1\" elseif slot==\"OT\" then slot=\"T2\" end\nlocal side=assignment.side[slot]\nif side == nil then return end\n-- Group staging only: this must finish before Spirit Taker / eruption spreads.\nlocal duration=math.floor((623-TensorReactions_CurrentTimer)*1000)\nif duration<=0 then self.used=true;return end\nlocal target={x=side==\"support\" and 92 or 108,y=player.pos.y or 0,z=side==\"support\" and 92 or 108}\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2)\ndrawer:addTimedCircle(duration,target.x,target.y,target.z,1.5,0,true)\nlocal distance=TensorCore.getDistance2d(player.pos,target)\nlocal heading=TensorCore.getHeadingToTarget(player.pos,target)\nif heading ~= nil and distance ~= nil and distance>1 then\n    drawer:addTimedArrow(duration,player.pos.x,target.y,player.pos.z,heading,math.max(.15,distance-1),1,1,1,0,true)\nend\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -10913,6 +10941,7 @@ local tbl =
 									true,
 								},
 							},
+							name = "Initial Assigned Group",
 							uuid = "68a68f0b-ac91-15cd-adb0-58f4126f838b",
 							version = 2.1,
 						},
@@ -10925,7 +10954,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return table.size(data.megaminx_p3_apoc_safe) == 8 ",
+							conditionLua = "return data.lpdu_p3_apoc_assignment ~= nil",
 							uuid = "4938e21f-4f21-aa8f-a121-ef38571f4846",
 							version = 3,
 						},
@@ -10933,11 +10962,12 @@ local tbl =
 				},
 				displayPath = "LPDU",
 				mechanicTime = 619.6,
-				name = "Apocalypse role side [LPDU]",
+				name = "[LPDU] P3 Apocalypse - Initial Assigned Group",
+				throttleTime = 100,
 				timeRange = true,
 				timelineIndex = 144,
-				timerEndOffset = 100,
-				timerStartOffset = -150,
+				timerEndOffset = 2.5,
+				timerStartOffset = -6.8,
 				uuid = "2c137f4e-8715-2a36-bdfe-6bcde411aa9c",
 				version = 2,
 			},
@@ -10953,7 +10983,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() or not roster.isReady() then return end\nlocal mySlot = roster.mySlot()\nif not mySlot then return end\nlocal support = {\"T1\", \"T2\", \"H1\", \"H2\"}\nlocal dps = {\"M1\", \"M2\", \"R1\", \"R2\"}\nlocal water = {}\nlocal countSupport, countDps = 0, 0\nfor _, slot in ipairs(support) do\n    local ent = roster.entOf(slot)\n    if not ent then return end\n    water[slot] = TensorCore.getBuff(ent, 2461) ~= nil\n    if water[slot] then countSupport = countSupport + 1 end\nend\nfor _, slot in ipairs(dps) do\n    local ent = roster.entOf(slot)\n    if not ent then return end\n    water[slot] = TensorCore.getBuff(ent, 2461) ~= nil\n    if water[slot] then countDps = countDps + 1 end\nend\nif countSupport + countDps ~= 6 then return end\nlocal function chosen(list, wantWater, howMany, slot)\n    local found = 0\n    for _, candidate in ipairs(list) do\n        if water[candidate] == wantWater then\n            found = found + 1\n            if candidate == slot then return found <= howMany end\n        end\n    end\n    return false\nend\nlocal flex = false\nlocal currentSide\nif mySlot == \"T1\" or mySlot == \"T2\" or mySlot == \"H1\" or mySlot == \"H2\" then\n    currentSide = \"support\"\n    if countSupport > 3 then\n        flex = chosen(support, true, countSupport - 3, mySlot)\n    elseif countSupport < 3 then\n        flex = chosen(support, false, 3 - countSupport, mySlot)\n    end\nelse\n    currentSide = \"dps\"\n    if countDps > 3 then\n        flex = chosen(dps, true, countDps - 3, mySlot)\n    elseif countDps < 3 then\n        flex = chosen(dps, false, 3 - countDps, mySlot)\n    end\nend\ndata.lpdu_p3_apoc_side = flex and (currentSide == \"support\" and \"dps\" or \"support\") or currentSide\nAnyoneCore.Shotcall(flex and \"flex to opposite side\" or \"stay on your side\", true, 40, false)\nself.used = true",
+							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current() == nil or not roster.isReady() then return end\nlocal supports={\"T1\",\"T2\",\"H1\",\"H2\"}\nlocal dps={\"M1\",\"M2\",\"R1\",\"R2\"}\nlocal all={\"T1\",\"T2\",\"H1\",\"H2\",\"M1\",\"M2\",\"R1\",\"R2\"}\nlocal waters, category, side, owner={},{},{},{}\nfor i,slot in ipairs(all) do\n    local ent=roster.entOf(slot)\n    if ent == nil then return end\n    local buff=TensorCore.getBuff(ent,2461)\n    category[slot]=0\n    side[slot]=i<=4 and \"support\" or \"dps\"\n    owner[slot]=slot\n    if buff ~= nil then\n        if type(buff.duration) ~= \"number\" then return end\n        table.insert(waters,{slot=slot,duration=buff.duration})\n    end\nend\nif #waters ~= 6 then return end\ntable.sort(waters,function(a,b) return a.duration<b.duration end)\n-- Two short, two medium, two long. Wait for a complete consistent snapshot.\nfor i=1,6,2 do\n    if math.abs(waters[i].duration-waters[i+1].duration)>2 then return end\n    if i<5 and waters[i+2].duration-waters[i+1].duration<4 then return end\nend\nfor i,entry in ipairs(waters) do category[entry.slot]=math.ceil(i/2) end\nlocal swapped={}\n-- Highest adjusting priority in each duplicated timer group swaps with\n-- the other side's highest adjusting player. Repeat until all four timer\n-- categories (including no Water) appear once on each side.\nfor pass=1,4 do\n    local countN,countS={0,0,0,0},{0,0,0,0}\n    for _,slot in ipairs(all) do\n        local counts=side[slot]==\"support\" and countN or countS\n        counts[category[slot]+1]=counts[category[slot]+1]+1\n    end\n    local s,d\n    for _,slot in ipairs(supports) do\n        if side[slot]==\"support\" and countN[category[slot]+1]>1 then s=slot;break end\n    end\n    if s == nil then break end\n    for _,slot in ipairs(dps) do\n        if side[slot]==\"dps\" and countS[category[slot]+1]>1 then d=slot;break end\n    end\n    if d == nil then return end\n    side[s],side[d]=\"dps\",\"support\"\n    owner[s],owner[d]=owner[d],owner[s]\n    swapped[s],swapped[d]=true,true\nend\nlocal counts={support={0,0,0,0},dps={0,0,0,0}}\nfor _,slot in ipairs(all) do\n    local n=category[slot]+1\n    counts[side[slot]][n]=counts[side[slot]][n]+1\nend\nfor _,group in pairs(counts) do for i=1,4 do if group[i] ~= 1 then return end end end\nlocal slot=roster.mySlot()\nif slot==\"MT\" then slot=\"T1\" elseif slot==\"OT\" then slot=\"T2\" end\nif side[slot] == nil then return end\n-- Freeze the initial assignment: never swap back after Water expires.\ndata.lpdu_p3_apoc_assignment={side=side,owner=owner,category=category,swapped=swapped}\ndata.lpdu_p3_apoc_side=side[slot]\nlocal label=side[slot]==\"support\" and \"NW group\" or \"SE group\"\nlocal roleNames={T1=\"MT\",T2=\"OT\"}\nlocal text=swapped[slot] and (label..\": swap with \"..(roleNames[owner[slot]] or owner[slot])..\"; keep their spot\") or (label..\": keep your spot\")\nAnyoneCore.Shotcall(text,true,8,false)\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -10962,6 +10992,7 @@ local tbl =
 									true,
 								},
 							},
+							name = "Water Timer Swaps",
 							uuid = "32caae9d-255a-cc09-9642-84f66a70b6da",
 							version = 2.1,
 						},
@@ -10984,11 +11015,12 @@ local tbl =
 				},
 				displayPath = "LPDU",
 				mechanicTime = 619.6,
-				name = "Apocalypse flex solver [LPDU]",
+				name = "[LPDU] P3 Apocalypse - Water Timer Swaps",
+				throttleTime = 100,
 				timeRange = true,
 				timelineIndex = 144,
-				timerEndOffset = 30,
-				timerStartOffset = -30,
+				timerEndOffset = 2.5,
+				timerStartOffset = -8,
 				uuid = "69e9ae29-cd03-194f-81cb-874de08aa504",
 				version = 2,
 			},
