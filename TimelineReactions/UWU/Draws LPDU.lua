@@ -12115,6 +12115,11 @@ local tbl =
 									"f08dd1d3-c4f8-adda-a645-30c6651f7f70",
 									true,
 								},
+								
+								{
+									"aef26f3f-0ab8-a50b-87a7-6d165b9afdc4",
+									true,
+								},
 							},
 							displayPath = "Draws - Garuda",
 							name = "[Alert] Feather Rain - Move 1215",
@@ -12147,15 +12152,27 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "if self.claimed then return true end\nlocal stamp=eventArgs.startTime\nlocal previous=data.uwu_lpdu_suppression_feather_stamp\n-- A volley creates one AOE per player. Its entries share a start time (or differ\n-- by a few milliseconds); the next volley is a separate cast about 0.85s later.\nif previous and math.abs(stamp-previous)<500 then return false end\ndata.uwu_lpdu_suppression_feather_stamp=stamp\nself.claimed=true\nreturn true",
+							dequeueIfLuaFalse = true,
+							name = "One alert per volley",
+							uuid = "aef26f3f-0ab8-a50b-87a7-6d165b9afdc4",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "Draws - Garuda",
 				eventType = 18,
 				mechanicTime = 1215,
-				name = "[Alert] Feather Rain - Move 1215",
+				name = "[LPDU] Suppression - Feather Rain Move",
 				throttleTime = 1000,
 				timeRange = true,
 				timelineIndex = 194,
-				timerEndOffset = -0.5,
+				timerEndOffset = 2,
 				timerStartOffset = -3,
 				uuid = "a6c44fc1-f001-3d5f-bac1-21e85d44e3cf",
 				version = 2,
@@ -12241,6 +12258,7 @@ local tbl =
 					},
 				},
 				displayPath = "Draws - Garuda",
+				enabled = false,
 				eventType = 18,
 				mechanicTime = 1216,
 				name = "[Alert] Feather Rain - Move 1216",
@@ -12364,6 +12382,11 @@ local tbl =
 									"65f7d2b1-9b43-25f3-a9b9-7d8f425f67ce",
 									true,
 								},
+								
+								{
+									"68b43e99-747c-6b84-8606-acc6cb37e866",
+									true,
+								},
 							},
 							uuid = "3daf66ef-4de9-1ea5-99ae-44466e40ff20",
 							version = 2.1,
@@ -12390,11 +12413,23 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local Roster = AnyoneCore.Roster\nif not Roster or not Roster.current() then return false end\nlocal slot = Roster.mySlot()\nif not slot then return false end\nreturn slot ~= \"T2\"",
+							conditionLua = "local Roster=AnyoneCore.Roster\nif Roster.current()==nil then return false end\nlocal slot=Roster.mySlot()\nreturn slot~=nil and slot~=\"T1\"",
 							conditionType = 9,
-							name = "Roster: except T2",
+							name = "Roster: except MT",
 							partyTargetType = "Off Tank",
 							uuid = "65f7d2b1-9b43-25f3-a9b9-7d8f425f67ce",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "if self.claimed then return true end\nif data.uwu_lpdu_suppression_stack_called then return false end\ndata.uwu_lpdu_suppression_stack_called=true\nself.claimed=true\nreturn true",
+							dequeueIfLuaFalse = true,
+							name = "One stack call",
+							uuid = "68b43e99-747c-6b84-8606-acc6cb37e866",
 							version = 3,
 						},
 					},
@@ -12515,6 +12550,11 @@ local tbl =
 									"798a0977-02bd-9d0d-95ab-b01d7415ee4f",
 									true,
 								},
+								
+								{
+									"ed9a85dc-e51c-332b-81e4-b2fb8fd92693",
+									true,
+								},
 							},
 							displayPath = "Draws - Garuda",
 							name = "Feather Rain Move",
@@ -12547,11 +12587,23 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "if self.claimed then return true end\nlocal stamp=eventArgs.startTime\nlocal previous=data.uwu_lpdu_suppression_feather_stamp\n-- A volley creates one AOE per player. Its entries share a start time (or differ\n-- by a few milliseconds); the next volley is a separate cast about 0.85s later.\nif previous and math.abs(stamp-previous)<500 then return false end\ndata.uwu_lpdu_suppression_feather_stamp=stamp\nself.claimed=true\nreturn true",
+							dequeueIfLuaFalse = true,
+							name = "One alert per volley",
+							uuid = "ed9a85dc-e51c-332b-81e4-b2fb8fd92693",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "Draws - Garuda",
 				eventType = 18,
 				mechanicTime = 1232,
-				name = "[Alert] Feather Rain - Move 1232",
+				name = "[LPDU] Suppression - Final Feather Rain Move",
 				throttleTime = 1000,
 				timeRange = true,
 				timelineIndex = 204,
@@ -12771,9 +12823,9 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local state = data.uwu_aether_guidance\nif not state then\n    state = { southDone = false, phase = nil, runPhase = nil }\n    data.uwu_aether_guidance = state\nend\n\nif state.phase and state.runPhase ~= state.phase then\n    local party = TensorCore.getEntityGroupList(\"Party\", { noAliveCheck = true }) or {}\n    local count = 0\n    local allReady = true\n    for _, member in pairs(party) do\n        count = count + 1\n        local percent = member and member.hp and member.hp.percent\n        if type(percent) ~= \"number\" or percent < 80 then\n            allReady = false\n        end\n    end\n\n    if count == 8 and allReady then\n        TensorCore.addAlertText(4000, \"RUN INTO ORB\", 1.1, 2, false)\n        state.runPhase = state.phase\n        if state.phase == \"north\" then self.used = true end\n    end\nend",
+							actionLua = "local state = data.uwu_aether_guidance\nif not state then\n    state = { southDone=false, phase=nil, runPhase=nil }\n    data.uwu_aether_guidance = state\nend\nif not state.phase or state.runPhase==state.phase then return end\n\nlocal roster = AnyoneCore.Roster\n-- Identity needs a resolved roster. Do not require all eight entities to be live:\n-- someone outside this player's group must not block their readiness alert.\nif roster.current()==nil then return end\nlocal slot = roster.mySlot()\nif not slot then return end\nif not self.slots then\n    if slot==\"T1\" or slot==\"T2\" then\n        self.slots={\"T1\",\"T2\"}\n    else\n        self.slots={\"H1\",\"H2\",\"M1\",\"M2\",\"R1\",\"R2\"}\n    end\nend\nfor _, groupSlot in ipairs(self.slots) do\n    local member = roster.entOf(groupSlot)\n    if not member or not member.alive or not member.hp or member.hp.percent<80 then return end\nend\nTensorCore.addAlertText(4000,\"RUN INTO ORB\",1.1,2,false)\nstate.runPhase=state.phase\nif state.phase==\"north\" then self.used=true end\n",
 							displayPath = "Draws - Ultima",
-							name = "South Soak Assignment",
+							name = "Soak group readiness",
 							uuid = "3edff3de-a032-9482-b16e-1d6eb2312139",
 							version = 2.1,
 						},
