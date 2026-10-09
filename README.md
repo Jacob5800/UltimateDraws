@@ -14,6 +14,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Add personal LPDU clockspot guidance during P2 House of Light, expiring through the protean hit.
+
 - Extend the personal partner marker around 58 by one second; show yellow Diamond Dust knockback guidance from 248.0.
 
 * Banish III partners near 322 mark your partner: MT/M1 red, OT/M2 yellow, H1/R1 purple, H2/R2 blue. Spread shows no partner marker. (09-10-2026)

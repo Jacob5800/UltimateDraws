@@ -8045,6 +8045,60 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current() == nil or not roster.isReady() then self.used = true; return end\nlocal slot = roster.mySlot()\nlocal offsets = {\n    T1 = { 0, -12 }, MT = { 0, -12 },\n    T2 = { 12, 0 }, OT = { 12, 0 },\n    H1 = { -12, 0 }, H2 = { 0, 12 },\n    R1 = { -8.5, -8.5 }, R2 = { 8.5, -8.5 },\n    M1 = { -8.5, 8.5 }, M2 = { 8.5, 8.5 }\n}\nlocal offset = offsets[slot]\nlocal player = TensorCore.mGetPlayer()\nif offset == nil or player == nil or player.pos == nil then self.used = true; return end\nlocal target = { x = 100 + offset[1], y = player.pos.y or 0, z = 100 + offset[2] }\nlocal heading = TensorCore.getHeadingToTarget(player.pos, target)\nlocal distance = TensorCore.getDistance2d(player.pos, target)\nlocal duration = math.floor(eventArgs.channelTimeMax * 1000) + 800\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0, 1, 0, .98), 2)\nif heading ~= nil and distance ~= nil and distance > .25 then\n    local tip = math.min(1.25, distance)\n    green:addTimedArrow(duration, player.pos.x, player.pos.y or 0, player.pos.z, heading, math.max(.15, distance - tip), .9, tip, 2.2, 0, false)\nend\ngreen:addTimedCircle(duration, target.x, target.y, target.z, 1, 0, false)\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"b40a5af0-cf37-bfbd-ba5b-6af35695ab78",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Personal LPDU clockspot",
+							uuid = "fc9a41d0-b296-ede2-a78e-2dab4293fdd1",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventSpellID = 40189,
+							name = "House of Light",
+							uuid = "b40a5af0-cf37-bfbd-ba5b-6af35695ab78",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Draws",
+				eventType = 3,
+				mechanicTime = 368.8,
+				name = "[LPDU] P2 House of Light - Personal Clockspot",
+				timeRange = true,
+				timelineIndex = 95,
+				timerStartOffset = -8,
+				uuid = "40120bab-36c7-4c04-b67b-52c13011a542",
+				version = 2,
+			},
+		},
 	},
 	[99] = 
 	{
