@@ -10494,6 +10494,49 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "26cdcd58-e875-7bce-a8de-8a36acb52694",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 3000,
+							alertPriority = 2,
+							alertText = "Look away",
+							uuid = "324cff15-c98b-dad5-bdf6-4476aea8e24f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU",
+				mechanicTime = 574.9,
+				name = "[LPDU] P3 Ultimate Relativity - Look Away",
+				timeRange = true,
+				timelineIndex = 135,
+				timerEndOffset = -1.5,
+				timerStartOffset = -2.5,
+				uuid = "ef62efa7-9ecf-d193-b772-a4e221e175ae",
+				version = 2,
+			},
+		},
 	},
 	[137] = 
 	{

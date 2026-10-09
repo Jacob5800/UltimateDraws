@@ -14,6 +14,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Added a Look away alert before Ultimate Relativity Shadoweye resolves.
+
 - Disabled the constantly aiming Diamond Dust puddle direction arrow around 254.
 
 - Correct Apocalypse Water-timer swaps and expire staging arrows before spreads; bring House of Light clockspots just outside melee reach.
