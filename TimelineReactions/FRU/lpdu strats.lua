@@ -7530,17 +7530,9 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local player = TensorCore.mGetPlayer()\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif player == nil or player.pos == nil or roster == nil or not roster.isReady() then self.used = true; return end\nlocal slot = roster.mySlot()\nlocal supports = slot == \"T1\" or slot == \"T2\" or slot == \"MT\" or slot == \"OT\" or slot == \"H1\" or slot == \"H2\"\nlocal dps = slot == \"M1\" or slot == \"M2\" or slot == \"R1\" or slot == \"R2\"\nif not supports and not dps then self.used = true; return end\nlocal target = { x = 100, y = player.pos.y or 0, z = supports and 85 or 115 }\nlocal heading = TensorCore.getHeadingToTarget(player.pos, target)\nif heading == nil then self.used = true; return end\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0, 1, 0, .98), 2)\ngreen:addTimedArrow(5500, player.pos.x, player.pos.y or 0, player.pos.z, heading, 6, .9, 1.25, 2.2, 0, false)\nself.used = true",
-							conditions = 
-							{
-								
-								{
-									"535972b5-d748-9cfd-afcd-196c8c84cf4a",
-									true,
-								},
-							},
+							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nlocal player = TensorCore.mGetPlayer()\nif roster == nil or roster.current() == nil or not roster.isReady() or player == nil or player.pos == nil then self.used = true; return end\n-- LPDU double conga: H1 H2 MT OT / R1 R2 M1 M2.\n-- Corners are closer to the opposite row than to their next row neighbour.\nlocal spots = {\n    H1={95.5,98.7}, H2={98.5,97.5}, T1={101.5,97.5}, T2={104.5,98.7},\n    R1={95.5,101.3}, R2={98.5,102.5}, M1={101.5,102.5}, M2={104.5,101.3}\n}\nlocal slot = roster.mySlot()\nif slot == \"MT\" then slot = \"T1\" elseif slot == \"OT\" then slot = \"T2\" end\nlocal target = spots[slot]\nif target == nil then self.used = true; return end\nlocal state = { baits={}, ids={}, hammers={}, assignments={}, guided=false }\nfor role in pairs(spots) do\n    local id = roster.idOf(role)\n    if id == nil or id == 0 then self.used = true; return end\n    state.ids[role] = id\nend\n-- This state belongs only to our editable LPDU reactions.\nstate.guide = function(x, z, duration)\n    local p = TensorCore.mGetPlayer()\n    if p == nil or p.pos == nil then return end\n    if state.arrow ~= nil then Argus.deleteTimedShape(state.arrow); state.arrow=nil end\n    if state.circle ~= nil then Argus.deleteTimedShape(state.circle); state.circle=nil end\n    local point = {x=x,y=p.pos.y or 0,z=z}\n    local heading = TensorCore.getHeadingToTarget(p.pos,point)\n    local distance = TensorCore.getDistance2d(p.pos,point)\n    local green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.98),2)\n    if heading ~= nil and distance ~= nil and distance > .25 then\n        local tip = math.min(1.25,distance)\n        state.arrow = green:addTimedArrow(duration,p.pos.x,p.pos.y or 0,p.pos.z,heading,math.max(.15,distance-tip),.9,tip,2.2,0,false)\n    end\n    local marker = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2)\n    state.circle = marker:addTimedCircle(duration,x,p.pos.y or 0,z,1,0,false)\nend\ndata.lpdu_fru_lr_personal = state\nstate.guide(target[1],target[2],7500)\nself.used = true\n",
 							endIfUsed = true,
-							name = "Guide support north / DPS south",
+							name = "Line up before the cast",
 							uuid = "74128a73-1652-d0a2-bd33-b26ac92c8bc7",
 							version = 2.1,
 						},
@@ -7548,25 +7540,14 @@ local tbl =
 				},
 				conditions = 
 				{
-					
-					{
-						data = 
-						{
-							category = "Lua",
-							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40212",
-							name = "Light Rampant cast",
-							uuid = "535972b5-d748-9cfd-afcd-196c8c84cf4a",
-							version = 3,
-						},
-					},
 				},
 				displayPath = "LPDU Draws",
-				eventType = 3,
 				mechanicTime = 331.8,
-				name = "[LPDU] Light Rampant - role side",
+				name = "[LPDU] P2 Light Rampant - Double Conga",
 				timeRange = true,
 				timelineIndex = 80,
-				timerStartOffset = -8,
+				timerEndOffset = -5.1,
+				timerStartOffset = -7.5,
 				uuid = "1f29d389-f98d-7c67-aa92-945a98753a6d",
 				version = 2,
 			},
@@ -7707,9 +7688,16 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local player = TensorCore.mGetPlayer()\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif player == nil or player.pos == nil or roster == nil or not roster.isReady() then self.used = true; return end\nlocal slot = roster.mySlot()\nlocal supports = slot == \"T1\" or slot == \"T2\" or slot == \"MT\" or slot == \"OT\" or slot == \"H1\" or slot == \"H2\"\nlocal dps = slot == \"M1\" or slot == \"M2\" or slot == \"R1\" or slot == \"R2\"\nif not supports and not dps then self.used = true; return end\nlocal target = supports and { x = 107, y = player.pos.y or 0, z = 93 } or { x = 93, y = player.pos.y or 0, z = 107 }\nlocal heading = TensorCore.getHeadingToTarget(player.pos, target)\nlocal distance = TensorCore.getDistance2d(player.pos, target)\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0, 1, 0, .98), 2)\nif heading ~= nil and distance ~= nil and distance > .25 then\n    local tip = math.min(1.25, distance)\n    green:addTimedArrow(5200, player.pos.x, player.pos.y or 0, player.pos.z, heading, math.max(.15, distance - tip), .9, tip, 2.2, 0, false)\nend\ngreen:addTimedCircle(5200, target.x, target.y, target.z, 1.15, 0, false)\nself.used = true",
-							endIfUsed = true,
-							name = "Guide support NE / DPS SW",
+							actionLua = "local roster=AnyoneCore and AnyoneCore.Roster\nlocal state=data.lpdu_fru_lr_personal\nif roster == nil or roster.current() == nil or not roster.isReady() or state == nil or not state.assigned or state.guided then self.used=true; return end\nlocal slot=roster.mySlot()\nif slot == \"MT\" then slot=\"T1\" elseif slot == \"OT\" then slot=\"T2\" end\nlocal assignment=state.assignments[slot]\nif assignment == nil then self.used=true; return end\nif eventArgs.spellID == 40218 then\n    -- The log identifies each puddle's baiter as the cast's main target.\n    local id=eventArgs.targetID\n    state.hammers[id]=(state.hammers[id] or 0)+1\n    if not assignment.bait or id ~= state.ids[slot] or state.hammers[id] < 5 then self.used=true; return end\nelseif eventArgs.spellID == 40213 then\n    if assignment.bait then self.used=true; return end\nelse self.used=true; return end\n-- Collapse after your own five puddles, or after the first towers resolve.\n-- These are safe stack staging positions from LPDU raidplan step 4.\nlocal x,z=assignment.north and 104.5 or 89.5,assignment.north and 82.5 or 115.5\nlocal duration=math.max(300,math.floor((348.8-TensorReactions_CurrentTimer)*1000))\nstate.guide(x,z,duration)\nstate.guided=true\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"9d8a5b2f-e97c-29a5-af6d-8e18a1bacdaf",
+									true,
+								},
+							},
+							name = "Collapse after your mechanic resolves",
 							uuid = "da87ddd0-0d1c-fe80-8304-6ddbec416796",
 							version = 2.1,
 						},
@@ -7717,14 +7705,34 @@ local tbl =
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Tower or puddle resolves",
+							spellIDList = 
+							{
+								40213,
+								40218,
+							},
+							uuid = "9d8a5b2f-e97c-29a5-af6d-8e18a1bacdaf",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Draws",
+				eventType = 2,
+				loop = true,
 				mechanicTime = 348.7,
-				name = "[LPDU] Light Rampant - collapse safe side",
+				name = "[LPDU] P2 Light Rampant - Assigned Stack Side",
 				timeRange = true,
 				timelineIndex = 88,
-				timerEndOffset = -1,
-				timerStartOffset = -3,
+				timerEndOffset = 0.2,
+				timerStartOffset = -12,
 				uuid = "cb4e79f5-3c0f-330d-91d8-06769086f813",
 				version = 2,
 			},
@@ -10752,6 +10760,20 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "[Strat] Draw Both Apoc Arrows",
+				uuid = "5827548d-106b-d448-b08d-251f3a9914a2",
+				version = 2,
+			},
+			inheritedObjectUUID = "a172d363-9c09-2bb7-b83d-23ce828fa61a",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
 		},
 		
 		{

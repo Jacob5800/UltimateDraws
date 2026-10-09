@@ -14,6 +14,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Replace fixed Light Rampant role-side arrows with the LPDU pre-cast double conga and assignment-driven stack transition.
+
 - Add personal LPDU clockspot guidance during P2 House of Light, expiring through the protean hit.
 
 - Extend the personal partner marker around 58 by one second; show yellow Diamond Dust knockback guidance from 248.0.
