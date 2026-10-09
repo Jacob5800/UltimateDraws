@@ -11172,6 +11172,530 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "data.lpdu_apoc_movement={shapes={},centerCount=0};self.used=true",
+							conditions = 
+							{
+								
+								{
+									"3b22dbbc-c11b-d4d2-bcd9-37b93c3a64c0",
+									true,
+								},
+							},
+							name = "Movement Reset",
+							uuid = "3c1b1834-2c8d-9eb5-a3a4-af781eeadca3",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40296",
+							name = "Movement Reset gate",
+							uuid = "3b22dbbc-c11b-d4d2-bcd9-37b93c3a64c0",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				mechanicTime = 619.6,
+				name = "[LPDU] P3 Apocalypse - Movement Reset",
+				timeRange = true,
+				timelineIndex = 144,
+				timerStartOffset = -5,
+				uuid = "9b983c2e-9255-757b-9337-889629a3cca6",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_apoc_movement;local assignment=data.lpdu_p3_apoc_assignment\nif s==nil then return end\nif s.clear==nil then\n function s.clear() for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={} end\n function s.draw(angle,dist,seconds,text,bx,bz)\n  s.clear();local x=(bx or 100)+math.sin(angle)*dist;local z=(bz or 100)+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.angle(side)\n  local a=s.first-s.rotation\n  a=(a+math.pi)%(2*math.pi)-math.pi\n  local forDPS=a>=-.1 and a<math.pi-.1\n  if forDPS~=(side==\"dps\") then a=a+math.pi end\n  return a\n end\nend\nif s.first~=nil then self.used=true;return end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID);if e==nil then return end\nlocal dx=e.pos.x-100;local dz=e.pos.z-100;if dx*dx+dz*dz<100 then self.used=true;return end\nlocal h=TensorCore.getHeadingToTarget({x=100,y=0,z=100},e.pos)\nlocal delta=(e.pos.h-h+math.pi)%(2*math.pi)-math.pi\nif math.abs(math.abs(delta)-math.pi/2)>.2 then self.used=true;return end\ns.first=h;s.rotation=delta>0 and math.pi/4 or -math.pi/4\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"0711888e-35be-95bc-ace4-9d8ee2278f38",
+									true,
+								},
+							},
+							name = "Pattern Direction",
+							uuid = "abb97c18-1555-92b4-8026-39c521fda161",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.entityContentID == 2011391 and eventArgs.a2 == 4 and eventArgs.a3 == 64",
+							name = "Pattern Direction gate",
+							uuid = "0711888e-35be-95bc-ace4-9d8ee2278f38",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 19,
+				loop = true,
+				mechanicTime = 619.6,
+				name = "[LPDU] P3 Apocalypse - Pattern Direction",
+				timeRange = true,
+				timelineIndex = 144,
+				timerEndOffset = 11,
+				uuid = "b0ff282b-058c-8ede-89ab-64fda4ab3fbc",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_apoc_movement;local assignment=data.lpdu_p3_apoc_assignment\nif s==nil then return end\nif s.clear==nil then\n function s.clear() for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={} end\n function s.draw(angle,dist,seconds,text,bx,bz)\n  s.clear();local x=(bx or 100)+math.sin(angle)*dist;local z=(bz or 100)+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.angle(side)\n  local a=s.first-s.rotation\n  a=(a+math.pi)%(2*math.pi)-math.pi\n  local forDPS=a>=-.1 and a<math.pi-.1\n  if forDPS~=(side==\"dps\") then a=a+math.pi end\n  return a\n end\nend\nif s.firstWater then self.used=true;return end\nlocal hit=false;for _,id in ipairs(eventArgs.hitTargets) do if id==p.id then hit=true end end\nif hit then s.firstWater=true;s.clear();AnyoneCore.Shotcall(\"Spread for jump - then take your safe sector\",true,3,false) end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"22b30e8a-4fdd-9068-b0fa-c54d8a4fcfd2",
+									true,
+								},
+							},
+							name = "After First Water",
+							uuid = "652ffad6-5a45-cb82-9d7a-7cab7bff69e1",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40271",
+							name = "After First Water gate",
+							uuid = "22b30e8a-4fdd-9068-b0fa-c54d8a4fcfd2",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 619.6,
+				name = "[LPDU] P3 Apocalypse - After First Water",
+				timeRange = true,
+				timelineIndex = 144,
+				timerEndOffset = 5,
+				timerStartOffset = 2,
+				uuid = "5483bde5-88d6-373e-83fc-6bc1d6baafec",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_apoc_movement;local assignment=data.lpdu_p3_apoc_assignment\nif s==nil then return end\nif s.clear==nil then\n function s.clear() for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={} end\n function s.draw(angle,dist,seconds,text,bx,bz)\n  s.clear();local x=(bx or 100)+math.sin(angle)*dist;local z=(bz or 100)+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.angle(side)\n  local a=s.first-s.rotation\n  a=(a+math.pi)%(2*math.pi)-math.pi\n  local forDPS=a>=-.1 and a<math.pi-.1\n  if forDPS~=(side==\"dps\") then a=a+math.pi end\n  return a\n end\nend\nif assignment==nil or s.first==nil then return end\nlocal owner=assignment.owner[slot];local side=assignment.side[slot];if owner==nil or side==nil then return end\ns.mid=s.angle(side);s.owner=owner;s.side=side;s.spreading=true\nif owner==\"H1\" or owner==\"R1\" then s.draw(s.mid-math.pi/12,19,5.2,\"Spread - outer safe sector\")\nelseif owner==\"H2\" or owner==\"R2\" then s.draw(s.mid+math.pi/12,19,5.2,\"Spread - outer safe sector\")\nelse\n local pos=(owner==\"T1\" or owner==\"M1\") and 0 or 1\n s.alt=pos==(s.rotation<0 and 1 or 0)\n s.draw(s.alt and s.mid-s.rotation or s.mid,10,5.2,s.alt and \"Spread - wait for middle blasts, then move in\" or \"Spread - safe sector\")\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"31bc7b78-904c-61a1-8d13-2a7f35165706",
+									true,
+								},
+							},
+							name = "Personal Safe Sector Spread",
+							uuid = "05b1158e-1024-f051-b30b-b4aed4854ed3",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40273",
+							name = "Personal Safe Sector Spread gate",
+							uuid = "31bc7b78-904c-61a1-8d13-2a7f35165706",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				mechanicTime = 619.6,
+				name = "[LPDU] P3 Apocalypse - Personal Safe Sector Spread",
+				timeRange = true,
+				timelineIndex = 144,
+				timerEndOffset = 14,
+				timerStartOffset = 10,
+				uuid = "f697f5ab-4b6d-fcff-81ad-0d1e97c4f014",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_apoc_movement;local assignment=data.lpdu_p3_apoc_assignment\nif s==nil then return end\nif s.clear==nil then\n function s.clear() for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={} end\n function s.draw(angle,dist,seconds,text,bx,bz)\n  s.clear();local x=(bx or 100)+math.sin(angle)*dist;local z=(bz or 100)+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.angle(side)\n  local a=s.first-s.rotation\n  a=(a+math.pi)%(2*math.pi)-math.pi\n  local forDPS=a>=-.1 and a<math.pi-.1\n  if forDPS~=(side==\"dps\") then a=a+math.pi end\n  return a\n end\nend\nlocal e=TensorCore.mGetEntity(eventArgs.entityID);if e==nil then self.used=true;return end\nlocal dx=e.pos.x-100;local dz=e.pos.z-100\nif dx*dx+dz*dz>=1 then self.used=true;return end\nif s.lastCenter==nil or TensorReactions_CurrentTimer-s.lastCenter>.7 then\n s.lastCenter=TensorReactions_CurrentTimer;s.centerCount=s.centerCount+1\nend\nif s.centerCount>=2 and s.spreading and s.alt and not s.altMoved then\n s.altMoved=true;s.draw(s.mid-s.rotation,4.5,1.5,\"Move in - keep your spread\")\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"bbd1053c-2aa3-b252-ae03-412ab2e2ba4c",
+									true,
+								},
+							},
+							name = "Melee Inner Spread Transition",
+							uuid = "7b097a5d-7075-ec0c-a9ed-f293276af3eb",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40297",
+							name = "Melee Inner Spread Transition gate",
+							uuid = "bbd1053c-2aa3-b252-ae03-412ab2e2ba4c",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 619.6,
+				name = "[LPDU] P3 Apocalypse - Melee Inner Spread Transition",
+				timeRange = true,
+				timelineIndex = 144,
+				timerEndOffset = 17,
+				timerStartOffset = 12,
+				uuid = "72d52ad3-0408-a3f7-aa5a-8a07ad0fa996",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_apoc_movement;local assignment=data.lpdu_p3_apoc_assignment\nif s==nil then return end\nif s.clear==nil then\n function s.clear() for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={} end\n function s.draw(angle,dist,seconds,text,bx,bz)\n  s.clear();local x=(bx or 100)+math.sin(angle)*dist;local z=(bz or 100)+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.angle(side)\n  local a=s.first-s.rotation\n  a=(a+math.pi)%(2*math.pi)-math.pi\n  local forDPS=a>=-.1 and a<math.pi-.1\n  if forDPS~=(side==\"dps\") then a=a+math.pi end\n  return a\n end\nend\nif s.water2Shown then self.used=true;return end\nif assignment==nil or s.first==nil then return end\ns.water2Shown=true;s.spreading=false;s.side=assignment.side[slot];s.mid=s.angle(s.side)\ns.draw(s.mid,3.5,6,\"Stack second Water - keep your swapped group\")\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"4796e734-548f-ac6d-bfd7-26ef1b99d4af",
+									true,
+								},
+							},
+							name = "Second Water Regroup",
+							uuid = "2dcb1280-9db7-aec1-96ff-abab5cff9904",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40274",
+							name = "Second Water Regroup gate",
+							uuid = "4796e734-548f-ac6d-bfd7-26ef1b99d4af",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 619.6,
+				name = "[LPDU] P3 Apocalypse - Second Water Regroup",
+				timeRange = true,
+				timelineIndex = 144,
+				timerEndOffset = 18,
+				timerStartOffset = 15,
+				uuid = "8888eda3-4b44-b02b-982e-2caac8ec6dd5",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_apoc_movement;local assignment=data.lpdu_p3_apoc_assignment\nif s==nil then return end\nif s.clear==nil then\n function s.clear() for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={} end\n function s.draw(angle,dist,seconds,text,bx,bz)\n  s.clear();local x=(bx or 100)+math.sin(angle)*dist;local z=(bz or 100)+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.angle(side)\n  local a=s.first-s.rotation\n  a=(a+math.pi)%(2*math.pi)-math.pi\n  local forDPS=a>=-.1 and a<math.pi-.1\n  if forDPS~=(side==\"dps\") then a=a+math.pi end\n  return a\n end\nend\nif s.midTaken then self.used=true;return end\nlocal hit=false;for _,id in ipairs(eventArgs.hitTargets) do if id==p.id then hit=true end end\nif not hit then self.used=true;return end\nif assignment==nil or s.first==nil then return end\ns.midTaken=true;s.side=assignment.side[slot];s.mid=s.angle(s.side);s.final=s.mid-s.rotation\nif slot==\"T2\" then s.draw(s.final,19,2.6,\"Bait farthest now - move out\")\nelse s.draw(s.final,3.5,2.6,\"Stay near middle - clear the tank bait\") end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"7d0d698a-24d3-f04a-993e-ca966c229fe2",
+									true,
+								},
+							},
+							name = "After Second Water - OT Bait",
+							uuid = "2a201b99-848f-cf97-a54e-913b4d26b460",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40271",
+							name = "After Second Water - OT Bait gate",
+							uuid = "7d0d698a-24d3-f04a-993e-ca966c229fe2",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 619.6,
+				name = "[LPDU] P3 Apocalypse - After Second Water - OT Bait",
+				timeRange = true,
+				timelineIndex = 144,
+				timerEndOffset = 24,
+				timerStartOffset = 21,
+				uuid = "37a91307-5ca6-93d2-97e4-6ce8d4cffaa0",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_apoc_movement;local assignment=data.lpdu_p3_apoc_assignment\nif s==nil then return end\nif s.clear==nil then\n function s.clear() for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={} end\n function s.draw(angle,dist,seconds,text,bx,bz)\n  s.clear();local x=(bx or 100)+math.sin(angle)*dist;local z=(bz or 100)+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.angle(side)\n  local a=s.first-s.rotation\n  a=(a+math.pi)%(2*math.pi)-math.pi\n  local forDPS=a>=-.1 and a<math.pi-.1\n  if forDPS~=(side==\"dps\") then a=a+math.pi end\n  return a\n end\nend\nif assignment==nil then self.used=true;return end\nlocal b=TensorCore.mGetEntity(eventArgs.entityID);if b==nil then return end\ns.bx=b.pos.x;s.bz=b.pos.z\ns.knockAngle=TensorCore.getHeadingToTarget(b.pos,{x=100,y=0,z=100})+(assignment.side[slot]==\"support\" and -1 or 1)*math.pi/9\ns.draw(s.knockAngle,2,3.3,assignment.side[slot]==\"support\" and \"Knockback - support side left\" or \"Knockback - DPS side right\",s.bx,s.bz)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"001a1834-2347-d0e7-b572-1f00ac10f4e7",
+									true,
+								},
+							},
+							name = "Personal Knockback Sides",
+							uuid = "d02ddadb-3bd1-e2f5-b1aa-76666e5b01d2",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40182",
+							name = "Personal Knockback Sides gate",
+							uuid = "001a1834-2347-d0e7-b572-1f00ac10f4e7",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 2,
+				mechanicTime = 619.6,
+				name = "[LPDU] P3 Apocalypse - Personal Knockback Sides",
+				timeRange = true,
+				timelineIndex = 144,
+				timerEndOffset = 26,
+				timerStartOffset = 23,
+				uuid = "4e34aa75-e819-24cd-8dd3-cfa57b767c6f",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_apoc_movement;local assignment=data.lpdu_p3_apoc_assignment\nif s==nil then return end\nif s.clear==nil then\n function s.clear() for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={} end\n function s.draw(angle,dist,seconds,text,bx,bz)\n  s.clear();local x=(bx or 100)+math.sin(angle)*dist;local z=(bz or 100)+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.angle(side)\n  local a=s.first-s.rotation\n  a=(a+math.pi)%(2*math.pi)-math.pi\n  local forDPS=a>=-.1 and a<math.pi-.1\n  if forDPS~=(side==\"dps\") then a=a+math.pi end\n  return a\n end\nend\nif s.knockAngle==nil then self.used=true;return end\ns.draw(s.knockAngle,10,4.5,\"Regroup for last Water - keep your group\",s.bx,s.bz)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"bf1e7b4c-039a-f478-8318-434086aa6b8b",
+									true,
+								},
+							},
+							name = "Last Water Regroup",
+							uuid = "dd4c6991-4263-8c81-bbe1-5dfe18974638",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40183",
+							name = "Last Water Regroup gate",
+							uuid = "bf1e7b4c-039a-f478-8318-434086aa6b8b",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 2,
+				mechanicTime = 619.6,
+				name = "[LPDU] P3 Apocalypse - Last Water Regroup",
+				timeRange = true,
+				timelineIndex = 144,
+				timerEndOffset = 29,
+				timerStartOffset = 26,
+				uuid = "25c01367-0656-a7a5-a7bf-9b066f659e23",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_apoc_movement;local assignment=data.lpdu_p3_apoc_assignment\nif s==nil then return end\nif s.clear==nil then\n function s.clear() for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={} end\n function s.draw(angle,dist,seconds,text,bx,bz)\n  s.clear();local x=(bx or 100)+math.sin(angle)*dist;local z=(bz or 100)+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.angle(side)\n  local a=s.first-s.rotation\n  a=(a+math.pi)%(2*math.pi)-math.pi\n  local forDPS=a>=-.1 and a<math.pi-.1\n  if forDPS~=(side==\"dps\") then a=a+math.pi end\n  return a\n end\nend\nlocal hit=false;for _,id in ipairs(eventArgs.hitTargets) do if id==p.id then hit=true end end\nif hit then s.clear() end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"92d410e4-dd18-49fa-8f41-d6d0c738c7a9",
+									true,
+								},
+							},
+							name = "Last Water Cleanup",
+							uuid = "e0572fd9-5c56-bff9-a254-a48340b250d7",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40271",
+							name = "Last Water Cleanup gate",
+							uuid = "92d410e4-dd18-49fa-8f41-d6d0c738c7a9",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 619.6,
+				name = "[LPDU] P3 Apocalypse - Last Water Cleanup",
+				timeRange = true,
+				timelineIndex = 144,
+				timerEndOffset = 33,
+				timerStartOffset = 29,
+				uuid = "e7a4730f-ddac-4852-bf17-6f830cf99e8b",
+				version = 2,
+			},
+		},
 	},
 	[145] = 
 	{
