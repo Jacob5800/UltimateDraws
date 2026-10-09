@@ -14,6 +14,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Pandora's Box: tank-only LB reminder six seconds before the raidwide hit.
+
 - P5 Akh Morn: green healer stack circles appear during the cast and clear on damage.
 
 - Added the green Diamond Dust ice-slide destination for Twin Silence/Stillness, shown from the cast until its first hit.

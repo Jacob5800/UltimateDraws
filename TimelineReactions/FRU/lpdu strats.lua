@@ -17595,6 +17595,69 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "592249a2-0f29-2f3d-9a02-08d57dd6ac01",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 4000,
+							alertPriority = 3,
+							alertTTS = true,
+							alertText = "Tank LB now",
+							conditions = 
+							{
+								
+								{
+									"aaab06ad-ee15-0fd6-a10b-a092f24948db",
+									true,
+								},
+							},
+							uuid = "4b1998ae-b182-818b-b3b5-27868fa6cc6d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local r=AnyoneCore.Roster; if r.current()==nil then return false end; local s=r.mySlot();return s==\"T1\" or s==\"T2\"",
+							name = "Tanks only",
+							uuid = "aaab06ad-ee15-0fd6-a10b-a092f24948db",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				mechanicTime = 1085.2,
+				name = "[LPDU] P5 Pandora's Box - Tank LB Reminder",
+				timeRange = true,
+				timelineIndex = 236,
+				timerEndOffset = -5.4,
+				timerStartOffset = -6,
+				uuid = "46c7ea4a-8589-dc1a-ae7d-31fa4d1ea838",
+				version = 2,
+			},
+		},
 	},
 	[237] = 
 	{
