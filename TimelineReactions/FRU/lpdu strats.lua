@@ -6858,6 +6858,60 @@ local tbl =
 			},
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current() == nil or not roster.isReady() then\n    self.used = true\n    return\nend\nlocal pairs = {\n    T1 = {\"M1\", 1, 0, 0}, M1 = {\"T1\", 1, 0, 0},\n    T2 = {\"M2\", 1, 1, 0}, M2 = {\"T2\", 1, 1, 0},\n    H1 = {\"R1\", .65, 0, 1}, R1 = {\"H1\", .65, 0, 1},\n    H2 = {\"R2\", 0, .4, 1}, R2 = {\"H2\", 0, .4, 1}\n}\nlocal pair = pairs[roster.mySlot()]\nlocal partnerID = pair and roster.idOf(pair[1])\nif partnerID ~= nil and partnerID ~= 0 then\n    local marker = TensorCore.getStaticDrawer(\n        GUI:ColorConvertFloat4ToU32(pair[2], pair[3], pair[4], .45), 2)\n    marker:addTimedCircleOnEnt(eventArgs.channelTimeMax * 1000 + 1000,\n        partnerID, 1, 0, true, true)\nend\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"919851d7-1121-8c20-9023-7c6c6990949d",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Mark assigned Banish partner",
+							uuid = "1f27ed21-e62c-3d5a-9f75-1b3a772e541d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventSpellID = 40220,
+							name = "Partners only",
+							uuid = "919851d7-1121-8c20-9023-7c6c6990949d",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Draws",
+				eventType = 3,
+				mechanicTime = 322.5,
+				name = "[LPDU] P2 Banish III - Personal Partner",
+				timeRange = true,
+				timelineIndex = 77,
+				timerStartOffset = -8,
+				uuid = "ddeab36d-5bef-addc-8ace-0df0bb2a5224",
+				version = 2,
+			},
+		},
 	},
 	[80] = 
 	{
