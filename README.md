@@ -14,6 +14,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- CT: short-Ice regroup now waits until both the head interception and Ice hit have resolved, regardless of event order.
+
 - Apocalypse: added pattern-derived personal spreads, second Water regroup, OT farthest-bait guidance after Water, knockback sides and final Water regroup with hit cleanup. All rotations and swaps await replay confirmation.
 
 - Paradise Regained: replaced legacy per-frame draws and kept each DPS tower arrow active until its assigned tower resolves.
