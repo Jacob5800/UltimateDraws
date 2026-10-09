@@ -5500,6 +5500,7 @@ local tbl =
 					},
 				},
 				displayPath = "FRU_LPDU_P2_DD",
+				enabled = false,
 				eventType = 3,
 				mechanicTime = 255.1,
 				name = "[LPDU] Diamond Dust puddle direction arrow [AnyoneCore]",
@@ -13998,6 +13999,20 @@ local tbl =
 		{
 			data = 
 			{
+				name = "[Strat] CT Helper Starting Dir",
+				uuid = "e1f79616-469e-4878-8f2e-d6ca0f6f2b28",
+				version = 2,
+			},
+			inheritedObjectUUID = "16093471-cb29-a975-bf66-439430e72a60",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "FRU_megaminx_indicator",
 				uuid = "6cb85338-869f-71ec-3637-f74e02e6d288",
@@ -14502,6 +14517,34 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "[Draw] Queue CT Debuffs",
+				uuid = "7bcd8f7c-b7f3-5a89-b4b8-2e0b4921d094",
+				version = 2,
+			},
+			inheritedObjectUUID = "40f4679b-e888-e580-acac-d72a0123de05",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
+				name = "[Draw] Dragon Heading",
+				uuid = "bc7c4c71-3fb3-c576-aadc-57284e7ac507",
+				version = 2,
+			},
+			inheritedObjectUUID = "a7551d03-0daf-2240-ac1d-8603c67e73db",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
 		},
 	},
 	[182] = 

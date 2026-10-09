@@ -14,6 +14,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Disabled the constantly aiming Diamond Dust puddle direction arrow around 254.
+
 - Correct Apocalypse Water-timer swaps and expire staging arrows before spreads; bring House of Light clockspots just outside melee reach.
 
 - Add personal Light Rampant tower/bait assignments from both overheads, using LPDU conga priority and north tower swaps.
