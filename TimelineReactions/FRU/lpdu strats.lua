@@ -15864,6 +15864,7 @@ local tbl =
 					},
 				},
 				displayPath = "FRU_megaminx_indicator",
+				enabled = false,
 				eventType = 3,
 				loop = true,
 				mechanicTime = 802.8,
