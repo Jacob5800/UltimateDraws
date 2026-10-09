@@ -10166,10 +10166,10 @@ local tbl =
 						data = 
 						{
 							aType = "Alert",
-							alertDuration = 4000,
 							alertPriority = 3,
 							alertScale = 0.85,
-							alertText = "Take Mesohigh tether near C",
+							alertTTS = true,
+							alertText = "Go to C and take tether",
 							conditions = 
 							{
 								
@@ -10177,8 +10177,18 @@ local tbl =
 									"05b6c628-04d9-a6a4-bee2-181f0900275d",
 									true,
 								},
+								
+								{
+									"f171ad90-45b0-2b66-bf0b-9c26bf4605a3",
+									true,
+								},
+								
+								{
+									"f5b16385-d6d2-598c-9135-16b2162a525b",
+									true,
+								},
 							},
-							name = "Take Mesohigh tether near C",
+							name = "Go to C and take tether",
 							uuid = "35bfe5d9-6eb4-717e-ba58-44df8c5e09b9",
 							version = 2.1,
 						},
@@ -10194,6 +10204,16 @@ local tbl =
 								
 								{
 									"05b6c628-04d9-a6a4-bee2-181f0900275d",
+									true,
+								},
+								
+								{
+									"f171ad90-45b0-2b66-bf0b-9c26bf4605a3",
+									true,
+								},
+								
+								{
+									"f5b16385-d6d2-598c-9135-16b2162a525b",
 									true,
 								},
 							},
@@ -10216,14 +10236,39 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.sourceEntityContentID==1644 and eventArgs.newTetherID==4",
+							dequeueIfLuaFalse = true,
+							name = "Garuda Mesohigh appears",
+							uuid = "f171ad90-45b0-2b66-bf0b-9c26bf4605a3",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "if self.claimed then return true end\nlocal p=TensorCore.mGetPlayer()\nif not p or eventArgs.newTargetID==p.id then return false end\nif data.uwu_r1_mesohigh_prompted then return false end\ndata.uwu_r1_mesohigh_prompted=true\nself.claimed=true\nreturn true",
+							dequeueIfLuaFalse = true,
+							name = "Prompt once before R1 takes tether",
+							uuid = "f5b16385-d6d2-598c-9135-16b2162a525b",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Guidance",
+				eventType = 15,
 				mechanicTime = 1109,
 				name = "[LPDU] Ultima Mesohigh - Take Tether near C - R1",
 				timeRange = true,
 				timelineIndex = 150,
-				timerEndOffset = 1.2,
-				timerStartOffset = 0.7,
+				timerEndOffset = 12,
+				timerStartOffset = -1,
 				uuid = "64fa6591-48cb-1a61-9245-cbbd64a5fa86",
 				version = 2,
 			},

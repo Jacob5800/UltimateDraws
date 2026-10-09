@@ -71,6 +71,8 @@ TEA: Coming soon by Ton.
 
 ### UWU: LPDU
 
+- 2026-10-10: R1 now hears and sees Go to C and take tether when Garuda Mesohigh appears during Annihilation. Replaced the narrow fixed-time window with the actual tether event, retained the personal C arrow and acquisition cleanup, and suppressed repeat prompts or prompts when R1 already holds the tether. Replay confirmation remains pending.
+
 - 2026-10-10: Suppression Feather Rain calls now fire once per volley, with overlapping 1215/1216 reactions merged. The stack call after the second Landslide fires once and excludes MT, the LPDU tether tank. Aetheric Boom readiness now checks only your soak group: both tanks, or the six healers/DPS, alive and at least 80% HP. Replay confirmation remains pending.
 
 - 2026-10-10: Predation now guides to an LPDU safe cardinal away from Garuda and outside Titan cardinal, then updates to the rune away from Ultima after the first Landslide hit. Replaced the conflicting Ifrit-only arrow, retained overlay rendering, and added short destination markers with expiry before Feather Rain. Replay confirmation across rotated patterns remains pending.
