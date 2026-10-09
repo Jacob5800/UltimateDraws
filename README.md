@@ -14,6 +14,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+* The green red-mirror spread spot near 313 also renders behind players using FLAG_RENDER_UI. (09-10-2026)
+
 * Fall of Faith bait circles expire by timeline 118; the green blue-mirror spread spot near 305 now renders behind characters using FLAG_RENDER_UI. (09-10-2026)
 
 * Around 57 seconds, partners receive a small personal partner marker: MT/R1 red, H1/M1 purple, OT/R2 yellow, H2/M2 blue. Spread shows no partner marker. (09-10-2026)
