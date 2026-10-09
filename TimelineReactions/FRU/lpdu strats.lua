@@ -16514,6 +16514,122 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "3efbe011-69a6-15e9-bc6d-a317f70e327c",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster\nif r.current()==nil or not r.isReady() then return end\nif data.lpdu_p5_healer_stack_shapes then\n for _,id in ipairs(data.lpdu_p5_healer_stack_shapes) do Argus.deleteTimedShape(id) end\nend\ndata.lpdu_p5_healer_stack_shapes={}\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.35),2,1)\nfor _,slot in ipairs({\"H1\",\"H2\"}) do\n local ent=r.entOf(slot)\n if ent then\n  local id=drawer:addTimedCircleOnEnt(math.floor(eventArgs.channelTimeMax*1000)+500,ent.id,4,0,true,true)\n  if id then table.insert(data.lpdu_p5_healer_stack_shapes,id) end\n end\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"ef1bc6c8-d19f-03bc-99a9-97bb8c950ca6",
+									true,
+								},
+							},
+							name = "Healer Stack Circles",
+							uuid = "a41340f5-5983-bec0-aa34-a6c0c5cbad43",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40310",
+							name = "Akh Morn event",
+							uuid = "ef1bc6c8-d19f-03bc-99a9-97bb8c950ca6",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 1011.4,
+				name = "[LPDU] P5 Akh Morn - Healer Stack Circles",
+				timeRange = true,
+				timelineIndex = 215,
+				timerEndOffset = 210,
+				timerStartOffset = -10,
+				uuid = "9718b10f-3a48-3c10-9bc2-8061ecfa5630",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "if data.lpdu_p5_healer_stack_shapes then\n for _,id in ipairs(data.lpdu_p5_healer_stack_shapes) do Argus.deleteTimedShape(id) end\n data.lpdu_p5_healer_stack_shapes=nil\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"08abdb32-a4c0-0919-b4e0-65520d4e3562",
+									true,
+								},
+							},
+							name = "Stack Circle Cleanup",
+							uuid = "c2b90302-4fd1-57b4-9400-894148e6c4a4",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and (eventArgs.spellID == 40311 or eventArgs.spellID == 40312)",
+							name = "Akh Morn event",
+							uuid = "08abdb32-a4c0-0919-b4e0-65520d4e3562",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 1011.4,
+				name = "[LPDU] P5 Akh Morn - Stack Circle Cleanup",
+				timeRange = true,
+				timelineIndex = 215,
+				timerEndOffset = 210,
+				timerStartOffset = -10,
+				uuid = "bf3cfb62-2953-1a8f-bc28-ce3e8640b867",
+				version = 2,
+			},
+		},
 	},
 	[216] = 
 	{
@@ -16611,6 +16727,48 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "[Core] Record First Wing Color",
+				uuid = "a8dcd000-82cc-b4f1-a54a-7539e49eab85",
+				version = 2,
+			},
+			inheritedObjectUUID = "8fc46a81-19ca-bd0a-b645-3ea5c354ad86",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
+				name = "[Core] Snapshot Wings MT",
+				uuid = "26be8dd0-50d1-3a39-a2d7-8591dc07a47f",
+				version = 2,
+			},
+			inheritedObjectUUID = "1704044b-bb59-29d4-9fba-4e972d899717",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
+				name = "[Core] Record First Tower Pos",
+				uuid = "20fcc952-953c-cb35-8428-cc69c78dd92b",
+				version = 2,
+			},
+			inheritedObjectUUID = "27258e88-95a9-7fc2-8819-ae4082d98aea",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
 		},
 	},
 	[219] = 
