@@ -71,6 +71,8 @@ TEA: Coming soon by Ton.
 
 ### UWU: LPDU
 
+- 2026-10-10: Predation now guides to an LPDU safe cardinal away from Garuda and outside Titan cardinal, then updates to the rune away from Ultima after the first Landslide hit. Replaced the conflicting Ifrit-only arrow, retained overlay rendering, and added short destination markers with expiry before Feather Rain. Replay confirmation across rotated patterns remains pending.
+
 - Added role-specific Titan positioning TTS near 715, a post-Plume out/Landslide TTS near 1070, and R1 Mesohigh guidance to C that clears upon tether acquisition.
 
 - Fixed R1/R2 eruption sides in Ifrit and Ultima, extended player-gaol blast ranges to later waves, and placed the Predation safe-rune circle above the floor with overlay rendering.

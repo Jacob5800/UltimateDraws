@@ -8097,6 +8097,16 @@ local tbl =
 		{
 			data = 
 			{
+				displayPath = "",
+				name = "Draws - Ultima",
+				uuid = "6c52c0d3-b329-37de-ab59-7f243a321302",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
 				actions = 
 				{
 					
@@ -8113,10 +8123,20 @@ local tbl =
 					{
 						data = 
 						{
+							displayPath = "",
+							name = "Draws - Ultima",
+							uuid = "c7b76161-3621-cd78-aa31-a0e9a582d9cd",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
 							aType = "Lua",
-							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then\n    self.used = true\n    return\nend\n\nlocal center = { x = 100, y = player.pos.y, z = 100 }\nlocal candidates = {\n    { x = 93.5,  y = center.y, z = 82.2  },\n    { x = 106.5, y = center.y, z = 82.2  },\n    { x = 117.8, y = center.y, z = 93.5  },\n    { x = 117.8, y = center.y, z = 106.5 },\n    { x = 106.5, y = center.y, z = 117.8 },\n    { x = 93.5,  y = center.y, z = 117.8 },\n    { x = 82.2,  y = center.y, z = 106.5 },\n    { x = 82.2,  y = center.y, z = 93.5  }\n}\n\nlocal hazards = {}\nlocal seen = {}\nlocal enemies = TensorCore.getEntityGroupList(\"Enemy\")\nfor _, entity in pairs(enemies or {}) do\n    local content = entity and (entity.contentid or entity.contentID)\n    if entity and entity.pos and (content == 1644 or content == 1185 or content == 1801 or content == 2137) then\n        seen[content] = true\n        local radius = 5.5\n        if content == 1644 then\n            radius = 7.0\n        elseif content == 1185 then\n            radius = 7.5\n        elseif content == 2137 then\n            radius = 6.5\n        end\n        hazards[#hazards + 1] = { x = entity.pos.x, z = entity.pos.z, radius = radius }\n    end\nend\n\nif not seen[1644] or not seen[1185] or not seen[1801] or not seen[2137] then\n    self.used = true\n    return\nend\n\nlocal best\nlocal bestClearance = -math.huge\nfor _, candidate in ipairs(candidates) do\n    local clearance = math.huge\n    for _, hazard in ipairs(hazards) do\n        local dx = candidate.x - hazard.x\n        local dz = candidate.z - hazard.z\n        clearance = math.min(clearance, math.sqrt(dx * dx + dz * dz) - hazard.radius)\n    end\n    if clearance > bestClearance then\n        best = candidate\n        bestClearance = clearance\n    end\nend\n\nif not best then\n    self.used = true\n    return\nend\n\nlocal channel = Argus2.getNextUnusedChannel(true)\nArgus2.addTimedCircleFilled(\n    10000,\n    best.x, best.y, best.z,\n    3.3, 64,\n    0x5533CC66, 0x5533CC66, 0xAA22FF66, 0,\n    nil, 0, 0, 0, 0, 0,\n    false, true, Argus2.RenderFlags.FLAG_RENDER_OVERLAY,\n    channel, 0, 0, 0\n)\n\nlocal distance = TensorCore.getDistance2d(player.pos, best)\nif distance > 0.2 then\n    local tip = math.min(1.8, distance * 0.35)\n    local drawer = TensorCore.getCachedDrawer(\n        0xFFB6FFB6, 0xFF55FF55, 0xFFFFFFFF, 0xFF000000, 5\n    )\n    drawer:addTimedArrow(\n        10000,\n        player.pos.x, player.pos.y, player.pos.z,\n        TensorCore.getHeadingToTarget(player.pos, best),\n        math.max(0.1, distance - tip),\n        1.5, tip, 3.2, 0, false,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\n\nAnyoneCore.addTimedWorldText(\n    10000,\n    \"PREDATION: SAFE RUNE\",\n    { x = best.x, y = best.y + 1.2, z = best.z },\n    0xFFB6FFB6, true, 1.25\n)\nself.used = true",
-							displayPath = "Draws - Garuda",
-							name = "Guide",
+							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then return end\n\nif self.bosses==nil then\n    self.models = {[1644]=8722, [1185]=8730, [1801]=8727, [2137]=8734}\n    self.bosses = {}\nend\nlocal models, bosses = self.models,self.bosses\nbosses[1644],bosses[1185],bosses[1801],bosses[2137] = nil,nil,nil,nil\nfor _, entity in pairs(TensorCore.getEntityGroupList(\"Enemy\") or {}) do\n    local model = models[entity.contentid]\n    if model and entity.pos and Argus.isEntityVisible(entity.id)\n        and Argus.getEntityModel(entity.id) == model then\n        bosses[entity.contentid] = entity\n    end\nend\nlocal garuda, titan, ultima, ifrit = bosses[1644], bosses[1801], bosses[2137], bosses[1185]\nif not garuda or not titan or not ultima or not ifrit then return end\n-- Wait for the trio's teleports, rather than accepting their previous positions.\nlocal gx, gz = garuda.pos.x-100, garuda.pos.z-100\nlocal tx, tz = titan.pos.x-100, titan.pos.z-100\nlocal ux, uz = ultima.pos.x-100, ultima.pos.z-100\nlocal ix, iz = ifrit.pos.x-100, ifrit.pos.z-100\nif math.abs(gx)<1 or math.abs(gz)<1 or gx*gx+gz*gz>64\n    or tx*tx+tz*tz<196 or ux*ux+uz*uz<196 or ix*ix+iz*iz<196 then return end\n\nlocal cardinals = {{x=0,z=-1}, {x=1,z=0}, {x=0,z=1}, {x=-1,z=0}}\nlocal titanCardinal, titanDot = nil, -math.huge\nfor i, direction in ipairs(cardinals) do\n    local dot = direction.x*tx + direction.z*tz\n    if dot>titanDot then titanDot=dot; titanCardinal=i end\nend\nlocal chosen, nearest = nil, math.huge\nfor i, direction in ipairs(cardinals) do\n    -- LPDU: one of the two cardinals away from Garuda; exclude Titan's cardinal.\n    if i~=titanCardinal and direction.x*gx + direction.z*gz < 0 then\n        local x,z = 100+direction.x*19, 100+direction.z*19\n        local dx,dz = x-player.pos.x,z-player.pos.z\n        local distance = dx*dx+dz*dz\n        if distance<nearest then nearest=distance; chosen=direction end\n    end\nend\nif not chosen then self.used=true; return end\n\n-- After the first Landslides, move along this edge to the rune away from Ultima.\nlocal tangentX,tangentZ = -chosen.z,chosen.x\nlocal rune, farthest = nil,-math.huge\nfor _,sign in ipairs({-1,1}) do\n    local x = 100+chosen.x*17.8+tangentX*6.5*sign\n    local z = 100+chosen.z*17.8+tangentZ*6.5*sign\n    local dx,dz = x-ultima.pos.x,z-ultima.pos.z\n    local distance = dx*dx+dz*dz\n    if distance>farthest then farthest=distance; rune={x=x,y=player.pos.y,z=z} end\nend\n\nlocal state = {rune=rune, phase=\"cardinal\", shapes={}}\ndata.uwu_lpdu_predation = state\nstate.arrowDrawer = TensorCore.getCachedDrawer(0xFFB6FFB6,0xFF55FF55,0xFFFFFFFF,0xFF000000,5)\nstate.circleDrawer = TensorCore.getCachedDrawer(0x5533CC66,0x5533CC66,0xAA22FF66,0,0)\nfunction state.guide(destination, timeout)\n    for _,uuid in ipairs(state.shapes) do Argus.deleteTimedShape(uuid) end\n    state.shapes = {}\n    local p = TensorCore.mGetPlayer()\n    if not p or not p.pos then return end\n    local flags = Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    -- This is a destination marker, not a claim that a large area is safe.\n    local uuid = state.circleDrawer:addTimedCircle(timeout,destination.x,p.pos.y,destination.z,0.6,0,false,true,flags)\n    if uuid then state.shapes[#state.shapes+1]=uuid end\n    local distance = TensorCore.getDistance2d(p.pos,destination)\n    if distance>0.2 then\n        local tip = math.min(1.8,distance*0.35)\n        uuid = state.arrowDrawer:addTimedArrow(timeout,p.pos.x,p.pos.y,p.pos.z,\n            TensorCore.getHeadingToTarget(p.pos,destination),math.max(0.1,distance-tip),\n            1.5,tip,3.2,0,false,flags)\n        if uuid then state.shapes[#state.shapes+1]=uuid end\n    end\nend\nstate.guide({x=100+chosen.x*19,y=player.pos.y,z=100+chosen.z*19},8500)\nself.used=true\n",
+							displayPath = "Draws - Ultima",
+							name = "Select LPDU cardinal and rune",
 							uuid = "163f8d28-6c36-3c00-b703-942e9d637d52",
 							version = 2.1,
 						},
@@ -8125,9 +8145,10 @@ local tbl =
 				conditions = 
 				{
 				},
-				displayPath = "Draws - Garuda",
+				displayPath = "Draws - Ultima",
 				mechanicTime = 1023,
-				name = "[Draw] Ultimate Predation - Safe Rune",
+				name = "[LPDU] Ultima Predation - Cardinal and Safe Rune",
+				throttleTime = 100,
 				timeRange = true,
 				timelineIndex = 123,
 				timerEndOffset = 20,
@@ -8153,15 +8174,44 @@ local tbl =
 		{
 			data = 
 			{
+				displayPath = "",
+				name = "Draws - Ultima",
+				uuid = "c09724dd-3055-33a4-bd3d-df097db1b5da",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
 				actions = 
 				{
 					
 					{
 						data = 
 						{
+							displayPath = "",
+							name = "Draws - Ultima",
+							uuid = "fe2d189d-39ad-2350-804a-8b9c7ace397f",
+						},
+						objectType = "folder",
+					},
+					
+					{
+						data = 
+						{
 							aType = "Lua",
-							actionLua = "local center = { x = 100, y = 0, z = 100 }\nlocal ifrit = TensorCore.getWokenEnt(1185)\nif not ifrit or not ifrit.pos then return end\n-- Logged safe group was northeast while Ifrit dashed northwest from the southeast.\nlocal safeHeading = TensorCore.getHeadingToTarget(center, ifrit.pos) - math.pi / 2\nlocal arrowDrawer = TensorCore.getCachedDrawer(0xAA00FF00, nil, 0xAA00FF00, 0xFFFFFFFF, 2)\narrowDrawer:addTimedArrow(5000, center.x, center.y, center.z, safeHeading, 19, 0.5, nil, nil, nil, true)\nself.used = true",
-							name = "Calculate safe spot and draw arrow",
+							actionLua = "local state = data.uwu_lpdu_predation\nif not state or state.phase~=\"cardinal\" then self.used=true; return end\nstate.phase=\"rune\"\n-- Triggered by the real Titan's first Landslide hit (11121), after its lanes resolve.\nstate.guide(state.rune,6000)\nAnyoneCore.addTimedWorldText(6000,\"SAFE RUNE — WAIT FOR FEATHER RAIN\",\n    {x=state.rune.x,y=state.rune.y+1.2,z=state.rune.z},0xFFB6FFB6,true,1.25)\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"2649963c-f010-c286-b8c1-15071ff49673",
+									true,
+								},
+							},
+							displayPath = "Draws - Ultima",
+							name = "Move along edge after Landslide",
 							uuid = "247e11b0-02cf-0f61-921a-9738c4a949c2",
 							version = 2.1,
 						},
@@ -8169,14 +8219,27 @@ local tbl =
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							eventArgType = 2,
+							eventSpellID = 11121,
+							name = "First Landslide hit",
+							uuid = "2649963c-f010-c286-b8c1-15071ff49673",
+							version = 3,
+						},
+					},
 				},
-				displayPath = "Draws - Ifrit",
+				displayPath = "Draws - Ultima",
+				eventType = 2,
 				mechanicTime = 1038,
-				name = "[Draw][LPDU][Ifrit] Crimson Cyclone Safe Spot 1038",
+				name = "[LPDU] Ultima Predation - Advance to Safe Rune",
 				timeRange = true,
 				timelineIndex = 125,
 				timerEndOffset = 2,
-				timerStartOffset = -2.7999999523163,
+				timerStartOffset = -2,
 				uuid = "5506deed-8a61-1692-b3ad-53cff37e55b9",
 				version = 2,
 			},
