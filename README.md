@@ -71,6 +71,8 @@ TEA: Coming soon by Ton.
 
 ### UWU: LPDU
 
+- Fixed R1/R2 eruption sides in Ifrit and Ultima, extended player-gaol blast ranges to later waves, and placed the Predation safe-rune circle above the floor with overlay rendering.
+
 * Fixed the first-Nails Eruption arrow to use the ready AnyoneCore roster slot, so only assigned R1/R2 see it; melee slots no longer pass the role check. (06-10-2026)
 * R2 now gets an arrow to the west tether add near Mesohigh at timeline 124. (06-10-2026)
 * R2 gets a Light Puddle alert at timeline 600; the ground-effect position captured at 435 drives the later arrow and circle. (06-10-2026)
