@@ -14,6 +14,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Added the green Diamond Dust ice-slide destination for Twin Silence/Stillness, shown from the cast until its first hit.
+
 - Added a Look away alert before Ultimate Relativity Shadoweye resolves.
 
 - Disabled the constantly aiming Diamond Dust puddle direction arrow around 254.

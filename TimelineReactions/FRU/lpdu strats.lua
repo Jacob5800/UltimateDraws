@@ -5674,6 +5674,58 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local a=eventArgs\nif a == nil or (a.spellID ~= 40193 and a.spellID ~= 40194) then self.used=true;return end\nlocal caster=TensorCore.mGetEntity(a.entityID)\nif caster == nil or caster.pos == nil or type(caster.pos.h) ~= \"number\" then self.used=true;return end\n-- LPDU: Silence front first; Stillness back first. This is the slide\n-- destination, not a knockback prediction or a second-cleave marker.\nlocal heading=caster.pos.h+(a.spellID==40193 and math.pi or 0)\nlocal x,y,z=TensorCore.getPosInDirection(caster.pos,heading,4.5,true)\nif x == nil or z == nil then self.used=true;return end\nif (x-100)^2+(z-100)^2>18.5^2 then self.used=true;return end\nlocal timeout=math.floor(a.channelTimeMax*1000+300)\nlocal green=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.55),2,1)\ngreen:addTimedCircle(timeout,x,(y or 0)+.05,z,1.2,0,true)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"e060dffc-708c-3f7f-8a88-45d575b4f60b",
+									true,
+								},
+							},
+							name = "Green safe slide destination",
+							uuid = "152d8fa9-2d4e-3a2a-a19b-aa749d9e53ce",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and (eventArgs.spellID == 40193 or eventArgs.spellID == 40194)",
+							name = "First Shiva cleave",
+							uuid = "e060dffc-708c-3f7f-8a88-45d575b4f60b",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				mechanicTime = 272.3,
+				name = "[LPDU] P2 Diamond Dust - Ice Slide Destination",
+				timeRange = true,
+				timelineIndex = 61,
+				timerEndOffset = -1,
+				timerStartOffset = -7,
+				uuid = "cd0e73df-a5b4-de3e-b402-7adab85968d0",
+				version = 2,
+			},
+		},
 	},
 	[62] = 
 	{
@@ -15315,64 +15367,6 @@ local tbl =
 		{
 			data = 
 			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "if data.p5_exa == nil then data.p5_exa = {} end\nlocal ent = TensorCore.mGetEntity(eventArgs.entityID)\ntable.insert(data.p5_exa,{pos = ent.pos})\nif table.size(data.p5_exa) == 8 then\n    local cross = (data.p5_exa[1].pos.x - 100) * (data.p5_exa[5].pos.z-100) - (data.p5_exa[1].pos.z-100) * (data.p5_exa[5].pos.x-100)\n    if cross < 0 then\n        TensorCore.addAlertText(20000,\"right\",1,1,true)\n    else\n        TensorCore.addAlertText(20000,\"left\",1,1,true)\n    end\nend\nself.used = true",
-							conditions = 
-							{
-								
-								{
-									"61efd7d8-6b94-ae3d-96ee-c5e0eeda5d16",
-									true,
-								},
-							},
-							uuid = "feafca53-8758-847e-baa6-31e71e081e82",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Event",
-							dequeueIfLuaFalse = true,
-							eventArgOptionType = 3,
-							eventArgType = 2,
-							spellIDList = 
-							{
-								40118,
-								40307,
-							},
-							uuid = "61efd7d8-6b94-ae3d-96ee-c5e0eeda5d16",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "FRU_megaminx_indicator",
-				eventType = 3,
-				loop = true,
-				mechanicTime = 984.8,
-				name = "Draw Exasquares2 [AnyoneCore test needed]",
-				timeRange = true,
-				timelineIndex = 209,
-				timerEndOffset = 30,
-				timerStartOffset = -200,
-				uuid = "90296038-c452-055f-948c-55b40c5ba004",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
 				displayPath = "",
 				name = "LPDU",
 				uuid = "f374dd05-d80b-ab5a-8b1c-6e2ded1a03dc",
@@ -15436,6 +15430,65 @@ local tbl =
 				uuid = "5f9c77f0-7294-8ae4-86c4-20a05ef977b3",
 				version = 2,
 			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "if data.p5_exa == nil then data.p5_exa = {} end\nlocal ent = TensorCore.mGetEntity(eventArgs.entityID)\ntable.insert(data.p5_exa,{pos = ent.pos})\nif table.size(data.p5_exa) == 8 then\n    local cross = (data.p5_exa[1].pos.x - 100) * (data.p5_exa[5].pos.z-100) - (data.p5_exa[1].pos.z-100) * (data.p5_exa[5].pos.x-100)\n    if cross < 0 then\n        TensorCore.addAlertText(20000,\"right\",1,1,true)\n    else\n        TensorCore.addAlertText(20000,\"left\",1,1,true)\n    end\nend\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"61efd7d8-6b94-ae3d-96ee-c5e0eeda5d16",
+									true,
+								},
+							},
+							uuid = "feafca53-8758-847e-baa6-31e71e081e82",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							spellIDList = 
+							{
+								40118,
+								40307,
+							},
+							uuid = "61efd7d8-6b94-ae3d-96ee-c5e0eeda5d16",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 984.8,
+				name = "Draw Exasquares2 [AnyoneCore test needed]",
+				timeRange = true,
+				timelineIndex = 209,
+				timerEndOffset = 30,
+				timerStartOffset = -200,
+				uuid = "90296038-c452-055f-948c-55b40c5ba004",
+				version = 2,
+			},
+			inheritedIndex = 14,
 		},
 		
 		{
