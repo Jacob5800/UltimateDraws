@@ -13635,6 +13635,232 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local roster=AnyoneCore.Roster\nif roster.current()==nil then return end\nlocal role=roster.mySlot()\nif role~=\"T1\" and role~=\"T2\" then self.used=true;return end\nlocal settings=Settings.FFXIVMINION\nlocal choice=settings.LPDU_FRU_DarklitTank or \"OT invulns\"\nif data.lpdu_darklit_tank_options==nil then data.lpdu_darklit_tank_options={\"MT invulns\",\"OT invulns\",\"Tank swap\"} end\nlocal options=data.lpdu_darklit_tank_options\nlocal index=choice==\"MT invulns\" and 0 or choice==\"Tank swap\" and 2 or 1\nlocal visible=GUI:Begin(\"[LPDU] FRU - Tank Settings\",true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n GUI:Text(\"P4 Darklit tank baits\")\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Invuln: selected tank takes far, then close. Tank swap: OT takes far, MT takes close. Both tanks should select the same plan.\") end\n GUI:SameLine(170);GUI:PushItemWidth(145)\n local newIndex=GUI:Combo(\"##LPDUFRUDarklitTank\",index,options)\n if newIndex~=index and options[newIndex+1]~=nil then settings.LPDU_FRU_DarklitTank=options[newIndex+1] end\n GUI:PopItemWidth()\n if choice==\"Tank swap\" then GUI:Text(\"OT far first / MT close second\")\n else GUI:Text(choice..\": far first / close second\") end\nend\nGUI:End();self.used=true",
+							name = "Tank Assignment Settings",
+							uuid = "b30d107e-8913-ca60-a4fb-363ee2bb14c3",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU",
+				eventType = 13,
+				loop = true,
+				mechanicTime = 738.2,
+				name = "[LPDU] P4 Mami Darklit - Tank Assignment Settings",
+				timeRange = true,
+				timelineIndex = 166,
+				timerEndOffset = 700,
+				timerStartOffset = -800,
+				uuid = "3f84acb3-05b6-b2eb-8ed5-c75d84eba29e",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local roster=AnyoneCore.Roster\nif roster.current()==nil then return end\nlocal role=roster.mySlot()\nif role~=\"T1\" and role~=\"T2\" then self.used=true;return end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif e==nil then return end\nlocal mode=Settings.FFXIVMINION.LPDU_FRU_DarklitTank or \"OT invulns\"\ndata.lpdu_darklit_tank={mode=mode,boss=eventArgs.entityID,origin={x=e.pos.x,y=e.pos.y,z=e.pos.z},first=mode==\"MT invulns\" and \"T1\" or \"T2\",second=mode==\"OT invulns\" and \"T2\" or \"T1\"}\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"983c8962-bf62-81d1-8bbd-e3f0dddc9ff9",
+									true,
+								},
+							},
+							name = "Somber Dance Tank Plan",
+							uuid = "db49afe8-ae03-3fa0-a93a-3feae2e281f6",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							eventArgType = 2,
+							eventSpellID = 40283,
+							name = "Somber Dance Tank Plan event",
+							uuid = "983c8962-bf62-81d1-8bbd-e3f0dddc9ff9",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				mechanicTime = 738.2,
+				name = "[LPDU] P4 Mami Darklit - Somber Dance Tank Plan",
+				timeRange = true,
+				timelineIndex = 166,
+				timerEndOffset = 21,
+				timerStartOffset = 15,
+				uuid = "b91387e8-1e3b-8c9b-a58f-0cec6dbd91e9",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local roster=AnyoneCore.Roster\nif roster.current()==nil then return end\nlocal role=roster.mySlot()\nif role~=\"T1\" and role~=\"T2\" then self.used=true;return end\nlocal r=AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot()\nlocal function clear()\n if data.lpdu_darklit_shapes then for _,id in ipairs(data.lpdu_darklit_shapes) do Argus.deleteTimedShape(id) end end\n data.lpdu_darklit_shapes={}\nend\nlocal function draw(x,z,seconds)\n clear()\n local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n local t={x=x,y=p.pos.y,z=z};local ms=math.floor(seconds*1000)\n local id=d:addTimedCircle(ms,x,p.pos.y+.05,z,1.2,0,true,true)\n if id then table.insert(data.lpdu_darklit_shapes,id) end\n local distance=TensorCore.getDistance2d(p.pos,t)\n if distance>1 then\n  id=d:addTimedArrow(ms,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,t),math.max(.15,distance-1),1,1,1,0,true)\n  if id then table.insert(data.lpdu_darklit_shapes,id) end\n end\nend\nlocal s=data.lpdu_darklit_tank\nif s==nil then self.used=true;return end\ns.firstHit=TensorReactions_CurrentTimer\nclear();self.used=true",
+							conditions = 
+							{
+								
+								{
+									"f8f7fae2-5398-e7de-aa60-fcb41c773a59",
+									true,
+								},
+							},
+							name = "First Tank Hit Cleanup",
+							uuid = "33ea86d1-0a14-81af-a52f-207089a37d1b",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							eventArgType = 2,
+							eventSpellID = 40284,
+							name = "First Tank Hit Cleanup event",
+							uuid = "f8f7fae2-5398-e7de-aa60-fcb41c773a59",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 2,
+				mechanicTime = 738.2,
+				name = "[LPDU] P4 Mami Darklit - First Tank Hit Cleanup",
+				timeRange = true,
+				timelineIndex = 166,
+				timerEndOffset = 26,
+				timerStartOffset = 20,
+				uuid = "45a9a195-423a-11f5-8a1d-eb02aee043e8",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local roster=AnyoneCore.Roster\nif roster.current()==nil then return end\nlocal role=roster.mySlot()\nif role~=\"T1\" and role~=\"T2\" then self.used=true;return end\nlocal r=AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot()\nlocal function clear()\n if data.lpdu_darklit_shapes then for _,id in ipairs(data.lpdu_darklit_shapes) do Argus.deleteTimedShape(id) end end\n data.lpdu_darklit_shapes={}\nend\nlocal function draw(x,z,seconds)\n clear()\n local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n local t={x=x,y=p.pos.y,z=z};local ms=math.floor(seconds*1000)\n local id=d:addTimedCircle(ms,x,p.pos.y+.05,z,1.2,0,true,true)\n if id then table.insert(data.lpdu_darklit_shapes,id) end\n local distance=TensorCore.getDistance2d(p.pos,t)\n if distance>1 then\n  id=d:addTimedArrow(ms,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,t),math.max(.15,distance-1),1,1,1,0,true)\n  if id then table.insert(data.lpdu_darklit_shapes,id) end\n end\nend\nlocal s=data.lpdu_darklit_tank\nif s==nil or s.firstHit==nil then return end\nif s.secondDrawn then self.used=true;return end\nlocal boss=TensorCore.mGetEntity(s.boss)\nif boss==nil then return end\n-- The hit event can still expose the pre-jump position. Wait for the actual landing.\nif TensorCore.getDistance2d(boss.pos,s.origin)<5 then return end\nlocal duration=s.firstHit+3.1-TensorReactions_CurrentTimer\nif duration<=0 then self.used=true;return end\ns.secondDrawn=true\nif slot==s.second then\n draw(boss.pos.x,boss.pos.z,duration)\n AnyoneCore.Shotcall(\"Move into boss - bait close now\",true,duration,false)\nelse\n local dx=100-boss.pos.x;local dz=100-boss.pos.z\n local length=math.sqrt(dx*dx+dz*dz)\n draw(boss.pos.x+dx/length*13.5,boss.pos.z+dz/length*13.5,duration)\n AnyoneCore.Shotcall(\"Move away - other tank takes close\",true,duration,false)\nend\nself.used=true",
+							name = "Closest Tank Bait",
+							uuid = "1da07194-6972-eb1c-9b88-1f5d4cf90a0a",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU",
+				mechanicTime = 738.2,
+				name = "[LPDU] P4 Mami Darklit - Closest Tank Bait",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 166,
+				timerEndOffset = 28,
+				timerStartOffset = 21,
+				uuid = "16187a13-2e85-f5a8-88e4-02081f50fde9",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local roster=AnyoneCore.Roster\nif roster.current()==nil then return end\nlocal role=roster.mySlot()\nif role~=\"T1\" and role~=\"T2\" then self.used=true;return end\nlocal r=AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot()\nlocal function clear()\n if data.lpdu_darklit_shapes then for _,id in ipairs(data.lpdu_darklit_shapes) do Argus.deleteTimedShape(id) end end\n data.lpdu_darklit_shapes={}\nend\nlocal function draw(x,z,seconds)\n clear()\n local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n local t={x=x,y=p.pos.y,z=z};local ms=math.floor(seconds*1000)\n local id=d:addTimedCircle(ms,x,p.pos.y+.05,z,1.2,0,true,true)\n if id then table.insert(data.lpdu_darklit_shapes,id) end\n local distance=TensorCore.getDistance2d(p.pos,t)\n if distance>1 then\n  id=d:addTimedArrow(ms,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,t),math.max(.15,distance-1),1,1,1,0,true)\n  if id then table.insert(data.lpdu_darklit_shapes,id) end\n end\nend\nclear();data.lpdu_darklit_tank=nil;self.used=true",
+							conditions = 
+							{
+								
+								{
+									"704501cb-6f03-88ae-912e-e8f86ba15c0b",
+									true,
+								},
+							},
+							name = "Second Tank Hit Cleanup",
+							uuid = "b4b27be6-bb27-4cb9-89a7-0e3209110ae1",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							eventArgType = 2,
+							eventSpellID = 40285,
+							name = "Second Tank Hit Cleanup event",
+							uuid = "704501cb-6f03-88ae-912e-e8f86ba15c0b",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 2,
+				mechanicTime = 738.2,
+				name = "[LPDU] P4 Mami Darklit - Second Tank Hit Cleanup",
+				timeRange = true,
+				timelineIndex = 166,
+				timerEndOffset = 30,
+				timerStartOffset = 23,
+				uuid = "4386a063-209c-9ef8-a195-7d99b61f5ec1",
+				version = 2,
+			},
+		},
 	},
 	[167] = 
 	{

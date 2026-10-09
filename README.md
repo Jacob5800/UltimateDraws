@@ -14,6 +14,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Added tank-only Darklit choices for MT invulns, OT invulns, or OT-first/MT-second swap; personal close-bait arrows follow the boss landing and clear after the second hit.
+
 - Disabled the old generic CT corner arrow and curved lines now replaced by personal LPDU rewind placement.
 
 - CT rewind placement now detects the exaline-origin corner and guides G1/G2 into the LPDU tank-led formation; blue players cleanse first and placement arrows end when Return records their position.
