@@ -14,6 +14,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- CT rewind placement now detects the exaline-origin corner and guides G1/G2 into the LPDU tank-led formation; blue players cleanse first and placement arrows end when Return records their position.
+
 - CT: added the second rewind knockback reminder with a three-second expiry; tank-front and party-behind reminders now cover both hits.
 
 - CT: short-Ice regroup now waits until both the head interception and Ice hit have resolved, regardless of event order.

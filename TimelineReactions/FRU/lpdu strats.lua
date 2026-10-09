@@ -15553,6 +15553,168 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_ct\nif s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end\n  s.shapes={}\n end\n function s.draw(x,z,seconds,text)\n  s.clear();local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then\n   id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end\n  end\n  if text then AnyoneCore.Shotcall(text,true,seconds,false) end\n end\n function s.polar(side,degrees,radius,seconds,text)\n  local angle=side*degrees*math.pi/180\n  s.draw(100+math.sin(angle)*radius,100+math.cos(angle)*radius,seconds,text)\n end\nend\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif e==nil then return end\nlocal dx=e.pos.x-100;local dz=e.pos.z-100\n-- Only the two cardinal first blasts establish the rewind corner.\nlocal axis\nif math.abs(dx)>19 and math.abs(dx)<21 and math.abs(dz)<1 then axis=\"x\"\nelseif math.abs(dz)>19 and math.abs(dz)<21 and math.abs(dx)<1 then axis=\"z\" end\nif axis==nil then self.used=true;return end\nif s.rewindOrigins==nil then s.rewindOrigins={} end\nif s.rewindOrigins[axis]==nil then s.rewindOrigins[axis]={x=dx,z=dz} end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"e4ff21d7-45c6-c14a-a862-3025efa71440",
+									true,
+								},
+							},
+							name = "Rewind Exaline Origins",
+							uuid = "e8dfe3a4-c1b4-3a11-9d71-e4a981c24584",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40252",
+							dequeueIfLuaFalse = true,
+							name = "Rewind Exaline Origins gate",
+							uuid = "e4ff21d7-45c6-c14a-a862-3025efa71440",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 798.9,
+				name = "[LPDU] P4 Crystallize Time - Rewind Exaline Origins",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 179,
+				timerEndOffset = 27,
+				timerStartOffset = 15,
+				uuid = "5d47befa-ed96-30e6-9b6a-68c0a904839e",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_ct\nif s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end\n  s.shapes={}\n end\n function s.draw(x,z,seconds,text)\n  s.clear();local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then\n   id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end\n  end\n  if text then AnyoneCore.Shotcall(text,true,seconds,false) end\n end\n function s.polar(side,degrees,radius,seconds,text)\n  local angle=side*degrees*math.pi/180\n  s.draw(100+math.sin(angle)*radius,100+math.cos(angle)*radius,seconds,text)\n end\nend\nlocal a=s.mine\nif a==nil or s.rewindOrigins==nil then return end\nlocal x=s.rewindOrigins.x;local z=s.rewindOrigins.z\nif x==nil or z==nil then return end\nif TensorCore.hasBuff(p,2452) or s.rewindPlaced then self.used=true;return end\nif a.blue and TensorCore.hasBuff(p,3264) then return end\nlocal sum={x=100+x.x+z.x,y=0,z=100+x.z+z.z}\nlocal heading=TensorCore.getHeadingToTarget({x=100,y=0,z=100},sum)\nlocal left=slot==\"T1\" or slot==\"H1\" or slot==\"M1\" or slot==\"R1\"\nlocal angle=heading+(left and math.pi/4 or -math.pi/4)\nlocal dx=math.sin(angle);local dz=math.cos(angle)\n-- G1 left / G2 right looking outward; tank leads one wing each.\nlocal nx=left and dz or -dz;local nz=left and -dx or dx\nlocal tank=slot==\"T1\" or slot==\"T2\"\nlocal forward=tank and 4 or 1;local diagonal=tank and 1 or 2\nlocal px=100+(x.x+z.x)*.5+forward*dx+diagonal*nx\nlocal pz=100+(x.z+z.z)*.5+forward*dz+diagonal*nz\ns.rewindPoint={x=px,y=0,z=pz}\nlocal text=\"Place rewind - \"..(left and \"G1 left\" or \"G2 right\")..(tank and \", tank in front\" or \", diagonally behind tank\")\ns.draw(px,pz,math.max(.2,832.5-TensorReactions_CurrentTimer),text)\ns.rewindGuided=true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"d7c404b7-e4d2-0a2c-a0e4-b37452937c1a",
+									true,
+								},
+							},
+							name = "Personal Rewind Position",
+							uuid = "97b4078a-4189-03ef-8811-caa2d0d31ce5",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return data.lpdu_ct ~= nil and data.lpdu_ct.mine ~= nil",
+							dequeueIfLuaFalse = true,
+							name = "Personal Rewind Position gate",
+							uuid = "d7c404b7-e4d2-0a2c-a0e4-b37452937c1a",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				mechanicTime = 798.9,
+				name = "[LPDU] P4 Crystallize Time - Personal Rewind Position",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 179,
+				timerEndOffset = 33.5,
+				timerStartOffset = 29,
+				uuid = "0c601e94-7849-43c1-84bc-4ec8e1ef21de",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_ct\nif s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end\n  s.shapes={}\n end\n function s.draw(x,z,seconds,text)\n  s.clear();local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then\n   id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end\n  end\n  if text then AnyoneCore.Shotcall(text,true,seconds,false) end\n end\n function s.polar(side,degrees,radius,seconds,text)\n  local angle=side*degrees*math.pi/180\n  s.draw(100+math.sin(angle)*radius,100+math.cos(angle)*radius,seconds,text)\n end\nend\ns.rewindPlaced=true;s.clear();self.used=true",
+							conditions = 
+							{
+								
+								{
+									"fc8bc56f-7669-ab13-a81a-d2f1929dfcae",
+									true,
+								},
+							},
+							name = "Rewind Position Recorded",
+							uuid = "04e22ade-f387-6e82-9aa1-1549e60265f6",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local p=TensorCore.mGetPlayer();return eventArgs ~= nil and p ~= nil and eventArgs.entityID == p.id and eventArgs.buffID == 2452",
+							dequeueIfLuaFalse = true,
+							name = "Rewind Position Recorded gate",
+							uuid = "fc8bc56f-7669-ab13-a81a-d2f1929dfcae",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 8,
+				mechanicTime = 798.9,
+				name = "[LPDU] P4 Crystallize Time - Rewind Position Recorded",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 179,
+				timerEndOffset = 36,
+				timerStartOffset = 30,
+				uuid = "ca3f4bcb-1e87-3505-be00-488c531bb164",
+				version = 2,
+			},
+		},
 	},
 	[180] = 
 	{
