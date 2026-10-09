@@ -7552,6 +7552,61 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nlocal state = data.lpdu_fru_lr_personal\nif roster == nil or roster.current() == nil or not roster.isReady() or state == nil or state.assigned then self.used=true; return end\nlocal role\nfor s,id in pairs(state.ids) do if id == eventArgs.entityID then role=s; break end end\nif role == nil then self.used=true; return end\nstate.baits[role] = true\nlocal order = {\"H1\",\"H2\",\"T1\",\"T2\",\"M2\",\"M1\",\"R2\",\"R1\"}\nlocal towerRoles, baitRoles, supportCount = {},{},0\nfor i,s in ipairs(order) do\n    if state.baits[s] then table.insert(baitRoles,s)\n    else table.insert(towerRoles,s); if i <= 4 then supportCount=supportCount+1 end end\nend\nif #baitRoles ~= 2 or #towerRoles ~= 6 then self.used=true; return end\n-- LPDU NorthSwap: NE/NW and N/S trade. With two support baits,\n-- rotate the surviving clockwise order once (SW becomes NW before swaps).\n-- This matches the explicitly LPDU-configured Splatoon algorithm.\nif supportCount == 2 then table.insert(towerRoles,1,table.remove(towerRoles,6)) end\nlocal towers={{113.856,92},{100,116},{86.144,92},{113.856,108},{100,84},{86.144,108}}\nfor i,s in ipairs(towerRoles) do\n    state.assignments[s]={x=towers[i][1],z=towers[i][2],north=towers[i][2]<100,bait=false}\nend\nlocal northRoles={H1=true,H2=true,T1=true,T2=true}\nlocal westToEast={H1=1,H2=2,T1=3,T2=4,R1=1,R2=2,M1=3,M2=4}\nlocal a,b=baitRoles[1],baitRoles[2]\nlocal aNorth\nif northRoles[a] == northRoles[b] then aNorth=westToEast[a]<westToEast[b]\nelse aNorth=northRoles[a] == true end\nstate.assignments[a]={x=100,z=aNorth and 91 or 109,north=aNorth,bait=true}\nstate.assignments[b]={x=100,z=aNorth and 109 or 91,north=not aNorth,bait=true}\nstate.assigned=true\nlocal slot=roster.mySlot()\nif slot == \"MT\" then slot=\"T1\" elseif slot == \"OT\" then slot=\"T2\" end\nlocal assignment=state.assignments[slot]\nif assignment ~= nil then state.guide(assignment.x,assignment.z,assignment.bait and 6500 or 11000) end\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"ae26268e-42ee-a6f2-a531-a1a90ae6568c",
+									true,
+								},
+							},
+							name = "LPDU clockwise tower assignment",
+							uuid = "df5cd6ea-5bf1-40a1-b064-5ea523d24088",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventMarkerID = 375,
+							name = "Both puddle overheads",
+							uuid = "ae26268e-42ee-a6f2-a531-a1a90ae6568c",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Draws",
+				eventType = 4,
+				loop = true,
+				mechanicTime = 331.8,
+				name = "[LPDU] P2 Light Rampant - Personal Tower or Bait",
+				timeRange = true,
+				timelineIndex = 80,
+				timerEndOffset = 4,
+				timerStartOffset = -1,
+				uuid = "b041ff68-141f-1517-a358-d71da1eacd3d",
+				version = 2,
+			},
+		},
 	},
 	[81] = 
 	{
