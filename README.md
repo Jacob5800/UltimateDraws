@@ -14,6 +14,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Mami Darklit: personal tower/protean assignments, Water flex, spread and safe-half stack guidance, and tank bait reminders.
+
 - Pandora's Box: tank-only LB reminder six seconds before the raidwide hit.
 
 - P5 Akh Morn: green healer stack circles appear during the cast and clear on damage.

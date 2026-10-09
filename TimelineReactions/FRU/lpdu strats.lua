@@ -12806,6 +12806,311 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "eae62f75-914e-c014-87f0-bf3d28a00982",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot()\nlocal function clear()\n if data.lpdu_darklit_shapes then for _,id in ipairs(data.lpdu_darklit_shapes) do Argus.deleteTimedShape(id) end end\n data.lpdu_darklit_shapes={}\nend\nlocal function draw(x,z,seconds)\n clear()\n local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n local t={x=x,y=p.pos.y,z=z};local ms=math.floor(seconds*1000)\n local id=d:addTimedCircle(ms,x,p.pos.y+.05,z,1.2,0,true,true)\n if id then table.insert(data.lpdu_darklit_shapes,id) end\n local distance=TensorCore.getDistance2d(p.pos,t)\n if distance>1 then\n  id=d:addTimedArrow(ms,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,t),math.max(.15,distance-1),1,1,1,0,true)\n  if id then table.insert(data.lpdu_darklit_shapes,id) end\n end\nend\ndata.lpdu_darklit_assignment=nil; data.lpdu_darklit_stage=0;data.lpdu_darklit_safe_x=nil\nlocal spots={H1={98,96},H2={102,96},T1={94,100},T2={94,104},M1={102,108},M2={106,108},R1={106,102},R2={106,106}}\nlocal t=spots[slot];if t then draw(t[1],t[2],5.5) end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"eea225b0-0db4-02bd-86df-bdef37456bb2",
+									true,
+								},
+							},
+							name = "Preposition",
+							uuid = "74c2e504-f473-8041-9f14-a58a6cfd57dc",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40239",
+							name = "Preposition event",
+							uuid = "eea225b0-0db4-02bd-86df-bdef37456bb2",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				mechanicTime = 738.2,
+				name = "[LPDU] P4 Mami Darklit - Preposition",
+				timeRange = true,
+				timelineIndex = 166,
+				timerStartOffset = -6,
+				uuid = "67c02f86-29ff-6c11-aa13-24c15aaa278c",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot()\nlocal function clear()\n if data.lpdu_darklit_shapes then for _,id in ipairs(data.lpdu_darklit_shapes) do Argus.deleteTimedShape(id) end end\n data.lpdu_darklit_shapes={}\nend\nlocal function draw(x,z,seconds)\n clear()\n local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n local t={x=x,y=p.pos.y,z=z};local ms=math.floor(seconds*1000)\n local id=d:addTimedCircle(ms,x,p.pos.y+.05,z,1.2,0,true,true)\n if id then table.insert(data.lpdu_darklit_shapes,id) end\n local distance=TensorCore.getDistance2d(p.pos,t)\n if distance>1 then\n  id=d:addTimedArrow(ms,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,t),math.max(.15,distance-1),1,1,1,0,true)\n  if id then table.insert(data.lpdu_darklit_shapes,id) end\n end\nend\nlocal all={\"T1\",\"T2\",\"H1\",\"H2\",\"M1\",\"M2\",\"R1\",\"R2\"}\nlocal byid,ents,water,links={},{},{},{}\nlocal nw=0\nfor _,s in ipairs(all) do\n local e=r.entOf(s);if not e then return end\n byid[e.id]=s;ents[s]=e\n if TensorCore.getBuff(e,2461) then water[s]=true;nw=nw+1 end\n links[s]={}\nend\nif nw~=2 then return end\nfor id,ts in pairs(Argus.getCurrentTethers()) do\n local a=byid[id]\n if a then for _,t in ipairs(ts) do\n  local b=byid[t.targetid]\n  if t.type==110 and b then links[a][b]=true;links[b][a]=true end\n end end\nend\nlocal tether,nt={},0\nfor _,s in ipairs(all) do local n=0;for _ in pairs(links[s]) do n=n+1 end\n if n>0 then if n~=2 then return end;tether[s]=true;nt=nt+1 end\nend\nif nt~=4 then return end\nlocal anchor=tether.H1 and \"H1\" or (tether.H2 and \"H2\" or nil)\nif not anchor then return end\nlocal south,east={},{}\nlocal neighbors,opposite={},nil\nfor _,s in ipairs(all) do\n if tether[s] then\n  south[s]=links[anchor][s]==true\n  if south[s] then table.insert(neighbors,s) elseif s~=anchor then opposite=s end\n end\nend\nif #neighbors~=2 or opposite==nil then return end\n-- Keep the healer north; connected players south; opposite player north.\n-- E/W is free in Mami: preserve the two southern players' visible order.\ntable.sort(neighbors,function(a,b) return ents[a].pos.x<ents[b].pos.x end)\neast[anchor]=false;east[opposite]=true;east[neighbors[1]]=false;east[neighbors[2]]=true\nlocal west,baits={},{}\nfor _,s in ipairs(all) do\n if not tether[s] then\n  if s==\"T1\" or s==\"T2\" or s==\"H1\" or s==\"H2\" then table.insert(west,s) else table.insert(baits,s) end\n end\nend\nif #west~=2 or #baits~=2 then return end\n-- Mami non-tethers: supports west, DPS east; preserve their N/S order.\nfor _,pair in ipairs({west,baits}) do\n table.sort(pair,function(a,b) return ents[a].pos.z<ents[b].pos.z end)\n south[pair[1]]=false;south[pair[2]]=true\nend\nfor _,s in ipairs(west) do east[s]=false end\nfor _,s in ipairs(baits) do east[s]=true end\nlocal wt,wb\nfor _,s in ipairs(all) do if water[s] then if tether[s] then wt=s else wb=s end end end\nif wt==nil or wb==nil then return end\nif south[wt]==south[wb] then\n local pair=east[wb] and baits or west\n south[pair[1]],south[pair[2]]=south[pair[2]],south[pair[1]]\nend\ndata.lpdu_darklit_assignment={south=south,east=east,tether=tether,water=water}\ndata.lpdu_darklit_stage=1\nlocal sn=south[slot];local en=east[slot]\nif tether[slot] then\n draw(en and 102 or 98,sn and 111 or 89,11)\n AnyoneCore.Shotcall(sn and \"South tower\" or \"North tower\",true,6,false)\nelse\n draw(en and 105 or 95,sn and 103 or 97,11)\n AnyoneCore.Shotcall(\"Bait protean \"..(sn and \"south\" or \"north\")..(en and \"east\" or \"west\"),true,6,false)\nend\nself.used=true",
+							name = "Personal Tower or Protean",
+							uuid = "fc8dd570-75ec-bb78-87d5-215492bdadeb",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU",
+				mechanicTime = 738.2,
+				name = "[LPDU] P4 Mami Darklit - Personal Tower or Protean",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 166,
+				timerEndOffset = 5,
+				timerStartOffset = 0.5,
+				uuid = "9ddd4aaa-fd38-539d-9e8c-f984962babbe",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot()\nlocal function clear()\n if data.lpdu_darklit_shapes then for _,id in ipairs(data.lpdu_darklit_shapes) do Argus.deleteTimedShape(id) end end\n data.lpdu_darklit_shapes={}\nend\nlocal function draw(x,z,seconds)\n clear()\n local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n local t={x=x,y=p.pos.y,z=z};local ms=math.floor(seconds*1000)\n local id=d:addTimedCircle(ms,x,p.pos.y+.05,z,1.2,0,true,true)\n if id then table.insert(data.lpdu_darklit_shapes,id) end\n local distance=TensorCore.getDistance2d(p.pos,t)\n if distance>1 then\n  id=d:addTimedArrow(ms,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,t),math.max(.15,distance-1),1,1,1,0,true)\n  if id then table.insert(data.lpdu_darklit_shapes,id) end\n end\nend\nlocal a=data.lpdu_darklit_assignment;if a==nil then return end\nif data.lpdu_darklit_stage~=1 then self.used=true;return end\ndata.lpdu_darklit_stage=2\nlocal sn=a.south[slot];local en=a.east[slot]\nlocal x,z\nif a.tether[slot] then x=(en and 1 or -1)*(sn and 5 or 8);z=sn and 9 or -8\nelse x=(en and 1 or -1)*(sn and 8 or 15);z=sn and 1 or -1 end\ndraw(100+x,100+z,2.6)\nAnyoneCore.Shotcall(\"Spread - stay away from north crystal\",true,3,false)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"26c3a832-89df-a4fa-b907-7babc4df4d65",
+									true,
+								},
+							},
+							name = "Spirit Taker Spread",
+							uuid = "e3c29bc4-60d9-3bc8-9a66-6dfde2584ed2",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40190",
+							name = "Spirit Taker Spread event",
+							uuid = "26c3a832-89df-a4fa-b907-7babc4df4d65",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 738.2,
+				name = "[LPDU] P4 Mami Darklit - Spirit Taker Spread",
+				timeRange = true,
+				timelineIndex = 166,
+				timerEndOffset = 16,
+				timerStartOffset = 10,
+				uuid = "d34f8b42-0e1d-8f4d-8318-1fdd7f4fe9c3",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot()\nlocal function clear()\n if data.lpdu_darklit_shapes then for _,id in ipairs(data.lpdu_darklit_shapes) do Argus.deleteTimedShape(id) end end\n data.lpdu_darklit_shapes={}\nend\nlocal function draw(x,z,seconds)\n clear()\n local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n local t={x=x,y=p.pos.y,z=z};local ms=math.floor(seconds*1000)\n local id=d:addTimedCircle(ms,x,p.pos.y+.05,z,1.2,0,true,true)\n if id then table.insert(data.lpdu_darklit_shapes,id) end\n local distance=TensorCore.getDistance2d(p.pos,t)\n if distance>1 then\n  id=d:addTimedArrow(ms,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,t),math.max(.15,distance-1),1,1,1,0,true)\n  if id then table.insert(data.lpdu_darklit_shapes,id) end\n end\nend\nlocal a=eventArgs\n-- Omen rectangle center establishes the cleaved half directly.\nlocal cx=a.x+math.sin(a.heading)*40\ndata.lpdu_darklit_safe_x=cx<100 and 1 or -1\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"3cae29a0-3e7c-9eed-9915-f2e19d29a8fc",
+									true,
+								},
+							},
+							name = "Detect Safe Cleave Half",
+							uuid = "6d8d24f6-0cbe-7ac0-ba6a-50e51491f65e",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and (eventArgs.aoeID == 40227 or eventArgs.aoeID == 40228)",
+							name = "Detect Safe Cleave Half event",
+							uuid = "3cae29a0-3e7c-9eed-9915-f2e19d29a8fc",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 18,
+				loop = true,
+				mechanicTime = 738.2,
+				name = "[LPDU] P4 Mami Darklit - Detect Safe Cleave Half",
+				timeRange = true,
+				timelineIndex = 166,
+				timerEndOffset = 19,
+				timerStartOffset = 12,
+				uuid = "21e840dc-3501-a53c-b3d9-c7c3f5f150b9",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot()\nlocal function clear()\n if data.lpdu_darklit_shapes then for _,id in ipairs(data.lpdu_darklit_shapes) do Argus.deleteTimedShape(id) end end\n data.lpdu_darklit_shapes={}\nend\nlocal function draw(x,z,seconds)\n clear()\n local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n local t={x=x,y=p.pos.y,z=z};local ms=math.floor(seconds*1000)\n local id=d:addTimedCircle(ms,x,p.pos.y+.05,z,1.2,0,true,true)\n if id then table.insert(data.lpdu_darklit_shapes,id) end\n local distance=TensorCore.getDistance2d(p.pos,t)\n if distance>1 then\n  id=d:addTimedArrow(ms,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,t),math.max(.15,distance-1),1,1,1,0,true)\n  if id then table.insert(data.lpdu_darklit_shapes,id) end\n end\nend\nlocal a=data.lpdu_darklit_assignment;local safe=data.lpdu_darklit_safe_x\nif a==nil or safe==nil then return end\nif data.lpdu_darklit_stage~=2 then self.used=true;return end\ndata.lpdu_darklit_stage=3\nlocal sn=a.south[slot]\ndraw(100+safe*(sn and 3 or 6),sn and 110 or 94,5)\nAnyoneCore.Shotcall((sn and \"South stack\" or \"North stack\")..(safe==1 and \" - east safe\" or \" - west safe\"),true,5,false)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"4b091294-8b06-44ba-b1e2-05ed733c6101",
+									true,
+								},
+							},
+							name = "Water Stack and Cleave",
+							uuid = "1d40e3b4-f1a7-4f22-a267-0e4c48b3c6fd",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40289",
+							name = "Water Stack and Cleave event",
+							uuid = "4b091294-8b06-44ba-b1e2-05ed733c6101",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 738.2,
+				name = "[LPDU] P4 Mami Darklit - Water Stack and Cleave",
+				timeRange = true,
+				timelineIndex = 166,
+				timerEndOffset = 20,
+				timerStartOffset = 12,
+				uuid = "34ec2c84-cb85-c816-acd5-e87ce26e1b15",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot()\nlocal function clear()\n if data.lpdu_darklit_shapes then for _,id in ipairs(data.lpdu_darklit_shapes) do Argus.deleteTimedShape(id) end end\n data.lpdu_darklit_shapes={}\nend\nlocal function draw(x,z,seconds)\n clear()\n local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n local t={x=x,y=p.pos.y,z=z};local ms=math.floor(seconds*1000)\n local id=d:addTimedCircle(ms,x,p.pos.y+.05,z,1.2,0,true,true)\n if id then table.insert(data.lpdu_darklit_shapes,id) end\n local distance=TensorCore.getDistance2d(p.pos,t)\n if distance>1 then\n  id=d:addTimedArrow(ms,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,t),math.max(.15,distance-1),1,1,1,0,true)\n  if id then table.insert(data.lpdu_darklit_shapes,id) end\n end\nend\nclear()\nif slot==\"T1\" or slot==\"T2\" then AnyoneCore.Shotcall(\"Tank bait far, then closest - swap or invuln\",true,6,false) end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"f7e9ccbd-4143-afcd-b504-62b790fd2d98",
+									true,
+								},
+							},
+							name = "Water Cleanup and Tank Baits",
+							uuid = "aa0d4376-ff03-3717-ba88-ddd0cc115679",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40271",
+							name = "Water Cleanup and Tank Baits event",
+							uuid = "f7e9ccbd-4143-afcd-b504-62b790fd2d98",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 2,
+				mechanicTime = 738.2,
+				name = "[LPDU] P4 Mami Darklit - Water Cleanup and Tank Baits",
+				timeRange = true,
+				timelineIndex = 166,
+				timerEndOffset = 23,
+				timerStartOffset = 18,
+				uuid = "fb77cc94-2b10-1bb0-90cf-af2c1b740346",
+				version = 2,
+			},
+		},
 	},
 	[167] = 
 	{
