@@ -14381,6 +14381,653 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "b60f7855-8fdd-b109-b29e-c5e7a3022a00",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "data.lpdu_ct={shapes={},puddles={},hours={},hourCount=0,heads={},lines={}}\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"15377762-3da9-a1f9-8be6-460e535629de",
+									true,
+								},
+							},
+							name = "Reset",
+							uuid = "c8501709-0250-8373-9683-996ddd1b6691",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40240",
+							name = "Reset gate",
+							uuid = "15377762-3da9-a1f9-8be6-460e535629de",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				mechanicTime = 798.9,
+				name = "[LPDU] P4 Crystallize Time - Reset",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 179,
+				timerStartOffset = -12,
+				uuid = "f92f06a4-1881-1b1d-ba25-60cb53c44af2",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_ct\nif s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end\n  s.shapes={}\n end\n function s.draw(x,z,seconds,text)\n  s.clear();local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then\n   id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end\n  end\n  if text then AnyoneCore.Shotcall(text,true,seconds,false) end\n end\n function s.polar(side,degrees,radius,seconds,text)\n  local angle=side*degrees*math.pi/180\n  s.draw(100+math.sin(angle)*radius,100+math.cos(angle)*radius,seconds,text)\n end\nend\nlocal e=TensorCore.mGetEntity(eventArgs.sourceEntityID)\nif e==nil or e.pos.z>=100 then self.used=true;return end\ns.north=e.pos.x<100 and -1 or 1\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"c2a239b8-f347-35d1-99cf-f4e1bd9a21ce",
+									true,
+								},
+							},
+							name = "Slow Hourglass Side",
+							uuid = "185917a2-30c9-74ca-978b-f4e2caff0fa6",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.sourceEntityContentID == 9823 and eventArgs.newTetherID == 133",
+							name = "Slow Hourglass Side gate",
+							uuid = "c2a239b8-f347-35d1-99cf-f4e1bd9a21ce",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 15,
+				loop = true,
+				mechanicTime = 798.9,
+				name = "[LPDU] P4 Crystallize Time - Slow Hourglass Side",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 179,
+				timerEndOffset = 9,
+				timerStartOffset = -1,
+				uuid = "73fa7750-2597-ac74-b43a-2885f390fc10",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_ct\nif s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end\n  s.shapes={}\n end\n function s.draw(x,z,seconds,text)\n  s.clear();local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then\n   id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end\n  end\n  if text then AnyoneCore.Shotcall(text,true,seconds,false) end\n end\n function s.polar(side,degrees,radius,seconds,text)\n  local angle=side*degrees*math.pi/180\n  s.draw(100+math.sin(angle)*radius,100+math.cos(angle)*radius,seconds,text)\n end\nend\nif s.north==nil then return end\nlocal order={\"H2\",\"H1\",\"T2\",\"T1\",\"M1\",\"M2\",\"R1\",\"R2\"}\nlocal ice={};local air={};local blue={};local assignments={}\nfor _,role in ipairs(order) do\n local e=r.entOf(role);if e==nil then return end\n if TensorCore.hasBuff(e,3263) then\n  if TensorCore.hasBuff(e,2462) then table.insert(ice,role)\n  elseif TensorCore.hasBuff(e,2463) then table.insert(air,role)\n  else return end\n elseif TensorCore.hasBuff(e,3264) then\n  local kind\n  if TensorCore.hasBuff(e,2460) then kind=\"eruption\"\n  elseif TensorCore.hasBuff(e,2454) then kind=\"stack\"\n  elseif TensorCore.hasBuff(e,2461) then kind=\"water\"\n  elseif TensorCore.hasBuff(e,2462) then kind=\"ice\" end\n  if kind==nil then return end\n  table.insert(blue,role);assignments[role]={kind=kind,blue=true}\n else return end\nend\nif #ice~=2 or #air~=2 or #blue~=4 then return end\nfor i,role in ipairs(ice) do assignments[role]={kind=\"short\",side=i==1 and -1 or 1} end\nfor i,role in ipairs(air) do assignments[role]={kind=\"long\",side=i==1 and -1 or 1} end\ns.assignments=assignments;s.mine=assignments[slot]\nlocal a=s.mine\nif a.kind==\"short\" then s.polar(a.side,90,13,8,\"Intercept first head - \"..(a.side<0 and \"west\" or \"east\"))\nelseif a.kind==\"long\" then s.polar(a.side,40,19,8,\"Aero south - \"..(a.side<0 and \"west\" or \"east\"))\nelseif a.kind==\"eruption\" then s.polar(s.north,140,19,8,\"Bait north - stay clear of fragment\")\nelse s.polar(-s.north,40,19,8,\"Stack south for Water\") end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"b8bac760-bb47-25ce-a3c5-6d5fa565ddde",
+									true,
+								},
+							},
+							name = "Personal Debuff Positions",
+							uuid = "d0374792-8b58-8239-b2bc-35a416e6b0f2",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return data.lpdu_ct ~= nil and data.lpdu_ct.north ~= nil",
+							name = "Personal Debuff Positions gate",
+							uuid = "b8bac760-bb47-25ce-a3c5-6d5fa565ddde",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				mechanicTime = 798.9,
+				name = "[LPDU] P4 Crystallize Time - Personal Debuff Positions",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 179,
+				timerEndOffset = 8,
+				timerStartOffset = 3.8,
+				uuid = "1f1e8543-55c1-bd73-87c9-f9610906352d",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_ct\nif s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end\n  s.shapes={}\n end\n function s.draw(x,z,seconds,text)\n  s.clear();local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then\n   id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end\n  end\n  if text then AnyoneCore.Shotcall(text,true,seconds,false) end\n end\n function s.polar(side,degrees,radius,seconds,text)\n  local angle=side*degrees*math.pi/180\n  s.draw(100+math.sin(angle)*radius,100+math.cos(angle)*radius,seconds,text)\n end\nend\nif s.hours[eventArgs.entityID] then self.used=true;return end\ns.hours[eventArgs.entityID]=true;s.hourCount=s.hourCount+1\nlocal a=s.mine;if a==nil then self.used=true;return end\nif s.hourCount==2 then\n if a.kind==\"long\" then s.polar(a.side,30,19,3,\"Aero bait - between the floor lines\")\n elseif a.blue and a.kind~=\"eruption\" then s.polar(-s.north,30,17,3,\"Stack close to Aero - knockback across\") end\nelseif s.hourCount==4 then\n if a.kind==\"long\" and not s.heads[a.side] then s.polar(a.side,33,13,3.5,\"Intercept second head now\")\n elseif a.kind==\"short\" and a.side~=s.north then s.polar(s.north,140,19,1.5,\"Join north stack\") end\nelseif s.hourCount==6 then\n s.clear();AnyoneCore.Shotcall(a.blue and \"Dodge exalines - cleanse before rewind\" or \"Dodge exalines\",true,4,false)\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"013c699b-de60-e4bc-93cc-5682f6771e00",
+									true,
+								},
+							},
+							name = "Hourglass Stage Guidance",
+							uuid = "0979d3f3-467c-046b-b407-aeea62200210",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40299",
+							name = "Hourglass Stage Guidance gate",
+							uuid = "013c699b-de60-e4bc-93cc-5682f6771e00",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 798.9,
+				name = "[LPDU] P4 Crystallize Time - Hourglass Stage Guidance",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 179,
+				timerEndOffset = 24,
+				timerStartOffset = 10,
+				uuid = "b524f669-568c-192d-bf7b-7fd33d8cadcc",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_ct\nif s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end\n  s.shapes={}\n end\n function s.draw(x,z,seconds,text)\n  s.clear();local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then\n   id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end\n  end\n  if text then AnyoneCore.Shotcall(text,true,seconds,false) end\n end\n function s.polar(side,degrees,radius,seconds,text)\n  local angle=side*degrees*math.pi/180\n  s.draw(100+math.sin(angle)*radius,100+math.cos(angle)*radius,seconds,text)\n end\nend\nif s.knock then self.used=true;return end\ns.knock=true;local a=s.mine;if a==nil then self.used=true;return end\nif a.kind==\"long\" then\n if a.side==s.north and s.hourCount<4 then s.polar(a.side,20,19,2.5,\"Dodge hourglass - then intercept second head\")\n else s.polar(a.side,33,13,4.5,\"Intercept second head\") end\nelseif a.blue then s.polar(s.north,140,19,3,\"Stack north - stay clear of fragment\")\nelseif a.kind==\"short\" and a.side==s.north then s.polar(s.north,140,19,3,\"Join north stack\")\nelse s.polar(a.side,80,19,2.5,\"Dodge second hourglass - then join stack\") end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"5e52c8d9-9ba3-0b5d-9d42-792158b46aaa",
+									true,
+								},
+							},
+							name = "Aero Knockback and Regroup",
+							uuid = "6c77b7f5-59e6-bf4f-8763-5b033154c2b5",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40280",
+							name = "Aero Knockback and Regroup gate",
+							uuid = "5e52c8d9-9ba3-0b5d-9d42-792158b46aaa",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 798.9,
+				name = "[LPDU] P4 Crystallize Time - Aero Knockback and Regroup",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 179,
+				timerEndOffset = 17,
+				timerStartOffset = 13,
+				uuid = "3db8912e-6b05-2e7f-bfe7-851f5675f9e7",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_ct\nif s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end\n  s.shapes={}\n end\n function s.draw(x,z,seconds,text)\n  s.clear();local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then\n   id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end\n  end\n  if text then AnyoneCore.Shotcall(text,true,seconds,false) end\n end\n function s.polar(side,degrees,radius,seconds,text)\n  local angle=side*degrees*math.pi/180\n  s.draw(100+math.sin(angle)*radius,100+math.cos(angle)*radius,seconds,text)\n end\nend\nlocal a=s.mine;if a==nil then self.used=true;return end\nlocal hit=false;for _,id in ipairs(eventArgs.hitTargets) do if id==p.id then hit=true end end\nif not hit then self.used=true;return end\nif a.kind==\"long\" then\n s.heads[a.side]=true;s.draw(100,118,3,\"Dodge last hourglass - hold south triangle\")\nelseif a.kind==\"short\" then\n if a.side==s.north then s.polar(s.north,140,19,3,\"Join north stack after Ice\")\n elseif s.hourCount>=4 then s.polar(s.north,140,19,2,\"Join north stack\")\n else s.polar(a.side,80,19,2.5,\"Hold outside - dodge second hourglass\") end\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"6b18cb75-3330-7d1f-a40f-816cd9ab7fcd",
+									true,
+								},
+							},
+							name = "Head Intercept Followup",
+							uuid = "6a916a6c-c800-9eae-b1e5-3929699373f4",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40241",
+							name = "Head Intercept Followup gate",
+							uuid = "6b18cb75-3330-7d1f-a40f-816cd9ab7fcd",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 798.9,
+				name = "[LPDU] P4 Crystallize Time - Head Intercept Followup",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 179,
+				timerEndOffset = 21,
+				timerStartOffset = 12,
+				uuid = "ec441f96-8b36-d884-8d92-80ade377c8b2",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_ct\nif s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end\n  s.shapes={}\n end\n function s.draw(x,z,seconds,text)\n  s.clear();local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then\n   id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end\n  end\n  if text then AnyoneCore.Shotcall(text,true,seconds,false) end\n end\n function s.polar(side,degrees,radius,seconds,text)\n  local angle=side*degrees*math.pi/180\n  s.draw(100+math.sin(angle)*radius,100+math.cos(angle)*radius,seconds,text)\n end\nend\nlocal a=s.mine;if a==nil then self.used=true;return end\nif a.kind~=\"long\" then s.draw(100,82,4.3,\"Hold north triangle - dodge exalines\") end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"1605358a-d8dc-6580-911e-bc26fb1bb8ef",
+									true,
+								},
+							},
+							name = "After North Stack",
+							uuid = "ddf1af0e-fd1f-f3d0-853f-284ca4a6bafe",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40277",
+							name = "After North Stack gate",
+							uuid = "1605358a-d8dc-6580-911e-bc26fb1bb8ef",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 2,
+				mechanicTime = 798.9,
+				name = "[LPDU] P4 Crystallize Time - After North Stack",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 179,
+				timerEndOffset = 19,
+				timerStartOffset = 16,
+				uuid = "49ce1a9a-f77e-9ab5-a434-fe46d94b5e1c",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_ct\nif s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end\n  s.shapes={}\n end\n function s.draw(x,z,seconds,text)\n  s.clear();local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then\n   id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end\n  end\n  if text then AnyoneCore.Shotcall(text,true,seconds,false) end\n end\n function s.polar(side,degrees,radius,seconds,text)\n  local angle=side*degrees*math.pi/180\n  s.draw(100+math.sin(angle)*radius,100+math.cos(angle)*radius,seconds,text)\n end\nend\nlocal key=eventArgs.z>105 and (eventArgs.x<100 and \"ice\" or \"water\") or (eventArgs.x<100 and \"eruption\" or \"stack\")\ns.puddles[key]={x=eventArgs.x,y=eventArgs.y,z=eventArgs.z,id=eventArgs.entityID}\nlocal a=s.mine\nif a and a.blue and a.kind==key then\n local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n local id=d:addTimedCircle(18000,eventArgs.x,eventArgs.y+.05,eventArgs.z,1,0,true,true)\n s.cleanseShape=id\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"6328dd19-4112-57c1-87ff-f52665567805",
+									true,
+								},
+							},
+							name = "Assigned Cleanse Circle",
+							uuid = "a3b7e644-3470-d77c-bf67-2c264fa089a7",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.entityContentID == 2014529",
+							name = "Assigned Cleanse Circle gate",
+							uuid = "6328dd19-4112-57c1-87ff-f52665567805",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 29,
+				loop = true,
+				mechanicTime = 798.9,
+				name = "[LPDU] P4 Crystallize Time - Assigned Cleanse Circle",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 179,
+				timerEndOffset = 23,
+				timerStartOffset = 13,
+				uuid = "c6834c51-ae2f-672c-a2ed-0049ade5b119",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_ct\nif s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end\n  s.shapes={}\n end\n function s.draw(x,z,seconds,text)\n  s.clear();local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then\n   id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end\n  end\n  if text then AnyoneCore.Shotcall(text,true,seconds,false) end\n end\n function s.polar(side,degrees,radius,seconds,text)\n  local angle=side*degrees*math.pi/180\n  s.draw(100+math.sin(angle)*radius,100+math.cos(angle)*radius,seconds,text)\n end\nend\nlocal a=s.mine;if a==nil or not a.blue then self.used=true;return end\nif TensorCore.hasBuff(p,3264) then return end\nif s.cleanseShape then Argus.deleteTimedShape(s.cleanseShape);s.cleanseShape=nil end\ns.clear();s.cleansed=true\nAnyoneCore.Shotcall(\"Cleanse done - place rewind with your light party\",true,3,false)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"fe65b785-d2e9-beaa-8363-a4e87491fcff",
+									true,
+								},
+							},
+							name = "Cleanse Circle Cleanup",
+							uuid = "1f9f6e4c-1580-a17d-bb6c-73a0bb7ad110",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return data.lpdu_ct ~= nil and data.lpdu_ct.mine ~= nil",
+							name = "Cleanse Circle Cleanup gate",
+							uuid = "fe65b785-d2e9-beaa-8363-a4e87491fcff",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				mechanicTime = 798.9,
+				name = "[LPDU] P4 Crystallize Time - Cleanse Circle Cleanup",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 179,
+				timerEndOffset = 34,
+				timerStartOffset = 19,
+				uuid = "a14e2f01-81ad-dbff-93bb-4b8975dc76f4",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_ct\nif s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end\n  s.shapes={}\n end\n function s.draw(x,z,seconds,text)\n  s.clear();local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then\n   id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end\n  end\n  if text then AnyoneCore.Shotcall(text,true,seconds,false) end\n end\n function s.polar(side,degrees,radius,seconds,text)\n  local angle=side*degrees*math.pi/180\n  s.draw(100+math.sin(angle)*radius,100+math.cos(angle)*radius,seconds,text)\n end\nend\nlocal a=s.mine;if a==nil then self.used=true;return end\ns.clear()\nif a.blue and TensorCore.hasBuff(p,3264) then\n local text={eruption=\"Cleanse west\",stack=\"Cleanse east\",ice=\"Cleanse southwest\",water=\"Cleanse southeast\"}\n AnyoneCore.Shotcall(text[a.kind]..\" - dodge exalines\",true,4.5,false)\nelse AnyoneCore.Shotcall(\"Place rewind - light party behind tank\",true,4.5,false) end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"8bb59900-76a9-40d6-aa18-ac60f3570170",
+									true,
+								},
+							},
+							name = "Cleanse Before Rewind",
+							uuid = "d50b78bc-712d-d4a4-ad71-8d6cf3a99080",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return data.lpdu_ct ~= nil and data.lpdu_ct.mine ~= nil",
+							name = "Cleanse Before Rewind gate",
+							uuid = "8bb59900-76a9-40d6-aa18-ac60f3570170",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				mechanicTime = 798.9,
+				name = "[LPDU] P4 Crystallize Time - Cleanse Before Rewind",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 179,
+				timerEndOffset = 26.5,
+				timerStartOffset = 25.8,
+				uuid = "8b24774e-c511-1237-aeb4-b6c710a1f05f",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_ct\nif s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end\n  s.shapes={}\n end\n function s.draw(x,z,seconds,text)\n  s.clear();local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then\n   id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end\n  end\n  if text then AnyoneCore.Shotcall(text,true,seconds,false) end\n end\n function s.polar(side,degrees,radius,seconds,text)\n  local angle=side*degrees*math.pi/180\n  s.draw(100+math.sin(angle)*radius,100+math.cos(angle)*radius,seconds,text)\n end\nend\ns.clear();AnyoneCore.Shotcall(\"Spread - let healers stand still\",true,3,false);self.used=true",
+							conditions = 
+							{
+								
+								{
+									"9a10a5a6-b713-496f-a4ae-d3eb377c8890",
+									true,
+								},
+							},
+							name = "Rewind Spread Reminder",
+							uuid = "bd4043b6-b5b4-58f7-9390-c3044c3de64d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40288",
+							name = "Rewind Spread Reminder gate",
+							uuid = "9a10a5a6-b713-496f-a4ae-d3eb377c8890",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				mechanicTime = 798.9,
+				name = "[LPDU] P4 Crystallize Time - Rewind Spread Reminder",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 179,
+				timerEndOffset = 37,
+				timerStartOffset = 32,
+				uuid = "2ca00578-cd2d-f279-bb93-c88db9131471",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_ct\nif s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end\n  s.shapes={}\n end\n function s.draw(x,z,seconds,text)\n  s.clear();local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then\n   id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end\n  end\n  if text then AnyoneCore.Shotcall(text,true,seconds,false) end\n end\n function s.polar(side,degrees,radius,seconds,text)\n  local angle=side*degrees*math.pi/180\n  s.draw(100+math.sin(angle)*radius,100+math.cos(angle)*radius,seconds,text)\n end\nend\ns.clear();AnyoneCore.Shotcall((slot==\"T1\" or slot==\"T2\") and \"Rewind knockback - tank in front\" or \"Rewind knockback - stay behind your tank\",true,7,false);self.used=true",
+							conditions = 
+							{
+								
+								{
+									"f54e8bd6-33d6-7e73-809e-19b1bd4d32dc",
+									true,
+								},
+							},
+							name = "Rewind Tank Formation",
+							uuid = "e8064643-d112-96d8-99fe-0fdc1f0f3bc7",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40229",
+							name = "Rewind Tank Formation gate",
+							uuid = "f54e8bd6-33d6-7e73-809e-19b1bd4d32dc",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				mechanicTime = 798.9,
+				name = "[LPDU] P4 Crystallize Time - Rewind Tank Formation",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 179,
+				timerEndOffset = 38,
+				timerStartOffset = 34,
+				uuid = "74baed58-9d20-eda9-89c9-570446adcc3f",
+				version = 2,
+			},
+		},
 	},
 	[180] = 
 	{

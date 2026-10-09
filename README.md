@@ -14,6 +14,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- CT FAST Dragon: added personal red-debuff assignments, hourglass/head and regroup guidance, assigned cleanse circles with cleanup, and cleanse/rewind reminders. Replay checks and safe cleanse routes remain pending.
+
 - Polarizing Strikes: personal boss-relative bait order, line dodges, side swaps and final move-out.
 
 - Mami Darklit: personal tower/protean assignments, Water flex, spread and safe-half stack guidance, and tank bait reminders.
