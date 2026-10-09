@@ -14,6 +14,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+* Around 57 seconds, partners receive a small personal partner marker: MT/R1 red, H1/M1 purple, OT/R2 yellow, H2/M2 blue. Spread shows no partner marker. (09-10-2026)
+
 * Ultimate Relativity now uses LPDU role priorities and one assigned-side arrow; Apocalypse uses roster-based water-stack flexes and role-side guidance. (04-10-2026)
 * Paradise Regained adds role tower spots and roster-based tank identities; the copied FRU draws are synced, with three AnyoneCore alternatives enabled for replay comparison. (04-10-2026)
 
