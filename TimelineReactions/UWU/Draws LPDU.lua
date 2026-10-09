@@ -7035,6 +7035,165 @@ local tbl =
 			},
 		},
 	},
+	[100] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "096495e4-5eb5-4b03-9626-45e060bc6e23",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 4000,
+							alertPriority = 3,
+							alertScale = 0.85,
+							alertTTS = true,
+							alertText = "Go in front of Titan",
+							conditions = 
+							{
+								
+								{
+									"0634d7e3-fa01-0cd1-8924-049109e9825a",
+									true,
+								},
+								
+								{
+									"23804938-7ae8-dd45-908a-56c6f91fa883",
+									true,
+								},
+							},
+							name = "Go in front of Titan",
+							uuid = "ab16162d-d497-8ba9-b846-afa139394873",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local r=AnyoneCore.Roster;if r.current()==nil then return false end;local s=r.mySlot();return s==\"T1\" or s==\"T2\" or s==\"M1\" or s==\"M2\"",
+							name = "Party Roster roles",
+							uuid = "0634d7e3-fa01-0cd1-8924-049109e9825a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							eventArgType = 2,
+							eventSpellID = 11107,
+							name = "Mechanic hit",
+							uuid = "23804938-7ae8-dd45-908a-56c6f91fa883",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 2,
+				mechanicTime = 715,
+				name = "[LPDU] Titan - Front Baits - Tanks/Melee",
+				timeRange = true,
+				timelineIndex = 100,
+				timerEndOffset = 2,
+				timerStartOffset = -1,
+				uuid = "52253a51-1522-22c7-9bb2-abb4397925fd",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 4000,
+							alertPriority = 3,
+							alertScale = 0.85,
+							alertTTS = true,
+							alertText = "Go opposite of Titan",
+							conditions = 
+							{
+								
+								{
+									"3c5fda43-a195-7630-9188-3dc0247cc00d",
+									true,
+								},
+								
+								{
+									"dbc4376c-c726-a4da-9d0c-8f0261754fd9",
+									true,
+								},
+							},
+							name = "Go opposite of Titan",
+							uuid = "ac764954-e76f-bacb-8953-ba4c7a376073",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local r=AnyoneCore.Roster;if r.current()==nil then return false end;local s=r.mySlot();return s==\"H1\" or s==\"H2\" or s==\"R1\" or s==\"R2\"",
+							name = "Party Roster roles",
+							uuid = "3c5fda43-a195-7630-9188-3dc0247cc00d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							eventArgType = 2,
+							eventSpellID = 11107,
+							name = "Mechanic hit",
+							uuid = "dbc4376c-c726-a4da-9d0c-8f0261754fd9",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 2,
+				mechanicTime = 715,
+				name = "[LPDU] Titan - Opposite Side - Healers/Ranged",
+				timeRange = true,
+				timelineIndex = 100,
+				timerEndOffset = 2,
+				timerStartOffset = -1,
+				uuid = "d5caf2b3-e6ac-bae4-bcf2-9bf71ea79eb1",
+				version = 2,
+			},
+		},
+	},
 	[102] = 
 	{
 		
@@ -8315,6 +8474,76 @@ local tbl =
 				timerEndOffset = 7,
 				timerStartOffset = -4,
 				uuid = "952a58bc-f5af-9d5a-bce0-7521167b7950",
+				version = 2,
+			},
+		},
+	},
+	[137] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "8544a1a1-a841-0d05-883e-2838d648de0c",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 4000,
+							alertPriority = 3,
+							alertScale = 0.85,
+							alertTTS = true,
+							alertText = "Out, dodge landslides",
+							conditions = 
+							{
+								
+								{
+									"3b6a59fb-92a5-703a-94b8-2f7adc029658",
+									true,
+								},
+							},
+							name = "Out, dodge landslides",
+							uuid = "f418b503-cd8b-acf8-8704-d349b2c82717",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							eventArgType = 2,
+							eventSpellID = 11105,
+							name = "Mechanic hit",
+							uuid = "3b6a59fb-92a5-703a-94b8-2f7adc029658",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 2,
+				mechanicTime = 1070,
+				name = "[LPDU] Ultima - Out and Dodge Landslides",
+				timeRange = true,
+				timelineIndex = 137,
+				timerEndOffset = 2,
+				timerStartOffset = -2,
+				uuid = "c1a514f0-7740-578d-b610-c1a8aa3e20f0",
 				version = 2,
 			},
 		},
@@ -9847,6 +10076,160 @@ local tbl =
 				timerEndOffset = 3,
 				timerStartOffset = 1,
 				uuid = "7ae528c8-a38d-0c99-9e3a-9926bb5ccd6c",
+				version = 2,
+			},
+		},
+	},
+	[150] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "82d1268c-e716-9a75-ad2e-87b3b60c94a5",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 4000,
+							alertPriority = 3,
+							alertScale = 0.85,
+							alertText = "Take Mesohigh tether near C",
+							conditions = 
+							{
+								
+								{
+									"05b6c628-04d9-a6a4-bee2-181f0900275d",
+									true,
+								},
+							},
+							name = "Take Mesohigh tether near C",
+							uuid = "35bfe5d9-6eb4-717e-ba58-44df8c5e09b9",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nif r.mySlot()~=\"R1\" then self.used=true;return end\nif data.uwu_r1_mesohigh_shapes then\n for _,id in ipairs(data.uwu_r1_mesohigh_shapes) do Argus.deleteTimedShape(id) end\nend\ndata.uwu_r1_mesohigh_shapes={}\nlocal x,y,z,active=Argus.getWaymarkInfo(3)\nif not active then self.used=true;return end\nlocal target={x=x,y=y,z=z}\nlocal flag=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nlocal d=TensorCore.getCachedDrawer(0xFF66FF99,0xFF00AA66,0xFF006644,0xFFFFFFFF,2,nil,flag)\nlocal id=d:addTimedCircle(8000,x,y+.05,z,1,0,false,true,flag)\nif id then table.insert(data.uwu_r1_mesohigh_shapes,id) end\nlocal length=TensorCore.getDistance2d(p.pos,target)\nif length>1 then\n id=d:addTimedArrow(8000,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,target),math.max(.1,length-1),1,1,2.3,0,false,flag)\n if id then table.insert(data.uwu_r1_mesohigh_shapes,id) end\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"05b6c628-04d9-a6a4-bee2-181f0900275d",
+									true,
+								},
+							},
+							name = "Personal arrow to C",
+							uuid = "6c32ebbf-ec62-310f-9139-bb3a90dc2694",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local r=AnyoneCore.Roster;if r.current()==nil then return false end;local s=r.mySlot();return s==\"R1\"",
+							name = "Party Roster roles",
+							uuid = "05b6c628-04d9-a6a4-bee2-181f0900275d",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				mechanicTime = 1109,
+				name = "[LPDU] Ultima Mesohigh - Take Tether near C - R1",
+				timeRange = true,
+				timelineIndex = 150,
+				timerEndOffset = 1.2,
+				timerStartOffset = 0.7,
+				uuid = "64fa6591-48cb-1a61-9245-cbbd64a5fa86",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "if data.uwu_r1_mesohigh_shapes then\n for _,id in ipairs(data.uwu_r1_mesohigh_shapes) do Argus.deleteTimedShape(id) end\n data.uwu_r1_mesohigh_shapes=nil\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"6cc5c8ba-0a53-1e96-bb28-0ee326181493",
+									true,
+								},
+								
+								{
+									"472f260a-8c55-f7b4-8d48-e755c2f841bb",
+									true,
+								},
+							},
+							name = "Remove R1 tether arrow",
+							uuid = "4266392a-a25f-25ad-90e4-8e28e3784af1",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local r=AnyoneCore.Roster;if r.current()==nil then return false end;local s=r.mySlot();return s==\"R1\"",
+							name = "Party Roster roles",
+							uuid = "6cc5c8ba-0a53-1e96-bb28-0ee326181493",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local p=TensorCore.mGetPlayer();return eventArgs~=nil and p~=nil and eventArgs.sourceEntityContentID==1644 and eventArgs.newTetherID==4 and eventArgs.newTargetID==p.id",
+							dequeueIfLuaFalse = true,
+							name = "Mesohigh acquired",
+							uuid = "472f260a-8c55-f7b4-8d48-e755c2f841bb",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 15,
+				mechanicTime = 1109,
+				name = "[LPDU] Ultima Mesohigh - R1 Tether Acquired Cleanup",
+				timeRange = true,
+				timelineIndex = 150,
+				timerEndOffset = 12,
+				uuid = "e7703b58-bf7b-1a90-9f83-2b7d5b59e5f8",
 				version = 2,
 			},
 		},

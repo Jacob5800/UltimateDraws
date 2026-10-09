@@ -71,6 +71,8 @@ TEA: Coming soon by Ton.
 
 ### UWU: LPDU
 
+- Added role-specific Titan positioning TTS near 715, a post-Plume out/Landslide TTS near 1070, and R1 Mesohigh guidance to C that clears upon tether acquisition.
+
 - Fixed R1/R2 eruption sides in Ifrit and Ultima, extended player-gaol blast ranges to later waves, and placed the Predation safe-rune circle above the floor with overlay rendering.
 
 * Fixed the first-Nails Eruption arrow to use the ready AnyoneCore roster slot, so only assigned R1/R2 see it; melee slots no longer pass the role check. (06-10-2026)
