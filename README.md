@@ -14,6 +14,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Paradise Regained: added first-tower-relative tank and healer guidance, OT provoke reminder, post-tether DPS tower assignments, and cleave/tower cleanup. Both sequences and all rotations await replay confirmation.
+
 - CT: disabled the old dual red-debuff arrows and marker-based per-frame cleanse arrows so they do not conflict with personal FAST Dragon guidance.
 
 - CT FAST Dragon: added personal red-debuff assignments, hourglass/head and regroup guidance, assigned cleanse circles with cleanup, and cleanse/rewind reminders. Replay checks and safe cleanse routes remain pending.

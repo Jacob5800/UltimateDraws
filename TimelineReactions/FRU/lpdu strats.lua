@@ -18079,6 +18079,383 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local old=data.lpdu_paradise\nif old then\n for _,id in ipairs(old.shapes) do Argus.deleteTimedShape(id) end\n if old.coneID then Argus.deleteTimedShape(old.coneID) end\nend\ndata.lpdu_paradise={shapes={},cleaves=0,tethers=0,towers=0}\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"cb672b3e-2462-4922-ba3e-bffc8d3485d1",
+									true,
+								},
+							},
+							name = "Reset",
+							uuid = "a2e0fecc-7d8b-8dc7-9d9d-97d625dd2f43",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40319",
+							name = "Reset gate",
+							uuid = "cb672b3e-2462-4922-ba3e-bffc8d3485d1",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 1033.6,
+				name = "[LPDU] P5 Paradise Regained - Reset",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 222,
+				timerEndOffset = 135,
+				timerStartOffset = -20,
+				uuid = "1057a667-f396-ca33-8e63-01baf49e66a1",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_paradise;if s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={}\n end\n function s.draw(angle,dist,seconds,text)\n  s.clear();local x=100+math.sin(angle)*dist;local z=100+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.tower(left,seconds)\n  s.clear();local angle=s.south+(left and -1 or 1)*2*math.pi/3\n  local x=100+math.sin(angle)*7-math.sin(s.south)*1.8\n  local z=100+math.cos(angle)*7-math.cos(s.south)*1.8;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(left and \"G1 left tower - north edge\" or \"G2 right tower - north edge\",true,seconds,false)\n end\n function s.cone(tank,dark,seconds)\n  if s.coneID then Argus.deleteTimedShape(s.coneID);s.coneID=nil end\n  local id=r.idOf(tank);if id==nil then return end\n  s.coneID=TensorCore.getMoogleDrawer():addTimedConeOnEnt(seconds*1000,s.boss,19,4*math.pi/3,id,0,false,true,(dark and -1 or 1)*math.pi/3,false)\n end\nend\nif s.south==nil then s.south=eventArgs.a1==51 and -2*math.pi/3 or eventArgs.a1==52 and 2*math.pi/3 or 0 end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"d62b6b9a-c865-5242-811d-f157dc64dae9",
+									true,
+								},
+							},
+							name = "First Tower Orientation",
+							uuid = "672d9408-8fe9-11f7-8fb0-c5d7356b3ded",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.a1 >= 51 and eventArgs.a1 <= 53 and eventArgs.a2 == 1 and eventArgs.a3 == 2",
+							name = "First Tower Orientation gate",
+							uuid = "d62b6b9a-c865-5242-811d-f157dc64dae9",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 14,
+				loop = true,
+				mechanicTime = 1033.6,
+				name = "[LPDU] P5 Paradise Regained - First Tower Orientation",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 222,
+				timerEndOffset = 135,
+				timerStartOffset = -20,
+				uuid = "3a6a7f9f-2029-9729-a747-40d5fd6c0df0",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_paradise;if s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={}\n end\n function s.draw(angle,dist,seconds,text)\n  s.clear();local x=100+math.sin(angle)*dist;local z=100+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.tower(left,seconds)\n  s.clear();local angle=s.south+(left and -1 or 1)*2*math.pi/3\n  local x=100+math.sin(angle)*7-math.sin(s.south)*1.8\n  local z=100+math.cos(angle)*7-math.cos(s.south)*1.8;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(left and \"G1 left tower - north edge\" or \"G2 right tower - north edge\",true,seconds,false)\n end\n function s.cone(tank,dark,seconds)\n  if s.coneID then Argus.deleteTimedShape(s.coneID);s.coneID=nil end\n  local id=r.idOf(tank);if id==nil then return end\n  s.coneID=TensorCore.getMoogleDrawer():addTimedConeOnEnt(seconds*1000,s.boss,19,4*math.pi/3,id,0,false,true,(dark and -1 or 1)*math.pi/3,false)\n end\nend\nif s.south==nil then return end\ns.dark=eventArgs.spellID==40233;s.boss=eventArgs.entityID;s.castStart=TensorReactions_CurrentTimer\ns.cone(\"T1\",s.dark,eventArgs.channelTimeMax+.4)\nlocal seconds=eventArgs.channelTimeMax+1.3\nif slot==\"T1\" then s.draw(s.south+(s.dark and -1 or 1)*2*math.pi/3,7,seconds,s.dark and \"Face first cleave left\" or \"Face first cleave right\")\nelseif slot==\"T2\" then s.draw(s.south+(s.dark and 0 or math.pi/4),s.dark and 2 or 10,seconds,s.dark and \"Bait closest - provoke mid-cast\" or \"Bait farthest - provoke mid-cast\")\nelseif slot==\"H1\" or slot==\"H2\" then s.draw(s.south,s.dark and 8.5 or 5,seconds,s.dark and \"First tower - stand farther out\" or \"First tower - stand farther in\")\nelse s.draw(s.south+((slot==\"M1\" or slot==\"R1\") and -.18 or .18),s.dark and 7.5 or 5.5,seconds,\"Wait south - towers after first cleave\") end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"c182edb4-b090-b14a-8ccb-4c46f97c36d0",
+									true,
+								},
+							},
+							name = "First Cleave and Healer Tower",
+							uuid = "c14ca3f0-4253-fe83-90b4-56d6b7b50b36",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and (eventArgs.spellID == 40233 or eventArgs.spellID == 40313)",
+							name = "First Cleave and Healer Tower gate",
+							uuid = "c182edb4-b090-b14a-8ccb-4c46f97c36d0",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 1033.6,
+				name = "[LPDU] P5 Paradise Regained - First Cleave and Healer Tower",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 222,
+				timerEndOffset = 135,
+				timerStartOffset = -20,
+				uuid = "fc005c1a-fcce-70ca-846e-6daf445cf544",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_paradise;if s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={}\n end\n function s.draw(angle,dist,seconds,text)\n  s.clear();local x=100+math.sin(angle)*dist;local z=100+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.tower(left,seconds)\n  s.clear();local angle=s.south+(left and -1 or 1)*2*math.pi/3\n  local x=100+math.sin(angle)*7-math.sin(s.south)*1.8\n  local z=100+math.cos(angle)*7-math.cos(s.south)*1.8;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(left and \"G1 left tower - north edge\" or \"G2 right tower - north edge\",true,seconds,false)\n end\n function s.cone(tank,dark,seconds)\n  if s.coneID then Argus.deleteTimedShape(s.coneID);s.coneID=nil end\n  local id=r.idOf(tank);if id==nil then return end\n  s.coneID=TensorCore.getMoogleDrawer():addTimedConeOnEnt(seconds*1000,s.boss,19,4*math.pi/3,id,0,false,true,(dark and -1 or 1)*math.pi/3,false)\n end\nend\ns.cleaves=s.cleaves+1\nif s.coneID then Argus.deleteTimedShape(s.coneID);s.coneID=nil end\nif s.cleaves==1 then s.cone(\"T2\",not s.dark,3.9) else s.clear() end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"8eb71025-a313-1435-8aeb-f9c7119b4681",
+									true,
+								},
+							},
+							name = "Cleave Telegraph Lifecycle",
+							uuid = "b9eb8e04-b47b-9c23-9513-f67809ef2ca7",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and (eventArgs.spellID == 40314 or eventArgs.spellID == 40315)",
+							name = "Cleave Telegraph Lifecycle gate",
+							uuid = "8eb71025-a313-1435-8aeb-f9c7119b4681",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 1033.6,
+				name = "[LPDU] P5 Paradise Regained - Cleave Telegraph Lifecycle",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 222,
+				timerEndOffset = 135,
+				timerStartOffset = -20,
+				uuid = "c8a0b09c-d2bb-892d-9859-568585dfc8aa",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_paradise;if s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={}\n end\n function s.draw(angle,dist,seconds,text)\n  s.clear();local x=100+math.sin(angle)*dist;local z=100+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.tower(left,seconds)\n  s.clear();local angle=s.south+(left and -1 or 1)*2*math.pi/3\n  local x=100+math.sin(angle)*7-math.sin(s.south)*1.8\n  local z=100+math.cos(angle)*7-math.cos(s.south)*1.8;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(left and \"G1 left tower - north edge\" or \"G2 right tower - north edge\",true,seconds,false)\n end\n function s.cone(tank,dark,seconds)\n  if s.coneID then Argus.deleteTimedShape(s.coneID);s.coneID=nil end\n  local id=r.idOf(tank);if id==nil then return end\n  s.coneID=TensorCore.getMoogleDrawer():addTimedConeOnEnt(seconds*1000,s.boss,19,4*math.pi/3,id,0,false,true,(dark and -1 or 1)*math.pi/3,false)\n end\nend\ns.tethers=s.tethers+1\nif s.tethers~=1 then self.used=true;return end\nif s.south==nil or s.dark==nil then self.used=true;return end\nif slot==\"T1\" then s.draw(s.south+math.pi,s.dark and 10 or 2,3,s.dark and \"Bait farthest north\" or \"Bait closest north\")\nelseif slot==\"T2\" then s.draw(s.south+(s.dark and -1 or 1)*math.pi/3,7,3,\"Second cleave - same side\")\nelseif slot==\"H1\" or slot==\"H2\" then s.draw(s.south+math.pi,s.dark and 5 or 8.5,3,s.dark and \"Move north - stand farther in\" or \"Move north - stand farther out\")\nelse s.tower(slot==\"M1\" or slot==\"R1\",6.7) end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"fd67f522-0fda-f5c5-8347-659d60cccc23",
+									true,
+								},
+							},
+							name = "Second Cleave and DPS Towers",
+							uuid = "a2e6ca54-8cd2-0218-9361-be05b0eecd77",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and (eventArgs.spellID == 39879 or eventArgs.spellID == 39880)",
+							name = "Second Cleave and DPS Towers gate",
+							uuid = "fd67f522-0fda-f5c5-8347-659d60cccc23",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 1033.6,
+				name = "[LPDU] P5 Paradise Regained - Second Cleave and DPS Towers",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 222,
+				timerEndOffset = 135,
+				timerStartOffset = -20,
+				uuid = "3dd37866-65f0-4c6b-bfa5-bcf3ca4f7c1d",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_paradise;if s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={}\n end\n function s.draw(angle,dist,seconds,text)\n  s.clear();local x=100+math.sin(angle)*dist;local z=100+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.tower(left,seconds)\n  s.clear();local angle=s.south+(left and -1 or 1)*2*math.pi/3\n  local x=100+math.sin(angle)*7-math.sin(s.south)*1.8\n  local z=100+math.cos(angle)*7-math.cos(s.south)*1.8;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(left and \"G1 left tower - north edge\" or \"G2 right tower - north edge\",true,seconds,false)\n end\n function s.cone(tank,dark,seconds)\n  if s.coneID then Argus.deleteTimedShape(s.coneID);s.coneID=nil end\n  local id=r.idOf(tank);if id==nil then return end\n  s.coneID=TensorCore.getMoogleDrawer():addTimedConeOnEnt(seconds*1000,s.boss,19,4*math.pi/3,id,0,false,true,(dark and -1 or 1)*math.pi/3,false)\n end\nend\nif s.castStart==nil or TensorReactions_CurrentTimer<s.castStart+3.3 then return end\nif slot==\"T2\" then AnyoneCore.Shotcall(\"Provoke now\",true,3,false) end\nself.used=true\ns.provokeDone=true",
+							conditions = 
+							{
+								
+								{
+									"8ac475a9-5623-66ad-b891-ca5b0175676e",
+									true,
+								},
+							},
+							name = "OT Provoke Reminder",
+							uuid = "f2eb0809-0504-27f2-8867-659d85a76c17",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return data.lpdu_paradise ~= nil and data.lpdu_paradise.castStart ~= nil and not data.lpdu_paradise.provokeDone",
+							name = "OT Provoke Reminder gate",
+							uuid = "8ac475a9-5623-66ad-b891-ca5b0175676e",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				loop = true,
+				mechanicTime = 1033.6,
+				name = "[LPDU] P5 Paradise Regained - OT Provoke Reminder",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 222,
+				timerEndOffset = 135,
+				timerStartOffset = -20,
+				uuid = "99f0377d-5d19-962d-ac00-03cf4e6328e9",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_paradise;if s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={}\n end\n function s.draw(angle,dist,seconds,text)\n  s.clear();local x=100+math.sin(angle)*dist;local z=100+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.tower(left,seconds)\n  s.clear();local angle=s.south+(left and -1 or 1)*2*math.pi/3\n  local x=100+math.sin(angle)*7-math.sin(s.south)*1.8\n  local z=100+math.cos(angle)*7-math.cos(s.south)*1.8;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(left and \"G1 left tower - north edge\" or \"G2 right tower - north edge\",true,seconds,false)\n end\n function s.cone(tank,dark,seconds)\n  if s.coneID then Argus.deleteTimedShape(s.coneID);s.coneID=nil end\n  local id=r.idOf(tank);if id==nil then return end\n  s.coneID=TensorCore.getMoogleDrawer():addTimedConeOnEnt(seconds*1000,s.boss,19,4*math.pi/3,id,0,false,true,(dark and -1 or 1)*math.pi/3,false)\n end\nend\ns.towers=s.towers+1\nif s.towers>=3 then s.clear();if s.coneID then Argus.deleteTimedShape(s.coneID);s.coneID=nil end end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"78161c77-74c8-7cec-aa1a-06eed91d8f38",
+									true,
+								},
+							},
+							name = "Tower Guidance Cleanup",
+							uuid = "d97fefa8-b203-d5fa-b858-9933ac0b2d87",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40320",
+							name = "Tower Guidance Cleanup gate",
+							uuid = "78161c77-74c8-7cec-aa1a-06eed91d8f38",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 1033.6,
+				name = "[LPDU] P5 Paradise Regained - Tower Guidance Cleanup",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 222,
+				timerEndOffset = 135,
+				timerStartOffset = -20,
+				uuid = "6f226cb2-502d-7d96-a9dd-002dbae465e0",
+				version = 2,
+			},
+		},
 	},
 	[224] = 
 	{
