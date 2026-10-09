@@ -17760,6 +17760,175 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "d49f98a1-86fc-eeee-9d1f-1cbeb0b9beaf",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot()\nlocal function clear()\n if data.lpdu_polarizing_shapes then for _,id in ipairs(data.lpdu_polarizing_shapes) do Argus.deleteTimedShape(id) end end\n data.lpdu_polarizing_shapes={}\nend\nlocal function draw(b,h,dist,seconds)\n clear();local x,y,z=TensorCore.getPosInDirection(b.pos,h,dist,true);local t={x=x,y=y,z=z}\n local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n local id=d:addTimedCircle(seconds*1000,x,y+.05,z,1,0,true,true)\n if id then table.insert(data.lpdu_polarizing_shapes,id) end\n local length=TensorCore.getDistance2d(p.pos,t)\n if length>1 then id=d:addTimedArrow(seconds*1000,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,t),math.max(.15,length-1),1,1,1,0,true)\n if id then table.insert(data.lpdu_polarizing_shapes,id) end end\nend\nlocal function assigned(b,order,seconds)\n local roles={T1=1,T2=1,M1=2,M2=2,R1=3,R2=3,H1=4,H2=4}\n local role=roles[slot];if not role then return end\n local left=slot==\"T1\" or slot==\"M1\" or slot==\"R1\" or slot==\"H1\"\n if role<order then left=not left end\n draw(b,b.pos.h+(left and 1 or -1)*math.pi*.75,role==order and 5 or 9,seconds)\n AnyoneCore.Shotcall(role==order and \"Bait in front\" or \"Stack behind bait\",true,seconds,false)\nend\ndata.lpdu_polarizing_done=0;data.lpdu_polarizing_boss=eventArgs.entityID\nlocal b=TensorCore.mGetEntity(eventArgs.entityID);if b==nil then return end\nassigned(b,1,eventArgs.channelTimeMax+1)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"bfeab76b-e4b2-b1b8-a9c8-d8f77fce9f32",
+									true,
+								},
+							},
+							name = "Personal First Bait",
+							uuid = "b41960c3-efb5-8837-a97a-b729c03fdb9a",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40316",
+							name = "Personal First Bait event",
+							uuid = "bfeab76b-e4b2-b1b8-a9c8-d8f77fce9f32",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 1051.2,
+				name = "[LPDU] P5 Polarizing Strikes - Personal First Bait",
+				timeRange = true,
+				timelineIndex = 226,
+				timerEndOffset = 120,
+				timerStartOffset = -8,
+				uuid = "ccec5805-4a3a-9953-90c3-a22d746b0ddd",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot()\nlocal function clear()\n if data.lpdu_polarizing_shapes then for _,id in ipairs(data.lpdu_polarizing_shapes) do Argus.deleteTimedShape(id) end end\n data.lpdu_polarizing_shapes={}\nend\nlocal function draw(b,h,dist,seconds)\n clear();local x,y,z=TensorCore.getPosInDirection(b.pos,h,dist,true);local t={x=x,y=y,z=z}\n local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n local id=d:addTimedCircle(seconds*1000,x,y+.05,z,1,0,true,true)\n if id then table.insert(data.lpdu_polarizing_shapes,id) end\n local length=TensorCore.getDistance2d(p.pos,t)\n if length>1 then id=d:addTimedArrow(seconds*1000,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,t),math.max(.15,length-1),1,1,1,0,true)\n if id then table.insert(data.lpdu_polarizing_shapes,id) end end\nend\nlocal function assigned(b,order,seconds)\n local roles={T1=1,T2=1,M1=2,M2=2,R1=3,R2=3,H1=4,H2=4}\n local role=roles[slot];if not role then return end\n local left=slot==\"T1\" or slot==\"M1\" or slot==\"R1\" or slot==\"H1\"\n if role<order then left=not left end\n draw(b,b.pos.h+(left and 1 or -1)*math.pi*.75,role==order and 5 or 9,seconds)\n AnyoneCore.Shotcall(role==order and \"Bait in front\" or \"Stack behind bait\",true,seconds,false)\nend\nlocal b=TensorCore.mGetEntity(data.lpdu_polarizing_boss);if b==nil then return end\ndata.lpdu_polarizing_done=(data.lpdu_polarizing_done or 0)+1\ndraw(b,b.pos.h+math.pi,9,2.2)\nAnyoneCore.Shotcall(data.lpdu_polarizing_done==4 and \"Move out\" or \"Dodge line - baiters swap sides\",true,2.2,false)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"98c920c6-b52b-7a8c-9a0a-1067dc1a49cc",
+									true,
+								},
+							},
+							name = "Line Dodge and Side Swap",
+							uuid = "7f9ca07b-7ea2-f3ef-8113-f39f993b688b",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40317",
+							name = "Line Dodge and Side Swap event",
+							uuid = "98c920c6-b52b-7a8c-9a0a-1067dc1a49cc",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 1051.2,
+				name = "[LPDU] P5 Polarizing Strikes - Line Dodge and Side Swap",
+				timeRange = true,
+				timelineIndex = 226,
+				timerEndOffset = 120,
+				timerStartOffset = -8,
+				uuid = "4ce8ceee-bc2e-d7ce-8efd-b6a2706f8ec5",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot()\nlocal function clear()\n if data.lpdu_polarizing_shapes then for _,id in ipairs(data.lpdu_polarizing_shapes) do Argus.deleteTimedShape(id) end end\n data.lpdu_polarizing_shapes={}\nend\nlocal function draw(b,h,dist,seconds)\n clear();local x,y,z=TensorCore.getPosInDirection(b.pos,h,dist,true);local t={x=x,y=y,z=z}\n local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n local id=d:addTimedCircle(seconds*1000,x,y+.05,z,1,0,true,true)\n if id then table.insert(data.lpdu_polarizing_shapes,id) end\n local length=TensorCore.getDistance2d(p.pos,t)\n if length>1 then id=d:addTimedArrow(seconds*1000,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,t),math.max(.15,length-1),1,1,1,0,true)\n if id then table.insert(data.lpdu_polarizing_shapes,id) end end\nend\nlocal function assigned(b,order,seconds)\n local roles={T1=1,T2=1,M1=2,M2=2,R1=3,R2=3,H1=4,H2=4}\n local role=roles[slot];if not role then return end\n local left=slot==\"T1\" or slot==\"M1\" or slot==\"R1\" or slot==\"H1\"\n if role<order then left=not left end\n draw(b,b.pos.h+(left and 1 or -1)*math.pi*.75,role==order and 5 or 9,seconds)\n AnyoneCore.Shotcall(role==order and \"Bait in front\" or \"Stack behind bait\",true,seconds,false)\nend\nlocal done=data.lpdu_polarizing_done\nif done==nil then return end\nif done>=4 then clear();self.used=true;return end\nlocal b=TensorCore.mGetEntity(data.lpdu_polarizing_boss);if b==nil then return end\nassigned(b,done+1,2.8)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"6bb4dabb-ddf7-5fbc-8a96-f85a6239cbf9",
+									true,
+								},
+							},
+							name = "Next Role Bait",
+							uuid = "976c80bd-5154-ef20-a33a-7265ff40b300",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40119",
+							name = "Next Role Bait event",
+							uuid = "6bb4dabb-ddf7-5fbc-8a96-f85a6239cbf9",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 1051.2,
+				name = "[LPDU] P5 Polarizing Strikes - Next Role Bait",
+				timeRange = true,
+				timelineIndex = 226,
+				timerEndOffset = 120,
+				timerStartOffset = -8,
+				uuid = "f586a299-f0fa-da0e-b04a-5b2dbe2df08b",
+				version = 2,
+			},
+		},
 	},
 	[227] = 
 	{

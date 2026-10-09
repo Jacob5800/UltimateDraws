@@ -14,6 +14,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Polarizing Strikes: personal boss-relative bait order, line dodges, side swaps and final move-out.
+
 - Mami Darklit: personal tower/protean assignments, Water flex, spread and safe-half stack guidance, and tank bait reminders.
 
 - Pandora's Box: tank-only LB reminder six seconds before the raidwide hit.
