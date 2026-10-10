@@ -7940,7 +7940,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local roster=AnyoneCore and AnyoneCore.Roster\nlocal state=data.lpdu_fru_lr_personal\nif roster == nil or roster.current() == nil or not roster.isReady() or state == nil or not state.assigned or state.guided then self.used=true; return end\nlocal slot=roster.mySlot()\nif slot == \"MT\" then slot=\"T1\" elseif slot == \"OT\" then slot=\"T2\" end\nlocal assignment=state.assignments[slot]\nif assignment == nil then self.used=true; return end\nif eventArgs.spellID == 40218 then\n    -- The log identifies each puddle's baiter as the cast's main target.\n    local id=eventArgs.targetID\n    state.hammers[id]=(state.hammers[id] or 0)+1\n    if not assignment.bait or id ~= state.ids[slot] then self.used=true;return end\n    if state.hammers[id]<5 then\n        -- LPDU: continuously rotate clockwise through all five puddles.\n        local p=roster.entOf(slot);if not p or not p.pos then return end\n        if state.arrow then Argus.deleteTimedShape(state.arrow);state.arrow=nil end\n        if state.circle then Argus.deleteTimedShape(state.circle);state.circle=nil end\n        local dx,dz=p.pos.x-100,p.pos.z-100\n        local tangent={x=p.pos.x-dz,y=p.pos.y,z=p.pos.z+dx}\n        local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.95),2)\n        state.arrow=d:addTimedArrow(1800,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,tangent),3,.8,1,1.8,0,false)\n        self.used=true;return\n    end\nelseif eventArgs.spellID == 40213 then\n    if assignment.bait then self.used=true; return end\n    local mine=false\n    for _,id in ipairs(eventArgs.hitTargets) do if id==state.ids[slot] then mine=true;break end end\n    if not mine then self.used=true;return end\nelse self.used=true; return end\n-- Collapse after your own five puddles, or after the first towers resolve.\n-- These are safe stack staging positions from LPDU raidplan step 4.\nlocal north=assignment.north\ndo\n local player=roster.entOf(slot)\n if player==nil or player.pos==nil then return end\n -- Preserve the side actually occupied after the first towers, including north/south swaps.\n north=player.pos.z<100\nend\nlocal x,z=north and 104.5 or 89.5,north and 82.5 or 115.5\nlocal duration=math.max(300,math.floor((352-TensorReactions_CurrentTimer)*1000))\nstate.guide(x,z,duration)\nstate.stackNorth=north\nstate.guided=true\nself.used=true\n",
+							actionLua = "local roster=AnyoneCore and AnyoneCore.Roster\nlocal state=data.lpdu_fru_lr_personal\nif roster == nil or roster.current() == nil or not roster.isReady() or state == nil or not state.assigned or state.guided then self.used=true; return end\nlocal slot=roster.mySlot()\nif slot == \"MT\" then slot=\"T1\" elseif slot == \"OT\" then slot=\"T2\" end\nlocal assignment=state.assignments[slot]\nif assignment == nil then self.used=true; return end\nif eventArgs.spellID == 40218 then\n    -- The log identifies each puddle's baiter as the cast's main target.\n    local id=eventArgs.targetID\n    state.hammers[id]=(state.hammers[id] or 0)+1\n    if not assignment.bait or id ~= state.ids[slot] then self.used=true;return end\n    if state.hammers[id]<5 then\n        -- LPDU: continuously rotate clockwise through all five puddles.\n        local p=roster.entOf(slot);if not p or not p.pos then return end\n        if state.arrow then Argus.deleteTimedShape(state.arrow);state.arrow=nil end\n        if state.circle then Argus.deleteTimedShape(state.circle);state.circle=nil end\n        local dx,dz=p.pos.x-100,p.pos.z-100\n        local tangent={x=p.pos.x-dz,y=p.pos.y,z=p.pos.z+dx}\n        local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.95),2)\n        state.puddleMoving=true\n        state.puddleLastPos={x=p.pos.x,y=p.pos.y,z=p.pos.z}\n        state.puddleHeading=TensorCore.getHeadingToTarget(p.pos,tangent)\n        state.arrow=d:addTimedArrow(1800,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,tangent),3,.8,1,1.8,0,false)\n        self.used=true;return\n    end\nelseif eventArgs.spellID == 40213 then\n    if assignment.bait then self.used=true; return end\n    local mine=false\n    for _,id in ipairs(eventArgs.hitTargets) do if id==state.ids[slot] then mine=true;break end end\n    if not mine then self.used=true;return end\nelse self.used=true; return end\nstate.puddleMoving=false\n-- Collapse after your own five puddles, or after the first towers resolve.\n-- These are safe stack staging positions from LPDU raidplan step 4.\nlocal north=assignment.north\ndo\n local player=roster.entOf(slot)\n if player==nil or player.pos==nil then return end\n -- Preserve the side actually occupied after the first towers, including north/south swaps.\n north=player.pos.z<100\nend\nlocal x,z=north and 104.5 or 89.5,north and 82.5 or 115.5\nlocal duration=math.max(300,math.floor((352-TensorReactions_CurrentTimer)*1000))\nstate.guide(x,z,duration)\nstate.stackNorth=north\nstate.guided=true\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -7986,6 +7986,40 @@ local tbl =
 				timerEndOffset = 0.2,
 				timerStartOffset = -12,
 				uuid = "cb4e79f5-3c0f-330d-91d8-06769086f813",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.lpdu_fru_lr_personal\nif not s or not s.puddleMoving or s.guided then self.used=true;return end\nlocal p=TensorCore.mGetPlayer();if not p or not p.pos then return end\nlocal dx,dz=p.pos.x-100,p.pos.z-100\nlocal tangent={x=p.pos.x-dz,y=p.pos.y,z=p.pos.z+dx}\nlocal heading=TensorCore.getHeadingToTarget(p.pos,tangent)\nlocal last=s.puddleLastPos\nif last then\n local mx,mz=p.pos.x-last.x,p.pos.z-last.z\n -- Only adopt observed travel when it continues clockwise, never backward.\n if mx*mx+mz*mz>.0025 and mx*(-dz)+mz*dx>0 then\n  heading=TensorCore.getHeadingToTarget(last,p.pos)\n  s.puddleHeading=heading\n elseif s.puddleHeading then heading=s.puddleHeading end\nend\ns.puddleLastPos={x=p.pos.x,y=p.pos.y,z=p.pos.z}\nlocal d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.95),2)\nif s.arrow and not d:updateTimedArrow(s.arrow,300,p.pos.x,p.pos.y+.05,p.pos.z,heading,3,.8,1,1.8,0,false) then\n Argus.deleteTimedShape(s.arrow);s.arrow=nil\nend\nif not s.arrow then s.arrow=d:addTimedArrow(300,p.pos.x,p.pos.y+.05,p.pos.z,heading,3,.8,1,1.8,0,false) end\nself.used=true",
+							name = "Refresh personal puddle direction",
+							uuid = "b379988d-f9ea-85e8-b222-a6d32abff954",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Draws",
+				loop = true,
+				mechanicTime = 348.7,
+				name = "[LPDU] Light Rampant - Follow clockwise puddle movement",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 88,
+				timerEndOffset = -0.5,
+				timerStartOffset = -10,
+				uuid = "c69afe23-0950-7a42-b481-a31ebf32543e",
 				version = 2,
 			},
 		},

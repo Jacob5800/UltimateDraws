@@ -23,6 +23,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Light Rampant puddle direction arrows now follow the player and turn with observed clockwise movement between baits, replacing stationary per-puddle arrows. Fifth bait still switches immediately to finishing-side regroup. (10-10-2026)
+
 - Added OT tankbuster reminder at 35 and a one-second, same-side inward arrow after Burnt Strike resolves near 70.6. Added a zero-offset potion reminder at the 418.8 targetable entry, retaining the original reminder. (10-10-2026)
 
 - Added a short yellow Diamond Dust knockback-side arrow, corrected safe-cone masking, and replaced the close-to-boss slide point with full-distance slide destinations and setup adjustment. Slide replay checks remain pending. (10-10-2026)
