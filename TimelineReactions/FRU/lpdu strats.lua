@@ -5685,7 +5685,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local a=eventArgs\nif a == nil or (a.spellID ~= 40193 and a.spellID ~= 40194) then self.used=true;return end\nlocal caster=TensorCore.mGetEntity(a.entityID)\nif caster == nil or caster.pos == nil or type(caster.pos.h) ~= \"number\" then self.used=true;return end\n-- LPDU: Silence front first; Stillness back first. This is the slide\n-- destination, not a knockback prediction or a second-cleave marker.\nlocal heading=caster.pos.h+(a.spellID==40193 and math.pi or 0)\nlocal x,y,z=TensorCore.getPosInDirection(caster.pos,heading,4.5,true)\nif x == nil or z == nil then self.used=true;return end\nif (x-100)^2+(z-100)^2>18.5^2 then self.used=true;return end\nlocal timeout=math.floor(a.channelTimeMax*1000+300)\nlocal green=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.55),2,1)\ngreen:addTimedCircle(timeout,x,(y or 0)+.05,z,1.2,0,true)\nself.used=true",
+							actionLua = "local a=eventArgs\nif a == nil or (a.spellID ~= 40193 and a.spellID ~= 40194) then self.used=true;return end\nlocal caster=TensorCore.mGetEntity(a.entityID)\nif caster == nil or caster.pos == nil or type(caster.pos.h) ~= \"number\" then self.used=true;return end\n-- Move to the opposite safe half only after the first cleave resolves.\nlocal heading=caster.pos.h+(a.spellID==40194 and math.pi or 0)\nlocal x,y,z=TensorCore.getPosInDirection(caster.pos,heading,4.5,true)\nif x == nil or z == nil then self.used=true;return end\nif (x-100)^2+(z-100)^2>18.5^2 then self.used=true;return end\nlocal timeout=1900\nlocal green=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.55),2,1)\ngreen:addTimedCircle(timeout,x,(y or 0)+.05,z,1.2,0,true)\nlocal p=TensorCore.mGetPlayer()\nif p and p.pos then\n local point={x=x,y=y or 0,z=z}\n local distance=TensorCore.getDistance2d(p.pos,point)\n if distance>.25 then\n  local tip=math.min(1.25,distance)\n  green:addTimedArrow(timeout,p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,point),math.max(.15,distance-tip),.9,tip,2.2,0,false)\n end\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -5715,13 +5715,12 @@ local tbl =
 					},
 				},
 				displayPath = "LPDU",
-				eventType = 3,
+				eventType = 2,
 				mechanicTime = 272.3,
 				name = "[LPDU] P2 Diamond Dust - Ice Slide Destination",
 				timeRange = true,
 				timelineIndex = 61,
-				timerEndOffset = -1,
-				timerStartOffset = -7,
+				timerStartOffset = -4,
 				uuid = "cd0e73df-a5b4-de3e-b402-7adab85968d0",
 				version = 2,
 			},
@@ -5739,6 +5738,20 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "[Draw] Camera Slide Facing",
+				uuid = "8dbf4f00-4ea0-59d8-9a02-b5d7978f1622",
+				version = 2,
+			},
+			inheritedObjectUUID = "f21f2baa-5a65-e46f-9c6a-feb0c45ba0de",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
 		},
 	},
 	[64] = 
@@ -7796,7 +7809,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local roster=AnyoneCore and AnyoneCore.Roster\nlocal state=data.lpdu_fru_lr_personal\nif roster == nil or roster.current() == nil or not roster.isReady() or state == nil or not state.assigned or state.guided then self.used=true; return end\nlocal slot=roster.mySlot()\nif slot == \"MT\" then slot=\"T1\" elseif slot == \"OT\" then slot=\"T2\" end\nlocal assignment=state.assignments[slot]\nif assignment == nil then self.used=true; return end\nif eventArgs.spellID == 40218 then\n    -- The log identifies each puddle's baiter as the cast's main target.\n    local id=eventArgs.targetID\n    state.hammers[id]=(state.hammers[id] or 0)+1\n    if not assignment.bait or id ~= state.ids[slot] or state.hammers[id] < 5 then self.used=true; return end\nelseif eventArgs.spellID == 40213 then\n    if assignment.bait then self.used=true; return end\nelse self.used=true; return end\n-- Collapse after your own five puddles, or after the first towers resolve.\n-- These are safe stack staging positions from LPDU raidplan step 4.\nlocal x,z=assignment.north and 104.5 or 89.5,assignment.north and 82.5 or 115.5\nlocal duration=math.max(300,math.floor((348.8-TensorReactions_CurrentTimer)*1000))\nstate.guide(x,z,duration)\nstate.guided=true\nself.used=true\n",
+							actionLua = "local roster=AnyoneCore and AnyoneCore.Roster\nlocal state=data.lpdu_fru_lr_personal\nif roster == nil or roster.current() == nil or not roster.isReady() or state == nil or not state.assigned or state.guided then self.used=true; return end\nlocal slot=roster.mySlot()\nif slot == \"MT\" then slot=\"T1\" elseif slot == \"OT\" then slot=\"T2\" end\nlocal assignment=state.assignments[slot]\nif assignment == nil then self.used=true; return end\nif eventArgs.spellID == 40218 then\n    -- The log identifies each puddle's baiter as the cast's main target.\n    local id=eventArgs.targetID\n    state.hammers[id]=(state.hammers[id] or 0)+1\n    if not assignment.bait or id ~= state.ids[slot] or state.hammers[id] < 5 then self.used=true; return end\nelseif eventArgs.spellID == 40213 then\n    if assignment.bait then self.used=true; return end\nelse self.used=true; return end\n-- Collapse after your own five puddles, or after the first towers resolve.\n-- These are safe stack staging positions from LPDU raidplan step 4.\nlocal north=assignment.north\nif not assignment.bait then\n local player=roster.entOf(slot)\n if player==nil or player.pos==nil then return end\n -- Preserve the side actually occupied after the first towers, including north/south swaps.\n north=player.pos.z<100\nend\nlocal x,z=north and 104.5 or 89.5,north and 82.5 or 115.5\nlocal duration=math.max(300,math.floor((348.8-TensorReactions_CurrentTimer)*1000))\nstate.guide(x,z,duration)\nstate.guided=true\nself.used=true\n",
 							conditions = 
 							{
 								

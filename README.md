@@ -23,6 +23,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Diamond Dust slide guidance now starts after the first cleave hit and ends before the second; disabled the earlier camera-facing arrow. Light Rampant tower players keep their occupied side for stack regrouping. Replay confirmation pending. (10-10-2026)
+
 - Fixed the Darklit tank selector so all three options, including Tank swap, can be selected and saved. (10-10-2026)
 
 - Added tank-only Darklit choices for MT invulns, OT invulns, or OT-first/MT-second swap; personal close-bait arrows follow the boss landing and clear after the second hit.
