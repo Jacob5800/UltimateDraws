@@ -2312,7 +2312,7 @@ local tbl =
 				mechanicTime = 85.9,
 				name = "[LPDU] Go to conga line",
 				timelineIndex = 22,
-				timerOffset = 4.1,
+				timerOffset = 3.1,
 				uuid = "466d7c46-ce83-29c3-9b38-1c62181178f7",
 				version = 2,
 			},
