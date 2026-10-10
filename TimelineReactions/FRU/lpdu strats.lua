@@ -17248,6 +17248,85 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Optimization",
+				uuid = "f7fe1377-267f-0e39-aefa-87d0aabc35e6",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 34647,
+							conditions = 
+							{
+								
+								{
+									"dbc52d32-2ca9-65fa-8070-cdc5fc7d4e2a",
+									true,
+								},
+								
+								{
+									"98f1c4a0-434e-61f4-b76d-d85ff0abf9f4",
+									true,
+								},
+							},
+							ignoreWeaveRules = true,
+							uuid = "7e7e3c7e-7552-68f1-8451-bbdadeb48179",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "VIPER",
+							name = "Is VPR",
+							uuid = "dbc52d32-2ca9-65fa-8070-cdc5fc7d4e2a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 34647,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							name = "Ire ready",
+							uuid = "98f1c4a0-434e-61f4-b76d-d85ff0abf9f4",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Optimization",
+				mechanicTime = 830.1,
+				name = "[VPR] CT Early Serpent's Ire",
+				timeRange = true,
+				timelineIndex = 192,
+				timerStartOffset = -2,
+				uuid = "3ef384fd-e475-d4cc-9064-c4e13cd0a7cd",
+				version = 2,
+			},
+		},
 	},
 	[194] = 
 	{
