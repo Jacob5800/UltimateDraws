@@ -23,6 +23,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Light Rampant tower regroup also checks local occupancy of the resolving four-yalm tower, so the movement arrow can trigger when the hit-target check misses the player. (10-10-2026)
+
 - Added a one-shot Go to conga line text/TTS reminder at timeline 90. (10-10-2026)
 
 - Light Rampant puddle direction arrows now follow the player and turn with observed clockwise movement between baits, replacing stationary per-puddle arrows. Fifth bait still switches immediately to finishing-side regroup. (10-10-2026)
