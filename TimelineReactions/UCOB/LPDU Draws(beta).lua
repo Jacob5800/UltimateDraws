@@ -2048,7 +2048,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal s=data.ucobMultiHatch22\nif not R or not R.current() or not R.isReady() or not s or Now()-s.started>25000 then self.used=true return end\nif not s.assignments then\n if Now()-s.lastMarker<150 then self.used=true return end\n local slots={\"T1\",\"H1\",\"M1\",\"R1\",\"T2\",\"H2\",\"M2\",\"R2\"}\n local marked,unmarked={},{}\n for _,slot in ipairs(slots) do\n  local id=R.idOf(slot)\n  if id and s.positions[id] then\n   if s.targets[id] then marked[#marked+1]=id else unmarked[#unmarked+1]=id end\n  end\n end\n if #marked~=2 or #s.links<2 then self.used=true return end\n -- Fixed roster priority: L1,L2,L3,L4,right R1,right R2,right R3,right R4.\n -- Marked players and unmarked backups are each ranked independently.\n local function match(ids,links)\n  local result={}\n  for i=1,#links do result[i]=ids[i] end\n  return result\n end\n local links={}\n for i=1,2 do links[i]=s.links[i] end\n local assigned=match(marked,links)\n \n s.assignments={}\n local backups=false and match(unmarked,links) or nil\n for i,link in ipairs(links) do\n  local pair={target=assigned[i],link=link,phase=0}\n  if backups then pair.backup=backups[i] end\n  s.assignments[assigned[i]]=pair\n  if backups then s.assignments[backups[i]]=pair end\n end\nend\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal pair=s.assignments[p.id]\nif not pair or pair.phase>=1 or not s.ready then self.used=true return end\nlocal link=pair.link\nlocal dest=link\nif false then\n local r=math.sqrt(link.x*link.x+link.z*link.z)\n if r<1 then self.used=true return end\n if p.id==pair.target then\n  if pair.phase==1 then dest={x=link.x/r*20.5,y=link.y,z=link.z/r*20.5} end\n elseif pair.phase==0 then\n  local distance=math.min(20.5,r+8.5)\n  dest={x=link.x/r*distance,y=link.y,z=link.z/r*distance}\n end\nend\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
+							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal s=data.ucobMultiHatch22\nif not R or not R.current() or not R.isReady() or not s or Now()-s.started>25000 then self.used=true return end\nif not s.assignments then\n if Now()-s.lastMarker<150 then self.used=true return end\n local slots={\"T1\",\"H1\",\"M1\",\"R1\",\"T2\",\"H2\",\"M2\",\"R2\"}\n local marked,unmarked={},{}\n for _,slot in ipairs(slots) do\n  local id=R.idOf(slot)\n  if id and s.positions[id] then\n   if s.targets[id] then marked[#marked+1]=id else unmarked[#unmarked+1]=id end\n  end\n end\n if #marked~=2 or #s.links<2 then self.used=true return end\n -- Compare both complete pairings using positions captured at the Hatch markers.\n -- Each player receives a separate link; Quickmarch order breaks equal-cost ties.\n local function match(ids,links)\n  local function distance(id,link)\n   local p=s.positions[id]\n   local dx,dz=p.x-link.x,p.z-link.z\n   return math.sqrt(dx*dx+dz*dz)\n  end\n  local direct=distance(ids[1],links[1])+distance(ids[2],links[2])\n  local swapped=distance(ids[1],links[2])+distance(ids[2],links[1])\n  if swapped<direct-0.001 then return {ids[2],ids[1]} end\n  return {ids[1],ids[2]}\n end\n local links={}\n for i=1,2 do links[i]=s.links[i] end\n local assigned=match(marked,links)\n \n s.assignments={}\n local backups=false and match(unmarked,links) or nil\n for i,link in ipairs(links) do\n  local pair={target=assigned[i],link=link,phase=0}\n  if backups then pair.backup=backups[i] end\n  s.assignments[assigned[i]]=pair\n  if backups then s.assignments[backups[i]]=pair end\n end\nend\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal pair=s.assignments[p.id]\nif not pair or pair.phase>=1 or not s.ready then self.used=true return end\nlocal link=pair.link\nlocal dest=link\nif false then\n local r=math.sqrt(link.x*link.x+link.z*link.z)\n if r<1 then self.used=true return end\n if p.id==pair.target then\n  if pair.phase==1 then dest={x=link.x/r*20.5,y=link.y,z=link.z/r*20.5} end\n elseif pair.phase==0 then\n  local distance=math.min(20.5,r+8.5)\n  dest={x=link.x/r*distance,y=link.y,z=link.z/r*distance}\n end\nend\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
 							name = "P1 double Hatch deterministic personal arrows",
 							uuid = "8819e831-9795-bb30-8b67-fdb6bfb79411",
 							version = 2.1,
@@ -2062,7 +2062,7 @@ local tbl =
 				eventType = 12,
 				loop = true,
 				mechanicTime = 114.9,
-				name = "P1 double Hatch deterministic personal arrows",
+				name = "[LPDU] P1 Double Hatch - Closest Separate Neurolinks",
 				timeRange = true,
 				timelineIndex = 22,
 				timerEndOffset = 14,
@@ -2178,7 +2178,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif not R or not R.current() or not R.isReady() or not p then return false end\nlocal s=data.ucobMultiHatch22\nif not s or not s.ready or s.soakAlert then return false end\nlocal a=s.assignments and s.assignments[p.id]\nreturn a and a.target==p.id and a.phase==0 and Now()-s.started<25000",
+							conditionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif not R or not R.current() or not R.isReady() or not p then return false end\nlocal s=data.ucobMultiHatch22\nif not s or not s.ready or s.soakAlert then return false end\nlocal a=s.assignments and s.assignments[p.id]\nreturn a~=nil and a.target==p.id and a.phase==0 and Now()-s.started<25000",
 							dequeueIfLuaFalse = true,
 							name = "Assigned soak ready",
 							uuid = "a513899a-7c5e-6d94-8f16-5adc57a7a8e4",
@@ -2290,7 +2290,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal s=data.ucobMultiHatch27\nif not R or not R.current() or not R.isReady() or not s or Now()-s.started>25000 then self.used=true return end\nif not s.assignments then\n if Now()-s.lastMarker<150 then self.used=true return end\n local slots={\"T1\",\"H1\",\"M1\",\"R1\",\"T2\",\"H2\",\"M2\",\"R2\"}\n local marked,unmarked={},{}\n for _,slot in ipairs(slots) do\n  local id=R.idOf(slot)\n  if id and s.positions[id] then\n   if s.targets[id] then marked[#marked+1]=id else unmarked[#unmarked+1]=id end\n  end\n end\n if #marked~=2 or #s.links<2 then self.used=true return end\n -- Fixed roster priority: L1,L2,L3,L4,right R1,right R2,right R3,right R4.\n -- Marked players and unmarked backups are each ranked independently.\n local function match(ids,links)\n  local result={}\n  for i=1,#links do result[i]=ids[i] end\n  return result\n end\n local links={}\n for i=1,2 do links[i]=s.links[i] end\n local assigned=match(marked,links)\n \n s.assignments={}\n local backups=false and match(unmarked,links) or nil\n for i,link in ipairs(links) do\n  local pair={target=assigned[i],link=link,phase=0}\n  if backups then pair.backup=backups[i] end\n  s.assignments[assigned[i]]=pair\n  if backups then s.assignments[backups[i]]=pair end\n end\nend\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal pair=s.assignments[p.id]\nif not pair or pair.phase>=1 or not s.ready then self.used=true return end\nlocal link=pair.link\nlocal dest=link\nif false then\n local r=math.sqrt(link.x*link.x+link.z*link.z)\n if r<1 then self.used=true return end\n if p.id==pair.target then\n  if pair.phase==1 then dest={x=link.x/r*20.5,y=link.y,z=link.z/r*20.5} end\n elseif pair.phase==0 then\n  local distance=math.min(20.5,r+8.5)\n  dest={x=link.x/r*distance,y=link.y,z=link.z/r*distance}\n end\nend\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
+							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal s=data.ucobMultiHatch27\nif not R or not R.current() or not R.isReady() or not s or Now()-s.started>25000 then self.used=true return end\nif not s.assignments then\n if Now()-s.lastMarker<150 then self.used=true return end\n local slots={\"T1\",\"H1\",\"M1\",\"R1\",\"T2\",\"H2\",\"M2\",\"R2\"}\n local marked,unmarked={},{}\n for _,slot in ipairs(slots) do\n  local id=R.idOf(slot)\n  if id and s.positions[id] then\n   if s.targets[id] then marked[#marked+1]=id else unmarked[#unmarked+1]=id end\n  end\n end\n if #marked~=2 or #s.links<2 then self.used=true return end\n -- Compare both complete pairings using positions captured at the Hatch markers.\n -- Each player receives a separate link; Quickmarch order breaks equal-cost ties.\n local function match(ids,links)\n  local function distance(id,link)\n   local p=s.positions[id]\n   local dx,dz=p.x-link.x,p.z-link.z\n   return math.sqrt(dx*dx+dz*dz)\n  end\n  local direct=distance(ids[1],links[1])+distance(ids[2],links[2])\n  local swapped=distance(ids[1],links[2])+distance(ids[2],links[1])\n  if swapped<direct-0.001 then return {ids[2],ids[1]} end\n  return {ids[1],ids[2]}\n end\n local links={}\n for i=1,2 do links[i]=s.links[i] end\n local assigned=match(marked,links)\n \n s.assignments={}\n local backups=false and match(unmarked,links) or nil\n for i,link in ipairs(links) do\n  local pair={target=assigned[i],link=link,phase=0}\n  if backups then pair.backup=backups[i] end\n  s.assignments[assigned[i]]=pair\n  if backups then s.assignments[backups[i]]=pair end\n end\nend\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal pair=s.assignments[p.id]\nif not pair or pair.phase>=1 or not s.ready then self.used=true return end\nlocal link=pair.link\nlocal dest=link\nif false then\n local r=math.sqrt(link.x*link.x+link.z*link.z)\n if r<1 then self.used=true return end\n if p.id==pair.target then\n  if pair.phase==1 then dest={x=link.x/r*20.5,y=link.y,z=link.z/r*20.5} end\n elseif pair.phase==0 then\n  local distance=math.min(20.5,r+8.5)\n  dest={x=link.x/r*distance,y=link.y,z=link.z/r*distance}\n end\nend\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
 							name = "P1 double Hatch deterministic personal arrows",
 							uuid = "6ad57068-f624-7f48-93d3-f5f87f6a1732",
 							version = 2.1,
@@ -2304,7 +2304,7 @@ local tbl =
 				eventType = 12,
 				loop = true,
 				mechanicTime = 143.6,
-				name = "P1 double Hatch deterministic personal arrows",
+				name = "[LPDU] P1 Double Hatch - Closest Separate Neurolinks",
 				timeRange = true,
 				timelineIndex = 27,
 				timerEndOffset = 14,
@@ -2478,7 +2478,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif not R or not R.current() or not R.isReady() or not p then return false end\nlocal s=data.ucobMultiHatch27\nif not s or not s.ready or s.soakAlert then return false end\nlocal a=s.assignments and s.assignments[p.id]\nreturn a and a.target==p.id and a.phase==0 and Now()-s.started<25000",
+							conditionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif not R or not R.current() or not R.isReady() or not p then return false end\nlocal s=data.ucobMultiHatch27\nif not s or not s.ready or s.soakAlert then return false end\nlocal a=s.assignments and s.assignments[p.id]\nreturn a~=nil and a.target==p.id and a.phase==0 and Now()-s.started<25000",
 							dequeueIfLuaFalse = true,
 							name = "Assigned soak ready",
 							uuid = "549c38b3-7af9-04e9-8337-4f383d232ad0",
@@ -2634,7 +2634,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal s=data.ucobMultiHatch31\nif not R or not R.current() or not R.isReady() or not s or Now()-s.started>25000 then self.used=true return end\nif not s.assignments then\n if Now()-s.lastMarker<150 then self.used=true return end\n local slots={\"T1\",\"H1\",\"M1\",\"R1\",\"T2\",\"H2\",\"M2\",\"R2\"}\n local marked,unmarked={},{}\n for _,slot in ipairs(slots) do\n  local id=R.idOf(slot)\n  if id and s.positions[id] then\n   if s.targets[id] then marked[#marked+1]=id else unmarked[#unmarked+1]=id end\n  end\n end\n if #marked~=2 or #s.links<2 then self.used=true return end\n -- Fixed roster priority: L1,L2,L3,L4,right R1,right R2,right R3,right R4.\n -- Marked players and unmarked backups are each ranked independently.\n local function match(ids,links)\n  local result={}\n  for i=1,#links do result[i]=ids[i] end\n  return result\n end\n local links={}\n for i=1,2 do links[i]=s.links[i] end\n local assigned=match(marked,links)\n \n s.assignments={}\n local backups=false and match(unmarked,links) or nil\n for i,link in ipairs(links) do\n  local pair={target=assigned[i],link=link,phase=0}\n  if backups then pair.backup=backups[i] end\n  s.assignments[assigned[i]]=pair\n  if backups then s.assignments[backups[i]]=pair end\n end\nend\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal pair=s.assignments[p.id]\nif not pair or pair.phase>=1 or not s.ready then self.used=true return end\nlocal link=pair.link\nlocal dest=link\nif false then\n local r=math.sqrt(link.x*link.x+link.z*link.z)\n if r<1 then self.used=true return end\n if p.id==pair.target then\n  if pair.phase==1 then dest={x=link.x/r*20.5,y=link.y,z=link.z/r*20.5} end\n elseif pair.phase==0 then\n  local distance=math.min(20.5,r+8.5)\n  dest={x=link.x/r*distance,y=link.y,z=link.z/r*distance}\n end\nend\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
+							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal s=data.ucobMultiHatch31\nif not R or not R.current() or not R.isReady() or not s or Now()-s.started>25000 then self.used=true return end\nif not s.assignments then\n if Now()-s.lastMarker<150 then self.used=true return end\n local slots={\"T1\",\"H1\",\"M1\",\"R1\",\"T2\",\"H2\",\"M2\",\"R2\"}\n local marked,unmarked={},{}\n for _,slot in ipairs(slots) do\n  local id=R.idOf(slot)\n  if id and s.positions[id] then\n   if s.targets[id] then marked[#marked+1]=id else unmarked[#unmarked+1]=id end\n  end\n end\n if #marked~=2 or #s.links<2 then self.used=true return end\n -- Compare both complete pairings using positions captured at the Hatch markers.\n -- Each player receives a separate link; Quickmarch order breaks equal-cost ties.\n local function match(ids,links)\n  local function distance(id,link)\n   local p=s.positions[id]\n   local dx,dz=p.x-link.x,p.z-link.z\n   return math.sqrt(dx*dx+dz*dz)\n  end\n  local direct=distance(ids[1],links[1])+distance(ids[2],links[2])\n  local swapped=distance(ids[1],links[2])+distance(ids[2],links[1])\n  if swapped<direct-0.001 then return {ids[2],ids[1]} end\n  return {ids[1],ids[2]}\n end\n local links={}\n for i=1,2 do links[i]=s.links[i] end\n local assigned=match(marked,links)\n \n s.assignments={}\n local backups=false and match(unmarked,links) or nil\n for i,link in ipairs(links) do\n  local pair={target=assigned[i],link=link,phase=0}\n  if backups then pair.backup=backups[i] end\n  s.assignments[assigned[i]]=pair\n  if backups then s.assignments[backups[i]]=pair end\n end\nend\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal pair=s.assignments[p.id]\nif not pair or pair.phase>=1 or not s.ready then self.used=true return end\nlocal link=pair.link\nlocal dest=link\nif false then\n local r=math.sqrt(link.x*link.x+link.z*link.z)\n if r<1 then self.used=true return end\n if p.id==pair.target then\n  if pair.phase==1 then dest={x=link.x/r*20.5,y=link.y,z=link.z/r*20.5} end\n elseif pair.phase==0 then\n  local distance=math.min(20.5,r+8.5)\n  dest={x=link.x/r*distance,y=link.y,z=link.z/r*distance}\n end\nend\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
 							name = "P1 double Hatch deterministic personal arrows",
 							uuid = "8953f140-edfe-c654-a144-4dbcb6ab50a0",
 							version = 2.1,
@@ -2648,7 +2648,7 @@ local tbl =
 				eventType = 12,
 				loop = true,
 				mechanicTime = 162.3,
-				name = "P1 double Hatch deterministic personal arrows",
+				name = "[LPDU] P1 Double Hatch - Closest Separate Neurolinks",
 				timeRange = true,
 				timelineIndex = 31,
 				timerEndOffset = 14,
@@ -2764,7 +2764,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif not R or not R.current() or not R.isReady() or not p then return false end\nlocal s=data.ucobMultiHatch31\nif not s or not s.ready or s.soakAlert then return false end\nlocal a=s.assignments and s.assignments[p.id]\nreturn a and a.target==p.id and a.phase==0 and Now()-s.started<25000",
+							conditionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif not R or not R.current() or not R.isReady() or not p then return false end\nlocal s=data.ucobMultiHatch31\nif not s or not s.ready or s.soakAlert then return false end\nlocal a=s.assignments and s.assignments[p.id]\nreturn a~=nil and a.target==p.id and a.phase==0 and Now()-s.started<25000",
 							dequeueIfLuaFalse = true,
 							name = "Assigned soak ready",
 							uuid = "232bc068-0f7e-6c3e-b9ad-189135bd73cf",
@@ -2876,7 +2876,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal s=data.ucobMultiHatch36\nif not R or not R.current() or not R.isReady() or not s or Now()-s.started>25000 then self.used=true return end\nif not s.assignments then\n if Now()-s.lastMarker<150 then self.used=true return end\n local slots={\"T1\",\"H1\",\"M1\",\"R1\",\"T2\",\"H2\",\"M2\",\"R2\"}\n local marked,unmarked={},{}\n for _,slot in ipairs(slots) do\n  local id=R.idOf(slot)\n  if id and s.positions[id] then\n   if s.targets[id] then marked[#marked+1]=id else unmarked[#unmarked+1]=id end\n  end\n end\n if #marked~=2 or #s.links<2 then self.used=true return end\n -- Fixed roster priority: L1,L2,L3,L4,right R1,right R2,right R3,right R4.\n -- Marked players and unmarked backups are each ranked independently.\n local function match(ids,links)\n  local result={}\n  for i=1,#links do result[i]=ids[i] end\n  return result\n end\n local links={}\n for i=1,2 do links[i]=s.links[i] end\n local assigned=match(marked,links)\n \n s.assignments={}\n local backups=false and match(unmarked,links) or nil\n for i,link in ipairs(links) do\n  local pair={target=assigned[i],link=link,phase=0}\n  if backups then pair.backup=backups[i] end\n  s.assignments[assigned[i]]=pair\n  if backups then s.assignments[backups[i]]=pair end\n end\nend\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal pair=s.assignments[p.id]\nif not pair or pair.phase>=1 or not s.ready then self.used=true return end\nlocal link=pair.link\nlocal dest=link\nif false then\n local r=math.sqrt(link.x*link.x+link.z*link.z)\n if r<1 then self.used=true return end\n if p.id==pair.target then\n  if pair.phase==1 then dest={x=link.x/r*20.5,y=link.y,z=link.z/r*20.5} end\n elseif pair.phase==0 then\n  local distance=math.min(20.5,r+8.5)\n  dest={x=link.x/r*distance,y=link.y,z=link.z/r*distance}\n end\nend\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
+							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal s=data.ucobMultiHatch36\nif not R or not R.current() or not R.isReady() or not s or Now()-s.started>25000 then self.used=true return end\nif not s.assignments then\n if Now()-s.lastMarker<150 then self.used=true return end\n local slots={\"T1\",\"H1\",\"M1\",\"R1\",\"T2\",\"H2\",\"M2\",\"R2\"}\n local marked,unmarked={},{}\n for _,slot in ipairs(slots) do\n  local id=R.idOf(slot)\n  if id and s.positions[id] then\n   if s.targets[id] then marked[#marked+1]=id else unmarked[#unmarked+1]=id end\n  end\n end\n if #marked~=2 or #s.links<2 then self.used=true return end\n -- Compare both complete pairings using positions captured at the Hatch markers.\n -- Each player receives a separate link; Quickmarch order breaks equal-cost ties.\n local function match(ids,links)\n  local function distance(id,link)\n   local p=s.positions[id]\n   local dx,dz=p.x-link.x,p.z-link.z\n   return math.sqrt(dx*dx+dz*dz)\n  end\n  local direct=distance(ids[1],links[1])+distance(ids[2],links[2])\n  local swapped=distance(ids[1],links[2])+distance(ids[2],links[1])\n  if swapped<direct-0.001 then return {ids[2],ids[1]} end\n  return {ids[1],ids[2]}\n end\n local links={}\n for i=1,2 do links[i]=s.links[i] end\n local assigned=match(marked,links)\n \n s.assignments={}\n local backups=false and match(unmarked,links) or nil\n for i,link in ipairs(links) do\n  local pair={target=assigned[i],link=link,phase=0}\n  if backups then pair.backup=backups[i] end\n  s.assignments[assigned[i]]=pair\n  if backups then s.assignments[backups[i]]=pair end\n end\nend\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal pair=s.assignments[p.id]\nif not pair or pair.phase>=1 or not s.ready then self.used=true return end\nlocal link=pair.link\nlocal dest=link\nif false then\n local r=math.sqrt(link.x*link.x+link.z*link.z)\n if r<1 then self.used=true return end\n if p.id==pair.target then\n  if pair.phase==1 then dest={x=link.x/r*20.5,y=link.y,z=link.z/r*20.5} end\n elseif pair.phase==0 then\n  local distance=math.min(20.5,r+8.5)\n  dest={x=link.x/r*distance,y=link.y,z=link.z/r*distance}\n end\nend\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
 							name = "P1 double Hatch deterministic personal arrows",
 							uuid = "ae70a37f-e694-51c2-bd07-329718633346",
 							version = 2.1,
@@ -2890,7 +2890,7 @@ local tbl =
 				eventType = 12,
 				loop = true,
 				mechanicTime = 191,
-				name = "P1 double Hatch deterministic personal arrows",
+				name = "[LPDU] P1 Double Hatch - Closest Separate Neurolinks",
 				timeRange = true,
 				timelineIndex = 36,
 				timerEndOffset = 14,
@@ -3064,7 +3064,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif not R or not R.current() or not R.isReady() or not p then return false end\nlocal s=data.ucobMultiHatch36\nif not s or not s.ready or s.soakAlert then return false end\nlocal a=s.assignments and s.assignments[p.id]\nreturn a and a.target==p.id and a.phase==0 and Now()-s.started<25000",
+							conditionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif not R or not R.current() or not R.isReady() or not p then return false end\nlocal s=data.ucobMultiHatch36\nif not s or not s.ready or s.soakAlert then return false end\nlocal a=s.assignments and s.assignments[p.id]\nreturn a~=nil and a.target==p.id and a.phase==0 and Now()-s.started<25000",
 							dequeueIfLuaFalse = true,
 							name = "Assigned soak ready",
 							uuid = "a00a48d5-9cf8-0834-8eb0-23247462ab14",
@@ -4617,6 +4617,717 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\ucob\\universal",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Personal Guidance",
+				uuid = "cb1889f4-1356-ce5f-bdd9-3b7307f13baf",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local t=eventArgs.line.line:gsub(\"%s+\",\" \")\nlocal seq=nil\nif t:find(\"O hallowed moon, shine you the iron path\",1,true) then seq={9916,9915}\nelseif t:find(\"O hallowed moon, take fire and scorch my foes\",1,true) then seq={9916,9917}\nelseif t:find(\"Take fire, O hallowed moon\",1,true) then seq={9917,9916}\nelseif t:find(\"Blazing path, lead me to iron rule\",1,true) then seq={9917,9915}\nelseif t:find(\"From on high I descend, the hallowed moon to call\",1,true) then seq={9918,9916}\nelseif t:find(\"From on high I descend, the iron path to walk\",1,true) then seq={9918,9915}\nelseif t:find(\"From on high I descend, the iron path to call\",1,true) then seq={9918,9915}\nelseif t:find(\"From on high I descend, the moon and stars to bring\",1,true) then seq={9918,9916,9920}\nelseif t:find(\"From hallowed moon I descend, a rain of stars to bring\",1,true) then seq={9916,9918,9920}\nelseif t:find(\"From hallowed moon I descend, upon burning earth to tread\",1,true) then seq={9916,9918,9917}\nelseif t:find(\"From hallowed moon I bare iron, in my descent to wield\",1,true) then seq={9916,9915,9918}\nelseif t:find(\"Unbending iron, take fire and descend\",1,true) then seq={9915,9917,9918}\nelseif t:find(\"Unbending iron, descend with fiery edge\",1,true) then seq={9915,9918,9917}\nend\nif seq then\n local now=Now()\n local previous=data.ucobNaelPersonalCallouts\n if not previous or previous.text~=t or now>=previous.expires then\n  data.ucobNaelPersonalCallouts={seq=seq,step=1,text=t,started=now,expires=now+20000,initialCalled=false}\n end\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"cc02b125-cc1c-3f6d-8e20-4eef58ca07c5",
+									true,
+								},
+							},
+							name = "Capture quote state",
+							uuid = "478a33b1-349f-dc77-9203-cd4cd7475f75",
+							version = 2.1,
+						},
+						inheritedIndex = 1,
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.ucobNaelPersonalCallouts\nif s and Now()<s.expires and s.seq[s.step] and s.calledStep~=s.step then\n s.calledStep=s.step\n self.used=true\nend",
+							conditions = 
+							{
+								
+								{
+									"23dc5c1f-d4c3-41a8-ab1f-6f3d7668a109",
+									true,
+								},
+								
+								{
+									"78c2f6bf-73a2-6518-9538-995fca8104de",
+									true,
+								},
+							},
+							name = "Claim one callout per step",
+							uuid = "23b46a17-988b-ea90-ad99-fa58df435116",
+							version = 2.1,
+						},
+						inheritedIndex = 2,
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 3000,
+							alertPriority = 2,
+							alertScale = 1.2,
+							alertTTS = true,
+							alertText = "In",
+							conditions = 
+							{
+								
+								{
+									"9417c312-e372-0705-910b-b64ce6197822",
+									true,
+								},
+								
+								{
+									"6b59f28b-fe0b-6260-83c5-11b4a5829ca8",
+									true,
+								},
+							},
+							endIfUsed = true,
+							uuid = "3da996ff-773a-d6dd-a634-35d93f96e155",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 3000,
+							alertPriority = 2,
+							alertScale = 1.2,
+							alertTTS = true,
+							alertText = "Out",
+							conditions = 
+							{
+								
+								{
+									"9417c312-e372-0705-910b-b64ce6197822",
+									true,
+								},
+								
+								{
+									"ed3fa211-5aa5-ac89-b623-4776e091802c",
+									true,
+								},
+							},
+							endIfUsed = true,
+							uuid = "a8aace30-169f-c100-906d-3d05e7acb272",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 3000,
+							alertPriority = 2,
+							alertScale = 1.2,
+							alertTTS = true,
+							alertText = "Stack",
+							conditions = 
+							{
+								
+								{
+									"9417c312-e372-0705-910b-b64ce6197822",
+									true,
+								},
+								
+								{
+									"7ef5e16d-56b2-6fbb-8286-9b76291ed970",
+									true,
+								},
+							},
+							endIfUsed = true,
+							uuid = "f70caacd-127a-0a42-b3ff-069adced5720",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 3000,
+							alertPriority = 2,
+							alertScale = 1.2,
+							alertTTS = true,
+							alertText = "Spread",
+							conditions = 
+							{
+								
+								{
+									"9417c312-e372-0705-910b-b64ce6197822",
+									true,
+								},
+								
+								{
+									"87326fb6-dfd1-993d-a707-58d52355dc6d",
+									true,
+								},
+							},
+							endIfUsed = true,
+							uuid = "7182fe6f-26a2-38a3-97be-8bc8987d2a58",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 3000,
+							alertPriority = 2,
+							alertScale = 1.2,
+							alertTTS = true,
+							alertText = "Spread",
+							conditions = 
+							{
+								
+								{
+									"9417c312-e372-0705-910b-b64ce6197822",
+									true,
+								},
+								
+								{
+									"abc2f3d5-861e-db3e-85f0-bb9c32047863",
+									true,
+								},
+							},
+							endIfUsed = true,
+							uuid = "992d71c5-0a00-d6b9-81cc-d0fb028fc078",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "self.used=true",
+							endIfUsed = true,
+							name = "Finish duplicate callout queue",
+							uuid = "b4655a46-45a8-0610-a002-52800a5e7f09",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local t=eventArgs.line.line:gsub(\"%s+\",\" \")\nlocal seq=nil\nif t:find(\"O hallowed moon, shine you the iron path\",1,true) then seq={9916,9915}\nelseif t:find(\"O hallowed moon, take fire and scorch my foes\",1,true) then seq={9916,9917}\nelseif t:find(\"Take fire, O hallowed moon\",1,true) then seq={9917,9916}\nelseif t:find(\"Blazing path, lead me to iron rule\",1,true) then seq={9917,9915}\nelseif t:find(\"From on high I descend, the hallowed moon to call\",1,true) then seq={9918,9916}\nelseif t:find(\"From on high I descend, the iron path to walk\",1,true) then seq={9918,9915}\nelseif t:find(\"From on high I descend, the iron path to call\",1,true) then seq={9918,9915}\nelseif t:find(\"From on high I descend, the moon and stars to bring\",1,true) then seq={9918,9916,9920}\nelseif t:find(\"From hallowed moon I descend, a rain of stars to bring\",1,true) then seq={9916,9918,9920}\nelseif t:find(\"From hallowed moon I descend, upon burning earth to tread\",1,true) then seq={9916,9918,9917}\nelseif t:find(\"From hallowed moon I bare iron, in my descent to wield\",1,true) then seq={9916,9915,9918}\nelseif t:find(\"Unbending iron, take fire and descend\",1,true) then seq={9915,9917,9918}\nelseif t:find(\"Unbending iron, descend with fiery edge\",1,true) then seq={9915,9918,9917}\nend\nlocal previous=data.ucobNaelPersonalCallouts\nreturn seq~=nil and (previous==nil or previous.text~=t or Now()>=previous.expires)",
+							dequeueIfLuaFalse = true,
+							name = "Recognized quote",
+							uuid = "cc02b125-cc1c-3f6d-8e20-4eef58ca07c5",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.ucobNaelPersonalCallouts\nreturn s~=nil and Now()<s.expires and s.seq[s.step]==9916",
+							name = "In",
+							uuid = "6b59f28b-fe0b-6260-83c5-11b4a5829ca8",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.ucobNaelPersonalCallouts\nreturn s~=nil and Now()<s.expires and s.seq[s.step]==9915",
+							name = "Out",
+							uuid = "ed3fa211-5aa5-ac89-b623-4776e091802c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.ucobNaelPersonalCallouts\nreturn s~=nil and Now()<s.expires and s.seq[s.step]==9917",
+							name = "Stack",
+							uuid = "7ef5e16d-56b2-6fbb-8286-9b76291ed970",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.ucobNaelPersonalCallouts\nreturn s~=nil and Now()<s.expires and s.seq[s.step]==9918",
+							name = "Spread",
+							uuid = "87326fb6-dfd1-993d-a707-58d52355dc6d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.ucobNaelPersonalCallouts\nreturn s~=nil and Now()<s.expires and s.seq[s.step]==9920",
+							name = "Spread",
+							uuid = "abc2f3d5-861e-db3e-85f0-bb9c32047863",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionUUID = "478a33b1-349f-dc77-9203-cd4cd7475f75",
+							category = "Action",
+							name = "Quote step updated",
+							uuid = "23dc5c1f-d4c3-41a8-ab1f-6f3d7668a109",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.ucobNaelPersonalCallouts\nreturn s~=nil and Now()<s.expires and s.seq[s.step]~=nil and s.calledStep~=s.step",
+							name = "Current step not announced",
+							uuid = "78c2f6bf-73a2-6518-9538-995fca8104de",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionUUID = "23b46a17-988b-ea90-ad99-fa58df435116",
+							category = "Action",
+							name = "Callout claimed in this queue",
+							uuid = "9417c312-e372-0705-910b-b64ce6197822",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 7,
+				loop = true,
+				mechanicTime = 230.6,
+				name = "[LPDU] Nael Quotes - First Step",
+				timeRange = true,
+				timelineIndex = 48,
+				timerEndOffset = 755,
+				timerStartOffset = -15,
+				uuid = "12c277ac-2691-9559-8ba1-ba24f45e015f",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.ucobNaelPersonalCallouts\nif s and Now()<s.expires and s.seq[s.step]==eventArgs.spellID then s.step=s.step+1 end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"55f63b8c-501e-20a9-b157-8bd2ba5a9427",
+									true,
+								},
+								
+								{
+									"42055d24-56da-9cd2-982b-eb518a9fad74",
+									true,
+								},
+							},
+							name = "Advance resolved step",
+							uuid = "7ef9748f-7cfb-e83a-a317-85f955862208",
+							version = 2.1,
+						},
+						inheritedIndex = 1,
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.ucobNaelPersonalCallouts\nif s and Now()<s.expires and s.seq[s.step] and s.calledStep~=s.step then\n s.calledStep=s.step\n self.used=true\nend",
+							conditions = 
+							{
+								
+								{
+									"a391dc47-e7a0-cee8-91e3-163473e65324",
+									true,
+								},
+								
+								{
+									"6d6910ba-177b-8174-8195-802cfaae09e1",
+									true,
+								},
+							},
+							name = "Claim one callout per step",
+							uuid = "c09c56e5-decc-658c-98f5-da248092b36e",
+							version = 2.1,
+						},
+						inheritedIndex = 2,
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 3000,
+							alertPriority = 2,
+							alertScale = 1.2,
+							alertTTS = true,
+							alertText = "In",
+							conditions = 
+							{
+								
+								{
+									"a7888a14-2ded-f255-9eb0-dfa05bc9728e",
+									true,
+								},
+								
+								{
+									"c9fdfc4b-bdde-1a01-9aca-8fbf8d6b337d",
+									true,
+								},
+							},
+							endIfUsed = true,
+							uuid = "ed0bec36-c340-bb82-9516-7cfa740c70ff",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 3000,
+							alertPriority = 2,
+							alertScale = 1.2,
+							alertTTS = true,
+							alertText = "Out",
+							conditions = 
+							{
+								
+								{
+									"a7888a14-2ded-f255-9eb0-dfa05bc9728e",
+									true,
+								},
+								
+								{
+									"551fc9fc-4600-2a28-9bfc-cec1e7417cc6",
+									true,
+								},
+							},
+							endIfUsed = true,
+							uuid = "9764fe1c-25a7-95ad-a15e-9cd9e6ee3063",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 3000,
+							alertPriority = 2,
+							alertScale = 1.2,
+							alertTTS = true,
+							alertText = "Stack",
+							conditions = 
+							{
+								
+								{
+									"a7888a14-2ded-f255-9eb0-dfa05bc9728e",
+									true,
+								},
+								
+								{
+									"53b8e121-a2bb-7542-be73-cb81b1806f8c",
+									true,
+								},
+							},
+							endIfUsed = true,
+							uuid = "653cfc6a-4a23-2d75-b039-b87f754bb9cb",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 3000,
+							alertPriority = 2,
+							alertScale = 1.2,
+							alertTTS = true,
+							alertText = "Spread",
+							conditions = 
+							{
+								
+								{
+									"a7888a14-2ded-f255-9eb0-dfa05bc9728e",
+									true,
+								},
+								
+								{
+									"33bcd0bd-8818-5f75-a469-af89e04dd1ef",
+									true,
+								},
+							},
+							endIfUsed = true,
+							uuid = "3316661d-aecc-0c3e-9b06-9b01d20b67a2",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 3000,
+							alertPriority = 2,
+							alertScale = 1.2,
+							alertTTS = true,
+							alertText = "Spread",
+							conditions = 
+							{
+								
+								{
+									"a7888a14-2ded-f255-9eb0-dfa05bc9728e",
+									true,
+								},
+								
+								{
+									"166373eb-3312-42f2-be4b-1f0d85508745",
+									true,
+								},
+							},
+							endIfUsed = true,
+							uuid = "be9c2739-94b4-8a94-968b-559abbdd270b",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "self.used=true",
+							conditions = 
+							{
+								
+								{
+									"a391dc47-e7a0-cee8-91e3-163473e65324",
+									true,
+								},
+								
+								{
+									"3b8be373-e09f-c19b-bff3-3e0ec14d169f",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Finish completed sequence",
+							uuid = "6ac096bf-39f6-e5cd-ba11-749750aaf737",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "self.used=true",
+							endIfUsed = true,
+							name = "Finish duplicate callout queue",
+							uuid = "886ec4cd-c772-c3f3-8103-ce52d8261d6f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							spellIDList = 
+							{
+								9915,
+								9916,
+								9917,
+								9918,
+								9920,
+							},
+							uuid = "55f63b8c-501e-20a9-b157-8bd2ba5a9427",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.ucobNaelPersonalCallouts\nreturn s~=nil and Now()<s.expires and s.seq[s.step]==eventArgs.spellID",
+							dequeueIfLuaFalse = true,
+							name = "Resolve current quote step",
+							uuid = "42055d24-56da-9cd2-982b-eb518a9fad74",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.ucobNaelPersonalCallouts\nreturn s~=nil and Now()<s.expires and s.seq[s.step]==9916",
+							name = "In",
+							uuid = "c9fdfc4b-bdde-1a01-9aca-8fbf8d6b337d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.ucobNaelPersonalCallouts\nreturn s~=nil and Now()<s.expires and s.seq[s.step]==9915",
+							name = "Out",
+							uuid = "551fc9fc-4600-2a28-9bfc-cec1e7417cc6",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.ucobNaelPersonalCallouts\nreturn s~=nil and Now()<s.expires and s.seq[s.step]==9917",
+							name = "Stack",
+							uuid = "53b8e121-a2bb-7542-be73-cb81b1806f8c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.ucobNaelPersonalCallouts\nreturn s~=nil and Now()<s.expires and s.seq[s.step]==9918",
+							name = "Spread",
+							uuid = "33bcd0bd-8818-5f75-a469-af89e04dd1ef",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.ucobNaelPersonalCallouts\nreturn s~=nil and Now()<s.expires and s.seq[s.step]==9920",
+							name = "Spread",
+							uuid = "166373eb-3312-42f2-be4b-1f0d85508745",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionUUID = "7ef9748f-7cfb-e83a-a317-85f955862208",
+							category = "Action",
+							name = "Quote step updated",
+							uuid = "a391dc47-e7a0-cee8-91e3-163473e65324",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.ucobNaelPersonalCallouts\nreturn s~=nil and s.seq[s.step]==nil",
+							name = "Sequence complete",
+							uuid = "3b8be373-e09f-c19b-bff3-3e0ec14d169f",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.ucobNaelPersonalCallouts\nreturn s~=nil and Now()<s.expires and s.seq[s.step]~=nil and s.calledStep~=s.step",
+							name = "Current step not announced",
+							uuid = "6d6910ba-177b-8174-8195-802cfaae09e1",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionUUID = "c09c56e5-decc-658c-98f5-da248092b36e",
+							category = "Action",
+							name = "Callout claimed in this queue",
+							uuid = "a7888a14-2ded-f255-9eb0-dfa05bc9728e",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 230.6,
+				name = "[LPDU] Nael Quotes - Next Step",
+				timeRange = true,
+				timelineIndex = 48,
+				timerEndOffset = 755,
+				timerStartOffset = -15,
+				uuid = "4d1c8790-fced-9181-aa8a-f9df06a75dea",
+				version = 2,
+			},
+		},
 	},
 	[49] = 
 	{
@@ -5614,26 +6325,6 @@ local tbl =
 							version = 2.1,
 						},
 					},
-					
-					{
-						data = 
-						{
-							aType = "Alert",
-							alertDuration = 4500,
-							alertPriority = 2,
-							alertText = "Spread",
-							conditions = 
-							{
-								
-								{
-									"87ce4fdc-3a90-0f4d-a550-c1e283e937b9",
-									true,
-								},
-							},
-							uuid = "1d4072ef-991c-b32c-ad5d-b0293aee8df8",
-							version = 2.1,
-						},
-					},
 				},
 				conditions = 
 				{
@@ -5727,6 +6418,7 @@ local tbl =
 					},
 				},
 				displayPath = "LPDU Personal Guidance",
+				enabled = false,
 				eventType = 2,
 				loop = true,
 				mechanicTime = 290.4,
@@ -5761,26 +6453,6 @@ local tbl =
 							},
 							name = "P2 Dive Quote - Out",
 							uuid = "34f92c0b-0dc8-c63d-9022-f37304828a87",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Alert",
-							alertDuration = 4500,
-							alertPriority = 2,
-							alertText = "Spread",
-							conditions = 
-							{
-								
-								{
-									"a23b3551-3366-f046-bdb0-d9d7df2f59c6",
-									true,
-								},
-							},
-							uuid = "0c7edca6-bf41-d36f-85c3-76e8f438dd2d",
 							version = 2.1,
 						},
 					},
@@ -5877,6 +6549,7 @@ local tbl =
 					},
 				},
 				displayPath = "LPDU Personal Guidance",
+				enabled = false,
 				eventType = 2,
 				loop = true,
 				mechanicTime = 290.4,
@@ -6777,7 +7450,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nlocal s=data.ucobEraTransition\nif not R or not R.current() or not R.isReady() or not p or not s or s.knockbackAt or Now()>=s.expires then self.used=true return end\nlocal dest={x=0,y=0,z=9}\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
+							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nlocal s=data.ucobEraTransition\nif not R or not R.current() or not R.isReady() or not p or not s or s.knockbackAt or Now()>=s.expires then self.used=true return end\nlocal x,y,z,active=Argus.getWaymarkInfo(1)\nif not active then self.used=true return end\nlocal dest={x=x,y=y,z=z}\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
 							name = "Party Knockback Position Arrow",
 							uuid = "e2a5a8ea-19d9-f502-bb68-b29ff1f40d56",
 							version = 2.1,
@@ -6971,6 +7644,20 @@ local tbl =
 		{
 			data = 
 			{
+				name = "Draw Flare Breath",
+				uuid = "414df4a6-dd06-d407-98bd-db99bccb77aa",
+				version = 2,
+			},
+			inheritedObjectUUID = "e96b8ee0-2a83-37cc-b2ee-95334cb12487",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "LPDU Personal Guidance",
 				uuid = "13c83d8b-e16e-93ce-a2d2-7b903ee89208",
@@ -7006,7 +7693,7 @@ local tbl =
 				timeRange = true,
 				timelineIndex = 88,
 				timerEndOffset = 1,
-				timerStartOffset = -3,
+				timerStartOffset = -2.5,
 				uuid = "ab0c4d88-3d67-dfdc-9c5d-b64686dc865a",
 				version = 2,
 			},
@@ -7223,6 +7910,40 @@ local tbl =
 				timerEndOffset = -0.1,
 				timerStartOffset = -4.5,
 				uuid = "443c7a7d-7725-c23a-881e-a362de3817d8",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 2500,
+							alertPriority = 2,
+							alertScale = 1.2,
+							alertTTS = true,
+							alertText = "Move for Twister",
+							endIfUsed = true,
+							uuid = "ab1f58e0-1d42-95b9-b324-1efaa06e5529",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Personal Guidance",
+				mechanicTime = 540,
+				name = "[LPDU] P3 Quickmarch - Twister Move",
+				timelineIndex = 92,
+				timerOffset = -2,
+				uuid = "b22422b3-4eef-b0eb-9886-938c43685ff6",
 				version = 2,
 			},
 		},
