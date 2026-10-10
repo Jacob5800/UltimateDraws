@@ -12128,7 +12128,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_apoc_movement;local assignment=data.lpdu_p3_apoc_assignment\nif s==nil then return end\nif s.clear==nil then\n function s.clear() for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={} end\n function s.draw(angle,dist,seconds,text,bx,bz)\n  s.clear();local x=(bx or 100)+math.sin(angle)*dist;local z=(bz or 100)+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.angle(side)\n  local a=s.first-s.rotation\n  a=(a+math.pi)%(2*math.pi)-math.pi\n  local forDPS=a>=-.1 and a<math.pi-.1\n  if forDPS~=(side==\"dps\") then a=a+math.pi end\n  return a\n end\nend\nif assignment==nil then self.used=true;return end\nlocal b=TensorCore.mGetEntity(eventArgs.entityID);if b==nil then return end\ns.bx=b.pos.x;s.bz=b.pos.z\ns.knockAngle=TensorCore.getHeadingToTarget(b.pos,{x=100,y=0,z=100})+(assignment.side[slot]==\"support\" and -1 or 1)*math.pi/9\ns.draw(s.knockAngle,2,3.3,assignment.side[slot]==\"support\" and \"Knockback - support side left\" or \"Knockback - DPS side right\",s.bx,s.bz)\nself.used=true",
+							actionLua = "local s=data.lpdu_apoc_movement;if s==nil then return end\nif s.clear then s.clear() end\nlocal b=TensorCore.mGetEntity(eventArgs.entityID);if b==nil then return end\ns.jump={boss=eventArgs.entityID,hit=TensorReactions_CurrentTimer,origin={x=b.pos.x,y=b.pos.y,z=b.pos.z}}\nself.used=true",
 							conditions = 
 							{
 								
@@ -12271,6 +12271,40 @@ local tbl =
 				timerEndOffset = 33,
 				timerStartOffset = 29,
 				uuid = "e7a4730f-ddac-4852-bf17-6f830cf99e8b",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_apoc_movement;local assignment=data.lpdu_p3_apoc_assignment\nif s==nil then return end\nif s.clear==nil then\n function s.clear() for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={} end\n function s.draw(angle,dist,seconds,text,bx,bz)\n  s.clear();local x=(bx or 100)+math.sin(angle)*dist;local z=(bz or 100)+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.angle(side)\n  local a=s.first-s.rotation\n  a=(a+math.pi)%(2*math.pi)-math.pi\n  local forDPS=a>=-.1 and a<math.pi-.1\n  if forDPS~=(side==\"dps\") then a=a+math.pi end\n  return a\n end\nend\nlocal j=s.jump;if j==nil or j.drawn or assignment==nil then self.used=true;return end\nlocal b=TensorCore.mGetEntity(j.boss);if b==nil then return end\n-- The far-hit event still reports the pre-jump position. Wait for actual landing.\nif TensorCore.getDistance2d(b.pos,j.origin)<5 then return end\nlocal seconds=j.hit+3-TensorReactions_CurrentTimer\nif seconds<=0 then self.used=true;return end\nj.drawn=true;s.bx=b.pos.x;s.bz=b.pos.z\ns.knockAngle=TensorCore.getHeadingToTarget(b.pos,{x=100,y=0,z=100})+(assignment.side[slot]==\"support\" and -1 or 1)*math.pi/9\ns.draw(s.knockAngle,2,seconds,\"Move into hitbox - knockback\",s.bx,s.bz)\nself.used=true",
+							name = "Actual landing knockback position",
+							uuid = "1d6d195b-8528-b5b1-aa45-9ec9aaed4f5f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU",
+				loop = true,
+				mechanicTime = 619.6,
+				name = "[LPDU] P3 Apocalypse - Knockback After Boss Landing",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 144,
+				timerEndOffset = 27.5,
+				timerStartOffset = 23,
+				uuid = "116677d8-fa67-2837-ba75-0b516e0a35df",
 				version = 2,
 			},
 		},

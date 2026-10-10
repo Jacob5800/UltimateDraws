@@ -23,6 +23,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Corrected Apocalypse knockback guidance after the far tank bait: clear the bait arrow on the hit, then guide inside the boss hitbox from her actual landing position. Replay confirmation pending. (10-10-2026)
+
 - Added missing Light Rampant orb-dodge and middle regroup arrows, Ultimate Relativity return-to-middle arrows, and clearer Diamond Dust first-side/after-hit slide guidance. Replay confirmation pending. (10-10-2026)
 - Added Apocalypse starting positions at 605 and corrected its pattern trigger for move-in and OT bait arrows; added Darklit tank-plan far-bait guidance and personal P4 Akh Morn regrouping. Shortened marker 1 transition staging by eight seconds. Replay confirmation pending. (10-10-2026)
 - P5 healer stack circles now show only your own light party and render behind players. Extended Polarizing Strikes guidance through the final line at 1177. Replay confirmation pending. (10-10-2026)
