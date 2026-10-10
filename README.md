@@ -23,6 +23,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Added a one-shot Look away text/TTS reminder two seconds before the Diamond Dust gaze around 263.7. (10-10-2026)
+
 - Apocalypse OT jump-bait guidance no longer requires the full party roster to be ready or the OT to appear in Water hit targets; it triggers once after second Water. Replay confirmation pending. (10-10-2026)
 
 - Diamond Dust slide guidance now starts after the first cleave hit and ends before the second; disabled the earlier camera-facing arrow. Light Rampant tower players keep their occupied side for stack regrouping. Replay confirmation pending. (10-10-2026)

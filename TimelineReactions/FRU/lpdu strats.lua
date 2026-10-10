@@ -5582,6 +5582,49 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "e411027c-4fa9-8ceb-93f2-9477e451ba5a",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "AnyoneCore.Shotcall(\"Look away\",true,2.2,false)\nself.used=true",
+							endIfUsed = true,
+							name = "Look away alert and TTS",
+							uuid = "c1016af5-6d48-6f7d-91e9-674d006fa363",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU",
+				mechanicTime = 263.7,
+				name = "[LPDU] P2 Diamond Dust - Look Away",
+				timeRange = true,
+				timelineIndex = 58,
+				timerEndOffset = -0.2,
+				timerStartOffset = -2,
+				uuid = "6262de10-a1a0-04b4-b1ea-3bd700c27ff5",
+				version = 2,
+			},
+		},
 	},
 	[59] = 
 	{
@@ -5738,20 +5781,6 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "[Draw] Camera Slide Facing",
-				uuid = "8dbf4f00-4ea0-59d8-9a02-b5d7978f1622",
-				version = 2,
-			},
-			inheritedObjectUUID = "f21f2baa-5a65-e46f-9c6a-feb0c45ba0de",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
 		},
 	},
 	[64] = 
