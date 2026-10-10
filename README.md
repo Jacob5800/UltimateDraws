@@ -14,6 +14,13 @@ TEA: Coming soon by Ton.
 
 ## Changelog
 
+### UCOB: LPDU
+
+- Improved Nael In/Out/Stack/Spread text and TTS, with one callout per quote step; duplicate suppression confirmed in replay. (10-10-2026)
+- Corrected P1 double-Hatch Neurolink assignments and alerts, and made the transition arrow follow A. (10-10-2026)
+- Added the Quickmarch Twister move reminder and brought Earthshaker destinations closer to melee. Bahamut cones now select the real boss and follow his facing. (10-10-2026)
+- Corrected Blackfire center stacks, Fellruin center spreads and earlier Neurolink guidance, and Grand Octet starting-arrow updates. P2 cone arrows now use short perimeter steps and active-cone checks. Visual replay confirmation remains pending. (10-10-2026)
+
 ### FRU: LPDU
 
 - Added tank-only Darklit choices for MT invulns, OT invulns, or OT-first/MT-second swap; personal close-bait arrows follow the boss landing and clear after the second hit.
