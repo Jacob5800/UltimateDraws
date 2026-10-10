@@ -23,6 +23,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- The AnyoneCore mitigation disable at fight start now runs only for DPS, skipping tanks and healers. (10-10-2026)
+
 - Shortened the P5 Polarizing Strikes callout to Dodge line. (10-10-2026)
 
 - Added a final tank-only CT formation arrow during the first Hallowed Wings cast near 835, pointing to the assigned LPDU tank-front position and expiring with the cast. (10-10-2026)

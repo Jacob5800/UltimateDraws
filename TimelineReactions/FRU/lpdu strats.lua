@@ -7,19 +7,8 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "0c5acf11-036b-0b6d-4ed2-ccb7e16bc6a1",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "FRU_megaminx_indicator",
-				uuid = "7681db20-18cf-4a54-efd9-0116278606b0",
+				uuid = "035d173d-bc8c-8121-705b-366ba896fead",
 			},
 			inheritanceRoot = "FRU_megaminx_indicator",
 			objectType = "folder",
@@ -37,6 +26,17 @@ local tbl =
 			{
 				enabled = false,
 			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\fru",
+				uuid = "0c5acf11-036b-0b6d-4ed2-ccb7e16bc6a1",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\fru",
+			objectType = "folder",
 		},
 		
 		{
@@ -890,6 +890,14 @@ local tbl =
 						{
 							aType = "Lua",
 							actionLua = "AnyoneCore.Settings.Reactions.fru.mitigation = false\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"cd5a1522-e4f3-73ef-bfa6-2342496d46cd",
+									true,
+								},
+							},
 							endIfUsed = true,
 							name = "Set FRU mitigation default",
 							uuid = "d567af1f-557b-ea24-8812-c22bc528665e",
@@ -899,6 +907,19 @@ local tbl =
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 9,
+							dequeueIfLuaFalse = true,
+							name = "Self is DPS",
+							partyTargetType = "DPS",
+							uuid = "cd5a1522-e4f3-73ef-bfa6-2342496d46cd",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "AnyoneCore Defaults",
 				mechanicTime = 13.7,
@@ -1068,19 +1089,8 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "168a8f49-c91b-3e15-b424-557fc39b4419",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "FRU_megaminx_indicator",
-				uuid = "721845c8-fb9a-e40c-5244-490eba6bfe18",
+				uuid = "a7809ac5-149c-8ec9-6dd2-2923fb1cacb5",
 			},
 			inheritanceRoot = "FRU_megaminx_indicator",
 			objectType = "folder",
@@ -1112,6 +1122,17 @@ local tbl =
 			{
 				enabled = false,
 			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\fru",
+				uuid = "168a8f49-c91b-3e15-b424-557fc39b4419",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\fru",
+			objectType = "folder",
 		},
 		
 		{
@@ -1203,7 +1224,7 @@ local tbl =
 				uuid = "b0c76152-9c39-ee47-94fd-404cc81c7256",
 				version = 2,
 			},
-			inheritedIndex = 27,
+			inheritedIndex = 26,
 		},
 		
 		{
@@ -1232,7 +1253,7 @@ local tbl =
 				uuid = "10a008fa-c7d3-95d1-b36b-5178829c0108",
 				version = 2,
 			},
-			inheritedIndex = 28,
+			inheritedIndex = 27,
 		},
 	},
 	[10] = 
@@ -1327,19 +1348,8 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "69232694-b0fe-5838-3355-5a766bc383a4",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "FRU_megaminx_indicator",
-				uuid = "5b9f5ac1-86ac-ccdd-f280-d96b8d0886d1",
+				uuid = "3e8e8176-0b23-dae2-c351-f380962bc126",
 			},
 			inheritanceRoot = "FRU_megaminx_indicator",
 			objectType = "folder",
@@ -1357,6 +1367,17 @@ local tbl =
 			{
 				enabled = false,
 			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\fru",
+				uuid = "69232694-b0fe-5838-3355-5a766bc383a4",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\fru",
+			objectType = "folder",
 		},
 		
 		{
@@ -1514,19 +1535,8 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "a2268e7e-931b-68e2-085e-262cc292dece",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "FRU_megaminx_indicator",
-				uuid = "d030d823-5e76-d3ff-14a2-ab696898c533",
+				uuid = "0b3324c4-56d2-f150-e0a9-2892565b05f4",
 			},
 			inheritanceRoot = "FRU_megaminx_indicator",
 			objectType = "folder",
@@ -1544,6 +1554,17 @@ local tbl =
 			{
 				enabled = false,
 			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\fru",
+				uuid = "a2268e7e-931b-68e2-085e-262cc292dece",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\fru",
+			objectType = "folder",
 		},
 		
 		{
@@ -1783,7 +1804,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "FRU_megaminx_indicator",
-				uuid = "bf751a5d-22d7-0d41-ae36-86a7f5f31ead",
+				uuid = "ced6bc3a-e34f-245e-23d4-579ce28b1baa",
 			},
 			inheritanceRoot = "FRU_megaminx_indicator",
 			objectType = "folder",
@@ -1950,6 +1971,31 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "FRU_megaminx_indicator",
+				uuid = "f7361e48-01a0-3b2c-4df1-334ecb3f09b8",
+			},
+			inheritanceRoot = "FRU_megaminx_indicator",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "get safe side",
+				uuid = "df39ded0-16d8-64b8-8579-e9224cb41109",
+				version = 2,
+			},
+			inheritedObjectUUID = "a50f1e2d-979a-5e32-a2d5-394200988ad3",
+			inheritedOverwrites = 
+			{
+				displayPath = "FRU_megaminx_indicator",
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "store\\anyone\\fru\\fru",
 				uuid = "3ab09a62-fa91-5cfe-d9b1-74f0f37d8bf2",
 			},
@@ -1969,31 +2015,6 @@ local tbl =
 			{
 				displayPath = "store\\anyone\\fru\\fru/anyone\\fru\\modules\\draws",
 				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "FRU_megaminx_indicator",
-				uuid = "973f217f-9768-8aa3-ee00-2f65167dec4f",
-			},
-			inheritanceRoot = "FRU_megaminx_indicator",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "get safe side",
-				uuid = "df39ded0-16d8-64b8-8579-e9224cb41109",
-				version = 2,
-			},
-			inheritedObjectUUID = "a50f1e2d-979a-5e32-a2d5-394200988ad3",
-			inheritedOverwrites = 
-			{
-				displayPath = "FRU_megaminx_indicator",
 			},
 		},
 		
@@ -2065,19 +2086,8 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "614a91e9-41a2-bf3d-7cd5-692b2cc412f9",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "FRU_megaminx_indicator",
-				uuid = "e15793e8-aa6a-2664-7f00-10d21ba15ef8",
+				uuid = "f163f1df-6444-fcbb-8176-6f2952b9b70f",
 			},
 			inheritanceRoot = "FRU_megaminx_indicator",
 			objectType = "folder",
@@ -2095,6 +2105,17 @@ local tbl =
 			{
 				enabled = false,
 			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\fru",
+				uuid = "614a91e9-41a2-bf3d-7cd5-692b2cc412f9",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\fru",
+			objectType = "folder",
 		},
 		
 		{
@@ -2205,6 +2226,31 @@ local tbl =
 	},
 	[22] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "FRU_megaminx_indicator",
+				uuid = "09529db0-b29c-177c-a8f6-e82a566b69e0",
+			},
+			inheritanceRoot = "FRU_megaminx_indicator",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "four tether indicator",
+				uuid = "af86cb6d-4c28-ea32-8f4d-99e7f656f02d",
+				version = 2,
+			},
+			inheritedObjectUUID = "dc060828-4b32-5cb6-82e2-3df85d14f88d",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
 		
 		{
 			data = 
@@ -2323,31 +2369,6 @@ local tbl =
 				version = 2,
 			},
 			inheritedObjectUUID = "3f865067-2227-65d4-9a02-84f6c4aa251f",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "FRU_megaminx_indicator",
-				uuid = "57eb262b-8f30-69e7-73f6-b23d59b32a3b",
-			},
-			inheritanceRoot = "FRU_megaminx_indicator",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "four tether indicator",
-				uuid = "af86cb6d-4c28-ea32-8f4d-99e7f656f02d",
-				version = 2,
-			},
-			inheritedObjectUUID = "dc060828-4b32-5cb6-82e2-3df85d14f88d",
 			inheritedOverwrites = 
 			{
 				enabled = false,
@@ -3563,19 +3584,8 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "90869c05-0ec9-3559-fd45-1e4fcfa33595",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "FRU_megaminx_indicator",
-				uuid = "aa18f1fc-17e7-3358-d8ad-e11e6452678c",
+				uuid = "dc81567f-606e-4bab-57ee-a589799ceb2f",
 			},
 			inheritanceRoot = "FRU_megaminx_indicator",
 			objectType = "folder",
@@ -3593,6 +3603,17 @@ local tbl =
 			{
 				enabled = false,
 			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\fru",
+				uuid = "90869c05-0ec9-3559-fd45-1e4fcfa33595",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\fru",
+			objectType = "folder",
 		},
 		
 		{
@@ -4545,33 +4566,8 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "31c44ba3-bfa0-9fc7-bce3-78259ac349f3",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "[Draw] Echo DD",
-				uuid = "fddc0885-4e93-a9c1-a4d2-5ae2c5ad77f3",
-				version = 2,
-			},
-			inheritedObjectUUID = "e5bf26cb-6d89-052c-9f8f-833c4311c96e",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "FRU_megaminx_indicator",
-				uuid = "909bb23a-47e2-0466-e4cf-391c5e27164a",
+				uuid = "fdb0245d-359b-e179-ed3b-a527ae874e8d",
 			},
 			inheritanceRoot = "FRU_megaminx_indicator",
 			objectType = "folder",
@@ -4627,6 +4623,31 @@ local tbl =
 				version = 2,
 			},
 			inheritedObjectUUID = "922f001e-6d09-c617-807a-ad3b84a49de5",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\fru",
+				uuid = "31c44ba3-bfa0-9fc7-bce3-78259ac349f3",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\fru",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "[Draw] Echo DD",
+				uuid = "fddc0885-4e93-a9c1-a4d2-5ae2c5ad77f3",
+				version = 2,
+			},
+			inheritedObjectUUID = "e5bf26cb-6d89-052c-9f8f-833c4311c96e",
 			inheritedOverwrites = 
 			{
 				enabled = false,
@@ -11494,6 +11515,59 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "FRU_megaminx_indicator",
+				uuid = "08bb897d-1b01-29f1-449e-e12bb246aced",
+			},
+			inheritanceRoot = "FRU_megaminx_indicator",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "get apoc pos",
+				uuid = "1d944924-f9d1-ac27-92b3-76941736631c",
+				version = 2,
+			},
+			inheritedObjectUUID = "4847aa4b-9461-39af-ab85-eff785f4653e",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
+				name = "apoc safe indicator",
+				uuid = "4bf50736-cdbe-d4a8-a06c-efbd429f9bce",
+				version = 2,
+			},
+			inheritedObjectUUID = "fdec6b95-969d-6985-8f45-c016dc969e07",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
+				name = "flex solver",
+				uuid = "bf4aff67-52c3-d4f3-aed1-bdc70ea4d6e1",
+				version = 2,
+			},
+			inheritedObjectUUID = "45fe4575-5bca-f5dc-b510-904223c446aa",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "store\\anyone\\fru\\fru",
 				uuid = "eb8cec99-1789-d305-fa13-ceb73330d4e9",
 			},
@@ -11537,59 +11611,6 @@ local tbl =
 				version = 2,
 			},
 			inheritedObjectUUID = "a172d363-9c09-2bb7-b83d-23ce828fa61a",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "FRU_megaminx_indicator",
-				uuid = "97d71a98-00a0-80fc-2c76-d3163ab70ee8",
-			},
-			inheritanceRoot = "FRU_megaminx_indicator",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "get apoc pos",
-				uuid = "1d944924-f9d1-ac27-92b3-76941736631c",
-				version = 2,
-			},
-			inheritedObjectUUID = "4847aa4b-9461-39af-ab85-eff785f4653e",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "apoc safe indicator",
-				uuid = "4bf50736-cdbe-d4a8-a06c-efbd429f9bce",
-				version = 2,
-			},
-			inheritedObjectUUID = "fdec6b95-969d-6985-8f45-c016dc969e07",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "flex solver",
-				uuid = "bf4aff67-52c3-d4f3-aed1-bdc70ea4d6e1",
-				version = 2,
-			},
-			inheritedObjectUUID = "45fe4575-5bca-f5dc-b510-904223c446aa",
 			inheritedOverwrites = 
 			{
 				enabled = false,
@@ -13207,6 +13228,31 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "FRU_megaminx_indicator",
+				uuid = "5826a72a-52d0-066e-3d63-3bd816e9365a",
+			},
+			inheritanceRoot = "FRU_megaminx_indicator",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "where boss is",
+				uuid = "6dc4478b-e3f6-ff15-ba69-2be152d12a96",
+				version = 2,
+			},
+			inheritedObjectUUID = "737c0ca0-c00a-d164-aead-aa89e28a97ce",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "store\\anyone\\fru\\fru",
 				uuid = "5c871cf6-b565-70d2-5225-3bfc6eab4446",
 			},
@@ -13236,31 +13282,6 @@ local tbl =
 				version = 2,
 			},
 			inheritedObjectUUID = "0bbf7c7c-4db3-f254-af03-d8d60d88e4a8",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "FRU_megaminx_indicator",
-				uuid = "139a9feb-3ecb-5f2f-519b-8db9b521523b",
-			},
-			inheritanceRoot = "FRU_megaminx_indicator",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "where boss is",
-				uuid = "6dc4478b-e3f6-ff15-ba69-2be152d12a96",
-				version = 2,
-			},
-			inheritedObjectUUID = "737c0ca0-c00a-d164-aead-aa89e28a97ce",
 			inheritedOverwrites = 
 			{
 				enabled = false,
@@ -14604,7 +14625,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "FRU_megaminx_indicator",
-				uuid = "42a79d7d-5aa9-37c9-718b-79df7d94d98d",
+				uuid = "5deb0698-d637-30a4-9a2d-20229e7116c8",
 			},
 			inheritanceRoot = "FRU_megaminx_indicator",
 			objectType = "folder",
@@ -17919,19 +17940,8 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "bbc59d8b-f566-0357-2dfc-b6bd4cac3edb",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "FRU_megaminx_indicator",
-				uuid = "d00577b2-9c16-1536-6a43-a9e437fc78c2",
+				uuid = "c589c417-e333-a1db-6d3a-8b21ca3df987",
 			},
 			inheritanceRoot = "FRU_megaminx_indicator",
 			objectType = "folder",
@@ -17963,6 +17973,17 @@ local tbl =
 			{
 				enabled = false,
 			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\fru",
+				uuid = "bbc59d8b-f566-0357-2dfc-b6bd4cac3edb",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\fru",
+			objectType = "folder",
 		},
 		
 		{
@@ -19421,19 +19442,8 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "08ebdb7e-f0bb-3eca-c002-23d0d24c960e",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "FRU_megaminx_indicator",
-				uuid = "97cf6d23-a351-ef77-fa06-66457fbfde73",
+				uuid = "9ed353a2-748c-bca6-ab62-8ee4da68a512",
 			},
 			inheritanceRoot = "FRU_megaminx_indicator",
 			objectType = "folder",
@@ -19493,6 +19503,17 @@ local tbl =
 			{
 				enabled = false,
 			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\fru",
+				uuid = "08ebdb7e-f0bb-3eca-c002-23d0d24c960e",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\fru",
+			objectType = "folder",
 		},
 		
 		{
@@ -20926,6 +20947,45 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "FRU_megaminx_indicator",
+				uuid = "9fbee33c-274f-c408-a2fc-19de88a371ec",
+			},
+			inheritanceRoot = "FRU_megaminx_indicator",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "Draw Exasquares",
+				uuid = "aa3724e4-f283-db62-a1d4-a2806a8b39bd",
+				version = 2,
+			},
+			inheritedObjectUUID = "afb07684-cdb0-e2f9-ab7c-916c59fa1215",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
+				name = "Draw Exasquares3",
+				uuid = "acde0298-fdd6-3f04-a533-c8c530c811b0",
+				version = 2,
+			},
+			inheritedObjectUUID = "cb4c2f58-5a95-c7ad-88be-fd77a6e4e5ca",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "store\\anyone\\fru\\fru",
 				uuid = "26d178dc-d12c-f730-d171-3606d3864bac",
 			},
@@ -20969,45 +21029,6 @@ local tbl =
 				version = 2,
 			},
 			inheritedObjectUUID = "231023f0-79b9-7670-a7fe-423456a3369b",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "FRU_megaminx_indicator",
-				uuid = "9d172a99-31e2-dba5-a26c-33fbd4f90ce9",
-			},
-			inheritanceRoot = "FRU_megaminx_indicator",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "Draw Exasquares",
-				uuid = "aa3724e4-f283-db62-a1d4-a2806a8b39bd",
-				version = 2,
-			},
-			inheritedObjectUUID = "afb07684-cdb0-e2f9-ab7c-916c59fa1215",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "Draw Exasquares3",
-				uuid = "acde0298-fdd6-3f04-a533-c8c530c811b0",
-				version = 2,
-			},
-			inheritedObjectUUID = "cb4c2f58-5a95-c7ad-88be-fd77a6e4e5ca",
 			inheritedOverwrites = 
 			{
 				enabled = false,
@@ -22070,19 +22091,8 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "f385d6c8-55d1-a4bc-0cda-5882d26eead8",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "FRU_megaminx_indicator",
-				uuid = "8d68146d-0a5e-2579-6246-2e1fe1e4387d",
+				uuid = "aa2215ec-5111-aa68-e53a-6f7e249aff1c",
 			},
 			inheritanceRoot = "FRU_megaminx_indicator",
 			objectType = "folder",
@@ -22142,6 +22152,17 @@ local tbl =
 			{
 				enabled = false,
 			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\fru",
+				uuid = "f385d6c8-55d1-a4bc-0cda-5882d26eead8",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\fru",
+			objectType = "folder",
 		},
 		
 		{
@@ -22954,34 +22975,6 @@ local tbl =
 			},
 			inheritanceRoot = "FRU_megaminx_indicator",
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "Draw Exasquares",
-				uuid = "b8ecdca7-d9ca-31cd-991a-de122694c202",
-				version = 2,
-			},
-			inheritedObjectUUID = "73a47124-ba3d-3698-9058-c1844957ef21",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "Draw Exasquares3",
-				uuid = "92a3bbe5-3320-b726-9901-4f5f9ad0ecd3",
-				version = 2,
-			},
-			inheritedObjectUUID = "4fb088dc-4fb9-fa75-b1ab-0ff5bb9cdca4",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
 		},
 		
 		{
@@ -24180,8 +24173,9 @@ local tbl =
 	},
 	inheritedProfiles = 
 	{
-		"FRU_megaminx_indicator",
 		"store\\anyone\\fru\\fru",
+		"FRU\\lpdu mits",
+		"FRU_megaminx_indicator",
 	},
 	timelineName = "fru",
 	version = "1.0.5",
