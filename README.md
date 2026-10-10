@@ -23,6 +23,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Expanded the tank GUI with Halo, Apocalypse bait, P4 far bait and tank plan, and P5 invuln order. Guidance, cones and provoke reminders follow the selections; P4 bait and first P5 invuln use different tanks. Renamed five CT reactions at 802 to [LPDU]. (10-10-2026)
+
 - Delayed P5 healer stack circles until 60% of the cast, kept P4 tanks out of healer-stack guidance, and moved the CT tank-front arrow to the rewind return. (10-10-2026)
 
 - Added MT guidance to A at P2 start and a personal Diamond Dust floor rotation path, including the LPDU Group 2 counterclockwise exception. Shortened P3-to-P4 marker 1 guidance by another half second. (10-10-2026)

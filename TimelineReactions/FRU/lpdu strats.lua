@@ -6,20 +6,6 @@ local tbl =
 		{
 			data = 
 			{
-				name = "protean indicator",
-				uuid = "b64f1684-8b35-71fa-9f7d-4b7d02dec4de",
-				version = 2,
-			},
-			inheritedObjectUUID = "f45a930e-0988-0934-99bf-6b0ce8133215",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
 				displayPath = "",
 				name = "store\\anyone\\fru\\fru",
 				uuid = "0c5acf11-036b-0b6d-4ed2-ccb7e16bc6a1",
@@ -190,38 +176,6 @@ local tbl =
 				uuid = "24790ed0-e847-40fd-baca-d66120d083e3",
 			},
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Alert",
-							alertDuration = 3000,
-							alertText = "[LPDU] AnyoneCore phys/ranged/melee/caster mitigation overrides active",
-							endIfUsed = true,
-							name = "[LPDU] mitigation overrides active",
-							uuid = "fa258a19-b48f-f082-8406-29e214708ef3",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-				},
-				displayPath = "LPDU Mitigation",
-				enabled = false,
-				mechanicTime = 13.7,
-				name = "[LPDU] Disable AnyoneCore DPS mitigation (tanks active)",
-				timelineIndex = 1,
-				uuid = "4a202c4d-cd1d-d146-9f60-4b86982a5031",
-				version = 2,
-			},
 		},
 		
 		{
@@ -1077,34 +1031,6 @@ local tbl =
 		{
 			data = 
 			{
-				name = "store mech",
-				uuid = "3ae3948b-3090-fdc3-a177-df40f8d1afdf",
-				version = 2,
-			},
-			inheritedObjectUUID = "f0c991ef-a66e-d028-8c20-925f77319880",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "clock spot indicator",
-				uuid = "7c419567-f4aa-5665-aac8-7f99d66d96ab",
-				version = 2,
-			},
-			inheritedObjectUUID = "f0313e65-1111-44e9-91c8-4d48c76c5e95",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
 				displayPath = "",
 				name = "store\\anyone\\fru\\fru",
 				uuid = "168a8f49-c91b-3e15-b424-557fc39b4419",
@@ -1202,7 +1128,7 @@ local tbl =
 				uuid = "b0c76152-9c39-ee47-94fd-404cc81c7256",
 				version = 2,
 			},
-			inheritedIndex = 26,
+			inheritedIndex = 24,
 		},
 		
 		{
@@ -1231,7 +1157,7 @@ local tbl =
 				uuid = "10a008fa-c7d3-95d1-b36b-5178829c0108",
 				version = 2,
 			},
-			inheritedIndex = 27,
+			inheritedIndex = 25,
 		},
 	},
 	[10] = 
@@ -1321,20 +1247,6 @@ local tbl =
 	},
 	[11] = 
 	{
-		
-		{
-			data = 
-			{
-				name = "safe zone indicator",
-				uuid = "08cb72e9-cfa2-56aa-ac24-5cbe9d8955ca",
-				version = 2,
-			},
-			inheritedObjectUUID = "dfbef113-e9dd-8c74-9a61-9dede7a364bd",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
 		
 		{
 			data = 
@@ -1436,7 +1348,7 @@ local tbl =
 				uuid = "34831afe-ca25-1810-8b7e-cb329920c8ae",
 				version = 2,
 			},
-			inheritedIndex = 25,
+			inheritedIndex = 24,
 		},
 	},
 	[12] = 
@@ -1497,20 +1409,6 @@ local tbl =
 	},
 	[13] = 
 	{
-		
-		{
-			data = 
-			{
-				name = "get safe element",
-				uuid = "66a1e688-3369-3527-8773-9314f46fc5c3",
-				version = 2,
-			},
-			inheritedObjectUUID = "843629ab-9159-a266-bd7d-1c0a462f6728",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
 		
 		{
 			data = 
@@ -1602,6 +1500,88 @@ local tbl =
 							{
 								
 								{
+									"aed91cef-5884-7308-bc52-84f06bdc70da",
+									true,
+								},
+							},
+							uuid = "1c2ef3aa-ab48-6287-a6ac-61e8360eb9d6",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "if data.megaminx_p1stackflex == nil then data.megaminx_p1stackflex = 0 end\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"7906cd03-812d-2f65-8595-a836fe5ea459",
+									true,
+								},
+							},
+							uuid = "2ddc3f6b-845d-1175-b424-1b8472f38a66",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							eventArgType = 2,
+							eventSpellID = 40150,
+							name = "lightning safe",
+							uuid = "aed91cef-5884-7308-bc52-84f06bdc70da",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							eventArgType = 2,
+							eventSpellID = 40151,
+							name = "fire safe",
+							uuid = "7906cd03-812d-2f65-8595-a836fe5ea459",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				mechanicTime = 56.2,
+				name = "FRU Burnt Strike protean dodge [LPDU]",
+				timeRange = true,
+				timelineIndex = 13,
+				timerEndOffset = 5,
+				timerStartOffset = -5,
+				uuid = "bc46cac8-745f-1f5b-9bc1-44a7062d6773",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "if data.megaminx_p1stackflex == nil then data.megaminx_p1stackflex = 1 end\nself.used = true",
+							conditions = 
+							{
+								
+								{
 									"a61a5256-0141-a1e7-94e6-a7a1a6072918",
 									true,
 								},
@@ -1669,105 +1649,9 @@ local tbl =
 			},
 			inheritedIndex = 10,
 		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "if data.megaminx_p1stackflex == nil then data.megaminx_p1stackflex = 1 end\nself.used = true",
-							conditions = 
-							{
-								
-								{
-									"aed91cef-5884-7308-bc52-84f06bdc70da",
-									true,
-								},
-							},
-							uuid = "1c2ef3aa-ab48-6287-a6ac-61e8360eb9d6",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "if data.megaminx_p1stackflex == nil then data.megaminx_p1stackflex = 0 end\nself.used = true",
-							conditions = 
-							{
-								
-								{
-									"7906cd03-812d-2f65-8595-a836fe5ea459",
-									true,
-								},
-							},
-							uuid = "2ddc3f6b-845d-1175-b424-1b8472f38a66",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Event",
-							eventArgType = 2,
-							eventSpellID = 40150,
-							name = "lightning safe",
-							uuid = "aed91cef-5884-7308-bc52-84f06bdc70da",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Event",
-							eventArgType = 2,
-							eventSpellID = 40151,
-							name = "fire safe",
-							uuid = "7906cd03-812d-2f65-8595-a836fe5ea459",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "LPDU",
-				eventType = 3,
-				mechanicTime = 56.2,
-				name = "FRU Burnt Strike protean dodge [LPDU]",
-				timeRange = true,
-				timelineIndex = 13,
-				timerEndOffset = 5,
-				timerStartOffset = -5,
-				uuid = "bc46cac8-745f-1f5b-9bc1-44a7062d6773",
-				version = 2,
-			},
-		},
 	},
 	[15] = 
 	{
-		
-		{
-			data = 
-			{
-				name = "protean indicator",
-				uuid = "d09e05d1-9285-4fbc-96ae-10cc4b701cfb",
-				version = 2,
-			},
-			inheritedObjectUUID = "402398f1-1ba5-5582-b5aa-f373d78517f4",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
 		
 		{
 			data = 
@@ -1892,7 +1776,7 @@ local tbl =
 				uuid = "9191b095-a2f2-5f05-9d3e-6b7b2f287882",
 				version = 2,
 			},
-			inheritedIndex = 4,
+			inheritedIndex = 3,
 		},
 	},
 	[16] = 
@@ -1911,21 +1795,6 @@ local tbl =
 	},
 	[17] = 
 	{
-		
-		{
-			data = 
-			{
-				name = "get safe side",
-				uuid = "df39ded0-16d8-64b8-8579-e9224cb41109",
-				version = 2,
-			},
-			inheritedObjectUUID = "a50f1e2d-979a-5e32-a2d5-394200988ad3",
-			inheritedOverwrites = 
-			{
-				displayPath = "FRU_megaminx_indicator",
-				enabled = false,
-			},
-		},
 		
 		{
 			data = 
@@ -2072,20 +1941,6 @@ local tbl =
 		{
 			data = 
 			{
-				name = "stack indicator",
-				uuid = "23262831-1276-06ad-a2f9-08285b0d1f17",
-				version = 2,
-			},
-			inheritedObjectUUID = "c714f104-03b6-c5d8-bf86-810275fff01a",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
 				displayPath = "",
 				name = "store\\anyone\\fru\\fru",
 				uuid = "614a91e9-41a2-bf3d-7cd5-692b2cc412f9",
@@ -2202,20 +2057,6 @@ local tbl =
 	},
 	[22] = 
 	{
-		
-		{
-			data = 
-			{
-				name = "four tether indicator",
-				uuid = "af86cb6d-4c28-ea32-8f4d-99e7f656f02d",
-				version = 2,
-			},
-			inheritedObjectUUID = "dc060828-4b32-5cb6-82e2-3df85d14f88d",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
 		
 		{
 			data = 
@@ -4555,62 +4396,6 @@ local tbl =
 	},
 	[45] = 
 	{
-		
-		{
-			data = 
-			{
-				name = "get marked player",
-				uuid = "8397dac0-83e0-7d9a-bfb7-8aea954b3d83",
-				version = 2,
-			},
-			inheritedObjectUUID = "1102ae37-b37c-9cda-b74d-ac98ad9d15df",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "get iciles",
-				uuid = "843fca5a-3663-ecc8-b481-48bb12952695",
-				version = 2,
-			},
-			inheritedObjectUUID = "862dc634-93cc-4d5d-b3fe-521dd4eb0174",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "get in/out",
-				uuid = "6264b26f-d45a-b4f1-80aa-3da9188766b6",
-				version = 2,
-			},
-			inheritedObjectUUID = "940cefba-95d0-66e2-8bf7-f7fe3e58b6e9",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "DD indicator edi",
-				uuid = "e636ab20-ed16-e703-a0fe-f96b884544af",
-				version = 2,
-			},
-			inheritedObjectUUID = "922f001e-6d09-c617-807a-ad3b84a49de5",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
 		
 		{
 			data = 
@@ -9691,34 +9476,6 @@ local tbl =
 		{
 			data = 
 			{
-				name = "get tethers",
-				uuid = "b305d5b6-a7ec-7c6b-8c4f-232353ae193d",
-				version = 2,
-			},
-			inheritedObjectUUID = "086828bb-51a3-b592-99e6-4f6128608cb9",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "UR indicator",
-				uuid = "b66afaff-17ea-ced5-a3f7-759c3af546d3",
-				version = 2,
-			},
-			inheritedObjectUUID = "843724fc-50d9-81b0-a58a-8ac5764aba1c",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
 				displayPath = "",
 				name = "LPDU",
 				uuid = "136698d7-510d-0e25-b552-edb1606c7d29",
@@ -11495,6 +11252,49 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "79ef3d3b-cb37-0b5b-b525-fffdc5127d36",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster\nif r.current()==nil then return end\nlocal slot=r.mySlot()\nlocal tank=(Settings.FFXIVMINION.LPDU_FRU_HaloTank or \"MT\")==\"MT\" and \"T1\" or \"T2\"\nif slot==tank then AnyoneCore.Shotcall(\"Take Halo - prepare tankbuster\",true,4,false) end\nself.used=true",
+							name = "Selected Halo tank reminder",
+							uuid = "22fc2bd0-2c9e-0f6d-b055-b05c5a32e843",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU",
+				mechanicTime = 595.4,
+				name = "[LPDU] P3 Black Halo - Selected Tank Reminder",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 140,
+				timerEndOffset = -5,
+				timerStartOffset = -8,
+				uuid = "855609a6-a390-d218-8d14-9b1726c963d2",
+				version = 2,
+			},
+		},
 	},
 	[141] = 
 	{
@@ -11558,48 +11358,6 @@ local tbl =
 	},
 	[144] = 
 	{
-		
-		{
-			data = 
-			{
-				name = "get apoc pos",
-				uuid = "1d944924-f9d1-ac27-92b3-76941736631c",
-				version = 2,
-			},
-			inheritedObjectUUID = "4847aa4b-9461-39af-ab85-eff785f4653e",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "apoc safe indicator",
-				uuid = "4bf50736-cdbe-d4a8-a06c-efbd429f9bce",
-				version = 2,
-			},
-			inheritedObjectUUID = "fdec6b95-969d-6985-8f45-c016dc969e07",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "flex solver",
-				uuid = "bf4aff67-52c3-d4f3-aed1-bdc70ea4d6e1",
-				version = 2,
-			},
-			inheritedObjectUUID = "45fe4575-5bca-f5dc-b510-904223c446aa",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
 		
 		{
 			data = 
@@ -12143,7 +11901,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_apoc_movement;local assignment=data.lpdu_p3_apoc_assignment\nif s==nil then return end\nif s.clear==nil then\n function s.clear() for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={} end\n function s.draw(angle,dist,seconds,text,bx,bz)\n  s.clear();local x=(bx or 100)+math.sin(angle)*dist;local z=(bz or 100)+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.angle(side)\n  local a=s.first-s.rotation\n  a=(a+math.pi)%(2*math.pi)-math.pi\n  local forDPS=a>=-.1 and a<math.pi-.1\n  if forDPS~=(side==\"dps\") then a=a+math.pi end\n  return a\n end\nend\nif s.midTaken then self.used=true;return end\nlocal hit=false;for _,id in ipairs(eventArgs.hitTargets) do if id==p.id then hit=true end end\nif not hit and slot~=\"T2\" then self.used=true;return end\nif assignment==nil or s.first==nil then return end\ns.midTaken=true;s.side=assignment.side[slot];s.mid=s.angle(s.side);s.final=s.mid-s.rotation\nif slot==\"T2\" then s.draw(s.final,19,2.6,\"Bait farthest now - move out\")\nelse s.draw(s.final,3.5,2.6,\"Stay near middle - clear the tank bait\") end\nself.used=true",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal bait=(Settings.FFXIVMINION.LPDU_FRU_ApocBait or \"OT\")==\"MT\" and \"T1\" or \"T2\"\nlocal slot=r.mySlot();local s=data.lpdu_apoc_movement;local assignment=data.lpdu_p3_apoc_assignment\nif s==nil then return end\nif s.clear==nil then\n function s.clear() for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={} end\n function s.draw(angle,dist,seconds,text,bx,bz)\n  s.clear();local x=(bx or 100)+math.sin(angle)*dist;local z=(bz or 100)+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.angle(side)\n  local a=s.first-s.rotation\n  a=(a+math.pi)%(2*math.pi)-math.pi\n  local forDPS=a>=-.1 and a<math.pi-.1\n  if forDPS~=(side==\"dps\") then a=a+math.pi end\n  return a\n end\nend\nif s.midTaken then self.used=true;return end\nlocal hit=false;for _,id in ipairs(eventArgs.hitTargets) do if id==p.id then hit=true end end\nif not hit and slot~=bait then self.used=true;return end\nif assignment==nil or s.first==nil then return end\ns.midTaken=true;s.side=assignment.side[slot];s.mid=s.angle(s.side);s.final=s.mid-s.rotation\nif slot==bait then s.draw(s.final,19,2.6,\"Bait farthest now - move out\")\nelse s.draw(s.final,3.5,2.6,\"Stay near middle - clear the tank bait\") end\nself.used=true",
 							conditions = 
 							{
 								
@@ -13264,20 +13022,6 @@ local tbl =
 		{
 			data = 
 			{
-				name = "where boss is",
-				uuid = "6dc4478b-e3f6-ff15-ba69-2be152d12a96",
-				version = 2,
-			},
-			inheritedObjectUUID = "737c0ca0-c00a-d164-aead-aa89e28a97ce",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
 				displayPath = "",
 				name = "store\\anyone\\fru\\fru",
 				uuid = "5c871cf6-b565-70d2-5225-3bfc6eab4446",
@@ -14357,7 +14101,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local roster=AnyoneCore.Roster\nif roster.current()==nil then return end\nlocal role=roster.mySlot()\nif role~=\"T1\" and role~=\"T2\" then self.used=true;return end\nlocal settings=Settings.FFXIVMINION\nlocal choice=settings.LPDU_FRU_DarklitTank or \"OT invulns\"\nif data.lpdu_darklit_tank_options==nil then data.lpdu_darklit_tank_options={\"MT invulns\",\"OT invulns\",\"Tank swap\"} end\nlocal options=data.lpdu_darklit_tank_options\nlocal index=choice==\"MT invulns\" and 1 or choice==\"Tank swap\" and 3 or 2\nlocal visible=GUI:Begin(\"[LPDU] FRU - Tank Settings\",true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n GUI:Text(\"P4 Darklit tank baits\")\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Invuln: selected tank takes far, then close. Tank swap: OT takes far, MT takes close. Both tanks should select the same plan.\") end\n GUI:SameLine(170);GUI:PushItemWidth(145)\n local newIndex=GUI:Combo(\"##LPDUFRUDarklitTank\",index,options)\n if newIndex~=index and options[newIndex]~=nil then settings.LPDU_FRU_DarklitTank=options[newIndex];choice=options[newIndex] end\n GUI:PopItemWidth()\n if choice==\"Tank swap\" then GUI:Text(\"OT far first / MT close second\")\n else GUI:Text(choice..\": far first / close second\") end\nend\nGUI:End();self.used=true",
+							actionLua = "local roster=AnyoneCore.Roster\nif roster.current()==nil then return end\nlocal role=roster.mySlot()\nif role~=\"T1\" and role~=\"T2\" then self.used=true;return end\nlocal settings=Settings.FFXIVMINION\nlocal mode=settings.LPDU_FRU_DarklitTank or \"OT invulns\"\nlocal bait=settings.LPDU_FRU_P4Bait or (mode==\"MT invulns\" and \"MT\" or \"OT\")\nlocal function tankChoice(label,key,default)\n local value=settings[key] or default\n GUI:Text(label);GUI:SameLine(190);GUI:PushItemWidth(150)\n local i=GUI:Combo(\"##\"..key,value==\"MT\" and 1 or 2,{\"MT\",\"OT\"})\n GUI:PopItemWidth()\n local chosen=i==1 and \"MT\" or \"OT\"\n settings[key]=chosen;return chosen\nend\nlocal visible=GUI:Begin(\"[LPDU] FRU - Tank Settings\",true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n tankChoice(\"P3 Halo tank\",\"LPDU_FRU_HaloTank\",\"MT\")\n tankChoice(\"P3 Apoc bait\",\"LPDU_FRU_ApocBait\",\"OT\")\n bait=tankChoice(\"P4 far bait\",\"LPDU_FRU_P4Bait\",bait)\n GUI:Text(\"P4 tank plan\");GUI:SameLine(190);GUI:PushItemWidth(150)\n local plan=GUI:Combo(\"##LPDUFRUP4Plan\",mode==\"Tank swap\" and 2 or 1,{\"Invuln both hits\",\"Tank swap\"})\n GUI:PopItemWidth()\n settings.LPDU_FRU_DarklitTank=plan==2 and \"Tank swap\" or bait..\" invulns\"\n GUI:Text(plan==2 and (bait..\" far / other tank close\") or (bait..\" takes both hits\"))\n local first=bait==\"MT\" and \"OT\" or \"MT\"\n settings.LPDU_FRU_P5FirstInvuln=first\n local selected=tankChoice(\"P5 first invuln\",\"LPDU_FRU_P5FirstInvuln\",first)\n if selected~=first then\n  first=selected;bait=selected==\"MT\" and \"OT\" or \"MT\"\n  settings.LPDU_FRU_P4Bait=bait\n  settings.LPDU_FRU_DarklitTank=plan==2 and \"Tank swap\" or bait..\" invulns\"\n end\n GUI:Text(\"P5: \"..first..\" first / \"..bait..\" second\")\n GUI:Text(\"P5 choice adjusts P4 bait to the other tank.\")\n GUI:Text(\"Both tanks must use the same settings.\")\nend\nGUI:End();self.used=true",
 							name = "Tank Assignment Settings",
 							uuid = "b30d107e-8913-ca60-a4fb-363ee2bb14c3",
 							version = 2.1,
@@ -14391,7 +14135,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local roster=AnyoneCore.Roster\nif roster.current()==nil then return end\nlocal role=roster.mySlot()\nif role~=\"T1\" and role~=\"T2\" then self.used=true;return end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif e==nil then return end\nlocal mode=Settings.FFXIVMINION.LPDU_FRU_DarklitTank or \"OT invulns\"\ndata.lpdu_darklit_tank={mode=mode,boss=eventArgs.entityID,origin={x=e.pos.x,y=e.pos.y,z=e.pos.z},first=mode==\"MT invulns\" and \"T1\" or \"T2\",second=mode==\"OT invulns\" and \"T2\" or \"T1\"}\nself.used=true",
+							actionLua = "local roster=AnyoneCore.Roster\nif roster.current()==nil then return end\nlocal role=roster.mySlot()\nif role~=\"T1\" and role~=\"T2\" then self.used=true;return end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif e==nil then return end\nlocal mode=Settings.FFXIVMINION.LPDU_FRU_DarklitTank or \"OT invulns\"\nlocal bait=Settings.FFXIVMINION.LPDU_FRU_P4Bait or (mode==\"MT invulns\" and \"MT\" or \"OT\")\nlocal first=bait==\"MT\" and \"T1\" or \"T2\"\nlocal second=mode==\"Tank swap\" and (first==\"T1\" and \"T2\" or \"T1\") or first\ndata.lpdu_darklit_tank={mode=mode,boss=eventArgs.entityID,origin={x=e.pos.x,y=e.pos.y,z=e.pos.z},first=first,second=second}\nself.used=true",
 							conditions = 
 							{
 								
@@ -16757,7 +16501,7 @@ local tbl =
 				eventType = 3,
 				loop = true,
 				mechanicTime = 802.8,
-				name = "crystallize indicator [AnyoneCore]",
+				name = "crystallize indicator [LPDU]",
 				timeRange = true,
 				timelineIndex = 180,
 				timerEndOffset = 100,
@@ -16966,7 +16710,7 @@ local tbl =
 				displayPath = "FRU_megaminx_indicator",
 				enabled = false,
 				mechanicTime = 802.8,
-				name = "check buffs [AnyoneCore]",
+				name = "check buffs [LPDU]",
 				timeRange = true,
 				timelineIndex = 180,
 				timerEndOffset = 100,
@@ -17017,7 +16761,7 @@ local tbl =
 				eventType = 15,
 				loop = true,
 				mechanicTime = 802.8,
-				name = "get tethers [AnyoneCore]",
+				name = "get tethers [LPDU]",
 				timeRange = true,
 				timelineIndex = 180,
 				timerEndOffset = 100,
@@ -17066,7 +16810,7 @@ local tbl =
 				},
 				displayPath = "FRU_megaminx_indicator",
 				mechanicTime = 802.8,
-				name = "get buff [AnyoneCore]",
+				name = "get buff [LPDU]",
 				timeRange = true,
 				timelineIndex = 180,
 				timerEndOffset = 100,
@@ -17121,83 +16865,13 @@ local tbl =
 				enabled = false,
 				eventType = 12,
 				mechanicTime = 802.8,
-				name = "blue indicators [AnyoneCore]",
+				name = "blue indicators [LPDU]",
 				timeRange = true,
 				timelineIndex = 180,
 				timerEndOffset = 100,
 				timerStartOffset = -100,
 				uuid = "5c6fa137-6bee-9bb3-baf7-c03d61ff1e94",
 				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "crystallize indicator",
-				uuid = "cf6553dd-749c-42c2-a2bd-9751431ed47a",
-				version = 2,
-			},
-			inheritedObjectUUID = "87a8fe68-1a30-e46b-b56b-024b46396616",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "check buffs",
-				uuid = "d78c90df-dc4c-0248-b989-c63604378ff2",
-				version = 2,
-			},
-			inheritedObjectUUID = "c4913759-c0cb-afc0-8037-c6d0d4488b25",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "get tethers",
-				uuid = "ee8df960-ed6b-475c-949d-43b95abca299",
-				version = 2,
-			},
-			inheritedObjectUUID = "74aa1861-c963-9ad6-b7c5-0f10e99f61f0",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "get buff",
-				uuid = "3a02bafa-7a15-8120-aded-acbe27b15824",
-				version = 2,
-			},
-			inheritedObjectUUID = "d0bc99aa-e4a3-233a-a410-7fd6492caf60",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "blue indicators",
-				uuid = "74268ce3-c8de-6823-9291-c7b63bb0fd7c",
-				version = 2,
-			},
-			inheritedObjectUUID = "d625dc17-8edc-2c89-812b-1322acfad5dd",
-			inheritedOverwrites = 
-			{
-				enabled = false,
 			},
 		},
 	},
@@ -18001,34 +17675,6 @@ local tbl =
 	},
 	[209] = 
 	{
-		
-		{
-			data = 
-			{
-				name = "Draw Exasquares",
-				uuid = "d1cdae98-2ba9-7994-b136-ad33dc02631c",
-				version = 2,
-			},
-			inheritedObjectUUID = "d1c706ed-cefa-6de5-a747-ed277324c599",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "Draw Exasquares3",
-				uuid = "cb2ba2ef-ebb8-b4d6-a140-2e95427d1142",
-				version = 2,
-			},
-			inheritedObjectUUID = "ef816030-96fd-8188-9fa9-cee103c8524e",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
 		
 		{
 			data = 
@@ -19496,62 +19142,6 @@ local tbl =
 		{
 			data = 
 			{
-				name = "channel tts",
-				uuid = "9c1cdda6-60d2-4103-a902-8e7582c35e46",
-				version = 2,
-			},
-			inheritedObjectUUID = "e60552b2-1a38-2017-beef-a2432745e4d5",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "get TB1",
-				uuid = "3f3cc3b1-91c5-d1cb-a0ef-88d12e9a050a",
-				version = 2,
-			},
-			inheritedObjectUUID = "582452d5-6a7c-2381-8310-e5c1523ca631",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "draw TB1",
-				uuid = "8b3290d2-9a80-8b47-8ef6-bf237df4ea6a",
-				version = 2,
-			},
-			inheritedObjectUUID = "6fc1c075-0616-3471-9c7f-3cc28ae0b50c",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "get tower1",
-				uuid = "300acc8f-ff01-cbae-9b4f-1ee7f185ca4f",
-				version = 2,
-			},
-			inheritedObjectUUID = "b2d82938-bf1c-8692-8a22-f9d5bc36f544",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
 				displayPath = "",
 				name = "store\\anyone\\fru\\fru",
 				uuid = "08ebdb7e-f0bb-3eca-c002-23d0d24c960e",
@@ -19817,7 +19407,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local old=data.lpdu_paradise\nif old then\n for _,id in ipairs(old.shapes) do Argus.deleteTimedShape(id) end\n if old.coneID then Argus.deleteTimedShape(old.coneID) end\nend\ndata.lpdu_paradise={shapes={},cleaves=0,tethers=0,towers=0}\nself.used=true",
+							actionLua = "local old=data.lpdu_paradise\nif old then\n for _,id in ipairs(old.shapes) do Argus.deleteTimedShape(id) end\n if old.coneID then Argus.deleteTimedShape(old.coneID) end\nend\nlocal settings=Settings.FFXIVMINION\nlocal mode=settings.LPDU_FRU_DarklitTank or \"OT invulns\"\nlocal p4=settings.LPDU_FRU_P4Bait or (mode==\"MT invulns\" and \"MT\" or \"OT\")\n-- Enforce the cross-phase restriction even when the GUI was not opened.\nlocal first=p4==\"MT\" and \"T2\" or \"T1\"\nlocal round=TensorReactions_CurrentTimer<1100 and 1 or 2\nlocal invuln=round==1 and first or (first==\"T1\" and \"T2\" or \"T1\")\ndata.lpdu_paradise={shapes={},cleaves=0,tethers=0,towers=0,invuln=invuln,cleave=invuln==\"T1\" and \"T2\" or \"T1\",round=round}\nself.used=true",
 							conditions = 
 							{
 								
@@ -19925,7 +19515,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_paradise;if s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={}\n end\n function s.draw(angle,dist,seconds,text)\n  s.clear();local x=100+math.sin(angle)*dist;local z=100+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.tower(left,seconds)\n  s.clear();local angle=s.south+(left and -1 or 1)*2*math.pi/3\n  local x=100+math.sin(angle)*7-math.sin(s.south)*1.8\n  local z=100+math.cos(angle)*7-math.cos(s.south)*1.8;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(left and \"G1 left tower - north edge\" or \"G2 right tower - north edge\",true,seconds,false)\n end\n function s.cone(tank,dark,seconds)\n  if s.coneID then Argus.deleteTimedShape(s.coneID);s.coneID=nil end\n  local id=r.idOf(tank);if id==nil then return end\n  s.coneID=TensorCore.getMoogleDrawer():addTimedConeOnEnt(seconds*1000,s.boss,19,4*math.pi/3,id,0,false,true,(dark and -1 or 1)*math.pi/3,false)\n end\nend\nif s.south==nil then return end\ns.dark=eventArgs.spellID==40233;s.boss=eventArgs.entityID;s.castStart=TensorReactions_CurrentTimer\ns.cone(\"T1\",s.dark,eventArgs.channelTimeMax+.4)\nlocal seconds=eventArgs.channelTimeMax+1.3\nif slot==\"T1\" then s.draw(s.south+(s.dark and -1 or 1)*2*math.pi/3,7,seconds,s.dark and \"Face first cleave left\" or \"Face first cleave right\")\nelseif slot==\"T2\" then s.draw(s.south+(s.dark and 0 or math.pi/4),s.dark and 2 or 10,seconds,s.dark and \"Bait closest - provoke mid-cast\" or \"Bait farthest - provoke mid-cast\")\nelseif slot==\"H1\" or slot==\"H2\" then s.draw(s.south,s.dark and 8.5 or 5,seconds,s.dark and \"First tower - stand farther out\" or \"First tower - stand farther in\")\nelse s.draw(s.south+((slot==\"M1\" or slot==\"R1\") and -.18 or .18),s.dark and 7.5 or 5.5,seconds,\"Wait south - towers after first cleave\") end\nself.used=true",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_paradise;if s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={}\n end\n function s.draw(angle,dist,seconds,text)\n  s.clear();local x=100+math.sin(angle)*dist;local z=100+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.tower(left,seconds)\n  s.clear();local angle=s.south+(left and -1 or 1)*2*math.pi/3\n  local x=100+math.sin(angle)*7-math.sin(s.south)*1.8\n  local z=100+math.cos(angle)*7-math.cos(s.south)*1.8;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(left and \"G1 left tower - north edge\" or \"G2 right tower - north edge\",true,seconds,false)\n end\n function s.cone(tank,dark,seconds)\n  if s.coneID then Argus.deleteTimedShape(s.coneID);s.coneID=nil end\n  local id=r.idOf(tank);if id==nil then return end\n  s.coneID=TensorCore.getMoogleDrawer():addTimedConeOnEnt(seconds*1000,s.boss,19,4*math.pi/3,id,0,false,true,(dark and -1 or 1)*math.pi/3,false)\n end\nend\nif s.south==nil then return end\ns.dark=eventArgs.spellID==40233;s.boss=eventArgs.entityID;s.castStart=TensorReactions_CurrentTimer\ns.cone(s.cleave,s.dark,eventArgs.channelTimeMax+.4)\nlocal seconds=eventArgs.channelTimeMax+1.3\nif slot==s.cleave then s.draw(s.south+(s.dark and -1 or 1)*2*math.pi/3,7,seconds,s.dark and \"Face first cleave left\" or \"Face first cleave right\")\nelseif slot==s.invuln then s.draw(s.south+(s.dark and 0 or math.pi/4),s.dark and 2 or 10,seconds,s.dark and \"Invuln - bait closest - provoke mid-cast\" or \"Invuln - bait farthest - provoke mid-cast\")\nelseif slot==\"H1\" or slot==\"H2\" then s.draw(s.south,s.dark and 8.5 or 5,seconds,s.dark and \"First tower - stand farther out\" or \"First tower - stand farther in\")\nelse s.draw(s.south+((slot==\"M1\" or slot==\"R1\") and -.18 or .18),s.dark and 7.5 or 5.5,seconds,\"Wait south - towers after first cleave\") end\nself.used=true",
 							conditions = 
 							{
 								
@@ -19979,7 +19569,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_paradise;if s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={}\n end\n function s.draw(angle,dist,seconds,text)\n  s.clear();local x=100+math.sin(angle)*dist;local z=100+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.tower(left,seconds)\n  s.clear();local angle=s.south+(left and -1 or 1)*2*math.pi/3\n  local x=100+math.sin(angle)*7-math.sin(s.south)*1.8\n  local z=100+math.cos(angle)*7-math.cos(s.south)*1.8;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(left and \"G1 left tower - north edge\" or \"G2 right tower - north edge\",true,seconds,false)\n end\n function s.cone(tank,dark,seconds)\n  if s.coneID then Argus.deleteTimedShape(s.coneID);s.coneID=nil end\n  local id=r.idOf(tank);if id==nil then return end\n  s.coneID=TensorCore.getMoogleDrawer():addTimedConeOnEnt(seconds*1000,s.boss,19,4*math.pi/3,id,0,false,true,(dark and -1 or 1)*math.pi/3,false)\n end\nend\ns.cleaves=s.cleaves+1\nif s.coneID then Argus.deleteTimedShape(s.coneID);s.coneID=nil end\nif s.cleaves==1 then s.cone(\"T2\",not s.dark,3.9) elseif slot==\"T1\" or slot==\"T2\" or slot==\"H1\" or slot==\"H2\" then s.clear() end\nself.used=true",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_paradise;if s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={}\n end\n function s.draw(angle,dist,seconds,text)\n  s.clear();local x=100+math.sin(angle)*dist;local z=100+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.tower(left,seconds)\n  s.clear();local angle=s.south+(left and -1 or 1)*2*math.pi/3\n  local x=100+math.sin(angle)*7-math.sin(s.south)*1.8\n  local z=100+math.cos(angle)*7-math.cos(s.south)*1.8;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(left and \"G1 left tower - north edge\" or \"G2 right tower - north edge\",true,seconds,false)\n end\n function s.cone(tank,dark,seconds)\n  if s.coneID then Argus.deleteTimedShape(s.coneID);s.coneID=nil end\n  local id=r.idOf(tank);if id==nil then return end\n  s.coneID=TensorCore.getMoogleDrawer():addTimedConeOnEnt(seconds*1000,s.boss,19,4*math.pi/3,id,0,false,true,(dark and -1 or 1)*math.pi/3,false)\n end\nend\ns.cleaves=s.cleaves+1\nif s.coneID then Argus.deleteTimedShape(s.coneID);s.coneID=nil end\nif s.cleaves==1 then s.cone(s.invuln,not s.dark,3.9) elseif slot==\"T1\" or slot==\"T2\" or slot==\"H1\" or slot==\"H2\" then s.clear() end\nself.used=true",
 							conditions = 
 							{
 								
@@ -20033,7 +19623,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_paradise;if s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={}\n end\n function s.draw(angle,dist,seconds,text)\n  s.clear();local x=100+math.sin(angle)*dist;local z=100+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.tower(left,seconds)\n  s.clear();local angle=s.south+(left and -1 or 1)*2*math.pi/3\n  local x=100+math.sin(angle)*7-math.sin(s.south)*1.8\n  local z=100+math.cos(angle)*7-math.cos(s.south)*1.8;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(left and \"G1 left tower - north edge\" or \"G2 right tower - north edge\",true,seconds,false)\n end\n function s.cone(tank,dark,seconds)\n  if s.coneID then Argus.deleteTimedShape(s.coneID);s.coneID=nil end\n  local id=r.idOf(tank);if id==nil then return end\n  s.coneID=TensorCore.getMoogleDrawer():addTimedConeOnEnt(seconds*1000,s.boss,19,4*math.pi/3,id,0,false,true,(dark and -1 or 1)*math.pi/3,false)\n end\nend\ns.tethers=s.tethers+1\nif s.tethers~=1 then self.used=true;return end\nif s.south==nil or s.dark==nil then self.used=true;return end\nif slot==\"T1\" then s.draw(s.south+math.pi,s.dark and 10 or 2,3,s.dark and \"Bait farthest north\" or \"Bait closest north\")\nelseif slot==\"T2\" then s.draw(s.south+(s.dark and -1 or 1)*math.pi/3,7,3,\"Second cleave - same side\")\nelseif slot==\"H1\" or slot==\"H2\" then s.draw(s.south+math.pi,s.dark and 5 or 8.5,3,s.dark and \"Move north - stand farther in\" or \"Move north - stand farther out\")\nelse s.tower(slot==\"M1\" or slot==\"R1\",6.7) end\nself.used=true",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_paradise;if s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={}\n end\n function s.draw(angle,dist,seconds,text)\n  s.clear();local x=100+math.sin(angle)*dist;local z=100+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.tower(left,seconds)\n  s.clear();local angle=s.south+(left and -1 or 1)*2*math.pi/3\n  local x=100+math.sin(angle)*7-math.sin(s.south)*1.8\n  local z=100+math.cos(angle)*7-math.cos(s.south)*1.8;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(left and \"G1 left tower - north edge\" or \"G2 right tower - north edge\",true,seconds,false)\n end\n function s.cone(tank,dark,seconds)\n  if s.coneID then Argus.deleteTimedShape(s.coneID);s.coneID=nil end\n  local id=r.idOf(tank);if id==nil then return end\n  s.coneID=TensorCore.getMoogleDrawer():addTimedConeOnEnt(seconds*1000,s.boss,19,4*math.pi/3,id,0,false,true,(dark and -1 or 1)*math.pi/3,false)\n end\nend\ns.tethers=s.tethers+1\nif s.tethers~=1 then self.used=true;return end\nif s.south==nil or s.dark==nil then self.used=true;return end\nif slot==s.cleave then s.draw(s.south+math.pi,s.dark and 10 or 2,3,s.dark and \"Bait farthest north\" or \"Bait closest north\")\nelseif slot==s.invuln then s.draw(s.south+(s.dark and -1 or 1)*math.pi/3,7,3,\"Second cleave - same side\")\nelseif slot==\"H1\" or slot==\"H2\" then s.draw(s.south+math.pi,s.dark and 5 or 8.5,3,s.dark and \"Move north - stand farther in\" or \"Move north - stand farther out\")\nelse s.tower(slot==\"M1\" or slot==\"R1\",6.7) end\nself.used=true",
 							conditions = 
 							{
 								
@@ -20087,7 +19677,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_paradise;if s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={}\n end\n function s.draw(angle,dist,seconds,text)\n  s.clear();local x=100+math.sin(angle)*dist;local z=100+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.tower(left,seconds)\n  s.clear();local angle=s.south+(left and -1 or 1)*2*math.pi/3\n  local x=100+math.sin(angle)*7-math.sin(s.south)*1.8\n  local z=100+math.cos(angle)*7-math.cos(s.south)*1.8;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(left and \"G1 left tower - north edge\" or \"G2 right tower - north edge\",true,seconds,false)\n end\n function s.cone(tank,dark,seconds)\n  if s.coneID then Argus.deleteTimedShape(s.coneID);s.coneID=nil end\n  local id=r.idOf(tank);if id==nil then return end\n  s.coneID=TensorCore.getMoogleDrawer():addTimedConeOnEnt(seconds*1000,s.boss,19,4*math.pi/3,id,0,false,true,(dark and -1 or 1)*math.pi/3,false)\n end\nend\nif s.castStart==nil or TensorReactions_CurrentTimer<s.castStart+3.3 then return end\nif slot==\"T2\" then AnyoneCore.Shotcall(\"Provoke now\",true,3,false) end\nself.used=true\ns.provokeDone=true",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_paradise;if s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={}\n end\n function s.draw(angle,dist,seconds,text)\n  s.clear();local x=100+math.sin(angle)*dist;local z=100+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.tower(left,seconds)\n  s.clear();local angle=s.south+(left and -1 or 1)*2*math.pi/3\n  local x=100+math.sin(angle)*7-math.sin(s.south)*1.8\n  local z=100+math.cos(angle)*7-math.cos(s.south)*1.8;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,.8,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(left and \"G1 left tower - north edge\" or \"G2 right tower - north edge\",true,seconds,false)\n end\n function s.cone(tank,dark,seconds)\n  if s.coneID then Argus.deleteTimedShape(s.coneID);s.coneID=nil end\n  local id=r.idOf(tank);if id==nil then return end\n  s.coneID=TensorCore.getMoogleDrawer():addTimedConeOnEnt(seconds*1000,s.boss,19,4*math.pi/3,id,0,false,true,(dark and -1 or 1)*math.pi/3,false)\n end\nend\nif s.castStart==nil or TensorReactions_CurrentTimer<s.castStart+3.3 then return end\nif slot==s.invuln then AnyoneCore.Shotcall(\"Provoke now\",true,3,false) end\nself.used=true\ns.provokeDone=true",
 							conditions = 
 							{
 								
@@ -20986,34 +20576,6 @@ local tbl =
 	},
 	[237] = 
 	{
-		
-		{
-			data = 
-			{
-				name = "Draw Exasquares",
-				uuid = "aa3724e4-f283-db62-a1d4-a2806a8b39bd",
-				version = 2,
-			},
-			inheritedObjectUUID = "afb07684-cdb0-e2f9-ab7c-916c59fa1215",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "Draw Exasquares3",
-				uuid = "acde0298-fdd6-3f04-a533-c8c530c811b0",
-				version = 2,
-			},
-			inheritedObjectUUID = "cb4c2f58-5a95-c7ad-88be-fd77a6e4e5ca",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
 		
 		{
 			data = 
@@ -22119,62 +21681,6 @@ local tbl =
 	},
 	[251] = 
 	{
-		
-		{
-			data = 
-			{
-				name = "draw TB2",
-				uuid = "0ea8a62d-cfad-7480-acd5-2bb848fa0c6f",
-				version = 2,
-			},
-			inheritedObjectUUID = "b53056e1-b672-4a17-8d7b-a86cea6bcc03",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "get TB2",
-				uuid = "a99b16fe-78be-f3e3-a9ab-1cd388cdb496",
-				version = 2,
-			},
-			inheritedObjectUUID = "b988eac3-0391-68ea-acc2-9daa092637b9",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "get tower2",
-				uuid = "6d0c78db-0195-5445-a584-db816e7c93d7",
-				version = 2,
-			},
-			inheritedObjectUUID = "5358d257-c02c-35f1-824b-5bcb43ae4cee",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "channel tts",
-				uuid = "63743ff0-9ceb-d5ff-b677-5e626f7cb5d4",
-				version = 2,
-			},
-			inheritedObjectUUID = "6b9cf487-a1f2-6eac-83cc-9ff43db0b1ab",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
 		
 		{
 			data = 
