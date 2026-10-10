@@ -23,6 +23,12 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Added OT tankbuster reminder at 35 and a one-second, same-side inward arrow after Burnt Strike resolves near 70.6. Added a zero-offset potion reminder at the 418.8 targetable entry, retaining the original reminder. (10-10-2026)
+
+- Added a short yellow Diamond Dust knockback-side arrow, corrected safe-cone masking, and replaced the close-to-boss slide point with full-distance slide destinations and setup adjustment. Slide replay checks remain pending. (10-10-2026)
+
+- Added clockwise Light Rampant puddle arrows through the fifth bait, regrouped baiters on their finishing side, and gated tower regrouping on the player's own tower hit. Added Mirror Mirror protean text/TTS during Scythe Kick. Replay checks remain pending. (10-10-2026)
+
 - Delayed both Moogle Burnt Strike AoEs by another half second (3.7 seconds total), including fresh render overrides. (10-10-2026)
 
 - Tank settings GUI now closes 15 seconds into the fight, retaining selected assignments. (10-10-2026)
