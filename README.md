@@ -23,6 +23,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Shortened the P5 Polarizing Strikes callout to Dodge line. (10-10-2026)
+
 - Added a final tank-only CT formation arrow during the first Hallowed Wings cast near 835, pointing to the assigned LPDU tank-front position and expiring with the cast. (10-10-2026)
 
 - Removed the long white Ultimate Relativity direction arrow and shortened P3-to-P4 marker 1 guidance by another three seconds. (10-10-2026)

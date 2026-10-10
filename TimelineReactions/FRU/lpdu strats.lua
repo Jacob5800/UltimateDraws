@@ -19371,6 +19371,20 @@ local tbl =
 				enabled = false,
 			},
 		},
+		
+		{
+			data = 
+			{
+				name = "[Draw] Tank Cleave Directions",
+				uuid = "f0fa82f4-91d1-76ac-9070-5f6876e5fc58",
+				version = 2,
+			},
+			inheritedObjectUUID = "4ca074fd-ecb5-0304-a757-94e4c898938a",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
 	},
 	[219] = 
 	{
@@ -20508,7 +20522,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or p==nil then return end\nlocal slot=r.mySlot()\nlocal function clear()\n if data.lpdu_polarizing_shapes then for _,id in ipairs(data.lpdu_polarizing_shapes) do Argus.deleteTimedShape(id) end end\n data.lpdu_polarizing_shapes={}\nend\nlocal function draw(b,h,dist,seconds)\n clear();local x,y,z=TensorCore.getPosInDirection(b.pos,h,dist,true);local t={x=x,y=y,z=z}\n local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n local id=d:addTimedCircle(seconds*1000,x,y+.05,z,1,0,true,true)\n if id then table.insert(data.lpdu_polarizing_shapes,id) end\n local length=TensorCore.getDistance2d(p.pos,t)\n if length>1 then id=d:addTimedArrow(seconds*1000,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,t),math.max(.15,length-1),1,1,1,0,true)\n if id then table.insert(data.lpdu_polarizing_shapes,id) end end\nend\nlocal function assigned(b,order,seconds)\n local roles={T1=1,T2=1,M1=2,M2=2,R1=3,R2=3,H1=4,H2=4}\n local role=roles[slot];if not role then return end\n local left=slot==\"T1\" or slot==\"M1\" or slot==\"R1\" or slot==\"H1\"\n if role<order then left=not left end\n draw(b,b.pos.h+(left and 1 or -1)*math.pi*.75,role==order and 5 or 9,seconds)\n AnyoneCore.Shotcall(role==order and \"Bait in front\" or \"Stack behind bait\",true,seconds,false)\nend\nlocal b=TensorCore.mGetEntity(data.lpdu_polarizing_boss);if b==nil then return end\ndata.lpdu_polarizing_done=(data.lpdu_polarizing_done or 0)+1\ndraw(b,b.pos.h+math.pi,9,2.2)\nAnyoneCore.Shotcall(data.lpdu_polarizing_done==4 and \"Move out\" or \"Dodge line - baiters swap sides\",true,2.2,false)\nself.used=true",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or p==nil then return end\nlocal slot=r.mySlot()\nlocal function clear()\n if data.lpdu_polarizing_shapes then for _,id in ipairs(data.lpdu_polarizing_shapes) do Argus.deleteTimedShape(id) end end\n data.lpdu_polarizing_shapes={}\nend\nlocal function draw(b,h,dist,seconds)\n clear();local x,y,z=TensorCore.getPosInDirection(b.pos,h,dist,true);local t={x=x,y=y,z=z}\n local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n local id=d:addTimedCircle(seconds*1000,x,y+.05,z,1,0,true,true)\n if id then table.insert(data.lpdu_polarizing_shapes,id) end\n local length=TensorCore.getDistance2d(p.pos,t)\n if length>1 then id=d:addTimedArrow(seconds*1000,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,t),math.max(.15,length-1),1,1,1,0,true)\n if id then table.insert(data.lpdu_polarizing_shapes,id) end end\nend\nlocal function assigned(b,order,seconds)\n local roles={T1=1,T2=1,M1=2,M2=2,R1=3,R2=3,H1=4,H2=4}\n local role=roles[slot];if not role then return end\n local left=slot==\"T1\" or slot==\"M1\" or slot==\"R1\" or slot==\"H1\"\n if role<order then left=not left end\n draw(b,b.pos.h+(left and 1 or -1)*math.pi*.75,role==order and 5 or 9,seconds)\n AnyoneCore.Shotcall(role==order and \"Bait in front\" or \"Stack behind bait\",true,seconds,false)\nend\nlocal b=TensorCore.mGetEntity(data.lpdu_polarizing_boss);if b==nil then return end\ndata.lpdu_polarizing_done=(data.lpdu_polarizing_done or 0)+1\ndraw(b,b.pos.h+math.pi,9,2.2)\nAnyoneCore.Shotcall(data.lpdu_polarizing_done==4 and \"Move out\" or \"Dodge line\",true,2.2,false)\nself.used=true",
 							conditions = 
 							{
 								
@@ -20898,7 +20912,7 @@ local tbl =
 				name = "[LPDU] P5 Pandora's Box - Tank LB Reminder",
 				timeRange = true,
 				timelineIndex = 236,
-				timerEndOffset = -5.4,
+				timerEndOffset = -5.4000000953674,
 				timerStartOffset = -6,
 				uuid = "46c7ea4a-8589-dc1a-ae7d-31fa4d1ea838",
 				version = 2,
@@ -22005,6 +22019,20 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "[Draw] Tank Cleave Directions",
+				uuid = "eabea795-e5e0-822f-a0c5-3ae9190e5dae",
+				version = 2,
+			},
+			inheritedObjectUUID = "61c1dac9-66ee-94b4-a629-103db9057c8d",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
 		},
 	},
 	[249] = 
