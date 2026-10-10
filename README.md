@@ -137,6 +137,8 @@ TEA: Coming soon by Ton.
 
 ### UWU: LPDU
 
+- 2026-10-11: Ifrit dash arrows now follow the recorded four-nail kill order. The Woken clone selects a one-step or two-step counterclockwise dodge from the fourth nail, mirrored for the Searing Wind healer; guidance begins after the first dash hit. Live checks across all Woken positions remain pending.
+
 - 2026-10-10: R1 now hears and sees Go to C and take tether when Garuda Mesohigh appears during Annihilation. Replaced the narrow fixed-time window with the actual tether event, retained the personal C arrow and acquisition cleanup, and suppressed repeat prompts or prompts when R1 already holds the tether. Replay confirmation remains pending.
 
 - 2026-10-10: Suppression Feather Rain calls now fire once per volley, with overlapping 1215/1216 reactions merged. The stack call after the second Landslide fires once and excludes MT, the LPDU tether tank. Aetheric Boom readiness now checks only your soak group: both tanks, or the six healers/DPS, alive and at least 80% HP. Replay confirmation remains pending.

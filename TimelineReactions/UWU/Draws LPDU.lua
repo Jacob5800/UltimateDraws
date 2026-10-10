@@ -3288,7 +3288,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.uwu_ifrit_last_nail = { dead = {}, count = 0 }\nself.used = true",
+							actionLua = "local state = data.uwu_ifrit_last_nail\nif not state or (state.spawnCount or 0) >= 4 or (state.count or 0) > 0 then\n    state = { nails = {}, spawnCount = 0, dead = {}, count = 0, order = {} }\n    data.uwu_ifrit_last_nail = state\nend\nif not state.nails[eventArgs.entityID] then\n    local nail = TensorCore.mGetEntity(eventArgs.entityID)\n    if nail and nail.pos then\n        state.nails[eventArgs.entityID] = { x = nail.pos.x, z = nail.pos.z }\n        state.spawnCount = state.spawnCount + 1\n    end\nend\nself.used = true",
 							conditions = 
 							{
 								
@@ -3342,7 +3342,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local labels = data.uwu_relative_nails\nlocal nail = labels and labels.nails and labels.nails[eventArgs.entityID]\nif not nail then\n    self.used = true\n    return\nend\n\nlocal state = data.uwu_ifrit_last_nail or { dead = {}, count = 0 }\ndata.uwu_ifrit_last_nail = state\nif not state.dead[eventArgs.entityID] then\n    state.dead[eventArgs.entityID] = true\n    state.count = state.count + 1\n    if state.count == 4 then\n        state.last = { x = nail.x, z = nail.z }\n    end\nend\nself.used = true",
+							actionLua = "local state = data.uwu_ifrit_last_nail\nif not state or state.dead[eventArgs.entityID] then\n    self.used = true\n    return\nend\n\nlocal nail = state.nails and state.nails[eventArgs.entityID]\nif not nail then\n    local labels = data.uwu_relative_nails\n    nail = labels and labels.nails and labels.nails[eventArgs.entityID]\nend\nif not nail then\n    local entity = TensorCore.mGetEntity(eventArgs.entityID)\n    if entity and entity.pos then\n        nail = { x = entity.pos.x, z = entity.pos.z }\n    end\nend\nif not nail then\n    self.used = true\n    return\nend\n\nstate.order = state.order or {}\nstate.dead[eventArgs.entityID] = true\nstate.count = state.count + 1\nstate.order[state.count] = { x = nail.x, z = nail.z }\nif state.count == 4 then\n    state.last = { x = nail.x, z = nail.z }\nend\nself.used = true",
 							conditions = 
 							{
 								
@@ -5389,7 +5389,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local state = data.uwu_ifrit_dash2\nif not state or state.drawn then\n    self.used = true\n    return\nend\n\nlocal boss = TensorCore.mGetEntity(eventArgs.entityID)\nlocal player = TensorCore.mGetPlayer()\nif not boss or not player then\n    return\nend\n\nlocal bossDX = boss.pos.x - 100\nlocal bossDZ = boss.pos.z - 100\nlocal playerDX = player.pos.x - 100\nlocal playerDZ = player.pos.z - 100\nlocal playerRadius = math.sqrt(playerDX * playerDX + playerDZ * playerDZ)\nif playerRadius < 5 then\n    return\nend\n\nif not state.octant then\n    function state.octant(dx, dz)\n        local ax = math.abs(dx)\n        local az = math.abs(dz)\n        if ax > az * 2.414214 then\n            return dx >= 0 and 0 or 4\n        end\n        if az > ax * 2.414214 then\n            return dz >= 0 and 2 or 6\n        end\n        if dx >= 0 then\n            return dz >= 0 and 1 or 7\n        end\n        return dz >= 0 and 3 or 5\n    end\n\n    function state.pointFor(index, radius, y)\n        local diagonal = radius * 0.7071068\n        if index == 0 then return { x = 100 + radius, y = y, z = 100 } end\n        if index == 1 then return { x = 100 + diagonal, y = y, z = 100 + diagonal } end\n        if index == 2 then return { x = 100, y = y, z = 100 + radius } end\n        if index == 3 then return { x = 100 - diagonal, y = y, z = 100 + diagonal } end\n        if index == 4 then return { x = 100 - radius, y = y, z = 100 } end\n        if index == 5 then return { x = 100 - diagonal, y = y, z = 100 - diagonal } end\n        if index == 6 then return { x = 100, y = y, z = 100 - radius } end\n        return { x = 100 + diagonal, y = y, z = 100 - diagonal }\n    end\nend\n\nlocal blueIndex = state.octant(bossDX, bossDZ)\nlocal playerIndex = state.octant(playerDX, playerDZ)\nlocal nextIndex = playerIndex - 1\nif nextIndex < 0 then nextIndex = nextIndex + 8 end\n\nlocal targetIndex = nextIndex\nif (targetIndex % 2) ~= (blueIndex % 2) then\n    targetIndex = targetIndex - 1\n    if targetIndex < 0 then targetIndex = targetIndex + 8 end\nend\n\nlocal firstPoint = state.pointFor(nextIndex, playerRadius, player.pos.y)\nlocal targetPoint = state.pointFor(targetIndex, playerRadius, player.pos.y)\nlocal drawer = TensorCore.getCachedDrawer(\n    0xFFCBFFB8, 0xFF5DF27B, 0xFFFFFFFF, 0xFF000000, 5\n)\n\nlocal firstDistance = TensorCore.getDistance2d(player.pos, firstPoint)\nif firstDistance > 0.2 then\n    local tip = math.min(2.8, firstDistance * 0.38)\n    drawer:addTimedArrow(\n        11000, player.pos.x, player.pos.y, player.pos.z,\n        TensorCore.getHeadingToTarget(player.pos, firstPoint),\n        math.max(0.1, firstDistance - tip), 1.55, tip, 3.25,\n        0, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\n\nlocal finalDistance = TensorCore.getDistance2d(firstPoint, targetPoint)\nif finalDistance > 0.2 then\n    local tip = math.min(2.8, finalDistance * 0.38)\n    drawer:addTimedArrow(\n        11000, firstPoint.x, firstPoint.y, firstPoint.z,\n        TensorCore.getHeadingToTarget(firstPoint, targetPoint),\n        math.max(0.1, finalDistance - tip), 1.55, tip, 3.25,\n        0, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\n\nstate.drawn = true\nself.used = true",
+							actionLua = "local state = data.uwu_ifrit_dash2\nlocal nails = data.uwu_ifrit_last_nail\nlocal player = TensorCore.mGetPlayer()\nif not state or state.drawn or not nails or not nails.order or not nails.order[4] or not player then\n    self.used = true\n    return\nend\n\nlocal function octant(x, z)\n    local dx, dz = x - 100, z - 100\n    local ax, az = math.abs(dx), math.abs(dz)\n    if ax > az * 2.414214 then return dx >= 0 and 0 or 4 end\n    if az > ax * 2.414214 then return dz >= 0 and 2 or 6 end\n    if dx >= 0 then return dz >= 0 and 1 or 7 end\n    return dz >= 0 and 3 or 5\nend\n\nlocal wokenNumber\nif eventArgs.entityID == state.bossID then\n    wokenNumber = 1\nelse\n    local boss = state.bossID and TensorCore.mGetEntity(state.bossID)\n    if boss and boss.pos then\n        local bossIndex = octant(boss.pos.x, boss.pos.z)\n        for i = 1, 4 do\n            local nail = nails.order[i]\n            if nail and octant(nail.x, nail.z) == bossIndex then\n                wokenNumber = i\n                break\n            end\n        end\n    end\nend\nif not wokenNumber then\n    self.used = true\n    return\nend\n\nlocal searing = state.secondHealerID == player.id\nlocal last = nails.order[4]\nlocal startIndex = (octant(last.x, last.z) + (searing and 4 or 0)) % 8\nlocal steps = (wokenNumber == 1 or wokenNumber == 3) and 1 or 2\nlocal px, pz = player.pos.x - 100, player.pos.z - 100\nlocal radius = math.max(16, math.min(18, math.sqrt(px * px + pz * pz)))\nlocal y = player.pos.y\nlocal function point(index)\n    local diagonal = radius * 0.7071068\n    if index == 0 then return { x = 100 + radius, y = y, z = 100 } end\n    if index == 1 then return { x = 100 + diagonal, y = y, z = 100 + diagonal } end\n    if index == 2 then return { x = 100, y = y, z = 100 + radius } end\n    if index == 3 then return { x = 100 - diagonal, y = y, z = 100 + diagonal } end\n    if index == 4 then return { x = 100 - radius, y = y, z = 100 } end\n    if index == 5 then return { x = 100 - diagonal, y = y, z = 100 - diagonal } end\n    if index == 6 then return { x = 100, y = y, z = 100 - radius } end\n    return { x = 100 + diagonal, y = y, z = 100 - diagonal }\nend\nlocal drawer = TensorCore.getCachedDrawer(\n    0xFFCBFFB8, 0xFF5DF27B, 0xFFFFFFFF, 0xFF000000, 5\n)\nlocal from = player.pos\nfor step = 1, steps do\n    local to = point((startIndex - step + 8) % 8)\n    local distance = TensorCore.getDistance2d(from, to)\n    if distance > 0.2 then\n        local tip = math.min(2.8, distance * 0.38)\n        drawer:addTimedArrow(\n            6500, from.x, from.y, from.z,\n            TensorCore.getHeadingToTarget(from, to),\n            math.max(0.1, distance - tip), 1.55, tip, 3.25,\n            0, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n        )\n    end\n    from = to\nend\nstate.drawn = true\nself.used = true",
 							conditions = 
 							{
 								
@@ -5411,7 +5411,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local state = data.uwu_ifrit_dash2\nreturn state ~= nil\n    and eventArgs.entityContentID == 1185\n    and eventArgs.spellID == 11103\n    and eventArgs.entityID ~= state.bossID",
+							conditionLua = "local state = data.uwu_ifrit_dash2\nlocal nails = data.uwu_ifrit_last_nail\nreturn state ~= nil and not state.drawn\n    and nails ~= nil and nails.order ~= nil and nails.order[4] ~= nil\n    and eventArgs.entityContentID == 1185\n    and eventArgs.spellID == 11103",
 							dequeueIfLuaFalse = true,
 							name = "Crimson Cyclone",
 							uuid = "a378b693-f4d0-eea6-8a42-5993a559d74a",
@@ -5420,12 +5420,12 @@ local tbl =
 					},
 				},
 				displayPath = "Draws - Ifrit",
-				eventType = 3,
+				eventType = 2,
 				mechanicTime = 416,
 				name = "[Draw] Ifrit Dash 2 - Blue Clone CCW Safe Path",
 				timeRange = true,
 				timelineIndex = 65,
-				timerEndOffset = 6,
+				timerEndOffset = 5,
 				timerStartOffset = -1,
 				uuid = "531f391a-7ec2-b820-af7c-31355ac29301",
 				version = 2,
