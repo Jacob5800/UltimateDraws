@@ -137,6 +137,8 @@ TEA: Coming soon by Ton.
 
 ### UWU: LPDU
 
+- 2026-10-11: Ifrit dash guidance now shows the starting spot near the fourth nail around timeline 409 (opposite for Searing Wind), then one counterclockwise move at a time. The first move appears after dash one; two-step patterns replace it with the next move after dash two from the player's current position. Replay confirmation remains pending.
+
 - 2026-10-11: Ifrit dash arrows now follow the recorded four-nail kill order. The Woken clone selects a one-step or two-step counterclockwise dodge from the fourth nail, mirrored for the Searing Wind healer; guidance begins after the first dash hit. Live checks across all Woken positions remain pending.
 
 - 2026-10-10: R1 now hears and sees Go to C and take tether when Garuda Mesohigh appears during Annihilation. Replaced the narrow fixed-time window with the actual tether event, retained the personal C arrow and acquisition cleanup, and suppressed repeat prompts or prompts when R1 already holds the tether. Replay confirmation remains pending.
