@@ -8992,6 +8992,34 @@ local tbl =
 		{
 			data = 
 			{
+				name = "[Strat] UR Helper Setup",
+				uuid = "d6ab3fa8-5730-6833-805b-562ac593aa63",
+				version = 2,
+			},
+			inheritedObjectUUID = "9e302ae9-7c44-f44c-b689-a68ddcca3ee6",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
+				name = "[Strat] UR Helper Increment Step",
+				uuid = "eadcc9bc-0d54-c1cb-bfe0-fb8716ac960e",
+				version = 2,
+			},
+			inheritedObjectUUID = "45f769cd-2e96-d652-bc5e-e9ad5068f26e",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
 				name = "[Melee] Feint (Primary)",
 				uuid = "c335e481-c164-2ac2-842e-755cbc5a8f55",
 				version = 2,
@@ -11510,7 +11538,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_apoc_movement;local assignment=data.lpdu_p3_apoc_assignment\nif s==nil then return end\nif s.clear==nil then\n function s.clear() for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={} end\n function s.draw(angle,dist,seconds,text,bx,bz)\n  s.clear();local x=(bx or 100)+math.sin(angle)*dist;local z=(bz or 100)+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.angle(side)\n  local a=s.first-s.rotation\n  a=(a+math.pi)%(2*math.pi)-math.pi\n  local forDPS=a>=-.1 and a<math.pi-.1\n  if forDPS~=(side==\"dps\") then a=a+math.pi end\n  return a\n end\nend\nif s.midTaken then self.used=true;return end\nlocal hit=false;for _,id in ipairs(eventArgs.hitTargets) do if id==p.id then hit=true end end\nif not hit then self.used=true;return end\nif assignment==nil or s.first==nil then return end\ns.midTaken=true;s.side=assignment.side[slot];s.mid=s.angle(s.side);s.final=s.mid-s.rotation\nif slot==\"T2\" then s.draw(s.final,19,2.6,\"Bait farthest now - move out\")\nelse s.draw(s.final,3.5,2.6,\"Stay near middle - clear the tank bait\") end\nself.used=true",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_apoc_movement;local assignment=data.lpdu_p3_apoc_assignment\nif s==nil then return end\nif s.clear==nil then\n function s.clear() for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={} end\n function s.draw(angle,dist,seconds,text,bx,bz)\n  s.clear();local x=(bx or 100)+math.sin(angle)*dist;local z=(bz or 100)+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.angle(side)\n  local a=s.first-s.rotation\n  a=(a+math.pi)%(2*math.pi)-math.pi\n  local forDPS=a>=-.1 and a<math.pi-.1\n  if forDPS~=(side==\"dps\") then a=a+math.pi end\n  return a\n end\nend\nif s.midTaken then self.used=true;return end\nlocal hit=false;for _,id in ipairs(eventArgs.hitTargets) do if id==p.id then hit=true end end\nif not hit and slot~=\"T2\" then self.used=true;return end\nif assignment==nil or s.first==nil then return end\ns.midTaken=true;s.side=assignment.side[slot];s.mid=s.angle(s.side);s.final=s.mid-s.rotation\nif slot==\"T2\" then s.draw(s.final,19,2.6,\"Bait farthest now - move out\")\nelse s.draw(s.final,3.5,2.6,\"Stay near middle - clear the tank bait\") end\nself.used=true",
 							conditions = 
 							{
 								

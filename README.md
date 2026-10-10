@@ -23,6 +23,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Apocalypse OT jump-bait guidance no longer requires the full party roster to be ready or the OT to appear in Water hit targets; it triggers once after second Water. Replay confirmation pending. (10-10-2026)
+
 - Diamond Dust slide guidance now starts after the first cleave hit and ends before the second; disabled the earlier camera-facing arrow. Light Rampant tower players keep their occupied side for stack regrouping. Replay confirmation pending. (10-10-2026)
 
 - Fixed the Darklit tank selector so all three options, including Tank swap, can be selected and saved. (10-10-2026)
