@@ -23,6 +23,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Added an owned [LPDU] Get Safe Side reaction at 62.2, copying the fire/thunder detector with its original -5/+5 timing offsets. (10-10-2026)
+
 - The AnyoneCore mitigation disable at fight start now runs only for DPS, skipping tanks and healers. (10-10-2026)
 
 - Shortened the P5 Polarizing Strikes callout to Dodge line. (10-10-2026)

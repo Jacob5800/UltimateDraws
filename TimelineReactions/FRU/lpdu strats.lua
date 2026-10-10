@@ -1989,6 +1989,7 @@ local tbl =
 			inheritedOverwrites = 
 			{
 				displayPath = "FRU_megaminx_indicator",
+				enabled = false,
 			},
 		},
 		
@@ -2015,6 +2016,7 @@ local tbl =
 			{
 				displayPath = "store\\anyone\\fru\\fru/anyone\\fru\\modules\\draws",
 				enabled = false,
+				loop = true,
 			},
 		},
 		
@@ -2075,6 +2077,57 @@ local tbl =
 				timerEndOffset = 10,
 				timerStartOffset = -10,
 				uuid = "e881f86b-cc5c-370a-a783-68f060c61b36",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "if data.megaminx_p1stackflex_ew == nil then\n\td(\"finding safe side\")\n    local ent = TensorCore.mGetEntity(eventArgs.entityID)\n    if eventArgs.entityContentID == 9710 then --fire\n        if ent.pos.x < 95 then\n            data.megaminx_p1stackflex_ew = 0 --west fire\n            self.used = true\n        end\n        if ent.pos.x > 105 then\n            data.megaminx_p1stackflex_ew = 1 --east fire\n            self.used = true\n        end\n    end\n    if eventArgs.entityContentID == 9711 then --thunder\n        if ent.pos.x > 105 then\n            data.megaminx_p1stackflex_ew = 0 --east thunder\n            self.used = true\n        end\n        if ent.pos.x < 95 then\n            data.megaminx_p1stackflex_ew = 1 --west thunder\n            self.used = true\n        end\n    end\nend\nself.used = true\n",
+							conditions = 
+							{
+								
+								{
+									"7be50b7d-04b2-2084-a093-3d4fbba607b1",
+									true,
+								},
+							},
+							uuid = "c0243cf1-25eb-4488-8aaf-bb0c3c49cdf7",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID == 9710 or eventArgs.entityContentID == 9711",
+							uuid = "7be50b7d-04b2-2084-a093-3d4fbba607b1",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 5,
+				loop = true,
+				mechanicTime = 62.2,
+				name = "[LPDU] Get Safe Side",
+				timeRange = true,
+				timelineIndex = 17,
+				timerEndOffset = 5,
+				timerStartOffset = -5,
+				uuid = "0a9b0ac4-edb4-50c0-bd5a-a7986bc836df",
 				version = 2,
 			},
 		},
