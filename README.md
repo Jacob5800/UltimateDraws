@@ -23,6 +23,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Added a one-shot Go to conga line text/TTS reminder at timeline 90. (10-10-2026)
+
 - Light Rampant puddle direction arrows now follow the player and turn with observed clockwise movement between baits, replacing stationary per-puddle arrows. Fifth bait still switches immediately to finishing-side regroup. (10-10-2026)
 
 - Added OT tankbuster reminder at 35 and a one-second, same-side inward arrow after Burnt Strike resolves near 70.6. Added a zero-offset potion reminder at the 418.8 targetable entry, retaining the original reminder. (10-10-2026)
