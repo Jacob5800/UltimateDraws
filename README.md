@@ -23,6 +23,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Removed the long white Ultimate Relativity direction arrow and shortened P3-to-P4 marker 1 guidance by another three seconds. (10-10-2026)
+
 - Moved the P2 intermission potion reminder from timeline entry 335 to 363, retaining its existing delay. (10-10-2026)
 
 - Replay feedback confirms P1–P3, P5 Akh Morn, Pandora's Box LB reminder and Exasquares. Paradise Regained confirmed on OT; other roles and Polarizing Strikes remain under review. (10-10-2026)
