@@ -6,6 +6,8 @@ Currently supported:
 
 UWU: LPDU (Beta) — supports ranged, melee, and tanks.
 
+UCOB: LPDU (Beta) Supports ranged/melee
+
 FRU: LPDU (Alpha, through P3)
 
 TEA: Coming soon by Ton.
