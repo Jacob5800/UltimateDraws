@@ -23,6 +23,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Added a final tank-only CT formation arrow during the first Hallowed Wings cast near 835, pointing to the assigned LPDU tank-front position and expiring with the cast. (10-10-2026)
+
 - Removed the long white Ultimate Relativity direction arrow and shortened P3-to-P4 marker 1 guidance by another three seconds. (10-10-2026)
 
 - Moved the P2 intermission potion reminder from timeline entry 335 to 363, retaining its existing delay. (10-10-2026)
