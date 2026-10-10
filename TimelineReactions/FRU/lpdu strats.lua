@@ -7844,41 +7844,6 @@ local tbl =
 			},
 			objectType = "folder",
 		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Alert",
-							alertDuration = 3000,
-							alertPriority = 2,
-							alertText = "[LPDU] Use potion",
-							name = "[LPDU] Use potion",
-							uuid = "63d1306b-20bf-e811-95d1-ed8267042e50",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-				},
-				displayPath = "LPDU Potion",
-				mechanicTime = 335.9,
-				name = "[LPDU] Use potion - P2 intermission",
-				throttleTime = 3000,
-				timeRange = true,
-				timelineIndex = 81,
-				timerEndOffset = 8,
-				timerStartOffset = 3,
-				uuid = "1019cfde-8ea4-c563-aea0-63af4f695731",
-				version = 2,
-			},
-		},
 	},
 	[85] = 
 	{
@@ -8411,6 +8376,51 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Potion",
+				uuid = "41f046a3-b3b8-eddb-a12e-b179e75aaeb5",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 3000,
+							alertPriority = 2,
+							alertText = "[LPDU] Use potion",
+							name = "[LPDU] Use potion",
+							uuid = "63d1306b-20bf-e811-95d1-ed8267042e50",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Potion",
+				mechanicTime = 363.5,
+				name = "[LPDU] Use potion - P2 intermission",
+				throttleTime = 3000,
+				timeRange = true,
+				timelineIndex = 93,
+				timerEndOffset = 8,
+				timerStartOffset = 3,
+				uuid = "1019cfde-8ea4-c563-aea0-63af4f695731",
+				version = 2,
+			},
 		},
 	},
 	[95] = 
@@ -20607,6 +20617,20 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				name = "[TTS] Move center",
+				uuid = "56505196-2ae8-2dd3-9d4f-5a83d0792b76",
+				version = 2,
+			},
+			inheritedObjectUUID = "f0e4eb0c-dd10-2a62-92c0-c8f6843c1ef9",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
 	},
 	[228] = 
 	{
@@ -20620,6 +20644,20 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "[TTS] Move out",
+				uuid = "c66cd363-f0a4-9a79-a48b-7c5a457e0c9d",
+				version = 2,
+			},
+			inheritedObjectUUID = "f1050637-06cb-04c0-9c8c-a185a4e9e15c",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
 		},
 	},
 	[229] = 
@@ -20635,6 +20673,20 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				name = "[TTS] Move center",
+				uuid = "e5207900-d4e3-f07a-a042-b30a72663765",
+				version = 2,
+			},
+			inheritedObjectUUID = "d254dbdc-8370-76cf-9f2e-68838b3dd504",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
 	},
 	[230] = 
 	{
@@ -20648,6 +20700,20 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "[TTS] Move out",
+				uuid = "aea70402-c9c3-c9e0-98cb-503d886072e2",
+				version = 2,
+			},
+			inheritedObjectUUID = "dd3e050e-4002-6499-8027-0b7bc77fbf3d",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
 		},
 	},
 	[231] = 
@@ -20663,6 +20729,20 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				name = "[TTS] Move center",
+				uuid = "0653266b-e97c-caf3-a22e-39b492f1e6d8",
+				version = 2,
+			},
+			inheritedObjectUUID = "7c690110-aca2-acb5-a909-8bef6c43a7de",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
 	},
 	[232] = 
 	{
@@ -20677,6 +20757,20 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				name = "[TTS] Move out",
+				uuid = "6aa6d7b4-89ad-82e9-bded-ac629c24d5c6",
+				version = 2,
+			},
+			inheritedObjectUUID = "07f14a83-2d53-c138-ba3e-6057c2f39748",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
 	},
 	[233] = 
 	{
@@ -20690,6 +20784,20 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "[TTS] Move center",
+				uuid = "1d80c386-5768-11b8-bdf5-812c119ff245",
+				version = 2,
+			},
+			inheritedObjectUUID = "98522f81-a0eb-30ed-8682-b06bfff77d4e",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
 		},
 		
 		{
@@ -22570,6 +22678,20 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				name = "[TTS] Move center",
+				uuid = "ef4cffb6-eddb-6b09-a3ba-58be6e47c1f9",
+				version = 2,
+			},
+			inheritedObjectUUID = "7ae97032-73b4-b949-ad4c-caa49865b158",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
 	},
 	[255] = 
 	{
@@ -22583,6 +22705,20 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "[TTS] Move out",
+				uuid = "39cd8139-a995-a5d5-b926-4e898c1159fd",
+				version = 2,
+			},
+			inheritedObjectUUID = "87e79e39-fa24-76e4-81ca-ed381a3af79d",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
 		},
 	},
 	[256] = 
@@ -22598,6 +22734,20 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				name = "[TTS] Move center",
+				uuid = "cd94945c-d204-936a-a22d-3fa9e6d11e0d",
+				version = 2,
+			},
+			inheritedObjectUUID = "8e57e59c-7bb7-ef36-880d-3bcbe915329a",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
 	},
 	[257] = 
 	{
@@ -22611,6 +22761,20 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "[TTS] Move out",
+				uuid = "ec864c3b-65bd-9248-9214-e52f7bb65c70",
+				version = 2,
+			},
+			inheritedObjectUUID = "bddf7d76-25e5-ca99-97ee-b594772acbba",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
 		},
 	},
 	[258] = 
@@ -22626,6 +22790,20 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				name = "[TTS] Move center",
+				uuid = "5ad05838-23d7-45ef-a6df-4e4cb306315e",
+				version = 2,
+			},
+			inheritedObjectUUID = "a7716388-7ab2-c616-8910-e68ed8068edc",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
 	},
 	[259] = 
 	{
@@ -22640,6 +22818,20 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				name = "[TTS] Move out",
+				uuid = "c8de781b-277b-94ed-801d-d71d37a47b8a",
+				version = 2,
+			},
+			inheritedObjectUUID = "6a653858-6ae4-c70e-91a3-42399de2f417",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
 	},
 	[260] = 
 	{
@@ -22653,6 +22845,20 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "[TTS] Move center",
+				uuid = "b9903de3-4a77-a3d1-9f83-1fca14e012f6",
+				version = 2,
+			},
+			inheritedObjectUUID = "0a8de8a6-1829-aaa8-af2f-75c107750255",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
 		},
 		
 		{
