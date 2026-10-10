@@ -23,6 +23,10 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Added a one-time Proteans text/TTS reminder at timeline 364 for House of Light; removed the P2 intermission potion reminder at 363.5. (10-10-2026)
+
+- Removed the yellow Diamond Dust knockback standing and landing circles; retained the short assigned-side arrow. (10-10-2026)
+
 - Light Rampant tower regroup also checks local occupancy of the resolving four-yalm tower, so the movement arrow can trigger when the hit-target check misses the player. (10-10-2026)
 
 - Added a one-shot Go to conga line text/TTS reminder at timeline 89 (moved one second earlier). (10-10-2026)
