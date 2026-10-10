@@ -23,7 +23,6 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
-- Added Viper-only Serpent's Ire during Crystallize Time at timeline 828.1–830.1, before the rewind placement; casts only when ready and supports boss downtime. (10-10-2026)
 
 - Added a one-time Proteans text/TTS reminder at timeline 364 for House of Light; removed the P2 intermission potion reminder at 363.5. (10-10-2026)
 
