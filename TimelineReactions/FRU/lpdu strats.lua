@@ -6,17 +6,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "FRU_megaminx_indicator",
-				uuid = "035d173d-bc8c-8121-705b-366ba896fead",
-			},
-			inheritanceRoot = "FRU_megaminx_indicator",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "protean indicator",
 				uuid = "b64f1684-8b35-71fa-9f7d-4b7d02dec4de",
 				version = 2,
@@ -1088,17 +1077,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "FRU_megaminx_indicator",
-				uuid = "a7809ac5-149c-8ec9-6dd2-2923fb1cacb5",
-			},
-			inheritanceRoot = "FRU_megaminx_indicator",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "store mech",
 				uuid = "3ae3948b-3090-fdc3-a177-df40f8d1afdf",
 				version = 2,
@@ -1347,17 +1325,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "FRU_megaminx_indicator",
-				uuid = "3e8e8176-0b23-dae2-c351-f380962bc126",
-			},
-			inheritanceRoot = "FRU_megaminx_indicator",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "safe zone indicator",
 				uuid = "08cb72e9-cfa2-56aa-ac24-5cbe9d8955ca",
 				version = 2,
@@ -1388,6 +1355,36 @@ local tbl =
 				uuid = "c80b3db0-f27a-1f9c-8fbe-0d4d876b0a7f",
 			},
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current() == nil or roster.mySlot() ~= \"T2\" then\n    self.used = true\n    return\nend\nlocal player = TensorCore.mGetPlayer()\nif player == nil or player.pos == nil then\n    self.used = true\n    return\nend\nlocal sourcePos = player.pos\nlocal targetPos = { x = 112.41, y = 0, z = 86.11 }\nlocal heading = TensorCore.getHeadingToTarget(sourcePos, targetPos)\nlocal distance = TensorCore.getDistance2d(sourcePos, targetPos)\nlocal otBlue = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(40/255, 100/255, 220/255, .25), 2)\nif distance > 0.5 then\n    otBlue:addTimedArrow(5000, sourcePos.x, sourcePos.y, sourcePos.z, heading, distance, 1, 1, 1, 0, true)\nend\nAnyoneCore.addTimedWorldText(5000, \"OT Buster\", targetPos, GUI:ColorConvertFloat4ToU32(1, 1, 1, 1), true, 1.5, 0)\nself.used = true",
+							name = "OT arrow to A",
+							uuid = "604d1e93-fa64-2d84-9bb6-f8a4de0eb3bc",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU",
+				mechanicTime = 40.3,
+				name = "[LPDU] OT Buster to A indicator",
+				timelineIndex = 11,
+				timerOffset = -5.5,
+				uuid = "3f066183-f48a-8699-8bac-1ddcdbf3c7e2",
+				version = 2,
+			},
 		},
 		
 		{
@@ -1440,36 +1437,6 @@ local tbl =
 				version = 2,
 			},
 			inheritedIndex = 25,
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current() == nil or roster.mySlot() ~= \"T2\" then\n    self.used = true\n    return\nend\nlocal player = TensorCore.mGetPlayer()\nif player == nil or player.pos == nil then\n    self.used = true\n    return\nend\nlocal sourcePos = player.pos\nlocal targetPos = { x = 112.41, y = 0, z = 86.11 }\nlocal heading = TensorCore.getHeadingToTarget(sourcePos, targetPos)\nlocal distance = TensorCore.getDistance2d(sourcePos, targetPos)\nlocal otBlue = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(40/255, 100/255, 220/255, .25), 2)\nif distance > 0.5 then\n    otBlue:addTimedArrow(5000, sourcePos.x, sourcePos.y, sourcePos.z, heading, distance, 1, 1, 1, 0, true)\nend\nAnyoneCore.addTimedWorldText(5000, \"OT Buster\", targetPos, GUI:ColorConvertFloat4ToU32(1, 1, 1, 1), true, 1.5, 0)\nself.used = true",
-							name = "OT arrow to A",
-							uuid = "604d1e93-fa64-2d84-9bb6-f8a4de0eb3bc",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-				},
-				displayPath = "LPDU",
-				mechanicTime = 40.3,
-				name = "[LPDU] OT Buster to A indicator",
-				timelineIndex = 11,
-				timerOffset = -5.5,
-				uuid = "3f066183-f48a-8699-8bac-1ddcdbf3c7e2",
-				version = 2,
-			},
 		},
 	},
 	[12] = 
@@ -1534,17 +1501,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "FRU_megaminx_indicator",
-				uuid = "0b3324c4-56d2-f150-e0a9-2892565b05f4",
-			},
-			inheritanceRoot = "FRU_megaminx_indicator",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "get safe element",
 				uuid = "66a1e688-3369-3527-8773-9314f46fc5c3",
 				version = 2,
@@ -1575,6 +1531,60 @@ local tbl =
 				uuid = "98e13fe5-8e56-ecb7-bbb0-c68d6ef79cb2",
 			},
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local function stop()\n    self.used = true\nend\n\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current == nil or roster.current() == nil\n    or roster.mySlot == nil or roster.isReady == nil or not roster.isReady() then\n    stop()\n    return\nend\n\nlocal mySlot = roster.mySlot()\nlocal isNorth = mySlot == \"T1\" or mySlot == \"H1\" or mySlot == \"M1\" or mySlot == \"R1\"\nlocal isSouth = mySlot == \"T2\" or mySlot == \"H2\" or mySlot == \"M2\" or mySlot == \"R2\"\nif not isNorth and not isSouth then\n    stop()\n    return\nend\n\nlocal player = TensorCore.mGetPlayer()\nif player == nil or player.pos == nil then\n    stop()\n    return\nend\n\nlocal safePos = { x = 100, y = 0, z = isNorth and 86 or 114 }\nlocal playerPos = { x = player.pos.x, y = player.pos.y or 0, z = player.pos.z }\nlocal distance = TensorCore.getDistance2d(playerPos, safePos)\nif distance <= 0 then\n    stop()\n    return\nend\n\nlocal drawDelay = 2600\nlocal timeout = math.max(1000, (tonumber(eventArgs.channelTimeMax) or 7.7) * 1000 + 220 - drawDelay)\nlocal heading = TensorCore.getHeadingToTarget(playerPos, safePos)\nlocal cyan = GUI:ColorConvertFloat4ToU32(0/255, 225/255, 255/255, .72)\nlocal white = GUI:ColorConvertFloat4ToU32(255/255, 255/255, 255/255, .95)\nlocal drawer = TensorCore.getCachedDrawer(cyan, cyan, cyan, white, 2.5)\ndrawer:addTimedArrow(timeout, playerPos.x, playerPos.y, playerPos.z, heading, distance, 0.5, 0.8, 0.8, drawDelay, true)\n\nstop()",
+							conditions = 
+							{
+								
+								{
+									"c408956c-49fa-a733-a00b-0646dee892ad",
+									true,
+								},
+							},
+							name = "Move to light party safe side [AnyoneCore]",
+							uuid = "f6f94979-8c79-0b43-b1ab-5c0da8fc64c2",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventSpellID = 40163,
+							name = "West Burnt Strike",
+							uuid = "c408956c-49fa-a733-a00b-0646dee892ad",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				mechanicTime = 56.2,
+				name = "Burnt Strike LP safe arrows [AnyoneCore]",
+				timeRange = true,
+				timelineIndex = 13,
+				timerEndOffset = 10,
+				timerStartOffset = -2,
+				uuid = "ff6878d6-9fbe-f887-96ff-e786d74c97ec",
+				version = 2,
+			},
 		},
 		
 		{
@@ -1670,60 +1680,6 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local function stop()\n    self.used = true\nend\n\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current == nil or roster.current() == nil\n    or roster.mySlot == nil or roster.isReady == nil or not roster.isReady() then\n    stop()\n    return\nend\n\nlocal mySlot = roster.mySlot()\nlocal isNorth = mySlot == \"T1\" or mySlot == \"H1\" or mySlot == \"M1\" or mySlot == \"R1\"\nlocal isSouth = mySlot == \"T2\" or mySlot == \"H2\" or mySlot == \"M2\" or mySlot == \"R2\"\nif not isNorth and not isSouth then\n    stop()\n    return\nend\n\nlocal player = TensorCore.mGetPlayer()\nif player == nil or player.pos == nil then\n    stop()\n    return\nend\n\nlocal safePos = { x = 100, y = 0, z = isNorth and 86 or 114 }\nlocal playerPos = { x = player.pos.x, y = player.pos.y or 0, z = player.pos.z }\nlocal distance = TensorCore.getDistance2d(playerPos, safePos)\nif distance <= 0 then\n    stop()\n    return\nend\n\nlocal drawDelay = 2600\nlocal timeout = math.max(1000, (tonumber(eventArgs.channelTimeMax) or 7.7) * 1000 + 220 - drawDelay)\nlocal heading = TensorCore.getHeadingToTarget(playerPos, safePos)\nlocal cyan = GUI:ColorConvertFloat4ToU32(0/255, 225/255, 255/255, .72)\nlocal white = GUI:ColorConvertFloat4ToU32(255/255, 255/255, 255/255, .95)\nlocal drawer = TensorCore.getCachedDrawer(cyan, cyan, cyan, white, 2.5)\ndrawer:addTimedArrow(timeout, playerPos.x, playerPos.y, playerPos.z, heading, distance, 0.5, 0.8, 0.8, drawDelay, true)\n\nstop()",
-							conditions = 
-							{
-								
-								{
-									"c408956c-49fa-a733-a00b-0646dee892ad",
-									true,
-								},
-							},
-							name = "Move to light party safe side [AnyoneCore]",
-							uuid = "f6f94979-8c79-0b43-b1ab-5c0da8fc64c2",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Event",
-							dequeueIfLuaFalse = true,
-							eventArgType = 2,
-							eventSpellID = 40163,
-							name = "West Burnt Strike",
-							uuid = "c408956c-49fa-a733-a00b-0646dee892ad",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "LPDU",
-				eventType = 3,
-				mechanicTime = 56.2,
-				name = "Burnt Strike LP safe arrows [AnyoneCore]",
-				timeRange = true,
-				timelineIndex = 13,
-				timerEndOffset = 10,
-				timerStartOffset = -2,
-				uuid = "ff6878d6-9fbe-f887-96ff-e786d74c97ec",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
 							actionLua = "if data.megaminx_p1stackflex == nil then data.megaminx_p1stackflex = 1 end\nself.used = true",
 							conditions = 
 							{
@@ -1802,17 +1758,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "FRU_megaminx_indicator",
-				uuid = "ced6bc3a-e34f-245e-23d4-579ce28b1baa",
-			},
-			inheritanceRoot = "FRU_megaminx_indicator",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "protean indicator",
 				uuid = "d09e05d1-9285-4fbc-96ae-10cc4b701cfb",
 				version = 2,
@@ -1832,64 +1777,6 @@ local tbl =
 				uuid = "25851da4-72fb-edec-931d-f22b3bcd4056",
 			},
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "local p = TensorCore.mGetPlayer()\nlocal center = {x = 100, y = 0,z = 100}\nlocal teal = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0/255, 190/255, 220/255, .25),2)\nlocal index\n--party should be tank1 tank2 healer1 healer2 melee1 melee2 range1 range2\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current() == nil then\n    self.used = true\n    return\nend\nlocal mySlot = roster.mySlot()\nlocal myRole = (mySlot == \"T1\" and \"MT\") or (mySlot == \"T2\" and \"OT\") or mySlot\nif not roster.isReady() then\n    self.used = true\n    return\nend\nif p == nil then self.used = true; return end\nif myRole == \"MT\" then index = 1\nelseif myRole == \"OT\" then index = 2\nelseif myRole == \"H1\" then index = 3\nelseif myRole == \"H2\" then index = 4\nelseif myRole == \"M1\" then index = 5\nelseif myRole == \"M2\" then index = 6\nelseif myRole == \"R1\" then index = 7\nelseif myRole == \"R2\" then index = 8\nelse self.used = true; return end\nlocal partyIDs = {\n    roster.idOf(\"T1\"),\n    roster.idOf(\"T2\"),\n    roster.idOf(\"H1\"),\n    roster.idOf(\"H2\"),\n    roster.idOf(\"M1\"),\n    roster.idOf(\"M2\"),\n    roster.idOf(\"R1\"),\n    roster.idOf(\"R2\")\n}--1: tank1 = N\n--2: tank2 = E\n--3: healer1 = W\n--4: healer2 = S\n--5: melee1 = SW\n--6: melee2 = SE\n--7: range1 = NW\n--8: range2 = NE\nlocal heading2North = TensorCore.getHeadingToTarget(center,{x = 100, y = 0,z = 70})\nlocal time = eventArgs.channelTimeMax * 1000 + 1000\nif index == 1 then --tank1\n    local heading = heading2North --north\n    local pos1 = TensorCore.getPosInDirection(center,heading,6)\n    local pos2 = TensorCore.getPosInDirection(center,heading + math.pi/8,6)\n    local distance = TensorCore.getDistance2d(pos1,pos2) - 1\n    teal:addTimedArrow(time, 100, 0, 100, heading, 6, 1, 1, 1,0,true)\nelseif index == 2 then --tank2\n    local heading = heading2North - math.pi/2 --east\n    local pos1 = TensorCore.getPosInDirection(center,heading,6)\n    local pos2 = TensorCore.getPosInDirection(center,heading + math.pi/8,6)\n    local distance = TensorCore.getDistance2d(pos1,pos2) - 1\n    teal:addTimedArrow(time, 100, 0, 100, heading, 6, 1, 1, 1,0,true)\nelseif index == 3 then --healer1\n    local heading = heading2North + math.pi/2 --west\n    if eventArgs.spellID == 40329 then --stack\n        local pos1 = TensorCore.getPosInDirection(center,heading,6)\n        local pos2 = TensorCore.getPosInDirection(center,heading + math.pi/8,6)\n        local distance = TensorCore.getDistance2d(pos1,pos2) - 1\n        teal:addTimedArrow(time, 100, 0, 100, heading, 6, 1, 1, 1,0,true)\n    end\n    if eventArgs.spellID == 40330 then --spread\n        local pos1 = TensorCore.getPosInDirection(center,heading,12)\n        local pos2 = TensorCore.getPosInDirection(center,heading + math.pi/8,12)\n        local distance = TensorCore.getDistance2d(pos1,pos2) - 1\n        teal:addTimedArrow(time, 100, 0, 100, heading, 6, 1, 1, 1,0,true)\n    end\nelseif index == 4 then --healer2\n    local heading = heading2North + math.pi --south\n    if eventArgs.spellID == 40329 then --stack\n        local pos1 = TensorCore.getPosInDirection(center,heading,6)\n        local pos2 = TensorCore.getPosInDirection(center,heading + math.pi/8,6)\n        local distance = TensorCore.getDistance2d(pos1,pos2) - 1\n        teal:addTimedArrow(time, 100, 0, 100, heading, 6, 1, 1, 1,0,true)\n    end\n    if eventArgs.spellID == 40330 then --spread\n        local pos1 = TensorCore.getPosInDirection(center,heading,12)\n        local pos2 = TensorCore.getPosInDirection(center,heading + math.pi/8,12)\n        local distance = TensorCore.getDistance2d(pos1,pos2) - 1\n        teal:addTimedArrow(time, 100, 0, 100, heading, 6, 1, 1, 1,0,true)\n    end\nelseif index == 5 then --melee1\n    local heading = heading2North + math.pi/2 + math.pi/4 --southwest\n    local pos1 = TensorCore.getPosInDirection(center,heading,6)\n    local pos2 = TensorCore.getPosInDirection(center,heading - math.pi/8,6)\n    local distance = TensorCore.getDistance2d(pos1,pos2) - 1\n    teal:addTimedArrow(time, 100, 0, 100, heading, 6, 1, 1, 1,0,true)\nelseif index == 6 then --melee2\n    local heading = heading2North - math.pi/2 - math.pi/4 --southeast\n    local pos1 = TensorCore.getPosInDirection(center,heading,6)\n    local pos2 = TensorCore.getPosInDirection(center,heading - math.pi/8,6)\n    local distance = TensorCore.getDistance2d(pos1,pos2) - 1\n    teal:addTimedArrow(time, 100, 0, 100, heading, 6, 1, 1, 1,0,true)\nelseif index == 7 then --range1\n    local heading = heading2North + math.pi/4 --northwest\n    if eventArgs.spellID == 40329 then --stack\n        local pos1 = TensorCore.getPosInDirection(center,heading,6)\n        local pos2 = TensorCore.getPosInDirection(center,heading - math.pi/8,6)\n        local distance = TensorCore.getDistance2d(pos1,pos2) - 1\n        teal:addTimedArrow(time, 100, 0, 100, heading, 6, 1, 1, 1,0,true)\n    end\n    if eventArgs.spellID == 40330 then --spread\n        local pos1 = TensorCore.getPosInDirection(center,heading,12)\n        local pos2 = TensorCore.getPosInDirection(center,heading - math.pi/8,12)\n        local distance = TensorCore.getDistance2d(pos1,pos2) - 1\n        teal:addTimedArrow(time, 100, 0, 100, heading, 6, 1, 1, 1,0,true)\n    end\nelseif index == 8 then --range2\n    local heading = heading2North - math.pi/4 --northeast\n    if eventArgs.spellID == 40329 then --stack\n        local pos1 = TensorCore.getPosInDirection(center,heading,6)\n        local pos2 = TensorCore.getPosInDirection(center,heading - math.pi/8,6)\n        local distance = TensorCore.getDistance2d(pos1,pos2) - 1\n        teal:addTimedArrow(time, 100, 0, 100, heading, 6, 1, 1, 1,0,true)\n    end\n    if eventArgs.spellID == 40330 then --spread\n        local pos1 = TensorCore.getPosInDirection(center,heading,12)\n        local pos2 = TensorCore.getPosInDirection(center,heading - math.pi/8,12)\n        local distance = TensorCore.getDistance2d(pos1,pos2) - 1\n        teal:addTimedArrow(time, 100, 0, 100, heading, 6, 1, 1, 1,0,true)\n    end\nend\n-- This occurrence only: identify the local player's LPDU partner for Sinsmite.\n-- Sinsmoke/spread (40330) deliberately has no partner marker.\nif eventArgs.spellID == 40329 then\n    local partners = {\n        T1 = {\"R1\", 1, 0, 0}, R1 = {\"T1\", 1, 0, 0},\n        H1 = {\"M1\", .65, 0, 1}, M1 = {\"H1\", .65, 0, 1},\n        T2 = {\"R2\", 1, 1, 0}, R2 = {\"T2\", 1, 1, 0},\n        H2 = {\"M2\", 0, .4, 1}, M2 = {\"H2\", 0, .4, 1}\n    }\n    local pair = partners[mySlot]\n    local partnerID = pair and roster.idOf(pair[1])\n    if partnerID ~= nil and partnerID ~= 0 then\n        local marker = TensorCore.getStaticDrawer(\n            GUI:ColorConvertFloat4ToU32(pair[2], pair[3], pair[4], .45), 2)\n        marker:addTimedCircleOnEnt(time + 1000, partnerID, 1, 0, true, true)\n    end\nend\nself.used = true",
-							conditions = 
-							{
-								
-								{
-									"2585fa29-d44a-a8b0-bc20-98db0d477529",
-									true,
-								},
-							},
-							name = "Opening role-position arrows",
-							uuid = "edcc6235-fe6e-d7c8-96f9-1e85233a9b8b",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Event",
-							eventArgOptionType = 3,
-							eventArgType = 2,
-							spellIDList = 
-							{
-								40330,
-								40329,
-							},
-							uuid = "2585fa29-d44a-a8b0-bc20-98db0d477529",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "LPDU",
-				eventType = 3,
-				mechanicTime = 58.2,
-				name = "Protean stack/spread positions [AnyoneCore]",
-				timeRange = true,
-				timelineIndex = 15,
-				timerEndOffset = 10,
-				timerStartOffset = -13,
-				uuid = "9191b095-a2f2-5f05-9d3e-6b7b2f287882",
-				version = 2,
-			},
-			inheritedIndex = 4,
 		},
 		
 		{
@@ -1949,6 +1836,64 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local p = TensorCore.mGetPlayer()\nlocal center = {x = 100, y = 0,z = 100}\nlocal teal = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0/255, 190/255, 220/255, .25),2)\nlocal index\n--party should be tank1 tank2 healer1 healer2 melee1 melee2 range1 range2\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current() == nil then\n    self.used = true\n    return\nend\nlocal mySlot = roster.mySlot()\nlocal myRole = (mySlot == \"T1\" and \"MT\") or (mySlot == \"T2\" and \"OT\") or mySlot\nif not roster.isReady() then\n    self.used = true\n    return\nend\nif p == nil then self.used = true; return end\nif myRole == \"MT\" then index = 1\nelseif myRole == \"OT\" then index = 2\nelseif myRole == \"H1\" then index = 3\nelseif myRole == \"H2\" then index = 4\nelseif myRole == \"M1\" then index = 5\nelseif myRole == \"M2\" then index = 6\nelseif myRole == \"R1\" then index = 7\nelseif myRole == \"R2\" then index = 8\nelse self.used = true; return end\nlocal partyIDs = {\n    roster.idOf(\"T1\"),\n    roster.idOf(\"T2\"),\n    roster.idOf(\"H1\"),\n    roster.idOf(\"H2\"),\n    roster.idOf(\"M1\"),\n    roster.idOf(\"M2\"),\n    roster.idOf(\"R1\"),\n    roster.idOf(\"R2\")\n}--1: tank1 = N\n--2: tank2 = E\n--3: healer1 = W\n--4: healer2 = S\n--5: melee1 = SW\n--6: melee2 = SE\n--7: range1 = NW\n--8: range2 = NE\nlocal heading2North = TensorCore.getHeadingToTarget(center,{x = 100, y = 0,z = 70})\nlocal time = eventArgs.channelTimeMax * 1000 + 1000\nif index == 1 then --tank1\n    local heading = heading2North --north\n    local pos1 = TensorCore.getPosInDirection(center,heading,6)\n    local pos2 = TensorCore.getPosInDirection(center,heading + math.pi/8,6)\n    local distance = TensorCore.getDistance2d(pos1,pos2) - 1\n    teal:addTimedArrow(time, 100, 0, 100, heading, 6, 1, 1, 1,0,true)\nelseif index == 2 then --tank2\n    local heading = heading2North - math.pi/2 --east\n    local pos1 = TensorCore.getPosInDirection(center,heading,6)\n    local pos2 = TensorCore.getPosInDirection(center,heading + math.pi/8,6)\n    local distance = TensorCore.getDistance2d(pos1,pos2) - 1\n    teal:addTimedArrow(time, 100, 0, 100, heading, 6, 1, 1, 1,0,true)\nelseif index == 3 then --healer1\n    local heading = heading2North + math.pi/2 --west\n    if eventArgs.spellID == 40329 then --stack\n        local pos1 = TensorCore.getPosInDirection(center,heading,6)\n        local pos2 = TensorCore.getPosInDirection(center,heading + math.pi/8,6)\n        local distance = TensorCore.getDistance2d(pos1,pos2) - 1\n        teal:addTimedArrow(time, 100, 0, 100, heading, 6, 1, 1, 1,0,true)\n    end\n    if eventArgs.spellID == 40330 then --spread\n        local pos1 = TensorCore.getPosInDirection(center,heading,12)\n        local pos2 = TensorCore.getPosInDirection(center,heading + math.pi/8,12)\n        local distance = TensorCore.getDistance2d(pos1,pos2) - 1\n        teal:addTimedArrow(time, 100, 0, 100, heading, 6, 1, 1, 1,0,true)\n    end\nelseif index == 4 then --healer2\n    local heading = heading2North + math.pi --south\n    if eventArgs.spellID == 40329 then --stack\n        local pos1 = TensorCore.getPosInDirection(center,heading,6)\n        local pos2 = TensorCore.getPosInDirection(center,heading + math.pi/8,6)\n        local distance = TensorCore.getDistance2d(pos1,pos2) - 1\n        teal:addTimedArrow(time, 100, 0, 100, heading, 6, 1, 1, 1,0,true)\n    end\n    if eventArgs.spellID == 40330 then --spread\n        local pos1 = TensorCore.getPosInDirection(center,heading,12)\n        local pos2 = TensorCore.getPosInDirection(center,heading + math.pi/8,12)\n        local distance = TensorCore.getDistance2d(pos1,pos2) - 1\n        teal:addTimedArrow(time, 100, 0, 100, heading, 6, 1, 1, 1,0,true)\n    end\nelseif index == 5 then --melee1\n    local heading = heading2North + math.pi/2 + math.pi/4 --southwest\n    local pos1 = TensorCore.getPosInDirection(center,heading,6)\n    local pos2 = TensorCore.getPosInDirection(center,heading - math.pi/8,6)\n    local distance = TensorCore.getDistance2d(pos1,pos2) - 1\n    teal:addTimedArrow(time, 100, 0, 100, heading, 6, 1, 1, 1,0,true)\nelseif index == 6 then --melee2\n    local heading = heading2North - math.pi/2 - math.pi/4 --southeast\n    local pos1 = TensorCore.getPosInDirection(center,heading,6)\n    local pos2 = TensorCore.getPosInDirection(center,heading - math.pi/8,6)\n    local distance = TensorCore.getDistance2d(pos1,pos2) - 1\n    teal:addTimedArrow(time, 100, 0, 100, heading, 6, 1, 1, 1,0,true)\nelseif index == 7 then --range1\n    local heading = heading2North + math.pi/4 --northwest\n    if eventArgs.spellID == 40329 then --stack\n        local pos1 = TensorCore.getPosInDirection(center,heading,6)\n        local pos2 = TensorCore.getPosInDirection(center,heading - math.pi/8,6)\n        local distance = TensorCore.getDistance2d(pos1,pos2) - 1\n        teal:addTimedArrow(time, 100, 0, 100, heading, 6, 1, 1, 1,0,true)\n    end\n    if eventArgs.spellID == 40330 then --spread\n        local pos1 = TensorCore.getPosInDirection(center,heading,12)\n        local pos2 = TensorCore.getPosInDirection(center,heading - math.pi/8,12)\n        local distance = TensorCore.getDistance2d(pos1,pos2) - 1\n        teal:addTimedArrow(time, 100, 0, 100, heading, 6, 1, 1, 1,0,true)\n    end\nelseif index == 8 then --range2\n    local heading = heading2North - math.pi/4 --northeast\n    if eventArgs.spellID == 40329 then --stack\n        local pos1 = TensorCore.getPosInDirection(center,heading,6)\n        local pos2 = TensorCore.getPosInDirection(center,heading - math.pi/8,6)\n        local distance = TensorCore.getDistance2d(pos1,pos2) - 1\n        teal:addTimedArrow(time, 100, 0, 100, heading, 6, 1, 1, 1,0,true)\n    end\n    if eventArgs.spellID == 40330 then --spread\n        local pos1 = TensorCore.getPosInDirection(center,heading,12)\n        local pos2 = TensorCore.getPosInDirection(center,heading - math.pi/8,12)\n        local distance = TensorCore.getDistance2d(pos1,pos2) - 1\n        teal:addTimedArrow(time, 100, 0, 100, heading, 6, 1, 1, 1,0,true)\n    end\nend\n-- This occurrence only: identify the local player's LPDU partner for Sinsmite.\n-- Sinsmoke/spread (40330) deliberately has no partner marker.\nif eventArgs.spellID == 40329 then\n    local partners = {\n        T1 = {\"R1\", 1, 0, 0}, R1 = {\"T1\", 1, 0, 0},\n        H1 = {\"M1\", .65, 0, 1}, M1 = {\"H1\", .65, 0, 1},\n        T2 = {\"R2\", 1, 1, 0}, R2 = {\"T2\", 1, 1, 0},\n        H2 = {\"M2\", 0, .4, 1}, M2 = {\"H2\", 0, .4, 1}\n    }\n    local pair = partners[mySlot]\n    local partnerID = pair and roster.idOf(pair[1])\n    if partnerID ~= nil and partnerID ~= 0 then\n        local marker = TensorCore.getStaticDrawer(\n            GUI:ColorConvertFloat4ToU32(pair[2], pair[3], pair[4], .45), 2)\n        marker:addTimedCircleOnEnt(time + 1000, partnerID, 1, 0, true, true)\n    end\nend\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"2585fa29-d44a-a8b0-bc20-98db0d477529",
+									true,
+								},
+							},
+							name = "Opening role-position arrows",
+							uuid = "edcc6235-fe6e-d7c8-96f9-1e85233a9b8b",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							spellIDList = 
+							{
+								40330,
+								40329,
+							},
+							uuid = "2585fa29-d44a-a8b0-bc20-98db0d477529",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				mechanicTime = 58.2,
+				name = "Protean stack/spread positions [AnyoneCore]",
+				timeRange = true,
+				timelineIndex = 15,
+				timerEndOffset = 10,
+				timerStartOffset = -13,
+				uuid = "9191b095-a2f2-5f05-9d3e-6b7b2f287882",
+				version = 2,
+			},
+			inheritedIndex = 4,
+		},
 	},
 	[16] = 
 	{
@@ -1966,17 +1911,6 @@ local tbl =
 	},
 	[17] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "FRU_megaminx_indicator",
-				uuid = "f7361e48-01a0-3b2c-4df1-334ecb3f09b8",
-			},
-			inheritanceRoot = "FRU_megaminx_indicator",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -2138,17 +2072,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "FRU_megaminx_indicator",
-				uuid = "f163f1df-6444-fcbb-8176-6f2952b9b70f",
-			},
-			inheritanceRoot = "FRU_megaminx_indicator",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "stack indicator",
 				uuid = "23262831-1276-06ad-a2f9-08285b0d1f17",
 				version = 2,
@@ -2279,17 +2202,6 @@ local tbl =
 	},
 	[22] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "FRU_megaminx_indicator",
-				uuid = "09529db0-b29c-177c-a8f6-e82a566b69e0",
-			},
-			inheritanceRoot = "FRU_megaminx_indicator",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -3636,17 +3548,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "FRU_megaminx_indicator",
-				uuid = "dc81567f-606e-4bab-57ee-a589799ceb2f",
-			},
-			inheritanceRoot = "FRU_megaminx_indicator",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "towers indicator",
 				uuid = "b0c9e7ab-7c00-d83d-ab4b-27c57ef2df24",
 				version = 2,
@@ -3677,6 +3578,36 @@ local tbl =
 				uuid = "108b4752-a062-1610-925a-23b090106dba",
 			},
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local function stop()\n    self.used = true\nend\n\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current == nil or roster.current() == nil\n    or roster.mySlot == nil or roster.isReady == nil or not roster.isReady() then\n    stop()\n    return\nend\n\nlocal mySlot = roster.mySlot()\nif mySlot ~= \"T1\" and mySlot ~= \"T2\" then\n    stop()\n    return\nend\n\nlocal player = TensorCore.mGetPlayer()\nif player == nil or player.pos == nil then\n    stop()\n    return\nend\n\nlocal towers = data.megaminx_p1_3stacktower\nif type(towers) ~= \"table\" or #towers < 3 then\n    stop()\n    return\nend\n\nlocal totalX = 0\nlocal count = 0\nfor _, tower in ipairs(towers) do\n    if tower ~= nil and tower.id ~= nil then\n        local entity = TensorCore.mGetEntity(tower.id)\n        if entity ~= nil and entity.pos ~= nil then\n            totalX = totalX + entity.pos.x\n            count = count + 1\n        end\n    end\nend\nif count == 0 then\n    stop()\n    return\nend\n\n-- Tanks solve Powdermark opposite the tower side.\nlocal towersEast = (totalX / count) > 100\nlocal safeX = towersEast and 84 or 116\nlocal safePos = { x = safeX, y = 0, z = 100 }\nlocal outsidePos = { x = 94, y = 0, z = 100 }\nlocal playerPos = { x = player.pos.x, y = player.pos.y or 0, z = player.pos.z }\nlocal center = { x = 100, y = 0, z = 100 }\n\nlocal drawer = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .25), 2)\n\n-- Stay outside the first Burnt Strike hit.\nlocal outHeading = TensorCore.getHeadingToTarget(playerPos, outsidePos)\nlocal outDistance = TensorCore.getDistance2d(playerPos, outsidePos) - 1\nif outDistance > 0 then\n    drawer:addTimedArrow(6200, playerPos.x, playerPos.y, playerPos.z, outHeading, outDistance, 1, 1, 1, 0, true)\nend\n\n-- After the first hit, walk inward for the knockback and follow-up hits.\nlocal inHeading = TensorCore.getHeadingToTarget(safePos, center)\nlocal inDistance = TensorCore.getDistance2d(safePos, center) - 1\nif inDistance > 0 then\n    drawer:addTimedArrow(4700, safePos.x, safePos.y, safePos.z, inHeading, inDistance, 1, 1, 1, 6200, true)\nend\n\nstop()",
+							name = "Outside then inside [AnyoneCore]",
+							uuid = "9c207840-1e20-cb82-9be3-937e1f89604b",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU",
+				mechanicTime = 140.9,
+				name = "[LPDU] Tank burnt strike dodge arrows",
+				timelineIndex = 32,
+				timerOffset = -5.8,
+				uuid = "9d4d0faf-bff0-6093-9799-6f6dd11177f6",
+				version = 2,
+			},
 		},
 		
 		{
@@ -3741,36 +3672,6 @@ local tbl =
 				version = 2,
 			},
 			inheritedIndex = 11,
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "local function stop()\n    self.used = true\nend\n\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current == nil or roster.current() == nil\n    or roster.mySlot == nil or roster.isReady == nil or not roster.isReady() then\n    stop()\n    return\nend\n\nlocal mySlot = roster.mySlot()\nif mySlot ~= \"T1\" and mySlot ~= \"T2\" then\n    stop()\n    return\nend\n\nlocal player = TensorCore.mGetPlayer()\nif player == nil or player.pos == nil then\n    stop()\n    return\nend\n\nlocal towers = data.megaminx_p1_3stacktower\nif type(towers) ~= \"table\" or #towers < 3 then\n    stop()\n    return\nend\n\nlocal totalX = 0\nlocal count = 0\nfor _, tower in ipairs(towers) do\n    if tower ~= nil and tower.id ~= nil then\n        local entity = TensorCore.mGetEntity(tower.id)\n        if entity ~= nil and entity.pos ~= nil then\n            totalX = totalX + entity.pos.x\n            count = count + 1\n        end\n    end\nend\nif count == 0 then\n    stop()\n    return\nend\n\n-- Tanks solve Powdermark opposite the tower side.\nlocal towersEast = (totalX / count) > 100\nlocal safeX = towersEast and 84 or 116\nlocal safePos = { x = safeX, y = 0, z = 100 }\nlocal outsidePos = { x = 94, y = 0, z = 100 }\nlocal playerPos = { x = player.pos.x, y = player.pos.y or 0, z = player.pos.z }\nlocal center = { x = 100, y = 0, z = 100 }\n\nlocal drawer = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .25), 2)\n\n-- Stay outside the first Burnt Strike hit.\nlocal outHeading = TensorCore.getHeadingToTarget(playerPos, outsidePos)\nlocal outDistance = TensorCore.getDistance2d(playerPos, outsidePos) - 1\nif outDistance > 0 then\n    drawer:addTimedArrow(6200, playerPos.x, playerPos.y, playerPos.z, outHeading, outDistance, 1, 1, 1, 0, true)\nend\n\n-- After the first hit, walk inward for the knockback and follow-up hits.\nlocal inHeading = TensorCore.getHeadingToTarget(safePos, center)\nlocal inDistance = TensorCore.getDistance2d(safePos, center) - 1\nif inDistance > 0 then\n    drawer:addTimedArrow(4700, safePos.x, safePos.y, safePos.z, inHeading, inDistance, 1, 1, 1, 6200, true)\nend\n\nstop()",
-							name = "Outside then inside [AnyoneCore]",
-							uuid = "9c207840-1e20-cb82-9be3-937e1f89604b",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-				},
-				displayPath = "LPDU",
-				mechanicTime = 140.9,
-				name = "[LPDU] Tank burnt strike dodge arrows",
-				timelineIndex = 32,
-				timerOffset = -5.8,
-				uuid = "9d4d0faf-bff0-6093-9799-6f6dd11177f6",
-				version = 2,
-			},
 		},
 	},
 	[33] = 
@@ -3855,6 +3756,46 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "aa0a7919-6f09-72da-98f0-f3af38c421b4",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster\nif r.current()==nil or r.mySlot()~=\"T1\" or not r.isReady() then return end\nlocal p=TensorCore.mGetPlayer();if p==nil then return end\nlocal x,y,z,active=Argus.getWaymarkInfo(1);if not active then return end\nlocal t={x=x,y=y,z=z};local length=TensorCore.getDistance2d(p.pos,t)\nlocal d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.55),2,1)\nd:addTimedCircle(8000,x,y+.05,z,1,0,true)\nif length>1 then d:addTimedArrow(8000,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,t),math.max(.15,length-1),1,1,1,0,true) end\nself.used=true",
+							endIfUsed = true,
+							name = "MT opening position",
+							uuid = "7f326168-120a-0116-ad7a-2c229ce153e2",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU",
+				mechanicTime = 203.8,
+				name = "[LPDU] P2 Opening - MT to A",
+				timelineIndex = 39,
+				uuid = "817ea404-d600-4cbf-955f-0aedf55dfb17",
+				version = 2,
+			},
 		},
 	},
 	[40] = 
@@ -4614,17 +4555,6 @@ local tbl =
 	},
 	[45] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "FRU_megaminx_indicator",
-				uuid = "fdb0245d-359b-e179-ed3b-a527ae874e8d",
-			},
-			inheritanceRoot = "FRU_megaminx_indicator",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -5583,6 +5513,71 @@ local tbl =
 				timerEndOffset = 0.5,
 				timerStartOffset = -6.5,
 				uuid = "7216e268-5c63-2fdd-8636-0bd023581cbc",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "c7f0b29c-416b-815c-bfe9-aa04e6bc543e",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster\nif r.current()==nil or not r.isReady() then return end\nlocal slot=r.mySlot();local g1=slot==\"T1\" or slot==\"H1\" or slot==\"M1\" or slot==\"R1\"\nlocal g2=slot==\"T2\" or slot==\"H2\" or slot==\"M2\" or slot==\"R2\"\nif not g1 and not g2 then return end\nlocal center={x=100,y=0,z=100}\n-- Use the assigned landing side captured before the knockback; icicles may already be gone.\nlocal state=data.lpdu_p2_DD_knockback_tether\nif state==nil or state.impactPos==nil then return end\nlocal landing=state.impactPos\nif landing.x==nil or landing.z==nil then return end\nlocal light=TensorCore.mGetEntity(eventArgs.entityID)\nif landing==nil or light==nil or light.pos==nil then return end\nlocal h=TensorCore.getHeadingToTarget(center,landing)\nlocal lightH=TensorCore.getHeadingToTarget(center,light.pos)\nlocal clockwiseGap=(h-lightH)%(2*math.pi)\nlocal sign=-1\nif g2 and clockwiseGap>=math.pi/8 and clockwiseGap<=3*math.pi/8 then sign=1 end\nlocal d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(1,.9,0,.75),3,1)\nfor i=0,3 do\n local a=h+sign*i*math.pi/12\n local b=a+sign*math.pi/12\n local x,y,z=TensorCore.getPosInDirection(center,a,17,true)\n local tx,ty,tz=TensorCore.getPosInDirection(center,b,17,true)\n local from={x=x,y=.05,z=z};local to={x=tx,y=.05,z=tz}\n local length=TensorCore.getDistance2d(from,to)\n d:addTimedArrow(5600,x,.05,z,TensorCore.getHeadingToTarget(from,to),math.max(.15,length-.8),.65,.8,1.4,0,false)\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"3bf3d945-c8d3-8f38-988f-6a8b148bde87",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Personal floor rotation path",
+							uuid = "175882cb-2021-995e-9e79-fba467606460",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventSpellID = 40208,
+							name = "First Holy hit",
+							uuid = "3bf3d945-c8d3-8f38-988f-6a8b148bde87",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 2,
+				mechanicTime = 255.1,
+				name = "[LPDU] Diamond Dust - Floor Rotation Direction",
+				timeRange = true,
+				timelineIndex = 53,
+				timerEndOffset = 0.5,
+				timerStartOffset = -1.5,
+				uuid = "757c3d2b-846d-f78f-8bb6-1ef380605808",
 				version = 2,
 			},
 		},
@@ -9556,34 +9551,6 @@ local tbl =
 		{
 			data = 
 			{
-				name = "get tethers",
-				uuid = "b305d5b6-a7ec-7c6b-8c4f-232353ae193d",
-				version = 2,
-			},
-			inheritedObjectUUID = "086828bb-51a3-b592-99e6-4f6128608cb9",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "UR indicator",
-				uuid = "b66afaff-17ea-ced5-a3f7-759c3af546d3",
-				version = 2,
-			},
-			inheritedObjectUUID = "843724fc-50d9-81b0-a58a-8ac5764aba1c",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
 				actions = 
 				{
 					
@@ -9718,6 +9685,34 @@ local tbl =
 				timerStartOffset = -100,
 				uuid = "3b54cfe4-8879-2a71-8fcf-ea51a01965e1",
 				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				name = "get tethers",
+				uuid = "b305d5b6-a7ec-7c6b-8c4f-232353ae193d",
+				version = 2,
+			},
+			inheritedObjectUUID = "086828bb-51a3-b592-99e6-4f6128608cb9",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
+				name = "UR indicator",
+				uuid = "b66afaff-17ea-ced5-a3f7-759c3af546d3",
+				version = 2,
+			},
+			inheritedObjectUUID = "843724fc-50d9-81b0-a58a-8ac5764aba1c",
+			inheritedOverwrites = 
+			{
+				enabled = false,
 			},
 		},
 		
@@ -11567,17 +11562,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "FRU_megaminx_indicator",
-				uuid = "08bb897d-1b01-29f1-449e-e12bb246aced",
-			},
-			inheritanceRoot = "FRU_megaminx_indicator",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "get apoc pos",
 				uuid = "1d944924-f9d1-ac27-92b3-76941736631c",
 				version = 2,
@@ -13280,17 +13264,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "FRU_megaminx_indicator",
-				uuid = "5826a72a-52d0-066e-3d63-3bd816e9365a",
-			},
-			inheritanceRoot = "FRU_megaminx_indicator",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "where boss is",
 				uuid = "6dc4478b-e3f6-ff15-ba69-2be152d12a96",
 				version = 2,
@@ -13414,7 +13387,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local p=TensorCore.mGetPlayer();if p==nil or p.pos==nil then return end\nlocal function guide(x,z,ms,radius)\n local t={x=x,y=p.pos.y,z=z};local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.55),2,1)\n local length=TensorCore.getDistance2d(p.pos,t)\n if length>.25 then local tip=math.min(1.25,length);d:addTimedArrow(ms,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,t),math.max(.15,length-tip),.9,tip,2.2,0,false) end\n d:addTimedCircle(ms,x,p.pos.y+.05,z,radius or 1,0,true)\nend\nlocal x,y,z,active=Argus.getWaymarkInfo(5);if not active then return end\nlocal duration=math.floor((702-TensorReactions_CurrentTimer)*1000);if duration<=0 then self.used=true;return end\nguide(x,z,duration,1.5);AnyoneCore.Shotcall(\"Go to one - bait puddles\",true,3,false);self.used=true",
+							actionLua = "local p=TensorCore.mGetPlayer();if p==nil or p.pos==nil then return end\nlocal function guide(x,z,ms,radius)\n local t={x=x,y=p.pos.y,z=z};local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.55),2,1)\n local length=TensorCore.getDistance2d(p.pos,t)\n if length>.25 then local tip=math.min(1.25,length);d:addTimedArrow(ms,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,t),math.max(.15,length-tip),.9,tip,2.2,0,false) end\n d:addTimedCircle(ms,x,p.pos.y+.05,z,radius or 1,0,true)\nend\nlocal x,y,z,active=Argus.getWaymarkInfo(5);if not active then return end\nlocal duration=math.floor((701.5-TensorReactions_CurrentTimer)*1000);if duration<=0 then self.used=true;return end\nguide(x,z,duration,1.5);AnyoneCore.Shotcall(\"Go to one - bait puddles\",true,3,false);self.used=true",
 							endIfUsed = true,
 							name = "P3 to P4 - Marker One Puddle Staging",
 							uuid = "80187bf5-05d0-e92d-9b65-a54eaeef9b6d",
@@ -14672,17 +14645,6 @@ local tbl =
 	},
 	[170] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "FRU_megaminx_indicator",
-				uuid = "5deb0698-d637-30a4-9a2d-20229e7116c8",
-			},
-			inheritanceRoot = "FRU_megaminx_indicator",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -16474,7 +16436,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_ct\nif s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end\n  s.shapes={}\n end\n function s.draw(x,z,seconds,text)\n  s.clear();local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then\n   id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end\n  end\n  if text then AnyoneCore.Shotcall(text,true,seconds,false) end\n end\n function s.polar(side,degrees,radius,seconds,text)\n  local angle=side*degrees*math.pi/180\n  s.draw(100+math.sin(angle)*radius,100+math.cos(angle)*radius,seconds,text)\n end\nend\ns.clear()\nlocal second=eventArgs.spellID==40230\nif not second and (slot==\"T1\" or slot==\"T2\") and s.rewindPoint~=nil then\n local point=s.rewindPoint\n s.draw(point.x,point.z,eventArgs.channelTimeMax,nil)\nend\nAnyoneCore.Shotcall((slot==\"T1\" or slot==\"T2\") and (second and \"Second knockback - tank in front\" or \"Rewind knockback - tank in front\") or (second and \"Second knockback - stay behind your tank\" or \"Rewind knockback - stay behind your tank\"),true,second and 3 or 7,false)\nself.used=true",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_ct\nif s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end\n  s.shapes={}\n end\n function s.draw(x,z,seconds,text)\n  s.clear();local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then\n   id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end\n  end\n  if text then AnyoneCore.Shotcall(text,true,seconds,false) end\n end\n function s.polar(side,degrees,radius,seconds,text)\n  local angle=side*degrees*math.pi/180\n  s.draw(100+math.sin(angle)*radius,100+math.cos(angle)*radius,seconds,text)\n end\nend\ns.clear()\nlocal second=eventArgs.spellID==40230\nif not second then\n s.firstWingEnd=TensorReactions_CurrentTimer+eventArgs.channelTimeMax\n s.returnFormationShown=false\nend\nAnyoneCore.Shotcall((slot==\"T1\" or slot==\"T2\") and (second and \"Second knockback - tank in front\" or \"Rewind knockback - tank in front\") or (second and \"Second knockback - stay behind your tank\" or \"Rewind knockback - stay behind your tank\"),true,second and 3 or 7,false)\nself.used=true",
 							conditions = 
 							{
 								
@@ -16679,6 +16641,39 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster\nif r.current()==nil or not r.isReady() then return end\nlocal slot=r.mySlot();if slot~=\"T1\" and slot~=\"T2\" then return end\nlocal s=data.lpdu_ct;local p=TensorCore.mGetPlayer()\nif s==nil or p==nil or s.firstWingEnd==nil or s.returnFormationShown or s.rewindPoint==nil or s.draw==nil then return end\nlocal now=TensorReactions_CurrentTimer\nif now<s.firstWingEnd-.5 or now>s.firstWingEnd+1.5 then return end\nif not TensorCore.hasBuff(p,4163) then return end\ns.returnFormationShown=true\nlocal point=s.rewindPoint\ns.draw(point.x,point.z,math.max(.2,s.firstWingEnd+1.8-now),nil)\nself.used=true",
+							name = "Tank front after rewind return",
+							uuid = "22db98e5-bbc5-1fc1-8c38-8a8f812ee009",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU",
+				mechanicTime = 798.9,
+				name = "[LPDU] P4 Crystallize Time - Tank Front After Return",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 179,
+				timerEndOffset = 43,
+				timerStartOffset = 34,
+				uuid = "60eb0419-3456-69a0-ad64-2e5a6b291c28",
+				version = 2,
+			},
+		},
 	},
 	[180] = 
 	{
@@ -16717,76 +16712,6 @@ local tbl =
 			},
 			inheritanceRoot = "FRU_megaminx_indicator",
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "crystallize indicator",
-				uuid = "cf6553dd-749c-42c2-a2bd-9751431ed47a",
-				version = 2,
-			},
-			inheritedObjectUUID = "87a8fe68-1a30-e46b-b56b-024b46396616",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "check buffs",
-				uuid = "d78c90df-dc4c-0248-b989-c63604378ff2",
-				version = 2,
-			},
-			inheritedObjectUUID = "c4913759-c0cb-afc0-8037-c6d0d4488b25",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "get tethers",
-				uuid = "ee8df960-ed6b-475c-949d-43b95abca299",
-				version = 2,
-			},
-			inheritedObjectUUID = "74aa1861-c963-9ad6-b7c5-0f10e99f61f0",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "get buff",
-				uuid = "3a02bafa-7a15-8120-aded-acbe27b15824",
-				version = 2,
-			},
-			inheritedObjectUUID = "d0bc99aa-e4a3-233a-a410-7fd6492caf60",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "blue indicators",
-				uuid = "74268ce3-c8de-6823-9291-c7b63bb0fd7c",
-				version = 2,
-			},
-			inheritedObjectUUID = "d625dc17-8edc-2c89-812b-1322acfad5dd",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
 		},
 		
 		{
@@ -17203,6 +17128,76 @@ local tbl =
 				timerStartOffset = -100,
 				uuid = "5c6fa137-6bee-9bb3-baf7-c03d61ff1e94",
 				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				name = "crystallize indicator",
+				uuid = "cf6553dd-749c-42c2-a2bd-9751431ed47a",
+				version = 2,
+			},
+			inheritedObjectUUID = "87a8fe68-1a30-e46b-b56b-024b46396616",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
+				name = "check buffs",
+				uuid = "d78c90df-dc4c-0248-b989-c63604378ff2",
+				version = 2,
+			},
+			inheritedObjectUUID = "c4913759-c0cb-afc0-8037-c6d0d4488b25",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
+				name = "get tethers",
+				uuid = "ee8df960-ed6b-475c-949d-43b95abca299",
+				version = 2,
+			},
+			inheritedObjectUUID = "74aa1861-c963-9ad6-b7c5-0f10e99f61f0",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
+				name = "get buff",
+				uuid = "3a02bafa-7a15-8120-aded-acbe27b15824",
+				version = 2,
+			},
+			inheritedObjectUUID = "d0bc99aa-e4a3-233a-a410-7fd6492caf60",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
+				name = "blue indicators",
+				uuid = "74268ce3-c8de-6823-9291-c7b63bb0fd7c",
+				version = 2,
+			},
+			inheritedObjectUUID = "d625dc17-8edc-2c89-812b-1322acfad5dd",
+			inheritedOverwrites = 
+			{
+				enabled = false,
 			},
 		},
 	},
@@ -17823,6 +17818,11 @@ local tbl =
 									"079af4bd-f2e3-54c0-aee0-8d159900617f",
 									true,
 								},
+								
+								{
+									"6bb4d5c4-b0bb-a4f6-bf10-03179fd70b99",
+									false,
+								},
 							},
 							name = "Personal healer stack",
 							uuid = "c37aeb6c-9bff-bb4c-8e1f-1eb57c7764da",
@@ -17847,6 +17847,19 @@ local tbl =
 								40302,
 							},
 							uuid = "079af4bd-f2e3-54c0-aee0-8d159900617f",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 9,
+							dequeueIfLuaFalse = true,
+							name = "Self is tank",
+							partyTargetType = "Tank",
+							uuid = "6bb4d5c4-b0bb-a4f6-bf10-03179fd70b99",
 							version = 3,
 						},
 					},
@@ -17992,17 +18005,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "FRU_megaminx_indicator",
-				uuid = "c589c417-e333-a1db-6d3a-8b21ca3df987",
-			},
-			inheritanceRoot = "FRU_megaminx_indicator",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "Draw Exasquares",
 				uuid = "d1cdae98-2ba9-7994-b136-ad33dc02631c",
 				version = 2,
@@ -18117,6 +18119,64 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
+							actionLua = "if data.p5_exa == nil then data.p5_exa = {} end\nif data.p5_exa_filtered_ent == nil then data.p5_exa_filtered_ent = {} end\nlocal ent = TensorCore.mGetEntity(eventArgs.entityID)\ntable.insert(data.p5_exa,{pos = ent.pos})\nif table.size(data.p5_exa) == 8 then\n    local cross = (data.p5_exa[1].pos.x - 100) * (data.p5_exa[5].pos.z-100) - (data.p5_exa[1].pos.z-100) * (data.p5_exa[5].pos.x-100)\n    if cross < 0 then\n        TensorCore.addAlertText(20000,\"right\",1,1,true)\n    else\n        TensorCore.addAlertText(20000,\"left\",1,1,true)\n    end\nend\nlocal function normalizeTo2Pi(r)\n    local TWO_PI = 2 * math.pi\n    r = r % TWO_PI\n    if r < 0 then\n        r = r + TWO_PI\n    end\n    return r\nend\nlocal function lineIntersectionXZ(pos1, pos2)\n    -- Extract coordinates and headings\n    local x1, z1, h1 = pos1.x, pos1.z, pos1.h + math.pi/2\n    local x2, z2, h2 = pos2.x, pos2.z, pos2.h + math.pi/2\n    \n    -- Precompute deltas\n    local dx = x2 - x1\n    local dz = z2 - z1\n    \n    -- Compute the determinant (sin(h1 - h2))\n    local denom = math.sin(h1 - h2)\n    \n    d(h1-h2)\n    -- If denom is 0 (or very close to 0), lines are parallel or coincident\n    if math.abs(denom) < 1e-12 then\n        return nil  -- No unique intersection\n    end\n    \n    -- Solve for parameter t on line 1\n    local t = ((dx) * math.cos(h2) - dz * math.sin(h2)) / denom\n    \n    -- Intersection point using line 1's parametric form\n    local Xi = x1 + t * math.sin(h1)\n    local Zi = z1 + t * math.cos(h1)\n\n    local north = (pos1.h + pos2.h) / 2\n    if (math.abs(north - pos1.h)) < (math.pi /2) then\n        north = north + math.pi\n    end\n    north = north + math.pi\n    \n    return { x = Xi, y = 0, z = Zi , h = north}\nend\n\nlocal heading2center = normalizeTo2Pi(TensorCore.getHeadingToTarget(ent.pos,{x=100,y=0,z=100}))\nif math.abs(heading2center - normalizeTo2Pi(ent.pos.h)) < 1 or  math.abs(heading2center - normalizeTo2Pi(ent.pos.h)) > 6 then\n    table.insert(data.p5_exa_filtered_ent,ent.pos)\nend\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .25),2)\n\nif table.size(data.p5_exa_filtered_ent) == 4 then\n    local cross = (data.p5_exa[1].pos.x - 100) * (data.p5_exa[5].pos.z-100) - (data.p5_exa[1].pos.z-100) * (data.p5_exa[5].pos.x-100)\n    local findapos = lineIntersectionXZ(data.p5_exa_filtered_ent[1],data.p5_exa_filtered_ent[2])\n    local newpos = TensorCore.getPosInDirection(findapos,findapos.h,5.412)\n    newpos.h = findapos.h\n    if cross > 0 then --left\n        local furthest = TensorCore.getPosInDirection(newpos,newpos.h - math.pi/2.667 , 7.07)\n        local midpoint = TensorCore.getPosInDirection(newpos,newpos.h - math.pi/2.667 , 7.07 - 5)\n        local nextpoint = TensorCore.getPosInDirection(newpos,newpos.h , 5.412)\n        green:addTimedRect(6000,furthest.x,0,furthest.z,TensorCore.getDistance2d(furthest,midpoint),.1,TensorCore.getHeadingToTarget(furthest,midpoint),0,true)\n        green:addTimedRect(6000,midpoint.x,0,midpoint.z,TensorCore.getDistance2d(midpoint,nextpoint),.1,TensorCore.getHeadingToTarget(midpoint,nextpoint),0,true)\n        green:addTimedRect(6000,nextpoint.x,0,nextpoint.z,TensorCore.getDistance2d(nextpoint,furthest),.1,TensorCore.getHeadingToTarget(nextpoint,furthest),0,true)\n    else\n        local furthest = TensorCore.getPosInDirection(newpos,newpos.h + math.pi/2.667 , 7.07)\n        local midpoint = TensorCore.getPosInDirection(newpos,newpos.h + math.pi/2.667 , 7.07 - 5)\n        local nextpoint = TensorCore.getPosInDirection(newpos,newpos.h , 5.412)\n        green:addTimedRect(6000,furthest.x,0,furthest.z,TensorCore.getDistance2d(furthest,midpoint),.1,TensorCore.getHeadingToTarget(furthest,midpoint),0,true)\n        green:addTimedRect(6000,midpoint.x,0,midpoint.z,TensorCore.getDistance2d(midpoint,nextpoint),.1,TensorCore.getHeadingToTarget(midpoint,nextpoint),0,true)\n        green:addTimedRect(6000,nextpoint.x,0,nextpoint.z,TensorCore.getDistance2d(nextpoint,furthest),.1,TensorCore.getHeadingToTarget(nextpoint,furthest),0,true)\n    end\n\n    findapos = lineIntersectionXZ(data.p5_exa_filtered_ent[3],data.p5_exa_filtered_ent[4])\n    newpos = TensorCore.getPosInDirection(findapos,findapos.h,5.412)\n    newpos.h = findapos.h\n    if cross > 0 then --left\n        local furthest = TensorCore.getPosInDirection(newpos,newpos.h - math.pi/2.667 , 7.07)\n        local midpoint = TensorCore.getPosInDirection(newpos,newpos.h - math.pi/2.667 , 7.07 - 5)\n        local nextpoint = TensorCore.getPosInDirection(newpos,newpos.h , 5.412)\n        green:addTimedRect(4000,furthest.x,0,furthest.z,TensorCore.getDistance2d(furthest,midpoint),.1,TensorCore.getHeadingToTarget(furthest,midpoint),6000,true)\n        green:addTimedRect(4000,midpoint.x,0,midpoint.z,TensorCore.getDistance2d(midpoint,nextpoint),.1,TensorCore.getHeadingToTarget(midpoint,nextpoint),6000,true)\n        green:addTimedRect(4000,nextpoint.x,0,nextpoint.z,TensorCore.getDistance2d(nextpoint,furthest),.1,TensorCore.getHeadingToTarget(nextpoint,furthest),6000,true)\n    else\n        local furthest = TensorCore.getPosInDirection(newpos,newpos.h + math.pi/2.667 , 7.07)\n        local midpoint = TensorCore.getPosInDirection(newpos,newpos.h + math.pi/2.667 , 7.07 - 5)\n        local nextpoint = TensorCore.getPosInDirection(newpos,newpos.h , 5.412)\n        green:addTimedRect(4000,furthest.x,0,furthest.z,TensorCore.getDistance2d(furthest,midpoint),.1,TensorCore.getHeadingToTarget(furthest,midpoint),6000,true)\n        green:addTimedRect(4000,midpoint.x,0,midpoint.z,TensorCore.getDistance2d(midpoint,nextpoint),.1,TensorCore.getHeadingToTarget(midpoint,nextpoint),6000,true)\n        green:addTimedRect(4000,nextpoint.x,0,nextpoint.z,TensorCore.getDistance2d(nextpoint,furthest),.1,TensorCore.getHeadingToTarget(nextpoint,furthest),6000,true)\n    end\nend\nif table.size(data.p5_exa_filtered_ent) == 6 then\n    local cross = (data.p5_exa[1].pos.x - 100) * (data.p5_exa[5].pos.z-100) - (data.p5_exa[1].pos.z-100) * (data.p5_exa[5].pos.x-100)\n    local findapos = lineIntersectionXZ(data.p5_exa_filtered_ent[5],data.p5_exa_filtered_ent[6])\n    local newpos = TensorCore.getPosInDirection(findapos,findapos.h,5.412)\n    newpos.h = findapos.h\n    if cross > 0 then --left\n        local furthest = TensorCore.getPosInDirection(newpos,newpos.h - math.pi/2.667 , 7.07)\n        local midpoint = TensorCore.getPosInDirection(newpos,newpos.h - math.pi/2.667 , 7.07 - 5)\n        local nextpoint = TensorCore.getPosInDirection(newpos,newpos.h , 5.412)\n        green:addTimedRect(6000,furthest.x,0,furthest.z,TensorCore.getDistance2d(furthest,midpoint),.1,TensorCore.getHeadingToTarget(furthest,midpoint),6000,true)\n        green:addTimedRect(6000,midpoint.x,0,midpoint.z,TensorCore.getDistance2d(midpoint,nextpoint),.1,TensorCore.getHeadingToTarget(midpoint,nextpoint),6000,true)\n        green:addTimedRect(6000,nextpoint.x,0,nextpoint.z,TensorCore.getDistance2d(nextpoint,furthest),.1,TensorCore.getHeadingToTarget(nextpoint,furthest),6000,true)\n    else\n        local furthest = TensorCore.getPosInDirection(newpos,newpos.h + math.pi/2.667 , 7.07)\n        local midpoint = TensorCore.getPosInDirection(newpos,newpos.h + math.pi/2.667 , 7.07 - 5)\n        local nextpoint = TensorCore.getPosInDirection(newpos,newpos.h , 5.412)\n        green:addTimedRect(6000,furthest.x,0,furthest.z,TensorCore.getDistance2d(furthest,midpoint),.1,TensorCore.getHeadingToTarget(furthest,midpoint),6000,true)\n        green:addTimedRect(6000,midpoint.x,0,midpoint.z,TensorCore.getDistance2d(midpoint,nextpoint),.1,TensorCore.getHeadingToTarget(midpoint,nextpoint),6000,true)\n        green:addTimedRect(6000,nextpoint.x,0,nextpoint.z,TensorCore.getDistance2d(nextpoint,furthest),.1,TensorCore.getHeadingToTarget(nextpoint,furthest),6000,true)\n    end\nend\n\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"f1254854-7d69-ccb2-96b2-745ccb3a2ba4",
+									true,
+								},
+							},
+							uuid = "0a5ae84a-dc0b-be90-96b8-15fa73276236",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							spellIDList = 
+							{
+								40118,
+								40307,
+							},
+							uuid = "f1254854-7d69-ccb2-96b2-745ccb3a2ba4",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 984.8,
+				name = "Draw Exasquares3 [LPDU]",
+				timeRange = true,
+				timelineIndex = 209,
+				timerEndOffset = 30,
+				timerStartOffset = -30,
+				uuid = "4677e4c3-db54-344f-b93c-8211b7a108ba",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
 							actionLua = "if data.p5_exa == nil then data.p5_exa = {} end\nlocal ent = TensorCore.mGetEntity(eventArgs.entityID)\ntable.insert(data.p5_exa,{pos = ent.pos})\nif table.size(data.p5_exa) == 8 then\n    local cross = (data.p5_exa[1].pos.x - 100) * (data.p5_exa[5].pos.z-100) - (data.p5_exa[1].pos.z-100) * (data.p5_exa[5].pos.x-100)\n    if cross < 0 then\n        TensorCore.addAlertText(20000,\"right\",1,1,true)\n    else\n        TensorCore.addAlertText(20000,\"left\",1,1,true)\n    end\nend\nself.used = true",
 							conditions = 
 							{
@@ -18164,64 +18224,6 @@ local tbl =
 				version = 2,
 			},
 			inheritedIndex = 14,
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "if data.p5_exa == nil then data.p5_exa = {} end\nif data.p5_exa_filtered_ent == nil then data.p5_exa_filtered_ent = {} end\nlocal ent = TensorCore.mGetEntity(eventArgs.entityID)\ntable.insert(data.p5_exa,{pos = ent.pos})\nif table.size(data.p5_exa) == 8 then\n    local cross = (data.p5_exa[1].pos.x - 100) * (data.p5_exa[5].pos.z-100) - (data.p5_exa[1].pos.z-100) * (data.p5_exa[5].pos.x-100)\n    if cross < 0 then\n        TensorCore.addAlertText(20000,\"right\",1,1,true)\n    else\n        TensorCore.addAlertText(20000,\"left\",1,1,true)\n    end\nend\nlocal function normalizeTo2Pi(r)\n    local TWO_PI = 2 * math.pi\n    r = r % TWO_PI\n    if r < 0 then\n        r = r + TWO_PI\n    end\n    return r\nend\nlocal function lineIntersectionXZ(pos1, pos2)\n    -- Extract coordinates and headings\n    local x1, z1, h1 = pos1.x, pos1.z, pos1.h + math.pi/2\n    local x2, z2, h2 = pos2.x, pos2.z, pos2.h + math.pi/2\n    \n    -- Precompute deltas\n    local dx = x2 - x1\n    local dz = z2 - z1\n    \n    -- Compute the determinant (sin(h1 - h2))\n    local denom = math.sin(h1 - h2)\n    \n    d(h1-h2)\n    -- If denom is 0 (or very close to 0), lines are parallel or coincident\n    if math.abs(denom) < 1e-12 then\n        return nil  -- No unique intersection\n    end\n    \n    -- Solve for parameter t on line 1\n    local t = ((dx) * math.cos(h2) - dz * math.sin(h2)) / denom\n    \n    -- Intersection point using line 1's parametric form\n    local Xi = x1 + t * math.sin(h1)\n    local Zi = z1 + t * math.cos(h1)\n\n    local north = (pos1.h + pos2.h) / 2\n    if (math.abs(north - pos1.h)) < (math.pi /2) then\n        north = north + math.pi\n    end\n    north = north + math.pi\n    \n    return { x = Xi, y = 0, z = Zi , h = north}\nend\n\nlocal heading2center = normalizeTo2Pi(TensorCore.getHeadingToTarget(ent.pos,{x=100,y=0,z=100}))\nif math.abs(heading2center - normalizeTo2Pi(ent.pos.h)) < 1 or  math.abs(heading2center - normalizeTo2Pi(ent.pos.h)) > 6 then\n    table.insert(data.p5_exa_filtered_ent,ent.pos)\nend\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .25),2)\n\nif table.size(data.p5_exa_filtered_ent) == 4 then\n    local cross = (data.p5_exa[1].pos.x - 100) * (data.p5_exa[5].pos.z-100) - (data.p5_exa[1].pos.z-100) * (data.p5_exa[5].pos.x-100)\n    local findapos = lineIntersectionXZ(data.p5_exa_filtered_ent[1],data.p5_exa_filtered_ent[2])\n    local newpos = TensorCore.getPosInDirection(findapos,findapos.h,5.412)\n    newpos.h = findapos.h\n    if cross > 0 then --left\n        local furthest = TensorCore.getPosInDirection(newpos,newpos.h - math.pi/2.667 , 7.07)\n        local midpoint = TensorCore.getPosInDirection(newpos,newpos.h - math.pi/2.667 , 7.07 - 5)\n        local nextpoint = TensorCore.getPosInDirection(newpos,newpos.h , 5.412)\n        green:addTimedRect(6000,furthest.x,0,furthest.z,TensorCore.getDistance2d(furthest,midpoint),.1,TensorCore.getHeadingToTarget(furthest,midpoint),0,true)\n        green:addTimedRect(6000,midpoint.x,0,midpoint.z,TensorCore.getDistance2d(midpoint,nextpoint),.1,TensorCore.getHeadingToTarget(midpoint,nextpoint),0,true)\n        green:addTimedRect(6000,nextpoint.x,0,nextpoint.z,TensorCore.getDistance2d(nextpoint,furthest),.1,TensorCore.getHeadingToTarget(nextpoint,furthest),0,true)\n    else\n        local furthest = TensorCore.getPosInDirection(newpos,newpos.h + math.pi/2.667 , 7.07)\n        local midpoint = TensorCore.getPosInDirection(newpos,newpos.h + math.pi/2.667 , 7.07 - 5)\n        local nextpoint = TensorCore.getPosInDirection(newpos,newpos.h , 5.412)\n        green:addTimedRect(6000,furthest.x,0,furthest.z,TensorCore.getDistance2d(furthest,midpoint),.1,TensorCore.getHeadingToTarget(furthest,midpoint),0,true)\n        green:addTimedRect(6000,midpoint.x,0,midpoint.z,TensorCore.getDistance2d(midpoint,nextpoint),.1,TensorCore.getHeadingToTarget(midpoint,nextpoint),0,true)\n        green:addTimedRect(6000,nextpoint.x,0,nextpoint.z,TensorCore.getDistance2d(nextpoint,furthest),.1,TensorCore.getHeadingToTarget(nextpoint,furthest),0,true)\n    end\n\n    findapos = lineIntersectionXZ(data.p5_exa_filtered_ent[3],data.p5_exa_filtered_ent[4])\n    newpos = TensorCore.getPosInDirection(findapos,findapos.h,5.412)\n    newpos.h = findapos.h\n    if cross > 0 then --left\n        local furthest = TensorCore.getPosInDirection(newpos,newpos.h - math.pi/2.667 , 7.07)\n        local midpoint = TensorCore.getPosInDirection(newpos,newpos.h - math.pi/2.667 , 7.07 - 5)\n        local nextpoint = TensorCore.getPosInDirection(newpos,newpos.h , 5.412)\n        green:addTimedRect(4000,furthest.x,0,furthest.z,TensorCore.getDistance2d(furthest,midpoint),.1,TensorCore.getHeadingToTarget(furthest,midpoint),6000,true)\n        green:addTimedRect(4000,midpoint.x,0,midpoint.z,TensorCore.getDistance2d(midpoint,nextpoint),.1,TensorCore.getHeadingToTarget(midpoint,nextpoint),6000,true)\n        green:addTimedRect(4000,nextpoint.x,0,nextpoint.z,TensorCore.getDistance2d(nextpoint,furthest),.1,TensorCore.getHeadingToTarget(nextpoint,furthest),6000,true)\n    else\n        local furthest = TensorCore.getPosInDirection(newpos,newpos.h + math.pi/2.667 , 7.07)\n        local midpoint = TensorCore.getPosInDirection(newpos,newpos.h + math.pi/2.667 , 7.07 - 5)\n        local nextpoint = TensorCore.getPosInDirection(newpos,newpos.h , 5.412)\n        green:addTimedRect(4000,furthest.x,0,furthest.z,TensorCore.getDistance2d(furthest,midpoint),.1,TensorCore.getHeadingToTarget(furthest,midpoint),6000,true)\n        green:addTimedRect(4000,midpoint.x,0,midpoint.z,TensorCore.getDistance2d(midpoint,nextpoint),.1,TensorCore.getHeadingToTarget(midpoint,nextpoint),6000,true)\n        green:addTimedRect(4000,nextpoint.x,0,nextpoint.z,TensorCore.getDistance2d(nextpoint,furthest),.1,TensorCore.getHeadingToTarget(nextpoint,furthest),6000,true)\n    end\nend\nif table.size(data.p5_exa_filtered_ent) == 6 then\n    local cross = (data.p5_exa[1].pos.x - 100) * (data.p5_exa[5].pos.z-100) - (data.p5_exa[1].pos.z-100) * (data.p5_exa[5].pos.x-100)\n    local findapos = lineIntersectionXZ(data.p5_exa_filtered_ent[5],data.p5_exa_filtered_ent[6])\n    local newpos = TensorCore.getPosInDirection(findapos,findapos.h,5.412)\n    newpos.h = findapos.h\n    if cross > 0 then --left\n        local furthest = TensorCore.getPosInDirection(newpos,newpos.h - math.pi/2.667 , 7.07)\n        local midpoint = TensorCore.getPosInDirection(newpos,newpos.h - math.pi/2.667 , 7.07 - 5)\n        local nextpoint = TensorCore.getPosInDirection(newpos,newpos.h , 5.412)\n        green:addTimedRect(6000,furthest.x,0,furthest.z,TensorCore.getDistance2d(furthest,midpoint),.1,TensorCore.getHeadingToTarget(furthest,midpoint),6000,true)\n        green:addTimedRect(6000,midpoint.x,0,midpoint.z,TensorCore.getDistance2d(midpoint,nextpoint),.1,TensorCore.getHeadingToTarget(midpoint,nextpoint),6000,true)\n        green:addTimedRect(6000,nextpoint.x,0,nextpoint.z,TensorCore.getDistance2d(nextpoint,furthest),.1,TensorCore.getHeadingToTarget(nextpoint,furthest),6000,true)\n    else\n        local furthest = TensorCore.getPosInDirection(newpos,newpos.h + math.pi/2.667 , 7.07)\n        local midpoint = TensorCore.getPosInDirection(newpos,newpos.h + math.pi/2.667 , 7.07 - 5)\n        local nextpoint = TensorCore.getPosInDirection(newpos,newpos.h , 5.412)\n        green:addTimedRect(6000,furthest.x,0,furthest.z,TensorCore.getDistance2d(furthest,midpoint),.1,TensorCore.getHeadingToTarget(furthest,midpoint),6000,true)\n        green:addTimedRect(6000,midpoint.x,0,midpoint.z,TensorCore.getDistance2d(midpoint,nextpoint),.1,TensorCore.getHeadingToTarget(midpoint,nextpoint),6000,true)\n        green:addTimedRect(6000,nextpoint.x,0,nextpoint.z,TensorCore.getDistance2d(nextpoint,furthest),.1,TensorCore.getHeadingToTarget(nextpoint,furthest),6000,true)\n    end\nend\n\nself.used = true",
-							conditions = 
-							{
-								
-								{
-									"f1254854-7d69-ccb2-96b2-745ccb3a2ba4",
-									true,
-								},
-							},
-							uuid = "0a5ae84a-dc0b-be90-96b8-15fa73276236",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Event",
-							dequeueIfLuaFalse = true,
-							eventArgOptionType = 3,
-							eventArgType = 2,
-							spellIDList = 
-							{
-								40118,
-								40307,
-							},
-							uuid = "f1254854-7d69-ccb2-96b2-745ccb3a2ba4",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "LPDU",
-				eventType = 3,
-				loop = true,
-				mechanicTime = 984.8,
-				name = "Draw Exasquares3 [LPDU]",
-				timeRange = true,
-				timelineIndex = 209,
-				timerEndOffset = 30,
-				timerStartOffset = -30,
-				uuid = "4677e4c3-db54-344f-b93c-8211b7a108ba",
-				version = 2,
-			},
 		},
 		
 		{
@@ -19210,7 +19212,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local r=AnyoneCore.Roster\nif r.current()==nil or not r.isReady() then return end\nif data.lpdu_p5_healer_stack_shapes then\n for _,id in ipairs(data.lpdu_p5_healer_stack_shapes) do Argus.deleteTimedShape(id) end\nend\ndata.lpdu_p5_healer_stack_shapes={}\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.35),2,1)\nlocal mine=r.mySlot()\nlocal group2=mine==\"T2\" or mine==\"H2\" or mine==\"M2\" or mine==\"R2\"\nfor _,slot in ipairs({group2 and \"H2\" or \"H1\"}) do\n local ent=r.entOf(slot)\n if ent then\n  local id=drawer:addTimedCircleOnEnt(math.floor(eventArgs.channelTimeMax*1000)+500,ent.id,4,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI)\n  if id then table.insert(data.lpdu_p5_healer_stack_shapes,id) end\n end\nend\nself.used=true",
+							actionLua = "local r=AnyoneCore.Roster\nif r.current()==nil or not r.isReady() then return end\nif data.lpdu_p5_healer_stack_shapes then\n for _,id in ipairs(data.lpdu_p5_healer_stack_shapes) do Argus.deleteTimedShape(id) end\nend\ndata.lpdu_p5_healer_stack_shapes={}\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.35),2,1)\nlocal delay=math.floor(eventArgs.channelTimeMax*1000*.6)\nlocal duration=math.floor(eventArgs.channelTimeMax*1000)-delay+500\nlocal mine=r.mySlot()\nlocal group2=mine==\"T2\" or mine==\"H2\" or mine==\"M2\" or mine==\"R2\"\nfor _,slot in ipairs({group2 and \"H2\" or \"H1\"}) do\n local ent=r.entOf(slot)\n if ent then\n  local id=drawer:addTimedCircleOnEnt(duration,ent.id,4,delay,false,true,Argus2.RenderFlags.FLAG_RENDER_UI)\n  if id then table.insert(data.lpdu_p5_healer_stack_shapes,id) end\n end\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -19490,17 +19492,6 @@ local tbl =
 	},
 	[222] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "FRU_megaminx_indicator",
-				uuid = "9ed353a2-748c-bca6-ab62-8ee4da68a512",
-			},
-			inheritanceRoot = "FRU_megaminx_indicator",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -20999,17 +20990,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "FRU_megaminx_indicator",
-				uuid = "9fbee33c-274f-c408-a2fc-19de88a371ec",
-			},
-			inheritanceRoot = "FRU_megaminx_indicator",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "Draw Exasquares",
 				uuid = "aa3724e4-f283-db62-a1d4-a2806a8b39bd",
 				version = 2,
@@ -22139,17 +22119,6 @@ local tbl =
 	},
 	[251] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "FRU_megaminx_indicator",
-				uuid = "aa2215ec-5111-aa68-e53a-6f7e249aff1c",
-			},
-			inheritanceRoot = "FRU_megaminx_indicator",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -24228,7 +24197,6 @@ local tbl =
 	{
 		"store\\anyone\\fru\\fru",
 		"FRU\\lpdu mits",
-		"FRU_megaminx_indicator",
 	},
 	timelineName = "fru",
 	version = "1.0.5",

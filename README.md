@@ -8,7 +8,7 @@ UWU: LPDU (Beta) — supports ranged, melee, and tanks.
 
 UCOB: LPDU (Beta) Supports ranged/melee
 
-FRU: LPDU (Alpha, through P3)
+FRU: LPDU
 
 TEA: Coming soon by Ton.
 
@@ -22,6 +22,10 @@ TEA: Coming soon by Ton.
 - Corrected Blackfire center stacks, Fellruin center spreads and earlier Neurolink guidance, and Grand Octet starting-arrow updates. P2 cone arrows now use short perimeter steps and active-cone checks. Visual replay confirmation remains pending. (10-10-2026)
 
 ### FRU: LPDU
+
+- Delayed P5 healer stack circles until 60% of the cast, kept P4 tanks out of healer-stack guidance, and moved the CT tank-front arrow to the rewind return. (10-10-2026)
+
+- Added MT guidance to A at P2 start and a personal Diamond Dust floor rotation path, including the LPDU Group 2 counterclockwise exception. Shortened P3-to-P4 marker 1 guidance by another half second. (10-10-2026)
 
 - Added an owned [LPDU] Get Safe Side reaction at 62.2, copying the fire/thunder detector with its original -5/+5 timing offsets. (10-10-2026)
 
