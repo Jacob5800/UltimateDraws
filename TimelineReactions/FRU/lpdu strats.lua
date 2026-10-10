@@ -7901,6 +7901,69 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "9fb120cc-2e6c-fc65-9e56-bbb06c009f66",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local p=TensorCore.mGetPlayer()\nlocal s=data.lpdu_fru_lr_personal\nif s and s.centerShown then self.used=true;return end\nif p==nil then return end\nif TensorCore.getBuff(p,2257,nil,2)==nil then self.used=true;return end\nif s then s.centerShown=true;s.guide(100,100,2400) end\nAnyoneCore.Shotcall(\"Middle tower\",true,2.4,false)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"01103da4-6d50-370e-bad1-575d8a6a0a6f",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "P2 Light Rampant - Middle Tower",
+							uuid = "f80b72b9-fbd6-1be0-958c-8532eccc46b1",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs~=nil and eventArgs.spellID==40219",
+							name = "Second orb burst",
+							uuid = "01103da4-6d50-370e-bad1-575d8a6a0a6f",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 2,
+				mechanicTime = 355,
+				name = "[LPDU] P2 Light Rampant - Middle Tower",
+				timeRange = true,
+				timelineIndex = 90,
+				timerEndOffset = 0.8,
+				timerStartOffset = -0.5,
+				uuid = "a0252ead-b022-1fff-9d6b-7215a6b437f1",
+				version = 2,
+			},
+		},
 	},
 	[92] = 
 	{
@@ -8708,6 +8771,49 @@ local tbl =
 				timerEndOffset = -1.5,
 				timerStartOffset = -11,
 				uuid = "1d53555e-7c59-8171-85d3-9388872cba53",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "2b36b308-07f4-fe16-b026-a828f463f9ea",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster\nif r.current()==nil then return end\nlocal angle={T1=math.pi,T2=math.pi/2,M1=-math.pi/2,M2=0,R1=-3*math.pi/4,R2=3*math.pi/4,H1=-math.pi/4,H2=math.pi/4}\nlocal a=angle[r.mySlot()];if a==nil then self.used=true;return end\nlocal x,z=100+math.sin(a)*2,100+math.cos(a)*2\nlocal duration=math.max(300,math.floor((388.6-TensorReactions_CurrentTimer)*1000))\nAnyoneCore.Shotcall(\"Position for intermission knockback\",true,3,false)\nlocal p=TensorCore.mGetPlayer()\nif p==nil or p.pos==nil then return end\nlocal target={x=x,y=p.pos.y,z=z}\nlocal d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.55),2,1)\nlocal distance=TensorCore.getDistance2d(p.pos,target)\nif distance>.25 then\n local tip=math.min(1.25,distance)\n d:addTimedArrow(duration,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,target),math.max(.15,distance-tip),.9,tip,2.2,0,false)\nend\nd:addTimedCircle(duration,x,p.pos.y+.05,z,1,0,true)\nself.used=true",
+							endIfUsed = true,
+							name = "P2 Absolute Zero - Intermission Knockback",
+							uuid = "ecf796d6-7fca-0017-8f6e-e572743dd007",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU",
+				mechanicTime = 387.8,
+				name = "[LPDU] P2 Absolute Zero - Intermission Knockback",
+				timeRange = true,
+				timelineIndex = 99,
+				timerEndOffset = -0.2,
+				timerStartOffset = -7.8,
+				uuid = "88cb07bc-1a40-e91a-b8e8-9ad481a85006",
 				version = 2,
 			},
 		},
@@ -10434,6 +10540,34 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				name = "[Core] Record Hourglass Rotations",
+				uuid = "88c65a66-6012-b431-baea-e7d015d721c8",
+				version = 2,
+			},
+			inheritedObjectUUID = "2dd37e32-e6c7-c1ad-9fed-a2ac7febb00a",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
+				name = "[Core] Reset Beam Info",
+				uuid = "f9e64435-ed91-15b9-b2ab-fe6356e6b8f8",
+				version = 2,
+			},
+			inheritedObjectUUID = "d4c4a907-b8b3-7ab9-a358-3906a679bc58",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
 	},
 	[128] = 
 	{
@@ -10522,6 +10656,20 @@ local tbl =
 		{
 			data = 
 			{
+				name = "[Strat] UR Helper Increment Step",
+				uuid = "76636f07-e582-97de-81c0-3f40932fd26d",
+				version = 2,
+			},
+			inheritedObjectUUID = "c19cd27a-b961-7db1-a872-f321b75b79a6",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
 				name = "[Ranged] rDPS Mit",
 				uuid = "f66f047e-3c04-dbd2-a1c7-6f3151e0d93b",
 				version = 2,
@@ -10545,6 +10693,34 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "[Core] Record Hourglass Rotations",
+				uuid = "2d6b03f5-172a-d162-8c73-2fa7930af122",
+				version = 2,
+			},
+			inheritedObjectUUID = "6259cd79-555a-7fdb-937a-d7f2be3b8930",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
+				name = "[Core] Reset Beam Info",
+				uuid = "7053ff8b-23f4-9c59-bb19-5c56358111d3",
+				version = 2,
+			},
+			inheritedObjectUUID = "8a58ec13-2a64-b4cb-8646-f1604cc52545",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
 		},
 	},
 	[132] = 
@@ -10587,6 +10763,20 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\fru",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "[Strat] UR Helper Increment Step",
+				uuid = "bf11a3d5-2b53-60d0-a2bb-adbe4dbb07ab",
+				version = 2,
+			},
+			inheritedObjectUUID = "e83c67c9-d863-4ae9-b1de-db387c098084",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
 		},
 	},
 	[134] = 
@@ -10639,7 +10829,10 @@ local tbl =
 							aType = "Alert",
 							alertDuration = 3000,
 							alertPriority = 2,
+							alertScale = 1.2,
+							alertTTS = true,
 							alertText = "Look away",
+							endIfUsed = true,
 							uuid = "324cff15-c98b-dad5-bdf6-4476aea8e24f",
 							version = 2.1,
 						},
