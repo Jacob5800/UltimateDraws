@@ -23,6 +23,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Delayed both Moogle Burnt Strike AoEs by another half second (3.7 seconds total), including fresh render overrides. (10-10-2026)
+
 - Tank settings GUI now closes 15 seconds into the fight, retaining selected assignments. (10-10-2026)
 
 - Expanded the tank GUI with Halo, Apocalypse bait, P4 far bait and tank plan, and P5 invuln order. Guidance, cones and provoke reminders follow the selections; P4 bait and first P5 invuln use different tanks. Renamed five CT reactions at 802 to [LPDU]. (10-10-2026)
