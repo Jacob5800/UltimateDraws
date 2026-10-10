@@ -23,19 +23,21 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
-- Corrected Apocalypse knockback guidance after the far tank bait: clear the bait arrow on the hit, then guide inside the boss hitbox from her actual landing position. Replay confirmation pending. (10-10-2026)
+- Replay feedback confirms P1–P3, P5 Akh Morn, Pandora's Box LB reminder and Exasquares. Paradise Regained confirmed on OT; other roles and Polarizing Strikes remain under review. (10-10-2026)
 
-- Added missing Light Rampant orb-dodge and middle regroup arrows, Ultimate Relativity return-to-middle arrows, and clearer Diamond Dust first-side/after-hit slide guidance. Replay confirmation pending. (10-10-2026)
-- Added Apocalypse starting positions at 605 and corrected its pattern trigger for move-in and OT bait arrows; added Darklit tank-plan far-bait guidance and personal P4 Akh Morn regrouping. Shortened marker 1 transition staging by eight seconds. Replay confirmation pending. (10-10-2026)
-- P5 healer stack circles now show only your own light party and render behind players. Extended Polarizing Strikes guidance through the final line at 1177. Replay confirmation pending. (10-10-2026)
+- Corrected Apocalypse knockback guidance after the far tank bait: clear the bait arrow on the hit, then guide inside the boss hitbox from her actual landing position. (10-10-2026)
 
-- Added personal middle-tower guidance after the second Light Rampant orb burst for two-stack players, LPDU intermission knockback staging from 380, and larger Ultimate Relativity Look away text with TTS. Replay confirmation pending. (10-10-2026)
+- Added missing Light Rampant orb-dodge and middle regroup arrows, Ultimate Relativity return-to-middle arrows, and clearer Diamond Dust first-side/after-hit slide guidance. (10-10-2026)
+- Added Apocalypse starting positions at 605 and corrected its pattern trigger for move-in and OT bait arrows; added Darklit tank-plan far-bait guidance and personal P4 Akh Morn regrouping (P4 replay checks remain open). Shortened marker 1 transition staging by eight seconds. (10-10-2026)
+- P5 healer stack circles now show only your own light party and render behind players. Extended Polarizing Strikes guidance through the final line at 1177; Polarizing replay checks remain open. (10-10-2026)
+
+- Added personal middle-tower guidance after the second Light Rampant orb burst for two-stack players, LPDU intermission knockback staging from 380, and larger Ultimate Relativity Look away text with TTS. (10-10-2026)
 
 - Added a one-shot Look away text/TTS reminder two seconds before the Diamond Dust gaze around 263.7. (10-10-2026)
 
-- Apocalypse OT jump-bait guidance no longer requires the full party roster to be ready or the OT to appear in Water hit targets; it triggers once after second Water. Replay confirmation pending. (10-10-2026)
+- Apocalypse OT jump-bait guidance no longer requires the full party roster to be ready or the OT to appear in Water hit targets; it triggers once after second Water. (10-10-2026)
 
-- Diamond Dust slide guidance now starts after the first cleave hit and ends before the second; disabled the earlier camera-facing arrow. Light Rampant tower players keep their occupied side for stack regrouping. Replay confirmation pending. (10-10-2026)
+- Diamond Dust slide guidance now starts after the first cleave hit and ends before the second; disabled the earlier camera-facing arrow. Light Rampant tower players keep their occupied side for stack regrouping. (10-10-2026)
 
 - Fixed the Darklit tank selector so all three options, including Tank swap, can be selected and saved. (10-10-2026)
 
@@ -49,11 +51,11 @@ TEA: Coming soon by Ton.
 
 - CT: short-Ice regroup now waits until both the head interception and Ice hit have resolved, regardless of event order.
 
-- Apocalypse: added pattern-derived personal spreads, second Water regroup, OT farthest-bait guidance after Water, knockback sides and final Water regroup with hit cleanup. All rotations and swaps await replay confirmation.
+- Apocalypse: added pattern-derived personal spreads, second Water regroup, OT farthest-bait guidance after Water, knockback sides and final Water regroup with hit cleanup.
 
 - Paradise Regained: replaced legacy per-frame draws and kept each DPS tower arrow active until its assigned tower resolves.
 
-- Paradise Regained: added first-tower-relative tank and healer guidance, OT provoke reminder, post-tether DPS tower assignments, and cleave/tower cleanup. Both sequences and all rotations await replay confirmation.
+- Paradise Regained: added first-tower-relative tank and healer guidance, OT provoke reminder, post-tether DPS tower assignments, and cleave/tower cleanup. OT guidance confirmed in replay; MT, healer and DPS checks remain open.
 
 - CT: disabled the old dual red-debuff arrows and marker-based per-frame cleanse arrows so they do not conflict with personal FAST Dragon guidance.
 
