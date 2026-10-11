@@ -2670,6 +2670,75 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Draws",
+				uuid = "3d3ca514-8732-c0ef-a2fa-f2b671aacde9",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local ent = TensorCore.mGetEntity(eventArgs.entityID)\nif not ent or not ent.pos then self.used=true; return end\nlocal radius = eventArgs.spellID == 40153 and 10 or 5\nlocal duration = eventArgs.channelTimeMax * 1000\nif duration <= 0 then self.used=true; return end\nlocal drawer = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(1,.15,.1,.18),2)\ndrawer:addTimedCircle(duration,ent.pos.x,ent.pos.y+.03,ent.pos.z,radius,0,false,true)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"0f1141d5-1ddc-e9ac-a110-bd57debd7c6c",
+									true,
+								},
+							},
+							name = "Draw exact halo cast radius",
+							uuid = "79a935e9-66dc-2ce1-a1d3-b4a8ce24e949",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Brightfire casts",
+							spellIDList = 
+							{
+								40152,
+								40153,
+							},
+							uuid = "0f1141d5-1ddc-e9ac-a110-bd57debd7c6c",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Draws",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 62.2,
+				name = "[LPDU] Halo Brightfire - Danger radius",
+				timeRange = true,
+				timelineIndex = 17,
+				timerEndOffset = 15,
+				uuid = "5a054df5-01d7-d657-9366-7d206dddcd77",
+				version = 2,
+			},
+		},
 	},
 	[18] = 
 	{

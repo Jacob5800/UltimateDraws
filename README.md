@@ -23,6 +23,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Added cast-based danger circles for both Halo of Flame and Halo of Levin: 5y small Brightfire and 10y large Brightfire, lasting until cast completion. (11-10-2026)
+
 - Fixed the DPS-only mitigation opener when FRU settings are missing, skipped redundant disable writes, and added job-appropriate automatic opener potion use. (11-10-2026)
 
 
