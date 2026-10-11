@@ -9915,6 +9915,38 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ultima LPDU",
+				uuid = "b1214fab-ae56-61fe-8b9c-0dbdc47ee94f",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Draws - Ultima LPDU",
+				execute = "local Roster = AnyoneCore and AnyoneCore.Roster\nif not Roster or not Roster.current() or Roster.mySlot() ~= 'T1' then return end\nlocal alive, ultima = TensorCore.isEntityAlive(2137)\nif not alive or not ultima or not ultima.id then return end\nlocal drawer = TensorCore.getCachedDrawer(0xCC33FF66, 0xCC33FF66, 0xFF33FF66, 0xFF000000, 3)\ndrawer:addTimedArrowOnEnt(4000, ultima.id, 6, 1.5, 3, 2.5, nil, 0, false, -math.pi / 2, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nTensorCore.addAlertText(3500, 'MT: left of Ultima', 1, 1, true)\nself.used = true",
+				executeType = 2,
+				mechanicTime = 1079,
+				name = "[Draw][LPDU][Post Predation] MT left of Ultima",
+				timeRange = true,
+				timelineIndex = 140,
+				timerEndOffset = 2,
+				uuid = "5e2921d5-efe8-9be4-9345-e18c8d08f3c8",
+				version = 2,
+			},
+		},
 	},
 	[141] = 
 	{
@@ -10904,7 +10936,7 @@ local tbl =
 							alertDuration = 2500,
 							alertPriority = 3,
 							alertTTS = true,
-							alertText = "Move away from OT",
+							alertText = "Move away from MT",
 							conditions = 
 							{
 								
@@ -10914,7 +10946,7 @@ local tbl =
 								},
 							},
 							displayPath = "[Raid calls]",
-							name = "[Raid Call][Ultima] Homing Lasers - Move Away from OT",
+							name = "[Raid Call][Ultima] Homing Lasers - Move Away from MT",
 							uuid = "955caf81-2ad0-7036-973f-536b07a9253f",
 							version = 2.1,
 						},
@@ -10937,10 +10969,10 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local Roster = AnyoneCore.Roster\nif not Roster or not Roster.current() then return false end\nlocal slot = Roster.mySlot()\nif not slot then return false end\nreturn slot ~= \"T2\"",
+							conditionLua = "local Roster = AnyoneCore.Roster\nif not Roster or not Roster.current() then return false end\nlocal slot = Roster.mySlot()\nreturn slot ~= nil and slot ~= \"T1\"",
 							conditionType = 9,
 							displayPath = "[Raid calls]",
-							name = "Roster: except T2",
+							name = "Roster: except T1",
 							partyTargetType = "Off Tank",
 							uuid = "6c179ad4-06f5-a030-9f66-c2a73ffb5bc3",
 							version = 3,
@@ -10949,7 +10981,7 @@ local tbl =
 				},
 				displayPath = "[Raid calls]",
 				mechanicTime = 1093,
-				name = "[Raid Call][Ultima] Homing Lasers - Move Away from OT",
+				name = "[Raid Call][Ultima] Homing Lasers - Move Away from MT",
 				timeRange = true,
 				timelineIndex = 146,
 				timerStartOffset = -1,
@@ -11002,9 +11034,9 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local Roster = AnyoneCore.Roster\nif not Roster or not Roster.current() then return false end\nlocal slot = Roster.mySlot()\nif not slot then return false end\nreturn slot == \"T2\"",
+							conditionLua = "local Roster = AnyoneCore.Roster\nif not Roster or not Roster.current() then return false end\nreturn Roster.mySlot() == \"T1\"",
 							conditionType = 9,
-							name = "Roster: T2",
+							name = "Roster: T1",
 							partyTargetType = "Off Tank",
 							uuid = "db92d3c4-b71d-d131-be4a-67c82c7bbf6a",
 							version = 3,
@@ -11013,7 +11045,7 @@ local tbl =
 				},
 				displayPath = "LPDU Guidance",
 				mechanicTime = 1093,
-				name = "[LPDU][OT] Homing Lasers - Stay Away",
+				name = "[LPDU][MT] Homing Lasers - Stay Away",
 				throttleTime = 5000,
 				timeRange = true,
 				timelineIndex = 146,
@@ -11124,6 +11156,44 @@ local tbl =
 				timerEndOffset = 2,
 				timerStartOffset = -2,
 				uuid = "d30b85b5-e340-3d1e-bd80-5d691f000785",
+				version = 2,
+			},
+		},
+	},
+	[148] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ultima LPDU",
+				uuid = "5813693a-7091-d59e-ba5b-ee8de400f453",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Draws - Ultima LPDU",
+				eventType = 13,
+				execute = "local Roster = AnyoneCore and AnyoneCore.Roster\nif not Roster or not Roster.current() then return end\nlocal slot = Roster.mySlot()\nif slot ~= \"T1\" and slot ~= \"T2\" and slot ~= \"M1\" and slot ~= \"M2\" then return end\nlocal cfg = _G.UWU_LPDU_AnnihilationAssignments\nif not cfg then\n    cfg = { melee = 0, solo = 0 }\n    _G.UWU_LPDU_AnnihilationAssignments = cfg\nend\nlocal visible = GUI:Begin(\"UWU LPDU 3-3-1-1 assignments\", true)\nif visible then\n    GUI:Text(\"Choose the assignments agreed with your group.\")\n    if slot == \"M1\" or slot == \"M2\" then\n        local choice = GUI:Combo(\"Melee with tanks\", cfg.melee, {\"Choose melee\", \"M1\", \"M2\"}, 3)\n        cfg.melee = choice\n        GUI:Text(\"First two orbs: MT + OT + selected melee.\")\n    else\n        local choice = GUI:Combo(\"Solo tank\", cfg.solo, {\"Choose tank\", \"MT\", \"OT\"}, 3)\n        cfg.solo = choice\n        GUI:Text(\"Third and fourth orbs: selected tank alone.\")\n    end\nend\nGUI:End()",
+				executeType = 2,
+				loop = true,
+				mechanicTime = 1100,
+				name = "[GUI][LPDU][Annihilation] Orb assignments",
+				timeRange = true,
+				timelineIndex = 148,
+				timerEndOffset = 42,
+				timerStartOffset = -30,
+				uuid = "b025a37c-047b-f366-999b-711917c7ba2d",
 				version = 2,
 			},
 		},
@@ -11671,6 +11741,41 @@ local tbl =
 			},
 		},
 	},
+	[155] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ultima LPDU",
+				uuid = "2e2a8032-5ad4-edb8-87e6-3f832a9e9fa6",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Draws - Ultima LPDU",
+				execute = "local Roster = AnyoneCore and AnyoneCore.Roster\nif not Roster or not Roster.current() then return end\nlocal slot = Roster.mySlot()\nif not slot then return end\nlocal cfg = _G.UWU_LPDU_AnnihilationAssignments or {}\nlocal assigned\nlocal missing = false\nif true then\n    if slot == \"T1\" or slot == \"T2\" then\n        assigned = true\n    elseif slot == \"M1\" or slot == \"M2\" then\n        missing = not cfg.melee or cfg.melee == 0\n        assigned = (cfg.melee == 1 and slot == \"M1\") or (cfg.melee == 2 and slot == \"M2\")\n    end\nelse\n    if slot == \"T1\" or slot == \"T2\" then\n        missing = not cfg.solo or cfg.solo == 0\n        assigned = (cfg.solo == 1 and slot == \"T1\") or (cfg.solo == 2 and slot == \"T2\")\n    end\nend\nif missing then\n    TensorCore.addAlertText(3500, \"Orb 1: choose your assignment\", 1.0, 2, true)\nelseif assigned then\n    if Roster.isReady() then\n        local id = Roster.idOf(slot)\n        if id then\n            local drawer = TensorCore.getCachedDrawer(0x6633FF66, 0xCC33FF66, 0xFF33FF66, 0xFF000000, 3)\n            drawer:addTimedCircleOnEnt(4000, id, 1.2, 0, false, true, Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n            AnyoneCore.addTimedWorldTextOnEnt(4000, \"SOAK ORB 1\", id, 0xFF33FF66, true, 1.1, 1.5)\n        end\n    end\n    TensorCore.addAlertText(3500, \"Orb 1: soak with tanks\", 1.0, 1, true)\nelse\n    TensorCore.addAlertText(3000, \"Orb 1: stay clear\", 0.9, 2, false)\nend\nself.used = true",
+				executeType = 2,
+				mechanicTime = 1116,
+				name = "[Draw][LPDU][Annihilation] Orb 1 role cue",
+				timeRange = true,
+				timelineIndex = 155,
+				timerEndOffset = 2,
+				uuid = "e8276347-36f7-698c-a08c-984954552ebf",
+				version = 2,
+			},
+		},
+	},
 	[156] = 
 	{
 		
@@ -11892,6 +11997,41 @@ local tbl =
 				timerEndOffset = 2,
 				timerStartOffset = -2,
 				uuid = "61bf5409-6d3e-2a0a-b1b9-5b30a2afa081",
+				version = 2,
+			},
+		},
+	},
+	[160] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ultima LPDU",
+				uuid = "bf98cb8d-7eca-9a15-a5b2-b14f4f19cf87",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Draws - Ultima LPDU",
+				execute = "local Roster = AnyoneCore and AnyoneCore.Roster\nif not Roster or not Roster.current() then return end\nlocal slot = Roster.mySlot()\nif not slot then return end\nlocal cfg = _G.UWU_LPDU_AnnihilationAssignments or {}\nlocal assigned\nlocal missing = false\nif true then\n    if slot == \"T1\" or slot == \"T2\" then\n        assigned = true\n    elseif slot == \"M1\" or slot == \"M2\" then\n        missing = not cfg.melee or cfg.melee == 0\n        assigned = (cfg.melee == 1 and slot == \"M1\") or (cfg.melee == 2 and slot == \"M2\")\n    end\nelse\n    if slot == \"T1\" or slot == \"T2\" then\n        missing = not cfg.solo or cfg.solo == 0\n        assigned = (cfg.solo == 1 and slot == \"T1\") or (cfg.solo == 2 and slot == \"T2\")\n    end\nend\nif missing then\n    TensorCore.addAlertText(3500, \"Orb 2: choose your assignment\", 1.0, 2, true)\nelseif assigned then\n    if Roster.isReady() then\n        local id = Roster.idOf(slot)\n        if id then\n            local drawer = TensorCore.getCachedDrawer(0x6633FF66, 0xCC33FF66, 0xFF33FF66, 0xFF000000, 3)\n            drawer:addTimedCircleOnEnt(4000, id, 1.2, 0, false, true, Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n            AnyoneCore.addTimedWorldTextOnEnt(4000, \"SOAK ORB 2\", id, 0xFF33FF66, true, 1.1, 1.5)\n        end\n    end\n    TensorCore.addAlertText(3500, \"Orb 2: soak with tanks\", 1.0, 1, true)\nelse\n    TensorCore.addAlertText(3000, \"Orb 2: stay clear\", 0.9, 2, false)\nend\nself.used = true",
+				executeType = 2,
+				mechanicTime = 1123,
+				name = "[Draw][LPDU][Annihilation] Orb 2 role cue",
+				timeRange = true,
+				timelineIndex = 160,
+				timerEndOffset = 2,
+				uuid = "213a082a-f2e6-4b9e-aada-ddd503b473db",
 				version = 2,
 			},
 		},
@@ -12234,6 +12374,41 @@ local tbl =
 			},
 		},
 	},
+	[167] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ultima LPDU",
+				uuid = "a7db96f4-254b-9c74-8669-a6cd4d789590",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Draws - Ultima LPDU",
+				execute = "local Roster = AnyoneCore and AnyoneCore.Roster\nif not Roster or not Roster.current() then return end\nlocal slot = Roster.mySlot()\nif not slot then return end\nlocal cfg = _G.UWU_LPDU_AnnihilationAssignments or {}\nlocal assigned\nlocal missing = false\nif false then\n    if slot == \"T1\" or slot == \"T2\" then\n        assigned = true\n    elseif slot == \"M1\" or slot == \"M2\" then\n        missing = not cfg.melee or cfg.melee == 0\n        assigned = (cfg.melee == 1 and slot == \"M1\") or (cfg.melee == 2 and slot == \"M2\")\n    end\nelse\n    if slot == \"T1\" or slot == \"T2\" then\n        missing = not cfg.solo or cfg.solo == 0\n        assigned = (cfg.solo == 1 and slot == \"T1\") or (cfg.solo == 2 and slot == \"T2\")\n    end\nend\nif missing then\n    TensorCore.addAlertText(3500, \"Orb 3: choose your assignment\", 1.0, 2, true)\nelseif assigned then\n    if Roster.isReady() then\n        local id = Roster.idOf(slot)\n        if id then\n            local drawer = TensorCore.getCachedDrawer(0x6633FF66, 0xCC33FF66, 0xFF33FF66, 0xFF000000, 3)\n            drawer:addTimedCircleOnEnt(4000, id, 1.2, 0, false, true, Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n            AnyoneCore.addTimedWorldTextOnEnt(4000, \"SOAK ORB 3\", id, 0xFF33FF66, true, 1.1, 1.5)\n        end\n    end\n    TensorCore.addAlertText(3500, \"Orb 3: solo tank soak\", 1.0, 1, true)\nelse\n    TensorCore.addAlertText(3000, \"Orb 3: stay clear\", 0.9, 2, false)\nend\nself.used = true",
+				executeType = 2,
+				mechanicTime = 1131,
+				name = "[Draw][LPDU][Annihilation] Orb 3 role cue",
+				timeRange = true,
+				timelineIndex = 167,
+				timerEndOffset = 2,
+				uuid = "cf7e9a1a-007e-3924-9cfe-24b53b676d5b",
+				version = 2,
+			},
+		},
+	},
 	[169] = 
 	{
 		
@@ -12246,6 +12421,41 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
+		},
+	},
+	[170] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ultima LPDU",
+				uuid = "535684ef-30b1-fe78-b51e-cb43def6da59",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Draws - Ultima LPDU",
+				execute = "local Roster = AnyoneCore and AnyoneCore.Roster\nif not Roster or not Roster.current() then return end\nlocal slot = Roster.mySlot()\nif not slot then return end\nlocal cfg = _G.UWU_LPDU_AnnihilationAssignments or {}\nlocal assigned\nlocal missing = false\nif false then\n    if slot == \"T1\" or slot == \"T2\" then\n        assigned = true\n    elseif slot == \"M1\" or slot == \"M2\" then\n        missing = not cfg.melee or cfg.melee == 0\n        assigned = (cfg.melee == 1 and slot == \"M1\") or (cfg.melee == 2 and slot == \"M2\")\n    end\nelse\n    if slot == \"T1\" or slot == \"T2\" then\n        missing = not cfg.solo or cfg.solo == 0\n        assigned = (cfg.solo == 1 and slot == \"T1\") or (cfg.solo == 2 and slot == \"T2\")\n    end\nend\nif missing then\n    TensorCore.addAlertText(3500, \"Orb 4: choose your assignment\", 1.0, 2, true)\nelseif assigned then\n    if Roster.isReady() then\n        local id = Roster.idOf(slot)\n        if id then\n            local drawer = TensorCore.getCachedDrawer(0x6633FF66, 0xCC33FF66, 0xFF33FF66, 0xFF000000, 3)\n            drawer:addTimedCircleOnEnt(4000, id, 1.2, 0, false, true, Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n            AnyoneCore.addTimedWorldTextOnEnt(4000, \"SOAK ORB 4\", id, 0xFF33FF66, true, 1.1, 1.5)\n        end\n    end\n    TensorCore.addAlertText(3500, \"Orb 4: solo tank soak\", 1.0, 1, true)\nelse\n    TensorCore.addAlertText(3000, \"Orb 4: stay clear\", 0.9, 2, false)\nend\nself.used = true",
+				executeType = 2,
+				mechanicTime = 1136,
+				name = "[Draw][LPDU][Annihilation] Orb 4 role cue",
+				timeRange = true,
+				timelineIndex = 170,
+				timerEndOffset = 2,
+				uuid = "29175c26-173d-d62c-9113-c2cf9eea799a",
+				version = 2,
+			},
 		},
 	},
 	[171] = 
@@ -12690,6 +12900,73 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Raid Calls - Ultima LPDU",
+				uuid = "f3c2137f-9918-fe4d-89f9-d98cc3a4e20c",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Raid Calls - Ultima LPDU",
+				execute = "local Roster = AnyoneCore and AnyoneCore.Roster\nif not Roster or not Roster.current() then return end\nlocal slot = Roster.mySlot()\nif slot == 'T2' then TensorCore.addAlertText(4000,'OT: invuln Homing Laser',1,1,true)\nelseif slot then TensorCore.addAlertText(4000,'OT takes Homing: stay away',1,2,false) end\nself.used = true",
+				executeType = 2,
+				mechanicTime = 1155,
+				name = "[Raid Call][LPDU][Post Annihilation] OT invuln Homing",
+				timeRange = true,
+				timelineIndex = 179,
+				timerEndOffset = 2,
+				uuid = "95d5f605-4beb-b4cb-a9c2-bd40c914cd5d",
+				version = 2,
+			},
+		},
+	},
+	[182] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Raid Calls - Ultima LPDU",
+				uuid = "cb07a58d-5dc8-cf1a-ba60-45c1d94def36",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Raid Calls - Ultima LPDU",
+				execute = "local Roster = AnyoneCore and AnyoneCore.Roster\nif not Roster or not Roster.current() then return end\nlocal slot = Roster.mySlot()\nif slot == 'T1' then TensorCore.addAlertText(4000,'MT: take cleave',1,1,true)\nelseif slot then TensorCore.addAlertText(4000,'Cleave on MT: stay clear',1,2,false) end\nself.used = true",
+				executeType = 2,
+				mechanicTime = 1169,
+				name = "[Raid Call][LPDU][Post Annihilation] MT cleave",
+				timeRange = true,
+				timelineIndex = 182,
+				timerEndOffset = 2,
+				uuid = "2a36eb70-d0af-469a-abdb-6c88fe2d0ce8",
+				version = 2,
+			},
 		},
 	},
 	[183] = 
