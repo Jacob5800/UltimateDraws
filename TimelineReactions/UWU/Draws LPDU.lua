@@ -4702,7 +4702,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.uwu_ifrit_dash2 = data.uwu_ifrit_dash2 or {}\nlocal state = data.uwu_ifrit_dash2\nif state.startArrowID then Argus.deleteTimedShape(state.startArrowID) end\nif state.arrowID then Argus.deleteTimedShape(state.arrowID) end\nif state.stopCircleID then Argus.deleteTimedShape(state.stopCircleID) end\nstate.startArrowID = nil\nstate.arrowID = nil\nstate.stopCircleID = nil\nstate.route = nil\nstate.dashOctants = nil\nstate.startIndex = nil\nstate.wokenNumber = nil\nstate.stage = nil\nstate.lastCasterID = nil\nstate.bossID = eventArgs.entityID\nstate.drawn = false\nself.used = true",
+							actionLua = "data.uwu_ifrit_dash2 = data.uwu_ifrit_dash2 or {}\nlocal state = data.uwu_ifrit_dash2\nif state.startArrowID then Argus.deleteTimedShape(state.startArrowID) end\nif state.arrowID then Argus.deleteTimedShape(state.arrowID) end\nif state.stopCircleID then Argus.deleteTimedShape(state.stopCircleID) end\nstate.startArrowID = nil\nstate.arrowID = nil\nstate.stopCircleID = nil\nstate.route = nil\nstate.dashOctants = nil\nstate.startIndex = nil\nstate.wokenNumber = nil\nstate.wokenOctant = nil\nstate.stage = nil\nstate.lastCasterID = nil\nstate.channelOctants = nil\nstate.channelIDs = nil\nstate.channelCount = nil\nstate.lastChannelID = nil\nstate.bossID = eventArgs.entityID\nstate.drawn = false\nself.used = true",
 							conditions = 
 							{
 								
@@ -5757,7 +5757,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local state = data.uwu_ifrit_dash2\nlocal nails = data.uwu_ifrit_last_nail\nlocal player = TensorCore.mGetPlayer()\nif not state or state.stage or not nails or not nails.order or not nails.order[4] or not player then self.used=true; return end\nlocal function octant(x, z)\n    local dx, dz = x - 100, z - 100\n    local ax, az = math.abs(dx), math.abs(dz)\n    if ax > az * 2.414214 then return dx >= 0 and 0 or 4 end\n    if az > ax * 2.414214 then return dz >= 0 and 2 or 6 end\n    if dx >= 0 then return dz >= 0 and 1 or 7 end\n    return dz >= 0 and 3 or 5\nend\nlocal wokenNumber\nif eventArgs.entityID == state.bossID then wokenNumber=1\nelse\n    local boss = state.bossID and TensorCore.mGetEntity(state.bossID)\n    if boss and boss.pos then\n        local bossIndex=octant(boss.pos.x,boss.pos.z)\n        for i=1,4 do\n            local nail=nails.order[i]\n            if nail and octant(nail.x,nail.z)==bossIndex then wokenNumber=i; break end\n        end\n    end\nend\nif not wokenNumber then\n    if state.startArrowID then Argus.deleteTimedShape(state.startArrowID); state.startArrowID=nil end\n    self.used=true; return\nend\nlocal caster=TensorCore.mGetEntity(eventArgs.entityID)\nif not caster or not caster.pos or octant(caster.pos.x,caster.pos.z) ~= octant(nails.order[1].x,nails.order[1].z) then\n    if state.startArrowID then Argus.deleteTimedShape(state.startArrowID); state.startArrowID=nil end\n    self.used=true; return\nend\nlocal searing=state.secondHealerID==player.id\nlocal startIndex=(octant(nails.order[4].x,nails.order[4].z)+(searing and 4 or 0))%8\nlocal dash={}\nfor i=1,4 do\n    local nail=nails.order[i]\n    if not nail then self.used=true; return end\n    dash[i]=octant(nail.x,nail.z)\nend\nlocal function safe(index,origin)\n    local diff=(index-origin)%4\n    return diff ~= 0\nend\nif not safe(startIndex,dash[1]) then self.used=true; return end\nlocal best, bestCost\nlocal function search(stage,index,cost,path)\n    if stage==5 then\n        if index%2 == dash[wokenNumber]%2 and (not bestCost or cost<bestCost) then\n            bestCost=cost\n            best={path[1],path[2],path[3],path[4]}\n        end\n        return\n    end\n    for turn=0,2 do\n        local nextIndex=(index+(turn==1 and 7 or turn==2 and 1 or 0))%8\n        if stage==4 or safe(nextIndex,dash[stage+1]) then\n            path[stage]=nextIndex\n            local penalty=turn==0 and 0 or 10+(turn==2 and 2 or 0)+stage*0.1\n            search(stage+1,nextIndex,cost+penalty,path)\n        end\n    end\nend\nsearch(1,startIndex,0,{})\nif not best then self.used=true; return end\nstate.route=best\nstate.dashOctants=dash\nstate.startIndex=startIndex\nstate.wokenNumber=wokenNumber\nif state.startArrowID then Argus.deleteTimedShape(state.startArrowID); state.startArrowID=nil end\nlocal stage=1\nlocal targetIndex = state.route[stage]\nlocal from = player.pos\nlocal px, pz = from.x - 100, from.z - 100\nlocal radius = math.max(16, math.min(18, math.sqrt(px * px + pz * pz)))\nlocal diagonal = radius * 0.7071068\nlocal y = from.y\nlocal to\nif targetIndex == 0 then to = {x=100+radius,y=y,z=100}\nelseif targetIndex == 1 then to = {x=100+diagonal,y=y,z=100+diagonal}\nelseif targetIndex == 2 then to = {x=100,y=y,z=100+radius}\nelseif targetIndex == 3 then to = {x=100-diagonal,y=y,z=100+diagonal}\nelseif targetIndex == 4 then to = {x=100-radius,y=y,z=100}\nelseif targetIndex == 5 then to = {x=100-diagonal,y=y,z=100-diagonal}\nelseif targetIndex == 6 then to = {x=100,y=y,z=100-radius}\nelse to = {x=100+diagonal,y=y,z=100-diagonal} end\nif state.arrowID then Argus.deleteTimedShape(state.arrowID); state.arrowID = nil end\nif state.stopCircleID then Argus.deleteTimedShape(state.stopCircleID); state.stopCircleID = nil end\nlocal drawer = TensorCore.getCachedDrawer(0xFFCBFFB8,0xFF5DF27B,0xFFFFFFFF,0xFF000000,5)\nlocal distance = TensorCore.getDistance2d(from,to)\nlocal previous = stage == 1 and state.startIndex or state.route[stage-1]\nif targetIndex ~= previous and distance > 0.2 then\n    local tip = math.min(2.8,distance*0.38)\n    state.arrowID = drawer:addTimedArrow(4300,from.x,from.y,from.z,\n        TensorCore.getHeadingToTarget(from,to),math.max(0.1,distance-tip),\n        1.35,tip,2.8,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nlocal final = true\nfor k=stage+1,4 do if state.route[k] ~= targetIndex then final=false; break end end\nif final then\n    state.stopCircleID = drawer:addTimedCircle(8500-stage*1400,\n        to.x,to.y,to.z,1.15,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nstate.stage = stage\nstate.lastCasterID = eventArgs.entityID\nself.used = true",
+							actionLua = "local state = data.uwu_ifrit_dash2\nlocal nails = data.uwu_ifrit_last_nail\nlocal player = TensorCore.mGetPlayer()\nif not state or state.stage or not nails or not nails.order or not nails.order[4] or not player then self.used=true; return end\nlocal function octant(x, z)\n    local dx, dz = x - 100, z - 100\n    local ax, az = math.abs(dx), math.abs(dz)\n    if ax > az * 2.414214 then return dx >= 0 and 0 or 4 end\n    if az > ax * 2.414214 then return dz >= 0 and 2 or 6 end\n    if dx >= 0 then return dz >= 0 and 1 or 7 end\n    return dz >= 0 and 3 or 5\nend\nlocal boss=state.bossID and TensorCore.mGetEntity(state.bossID)\nif not boss or not boss.pos or state.channelCount~=3 or not state.channelOctants or not state.channelIDs or state.channelIDs[1]~=eventArgs.entityID then\n    if state.startArrowID then Argus.deleteTimedShape(state.startArrowID); state.startArrowID=nil end\n    self.used=true; return\nend\nlocal wokenOctant=octant(boss.pos.x,boss.pos.z)\nlocal searing=state.secondHealerID==player.id\nlocal startIndex=(octant(nails.order[4].x,nails.order[4].z)+(searing and 4 or 0))%8\nlocal dash={state.channelOctants[1],state.channelOctants[2],state.channelOctants[3]}\nlocal seen={}\nfor i=1,3 do\n    if dash[i]==nil or seen[dash[i]] then self.used=true; return end\n    seen[dash[i]]=true\nend\nlocal remainder\nfor i=1,4 do\n    local nail=nails.order[i]\n    if not nail then self.used=true; return end\n    local index=octant(nail.x,nail.z)\n    if not seen[index] then\n        if remainder and remainder~=index then self.used=true; return end\n        remainder=index\n    end\nend\nif remainder==nil then self.used=true; return end\ndash[4]=remainder\nlocal function safe(index,origin)\n    local diff=(index-origin)%4\n    return diff ~= 0\nend\nif not safe(startIndex,dash[1]) then self.used=true; return end\nlocal best, bestCost\nlocal function search(stage,index,cost,path)\n    if stage==5 then\n        if index%2 == wokenOctant%2 and (not bestCost or cost<bestCost) then\n            bestCost=cost\n            best={path[1],path[2],path[3],path[4]}\n        end\n        return\n    end\n    for turn=0,2 do\n        local nextIndex=(index+(turn==1 and 7 or turn==2 and 1 or 0))%8\n        if stage==4 or safe(nextIndex,dash[stage+1]) then\n            path[stage]=nextIndex\n            local penalty=turn==0 and 0 or 10+(turn==2 and 2 or 0)+stage*0.1\n            search(stage+1,nextIndex,cost+penalty,path)\n        end\n    end\nend\nsearch(1,startIndex,0,{})\nif not best then self.used=true; return end\nstate.route=best\nstate.dashOctants=dash\nstate.startIndex=startIndex\nstate.wokenOctant=wokenOctant\nif state.startArrowID then Argus.deleteTimedShape(state.startArrowID); state.startArrowID=nil end\nlocal stage=1\nlocal targetIndex = state.route[stage]\nlocal from = player.pos\nlocal px, pz = from.x - 100, from.z - 100\nlocal radius = math.max(16, math.min(18, math.sqrt(px * px + pz * pz)))\nlocal diagonal = radius * 0.7071068\nlocal y = from.y\nlocal to\nif targetIndex == 0 then to = {x=100+radius,y=y,z=100}\nelseif targetIndex == 1 then to = {x=100+diagonal,y=y,z=100+diagonal}\nelseif targetIndex == 2 then to = {x=100,y=y,z=100+radius}\nelseif targetIndex == 3 then to = {x=100-diagonal,y=y,z=100+diagonal}\nelseif targetIndex == 4 then to = {x=100-radius,y=y,z=100}\nelseif targetIndex == 5 then to = {x=100-diagonal,y=y,z=100-diagonal}\nelseif targetIndex == 6 then to = {x=100,y=y,z=100-radius}\nelse to = {x=100+diagonal,y=y,z=100-diagonal} end\nif state.arrowID then Argus.deleteTimedShape(state.arrowID); state.arrowID = nil end\nif state.stopCircleID then Argus.deleteTimedShape(state.stopCircleID); state.stopCircleID = nil end\nlocal drawer = TensorCore.getCachedDrawer(0xFFCBFFB8,0xFF5DF27B,0xFFFFFFFF,0xFF000000,5)\nlocal distance = TensorCore.getDistance2d(from,to)\nlocal previous = stage == 1 and state.startIndex or state.route[stage-1]\nif targetIndex ~= previous and distance > 0.2 then\n    local tip = math.min(2.8,distance*0.38)\n    state.arrowID = drawer:addTimedArrow(4300,from.x,from.y,from.z,\n        TensorCore.getHeadingToTarget(from,to),math.max(0.1,distance-tip),\n        1.35,tip,2.8,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nlocal final = true\nfor k=stage+1,4 do if state.route[k] ~= targetIndex then final=false; break end end\nif final then\n    state.stopCircleID = drawer:addTimedCircle(8500-stage*1400,\n        to.x,to.y,to.z,1.15,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nstate.stage = stage\nstate.lastCasterID = eventArgs.entityID\nself.used = true",
 							conditions = 
 							{
 								
@@ -5955,6 +5955,165 @@ local tbl =
 				timerEndOffset = 9,
 				timerStartOffset = 3,
 				uuid = "dfde9ae0-829e-0a16-9470-025077181d6f",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local state=data.uwu_ifrit_dash2\nlocal entity=TensorCore.mGetEntity(eventArgs.entityID)\nif not state or not entity or not entity.pos then self.used=true; return end\nlocal dx,dz=entity.pos.x-100,entity.pos.z-100\nlocal ax,az=math.abs(dx),math.abs(dz)\nlocal index\nif ax>az*2.414214 then index=dx>=0 and 0 or 4\nelseif az>ax*2.414214 then index=dz>=0 and 2 or 6\nelseif dx>=0 then index=dz>=0 and 1 or 7\nelse index=dz>=0 and 3 or 5 end\nstate.channelOctants=state.channelOctants or {}\nstate.channelIDs=state.channelIDs or {}\nstate.channelOctants[1]=index\nstate.channelIDs[1]=eventArgs.entityID\nstate.channelCount=1\nstate.lastChannelID=eventArgs.entityID\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"81ce37b4-18af-edeb-a18d-b802cfa8e3a6",
+									true,
+								},
+							},
+							name = "Record Charge 1",
+							uuid = "a88aec25-ba50-0a92-ac1f-894e91d69b9f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local state=data.uwu_ifrit_dash2\nreturn state~=nil and state.bossID~=nil and (state.channelCount or 0)==0 and eventArgs.entityContentID==1185 and eventArgs.spellID==11103 and eventArgs.entityID~=state.lastChannelID",
+							dequeueIfLuaFalse = true,
+							name = "Crimson Cyclone Channel 1",
+							uuid = "81ce37b4-18af-edeb-a18d-b802cfa8e3a6",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Ifrit",
+				eventType = 3,
+				mechanicTime = 416,
+				name = "[Core] Ifrit Dash 2 - Record Charge 1",
+				timeRange = true,
+				timelineIndex = 65,
+				timerEndOffset = 3,
+				timerStartOffset = -6,
+				uuid = "a338eb41-8296-3122-a6f9-4b3a712a5be7",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local state=data.uwu_ifrit_dash2\nlocal entity=TensorCore.mGetEntity(eventArgs.entityID)\nif not state or not entity or not entity.pos then self.used=true; return end\nlocal dx,dz=entity.pos.x-100,entity.pos.z-100\nlocal ax,az=math.abs(dx),math.abs(dz)\nlocal index\nif ax>az*2.414214 then index=dx>=0 and 0 or 4\nelseif az>ax*2.414214 then index=dz>=0 and 2 or 6\nelseif dx>=0 then index=dz>=0 and 1 or 7\nelse index=dz>=0 and 3 or 5 end\nstate.channelOctants=state.channelOctants or {}\nstate.channelIDs=state.channelIDs or {}\nstate.channelOctants[2]=index\nstate.channelIDs[2]=eventArgs.entityID\nstate.channelCount=2\nstate.lastChannelID=eventArgs.entityID\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"0c5106be-bfde-5c32-8674-4aed7fb2e134",
+									true,
+								},
+							},
+							name = "Record Charge 2",
+							uuid = "5a8688d3-a8c4-e532-ad62-553b6887fe8f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local state=data.uwu_ifrit_dash2\nreturn state~=nil and state.bossID~=nil and (state.channelCount or 0)==1 and eventArgs.entityContentID==1185 and eventArgs.spellID==11103 and eventArgs.entityID~=state.lastChannelID",
+							dequeueIfLuaFalse = true,
+							name = "Crimson Cyclone Channel 2",
+							uuid = "0c5106be-bfde-5c32-8674-4aed7fb2e134",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Ifrit",
+				eventType = 3,
+				mechanicTime = 416,
+				name = "[Core] Ifrit Dash 2 - Record Charge 2",
+				timeRange = true,
+				timelineIndex = 65,
+				timerEndOffset = 3,
+				timerStartOffset = -6,
+				uuid = "d4a7ceb1-f679-666a-bd98-08b4b4c96ba0",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local state=data.uwu_ifrit_dash2\nlocal entity=TensorCore.mGetEntity(eventArgs.entityID)\nif not state or not entity or not entity.pos then self.used=true; return end\nlocal dx,dz=entity.pos.x-100,entity.pos.z-100\nlocal ax,az=math.abs(dx),math.abs(dz)\nlocal index\nif ax>az*2.414214 then index=dx>=0 and 0 or 4\nelseif az>ax*2.414214 then index=dz>=0 and 2 or 6\nelseif dx>=0 then index=dz>=0 and 1 or 7\nelse index=dz>=0 and 3 or 5 end\nstate.channelOctants=state.channelOctants or {}\nstate.channelIDs=state.channelIDs or {}\nstate.channelOctants[3]=index\nstate.channelIDs[3]=eventArgs.entityID\nstate.channelCount=3\nstate.lastChannelID=eventArgs.entityID\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"f77d6360-151e-6199-9085-3988dfbf3f69",
+									true,
+								},
+							},
+							name = "Record Charge 3",
+							uuid = "e9448dda-f05a-7f0a-bdc4-ed258aa80998",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local state=data.uwu_ifrit_dash2\nreturn state~=nil and state.bossID~=nil and (state.channelCount or 0)==2 and eventArgs.entityContentID==1185 and eventArgs.spellID==11103 and eventArgs.entityID~=state.lastChannelID",
+							dequeueIfLuaFalse = true,
+							name = "Crimson Cyclone Channel 3",
+							uuid = "f77d6360-151e-6199-9085-3988dfbf3f69",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Ifrit",
+				eventType = 3,
+				mechanicTime = 416,
+				name = "[Core] Ifrit Dash 2 - Record Charge 3",
+				timeRange = true,
+				timelineIndex = 65,
+				timerEndOffset = 3,
+				timerStartOffset = -6,
+				uuid = "fd7c98ac-3fc7-d5db-b2d5-303f3f1727b6",
 				version = 2,
 			},
 		},

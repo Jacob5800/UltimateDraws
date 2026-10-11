@@ -137,7 +137,9 @@ TEA: Coming soon by Ton.
 
 ### UWU: LPDU
 
-- 2026-10-11: Ifrit dash guidance now checks the later Crimson Cyclone lanes and Afterburn before choosing each move. It can wait through a dash when the next counterclockwise spot would be hit, shows a small green circle at the final stopping point, and clears cues if the observed caster order disagrees with the recorded nail order. The route is saved in Draws LPDU; live replay confirmation remains pending.
+- 2026-10-11: Ifrit dash routing now reads the actual Crimson Cyclone channel order instead of assuming nail death events arrive in charge order. The first three charge origins are known before the first hit; the fourth uses the remaining nail position. This covers older pulls where death-event order differed from dash order. Replay confirmation remains pending.
+
+- 2026-10-11: Ifrit dash guidance now checks the later Crimson Cyclone lanes and Afterburn before choosing each move. It can wait through a dash when the next counterclockwise spot would be hit, shows a small green circle at the final stopping point, and clears cues if a cast contradicts the planned order. The route is saved in Draws LPDU; live replay confirmation remains pending.
 
 - 2026-10-11: Ifrit dash guidance now shows the starting spot near the fourth nail around timeline 409 (opposite for Searing Wind), then one counterclockwise move at a time. The first move appears after dash one; two-step patterns replace it with the next move after dash two from the player's current position. Replay confirmation remains pending.
 
