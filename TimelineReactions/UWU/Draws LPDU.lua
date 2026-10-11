@@ -7,6 +7,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "ae65a351-f417-42dd-7034-929f1f5a0401",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "Draws - Garuda",
 				uuid = "7c82c781-f4c1-68ef-9934-0c5d314d5e70",
 			},
@@ -353,6 +364,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "094fd00f-7280-2743-9f44-9f215769ad7f",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "Draws - Garuda",
 				uuid = "72aaf4fb-be72-3db4-8943-92aa990e1e93",
 			},
@@ -481,6 +503,17 @@ local tbl =
 		{
 			data = 
 			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "3ed518fb-eeaf-4de7-5c36-740596c6df6b",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
 				actions = 
 				{
 					
@@ -521,6 +554,17 @@ local tbl =
 	},
 	[9] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "fcdd508c-fc6a-f658-1e68-7abe91e121bc",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -585,8 +629,33 @@ local tbl =
 			},
 		},
 	},
+	[10] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "6af50a72-25f2-6d26-1927-3928fc4a0062",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+	},
 	[11] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "948d8869-83fe-4b8d-1ffd-5b774e5fda99",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -703,6 +772,17 @@ local tbl =
 	},
 	[12] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "105db5cc-5f1f-97d0-e752-0c9e997c143c",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -836,6 +916,17 @@ local tbl =
 	},
 	[13] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "14dc7e3b-9c4a-819f-5975-8de59e61d1eb",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -1381,8 +1472,47 @@ local tbl =
 			},
 		},
 	},
+	[15] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "78fc6e35-cb5a-8e21-6361-6aeb9475f4e5",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+	},
+	[17] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "ad7ae207-a9fd-3c73-135f-73995afdc277",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+	},
 	[18] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "fba042da-4a7e-69be-488b-54309c55b40a",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -1726,6 +1856,20 @@ local tbl =
 			},
 		},
 	},
+	[20] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "3bf2cd4d-cc68-1171-03d5-1e3f34b3cfbd",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+	},
 	[21] = 
 	{
 		
@@ -2034,6 +2178,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "2bb3ab5f-948d-0643-3914-f12ddf64158f",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "Draws - Garuda",
 				uuid = "b2e65a07-c442-72ac-bcfb-4d4ee4e69b12",
 			},
@@ -2263,6 +2418,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "eafe3333-e3be-5f2f-90d4-57c1aff34523",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "[Raid calls]",
 				uuid = "4856cb4e-93a9-714b-9f42-e99e31d54358",
 			},
@@ -2473,6 +2639,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "65cdcfc5-7d83-0349-3e2f-7eb7ba90cd75",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "Draws - Garuda",
 				uuid = "8a27b6f8-3c5d-396a-ae76-319a2e952326",
 			},
@@ -2673,8 +2850,33 @@ local tbl =
 			},
 		},
 	},
+	[30] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "f645c2f4-d6bf-9c78-9dc6-8496c6d978a4",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+	},
 	[36] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "d210d9b6-0536-7c72-09bb-28543eff1526",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -2883,6 +3085,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "d6af55ec-7b34-ed40-e1bc-a3ee177a145c",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "Draws - Ifrit",
 				uuid = "9bd384a7-44a0-ddb8-b7f2-e6b7eba2228b",
 			},
@@ -2934,6 +3147,17 @@ local tbl =
 	},
 	[39] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "1fd243db-78b2-f64f-7b21-b0b55f50c60b",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -3158,6 +3382,17 @@ local tbl =
 	},
 	[43] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "754dd0b6-3d6d-0b42-6c07-45a0e23c0c26",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -3975,6 +4210,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "f4f4ba31-000f-41c5-7299-474387a42d21",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "Draws - Ifrit",
 				uuid = "f5daecfb-636d-4792-9a22-3aae9dc0b4ea",
 			},
@@ -4129,6 +4375,17 @@ local tbl =
 	},
 	[47] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "83c40e7a-3eaa-7f7e-879e-553492668a2a",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -4327,8 +4584,33 @@ local tbl =
 			},
 		},
 	},
+	[48] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "3f6310a7-853f-a533-90ec-11154f1b5697",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+	},
 	[52] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "d03da130-70f0-c7ec-f805-fb4a4a44a3a0",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -4420,7 +4702,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.uwu_ifrit_dash2 = data.uwu_ifrit_dash2 or {}\nlocal state = data.uwu_ifrit_dash2\nstate.bossID = eventArgs.entityID\nstate.drawn = false\nself.used = true",
+							actionLua = "data.uwu_ifrit_dash2 = data.uwu_ifrit_dash2 or {}\nlocal state = data.uwu_ifrit_dash2\nif state.startArrowID then Argus.deleteTimedShape(state.startArrowID) end\nif state.arrowID then Argus.deleteTimedShape(state.arrowID) end\nif state.stopCircleID then Argus.deleteTimedShape(state.stopCircleID) end\nstate.startArrowID = nil\nstate.arrowID = nil\nstate.stopCircleID = nil\nstate.route = nil\nstate.dashOctants = nil\nstate.startIndex = nil\nstate.wokenNumber = nil\nstate.stage = nil\nstate.lastCasterID = nil\nstate.bossID = eventArgs.entityID\nstate.drawn = false\nself.used = true",
 							conditions = 
 							{
 								
@@ -4773,6 +5055,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "73a6dc81-b3c4-b5d5-6098-273f88b1b071",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "Movement - Eruption",
 				uuid = "b4101758-6e48-e9b7-b30b-74b5c8440c9f",
 			},
@@ -4852,6 +5145,17 @@ local tbl =
 	},
 	[57] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "a87b8853-3667-8ba7-95d7-fa2d50d6a543",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -5131,6 +5435,20 @@ local tbl =
 				uuid = "80280ee0-4e6e-a44c-b22d-be6208463815",
 				version = 2,
 			},
+		},
+	},
+	[61] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "6acdfe1a-7bb6-3386-97f1-2f0cd643594a",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
 		},
 	},
 	[63] = 
@@ -5439,7 +5757,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local state = data.uwu_ifrit_dash2\nlocal nails = data.uwu_ifrit_last_nail\nlocal player = TensorCore.mGetPlayer()\nif not state or state.drawn or state.stepShown or not nails or not nails.order or not nails.order[4] or not player then\n    self.used = true\n    return\nend\n\nlocal function octant(x, z)\n    local dx, dz = x - 100, z - 100\n    local ax, az = math.abs(dx), math.abs(dz)\n    if ax > az * 2.414214 then return dx >= 0 and 0 or 4 end\n    if az > ax * 2.414214 then return dz >= 0 and 2 or 6 end\n    if dx >= 0 then return dz >= 0 and 1 or 7 end\n    return dz >= 0 and 3 or 5\nend\n\nlocal wokenNumber\nif eventArgs.entityID == state.bossID then\n    wokenNumber = 1\nelse\n    local boss = state.bossID and TensorCore.mGetEntity(state.bossID)\n    if boss and boss.pos then\n        local bossIndex = octant(boss.pos.x, boss.pos.z)\n        for i = 1, 4 do\n            local nail = nails.order[i]\n            if nail and octant(nail.x, nail.z) == bossIndex then\n                wokenNumber = i\n                break\n            end\n        end\n    end\nend\nif not wokenNumber then\n    self.used = true\n    return\nend\n\nif state.startArrowID then\n    Argus.deleteTimedShape(state.startArrowID)\n    state.startArrowID = nil\nend\n\nlocal searing = state.secondHealerID == player.id\nlocal last = nails.order[4]\nlocal startIndex = (octant(last.x, last.z) + (searing and 4 or 0)) % 8\nlocal steps = (wokenNumber == 1 or wokenNumber == 3) and 1 or 2\nlocal px, pz = player.pos.x - 100, player.pos.z - 100\nlocal radius = math.max(16, math.min(18, math.sqrt(px * px + pz * pz)))\nlocal y = player.pos.y\nlocal targetIndex = (startIndex - 1 + 8) % 8\nlocal diagonal = radius * 0.7071068\nlocal to\nif targetIndex == 0 then to = { x = 100 + radius, y = y, z = 100 }\nelseif targetIndex == 1 then to = { x = 100 + diagonal, y = y, z = 100 + diagonal }\nelseif targetIndex == 2 then to = { x = 100, y = y, z = 100 + radius }\nelseif targetIndex == 3 then to = { x = 100 - diagonal, y = y, z = 100 + diagonal }\nelseif targetIndex == 4 then to = { x = 100 - radius, y = y, z = 100 }\nelseif targetIndex == 5 then to = { x = 100 - diagonal, y = y, z = 100 - diagonal }\nelseif targetIndex == 6 then to = { x = 100, y = y, z = 100 - radius }\nelse to = { x = 100 + diagonal, y = y, z = 100 - diagonal } end\n\nlocal from = player.pos\nlocal distance = TensorCore.getDistance2d(from, to)\nif distance > 0.2 then\n    local drawer = TensorCore.getCachedDrawer(\n        0xFFCBFFB8, 0xFF5DF27B, 0xFFFFFFFF, 0xFF000000, 5\n    )\n    local tip = math.min(2.8, distance * 0.38)\n    state.arrowID = drawer:addTimedArrow(\n        5500, from.x, from.y, from.z,\n        TensorCore.getHeadingToTarget(from, to),\n        math.max(0.1, distance - tip), 1.55, tip, 3.25,\n        0, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\nstate.stepShown = 1\nstate.steps = steps\nstate.startIndex = startIndex\nstate.firstCasterID = eventArgs.entityID\nstate.drawn = steps == 1\nself.used = true",
+							actionLua = "local state = data.uwu_ifrit_dash2\nlocal nails = data.uwu_ifrit_last_nail\nlocal player = TensorCore.mGetPlayer()\nif not state or state.stage or not nails or not nails.order or not nails.order[4] or not player then self.used=true; return end\nlocal function octant(x, z)\n    local dx, dz = x - 100, z - 100\n    local ax, az = math.abs(dx), math.abs(dz)\n    if ax > az * 2.414214 then return dx >= 0 and 0 or 4 end\n    if az > ax * 2.414214 then return dz >= 0 and 2 or 6 end\n    if dx >= 0 then return dz >= 0 and 1 or 7 end\n    return dz >= 0 and 3 or 5\nend\nlocal wokenNumber\nif eventArgs.entityID == state.bossID then wokenNumber=1\nelse\n    local boss = state.bossID and TensorCore.mGetEntity(state.bossID)\n    if boss and boss.pos then\n        local bossIndex=octant(boss.pos.x,boss.pos.z)\n        for i=1,4 do\n            local nail=nails.order[i]\n            if nail and octant(nail.x,nail.z)==bossIndex then wokenNumber=i; break end\n        end\n    end\nend\nif not wokenNumber then\n    if state.startArrowID then Argus.deleteTimedShape(state.startArrowID); state.startArrowID=nil end\n    self.used=true; return\nend\nlocal caster=TensorCore.mGetEntity(eventArgs.entityID)\nif not caster or not caster.pos or octant(caster.pos.x,caster.pos.z) ~= octant(nails.order[1].x,nails.order[1].z) then\n    if state.startArrowID then Argus.deleteTimedShape(state.startArrowID); state.startArrowID=nil end\n    self.used=true; return\nend\nlocal searing=state.secondHealerID==player.id\nlocal startIndex=(octant(nails.order[4].x,nails.order[4].z)+(searing and 4 or 0))%8\nlocal dash={}\nfor i=1,4 do\n    local nail=nails.order[i]\n    if not nail then self.used=true; return end\n    dash[i]=octant(nail.x,nail.z)\nend\nlocal function safe(index,origin)\n    local diff=(index-origin)%4\n    return diff ~= 0\nend\nif not safe(startIndex,dash[1]) then self.used=true; return end\nlocal best, bestCost\nlocal function search(stage,index,cost,path)\n    if stage==5 then\n        if index%2 == dash[wokenNumber]%2 and (not bestCost or cost<bestCost) then\n            bestCost=cost\n            best={path[1],path[2],path[3],path[4]}\n        end\n        return\n    end\n    for turn=0,2 do\n        local nextIndex=(index+(turn==1 and 7 or turn==2 and 1 or 0))%8\n        if stage==4 or safe(nextIndex,dash[stage+1]) then\n            path[stage]=nextIndex\n            local penalty=turn==0 and 0 or 10+(turn==2 and 2 or 0)+stage*0.1\n            search(stage+1,nextIndex,cost+penalty,path)\n        end\n    end\nend\nsearch(1,startIndex,0,{})\nif not best then self.used=true; return end\nstate.route=best\nstate.dashOctants=dash\nstate.startIndex=startIndex\nstate.wokenNumber=wokenNumber\nif state.startArrowID then Argus.deleteTimedShape(state.startArrowID); state.startArrowID=nil end\nlocal stage=1\nlocal targetIndex = state.route[stage]\nlocal from = player.pos\nlocal px, pz = from.x - 100, from.z - 100\nlocal radius = math.max(16, math.min(18, math.sqrt(px * px + pz * pz)))\nlocal diagonal = radius * 0.7071068\nlocal y = from.y\nlocal to\nif targetIndex == 0 then to = {x=100+radius,y=y,z=100}\nelseif targetIndex == 1 then to = {x=100+diagonal,y=y,z=100+diagonal}\nelseif targetIndex == 2 then to = {x=100,y=y,z=100+radius}\nelseif targetIndex == 3 then to = {x=100-diagonal,y=y,z=100+diagonal}\nelseif targetIndex == 4 then to = {x=100-radius,y=y,z=100}\nelseif targetIndex == 5 then to = {x=100-diagonal,y=y,z=100-diagonal}\nelseif targetIndex == 6 then to = {x=100,y=y,z=100-radius}\nelse to = {x=100+diagonal,y=y,z=100-diagonal} end\nif state.arrowID then Argus.deleteTimedShape(state.arrowID); state.arrowID = nil end\nif state.stopCircleID then Argus.deleteTimedShape(state.stopCircleID); state.stopCircleID = nil end\nlocal drawer = TensorCore.getCachedDrawer(0xFFCBFFB8,0xFF5DF27B,0xFFFFFFFF,0xFF000000,5)\nlocal distance = TensorCore.getDistance2d(from,to)\nlocal previous = stage == 1 and state.startIndex or state.route[stage-1]\nif targetIndex ~= previous and distance > 0.2 then\n    local tip = math.min(2.8,distance*0.38)\n    state.arrowID = drawer:addTimedArrow(4300,from.x,from.y,from.z,\n        TensorCore.getHeadingToTarget(from,to),math.max(0.1,distance-tip),\n        1.35,tip,2.8,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nlocal final = true\nfor k=stage+1,4 do if state.route[k] ~= targetIndex then final=false; break end end\nif final then\n    state.stopCircleID = drawer:addTimedCircle(8500-stage*1400,\n        to.x,to.y,to.z,1.15,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nstate.stage = stage\nstate.lastCasterID = eventArgs.entityID\nself.used = true",
 							conditions = 
 							{
 								
@@ -5448,7 +5766,7 @@ local tbl =
 									true,
 								},
 							},
-							name = "CCW Step 1",
+							name = "Safe Step 1",
 							uuid = "253e2d53-42bb-0343-8190-67e670c01829",
 							version = 2.1,
 						},
@@ -5461,7 +5779,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local state = data.uwu_ifrit_dash2\nlocal nails = data.uwu_ifrit_last_nail\nreturn state ~= nil and not state.drawn\n    and nails ~= nil and nails.order ~= nil and nails.order[4] ~= nil\n    and eventArgs.entityContentID == 1185\n    and eventArgs.spellID == 11103",
+							conditionLua = "local state=data.uwu_ifrit_dash2\nlocal nails=data.uwu_ifrit_last_nail\nreturn state~=nil and state.stage==nil and nails~=nil and nails.order~=nil and nails.order[4]~=nil and eventArgs.entityContentID==1185 and eventArgs.spellID==11103",
 							dequeueIfLuaFalse = true,
 							name = "Crimson Cyclone",
 							uuid = "a378b693-f4d0-eea6-8a42-5993a559d74a",
@@ -5472,7 +5790,7 @@ local tbl =
 				displayPath = "Draws - Ifrit",
 				eventType = 2,
 				mechanicTime = 416,
-				name = "[Draw] Ifrit Dash 2 - CCW Step 1",
+				name = "[Draw] Ifrit Dash 2 - Safe Step 1",
 				timeRange = true,
 				timelineIndex = 65,
 				timerEndOffset = 5,
@@ -5492,7 +5810,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local state = data.uwu_ifrit_dash2\nlocal player = TensorCore.mGetPlayer()\nif not state or state.drawn or state.stepShown ~= 1 or state.steps ~= 2 or not player then\n    self.used = true\n    return\nend\nif state.arrowID then\n    Argus.deleteTimedShape(state.arrowID)\n    state.arrowID = nil\nend\nlocal targetIndex = (state.startIndex - 2 + 8) % 8\nlocal from = player.pos\nlocal px, pz = from.x - 100, from.z - 100\nlocal radius = math.max(16, math.min(18, math.sqrt(px * px + pz * pz)))\nlocal diagonal = radius * 0.7071068\nlocal y = from.y\nlocal to\nif targetIndex == 0 then to = { x = 100 + radius, y = y, z = 100 }\nelseif targetIndex == 1 then to = { x = 100 + diagonal, y = y, z = 100 + diagonal }\nelseif targetIndex == 2 then to = { x = 100, y = y, z = 100 + radius }\nelseif targetIndex == 3 then to = { x = 100 - diagonal, y = y, z = 100 + diagonal }\nelseif targetIndex == 4 then to = { x = 100 - radius, y = y, z = 100 }\nelseif targetIndex == 5 then to = { x = 100 - diagonal, y = y, z = 100 - diagonal }\nelseif targetIndex == 6 then to = { x = 100, y = y, z = 100 - radius }\nelse to = { x = 100 + diagonal, y = y, z = 100 - diagonal } end\nlocal distance = TensorCore.getDistance2d(from, to)\nif distance > 0.2 then\n    local drawer = TensorCore.getCachedDrawer(\n        0xFFCBFFB8, 0xFF5DF27B, 0xFFFFFFFF, 0xFF000000, 5\n    )\n    local tip = math.min(2.8, distance * 0.38)\n    drawer:addTimedArrow(\n        5000, from.x, from.y, from.z,\n        TensorCore.getHeadingToTarget(from, to),\n        math.max(0.1, distance - tip), 1.55, tip, 3.25,\n        0, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\nstate.stepShown = 2\nstate.drawn = true\nself.used = true",
+							actionLua = "local state=data.uwu_ifrit_dash2\nlocal player=TensorCore.mGetPlayer()\nif not state or state.stage~=1 or not state.route or not player then self.used=true; return end\nlocal function octant(x, z)\n    local dx, dz = x - 100, z - 100\n    local ax, az = math.abs(dx), math.abs(dz)\n    if ax > az * 2.414214 then return dx >= 0 and 0 or 4 end\n    if az > ax * 2.414214 then return dz >= 0 and 2 or 6 end\n    if dx >= 0 then return dz >= 0 and 1 or 7 end\n    return dz >= 0 and 3 or 5\nend\nlocal caster=TensorCore.mGetEntity(eventArgs.entityID)\nif not caster or not caster.pos or octant(caster.pos.x,caster.pos.z) ~= state.dashOctants[2] then\n    if state.arrowID then Argus.deleteTimedShape(state.arrowID); state.arrowID=nil end\n    if state.stopCircleID then Argus.deleteTimedShape(state.stopCircleID); state.stopCircleID=nil end\n    state.stage=4\n    self.used=true\n    return\nend\nlocal stage=2\nlocal targetIndex = state.route[stage]\nlocal from = player.pos\nlocal px, pz = from.x - 100, from.z - 100\nlocal radius = math.max(16, math.min(18, math.sqrt(px * px + pz * pz)))\nlocal diagonal = radius * 0.7071068\nlocal y = from.y\nlocal to\nif targetIndex == 0 then to = {x=100+radius,y=y,z=100}\nelseif targetIndex == 1 then to = {x=100+diagonal,y=y,z=100+diagonal}\nelseif targetIndex == 2 then to = {x=100,y=y,z=100+radius}\nelseif targetIndex == 3 then to = {x=100-diagonal,y=y,z=100+diagonal}\nelseif targetIndex == 4 then to = {x=100-radius,y=y,z=100}\nelseif targetIndex == 5 then to = {x=100-diagonal,y=y,z=100-diagonal}\nelseif targetIndex == 6 then to = {x=100,y=y,z=100-radius}\nelse to = {x=100+diagonal,y=y,z=100-diagonal} end\nif state.arrowID then Argus.deleteTimedShape(state.arrowID); state.arrowID = nil end\nif state.stopCircleID then Argus.deleteTimedShape(state.stopCircleID); state.stopCircleID = nil end\nlocal drawer = TensorCore.getCachedDrawer(0xFFCBFFB8,0xFF5DF27B,0xFFFFFFFF,0xFF000000,5)\nlocal distance = TensorCore.getDistance2d(from,to)\nlocal previous = stage == 1 and state.startIndex or state.route[stage-1]\nif targetIndex ~= previous and distance > 0.2 then\n    local tip = math.min(2.8,distance*0.38)\n    state.arrowID = drawer:addTimedArrow(4300,from.x,from.y,from.z,\n        TensorCore.getHeadingToTarget(from,to),math.max(0.1,distance-tip),\n        1.35,tip,2.8,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nlocal final = true\nfor k=stage+1,4 do if state.route[k] ~= targetIndex then final=false; break end end\nif final then\n    state.stopCircleID = drawer:addTimedCircle(8500-stage*1400,\n        to.x,to.y,to.z,1.15,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nstate.stage = stage\nstate.lastCasterID = eventArgs.entityID\nself.used = true",
 							conditions = 
 							{
 								
@@ -5501,7 +5819,7 @@ local tbl =
 									true,
 								},
 							},
-							name = "CCW Step 2",
+							name = "Safe Step 2",
 							uuid = "cb543621-3c67-03ca-9165-b9c43c1ff1e4",
 							version = 2.1,
 						},
@@ -5514,7 +5832,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local state = data.uwu_ifrit_dash2\nreturn state ~= nil and state.stepShown == 1 and state.steps == 2 and not state.drawn\n    and eventArgs.entityContentID == 1185 and eventArgs.spellID == 11103\n    and eventArgs.entityID ~= state.firstCasterID",
+							conditionLua = "local state=data.uwu_ifrit_dash2\nreturn state~=nil and state.stage==1 and state.route~=nil and eventArgs.entityContentID==1185 and eventArgs.spellID==11103 and eventArgs.entityID~=state.lastCasterID",
 							dequeueIfLuaFalse = true,
 							name = "Second Crimson Cyclone",
 							uuid = "40bc8b9b-53a9-0916-b377-ca4602633a98",
@@ -5525,14 +5843,134 @@ local tbl =
 				displayPath = "Draws - Ifrit",
 				eventType = 2,
 				mechanicTime = 416,
-				name = "[Draw] Ifrit Dash 2 - CCW Step 2",
+				name = "[Draw] Ifrit Dash 2 - Safe Step 2",
 				timeRange = true,
 				timelineIndex = 65,
-				timerEndOffset = 4,
+				timerEndOffset = 9,
 				timerStartOffset = 1,
 				uuid = "ac89ce9b-70a7-49f4-ab1a-1ff7cb1b2cc4",
 				version = 2,
 			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local state=data.uwu_ifrit_dash2\nlocal player=TensorCore.mGetPlayer()\nif not state or state.stage~=2 or not state.route or not player then self.used=true; return end\nlocal function octant(x, z)\n    local dx, dz = x - 100, z - 100\n    local ax, az = math.abs(dx), math.abs(dz)\n    if ax > az * 2.414214 then return dx >= 0 and 0 or 4 end\n    if az > ax * 2.414214 then return dz >= 0 and 2 or 6 end\n    if dx >= 0 then return dz >= 0 and 1 or 7 end\n    return dz >= 0 and 3 or 5\nend\nlocal caster=TensorCore.mGetEntity(eventArgs.entityID)\nif not caster or not caster.pos or octant(caster.pos.x,caster.pos.z) ~= state.dashOctants[3] then\n    if state.arrowID then Argus.deleteTimedShape(state.arrowID); state.arrowID=nil end\n    if state.stopCircleID then Argus.deleteTimedShape(state.stopCircleID); state.stopCircleID=nil end\n    state.stage=4\n    self.used=true\n    return\nend\nlocal stage=3\nlocal targetIndex = state.route[stage]\nlocal from = player.pos\nlocal px, pz = from.x - 100, from.z - 100\nlocal radius = math.max(16, math.min(18, math.sqrt(px * px + pz * pz)))\nlocal diagonal = radius * 0.7071068\nlocal y = from.y\nlocal to\nif targetIndex == 0 then to = {x=100+radius,y=y,z=100}\nelseif targetIndex == 1 then to = {x=100+diagonal,y=y,z=100+diagonal}\nelseif targetIndex == 2 then to = {x=100,y=y,z=100+radius}\nelseif targetIndex == 3 then to = {x=100-diagonal,y=y,z=100+diagonal}\nelseif targetIndex == 4 then to = {x=100-radius,y=y,z=100}\nelseif targetIndex == 5 then to = {x=100-diagonal,y=y,z=100-diagonal}\nelseif targetIndex == 6 then to = {x=100,y=y,z=100-radius}\nelse to = {x=100+diagonal,y=y,z=100-diagonal} end\nif state.arrowID then Argus.deleteTimedShape(state.arrowID); state.arrowID = nil end\nif state.stopCircleID then Argus.deleteTimedShape(state.stopCircleID); state.stopCircleID = nil end\nlocal drawer = TensorCore.getCachedDrawer(0xFFCBFFB8,0xFF5DF27B,0xFFFFFFFF,0xFF000000,5)\nlocal distance = TensorCore.getDistance2d(from,to)\nlocal previous = stage == 1 and state.startIndex or state.route[stage-1]\nif targetIndex ~= previous and distance > 0.2 then\n    local tip = math.min(2.8,distance*0.38)\n    state.arrowID = drawer:addTimedArrow(4300,from.x,from.y,from.z,\n        TensorCore.getHeadingToTarget(from,to),math.max(0.1,distance-tip),\n        1.35,tip,2.8,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nlocal final = true\nfor k=stage+1,4 do if state.route[k] ~= targetIndex then final=false; break end end\nif final then\n    state.stopCircleID = drawer:addTimedCircle(8500-stage*1400,\n        to.x,to.y,to.z,1.15,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nstate.stage = stage\nstate.lastCasterID = eventArgs.entityID\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"a510d972-a5c8-e0ee-bb24-37b466884d82",
+									true,
+								},
+							},
+							name = "Safe Step 3",
+							uuid = "d0e27849-5e14-8266-9d03-17809f1ecd18",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local state=data.uwu_ifrit_dash2\nreturn state~=nil and state.stage==2 and state.route~=nil and eventArgs.entityContentID==1185 and eventArgs.spellID==11103 and eventArgs.entityID~=state.lastCasterID",
+							dequeueIfLuaFalse = true,
+							name = "Crimson Cyclone 3",
+							uuid = "a510d972-a5c8-e0ee-bb24-37b466884d82",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Ifrit",
+				eventType = 2,
+				mechanicTime = 416,
+				name = "[Draw] Ifrit Dash 2 - Safe Step 3",
+				timeRange = true,
+				timelineIndex = 65,
+				timerEndOffset = 9,
+				timerStartOffset = 2,
+				uuid = "d3a7222f-d953-9804-8ec0-7aca6f5cc2bb",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local state=data.uwu_ifrit_dash2\nlocal player=TensorCore.mGetPlayer()\nif not state or state.stage~=3 or not state.route or not player then self.used=true; return end\nlocal function octant(x, z)\n    local dx, dz = x - 100, z - 100\n    local ax, az = math.abs(dx), math.abs(dz)\n    if ax > az * 2.414214 then return dx >= 0 and 0 or 4 end\n    if az > ax * 2.414214 then return dz >= 0 and 2 or 6 end\n    if dx >= 0 then return dz >= 0 and 1 or 7 end\n    return dz >= 0 and 3 or 5\nend\nlocal caster=TensorCore.mGetEntity(eventArgs.entityID)\nif not caster or not caster.pos or octant(caster.pos.x,caster.pos.z) ~= state.dashOctants[4] then\n    if state.arrowID then Argus.deleteTimedShape(state.arrowID); state.arrowID=nil end\n    if state.stopCircleID then Argus.deleteTimedShape(state.stopCircleID); state.stopCircleID=nil end\n    state.stage=4\n    self.used=true\n    return\nend\nlocal stage=4\nlocal targetIndex = state.route[stage]\nlocal from = player.pos\nlocal px, pz = from.x - 100, from.z - 100\nlocal radius = math.max(16, math.min(18, math.sqrt(px * px + pz * pz)))\nlocal diagonal = radius * 0.7071068\nlocal y = from.y\nlocal to\nif targetIndex == 0 then to = {x=100+radius,y=y,z=100}\nelseif targetIndex == 1 then to = {x=100+diagonal,y=y,z=100+diagonal}\nelseif targetIndex == 2 then to = {x=100,y=y,z=100+radius}\nelseif targetIndex == 3 then to = {x=100-diagonal,y=y,z=100+diagonal}\nelseif targetIndex == 4 then to = {x=100-radius,y=y,z=100}\nelseif targetIndex == 5 then to = {x=100-diagonal,y=y,z=100-diagonal}\nelseif targetIndex == 6 then to = {x=100,y=y,z=100-radius}\nelse to = {x=100+diagonal,y=y,z=100-diagonal} end\nif state.arrowID then Argus.deleteTimedShape(state.arrowID); state.arrowID = nil end\nif state.stopCircleID then Argus.deleteTimedShape(state.stopCircleID); state.stopCircleID = nil end\nlocal drawer = TensorCore.getCachedDrawer(0xFFCBFFB8,0xFF5DF27B,0xFFFFFFFF,0xFF000000,5)\nlocal distance = TensorCore.getDistance2d(from,to)\nlocal previous = stage == 1 and state.startIndex or state.route[stage-1]\nif targetIndex ~= previous and distance > 0.2 then\n    local tip = math.min(2.8,distance*0.38)\n    state.arrowID = drawer:addTimedArrow(4300,from.x,from.y,from.z,\n        TensorCore.getHeadingToTarget(from,to),math.max(0.1,distance-tip),\n        1.35,tip,2.8,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nlocal final = true\nfor k=stage+1,4 do if state.route[k] ~= targetIndex then final=false; break end end\nif final then\n    state.stopCircleID = drawer:addTimedCircle(8500-stage*1400,\n        to.x,to.y,to.z,1.15,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nstate.stage = stage\nstate.lastCasterID = eventArgs.entityID\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"a44acc7a-ac03-55bf-bf11-34f225fd2bb2",
+									true,
+								},
+							},
+							name = "Safe Step 4",
+							uuid = "ae3ec59c-496e-8e04-8cf2-0fd3a5f4b43f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local state=data.uwu_ifrit_dash2\nreturn state~=nil and state.stage==3 and state.route~=nil and eventArgs.entityContentID==1185 and eventArgs.spellID==11103 and eventArgs.entityID~=state.lastCasterID",
+							dequeueIfLuaFalse = true,
+							name = "Crimson Cyclone 4",
+							uuid = "a44acc7a-ac03-55bf-bf11-34f225fd2bb2",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Ifrit",
+				eventType = 2,
+				mechanicTime = 416,
+				name = "[Draw] Ifrit Dash 2 - Safe Step 4",
+				timeRange = true,
+				timelineIndex = 65,
+				timerEndOffset = 9,
+				timerStartOffset = 3,
+				uuid = "dfde9ae0-829e-0a16-9470-025077181d6f",
+				version = 2,
+			},
+		},
+	},
+	[66] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "2c15fb8f-9f80-0353-7f90-66753ed5853f",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
 		},
 	},
 	[71] = 
@@ -5601,6 +6039,17 @@ local tbl =
 	},
 	[72] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "82aee2ce-61d2-791a-dc79-ad5cfaf41e7e",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -5685,6 +6134,17 @@ local tbl =
 	},
 	[74] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "5f1e03ac-8ad8-2c80-288a-aabe8b2f211c",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -6009,8 +6469,33 @@ local tbl =
 			},
 		},
 	},
+	[75] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "a4ef9b9b-231a-768f-6658-a405856931cb",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+	},
 	[76] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "4c71fed2-1dc6-f856-1328-b548f9b6aa42",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -6099,6 +6584,17 @@ local tbl =
 		{
 			data = 
 			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "0d1efa20-16a7-f70c-b429-2c2a84bf2190",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
 				actions = 
 				{
 					
@@ -6125,6 +6621,20 @@ local tbl =
 				uuid = "5ca6e7a9-d879-7a17-b3cc-7de6f8c29b6e",
 				version = 2,
 			},
+		},
+	},
+	[79] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "62e254af-589f-bf7b-a966-cf21823ebc5f",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
 		},
 	},
 	[82] = 
@@ -6258,6 +6768,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "a546069f-2892-20eb-1e5e-a7b5bed424cf",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "Draws - Titan LPDU",
 				uuid = "671e1e3b-b0b4-57c0-b290-f44b7a4e0ba0",
 			},
@@ -6308,6 +6829,17 @@ local tbl =
 	},
 	[85] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "681b1cd0-23ac-633c-84f9-9aeec1561bc0",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -6556,8 +7088,33 @@ local tbl =
 			},
 		},
 	},
+	[87] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "2eedf226-867a-4f62-e1e0-63f87c03e296",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+	},
 	[89] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "0768f15c-0dbc-0a30-a102-7c5af0c0564c",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -6696,8 +7253,47 @@ local tbl =
 			},
 		},
 	},
+	[92] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "b28d9934-d902-0db8-6d23-936691d7aae4",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+	},
+	[94] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "eaeaf7f6-d14f-c2b2-56d7-43e4a823fa66",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+	},
 	[95] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "1f1fa6dd-3c64-b4a9-9060-6cb31c556dcd",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -7039,6 +7635,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "d6498e52-6440-e656-47b6-1b88838e39c2",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "Draws - Titan LPDU",
 				uuid = "db0b1aea-7d58-f185-b445-52cb914581db",
 			},
@@ -7138,8 +7745,33 @@ local tbl =
 			},
 		},
 	},
+	[99] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "867e8849-bee4-1ebd-6781-9fd741bf6379",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+	},
 	[100] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "c14830dc-7fae-7628-414e-9a3eef1a4c8c",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -7297,6 +7929,20 @@ local tbl =
 			},
 		},
 	},
+	[101] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "091ee28b-8684-9877-7f1c-9385311214fb",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+	},
 	[102] = 
 	{
 		
@@ -7422,6 +8068,17 @@ local tbl =
 	},
 	[114] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "5c028229-a49f-4ccd-f2ac-e6fb6a889119",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -7611,6 +8268,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "f0ed9032-306d-d966-b0b5-1e8c1872b6e2",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "Draws - Ultima",
 				uuid = "0466e0d5-9048-8b78-89b1-107d451107be",
 			},
@@ -7651,6 +8319,17 @@ local tbl =
 	},
 	[116] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "beb77afb-9460-2adf-8ff7-ee29ba8a886b",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -7946,8 +8625,33 @@ local tbl =
 			},
 		},
 	},
+	[117] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "7cbfb28c-96e0-9010-24e2-fc32b5a4cabc",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+	},
 	[118] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "de81ec3d-ca09-4279-bd27-9e0f533bf06d",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -7992,6 +8696,17 @@ local tbl =
 	},
 	[119] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "83deb3d6-0bd8-18c2-24e5-540054288906",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -8184,6 +8899,20 @@ local tbl =
 			},
 		},
 	},
+	[121] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "38ab8931-5626-7ffd-795c-16bf7c143ee1",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+	},
 	[123] = 
 	{
 		
@@ -8263,6 +8992,17 @@ local tbl =
 	},
 	[125] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "b739669d-4655-9611-3243-521395412d4d",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -8348,8 +9088,33 @@ local tbl =
 			},
 		},
 	},
+	[127] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "8e0ef3ef-ff28-b363-065b-504185020b5f",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+	},
 	[130] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "d1f1f933-6a5c-5b3f-7453-33c9efca93e3",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -8393,6 +9158,17 @@ local tbl =
 	},
 	[132] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "09b9a4e1-9f9c-2e2d-1c9b-d69b36f77691",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -8644,6 +9420,20 @@ local tbl =
 			},
 		},
 	},
+	[136] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "22e6934d-f75b-94c1-078c-5d6746c8607d",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+	},
 	[137] = 
 	{
 		
@@ -8820,6 +9610,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "c7e74140-3583-97c4-9cef-fdea06588af0",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "[Raid calls]",
 				uuid = "fb66c9c8-b9e7-bd3e-a6b3-f522a33470b9",
 			},
@@ -8958,6 +9759,17 @@ local tbl =
 	},
 	[141] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "c5654a4f-8006-9f93-9a72-19e15afe3bbf",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -9735,6 +10547,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "ee89abd4-7279-b370-3f6d-94e6c9626f44",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "Draws - Garuda",
 				uuid = "ed3f9b49-d5d7-3927-b154-108720887911",
 			},
@@ -9877,6 +10700,17 @@ local tbl =
 	},
 	[146] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "e29408da-273e-dec6-a5e0-4b90f26c0fca",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -10033,6 +10867,17 @@ local tbl =
 	},
 	[147] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "c49cdc91-fc5f-372d-a35f-e65fe7fd7541",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -10452,6 +11297,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "ad735322-2682-f0f6-7f42-20d4a5c05ed2",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "Draws - Titan LPDU",
 				uuid = "aec02ddb-19c3-3dfe-9606-4c37d97ec6cf",
 			},
@@ -10549,6 +11405,20 @@ local tbl =
 			},
 		},
 	},
+	[152] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "a80a62ab-2851-dd2f-5555-5191fe3dfb9b",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+	},
 	[153] = 
 	{
 		
@@ -10640,6 +11510,20 @@ local tbl =
 				uuid = "9b89ba5b-0778-55a8-91d1-7c3ff9ffbe53",
 				version = 2,
 			},
+		},
+	},
+	[156] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "22fe0237-d920-8443-6526-3b7de92e8267",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
 		},
 	},
 	[157] = 
@@ -10735,8 +11619,33 @@ local tbl =
 			},
 		},
 	},
+	[158] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "75a2db41-f773-4e15-8c88-b93ba4da66f1",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+	},
 	[159] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "801175ca-481e-6b4e-8809-f0cc569e193a",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -10945,6 +11854,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "848f90d8-4300-ea5c-81a6-05320d8ec9c8",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "Draws - Ifrit",
 				uuid = "c8eaa061-e6d5-1b59-ad66-27bea5b2ec07",
 			},
@@ -10953,6 +11873,17 @@ local tbl =
 	},
 	[164] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "3365c4d2-8f11-e7be-8958-50387faf1602",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -11144,6 +12075,20 @@ local tbl =
 			},
 		},
 	},
+	[169] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "7c3bdd5d-0fee-0c21-ea79-d6a35c70a10d",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+	},
 	[171] = 
 	{
 		
@@ -11243,8 +12188,33 @@ local tbl =
 			},
 		},
 	},
+	[172] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "ee641e85-ddbb-3ba9-9584-53f779f67af5",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+	},
 	[173] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "b096253e-72a6-49b2-8eae-31a89feffa2e",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -11535,6 +12505,76 @@ local tbl =
 			},
 		},
 	},
+	[178] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "02623d1f-db7a-1b23-7199-cb6d9ec9c30f",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+	},
+	[179] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "c5375350-bfe2-e814-7286-640606877900",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+	},
+	[183] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "ec05def1-47dc-43cd-3751-98af5d52f5a1",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+	},
+	[185] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "035c2caf-f6e7-a9b3-1ffb-4af12e42e91f",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+	},
+	[186] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "018d4076-312d-396a-fd25-4db4b7ead4a6",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+	},
 	[188] = 
 	{
 		
@@ -11619,6 +12659,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "4569739b-ce08-dcd7-0673-0995d83c858b",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "Draws - Ultima",
 				uuid = "2a0bf502-ee77-8a59-9b60-23b6817e13e1",
 			},
@@ -11689,6 +12740,17 @@ local tbl =
 	},
 	[190] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "a39c190d-a076-fee9-efdd-bb1fad9f8f3d",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -12225,6 +13287,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "eaf85ba1-84e5-e4b5-fd90-75f3fd65a851",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "Draws - Garuda",
 				uuid = "d17f6e6f-1bf0-8ad5-8e21-d311d53d6eb2",
 			},
@@ -12329,6 +13402,17 @@ local tbl =
 	},
 	[196] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "c99b09f3-b964-5887-1eed-c7a128df04a3",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -12596,6 +13680,20 @@ local tbl =
 			},
 		},
 	},
+	[202] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "1f4a98f3-3cfe-0dff-adde-b3cd7e8e93a3",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+	},
 	[203] = 
 	{
 		
@@ -12655,6 +13753,17 @@ local tbl =
 	},
 	[204] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "f94ba80d-04ee-6481-5cea-19b3034f1e3d",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -12764,6 +13873,17 @@ local tbl =
 	},
 	[206] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "1197de1f-39c3-1053-94b1-c561adff640f",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -12883,6 +14003,17 @@ local tbl =
 	},
 	[207] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "d46cf450-dab3-1984-972f-a96a15bd1a00",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -13344,6 +14475,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "4b990ab7-8dec-b323-4231-871d11c98ae7",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "Draws - Garuda",
 				uuid = "634a1373-5c8f-30d3-ac1f-292a63c8519f",
 			},
@@ -13524,6 +14666,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "d60e5ba2-b80a-0556-6831-a974ce5b6752",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "Draws - Garuda",
 				uuid = "43958ee1-6523-8ee7-a5d7-f4c68c982b68",
 			},
@@ -13611,6 +14764,17 @@ local tbl =
 	},
 	[218] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "bc98f970-b0eb-040c-8cec-448e8f0862a0",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -13847,6 +15011,17 @@ local tbl =
 	},
 	[224] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\main",
+				uuid = "b80a56d3-f6a3-e557-5274-0f6d46b9b183",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\main",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -14103,6 +15278,7 @@ local tbl =
 	},
 	inheritedProfiles = 
 	{
+		"store\\anyone\\uwu\\main",
 	},
 	timelineName = "uwu",
 	version = "1.0.2",
