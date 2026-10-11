@@ -23,6 +23,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Fixed the DPS-only mitigation opener when FRU settings are missing, skipped redundant disable writes, and added job-appropriate automatic opener potion use. (11-10-2026)
+
 
 - Added a one-time Proteans text/TTS reminder at timeline 364 for House of Light; removed the P2 intermission potion reminder at 363.5. (10-10-2026)
 
