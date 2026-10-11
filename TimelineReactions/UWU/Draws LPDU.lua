@@ -195,7 +195,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "TensorDrift_SlidecastForceHold = false\nself.used = true",
+							actionLua = "TensorDrift_SlidecastForceHold = false\ndata.uwu_annihilation_orbs = nil\nself.used = true",
 							name = "End Slide",
 							uuid = "cd9bc5e0-499a-431e-b654-0691e38eae8e",
 							version = 2.1,
@@ -11764,13 +11764,16 @@ local tbl =
 				{
 				},
 				displayPath = "Draws - Ultima LPDU",
-				execute = "local Roster = AnyoneCore and AnyoneCore.Roster\nif not Roster or not Roster.current() then return end\nlocal slot = Roster.mySlot()\nif not slot then return end\nlocal cfg = _G.UWU_LPDU_AnnihilationAssignments or {}\nlocal assigned\nlocal missing = false\nif true then\n    if slot == \"T1\" or slot == \"T2\" then\n        assigned = true\n    elseif slot == \"M1\" or slot == \"M2\" then\n        missing = not cfg.melee or cfg.melee == 0\n        assigned = (cfg.melee == 1 and slot == \"M1\") or (cfg.melee == 2 and slot == \"M2\")\n    end\nelse\n    if slot == \"T1\" or slot == \"T2\" then\n        missing = not cfg.solo or cfg.solo == 0\n        assigned = (cfg.solo == 1 and slot == \"T1\") or (cfg.solo == 2 and slot == \"T2\")\n    end\nend\nif missing then\n    TensorCore.addAlertText(3500, \"Orb 1: choose your assignment\", 1.0, 2, true)\nelseif assigned then\n    if Roster.isReady() then\n        local id = Roster.idOf(slot)\n        if id then\n            local drawer = TensorCore.getCachedDrawer(0x6633FF66, 0xCC33FF66, 0xFF33FF66, 0xFF000000, 3)\n            drawer:addTimedCircleOnEnt(4000, id, 1.2, 0, false, true, Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n            AnyoneCore.addTimedWorldTextOnEnt(4000, \"SOAK ORB 1\", id, 0xFF33FF66, true, 1.1, 1.5)\n        end\n    end\n    TensorCore.addAlertText(3500, \"Orb 1: soak with tanks\", 1.0, 1, true)\nelse\n    TensorCore.addAlertText(3000, \"Orb 1: stay clear\", 0.9, 2, false)\nend\nself.used = true",
+				eventType = 5,
+				execute = "if not eventArgs or eventArgs.entityContentID ~= 2138 or not eventArgs.entityID then return end\ndata.uwu_annihilation_orbs = data.uwu_annihilation_orbs or {seen = {}, count = 0}\nlocal state = data.uwu_annihilation_orbs\nif state.seen[eventArgs.entityID] then return end\nif state.count >= 4 then return end\nstate.seen[eventArgs.entityID] = true\nstate.count = state.count + 1\nlocal orb = state.count\nlocal Roster = AnyoneCore and AnyoneCore.Roster\nif not Roster or not Roster.current() then self.used = true return end\nlocal slot = Roster.mySlot()\nif not slot then self.used = true return end\nlocal cfg = _G.UWU_LPDU_AnnihilationAssignments or {}\nlocal assigned = false\nlocal missing = false\nif orb <= 2 then\n    if slot == \"T1\" or slot == \"T2\" then\n        assigned = true\n    elseif slot == \"M1\" or slot == \"M2\" then\n        missing = not cfg.melee or cfg.melee == 0\n        assigned = (cfg.melee == 1 and slot == \"M1\") or (cfg.melee == 2 and slot == \"M2\")\n    end\nelseif slot == \"T1\" or slot == \"T2\" then\n    missing = not cfg.solo or cfg.solo == 0\n    assigned = (cfg.solo == 1 and slot == \"T1\") or (cfg.solo == 2 and slot == \"T2\")\nend\nif missing then\n    TensorCore.addAlertText(3500, \"Orb \" .. orb .. \": choose your assignment\", 1.0, 2, true)\nelseif assigned then\n    if Roster.isReady() then\n        local id = Roster.idOf(slot)\n        if id then\n            local drawer = TensorCore.getCachedDrawer(0x6633FF66, 0xCC33FF66, 0xFF33FF66, 0xFF000000, 3)\n            drawer:addTimedCircleOnEnt(4000, id, 1.2, 0, false, true, Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n            AnyoneCore.addTimedWorldTextOnEnt(4000, \"SOAK ORB \" .. orb, id, 0xFF33FF66, true, 1.1, 1.5)\n        end\n    end\n    TensorCore.addAlertText(3500, \"Orb \" .. orb .. (orb <= 2 and \": soak with tanks\" or \": solo tank soak\"), 1.0, 1, true)\nelse\n    TensorCore.addAlertText(3000, \"Orb \" .. orb .. \": stay clear\", 0.9, 2, false)\nend\nself.used = true",
 				executeType = 2,
+				loop = true,
 				mechanicTime = 1116,
-				name = "[Draw][LPDU][Annihilation] Orb 1 role cue",
+				name = "[Draw][LPDU][Annihilation] Orb spawn role cues",
 				timeRange = true,
 				timelineIndex = 155,
-				timerEndOffset = 2,
+				timerEndOffset = 24,
+				timerStartOffset = -3,
 				uuid = "e8276347-36f7-698c-a08c-984954552ebf",
 				version = 2,
 			},
@@ -12024,6 +12027,7 @@ local tbl =
 				{
 				},
 				displayPath = "Draws - Ultima LPDU",
+				enabled = false,
 				execute = "local Roster = AnyoneCore and AnyoneCore.Roster\nif not Roster or not Roster.current() then return end\nlocal slot = Roster.mySlot()\nif not slot then return end\nlocal cfg = _G.UWU_LPDU_AnnihilationAssignments or {}\nlocal assigned\nlocal missing = false\nif true then\n    if slot == \"T1\" or slot == \"T2\" then\n        assigned = true\n    elseif slot == \"M1\" or slot == \"M2\" then\n        missing = not cfg.melee or cfg.melee == 0\n        assigned = (cfg.melee == 1 and slot == \"M1\") or (cfg.melee == 2 and slot == \"M2\")\n    end\nelse\n    if slot == \"T1\" or slot == \"T2\" then\n        missing = not cfg.solo or cfg.solo == 0\n        assigned = (cfg.solo == 1 and slot == \"T1\") or (cfg.solo == 2 and slot == \"T2\")\n    end\nend\nif missing then\n    TensorCore.addAlertText(3500, \"Orb 2: choose your assignment\", 1.0, 2, true)\nelseif assigned then\n    if Roster.isReady() then\n        local id = Roster.idOf(slot)\n        if id then\n            local drawer = TensorCore.getCachedDrawer(0x6633FF66, 0xCC33FF66, 0xFF33FF66, 0xFF000000, 3)\n            drawer:addTimedCircleOnEnt(4000, id, 1.2, 0, false, true, Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n            AnyoneCore.addTimedWorldTextOnEnt(4000, \"SOAK ORB 2\", id, 0xFF33FF66, true, 1.1, 1.5)\n        end\n    end\n    TensorCore.addAlertText(3500, \"Orb 2: soak with tanks\", 1.0, 1, true)\nelse\n    TensorCore.addAlertText(3000, \"Orb 2: stay clear\", 0.9, 2, false)\nend\nself.used = true",
 				executeType = 2,
 				mechanicTime = 1123,
@@ -12397,6 +12401,7 @@ local tbl =
 				{
 				},
 				displayPath = "Draws - Ultima LPDU",
+				enabled = false,
 				execute = "local Roster = AnyoneCore and AnyoneCore.Roster\nif not Roster or not Roster.current() then return end\nlocal slot = Roster.mySlot()\nif not slot then return end\nlocal cfg = _G.UWU_LPDU_AnnihilationAssignments or {}\nlocal assigned\nlocal missing = false\nif false then\n    if slot == \"T1\" or slot == \"T2\" then\n        assigned = true\n    elseif slot == \"M1\" or slot == \"M2\" then\n        missing = not cfg.melee or cfg.melee == 0\n        assigned = (cfg.melee == 1 and slot == \"M1\") or (cfg.melee == 2 and slot == \"M2\")\n    end\nelse\n    if slot == \"T1\" or slot == \"T2\" then\n        missing = not cfg.solo or cfg.solo == 0\n        assigned = (cfg.solo == 1 and slot == \"T1\") or (cfg.solo == 2 and slot == \"T2\")\n    end\nend\nif missing then\n    TensorCore.addAlertText(3500, \"Orb 3: choose your assignment\", 1.0, 2, true)\nelseif assigned then\n    if Roster.isReady() then\n        local id = Roster.idOf(slot)\n        if id then\n            local drawer = TensorCore.getCachedDrawer(0x6633FF66, 0xCC33FF66, 0xFF33FF66, 0xFF000000, 3)\n            drawer:addTimedCircleOnEnt(4000, id, 1.2, 0, false, true, Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n            AnyoneCore.addTimedWorldTextOnEnt(4000, \"SOAK ORB 3\", id, 0xFF33FF66, true, 1.1, 1.5)\n        end\n    end\n    TensorCore.addAlertText(3500, \"Orb 3: solo tank soak\", 1.0, 1, true)\nelse\n    TensorCore.addAlertText(3000, \"Orb 3: stay clear\", 0.9, 2, false)\nend\nself.used = true",
 				executeType = 2,
 				mechanicTime = 1131,
@@ -12446,6 +12451,7 @@ local tbl =
 				{
 				},
 				displayPath = "Draws - Ultima LPDU",
+				enabled = false,
 				execute = "local Roster = AnyoneCore and AnyoneCore.Roster\nif not Roster or not Roster.current() then return end\nlocal slot = Roster.mySlot()\nif not slot then return end\nlocal cfg = _G.UWU_LPDU_AnnihilationAssignments or {}\nlocal assigned\nlocal missing = false\nif false then\n    if slot == \"T1\" or slot == \"T2\" then\n        assigned = true\n    elseif slot == \"M1\" or slot == \"M2\" then\n        missing = not cfg.melee or cfg.melee == 0\n        assigned = (cfg.melee == 1 and slot == \"M1\") or (cfg.melee == 2 and slot == \"M2\")\n    end\nelse\n    if slot == \"T1\" or slot == \"T2\" then\n        missing = not cfg.solo or cfg.solo == 0\n        assigned = (cfg.solo == 1 and slot == \"T1\") or (cfg.solo == 2 and slot == \"T2\")\n    end\nend\nif missing then\n    TensorCore.addAlertText(3500, \"Orb 4: choose your assignment\", 1.0, 2, true)\nelseif assigned then\n    if Roster.isReady() then\n        local id = Roster.idOf(slot)\n        if id then\n            local drawer = TensorCore.getCachedDrawer(0x6633FF66, 0xCC33FF66, 0xFF33FF66, 0xFF000000, 3)\n            drawer:addTimedCircleOnEnt(4000, id, 1.2, 0, false, true, Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n            AnyoneCore.addTimedWorldTextOnEnt(4000, \"SOAK ORB 4\", id, 0xFF33FF66, true, 1.1, 1.5)\n        end\n    end\n    TensorCore.addAlertText(3500, \"Orb 4: solo tank soak\", 1.0, 1, true)\nelse\n    TensorCore.addAlertText(3000, \"Orb 4: stay clear\", 0.9, 2, false)\nend\nself.used = true",
 				executeType = 2,
 				mechanicTime = 1136,

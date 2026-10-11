@@ -137,6 +137,8 @@ TEA: Coming soon by Ton.
 
 ### UWU: LPDU
 
+- 2026-10-11: Annihilation orb role cues now fire as each Aetheroplasm orb appears, rather than at fixed timeline times. A wipe resets the orb count; the three previous timed cues are disabled. Live replay confirmation remains pending.
+
 - 2026-10-11: Added an Annihilation 3-3-1-1 assignment window for melee and tanks, with role-specific cues for each of the four orbs. Added MT-left guidance after Predation, corrected the MT Homing calls there, and added OT Homing invulnerability and MT cleave reminders after Annihilation. Orb locations and new call timing await live replay confirmation.
 
 - 2026-10-11: Titan Granite Gaol blast-range circles for unmarked players now appear only during timeline 639–700. The event-driven draw remains uncapped, preserving all gaols that spawn in that window. Replay confirmation remains pending.
