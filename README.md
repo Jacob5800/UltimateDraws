@@ -23,6 +23,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Added a small green circle at your assigned Fall of Faith conga position alongside the existing arrow. (11-10-2026)
+
 - Added world-text countdown above your assigned P1 tower, showing seconds remaining until its cast resolves. (11-10-2026)
 
 - Added cast-based danger circles for both Halo of Flame and Halo of Levin: 5y small Brightfire and 10y large Brightfire, lasting until cast completion. (11-10-2026)
