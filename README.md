@@ -23,6 +23,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Switched assigned tower timers to continuous world-text countdowns and added separate countdowns for middle Burnt Strike and its follow-up AoE. (11-10-2026)
+
 - Added a small green circle at your assigned Fall of Faith conga position alongside the existing arrow. (11-10-2026)
 
 - Added world-text countdown above your assigned P1 tower, showing seconds remaining until its cast resolves. (11-10-2026)

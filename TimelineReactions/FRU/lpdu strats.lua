@@ -4427,7 +4427,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local timer = data.frup1_lpdu_tower_countdown\nif not timer then self.used=true; return end\nlocal remaining = timer.expires - Now()\nif remaining <= 0 then data.frup1_lpdu_tower_countdown=nil; self.used=true; return end\nlocal seconds = math.ceil(remaining / 1000)\nif timer.lastSeconds ~= seconds then\n    local ent = TensorCore.mGetEntity(timer.entityID)\n    if ent and ent.pos then\n        local lifetime = math.max(1, remaining - (seconds - 1) * 1000)\n        AnyoneCore.addTimedWorldTextOnEnt(lifetime,tostring(seconds)..\"s\",timer.entityID,\n            GUI:ColorConvertFloat4ToU32(0,1,0,1),true,1.5,2)\n        timer.lastSeconds = seconds\n    end\nend\nself.used=true",
+							actionLua = "local timer = data.frup1_lpdu_tower_countdown\nif not timer or timer.started then self.used=true; return end\nlocal remaining = timer.expires - Now()\nif remaining <= 0 then data.frup1_lpdu_tower_countdown=nil; self.used=true; return end\nlocal ent = TensorCore.mGetEntity(timer.entityID)\nif ent and ent.pos then\n    AnyoneCore.addWorldTextCountdown(remaining,{x=ent.pos.x,y=ent.pos.y+2,z=ent.pos.z},\n        GUI:ColorConvertFloat4ToU32(0,1,0,1),true,1.5)\n    timer.started=true\nend\nself.used=true",
 							name = "Tower seconds remaining",
 							uuid = "4f340764-baad-9d1e-955f-45e3bd2835cc",
 							version = 2.1,
@@ -4447,6 +4447,68 @@ local tbl =
 				timerEndOffset = 12,
 				timerStartOffset = -10,
 				uuid = "49c0e120-ab39-961f-9460-fa2e762dd289",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local ent = TensorCore.mGetEntity(eventArgs.entityID)\nif not ent or not ent.pos then self.used=true; return end\nlocal duration = eventArgs.channelTimeMax * 1000\nlocal followup = eventArgs.spellID == 40130 or eventArgs.spellID == 40134\nif duration > 0 then\n    AnyoneCore.addWorldTextCountdown(duration,\n        {x=ent.pos.x,y=ent.pos.y+(followup and 4 or 2),z=ent.pos.z},\n        GUI:ColorConvertFloat4ToU32(1,.8,0,1),true,1.5)\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"265e7367-c56f-d5d1-ac35-47ae6e9fd21a",
+									true,
+								},
+							},
+							name = "Continuous AoE countdown",
+							uuid = "7973d289-abde-b682-894f-8abd121bcab1",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Middle AoE casts",
+							spellIDList = 
+							{
+								40129,
+								40130,
+								40133,
+								40134,
+							},
+							uuid = "265e7367-c56f-d5d1-ac35-47ae6e9fd21a",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Draws",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 140.9,
+				name = "[LPDU] Towers - Middle AoE countdowns",
+				timeRange = true,
+				timelineIndex = 32,
+				timerEndOffset = 5,
+				timerStartOffset = -10,
+				uuid = "2bca7376-1313-bcc8-8469-d0ef44407967",
 				version = 2,
 			},
 		},
