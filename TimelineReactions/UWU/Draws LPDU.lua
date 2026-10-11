@@ -7111,7 +7111,7 @@ local tbl =
 				name = "[Draw][LPDU][Titan] Gaol blast range for unmarked",
 				timeRange = true,
 				timelineIndex = 85,
-				timerEndOffset = 1000,
+				timerEndOffset = 61,
 				uuid = "d3d012a2-c734-0173-820b-816f2b597bbe",
 				version = 2,
 			},
