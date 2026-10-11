@@ -4461,7 +4461,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local ent = TensorCore.mGetEntity(eventArgs.entityID)\nif not ent or not ent.pos then self.used=true; return end\nlocal duration = eventArgs.channelTimeMax * 1000\nlocal followup = eventArgs.spellID == 40130 or eventArgs.spellID == 40134\nif duration > 0 then\n    AnyoneCore.addWorldTextCountdown(duration,\n        {x=ent.pos.x,y=ent.pos.y+(followup and 4 or 2),z=ent.pos.z},\n        GUI:ColorConvertFloat4ToU32(1,.8,0,1),true,1.5)\nend\nself.used=true",
+							actionLua = "local ent = TensorCore.mGetEntity(eventArgs.entityID)\nif not ent or not ent.pos then self.used=true; return end\nlocal textX, textZ = ent.pos.x, ent.pos.z\nlocal bx, by, bz, active = Argus.getWaymarkInfo(2)\nif active then\n    local dx, dz = bx - textX, bz - textZ\n    local distance = math.sqrt(dx * dx + dz * dz)\n    if distance > 0 then\n        local offset = math.min(2, distance)\n        textX, textZ = textX + dx / distance * offset, textZ + dz / distance * offset\n    end\nend\nlocal duration = eventArgs.channelTimeMax * 1000\nlocal followup = eventArgs.spellID == 40130 or eventArgs.spellID == 40134\nif duration > 0 then\n    AnyoneCore.addWorldTextCountdown(duration,\n        {x=textX,y=ent.pos.y+(followup and 4 or 2),z=textZ},\n        GUI:ColorConvertFloat4ToU32(1,.8,0,1),true,1.5)\nend\nself.used=true",
 							conditions = 
 							{
 								

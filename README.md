@@ -23,6 +23,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Middle AoE timers now follow B's actual waymark position for their 2-yalm offset. (11-10-2026)
+
 - Moved the middle AoE countdown labels 2 yalms toward B for improved readability. (11-10-2026)
 
 - Switched assigned tower timers to continuous world-text countdowns and added separate countdowns for middle Burnt Strike and its follow-up AoE. (11-10-2026)
