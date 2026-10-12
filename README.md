@@ -151,6 +151,8 @@ TEA: Coming soon by Ton.
 
 ### UWU: LPDU
 
+- Moved orb assignments to fight start (timeline 0–15). Added a DPS nail kill-order switch when either relative NW/NE nail falls below 40% while both southern nails remain alive, Mesohigh circles that follow tether transfers, and a small melee-only blue OT marker until Mistral Song resolves. (12-10-2026)
+
 - 2026-10-11: Annihilation orb role cues now fire as each Aetheroplasm orb appears, rather than at fixed timeline times. A wipe resets the orb count; the three previous timed cues are disabled. Live replay confirmation remains pending.
 
 - 2026-10-11: Added an Annihilation 3-3-1-1 assignment window for melee and tanks, with role-specific cues for each of the four orbs. Added MT-left guidance after Predation, corrected the MT Homing calls there, and added OT Homing invulnerability and MT cleave reminders after Annihilation. Orb locations and new call timing await live replay confirmation.

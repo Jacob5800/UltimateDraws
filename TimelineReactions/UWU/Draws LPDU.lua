@@ -343,6 +343,126 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ultima LPDU",
+				uuid = "4d1c5219-b69d-cea6-abce-6a518dff418d",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Draws - Ultima LPDU",
+				eventType = 13,
+				execute = "local Roster = AnyoneCore and AnyoneCore.Roster\nif not Roster or not Roster.current() then return end\nlocal slot = Roster.mySlot()\nif slot ~= \"T1\" and slot ~= \"T2\" and slot ~= \"M1\" and slot ~= \"M2\" then return end\nlocal cfg = _G.UWU_LPDU_AnnihilationAssignments\nif not cfg then\n    cfg = { melee = 0, solo = 0 }\n    _G.UWU_LPDU_AnnihilationAssignments = cfg\nend\nlocal visible = GUI:Begin(\"UWU LPDU 3-3-1-1 assignments\", true)\nif visible then\n    GUI:Text(\"Choose the assignments agreed with your group.\")\n    if slot == \"M1\" or slot == \"M2\" then\n        local choice = GUI:Combo(\"Melee with tanks\", cfg.melee, {\"Choose melee\", \"M1\", \"M2\"}, 3)\n        cfg.melee = choice\n        GUI:Text(\"First two orbs: MT + OT + selected melee.\")\n    else\n        local choice = GUI:Combo(\"Solo tank\", cfg.solo, {\"Choose tank\", \"MT\", \"OT\"}, 3)\n        cfg.solo = choice\n        GUI:Text(\"Third and fourth orbs: selected tank alone.\")\n    end\nend\nGUI:End()",
+				executeType = 2,
+				loop = true,
+				mechanicTime = 9,
+				name = "[GUI][LPDU][Annihilation] Orb assignments",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 6,
+				timerStartOffset = -9,
+				uuid = "b025a37c-047b-f366-999b-711917c7ba2d",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "d7f90340-eb27-9744-b9a7-b27b0a4a1f44",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 15,
+				execute = "local a=eventArgs\nif a.sourceEntityContentID~=1645 and a.sourceEntityContentID~=1646 then self.used=true;return end\nlocal s=data.lpdu_mesohigh_aoe\nif not s then s={};data.lpdu_mesohigh_aoe=s end\nlocal old=s[a.sourceEntityID]\nif old then Argus.deleteTimedShape(old);s[a.sourceEntityID]=nil end\nif a.newTetherID==4 and TensorCore.mGetEntity(a.newTargetID) then\n s[a.sourceEntityID]=TensorCore.getMoogleDrawer():addTimedCircleOnEnt(15000,a.newTargetID,3,0,false,false)\nend\nself.used=true",
+				executeType = 2,
+				loop = true,
+				mechanicTime = 9,
+				name = "[LPDU] Mesohigh - Current Tether Holder AoE",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 1591,
+				timerStartOffset = -9,
+				uuid = "0fd6fc1b-02b9-23db-999a-1d4a476209d2",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 4,
+				execute = "if eventArgs.markerID~=16 then self.used=true;return end\nlocal r=AnyoneCore.Roster\nif r.current()==nil or not r.isReady() then return end\nlocal slot=r.mySlot()\nif slot~=\"M1\" and slot~=\"M2\" then self.used=true;return end\nlocal ot=r.entOf(\"T2\")\nif not ot then return end\nif data.lpdu_mistral_ot_circle then Argus.deleteTimedShape(data.lpdu_mistral_ot_circle) end\ndata.lpdu_mistral_ot_circle=TensorCore.getStaticDrawer(0xFFFFAA33,2):addTimedCircleOnEnt(10000,ot.id,.6,0,false,true)\nself.used=true",
+				executeType = 2,
+				loop = true,
+				mechanicTime = 9,
+				name = "[LPDU] Mistral Song - OT Marker for Melee",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 1591,
+				timerStartOffset = -9,
+				uuid = "bb476a8a-5c9e-796d-ab9b-9047e718e67a",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 2,
+				execute = "if eventArgs.spellID~=11074 and eventArgs.spellID~=11083 then self.used=true;return end\nif data.lpdu_mistral_ot_circle then\n Argus.deleteTimedShape(data.lpdu_mistral_ot_circle);data.lpdu_mistral_ot_circle=nil\nend\nself.used=true",
+				executeType = 2,
+				loop = true,
+				mechanicTime = 9,
+				name = "[LPDU] Mistral Song - OT Marker Cleanup",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 1591,
+				timerStartOffset = -9,
+				uuid = "f0bd2877-5dd3-61c2-b57d-6d1f34026658",
+				version = 2,
+			},
+		},
 	},
 	[3] = 
 	{
@@ -4045,6 +4165,39 @@ local tbl =
 				timelineIndex = 43,
 				timerOffset = -1,
 				uuid = "ecc05467-4e29-34b6-9449-fa97df47a5b8",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "2ae7a193-4855-1d88-9d38-5981970739d4",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				execute = "local labels=data.uwu_relative_nails\nif not labels or not labels.drawn then return end\nlocal r=AnyoneCore.Roster\nif r.current()==nil or not r.isReady() then return end\nlocal slot=r.mySlot()\nif slot~=\"M1\" and slot~=\"M2\" and slot~=\"R1\" and slot~=\"R2\" then self.used=true;return end\nlocal s=data.lpdu_nail_40\nif not s then\n s={list={}};data.lpdu_nail_40=s\n for _,n in pairs(labels.nails) do s.list[#s.list+1]=n end\n if #s.list~=4 then data.lpdu_nail_40=nil;return end\n local list=s.list;local ai,bi,q=1,2,math.huge\n for i=1,3 do for j=i+1,4 do\n  local dx,dz=list[i].x-list[j].x,list[i].z-list[j].z;local d=dx*dx+dz*dz\n  if d<q then ai,bi,q=i,j,d end\n end end\n s.northA=list[ai].id;s.northB=list[bi].id\n local south={};for i=1,4 do if i~=ai and i~=bi then south[#south+1]=list[i] end end\n s.southA=south[1].id;s.southB=south[2].id\n local nx=(list[ai].x+list[bi].x-south[1].x-south[2].x)*.5\n local nz=(list[ai].z+list[bi].z-south[1].z-south[2].z)*.5\n local ex,ez=-nz,nx\n local side=(south[1].x-south[2].x)*ex+(south[1].z-south[2].z)*ez\n s.first=side>=0 and south[1].id or south[2].id\nend\nif s.done then self.used=true;return end\nlocal a,b=TensorCore.mGetEntity(s.northA),TensorCore.mGetEntity(s.northB)\nlocal c,d=TensorCore.mGetEntity(s.southA),TensorCore.mGetEntity(s.southB)\nif not a or not b or not c or not d then return end\nif c.hp.current<=0 or d.hp.current<=0 then self.used=true;return end\nif not (a.hp.current>0 and a.hp.percent<40 or b.hp.current>0 and b.hp.percent<40) then return end\nlocal target=TensorCore.mGetEntity(s.first)\nif not target then return end\nlocal p=TensorCore.mGetPlayer()\nlocal drawer=TensorCore.getStaticDrawer(0xFF66FF99,2)\ndrawer:addTimedCircleOnEnt(6000,target.id,1,0,false,true)\nif p then\n local dist=TensorCore.getDistance2d(p.pos,target.pos)\n if dist>1 then drawer:addTimedArrow(6000,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,target.pos),math.max(.1,dist-1),1,1,1.5,0,false) end\nend\nAnyoneCore.addTimedWorldTextOnEnt(6000,\"KILL ORDER: 1 SE â†’ 2 SW â†’ 3 NE â†’ 4 NW\",target.id,0xFFFFFFFF,true,1.3,3)\ns.done=true;self.used=true",
+				executeType = 2,
+				loop = true,
+				mechanicTime = 328,
+				name = "[LPDU] Nails - Below 40 Percent Kill Order",
+				timeRange = true,
+				timelineIndex = 43,
+				timerEndOffset = 65,
+				uuid = "d394afa9-032d-f512-a07f-abe0091a8e4c",
 				version = 2,
 			},
 		},
@@ -11171,31 +11324,6 @@ local tbl =
 				uuid = "5813693a-7091-d59e-ba5b-ee8de400f453",
 			},
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-				},
-				conditions = 
-				{
-				},
-				displayPath = "Draws - Ultima LPDU",
-				eventType = 13,
-				execute = "local Roster = AnyoneCore and AnyoneCore.Roster\nif not Roster or not Roster.current() then return end\nlocal slot = Roster.mySlot()\nif slot ~= \"T1\" and slot ~= \"T2\" and slot ~= \"M1\" and slot ~= \"M2\" then return end\nlocal cfg = _G.UWU_LPDU_AnnihilationAssignments\nif not cfg then\n    cfg = { melee = 0, solo = 0 }\n    _G.UWU_LPDU_AnnihilationAssignments = cfg\nend\nlocal visible = GUI:Begin(\"UWU LPDU 3-3-1-1 assignments\", true)\nif visible then\n    GUI:Text(\"Choose the assignments agreed with your group.\")\n    if slot == \"M1\" or slot == \"M2\" then\n        local choice = GUI:Combo(\"Melee with tanks\", cfg.melee, {\"Choose melee\", \"M1\", \"M2\"}, 3)\n        cfg.melee = choice\n        GUI:Text(\"First two orbs: MT + OT + selected melee.\")\n    else\n        local choice = GUI:Combo(\"Solo tank\", cfg.solo, {\"Choose tank\", \"MT\", \"OT\"}, 3)\n        cfg.solo = choice\n        GUI:Text(\"Third and fourth orbs: selected tank alone.\")\n    end\nend\nGUI:End()",
-				executeType = 2,
-				loop = true,
-				mechanicTime = 1100,
-				name = "[GUI][LPDU][Annihilation] Orb assignments",
-				timeRange = true,
-				timelineIndex = 148,
-				timerEndOffset = 42,
-				timerStartOffset = -30,
-				uuid = "b025a37c-047b-f366-999b-711917c7ba2d",
-				version = 2,
-			},
 		},
 	},
 	[149] = 
