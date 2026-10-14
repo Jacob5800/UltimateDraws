@@ -115,6 +115,383 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local p=TensorCore.mGetPlayer()\nif p and eventArgs.entityID==p.id then\n if eventArgs.markerID==117 then data.ucobOwnFireball={started=Now(),expires=Now()+9500}\n elseif eventArgs.markerID==118 then data.ucobOwnHatchPending=Now()+15000 end\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"fdc3f9e7-e611-17b2-a223-8c1e49b5c4e5",
+									true,
+								},
+							},
+							name = "P1 Fireball - Personal marker tracking",
+							uuid = "0ccdb5a0-e6b5-97f7-b15b-42f2ed7b8055",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							markerIDList = 
+							{
+								117,
+								118,
+							},
+							name = "Fireball or Hatch",
+							uuid = "fdc3f9e7-e611-17b2-a223-8c1e49b5c4e5",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 4,
+				loop = true,
+				mechanicTime = 7,
+				name = "[LPDU] P1 Fireball - Personal marker tracking",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 205,
+				timerStartOffset = -7,
+				uuid = "e1684d87-7da0-f725-acef-c33fd356ed29",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local p=TensorCore.mGetPlayer()\nif p then\n for _,id in ipairs(eventArgs.hitTargets or {}) do\n  if id==p.id then\n   if eventArgs.spellID==9903 then data.ucobOwnHatchPending=nil\n   elseif eventArgs.spellID==9900 then data.ucobOwnFireball=nil end\n  end\n end\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"53cc9a2a-8c07-ca7c-9bd6-74957fd45bee",
+									true,
+								},
+							},
+							name = "P1 Fireball - Hatch and stack resolution",
+							uuid = "b4926a61-4732-07fc-8c21-aa3163fb288d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Mechanic IDs",
+							spellIDList = 
+							{
+								9900,
+								9903,
+							},
+							uuid = "53cc9a2a-8c07-ca7c-9bd6-74957fd45bee",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 7,
+				name = "[LPDU] P1 Fireball - Hatch and stack resolution",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 205,
+				timerStartOffset = -7,
+				uuid = "da177695-a468-0ca7-85e8-73a30aea47db",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "if eventArgs.castPosX==nil or eventArgs.castPosZ==nil then self.used=true return end\nlocal now=Now()\nlocal s=data.ucobLiquidAlert\nif not s or now-s.last>2500 then s={count=0,last=now,puddles={},own=false};data.ucobLiquidAlert=s end\nif now-s.last<150 and s.count>0 then self.used=true return end\ns.count=s.count+1;s.last=now\ns.puddles[#s.puddles+1]={x=eventArgs.castPosX,z=eventArgs.castPosZ,expires=now+30000}\nlocal R=AnyoneCore and AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif p and (p.pos.x-eventArgs.castPosX)^2+(p.pos.z-eventArgs.castPosZ)^2<36 then s.own=true end\nif R and R.current() and R.mySlot()=='R1' then\n if s.count==1 then AnyoneCore.Shotcall('Liquid Hell, keep moving',true,4,false)\n elseif s.count==5 then AnyoneCore.Shotcall('Last puddle, move clear',true,3,false) end\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"c94dea24-611a-b610-a902-f381ecc6192f",
+									true,
+								},
+							},
+							name = "Liquid Hell - L4 volley alerts and tracking",
+							uuid = "2530d4d0-a643-5819-ac3a-7897c594803f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Mechanic IDs",
+							spellIDList = 
+							{
+								9901,
+							},
+							uuid = "c94dea24-611a-b610-a902-f381ecc6192f",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 7,
+				name = "[LPDU] Liquid Hell - L4 volley alerts and tracking",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 1230,
+				timerStartOffset = -7,
+				uuid = "c9970f64-34db-2a0a-86a3-fac208cada2c",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.ucobOwnFireball\nlocal p=TensorCore.mGetPlayer()\nif not s or not p or Now()>=s.expires or Now()-s.started<2000 then self.used=true return end\nif data.ucobOwnHatchPending and Now()<data.ucobOwnHatchPending then self.used=true return end\nfor _,index in ipairs({22,27,31,36}) do\n local hatch=data['ucobMultiHatch'..index]\n local pair=hatch and hatch.assignments and hatch.assignments[p.id]\n if hatch and Now()-hatch.started<25000 and pair and pair.target==p.id and pair.phase==0 then self.used=true return end\nend\nlocal lh=data.ucobLiquidAlert\nif lh and lh.own and Now()-lh.last<6500 and lh.count<5 then self.used=true return end\nlocal b=TensorCore.mGetEntity(p.targetid)\nif not b or b.contentid~=1482 or Argus.getEntityModel(b)~=8159 then self.used=true return end\nlocal dest={x=b.pos.x-math.sin(b.pos.h)*4,y=b.pos.y,z=b.pos.z-math.cos(b.pos.h)*4}\nif lh then\n for _,q in ipairs(lh.puddles) do\n  if Now()<q.expires and (dest.x-q.x)^2+(dest.z-q.z)^2<36 then self.used=true return end\n end\nend\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
+							name = "P1 Fireball - Delayed personal regroup arrow",
+							uuid = "4fb877f7-5e51-90a4-b310-b115cc4d5d28",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 7,
+				name = "[LPDU] P1 Fireball - Delayed personal regroup arrow",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 205,
+				timerStartOffset = -7,
+				uuid = "c2d98204-bde2-5ad4-835c-5852f02d1afc",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local t=eventArgs.line.line:gsub(\"%s+\",\" \")\nlocal seq=nil\nif t:find(\"O hallowed moon, shine you the iron path\",1,true) then seq={9916,9915}\nelseif t:find(\"O hallowed moon, take fire and scorch my foes\",1,true) then seq={9916,9917}\nelseif t:find(\"Take fire, O hallowed moon\",1,true) then seq={9917,9916}\nelseif t:find(\"Blazing path, lead me to iron rule\",1,true) then seq={9917,9915}\nelseif t:find(\"From on high I descend, the hallowed moon to call\",1,true) then seq={9918,9916}\nelseif t:find(\"From on high I descend, the iron path to walk\",1,true) then seq={9918,9915}\nelseif t:find(\"From on high I descend, the iron path to call\",1,true) then seq={9918,9915}\nelseif t:find(\"From on high I descend, the moon and stars to bring\",1,true) then seq={9918,9916,9920}\nelseif t:find(\"From hallowed moon I descend, a rain of stars to bring\",1,true) then seq={9916,9918,9920}\nelseif t:find(\"From hallowed moon I descend, upon burning earth to tread\",1,true) then seq={9916,9918,9917}\nelseif t:find(\"From hallowed moon I bare iron, in my descent to wield\",1,true) then seq={9916,9915,9918}\nelseif t:find(\"Unbending iron, take fire and descend\",1,true) then seq={9915,9917,9918}\nelseif t:find(\"Unbending iron, descend with fiery edge\",1,true) then seq={9915,9918,9917}\nend\nif seq then\n local previous=data.ucobBeamTiming\n if not previous or previous.text~=t or Now()>=previous.expires then\n  data.ucobBeamTiming={seq=seq,step=1,text=t,nextAt=Now()+5100,expires=Now()+20000}\n end\nend\nself.used=true",
+							name = "Thermionic Beam - Quote timer capture",
+							uuid = "afe96595-8a72-a5cc-af91-70858145767b",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 7,
+				loop = true,
+				mechanicTime = 7,
+				name = "[LPDU] Thermionic Beam - Quote timer capture",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 1230,
+				timerStartOffset = -7,
+				uuid = "d47f8702-dc12-5e1b-89c6-f50d313cc944",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.ucobBeamTiming\nif s and Now()<s.expires and s.seq[s.step]==eventArgs.spellID then\n s.step=s.step+1;s.nextAt=Now()+3100;s.timerStep=nil\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"0f3671b8-472b-2f3f-bf06-bdc046f9846d",
+									true,
+								},
+							},
+							name = "Thermionic Beam - Damage resolution",
+							uuid = "14b12733-1279-f12a-b211-548e6ddff2df",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Mechanic IDs",
+							spellIDList = 
+							{
+								9915,
+								9916,
+								9917,
+								9918,
+								9920,
+							},
+							uuid = "0f3671b8-472b-2f3f-bf06-bdc046f9846d",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 7,
+				name = "[LPDU] Thermionic Beam - Damage resolution",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 1230,
+				timerStartOffset = -7,
+				uuid = "ae4ede69-3c69-6104-81ab-bdb70f7063dc",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.ucobBeamTiming\nlocal p=TensorCore.mGetPlayer()\nif s and p and Now()<s.expires and s.seq[s.step]==9917 and s.timerStep~=s.step and Now()<s.nextAt then\n local id=p.id\n AnyoneCore.addWorldTextCountdown(s.nextAt-Now(),setmetatable({entityID=id},{__index=function(t,k) local e=TensorCore.mGetEntity(t.entityID);if not e then return 0 end;if k=='x' then return e.pos.x elseif k=='y' then return e.pos.y+1.8 elseif k=='z' then return e.pos.z end end}),0xFFFFFFFF,true,.9)\n AnyoneCore.addTimedWorldTextOnEnt(s.nextAt-Now(),'Stack',id,0xFFFFFFFF,true,.8,2.5)\n s.timerStep=s.step\nend\nself.used=true",
+							name = "Thermionic Beam - Personal continuous stack timer",
+							uuid = "25885782-4aff-8811-8b76-8f81b14fb1e7",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Personal Guidance",
+				loop = true,
+				mechanicTime = 7,
+				name = "[LPDU] Thermionic Beam - Personal continuous stack timer",
+				throttleTime = 200,
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 1230,
+				timerStartOffset = -7,
+				uuid = "81bc8b92-d6d3-d71c-87ad-f12f9847f156",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.ucobBeamTiming\nlocal p=TensorCore.mGetPlayer()\nif s and p and Now()<s.expires and s.seq[s.step]==9917 then\n local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(.15,1,.2,.6),2)\n d:addCircle(p.pos.x,p.pos.y,p.pos.z,4,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nself.used=true",
+							name = "Thermionic Beam - Green stack circle until hit",
+							uuid = "b7142af0-7f13-ef63-a6b5-caa94462b93d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 7,
+				name = "[LPDU] Thermionic Beam - Green stack circle until hit",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 1230,
+				timerStartOffset = -7,
+				uuid = "56278f1d-f2ae-2d6a-b466-74c36e7b79e2",
+				version = 2,
+			},
+		},
 	},
 	[3] = 
 	{
@@ -3968,6 +4345,124 @@ local tbl =
 				timerEndOffset = 14,
 				timerStartOffset = -4,
 				uuid = "cc588df0-2620-fd2a-a9e0-72250af44235",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nif not R or not R.current() or not R.isReady() then self.used=true return end\nlocal now=Now()\nlocal s=data.ucobOpeningMeteorTimers\nif not s or now-s.started>20000 then s={started=now,last=0,hit={},count=0,volley=0};data.ucobOpeningMeteorTimers=s end\nif now-s.last<1500 then self.used=true return end\ns.last=now;s.volley=s.volley+1\nif s.volley>2 then self.used=true return end\nlocal remaining=s.volley==1 and 1600 or 600\nfor _,slot in ipairs({'T1','T2','H1','H2','M1','M2','R1','R2'}) do\n local e=R.entOf(slot)\n if e and e.hp.current>0 and not s.hit[e.id] then\n  local id=e.id\n  AnyoneCore.addWorldTextCountdown(remaining,setmetatable({entityID=id},{__index=function(t,k) local e=TensorCore.mGetEntity(t.entityID);if not e then return 0 end;if k=='x' then return e.pos.x elseif k=='y' then return e.pos.y+1.8 elseif k=='z' then return e.pos.z end end}),0xFFFFFFFF,true,.85)\n end\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"a67bad36-4470-e695-b69d-8c88e9471af6",
+									true,
+								},
+							},
+							name = "P2 Opener - Meteor Stream countdowns on party",
+							uuid = "ff6709cc-1f67-d36d-bb57-c9174dc488a1",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Mechanic IDs",
+							spellIDList = 
+							{
+								9913,
+							},
+							uuid = "a67bad36-4470-e695-b69d-8c88e9471af6",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 200,
+				name = "[LPDU] P2 Opener - Meteor Stream countdowns on party",
+				timeRange = true,
+				timelineIndex = 39,
+				timerEndOffset = 30,
+				timerStartOffset = -15,
+				uuid = "e4582766-06bc-9d67-96f3-5520b6381007",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.ucobOpeningMeteorTimers\nif s and Now()-s.started<20000 then\n for _,id in ipairs(eventArgs.hitTargets or {}) do s.hit[id]=true end\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"7fda7401-8185-c8a0-9989-08ccff944abb",
+									true,
+								},
+							},
+							name = "P2 Opener - Meteor Stream target cleanup",
+							uuid = "dfb1bd93-1205-aac5-bc4f-122e76da7c90",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Mechanic IDs",
+							spellIDList = 
+							{
+								9920,
+							},
+							uuid = "7fda7401-8185-c8a0-9989-08ccff944abb",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 200,
+				name = "[LPDU] P2 Opener - Meteor Stream target cleanup",
+				timeRange = true,
+				timelineIndex = 39,
+				timerEndOffset = 30,
+				timerStartOffset = -15,
+				uuid = "0cb438f6-9b1c-faef-bfcf-b6a8d4323e2d",
 				version = 2,
 			},
 		},
@@ -8220,6 +8715,40 @@ local tbl =
 				timerEndOffset = 1,
 				timerStartOffset = -5,
 				uuid = "9045bfb4-bb06-f023-a68b-b74439f6c201",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dest={x=0,y=p.pos.y,z=0}\nif not data.ucobQuickmarchMiddleCalled then AnyoneCore.Shotcall('Stack middle',true,3,false);data.ucobQuickmarchMiddleCalled=true end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
+							name = "P3 Quickmarch - Regroup middle before dive",
+							uuid = "d22a883a-9b79-fff1-87ff-6e2eda0852ea",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 532,
+				name = "[LPDU] P3 Quickmarch - Regroup middle before dive",
+				timeRange = true,
+				timelineIndex = 90,
+				timerEndOffset = 3.4,
+				timerStartOffset = -2,
+				uuid = "b72f8c8c-4a2f-ea7c-af0f-a9fda28331d1",
 				version = 2,
 			},
 		},
