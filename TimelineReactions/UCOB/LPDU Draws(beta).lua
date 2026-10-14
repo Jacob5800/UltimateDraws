@@ -10081,6 +10081,20 @@ local tbl =
 		{
 			data = 
 			{
+				name = "TTS Spread",
+				uuid = "1e929b6c-cca0-f23c-9fad-af448c38cfa4",
+				version = 2,
+			},
+			inheritedObjectUUID = "137c2f40-2945-b383-af4d-33a613fa1cb3",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "LPDU Personal Guidance",
 				uuid = "2ce49414-307b-0d3c-b07a-064075d7f348",
@@ -10304,7 +10318,7 @@ local tbl =
 				timeRange = true,
 				timelineIndex = 122,
 				timerEndOffset = 0.5,
-				timerStartOffset = -1.8,
+				timerStartOffset = -1.7999999523163,
 				uuid = "eec4a1ed-0fdd-abe5-a8e8-f5da668a379c",
 				version = 2,
 			},
@@ -10362,7 +10376,7 @@ local tbl =
 				timeRange = true,
 				timelineIndex = 122,
 				timerEndOffset = 1,
-				timerStartOffset = -0.4,
+				timerStartOffset = -0.40000000596046,
 				uuid = "4a1d68cd-770a-fcd9-82a4-567a801c50f1",
 				version = 2,
 			},
@@ -10895,6 +10909,40 @@ local tbl =
 				timerEndOffset = 2,
 				timerStartOffset = -1,
 				uuid = "2acd26d7-d58d-2e0e-bb31-facaa0c656c3",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 2500,
+							alertPriority = 2,
+							alertScale = 1.2,
+							alertTTS = true,
+							alertText = "Move for Twister",
+							endIfUsed = true,
+							uuid = "b119e4f8-040d-9e81-be68-e37bf9bc06b6",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Personal Guidance",
+				mechanicTime = 681.4,
+				name = "[LPDU] P3 Heavensfall - Twister Move",
+				timelineIndex = 127,
+				timerOffset = -2,
+				uuid = "b1d6da2d-d0fb-905c-9f7e-2718abebe6df",
 				version = 2,
 			},
 		},

@@ -16,6 +16,8 @@ TEA: Coming soon by Ton.
 
 ### UCOB: LPDU
 
+- Added a Move for Twister text/TTS reminder at timeline 679.4 during Heavensfall Trio, two seconds before Twisting Dive resolves. (14-10-2026)
+
 - P1 transition regroup arrow now follows the actual C marker instead of a fixed south-of-center point. (14-10-2026)
 
 - Added frontal-cone warnings for every later P1 Plummet, following Twintania's actual target, and continuous countdowns on the first Blackfire towers. (14-10-2026)
