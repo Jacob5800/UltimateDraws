@@ -11442,7 +11442,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif not R or not R.current() or not R.isReady() or not p then self.used=true return end\nlocal slot=R.mySlot()\nif not slot then self.used=true return end\nlocal s=data.ucobHFGuide\nif not s or not s.conesDone or s.done or Now()>=s.expires then self.used=true return end\nlocal dest={x=0,y=0,z=0}\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
+							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif not R or not R.current() or not R.isReady() or not p then self.used=true return end\nlocal slot=R.mySlot()\nif not slot then self.used=true return end\nlocal s=data.ucobHFGuide\nif not s or not s.conesDone or s.done or Now()>=s.expires then self.used=true return end\nlocal boss=nil\nfor _,e in pairs(TensorCore.entityList('')) do\n if e.contentid==3210 and Argus.getEntityModel(e)==8168 and Argus.isEntityVisible(e) then boss=e;break end\nend\nif not boss then self.used=true return end\nlocal dest={x=boss.pos.x-math.sin(boss.pos.h)*3,y=boss.pos.y,z=boss.pos.z-math.cos(boss.pos.h)*3}\nif not s.fireballCall then AnyoneCore.Shotcall('Stack behind Bahamut',true,4,false);s.fireballCall=true end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
 							name = "Heavensfall - Middle Fireball Regroup",
 							uuid = "7b41c570-91f4-79ee-b0ff-9793b2265418",
 							version = 2.1,
@@ -11456,7 +11456,7 @@ local tbl =
 				eventType = 12,
 				loop = true,
 				mechanicTime = 703.5,
-				name = "[LPDU] P3 Heavensfall - Middle Fireball Regroup",
+				name = "[LPDU] P3 Heavensfall - Bahamut Rear Fireball Regroup",
 				timeRange = true,
 				timelineIndex = 135,
 				timerEndOffset = 1,
