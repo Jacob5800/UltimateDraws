@@ -3440,8 +3440,8 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.ucobP1Transition\nif not s or Now()>=s.expires then self.used=true return end\nlocal dest={x=0,y=0,z=7}\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
-							name = "P1 transition south of center arrow",
+							actionLua = "local s=data.ucobP1Transition\nif not s or Now()>=s.expires then self.used=true return end\nlocal x,y,z,active=Argus.getWaymarkInfo(3)\nif not active then self.used=true return end\nlocal dest={x=x,y=y,z=z}\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
+							name = "P1 transition C marker arrow",
 							uuid = "b29e4918-c647-c932-977e-112eb7dbbb92",
 							version = 2.1,
 						},
@@ -3454,7 +3454,7 @@ local tbl =
 				eventType = 12,
 				loop = true,
 				mechanicTime = 200,
-				name = "P1 transition south of center arrow",
+				name = "P1 transition regroup at C",
 				timeRange = true,
 				timelineIndex = 39,
 				timerEndOffset = 2,
