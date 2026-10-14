@@ -6155,6 +6155,65 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal targeted=false\nfor _,id in ipairs(eventArgs.hitTargets or {}) do if id==p.id then targeted=true;break end end\nif not targeted or (data.ucobOwnThunderCall and Now()-data.ucobOwnThunderCall<1000) then self.used=true return end\ndata.ucobOwnThunderCall=Now()\nAnyoneCore.Shotcall('Spread',true,4,false)\nAnyoneCore.addTimedWorldTextOnEnt(6000,'Spread',p.id,0xFFFFFFFF,true,.85,1)\nAnyoneCore.addWorldTextCountdown(6000,setmetatable({entityID=p.id},{__index=function(t,k) local e=TensorCore.mGetEntity(t.entityID);if not e then return 0 end;if k=='x' then return e.pos.x elseif k=='y' then return e.pos.y+.3 elseif k=='z' then return e.pos.z end end}),0xFFFFFFFF,true,.85)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"a9a0b0ff-e980-43b0-8cc4-8a31a9face61",
+									true,
+								},
+							},
+							name = "Own Thunder spread cue",
+							uuid = "f6fb6d1b-0188-8845-ab58-653fa5258eb5",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Thunder application",
+							spellIDList = 
+							{
+								9927,
+							},
+							uuid = "a9a0b0ff-e980-43b0-8cc4-8a31a9face61",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 230.6,
+				name = "[LPDU] P2 Thunderstruck - Personal spread call and countdown",
+				timeRange = true,
+				timelineIndex = 48,
+				timerEndOffset = 180,
+				timerStartOffset = -40,
+				uuid = "0efbaafa-1114-7005-b772-2a4402c91f20",
+				version = 2,
+			},
+		},
 	},
 	[49] = 
 	{

@@ -16,6 +16,8 @@ TEA: Coming soon by Ton.
 
 ### UCOB: LPDU
 
+- Thunderstruck now gives the affected player a Spread voice/text call and a small following countdown, preserving the later Thermionic stack guidance. (14-10-2026)
+
 - P1 double-Hatch arrows refresh unresolved assignments once per second, respect a marked player already inside a link, and retain the original expiry and hit cleanup. (14-10-2026)
 
 - P1 Liquid Hell warnings now check who is furthest from Twintania. Added late Fleeting light Thermionic Beam timing and a stack call that waits for the player's dragon bait to lock. Tenstrike middle regroup yields when Earthshaker markers appear. (14-10-2026)
