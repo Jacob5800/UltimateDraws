@@ -16,6 +16,8 @@ TEA: Coming soon by Ton.
 
 ### UCOB: LPDU
 
+- Added frontal-cone warnings for every later P1 Plummet, following Twintania's actual target, and continuous countdowns on the first Blackfire towers. (14-10-2026)
+
 - Heavensfall towers now show R1–R4/L1–L4 labels and continuous expiry countdowns, with assigned arrows ordered clockwise from the tower under Nael. (14-10-2026)
 
 - Improved Nael In/Out/Stack/Spread text and TTS, with one callout per quote step; duplicate suppression confirmed in replay. (10-10-2026)

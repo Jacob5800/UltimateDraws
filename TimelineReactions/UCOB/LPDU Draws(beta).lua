@@ -569,6 +569,52 @@ local tbl =
 			},
 		},
 	},
+	[6] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Personal Guidance",
+				uuid = "e37071e6-ae96-7cf1-ac57-3ec901e4bdc7",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local key='ucobP1Plummet6'\nlocal s=data[key]\nlocal now=Now()\nif not s or now-s.started>10000 then s={started=now,nextSearch=0};data[key]=s end\nlocal boss=s.boss and TensorCore.mGetEntity(s.boss)\nif not boss and now>=s.nextSearch then\n s.nextSearch=now+1000\n for _,e in pairs(EntityList('')) do if e.contentid==1482 then s.boss=e.id;boss=e;break end end\nend\nif boss and boss.targetid~=0 then\n local target=TensorCore.mGetEntity(boss.targetid)\n if target then\n  TensorCore.getStaticDrawer(0x593333FF,2):addCone(boss.pos.x,boss.pos.y,boss.pos.z,12,math.rad(120),TensorCore.getHeadingToTarget(boss.pos,target.pos),false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n end\nend\nself.used=true",
+							name = "Actual tank frontal cone",
+							uuid = "3cff94ba-a3d3-37d5-8479-125857b09380",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 27.6,
+				name = "[LPDU] P1 Plummet 27.6 - Actual Tank Cone",
+				timeRange = true,
+				timelineIndex = 6,
+				timerStartOffset = -3,
+				uuid = "8610cde2-41d2-124e-84ea-4e705631c5bc",
+				version = 2,
+			},
+		},
+	},
 	[7] = 
 	{
 		
@@ -1855,6 +1901,52 @@ local tbl =
 			},
 		},
 	},
+	[17] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Personal Guidance",
+				uuid = "9362dedd-75de-a8c3-ba81-c89a8bb533af",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local key='ucobP1Plummet17'\nlocal s=data[key]\nlocal now=Now()\nif not s or now-s.started>10000 then s={started=now,nextSearch=0};data[key]=s end\nlocal boss=s.boss and TensorCore.mGetEntity(s.boss)\nif not boss and now>=s.nextSearch then\n s.nextSearch=now+1000\n for _,e in pairs(EntityList('')) do if e.contentid==1482 then s.boss=e.id;boss=e;break end end\nend\nif boss and boss.targetid~=0 then\n local target=TensorCore.mGetEntity(boss.targetid)\n if target then\n  TensorCore.getStaticDrawer(0x593333FF,2):addCone(boss.pos.x,boss.pos.y,boss.pos.z,12,math.rad(120),TensorCore.getHeadingToTarget(boss.pos,target.pos),false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n end\nend\nself.used=true",
+							name = "Actual tank frontal cone",
+							uuid = "92fb96a4-a137-a8fb-a4d9-38515b3c09bf",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 86.6,
+				name = "[LPDU] P1 Plummet 86.6 - Actual Tank Cone",
+				timeRange = true,
+				timelineIndex = 17,
+				timerStartOffset = -3,
+				uuid = "fd83eb0c-a808-6c0e-9cbe-ade6baf11b67",
+				version = 2,
+			},
+		},
+	},
 	[18] = 
 	{
 		
@@ -2213,6 +2305,52 @@ local tbl =
 			objectType = "folder",
 		},
 	},
+	[26] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Personal Guidance",
+				uuid = "41d169a5-37d2-4e7a-af09-bc2eb5acd5a6",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local key='ucobP1Plummet26'\nlocal s=data[key]\nlocal now=Now()\nif not s or now-s.started>10000 then s={started=now,nextSearch=0};data[key]=s end\nlocal boss=s.boss and TensorCore.mGetEntity(s.boss)\nif not boss and now>=s.nextSearch then\n s.nextSearch=now+1000\n for _,e in pairs(EntityList('')) do if e.contentid==1482 then s.boss=e.id;boss=e;break end end\nend\nif boss and boss.targetid~=0 then\n local target=TensorCore.mGetEntity(boss.targetid)\n if target then\n  TensorCore.getStaticDrawer(0x593333FF,2):addCone(boss.pos.x,boss.pos.y,boss.pos.z,12,math.rad(120),TensorCore.getHeadingToTarget(boss.pos,target.pos),false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n end\nend\nself.used=true",
+							name = "Actual tank frontal cone",
+							uuid = "793d6598-2bcb-99b1-bb70-9716c0d426ad",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 136.6,
+				name = "[LPDU] P1 Plummet 136.6 - Actual Tank Cone",
+				timeRange = true,
+				timelineIndex = 26,
+				timerStartOffset = -3,
+				uuid = "eae0a105-6925-b6cc-9df4-dfe87c682621",
+				version = 2,
+			},
+		},
+	},
 	[27] = 
 	{
 		
@@ -2495,6 +2633,52 @@ local tbl =
 				timerEndOffset = 14,
 				timerStartOffset = -20,
 				uuid = "e3353512-68d7-d055-90e3-39ea3bc9b49d",
+				version = 2,
+			},
+		},
+	},
+	[29] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Personal Guidance",
+				uuid = "8ccacaf2-0f38-8dfd-a0bf-5aa516bde0a7",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local key='ucobP1Plummet29'\nlocal s=data[key]\nlocal now=Now()\nif not s or now-s.started>10000 then s={started=now,nextSearch=0};data[key]=s end\nlocal boss=s.boss and TensorCore.mGetEntity(s.boss)\nif not boss and now>=s.nextSearch then\n s.nextSearch=now+1000\n for _,e in pairs(EntityList('')) do if e.contentid==1482 then s.boss=e.id;boss=e;break end end\nend\nif boss and boss.targetid~=0 then\n local target=TensorCore.mGetEntity(boss.targetid)\n if target then\n  TensorCore.getStaticDrawer(0x593333FF,2):addCone(boss.pos.x,boss.pos.y,boss.pos.z,12,math.rad(120),TensorCore.getHeadingToTarget(boss.pos,target.pos),false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n end\nend\nself.used=true",
+							name = "Actual tank frontal cone",
+							uuid = "f79e02ac-2464-81bc-87c2-02b69ee9a0c9",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 151.6,
+				name = "[LPDU] P1 Plummet 151.6 - Actual Tank Cone",
+				timeRange = true,
+				timelineIndex = 29,
+				timerStartOffset = -3,
+				uuid = "d8fc914a-2f54-ebea-a947-1d9f5076a240",
 				version = 2,
 			},
 		},
@@ -2799,6 +2983,52 @@ local tbl =
 			objectType = "folder",
 		},
 	},
+	[35] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Personal Guidance",
+				uuid = "73e1d467-8086-6060-b455-bbdd4e0e9e57",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local key='ucobP1Plummet35'\nlocal s=data[key]\nlocal now=Now()\nif not s or now-s.started>10000 then s={started=now,nextSearch=0};data[key]=s end\nlocal boss=s.boss and TensorCore.mGetEntity(s.boss)\nif not boss and now>=s.nextSearch then\n s.nextSearch=now+1000\n for _,e in pairs(EntityList('')) do if e.contentid==1482 then s.boss=e.id;boss=e;break end end\nend\nif boss and boss.targetid~=0 then\n local target=TensorCore.mGetEntity(boss.targetid)\n if target then\n  TensorCore.getStaticDrawer(0x593333FF,2):addCone(boss.pos.x,boss.pos.y,boss.pos.z,12,math.rad(120),TensorCore.getHeadingToTarget(boss.pos,target.pos),false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n end\nend\nself.used=true",
+							name = "Actual tank frontal cone",
+							uuid = "907826c4-d4f7-2700-a09b-4f4d20b351e0",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 184,
+				name = "[LPDU] P1 Plummet 184 - Actual Tank Cone",
+				timeRange = true,
+				timelineIndex = 35,
+				timerStartOffset = -3,
+				uuid = "3f0ef9ca-f817-16c5-8825-e6ac52fc015b",
+				version = 2,
+			},
+		},
+	},
 	[36] = 
 	{
 		
@@ -3097,6 +3327,49 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\ucob\\universal",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Personal Guidance",
+				uuid = "f39210c1-50b1-afc2-9b90-b7ace3f837f8",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local key='ucobP1Plummet38'\nlocal s=data[key]\nlocal now=Now()\nif not s or now-s.started>10000 then s={started=now,nextSearch=0};data[key]=s end\nlocal boss=s.boss and TensorCore.mGetEntity(s.boss)\nif not boss and now>=s.nextSearch then\n s.nextSearch=now+1000\n for _,e in pairs(EntityList('')) do if e.contentid==1482 then s.boss=e.id;boss=e;break end end\nend\nif boss and boss.targetid~=0 then\n local target=TensorCore.mGetEntity(boss.targetid)\n if target then\n  TensorCore.getStaticDrawer(0x593333FF,2):addCone(boss.pos.x,boss.pos.y,boss.pos.z,12,math.rad(120),TensorCore.getHeadingToTarget(boss.pos,target.pos),false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n end\nend\nself.used=true",
+							name = "Actual tank frontal cone",
+							uuid = "275472c0-1108-e366-a8be-92bf3494d18d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 199,
+				name = "[LPDU] P1 Plummet 199 - Actual Tank Cone",
+				timeRange = true,
+				timelineIndex = 38,
+				timerStartOffset = -3,
+				uuid = "49ef9898-99c9-7b46-b940-708ec6805aff",
+				version = 2,
+			},
 		},
 	},
 	[39] = 
@@ -8928,7 +9201,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.ucobBlackfireTowerChoice\nif not s then\n s={towers={},marked={},markerCount=0,hyper=0,expires=Now()+11000}\n for _,e in pairs(TensorCore.entityList(\"\")) do\n  if e.contentid==2612 and Argus.getEntityModel(e)==8161 then\n   local r=math.sqrt(e.pos.x^2+e.pos.z^2)\n   if r>20 then s.nx=e.pos.x/r s.nz=e.pos.z/r end\n   break\n  end\n end\n data.ucobBlackfireTowerChoice=s\nend\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif e then s.towers[eventArgs.entityID]={x=e.pos.x,y=e.pos.y,z=e.pos.z} end\nself.used=true",
+							actionLua = "local s=data.ucobBlackfireTowerChoice\nif not s then\n s={towers={},marked={},markerCount=0,hyper=0,expires=Now()+11000}\n for _,e in pairs(TensorCore.entityList(\"\")) do\n  if e.contentid==2612 and Argus.getEntityModel(e)==8161 then\n   local r=math.sqrt(e.pos.x^2+e.pos.z^2)\n   if r>20 then s.nx=e.pos.x/r s.nz=e.pos.z/r end\n   break\n  end\n end\n data.ucobBlackfireTowerChoice=s\nend\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif e and not s.towers[eventArgs.entityID] then\n s.towers[eventArgs.entityID]={x=e.pos.x,y=e.pos.y,z=e.pos.z}\n AnyoneCore.addWorldTextCountdown(eventArgs.channelTimeMax*1000,{x=e.pos.x,y=e.pos.y+1,z=e.pos.z},0xFFFFFFFF,true,1.4)\nend\nself.used=true",
 							conditions = 
 							{
 								
