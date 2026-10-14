@@ -10535,7 +10535,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local now=Now()\nlocal s=data.ucobHeavensfallTowers\nif not s or now-s.started>25000 then s={started=now,towers={},kb=false} data.ucobHeavensfallTowers=s end\nif not s.reference then\n for _,e in pairs(EntityList(\"\")) do\n  if e.contentid==2612 and Argus.getEntityModel(e)==8161 then\n   local length=math.sqrt(e.pos.x*e.pos.x+e.pos.z*e.pos.z)\n   if length>15 then s.reference=math.atan2(e.pos.x,-e.pos.z) break end\n  end\n end\nend\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif e and not s.towers[e.id] then s.towers[e.id]={id=e.id,x=e.pos.x,y=e.pos.y,z=e.pos.z,expires=now+eventArgs.channelTimeMax*1000} end\nif s.reference and not s.labelsDrawn then\n local towers={}\n for _,tower in pairs(s.towers) do if tower.expires>now then towers[#towers+1]=tower end end\n if #towers==8 then\n  local function angle(t) return math.atan2(t.x,-t.z) end\n  local anchor,delta=nil,math.huge\n  for _,tower in ipairs(towers) do\n   local d=math.abs((angle(tower)-s.reference+math.pi)%(2*math.pi)-math.pi)\n   if d<delta then delta=d;anchor=angle(tower) end\n  end\n  table.sort(towers,function(a,b) return (angle(a)-anchor)%(2*math.pi)<(angle(b)-anchor)%(2*math.pi) end)\n  s.ordered=towers\n  local names={'R1','R2','R3','R4','L4','L3','L2','L1'}\n  for i,tower in ipairs(towers) do\n   local remaining=math.max(1,tower.expires-Now())\n   AnyoneCore.addTimedWorldText(remaining,names[i],{x=tower.x,y=tower.y+2,z=tower.z},0xFFFFFFFF,true,1.3)\n   AnyoneCore.addWorldTextCountdown(remaining,{x=tower.x,y=tower.y+.8,z=tower.z},0xFFFFFFFF,true,1.2)\n  end\n  s.labelsDrawn=true\n end\nend\nself.used=true",
+							actionLua = "local now=Now()\nlocal s=data.ucobHeavensfallTowers\nif not s or now-s.started>25000 then s={started=now,towers={},kb=false} data.ucobHeavensfallTowers=s end\nlocal reference=data.ucobHFNaelReference\nif reference and now-reference.time<20000 then s.reference=reference.angle end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif e and not s.towers[e.id] then s.towers[e.id]={id=e.id,x=e.pos.x,y=e.pos.y,z=e.pos.z,expires=now+eventArgs.channelTimeMax*1000} end\nif s.reference and not s.labelsDrawn then\n local towers={}\n for _,tower in pairs(s.towers) do if tower.expires>now then towers[#towers+1]=tower end end\n if #towers==8 then\n  local function angle(t) return math.atan2(t.x,-t.z) end\n  local anchor,delta=nil,math.huge\n  for _,tower in ipairs(towers) do\n   local d=math.abs((angle(tower)-s.reference+math.pi)%(2*math.pi)-math.pi)\n   if d<delta then delta=d;anchor=angle(tower) end\n  end\n  table.sort(towers,function(a,b) return (angle(a)-anchor)%(2*math.pi)<(angle(b)-anchor)%(2*math.pi) end)\n  s.ordered=towers\n  local names={'R1','R2','R3','R4','L4','L3','L2','L1'}\n  for i,tower in ipairs(towers) do\n   local remaining=math.max(1,tower.expires-Now())\n   AnyoneCore.addTimedWorldText(remaining,names[i],{x=tower.x,y=tower.y+2,z=tower.z},0xFFFFFFFF,true,1.3)\n   AnyoneCore.addWorldTextCountdown(remaining,{x=tower.x,y=tower.y+.8,z=tower.z},0xFFFFFFFF,true,1.2)\n  end\n  s.labelsDrawn=true\n end\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -10671,6 +10671,57 @@ local tbl =
 				timerEndOffset = 9,
 				timerStartOffset = -4,
 				uuid = "b6d2d5c4-45a3-dc52-958c-89b8a9365c2f",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local e=TensorCore.mGetEntity(eventArgs.entityID)\nif e and Argus.getEntityModel(e)==8161 and e.pos.x^2+e.pos.z^2>400 then\n data.ucobHFNaelReference={angle=math.atan2(e.pos.x,-e.pos.z),time=Now()}\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"41ae1056-1043-024b-98b1-4c5db946495f",
+									true,
+								},
+							},
+							uuid = "543302eb-b67d-69ae-aa68-47134bbd4e63",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 2612,
+							uuid = "41ae1056-1043-024b-98b1-4c5db946495f",
+							version = 3,
+						},
+					},
+				},
+				eventType = 23,
+				loop = true,
+				mechanicTime = 673.4,
+				name = "[LPDU] Heavensfall - Actual Nael North Capture",
+				timeRange = true,
+				timelineIndex = 125,
+				timerEndOffset = 18,
+				uuid = "df92ba31-c4e4-1e8a-9b3c-563ffe61a436",
 				version = 2,
 			},
 		},
