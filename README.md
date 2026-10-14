@@ -16,6 +16,8 @@ TEA: Coming soon by Ton.
 
 ### UCOB: LPDU
 
+- Heavensfall towers now show R1–R4/L1–L4 labels and continuous expiry countdowns, with assigned arrows ordered clockwise from the tower under Nael. (14-10-2026)
+
 - Improved Nael In/Out/Stack/Spread text and TTS, with one callout per quote step; duplicate suppression confirmed in replay. (10-10-2026)
 - Corrected P1 double-Hatch Neurolink assignments and alerts, and made the transition arrow follow A. (10-10-2026)
 - Added the Quickmarch Twister move reminder and brought Earthshaker destinations closer to melee. Bahamut cones now select the real boss and follow his facing. (10-10-2026)
