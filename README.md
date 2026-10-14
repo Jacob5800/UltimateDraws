@@ -16,6 +16,8 @@ TEA: Coming soon by Ton.
 
 ### UCOB: LPDU
 
+- Added a small personal Raven's Dive countdown near timeline 294, clarified Blackfire Wait outside/Soak tower guidance, and kept Fellruin IN destinations outside Neurolinks until link soaking is required. (14-10-2026)
+
 - Heavensfall Fireball regroup now follows Bahamut's rear when he reappears, with a Stack behind Bahamut callout. (14-10-2026)
 
 - Heavensfall counts the first tower clockwise from Nael as R1, including a tower directly under her, and adds pre-knockback alignment before the tower correction arrow. Blackfire stack guidance moves opposite Nael and retreats straight toward the wall for targeted Hypernova. Added Fellruin Spread/Under Nael and assigned Neurolink callouts. (14-10-2026)

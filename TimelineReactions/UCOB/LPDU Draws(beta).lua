@@ -6893,6 +6893,57 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.ucobNaelPersonalCallouts\nlocal p=TensorCore.mGetPlayer()\nif s and p then\n local remaining=s.started+5700-Now()\n if remaining>0 then AnyoneCore.addWorldTextCountdown(remaining,{x=p.pos.x,y=p.pos.y+.8,z=p.pos.z},0xFFFFFFFF,true,.9);data.ucobOwnDiveTimerStarted=s.started end\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"0d9f85c7-da90-a993-876e-0aa568732672",
+									true,
+								},
+							},
+							uuid = "d06b5f0b-137e-b0c1-9715-a61d24700e46",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.ucobNaelPersonalCallouts\nreturn s~=nil and s.step==1 and s.seq[1]==9918 and s.started~=data.ucobOwnDiveTimerStarted and Now()<s.started+5700",
+							name = "Own initial Dive countdown pending",
+							uuid = "0d9f85c7-da90-a993-876e-0aa568732672",
+							version = 3,
+						},
+					},
+				},
+				loop = true,
+				mechanicTime = 290.4,
+				name = "[LPDU] Nael Raven Dive - Personal Countdown",
+				throttleTime = 250,
+				timeRange = true,
+				timelineIndex = 61,
+				timerEndOffset = 10,
+				timerStartOffset = -8,
+				uuid = "6cbbab2c-aac9-2cef-9c9c-4acaabace9d2",
+				version = 2,
+			},
+		},
 	},
 	[63] = 
 	{
@@ -9485,7 +9536,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.ucobBlackfireTowerChoice\nlocal R=AnyoneCore and AnyoneCore.Roster\nif not s or Now()>=s.expires or not s.nx or s.markerCount~=4 or not R or not R.current() or not R.isReady() then self.used=true return end\nlocal slot=R.mySlot()\nif slot~=\"M1\" and slot~=\"M2\" and slot~=\"R1\" and slot~=\"R2\" then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal choice=Settings.FFXIVMINION.LPDU_UCOB_BlackfireTower\nif choice~=\"Close\" and choice~=\"Far\" then\n choice=(slot==\"M1\" or slot==\"M2\") and \"Close\" or \"Far\"\nend\nlocal dest=nil\nif s.marked[p.id] then\n if s.stackDone and not s.stackRetreat then self.used=true return end\n s.stackDest=s.stackDest or {x=-s.nx*8,y=0,z=-s.nz*8}\n dest=s.stackDest\nelse\n if choice~=\"Close\" and choice~=\"Far\" then self.used=true return end\n if s.choice~=choice then\n  local selected=nil local score=nil local count=0\n  -- Facing Nael: LPDU DPS left, supports right.\n  for _,t in pairs(s.towers) do\n   if t.x*s.nz-t.z*s.nx>0 then\n    count=count+1\n    local n=t.x*s.nx+t.z*s.nz\n    if not score or (choice==\"Close\" and n>score) or (choice==\"Far\" and n<score) then selected=t score=n end\n   end\n  end\n  if count~=2 or not selected then self.used=true return end\n  s.choice=choice s.selected=selected\n  local r=math.sqrt(selected.x^2+selected.z^2)\n  s.stage={x=selected.x/r*(r+4),y=selected.y,z=selected.z/r*(r+4)}\n end\n dest=s.hyper>=2 and s.selected or s.stage\nend\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
+							actionLua = "local s=data.ucobBlackfireTowerChoice\nlocal R=AnyoneCore and AnyoneCore.Roster\nif not s or Now()>=s.expires or not s.nx or s.markerCount~=4 or not R or not R.current() or not R.isReady() then self.used=true return end\nlocal slot=R.mySlot()\nif slot~=\"M1\" and slot~=\"M2\" and slot~=\"R1\" and slot~=\"R2\" then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal choice=Settings.FFXIVMINION.LPDU_UCOB_BlackfireTower\nif choice~=\"Close\" and choice~=\"Far\" then\n choice=(slot==\"M1\" or slot==\"M2\") and \"Close\" or \"Far\"\nend\nlocal dest=nil\nif s.marked[p.id] then\n if s.stackDone and not s.stackRetreat then self.used=true return end\n s.stackDest=s.stackDest or {x=-s.nx*8,y=0,z=-s.nz*8}\n dest=s.stackDest\nelse\n if choice~=\"Close\" and choice~=\"Far\" then self.used=true return end\n if s.choice~=choice then\n  local selected=nil local score=nil local count=0\n  -- Facing Nael: LPDU DPS left, supports right.\n  for _,t in pairs(s.towers) do\n   if t.x*s.nz-t.z*s.nx>0 then\n    count=count+1\n    local n=t.x*s.nx+t.z*s.nz\n    if not score or (choice==\"Close\" and n>score) or (choice==\"Far\" and n<score) then selected=t score=n end\n   end\n  end\n  if count~=2 or not selected then self.used=true return end\n  s.choice=choice s.selected=selected\n  local r=math.sqrt(selected.x^2+selected.z^2)\n  s.stage={x=selected.x/r*(r+4),y=selected.y,z=selected.z/r*(r+4)}\n end\n dest=s.hyper>=2 and s.selected or s.stage\n local phase=s.hyper>=2 and 'Soak tower' or 'Wait outside'\n if s.stageLabel~=phase then\n  AnyoneCore.addTimedWorldText(math.max(1,s.expires-Now()),phase,{x=dest.x,y=dest.y+1,z=dest.z},0xFFFFFFFF,true,1)\n  AnyoneCore.Shotcall(phase,true,2,false)\n  s.stageLabel=phase\n end\nend\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
 							name = "Close-Far Personal Arrow",
 							uuid = "6d1dfcec-1baa-eedf-97ef-c38a75752e92",
 							version = 2.1,
@@ -10040,7 +10091,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif not R or not R.current() or not R.isReady() or not p then self.used=true return end\nlocal slot=R.mySlot()\nif not slot then self.used=true return end\nlocal s=data.ucobFellruinGuide\nif data.ucobFellruinLinks and Now()<data.ucobFellruinLinks.expires then self.used=true return end\nif not s or Now()>=s.expires or not s.nael then self.used=true return end\nlocal nael=TensorCore.mGetEntity(s.nael)\nif not nael then self.used=true return end\nlocal np=nael.pos\nlocal dest\nif s.seq[s.step]==9916 then\n local r=math.sqrt(np.x^2+np.z^2)\n if r<1 then self.used=true return end\n -- Behind Nael, away from middle; tanks move between the party and Bahamut.\n if slot==\"T1\" or slot==\"T2\" then\n  local b=nil\n  for _,e in pairs(EntityList(\"\")) do if e.contentid==3210 then b=e.pos;break end end\n  if not b then self.used=true return end\n  local dx,dz=b.x-np.x,b.z-np.z;local d=math.sqrt(dx^2+dz^2)\n  if d<1 then self.used=true return end\n  dest={x=np.x+dx/d*2,y=np.y,z=np.z+dz/d*2}\n else dest={x=np.x+np.x/r*2,y=np.y,z=np.z+np.z/r*2} end\nelseif s.seq[s.step]==9918 or s.profDone then\n local r=math.sqrt(np.x^2+np.z^2)\n if r<1 then self.used=true return end\n local nx,nz=-np.x/r,-np.z/r\n local rank={T1=0,H1=1,M1=2,R1=3,T2=0,H2=1,M2=2,R2=3}\n local left=slot==\"T1\" or slot==\"H1\" or slot==\"M1\" or slot==\"R1\"\n local angle=math.rad(22.5+rank[slot]*45);local side=left and -1 or 1\n dest={x=8*(nx*math.cos(angle)-side*nz*math.sin(angle)),y=np.y,z=8*(nz*math.cos(angle)+side*nx*math.sin(angle))}\nelse self.used=true return end\nlocal call=s.seq[s.step]==9916 and 'Under Nael' or 'Spread'\nif s.lastCall~=call then AnyoneCore.Shotcall(call,true,3,false);s.lastCall=call end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
+							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif not R or not R.current() or not R.isReady() or not p then self.used=true return end\nlocal slot=R.mySlot()\nif not slot then self.used=true return end\nlocal s=data.ucobFellruinGuide\nif data.ucobFellruinLinks and Now()<data.ucobFellruinLinks.expires then self.used=true return end\nif not s or Now()>=s.expires or not s.nael then self.used=true return end\nlocal nael=TensorCore.mGetEntity(s.nael)\nif not nael then self.used=true return end\nlocal np=nael.pos\nlocal dest\nif s.seq[s.step]==9916 then\n local r=math.sqrt(np.x^2+np.z^2)\n if r<1 then self.used=true return end\n -- Behind Nael, away from middle; tanks move between the party and Bahamut.\n if slot==\"T1\" or slot==\"T2\" then\n  local b=nil\n  for _,e in pairs(EntityList(\"\")) do if e.contentid==3210 then b=e.pos;break end end\n  if not b then self.used=true return end\n  local dx,dz=b.x-np.x,b.z-np.z;local d=math.sqrt(dx^2+dz^2)\n  if d<1 then self.used=true return end\n  dest={x=np.x+dx/d*2,y=np.y,z=np.z+dz/d*2}\n else\n  local candidates={}\n  for i=0,15 do\n   local h=math.pi*2*i/16\n   local q={x=np.x+math.sin(h)*3.5,y=np.y,z=np.z+math.cos(h)*3.5}\n   local clear=true\n   for _,link in pairs(TensorCore.entityList('')) do\n    if link.contentid==2001151 and (q.x-link.pos.x)^2+(q.z-link.pos.z)^2<4.5^2 then clear=false;break end\n   end\n   if clear then candidates[#candidates+1]=q end\n  end\n  local best,score=nil,math.huge\n  for _,q in ipairs(candidates) do local d=(q.x-p.pos.x)^2+(q.z-p.pos.z)^2;if d<score then best=q;score=d end end\n  if not best then self.used=true return end\n  dest=best\n end\nelseif s.seq[s.step]==9918 or s.profDone then\n local r=math.sqrt(np.x^2+np.z^2)\n if r<1 then self.used=true return end\n local nx,nz=-np.x/r,-np.z/r\n local rank={T1=0,H1=1,M1=2,R1=3,T2=0,H2=1,M2=2,R2=3}\n local left=slot==\"T1\" or slot==\"H1\" or slot==\"M1\" or slot==\"R1\"\n local angle=math.rad(22.5+rank[slot]*45);local side=left and -1 or 1\n dest={x=8*(nx*math.cos(angle)-side*nz*math.sin(angle)),y=np.y,z=8*(nz*math.cos(angle)+side*nx*math.sin(angle))}\nelse self.used=true return end\nlocal call=s.seq[s.step]==9916 and 'Under Nael' or 'Spread'\nif s.lastCall~=call then AnyoneCore.Shotcall(call,true,3,false);s.lastCall=call end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
 							name = "Fellruin - Quickmarch Spread and Dynamo",
 							uuid = "c5660c77-9c28-4d54-b0a1-5e1a54686e7f",
 							version = 2.1,
