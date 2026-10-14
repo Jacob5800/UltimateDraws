@@ -16,6 +16,8 @@ TEA: Coming soon by Ton.
 
 ### UCOB: LPDU
 
+- Fellruin regroup guidance uses the Neurolink under Nael; both spreads use personal red/green proximity circles with countdowns instead of assigned spread arrows. Personal Nael spread countdown follows your character. Strengthened transition-to-A capture and delayed P1 double-Hatch position assignment by 0.3 seconds. (14-10-2026)
+
 - Added a small personal Raven's Dive countdown near timeline 294, clarified Blackfire Wait outside/Soak tower guidance, and kept Fellruin IN destinations outside Neurolinks until link soaking is required. (14-10-2026)
 
 - Heavensfall Fireball regroup now follows Bahamut's rear when he reappears, with a Stack behind Bahamut callout. (14-10-2026)
