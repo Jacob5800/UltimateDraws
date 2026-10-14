@@ -8147,7 +8147,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.ucobLPDUDives\nif s and Now()<s.expires then\n local spell=eventArgs.spellID\n if spell>=9931 and spell<=9935 then\n  s.returnCasters=s.returnCasters or {}\n  if not s.returnCasters[eventArgs.entityID] then\n   s.returnCasters[eventArgs.entityID]=true\n   local n=0\n   for _ in pairs(s.returnCasters) do n=n+1 end\n   local order=n==2 and 1 or n==3 and 2 or n==5 and 3 or nil\n   if order then s.returnUntil=s.returnUntil or {};s.returnUntil[order]=Now()+4000 end\n  end\n elseif spell==9920 then\n  s.returnSpreadHits=s.returnSpreadHits or {}\n  for _,id in ipairs(eventArgs.hitTargets) do s.returnSpreadHits[id]=true end\n  local n=0\n  for _ in pairs(s.returnSpreadHits) do n=n+1 end\n  if n>=4 then s.returnSpread=false end\n elseif spell==9918 then s.returnBuster=false\n elseif spell==9917 then s.returnDone=true end\nend\nself.used=true",
+							actionLua = "local s=data.ucobLPDUDives\nif s and Now()<s.expires then\n local spell=eventArgs.spellID\n if spell>=9931 and spell<=9935 then\n  s.returnCasters=s.returnCasters or {}\n  if not s.returnCasters[eventArgs.entityID] then\n   s.returnCasters[eventArgs.entityID]=true\n   local n=0\n   for _ in pairs(s.returnCasters) do n=n+1 end\n   local order=n==2 and 1 or n==3 and 2 or n==5 and 3 or nil\n   if order then s.returnUntil=s.returnUntil or {};s.returnUntil[order]=Now()+4000 end\n  end\n elseif spell==9920 then\n  s.returnSpreadHits=s.returnSpreadHits or {}\n  for _,id in ipairs(eventArgs.hitTargets) do s.returnSpreadHits[id]=true end\n  local n=0\n  for _ in pairs(s.returnSpreadHits) do n=n+1 end\n  if n>=4 then s.returnSpread=false end\n elseif spell==9921 then s.returnBuster=false\n elseif spell==9917 then s.returnDone=true end\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -8180,7 +8180,7 @@ local tbl =
 								9934,
 								9935,
 								9920,
-								9918,
+								9921,
 								9917,
 							},
 							uuid = "f85cedfc-dd72-98c5-9815-1339a44b01fe",
@@ -8353,7 +8353,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "if eventArgs.entityContentID==2612 then\n if eventArgs.isTargetable then data.ucobEraTransition=nil\n else\n  local dives=data.ucobLPDUDives\n  if not data.ucobEraTransition or Now()>=data.ucobEraTransition.expires then data.ucobEraTransition={start=Now(),expires=Now()+9000} end\n end\nend\nself.used=true",
+							actionLua = "if eventArgs.entityContentID==2612 then\n if eventArgs.isTargetable then data.ucobEraTransition=nil\n else\n  local dives=data.ucobLPDUDives\n  local quote=data.ucobBeamTiming\n  if dives and Now()<dives.expires and (dives.locked<3 or dives.returnSpread or dives.returnBuster) then self.used=true return end\n  if quote and quote.dive and Now()<quote.expires and quote.seq[quote.step] then self.used=true return end\n  if not data.ucobEraTransition or Now()>=data.ucobEraTransition.expires then data.ucobEraTransition={start=Now(),expires=Now()+9000} end\n end\nend\nself.used=true",
 							name = "Transition Capture",
 							uuid = "42feded1-9fc9-4a7e-b800-409bc139b5c4",
 							version = 2.1,
