@@ -7,10 +7,32 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "0c5acf11-036b-0b6d-4ed2-ccb7e16bc6a1",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "92a43271-03c3-9dbd-cdb1-2b47622aa4c1",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "ab558951-4d74-6e15-071c-4bdb3be7dac1",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "c83a73bb-c1fd-d6f7-1c58-8c251bbb5eeb",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -1576,17 +1598,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "3fa81c98-b6de-e4dc-0311-63f6ce4068a8",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "[Melee] Feint (Primary)",
 				uuid = "6aca4984-34d8-dcc6-8838-de1836c70ec9",
 				version = 2,
@@ -1660,17 +1671,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "e55087df-c607-6bb3-532f-6f691a0d336f",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "[Ranged] rDPS Mit",
 				uuid = "43e42795-3d77-db2c-8cfc-2565ae4e2ad9",
 				version = 2,
@@ -1728,10 +1728,32 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "168a8f49-c91b-3e15-b424-557fc39b4419",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "9eeff749-8488-1015-aa76-cc8fd0f02c59",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "9b45de89-52da-e98d-873f-c9033349f6b9",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "466ede43-6134-b73f-46ca-4e7d044247f3",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -1824,7 +1846,7 @@ local tbl =
 				uuid = "b0c76152-9c39-ee47-94fd-404cc81c7256",
 				version = 2,
 			},
-			inheritedIndex = 24,
+			inheritedIndex = 21,
 		},
 		
 		{
@@ -1853,7 +1875,7 @@ local tbl =
 				uuid = "10a008fa-c7d3-95d1-b36b-5178829c0108",
 				version = 2,
 			},
-			inheritedIndex = 25,
+			inheritedIndex = 22,
 		},
 	},
 	[10] = 
@@ -1988,10 +2010,32 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "69232694-b0fe-5838-3355-5a766bc383a4",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "c9ee12e4-b6d6-2d38-72e0-40fe3029b034",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "887771aa-6e33-ebd6-8fc6-1ca042ce1c1a",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "b226f62e-d75f-d552-7d18-b0e492c5d7de",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -2084,7 +2128,7 @@ local tbl =
 				uuid = "34831afe-ca25-1810-8b7e-cb329920c8ae",
 				version = 2,
 			},
-			inheritedIndex = 24,
+			inheritedIndex = 13,
 		},
 	},
 	[12] = 
@@ -2094,10 +2138,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "5aac952b-1aaa-467f-8373-65e9795d533b",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "d27b7909-c51c-ab85-b693-45c31c458479",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -2150,10 +2194,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "a2268e7e-931b-68e2-085e-262cc292dece",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "9599686a-963e-5d6e-5275-58480d7e84fa",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "fb58e584-b176-15f0-76bd-ee064383ab34",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -2383,7 +2438,7 @@ local tbl =
 				uuid = "adcd6115-2cc5-5a42-88a7-bf33d0858806",
 				version = 2,
 			},
-			inheritedIndex = 10,
+			inheritedIndex = 9,
 		},
 	},
 	[15] = 
@@ -2522,10 +2577,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "c23f77ff-b317-63ab-0b60-c4bdba5aa54f",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "29fb8d8d-8fdc-5101-2398-d15f7a930bfd",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -2536,10 +2591,31 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "68bda278-e75f-f2dc-9252-84f225e7de68",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "store\\anyone\\fru\\fru",
 				uuid = "3ab09a62-fa91-5cfe-d9b1-74f0f37d8bf2",
 			},
 			inheritanceRoot = "store\\anyone\\fru\\fru",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "store\\anyone\\fru\\fru",
+				name = "anyone\\fru\\modules\\draws",
+				uuid = "1cddd9e1-2edd-cd1b-b233-ef2d29b0ad15",
+			},
 			objectType = "folder",
 		},
 		
@@ -2747,10 +2823,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "614a91e9-41a2-bf3d-7cd5-692b2cc412f9",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "fc137503-3eec-3937-1ed8-4e357ede6293",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "7c9ef3bf-8df7-5f2b-1f2c-512dd65ed42f",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -2771,10 +2858,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "e635522c-0ff3-6f70-c44f-627e3c43f4bc",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "38317f52-2187-d92e-4b7d-5118a1945382",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -2882,10 +2969,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "4419f0ec-12af-6530-d863-18c2943db77c",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "0d4a6a76-7e9f-2b12-b730-bae8656119a6",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -2910,10 +2997,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "b3f037a9-cae8-b0fd-545c-c8dff146a5b9",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "dd22fbdf-3136-29c3-1ad0-db254a2b666f",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "9ab6696d-dbc2-b851-4d23-1aefbd95975d",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 	},
@@ -2924,10 +3022,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "dd8c6d36-8a79-9cba-aeb4-5d987c035c46",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "0b47310e-d947-95f2-e2c6-a670ec5a829e",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "4be06d10-7680-99ec-41ff-db2e59f480c0",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -3674,10 +3783,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "f755c703-3907-dc77-02dd-c145a83251d3",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "f9e698a5-03e8-cb91-ae6f-612bd9411e55",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -3688,10 +3797,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "ba4496b0-9c84-bf6c-0f87-a5de3bd88640",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "63a06822-d631-f426-d4cc-87b40dce5092",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "51e157b6-e471-cd62-8d14-6990d6ec9a66",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 	},
@@ -3702,10 +3822,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "727de27d-0c5b-0629-9545-7a0b70387e0d",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "deda784f-5520-32e3-ad8e-60f9da9f20ff",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -3716,10 +3836,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "320ece3a-35f7-3bb6-db33-d9f45c83718a",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "05df63fc-cac5-5b40-d416-f89a05afbf6c",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -3744,10 +3864,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "e09d0df7-4fc0-9583-7b67-1011ed884387",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "f7b166a1-4a11-f8d5-b7fe-58079317f111",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -3758,10 +3878,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "d6471654-8cb7-b2f8-2edb-61da0bd2dc64",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "bcdbf2ce-7db2-946a-d1ee-17f06ede4ffe",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -3772,10 +3892,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "c5609d71-4983-9025-34ab-e1170dca9541",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "37623f15-085e-4939-fe92-c2677c1cd105",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -4225,17 +4345,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "212fd99f-f5d3-67f3-7ce8-43f5f3fef5ef",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "[Melee] Feint (Primary)",
 				uuid = "bb048ea8-841d-28bc-9970-7fb4c7fb1971",
 				version = 2,
@@ -4281,6 +4390,28 @@ local tbl =
 		{
 			data = 
 			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "bd6c7d9f-42aa-b81b-de4f-6b4d990aeb8f",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "ffcb08f1-7bf1-3965-adbb-29ffd896b161",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
 				name = "towers indicator",
 				uuid = "b0c9e7ab-7c00-d83d-ab4b-27c57ef2df24",
 				version = 2,
@@ -4290,17 +4421,6 @@ local tbl =
 			{
 				enabled = false,
 			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "90869c05-0ec9-3559-fd45-1e4fcfa33595",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
 		},
 		
 		{
@@ -4520,10 +4640,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "e51df158-7ecb-871c-3668-04f2a8322b28",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "e8b76032-aa55-a1de-162d-eb381989be62",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -4534,10 +4654,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "25a738cb-73a1-27a7-04a3-5a815cb5f5db",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "d5ce469d-2766-c9e9-4b45-d11b0dcabaad",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "41d34fd7-18e3-b6e3-a8c0-3f3967da7747",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -4562,10 +4693,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "63248e9e-b450-b5aa-aead-fca42155b4ee",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "9849403e-3459-728a-a828-53a406a09e4e",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "36898de0-efe7-8224-9e2a-966ae861ac50",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -4576,10 +4718,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "4742d6b4-b80e-7160-057d-57ce134e08c4",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "35429788-e920-0e84-a9f1-f62a7f27f098",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "a657df02-25c0-aece-9454-76a0fac879b2",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 	},
@@ -4590,10 +4743,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "5ebada9a-9c19-dfae-a774-d280ea69e5ea",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "fbd8c74a-50a9-e27e-098c-5ae8a9d4b9da",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "99e10fc0-9885-0264-84d3-c362ebfcdcf0",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -4637,34 +4801,6 @@ local tbl =
 			},
 		},
 	},
-	[40] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "6310ab5a-e517-3e86-a211-ccd4594097aa",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-	},
-	[41] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "68e12a97-65b7-2513-912b-53f1189109a7",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-	},
 	[44] = 
 	{
 		
@@ -4672,81 +4808,11 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "4de487d6-bdc3-39ca-0017-9af888d5c066",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "fd6295b8-47b4-83dc-06c1-b70ebf4016a8",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "[Melee] Feint (Secondary)",
-				uuid = "ad4a421c-5376-d97c-82bd-db7d8a9394f1",
-				version = 2,
-			},
-			inheritedObjectUUID = "a7c69905-46e8-9f31-ac34-1b00bdc3f83d",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[SAM] Tengentsu",
-				uuid = "92b5888d-7f0b-4f24-b365-f1a2993bd129",
-				version = 2,
-			},
-			inheritedObjectUUID = "55aada8a-aac1-6489-ada2-44a32c50f81c",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[VPR] Feint (Secondary)",
-				uuid = "c49bad4e-9f99-831b-8271-b7d0ea8cb9fe",
-				version = 2,
-			},
-			inheritedObjectUUID = "376eff99-1f20-4468-b5e8-320b68666f38",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[Caster] Addle (Primary)",
-				uuid = "230dd641-7084-4bd5-b361-03fecd71e639",
-				version = 2,
-			},
-			inheritedObjectUUID = "f282ea3d-7b2b-1ebf-b28f-372aec183fcc",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[RPR] Arcane Crest",
-				uuid = "79950ec8-8ab3-8f39-b7f6-955971a99cb6",
-				version = 2,
-			},
-			inheritedObjectUUID = "a930ab91-fa98-fda0-8b1d-0d1dc4bf8c29",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
 		},
 		
 		{
@@ -5399,10 +5465,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "31c44ba3-bfa0-9fc7-bce3-78259ac349f3",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "36dcc6d1-09bf-28e5-9028-e5bbdea95361",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "b9953531-433c-6f3d-c2ea-a077b0a110e1",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -5418,6 +5495,17 @@ local tbl =
 			{
 				enabled = false,
 			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "813f7a1b-a7ef-57af-391e-27d90897088b",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
+			objectType = "folder",
 		},
 		
 		{
@@ -5762,10 +5850,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "d465c38c-bf9a-7780-aede-f9a223bb691c",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "0cd5d532-cb58-1cee-d945-6a643da83362",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "41610986-2784-6eda-4af0-4c4041d243f6",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 	},
@@ -5776,10 +5875,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "b9cc19c9-41bf-764d-f50e-d83fb3b91759",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "74afdd63-2ae3-dbf7-4541-6e2975c54a73",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "e18af29f-5e1a-11eb-6143-c1e9bd29608f",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -5830,10 +5940,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "8892125f-d46d-713b-7fba-ee298903f2af",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "4a0f156d-e1d4-66c1-1d11-3a83cb16c15d",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -5853,17 +5963,6 @@ local tbl =
 	},
 	[50] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "5dcf1acd-97e0-9329-e701-0fa7d9f7495d",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -6372,10 +6471,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "0126e306-15ff-29ba-f22b-6f1ce5381116",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "8927b502-e65a-6eb6-a141-cf705375b2d2",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "265fe75c-29bd-adf8-1de1-662ed14fc24c",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -6428,10 +6538,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "b11d8d75-a950-f8f1-5773-f8af6fc4f705",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "ded742b7-5c28-6b83-de6f-be01387ef487",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
 			objectType = "folder",
 		},
 		
@@ -6485,10 +6595,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "44c21a88-ba37-71d4-dc10-9ad2c45c4c58",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "c18079f0-487a-8dcc-68e9-0a820bedeb00",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "6087cdae-f931-8ad2-e3b9-7fdc98c1fdde",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -6499,10 +6620,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "bf38c6e5-166d-a721-c394-24e3ae783df5",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "d1213343-3d37-f25f-1fc9-c74188a20fd3",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "cb1571d1-ab63-afed-2d8c-516b734d3ac1",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -6746,10 +6878,32 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "af2b0d62-7c65-d2ee-5e4f-a8cc67f7fef2",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "79329f72-6b5c-278e-5ffd-3d1c40796542",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "b5808e6c-0ce0-7890-c3f0-b5428c71189c",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "3a755998-cbf0-86d4-e345-dc56277f7488",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 	},
@@ -6760,10 +6914,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "dd9d9994-0342-4928-0c69-3b9ae03df6a4",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "1531e8a6-24a0-73a2-42fb-113000e21c96",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "d3c486e2-628e-9e36-ce6a-b0f48b64d412",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -7265,20 +7430,6 @@ local tbl =
 			},
 		},
 	},
-	[65] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "3322c1b1-2ab3-5395-8c2c-03d736335481",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-	},
 	[68] = 
 	{
 		
@@ -7286,10 +7437,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "2c0313f0-1876-fa5c-10d2-ef9ed904cc80",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "86e22724-a45e-d410-6034-f5ba146ff974",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "bcb288ea-7ddb-fe4e-d47d-7df4793b535a",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -7444,10 +7606,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "9875776e-4701-06da-62ad-bd7ce9175abe",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "2ee68218-bf8e-1f8c-54c8-4e52a3e0dd08",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -7577,10 +7739,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "327d4ba1-8c57-7b9d-76a2-57d3c2bb4df1",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "81aaac9b-7e6c-891f-ff21-f2d1e302fb4b",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -7715,10 +7877,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "46c2f815-9dbc-7549-bbf8-4987ee737225",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "32f678b7-fc99-3883-412b-e1150922db27",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -7793,10 +7955,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "1f51eda8-b856-1f0c-2af3-778a31a794f8",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "5c72d34a-00d9-54c6-6757-7d804d6c713a",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "1513684e-b705-2582-acba-2c4458d4127e",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -8053,10 +8226,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "9cb21376-28cb-28aa-7bc1-3858158cad86",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "44d2fa62-41e9-1966-8964-d26ccf15d0b2",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "5ec32a3c-38d0-2c88-6e34-0ff2ba9e3fac",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -8748,10 +8932,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "64106f43-e81b-9aa7-2729-e305962c9413",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "6071dfe1-ed22-049d-ff7a-5c5fb6160051",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "2fb5fd8b-de13-d38f-5643-07b100b320bb",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -8772,10 +8967,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "e8737c37-6a4d-daf3-404d-ccd1f0160ec7",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "f86c29e5-9436-dc99-9274-d0c3f81fee95",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -8786,10 +8981,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "2dac1b7e-dd2b-25d2-7d69-cb104e186bce",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "f9c2e5da-ee65-d58e-c9d1-96046b3ee9ea",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "7f660e94-551d-6290-54eb-2d4acee3c204",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -8932,10 +9138,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "2bb7e319-a981-da5d-ae03-dbfbc8560229",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "663f38df-c4b2-a55b-e755-260db26554cf",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -9127,10 +9333,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "5aba3fb3-8d46-8ed7-c52f-81410bbb9183",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "5b7c0a71-2f2d-95ed-43aa-a87bcb3c4321",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -9325,10 +9531,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "ec10bc26-0d83-c69a-c337-c864f1f237b6",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "61df07d2-9eeb-4416-b0fa-75e09d1dc2a2",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "3bc594f8-551d-e78c-a490-836aa63b33e8",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -9349,10 +9566,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "fe4ac420-5f6a-33cc-ee75-13b2ceaa6130",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "b9645586-30f3-910a-b8b2-7e04e0d546f6",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -9533,10 +9750,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "a178e544-93e6-dd58-3368-4846eaace0d4",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "bbb009ca-4916-3ec6-081a-4700aca9a7ba",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "8e2dd7ce-20d6-9382-339f-bcc4d1ee81fe",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -10030,10 +10258,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "808aa951-0815-fc6d-61fe-1b27e86f19e1",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "4693d753-f491-41cf-f057-0b6d35997843",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 	},
@@ -10044,10 +10272,32 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "fc875c4b-1c46-9567-268e-a72d83a5429b",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "f9d134cb-d9c5-3997-7942-806dff763edb",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "2255e1a7-f193-5b0b-7642-dea5d9af1c17",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "29be4c89-beba-06d5-b9d0-3f07dfa243f9",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -10114,10 +10364,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "3a04b21e-e88c-df6a-a66b-64e0bf3736ae",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "8cb171fe-ad97-f6fa-10e3-e254efbd14ae",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 	},
@@ -10128,10 +10378,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "f7151089-cdc6-2f15-d271-042f31e68c59",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "85321321-830b-8965-eb11-9b4bd7be3751",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -10142,10 +10392,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "7a2d5fd5-5cc8-3be9-700b-e3bf6ca0e725",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "6828f449-825d-554d-7289-d703755ec859",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "39aa7b43-acb2-97e7-3c9c-e4915e6863f3",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 	},
@@ -10156,10 +10417,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "807788e6-362e-4462-8ae1-b2ec591492b6",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "9f241322-1913-dede-adc6-4dac76ff7812",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 	},
@@ -10170,10 +10431,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "92651273-bdbd-21ff-fab7-f9a972ddec83",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "f40cd59d-32d6-c1e9-d2c6-253f87cf7a8d",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -10294,26 +10555,26 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "1e409abf-12de-3efb-3ab3-b739ad028d4f",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "f92dd723-6512-018f-6caa-3ed5abc496f3",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
 			objectType = "folder",
 		},
-	},
-	[121] = 
-	{
 		
 		{
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "d810bc22-e079-468e-ddaa-c8fce62573f2",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "1bc3a3b1-0277-237d-d932-1fff3d4bc4e1",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
+	},
+	[121] = 
+	{
 		
 		{
 			data = 
@@ -10336,10 +10597,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "29495d78-2812-2b64-c570-6dc6c04a4008",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "9914a252-7234-e93e-c2bb-6f206c68f1e2",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
 			objectType = "folder",
 		},
 		
@@ -10355,6 +10616,17 @@ local tbl =
 			{
 				enabled = false,
 			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "ea82c8cc-4484-98e0-3bce-2e7e2fd7c8bc",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
+			objectType = "folder",
 		},
 		
 		{
@@ -11433,10 +11705,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "ba5d1671-6448-03b5-36f5-5507b460c981",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "d894ba35-a371-cb31-4665-4457c980c865",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -11786,10 +12058,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "cb438f54-883e-33c8-a5f0-830a5e6b6ba4",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "ca5485fe-cc9a-f892-5ace-89a47e24c1ce",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
 			objectType = "folder",
 		},
 		
@@ -11820,20 +12092,20 @@ local tbl =
 				enabled = false,
 			},
 		},
-	},
-	[128] = 
-	{
 		
 		{
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "d59986f7-c471-a0d3-5737-a6c1573869c7",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "3bcebba0-0c89-1f0c-d9d1-986a8d658ed0",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
+	},
+	[128] = 
+	{
 		
 		{
 			data = 
@@ -11898,10 +12170,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "ab45e70c-e09b-9b58-2ea5-229691f26edc",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "c82561bc-59db-7810-6513-a632aab3a1ec",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -11940,10 +12212,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "90ac3d49-8c04-4605-3e91-306372189919",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "244842e1-dcb7-c76d-a9a1-6863103cdfb1",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
 			objectType = "folder",
 		},
 		
@@ -11974,20 +12246,20 @@ local tbl =
 				enabled = false,
 			},
 		},
-	},
-	[132] = 
-	{
 		
 		{
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "24c4ab56-380d-af82-d94c-b44c32717226",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "c9d41761-07e1-a3a5-39c8-c39f381bd391",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
+	},
+	[132] = 
+	{
 		
 		{
 			data = 
@@ -12010,10 +12282,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "08a46f23-1cad-839f-48e0-5989a11af5b3",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "d65c670f-c0b7-3f73-11d3-06317fa3037f",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -12038,10 +12310,32 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "c697f450-42c0-80b4-8766-471a44ab7a20",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "8dc464ce-a163-ea22-abb8-f98863dea61e",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "25b327d0-13da-6efc-bc35-8f46fef86340",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "c7df8614-b36e-cb68-fbf8-8102c5050004",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 	},
@@ -12052,10 +12346,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "7f47439d-a528-2fd1-0729-0f57de7e956d",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "94ee812d-fb78-c921-019c-ba8f2605e47d",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "d0a08dc7-3908-3b4b-c3ff-fc7d6fddaab7",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -12105,20 +12410,6 @@ local tbl =
 			},
 		},
 	},
-	[137] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "3fc14e17-2124-e2cb-2364-5addf2af2e67",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-	},
 	[138] = 
 	{
 		
@@ -12126,10 +12417,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "e64946f4-e244-2e10-8bcf-fb1ee7d99b44",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "e8c84614-3d8e-4208-a412-e18a803eef44",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -12336,17 +12627,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "867c7d11-f636-985d-4e52-a54b8fe91ba1",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "[Melee] Feint (Secondary)",
 				uuid = "61f670bb-a087-46b2-a870-bd05d85f11ca",
 				version = 2,
@@ -12388,17 +12668,6 @@ local tbl =
 	},
 	[140] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "57f2e8ed-30ad-bcd1-75b0-c1c3bb1e33bd",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -12496,10 +12765,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "6c2381e7-acaa-6fcb-fe70-71692ed43237",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "21a0d3e3-c8b7-0e4f-680b-3a297958d253",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -12510,10 +12779,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "eb8cec99-1789-d305-fa13-ceb73330d4e9",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "1fdc82b1-9b32-f06d-d94f-d50767c93701",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "d0696c91-e3c3-2ea5-d9e8-7d9bc40f5901",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -13288,17 +13568,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "0b66c25c-6c21-2858-d3eb-f3fab81b952c",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "[SAM] Tengentsu",
 				uuid = "df8dfec5-10c0-a4c4-8976-8e69b14d6f60",
 				version = 2,
@@ -13331,10 +13600,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "1a8f4933-a833-109f-865d-d03daa712543",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "17f09c7f-9c98-ca73-5ad3-532d7b62b6af",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -13345,10 +13614,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "1da31b95-a738-2409-f7d2-74ab1ca496e5",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "8a580a4d-74d6-7d19-5f3f-d35f1f96ee7d",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "3e530eff-641b-c7d3-b6a2-b4b1d9a9fcef",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -13373,10 +13653,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "f6321128-37a4-7ecc-3f4c-6dfe2a79ccb8",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "c2368a38-5a13-3254-cdf9-86f2caebc0e8",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -13401,10 +13681,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "8220aafa-e8ce-9dae-f9c0-0ac04f2b598a",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "801f979a-bdb3-b166-7866-a9144108240a",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -13429,40 +13709,37 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "a84885b7-ad3c-a99b-2e20-028de0302b87",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "b2af7bab-5d6f-f72f-6dd4-60f919825ebb",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
 			objectType = "folder",
 		},
-	},
-	[152] = 
-	{
 		
 		{
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "02e33770-b672-ca84-1a6a-f60a2e806e40",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "6406f707-793e-6d23-a17c-58d9fac41b77",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "154ed169-1194-c61d-6555-e493fa8dc0d9",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 	},
 	[153] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "3492873d-1206-80e1-ab6f-c80762e0660d",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -14170,10 +14447,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "5c871cf6-b565-70d2-5225-3bfc6eab4446",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "2cdc3c1a-9ff0-6726-1554-a97c8a4299ca",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -14251,10 +14528,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "318fe8ac-2cf0-c9e8-39ea-e0c686e59f7c",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "66251246-91d7-2132-6288-0450666c4516",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "5b8f4b1c-2b56-fc58-6f20-cffa4d1e088c",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -14307,10 +14595,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "aca52869-2a50-7355-6619-d653e3ee8db9",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "72452025-7b89-8ff1-764f-f297791439f5",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
 			objectType = "folder",
 		},
 	},
@@ -14321,24 +14609,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "860b30e2-309a-9c66-29e6-694829b80fb2",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "dee5cf02-b802-6bbe-57c3-c4bc0208e8b2",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-	},
-	[161] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "3056330e-8833-cfa2-8b89-dc88350ad19e",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -14349,10 +14623,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "79e6d0c1-9638-4e25-7842-29cf7b90c8d1",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "88b3dcf5-a4aa-cbd9-3105-0003a842fac5",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "b6afb41f-8001-5773-07b4-2d91d613f48f",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 	},
@@ -14363,10 +14648,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "b424f035-6a80-29f1-3744-d7bb626cdf05",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "de3a8a29-4211-0465-f9fa-b02fc2bafdb9",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "316ad5e9-6c18-f9bd-e79f-a823a44b6f99",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -15470,17 +15766,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "d81b2048-7b66-a2d4-807a-634eb7043458",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "[Melee] Feint Usurper (Primary)",
 				uuid = "778d6154-d6f9-f0ed-bb7f-b9324ace0614",
 				version = 2,
@@ -15513,10 +15798,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "144e8d53-85bc-9a77-a496-dccde7cc06e3",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "ed384e83-4924-a9ef-2ab9-4a09cc0dbcf3",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "e4ef32fd-8080-d241-18bb-44c30d353eed",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 	},
@@ -15527,10 +15823,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "e81f97c6-d72e-5aba-2271-de00d7dff916",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "f1786ac6-9136-7c42-5396-b684269bf2f6",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -15650,10 +15946,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "dbe13285-40cf-50c9-cf59-d45f75337f55",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "9584309d-f9a9-ff29-683e-5893434d160d",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -15664,10 +15960,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "87ea9c02-d4e7-bed6-29b1-691800487cd2",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "6e7b144e-464f-694a-7ea2-1330e7775e3e",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -15678,10 +15974,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "6c8a701f-b8c7-82a3-7dda-ccc57babdaaf",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "205476cb-1cd3-0eb7-e7e1-64c59fa2987b",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -15692,10 +15988,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "f5051c51-2f6a-571d-1042-858b5ce98ce1",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "3c990899-ec72-182d-b785-e4efebcd0189",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -15931,10 +16227,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "ae7f251e-ea13-e25a-5630-e57433b1a9ae",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "8abdecba-d332-2c5e-3542-821ca1c8fa2a",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -15959,10 +16255,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "461384dd-369f-9091-afa8-ec97cfc97dad",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "bd0b66ed-d06f-fe91-ffc0-70778ab68f3d",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "dabf7587-a605-17db-0067-36b5506d7877",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -17573,10 +17880,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "746dfb39-e1c2-a6f5-e486-56bf09264a09",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "2c8d8a51-c3e2-2c4d-b4b2-0be7492317a1",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "fed8f7b1-1217-ab05-26cb-cafbc8c60521",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -17592,6 +17910,17 @@ local tbl =
 			{
 				enabled = false,
 			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "59152d9b-e19b-4ee7-c1dd-7bc5ad9dd9cb",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
+			objectType = "folder",
 		},
 		
 		{
@@ -18029,25 +18358,11 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "17650cfc-7567-3408-9e56-78229992a4cc",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "67f04b8c-fe71-1570-6ea0-90bed6f4027c",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "[Draw] Queue CT Debuffs",
-				uuid = "7bcd8f7c-b7f3-5a89-b4b8-2e0b4921d094",
-				version = 2,
-			},
-			inheritedObjectUUID = "40f4679b-e888-e580-acac-d72a0123de05",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
 		},
 		
 		{
@@ -18063,6 +18378,20 @@ local tbl =
 				enabled = false,
 			},
 		},
+		
+		{
+			data = 
+			{
+				name = "[Draw] Queue CT Debuffs",
+				uuid = "7bcd8f7c-b7f3-5a89-b4b8-2e0b4921d094",
+				version = 2,
+			},
+			inheritedObjectUUID = "40f4679b-e888-e580-acac-d72a0123de05",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
 	},
 	[182] = 
 	{
@@ -18071,10 +18400,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "2b59a753-621f-814f-ac5a-f6a5fed720e3",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "26ceb51f-9220-c9d3-ca76-488dafef16cf",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -18085,10 +18414,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "f35fd38d-697d-bd81-32b5-76ebe3aa4b5d",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "0d03e11d-d89a-1181-4e56-a95b2a6215ed",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "80194bf5-dcd7-5081-84f6-c397cafb3725",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -18099,10 +18439,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "90f1eac1-8e74-344d-9bdf-42f7929be2d1",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "5b30dc29-d376-57a5-7d04-5e2f3fb14fb9",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "e92debe9-385e-e5fd-2fdc-92235c0e8599",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -18113,10 +18464,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "1306f84c-138e-c098-eb0a-67562d6e6b1c",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "b542a490-29e6-dce4-aad2-cc6e1bd54d00",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -18137,10 +18488,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "c1208b1a-7462-08de-8cdd-b05062f399aa",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "cd029fa2-29be-a49e-5861-69f409461dd2",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -18210,20 +18561,6 @@ local tbl =
 			},
 		},
 	},
-	[198] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "c58a3f1e-93b5-c4da-ac8f-02f44abcc3ae",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-	},
 	[201] = 
 	{
 		
@@ -18231,10 +18568,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "240f25a3-3818-3a1f-8f83-19e5bc85ac33",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "b73747b3-af82-259f-9cc3-de15845bdb83",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "6b3857a1-82d2-042d-c05c-453facdaf911",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 	},
@@ -18245,10 +18593,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "c6b09d8c-fc06-51d8-7f75-6062ad5d255c",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "a826587c-5bb6-97d0-1d2a-7bbef10cbeac",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -18715,10 +19063,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "555b855a-7a0c-ef1e-ade7-ec94da602eea",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "af915ef6-8cde-a9e2-4a5d-8b84ddd076e6",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -18799,10 +19147,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "5b2c0497-3c8f-994b-036d-14b10e19e4e7",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "64a622ed-a2fb-97e1-3b3a-1bc378446a9d",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 	},
@@ -18813,10 +19161,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "9ab1fa1d-c092-e651-9f71-5b2bf9e94bed",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "9ab427ed-021d-12e1-d243-f25b685f503d",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "2e1f5687-9e13-380b-e542-e779a3cd5977",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -18837,10 +19196,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "bbc59d8b-f566-0357-2dfc-b6bd4cac3edb",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "371c29a7-0659-a30b-7399-b815ee756417",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -19026,7 +19385,7 @@ local tbl =
 				uuid = "90296038-c452-055f-948c-55b40c5ba004",
 				version = 2,
 			},
-			inheritedIndex = 14,
+			inheritedIndex = 10,
 		},
 		
 		{
@@ -19318,17 +19677,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "7411a393-7608-328f-02c7-9ea1aa9ad223",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "[Melee] Feint (Primary)",
 				uuid = "1b7d8fb7-6eda-3967-afb3-ba3dfa555bb4",
 				version = 2,
@@ -19368,34 +19716,6 @@ local tbl =
 			},
 		},
 	},
-	[213] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "f371bd06-6eba-2d32-5ab8-1e44c6bb0e56",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-	},
-	[214] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "5019f4cd-4574-9ac1-3b69-0b6f213da69d",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-	},
 	[215] = 
 	{
 		
@@ -19403,10 +19723,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "cdf4f600-437c-e1e4-d4a6-7192688e5750",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "365e3834-71d2-2ba0-2823-713ac6a7f6e4",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -20117,17 +20437,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "cdfb1e47-2e48-f57b-170d-4b15e1b7b117",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "[Melee] Feint (Secondary)",
 				uuid = "975f6660-fe1c-52f1-ad2e-a1be66d3d917",
 				version = 2,
@@ -20202,10 +20511,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "2b237e01-a7e2-838d-13f9-78b32872e011",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "df548d4d-7ee6-3d69-190b-7ddffd11849d",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
 			objectType = "folder",
 		},
 		
@@ -20254,6 +20563,17 @@ local tbl =
 		{
 			data = 
 			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "47265e05-0e70-4729-01c0-da73e591ae75",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
 				name = "[Draw] Tank Cleave Directions",
 				uuid = "f0fa82f4-91d1-76ac-9070-5f6876e5fc58",
 				version = 2,
@@ -20272,24 +20592,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "d52e2024-7382-8bc0-a54f-f526883fa9f4",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "337fc870-2d8a-54a4-5c4f-1076056427e0",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-	},
-	[220] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "cfe87394-f292-7c80-335a-fe5a19e57ae4",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -20300,10 +20606,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "08ebdb7e-f0bb-3eca-c002-23d0d24c960e",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "f3bca996-b623-079a-46d2-02e464207a86",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -20938,24 +21244,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "bf58d6b8-ca4c-17bc-1e2e-dad67a118348",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "4440c442-43f9-e246-7124-4cc0479d6ed2",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-	},
-	[225] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "b183a0e5-bacc-35f9-020e-9ea3561b5335",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
 			objectType = "folder",
 		},
 	},
@@ -21437,10 +21729,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "2904c4ff-98af-2a13-8a16-6cc94c70cb8f",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "018f086f-907b-702b-74f5-466d10fb5ddf",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -21465,10 +21757,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "4cfa9f2c-5baa-7b08-dce2-b542a25055fc",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "e475e0a8-e9e4-03dc-37bc-063238dfdd98",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -21493,10 +21785,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "c80fdee9-c805-edf5-58dc-655fff594439",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "2483583d-9260-6201-0c71-239f0c8eddad",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -21521,10 +21813,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "878e3867-0e3e-2783-2e19-6dcd4a3ee8b7",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "31a8cba3-ecca-5157-2f02-d10519f9e313",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -21549,10 +21841,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "53d4826a-f474-cdb6-abf4-6f0024170dfa",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "761e0fe6-8036-a56a-1b5c-3b705b6f1096",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -21577,10 +21869,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "735d9f6d-cad8-9829-abfa-9747d688ea3d",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "c6dc0695-1e44-29c9-af0b-efd3999cef45",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -21605,10 +21897,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "d98a8420-5b02-516c-aa1d-314aa4d99a70",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "ed07a300-4e8f-f844-d81a-1156305d9db0",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -21661,10 +21953,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "06f7a319-8966-42fd-5211-1c934e9b8b69",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "43bea8bb-9ff1-deff-3f53-ac81fe2a12eb",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -21738,10 +22030,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "26d178dc-d12c-f730-d171-3606d3864bac",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "895a57ac-f839-fa38-7c4b-5382e6fe0c9c",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -22241,34 +22533,6 @@ local tbl =
 			},
 		},
 	},
-	[240] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "a3555282-f052-7556-1464-43ec1bb33352",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-	},
-	[242] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "4be33e58-76d3-b10c-add6-c036933e8c68",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-	},
 	[243] = 
 	{
 		
@@ -22276,10 +22540,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "f74be905-5c3a-0749-c7a0-1a03909e35d5",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "8e1dcbb5-054c-76d1-b556-20ff7f09d9e5",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -22730,17 +22994,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "8c6c85cb-0b4f-1817-42c8-357d138a6c1b",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "[Melee] Feint (Secondary)",
 				uuid = "8048d2a4-b1ca-2847-a2d6-cc49875da77f",
 				version = 2,
@@ -22787,10 +23040,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "106fd2d1-4ad5-0d9d-b0e7-60f778544361",
+				name = "store\\anyone\\fru\\modules\\core",
+				uuid = "8e6c5f11-d930-2abd-52f8-666f914c3861",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "7a675371-4756-6515-bf06-5863e70f8fe1",
+			},
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -22815,10 +23079,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "4542efd7-6be8-b10b-95aa-f07126a3a827",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "ffd32c1b-073d-5b97-85a6-3e49ed91ab8b",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -22829,26 +23093,15 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "cf8fa6b5-4651-c2f9-f17a-2c9f7dd79585",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "9efcdac1-0d93-31ed-73c1-eb8fe219ba71",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 	},
 	[251] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "f385d6c8-55d1-a4bc-0cda-5882d26eead8",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -23406,10 +23659,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "95518741-003d-084d-f5f1-8bcb96fb7f51",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "0dcc1345-676e-45e9-85ed-cbb3f5d032b5",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -23434,10 +23687,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "9359ce64-7e18-0980-336e-e19e3493d034",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "a48cc1b0-df6f-ee64-441c-49b6590a3420",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -23462,10 +23715,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "7e25e1fb-7e1e-31c7-79f4-d8d112f8324b",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "8e290713-c915-2477-ff33-e5e57fd75d43",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -23490,10 +23743,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "4bc0e98e-7c40-cbca-178d-29b45075881e",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "cf9e3496-0f59-2d0a-c318-ac5040020586",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -23518,10 +23771,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "f7bf700d-db46-9181-aec7-f5d7e809e7dd",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "965ef6b9-fe59-a5f5-9212-5967f5a84fa9",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -23546,10 +23799,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "c35f7840-8551-33a4-2f05-2d9ad4177d90",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "360f2e74-1e2c-1f60-b667-337a14c25d24",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -23574,10 +23827,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "426f6900-800b-8714-b545-ef8edd08ca50",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "ce1599c4-95f0-a0a0-353e-426e9e109f34",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -23644,10 +23897,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "40982b4a-b90e-eefe-fcde-d4645061a4da",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "ffbc46ea-7ce8-7206-6d15-1d289d5b101a",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -24061,33 +24314,8 @@ local tbl =
 			},
 		},
 	},
-	[263] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "42759147-7194-f5ab-fed6-8d4156322417",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-	},
 	[264] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "1a29043c-6f7b-ea38-281c-1fb2c1b6bd0c",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -24103,33 +24331,8 @@ local tbl =
 			},
 		},
 	},
-	[265] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "0aa92279-61a6-b465-2f6a-250fa71d1349",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-	},
 	[266] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "67ec3006-5198-fae2-5d0a-dcc83b358156",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -24173,20 +24376,6 @@ local tbl =
 			},
 		},
 	},
-	[267] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "e88c1693-d927-d87f-3914-acb51f154523",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-	},
 	[268] = 
 	{
 		
@@ -24194,10 +24383,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "ab876788-fd1d-b2ac-6d0f-5446d03aa098",
+				name = "store\\anyone\\fru\\modules\\draws",
+				uuid = "f88a4c6c-51a7-d518-7c5b-e616d11c0c5c",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -24792,17 +24981,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "5e1b1403-37b1-4be7-8ef2-a1b16f17c313",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "[Melee] Feint (Secondary)",
 				uuid = "f4dfcd3b-bbb1-2c15-a8d8-ab9efe1156cc",
 				version = 2,
@@ -24849,17 +25027,19 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\fru",
-				uuid = "4451ba36-03f7-95ea-396d-7994ee77dc86",
+				name = "store\\anyone\\fru\\modules\\optimization",
+				uuid = "6d1b32be-55c9-ba92-f083-56e0e1014b6e",
 			},
-			inheritanceRoot = "store\\anyone\\fru\\fru",
+			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 	},
 	inheritedProfiles = 
 	{
-		"store\\anyone\\fru\\fru",
 		"FRU\\lpdu mits",
+		"store\\anyone\\fru\\modules\\core",
+		"store\\anyone\\fru\\modules\\draws",
+		"store\\anyone\\fru\\modules\\optimization",
 	},
 	timelineName = "fru",
 	version = "1.0.5",
