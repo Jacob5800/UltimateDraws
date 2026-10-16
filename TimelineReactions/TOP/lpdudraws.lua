@@ -823,7 +823,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos or p.localmapid~=1122 then self.used=true return end\nfor _,spot in ipairs({{'N',100,80},{'E',120,100},{'S',100,120},{'W',80,100}}) do\n AnyoneCore.addTimedWorldText(1500,spot[1],{x=spot[2],y=p.pos.y+1,z=spot[3]},0xFFFFFFFF,true,1.8)\nend\nself.used=true\n",
+							actionLua = "local p=TensorCore.mGetPlayer()\nif not p or not p.pos or p.localmapid~=1122 then self.used=true return end\n-- Keep the same fixed compass through replay seeks and repeated pulls.\nif not LPDU_TOP_CompassUntil or Now()>=LPDU_TOP_CompassUntil then\n LPDU_TOP_CompassUntil=Now()+1500000\n for _,spot in ipairs({{'N',100,80},{'E',120,100},{'S',100,120},{'W',80,100}}) do\n  AnyoneCore.addTimedWorldText(1500000,spot[1],{x=spot[2],y=1,z=spot[3]},0xFFFFFFFF,true,1.8)\n end\nend\nself.used=true\n",
 							name = "[Orientation] Arena edge N E S W",
 							uuid = "2df23859-5386-3755-a076-a9c3e2ff0044",
 							version = 2.1,
@@ -834,13 +834,12 @@ local tbl =
 				{
 				},
 				displayPath = "Orientation",
-				loop = true,
 				mechanicTime = 15,
 				name = "[Orientation] Arena edge N E S W",
 				throttleTime = 1500,
 				timeRange = true,
 				timelineIndex = 3,
-				timerEndOffset = 1410,
+				timerEndOffset = -10,
 				timerStartOffset = -15,
 				uuid = "9685a67c-7f1e-fd18-876e-9446cd2f0baa",
 				version = 2,
@@ -946,6 +945,14 @@ local tbl =
 						{
 							aType = "Lua",
 							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nlocal A=TensorCore.API.TensorACR\nlocal lock=S.monitorAutoLock\nlocal function release()\n if lock and lock.owned then\n  A.setHardLockFace(false)\n  A.toggleLockFace(false)\n  lock.owned=false\n end\n S.monitorAutoLock=nil\nend\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.alive or p.localmapid~=1122 or Settings.FFXIVMINION.LPDU_TOP_MonitorAutoFacing~=true then\n release(); self.used=true return\nend\nif lock and lock.owned then\n if Now()>=lock.releaseAt then release() end\n self.used=true return\nend\nlocal plan=S.monitorFacing\nlocal d=S.delta\nlocal ownRight=TensorCore.hasBuff(p,3452)\nlocal ownLeft=TensorCore.hasBuff(p,3453)\nif d and d.monitorDeadline and d.monitorSafe and d.monitorDeadline>Now()-1000 and (ownRight or ownLeft) then\n local beam=math.atan2(d.monitorSafe.x,d.monitorSafe.z)\n plan={key='delta-monitor-'..d.monitorDeadline,deadline=d.monitorDeadline,heading=beam-(ownRight and -math.pi/2 or math.pi/2)}\nend\nif not plan or not (ownRight or ownLeft) or plan.key==S.monitorAutoFinished then self.used=true return end\nlocal remaining=plan.deadline-Now()\nif remaining>1000 or remaining< -200 then self.used=true return end\nlocal R=AnyoneCore.Roster\nif not R or not R.current() then self.used=true return end\nA.setLockFaceHeading(plan.heading)\nA.setHardLockFace(true)\nA.toggleLockFace(true)\nS.monitorAutoLock={owned=true,key=plan.key,deadline=plan.deadline,releaseAt=plan.deadline+2000}\nS.monitorAutoFinished=plan.key\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"f18dc4c7-8af2-104a-ad61-43be4d75aaf9",
+									true,
+								},
+							},
 							name = "[Monitor] Last-second auto-facing",
 							uuid = "bcc39065-7183-8ee0-a7a1-9aa65c09a45d",
 							version = 2.1,
@@ -954,6 +961,17 @@ local tbl =
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.topLpdu\nif not S then return false end\nif S.monitorAutoLock and S.monitorAutoLock.owned then return true end\nif Settings.FFXIVMINION.LPDU_TOP_MonitorAutoFacing~=true then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.alive or p.localmapid~=1122 or not (TensorCore.hasBuff(p,3452) or TensorCore.hasBuff(p,3453)) then return false end\nlocal plan=S.monitorFacing\nif plan and plan.key~=S.monitorAutoFinished and plan.deadline>=Now()-200 and plan.deadline<=Now()+1000 then return true end\nlocal d=S.delta\nreturn d and d.monitorSafe and d.monitorDeadline and d.monitorDeadline>=Now()-200 and d.monitorDeadline<=Now()+1000 or false\n",
+							name = "Monitor deadline or owned release",
+							uuid = "f18dc4c7-8af2-104a-ad61-43be4d75aaf9",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "Monitors",
 				loop = true,
@@ -1091,7 +1109,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1122 then self.used=true return end\nlocal list=MoogleTelegraphs.Settings.aoeIDUserBlacklist\nlist[32362]={label='Solar Ray',source='LPDU Top Reactions'}\nlist[32363]={label='Solar Ray',source='LPDU Top Reactions'}\nlist[31526]={label='Efficient Bladework',source='LPDU Top Reactions'}\nlist[31557]={label='Laser Shower',source='LPDU Top Reactions'}\nlist[31539]={label='Optimized Sagittarius Arrow',source='LPDU Top Reactions'}\nlist[31567]={label='Wave Repeater',source='LPDU Top Reactions'}\nlist[31616]={label='Wave Cannon',source='LPDU Top Reactions'}\nlist[33197]={label='Solar Ray',source='LPDU Top Reactions'}\nlist[31651]={label='Cosmo Arrow',source='LPDU Top Reactions'}\nlist[31525]={label='Beyond Strength',source='LPDU Top Reactions'}\nlist[31533]={label='Optimized Blizzard III',source='LPDU Top Reactions'}\nlist[31631]={label='Rear Lasers',source='LPDU Top Reactions'}\nlist[31609]={label='Diffuse Wave Cannon',source='LPDU Top Reactions'}\nlist[31532]={label='Superliminal Steel',source='LPDU Top Reactions'}\nself.used=true\n",
+							actionLua = "\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1122 then self.used=true return end\nlocal list=MoogleTelegraphs.Settings.aoeIDUserBlacklist\nlist[32362]={label='Solar Ray',source='LPDU Top Reactions'}\nlist[32363]={label='Solar Ray',source='LPDU Top Reactions'}\nlist[31526]={label='Efficient Bladework',source='LPDU Top Reactions'}\nlist[31557]={label='Laser Shower',source='LPDU Top Reactions'}\nlist[31539]={label='Optimized Sagittarius Arrow',source='LPDU Top Reactions'}\nlist[31567]={label='Wave Repeater',source='LPDU Top Reactions'}\nlist[31616]={label='Wave Cannon',source='LPDU Top Reactions'}\nlist[33197]={label='Solar Ray',source='LPDU Top Reactions'}\nlist[31651]={label='Cosmo Arrow',source='LPDU Top Reactions'}\nlist[31525]={label='Beyond Strength',source='LPDU Top Reactions'}\nlist[31533]={label='Optimized Blizzard III',source='LPDU Top Reactions'}\nlist[31631]={label='Rear Lasers',source='LPDU Top Reactions'}\nlist[31609]={label='Diffuse Wave Cannon',source='LPDU Top Reactions'}\nlist[31532]={label='Superliminal Steel',source='LPDU Top Reactions'}\nlist[32368]={label='Flamethrower',source='LPDU Top Reactions'}\nlist[31500]={label='Ballistic Impact',source='LPDU Top Reactions'}\nlist[31521]={label='Action 31521',source='LPDU Top Reactions'}\nlist[31637]={label='Action 31637',source='LPDU Top Reactions'}\nlist[31661]={label='Action 31661',source='LPDU Top Reactions'}\nlist[31663]={label='Action 31663',source='LPDU Top Reactions'}\nself.used=true\n",
 							name = "[Setup] LPDU TOP Moogle blacklist",
 							uuid = "fef53c36-e5b4-130f-84ba-5d6e0b463672",
 							version = 2.1,
@@ -3867,7 +3885,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() then self.used=true return end\nlocal R=AnyoneCore.Roster\nlocal lists={{},{},{}}\nfor slot in string.gmatch('R1 M1 T1 H1 H2 T2 M2 R2','%S+') do\n local e=R.entOf(slot)\n local category=TensorCore.hasBuff(e,3425) and 1 or TensorCore.hasBuff(e,3426) and 2 or 3\n lists[category][#lists[category]+1]=e.id\nend\nS.sniperCircles=S.sniperCircles or {}\nlocal me=TensorCore.mGetPlayer()\nlocal spread=TensorCore.hasBuff(me,3425)\nfor category=1,2 do for _,id in ipairs(lists[category]) do\n local e=TensorCore.mGetEntity(id)\n local safe=category==2 and not spread\n local d=TensorCore.getCachedFlatDrawer(safe and 0x5033FF33 or 0x503333FF,safe and 0x5033FF33 or 0x503333FF,safe and 0x5033FF33 or 0x503333FF,safe and 0xFF33FF33 or 0xFF3333FF,3,0,0)\n local old=S.sniperCircles[id]\n if old and old.safe~=safe then Argus.deleteTimedShape(old.id);S.owned[old.id]=nil;old=nil end\n if e and e.pos and (not old or not d:updateTimedCircle(old.id,1000,e.pos.x,0,e.pos.z,6,0,false,true,0)) then\n  S.sniperCircles[id]={id=S.keep(d:addTimedCircle(1000,e.pos.x,0,e.pos.z,6,0,false,true,0)),safe=safe}\n end\nend end\nif #lists[1]~=4 or #lists[2]~=2 or #lists[3]~=2 then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nlocal angles={[-1]=0}\nfor category,list in ipairs(lists) do\n for rank,id in ipairs(list) do\n  if id==p.id then\n   local angle=category==1 and ({-math.pi/2,-3*math.pi/4,3*math.pi/4,math.pi/2})[rank] or (rank==1 and -math.pi/4 or math.pi/4)\n   S.sniperAngle=angle\n   S.go('sniper',S.polar(angle,19),category==1 and 'Spread here' or 'Pair stack north',10,1)\n  end\n end\nend\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() then self.used=true return end\nlocal R=AnyoneCore.Roster\nlocal lists={{},{},{}}\nfor slot in string.gmatch('R1 M1 T1 H1 H2 T2 M2 R2','%S+') do\n local e=R.entOf(slot)\n local category=TensorCore.hasBuff(e,3425) and 1 or TensorCore.hasBuff(e,3426) and 2 or 3\n lists[category][#lists[category]+1]=e.id\nend\nS.sniperCircles=S.sniperCircles or {}\nlocal me=TensorCore.mGetPlayer()\nlocal spread=TensorCore.hasBuff(me,3425)\nlocal assignedStack\nfor rank,id in ipairs(lists[2]) do if id==me.id then assignedStack=id end end\nfor rank,id in ipairs(lists[3]) do if id==me.id then assignedStack=lists[2][rank] end end\nfor category=1,2 do for _,id in ipairs(lists[category]) do\n local e=TensorCore.mGetEntity(id)\n local safe=category==2 and id==assignedStack\n local d=TensorCore.getCachedFlatDrawer(safe and 0x5033FF33 or 0x503333FF,safe and 0x5033FF33 or 0x503333FF,safe and 0x5033FF33 or 0x503333FF,safe and 0xFF33FF33 or 0xFF3333FF,3,0,0)\n local old=S.sniperCircles[id]\n if old and old.safe~=safe then Argus.deleteTimedShape(old.id);S.owned[old.id]=nil;old=nil end\n if e and e.pos and (not old or not d:updateTimedCircle(old.id,1000,e.pos.x,0,e.pos.z,6,0,false,true,0)) then\n  S.sniperCircles[id]={id=S.keep(d:addTimedCircle(1000,e.pos.x,0,e.pos.z,6,0,false,true,0)),safe=safe}\n end\nend end\nif #lists[1]~=4 or #lists[2]~=2 or #lists[3]~=2 then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nlocal angles={[-1]=0}\nfor category,list in ipairs(lists) do\n for rank,id in ipairs(list) do\n  if id==p.id then\n   local angle=category==1 and ({-math.pi/2,-3*math.pi/4,3*math.pi/4,math.pi/2})[rank] or (rank==1 and -math.pi/4 or math.pi/4)\n   S.sniperAngle=angle\n   S.go('sniper',S.polar(angle,19),category==1 and 'Spread here' or 'Pair stack north',10,1)\n  end\n end\nend\nself.used=true\n",
 							name = "[P3] Personal transition spread or pair",
 							uuid = "06a68062-9828-2424-ba07-01f5955041b4",
 							version = 2.1,
@@ -4867,7 +4885,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() or not S.p4 or not S.goal then self.used=true return end\nlocal key=S.goal.key\nlocal protean=string.find(key,'p4%-protean%-')\nlocal stack=string.find(key,'p4%-stack%-')\nif not protean and not stack then self.used=true return end\nlocal d=TensorCore.getCachedFlatDrawer(0x5033FF33,0x5033FF33,0x5033FF33,0xFF33FF33,3,0,0)\nS.p4LaneDraws=S.p4LaneDraws or {}\nlocal targets={}\nif protean then local p=TensorCore.mGetPlayer();targets[p.id]=p\nelse for id in pairs(S.p4.targets)do local e=TensorCore.mGetEntity(id);if e then targets[id]=e end end end\nlocal active={}\nfor id,e in pairs(targets) do\n local h=math.atan2(e.pos.x-100,e.pos.z-100)\n local name=key..':'..id;active[name]=true\n local old=S.p4LaneDraws[name]\n if not old or not d:updateTimedRect(old,1000,100,0,100,100,6,h,0,false,true,0) then\n  S.p4LaneDraws[name]=S.keep(d:addTimedRect(1000,100,0,100,100,6,h,0,false,true,0))\n end\nend\nfor name,id in pairs(S.p4LaneDraws) do if not active[name]then Argus.deleteTimedShape(id);S.owned[id]=nil;S.p4LaneDraws[name]=nil end end\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() or not S.p4 or not S.goal then self.used=true return end\nlocal key=S.goal.key\nlocal protean=string.find(key,'p4%-protean%-')\nlocal stack=string.find(key,'p4%-stack%-')\nif not protean and not stack then self.used=true return end\nlocal good=TensorCore.getCachedFlatDrawer(0x5033FF33,0x5033FF33,0x5033FF33,0xFF33FF33,3,0,0)\nlocal bad=TensorCore.getCachedFlatDrawer(0x503333FF,0x503333FF,0x503333FF,0xFF3333FF,3,0,0)\nS.p4LaneDraws=S.p4LaneDraws or {}\nlocal targets={}\nif protean then local p=TensorCore.mGetPlayer();targets[p.id]=p\nelse for id in pairs(S.p4.targets)do local e=TensorCore.mGetEntity(id);if e then targets[id]=e end end end\nlocal active={}\nfor id,e in pairs(targets) do\n local h=math.atan2(e.pos.x-100,e.pos.z-100)\n local safe=protean or (S.p4.stackWest~=nil and ((e.pos.x<100)==S.p4.stackWest))\n local d=safe and good or bad\n local name=key..':'..id..':'..tostring(not not safe);active[name]=true\n local old=S.p4LaneDraws[name]\n if not old or not d:updateTimedRect(old,1000,100,0,100,100,6,h,0,false,true,0) then\n  S.p4LaneDraws[name]=S.keep(d:addTimedRect(1000,100,0,100,100,6,h,0,false,true,0))\n end\nend\nfor name,id in pairs(S.p4LaneDraws) do if not active[name]then Argus.deleteTimedShape(id);S.owned[id]=nil;S.p4LaneDraws[name]=nil end end\nself.used=true\n",
 							name = "[P4] Personal protean and both stack lanes",
 							uuid = "6cdad62f-c221-6e97-b7e9-b764eddf86fa",
 							version = 2.1,
