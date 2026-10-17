@@ -10,6 +10,8 @@ UCOB: LPDU (Beta) Supports ranged/melee
 
 FRU: LPDU
 
+TOP: LPDU 
+
 TEA: Coming soon by Ton.
 
 ## Changelog
