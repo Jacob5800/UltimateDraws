@@ -209,6 +209,59 @@ local tbl =
 		{
 			data = 
 			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "if AnyoneCore and AnyoneCore.Settings and AnyoneCore.Settings.DutyHelper then\n    AnyoneCore.Settings.DutyHelper.enabled = false\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"f9b3d3e9-ae0b-a852-911a-0f526b6c83c5",
+									true,
+								},
+							},
+							name = "Disable Duty Helper",
+							uuid = "320bd57e-c3b9-c871-9492-dcb7bf99c4fb",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return AnyoneCore~=nil and AnyoneCore.Settings~=nil and AnyoneCore.Settings.DutyHelper~=nil",
+							dequeueIfLuaFalse = true,
+							name = "Duty Helper loaded",
+							uuid = "f9b3d3e9-ae0b-a852-911a-0f526b6c83c5",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Core",
+				mechanicTime = 15,
+				name = "[Start] Disable Duty Helper once",
+				throttleTime = 1000,
+				timeRange = true,
+				timelineIndex = 3,
+				timerEndOffset = -10,
+				timerStartOffset = -15,
+				uuid = "dde031f4-60b3-5ca8-80fd-8ab5968bfdcd",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "P1",
 				uuid = "2b89b28e-2dee-0496-b123-579119973ffc",

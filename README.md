@@ -18,6 +18,8 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- Duty Helper now disables once at encounter start, during the opening five seconds, without repeatedly running throughout the fight. (17-10-2026)
+
 - Added the LPDU mitigation profile with assigned DPS Feint, Addle, ranged party mitigation, Dismantle and Magick Barrier timings, plus Rampart and tank short cooldowns with assigned support targets. Uses AnyoneCore Party Roster roles. (17-10-2026)
 - Added job-appropriate potions for the P1 opener, P3 reopener, post-Delta reopener and P6 reopener. Mitigation and potion cast timing still needs replay confirmation. (17-10-2026)
 
