@@ -463,6 +463,110 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "data.uwuAttackMarkersPending=true;data.uwuAttackMarkersCleared=nil\nself.used=true",
+							name = "[LPDU] Queue Attack 1-3 cleanup on wipe",
+							uuid = "6e4b521d-1a8a-39db-83b9-1b51d2e51ca8",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 9,
+				mechanicTime = 9,
+				name = "[LPDU] Queue Attack 1-3 cleanup on wipe",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 2000,
+				timerStartOffset = -9,
+				uuid = "cb5e67fe-4da6-88f8-846e-d73ddbea7721",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "SendTextCommand('/mk off <attack1>')\nSendTextCommand('/mk off <attack2>')\nSendTextCommand('/mk off <attack3>')\ndata.uwuAttackMarkersPending=nil;data.uwuAttackMarkersCleared=true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"76be9a1e-94cf-5f46-b5b5-9d539d158df2",
+									true,
+								},
+								
+								{
+									"df8dd9f0-a003-0e6f-a955-7e7b9020364d",
+									true,
+								},
+							},
+							name = "[LPDU] Clear Attack 1-3 when alive",
+							uuid = "d4c14ed1-86a8-b721-985d-0d51adc8dd0b",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 2,
+							dequeueIfLuaFalse = true,
+							hpType = 2,
+							hpValue = 1,
+							uuid = "76be9a1e-94cf-5f46-b5b5-9d539d158df2",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return data.uwuAttackMarkersPending==true or data.uwuAttackMarkersCleared~=true",
+							dequeueIfLuaFalse = true,
+							name = "Wipe pending or fresh pull",
+							uuid = "df8dd9f0-a003-0e6f-a955-7e7b9020364d",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				mechanicTime = 9,
+				name = "[LPDU] Clear Attack 1-3 when alive",
+				throttleTime = 250,
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 6,
+				timerStartOffset = -9,
+				uuid = "a4834950-4143-c21e-a1af-5fd283e4710b",
+				version = 2,
+			},
+		},
 	},
 	[3] = 
 	{
