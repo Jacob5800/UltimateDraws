@@ -4951,6 +4951,60 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.topLpdu\nif not S or not S.hw or not S.ready() then self.used=true return end\nlocal hw=S.hw;hw.finalDangerCircles=hw.finalDangerCircles or {}\nlocal circles=hw.finalDangerCircles;local active={}\nfor _,slot in ipairs({'T1','T2','H1','H2','M1','M2','R1','R2'}) do\n local e=AnyoneCore.Roster.entOf(slot)\n if e and e.alive then\n  local b=TensorCore.getBuff(e,3529) or TensorCore.getBuff(e,3530)\n  if b and b.duration>0 then\n   active[e.id]=true;local ms=b.duration*1000;local h=circles[e.id]\n   if not h or not S.red:updateTimedCircleOnEnt(h,ms,e.id,5,0,false,true,S.flags) then\n    if h then S.owned[h]=nil end\n    h=S.red:addTimedCircleOnEnt(ms,e.id,5,0,false,true,S.flags)\n    if h then S.keep(h);circles[e.id]=h end\n   end\n  end\n end\nend\nfor id,h in pairs(circles) do\n if not active[id] then Argus.deleteTimedShape(h);S.owned[h]=nil;circles[id]=nil end\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"b00c7c87-2587-a92d-bd0f-04fa352daf44",
+									true,
+								},
+							},
+							name = "Show unresolved tether explosions",
+							uuid = "bab7a392-a56b-5d79-811a-2caa8aa3249c",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.topLpdu;return S~=nil and S.hw~=nil and S.hw.wave==4 and S.hw.resolved~=nil",
+							dequeueIfLuaFalse = true,
+							name = "Final towers resolved",
+							uuid = "b00c7c87-2587-a92d-bd0f-04fa352daf44",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "P3\\Hello World",
+				loop = true,
+				mechanicTime = 441.3,
+				name = "[P3] Final tether explosion circles",
+				throttleTime = 250,
+				timeRange = true,
+				timelineIndex = 76,
+				timerEndOffset = 110,
+				timerStartOffset = 70,
+				uuid = "abdad240-4291-cf31-a2e4-2e8d2a667584",
+				version = 2,
+			},
+		},
 	},
 	[89] = 
 	{
