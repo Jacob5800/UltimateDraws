@@ -18,6 +18,8 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- Moved the Hello World opening clock spread one yalm farther from centre, from 8 to 9 yalms. (18-10-2026)
+
 - Improved early Sigma lineup guidance to stage on the assigned side behind the initial laser before the middle clears; final bounce positions remain restored. Reduced the green-square dodge call to once per sequence and added the assigned waymark to the meteor middle call. (18-10-2026)
 - Added 5-yalm circles on players with unresolved tether explosions during the final Hello World spread/finish-tethers stage. Circles clear as each debuff resolves. (18-10-2026)
 

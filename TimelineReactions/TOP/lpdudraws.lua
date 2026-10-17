@@ -4490,7 +4490,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() then self.used=true return end\nlocal slot=AnyoneCore.Roster.mySlot()\nlocal degrees={T1=0,T2=45,H2=90,R2=135,M2=180,M1=225,R1=270,H1=315}\nlocal a=degrees[slot]\nif a then\n local seconds=math.max(.1,440.8-TensorReactions_CurrentTimer)\n S.go('hw-precast-clock',S.polar(math.rad(a),8),'Loose clock spread for Hello World',seconds,.8)\nend\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() then self.used=true return end\nlocal slot=AnyoneCore.Roster.mySlot()\nlocal degrees={T1=0,T2=45,H2=90,R2=135,M2=180,M1=225,R1=270,H1=315}\nlocal a=degrees[slot]\nif a then\n local seconds=math.max(.1,440.8-TensorReactions_CurrentTimer)\n S.go('hw-precast-clock',S.polar(math.rad(a),9),'Loose clock spread for Hello World',seconds,.8)\nend\nself.used=true\n",
 							conditions = 
 							{
 								
