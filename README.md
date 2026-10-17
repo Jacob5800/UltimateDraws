@@ -18,6 +18,9 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- Reduced repeated setup and completed-position work, with mechanic-state gates that preserve active draw cleanup. Fixed early Sigma staging being blocked by a later AoE, added nearby Omega dodge candidates and cleared personal bounce arrows after the hit. (18-10-2026)
+- Added Program Loop guidance to clear outer positions after assignments, progressive Pantokrator cone fills, stronger tank danger circles during both Cosmo Dives, and removed the repeated knockback call while retaining its draw. (18-10-2026)
+
 - Brought the first P4 protean positioning arrow forward to timeline 610, retaining the assigned positions and keeping guidance until the existing mechanic handoff. (18-10-2026)
 
 - Moved the Hello World opening clock spread one yalm farther from centre, from 8 to 9 yalms. (18-10-2026)
