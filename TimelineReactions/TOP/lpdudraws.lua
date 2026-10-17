@@ -8236,7 +8236,15 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() then self.used=true return end\nlocal phase='sigma'\nlocal stage=phase=='sigma' and 1 or S.omega and S.omega.stage or 0\nif stage==0 then self.used=true return end\nlocal key=phase..stage\nlocal b=S.p5BounceCircles\nif not b or b.key~=key then\n if b then for _,s in pairs(b.draws)do Argus.deleteTimedShape(s.id);S.owned[s.id]=nil end end\n b={key=key,draws={},nearDone=0,farDone=0};S.p5BounceCircles=b\nend\nlocal party={}\nfor _,slot in ipairs({'T1','T2','H1','H2','M1','M2','R1','R2'})do\n local e=AnyoneCore.Roster.entOf(slot);party[#party+1]=e\n if phase=='sigma' or TensorCore.hasBuff(e,stage==1 and 3004 or 3005) then\n  for _,kind in ipairs({'near','far'})do\n   local buff=TensorCore.getBuff(e,kind=='near' and 3442 or 3443)\n   if not b[kind] and buff and buff.duration>0 then b[kind]=e.id;b.deadline=Now()+buff.duration*1000 end\n  end\n end\nend\nif not b.deadline then self.used=true return end\nlocal active={}\nlocal function circle(id,radius,activation)\n if activation>=Now()-150 then\n  local old=active[id]\n  if not old or radius>old.radius then active[id]={radius=radius,deadline=activation+250}end\n end\nend\nfor _,kind in ipairs({'near','far'})do\n local count=b[kind..'Done'];local start=b[kind] and TensorCore.mGetEntity(b[kind])\n if start and count<3 then\n  if count==0 then circle(start.id,8,b.deadline)end\n  for order=math.max(1,count),2 do\n   local target,distance\n   for _,e in ipairs(party)do if e.id~=start.id and e.alive then\n    local d=TensorCore.getDistance2d(e.pos,start.pos)\n    if not distance or kind=='near' and d<distance or kind=='far' and d>distance then target=e;distance=d end\n   end end\n   if target then circle(target.id,4,b.deadline+order*1000);start=target else break end\n  end\n end\nend\nlocal drawer=TensorCore.getCachedFlatDrawer(0x80202080,0x80202080,0x80202080,0xFF1010CC,3,0,0)\nfor id,s in pairs(b.draws)do\n if not active[id] or active[id].radius~=s.radius then Argus.deleteTimedShape(s.id);S.owned[s.id]=nil;b.draws[id]=nil end\nend\nfor id,a in pairs(active)do\n local old=b.draws[id]\n if not old or Now()>=old.expires then\n  local ms=math.max(100,a.deadline-Now())\n  b.draws[id]={id=S.keep(drawer:addTimedCircleOnEnt(ms,id,a.radius,0,false,true,0)),radius=a.radius,expires=Now()+ms}\n end\nend\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nlocal b=S and S.p5BounceCircles\nif b then\n for _,shape in pairs(b.draws or {})do Argus.deleteTimedShape(shape.id);S.owned[shape.id]=nil end\n b.draws={}\nend\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"fb181491-4216-f4e2-b43f-f12bc40f58d3",
+									true,
+								},
+							},
 							name = "[P5 Sigma] Predicted near and far bounce circles",
 							uuid = "2bd5fa91-50ce-b953-9a60-842640f26abf",
 							version = 2.1,
@@ -8245,6 +8253,17 @@ local tbl =
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.topLpdu;local b=S and S.p5BounceCircles;return b and b.draws and next(b.draws) or false",
+							name = "Remove previous bounce circles",
+							uuid = "fb181491-4216-f4e2-b43f-f12bc40f58d3",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "P5\\Sigma",
 				loop = true,
@@ -8301,6 +8320,7 @@ local tbl =
 					},
 				},
 				displayPath = "P5\\Sigma",
+				enabled = false,
 				eventType = 2,
 				loop = true,
 				mechanicTime = 870.6,
@@ -8882,7 +8902,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nlocal W=S.weapon\nif not W or not S.ready() then self.used=true return end\nlocal entries=W.active('omega')\nif #entries<2 and 'omega'~='sigma' then self.used=true return end\nif #entries==0 then self.used=true return end\nlocal key='weapon-omega-'..entries[1].deadline\nif S.issued[key] then self.used=true return end\nfor _,e in ipairs(entries) do if not e.drawn then e.drawn=true;W.draw(e) end end\nlocal p=TensorCore.mGetPlayer()\nlocal best,score\nlocal preferred=p.pos\n-- Omega EU uses cardinal close/mid/far spots; P2 preserves the player's side.\nfor cardinal=0,3 do for _,radius in ipairs({3.5,10.5,17.5}) do\n local pos=S.polar(cardinal*math.pi/2,radius)\n local ok=not W.unsafe(pos.x,pos.z,entries,.8)\n if 'omega'=='p2' then\n  local ps=S.ps\n  local peer\n  if ps then for id,n in pairs(ps.marks) do if id~=p.id and n==ps.marks[p.id] then peer=TensorCore.mGetEntity(id);break end end end\n  if peer then\n   local distance=TensorCore.getDistance2d(pos,peer.pos)\n   ok=ok and (ps.glitch=='remote' and distance>=34 or ps.glitch=='mid' and distance>=20 and distance<=26)\n  end\n end\n local rank='omega'=='omega' and (radius*10+cardinal) or TensorCore.getDistance2d(p.pos,pos)\n if ok and (not score or rank<score) then best=pos;score=rank end\nend end\nlocal message='Go to safe spot'\nlocal holder=false\nfor _,content in ipairs({12257,12258}) do for _,boss in pairs(TensorCore.entityList('contentid='..content)) do\n if Argus.getEntityModel(boss)==15720 and boss.targetable and boss.alive and boss.targetid==p.id then holder=true;break end\nend end\nif best and holder then\n local opposite={x=200-best.x,y=0,z=200-best.z}\n local safe=not W.unsafe(opposite.x,opposite.z,entries,.8)\n if safe then\n  local escaped=not W.unsafe(p.pos.x,p.pos.z,entries,.8)\n  for i=1,80 do\n   local t=i/80\n   local clear=not W.unsafe(p.pos.x+(opposite.x-p.pos.x)*t,p.pos.z+(opposite.z-p.pos.z)*t,entries,.8)\n   if escaped and not clear then safe=false;break end\n   escaped=escaped or clear\n  end\n end\n if safe then best=opposite;message='Opposite party, keep boss facing away' end\nend\nif best then S.go(key,best,message,math.max(.2,(entries[1].deadline-Now())/1000+.2),.8) end\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nlocal W=S.weapon\nif not W or not S.ready() then self.used=true return end\nlocal entries=W.active('omega')\nif #entries<2 and 'omega'~='sigma' then self.used=true return end\nif #entries==0 then self.used=true return end\nlocal key='weapon-omega-'..entries[1].deadline\nif S.issued[key] then self.used=true return end\nfor _,e in ipairs(entries) do if not e.drawn then e.drawn=true;W.draw(e) end end\nlocal p=TensorCore.mGetPlayer()\nlocal best,score\nlocal function reachable(pos)\n local escaped=not W.unsafe(p.pos.x,p.pos.z,entries,.8)\n for i=1,80 do\n  local f=i/80\n  local clear=not W.unsafe(p.pos.x+(pos.x-p.pos.x)*f,p.pos.z+(pos.z-p.pos.z)*f,entries,.8)\n  if escaped and not clear then return false end\n  escaped=escaped or clear\n end\n return escaped\nend\n-- Keep the established valid cardinal spots, ranked by movement from the player.\nfor cardinal=0,3 do for _,radius in ipairs({3.5,10.5,17.5})do\n local pos=S.polar(cardinal*math.pi/2,radius)\n local distance=TensorCore.getDistance2d(p.pos,pos)\n if (not score or distance<score) and not W.unsafe(pos.x,pos.z,entries,.8) and reachable(pos)then best=pos;score=distance end\nend end\nlocal message='Go to nearest safe spot'\nif best then S.go(key,best,message,math.max(.2,(entries[1].deadline-Now())/1000+.2),.8) end\nself.used=true\n",
 							name = "[Weapon] omega safe position",
 							uuid = "b9799bc7-269c-5c04-97e0-dc266695acb3",
 							version = 2.1,
@@ -9140,7 +9160,15 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() then self.used=true return end\nlocal phase='omega'\nlocal stage=phase=='sigma' and 1 or S.omega and S.omega.stage or 0\nif stage==0 then self.used=true return end\nlocal key=phase..stage\nlocal b=S.p5BounceCircles\nif not b or b.key~=key then\n if b then for _,s in pairs(b.draws)do Argus.deleteTimedShape(s.id);S.owned[s.id]=nil end end\n b={key=key,draws={},nearDone=0,farDone=0};S.p5BounceCircles=b\nend\nlocal party={}\nfor _,slot in ipairs({'T1','T2','H1','H2','M1','M2','R1','R2'})do\n local e=AnyoneCore.Roster.entOf(slot);party[#party+1]=e\n if phase=='sigma' or TensorCore.hasBuff(e,stage==1 and 3004 or 3005) then\n  for _,kind in ipairs({'near','far'})do\n   local buff=TensorCore.getBuff(e,kind=='near' and 3442 or 3443)\n   if not b[kind] and buff and buff.duration>0 then b[kind]=e.id;b.deadline=Now()+buff.duration*1000 end\n  end\n end\nend\nif not b.deadline then self.used=true return end\nlocal active={}\nlocal function circle(id,radius,activation)\n if activation>=Now()-150 then\n  local old=active[id]\n  if not old or radius>old.radius then active[id]={radius=radius,deadline=activation+250}end\n end\nend\nfor _,kind in ipairs({'near','far'})do\n local count=b[kind..'Done'];local start=b[kind] and TensorCore.mGetEntity(b[kind])\n if start and count<3 then\n  if count==0 then circle(start.id,8,b.deadline)end\n  for order=math.max(1,count),2 do\n   local target,distance\n   for _,e in ipairs(party)do if e.id~=start.id and e.alive then\n    local d=TensorCore.getDistance2d(e.pos,start.pos)\n    if not distance or kind=='near' and d<distance or kind=='far' and d>distance then target=e;distance=d end\n   end end\n   if target then circle(target.id,4,b.deadline+order*1000);start=target else break end\n  end\n end\nend\nlocal drawer=TensorCore.getCachedFlatDrawer(0x80202080,0x80202080,0x80202080,0xFF1010CC,3,0,0)\nfor id,s in pairs(b.draws)do\n if not active[id] or active[id].radius~=s.radius then Argus.deleteTimedShape(s.id);S.owned[s.id]=nil;b.draws[id]=nil end\nend\nfor id,a in pairs(active)do\n local old=b.draws[id]\n if not old or Now()>=old.expires then\n  local ms=math.max(100,a.deadline-Now())\n  b.draws[id]={id=S.keep(drawer:addTimedCircleOnEnt(ms,id,a.radius,0,false,true,0)),radius=a.radius,expires=Now()+ms}\n end\nend\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nlocal b=S and S.p5BounceCircles\nif b then\n for _,shape in pairs(b.draws or {})do Argus.deleteTimedShape(shape.id);S.owned[shape.id]=nil end\n b.draws={}\nend\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"43992b8c-d0f0-50fd-a2d0-b1898d68cc7a",
+									true,
+								},
+							},
 							name = "[P5 Omega] Predicted near and far bounce circles",
 							uuid = "4788149d-e32b-e388-b30e-d508a4b71c52",
 							version = 2.1,
@@ -9149,6 +9177,17 @@ local tbl =
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.topLpdu;local b=S and S.p5BounceCircles;return b and b.draws and next(b.draws) or false",
+							name = "Remove previous bounce circles",
+							uuid = "43992b8c-d0f0-50fd-a2d0-b1898d68cc7a",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "P5\\Omega",
 				loop = true,
@@ -9205,6 +9244,7 @@ local tbl =
 					},
 				},
 				displayPath = "P5\\Omega",
+				enabled = false,
 				eventType = 2,
 				loop = true,
 				mechanicTime = 945.8,
@@ -9739,7 +9779,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() then self.used=true return end\nlocal R=AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nlocal good=TensorCore.getCachedFlatDrawer(0x5033FF33,0x5033FF33,0x5033FF33,0xFF33FF33,3,0,0)\nlocal bad=TensorCore.getCachedFlatDrawer(0x503333FF,0x503333FF,0x503333FF,0xFF3333FF,3,0,0)\nlocal tank=R.mySlot()=='T1' or R.mySlot()=='T2'\nlocal dive=S.p6DiveShape\nif dive and dive.deadline>Now() then\n local boss=TensorCore.mGetEntity(dive.source)\n if boss and boss.pos then\n  local party={}\n  for _,role in ipairs({'T1','T2','H1','H2','M1','M2','R1','R2'}) do\n   local e=R.entOf(role);party[#party+1]={e=e,d=TensorCore.getDistance2d(e.pos,boss.pos)}\n  end\n  table.sort(party,function(a,b)return a.d<b.d end)\n  dive.draws=dive.draws or {}\n  local active={}\n  for _,i in ipairs({1,2,8}) do\n   local e=party[i].e;active[e.id]=true\n   local radius=i==8 and 6 or 8\n   local safe=i==8 and not tank\n   local drawer=safe and good or bad\n   local old=dive.draws[e.id]\n   if old and old.safe~=safe then Argus.deleteTimedShape(old.id);S.owned[old.id]=nil;old=nil end\n   if not old or not drawer:updateTimedCircle(old.id,1500,e.pos.x,0,e.pos.z,radius,0,false,true,0) then\n    dive.draws[e.id]={id=S.keep(drawer:addTimedCircle(1500,e.pos.x,0,e.pos.z,radius,0,false,true,0)),safe=safe}\n   end\n  end\n  for id,shape in pairs(dive.draws) do if not active[id] then Argus.deleteTimedShape(shape.id);S.owned[shape.id]=nil;dive.draws[id]=nil end end\n end\nend\nlocal wild=S.p6WildShape\nif wild and wild.deadline>Now() and Now()>=wild.ready then\n local boss=TensorCore.mGetEntity(wild.source)\n if boss and boss.pos then\n  local x,z=0,0\n  for _,role in ipairs({'H1','H2','M1','M2','R1','R2'}) do local e=R.entOf(role);x=x+e.pos.x;z=z+e.pos.z end\n  x,z=x/6,z/6\n  local h=math.atan2(x-boss.pos.x,z-boss.pos.z)\n  local front=math.huge\n  for _,role in ipairs({'H1','H2','M1','M2','R1','R2'})do\n   local e=R.entOf(role)\n   front=math.min(front,(e.pos.x-boss.pos.x)*math.sin(h)+(e.pos.z-boss.pos.z)*math.cos(h))\n  end\n  local safe=true\n  for _,role in ipairs({'T1','T2'})do\n   local e=R.entOf(role)\n   local vx,vz=e.pos.x-boss.pos.x,e.pos.z-boss.pos.z\n   local forward=vx*math.sin(h)+vz*math.cos(h)\n   local across=vx*math.cos(h)-vz*math.sin(h)\n   if not e.alive or forward<0 or forward>=front-.5 or math.abs(across)>=4 then safe=false end\n  end\n  if wild.draw and wild.safe~=safe then Argus.deleteTimedShape(wild.draw);S.owned[wild.draw]=nil;wild.draw=nil end\n  local drawer=safe and good or bad\n  local geom=wild.geometry\n  local moved=not geom or (boss.pos.x-geom.x)^2+(boss.pos.z-geom.z)^2>.0025 or math.abs(math.atan2(math.sin(h-geom.h),math.cos(h-geom.h)))>.02\n  if not wild.draw or moved then\n   if not wild.draw or not drawer:updateTimedRect(wild.draw,math.max(100,wild.deadline-Now()),boss.pos.x,0,boss.pos.z,100,8,h,0,false,true,0) then\n    wild.draw=S.keep(drawer:addTimedRect(math.max(100,wild.deadline-Now()),boss.pos.x,0,boss.pos.z,100,8,h,0,false,true,0))\n   end\n   wild.geometry={x=boss.pos.x,z=boss.pos.z,h=h}\n  end\n  wild.safe=safe\n end\nend\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() then self.used=true return end\nlocal R=AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nlocal good=TensorCore.getCachedFlatDrawer(0x5033FF33,0x5033FF33,0x5033FF33,0xFF33FF33,3,0,0)\nlocal bad=TensorCore.getCachedFlatDrawer(0x503333FF,0x503333FF,0x503333FF,0xFF3333FF,3,0,0)\nlocal tank=R.mySlot()=='T1' or R.mySlot()=='T2'\nlocal dive=S.p6DiveShape\nif dive and dive.deadline>Now() then\n local diveGood=TensorCore.getCachedFlatDrawer(0x9933FF33,0x9933FF33,0x9933FF33,0xFF33FF33,3,0,0)\n local diveBad=TensorCore.getCachedFlatDrawer(0x993333FF,0x993333FF,0x993333FF,0xFF3333FF,3,0,0)\n local boss=TensorCore.mGetEntity(dive.source)\n if boss and boss.pos then\n  local party={}\n  for _,role in ipairs({'T1','T2','H1','H2','M1','M2','R1','R2'}) do\n   local e=R.entOf(role);party[#party+1]={e=e,d=TensorCore.getDistance2d(e.pos,boss.pos)}\n  end\n  table.sort(party,function(a,b)return a.d<b.d end)\n  dive.draws=dive.draws or {}\n  local active={}\n  for _,i in ipairs({1,2,8}) do\n   local e=party[i].e;active[e.id]=true\n   local radius=i==8 and 6 or 8\n   local safe=i==8 and not tank\n   local drawer=safe and diveGood or diveBad\n   local old=dive.draws[e.id]\n   if old and old.safe~=safe then Argus.deleteTimedShape(old.id);S.owned[old.id]=nil;old=nil end\n   if not old or not drawer:updateTimedCircle(old.id,1500,e.pos.x,0,e.pos.z,radius,0,false,true,0) then\n    dive.draws[e.id]={id=S.keep(drawer:addTimedCircle(1500,e.pos.x,0,e.pos.z,radius,0,false,true,0)),safe=safe}\n   end\n  end\n  for id,shape in pairs(dive.draws) do if not active[id] then Argus.deleteTimedShape(shape.id);S.owned[shape.id]=nil;dive.draws[id]=nil end end\n end\nend\nlocal wild=S.p6WildShape\nif wild and wild.deadline>Now() and Now()>=wild.ready then\n local boss=TensorCore.mGetEntity(wild.source)\n if boss and boss.pos then\n  local x,z=0,0\n  for _,role in ipairs({'H1','H2','M1','M2','R1','R2'}) do local e=R.entOf(role);x=x+e.pos.x;z=z+e.pos.z end\n  x,z=x/6,z/6\n  local h=math.atan2(x-boss.pos.x,z-boss.pos.z)\n  local front=math.huge\n  for _,role in ipairs({'H1','H2','M1','M2','R1','R2'})do\n   local e=R.entOf(role)\n   front=math.min(front,(e.pos.x-boss.pos.x)*math.sin(h)+(e.pos.z-boss.pos.z)*math.cos(h))\n  end\n  local safe=true\n  for _,role in ipairs({'T1','T2'})do\n   local e=R.entOf(role)\n   local vx,vz=e.pos.x-boss.pos.x,e.pos.z-boss.pos.z\n   local forward=vx*math.sin(h)+vz*math.cos(h)\n   local across=vx*math.cos(h)-vz*math.sin(h)\n   if not e.alive or forward<0 or forward>=front-.5 or math.abs(across)>=4 then safe=false end\n  end\n  if wild.draw and wild.safe~=safe then Argus.deleteTimedShape(wild.draw);S.owned[wild.draw]=nil;wild.draw=nil end\n  local drawer=safe and good or bad\n  local geom=wild.geometry\n  local moved=not geom or (boss.pos.x-geom.x)^2+(boss.pos.z-geom.z)^2>.0025 or math.abs(math.atan2(math.sin(h-geom.h),math.cos(h-geom.h)))>.02\n  if not wild.draw or moved then\n   if not wild.draw or not drawer:updateTimedRect(wild.draw,math.max(100,wild.deadline-Now()),boss.pos.x,0,boss.pos.z,100,8,h,0,false,true,0) then\n    wild.draw=S.keep(drawer:addTimedRect(math.max(100,wild.deadline-Now()),boss.pos.x,0,boss.pos.z,100,8,h,0,false,true,0))\n   end\n   wild.geometry={x=boss.pos.x,z=boss.pos.z,h=h}\n  end\n  wild.safe=safe\n end\nend\nself.used=true\n",
 							conditions = 
 							{
 								
