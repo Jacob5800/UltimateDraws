@@ -18,6 +18,9 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- Added the LPDU mitigation profile with assigned DPS Feint, Addle, ranged party mitigation, Dismantle and Magick Barrier timings, plus Rampart and tank short cooldowns with assigned support targets. Uses AnyoneCore Party Roster roles. (17-10-2026)
+- Added job-appropriate potions for the P1 opener, P3 reopener, post-Delta reopener and P6 reopener. Mitigation and potion cast timing still needs replay confirmation. (17-10-2026)
+
 - Added independent, default-off automarker switches and P5 marker assignments with a grace period before LPDU static fallback. Consolidated P5 settings and placed TOP automarkers below P6. (17-10-2026)
 - P5 Solar Ray defaults now use kitchen sink/tank swap for Rays 1 and 4, OT invulnerability for Ray 2 and MT invulnerability for Ray 3. P6 settings retain mechanics and LB choices while hiding individual auto-attack options. (17-10-2026)
 - Improved P1 tether-circle stability and clockwise guidance, removed P5 bounce-circle clutter, and made Omega dodge guidance select the nearest reachable safe destination. Both Cosmo Dive circle fills now use 60% opacity. Further replay checks remain pending. (17-10-2026)
