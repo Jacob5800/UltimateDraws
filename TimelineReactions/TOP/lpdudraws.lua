@@ -4223,6 +4223,89 @@ local tbl =
 			},
 		},
 	},
+	[58] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "P3\\Transition",
+				uuid = "a6dbf340-17a1-3434-9d63-6eda04502aa5",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.topLpdu\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not S or not e then self.used=true return end\nS.p2Defeated=S.p2Defeated or {}\nS.p2Defeated[Argus.getEntityModel(e)]=true\nif not S.p2Defeated[15712] or not S.p2Defeated[15713] then self.used=true return end\nlocal slot=AnyoneCore.Roster.mySlot()\nlocal order={'R1','M1','T1','H1','H2','T2','M2','R2'}\nfor rank,role in ipairs(order) do if slot==role then\n S.go('p3-south-lineup',{x=100+(rank-4.5)*2.6,z=110},'Go south, line up for transition',12,.7)\n break\nend end\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"9b5479ff-9624-d0fe-b45a-c70baf615a8d",
+									true,
+								},
+								
+								{
+									"7082350b-bf5d-e584-8f68-db11b6e60dd5",
+									true,
+								},
+							},
+							name = "South transition slot",
+							uuid = "7d0f0c81-68a4-12ee-9783-d9af1e3e5041",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.isTargetable==false and (eventArgs.entityContentID==7633 or eventArgs.entityContentID==7634)",
+							dequeueIfLuaFalse = true,
+							name = "Boss becomes untargetable",
+							uuid = "9b5479ff-9624-d0fe-b45a-c70baf615a8d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.topLpdu\nif not S or not S.ready() then return false end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e then return false end\nlocal model=Argus.getEntityModel(e)\nreturn (model==15712 or model==15713) and (not e.alive or (e.hp~=nil and e.hp.current<=1))",
+							name = "Defeated and roster ready",
+							uuid = "7082350b-bf5d-e584-8f68-db11b6e60dd5",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "P3\\Transition",
+				eventType = 26,
+				loop = true,
+				mechanicTime = 347.4,
+				name = "[P3] South lineup after both P2 bosses fall",
+				timeRange = true,
+				timelineIndex = 58,
+				timerEndOffset = 60,
+				timerStartOffset = -60,
+				uuid = "c050f6e7-a68a-2430-a654-1216075b7114",
+				version = 2,
+			},
+		},
+	},
 	[62] = 
 	{
 		
