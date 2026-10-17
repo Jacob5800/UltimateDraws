@@ -16,6 +16,12 @@ TEA: Coming soon by Ton.
 
 ## Changelog
 
+### TOP: LPDU
+
+- Added independent, default-off automarker switches and P5 marker assignments with a grace period before LPDU static fallback. Consolidated P5 settings and placed TOP automarkers below P6. (17-10-2026)
+- P5 Solar Ray defaults now use kitchen sink/tank swap for Rays 1 and 4, OT invulnerability for Ray 2 and MT invulnerability for Ray 3. P6 settings retain mechanics and LB choices while hiding individual auto-attack options. (17-10-2026)
+- Improved P1 tether-circle stability and clockwise guidance, removed P5 bounce-circle clutter, and made Omega dodge guidance select the nearest reachable safe destination. Both Cosmo Dive circle fills now use 60% opacity. Further replay checks remain pending. (17-10-2026)
+
 ### UCOB: LPDU
 
 - Corrected the late Nael tankbuster return trigger and kept transition-to-A guidance from interrupting unfinished dragon baits or the remaining quote mechanics. (14-10-2026)

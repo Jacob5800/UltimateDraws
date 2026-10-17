@@ -10,6 +10,13 @@
 - Author UCOB changes through TensorCore in `Ucobreactions\LPDU Draws` on timeline `ucob`, version `1.0.3`.
 - After every successful profile update, copy (never move) `C:\Users\matth\Documents\Bots\FFXIVMinion64\LuaMods\TensorReactions\TimelineReactions\Ucobreactions\LPDU Draws.lua` to this checkout's `TimelineReactions\UCOB\LPDU Draws(beta).lua`, overwriting the existing destination. Verify matching hashes. Update the UCOB README changelog, commit the profile and README together, and push to the configured origin branch. Confirm branch/origin, ensure this is the only outgoing commit, and verify push success. Report unavailable paths instead of creating another checkout.
 
+## TOP profile publishing
+
+- Author TOP changes through TensorCore in the live `TOPReactions\lpdudraws` profile on timeline `top`, version `1.0.3`. Confirm the editable profile before mutations.
+- Authoritative source: `C:\Users\matth\Documents\Bots\FFXIVMinion64\LuaMods\TensorReactions\TimelineReactions\TOPReactions\lpdudraws.lua`. Keep this original file in place; do not resolve it beneath the sibling Agent workspace.
+- After every successful TOP profile update, copy (never move or cut) the authoritative source to `C:\Users\matth\OneDrive\Documenten\GitHub\UltimateDraws\TimelineReactions\TOP\lpdudraws.lua`, overwriting the destination copy. Verify matching source/destination hashes, then update the relevant user-facing TOP README changelog entry. Commit the reaction file and README together and push to the configured origin branch. Before pushing, confirm the current branch and origin URL, ensure the intended commit is the only local outgoing commit, and verify the push succeeded. If the source or checkout is unavailable, report that instead of creating another folder or checkout.
+- Verify saved reactions through TensorCore and update `TOP-LPDU-DRAWS-TODO.md` after each change, separating completed implementation from pending replay observations. Use trailing `(DD-MM-YYYY)` changelog dates and the repository's 10-day retention rule.
+
 ## Discord changelog updater
 
 - `.github/workflows/discord-changelog.yml` posts the README `Changelog` section as a new Discord webhook message whenever `README.md` changes on `main`.
