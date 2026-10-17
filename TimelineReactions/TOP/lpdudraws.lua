@@ -23,7 +23,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "\nif data.topLpdu then self.used=true return end\nlocal S={owned={},issued={},line={},towers={},towerSeen={},step=0}\ndata.topLpdu=S\nS.green=TensorCore.getStaticDrawer(0xB333FF33,2)\nS.red=TensorCore.getStaticDrawer(0x803333FF,2)\nS.flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nfunction S.keep(id)\n if id then S.owned[id]=Now()+180000 end\n return id\nend\nfunction S.clearGoal()\n if S.arrow then Argus.deleteTimedShape(S.arrow); S.owned[S.arrow]=nil; S.arrow=nil end\n if S.ring then Argus.deleteTimedShape(S.ring); S.owned[S.ring]=nil; S.ring=nil end\n S.goal=nil;S.ringState=nil\nend\nfunction S.ready()\n local R=AnyoneCore.Roster\n return R and R.current() and R.isReady()\nend\nfunction S.say(text,seconds) AnyoneCore.Shotcall(text,true,seconds or 3,false) end\nfunction S.go(key,pos,text,seconds,radius)\n if not S.ready() then return false end\n local p=TensorCore.mGetPlayer()\n if not p or not p.pos or not pos then return false end\n if S.issued[key] then return true end\n S.clearGoal()\n local dest={x=pos.x,y=0,z=pos.z}\n S.goal={key=key,pos=dest,expires=Now()+(seconds or 4)*1000,radius=radius or 1}\n S.issued[key]=true\n S.ring=S.keep(S.green:addTimedCircle((seconds or 4)*1000,dest.x,dest.y,dest.z,radius or 1,0,false,true,S.flags))\n S.ringState={x=dest.x,y=dest.y,z=dest.z,radius=radius or 1,expires=S.goal.expires}\n if text and text~='' then S.say(text,math.min(seconds or 4,4)) end\n return true\nend\nfunction S.polar(angle,radius)\n local p=TensorCore.mGetPlayer()\n return {x=100+math.sin(angle)*radius,y=0,z=100-math.cos(angle)*radius}\nend\nfunction S.dir(pos)\n local a=math.atan2(pos.x-100,100-pos.z)\n return math.floor((a+math.pi/4)/(math.pi/2))%4\nend\nfunction S.lineNumber(e)\n for id,n in pairs({[3004]=1,[3005]=2,[3006]=3,[3451]=4}) do\n  if TensorCore.hasBuff(e,id) then return n end\n end\nend\nfunction S.pair(priority,number)\n local R=AnyoneCore.Roster\n if not S.ready() then return end\n local found={}\n for slot in string.gmatch(priority,'%S+') do\n  local e=R.entOf(slot)\n  if e and (S.line[e.id] or S.lineNumber(e))==number then found[#found+1]=e.id end\n end\n if #found~=2 then return end\n local p=TensorCore.mGetPlayer()\n if p.id==found[1] then return 1,found[2] end\n if p.id==found[2] then return 2,found[1] end\nend\nfunction S.pantoPair(number)\n local R=AnyoneCore.Roster\n if not S.ready() then return end\n local pair={}\n for _,slot in ipairs({'T1','M1','R1','H1','T2','M2','R2','H2'}) do\n  local e=R.entOf(slot)\n  if e and (S.line[e.id] or S.lineNumber(e))==number then\n   pair[#pair+1]={id=e.id,group=(slot=='T1' or slot=='M1' or slot=='R1' or slot=='H1') and 1 or 2}\n  end\n end\n if #pair~=2 then return end\n if pair[1].group==pair[2].group then pair[1].group=3-pair[1].group end\n local id=TensorCore.mGetPlayer().id\n if id==pair[1].id then return pair[1].group,pair[2].id end\n if id==pair[2].id then return pair[2].group,pair[1].id end\nend\nself.used=true\n",
+							actionLua = "\nif data.topLpdu then self.used=true return end\nlocal S={owned={},issued={},line={},towers={},towerSeen={},step=0}\ndata.topLpdu=S\nS.green=TensorCore.getStaticDrawer(0xB333FF33,2)\nS.red=TensorCore.getStaticDrawer(0x803333FF,2)\nS.flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nfunction S.keep(id)\n if id then S.owned[id]=Now()+180000 end\n return id\nend\nfunction S.clearGoal()\n if S.arrow then Argus.deleteTimedShape(S.arrow); S.owned[S.arrow]=nil; S.arrow=nil end\n if S.ring then Argus.deleteTimedShape(S.ring); S.owned[S.ring]=nil; S.ring=nil end\n S.goal=nil;S.ringState=nil\nend\nfunction S.ready()\n local R=AnyoneCore.Roster\n return R and R.current() and R.isReady()\nend\nfunction S.say(text,seconds) AnyoneCore.Shotcall(text,true,seconds or 3,false) end\nfunction S.go(key,pos,text,seconds,radius)\n if not S.ready() then return false end\n local p=TensorCore.mGetPlayer()\n if not p or not p.pos or not pos then return false end\n if S.issued[key] then return true end\n S.clearGoal()\n local dest={x=pos.x,y=0,z=pos.z}\n S.goal={key=key,pos=dest,expires=Now()+(seconds or 4)*1000,radius=radius or 1}\n S.issued[key]=true\n local arrowOnly=string.find(key,'panto-clockwise-',1,true)==1 or string.find(key,'panto-return-',1,true)==1 or key=='panto-flame-start' or string.find(key,'p6-exa-middle-',1,true)==1 or key=='p6-meteor-middle' or S.p6ArrowOnlyPending\n S.goal.arrowOnly=arrowOnly\n if not arrowOnly then\n S.ring=S.keep(S.green:addTimedCircle((seconds or 4)*1000,dest.x,dest.y,dest.z,radius or 1,0,false,true,S.flags))\n S.ringState={x=dest.x,y=dest.y,z=dest.z,radius=radius or 1,expires=S.goal.expires}\n end\n if text and text~='' then S.say(text,math.min(seconds or 4,4)) end\n return true\nend\nfunction S.polar(angle,radius)\n local p=TensorCore.mGetPlayer()\n return {x=100+math.sin(angle)*radius,y=0,z=100-math.cos(angle)*radius}\nend\nfunction S.dir(pos)\n local a=math.atan2(pos.x-100,100-pos.z)\n return math.floor((a+math.pi/4)/(math.pi/2))%4\nend\nfunction S.lineNumber(e)\n for id,n in pairs({[3004]=1,[3005]=2,[3006]=3,[3451]=4}) do\n  if TensorCore.hasBuff(e,id) then return n end\n end\nend\nfunction S.pair(priority,number)\n if S.mode=='loop' and Settings.FFXIVMINION.LPDU_TOP_AM_loop==1 then priority='M1 M2 T1 T2 R1 R2 H1 H2' end\n local R=AnyoneCore.Roster\n if not S.ready() then return end\n local found={}\n for slot in string.gmatch(priority,'%S+') do\n  local e=R.entOf(slot)\n  if e and (S.line[e.id] or S.lineNumber(e))==number then found[#found+1]=e.id end\n end\n if #found~=2 then return end\n local p=TensorCore.mGetPlayer()\n if p.id==found[1] then return 1,found[2] end\n if p.id==found[2] then return 2,found[1] end\nend\nfunction S.pantoPair(number)\n local R=AnyoneCore.Roster\n if not S.ready() then return end\n local pair={}\n for _,slot in ipairs({'T1','M1','R1','H1','T2','M2','R2','H2'}) do\n  local e=R.entOf(slot)\n  if e and (S.line[e.id] or S.lineNumber(e))==number then\n   pair[#pair+1]={id=e.id,group=(slot=='T1' or slot=='M1' or slot=='R1' or slot=='H1') and 1 or 2}\n  end\n end\n if #pair~=2 then return end\n if pair[1].group==pair[2].group then pair[1].group=3-pair[1].group end\n local id=TensorCore.mGetPlayer().id\n if id==pair[1].id then return pair[1].group,pair[2].id end\n if id==pair[2].id then return pair[2].group,pair[1].id end\nend\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -697,7 +697,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() then self.used=true return end\nS.loopDanger=S.loopDanger or {}\nlocal active={}\nif S.mode=='loop' then\n local R=AnyoneCore.Roster\n for source,list in pairs(Argus.getCurrentTethers()) do for _,t in ipairs(list) do if t.type==89 then\n  local raid=R.slotOf(source) and source or R.slotOf(t.targetid) and t.targetid\n  if raid then active[raid]=true end\n end end end\nend\nfor id,shape in pairs(S.loopDanger) do\n if not active[id] then Argus.deleteTimedShape(shape);S.owned[shape]=nil;S.loopDanger[id]=nil end\nend\nfor id in pairs(active) do\n local e=TensorCore.mGetEntity(id)\n if e and e.pos then\n  local shape=S.loopDanger[id]\n  if not shape or not S.red:updateTimedCircle(shape,2500,e.pos.x,0,e.pos.z,15,0,false,true,0) then\n   S.loopDanger[id]=S.keep(S.red:addTimedCircle(2500,e.pos.x,0,e.pos.z,15,0,false,true,0))\n  end\n end\nend\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() then self.used=true return end\nS.loopDanger=S.loopDanger or {}\nlocal active={}\nif S.mode=='loop' then\n local R=AnyoneCore.Roster\n for source,list in pairs(Argus.getCurrentTethers()) do for _,t in ipairs(list) do if t.type==89 then\n  local raid=R.slotOf(source) and source or R.slotOf(t.targetid) and t.targetid\n  if raid then active[raid]=true end\n end end end\nend\nfor id,shape in pairs(S.loopDanger) do\n if not active[id] then Argus.deleteTimedShape(shape);S.owned[shape]=nil;S.loopDanger[id]=nil end\nend\nfor id in pairs(active) do\n local e=TensorCore.mGetEntity(id)\n if e and e.pos then\n  local shape=S.loopDanger[id]\n  if not shape or not true then\n   S.loopDanger[id]=S.keep(S.red:addTimedCircleOnEnt(60000,id,15,0,false,true,0))\n  end\n end\nend\nself.used=true\n",
 							name = "[P1] Live Blaster tether danger circles",
 							uuid = "c9dde5e6-30a9-f3f1-baad-5a5d210e2f9b",
 							version = 2.1,
@@ -773,6 +773,7 @@ local tbl =
 					},
 				},
 				displayPath = "Cast AoEs",
+				enabled = false,
 				eventType = 3,
 				loop = true,
 				mechanicTime = 15,
@@ -828,6 +829,7 @@ local tbl =
 					},
 				},
 				displayPath = "Cast AoEs",
+				enabled = false,
 				eventType = 3,
 				loop = true,
 				mechanicTime = 15,
@@ -938,7 +940,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "if TensorReactions_CurrentCombatTimer>=15 then self.used=true return end\n\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1122 then self.used=true return end\nlocal settings=Settings.FFXIVMINION\nlocal R=AnyoneCore.Roster\nlocal role=R and R.current() and R.mySlot() or nil\nlocal tank=role=='T1' or role=='T2'\nlocal healer=role=='H1' or role=='H2'\nlocal function option(label,key,default,values,help)\n GUI:Text(label);GUI:SameLine(205);GUI:PushItemWidth(205)\n local old=settings[key];if old==nil then old=default end\n local choice=GUI:Combo('##'..key,old+1,values)\n GUI:PopItemWidth();settings[key]=choice-1\n if help and GUI:IsItemHovered() then GUI:SetTooltip(help) end\nend\nlocal function mitigation(label,key,help)\n if tank then option(label,key..'_'..role,0,{'Mitigate','Use invuln'},help) end\nend\nlocal visible=GUI:Begin('TOP LPDU Settings',true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n if GUI:CollapsingHeader('P1') then\n  option('Kyrios layout','LPDU_TOP_P1KyriosLayout',0,{'Both invuln north','Split northwest / northeast'},'Both north: both tanks stack north and invuln the cleaves. Split: MT northwest, OT northeast. Changes tank positions and party line-spread positions. Match the party layout.')\n  if tank then\n   if settings.LPDU_TOP_P1KyriosLayout==1 then\n    mitigation('Kyrios cleaves','LPDU_TOP_P1Kyrios','Your personal reminder for the split tank baits: normal mitigation or invulnerability. The split destinations remain northwest / northeast.')\n   else GUI:Text('North stack: both tanks invuln') end\n  end\n end\n if GUI:CollapsingHeader('P2') then\n  option('Opening boss groups','LPDU_TOP_P2FirewallSwap',0,{'Standard groups','NIN / SCH: swap M1 and H2'},'LPDU NIN/SCH variant: M1 starts on female, H2 starts on male. Changes the opening Firewall arrow. The later Party Synergy lineup stays THMR.')\n  if tank then\n   mitigation('Opening Solar Ray','LPDU_TOP_P2Solar','Your personal opening-buster reminder. Choose the mitigation method agreed with your party; this does not swap the opening boss assignments.')\n   mitigation('Limitless tether','LPDU_TOP_P2Tether','Your personal cleave-buster reminder. Guidance first intercepts your tether, then points clockwise out once you own it. Keep the cleave away from the party.')\n  end\n end\n if GUI:CollapsingHeader('P3 / P5 Monitors') then\n  GUI:Text('Monitor Auto-Facing');GUI:SameLine(205);GUI:PushItemWidth(205)\n  local index=GUI:Combo('##LPDUTOPMonitorAutoFacing',settings.LPDU_TOP_MonitorAutoFacing==true and 2 or 1,{'Disabled','Enabled'})\n  GUI:PopItemWidth();settings.LPDU_TOP_MonitorAutoFacing=index==2\n  if GUI:IsItemHovered() then GUI:SetTooltip('P3 and P5 Delta monitors: faces your assigned monitor in the last second. Holds through cast completion and releases 0.8 seconds after damage. Turning this off releases a lock acquired by this feature.') end\n end\n if GUI:CollapsingHeader('P5 assignments') then\n  if GUI:CollapsingHeader('Static bounce priority') then\n   GUI:Text('Set the same priority as your LPDU automarker.')\n   local slots={'T1','T2','H1','H2','M1','M2','R1','R2'}\n   local seen,valid={},true\n   for rank=1,8 do\n    option('Priority '..rank,'LPDU_TOP_BouncePriority'..rank,rank-1,slots,'Use each roster slot once. Duplicate slots fall back to standard roster order.')\n    local index=settings['LPDU_TOP_BouncePriority'..rank]\n    if seen[index] then valid=false end;seen[index]=true\n   end\n   if not valid then GUI:Text('Duplicate slot: using standard roster order.') end\n  end\n  option('Bounce assignments','LPDU_TOP_BounceAssignments',0,{'Auto: markers / LPDU fallback','LPDU static'},'Uses a complete LPDU automarker set after it stays stable for 0.5 seconds. Incomplete or unrecognized sets keep LPDU static assignments. Applies to Sigma and Omega bounces.')\n end\n if tank and GUI:CollapsingHeader('P5') then\n  local labels={'Solar Ray 1 - pre Delta','Solar Ray 2 - post Delta','Solar Ray 3 - post Sigma','Solar Ray 4 - post Omega'}\n  for wave=1,4 do\n   option(labels[wave],'LPDU_TOP_SolarTankPlan'..wave,4,{'Tank swap','MT invulns','OT invulns','Current tank invulns','Auto: LPDU tank plan'},'Tank swap: first tank moves counterclockwise after the hit; other tank takes that position for the second hit. Invuln plans change the aggro owner, reminders and arrows. An active invuln on the current tank prevents an unnecessary swap. Match both tanks settings.')\n  end\n end\n if GUI:CollapsingHeader('P6') then\n  option('Physical ranged role','LPDU_TOP_P6PhysicalRanged',0,{'R1 physical / R2 caster','R2 physical / R1 caster'},'Swaps the ranged destinations for Cosmo Arrow starting pairs, both Wave Cannons and meteors. Also identifies which ranged player the tank support call refers to. Tanks and ranged players must use the same assignment.')\n  if tank then\n   option('Cosmo Memory LB3','LPDU_TOP_P6MemoryLB',0,{'MT uses tank LB3','OT uses tank LB3'},'Selects which roster tank receives the tank LB3 call for the opening P6 Cosmo Memory.')\n   for wave=1,5 do\n    if wave==2 then mitigation('Cosmo Dive 1','LPDU_TOP_P6Dive1','Your first Dive mitigation reminder. Both tanks keep their assigned close baits; the party takes the shared hit separately.') end\n    if wave==5 then mitigation('Cosmo Dive 2','LPDU_TOP_P6Dive2','Your second Dive mitigation reminder. Tank bait arrows adapt to the party position for this Dive.') end\n    option('Autos '..wave..' aggro','LPDU_TOP_P6AutoAggro'..wave,0,{'MT holds boss','OT holds boss'},'Sets the intended aggro holder and changes both tank arrows. The other tank stays furthest from the boss for the far auto. An active invuln on the current tank preserves that owner. Set the same owner on both tanks.')\n    mitigation('Autos '..wave,'LPDU_TOP_P6Auto'..wave,'Your personal mitigation or invuln reminder for this auto set. Aggro ownership is selected separately above.')\n   end\n   for wave=1,2 do option('Magic Number '..wave..' LB3','LPDU_TOP_P6TankLB'..wave,wave==2 and 1 or 0,{'MT uses tank LB3','OT uses tank LB3'},'Selects the tank LB3 caller for this Magic Number. Set each cast separately to match your party LB order.') end\n  end\n  if healer then\n   for wave=1,2 do option('Magic Number '..wave..' LB3','LPDU_TOP_P6HealerLB'..wave,0,{'H1 uses healer LB3','H2 uses healer LB3'},'Selects the healer LB3 caller for this Magic Number. The selected healer gets a prepare call and Use healer LB3 now after damage. Set each cast separately to match your party LB order.') end\n  end\n end\nend\nGUI:End();self.used=true\n",
+							actionLua = "if TensorReactions_CurrentCombatTimer>=15 then self.used=true return end\n\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1122 then self.used=true return end\nlocal settings=Settings.FFXIVMINION\nlocal R=AnyoneCore.Roster\nlocal role=R and R.current() and R.mySlot() or nil\nlocal tank=role=='T1' or role=='T2'\nlocal healer=role=='H1' or role=='H2'\nlocal function option(label,key,default,values,help)\n GUI:Text(label);GUI:SameLine(205);GUI:PushItemWidth(205)\n local old=settings[key];if old==nil then old=default end\n local choice=GUI:Combo('##'..key,old+1,values)\n GUI:PopItemWidth();settings[key]=choice-1\n if help and GUI:IsItemHovered() then GUI:SetTooltip(help) end\nend\nlocal function mitigation(label,key,help)\n if tank then option(label,key..'_'..role,0,{'Mitigate','Use invuln'},help) end\nend\nlocal visible=GUI:Begin('TOP LPDU Settings',true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n if GUI:CollapsingHeader('P1') then\n  option('Kyrios layout','LPDU_TOP_P1KyriosLayout',0,{'Both invuln north','Split northwest / northeast'},'Both north: both tanks stack north and invuln the cleaves. Split: MT northwest, OT northeast. Changes tank positions and party line-spread positions. Match the party layout.')\n  if tank then\n   if settings.LPDU_TOP_P1KyriosLayout==1 then\n    mitigation('Kyrios cleaves','LPDU_TOP_P1Kyrios','Your personal reminder for the split tank baits: normal mitigation or invulnerability. The split destinations remain northwest / northeast.')\n   else GUI:Text('North stack: both tanks invuln') end\n  end\n end\n if GUI:CollapsingHeader('P2') then\n  option('Opening boss groups','LPDU_TOP_P2FirewallSwap',0,{'Standard groups','NIN / SCH: swap M1 and H2'},'LPDU NIN/SCH variant: M1 starts on female, H2 starts on male. Changes the opening Firewall arrow. The later Party Synergy lineup stays THMR.')\n  if tank then\n   mitigation('Opening Solar Ray','LPDU_TOP_P2Solar','Your personal opening-buster reminder. Choose the mitigation method agreed with your party; this does not swap the opening boss assignments.')\n   mitigation('Limitless tether','LPDU_TOP_P2Tether','Your personal cleave-buster reminder. Guidance first intercepts your tether, then points clockwise out once you own it. Keep the cleave away from the party.')\n  end\n end\n if GUI:CollapsingHeader('P3 / P5 Monitors') then\n  GUI:Text('Monitor Auto-Facing');GUI:SameLine(205);GUI:PushItemWidth(205)\n  local index=GUI:Combo('##LPDUTOPMonitorAutoFacing',settings.LPDU_TOP_MonitorAutoFacing==true and 2 or 1,{'Disabled','Enabled'})\n  GUI:PopItemWidth();settings.LPDU_TOP_MonitorAutoFacing=index==2\n  if GUI:IsItemHovered() then GUI:SetTooltip('P3 and P5 Delta monitors: faces your assigned monitor in the last second. Holds through cast completion and releases 0.8 seconds after damage. Turning this off releases a lock acquired by this feature.') end\n end\n if GUI:CollapsingHeader('TOP automarkers') then\n  GUI:Text('All default off. Skip foreign marks; never auto-clear.')\n  option('P1 Program Loop','LPDU_TOP_AM_loop',0,{'Off','On'},'Uses the shown LPDU preset. Existing foreign marks abort this set. Marker changes require a live party test.')\n  option('P1 Pantokrator','LPDU_TOP_AM_panto',0,{'Off','On'},'Uses the shown LPDU preset. Existing foreign marks abort this set. Marker changes require a live party test.')\n  option('P2 Party Synergy','LPDU_TOP_AM_synergy',0,{'Off','On'},'Uses the shown LPDU preset. Existing foreign marks abort this set. Marker changes require a live party test.')\n  option('P3 Transition','LPDU_TOP_AM_transition',0,{'Off','On'},'Uses the shown LPDU preset. Existing foreign marks abort this set. Marker changes require a live party test.')\n  option('P3 Monitors','LPDU_TOP_AM_monitor',0,{'Off','On'},'Uses the shown LPDU preset. Existing foreign marks abort this set. Marker changes require a live party test.')\n  option('P5 Delta','LPDU_TOP_AM_delta',0,{'Off','On'},'Uses the shown LPDU preset. Existing foreign marks abort this set. Marker changes require a live party test.')\n  option('P5 Sigma','LPDU_TOP_AM_sigma',0,{'Off','On'},'LPDU / Sausage assignments. Existing foreign marks abort this set.')\n  option('P5 Omega','LPDU_TOP_AM_omega',0,{'Off','On'},'LPDU / Sausage assignments. Existing foreign marks abort this set.')\n end\n if GUI:CollapsingHeader('P5 assignments') then\n  if GUI:CollapsingHeader('Static bounce priority') then\n   GUI:Text('Set the same priority as your LPDU automarker.')\n   local slots={'T1','T2','H1','H2','M1','M2','R1','R2'}\n   local seen,valid={},true\n   for rank=1,8 do\n    option('Priority '..rank,'LPDU_TOP_BouncePriority'..rank,rank-1,slots,'Use each roster slot once. Duplicate slots fall back to standard roster order.')\n    local index=settings['LPDU_TOP_BouncePriority'..rank]\n    if seen[index] then valid=false end;seen[index]=true\n   end\n   if not valid then GUI:Text('Duplicate slot: using standard roster order.') end\n  end\n  option('Bounce assignments','LPDU_TOP_BounceAssignments',0,{'Auto: markers / LPDU fallback','LPDU fallback with marker grace','Force LPDU static'},'Waits up to 1.5 seconds for all eight unique valid LPDU marks, stable for 0.5 seconds. Then uses static priority if absent. Force static deliberately ignores overhead marks.')\n end\n if tank and GUI:CollapsingHeader('P5') then\n  local labels={'Solar Ray 1 - pre Delta','Solar Ray 2 - post Delta','Solar Ray 3 - post Sigma','Solar Ray 4 - post Omega'}\n  for wave=1,4 do\n   option(labels[wave],'LPDU_TOP_SolarTankPlan'..wave,4,{'Tank swap','MT invulns','OT invulns','Current tank invulns','Auto: LPDU tank plan'},'Tank swap: first tank moves counterclockwise after the hit; other tank takes that position for the second hit. Invuln plans change the aggro owner, reminders and arrows. An active invuln on the current tank prevents an unnecessary swap. Match both tanks settings.')\n  end\n end\n if GUI:CollapsingHeader('P6') then\n  option('Physical ranged role','LPDU_TOP_P6PhysicalRanged',0,{'R1 physical / R2 caster','R2 physical / R1 caster'},'Swaps the ranged destinations for Cosmo Arrow starting pairs, both Wave Cannons and meteors. Also identifies which ranged player the tank support call refers to. Tanks and ranged players must use the same assignment.')\n  if tank then\n   option('Cosmo Memory LB3','LPDU_TOP_P6MemoryLB',0,{'MT uses tank LB3','OT uses tank LB3'},'Selects which roster tank receives the tank LB3 call for the opening P6 Cosmo Memory.')\n   for wave=1,5 do\n    if wave==2 then mitigation('Cosmo Dive 1','LPDU_TOP_P6Dive1','Your first Dive mitigation reminder. Both tanks keep their assigned close baits; the party takes the shared hit separately.') end\n    if wave==5 then mitigation('Cosmo Dive 2','LPDU_TOP_P6Dive2','Your second Dive mitigation reminder. Tank bait arrows adapt to the party position for this Dive.') end\n    option('Autos '..wave..' aggro','LPDU_TOP_P6AutoAggro'..wave,0,{'MT holds boss','OT holds boss'},'Sets the intended aggro holder and changes both tank arrows. The other tank stays furthest from the boss for the far auto. An active invuln on the current tank preserves that owner. Set the same owner on both tanks.')\n    mitigation('Autos '..wave,'LPDU_TOP_P6Auto'..wave,'Your personal mitigation or invuln reminder for this auto set. Aggro ownership is selected separately above.')\n   end\n   for wave=1,2 do option('Magic Number '..wave..' LB3','LPDU_TOP_P6TankLB'..wave,wave==2 and 1 or 0,{'MT uses tank LB3','OT uses tank LB3'},'Selects the tank LB3 caller for this Magic Number. Set each cast separately to match your party LB order.') end\n  end\n  if healer then\n   for wave=1,2 do option('Magic Number '..wave..' LB3','LPDU_TOP_P6HealerLB'..wave,0,{'H1 uses healer LB3','H2 uses healer LB3'},'Selects the healer LB3 caller for this Magic Number. The selected healer gets a prepare call and Use healer LB3 now after damage. Set each cast separately to match your party LB order.') end\n  end\n end\nend\nGUI:End();self.used=true\n",
 							name = "[GUI] TOP LPDU Settings",
 							uuid = "a36782c6-adc8-a738-8222-93b2b178e770",
 							version = 2.1,
@@ -1169,6 +1171,122 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Automarkers",
+				uuid = "6573e133-59b6-0e5f-abac-84d2ff0142b6",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif S.topAMTick then self.used=true return end\nfunction S.topAMTick(key,queue,enabled)\n local w=S.p5MarkerWriter\n local p=TensorCore.mGetPlayer()\n local function restore()\n  if w and w.target and p.targetid==w.target and w.previous and w.previous~=0 then Player:SetTarget(w.previous)end\n  if w then w.target=nil;w.previous=nil end\n end\n if not enabled or not S.ready() then if w and w.key==key then restore()end;return end\n if not w then w={owned={}};S.p5MarkerWriter=w end\n if w.key~=key then restore();w.key=key;w.start=Now();w.index=1;w.pending=nil;w.done=nil;w.blocked=nil end\n if w.done or w.blocked or Now()-w.start<1800 then return end\n if not queue or #queue==0 then return end\n local seen,people={},{}\n for _,a in ipairs(queue)do if seen[a.marker] or people[a.id]then return end;seen[a.marker]=true;people[a.id]=true end\n for _,slot in ipairs({'T1','T2','H1','H2','M1','M2','R1','R2'})do\n  local e=AnyoneCore.Roster.entOf(slot)\n  local pending=w.pending and w.pending.id==e.id and w.pending.marker==e.marker\n  if e.marker and e.marker~=0 and w.owned[e.id]~=e.marker and not pending then w.blocked=true;restore();return end\n end\n if w.pending then\n  local e=TensorCore.mGetEntity(w.pending.id)\n  if e and e.marker==w.pending.marker then w.owned[e.id]=e.marker;w.pending=nil;w.index=w.index+1;restore()\n  elseif Now()-w.sent>1200 then w.blocked=true;restore()end\n  return\n end\n local nextMark=queue[w.index]\n if not nextMark then w.done=true;restore();return end\n local e=TensorCore.mGetEntity(nextMark.id)\n if not e then w.blocked=true;restore();return end\n if e.marker==nextMark.marker then w.index=w.index+1;return end\n if w.target~=e.id then w.previous=p.targetid;w.target=e.id;Player:SetTarget(e.id);return end\n if p.targetid~=e.id then w.blocked=true;restore();return end\n local commands={[1]='attack1',[2]='attack2',[3]='attack3',[4]='attack4',[5]='attack5',[6]='bind1',[7]='bind2',[8]='bind3',[9]='ignore1',[10]='ignore2',[11]='square',[12]='circle',[13]='cross',[14]='triangle'}\n SendTextCommand('/mk '..commands[nextMark.marker]..' <t>');w.pending=nextMark;w.sent=Now()\nend\nfunction S.topAMBuild(scope)\n if not S.ready() then return end\n local R=AnyoneCore.Roster\n local slots={'T1','T2','H1','H2','M1','M2','R1','R2'}\n local party={}\n for rank,slot in ipairs(slots)do local e=R.entOf(slot);party[#party+1]={id=e.id,slot=slot,e=e,rank=rank}end\n local queue,key={},scope\n S.topAMSnapshots=S.topAMSnapshots or {}\n if scope~='loop' and scope~='panto' and S.topAMSnapshots[scope] then return scope,S.topAMSnapshots[scope] end\n local function put(id,marker)queue[#queue+1]={id=id,marker=marker}end\n if scope=='loop' or scope=='panto' then\n  if S.mode~=(scope=='loop' and 'loop' or 'panto')then return end\n  local stage=scope=='loop' and math.max(1,S.step or 0) or TensorReactions_CurrentTimer<81.3 and 1 or TensorReactions_CurrentTimer<87.3 and 2 or TensorReactions_CurrentTimer<93.3 and 3 or TensorReactions_CurrentTimer<99.4 and 4 or 5\n  if stage>4 then return end\n  key=scope..stage\n  if S.topAMSnapshots[key] then return key,S.topAMSnapshots[key] end\n  local groups={{},{},{},{}}\n  local order=scope=='loop' and {'M1','M2','T1','T2','R1','R2','H1','H2'} or {'T1','M1','R1','H1','T2','M2','R2','H2'}\n  for _,slot in ipairs(order)do local e=R.entOf(slot);local n=S.line[e.id] or S.lineNumber(e);if not n then return end;groups[n][#groups[n]+1]=e.id end\n  for _,g in ipairs(groups)do if #g~=2 then return end end\n  local other=(stage+1)%4+1\n  put(groups[stage][1],scope=='loop' and 1 or 9);put(groups[stage][2],scope=='loop' and 2 or 10)\n  put(groups[other][1],scope=='loop' and 9 or 1);put(groups[other][2],scope=='loop' and 10 or 2)\n elseif scope=='synergy' then\n  local ps=S.ps;if not ps or not ps.glitch then return end\n  local rankOrder={'T1','H1','M1','R1','T2','H2','M2','R2'}\n  for number=1,4 do\n   local pair={}\n   for _,slot in ipairs(rankOrder)do local id=R.idOf(slot);if ps.marks[id]==number then pair[#pair+1]=id end end\n   if #pair~=2 then return end\n   local right=ps.glitch=='remote' and ({4,2,3,1})[number] or number\n   put(pair[1],({13,11,12,14})[number]);put(pair[2],right)\n  end\n elseif scope=='transition' or scope=='monitor' then\n  local groups=scope=='transition' and {{},{},{}} or {{},{}}\n  for _,p in ipairs(party)do\n   local category\n   if scope=='transition' then category=TensorCore.hasBuff(p.e,3425) and 1 or TensorCore.hasBuff(p.e,3426) and 2 or 3\n   else category=(TensorCore.hasBuff(p.e,3452) or TensorCore.hasBuff(p.e,3453)) and 1 or 2 end\n   groups[category][#groups[category]+1]=p\n  end\n  if scope=='transition' then if #groups[1]~=4 or #groups[2]~=2 or #groups[3]~=2 then return end\n  elseif #groups[1]~=3 then return end\n  for _,group in ipairs(groups)do table.sort(group,function(a,b)\n   local x=scope=='transition' and a.e.pos.x or a.e.pos.z;local y=scope=='transition' and b.e.pos.x or b.e.pos.z\n   if math.abs(x-y)>.1 then return x<y end;return a.rank<b.rank\n  end)end\n  if scope=='transition' then\n   S.topAMTransitionLists={{},{},{}}\n   for category,group in ipairs(groups)do for _,p in ipairs(group)do S.topAMTransitionLists[category][#S.topAMTransitionLists[category]+1]=p.id end end\n   for i,p in ipairs(groups[1])do put(p.id,i)end\n   for i,p in ipairs(groups[2])do put(p.id,5+i)end\n   for i,p in ipairs(groups[3])do put(p.id,8+i)end\n  else\n   for i,p in ipairs(groups[1])do put(p.id,5+i)end\n   for i,p in ipairs(groups[2])do put(p.id,i)end\n  end\n elseif scope=='delta' then\n  local near,far\n  for _,p in ipairs(party)do if TensorCore.hasBuff(p.e,3442)then if near then return end;near=p.id end;if TensorCore.hasBuff(p.e,3443)then if far then return end;far=p.id end end\n  if not near or not far then return end\n  put(far,13);put(near,14)\n end\n S.topAMSnapshots=S.topAMSnapshots or {}\n if not S.topAMSnapshots[key] then S.topAMSnapshots[key]=queue end\n return key,S.topAMSnapshots[key]\nend\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"b31f5b5a-b372-4e66-a124-8ca9ba43ba0f",
+									true,
+								},
+							},
+							name = "[AM] Shared protected TOP marker writer",
+							uuid = "5e263352-76e5-e6e1-b12b-9387495fc9f3",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.topLpdu;return S and not S.topAMTick and (Settings.FFXIVMINION.LPDU_TOP_AM_loop==1 or Settings.FFXIVMINION.LPDU_TOP_AM_panto==1 or Settings.FFXIVMINION.LPDU_TOP_AM_synergy==1 or Settings.FFXIVMINION.LPDU_TOP_AM_transition==1 or Settings.FFXIVMINION.LPDU_TOP_AM_monitor==1 or Settings.FFXIVMINION.LPDU_TOP_AM_delta==1 or Settings.FFXIVMINION.LPDU_TOP_AM_sigma==1 or Settings.FFXIVMINION.LPDU_TOP_AM_omega==1) or false",
+							name = "Matching mechanic",
+							uuid = "b31f5b5a-b372-4e66-a124-8ca9ba43ba0f",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Automarkers",
+				loop = true,
+				mechanicTime = 15,
+				name = "[AM] Shared protected TOP marker writer",
+				throttleTime = 250,
+				timeRange = true,
+				timelineIndex = 3,
+				timerEndOffset = 1420,
+				timerStartOffset = -15,
+				uuid = "3b9eaf89-f7df-b482-bb14-1dbad2bf9482",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.topAMBuild then self.used=true return end\nlocal enabled=Settings.FFXIVMINION.LPDU_TOP_AM_loop==1\nif not S.ready() then self.used=true return end\nlocal w=S.p5MarkerWriter\nif not enabled then\n if w and string.find(w.key,'loop',1,true)==1 then S.topAMTick(w.key,nil,false)end\n self.used=true return\nend\nlocal key,queue=S.topAMBuild('loop')\nif not key and w and w.target and string.find(w.key,'loop',1,true)==1 then S.topAMTick(w.key,nil,false)end\nif key and queue then S.topAMTick(key,queue,enabled)end\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"fdc1663b-2a07-01f1-8010-bdf74d2ca0d7",
+									true,
+								},
+							},
+							name = "[AM] Optional P1 Program Loop",
+							uuid = "eb669dcd-738b-89de-bcc1-620fe1c61a69",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.topLpdu;return S and (Settings.FFXIVMINION.LPDU_TOP_AM_loop==1 or S.p5MarkerWriter and S.p5MarkerWriter.target and string.find(S.p5MarkerWriter.key,'loop',1,true)==1) or false",
+							name = "Matching mechanic",
+							uuid = "fdc1663b-2a07-01f1-8010-bdf74d2ca0d7",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Automarkers",
+				loop = true,
+				mechanicTime = 15,
+				name = "[AM] Optional P1 Program Loop",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 3,
+				timerEndOffset = 48,
+				timerStartOffset = -5,
+				uuid = "5676c832-9c06-8a01-bbfa-066a0f305479",
+				version = 2,
+			},
+		},
 	},
 	[13] = 
 	{
@@ -1328,7 +1446,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S or S.mode~='panto' then self.used=true return end\nS.pantoCasts=S.pantoCasts or {}\nS.pantoCasts[eventArgs.entityID]={angle=math.pi-eventArgs.heading,deadline=Now()+eventArgs.duration*1000}\nif not S.ready() or S.pantoAngle then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nlocal group=S.pantoGroup\nif not group then self.used=true return end\nlocal a=math.pi-eventArgs.heading-math.rad(34)\nlocal expected=group==1 and 0 or math.pi\nif math.cos(a-expected)<0 then a=a+math.pi end\nS.pantoAngle=a\nlocal radius=math.max(10,math.min(12,TensorCore.getDistance2d(p.pos,{x=100,y=0,z=100})))\nS.go('panto-flame-start',S.polar(a,radius),'Go to group, prepare clockwise',eventArgs.duration+.5,1)\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S or S.mode~='panto' then self.used=true return end\nS.pantoCasts=S.pantoCasts or {}\nS.pantoCasts[eventArgs.entityID]={angle=math.pi-eventArgs.heading,deadline=Now()+eventArgs.duration*1000,x=eventArgs.x,y=eventArgs.y,z=eventArgs.z,heading=eventArgs.heading}\nif not S.ready() or S.pantoAngle then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nif not S.pantoDirectionLabel then\n S.pantoDirectionLabel=true\n AnyoneCore.addTimedWorldTextOnEnt(30000,'CLOCKWISE',p.id,0xFFFFFFFF,true,1.3,2.5)\nend\nlocal group=S.pantoGroup\nif not group then self.used=true return end\nlocal a=math.pi-eventArgs.heading-math.rad(34)\nlocal expected=group==1 and 0 or math.pi\nif math.cos(a-expected)<0 then a=a+math.pi end\nS.pantoAngle=a\nlocal radius=math.max(10,math.min(12,TensorCore.getDistance2d(p.pos,{x=100,y=0,z=100})))\nS.go('panto-flame-start',S.polar(a,radius),'Go to group, prepare clockwise',eventArgs.duration+.5,1)\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -1438,7 +1556,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nlocal p=TensorCore.mGetPlayer()\nif S.mode~='panto' or not S.pantoAngle or not p then self.used=true return end\nfor _,id in ipairs(eventArgs.hitTargets) do if id==p.id then\n S.pantoSpreadUntil=nil\n S.go('panto-return-'..(S.pantoFlame or 0),S.polar(S.pantoAngle,12),'Step clockwise with group',2,1)\n S.pantoMovementAnnounced=true\n break\nend end\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nlocal p=TensorCore.mGetPlayer()\nif S.mode~='panto' or not S.pantoAngle or not p then self.used=true return end\nfor _,id in ipairs(eventArgs.hitTargets) do if id==p.id then\n S.pantoSpreadUntil=nil\n S.go('panto-return-'..(S.pantoFlame or 0),S.polar(S.pantoAngle,12),'Return to group',2.5,1)\n S.pantoMovementAnnounced=true\n break\nend end\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -1479,6 +1597,59 @@ local tbl =
 				timerEndOffset = 32,
 				timerStartOffset = -2,
 				uuid = "e6568de2-3bc5-e070-887e-1bb5f96b5f13",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nS.pantoConeDraws=S.pantoConeDraws or {}\nlocal list,active={},{}\nfor id,cast in pairs(S.pantoCasts or {})do\n if cast.deadline>Now() and cast.x then list[#list+1]={id=id,cast=cast}end\nend\ntable.sort(list,function(a,b)return a.cast.deadline<b.cast.deadline end)\nlocal first=list[1] and list[1].cast.deadline\nfor _,entry in ipairs(list)do\n local id,c=entry.id,entry.cast;active[id]=true\n local danger=c.deadline<=first+100\n local old=S.pantoConeDraws[id]\n if old and (old.danger~=danger or old.deadline~=c.deadline)then Argus.deleteTimedShape(old.id);S.owned[old.id]=nil;old=nil end\n if not old then\n  local fill=danger and 0x80202080 or 0x4000AAFF\n  local border=danger and 0xFF1010CC or 0xFF00AAFF\n  local d=TensorCore.getCachedFlatDrawer(fill,fill,fill,border,3,0,0)\n  S.pantoConeDraws[id]={id=S.keep(d:addTimedCone(math.max(100,c.deadline-Now()),c.x,c.y,c.z,65,math.rad(60),c.heading,0,false,true,0)),danger=danger,deadline=c.deadline}\n else S.pantoConeDraws[id]=old end\nend\nfor id,shape in pairs(S.pantoConeDraws)do if not active[id]then Argus.deleteTimedShape(shape.id);S.owned[shape.id]=nil;S.pantoConeDraws[id]=nil end end\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"42115de8-2c32-e2fa-aed4-1ca0926e9f9a",
+									true,
+								},
+							},
+							name = "[P1] Current red and upcoming amber flamethrowers",
+							uuid = "d5c7b583-5857-330c-889a-81b6412edcd0",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.topLpdu;return S and S.mode=='panto' and (S.pantoCasts and next(S.pantoCasts) or S.pantoConeDraws and next(S.pantoConeDraws)) or false",
+							name = "Matching mechanic",
+							uuid = "42115de8-2c32-e2fa-aed4-1ca0926e9f9a",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "P1",
+				loop = true,
+				mechanicTime = 69.2,
+				name = "[P1] Current red and upcoming amber flamethrowers",
+				throttleTime = 200,
+				timeRange = true,
+				timelineIndex = 15,
+				timerEndOffset = 33,
+				timerStartOffset = -6,
+				uuid = "3ac69944-2819-3115-bcab-5ff821b56c57",
 				version = 2,
 			},
 		},
@@ -1545,6 +1716,69 @@ local tbl =
 				timerEndOffset = 40,
 				timerStartOffset = -10,
 				uuid = "58bd72f7-c7e9-186c-a948-dc1d7ee1e3b7",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Automarkers",
+				uuid = "59d781cc-29d1-21ba-bf0d-617a46a8e874",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.topAMBuild then self.used=true return end\nlocal enabled=Settings.FFXIVMINION.LPDU_TOP_AM_panto==1\nif not S.ready() then self.used=true return end\nlocal w=S.p5MarkerWriter\nif not enabled then\n if w and string.find(w.key,'panto',1,true)==1 then S.topAMTick(w.key,nil,false)end\n self.used=true return\nend\nlocal key,queue=S.topAMBuild('panto')\nif not key and w and w.target and string.find(w.key,'panto',1,true)==1 then S.topAMTick(w.key,nil,false)end\nif key and queue then S.topAMTick(key,queue,enabled)end\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"14f39a4b-a434-fc6a-bea2-dbe80a0fe1a2",
+									true,
+								},
+							},
+							name = "[AM] Optional P1 Pantokrator",
+							uuid = "0fb40106-8f4f-8227-b399-06440a1d913f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.topLpdu;return S and (Settings.FFXIVMINION.LPDU_TOP_AM_panto==1 or S.p5MarkerWriter and S.p5MarkerWriter.target and string.find(S.p5MarkerWriter.key,'panto',1,true)==1) or false",
+							name = "Matching mechanic",
+							uuid = "14f39a4b-a434-fc6a-bea2-dbe80a0fe1a2",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Automarkers",
+				loop = true,
+				mechanicTime = 69.2,
+				name = "[AM] Optional P1 Pantokrator",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 15,
+				timerEndOffset = 32,
+				timerStartOffset = -6,
+				uuid = "f00dfe4f-ff9f-2393-b705-d77dc50c2244",
 				version = 2,
 			},
 		},
@@ -2839,6 +3073,69 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Automarkers",
+				uuid = "2d54a67d-59ef-989a-b407-7cbcb0bca562",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.topAMBuild then self.used=true return end\nlocal enabled=Settings.FFXIVMINION.LPDU_TOP_AM_synergy==1\nif not S.ready() then self.used=true return end\nlocal w=S.p5MarkerWriter\nif not enabled then\n if w and string.find(w.key,'synergy',1,true)==1 then S.topAMTick(w.key,nil,false)end\n self.used=true return\nend\nlocal key,queue=S.topAMBuild('synergy')\nif not key and w and w.target and string.find(w.key,'synergy',1,true)==1 then S.topAMTick(w.key,nil,false)end\nif key and queue then S.topAMTick(key,queue,enabled)end\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"385f1d72-f1b4-1620-9d89-a75895ba918b",
+									true,
+								},
+							},
+							name = "[AM] Optional P2 Party Synergy",
+							uuid = "e807c7a3-3e79-9302-80e3-851608f47477",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.topLpdu;return S and (Settings.FFXIVMINION.LPDU_TOP_AM_synergy==1 or S.p5MarkerWriter and S.p5MarkerWriter.target and string.find(S.p5MarkerWriter.key,'synergy',1,true)==1) or false",
+							name = "Matching mechanic",
+							uuid = "385f1d72-f1b4-1620-9d89-a75895ba918b",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Automarkers",
+				loop = true,
+				mechanicTime = 230.9,
+				name = "[AM] Optional P2 Party Synergy",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 35,
+				timerEndOffset = 30,
+				timerStartOffset = -3,
+				uuid = "e8c41bed-959d-5ac1-a15a-c4e176858c44",
+				version = 2,
+			},
+		},
 	},
 	[39] = 
 	{
@@ -3924,7 +4221,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() then self.used=true return end\nlocal R=AnyoneCore.Roster\nlocal lists={{},{},{}}\nfor slot in string.gmatch('R1 M1 T1 H1 H2 T2 M2 R2','%S+') do\n local e=R.entOf(slot)\n local category=TensorCore.hasBuff(e,3425) and 1 or TensorCore.hasBuff(e,3426) and 2 or 3\n lists[category][#lists[category]+1]=e.id\nend\nS.sniperCircles=S.sniperCircles or {}\nlocal me=TensorCore.mGetPlayer()\nlocal spread=TensorCore.hasBuff(me,3425)\nlocal assignedStack\nfor rank,id in ipairs(lists[2]) do if id==me.id then assignedStack=id end end\nfor rank,id in ipairs(lists[3]) do if id==me.id then assignedStack=lists[2][rank] end end\nfor category=1,2 do for _,id in ipairs(lists[category]) do\n local e=TensorCore.mGetEntity(id)\n local safe=category==2 and id==assignedStack\n local d=TensorCore.getCachedFlatDrawer(safe and 0x5033FF33 or 0x503333FF,safe and 0x5033FF33 or 0x503333FF,safe and 0x5033FF33 or 0x503333FF,safe and 0xFF33FF33 or 0xFF3333FF,3,0,0)\n local old=S.sniperCircles[id]\n if old and old.safe~=safe then Argus.deleteTimedShape(old.id);S.owned[old.id]=nil;old=nil end\n if e and e.pos and (not old or not d:updateTimedCircle(old.id,1000,e.pos.x,0,e.pos.z,6,0,false,true,0)) then\n  S.sniperCircles[id]={id=S.keep(d:addTimedCircle(1000,e.pos.x,0,e.pos.z,6,0,false,true,0)),safe=safe}\n end\nend end\nif #lists[1]~=4 or #lists[2]~=2 or #lists[3]~=2 then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nlocal angles={[-1]=0}\nfor category,list in ipairs(lists) do\n for rank,id in ipairs(list) do\n  if id==p.id then\n   local angle=category==1 and ({-math.pi/2,-3*math.pi/4,3*math.pi/4,math.pi/2})[rank] or (rank==1 and -math.pi/4 or math.pi/4)\n   S.sniperAngle=angle\n   S.go('sniper',S.polar(angle,19),category==1 and 'Spread here' or 'Pair stack north',10,1)\n  end\n end\nend\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() then self.used=true return end\nlocal R=AnyoneCore.Roster\nlocal lists={{},{},{}}\nfor slot in string.gmatch('R1 M1 T1 H1 H2 T2 M2 R2','%S+') do\n local e=R.entOf(slot)\n local category=TensorCore.hasBuff(e,3425) and 1 or TensorCore.hasBuff(e,3426) and 2 or 3\n lists[category][#lists[category]+1]=e.id\nend\nif Settings.FFXIVMINION.LPDU_TOP_AM_transition==1 and S.topAMBuild then\n S.topAMBuild('transition')\n if S.topAMTransitionLists then lists=S.topAMTransitionLists end\nend\nS.sniperCircles=S.sniperCircles or {}\nlocal me=TensorCore.mGetPlayer()\nlocal spread=TensorCore.hasBuff(me,3425)\nlocal assignedStack\nfor rank,id in ipairs(lists[2]) do if id==me.id then assignedStack=id end end\nfor rank,id in ipairs(lists[3]) do if id==me.id then assignedStack=lists[2][rank] end end\nif TensorReactions_CurrentTimer>=421.0 then\nfor category=1,2 do for _,id in ipairs(lists[category]) do\n local e=TensorCore.mGetEntity(id)\n local safe=category==2 and id==assignedStack\n local d=TensorCore.getCachedFlatDrawer(safe and 0x5033FF33 or 0x503333FF,safe and 0x5033FF33 or 0x503333FF,safe and 0x5033FF33 or 0x503333FF,safe and 0xFF33FF33 or 0xFF3333FF,3,0,0)\n local old=S.sniperCircles[id]\n if old and old.safe~=safe then Argus.deleteTimedShape(old.id);S.owned[old.id]=nil;old=nil end\n local seconds=(category==1 and 428.4 or 427.3)-TensorReactions_CurrentTimer\n if e and e.pos and not old and seconds>0 then\n  S.sniperCircles[id]={id=S.keep(d:addTimedCircleOnEnt(math.floor(seconds*1000),id,6,0,false,true,0)),safe=safe}\n end\nend end\nend\nif #lists[1]~=4 or #lists[2]~=2 or #lists[3]~=2 then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nlocal angles={[-1]=0}\nfor category,list in ipairs(lists) do\n for rank,id in ipairs(list) do\n  if id==p.id then\n   local angle=category==1 and ({-math.pi/2,-3*math.pi/4,3*math.pi/4,math.pi/2})[rank] or (rank==1 and -math.pi/4 or math.pi/4)\n   S.sniperAngle=angle\n   S.go('sniper',S.polar(angle,19),category==1 and 'Spread here' or 'Pair stack north',10,1)\n  end\n end\nend\nself.used=true\n",
 							name = "[P3] Personal transition spread or pair",
 							uuid = "06a68062-9828-2424-ba07-01f5955041b4",
 							version = 2.1,
@@ -3944,6 +4241,134 @@ local tbl =
 				timerEndOffset = -0.2,
 				timerStartOffset = -20,
 				uuid = "cb45a7aa-3489-5f59-b19a-545300bbaa5d",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Automarkers",
+				uuid = "33c658db-803b-b1b3-a452-1bc118018d08",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.topAMBuild then self.used=true return end\nlocal enabled=Settings.FFXIVMINION.LPDU_TOP_AM_transition==1\nif not S.ready() then self.used=true return end\nlocal w=S.p5MarkerWriter\nif not enabled then\n if w and string.find(w.key,'transition',1,true)==1 then S.topAMTick(w.key,nil,false)end\n self.used=true return\nend\nlocal key,queue=S.topAMBuild('transition')\nif not key and w and w.target and string.find(w.key,'transition',1,true)==1 then S.topAMTick(w.key,nil,false)end\nif key and queue then S.topAMTick(key,queue,enabled)end\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"288dd288-85a9-5bc8-8807-99317f9da9f0",
+									true,
+								},
+							},
+							name = "[AM] Optional P3 Transition",
+							uuid = "51a2d019-ba9f-4ed2-ac6b-2f983c6d61e7",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.topLpdu;return S and (Settings.FFXIVMINION.LPDU_TOP_AM_transition==1 or S.p5MarkerWriter and S.p5MarkerWriter.target and string.find(S.p5MarkerWriter.key,'transition',1,true)==1) or false",
+							name = "Matching mechanic",
+							uuid = "288dd288-85a9-5bc8-8807-99317f9da9f0",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Automarkers",
+				loop = true,
+				mechanicTime = 427.3,
+				name = "[AM] Optional P3 Transition",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 70,
+				timerStartOffset = -20,
+				uuid = "c6495f66-32d7-af12-baf2-abe45893aff9",
+				version = 2,
+			},
+		},
+	},
+	[74] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "P3\\Hello World",
+				uuid = "a4b04b0d-edd5-2bd8-8fef-847f2fe5d15a",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() then self.used=true return end\nlocal slot=AnyoneCore.Roster.mySlot()\nlocal degrees={T1=0,T2=45,H2=90,R2=135,M2=180,M1=225,R1=270,H1=315}\nlocal a=degrees[slot]\nif a then\n local seconds=math.max(.1,440.8-TensorReactions_CurrentTimer)\n S.go('hw-precast-clock',S.polar(math.rad(a),8),'Loose clock spread for Hello World',seconds,.8)\nend\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"6855451c-3e0f-1b22-af0a-5b852bedd00f",
+									true,
+								},
+							},
+							name = "[P3] Loose clock spread before Hello World",
+							uuid = "6074ca5a-2717-a95a-8244-0b1022e6f685",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return data.topLpdu and not data.topLpdu.issued['hw-precast-clock']",
+							name = "Matching mechanic",
+							uuid = "6855451c-3e0f-1b22-af0a-5b852bedd00f",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "P3\\Hello World",
+				loop = true,
+				mechanicTime = 432.3,
+				name = "[P3] Loose clock spread before Hello World",
+				throttleTime = 250,
+				timeRange = true,
+				timelineIndex = 74,
+				timerEndOffset = 8.5,
+				timerStartOffset = 0.3,
+				uuid = "332c448d-6cc6-fc40-896b-d9a236ce8353",
 				version = 2,
 			},
 		},
@@ -4132,7 +4557,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nS.hw=S.hw or {roles={},colors={},towers={},wave=0,sides={},dest={},patches=0}\nlocal hw=S.hw\nLPDU_TOP_HWDebug={time=TensorReactions_CurrentTimer,wave=hw.wave,resolved=hw.resolved,ready=S.ready(),roles=hw.roles,colors=hw.colors,towers=hw.towers}\nif not S.ready() or hw.resolved then self.used=true return end\n-- Replay snapshots may restore statuses without firing their original gain event.\n-- Recover initial roles while their preparation statuses are still present.\nif hw.wave<=1 then\n for _,slot in ipairs({'T1','T2','H1','H2','M1','M2','R1','R2'}) do\n  local e=AnyoneCore.Roster.entOf(slot)\n  if hw.roles[e.id]==nil then\n   if (TensorCore.hasBuff(e,3436) or TensorCore.hasBuff(e,3524)) then hw.roles[e.id]=2\n   elseif (TensorCore.hasBuff(e,3437) or TensorCore.hasBuff(e,3525)) then hw.roles[e.id]=0\n   else\n    local localBuff=TensorCore.getBuff(e,3503)\n    local remoteBuff=TensorCore.getBuff(e,3441)\n    if TensorCore.hasBuff(e,3529) or (localBuff and localBuff.duration<30) then hw.roles[e.id]=3\n    elseif TensorCore.hasBuff(e,3530) or (remoteBuff and remoteBuff.duration<30) then hw.roles[e.id]=1 end\n   end\n  end\n  if (TensorCore.hasBuff(e,3438) or TensorCore.hasBuff(e,3526)) then hw.colors[e.id]='red'\n  elseif (TensorCore.hasBuff(e,3439) or TensorCore.hasBuff(e,3429)) then hw.colors[e.id]='blue' end\n end\nend\nlocal count,defamColor=0,nil\nfor id,role in pairs(hw.roles) do\n count=count+1\n if role==0 and hw.colors[id] then defamColor=hw.colors[id] end\nend\nlocal player=TensorCore.mGetPlayer()\nif not defamColor then\n for id,role in pairs(hw.roles) do\n  if role==2 and hw.colors[id] then defamColor=hw.colors[id]=='red' and 'blue' or 'red';break end\n end\nend\nLPDU_TOP_HWDebug.roleCount=count;LPDU_TOP_HWDebug.defamColor=defamColor\nif hw.roles[player.id]==nil or not defamColor then LPDU_TOP_HWDebug.waiting='player role or defamation color';self.used=true return end\nlocal n,mx,mz,deadline=0,0,0,nil\nfor _,t in pairs(hw.towers) do\n n=n+1; deadline=t.expires\n if t.color==defamColor then mx=mx+t.pos.x-100; mz=mz+t.pos.z-100 end\nend\nLPDU_TOP_HWDebug.towerCount=n;LPDU_TOP_HWDebug.deadline=deadline\nif n~=4 or not deadline or deadline<=Now() then LPDU_TOP_HWDebug.waiting='four active towers';self.used=true return end\nlocal a=math.atan2(mx,-mz)\nhw.angle=a\nlocal function spot(role,side)\n if role==0 then return S.polar(a+side*math.pi/4,15.5)\n elseif role==1 then return S.polar(a+math.pi+side*math.rad(12),12.5)\n elseif role==2 then return S.polar(a+math.pi+side*math.rad(25),12.5)\n elseif hw.wave<4 then return S.polar(a+side*math.rad(75),15.5)\n else return S.polar(a+math.pi+side*math.rad(12),12.5) end\nend\nlocal R=AnyoneCore.Roster\nfor initial=hw.roles[player.id],hw.roles[player.id] do\n local pair={}\n for slot in string.gmatch('R1 M1 T1 H1 H2 T2 M2 R2','%S+') do\n  local e=R.entOf(slot)\n  if hw.roles[e.id]==initial then pair[#pair+1]=e end\n end\n if #pair~=2 then LPDU_TOP_HWDebug.waiting='same role partner';self.used=true return end\n local role=(initial+hw.wave-1)%4\n hw.sideWaves=hw.sideWaves or {}\n if hw.sideWaves[pair[1].id]~=hw.wave then\n  hw.sideWaves[pair[1].id]=hw.wave;hw.sideWaves[pair[2].id]=hw.wave\n  local left,right=spot(role,-1),spot(role,1)\n  local straight=TensorCore.getDistance2d(pair[1].pos,left)+TensorCore.getDistance2d(pair[2].pos,right)\n  local cross=TensorCore.getDistance2d(pair[1].pos,right)+TensorCore.getDistance2d(pair[2].pos,left)\n  hw.sides[pair[1].id]=straight<=cross and -1 or 1\n  hw.sides[pair[2].id]=-hw.sides[pair[1].id]\n end\n for _,e in ipairs(pair) do hw.dest[e.id]=spot(role,hw.sides[e.id]) end\nend\nlocal p=TensorCore.mGetPlayer()\nlocal role=(hw.roles[p.id]+hw.wave-1)%4\nlocal good=TensorCore.getCachedFlatDrawer(0x3033FF33,0x3033FF33,0x3033FF33,0xFF33FF33,3,0,0)\nlocal bad=TensorCore.getCachedFlatDrawer(0x80202060,0x80202060,0x80202060,0xFF1010CC,3,0,0)\nhw.roleCircles=hw.roleCircles or {}\nlocal shareTarget,shareDistance\nlocal donorRole=role==3 and hw.wave<4 and 0 or (role==1 or role==3 and hw.wave==4) and 2 or nil\nif donorRole then\n for id,initial in pairs(hw.roles)do\n  if (initial+hw.wave-1)%4==donorRole then\n   local e=TensorCore.mGetEntity(id)\n   if e and e.pos then\n    local distance=TensorCore.getDistance2d(e.pos,hw.dest[p.id])\n    if not shareDistance or distance<shareDistance then shareTarget=id;shareDistance=distance end\n   end\n  end\n end\nend\nfor id,initial in pairs(hw.roles) do\n local current=(initial+hw.wave-1)%4\n if current~=0 and hw.roleCircles[id] then\n  Argus.deleteTimedShape(hw.roleCircles[id].id);S.owned[hw.roleCircles[id].id]=nil;hw.roleCircles[id]=nil\n end\n if current==0 then\n  local e=TensorCore.mGetEntity(id)\n  local share=id==shareTarget\n  local drawer=share and good or bad\n  local radius=current==0 and 20 or 5\n  local state=hw.roleCircles[id]\n  if state and (state.share~=share or state.wave~=hw.wave) then Argus.deleteTimedShape(state.id);S.owned[state.id]=nil;state=nil end\n  if e and e.pos and (not state or Now()>=state.expires) then\n   local ms=math.max(100,deadline-Now())\n   hw.roleCircles[id]={id=S.keep(drawer:addTimedCircleOnEnt(ms,id,20,0,false,true,0)),share=share,wave=hw.wave,expires=deadline}\n  end\n end\nend\nLPDU_TOP_HWDebug.waiting=nil;LPDU_TOP_HWDebug.destination=hw.dest[p.id]\nlocal text=({'Take defamation tower','Share stack, stay near','Take stack tower','Take defamation, stay out'})[role+1]\nif role==3 and hw.wave==4 then text='Share final stack' end\nlocal seconds=(deadline-Now())/1000\nif S.goal and S.goal.key=='hw-tower-'..hw.wave then S.goal.pos=hw.dest[p.id];S.goal.expires=deadline end\nif S.go('hw-tower-'..hw.wave,hw.dest[p.id],text,seconds,0.9) and not hw.countdown then\n hw.countdown=hw.wave\n local pos=hw.dest[p.id]\n AnyoneCore.addWorldTextCountdown(math.floor(seconds*1000),{x=pos.x,y=pos.y+2,z=pos.z},0xFF33FF33,true,1.2)\nend\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nS.hw=S.hw or {roles={},colors={},towers={},wave=0,sides={},dest={},patches=0}\nlocal hw=S.hw\nLPDU_TOP_HWDebug={time=TensorReactions_CurrentTimer,wave=hw.wave,resolved=hw.resolved,ready=S.ready(),roles=hw.roles,colors=hw.colors,towers=hw.towers}\nif not S.ready() or hw.resolved then self.used=true return end\n-- Replay snapshots may restore statuses without firing their original gain event.\n-- Recover initial roles while their preparation statuses are still present.\nif hw.wave<=1 then\n for _,slot in ipairs({'T1','T2','H1','H2','M1','M2','R1','R2'}) do\n  local e=AnyoneCore.Roster.entOf(slot)\n  if hw.roles[e.id]==nil then\n   if (TensorCore.hasBuff(e,3436) or TensorCore.hasBuff(e,3524)) then hw.roles[e.id]=2\n   elseif (TensorCore.hasBuff(e,3437) or TensorCore.hasBuff(e,3525)) then hw.roles[e.id]=0\n   else\n    local localBuff=TensorCore.getBuff(e,3503)\n    local remoteBuff=TensorCore.getBuff(e,3441)\n    if TensorCore.hasBuff(e,3529) or (localBuff and localBuff.duration<30) then hw.roles[e.id]=3\n    elseif TensorCore.hasBuff(e,3530) or (remoteBuff and remoteBuff.duration<30) then hw.roles[e.id]=1 end\n   end\n  end\n  if (TensorCore.hasBuff(e,3438) or TensorCore.hasBuff(e,3526)) then hw.colors[e.id]='red'\n  elseif (TensorCore.hasBuff(e,3439) or TensorCore.hasBuff(e,3429)) then hw.colors[e.id]='blue' end\n end\nend\nlocal count,defamColor=0,nil\nfor id,role in pairs(hw.roles) do\n count=count+1\n if role==0 and hw.colors[id] then defamColor=hw.colors[id] end\nend\nlocal player=TensorCore.mGetPlayer()\nif not defamColor then\n for id,role in pairs(hw.roles) do\n  if role==2 and hw.colors[id] then defamColor=hw.colors[id]=='red' and 'blue' or 'red';break end\n end\nend\nLPDU_TOP_HWDebug.roleCount=count;LPDU_TOP_HWDebug.defamColor=defamColor\nif hw.roles[player.id]==nil or not defamColor then LPDU_TOP_HWDebug.waiting='player role or defamation color';self.used=true return end\nlocal n,mx,mz,deadline=0,0,0,nil\nfor _,t in pairs(hw.towers) do\n n=n+1; deadline=t.expires\n if t.color==defamColor then mx=mx+t.pos.x-100; mz=mz+t.pos.z-100 end\nend\nLPDU_TOP_HWDebug.towerCount=n;LPDU_TOP_HWDebug.deadline=deadline\nif n~=4 or not deadline or deadline<=Now() then LPDU_TOP_HWDebug.waiting='four active towers';self.used=true return end\nlocal a=math.atan2(mx,-mz)\nhw.angle=a\nlocal function spot(role,side)\n if role==0 then return S.polar(a+side*math.pi/4,15.5)\n elseif role==1 then return S.polar(a+math.pi+side*math.rad(12),12.5)\n elseif role==2 then return S.polar(a+math.pi+side*math.rad(25),12.5)\n elseif hw.wave<4 then return S.polar(a+side*math.rad(75),15.5)\n else return S.polar(a+math.pi+side*math.rad(12),12.5) end\nend\nlocal R=AnyoneCore.Roster\nfor initial=hw.roles[player.id],hw.roles[player.id] do\n local pair={}\n for slot in string.gmatch('R1 M1 T1 H1 H2 T2 M2 R2','%S+') do\n  local e=R.entOf(slot)\n  if hw.roles[e.id]==initial then pair[#pair+1]=e end\n end\n if #pair~=2 then LPDU_TOP_HWDebug.waiting='same role partner';self.used=true return end\n local role=(initial+hw.wave-1)%4\n hw.sideWaves=hw.sideWaves or {}\n if hw.sideWaves[pair[1].id]~=hw.wave then\n  hw.sideWaves[pair[1].id]=hw.wave;hw.sideWaves[pair[2].id]=hw.wave\n  local left,right=spot(role,-1),spot(role,1)\n  local straight=TensorCore.getDistance2d(pair[1].pos,left)+TensorCore.getDistance2d(pair[2].pos,right)\n  local cross=TensorCore.getDistance2d(pair[1].pos,right)+TensorCore.getDistance2d(pair[2].pos,left)\n  hw.sides[pair[1].id]=straight<=cross and -1 or 1\n  hw.sides[pair[2].id]=-hw.sides[pair[1].id]\n end\n for _,e in ipairs(pair) do hw.dest[e.id]=spot(role,hw.sides[e.id]) end\nend\nlocal p=TensorCore.mGetPlayer()\nlocal role=(hw.roles[p.id]+hw.wave-1)%4\nfor _,shape in pairs(hw.roleCircles or {})do Argus.deleteTimedShape(shape.id);S.owned[shape.id]=nil end\nhw.roleCircles=nil\nLPDU_TOP_HWDebug.waiting=nil;LPDU_TOP_HWDebug.destination=hw.dest[p.id]\nlocal text=({'Take defamation tower','Share stack, stay near','Take stack tower','Take defamation, stay out'})[role+1]\nif role==3 and hw.wave==4 then text='Share final stack' end\nlocal seconds=(deadline-Now())/1000\nif S.goal and S.goal.key=='hw-tower-'..hw.wave then S.goal.pos=hw.dest[p.id];S.goal.expires=deadline end\nif S.go('hw-tower-'..hw.wave,hw.dest[p.id],text,seconds,0.9) and not hw.countdown then\n hw.countdown=hw.wave\n local pos=hw.dest[p.id]\n AnyoneCore.addWorldTextCountdown(math.floor(seconds*1000),{x=pos.x,y=pos.y+2,z=pos.z},0xFF33FF33,true,1.2)\nend\nself.used=true\n",
 							name = "[P3] Hello World personal tower step",
 							uuid = "4ec5cecc-d59d-92b7-b06a-c95dc060d269",
 							version = 2.1,
@@ -4472,7 +4897,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then local R=AnyoneCore.Roster\nif S.ready() then\n local order={}\n for _,role in ipairs({'R1','M1','T1','H1','H2','T2','M2','R2'}) do\n  local e=R.entOf(role);order[#order+1]={id=e.id,z=e.pos.z,rank=#order+1}\n end\n table.sort(order,function(a,b)if math.abs(a.z-b.z)>.1 then return a.z<b.z end return a.rank<b.rank end)\n S.monitorOrder={}\n for _,entry in ipairs(order) do S.monitorOrder[#S.monitorOrder+1]=entry.id end\nend\nself.used=true return end\n\nS.monitorBoss=eventArgs.spellID==31595 and 1 or -1\nS.monitorDeadline=Now()+eventArgs.channelTimeMax*1000\nlocal R=AnyoneCore.Roster\nif S.ready() then\n local order={}\n for _,role in ipairs({'R1','M1','T1','H1','H2','T2','M2','R2'}) do\n  local e=R.entOf(role);order[#order+1]={id=e.id,z=e.pos.z,rank=#order+1}\n end\n table.sort(order,function(a,b)if math.abs(a.z-b.z)>.1 then return a.z<b.z end return a.rank<b.rank end)\n S.monitorOrder={}\n for _,entry in ipairs(order) do S.monitorOrder[#S.monitorOrder+1]=entry.id end\nend\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\nS.p3MonitorResolved=nil\nS.monitorBoss=eventArgs.spellID==31595 and 1 or -1\nS.monitorDeadline=Now()+eventArgs.channelTimeMax*1000\nlocal R=AnyoneCore.Roster\nif S.ready() then\n local order={}\n for _,role in ipairs({'R1','M1','T1','H1','H2','T2','M2','R2'}) do\n  local e=R.entOf(role);order[#order+1]={id=e.id,z=e.pos.z,rank=#order+1}\n end\n table.sort(order,function(a,b)if math.abs(a.z-b.z)>.1 then return a.z<b.z end return a.rank<b.rank end)\n S.monitorOrder={}\n for _,entry in ipairs(order) do S.monitorOrder[#S.monitorOrder+1]=entry.id end\nend\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -4569,7 +4994,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nlocal p=TensorCore.mGetPlayer()\nlocal R=AnyoneCore.Roster\nif not p or not p.pos or not R or not R.current() then self.used=true return end\nlocal boss\nfor _,e in pairs(TensorCore.entityList('contentid=7636')) do\n if Argus.getEntityModel(e)==15717 and e.targetable and e.alive and e.targetid==p.id then boss=e; break end\nend\nif not boss or not boss.pos then self.used=true return end\nlocal error=math.abs(math.atan2(math.sin(boss.pos.h-math.pi),math.cos(boss.pos.h-math.pi)))\nlocal key='face-monitors-end'\nif error<math.rad(20) then\n if S.goal and S.goal.key==key then S.clearGoal() end\n self.used=true return\nend\nif boss.castinginfo.channelingid~=0 then self.used=true return end\nS.go(key,{x=boss.pos.x,y=boss.pos.y,z=boss.pos.z-boss.hitradius-1.5},'You have aggro, face boss north',3.5,0.8)\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S or not S.p3MonitorResolved then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nlocal R=AnyoneCore.Roster\nif not p or not p.pos or not R or not R.current() then self.used=true return end\nlocal boss\nfor _,e in pairs(TensorCore.entityList('contentid=7636'))do\n if Argus.getEntityModel(e)==15717 and e.targetable and e.alive and e.targetid==p.id then boss=e;break end\nend\nif not boss or not boss.pos or boss.castinginfo.channelingid~=0 then self.used=true return end\nlocal dx,dz=p.pos.x-boss.pos.x,p.pos.z-boss.pos.z\nlocal n=math.sqrt(dx*dx+dz*dz)\nif n<.5 then self.used=true return end\ndx,dz=dx/n,dz/n\nlocal a=math.atan2(dx,dz)\nS.go('face-monitors-end',{x=100+math.sin(a)*19,y=p.pos.y,z=100+math.cos(a)*19},'Pull boss to wall after monitors',5,0.8)\nself.used=true\n",
 							name = "[Aggro] Face boss north - monitors-end",
 							uuid = "6876847f-2fe6-dbe0-a8c2-844d3fbe932f",
 							version = 2.1,
@@ -4582,7 +5007,7 @@ local tbl =
 				displayPath = "Orientation",
 				loop = true,
 				mechanicTime = 571.4,
-				name = "[Aggro] Face boss north - monitors-end",
+				name = "[P3] Pull surviving boss after monitors",
 				throttleTime = 250,
 				timeRange = true,
 				timelineIndex = 93,
@@ -4613,7 +5038,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nlocal lock=S.monitorAutoLock\nif lock and lock.owned then lock.releaseAt=Now()+800 end\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nS.p3MonitorResolved=Now()\nlocal lock=S.monitorAutoLock\nif lock and lock.owned then lock.releaseAt=Now()+800 end\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -4654,6 +5079,69 @@ local tbl =
 				timerEndOffset = 215,
 				timerStartOffset = -12,
 				uuid = "7f1defde-efd0-1c15-8d53-7c008a40d29d",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Automarkers",
+				uuid = "56c1e7c8-f1db-56aa-8220-61c4f8332926",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.topAMBuild then self.used=true return end\nlocal enabled=Settings.FFXIVMINION.LPDU_TOP_AM_monitor==1\nif not S.ready() then self.used=true return end\nlocal w=S.p5MarkerWriter\nif not enabled then\n if w and string.find(w.key,'monitor',1,true)==1 then S.topAMTick(w.key,nil,false)end\n self.used=true return\nend\nlocal key,queue=S.topAMBuild('monitor')\nif not key and w and w.target and string.find(w.key,'monitor',1,true)==1 then S.topAMTick(w.key,nil,false)end\nif key and queue then S.topAMTick(key,queue,enabled)end\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"c951ca43-17df-0a21-a53a-f8f6a3076077",
+									true,
+								},
+							},
+							name = "[AM] Optional P3 Monitors",
+							uuid = "a6431d68-dc34-2f60-83e0-a58e9fcbe1c1",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.topLpdu;return S and (Settings.FFXIVMINION.LPDU_TOP_AM_monitor==1 or S.p5MarkerWriter and S.p5MarkerWriter.target and string.find(S.p5MarkerWriter.key,'monitor',1,true)==1) or false",
+							name = "Matching mechanic",
+							uuid = "c951ca43-17df-0a21-a53a-f8f6a3076077",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Automarkers",
+				loop = true,
+				mechanicTime = 571.4,
+				name = "[AM] Optional P3 Monitors",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 93,
+				timerEndOffset = 1,
+				timerStartOffset = -12,
+				uuid = "1e74a2b7-ff7a-3ed8-aa02-d2fd82cb2864",
 				version = 2,
 			},
 		},
@@ -5743,6 +6231,69 @@ local tbl =
 				timerEndOffset = 50,
 				timerStartOffset = -6,
 				uuid = "639421f9-277b-a03e-bde5-3c6f7932c2bf",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Automarkers",
+				uuid = "e4d74861-57dc-57fa-8a3b-87016720c297",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.topAMBuild then self.used=true return end\nlocal enabled=Settings.FFXIVMINION.LPDU_TOP_AM_delta==1\nif not S.ready() then self.used=true return end\nlocal w=S.p5MarkerWriter\nif not enabled then\n if w and string.find(w.key,'delta',1,true)==1 then S.topAMTick(w.key,nil,false)end\n self.used=true return\nend\nlocal key,queue=S.topAMBuild('delta')\nif not key and w and w.target and string.find(w.key,'delta',1,true)==1 then S.topAMTick(w.key,nil,false)end\nif key and queue then S.topAMTick(key,queue,enabled)end\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"cc2dbcdd-bc1c-d70c-9a80-ddedbe184df2",
+									true,
+								},
+							},
+							name = "[AM] Optional P5 Delta",
+							uuid = "e6d2142e-5c80-fdf0-aa69-3f3e8d13968c",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.topLpdu;return S and (Settings.FFXIVMINION.LPDU_TOP_AM_delta==1 or S.p5MarkerWriter and S.p5MarkerWriter.target and string.find(S.p5MarkerWriter.key,'delta',1,true)==1) or false",
+							name = "Matching mechanic",
+							uuid = "cc2dbcdd-bc1c-d70c-9a80-ddedbe184df2",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Automarkers",
+				loop = true,
+				mechanicTime = 740,
+				name = "[AM] Optional P5 Delta",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 130,
+				timerEndOffset = 40,
+				timerStartOffset = -4,
+				uuid = "947cb2b6-2e4f-e6c5-b904-cdc8724eea8e",
 				version = 2,
 			},
 		},
@@ -7284,7 +7835,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.weapon then self.used=true return end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e or not e.pos then self.used=true return end\nlocal model=Argus.getEntityModel(e)\nif not (model==15720) then self.used=true return end\nlocal d=(e.pos.x-100)^2+(e.pos.z-100)^2\nif d<80 or d>125 then self.used=true return end\nS.weapon.add(e,14900,'sigma')\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.weapon then self.used=true return end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e or not e.pos then self.used=true return end\nlocal model=Argus.getEntityModel(e)\nif not (model==15720) then self.used=true return end\nlocal d=(e.pos.x-100)^2+(e.pos.z-100)^2\nif d<80 or d>125 then self.used=true return end\nS.weapon.add(e,15100,'sigma')\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -7490,7 +8041,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\nif not S.bounceOrder then\n function S.bounceOrder()\n  local base={'T1','T2','H1','H2','M1','M2','R1','R2'}\n  local order,seen={},{}\n  for rank=1,8 do\n   local index=Settings.FFXIVMINION['LPDU_TOP_BouncePriority'..rank]\n   if index==nil then index=rank-1 end\n   local slot=base[index+1]\n   if not slot or seen[slot] then return base end\n   seen[slot]=true;order[rank]=slot\n  end\n  return order\n end\nend\n\nlocal s=S.sigma\nif not s or not s.laser or not S.ready() then self.used=true return end\nlocal l=s.laser\nlocal R=AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif not l.roles then\n local function assignStatic()\n local holders,pool,front,back={}, {}, {}, {}\n local aggro\n for _,content in ipairs({12257,12258}) do for _,boss in pairs(TensorCore.entityList('contentid='..content)) do\n  if Argus.getEntityModel(boss)==15720 then aggro=boss.targetid end\n end end\n for _,role in ipairs(S.bounceOrder()) do\n  local e=R.entOf(role)\n  if TensorCore.hasBuff(e,3442) then holders[e.id]='near';local b=TensorCore.getBuff(e,3442);if b then s.worldDeadline=Now()+b.duration*1000 end\n  elseif TensorCore.hasBuff(e,3443) then holders[e.id]='far'\n  else\n   local d=TensorCore.getBuff(e,3444)\n   pool[#pool+1]={id=e.id,dynamis=d and d.stacks or 0}\n  end\n end\n local count=0;for _ in pairs(holders) do count=count+1 end\n if count~=2 or #pool~=6 then self.used=true return end\n for _,a in ipairs(pool) do if a.dynamis==1 then front[#front+1]=a.id end end\n if #front~=3 then self.used=true return end\n local chosen={};for _,id in ipairs(front) do chosen[id]=true end\n for _,a in ipairs(pool) do if not chosen[a.id] then back[#back+1]=a.id end end\n l.roles=holders\n for i,id in ipairs(front) do l.roles[id]=({'fist1','fist2','far1'})[i] end\n for i,id in ipairs(back) do l.roles[id]=({'far2','near1','near2'})[i] end\n end\n assignStatic()\nend\nlocal role=l.roles and l.roles[p.id]\nif Settings.FFXIVMINION.LPDU_TOP_BounceAssignments~=1 then\n local mapping={[1]='far1',[2]='near1',[3]='near2',[4]='far2',[6]='fist1',[7]='fist2',[13]='far',[14]='near'}\n local picked,seen,parts={},{},{}\n local valid=true\n for _,slot in ipairs({'T1','T2','H1','H2','M1','M2','R1','R2'}) do\n  local e=AnyoneCore.Roster.entOf(slot)\n  local assigned=mapping[e.marker]\n  if not assigned or seen[e.marker] then valid=false;break end\n  if assigned=='near' and not TensorCore.hasBuff(e,3442) then valid=false;break end\n  if assigned=='far' and not TensorCore.hasBuff(e,3443) then valid=false;break end\n  seen[e.marker]=true;picked[e.id]=assigned;parts[#parts+1]=tostring(e.id)..':'..tostring(e.marker)\n end\n local signature=valid and table.concat(parts,',') or nil\n if signature~=l.amSignature then\n  l.amSignature=signature;l.amSince=Now()\n end\n if valid and Now()-l.amSince>=500 then\n  l.amRoles=picked\n end\n if l.amRoles then\n  role=l.amRoles[p.id] or role\n end\nend\nif not role then self.used=true return end\nlocal targetH={far=l.heading,near=l.heading+10*l.rotation,far1=l.heading+math.pi,far2=l.heading,near1=l.heading+9*l.rotation,near2=l.heading+11*l.rotation,fist1=l.heading+math.pi+5*l.rotation,fist2=l.heading+math.pi-5*l.rotation}\nlocal radius=(role=='near' or role=='far') and 10 or 19\nlocal h=targetH[role]\nlocal final={x=100+radius*math.sin(h),y=p.pos.y,z=100+radius*math.cos(h)}\nlocal seconds=math.max(.2,(l.deadline-Now())/1000)\nlocal current=l.heading+l.hits*l.rotation\nlocal phase='rotate-'..l.hits\nlocal pos,text\nlocal early=l.deadline-Now()>4000 and l.hits==0\nif early then\n local front=role=='fist1' or role=='fist2' or role=='far1'\n local angle=l.heading+(front and math.pi or 0)\n local rank=role=='fist1' and -1 or role=='fist2' and 1 or role=='near1' and -1 or role=='far2' and 1 or 0\n local lateral=rank*2.5\n pos={x=100+16*math.sin(angle)+lateral*math.cos(angle),y=p.pos.y,z=100+16*math.cos(angle)-lateral*math.sin(angle)}\n text=front and 'Go female side, line up in your slot' or 'Go opposite female, line up in your slot'\n if role=='near' or role=='far' then pos=final;text=role=='near' and 'Near world, prepare opposite female' or 'Distant world, prepare opposite female' end\n phase='conga';seconds=math.max(.3,(l.deadline-Now()-4000)/1000)\nelse\n local function safe(x,z)\n  if S.weapon and S.weapon.unsafe(x,z,S.weapon.active('sigma'),.6) then return false end\n  if l.hits<14 then\n   for i=0,math.min(1,13-l.hits) do\n    local a=current+i*l.rotation\n    if math.abs((x-100)*math.cos(a)-(z-100)*math.sin(a))<6.35 then return false end\n   end\n  end\n  return true\n end\n local function reachable(target)\n  local escaped=safe(p.pos.x,p.pos.z)\n  for i=1,16 do\n   local t=i/16\n   local good=safe(p.pos.x+(target.x-p.pos.x)*t,p.pos.z+(target.z-p.pos.z)*t)\n   if escaped and not good then return false end\n   escaped=escaped or good\n  end\n  return escaped\n end\n local path=reachable(final)\n if path then\n  pos=final\n  text=role=='near' and 'Near world, take your ring spot' or role=='far' and 'Distant world, take your ring spot' or role=='fist1' and 'Bait first hand northwest' or role=='fist2' and 'Bait second hand northeast' or role=='far1' and 'First far bounce, female wall' or role=='far2' and 'Second far bounce, opposite wall' or role=='near1' and 'Take first near bounce spot' or 'Take second near bounce spot'\n  phase='final';seconds=math.max(.2,((s.worldDeadline or (l.deadline+(14-l.hits)*600+2200))-Now())/1000)\n else\n  local behind=current-(l.rotation>0 and 1 or -1)*math.rad(20)\n  local playerH=math.atan2(p.pos.x-100,p.pos.z-100)\n  if math.cos(playerH-behind)<0 then behind=behind+math.pi end\n  local candidate={x=100+19*math.sin(behind),y=p.pos.y,z=100+19*math.cos(behind)}\n  if safe(candidate.x,candidate.z) and reachable(candidate) then pos=candidate end\n  if not pos then\n   -- Stay on the player's present side and take only a short safe step.\n   local direction=l.rotation>0 and 1 or -1\n   for degrees=5,45,5 do\n    local angle=playerH+direction*math.rad(degrees)\n    local nextSpot={x=100+19*math.sin(angle),y=p.pos.y,z=100+19*math.cos(angle)}\n    if safe(nextSpot.x,nextSpot.z) and reachable(nextSpot) then pos=nextSpot;break end\n   end\n  end\n  if not pos and safe(p.pos.x,p.pos.z) then pos={x=p.pos.x,y=p.pos.y,z=p.pos.z} end\n  text=l.rotation<0 and 'Follow laser clockwise, stay close' or 'Follow laser counterclockwise, stay close'\n  seconds=l.hits==0 and math.max(1.2,(l.deadline-Now())/1000) or 1.2\n end\nend\nif pos then\n local key='sigma-laser-'..role..'-'..phase\n if S.issued[key] and (not S.goal or S.goal.key~=key) then S.issued[key]=nil end\n if S.goal and S.goal.key==key then S.goal.pos=pos;S.goal.expires=Now()+seconds*1000 end\n if phase=='rotate-'..l.hits then\n  if l.rotateAnnounced then text='' else l.rotateAnnounced=true end\n end\n if S.go(key,pos,text,seconds,.7) and phase=='final' and not l.timerDrawn then\n  l.timerDrawn=true\n  AnyoneCore.addWorldTextCountdown(math.max(100,(s.worldDeadline or (Now()+seconds*1000))-Now()),{x=pos.x,y=p.pos.y+2,z=pos.z},0xFF33FF33,true,1.2)\n end\nend\nif l.drawGeneration~=l.generation then\n l.drawGeneration=l.generation\n for _,id in ipairs(l.draws) do Argus.deleteTimedShape(id) end\n l.draws={}\n if l.hits<14 then\n  for i=0,math.min(1,13-l.hits) do\n   local a=current+i*l.rotation\n   local drawer=i==0 and S.red or TensorCore.getStaticDrawer(0x403333FF,2)\n   local ms=math.max(100,l.deadline+i*600-Now()+100)\n   l.draws[#l.draws+1]=S.keep(drawer:addTimedRect(ms,100-25*math.sin(a),p.pos.y,100-25*math.cos(a),50,12,a,0,false,true,S.flags))\n  end\n end\nend\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\nif not S.bounceOrder then\n function S.bounceOrder()\n  local base={'T1','T2','H1','H2','M1','M2','R1','R2'}\n  local order,seen={},{}\n  for rank=1,8 do\n   local index=Settings.FFXIVMINION['LPDU_TOP_BouncePriority'..rank]\n   if index==nil then index=rank-1 end\n   local slot=base[index+1]\n   if not slot or seen[slot] then return base end\n   seen[slot]=true;order[rank]=slot\n  end\n  return order\n end\nend\n\nlocal s=S.sigma\nif not s or not s.laser or not S.ready() then self.used=true return end\nlocal l=s.laser\nlocal R=AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif not l.roles then\n local function assignStatic()\n local holders,pool,front,back={}, {}, {}, {}\n local aggro\n for _,content in ipairs({12257,12258}) do for _,boss in pairs(TensorCore.entityList('contentid='..content)) do\n  if Argus.getEntityModel(boss)==15720 then aggro=boss.targetid end\n end end\n for _,role in ipairs(S.bounceOrder()) do\n  local e=R.entOf(role)\n  if TensorCore.hasBuff(e,3442) then holders[e.id]='near';local b=TensorCore.getBuff(e,3442);if b then s.worldDeadline=Now()+b.duration*1000 end\n  elseif TensorCore.hasBuff(e,3443) then holders[e.id]='far'\n  else\n   local d=TensorCore.getBuff(e,3444)\n   pool[#pool+1]={id=e.id,dynamis=d and d.stacks or 0}\n  end\n end\n local count=0;for _ in pairs(holders) do count=count+1 end\n if count~=2 or #pool~=6 then self.used=true return end\n for _,a in ipairs(pool) do if a.dynamis==1 then front[#front+1]=a.id end end\n if #front~=3 then self.used=true return end\n local chosen={};for _,id in ipairs(front) do chosen[id]=true end\n for _,a in ipairs(pool) do if not chosen[a.id] then back[#back+1]=a.id end end\n l.roles=holders\n for i,id in ipairs(front) do l.roles[id]=({'fist1','fist2','far1'})[i] end\n for i,id in ipairs(back) do l.roles[id]=({'far2','near1','near2'})[i] end\n end\n assignStatic()\nend\nlocal role=l.roles and l.roles[p.id]\nif Settings.FFXIVMINION.LPDU_TOP_BounceAssignments~=2 then\n local mapping={[1]='far1',[2]='near1',[3]='near2',[4]='far2',[6]='fist1',[7]='fist2',[13]='far',[14]='near'}\n local picked,seen,parts={},{},{}\n local valid=true\n for _,slot in ipairs({'T1','T2','H1','H2','M1','M2','R1','R2'}) do\n  local e=AnyoneCore.Roster.entOf(slot)\n  local assigned=mapping[e.marker]\n  if not assigned or seen[e.marker] then valid=false;break end\n  if assigned=='near' and not TensorCore.hasBuff(e,3442) then valid=false;break end\n  if assigned=='far' and not TensorCore.hasBuff(e,3443) then valid=false;break end\n  seen[e.marker]=true;picked[e.id]=assigned;parts[#parts+1]=tostring(e.id)..':'..tostring(e.marker)\n end\n local signature=valid and table.concat(parts,',') or nil\n if signature~=l.amSignature then\n  l.amSignature=signature;l.amSince=Now()\n end\n if valid and Now()-l.amSince>=500 then\n  l.amRoles=picked\n end\n if l.amRoles then\n  role=l.amRoles[p.id] or role\n end\nend\nif not l.markerGraceStarted then l.markerGraceStarted=Now() end\nif Settings.FFXIVMINION.LPDU_TOP_BounceAssignments~=2 and not l.amRoles and Now()-l.markerGraceStarted<1500 then self.used=true return end\nif not role then self.used=true return end\nlocal targetH={far=l.heading,near=l.heading+10*l.rotation,far1=l.heading+math.pi,far2=l.heading,near1=l.heading+9*l.rotation,near2=l.heading+11*l.rotation,fist1=l.heading+math.pi+5*l.rotation,fist2=l.heading+math.pi-5*l.rotation}\nlocal radius=(role=='near' or role=='far') and 10 or 19\nlocal h=targetH[role]\nlocal final={x=100+radius*math.sin(h),y=p.pos.y,z=100+radius*math.cos(h)}\nlocal seconds=math.max(.2,(l.deadline-Now())/1000)\nlocal current=l.heading+l.hits*l.rotation\nlocal phase='rotate-'..l.hits\nlocal pos,text\n local function safe(x,z)\n  if S.weapon and S.weapon.unsafe(x,z,S.weapon.active('sigma'),.6) then return false end\n  if l.hits<14 then\n   for i=0,math.min(1,13-l.hits) do\n    local a=current+i*l.rotation\n    if math.abs((x-100)*math.cos(a)-(z-100)*math.sin(a))<6.35 then return false end\n   end\n  end\n  return true\n end\n local function reachable(target)\n  local escaped=safe(p.pos.x,p.pos.z)\n  for i=1,16 do\n   local t=i/16\n   local good=safe(p.pos.x+(target.x-p.pos.x)*t,p.pos.z+(target.z-p.pos.z)*t)\n   if escaped and not good then return false end\n   escaped=escaped or good\n  end\n  return escaped\n end\nlocal middlePending=S.weapon and S.weapon.active('sigma') or {}\nlocal early=l.deadline-Now()>4000 and l.hits==0\nif early then\n local front=role=='fist1' or role=='fist2' or role=='far1'\n local angle=l.heading+(front and math.pi or 0)\n local rank=role=='fist1' and -1 or role=='fist2' and 1 or role=='near1' and -1 or role=='far2' and 1 or 0\n local lateral=rank*2.5\n pos={x=100+16*math.sin(angle)+lateral*math.cos(angle),y=p.pos.y,z=100+16*math.cos(angle)-lateral*math.sin(angle)}\n text=front and 'Go female side, line up in your slot' or 'Go opposite female, line up in your slot'\n if role=='near' or role=='far' then\n  if #middlePending>0 then pos={x=100+16*math.sin(h),y=p.pos.y,z=100+16*math.cos(h)};text='Stay outside, wait for middle AoE'\n  else pos=final;text=role=='near' and 'Near world, prepare opposite female' or 'Distant world, prepare opposite female' end\n end\n phase='conga';seconds=math.max(.3,(l.deadline-Now()-4000)/1000)\nelse\n local pending=S.weapon and S.weapon.active('sigma') or {}\n local path=reachable(final) and (#pending==0 or radius>=15)\n if path then\n  pos=final\n  text=role=='near' and 'Near world, take your ring spot' or role=='far' and 'Distant world, take your ring spot' or role=='fist1' and 'Bait first hand northwest' or role=='fist2' and 'Bait second hand northeast' or role=='far1' and 'First far bounce, female wall' or role=='far2' and 'Second far bounce, opposite wall' or role=='near1' and 'Take first near bounce spot' or 'Take second near bounce spot'\n  phase='final';seconds=math.max(.2,((s.worldDeadline or (l.deadline+(14-l.hits)*600+2200))-Now())/1000)\n else\n  local behind=current-(l.rotation>0 and 1 or -1)*math.rad(20)\n  local playerH=math.atan2(p.pos.x-100,p.pos.z-100)\n  if math.cos(playerH-behind)<0 then behind=behind+math.pi end\n  local candidate={x=100+19*math.sin(behind),y=p.pos.y,z=100+19*math.cos(behind)}\n  if safe(candidate.x,candidate.z) and reachable(candidate) then pos=candidate end\n  if not pos then\n   -- Stay on the player's present side and take only a short safe step.\n   local direction=l.rotation>0 and 1 or -1\n   for degrees=5,45,5 do\n    local angle=playerH+direction*math.rad(degrees)\n    local nextSpot={x=100+19*math.sin(angle),y=p.pos.y,z=100+19*math.cos(angle)}\n    if safe(nextSpot.x,nextSpot.z) and reachable(nextSpot) then pos=nextSpot;break end\n   end\n  end\n  if not pos and safe(p.pos.x,p.pos.z) then pos={x=p.pos.x,y=p.pos.y,z=p.pos.z} end\n  text=l.rotation<0 and 'Follow laser clockwise, stay close' or 'Follow laser counterclockwise, stay close'\n  seconds=l.hits==0 and math.max(1.2,(l.deadline-Now())/1000) or 1.2\n end\nend\nlocal pending=S.weapon and S.weapon.active('sigma') or {}\nfor _,hazard in ipairs(pending)do\n if not hazard.countdownDrawn and hazard.deadline>Now() then\n  hazard.countdownDrawn=true\n  AnyoneCore.addWorldTextCountdown(hazard.deadline-Now(),{x=hazard.x,y=p.pos.y+2,z=hazard.z},0xFFFFFFFF,true,1.2)\n end\nend\nif not pos or not safe(pos.x,pos.z) or not reachable(pos) then\n local score\n pos=nil\n for x=81,119,1 do for z=81,119,1 do\n  if (x-100)^2+(z-100)^2<=19.2^2 and safe(x,z) then\n   local candidate={x=x,y=p.pos.y,z=z}\n   local d=(x-p.pos.x)^2+(z-p.pos.z)^2\n   if (not score or d<score) and reachable(candidate) then score=d;pos=candidate end\n  end\n end end\n phase='safe-'..l.hits;seconds=1.5\nend\nif #pending>0 and phase~='conga' then text='Stay outside, wait for middle AoE' end\nif pos then\n local key='sigma-laser-'..role..'-'..phase\n if S.issued[key] and (not S.goal or S.goal.key~=key) then S.issued[key]=nil end\n if S.goal and S.goal.key==key then S.goal.pos=pos;S.goal.expires=Now()+seconds*1000 end\n if phase=='rotate-'..l.hits then\n  if l.rotateAnnounced then text='' else l.rotateAnnounced=true end\n end\n if S.go(key,pos,text,seconds,.7) and phase=='final' and not l.timerDrawn then\n  l.timerDrawn=true\n  AnyoneCore.addWorldTextCountdown(math.max(100,(s.worldDeadline or (Now()+seconds*1000))-Now()),{x=pos.x,y=p.pos.y+2,z=pos.z},0xFF33FF33,true,1.2)\n end\nend\nif l.drawGeneration~=l.generation then\n l.drawGeneration=l.generation\n for _,id in ipairs(l.draws) do Argus.deleteTimedShape(id) end\n l.draws={}\n if l.hits<14 then\n  for i=0,math.min(1,13-l.hits) do\n   local a=current+i*l.rotation\n   local drawer=i==0 and S.red or TensorCore.getStaticDrawer(0x403333FF,2)\n   local ms=math.max(100,l.deadline+i*600-Now()+100)\n   l.draws[#l.draws+1]=S.keep(drawer:addTimedRect(ms,100-25*math.sin(a),p.pos.y,100-25*math.cos(a),50,12,a,0,false,true,S.flags))\n  end\n end\nend\nself.used=true\n",
 							name = "[P5 Sigma] Conga rotate and assigned world baits",
 							uuid = "7f9125ec-1590-3116-b897-924ff0859b17",
 							version = 2.1,
@@ -7564,6 +8115,147 @@ local tbl =
 				timerEndOffset = 8,
 				timerStartOffset = -12,
 				uuid = "72c5d948-93d8-05bc-bf8c-beab9dd347f6",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() then self.used=true return end\nlocal phase='sigma'\nlocal stage=phase=='sigma' and 1 or S.omega and S.omega.stage or 0\nif stage==0 then self.used=true return end\nlocal key=phase..stage\nlocal b=S.p5BounceCircles\nif not b or b.key~=key then\n if b then for _,s in pairs(b.draws)do Argus.deleteTimedShape(s.id);S.owned[s.id]=nil end end\n b={key=key,draws={},nearDone=0,farDone=0};S.p5BounceCircles=b\nend\nlocal party={}\nfor _,slot in ipairs({'T1','T2','H1','H2','M1','M2','R1','R2'})do\n local e=AnyoneCore.Roster.entOf(slot);party[#party+1]=e\n if phase=='sigma' or TensorCore.hasBuff(e,stage==1 and 3004 or 3005) then\n  for _,kind in ipairs({'near','far'})do\n   local buff=TensorCore.getBuff(e,kind=='near' and 3442 or 3443)\n   if not b[kind] and buff and buff.duration>0 then b[kind]=e.id;b.deadline=Now()+buff.duration*1000 end\n  end\n end\nend\nif not b.deadline then self.used=true return end\nlocal active={}\nlocal function circle(id,radius,activation)\n if activation>=Now()-150 then\n  local old=active[id]\n  if not old or radius>old.radius then active[id]={radius=radius,deadline=activation+250}end\n end\nend\nfor _,kind in ipairs({'near','far'})do\n local count=b[kind..'Done'];local start=b[kind] and TensorCore.mGetEntity(b[kind])\n if start and count<3 then\n  if count==0 then circle(start.id,8,b.deadline)end\n  for order=math.max(1,count),2 do\n   local target,distance\n   for _,e in ipairs(party)do if e.id~=start.id and e.alive then\n    local d=TensorCore.getDistance2d(e.pos,start.pos)\n    if not distance or kind=='near' and d<distance or kind=='far' and d>distance then target=e;distance=d end\n   end end\n   if target then circle(target.id,4,b.deadline+order*1000);start=target else break end\n  end\n end\nend\nlocal drawer=TensorCore.getCachedFlatDrawer(0x80202080,0x80202080,0x80202080,0xFF1010CC,3,0,0)\nfor id,s in pairs(b.draws)do\n if not active[id] or active[id].radius~=s.radius then Argus.deleteTimedShape(s.id);S.owned[s.id]=nil;b.draws[id]=nil end\nend\nfor id,a in pairs(active)do\n local old=b.draws[id]\n if not old or Now()>=old.expires then\n  local ms=math.max(100,a.deadline-Now())\n  b.draws[id]={id=S.keep(drawer:addTimedCircleOnEnt(ms,id,a.radius,0,false,true,0)),radius=a.radius,expires=Now()+ms}\n end\nend\nself.used=true\n",
+							name = "[P5 Sigma] Predicted near and far bounce circles",
+							uuid = "2bd5fa91-50ce-b953-9a60-842640f26abf",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "P5\\Sigma",
+				loop = true,
+				mechanicTime = 870.6,
+				name = "[P5 Sigma] Predicted near and far bounce circles",
+				throttleTime = 200,
+				timeRange = true,
+				timelineIndex = 174,
+				timerEndOffset = 25,
+				timerStartOffset = -20,
+				uuid = "d7904def-c4e7-21e7-a4a9-96c33610ae1a",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nlocal b=S.p5BounceCircles\nif b then\n local kind=(eventArgs.spellID==31625 or eventArgs.spellID==31626) and 'near' or 'far'\n local stamp=tostring(eventArgs.spellID)..':'..tostring(eventArgs.targetID)\n b.seen=b.seen or {}\n if not b.seen[stamp] or Now()-b.seen[stamp]>500 then\n  b.seen[stamp]=Now();b[kind]=eventArgs.targetID;b[kind..'Done']=math.min(3,b[kind..'Done']+1)\n end\nend\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"ca359fb1-4c03-d0da-9fc0-8d9c2fb63a01",
+									true,
+								},
+							},
+							name = "[P5 Sigma] Advance near and far circle chain",
+							uuid = "219bf5e1-53b4-ac7d-b63d-0e26e5ef1611",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.spellID==31625 or eventArgs.spellID==31626 or eventArgs.spellID==33040 or eventArgs.spellID==33041",
+							dequeueIfLuaFalse = true,
+							name = "Matching mechanic",
+							uuid = "ca359fb1-4c03-d0da-9fc0-8d9c2fb63a01",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "P5\\Sigma",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 870.6,
+				name = "[P5 Sigma] Advance near and far circle chain",
+				timeRange = true,
+				timelineIndex = 174,
+				timerEndOffset = 25,
+				timerStartOffset = -20,
+				uuid = "24335233-8b86-0665-a125-bccd61a7a95e",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nlocal w=S.p5MarkerWriter\nlocal p=TensorCore.mGetPlayer()\nlocal function restore()\n if w and w.target and p.targetid==w.target and w.previous and w.previous~=0 then Player:SetTarget(w.previous)end\n if w then w.target=nil;w.previous=nil end\nend\nif Settings.FFXIVMINION.LPDU_TOP_AM_sigma~=1 or not S.ready() then restore();self.used=true return end\nlocal phase='sigma'\nlocal source=phase=='sigma' and S.sigma and S.sigma.laser or S.omega\nlocal stage=phase=='sigma' and 1 or source and source.stage or 0\nlocal roles=source and source.roles\nif not roles or stage==0 then restore();self.used=true return end\nlocal key=phase..stage\nif not w then w={owned={}};S.p5MarkerWriter=w end\nif w.key~=key then\n restore();w.key=key;w.start=Now();w.index=1;w.pending=nil;w.done=nil;w.blocked=nil;w.queue=nil\nend\nif w.done or w.blocked or Now()-w.start<1800 then self.used=true return end\nlocal marker={far1=1,near1=2,near2=3,far2=4,fist1=6,fist2=7,monitor1=6,monitor2=7,tether1=6,tether2=7,far=13,near=14}\nlocal commands={[1]='attack1',[2]='attack2',[3]='attack3',[4]='attack4',[6]='bind1',[7]='bind2',[13]='cross',[14]='triangle'}\nlocal queue,seen={},{}\nfor _,slot in ipairs({'T1','T2','H1','H2','M1','M2','R1','R2'})do\n local e=AnyoneCore.Roster.entOf(slot);local m=marker[roles[e.id]]\n if not m or seen[m] then restore();self.used=true return end\n seen[m]=true;queue[#queue+1]={id=e.id,marker=m}\n -- An acknowledged write may legitimately have changed this player's marker.\n local pending=w.pending and w.pending.id==e.id and w.pending.marker==e.marker\n if e.marker and e.marker~=0 and w.owned[e.id]~=e.marker and not pending then\n  w.blocked=true;restore();self.used=true return\n end\nend\nw.queue=queue\nif w.pending then\n local e=TensorCore.mGetEntity(w.pending.id)\n if e and e.marker==w.pending.marker then\n  w.owned[e.id]=e.marker;w.pending=nil;w.index=w.index+1;restore()\n elseif Now()-w.sent>1200 then w.blocked=true;restore()\n end\n self.used=true return\nend\nlocal nextMark=w.queue[w.index]\nif not nextMark then w.done=true;restore();self.used=true return end\nlocal e=TensorCore.mGetEntity(nextMark.id)\nif not e then w.blocked=true;restore();self.used=true return end\nif e.marker==nextMark.marker then w.index=w.index+1;self.used=true return end\nif w.target~=e.id then\n w.previous=p.targetid;w.target=e.id;Player:SetTarget(e.id);self.used=true return\nend\nif p.targetid~=e.id then w.blocked=true;restore();self.used=true return end\nSendTextCommand('/mk '..commands[nextMark.marker]..' <t>')\nw.pending=nextMark;w.sent=Now()\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"ee0d4cfa-771f-e34c-a919-c28c86ec0088",
+									true,
+								},
+							},
+							name = "[P5 Sigma] Optional owned LPDU markers",
+							uuid = "a0aa7e0e-a50d-3f37-b2af-b1ec2b7b3a69",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.topLpdu;return S and (Settings.FFXIVMINION.LPDU_TOP_AM_sigma==1 or S.p5MarkerWriter and S.p5MarkerWriter.target) or false",
+							name = "Matching mechanic",
+							uuid = "ee0d4cfa-771f-e34c-a919-c28c86ec0088",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "P5\\Sigma",
+				loop = true,
+				mechanicTime = 870.6,
+				name = "[P5 Sigma] Optional owned LPDU markers",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 174,
+				timerEndOffset = 25,
+				timerStartOffset = -20,
+				uuid = "e8daca88-4ac0-26ae-81a4-a5bca3c3fe69",
 				version = 2,
 			},
 		},
@@ -8307,7 +8999,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nlocal o=S.omega\nif not o or not S.ready() or o.stage==0 then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nlocal role=o.roles[p.id]\nif o.amStage~=o.stage then\n o.amStage=o.stage;o.amRoles=nil;o.amSignature=nil;o.amSince=Now()\nend\nif Settings.FFXIVMINION.LPDU_TOP_BounceAssignments~=1 then\n local mapping={[1]='far1',[2]='near1',[3]='near2',[4]='far2',[6]='monitor1',[7]='monitor2',[13]='far',[14]='near'}\n local picked,seen,parts={},{},{}\n local valid=true\n for _,slot in ipairs({'T1','T2','H1','H2','M1','M2','R1','R2'}) do\n  local e=AnyoneCore.Roster.entOf(slot)\n  local assigned=mapping[e.marker]\n  if not assigned or seen[e.marker] then valid=false;break end\n  if assigned=='near' and not TensorCore.hasBuff(e,3442) then valid=false;break end\n  if assigned=='far' and not TensorCore.hasBuff(e,3443) then valid=false;break end\n  seen[e.marker]=true;picked[e.id]=assigned;parts[#parts+1]=tostring(e.id)..':'..tostring(e.marker)\n end\n local signature=valid and table.concat(parts,',') or nil\n if signature~=o.amSignature then\n  o.amSignature=signature;o.amSince=Now()\n end\n if valid and Now()-o.amSince>=500 then\n  o.amRoles=picked\n end\n if o.amRoles then\n  role=o.amRoles[p.id] or role\n  if o.stage==2 then if role=='monitor1' then role='tether1' elseif role=='monitor2' then role='tether2' end end\n end\nend\nif not role then self.used=true return end\nlocal pos,text\nlocal key='omega-role-'..o.stage..'-'..role\nlocal deadline\nif o.stage==1 then\n local h,a=o.heading,o.monitorSide\n local angles={near=h-a,far=h+2.05*a,far1=h-.05*a,near1=h-.95*a,near2=h-1.05*a,far2=h-1.95*a,monitor1=h+.5*a,monitor2=h+1.5*a}\n local radius=(role=='near' or role=='far') and 10 or (role=='monitor1' or role=='monitor2') and 15 or 19\n local angle=angles[role]\n pos={x=100+radius*math.sin(angle),y=p.pos.y,z=100+radius*math.cos(angle)}\n text=role=='monitor1' and 'Soak north monitor' or role=='monitor2' and 'Soak south monitor' or role=='near' and 'Near world, go to safe side' or role=='far' and 'Distant world, go opposite' or role=='far1' and 'Bait first far bounce at wall' or role=='far2' and 'Bait second far bounce at wall' or role=='near1' and 'Bait first near bounce' or 'Bait second near bounce'\n deadline=o.monitorDeadline+2200\nelse\n local nx,nz=o.nx,o.nz\n if not nx then self.used=true return end\n local function rel(x,z) return {x=100-nz*x-nx*z,y=p.pos.y,z=100+nx*x-nz*z} end\n local spots={near=rel(0,10),far=rel(-10,0),far1=rel(19,0),near1=rel(5,18),near2=rel(-5,18),far2=rel(-19,0),tether1=rel(10,-16),tether2=rel(-10,-16)}\n pos=spots[role]\n text=role=='near' and 'Near world south, inside ring' or role=='far' and 'Distant world west, inside ring' or role=='far1' and 'Bait first far bounce east wall' or role=='far2' and 'Bait second far bounce west wall' or role=='near1' and 'Bait first near bounce southeast' or role=='near2' and 'Bait second near bounce southwest' or 'Take your blaster tether, go north'\n deadline=o.blasterDeadline+3800\n if role=='tether1' or role=='tether2' then\n  local tethers={};local seen={};local own=false\n  for source,list in pairs(Argus.getCurrentTethers()) do for _,t in ipairs(list) do if t.type==89 then\n   local sourceRole=AnyoneCore.Roster.slotOf(source)\n   local raid=sourceRole and TensorCore.mGetEntity(source) or TensorCore.mGetEntity(t.targetid)\n   local boss=sourceRole and TensorCore.mGetEntity(t.targetid) or TensorCore.mGetEntity(source)\n   if raid and boss and AnyoneCore.Roster.slotOf(raid.id) and not seen[raid.id] then\n     seen[raid.id]=true\n    if raid.id==p.id then own=true end\n    tethers[#tethers+1]={raid=raid,boss=boss,lateral=-(raid.pos.x-100)*nz+(raid.pos.z-100)*nx}\n   end\n  end end end\n  if own then text=role=='tether1' and 'Tether taken, go northeast wall' or 'Tether taken, go northwest wall'\n  elseif #tethers==2 then\n   table.sort(tethers,function(a,b)return a.lateral>b.lateral end)\n   local t=tethers[role=='tether1' and 1 or 2]\n   pos={x=t.raid.pos.x*.75+t.boss.pos.x*.25,y=p.pos.y,z=t.raid.pos.z*.75+t.boss.pos.z*.25}\n   text=role=='tether1' and 'Take east blaster tether now' or 'Take west blaster tether now'\n   key=key..'-pickup'\n  end\n end\nend\nif not pos or not deadline then self.used=true return end\nlocal seconds=math.max(.2,(deadline-Now())/1000)\nif S.goal and S.goal.key==key then S.goal.pos=pos;S.goal.expires=deadline end\nif S.go(key,pos,text,seconds,.8) then\n if not o.timers then o.timers={} end\n if not o.timers[key] then\n  o.timers[key]=true\n  local ms=math.max(100,(o.stage==1 and o.monitorDeadline or o.blasterDeadline)-Now())\n  AnyoneCore.addWorldTextCountdown(ms,{x=pos.x,y=p.pos.y+2,z=pos.z},0xFF33FF33,true,1.2)\n end\nend\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nlocal o=S.omega\nif not o or not S.ready() or o.stage==0 then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nlocal role=o.roles[p.id]\nif o.amStage~=o.stage then\n o.markerGraceStarted=Now();o.amStage=o.stage;o.amRoles=nil;o.amSignature=nil;o.amSince=Now()\nend\nif Settings.FFXIVMINION.LPDU_TOP_BounceAssignments~=2 then\n local mapping={[1]='far1',[2]='near1',[3]='near2',[4]='far2',[6]='monitor1',[7]='monitor2',[13]='far',[14]='near'}\n local picked,seen,parts={},{},{}\n local valid=true\n for _,slot in ipairs({'T1','T2','H1','H2','M1','M2','R1','R2'}) do\n  local e=AnyoneCore.Roster.entOf(slot)\n  local assigned=mapping[e.marker]\n  if not assigned or seen[e.marker] then valid=false;break end\n  if assigned=='near' and not TensorCore.hasBuff(e,3442) then valid=false;break end\n  if assigned=='far' and not TensorCore.hasBuff(e,3443) then valid=false;break end\n  seen[e.marker]=true;picked[e.id]=assigned;parts[#parts+1]=tostring(e.id)..':'..tostring(e.marker)\n end\n local signature=valid and table.concat(parts,',') or nil\n if signature~=o.amSignature then\n  o.amSignature=signature;o.amSince=Now()\n end\n if valid and Now()-o.amSince>=500 then\n  o.amRoles=picked\n end\n if o.amRoles then\n  role=o.amRoles[p.id] or role\n  if o.stage==2 then if role=='monitor1' then role='tether1' elseif role=='monitor2' then role='tether2' end end\n end\nend\nif not o.markerGraceStarted then o.markerGraceStarted=Now() end\nif Settings.FFXIVMINION.LPDU_TOP_BounceAssignments~=2 and not o.amRoles and Now()-o.markerGraceStarted<1500 then self.used=true return end\nif not role then self.used=true return end\nlocal pos,text\nlocal key='omega-role-'..o.stage..'-'..role\nlocal deadline\nif o.stage==1 then\n local h,a=o.heading,o.monitorSide\n local angles={near=h-a,far=h+2.05*a,far1=h-.05*a,near1=h-.95*a,near2=h-1.05*a,far2=h-1.95*a,monitor1=h+.5*a,monitor2=h+1.5*a}\n local radius=(role=='near' or role=='far') and 10 or (role=='monitor1' or role=='monitor2') and 15 or 19\n local angle=angles[role]\n pos={x=100+radius*math.sin(angle),y=p.pos.y,z=100+radius*math.cos(angle)}\n text=role=='monitor1' and 'Soak north monitor' or role=='monitor2' and 'Soak south monitor' or role=='near' and 'Near world, go to safe side' or role=='far' and 'Distant world, go opposite' or role=='far1' and 'Bait first far bounce at wall' or role=='far2' and 'Bait second far bounce at wall' or role=='near1' and 'Bait first near bounce' or 'Bait second near bounce'\n deadline=o.monitorDeadline+2200\nelse\n local nx,nz=o.nx,o.nz\n if not nx then self.used=true return end\n local function rel(x,z) return {x=100-nz*x-nx*z,y=p.pos.y,z=100+nx*x-nz*z} end\n local spots={near=rel(0,10),far=rel(-10,0),far1=rel(19,0),near1=rel(5,18),near2=rel(-5,18),far2=rel(-19,0),tether1=rel(10,-16),tether2=rel(-10,-16)}\n pos=spots[role]\n text=role=='near' and 'Near world south, inside ring' or role=='far' and 'Distant world west, inside ring' or role=='far1' and 'Bait first far bounce east wall' or role=='far2' and 'Bait second far bounce west wall' or role=='near1' and 'Bait first near bounce southeast' or role=='near2' and 'Bait second near bounce southwest' or 'Take your blaster tether, go north'\n deadline=o.blasterDeadline+3800\n if role=='tether1' or role=='tether2' then\n  local tethers={};local seen={};local own=false\n  for source,list in pairs(Argus.getCurrentTethers()) do for _,t in ipairs(list) do if t.type==89 then\n   local sourceRole=AnyoneCore.Roster.slotOf(source)\n   local raid=sourceRole and TensorCore.mGetEntity(source) or TensorCore.mGetEntity(t.targetid)\n   local boss=sourceRole and TensorCore.mGetEntity(t.targetid) or TensorCore.mGetEntity(source)\n   if raid and boss and AnyoneCore.Roster.slotOf(raid.id) and not seen[raid.id] then\n     seen[raid.id]=true\n    if raid.id==p.id then own=true end\n    tethers[#tethers+1]={raid=raid,boss=boss,lateral=-(raid.pos.x-100)*nz+(raid.pos.z-100)*nx}\n   end\n  end end end\n  if own then text=role=='tether1' and 'Tether taken, go northeast wall' or 'Tether taken, go northwest wall'\n  elseif #tethers==2 then\n   table.sort(tethers,function(a,b)return a.lateral>b.lateral end)\n   local t=tethers[role=='tether1' and 1 or 2]\n   pos={x=t.raid.pos.x*.75+t.boss.pos.x*.25,y=p.pos.y,z=t.raid.pos.z*.75+t.boss.pos.z*.25}\n   text=role=='tether1' and 'Take east blaster tether now' or 'Take west blaster tether now'\n   key=key..'-pickup'\n  end\n end\nend\nif not pos or not deadline then self.used=true return end\nlocal seconds=math.max(.2,(deadline-Now())/1000)\nif S.goal and S.goal.key==key then S.goal.pos=pos;S.goal.expires=deadline end\nif S.go(key,pos,text,seconds,.8) then\n if not o.timers then o.timers={} end\n if not o.timers[key] then\n  o.timers[key]=true\n  local ms=math.max(100,(o.stage==1 and o.monitorDeadline or o.blasterDeadline)-Now())\n  AnyoneCore.addWorldTextCountdown(ms,{x=pos.x,y=p.pos.y+2,z=pos.z},0xFF33FF33,true,1.2)\n end\nend\nself.used=true\n",
 							name = "[P5 Omega] Personal world monitor and tether steps",
 							uuid = "17b5dd0b-35e2-62ce-89dc-bae37da42ecd",
 							version = 2.1,
@@ -8327,6 +9019,147 @@ local tbl =
 				timerEndOffset = 26,
 				timerStartOffset = -12,
 				uuid = "20726eba-55e1-33c3-be1d-a02bf4111cc2",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() then self.used=true return end\nlocal phase='omega'\nlocal stage=phase=='sigma' and 1 or S.omega and S.omega.stage or 0\nif stage==0 then self.used=true return end\nlocal key=phase..stage\nlocal b=S.p5BounceCircles\nif not b or b.key~=key then\n if b then for _,s in pairs(b.draws)do Argus.deleteTimedShape(s.id);S.owned[s.id]=nil end end\n b={key=key,draws={},nearDone=0,farDone=0};S.p5BounceCircles=b\nend\nlocal party={}\nfor _,slot in ipairs({'T1','T2','H1','H2','M1','M2','R1','R2'})do\n local e=AnyoneCore.Roster.entOf(slot);party[#party+1]=e\n if phase=='sigma' or TensorCore.hasBuff(e,stage==1 and 3004 or 3005) then\n  for _,kind in ipairs({'near','far'})do\n   local buff=TensorCore.getBuff(e,kind=='near' and 3442 or 3443)\n   if not b[kind] and buff and buff.duration>0 then b[kind]=e.id;b.deadline=Now()+buff.duration*1000 end\n  end\n end\nend\nif not b.deadline then self.used=true return end\nlocal active={}\nlocal function circle(id,radius,activation)\n if activation>=Now()-150 then\n  local old=active[id]\n  if not old or radius>old.radius then active[id]={radius=radius,deadline=activation+250}end\n end\nend\nfor _,kind in ipairs({'near','far'})do\n local count=b[kind..'Done'];local start=b[kind] and TensorCore.mGetEntity(b[kind])\n if start and count<3 then\n  if count==0 then circle(start.id,8,b.deadline)end\n  for order=math.max(1,count),2 do\n   local target,distance\n   for _,e in ipairs(party)do if e.id~=start.id and e.alive then\n    local d=TensorCore.getDistance2d(e.pos,start.pos)\n    if not distance or kind=='near' and d<distance or kind=='far' and d>distance then target=e;distance=d end\n   end end\n   if target then circle(target.id,4,b.deadline+order*1000);start=target else break end\n  end\n end\nend\nlocal drawer=TensorCore.getCachedFlatDrawer(0x80202080,0x80202080,0x80202080,0xFF1010CC,3,0,0)\nfor id,s in pairs(b.draws)do\n if not active[id] or active[id].radius~=s.radius then Argus.deleteTimedShape(s.id);S.owned[s.id]=nil;b.draws[id]=nil end\nend\nfor id,a in pairs(active)do\n local old=b.draws[id]\n if not old or Now()>=old.expires then\n  local ms=math.max(100,a.deadline-Now())\n  b.draws[id]={id=S.keep(drawer:addTimedCircleOnEnt(ms,id,a.radius,0,false,true,0)),radius=a.radius,expires=Now()+ms}\n end\nend\nself.used=true\n",
+							name = "[P5 Omega] Predicted near and far bounce circles",
+							uuid = "4788149d-e32b-e388-b30e-d508a4b71c52",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "P5\\Omega",
+				loop = true,
+				mechanicTime = 945.8,
+				name = "[P5 Omega] Predicted near and far bounce circles",
+				throttleTime = 200,
+				timeRange = true,
+				timelineIndex = 194,
+				timerEndOffset = 45,
+				timerStartOffset = -15,
+				uuid = "41276ebf-2b3d-f9c3-979c-e9b4b1071914",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nlocal b=S.p5BounceCircles\nif b then\n local kind=(eventArgs.spellID==31625 or eventArgs.spellID==31626) and 'near' or 'far'\n local stamp=tostring(eventArgs.spellID)..':'..tostring(eventArgs.targetID)\n b.seen=b.seen or {}\n if not b.seen[stamp] or Now()-b.seen[stamp]>500 then\n  b.seen[stamp]=Now();b[kind]=eventArgs.targetID;b[kind..'Done']=math.min(3,b[kind..'Done']+1)\n end\nend\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"c25749cb-acec-e9d9-8a65-f4ba3e6a7860",
+									true,
+								},
+							},
+							name = "[P5 Omega] Advance near and far circle chain",
+							uuid = "7496a479-b5fd-5b41-b06d-d6a170e61d62",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.spellID==31625 or eventArgs.spellID==31626 or eventArgs.spellID==33040 or eventArgs.spellID==33041",
+							dequeueIfLuaFalse = true,
+							name = "Matching mechanic",
+							uuid = "c25749cb-acec-e9d9-8a65-f4ba3e6a7860",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "P5\\Omega",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 945.8,
+				name = "[P5 Omega] Advance near and far circle chain",
+				timeRange = true,
+				timelineIndex = 194,
+				timerEndOffset = 45,
+				timerStartOffset = -15,
+				uuid = "9a2ed590-b8fd-8d1f-97cb-dd919af3cfb8",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nlocal w=S.p5MarkerWriter\nlocal p=TensorCore.mGetPlayer()\nlocal function restore()\n if w and w.target and p.targetid==w.target and w.previous and w.previous~=0 then Player:SetTarget(w.previous)end\n if w then w.target=nil;w.previous=nil end\nend\nif Settings.FFXIVMINION.LPDU_TOP_AM_omega~=1 or not S.ready() then restore();self.used=true return end\nlocal phase='omega'\nlocal source=phase=='sigma' and S.sigma and S.sigma.laser or S.omega\nlocal stage=phase=='sigma' and 1 or source and source.stage or 0\nlocal roles=source and source.roles\nif not roles or stage==0 then restore();self.used=true return end\nlocal key=phase..stage\nif not w then w={owned={}};S.p5MarkerWriter=w end\nif w.key~=key then\n restore();w.key=key;w.start=Now();w.index=1;w.pending=nil;w.done=nil;w.blocked=nil;w.queue=nil\nend\nif w.done or w.blocked or Now()-w.start<1800 then self.used=true return end\nlocal marker={far1=1,near1=2,near2=3,far2=4,fist1=6,fist2=7,monitor1=6,monitor2=7,tether1=6,tether2=7,far=13,near=14}\nlocal commands={[1]='attack1',[2]='attack2',[3]='attack3',[4]='attack4',[6]='bind1',[7]='bind2',[13]='cross',[14]='triangle'}\nlocal queue,seen={},{}\nfor _,slot in ipairs({'T1','T2','H1','H2','M1','M2','R1','R2'})do\n local e=AnyoneCore.Roster.entOf(slot);local m=marker[roles[e.id]]\n if not m or seen[m] then restore();self.used=true return end\n seen[m]=true;queue[#queue+1]={id=e.id,marker=m}\n -- An acknowledged write may legitimately have changed this player's marker.\n local pending=w.pending and w.pending.id==e.id and w.pending.marker==e.marker\n if e.marker and e.marker~=0 and w.owned[e.id]~=e.marker and not pending then\n  w.blocked=true;restore();self.used=true return\n end\nend\nw.queue=queue\nif w.pending then\n local e=TensorCore.mGetEntity(w.pending.id)\n if e and e.marker==w.pending.marker then\n  w.owned[e.id]=e.marker;w.pending=nil;w.index=w.index+1;restore()\n elseif Now()-w.sent>1200 then w.blocked=true;restore()\n end\n self.used=true return\nend\nlocal nextMark=w.queue[w.index]\nif not nextMark then w.done=true;restore();self.used=true return end\nlocal e=TensorCore.mGetEntity(nextMark.id)\nif not e then w.blocked=true;restore();self.used=true return end\nif e.marker==nextMark.marker then w.index=w.index+1;self.used=true return end\nif w.target~=e.id then\n w.previous=p.targetid;w.target=e.id;Player:SetTarget(e.id);self.used=true return\nend\nif p.targetid~=e.id then w.blocked=true;restore();self.used=true return end\nSendTextCommand('/mk '..commands[nextMark.marker]..' <t>')\nw.pending=nextMark;w.sent=Now()\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"40dd6856-581b-be65-b4e3-12a2cccec569",
+									true,
+								},
+							},
+							name = "[P5 Omega] Optional owned LPDU markers",
+							uuid = "ba5f0268-f9f4-9002-b411-c6d47ce2a5bc",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.topLpdu;return S and (Settings.FFXIVMINION.LPDU_TOP_AM_omega==1 or S.p5MarkerWriter and S.p5MarkerWriter.target) or false",
+							name = "Matching mechanic",
+							uuid = "40dd6856-581b-be65-b4e3-12a2cccec569",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "P5\\Omega",
+				loop = true,
+				mechanicTime = 945.8,
+				name = "[P5 Omega] Optional owned LPDU markers",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 194,
+				timerEndOffset = 45,
+				timerStartOffset = -15,
+				uuid = "e7ae862b-9654-51a5-97c2-7667f2608970",
 				version = 2,
 			},
 		},
@@ -8638,7 +9471,15 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() then self.used=true return end\nlocal plan=S.p6Plan\nif plan and plan.deadline<Now() then S.p6Plan=nil;plan=nil end\nlocal p=TensorCore.mGetPlayer()\nlocal squares,exas,puddles={},{},{}\nlocal generation=''\nif S.cosmo then for _,l in ipairs(S.cosmo.lines) do if l.left>0 and l.visible and l.deadline>Now()-300 then squares[#squares+1]=l;generation=generation..l.left..':'..l.deadline end end end\nif S.exas and S.p6ExaMove then for _,l in ipairs(S.exas.lines) do\n if l.left>0 and l.deadline>Now()-300 then for i=0,math.min(1,l.left-1) do\n  exas[#exas+1]={x=l.x+l.dx*i,z=l.z+l.dz*i,radius=8}\n end;generation=generation..l.left..':'..l.deadline end\nend end\nfor i=#(S.p6Puddles or {}),1,-1 do\n local a=S.p6Puddles[i]\n if a.deadline<Now() then table.remove(S.p6Puddles,i) else puddles[#puddles+1]=a;generation=generation..a.deadline end\nend\nif not plan and #squares==0 and #exas==0 and #puddles==0 then\n if S.goal and string.sub(S.goal.key,1,8)=='p6-safe-' then S.clearGoal() end\n self.used=true return end\nlocal function safe(x,z)\n if (x-100)^2+(z-100)^2>19.4^2 then return false end\n for _,l in ipairs(squares) do\n  local dx,dz=x-l.x,z-l.z\n  local f=dx*math.sin(l.h)+dz*math.cos(l.h)\n  local a=dx*math.cos(l.h)-dz*math.sin(l.h)\n  if f>-.45 and f<(l.first and 40 or 100)+.45 and math.abs(a)<(l.first and 5 or 2.5)+.45 then return false end\n end\n for _,l in ipairs(exas) do if (x-l.x)^2+(z-l.z)^2<(l.radius+.45)^2 then return false end end\n for _,l in ipairs(puddles) do if (x-l.x)^2+(z-l.z)^2<(l.radius+.45)^2 then return false end end\n return true\nend\nlocal function reachable(pos)\n local vx,vz=pos.x-p.pos.x,pos.z-p.pos.z\n local len=vx*vx+vz*vz\n -- A player already inside a puddle must move continuously away from its centre.\n -- Otherwise the complete segment, not just its endpoint, must clear the circle.\n for _,list in ipairs({exas,puddles}) do for _,l in ipairs(list) do\n  local ax,az=p.pos.x-l.x,p.pos.z-l.z\n  local rr=(l.radius+.45)^2\n  if ax*ax+az*az<rr then\n   if ax*vx+az*vz<0 then return false end\n  else\n   local t=len>0 and math.max(0,math.min(1,-(ax*vx+az*vz)/len)) or 0\n   if (ax+vx*t)^2+(az+vz*t)^2<rr then return false end\n  end\n end end\n local escaped=safe(p.pos.x,p.pos.z)\n local steps=math.max(12,math.ceil(math.sqrt(len)/.25))\n for i=1,steps do\n  local t=i/steps\n  local good=safe(p.pos.x+(pos.x-p.pos.x)*t,p.pos.z+(pos.z-p.pos.z)*t)\n  if escaped and not good then return false end\n  escaped=escaped or good\n end\n return escaped\nend\nlocal desired=plan and plan.pos or p.pos\nlocal best,score\nif safe(desired.x,desired.z) and reachable(desired) then best=desired end\n-- Keep a safe detour until the assigned position is directly reachable.\n-- Player motion alone must not continually choose a different grid point.\nif not best and S.goal and string.sub(S.goal.key,1,8)=='p6-safe-' then\n local previous=S.goal.pos\n if safe(previous.x,previous.z) and reachable(previous) then best=previous end\nend\nif not best then\n for x=82,118,2 do for z=82,118,2 do\n  if safe(x,z) then\n   local a={x=x,y=p.pos.y,z=z}\n   if reachable(a) then\n    local d=(x-p.pos.x)^2+(z-p.pos.z)^2\n    local target=(x-desired.x)^2+(z-desired.z)^2\n    local rank=d+(plan and target*.6 or 0)\n    if not score or rank<score then score=rank;best=a end\n   end\n  end\n end end\nend\nif not best then\n if S.goal and (string.sub(S.goal.key,1,3)=='p6-' or (plan and S.goal.key==plan.key)) then S.clearGoal() end\n self.used=true return\nend\nlocal direct=plan and math.abs(best.x-desired.x)<.1 and math.abs(best.z-desired.z)<.1\nlocal key=direct and plan.key or 'p6-safe-'..(plan and plan.key or 'follow')..'-'..generation\nlocal meteor=plan and plan.key=='p6-meteor-spread'\nlocal text=meteor and 'Hold meteor spread, stay apart' or direct and plan.text or #squares>0 and 'Dodge to the green square' or 'Dodge puddles, follow the clear lane'\nif not plan and TensorCore.getDistance2d(p.pos,best)<.7 then self.used=true return end\nif S.goal and S.goal.key==key then S.goal.pos=best end\nif S.p6LastStepText==text then text='' else S.p6LastStepText=text end\nlocal hold=2.1\nfor _,l in ipairs(squares) do hold=math.max(hold,(l.deadline-Now())/1000+.3) end\nif S.exas then for _,l in ipairs(S.exas.lines) do if l.left>0 then hold=math.max(hold,(l.deadline-Now())/1000+.3) end end end\nfor _,l in ipairs(puddles) do hold=math.max(hold,(l.deadline-Now())/1000+.3) end\nif S.issued[key] and (not S.goal or S.goal.key~=key) then S.issued[key]=nil end\nS.go(key,best,text,direct and math.max(.2,(plan.deadline-Now())/1000) or hold,.65)\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() then self.used=true return end\nif S.p6PendingFirstDive then\n local active=false\n for _,line in ipairs(S.cosmo and S.cosmo.lines or {})do\n  if line.left>0 and line.visible and line.deadline>Now()-300 then active=true;break end\n end\n if not active then\n  local nextPlan=S.p6PendingFirstDive;S.p6PendingFirstDive=nil\n  if nextPlan.deadline>Now() then\n   S.p6Plan=nextPlan\n   AnyoneCore.addWorldTextCountdown(nextPlan.deadline-Now(),{x=nextPlan.pos.x,y=2,z=nextPlan.pos.z},0xFF33FF33,true,1.2)\n  end\n end\nend\nlocal plan=S.p6Plan\nif plan and plan.deadline<Now() then S.p6Plan=nil;plan=nil end\nlocal p=TensorCore.mGetPlayer()\nlocal squares,exas,puddles={},{},{}\nlocal generation=''\nif S.cosmo then for _,l in ipairs(S.cosmo.lines) do if l.left>0 and l.visible and l.deadline>Now()-300 then squares[#squares+1]=l;generation=generation..l.left..':'..l.deadline end end end\nif S.exas and S.p6ExaMove then for _,l in ipairs(S.exas.lines) do\n if l.left>0 and l.deadline>Now()-300 then for i=0,math.min(1,l.left-1) do\n  exas[#exas+1]={x=l.x+l.dx*i,z=l.z+l.dz*i,radius=8}\n end;generation=generation..l.left..':'..l.deadline end\nend end\nfor i=#(S.p6Puddles or {}),1,-1 do\n local a=S.p6Puddles[i]\n if a.deadline<Now() then table.remove(S.p6Puddles,i) else puddles[#puddles+1]=a;generation=generation..a.deadline end\nend\nif not plan and #squares==0 and #exas==0 and #puddles==0 then\n if S.goal and string.sub(S.goal.key,1,8)=='p6-safe-' then S.clearGoal() end\n self.used=true return end\nlocal function safe(x,z)\n if (x-100)^2+(z-100)^2>19.4^2 then return false end\n for _,l in ipairs(squares) do\n  local dx,dz=x-l.x,z-l.z\n  local f=dx*math.sin(l.h)+dz*math.cos(l.h)\n  local a=dx*math.cos(l.h)-dz*math.sin(l.h)\n  if f>-.45 and f<(l.first and 40 or 100)+.45 and math.abs(a)<(l.first and 5 or 2.5)+.45 then return false end\n end\n for _,l in ipairs(exas) do if (x-l.x)^2+(z-l.z)^2<(l.radius+.45)^2 then return false end end\n for _,l in ipairs(puddles) do if (x-l.x)^2+(z-l.z)^2<(l.radius+.45)^2 then return false end end\n return true\nend\nlocal function reachable(pos)\n local vx,vz=pos.x-p.pos.x,pos.z-p.pos.z\n local len=vx*vx+vz*vz\n -- A player already inside a puddle must move continuously away from its centre.\n -- Otherwise the complete segment, not just its endpoint, must clear the circle.\n for _,list in ipairs({exas,puddles}) do for _,l in ipairs(list) do\n  local ax,az=p.pos.x-l.x,p.pos.z-l.z\n  local rr=(l.radius+.45)^2\n  if ax*ax+az*az<rr then\n   if ax*vx+az*vz<0 then return false end\n  else\n   local t=len>0 and math.max(0,math.min(1,-(ax*vx+az*vz)/len)) or 0\n   if (ax+vx*t)^2+(az+vz*t)^2<rr then return false end\n  end\n end end\n local escaped=safe(p.pos.x,p.pos.z)\n local steps=math.max(12,math.ceil(math.sqrt(len)/.25))\n for i=1,steps do\n  local t=i/steps\n  local good=safe(p.pos.x+(pos.x-p.pos.x)*t,p.pos.z+(pos.z-p.pos.z)*t)\n  if escaped and not good then return false end\n  escaped=escaped or good\n end\n return escaped\nend\nlocal desired=plan and plan.pos or p.pos\nlocal best,score\nif safe(desired.x,desired.z) and reachable(desired) then best=desired end\n-- Keep a safe detour until the assigned position is directly reachable.\n-- Player motion alone must not continually choose a different grid point.\nif not best and S.goal and string.sub(S.goal.key,1,8)=='p6-safe-' then\n local previous=S.goal.pos\n if safe(previous.x,previous.z) and reachable(previous) then best=previous end\nend\nif not best then\n for x=82,118,2 do for z=82,118,2 do\n  if safe(x,z) then\n   local a={x=x,y=p.pos.y,z=z}\n   if reachable(a) then\n    local d=(x-p.pos.x)^2+(z-p.pos.z)^2\n    local target=(x-desired.x)^2+(z-desired.z)^2\n    local rank=d+(plan and target*.6 or 0)\n    if not score or rank<score then score=rank;best=a end\n   end\n  end\n end end\nend\nif not best then\n if S.goal and (string.sub(S.goal.key,1,3)=='p6-' or (plan and S.goal.key==plan.key)) then S.clearGoal() end\n self.used=true return\nend\nlocal direct=plan and math.abs(best.x-desired.x)<.1 and math.abs(best.z-desired.z)<.1\nlocal key=direct and plan.key or 'p6-safe-'..(plan and plan.key or 'follow')..'-'..generation\nlocal meteor=plan and plan.key=='p6-meteor-spread'\nlocal text=meteor and 'Hold meteor spread, stay apart' or direct and plan.text or #squares>0 and 'Dodge to the green square' or 'Dodge puddles, follow the clear lane'\nif not plan and TensorCore.getDistance2d(p.pos,best)<.7 then self.used=true return end\nif S.goal and S.goal.key==key then S.goal.pos=best end\nif S.p6LastStepText==text then text='' else S.p6LastStepText=text end\nlocal hold=2.1\nfor _,l in ipairs(squares) do hold=math.max(hold,(l.deadline-Now())/1000+.3) end\nif S.exas then for _,l in ipairs(S.exas.lines) do if l.left>0 then hold=math.max(hold,(l.deadline-Now())/1000+.3) end end end\nfor _,l in ipairs(puddles) do hold=math.max(hold,(l.deadline-Now())/1000+.3) end\nif S.issued[key] and (not S.goal or S.goal.key~=key) then S.issued[key]=nil end\nS.p6ArrowOnlyPending=#puddles>0 or plan and (string.find(plan.key,'p6-exa-middle-',1,true)==1 or plan.key=='p6-meteor-middle')\nS.go(key,best,text,direct and math.max(.2,(plan.deadline-Now())/1000) or hold,.65)\nS.p6ArrowOnlyPending=nil\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"cd1c8d03-daf7-cf75-94e3-a5e4d771356f",
+									true,
+								},
+							},
 							name = "[P6] Personal safe steps through squares and exaflares",
 							uuid = "5fe097b9-0466-1cf6-916c-9e971615e4fc",
 							version = 2.1,
@@ -8647,6 +9488,17 @@ local tbl =
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.topLpdu;if not S then return false end;if S.p6Plan or S.p6Puddles and next(S.p6Puddles) or S.goal and string.sub(S.goal.key,1,8)=='p6-safe-' then return true end;for _,q in ipairs({S.cosmo or {},S.exas or {}})do for _,l in ipairs(q.lines or {})do if l.left>0 and l.visible~=false and l.deadline>Now()-300 then return true end end end;return false",
+							name = "Relevant geometry active",
+							uuid = "cd1c8d03-daf7-cf75-94e3-a5e4d771356f",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "P6",
 				loop = true,
@@ -8780,7 +9632,15 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() then self.used=true return end\nlocal R=AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nlocal good=TensorCore.getCachedFlatDrawer(0x5033FF33,0x5033FF33,0x5033FF33,0xFF33FF33,3,0,0)\nlocal bad=TensorCore.getCachedFlatDrawer(0x503333FF,0x503333FF,0x503333FF,0xFF3333FF,3,0,0)\nlocal tank=R.mySlot()=='T1' or R.mySlot()=='T2'\nlocal dive=S.p6DiveShape\nif dive and dive.deadline>Now() then\n local boss=TensorCore.mGetEntity(dive.source)\n if boss and boss.pos then\n  local party={}\n  for _,role in ipairs({'T1','T2','H1','H2','M1','M2','R1','R2'}) do\n   local e=R.entOf(role);party[#party+1]={e=e,d=TensorCore.getDistance2d(e.pos,boss.pos)}\n  end\n  table.sort(party,function(a,b)return a.d<b.d end)\n  dive.draws=dive.draws or {}\n  local active={}\n  for _,i in ipairs({1,2,8}) do\n   local e=party[i].e;active[e.id]=true\n   local radius=i==8 and 6 or 8\n   local safe=i==8 and not tank\n   local drawer=safe and good or bad\n   local old=dive.draws[e.id]\n   if old and old.safe~=safe then Argus.deleteTimedShape(old.id);S.owned[old.id]=nil;old=nil end\n   if not old or not drawer:updateTimedCircle(old.id,1500,e.pos.x,0,e.pos.z,radius,0,false,true,0) then\n    dive.draws[e.id]={id=S.keep(drawer:addTimedCircle(1500,e.pos.x,0,e.pos.z,radius,0,false,true,0)),safe=safe}\n   end\n  end\n  for id,shape in pairs(dive.draws) do if not active[id] then Argus.deleteTimedShape(shape.id);S.owned[shape.id]=nil;dive.draws[id]=nil end end\n end\nend\nlocal wild=S.p6WildShape\nif wild and wild.deadline>Now() and Now()>=wild.ready then\n local boss=TensorCore.mGetEntity(wild.source)\n if boss and boss.pos then\n  local x,z=0,0\n  for _,role in ipairs({'H1','H2','M1','M2','R1','R2'}) do local e=R.entOf(role);x=x+e.pos.x;z=z+e.pos.z end\n  x,z=x/6,z/6\n  local h=math.atan2(x-boss.pos.x,z-boss.pos.z)\n  local safe=not tank\n  if tank then\n   local vx,vz=p.pos.x-boss.pos.x,p.pos.z-boss.pos.z\n   local forward=vx*math.sin(h)+vz*math.cos(h)\n   local across=vx*math.cos(h)-vz*math.sin(h)\n   local front=math.huge\n   for _,role in ipairs({'H1','H2','M1','M2','R1','R2'}) do local e=R.entOf(role);front=math.min(front,(e.pos.x-boss.pos.x)*math.sin(h)+(e.pos.z-boss.pos.z)*math.cos(h)) end\n   safe=forward>=0 and forward<front-.5 and math.abs(across)<4\n  end\n  if wild.draw and wild.safe~=safe then Argus.deleteTimedShape(wild.draw);S.owned[wild.draw]=nil;wild.draw=nil end\n  local drawer=safe and good or bad\n  if not wild.draw or not drawer:updateTimedRect(wild.draw,1500,boss.pos.x,0,boss.pos.z,100,8,h,0,false,true,0) then\n   wild.draw=S.keep(drawer:addTimedRect(1500,boss.pos.x,0,boss.pos.z,100,8,h,0,false,true,0))\n  end\n  wild.safe=safe\n end\nend\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() then self.used=true return end\nlocal R=AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nlocal good=TensorCore.getCachedFlatDrawer(0x5033FF33,0x5033FF33,0x5033FF33,0xFF33FF33,3,0,0)\nlocal bad=TensorCore.getCachedFlatDrawer(0x503333FF,0x503333FF,0x503333FF,0xFF3333FF,3,0,0)\nlocal tank=R.mySlot()=='T1' or R.mySlot()=='T2'\nlocal dive=S.p6DiveShape\nif dive and dive.deadline>Now() then\n local boss=TensorCore.mGetEntity(dive.source)\n if boss and boss.pos then\n  local party={}\n  for _,role in ipairs({'T1','T2','H1','H2','M1','M2','R1','R2'}) do\n   local e=R.entOf(role);party[#party+1]={e=e,d=TensorCore.getDistance2d(e.pos,boss.pos)}\n  end\n  table.sort(party,function(a,b)return a.d<b.d end)\n  dive.draws=dive.draws or {}\n  local active={}\n  for _,i in ipairs({1,2,8}) do\n   local e=party[i].e;active[e.id]=true\n   local radius=i==8 and 6 or 8\n   local safe=i==8 and not tank\n   local drawer=safe and good or bad\n   local old=dive.draws[e.id]\n   if old and old.safe~=safe then Argus.deleteTimedShape(old.id);S.owned[old.id]=nil;old=nil end\n   if not old or not drawer:updateTimedCircle(old.id,1500,e.pos.x,0,e.pos.z,radius,0,false,true,0) then\n    dive.draws[e.id]={id=S.keep(drawer:addTimedCircle(1500,e.pos.x,0,e.pos.z,radius,0,false,true,0)),safe=safe}\n   end\n  end\n  for id,shape in pairs(dive.draws) do if not active[id] then Argus.deleteTimedShape(shape.id);S.owned[shape.id]=nil;dive.draws[id]=nil end end\n end\nend\nlocal wild=S.p6WildShape\nif wild and wild.deadline>Now() and Now()>=wild.ready then\n local boss=TensorCore.mGetEntity(wild.source)\n if boss and boss.pos then\n  local x,z=0,0\n  for _,role in ipairs({'H1','H2','M1','M2','R1','R2'}) do local e=R.entOf(role);x=x+e.pos.x;z=z+e.pos.z end\n  x,z=x/6,z/6\n  local h=math.atan2(x-boss.pos.x,z-boss.pos.z)\n  local front=math.huge\n  for _,role in ipairs({'H1','H2','M1','M2','R1','R2'})do\n   local e=R.entOf(role)\n   front=math.min(front,(e.pos.x-boss.pos.x)*math.sin(h)+(e.pos.z-boss.pos.z)*math.cos(h))\n  end\n  local safe=true\n  for _,role in ipairs({'T1','T2'})do\n   local e=R.entOf(role)\n   local vx,vz=e.pos.x-boss.pos.x,e.pos.z-boss.pos.z\n   local forward=vx*math.sin(h)+vz*math.cos(h)\n   local across=vx*math.cos(h)-vz*math.sin(h)\n   if not e.alive or forward<0 or forward>=front-.5 or math.abs(across)>=4 then safe=false end\n  end\n  if wild.draw and wild.safe~=safe then Argus.deleteTimedShape(wild.draw);S.owned[wild.draw]=nil;wild.draw=nil end\n  local drawer=safe and good or bad\n  local geom=wild.geometry\n  local moved=not geom or (boss.pos.x-geom.x)^2+(boss.pos.z-geom.z)^2>.0025 or math.abs(math.atan2(math.sin(h-geom.h),math.cos(h-geom.h)))>.02\n  if not wild.draw or moved then\n   if not wild.draw or not drawer:updateTimedRect(wild.draw,math.max(100,wild.deadline-Now()),boss.pos.x,0,boss.pos.z,100,8,h,0,false,true,0) then\n    wild.draw=S.keep(drawer:addTimedRect(math.max(100,wild.deadline-Now()),boss.pos.x,0,boss.pos.z,100,8,h,0,false,true,0))\n   end\n   wild.geometry={x=boss.pos.x,z=boss.pos.z,h=h}\n  end\n  wild.safe=safe\n end\nend\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"473ff59e-bfea-1569-8ad3-a8ebd1bbfd37",
+									true,
+								},
+							},
 							name = "[P6] Actual Dive circles and wild charge line",
 							uuid = "defdce35-915a-6c2a-8c3a-6517c145880a",
 							version = 2.1,
@@ -8789,6 +9649,17 @@ local tbl =
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.topLpdu;if not S then return false end;local d,w=S.p6DiveShape,S.p6WildShape;return d and d.deadline>Now() or w and w.deadline>Now() and Now()>=w.ready or false",
+							name = "Relevant geometry active",
+							uuid = "473ff59e-bfea-1569-8ad3-a8ebd1bbfd37",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "P6",
 				loop = true,
@@ -9180,7 +10051,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local S=data.topLpdu\nlocal q=S and S.cosmo\nreturn q and (q.dirty or q.tileCache and next(q.tileCache) and (not q.nextRenew or Now()>=q.nextRenew)) or false",
+							conditionLua = "local S=data.topLpdu\nlocal q=S and S.cosmo\nreturn q and (q.dirty or ((q.tileCache and next(q.tileCache)) or (q.hazardCache and next(q.hazardCache))) and (not q.nextRenew or Now()>=q.nextRenew)) or false",
 							name = "Grid changed or renewal due",
 							uuid = "dd9f5291-168c-08cc-ac2e-32d9e2dc43b3",
 							version = 3,
@@ -9221,7 +10092,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() then self.used=true return end\nS.p6Cosmo=(S.p6Cosmo or 0)+1\nlocal slot=AnyoneCore.Roster.mySlot()\nlocal assignedSlot=slot\nif Settings.FFXIVMINION.LPDU_TOP_P6PhysicalRanged==1 then\n if slot=='R1' then assignedSlot='R2' elseif slot=='R2' then assignedSlot='R1' end\nend\nlocal spots={T1={94,88},R1={88,94},T2={106,88},R2={112,94},H1={94,112},M1={88,106},H2={106,112},M2={112,106}}\nlocal a=S.p6Cosmo==1 and {108,108} or spots[assignedSlot]\nif a then S.p6Plan={key='p6-cosmo-pair-'..S.p6Cosmo,pos={x=a[1],z=a[2]},text=S.p6Cosmo==1 and 'Go southeast, dodge with party' or 'Go to your assigned starting pair',deadline=Now()+24000} end\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() then self.used=true return end\nS.p6Cosmo=(S.p6Cosmo or 0)+1\nlocal slot=AnyoneCore.Roster.mySlot()\nlocal assignedSlot=slot\nif Settings.FFXIVMINION.LPDU_TOP_P6PhysicalRanged==1 then\n if slot=='R1' then assignedSlot='R2' elseif slot=='R2' then assignedSlot='R1' end\nend\nlocal spots={T1={94,88},R1={88,94},T2={106,88},R2={112,94},H1={94,112},M1={88,106},H2={106,112},M2={112,106}}\nlocal a=S.p6Cosmo==1 and (slot=='T1' and {92,92} or {108,108}) or spots[assignedSlot]\nif a then S.p6Plan={key='p6-cosmo-pair-'..S.p6Cosmo,pos={x=a[1],z=a[2]},text=S.p6Cosmo==1 and (slot=='T1' and 'Stay northwest, dodge on your side' or 'Go southeast, dodge with party') or 'Go to your assigned starting pair',deadline=Now()+24000} end\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -9289,7 +10160,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() then self.used=true return end\nlocal R=AnyoneCore.Roster\nlocal slot=R.mySlot()\nS.dives=(S.dives or 0)+1\nlocal seconds=eventArgs.channelTimeMax+2.5\nlocal pos,text\nif S.dives==1 then\n if slot=='T1' then pos={x=90,z=90};text='MT northwest, bait close'\n elseif slot=='T2' then pos={x=110,z=90};text='OT northeast, bait close'\n else pos={x=110,z=110};text='Stack southeast, stay far' end\nelse\n local sx,sz=0,0\n for _,member in ipairs({'H1','H2','M1','M2','R1','R2'}) do\n  local e=R.entOf(member); sx=sx+e.pos.x-100; sz=sz+e.pos.z-100\n end\n if sx*sx+sz*sz<4 then self.used=true return end\n local a=math.atan2(sx,-sz)\n if slot=='T1' then pos=S.polar(a+math.pi*3/4,10);text='MT through boss, go left'\n elseif slot=='T2' then pos=S.polar(a-math.pi*3/4,10);text='OT through boss, go right'\n else pos=S.polar(a,19);text='Stack outside, stay far' end\nend\nif slot=='T1' or slot=='T2' then\n text=text..(Settings.FFXIVMINION['LPDU_TOP_P6Dive'..S.dives..'_'..slot]==1 and ', invuln' or ', mitigate')\nend\nS.p6Plan={key='p6-dive-'..S.dives,pos=pos,text=text,deadline=Now()+seconds*1000}\nlocal p=TensorCore.mGetPlayer()\nAnyoneCore.addWorldTextCountdown(math.floor(seconds*1000),{x=pos.x,y=p.pos.y+2,z=pos.z},0xFF33FF33,true,1.2)\nS.say('Prepare dive, follow the safe squares',3)\n\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() then self.used=true return end\nlocal R=AnyoneCore.Roster\nlocal slot=R.mySlot()\nS.dives=(S.dives or 0)+1\nlocal seconds=eventArgs.channelTimeMax+2.5\nlocal pos,text\nif S.dives==1 then\n if slot=='T1' then pos={x=90,z=90};text='MT northwest, bait close'\n elseif slot=='T2' then pos={x=110,z=90};text='OT northeast, bait close'\n else pos={x=110,z=110};text='Stack southeast, stay far' end\nelse\n local sx,sz=0,0\n for _,member in ipairs({'H1','H2','M1','M2','R1','R2'}) do\n  local e=R.entOf(member); sx=sx+e.pos.x-100; sz=sz+e.pos.z-100\n end\n if sx*sx+sz*sz<4 then self.used=true return end\n local a=math.atan2(sx,-sz)\n if slot=='T1' then pos=S.polar(a+math.pi*3/4,10);text='MT through boss, go left'\n elseif slot=='T2' then pos=S.polar(a-math.pi*3/4,10);text='OT through boss, go right'\n else pos=S.polar(a,19);text='Stack outside, stay far' end\nend\nif slot=='T1' or slot=='T2' then\n text=text..(Settings.FFXIVMINION['LPDU_TOP_P6Dive'..S.dives..'_'..slot]==1 and ', invuln' or ', mitigate')\nend\nlocal previous=S.p6Plan\nS.p6Plan={key='p6-dive-'..S.dives,pos=pos,text=text,deadline=Now()+seconds*1000}\nif S.dives==1 and slot=='T2' and S.cosmo then S.p6PendingFirstDive=S.p6Plan;S.p6Plan=previous end\nlocal p=TensorCore.mGetPlayer()\nif not S.p6PendingFirstDive then AnyoneCore.addWorldTextCountdown(math.floor(seconds*1000),{x=pos.x,y=p.pos.y+2,z=pos.z},0xFF33FF33,true,1.2) end\nS.say('Prepare dive, follow the safe squares',3)\n\nself.used=true\n",
 							conditions = 
 							{
 								
