@@ -20,7 +20,7 @@ TEA: Coming soon by Ton.
 
 - Added 5-yalm circles on players with unresolved tether explosions during the final Hello World spread/finish-tethers stage. Circles clear as each debuff resolves. (18-10-2026)
 
-- Removed the first P4 ring-in instruction during the stack sequence, keeping later ring dodges. Corrected Sigma's first/second near-bounce arrow sides to match the observed hit order around timeline 880. (18-10-2026)
+- Removed the first P4 ring-in instruction during the stack sequence, keeping later ring dodges. Restored the original Sigma bounce positions after the near-bounce adjustment affected other assignments. (18-10-2026)
 
 - Duty Helper now disables once at encounter start, during the opening five seconds, without repeatedly running throughout the fight. (17-10-2026)
 
