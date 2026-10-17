@@ -5537,7 +5537,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() or not S.p4 or S.p4.wave~=1 then self.used=true return end\nlocal slot=AnyoneCore.Roster.mySlot()\nlocal angle=({T1=-67.5,R1=-90,H1=-112.5,M1=-135,T2=67.5,R2=90,H2=112.5,M2=135})[slot]\nif not angle then self.used=true return end\nS.go('p4-protean-1',S.polar(math.rad(angle),17),'Go to protean spot',5.4,0.8)\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() or not S.p4 or S.p4.wave~=1 then self.used=true return end\nlocal slot=AnyoneCore.Roster.mySlot()\nlocal angle=({T1=-67.5,R1=-90,H1=-112.5,M1=-135,T2=67.5,R2=90,H2=112.5,M2=135})[slot]\nif not angle then self.used=true return end\nS.go('p4-protean-1',S.polar(math.rad(angle),17),'Go to protean spot',math.max(.1,621.3-TensorReactions_CurrentTimer),0.8)\nself.used=true\n",
 							name = "[P4] Assigned protean 1",
 							uuid = "20a0d98a-f4d8-dc4f-b8b4-bc8d52a72dd9",
 							version = 2.1,
@@ -5555,7 +5555,7 @@ local tbl =
 				timeRange = true,
 				timelineIndex = 102,
 				timerEndOffset = -0.1,
-				timerStartOffset = -5.5,
+				timerStartOffset = -11.4,
 				uuid = "0d546717-05b9-6bfc-93aa-15752e831784",
 				version = 2,
 			},

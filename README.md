@@ -18,6 +18,8 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- Brought the first P4 protean positioning arrow forward to timeline 610, retaining the assigned positions and keeping guidance until the existing mechanic handoff. (18-10-2026)
+
 - Moved the Hello World opening clock spread one yalm farther from centre, from 8 to 9 yalms. (18-10-2026)
 
 - Improved early Sigma lineup guidance to stage on the assigned side behind the initial laser before the middle clears; final bounce positions remain restored. Reduced the green-square dodge call to once per sequence and added the assigned waymark to the meteor middle call. (18-10-2026)
