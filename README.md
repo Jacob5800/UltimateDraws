@@ -18,6 +18,8 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- Removed the first P4 ring-in instruction during the stack sequence, keeping later ring dodges. Corrected Sigma's first/second near-bounce arrow sides to match the observed hit order around timeline 880. (18-10-2026)
+
 - Duty Helper now disables once at encounter start, during the opening five seconds, without repeatedly running throughout the fight. (17-10-2026)
 
 - Added the LPDU mitigation profile with assigned DPS Feint, Addle, ranged party mitigation, Dismantle and Magick Barrier timings, plus Rampart and tank short cooldowns with assigned support targets. Uses AnyoneCore Party Roster roles. (17-10-2026)
