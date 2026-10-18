@@ -13098,9 +13098,10 @@ local tbl =
 						data = 
 						{
 							aType = "Alert",
-							alertDuration = 4500,
+							alertDuration = 3000,
 							alertPriority = 2,
-							alertText = "Step into Neurolink",
+							alertTTS = true,
+							alertText = "First Hatch—into your link",
 							conditions = 
 							{
 								
@@ -13108,8 +13109,90 @@ local tbl =
 									"55300f01-46ce-6973-a737-60805c660a41",
 									true,
 								},
+								
+								{
+									"b87ad6c1-30c2-9646-92bd-ef6846fcabe4",
+									true,
+								},
 							},
-							uuid = "71870fe1-c597-3aef-9fa2-2e29b0c13ffc",
+							uuid = "f2da3249-6a96-6c6c-806b-9e5b7733f89c",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 3000,
+							alertPriority = 2,
+							alertText = "Backup—wait outside your link",
+							conditions = 
+							{
+								
+								{
+									"55300f01-46ce-6973-a737-60805c660a41",
+									true,
+								},
+								
+								{
+									"7414c1c8-0b39-0913-b456-ae2b341a7b7a",
+									true,
+								},
+							},
+							uuid = "cd0716ab-0bf2-5b7c-9afd-7cfd3336f934",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 3000,
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = "First soaked—move out",
+							conditions = 
+							{
+								
+								{
+									"55300f01-46ce-6973-a737-60805c660a41",
+									true,
+								},
+								
+								{
+									"b057cbd3-b950-4090-953d-59a7d309eddb",
+									true,
+								},
+							},
+							uuid = "fbee907d-8a7d-91c8-ad0c-2c2e000a6e6d",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 3000,
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = "Backup—soak second Hatch",
+							conditions = 
+							{
+								
+								{
+									"55300f01-46ce-6973-a737-60805c660a41",
+									true,
+								},
+								
+								{
+									"4a72e8e4-2000-723e-861a-754274f514da",
+									true,
+								},
+							},
+							uuid = "5c855b60-be9a-aa1b-b225-3b6f95370389",
 							version = 2.1,
 						},
 					},
@@ -13118,7 +13201,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.ucobMultiHatch142\nlocal p=TensorCore.mGetPlayer()\nif s and p then s.entryAlerts=s.entryAlerts or {};s.entryAlerts[p.id]=true end\nself.used=true",
+							actionLua = "local s=data.ucobMultiHatch142\nlocal p=TensorCore.mGetPlayer()\nlocal a=p and s and s.assignments and s.assignments[p.id]\nif a then s.personalHatchCall=(a.target==p.id and 'first' or 'backup')..a.phase end\nself.used=true",
 							conditions = 
 							{
 								
@@ -13127,8 +13210,8 @@ local tbl =
 									true,
 								},
 							},
-							name = "Personal alert used",
-							uuid = "93a4e494-44f3-d895-a2b4-adc402d7d479",
+							name = "Remember announced Hatch stage",
+							uuid = "1c5816f1-3415-8f72-b2b8-445169002fee",
 							version = 2.1,
 						},
 					},
@@ -13140,10 +13223,54 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif not R or not R.current() or not R.isReady() or not p then return false end\nlocal s=data.ucobMultiHatch142\nif not s or s.entryAlerts and s.entryAlerts[p.id] then return false end\nif Now()-s.started>25000 then return false end\nlocal a=s.assignments and s.assignments[p.id]\nif not a then return false end\nreturn s.ready and ((a.target==p.id and a.phase==0) or (a.backup==p.id and a.phase==1))",
+							conditionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal s=data.ucobMultiHatch142\nif not s or not s.ready or Now()-s.started>25000 or not R or not R.current() or not R.isReady() then return false end\nlocal wave=data.ucobTenShakerAlert\nif wave and Now()<wave.expires and #wave.waves>0 then return false end\nlocal p=TensorCore.mGetPlayer()\nlocal a=p and s.assignments and s.assignments[p.id]\nif not a or a.phase>=2 then return false end\nlocal key=(a.target==p.id and 'first' or 'backup')..a.phase\nreturn s.personalHatchCall~=key",
 							dequeueIfLuaFalse = true,
-							name = "Your soak ready",
+							name = "Personal Hatch stage changed",
 							uuid = "55300f01-46ce-6973-a737-60805c660a41",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local p=TensorCore.mGetPlayer()\nlocal s=data.ucobMultiHatch142\nlocal a=p and s and s.assignments and s.assignments[p.id]\nreturn a~=nil and (a.target==p.id)==true and a.phase==0",
+							name = "first Hatch stage",
+							uuid = "b87ad6c1-30c2-9646-92bd-ef6846fcabe4",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local p=TensorCore.mGetPlayer()\nlocal s=data.ucobMultiHatch142\nlocal a=p and s and s.assignments and s.assignments[p.id]\nreturn a~=nil and (a.target==p.id)==false and a.phase==0",
+							name = "wait Hatch stage",
+							uuid = "7414c1c8-0b39-0913-b456-ae2b341a7b7a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local p=TensorCore.mGetPlayer()\nlocal s=data.ucobMultiHatch142\nlocal a=p and s and s.assignments and s.assignments[p.id]\nreturn a~=nil and (a.target==p.id)==true and a.phase==1",
+							name = "out Hatch stage",
+							uuid = "b057cbd3-b950-4090-953d-59a7d309eddb",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local p=TensorCore.mGetPlayer()\nlocal s=data.ucobMultiHatch142\nlocal a=p and s and s.assignments and s.assignments[p.id]\nreturn a~=nil and (a.target==p.id)==false and a.phase==1",
+							name = "second Hatch stage",
+							uuid = "4a72e8e4-2000-723e-861a-754274f514da",
 							version = 3,
 						},
 					},
@@ -13152,11 +13279,11 @@ local tbl =
 				loop = true,
 				mechanicTime = 740.5,
 				name = "[LPDU] P3 Tenstrike Hatch - Personal Neurolink Entry",
-				throttleTime = 500,
+				throttleTime = 150,
 				timeRange = true,
 				timelineIndex = 142,
-				timerEndOffset = 14,
-				timerStartOffset = -20,
+				timerEndOffset = 18,
+				timerStartOffset = -8,
 				uuid = "d1578e43-ad84-bdaa-bf5b-44d7c2dadfe2",
 				version = 2,
 			},
@@ -13310,7 +13437,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.ucobTenShakerAlert\nif s and not s.hits[eventArgs.entityID] then\n s.hits[eventArgs.entityID]=true s.hitCount=s.hitCount+1\n if s.hitCount>=4 then\n  s.current=s.current+1 s.hits={} s.hitCount=0\n end\nend\nself.used=true",
+							actionLua = "local s=data.ucobTenShakerAlert\nif s and not s.finished and not s.hits[eventArgs.entityID] then\n s.hits[eventArgs.entityID]=true;s.hitCount=s.hitCount+1\n if s.hitCount>=4 then\n  s.current=s.current+1;s.hits={};s.hitCount=0\n  if s.current>2 then s.finished=true;s.regroupUntil=Now()+6000 end\n end\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -13321,6 +13448,56 @@ local tbl =
 							},
 							name = "Tenstrike Earthshaker - Wave Resolution",
 							uuid = "821fc406-ac24-299c-894d-0faaa30f52ab",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 3500,
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = "Middle—stack",
+							conditions = 
+							{
+								
+								{
+									"38848b96-48a8-a608-a574-ed271847914d",
+									true,
+								},
+								
+								{
+									"fc531b2b-4239-81a4-a9c0-e697b9279ee8",
+									true,
+								},
+							},
+							uuid = "903e8e2c-f1b4-cbbc-bfcc-6da888ff8168",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.ucobTenShakerAlert\nif s then s.regroupAnnounced=true end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"38848b96-48a8-a608-a574-ed271847914d",
+									true,
+								},
+								
+								{
+									"fc531b2b-4239-81a4-a9c0-e697b9279ee8",
+									true,
+								},
+							},
+							name = "Remember final regroup call",
+							uuid = "240b5ab9-f04e-210d-bad8-ecdecab04cf5",
 							version = 2.1,
 						},
 					},
@@ -13340,6 +13517,17 @@ local tbl =
 								9946,
 							},
 							uuid = "38848b96-48a8-a608-a574-ed271847914d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.ucobTenShakerAlert\nreturn s~=nil and s.finished==true and not s.regroupAnnounced",
+							name = "Both shaker waves resolved once",
+							uuid = "fc531b2b-4239-81a4-a9c0-e697b9279ee8",
 							version = 3,
 						},
 					},
@@ -13370,7 +13558,8 @@ local tbl =
 							aType = "Alert",
 							alertDuration = 4500,
 							alertPriority = 2,
-							alertText = "Earthshaker: spread away from north; avoid other cones",
+							alertTTS = true,
+							alertText = "Earthshaker on you—spread away from 4",
 							conditions = 
 							{
 								
@@ -13424,7 +13613,7 @@ local tbl =
 							aType = "Alert",
 							alertDuration = 4500,
 							alertPriority = 2,
-							alertText = "No Earthshaker: wait at marker 4",
+							alertText = "No Earthshaker—wait at 4",
 							conditions = 
 							{
 								
@@ -13496,6 +13685,40 @@ local tbl =
 				timerEndOffset = 8,
 				timerStartOffset = -8,
 				uuid = "abe04ff3-4024-1773-b50f-2963b358d306",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.ucobTenShakerAlert\nif not s or not s.finished or not s.regroupUntil or Now()>=s.regroupUntil then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dest={x=0,y=0,z=0}\nlocal distance=math.sqrt(p.pos.x*p.pos.x+p.pos.z*p.pos.z)\nlocal d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(.15,1,.2,.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>.8 then local tip=math.min(1.5,distance*.35);d:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(.1,distance-tip),.55,tip,1.1,false,flags)end\nd:addCircle(0,0,0,.8,false,flags)\nself.used=true",
+							name = "Final hit center regroup arrow",
+							uuid = "5de24cab-eee0-1a4a-831b-28d41b2e7330",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 754.4,
+				name = "Tenstrike final Earthshaker regroup middle",
+				timeRange = true,
+				timelineIndex = 147,
+				timerEndOffset = 17,
+				timerStartOffset = -2,
+				uuid = "93f48b0b-3fcd-c0a4-a333-b5e3a78e62b8",
 				version = 2,
 			},
 		},
