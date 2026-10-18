@@ -1102,16 +1102,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "725c1c65-68bc-8038-a7ca-6287680f558f",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "LPDU",
 				uuid = "f6537e66-aa7b-5235-9a20-b1f9179b542b",
 			},
@@ -2404,16 +2394,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "100865c1-4b21-8030-8553-d3e4ce5593f5",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "LPDU Draws",
 				uuid = "b3754a5d-7471-a57b-b60c-427ed4539e35",
 			},
@@ -2645,16 +2625,6 @@ local tbl =
 			{
 				enabled = false,
 			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "85f55d20-7a2e-e726-86cf-afc1f458d5e9",
-			},
-			objectType = "folder",
 		},
 	},
 	[30] = 
@@ -3058,16 +3028,6 @@ local tbl =
 				uuid = "83b97733-edb1-d017-6fe2-12d538214d83",
 			},
 			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "cc2c8f02-ba35-dd22-9c0e-cd74e4f9f0c0",
-			},
 			objectType = "folder",
 		},
 	},
@@ -3606,16 +3566,6 @@ local tbl =
 			{
 				enabled = false,
 			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "9610cf5c-89cd-a6f2-9003-4e696615df6f",
-			},
-			objectType = "folder",
 		},
 		
 		{
@@ -4308,16 +4258,6 @@ local tbl =
 				enabled = false,
 			},
 		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "69deafa1-d61d-ad6e-bddb-94bd5307e8f1",
-			},
-			objectType = "folder",
-		},
 	},
 	[68] = 
 	{
@@ -4894,16 +4834,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "9fa87e1f-3d04-4672-a206-05def5501e4e",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "LPDU Draws",
 				uuid = "9a3ddc04-fb17-6cc4-8bb0-df9b137abf69",
 			},
@@ -5082,16 +5012,6 @@ local tbl =
 			{
 				enabled = false,
 			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "f737d30d-29f1-32c1-89bf-455957c7854b",
-			},
-			objectType = "folder",
 		},
 		
 		{
@@ -6101,16 +6021,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "c6dd7e4d-a9e9-19e2-ab2c-8251dcc2adbb",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "LPDU",
 				uuid = "2b36b308-07f4-fe16-b026-a828f463f9ea",
 			},
@@ -6271,16 +6181,6 @@ local tbl =
 			{
 				enabled = false,
 			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "b024a055-a05a-0800-a52e-de7a9c0e3a9f",
-			},
-			objectType = "folder",
 		},
 	},
 	[120] = 
@@ -6789,16 +6689,6 @@ local tbl =
 				version = 2,
 			},
 		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "10ca4acd-144b-9985-acb1-0d67e17b9873",
-			},
-			objectType = "folder",
-		},
 	},
 	[126] = 
 	{
@@ -6879,16 +6769,6 @@ local tbl =
 			{
 				enabled = false,
 			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "13ba74d3-cd8a-8ab1-8387-6bbdb4836ecf",
-			},
-			objectType = "folder",
 		},
 	},
 	[127] = 
@@ -7293,16 +7173,6 @@ local tbl =
 			{
 				enabled = false,
 			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "5660c2e9-db72-5fdd-ab2e-c4336b169f59",
-			},
-			objectType = "folder",
 		},
 	},
 	[139] = 
@@ -8469,16 +8339,6 @@ local tbl =
 				enabled = false,
 			},
 		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "49b84f17-dab3-ac43-865d-88f63345c3f3",
-			},
-			objectType = "folder",
-		},
 	},
 	[154] = 
 	{
@@ -8817,16 +8677,6 @@ local tbl =
 				uuid = "66e53936-b3f2-5665-8535-adef4a2594cd",
 				version = 2,
 			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "d99270de-1002-e0e8-bae7-2bd7dcdf4558",
-			},
-			objectType = "folder",
 		},
 		
 		{
@@ -9608,16 +9458,6 @@ local tbl =
 				enabled = false,
 			},
 		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "10b3f68f-69df-7b37-94ab-0541c7960eff",
-			},
-			objectType = "folder",
-		},
 	},
 	[176] = 
 	{
@@ -9712,16 +9552,6 @@ local tbl =
 			{
 				enabled = false,
 			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "d524ebff-c173-776d-93e7-5da7c520ef48",
-			},
-			objectType = "folder",
 		},
 		
 		{
@@ -11301,16 +11131,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "62651d03-d387-9c5c-86f3-9749743b777d",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "LPDU",
 				uuid = "49b110db-0465-b451-b52e-835e051342df",
 			},
@@ -11711,16 +11531,6 @@ local tbl =
 				version = 2,
 			},
 		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "12971a58-b4b2-bfee-9a0c-2b32320a4911",
-			},
-			objectType = "folder",
-		},
 	},
 	[212] = 
 	{
@@ -11789,16 +11599,6 @@ local tbl =
 				uuid = "365e3834-71d2-2ba0-2823-713ac6a7f6e4",
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "0b7ff6c3-2e4b-1f6e-83aa-2853ce578eca",
-			},
 			objectType = "folder",
 		},
 		
@@ -12683,16 +12483,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "55189d3e-b417-4ef1-a216-7ac483414370",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "LPDU",
 				uuid = "d49f98a1-86fc-eeee-9d1f-1cbeb0b9beaf",
 			},
@@ -13326,16 +13116,6 @@ local tbl =
 				version = 2,
 			},
 		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "a72d09cd-f111-5657-9e5e-bbbb8d505fe1",
-			},
-			objectType = "folder",
-		},
 	},
 	[243] = 
 	{
@@ -13359,16 +13139,6 @@ local tbl =
 				uuid = "8e1dcbb5-054c-76d1-b556-20ff7f09d9e5",
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "ecd64bd8-1065-cbdb-9003-f90432d6ec84",
-			},
 			objectType = "folder",
 		},
 	},
@@ -13700,16 +13470,6 @@ local tbl =
 				uuid = "65ece87d-fe14-3561-75ff-78836a33c30d",
 			},
 			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "2ab8582c-0175-dc05-a072-f757a709d3bb",
-			},
 			objectType = "folder",
 		},
 	},
@@ -14060,16 +13820,6 @@ local tbl =
 				version = 2,
 			},
 		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "319fd38f-d861-ce4d-a605-4df1adbe0f1d",
-			},
-			objectType = "folder",
-		},
 	},
 	[268] = 
 	{
@@ -14108,16 +13858,6 @@ local tbl =
 			{
 				enabled = false,
 			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "dc899cfc-a0c0-a713-ba3d-e5872ad96f1f",
-			},
-			objectType = "folder",
 		},
 	},
 	inheritedProfiles = 

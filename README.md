@@ -144,7 +144,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
-- FRU mitigation split: Moved103 mitigation reactions (145 skill actions) and the AnyoneCore automatic-mitigation disable into lpdu mits; removed their originals from lpdu strats. Tank-LB reminder remains in lpdu strats. (18-10-2026)
+- FRU mitigation split: Moved103 mitigation reactions (145 skill actions) and the AnyoneCore automatic-mitigation disable into lpdu mits; removed their originals and 26 empty mitigation folders from lpdu strats. Tank-LB reminder remains in lpdu strats. (18-10-2026)
+
 
 
 
