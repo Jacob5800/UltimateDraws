@@ -18,6 +18,8 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- Program Loop snapshots all eight number assignments before buffs expire, preserving later tether pickup guidance. Pantokrator countdowns now sit inside each current cone instead of on the boss. (18-10-2026)
+
 - P1 tether guidance now uses recorded handoffs, works when only your own tether is available, and ignores stale number assignments after confirmed ownership. (18-10-2026)
 
 - Program Loop now records actual tether gain/removal events for reliable ownership tracking. (18-10-2026)
