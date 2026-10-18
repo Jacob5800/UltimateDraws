@@ -144,7 +144,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
-- FRU mitigation split: Destination LPDU mits verified; 100 of105 original mitigation-related reactions removed from lpdu strats. (18-10-2026)
+- FRU mitigation split: Moved all103 mitigation reactions (145 skill actions), the tank-LB reminder and AnyoneCore automatic-mitigation disable from lpdu strats into lpdu mits. Original reactions removed; drawings, movement guidance and potions retained. (18-10-2026)
+
 
 
 
