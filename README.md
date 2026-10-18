@@ -18,6 +18,10 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- Corrected Sagittarius Arrow to the recorded AoE heading. Delta arm previews follow their bait before locking into the rotating sequence. (18-10-2026)
+- Added one small centre countdown per Pantokrator cone pair; expanding-ring timers now sit within each successive ring. Program Loop waiting guidance avoids tether pickup paths and prefers south when clear. (18-10-2026)
+- Cosmo Dive circles use 45% fill, with the non-tank stack green. Dive, puddle and exaflare draws render on the ground to keep characters visible. Added brief spread-beam previews and personal meteor flare destinations, accounting for the ranged LB. (18-10-2026)
+
 - Added south transition lineup guidance between waymarks 3 and 2 after both P2 bosses are defeated, in R1–M1–MT–H1–H2–OT–M2–R2 order. Existing spread assignments take over afterward. (18-10-2026)
 
 - Reduced repeated setup and completed-position work, with mechanic-state gates that preserve active draw cleanup. Fixed early Sigma staging being blocked by a later AoE, added nearby Omega dodge candidates and cleared personal bounce arrows after the hit. (18-10-2026)
