@@ -44,6 +44,8 @@ TEA: Coming soon by Ton.
 
 ### UCOB: LPDU
 
+- Fellruin’s spread call around 628 now says Spread instead of Spread soon, matching the active personal spread guidance. Timing and draws are unchanged. (18-10-2026)
+
 - The small Cleanse doom alert now appears once when your blue-circle cleanse guidance is active and it is your turn, rather than waiting until Doom has three seconds left. Other players’ turns and missing/expired patches do not prompt you. (18-10-2026)
 
 - Personal Twister countdown increased another 20%, from 1.5x to 1.8x the original text size; position and timing are unchanged. (18-10-2026)
@@ -61,8 +63,6 @@ TEA: Coming soon by Ton.
 - P1 Liquid Hell warnings now check who is furthest from Twintania. Added late Fleeting light Thermionic Beam timing and a stack call that waits for the player's dragon bait to lock. Tenstrike middle regroup yields when Earthshaker markers appear. (14-10-2026)
 
 - L4 now receives early Liquid Hell bait-edge voice alerts before the volley. Tenstrike Hatch assignments sample positions later and prioritize the closest remaining player/link pairs, preserving first-soak and backup pairing. (14-10-2026)
-
-- Added L4 Liquid Hell volley alerts, delayed personal P1 Fireball regroup guidance that waits for Hatch/baiting, player-attached Thermionic Beam countdowns and green stack circles that clear on damage, P2 opening Meteor Stream timers, and Quickmarch middle regroup before Twisting Dive. (14-10-2026)
 
 ### FRU: LPDU
 
