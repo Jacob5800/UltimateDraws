@@ -18,6 +18,8 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- Hello World stack-tower soakers now see their assigned 6y tower boundary only during that tower step, with a stable green outline and subtle fill. (18-10-2026)
+
 - Stabilized exasquare/Blaster draw lifetimes and raised flat shapes slightly above the floor; Wave Cannon stack refreshes continuously. Meteor spread arrows now keep the assigned clock destination instead of changing detours. (18-10-2026)
 - Sigma's outside/middle-AoE waiting step starts around the first rear laser. Omega bounce receivers briefly see one relevant World spacing circle; other roles do not. (18-10-2026)
 
