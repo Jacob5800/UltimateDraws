@@ -12082,7 +12082,7 @@ local tbl =
 				name = "Heavensfall tower arrows after knockback",
 				timeRange = true,
 				timelineIndex = 128,
-				timerEndOffset = 2,
+				timerEndOffset = 5,
 				timerStartOffset = -2,
 				uuid = "4fe0e4f3-6a35-07a3-a2ad-0fdeb7dfb231",
 				version = 2,
@@ -12099,7 +12099,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nif not R or not R.current() or not R.isReady() then self.used=true return end\nlocal slot=R.mySlot()\nif not slot then self.used=true return end\nlocal s=data.ucobHeavensfallTowers\nif not s or not s.reference or Now()-s.started>15000 then self.used=true return end\nlocal towers=s.ordered\nif not towers or #towers~=8 then self.used=true return end\nlocal rank={T2=1,H2=2,M2=3,R2=4,R1=5,M1=6,H1=7,T1=8}\nlocal tower=towers[rank[slot]]\nlocal dest=tower\nif tower and not s.kb then\n local radius=math.sqrt(tower.x^2+tower.z^2)\n if radius<1 then self.used=true return end\n -- Stage along the assigned tower's radial line for the outward knockback.\n dest={x=tower.x/radius*8,y=tower.y,z=tower.z/radius*8,expires=tower.expires}\nend\nif not dest or Now()>=dest.expires then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
+							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nif not R or not R.current() or not R.isReady() then self.used=true return end\nlocal slot=R.mySlot()\nif not slot then self.used=true return end\nlocal s=data.ucobHeavensfallTowers\nif not s or not s.reference or Now()-s.started>15000 then self.used=true return end\nlocal towers=s.ordered\nif not towers or #towers~=8 then self.used=true return end\nlocal rank={T2=1,H2=2,M2=3,R2=4,R1=5,M1=6,H1=7,T1=8}\nlocal tower=towers[rank[slot]]\nlocal dest=tower\nif tower and not s.kb then\n local radius=math.sqrt(tower.x^2+tower.z^2)\n if radius<1 then self.used=true return end\n -- Stage along the assigned tower's radial line for the outward knockback.\n dest={x=tower.x/radius*8,y=tower.y,z=tower.z/radius*8,expires=tower.expires}\nend\nif not dest or Now()>=dest.expires then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\nif not s.kb then drawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags) end\nself.used=true",
 							name = "Heavensfall personal assigned tower arrow",
 							uuid = "739699fe-2510-c477-b5c4-7049749b1967",
 							version = 2.1,
