@@ -46,6 +46,8 @@ TEA: Coming soon by Ton.
 
 ### UCOB: LPDU
 
+- P1 Fireball regroup and late Hatch arrows now yield while the Twintania-to-Nael transition regroup is active, preventing competing destinations after Twintania disappears. (19-10-2026)
+
 - Tenstrike highlights only your assigned Neurolink: amber while waiting as backup, green when it is your turn, clearing after completion. Personal Hatch phase calls now check immediately alongside guidance rather than waiting in the update queue. (19-10-2026)
 
 - Tenstrike calls now explicitly progress from Spread - wait for Hatch markers to Hatch on you - into your link or No Hatch - stay spread, then Your turn - soak your link for backups. Removed the redundant backup-wait call; middle remains the regroup instruction. (19-10-2026)
@@ -63,8 +65,6 @@ TEA: Coming soon by Ton.
 - Tenstrike players without the current Earthshaker now receive a green arrow to the actual EU waymark 4. It stops when the wave changes or ends; the waiting call names marker 4 without assuming it is north. (18-10-2026)
 
 - Blackfire Trio’s Stack middle call around 570 now also uses TTS; its timing and visual alert remain unchanged. (18-10-2026)
-
-- Fellruin now distinguishes Spread for dive, Under Nael, Stay in your link, and Out of link—spread on the actual Aetheric Profusion hit. Link guidance hands off to final spread circles without competing instructions; tank link assignments are retained. (18-10-2026)
 
 ### FRU: LPDU
 
