@@ -890,16 +890,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "24790ed0-e847-40fd-baca-d66120d083e3",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "AnyoneCore Defaults",
 				uuid = "9cc21e4d-1ee6-8ab7-b3ba-c87b3095fc0f",
 			},
@@ -11928,37 +11918,6 @@ local tbl =
 			},
 		},
 	},
-	[216] = 
-	{
-		
-		{
-			data = 
-			{
-				name = "[Melee] Feint (Secondary)",
-				uuid = "975f6660-fe1c-52f1-ad2e-a1be66d3d917",
-				version = 2,
-			},
-			inheritedObjectUUID = "aa7eaad6-067c-b722-b6b0-5010fb8602d8",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[VPR] Feint (Secondary)",
-				uuid = "be8a956b-23d0-39fa-9db3-a996bf1bbe0a",
-				version = 2,
-			},
-			inheritedObjectUUID = "bf853260-8e3a-eeda-8e62-652c1e309387",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-	},
 	[218] = 
 	{
 		
@@ -13117,6 +13076,59 @@ local tbl =
 				uuid = "592249a2-0f29-2f3d-9a02-08d57dd6ac01",
 			},
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 4000,
+							alertPriority = 3,
+							alertTTS = true,
+							alertText = "Tank LB now",
+							conditions = 
+							{
+								
+								{
+									"868e8866-d256-a390-a62e-2d571695e49c",
+									true,
+								},
+							},
+							uuid = "68751062-858c-60ac-a088-e4a66e52b7ef",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local r=AnyoneCore.Roster; if r.current()==nil then return false end; local s=r.mySlot();return s==\"T1\" or s==\"T2\"",
+							name = "Tanks only",
+							uuid = "868e8866-d256-a390-a62e-2d571695e49c",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				mechanicTime = 1085.2,
+				name = "[LPDU] P5 Pandora's Box - Tank LB Reminder",
+				timeRange = true,
+				timelineIndex = 236,
+				timerEndOffset = -5.4000000953674,
+				timerStartOffset = -6,
+				uuid = "04203271-b6ef-b24a-95bd-f5dc3ab8af00",
+				version = 2,
+			},
 		},
 	},
 	[237] = 
