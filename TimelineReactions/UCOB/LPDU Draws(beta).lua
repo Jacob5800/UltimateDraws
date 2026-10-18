@@ -5089,7 +5089,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal targets=data.ucobThunderTargets\nif not R or not R.current() or not targets then self.used=true return end\nlocal d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(1,0.15,0.15,0.5),2)\nfor _,id in ipairs(targets) do\n local e=TensorCore.mGetEntity(id)\n if e then d:addCircle(e.pos.x,e.pos.y,e.pos.z,5,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY) end\nend\nif not R.isReady() then self.used=true return end\nlocal rank=nil\nfor i,id in ipairs(targets) do if id==R.idOf(R.mySlot()) then rank=i end end\nlocal s=data.ucobThunderMode\nlocal n=data.ucobThunderNael and TensorCore.mGetEntity(data.ucobThunderNael)\nif not rank or not s or not n then self.used=true return end\nlocal radius=s.mode==\"out\" and 11 or 5\nlocal side=rank==1 and -1 or 1\nlocal dest={x=n.pos.x+side*radius*0.70710678,y=n.pos.y,z=n.pos.z-radius*0.70710678}\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
+							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal targets=data.ucobThunderTargets\nif not R or not R.current() or not targets then self.used=true return end\nlocal d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(1,0.15,0.15,0.5),2)\nfor _,id in ipairs(targets) do\n local e=TensorCore.mGetEntity(id)\n if e and id~=R.idOf(R.mySlot()) then d:addCircle(e.pos.x,e.pos.y,e.pos.z,5,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY) end\nend\nif not R.isReady() then self.used=true return end\nlocal rank=nil\nfor i,id in ipairs(targets) do if id==R.idOf(R.mySlot()) then rank=i end end\nlocal s=data.ucobThunderMode\nlocal n=data.ucobThunderNael and TensorCore.mGetEntity(data.ucobThunderNael)\nif not rank or not s or not n then self.used=true return end\nlocal radius=s.mode==\"out\" and 11 or 5\nlocal side=rank==1 and -1 or 1\nlocal dest={x=n.pos.x+side*radius*0.70710678,y=n.pos.y,z=n.pos.z-radius*0.70710678}\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
 							name = "P2 Thunder circles and north personal arrows",
 							uuid = "8895186c-bacf-e694-89bf-e2f46419f059",
 							version = 2.1,
@@ -5702,6 +5702,169 @@ local tbl =
 				timerEndOffset = 20,
 				timerStartOffset = -25,
 				uuid = "104c7a66-2a20-26d3-9f4a-c79f9e02f58a",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local p=TensorCore.mGetPlayer()\nif p then\n local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(1,.15,.15,.5),2)\n d:addCircle(p.pos.x,p.pos.y,p.pos.z,5,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"9e636904-7e8d-22c4-b80b-96b3de0e5358",
+									true,
+								},
+							},
+							name = "Own lightning spread circle",
+							uuid = "4c2ae9a7-4854-8506-b482-b09c6ac54c11",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							buffID = 466,
+							category = "Self",
+							name = "Own Thunderstruck",
+							uuid = "9e636904-7e8d-22c4-b80b-96b3de0e5358",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 222.1,
+				name = "P2 own Thunderstruck debuff circle",
+				timeRange = true,
+				timelineIndex = 47,
+				timerEndOffset = 200,
+				timerStartOffset = -25,
+				uuid = "8fc1262d-a085-cf40-ab7e-d584c0ba3f1f",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 4000,
+							alertTTS = true,
+							alertText = "Lightning on you—spread",
+							conditions = 
+							{
+								
+								{
+									"5e517670-d02f-97f6-9764-31761c211658",
+									true,
+								},
+								
+								{
+									"efb90db0-6413-054d-8d13-8288c76c0d94",
+									true,
+								},
+							},
+							uuid = "5a3e7695-65d0-5a05-8811-7398c6682ce0",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "data.ucobThunderBuffCalled=true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"5e517670-d02f-97f6-9764-31761c211658",
+									true,
+								},
+							},
+							name = "Remember own lightning call",
+							uuid = "1f5d45bc-3762-d72c-af92-75a1aa21e2a1",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "data.ucobThunderBuffCalled=nil\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"5e517670-d02f-97f6-9764-31761c211658",
+									false,
+								},
+							},
+							name = "Rearm after lightning clears",
+							uuid = "e973158b-3276-b1b0-aa7a-67fb81da1e7d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							buffID = 466,
+							category = "Self",
+							dequeueIfLuaFalse = true,
+							name = "Own Thunderstruck",
+							uuid = "5e517670-d02f-97f6-9764-31761c211658",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return data.ucobThunderBuffCalled~=true",
+							dequeueIfLuaFalse = true,
+							name = "Not called this debuff",
+							uuid = "efb90db0-6413-054d-8d13-8288c76c0d94",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				loop = true,
+				mechanicTime = 222.1,
+				name = "P2 own Thunderstruck spread alert",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 47,
+				timerEndOffset = 200,
+				timerStartOffset = -25,
+				uuid = "8065baef-0720-efba-8cb9-06024b8747e0",
 				version = 2,
 			},
 		},
@@ -6441,7 +6604,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal targeted=false\nfor _,id in ipairs(eventArgs.hitTargets or {}) do if id==p.id then targeted=true;break end end\nif not targeted or (data.ucobOwnThunderCall and Now()-data.ucobOwnThunderCall<1000) then self.used=true return end\ndata.ucobOwnThunderCall=Now()\nAnyoneCore.Shotcall('Spread',true,4,false)\nAnyoneCore.addTimedWorldTextOnEnt(6000,'Spread',p.id,0xFFFFFFFF,true,.85,1)\nAnyoneCore.addWorldTextCountdown(6000,setmetatable({entityID=p.id},{__index=function(t,k) local e=TensorCore.mGetEntity(t.entityID);if not e then return 0 end;if k=='x' then return e.pos.x elseif k=='y' then return e.pos.y+.3 elseif k=='z' then return e.pos.z end end}),0xFFFFFFFF,true,.85)\nself.used=true",
+							actionLua = "local p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal targeted=false\nfor _,id in ipairs(eventArgs.hitTargets or {}) do if id==p.id then targeted=true;break end end\nif not targeted or (data.ucobOwnThunderCall and Now()-data.ucobOwnThunderCall<1000) then self.used=true return end\ndata.ucobOwnThunderCall=Now()\nAnyoneCore.addWorldTextCountdown(6000,setmetatable({entityID=p.id},{__index=function(t,k) local e=TensorCore.mGetEntity(t.entityID);if not e then return 0 end;if k=='x' then return e.pos.x elseif k=='y' then return e.pos.y+.3 elseif k=='z' then return e.pos.z end end}),0xFFFFFFFF,true,.85)\nself.used=true",
 							conditions = 
 							{
 								
