@@ -13263,7 +13263,7 @@ local tbl =
 							alertDuration = 3000,
 							alertPriority = 2,
 							alertTTS = true,
-							alertText = "First Hatch—into your link",
+							alertText = "Hatch on you - into your link",
 							conditions = 
 							{
 								
@@ -13278,31 +13278,6 @@ local tbl =
 								},
 							},
 							uuid = "f2da3249-6a96-6c6c-806b-9e5b7733f89c",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Alert",
-							alertDuration = 3000,
-							alertPriority = 2,
-							alertText = "Backup—wait outside your link",
-							conditions = 
-							{
-								
-								{
-									"55300f01-46ce-6973-a737-60805c660a41",
-									true,
-								},
-								
-								{
-									"7414c1c8-0b39-0913-b456-ae2b341a7b7a",
-									true,
-								},
-							},
-							uuid = "cd0716ab-0bf2-5b7c-9afd-7cfd3336f934",
 							version = 2.1,
 						},
 					},
@@ -13340,7 +13315,7 @@ local tbl =
 							alertDuration = 3000,
 							alertPriority = 2,
 							alertTTS = true,
-							alertText = "Backup—soak second Hatch",
+							alertText = "Your turn - soak your link",
 							conditions = 
 							{
 								
@@ -13573,7 +13548,7 @@ local tbl =
 							aType = "Alert",
 							alertDuration = 3000,
 							alertTTS = true,
-							alertText = "Spread—keep clear of the Hatch players",
+							alertText = "No Hatch - stay spread",
 							conditions = 
 							{
 								
@@ -13630,6 +13605,59 @@ local tbl =
 				timelineIndex = 142,
 				timerEndOffset = 8,
 				uuid = "4f345304-4066-b830-91fe-d19d2be4be5d",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 3500,
+							alertTTS = true,
+							alertText = "Spread - wait for Hatch markers",
+							conditions = 
+							{
+								
+								{
+									"6cd1f8c3-8afe-2de3-999c-1683c44c7725",
+									true,
+								},
+							},
+							uuid = "bc5e8583-7888-c8d0-9df1-1e0e4cd437ec",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.ucobMultiHatch142\nreturn not s or Now()-s.started>25000 or next(s.targets)==nil",
+							dequeueIfLuaFalse = true,
+							name = "Hatch markers not established",
+							uuid = "6cd1f8c3-8afe-2de3-999c-1683c44c7725",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				mechanicTime = 740.5,
+				name = "Tenstrike spread while awaiting Hatch markers",
+				timeRange = true,
+				timelineIndex = 142,
+				timerEndOffset = -1,
+				timerStartOffset = -5,
+				uuid = "1d524c19-0121-6ccc-92b8-53416964fb4d",
 				version = 2,
 			},
 		},
