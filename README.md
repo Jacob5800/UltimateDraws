@@ -18,8 +18,11 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- P3 movement calls distinguish rot outer-lane travel, tether inside waiting, safe staging release, assigned rot pickup, confirmed transfer/spread, and vulnerability-gated tether breaks. The handoff arrow clears when rot is received. (18-10-2026)
+- Program Loop confirmed tether holders retain outward guidance without needing their partner's original number record. Pantokrator's opening arrow now waits for observed rotation and selects the matching edge. (18-10-2026)
+
 - Pantokrator direction now follows observed cone rotation (clockwise or counterclockwise). Program Loop clear-out guidance uses an arrow without a destination circle. (18-10-2026)
-- Hello World tower assignments account for both partners’ positions and keep a settled pair stable; roster priority breaks ties. Rot handoffs use that same pairing through all four waves. (18-10-2026)
+- Hello World now follows the positional tower split: when both eligible rot holders approach the same tower, the front player continues to the other tower and the trailing player stays. The split is fixed per wave and reused for rot handoffs. (18-10-2026)
 - Omega near bounce receivers keep a stable paired destination with jump spacing and first/second distance ordering; already valid bait positions are preserved. Increased personal World-circle fill to 25%. (18-10-2026)
 
 - Hello World stack-tower soakers now see their assigned 6y tower boundary only during that tower step, with a stable green outline and subtle fill. (18-10-2026)
