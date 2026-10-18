@@ -19,7 +19,7 @@ TEA: Coming soon by Ton.
 ### TOP: LPDU
 
 - Pantokrator direction now follows observed cone rotation (clockwise or counterclockwise). Program Loop clear-out guidance uses an arrow without a destination circle. (18-10-2026)
-- Hello World tower sides and rot recipients now share the R1/M1/T1/H1/H2/T2/M2/R2 priority through all four waves, preventing independent nearest-player reassignment. (18-10-2026)
+- Hello World tower assignments account for both partners’ positions and keep a settled pair stable; roster priority breaks ties. Rot handoffs use that same pairing through all four waves. (18-10-2026)
 - Omega near bounce receivers keep a stable paired destination with jump spacing and first/second distance ordering; already valid bait positions are preserved. Increased personal World-circle fill to 25%. (18-10-2026)
 
 - Hello World stack-tower soakers now see their assigned 6y tower boundary only during that tower step, with a stable green outline and subtle fill. (18-10-2026)
