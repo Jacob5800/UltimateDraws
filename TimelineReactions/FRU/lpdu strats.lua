@@ -886,6 +886,20 @@ local tbl =
 			},
 		},
 	}, 
+	[4] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "ba404b1f-2e0c-72d3-aeb7-5155412e6c6f",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
+	},
 	[7] = 
 	{
 		
@@ -2955,6 +2969,17 @@ local tbl =
 	},
 	[39] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "290167db-aff0-fa3f-02c8-fb79c0653dab",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -8458,6 +8483,17 @@ local tbl =
 	},
 	[157] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "57330176-8d80-7282-3df6-18f806021cc6",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
