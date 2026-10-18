@@ -19869,7 +19869,8 @@ local tbl =
 				name = "[LPDU Tank] P4 Darklit MT Reprisal",
 				timeRange = true,
 				timelineIndex = 166,
-				timerStartOffset = -3,
+				timerEndOffset = -6,
+				timerStartOffset = -7,
 				uuid = "1c248c48-881d-505a-baaa-3980ab322394",
 				version = 2,
 			},
@@ -23737,7 +23738,8 @@ local tbl =
 				name = "[LPDU Tank] P4 CT MT Reprisal",
 				timeRange = true,
 				timelineIndex = 179,
-				timerStartOffset = -3,
+				timerEndOffset = -5,
+				timerStartOffset = -6,
 				uuid = "4e881e8f-5182-498f-8ccd-b9cd1cf1ae35",
 				version = 2,
 			},
@@ -26363,28 +26365,6 @@ local tbl =
 					{
 						data = 
 						{
-							actionID = 7388,
-							conditions = 
-							{
-								
-								{
-									"2b96cfe4-cf47-bbc9-96fe-824cdc25e464",
-									true,
-								},
-								
-								{
-									"99cfad7e-3467-5f40-ae72-62f5a2d9640c",
-									true,
-								},
-							},
-							uuid = "06281da9-0f61-221f-853b-9f8bb6937466",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
 							actionID = 16471,
 							conditions = 
 							{
@@ -26436,18 +26416,6 @@ local tbl =
 							conditionLua = "local r=AnyoneCore.Roster\nif not r.current() then return false end\nlocal slot=r.mySlot()\nreturn slot==\"T1\"",
 							name = "Assigned MT",
 							uuid = "99cfad7e-3467-5f40-ae72-62f5a2d9640c",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "WARRIOR",
-							uuid = "2b96cfe4-cf47-bbc9-96fe-824cdc25e464",
 							version = 3,
 						},
 					},

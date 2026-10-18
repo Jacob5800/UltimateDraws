@@ -66,6 +66,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- MT Darklit Reprisal now uses 731.2–732.2 and CT Reprisal 792.9–793.9, preserving recovery for second Akh Morn. Removed WAR’s unavailable second-Morn Shake request while retaining its late first-Morn shield; second-Morn coverage uses the agreed party plan. (18-10-2026)
+
 - The seven imported DRK potion and potion-hold reactions now support either assigned tank role. Their DRK job requirement, potion and optimization conditions, actions and timings are retained. (18-10-2026)
 
 - RDM Jump In now disables and re-enables in the shared jump-control windows, including the P2 entry release. SMN is skipped; Viper, Reaper and Samurai have no equivalent persistent movement toggle in their current ACR catalogs. (18-10-2026)
@@ -83,8 +85,6 @@ TEA: Coming soon by Ton.
 - Added WAR FRU with selected WarNeverChange rotation controls, assigned MT/OT gates and inherited LPDU spreadsheet mitigation. Shared tanks receive four Sprint windows and three Shirk reactions triggered by the assigned OT Provoke. Added jump-hold releases for skipped P1 windows and after Apocalypse; source alternative WAR mitigations remain excluded. (18-10-2026)
 
 - Added shared spreadsheet tank mitigation across P1-P5 for all four tanks, with assigned-role gates, P4 grouping-aware cooldown reservations and P5 hit-triggered Provoke swaps. Variable crystal completion uses its verified death event. Optional DRK personal timings retain shared spreadsheet party mitigation without duplicate Reprisals/Missionary. (18-10-2026)
-
-- LPDU mits now disables AnyoneCore automatic DPS and tank mitigation at fight start, using its existing FRU tank-mitigation switch. A native healer exclusion leaves healer settings unchanged. (18-10-2026)
 
 ### UWU: LPDU
 
