@@ -20469,8 +20469,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local r=AnyoneCore.Roster\nif not r.current() then return false end\nlocal slot=r.mySlot()\nlocal mode=Settings.FFXIVMINION.LPDU_FRU_P4AM1Mode or \"4-4\"\nreturn not ((mode==\"7-1 MT solo\" and slot==\"T1\") or (mode==\"7-1 OT solo\" and slot==\"T2\"))",
-							name = "Reserve solo Akh short",
+							conditionLua = "if not AnyoneCore.Roster.current() then return false end\nlocal mode=Settings.FFXIVMINION.LPDU_FRU_P4AM1Mode or \"4-4\"\nreturn mode == \"4-4\"",
+							name = "Short reserved for first solo Akh",
 							uuid = "2941aee9-d12f-7b60-be5e-becf8761be83",
 							version = 3,
 						},
