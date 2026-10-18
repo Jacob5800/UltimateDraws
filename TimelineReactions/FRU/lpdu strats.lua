@@ -29,17 +29,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "c83a73bb-c1fd-d6f7-1c58-8c251bbb5eeb",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "LPDU Potion",
 				uuid = "750e21a5-4c87-6e78-ae26-90d272574dbb",
 			},
@@ -1592,95 +1581,8 @@ local tbl =
 			},
 		},
 	}, 
-	[4] = 
-	{
-		
-		{
-			data = 
-			{
-				name = "[Melee] Feint (Primary)",
-				uuid = "6aca4984-34d8-dcc6-8838-de1836c70ec9",
-				version = 2,
-			},
-			inheritedObjectUUID = "6f3f9757-975e-8cd9-94e3-f91b2ffbc51e",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[SAM] Tengentsu",
-				uuid = "31aa9ebf-c156-2e68-b22f-792731571050",
-				version = 2,
-			},
-			inheritedObjectUUID = "d5218505-5bb7-6dee-8e3d-f9aa142cecf1",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[Caster] Addle (Secondary)",
-				uuid = "778d5198-da33-76f1-a460-753db8dac6f0",
-				version = 2,
-			},
-			inheritedObjectUUID = "a2f244a5-fdb0-2175-9988-dc6890b7faa9",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[RPR] Arcane Crest",
-				uuid = "8790fdb9-df6f-a84f-af6c-f5954616d50f",
-				version = 2,
-			},
-			inheritedObjectUUID = "b7ea7f1a-fdfe-19df-b965-6a4672012769",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[VPR] Feint (Primary)",
-				uuid = "13b599d4-9147-3d51-baf0-061a3d30cb04",
-				version = 2,
-			},
-			inheritedObjectUUID = "7855942e-7bf0-da44-bc35-9dcd8ce0e95a",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-	},
 	[7] = 
 	{
-		
-		{
-			data = 
-			{
-				name = "[Ranged] rDPS Mit",
-				uuid = "43e42795-3d77-db2c-8cfc-2565ae4e2ad9",
-				version = 2,
-			},
-			inheritedObjectUUID = "6631a50f-0762-0ea4-9d43-3513863113e9",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
 		
 		{
 			data = 
@@ -1743,17 +1645,6 @@ local tbl =
 				uuid = "9b45de89-52da-e98d-873f-c9033349f6b9",
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "466ede43-6134-b73f-46ca-4e7d044247f3",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -1846,7 +1737,7 @@ local tbl =
 				uuid = "b0c76152-9c39-ee47-94fd-404cc81c7256",
 				version = 2,
 			},
-			inheritedIndex = 21,
+			inheritedIndex = 7,
 		},
 		
 		{
@@ -1875,7 +1766,7 @@ local tbl =
 				uuid = "10a008fa-c7d3-95d1-b36b-5178829c0108",
 				version = 2,
 			},
-			inheritedIndex = 22,
+			inheritedIndex = 8,
 		},
 	},
 	[10] = 
@@ -1997,7 +1888,7 @@ local tbl =
 				mechanicTime = 34.9,
 				name = "[LPDU] OT - Take tankbuster",
 				timelineIndex = 10,
-				timerOffset = 0.1,
+				timerOffset = 0.10000000149012,
 				uuid = "f08c6fbc-4feb-281d-929e-216fb0aba8db",
 				version = 2,
 			},
@@ -2025,17 +1916,6 @@ local tbl =
 				uuid = "887771aa-6e33-ebd6-8fc6-1ca042ce1c1a",
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "b226f62e-d75f-d552-7d18-b0e492c5d7de",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -2128,7 +2008,7 @@ local tbl =
 				uuid = "34831afe-ca25-1810-8b7e-cb329920c8ae",
 				version = 2,
 			},
-			inheritedIndex = 13,
+			inheritedIndex = 11,
 		},
 	},
 	[12] = 
@@ -2143,48 +2023,6 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "[NIN] Shade Shift",
-				uuid = "153c45a0-7815-2f52-aecc-1321f1ea7052",
-				version = 2,
-			},
-			inheritedObjectUUID = "3a878589-ae15-ff93-aa79-6f1ed1380620",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[SAM] Tengentsu",
-				uuid = "007b06c3-014b-3938-9041-6c8f4bd4ca04",
-				version = 2,
-			},
-			inheritedObjectUUID = "a5c0e594-9790-f418-9807-a3cf9c146b66",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[RPR] Arcane Crest",
-				uuid = "ea347e36-1854-08f8-82c4-23b077c58209",
-				version = 2,
-			},
-			inheritedObjectUUID = "6b9b3e6f-ce00-a8cb-ab77-298a1a4866a7",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
 		},
 	},
 	[13] = 
@@ -3003,17 +2841,6 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
 			objectType = "folder",
 		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "9ab6696d-dbc2-b851-4d23-1aefbd95975d",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
 	},
 	[22] = 
 	{
@@ -3803,17 +3630,6 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "51e157b6-e471-cd62-8d14-6990d6ec9a66",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
 	},
 	[25] = 
 	{
@@ -3887,17 +3703,6 @@ local tbl =
 	},
 	[29] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "37623f15-085e-4939-fe92-c2677c1cd105",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -4402,31 +4207,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "ffcb08f1-7bf1-3965-adbb-29ffd896b161",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "towers indicator",
-				uuid = "b0c9e7ab-7c00-d83d-ab4b-27c57ef2df24",
-				version = 2,
-			},
-			inheritedObjectUUID = "fb767ce0-3908-91d7-92ce-72c2ad044a09",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "LPDU",
 				uuid = "108b4752-a062-1610-925a-23b090106dba",
 			},
@@ -4457,7 +4237,7 @@ local tbl =
 				mechanicTime = 140.9,
 				name = "[LPDU] Tank burnt strike dodge arrows",
 				timelineIndex = 32,
-				timerOffset = -5.8,
+				timerOffset = -5.8000001907349,
 				uuid = "9d4d0faf-bff0-6093-9799-6f6dd11177f6",
 				version = 2,
 			},
@@ -4524,7 +4304,7 @@ local tbl =
 				uuid = "f9d34f83-9580-db6b-80b8-a9442eb670b5",
 				version = 2,
 			},
-			inheritedIndex = 11,
+			inheritedIndex = 10,
 		},
 		
 		{
@@ -4660,31 +4440,6 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
 			objectType = "folder",
 		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "41d34fd7-18e3-b6e3-a8c0-3f3967da7747",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "[SAM] Tengentsu",
-				uuid = "bd8d3c03-d1c5-04b8-8688-a04e7458d1c6",
-				version = 2,
-			},
-			inheritedObjectUUID = "20f6de02-450b-700a-a0cf-5003bf05c86d",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
 	},
 	[35] = 
 	{
@@ -4724,17 +4479,6 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
 			objectType = "folder",
 		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "a657df02-25c0-aece-9454-76a0fac879b2",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
 	},
 	[39] = 
 	{
@@ -4747,17 +4491,6 @@ local tbl =
 				uuid = "fbd8c74a-50a9-e27e-098c-5ae8a9d4b9da",
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "99e10fc0-9885-0264-84d3-c362ebfcdcf0",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -4803,17 +4536,6 @@ local tbl =
 	},
 	[44] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "fd6295b8-47b4-83dc-06c1-b70ebf4016a8",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -5501,17 +5223,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "813f7a1b-a7ef-57af-391e-27d90897088b",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "FRU_LPDU_P2_DD",
 				uuid = "1b8b1bd1-8ff2-75d9-8aa4-3e24a707fac2",
 			},
@@ -5854,17 +5565,6 @@ local tbl =
 				uuid = "0cd5d532-cb58-1cee-d945-6a643da83362",
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "41610986-2784-6eda-4af0-4c4041d243f6",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 	},
@@ -6631,17 +6331,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "cb1571d1-ab63-afed-2d8c-516b734d3ac1",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "LPDU",
 				uuid = "d6299a57-d3e5-ceef-bf72-71734bc12b86",
 			},
@@ -6895,17 +6584,6 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "3a755998-cbf0-86d4-e345-dc56277f7488",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
 	},
 	[64] = 
 	{
@@ -6918,17 +6596,6 @@ local tbl =
 				uuid = "1531e8a6-24a0-73a2-42fb-113000e21c96",
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "d3c486e2-628e-9e36-ce6a-b0f48b64d412",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -7965,17 +7632,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "1513684e-b705-2582-acba-2c4458d4127e",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "[SAM] Tengentsu",
 				uuid = "db16ccd5-eef2-af0b-a015-12dc371113e5",
 				version = 2,
@@ -8943,17 +8599,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "2fb5fd8b-de13-d38f-5643-07b100b320bb",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "LPDU Potion",
 				uuid = "e754c082-281d-3f97-b49e-49d33934f303",
 			},
@@ -9542,17 +9187,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "3bc594f8-551d-e78c-a490-836aa63b33e8",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "LPDU Potion",
 				uuid = "41f046a3-b3b8-eddb-a12e-b179e75aaeb5",
 			},
@@ -9754,17 +9388,6 @@ local tbl =
 				uuid = "bbb009ca-4916-3ec6-081a-4700aca9a7ba",
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "8e2dd7ce-20d6-9382-339f-bcc4d1ee81fe",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -10251,20 +9874,6 @@ local tbl =
 			},
 		},
 	},
-	[100] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "4693d753-f491-41cf-f057-0b6d35997843",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
-	},
 	[102] = 
 	{
 		
@@ -10288,31 +9897,6 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "29be4c89-beba-06d5-b9d0-3f07dfa243f9",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "[DNC] Set Improv Spot",
-				uuid = "de140189-68d6-6b7a-81f1-21c040f1ae3d",
-				version = 2,
-			},
-			inheritedObjectUUID = "01c108f4-a076-00c3-b831-31ca4ddf364e",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
 		},
 		
 		{
@@ -10357,20 +9941,6 @@ local tbl =
 			},
 		},
 	},
-	[103] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "8cb171fe-ad97-f6fa-10e3-e254efbd14ae",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
-	},
 	[108] = 
 	{
 		
@@ -10398,45 +9968,9 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
 			objectType = "folder",
 		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "39aa7b43-acb2-97e7-3c9c-e4915e6863f3",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
-	},
-	[118] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "9f241322-1913-dede-adc6-4dac76ff7812",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
 	},
 	[119] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "f40cd59d-32d6-c1e9-d2c6-253f87cf7a8d",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -10446,20 +9980,6 @@ local tbl =
 				version = 2,
 			},
 			inheritedObjectUUID = "a6d336f6-937a-f5d2-a08f-8daf92e45e17",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[RPR] Arcane Crest",
-				uuid = "aa068148-fb44-4b64-95ab-bdbebc2aba8b",
-				version = 2,
-			},
-			inheritedObjectUUID = "c5e725f9-6861-c81d-a9ac-24692dfb2eab",
 			inheritedOverwrites = 
 			{
 				enabled = false,
@@ -10559,17 +10079,6 @@ local tbl =
 				uuid = "f92dd723-6512-018f-6caa-3ed5abc496f3",
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "1bc3a3b1-0277-237d-d932-1fff3d4bc4e1",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 	},
@@ -12327,17 +11836,6 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "c7df8614-b36e-cb68-fbf8-8102c5050004",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
 	},
 	[135] = 
 	{
@@ -12350,17 +11848,6 @@ local tbl =
 				uuid = "94ee812d-fb78-c921-019c-ba8f2605e47d",
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "d0a08dc7-3908-3b4b-c3ff-fc7d6fddaab7",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -13624,17 +13111,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "3e530eff-641b-c7d3-b6a2-b4b1d9a9fcef",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "[MNK] Mantra",
 				uuid = "edb235e8-6b6e-b951-bb65-23b83ce618d3",
 				version = 2,
@@ -13724,17 +13200,6 @@ local tbl =
 				uuid = "6406f707-793e-6d23-a17c-58d9fac41b77",
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "154ed169-1194-c61d-6555-e493fa8dc0d9",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 	},
@@ -14446,17 +13911,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "2cdc3c1a-9ff0-6726-1554-a97c8a4299ca",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "[Ranged] rDPS Mit",
 				uuid = "8b533088-0545-a245-a13e-3bef3b9c78cb",
 				version = 2,
@@ -14532,17 +13986,6 @@ local tbl =
 				uuid = "66251246-91d7-2132-6288-0450666c4516",
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "5b8f4b1c-2b56-fc58-6f20-cffa4d1e088c",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -14627,17 +14070,6 @@ local tbl =
 				uuid = "88b3dcf5-a4aa-cbd9-3105-0003a842fac5",
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "b6afb41f-8001-5773-07b4-2d91d613f48f",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 	},
@@ -15804,17 +15236,6 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "e4ef32fd-8080-d241-18bb-44c30d353eed",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
 	},
 	[169] = 
 	{
@@ -16259,17 +15680,6 @@ local tbl =
 				uuid = "bd0b66ed-d06f-fe91-ffc0-70778ab68f3d",
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "dabf7587-a605-17db-0067-36b5506d7877",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -17916,17 +17326,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "59152d9b-e19b-4ee7-c1dd-7bc5ad9dd9cb",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "FRU_megaminx_indicator",
 				uuid = "6cb85338-869f-71ec-3637-f74e02e6d288",
 			},
@@ -18574,17 +17973,6 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
 			objectType = "folder",
 		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "6b3857a1-82d2-042d-c05c-453facdaf911",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
 	},
 	[202] = 
 	{
@@ -19140,20 +18528,6 @@ local tbl =
 			},
 		},
 	},
-	[205] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "64a622ed-a2fb-97e1-3b3a-1bc378446a9d",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
-	},
 	[207] = 
 	{
 		
@@ -19165,17 +18539,6 @@ local tbl =
 				uuid = "9ab427ed-021d-12e1-d243-f25b685f503d",
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "2e1f5687-9e13-380b-e542-e779a3cd5977",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
 			objectType = "folder",
 		},
 		
@@ -19728,20 +19091,6 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "[MNK] Mantra",
-				uuid = "8fbc0c0f-16de-8dc7-b04a-61b2196496bf",
-				version = 2,
-			},
-			inheritedObjectUUID = "70ea6763-0360-64c1-b051-a3e356a9e937",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
 		},
 		
 		{
@@ -20456,48 +19805,6 @@ local tbl =
 				version = 2,
 			},
 			inheritedObjectUUID = "bf853260-8e3a-eeda-8e62-652c1e309387",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[Caster] Addle (Primary)",
-				uuid = "5b7890f9-3193-fb80-8eb9-3970e81b8486",
-				version = 2,
-			},
-			inheritedObjectUUID = "67daa4d0-6054-8a3c-9900-b454e1192e33",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[MCH] Dismantle",
-				uuid = "00d43455-2163-974f-ba30-57eb2322fb9b",
-				version = 2,
-			},
-			inheritedObjectUUID = "7f08d13e-bb23-fe5c-9688-6cf315b0ccce",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[RDM] Barrier",
-				uuid = "e0f43b55-4188-fc8c-b923-cdda765b7502",
-				version = 2,
-			},
-			inheritedObjectUUID = "d0c144ab-5699-c9c8-8346-63803c3c04f0",
 			inheritedOverwrites = 
 			{
 				enabled = false,
@@ -21917,48 +21224,9 @@ local tbl =
 				enabled = false,
 			},
 		},
-		
-		{
-			data = 
-			{
-				name = "[Ranged] rDPS Mit",
-				uuid = "4b24a44e-85ea-46a4-a0d0-f96583583529",
-				version = 2,
-			},
-			inheritedObjectUUID = "3aadbb97-6614-11ad-8e86-07acf8642889",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[BRD] Nature's Minne",
-				uuid = "d4f9730a-5ec0-f12a-80e2-59c23c640ad7",
-				version = 2,
-			},
-			inheritedObjectUUID = "83fd8aac-94e9-2cd3-a0d9-77fb30fc00a9",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
 	},
 	[236] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "43bea8bb-9ff1-deff-3f53-ac81fe2a12eb",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -22035,48 +21303,6 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "[Melee] Feint (Primary)",
-				uuid = "d551e03c-f1d9-c8d7-b187-29a004963e04",
-				version = 2,
-			},
-			inheritedObjectUUID = "bfde68cc-df8f-8063-81d6-6b9aba864fd0",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[VPR] Feint (Primary)",
-				uuid = "87384a71-0239-5dd6-984e-298eb7db5245",
-				version = 2,
-			},
-			inheritedObjectUUID = "e44d74a3-3280-520a-b76f-b7aef590dde0",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[Caster] Addle (Secondary)",
-				uuid = "288c2dbc-ee53-93d7-83d5-ab6eae6e5ed5",
-				version = 2,
-			},
-			inheritedObjectUUID = "231023f0-79b9-7670-a7fe-423456a3369b",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
 		},
 		
 		{
@@ -22550,20 +21776,6 @@ local tbl =
 		{
 			data = 
 			{
-				name = "[MNK] Mantra",
-				uuid = "5ec1faf4-4786-56b6-a82b-cb87c128f07c",
-				version = 2,
-			},
-			inheritedObjectUUID = "ba36cad2-7242-bde9-a806-90e7703a065b",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
 				displayPath = "",
 				name = "LPDU Mitigation",
 				uuid = "ecd64bd8-1065-cbdb-9003-f90432d6ec84",
@@ -22985,51 +22197,6 @@ local tbl =
 				timerStartOffset = -11,
 				uuid = "b7a4a22e-0222-5f3c-a2f7-b23efbb48d67",
 				version = 2,
-			},
-		},
-	},
-	[245] = 
-	{
-		
-		{
-			data = 
-			{
-				name = "[Melee] Feint (Secondary)",
-				uuid = "8048d2a4-b1ca-2847-a2d6-cc49875da77f",
-				version = 2,
-			},
-			inheritedObjectUUID = "2277754c-f53d-4bcd-a1eb-83e8c4c107a0",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[VPR] Feint (Secondary)",
-				uuid = "39ba3019-728c-5b40-b6d6-15944ef17e79",
-				version = 2,
-			},
-			inheritedObjectUUID = "cb10049e-4fb0-54ae-8d9d-97acfcf8a8fe",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[Caster] Addle (Primary)",
-				uuid = "eeb69dac-16a2-6c8d-95e7-f4b28b11ff5e",
-				version = 2,
-			},
-			inheritedObjectUUID = "ca7c5778-0cbb-84d2-9065-06b4310536f7",
-			inheritedOverwrites = 
-			{
-				enabled = false,
 			},
 		},
 	},
@@ -23847,48 +23014,6 @@ local tbl =
 				enabled = false,
 			},
 		},
-		
-		{
-			data = 
-			{
-				name = "[Ranged] rDPS Mit",
-				uuid = "78e7e834-af25-67c8-af26-744abe05f246",
-				version = 2,
-			},
-			inheritedObjectUUID = "a74e7c2a-296f-6075-af96-beb47b1580dc",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[RDM] Barrier",
-				uuid = "d08dba6c-f8c5-e3db-a76d-e224da41ff41",
-				version = 2,
-			},
-			inheritedObjectUUID = "37f7a626-b25e-f16b-bbb1-4022c6518fee",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[BRD] Nature's Minne",
-				uuid = "65464bf0-73a1-bd99-b50a-82eca016e5fd",
-				version = 2,
-			},
-			inheritedObjectUUID = "7ac1b9bd-4bb7-2ec0-a86e-9fd6175c0e6d",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
 	},
 	[262] = 
 	{
@@ -24311,68 +23436,6 @@ local tbl =
 				timerStartOffset = -11,
 				uuid = "e91a6ff9-beab-68a9-840c-f459ea4bdf76",
 				version = 2,
-			},
-		},
-	},
-	[264] = 
-	{
-		
-		{
-			data = 
-			{
-				name = "[MCH] Dismantle",
-				uuid = "c5689d3c-5582-d36c-a928-300e8686efd3",
-				version = 2,
-			},
-			inheritedObjectUUID = "8c7ca3ae-ac68-c372-99a6-41f302e586b1",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-	},
-	[266] = 
-	{
-		
-		{
-			data = 
-			{
-				name = "[Melee] Feint (Primary)",
-				uuid = "c69d2312-bc2f-6c05-9304-1da7e8f6dacd",
-				version = 2,
-			},
-			inheritedObjectUUID = "044921d0-1f04-60e7-928c-86d7ab001c9d",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[VPR] Feint (Primary)",
-				uuid = "2e68eb23-507f-d8b8-9364-8ac37f925d8f",
-				version = 2,
-			},
-			inheritedObjectUUID = "bd0fb6d1-d223-076c-8b6a-d835a7918a9d",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[Caster] Addle (Secondary)",
-				uuid = "0fe5e84d-0ca5-621c-8a4a-51a2765c83e8",
-				version = 2,
-			},
-			inheritedObjectUUID = "8cf07b65-f2e0-a70a-b3da-bd550083c5c0",
-			inheritedOverwrites = 
-			{
-				enabled = false,
 			},
 		},
 	},
@@ -24975,71 +24038,11 @@ local tbl =
 			},
 		},
 	},
-	[270] = 
-	{
-		
-		{
-			data = 
-			{
-				name = "[Melee] Feint (Secondary)",
-				uuid = "f4dfcd3b-bbb1-2c15-a8d8-ab9efe1156cc",
-				version = 2,
-			},
-			inheritedObjectUUID = "168cea2b-cafa-1cc6-aa3a-019cb0735b4d",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[VPR] Feint (Secondary)",
-				uuid = "364d4765-bb16-5518-8455-31a1f6d9ac54",
-				version = 2,
-			},
-			inheritedObjectUUID = "3f93ffb8-3d20-94fe-9afb-404dd38d8280",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[Caster] Addle (Primary)",
-				uuid = "02d8239d-555a-7662-925e-2caee5f03ee3",
-				version = 2,
-			},
-			inheritedObjectUUID = "b0d01b44-951e-60a6-a42c-deaa6967fb3b",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-	},
-	[271] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\fru\\modules\\optimization",
-				uuid = "6d1b32be-55c9-ba92-f083-56e0e1014b6e",
-			},
-			inheritanceRoot = "store\\anyone\\fru\\modules\\optimization",
-			objectType = "folder",
-		},
-	},
 	inheritedProfiles = 
 	{
-		"FRU\\lpdu mits",
 		"store\\anyone\\fru\\modules\\core",
 		"store\\anyone\\fru\\modules\\draws",
-		"store\\anyone\\fru\\modules\\optimization",
+		"Frureactions\\lpdu mits",
 	},
 	timelineName = "fru",
 	version = "1.0.5",
