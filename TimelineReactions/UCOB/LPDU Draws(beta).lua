@@ -9971,6 +9971,7 @@ local tbl =
 							aType = "Alert",
 							alertDuration = 4500,
 							alertPriority = 2,
+							alertTTS = true,
 							alertText = "Stack middle",
 							conditions = 
 							{

@@ -46,6 +46,8 @@ TEA: Coming soon by Ton.
 
 ### UCOB: LPDU
 
+- Blackfire Trio’s Stack middle call around 570 now also uses TTS; its timing and visual alert remain unchanged. (18-10-2026)
+
 - Fellruin now distinguishes Spread for dive, Under Nael, Stay in your link, and Out of link—spread on the actual Aetheric Profusion hit. Link guidance hands off to final spread circles without competing instructions; tank link assignments are retained. (18-10-2026)
 
 - Latest UCOB cues: your Heavensfall tower stays green while the small staging circle clears on knockback; the moving Twister countdown is 1.8x size; Cleanse doom appears only on your turn; only the first clockwise Doom call speaks. (18-10-2026)
@@ -63,8 +65,6 @@ TEA: Coming soon by Ton.
 - Heavensfall highlights only your assigned tower green once the Nael-based order is established. Added a character-following Twister countdown for P1/trios/adds and TTS on only the first clockwise Doom call. Thermionic timers now skip idle work, retain assignment waits and process quotes only during Nael phases. (18-10-2026)
 
 - Corrected the late Nael tankbuster return trigger and kept transition-to-A guidance from interrupting unfinished dragon baits or the remaining quote mechanics. (14-10-2026)
-
-- Thunderstruck now gives the affected player a Spread voice/text call and a small following countdown, preserving the later Thermionic stack guidance. (14-10-2026)
 
 ### FRU: LPDU
 
