@@ -4707,6 +4707,60 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.topLpdu\nlocal hands=S and S.p3EarlyHands\nif not hands or hands.firstResolved then self.used=true return end\nhands.firstResolved=true\nlocal drawer=TensorCore.getCachedFlatDrawer(0x663333FF,0x663333FF,0x663333FF,0xFF3333FF,3,0,0)\nfor _,early in pairs(hands.entries) do\n if early.wave==2 and early.shape and early.deadline>Now() then\n  if early.whiteShape then Argus.deleteTimedShape(early.whiteShape);S.owned[early.whiteShape]=nil;early.whiteShape=nil end\n  Argus.deleteTimedShape(early.shape);S.owned[early.shape]=nil\n  early.shape=S.keep(drawer:addTimedCircle(early.deadline-Now(),early.x,early.y,early.z,11,0,false,true,0))\n end\nend\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"0a809884-7b9f-fc2a-934e-ddcd1b9a06a6",
+									true,
+								},
+							},
+							name = "Activate second hand warning",
+							uuid = "d3065599-9046-51c5-bfdf-2bdead4e2962",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							eventArgType = 2,
+							eventSpellID = 31566,
+							name = "Hand slam",
+							uuid = "0a809884-7b9f-fc2a-934e-ddcd1b9a06a6",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "P3",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 426.4,
+				name = "[P3] Second hands turn red after first hit",
+				timeRange = true,
+				timelineIndex = 68,
+				timerEndOffset = 6,
+				timerStartOffset = -3,
+				uuid = "9c7dd7fc-f454-d0e6-b61d-d82fd897179b",
+				version = 2,
+			},
+		},
 	},
 	[70] = 
 	{
