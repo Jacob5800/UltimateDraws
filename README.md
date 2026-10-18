@@ -18,6 +18,12 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- Cosmo Dive now uses 55% fill: your own tank bait blue, the other tank red; non-tanks see both tank baits red, party stack stays green. Added brief beams to the first Wave Cannon set. (18-10-2026)
+- Pantokrator uses one short opening direction cue instead of repeated movement arrows. Removed red puddle countdown clutter and added a countdown only for your green missile spread. Moved the transition lineup 4y farther south. (18-10-2026)
+- P6 routing considers known exaflare lanes earlier and briefly waits for meteor puddle captures before showing the spread arrow/call. Program Loop waiting candidates extend farther out when inner candidates are blocked. Replay checks remain pending. (18-10-2026)
+
+- Sigma: highlight your assigned tower as soon as its assignment is known, retaining the existing arrow handoff. Removed the early conga positioning arrow and callout; later bounce guidance remains. (18-10-2026)
+
 - Corrected Sagittarius Arrow to the recorded AoE heading. Delta arm previews follow their bait before locking into the rotating sequence. (18-10-2026)
 - Added one small centre countdown per Pantokrator cone pair; expanding-ring timers now sit within each successive ring. Program Loop waiting guidance avoids tether pickup paths and prefers south when clear. (18-10-2026)
 - Cosmo Dive circles use 45% fill, with the non-tank stack green. Dive, puddle and exaflare draws render on the ground to keep characters visible. Added brief spread-beam previews and personal meteor flare destinations, accounting for the ranged LB. (18-10-2026)
