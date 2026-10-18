@@ -46,6 +46,8 @@ TEA: Coming soon by Ton.
 
 ### UCOB: LPDU
 
+- Fixed spacing in the personal lightning alert: Lightning on you, spread! (19-10-2026)
+
 - P1 Fireball regroup and late Hatch arrows now yield while the Twintania-to-Nael transition regroup is active, preventing competing destinations after Twintania disappears. (19-10-2026)
 
 - Tenstrike highlights only your assigned Neurolink: amber while waiting as backup, green when it is your turn, clearing after completion. Personal Hatch phase calls now check immediately alongside guidance rather than waiting in the update queue. (19-10-2026)
@@ -63,8 +65,6 @@ TEA: Coming soon by Ton.
 - Tenstrike now distinguishes first Hatch, backup waiting, first-soak exit and second-soak entry. Earthshaker calls identify marked spread versus waiting at 4; Middle—stack and a short center arrow begin only after both waves resolve. (19-10-2026)
 
 - Tenstrike players without the current Earthshaker now receive a green arrow to the actual EU waymark 4. It stops when the wave changes or ends; the waiting call names marker 4 without assuming it is north. (18-10-2026)
-
-- Blackfire Trio’s Stack middle call around 570 now also uses TTS; its timing and visual alert remain unchanged. (18-10-2026)
 
 ### FRU: LPDU
 

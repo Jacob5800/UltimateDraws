@@ -5771,7 +5771,7 @@ local tbl =
 							aType = "Alert",
 							alertDuration = 4000,
 							alertTTS = true,
-							alertText = "Lightning on you—spread",
+							alertText = "Lightning on you, spread!",
 							conditions = 
 							{
 								
