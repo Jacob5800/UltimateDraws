@@ -46,6 +46,8 @@ TEA: Coming soon by Ton.
 
 ### UCOB: LPDU
 
+- Nael transition stack guidance defaults to A and follows a clear five-player majority gathered within 6y of B or C for 0.5 seconds. It retains the selection through brief movement gaps. (19-10-2026)
+
 - Tenstrike now distinguishes first Hatch, backup waiting, first-soak exit and second-soak entry. Earthshaker calls identify marked spread versus waiting at 4; Middle—stack and a short center arrow begin only after both waves resolve. (19-10-2026)
 
 - Tenstrike players without the current Earthshaker now receive a green arrow to the actual EU waymark 4. It stops when the wave changes or ends; the waiting call names marker 4 without assuming it is north. (18-10-2026)
@@ -63,8 +65,6 @@ TEA: Coming soon by Ton.
 - The small Cleanse doom alert now appears once when your blue-circle cleanse guidance is active and it is your turn, rather than waiting until Doom has three seconds left. Other players’ turns and missing/expired patches do not prompt you. (18-10-2026)
 
 - Personal Twister countdown increased another 20%, from 1.5x to 1.8x the original text size; position and timing are unchanged. (18-10-2026)
-
-- Personal Twister countdown text is now 50% larger, retaining its player-following position and cast deadline. (18-10-2026)
 
 ### FRU: LPDU
 
