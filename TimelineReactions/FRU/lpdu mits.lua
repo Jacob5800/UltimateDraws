@@ -8177,11 +8177,11 @@ local tbl =
 				},
 				displayPath = "Spreadsheet tank mitigation / P2",
 				mechanicTime = 276.1,
-				name = "[LPDU Tank] P2 first autos 120s",
+				name = "[LPDU Tank] P2 later autos 120s",
 				timeRange = true,
 				timelineIndex = 62,
-				timerEndOffset = -6,
-				timerStartOffset = -10,
+				timerEndOffset = 42,
+				timerStartOffset = 38,
 				uuid = "097e6122-1436-be13-8b15-413ae578af0f",
 				version = 2,
 			},
@@ -17359,7 +17359,8 @@ local tbl =
 				name = "[LPDU Tank] P3 Memory MT shield",
 				timeRange = true,
 				timelineIndex = 154,
-				timerStartOffset = -3,
+				timerEndOffset = -9,
+				timerStartOffset = -12,
 				uuid = "55d6e2d0-765b-66be-af0e-12d64e0884b1",
 				version = 2,
 			},
@@ -20117,50 +20118,6 @@ local tbl =
 					{
 						data = 
 						{
-							actionID = 3540,
-							conditions = 
-							{
-								
-								{
-									"794bee36-160c-3bf2-8cd0-d6749f818e5b",
-									true,
-								},
-								
-								{
-									"15e67189-83ad-727a-84a6-03e334cad4b0",
-									true,
-								},
-							},
-							uuid = "1c4d9c80-e291-449a-bd31-e41b81d3b063",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 7388,
-							conditions = 
-							{
-								
-								{
-									"5dd778bc-cb18-7699-9be8-039d9dc65643",
-									true,
-								},
-								
-								{
-									"15e67189-83ad-727a-84a6-03e334cad4b0",
-									true,
-								},
-							},
-							uuid = "9d3a97d7-dd4d-962e-a4b5-51540c1b37f8",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
 							actionID = 16471,
 							conditions = 
 							{
@@ -20266,7 +20223,7 @@ local tbl =
 				},
 				displayPath = "Spreadsheet tank mitigation / P4",
 				mechanicTime = 773.5,
-				name = "[LPDU Tank] P4 Akh 1 MT party",
+				name = "[LPDU Tank] P4 Akh 1 MT magic party",
 				timeRange = true,
 				timelineIndex = 175,
 				timerStartOffset = -3,
@@ -21437,6 +21394,130 @@ local tbl =
 				timelineIndex = 175,
 				timerStartOffset = -6,
 				uuid = "c54fc891-7c2e-37a8-9510-9a2849825f4f",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 3540,
+							conditions = 
+							{
+								
+								{
+									"7096aa42-c93c-123a-becf-44cc189c0cee",
+									true,
+								},
+								
+								{
+									"3dbc5edd-01b5-43fe-b9cb-cdacd267fa83",
+									true,
+								},
+							},
+							uuid = "02ad4afa-44f1-55a8-8769-3bdf0bec9e17",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 7388,
+							conditions = 
+							{
+								
+								{
+									"2afb522d-5ee4-6b68-8fbd-e2adb3645362",
+									true,
+								},
+								
+								{
+									"3dbc5edd-01b5-43fe-b9cb-cdacd267fa83",
+									true,
+								},
+							},
+							uuid = "243724ed-24c7-9f41-807e-cc7e9294ed25",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local r=AnyoneCore.Roster\nif not r.current() then return false end\nlocal slot=r.mySlot()\nreturn slot==\"T1\"",
+							name = "Assigned MT",
+							uuid = "3dbc5edd-01b5-43fe-b9cb-cdacd267fa83",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "PALADIN",
+							uuid = "7096aa42-c93c-123a-becf-44cc189c0cee",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "WARRIOR",
+							uuid = "2afb522d-5ee4-6b68-8fbd-e2adb3645362",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DARKKNIGHT",
+							uuid = "8c5bdb61-6462-087e-9b13-3f0d022990ef",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "GUNBREAKER",
+							uuid = "fb1764dd-d719-6982-a3ab-5a8138b3912a",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Spreadsheet tank mitigation / P4",
+				mechanicTime = 773.5,
+				name = "[LPDU Tank] P4 Akh 1 MT shield for Morn Afah",
+				timeRange = true,
+				timelineIndex = 175,
+				timerEndOffset = 9.5,
+				timerStartOffset = 5,
+				uuid = "e40c3211-d190-b015-be40-4c3dca7483d0",
 				version = 2,
 			},
 		},
@@ -22899,7 +22980,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return Settings.FFXIVMINION.LPDU_FRU_DarklitTank ~= \"Tank swap\" and (Settings.FFXIVMINION.LPDU_FRU_P4AM1Mode or \"4-4\") ~= \"7-1 OT solo\"",
+							conditionLua = "return Settings.FFXIVMINION.LPDU_FRU_DarklitTank ~= \"Tank swap\" and (Settings.FFXIVMINION.LPDU_FRU_P4AM1Mode or \"4-4\") ~= \"7-1 OT solo\" and (Settings.FFXIVMINION.LPDU_FRU_P4AM2Mode or \"7-1 MT solo\") ~= \"7-1 OT solo\"",
 							name = "Mechanic plan branch",
 							uuid = "dc709b0e-ba0e-46b6-9190-c854ef7eb55c",
 							version = 3,
