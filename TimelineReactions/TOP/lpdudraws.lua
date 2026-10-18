@@ -2088,7 +2088,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() or S.mode~='panto' then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nlocal n=S.line[p.id] or S.lineNumber(p)\nlocal key='panto-step-1'\nif S.lastAssignment==key or not n then self.used=true return end\nlocal group=S.pantoPair(n)\nif not group then self.used=true return end\nS.lastAssignment=key\nif n==1 then\n S.pantoSpreadUntil=Now()+4300;S.pantoMovementAnnounced=false\n S.clearGoal()\n S.say('Spread out',3)\n local id=S.keep(S.green:addTimedCircleOnEnt(4300,p.id,5,0,false,true,S.flags))\n AnyoneCore.addWorldTextCountdown(4300,{x=p.pos.x,y=p.pos.y+1,z=p.pos.z},0xFF33FF33,true,1.1)\nelse S.say('Stay with group',3) end\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() or S.mode~='panto' then self.used=true return end\nif not JacobWorldText then return end\nlocal p=TensorCore.mGetPlayer()\nlocal n=S.line[p.id] or S.lineNumber(p)\nlocal key='panto-step-1'\nif S.lastAssignment==key or not n then self.used=true return end\nlocal group=S.pantoPair(n)\nif not group then self.used=true return end\nS.lastAssignment=key\nif n==1 then\n S.pantoSpreadUntil=Now()+4300;S.pantoMovementAnnounced=false\n S.clearGoal()\n S.say('Spread out',3)\n local id=S.keep(S.green:addTimedCircleOnEnt(4300,p.id,5,0,false,true,S.flags))\n JacobWorldText.addEntityCountdown(4300,p.id,0xFF33FF33,true,1.1,1,'top-p1-spread-'..p.id)\nelse S.say('Stay with group',3) end\nself.used=true\n",
 							name = "[P1] Missile spread 1",
 							uuid = "a08ca1c1-1f15-53d4-a232-f186385445e6",
 							version = 2.1,
@@ -2135,7 +2135,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() or S.mode~='panto' then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nlocal n=S.line[p.id] or S.lineNumber(p)\nlocal key='panto-step-2'\nif S.lastAssignment==key or not n then self.used=true return end\nlocal group=S.pantoPair(n)\nif not group then self.used=true return end\nS.lastAssignment=key\nif n==2 then\n S.pantoSpreadUntil=Now()+4300;S.pantoMovementAnnounced=false\n S.clearGoal()\n S.say('Spread out',3)\n local id=S.keep(S.green:addTimedCircleOnEnt(4300,p.id,5,0,false,true,S.flags))\n AnyoneCore.addWorldTextCountdown(4300,{x=p.pos.x,y=p.pos.y+1,z=p.pos.z},0xFF33FF33,true,1.1)\nelse S.say('Stay with group',3) end\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() or S.mode~='panto' then self.used=true return end\nif not JacobWorldText then return end\nlocal p=TensorCore.mGetPlayer()\nlocal n=S.line[p.id] or S.lineNumber(p)\nlocal key='panto-step-2'\nif S.lastAssignment==key or not n then self.used=true return end\nlocal group=S.pantoPair(n)\nif not group then self.used=true return end\nS.lastAssignment=key\nif n==2 then\n S.pantoSpreadUntil=Now()+4300;S.pantoMovementAnnounced=false\n S.clearGoal()\n S.say('Spread out',3)\n local id=S.keep(S.green:addTimedCircleOnEnt(4300,p.id,5,0,false,true,S.flags))\n JacobWorldText.addEntityCountdown(4300,p.id,0xFF33FF33,true,1.1,1,'top-p1-spread-'..p.id)\nelse S.say('Stay with group',3) end\nself.used=true\n",
 							name = "[P1] Missile spread 2",
 							uuid = "0bea8a9a-aa27-66b7-a48f-5f847efb7dac",
 							version = 2.1,
@@ -2182,7 +2182,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() or S.mode~='panto' then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nlocal n=S.line[p.id] or S.lineNumber(p)\nlocal key='panto-step-3'\nif S.lastAssignment==key or not n then self.used=true return end\nlocal group=S.pantoPair(n)\nif not group then self.used=true return end\nS.lastAssignment=key\nif n==3 then\n S.pantoSpreadUntil=Now()+4300;S.pantoMovementAnnounced=false\n S.clearGoal()\n S.say('Spread out',3)\n local id=S.keep(S.green:addTimedCircleOnEnt(4300,p.id,5,0,false,true,S.flags))\n AnyoneCore.addWorldTextCountdown(4300,{x=p.pos.x,y=p.pos.y+1,z=p.pos.z},0xFF33FF33,true,1.1)\nelse S.say('Stay with group',3) end\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() or S.mode~='panto' then self.used=true return end\nif not JacobWorldText then return end\nlocal p=TensorCore.mGetPlayer()\nlocal n=S.line[p.id] or S.lineNumber(p)\nlocal key='panto-step-3'\nif S.lastAssignment==key or not n then self.used=true return end\nlocal group=S.pantoPair(n)\nif not group then self.used=true return end\nS.lastAssignment=key\nif n==3 then\n S.pantoSpreadUntil=Now()+4300;S.pantoMovementAnnounced=false\n S.clearGoal()\n S.say('Spread out',3)\n local id=S.keep(S.green:addTimedCircleOnEnt(4300,p.id,5,0,false,true,S.flags))\n JacobWorldText.addEntityCountdown(4300,p.id,0xFF33FF33,true,1.1,1,'top-p1-spread-'..p.id)\nelse S.say('Stay with group',3) end\nself.used=true\n",
 							name = "[P1] Missile spread 3",
 							uuid = "be1976a8-c75c-f4bd-97ba-c3b8c29feb24",
 							version = 2.1,
@@ -2229,7 +2229,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() or S.mode~='panto' then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nlocal n=S.line[p.id] or S.lineNumber(p)\nlocal key='panto-step-4'\nif S.lastAssignment==key or not n then self.used=true return end\nlocal group=S.pantoPair(n)\nif not group then self.used=true return end\nS.lastAssignment=key\nif n==4 then\n S.pantoSpreadUntil=Now()+4300;S.pantoMovementAnnounced=false\n S.clearGoal()\n S.say('Spread out',3)\n local id=S.keep(S.green:addTimedCircleOnEnt(4300,p.id,5,0,false,true,S.flags))\n AnyoneCore.addWorldTextCountdown(4300,{x=p.pos.x,y=p.pos.y+1,z=p.pos.z},0xFF33FF33,true,1.1)\nelse S.say('Stay with group',3) end\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() or S.mode~='panto' then self.used=true return end\nif not JacobWorldText then return end\nlocal p=TensorCore.mGetPlayer()\nlocal n=S.line[p.id] or S.lineNumber(p)\nlocal key='panto-step-4'\nif S.lastAssignment==key or not n then self.used=true return end\nlocal group=S.pantoPair(n)\nif not group then self.used=true return end\nS.lastAssignment=key\nif n==4 then\n S.pantoSpreadUntil=Now()+4300;S.pantoMovementAnnounced=false\n S.clearGoal()\n S.say('Spread out',3)\n local id=S.keep(S.green:addTimedCircleOnEnt(4300,p.id,5,0,false,true,S.flags))\n JacobWorldText.addEntityCountdown(4300,p.id,0xFF33FF33,true,1.1,1,'top-p1-spread-'..p.id)\nelse S.say('Stay with group',3) end\nself.used=true\n",
 							name = "[P1] Missile spread 4",
 							uuid = "8c0072b4-0e0a-d795-a7f5-67f53ad4f4a7",
 							version = 2.1,
