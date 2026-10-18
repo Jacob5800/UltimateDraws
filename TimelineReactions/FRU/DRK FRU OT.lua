@@ -161,8 +161,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "if not AnyoneCore.Roster.current() then return false end\nreturn AnyoneCore.Roster.mySlot() == \"T2\"",
-							name = "Assigned OT (T2)",
+							conditionLua = "if not AnyoneCore.Roster.current() then return false end\nlocal slot=AnyoneCore.Roster.mySlot()\nreturn slot == \"T1\" or slot == \"T2\"",
+							name = "Assigned tank (MT/OT)",
 							uuid = "b18faec9-310b-e1e0-a81e-8b99dbacc4ad",
 							version = 3,
 						},
@@ -213,7 +213,7 @@ local tbl =
 				},
 				displayPath = "DRK OT / Imported timings",
 				mechanicTime = 13.7,
-				name = "[DRK OT] pot after 1st gcd",
+				name = "[DRK] pot after 1st gcd",
 				timeRange = true,
 				timelineIndex = 1,
 				timerEndOffset = 6,
@@ -4182,8 +4182,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "if not AnyoneCore.Roster.current() then return false end\nreturn AnyoneCore.Roster.mySlot() == \"T2\"",
-							name = "Assigned OT (T2)",
+							conditionLua = "if not AnyoneCore.Roster.current() then return false end\nlocal slot=AnyoneCore.Roster.mySlot()\nreturn slot == \"T1\" or slot == \"T2\"",
+							name = "Assigned tank (MT/OT)",
 							uuid = "3c872283-d2f4-6a4b-af75-ddabee755302",
 							version = 3,
 						},
@@ -4223,7 +4223,7 @@ local tbl =
 				},
 				displayPath = "DRK OT / Imported timings",
 				mechanicTime = 418.8,
-				name = "[DRK OT] Pot",
+				name = "[DRK] Pot",
 				timeRange = true,
 				timelineIndex = 102,
 				timerStartOffset = -3,
@@ -6546,6 +6546,20 @@ local tbl =
 			objectType = "folder",
 		},
 	},
+	[159] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Frureactions\\lpdu strats",
+				uuid = "49ad3f7f-5cad-a1ab-795c-b359e8960bef",
+			},
+			inheritanceRoot = "Frureactions\\lpdu strats",
+			objectType = "folder",
+		},
+	},
 	[162] = 
 	{
 		
@@ -7257,8 +7271,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "if not AnyoneCore.Roster.current() then return false end\nreturn AnyoneCore.Roster.mySlot() == \"T2\"",
-							name = "Assigned OT (T2)",
+							conditionLua = "if not AnyoneCore.Roster.current() then return false end\nlocal slot=AnyoneCore.Roster.mySlot()\nreturn slot == \"T1\" or slot == \"T2\"",
+							name = "Assigned tank (MT/OT)",
 							uuid = "77cd9b39-b1f9-03c7-80f5-31341b206d00",
 							version = 3,
 						},
@@ -7298,7 +7312,7 @@ local tbl =
 				},
 				displayPath = "DRK OT / Imported timings",
 				mechanicTime = 729.2,
-				name = "[DRK OT] hold till pot'ed",
+				name = "[DRK] hold till pot'ed",
 				timeRange = true,
 				timelineIndex = 162,
 				timerEndOffset = 30,
@@ -7453,8 +7467,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "if not AnyoneCore.Roster.current() then return false end\nreturn AnyoneCore.Roster.mySlot() == \"T2\"",
-							name = "Assigned OT (T2)",
+							conditionLua = "if not AnyoneCore.Roster.current() then return false end\nlocal slot=AnyoneCore.Roster.mySlot()\nreturn slot == \"T1\" or slot == \"T2\"",
+							name = "Assigned tank (MT/OT)",
 							uuid = "8a6927f5-30d8-6ed0-8f37-965a8bf2cb98",
 							version = 3,
 						},
@@ -7485,7 +7499,7 @@ local tbl =
 				displayPath = "DRK OT / Imported timings",
 				loop = true,
 				mechanicTime = 729.2,
-				name = "[DRK OT] pot",
+				name = "[DRK] pot",
 				timeRange = true,
 				timelineIndex = 162,
 				timerEndOffset = 17,
@@ -9883,8 +9897,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "if not AnyoneCore.Roster.current() then return false end\nreturn AnyoneCore.Roster.mySlot() == \"T2\"",
-							name = "Assigned OT (T2)",
+							conditionLua = "if not AnyoneCore.Roster.current() then return false end\nlocal slot=AnyoneCore.Roster.mySlot()\nreturn slot == \"T1\" or slot == \"T2\"",
+							name = "Assigned tank (MT/OT)",
 							uuid = "8459be7b-b4e1-9ca2-93be-1221df552dac",
 							version = 3,
 						},
@@ -9914,7 +9928,7 @@ local tbl =
 				},
 				displayPath = "DRK OT / Imported timings",
 				mechanicTime = 972.3,
-				name = "[DRK OT] pot off",
+				name = "[DRK] pot off",
 				timelineIndex = 207,
 				timerOffset = -2,
 				uuid = "7aeb4244-b532-972c-aa11-c18ad204dfa1",
@@ -10248,8 +10262,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "if not AnyoneCore.Roster.current() then return false end\nreturn AnyoneCore.Roster.mySlot() == \"T2\"",
-							name = "Assigned OT (T2)",
+							conditionLua = "if not AnyoneCore.Roster.current() then return false end\nlocal slot=AnyoneCore.Roster.mySlot()\nreturn slot == \"T1\" or slot == \"T2\"",
+							name = "Assigned tank (MT/OT)",
 							uuid = "bcf0f000-deba-fee5-bdaa-76883f5500b9",
 							version = 3,
 						},
@@ -10279,7 +10293,7 @@ local tbl =
 				},
 				displayPath = "DRK OT / Imported timings",
 				mechanicTime = 1011.4,
-				name = "[DRK OT] potion",
+				name = "[DRK] potion",
 				timelineIndex = 215,
 				uuid = "44a35d69-701f-3346-b0fe-cda036508365",
 				version = 2,
@@ -11166,8 +11180,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "if not AnyoneCore.Roster.current() then return false end\nreturn AnyoneCore.Roster.mySlot() == \"T2\"",
-							name = "Assigned OT (T2)",
+							conditionLua = "if not AnyoneCore.Roster.current() then return false end\nlocal slot=AnyoneCore.Roster.mySlot()\nreturn slot == \"T1\" or slot == \"T2\"",
+							name = "Assigned tank (MT/OT)",
 							uuid = "0153404b-0fdf-0292-b3a3-75c7a4f3966e",
 							version = 3,
 						},
@@ -11207,7 +11221,7 @@ local tbl =
 				},
 				displayPath = "DRK OT / Imported timings",
 				mechanicTime = 1070.8,
-				name = "[DRK OT] hold till pot'ed",
+				name = "[DRK] hold till pot'ed",
 				timeRange = true,
 				timelineIndex = 235,
 				timerEndOffset = 50,

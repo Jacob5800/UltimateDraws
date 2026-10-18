@@ -66,6 +66,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- The seven imported DRK potion and potion-hold reactions now support either assigned tank role. Their DRK job requirement, potion and optimization conditions, actions and timings are retained. (18-10-2026)
+
 - RDM Jump In now disables and re-enables in the shared jump-control windows, including the P2 entry release. SMN is skipped; Viper, Reaper and Samurai have no equivalent persistent movement toggle in their current ACR catalogs. (18-10-2026)
 
 - Added the requested synchronized jump-disable/re-enable windows to lpdu mits for PLD, MNK and DRG, the non-WAR live ACR catalogs exposing a Jumps toggle. Restores jumps at P2 entry 203.8 without resetting unrelated rotation holds. WAR keeps its existing job-profile controls. (18-10-2026)
@@ -83,8 +85,6 @@ TEA: Coming soon by Ton.
 - Added shared spreadsheet tank mitigation across P1-P5 for all four tanks, with assigned-role gates, P4 grouping-aware cooldown reservations and P5 hit-triggered Provoke swaps. Variable crystal completion uses its verified death event. Optional DRK personal timings retain shared spreadsheet party mitigation without duplicate Reprisals/Missionary. (18-10-2026)
 
 - LPDU mits now disables AnyoneCore automatic DPS and tank mitigation at fight start, using its existing FRU tank-mitigation switch. A native healer exclusion leaves healer settings unchanged. (18-10-2026)
-
-- Imported DRK Akh Morn cooldowns now run only when OT is selected as the solo tank for that set; party and MT-solo choices do not trigger the DRK solo bundle. (18-10-2026)
 
 ### UWU: LPDU
 
