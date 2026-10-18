@@ -13085,7 +13085,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nif not R or not R.current() or not R.isReady() then self.used=true return end\nlocal slot=R.mySlot()\nif not slot then self.used=true return end\nlocal order={T1=0,H1=1,M1=2,R1=3,T2=0,H2=1,M2=2,R2=3}\nlocal left=slot==\"T1\" or slot==\"H1\" or slot==\"M1\" or slot==\"R1\"\nlocal angle=math.rad(22.5+order[slot]*45)\nlocal dest={x=(left and -1 or 1)*math.sin(angle)*9,y=0,z=-math.cos(angle)*9}\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
+							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nif not R or not R.current() or not R.isReady() then self.used=true return end\nlocal now=Now()\nif data.ucobTenstrikeSpreadHit and now-data.ucobTenstrikeSpreadHit<20000 then self.used=true return end\nlocal s=data.ucobMultiHatch142\nlocal p=TensorCore.mGetPlayer()\nif s and now-s.started<25000 and s.ready and s.assignments and p and s.assignments[p.id] then self.used=true return end\nlocal slot=R.mySlot()\nif not slot then self.used=true return end\nlocal order={T1=0,H1=1,M1=2,R1=3,T2=0,H2=1,M2=2,R2=3}\nlocal left=slot==\"T1\" or slot==\"H1\" or slot==\"M1\" or slot==\"R1\"\nlocal angle=math.rad(22.5+order[slot]*45)\nlocal dest={x=(left and -1 or 1)*math.sin(angle)*12,y=0,z=-math.cos(angle)*12}\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
 							name = "Tenstrike initial Quickmarch position arrows",
 							uuid = "37069428-cc4f-91b2-b4fb-5ab51c72af4a",
 							version = 2.1,
@@ -13102,8 +13102,8 @@ local tbl =
 				name = "Tenstrike initial Quickmarch position arrows",
 				timeRange = true,
 				timelineIndex = 142,
-				timerEndOffset = -0.1,
-				timerStartOffset = -4,
+				timerEndOffset = 8,
+				timerStartOffset = -5,
 				uuid = "9bf39d4e-102f-4eac-ad60-9a1b5e2a0cbb",
 				version = 2,
 			},
@@ -13448,6 +13448,82 @@ local tbl =
 				timerEndOffset = 18,
 				timerStartOffset = -8,
 				uuid = "d1578e43-ad84-bdaa-bf5b-44d7c2dadfe2",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "data.ucobTenstrikeSpreadHit=Now()\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"e551eacc-e431-bd06-8135-25eaa772a08f",
+									true,
+								},
+								
+								{
+									"f1e8812b-e599-a885-83b5-dcf2cc5afff6",
+									true,
+								},
+							},
+							name = "End personal spread arrow",
+							uuid = "e37c742c-2dbc-43e6-aa78-6c2d5b92a888",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Meteor Stream hit",
+							spellIDList = 
+							{
+								9920,
+							},
+							uuid = "e551eacc-e431-bd06-8135-25eaa772a08f",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local p=TensorCore.mGetPlayer()\nreturn p~=nil and eventArgs.targetID==p.id",
+							dequeueIfLuaFalse = true,
+							name = "Own spread hit",
+							uuid = "f1e8812b-e599-a885-83b5-dcf2cc5afff6",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 740.5,
+				name = "Tenstrike own Meteor Stream spread resolved",
+				timeRange = true,
+				timelineIndex = 142,
+				timerEndOffset = 9,
+				timerStartOffset = -1,
+				uuid = "0c4950d4-a962-9152-a88f-7a2bb8da6a16",
 				version = 2,
 			},
 		},
