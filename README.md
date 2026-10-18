@@ -66,6 +66,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- WAR/GNB reserve their P1 OT short for the first explosion instead of spending it on Powder support; MT avoids an unavailable repeated short and uses Rampart plus explosion extras. WAR/GNB also reserve their short when solo first Akh instead of giving Somber support. Removed redundant Dark Mind from the DRK second-Akh extras while retaining Oblation. (18-10-2026)
+
 - Moved the P2 120s personal window to 314.1-318.1 after accounting for the P1 sync. Split first P4 Akh Morn party mitigation: DRK/GNB stay early, PLD/WAR shields wait until 778.5-783.0 for Morn Afah; preceding Memory shields now use 658.1-661.1 to preserve cooldown margin. Wings reserves OT Rampart when either Akh set selects OT solo. Somber invuln automatically excludes PLD and updates linked P4/P5 ownership; two PLDs use Tank swap. (18-10-2026)
 
 - Added WAR FRU with selected WarNeverChange rotation controls, assigned MT/OT gates and inherited LPDU spreadsheet mitigation. Shared tanks receive four Sprint windows and three Shirk reactions triggered by the assigned OT Provoke. Added jump-hold releases for skipped P1 windows and after Apocalypse; source alternative WAR mitigations remain excluded. (18-10-2026)
@@ -83,8 +85,6 @@ TEA: Coming soon by Ton.
 - Shared off-tank utility: stance on at 16.4, stance off during the 200.8–203.8 window, stance on during 702.9–712.9, and Gaia Provokes during 733.2–738.2 and 767.5–773.5. Uses assigned OT for every tank job; stance guards prevent accidental toggles. (18-10-2026)
 
 - FRU mitigation split: Moved103 mitigation reactions (145 skill actions) and the AnyoneCore automatic-mitigation disable into lpdu mits; removed their originals and 26 empty mitigation folders from lpdu strats. Tank-LB reminder remains in lpdu strats. (18-10-2026)
-
-- Middle AoE timers now follow B's actual waymark position for their 2-yalm offset. (11-10-2026)
 
 ### UWU: LPDU
 

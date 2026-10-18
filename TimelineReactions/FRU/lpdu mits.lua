@@ -1971,34 +1971,6 @@ local tbl =
 					{
 						data = 
 						{
-							actionID = 16464,
-							conditions = 
-							{
-								
-								{
-									"b5a50512-8012-5b77-afdb-1789cab85aeb",
-									true,
-								},
-								
-								{
-									"cbe8ca8c-4a82-d43a-9852-01a516138bb5",
-									true,
-								},
-								
-								{
-									"7de54535-bc60-92ac-9bed-8c3e90cc8afb",
-									true,
-								},
-							},
-							targetType = "Other Tank",
-							uuid = "d45143ea-6817-8f27-8792-36685907c048",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
 							actionID = 7393,
 							conditions = 
 							{
@@ -2020,34 +1992,6 @@ local tbl =
 							},
 							targetType = "Other Tank",
 							uuid = "afa204a4-d76e-cfa8-9494-55da8e9ab670",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 25758,
-							conditions = 
-							{
-								
-								{
-									"da1847ad-5649-9f5d-a002-649c6ca37e52",
-									true,
-								},
-								
-								{
-									"cbe8ca8c-4a82-d43a-9852-01a516138bb5",
-									true,
-								},
-								
-								{
-									"7de54535-bc60-92ac-9bed-8c3e90cc8afb",
-									true,
-								},
-							},
-							targetType = "Other Tank",
-							uuid = "b4dfed39-dc1e-a309-a508-c9c0c3514d07",
 							version = 2.1,
 						},
 					},
@@ -2713,8 +2657,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local r=AnyoneCore.Roster\nif not r.current() then return false end\nlocal slot=r.mySlot()\nreturn slot==\"T2\"",
-							name = "Assigned OT",
+							conditionLua = "local r=AnyoneCore.Roster\nif not r.current() then return false end\nlocal slot=r.mySlot()\nreturn slot==\"T1\" or slot==\"T2\"",
+							name = "Assigned tanks",
 							uuid = "45659848-8870-7f91-8d83-844a77251f76",
 							version = 3,
 						},
@@ -2781,7 +2725,7 @@ local tbl =
 				},
 				displayPath = "Spreadsheet tank mitigation / P1",
 				mechanicTime = 40.3,
-				name = "[LPDU Tank] P1 explosion 1 OT extra",
+				name = "[LPDU Tank] P1 explosion 1 tank extras",
 				timeRange = true,
 				timelineIndex = 11,
 				timerEndOffset = -3,
@@ -2845,6 +2789,11 @@ local tbl =
 									"2e975f80-3f48-c1f6-abe0-0322a92d58b2",
 									true,
 								},
+								
+								{
+									"62b64d99-9043-2e88-9e1d-84851e058809",
+									true,
+								},
 							},
 							uuid = "e5efb9ec-4c28-4cae-b014-76fa61ea2c47",
 							version = 2.1,
@@ -2897,6 +2846,11 @@ local tbl =
 								
 								{
 									"2e975f80-3f48-c1f6-abe0-0322a92d58b2",
+									true,
+								},
+								
+								{
+									"62b64d99-9043-2e88-9e1d-84851e058809",
 									true,
 								},
 							},
@@ -2974,6 +2928,17 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
 							uuid = "95b2daa2-d82f-b1fc-b9f2-130b49e07ba0",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local r=AnyoneCore.Roster\nif not r.current() then return false end\nreturn r.mySlot()==\"T2\"",
+							name = "OT short reserved for explosion",
+							uuid = "62b64d99-9043-2e88-9e1d-84851e058809",
 							version = 3,
 						},
 					},
@@ -19023,6 +18988,11 @@ local tbl =
 									"04a43a36-a0d1-9d90-9a8d-95735fe13e94",
 									true,
 								},
+								
+								{
+									"2941aee9-d12f-7b60-be5e-becf8761be83",
+									true,
+								},
 							},
 							targetType = "Other Tank",
 							uuid = "ce562e80-c347-23b1-a10f-0ea0d208ed69",
@@ -19077,6 +19047,11 @@ local tbl =
 								
 								{
 									"04a43a36-a0d1-9d90-9a8d-95735fe13e94",
+									true,
+								},
+								
+								{
+									"2941aee9-d12f-7b60-be5e-becf8761be83",
 									true,
 								},
 							},
@@ -19155,6 +19130,17 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
 							uuid = "e6494a79-a5a6-c3f2-8a40-85b4452506f3",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local r=AnyoneCore.Roster\nif not r.current() then return false end\nlocal slot=r.mySlot()\nlocal mode=Settings.FFXIVMINION.LPDU_FRU_P4AM1Mode or \"4-4\"\nreturn not ((mode==\"7-1 MT solo\" and slot==\"T1\") or (mode==\"7-1 OT solo\" and slot==\"T2\"))",
+							name = "Reserve solo Akh short",
+							uuid = "2941aee9-d12f-7b60-be5e-becf8761be83",
 							version = 3,
 						},
 					},
@@ -24470,33 +24456,6 @@ local tbl =
 								},
 							},
 							uuid = "bb286246-3011-14c7-bb82-cc816ad74c72",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 3634,
-							conditions = 
-							{
-								
-								{
-									"7b73bbd5-9c74-1f51-9ecf-be2806bb50f3",
-									true,
-								},
-								
-								{
-									"eeb57ef6-a9b3-92f9-9ca5-ee7aeaa96879",
-									true,
-								},
-								
-								{
-									"d1642ca3-33be-901a-9f0b-08ff9532cbfb",
-									true,
-								},
-							},
-							uuid = "ff161a8d-8cc3-6f27-a523-906c71d5081b",
 							version = 2.1,
 						},
 					},
