@@ -7,17 +7,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "b051d202-4ffc-0cbe-9399-b7e8ceab4212",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\core",
 				uuid = "92a43271-03c3-9dbd-cdb1-2b47622aa4c1",
 			},
@@ -841,7 +830,7 @@ local tbl =
 				uuid = "4316bde5-cc78-3256-b36a-fcd86f475284",
 				version = 2,
 			},
-			inheritedIndex = 30,
+			inheritedIndex = 22,
 		},
 		
 		{
@@ -886,33 +875,8 @@ local tbl =
 			},
 		},
 	}, 
-	[4] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "ba404b1f-2e0c-72d3-aeb7-5155412e6c6f",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-	},
 	[7] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "d1f4f2a0-f8ff-32b4-485c-80caa15705f0",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -1106,17 +1070,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "bc57735c-8b41-d8b0-6f90-ce5edd9d1b2c",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "LPDU",
 				uuid = "f6537e66-aa7b-5235-9a20-b1f9179b542b",
 			},
@@ -1160,17 +1113,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "38877cf5-cd5a-9089-8490-cdbfe8494e05",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\core",
 				uuid = "c9ee12e4-b6d6-2d38-72e0-40fe3029b034",
 			},
@@ -1197,6 +1139,36 @@ local tbl =
 				uuid = "c80b3db0-f27a-1f9c-8fbe-0d4d876b0a7f",
 			},
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current() == nil or roster.mySlot() ~= \"T2\" then\n    self.used = true\n    return\nend\nlocal player = TensorCore.mGetPlayer()\nif player == nil or player.pos == nil then\n    self.used = true\n    return\nend\nlocal sourcePos = player.pos\nlocal targetPos = { x = 112.41, y = 0, z = 86.11 }\nlocal heading = TensorCore.getHeadingToTarget(sourcePos, targetPos)\nlocal distance = TensorCore.getDistance2d(sourcePos, targetPos)\nlocal otBlue = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(40/255, 100/255, 220/255, .25), 2)\nif distance > 0.5 then\n    otBlue:addTimedArrow(5000, sourcePos.x, sourcePos.y, sourcePos.z, heading, distance, 1, 1, 1, 0, true)\nend\nAnyoneCore.addTimedWorldText(5000, \"OT Buster\", targetPos, GUI:ColorConvertFloat4ToU32(1, 1, 1, 1), true, 1.5, 0)\nself.used = true",
+							name = "OT arrow to A",
+							uuid = "604d1e93-fa64-2d84-9bb6-f8a4de0eb3bc",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU",
+				mechanicTime = 40.3,
+				name = "[LPDU] OT Buster to A indicator",
+				timelineIndex = 11,
+				timerOffset = -5.5,
+				uuid = "3f066183-f48a-8699-8bac-1ddcdbf3c7e2",
+				version = 2,
+			},
 		},
 		
 		{
@@ -1250,50 +1222,9 @@ local tbl =
 			},
 			inheritedIndex = 11,
 		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current() == nil or roster.mySlot() ~= \"T2\" then\n    self.used = true\n    return\nend\nlocal player = TensorCore.mGetPlayer()\nif player == nil or player.pos == nil then\n    self.used = true\n    return\nend\nlocal sourcePos = player.pos\nlocal targetPos = { x = 112.41, y = 0, z = 86.11 }\nlocal heading = TensorCore.getHeadingToTarget(sourcePos, targetPos)\nlocal distance = TensorCore.getDistance2d(sourcePos, targetPos)\nlocal otBlue = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(40/255, 100/255, 220/255, .25), 2)\nif distance > 0.5 then\n    otBlue:addTimedArrow(5000, sourcePos.x, sourcePos.y, sourcePos.z, heading, distance, 1, 1, 1, 0, true)\nend\nAnyoneCore.addTimedWorldText(5000, \"OT Buster\", targetPos, GUI:ColorConvertFloat4ToU32(1, 1, 1, 1), true, 1.5, 0)\nself.used = true",
-							name = "OT arrow to A",
-							uuid = "604d1e93-fa64-2d84-9bb6-f8a4de0eb3bc",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-				},
-				displayPath = "LPDU",
-				mechanicTime = 40.3,
-				name = "[LPDU] OT Buster to A indicator",
-				timelineIndex = 11,
-				timerOffset = -5.5,
-				uuid = "3f066183-f48a-8699-8bac-1ddcdbf3c7e2",
-				version = 2,
-			},
-		},
 	},
 	[12] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "4d06ed6a-481d-f60e-9372-58407dbc317a",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -2088,17 +2019,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "36bb06a9-200c-97ad-dd37-46d73c5d2ef9",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "0d4a6a76-7e9f-2b12-b730-bae8656119a6",
 			},
@@ -2136,17 +2056,6 @@ local tbl =
 	},
 	[22] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "c07b454f-b7fd-6f13-1e90-e551ba5fb85f",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -2302,6 +2211,36 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
+							actionLua = "AnyoneCore.Shotcall(\"Go to conga line\",true,3,false)\nself.used=true",
+							name = "Conga line reminder",
+							uuid = "82c9f3c4-768d-3368-9f33-0287b6a89c9f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU",
+				mechanicTime = 85.9,
+				name = "[LPDU] Go to conga line",
+				timelineIndex = 22,
+				timerOffset = 3.1,
+				uuid = "466d7c46-ce83-29c3-9b38-1c62181178f7",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
 							actionLua = "local state = data.frup1_lpdu_four_tether\nif state == nil then\n    state = {\n        records = {},\n        positionByOrder = {[1] = 1, [2] = 2, [3] = 3, [4] = 4},\n        partnerByOrder = {[1] = 3, [3] = 1, [2] = 4, [4] = 2}\n    }\n    data.frup1_lpdu_four_tether = state\nend\nstate.records = state.records or {}\nstate.positionByOrder = state.positionByOrder or {[1] = 1, [2] = 2, [3] = 3, [4] = 4}\nstate.partnerByOrder = state.partnerByOrder or {[1] = 3, [3] = 1, [2] = 4, [4] = 2}\n-- Splatoon/LPDU spots: 1 north inner, 2 south inner, 3 north outer, 4 south outer.\n-- Reset each event so a live profile edit also updates existing encounter state.\nstate.tetherPositions = {\n    [1] = {x = 100, y = 0, z = 95},\n    [2] = {x = 100, y = 0, z = 105},\n    [3] = {x = 100, y = 0, z = 93},\n    [4] = {x = 100, y = 0, z = 107}\n}\n\nlocal records = state.records\nlocal positions = state.tetherPositions\nlocal isTetherAdd = (eventArgs.newTetherID == 249 or eventArgs.newTetherID == 287)\n    and eventArgs.newTargetID ~= nil\nlocal isTetherClear = eventArgs.newTetherID == 0\n    and (eventArgs.oldTetherID == 249 or eventArgs.oldTetherID == 287)\n    and eventArgs.oldTargetID ~= nil\nlocal swapFrom = nil\nlocal swapTo = nil\nlocal swapTether = nil\n\nif isTetherAdd then\n    local record = nil\n    for _, existing in ipairs(records) do\n        if existing.id == eventArgs.newTargetID then\n            record = existing\n            break\n        end\n    end\n\n    if record ~= nil then\n        record.tether = eventArgs.newTetherID\n    elseif #records < 4 then\n        table.insert(records, {\n            id = eventArgs.newTargetID,\n            tether = eventArgs.newTetherID,\n            order = #records + 1,\n            resolved = false\n        })\n    end\nend\n\nif isTetherClear then\n    for _, record in ipairs(records) do\n        if record.id == eventArgs.oldTargetID\n            and record.tether == eventArgs.oldTetherID\n            and not record.resolved then\n            record.resolved = true\n            if record.order == 1 and not state.swapped13 then\n                local nextTether = records[3]\n                if nextTether ~= nil and not nextTether.resolved then\n                    swapFrom = positions[state.positionByOrder[3] or 3]\n                    swapTether = nextTether.tether\n                end\n                state.positionByOrder[1], state.positionByOrder[3] =\n                    state.positionByOrder[3], state.positionByOrder[1]\n                if swapFrom ~= nil then\n                    swapTo = positions[state.positionByOrder[3] or 3]\n                end\n                state.swapped13 = true\n            elseif record.order == 2 and not state.swapped24 then\n                local nextTether = records[4]\n                if nextTether ~= nil and not nextTether.resolved then\n                    swapFrom = positions[state.positionByOrder[4] or 4]\n                    swapTether = nextTether.tether\n                end\n                state.positionByOrder[2], state.positionByOrder[4] =\n                    state.positionByOrder[4], state.positionByOrder[2]\n                if swapFrom ~= nil then\n                    swapTo = positions[state.positionByOrder[4] or 4]\n                end\n                state.swapped24 = true\n            end\n            break\n        end\n    end\nend\n\nlocal player = TensorCore.mGetPlayer()\n-- Retire the initial LPDU conga arrow when the tether assignment takes over.\nlocal setupArrow = data.frup1_lpdu_conga_setup\nif type(setupArrow) == \"table\" and setupArrow.arrowUUID ~= nil\n    and ((isTetherAdd and player ~= nil and eventArgs.newTargetID == player.id)\n        or #records >= 4) then\n    Argus.deleteTimedShape(setupArrow.arrowUUID)\n    setupArrow.arrowUUID = nil\nend\nlocal center = {x = 100, y = 0, z = 100}\n-- Red marks fire/stack; blue marks lightning/spread.\nlocal stackRed = TensorCore.getStaticDrawer(\n    GUI:ColorConvertFloat4ToU32(1, .16, .12, .55), 2)\nlocal spreadBlue = TensorCore.getStaticDrawer(\n    GUI:ColorConvertFloat4ToU32(.10, .52, 1, .55), 2)\nlocal green = TensorCore.getStaticDrawer(\n    GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .25), 2)\nlocal markerRadius = 1.0\n-- Never extend a Fall of Faith marker beyond timeline 118.\nlocal markerTimeout = math.min(15000, math.max(0, math.floor((118 - TensorReactions_CurrentTimer) * 1000)))\n\n-- Show only the current tether bait on each side. The second tether takes\n-- the first tether's spot after its tether clears.\nfor order, record in ipairs(records) do\n    local firstOrder = (order == 1 or order == 3) and 1 or 2\n    local secondOrder = firstOrder == 1 and 3 or 4\n    local firstRecord = records[firstOrder]\n    local activeOrder = nil\n    if firstRecord ~= nil and not firstRecord.resolved then\n        activeOrder = firstOrder\n    elseif firstRecord ~= nil and firstRecord.resolved then\n        local secondRecord = records[secondOrder]\n        if secondRecord ~= nil and not secondRecord.resolved then\n            activeOrder = secondOrder\n        end\n    end\n\n    local isActiveBait = order == activeOrder\n    local position = positions[state.positionByOrder[order] or order]\n    local isStack = record.tether == 249\n    local drawer = isStack and stackRed or spreadBlue\n\n    if isActiveBait and position ~= nil then\n        if record.markerUUID ~= nil then\n            local updated = drawer:updateTimedCircle(\n                record.markerUUID, markerTimeout, position.x, position.y, position.z,\n                markerRadius, 0, true, false)\n            if not updated then\n                Argus.deleteTimedShape(record.markerUUID)\n                record.markerUUID = nil\n            end\n        end\n        if record.markerUUID == nil then\n            record.markerUUID = drawer:addTimedCircle(\n                markerTimeout, position.x, position.y, position.z, markerRadius, 0, true)\n        end\n    elseif record.markerUUID ~= nil then\n        Argus.deleteTimedShape(record.markerUUID)\n        record.markerUUID = nil\n    end\nend\n\nlocal targetPosition = nil\nlocal myRecord = nil\nif player ~= nil then\n    for _, record in ipairs(records) do\n        if record.id == player.id then\n            myRecord = record\n            break\n        end\n    end\nend\n\n-- The tethered player follows their own prey order and swap.\nif myRecord ~= nil and not myRecord.resolved then\n    targetPosition = positions[state.positionByOrder[myRecord.order] or myRecord.order]\nelseif #records >= 4 and player ~= nil then\n    -- LPDU conga priority: H1, H2, MT, OT, M1, M2, R1, R2.\n    -- Among non-tethered players, the first two go north and the next two south.\n    local anyTetherUnresolved = false\n    local tethered = {}\n    for _, record in ipairs(records) do\n        if not record.resolved then anyTetherUnresolved = true end\n        tethered[record.id] = true\n    end\n\n    local roster = AnyoneCore and AnyoneCore.Roster\n    if anyTetherUnresolved and roster ~= nil and roster.current() ~= nil\n        and roster.isReady() then\n        local slotOrder = {\"H1\", \"H2\", \"T1\", \"T2\", \"M1\", \"M2\", \"R1\", \"R2\"}\n        local fillers = {}\n        for _, slot in ipairs(slotOrder) do\n            local id = roster.idOf(slot)\n            if id ~= nil and not tethered[id] then\n                table.insert(fillers, slot)\n            end\n        end\n\n        local mySlot = roster.mySlot()\n        if #fillers == 4 and mySlot ~= nil then\n            for i, slot in ipairs(fillers) do\n                if slot == mySlot then\n                    targetPosition = i <= 2\n                        and {x = 100, y = 0, z = 92}\n                        or {x = 100, y = 0, z = 108}\n                    break\n                end\n            end\n        end\n    end\nend\n\n\n-- Recreate the local guidance arrow after circles so it renders above them.\nif state.localArrowUUID ~= nil then\n    Argus.deleteTimedShape(state.localArrowUUID)\n    state.localArrowUUID = nil\nend\nif targetPosition ~= nil then\n    local heading = TensorCore.getHeadingToTarget(center, targetPosition)\n    local distance = TensorCore.getDistance2d(center, targetPosition) - 1\n    state.localArrowUUID = green:addTimedArrow(\n        5000, center.x, center.y, center.z, heading,\n        distance, 1, 1, 1, 0, true)\nend\n\nself.used = true",
 							conditions = 
 							{
@@ -2405,37 +2344,7 @@ local tbl =
 				uuid = "a9bb6087-404d-4e04-8e10-0798c319b69d",
 				version = 2,
 			},
-			inheritedIndex = 23,
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "AnyoneCore.Shotcall(\"Go to conga line\",true,3,false)\nself.used=true",
-							name = "Conga line reminder",
-							uuid = "82c9f3c4-768d-3368-9f33-0287b6a89c9f",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-				},
-				displayPath = "LPDU",
-				mechanicTime = 85.9,
-				name = "[LPDU] Go to conga line",
-				timelineIndex = 22,
-				timerOffset = 3.1,
-				uuid = "466d7c46-ce83-29c3-9b38-1c62181178f7",
-				version = 2,
-			},
+			inheritedIndex = 19,
 		},
 		
 		{
@@ -2486,17 +2395,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "6add6c2e-1053-b0c2-c18e-db18bbee8c7e",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "f9e698a5-03e8-cb91-ae6f-612bd9411e55",
 			},
@@ -2520,17 +2418,6 @@ local tbl =
 	},
 	[25] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "85f13c64-e455-d760-4427-fdfab3f73074",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -2592,17 +2479,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "d1857271-27db-e735-f554-be2fbbc50441",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "bcdbf2ce-7db2-946a-d1ee-17f06ede4ffe",
 			},
@@ -2612,17 +2488,6 @@ local tbl =
 	},
 	[29] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "b4f417b8-e36e-8b9c-975f-b80e3711e248",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -2710,17 +2575,6 @@ local tbl =
 	},
 	[30] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "544a3262-f17f-4506-fd7d-aec839871e32",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -2995,17 +2849,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "4220bf4d-df61-69a1-b312-85077707f31d",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "e8b76032-aa55-a1de-162d-eb381989be62",
 			},
@@ -3029,17 +2872,6 @@ local tbl =
 	},
 	[35] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "ebb1067f-9d31-d09b-771d-a935e36b000f",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -3079,17 +2911,6 @@ local tbl =
 	},
 	[39] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "290167db-aff0-fa3f-02c8-fb79c0653dab",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -3140,34 +2961,6 @@ local tbl =
 				uuid = "817ea404-d600-4cbf-955f-0aedf55dfb17",
 				version = 2,
 			},
-		},
-	},
-	[40] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "e4a9db7f-2922-7a8b-ed26-3161dc63d50f",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-	},
-	[44] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "83b97733-edb1-d017-6fe2-12d538214d83",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
 		},
 	},
 	[45] = 
@@ -3623,20 +3416,6 @@ local tbl =
 			},
 		},
 	},
-	[48] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "13f9efa7-796e-f463-fbce-7299def8eab7",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-	},
 	[49] = 
 	{
 		
@@ -3667,17 +3446,6 @@ local tbl =
 	},
 	[50] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "c0f9bd30-869f-8edc-4b2f-28fac5ff60c0",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -4299,17 +4067,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "edb55393-8ac3-60cf-4aae-c7fd809bd063",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\core",
 				uuid = "79329f72-6b5c-278e-5ffd-3d1c40796542",
 			},
@@ -4330,17 +4087,6 @@ local tbl =
 	},
 	[64] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "e93f1df9-6aba-dfdd-ef65-4bef9d1445c9",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -4732,17 +4478,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "b28c1528-3af1-6514-5ff0-8b82010afdb8",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "81aaac9b-7e6c-891f-ff21-f2d1e302fb4b",
 			},
@@ -4881,17 +4616,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "e5a8077c-a81e-c580-1ca4-1fbee27ab04c",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "32f678b7-fc99-3883-412b-e1150922db27",
 			},
@@ -4965,17 +4689,6 @@ local tbl =
 	},
 	[77] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "c794d995-ac8c-b099-69df-049f32b5cba5",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -5082,17 +4795,6 @@ local tbl =
 	},
 	[80] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "e5033c83-f0fc-7177-7074-468d263a6353",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -5695,17 +5397,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "b9624222-1b00-e9c6-30b8-ab0886d4a3f2",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "5b7c0a71-2f2d-95ed-43aa-a87bcb3c4321",
 			},
@@ -5928,17 +5619,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "cdf005d9-1291-fad5-8e7d-407b0128d329",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "b9645586-30f3-910a-b8b2-7e04e0d546f6",
 			},
@@ -6118,17 +5798,6 @@ local tbl =
 	},
 	[99] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "45ebc015-9e7e-5a99-eb88-1e1fb10cb225",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -6369,17 +6038,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "ab6559a0-56f6-e02c-7357-efe65ee819f0",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "[SAM] Tengentsu",
 				uuid = "f5484f59-cf1a-72f1-ac11-a30a93b2d667",
 				version = 2,
@@ -6411,17 +6069,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "189cda8d-a7b5-4019-c2a3-4707d22c059d",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "[DNC] Curing Waltz",
 				uuid = "fa2366f0-c7a3-0b16-9856-1bdcce9a4544",
 				version = 2,
@@ -6435,17 +6082,6 @@ local tbl =
 	},
 	[123] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "9380e173-b121-b17f-91c1-92c19a4c8b03",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -6916,17 +6552,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "1ec08d5e-19ba-dd62-4241-0f9c85cf166e",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "d894ba35-a371-cb31-4665-4457c980c865",
 			},
@@ -7045,17 +6670,6 @@ local tbl =
 	},
 	[128] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "33bfb57c-00ab-46e8-91eb-1afe38edd58c",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -7214,17 +6828,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "eca37e9d-fc2b-b1a9-3232-283304069fad",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "[Caster] Addle (Secondary)",
 				uuid = "dbeda0ea-b3a0-b7f2-9fe0-06c491c57612",
 				version = 2,
@@ -7356,17 +6959,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "3600c92b-fa33-56f7-fdc9-bb55b4b2323b",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "e8c84614-3d8e-4208-a412-e18a803eef44",
 			},
@@ -7422,17 +7014,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "2ae096da-4508-c096-07d0-7e3cd7b990aa",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				name = "[Melee] Feint (Secondary)",
 				uuid = "61f670bb-a087-46b2-a870-bd05d85f11ca",
 				version = 2,
@@ -7474,17 +7055,6 @@ local tbl =
 	},
 	[140] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "318a17fe-88de-ad72-9420-b87c2c17fe0e",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -8431,17 +8001,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "c23b9f26-7898-719a-4045-19d43cbb8876",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "8a580a4d-74d6-7d19-5f3f-d35f1f96ee7d",
 			},
@@ -8470,17 +8029,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "62424407-c8c5-9feb-78fd-dd8d71ef8cd7",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "c2368a38-5a13-3254-cdf9-86f2caebc0e8",
 			},
@@ -8504,17 +8052,6 @@ local tbl =
 	},
 	[150] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "5de4d985-a985-2039-9661-cc2bfd932dd5",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -8568,17 +8105,6 @@ local tbl =
 	},
 	[153] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "f357bcfa-4a34-06be-b3c6-518c97385d4a",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -8638,17 +8164,6 @@ local tbl =
 	},
 	[154] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "cdc0a451-93de-de6d-bbfc-a4377ad74c61",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -8724,17 +8239,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "8c6705d7-2844-6cd3-5117-cfb1c23c1327",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\core",
 				uuid = "66251246-91d7-2132-6288-0450666c4516",
 			},
@@ -8791,17 +8295,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "57330176-8d80-7282-3df6-18f806021cc6",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\core",
 				uuid = "72452025-7b89-8ff1-764f-f297791439f5",
 			},
@@ -8823,33 +8316,8 @@ local tbl =
 			objectType = "folder",
 		},
 	},
-	[159] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "fad54c44-dc9f-7888-0f83-acb217e44214",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-	},
 	[162] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "207995c6-1641-b7ba-d538-07b426d30e16",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -8864,17 +8332,6 @@ local tbl =
 	},
 	[166] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "b1afd64a-6c9c-8136-9124-6e20535b941a",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -9753,17 +9210,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "9337e3f1-940c-af95-fef6-0def70b2de01",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "6e7b144e-464f-694a-7ea2-1330e7775e3e",
 			},
@@ -9787,17 +9233,6 @@ local tbl =
 	},
 	[175] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "6dd30d1a-f3ae-ff86-06db-eb04f441e5ea",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -9923,17 +9358,6 @@ local tbl =
 	},
 	[179] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "2c8fddae-0783-31a2-08c2-b9d824f7293e",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -11508,33 +10932,8 @@ local tbl =
 			},
 		},
 	},
-	[195] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "55b203e4-f9a4-1be8-ea34-3cbadc08a534",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-	},
 	[201] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "391020e4-a9e1-3610-4ed4-4fe6bf66c234",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -11549,17 +10948,6 @@ local tbl =
 	},
 	[202] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "34191f43-c1cb-fb8f-4c65-cb81f4740253",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -11675,17 +11063,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "e9d9eb29-5568-ee9d-f0da-1dfb75b4b5b9",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "af915ef6-8cde-a9e2-4a5d-8b84ddd076e6",
 			},
@@ -11770,17 +11147,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "1dfc50ae-17e8-19b2-3f45-595c16639c3e",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\core",
 				uuid = "9ab427ed-021d-12e1-d243-f25b685f503d",
 			},
@@ -11805,17 +11171,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "4982aecc-465a-85f8-00aa-16be54fededc",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "371c29a7-0659-a30b-7399-b815ee756417",
 			},
@@ -11831,65 +11186,6 @@ local tbl =
 				uuid = "f374dd05-d80b-ab5a-8b1c-6e2ded1a03dc",
 			},
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "if data.p5_exa == nil then data.p5_exa = {} end\nlocal ent = TensorCore.mGetEntity(eventArgs.entityID)\ntable.insert(data.p5_exa,{pos = ent.pos})\nif table.size(data.p5_exa) == 8 then\n    local cross = (data.p5_exa[1].pos.x - 100) * (data.p5_exa[5].pos.z-100) - (data.p5_exa[1].pos.z-100) * (data.p5_exa[5].pos.x-100)\n    if cross < 0 then\n        TensorCore.addAlertText(20000,\"right\",1,1,true)\n    else\n        TensorCore.addAlertText(20000,\"left\",1,1,true)\n    end\nend\nself.used = true",
-							conditions = 
-							{
-								
-								{
-									"61efd7d8-6b94-ae3d-96ee-c5e0eeda5d16",
-									true,
-								},
-							},
-							uuid = "feafca53-8758-847e-baa6-31e71e081e82",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Event",
-							dequeueIfLuaFalse = true,
-							eventArgOptionType = 3,
-							eventArgType = 2,
-							spellIDList = 
-							{
-								40118,
-								40307,
-							},
-							uuid = "61efd7d8-6b94-ae3d-96ee-c5e0eeda5d16",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "LPDU",
-				eventType = 3,
-				loop = true,
-				mechanicTime = 984.8,
-				name = "Draw Exasquares2 [AnyoneCore test needed]",
-				timeRange = true,
-				timelineIndex = 209,
-				timerEndOffset = 30,
-				timerStartOffset = -200,
-				uuid = "90296038-c452-055f-948c-55b40c5ba004",
-				version = 2,
-			},
-			inheritedIndex = 10,
 		},
 		
 		{
@@ -12007,6 +11303,65 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "if data.p5_exa == nil then data.p5_exa = {} end\nlocal ent = TensorCore.mGetEntity(eventArgs.entityID)\ntable.insert(data.p5_exa,{pos = ent.pos})\nif table.size(data.p5_exa) == 8 then\n    local cross = (data.p5_exa[1].pos.x - 100) * (data.p5_exa[5].pos.z-100) - (data.p5_exa[1].pos.z-100) * (data.p5_exa[5].pos.x-100)\n    if cross < 0 then\n        TensorCore.addAlertText(20000,\"right\",1,1,true)\n    else\n        TensorCore.addAlertText(20000,\"left\",1,1,true)\n    end\nend\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"61efd7d8-6b94-ae3d-96ee-c5e0eeda5d16",
+									true,
+								},
+							},
+							uuid = "feafca53-8758-847e-baa6-31e71e081e82",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							spellIDList = 
+							{
+								40118,
+								40307,
+							},
+							uuid = "61efd7d8-6b94-ae3d-96ee-c5e0eeda5d16",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 984.8,
+				name = "Draw Exasquares2 [AnyoneCore test needed]",
+				timeRange = true,
+				timelineIndex = 209,
+				timerEndOffset = 30,
+				timerStartOffset = -200,
+				uuid = "90296038-c452-055f-948c-55b40c5ba004",
+				version = 2,
+			},
+			inheritedIndex = 7,
+		},
 	},
 	[212] = 
 	{
@@ -12055,17 +11410,6 @@ local tbl =
 	},
 	[215] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "e491f8cb-9c85-fcbf-698c-cba53c4ac1db",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -12196,17 +11540,6 @@ local tbl =
 	},
 	[218] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "b29dd88e-71b6-c50a-363b-15d063e8d41e",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -12959,17 +12292,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "5ee5bd7d-3686-1451-9def-00a7632c980d",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "LPDU",
 				uuid = "d49f98a1-86fc-eeee-9d1f-1cbeb0b9beaf",
 			},
@@ -13338,17 +12660,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "74278102-2b01-0f26-bc10-c0c476a19e12",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "LPDU",
 				uuid = "592249a2-0f29-2f3d-9a02-08d57dd6ac01",
 			},
@@ -13410,17 +12721,6 @@ local tbl =
 	},
 	[237] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "0eeb7b53-cb07-b407-7d71-febd47ce4463",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -13611,17 +12911,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "8aceeede-70de-8f82-eace-3074f1dd77ee",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "8e1dcbb5-054c-76d1-b556-20ff7f09d9e5",
 			},
@@ -13631,17 +12920,6 @@ local tbl =
 	},
 	[247] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "f5316b22-2d92-23be-a402-cce000b99232",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -13957,20 +13235,6 @@ local tbl =
 			},
 		},
 	},
-	[253] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "65ece87d-fe14-3561-75ff-78836a33c30d",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-	},
 	[254] = 
 	{
 		
@@ -14174,17 +13438,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "925bc9b5-ff6f-1259-ad5e-c597af7bc205",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "ffbc46ea-7ce8-7206-6d15-1d289d5b101a",
 			},
@@ -14326,17 +13579,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "227d5193-dd01-9ce7-5594-5f491662d6a3",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "f88a4c6c-51a7-d518-7c5b-e616d11c0c5c",
 			},
@@ -14362,7 +13604,6 @@ local tbl =
 	{
 		"store\\anyone\\fru\\modules\\core",
 		"store\\anyone\\fru\\modules\\draws",
-		"Frureactions\\lpdu mits",
 	},
 	timelineName = "fru",
 	version = "1.0.5",
