@@ -18,6 +18,8 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- P6 puddles keep all danger circles but show only the personal countdown. Spread beams now follow targets from a single attached draw, and Wild Charge no longer refreshes unchanged geometry. Hello World uptime hover text keeps its wording across two lines. (18-10-2026)
+
 - P3 hand circles and continuous countdowns now appear only for the final 10 seconds before each set hits, preserving the predicted impact deadlines. (18-10-2026)
 
 - P3 Hello World settings now offer Caster/healer uptime, disabled by default. On a shared tower approach, tanks/melee adjust for healers/casters; other pairs retain the front-player rule. Hover text explains party consistency and next-set application. (18-10-2026)
