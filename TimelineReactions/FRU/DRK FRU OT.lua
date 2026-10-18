@@ -8973,6 +8973,11 @@ local tbl =
 									"956ee892-48bb-4f4e-a917-669abb43eee4",
 									true,
 								},
+								
+								{
+									"2b5952eb-2281-2eb5-957b-565d5cf4f0ad",
+									true,
+								},
 							},
 							name = "Request Rampart",
 							uuid = "b6220cab-56ab-5943-ac8d-d6e09aed054b",
@@ -9000,6 +9005,11 @@ local tbl =
 								
 								{
 									"956ee892-48bb-4f4e-a917-669abb43eee4",
+									true,
+								},
+								
+								{
+									"2b5952eb-2281-2eb5-957b-565d5cf4f0ad",
 									true,
 								},
 							},
@@ -9055,6 +9065,17 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return (Settings.FFXIVMINION.LPDU_FRU_P4AM1Mode or \"4-4\") == \"7-1 OT solo\"",
+							name = "OT is selected solo tank for this set",
+							uuid = "2b5952eb-2281-2eb5-957b-565d5cf4f0ad",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "DRK OT / Imported timings",
 				mechanicTime = 773.5,
@@ -9096,6 +9117,11 @@ local tbl =
 									"f011272e-698b-121d-9ae6-ae8b32b52e66",
 									true,
 								},
+								
+								{
+									"630363c9-d100-a443-9792-8c237bfc2434",
+									true,
+								},
 							},
 							name = "Request Oblation Self",
 							uuid = "2baa03a7-335a-f12a-8c1e-1bbc45a4b1f7",
@@ -9125,6 +9151,11 @@ local tbl =
 									"f011272e-698b-121d-9ae6-ae8b32b52e66",
 									true,
 								},
+								
+								{
+									"630363c9-d100-a443-9792-8c237bfc2434",
+									true,
+								},
 							},
 							name = "Request TBN Self",
 							uuid = "25cab908-bf1c-f75d-8fd8-86010511c203",
@@ -9152,6 +9183,11 @@ local tbl =
 								
 								{
 									"f011272e-698b-121d-9ae6-ae8b32b52e66",
+									true,
+								},
+								
+								{
+									"630363c9-d100-a443-9792-8c237bfc2434",
 									true,
 								},
 							},
@@ -9204,6 +9240,17 @@ local tbl =
 							conditionLua = "return Settings.FFXIVMINION.LPDU_FRU_DRKOT_Optimize ~= false",
 							name = "Source rotation optimizations enabled",
 							uuid = "9adb0e16-46a1-a0c8-999b-6cf0740bdd1d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return (Settings.FFXIVMINION.LPDU_FRU_P4AM1Mode or \"4-4\") == \"7-1 OT solo\"",
+							name = "OT is selected solo tank for this set",
+							uuid = "630363c9-d100-a443-9792-8c237bfc2434",
 							version = 3,
 						},
 					},
@@ -10801,6 +10848,11 @@ local tbl =
 									"c0a783f4-4495-fc1b-99d0-32df7473aadf",
 									true,
 								},
+								
+								{
+									"bba3810d-f813-4503-8164-18dc0b89a869",
+									true,
+								},
 							},
 							name = "Request Rampart",
 							uuid = "4978e5dc-93ad-b4ea-afa3-4eef9f5a1d31",
@@ -10828,6 +10880,11 @@ local tbl =
 								
 								{
 									"c0a783f4-4495-fc1b-99d0-32df7473aadf",
+									true,
+								},
+								
+								{
+									"bba3810d-f813-4503-8164-18dc0b89a869",
 									true,
 								},
 							},
@@ -10883,6 +10940,17 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return (Settings.FFXIVMINION.LPDU_FRU_P4AM2Mode or \"7-1 MT solo\") == \"7-1 OT solo\"",
+							name = "OT is selected solo tank for this set",
+							uuid = "bba3810d-f813-4503-8164-18dc0b89a869",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "DRK OT / Imported timings",
 				enabled = false,
@@ -10925,6 +10993,11 @@ local tbl =
 									"a09c34e3-0afd-3bb5-bc37-93350715f753",
 									true,
 								},
+								
+								{
+									"83be2265-ff2c-43c5-8f26-3f7d1682cbc6",
+									true,
+								},
 							},
 							name = "Request Oblation Self",
 							uuid = "aa7e36c5-078c-942e-ace1-0faa722d451b",
@@ -10954,6 +11027,11 @@ local tbl =
 									"a09c34e3-0afd-3bb5-bc37-93350715f753",
 									true,
 								},
+								
+								{
+									"83be2265-ff2c-43c5-8f26-3f7d1682cbc6",
+									true,
+								},
 							},
 							name = "Request TBN Self",
 							uuid = "d9597df9-5541-0497-9f27-b2a4f412c1b5",
@@ -10981,6 +11059,11 @@ local tbl =
 								
 								{
 									"a09c34e3-0afd-3bb5-bc37-93350715f753",
+									true,
+								},
+								
+								{
+									"83be2265-ff2c-43c5-8f26-3f7d1682cbc6",
 									true,
 								},
 							},
@@ -11033,6 +11116,17 @@ local tbl =
 							conditionLua = "return Settings.FFXIVMINION.LPDU_FRU_DRKOT_Optimize ~= false",
 							name = "Source rotation optimizations enabled",
 							uuid = "46a52c05-f606-6cc8-abfe-1500f9a2a4c4",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return (Settings.FFXIVMINION.LPDU_FRU_P4AM2Mode or \"7-1 MT solo\") == \"7-1 OT solo\"",
+							name = "OT is selected solo tank for this set",
+							uuid = "83be2265-ff2c-43c5-8f26-3f7d1682cbc6",
 							version = 3,
 						},
 					},
