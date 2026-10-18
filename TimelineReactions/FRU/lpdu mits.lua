@@ -894,8 +894,8 @@ local tbl =
 				name = "[LPDU Tank] P1 pull party mitigation",
 				timeRange = true,
 				timelineIndex = 1,
-				timerEndOffset = -8.7,
-				timerStartOffset = -13.7,
+				timerEndOffset = -8.6999998092651,
+				timerStartOffset = -13.699999809265,
 				uuid = "0ed81913-2044-1598-b80c-86246add544c",
 				version = 2,
 			},
@@ -4036,6 +4036,260 @@ local tbl =
 			},
 		},
 	},
+	[25] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Shared ACR jump controls",
+				uuid = "fa107f8a-9241-f998-afc9-b6d0d6a64ad8",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuPLD3_Jumps = false\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"74bf1a29-3f00-ca04-a127-fe75a0713fc8",
+									true,
+								},
+							},
+							name = "PALADIN jumps off",
+							uuid = "ceb2ebc6-2ba3-9065-946f-b1c8ad147310",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuMNK3_Jumps = false\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"13dd2059-3309-0055-92b0-5f86dacf0b2e",
+									true,
+								},
+							},
+							name = "MONK jumps off",
+							uuid = "2d743c39-ed3f-92db-bd02-d1b24d67722e",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuDRG3_Jumps = false\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"ba752731-02f1-5482-a22e-a69ac33fdaf1",
+									true,
+								},
+							},
+							name = "DRAGOON jumps off",
+							uuid = "5404d3b3-28a3-4635-a52b-a1f2ea1059e0",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "PALADIN",
+							uuid = "74bf1a29-3f00-ca04-a127-fe75a0713fc8",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MONK",
+							uuid = "13dd2059-3309-0055-92b0-5f86dacf0b2e",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DRAGOON",
+							uuid = "ba752731-02f1-5482-a22e-a69ac33fdaf1",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Shared ACR jump controls",
+				mechanicTime = 105.8,
+				name = "[LPDU] Disable jumps",
+				timeRange = true,
+				timelineIndex = 25,
+				timerEndOffset = -2,
+				timerStartOffset = -5,
+				uuid = "fd35acf9-ecef-ff10-bcd3-ea07543b4bea",
+				version = 2,
+			},
+		},
+	},
+	[28] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Shared ACR jump controls",
+				uuid = "2e30b0ad-588c-abc4-926d-145832ed5b18",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuPLD3_Jumps = true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"32158955-ad79-0271-84e5-b2ff62340057",
+									true,
+								},
+							},
+							name = "PALADIN jumps on",
+							uuid = "d9e2542d-c6fe-d4dd-9f18-ba4400bdb85f",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuMNK3_Jumps = true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"8b2a48a4-5f2e-605f-8f37-673c978b8fca",
+									true,
+								},
+							},
+							name = "MONK jumps on",
+							uuid = "8079c1d1-0eb6-8a84-9081-8af21736d122",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuDRG3_Jumps = true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"e891ddc9-4fd7-c706-ba27-7d483189b424",
+									true,
+								},
+							},
+							name = "DRAGOON jumps on",
+							uuid = "8f615ae0-843a-53a6-a83e-b457a3058e8b",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "PALADIN",
+							uuid = "32158955-ad79-0271-84e5-b2ff62340057",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MONK",
+							uuid = "8b2a48a4-5f2e-605f-8f37-673c978b8fca",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DRAGOON",
+							uuid = "e891ddc9-4fd7-c706-ba27-7d483189b424",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Shared ACR jump controls",
+				mechanicTime = 113.7,
+				name = "[LPDU] Enable jumps",
+				timeRange = true,
+				timelineIndex = 28,
+				timerEndOffset = 3.5,
+				timerStartOffset = 0.5,
+				uuid = "61baa886-b568-949d-88ac-cadd8c65bdac",
+				version = 2,
+			},
+		},
+	},
 	[29] = 
 	{
 		
@@ -5025,6 +5279,132 @@ local tbl =
 			},
 		},
 	},
+	[33] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Shared ACR jump controls",
+				uuid = "0eb30106-de4b-492c-a23e-829ee7937dbe",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuPLD3_Jumps = false\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"ac7b2005-e1e5-6066-814c-4fa6c2d60444",
+									true,
+								},
+							},
+							name = "PALADIN jumps off",
+							uuid = "33cd12a8-242e-6c15-a784-8611b1107e25",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuMNK3_Jumps = false\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"7952e3c2-a90a-334b-96d4-965548f1437d",
+									true,
+								},
+							},
+							name = "MONK jumps off",
+							uuid = "27356917-81b7-c09f-9f9c-89be46238ce0",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuDRG3_Jumps = false\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"c6d458d2-0d8e-4820-823a-0648f16022a4",
+									true,
+								},
+							},
+							name = "DRAGOON jumps off",
+							uuid = "dfa0e18e-0961-8d59-a65a-1fe145d03e40",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "PALADIN",
+							uuid = "ac7b2005-e1e5-6066-814c-4fa6c2d60444",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MONK",
+							uuid = "7952e3c2-a90a-334b-96d4-965548f1437d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DRAGOON",
+							uuid = "c6d458d2-0d8e-4820-823a-0648f16022a4",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Shared ACR jump controls",
+				mechanicTime = 142.9,
+				name = "[LPDU] Disable jumps",
+				timeRange = true,
+				timelineIndex = 33,
+				timerEndOffset = 3,
+				uuid = "5f37c7fb-9555-9539-9542-7abbc5797d18",
+				version = 2,
+			},
+		},
+	},
 	[35] = 
 	{
 		
@@ -5869,6 +6249,130 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Shared ACR jump controls",
+				uuid = "ec2c1feb-31bd-61cc-a845-d0c0c7104179",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuPLD3_Jumps = true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"1824f222-3f34-852c-b51e-733d89982159",
+									true,
+								},
+							},
+							name = "PALADIN jumps on",
+							uuid = "fc9467c2-6151-cd9d-bb75-658008aedab5",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuMNK3_Jumps = true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"4af7e2d4-eb60-5239-a06d-fb43674199dd",
+									true,
+								},
+							},
+							name = "MONK jumps on",
+							uuid = "12b5794e-7546-6367-a25c-917c8c3aae02",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuDRG3_Jumps = true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"0eb42001-0607-bc07-ac15-8d0a4c8cc080",
+									true,
+								},
+							},
+							name = "DRAGOON jumps on",
+							uuid = "a23ce231-9d0f-3869-8132-291bf61b9612",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "PALADIN",
+							uuid = "1824f222-3f34-852c-b51e-733d89982159",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MONK",
+							uuid = "4af7e2d4-eb60-5239-a06d-fb43674199dd",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DRAGOON",
+							uuid = "0eb42001-0607-bc07-ac15-8d0a4c8cc080",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Shared ACR jump controls",
+				mechanicTime = 145.6,
+				name = "[LPDU] Enable jumps",
+				timeRange = true,
+				timelineIndex = 35,
+				timerEndOffset = 5,
+				timerStartOffset = 2,
+				uuid = "1beecf94-0bf0-04b8-984e-365d8c655c3a",
+				version = 2,
+			},
+		},
 	},
 	[39] = 
 	{
@@ -6110,6 +6614,129 @@ local tbl =
 				timelineIndex = 39,
 				timerStartOffset = -3,
 				uuid = "443a44e5-6142-6e4b-9378-b99c56828ef0",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Shared ACR jump controls",
+				uuid = "d3890823-fa13-723d-a2f7-465919ee4065",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuPLD3_Jumps = true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"12f8afe6-3b87-e417-905b-2bfb01c0447f",
+									true,
+								},
+							},
+							name = "PALADIN jumps on",
+							uuid = "db919d5b-57de-9440-9b92-c93aabf939d9",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuMNK3_Jumps = true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"585a1e43-6238-a04a-85c0-3f7a5717f9f7",
+									true,
+								},
+							},
+							name = "MONK jumps on",
+							uuid = "0fbe71e6-bd83-9587-b676-812b0cfbddb4",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuDRG3_Jumps = true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"f9e0842a-9f57-5e78-af62-9e0183438563",
+									true,
+								},
+							},
+							name = "DRAGOON jumps on",
+							uuid = "ea9f09ac-d06b-9d31-a961-b924f26bda6a",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "PALADIN",
+							uuid = "12f8afe6-3b87-e417-905b-2bfb01c0447f",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MONK",
+							uuid = "585a1e43-6238-a04a-85c0-3f7a5717f9f7",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DRAGOON",
+							uuid = "f9e0842a-9f57-5e78-af62-9e0183438563",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Shared ACR jump controls",
+				mechanicTime = 203.8,
+				name = "[LPDU] P2 entry release jump holds",
+				timeRange = true,
+				timelineIndex = 39,
+				timerEndOffset = 3,
+				uuid = "54fe5d2c-22ac-4ca6-8451-b1752d567593",
 				version = 2,
 			},
 		},
@@ -9055,6 +9682,256 @@ local tbl =
 				timerEndOffset = 9,
 				timerStartOffset = 6,
 				uuid = "4cac4676-8078-c9f2-92ef-77bfd9fcdaa6",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Shared ACR jump controls",
+				uuid = "aeab0399-9083-5d85-bdc8-2810f6e31ec4",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuPLD3_Jumps = false\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"c57c5ab3-5fe3-842e-ae90-2d477909a8d9",
+									true,
+								},
+							},
+							name = "PALADIN jumps off",
+							uuid = "4edb0f31-94f5-fe06-86f6-c733eb93b583",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuMNK3_Jumps = false\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"24c4fc94-1c9b-2fcc-a88d-066b92532290",
+									true,
+								},
+							},
+							name = "MONK jumps off",
+							uuid = "14cac7d9-f434-53a3-8592-1f47b985279f",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuDRG3_Jumps = false\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"de020ddf-b53d-4141-9f10-8439f3c9525b",
+									true,
+								},
+							},
+							name = "DRAGOON jumps off",
+							uuid = "606e16a4-0ddf-6861-b359-6df9261facc0",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "PALADIN",
+							uuid = "c57c5ab3-5fe3-842e-ae90-2d477909a8d9",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MONK",
+							uuid = "24c4fc94-1c9b-2fcc-a88d-066b92532290",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DRAGOON",
+							uuid = "de020ddf-b53d-4141-9f10-8439f3c9525b",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Shared ACR jump controls",
+				mechanicTime = 307.2,
+				name = "[LPDU] Disable jumps",
+				timeRange = true,
+				timelineIndex = 72,
+				timerStartOffset = -3,
+				uuid = "1516150c-955a-d57d-b5f4-742283c80f41",
+				version = 2,
+			},
+		},
+	},
+	[76] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Shared ACR jump controls",
+				uuid = "c353d30e-23bd-202b-89d6-f2f290a8249b",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuPLD3_Jumps = true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"23de3b21-42a7-69e1-b930-28e5a8a91987",
+									true,
+								},
+							},
+							name = "PALADIN jumps on",
+							uuid = "f723e1cd-a93f-ebb5-b468-c9913029efb4",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuMNK3_Jumps = true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"e75464bc-bcd4-e189-99cb-72e2eac9b078",
+									true,
+								},
+							},
+							name = "MONK jumps on",
+							uuid = "4baeb2e0-3da5-4471-9455-e7164f243c98",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuDRG3_Jumps = true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"161d5d94-d08a-899d-9447-4674739a0c2d",
+									true,
+								},
+							},
+							name = "DRAGOON jumps on",
+							uuid = "65c9b70b-6f7f-750e-a58e-6c2fb9cb4167",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "PALADIN",
+							uuid = "23de3b21-42a7-69e1-b930-28e5a8a91987",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MONK",
+							uuid = "e75464bc-bcd4-e189-99cb-72e2eac9b078",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DRAGOON",
+							uuid = "161d5d94-d08a-899d-9447-4674739a0c2d",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Shared ACR jump controls",
+				mechanicTime = 317.1,
+				name = "[LPDU] Enable jumps",
+				timeRange = true,
+				timelineIndex = 76,
+				timerEndOffset = 3.5,
+				timerStartOffset = 0.5,
+				uuid = "2b26f321-abce-b21f-b290-9a392b1b8b1d",
 				version = 2,
 			},
 		},
@@ -17760,6 +18637,260 @@ local tbl =
 				timelineIndex = 157,
 				timerStartOffset = -10,
 				uuid = "b2bf3509-4ef1-523a-8200-b09a27fb7243",
+				version = 2,
+			},
+		},
+	},
+	[159] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Shared ACR jump controls",
+				uuid = "ea5cd340-0211-86e4-88c4-b4ea88defefa",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuPLD3_Jumps = false\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"79e02959-0a0b-9179-9b03-76800960b025",
+									true,
+								},
+							},
+							name = "PALADIN jumps off",
+							uuid = "f71ae68c-f8b9-1ba3-b3be-60dc3b513f6a",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuMNK3_Jumps = false\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"5762272d-127a-bf01-a798-7de8cfd4427b",
+									true,
+								},
+							},
+							name = "MONK jumps off",
+							uuid = "ef22f028-7307-bdf6-aca7-2f2f5939503b",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuDRG3_Jumps = false\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"391d1f23-416d-4640-8b94-bbf1d040f847",
+									true,
+								},
+							},
+							name = "DRAGOON jumps off",
+							uuid = "02df3623-a812-782d-acdb-6f41ca6f85ee",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "PALADIN",
+							uuid = "79e02959-0a0b-9179-9b03-76800960b025",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MONK",
+							uuid = "5762272d-127a-bf01-a798-7de8cfd4427b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DRAGOON",
+							uuid = "391d1f23-416d-4640-8b94-bbf1d040f847",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Shared ACR jump controls",
+				mechanicTime = 726.5,
+				name = "[LPDU] Disable jumps",
+				timeRange = true,
+				timelineIndex = 159,
+				timerEndOffset = 2,
+				timerStartOffset = -1,
+				uuid = "e2be83f1-1342-0b92-8d97-ce1529b555dd",
+				version = 2,
+			},
+		},
+	},
+	[162] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Shared ACR jump controls",
+				uuid = "ab87d641-d70b-9b05-a38e-9c025b785767",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuPLD3_Jumps = true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"1a2fefe0-6f3b-5553-a845-91c15438ddfd",
+									true,
+								},
+							},
+							name = "PALADIN jumps on",
+							uuid = "a235442e-9db6-7264-8ad9-9b1122ca11c4",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuMNK3_Jumps = true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"589342f2-4a7d-8796-831a-087f03dc9b68",
+									true,
+								},
+							},
+							name = "MONK jumps on",
+							uuid = "56aef69c-8e32-1811-99b1-9057a5030463",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuDRG3_Jumps = true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"bffeefa8-5688-126c-98a0-a6637dc594fc",
+									true,
+								},
+							},
+							name = "DRAGOON jumps on",
+							uuid = "9d85fedb-0551-cebe-b9f3-5af1b0c0aa94",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "PALADIN",
+							uuid = "1a2fefe0-6f3b-5553-a845-91c15438ddfd",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MONK",
+							uuid = "589342f2-4a7d-8796-831a-087f03dc9b68",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DRAGOON",
+							uuid = "bffeefa8-5688-126c-98a0-a6637dc594fc",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Shared ACR jump controls",
+				mechanicTime = 729.2,
+				name = "[LPDU] Enable jumps",
+				timeRange = true,
+				timelineIndex = 162,
+				timerEndOffset = 4,
+				timerStartOffset = 1,
+				uuid = "5a1dd1db-b8cd-ab8b-bb61-71540dd19805",
 				version = 2,
 			},
 		},

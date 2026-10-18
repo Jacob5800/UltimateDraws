@@ -66,6 +66,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Added the requested synchronized jump-disable/re-enable windows to lpdu mits for PLD, MNK and DRG, the non-WAR live ACR catalogs exposing a Jumps toggle. Restores jumps at P2 entry 203.8 without resetting unrelated rotation holds. WAR keeps its existing job-profile controls. (18-10-2026)
+
 - Removed WAR Nascent Flash and GNB Heart of Corundum requests from OT Quadruple Slap support, where the fast P1-to-P2 transition leaves them unavailable. MT invuln and PLD/DRK support remain unchanged; no healer automation was added. (18-10-2026)
 
 - PLD keeps Veil for first Morn Afah and Passage for second; removed the unavailable second Veil request. DRK and other-job assignments remain unchanged. This is a normal-stack plan; no intentional-death behavior was added. (18-10-2026)
@@ -83,8 +85,6 @@ TEA: Coming soon by Ton.
 - Imported DRK Akh Morn cooldowns now run only when OT is selected as the solo tank for that set; party and MT-solo choices do not trigger the DRK solo bundle. (18-10-2026)
 
 - Added separate P4 Akh Morn 1/2 grouping choices: 4–4, MT solo with seven on OT, or OT solo with seven on MT. Personal stack circles, arrows and calls follow the selected grouping for all roles. Defaults follow the supplied sheet: first 4–4, second MT solo. (18-10-2026)
-
-- Added DRK FRU OT with DRK/assigned-OT gates, source rotation optimizations and an explicit mitigation timing selector. Spreadsheet remains the default; imported DRK mitigation timings run only when selected. Shared buster choices replace the source globals, and Apocalypse sink/invuln choices are exclusive. (18-10-2026)
 
 ### UWU: LPDU
 
