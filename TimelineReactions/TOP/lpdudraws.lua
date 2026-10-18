@@ -7079,6 +7079,113 @@ local tbl =
 		{
 			data = 
 			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.topLpdu\nif not S or not S.ready() then self.used=true return end\nlocal phase='delta'\nlocal o=S.delta\nlocal stage=phase=='omega' and o and o.stage or 1\nlocal key=phase..tostring(stage)\nlocal b=S.p5BounceCircles\nlocal function clear(state)\n if state then for _,shape in pairs(state.draws or {}) do Argus.deleteTimedShape(shape.id);S.owned[shape.id]=nil end;state.draws={} end\nend\nif not o or stage==0 then if b and b.phase==phase then clear(b) end;self.used=true return end\nif not b or b.key~=key or b.version~=1 then\n clear(b);b={version=1,key=key,phase=phase,draws={},nearDone=0,farDone=0,nearVisited={},farVisited={},seen={}};S.p5BounceCircles=b\nend\nif b.nearDone>=3 and b.farDone>=3 then clear(b);self.used=true return end\nlocal party={};local R=AnyoneCore.Roster\nfor _,slot in ipairs({'T1','T2','H1','H2','M1','M2','R1','R2'}) do\n local e=R.entOf(slot);party[#party+1]=e\n if phase~='omega' or TensorCore.hasBuff(e,stage==1 and 3004 or 3005) then\n  for _,kind in ipairs({'near','far'}) do\n   local buff=TensorCore.getBuff(e,kind=='near' and 3442 or 3443)\n   if not b[kind] and buff and buff.duration>0 then\n    b[kind]=e.id;b[kind..'Visited'][e.id]=true\n    b.deadline=Now()+buff.duration*1000\n   end\n  end\n end\nend\nif not b.near or not b.far or not b.deadline or Now()<b.deadline-10000 then self.used=true return end\nif Now()>b.deadline+4500 then clear(b);self.used=true return end\nlocal assignments=o.worldRoles\nlocal expected={}\nfor id,role in pairs(assignments or {}) do expected[role]=id end\nlocal active,warnings={},{}\nlocal function shape(key,kind,source,target,radius)\n active[key]={kind=kind,source=source,target=target,radius=radius}\nend\nfor _,kind in ipairs({'near','far'}) do\n local count=b[kind..'Done'];local holder=TensorCore.mGetEntity(b[kind])\n local visited={};for id in pairs(b[kind..'Visited'])do visited[id]=true end\n if holder and holder.pos and count<3 then\n  if count==0 then shape(kind..'initial',kind,holder.id,holder.id,8) end\n  for order=math.max(1,count),2 do\n   local target,distance\n   for _,e in ipairs(party)do if e.alive and e.pos and not visited[e.id] and e.id~=holder.id then\n    local d=TensorCore.getDistance2d(e.pos,holder.pos)\n    if not distance or (kind=='near' and d<distance-.001) or (kind=='far' and d>distance+.001) or (math.abs(d-distance)<=.001 and e.id<target.id) then target=e;distance=d end\n   end end\n   if not target then break end\n   local role=kind..order\n   shape(role..'line',kind,holder.id,target.id,nil)\n   shape(role..'circle',kind,target.id,target.id,4)\n   if expected[role] and expected[role]~=target.id then\n    warnings[#warnings+1]=string.upper(kind)..order..': '..(R.slotOf(target.id) or '?')..' predicted, need '..(R.slotOf(expected[role]) or '?')\n   end\n   visited[target.id]=true;holder=target\n  end\n end\nend\nlocal red=TensorCore.getCachedFlatDrawer(0x183333FF,0x183333FF,0x183333FF,0xCC3333FF,1,0,0)\nlocal blue=TensorCore.getCachedFlatDrawer(0x18FFAA33,0x18FFAA33,0x18FFAA33,0xCCFFAA33,1,0,0)\nfor key,old in pairs(b.draws)do\n local a=active[key]\n if not a or old.source~=a.source or old.target~=a.target then Argus.deleteTimedShape(old.id);S.owned[old.id]=nil;b.draws[key]=nil end\nend\nfor key,a in pairs(active)do if not b.draws[key] then\n local ms=math.max(100,b.deadline+4500-Now())\n local drawer=a.kind=='near' and red or blue\n local id\n if a.radius then id=drawer:addTimedCircleOnEnt(ms,a.target,a.radius,0,false,true,0)\n else id=drawer:addTimedRectOnEnt(ms,a.source,0,.10,a.target,0,false,false,true,0,false,0) end\n b.draws[key]={id=S.keep(id),source=a.source,target=a.target}\nend end\nlocal warning=table.concat(warnings,'\\n')\nif warning~=b.warning then b.warning=warning;b.warningSince=Now() end\nif warning~='' and Now()-(b.warningSince or Now())>=600 and (not b.warnedAt or Now()-b.warnedAt>=4000) then\n b.warnedAt=Now();S.say('WORLD PATH\\n'..warning,3)\nend\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"5c75176c-49f6-70af-ab32-6caa674af0b5",
+									true,
+								},
+							},
+							name = "Predict Delta world chains",
+							uuid = "684dc0f7-f6fc-67d9-949e-e99206962d0d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.topLpdu\nreturn S~=nil and S.ready() and S.delta~=nil and S.delta.stage>=3",
+							name = "Final Delta stage",
+							uuid = "5c75176c-49f6-70af-ab32-6caa674af0b5",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "P5\\Delta",
+				loop = true,
+				mechanicTime = 740,
+				name = "[P5 Delta] Predicted world paths and order warning",
+				throttleTime = 200,
+				timeRange = true,
+				timelineIndex = 130,
+				timerEndOffset = 65,
+				timerStartOffset = 20,
+				uuid = "e9c3800e-d933-d5b9-938f-d6b6d56f1ab0",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nlocal b=S.p5BounceCircles\nif b and b.phase=='delta' then\n local kind=(eventArgs.spellID==31625 or eventArgs.spellID==31626) and 'near' or 'far'\n local stamp=tostring(eventArgs.spellID)..':'..tostring(eventArgs.targetID)\n b.seen=b.seen or {}\n if not b.seen[stamp] or Now()-b.seen[stamp]>500 then\n  b.seen[stamp]=Now();b[kind]=eventArgs.targetID;b[kind..'Done']=math.min(3,b[kind..'Done']+1)\n  b[kind..'Visited']=b[kind..'Visited'] or {};b[kind..'Visited'][eventArgs.targetID]=true\n end\nend\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"024e938b-42a0-5b3e-93b2-27f6ea5c3a74",
+									true,
+								},
+							},
+							name = "Record actual Delta chain target",
+							uuid = "b696fb59-9567-a8fc-b36c-84a6af7b2c6a",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.spellID==31625 or eventArgs.spellID==31626 or eventArgs.spellID==33040 or eventArgs.spellID==33041",
+							dequeueIfLuaFalse = true,
+							name = "World chain hit",
+							uuid = "024e938b-42a0-5b3e-93b2-27f6ea5c3a74",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "P5\\Delta",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 740,
+				name = "[P5 Delta] Advance predicted world chains",
+				timeRange = true,
+				timelineIndex = 130,
+				timerEndOffset = 65,
+				timerStartOffset = 20,
+				uuid = "7a4c22a7-4a56-b091-b5b8-45ccb396e4df",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "Automarkers",
 				uuid = "e4d74861-57dc-57fa-8a3b-87016720c297",
