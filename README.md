@@ -18,6 +18,9 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- Stabilized exasquare/Blaster draw lifetimes and raised flat shapes slightly above the floor; Wave Cannon stack refreshes continuously. Meteor spread arrows now keep the assigned clock destination instead of changing detours. (18-10-2026)
+- Sigma's outside/middle-AoE waiting step starts around the first rear laser. Omega bounce receivers briefly see one relevant World spacing circle; other roles do not. (18-10-2026)
+
 - Cosmo Dive now uses 55% fill: your own tank bait blue, the other tank red; non-tanks see both tank baits red, party stack stays green. Added brief beams to the first Wave Cannon set. (18-10-2026)
 - Pantokrator uses one short opening direction cue instead of repeated movement arrows. Removed red puddle countdown clutter and added a countdown only for your green missile spread. Moved the transition lineup 4y farther south. (18-10-2026)
 - P6 routing considers known exaflare lanes earlier and briefly waits for meteor puddle captures before showing the spread arrow/call. Program Loop waiting candidates extend farther out when inner candidates are blocked. Replay checks remain pending. (18-10-2026)
