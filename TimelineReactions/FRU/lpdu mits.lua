@@ -4111,6 +4111,25 @@ local tbl =
 							version = 2.1,
 						},
 					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuRDM3_JumpIn = false\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"ea467d12-87e0-0f99-9e00-bb093ba0c5e3",
+									true,
+								},
+							},
+							name = "RDM Jump In off",
+							uuid = "ad8efd54-3bc5-6138-9daf-885fa4ef5209",
+							version = 2.1,
+						},
+					},
 				},
 				conditions = 
 				{
@@ -4147,6 +4166,18 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "DRAGOON",
 							uuid = "ba752731-02f1-5482-a22e-a69ac33fdaf1",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REDMAGE",
+							uuid = "ea467d12-87e0-0f99-9e00-bb093ba0c5e3",
 							version = 3,
 						},
 					},
@@ -4238,6 +4269,25 @@ local tbl =
 							version = 2.1,
 						},
 					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuRDM3_JumpIn = true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"2f1b7a77-0dca-368a-8041-810da4c1bbd0",
+									true,
+								},
+							},
+							name = "RDM Jump In on",
+							uuid = "82197bd0-84c4-e781-896c-ed903b980996",
+							version = 2.1,
+						},
+					},
 				},
 				conditions = 
 				{
@@ -4274,6 +4324,18 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "DRAGOON",
 							uuid = "e891ddc9-4fd7-c706-ba27-7d483189b424",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REDMAGE",
+							uuid = "2f1b7a77-0dca-368a-8041-810da4c1bbd0",
 							version = 3,
 						},
 					},
@@ -5354,6 +5416,25 @@ local tbl =
 							version = 2.1,
 						},
 					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuRDM3_JumpIn = false\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"022e6f64-30d5-dc7c-a892-09bc57f1446a",
+									true,
+								},
+							},
+							name = "RDM Jump In off",
+							uuid = "271a18b1-a08f-0c5b-9762-4dcba27fabb3",
+							version = 2.1,
+						},
+					},
 				},
 				conditions = 
 				{
@@ -5390,6 +5471,18 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "DRAGOON",
 							uuid = "c6d458d2-0d8e-4820-823a-0648f16022a4",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REDMAGE",
+							uuid = "022e6f64-30d5-dc7c-a892-09bc57f1446a",
 							version = 3,
 						},
 					},
@@ -6322,6 +6415,25 @@ local tbl =
 							version = 2.1,
 						},
 					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuRDM3_JumpIn = true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"20547788-1d2d-5170-a859-6b3cb8d86b9a",
+									true,
+								},
+							},
+							name = "RDM Jump In on",
+							uuid = "1f5acbd9-e82b-dc24-971b-63439b9c2277",
+							version = 2.1,
+						},
+					},
 				},
 				conditions = 
 				{
@@ -6358,6 +6470,18 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "DRAGOON",
 							uuid = "0eb42001-0607-bc07-ac15-8d0a4c8cc080",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REDMAGE",
+							uuid = "20547788-1d2d-5170-a859-6b3cb8d86b9a",
 							version = 3,
 						},
 					},
@@ -6690,6 +6814,25 @@ local tbl =
 							version = 2.1,
 						},
 					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuRDM3_JumpIn = true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"6ec8f797-9db6-b513-b640-2e08476b51c1",
+									true,
+								},
+							},
+							name = "RDM Jump In on",
+							uuid = "04d5cc1e-48a1-7015-b84a-1c2380da1e7e",
+							version = 2.1,
+						},
+					},
 				},
 				conditions = 
 				{
@@ -6726,6 +6869,18 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "DRAGOON",
 							uuid = "f9e0842a-9f57-5e78-af62-9e0183438563",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REDMAGE",
+							uuid = "6ec8f797-9db6-b513-b640-2e08476b51c1",
 							version = 3,
 						},
 					},
@@ -9758,6 +9913,25 @@ local tbl =
 							version = 2.1,
 						},
 					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuRDM3_JumpIn = false\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"68fa4686-0d5b-6f6d-8e95-6021b324d335",
+									true,
+								},
+							},
+							name = "RDM Jump In off",
+							uuid = "6352be2a-44b3-8c75-b64c-f7ac6658b4e4",
+							version = 2.1,
+						},
+					},
 				},
 				conditions = 
 				{
@@ -9794,6 +9968,18 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "DRAGOON",
 							uuid = "de020ddf-b53d-4141-9f10-8439f3c9525b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REDMAGE",
+							uuid = "68fa4686-0d5b-6f6d-8e95-6021b324d335",
 							version = 3,
 						},
 					},
@@ -9884,6 +10070,25 @@ local tbl =
 							version = 2.1,
 						},
 					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuRDM3_JumpIn = true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"e5a782ba-056f-e9ea-b2de-74685c54fb15",
+									true,
+								},
+							},
+							name = "RDM Jump In on",
+							uuid = "c65db28e-ca94-4f47-86eb-da7c3564c801",
+							version = 2.1,
+						},
+					},
 				},
 				conditions = 
 				{
@@ -9920,6 +10125,18 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "DRAGOON",
 							uuid = "161d5d94-d08a-899d-9447-4674739a0c2d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REDMAGE",
+							uuid = "e5a782ba-056f-e9ea-b2de-74685c54fb15",
 							version = 3,
 						},
 					},
@@ -18716,6 +18933,25 @@ local tbl =
 							version = 2.1,
 						},
 					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuRDM3_JumpIn = false\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"8f137048-fcea-4a57-89b9-12b060297e23",
+									true,
+								},
+							},
+							name = "RDM Jump In off",
+							uuid = "08907b10-98c1-65db-af78-05ff1a971401",
+							version = 2.1,
+						},
+					},
 				},
 				conditions = 
 				{
@@ -18752,6 +18988,18 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "DRAGOON",
 							uuid = "391d1f23-416d-4640-8b94-bbf1d040f847",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REDMAGE",
+							uuid = "8f137048-fcea-4a57-89b9-12b060297e23",
 							version = 3,
 						},
 					},
@@ -18843,6 +19091,25 @@ local tbl =
 							version = 2.1,
 						},
 					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "ACR_RikuRDM3_JumpIn = true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"b8f5f25c-a1dc-26cb-a900-9136b72a18f5",
+									true,
+								},
+							},
+							name = "RDM Jump In on",
+							uuid = "f13158c6-6930-b8e3-b77a-618e5855997d",
+							version = 2.1,
+						},
+					},
 				},
 				conditions = 
 				{
@@ -18879,6 +19146,18 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "DRAGOON",
 							uuid = "bffeefa8-5688-126c-98a0-a6637dc594fc",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REDMAGE",
+							uuid = "b8f5f25c-a1dc-26cb-a900-9136b72a18f5",
 							version = 3,
 						},
 					},
