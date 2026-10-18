@@ -813,6 +813,40 @@ local tbl =
 		{
 			data = 
 			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.topLpdu\nif not S or S.mode~='loop' then self.used=true return end\nif eventArgs.newTetherID~=89 and eventArgs.oldTetherID~=89 then self.used=true return end\nS.loopTetherEvents=S.loopTetherEvents or {}\nS.loopTetherEvents[eventArgs.sourceEntityID]=eventArgs.newTetherID==89 and eventArgs.newTargetID or false\nself.used=true\n",
+							name = "Remember actual tether handoff",
+							uuid = "6a770b1a-9300-7b58-a833-cf0f9b4a040e",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "P1",
+				eventType = 15,
+				loop = true,
+				mechanicTime = 15,
+				name = "[P1] Remember Blaster tether handoffs",
+				timeRange = true,
+				timelineIndex = 3,
+				timerEndOffset = 50,
+				timerStartOffset = -10,
+				uuid = "62719ad4-e35d-bd49-ad82-0d35c28d564c",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "Cast AoEs",
 				uuid = "559aa6f5-1f6b-8f01-9355-336893c5f85f",

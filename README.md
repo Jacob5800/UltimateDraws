@@ -18,6 +18,8 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- Program Loop now records actual tether gain/removal events for reliable ownership tracking. (18-10-2026)
+
 - P3 movement calls distinguish rot outer-lane travel, tether inside waiting, safe staging release, assigned rot pickup, confirmed transfer/spread, and vulnerability-gated tether breaks. The handoff arrow clears when rot is received. (18-10-2026)
 - Program Loop confirmed tether holders retain outward guidance without needing their partner's original number record. Pantokrator's opening arrow now waits for observed rotation and selects the matching edge. (18-10-2026)
 
