@@ -339,6 +339,14 @@ local tbl =
 						{
 							aType = "Lua",
 							actionLua = "local t=eventArgs.line.line:gsub(\"%s+\",\" \")\nlocal seq=nil\nlocal dive=false\nif t:find(\"O hallowed moon, shine you the iron path\",1,true) then seq={9916,9915}\nelseif t:find(\"O hallowed moon, take fire and scorch my foes\",1,true) then seq={9916,9917}\nelseif t:find(\"Take fire, O hallowed moon\",1,true) then seq={9917,9916}\nelseif t:find(\"Blazing path, lead me to iron rule\",1,true) then seq={9917,9915}\nelseif t:find(\"From on high I descend, the hallowed moon to call\",1,true) then seq={9918,9916}\nelseif t:find(\"From on high I descend, the iron path to walk\",1,true) then seq={9918,9915}\nelseif t:find(\"From on high I descend, the iron path to call\",1,true) then seq={9918,9915}\nelseif t:find(\"From on high I descend, the moon and stars to bring\",1,true) then seq={9918,9916,9920}\nelseif t:find(\"From hallowed moon I descend, a rain of stars to bring\",1,true) then seq={9916,9918,9920}\nelseif t:find(\"From hallowed moon I descend, upon burning earth to tread\",1,true) then seq={9916,9918,9917}\nelseif t:find(\"From hallowed moon I bare iron, in my descent to wield\",1,true) then seq={9916,9915,9918}\nelseif t:find(\"Unbending iron, take fire and descend\",1,true) then seq={9915,9917,9918}\nelseif t:find(\"Unbending iron, descend with fiery edge\",1,true) then seq={9915,9918,9917}\nend\nif t:find(\"Fleeting light! 'Neath the red moon, scorch you the earth\",1,true) then seq={9921,9917};dive=true\nelseif t:find(\"Fleeting light! Amid a rain of stars, exalt you the red moon\",1,true) then seq={9920,9921};dive=true end\nif seq then\n data.ucobP1LHEnded=true\n local previous=data.ucobBeamTiming\n if not previous or previous.text~=t or Now()>=previous.expires then\n  data.ucobBeamTiming={seq=seq,step=1,text=t,dive=dive,nextAt=Now()+(dive and 14300 or 5100),expires=Now()+20000}\n end\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"06017892-8f7d-525f-9b57-fc9925869ced",
+									true,
+								},
+							},
 							name = "Thermionic Beam - Quote timer capture",
 							uuid = "afe96595-8a72-a5cc-af91-70858145767b",
 							version = 2.1,
@@ -347,6 +355,18 @@ local tbl =
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local t=eventArgs.line.line:gsub(\"%s+\",\" \")\nreturn t:find(\"O hallowed moon\",1,true)~=nil or t:find(\"Take fire\",1,true)~=nil or t:find(\"Blazing path\",1,true)~=nil or t:find(\"From on high\",1,true)~=nil or t:find(\"From hallowed moon\",1,true)~=nil or t:find(\"Unbending iron\",1,true)~=nil or t:find(\"Fleeting light!\",1,true)~=nil",
+							dequeueIfLuaFalse = true,
+							name = "Relevant Nael quote",
+							uuid = "06017892-8f7d-525f-9b57-fc9925869ced",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Personal Guidance",
 				eventType = 7,
@@ -355,8 +375,8 @@ local tbl =
 				name = "[LPDU] Thermionic Beam - Quote timer capture",
 				timeRange = true,
 				timelineIndex = 2,
-				timerEndOffset = 1230,
-				timerStartOffset = -7,
+				timerEndOffset = 977,
+				timerStartOffset = 190,
 				uuid = "d47f8702-dc12-5e1b-89c6-f50d313cc944",
 				version = 2,
 			},
@@ -436,7 +456,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.ucobBeamTiming\nlocal p=TensorCore.mGetPlayer()\nlocal dives=data.ucobLPDUDives\nlocal order=p and dives and dives.order[p.id]\nif s and s.dive and dives and Now()<dives.expires and order and order>dives.locked then self.used=true return end\nif s and p and Now()<s.expires and s.seq[s.step]==9917 and s.timerStep~=s.step and Now()<s.nextAt then\n local id=p.id\n AnyoneCore.addWorldTextCountdown(s.nextAt-Now(),setmetatable({entityID=id},{__index=function(t,k) local e=TensorCore.mGetEntity(t.entityID);if not e then return 0 end;if k=='x' then return e.pos.x elseif k=='y' then return e.pos.y+1.8 elseif k=='z' then return e.pos.z end end}),0xFFFFFFFF,true,.9)\n AnyoneCore.addTimedWorldTextOnEnt(s.nextAt-Now(),'Stack',id,0xFFFFFFFF,true,.8,2.5)\n if s.dive then AnyoneCore.Shotcall('Stack now',true,3,false) end\n s.timerStep=s.step\nend\nself.used=true",
+							actionLua = "local pending=data.ucobBeamTiming\nif not pending or Now()>=pending.expires or pending.seq[pending.step]~=9917 or pending.timerStep==pending.step or Now()>=pending.nextAt then self.used=true return end\nif Now()<(pending.nextTimerCheck or 0) then self.used=true return end\npending.nextTimerCheck=Now()+100\nlocal s=data.ucobBeamTiming\nlocal p=TensorCore.mGetPlayer()\nlocal dives=data.ucobLPDUDives\nlocal order=p and dives and dives.order[p.id]\nif s and s.dive and dives and Now()<dives.expires and order and order>dives.locked then self.used=true return end\nif s and p and Now()<s.expires and s.seq[s.step]==9917 and s.timerStep~=s.step and Now()<s.nextAt then\n local id=p.id\n AnyoneCore.addWorldTextCountdown(s.nextAt-Now(),setmetatable({entityID=id},{__index=function(t,k) local e=TensorCore.mGetEntity(t.entityID);if not e then return 0 end;if k=='x' then return e.pos.x elseif k=='y' then return e.pos.y+1.8 elseif k=='z' then return e.pos.z end end}),0xFFFFFFFF,true,.9)\n AnyoneCore.addTimedWorldTextOnEnt(s.nextAt-Now(),'Stack',id,0xFFFFFFFF,true,.8,2.5)\n if s.dive then AnyoneCore.Shotcall('Stack now',true,3,false) end\n s.timerStep=s.step\nend\nself.used=true",
 							name = "Thermionic Beam - Personal continuous stack timer",
 							uuid = "25885782-4aff-8811-8b76-8f81b14fb1e7",
 							version = 2.1,
@@ -447,14 +467,15 @@ local tbl =
 				{
 				},
 				displayPath = "LPDU Personal Guidance",
+				eventType = 12,
 				loop = true,
 				mechanicTime = 7,
 				name = "[LPDU] Thermionic Beam - Personal continuous stack timer",
 				throttleTime = 200,
 				timeRange = true,
 				timelineIndex = 2,
-				timerEndOffset = 1230,
-				timerStartOffset = -7,
+				timerEndOffset = 977,
+				timerStartOffset = 190,
 				uuid = "81bc8b92-d6d3-d71c-87ad-f12f9847f156",
 				version = 2,
 			},
@@ -470,7 +491,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.ucobBeamTiming\nlocal p=TensorCore.mGetPlayer()\nlocal dives=data.ucobLPDUDives\nlocal order=p and dives and dives.order[p.id]\nif s and s.dive and dives and Now()<dives.expires and order and order>dives.locked then self.used=true return end\nif s and p and Now()<s.expires and s.seq[s.step]==9917 then\n local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(.15,1,.2,.6),2)\n d:addCircle(p.pos.x,p.pos.y,p.pos.z,4,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nself.used=true",
+							actionLua = "local pending=data.ucobBeamTiming\nif not pending or Now()>=pending.expires or pending.seq[pending.step]~=9917 then self.used=true return end\nlocal s=data.ucobBeamTiming\nlocal p=TensorCore.mGetPlayer()\nlocal dives=data.ucobLPDUDives\nlocal order=p and dives and dives.order[p.id]\nif s and s.dive and dives and Now()<dives.expires and order and order>dives.locked then self.used=true return end\nif s and p and Now()<s.expires and s.seq[s.step]==9917 then\n local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(.15,1,.2,.6),2)\n d:addCircle(p.pos.x,p.pos.y,p.pos.z,4,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nself.used=true",
 							name = "Thermionic Beam - Green stack circle until hit",
 							uuid = "b7142af0-7f13-ef63-a6b5-caa94462b93d",
 							version = 2.1,
@@ -487,9 +508,111 @@ local tbl =
 				name = "[LPDU] Thermionic Beam - Green stack circle until hit",
 				timeRange = true,
 				timelineIndex = 2,
-				timerEndOffset = 1230,
-				timerStartOffset = -7,
+				timerEndOffset = 977,
+				timerStartOffset = 190,
 				uuid = "56278f1d-f2ae-2d6a-b466-74c36e7b79e2",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.ucobPersonalTwister\nif not s then self.used=true return end\nlocal now=Now()\nif now>=s.deadline then data.ucobPersonalTwister=nil self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.alive then data.ucobPersonalTwister=nil self.used=true return end\nlocal x,y=RenderManager:WorldToScreen({x=p.pos.x,y=p.pos.y+2.3,z=p.pos.z},true)\nif not x or not y then self.used=true return end\nlocal width,height=GUI:GetScreenSize()\nGUI:SetNextWindowPos(0,0,GUI.SetCond_Always)\nGUI:SetNextWindowSize(width,height,GUI.SetCond_Always)\nGUI:PushStyleColor(GUI.Col_WindowBg,0,0,0,0)\nlocal flags=GUI.WindowFlags_NoTitleBar+GUI.WindowFlags_NoResize+GUI.WindowFlags_NoMove+GUI.WindowFlags_NoScrollbar+GUI.WindowFlags_NoSavedSettings+GUI.WindowFlags_NoInputs+GUI.WindowFlags_NoFocusOnAppearing\nif GUI:Begin('##UCOBPersonalTwisterTimer',true,flags) then\n local text=string.format('Twister %.1f',math.max(0,(s.deadline-now)/1000))\n local w,h=GUI:CalcTextSize(text)\n GUI:AddRectFilled(x-w/2-4,y-h/2-2,x+w/2+4,y+h/2+2,0xA0000000,4)\n GUI:AddText(x-w/2,y-h/2,0xFFFFFFFF,text)\nend\nGUI:End();GUI:PopStyleColor();self.used=true",
+							name = "Personal moving Twister countdown",
+							uuid = "407874ae-76b2-876d-8124-3aa2e821c2f0",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 13,
+				loop = true,
+				mechanicTime = 7,
+				name = "Personal moving Twister countdown",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 977,
+				timerStartOffset = -7,
+				uuid = "a94f9d16-f251-17ce-b1c2-c2ccf5b6b28f",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "data.ucobPersonalTwister=nil\ndata.ucobDoomCWSpoken=nil\nself.used=true",
+							name = "Personal Twister and first clockwise reset",
+							uuid = "1ed0772c-a9eb-ece7-9ed2-453e31c405bc",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 9,
+				loop = true,
+				mechanicTime = 7,
+				name = "Personal Twister and first clockwise reset",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 1500,
+				timerStartOffset = -7,
+				uuid = "92c42a57-5b14-38cc-8f34-4d0b09b7c9c8",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "data.ucobPersonalTwister=nil\nself.used=true",
+							name = "Personal Twister death cleanup",
+							uuid = "8fb34261-80c3-019e-8805-1d4022e0aab6",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 10,
+				loop = true,
+				mechanicTime = 7,
+				name = "Personal Twister death cleanup",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 977,
+				timerStartOffset = -7,
+				uuid = "aa35adcf-e817-9771-a62b-ef174abe85f3",
 				version = 2,
 			},
 		},
@@ -506,6 +629,76 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\ucob\\universal",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Personal Guidance",
+				uuid = "cfecc2f6-322c-c4b3-b179-14f075328017",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local now=Now()\nlocal duration=eventArgs.channelTimeMax*1000\nif duration<=0 then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.alive then self.used=true return end\nlocal old=data.ucobPersonalTwister\nif not old or old.source~=eventArgs.entityID or math.abs(old.deadline-(now+duration))>500 then\n data.ucobPersonalTwister={source=eventArgs.entityID,deadline=now+duration}\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"061da81f-c3ce-b8fc-8062-43f427472f9f",
+									true,
+								},
+							},
+							name = "[LPDU] P1 Twister countdown capture",
+							uuid = "93ab18dc-7ddc-5904-ae67-4ea39ab18f53",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Twister or Twisting Dive",
+							spellIDList = 
+							{
+								9898,
+								9906,
+							},
+							uuid = "061da81f-c3ce-b8fc-8062-43f427472f9f",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 13.1,
+				name = "[LPDU] P1 Twister countdown capture",
+				timeRange = true,
+				timelineIndex = 3,
+				timerEndOffset = 187,
+				timerStartOffset = -13.1,
+				uuid = "dffcc928-6672-446f-8f15-1b7c0ed97075",
+				version = 2,
+			},
 		},
 	},
 	[4] = 
@@ -5009,6 +5202,7 @@ local tbl =
 							aType = "Alert",
 							alertDuration = 4000,
 							alertPriority = 2,
+							alertTTS = true,
 							alertText = "Dodge clockwise around boss",
 							conditions = 
 							{
@@ -5017,8 +5211,59 @@ local tbl =
 									"1d26f13b-1a9f-48b6-978a-ba1d69a5bc4a",
 									true,
 								},
+								
+								{
+									"6b9223ad-2c08-008a-b63c-c9bb0c8dc318",
+									true,
+								},
 							},
+							name = "First clockwise call (TTS)",
 							uuid = "29806dbc-2060-2c9c-a3cc-fd2a5b2782b0",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 4000,
+							alertPriority = 2,
+							alertText = "Dodge clockwise around boss",
+							conditions = 
+							{
+								
+								{
+									"1d26f13b-1a9f-48b6-978a-ba1d69a5bc4a",
+									true,
+								},
+								
+								{
+									"6b9223ad-2c08-008a-b63c-c9bb0c8dc318",
+									false,
+								},
+							},
+							name = "Later clockwise calls (text only)",
+							uuid = "311c8d74-329b-1ccf-852e-8da581b85dc1",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "data.ucobDoomCWSpoken=true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"1d26f13b-1a9f-48b6-978a-ba1d69a5bc4a",
+									true,
+								},
+							},
+							name = "Remember first clockwise call",
+							uuid = "149fc2ce-93d7-d9ed-a945-f1559f618da8",
 							version = 2.1,
 						},
 					},
@@ -5038,6 +5283,17 @@ local tbl =
 								9929,
 							},
 							uuid = "1d26f13b-1a9f-48b6-978a-ba1d69a5bc4a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return data.ucobDoomCWSpoken ~= true",
+							name = "First clockwise call",
+							uuid = "6b9223ad-2c08-008a-b63c-c9bb0c8dc318",
 							version = 3,
 						},
 					},
@@ -5837,7 +6093,7 @@ local tbl =
 							aType = "Alert",
 							alertDuration = 3000,
 							alertPriority = 2,
-							alertScale = 1.2,
+							alertScale = 1.2000000476837,
 							alertTTS = true,
 							alertText = "In",
 							conditions = 
@@ -5865,7 +6121,7 @@ local tbl =
 							aType = "Alert",
 							alertDuration = 3000,
 							alertPriority = 2,
-							alertScale = 1.2,
+							alertScale = 1.2000000476837,
 							alertTTS = true,
 							alertText = "Out",
 							conditions = 
@@ -5893,7 +6149,7 @@ local tbl =
 							aType = "Alert",
 							alertDuration = 3000,
 							alertPriority = 2,
-							alertScale = 1.2,
+							alertScale = 1.2000000476837,
 							alertTTS = true,
 							alertText = "Stack",
 							conditions = 
@@ -5921,7 +6177,7 @@ local tbl =
 							aType = "Alert",
 							alertDuration = 3000,
 							alertPriority = 2,
-							alertScale = 1.2,
+							alertScale = 1.2000000476837,
 							alertTTS = true,
 							alertText = "Spread",
 							conditions = 
@@ -5949,7 +6205,7 @@ local tbl =
 							aType = "Alert",
 							alertDuration = 3000,
 							alertPriority = 2,
-							alertScale = 1.2,
+							alertScale = 1.2000000476837,
 							alertTTS = true,
 							alertText = "Spread",
 							conditions = 
@@ -8918,6 +9174,66 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local now=Now()\nlocal duration=eventArgs.channelTimeMax*1000\nif duration<=0 then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.alive then self.used=true return end\nlocal old=data.ucobPersonalTwister\nif not old or old.source~=eventArgs.entityID or math.abs(old.deadline-(now+duration))>500 then\n data.ucobPersonalTwister={source=eventArgs.entityID,deadline=now+duration}\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"1fb123a0-2b38-bd99-8b86-6646ad8b36f0",
+									true,
+								},
+							},
+							name = "[LPDU] P3 Twister countdown capture",
+							uuid = "9549b802-f73f-b184-bef1-e09c7da6cdf7",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Twister or Twisting Dive",
+							spellIDList = 
+							{
+								9898,
+								9906,
+							},
+							uuid = "1fb123a0-2b38-bd99-8b86-6646ad8b36f0",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 540,
+				name = "[LPDU] P3 Twister countdown capture",
+				timeRange = true,
+				timelineIndex = 92,
+				timerEndOffset = 300,
+				timerStartOffset = -15,
+				uuid = "ed6f2dd2-7903-554d-b718-3272c8d6b4e1",
+				version = 2,
+			},
+		},
 	},
 	[93] = 
 	{
@@ -11297,6 +11613,40 @@ local tbl =
 				timerEndOffset = 9,
 				timerStartOffset = -4,
 				uuid = "b6d2d5c4-45a3-dc52-958c-89b8a9365c2f",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.ucobHeavensfallTowers\nif not s or not s.reference or not s.ordered or #s.ordered~=8 or Now()-s.started>25000 then self.used=true return end\nlocal R=AnyoneCore.Roster\nif not R.current() or not R.isReady() then self.used=true return end\nlocal rank={T2=1,H2=2,M2=3,R2=4,R1=5,M1=6,H1=7,T1=8}\nlocal index=rank[R.mySlot()]\nlocal t=index and s.ordered[index]\nif not t or Now()>=t.expires then self.used=true return end\nlocal d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(.15,1,.2,.65),2)\nd:addCircle(t.x,t.y,t.z,3,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nself.used=true",
+							name = "Heavensfall assigned tower green circle",
+							uuid = "0343b067-787c-6012-819b-d7cb2e5ecf92",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 673.4,
+				name = "Heavensfall assigned tower green circle",
+				timeRange = true,
+				timelineIndex = 125,
+				timerEndOffset = 22,
+				timerStartOffset = 5,
+				uuid = "9497102c-5bd4-98f9-bec7-6e6ee5a198ff",
 				version = 2,
 			},
 		},
@@ -14485,6 +14835,66 @@ local tbl =
 				timerEndOffset = 1,
 				timerStartOffset = -1,
 				uuid = "6977a1fa-2ccb-19b2-b0c0-76c9ad5eb990",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local now=Now()\nlocal duration=eventArgs.channelTimeMax*1000\nif duration<=0 then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.alive then self.used=true return end\nlocal old=data.ucobPersonalTwister\nif not old or old.source~=eventArgs.entityID or math.abs(old.deadline-(now+duration))>500 then\n data.ucobPersonalTwister={source=eventArgs.entityID,deadline=now+duration}\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"3ad5dbda-b68e-89e2-a145-778ab98ecf7d",
+									true,
+								},
+							},
+							name = "[LPDU] P4 Twister countdown capture",
+							uuid = "56af4d84-678c-19ca-8b71-0d60f4d53451",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Twister or Twisting Dive",
+							spellIDList = 
+							{
+								9898,
+								9906,
+							},
+							uuid = "3ad5dbda-b68e-89e2-a145-778ab98ecf7d",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 868.6,
+				name = "[LPDU] P4 Twister countdown capture",
+				timeRange = true,
+				timelineIndex = 173,
+				timerEndOffset = 116,
+				timerStartOffset = -12,
+				uuid = "acdf83e3-5fc7-6675-990d-e27b4f142d97",
 				version = 2,
 			},
 		},

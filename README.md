@@ -44,6 +44,8 @@ TEA: Coming soon by Ton.
 
 ### UCOB: LPDU
 
+- Heavensfall highlights only your assigned tower green once the Nael-based order is established. Added a character-following Twister countdown for P1/trios/adds and TTS on only the first clockwise Doom call. Thermionic timers now skip idle work, retain assignment waits and process quotes only during Nael phases. (18-10-2026)
+
 - Corrected the late Nael tankbuster return trigger and kept transition-to-A guidance from interrupting unfinished dragon baits or the remaining quote mechanics. (14-10-2026)
 
 - Thunderstruck now gives the affected player a Spread voice/text call and a small following countdown, preserving the later Thermionic stack guidance. (14-10-2026)
@@ -61,8 +63,6 @@ TEA: Coming soon by Ton.
 - Added a small personal Raven's Dive countdown near timeline 294, clarified Blackfire Wait outside/Soak tower guidance, and kept Fellruin IN destinations outside Neurolinks until link soaking is required. (14-10-2026)
 
 - Heavensfall Fireball regroup now follows Bahamut's rear when he reappears, with a Stack behind Bahamut callout. (14-10-2026)
-
-- Heavensfall counts the first tower clockwise from Nael as R1, including a tower directly under her, and adds pre-knockback alignment before the tower correction arrow. Blackfire stack guidance moves opposite Nael and retreats straight toward the wall for targeted Hypernova. Added Fellruin Spread/Under Nael and assigned Neurolink callouts. (14-10-2026)
 
 ### FRU: LPDU
 
