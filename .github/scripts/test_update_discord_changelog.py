@@ -1,5 +1,5 @@
 import unittest
-from update_discord_changelog import changelog_sections, changelog_payloads
+from update_discord_changelog import changelog_sections, changelog_payloads, new_changelog_sections
 
 
 class ChangelogTests(unittest.TestCase):
@@ -43,6 +43,42 @@ class ChangelogTests(unittest.TestCase):
     def test_missing_changelog_rejected(self):
         with self.assertRaises(ValueError):
             changelog_payloads('# Readme\n')
+
+    def test_ucob_only_update_does_not_repeat_other_fights(self):
+        before = ('## Changelog\n### FRU\n- Existing FRU (18-10-2026)\n'
+                  '### UCOB\n- Existing UCOB (18-10-2026)\n'
+                  '### UWU\n- Existing UWU (18-10-2026)\n')
+        after = before.replace('### UCOB\n', '### UCOB\n- New tower fix (18-10-2026)\n')
+        sections = new_changelog_sections(after, before)
+        self.assertEqual(sections, [('UCOB', ['- New tower fix (18-10-2026)'])])
+        embeds = [e for p in changelog_payloads(after, before) for e in p['embeds']]
+        self.assertEqual(len(embeds), 1)
+        self.assertIn('UCOB', embeds[0]['title'])
+        self.assertNotIn('Existing', embeds[0]['description'])
+
+    def test_removal_reorder_and_whitespace_do_not_post(self):
+        before = '## Changelog\n### UCOB\n- One long entry (18-10-2026)\n- Removed (14-10-2026)\n'
+        after = '## Changelog\n### UCOB\n- One long\n  entry (18-10-2026)\n'
+        self.assertEqual(changelog_payloads(after, before), [])
+
+    def test_multiple_changed_sections_all_appear(self):
+        before = '## Changelog\n### TOP\n- TOP existing (18-10-2026)\n'
+        after = before + '### FRU\n- FRU new (18-10-2026)\n### UCOB\n- UCOB new (18-10-2026)\n'
+        embeds = [e for p in changelog_payloads(after, before) for e in p['embeds']]
+        self.assertEqual(len(embeds), 2)
+        self.assertTrue(any('UCOB new' in e['description'] for e in embeds))
+        self.assertTrue(any('FRU new' in e['description'] for e in embeds))
+
+    def test_baseline_checks_entries_beyond_preview_cap(self):
+        before = '## Changelog\n### UCOB\n' + ''.join(
+            f'- Old {i} (18-10-2026)\n' for i in range(12))
+        after = '## Changelog\n### UCOB\n- Old 11 (18-10-2026)\n'
+        self.assertEqual(changelog_payloads(after, before), [])
+
+    def test_first_changelog_is_all_new(self):
+        text = '## Changelog\n### UCOB\n- First (18-10-2026)\n'
+        self.assertEqual(new_changelog_sections(text, '# Old README'),
+                         [('UCOB', ['- First (18-10-2026)'])])
 
 
 if __name__ == '__main__':

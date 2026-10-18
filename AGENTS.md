@@ -21,6 +21,6 @@
 
 ## Discord changelog updater
 
-- `.github/workflows/discord-changelog.yml` posts the README `Changelog` section as a new Discord webhook message whenever `README.md` changes on `main`.
+- `.github/workflows/discord-changelog.yml` posts only new/updated README changelog entries on pushes to `main`, compared with the push's before revision. Formatting-only whitespace and removals do not post. Keep checkout history available for that baseline; fail rather than silently reposting history if it cannot be read.
 - Configure the repository Actions secret `DISCORD_WEBHOOK_URL` with the webhook URL.
-- Discord output must retain every nonempty fight/profile section, capped at 10 entries each. Paginate descriptions and messages within Discord limits; never truncate the entire changelog after the first section.
+- Discord output must retain every fight/profile section with new entries, capped at 10 entries each. Paginate descriptions and messages within Discord limits; never truncate after the first section. Manual dispatch may explicitly request a full snapshot; otherwise it compares against HEAD^.

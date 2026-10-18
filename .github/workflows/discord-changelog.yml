@@ -10,6 +10,11 @@ on:
       - .github/scripts/test_update_discord_changelog.py
       - .github/workflows/discord-changelog.yml
   workflow_dispatch:
+    inputs:
+      full_snapshot:
+        description: Repost the full current changelog instead of only new entries
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -20,6 +25,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Test changelog formatting
         run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
@@ -27,4 +34,6 @@ jobs:
       - name: Post the Discord changelog
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          CHANGELOG_BEFORE_SHA: ${{ github.event.before }}
+          CHANGELOG_FULL_SNAPSHOT: ${{ github.event_name == 'workflow_dispatch' && inputs.full_snapshot && 'true' || 'false' }}
         run: python3 .github/scripts/update_discord_changelog.py

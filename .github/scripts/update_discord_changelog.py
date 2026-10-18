@@ -1,4 +1,4 @@
-"""Post the repository README changelog to Discord when it changes."""
+"""Post new README changelog entries to Discord when they change."""
 
 from __future__ import annotations
 
@@ -6,6 +6,7 @@ import json
 import os
 import re
 import sys
+import subprocess
 from datetime import date, datetime
 import urllib.error
 import urllib.parse
@@ -21,7 +22,7 @@ ENTRIES_PER_SECTION = 10
 CHANGELOG_URL = "https://github.com/Jacob5800/UltimateDraws#changelog"
 
 
-def changelog_sections(readme: str) -> list[tuple[str, list[str]]]:
+def changelog_sections(readme: str, *, limit: int | None = ENTRIES_PER_SECTION) -> list[tuple[str, list[str]]]:
     lines = readme.splitlines()
     try:
         start = next(i for i, line in enumerate(lines) if line.strip() == CHANGELOG_HEADING)
@@ -53,8 +54,37 @@ def changelog_sections(readme: str) -> list[tuple[str, list[str]]]:
     if not sections:
         raise ValueError("The README changelog contains no entries")
     # Stable sorting preserves newest-first authoring order for same-day entries.
-    return [(title, sorted(items, key=entry_date, reverse=True)[:ENTRIES_PER_SECTION])
+    return [(title, sorted(items, key=entry_date, reverse=True)[:limit])
             for title, items in sections]
+
+
+def new_changelog_sections(readme: str, previous_readme: str) -> list[tuple[str, list[str]]]:
+    """Compare whole entries per section, ignoring formatting-only whitespace."""
+    previous = (dict(changelog_sections(previous_readme, limit=None))
+                if CHANGELOG_HEADING in previous_readme else {})
+    result = []
+    for title, entries in changelog_sections(readme):
+        known = {" ".join(entry.split()) for entry in previous.get(title, [])}
+        added = [entry for entry in entries if " ".join(entry.split()) not in known]
+        if added:
+            result.append((title, added))
+    return result
+
+
+def previous_readme() -> str:
+    """Use the whole push's before revision; manual updates use the last commit."""
+    revision = os.environ.get("CHANGELOG_BEFORE_SHA", "").strip()
+    if revision and set(revision) == {"0"}:
+        return ""
+    if revision and not re.fullmatch(r"[0-9a-fA-F]{40,64}", revision):
+        raise ValueError("Invalid changelog baseline revision")
+    revision = revision or "HEAD^"
+    result = subprocess.run(["git", "show", f"{revision}:README.md"],
+                            cwd=README_PATH.parent, capture_output=True, text=True,
+                            encoding="utf-8")
+    if result.returncode:
+        raise ValueError("Cannot read the previous README; refusing to repost full history")
+    return result.stdout
 
 
 def entry_date(entry: str) -> date:
@@ -70,11 +100,13 @@ def entry_date(entry: str) -> date:
     return date.min
 
 
-def changelog_payloads(readme: str) -> list[dict]:
+def changelog_payloads(readme: str, previous_readme: str | None = None) -> list[dict]:
     """Keep every section; paginate rather than truncate later fights."""
     embeds = []
     footer = f"\n\n[Full changelog]({CHANGELOG_URL})"
-    for section, entries in changelog_sections(readme):
+    sections = (changelog_sections(readme) if previous_readme is None
+                else new_changelog_sections(readme, previous_readme))
+    for section, entries in sections:
         title = f"UltimateDraws Changelog — {section}"[:256]
         pages, current = [], ""
         budget = DISCORD_DESCRIPTION_LIMIT - len(footer)
@@ -134,13 +166,23 @@ def webhook_endpoint(webhook_url: str) -> str:
 
 
 def main() -> int:
+    try:
+        readme = README_PATH.read_text(encoding="utf-8")
+        baseline = None if os.environ.get("CHANGELOG_FULL_SNAPSHOT") == "true" else previous_readme()
+        payloads = changelog_payloads(readme, baseline)
+    except (OSError, ValueError) as exc:
+        print(str(exc), file=sys.stderr)
+        return 1
+    if not payloads:
+        print("No new changelog entries; nothing to post.")
+        return 0
+
     webhook_url = os.environ.get("DISCORD_WEBHOOK_URL", "").strip()
     if not webhook_url:
         print("Missing repository Actions secret DISCORD_WEBHOOK_URL", file=sys.stderr)
         return 1
 
     try:
-        payloads = changelog_payloads(README_PATH.read_text(encoding="utf-8"))
         endpoint = webhook_endpoint(webhook_url)
     except (OSError, ValueError) as exc:
         print(str(exc), file=sys.stderr)

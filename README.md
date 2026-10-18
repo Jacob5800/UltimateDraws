@@ -18,6 +18,8 @@ TEA: Coming soon by Ton.
 
 ### Repository
 
+- Discord now posts only new changelog entries, grouped by fight, including UCOB. Unchanged history and pruning are not reposted; the full changelog remains here. (18-10-2026)
+
 - Changelog sections now keep their 10 newest entries each. Discord shows every fight in separate sections and splits long updates across messages instead of cutting off later fights. (18-10-2026)
 
 ### TOP: LPDU
@@ -44,6 +46,8 @@ TEA: Coming soon by Ton.
 
 ### UCOB: LPDU
 
+- Latest UCOB cues: your Heavensfall tower stays green while the small staging circle clears on knockback; the moving Twister countdown is 1.8x size; Cleanse doom appears only on your turn; only the first clockwise Doom call speaks. (18-10-2026)
+
 - Heavensfall’s small pre-knockback staging circle now clears on the actual knockback. Extended the hit listener to catch later replay timings; assigned tower highlighting and post-knockback correction remain. (18-10-2026)
 
 - Fellruin’s spread call around 628 now says Spread instead of Spread soon, matching the active personal spread guidance. Timing and draws are unchanged. (18-10-2026)
@@ -61,8 +65,6 @@ TEA: Coming soon by Ton.
 - Thunderstruck now gives the affected player a Spread voice/text call and a small following countdown, preserving the later Thermionic stack guidance. (14-10-2026)
 
 - P1 double-Hatch arrows refresh unresolved assignments once per second, respect a marked player already inside a link, and retain the original expiry and hit cleanup. (14-10-2026)
-
-- P1 Liquid Hell warnings now check who is furthest from Twintania. Added late Fleeting light Thermionic Beam timing and a stack call that waits for the player's dragon bait to lock. Tenstrike middle regroup yields when Earthshaker markers appear. (14-10-2026)
 
 ### FRU: LPDU
 
