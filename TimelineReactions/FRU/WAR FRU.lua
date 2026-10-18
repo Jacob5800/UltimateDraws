@@ -2544,6 +2544,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "Frureactions\\lpdu strats",
+				uuid = "9f8921f1-a978-2785-0486-148b5802ba41",
+			},
+			inheritanceRoot = "Frureactions\\lpdu strats",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "WAR rotation controls",
 				uuid = "c3dcaa45-e9ec-eecf-8ef0-091d69590bff",
 			},
