@@ -18,6 +18,8 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- P3 hand-phase pair-stack guidance now lasts 11 seconds instead of 10; spread guidance retains its existing duration. (18-10-2026)
+
 - Program Loop no longer repeats a completed tether as a new step: retained number eligibility, handoff-step tracking and deadline cleanup suppress lingering ownership. (18-10-2026)
 
 - P3 hand casts reuse the early preview without duplicate countdowns, retaining the normal cast-only fallback when arrival was missed. Omega World holders briefly see their personal SET 1/2 NEAR/FAR WORLD label. (18-10-2026)
