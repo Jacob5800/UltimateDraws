@@ -9020,7 +9020,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local roster=AnyoneCore.Roster\nif roster.current()==nil then return end\nlocal role=roster.mySlot()\nif role~=\"T1\" and role~=\"T2\" then self.used=true;return end\nlocal settings=Settings.FFXIVMINION\nlocal mode=settings.LPDU_FRU_DarklitTank or \"OT invulns\"\nlocal bait=settings.LPDU_FRU_P4Bait or (mode==\"MT invulns\" and \"MT\" or \"OT\")\nlocal function tankChoice(label,key,default)\n local value=settings[key] or default\n GUI:Text(label);GUI:SameLine(190);GUI:PushItemWidth(150)\n local i=GUI:Combo(\"##\"..key,value==\"MT\" and 1 or 2,{\"MT\",\"OT\"})\n GUI:PopItemWidth()\n local chosen=i==1 and \"MT\" or \"OT\"\n settings[key]=chosen;return chosen\nend\nlocal visible=GUI:Begin(\"[LPDU] FRU - Tank Settings\",true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n tankChoice(\"P3 Halo tank\",\"LPDU_FRU_HaloTank\",\"MT\")\n tankChoice(\"P3 Apoc bait\",\"LPDU_FRU_ApocBait\",\"OT\")\n bait=tankChoice(\"P4 far bait\",\"LPDU_FRU_P4Bait\",bait)\n GUI:Text(\"P4 tank plan\");GUI:SameLine(190);GUI:PushItemWidth(150)\n local plan=GUI:Combo(\"##LPDUFRUP4Plan\",mode==\"Tank swap\" and 2 or 1,{\"Invuln both hits\",\"Tank swap\"})\n GUI:PopItemWidth()\n settings.LPDU_FRU_DarklitTank=plan==2 and \"Tank swap\" or bait..\" invulns\"\n GUI:Text(plan==2 and (bait..\" far / other tank close\") or (bait..\" takes both hits\"))\n local first=bait==\"MT\" and \"OT\" or \"MT\"\n settings.LPDU_FRU_P5FirstInvuln=first\n local selected=tankChoice(\"P5 first invuln\",\"LPDU_FRU_P5FirstInvuln\",first)\n if selected~=first then\n  first=selected;bait=selected==\"MT\" and \"OT\" or \"MT\"\n  settings.LPDU_FRU_P4Bait=bait\n  settings.LPDU_FRU_DarklitTank=plan==2 and \"Tank swap\" or bait..\" invulns\"\n end\n GUI:Text(\"P5: \"..first..\" first / \"..bait..\" second\")\n GUI:Text(\"P5 choice adjusts P4 bait to the other tank.\")\n GUI:Text(\"Both tanks must use the same settings.\")\nend\nGUI:End();self.used=true",
+							actionLua = "local roster=AnyoneCore.Roster\nif roster.current()==nil then return end\nlocal role=roster.mySlot()\nlocal settings=Settings.FFXIVMINION\nlocal mode=settings.LPDU_FRU_DarklitTank or \"OT invulns\"\nlocal bait=settings.LPDU_FRU_P4Bait or (mode==\"MT invulns\" and \"MT\" or \"OT\")\nlocal function tankChoice(label,key,default)\n local value=settings[key] or default\n GUI:Text(label);GUI:SameLine(190);GUI:PushItemWidth(150)\n local i=GUI:Combo(\"##\"..key,value==\"MT\" and 1 or 2,{\"MT\",\"OT\"})\n GUI:PopItemWidth()\n local chosen=i==1 and \"MT\" or \"OT\"\n settings[key]=chosen;return chosen\nend\nlocal visible=GUI:Begin(\"[LPDU] FRU - Tank Settings\",true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n local function akhChoice(label,key,default)\n  local modes={\"4-4\",\"7-1 MT solo\",\"7-1 OT solo\"}\n  local value=settings[key] or default\n  GUI:Text(label);GUI:SameLine(190);GUI:PushItemWidth(150)\n  local i=GUI:Combo(\"##\"..key,value==modes[2] and 2 or (value==modes[3] and 3 or 1),modes)\n  GUI:PopItemWidth();settings[key]=modes[i]\n end\n akhChoice(\"P4 Akh Morn 1\",\"LPDU_FRU_P4AM1Mode\",\"4-4\")\n akhChoice(\"P4 Akh Morn 2\",\"LPDU_FRU_P4AM2Mode\",\"7-1 MT solo\")\n GUI:Text(\"Sheet defaults: first 4-4; second MT solo / party with OT.\")\n GUI:Text(\"Both tanks and party must agree on the grouping.\")\n tankChoice(\"P3 Halo tank\",\"LPDU_FRU_HaloTank\",\"MT\")\n tankChoice(\"P3 Apoc bait\",\"LPDU_FRU_ApocBait\",\"OT\")\n bait=tankChoice(\"P4 far bait\",\"LPDU_FRU_P4Bait\",bait)\n GUI:Text(\"P4 tank plan\");GUI:SameLine(190);GUI:PushItemWidth(150)\n local plan=GUI:Combo(\"##LPDUFRUP4Plan\",mode==\"Tank swap\" and 2 or 1,{\"Invuln both hits\",\"Tank swap\"})\n GUI:PopItemWidth()\n settings.LPDU_FRU_DarklitTank=plan==2 and \"Tank swap\" or bait..\" invulns\"\n GUI:Text(plan==2 and (bait..\" far / other tank close\") or (bait..\" takes both hits\"))\n local first=bait==\"MT\" and \"OT\" or \"MT\"\n settings.LPDU_FRU_P5FirstInvuln=first\n local selected=tankChoice(\"P5 first invuln\",\"LPDU_FRU_P5FirstInvuln\",first)\n if selected~=first then\n  first=selected;bait=selected==\"MT\" and \"OT\" or \"MT\"\n  settings.LPDU_FRU_P4Bait=bait\n  settings.LPDU_FRU_DarklitTank=plan==2 and \"Tank swap\" or bait..\" invulns\"\n end\n GUI:Text(\"P5: \"..first..\" first / \"..bait..\" second\")\n GUI:Text(\"P5 choice adjusts P4 bait to the other tank.\")\n GUI:Text(\"Both tanks must use the same settings.\")\nend\nGUI:End();self.used=true",
 							name = "Tank Assignment Settings",
 							uuid = "b30d107e-8913-ca60-a4fb-363ee2bb14c3",
 							version = 2.1,
@@ -9482,6 +9482,75 @@ local tbl =
 			inheritedOverwrites = 
 			{
 				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "4be5ec4b-8b30-a2ac-a49f-e00cc6aa38b8",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster\nif r.current()==nil or not r.isReady() then return end\nlocal slot=r.mySlot();if slot==nil then return end\nlocal p=TensorCore.mGetPlayer();if p==nil then return end\nlocal now=TensorReactions_CurrentTimer\nif data.lpdu_p4_akh_guide_1 and now-data.lpdu_p4_akh_guide_1<1 then self.used=true;return end\nlocal mode=Settings.FFXIVMINION.LPDU_FRU_P4AM1Mode or \"4-4\"\nlocal target,callout\nif mode==\"7-1 MT solo\" or mode==\"7-1 OT solo\" then\n local solo=mode==\"7-1 MT solo\" and \"T1\" or \"T2\"\n local stack=solo==\"T1\" and \"T2\" or \"T1\"\n target=r.entOf(slot==solo and solo or stack)\n callout=slot==solo and \"Solo Akh Morn - use mitigation, stay clear of party\" or (\"Seven-person stack with \"..(stack==\"T1\" and \"MT\" or \"OT\"))\nelse\n local second=slot==\"T2\" or slot==\"H2\" or slot==\"M2\" or slot==\"R2\"\n target=r.entOf(second and \"H2\" or \"H1\")\n callout=second and \"Group two - stack with H2\" or \"Group one - stack with H1\"\nend\nif target==nil then return end\ndata.lpdu_p4_akh_guide_1=now\nlocal ms=math.floor((eventArgs.channelTimeMax+5.5)*1000)\nlocal d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.4),2,1,Argus2.RenderFlags.FLAG_RENDER_UI)\nd:addTimedCircleOnEnt(ms,target.id,4,0,false,true)\nif p.id~=target.id then d:addTimedArrowOnEnt(ms,p.id,3.5,.9,1.25,2.2,target.id,0,false) end\nAnyoneCore.Shotcall(callout,true,3,false)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"01e4b2e1-9920-4dfd-b196-c8a70c873b10",
+									true,
+								},
+							},
+							name = "Personal Akh Morn group",
+							uuid = "e77c8bab-3d71-a1e5-b1e8-aabc2323a01a",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Akh Morn casts",
+							spellIDList = 
+							{
+								40247,
+								40302,
+							},
+							uuid = "01e4b2e1-9920-4dfd-b196-c8a70c873b10",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 773.5,
+				name = "[LPDU] P4 Akh Morn 1 - Personal Groups",
+				timeRange = true,
+				timelineIndex = 175,
+				timerStartOffset = -6,
+				uuid = "49a97129-950f-7b27-afb2-3a03955494fc",
+				version = 2,
 			},
 		},
 	},
@@ -11173,18 +11242,13 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local r=AnyoneCore.Roster\nif r.current()==nil or not r.isReady() then return end\nlocal slot=r.mySlot();if slot==nil then return end\nlocal second=slot==\"T2\" or slot==\"H2\" or slot==\"M2\" or slot==\"R2\"\nlocal healer=r.entOf(second and \"H2\" or \"H1\");local p=TensorCore.mGetPlayer()\nif healer==nil or p==nil then return end\nlocal now=TensorReactions_CurrentTimer\nif data.lpdu_p4_akh_guide and now-data.lpdu_p4_akh_guide<1 then self.used=true;return end\ndata.lpdu_p4_akh_guide=now\nlocal ms=math.floor((eventArgs.channelTimeMax+5.5)*1000)\nlocal d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.4),2,1,Argus2.RenderFlags.FLAG_RENDER_UI)\nd:addTimedCircleOnEnt(ms,healer.id,4,0,false,true)\nif p.id~=healer.id then d:addTimedArrowOnEnt(ms,p.id,3.5,.9,1.25,2.2,healer.id,0,false) end\nAnyoneCore.Shotcall(second and \"Group two - stack with H2\" or \"Group one - stack with H1\",true,3,false)\nself.used=true",
+							actionLua = "local r=AnyoneCore.Roster\nif r.current()==nil or not r.isReady() then return end\nlocal slot=r.mySlot();if slot==nil then return end\nlocal p=TensorCore.mGetPlayer();if p==nil then return end\nlocal now=TensorReactions_CurrentTimer\nif data.lpdu_p4_akh_guide_2 and now-data.lpdu_p4_akh_guide_2<1 then self.used=true;return end\nlocal mode=Settings.FFXIVMINION.LPDU_FRU_P4AM2Mode or \"7-1 MT solo\"\nlocal target,callout\nif mode==\"7-1 MT solo\" or mode==\"7-1 OT solo\" then\n local solo=mode==\"7-1 MT solo\" and \"T1\" or \"T2\"\n local stack=solo==\"T1\" and \"T2\" or \"T1\"\n target=r.entOf(slot==solo and solo or stack)\n callout=slot==solo and \"Solo Akh Morn - use mitigation, stay clear of party\" or (\"Seven-person stack with \"..(stack==\"T1\" and \"MT\" or \"OT\"))\nelse\n local second=slot==\"T2\" or slot==\"H2\" or slot==\"M2\" or slot==\"R2\"\n target=r.entOf(second and \"H2\" or \"H1\")\n callout=second and \"Group two - stack with H2\" or \"Group one - stack with H1\"\nend\nif target==nil then return end\ndata.lpdu_p4_akh_guide_2=now\nlocal ms=math.floor((eventArgs.channelTimeMax+5.5)*1000)\nlocal d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.4),2,1,Argus2.RenderFlags.FLAG_RENDER_UI)\nd:addTimedCircleOnEnt(ms,target.id,4,0,false,true)\nif p.id~=target.id then d:addTimedArrowOnEnt(ms,p.id,3.5,.9,1.25,2.2,target.id,0,false) end\nAnyoneCore.Shotcall(callout,true,3,false)\nself.used=true",
 							conditions = 
 							{
 								
 								{
 									"079af4bd-f2e3-54c0-aee0-8d159900617f",
 									true,
-								},
-								
-								{
-									"6bb4d5c4-b0bb-a4f6-bf10-03179fd70b99",
-									false,
 								},
 							},
 							name = "Personal healer stack",
@@ -11231,7 +11295,7 @@ local tbl =
 				eventType = 3,
 				loop = true,
 				mechanicTime = 854.9,
-				name = "[LPDU] P4 Post-CT Akh Morn - Personal Healer Stack",
+				name = "[LPDU] P4 Akh Morn 2 - Personal Groups",
 				timeRange = true,
 				timelineIndex = 202,
 				timerStartOffset = -6,

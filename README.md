@@ -66,6 +66,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Added separate P4 Akh Morn 1/2 grouping choices: 4–4, MT solo with seven on OT, or OT solo with seven on MT. Personal stack circles, arrows and calls follow the selected grouping for all roles. Defaults follow the supplied sheet: first 4–4, second MT solo. (18-10-2026)
+
 - Added DRK FRU OT with DRK/assigned-OT gates, source rotation optimizations and an explicit mitigation timing selector. Spreadsheet remains the default; imported DRK mitigation timings run only when selected. Shared buster choices replace the source globals, and Apocalypse sink/invuln choices are exclusive. (18-10-2026)
 
 - Shared off-tank utility: stance on at 16.4, stance off during the 200.8–203.8 window, stance on during 702.9–712.9, and Gaia Provokes during 733.2–738.2 and 767.5–773.5. Uses assigned OT for every tank job; stance guards prevent accidental toggles. (18-10-2026)
@@ -83,8 +85,6 @@ TEA: Coming soon by Ton.
 - Added world-text countdown above your assigned P1 tower, showing seconds remaining until its cast resolves. (11-10-2026)
 
 - Added cast-based danger circles for both Halo of Flame and Halo of Levin: 5y small Brightfire and 10y large Brightfire, lasting until cast completion. (11-10-2026)
-
-- Fixed the DPS-only mitigation opener when FRU settings are missing, skipped redundant disable writes, and added job-appropriate automatic opener potion use. (11-10-2026)
 
 ### UWU: LPDU
 
