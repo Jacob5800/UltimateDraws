@@ -2135,6 +2135,128 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Shared tank utility",
+				uuid = "64bd6cd5-e5ab-1db6-a65a-a7908077ae30",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 7537,
+							conditions = 
+							{
+								
+								{
+									"aa06a235-0fef-815c-89dc-e8aa1d736b5e",
+									true,
+								},
+								
+								{
+									"5bedf1e7-2755-58f0-879d-fade9d03ae64",
+									true,
+								},
+								
+								{
+									"b27ee5d7-d221-acd7-852e-e347c376bd3c",
+									true,
+								},
+								
+								{
+									"c32d49ce-c46a-cdf7-9627-ae8362fc7235",
+									true,
+								},
+							},
+							targetType = "Other Tank",
+							uuid = "37a4d1a0-b5e2-3bc2-bbfc-360527d97b02",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								19,
+								21,
+								32,
+								37,
+							},
+							uuid = "5bedf1e7-2755-58f0-879d-fade9d03ae64",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local r=AnyoneCore.Roster\nif not r.current() then return false end\nlocal slot=r.mySlot()\nreturn slot==\"T1\"",
+							name = "Assigned MT",
+							uuid = "b27ee5d7-d221-acd7-852e-e347c376bd3c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Provoke event",
+							spellIDList = 
+							{
+								7533,
+							},
+							uuid = "aa06a235-0fef-815c-89dc-e8aa1d736b5e",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local r=AnyoneCore.Roster\nif not r.current() then return false end\nreturn eventArgs.entityID==r.idOf(\"T2\")",
+							name = "Assigned OT used Provoke",
+							uuid = "c32d49ce-c46a-cdf7-9627-ae8362fc7235",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Shared tank utility",
+				eventType = 2,
+				mechanicTime = 24.2,
+				name = "[LPDU Tank] MT Shirk after OT Provoke",
+				timeRange = true,
+				timelineIndex = 7,
+				timerEndOffset = 10,
+				timerStartOffset = -5,
+				uuid = "243aee25-54a9-d302-bbde-c579735e2d55",
+				version = 2,
+			},
+		},
 	},
 	[10] = 
 	{
@@ -2863,6 +2985,91 @@ local tbl =
 				timelineIndex = 11,
 				timerStartOffset = -3,
 				uuid = "df82f232-26d5-6dc9-a7ff-649e6ecd0f32",
+				version = 2,
+			},
+		},
+	},
+	[12] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Shared tank utility",
+				uuid = "eae50873-0594-214d-9b1a-d5f6ad9788d2",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 3,
+							conditions = 
+							{
+								
+								{
+									"58f62b69-c40d-f1ee-a6b5-1cefb4b377b9",
+									true,
+								},
+								
+								{
+									"8f91e720-4023-551e-9a02-b49174740075",
+									true,
+								},
+							},
+							uuid = "eaeab93c-9616-8279-a047-7dd40a2e94eb",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								19,
+								21,
+								32,
+								37,
+							},
+							uuid = "58f62b69-c40d-f1ee-a6b5-1cefb4b377b9",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local r=AnyoneCore.Roster\nif not r.current() then return false end\nlocal slot=r.mySlot()\nreturn slot==\"T1\" or slot==\"T2\"",
+							name = "Assigned tanks",
+							uuid = "8f91e720-4023-551e-9a02-b49174740075",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Shared tank utility",
+				mechanicTime = 50,
+				name = "[LPDU Tank] Sprint",
+				timeRange = true,
+				timelineIndex = 12,
+				timerEndOffset = -6,
+				timerStartOffset = -9,
+				uuid = "be79ef4b-ab00-b54f-b0a9-2d7edf02df3d",
 				version = 2,
 			},
 		},
@@ -4727,6 +4934,128 @@ local tbl =
 				timerEndOffset = -1,
 				timerStartOffset = -4,
 				uuid = "42256b47-c0e6-bf39-9444-72cc2c21802d",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Shared tank utility",
+				uuid = "d166b186-1cdf-a297-b7e2-3b7dc4da2929",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 7537,
+							conditions = 
+							{
+								
+								{
+									"a1eadd05-fce9-bfea-ab03-7bf2fd5f44fe",
+									true,
+								},
+								
+								{
+									"f016c335-ed0a-fa27-8357-8a68e2c1ba79",
+									true,
+								},
+								
+								{
+									"3800a0b2-06f2-c53a-b9df-109a552d926b",
+									true,
+								},
+								
+								{
+									"03ff960e-d3a9-e476-afe0-bb3b648919bd",
+									true,
+								},
+							},
+							targetType = "Other Tank",
+							uuid = "a5de62d8-e563-207a-b2b7-80933bc6b620",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								19,
+								21,
+								32,
+								37,
+							},
+							uuid = "f016c335-ed0a-fa27-8357-8a68e2c1ba79",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local r=AnyoneCore.Roster\nif not r.current() then return false end\nlocal slot=r.mySlot()\nreturn slot==\"T1\"",
+							name = "Assigned MT",
+							uuid = "3800a0b2-06f2-c53a-b9df-109a552d926b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Provoke event",
+							spellIDList = 
+							{
+								7533,
+							},
+							uuid = "a1eadd05-fce9-bfea-ab03-7bf2fd5f44fe",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local r=AnyoneCore.Roster\nif not r.current() then return false end\nreturn eventArgs.entityID==r.idOf(\"T2\")",
+							name = "Assigned OT used Provoke",
+							uuid = "03ff960e-d3a9-e476-afe0-bb3b648919bd",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Shared tank utility",
+				eventType = 2,
+				mechanicTime = 129.5,
+				name = "[LPDU Tank] MT Shirk after OT Provoke",
+				timeRange = true,
+				timelineIndex = 30,
+				timerEndOffset = 10,
+				timerStartOffset = -20,
+				uuid = "aa7fc33d-081a-6b71-af8c-fbc2ad7ac4c8",
 				version = 2,
 			},
 		},
@@ -7078,6 +7407,90 @@ local tbl =
 			},
 		},
 	},
+	[48] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Shared tank utility",
+				uuid = "842f278e-d839-53eb-8365-b1290d05f521",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 3,
+							conditions = 
+							{
+								
+								{
+									"7296e743-c23b-afed-b109-5937dacb1fbc",
+									true,
+								},
+								
+								{
+									"2b0b92cf-d7ed-396f-99b7-a9cca2170346",
+									true,
+								},
+							},
+							uuid = "2669e3db-4988-9891-b27d-e1a3d8c8ca98",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								19,
+								21,
+								32,
+								37,
+							},
+							uuid = "7296e743-c23b-afed-b109-5937dacb1fbc",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local r=AnyoneCore.Roster\nif not r.current() then return false end\nlocal slot=r.mySlot()\nreturn slot==\"T1\" or slot==\"T2\"",
+							name = "Assigned tanks",
+							uuid = "2b0b92cf-d7ed-396f-99b7-a9cca2170346",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Shared tank utility",
+				mechanicTime = 246.7,
+				name = "[LPDU Tank] Sprint",
+				timeRange = true,
+				timelineIndex = 48,
+				timerStartOffset = -3,
+				uuid = "7bfcdae1-baaf-7f4c-a27b-5fc09ef21b58",
+				version = 2,
+			},
+		},
+	},
 	[50] = 
 	{
 		
@@ -8675,6 +9088,88 @@ local tbl =
 				timelineIndex = 72,
 				timerEndOffset = 3,
 				uuid = "7e342ae6-8023-94a4-91d1-2ace8cedf5a3",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Shared tank utility",
+				uuid = "5293459c-abd1-bd8d-9455-fdf5b3e0fafd",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 3,
+							conditions = 
+							{
+								
+								{
+									"d8fe6f20-09d5-893e-bcc9-76bf8c5e8dcc",
+									true,
+								},
+								
+								{
+									"e3d8a765-d26e-6048-8298-d7de0414ed8c",
+									true,
+								},
+							},
+							uuid = "aa36c8ac-587d-7652-9742-8acb350e1554",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								19,
+								21,
+								32,
+								37,
+							},
+							uuid = "d8fe6f20-09d5-893e-bcc9-76bf8c5e8dcc",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local r=AnyoneCore.Roster\nif not r.current() then return false end\nlocal slot=r.mySlot()\nreturn slot==\"T1\" or slot==\"T2\"",
+							name = "Assigned tanks",
+							uuid = "e3d8a765-d26e-6048-8298-d7de0414ed8c",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Shared tank utility",
+				mechanicTime = 307.2,
+				name = "[LPDU Tank] Sprint",
+				timeRange = true,
+				timelineIndex = 72,
+				timerEndOffset = 9,
+				timerStartOffset = 6,
+				uuid = "4cac4676-8078-c9f2-92ef-77bfd9fcdaa6",
 				version = 2,
 			},
 		},
@@ -14368,6 +14863,213 @@ local tbl =
 				timelineIndex = 140,
 				timerStartOffset = -3,
 				uuid = "dd6b46cd-5b54-8123-affa-264f74c55e8d",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Shared tank utility",
+				uuid = "3db328fd-e8f1-4639-8a45-ca1d19e9e4b1",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 7537,
+							conditions = 
+							{
+								
+								{
+									"3905c8e6-4c59-3214-b032-5fa200ddf4b3",
+									true,
+								},
+								
+								{
+									"2b5b6efc-bc11-91e4-9452-216252ba2303",
+									true,
+								},
+								
+								{
+									"75e75dc4-80f8-2040-a861-e2d580779bda",
+									true,
+								},
+								
+								{
+									"772d0384-fb49-feda-87e7-30cf4b950f8c",
+									true,
+								},
+							},
+							targetType = "Other Tank",
+							uuid = "75be06f1-7f02-60b3-b7e0-92fbb789a62f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								19,
+								21,
+								32,
+								37,
+							},
+							uuid = "2b5b6efc-bc11-91e4-9452-216252ba2303",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local r=AnyoneCore.Roster\nif not r.current() then return false end\nlocal slot=r.mySlot()\nreturn slot==\"T1\"",
+							name = "Assigned MT",
+							uuid = "75e75dc4-80f8-2040-a861-e2d580779bda",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Provoke event",
+							spellIDList = 
+							{
+								7533,
+							},
+							uuid = "3905c8e6-4c59-3214-b032-5fa200ddf4b3",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local r=AnyoneCore.Roster\nif not r.current() then return false end\nreturn eventArgs.entityID==r.idOf(\"T2\")",
+							name = "Assigned OT used Provoke",
+							uuid = "772d0384-fb49-feda-87e7-30cf4b950f8c",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Shared tank utility",
+				eventType = 2,
+				mechanicTime = 595.4,
+				name = "[LPDU Tank] MT Shirk after OT Provoke",
+				timeRange = true,
+				timelineIndex = 140,
+				timerEndOffset = 20,
+				timerStartOffset = -10,
+				uuid = "d8cc1577-0e70-716e-850d-c8b870ceb476",
+				version = 2,
+			},
+		},
+	},
+	[148] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Shared tank utility",
+				uuid = "73dbedd1-80c1-f965-af9c-b1babc950b56",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 3,
+							conditions = 
+							{
+								
+								{
+									"d1ec2481-b3fb-74bd-a826-95dfc989c4bc",
+									true,
+								},
+								
+								{
+									"60846c58-da39-44d9-9d21-adaa253fdc8e",
+									true,
+								},
+							},
+							uuid = "52544608-2c6a-0553-ae33-0660a581108f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								19,
+								21,
+								32,
+								37,
+							},
+							uuid = "d1ec2481-b3fb-74bd-a826-95dfc989c4bc",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local r=AnyoneCore.Roster\nif not r.current() then return false end\nlocal slot=r.mySlot()\nreturn slot==\"T1\" or slot==\"T2\"",
+							name = "Assigned tanks",
+							uuid = "60846c58-da39-44d9-9d21-adaa253fdc8e",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Shared tank utility",
+				mechanicTime = 635.4,
+				name = "[LPDU Tank] Sprint",
+				timeRange = true,
+				timelineIndex = 148,
+				timerEndOffset = -4,
+				timerStartOffset = -7,
+				uuid = "ab38ca03-c06c-f25f-b7ee-eaccabde486b",
 				version = 2,
 			},
 		},

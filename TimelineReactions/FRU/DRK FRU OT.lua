@@ -2398,6 +2398,20 @@ local tbl =
 			},
 		},
 	},
+	[40] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Frureactions\\lpdu strats",
+				uuid = "1bb917b2-46eb-9646-93fc-4a483dfe60a2",
+			},
+			inheritanceRoot = "Frureactions\\lpdu strats",
+			objectType = "folder",
+		},
+	},
 	[44] = 
 	{
 		
@@ -2648,6 +2662,20 @@ local tbl =
 				displayPath = "",
 				name = "Frureactions\\lpdu strats",
 				uuid = "9ca71459-b84b-a1b5-ca04-4f738c7d88c9",
+			},
+			inheritanceRoot = "Frureactions\\lpdu strats",
+			objectType = "folder",
+		},
+	},
+	[48] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Frureactions\\lpdu strats",
+				uuid = "fed2a95a-7f2d-c3be-650d-a67064e0c08a",
 			},
 			inheritanceRoot = "Frureactions\\lpdu strats",
 			objectType = "folder",
@@ -8581,6 +8609,17 @@ local tbl =
 	},
 	[195] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Frureactions\\lpdu strats",
+				uuid = "6d1a9417-77dc-7703-5184-faa167966847",
+			},
+			inheritanceRoot = "Frureactions\\lpdu strats",
+			objectType = "folder",
+		},
 		
 		{
 			data = 

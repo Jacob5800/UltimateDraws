@@ -907,6 +907,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "d1f4f2a0-f8ff-32b4-485c-80caa15705f0",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "FRU_megaminx_LPDU",
 				uuid = "9fe74006-623a-306a-a5ab-06b56a20e2b5",
 			},
@@ -1149,6 +1160,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "38877cf5-cd5a-9089-8490-cdbfe8494e05",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\core",
 				uuid = "c9ee12e4-b6d6-2d38-72e0-40fe3029b034",
 			},
@@ -1175,36 +1197,6 @@ local tbl =
 				uuid = "c80b3db0-f27a-1f9c-8fbe-0d4d876b0a7f",
 			},
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current() == nil or roster.mySlot() ~= \"T2\" then\n    self.used = true\n    return\nend\nlocal player = TensorCore.mGetPlayer()\nif player == nil or player.pos == nil then\n    self.used = true\n    return\nend\nlocal sourcePos = player.pos\nlocal targetPos = { x = 112.41, y = 0, z = 86.11 }\nlocal heading = TensorCore.getHeadingToTarget(sourcePos, targetPos)\nlocal distance = TensorCore.getDistance2d(sourcePos, targetPos)\nlocal otBlue = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(40/255, 100/255, 220/255, .25), 2)\nif distance > 0.5 then\n    otBlue:addTimedArrow(5000, sourcePos.x, sourcePos.y, sourcePos.z, heading, distance, 1, 1, 1, 0, true)\nend\nAnyoneCore.addTimedWorldText(5000, \"OT Buster\", targetPos, GUI:ColorConvertFloat4ToU32(1, 1, 1, 1), true, 1.5, 0)\nself.used = true",
-							name = "OT arrow to A",
-							uuid = "604d1e93-fa64-2d84-9bb6-f8a4de0eb3bc",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-				},
-				displayPath = "LPDU",
-				mechanicTime = 40.3,
-				name = "[LPDU] OT Buster to A indicator",
-				timelineIndex = 11,
-				timerOffset = -5.5,
-				uuid = "3f066183-f48a-8699-8bac-1ddcdbf3c7e2",
-				version = 2,
-			},
 		},
 		
 		{
@@ -1258,9 +1250,50 @@ local tbl =
 			},
 			inheritedIndex = 11,
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current() == nil or roster.mySlot() ~= \"T2\" then\n    self.used = true\n    return\nend\nlocal player = TensorCore.mGetPlayer()\nif player == nil or player.pos == nil then\n    self.used = true\n    return\nend\nlocal sourcePos = player.pos\nlocal targetPos = { x = 112.41, y = 0, z = 86.11 }\nlocal heading = TensorCore.getHeadingToTarget(sourcePos, targetPos)\nlocal distance = TensorCore.getDistance2d(sourcePos, targetPos)\nlocal otBlue = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(40/255, 100/255, 220/255, .25), 2)\nif distance > 0.5 then\n    otBlue:addTimedArrow(5000, sourcePos.x, sourcePos.y, sourcePos.z, heading, distance, 1, 1, 1, 0, true)\nend\nAnyoneCore.addTimedWorldText(5000, \"OT Buster\", targetPos, GUI:ColorConvertFloat4ToU32(1, 1, 1, 1), true, 1.5, 0)\nself.used = true",
+							name = "OT arrow to A",
+							uuid = "604d1e93-fa64-2d84-9bb6-f8a4de0eb3bc",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU",
+				mechanicTime = 40.3,
+				name = "[LPDU] OT Buster to A indicator",
+				timelineIndex = 11,
+				timerOffset = -5.5,
+				uuid = "3f066183-f48a-8699-8bac-1ddcdbf3c7e2",
+				version = 2,
+			},
+		},
 	},
 	[12] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "4d06ed6a-481d-f60e-9372-58407dbc317a",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -2055,6 +2088,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "36bb06a9-200c-97ad-dd37-46d73c5d2ef9",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "0d4a6a76-7e9f-2b12-b730-bae8656119a6",
 			},
@@ -2258,36 +2302,6 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "AnyoneCore.Shotcall(\"Go to conga line\",true,3,false)\nself.used=true",
-							name = "Conga line reminder",
-							uuid = "82c9f3c4-768d-3368-9f33-0287b6a89c9f",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-				},
-				displayPath = "LPDU",
-				mechanicTime = 85.9,
-				name = "[LPDU] Go to conga line",
-				timelineIndex = 22,
-				timerOffset = 3.1,
-				uuid = "466d7c46-ce83-29c3-9b38-1c62181178f7",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
 							actionLua = "local state = data.frup1_lpdu_four_tether\nif state == nil then\n    state = {\n        records = {},\n        positionByOrder = {[1] = 1, [2] = 2, [3] = 3, [4] = 4},\n        partnerByOrder = {[1] = 3, [3] = 1, [2] = 4, [4] = 2}\n    }\n    data.frup1_lpdu_four_tether = state\nend\nstate.records = state.records or {}\nstate.positionByOrder = state.positionByOrder or {[1] = 1, [2] = 2, [3] = 3, [4] = 4}\nstate.partnerByOrder = state.partnerByOrder or {[1] = 3, [3] = 1, [2] = 4, [4] = 2}\n-- Splatoon/LPDU spots: 1 north inner, 2 south inner, 3 north outer, 4 south outer.\n-- Reset each event so a live profile edit also updates existing encounter state.\nstate.tetherPositions = {\n    [1] = {x = 100, y = 0, z = 95},\n    [2] = {x = 100, y = 0, z = 105},\n    [3] = {x = 100, y = 0, z = 93},\n    [4] = {x = 100, y = 0, z = 107}\n}\n\nlocal records = state.records\nlocal positions = state.tetherPositions\nlocal isTetherAdd = (eventArgs.newTetherID == 249 or eventArgs.newTetherID == 287)\n    and eventArgs.newTargetID ~= nil\nlocal isTetherClear = eventArgs.newTetherID == 0\n    and (eventArgs.oldTetherID == 249 or eventArgs.oldTetherID == 287)\n    and eventArgs.oldTargetID ~= nil\nlocal swapFrom = nil\nlocal swapTo = nil\nlocal swapTether = nil\n\nif isTetherAdd then\n    local record = nil\n    for _, existing in ipairs(records) do\n        if existing.id == eventArgs.newTargetID then\n            record = existing\n            break\n        end\n    end\n\n    if record ~= nil then\n        record.tether = eventArgs.newTetherID\n    elseif #records < 4 then\n        table.insert(records, {\n            id = eventArgs.newTargetID,\n            tether = eventArgs.newTetherID,\n            order = #records + 1,\n            resolved = false\n        })\n    end\nend\n\nif isTetherClear then\n    for _, record in ipairs(records) do\n        if record.id == eventArgs.oldTargetID\n            and record.tether == eventArgs.oldTetherID\n            and not record.resolved then\n            record.resolved = true\n            if record.order == 1 and not state.swapped13 then\n                local nextTether = records[3]\n                if nextTether ~= nil and not nextTether.resolved then\n                    swapFrom = positions[state.positionByOrder[3] or 3]\n                    swapTether = nextTether.tether\n                end\n                state.positionByOrder[1], state.positionByOrder[3] =\n                    state.positionByOrder[3], state.positionByOrder[1]\n                if swapFrom ~= nil then\n                    swapTo = positions[state.positionByOrder[3] or 3]\n                end\n                state.swapped13 = true\n            elseif record.order == 2 and not state.swapped24 then\n                local nextTether = records[4]\n                if nextTether ~= nil and not nextTether.resolved then\n                    swapFrom = positions[state.positionByOrder[4] or 4]\n                    swapTether = nextTether.tether\n                end\n                state.positionByOrder[2], state.positionByOrder[4] =\n                    state.positionByOrder[4], state.positionByOrder[2]\n                if swapFrom ~= nil then\n                    swapTo = positions[state.positionByOrder[4] or 4]\n                end\n                state.swapped24 = true\n            end\n            break\n        end\n    end\nend\n\nlocal player = TensorCore.mGetPlayer()\n-- Retire the initial LPDU conga arrow when the tether assignment takes over.\nlocal setupArrow = data.frup1_lpdu_conga_setup\nif type(setupArrow) == \"table\" and setupArrow.arrowUUID ~= nil\n    and ((isTetherAdd and player ~= nil and eventArgs.newTargetID == player.id)\n        or #records >= 4) then\n    Argus.deleteTimedShape(setupArrow.arrowUUID)\n    setupArrow.arrowUUID = nil\nend\nlocal center = {x = 100, y = 0, z = 100}\n-- Red marks fire/stack; blue marks lightning/spread.\nlocal stackRed = TensorCore.getStaticDrawer(\n    GUI:ColorConvertFloat4ToU32(1, .16, .12, .55), 2)\nlocal spreadBlue = TensorCore.getStaticDrawer(\n    GUI:ColorConvertFloat4ToU32(.10, .52, 1, .55), 2)\nlocal green = TensorCore.getStaticDrawer(\n    GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .25), 2)\nlocal markerRadius = 1.0\n-- Never extend a Fall of Faith marker beyond timeline 118.\nlocal markerTimeout = math.min(15000, math.max(0, math.floor((118 - TensorReactions_CurrentTimer) * 1000)))\n\n-- Show only the current tether bait on each side. The second tether takes\n-- the first tether's spot after its tether clears.\nfor order, record in ipairs(records) do\n    local firstOrder = (order == 1 or order == 3) and 1 or 2\n    local secondOrder = firstOrder == 1 and 3 or 4\n    local firstRecord = records[firstOrder]\n    local activeOrder = nil\n    if firstRecord ~= nil and not firstRecord.resolved then\n        activeOrder = firstOrder\n    elseif firstRecord ~= nil and firstRecord.resolved then\n        local secondRecord = records[secondOrder]\n        if secondRecord ~= nil and not secondRecord.resolved then\n            activeOrder = secondOrder\n        end\n    end\n\n    local isActiveBait = order == activeOrder\n    local position = positions[state.positionByOrder[order] or order]\n    local isStack = record.tether == 249\n    local drawer = isStack and stackRed or spreadBlue\n\n    if isActiveBait and position ~= nil then\n        if record.markerUUID ~= nil then\n            local updated = drawer:updateTimedCircle(\n                record.markerUUID, markerTimeout, position.x, position.y, position.z,\n                markerRadius, 0, true, false)\n            if not updated then\n                Argus.deleteTimedShape(record.markerUUID)\n                record.markerUUID = nil\n            end\n        end\n        if record.markerUUID == nil then\n            record.markerUUID = drawer:addTimedCircle(\n                markerTimeout, position.x, position.y, position.z, markerRadius, 0, true)\n        end\n    elseif record.markerUUID ~= nil then\n        Argus.deleteTimedShape(record.markerUUID)\n        record.markerUUID = nil\n    end\nend\n\nlocal targetPosition = nil\nlocal myRecord = nil\nif player ~= nil then\n    for _, record in ipairs(records) do\n        if record.id == player.id then\n            myRecord = record\n            break\n        end\n    end\nend\n\n-- The tethered player follows their own prey order and swap.\nif myRecord ~= nil and not myRecord.resolved then\n    targetPosition = positions[state.positionByOrder[myRecord.order] or myRecord.order]\nelseif #records >= 4 and player ~= nil then\n    -- LPDU conga priority: H1, H2, MT, OT, M1, M2, R1, R2.\n    -- Among non-tethered players, the first two go north and the next two south.\n    local anyTetherUnresolved = false\n    local tethered = {}\n    for _, record in ipairs(records) do\n        if not record.resolved then anyTetherUnresolved = true end\n        tethered[record.id] = true\n    end\n\n    local roster = AnyoneCore and AnyoneCore.Roster\n    if anyTetherUnresolved and roster ~= nil and roster.current() ~= nil\n        and roster.isReady() then\n        local slotOrder = {\"H1\", \"H2\", \"T1\", \"T2\", \"M1\", \"M2\", \"R1\", \"R2\"}\n        local fillers = {}\n        for _, slot in ipairs(slotOrder) do\n            local id = roster.idOf(slot)\n            if id ~= nil and not tethered[id] then\n                table.insert(fillers, slot)\n            end\n        end\n\n        local mySlot = roster.mySlot()\n        if #fillers == 4 and mySlot ~= nil then\n            for i, slot in ipairs(fillers) do\n                if slot == mySlot then\n                    targetPosition = i <= 2\n                        and {x = 100, y = 0, z = 92}\n                        or {x = 100, y = 0, z = 108}\n                    break\n                end\n            end\n        end\n    end\nend\n\n\n-- Recreate the local guidance arrow after circles so it renders above them.\nif state.localArrowUUID ~= nil then\n    Argus.deleteTimedShape(state.localArrowUUID)\n    state.localArrowUUID = nil\nend\nif targetPosition ~= nil then\n    local heading = TensorCore.getHeadingToTarget(center, targetPosition)\n    local distance = TensorCore.getDistance2d(center, targetPosition) - 1\n    state.localArrowUUID = green:addTimedArrow(\n        5000, center.x, center.y, center.z, heading,\n        distance, 1, 1, 1, 0, true)\nend\n\nself.used = true",
 							conditions = 
 							{
@@ -2397,6 +2411,36 @@ local tbl =
 		{
 			data = 
 			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "AnyoneCore.Shotcall(\"Go to conga line\",true,3,false)\nself.used=true",
+							name = "Conga line reminder",
+							uuid = "82c9f3c4-768d-3368-9f33-0287b6a89c9f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU",
+				mechanicTime = 85.9,
+				name = "[LPDU] Go to conga line",
+				timelineIndex = 22,
+				timerOffset = 3.1,
+				uuid = "466d7c46-ce83-29c3-9b38-1c62181178f7",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "LPDU Draws",
 				uuid = "b3754a5d-7471-a57b-b60c-427ed4539e35",
@@ -2437,6 +2481,17 @@ local tbl =
 	},
 	[23] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "6add6c2e-1053-b0c2-c18e-db18bbee8c7e",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -2633,6 +2688,17 @@ local tbl =
 	},
 	[30] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "544a3262-f17f-4506-fd7d-aec839871e32",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -2935,6 +3001,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "ebb1067f-9d31-d09b-771d-a935e36b000f",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\core",
 				uuid = "9849403e-3459-728a-a828-53a406a09e4e",
 			},
@@ -3030,6 +3107,20 @@ local tbl =
 				uuid = "817ea404-d600-4cbf-955f-0aedf55dfb17",
 				version = 2,
 			},
+		},
+	},
+	[40] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "e4a9db7f-2922-7a8b-ed26-3161dc63d50f",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
 		},
 	},
 	[44] = 
@@ -3497,6 +3588,20 @@ local tbl =
 				uuid = "bbe2e59f-ef58-842e-a99b-534932dc44b1",
 				version = 2,
 			},
+		},
+	},
+	[48] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "13f9efa7-796e-f463-fbce-7299def8eab7",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
 		},
 	},
 	[49] = 
@@ -4161,6 +4266,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "edb55393-8ac3-60cf-4aae-c7fd809bd063",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\core",
 				uuid = "79329f72-6b5c-278e-5ffd-3d1c40796542",
 			},
@@ -4578,6 +4694,17 @@ local tbl =
 	},
 	[72] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "b28c1528-3af1-6514-5ff0-8b82010afdb8",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -5524,6 +5651,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "b9624222-1b00-e9c6-30b8-ab0886d4a3f2",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "5b7c0a71-2f2d-95ed-43aa-a87bcb3c4321",
 			},
@@ -5741,6 +5879,17 @@ local tbl =
 	},
 	[95] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "cdf005d9-1291-fad5-8e7d-407b0128d329",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -6214,6 +6363,17 @@ local tbl =
 	},
 	[121] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "189cda8d-a7b5-4019-c2a3-4707d22c059d",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -6845,6 +7005,17 @@ local tbl =
 		{
 			data = 
 			{
+				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "33bfb57c-00ab-46e8-91eb-1afe38edd58c",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
 				name = "[DPS] Second Wind",
 				uuid = "1b83b981-dc96-0bc8-8d79-79d78708da8d",
 				version = 2,
@@ -6995,6 +7166,17 @@ local tbl =
 	},
 	[132] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "eca37e9d-fc2b-b1a9-3232-283304069fad",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -7196,6 +7378,17 @@ local tbl =
 		{
 			data = 
 			{
+				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "2ae096da-4508-c096-07d0-7e3cd7b990aa",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
 				name = "[Melee] Feint (Secondary)",
 				uuid = "61f670bb-a087-46b2-a870-bd05d85f11ca",
 				version = 2,
@@ -7237,6 +7430,17 @@ local tbl =
 	},
 	[140] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "318a17fe-88de-ad72-9420-b87c2c17fe0e",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -8183,6 +8387,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "c23b9f26-7898-719a-4045-19d43cbb8876",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "8a580a4d-74d6-7d19-5f3f-d35f1f96ee7d",
 			},
@@ -8211,6 +8426,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "62424407-c8c5-9feb-78fd-dd8d71ef8cd7",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "c2368a38-5a13-3254-cdf9-86f2caebc0e8",
 			},
@@ -8234,6 +8460,17 @@ local tbl =
 	},
 	[150] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "5de4d985-a985-2039-9661-cc2bfd932dd5",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -8361,6 +8598,17 @@ local tbl =
 		{
 			data = 
 			{
+				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "cdc0a451-93de-de6d-bbfc-a4377ad74c61",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
 				name = "[Ranged] rDPS Mit",
 				uuid = "8b533088-0545-a245-a13e-3bef3b9c78cb",
 				version = 2,
@@ -8427,6 +8675,17 @@ local tbl =
 	},
 	[156] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "8c6705d7-2844-6cd3-5117-cfb1c23c1327",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -9420,6 +9679,17 @@ local tbl =
 	},
 	[172] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "9337e3f1-940c-af95-fef6-0def70b2de01",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -11169,8 +11439,33 @@ local tbl =
 			},
 		},
 	},
+	[195] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "55b203e4-f9a4-1be8-ea34-3cbadc08a534",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
+	},
 	[201] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "391020e4-a9e1-3610-4ed4-4fe6bf66c234",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -11311,6 +11606,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "e9d9eb29-5568-ee9d-f0da-1dfb75b4b5b9",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "af915ef6-8cde-a9e2-4a5d-8b84ddd076e6",
 			},
@@ -11395,6 +11701,17 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "1dfc50ae-17e8-19b2-3f45-595c16639c3e",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\core",
 				uuid = "9ab427ed-021d-12e1-d243-f25b685f503d",
 			},
@@ -11457,64 +11774,6 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local drawer = TensorCore.getCachedDrawer(1275068160, 1006895359, 1174667519)\nlocal ent = TensorCore.mGetEntity(eventArgs.entityID)\n--drawer:addTimedRect(8000, ent.pos.x, ent.pos.y, ent.pos.z, 40, 10, ent.pos.h, 0, true)\n\nlocal dumbshit = TensorCore.getPosInDirection(ent.pos,ent.pos.h,2.5)\ndrawer:addTimedCenteredRect(7000,dumbshit.x,0,dumbshit.z,5,40,ent.pos.h,0,true)\n\nfor i=1,8 do\n    local pos = TensorCore.getPosInDirection(dumbshit,ent.pos.h,5*(i))\n    drawer:addTimedCenteredRect(2000,pos.x,0,pos.z,5,40,ent.pos.h,7000+(2000*(i-1)),true)\nend\nself.used = true",
-							conditions = 
-							{
-								
-								{
-									"70c6e6b7-29cb-6eac-b8f7-a34e2b68daae",
-									true,
-								},
-							},
-							uuid = "9f41933c-8e4c-8612-8808-3bf76fd91dcd",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Event",
-							dequeueIfLuaFalse = true,
-							eventArgOptionType = 3,
-							eventArgType = 2,
-							spellIDList = 
-							{
-								40118,
-								40307,
-							},
-							uuid = "70c6e6b7-29cb-6eac-b8f7-a34e2b68daae",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "LPDU",
-				eventType = 3,
-				loop = true,
-				mechanicTime = 984.8,
-				name = "Draw Exasquares [LPDU]",
-				timeRange = true,
-				timelineIndex = 209,
-				timerEndOffset = 30,
-				timerStartOffset = -30,
-				uuid = "5f9c77f0-7294-8ae4-86c4-20a05ef977b3",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
 							actionLua = "if data.p5_exa == nil then data.p5_exa = {} end\nlocal ent = TensorCore.mGetEntity(eventArgs.entityID)\ntable.insert(data.p5_exa,{pos = ent.pos})\nif table.size(data.p5_exa) == 8 then\n    local cross = (data.p5_exa[1].pos.x - 100) * (data.p5_exa[5].pos.z-100) - (data.p5_exa[1].pos.z-100) * (data.p5_exa[5].pos.x-100)\n    if cross < 0 then\n        TensorCore.addAlertText(20000,\"right\",1,1,true)\n    else\n        TensorCore.addAlertText(20000,\"left\",1,1,true)\n    end\nend\nself.used = true",
 							conditions = 
 							{
@@ -11562,6 +11821,64 @@ local tbl =
 				version = 2,
 			},
 			inheritedIndex = 10,
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local drawer = TensorCore.getCachedDrawer(1275068160, 1006895359, 1174667519)\nlocal ent = TensorCore.mGetEntity(eventArgs.entityID)\n--drawer:addTimedRect(8000, ent.pos.x, ent.pos.y, ent.pos.z, 40, 10, ent.pos.h, 0, true)\n\nlocal dumbshit = TensorCore.getPosInDirection(ent.pos,ent.pos.h,2.5)\ndrawer:addTimedCenteredRect(7000,dumbshit.x,0,dumbshit.z,5,40,ent.pos.h,0,true)\n\nfor i=1,8 do\n    local pos = TensorCore.getPosInDirection(dumbshit,ent.pos.h,5*(i))\n    drawer:addTimedCenteredRect(2000,pos.x,0,pos.z,5,40,ent.pos.h,7000+(2000*(i-1)),true)\nend\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"70c6e6b7-29cb-6eac-b8f7-a34e2b68daae",
+									true,
+								},
+							},
+							uuid = "9f41933c-8e4c-8612-8808-3bf76fd91dcd",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							spellIDList = 
+							{
+								40118,
+								40307,
+							},
+							uuid = "70c6e6b7-29cb-6eac-b8f7-a34e2b68daae",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 984.8,
+				name = "Draw Exasquares [LPDU]",
+				timeRange = true,
+				timelineIndex = 209,
+				timerEndOffset = 30,
+				timerStartOffset = -30,
+				uuid = "5f9c77f0-7294-8ae4-86c4-20a05ef977b3",
+				version = 2,
+			},
 		},
 		
 		{
@@ -11810,6 +12127,17 @@ local tbl =
 	},
 	[218] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "b29dd88e-71b6-c50a-363b-15d063e8d41e",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
@@ -13234,6 +13562,17 @@ local tbl =
 	},
 	[247] = 
 	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Frureactions\\lpdu mits",
+				uuid = "f5316b22-2d92-23be-a402-cce000b99232",
+			},
+			inheritanceRoot = "Frureactions\\lpdu mits",
+			objectType = "folder",
+		},
 		
 		{
 			data = 
