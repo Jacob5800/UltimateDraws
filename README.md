@@ -18,6 +18,8 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- P1 tether guidance now uses recorded handoffs, works when only your own tether is available, and ignores stale number assignments after confirmed ownership. (18-10-2026)
+
 - Program Loop now records actual tether gain/removal events for reliable ownership tracking. (18-10-2026)
 
 - P3 movement calls distinguish rot outer-lane travel, tether inside waiting, safe staging release, assigned rot pickup, confirmed transfer/spread, and vulnerability-gated tether breaks. The handoff arrow clears when rot is received. (18-10-2026)
