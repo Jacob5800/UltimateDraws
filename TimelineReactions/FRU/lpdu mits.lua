@@ -667,17 +667,17 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local reactions = AnyoneCore.Settings.Reactions\nif not reactions.fru then reactions.fru = {} end\nif reactions.fru.mitigation ~= false then\n reactions.fru.mitigation = false\nend\nself.used = true",
+							actionLua = "local reactions = AnyoneCore.Settings.Reactions\nif not reactions.fru then reactions.fru = {} end\nreactions.fru.mitigation = false\nreactions.fruFMBGTankMits = false\nself.used = true",
 							conditions = 
 							{
 								
 								{
 									"1ffcd2d6-ce7e-baea-83cd-8fb001acb3e9",
-									true,
+									false,
 								},
 							},
 							endIfUsed = true,
-							name = "Set FRU mitigation default",
+							name = "Disable FRU DPS/tank automatic mitigation",
 							uuid = "f5c35998-2958-1608-99e9-14b8a8ce3718",
 							version = 2.1,
 						},
@@ -692,8 +692,8 @@ local tbl =
 							category = "Self",
 							conditionType = 9,
 							dequeueIfLuaFalse = true,
-							name = "Self is DPS",
-							partyTargetType = "DPS",
+							name = "Self is healer",
+							partyTargetType = "Healer",
 							uuid = "1ffcd2d6-ce7e-baea-83cd-8fb001acb3e9",
 							version = 3,
 						},
@@ -701,7 +701,7 @@ local tbl =
 				},
 				displayPath = "AnyoneCore Defaults",
 				mechanicTime = 13.7,
-				name = "Disable AnyoneCore DPS mitigation at start",
+				name = "Disable AnyoneCore DPS and tank mitigation at start",
 				timelineIndex = 1,
 				timerOffset = -13.60000038147,
 				uuid = "7a54a151-536f-663c-bb67-07f33b18143d",

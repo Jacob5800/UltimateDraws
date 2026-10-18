@@ -66,6 +66,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- LPDU mits now disables AnyoneCore automatic DPS and tank mitigation at fight start, using its existing FRU tank-mitigation switch. A native healer exclusion leaves healer settings unchanged. (18-10-2026)
+
 - Imported DRK Akh Morn cooldowns now run only when OT is selected as the solo tank for that set; party and MT-solo choices do not trigger the DRK solo bundle. (18-10-2026)
 
 - Added separate P4 Akh Morn 1/2 grouping choices: 4–4, MT solo with seven on OT, or OT solo with seven on MT. Personal stack circles, arrows and calls follow the selected grouping for all roles. Defaults follow the supplied sheet: first 4–4, second MT solo. (18-10-2026)
@@ -83,8 +85,6 @@ TEA: Coming soon by Ton.
 - Switched assigned tower timers to continuous world-text countdowns and added separate countdowns for middle Burnt Strike and its follow-up AoE. (11-10-2026)
 
 - Added a small green circle at your assigned Fall of Faith conga position alongside the existing arrow. (11-10-2026)
-
-- Added world-text countdown above your assigned P1 tower, showing seconds remaining until its cast resolves. (11-10-2026)
 
 ### UWU: LPDU
 
