@@ -14573,7 +14573,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.ucobOctetGuide\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif s and e then s.towersSpawned=true;s.towers[eventArgs.entityID]={x=e.pos.x,y=e.pos.y,z=e.pos.z,expires=Now()+eventArgs.channelTimeMax*1000+400} end\nself.used=true",
+							actionLua = "local s=data.ucobOctetGuide\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif s and e and not s.towers[eventArgs.entityID] then\n local duration=eventArgs.channelTimeMax*1000\n s.towersSpawned=true\n s.towers[eventArgs.entityID]={x=e.pos.x,y=e.pos.y,z=e.pos.z,expires=Now()+duration+400}\n if duration>0 then AnyoneCore.addWorldTextCountdown(duration,{x=e.pos.x,y=e.pos.y+1,z=e.pos.z},0xFFFFFFFF,true,1.2) end\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -15645,7 +15645,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.ucobAddsQuote174\nif s and s.seq[s.step]==eventArgs.spellID then\n s.step=s.step+1\n if s.step>#s.seq then data.ucobAddsQuote174=nil end\nend\nself.used=true",
+							actionLua = "local s=data.ucobAddsQuote174\nif s and s.seq[s.step]==eventArgs.spellID then\n s.step=s.step+1\n if s.seq[s.step]==9918 then\n  local p=TensorCore.mGetPlayer()\n  if p then\n   AnyoneCore.addWorldTextCountdown(3100,setmetatable({entityID=p.id},{__index=function(t,k)\n    local e=TensorCore.mGetEntity(t.entityID)\n    if not e then return 0 end\n    if k=='x' then return e.pos.x elseif k=='y' then return e.pos.y+1 elseif k=='z' then return e.pos.z end\n   end}),0xFFFFFFFF,true,1.2)\n  end\n end\n if s.step>#s.seq then data.ucobAddsQuote174=nil end\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -15706,7 +15706,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nif not R or not R.current() or not R.isReady() then self.used=true return end\nlocal slot=R.mySlot()\nif not slot then self.used=true return end\nlocal s=data.ucobAddsQuote174\nif not s or Now()>=s.expires or s.seq[s.step]~=9917 then self.used=true return end\nlocal dest={x=0,y=0,z=s.north and -9 or 0}\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
+							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nif not R or not R.current() or not R.isReady() then self.used=true return end\nlocal slot=R.mySlot()\nif not slot then self.used=true return end\nlocal s=data.ucobAddsQuote174\nif not s or Now()>=s.expires or s.seq[s.step]~=9917 then self.used=true return end\nlocal x,y,z,active=Argus.getWaymarkInfo(s.north and 8 or 5)\nif not active then self.used=true return end\nlocal dest={x=x,y=y,z=z}\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
 							name = "Adds Thermionic Beam - Quote stack",
 							uuid = "74855a5c-92a6-38b7-b306-10860659b1d7",
 							version = 2.1,
@@ -16698,7 +16698,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.ucobAddsQuote184\nif s and s.seq[s.step]==eventArgs.spellID then\n s.step=s.step+1\n if s.step>#s.seq then data.ucobAddsQuote184=nil end\nend\nself.used=true",
+							actionLua = "local s=data.ucobAddsQuote184\nif s and s.seq[s.step]==eventArgs.spellID then\n s.step=s.step+1\n if s.seq[s.step]==9918 then\n  local p=TensorCore.mGetPlayer()\n  if p then\n   AnyoneCore.addWorldTextCountdown(3100,setmetatable({entityID=p.id},{__index=function(t,k)\n    local e=TensorCore.mGetEntity(t.entityID)\n    if not e then return 0 end\n    if k=='x' then return e.pos.x elseif k=='y' then return e.pos.y+1 elseif k=='z' then return e.pos.z end\n   end}),0xFFFFFFFF,true,1.2)\n  end\n end\n if s.step>#s.seq then data.ucobAddsQuote184=nil end\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -16759,7 +16759,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nif not R or not R.current() or not R.isReady() then self.used=true return end\nlocal slot=R.mySlot()\nif not slot then self.used=true return end\nlocal s=data.ucobAddsQuote184\nif not s or Now()>=s.expires or s.seq[s.step]~=9917 then self.used=true return end\nlocal dest={x=0,y=0,z=s.north and -9 or 0}\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
+							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nif not R or not R.current() or not R.isReady() then self.used=true return end\nlocal slot=R.mySlot()\nif not slot then self.used=true return end\nlocal s=data.ucobAddsQuote184\nif not s or Now()>=s.expires or s.seq[s.step]~=9917 then self.used=true return end\nlocal x,y,z,active=Argus.getWaymarkInfo(s.north and 8 or 5)\nif not active then self.used=true return end\nlocal dest={x=x,y=y,z=z}\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
 							name = "Adds Thermionic Beam - Quote stack",
 							uuid = "f975fe42-5ae8-206c-9b66-137e0ac119b0",
 							version = 2.1,
