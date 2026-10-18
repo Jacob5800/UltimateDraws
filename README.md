@@ -144,7 +144,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
-- FRU mitigation split: 100 mitigation-related reactions copied into LPDU mits with original timing, conditions and targets; removal from lpdu strats follows after destination verification. (18-10-2026)
+- FRU mitigation split: 105 mitigation-related reactions copied into LPDU mits with original timing, conditions and targets; removal from lpdu strats follows after destination verification. (18-10-2026)
+
 
 - Middle AoE timers now follow B's actual waymark position for their 2-yalm offset. (11-10-2026)
 

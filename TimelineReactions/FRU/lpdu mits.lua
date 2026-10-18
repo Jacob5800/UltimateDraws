@@ -8522,6 +8522,151 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 65,
+							conditions = 
+							{
+								
+								{
+									"ad23ea1e-3a98-017a-9a66-20c9d70355a4",
+									true,
+								},
+								
+								{
+									"90f8dd06-3525-4e23-b427-586c17577277",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "[LPDU] Mantra Polarizing Strikes 1",
+							uuid = "7a720b3b-871c-4b18-95bf-ecd44dd4ec2d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MONK",
+							name = "MONK job",
+							uuid = "ad23ea1e-3a98-017a-9a66-20c9d70355a4",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 65,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							dequeueIfLuaFalse = true,
+							name = "Polarizing Strikes 1 CD",
+							uuid = "90f8dd06-3525-4e23-b427-586c17577277",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Mitigation",
+				mechanicTime = 1051.2,
+				name = "[LPDU] Mantra Polarizing Strikes 1",
+				timeRange = true,
+				timelineIndex = 226,
+				timerEndOffset = 1,
+				timerStartOffset = -5,
+				uuid = "8905fbd2-a42b-c5e7-a545-c11c9af18f45",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 7560,
+							conditions = 
+							{
+								
+								{
+									"e953ab12-9ef1-27bd-9ace-39cca9e181f2",
+									true,
+								},
+								
+								{
+									"4530a292-25de-2641-bdf0-76edb80a8d72",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "[LPDU] R2 Addle 2 Polarizing Strikes 1",
+							targetType = "Enemy",
+							uuid = "1b7cad82-e0cf-f0eb-a4cf-c8b0c010a71a",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local p = TensorCore.mGetPlayer()\nlocal r = GetRole(\"R2\")\nreturn p ~= nil and r ~= nil and p.id == r.id",
+							dequeueIfLuaFalse = true,
+							name = "R2 roster",
+							uuid = "e953ab12-9ef1-27bd-9ace-39cca9e181f2",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 7560,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							dequeueIfLuaFalse = true,
+							name = "Polarizing Strikes 1 CD",
+							uuid = "4530a292-25de-2641-bdf0-76edb80a8d72",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Mitigation",
+				enabled = false,
+				mechanicTime = 1051.2,
+				name = "[LPDU] R2 Addle 2 Polarizing Strikes 1",
+				timeRange = true,
+				timelineIndex = 226,
+				timerEndOffset = 1,
+				timerStartOffset = -5,
+				uuid = "49f05020-4fcb-e177-805a-7f4ef6205f5a",
+				version = 2,
+			},
+		},
 	},
 	[236] = 
 	{
@@ -9387,6 +9532,222 @@ local tbl =
 				timerEndOffset = -1.5,
 				timerStartOffset = -11,
 				uuid = "af8d8bc4-f6d2-4c03-84c2-4b7697e88bc0",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 65,
+							conditions = 
+							{
+								
+								{
+									"aabe13dc-50e4-42a1-8577-332576cf0afb",
+									true,
+								},
+								
+								{
+									"9b3e11db-b6c7-1a0f-9119-2cf58211b3be",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "[LPDU] Mantra Polarizing Strikes 2",
+							uuid = "646a3492-2fe5-8631-b3c4-9f8baef2374b",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MONK",
+							name = "MONK job",
+							uuid = "aabe13dc-50e4-42a1-8577-332576cf0afb",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 65,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							dequeueIfLuaFalse = true,
+							name = "Polarizing Strikes 2 CD",
+							uuid = "9b3e11db-b6c7-1a0f-9119-2cf58211b3be",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Mitigation",
+				mechanicTime = 1162.6,
+				name = "[LPDU] Mantra Polarizing Strikes 2",
+				timeRange = true,
+				timelineIndex = 253,
+				timerEndOffset = -1.5,
+				timerStartOffset = -11,
+				uuid = "1b86f66c-feb9-aada-a2bd-ddfe724be771",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 25857,
+							conditions = 
+							{
+								
+								{
+									"c4cf9901-ada4-c4a3-a7f2-b5929a63a67d",
+									true,
+								},
+								
+								{
+									"77077584-f7d3-6a1e-9908-f19a78d6e98f",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "[LPDU] Magick Barrier Polarizing Strikes 2",
+							uuid = "8bfd0ca3-c152-378d-a257-6f737b7088cd",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REDMAGE",
+							name = "REDMAGE job",
+							uuid = "c4cf9901-ada4-c4a3-a7f2-b5929a63a67d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 25857,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							dequeueIfLuaFalse = true,
+							name = "Polarizing Strikes 2 CD",
+							uuid = "77077584-f7d3-6a1e-9908-f19a78d6e98f",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Mitigation",
+				mechanicTime = 1162.6,
+				name = "[LPDU] Magick Barrier Polarizing Strikes 2",
+				timeRange = true,
+				timelineIndex = 253,
+				timerEndOffset = -1.5,
+				timerStartOffset = -11,
+				uuid = "a488d6e8-4a29-1ece-91c1-61bf558376a5",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 7408,
+							conditions = 
+							{
+								
+								{
+									"d438220c-824e-d21c-b176-c29d267b28d3",
+									true,
+								},
+								
+								{
+									"25737449-3bb2-c35a-a87a-9dab31c11b22",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "[LPDU] Nature's Minne Polarizing Strikes 2",
+							uuid = "09a9a3dc-7035-d9e6-b815-58130be7ec4e",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "BARD job",
+							uuid = "d438220c-824e-d21c-b176-c29d267b28d3",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 7408,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							dequeueIfLuaFalse = true,
+							name = "Polarizing Strikes 2 CD",
+							uuid = "25737449-3bb2-c35a-a87a-9dab31c11b22",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Mitigation",
+				mechanicTime = 1162.6,
+				name = "[LPDU] Nature's Minne Polarizing Strikes 2",
+				timeRange = true,
+				timelineIndex = 253,
+				timerEndOffset = -1.5,
+				timerStartOffset = -11,
+				uuid = "1acc5735-d61d-a64a-8773-5dd25fb16cc1",
 				version = 2,
 			},
 		},
