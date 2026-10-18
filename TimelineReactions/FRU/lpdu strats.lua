@@ -885,16 +885,6 @@ local tbl =
 				version = 2,
 			},
 		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "AnyoneCore Defaults",
-				uuid = "9cc21e4d-1ee6-8ab7-b3ba-c87b3095fc0f",
-			},
-			objectType = "folder",
-		},
 	}, 
 	[7] = 
 	{

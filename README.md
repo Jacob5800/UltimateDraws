@@ -144,6 +144,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Shared off-tank utility: stance on at 16.4, stance off during the 200.8–203.8 window, stance on during 702.9–712.9, and Gaia Provokes during 733.2–738.2 and 767.5–773.5. Uses assigned OT for every tank job; stance guards prevent accidental toggles. (18-10-2026)
+
 - FRU mitigation split: Moved103 mitigation reactions (145 skill actions) and the AnyoneCore automatic-mitigation disable into lpdu mits; removed their originals and 26 empty mitigation folders from lpdu strats. Tank-LB reminder remains in lpdu strats. (18-10-2026)
 
 

@@ -709,6 +709,254 @@ local tbl =
 			},
 		},
 	}, 
+	[4] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Off-tank utility",
+				uuid = "b63bd92b-d7e8-7f54-9234-34d0518e80f5",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 28,
+							conditions = 
+							{
+								
+								{
+									"68f14b0a-8ffa-277a-8a9a-fff319a7093b",
+									true,
+								},
+								
+								{
+									"32fa7d3b-40b0-8e5f-8913-e8db4dc81c22",
+									true,
+								},
+								
+								{
+									"da82be03-665b-f98b-82c5-72bce8c8200a",
+									true,
+								},
+							},
+							endIfUsed = true,
+							ignoreWeaveRules = true,
+							uuid = "2b5d79a6-001b-2943-bcfd-c3c94694ce0d",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 48,
+							conditions = 
+							{
+								
+								{
+									"e9509486-3620-7e89-bf45-c440d22af19d",
+									true,
+								},
+								
+								{
+									"32fa7d3b-40b0-8e5f-8913-e8db4dc81c22",
+									true,
+								},
+								
+								{
+									"2c05bf1f-a04c-631e-a807-10012c7cf676",
+									true,
+								},
+							},
+							endIfUsed = true,
+							ignoreWeaveRules = true,
+							uuid = "06467aaf-6581-b866-ac38-3a859c045797",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 3629,
+							conditions = 
+							{
+								
+								{
+									"d4668920-f79a-3ca2-bc9e-a8c9d92cb2fd",
+									true,
+								},
+								
+								{
+									"32fa7d3b-40b0-8e5f-8913-e8db4dc81c22",
+									true,
+								},
+								
+								{
+									"518e176c-ed69-9cfe-8193-b1aa705a2004",
+									true,
+								},
+							},
+							endIfUsed = true,
+							ignoreWeaveRules = true,
+							uuid = "3379d956-eba8-2193-b6dd-ee376e3b3da7",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 16142,
+							conditions = 
+							{
+								
+								{
+									"6d615cee-cf5e-b81b-9c5c-f55576e17b1d",
+									true,
+								},
+								
+								{
+									"32fa7d3b-40b0-8e5f-8913-e8db4dc81c22",
+									true,
+								},
+								
+								{
+									"deb2c332-f60d-7700-90ba-944b64e27217",
+									true,
+								},
+							},
+							endIfUsed = true,
+							ignoreWeaveRules = true,
+							uuid = "77f2aa5b-3d3a-075d-8612-c0ff281695bd",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "if not AnyoneCore.Roster.current() then return false end\nreturn AnyoneCore.Roster.mySlot() == \"T2\"",
+							name = "Assigned OT (T2)",
+							uuid = "32fa7d3b-40b0-8e5f-8913-e8db4dc81c22",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "PALADIN",
+							uuid = "68f14b0a-8ffa-277a-8a9a-fff319a7093b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							buffCheckType = 2,
+							buffID = 79,
+							category = "Self",
+							uuid = "da82be03-665b-f98b-82c5-72bce8c8200a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "WARRIOR",
+							uuid = "e9509486-3620-7e89-bf45-c440d22af19d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							buffCheckType = 2,
+							buffID = 91,
+							category = "Self",
+							uuid = "2c05bf1f-a04c-631e-a807-10012c7cf676",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "DARKKNIGHT",
+							uuid = "d4668920-f79a-3ca2-bc9e-a8c9d92cb2fd",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							buffCheckType = 2,
+							buffID = 743,
+							category = "Self",
+							uuid = "518e176c-ed69-9cfe-8193-b1aa705a2004",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "GUNBREAKER",
+							uuid = "6d615cee-cf5e-b81b-9c5c-f55576e17b1d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							buffCheckType = 2,
+							buffID = 1833,
+							category = "Self",
+							uuid = "deb2c332-f60d-7700-90ba-944b64e27217",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Off-tank utility",
+				mechanicTime = 16.4,
+				name = "[LPDU OT] Stance on",
+				timeRange = true,
+				timelineIndex = 4,
+				timerEndOffset = 3,
+				uuid = "2cc129cc-93f9-6d81-a46c-1d0dce1bc611",
+				version = 2,
+			},
+		},
+	},
 	[10] = 
 	{
 		
@@ -1579,6 +1827,250 @@ local tbl =
 				timerEndOffset = -1.5,
 				timerStartOffset = -11,
 				uuid = "9e087778-2368-05ca-bb27-825f765fe85e",
+				version = 2,
+			},
+		},
+	},
+	[39] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Off-tank utility",
+				uuid = "cf19c049-f983-22f1-ac05-9e0eb3b03933",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 32065,
+							conditions = 
+							{
+								
+								{
+									"501fe6d7-82ad-24f7-b59a-c594c2a2011c",
+									true,
+								},
+								
+								{
+									"75c7e5af-9110-8709-ae27-46cf465e2d82",
+									true,
+								},
+								
+								{
+									"01896b12-434e-5f61-966d-ddf398a26919",
+									true,
+								},
+							},
+							endIfUsed = true,
+							ignoreWeaveRules = true,
+							uuid = "662fd3f5-91f5-cb81-a7d1-db8b50aa9de5",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 32066,
+							conditions = 
+							{
+								
+								{
+									"5b6666ec-ff6b-ac8f-9c23-269102fcd671",
+									true,
+								},
+								
+								{
+									"75c7e5af-9110-8709-ae27-46cf465e2d82",
+									true,
+								},
+								
+								{
+									"a407cf73-6003-b4b6-82ee-426ed332b073",
+									true,
+								},
+							},
+							endIfUsed = true,
+							ignoreWeaveRules = true,
+							uuid = "9851811e-067e-0fd1-abb4-50720e4159b2",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 32067,
+							conditions = 
+							{
+								
+								{
+									"7bd54c5c-e8cd-7f42-86c3-ddc7c1eea3fb",
+									true,
+								},
+								
+								{
+									"75c7e5af-9110-8709-ae27-46cf465e2d82",
+									true,
+								},
+								
+								{
+									"a5f8d41c-591b-16f9-8325-9ad53a8f19bf",
+									true,
+								},
+							},
+							endIfUsed = true,
+							ignoreWeaveRules = true,
+							uuid = "07abcaf0-61b6-6e95-9e5b-f664cd3e7bb7",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 32068,
+							conditions = 
+							{
+								
+								{
+									"060a7f79-18cf-20d1-8c8b-4e5f849714a1",
+									true,
+								},
+								
+								{
+									"75c7e5af-9110-8709-ae27-46cf465e2d82",
+									true,
+								},
+								
+								{
+									"bbad54b3-29d8-e4bd-a4e7-7d88a05ec857",
+									true,
+								},
+							},
+							endIfUsed = true,
+							ignoreWeaveRules = true,
+							uuid = "8c5ffed3-1e9c-96ce-a6d1-44e4fe73ecb2",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "if not AnyoneCore.Roster.current() then return false end\nreturn AnyoneCore.Roster.mySlot() == \"T2\"",
+							name = "Assigned OT (T2)",
+							uuid = "75c7e5af-9110-8709-ae27-46cf465e2d82",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "PALADIN",
+							uuid = "501fe6d7-82ad-24f7-b59a-c594c2a2011c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							buffID = 79,
+							category = "Self",
+							uuid = "01896b12-434e-5f61-966d-ddf398a26919",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "WARRIOR",
+							uuid = "5b6666ec-ff6b-ac8f-9c23-269102fcd671",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							buffID = 91,
+							category = "Self",
+							uuid = "a407cf73-6003-b4b6-82ee-426ed332b073",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "DARKKNIGHT",
+							uuid = "7bd54c5c-e8cd-7f42-86c3-ddc7c1eea3fb",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							buffID = 743,
+							category = "Self",
+							uuid = "a5f8d41c-591b-16f9-8325-9ad53a8f19bf",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "GUNBREAKER",
+							uuid = "060a7f79-18cf-20d1-8c8b-4e5f849714a1",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							buffID = 1833,
+							category = "Self",
+							uuid = "bbad54b3-29d8-e4bd-a4e7-7d88a05ec857",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Off-tank utility",
+				mechanicTime = 203.8,
+				name = "[LPDU OT] drop stance",
+				timeRange = true,
+				timelineIndex = 39,
+				timerStartOffset = -3,
+				uuid = "443a44e5-6142-6e4b-9378-b99c56828ef0",
 				version = 2,
 			},
 		},
@@ -5785,6 +6277,254 @@ local tbl =
 			},
 		},
 	},
+	[157] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Off-tank utility",
+				uuid = "20da24f6-d2b2-06b7-a689-efbcb80fc6e4",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 28,
+							conditions = 
+							{
+								
+								{
+									"e97e779a-3943-0bf1-8adf-49d398440476",
+									true,
+								},
+								
+								{
+									"9e051362-d5d1-eefa-857c-6bb29f9078ef",
+									true,
+								},
+								
+								{
+									"344a21be-745c-9d19-8d5e-917ff92a70b0",
+									true,
+								},
+							},
+							endIfUsed = true,
+							ignoreWeaveRules = true,
+							uuid = "2b79b66e-cad0-d00d-9446-52e578a13c12",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 48,
+							conditions = 
+							{
+								
+								{
+									"33372f4f-2ab3-18d6-9113-e5187390d897",
+									true,
+								},
+								
+								{
+									"9e051362-d5d1-eefa-857c-6bb29f9078ef",
+									true,
+								},
+								
+								{
+									"20a6f33b-db08-6b88-acca-89145febb69b",
+									true,
+								},
+							},
+							endIfUsed = true,
+							ignoreWeaveRules = true,
+							uuid = "59fa6dc4-885f-ac86-9fc0-d73db1abece9",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 3629,
+							conditions = 
+							{
+								
+								{
+									"b44ed2f5-946b-bbde-9c2e-57bcc37ac762",
+									true,
+								},
+								
+								{
+									"9e051362-d5d1-eefa-857c-6bb29f9078ef",
+									true,
+								},
+								
+								{
+									"441ea864-ed0b-e61b-ac86-df44dea989a5",
+									true,
+								},
+							},
+							endIfUsed = true,
+							ignoreWeaveRules = true,
+							uuid = "63c95f94-c7d6-22c4-9514-f4e7b4a4fc1d",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 16142,
+							conditions = 
+							{
+								
+								{
+									"836982c9-e855-b501-b6fc-51f79d4c0a3e",
+									true,
+								},
+								
+								{
+									"9e051362-d5d1-eefa-857c-6bb29f9078ef",
+									true,
+								},
+								
+								{
+									"38ac909e-0134-c960-814e-0195f9334a21",
+									true,
+								},
+							},
+							endIfUsed = true,
+							ignoreWeaveRules = true,
+							uuid = "3a558d34-d432-81a0-8983-72d2b084041f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "if not AnyoneCore.Roster.current() then return false end\nreturn AnyoneCore.Roster.mySlot() == \"T2\"",
+							name = "Assigned OT (T2)",
+							uuid = "9e051362-d5d1-eefa-857c-6bb29f9078ef",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "PALADIN",
+							uuid = "e97e779a-3943-0bf1-8adf-49d398440476",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							buffCheckType = 2,
+							buffID = 79,
+							category = "Self",
+							uuid = "344a21be-745c-9d19-8d5e-917ff92a70b0",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "WARRIOR",
+							uuid = "33372f4f-2ab3-18d6-9113-e5187390d897",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							buffCheckType = 2,
+							buffID = 91,
+							category = "Self",
+							uuid = "20a6f33b-db08-6b88-acca-89145febb69b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "DARKKNIGHT",
+							uuid = "b44ed2f5-946b-bbde-9c2e-57bcc37ac762",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							buffCheckType = 2,
+							buffID = 743,
+							category = "Self",
+							uuid = "441ea864-ed0b-e61b-ac86-df44dea989a5",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "GUNBREAKER",
+							uuid = "836982c9-e855-b501-b6fc-51f79d4c0a3e",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							buffCheckType = 2,
+							buffID = 1833,
+							category = "Self",
+							uuid = "38ac909e-0134-c960-814e-0195f9334a21",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Off-tank utility",
+				mechanicTime = 712.9,
+				name = "[LPDU OT] stance up",
+				timeRange = true,
+				timelineIndex = 157,
+				timerStartOffset = -10,
+				uuid = "b2bf3509-4ef1-523a-8200-b09a27fb7243",
+				version = 2,
+			},
+		},
+	},
 	[166] = 
 	{
 		
@@ -6215,6 +6955,89 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Off-tank utility",
+				uuid = "279006f3-48dc-a085-b79f-0dcbc4796d18",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 7533,
+							conditions = 
+							{
+								
+								{
+									"01fa3dc5-76bc-152e-883d-03cbdea65ec3",
+									true,
+								},
+								
+								{
+									"f2804fc8-b90c-4997-8bbb-c4595477b807",
+									true,
+								},
+							},
+							endIfUsed = true,
+							targetContentID = 9832,
+							targetType = "ContentID",
+							uuid = "2e870ffc-8a2d-882f-905f-be2ee2455599",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								19,
+								21,
+								32,
+								37,
+							},
+							uuid = "01fa3dc5-76bc-152e-883d-03cbdea65ec3",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "if not AnyoneCore.Roster.current() then return false end\nreturn AnyoneCore.Roster.mySlot() == \"T2\"",
+							name = "Assigned OT (T2)",
+							uuid = "f2804fc8-b90c-4997-8bbb-c4595477b807",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Off-tank utility",
+				mechanicTime = 738.2,
+				name = "[LPDU OT] Voke gaia",
+				timeRange = true,
+				timelineIndex = 166,
+				timerStartOffset = -5,
+				uuid = "413d9305-31a2-f272-8553-35d8b24b1735",
+				version = 2,
+			},
+		},
 	},
 	[175] = 
 	{
@@ -6426,6 +7249,89 @@ local tbl =
 				timerEndOffset = -1.5,
 				timerStartOffset = -11,
 				uuid = "5223976f-9421-21dd-a963-18642b34a638",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Off-tank utility",
+				uuid = "c69a7693-2c10-eceb-b77e-3c2b3cfba6fd",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 7533,
+							conditions = 
+							{
+								
+								{
+									"32b57a5a-9303-7392-b8d2-f17446bfea85",
+									true,
+								},
+								
+								{
+									"33ba5a4c-a3af-8f01-8932-39b3ba08a0d7",
+									true,
+								},
+							},
+							endIfUsed = true,
+							targetContentID = 9832,
+							targetType = "ContentID",
+							uuid = "531733f7-9529-339c-b8e6-017860e924ca",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								19,
+								21,
+								32,
+								37,
+							},
+							uuid = "32b57a5a-9303-7392-b8d2-f17446bfea85",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "if not AnyoneCore.Roster.current() then return false end\nreturn AnyoneCore.Roster.mySlot() == \"T2\"",
+							name = "Assigned OT (T2)",
+							uuid = "33ba5a4c-a3af-8f01-8932-39b3ba08a0d7",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Off-tank utility",
+				mechanicTime = 773.5,
+				name = "[LPDU OT] Voke gaia",
+				timeRange = true,
+				timelineIndex = 175,
+				timerStartOffset = -6,
+				uuid = "1692e7d0-038b-9179-a953-219974785381",
 				version = 2,
 			},
 		},
