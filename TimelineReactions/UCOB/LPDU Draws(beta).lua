@@ -5390,9 +5390,9 @@ local tbl =
 						data = 
 						{
 							aType = "Alert",
-							alertDuration = 4000,
+							alertDuration = 2500,
 							alertPriority = 2,
-							alertText = "Cleanse Doom",
+							alertText = "Cleanse doom",
 							conditions = 
 							{
 								
@@ -5405,6 +5405,25 @@ local tbl =
 							version = 2.1,
 						},
 					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local wave=data.ucobDoomWave\nif wave then wave.warned=true end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"3079025d-870a-13e0-8352-44365c2a0d32",
+									true,
+								},
+							},
+							name = "Remember personal cleanse prompt",
+							uuid = "a04bd133-4948-1ce7-bfec-ce6baa37df1a",
+							version = 2.1,
+						},
+					},
 				},
 				conditions = 
 				{
@@ -5413,9 +5432,9 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local s=data.ucobDoomWave\nlocal p=TensorCore.mGetPlayer()\nif not s or not p or s.warned then return false end\nlocal b=TensorCore.getBuff(p,210)\nif b and b.duration>0 and b.duration<=3 then s.warned=true;return true end\nreturn false",
+							conditionLua = "local wave=data.ucobDoomWave\nlocal s=data.ucobCleansePatches\nif not wave or wave.warned or not s then return false end\nlocal R=AnyoneCore and AnyoneCore.Roster\nif not R or not R.current() or not R.isReady() then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or wave.first~=p.id or s.owner~=p.id or not TensorCore.getBuff(p,210) then return false end\nlocal q=s.patches[1]\nreturn q~=nil and Now()<q.expires",
 							dequeueIfLuaFalse = true,
-							name = "Personal Doom near expiry once",
+							name = "Own turn and blue cleanse patch",
 							uuid = "3079025d-870a-13e0-8352-44365c2a0d32",
 							version = 3,
 						},
