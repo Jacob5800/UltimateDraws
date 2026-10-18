@@ -6372,34 +6372,6 @@ local tbl =
 					{
 						data = 
 						{
-							actionID = 16464,
-							conditions = 
-							{
-								
-								{
-									"2d23d2a2-b2f5-4ce4-857c-2091562d6684",
-									true,
-								},
-								
-								{
-									"c1e5b3c7-aa95-fa2c-91d5-c4ac89487b02",
-									true,
-								},
-								
-								{
-									"f69272ff-4737-9da8-a64b-d6ee57143db7",
-									true,
-								},
-							},
-							targetType = "Other Tank",
-							uuid = "42488f34-b411-86fc-9bc8-8a51cfb21360",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
 							actionID = 7393,
 							conditions = 
 							{
@@ -6421,34 +6393,6 @@ local tbl =
 							},
 							targetType = "Other Tank",
 							uuid = "0c9192a2-4ec4-fc06-b7c8-ba0a12a5d1f5",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 25758,
-							conditions = 
-							{
-								
-								{
-									"23e86fec-3616-5420-b209-a4977f1333c0",
-									true,
-								},
-								
-								{
-									"c1e5b3c7-aa95-fa2c-91d5-c4ac89487b02",
-									true,
-								},
-								
-								{
-									"f69272ff-4737-9da8-a64b-d6ee57143db7",
-									true,
-								},
-							},
-							targetType = "Other Tank",
-							uuid = "c1080112-c37d-0e39-aae8-f090d2d32571",
 							version = 2.1,
 						},
 					},
@@ -6496,32 +6440,8 @@ local tbl =
 							category = "Self",
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
-							jobValue = "WARRIOR",
-							uuid = "2d23d2a2-b2f5-4ce4-857c-2091562d6684",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
 							jobValue = "DARKKNIGHT",
 							uuid = "7beefb02-fd84-fc89-acfd-e1e50a67a2af",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "GUNBREAKER",
-							uuid = "23e86fec-3616-5420-b209-a4977f1333c0",
 							version = 3,
 						},
 					},
