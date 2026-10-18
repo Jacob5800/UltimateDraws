@@ -25033,28 +25033,6 @@ local tbl =
 					{
 						data = 
 						{
-							actionID = 3540,
-							conditions = 
-							{
-								
-								{
-									"f5d67b53-d765-e7b7-8ae2-43903411b4bc",
-									true,
-								},
-								
-								{
-									"99cfad7e-3467-5f40-ae72-62f5a2d9640c",
-									true,
-								},
-							},
-							uuid = "9b2ca72f-6821-7e0b-981f-ab1f5c38bb75",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
 							actionID = 7388,
 							conditions = 
 							{
@@ -25128,18 +25106,6 @@ local tbl =
 							conditionLua = "local r=AnyoneCore.Roster\nif not r.current() then return false end\nlocal slot=r.mySlot()\nreturn slot==\"T1\"",
 							name = "Assigned MT",
 							uuid = "99cfad7e-3467-5f40-ae72-62f5a2d9640c",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "PALADIN",
-							uuid = "f5d67b53-d765-e7b7-8ae2-43903411b4bc",
 							version = 3,
 						},
 					},
