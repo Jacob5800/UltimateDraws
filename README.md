@@ -18,6 +18,8 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- P3 hand previews now use 40% fill. The second set stays amber until its last 3 seconds, then changes to red using a scheduled draw. Removed the separate ring countdown while preserving its circle. (18-10-2026)
+
 - P2 stack adjustments now name and highlight the player to swap with using the existing LPDU rule. P2 and Sigma keep a personal matching-symbol partner label and subtle connecting line through their mechanic. (18-10-2026)
 
 - P6 puddles keep all danger circles but show only the personal countdown. Spread beams now follow targets from a single attached draw, and Wild Charge no longer refreshes unchanged geometry. Hello World uptime hover text keeps its wording across two lines. (18-10-2026)
