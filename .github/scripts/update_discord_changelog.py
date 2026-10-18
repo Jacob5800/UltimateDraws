@@ -4,7 +4,9 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import sys
+from datetime import date, datetime
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -14,9 +16,12 @@ from pathlib import Path
 README_PATH = Path(__file__).resolve().parents[2] / "README.md"
 CHANGELOG_HEADING = "## Changelog"
 DISCORD_DESCRIPTION_LIMIT = 4096
+DISCORD_MESSAGE_EMBED_LIMIT = 6000
+ENTRIES_PER_SECTION = 10
+CHANGELOG_URL = "https://github.com/Jacob5800/UltimateDraws#changelog"
 
 
-def changelog_text(readme: str) -> str:
+def changelog_sections(readme: str) -> list[tuple[str, list[str]]]:
     lines = readme.splitlines()
     try:
         start = next(i for i, line in enumerate(lines) if line.strip() == CHANGELOG_HEADING)
@@ -29,21 +34,83 @@ def changelog_text(readme: str) -> str:
             break
         body.append(line)
 
-    text = "\n".join(body).strip()
-    if not text:
+    if not "\n".join(body).strip():
         raise ValueError("The README changelog section is empty")
+    sections: list[tuple[str, list[str]]] = []
+    heading = "Updates"
+    entries: list[str] = []
+    for line in body:
+        if line.startswith("### "):
+            if entries:
+                sections.append((heading, entries))
+            heading, entries = line[4:].strip(), []
+        elif re.match(r"^[-*] ", line):
+            entries.append(line.strip())
+        elif line.strip() and entries:
+            entries[-1] += "\n" + line.rstrip()
+    if entries:
+        sections.append((heading, entries))
+    if not sections:
+        raise ValueError("The README changelog contains no entries")
+    # Stable sorting preserves newest-first authoring order for same-day entries.
+    return [(title, sorted(items, key=entry_date, reverse=True)[:ENTRIES_PER_SECTION])
+            for title, items in sections]
 
-    if len(text) <= DISCORD_DESCRIPTION_LIMIT:
-        return text
 
-    # Keep complete leading lines (the README lists the newest entries first).
-    shortened = []
-    for line in text.splitlines():
-        candidate = "\n".join([*shortened, line, "", "[Full changelog](https://github.com/Jacob5800/UltimateDraws#changelog)"])
-        if len(candidate) > DISCORD_DESCRIPTION_LIMIT:
-            break
-        shortened.append(line)
-    return "\n".join(shortened).rstrip() + "\n\n[Full changelog](https://github.com/Jacob5800/UltimateDraws#changelog)"
+def entry_date(entry: str) -> date:
+    trailing = re.search(r"\((\d{2}-\d{2}-\d{4})\)\s*$", entry)
+    leading = re.match(r"^[-*]\s+(\d{4}-\d{2}-\d{2}):", entry)
+    try:
+        if trailing:
+            return datetime.strptime(trailing[1], "%d-%m-%Y").date()
+        if leading:
+            return date.fromisoformat(leading[1])
+    except ValueError:
+        pass
+    return date.min
+
+
+def changelog_payloads(readme: str) -> list[dict]:
+    """Keep every section; paginate rather than truncate later fights."""
+    embeds = []
+    footer = f"\n\n[Full changelog]({CHANGELOG_URL})"
+    for section, entries in changelog_sections(readme):
+        title = f"UltimateDraws Changelog — {section}"[:256]
+        pages, current = [], ""
+        budget = DISCORD_DESCRIPTION_LIMIT - len(footer)
+        for entry in entries:
+            # A single unusually long entry can span descriptions too.
+            while entry:
+                separator = "\n\n" if current else ""
+                room = budget - len(current) - len(separator)
+                if len(entry) <= room:
+                    current += separator + entry
+                    break
+                if current:
+                    pages.append(current)
+                    current = ""
+                else:
+                    split = entry.rfind(" ", 0, budget + 1)
+                    split = split if split > 0 else budget
+                    pages.append(entry[:split])
+                    entry = entry[split:].lstrip()
+        if current:
+            pages.append(current)
+        for i, description in enumerate(pages, 1):
+            page_title = title if len(pages) == 1 else f"{title[:240]} ({i}/{len(pages)})"
+            embeds.append({"title": page_title, "url": CHANGELOG_URL,
+                           "description": description + footer, "color": 5793266})
+    payloads, batch, size = [], [], 0
+    for embed in embeds:
+        count = len(embed["title"]) + len(embed["description"])
+        if batch and (size + count > DISCORD_MESSAGE_EMBED_LIMIT or len(batch) == 10):
+            payloads.append({"content": "", "embeds": batch, "allowed_mentions": {"parse": []}})
+            batch, size = [], 0
+        batch.append(embed)
+        size += count
+    if batch:
+        payloads.append({"content": "", "embeds": batch, "allowed_mentions": {"parse": []}})
+    return payloads
 
 
 def webhook_endpoint(webhook_url: str) -> str:
@@ -73,35 +140,24 @@ def main() -> int:
         return 1
 
     try:
-        description = changelog_text(README_PATH.read_text(encoding="utf-8"))
+        payloads = changelog_payloads(README_PATH.read_text(encoding="utf-8"))
         endpoint = webhook_endpoint(webhook_url)
     except (OSError, ValueError) as exc:
         print(str(exc), file=sys.stderr)
         return 1
 
-    payload = {
-        "content": "",
-        "embeds": [
-            {
-                "title": "UltimateDraws Changelog",
-                "url": "https://github.com/Jacob5800/UltimateDraws#changelog",
-                "description": description,
-                "color": 5793266,
-            }
-        ],
-        "allowed_mentions": {"parse": []},
-    }
-    request = urllib.request.Request(
-        endpoint,
-        data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
-        headers={"Content-Type": "application/json", "User-Agent": "UltimateDrawsChangelog/1.0"},
-        method="POST",
-    )
     try:
-        with urllib.request.urlopen(request, timeout=20) as response:
-            if response.status not in (200, 204):
-                print(f"Discord returned unexpected HTTP status {response.status}", file=sys.stderr)
-                return 1
+        for payload in payloads:
+            request = urllib.request.Request(
+                endpoint,
+                data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
+                headers={"Content-Type": "application/json", "User-Agent": "UltimateDrawsChangelog/1.0"},
+                method="POST",
+            )
+            with urllib.request.urlopen(request, timeout=20) as response:
+                if response.status not in (200, 204):
+                    print(f"Discord returned unexpected HTTP status {response.status}", file=sys.stderr)
+                    return 1
     except urllib.error.HTTPError as exc:
         print(
             f"Discord rejected the changelog post (HTTP {exc.code}); verify the webhook URL "
@@ -117,7 +173,7 @@ def main() -> int:
         )
         return 1
 
-    print("Posted the Discord changelog update.")
+    print(f"Posted the Discord changelog update in {len(payloads)} message(s).")
     return 0
 
 

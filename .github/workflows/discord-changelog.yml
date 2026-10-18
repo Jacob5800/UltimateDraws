@@ -6,6 +6,9 @@ on:
       - main
     paths:
       - README.md
+      - .github/scripts/update_discord_changelog.py
+      - .github/scripts/test_update_discord_changelog.py
+      - .github/workflows/discord-changelog.yml
   workflow_dispatch:
 
 permissions:
@@ -17,6 +20,9 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
+      - name: Test changelog formatting
+        run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
 
       - name: Post the Discord changelog
         env:
