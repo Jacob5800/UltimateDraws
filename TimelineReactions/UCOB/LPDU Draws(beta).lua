@@ -13424,7 +13424,7 @@ local tbl =
 							aType = "Alert",
 							alertDuration = 4500,
 							alertPriority = 2,
-							alertText = "No Earthshaker: wait at north marker 4",
+							alertText = "No Earthshaker: wait at marker 4",
 							conditions = 
 							{
 								
@@ -13462,6 +13462,40 @@ local tbl =
 				timerEndOffset = 8,
 				timerStartOffset = -8,
 				uuid = "b04c30c7-52fe-08a5-82c8-15a850e5d8af",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.ucobTenShakerAlert\nif not s or Now()>=s.expires then self.used=true return end\nlocal w=s.waves[s.current]\nif not w or w.count~=4 then self.used=true return end\nlocal R=AnyoneCore and AnyoneCore.Roster\nif not R or not R.current() then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nif not p or w.targets[p.id] then self.used=true return end\nlocal x,y,z,active=Argus.getWaymarkInfo(8)\nif not active then self.used=true return end\nlocal dest={x=x,y=y,z=z}\nlocal dx,dz=x-p.pos.x,z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(.15,1,.2,.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>.8 then\n local tip=math.min(1.5,distance*.35)\n d:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(.1,distance-tip),.55,tip,1.1,false,flags)\nend\nd:addCircle(x,y,z,.8,false,flags)\nself.used=true",
+							name = "Personal wait at actual waymark 4",
+							uuid = "ef3d83ed-da92-05f5-9ea7-3b065919f2c4",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 754.4,
+				name = "Tenstrike unmarked wait at waymark 4 arrow",
+				timeRange = true,
+				timelineIndex = 147,
+				timerEndOffset = 8,
+				timerStartOffset = -8,
+				uuid = "abe04ff3-4024-1773-b50f-2963b358d306",
 				version = 2,
 			},
 		},
