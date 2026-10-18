@@ -4663,6 +4663,50 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "P3",
+				uuid = "90952b45-35c5-0322-84f9-bd4e86764ab1",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\nif eventArgs.index~=1 or (eventArgs.newAnimID~=7747 and eventArgs.newAnimID~=7748) then self.used=true return end\nif eventArgs.entityContentID~=7637 and eventArgs.entityContentID~=7638 then self.used=true return end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e or not e.pos then self.used=true return end\nlocal pos=e.pos;local r2=(pos.x-100)^2+(pos.z-100)^2\n-- The models first exist hidden at center; only their visible 14y arrival is reliable.\nif r2<13^2 or r2>15^2 then self.used=true return end\nlocal hands=S.p3EarlyHands\nif not hands or Now()-hands.started>30000 then hands={started=Now(),entries={}};S.p3EarlyHands=hands end\nif hands.entries[e.id] then self.used=true return end\nlocal wave=Now()-hands.started<1500 and 1 or 2\nlocal ms=wave==1 and 14000 or 13600\nlocal fill=wave==1 and 0x403333FF or 0x2033AAFF\nlocal border=wave==1 and 0xFF3333FF or 0xFF33AAFF\nlocal drawer=TensorCore.getCachedFlatDrawer(fill,fill,fill,border,3,0,0)\nlocal id=S.keep(drawer:addTimedCircle(ms,pos.x,pos.y+.08,pos.z,11,0,false,true,0))\nhands.entries[e.id]={shape=id,deadline=Now()+ms,wave=wave,x=pos.x,y=pos.y+.08,z=pos.z}\nAnyoneCore.addWorldTextCountdown(ms,{x=pos.x,y=pos.y+2,z=pos.z},0xFFFFFFFF,true,1.15)\nself.used=true\n",
+							name = "Predict visible hand arrival and countdown",
+							uuid = "552f1686-1e44-861c-b145-4046d0b78f61",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "P3",
+				eventType = 23,
+				loop = true,
+				mechanicTime = 426.4,
+				name = "[P3] Predict both hand slam sets early",
+				timeRange = true,
+				timelineIndex = 68,
+				timerEndOffset = 5,
+				timerStartOffset = -20,
+				uuid = "e77254c1-5849-369c-a380-8a7f6db9a846",
+				version = 2,
+			},
+		},
 	},
 	[70] = 
 	{
