@@ -46,6 +46,8 @@ TEA: Coming soon by Ton.
 
 ### UCOB: LPDU
 
+- Fellruin now distinguishes Spread for dive, Under Nael, Stay in your link, and Out of link—spread on the actual Aetheric Profusion hit. Link guidance hands off to final spread circles without competing instructions; tank link assignments are retained. (18-10-2026)
+
 - Latest UCOB cues: your Heavensfall tower stays green while the small staging circle clears on knockback; the moving Twister countdown is 1.8x size; Cleanse doom appears only on your turn; only the first clockwise Doom call speaks. (18-10-2026)
 
 - Heavensfall’s small pre-knockback staging circle now clears on the actual knockback. Extended the hit listener to catch later replay timings; assigned tower highlighting and post-knockback correction remain. (18-10-2026)
@@ -63,8 +65,6 @@ TEA: Coming soon by Ton.
 - Corrected the late Nael tankbuster return trigger and kept transition-to-A guidance from interrupting unfinished dragon baits or the remaining quote mechanics. (14-10-2026)
 
 - Thunderstruck now gives the affected player a Spread voice/text call and a small following countdown, preserving the later Thermionic stack guidance. (14-10-2026)
-
-- P1 double-Hatch arrows refresh unresolved assignments once per second, respect a marked player already inside a link, and retain the original expiry and hit cleanup. (14-10-2026)
 
 ### FRU: LPDU
 

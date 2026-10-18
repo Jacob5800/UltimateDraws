@@ -10954,7 +10954,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.ucobFellruinGuide\nif s and s.seq[s.step]==eventArgs.spellID then s.step=s.step+1;s.nextAt=Now()+3100;s.timerStep=nil end\nif s and eventArgs.spellID==9905 then s.profDone=true;s.nextAt=Now()+3100;s.timerStep=nil;AnyoneCore.Shotcall(\"Spread now\",true,3,false);s.lastCall=\"Spread now\" end\nif s and eventArgs.spellID==9920 then data.ucobFellruinGuide=nil end\nself.used=true",
+							actionLua = "local s=data.ucobFellruinGuide\nif not s or Now()>=s.expires then self.used=true return end\nif s.seq[s.step]==eventArgs.spellID then s.step=s.step+1;s.nextAt=Now()+3100;s.timerStep=nil end\nif eventArgs.spellID==9905 and not s.profDone then\n s.profDone=true;s.nextAt=Now()+3100;s.timerStep=nil\n data.ucobFellruinLinks=nil\n AnyoneCore.Shotcall('Out of link, spread!',true,3,false)\n s.lastCall='Out of link, spread!'\nend\nif eventArgs.spellID==9920 then data.ucobFellruinGuide=nil end\nself.used=true",
 							conditions = 
 							{
 								
@@ -11015,7 +11015,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nlocal s=data.ucobFellruinGuide\nif not R or not R.current() or not R.isReady() or not p or not s or Now()>=s.expires or not s.nael then self.used=true return end\nlocal slot=R.mySlot()\nlocal nael=TensorCore.mGetEntity(s.nael)\nif not slot or not nael then self.used=true return end\nlocal nextSpell=s.seq[s.step]\nlocal spread=nextSpell==9918 or s.profDone\nlocal links=data.ucobFellruinLinks\nif links and Now()<links.expires and not (nextSpell==9918 and not s.profDone) then self.used=true return end\nif spread then\n local radius=s.profDone and 4 or 3\n local clear=true\n for _,other in ipairs({'T1','T2','H1','H2','M1','M2','R1','R2'}) do\n  local e=R.entOf(other)\n  if e and e.id~=p.id and e.hp.current>0 and (p.pos.x-e.pos.x)^2+(p.pos.z-e.pos.z)^2<radius^2 then clear=false;break end\n end\n local color=clear and GUI:ColorConvertFloat4ToU32(.15,1,.2,.7) or GUI:ColorConvertFloat4ToU32(1,.15,.15,.7)\n local d=TensorCore.getStaticDrawer(color,2)\n d:addCircle(p.pos.x,p.pos.y,p.pos.z,radius,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if s.nextAt and Now()<s.nextAt and s.timerStep~=s.step then\n  AnyoneCore.addWorldTextCountdown(s.nextAt-Now(),setmetatable({entityID=p.id},{__index=function(t,k) local e=TensorCore.mGetEntity(t.entityID);if not e then return 0 end;if k=='x' then return e.pos.x elseif k=='y' then return e.pos.y+1.8 elseif k=='z' then return e.pos.z end end}),0xFFFFFFFF,true,.9)\n  s.timerStep=s.step\n end\n local call=s.profDone and 'Spread now' or 'Spread'\n if s.lastCall~=call then AnyoneCore.Shotcall(call,true,3,false);s.lastCall=call end\n self.used=true return\nend\nif nextSpell~=9916 then self.used=true return end\nlocal np=nael.pos\nlocal dest=nil\nif slot=='T1' or slot=='T2' then\n local b=nil\n for _,e in pairs(TensorCore.entityList('')) do if e.contentid==3210 and Argus.getEntityModel(e)==8168 then b=e.pos;break end end\n if not b then self.used=true return end\n local dx,dz=b.x-np.x,b.z-np.z;local r=math.sqrt(dx*dx+dz*dz)\n if r<1 then self.used=true return end\n dest={x=np.x+dx/r*2,y=np.y,z=np.z+dz/r*2}\nelse\n local best,score=nil,math.huge\n for _,e in pairs(TensorCore.entityList('')) do\n  if e.contentid==2001151 then\n   local r=(e.pos.x-np.x)^2+(e.pos.z-np.z)^2\n   if r<score then best=e.pos;score=r end\n  end\n end\n if not best or score>36 then self.used=true return end\n dest={x=best.x,y=best.y,z=best.z}\nend\nif s.lastCall~='Under Nael, Neurolink' then AnyoneCore.Shotcall('Under Nael, Neurolink',true,3,false);s.lastCall='Under Nael, Neurolink' end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
+							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nlocal s=data.ucobFellruinGuide\nif not R or not R.current() or not R.isReady() or not p or not s or Now()>=s.expires or not s.nael then self.used=true return end\nlocal slot=R.mySlot()\nlocal nael=TensorCore.mGetEntity(s.nael)\nif not slot or (not nael and not s.profDone) then self.used=true return end\nlocal nextSpell=s.seq[s.step]\nlocal spread=nextSpell==9918 or s.profDone\nlocal links=data.ucobFellruinLinks\nif links and Now()<links.expires and not (nextSpell==9918 and not s.profDone) then self.used=true return end\nif spread then\n local radius=s.profDone and 4 or 3\n local clear=true\n for _,other in ipairs({'T1','T2','H1','H2','M1','M2','R1','R2'}) do\n  local e=R.entOf(other)\n  if e and e.id~=p.id and e.hp.current>0 and (p.pos.x-e.pos.x)^2+(p.pos.z-e.pos.z)^2<radius^2 then clear=false;break end\n end\n local color=clear and GUI:ColorConvertFloat4ToU32(.15,1,.2,.7) or GUI:ColorConvertFloat4ToU32(1,.15,.15,.7)\n local d=TensorCore.getStaticDrawer(color,2)\n d:addCircle(p.pos.x,p.pos.y,p.pos.z,radius,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if s.nextAt and Now()<s.nextAt and s.timerStep~=s.step then\n  AnyoneCore.addWorldTextCountdown(s.nextAt-Now(),setmetatable({entityID=p.id},{__index=function(t,k) local e=TensorCore.mGetEntity(t.entityID);if not e then return 0 end;if k=='x' then return e.pos.x elseif k=='y' then return e.pos.y+1.8 elseif k=='z' then return e.pos.z end end}),0xFFFFFFFF,true,.9)\n  s.timerStep=s.step\n end\n local call=s.profDone and 'Out of link, spread!' or 'Spread for dive'\n if s.lastCall~=call then AnyoneCore.Shotcall(call,true,3,false);s.lastCall=call end\n self.used=true return\nend\nif nextSpell~=9916 then self.used=true return end\nlocal np=nael.pos\nlocal dest=nil\nif slot=='T1' or slot=='T2' then\n local b=nil\n for _,e in pairs(TensorCore.entityList('')) do if e.contentid==3210 and Argus.getEntityModel(e)==8168 then b=e.pos;break end end\n if not b then self.used=true return end\n local dx,dz=b.x-np.x,b.z-np.z;local r=math.sqrt(dx*dx+dz*dz)\n if r<1 then self.used=true return end\n dest={x=np.x+dx/r*2,y=np.y,z=np.z+dz/r*2}\nelse\n local best,score=nil,math.huge\n for _,e in pairs(TensorCore.entityList('')) do\n  if e.contentid==2001151 then\n   local r=(e.pos.x-np.x)^2+(e.pos.z-np.z)^2\n   if r<score then best=e.pos;score=r end\n  end\n end\n if not best or score>36 then self.used=true return end\n dest={x=best.x,y=best.y,z=best.z}\nend\nif s.lastCall~='Under Nael' then AnyoneCore.Shotcall('Under Nael',true,3,false);s.lastCall='Under Nael' end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
 							name = "Fellruin - Quickmarch Spread and Dynamo",
 							uuid = "c5660c77-9c28-4d54-b0a1-5e1a54686e7f",
 							version = 2.1,
@@ -11056,6 +11056,20 @@ local tbl =
 		{
 			data = 
 			{
+				name = "TTS Spread",
+				uuid = "8069138f-a197-2f04-af42-c46dddcfd00d",
+				version = 2,
+			},
+			inheritedObjectUUID = "137c2f40-2945-b383-af4d-33a613fa1cb3",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "LPDU Personal Guidance",
 				uuid = "2ce49414-307b-0d3c-b07a-064075d7f348",
@@ -11073,7 +11087,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local links={}\nlocal nael=nil\nfor _,e in pairs(EntityList(\"\")) do\n if e.contentid==2612 then nael=e.pos end\n if e.contentid==2001151 then links[#links+1]={x=e.pos.x,y=e.pos.y,z=e.pos.z} end\nend\nif nael and #links==3 then\n table.sort(links,function(a,b) return (a.x-nael.x)^2+(a.z-nael.z)^2<(b.x-nael.x)^2+(b.z-nael.z)^2 end)\n local r=math.sqrt(nael.x*nael.x+nael.z*nael.z)\n if r>1 then\n  local lx,lz=-nael.z/r,nael.x/r\n  if links[2].x*lx+links[2].z*lz<links[3].x*lx+links[3].z*lz then links[2],links[3]=links[3],links[2] end\n  data.ucobFellruinLinks={party=links[1],T1=links[2],T2=links[3],expires=Now()+eventArgs.channelTimeMax*1000}\n local R=AnyoneCore and AnyoneCore.Roster\n if R and R.current() then\n  local slot=R.mySlot()\n  AnyoneCore.Shotcall(slot=='T1' and 'Left dragon, Neurolink' or slot=='T2' and 'Right dragon, Neurolink' or 'Under Nael, Neurolink',true,4,false)\n end\n end\nend\nself.used=true",
+							actionLua = "local links={}\nlocal nael=nil\nfor _,e in pairs(EntityList(\"\")) do\n if e.contentid==2612 then nael=e.pos end\n if e.contentid==2001151 then links[#links+1]={x=e.pos.x,y=e.pos.y,z=e.pos.z} end\nend\nif nael and #links==3 then\n table.sort(links,function(a,b) return (a.x-nael.x)^2+(a.z-nael.z)^2<(b.x-nael.x)^2+(b.z-nael.z)^2 end)\n local r=math.sqrt(nael.x*nael.x+nael.z*nael.z)\n if r>1 then\n  local lx,lz=-nael.z/r,nael.x/r\n  if links[2].x*lx+links[2].z*lz<links[3].x*lx+links[3].z*lz then links[2],links[3]=links[3],links[2] end\n  data.ucobFellruinLinks={party=links[1],T1=links[2],T2=links[3],expires=Now()+eventArgs.channelTimeMax*1000+1000}\n local R=AnyoneCore and AnyoneCore.Roster\n if R and R.current() then\n  local slot=R.mySlot()\n  local guide=data.ucobFellruinGuide\n  if slot=='T1' or slot=='T2' then\n   AnyoneCore.Shotcall(slot=='T1' and 'Left dragon, Neurolink' or 'Right dragon, Neurolink',true,4,false)\n  elseif not guide or guide.seq[guide.step]~=9918 then\n   if not guide or guide.lastCall~='Under Nael' then AnyoneCore.Shotcall('Under Nael',true,3,false) end\n   if guide then guide.lastCall='Under Nael' end\n  end\n end\n end\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -11131,7 +11145,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nif not R or not R.current() or not R.isReady() then self.used=true return end\nlocal slot=R.mySlot()\nif not slot then self.used=true return end\nlocal guide=data.ucobFellruinGuide\nif guide and guide.seq[guide.step]==9918 and not guide.profDone then self.used=true return end\nlocal s=data.ucobFellruinLinks\nif not s or Now()>s.expires then self.used=true return end\nlocal dest=s[slot] or s.party\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
+							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nif not R or not R.current() or not R.isReady() then self.used=true return end\nlocal slot=R.mySlot()\nif not slot then self.used=true return end\nlocal guide=data.ucobFellruinGuide\nif guide and (guide.profDone or guide.seq[guide.step]==9918) then self.used=true return end\nlocal s=data.ucobFellruinLinks\nif not s or Now()>s.expires then self.used=true return end\nlocal dest=s[slot] or s.party\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nif guide and not guide.profDone then\n local nextSpell=guide.seq[guide.step]\n local call=nil\n if nextSpell==9916 and slot~='T1' and slot~='T2' then call='Under Nael'\n elseif not nextSpell then call='Stay in your link' end\n if call and guide.lastCall~=call then AnyoneCore.Shotcall(call,true,3,false);guide.lastCall=call end\nend\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
 							name = "Fellruin Aetheric Profusion - Assigned Neurolink",
 							uuid = "fb3b20b0-c8e6-f7e1-a67d-d0e59699e9ad",
 							version = 2.1,
@@ -11148,7 +11162,7 @@ local tbl =
 				name = "[LPDU] Fellruin Aetheric Profusion - Assigned Neurolink",
 				timeRange = true,
 				timelineIndex = 118,
-				timerEndOffset = 0.5,
+				timerEndOffset = 3,
 				timerStartOffset = -5,
 				uuid = "8894aeff-7a57-aeb4-9201-12f7e770f916",
 				version = 2,
