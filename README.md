@@ -46,6 +46,8 @@ TEA: Coming soon by Ton.
 
 ### UCOB: LPDU
 
+- Tenstrike initial spread arrows now stop one second before the DPS or tank/healer spread window. Once all three Hatch targets are confirmed, only non-Hatch players receive a single Spread—keep clear of the Hatch players call. (19-10-2026)
+
 - Tenstrike spread guidance now starts at 735.5, uses the same 12y Quickmarch spread radius, and remains until your Hatch assignment takes over or your own Meteor Stream hits. This removes the premature cutoff before the spread. (19-10-2026)
 
 - Nael lightning now shows a following 5y personal spread circle directly while Thunderstruck is present, with one Lightning on you—spread call per application. Other-player circles and the existing countdown remain; the previous duplicate call is removed. (19-10-2026)
@@ -63,8 +65,6 @@ TEA: Coming soon by Ton.
 - Latest UCOB cues: your Heavensfall tower stays green while the small staging circle clears on knockback; the moving Twister countdown is 1.8x size; Cleanse doom appears only on your turn; only the first clockwise Doom call speaks. (18-10-2026)
 
 - Heavensfall’s small pre-knockback staging circle now clears on the actual knockback. Extended the hit listener to catch later replay timings; assigned tower highlighting and post-knockback correction remain. (18-10-2026)
-
-- Fellruin’s spread call around 628 now says Spread instead of Spread soon, matching the active personal spread guidance. Timing and draws are unchanged. (18-10-2026)
 
 ### FRU: LPDU
 
