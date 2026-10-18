@@ -66,6 +66,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Added shared spreadsheet tank mitigation across P1-P5 for all four tanks, with assigned-role gates, P4 grouping-aware cooldown reservations and P5 hit-triggered Provoke swaps. Variable crystal completion uses its verified death event. Optional DRK personal timings retain shared spreadsheet party mitigation without duplicate Reprisals/Missionary. (18-10-2026)
+
 - LPDU mits now disables AnyoneCore automatic DPS and tank mitigation at fight start, using its existing FRU tank-mitigation switch. A native healer exclusion leaves healer settings unchanged. (18-10-2026)
 
 - Imported DRK Akh Morn cooldowns now run only when OT is selected as the solo tank for that set; party and MT-solo choices do not trigger the DRK solo bundle. (18-10-2026)
@@ -83,8 +85,6 @@ TEA: Coming soon by Ton.
 - Moved the middle AoE countdown labels 2 yalms toward B for improved readability. (11-10-2026)
 
 - Switched assigned tower timers to continuous world-text countdowns and added separate countdowns for middle Burnt Strike and its follow-up AoE. (11-10-2026)
-
-- Added a small green circle at your assigned Fall of Faith conga position alongside the existing arrow. (11-10-2026)
 
 ### UWU: LPDU
 
