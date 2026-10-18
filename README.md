@@ -18,6 +18,8 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- P3 hand casts reuse the early preview without duplicate countdowns, retaining the normal cast-only fallback when arrival was missed. Omega World holders briefly see their personal SET 1/2 NEAR/FAR WORLD label. (18-10-2026)
+
 - Both P3 hand slam sets now show 11y AoE previews and continuous countdowns from their visible arrival animation, well before the cast bar. First and second sets use distinct colours. (18-10-2026)
 
 - Program Loop snapshots all eight number assignments before buffs expire, preserving later tether pickup guidance. Pantokrator countdowns now sit inside each current cone instead of on the boss. (18-10-2026)
