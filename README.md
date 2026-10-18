@@ -44,6 +44,8 @@ TEA: Coming soon by Ton.
 
 ### UCOB: LPDU
 
+- Personal Twister countdown increased another 20%, from 1.5x to 1.8x the original text size; position and timing are unchanged. (18-10-2026)
+
 - Personal Twister countdown text is now 50% larger, retaining its player-following position and cast deadline. (18-10-2026)
 
 - Heavensfall highlights only your assigned tower green once the Nael-based order is established. Added a character-following Twister countdown for P1/trios/adds and TTS on only the first clockwise Doom call. Thermionic timers now skip idle work, retain assignment waits and process quotes only during Nael phases. (18-10-2026)
@@ -61,8 +63,6 @@ TEA: Coming soon by Ton.
 - Added L4 Liquid Hell volley alerts, delayed personal P1 Fireball regroup guidance that waits for Hatch/baiting, player-attached Thermionic Beam countdowns and green stack circles that clear on damage, P2 opening Meteor Stream timers, and Quickmarch middle regroup before Twisting Dive. (14-10-2026)
 
 - Fellruin regroup guidance uses the Neurolink under Nael; both spreads use personal red/green proximity circles with countdowns instead of assigned spread arrows. Personal Nael spread countdown follows your character. Strengthened transition-to-A capture and delayed P1 double-Hatch position assignment by 0.3 seconds. (14-10-2026)
-
-- Added a small personal Raven's Dive countdown near timeline 294, clarified Blackfire Wait outside/Soak tower guidance, and kept Fellruin IN destinations outside Neurolinks until link soaking is required. (14-10-2026)
 
 ### FRU: LPDU
 
