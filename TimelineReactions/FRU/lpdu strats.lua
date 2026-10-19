@@ -7,17 +7,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "b051d202-4ffc-0cbe-9399-b7e8ceab4212",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\core",
 				uuid = "92a43271-03c3-9dbd-cdb1-2b47622aa4c1",
 			},
@@ -886,33 +875,8 @@ local tbl =
 			},
 		},
 	}, 
-	[4] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "ba404b1f-2e0c-72d3-aeb7-5155412e6c6f",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-	},
 	[7] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "d1f4f2a0-f8ff-32b4-485c-80caa15705f0",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -1106,17 +1070,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "bc57735c-8b41-d8b0-6f90-ce5edd9d1b2c",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "LPDU",
 				uuid = "f6537e66-aa7b-5235-9a20-b1f9179b542b",
 			},
@@ -1160,17 +1113,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "38877cf5-cd5a-9089-8490-cdbfe8494e05",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\core",
 				uuid = "c9ee12e4-b6d6-2d38-72e0-40fe3029b034",
 			},
@@ -1197,6 +1139,36 @@ local tbl =
 				uuid = "c80b3db0-f27a-1f9c-8fbe-0d4d876b0a7f",
 			},
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current() == nil or roster.mySlot() ~= \"T2\" then\n    self.used = true\n    return\nend\nlocal player = TensorCore.mGetPlayer()\nif player == nil or player.pos == nil then\n    self.used = true\n    return\nend\nlocal sourcePos = player.pos\nlocal targetPos = { x = 112.41, y = 0, z = 86.11 }\nlocal heading = TensorCore.getHeadingToTarget(sourcePos, targetPos)\nlocal distance = TensorCore.getDistance2d(sourcePos, targetPos)\nlocal otBlue = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(40/255, 100/255, 220/255, .25), 2)\nif distance > 0.5 then\n    otBlue:addTimedArrow(5000, sourcePos.x, sourcePos.y, sourcePos.z, heading, distance, 1, 1, 1, 0, true)\nend\nAnyoneCore.addTimedWorldText(5000, \"OT Buster\", targetPos, GUI:ColorConvertFloat4ToU32(1, 1, 1, 1), true, 1.5, 0)\nself.used = true",
+							name = "OT arrow to A",
+							uuid = "604d1e93-fa64-2d84-9bb6-f8a4de0eb3bc",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU",
+				mechanicTime = 40.3,
+				name = "[LPDU] OT Buster to A indicator",
+				timelineIndex = 11,
+				timerOffset = -5.5,
+				uuid = "3f066183-f48a-8699-8bac-1ddcdbf3c7e2",
+				version = 2,
+			},
 		},
 		
 		{
@@ -1250,50 +1222,9 @@ local tbl =
 			},
 			inheritedIndex = 11,
 		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current() == nil or roster.mySlot() ~= \"T2\" then\n    self.used = true\n    return\nend\nlocal player = TensorCore.mGetPlayer()\nif player == nil or player.pos == nil then\n    self.used = true\n    return\nend\nlocal sourcePos = player.pos\nlocal targetPos = { x = 112.41, y = 0, z = 86.11 }\nlocal heading = TensorCore.getHeadingToTarget(sourcePos, targetPos)\nlocal distance = TensorCore.getDistance2d(sourcePos, targetPos)\nlocal otBlue = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(40/255, 100/255, 220/255, .25), 2)\nif distance > 0.5 then\n    otBlue:addTimedArrow(5000, sourcePos.x, sourcePos.y, sourcePos.z, heading, distance, 1, 1, 1, 0, true)\nend\nAnyoneCore.addTimedWorldText(5000, \"OT Buster\", targetPos, GUI:ColorConvertFloat4ToU32(1, 1, 1, 1), true, 1.5, 0)\nself.used = true",
-							name = "OT arrow to A",
-							uuid = "604d1e93-fa64-2d84-9bb6-f8a4de0eb3bc",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-				},
-				displayPath = "LPDU",
-				mechanicTime = 40.3,
-				name = "[LPDU] OT Buster to A indicator",
-				timelineIndex = 11,
-				timerOffset = -5.5,
-				uuid = "3f066183-f48a-8699-8bac-1ddcdbf3c7e2",
-				version = 2,
-			},
-		},
 	},
 	[12] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "4d06ed6a-481d-f60e-9372-58407dbc317a",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -2088,17 +2019,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "36bb06a9-200c-97ad-dd37-46d73c5d2ef9",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "0d4a6a76-7e9f-2b12-b730-bae8656119a6",
 			},
@@ -2122,17 +2042,6 @@ local tbl =
 	},
 	[22] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "c07b454f-b7fd-6f13-1e90-e551ba5fb85f",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -2164,6 +2073,36 @@ local tbl =
 				uuid = "661328fb-4f04-0764-8ed3-14ee03f4d860",
 			},
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "AnyoneCore.Shotcall(\"Go to conga line\",true,3,false)\nself.used=true",
+							name = "Conga line reminder",
+							uuid = "82c9f3c4-768d-3368-9f33-0287b6a89c9f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU",
+				mechanicTime = 85.9,
+				name = "[LPDU] Go to conga line",
+				timelineIndex = 22,
+				timerOffset = 3.0999999046326,
+				uuid = "466d7c46-ce83-29c3-9b38-1c62181178f7",
+				version = 2,
+			},
 		},
 		
 		{
@@ -2285,36 +2224,6 @@ local tbl =
 		{
 			data = 
 			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "AnyoneCore.Shotcall(\"Go to conga line\",true,3,false)\nself.used=true",
-							name = "Conga line reminder",
-							uuid = "82c9f3c4-768d-3368-9f33-0287b6a89c9f",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-				},
-				displayPath = "LPDU",
-				mechanicTime = 85.9,
-				name = "[LPDU] Go to conga line",
-				timelineIndex = 22,
-				timerOffset = 3.0999999046326,
-				uuid = "466d7c46-ce83-29c3-9b38-1c62181178f7",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
 				displayPath = "",
 				name = "LPDU Draws",
 				uuid = "b3754a5d-7471-a57b-b60c-427ed4539e35",
@@ -2360,17 +2269,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "6add6c2e-1053-b0c2-c18e-db18bbee8c7e",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "f9e698a5-03e8-cb91-ae6f-612bd9411e55",
 			},
@@ -2394,17 +2292,6 @@ local tbl =
 	},
 	[25] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "85f13c64-e455-d760-4427-fdfab3f73074",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -2452,49 +2339,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "d1857271-27db-e735-f554-be2fbbc50441",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "bcdbf2ce-7db2-946a-d1ee-17f06ede4ffe",
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
-			objectType = "folder",
-		},
-	},
-	[29] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "b4f417b8-e36e-8b9c-975f-b80e3711e248",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-	},
-	[30] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "544a3262-f17f-4506-fd7d-aec839871e32",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
 			objectType = "folder",
 		},
 	},
@@ -2729,17 +2577,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "4220bf4d-df61-69a1-b312-85077707f31d",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "e8b76032-aa55-a1de-162d-eb381989be62",
 			},
@@ -2763,17 +2600,6 @@ local tbl =
 	},
 	[35] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "ebb1067f-9d31-d09b-771d-a935e36b000f",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -2813,17 +2639,6 @@ local tbl =
 	},
 	[39] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "290167db-aff0-fa3f-02c8-fb79c0653dab",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -2874,34 +2689,6 @@ local tbl =
 				uuid = "817ea404-d600-4cbf-955f-0aedf55dfb17",
 				version = 2,
 			},
-		},
-	},
-	[40] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "e4a9db7f-2922-7a8b-ed26-3161dc63d50f",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-	},
-	[44] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "83b97733-edb1-d017-6fe2-12d538214d83",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
 		},
 	},
 	[45] = 
@@ -3357,20 +3144,6 @@ local tbl =
 			},
 		},
 	},
-	[48] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "13f9efa7-796e-f463-fbce-7299def8eab7",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-	},
 	[49] = 
 	{
 		
@@ -3401,17 +3174,6 @@ local tbl =
 	},
 	[50] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "c0f9bd30-869f-8edc-4b2f-28fac5ff60c0",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -3590,17 +3352,6 @@ local tbl =
 	},
 	[57] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "fc1251a3-4540-7447-2598-105116de2af3",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -4086,17 +3837,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "edb55393-8ac3-60cf-4aae-c7fd809bd063",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\core",
 				uuid = "79329f72-6b5c-278e-5ffd-3d1c40796542",
 			},
@@ -4117,17 +3857,6 @@ local tbl =
 	},
 	[64] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "e93f1df9-6aba-dfdd-ef65-4bef9d1445c9",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -4449,17 +4178,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "b28c1528-3af1-6514-5ff0-8b82010afdb8",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "81aaac9b-7e6c-891f-ff21-f2d1e302fb4b",
 			},
@@ -4537,17 +4255,6 @@ local tbl =
 	},
 	[76] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "e5a8077c-a81e-c580-1ca4-1fbee27ab04c",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -4631,17 +4338,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "c794d995-ac8c-b099-69df-049f32b5cba5",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "5c72d34a-00d9-54c6-6757-7d804d6c713a",
 			},
@@ -4715,17 +4411,6 @@ local tbl =
 	},
 	[80] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "e5033c83-f0fc-7177-7074-468d263a6353",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -5014,20 +4699,6 @@ local tbl =
 			},
 		},
 	},
-	[89] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "5b1fcf5a-2717-31ae-8b97-217c1774b9ea",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-	},
 	[90] = 
 	{
 		
@@ -5230,17 +4901,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "b9624222-1b00-e9c6-30b8-ab0886d4a3f2",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "5b7c0a71-2f2d-95ed-43aa-a87bcb3c4321",
 			},
@@ -5388,17 +5048,6 @@ local tbl =
 	},
 	[95] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "cdf005d9-1291-fad5-8e7d-407b0128d329",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -5583,17 +5232,6 @@ local tbl =
 	},
 	[99] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "45ebc015-9e7e-5a99-eb88-1e1fb10cb225",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -6431,20 +6069,6 @@ local tbl =
 			objectType = "folder",
 		},
 	},
-	[119] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "ab6559a0-56f6-e02c-7357-efe65ee819f0",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-	},
 	[120] = 
 	{
 		
@@ -6459,33 +6083,8 @@ local tbl =
 			objectType = "folder",
 		},
 	},
-	[121] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "189cda8d-a7b5-4019-c2a3-4707d22c059d",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-	},
 	[123] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "9380e173-b121-b17f-91c1-92c19a4c8b03",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -6921,33 +6520,8 @@ local tbl =
 			},
 		},
 	},
-	[125] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "9db0cd59-0791-6a4d-2f8a-ae3bc633bbe9",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-	},
 	[126] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "1ec08d5e-19ba-dd62-4241-0f9c85cf166e",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -7024,20 +6598,6 @@ local tbl =
 				uuid = "3bcebba0-0c89-1f0c-d9d1-986a8d658ed0",
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
-			objectType = "folder",
-		},
-	},
-	[128] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "33bfb57c-00ab-46e8-91eb-1afe38edd58c",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
 			objectType = "folder",
 		},
 	},
@@ -7119,20 +6679,6 @@ local tbl =
 				uuid = "c9d41761-07e1-a3a5-39c8-c39f381bd391",
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
-			objectType = "folder",
-		},
-	},
-	[132] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "eca37e9d-fc2b-b1a9-3232-283304069fad",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
 			objectType = "folder",
 		},
 	},
@@ -7256,17 +6802,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "3600c92b-fa33-56f7-fdc9-bb55b4b2323b",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "e8c84614-3d8e-4208-a412-e18a803eef44",
 			},
@@ -7274,33 +6809,8 @@ local tbl =
 			objectType = "folder",
 		},
 	},
-	[139] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "2ae096da-4508-c096-07d0-7e3cd7b990aa",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-	},
 	[140] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "318a17fe-88de-ad72-9420-b87c2c17fe0e",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -8216,17 +7726,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "c23b9f26-7898-719a-4045-19d43cbb8876",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "8a580a4d-74d6-7d19-5f3f-d35f1f96ee7d",
 			},
@@ -8241,17 +7740,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "62424407-c8c5-9feb-78fd-dd8d71ef8cd7",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "c2368a38-5a13-3254-cdf9-86f2caebc0e8",
 			},
@@ -8261,17 +7749,6 @@ local tbl =
 	},
 	[150] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "5de4d985-a985-2039-9661-cc2bfd932dd5",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -8323,33 +7800,8 @@ local tbl =
 			objectType = "folder",
 		},
 	},
-	[153] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "f357bcfa-4a34-06be-b3c6-518c97385d4a",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-	},
 	[154] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "cdc0a451-93de-de6d-bbfc-a4377ad74c61",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -8392,17 +7844,6 @@ local tbl =
 	},
 	[156] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "8c6705d7-2844-6cd3-5117-cfb1c23c1327",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -8459,17 +7900,6 @@ local tbl =
 	},
 	[157] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "57330176-8d80-7282-3df6-18f806021cc6",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -8560,33 +7990,8 @@ local tbl =
 			},
 		},
 	},
-	[159] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "fad54c44-dc9f-7888-0f83-acb217e44214",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-	},
 	[162] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "207995c6-1641-b7ba-d538-07b426d30e16",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -8601,17 +8006,6 @@ local tbl =
 	},
 	[166] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "b1afd64a-6c9c-8136-9124-6e20535b941a",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -9758,7 +9152,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local roster=AnyoneCore.Roster\nif roster.current()==nil then return end\nlocal role=roster.mySlot()\nlocal settings=Settings.FFXIVMINION\nlocal replayDefaults\nif roster.isReady() then\n local mt=roster.entOf(\"T1\")\n local ot=roster.entOf(\"T2\")\n if mt and ot and ((mt.job==19 and ot.job==32) or (mt.job==32 and ot.job==19)) then\n  local pld=mt.job==19 and \"MT\" or \"OT\"\n  local drk=pld==\"MT\" and \"OT\" or \"MT\"\n  replayDefaults={\n   LPDU_FRU_P4AM1Mode=\"7-1 \"..pld..\" solo\",\n   LPDU_FRU_P4AM2Mode=\"7-1 \"..drk..\" solo\",\n   LPDU_FRU_HaloTank=pld, LPDU_FRU_ApocBait=drk,\n   LPDU_FRU_P4Bait=drk, LPDU_FRU_DarklitTank=drk..\" invulns\",\n   LPDU_FRU_P5FirstInvuln=pld\n  }\n  for key,value in pairs(replayDefaults) do\n   if settings[key]==nil then settings[key]=value end\n  end\n end\nend\nlocal mode=settings.LPDU_FRU_DarklitTank or \"OT invulns\"\nlocal bait=settings.LPDU_FRU_P4Bait or (mode==\"MT invulns\" and \"MT\" or \"OT\")\nlocal optionHelp={\n LPDU_FRU_P4AM1Mode=\"Changes the first P4 Akh Morn stack groups, solo-tank guidance and final-stack reminder. Both tanks and the party must match. Active/inherited LPDU mits also changes mitigation assignments and rejects unsupported combinations.\",\n LPDU_FRU_P4AM2Mode=\"Changes the second P4 Akh Morn stack groups, solo-tank guidance and final-stack reminder. With LPDU mits, the same tank cannot solo both sets.\",\n LPDU_FRU_HaloTank=\"Selects the P3 Black Halo tank. Changes the assigned tank guidance and LPDU mitigation owner; the other tank provides support.\",\n LPDU_FRU_ApocBait=\"Selects the P3 Apocalypse / Darkest Dance bait tank. Changes the far-bait guidance and LPDU mitigation assignments.\",\n LPDU_FRU_P4Bait=\"Selects the P4 Somber Dance far-bait tank and changes its guidance arrow. With Invuln both hits, this tank takes both hits; with Tank swap, the other tank takes the close hit. This does not change P5 invuln order.\",\n LPDU_FRU_P5FirstInvuln=\"Selects the invuln tank for the first P5 Wings set; the other tank invulns the second set. Changes invuln/bait versus cleave guidance and LPDU mitigation assignments. PLD cooldown restrictions may reject the plan when LPDU mits is active/inherited.\"\n}\nlocal function optionTooltip(key)\n if GUI:IsItemHovered() then GUI:SetTooltip(optionHelp[key]) end\nend\nlocal function tankChoice(label,key,default)\n local value=settings[key] or default\n GUI:Text(label);GUI:SameLine(190);GUI:PushItemWidth(150)\n local i=GUI:Combo(\"##\"..key,value==\"MT\" and 1 or 2,{\"MT\",\"OT\"})\n optionTooltip(key)\n GUI:PopItemWidth()\n local chosen=i==1 and \"MT\" or \"OT\"\n settings[key]=chosen;return chosen\nend\nlocal visible=GUI:Begin(\"[LPDU] FRU - Tank Settings\",true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n local function akhChoice(label,key,default)\n  local modes={\"4-4\",\"7-1 MT solo\",\"7-1 OT solo\"}\n  local value=settings[key] or default\n  GUI:Text(label);GUI:SameLine(190);GUI:PushItemWidth(150)\n  local i=GUI:Combo(\"##\"..key,value==modes[2] and 2 or (value==modes[3] and 3 or 1),modes)\n  optionTooltip(key)\n  GUI:PopItemWidth();settings[key]=modes[i]\n end\n akhChoice(\"P4 Akh Morn 1\",\"LPDU_FRU_P4AM1Mode\",\"4-4\")\n akhChoice(\"P4 Akh Morn 2\",\"LPDU_FRU_P4AM2Mode\",\"7-1 MT solo\")\n if replayDefaults then\n  GUI:Text(\"DRK/PLD defaults: first PLD solo; second DRK solo.\")\n else\n  GUI:Text(\"LPDU Mitsheet default: first 4-4; second MT solo / party with OT.\")\n end\n GUI:Text(\"Both tanks and party must agree on the grouping.\")\n tankChoice(\"P3 Halo tank\",\"LPDU_FRU_HaloTank\",\"MT\")\n tankChoice(\"P3 Apoc bait\",\"LPDU_FRU_ApocBait\",\"OT\")\n bait=tankChoice(\"P4 far bait\",\"LPDU_FRU_P4Bait\",bait)\n GUI:Text(\"P4 tank plan\");GUI:SameLine(190);GUI:PushItemWidth(150)\n local plan=GUI:Combo(\"##LPDUFRUP4Plan\",mode==\"Tank swap\" and 2 or 1,{\"Invuln both hits\",\"Tank swap\"})\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Changes P4 Somber Dance tank instructions and LPDU mitigation assignments. Invuln both hits uses the far-bait tank for both hits. Tank swap splits the hits; active/inherited LPDU mits requires first Akh Morn to use 4-4. Other choices remain available without LPDU mits.\") end\n GUI:PopItemWidth()\n settings.LPDU_FRU_DarklitTank=plan==2 and \"Tank swap\" or bait..\" invulns\"\n GUI:Text(plan==2 and (bait..\" far / other tank close\") or (bait..\" takes both hits\"))\n local first=tankChoice(\"P5 first invuln\",\"LPDU_FRU_P5FirstInvuln\",\"MT\")\n GUI:Text(\"P5: \"..first..\" first / \"..(first==\"MT\" and \"OT\" or \"MT\")..\" second\")\n GUI:Text(\"Confirm these assignments with your co-tank.\")\n GUI:Text(\"Both tanks must match settings.\")\n local planKeys={\"LPDU_FRU_P4AM1Mode\",\"LPDU_FRU_P4AM2Mode\",\"LPDU_FRU_HaloTank\",\"LPDU_FRU_ApocBait\",\"LPDU_FRU_P4Bait\",\"LPDU_FRU_DarklitTank\",\"LPDU_FRU_P5FirstInvuln\"}\n local function snapshot()\n  local result={}\n  for _,key in ipairs(planKeys) do result[key]=settings[key] end\n  return result\n end\n if GUI:Button(\"Save settings\") then\n  settings.LPDU_FRU_SavedTankPlan=snapshot()\n  data.lpdu_plan_message=\"Current tank plan saved.\"\n end\n if GUI:CollapsingHeader(\"Settings backup / sharing\") then\n  if GUI:Button(\"Export to clipboard\") then\n   local lines={\"LPDU-FRU-TANK-v1\"}\n   for _,key in ipairs(planKeys) do table.insert(lines,key..\"=\"..tostring(settings[key])) end\n   GUI:SetClipboardText(table.concat(lines,\"\\n\"))\n   data.lpdu_plan_message=\"Settings copied to clipboard.\"\n  end\n  GUI:SameLine()\n  if GUI:Button(\"Import from clipboard\") then\n   local text=GUI:GetClipboardText() or \"\"\n   local values={};local count=0;local valid=true\n   local allowed={}\n   for _,key in ipairs(planKeys) do allowed[key]=true end\n   local first=true\n   for line in string.gmatch(text,\"[^\\r\\n]+\") do\n    if first then valid=line==\"LPDU-FRU-TANK-v1\";first=false\n    else\n     local key,value=string.match(line,\"^([%w_]+)=(.+)$\")\n     local ok=key and allowed[key] and values[key]==nil\n     if ok and (key==planKeys[1] or key==planKeys[2]) then\n      ok=value==\"4-4\" or value==\"7-1 MT solo\" or value==\"7-1 OT solo\"\n     elseif ok and key==\"LPDU_FRU_DarklitTank\" then\n      ok=value==\"MT invulns\" or value==\"OT invulns\" or value==\"Tank swap\"\n     elseif ok then ok=value==\"MT\" or value==\"OT\" end\n     if not ok then valid=false else values[key]=value;count=count+1 end\n    end\n   end\n   if valid and count==#planKeys then\n    data.lpdu_plan_import=values;data.lpdu_plan_message=\"Review the imported plan, then Apply.\"\n   else data.lpdu_plan_import=nil;data.lpdu_plan_message=\"Invalid or incomplete LPDU tank settings.\" end\n  end\n  if data.lpdu_plan_import then\n   for _,key in ipairs(planKeys) do GUI:Text(string.gsub(key,\"LPDU_FRU_\",\"\")..\": \"..data.lpdu_plan_import[key]) end\n   if GUI:Button(\"Apply import\") then\n    for _,key in ipairs(planKeys) do settings[key]=data.lpdu_plan_import[key] end\n    data.lpdu_plan_import=nil\n    data.lpdu_plan_message=\"Imported. Selected tank plan retained.\"\n   end\n   GUI:SameLine()\n   if GUI:Button(\"Cancel import\") then data.lpdu_plan_import=nil end\n  end\n  if settings.LPDU_FRU_SavedTankPlan then\n   local loadSaved=GUI:Button(\"Load saved settings\")\n   if GUI:IsItemHovered() then GUI:SetTooltip(\"Load your previously saved tank settings. This replaces the current selections.\") end\n   if loadSaved then\n   for _,key in ipairs(planKeys) do\n    local value=settings.LPDU_FRU_SavedTankPlan[key]\n    if value~=nil then settings[key]=value end\n   end\n   data.lpdu_plan_message=\"Saved settings loaded.\"\n   end\n  end\n end\n if data.lpdu_plan_message then GUI:Text(data.lpdu_plan_message) end\nend\nGUI:End();self.used=true",
+							actionLua = "local roster=AnyoneCore.Roster\nif roster.current()==nil then return end\nlocal role=roster.mySlot()\nlocal settings=Settings.FFXIVMINION\nlocal replayDefaults\nif roster.isReady() then\n local mt=roster.entOf(\"T1\")\n local ot=roster.entOf(\"T2\")\n if mt and ot and ((mt.job==19 and ot.job==32) or (mt.job==32 and ot.job==19)) then\n  local pld=mt.job==19 and \"MT\" or \"OT\"\n  local drk=pld==\"MT\" and \"OT\" or \"MT\"\n  replayDefaults={\n   LPDU_FRU_P4AM1Mode=\"7-1 \"..pld..\" solo\",\n   LPDU_FRU_P4AM2Mode=\"7-1 \"..drk..\" solo\",\n   LPDU_FRU_HaloTank=pld, LPDU_FRU_ApocBait=drk,\n   LPDU_FRU_P4Bait=drk, LPDU_FRU_DarklitTank=drk..\" invulns\",\n   LPDU_FRU_P5FirstInvuln=pld\n  }\n  for key,value in pairs(replayDefaults) do\n   if settings[key]==nil then settings[key]=value end\n  end\n end\nend\nlocal mode=settings.LPDU_FRU_DarklitTank or \"OT invulns\"\nlocal bait=settings.LPDU_FRU_P4Bait or (mode==\"MT invulns\" and \"MT\" or \"OT\")\nlocal optionHelp={\n LPDU_FRU_P4AM1Mode=\"Changes the first P4 Akh Morn stack groups, solo-tank guidance and final-stack reminder. Both tanks and the party must match. Active/inherited LPDU mits also changes mitigation assignments and rejects unsupported combinations.\",\n LPDU_FRU_P4AM2Mode=\"Changes the second P4 Akh Morn stack groups, solo-tank guidance and final-stack reminder. With LPDU mits, the same tank cannot solo both sets.\",\n LPDU_FRU_HaloTank=\"Selects the P3 Black Halo tank. Changes the assigned tank guidance and LPDU mitigation owner; the other tank provides support.\",\n LPDU_FRU_ApocBait=\"Selects the P3 Apocalypse / Darkest Dance bait tank. Changes the far-bait guidance and LPDU mitigation assignments.\",\n LPDU_FRU_P4Bait=\"Selects the P4 Somber Dance far-bait tank and changes its guidance arrow. With Invuln both hits, this tank takes both hits; with Tank swap, the other tank takes the close hit. This does not change P5 invuln order.\",\n LPDU_FRU_P5FirstInvuln=\"Selects the invuln tank for the first P5 Wings set; the other tank invulns the second set. Changes invuln/bait versus cleave guidance and LPDU mitigation assignments. PLD cooldown restrictions may reject the plan when LPDU mits is active/inherited.\"\n}\nlocal function optionTooltip(key)\n if GUI:IsItemHovered() then GUI:SetTooltip(optionHelp[key]) end\nend\nlocal function tankChoice(label,key,default)\n local value=settings[key] or default\n GUI:Text(label);GUI:SameLine(190);GUI:PushItemWidth(150)\n local i=GUI:Combo(\"##\"..key,value==\"MT\" and 1 or 2,{\"MT\",\"OT\"})\n optionTooltip(key)\n GUI:PopItemWidth()\n local chosen=i==1 and \"MT\" or \"OT\"\n settings[key]=chosen;return chosen\nend\nlocal visible=GUI:Begin(\"[LPDU] FRU - Tank Settings\",true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n local function akhChoice(label,key,default)\n  local modes={\"4-4\",\"7-1 MT solo\",\"7-1 OT solo\"}\n  local value=settings[key] or default\n  GUI:Text(label);GUI:SameLine(190);GUI:PushItemWidth(150)\n  local i=GUI:Combo(\"##\"..key,value==modes[2] and 2 or (value==modes[3] and 3 or 1),modes)\n  optionTooltip(key)\n  GUI:PopItemWidth();settings[key]=modes[i]\n end\n akhChoice(\"P4 Akh Morn 1\",\"LPDU_FRU_P4AM1Mode\",\"4-4\")\n akhChoice(\"P4 Akh Morn 2\",\"LPDU_FRU_P4AM2Mode\",\"7-1 MT solo\")\n if data.lpdu_fru_gnb_v3_defaults and TensorCore.mGetPlayer().job==37 then\n  GUI:Text(\"GNB V3 defaults: MT Halo/Somber; OT Apoc / first P5 invuln.\")\n  GUI:Text(\"Match the GNB ACR MT/OT role to the party roster.\")\n elseif replayDefaults then\n  GUI:Text(\"DRK/PLD defaults: first PLD solo; second DRK solo.\")\n else\n  GUI:Text(\"LPDU Mitsheet default: first 4-4; second MT solo / party with OT.\")\n end\n GUI:Text(\"Both tanks and party must agree on the grouping.\")\n tankChoice(\"P3 Halo tank\",\"LPDU_FRU_HaloTank\",\"MT\")\n tankChoice(\"P3 Apoc bait\",\"LPDU_FRU_ApocBait\",\"OT\")\n bait=tankChoice(\"P4 far bait\",\"LPDU_FRU_P4Bait\",bait)\n GUI:Text(\"P4 tank plan\");GUI:SameLine(190);GUI:PushItemWidth(150)\n local plan=GUI:Combo(\"##LPDUFRUP4Plan\",mode==\"Tank swap\" and 2 or 1,{\"Invuln both hits\",\"Tank swap\"})\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Changes P4 Somber Dance tank instructions and LPDU mitigation assignments. Invuln both hits uses the far-bait tank for both hits. Tank swap splits the hits; active/inherited LPDU mits requires first Akh Morn to use 4-4. Other choices remain available without LPDU mits.\") end\n GUI:PopItemWidth()\n settings.LPDU_FRU_DarklitTank=plan==2 and \"Tank swap\" or bait..\" invulns\"\n GUI:Text(plan==2 and (bait..\" far / other tank close\") or (bait..\" takes both hits\"))\n local first=tankChoice(\"P5 first invuln\",\"LPDU_FRU_P5FirstInvuln\",\"MT\")\n GUI:Text(\"P5: \"..first..\" first / \"..(first==\"MT\" and \"OT\" or \"MT\")..\" second\")\n GUI:Text(\"Confirm these assignments with your co-tank.\")\n GUI:Text(\"Both tanks must match settings.\")\n local planKeys={\"LPDU_FRU_P4AM1Mode\",\"LPDU_FRU_P4AM2Mode\",\"LPDU_FRU_HaloTank\",\"LPDU_FRU_ApocBait\",\"LPDU_FRU_P4Bait\",\"LPDU_FRU_DarklitTank\",\"LPDU_FRU_P5FirstInvuln\"}\n local function snapshot()\n  local result={}\n  for _,key in ipairs(planKeys) do result[key]=settings[key] end\n  return result\n end\n if GUI:Button(\"Save settings\") then\n  settings.LPDU_FRU_SavedTankPlan=snapshot()\n  data.lpdu_plan_message=\"Current tank plan saved.\"\n end\n if GUI:CollapsingHeader(\"Settings backup / sharing\") then\n  if GUI:Button(\"Export to clipboard\") then\n   local lines={\"LPDU-FRU-TANK-v1\"}\n   for _,key in ipairs(planKeys) do table.insert(lines,key..\"=\"..tostring(settings[key])) end\n   GUI:SetClipboardText(table.concat(lines,\"\\n\"))\n   data.lpdu_plan_message=\"Settings copied to clipboard.\"\n  end\n  GUI:SameLine()\n  if GUI:Button(\"Import from clipboard\") then\n   local text=GUI:GetClipboardText() or \"\"\n   local values={};local count=0;local valid=true\n   local allowed={}\n   for _,key in ipairs(planKeys) do allowed[key]=true end\n   local first=true\n   for line in string.gmatch(text,\"[^\\r\\n]+\") do\n    if first then valid=line==\"LPDU-FRU-TANK-v1\";first=false\n    else\n     local key,value=string.match(line,\"^([%w_]+)=(.+)$\")\n     local ok=key and allowed[key] and values[key]==nil\n     if ok and (key==planKeys[1] or key==planKeys[2]) then\n      ok=value==\"4-4\" or value==\"7-1 MT solo\" or value==\"7-1 OT solo\"\n     elseif ok and key==\"LPDU_FRU_DarklitTank\" then\n      ok=value==\"MT invulns\" or value==\"OT invulns\" or value==\"Tank swap\"\n     elseif ok then ok=value==\"MT\" or value==\"OT\" end\n     if not ok then valid=false else values[key]=value;count=count+1 end\n    end\n   end\n   if valid and count==#planKeys then\n    data.lpdu_plan_import=values;data.lpdu_plan_message=\"Review the imported plan, then Apply.\"\n   else data.lpdu_plan_import=nil;data.lpdu_plan_message=\"Invalid or incomplete LPDU tank settings.\" end\n  end\n  if data.lpdu_plan_import then\n   for _,key in ipairs(planKeys) do GUI:Text(string.gsub(key,\"LPDU_FRU_\",\"\")..\": \"..data.lpdu_plan_import[key]) end\n   if GUI:Button(\"Apply import\") then\n    for _,key in ipairs(planKeys) do settings[key]=data.lpdu_plan_import[key] end\n    data.lpdu_plan_import=nil\n    data.lpdu_plan_message=\"Imported. Selected tank plan retained.\"\n   end\n   GUI:SameLine()\n   if GUI:Button(\"Cancel import\") then data.lpdu_plan_import=nil end\n  end\n  if settings.LPDU_FRU_SavedTankPlan then\n   local loadSaved=GUI:Button(\"Load saved settings\")\n   if GUI:IsItemHovered() then GUI:SetTooltip(\"Load your previously saved tank settings. This replaces the current selections.\") end\n   if loadSaved then\n   for _,key in ipairs(planKeys) do\n    local value=settings.LPDU_FRU_SavedTankPlan[key]\n    if value~=nil then settings[key]=value end\n   end\n   data.lpdu_plan_message=\"Saved settings loaded.\"\n   end\n  end\n end\n if data.lpdu_plan_message then GUI:Text(data.lpdu_plan_message) end\nend\nGUI:End();self.used=true",
 							name = "Tank Assignment Settings",
 							uuid = "b30d107e-8913-ca60-a4fb-363ee2bb14c3",
 							version = 2.1,
@@ -10118,17 +9512,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "9337e3f1-940c-af95-fef6-0def70b2de01",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "6e7b144e-464f-694a-7ea2-1330e7775e3e",
 			},
@@ -10152,17 +9535,6 @@ local tbl =
 	},
 	[175] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "6dd30d1a-f3ae-ff86-06db-eb04f441e5ea",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -10322,17 +9694,6 @@ local tbl =
 	},
 	[179] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "2c8fddae-0783-31a2-08c2-b9d824f7293e",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -11824,17 +11185,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "903c0ccf-e76a-e7db-abe4-90118040641f",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "b542a490-29e6-dce4-aad2-cc6e1bd54d00",
 			},
@@ -11932,33 +11282,8 @@ local tbl =
 			},
 		},
 	},
-	[195] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "55b203e4-f9a4-1be8-ea34-3cbadc08a534",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-	},
 	[201] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "391020e4-a9e1-3610-4ed4-4fe6bf66c234",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -11973,17 +11298,6 @@ local tbl =
 	},
 	[202] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "34191f43-c1cb-fb8f-4c65-cb81f4740253",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -12085,17 +11399,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "e9d9eb29-5568-ee9d-f0da-1dfb75b4b5b9",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "af915ef6-8cde-a9e2-4a5d-8b84ddd076e6",
 			},
@@ -12172,17 +11475,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "1dfc50ae-17e8-19b2-3f45-595c16639c3e",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\core",
 				uuid = "9ab427ed-021d-12e1-d243-f25b685f503d",
 			},
@@ -12207,17 +11499,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "4982aecc-465a-85f8-00aa-16be54fededc",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "371c29a7-0659-a30b-7399-b815ee756417",
 			},
@@ -12233,65 +11514,6 @@ local tbl =
 				uuid = "f374dd05-d80b-ab5a-8b1c-6e2ded1a03dc",
 			},
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "if data.p5_exa == nil then data.p5_exa = {} end\nlocal ent = TensorCore.mGetEntity(eventArgs.entityID)\ntable.insert(data.p5_exa,{pos = ent.pos})\nif table.size(data.p5_exa) == 8 then\n    local cross = (data.p5_exa[1].pos.x - 100) * (data.p5_exa[5].pos.z-100) - (data.p5_exa[1].pos.z-100) * (data.p5_exa[5].pos.x-100)\n    if cross < 0 then\n        TensorCore.addAlertText(20000,\"right\",1,1,true)\n    else\n        TensorCore.addAlertText(20000,\"left\",1,1,true)\n    end\nend\nself.used = true",
-							conditions = 
-							{
-								
-								{
-									"61efd7d8-6b94-ae3d-96ee-c5e0eeda5d16",
-									true,
-								},
-							},
-							uuid = "feafca53-8758-847e-baa6-31e71e081e82",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Event",
-							dequeueIfLuaFalse = true,
-							eventArgOptionType = 3,
-							eventArgType = 2,
-							spellIDList = 
-							{
-								40118,
-								40307,
-							},
-							uuid = "61efd7d8-6b94-ae3d-96ee-c5e0eeda5d16",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "LPDU",
-				eventType = 3,
-				loop = true,
-				mechanicTime = 984.8,
-				name = "Draw Exasquares2 [AnyoneCore test needed]",
-				timeRange = true,
-				timelineIndex = 209,
-				timerEndOffset = 30,
-				timerStartOffset = -200,
-				uuid = "90296038-c452-055f-948c-55b40c5ba004",
-				version = 2,
-			},
-			inheritedIndex = 7,
 		},
 		
 		{
@@ -12409,20 +11631,68 @@ local tbl =
 				version = 2,
 			},
 		},
-	},
-	[215] = 
-	{
 		
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "e491f8cb-9c85-fcbf-698c-cba53c4ac1db",
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "if data.p5_exa == nil then data.p5_exa = {} end\nlocal ent = TensorCore.mGetEntity(eventArgs.entityID)\ntable.insert(data.p5_exa,{pos = ent.pos})\nif table.size(data.p5_exa) == 8 then\n    local cross = (data.p5_exa[1].pos.x - 100) * (data.p5_exa[5].pos.z-100) - (data.p5_exa[1].pos.z-100) * (data.p5_exa[5].pos.x-100)\n    if cross < 0 then\n        TensorCore.addAlertText(20000,\"right\",1,1,true)\n    else\n        TensorCore.addAlertText(20000,\"left\",1,1,true)\n    end\nend\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"61efd7d8-6b94-ae3d-96ee-c5e0eeda5d16",
+									true,
+								},
+							},
+							uuid = "feafca53-8758-847e-baa6-31e71e081e82",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							spellIDList = 
+							{
+								40118,
+								40307,
+							},
+							uuid = "61efd7d8-6b94-ae3d-96ee-c5e0eeda5d16",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 984.8,
+				name = "Draw Exasquares2 [AnyoneCore test needed]",
+				timeRange = true,
+				timelineIndex = 209,
+				timerEndOffset = 30,
+				timerStartOffset = -200,
+				uuid = "90296038-c452-055f-948c-55b40c5ba004",
+				version = 2,
 			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
+			inheritedIndex = 7,
 		},
+	},
+	[215] = 
+	{
 		
 		{
 			data = 
@@ -12553,17 +11823,6 @@ local tbl =
 	},
 	[218] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "b29dd88e-71b6-c50a-363b-15d063e8d41e",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -13316,17 +12575,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "5ee5bd7d-3686-1451-9def-00a7632c980d",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "LPDU",
 				uuid = "d49f98a1-86fc-eeee-9d1f-1cbeb0b9beaf",
 			},
@@ -13695,17 +12943,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "74278102-2b01-0f26-bc10-c0c476a19e12",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "LPDU",
 				uuid = "592249a2-0f29-2f3d-9a02-08d57dd6ac01",
 			},
@@ -13767,17 +13004,6 @@ local tbl =
 	},
 	[237] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "0eeb7b53-cb07-b407-7d71-febd47ce4463",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -14690,17 +13916,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "8aceeede-70de-8f82-eace-3074f1dd77ee",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "8e1dcbb5-054c-76d1-b556-20ff7f09d9e5",
 			},
@@ -14710,17 +13925,6 @@ local tbl =
 	},
 	[247] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "f5316b22-2d92-23be-a402-cce000b99232",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -15036,20 +14240,6 @@ local tbl =
 			},
 		},
 	},
-	[253] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "65ece87d-fe14-3561-75ff-78836a33c30d",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-	},
 	[254] = 
 	{
 		
@@ -15253,17 +14443,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "925bc9b5-ff6f-1259-ad5e-c597af7bc205",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "ffbc46ea-7ce8-7206-6d15-1d289d5b101a",
 			},
@@ -15405,17 +14584,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "Frureactions\\lpdu mits",
-				uuid = "227d5193-dd01-9ce7-5594-5f491662d6a3",
-			},
-			inheritanceRoot = "Frureactions\\lpdu mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "store\\anyone\\fru\\modules\\draws",
 				uuid = "f88a4c6c-51a7-d518-7c5b-e616d11c0c5c",
 			},
@@ -15427,7 +14595,6 @@ local tbl =
 	{
 		"store\\anyone\\fru\\modules\\core",
 		"store\\anyone\\fru\\modules\\draws",
-		"Frureactions\\lpdu mits",
 	},
 	timelineName = "fru",
 	version = "1.0.5",
