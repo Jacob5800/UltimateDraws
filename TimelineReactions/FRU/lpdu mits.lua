@@ -36,7 +36,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Mantra Cyclonic Break",
 							uuid = "876c5273-a45a-696e-a773-6d934a509b7d",
 							version = 2.1,
@@ -108,7 +107,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Magick Barrier Cyclonic Break",
 							uuid = "a6884baa-224f-f73e-a062-03fb1ef59951",
 							version = 2.1,
@@ -181,7 +179,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M1 Feint Cyclonic Break",
 							targetType = "Enemy",
@@ -255,7 +252,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] R2 Addle 2 Cyclonic Break",
 							targetType = "Enemy",
 							uuid = "dfddf30c-8656-44b7-b418-61b78459953b",
@@ -327,7 +323,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Tempera Grassa Cyclonic Break",
 							uuid = "ba183fee-9927-7cc1-874c-0e401c3d032b",
 							version = 2.1,
@@ -417,6 +412,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16889,
 							conditions = 
 							{
@@ -437,8 +433,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
 							name = "[LPDU] R2 Tactician - Cyclonic Break",
 							uuid = "594e250f-b827-24c8-83ff-3c3daa0d8944",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -605,7 +603,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
 							name = "[LPDU] Nature's Minne Cyclonic Break",
 							uuid = "9dac7927-0950-4263-af69-ed93a53ae8d4",
@@ -2247,7 +2244,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Improvisation Utopian Sky",
 							uuid = "7d5f0821-1cbc-01cb-a259-18cdbb3ccf56",
 							version = 2.1,
@@ -3293,6 +3289,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16889,
 							conditions = 
 							{
@@ -3313,8 +3310,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
 							name = "[LPDU] R1 Tactician - Burnished Glory 1",
 							uuid = "53a2fd27-021c-785e-a82c-b5f24a8e39b6",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -3465,6 +3464,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 2887,
 							conditions = 
 							{
@@ -3479,9 +3479,10 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Dismantle",
 							name = "[LPDU] Dismantle Burnished Glory 1",
 							uuid = "216c2448-fb13-802e-9c7b-2970ec87d7bb",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -3551,7 +3552,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] R1 Addle Burnished Glory 1",
 							targetType = "Enemy",
 							uuid = "3c30bef5-7e23-6de3-9973-1e61e061de0a",
@@ -3624,7 +3624,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M2 Feint Burnished Glory 1",
 							targetType = "Enemy",
@@ -4404,7 +4403,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M1 Feint Burnished Glory 2",
 							targetType = "Enemy",
@@ -4478,7 +4476,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] R2 Addle 2 Burnished Glory 2",
 							targetType = "Enemy",
 							uuid = "24d845ce-fb58-97d3-a3c3-312c9b96d4c9",
@@ -4569,6 +4566,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16889,
 							conditions = 
 							{
@@ -4589,8 +4587,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
 							name = "[LPDU] R1 Tactician - Burnished Glory 2",
 							uuid = "122537c7-032f-267b-9ce5-d24ebac8a456",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -7297,7 +7297,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Tempera Grassa Diamond Dust",
 							uuid = "28545059-7570-8309-a0b8-308942848432",
 							version = 2.1,
@@ -7369,7 +7368,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Magick Barrier Diamond Dust",
 							uuid = "e97f9e12-fc7a-f5da-a55a-6d90f7972886",
 							version = 2.1,
@@ -7442,7 +7440,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M2 Feint Diamond Dust",
 							targetType = "Enemy",
@@ -7517,7 +7514,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
 							name = "[LPDU] Nature's Minne Diamond Dust",
 							uuid = "3334c4f0-b8f4-cfef-a91a-d9e4a134f1c8",
@@ -7591,7 +7587,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] R1 Addle Diamond Dust",
 							targetType = "Enemy",
 							uuid = "53886910-b2db-94ac-85ef-80cfd0475853",
@@ -7663,7 +7658,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Mantra Diamond Dust",
 							uuid = "7cb25238-a73b-6dbc-8359-e11028e62d89",
 							version = 2.1,
@@ -7753,6 +7747,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16889,
 							conditions = 
 							{
@@ -7773,8 +7768,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
 							name = "[LPDU] R2 Tactician - Diamond Dust",
 							uuid = "ae4704c7-17ee-3698-af90-c8d424e24410",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -8242,6 +8239,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16889,
 							conditions = 
 							{
@@ -8262,8 +8260,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
 							name = "[LPDU] R1 Tactician - Diamond Dust Knockback",
 							uuid = "6d7dbffe-fb55-1333-b563-d86da5c1b344",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -8428,7 +8428,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Improvisation Diamond Dust Knockback",
 							uuid = "8f981874-19ee-0b13-8255-5c7d2544f3ed",
 							version = 2.1,
@@ -8924,7 +8923,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M1 Feint Hallowed Ray",
 							targetType = "Enemy",
@@ -8998,7 +8996,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] R2 Addle 2 Hallowed Ray",
 							targetType = "Enemy",
 							uuid = "4f2b079c-01fe-865f-831e-9cc7afb2afc1",
@@ -9057,6 +9054,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 2887,
 							conditions = 
 							{
@@ -9071,9 +9069,10 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Dismantle",
 							name = "[LPDU] Dismantle Hallowed Ray",
 							uuid = "6221801e-8425-0f29-ae53-17a005bfc098",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -9161,6 +9160,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16889,
 							conditions = 
 							{
@@ -9181,8 +9181,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
 							name = "[LPDU] R2 Tactician - Hallowed Ray",
 							uuid = "5e497998-231c-4990-a853-59eb9059c863",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -10229,7 +10231,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M2 Feint Banish III + Light Rampant",
 							targetType = "Enemy",
@@ -10303,7 +10304,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] R1 Addle Banish III + Light Rampant",
 							targetType = "Enemy",
 							uuid = "237a847a-d974-5335-8776-2259d786d1ec",
@@ -10674,7 +10674,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Tempera Grassa Light Rampant",
 							uuid = "bca0e267-4eb0-0ca2-9abe-cf4ae95f17e5",
 							version = 2.1,
@@ -10764,6 +10763,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16889,
 							conditions = 
 							{
@@ -10784,8 +10784,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
 							name = "[LPDU] R1 Tactician - Light Rampant",
 							uuid = "9a548f82-1432-464c-874e-4150b33a7756",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -10950,7 +10952,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Mantra Light Rampant",
 							uuid = "b8649d41-21b5-f516-a82d-cc3198555871",
 							version = 2.1,
@@ -11023,7 +11024,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
 							name = "[LPDU] Nature's Minne Light Rampant",
 							uuid = "d6d9dc27-4ad5-91d9-871d-b0edb2f836d7",
@@ -11097,7 +11097,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Magick Barrier Light Rampant",
 							uuid = "3775b1ca-d88e-bfad-8fdf-54a31b2645ae",
 							version = 2.1,
@@ -11714,7 +11713,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M1 Feint Absolute Zero",
 							targetType = "Enemy",
@@ -11806,6 +11804,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16889,
 							conditions = 
 							{
@@ -11826,8 +11825,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
 							name = "[LPDU] R2 Tactician - Absolute Zero",
 							uuid = "3ee8c56d-6660-00a2-bcde-e1f2afca7dd7",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -11992,7 +11993,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] R2 Addle 2 Absolute Zero",
 							targetType = "Enemy",
 							uuid = "f61dc7d5-ffe1-4063-b928-6256e33c14f3",
@@ -12265,7 +12265,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Improvisation P3 Transition",
 							uuid = "6ba42a5c-3d21-1b47-9bc8-e93c40eae49c",
 							version = 2.1,
@@ -12960,7 +12959,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M1 Feint Ultimate Relativity",
 							targetType = "Enemy",
@@ -13035,7 +13033,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
 							name = "[LPDU] Nature's Minne Ultimate Relativity",
 							uuid = "25d12872-8cd1-bc55-bd9e-f09394d6b260",
@@ -13109,7 +13106,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] R1 Addle Ultimate Relativity",
 							targetType = "Enemy",
 							uuid = "c3a44e51-d8ff-d39c-9e82-af94bdd61848",
@@ -13181,7 +13177,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Mantra Ultimate Relativity",
 							uuid = "7eaf6205-b26d-5709-b457-3beeddd84c86",
 							version = 2.1,
@@ -13271,6 +13266,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16889,
 							conditions = 
 							{
@@ -13291,8 +13287,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
 							name = "[LPDU] R2 Tactician - Ultimate Relativity",
 							uuid = "39b659fa-8322-f044-be09-b507070d193b",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -13443,6 +13441,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 2887,
 							conditions = 
 							{
@@ -13457,9 +13456,10 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Dismantle",
 							name = "[LPDU] Dismantle Ultimate Relativity",
 							uuid = "bcd46014-8e97-fb59-b40d-3550f0ec9a64",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -13529,7 +13529,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Magick Barrier Ultimate Relativity",
 							uuid = "07d2414d-4fc6-fab6-b44c-f520922edc7b",
 							version = 2.1,
@@ -13614,7 +13613,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Tempera Grassa Dark Fire III",
 							uuid = "834ec0cb-eb26-0cba-b665-cb8f3eb54028",
 							version = 2.1,
@@ -13704,6 +13702,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16889,
 							conditions = 
 							{
@@ -13724,8 +13723,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
 							name = "[LPDU] R1 Tactician - Dark Fire III",
 							uuid = "74879a34-1a0a-d68a-961c-82c67a73d599",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -14336,7 +14337,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M2 Feint Shell Crusher + Shockwave Pulsar",
 							targetType = "Enemy",
@@ -14410,7 +14410,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] R2 Addle 2 Shell Crusher + Shockwave Pulsar",
 							targetType = "Enemy",
 							uuid = "c6a2ed18-4f21-5239-b996-97f98827e152",
@@ -17396,7 +17395,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
 							name = "[LPDU] Nature's Minne Shockwave Pulsar + Memory's End",
 							uuid = "e936dc79-1ac0-d52e-8305-1169f60c0bbc",
@@ -17471,7 +17469,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M1 Feint Shockwave Pulsar + Memory's End",
 							targetType = "Enemy",
@@ -17545,7 +17542,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Mantra Shockwave Pulsar + Memory's End",
 							uuid = "c89da4a7-864c-9899-95b4-25fedebbc9a3",
 							version = 2.1,
@@ -17617,7 +17613,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] R1 Addle Shockwave Pulsar + Memory's End",
 							targetType = "Enemy",
 							uuid = "a248acbc-b611-d0a0-a8f4-190c8ebd06db",
@@ -17689,7 +17684,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Improvisation Shockwave Pulsar + Memory's End",
 							uuid = "e7c218e3-b99c-2b73-afd1-06bf3d46170b",
 							version = 2.1,
@@ -17779,6 +17773,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16889,
 							conditions = 
 							{
@@ -17799,8 +17794,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
 							name = "[LPDU] R2 Tactician - Shockwave Pulsar + Memory's End",
 							uuid = "94614015-2ebc-b610-a871-03ef376eeefc",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -17965,7 +17962,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Tempera Grassa Shockwave Pulsar + Memory's End",
 							uuid = "0b4f87a3-375b-407f-a771-5895413bf2f9",
 							version = 2.1,
@@ -19274,6 +19270,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 2887,
 							conditions = 
 							{
@@ -19288,9 +19285,10 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Dismantle",
 							name = "[LPDU] Dismantle Darklit Dragonsong",
 							uuid = "591026fe-4778-7131-a092-1f3d2046eaea",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -19378,6 +19376,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16889,
 							conditions = 
 							{
@@ -19398,8 +19397,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
 							name = "[LPDU] R1 Tactician - Darklit Dragonsong",
 							uuid = "3dc6859b-1605-f82d-9571-e421c8a80cb4",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -19565,7 +19566,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M2 Feint Darklit Dragonsong (Ryne)",
 							targetType = "Enemy",
@@ -19639,7 +19639,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] R2 Addle 2 Darklit Dragonsong",
 							targetType = "Enemy",
 							uuid = "4e2d7072-9e72-2006-9fc6-2ca5f5696624",
@@ -21247,6 +21246,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16889,
 							conditions = 
 							{
@@ -21267,8 +21267,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
 							name = "[LPDU] R2 Tactician - P4 Akh Morn 1",
 							uuid = "bb329436-d260-5bbd-b027-57e32170ff67",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -22963,7 +22965,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M1 Feint Crystallize Time (Gaia)",
 							targetType = "Enemy",
@@ -23037,7 +23038,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Magick Barrier Crystallize Time",
 							uuid = "3a1d16ca-daa4-a278-b1d2-438095d52520",
 							version = 2.1,
@@ -23109,7 +23109,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] R1 Addle Crystallize Time",
 							targetType = "Enemy",
 							uuid = "ec4eda11-e6a1-56c1-a850-4cecfc93ac25",
@@ -23181,7 +23180,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Mantra Crystallize Time",
 							uuid = "5790a44c-c21c-8a39-9c67-879fad652bed",
 							version = 2.1,
@@ -23271,6 +23269,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16889,
 							conditions = 
 							{
@@ -23291,8 +23290,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
 							name = "[LPDU] R1 Tactician - Crystallize Time Rewind",
 							uuid = "657905de-13af-e3a6-88ab-99023d165f00",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -23457,7 +23458,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Improvisation Crystallize Time",
 							uuid = "170a2ac7-3be6-4315-a702-0c0989ca824f",
 							version = 2.1,
@@ -23530,7 +23530,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
 							name = "[LPDU] Nature's Minne Crystallize Time",
 							uuid = "3d277800-6774-1130-bf8d-ddb42fa03cce",
@@ -23604,7 +23603,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Tempera Grassa Crystallize Time Rewind",
 							uuid = "590481f7-431a-31a6-9bbd-a5523d930b3a",
 							version = 2.1,
@@ -24939,6 +24937,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 2887,
 							conditions = 
 							{
@@ -24953,9 +24952,10 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Dismantle",
 							name = "[LPDU] Dismantle Akh Morn on Ryne",
 							uuid = "a4ecb823-fb71-b9d2-9137-a18a38927680",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -25026,7 +25026,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M2 Feint Post-CT Akh Morn + Morn Afah",
 							targetType = "Enemy",
@@ -25118,6 +25117,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16889,
 							conditions = 
 							{
@@ -25138,8 +25138,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
 							name = "[LPDU] R2 Tactician - P4 Akh Morn 2 + Morn Afah",
 							uuid = "a862ca7d-e226-7ac3-8996-6dbb367a8bbb",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -26860,7 +26862,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M1 Feint Fulgent Blade",
 							targetType = "Enemy",
@@ -26952,6 +26953,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16889,
 							conditions = 
 							{
@@ -26972,8 +26974,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
 							name = "[LPDU] R1 Tactician - Fulgent Blade 1",
 							uuid = "9687ad47-c527-f6b7-bf88-c9e36a4845ba",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -27338,7 +27342,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] R1 Addle P5 Akh Morn 1",
 							targetType = "Enemy",
 							uuid = "8b3d234a-4c44-7101-bb76-06749a2642d5",
@@ -27428,6 +27431,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16889,
 							conditions = 
 							{
@@ -27448,8 +27452,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
 							name = "[LPDU] R2 Tactician - P5 Akh Morn 1",
 							uuid = "49b88bdd-0b45-7cd5-bbf6-683ceefa7908",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -27615,7 +27621,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M2 Feint P5 Akh Morn 1",
 							targetType = "Enemy",
@@ -27689,7 +27694,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Tempera Grassa P5 Akh Morn 1",
 							uuid = "cd385a43-16dd-3a50-8e3e-f43ab4a7021e",
 							version = 2.1,
@@ -27761,7 +27765,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Improvisation P5 Akh Morn 1",
 							uuid = "035d94ef-7772-1ec7-bcde-1b891f1dc217",
 							version = 2.1,
@@ -27819,6 +27822,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 2887,
 							conditions = 
 							{
@@ -27833,9 +27837,10 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Dismantle",
 							name = "[LPDU] Dismantle P5 Akh Morn 1",
 							uuid = "39ac086d-edcb-1a2d-891d-cc474c7c1120",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -29907,7 +29912,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Magick Barrier Polarizing Strikes 1",
 							uuid = "8ce8d8ca-a608-cafb-ac12-4e4fdce70a9d",
 							version = 2.1,
@@ -29980,7 +29984,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
 							name = "[LPDU] Nature's Minne Polarizing Strikes 1",
 							uuid = "6a1c1be2-3ccf-c312-a448-e555e40b00c2",
@@ -30054,7 +30057,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Mantra Polarizing Strikes 1",
 							uuid = "7a720b3b-871c-4b18-95bf-ecd44dd4ec2d",
 							version = 2.1,
@@ -30126,7 +30128,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] R2 Addle 2 Polarizing Strikes 1",
 							targetType = "Enemy",
 							uuid = "1b7cad82-e0cf-f0eb-a4cf-c8b0c010a71a",
@@ -30600,7 +30601,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M1 Feint Fulgent Blade",
 							targetType = "Enemy",
@@ -30692,6 +30692,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16889,
 							conditions = 
 							{
@@ -30712,8 +30713,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
 							name = "[LPDU] R1 Tactician - Fulgent Blade 2",
 							uuid = "9f6e4122-404f-c3f6-9ffa-9a31753fff29",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -30891,7 +30894,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] R1 Addle P5 Akh Morn 2",
 							targetType = "Enemy",
 							uuid = "488e224b-afcc-72d4-8d86-abed7b459098",
@@ -30981,6 +30983,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16889,
 							conditions = 
 							{
@@ -31001,8 +31004,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
 							name = "[LPDU] R2 Tactician - P5 Akh Morn 2",
 							uuid = "1fd0ae51-a64b-374c-b94b-fa9a214e9fa0",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -31167,7 +31172,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Tempera Grassa P5 Akh Morn 2",
 							uuid = "bd2c6bf4-8ebf-b6f5-b58f-8898757dd8b1",
 							version = 2.1,
@@ -31240,7 +31244,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M2 Feint P5 Akh Morn 2",
 							targetType = "Enemy",
@@ -33316,7 +33319,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] R2 Addle 2 Polarizing Strikes 2",
 							targetType = "Enemy",
 							uuid = "97ac7bbe-c5be-3c45-bb5e-40e25fa00b2c",
@@ -33389,7 +33391,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Mantra Polarizing Strikes 2",
 							uuid = "646a3492-2fe5-8631-b3c4-9f8baef2374b",
 							version = 2.1,
@@ -33461,7 +33462,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Magick Barrier Polarizing Strikes 2",
 							uuid = "8bfd0ca3-c152-378d-a257-6f737b7088cd",
 							version = 2.1,
@@ -33534,7 +33534,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
 							name = "[LPDU] Nature's Minne Polarizing Strikes 2",
 							uuid = "09a9a3dc-7035-d9e6-b815-58130be7ec4e",
@@ -33809,7 +33808,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M1 Feint Fulgent Blade",
 							targetType = "Enemy",
@@ -33901,6 +33899,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16889,
 							conditions = 
 							{
@@ -33921,8 +33920,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
 							name = "[LPDU] R1 Tactician - Fulgent Blade 3",
 							uuid = "fb054a1f-0492-78cb-a387-ab0d090a3c27",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -34339,6 +34340,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 2887,
 							conditions = 
 							{
@@ -34353,9 +34355,10 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Dismantle",
 							name = "[LPDU] Dismantle P5 Akh Morn 3",
 							uuid = "105ae981-9309-2e2b-bd6c-f7c17c616a0c",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -34425,7 +34428,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Improvisation P5 Akh Morn 3",
 							uuid = "3b78d419-3083-4a6c-a2fb-1f1bd702eb29",
 							version = 2.1,
@@ -34497,7 +34499,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] R1 Addle P5 Akh Morn 3",
 							targetType = "Enemy",
 							uuid = "842b758a-9d7c-02ce-a6e3-8e505e7437cb",
@@ -34587,6 +34588,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16889,
 							conditions = 
 							{
@@ -34607,8 +34609,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
 							name = "[LPDU] R2 Tactician - P5 Akh Morn 3",
 							uuid = "f52f9072-e123-68d8-8b03-2a84adf8b9c5",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -34774,7 +34778,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M2 Feint P5 Akh Morn 3",
 							targetType = "Enemy",
@@ -34848,7 +34851,6 @@ local tbl =
 									true,
 								},
 							},
-							endIfUsed = true,
 							name = "[LPDU] Tempera Grassa P5 Akh Morn 3",
 							uuid = "7ac6b7d9-2488-5d93-bd15-764efa5c305e",
 							version = 2.1,
