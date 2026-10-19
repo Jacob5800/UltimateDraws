@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Fixed the final six P1 Addle and physical-ranged mitigation role checks to use AnyoneCore Party Roster. Full 243-reaction audit found no remaining legacy role helpers; combat confirmation pending. (19-10-2026)
+
 - Fixed 32 P2-P5 Addle and physical-ranged mitigation role checks to use AnyoneCore Party Roster. Existing enabled/disabled choices and timings are preserved; combat confirmation pending. (19-10-2026)
 
 - Fixed all 19 M1/M2 Feint assignments to read AnyoneCore Party Roster instead of legacy toolbox roles, including P1 Cyclonic Break and both Burnished Glory assignments. Combat confirmation pending. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - Removed WAR Nascent Flash and GNB Heart of Corundum requests from OT Quadruple Slap support, where the fast P1-to-P2 transition leaves them unavailable. MT invuln and PLD/DRK support remain unchanged; no healer automation was added. (18-10-2026)
 
 - PLD keeps Veil for first Morn Afah and Passage for second; removed the unavailable second Veil request. DRK and other-job assignments remain unchanged. This is a normal-stack plan; no intentional-death behavior was added. (18-10-2026)
-
-- WAR/GNB reserve their P1 OT short for the first explosion instead of spending it on Powder support; MT avoids an unavailable repeated short and uses Rampart plus explosion extras. WAR/GNB also reserve their short when solo first Akh instead of giving Somber support. Removed redundant Dark Mind from the DRK second-Akh extras while retaining Oblation. (18-10-2026)
 
 ### UWU: LPDU
 
