@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- **P5 restriction notice:** PLD explanations now appear only when a Paladin is present in the tank roster; the two-PLD note appears only for two Paladins. Updated the blocked-choice popup opening behavior. (19-10-2026)
+
 - **P5 invuln selection popup:** Choosing an incompatible order now opens an explanation with an OK button, showing the required order and the P4 Tank swap alternative. (19-10-2026)
 
 - **Tank settings clarity:** Explains when the PLD cooldown restriction requires a P5 invuln order, why the choice reverts, and how P4 Tank swap allows changing it. The displayed P5 order now reflects the enforced selection immediately. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - **Red Mage Magick Barrier:** Retimed seven existing Hotbar uses with EU references, including Sinbound Fire/Thunder, LR Banish and first P4 Akh Morn. Corrected DD/LR and P5 cooldown spacing and removed cooldown conditions. (19-10-2026)
 
 - **Monk Riddle of Earth:** Added three conservative Monk-only Hotbar uses before second Burnished Glory, the first Ultimate Relativity stack and Crystallize Time Quietus, based on EU reference timings. (19-10-2026)
-
-- **Bard Nature's Minne:** Retimed eight existing Hotbar uses using EU references, including Utopian recovery, Light Rampant orbs, Hell's Judgment and late P3 recovery. Spaced the P5 pair for the 120-second cooldown and removed cooldown conditions. (19-10-2026)
 
 ### UWU: LPDU
 
