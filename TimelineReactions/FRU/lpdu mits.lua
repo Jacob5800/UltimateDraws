@@ -520,80 +520,6 @@ local tbl =
 		{
 			data = 
 			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "ACR",
-							actionID = 7408,
-							conditions = 
-							{
-								
-								{
-									"649ce186-72ec-1810-8b47-5abe6afbba61",
-									true,
-								},
-								
-								{
-									"4dcda1fd-7476-6c33-8535-05787e9ef1c8",
-									true,
-								},
-							},
-							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
-							name = "[LPDU] Nature's Minne Cyclonic Break",
-							uuid = "9dac7927-0950-4263-af69-ed93a53ae8d4",
-							variableTogglesType = 2,
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "BARD",
-							name = "BARD job",
-							uuid = "649ce186-72ec-1810-8b47-5abe6afbba61",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 7408,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Cyclonic Break CD",
-							uuid = "4dcda1fd-7476-6c33-8535-05787e9ef1c8",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "LPDU Mitigation",
-				mechanicTime = 13.7,
-				name = "[LPDU] Nature's Minne Cyclonic Break",
-				timeRange = true,
-				timelineIndex = 1,
-				timerEndOffset = -1.5,
-				timerStartOffset = -11,
-				uuid = "dd722cef-4056-12e6-9c62-db53bbfaea3f",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
 				displayPath = "",
 				name = "AnyoneCore Defaults",
 				uuid = "50b48973-e5e7-32e0-bbd7-89a18e3b2050",
@@ -2973,6 +2899,70 @@ local tbl =
 				timerEndOffset = -6,
 				timerStartOffset = -9,
 				uuid = "be79ef4b-ab00-b54f-b0a9-2d7edf02df3d",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Mitigation",
+				uuid = "8ba59070-6e11-768b-89e8-283a31579341",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							actionID = 7408,
+							conditions = 
+							{
+								
+								{
+									"649ce186-72ec-1810-8b47-5abe6afbba61",
+									true,
+								},
+							},
+							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
+							name = "[LPDU] Nature's Minne Utopian recovery",
+							uuid = "9dac7927-0950-4263-af69-ed93a53ae8d4",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "BARD job",
+							uuid = "649ce186-72ec-1810-8b47-5abe6afbba61",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Mitigation",
+				mechanicTime = 50,
+				name = "[LPDU] Nature's Minne Utopian recovery",
+				timeRange = true,
+				timelineIndex = 12,
+				timerEndOffset = 3,
+				uuid = "dd722cef-4056-12e6-9c62-db53bbfaea3f",
 				version = 2,
 			},
 		},
@@ -7631,11 +7621,6 @@ local tbl =
 									"d75ef94f-3b30-6b7b-965e-8cfa12db8c9a",
 									true,
 								},
-								
-								{
-									"87ce1989-a724-5229-ad23-88704790cf57",
-									true,
-								},
 							},
 							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
 							name = "[LPDU] Nature's Minne Diamond Dust",
@@ -7660,28 +7645,14 @@ local tbl =
 							version = 3,
 						},
 					},
-					
-					{
-						data = 
-						{
-							actionID = 7408,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Diamond Dust CD",
-							uuid = "87ce1989-a724-5229-ad23-88704790cf57",
-							version = 3,
-						},
-					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 235.3,
 				name = "[LPDU] Nature's Minne Diamond Dust",
 				timeRange = true,
 				timelineIndex = 44,
-				timerEndOffset = -1.5,
-				timerStartOffset = -11,
+				timerEndOffset = -5,
+				timerStartOffset = -8,
 				uuid = "5e484ec1-6c36-7524-9f8f-b1b1f4408ef3",
 				version = 2,
 			},
@@ -11146,80 +11117,6 @@ local tbl =
 						data = 
 						{
 							aType = "ACR",
-							actionID = 7408,
-							conditions = 
-							{
-								
-								{
-									"d603f737-6d29-13b8-b9a9-2688dec1e21c",
-									true,
-								},
-								
-								{
-									"e9374322-f144-8135-aa86-a2a368043375",
-									true,
-								},
-							},
-							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
-							name = "[LPDU] Nature's Minne Light Rampant",
-							uuid = "d6d9dc27-4ad5-91d9-871d-b0edb2f836d7",
-							variableTogglesType = 2,
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "BARD",
-							name = "BARD job",
-							uuid = "d603f737-6d29-13b8-b9a9-2688dec1e21c",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 7408,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Light Rampant CD",
-							uuid = "e9374322-f144-8135-aa86-a2a368043375",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "LPDU Mitigation",
-				mechanicTime = 331.8,
-				name = "[LPDU] Nature's Minne Light Rampant",
-				timeRange = true,
-				timelineIndex = 80,
-				timerEndOffset = 1,
-				timerStartOffset = -5,
-				uuid = "6c9d6626-009c-cc73-b9b5-74287f0b6388",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "ACR",
 							actionID = 25857,
 							conditions = 
 							{
@@ -11399,6 +11296,73 @@ local tbl =
 				timelineIndex = 80,
 				timerStartOffset = -3,
 				uuid = "237c7e5b-fc9c-9121-afa6-9dc7cb3003df",
+				version = 2,
+			},
+		},
+	},
+	[89] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Mitigation",
+				uuid = "14b7be97-a8dc-f656-a514-4590a97d5b2a",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							actionID = 7408,
+							conditions = 
+							{
+								
+								{
+									"d603f737-6d29-13b8-b9a9-2688dec1e21c",
+									true,
+								},
+							},
+							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
+							name = "[LPDU] Nature's Minne Light Rampant orb recovery",
+							uuid = "d6d9dc27-4ad5-91d9-871d-b0edb2f836d7",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "BARD job",
+							uuid = "d603f737-6d29-13b8-b9a9-2688dec1e21c",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Mitigation",
+				mechanicTime = 352,
+				name = "[LPDU] Nature's Minne Light Rampant orb recovery",
+				timeRange = true,
+				timelineIndex = 89,
+				timerEndOffset = 3,
+				uuid = "6c9d6626-009c-cc73-b9b5-74287f0b6388",
 				version = 2,
 			},
 		},
@@ -13049,6 +13013,71 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Mitigation",
+				uuid = "a6ec6dd2-7d28-4c9a-a229-b9f8847f4752",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							actionID = 7408,
+							conditions = 
+							{
+								
+								{
+									"60025699-b757-bba6-bae2-a2c69e672939",
+									true,
+								},
+							},
+							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
+							name = "[LPDU] Nature's Minne Hell's Judgment",
+							uuid = "25d12872-8cd1-bc55-bd9e-f09394d6b260",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "BARD job",
+							uuid = "60025699-b757-bba6-bae2-a2c69e672939",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Mitigation",
+				mechanicTime = 518.3,
+				name = "[LPDU] Nature's Minne Hell's Judgment",
+				timeRange = true,
+				timelineIndex = 121,
+				timerEndOffset = -8,
+				timerStartOffset = -11,
+				uuid = "d74f2e1b-ef2d-c6aa-b90f-20da726aac5a",
+				version = 2,
+			},
+		},
 	},
 	[123] = 
 	{
@@ -13133,80 +13162,6 @@ local tbl =
 				timerEndOffset = -1.5,
 				timerStartOffset = -11,
 				uuid = "7917e689-1384-53a3-b8b2-7c080c1c42c0",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "ACR",
-							actionID = 7408,
-							conditions = 
-							{
-								
-								{
-									"60025699-b757-bba6-bae2-a2c69e672939",
-									true,
-								},
-								
-								{
-									"6b1d9a73-883c-b33f-9bf7-50337bc99767",
-									true,
-								},
-							},
-							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
-							name = "[LPDU] Nature's Minne Ultimate Relativity",
-							uuid = "25d12872-8cd1-bc55-bd9e-f09394d6b260",
-							variableTogglesType = 2,
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "BARD",
-							name = "BARD job",
-							uuid = "60025699-b757-bba6-bae2-a2c69e672939",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 7408,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Ultimate Relativity CD",
-							uuid = "6b1d9a73-883c-b33f-9bf7-50337bc99767",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "LPDU Mitigation",
-				mechanicTime = 532.4,
-				name = "[LPDU] Nature's Minne Ultimate Relativity",
-				timeRange = true,
-				timelineIndex = 123,
-				timerEndOffset = -1.5,
-				timerStartOffset = -11,
-				uuid = "d74f2e1b-ef2d-c6aa-b90f-20da726aac5a",
 				version = 2,
 			},
 		},
@@ -16377,6 +16332,61 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							actionID = 7408,
+							conditions = 
+							{
+								
+								{
+									"48f43004-4f8f-b1ab-a3e7-75189cfe520a",
+									true,
+								},
+							},
+							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
+							name = "[LPDU] Nature's Minne Apocalypse recovery",
+							uuid = "e936dc79-1ac0-d52e-8305-1169f60c0bbc",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "BARD job",
+							uuid = "48f43004-4f8f-b1ab-a3e7-75189cfe520a",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Mitigation",
+				mechanicTime = 635.4,
+				name = "[LPDU] Nature's Minne Apocalypse recovery",
+				timeRange = true,
+				timelineIndex = 148,
+				timerEndOffset = -1,
+				timerStartOffset = -4,
+				uuid = "e3a49d6a-d70d-2a37-80c9-7e454ee2c511",
+				version = 2,
+			},
+		},
 	},
 	[149] = 
 	{
@@ -17626,80 +17636,6 @@ local tbl =
 				uuid = "b0e669a2-a67e-dee7-be08-3942fa3f9efc",
 			},
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "ACR",
-							actionID = 7408,
-							conditions = 
-							{
-								
-								{
-									"48f43004-4f8f-b1ab-a3e7-75189cfe520a",
-									true,
-								},
-								
-								{
-									"4b9cdff7-0218-6a71-ae7a-499895edea43",
-									true,
-								},
-							},
-							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
-							name = "[LPDU] Nature's Minne Shockwave Pulsar + Memory's End",
-							uuid = "e936dc79-1ac0-d52e-8305-1169f60c0bbc",
-							variableTogglesType = 2,
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "BARD",
-							name = "BARD job",
-							uuid = "48f43004-4f8f-b1ab-a3e7-75189cfe520a",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 7408,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Shockwave Pulsar + Memory's End CD",
-							uuid = "4b9cdff7-0218-6a71-ae7a-499895edea43",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "LPDU Mitigation",
-				mechanicTime = 656.4,
-				name = "[LPDU] Nature's Minne Shockwave Pulsar + Memory's End",
-				timeRange = true,
-				timelineIndex = 153,
-				timerEndOffset = 1,
-				timerStartOffset = -5,
-				uuid = "e3a49d6a-d70d-2a37-80c9-7e454ee2c511",
-				version = 2,
-			},
 		},
 		
 		{
@@ -23630,11 +23566,6 @@ local tbl =
 									"9ab2b530-3929-0dfd-a8cb-6f278810719f",
 									true,
 								},
-								
-								{
-									"c3d260f0-4158-7055-8ca6-8848ee0d1367",
-									true,
-								},
 							},
 							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
 							name = "[LPDU] Nature's Minne Crystallize Time",
@@ -23659,28 +23590,14 @@ local tbl =
 							version = 3,
 						},
 					},
-					
-					{
-						data = 
-						{
-							actionID = 7408,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Crystallize Time CD",
-							uuid = "c3d260f0-4158-7055-8ca6-8848ee0d1367",
-							version = 3,
-						},
-					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 798.9,
 				name = "[LPDU] Nature's Minne Crystallize Time",
 				timeRange = true,
 				timelineIndex = 179,
-				timerEndOffset = -1.5,
-				timerStartOffset = -11,
+				timerEndOffset = -2,
+				timerStartOffset = -5,
 				uuid = "7bb0a7aa-bb93-8e3b-ba07-dbe8f9e76529",
 				version = 2,
 			},
@@ -30137,11 +30054,6 @@ local tbl =
 									"7966f342-6e3c-68fb-abd0-2675fca994a9",
 									true,
 								},
-								
-								{
-									"a52281bb-24ea-a881-ba25-cda232911e0a",
-									true,
-								},
 							},
 							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
 							name = "[LPDU] Nature's Minne Polarizing Strikes 1",
@@ -30166,28 +30078,14 @@ local tbl =
 							version = 3,
 						},
 					},
-					
-					{
-						data = 
-						{
-							actionID = 7408,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Polarizing Strikes 1 CD",
-							uuid = "a52281bb-24ea-a881-ba25-cda232911e0a",
-							version = 3,
-						},
-					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 1051.2,
 				name = "[LPDU] Nature's Minne Polarizing Strikes 1",
 				timeRange = true,
 				timelineIndex = 226,
-				timerEndOffset = 1,
-				timerStartOffset = -5,
+				timerEndOffset = -6,
+				timerStartOffset = -9,
 				uuid = "ba56776f-6b20-e99a-bfc7-bf8be7a074ad",
 				version = 2,
 			},
@@ -33671,14 +33569,9 @@ local tbl =
 									"d438220c-824e-d21c-b176-c29d267b28d3",
 									true,
 								},
-								
-								{
-									"25737449-3bb2-c35a-a87a-9dab31c11b22",
-									true,
-								},
 							},
 							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
-							name = "[LPDU] Nature's Minne Polarizing Strikes 2",
+							name = "[LPDU] Nature's Minne Polarizing Strikes 2 recovery",
 							uuid = "09a9a3dc-7035-d9e6-b815-58130be7ec4e",
 							variableTogglesType = 2,
 							version = 2.1,
@@ -33700,28 +33593,14 @@ local tbl =
 							version = 3,
 						},
 					},
-					
-					{
-						data = 
-						{
-							actionID = 7408,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Polarizing Strikes 2 CD",
-							uuid = "25737449-3bb2-c35a-a87a-9dab31c11b22",
-							version = 3,
-						},
-					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 1162.6,
-				name = "[LPDU] Nature's Minne Polarizing Strikes 2",
+				name = "[LPDU] Nature's Minne Polarizing Strikes 2 recovery",
 				timeRange = true,
 				timelineIndex = 253,
-				timerEndOffset = -1.5,
-				timerStartOffset = -11,
+				timerEndOffset = 9,
+				timerStartOffset = 6,
 				uuid = "1acc5735-d61d-a64a-8773-5dd25fb16cc1",
 				version = 2,
 			},
