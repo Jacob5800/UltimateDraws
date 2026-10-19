@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- **Tank settings sharing / UR rewind:** Replaced the replay preset button with Save/Restore and clipboard Import/Export with preview. Added a quiet personal countdown for the final five seconds of UR Return, without TTS or central callouts. (19-10-2026)
+
 - **Tank settings wording:** Renamed “Sheet defaults” to “LPDU Mitsheet default”. (19-10-2026)
 
 - **P2 adds potion:** The 418.8 reaction now uses the appropriate stat potion for all 21 supported combat jobs, alongside its existing reminder. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - **Crystallize Time exalines:** Added a continuous countdown on each active Tidal Light strip, refreshed for each successive hit from its own cast duration. (19-10-2026)
 
 - **P4 Somber Dance far bait:** The assigned tank now baits east or west on the side farther from Oracle, instead of reusing the earlier Darklit safe side. (19-10-2026)
-
-- **Early P4 puddle guidance:** The marker-one staging arrow and green circle now clear on the Akh Rhai move cue when puddles drop. (19-10-2026)
 
 ### UWU: LPDU
 
