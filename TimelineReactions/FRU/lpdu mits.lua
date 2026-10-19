@@ -534,6 +534,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3540,
 							conditions = 
 							{
@@ -548,8 +549,10 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_DivineVeil",
 							ignoreWeaveRules = true,
 							uuid = "e49520b0-39a3-8ca4-9625-86e894b0f312",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -653,6 +656,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "5a4dfbeb-1c90-c849-abc8-00aed2095773",
 							version = 3,
 						},
@@ -717,6 +721,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -736,7 +741,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Reprisal",
 							uuid = "f7316daf-9c87-a825-816a-a407d3b6e32d",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -852,6 +859,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "046a6528-cddc-4803-8721-9a120aac5c70",
 							version = 3,
 						},
@@ -949,6 +957,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36920,
 							conditions = 
 							{
@@ -968,7 +977,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Guardian",
 							uuid = "e9d3e434-05ca-bec3-814a-27899b56e1b8",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -1095,6 +1106,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "1ca2521a-4877-f45f-8cfc-879ba02637e4",
 							version = 3,
 						},
@@ -1237,6 +1249,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 28,
 							conditions = 
 							{
@@ -1257,8 +1270,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuPLD3_Hotbar_IronWill",
 							ignoreWeaveRules = true,
 							uuid = "2b5d79a6-001b-2943-bcfd-c3c94694ce0d",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -1379,6 +1394,7 @@ local tbl =
 							category = "Self",
 							conditionType = 13,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "68f14b0a-8ffa-277a-8a9a-fff319a7093b",
 							version = 3,
 						},
@@ -1506,6 +1522,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -1525,7 +1542,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Rampart",
 							uuid = "184abbe6-8b1f-2941-8e70-2a5f08810627",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -1652,6 +1671,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "79a9a29e-f9aa-4d47-b4c0-ff9b770eac19",
 							version = 3,
 						},
@@ -1715,6 +1735,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25746,
 							conditions = 
 							{
@@ -1734,7 +1755,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_HolySheltron",
 							uuid = "2d12e424-2f90-5e16-8666-dc5a868a107b",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -1861,6 +1884,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "e2ea9d92-e4c6-0662-a9d9-35fee21c88b0",
 							version = 3,
 						},
@@ -1924,6 +1948,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7382,
 							conditions = 
 							{
@@ -1943,8 +1968,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_InterventionMouse",
 							targetType = "Other Tank",
 							uuid = "113024ae-43aa-5977-96cd-9177e5ee3a94",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -2013,6 +2041,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "d7cfd8e0-af2e-2eea-8dd8-11ede1f493dd",
 							version = 3,
 						},
@@ -2234,6 +2263,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -2253,7 +2283,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Rampart",
 							uuid = "b80d17f5-477e-8553-a688-805b4d2c13c1",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -2380,6 +2412,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "8158e67e-1773-e285-8dcc-bd188d166429",
 							version = 3,
 						},
@@ -2444,6 +2477,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 22,
 							conditions = 
 							{
@@ -2463,7 +2497,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Bulwark",
 							uuid = "f6af4f0a-4339-7ab3-b0d3-b91841715ad9",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -2620,6 +2656,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "96909c81-20a0-3de8-b262-410cc82b3993",
 							version = 3,
 						},
@@ -2684,6 +2721,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25746,
 							conditions = 
 							{
@@ -2703,7 +2741,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_HolySheltron",
 							uuid = "3e43fec2-c6b0-0510-bf1b-c9787335272d",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -2840,6 +2880,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "66f45870-e305-21f1-b506-0b886defe63d",
 							version = 3,
 						},
@@ -3141,6 +3182,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3540,
 							conditions = 
 							{
@@ -3155,7 +3197,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_DivineVeil",
 							uuid = "9c575a27-d43b-10aa-98ab-d7e4bc3a1612",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -3256,6 +3300,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "b89f038e-c91b-d4d6-8cf5-0d9ec383eaa6",
 							version = 3,
 						},
@@ -3895,6 +3940,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -3914,7 +3960,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Reprisal",
 							uuid = "6d427418-fb07-34a0-a4c2-ad977830f9ba",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -4030,6 +4078,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "e5c42ef3-b6cd-31a4-bf9c-1dbe788ab7f2",
 							version = 3,
 						},
@@ -4173,6 +4222,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "929f5ea3-e61b-cb38-a043-58991607ead8",
 							version = 3,
 						},
@@ -4424,6 +4474,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "74bf1a29-3f00-ca04-a127-fe75a0713fc8",
 							version = 3,
 						},
@@ -4582,6 +4633,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "32158955-ad79-0271-84e5-b2ff62340057",
 							version = 3,
 						},
@@ -5035,6 +5087,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3540,
 							conditions = 
 							{
@@ -5049,7 +5102,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_DivineVeil",
 							uuid = "c6dc9a41-3303-3657-8b2b-bf1eccb1a769",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -5100,6 +5155,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "53d090b2-5559-a4c1-9361-96c89b8fb52c",
 							version = 3,
 						},
@@ -5138,6 +5194,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -5157,7 +5214,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Reprisal",
 							uuid = "fad3dd55-a9da-9251-a72f-5c4f3fb0c95d",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -5273,6 +5332,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "292a208d-7d05-0926-b8c6-340057be247e",
 							version = 3,
 						},
@@ -5522,6 +5582,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 30,
 							conditions = 
 							{
@@ -5541,7 +5602,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_HallowedGround",
 							uuid = "2292f6f1-c8d8-ba4f-bffb-336213d18a0f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -5665,6 +5728,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "4bb11f1c-9bcd-db64-8b9c-7098f17ea2c8",
 							version = 3,
 						},
@@ -5947,6 +6011,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "ac7b2005-e1e5-6066-814c-4fa6c2d60444",
 							version = 3,
 						},
@@ -6031,6 +6096,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -6050,7 +6116,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Rampart",
 							uuid = "3126dc5f-01ee-dad1-b123-2bf47c9d4f85",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -6177,6 +6245,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "1cb87f9a-5045-5986-8d46-8dcb167a0913",
 							version = 3,
 						},
@@ -6241,6 +6310,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36920,
 							conditions = 
 							{
@@ -6260,7 +6330,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Guardian",
 							uuid = "b1beaded-fdbb-1850-b2cc-be4124e427a5",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -6387,6 +6459,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "bc9d47d9-6aee-b0bc-8989-09a26de34fb8",
 							version = 3,
 						},
@@ -6451,6 +6524,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 22,
 							conditions = 
 							{
@@ -6470,7 +6544,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Bulwark",
 							uuid = "b5aefd5b-d5d2-8a91-b7d0-90830564c808",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -6627,6 +6703,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "edf3aa0f-87e6-3493-a145-c2674c6820b0",
 							version = 3,
 						},
@@ -6691,6 +6768,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25746,
 							conditions = 
 							{
@@ -6710,7 +6788,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_HolySheltron",
 							uuid = "68156289-0a58-95bb-ab3d-65323bd33add",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -6837,6 +6917,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "f0890f32-e110-e39e-b2d2-47a3c07b164b",
 							version = 3,
 						},
@@ -6993,6 +7074,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "1824f222-3f34-852c-b51e-733d89982159",
 							version = 3,
 						},
@@ -7068,6 +7150,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 32065,
 							conditions = 
 							{
@@ -7088,8 +7171,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuPLD3_Hotbar_ReleaseIronWill",
 							ignoreWeaveRules = true,
 							uuid = "662fd3f5-91f5-cb81-a7d1-db8b50aa9de5",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -7210,6 +7295,7 @@ local tbl =
 							category = "Self",
 							conditionType = 13,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "501fe6d7-82ad-24f7-b59a-c594c2a2011c",
 							version = 3,
 						},
@@ -7403,6 +7489,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "12f8afe6-3b87-e417-905b-2bfb01c0447f",
 							version = 3,
 						},
@@ -7487,6 +7574,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 30,
 							conditions = 
 							{
@@ -7506,7 +7594,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_HallowedGround",
 							uuid = "d38ae01f-9705-da32-b2f2-2bac3adfb18e",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -7630,6 +7720,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "4ea85a65-f07b-21d3-a289-7755dc0a9641",
 							version = 3,
 						},
@@ -7693,6 +7784,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7382,
 							conditions = 
 							{
@@ -7712,8 +7804,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_InterventionMouse",
 							targetType = "Other Tank",
 							uuid = "7827cb55-0be1-8f58-9351-3ffcd49aa037",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -7782,6 +7877,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "1bbcc7b5-e2ba-1785-afeb-4872de2903b7",
 							version = 3,
 						},
@@ -8447,6 +8543,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -8466,7 +8563,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Reprisal",
 							uuid = "03df9c96-5faf-9986-8776-f74995fc54c8",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -8582,6 +8681,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "342d7e4f-30f7-4c01-a04e-af774ce3f16a",
 							version = 3,
 						},
@@ -9072,6 +9172,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3540,
 							conditions = 
 							{
@@ -9086,7 +9187,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_DivineVeil",
 							uuid = "59e1edb6-f51b-dadf-ab5d-f50e175d91ee",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -9187,6 +9290,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "0251dccf-2896-3494-ad72-dcbf3d2ecbb0",
 							version = 3,
 						},
@@ -9342,6 +9446,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36920,
 							conditions = 
 							{
@@ -9361,7 +9466,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Guardian",
 							uuid = "075e03db-059d-789e-8bcd-a0e5fea43f9b",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -9488,6 +9595,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "05ed8351-9564-9072-b443-294d93aa4898",
 							version = 3,
 						},
@@ -10018,6 +10126,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -10037,7 +10146,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Reprisal",
 							uuid = "b8dec4b4-8aea-4083-bea2-b640e501804c",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -10153,6 +10264,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "ea7e010a-b172-1509-89d8-c9560c485a6c",
 							version = 3,
 						},
@@ -10296,6 +10408,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "e620ded0-ff8c-b90e-bdbc-434bbf5263c9",
 							version = 3,
 						},
@@ -10344,6 +10457,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -10363,7 +10477,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Rampart",
 							uuid = "c6b1f72a-ef3b-9fd0-ab99-5dabb5342af3",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -10490,6 +10606,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "abd756c4-aba3-e4c8-b461-5a0660fcac3b",
 							version = 3,
 						},
@@ -10689,6 +10806,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "c57c5ab3-5fe3-842e-ae90-2d477909a8d9",
 							version = 3,
 						},
@@ -10846,6 +10964,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "23de3b21-42a7-69e1-b930-28e5a8a91987",
 							version = 3,
 						},
@@ -11089,6 +11208,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -11108,7 +11228,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Reprisal",
 							uuid = "533e76cd-f91f-cf33-8d74-0108ad928a2e",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -11224,6 +11346,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "9e1fd6d5-21b3-7da5-bd17-9882aa4a1b26",
 							version = 3,
 						},
@@ -11795,6 +11918,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3540,
 							conditions = 
 							{
@@ -11809,7 +11933,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_DivineVeil",
 							uuid = "6f4c17ed-abec-5463-8edd-5fd16ba3526f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -11860,6 +11986,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "b4f4cbf5-ff2b-00a1-aa85-b61b818c4893",
 							version = 3,
 						},
@@ -12183,6 +12310,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -12202,7 +12330,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Reprisal",
 							uuid = "ef23b59d-54f2-47f2-b388-f0084eaefa1f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -12318,6 +12448,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "d774910d-7dc5-94c6-8c3e-44722cd07b06",
 							version = 3,
 						},
@@ -12414,6 +12545,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3540,
 							conditions = 
 							{
@@ -12428,7 +12560,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_DivineVeil",
 							uuid = "daa50751-f078-34d8-a56d-7e823e9bdd87",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -12479,6 +12613,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "11c2d30e-720d-b071-92ff-2c9f7c6eae45",
 							version = 3,
 						},
@@ -12908,6 +13043,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -12927,7 +13063,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Reprisal",
 							uuid = "c8b02e56-f1f3-fd7c-a753-008b343ee58f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -13043,6 +13181,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "bd9d2be8-b060-8fcc-889e-68e0ba9f7eef",
 							version = 3,
 						},
@@ -13227,6 +13366,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3540,
 							conditions = 
 							{
@@ -13256,8 +13396,10 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_DivineVeil",
 							ignoreWeaveRules = true,
 							uuid = "6be90a38-afaf-5cd6-8b1e-9fcae6e9c89d",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -13447,6 +13589,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "1e2e1ba5-a237-cc2a-8bed-3345909ad273",
 							version = 3,
 						},
@@ -13615,6 +13758,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "7cef9b49-cb86-f00a-8539-c0656384e910",
 							version = 3,
 						},
@@ -13665,6 +13809,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -13684,7 +13829,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Reprisal",
 							uuid = "8abc50f5-eb31-b880-8e9d-f18c62c76fa2",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -13800,6 +13947,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "94e9526a-b2ce-38a9-84f0-bd8025b5b5ea",
 							version = 3,
 						},
@@ -14964,6 +15112,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -14983,7 +15132,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Reprisal",
 							uuid = "864413b3-32f7-5b3d-956e-40b65133279b",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -15099,6 +15250,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "67cced1d-1c8d-0865-9ca9-4db1fe43f32b",
 							version = 3,
 						},
@@ -15348,6 +15500,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3540,
 							conditions = 
 							{
@@ -15362,7 +15515,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_DivineVeil",
 							uuid = "7db5987b-63df-88b7-9301-a0c609f7287f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -15413,6 +15568,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "78afc05a-5951-e04d-865b-7f7e699332e9",
 							version = 3,
 						},
@@ -15632,6 +15788,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -15651,7 +15808,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Reprisal",
 							uuid = "4f888165-65f7-5704-976f-233a21c4bd9e",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -15767,6 +15926,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "0bb72b25-28d0-9f4d-8c11-4762d09fb70f",
 							version = 3,
 						},
@@ -15992,6 +16152,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3540,
 							conditions = 
 							{
@@ -16006,7 +16167,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_DivineVeil",
 							uuid = "87c2b1be-42d5-1d06-9689-a98fa2663f8f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -16057,6 +16220,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "75f90b47-34c0-e604-9028-db47bdd2c498",
 							version = 3,
 						},
@@ -16118,6 +16282,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -16137,7 +16302,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Rampart",
 							uuid = "9d8ac5c9-3879-e36e-aca3-d37bb1196dad",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -16264,6 +16431,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "3c1edde9-7087-397c-964f-579d8fbd4d29",
 							version = 3,
 						},
@@ -16328,6 +16496,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36920,
 							conditions = 
 							{
@@ -16347,7 +16516,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Guardian",
 							uuid = "a17f4e2a-789b-155a-b5ad-8e66d6f9525c",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -16474,6 +16645,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "1d666dc1-7c27-4790-9450-800787719438",
 							version = 3,
 						},
@@ -16538,6 +16710,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 22,
 							conditions = 
 							{
@@ -16557,7 +16730,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Bulwark",
 							uuid = "a6b15cb5-3268-e706-95dc-9a912813ccb8",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -16714,6 +16889,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "36464a01-4fd9-e9d0-a669-d8a44c7b1334",
 							version = 3,
 						},
@@ -16778,6 +16954,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25746,
 							conditions = 
 							{
@@ -16797,7 +16974,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_HolySheltron",
 							uuid = "b758089a-c672-e96e-83ba-209f294a5d79",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -16924,6 +17103,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "2d6b05ca-e96a-3167-a20d-a93564a8355c",
 							version = 3,
 						},
@@ -16987,6 +17167,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7382,
 							conditions = 
 							{
@@ -17006,8 +17187,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_InterventionMouse",
 							targetType = "Other Tank",
 							uuid = "247804f2-d9dd-ee51-9b86-3215ae4f59f3",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -17140,6 +17324,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "67b3c5c3-3106-7aee-959c-f1840930ad91",
 							version = 3,
 						},
@@ -17553,6 +17738,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -17572,7 +17758,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Reprisal",
 							uuid = "b72941c7-6af4-4fc9-831a-9eb4dfb15146",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -17688,6 +17876,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "9ddf042c-34e3-fc9d-9645-7ec6c21d2dcf",
 							version = 3,
 						},
@@ -17807,6 +17996,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -17826,7 +18016,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Rampart",
 							uuid = "645694fa-2787-1429-8623-ea4be91e6f9d",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -17953,6 +18145,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "b6a045b5-fbdc-25af-9626-0b189501f2e2",
 							version = 3,
 						},
@@ -18017,6 +18210,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36920,
 							conditions = 
 							{
@@ -18036,7 +18230,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Guardian",
 							uuid = "88ee7160-add5-59f2-803b-1825003f7763",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -18163,6 +18359,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "cea07679-c0d4-fa70-b663-c9f4abd05367",
 							version = 3,
 						},
@@ -18227,6 +18424,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 22,
 							conditions = 
 							{
@@ -18246,7 +18444,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Bulwark",
 							uuid = "f40564df-2c36-f436-858c-f08c3c880eef",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -18403,6 +18603,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "3bbaa8e9-130c-37da-81fa-c5174dc8f0a3",
 							version = 3,
 						},
@@ -18467,6 +18668,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25746,
 							conditions = 
 							{
@@ -18486,7 +18688,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_HolySheltron",
 							uuid = "f3b75a60-e436-3f89-be75-b0e5930b7f7f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -18613,6 +18817,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "09620f01-e0e0-1120-a839-7131d7c02c93",
 							version = 3,
 						},
@@ -18676,6 +18881,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7382,
 							conditions = 
 							{
@@ -18695,8 +18901,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_InterventionMouse",
 							targetType = "Other Tank",
 							uuid = "e7d7c6b4-27c0-cd5a-a6b1-4788e6a85aea",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -18829,6 +19038,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "a615a78f-0dd3-0577-9045-50f301d8609f",
 							version = 3,
 						},
@@ -19515,6 +19725,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -19534,7 +19745,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Reprisal",
 							uuid = "bbfb92c0-c56d-f629-b4e3-7e2319695cfd",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -19650,6 +19863,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "a048bc76-3f77-53ff-91ec-0b2307443149",
 							version = 3,
 						},
@@ -19769,6 +19983,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3540,
 							conditions = 
 							{
@@ -19783,7 +19998,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_DivineVeil",
 							uuid = "e14669a7-755d-91c7-bee0-d63ad4faaf1f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -19834,6 +20051,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "10bff3e0-da05-c84a-967f-19db6b342abc",
 							version = 3,
 						},
@@ -19920,6 +20138,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "0087b9a7-7465-ed25-83da-ab28659aa51c",
 							version = 3,
 						},
@@ -19968,6 +20187,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -19982,9 +20202,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Hotbar_ProvokeMouse",
 							targetContentID = 12809,
 							targetType = "ContentID",
 							uuid = "80a674ac-bb5c-84c6-86af-ffb11272aa65",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -20094,6 +20317,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "b885a6d4-283c-6f9b-bad5-9a544a2d94a7",
 							version = 3,
 						},
@@ -20171,6 +20395,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 28,
 							conditions = 
 							{
@@ -20191,8 +20416,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuPLD3_Hotbar_IronWill",
 							ignoreWeaveRules = true,
 							uuid = "2b79b66e-cad0-d00d-9446-52e578a13c12",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -20313,6 +20540,7 @@ local tbl =
 							category = "Self",
 							conditionType = 13,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "e97e779a-3943-0bf1-8adf-49d398440476",
 							version = 3,
 						},
@@ -20513,6 +20741,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "79e02959-0a0b-9179-9b03-76800960b025",
 							version = 3,
 						},
@@ -20671,6 +20900,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "1a2fefe0-6f3b-5553-a845-91c15438ddfd",
 							version = 3,
 						},
@@ -21281,6 +21511,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -21300,7 +21531,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Reprisal",
 							uuid = "ad189bf6-c8ba-4e4c-9d8c-4e84769b7864",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -21416,6 +21649,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "1032e9c0-f15b-7137-a3a1-2ad9ceb8f3b4",
 							version = 3,
 						},
@@ -21513,6 +21747,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3540,
 							conditions = 
 							{
@@ -21527,7 +21762,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_DivineVeil",
 							uuid = "6c1d5b2e-05c7-f869-9929-5b14b91a5985",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -21628,6 +21865,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "206fd35d-0d3b-ab4f-a4fc-063ef8019bc3",
 							version = 3,
 						},
@@ -21757,6 +21995,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 30,
 							conditions = 
 							{
@@ -21776,7 +22015,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_HallowedGround",
 							uuid = "7323f28e-70d8-cbd0-8f3c-572bc28082e3",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -21900,6 +22141,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "105f587e-a42f-7b8e-99f6-a70f5494e2ae",
 							version = 3,
 						},
@@ -21963,6 +22205,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7382,
 							conditions = 
 							{
@@ -21982,8 +22225,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_InterventionMouse",
 							targetType = "Other Tank",
 							uuid = "93e6a97a-f882-51eb-a44f-02b58c6bed4b",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -22126,6 +22372,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "2e5ec0e1-8f3f-69e0-b930-bbc109b3b74f",
 							version = 3,
 						},
@@ -22201,6 +22448,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -22220,7 +22468,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Rampart",
 							uuid = "42148870-348e-8401-bf75-d16b8cbef39c",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -22347,6 +22597,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "5913398a-6e6d-eddf-8484-22d67a7ea760",
 							version = 3,
 						},
@@ -22410,6 +22661,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 22,
 							conditions = 
 							{
@@ -22429,7 +22681,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Bulwark",
 							uuid = "59540661-8be3-600c-b703-092ff7e1289f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -22586,6 +22840,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "3ac964f6-edd4-ebd0-bd2b-427113b78e6c",
 							version = 3,
 						},
@@ -22649,6 +22904,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25746,
 							conditions = 
 							{
@@ -22668,7 +22924,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_HolySheltron",
 							uuid = "403d4916-11c4-589c-af06-225da408e87d",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -22795,6 +23053,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "09f9f3c8-88b9-1728-90a2-a57dc410bb44",
 							version = 3,
 						},
@@ -23362,6 +23621,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "794bee36-160c-3bf2-8cd0-d6749f818e5b",
 							version = 3,
 						},
@@ -23425,6 +23685,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -23444,7 +23705,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Reprisal",
 							uuid = "81bec400-1eb0-e815-ad6b-745e5a5a91cf",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -23560,6 +23823,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "e758780b-0e57-2d8e-95d8-fe0c37a2d341",
 							version = 3,
 						},
@@ -23656,6 +23920,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -23675,7 +23940,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Rampart",
 							uuid = "f3ed8934-4f8c-9a15-8e51-a72b235d3035",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -23802,6 +24069,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "4e180a93-0ab6-61d0-a58d-d2756c75d703",
 							version = 3,
 						},
@@ -23865,6 +24133,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 22,
 							conditions = 
 							{
@@ -23884,7 +24153,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Bulwark",
 							uuid = "752d5b97-a6e7-89c5-9981-d3a305a94ef3",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -24041,6 +24312,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "a6f15003-4d2c-21fd-8ae3-5b1fc53b4920",
 							version = 3,
 						},
@@ -24104,6 +24376,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25746,
 							conditions = 
 							{
@@ -24123,7 +24396,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_HolySheltron",
 							uuid = "a48c45d9-774b-8e8e-aa37-8dd3382faa7d",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -24250,6 +24525,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "60cb8447-e1d2-db36-9b2d-885fe69b455b",
 							version = 3,
 						},
@@ -24313,6 +24589,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7382,
 							conditions = 
 							{
@@ -24332,8 +24609,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_InterventionMouse",
 							targetType = "Other Tank",
 							uuid = "96869d5f-9e8f-f8d2-8fd6-b8d4efab7712",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -24466,6 +24746,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "d5fbe6ea-a32e-ec6a-8459-63a448b3cfaf",
 							version = 3,
 						},
@@ -24530,6 +24811,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -24544,9 +24826,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Hotbar_ProvokeMouse",
 							targetContentID = 12809,
 							targetType = "ContentID",
 							uuid = "d1ba9b4d-8e26-fbe6-a825-a80a8eed3c9b",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -24656,6 +24941,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "63886ca4-96b9-b151-a754-2e3ee0ce545d",
 							version = 3,
 						},
@@ -24719,6 +25005,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3540,
 							conditions = 
 							{
@@ -24733,7 +25020,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_DivineVeil",
 							uuid = "02ad4afa-44f1-55a8-8769-3bdf0bec9e17",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -24784,6 +25073,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "7096aa42-c93c-123a-becf-44cc189c0cee",
 							version = 3,
 						},
@@ -25365,6 +25655,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -25384,7 +25675,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Reprisal",
 							uuid = "8566c097-147d-9cee-9089-cccc1e6b6362",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -25500,6 +25793,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "9a46afe5-d3d9-77e4-a67e-e97ffbb4340a",
 							version = 3,
 						},
@@ -25687,6 +25981,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3540,
 							conditions = 
 							{
@@ -25701,7 +25996,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_DivineVeil",
 							uuid = "385429f2-a182-4926-97bc-0b765c7a5707",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -25802,6 +26099,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "7379b898-73d4-893c-87ce-08f3e50ee01a",
 							version = 3,
 						},
@@ -25866,6 +26164,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36920,
 							conditions = 
 							{
@@ -25885,7 +26184,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Guardian",
 							uuid = "06fed427-84a8-41c3-8363-73ca6f65172e",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -26012,6 +26313,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "4b055849-b787-96a8-b633-50cb0a7cbbfd",
 							version = 3,
 						},
@@ -26076,6 +26378,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -26100,7 +26403,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Rampart",
 							uuid = "8de1d17e-6e7e-5622-8e11-866c9933a3f2",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -26253,6 +26558,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "2f653999-6544-cf50-8dce-75644aea0f1d",
 							version = 3,
 						},
@@ -26424,6 +26730,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -26438,9 +26745,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Hotbar_ProvokeMouse",
 							targetContentID = 12809,
 							targetType = "ContentID",
 							uuid = "6737fc8e-f4d0-56c9-a553-0ab8bb8a8834",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -26550,6 +26860,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "90e05882-ee10-ff56-90f2-4b24713deccc",
 							version = 3,
 						},
@@ -26614,6 +26925,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -26628,9 +26940,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Hotbar_ProvokeMouse",
 							targetContentID = 9832,
 							targetType = "ContentID",
 							uuid = "61da00af-0cb3-628a-9762-1554ed0b7312",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -26740,6 +27055,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "ab4c6913-01b5-2380-a3ac-96b46519466c",
 							version = 3,
 						},
@@ -27250,6 +27566,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -27269,7 +27586,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Reprisal",
 							uuid = "f62a0b6c-ca89-17a4-9390-517662249ec6",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -27385,6 +27704,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "75c68b14-5972-60f7-be21-cee112aea81d",
 							version = 3,
 						},
@@ -27481,6 +27801,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -27500,7 +27821,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Reprisal",
 							uuid = "2c11163a-4a3d-18a0-929e-3319617ee02b",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -27616,6 +27939,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "1facd5a4-011d-fb7d-ab64-47c21203b1f5",
 							version = 3,
 						},
@@ -27712,6 +28036,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -27731,7 +28056,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Rampart",
 							uuid = "29ffc56c-26d0-502b-b24e-c71bb21860cb",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -27858,6 +28185,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "caf4dd40-3c83-62e8-bbe8-42fb4f104cff",
 							version = 3,
 						},
@@ -27922,6 +28250,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 22,
 							conditions = 
 							{
@@ -27941,7 +28270,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Bulwark",
 							uuid = "11524b66-efc1-ab98-be5b-c695a98651b0",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -28068,6 +28399,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "4baabb36-f0a0-3e35-ba3b-6c03bb391507",
 							version = 3,
 						},
@@ -28132,6 +28464,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25746,
 							conditions = 
 							{
@@ -28151,7 +28484,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_HolySheltron",
 							uuid = "d4dfddc8-b777-a18f-988c-beb268e0cbb2",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -28278,6 +28613,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "7a0ecf40-5637-e35a-a2e3-7830f3db8869",
 							version = 3,
 						},
@@ -28342,6 +28678,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7382,
 							conditions = 
 							{
@@ -28361,8 +28698,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_InterventionMouse",
 							targetType = "Other Tank",
 							uuid = "89ddce60-a18d-4d93-8fd1-6b6e37ff0222",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -28495,6 +28835,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "d35ab81a-5f37-a16d-b6ae-ae3f6604ba6f",
 							version = 3,
 						},
@@ -28736,6 +29077,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "8562a138-cc79-6b38-ba3f-9a061e8c1f9d",
 							version = 3,
 						},
@@ -28784,6 +29126,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -28798,9 +29141,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Hotbar_ProvokeMouse",
 							targetContentID = 13561,
 							targetType = "ContentID",
 							uuid = "1ec7cad2-9361-2a23-b93a-91bce46ff7c3",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -28910,6 +29256,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "f3cb6d12-0648-995d-aed7-859e07c91dac",
 							version = 3,
 						},
@@ -29291,6 +29638,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -29310,7 +29658,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Reprisal",
 							uuid = "e780540b-8e73-a028-bad3-9cc50959e5f1",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -29426,6 +29776,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "af28c015-66a0-9689-b5c1-6826d7552dc3",
 							version = 3,
 						},
@@ -30112,6 +30463,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3540,
 							conditions = 
 							{
@@ -30126,7 +30478,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_DivineVeil",
 							uuid = "1b3f1731-b9d0-89f5-b9d1-cb8896eee9be",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -30227,6 +30581,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "49bb0e25-760f-7914-a8ea-38ed1db6f852",
 							version = 3,
 						},
@@ -30291,6 +30646,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -30310,7 +30666,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Reprisal",
 							uuid = "eef9ed6b-1b8f-44fc-8780-512f0694b426",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -30426,6 +30784,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "bade4b3e-4b74-925f-aa94-ef47b07b94aa",
 							version = 3,
 						},
@@ -30545,6 +30904,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 30,
 							conditions = 
 							{
@@ -30564,7 +30924,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_HallowedGround",
 							uuid = "99308e40-7a58-f456-9d1a-94ae361e46d2",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -30688,6 +31050,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "fd7e5f48-2ff5-6cd3-af66-b8c540aebe98",
 							version = 3,
 						},
@@ -30751,6 +31114,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7382,
 							conditions = 
 							{
@@ -30770,8 +31134,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_InterventionMouse",
 							targetType = "Other Tank",
 							uuid = "d75b7e87-467d-6d94-b06e-4e5d8b3b2dc6",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -30904,6 +31271,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "89fdb50c-3478-e939-bbc7-794e24060633",
 							version = 3,
 						},
@@ -30967,6 +31335,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -30986,7 +31355,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Rampart",
 							uuid = "cf1b7639-ed22-5aa7-bb62-35f1ed8a6be9",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -31113,6 +31484,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "b4b07c4b-8989-d459-9fac-2fb87d70d557",
 							version = 3,
 						},
@@ -31177,6 +31549,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36920,
 							conditions = 
 							{
@@ -31196,7 +31569,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Guardian",
 							uuid = "97e2b958-ce87-1fa7-8aba-3d67703b4c4f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -31323,6 +31698,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "64cefe83-2d8f-4a9a-9e38-52709b54b2b4",
 							version = 3,
 						},
@@ -31387,6 +31763,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 22,
 							conditions = 
 							{
@@ -31406,7 +31783,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Bulwark",
 							uuid = "ed5a7fd8-1e8f-318c-95bf-dd8ec74d017a",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -31563,6 +31942,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "4cf8e0b8-4b9c-a804-b56d-1b89dbd7fdef",
 							version = 3,
 						},
@@ -31627,6 +32007,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25746,
 							conditions = 
 							{
@@ -31646,7 +32027,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_HolySheltron",
 							uuid = "26313f37-caab-8bcd-8810-a2b05532f1e9",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -31773,6 +32156,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "8d6c252f-a2d5-2a46-9e8b-1121553a33c1",
 							version = 3,
 						},
@@ -31836,6 +32220,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -31850,9 +32235,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Hotbar_ProvokeMouse",
 							targetContentID = 13561,
 							targetType = "ContentID",
 							uuid = "8a8aafbd-74c6-e674-a3b2-686aadf0d129",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -31962,6 +32350,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "38a54725-4024-5339-807e-5981678b974a",
 							version = 3,
 						},
@@ -32026,6 +32415,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -32045,9 +32435,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Hotbar_ProvokeMouse",
 							targetContentID = 13561,
 							targetType = "ContentID",
 							uuid = "077634f6-242a-0e81-a8d6-e706ab8b2468",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -32189,6 +32582,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "3ccae06b-7e78-e071-ba62-e19aa10119ed",
 							version = 3,
 						},
@@ -32525,6 +32919,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -32544,7 +32939,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Reprisal",
 							uuid = "cfd59bc9-bfd7-86f5-aec1-3839f0de369e",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -32660,6 +33057,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "6defe1ba-6ca7-0781-862f-3503f39dfa80",
 							version = 3,
 						},
@@ -32789,6 +33187,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -32808,7 +33207,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Reprisal",
 							uuid = "f6cc197b-8afc-7b04-ab60-d71b78aa1d34",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -32924,6 +33325,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "3e6386fd-5cb1-7f38-9e2b-080bed4743ab",
 							version = 3,
 						},
@@ -33779,6 +34181,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3540,
 							conditions = 
 							{
@@ -33793,7 +34196,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_DivineVeil",
 							uuid = "181cc250-d12a-71bc-854d-d1ff6289f56f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -33894,6 +34299,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "3a29d305-8af6-3aca-8284-61dd06af9699",
 							version = 3,
 						},
@@ -33958,6 +34364,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -33977,7 +34384,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Reprisal",
 							uuid = "b5cae6fe-b33e-3ad3-b94c-48fa0761a60e",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -34093,6 +34502,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "b442d95e-7e90-7266-b56a-ca5af37a644c",
 							version = 3,
 						},
@@ -34212,6 +34622,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 30,
 							conditions = 
 							{
@@ -34231,7 +34642,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_HallowedGround",
 							uuid = "bf4d4904-aef4-e808-909a-1536b48d76b3",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -34355,6 +34768,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "4c529ce1-af26-ca8a-99af-d70a061c7d95",
 							version = 3,
 						},
@@ -34418,6 +34832,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7382,
 							conditions = 
 							{
@@ -34437,8 +34852,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_InterventionMouse",
 							targetType = "Other Tank",
 							uuid = "5e209897-b89c-2785-9d2c-9bf685eaa263",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -34571,6 +34989,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "d62dc138-f3b3-1353-a5a1-2bb4529eabe0",
 							version = 3,
 						},
@@ -34634,6 +35053,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -34653,7 +35073,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Rampart",
 							uuid = "20db2fa1-f497-d9aa-a26d-d97ebb8e42ed",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -34780,6 +35202,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "72d12a42-4ac5-471d-9f65-2c35e20d9169",
 							version = 3,
 						},
@@ -34844,6 +35267,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36920,
 							conditions = 
 							{
@@ -34863,7 +35287,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Guardian",
 							uuid = "f4b62b4b-8095-0f81-8f66-afe2cd2ca298",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -34990,6 +35416,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "b941ef7c-8aba-9c5c-8aff-cd692b2955fc",
 							version = 3,
 						},
@@ -35054,6 +35481,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 22,
 							conditions = 
 							{
@@ -35073,7 +35501,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Bulwark",
 							uuid = "59e24211-0e88-554b-bf11-ac91824a7eb3",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -35230,6 +35660,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "56c22d1e-7f56-c134-a9db-49b550188913",
 							version = 3,
 						},
@@ -35294,6 +35725,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25746,
 							conditions = 
 							{
@@ -35313,7 +35745,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_HolySheltron",
 							uuid = "e94ca7a0-d3d9-ee39-bee6-5196973a61c9",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -35440,6 +35874,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "b97718ef-b79f-716c-bd09-9a8f648442b4",
 							version = 3,
 						},
@@ -35503,6 +35938,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -35517,9 +35953,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Hotbar_ProvokeMouse",
 							targetContentID = 13561,
 							targetType = "ContentID",
 							uuid = "3b6ac2c2-e3db-b25f-afc0-b3a72165d789",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -35629,6 +36068,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "f0e65bbe-1e31-2ee4-b167-308f047474ef",
 							version = 3,
 						},
@@ -35693,6 +36133,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -35712,9 +36153,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Hotbar_ProvokeMouse",
 							targetContentID = 13561,
 							targetType = "ContentID",
 							uuid = "3266839d-e7d0-d585-bfd7-233d56759c39",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -35856,6 +36300,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "269ee2db-2c7c-72ab-b961-0f4f07731442",
 							version = 3,
 						},
@@ -36192,6 +36637,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -36211,7 +36657,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Reprisal",
 							uuid = "8274e417-88ac-4bc5-b588-d991e759092f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -36327,6 +36775,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "0f412b29-450e-f8dc-affb-af032743a525",
 							version = 3,
 						},
@@ -36740,6 +37189,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -36759,7 +37209,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_Reprisal",
 							uuid = "43cbce90-7ce9-bc01-84da-d1e511084cbc",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -36875,6 +37327,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "0cf1df2a-e35b-8920-a5c6-2c06dbeced04",
 							version = 3,
 						},
@@ -37018,6 +37471,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "d2606bf1-22ad-41c1-8349-a4f1ab27c8ef",
 							version = 3,
 						},
@@ -37634,6 +38088,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3540,
 							conditions = 
 							{
@@ -37648,7 +38103,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPLD3_Tankbar_DivineVeil",
 							uuid = "76df6af6-670c-7722-9130-a8c3f6452f14",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -37749,6 +38206,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "PALADIN",
+							name = "Paladin",
 							uuid = "94b5aeba-a926-d1fd-9f87-67fa24c7e046",
 							version = 3,
 						},
