@@ -12912,6 +12912,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7549,
 							conditions = 
 							{
@@ -12927,9 +12928,11 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M1 Feint Ultimate Relativity",
 							targetType = "Enemy",
 							uuid = "b2a1aa0b-4034-5c71-8418-c60d3e00c0f4",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -14276,6 +14279,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7549,
 							conditions = 
 							{
@@ -14291,9 +14295,11 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M2 Feint Shell Crusher + Shockwave Pulsar",
 							targetType = "Enemy",
 							uuid = "c2bce1a6-b4df-a6ce-8d58-17b74ddaefdf",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -17405,6 +17411,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7549,
 							conditions = 
 							{
@@ -17420,9 +17427,11 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M1 Feint Shockwave Pulsar + Memory's End",
 							targetType = "Enemy",
 							uuid = "0752c767-1eed-0139-a790-574ab167baa7",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -19490,6 +19499,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7549,
 							conditions = 
 							{
@@ -19505,9 +19515,11 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M2 Feint Darklit Dragonsong (Ryne)",
 							targetType = "Enemy",
 							uuid = "4bae1878-5e4b-fd02-8fda-55a9c94f92e2",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -22882,6 +22894,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7549,
 							conditions = 
 							{
@@ -22897,9 +22910,11 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M1 Feint Crystallize Time (Gaia)",
 							targetType = "Enemy",
 							uuid = "36f67c7d-1bb2-e08c-a9ac-c9301f80466d",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -24936,6 +24951,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7549,
 							conditions = 
 							{
@@ -24951,9 +24967,11 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M2 Feint Post-CT Akh Morn + Morn Afah",
 							targetType = "Enemy",
 							uuid = "b1ae97b3-183a-7e67-bebf-0f3c6aca8a9f",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -26764,6 +26782,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7549,
 							conditions = 
 							{
@@ -26779,9 +26798,11 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M1 Feint Fulgent Blade",
 							targetType = "Enemy",
 							uuid = "7e6d8661-87d6-e7dd-b5f2-672f6e9c1424",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -27510,6 +27531,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7549,
 							conditions = 
 							{
@@ -27525,9 +27547,11 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M2 Feint P5 Akh Morn 1",
 							targetType = "Enemy",
 							uuid = "6eb5bab9-c279-02f5-870c-5ba3f86bb492",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -30489,6 +30513,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7549,
 							conditions = 
 							{
@@ -30504,9 +30529,11 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M1 Feint Fulgent Blade",
 							targetType = "Enemy",
 							uuid = "e17792fb-fc3e-6e4c-be6a-63a06220b3ac",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -31120,6 +31147,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7549,
 							conditions = 
 							{
@@ -31135,9 +31163,11 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M2 Feint P5 Akh Morn 2",
 							targetType = "Enemy",
 							uuid = "44b54428-2dba-6d00-a42a-3e9eae645255",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -33683,6 +33713,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7549,
 							conditions = 
 							{
@@ -33698,9 +33729,11 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M1 Feint Fulgent Blade",
 							targetType = "Enemy",
 							uuid = "5dc8e9f4-ce47-b455-b68d-a77f0c51b162",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -34639,6 +34672,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7549,
 							conditions = 
 							{
@@ -34654,9 +34688,11 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M2 Feint P5 Akh Morn 3",
 							targetType = "Enemy",
 							uuid = "8c0aee9a-ee55-3799-b565-d1ce3c22c394",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},

@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- P3-P5 M1/M2 Feint also uses the ACR Hotbar request, completing all 19 Feint assignments. Existing timing, roster and cooldown checks are preserved; combat confirmation pending. (19-10-2026)
+
 - P1-P2 M1/M2 Feint now requests the ACR Hotbar Feint control, verified against RikuMNK3, instead of casting directly. Role/cooldown gates and timings remain unchanged; combat testing pending. (19-10-2026)
 
 - Fixed the final six P1 Addle and physical-ranged mitigation role checks to use AnyoneCore Party Roster. Full 243-reaction audit found no remaining legacy role helpers; combat confirmation pending. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - RDM Jump In now disables and re-enables in the shared jump-control windows, including the P2 entry release. SMN is skipped; Viper, Reaper and Samurai have no equivalent persistent movement toggle in their current ACR catalogs. (18-10-2026)
 
 - Added the requested synchronized jump-disable/re-enable windows to lpdu mits for PLD, MNK and DRG, the non-WAR live ACR catalogs exposing a Jumps toggle. Restores jumps at P2 entry 203.8 without resetting unrelated rotation holds. WAR keeps its existing job-profile controls. (18-10-2026)
-
-- Removed WAR Nascent Flash and GNB Heart of Corundum requests from OT Quadruple Slap support, where the fast P1-to-P2 transition leaves them unavailable. MT invuln and PLD/DRK support remain unchanged; no healer automation was added. (18-10-2026)
 
 ### UWU: LPDU
 
