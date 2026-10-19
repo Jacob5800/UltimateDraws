@@ -616,6 +616,290 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Potions",
+				uuid = "58824b00-87d1-d1c6-b9d9-e74a355e12da",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"3e99cdbc-a612-8fe5-9bbf-c8677bd386d3",
+									true,
+								},
+								
+								{
+									"ff0401fa-e239-95d9-903b-aa2350d137be",
+									true,
+								},
+								
+								{
+									"619686bb-3385-b662-a561-13fbaf90924c",
+									true,
+								},
+								
+								{
+									"ab8d89f8-bf1d-ceaf-84c9-9c26b9c5de4d",
+									true,
+								},
+							},
+							name = "Potion - Strength",
+							potType = 4,
+							usePot = true,
+							uuid = "a2aceb49-7c2c-dc58-9823-b2e7e24253a5",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"3e99cdbc-a612-8fe5-9bbf-c8677bd386d3",
+									true,
+								},
+								
+								{
+									"ff0401fa-e239-95d9-903b-aa2350d137be",
+									true,
+								},
+								
+								{
+									"619686bb-3385-b662-a561-13fbaf90924c",
+									true,
+								},
+								
+								{
+									"3cf70bd5-f86d-5575-9f2f-03cc8cb565e4",
+									true,
+								},
+							},
+							name = "Potion - Dexterity",
+							usePot = true,
+							uuid = "149608ee-7fc2-d1f7-bdb0-9f0ddcffd0bd",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"3e99cdbc-a612-8fe5-9bbf-c8677bd386d3",
+									true,
+								},
+								
+								{
+									"ff0401fa-e239-95d9-903b-aa2350d137be",
+									true,
+								},
+								
+								{
+									"619686bb-3385-b662-a561-13fbaf90924c",
+									true,
+								},
+								
+								{
+									"e8d34ffb-2872-3f9b-801c-4d1d5970efc5",
+									true,
+								},
+							},
+							name = "Potion - Intelligence",
+							potType = 2,
+							usePot = true,
+							uuid = "9940706a-5e33-713e-b9b2-2453b0cd80a2",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"3e99cdbc-a612-8fe5-9bbf-c8677bd386d3",
+									true,
+								},
+								
+								{
+									"ff0401fa-e239-95d9-903b-aa2350d137be",
+									true,
+								},
+								
+								{
+									"619686bb-3385-b662-a561-13fbaf90924c",
+									true,
+								},
+								
+								{
+									"b7f8fc37-d51f-1995-bce8-acb7abd7750a",
+									true,
+								},
+							},
+							name = "Potion - Mind",
+							potType = 3,
+							usePot = true,
+							uuid = "06ce632d-95e3-50e8-8e7f-50feed112572",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return Settings.FFXIVMINION.LPDU_UCOB_PotionsEnabled ~= false",
+							name = "LPDU potions enabled",
+							uuid = "3e99cdbc-a612-8fe5-9bbf-c8677bd386d3",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 7,
+							name = "In combat",
+							uuid = "ff0401fa-e239-95d9-903b-aa2350d137be",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return Settings.FFXIVMINION.LPDU_UCOB_PotionOpener ~= false",
+							name = "Opener potion enabled",
+							uuid = "619686bb-3385-b662-a561-13fbaf90924c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								19,
+								20,
+								21,
+								22,
+								32,
+								34,
+								37,
+								39,
+							},
+							name = "Strength jobs",
+							uuid = "ab8d89f8-bf1d-ceaf-84c9-9c26b9c5de4d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								23,
+								30,
+								31,
+								38,
+								41,
+							},
+							name = "Dexterity jobs",
+							uuid = "3cf70bd5-f86d-5575-9f2f-03cc8cb565e4",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								25,
+								27,
+								35,
+								42,
+							},
+							name = "Intelligence jobs",
+							uuid = "e8d34ffb-2872-3f9b-801c-4d1d5970efc5",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								24,
+								28,
+								33,
+								40,
+							},
+							name = "Mind jobs",
+							uuid = "b7f8fc37-d51f-1995-bce8-acb7abd7750a",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Potions",
+				mechanicTime = 7,
+				name = "[LPDU Potion] Opener",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = -0.7,
+				timerStartOffset = -3.7,
+				uuid = "40b1ff84-4380-2d1f-b75e-05b5c9070754",
+				version = 2,
+			},
+		},
 	},
 	[3] = 
 	{
@@ -980,8 +1264,8 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local settings=Settings.FFXIVMINION\nif not data.ucobAssignmentGuiOptions then\n data.ucobAssignmentGuiOptions={healer={\"Unassigned\",\"In\",\"Out\"},tower={\"Unassigned\",\"Close\",\"Far\"}}\nend\nlocal options=data.ucobAssignmentGuiOptions\nlocal healer=settings.LPDU_UCOB_FirstFireballHealer or \"Unassigned\"\nlocal R=AnyoneCore and AnyoneCore.Roster\nlocal slot=R and R.current() and R.mySlot() or nil\nlocal defaultTower=(slot==\"M1\" or slot==\"M2\") and \"Close\" or (slot==\"R1\" or slot==\"R2\") and \"Far\" or nil\noptions.tower[1]=defaultTower and (\"Auto: \"..defaultTower) or \"Auto (role)\"\nlocal tower=settings.LPDU_UCOB_BlackfireTower or \"Unassigned\"\nlocal hi=healer==\"In\" and 2 or healer==\"Out\" and 3 or 1\nlocal ti=tower==\"Close\" and 2 or tower==\"Far\" and 3 or 1\nlocal visible=GUI:Begin(\"[LPDU] UCOB - Assignments\",true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n GUI:PushItemWidth(150)\n GUI:Text(\"P1 Healer Fireball - DPS targeted\")\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"First Fireball only.\\nDPS targeted: use your chosen In/Out assignment.\\nHealer targeted: that healer goes in; the other stays out automatically.\\nUnassigned: agree which healer stays out.\\nBoth tanks stay out.\")\n end\n GUI:SameLine(255)\n local newH,changedH=GUI:Combo(\"##LPDUFirstFireballHealer\",hi,options.healer)\n if newH~=hi and options.healer[newH] then settings.LPDU_UCOB_FirstFireballHealer=options.healer[newH] end\n GUI:Text(\"P3 Blackfire DPS Tower\")\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Default: melee Close to Nael; ranged Far from Nael.\\nChoose Close/Far to override, or Auto to follow your roster role.\") end\n GUI:SameLine(255)\n local newT,changedT=GUI:Combo(\"##LPDUBlackfireTower\",ti,options.tower)\n if newT~=ti and options.tower[newT] then settings.LPDU_UCOB_BlackfireTower=newT==1 and \"Unassigned\" or options.tower[newT] end\n GUI:PopItemWidth()\nend\nGUI:End()\nself.used=true",
-							name = "First Fireball and Blackfire Settings",
+							actionLua = "local settings=Settings.FFXIVMINION\nif not data.ucobAssignmentGuiOptions then\n data.ucobAssignmentGuiOptions={healer={\"Unassigned\",\"In\",\"Out\"},tower={\"Unassigned\",\"Close\",\"Far\"}}\nend\nlocal options=data.ucobAssignmentGuiOptions\nlocal healer=settings.LPDU_UCOB_FirstFireballHealer or \"Unassigned\"\nlocal R=AnyoneCore and AnyoneCore.Roster\nlocal slot=R and R.current() and R.mySlot() or nil\nlocal defaultTower=(slot==\"M1\" or slot==\"M2\") and \"Close\" or (slot==\"R1\" or slot==\"R2\") and \"Far\" or nil\noptions.tower[1]=defaultTower and (\"Auto: \"..defaultTower) or \"Auto (role)\"\nlocal tower=settings.LPDU_UCOB_BlackfireTower or \"Unassigned\"\nlocal hi=healer==\"In\" and 2 or healer==\"Out\" and 3 or 1\nlocal ti=tower==\"Close\" and 2 or tower==\"Far\" and 3 or 1\nlocal visible=GUI:Begin(\"[LPDU] UCOB - Assignments\",true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n GUI:PushItemWidth(150)\n GUI:Text(\"P1 Healer Fireball - DPS targeted\")\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"First Fireball only.\\nDPS targeted: use your chosen In/Out assignment.\\nHealer targeted: that healer goes in; the other stays out automatically.\\nUnassigned: agree which healer stays out.\\nBoth tanks stay out.\")\n end\n GUI:SameLine(255)\n local newH,changedH=GUI:Combo(\"##LPDUFirstFireballHealer\",hi,options.healer)\n if newH~=hi and options.healer[newH] then settings.LPDU_UCOB_FirstFireballHealer=options.healer[newH] end\n GUI:Text(\"P3 Blackfire DPS Tower\")\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Default: melee Close to Nael; ranged Far from Nael.\\nChoose Close/Far to override, or Auto to follow your roster role.\") end\n GUI:SameLine(255)\n local newT,changedT=GUI:Combo(\"##LPDUBlackfireTower\",ti,options.tower)\n if newT~=ti and options.tower[newT] then settings.LPDU_UCOB_BlackfireTower=newT==1 and \"Unassigned\" or options.tower[newT] end\n GUI:Text(\"Potions\")\n settings.LPDU_UCOB_PotionsEnabled=GUI:Checkbox(\"Enable LPDU potion schedule##UCOBPots\",settings.LPDU_UCOB_PotionsEnabled~=false)\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Uses your job's main-stat potion and normal weave rules.\\nWindows expire after 3 seconds; unavailable potions are skipped.\\nDisable duplicate potion automation in your job profile.\") end\n settings.LPDU_UCOB_PotionOpener=GUI:Checkbox(\"Opener potion##UCOBPotOpener\",settings.LPDU_UCOB_PotionOpener~=false)\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Disable for a three-potion route. Default opener: timeline 3.3s.\") end\n if not data.ucobPotionSecondOptions then data.ucobPotionSecondOptions={\"Late Nael\",\"Delayed Nael\",\"Bahamut opener\",\"After Blackfire\",\"Disabled / manual\"} end\n local potOptions=data.ucobPotionSecondOptions\n local second=settings.LPDU_UCOB_PotionSecond or \"Late Nael\"\n local secondIndex=1\n for i=1,#potOptions do if potOptions[i]==second then secondIndex=i break end end\n GUI:Text(\"Second potion window\")\n GUI:SameLine(255)\n local newSecond=GUI:Combo(\"##UCOBSecondPotion\",secondIndex,potOptions)\n if newSecond~=secondIndex and potOptions[newSecond] then settings.LPDU_UCOB_PotionSecond=potOptions[newSecond] end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Alternatives, not extra potions.\\nLate Nael 340.3 / Delayed Nael 368.9 / Bahamut opener 512.0 / After Blackfire 591.3.\\nAdds opener 845.8 and Late Golden 1366.6 remain enabled.\\nTimes are synced timeline coordinates, not seconds since pull.\\nReal cooldown or missing items can cause a window to be skipped.\") end\n GUI:PopItemWidth()\nend\nGUI:End()\nself.used=true",
+							name = "Assignment and potion settings",
 							uuid = "a7689b1f-29f6-541f-a839-c69ff7957246",
 							version = 2.1,
 						},
@@ -4865,6 +5149,20 @@ local tbl =
 		{
 			data = 
 			{
+				name = "[MCH] Precast Potion",
+				uuid = "62417090-c38b-837f-8991-9b6c422c5d7b",
+				version = 2,
+			},
+			inheritedObjectUUID = "c443b543-f7e6-e221-a19b-d1026b0ee158",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "LPDU Personal Guidance",
 				uuid = "4ae11575-ae15-fe2c-b61e-09dc71ae9e24",
@@ -8729,6 +9027,293 @@ local tbl =
 			},
 		},
 	},
+	[72] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Potions",
+				uuid = "c80c7447-ae68-42b9-b100-a6a0a7b93df0",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"4b28d722-ae32-898b-8082-dc546a368fa3",
+									true,
+								},
+								
+								{
+									"676b868c-2445-2912-bd29-0b52fbb52082",
+									true,
+								},
+								
+								{
+									"e3a65fcc-697c-5bba-af96-334589dcabe8",
+									true,
+								},
+								
+								{
+									"30c0597e-c48c-e78c-b3fc-37d617a96c76",
+									true,
+								},
+							},
+							name = "Potion - Strength",
+							potType = 4,
+							usePot = true,
+							uuid = "19522baa-233d-2406-b340-ccae3980f86a",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"4b28d722-ae32-898b-8082-dc546a368fa3",
+									true,
+								},
+								
+								{
+									"676b868c-2445-2912-bd29-0b52fbb52082",
+									true,
+								},
+								
+								{
+									"e3a65fcc-697c-5bba-af96-334589dcabe8",
+									true,
+								},
+								
+								{
+									"0e2a0b6b-5edd-e7c6-930e-cda5e5b91b3a",
+									true,
+								},
+							},
+							name = "Potion - Dexterity",
+							usePot = true,
+							uuid = "fb92c6a6-061b-c463-a50a-b03c6c8a3be8",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"4b28d722-ae32-898b-8082-dc546a368fa3",
+									true,
+								},
+								
+								{
+									"676b868c-2445-2912-bd29-0b52fbb52082",
+									true,
+								},
+								
+								{
+									"e3a65fcc-697c-5bba-af96-334589dcabe8",
+									true,
+								},
+								
+								{
+									"38a48d08-963b-4a4e-999e-85211b04ac7b",
+									true,
+								},
+							},
+							name = "Potion - Intelligence",
+							potType = 2,
+							usePot = true,
+							uuid = "8c7005d1-88e5-3326-a31c-d132effb291c",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"4b28d722-ae32-898b-8082-dc546a368fa3",
+									true,
+								},
+								
+								{
+									"676b868c-2445-2912-bd29-0b52fbb52082",
+									true,
+								},
+								
+								{
+									"e3a65fcc-697c-5bba-af96-334589dcabe8",
+									true,
+								},
+								
+								{
+									"bb7b8aec-9ced-fc1b-84fb-b4e49f3c3bea",
+									true,
+								},
+							},
+							name = "Potion - Mind",
+							potType = 3,
+							usePot = true,
+							uuid = "940f1520-cf4c-3c1f-a4fa-d10ca6604a2d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return Settings.FFXIVMINION.LPDU_UCOB_PotionsEnabled ~= false",
+							name = "LPDU potions enabled",
+							uuid = "4b28d722-ae32-898b-8082-dc546a368fa3",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 7,
+							name = "In combat",
+							uuid = "676b868c-2445-2912-bd29-0b52fbb52082",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return (Settings.FFXIVMINION.LPDU_UCOB_PotionSecond or \"Late Nael\") == \"Late Nael\"",
+							name = "Second potion - Late Nael",
+							uuid = "e3a65fcc-697c-5bba-af96-334589dcabe8",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								19,
+								20,
+								21,
+								22,
+								32,
+								34,
+								37,
+								39,
+							},
+							name = "Strength jobs",
+							uuid = "30c0597e-c48c-e78c-b3fc-37d617a96c76",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								23,
+								30,
+								31,
+								38,
+								41,
+							},
+							name = "Dexterity jobs",
+							uuid = "0e2a0b6b-5edd-e7c6-930e-cda5e5b91b3a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								25,
+								27,
+								35,
+								42,
+							},
+							name = "Intelligence jobs",
+							uuid = "38a48d08-963b-4a4e-999e-85211b04ac7b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								24,
+								28,
+								33,
+								40,
+							},
+							name = "Mind jobs",
+							uuid = "bb7b8aec-9ced-fc1b-84fb-b4e49f3c3bea",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Potions",
+				mechanicTime = 339.5,
+				name = "[LPDU Potion] Late Nael",
+				timeRange = true,
+				timelineIndex = 72,
+				timerEndOffset = 3.8,
+				timerStartOffset = 0.8,
+				uuid = "dd2a0b5f-be20-5002-bd83-40fe15b2244c",
+				version = 2,
+			},
+		},
+	},
 	[73] = 
 	{
 		
@@ -8755,6 +9340,293 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\ucob\\universal",
 			objectType = "folder",
+		},
+	},
+	[79] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Potions",
+				uuid = "039e1311-8dbe-83a0-961c-72abbdd4aef6",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"a9ded257-ea61-1b09-95b1-faa0498eff63",
+									true,
+								},
+								
+								{
+									"434dbd12-4444-db9d-b07e-6b692a915211",
+									true,
+								},
+								
+								{
+									"a02945b9-7075-fbb3-b548-99d615879aba",
+									true,
+								},
+								
+								{
+									"ae164da1-8192-c956-a29e-dfade6889f25",
+									true,
+								},
+							},
+							name = "Potion - Strength",
+							potType = 4,
+							usePot = true,
+							uuid = "16510acd-73d8-c1e6-b5db-02b122c06b4d",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"a9ded257-ea61-1b09-95b1-faa0498eff63",
+									true,
+								},
+								
+								{
+									"434dbd12-4444-db9d-b07e-6b692a915211",
+									true,
+								},
+								
+								{
+									"a02945b9-7075-fbb3-b548-99d615879aba",
+									true,
+								},
+								
+								{
+									"720af418-513c-7aef-b524-45d2f1109c35",
+									true,
+								},
+							},
+							name = "Potion - Dexterity",
+							usePot = true,
+							uuid = "df3f7959-243e-93a3-8b52-5e5b0ffff0bc",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"a9ded257-ea61-1b09-95b1-faa0498eff63",
+									true,
+								},
+								
+								{
+									"434dbd12-4444-db9d-b07e-6b692a915211",
+									true,
+								},
+								
+								{
+									"a02945b9-7075-fbb3-b548-99d615879aba",
+									true,
+								},
+								
+								{
+									"777ef6ea-99e3-2a7d-98ab-50b83b2d9e63",
+									true,
+								},
+							},
+							name = "Potion - Intelligence",
+							potType = 2,
+							usePot = true,
+							uuid = "eedc0936-e6a3-5daa-a3cb-2cb5fd7a06f4",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"a9ded257-ea61-1b09-95b1-faa0498eff63",
+									true,
+								},
+								
+								{
+									"434dbd12-4444-db9d-b07e-6b692a915211",
+									true,
+								},
+								
+								{
+									"a02945b9-7075-fbb3-b548-99d615879aba",
+									true,
+								},
+								
+								{
+									"deb24b42-d13e-9fda-90ca-092689d3eb85",
+									true,
+								},
+							},
+							name = "Potion - Mind",
+							potType = 3,
+							usePot = true,
+							uuid = "2b3a417c-eda4-37b5-bd00-70c7b57cf024",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return Settings.FFXIVMINION.LPDU_UCOB_PotionsEnabled ~= false",
+							name = "LPDU potions enabled",
+							uuid = "a9ded257-ea61-1b09-95b1-faa0498eff63",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 7,
+							name = "In combat",
+							uuid = "434dbd12-4444-db9d-b07e-6b692a915211",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return (Settings.FFXIVMINION.LPDU_UCOB_PotionSecond or \"Late Nael\") == \"Delayed Nael\"",
+							name = "Second potion - Delayed Nael",
+							uuid = "a02945b9-7075-fbb3-b548-99d615879aba",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								19,
+								20,
+								21,
+								22,
+								32,
+								34,
+								37,
+								39,
+							},
+							name = "Strength jobs",
+							uuid = "ae164da1-8192-c956-a29e-dfade6889f25",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								23,
+								30,
+								31,
+								38,
+								41,
+							},
+							name = "Dexterity jobs",
+							uuid = "720af418-513c-7aef-b524-45d2f1109c35",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								25,
+								27,
+								35,
+								42,
+							},
+							name = "Intelligence jobs",
+							uuid = "777ef6ea-99e3-2a7d-98ab-50b83b2d9e63",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								24,
+								28,
+								33,
+								40,
+							},
+							name = "Mind jobs",
+							uuid = "deb24b42-d13e-9fda-90ca-092689d3eb85",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Potions",
+				mechanicTime = 372.7,
+				name = "[LPDU Potion] Delayed Nael",
+				timeRange = true,
+				timelineIndex = 79,
+				timerEndOffset = -0.8,
+				timerStartOffset = -3.8,
+				uuid = "30293eb4-f88f-578e-8ad5-46dede03b832",
+				version = 2,
+			},
 		},
 	},
 	[82] = 
@@ -9000,6 +9872,304 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\ucob\\universal",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "[MCH] Precast Potion",
+				uuid = "751531aa-3328-b61d-8884-b0cdd6497bca",
+				version = 2,
+			},
+			inheritedObjectUUID = "7a776270-406c-36e4-9740-e6f405e82288",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Potions",
+				uuid = "3b19aff3-d9c8-d3f6-a957-891720e4d3de",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"42815904-24fc-305d-abb9-7df2af77c2e1",
+									true,
+								},
+								
+								{
+									"ea7add80-bf25-b4c1-8888-fb1af4912dd6",
+									true,
+								},
+								
+								{
+									"02f9d7c2-db1b-343c-a964-2a1b0c7b8c77",
+									true,
+								},
+								
+								{
+									"c8067e9c-302a-99eb-90a9-db57552c4ed7",
+									true,
+								},
+							},
+							name = "Potion - Strength",
+							potType = 4,
+							usePot = true,
+							uuid = "41108440-d387-f508-bb26-3fc740a68f02",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"42815904-24fc-305d-abb9-7df2af77c2e1",
+									true,
+								},
+								
+								{
+									"ea7add80-bf25-b4c1-8888-fb1af4912dd6",
+									true,
+								},
+								
+								{
+									"02f9d7c2-db1b-343c-a964-2a1b0c7b8c77",
+									true,
+								},
+								
+								{
+									"95f967d3-134e-c6a3-9624-950d4460a266",
+									true,
+								},
+							},
+							name = "Potion - Dexterity",
+							usePot = true,
+							uuid = "2978dd6e-ad71-2ad8-ba46-4621acb6f518",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"42815904-24fc-305d-abb9-7df2af77c2e1",
+									true,
+								},
+								
+								{
+									"ea7add80-bf25-b4c1-8888-fb1af4912dd6",
+									true,
+								},
+								
+								{
+									"02f9d7c2-db1b-343c-a964-2a1b0c7b8c77",
+									true,
+								},
+								
+								{
+									"ec2c0d81-3541-caa5-8286-881c30b1b882",
+									true,
+								},
+							},
+							name = "Potion - Intelligence",
+							potType = 2,
+							usePot = true,
+							uuid = "2368dfe9-49f9-fa9f-b672-d4ab76e626a9",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"42815904-24fc-305d-abb9-7df2af77c2e1",
+									true,
+								},
+								
+								{
+									"ea7add80-bf25-b4c1-8888-fb1af4912dd6",
+									true,
+								},
+								
+								{
+									"02f9d7c2-db1b-343c-a964-2a1b0c7b8c77",
+									true,
+								},
+								
+								{
+									"8514d708-8aad-2ec3-a074-52feb295d5a2",
+									true,
+								},
+							},
+							name = "Potion - Mind",
+							potType = 3,
+							usePot = true,
+							uuid = "515a7d13-2bb0-e20d-a315-8c9634a6b576",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return Settings.FFXIVMINION.LPDU_UCOB_PotionsEnabled ~= false",
+							name = "LPDU potions enabled",
+							uuid = "42815904-24fc-305d-abb9-7df2af77c2e1",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 7,
+							name = "In combat",
+							uuid = "ea7add80-bf25-b4c1-8888-fb1af4912dd6",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return (Settings.FFXIVMINION.LPDU_UCOB_PotionSecond or \"Late Nael\") == \"Bahamut opener\"",
+							name = "Second potion - Bahamut opener",
+							uuid = "02f9d7c2-db1b-343c-a964-2a1b0c7b8c77",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								19,
+								20,
+								21,
+								22,
+								32,
+								34,
+								37,
+								39,
+							},
+							name = "Strength jobs",
+							uuid = "c8067e9c-302a-99eb-90a9-db57552c4ed7",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								23,
+								30,
+								31,
+								38,
+								41,
+							},
+							name = "Dexterity jobs",
+							uuid = "95f967d3-134e-c6a3-9624-950d4460a266",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								25,
+								27,
+								35,
+								42,
+							},
+							name = "Intelligence jobs",
+							uuid = "ec2c0d81-3541-caa5-8286-881c30b1b882",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								24,
+								28,
+								33,
+								40,
+							},
+							name = "Mind jobs",
+							uuid = "8514d708-8aad-2ec3-a074-52feb295d5a2",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Potions",
+				mechanicTime = 511,
+				name = "[LPDU Potion] Bahamut opener",
+				timeRange = true,
+				timelineIndex = 87,
+				timerEndOffset = 4,
+				timerStartOffset = 1,
+				uuid = "6961a29b-f52d-a418-b81b-a6006718825e",
+				version = 2,
+			},
 		},
 	},
 	[88] = 
@@ -9476,6 +10646,20 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\ucob\\universal",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "[MCH] Precast Potion",
+				uuid = "c56294fa-1dc2-9439-8342-5effe6f426a1",
+				version = 2,
+			},
+			inheritedObjectUUID = "5d604ee3-dade-86b6-a3a1-c3ed67778973",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
 		},
 	},
 	[96] = 
@@ -10694,6 +11878,290 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\ucob\\universal",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Potions",
+				uuid = "58827aa1-b549-be9c-9c8f-85f9fd8df432",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"616ad61b-8e1d-2566-87f2-7917fd2c2dc6",
+									true,
+								},
+								
+								{
+									"b6729920-a74c-1e57-9f6f-8bcda0131b45",
+									true,
+								},
+								
+								{
+									"6ddc2792-6dc8-2a27-a0cb-e00c8c0f2771",
+									true,
+								},
+								
+								{
+									"aaa56135-a9d0-02e9-a19d-bda132106001",
+									true,
+								},
+							},
+							name = "Potion - Strength",
+							potType = 4,
+							usePot = true,
+							uuid = "1e89872c-41d7-51c6-99b8-4f7e62ac4025",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"616ad61b-8e1d-2566-87f2-7917fd2c2dc6",
+									true,
+								},
+								
+								{
+									"b6729920-a74c-1e57-9f6f-8bcda0131b45",
+									true,
+								},
+								
+								{
+									"6ddc2792-6dc8-2a27-a0cb-e00c8c0f2771",
+									true,
+								},
+								
+								{
+									"90dcff04-aaad-7867-b3c8-b1466dc70609",
+									true,
+								},
+							},
+							name = "Potion - Dexterity",
+							usePot = true,
+							uuid = "6a81b398-0f23-a291-95ef-5a8147304d87",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"616ad61b-8e1d-2566-87f2-7917fd2c2dc6",
+									true,
+								},
+								
+								{
+									"b6729920-a74c-1e57-9f6f-8bcda0131b45",
+									true,
+								},
+								
+								{
+									"6ddc2792-6dc8-2a27-a0cb-e00c8c0f2771",
+									true,
+								},
+								
+								{
+									"bbe79368-908b-f83b-9a32-1f8adee995e7",
+									true,
+								},
+							},
+							name = "Potion - Intelligence",
+							potType = 2,
+							usePot = true,
+							uuid = "7187afd5-15ac-677d-9811-93644f656ec0",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"616ad61b-8e1d-2566-87f2-7917fd2c2dc6",
+									true,
+								},
+								
+								{
+									"b6729920-a74c-1e57-9f6f-8bcda0131b45",
+									true,
+								},
+								
+								{
+									"6ddc2792-6dc8-2a27-a0cb-e00c8c0f2771",
+									true,
+								},
+								
+								{
+									"e169ca60-076d-9c65-b71f-2a48522d8ed6",
+									true,
+								},
+							},
+							name = "Potion - Mind",
+							potType = 3,
+							usePot = true,
+							uuid = "68fd609e-1fad-0736-af38-1856c863f50a",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return Settings.FFXIVMINION.LPDU_UCOB_PotionsEnabled ~= false",
+							name = "LPDU potions enabled",
+							uuid = "616ad61b-8e1d-2566-87f2-7917fd2c2dc6",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 7,
+							name = "In combat",
+							uuid = "b6729920-a74c-1e57-9f6f-8bcda0131b45",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return (Settings.FFXIVMINION.LPDU_UCOB_PotionSecond or \"Late Nael\") == \"After Blackfire\"",
+							name = "Second potion - After Blackfire",
+							uuid = "6ddc2792-6dc8-2a27-a0cb-e00c8c0f2771",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								19,
+								20,
+								21,
+								22,
+								32,
+								34,
+								37,
+								39,
+							},
+							name = "Strength jobs",
+							uuid = "aaa56135-a9d0-02e9-a19d-bda132106001",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								23,
+								30,
+								31,
+								38,
+								41,
+							},
+							name = "Dexterity jobs",
+							uuid = "90dcff04-aaad-7867-b3c8-b1466dc70609",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								25,
+								27,
+								35,
+								42,
+							},
+							name = "Intelligence jobs",
+							uuid = "bbe79368-908b-f83b-9a32-1f8adee995e7",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								24,
+								28,
+								33,
+								40,
+							},
+							name = "Mind jobs",
+							uuid = "e169ca60-076d-9c65-b71f-2a48522d8ed6",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Potions",
+				mechanicTime = 590,
+				name = "[LPDU Potion] After Blackfire",
+				timeRange = true,
+				timelineIndex = 109,
+				timerEndOffset = 4.3,
+				timerStartOffset = 1.3,
+				uuid = "24840c70-80e0-95f4-a1e6-fefdf7a497a0",
+				version = 2,
+			},
 		},
 	},
 	[110] = 
@@ -14802,6 +16270,259 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\ucob\\universal",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Potions",
+				uuid = "a4dba620-bd18-3c46-9e21-072e8f97f8e9",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"00aca765-f160-fbe4-a8b0-9d3812390b8b",
+									true,
+								},
+								
+								{
+									"d89960c4-8954-2821-bf56-7308ec8c8939",
+									true,
+								},
+								
+								{
+									"c9c53570-b69d-e5d1-a0e1-4af667f49bb6",
+									true,
+								},
+							},
+							name = "Potion - Strength",
+							potType = 4,
+							usePot = true,
+							uuid = "8581ba44-23a4-598b-9733-c1b9cb3cc3c4",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"00aca765-f160-fbe4-a8b0-9d3812390b8b",
+									true,
+								},
+								
+								{
+									"d89960c4-8954-2821-bf56-7308ec8c8939",
+									true,
+								},
+								
+								{
+									"db40f719-b4d2-02fd-bc77-2dc9ab0c59c2",
+									true,
+								},
+							},
+							name = "Potion - Dexterity",
+							usePot = true,
+							uuid = "d135317a-2eff-fe10-bfb3-d4f9483e416d",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"00aca765-f160-fbe4-a8b0-9d3812390b8b",
+									true,
+								},
+								
+								{
+									"d89960c4-8954-2821-bf56-7308ec8c8939",
+									true,
+								},
+								
+								{
+									"e31ec5da-beca-a12c-8acb-ee5339890a9a",
+									true,
+								},
+							},
+							name = "Potion - Intelligence",
+							potType = 2,
+							usePot = true,
+							uuid = "a1122412-54a4-01ca-bff6-be5e9f4c5288",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"00aca765-f160-fbe4-a8b0-9d3812390b8b",
+									true,
+								},
+								
+								{
+									"d89960c4-8954-2821-bf56-7308ec8c8939",
+									true,
+								},
+								
+								{
+									"b15c4cc7-a16e-2dbb-a6f8-db51ce6d4f92",
+									true,
+								},
+							},
+							name = "Potion - Mind",
+							potType = 3,
+							usePot = true,
+							uuid = "a9c0032b-4170-2caa-a1c7-11f5704f59f2",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return Settings.FFXIVMINION.LPDU_UCOB_PotionsEnabled ~= false",
+							name = "LPDU potions enabled",
+							uuid = "00aca765-f160-fbe4-a8b0-9d3812390b8b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 7,
+							name = "In combat",
+							uuid = "d89960c4-8954-2821-bf56-7308ec8c8939",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								19,
+								20,
+								21,
+								22,
+								32,
+								34,
+								37,
+								39,
+							},
+							name = "Strength jobs",
+							uuid = "c9c53570-b69d-e5d1-a0e1-4af667f49bb6",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								23,
+								30,
+								31,
+								38,
+								41,
+							},
+							name = "Dexterity jobs",
+							uuid = "db40f719-b4d2-02fd-bc77-2dc9ab0c59c2",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								25,
+								27,
+								35,
+								42,
+							},
+							name = "Intelligence jobs",
+							uuid = "e31ec5da-beca-a12c-8acb-ee5339890a9a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								24,
+								28,
+								33,
+								40,
+							},
+							name = "Mind jobs",
+							uuid = "b15c4cc7-a16e-2dbb-a6f8-db51ce6d4f92",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Potions",
+				mechanicTime = 844.9,
+				name = "[LPDU Potion] Adds opener",
+				timeRange = true,
+				timelineIndex = 168,
+				timerEndOffset = 3.9,
+				timerStartOffset = 0.9,
+				uuid = "c636d74c-5416-b068-980b-a9881ab41a9a",
+				version = 2,
+			},
+		},
 	},
 	[170] = 
 	{
@@ -18483,6 +20204,259 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\ucob\\universal",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Potions",
+				uuid = "160e154a-7371-0002-ab3d-5e0a8051d7b1",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"3ce6e432-50a1-f954-b24d-04c4097749a7",
+									true,
+								},
+								
+								{
+									"63b5d56d-57ef-4f5b-9166-646368c3de9a",
+									true,
+								},
+								
+								{
+									"acec0343-9ee3-8c7f-bb11-d0295209235a",
+									true,
+								},
+							},
+							name = "Potion - Strength",
+							potType = 4,
+							usePot = true,
+							uuid = "8cb20cb6-06e4-1bec-82dd-a095d662f5af",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"3ce6e432-50a1-f954-b24d-04c4097749a7",
+									true,
+								},
+								
+								{
+									"63b5d56d-57ef-4f5b-9166-646368c3de9a",
+									true,
+								},
+								
+								{
+									"e4990cda-3fa5-d634-9618-36e266a4cb99",
+									true,
+								},
+							},
+							name = "Potion - Dexterity",
+							usePot = true,
+							uuid = "8ecef29e-9496-874b-8aff-80258a3dc87e",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"3ce6e432-50a1-f954-b24d-04c4097749a7",
+									true,
+								},
+								
+								{
+									"63b5d56d-57ef-4f5b-9166-646368c3de9a",
+									true,
+								},
+								
+								{
+									"6c69c206-1a65-4d7f-b142-51a220cc4ecd",
+									true,
+								},
+							},
+							name = "Potion - Intelligence",
+							potType = 2,
+							usePot = true,
+							uuid = "4f21fb1d-25b2-6927-aa87-4bf188263cfe",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"3ce6e432-50a1-f954-b24d-04c4097749a7",
+									true,
+								},
+								
+								{
+									"63b5d56d-57ef-4f5b-9166-646368c3de9a",
+									true,
+								},
+								
+								{
+									"0b00b061-92c9-6ebd-becb-5bf9ffa2edf6",
+									true,
+								},
+							},
+							name = "Potion - Mind",
+							potType = 3,
+							usePot = true,
+							uuid = "c52fc723-d436-0591-bcc0-82f9f464addd",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return Settings.FFXIVMINION.LPDU_UCOB_PotionsEnabled ~= false",
+							name = "LPDU potions enabled",
+							uuid = "3ce6e432-50a1-f954-b24d-04c4097749a7",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 7,
+							name = "In combat",
+							uuid = "63b5d56d-57ef-4f5b-9166-646368c3de9a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								19,
+								20,
+								21,
+								22,
+								32,
+								34,
+								37,
+								39,
+							},
+							name = "Strength jobs",
+							uuid = "acec0343-9ee3-8c7f-bb11-d0295209235a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								23,
+								30,
+								31,
+								38,
+								41,
+							},
+							name = "Dexterity jobs",
+							uuid = "e4990cda-3fa5-d634-9618-36e266a4cb99",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								25,
+								27,
+								35,
+								42,
+							},
+							name = "Intelligence jobs",
+							uuid = "6c69c206-1a65-4d7f-b142-51a220cc4ecd",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								24,
+								28,
+								33,
+								40,
+							},
+							name = "Mind jobs",
+							uuid = "0b00b061-92c9-6ebd-becb-5bf9ffa2edf6",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Potions",
+				mechanicTime = 1369.4,
+				name = "[LPDU Potion] Late Golden",
+				timeRange = true,
+				timelineIndex = 202,
+				timerEndOffset = 0.2,
+				timerStartOffset = -2.8,
+				uuid = "030d2e64-8182-63a4-8c4d-dab99f5ef666",
+				version = 2,
+			},
 		},
 	},
 	[203] = 
