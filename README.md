@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Converted 99 Warrior LPDU mits actions to live ACR Hotbar/Tankbar requests, preserving support and Provoke targets. Kept Holmgang explicitly self-targeted through native actions and named all 106 Warrior-only job conditions Warrior. (19-10-2026)
+
 - Renamed Restore saved settings to Load saved settings and added hover explanations for saved-plan loading and all seven tank settings, including which guidance/mitigation assignments change. (19-10-2026)
 
 - Fixed P4 tank-swap restriction to reject a solo first Akh Morn from either tank's GUI; the plan conflict is shared, while ordinary cooldown checks remain personal. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - Added an all-job P5 Fulgent Blade potion window from timeline 1095 to 1100, allowing an early weave before 1097.4. (19-10-2026)
 
 - Added a solo-tank rejoin callout for both P4 Akh Morn sets when Morn Afah starts, prompting the selected solo tank to stack with the party for the final hit. (19-10-2026)
-
-- **UR middle guidance:** Removed the small bright-green destination circle from center-return guidance, preserving its arrow and the larger light-green mechanic circle. (19-10-2026)
 
 ### UWU: LPDU
 

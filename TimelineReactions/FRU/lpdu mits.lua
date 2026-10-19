@@ -557,6 +557,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7388,
 							conditions = 
 							{
@@ -571,8 +572,10 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_ShakeItOff",
 							ignoreWeaveRules = true,
 							uuid = "f2f94b07-c6bd-97c0-9682-389c6da3bd1a",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -659,6 +662,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "4ca54ae2-62ef-1b5d-977f-b8da0aeea3b1",
 							version = 3,
 						},
@@ -731,6 +735,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -745,7 +750,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Reprisal",
 							uuid = "8bfd6b84-566f-9c51-8873-5e9fd514968c",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -830,6 +837,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "f4aa7535-bd1e-6317-870d-c3cc48047520",
 							version = 3,
 						},
@@ -907,6 +915,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36923,
 							conditions = 
 							{
@@ -926,7 +935,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Damnation",
 							uuid = "1807ecd0-fe26-53cd-971d-bedb78ac092e",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -1032,6 +1043,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "a0be27f6-d034-4ee0-81bf-85a52b44508a",
 							version = 3,
 						},
@@ -1189,6 +1201,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 48,
 							conditions = 
 							{
@@ -1209,8 +1222,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuWAR3_Hotbar_Defiance",
 							ignoreWeaveRules = true,
 							uuid = "06467aaf-6581-b866-ac38-3a859c045797",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -1318,6 +1333,7 @@ local tbl =
 							category = "Self",
 							conditionType = 13,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "e9509486-3620-7e89-bf45-c440d22af19d",
 							version = 3,
 						},
@@ -1448,6 +1464,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -1467,7 +1484,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Rampart",
 							uuid = "276c87cf-60cd-1dff-b845-79e5dceadaa9",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -1573,6 +1592,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "037aedb0-5f6e-fffa-99fd-d455411332a4",
 							version = 3,
 						},
@@ -1649,6 +1669,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25751,
 							conditions = 
 							{
@@ -1668,7 +1689,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Bloodwhetting",
 							uuid = "11eebd3a-bc36-1009-bee2-1771129e42f9",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -1774,6 +1797,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "110d529e-a26d-3d25-afd5-6a9168797849",
 							version = 3,
 						},
@@ -1924,6 +1948,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "b5a50512-8012-5b77-afdb-1789cab85aeb",
 							version = 3,
 						},
@@ -2158,6 +2183,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -2177,7 +2203,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Rampart",
 							uuid = "14c6e55a-1b2b-d836-8aa8-a5454fc66e8c",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -2283,6 +2311,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "46a70174-c456-660b-9ad2-d4f240ec3528",
 							version = 3,
 						},
@@ -2360,6 +2389,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 40,
 							conditions = 
 							{
@@ -2379,7 +2409,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_ThrillOfBattle",
 							uuid = "08ff98d9-d5ba-0b7c-b14c-9e0ed03c2843",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -2515,6 +2547,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "65cf55d9-d2e7-92ce-9214-20dc28b4a434",
 							version = 3,
 						},
@@ -2592,6 +2625,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25751,
 							conditions = 
 							{
@@ -2616,7 +2650,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Bloodwhetting",
 							uuid = "e5efb9ec-4c28-4cae-b014-76fa61ea2c47",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -2727,6 +2763,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "49b03234-a037-b410-9f00-4fff296fd52c",
 							version = 3,
 						},
@@ -3036,6 +3073,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7388,
 							conditions = 
 							{
@@ -3050,7 +3088,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_ShakeItOff",
 							uuid = "e9989627-427e-ef21-9afe-eb60c57a9581",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -3135,6 +3175,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "4f1eb8c7-8b50-e38f-bb14-9e89d18a684e",
 							version = 3,
 						},
@@ -3782,6 +3823,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -3796,7 +3838,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Reprisal",
 							uuid = "160c5f12-186a-d2a7-8bbc-b8786de8f3b0",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -3881,6 +3925,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "9ce25b4d-fa35-7393-a6e8-47e9a54fb3fe",
 							version = 3,
 						},
@@ -4857,6 +4902,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7388,
 							conditions = 
 							{
@@ -4871,7 +4917,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_ShakeItOff",
 							uuid = "c9a61b44-b1e0-f87b-ac7a-2cf9e6152344",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -4909,6 +4957,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "463557d0-07cb-03d5-8d92-050f84c15469",
 							version = 3,
 						},
@@ -4956,6 +5005,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -4970,7 +5020,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Reprisal",
 							uuid = "c13498f2-b001-7165-9082-6b9ce7e8ece1",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -5055,6 +5107,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "55a6990e-38ad-9ddb-a0aa-f29b6572c672",
 							version = 3,
 						},
@@ -5409,6 +5462,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "f0e3249f-dc94-02b2-82dd-61f71efcc834",
 							version = 3,
 						},
@@ -5788,6 +5842,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -5807,7 +5862,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Rampart",
 							uuid = "3647add7-3c32-f2b2-9937-8f4f13051742",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -5913,6 +5970,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "3a88ba96-c5bc-e48e-a154-78b418ba943d",
 							version = 3,
 						},
@@ -5990,6 +6048,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36923,
 							conditions = 
 							{
@@ -6009,7 +6068,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Damnation",
 							uuid = "fe82e578-e0eb-4ada-b6d6-5959010d4e9c",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -6115,6 +6176,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "5c9107a3-8975-1f8a-b0f2-1da577b255da",
 							version = 3,
 						},
@@ -6192,6 +6254,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 40,
 							conditions = 
 							{
@@ -6211,7 +6274,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_ThrillOfBattle",
 							uuid = "223342f3-542f-fc6e-992c-71df1c2f0a33",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -6347,6 +6412,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "ad434365-6130-ae74-800b-3a81d859f7b3",
 							version = 3,
 						},
@@ -6424,6 +6490,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25751,
 							conditions = 
 							{
@@ -6443,7 +6510,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Bloodwhetting",
 							uuid = "6cb8a55a-f06e-b976-b24f-02edf6fe1a66",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -6549,6 +6618,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "ae248e97-a929-70e8-8c4a-a12baa382be3",
 							version = 3,
 						},
@@ -6795,6 +6865,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 32066,
 							conditions = 
 							{
@@ -6815,8 +6886,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuWAR3_Hotbar_ReleaseDefiance",
 							ignoreWeaveRules = true,
 							uuid = "9851811e-067e-0fd1-abb4-50720e4159b2",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -6923,6 +6996,7 @@ local tbl =
 							category = "Self",
 							conditionType = 13,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "5b6666ec-ff6b-ac8f-9c23-269102fcd671",
 							version = 3,
 						},
@@ -7329,6 +7403,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "0f43a558-ef63-c470-942b-104d1aebb119",
 							version = 3,
 						},
@@ -8154,6 +8229,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -8168,7 +8244,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Reprisal",
 							uuid = "9b4eb3a7-a724-8644-8606-01ab2de727d3",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -8253,6 +8331,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "60db083e-ab6f-85a2-b887-0ff04adabfd6",
 							version = 3,
 						},
@@ -8718,6 +8797,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7388,
 							conditions = 
 							{
@@ -8732,7 +8812,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_ShakeItOff",
 							uuid = "234c5848-7f5a-b83d-986c-16da45e9e437",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -8817,6 +8899,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "1a43161a-099f-0617-839a-3be08379625c",
 							version = 3,
 						},
@@ -8985,6 +9068,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36923,
 							conditions = 
 							{
@@ -9004,7 +9088,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Damnation",
 							uuid = "214fbc47-aa93-58e4-9efa-43cba77c0de1",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -9110,6 +9196,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "bdefdaf9-833f-8554-beee-b9328c4bbbdd",
 							version = 3,
 						},
@@ -9648,6 +9735,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -9662,7 +9750,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Reprisal",
 							uuid = "571c1b83-d32a-8836-88e3-759adf129b70",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -9747,6 +9837,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "d37eb02e-4528-e1c5-9c89-d4945aa764c0",
 							version = 3,
 						},
@@ -9918,6 +10009,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -9937,7 +10029,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Rampart",
 							uuid = "9ec4c3e1-c8aa-2a00-b7f1-174e437203c1",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -10043,6 +10137,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "48eb5f0b-f54f-e6a3-8ace-86b5f424a14c",
 							version = 3,
 						},
@@ -10650,6 +10745,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -10664,7 +10760,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Reprisal",
 							uuid = "8dd1108e-d8f4-3cbe-93de-958cacaa4bd6",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -10749,6 +10847,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "1646a2e4-06e6-0d1b-a345-7454c6095287",
 							version = 3,
 						},
@@ -11291,6 +11390,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7388,
 							conditions = 
 							{
@@ -11305,7 +11405,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_ShakeItOff",
 							uuid = "eb5bfe25-7a96-67da-91fa-95c6dd272374",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -11343,6 +11445,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "370a930b-e446-a862-8892-88deca788f49",
 							version = 3,
 						},
@@ -11671,6 +11774,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -11685,7 +11789,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Reprisal",
 							uuid = "654a0681-083e-7700-b46f-8b1a25c7b93f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -11770,6 +11876,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "fe315a87-05a8-b61e-a17a-0c15a6eb3299",
 							version = 3,
 						},
@@ -11841,6 +11948,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7388,
 							conditions = 
 							{
@@ -11855,7 +11963,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_ShakeItOff",
 							uuid = "8d0192e1-46d1-c895-9268-a1227b9338d9",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -11893,6 +12003,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "d8173cf6-074d-37ce-9b89-2e9192c9e2d7",
 							version = 3,
 						},
@@ -12331,6 +12442,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -12345,7 +12457,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Reprisal",
 							uuid = "0df8df9a-c593-a9dd-aa5e-0d6720cceb22",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -12430,6 +12544,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "a42cea52-62bb-45e1-bffb-f31db68c3b4a",
 							version = 3,
 						},
@@ -12605,6 +12720,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7388,
 							conditions = 
 							{
@@ -12634,8 +12750,10 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_ShakeItOff",
 							ignoreWeaveRules = true,
 							uuid = "f6d48466-0e02-d328-ae49-0a0e085cd73d",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -12793,6 +12911,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "bce96466-204a-a546-90af-17ed73cc6450",
 							version = 3,
 						},
@@ -13019,6 +13138,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -13033,7 +13153,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Reprisal",
 							uuid = "53a78afc-528e-a89f-bdee-5b40f8a5c54d",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -13118,6 +13240,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "9ad08c65-3603-756a-aaab-cc3e301de5dd",
 							version = 3,
 						},
@@ -14257,6 +14380,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -14271,7 +14395,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Reprisal",
 							uuid = "67ef8dd3-6f5a-fcc3-bd6f-6620f80d3fc1",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -14356,6 +14482,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "befd9055-df08-7c21-a7c0-dbc95463c07a",
 							version = 3,
 						},
@@ -14576,6 +14703,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7388,
 							conditions = 
 							{
@@ -14590,7 +14718,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_ShakeItOff",
 							uuid = "cc4f37ca-08de-e3d1-86ea-b36dd76bc215",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -14628,6 +14758,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "dce28ba4-5c94-d57a-ac98-6357115f7deb",
 							version = 3,
 						},
@@ -14856,6 +14987,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -14870,7 +15002,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Reprisal",
 							uuid = "4e014f2a-e2bd-86cd-b847-588ae45a4b01",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -14955,6 +15089,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "5f04152f-ac83-d8e5-a490-54b3ec91ec75",
 							version = 3,
 						},
@@ -15151,6 +15286,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7388,
 							conditions = 
 							{
@@ -15165,7 +15301,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_ShakeItOff",
 							uuid = "10270c31-7e73-e963-9fe9-cb9f1203f275",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -15203,6 +15341,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "8334152a-b1f1-aaac-acad-6724755626fd",
 							version = 3,
 						},
@@ -15278,6 +15417,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -15297,7 +15437,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Rampart",
 							uuid = "ce9887c1-e205-f480-bdff-1a4ea512eb49",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -15403,6 +15545,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "5551addf-7220-4fea-8710-1595d8cd08c2",
 							version = 3,
 						},
@@ -15480,6 +15623,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36923,
 							conditions = 
 							{
@@ -15499,7 +15643,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Damnation",
 							uuid = "f74a13eb-70d5-8568-8a9d-f1e1efaf42ac",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -15605,6 +15751,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "8d353b40-4782-a83c-a239-7f351c03a5cb",
 							version = 3,
 						},
@@ -15682,6 +15829,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 40,
 							conditions = 
 							{
@@ -15701,7 +15849,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_ThrillOfBattle",
 							uuid = "d2f6f7b8-6570-f4e8-b1d6-3e0133ae722e",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -15837,6 +15987,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "3ee954f1-947d-6555-adf3-c2b71dc7e200",
 							version = 3,
 						},
@@ -15914,6 +16065,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25751,
 							conditions = 
 							{
@@ -15933,7 +16085,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Bloodwhetting",
 							uuid = "f9f85e3b-bdeb-3b28-8363-5bd7b4f57489",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -16039,6 +16193,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "a23d4e21-8513-4442-a4f7-6bc927c2f69f",
 							version = 3,
 						},
@@ -16116,6 +16271,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16464,
 							conditions = 
 							{
@@ -16135,8 +16291,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_NascentFlashMouse",
 							targetType = "Other Tank",
 							uuid = "d17f9ab8-ba24-6af0-ac05-f57f30bb3c82",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -16245,6 +16404,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "dfc4409b-f4e2-763c-ace9-140c88d22dfb",
 							version = 3,
 						},
@@ -16666,6 +16826,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -16680,7 +16841,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Reprisal",
 							uuid = "69d8dc6c-3916-33d9-8813-ab906604bf96",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -16765,6 +16928,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "682562ce-3812-a38c-b312-371b84b9900b",
 							version = 3,
 						},
@@ -16864,6 +17028,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -16883,7 +17048,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Rampart",
 							uuid = "6f534d32-19cb-fb39-bade-ff5e361f94e0",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -16989,6 +17156,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "40640210-d000-9576-a188-c7a746ac1312",
 							version = 3,
 						},
@@ -17066,6 +17234,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36923,
 							conditions = 
 							{
@@ -17085,7 +17254,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Damnation",
 							uuid = "7f197022-cd64-e878-bac5-404bd9a15eb9",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -17191,6 +17362,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "1a2f50ab-42d7-5792-b825-48d67123231c",
 							version = 3,
 						},
@@ -17268,6 +17440,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 40,
 							conditions = 
 							{
@@ -17287,7 +17460,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_ThrillOfBattle",
 							uuid = "86929326-6acd-d3ec-953f-096fce297977",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -17423,6 +17598,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "e49b4078-e683-23d0-b812-1877950206fe",
 							version = 3,
 						},
@@ -17500,6 +17676,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25751,
 							conditions = 
 							{
@@ -17519,7 +17696,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Bloodwhetting",
 							uuid = "c606052d-3690-c176-98ec-eaacafd03632",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -17625,6 +17804,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "d850e8f6-f86e-8ff8-9914-c702f2303d09",
 							version = 3,
 						},
@@ -17702,6 +17882,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16464,
 							conditions = 
 							{
@@ -17721,8 +17902,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_NascentFlashMouse",
 							targetType = "Other Tank",
 							uuid = "63e7c452-ac75-d5f2-9b4b-4a688ad9d3b1",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -17831,6 +18015,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "053e54fb-6bbb-b137-bf85-e87eebafb499",
 							version = 3,
 						},
@@ -18521,6 +18706,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -18535,7 +18721,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Reprisal",
 							uuid = "133faaf9-cf2c-fb97-8397-c35e31d3ced2",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -18620,6 +18808,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "b8e09fd0-4e86-d33b-bbed-f331f2d33264",
 							version = 3,
 						},
@@ -18714,6 +18903,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7388,
 							conditions = 
 							{
@@ -18728,7 +18918,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_ShakeItOff",
 							uuid = "e473ac29-4e51-0428-8a8d-30776b0be8d8",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -18766,6 +18958,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "fe628564-bb17-dc49-8f07-3af26a80f477",
 							version = 3,
 						},
@@ -18911,6 +19104,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -18925,9 +19119,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Hotbar_ProvokeMouse",
 							targetContentID = 12809,
 							targetType = "ContentID",
 							uuid = "71483ef0-2f8d-1cdf-afa4-654a7b0dee5a",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -19017,6 +19214,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "10df2215-016d-2fb8-9f1b-b8a3de22c86b",
 							version = 3,
 						},
@@ -19109,6 +19307,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 48,
 							conditions = 
 							{
@@ -19129,8 +19328,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuWAR3_Hotbar_Defiance",
 							ignoreWeaveRules = true,
 							uuid = "59fa6dc4-885f-ac86-9fc0-d73db1abece9",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -19238,6 +19439,7 @@ local tbl =
 							category = "Self",
 							conditionType = 13,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "33372f4f-2ab3-18d6-9113-e5187390d897",
 							version = 3,
 						},
@@ -20204,6 +20406,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -20218,7 +20421,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Reprisal",
 							uuid = "adfbfd7e-94a0-b875-91eb-427d9ed6916f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -20303,6 +20508,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "ffc7a8ba-c883-db8b-a82c-5eda22402abc",
 							version = 3,
 						},
@@ -20375,6 +20581,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7388,
 							conditions = 
 							{
@@ -20389,7 +20596,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_ShakeItOff",
 							uuid = "48fd7ab4-350a-9fc5-965a-9870e65a54c9",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -20474,6 +20683,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "0c97b2f9-8434-07c4-8da5-917407e51ea6",
 							version = 3,
 						},
@@ -20741,6 +20951,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "97bdb439-f09c-56f1-851d-76885b1c3cc5",
 							version = 3,
 						},
@@ -20818,6 +21029,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16464,
 							conditions = 
 							{
@@ -20842,8 +21054,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_NascentFlashMouse",
 							targetType = "Other Tank",
 							uuid = "ce562e80-c347-23b1-a10f-0ea0d208ed69",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -20957,6 +21172,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "660abb59-3aaa-4704-a321-8ff76c1de2ea",
 							version = 3,
 						},
@@ -21045,6 +21261,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -21064,7 +21281,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Rampart",
 							uuid = "68341e6c-72a4-019f-a024-4e968255e6da",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -21170,6 +21389,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "501403f2-5ceb-9a4a-a987-0a1ee00e110b",
 							version = 3,
 						},
@@ -21246,6 +21466,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 40,
 							conditions = 
 							{
@@ -21265,7 +21486,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_ThrillOfBattle",
 							uuid = "d7788646-b166-5908-8578-9998c539c23b",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -21401,6 +21624,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "f5174118-76e4-a4a9-8785-ad31e1409bbe",
 							version = 3,
 						},
@@ -21477,6 +21701,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25751,
 							conditions = 
 							{
@@ -21496,7 +21721,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Bloodwhetting",
 							uuid = "d2b9eeec-6ab2-b7ae-b7b6-2c4292f00b14",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -21602,6 +21829,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "070c63a5-7c1d-aac8-b76b-b089d8f7544e",
 							version = 3,
 						},
@@ -22164,6 +22392,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "5dd778bc-cb18-7699-9be8-039d9dc65643",
 							version = 3,
 						},
@@ -22235,6 +22464,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -22249,7 +22479,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Reprisal",
 							uuid = "ee95e5a0-d6e1-0484-9208-c89f2004e17b",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -22334,6 +22566,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "22c2469f-5843-81b9-9ede-513ae722c743",
 							version = 3,
 						},
@@ -22410,6 +22643,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -22429,7 +22663,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Rampart",
 							uuid = "1db04c0c-129a-b15c-afe2-4a8fc3202e66",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -22535,6 +22771,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "6792609c-cd51-1ed2-9ca3-e36ec93e06fe",
 							version = 3,
 						},
@@ -22611,6 +22848,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 40,
 							conditions = 
 							{
@@ -22630,7 +22868,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_ThrillOfBattle",
 							uuid = "c29bbb7a-dc78-8ea1-9d49-bd5502a6a2ef",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -22766,6 +23006,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "e54b9b75-aeda-2525-ba39-f8ed0a5a3707",
 							version = 3,
 						},
@@ -22842,6 +23083,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25751,
 							conditions = 
 							{
@@ -22861,7 +23103,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Bloodwhetting",
 							uuid = "3cfcdb79-2b13-be4b-84bc-88465315ac94",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -22967,6 +23211,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "a727467a-0730-2765-9029-04bd7f89d615",
 							version = 3,
 						},
@@ -23044,6 +23289,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16464,
 							conditions = 
 							{
@@ -23063,8 +23309,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_NascentFlashMouse",
 							targetType = "Other Tank",
 							uuid = "6cef1767-6d2a-16b7-809c-d6d9473137e7",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -23173,6 +23422,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "d8a629f5-c2a2-dc42-9f13-b1c0eb904de7",
 							version = 3,
 						},
@@ -23247,6 +23497,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -23261,9 +23512,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Hotbar_ProvokeMouse",
 							targetContentID = 12809,
 							targetType = "ContentID",
 							uuid = "0bbeb4f6-1806-866e-a3d4-860b172ead80",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -23353,6 +23607,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "c626f92c-f452-399e-b013-154a89deedce",
 							version = 3,
 						},
@@ -23424,6 +23679,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7388,
 							conditions = 
 							{
@@ -23438,7 +23694,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_ShakeItOff",
 							uuid = "243724ed-24c7-9f41-807e-cc7e9294ed25",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -23476,6 +23734,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "2afb522d-5ee4-6b68-8fbd-e2adb3645362",
 							version = 3,
 						},
@@ -24065,6 +24324,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -24079,7 +24339,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Reprisal",
 							uuid = "335b6276-e446-8523-9199-ca3e3b2bab36",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -24164,6 +24426,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "49422a86-03e5-7aa3-aeca-bbc479e3a8b9",
 							version = 3,
 						},
@@ -24326,6 +24589,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7388,
 							conditions = 
 							{
@@ -24340,7 +24604,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_ShakeItOff",
 							uuid = "ffe6e223-3010-f6bc-bff7-0a7ebb56eba8",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -24425,6 +24691,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "b0af5c13-aca6-a2e4-9712-485c6e426ba2",
 							version = 3,
 						},
@@ -24502,6 +24769,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36923,
 							conditions = 
 							{
@@ -24521,7 +24789,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Damnation",
 							uuid = "07221507-0602-e0a2-b2aa-0dfc2b293bde",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -24627,6 +24897,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "11d55a96-ba56-6dcd-b54d-53463dc8b2bf",
 							version = 3,
 						},
@@ -24709,6 +24980,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -24733,7 +25005,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Rampart",
 							uuid = "2b627385-da73-1cfa-8bdc-f49cdc024441",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -24860,6 +25134,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "26f7f0ed-e2ac-8e15-822d-561d29ae0089",
 							version = 3,
 						},
@@ -25041,6 +25316,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -25055,9 +25331,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Hotbar_ProvokeMouse",
 							targetContentID = 12809,
 							targetType = "ContentID",
 							uuid = "05a18c8c-ddf4-a163-b019-ac79d33df7e4",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -25147,6 +25426,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "8f544f90-bd40-1b84-83cf-ec43aaba0d1a",
 							version = 3,
 						},
@@ -25221,6 +25501,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -25235,9 +25516,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Hotbar_ProvokeMouse",
 							targetContentID = 9832,
 							targetType = "ContentID",
 							uuid = "e8bb0b6c-1522-f28e-95a8-53ca568e6126",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -25327,6 +25611,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "5b3dfa06-2d8c-7906-9699-2b526daa4a3f",
 							version = 3,
 						},
@@ -25845,6 +26130,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -25859,7 +26145,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Reprisal",
 							uuid = "4f94cb1a-ab43-0092-9638-0d4b91c7876c",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -25944,6 +26232,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "d8ef14d0-c4b4-c172-8824-f81f25a09322",
 							version = 3,
 						},
@@ -26015,6 +26304,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -26029,7 +26319,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Reprisal",
 							uuid = "714a3bac-0034-b6b5-be8b-3d7706264671",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -26114,6 +26406,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "bfef56a2-af7d-469d-9f4b-e6f36c2f4fd2",
 							version = 3,
 						},
@@ -26190,6 +26483,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -26209,7 +26503,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Rampart",
 							uuid = "16a12d1b-8a1c-7a49-aaad-a9b9075ea156",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -26315,6 +26611,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "7ca471d4-2698-738c-ae3a-ed566383d606",
 							version = 3,
 						},
@@ -26392,6 +26689,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 40,
 							conditions = 
 							{
@@ -26411,7 +26709,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_ThrillOfBattle",
 							uuid = "bb286246-3011-14c7-bb82-cc816ad74c72",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -26517,6 +26817,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "bd1ea15e-da72-a226-b843-8fd63b14994e",
 							version = 3,
 						},
@@ -26594,6 +26895,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25751,
 							conditions = 
 							{
@@ -26613,7 +26915,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Bloodwhetting",
 							uuid = "9ed6fdc8-fcd4-2868-984b-3f52ef76d1df",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -26719,6 +27023,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "424afdbd-1791-e3a0-b92d-45dc014e04c4",
 							version = 3,
 						},
@@ -26797,6 +27102,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16464,
 							conditions = 
 							{
@@ -26816,8 +27122,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_NascentFlashMouse",
 							targetType = "Other Tank",
 							uuid = "4ad7d53b-0557-db3d-bbee-8694e4d6542a",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -26926,6 +27235,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "09f9e42b-c79b-344d-a28d-f99f14ea95b2",
 							version = 3,
 						},
@@ -27221,6 +27531,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -27235,9 +27546,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Hotbar_ProvokeMouse",
 							targetContentID = 13561,
 							targetType = "ContentID",
 							uuid = "287ba0e9-d933-6b9f-8659-6ee0682c1e34",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -27327,6 +27641,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "f353e0b1-a910-dad7-8bc4-bbe0f8219a07",
 							version = 3,
 						},
@@ -27716,6 +28031,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -27730,7 +28046,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Reprisal",
 							uuid = "cf3ae98c-78a3-00c5-8299-3f34a52359dd",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -27815,6 +28133,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "dec8f5de-ab5b-fa03-98a1-7c98fb697ba2",
 							version = 3,
 						},
@@ -28476,6 +28795,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7388,
 							conditions = 
 							{
@@ -28490,7 +28810,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_ShakeItOff",
 							uuid = "bc2ca66b-0c1c-fdcc-8f02-b57b42df7af7",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -28575,6 +28897,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "317ef63b-d596-c98a-911a-5b67cac7fb37",
 							version = 3,
 						},
@@ -28647,6 +28970,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -28661,7 +28985,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Reprisal",
 							uuid = "76170772-0e13-82a8-b835-e52a604a6144",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -28746,6 +29072,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "0c87f343-6663-0506-8c91-50e0c71a9bd2",
 							version = 3,
 						},
@@ -28970,6 +29297,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "5fb60d70-d32b-c6cf-a396-f2bbbac33a2e",
 							version = 3,
 						},
@@ -29047,6 +29375,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16464,
 							conditions = 
 							{
@@ -29066,8 +29395,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_NascentFlashMouse",
 							targetType = "Other Tank",
 							uuid = "15c141ce-d4c0-6c18-bfd9-1a1d068e34e4",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -29176,6 +29508,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "90e2dd33-1e12-7054-a0f2-b1f2967e06c6",
 							version = 3,
 						},
@@ -29252,6 +29585,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -29271,7 +29605,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Rampart",
 							uuid = "7e59d2d7-9583-5c2e-803a-f34764ae3fff",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -29377,6 +29713,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "c7f7977b-e044-bd05-9ee0-16b7bf5a6124",
 							version = 3,
 						},
@@ -29454,6 +29791,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36923,
 							conditions = 
 							{
@@ -29473,7 +29811,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Damnation",
 							uuid = "318c6329-aa5f-77f4-a46d-8e5a0650da63",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -29579,6 +29919,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "e20e3c00-db4e-3818-8781-897092b6337d",
 							version = 3,
 						},
@@ -29656,6 +29997,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 40,
 							conditions = 
 							{
@@ -29675,7 +30017,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_ThrillOfBattle",
 							uuid = "747e95e4-d49e-224b-88c7-1947ec3619f9",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -29811,6 +30155,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "6749db35-db62-7158-b817-f09a6835a8e9",
 							version = 3,
 						},
@@ -29888,6 +30233,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25751,
 							conditions = 
 							{
@@ -29907,7 +30253,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Bloodwhetting",
 							uuid = "cbc167b2-3f9b-d1b7-918a-ac544efec241",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -30013,6 +30361,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "162e4c2a-e6c3-a39a-9c56-ab26bc7e9998",
 							version = 3,
 						},
@@ -30086,6 +30435,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -30100,9 +30450,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Hotbar_ProvokeMouse",
 							targetContentID = 13561,
 							targetType = "ContentID",
 							uuid = "80006f69-c5bc-145c-b09a-df33a7ae7af9",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -30192,6 +30545,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "368b66fa-3298-2c32-8264-5027fe906948",
 							version = 3,
 						},
@@ -30271,6 +30625,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -30290,9 +30645,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Hotbar_ProvokeMouse",
 							targetContentID = 13561,
 							targetType = "ContentID",
 							uuid = "9a078742-9423-e5c8-9e94-8811e4e5aa11",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -30409,6 +30767,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "3bdf0414-85cb-f11d-9cd8-81f4d4ebbe90",
 							version = 3,
 						},
@@ -30753,6 +31112,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -30767,7 +31127,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Reprisal",
 							uuid = "46fedeb7-43d8-9f81-b88c-456bb28d2df1",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -30852,6 +31214,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "8a456641-03f3-3d4f-af61-4de8fe7b9c55",
 							version = 3,
 						},
@@ -30956,6 +31319,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -30970,7 +31334,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Reprisal",
 							uuid = "0dddc4cd-151d-9c22-ba83-d160d2e9346e",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -31055,6 +31421,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "b3430574-7bff-6f28-8c34-9c85d0f94522",
 							version = 3,
 						},
@@ -31885,6 +32252,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7388,
 							conditions = 
 							{
@@ -31899,7 +32267,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_ShakeItOff",
 							uuid = "86a2eafa-b642-76d6-81c8-664d7ce81054",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -31984,6 +32354,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "5e4e6e1d-0dd5-caac-9176-32235de5589d",
 							version = 3,
 						},
@@ -32056,6 +32427,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -32070,7 +32442,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Reprisal",
 							uuid = "9bc76dbb-776c-48a3-bfdb-d790b8388d28",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -32155,6 +32529,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "733c0424-e9c5-69ef-b6e1-7b94d0492102",
 							version = 3,
 						},
@@ -32379,6 +32754,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "fd01b965-e1be-6aca-af37-c6aa6f35a196",
 							version = 3,
 						},
@@ -32456,6 +32832,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16464,
 							conditions = 
 							{
@@ -32475,8 +32852,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_NascentFlashMouse",
 							targetType = "Other Tank",
 							uuid = "2f5ce351-b875-3413-8fc7-2b95b65cd8bc",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -32585,6 +32965,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "8b0a2b65-f6d1-e7cd-8a0a-6fbe76bb63c3",
 							version = 3,
 						},
@@ -32661,6 +33042,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -32680,7 +33062,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Rampart",
 							uuid = "a42fe900-0f1d-f3c0-ab60-46696c6f45da",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -32786,6 +33170,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "c6e524cb-a868-7b31-bc31-2f5a768ad008",
 							version = 3,
 						},
@@ -32863,6 +33248,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36923,
 							conditions = 
 							{
@@ -32882,7 +33268,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Damnation",
 							uuid = "a2547db6-928e-677d-ad51-9e95fd3cb507",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -32988,6 +33376,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "8f5dc9cc-49ff-1737-9872-0cd0aac48473",
 							version = 3,
 						},
@@ -33065,6 +33454,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 40,
 							conditions = 
 							{
@@ -33084,7 +33474,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_ThrillOfBattle",
 							uuid = "f660d9bc-3c9a-1402-9b44-826f457d2981",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -33220,6 +33612,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "66b951d8-65c3-a14a-8357-40365b3823b6",
 							version = 3,
 						},
@@ -33297,6 +33690,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25751,
 							conditions = 
 							{
@@ -33316,7 +33710,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Bloodwhetting",
 							uuid = "24619f4a-efed-7978-92d7-b7afe5e34c23",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -33422,6 +33818,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "531fd2c7-0c2d-a40d-aa21-326809ac0814",
 							version = 3,
 						},
@@ -33495,6 +33892,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -33509,9 +33907,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Hotbar_ProvokeMouse",
 							targetContentID = 13561,
 							targetType = "ContentID",
 							uuid = "3ff44768-baa7-04db-930b-10a180a574db",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -33601,6 +34002,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "1a83d32e-e1ec-95de-9d6b-875d5376bfa1",
 							version = 3,
 						},
@@ -33680,6 +34082,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -33699,9 +34102,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Hotbar_ProvokeMouse",
 							targetContentID = 13561,
 							targetType = "ContentID",
 							uuid = "2e0aed93-8c55-ee4b-acaa-0f6c1d031996",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -33818,6 +34224,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "723a6fec-a951-898f-a057-f622ecdc91c1",
 							version = 3,
 						},
@@ -34162,6 +34569,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -34176,7 +34584,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Reprisal",
 							uuid = "43d2668d-03ed-86d2-a302-5e8c51eeb3fd",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -34261,6 +34671,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "442178ea-64da-022c-b5ae-1b9d130ba47c",
 							version = 3,
 						},
@@ -34649,6 +35060,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -34663,7 +35075,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_Reprisal",
 							uuid = "d4f2b4cc-a934-5564-951f-55f26b19df13",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -34748,6 +35162,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "06510388-3fc2-1a5b-90d2-f419a1678864",
 							version = 3,
 						},
@@ -35482,6 +35897,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7388,
 							conditions = 
 							{
@@ -35496,7 +35912,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuWAR3_Tankbar_ShakeItOff",
 							uuid = "a2d3f0c6-b4f8-220e-b3f9-08690e87c1ee",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -35581,6 +35999,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "WARRIOR",
+							name = "Warrior",
 							uuid = "bd8bd8d5-eb71-2492-9cee-56598cea26e0",
 							version = 3,
 						},
