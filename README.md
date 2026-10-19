@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- **Crystallize Time exalines:** Added a continuous countdown on each active Tidal Light strip, refreshed for each successive hit from its own cast duration. (19-10-2026)
+
 - **P4 Somber Dance far bait:** The assigned tank now baits east or west on the side farther from Oracle, instead of reusing the earlier Darklit safe side. (19-10-2026)
 
 - **Early P4 puddle guidance:** The marker-one staging arrow and green circle now clear on the Akh Rhai move cue when puddles drop. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - **Dancer Improvisation:** Retimed existing uses around first Burnished Glory, Diamond Dust Holy recovery and second P4 Akh Morn using EU references. The transition window now tolerates a timeline jump; first P5 Akh Morn is later to allow cooldown recovery. Seven Hotbar uses retained without cooldown conditions. (19-10-2026)
 
 - **Monk Mantra:** Aligned the schedule with EU reference uses: first Burnished Glory, earlier Apocalypse recovery, and first P4 Akh Morn; tightened Diamond Dust/Ultimate Relativity windows. All eight uses now request Mantra through the ACR Hotbar without cooldown conditions. (19-10-2026)
-
-- **Ninja mitigation:** Added Shade Shift before Diamond Dust and Ultimate Relativity, using Ninja-only Hotbar requests with enough time between uses for its cooldown. (19-10-2026)
 
 ### UWU: LPDU
 

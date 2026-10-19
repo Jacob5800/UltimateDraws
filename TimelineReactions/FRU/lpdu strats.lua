@@ -8944,6 +8944,76 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Draws",
+				uuid = "9bf79359-a4fb-f5eb-9839-46ae7e3d0ddd",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local ent = TensorCore.mGetEntity(eventArgs.entityID)\nif not ent or not ent.pos then self.used=true; return end\nlocal duration = eventArgs.channelTimeMax * 1000\nif duration > 0 then\n    AnyoneCore.addWorldTextCountdown(duration,\n        {x=ent.pos.x,y=ent.pos.y+2,z=ent.pos.z},\n        GUI:ColorConvertFloat4ToU32(1,.8,0,1),true,1.5)\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"2a5ed79c-fbe6-d1eb-8a96-d3251ac367a1",
+									true,
+								},
+							},
+							name = "Countdown at active exaline strip",
+							uuid = "9d04e19c-9f13-a525-9e23-a391053d9568",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Tidal Light initial and moving hits",
+							spellIDList = 
+							{
+								40252,
+								40253,
+							},
+							uuid = "2a5ed79c-fbe6-d1eb-8a96-d3251ac367a1",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Draws",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 798.9,
+				name = "[LPDU] P4 CT - Exaline Per-Hit Countdown",
+				timeRange = true,
+				timelineIndex = 179,
+				timerEndOffset = 36,
+				timerStartOffset = 14,
+				uuid = "4d9961ab-23e8-92b7-b11f-c9099ff0225b",
+				version = 2,
+			},
+		},
 	},
 	[180] = 
 	{
