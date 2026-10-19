@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- **First mirror alert:** Added a one-time spoken/on-screen “First mirror - move to the arrow” cue when the initial mirror direction arrow appears. (19-10-2026)
+
 - **DRK/PLD defaults:** New unset tank settings use PLD solo for first P4 Akh, DRK solo for second, PLD Halo/P5 first and DRK Apoc/Somber. Existing choices remain editable; a Load DRK/PLD replay defaults button applies the full preset. (19-10-2026)
 
 - **P5 restriction notice:** PLD explanations now appear only when a Paladin is present in the tank roster; the two-PLD note appears only for two Paladins. Updated the blocked-choice popup opening behavior. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - **P1 tank tower-side arrow:** The initial tank dodge arrow now points opposite the towers on either layout, fixing the west-tower layout that could point MT/OT toward the tower side. (19-10-2026)
 
 - **LPDU strats cleanup:** Removed 95 empty broken inheritance references that appeared as red leftover reactions. Valid reactions and inheritance modules are preserved. (19-10-2026)
-
-- **Red Mage Magick Barrier:** Retimed seven existing Hotbar uses with EU references, including Sinbound Fire/Thunder, LR Banish and first P4 Akh Morn. Corrected DD/LR and P5 cooldown spacing and removed cooldown conditions. (19-10-2026)
 
 ### UWU: LPDU
 
