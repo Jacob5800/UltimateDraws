@@ -580,6 +580,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16471,
 							conditions = 
 							{
@@ -594,8 +595,10 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_DarkMissionary",
 							ignoreWeaveRules = true,
 							uuid = "d5977654-517c-c193-8d99-76e04c9978e3",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -750,6 +753,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -764,7 +768,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "2f083e60-6f8d-9440-8cea-324d94a31eda",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -928,6 +934,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36927,
 							conditions = 
 							{
@@ -947,7 +954,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_ShadowedVigil",
 							uuid = "c79c5e9d-6dde-9a30-b55e-ac265f000473",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -1209,6 +1218,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3629,
 							conditions = 
 							{
@@ -1229,8 +1239,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuDRK3_Hotbar_Grit",
 							ignoreWeaveRules = true,
 							uuid = "3379d956-eba8-2193-b6dd-ee376e3b3da7",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -1463,6 +1475,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -1482,7 +1495,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Rampart",
 							uuid = "ee4cf42e-2344-0158-8065-b1e1202065d3",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -1661,6 +1676,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7393,
 							conditions = 
 							{
@@ -1680,7 +1696,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_TheBlackestNightSelf",
 							uuid = "fd861f7b-282a-62de-9c32-151d5fe904a0",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -1833,6 +1851,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7393,
 							conditions = 
 							{
@@ -1852,8 +1871,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_TheBlackestNightMouse",
 							targetType = "Other Tank",
 							uuid = "afa204a4-d76e-cfa8-9494-55da8e9ab670",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -2163,6 +2185,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -2182,7 +2205,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Rampart",
 							uuid = "8d968535-65e4-3e63-8f6e-10b27bbd03ef",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -2362,6 +2387,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3634,
 							conditions = 
 							{
@@ -2381,7 +2407,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_DarkMind",
 							uuid = "8980ee6b-d7b9-15ba-a12e-765fd55d109c",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -2389,6 +2417,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25754,
 							conditions = 
 							{
@@ -2408,7 +2437,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_OblationSelf",
 							uuid = "2be3e44e-8abd-b63b-a13a-6b4aa280963f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -2593,6 +2624,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7393,
 							conditions = 
 							{
@@ -2612,7 +2644,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_TheBlackestNightSelf",
 							uuid = "1f837881-7ae3-abda-afdb-52968bc952f9",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -3024,6 +3058,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16471,
 							conditions = 
 							{
@@ -3038,7 +3073,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_DarkMissionary",
 							uuid = "23852a0c-25f0-8944-b084-cc770164d820",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -3767,6 +3804,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -3781,7 +3819,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "c5c4b396-45f0-7e6f-82c7-49aabccbf412",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -3890,7 +3930,12 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "Alert",
 							actionID = 7385,
+							alertPriority = 2,
+							alertScale = 1,
+							alertTTS = true,
+							alertText = "Passage of Arms - position and use manually",
 							conditions = 
 							{
 								
@@ -3905,6 +3950,7 @@ local tbl =
 								},
 							},
 							ignoreWeaveRules = true,
+							name = "Manual Passage of Arms reminder",
 							uuid = "8c60d434-da7a-d6ab-838f-da63a73ca1ee",
 							version = 2.1,
 						},
@@ -3979,6 +4025,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16471,
 							conditions = 
 							{
@@ -3993,7 +4040,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_DarkMissionary",
 							uuid = "02e4e12a-ae09-1f7a-a69e-b46d2aac7233",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -4929,6 +4978,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -4943,7 +4993,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "c486c403-1f1b-a537-9ea9-f82b534c7131",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -5259,6 +5311,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3638,
 							conditions = 
 							{
@@ -5278,7 +5331,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_LivingDead",
 							uuid = "e5e4692d-fd1e-7ad9-a94d-925daaa8f85f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -5760,6 +5815,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -5779,7 +5835,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Rampart",
 							uuid = "47a77cde-8b23-9be3-a239-d31c85fdb7aa",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -5959,6 +6017,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36927,
 							conditions = 
 							{
@@ -5978,7 +6037,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_ShadowedVigil",
 							uuid = "5b4277de-368e-2d59-a034-b1f4bc29d5e2",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -6158,6 +6219,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3634,
 							conditions = 
 							{
@@ -6177,7 +6239,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_DarkMind",
 							uuid = "c12b0c07-341d-943c-82e8-8c5e5119fe74",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -6185,6 +6249,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25754,
 							conditions = 
 							{
@@ -6204,7 +6269,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_OblationSelf",
 							uuid = "a39b5133-e676-ad13-8fa7-ca3d10af37d7",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -6384,6 +6451,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7393,
 							conditions = 
 							{
@@ -6403,7 +6471,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_TheBlackestNightSelf",
 							uuid = "05b3693f-e1c3-1b56-a01a-eef0c2dc65b3",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -6754,6 +6824,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 32067,
 							conditions = 
 							{
@@ -6774,8 +6845,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuDRK3_Hotbar_ReleaseGrit",
 							ignoreWeaveRules = true,
 							uuid = "07abcaf0-61b6-6e95-9e5b-f664cd3e7bb7",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -7158,6 +7231,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3638,
 							conditions = 
 							{
@@ -7177,7 +7251,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_LivingDead",
 							uuid = "9e32d5cd-f8c5-7a1b-a2ea-d8c9c103fdce",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -7330,6 +7406,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7393,
 							conditions = 
 							{
@@ -7349,8 +7426,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_TheBlackestNightMouse",
 							targetType = "Other Tank",
 							uuid = "0c9192a2-4ec4-fc06-b7c8-ba0a12a5d1f5",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -8096,6 +8176,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -8110,7 +8191,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "ba3323aa-0c71-c7f4-a39c-dd1997ce2dcf",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -8657,6 +8740,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16471,
 							conditions = 
 							{
@@ -8671,7 +8755,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_DarkMissionary",
 							uuid = "6a4fec8c-c69b-b944-a9ad-5517df77c90f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -8926,6 +9012,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36927,
 							conditions = 
 							{
@@ -8945,7 +9032,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_ShadowedVigil",
 							uuid = "72d054d3-b397-1b4e-8097-3a908c839af2",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -9581,6 +9670,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -9595,7 +9685,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "c5734f96-41ae-846c-b3b0-633bcbe7f2bb",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -9704,7 +9796,12 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "Alert",
 							actionID = 7385,
+							alertPriority = 2,
+							alertScale = 1,
+							alertTTS = true,
+							alertText = "Passage of Arms - position and use manually",
 							conditions = 
 							{
 								
@@ -9719,6 +9816,7 @@ local tbl =
 								},
 							},
 							ignoreWeaveRules = true,
+							name = "Manual Passage of Arms reminder",
 							uuid = "9ff8f4f3-6be5-eddc-bc42-38f82e31ee7d",
 							version = 2.1,
 						},
@@ -9847,6 +9945,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -9866,7 +9965,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Rampart",
 							uuid = "c10aeb14-89cc-e8b7-8067-b0e944989063",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -10571,6 +10672,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -10585,7 +10687,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "49338cfd-e8e9-f634-86c8-bf58c23aaf9f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -10694,6 +10798,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16471,
 							conditions = 
 							{
@@ -10708,7 +10813,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_DarkMissionary",
 							uuid = "b147820a-c892-8296-a394-90060c85061b",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -11351,6 +11458,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16471,
 							conditions = 
 							{
@@ -11365,7 +11473,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_DarkMissionary",
 							uuid = "cd155af8-7fca-e1d8-a52c-b07826f1693d",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -11583,6 +11693,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -11597,7 +11708,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "cac2bde9-c9e2-4ced-b143-e083daf1d7f3",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -12240,6 +12353,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -12254,7 +12368,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "5544971b-3771-5f3e-b511-7c75253f7e4b",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -12527,6 +12643,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16471,
 							conditions = 
 							{
@@ -12556,8 +12673,10 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_DarkMissionary",
 							ignoreWeaveRules = true,
 							uuid = "055ed40c-51b5-1fce-adf0-a70da22461dc",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -12725,7 +12844,12 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "Alert",
 							actionID = 7385,
+							alertPriority = 2,
+							alertScale = 1,
+							alertTTS = true,
+							alertText = "Passage of Arms - position and use manually",
 							conditions = 
 							{
 								
@@ -12755,6 +12879,7 @@ local tbl =
 								},
 							},
 							ignoreWeaveRules = true,
+							name = "Manual Passage of Arms reminder",
 							uuid = "41fbabef-afec-3d3a-afef-f0fc682b69db",
 							version = 2.1,
 						},
@@ -12916,6 +13041,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -12930,7 +13056,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "d957b45b-631a-ca9c-b750-c90c481c4ac0",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -14151,6 +14279,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -14165,7 +14294,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "7ee8c66d-70bf-846a-91fb-76e5791365a3",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -14298,6 +14429,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16471,
 							conditions = 
 							{
@@ -14312,7 +14444,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_DarkMissionary",
 							uuid = "1e02f8b6-0a07-5a57-b227-b5ea2816cc6c",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -14744,6 +14878,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -14758,7 +14893,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "d7f94e36-66c1-5a6b-9d9f-90bec662a1b5",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -14867,6 +15004,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16471,
 							conditions = 
 							{
@@ -14881,7 +15019,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_DarkMissionary",
 							uuid = "32ec9d40-33df-9339-b722-5c1bbd630cc7",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -15165,6 +15305,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -15184,7 +15325,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Rampart",
 							uuid = "3c40f2c1-e269-e3c2-a6e9-e64737d069b3",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -15364,6 +15507,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36927,
 							conditions = 
 							{
@@ -15383,7 +15527,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_ShadowedVigil",
 							uuid = "6936c3b8-4146-dbf7-b379-5545047efe89",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -15563,6 +15709,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3634,
 							conditions = 
 							{
@@ -15582,7 +15729,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_DarkMind",
 							uuid = "bcdad49f-4370-95af-8e85-caad034509f1",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -15590,6 +15739,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25754,
 							conditions = 
 							{
@@ -15609,7 +15759,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_OblationSelf",
 							uuid = "205ad550-0d78-b07a-9000-af22676a4267",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -15789,6 +15941,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7393,
 							conditions = 
 							{
@@ -15808,7 +15961,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_TheBlackestNightSelf",
 							uuid = "974ad90c-3409-a0a3-9f0c-046d894e0f78",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -15989,6 +16144,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7393,
 							conditions = 
 							{
@@ -16008,8 +16164,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_TheBlackestNightMouse",
 							targetType = "Other Tank",
 							uuid = "63c82e08-ce02-4542-8d12-ed472eff6c38",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -16529,6 +16688,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -16543,7 +16703,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "ad4f2995-3138-655f-ad67-8c4d0e48e668",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -16729,6 +16891,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -16748,7 +16911,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Rampart",
 							uuid = "83d4cd09-54d4-8a42-b592-92f466311357",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -16928,6 +17093,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36927,
 							conditions = 
 							{
@@ -16947,7 +17113,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_ShadowedVigil",
 							uuid = "ce008b8b-1c3f-7632-9491-3e7a70808e1f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -17127,6 +17295,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3634,
 							conditions = 
 							{
@@ -17146,7 +17315,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_DarkMind",
 							uuid = "712bca05-cacf-2282-9c05-eaf1f94c7811",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -17154,6 +17325,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25754,
 							conditions = 
 							{
@@ -17173,7 +17345,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_OblationSelf",
 							uuid = "8d94b2f2-e36a-9ba5-b88c-dc967e009249",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -17353,6 +17527,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7393,
 							conditions = 
 							{
@@ -17372,7 +17547,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_TheBlackestNightSelf",
 							uuid = "44d82c2a-fa3f-0451-b9b5-d6bed0f11138",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -17553,6 +17730,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7393,
 							conditions = 
 							{
@@ -17572,8 +17750,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_TheBlackestNightMouse",
 							targetType = "Other Tank",
 							uuid = "f2405eb4-a039-f8c0-96f9-23d294aa88ae",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -18216,6 +18397,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16471,
 							conditions = 
 							{
@@ -18230,7 +18412,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_DarkMissionary",
 							uuid = "ec13c5e7-eea3-961b-85c8-6748b780e3cc",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -18359,6 +18543,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -18373,7 +18558,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "20aeb385-e92e-6a83-9ebc-79e7e3e1f8b5",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -18605,7 +18792,12 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "Alert",
 							actionID = 7385,
+							alertPriority = 2,
+							alertScale = 1,
+							alertTTS = true,
+							alertText = "Passage of Arms - position and use manually",
 							conditions = 
 							{
 								
@@ -18620,6 +18812,7 @@ local tbl =
 								},
 							},
 							ignoreWeaveRules = true,
+							name = "Manual Passage of Arms reminder",
 							uuid = "0c1a9fcb-9634-ca99-b0d8-91080f2642da",
 							version = 2.1,
 						},
@@ -18742,6 +18935,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -18756,9 +18950,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Hotbar_ProvokeMouse",
 							targetContentID = 12809,
 							targetType = "ContentID",
 							uuid = "fe5ab921-be33-588c-bbde-29c0307cd2b3",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -18941,6 +19138,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3629,
 							conditions = 
 							{
@@ -18961,8 +19159,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuDRK3_Hotbar_Grit",
 							ignoreWeaveRules = true,
 							uuid = "63c95f94-c7d6-22c4-9514-f4e7b4a4fc1d",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -20026,6 +20226,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -20040,7 +20241,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "d27dc203-c144-479f-af8f-e352a678729b",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -20194,6 +20397,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16471,
 							conditions = 
 							{
@@ -20208,7 +20412,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_DarkMissionary",
 							uuid = "a91daf3b-a945-bf14-973a-fe5f0b7e32db",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -20394,6 +20600,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3638,
 							conditions = 
 							{
@@ -20413,7 +20620,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_LivingDead",
 							uuid = "19d687ce-8f09-7752-9d8c-191808b4475b",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -20599,6 +20808,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7393,
 							conditions = 
 							{
@@ -20618,8 +20828,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_TheBlackestNightMouse",
 							targetType = "Other Tank",
 							uuid = "8881bab8-3eb4-e68c-9a18-905c9461676f",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -20816,6 +21029,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -20835,7 +21049,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Rampart",
 							uuid = "233e414f-1b76-d941-b7ac-45c27cca6593",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -21014,6 +21230,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3634,
 							conditions = 
 							{
@@ -21033,7 +21250,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_DarkMind",
 							uuid = "1471eb67-b9fc-16f1-9fb5-9384cf24f1ac",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -21041,6 +21260,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25754,
 							conditions = 
 							{
@@ -21060,7 +21280,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_OblationSelf",
 							uuid = "a43f0d7a-29a8-a12a-b8ab-8f628e527037",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -21239,6 +21461,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7393,
 							conditions = 
 							{
@@ -21258,7 +21481,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_TheBlackestNightSelf",
 							uuid = "43e13b69-3937-bbd1-a080-0aa9500eaa7c",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -21819,6 +22044,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16471,
 							conditions = 
 							{
@@ -21833,7 +22059,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_DarkMissionary",
 							uuid = "16bb8434-d61b-ae2a-ba6c-0c512cc50b22",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -21986,6 +22214,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -22000,7 +22229,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "3062d75b-42ca-aabd-a8e1-2e1282fa308f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -22163,6 +22394,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -22182,7 +22414,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Rampart",
 							uuid = "03ddd5c9-9923-ac9b-9044-3aa063231e2c",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -22361,6 +22595,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3634,
 							conditions = 
 							{
@@ -22380,7 +22615,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_DarkMind",
 							uuid = "28621a25-c055-d81f-a191-b44344ac408a",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -22388,6 +22625,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25754,
 							conditions = 
 							{
@@ -22407,7 +22645,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_OblationSelf",
 							uuid = "6cae32d0-3a4c-48a6-9b9d-7b74034c7ffe",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -22586,6 +22826,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7393,
 							conditions = 
 							{
@@ -22605,7 +22846,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_TheBlackestNightSelf",
 							uuid = "e1ed24d9-7981-3ae9-b63b-b6bb3143e5f8",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -22786,6 +23029,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7393,
 							conditions = 
 							{
@@ -22805,8 +23049,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_TheBlackestNightMouse",
 							targetType = "Other Tank",
 							uuid = "fdb993ca-8f68-cb4c-b301-306d2cc92b47",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -22981,6 +23228,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -22995,9 +23243,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Hotbar_ProvokeMouse",
 							targetContentID = 12809,
 							targetType = "ContentID",
 							uuid = "c351851d-4832-02aa-862b-abad2fe75ee2",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -23793,6 +24044,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -23807,7 +24059,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "e4353999-4275-6c74-a857-812de9207184",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -24051,6 +24305,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16471,
 							conditions = 
 							{
@@ -24065,7 +24320,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_DarkMissionary",
 							uuid = "a76b6fd3-fdd1-1e83-a20f-85e880704acf",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -24229,6 +24486,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36927,
 							conditions = 
 							{
@@ -24248,7 +24506,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_ShadowedVigil",
 							uuid = "3b8aad9b-294f-7599-a2c6-3913a8b78501",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -24438,6 +24698,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -24462,7 +24723,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Rampart",
 							uuid = "5502ff84-8914-a62b-8709-62fd1c389825",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -24604,6 +24867,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3634,
 							conditions = 
 							{
@@ -24623,7 +24887,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_DarkMind",
 							uuid = "6a1ed0f0-a06b-ba70-bd58-6d3e005ad75f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -24756,6 +25022,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -24770,9 +25037,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Hotbar_ProvokeMouse",
 							targetContentID = 12809,
 							targetType = "ContentID",
 							uuid = "c0f792d8-877f-7c79-b4d9-85b49934fb72",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -24932,6 +25202,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -24946,9 +25217,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Hotbar_ProvokeMouse",
 							targetContentID = 9832,
 							targetType = "ContentID",
 							uuid = "d2fd27e4-4e03-b766-b142-a5173e7fa1d7",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -25550,6 +25824,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -25564,7 +25839,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "a9f0ec66-9545-3af1-88d2-7cbe10499f32",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -25717,6 +25994,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -25731,7 +26009,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "e618e2ca-133e-cfc6-994d-3819b1144105",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -25894,6 +26174,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -25913,7 +26194,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Rampart",
 							uuid = "4a8197d6-8e0d-0eee-b7ce-b1126e339101",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -26093,6 +26376,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25754,
 							conditions = 
 							{
@@ -26112,7 +26396,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_OblationSelf",
 							uuid = "0091b745-9734-39b8-8881-0fa5267f9fda",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -26292,6 +26578,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7393,
 							conditions = 
 							{
@@ -26311,7 +26598,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_TheBlackestNightSelf",
 							uuid = "d6fe7369-4809-3790-aa9d-78067b3304e3",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -26493,6 +26782,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7393,
 							conditions = 
 							{
@@ -26512,8 +26802,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_TheBlackestNightMouse",
 							targetType = "Other Tank",
 							uuid = "4133109c-c2b4-f5df-b79c-d7f7b8a898a0",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -26663,6 +26956,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16471,
 							conditions = 
 							{
@@ -26677,7 +26971,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_DarkMissionary",
 							uuid = "a14ec92f-44d8-ca77-92b7-4b09984b1473",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -26763,7 +27059,12 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "Alert",
 							actionID = 7385,
+							alertPriority = 2,
+							alertScale = 1,
+							alertTTS = true,
+							alertText = "Passage of Arms - position and use manually",
 							conditions = 
 							{
 								
@@ -26778,6 +27079,7 @@ local tbl =
 								},
 							},
 							ignoreWeaveRules = true,
+							name = "Manual Passage of Arms reminder",
 							uuid = "1e05e4ea-b848-1dca-ac16-396c638c3b27",
 							version = 2.1,
 						},
@@ -26900,6 +27202,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -26914,9 +27217,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Hotbar_ProvokeMouse",
 							targetContentID = 13561,
 							targetType = "ContentID",
 							uuid = "bcba815a-a3cd-2452-83b4-de48a0cd97f8",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -27389,6 +27695,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -27403,7 +27710,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "10dc7f18-0405-3145-b37b-0d7465470cac",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -28146,6 +28455,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16471,
 							conditions = 
 							{
@@ -28160,7 +28470,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_DarkMissionary",
 							uuid = "292d3cf4-4173-80e0-8446-518c4d02e489",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -28314,6 +28626,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -28328,7 +28641,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "5e94b8ac-3227-d1ce-afea-8c7ab8272426",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -28514,6 +28829,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3638,
 							conditions = 
 							{
@@ -28533,7 +28849,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_LivingDead",
 							uuid = "67d88baf-eb25-16c8-8fc0-c2ebf343f04e",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -28714,6 +29032,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7393,
 							conditions = 
 							{
@@ -28733,8 +29052,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_TheBlackestNightMouse",
 							targetType = "Other Tank",
 							uuid = "93cbd821-5497-bcce-b376-b5536eb17fb2",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -28914,6 +29236,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -28933,7 +29256,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Rampart",
 							uuid = "edb147be-bf0b-da33-b454-46650e6837d2",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -29113,6 +29438,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36927,
 							conditions = 
 							{
@@ -29132,7 +29458,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_ShadowedVigil",
 							uuid = "376de718-1541-11f8-982f-20f898e7ef1d",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -29312,6 +29640,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3634,
 							conditions = 
 							{
@@ -29331,7 +29660,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_DarkMind",
 							uuid = "b6b54a43-7beb-f98a-9d9c-dff49c3c2fbb",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -29339,6 +29670,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25754,
 							conditions = 
 							{
@@ -29358,7 +29690,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_OblationSelf",
 							uuid = "23c0243a-5db6-4e38-9752-6bebba4eb080",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -29538,6 +29872,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7393,
 							conditions = 
 							{
@@ -29557,7 +29892,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_TheBlackestNightSelf",
 							uuid = "924869c6-ca4f-1958-9f66-526384319901",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -29730,6 +30067,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -29744,9 +30082,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Hotbar_ProvokeMouse",
 							targetContentID = 13561,
 							targetType = "ContentID",
 							uuid = "43173d3b-6ff4-e6fa-bb04-313ad5a98403",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -29916,6 +30257,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -29935,9 +30277,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Hotbar_ProvokeMouse",
 							targetContentID = 13561,
 							targetType = "ContentID",
 							uuid = "31529bcf-69be-8759-bc6c-0188dc0ad4ac",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -30387,6 +30732,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -30401,7 +30747,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "f7054c3c-e694-00ed-af44-63d22e367d0d",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -30587,6 +30935,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -30601,7 +30950,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "49f6d918-339c-d380-821e-e58a11764968",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -31513,6 +31864,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16471,
 							conditions = 
 							{
@@ -31527,7 +31879,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_DarkMissionary",
 							uuid = "a7e33b5a-f8a1-1fa0-b83f-dee3c001705c",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -31681,6 +32035,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -31695,7 +32050,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "26fd75e2-880a-d1ed-9f06-e4babd9c1163",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -31881,6 +32238,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3638,
 							conditions = 
 							{
@@ -31900,7 +32258,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_LivingDead",
 							uuid = "3b96c385-d6fb-158f-b7f3-817b18827607",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -32081,6 +32441,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7393,
 							conditions = 
 							{
@@ -32100,8 +32461,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_TheBlackestNightMouse",
 							targetType = "Other Tank",
 							uuid = "45d8379c-1bf3-b01f-8399-5955ee9e0210",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -32281,6 +32645,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -32300,7 +32665,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Rampart",
 							uuid = "525262c7-4273-1813-99c9-443aa3f82327",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -32480,6 +32847,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36927,
 							conditions = 
 							{
@@ -32499,7 +32867,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_ShadowedVigil",
 							uuid = "3cacd6b6-78c8-ee00-8bfc-36d413b448bb",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -32679,6 +33049,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3634,
 							conditions = 
 							{
@@ -32698,7 +33069,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_DarkMind",
 							uuid = "d95cbae9-9d72-b071-bffe-c0741bb49139",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -32706,6 +33079,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25754,
 							conditions = 
 							{
@@ -32725,7 +33099,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_OblationSelf",
 							uuid = "1bd1daf4-7634-01e3-9419-3430cc1cb0d5",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -32905,6 +33281,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7393,
 							conditions = 
 							{
@@ -32924,7 +33301,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_TheBlackestNightSelf",
 							uuid = "0343e14a-3547-4c92-bd03-97535f085792",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -33097,6 +33476,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -33111,9 +33491,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Hotbar_ProvokeMouse",
 							targetContentID = 13561,
 							targetType = "ContentID",
 							uuid = "deb2499c-3c0b-0591-9bd0-1d2f210d7d3c",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -33283,6 +33666,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -33302,9 +33686,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Hotbar_ProvokeMouse",
 							targetContentID = 13561,
 							targetType = "ContentID",
 							uuid = "821c4b9b-dbfd-dc5d-b1f9-b5d7a412d128",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -33754,6 +34141,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -33768,7 +34156,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "b80b0f3e-7256-c519-a82d-fc5bbdd29983",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -34238,6 +34628,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -34252,7 +34643,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "2d357982-67a1-4cde-9532-474c39c98cca",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -34361,7 +34754,12 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "Alert",
 							actionID = 7385,
+							alertPriority = 2,
+							alertScale = 1,
+							alertTTS = true,
+							alertText = "Passage of Arms - position and use manually",
 							conditions = 
 							{
 								
@@ -34376,6 +34774,7 @@ local tbl =
 								},
 							},
 							ignoreWeaveRules = true,
+							name = "Manual Passage of Arms reminder",
 							uuid = "1ea12b04-dad3-30e1-8dcc-e12dee29dbbc",
 							version = 2.1,
 						},
@@ -35062,6 +35461,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16471,
 							conditions = 
 							{
@@ -35076,7 +35476,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDRK3_Tankbar_DarkMissionary",
 							uuid = "b2634a85-4e3d-cf01-88c2-883957c4365e",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
