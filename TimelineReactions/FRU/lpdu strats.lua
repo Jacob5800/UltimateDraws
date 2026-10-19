@@ -2025,20 +2025,6 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
-		
-		{
-			data = 
-			{
-				name = "[SAM] Tengentsu",
-				uuid = "f2395284-5cf6-130c-ab27-d13bd990b165",
-				version = 2,
-			},
-			inheritedObjectUUID = "b60ef4fe-7c6b-fc16-bf78-e2ecc2d8621f",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
 	},
 	[21] = 
 	{
@@ -2082,118 +2068,6 @@ local tbl =
 		{
 			data = 
 			{
-				name = "[Melee] Feint (Secondary)",
-				uuid = "ff4d607c-9900-21cb-b24e-4f8579222a9d",
-				version = 2,
-			},
-			inheritedObjectUUID = "7c2d471b-28e6-801d-9d52-cfca8d0e877e",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[MCH] Dismantle",
-				uuid = "de96d0a6-78ea-bae3-9a08-641aaaea7b0f",
-				version = 2,
-			},
-			inheritedObjectUUID = "4b70e931-11eb-2edc-a7cc-1a3cd3fb4a57",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[Caster] Addle (Primary)",
-				uuid = "64bddf7a-2f0d-5d58-87f9-7b420379a101",
-				version = 2,
-			},
-			inheritedObjectUUID = "95b61d84-67b1-fc9a-8b97-46e02a668754",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[RDM] Barrier",
-				uuid = "3dfb8fe1-5dbd-7ffd-b032-599726f6b618",
-				version = 2,
-			},
-			inheritedObjectUUID = "ab802951-8a25-b8e0-86d7-cccf11130956",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[RPR] Arcane Crest",
-				uuid = "fbc1a44b-ef09-128c-a0fa-6c0b87f069d7",
-				version = 2,
-			},
-			inheritedObjectUUID = "9df67090-e47b-6d77-8d87-c3431db7a898",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[VPR] Feint (Secondary)",
-				uuid = "51595165-2a67-4091-ae0e-0a509f456a6f",
-				version = 2,
-			},
-			inheritedObjectUUID = "4169a7c0-67ed-5409-9096-2bbec9946539",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[DNC] Improv",
-				uuid = "8736b32b-6bc6-774e-ad0a-76934076901d",
-				version = 2,
-			},
-			inheritedObjectUUID = "9164e371-ec55-f024-9c8e-8ce2ec687320",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[BRD] Nature's Minne",
-				uuid = "f5af2e07-7200-d42a-92d5-40e21557b7b8",
-				version = 2,
-			},
-			inheritedObjectUUID = "3f865067-2227-65d4-9a02-84f6c4aa251f",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
 				displayPath = "",
 				name = "LPDU",
 				uuid = "661328fb-4f04-0764-8ed3-14ee03f4d860",
@@ -2225,7 +2099,7 @@ local tbl =
 				mechanicTime = 85.9,
 				name = "[LPDU] Go to conga line",
 				timelineIndex = 22,
-				timerOffset = 3.1,
+				timerOffset = 3.0999999046326,
 				uuid = "466d7c46-ce83-29c3-9b38-1c62181178f7",
 				version = 2,
 			},
@@ -2344,7 +2218,7 @@ local tbl =
 				uuid = "a9bb6087-404d-4e04-8e10-0798c319b69d",
 				version = 2,
 			},
-			inheritedIndex = 19,
+			inheritedIndex = 11,
 		},
 		
 		{
@@ -2443,20 +2317,6 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
-		
-		{
-			data = 
-			{
-				name = "[MNK] Mantra",
-				uuid = "3cd7e7d9-1a4e-a733-b4ff-d2fa539c64ae",
-				version = 2,
-			},
-			inheritedObjectUUID = "68581fad-0fcf-a86a-b30e-e3d3c076a2c9",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
 	},
 	[27] = 
 	{
@@ -2484,138 +2344,6 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
-		},
-	},
-	[29] = 
-	{
-		
-		{
-			data = 
-			{
-				name = "[Melee] Bloodbath",
-				uuid = "acfb15bb-e956-37a9-8165-51947a57adeb",
-				version = 2,
-			},
-			inheritedObjectUUID = "acfe7ae2-e877-2e14-ba4b-f8c77926368e",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[VPR] Bloodbath",
-				uuid = "b07a4686-ebb5-eea5-b10a-4a879046ac04",
-				version = 2,
-			},
-			inheritedObjectUUID = "6f48ae83-cac9-6195-a956-2bd254b009d6",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[Ranged] rDPS Mit",
-				uuid = "83ae8158-53f8-e123-87a6-5114290effb2",
-				version = 2,
-			},
-			inheritedObjectUUID = "13931ffa-0259-0164-901d-ff2cc47d1e5e",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[DNC] Curing Waltz",
-				uuid = "4746eeb0-e2f7-06ab-87fc-8cd256ccda16",
-				version = 2,
-			},
-			inheritedObjectUUID = "6a4dce1e-ab14-0ad2-9382-3e7df7964150",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[SAM] Tengentsu",
-				uuid = "45f82aa4-39ae-0824-9512-faf8f6548448",
-				version = 2,
-			},
-			inheritedObjectUUID = "a503f320-6162-c335-8651-6a19366af969",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[RPR] Arcane Crest",
-				uuid = "afae34e0-35a1-11f2-a1b8-1f5ef751a87f",
-				version = 2,
-			},
-			inheritedObjectUUID = "b5193116-af1f-771e-b4f8-a587a11ca8f1",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-	},
-	[30] = 
-	{
-		
-		{
-			data = 
-			{
-				name = "[Melee] Feint (Primary)",
-				uuid = "bb048ea8-841d-28bc-9970-7fb4c7fb1971",
-				version = 2,
-			},
-			inheritedObjectUUID = "ec51d3f1-73a3-14a2-92f9-eab5ec7b98b3",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[VPR] Feint (Primary)",
-				uuid = "d078c417-6580-f82f-9558-106731d4aafe",
-				version = 2,
-			},
-			inheritedObjectUUID = "e9fec76b-107c-9050-b197-67e487477cab",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[Caster] Addle (Secondary)",
-				uuid = "4612d5ec-cf5f-6c29-955e-be9f1c0ea357",
-				version = 2,
-			},
-			inheritedObjectUUID = "41292260-366e-eb74-8018-e42b26306560",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
 		},
 	},
 	[32] = 
@@ -3450,48 +3178,6 @@ local tbl =
 		{
 			data = 
 			{
-				name = "[NIN] Shade Shift",
-				uuid = "66b4da1d-4330-42cd-8a6d-3dbe04c538ea",
-				version = 2,
-			},
-			inheritedObjectUUID = "7cc2a702-0e53-c0db-8fdd-82f576fadfc3",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[SAM] Tengentsu",
-				uuid = "9056d402-f108-0c27-ad7e-ceb1e212be2f",
-				version = 2,
-			},
-			inheritedObjectUUID = "beb66939-df91-1930-9936-1f821f493a3c",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[MNK] Mantra",
-				uuid = "18c87570-fd45-0cf7-a27c-97daa7f5f928",
-				version = 2,
-			},
-			inheritedObjectUUID = "41d89acf-e12d-c377-84f4-b9b08180287f",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
 				displayPath = "",
 				name = "FRU_LPDU_P2_DD",
 				uuid = "b6f21105-6f9e-9987-8182-c1c020f6c984",
@@ -3687,48 +3373,6 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "[Ranged] rDPS Mit",
-				uuid = "533ca645-e97f-9e84-bee6-69e139923d4d",
-				version = 2,
-			},
-			inheritedObjectUUID = "a5b42838-c69a-0b07-8a60-fbef23761e44",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[RDM] Barrier",
-				uuid = "08e886b4-6c11-9b87-8824-d71fea8cea2b",
-				version = 2,
-			},
-			inheritedObjectUUID = "6d41d5c8-9dda-ece9-97f3-e5d89ff45931",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[DNC] Curing Waltz",
-				uuid = "bf648c02-04c5-5dd9-9f50-4925fd10db47",
-				version = 2,
-			},
-			inheritedObjectUUID = "94d7dc7b-7a0c-3684-b984-f05c33ce372c",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
 		},
 	},
 	[58] = 
@@ -4098,76 +3742,6 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
-		
-		{
-			data = 
-			{
-				name = "[Melee] Feint (Primary)",
-				uuid = "1404c1ee-1bb3-acfc-b932-0c322004de0c",
-				version = 2,
-			},
-			inheritedObjectUUID = "a2a4eac6-c803-d997-b019-c9c3e7c057f1",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[SAM] Tengentsu",
-				uuid = "307a5d38-e908-9ff2-9483-0d06ad2394c9",
-				version = 2,
-			},
-			inheritedObjectUUID = "0992ab26-1fb9-05ab-921b-5b5c9f7b024c",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[Caster] Addle (Secondary)",
-				uuid = "0ca1f8b0-b2e9-01df-8323-68bfe6cd354d",
-				version = 2,
-			},
-			inheritedObjectUUID = "f60c7036-01b8-7bb6-a2fa-b3724ae05f95",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[RPR] Arcane Crest",
-				uuid = "38543620-c276-35d4-acf2-50f12163a8ad",
-				version = 2,
-			},
-			inheritedObjectUUID = "c82002b0-8fd5-f72e-b9c0-1e24dd8dd3ee",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[VPR] Feint (Primary)",
-				uuid = "43f285a2-d490-5887-915b-8ede0bb00e35",
-				version = 2,
-			},
-			inheritedObjectUUID = "4eba6aef-701d-b010-bb5f-08be5a6df091",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
 	},
 	[68] = 
 	{
@@ -4488,62 +4062,6 @@ local tbl =
 		{
 			data = 
 			{
-				name = "[Melee] Bloodbath",
-				uuid = "0c6a2b93-848e-3c6a-993a-78f0ae28c9ee",
-				version = 2,
-			},
-			inheritedObjectUUID = "bce2c93f-73e0-b47c-b664-6ad47d689a49",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[SAM] Tengentsu",
-				uuid = "d83b2c8f-dcc3-791b-8b6a-c1a72df5911a",
-				version = 2,
-			},
-			inheritedObjectUUID = "1dbbb84b-dcb0-52a7-8096-51c627fdf650",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[BRD] Nature's Minne",
-				uuid = "9d7b940d-aa57-4381-b287-fe34d0b29fb1",
-				version = 2,
-			},
-			inheritedObjectUUID = "0cbe17f3-eff8-8753-9487-0dd9637b1796",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[VPR] Bloodbath",
-				uuid = "9e0dedba-02f9-fa4f-a1d8-9d8b31772e9f",
-				version = 2,
-			},
-			inheritedObjectUUID = "e2edfed3-4f28-50db-ad35-e1c9750e4b05",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
 				displayPath = "",
 				name = "LPDU",
 				uuid = "d8aa4597-eb33-c43c-b56b-f1a9b509b774",
@@ -4704,34 +4222,6 @@ local tbl =
 		{
 			data = 
 			{
-				name = "[SAM] Tengentsu",
-				uuid = "db16ccd5-eef2-af0b-a015-12dc371113e5",
-				version = 2,
-			},
-			inheritedObjectUUID = "aa4544e9-400e-68a4-a486-ca545e7970f9",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[RPR] Arcane Crest",
-				uuid = "2bace156-d2d1-bd08-9d58-ace65ea448c3",
-				version = 2,
-			},
-			inheritedObjectUUID = "4b5a05c0-769e-1dc8-8c80-9ddf3fd24765",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
 				displayPath = "",
 				name = "LPDU Draws",
 				uuid = "9a3ddc04-fb17-6cc4-8bb0-df9b137abf69",
@@ -4816,90 +4306,6 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "[MCH] Dismantle",
-				uuid = "6d9a84c2-af55-2668-a14e-8d7d50e54f4b",
-				version = 2,
-			},
-			inheritedObjectUUID = "f2faaedd-6b81-d7a8-a5ea-9b352bdff892",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[SAM] Tengentsu",
-				uuid = "79e25e35-140a-8848-b4ef-f1498d28b5a4",
-				version = 2,
-			},
-			inheritedObjectUUID = "dcd218ee-2e08-ce75-b53b-b8da854b305b",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[Caster] Addle (Primary)",
-				uuid = "ee448d3e-1bcd-03fb-8d2b-857d6b5dde2d",
-				version = 2,
-			},
-			inheritedObjectUUID = "ff9c72f2-7fe8-fdc7-92d1-7521617cb4d5",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[Melee] Feint (Secondary)",
-				uuid = "1d2b6616-cfd2-3afb-979d-f463981e3f8c",
-				version = 2,
-			},
-			inheritedObjectUUID = "f3083c5d-8d59-7c22-83bb-dbb2facd4e91",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[MNK] Mantra",
-				uuid = "88299a58-ad60-73c0-bcd8-6a8042f4a717",
-				version = 2,
-			},
-			inheritedObjectUUID = "2e2400b1-7b30-a5b1-840a-76dd7a1dcfad",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[VPR] Feint (Secondary)",
-				uuid = "5c0627fc-3321-bc6a-a3e5-990a77c7130b",
-				version = 2,
-			},
-			inheritedObjectUUID = "ec54876b-30d0-645d-b6f8-8cb47881108e",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
 		},
 		
 		{
@@ -5061,34 +4467,6 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "[Ranged] rDPS Mit",
-				uuid = "935cd27d-c603-8ba8-b454-68e849be4843",
-				version = 2,
-			},
-			inheritedObjectUUID = "85e7201a-03ff-8fa2-9e50-1fb67e7d24d4",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[SAM] Tengentsu",
-				uuid = "4dcc1d26-4641-f8f0-972b-c547808bce4e",
-				version = 2,
-			},
-			inheritedObjectUUID = "fcce6b5a-0ff0-6a0d-9e7a-ccae9c3cf17f",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
 		},
 		
 		{
@@ -5402,76 +4780,6 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "[Ranged] rDPS Mit",
-				uuid = "149b97a4-cf62-7689-822a-82f8bd826ed2",
-				version = 2,
-			},
-			inheritedObjectUUID = "65edf55c-5919-e422-b0b4-f942df69db38",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[DPS] Second Wind",
-				uuid = "3b87a933-2a2a-381a-aea7-047354fa39ab",
-				version = 2,
-			},
-			inheritedObjectUUID = "cf3a95d3-fa5a-c7a3-88a3-98c515dc2291",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[SAM] Tengentsu",
-				uuid = "38f63554-4ea2-29a0-b75e-2ce5ac49258f",
-				version = 2,
-			},
-			inheritedObjectUUID = "0316915f-c988-eb82-b28f-5f8cf3d2cd27",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[VPR] Second Wind",
-				uuid = "8b9daa8a-1091-5925-a75c-778196a1e4cc",
-				version = 2,
-			},
-			inheritedObjectUUID = "eaf03659-05c1-39d5-9151-31b3fe642753",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[RPR] Arcane Crest",
-				uuid = "21ed5efb-3910-d9ae-baec-693b3f6d7206",
-				version = 2,
-			},
-			inheritedObjectUUID = "3dcfb906-eb8b-8f36-be25-b86b018d4dfc",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
 		},
 		
 		{
@@ -5813,90 +5121,6 @@ local tbl =
 		{
 			data = 
 			{
-				name = "[Melee] Feint (Primary)",
-				uuid = "a5a2079d-34e4-c635-974b-1b4cca3cfc61",
-				version = 2,
-			},
-			inheritedObjectUUID = "f5289db2-0be7-d962-9773-71c20389c75a",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[RDM] Barrier",
-				uuid = "246af1bd-855f-39cb-9071-2a9c4b31ba00",
-				version = 2,
-			},
-			inheritedObjectUUID = "3ac6cfad-11e9-def6-bb16-9b2c19a8e5ce",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[VPR] Feint (Primary)",
-				uuid = "be5e9212-1351-c4ff-8120-5a4773d57f4a",
-				version = 2,
-			},
-			inheritedObjectUUID = "97ee1d05-aa53-7967-9a96-b1c5f4b53b04",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[Caster] Addle (Secondary)",
-				uuid = "c0b5cc04-fdc2-9704-88e8-82c59754f209",
-				version = 2,
-			},
-			inheritedObjectUUID = "833cd5c0-0daa-9770-834b-f36b516cc7a1",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[SAM] Tengentsu",
-				uuid = "18c22f77-16b2-ca6f-8154-808d95a800cc",
-				version = 2,
-			},
-			inheritedObjectUUID = "f55b9f80-cf92-5d61-8bed-085fbad2bb7f",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[DNC] Curing Waltz",
-				uuid = "e69776f8-e152-0cce-a1e7-2d98e87f90f1",
-				version = 2,
-			},
-			inheritedObjectUUID = "b1a23f11-24c4-ceba-86d2-50be8310a2ea",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
 				displayPath = "",
 				name = "LPDU",
 				uuid = "2b36b308-07f4-fe16-b026-a828f463f9ea",
@@ -6032,23 +5256,6 @@ local tbl =
 			objectType = "folder",
 		},
 	},
-	[119] = 
-	{
-		
-		{
-			data = 
-			{
-				name = "[SAM] Tengentsu",
-				uuid = "f5484f59-cf1a-72f1-ac11-a30a93b2d667",
-				version = 2,
-			},
-			inheritedObjectUUID = "a6d336f6-937a-f5d2-a08f-8daf92e45e17",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-	},
 	[120] = 
 	{
 		
@@ -6061,23 +5268,6 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
 			objectType = "folder",
-		},
-	},
-	[121] = 
-	{
-		
-		{
-			data = 
-			{
-				name = "[DNC] Curing Waltz",
-				uuid = "fa2366f0-c7a3-0b16-9856-1bdcce9a4544",
-				version = 2,
-			},
-			inheritedObjectUUID = "7913d802-6b3b-2e6b-983c-e7ae81554233",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
 		},
 	},
 	[123] = 
@@ -6155,76 +5345,6 @@ local tbl =
 				version = 2,
 			},
 			inheritedObjectUUID = "45f769cd-2e96-d652-bc5e-e9ad5068f26e",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[Melee] Feint (Primary)",
-				uuid = "c335e481-c164-2ac2-842e-755cbc5a8f55",
-				version = 2,
-			},
-			inheritedObjectUUID = "aa624f42-5fdb-0548-9288-df47bfd4bc3c",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[VPR] Feint (Primary)",
-				uuid = "0e0830d0-dca2-e71c-b099-ffca528ea8d0",
-				version = 2,
-			},
-			inheritedObjectUUID = "d1a49571-e4c1-15bd-9595-e6cf946820bf",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[Caster] Addle (Primary)",
-				uuid = "820bd360-a65e-51d1-b1b3-605605f3337a",
-				version = 2,
-			},
-			inheritedObjectUUID = "fea849de-d8c0-3de9-963c-f455801430bb",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[SAM] Tengentsu",
-				uuid = "79d07e7f-9008-118a-9b6f-3d42fbb40e3e",
-				version = 2,
-			},
-			inheritedObjectUUID = "25da3918-b20e-a34d-8972-fa3c9af5d63e",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[RPR] Arcane Crest",
-				uuid = "ee702a44-2c3f-4e60-b96a-d0bd3572e7db",
-				version = 2,
-			},
-			inheritedObjectUUID = "f4f5c2c2-5e9f-04b8-9bda-f96dfa74703e",
 			inheritedOverwrites = 
 			{
 				enabled = false,
@@ -6572,48 +5692,6 @@ local tbl =
 				enabled = false,
 			},
 		},
-		
-		{
-			data = 
-			{
-				name = "[Melee] Bloodbath",
-				uuid = "f55334b2-4eda-6f3d-8b66-1a9f9d33ddbd",
-				version = 2,
-			},
-			inheritedObjectUUID = "49865abd-8207-d2bc-9a34-415b62d88830",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[MNK] Mantra",
-				uuid = "c07cc506-f69a-0622-824d-c96c0524fe6a",
-				version = 2,
-			},
-			inheritedObjectUUID = "fdc04865-3c0d-341f-94a4-8dd41fb0cc95",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[VPR] Bloodbath",
-				uuid = "e3e3a939-4fba-cbc6-b0ac-9e3a88392808",
-				version = 2,
-			},
-			inheritedObjectUUID = "39acb337-cea0-d1c1-8743-bc13d742c36e",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
 	},
 	[127] = 
 	{
@@ -6668,65 +5746,6 @@ local tbl =
 			objectType = "folder",
 		},
 	},
-	[128] = 
-	{
-		
-		{
-			data = 
-			{
-				name = "[DPS] Second Wind",
-				uuid = "1b83b981-dc96-0bc8-8d79-79d78708da8d",
-				version = 2,
-			},
-			inheritedObjectUUID = "ee6b0670-c3a7-6a9e-9574-b7fe62499328",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[VPR] Second Wind",
-				uuid = "2ca80f05-c72c-3dbd-9415-feb04cbd58e5",
-				version = 2,
-			},
-			inheritedObjectUUID = "7593fa92-71a9-8d4c-a69c-a6fb1c0647ac",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[RDM] Barrier",
-				uuid = "5ec62948-ac4b-3a17-9385-00d010ce0c79",
-				version = 2,
-			},
-			inheritedObjectUUID = "da986272-4134-80aa-a19b-a94be0282a5d",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[BRD] Nature's Minne",
-				uuid = "3d2e590c-deb2-4fd3-97f6-8ab773eb90b6",
-				version = 2,
-			},
-			inheritedObjectUUID = "bab86f66-b9a0-c00b-a725-dc2d98419677",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-	},
 	[130] = 
 	{
 		
@@ -6749,20 +5768,6 @@ local tbl =
 				version = 2,
 			},
 			inheritedObjectUUID = "c19cd27a-b961-7db1-a872-f321b75b79a6",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[Ranged] rDPS Mit",
-				uuid = "f66f047e-3c04-dbd2-a1c7-6f3151e0d93b",
-				version = 2,
-			},
-			inheritedObjectUUID = "2cfdf1fd-0421-53ed-a7a7-41adc6b22a2c",
 			inheritedOverwrites = 
 			{
 				enabled = false,
@@ -6820,23 +5825,6 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
-		},
-	},
-	[132] = 
-	{
-		
-		{
-			data = 
-			{
-				name = "[Caster] Addle (Secondary)",
-				uuid = "dbeda0ea-b3a0-b7f2-9fe0-06c491c57612",
-				version = 2,
-			},
-			inheritedObjectUUID = "b758bcbb-d42b-8ca3-824b-92b1c2e95e24",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
 		},
 	},
 	[133] = 
@@ -6964,93 +5952,6 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "[SAM] Tengentsu",
-				uuid = "0e9b1505-3618-588a-be3f-ca025b5e51fc",
-				version = 2,
-			},
-			inheritedObjectUUID = "ee38659e-b021-c7f6-b0ea-007ba566bc9e",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[RPR] Arcane Crest",
-				uuid = "098e1610-5d58-c0d5-8e80-d8d59f127e51",
-				version = 2,
-			},
-			inheritedObjectUUID = "a9de8d2f-e643-1fa3-b536-75c64b0a9c26",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[DNC] Curing Waltz",
-				uuid = "7909e0e6-d3df-2dc6-a4e4-8a3111a42119",
-				version = 2,
-			},
-			inheritedObjectUUID = "de6d5580-ae64-2087-90ee-1b8cf7179556",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-	},
-	[139] = 
-	{
-		
-		{
-			data = 
-			{
-				name = "[Melee] Feint (Secondary)",
-				uuid = "61f670bb-a087-46b2-a870-bd05d85f11ca",
-				version = 2,
-			},
-			inheritedObjectUUID = "3c519dd1-52fe-f052-a288-3167ca3ff959",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[VPR] Feint (Secondary)",
-				uuid = "c1998bce-af8b-692d-b579-6d5392beb3c6",
-				version = 2,
-			},
-			inheritedObjectUUID = "7b328777-8e33-59c6-9572-9bd9f8807de0",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[MCH] Dismantle",
-				uuid = "0e275280-9a8c-ad27-81c9-ad562497d9c1",
-				version = 2,
-			},
-			inheritedObjectUUID = "4e0d3ee3-5e26-e9b0-970d-71d17b8b2ad1",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
 		},
 	},
 	[140] = 
@@ -7949,37 +6850,6 @@ local tbl =
 			},
 		},
 	},
-	[145] = 
-	{
-		
-		{
-			data = 
-			{
-				name = "[SAM] Tengentsu",
-				uuid = "df8dfec5-10c0-a4c4-8976-8e69b14d6f60",
-				version = 2,
-			},
-			inheritedObjectUUID = "d5c295e8-5391-ed72-ad7f-a325846f6254",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[RPR] Arcane Crest",
-				uuid = "50da864a-d640-2079-8f45-9f158e03ff05",
-				version = 2,
-			},
-			inheritedObjectUUID = "744d05e1-04c9-f2db-a7e4-865a10df432a",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-	},
 	[146] = 
 	{
 		
@@ -8007,20 +6877,6 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
-		
-		{
-			data = 
-			{
-				name = "[MNK] Mantra",
-				uuid = "edb235e8-6b6e-b951-bb65-23b83ce618d3",
-				version = 2,
-			},
-			inheritedObjectUUID = "d5ef2c3d-fb5d-5f22-99f7-c9016510a54d",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
 	},
 	[149] = 
 	{
@@ -8034,20 +6890,6 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "[SAM] Tengentsu",
-				uuid = "1121704d-60b0-a350-8baa-c951cd040f3e",
-				version = 2,
-			},
-			inheritedObjectUUID = "a1fa4bc9-8bdf-e5c8-af14-85bcbca892fd",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
 		},
 	},
 	[150] = 
@@ -8103,95 +6945,8 @@ local tbl =
 			objectType = "folder",
 		},
 	},
-	[153] = 
-	{
-		
-		{
-			data = 
-			{
-				name = "[SAM] Tengentsu",
-				uuid = "cc3f6bce-8819-f6c5-9c5c-db67184edc83",
-				version = 2,
-			},
-			inheritedObjectUUID = "99048414-cb23-800d-886e-f69cf9ed9cb5",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[RPR] Arcane Crest",
-				uuid = "8b94354e-d45a-492c-b821-7ff426095fd6",
-				version = 2,
-			},
-			inheritedObjectUUID = "6f7db24b-f594-1c19-bdac-6b2bc47bdbea",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[Caster] Addle (Primary) Forced",
-				uuid = "b95ce26c-19ce-067c-85ff-baf1c5cdda35",
-				version = 2,
-			},
-			inheritedObjectUUID = "cb6da4e9-6056-d969-80f5-a973e43ff88c",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[RDM] Barrier",
-				uuid = "9fa9d079-b6e9-8c3b-933e-0d7b679c21f3",
-				version = 2,
-			},
-			inheritedObjectUUID = "964463af-24c6-a432-82c7-b955b012f7bd",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-	},
 	[154] = 
 	{
-		
-		{
-			data = 
-			{
-				name = "[Ranged] rDPS Mit",
-				uuid = "8b533088-0545-a245-a13e-3bef3b9c78cb",
-				version = 2,
-			},
-			inheritedObjectUUID = "8b5fa3cf-c0d0-9901-a36b-f0fcdf5f1e66",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[Caster] Addle (Primary)",
-				uuid = "930c7083-8c07-8bc0-ab8f-4312ef819172",
-				version = 2,
-			},
-			inheritedObjectUUID = "0bbf7c7c-4db3-f254-af03-d8d60d88e4a8",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
 		
 		{
 			data = 
@@ -8353,20 +7108,6 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "[MCH] Dismantle",
-				uuid = "593492c5-1438-e622-be2c-4bd5bc4d38d4",
-				version = 2,
-			},
-			inheritedObjectUUID = "ec5a11a7-d756-9b81-b998-c4beb8ce1f05",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
 		},
 		
 		{
@@ -9021,37 +7762,6 @@ local tbl =
 			},
 		},
 	},
-	[167] = 
-	{
-		
-		{
-			data = 
-			{
-				name = "[Melee] Feint Usurper (Primary)",
-				uuid = "778d6154-d6f9-f0ed-bb7f-b9324ace0614",
-				version = 2,
-			},
-			inheritedObjectUUID = "efc38fdf-00f0-96ff-a503-2b7001dd3958",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[Caster] Addle Usurper (Secondary)",
-				uuid = "44952b4f-e9d7-5634-a860-dc14f4821552",
-				version = 2,
-			},
-			inheritedObjectUUID = "687e891a-dc9e-adba-8dec-ff1c8adefa05",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-	},
 	[168] = 
 	{
 		
@@ -9082,20 +7792,6 @@ local tbl =
 	},
 	[170] = 
 	{
-		
-		{
-			data = 
-			{
-				name = "draw cleave",
-				uuid = "f552a70b-2d64-7097-bf5a-cac82bcad915",
-				version = 2,
-			},
-			inheritedObjectUUID = "ff98a44f-a9de-e6b8-9c38-049ed2d5888a",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
 		
 		{
 			data = 
@@ -9248,20 +7944,6 @@ local tbl =
 		{
 			data = 
 			{
-				name = "[MNK] Mantra",
-				uuid = "7a7bd5ff-3003-eb97-8eaf-f5378b3ae803",
-				version = 2,
-			},
-			inheritedObjectUUID = "c1687c82-b89a-0b52-b981-9d96d632ae3c",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
 				displayPath = "",
 				name = "LPDU",
 				uuid = "4be5ec4b-8b30-a2ac-a49f-e00cc6aa38b8",
@@ -9341,20 +8023,6 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
-		
-		{
-			data = 
-			{
-				name = "[Ranged] rDPS Mit",
-				uuid = "52aecc72-533b-caba-b1ce-e2b4b5697e0a",
-				version = 2,
-			},
-			inheritedObjectUUID = "6a905f74-78a4-4323-85d1-b1b132135ae2",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
 	},
 	[179] = 
 	{
@@ -9368,48 +8036,6 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\core",
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "[Melee] Feint Oracle (Secondary)",
-				uuid = "a3265b77-9fa6-4fd7-b810-550479799cfa",
-				version = 2,
-			},
-			inheritedObjectUUID = "5eac93c6-04ab-7ecb-bc2f-5c5a07bcd0d4",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[BRD] Nature's Minne",
-				uuid = "569da7d7-7f1c-9b11-9708-003aec148e4a",
-				version = 2,
-			},
-			inheritedObjectUUID = "25d324fd-76c1-912d-83cb-352d186ac11e",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[Caster] Addle Oracle (Primary)",
-				uuid = "884538ca-9d64-2660-93dc-40db165eb6ef",
-				version = 2,
-			},
-			inheritedObjectUUID = "52a62c54-82f8-6315-9e96-8190c27ff8f5",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
 		},
 		
 		{
@@ -10749,20 +9375,6 @@ local tbl =
 				enabled = false,
 			},
 		},
-		
-		{
-			data = 
-			{
-				name = "[Draw] Queue CT Debuffs",
-				uuid = "7bcd8f7c-b7f3-5a89-b4b8-2e0b4921d094",
-				version = 2,
-			},
-			inheritedObjectUUID = "40f4679b-e888-e580-acac-d72a0123de05",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
 	},
 	[182] = 
 	{
@@ -10963,20 +9575,6 @@ local tbl =
 		{
 			data = 
 			{
-				name = "[MNK] Mantra",
-				uuid = "27372136-91db-3f88-ad16-737fbeefd688",
-				version = 2,
-			},
-			inheritedObjectUUID = "4f8cebcf-bd8d-f509-bbd2-c039e1450a42",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
 				displayPath = "",
 				name = "LPDU",
 				uuid = "49b110db-0465-b451-b52e-835e051342df",
@@ -11068,76 +9666,6 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "[Melee] Feint Usurper (Primary)",
-				uuid = "1df2b213-6e7f-d051-a78a-8e32231d42ba",
-				version = 2,
-			},
-			inheritedObjectUUID = "791cd2db-9b33-7772-bfff-205fb3b6aa48",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[Ranged] rDPS Mit",
-				uuid = "627aec6a-916a-9bc7-a82d-6ea9ba16617b",
-				version = 2,
-			},
-			inheritedObjectUUID = "1c893f59-158d-ec3e-b7f5-2eb3ecab401e",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[Caster] Addle (Secondary)",
-				uuid = "9858dbfa-a9fa-d879-ac40-0f8da5e3f0fd",
-				version = 2,
-			},
-			inheritedObjectUUID = "927827dc-cdd7-8faf-944e-bd9e214ebb70",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[MCH] Dismantle",
-				uuid = "b90b02a9-98b2-1ee7-abf4-bb749e08c441",
-				version = 2,
-			},
-			inheritedObjectUUID = "40e8b95e-bd4d-0f62-9066-4e29d3fb9882",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[RDM] Barrier",
-				uuid = "dd1278ae-faf2-fd5a-ba2c-498eac05866d",
-				version = 2,
-			},
-			inheritedObjectUUID = "07af889b-819e-7f84-973c-40cd018e55f1",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
 		},
 	},
 	[207] = 
@@ -11361,51 +9889,6 @@ local tbl =
 				version = 2,
 			},
 			inheritedIndex = 7,
-		},
-	},
-	[212] = 
-	{
-		
-		{
-			data = 
-			{
-				name = "[Melee] Feint (Primary)",
-				uuid = "1b7d8fb7-6eda-3967-afb3-ba3dfa555bb4",
-				version = 2,
-			},
-			inheritedObjectUUID = "c8c951b4-ccda-2c6e-a83b-590ecc159d27",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[VPR] Feint (Primary)",
-				uuid = "16826331-b740-76a6-b45c-1db919ab9b8a",
-				version = 2,
-			},
-			inheritedObjectUUID = "f96394d5-fb55-b83e-b0e7-492bf19faf31",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
-		},
-		
-		{
-			data = 
-			{
-				name = "[Caster] Addle (Secondary)",
-				uuid = "c82601f5-bbd8-a303-aab7-38009bae1e1c",
-				version = 2,
-			},
-			inheritedObjectUUID = "562d6f19-0f40-b7ba-a971-77b082b63006",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
 		},
 	},
 	[215] = 
@@ -13584,20 +12067,6 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				name = "[MNK] Mantra",
-				uuid = "40ab71e8-f807-8ffe-8dad-77660904312a",
-				version = 2,
-			},
-			inheritedObjectUUID = "24db05a7-5471-9730-8fbe-b1290e561df8",
-			inheritedOverwrites = 
-			{
-				enabled = false,
-			},
 		},
 	},
 	inheritedProfiles = 

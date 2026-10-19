@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- **LPDU strats cleanup:** Removed 95 empty broken inheritance references that appeared as red leftover reactions. Valid reactions and inheritance modules are preserved. (19-10-2026)
+
 - **Red Mage Magick Barrier:** Retimed seven existing Hotbar uses with EU references, including Sinbound Fire/Thunder, LR Banish and first P4 Akh Morn. Corrected DD/LR and P5 cooldown spacing and removed cooldown conditions. (19-10-2026)
 
 - **Monk Riddle of Earth:** Added three conservative Monk-only Hotbar uses before second Burnished Glory, the first Ultimate Relativity stack and Crystallize Time Quietus, based on EU reference timings. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - Red Mage Magick Barrier now uses the verified RikuRDM3 Hotbar request for all seven assignments. Existing timings, role/job checks and cooldown conditions are preserved; combat confirmation pending. (19-10-2026)
 
 - Converted all 17 Addle assignments to the ACR Hotbar request verified with RikuPCT3. Existing timings and conditions remain; Tempera Grassa stays a direct action pending confirmation of the ACR Coat-to-Grassa behavior. (19-10-2026)
-
-- Dancer mitigation now uses verified RikuDNC3 Hotbar requests for 21 Shield Samba and seven Improvisation actions. Existing assignments, timing and conditions are preserved; combat confirmation pending. (19-10-2026)
 
 ### UWU: LPDU
 
