@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- **Tank settings wording:** Renamed “Sheet defaults” to “LPDU Mitsheet default”. (19-10-2026)
+
 - **P2 adds potion:** The 418.8 reaction now uses the appropriate stat potion for all 21 supported combat jobs, alongside its existing reminder. (19-10-2026)
 
 - **First mirror alert:** Added a one-time spoken/on-screen “First mirror - move to the arrow” cue when the initial mirror direction arrow appears. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - **P4 Somber Dance far bait:** The assigned tank now baits east or west on the side farther from Oracle, instead of reusing the earlier Darklit safe side. (19-10-2026)
 
 - **Early P4 puddle guidance:** The marker-one staging arrow and green circle now clear on the Akh Rhai move cue when puddles drop. (19-10-2026)
-
-- **P1 tank tower-side arrow:** The initial tank dodge arrow now points opposite the towers on either layout, fixing the west-tower layout that could point MT/OT toward the tower side. (19-10-2026)
 
 ### UWU: LPDU
 
