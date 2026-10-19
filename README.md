@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Tank settings now retain all selected groupings and an independent P5 invuln order. Active/inherited LPDU mits adds an OK-acknowledged cooldown-plan warning popup and copyable details; users without LPDU mits receive no mitigation-plan popup. Checks estimate recovery across the selected tank schedule rather than adding combat cooldown conditions. (19-10-2026)
+
 - LPDU mits: changed all six PLD Passage of Arms usages to manual-use alerts with voice reminders, and converted 116 DRK-specific actions to catalog-resolved ACR Hotbar/Tankbar requests while preserving timing, role gates, and support targets. (19-10-2026)
 
 - Added boss world-text labels and continuous countdowns for Diamond Dust look-away and both Shiva cleaves; the second cleave timer appears after the first hit. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - **Tank settings wording:** Renamed “Sheet defaults” to “LPDU Mitsheet default”. (19-10-2026)
 
 - **P2 adds potion:** The 418.8 reaction now uses the appropriate stat potion for all 21 supported combat jobs, alongside its existing reminder. (19-10-2026)
-
-- **First mirror alert:** Added a one-time spoken/on-screen “First mirror - move to the arrow” cue when the initial mirror direction arrow appears. (19-10-2026)
 
 ### UWU: LPDU
 
