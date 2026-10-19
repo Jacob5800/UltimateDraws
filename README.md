@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- **P5 invuln selection popup:** Choosing an incompatible order now opens an explanation with an OK button, showing the required order and the P4 Tank swap alternative. (19-10-2026)
+
 - **Tank settings clarity:** Explains when the PLD cooldown restriction requires a P5 invuln order, why the choice reverts, and how P4 Tank swap allows changing it. The displayed P5 order now reflects the enforced selection immediately. (19-10-2026)
 
 - **Crystallize Time exalines:** Added a continuous countdown on each active Tidal Light strip, refreshed for each successive hit from its own cast duration. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - **Monk Riddle of Earth:** Added three conservative Monk-only Hotbar uses before second Burnished Glory, the first Ultimate Relativity stack and Crystallize Time Quietus, based on EU reference timings. (19-10-2026)
 
 - **Bard Nature's Minne:** Retimed eight existing Hotbar uses using EU references, including Utopian recovery, Light Rampant orbs, Hell's Judgment and late P3 recovery. Spaced the P5 pair for the 120-second cooldown and removed cooldown conditions. (19-10-2026)
-
-- **Dancer Improvisation:** Retimed existing uses around first Burnished Glory, Diamond Dust Holy recovery and second P4 Akh Morn using EU references. The transition window now tolerates a timeline jump; first P5 Akh Morn is later to allow cooldown recovery. Seven Hotbar uses retained without cooldown conditions. (19-10-2026)
 
 ### UWU: LPDU
 
