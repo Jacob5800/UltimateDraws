@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- **Monk Mantra:** Aligned the schedule with EU reference uses: first Burnished Glory, earlier Apocalypse recovery, and first P4 Akh Morn; tightened Diamond Dust/Ultimate Relativity windows. All eight uses now request Mantra through the ACR Hotbar without cooldown conditions. (19-10-2026)
+
 - **Ninja mitigation:** Added Shade Shift before Diamond Dust and Ultimate Relativity, using Ninja-only Hotbar requests with enough time between uses for its cooldown. (19-10-2026)
 
 - Added conservative Samurai Tengetsu Hotbar windows immediately before P1 Cyclonic Break and second Burnished Glory, matching sampled reference usage without cooldown conditions. The existing mirrors movement Sprint window is now a shared Hotbar request for all jobs; its synced timing is preserved. Combat confirmation pending. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - P3-P5 M1/M2 Feint also uses the ACR Hotbar request, completing all 19 Feint assignments. Existing timing, roster and cooldown checks are preserved; combat confirmation pending. (19-10-2026)
 
 - P1-P2 M1/M2 Feint now requests the ACR Hotbar Feint control, verified against RikuMNK3, instead of casting directly. Role/cooldown gates and timings remain unchanged; combat testing pending. (19-10-2026)
-
-- Fixed the final six P1 Addle and physical-ranged mitigation role checks to use AnyoneCore Party Roster. Full 243-reaction audit found no remaining legacy role helpers; combat confirmation pending. (19-10-2026)
 
 ### UWU: LPDU
 

@@ -22,77 +22,6 @@ local tbl =
 					{
 						data = 
 						{
-							actionID = 65,
-							conditions = 
-							{
-								
-								{
-									"e819eda1-c417-6d4d-a297-51276285dcaa",
-									true,
-								},
-								
-								{
-									"06243193-7c5b-9dc0-b04a-54f8e25952a0",
-									true,
-								},
-							},
-							name = "[LPDU] Mantra Cyclonic Break",
-							uuid = "876c5273-a45a-696e-a773-6d934a509b7d",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "MONK",
-							name = "MONK job",
-							uuid = "e819eda1-c417-6d4d-a297-51276285dcaa",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 65,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Cyclonic Break CD",
-							uuid = "06243193-7c5b-9dc0-b04a-54f8e25952a0",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "LPDU Mitigation",
-				mechanicTime = 13.7,
-				name = "[LPDU] Mantra Cyclonic Break",
-				timeRange = true,
-				timelineIndex = 1,
-				timerEndOffset = -1.5,
-				timerStartOffset = -11,
-				uuid = "02ed764a-04fd-a87c-8f0a-809c0a3fa0d9",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
 							aType = "ACR",
 							actionID = 25857,
 							conditions = 
@@ -3754,6 +3683,61 @@ local tbl =
 				timerEndOffset = -1.5,
 				timerStartOffset = -11,
 				uuid = "d952f3cb-dfd5-5576-ab0e-72ef0d497b49",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							actionID = 65,
+							conditions = 
+							{
+								
+								{
+									"e819eda1-c417-6d4d-a297-51276285dcaa",
+									true,
+								},
+							},
+							gVar = "ACR_RikuMNK3_Hotbar_Mantra",
+							name = "[LPDU] Mantra Burnished Glory 1",
+							uuid = "876c5273-a45a-696e-a773-6d934a509b7d",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MONK",
+							name = "MONK job",
+							uuid = "e819eda1-c417-6d4d-a297-51276285dcaa",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Mitigation",
+				mechanicTime = 85.9,
+				name = "[LPDU] Mantra Burnished Glory 1",
+				timeRange = true,
+				timelineIndex = 22,
+				timerEndOffset = -6,
+				timerStartOffset = -9,
+				uuid = "02ed764a-04fd-a87c-8f0a-809c0a3fa0d9",
 				version = 2,
 			},
 		},
@@ -7805,6 +7789,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 65,
 							conditions = 
 							{
@@ -7813,14 +7798,11 @@ local tbl =
 									"a91ba3d2-bd73-fd4e-af3a-4c47154a91a7",
 									true,
 								},
-								
-								{
-									"cbec6ce3-91d5-3b00-8886-03c14fe5da85",
-									true,
-								},
 							},
+							gVar = "ACR_RikuMNK3_Hotbar_Mantra",
 							name = "[LPDU] Mantra Diamond Dust",
 							uuid = "7cb25238-a73b-6dbc-8359-e11028e62d89",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -7840,28 +7822,14 @@ local tbl =
 							version = 3,
 						},
 					},
-					
-					{
-						data = 
-						{
-							actionID = 65,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Diamond Dust CD",
-							uuid = "cbec6ce3-91d5-3b00-8886-03c14fe5da85",
-							version = 3,
-						},
-					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 235.3,
 				name = "[LPDU] Mantra Diamond Dust",
 				timeRange = true,
 				timelineIndex = 44,
-				timerEndOffset = -1.5,
-				timerStartOffset = -11,
+				timerEndOffset = -2,
+				timerStartOffset = -5,
 				uuid = "c8f77f5f-ab7c-47d8-9442-73c63e2a2374",
 				version = 2,
 			},
@@ -11147,6 +11115,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 65,
 							conditions = 
 							{
@@ -11155,14 +11124,11 @@ local tbl =
 									"fe591e66-d02c-0678-83fe-e026c284e623",
 									true,
 								},
-								
-								{
-									"6a108e82-622c-3939-8331-adb97a06bcb2",
-									true,
-								},
 							},
+							gVar = "ACR_RikuMNK3_Hotbar_Mantra",
 							name = "[LPDU] Mantra Light Rampant",
 							uuid = "b8649d41-21b5-f516-a82d-cc3198555871",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -11179,20 +11145,6 @@ local tbl =
 							jobValue = "MONK",
 							name = "MONK job",
 							uuid = "fe591e66-d02c-0678-83fe-e026c284e623",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 65,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Light Rampant CD",
-							uuid = "6a108e82-622c-3939-8331-adb97a06bcb2",
 							version = 3,
 						},
 					},
@@ -13386,6 +13338,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 65,
 							conditions = 
 							{
@@ -13394,14 +13347,11 @@ local tbl =
 									"afe92a7f-8bc2-f663-a87f-19f2a809eb68",
 									true,
 								},
-								
-								{
-									"3e51369a-b1c4-e433-8fb5-56afa9fb8da7",
-									true,
-								},
 							},
+							gVar = "ACR_RikuMNK3_Hotbar_Mantra",
 							name = "[LPDU] Mantra Ultimate Relativity",
 							uuid = "7eaf6205-b26d-5709-b457-3beeddd84c86",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -13421,28 +13371,14 @@ local tbl =
 							version = 3,
 						},
 					},
-					
-					{
-						data = 
-						{
-							actionID = 65,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Ultimate Relativity CD",
-							uuid = "3e51369a-b1c4-e433-8fb5-56afa9fb8da7",
-							version = 3,
-						},
-					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 532.4,
 				name = "[LPDU] Mantra Ultimate Relativity",
 				timeRange = true,
 				timelineIndex = 123,
-				timerEndOffset = -1.5,
-				timerStartOffset = -11,
+				timerEndOffset = -2,
+				timerStartOffset = -5,
 				uuid = "3a31fc70-0f26-aa5e-a7b8-7db987c1a993",
 				version = 2,
 			},
@@ -16420,6 +16356,71 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Mitigation",
+				uuid = "5c097a0a-cdda-99cd-830b-844fa1441793",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							actionID = 65,
+							conditions = 
+							{
+								
+								{
+									"3ba0eb7d-29fa-753e-a9f9-3db01a364324",
+									true,
+								},
+							},
+							gVar = "ACR_RikuMNK3_Hotbar_Mantra",
+							name = "[LPDU] Mantra Apocalypse recovery",
+							uuid = "c89da4a7-864c-9899-95b4-25fedebbc9a3",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MONK",
+							name = "MONK job",
+							uuid = "3ba0eb7d-29fa-753e-a9f9-3db01a364324",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Mitigation",
+				mechanicTime = 635.4,
+				name = "[LPDU] Mantra Apocalypse recovery",
+				timeRange = true,
+				timelineIndex = 148,
+				timerEndOffset = -3,
+				timerStartOffset = -6,
+				uuid = "e51c3ff8-7369-c7f0-bacd-35ea1e46bc6b",
+				version = 2,
+			},
+		},
 	},
 	[149] = 
 	{
@@ -17815,77 +17816,6 @@ local tbl =
 				timerEndOffset = 1,
 				timerStartOffset = -5,
 				uuid = "5e473cdd-2da4-880c-9a57-198eef5a9633",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							actionID = 65,
-							conditions = 
-							{
-								
-								{
-									"3ba0eb7d-29fa-753e-a9f9-3db01a364324",
-									true,
-								},
-								
-								{
-									"9f142c2e-3154-4e06-9b18-f4ffe0b8bf31",
-									true,
-								},
-							},
-							name = "[LPDU] Mantra Shockwave Pulsar + Memory's End",
-							uuid = "c89da4a7-864c-9899-95b4-25fedebbc9a3",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "MONK",
-							name = "MONK job",
-							uuid = "3ba0eb7d-29fa-753e-a9f9-3db01a364324",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 65,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Shockwave Pulsar + Memory's End CD",
-							uuid = "9f142c2e-3154-4e06-9b18-f4ffe0b8bf31",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "LPDU Mitigation",
-				mechanicTime = 656.4,
-				name = "[LPDU] Mantra Shockwave Pulsar + Memory's End",
-				timeRange = true,
-				timelineIndex = 153,
-				timerEndOffset = 1,
-				timerStartOffset = -5,
-				uuid = "e51c3ff8-7369-c7f0-bacd-35ea1e46bc6b",
 				version = 2,
 			},
 		},
@@ -21732,6 +21662,61 @@ local tbl =
 		{
 			data = 
 			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							actionID = 65,
+							conditions = 
+							{
+								
+								{
+									"721ee3fd-adfa-f235-b416-eaf7db4fb216",
+									true,
+								},
+							},
+							gVar = "ACR_RikuMNK3_Hotbar_Mantra",
+							name = "[LPDU] Mantra Akh Morn 1 (P4)",
+							uuid = "5790a44c-c21c-8a39-9c67-879fad652bed",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MONK",
+							name = "MONK job",
+							uuid = "721ee3fd-adfa-f235-b416-eaf7db4fb216",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Mitigation",
+				mechanicTime = 773.5,
+				name = "[LPDU] Mantra Akh Morn 1 (P4)",
+				timeRange = true,
+				timelineIndex = 175,
+				timerEndOffset = -5,
+				timerStartOffset = -8,
+				uuid = "0a8c314b-569e-b539-ba34-a50d8f4dc912",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "Off-tank utility",
 				uuid = "c69a7693-2c10-eceb-b77e-3c2b3cfba6fd",
@@ -23476,77 +23461,6 @@ local tbl =
 				timerEndOffset = -1.5,
 				timerStartOffset = -11,
 				uuid = "8af95df8-3618-f0f6-95a2-7aa9241eceb6",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							actionID = 65,
-							conditions = 
-							{
-								
-								{
-									"721ee3fd-adfa-f235-b416-eaf7db4fb216",
-									true,
-								},
-								
-								{
-									"60f92f05-53dd-b8a6-a512-df8aa61f22eb",
-									true,
-								},
-							},
-							name = "[LPDU] Mantra Crystallize Time",
-							uuid = "5790a44c-c21c-8a39-9c67-879fad652bed",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "MONK",
-							name = "MONK job",
-							uuid = "721ee3fd-adfa-f235-b416-eaf7db4fb216",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 65,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Crystallize Time CD",
-							uuid = "60f92f05-53dd-b8a6-a512-df8aa61f22eb",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "LPDU Mitigation",
-				mechanicTime = 798.9,
-				name = "[LPDU] Mantra Crystallize Time",
-				timeRange = true,
-				timelineIndex = 179,
-				timerEndOffset = -1.5,
-				timerStartOffset = -11,
-				uuid = "0a8c314b-569e-b539-ba34-a50d8f4dc912",
 				version = 2,
 			},
 		},
@@ -30390,6 +30304,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 65,
 							conditions = 
 							{
@@ -30398,14 +30313,11 @@ local tbl =
 									"ad23ea1e-3a98-017a-9a66-20c9d70355a4",
 									true,
 								},
-								
-								{
-									"90f8dd06-3525-4e23-b427-586c17577277",
-									true,
-								},
 							},
+							gVar = "ACR_RikuMNK3_Hotbar_Mantra",
 							name = "[LPDU] Mantra Polarizing Strikes 1",
 							uuid = "7a720b3b-871c-4b18-95bf-ecd44dd4ec2d",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -30422,20 +30334,6 @@ local tbl =
 							jobValue = "MONK",
 							name = "MONK job",
 							uuid = "ad23ea1e-3a98-017a-9a66-20c9d70355a4",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 65,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Polarizing Strikes 1 CD",
-							uuid = "90f8dd06-3525-4e23-b427-586c17577277",
 							version = 3,
 						},
 					},
@@ -33737,6 +33635,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 65,
 							conditions = 
 							{
@@ -33745,14 +33644,11 @@ local tbl =
 									"aabe13dc-50e4-42a1-8577-332576cf0afb",
 									true,
 								},
-								
-								{
-									"9b3e11db-b6c7-1a0f-9119-2cf58211b3be",
-									true,
-								},
 							},
+							gVar = "ACR_RikuMNK3_Hotbar_Mantra",
 							name = "[LPDU] Mantra Polarizing Strikes 2",
 							uuid = "646a3492-2fe5-8631-b3c4-9f8baef2374b",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -33769,20 +33665,6 @@ local tbl =
 							jobValue = "MONK",
 							name = "MONK job",
 							uuid = "aabe13dc-50e4-42a1-8577-332576cf0afb",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 65,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Polarizing Strikes 2 CD",
-							uuid = "9b3e11db-b6c7-1a0f-9119-2cf58211b3be",
 							version = 3,
 						},
 					},
