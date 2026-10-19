@@ -5127,6 +5127,70 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Monk personal mitigation",
+				uuid = "7a6c718a-e5a8-0cdc-990e-9798e2fb885e",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"c822b31d-679d-fb50-a564-79b67f8c2e33",
+									true,
+								},
+							},
+							gVar = "ACR_RikuMNK3_Hotbar_RiddleOfEarth",
+							name = "[LPDU MNK] Riddle of Earth - Burnished Glory 2",
+							uuid = "e2e44586-b241-afcf-bd48-2bc6e2732e9b",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MONK",
+							name = "Monk job",
+							uuid = "c822b31d-679d-fb50-a564-79b67f8c2e33",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Monk personal mitigation",
+				mechanicTime = 121.1,
+				name = "[LPDU MNK] Riddle of Earth - Burnished Glory 2",
+				timeRange = true,
+				timelineIndex = 29,
+				timerEndOffset = -7,
+				timerStartOffset = -9,
+				uuid = "e54e92d9-508f-ee85-889a-e95655543e21",
+				version = 2,
+			},
+		},
 	},
 	[30] = 
 	{
@@ -13715,6 +13779,73 @@ local tbl =
 				timerEndOffset = -2,
 				timerStartOffset = -5,
 				uuid = "9a1717ac-6cda-791b-b58d-c82bfc2306fb",
+				version = 2,
+			},
+		},
+	},
+	[125] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Monk personal mitigation",
+				uuid = "4628d2ca-4234-6b98-998c-4963d0b67ec4",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"ae68231b-bbdd-bddf-837b-6a1903c5ec6d",
+									true,
+								},
+							},
+							gVar = "ACR_RikuMNK3_Hotbar_RiddleOfEarth",
+							name = "[LPDU MNK] Riddle of Earth - Relativity first stack",
+							uuid = "c317ef60-9fbd-7ab9-8dd4-18ac14a7574a",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MONK",
+							name = "Monk job",
+							uuid = "ae68231b-bbdd-bddf-837b-6a1903c5ec6d",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Monk personal mitigation",
+				mechanicTime = 544.2,
+				name = "[LPDU MNK] Riddle of Earth - Relativity first stack",
+				timeRange = true,
+				timelineIndex = 125,
+				timerEndOffset = -1,
+				timerStartOffset = -3,
+				uuid = "454c3490-4b4f-7085-9c84-c842ac0ddfe4",
 				version = 2,
 			},
 		},
@@ -23858,6 +23989,73 @@ local tbl =
 				timerEndOffset = -5,
 				timerStartOffset = -6,
 				uuid = "4e881e8f-5182-498f-8ccd-b9cd1cf1ae35",
+				version = 2,
+			},
+		},
+	},
+	[192] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Monk personal mitigation",
+				uuid = "2d7d82bc-45dc-9639-a376-033f4d0aca7f",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"e44a619c-1d85-c14a-930b-d61894286766",
+									true,
+								},
+							},
+							gVar = "ACR_RikuMNK3_Hotbar_RiddleOfEarth",
+							name = "[LPDU MNK] Riddle of Earth - Quietus",
+							uuid = "4602baf3-a205-03d4-b5ba-aea9428620ae",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MONK",
+							name = "Monk job",
+							uuid = "e44a619c-1d85-c14a-930b-d61894286766",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Monk personal mitigation",
+				mechanicTime = 830.1,
+				name = "[LPDU MNK] Riddle of Earth - Quietus",
+				timeRange = true,
+				timelineIndex = 192,
+				timerEndOffset = -2,
+				timerStartOffset = -4,
+				uuid = "3c2d8c5e-4daf-4be6-86dd-b9a0c32cce36",
 				version = 2,
 			},
 		},

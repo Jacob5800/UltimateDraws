@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- **Monk Riddle of Earth:** Added three conservative Monk-only Hotbar uses before second Burnished Glory, the first Ultimate Relativity stack and Crystallize Time Quietus, based on EU reference timings. (19-10-2026)
+
 - **Bard Nature's Minne:** Retimed eight existing Hotbar uses using EU references, including Utopian recovery, Light Rampant orbs, Hell's Judgment and late P3 recovery. Spaced the P5 pair for the 120-second cooldown and removed cooldown conditions. (19-10-2026)
 
 - **Dancer Improvisation:** Retimed existing uses around first Burnished Glory, Diamond Dust Holy recovery and second P4 Akh Morn using EU references. The transition window now tolerates a timeline jump; first P5 Akh Morn is later to allow cooldown recovery. Seven Hotbar uses retained without cooldown conditions. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - Dancer mitigation now uses verified RikuDNC3 Hotbar requests for 21 Shield Samba and seven Improvisation actions. Existing assignments, timing and conditions are preserved; combat confirmation pending. (19-10-2026)
 
 - Machinist mitigation now uses TensorMagnum3 Hotbar requests for 21 Tactician and seven Dismantle actions. Removed redundant End Reaction if Used flags from 82 single-action mitigation reactions; multi-action behavior is preserved. Combat confirmation pending. (19-10-2026)
-
-- Bard mitigation now uses verified TensorRequiem3 Hotbar requests: 21 Troubadour and eight Nature's Minne actions. Timing, assignments, cooldown checks and enabled states are preserved; combat confirmation pending. (19-10-2026)
 
 ### UWU: LPDU
 
