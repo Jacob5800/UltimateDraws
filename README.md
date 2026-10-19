@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- **Tank settings clarity:** Explains when the PLD cooldown restriction requires a P5 invuln order, why the choice reverts, and how P4 Tank swap allows changing it. The displayed P5 order now reflects the enforced selection immediately. (19-10-2026)
+
 - **Crystallize Time exalines:** Added a continuous countdown on each active Tidal Light strip, refreshed for each successive hit from its own cast duration. (19-10-2026)
 
 - **P4 Somber Dance far bait:** The assigned tank now baits east or west on the side farther from Oracle, instead of reusing the earlier Darklit safe side. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - **Bard Nature's Minne:** Retimed eight existing Hotbar uses using EU references, including Utopian recovery, Light Rampant orbs, Hell's Judgment and late P3 recovery. Spaced the P5 pair for the 120-second cooldown and removed cooldown conditions. (19-10-2026)
 
 - **Dancer Improvisation:** Retimed existing uses around first Burnished Glory, Diamond Dust Holy recovery and second P4 Akh Morn using EU references. The transition window now tolerates a timeline jump; first P5 Akh Morn is later to allow cooldown recovery. Seven Hotbar uses retained without cooldown conditions. (19-10-2026)
-
-- **Monk Mantra:** Aligned the schedule with EU reference uses: first Burnished Glory, earlier Apocalypse recovery, and first P4 Akh Morn; tightened Diamond Dust/Ultimate Relativity windows. All eight uses now request Mantra through the ACR Hotbar without cooldown conditions. (19-10-2026)
 
 ### UWU: LPDU
 
