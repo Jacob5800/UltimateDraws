@@ -444,6 +444,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16012,
 							conditions = 
 							{
@@ -464,8 +465,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
 							name = "[LPDU] R2 Shield Samba - Cyclonic Break",
 							uuid = "357f2c05-9f6b-03df-a8e9-c160194d5454",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -2230,6 +2233,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16014,
 							conditions = 
 							{
@@ -2244,8 +2248,10 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDNC3_Hotbar_Improvisation",
 							name = "[LPDU] Improvisation Utopian Sky",
 							uuid = "7d5f0821-1cbc-01cb-a259-18cdbb3ccf56",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -3321,6 +3327,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16012,
 							conditions = 
 							{
@@ -3341,8 +3348,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
 							name = "[LPDU] R1 Shield Samba - Burnished Glory 1",
 							uuid = "0352468c-59d2-bab5-a44f-3394c446c65e",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -4598,6 +4607,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16012,
 							conditions = 
 							{
@@ -4618,8 +4628,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
 							name = "[LPDU] R1 Shield Samba - Burnished Glory 2",
 							uuid = "5924e541-d8b4-ec95-8e59-0eaeeef3c745",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -7779,6 +7791,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16012,
 							conditions = 
 							{
@@ -7799,8 +7812,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
 							name = "[LPDU] R2 Shield Samba - Diamond Dust",
 							uuid = "42f36017-258d-ff8e-9c25-a9d4c6c7d7f8",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -8271,6 +8286,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16012,
 							conditions = 
 							{
@@ -8291,8 +8307,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
 							name = "[LPDU] R1 Shield Samba - Diamond Dust Knockback",
 							uuid = "3c66abac-a50a-5dc0-a64b-d49a8794d38e",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -8414,6 +8432,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16014,
 							conditions = 
 							{
@@ -8428,8 +8447,10 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDNC3_Hotbar_Improvisation",
 							name = "[LPDU] Improvisation Diamond Dust Knockback",
 							uuid = "8f981874-19ee-0b13-8255-5c7d2544f3ed",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -9192,6 +9213,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16012,
 							conditions = 
 							{
@@ -9212,8 +9234,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
 							name = "[LPDU] R2 Shield Samba - Hallowed Ray",
 							uuid = "b0c31351-877f-905d-baf6-f6f0b86243d2",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -10795,6 +10819,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16012,
 							conditions = 
 							{
@@ -10815,8 +10840,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
 							name = "[LPDU] R1 Shield Samba - Light Rampant",
 							uuid = "f9248f19-336b-59b0-a66f-fe6b1563d957",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -11836,6 +11863,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16012,
 							conditions = 
 							{
@@ -11856,8 +11884,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
 							name = "[LPDU] R2 Shield Samba - Absolute Zero",
 							uuid = "30494a3b-4fb0-3ba4-9a6c-0b424b489a7e",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -12251,6 +12281,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16014,
 							conditions = 
 							{
@@ -12265,8 +12296,10 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDNC3_Hotbar_Improvisation",
 							name = "[LPDU] Improvisation P3 Transition",
 							uuid = "6ba42a5c-3d21-1b47-9bc8-e93c40eae49c",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -13298,6 +13331,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16012,
 							conditions = 
 							{
@@ -13318,8 +13352,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
 							name = "[LPDU] R2 Shield Samba - Ultimate Relativity",
 							uuid = "1fd1fc97-1ce7-615b-8fcb-4c337e68600c",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -13734,6 +13770,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16012,
 							conditions = 
 							{
@@ -13754,8 +13791,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
 							name = "[LPDU] R1 Shield Samba - Dark Fire III",
 							uuid = "dca9954d-eebc-735f-8432-9c2bcf9957bc",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -17670,6 +17709,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16014,
 							conditions = 
 							{
@@ -17684,8 +17724,10 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDNC3_Hotbar_Improvisation",
 							name = "[LPDU] Improvisation Shockwave Pulsar + Memory's End",
 							uuid = "e7c218e3-b99c-2b73-afd1-06bf3d46170b",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -17805,6 +17847,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16012,
 							conditions = 
 							{
@@ -17825,8 +17868,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
 							name = "[LPDU] R2 Shield Samba - Shockwave Pulsar + Memory's End",
 							uuid = "7b62e4ff-a4c4-10b9-9dff-8548f8a39f4a",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -19408,6 +19453,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16012,
 							conditions = 
 							{
@@ -19428,8 +19474,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
 							name = "[LPDU] R1 Shield Samba - Darklit Dragonsong",
 							uuid = "47fe4e1e-d49e-e0af-8df4-72f80b41c8fa",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -21278,6 +21326,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16012,
 							conditions = 
 							{
@@ -21298,8 +21347,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
 							name = "[LPDU] R2 Shield Samba - P4 Akh Morn 1",
 							uuid = "ebd1a22a-ef45-aae1-81e7-e4124ff3340d",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -23301,6 +23352,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16012,
 							conditions = 
 							{
@@ -23321,8 +23373,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
 							name = "[LPDU] R1 Shield Samba - Crystallize Time Rewind",
 							uuid = "646c7b4a-1f4f-0ee4-88b0-92850d669c73",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -23444,6 +23498,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16014,
 							conditions = 
 							{
@@ -23458,8 +23513,10 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDNC3_Hotbar_Improvisation",
 							name = "[LPDU] Improvisation Crystallize Time",
 							uuid = "170a2ac7-3be6-4315-a702-0c0989ca824f",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -25149,6 +25206,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16012,
 							conditions = 
 							{
@@ -25169,8 +25227,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
 							name = "[LPDU] R2 Shield Samba - P4 Akh Morn 2 + Morn Afah",
 							uuid = "ea7240d3-4607-6ce4-a1e5-a249de43299c",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -26985,6 +27045,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16012,
 							conditions = 
 							{
@@ -27005,8 +27066,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
 							name = "[LPDU] R1 Shield Samba - Fulgent Blade 1",
 							uuid = "8f6c77d9-028e-182d-8949-21a0aa9d42aa",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -27463,6 +27526,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16012,
 							conditions = 
 							{
@@ -27483,8 +27547,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
 							name = "[LPDU] R2 Shield Samba - P5 Akh Morn 1",
 							uuid = "ad8765f8-62d2-b512-884d-37af4363ddce",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -27751,6 +27817,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16014,
 							conditions = 
 							{
@@ -27765,8 +27832,10 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDNC3_Hotbar_Improvisation",
 							name = "[LPDU] Improvisation P5 Akh Morn 1",
 							uuid = "035d94ef-7772-1ec7-bcde-1b891f1dc217",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -30724,6 +30793,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16012,
 							conditions = 
 							{
@@ -30744,8 +30814,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
 							name = "[LPDU] R1 Shield Samba - Fulgent Blade 2",
 							uuid = "d2ae68bc-175b-64ed-8c6b-42cb156c47e3",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -31015,6 +31087,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16012,
 							conditions = 
 							{
@@ -31035,8 +31108,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
 							name = "[LPDU] R2 Shield Samba - P5 Akh Morn 2",
 							uuid = "16253ee1-1aa6-14b7-8e00-bc00da497a05",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -33931,6 +34006,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16012,
 							conditions = 
 							{
@@ -33951,8 +34027,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
 							name = "[LPDU] R1 Shield Samba - Fulgent Blade 3",
 							uuid = "33a47ccf-f1f3-215b-9d5b-c9e306cc9a3b",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -34414,6 +34492,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16014,
 							conditions = 
 							{
@@ -34428,8 +34507,10 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuDNC3_Hotbar_Improvisation",
 							name = "[LPDU] Improvisation P5 Akh Morn 3",
 							uuid = "3b78d419-3083-4a6c-a2fb-1f1bd702eb29",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -34620,6 +34701,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16012,
 							conditions = 
 							{
@@ -34640,8 +34722,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
 							name = "[LPDU] R2 Shield Samba - P5 Akh Morn 3",
 							uuid = "e6c5508b-ba7e-9676-a5f7-7a4156246fbf",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
