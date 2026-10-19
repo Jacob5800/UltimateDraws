@@ -3409,7 +3409,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "AnyoneCore.Shotcall(\"Look away\",true,2.2,false)\nself.used=true",
+							actionLua = "local remaining=263.4-TensorReactions_CurrentTimer\nif remaining<=0 then self.used=true;return end\nlocal boss\nfor _,entry in pairs(EntityList(\"\") or {}) do\n local e=TensorCore.mGetEntity(entry.id)\n if e and e.contentid==12809 and Argus.getEntityModel(e)==9020 then boss=e;break end\nend\nif boss and boss.pos then\n local p=boss.pos;local ms=math.floor(remaining*1000)\n AnyoneCore.addWorldTextCountdown(ms,{x=p.x,y=p.y+4,z=p.z},0xFF00FFFF,true,1.5)\n AnyoneCore.addTimedWorldText(ms,\"LOOK AWAY\",{x=p.x,y=p.y+6,z=p.z},0xFF00FFFF,true,1.2)\nend\nAnyoneCore.Shotcall(\"Look away\",true,2.2,false)\nself.used=true",
 							endIfUsed = true,
 							name = "Look away alert and TTS",
 							uuid = "c1016af5-6d48-6f7d-91e9-674d006fa363",
@@ -3700,6 +3700,132 @@ local tbl =
 				timerEndOffset = 1,
 				timerStartOffset = -1,
 				uuid = "a754ea44-14d3-7e9b-a063-949a81a194b6",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Draws",
+				uuid = "19286b3b-fd74-1602-8ab1-cfa417775459",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e or not e.pos then return end\nlocal remaining=eventArgs.channelTimeMax\nif remaining<=0 then self.used=true;return end\nlocal p=e.pos;local ms=math.floor(remaining*1000)\nAnyoneCore.addWorldTextCountdown(ms,{x=p.x,y=p.y+4,z=p.z},0xFFFFFFFF,true,1.5)\nAnyoneCore.addTimedWorldText(ms,eventArgs.spellID==40194 and \"CLEAVE 1 - FRONT\" or \"CLEAVE 1 - BACK\",{x=p.x,y=p.y+6,z=p.z},0xFFFFFFFF,true,1.2)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"da80d3b9-63b8-0d41-972f-f89713c04ee4",
+									true,
+								},
+							},
+							name = "Boss cleave label and countdown",
+							uuid = "f077d86f-1e37-c4c4-85f1-eaa359296c80",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "First Shiva cleave",
+							spellIDList = 
+							{
+								40193,
+								40194,
+							},
+							uuid = "da80d3b9-63b8-0d41-972f-f89713c04ee4",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Draws",
+				eventType = 3,
+				mechanicTime = 272.3,
+				name = "[LPDU] P2 Diamond Dust - Cleave 1 Countdown",
+				timeRange = true,
+				timelineIndex = 61,
+				timerStartOffset = -7,
+				uuid = "8ccf9e41-b240-8272-abf5-ee6ca9982559",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e or not e.pos then return end\nlocal remaining=272.3-TensorReactions_CurrentTimer\nif remaining<=0 then self.used=true;return end\nlocal p=e.pos;local ms=math.floor(remaining*1000)\nAnyoneCore.addWorldTextCountdown(ms,{x=p.x,y=p.y+4,z=p.z},0xFFFFFFFF,true,1.5)\nAnyoneCore.addTimedWorldText(ms,eventArgs.spellID==40194 and \"CLEAVE 2 - BACK\" or \"CLEAVE 2 - FRONT\",{x=p.x,y=p.y+6,z=p.z},0xFFFFFFFF,true,1.2)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"93f04003-7ac9-0c0b-84ee-715edc9f8f89",
+									true,
+								},
+							},
+							name = "Boss cleave label and countdown",
+							uuid = "048050f9-988e-411f-b293-d421d908e5e4",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "First Shiva cleave",
+							spellIDList = 
+							{
+								40193,
+								40194,
+							},
+							uuid = "93f04003-7ac9-0c0b-84ee-715edc9f8f89",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Draws",
+				eventType = 2,
+				mechanicTime = 272.3,
+				name = "[LPDU] P2 Diamond Dust - Cleave 2 Countdown",
+				timeRange = true,
+				timelineIndex = 61,
+				timerStartOffset = -7,
+				uuid = "0954c130-2196-a3b5-971e-ea75d30e8589",
 				version = 2,
 			},
 		},

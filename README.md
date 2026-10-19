@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Added boss world-text labels and continuous countdowns for Diamond Dust look-away and both Shiva cleaves; the second cleave timer appears after the first hit. (19-10-2026)
+
 - Added an all-job P5 Fulgent Blade potion window from timeline 1095 to 1100, allowing an early weave before 1097.4. (19-10-2026)
 
 - Added a solo-tank rejoin callout for both P4 Akh Morn sets when Morn Afah starts, prompting the selected solo tank to stack with the party for the final hit. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - **First mirror alert:** Added a one-time spoken/on-screen “First mirror - move to the arrow” cue when the initial mirror direction arrow appears. (19-10-2026)
 
 - **DRK/PLD defaults:** New unset tank settings use PLD solo for first P4 Akh, DRK solo for second, PLD Halo/P5 first and DRK Apoc/Somber. Existing choices remain editable; a Load DRK/PLD replay defaults button applies the full preset. (19-10-2026)
-
-- **P5 restriction notice:** PLD explanations now appear only when a Paladin is present in the tank roster; the two-PLD note appears only for two Paladins. Updated the blocked-choice popup opening behavior. (19-10-2026)
 
 ### UWU: LPDU
 
