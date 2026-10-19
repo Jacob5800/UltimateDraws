@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- **P2 adds potion:** The 418.8 reaction now uses the appropriate stat potion for all 21 supported combat jobs, alongside its existing reminder. (19-10-2026)
+
 - **First mirror alert:** Added a one-time spoken/on-screen “First mirror - move to the arrow” cue when the initial mirror direction arrow appears. (19-10-2026)
 
 - **DRK/PLD defaults:** New unset tank settings use PLD solo for first P4 Akh, DRK solo for second, PLD Halo/P5 first and DRK Apoc/Somber. Existing choices remain editable; a Load DRK/PLD replay defaults button applies the full preset. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - **Early P4 puddle guidance:** The marker-one staging arrow and green circle now clear on the Akh Rhai move cue when puddles drop. (19-10-2026)
 
 - **P1 tank tower-side arrow:** The initial tank dodge arrow now points opposite the towers on either layout, fixing the west-tower layout that could point MT/OT toward the tower side. (19-10-2026)
-
-- **LPDU strats cleanup:** Removed 95 empty broken inheritance references that appeared as red leftover reactions. Valid reactions and inheritance modules are preserved. (19-10-2026)
 
 ### UWU: LPDU
 
