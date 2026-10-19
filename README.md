@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Red Mage Magick Barrier now uses the verified RikuRDM3 Hotbar request for all seven assignments. Existing timings, role/job checks and cooldown conditions are preserved; combat confirmation pending. (19-10-2026)
+
 - Converted all 17 Addle assignments to the ACR Hotbar request verified with RikuPCT3. Existing timings and conditions remain; Tempera Grassa stays a direct action pending confirmation of the ACR Coat-to-Grassa behavior. (19-10-2026)
 
 - Dancer mitigation now uses verified RikuDNC3 Hotbar requests for 21 Shield Samba and seven Improvisation actions. Existing assignments, timing and conditions are preserved; combat confirmation pending. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - Fixed 32 P2-P5 Addle and physical-ranged mitigation role checks to use AnyoneCore Party Roster. Existing enabled/disabled choices and timings are preserved; combat confirmation pending. (19-10-2026)
 
 - Fixed all 19 M1/M2 Feint assignments to read AnyoneCore Party Roster instead of legacy toolbox roles, including P1 Cyclonic Break and both Burnished Glory assignments. Combat confirmation pending. (19-10-2026)
-
-- WAR/GNB now reserve Nascent Flash/Heart of Corundum during Somber whenever the first Akh uses 7–1, including when supporting the other solo tank. First 4–4 and PLD/DRK support remain unchanged. Expanded cooldown checks pass all 864 grouping, role, job and partner inputs after GUI normalization; replay survival checks remain pending. (18-10-2026)
 
 ### UWU: LPDU
 

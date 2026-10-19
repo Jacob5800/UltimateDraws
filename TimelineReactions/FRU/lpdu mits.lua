@@ -93,6 +93,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25857,
 							conditions = 
 							{
@@ -107,8 +108,10 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuRDM3_Hotbar_MagickBarrier",
 							name = "[LPDU] Magick Barrier Cyclonic Break",
 							uuid = "a6884baa-224f-f73e-a062-03fb1ef59951",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -7374,6 +7377,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25857,
 							conditions = 
 							{
@@ -7388,8 +7392,10 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuRDM3_Hotbar_MagickBarrier",
 							name = "[LPDU] Magick Barrier Diamond Dust",
 							uuid = "e97f9e12-fc7a-f5da-a55a-6d90f7972886",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -11127,6 +11133,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25857,
 							conditions = 
 							{
@@ -11141,8 +11148,10 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuRDM3_Hotbar_MagickBarrier",
 							name = "[LPDU] Magick Barrier Light Rampant",
 							uuid = "3775b1ca-d88e-bfad-8fdf-54a31b2645ae",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -13573,6 +13582,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25857,
 							conditions = 
 							{
@@ -13587,8 +13597,10 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuRDM3_Hotbar_MagickBarrier",
 							name = "[LPDU] Magick Barrier Ultimate Relativity",
 							uuid = "07d2414d-4fc6-fab6-b44c-f520922edc7b",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -23104,6 +23116,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25857,
 							conditions = 
 							{
@@ -23118,8 +23131,10 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuRDM3_Hotbar_MagickBarrier",
 							name = "[LPDU] Magick Barrier Crystallize Time",
 							uuid = "3a1d16ca-daa4-a278-b1d2-438095d52520",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -30002,6 +30017,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25857,
 							conditions = 
 							{
@@ -30016,8 +30032,10 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuRDM3_Hotbar_MagickBarrier",
 							name = "[LPDU] Magick Barrier Polarizing Strikes 1",
 							uuid = "8ce8d8ca-a608-cafb-ac12-4e4fdce70a9d",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -33565,6 +33583,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25857,
 							conditions = 
 							{
@@ -33579,8 +33598,10 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuRDM3_Hotbar_MagickBarrier",
 							name = "[LPDU] Magick Barrier Polarizing Strikes 2",
 							uuid = "8bfd0ca3-c152-378d-a257-6f737b7088cd",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
