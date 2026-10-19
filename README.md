@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- **Dancer Improvisation:** Retimed existing uses around first Burnished Glory, Diamond Dust Holy recovery and second P4 Akh Morn using EU references. The transition window now tolerates a timeline jump; first P5 Akh Morn is later to allow cooldown recovery. Seven Hotbar uses retained without cooldown conditions. (19-10-2026)
+
 - **Monk Mantra:** Aligned the schedule with EU reference uses: first Burnished Glory, earlier Apocalypse recovery, and first P4 Akh Morn; tightened Diamond Dust/Ultimate Relativity windows. All eight uses now request Mantra through the ACR Hotbar without cooldown conditions. (19-10-2026)
 
 - **Ninja mitigation:** Added Shade Shift before Diamond Dust and Ultimate Relativity, using Ninja-only Hotbar requests with enough time between uses for its cooldown. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - Bard mitigation now uses verified TensorRequiem3 Hotbar requests: 21 Troubadour and eight Nature's Minne actions. Timing, assignments, cooldown checks and enabled states are preserved; combat confirmation pending. (19-10-2026)
 
 - P3-P5 M1/M2 Feint also uses the ACR Hotbar request, completing all 19 Feint assignments. Existing timing, roster and cooldown checks are preserved; combat confirmation pending. (19-10-2026)
-
-- P1-P2 M1/M2 Feint now requests the ACR Hotbar Feint control, verified against RikuMNK3, instead of casting directly. Role/cooldown gates and timings remain unchanged; combat testing pending. (19-10-2026)
 
 ### UWU: LPDU
 

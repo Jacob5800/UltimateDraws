@@ -2224,80 +2224,6 @@ local tbl =
 			},
 			objectType = "folder",
 		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "ACR",
-							actionID = 16014,
-							conditions = 
-							{
-								
-								{
-									"bb6a42bd-a1fe-5961-b3d7-c90938a30194",
-									true,
-								},
-								
-								{
-									"4670be9c-aeb0-6aa3-9b5c-dec61e6ad28c",
-									true,
-								},
-							},
-							gVar = "ACR_RikuDNC3_Hotbar_Improvisation",
-							name = "[LPDU] Improvisation Utopian Sky",
-							uuid = "7d5f0821-1cbc-01cb-a259-18cdbb3ccf56",
-							variableTogglesType = 2,
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "DANCER",
-							name = "DANCER job",
-							uuid = "bb6a42bd-a1fe-5961-b3d7-c90938a30194",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 16014,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Utopian Sky CD",
-							uuid = "4670be9c-aeb0-6aa3-9b5c-dec61e6ad28c",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "LPDU Mitigation",
-				mechanicTime = 34.9,
-				name = "[LPDU] Improvisation Utopian Sky",
-				timeRange = true,
-				timelineIndex = 10,
-				timerEndOffset = -1.5,
-				timerStartOffset = -11,
-				uuid = "6bbee03b-8d5a-30af-a92d-f1f2cd068359",
-				version = 2,
-			},
-		},
 	},
 	[11] = 
 	{
@@ -3738,6 +3664,61 @@ local tbl =
 				timerEndOffset = -6,
 				timerStartOffset = -9,
 				uuid = "02ed764a-04fd-a87c-8f0a-809c0a3fa0d9",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							actionID = 16014,
+							conditions = 
+							{
+								
+								{
+									"bb6a42bd-a1fe-5961-b3d7-c90938a30194",
+									true,
+								},
+							},
+							gVar = "ACR_RikuDNC3_Hotbar_Improvisation",
+							name = "[LPDU] Improvisation Burnished Glory 1",
+							uuid = "7d5f0821-1cbc-01cb-a259-18cdbb3ccf56",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DANCER",
+							name = "DANCER job",
+							uuid = "bb6a42bd-a1fe-5961-b3d7-c90938a30194",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Mitigation",
+				mechanicTime = 85.9,
+				name = "[LPDU] Improvisation Burnished Glory 1",
+				timeRange = true,
+				timelineIndex = 22,
+				timerEndOffset = -2,
+				timerStartOffset = -5,
+				uuid = "6bbee03b-8d5a-30af-a92d-f1f2cd068359",
 				version = 2,
 			},
 		},
@@ -8609,80 +8590,6 @@ local tbl =
 		{
 			data = 
 			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "ACR",
-							actionID = 16014,
-							conditions = 
-							{
-								
-								{
-									"9ae3f07d-f601-b306-bf66-703cba05b384",
-									true,
-								},
-								
-								{
-									"cac4e221-8a26-b6ed-aa83-765409a123b3",
-									true,
-								},
-							},
-							gVar = "ACR_RikuDNC3_Hotbar_Improvisation",
-							name = "[LPDU] Improvisation Diamond Dust Knockback",
-							uuid = "8f981874-19ee-0b13-8255-5c7d2544f3ed",
-							variableTogglesType = 2,
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "DANCER",
-							name = "DANCER job",
-							uuid = "9ae3f07d-f601-b306-bf66-703cba05b384",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 16014,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Diamond Dust Knockback CD",
-							uuid = "cac4e221-8a26-b6ed-aa83-765409a123b3",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "LPDU Mitigation",
-				mechanicTime = 251.1,
-				name = "[LPDU] Improvisation Diamond Dust Knockback",
-				timeRange = true,
-				timelineIndex = 50,
-				timerEndOffset = -1.5,
-				timerStartOffset = -11,
-				uuid = "fd73327d-1b1f-584e-b36c-f1940c5a499e",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
 				displayPath = "",
 				name = "Spreadsheet tank mitigation ",
 				uuid = "95525f21-d663-cc17-8333-f8dcaf406bb5",
@@ -8864,6 +8771,74 @@ local tbl =
 				timerEndOffset = 1,
 				timerStartOffset = -2,
 				uuid = "63201a2e-8d1f-cb0b-b188-203761228f70",
+				version = 2,
+			},
+		},
+	},
+	[57] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Mitigation",
+				uuid = "6c4d2f03-bfd1-a4b5-908c-6aba4ca41494",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							actionID = 16014,
+							conditions = 
+							{
+								
+								{
+									"9ae3f07d-f601-b306-bf66-703cba05b384",
+									true,
+								},
+							},
+							gVar = "ACR_RikuDNC3_Hotbar_Improvisation",
+							name = "[LPDU] Improvisation Diamond Dust Holy recovery",
+							uuid = "8f981874-19ee-0b13-8255-5c7d2544f3ed",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DANCER",
+							name = "DANCER job",
+							uuid = "9ae3f07d-f601-b306-bf66-703cba05b384",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Mitigation",
+				mechanicTime = 259.9,
+				name = "[LPDU] Improvisation Diamond Dust Holy recovery",
+				timeRange = true,
+				timelineIndex = 57,
+				timerEndOffset = 2,
+				timerStartOffset = -1,
+				uuid = "fd73327d-1b1f-584e-b36c-f1940c5a499e",
 				version = 2,
 			},
 		},
@@ -12429,11 +12404,6 @@ local tbl =
 									"c32d9236-e231-6970-a1cd-05cffce4675e",
 									true,
 								},
-								
-								{
-									"5c6e5d68-33cd-60e8-9774-b80cc9facb55",
-									true,
-								},
 							},
 							gVar = "ACR_RikuDNC3_Hotbar_Improvisation",
 							name = "[LPDU] Improvisation P3 Transition",
@@ -12458,28 +12428,14 @@ local tbl =
 							version = 3,
 						},
 					},
-					
-					{
-						data = 
-						{
-							actionID = 16014,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "P3 Transition CD",
-							uuid = "5c6e5d68-33cd-60e8-9774-b80cc9facb55",
-							version = 3,
-						},
-					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 500,
 				name = "[LPDU] Improvisation P3 Transition",
 				timeRange = true,
 				timelineIndex = 119,
-				timerEndOffset = -1.5,
-				timerStartOffset = -11,
+				timerEndOffset = 1,
+				timerStartOffset = -38,
 				uuid = "7974fa66-5c67-815f-a4fd-82f7c783078c",
 				version = 2,
 			},
@@ -17912,11 +17868,6 @@ local tbl =
 									"f72450a1-104b-27aa-8797-dfa52993fbb6",
 									true,
 								},
-								
-								{
-									"715d83c2-8338-a9d6-841c-a618024cbd89",
-									true,
-								},
 							},
 							gVar = "ACR_RikuDNC3_Hotbar_Improvisation",
 							name = "[LPDU] Improvisation Shockwave Pulsar + Memory's End",
@@ -17938,20 +17889,6 @@ local tbl =
 							jobValue = "DANCER",
 							name = "DANCER job",
 							uuid = "f72450a1-104b-27aa-8797-dfa52993fbb6",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 16014,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Shockwave Pulsar + Memory's End CD",
-							uuid = "715d83c2-8338-a9d6-841c-a618024cbd89",
 							version = 3,
 						},
 					},
@@ -23685,80 +23622,6 @@ local tbl =
 						data = 
 						{
 							aType = "ACR",
-							actionID = 16014,
-							conditions = 
-							{
-								
-								{
-									"2af314ac-7db2-5744-a5c5-c0f4bba280e6",
-									true,
-								},
-								
-								{
-									"7ca97e15-7cfb-a1ef-8b7d-ff1313298120",
-									true,
-								},
-							},
-							gVar = "ACR_RikuDNC3_Hotbar_Improvisation",
-							name = "[LPDU] Improvisation Crystallize Time",
-							uuid = "170a2ac7-3be6-4315-a702-0c0989ca824f",
-							variableTogglesType = 2,
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "DANCER",
-							name = "DANCER job",
-							uuid = "2af314ac-7db2-5744-a5c5-c0f4bba280e6",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 16014,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Crystallize Time CD",
-							uuid = "7ca97e15-7cfb-a1ef-8b7d-ff1313298120",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "LPDU Mitigation",
-				mechanicTime = 798.9,
-				name = "[LPDU] Improvisation Crystallize Time",
-				timeRange = true,
-				timelineIndex = 179,
-				timerEndOffset = -1.5,
-				timerStartOffset = -11,
-				uuid = "5626bc4d-823d-23bd-abcc-48ce0743190d",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "ACR",
 							actionID = 7408,
 							conditions = 
 							{
@@ -25525,6 +25388,61 @@ local tbl =
 				timerEndOffset = 1,
 				timerStartOffset = -5,
 				uuid = "e6ddfb7a-409f-1c48-9487-f84844da640c",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							actionID = 16014,
+							conditions = 
+							{
+								
+								{
+									"2af314ac-7db2-5744-a5c5-c0f4bba280e6",
+									true,
+								},
+							},
+							gVar = "ACR_RikuDNC3_Hotbar_Improvisation",
+							name = "[LPDU] Improvisation P4 Akh Morn 2",
+							uuid = "170a2ac7-3be6-4315-a702-0c0989ca824f",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DANCER",
+							name = "DANCER job",
+							uuid = "2af314ac-7db2-5744-a5c5-c0f4bba280e6",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Mitigation",
+				mechanicTime = 854.9,
+				name = "[LPDU] Improvisation P4 Akh Morn 2",
+				timeRange = true,
+				timelineIndex = 202,
+				timerEndOffset = -2,
+				timerStartOffset = -5,
+				uuid = "5626bc4d-823d-23bd-abcc-48ce0743190d",
 				version = 2,
 			},
 		},
@@ -28015,11 +27933,6 @@ local tbl =
 									"894ad83e-a1cc-9dd9-abcf-1bdbf8e346a4",
 									true,
 								},
-								
-								{
-									"02aa88b7-06d6-751f-b3d4-91fec2e4bec7",
-									true,
-								},
 							},
 							gVar = "ACR_RikuDNC3_Hotbar_Improvisation",
 							name = "[LPDU] Improvisation P5 Akh Morn 1",
@@ -28044,28 +27957,13 @@ local tbl =
 							version = 3,
 						},
 					},
-					
-					{
-						data = 
-						{
-							actionID = 16014,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "P5 Akh Morn 1 CD",
-							uuid = "02aa88b7-06d6-751f-b3d4-91fec2e4bec7",
-							version = 3,
-						},
-					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 1011.4,
 				name = "[LPDU] Improvisation P5 Akh Morn 1",
 				timeRange = true,
 				timelineIndex = 215,
-				timerEndOffset = -1.5,
-				timerStartOffset = -11,
+				timerStartOffset = -3,
 				uuid = "cb87df62-8d5c-1884-afe9-17f7a1c9d1b6",
 				version = 2,
 			},
@@ -34671,11 +34569,6 @@ local tbl =
 									"b2493c1b-861b-9945-886f-862436befe8c",
 									true,
 								},
-								
-								{
-									"815c56ef-1b85-0793-9b45-6fb47056c46e",
-									true,
-								},
 							},
 							gVar = "ACR_RikuDNC3_Hotbar_Improvisation",
 							name = "[LPDU] Improvisation P5 Akh Morn 3",
@@ -34697,20 +34590,6 @@ local tbl =
 							jobValue = "DANCER",
 							name = "DANCER job",
 							uuid = "b2493c1b-861b-9945-886f-862436befe8c",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 16014,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "P5 Akh Morn 3 CD",
-							uuid = "815c56ef-1b85-0793-9b45-6fb47056c46e",
 							version = 3,
 						},
 					},
