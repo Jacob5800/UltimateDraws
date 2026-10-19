@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- **UR middle guidance:** Removed the small bright-green destination circle from center-return guidance, preserving its arrow and the larger light-green mechanic circle. (19-10-2026)
+
 - **P4 Darklit potion:** The 738.2 reaction now uses the appropriate stat potion for all 21 supported combat jobs, alongside its existing reminder. (19-10-2026)
 
 - **Tank settings sharing / UR rewind:** Replaced the replay preset button with Save/Restore and clipboard Import/Export with preview. Added a quiet personal countdown for the final five seconds of UR Return, without TTS or central callouts. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - **P5 invuln selection popup:** Choosing an incompatible order now opens an explanation with an OK button, showing the required order and the P4 Tank swap alternative. (19-10-2026)
 
 - **Tank settings clarity:** Explains when the PLD cooldown restriction requires a P5 invuln order, why the choice reverts, and how P4 Tank swap allows changing it. The displayed P5 order now reflects the enforced selection immediately. (19-10-2026)
-
-- **Crystallize Time exalines:** Added a continuous countdown on each active Tidal Light strip, refreshed for each successive hit from its own cast duration. (19-10-2026)
 
 ### UWU: LPDU
 
