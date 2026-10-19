@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- **Red Mage Magick Barrier:** Retimed seven existing Hotbar uses with EU references, including Sinbound Fire/Thunder, LR Banish and first P4 Akh Morn. Corrected DD/LR and P5 cooldown spacing and removed cooldown conditions. (19-10-2026)
+
 - **Monk Riddle of Earth:** Added three conservative Monk-only Hotbar uses before second Burnished Glory, the first Ultimate Relativity stack and Crystallize Time Quietus, based on EU reference timings. (19-10-2026)
 
 - **Bard Nature's Minne:** Retimed eight existing Hotbar uses using EU references, including Utopian recovery, Light Rampant orbs, Hell's Judgment and late P3 recovery. Spaced the P5 pair for the 120-second cooldown and removed cooldown conditions. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - Converted all 17 Addle assignments to the ACR Hotbar request verified with RikuPCT3. Existing timings and conditions remain; Tempera Grassa stays a direct action pending confirmation of the ACR Coat-to-Grassa behavior. (19-10-2026)
 
 - Dancer mitigation now uses verified RikuDNC3 Hotbar requests for 21 Shield Samba and seven Improvisation actions. Existing assignments, timing and conditions are preserved; combat confirmation pending. (19-10-2026)
-
-- Machinist mitigation now uses TensorMagnum3 Hotbar requests for 21 Tactician and seven Dismantle actions. Removed redundant End Reaction if Used flags from 82 single-action mitigation reactions; multi-action behavior is preserved. Combat confirmation pending. (19-10-2026)
 
 ### UWU: LPDU
 

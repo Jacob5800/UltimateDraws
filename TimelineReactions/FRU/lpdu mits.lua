@@ -23,80 +23,6 @@ local tbl =
 						data = 
 						{
 							aType = "ACR",
-							actionID = 25857,
-							conditions = 
-							{
-								
-								{
-									"72bd8735-e338-3c42-abc3-a8d1e0c7d2a6",
-									true,
-								},
-								
-								{
-									"1fd1ad0e-946d-5d76-9015-d52a84546b75",
-									true,
-								},
-							},
-							gVar = "ACR_RikuRDM3_Hotbar_MagickBarrier",
-							name = "[LPDU] Magick Barrier Cyclonic Break",
-							uuid = "a6884baa-224f-f73e-a062-03fb1ef59951",
-							variableTogglesType = 2,
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "REDMAGE",
-							name = "REDMAGE job",
-							uuid = "72bd8735-e338-3c42-abc3-a8d1e0c7d2a6",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 25857,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Cyclonic Break CD",
-							uuid = "1fd1ad0e-946d-5d76-9015-d52a84546b75",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "LPDU Mitigation",
-				mechanicTime = 13.7,
-				name = "[LPDU] Magick Barrier Cyclonic Break",
-				timeRange = true,
-				timelineIndex = 1,
-				timerEndOffset = -1.5,
-				timerStartOffset = -11,
-				uuid = "826874b5-3eeb-2c0c-89c3-214aaecf348e",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "ACR",
 							actionID = 7549,
 							conditions = 
 							{
@@ -2963,6 +2889,61 @@ local tbl =
 				timelineIndex = 12,
 				timerEndOffset = 3,
 				uuid = "dd722cef-4056-12e6-9c62-db53bbfaea3f",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							actionID = 25857,
+							conditions = 
+							{
+								
+								{
+									"72bd8735-e338-3c42-abc3-a8d1e0c7d2a6",
+									true,
+								},
+							},
+							gVar = "ACR_RikuRDM3_Hotbar_MagickBarrier",
+							name = "[LPDU] Magick Barrier Sinbound Fire/Thunder",
+							uuid = "a6884baa-224f-f73e-a062-03fb1ef59951",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REDMAGE",
+							name = "REDMAGE job",
+							uuid = "72bd8735-e338-3c42-abc3-a8d1e0c7d2a6",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Mitigation",
+				mechanicTime = 50,
+				name = "[LPDU] Magick Barrier Sinbound Fire/Thunder",
+				timeRange = true,
+				timelineIndex = 12,
+				timerEndOffset = -1,
+				timerStartOffset = -3,
+				uuid = "826874b5-3eeb-2c0c-89c3-214aaecf348e",
 				version = 2,
 			},
 		},
@@ -7537,11 +7518,6 @@ local tbl =
 									"af567909-fa37-2f02-bfe8-6593c5f5c747",
 									true,
 								},
-								
-								{
-									"9df9797d-98b3-42c1-b3ec-80eff9d15b21",
-									true,
-								},
 							},
 							gVar = "ACR_RikuRDM3_Hotbar_MagickBarrier",
 							name = "[LPDU] Magick Barrier Diamond Dust",
@@ -7566,28 +7542,14 @@ local tbl =
 							version = 3,
 						},
 					},
-					
-					{
-						data = 
-						{
-							actionID = 25857,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Diamond Dust CD",
-							uuid = "9df9797d-98b3-42c1-b3ec-80eff9d15b21",
-							version = 3,
-						},
-					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 235.3,
 				name = "[LPDU] Magick Barrier Diamond Dust",
 				timeRange = true,
 				timelineIndex = 44,
-				timerEndOffset = -1.5,
-				timerStartOffset = -11,
+				timerEndOffset = -2,
+				timerStartOffset = -5,
 				uuid = "4365a579-4ee4-8aeb-94ee-f8dfc454695f",
 				version = 2,
 			},
@@ -11174,80 +11136,6 @@ local tbl =
 		{
 			data = 
 			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "ACR",
-							actionID = 25857,
-							conditions = 
-							{
-								
-								{
-									"2e81adb9-532b-3ddf-b0b5-13ed4129bf08",
-									true,
-								},
-								
-								{
-									"bc5981af-a96c-285a-9fb6-451ac3771545",
-									true,
-								},
-							},
-							gVar = "ACR_RikuRDM3_Hotbar_MagickBarrier",
-							name = "[LPDU] Magick Barrier Light Rampant",
-							uuid = "3775b1ca-d88e-bfad-8fdf-54a31b2645ae",
-							variableTogglesType = 2,
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "REDMAGE",
-							name = "REDMAGE job",
-							uuid = "2e81adb9-532b-3ddf-b0b5-13ed4129bf08",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 25857,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Light Rampant CD",
-							uuid = "bc5981af-a96c-285a-9fb6-451ac3771545",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "LPDU Mitigation",
-				mechanicTime = 331.8,
-				name = "[LPDU] Magick Barrier Light Rampant",
-				timeRange = true,
-				timelineIndex = 80,
-				timerEndOffset = 1,
-				timerStartOffset = -5,
-				uuid = "2d8d0631-807a-b72b-a573-98cc5d60d60e",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
 				displayPath = "",
 				name = "Spreadsheet tank mitigation ",
 				uuid = "5787e461-6f01-e241-962c-a3f610dbc8f0",
@@ -11550,6 +11438,71 @@ local tbl =
 				timerEndOffset = -1,
 				timerStartOffset = -4,
 				uuid = "c7c15a5a-b6d5-c829-8936-7c5f7a549863",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Mitigation",
+				uuid = "e9351b97-dfb1-7b9a-8611-e7bfb97a6bbe",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							actionID = 25857,
+							conditions = 
+							{
+								
+								{
+									"2e81adb9-532b-3ddf-b0b5-13ed4129bf08",
+									true,
+								},
+							},
+							gVar = "ACR_RikuRDM3_Hotbar_MagickBarrier",
+							name = "[LPDU] Magick Barrier Light Rampant Banish",
+							uuid = "3775b1ca-d88e-bfad-8fdf-54a31b2645ae",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REDMAGE",
+							name = "REDMAGE job",
+							uuid = "2e81adb9-532b-3ddf-b0b5-13ed4129bf08",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Mitigation",
+				mechanicTime = 360.8,
+				name = "[LPDU] Magick Barrier Light Rampant Banish",
+				timeRange = true,
+				timelineIndex = 92,
+				timerEndOffset = -1,
+				timerStartOffset = -3,
+				uuid = "2d8d0631-807a-b72b-a573-98cc5d60d60e",
 				version = 2,
 			},
 		},
@@ -13661,11 +13614,6 @@ local tbl =
 									"d98363a4-c95d-9c4c-96de-8581fdc624b7",
 									true,
 								},
-								
-								{
-									"42074fa1-1e30-7a43-8341-fb1b149af81d",
-									true,
-								},
 							},
 							gVar = "ACR_RikuRDM3_Hotbar_MagickBarrier",
 							name = "[LPDU] Magick Barrier Ultimate Relativity",
@@ -13690,28 +13638,14 @@ local tbl =
 							version = 3,
 						},
 					},
-					
-					{
-						data = 
-						{
-							actionID = 25857,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Ultimate Relativity CD",
-							uuid = "42074fa1-1e30-7a43-8341-fb1b149af81d",
-							version = 3,
-						},
-					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 532.4,
 				name = "[LPDU] Magick Barrier Ultimate Relativity",
 				timeRange = true,
 				timelineIndex = 123,
-				timerEndOffset = -1.5,
-				timerStartOffset = -11,
+				timerEndOffset = -2,
+				timerStartOffset = -5,
 				uuid = "833165a7-1858-65c6-8e3f-2f79f328d9cf",
 				version = 2,
 			},
@@ -21721,6 +21655,61 @@ local tbl =
 		{
 			data = 
 			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							actionID = 25857,
+							conditions = 
+							{
+								
+								{
+									"bb087493-2769-1e4b-84a5-1c64d9c646f9",
+									true,
+								},
+							},
+							gVar = "ACR_RikuRDM3_Hotbar_MagickBarrier",
+							name = "[LPDU] Magick Barrier P4 Akh Morn 1",
+							uuid = "3a1d16ca-daa4-a278-b1d2-438095d52520",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REDMAGE",
+							name = "REDMAGE job",
+							uuid = "bb087493-2769-1e4b-84a5-1c64d9c646f9",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Mitigation",
+				mechanicTime = 773.5,
+				name = "[LPDU] Magick Barrier P4 Akh Morn 1",
+				timeRange = true,
+				timelineIndex = 175,
+				timerEndOffset = -2,
+				timerStartOffset = -4,
+				uuid = "9dcdccd7-b32e-ae42-b484-524535c4d7bc",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "Off-tank utility",
 				uuid = "c69a7693-2c10-eceb-b77e-3c2b3cfba6fd",
@@ -23317,80 +23306,6 @@ local tbl =
 				timerEndOffset = -1.5,
 				timerStartOffset = -11,
 				uuid = "28b38742-b499-49e4-87de-e1338e85f3a8",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "ACR",
-							actionID = 25857,
-							conditions = 
-							{
-								
-								{
-									"bb087493-2769-1e4b-84a5-1c64d9c646f9",
-									true,
-								},
-								
-								{
-									"e44241b8-ea93-64c8-8c0b-d88711beb550",
-									true,
-								},
-							},
-							gVar = "ACR_RikuRDM3_Hotbar_MagickBarrier",
-							name = "[LPDU] Magick Barrier Crystallize Time",
-							uuid = "3a1d16ca-daa4-a278-b1d2-438095d52520",
-							variableTogglesType = 2,
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "REDMAGE",
-							name = "REDMAGE job",
-							uuid = "bb087493-2769-1e4b-84a5-1c64d9c646f9",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 25857,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Crystallize Time CD",
-							uuid = "e44241b8-ea93-64c8-8c0b-d88711beb550",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "LPDU Mitigation",
-				mechanicTime = 798.9,
-				name = "[LPDU] Magick Barrier Crystallize Time",
-				timeRange = true,
-				timelineIndex = 179,
-				timerEndOffset = -1.5,
-				timerStartOffset = -11,
-				uuid = "9dcdccd7-b32e-ae42-b484-524535c4d7bc",
 				version = 2,
 			},
 		},
@@ -30178,11 +30093,6 @@ local tbl =
 									"5847f1ff-e44c-cdf1-b79a-ae62eede204e",
 									true,
 								},
-								
-								{
-									"b308b14b-b25a-0ed9-9780-6e84b3abe86e",
-									true,
-								},
 							},
 							gVar = "ACR_RikuRDM3_Hotbar_MagickBarrier",
 							name = "[LPDU] Magick Barrier Polarizing Strikes 1",
@@ -30207,28 +30117,14 @@ local tbl =
 							version = 3,
 						},
 					},
-					
-					{
-						data = 
-						{
-							actionID = 25857,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Polarizing Strikes 1 CD",
-							uuid = "b308b14b-b25a-0ed9-9780-6e84b3abe86e",
-							version = 3,
-						},
-					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 1051.2,
 				name = "[LPDU] Magick Barrier Polarizing Strikes 1",
 				timeRange = true,
 				timelineIndex = 226,
-				timerEndOffset = 1,
-				timerStartOffset = -5,
+				timerEndOffset = -5,
+				timerStartOffset = -8,
 				uuid = "708a9939-d6bb-65d6-9528-588d6d1a0171",
 				version = 2,
 			},
@@ -33693,14 +33589,9 @@ local tbl =
 									"c4cf9901-ada4-c4a3-a7f2-b5929a63a67d",
 									true,
 								},
-								
-								{
-									"77077584-f7d3-6a1e-9908-f19a78d6e98f",
-									true,
-								},
 							},
 							gVar = "ACR_RikuRDM3_Hotbar_MagickBarrier",
-							name = "[LPDU] Magick Barrier Polarizing Strikes 2",
+							name = "[LPDU] Magick Barrier Polarizing Strikes 2 follow-up",
 							uuid = "8bfd0ca3-c152-378d-a257-6f737b7088cd",
 							variableTogglesType = 2,
 							version = 2.1,
@@ -33722,28 +33613,14 @@ local tbl =
 							version = 3,
 						},
 					},
-					
-					{
-						data = 
-						{
-							actionID = 25857,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Polarizing Strikes 2 CD",
-							uuid = "77077584-f7d3-6a1e-9908-f19a78d6e98f",
-							version = 3,
-						},
-					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 1162.6,
-				name = "[LPDU] Magick Barrier Polarizing Strikes 2",
+				name = "[LPDU] Magick Barrier Polarizing Strikes 2 follow-up",
 				timeRange = true,
 				timelineIndex = 253,
-				timerEndOffset = -1.5,
-				timerStartOffset = -11,
+				timerEndOffset = 9,
+				timerStartOffset = 6,
 				uuid = "a488d6e8-4a29-1ece-91c1-61bf558376a5",
 				version = 2,
 			},
