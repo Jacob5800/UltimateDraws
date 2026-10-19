@@ -256,7 +256,7 @@ local tbl =
 									true,
 								},
 							},
-							gVar = "ACR_RikuPCT3_Hotbar_Addle",
+							gVar = "ACR_RikuRDM3_Hotbar_Addle",
 							name = "[LPDU] R2 Addle 2 Cyclonic Break",
 							targetType = "Enemy",
 							uuid = "dfddf30c-8656-44b7-b418-61b78459953b",
@@ -1278,6 +1278,72 @@ local tbl =
 				timelineIndex = 1,
 				timerStartOffset = -3,
 				uuid = "653df724-2600-6a52-866c-3807a38f5388",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Samurai personal mitigation",
+				uuid = "1511191d-199e-61dd-828a-d10a90a5a01e",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"2af32810-1184-5496-80d5-2745571d80f4",
+									true,
+								},
+							},
+							gVar = "ACR_TensorWeeb3_Hotbar_Tengetsu",
+							uuid = "9a1b42cc-11d7-a588-b9ee-ec5c4b107b6a",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								34,
+							},
+							name = "Samurai",
+							uuid = "2af32810-1184-5496-80d5-2745571d80f4",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Samurai personal mitigation",
+				mechanicTime = 13.7,
+				name = "[LPDU SAM] Tengetsu - Cyclonic Break",
+				timeRange = true,
+				timelineIndex = 1,
+				timerEndOffset = -0.5,
+				timerStartOffset = -2.5,
+				uuid = "5c14223c-d6d5-f687-9a09-e701d35d16c7",
 				version = 2,
 			},
 		},
@@ -4495,7 +4561,7 @@ local tbl =
 									true,
 								},
 							},
-							gVar = "ACR_RikuPCT3_Hotbar_Addle",
+							gVar = "ACR_RikuRDM3_Hotbar_Addle",
 							name = "[LPDU] R2 Addle 2 Burnished Glory 2",
 							targetType = "Enemy",
 							uuid = "24d845ce-fb58-97d3-a3c3-312c9b96d4c9",
@@ -5037,6 +5103,72 @@ local tbl =
 				timelineIndex = 29,
 				timerStartOffset = -3,
 				uuid = "66b69271-8d06-455d-b1f5-207bf3899c68",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Samurai personal mitigation",
+				uuid = "4fb76819-ea6e-7872-b37d-8966323aeba5",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"d811f8b8-07de-7309-b9cf-c34e55db03f7",
+									true,
+								},
+							},
+							gVar = "ACR_TensorWeeb3_Hotbar_Tengetsu",
+							uuid = "a6085eb4-6c5c-9a3d-80bf-4fbac2c91ffa",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								34,
+							},
+							name = "Samurai",
+							uuid = "d811f8b8-07de-7309-b9cf-c34e55db03f7",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Samurai personal mitigation",
+				mechanicTime = 121.1,
+				name = "[LPDU SAM] Tengetsu - Burnished Glory",
+				timeRange = true,
+				timelineIndex = 29,
+				timerEndOffset = -0.5,
+				timerStartOffset = -2.5,
+				uuid = "86176a4c-d851-85e3-842c-ed75fcd7267c",
 				version = 2,
 			},
 		},
@@ -9035,7 +9167,7 @@ local tbl =
 									true,
 								},
 							},
-							gVar = "ACR_RikuPCT3_Hotbar_Addle",
+							gVar = "ACR_RikuRDM3_Hotbar_Addle",
 							name = "[LPDU] R2 Addle 2 Hallowed Ray",
 							targetType = "Enemy",
 							uuid = "4f2b079c-01fe-865f-831e-9cc7afb2afc1",
@@ -9863,60 +9995,21 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 3,
-							conditions = 
-							{
-								
-								{
-									"d8fe6f20-09d5-893e-bcc9-76bf8c5e8dcc",
-									true,
-								},
-								
-								{
-									"e3d8a765-d26e-6048-8298-d7de0414ed8c",
-									true,
-								},
-							},
+							gVar = "ACR_TensorWeeb3_Hotbar_Sprint",
 							uuid = "aa36c8ac-587d-7652-9742-8acb350e1554",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
 				},
 				conditions = 
 				{
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								19,
-								21,
-								32,
-								37,
-							},
-							uuid = "d8fe6f20-09d5-893e-bcc9-76bf8c5e8dcc",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Lua",
-							conditionLua = "local r=AnyoneCore.Roster\nif not r.current() then return false end\nlocal slot=r.mySlot()\nreturn slot==\"T1\" or slot==\"T2\"",
-							name = "Assigned tanks",
-							uuid = "e3d8a765-d26e-6048-8298-d7de0414ed8c",
-							version = 3,
-						},
-					},
 				},
 				displayPath = "Shared tank utility",
 				mechanicTime = 307.2,
-				name = "[LPDU Tank] Sprint",
+				name = "[LPDU All] Sprint - mirrors movement",
 				timeRange = true,
 				timelineIndex = 72,
 				timerEndOffset = 9,
@@ -12050,7 +12143,7 @@ local tbl =
 									true,
 								},
 							},
-							gVar = "ACR_RikuPCT3_Hotbar_Addle",
+							gVar = "ACR_RikuRDM3_Hotbar_Addle",
 							name = "[LPDU] R2 Addle 2 Absolute Zero",
 							targetType = "Enemy",
 							uuid = "f61dc7d5-ffe1-4063-b928-6256e33c14f3",
@@ -14484,7 +14577,7 @@ local tbl =
 									true,
 								},
 							},
-							gVar = "ACR_RikuPCT3_Hotbar_Addle",
+							gVar = "ACR_RikuRDM3_Hotbar_Addle",
 							name = "[LPDU] R2 Addle 2 Shell Crusher + Shockwave Pulsar",
 							targetType = "Enemy",
 							uuid = "c6a2ed18-4f21-5239-b996-97f98827e152",
