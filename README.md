@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Fixed 32 P2-P5 Addle and physical-ranged mitigation role checks to use AnyoneCore Party Roster. Existing enabled/disabled choices and timings are preserved; combat confirmation pending. (19-10-2026)
+
 - Fixed all 19 M1/M2 Feint assignments to read AnyoneCore Party Roster instead of legacy toolbox roles, including P1 Cyclonic Break and both Burnished Glory assignments. Combat confirmation pending. (19-10-2026)
 
 - WAR/GNB now reserve Nascent Flash/Heart of Corundum during Somber whenever the first Akh uses 7–1, including when supporting the other solo tank. First 4–4 and PLD/DRK support remain unchanged. Expanded cooldown checks pass all 864 grouping, role, job and partner inputs after GUI normalization; replay survival checks remain pending. (18-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - PLD keeps Veil for first Morn Afah and Passage for second; removed the unavailable second Veil request. DRK and other-job assignments remain unchanged. This is a normal-stack plan; no intentional-death behavior was added. (18-10-2026)
 
 - WAR/GNB reserve their P1 OT short for the first explosion instead of spending it on Powder support; MT avoids an unavailable repeated short and uses Rampart plus explosion extras. WAR/GNB also reserve their short when solo first Akh instead of giving Somber support. Removed redundant Dark Mind from the DRK second-Akh extras while retaining Oblation. (18-10-2026)
-
-- Moved the P2 120s personal window to 314.1-318.1 after accounting for the P1 sync. Split first P4 Akh Morn party mitigation: DRK/GNB stay early, PLD/WAR shields wait until 778.5-783.0 for Morn Afah; preceding Memory shields now use 658.1-661.1 to preserve cooldown margin. Wings reserves OT Rampart when either Akh set selects OT solo. Somber invuln automatically excludes PLD and updates linked P4/P5 ownership; two PLDs use Tank swap. (18-10-2026)
 
 ### UWU: LPDU
 
