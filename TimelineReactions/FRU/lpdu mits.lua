@@ -166,6 +166,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7549,
 							conditions = 
 							{
@@ -181,10 +182,11 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
-							gVar = "ACR_RikuSGE3_CD",
+							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M1 Feint Cyclonic Break",
 							targetType = "Enemy",
 							uuid = "73c57bc1-cf09-64aa-b3d8-4d0595943c83",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -3598,6 +3600,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7549,
 							conditions = 
 							{
@@ -3613,9 +3616,11 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M2 Feint Burnished Glory 1",
 							targetType = "Enemy",
 							uuid = "07dc106a-6066-b4f8-8311-a533c7f4b024",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -4375,6 +4380,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7549,
 							conditions = 
 							{
@@ -4390,9 +4396,11 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M1 Feint Burnished Glory 2",
 							targetType = "Enemy",
 							uuid = "d0d9624d-1c39-f872-b702-dade79783bbb",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -7407,6 +7415,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7549,
 							conditions = 
 							{
@@ -7422,9 +7431,11 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M2 Feint Diamond Dust",
 							targetType = "Enemy",
 							uuid = "7bda8518-85f9-7e88-ba65-98795ff86808",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -8877,6 +8888,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7549,
 							conditions = 
 							{
@@ -8892,9 +8904,11 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M1 Feint Hallowed Ray",
 							targetType = "Enemy",
 							uuid = "99747ab3-3dde-9620-94a7-7ff0f1017915",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -10176,6 +10190,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7549,
 							conditions = 
 							{
@@ -10191,9 +10206,11 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M2 Feint Banish III + Light Rampant",
 							targetType = "Enemy",
 							uuid = "37c73335-f73c-f3a8-b7df-a4c086690029",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -11652,6 +11669,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7549,
 							conditions = 
 							{
@@ -11667,9 +11685,11 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuMNK3_Hotbar_Feint",
 							name = "[LPDU] M1 Feint Absolute Zero",
 							targetType = "Enemy",
 							uuid = "93e2490d-96c1-f51d-a610-b89530d9463e",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
