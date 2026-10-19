@@ -238,6 +238,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7560,
 							conditions = 
 							{
@@ -252,9 +253,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPCT3_Hotbar_Addle",
 							name = "[LPDU] R2 Addle 2 Cyclonic Break",
 							targetType = "Enemy",
 							uuid = "dfddf30c-8656-44b7-b418-61b78459953b",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -3547,6 +3550,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7560,
 							conditions = 
 							{
@@ -3561,9 +3565,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPCT3_Hotbar_Addle",
 							name = "[LPDU] R1 Addle Burnished Glory 1",
 							targetType = "Enemy",
 							uuid = "3c30bef5-7e23-6de3-9973-1e61e061de0a",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -4471,6 +4477,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7560,
 							conditions = 
 							{
@@ -4485,9 +4492,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPCT3_Hotbar_Addle",
 							name = "[LPDU] R2 Addle 2 Burnished Glory 2",
 							targetType = "Enemy",
 							uuid = "24d845ce-fb58-97d3-a3c3-312c9b96d4c9",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -4522,7 +4531,6 @@ local tbl =
 					},
 				},
 				displayPath = "LPDU Mitigation",
-				enabled = false,
 				mechanicTime = 121.1,
 				name = "[LPDU] R2 Addle 2 Burnished Glory 2",
 				timeRange = true,
@@ -7585,6 +7593,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7560,
 							conditions = 
 							{
@@ -7599,9 +7608,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPCT3_Hotbar_Addle",
 							name = "[LPDU] R1 Addle Diamond Dust",
 							targetType = "Enemy",
 							uuid = "53886910-b2db-94ac-85ef-80cfd0475853",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -9003,6 +9014,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7560,
 							conditions = 
 							{
@@ -9017,9 +9029,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPCT3_Hotbar_Addle",
 							name = "[LPDU] R2 Addle 2 Hallowed Ray",
 							targetType = "Enemy",
 							uuid = "4f2b079c-01fe-865f-831e-9cc7afb2afc1",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -10314,6 +10328,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7560,
 							conditions = 
 							{
@@ -10328,9 +10343,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPCT3_Hotbar_Addle",
 							name = "[LPDU] R1 Addle Banish III + Light Rampant",
 							targetType = "Enemy",
 							uuid = "237a847a-d974-5335-8776-2259d786d1ec",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -12009,6 +12026,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7560,
 							conditions = 
 							{
@@ -12023,9 +12041,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPCT3_Hotbar_Addle",
 							name = "[LPDU] R2 Addle 2 Absolute Zero",
 							targetType = "Enemy",
 							uuid = "f61dc7d5-ffe1-4063-b928-6256e33c14f3",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -12060,7 +12080,6 @@ local tbl =
 					},
 				},
 				displayPath = "LPDU Mitigation",
-				enabled = false,
 				mechanicTime = 387.8,
 				name = "[LPDU] R2 Addle 2 Absolute Zero",
 				timeRange = true,
@@ -13125,6 +13144,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7560,
 							conditions = 
 							{
@@ -13139,9 +13159,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPCT3_Hotbar_Addle",
 							name = "[LPDU] R1 Addle Ultimate Relativity",
 							targetType = "Enemy",
 							uuid = "c3a44e51-d8ff-d39c-9e82-af94bdd61848",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -14435,6 +14457,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7560,
 							conditions = 
 							{
@@ -14449,9 +14472,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPCT3_Hotbar_Addle",
 							name = "[LPDU] R2 Addle 2 Shell Crusher + Shockwave Pulsar",
 							targetType = "Enemy",
 							uuid = "c6a2ed18-4f21-5239-b996-97f98827e152",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -14486,7 +14511,6 @@ local tbl =
 					},
 				},
 				displayPath = "LPDU Mitigation",
-				enabled = false,
 				mechanicTime = 578.6,
 				name = "[LPDU] R2 Addle 2 Shell Crusher + Shockwave Pulsar",
 				timeRange = true,
@@ -17638,6 +17662,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7560,
 							conditions = 
 							{
@@ -17652,9 +17677,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPCT3_Hotbar_Addle",
 							name = "[LPDU] R1 Addle Shockwave Pulsar + Memory's End",
 							targetType = "Enemy",
 							uuid = "a248acbc-b611-d0a0-a8f4-190c8ebd06db",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -19673,6 +19700,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7560,
 							conditions = 
 							{
@@ -19687,9 +19715,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPCT3_Hotbar_Addle",
 							name = "[LPDU] R2 Addle 2 Darklit Dragonsong",
 							targetType = "Enemy",
 							uuid = "4e2d7072-9e72-2006-9fc6-2ca5f5696624",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -19724,7 +19754,6 @@ local tbl =
 					},
 				},
 				displayPath = "LPDU Mitigation",
-				enabled = false,
 				mechanicTime = 738.2,
 				name = "[LPDU] R2 Addle 2 Darklit Dragonsong",
 				timeRange = true,
@@ -23146,6 +23175,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7560,
 							conditions = 
 							{
@@ -23160,9 +23190,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPCT3_Hotbar_Addle",
 							name = "[LPDU] R1 Addle Crystallize Time",
 							targetType = "Enemy",
 							uuid = "ec4eda11-e6a1-56c1-a850-4cecfc93ac25",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -27391,6 +27423,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7560,
 							conditions = 
 							{
@@ -27405,9 +27438,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPCT3_Hotbar_Addle",
 							name = "[LPDU] R1 Addle P5 Akh Morn 1",
 							targetType = "Enemy",
 							uuid = "8b3d234a-4c44-7101-bb76-06749a2642d5",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -30183,6 +30218,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7560,
 							conditions = 
 							{
@@ -30197,9 +30233,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPCT3_Hotbar_Addle",
 							name = "[LPDU] R2 Addle 2 Polarizing Strikes 1",
 							targetType = "Enemy",
 							uuid = "1b7cad82-e0cf-f0eb-a4cf-c8b0c010a71a",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -30234,7 +30272,6 @@ local tbl =
 					},
 				},
 				displayPath = "LPDU Mitigation",
-				enabled = false,
 				mechanicTime = 1051.2,
 				name = "[LPDU] R2 Addle 2 Polarizing Strikes 1",
 				timeRange = true,
@@ -30952,6 +30989,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7560,
 							conditions = 
 							{
@@ -30966,9 +31004,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPCT3_Hotbar_Addle",
 							name = "[LPDU] R1 Addle P5 Akh Morn 2",
 							targetType = "Enemy",
 							uuid = "488e224b-afcc-72d4-8d86-abed7b459098",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -33380,6 +33420,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7560,
 							conditions = 
 							{
@@ -33394,9 +33435,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPCT3_Hotbar_Addle",
 							name = "[LPDU] R2 Addle 2 Polarizing Strikes 2",
 							targetType = "Enemy",
 							uuid = "97ac7bbe-c5be-3c45-bb5e-40e25fa00b2c",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -33431,7 +33474,6 @@ local tbl =
 					},
 				},
 				displayPath = "LPDU Mitigation",
-				enabled = false,
 				mechanicTime = 1162.6,
 				name = "[LPDU] R2 Addle 2 Polarizing Strikes 2",
 				timeRange = true,
@@ -34566,6 +34608,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7560,
 							conditions = 
 							{
@@ -34580,9 +34623,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuPCT3_Hotbar_Addle",
 							name = "[LPDU] R1 Addle P5 Akh Morn 3",
 							targetType = "Enemy",
 							uuid = "842b758a-9d7c-02ce-a6e3-8e505e7437cb",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},

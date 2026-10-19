@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Converted all 17 Addle assignments to the ACR Hotbar request verified with RikuPCT3. Existing timings and conditions remain; Tempera Grassa stays a direct action pending confirmation of the ACR Coat-to-Grassa behavior. (19-10-2026)
+
 - Dancer mitigation now uses verified RikuDNC3 Hotbar requests for 21 Shield Samba and seven Improvisation actions. Existing assignments, timing and conditions are preserved; combat confirmation pending. (19-10-2026)
 
 - Machinist mitigation now uses TensorMagnum3 Hotbar requests for 21 Tactician and seven Dismantle actions. Removed redundant End Reaction if Used flags from 82 single-action mitigation reactions; multi-action behavior is preserved. Combat confirmation pending. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - Fixed all 19 M1/M2 Feint assignments to read AnyoneCore Party Roster instead of legacy toolbox roles, including P1 Cyclonic Break and both Burnished Glory assignments. Combat confirmation pending. (19-10-2026)
 
 - WAR/GNB now reserve Nascent Flash/Heart of Corundum during Somber whenever the first Akh uses 7–1, including when supporting the other solo tank. First 4–4 and PLD/DRK support remain unchanged. Expanded cooldown checks pass all 864 grouping, role, job and partner inputs after GUI normalization; replay survival checks remain pending. (18-10-2026)
-
-- MT Darklit Reprisal now uses 731.2–732.2 and CT Reprisal 792.9–793.9, preserving recovery for second Akh Morn. Removed WAR’s unavailable second-Morn Shake request while retaining its late first-Morn shield; second-Morn coverage uses the agreed party plan. (18-10-2026)
 
 ### UWU: LPDU
 
