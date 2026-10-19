@@ -3075,7 +3075,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local s=data.q40bounds\nlocal p=TensorCore.mGetPlayer()\nif not s then self.used=true return end\nlocal j=p and p.job;local x,z,name,index\nif j==19 or j==21 or j==32 or j==37 then x=-607.78;z=-307.78;name='TANK NW TOWER';index=27\nelseif j==24 or j==28 or j==33 or j==40 then x=-592.22;z=-292.22;name='HEALER SE TOWER';index=30\nelseif j==20 or j==22 or j==30 or j==34 or j==39 or j==41 then x=-592.22;z=-307.78;name='MELEE NE TOWER';index=28\nelse x=-607.78;z=-292.22;name='RANGED SW TOWER';index=29 end\nlocal active=data.q40towers and data.q40towers[index]\nif not active or not s.towerUntil or Now()>=s.towerUntil or not p or not p.alive or Now()<s.towerAt or Now()<(data.q40towerBlockUntil or 0) then\n if s.towerArrow then Argus.deleteTimedShape(s.towerArrow);s.towerArrow=nil end\n if s.towerCircle then Argus.deleteTimedShape(s.towerCircle);s.towerCircle=nil end\n if not active or not s.towerUntil or Now()>=s.towerUntil then s.towerUntil=nil end\n self.used=true return\nend\nlocal ms=s.towerUntil-Now()\nlocal drawer=TensorCore.getCachedFlatDrawer(0x4433FF33,0x6633FF33,0x8833FF33,0xFF33FF33,2,1,Argus2.RenderFlags.FLAG_RENDER_UI)\nlocal pos={x=x,y=p.pos.y,z=z};local d=TensorCore.getDistance2d(p.pos,pos);local h=TensorCore.getHeadingToTarget(p.pos,pos)\nif not s.towerCircle then s.towerCircle=drawer:addTimedCircle(ms,x,p.pos.y,z,1,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI) end\nif d>.7 or (s.towerArrow and Now()<(s.towerArrowAt or 0)+3000) then\n if s.towerArrow then drawer:updateTimedArrow(s.towerArrow,ms,p.pos.x,p.pos.y,p.pos.z,h,math.max(.1,d-1),.65,1,1.3,0,false,Argus2.RenderFlags.FLAG_RENDER_UI)\n else s.towerArrowAt=Now();s.towerArrow=drawer:addTimedArrow(ms,p.pos.x,p.pos.y,p.pos.z,h,math.max(.1,d-1),.65,1,1.3,0,false,Argus2.RenderFlags.FLAG_RENDER_UI) end\nelseif s.towerArrow then Argus.deleteTimedShape(s.towerArrow);s.towerArrow=nil end\nif not s.towerSaid then TensorCore.addAlertText(2500,name,.9,2,false);s.towerSaid=true end\nself.used=true",
+						actionLua = "local s=data.q40bounds\nlocal p=TensorCore.mGetPlayer()\nif not s then self.used=true return end\nlocal j=p and p.job;local x,z,name,index\nif j==19 or j==21 or j==32 or j==37 then x=-607.78;z=-307.78;name='TANK NW TOWER';index=27\nelseif j==24 or j==28 or j==33 or j==40 then x=-592.22;z=-292.22;name='HEALER SE TOWER';index=30\nelseif j==20 or j==22 or j==30 or j==34 or j==39 or j==41 then x=-592.22;z=-307.78;name='MELEE NE TOWER';index=28\nelse x=-607.78;z=-292.22;name='RANGED SW TOWER';index=29 end\nlocal active=data.q40towers and data.q40towers[index]\nif not active or not s.towerUntil or Now()>=s.towerUntil or not p or not p.alive or Now()<s.towerAt or Now()<(data.q40towerBlockUntil or 0) then\n if s.towerArrow then Argus.deleteTimedShape(s.towerArrow);s.towerArrow=nil end\n if s.towerCircle then Argus.deleteTimedShape(s.towerCircle);s.towerCircle=nil end\n if not active or not s.towerUntil or Now()>=s.towerUntil then s.towerUntil=nil end\n self.used=true return\nend\nlocal ms=s.towerUntil-Now()\nlocal drawer=TensorCore.getCachedFlatDrawer(0x4433FF33,0x6633FF33,0x8833FF33,0xFF33FF33,2,1,Argus2.RenderFlags.FLAG_RENDER_UI)\nlocal pos={x=x,y=p.pos.y,z=z};local d=TensorCore.getDistance2d(p.pos,pos);local h=TensorCore.getHeadingToTarget(p.pos,pos)\nif not s.towerCircle then s.towerCircle=drawer:addTimedCircle(ms,x,p.pos.y,z,1,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI) end\nif d>.7 or (s.towerArrow and Now()<(s.towerArrowAt or 0)+4000) then\n if s.towerArrow then drawer:updateTimedArrow(s.towerArrow,ms,p.pos.x,p.pos.y,p.pos.z,h,math.max(.1,d-1),.65,1,1.3,0,false,Argus2.RenderFlags.FLAG_RENDER_UI)\n else s.towerArrowAt=Now();s.towerArrow=drawer:addTimedArrow(ms,p.pos.x,p.pos.y,p.pos.z,h,math.max(.1,d-1),.65,1,1.3,0,false,Argus2.RenderFlags.FLAG_RENDER_UI) end\nelseif s.towerArrow then Argus.deleteTimedShape(s.towerArrow);s.towerArrow=nil end\nif not s.towerSaid then TensorCore.addAlertText(2500,name,.9,2,false);s.towerSaid=true end\nself.used=true",
 						conditions = 
 						{
 							
@@ -3350,7 +3350,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local party=TensorCore.getEntityGroupList('Party') or {}\nlocal p=TensorCore.mGetPlayer()\nlocal owner,buff\nif p and p.alive then local b=TensorCore.getBuff(p,4567);if b then owner=p;buff=b end end\nfor _,e in pairs(party) do local b=TensorCore.getBuff(e,4567);if b and e.alive then owner=e;buff=b;break end end\nlocal s=data.q40sin or {};data.q40sin=s\nif not owner then\n s.missingSince=s.missingSince or Now()\n if Now()-s.missingSince>=500 then if s.circle then Argus.deleteTimedShape(s.circle) end;data.q40sin=nil end\n self.used=true return\nend\ns.missingSince=nil\nlocal radius=buff.stacks>=10 and 4 or 1.2\nlocal drawer=TensorCore.getCachedFlatDrawer(0x99FFFFFF,0x99FFFFFF,0x99FFFFFF,0xFFFFFFFF,2,1,Argus2.RenderFlags.FLAG_RENDER_UI)\nif s.owner~=owner.id then if s.circle then Argus.deleteTimedShape(s.circle) end;s.owner=owner.id;s.circle=drawer:addTimedCircleOnEnt(60000,owner.id,radius,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI)\nelseif not drawer:updateTimedCircleOnEnt(s.circle,60000,owner.id,radius,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI) then\n s.circle=drawer:addTimedCircleOnEnt(60000,owner.id,radius,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI) end\n\n-- The diagram defines the complete pass order from the first holder's job.\nlocal function role(e)\n local j=e.job\n if j==19 or j==21 or j==32 or j==37 then return 'tank' end\n if j==24 or j==28 or j==33 or j==40 then return 'healer' end\n if j==20 or j==22 or j==30 or j==34 or j==39 or j==41 then return 'melee' end\n if j==23 or j==31 or j==38 or j==25 or j==27 or j==35 or j==42 then return 'ranged' end\nend\nif not data.q40sinPassOrder then\n local sequences={tank={'tank','melee','ranged','healer'},healer={'healer','ranged','melee','tank'},ranged={'ranged','healer','tank','melee'},melee={'melee','tank','healer','ranged'}}\n local sequence=sequences[role(owner)];local byRole={};local seen={};local valid=true\n local function take(e)\n  if seen[e.id] then return end;seen[e.id]=true\n  local k=role(e);if not k then valid=false return end\n  if byRole[k] then valid=false else byRole[k]=e.id end\n end\n if p then take(p) end;for _,e in pairs(party) do take(e) end\n if valid and sequence then\n  local order={};for i,k in ipairs(sequence) do if not byRole[k] then valid=false break end;order[i]=byRole[k] end\n  if valid then data.q40sinPassOrder=order end\n end\nend\nlocal nextID\nfor i,id in ipairs(data.q40sinPassOrder or {}) do if id==owner.id then nextID=data.q40sinPassOrder[i+1];break end end\nlocal nextPlayer=nextID and TensorCore.mGetEntity(nextID)\nif buff.stacks>=8 and nextPlayer and nextPlayer.alive and not TensorCore.getBuff(nextPlayer,4569) then\n if s.nextLabelOwner~=owner.id then\n  AnyoneCore.addTimedWorldTextOnEnt(6000,'Next',nextPlayer.id,0xFFFFFFFF,true,1.3,3.5);s.nextLabelOwner=owner.id\n end\n if p and p.alive and p.id==nextPlayer.id and s.nextWarnedOwner~=owner.id then\n  AnyoneCore.addTimedWorldTextOnEnt(6000,'Go near Sinbearer',p.id,0xFFFFFFFF,true,1.2,2.8)\n  TensorCore.addAlertText(4000,\"YOU'RE NEXT - GO NEAR SINBEARER\",.95,2,true);s.nextWarnedOwner=owner.id\n end\nend\n\n-- The Toolbox documents fixed entity labels, not an update/count-up API. Display real stacks as a short refreshed status label.\nAnyoneCore.addTimedWorldTextOnEnt(270,tostring(buff.stacks)..'/16',owner.id,0xFFFFFFFF,true,1.3,2)\nself.used=true",
+						actionLua = "local party=TensorCore.getEntityGroupList('Party') or {}\nlocal p=TensorCore.mGetPlayer()\nlocal owner,buff\nif p and p.alive then local b=TensorCore.getBuff(p,4567);if b then owner=p;buff=b end end\nfor _,e in pairs(party) do local b=TensorCore.getBuff(e,4567);if b and e.alive then owner=e;buff=b;break end end\nlocal s=data.q40sin or {};data.q40sin=s\nif not owner then\n s.missingSince=s.missingSince or Now()\n if Now()-s.missingSince>=500 then if s.circle then Argus.deleteTimedShape(s.circle) end;data.q40sin=nil end\n self.used=true return\nend\ns.missingSince=nil\nlocal radius=buff.stacks>=10 and 4 or 1.2\nlocal drawer=TensorCore.getCachedFlatDrawer(0x99FFFFFF,0x99FFFFFF,0x99FFFFFF,0xFFFFFFFF,2,1,Argus2.RenderFlags.FLAG_RENDER_UI)\nif s.owner~=owner.id then if s.circle then Argus.deleteTimedShape(s.circle) end;s.owner=owner.id;s.circle=drawer:addTimedCircleOnEnt(60000,owner.id,radius,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI)\nelseif not drawer:updateTimedCircleOnEnt(s.circle,60000,owner.id,radius,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI) then\n s.circle=drawer:addTimedCircleOnEnt(60000,owner.id,radius,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI) end\n\n-- The diagram defines the complete pass order from the first holder's job.\nlocal function role(e)\n local j=e.job\n if j==19 or j==21 or j==32 or j==37 then return 'tank' end\n if j==24 or j==28 or j==33 or j==40 then return 'healer' end\n if j==20 or j==22 or j==30 or j==34 or j==39 or j==41 then return 'melee' end\n if j==23 or j==31 or j==38 or j==25 or j==27 or j==35 or j==42 then return 'ranged' end\nend\nif not data.q40sinPassOrder then\n local sequences={tank={'tank','melee','ranged','healer'},healer={'healer','ranged','melee','tank'},ranged={'ranged','healer','tank','melee'},melee={'melee','tank','healer','ranged'}}\n local sequence=sequences[role(owner)];local byRole={};local seen={};local valid=true\n local function take(e)\n  if seen[e.id] then return end;seen[e.id]=true\n  local k=role(e);if not k then valid=false return end\n  if byRole[k] then valid=false else byRole[k]=e.id end\n end\n if p then take(p) end;for _,e in pairs(party) do take(e) end\n if valid and sequence then\n  local order={};for i,k in ipairs(sequence) do if not byRole[k] then valid=false break end;order[i]=byRole[k] end\n  if valid then data.q40sinPassOrder=order end\n end\nend\nlocal nextID\nfor i,id in ipairs(data.q40sinPassOrder or {}) do if id==owner.id then nextID=data.q40sinPassOrder[i+1];break end end\nlocal nextPlayer=nextID and TensorCore.mGetEntity(nextID)\nif s.nextLabelOwner~=owner.id then s.nextLabelOwner=nil;s.nextLabelID=nil;s.nextLabelRole=nil end\nif buff.stacks>=8 and nextPlayer and nextPlayer.alive and not TensorCore.getBuff(nextPlayer,4569) and not s.nextLabelID then\n s.nextLabelOwner=owner.id;s.nextLabelID=nextPlayer.id\n local names={ranged='Ranged',healer='Healer',tank='Tank',melee='Melee'}\n s.nextLabelRole=names[role(nextPlayer)]\nend\nif s.nextLabelID and p and p.alive and p.id==s.nextLabelID and s.nextWarnedOwner~=owner.id then\n TensorCore.addAlertText(4000,\"YOU'RE NEXT - GO NEAR SINBEARER\",.95,2,true);s.nextWarnedOwner=owner.id\nend\n\n-- The Toolbox documents fixed entity labels, not an update/count-up API. Display real stacks as a short refreshed status label.\nAnyoneCore.addTimedWorldTextOnEnt(270,tostring(buff.stacks)..'/16',owner.id,0xFFFFFFFF,true,1.3,2)\nself.used=true",
 						conditions = 
 						{
 							
@@ -3549,7 +3549,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local s=data.quantum40_scourging\nif s then for _,h in ipairs(s.handles or {}) do Argus.deleteTimedShape(h) end;for _,l in pairs(s.lines or {}) do for _,h in pairs(l.handles) do Argus.deleteTimedShape(h) end end end\nlocal b=data.q40bounds;if b then if b.towerArrow then Argus.deleteTimedShape(b.towerArrow) end;if b.towerCircle then Argus.deleteTimedShape(b.towerCircle) end end\nif data.q40sin and data.q40sin.circle then Argus.deleteTimedShape(data.q40sin.circle) end\nif data.q40stack then for _,key in ipairs({'circle','guideCircle','guideArrow'}) do local h=data.q40stack[key];if h then Argus.deleteTimedShape(h) end end end\ndata.q40spinelashCount=nil\ndata.quantum40_scourging=nil;data.q40bounds=nil;data.q40sin=nil;data.q40stack=nil;data.q40towers=nil\nlocal t=data.q40tankTower;if t then if t.arrow then Argus.deleteTimedShape(t.arrow) end;if t.circle then Argus.deleteTimedShape(t.circle) end end\nlocal t=data.q40chain;if t then if t.arrow then Argus.deleteTimedShape(t.arrow) end;if t.circle then Argus.deleteTimedShape(t.circle) end end\ndata.q40tankTower=nil;data.q40chain=nil;data.q40quadWave=nil;data.q40towerBlockUntil=nil;data.q40vengeanceWarn=nil;data.q40renderDirty=nil\nif data.q40shackle and data.q40shackle.circle then Argus.deleteTimedShape(data.q40shackle.circle) end\nif data.q40tailBeam then Argus.deleteTimedShape(data.q40tailBeam) end\ndata.q40shackle=nil;data.q40tailBeam=nil;data.q40pullDeadline=nil;data.q40eruptionLast=nil\ndata.q40sinPassOrder=nil\nself.used=true",
+						actionLua = "data.q40urgent=nil;data.q40urgentUntil=nil;data.q40chainGather=nil\nif data.q40pairCircle and data.q40pairCircle.handle then Argus.deleteTimedShape(data.q40pairCircle.handle)end\ndata.q40pairCircle=nil;data.q40stillActive=nil;data.q40drains=nil\ndata.q40preFlame=nil\nfor _,h in pairs(data.q40dpsShackleCircles or {})do Argus.deleteTimedShape(h)end\ndata.q40dpsShackleCircles=nil;data.q40dpsShackleTargets=nil\ndata.q40lateLight=nil\ndata.q40puddleSeen=nil;data.q40fireBait=nil;data.q40still=nil;data.q40hellishStart=nil;data.q40eruptionSoon=nil;data.q40moveCall=nil\nlocal s=data.quantum40_scourging;if s and s.preview then Argus.deleteTimedShape(s.preview)end\ndata.q40openingReminder=nil;data.q40blade=nil;data.q40flamebornAt=nil;data.q40flameTethers=nil\nlocal s=data.quantum40_scourging\nif s then for _,h in ipairs(s.handles or {}) do Argus.deleteTimedShape(h) end;for _,l in pairs(s.lines or {}) do for _,h in pairs(l.handles) do Argus.deleteTimedShape(h) end end end\nlocal b=data.q40bounds;if b then if b.towerArrow then Argus.deleteTimedShape(b.towerArrow) end;if b.towerCircle then Argus.deleteTimedShape(b.towerCircle) end end\nif data.q40sin and data.q40sin.circle then Argus.deleteTimedShape(data.q40sin.circle) end\nif data.q40stack then for _,key in ipairs({'circle','guideCircle','guideArrow'}) do local h=data.q40stack[key];if h then Argus.deleteTimedShape(h) end end end\ndata.q40spinelashCount=nil\ndata.quantum40_scourging=nil;data.q40bounds=nil;data.q40sin=nil;data.q40stack=nil;data.q40towers=nil\nlocal t=data.q40tankTower;if t then if t.arrow then Argus.deleteTimedShape(t.arrow) end;if t.circle then Argus.deleteTimedShape(t.circle) end end\nlocal t=data.q40chain;if t then if t.arrow then Argus.deleteTimedShape(t.arrow) end;if t.circle then Argus.deleteTimedShape(t.circle) end end\ndata.q40tankTower=nil;data.q40chain=nil;data.q40quadWave=nil;data.q40towerBlockUntil=nil;data.q40vengeanceWarn=nil;data.q40renderDirty=nil\nif data.q40shackle and data.q40shackle.circle then Argus.deleteTimedShape(data.q40shackle.circle) end\nif data.q40tailBeam then Argus.deleteTimedShape(data.q40tailBeam) end\ndata.q40shackle=nil;data.q40tailBeam=nil;data.q40pullDeadline=nil;data.q40eruptionLast=nil\ndata.q40sinPassOrder=nil\nself.used=true",
 						conditions = 
 						{
 							
@@ -3598,7 +3598,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "data.q40renderDirty=nil\nlocal now=Now();local b=data.q40bounds;local s=data.quantum40_scourging\nlocal pending=b~=nil and b.resolvedAt==nil\nlocal drawer=TensorCore.getCachedFlatDrawer(0x223333FF,0x443333FF,0x663333FF,0xCC3333FF,2,1,Argus2.RenderFlags.FLAG_RENDER_UI)\nif s then\n local allowed=not pending\n for _,l in pairs(s.lines or {}) do\n  local wanted={}\n  if allowed and now<l.expires then\n   for _,dir in ipairs({-1,1}) do\n    local first=0;while l.hit[first] do first=first+dir end\n    for n=0,3 do local k=first+n*dir;local x,z=l.x+k*4*l.dx,l.z+k*4*l.dz\n     if math.abs(x+600)<=19.5 and math.abs(z+300)<=14.5 then wanted[k]={x=x,z=z} end\n    end\n   end\n  end\n  for k,h in pairs(l.handles) do if not wanted[k] then Argus.deleteTimedShape(h);l.handles[k]=nil end end\n  for k,p in pairs(wanted) do\n   local ms=math.max(1,l.expires-now)\n   if not l.handles[k] then l.handles[k]=drawer:addTimedCircle(ms,p.x,l.y+.08,p.z,5,0,false,false,Argus2.RenderFlags.FLAG_RENDER_UI) end\n  end\n end\n if allowed and next(s.lines) and s.safe and not s.safeShown then\n  local p=TensorCore.mGetPlayer()\n  if p and p.alive then\n   local v={x=s.safe.x,y=p.pos.y,z=s.safe.z};local d=TensorCore.getDistance2d(p.pos,v)\n   local g=TensorCore.getCachedFlatDrawer(0x2233FF33,0x4433FF33,0x6633FF33,0xFF33FF33,2,1,Argus2.RenderFlags.FLAG_RENDER_UI)\n   s.handles[#s.handles+1]=g:addTimedCircle(12000,v.x,v.y+.15,v.z,1.2,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI)\n   if d>.8 then s.handles[#s.handles+1]=g:addTimedArrow(6500,p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,v),math.max(.1,d-1),.7,1,1.3,0,false,Argus2.RenderFlags.FLAG_RENDER_UI) end\n   local label;local best=math.huge\n   local labels={'A','B','C','D','1','2','3','4'}\n   for i=1,8 do local wx,wy,wz,active=Argus.getWaymarkInfo(i);if active then local d2=(wx-v.x)^2+(wz-v.z)^2;if d2<best then best=d2;label=labels[i] end end end\n   TensorCore.addAlertText(3500,label and ('EXACRYSTALS - WAYMARK '..label) or 'EXACRYSTAL SAFE SPOT',.95,2,true);s.safeShown=true\n  end\n end\nend\nlocal stack=data.q40stack\nif stack then\n local e=TensorCore.mGetEntity(stack.target);local p=TensorCore.mGetPlayer()\n if now>=stack.expires or not e or not e.alive or not p or not p.alive then\n  if stack.circle then Argus.deleteTimedShape(stack.circle) end\n  if stack.guideCircle then Argus.deleteTimedShape(stack.guideCircle) end\n  if stack.guideArrow then Argus.deleteTimedShape(stack.guideArrow) end\n  data.q40stack=nil\n elseif not pending then\n  local ms=stack.expires-now\n  local g=TensorCore.getCachedFlatDrawer(0x2233FF33,0x4433FF33,0x6633FF33,0xFF33FF33,2,1,Argus2.RenderFlags.FLAG_RENDER_UI)\n  local tank=p.job==19 or p.job==21 or p.job==32 or p.job==37\n  local fixed={x=stack.first and -613.5 or -586.5,y=p.pos.y+.15,z=-299.5}\n  if not stack.circle then\n   if stack.fixed then\n    stack.circle=g:addTimedCircle(ms,fixed.x,fixed.y,fixed.z,1.4,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI)\n   else stack.circle=g:addTimedCircleOnEnt(ms,e.id,1.4,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI) end\n   local pos=stack.fixed and {x=fixed.x,y=fixed.y+1,z=fixed.z} or {x=e.pos.x,y=e.pos.y+1,z=e.pos.z}\n   AnyoneCore.addWorldTextCountdown(ms,pos,0xFFFFFFFF,true,1.3)\n   TensorCore.addAlertText(4500,tank and 'TANK IN FRONT OF LINE STACK' or 'STACK BEHIND TANK',1,2,true)\n  end\n  if stack.fixed then\n   local dest={x=fixed.x,y=fixed.y,z=tank and -302.5 or fixed.z}\n   if tank and not stack.guideCircle then stack.guideCircle=g:addTimedCircle(ms,dest.x,dest.y,dest.z,.8,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI) end\n   local d=TensorCore.getDistance2d(p.pos,dest)\n   if d>.7 or (stack.guideArrow and Now()<(stack.guideArrowAt or 0)+3000) then\n    local h=TensorCore.getHeadingToTarget(p.pos,dest)\n    if stack.guideArrow then g:updateTimedArrow(stack.guideArrow,ms,p.pos.x,p.pos.y,p.pos.z,h,math.max(.1,d-1),.65,1,1.3,0,false,Argus2.RenderFlags.FLAG_RENDER_UI)\n    else stack.guideArrowAt=Now();stack.guideArrow=g:addTimedArrow(ms,p.pos.x,p.pos.y,p.pos.z,h,math.max(.1,d-1),.65,1,1.3,0,false,Argus2.RenderFlags.FLAG_RENDER_UI) end\n   elseif stack.guideArrow then Argus.deleteTimedShape(stack.guideArrow);stack.guideArrow=nil end\n   stack.px=p.pos.x;stack.pz=p.pos.z\n  end\n end\nend\nlocal t=data.q40tankTower\nif t then\n local p=TensorCore.mGetPlayer()\n local blocked=pending or now<(data.q40towerBlockUntil or 0)\n if now>=t.expires or not p or not p.alive or blocked then\n  if t.arrow then Argus.deleteTimedShape(t.arrow);t.arrow=nil end\n  if t.circle then Argus.deleteTimedShape(t.circle);t.circle=nil end\n  if now>=t.expires or not p or not p.alive then data.q40tankTower=nil end\n else\n  local g=TensorCore.getCachedFlatDrawer(0x2233FF33,0x4433FF33,0x6633FF33,0xFF33FF33,2,1,Argus2.RenderFlags.FLAG_RENDER_UI)\n  local ms=t.expires-now;local dest={x=t.x,y=t.y,z=t.z};local d=TensorCore.getDistance2d(p.pos,dest);local h=TensorCore.getHeadingToTarget(p.pos,dest)\n  if not t.circle then t.circle=g:addTimedCircle(ms,t.x,t.y,t.z,1.5,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI) end\n  if d>.7 or (t.arrow and Now()<(t.arrowAt or 0)+3000) then\n   if t.arrow then g:updateTimedArrow(t.arrow,ms,p.pos.x,p.pos.y,p.pos.z,h,math.max(.1,d-1),.65,1,1.3,0,false,Argus2.RenderFlags.FLAG_RENDER_UI)\n   else t.arrowAt=Now();t.arrow=g:addTimedArrow(ms,p.pos.x,p.pos.y,p.pos.z,h,math.max(.1,d-1),.65,1,1.3,0,false,Argus2.RenderFlags.FLAG_RENDER_UI) end\n  elseif t.arrow then Argus.deleteTimedShape(t.arrow);t.arrow=nil end\n  t.px=p.pos.x;t.pz=p.pos.z\n  if not t.said then TensorCore.addAlertText(2500,'TANK SOAK TOWER',1,2,true);t.said=true end\n end\nend\nself.used=true",
+						actionLua = "data.q40renderDirty=nil\nlocal now=Now();local b=data.q40bounds;local s=data.quantum40_scourging\nlocal pending=b~=nil and b.resolvedAt==nil\nlocal drawer=TensorCore.getCachedFlatDrawer(0x223333FF,0x443333FF,0x663333FF,0xCC3333FF,2,1,Argus2.RenderFlags.FLAG_RENDER_UI)\nif s then\n local allowed=not pending\n if pending and s.safe and not s.safeShown then\n  if s.preview and (math.abs(s.previewX-s.safe.x)>.1 or math.abs(s.previewZ-s.safe.z)>.1) then Argus.deleteTimedShape(s.preview);s.preview=nil end\n  if not s.preview then\n   local y=TensorCore.getCachedFlatDrawer(0x2233FFFF,0x4433FFFF,0x6633FFFF,0xFF33FFFF,2,1,Argus2.RenderFlags.FLAG_RENDER_UI)\n   s.preview=y:addTimedCircle(25000,s.safe.x,.15,s.safe.z,1.2,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI)\n   s.previewX=s.safe.x;s.previewZ=s.safe.z;s.handles[#s.handles+1]=s.preview\n  end\n elseif s.preview then Argus.deleteTimedShape(s.preview);s.preview=nil end\n for _,l in pairs(s.lines or {}) do\n  local wanted={}\n  if allowed and now<l.expires then\n   for _,dir in ipairs({-1,1}) do\n    local first=0;while l.hit[first] do first=first+dir end\n    for n=0,3 do local k=first+n*dir;local x,z=l.x+k*4*l.dx,l.z+k*4*l.dz\n     if math.abs(x+600)<=19.5 and math.abs(z+300)<=14.5 then wanted[k]={x=x,z=z} end\n    end\n   end\n  end\n  for k,h in pairs(l.handles) do if not wanted[k] then Argus.deleteTimedShape(h);l.handles[k]=nil end end\n  for k,p in pairs(wanted) do\n   local ms=math.max(1,l.expires-now)\n   if not l.handles[k] then l.handles[k]=drawer:addTimedCircle(ms,p.x,l.y+.08,p.z,5,0,false,false,Argus2.RenderFlags.FLAG_RENDER_UI) end\n  end\n end\n if allowed and next(s.lines) and s.safe and not s.safeShown then\n  local p=TensorCore.mGetPlayer()\n  if p and p.alive then\n   local v={x=s.safe.x,y=p.pos.y,z=s.safe.z};local d=TensorCore.getDistance2d(p.pos,v)\n   local g=TensorCore.getCachedFlatDrawer(0x2233FF33,0x4433FF33,0x6633FF33,0xFF33FF33,2,1,Argus2.RenderFlags.FLAG_RENDER_UI)\n   s.handles[#s.handles+1]=g:addTimedCircle(12000,v.x,v.y+.15,v.z,1.2,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI)\n   if d>.8 then s.handles[#s.handles+1]=g:addTimedArrow(6500,p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,v),math.max(.1,d-1),.7,1,1.3,0,false,Argus2.RenderFlags.FLAG_RENDER_UI) end\n   local label;local best=math.huge\n   local labels={'A','B','C','D','1','2','3','4'}\n   for i=1,8 do local wx,wy,wz,active=Argus.getWaymarkInfo(i);if active then local d2=(wx-v.x)^2+(wz-v.z)^2;if d2<best then best=d2;label=labels[i] end end end\n   TensorCore.addAlertText(3500,label and ('EXACRYSTALS - WAYMARK '..label) or 'EXACRYSTAL SAFE SPOT',.95,2,true);s.safeShown=true\n  end\n end\nend\nlocal stack=data.q40stack\nif stack then\n local e=TensorCore.mGetEntity(stack.target);local p=TensorCore.mGetPlayer()\n if now>=stack.expires or not e or not e.alive or not p or not p.alive then\n  if stack.circle then Argus.deleteTimedShape(stack.circle) end\n  if stack.guideCircle then Argus.deleteTimedShape(stack.guideCircle) end\n  if stack.guideArrow then Argus.deleteTimedShape(stack.guideArrow) end\n  data.q40stack=nil\n elseif not pending then\n  local ms=stack.expires-now\n  local g=TensorCore.getCachedFlatDrawer(0x2233FF33,0x4433FF33,0x6633FF33,0xFF33FF33,2,1,Argus2.RenderFlags.FLAG_RENDER_UI)\n  local tank=p.job==19 or p.job==21 or p.job==32 or p.job==37\n  local fixed={x=stack.first and -613.5 or -586.5,y=p.pos.y+.15,z=-299.5}\n  if not stack.circle then\n   if stack.fixed then\n    stack.circle=g:addTimedCircle(ms,fixed.x,fixed.y,fixed.z,1.4,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI)\n   else stack.circle=g:addTimedCircleOnEnt(ms,e.id,1.4,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI) end\n   local pos=stack.fixed and {x=fixed.x,y=fixed.y+1,z=fixed.z} or {x=e.pos.x,y=e.pos.y+1,z=e.pos.z}\n   AnyoneCore.addWorldTextCountdown(ms,pos,0xFFFFFFFF,true,1.3)\n   TensorCore.addAlertText(4500,tank and 'TANK IN FRONT OF LINE STACK' or 'STACK BEHIND TANK',1,2,true)\n  end\n  if not stack.fixed then\n   local dest={x=-600,y=p.pos.y,z=tank and -303 or -300}\n   local dist=TensorCore.getDistance2d(p.pos,dest)\n   if not stack.guideCircle then stack.guideCircle=g:addTimedCircle(ms,dest.x,dest.y,dest.z,.8,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI)end\n   if dist>.7 then\n    local h=TensorCore.getHeadingToTarget(p.pos,dest)\n    if stack.guideArrow then g:updateTimedArrow(stack.guideArrow,ms,p.pos.x,p.pos.y,p.pos.z,h,math.max(.1,dist-1),.65,1,1.3,0,false,Argus2.RenderFlags.FLAG_RENDER_UI)\n    else stack.guideArrow=g:addTimedArrow(ms,p.pos.x,p.pos.y,p.pos.z,h,math.max(.1,dist-1),.65,1,1.3,0,false,Argus2.RenderFlags.FLAG_RENDER_UI)end\n   elseif stack.guideArrow then Argus.deleteTimedShape(stack.guideArrow);stack.guideArrow=nil end\n  end\n  if stack.fixed then\n   local dest={x=fixed.x,y=fixed.y,z=tank and -302.5 or fixed.z}\n   if tank and not stack.guideCircle then stack.guideCircle=g:addTimedCircle(ms,dest.x,dest.y,dest.z,.8,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI) end\n   local d=TensorCore.getDistance2d(p.pos,dest)\n   if d>.7 or (stack.guideArrow and Now()<(stack.guideArrowAt or 0)+3000) then\n    local h=TensorCore.getHeadingToTarget(p.pos,dest)\n    if stack.guideArrow then g:updateTimedArrow(stack.guideArrow,ms,p.pos.x,p.pos.y,p.pos.z,h,math.max(.1,d-1),.65,1,1.3,0,false,Argus2.RenderFlags.FLAG_RENDER_UI)\n    else stack.guideArrowAt=Now();stack.guideArrow=g:addTimedArrow(ms,p.pos.x,p.pos.y,p.pos.z,h,math.max(.1,d-1),.65,1,1.3,0,false,Argus2.RenderFlags.FLAG_RENDER_UI) end\n   elseif stack.guideArrow then Argus.deleteTimedShape(stack.guideArrow);stack.guideArrow=nil end\n   stack.px=p.pos.x;stack.pz=p.pos.z\n  end\n end\nend\nlocal t=data.q40tankTower\nif t then\n local p=TensorCore.mGetPlayer()\n local blocked=pending or now<(data.q40towerBlockUntil or 0)\n if now>=t.expires or not p or not p.alive or blocked then\n  if t.arrow then Argus.deleteTimedShape(t.arrow);t.arrow=nil end\n  if t.circle then Argus.deleteTimedShape(t.circle);t.circle=nil end\n  if now>=t.expires or not p or not p.alive then data.q40tankTower=nil end\n else\n  local g=TensorCore.getCachedFlatDrawer(0x2233FF33,0x4433FF33,0x6633FF33,0xFF33FF33,2,1,Argus2.RenderFlags.FLAG_RENDER_UI)\n  local ms=t.expires-now;local dest={x=t.x,y=t.y,z=t.z};local d=TensorCore.getDistance2d(p.pos,dest);local h=TensorCore.getHeadingToTarget(p.pos,dest)\n  if not t.circle then t.circle=g:addTimedCircle(ms,t.x,t.y,t.z,1.5,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI) end\n  if d>.7 or (t.arrow and Now()<(t.arrowAt or 0)+3000) then\n   if t.arrow then g:updateTimedArrow(t.arrow,ms,p.pos.x,p.pos.y,p.pos.z,h,math.max(.1,d-1),.65,1,1.3,0,false,Argus2.RenderFlags.FLAG_RENDER_UI)\n   else t.arrowAt=Now();t.arrow=g:addTimedArrow(ms,p.pos.x,p.pos.y,p.pos.z,h,math.max(.1,d-1),.65,1,1.3,0,false,Argus2.RenderFlags.FLAG_RENDER_UI) end\n  elseif t.arrow then Argus.deleteTimedShape(t.arrow);t.arrow=nil end\n  t.px=p.pos.x;t.pz=p.pos.z\n  if not t.said then TensorCore.addAlertText(2500,'TANK SOAK TOWER',1,2,true);t.said=true end\n end\nend\nself.used=true",
 						conditions = 
 						{
 							
@@ -3663,7 +3663,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local p=TensorCore.mGetPlayer();if not p or not p.alive then self.used=true return end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID);local found=e and e.id==p.id\nfor _,v in pairs(TensorCore.getEntityGroupList('Party') or {}) do if e and v.id==e.id then found=true break end end\nif found and (not data.q40pairCall or Now()-data.q40pairCall>3000) then data.q40pairCall=Now();TensorCore.addAlertText(4500,'STACK WITH PARTNER',1,2,true) end\nself.used=true",
+						actionLua = "local p=TensorCore.mGetPlayer();if not p or not p.alive then self.used=true return end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID);local found=e and e.id==p.id\nfor _,v in pairs(TensorCore.getEntityGroupList('Party') or {}) do if e and v.id==e.id then found=true break end end\nif found and (not data.q40pairCall or Now()-data.q40pairCall>3000) then data.q40pairCall=Now();TensorCore.addAlertText(4500,'STACK WITH PARTNER',1,2,false) end\nself.used=true",
 						conditions = 
 						{
 							
@@ -4002,6 +4002,11 @@ local tbl =
 								"65ed409b-6942-0ecb-87b4-5c9a84baf780",
 								true,
 							},
+							
+							{
+								"87a42da9-89a7-1605-80a1-0afbd6c0a11f",
+								true,
+							},
 						},
 						name = "[Quantum40] Vodoriga - switch to add",
 						uuid = "0ccdec1f-36ff-ffcf-affe-20a8f6e16dd4",
@@ -4035,12 +4040,1935 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return eventArgs.isTargetable==true",
+						dequeueIfLuaFalse = true,
+						name = "Add became targetable",
+						uuid = "87a42da9-89a7-1605-80a1-0afbd6c0a11f",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Quantum40/Guidance",
-			eventType = 5,
+			eventType = 26,
 			name = "[Quantum40] Vodoriga - switch to add",
 			timeout = 1,
 			uuid = "8e181cb4-3702-90c0-89dd-149d03188183",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local s=data.q40sin\nif not s or not s.nextLabelID or s.nextLabelOwner~=s.owner then self.used=true return end\nlocal e=TensorCore.mGetEntity(s.nextLabelID)\nlocal owner=TensorCore.mGetEntity(s.owner)\nlocal p=TensorCore.mGetPlayer()\nif not e or not e.alive or not owner or not owner.alive or not TensorCore.getBuff(owner,4567) or not p or not p.alive then self.used=true return end\nlocal width,height=GUI:GetScreenSize()\nGUI:SetNextWindowPos(0,0,GUI.SetCond_Always);GUI:SetNextWindowSize(width,height,GUI.SetCond_Always)\nGUI:PushStyleColor(GUI.Col_WindowBg,0,0,0,0)\nlocal flags=GUI.WindowFlags_NoTitleBar+GUI.WindowFlags_NoResize+GUI.WindowFlags_NoMove+GUI.WindowFlags_NoScrollbar+GUI.WindowFlags_NoSavedSettings+GUI.WindowFlags_NoInputs+GUI.WindowFlags_NoFocusOnAppearing\nif GUI:Begin('##Q40PersistentPassLabels',true,flags) then\n GUI:SetWindowFontScale(1.3)\n local function label(text,extra)\n  local x,y=RenderManager:WorldToScreen({x=e.pos.x,y=e.pos.y+extra,z=e.pos.z},true)\n  if x and y then local w,h=GUI:CalcTextSize(text);GUI:AddRectFilled(x-w/2-4,y-h/2-2,x+w/2+4,y+h/2+2,0xA0000000,4);GUI:AddText(x-w/2,y-h/2,0xFFFFFFFF,text) end\n end\n label('Next '..(s.nextLabelRole or ''),3.5)\n if p.id==e.id then label('Go near Sinbearer',2.8) end\n GUI:SetWindowFontScale(1)\nend\nGUI:End();GUI:PopStyleColor();self.used=true",
+						conditions = 
+						{
+							
+							{
+								"2d6373ff-6612-81f9-8d66-fe8390586bb3",
+								true,
+							},
+						},
+						name = "Pass owned labels until actual holder changes",
+						uuid = "49655db3-1c92-9fb6-921c-db51f58e3d9d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 1311,
+						uuid = "2d6373ff-6612-81f9-8d66-fe8390586bb3",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			eventType = 13,
+			name = "[Quantum40] Sin - persistent next role labels",
+			uuid = "2c9d4e7f-1481-6040-b026-50adca44e630",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if not data.q40openingReminder then data.q40preFlame={at=Now()+340800,expires=Now()+345800};data.q40openingReminder={at=Now()+17800,expires=Now()+22000} end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"b5e56a03-aac3-6307-af5c-a1162f5a9eb4",
+								true,
+							},
+							
+							{
+								"133803fb-4dd6-12fb-b465-f95904755639",
+								true,
+							},
+						},
+						name = "Opening light reminder clock",
+						uuid = "06781e74-9303-3926-b6f3-365813890f3e",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						name = "Quantum map",
+						uuid = "b5e56a03-aac3-6307-af5c-a1162f5a9eb4",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 3,
+						eventArgType = 2,
+						spellIDList = 
+						{
+							44797,
+							44798,
+						},
+						uuid = "133803fb-4dd6-12fb-b465-f95904755639",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			eventType = 3,
+			name = "[Quantum40] Opening light reminder clock",
+			timeout = 1,
+			uuid = "aa732f41-943c-36b9-988f-a8d948d944e8",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local s=data.q40openingReminder\nif not s or s.done or Now()<s.at then self.used=true return end\ns.done=true\nlocal p=TensorCore.mGetPlayer()\nif p and p.alive and Now()<s.expires and TensorCore.getBuff(p,4559) then TensorCore.addAlertText(4000,'GET LIGHT DEBUFF',1,2,true) end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"5e3ecc17-7c47-5f38-ac2e-391ed0c5ddfd",
+								true,
+							},
+						},
+						name = "Grab light before opening towers",
+						uuid = "fcb6f9e2-eacd-a9c8-86c5-6753a79f21dd",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						name = "Quantum map",
+						uuid = "5e3ecc17-7c47-5f38-ac2e-391ed0c5ddfd",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			name = "[Quantum40] Grab light before opening towers",
+			timeout = 1,
+			uuid = "b3be5ac4-261b-8a22-be9d-bcb89027caf9",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local p=TensorCore.mGetPlayer()\nif not p or not p.alive then self.used=true return end\nlocal function group(job)\n if job==19 or job==21 or job==32 or job==37 then return 'tank' end\n if job==24 or job==28 or job==33 or job==40 then return 'healer' end\n if job==20 or job==22 or job==30 or job==34 or job==39 or job==41 then return 'melee' end\n return 'ranged'\nend\nlocal role=group(p.job)\nlocal anchorRole=(role=='tank' or role=='melee')and 'tank' or 'healer'\nlocal anchor=group(p.job)==anchorRole and p or nil\nlocal relevant=eventArgs.entityID==p.id\nfor _,e in pairs(TensorCore.getEntityGroupList('Party')or {})do\n if e.id==eventArgs.entityID then relevant=true end\n if e.alive and group(e.job)==anchorRole then anchor=e end\nend\nif not relevant or not anchor then self.used=true return end\nlocal now=Now();local s=data.q40pairCircle\nif s and now<s.expires then self.used=true return end\nlocal g=TensorCore.getCachedFlatDrawer(0x2233FF33,0x4433FF33,0x6633FF33,0xFF33FF33,2,1,Argus2.RenderFlags.FLAG_RENDER_UI)\ndata.q40pairCircle={expires=now+5100,anchor=anchor.id,handle=g:addTimedCircleOnEnt(5100,anchor.id,1.5,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI)}\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"9c8b0df5-815c-7913-964c-32683551ac44",
+								true,
+							},
+							
+							{
+								"b82b4279-c9d3-d508-b069-19331815521e",
+								true,
+							},
+						},
+						name = "One tank melee or healer ranged circle",
+						uuid = "548c529e-1e18-4386-ac5c-ab6104af173f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						name = "Quantum map",
+						uuid = "9c8b0df5-815c-7913-964c-32683551ac44",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return eventArgs.markerID==77 or eventArgs.markerID==78",
+						dequeueIfLuaFalse = true,
+						name = "Partner ring marker",
+						uuid = "b82b4279-c9d3-d508-b069-19331815521e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			eventType = 4,
+			name = "[Quantum40] Own role set partner circle",
+			timeout = 1,
+			uuid = "212f2d7b-bb09-9f73-a262-c9b12564a9a2",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local p=TensorCore.mGetPlayer();if not p or not p.alive then self.used=true return end\nlocal now=Now();local id=eventArgs.spellID\nlocal middle=id==44103 or id==44109\nlocal ms=eventArgs.channelTimeMax*1000+800\nlocal j=p.job;local left=j==19 or j==21 or j==32 or j==37 or j==23 or j==31 or j==38 or j==25 or j==27 or j==35 or j==42\nlocal towerStage=data.q40flamebornAt and now-data.q40flamebornAt>20000 and now-data.q40flamebornAt<80000\nlocal x=middle and -600 or (towerStage and left and -610 or -590)\nlocal z=math.max(-312,math.min(-288,p.pos.z))\nlocal q=data.q40urgent or {};data.q40urgent=q;q['blade']={text=middle and 'MIDDLE SAFE' or (towerStage and left and 'SIDES - LEFT TOWARD YOUR TOWER' or (towerStage and 'SIDES - RIGHT TOWARD YOUR TOWER' or 'SIDES - GO RIGHT')),deadline=now+ms-800,expires=now+ms-800,priority=2}\n-- queued Blade\n-- middle and 'MIDDLE SAFE' or (towerStage and left and 'SIDES - LEFT TOWARD YOUR TOWER' or (towerStage and 'SIDES - RIGHT TOWARD YOUR TOWER' or 'SIDES - GO RIGHT')),1,2,true)\ndata.q40blade={x=x,y=p.pos.y,z=z,expires=now+ms}\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"677025ed-66d5-f691-98fb-8c8e4d6abbd5",
+								true,
+							},
+							
+							{
+								"1818c31f-3bd4-9af9-80df-e8bf6caf2134",
+								true,
+							},
+						},
+						name = "Blade middle or right guidance",
+						uuid = "52dcaa98-eb26-03da-91d4-f98b07613968",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						name = "Quantum map",
+						uuid = "677025ed-66d5-f691-98fb-8c8e4d6abbd5",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 3,
+						eventArgType = 2,
+						spellIDList = 
+						{
+							44102,
+							44103,
+							44108,
+							44109,
+						},
+						uuid = "1818c31f-3bd4-9af9-80df-e8bf6caf2134",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			eventType = 3,
+			name = "[Quantum40] Blade middle or right guidance",
+			timeout = 1,
+			uuid = "4bbbbd29-01de-1550-b83b-85de9d5340d4",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local s=data.q40blade\nif not s or Now()>=s.expires then self.used=true return end\nlocal p=TensorCore.mGetPlayer();if not p or not p.alive then self.used=true return end\nlocal d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(.15,1,.2,.65),2)\nlocal dest={x=s.x,y=s.y,z=s.z};local dist=TensorCore.getDistance2d(p.pos,dest);local f=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif dist>.8 then d:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(.1,dist-1),.55,1,1.1,false,f)end\nd:addCircle(s.x,s.y,s.z,.8,false,f);self.used=true",
+						conditions = 
+						{
+							
+							{
+								"5017db47-e1b1-23be-9bea-4b1698712fb1",
+								true,
+							},
+						},
+						name = "Blade destination arrow",
+						uuid = "ecf9a882-584e-9aa9-8708-d51434e959e4",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						name = "Quantum map",
+						uuid = "5017db47-e1b1-23be-9bea-4b1698712fb1",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			eventType = 12,
+			name = "[Quantum40] Blade destination arrow",
+			timeout = 1,
+			uuid = "71ab04a6-2312-70b9-a591-6fef83cc7961",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "data.q40flamebornAt=Now()\ndata.q40lateLight={at=Now()+30000,expires=Now()+40000}\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"9122b320-68e8-7be0-bc77-84ac3624e551",
+								true,
+							},
+							
+							{
+								"e1f8e181-ac0a-68c7-a898-c9e95a10cf2e",
+								true,
+							},
+						},
+						name = "Preposition for Flameborn",
+						uuid = "652627e5-6f72-ded1-912b-bcc3088a5453",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						name = "Quantum map",
+						uuid = "9122b320-68e8-7be0-bc77-84ac3624e551",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 3,
+						eventArgType = 2,
+						spellIDList = 
+						{
+							44170,
+						},
+						uuid = "e1f8e181-ac0a-68c7-a898-c9e95a10cf2e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			eventType = 3,
+			name = "[Quantum40] Preposition for Flameborn",
+			timeout = 1,
+			uuid = "f505582e-b8cb-6945-9b16-f08b8664caaf",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local s=data.q40flameTethers or {};data.q40flameTethers=s\nif eventArgs.newTetherID==17 then s[eventArgs.sourceEntityID]=eventArgs.newTargetID else s[eventArgs.sourceEntityID]=nil end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"779da6b7-54ad-b8eb-96ab-d4373d8d19b9",
+								true,
+							},
+							
+							{
+								"9e2455da-20d5-a6f8-b1bc-d1f40c092b4d",
+								true,
+							},
+						},
+						name = "Flameborn tether ownership",
+						uuid = "d868dc0f-88de-eb2d-bc73-3b353014f0f4",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						name = "Quantum map",
+						uuid = "779da6b7-54ad-b8eb-96ab-d4373d8d19b9",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return eventArgs.sourceEntityContentID==14041",
+						dequeueIfLuaFalse = true,
+						name = "Flameborn source",
+						uuid = "9e2455da-20d5-a6f8-b1bc-d1f40c092b4d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			eventType = 15,
+			name = "[Quantum40] Flameborn tether ownership",
+			timeout = 1,
+			uuid = "f41f2def-5d70-6652-8c71-30e54119522f",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local s=data.q40flameTethers\nif not s or not next(s) then self.used=true return end\nlocal counts={}\nfor source,target in pairs(s)do\n local e=TensorCore.mGetEntity(source);local p=TensorCore.mGetEntity(target)\n if e and e.alive and p and p.alive then counts[target]=(counts[target]or 0)+1 else s[source]=nil end\nend\nlocal d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(.7,.15,1,.65),2)\nfor id,count in pairs(counts)do if count==1 then local e=TensorCore.mGetEntity(id);d:addCircle(e.pos.x,e.pos.y,e.pos.z,1,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)end end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"2834a914-4ac9-b2aa-a90d-34ad1888a686",
+								true,
+							},
+						},
+						name = "Single Flameborn tether player circle",
+						uuid = "b1b90043-cda7-e6f0-becf-e0c9da9b83ff",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						name = "Quantum map",
+						uuid = "2834a914-4ac9-b2aa-a90d-34ad1888a686",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			eventType = 12,
+			name = "[Quantum40] Single Flameborn tether player circle",
+			timeout = 1,
+			uuid = "fafb4fe3-93b4-9b1f-9f4f-dabd42b4941a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local p=TensorCore.mGetPlayer();if not p or not p.alive then self.used=true return end\nlocal ms=eventArgs.channelTimeMax*1000+1300\nlocal g=TensorCore.getCachedFlatDrawer(0x223333FF,0x443333FF,0x663333FF,0xCC3333FF,2,1,Argus2.RenderFlags.FLAG_RENDER_UI)\nfor _,e in pairs(TensorCore.getEntityGroupList('Party')or {})do\n if e.id~=p.id and e.alive then\n  local j=e.job;local tank=j==19 or j==21 or j==32 or j==37;local healer=j==24 or j==28 or j==33 or j==40\n  if not tank then g:addTimedCircleOnEnt(ms,e.id,healer and 21 or 8,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI)end\n end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"d2908e20-2e72-e4ad-8dc7-c20f480b6838",
+								true,
+							},
+							
+							{
+								"d7a52d34-8608-9cc1-8727-b65f1ff76619",
+								true,
+							},
+						},
+						name = "Other healer and DPS shackle spreads",
+						uuid = "aa529b6a-3053-a97d-859e-f66265e8f7cb",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						name = "Quantum map",
+						uuid = "d2908e20-2e72-e4ad-8dc7-c20f480b6838",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 3,
+						eventArgType = 2,
+						spellIDList = 
+						{
+							44801,
+						},
+						uuid = "d7a52d34-8608-9cc1-8727-b65f1ff76619",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			eventType = 3,
+			name = "[Quantum40] Other healer and DPS shackle spreads",
+			timeout = 1,
+			uuid = "d2edd254-50be-564e-a524-25a321c05e39",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local now=Now();local key=tostring(eventArgs.entityID)..':'..tostring(eventArgs.aoeID)..':'..tostring(eventArgs.startTime)\nlocal seen=data.q40puddleSeen or {};data.q40puddleSeen=seen\nif seen[key] then self.used=true return end;seen[key]=now\nfor k,t in pairs(seen)do if now-t>10000 then seen[k]=nil end end\nlocal ms=math.max(1,eventArgs.startTime+eventArgs.duration*1000-now)\nif ms>10000 then self.used=true return end\nlocal g=TensorCore.getCachedFlatDrawer(0x223333FF,0x443333FF,0x663333FF,0xDD3333FF,2,1,Argus2.RenderFlags.FLAG_RENDER_UI)\ng:addTimedCircle(ms,eventArgs.x,eventArgs.y+.08,eventArgs.z,6,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI)\nlocal p=TensorCore.mGetPlayer()\nif p and p.alive and (eventArgs.x-p.pos.x)^2+(eventArgs.z-p.pos.z)^2<=9 then AnyoneCore.addWorldTextCountdown(ms,{x=eventArgs.x,y=eventArgs.y+1,z=eventArgs.z},0xFFFFFFFF,true,1.2)end\nif not data.q40moveCall or now-data.q40moveCall>1000 then\n TensorCore.addAlertText(1800,'MOVE',1,2,true);data.q40urgentUntil=Now()+1800;if data.q40urgent then data.q40urgent.eruptionSoon=nil end;data.q40moveCall=now\nend\ndata.q40fireBait=nil\ndata.q40blade=nil\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"812d4abb-695f-ac29-b1a0-de5d56deab57",
+								true,
+							},
+							
+							{
+								"9e595571-6c60-b696-b3dd-ef2534a1c494",
+								true,
+							},
+						},
+						name = "Locked fireball and eruption puddles",
+						uuid = "0a9035c5-f4c2-16c4-8f51-386b223def8c",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						name = "Quantum map",
+						uuid = "812d4abb-695f-ac29-b1a0-de5d56deab57",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return eventArgs.aoeID==44098 or eventArgs.aoeID==44156",
+						dequeueIfLuaFalse = true,
+						name = "Fireball or eruption AoE",
+						uuid = "9e595571-6c60-b696-b3dd-ef2534a1c494",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			eventType = 18,
+			name = "[Quantum40] Locked fireball and eruption puddles",
+			timeout = 1,
+			uuid = "35165570-41b4-525c-bece-518a23b87670",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local p=TensorCore.mGetPlayer();if not p or not p.alive then self.used=true return end\nlocal ms=eventArgs.channelTimeMax*1000+300\ndata.q40fireBait={expires=Now()+ms}\nTensorCore.addAlertText(3500,'BAIT FIREBALLS - THEN MOVE',1,2,true)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"7581a2fa-6f56-9a83-8d3a-686449e9906f",
+								true,
+							},
+							
+							{
+								"62f6f10c-1277-de15-8d01-00ef87fa4393",
+								true,
+							},
+						},
+						name = "Four fireballs bait preview",
+						uuid = "beccf336-47f4-4f40-a6af-e5f3ff6a55ad",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						name = "Quantum map",
+						uuid = "7581a2fa-6f56-9a83-8d3a-686449e9906f",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 3,
+						eventArgType = 2,
+						spellIDList = 
+						{
+							44097,
+							44105,
+						},
+						uuid = "62f6f10c-1277-de15-8d01-00ef87fa4393",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			eventType = 3,
+			name = "[Quantum40] Four fireballs bait preview",
+			timeout = 1,
+			uuid = "6d1355e3-d158-b89c-96f9-499e020a54a7",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local s=data.q40fireBait\nif not s or Now()>=s.expires then self.used=true return end\nlocal p=TensorCore.mGetPlayer();if p and p.alive then local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(1,.15,.15,.4),2);d:addCircle(p.pos.x,p.pos.y,p.pos.z,6,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"49694f6a-1622-b3dc-9057-14fa6d7a37d8",
+								true,
+							},
+						},
+						name = "Personal fireball bait circle",
+						uuid = "9e742a31-386c-59af-9d95-1be9e9086a89",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						name = "Quantum map",
+						uuid = "49694f6a-1622-b3dc-9057-14fa6d7a37d8",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			eventType = 12,
+			name = "[Quantum40] Personal fireball bait circle",
+			timeout = 1,
+			uuid = "00b6a80c-387f-765b-916f-65dea0a2bb63",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local p=TensorCore.mGetPlayer();if not p or not p.alive then self.used=true return end\nlocal ms=eventArgs.channelTimeMax*1000\ndata.q40still={at=Now()+math.max(0,ms-1000),expires=Now()+ms+4000,resolveAt=Now()+ms}\nTensorCore.addAlertText(4000,'STILLNESS - GET SAFE, THEN STOP MOVING',1,2,true)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"839ba370-5e91-19a4-b9ff-17b40a376e27",
+								true,
+							},
+							
+							{
+								"ba427a9f-405c-c7a6-91cc-e6ead4e837fa",
+								true,
+							},
+						},
+						name = "Two chained fireballs stillness",
+						uuid = "45e903fb-4b52-a9d8-bc19-1c91ce83eea0",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						name = "Quantum map",
+						uuid = "839ba370-5e91-19a4-b9ff-17b40a376e27",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 3,
+						eventArgType = 2,
+						spellIDList = 
+						{
+							44100,
+							44107,
+						},
+						uuid = "ba427a9f-405c-c7a6-91cc-e6ead4e837fa",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			eventType = 3,
+			name = "[Quantum40] Two chained fireballs stillness",
+			timeout = 1,
+			uuid = "98902997-35e2-beb8-b481-acb537f5212e",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local s=data.q40still\nif not s or s.said or Now()<s.at or Now()>=s.expires then self.used=true return end\ns.said=true;data.q40blade=nil\nTensorCore.addAlertText(2500,'STOP MOVING - KEEP ATTACKING',1,2,true)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"83aaf3c5-9093-0185-9969-7e46acff2366",
+								true,
+							},
+						},
+						name = "Stillness final warning",
+						uuid = "93cbd314-382d-bf19-b46e-9438ea2a8db1",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						name = "Quantum map",
+						uuid = "83aaf3c5-9093-0185-9969-7e46acff2366",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			name = "[Quantum40] Stillness final warning",
+			timeout = 1,
+			uuid = "9a3727ae-7e6a-9a9d-97fd-ae815fa1b2a5",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local now=Now()\nif eventArgs.spellID==44151 then\n data.q40hellishStart=now;data.q40eruptionSoon={at=now+8100,expires=now+11000}\nelseif data.q40hellishStart and now-data.q40hellishStart>20000 and now-data.q40hellishStart<45000 then\n data.q40eruptionSoon={at=now+22000,expires=now+25000}\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"7823e03d-69e9-a446-907e-2753ee8c2646",
+								true,
+							},
+							
+							{
+								"8dea4f70-d4eb-2e34-b3a3-357d2a6aada1",
+								true,
+							},
+						},
+						name = "Eruption set anticipation",
+						uuid = "04e80c9a-fc08-617f-8509-82aa624df7d1",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						name = "Quantum map",
+						uuid = "7823e03d-69e9-a446-907e-2753ee8c2646",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 3,
+						eventArgType = 2,
+						spellIDList = 
+						{
+							44151,
+							44157,
+							44158,
+						},
+						uuid = "8dea4f70-d4eb-2e34-b3a3-357d2a6aada1",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			eventType = 3,
+			name = "[Quantum40] Eruption set anticipation",
+			timeout = 1,
+			uuid = "846be0d1-0755-8963-a8f0-107bd866dc9e",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local s=data.q40eruptionSoon\nif not s or s.said or Now()<s.at then self.used=true return end\ns.said=true\nif Now()<s.expires then local q=data.q40urgent or {};data.q40urgent=q;q['eruptionSoon']={text='ERUPTIONS SOON - BAIT',deadline=s.expires-1000,expires=s.expires-1000,priority=1}end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"bd6d2d50-3a15-2ee5-be94-a00c949854b9",
+								true,
+							},
+						},
+						name = "Eruptions soon warning",
+						uuid = "052c5d03-88ef-4c61-8cc9-74383fd0e21f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						name = "Quantum map",
+						uuid = "bd6d2d50-3a15-2ee5-be94-a00c949854b9",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			name = "[Quantum40] Eruptions soon warning",
+			timeout = 1,
+			uuid = "53577473-2618-6172-b1d7-e05a30d11fa9",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local s=data.q40lateLight\nif not s or s.said or Now()<s.at then self.used=true return end\ns.said=true\nlocal p=TensorCore.mGetPlayer()\nif p and p.alive and Now()<s.expires and not TensorCore.getBuff(p,4560) then TensorCore.addAlertText(4500,'GET LIGHT - TOWERS COMING',1,2,true)end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"fcac7089-f04f-de2a-836f-3fe3b9df1ca2",
+								true,
+							},
+						},
+						name = "Early own dark reminder before tower Blade",
+						uuid = "3ac6b586-6d9e-8be2-9af1-25df340071e8",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 1311,
+						uuid = "fcac7089-f04f-de2a-836f-3fe3b9df1ca2",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			name = "[Quantum40] Post Flameborn prepare light towers",
+			throttleTime = 100,
+			uuid = "01d54df1-3de6-1e60-9b2f-ba98a7299cbc",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local p=TensorCore.mGetPlayer();local e=TensorCore.mGetEntity(eventArgs.entityID)\nif p and e and p.id~=e.id then\n for _,v in pairs(TensorCore.getEntityGroupList('Party')or {})do if v.id==e.id then\n  local t=data.q40dpsShackleTargets or {};data.q40dpsShackleTargets=t;t[e.id]=true;break\n end end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"c34eec60-6bc8-9e88-8ea6-3aba3f9df13b",
+								true,
+							},
+							
+							{
+								"17ca6b9c-e85e-4515-8249-fa0b8407e7d7",
+								true,
+							},
+						},
+						name = "Other marked DPS only",
+						uuid = "68248ebe-47b0-1dd0-bfa0-87af5c35b085",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						uuid = "c34eec60-6bc8-9e88-8ea6-3aba3f9df13b",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgType = 2,
+						eventBuffID = 4565,
+						uuid = "17ca6b9c-e85e-4515-8249-fa0b8407e7d7",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			eventType = 8,
+			name = "[Quantum40] Other DPS Shackled Abilities capture",
+			timeout = 1,
+			uuid = "cac487b6-3b00-4fd8-ada8-0cda9d026743",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local t=data.q40dpsShackleTargets\nif not t or not next(t)then self.used=true return end\nlocal p=TensorCore.mGetPlayer();local h=data.q40dpsShackleCircles or {};data.q40dpsShackleCircles=h\nlocal d=TensorCore.getCachedFlatDrawer(0x223333FF,0x443333FF,0x663333FF,0xCC3333FF,2,1,Argus2.RenderFlags.FLAG_RENDER_UI)\nfor id in pairs(t)do\n local e=TensorCore.mGetEntity(id)\n if not e or not e.alive or not p or not p.alive or id==p.id or not TensorCore.getBuff(e,4565)then\n  if h[id]then Argus.deleteTimedShape(h[id]);h[id]=nil end;t[id]=nil\n elseif not h[id]then h[id]=d:addTimedCircleOnEnt(90000,id,8,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI)end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"7e79d5be-0367-d3d8-b38e-d9922ae47862",
+								true,
+							},
+						},
+						name = "Eight yard other DPS danger circles",
+						uuid = "690576f6-f9c4-afe1-8cb8-0d301e511a62",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						uuid = "7e79d5be-0367-d3d8-b38e-d9922ae47862",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			name = "[Quantum40] Other DPS shackle circles until debuff clears",
+			throttleTime = 150,
+			timeout = 1,
+			uuid = "f3ac9fcc-1857-d2f0-959d-dadf680ae101",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local now=Now();local s=data.q40fireBait;local label='Bait'\nlocal deadline=s and s.expires\nif not deadline or now>=deadline then s=data.q40still;deadline=s and s.resolveAt;label='Stillness' end\nif not deadline or now>=deadline then self.used=true return end\nlocal p=TensorCore.mGetPlayer();if not p or not p.alive then self.used=true return end\nlocal x,y=RenderManager:WorldToScreen({x=p.pos.x,y=p.pos.y+1,z=p.pos.z},true)\nif not x or not y then self.used=true return end\nlocal width,height=GUI:GetScreenSize();GUI:SetNextWindowPos(0,0,GUI.SetCond_Always);GUI:SetNextWindowSize(width,height,GUI.SetCond_Always)\nGUI:PushStyleColor(GUI.Col_WindowBg,0,0,0,0)\nlocal flags=GUI.WindowFlags_NoTitleBar+GUI.WindowFlags_NoResize+GUI.WindowFlags_NoMove+GUI.WindowFlags_NoScrollbar+GUI.WindowFlags_NoSavedSettings+GUI.WindowFlags_NoInputs+GUI.WindowFlags_NoFocusOnAppearing\nif GUI:Begin('##Q40PersonalBaitTimer',true,flags)then\n GUI:SetWindowFontScale(1.2)\n local text=string.format('%s %.1f',label,math.max(0,(deadline-now)/1000));local w,h=GUI:CalcTextSize(text)\n GUI:AddRectFilled(x-w/2-4,y-h/2-2,x+w/2+4,y+h/2+2,0xA0000000,4);GUI:AddText(x-w/2,y-h/2,0xFFFFFFFF,text)\n GUI:SetWindowFontScale(1)\nend\nGUI:End();GUI:PopStyleColor();self.used=true",
+						conditions = 
+						{
+							
+							{
+								"10d33699-d61e-c13c-be85-d4a4e7118888",
+								true,
+							},
+						},
+						name = "Following personal bait and stillness countdown",
+						uuid = "354381a3-1ebb-3962-a98a-f7dbdfcdd715",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						uuid = "10d33699-d61e-c13c-be85-d4a4e7118888",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			eventType = 13,
+			name = "[Quantum40] Following personal bait and stillness countdown",
+			timeout = 1,
+			uuid = "abeab70b-6ae4-023b-b849-b5e3c3a5c0b8",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local at=data.q40flamebornAt\nif not at or Now()-at<80000 or Now()-at>220000 then self.used=true return end\nlocal id=eventArgs.spellID;local delay\nif id==44157 or id==44158 then delay=8600\nelse delay=eventArgs.channelTimeMax*1000+12100 end\ndata.q40eruptionSoon={at=Now()+delay,expires=Now()+delay+3000}\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"d3865ea0-256a-3a30-a36b-5ef523cf8187",
+								true,
+							},
+							
+							{
+								"a3dc4a10-d197-73b0-8c0c-3f0ddaf05744",
+								true,
+							},
+						},
+						name = "Late eruption set anticipation",
+						uuid = "723d12ec-84fc-bdae-99f0-737159755aac",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						uuid = "d3865ea0-256a-3a30-a36b-5ef523cf8187",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 3,
+						eventArgType = 2,
+						spellIDList = 
+						{
+							44157,
+							44158,
+							44129,
+							44130,
+						},
+						uuid = "a3dc4a10-d197-73b0-8c0c-3f0ddaf05744",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			eventType = 3,
+			name = "[Quantum40] Late eruption set anticipation",
+			timeout = 1,
+			uuid = "39cb6cb6-5325-cf28-ba97-d298c6a79d78",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local s=data.q40preFlame\nif not s or s.said or Now()<s.at then self.used=true return end\ns.said=true\nlocal p=TensorCore.mGetPlayer()\nif p and p.alive and Now()<s.expires then TensorCore.addAlertText(4500,'PREPOSITION FOR FLAMEBORN',1,2,true)end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"bb21ae7b-f3e9-7235-9160-90b867106fc4",
+								true,
+							},
+						},
+						name = "Earlier once per pull preposition",
+						uuid = "3a39314b-c256-2cc4-9982-f1622c1b6341",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						uuid = "bb21ae7b-f3e9-7235-9160-90b867106fc4",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			name = "[Quantum40] Flameborn preposition at 350",
+			throttleTime = 100,
+			timeout = 1,
+			uuid = "ec211c5f-6ea6-dab8-8e56-d2f42678eb72",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local s=data.q40pairCircle;local now=Now()\nif not s or now>=s.expires then self.used=true return end\nlocal e=TensorCore.mGetEntity(s.anchor);local p=TensorCore.mGetPlayer()\nif not e or not e.alive or not p or not p.alive then self.used=true return end\nlocal x,y=RenderManager:WorldToScreen({x=e.pos.x,y=e.pos.y+1,z=e.pos.z},true)\nif not x or not y then self.used=true return end\nlocal width,height=GUI:GetScreenSize();GUI:SetNextWindowPos(0,0,GUI.SetCond_Always);GUI:SetNextWindowSize(width,height,GUI.SetCond_Always)\nGUI:PushStyleColor(GUI.Col_WindowBg,0,0,0,0)\nlocal flags=GUI.WindowFlags_NoTitleBar+GUI.WindowFlags_NoResize+GUI.WindowFlags_NoMove+GUI.WindowFlags_NoScrollbar+GUI.WindowFlags_NoSavedSettings+GUI.WindowFlags_NoInputs+GUI.WindowFlags_NoFocusOnAppearing\nif GUI:Begin('##Q40PartnerCountdown',true,flags)then\n GUI:SetWindowFontScale(1.2);local text=string.format('Partner %.1f',math.max(0,(s.expires-now)/1000));local w,h=GUI:CalcTextSize(text)\n GUI:AddRectFilled(x-w/2-4,y-h/2-2,x+w/2+4,y+h/2+2,0xA0000000,4);GUI:AddText(x-w/2,y-h/2,0xFFFFFFFF,text);GUI:SetWindowFontScale(1)\nend\nGUI:End();GUI:PopStyleColor();self.used=true",
+						conditions = 
+						{
+							
+							{
+								"2c914cb5-00de-3c9e-81ce-803988608325",
+								true,
+							},
+						},
+						name = "Partner set continuous countdown",
+						uuid = "2a018016-f351-fbad-84f3-28f99be9e392",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						uuid = "2c914cb5-00de-3c9e-81ce-803988608325",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			eventType = 13,
+			name = "[Quantum40] Partner set continuous countdown",
+			timeout = 1,
+			uuid = "ad10cf94-3369-d263-861a-15815ac94a6d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local p=TensorCore.mGetPlayer()\nif p and p.alive and eventArgs.entityID==p.id then data.q40stillActive={at=Now(),expires=Now()+math.max(15000,(eventArgs.buffDuration or 0)*1000+2000)} end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"39bcec9d-1639-7d69-acae-676f2702b74d",
+								true,
+							},
+							
+							{
+								"9073c074-585e-1080-aab9-a127d0edfaae",
+								true,
+							},
+						},
+						name = "Own Stillness active",
+						uuid = "accd845c-356e-a462-8c33-58c925cfeb9f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						uuid = "39bcec9d-1639-7d69-acae-676f2702b74d",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgType = 2,
+						eventBuffID = 4562,
+						uuid = "9073c074-585e-1080-aab9-a127d0edfaae",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			eventType = 8,
+			name = "[Quantum40] Own Stillness active",
+			timeout = 1,
+			uuid = "ede42b5b-f503-db6a-aa19-e8a462a6a44a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local s=data.q40stillActive\nif not s then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.alive or Now()>=s.expires then data.q40stillActive=nil;self.used=true return end\nif Now()-s.at>=250 and not TensorCore.getBuff(p,4562)then\n TensorCore.addAlertText(2500,'YOU CAN MOVE',1,2,true)\n data.q40stillActive=nil;data.q40still=nil\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"849378bd-b690-0d91-b2d2-33186324c1e0",
+								true,
+							},
+						},
+						name = "Stillness cleared move call",
+						uuid = "c7c7726f-e614-88d5-898c-b8a9e873a50a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						uuid = "849378bd-b690-0d91-b2d2-33186324c1e0",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			name = "[Quantum40] Stillness cleared move call",
+			throttleTime = 100,
+			timeout = 1,
+			uuid = "5ad9aaa2-3952-91e6-8fcc-2e3349a9a945",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local now=Now();local id=eventArgs.spellID\nlocal color=(id==44129 or id==44130)and 'LIGHT' or 'DARK'\nlocal ms=eventArgs.channelTimeMax*1000\nlocal s=data.q40drains\nif not s or now>=s.expires then s={pending={},seen={},expires=now+30000};data.q40drains=s end\nlocal key=tostring(eventArgs.entityID)..':'..tostring(id)\nif s.seen[key]then self.used=true return end;s.seen[key]=true\ns.pending[#s.pending+1]={color=color,deadline=now+ms}\ntable.sort(s.pending,function(a,b)return a.deadline<b.deadline end)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"52628729-bee8-f6bd-8499-4c9317c03158",
+								true,
+							},
+							
+							{
+								"2ef7951d-75ae-9ce8-8470-631229c5fc8f",
+								true,
+							},
+						},
+						name = "Drain Aether ordered colour capture",
+						uuid = "9fa33205-a76a-8624-9b72-63cbe6f7259c",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						uuid = "52628729-bee8-f6bd-8499-4c9317c03158",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 3,
+						eventArgType = 2,
+						spellIDList = 
+						{
+							44129,
+							44130,
+							44132,
+							44134,
+						},
+						uuid = "2ef7951d-75ae-9ce8-8470-631229c5fc8f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			eventType = 3,
+			name = "[Quantum40] Drain Aether ordered colour capture",
+			timeout = 1,
+			uuid = "caf8502c-b416-b4ee-9fe8-885cc1f86fb7",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local s=data.q40drains\nif not s or Now()>=s.expires or #s.pending==0 then self.used=true return end\nlocal next=s.pending[1];if s.announced==next then self.used=true return end\nlocal p=TensorCore.mGetPlayer();if not p or not p.alive then self.used=true return end\nlocal sin=TensorCore.getBuff(p,4567)\nlocal need=next.color\nif need=='LIGHT' and sin then need='DARK' end\nlocal correct=TensorCore.getBuff(p,need=='LIGHT' and 4560 or 4559)~=nil\nlocal text\nif next.color=='LIGHT' and sin then text='SINBEARER - STAY DARK FOR THIS DRAIN'\nelse text=(correct and 'STAY ' or 'GET ')..need..' FOR DRAIN' end\nlocal q=data.q40urgent or {};data.q40urgent=q;q['drain']={text=text,deadline=next.deadline,expires=next.deadline,priority=2};s.announced=next\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"690ef377-b10b-47b0-ad7c-9508cb6389f4",
+								true,
+							},
+						},
+						name = "Drain Aether personal colour instruction",
+						uuid = "673283ff-6126-1f39-97f4-0a2bf4ee3e07",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						uuid = "690ef377-b10b-47b0-ad7c-9508cb6389f4",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			name = "[Quantum40] Drain Aether personal colour instruction",
+			throttleTime = 100,
+			timeout = 1,
+			uuid = "5a9a55c5-121d-a3e1-8f8a-cd10e5dc3428",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if data.q40urgent then data.q40urgent.drain=nil end\nlocal s=data.q40drains\nif s and #s.pending>0 then\n local color=(eventArgs.spellID==44129 or eventArgs.spellID==44130)and 'LIGHT' or 'DARK'\n for i,v in ipairs(s.pending)do if v.color==color then table.remove(s.pending,i);break end end\n if #s.pending==0 then data.q40drains=nil end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"2714e276-a962-2dbe-9386-e40cc1ba691c",
+								true,
+							},
+							
+							{
+								"2f919b3c-ee50-04a2-b393-726084382dfb",
+								true,
+							},
+						},
+						name = "Drain Aether advance on actual hit",
+						uuid = "ee3cb669-4c13-851d-94e2-b5b53006f15e",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						uuid = "2714e276-a962-2dbe-9386-e40cc1ba691c",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 3,
+						eventArgType = 2,
+						spellIDList = 
+						{
+							44129,
+							44130,
+							44132,
+							44134,
+						},
+						uuid = "2f919b3c-ee50-04a2-b393-726084382dfb",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			eventType = 2,
+			name = "[Quantum40] Drain Aether advance on actual hit",
+			timeout = 1,
+			uuid = "7aac35f3-d6e4-2db5-ab1a-6cfaa58bde68",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local q=data.q40urgent;local now=Now()\nif not q then self.used=true return end\nlocal p=TensorCore.mGetPlayer();if not p or not p.alive then data.q40urgent=nil;self.used=true return end\nlocal best,key\nfor k,v in pairs(q)do\n if now>=v.expires then q[k]=nil\n elseif not best or v.deadline<best.deadline or (v.deadline==best.deadline and v.priority>best.priority)then best=v;key=k end\nend\nif best and now>=(data.q40urgentUntil or 0)then\n local ms=math.min(1800,best.expires-now)\n TensorCore.addAlertText(ms,best.text,1,2,true);q[key]=nil;data.q40urgentUntil=now+ms\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"dbd5db61-8009-7160-a5b5-20f2c641d286",
+								true,
+							},
+						},
+						name = "Immediate sequence instruction queue",
+						uuid = "5ef22799-f142-3efa-83dc-6e02b8cff3fd",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						uuid = "dbd5db61-8009-7160-a5b5-20f2c641d286",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			name = "[Quantum40] Immediate sequence instruction queue",
+			throttleTime = 100,
+			timeout = 1,
+			uuid = "4def8007-9979-c3c9-bf57-28b424fe7182",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local at=data.q40flamebornAt;local now=Now()\nif at and now-at>65000 and now-at<130000 and not data.q40chainGather then data.q40chainGather={at=now,expires=now+12000}end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"2942b168-6fd6-e305-8d3e-ef3f1b20d0c0",
+								true,
+							},
+							
+							{
+								"440c2e3c-6365-8ce9-873a-45bc3466cb2e",
+								true,
+							},
+						},
+						name = "Late exaflare chain gather arm",
+						uuid = "dac6eefd-5b53-872b-9004-6fd3aaa5f346",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						uuid = "2942b168-6fd6-e305-8d3e-ef3f1b20d0c0",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 3,
+						eventArgType = 2,
+						spellIDList = 
+						{
+							44118,
+							44119,
+						},
+						uuid = "440c2e3c-6365-8ce9-873a-45bc3466cb2e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			eventType = 2,
+			name = "[Quantum40] Late exaflare chain gather arm",
+			timeout = 1,
+			uuid = "2c47af3c-62fe-0c8d-90d6-083e39671025",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local t=data.q40chainGather;local now=Now()\nif not t or t.said or now<t.at+250 then self.used=true return end\nif now>=t.expires then t.said=true;self.used=true return end\nlocal s=data.quantum40_scourging;if not s or not next(s.lines or {})then self.used=true return end\nfor _,l in pairs(s.lines)do\n if now<l.expires then\n  for k=-10,10 do\n   local x,z=l.x+k*4*l.dx,l.z+k*4*l.dz\n   if (x+600)^2+(z+300)^2<36 and not l.hit[k]then self.used=true return end\n  end\n end\nend\nlocal p=TensorCore.mGetPlayer()\nif p and p.alive then TensorCore.addAlertText(3000,'MIDDLE FOR CHAINS',1,2,true);t.said=true end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"8f01e4b7-d0f1-d917-ac27-5676c5533cf8",
+								true,
+							},
+						},
+						name = "Middle for chains after centre clears",
+						uuid = "81872669-3617-acce-a848-e58dd84f28ec",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						uuid = "8f01e4b7-d0f1-d917-ac27-5676c5533cf8",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Quantum40/Guidance",
+			name = "[Quantum40] Middle for chains after centre clears",
+			throttleTime = 100,
+			timeout = 1,
+			uuid = "02c68bc9-2902-247b-9ef2-a88bc9bef235",
 			version = 2,
 		},
 	},
@@ -4195,7 +6123,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local s=data.q40chain;local p=TensorCore.mGetPlayer()\nif not s then self.used=true return end\nif not p or not p.alive or Now()>=s.expires then\n if s.arrow then Argus.deleteTimedShape(s.arrow) end;if s.circle then Argus.deleteTimedShape(s.circle) end;data.q40chain=nil;self.used=true return\nend\nlocal g=TensorCore.getCachedFlatDrawer(0x2233FF33,0x4433FF33,0x6633FF33,0xFF33FF33,2,1,Argus2.RenderFlags.FLAG_RENDER_UI)\nlocal dest={x=s.x,y=s.y or p.pos.y,z=s.z};local ms=s.expires-Now();local d=TensorCore.getDistance2d(p.pos,dest)\nif not s.circle then s.circle=g:addTimedCircle(ms,dest.x,dest.y+.05,dest.z,.8,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI) end\nif d>.8 or (s.arrow and Now()<(s.arrowAt or 0)+3000) then\n local h=TensorCore.getHeadingToTarget(p.pos,dest)\n if s.arrow then g:updateTimedArrow(s.arrow,ms,p.pos.x,p.pos.y,p.pos.z,h,math.max(.1,d-1),.65,1,1.3,0,false,Argus2.RenderFlags.FLAG_RENDER_UI)\n else s.arrowAt=Now();s.arrow=g:addTimedArrow(ms,p.pos.x,p.pos.y,p.pos.z,h,math.max(.1,d-1),.65,1,1.3,0,false,Argus2.RenderFlags.FLAG_RENDER_UI) end\nelseif s.arrow then Argus.deleteTimedShape(s.arrow);s.arrow=nil end\ns.px=p.pos.x;s.pz=p.pos.z;self.used=true",
+						actionLua = "local s=data.q40chain;local p=TensorCore.mGetPlayer()\nif not s then self.used=true return end\nif not p or not p.alive or Now()>=s.expires then\n if s.arrow then Argus.deleteTimedShape(s.arrow) end;if s.circle then Argus.deleteTimedShape(s.circle) end;data.q40chain=nil;self.used=true return\nend\nlocal g=TensorCore.getCachedFlatDrawer(0x2233FF33,0x4433FF33,0x6633FF33,0xFF33FF33,2,1,Argus2.RenderFlags.FLAG_RENDER_UI)\nlocal dest={x=s.x,y=s.y or p.pos.y,z=s.z};local ms=s.expires-Now();local d=TensorCore.getDistance2d(p.pos,dest)\nif not s.circle then s.circle=g:addTimedCircle(ms,dest.x,dest.y+.05,dest.z,.8,0,false,true,Argus2.RenderFlags.FLAG_RENDER_UI) end\nif s.stage=='break' or d>.8 or (s.arrow and Now()<(s.arrowAt or 0)+3000) then\n local h=TensorCore.getHeadingToTarget(p.pos,dest)\n if s.arrow then g:updateTimedArrow(s.arrow,ms,p.pos.x,p.pos.y,p.pos.z,h,math.max(.1,d-1),.65,1,1.3,0,false,Argus2.RenderFlags.FLAG_RENDER_UI)\n else s.arrowAt=Now();s.arrow=g:addTimedArrow(ms,p.pos.x,p.pos.y,p.pos.z,h,math.max(.1,d-1),.65,1,1.3,0,false,Argus2.RenderFlags.FLAG_RENDER_UI) end\nelseif s.arrow then Argus.deleteTimedShape(s.arrow);s.arrow=nil end\ns.px=p.pos.x;s.pz=p.pos.z;self.used=true",
 						conditions = 
 						{
 							
@@ -4730,7 +6658,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "if not data.q40eruptionLast or Now()-data.q40eruptionLast>8000 then TensorCore.addAlertText(3500,'ERUPTIONS - BAIT PUDDLES',.95,2,true) end\ndata.q40eruptionLast=Now();self.used=true",
+						actionLua = "if not data.q40moveCall or Now()-data.q40moveCall>1000 then TensorCore.addAlertText(1800,'MOVE',1,2,true);data.q40urgentUntil=Now()+1800;if data.q40urgent then data.q40urgent.eruptionSoon=nil end;data.q40moveCall=Now()end\nself.used=true",
 						conditions = 
 						{
 							
