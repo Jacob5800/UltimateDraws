@@ -726,6 +726,11 @@ local tbl =
 									"24456ef7-3a4d-de75-93c2-a8947bed4377",
 									true,
 								},
+								
+								{
+									"e90d811e-82f7-9ac0-aafb-4ddcb4f59591",
+									true,
+								},
 							},
 							uuid = "f7316daf-9c87-a825-816a-a407d3b6e32d",
 							version = 2.1,
@@ -747,6 +752,11 @@ local tbl =
 								
 								{
 									"24456ef7-3a4d-de75-93c2-a8947bed4377",
+									true,
+								},
+								
+								{
+									"e90d811e-82f7-9ac0-aafb-4ddcb4f59591",
 									true,
 								},
 							},
@@ -774,6 +784,11 @@ local tbl =
 									"24456ef7-3a4d-de75-93c2-a8947bed4377",
 									true,
 								},
+								
+								{
+									"e90d811e-82f7-9ac0-aafb-4ddcb4f59591",
+									true,
+								},
 							},
 							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "2f083e60-6f8d-9440-8cea-324d94a31eda",
@@ -796,6 +811,11 @@ local tbl =
 								
 								{
 									"24456ef7-3a4d-de75-93c2-a8947bed4377",
+									true,
+								},
+								
+								{
+									"e90d811e-82f7-9ac0-aafb-4ddcb4f59591",
 									true,
 								},
 							},
@@ -863,6 +883,39 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
 							uuid = "6c7a0ef6-9382-6ced-8ad6-37fb9d80c44e",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 5,
+							name = "Reprisal range <=5y",
+							partyTargetType = "Detection Target",
+							uuid = "211b25ee-8f77-0126-9589-0781021fb954",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"211b25ee-8f77-0126-9589-0781021fb954",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Enemy in Reprisal range",
+							uuid = "e90d811e-82f7-9ac0-aafb-4ddcb4f59591",
 							version = 3,
 						},
 					},
@@ -3814,6 +3867,11 @@ local tbl =
 									"8aa60a57-b6c8-ce84-a151-279131d80a61",
 									true,
 								},
+								
+								{
+									"180c278a-fd97-6bb8-b919-8910cee5e7f2",
+									true,
+								},
 							},
 							uuid = "6d427418-fb07-34a0-a4c2-ad977830f9ba",
 							version = 2.1,
@@ -3835,6 +3893,11 @@ local tbl =
 								
 								{
 									"8aa60a57-b6c8-ce84-a151-279131d80a61",
+									true,
+								},
+								
+								{
+									"180c278a-fd97-6bb8-b919-8910cee5e7f2",
 									true,
 								},
 							},
@@ -3862,6 +3925,11 @@ local tbl =
 									"8aa60a57-b6c8-ce84-a151-279131d80a61",
 									true,
 								},
+								
+								{
+									"180c278a-fd97-6bb8-b919-8910cee5e7f2",
+									true,
+								},
 							},
 							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "c5c4b396-45f0-7e6f-82c7-49aabccbf412",
@@ -3884,6 +3952,11 @@ local tbl =
 								
 								{
 									"8aa60a57-b6c8-ce84-a151-279131d80a61",
+									true,
+								},
+								
+								{
+									"180c278a-fd97-6bb8-b919-8910cee5e7f2",
 									true,
 								},
 							},
@@ -3951,6 +4024,39 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
 							uuid = "2aba8285-4f07-2b72-8ccc-c7acb480eb4c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 5,
+							name = "Reprisal range <=5y",
+							partyTargetType = "Detection Target",
+							uuid = "2d5bd7d0-14d9-8ca7-9b91-fe00961bfbe4",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"2d5bd7d0-14d9-8ca7-9b91-fe00961bfbe4",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Enemy in Reprisal range",
+							uuid = "180c278a-fd97-6bb8-b919-8910cee5e7f2",
 							version = 3,
 						},
 					},
@@ -4996,6 +5102,11 @@ local tbl =
 									"5d04ffe0-d7da-0239-93c7-e6018174bc0b",
 									true,
 								},
+								
+								{
+									"1bc2b84e-1056-968d-9af6-7c8bc555eaa9",
+									true,
+								},
 							},
 							uuid = "fad3dd55-a9da-9251-a72f-5c4f3fb0c95d",
 							version = 2.1,
@@ -5017,6 +5128,11 @@ local tbl =
 								
 								{
 									"5d04ffe0-d7da-0239-93c7-e6018174bc0b",
+									true,
+								},
+								
+								{
+									"1bc2b84e-1056-968d-9af6-7c8bc555eaa9",
 									true,
 								},
 							},
@@ -5044,6 +5160,11 @@ local tbl =
 									"5d04ffe0-d7da-0239-93c7-e6018174bc0b",
 									true,
 								},
+								
+								{
+									"1bc2b84e-1056-968d-9af6-7c8bc555eaa9",
+									true,
+								},
 							},
 							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "c486c403-1f1b-a537-9ea9-f82b534c7131",
@@ -5066,6 +5187,11 @@ local tbl =
 								
 								{
 									"5d04ffe0-d7da-0239-93c7-e6018174bc0b",
+									true,
+								},
+								
+								{
+									"1bc2b84e-1056-968d-9af6-7c8bc555eaa9",
 									true,
 								},
 							},
@@ -5133,6 +5259,39 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
 							uuid = "a873bc6c-6938-7325-a151-a2c6aab24f8a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 5,
+							name = "Reprisal range <=5y",
+							partyTargetType = "Detection Target",
+							uuid = "3371f425-2d48-8af5-8adf-f83c6a51bb9b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"3371f425-2d48-8af5-8adf-f83c6a51bb9b",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Enemy in Reprisal range",
+							uuid = "1bc2b84e-1056-968d-9af6-7c8bc555eaa9",
 							version = 3,
 						},
 					},
@@ -8220,6 +8379,11 @@ local tbl =
 									"8d34f667-5340-01be-a1a2-2b0c0deb8d27",
 									true,
 								},
+								
+								{
+									"ded06da8-58cd-c2a0-8ebf-bc3356b6c583",
+									true,
+								},
 							},
 							uuid = "03df9c96-5faf-9986-8776-f74995fc54c8",
 							version = 2.1,
@@ -8241,6 +8405,11 @@ local tbl =
 								
 								{
 									"8d34f667-5340-01be-a1a2-2b0c0deb8d27",
+									true,
+								},
+								
+								{
+									"ded06da8-58cd-c2a0-8ebf-bc3356b6c583",
 									true,
 								},
 							},
@@ -8268,6 +8437,11 @@ local tbl =
 									"8d34f667-5340-01be-a1a2-2b0c0deb8d27",
 									true,
 								},
+								
+								{
+									"ded06da8-58cd-c2a0-8ebf-bc3356b6c583",
+									true,
+								},
 							},
 							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "ba3323aa-0c71-c7f4-a39c-dd1997ce2dcf",
@@ -8290,6 +8464,11 @@ local tbl =
 								
 								{
 									"8d34f667-5340-01be-a1a2-2b0c0deb8d27",
+									true,
+								},
+								
+								{
+									"ded06da8-58cd-c2a0-8ebf-bc3356b6c583",
 									true,
 								},
 							},
@@ -8357,6 +8536,39 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
 							uuid = "405a5bc3-785b-69ab-9dfd-84117571b349",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 5,
+							name = "Reprisal range <=5y",
+							partyTargetType = "Detection Target",
+							uuid = "e48946b0-c289-c907-aa16-9f9d433ec957",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"e48946b0-c289-c907-aa16-9f9d433ec957",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Enemy in Reprisal range",
+							uuid = "ded06da8-58cd-c2a0-8ebf-bc3356b6c583",
 							version = 3,
 						},
 					},
@@ -9726,6 +9938,11 @@ local tbl =
 									"8126189e-a3dd-cb99-b471-1dbf461d654c",
 									true,
 								},
+								
+								{
+									"5510fff8-0b2e-b991-b690-046f8e3c737f",
+									true,
+								},
 							},
 							uuid = "b8dec4b4-8aea-4083-bea2-b640e501804c",
 							version = 2.1,
@@ -9747,6 +9964,11 @@ local tbl =
 								
 								{
 									"8126189e-a3dd-cb99-b471-1dbf461d654c",
+									true,
+								},
+								
+								{
+									"5510fff8-0b2e-b991-b690-046f8e3c737f",
 									true,
 								},
 							},
@@ -9774,6 +9996,11 @@ local tbl =
 									"8126189e-a3dd-cb99-b471-1dbf461d654c",
 									true,
 								},
+								
+								{
+									"5510fff8-0b2e-b991-b690-046f8e3c737f",
+									true,
+								},
 							},
 							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "c5734f96-41ae-846c-b3b0-633bcbe7f2bb",
@@ -9796,6 +10023,11 @@ local tbl =
 								
 								{
 									"8126189e-a3dd-cb99-b471-1dbf461d654c",
+									true,
+								},
+								
+								{
+									"5510fff8-0b2e-b991-b690-046f8e3c737f",
 									true,
 								},
 							},
@@ -9863,6 +10095,39 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
 							uuid = "a27e415c-09d5-2b54-917f-3f4919192575",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 5,
+							name = "Reprisal range <=5y",
+							partyTargetType = "Detection Target",
+							uuid = "de33737c-e240-e435-ada0-934c7a6ff07b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"de33737c-e240-e435-ada0-934c7a6ff07b",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Enemy in Reprisal range",
+							uuid = "5510fff8-0b2e-b991-b690-046f8e3c737f",
 							version = 3,
 						},
 					},
@@ -10736,6 +11001,11 @@ local tbl =
 									"b5191cee-7ca0-6f37-b426-e2ef55afd340",
 									true,
 								},
+								
+								{
+									"4b6ce83e-8d19-040d-805a-07da122c94c5",
+									true,
+								},
 							},
 							uuid = "533e76cd-f91f-cf33-8d74-0108ad928a2e",
 							version = 2.1,
@@ -10757,6 +11027,11 @@ local tbl =
 								
 								{
 									"b5191cee-7ca0-6f37-b426-e2ef55afd340",
+									true,
+								},
+								
+								{
+									"4b6ce83e-8d19-040d-805a-07da122c94c5",
 									true,
 								},
 							},
@@ -10784,6 +11059,11 @@ local tbl =
 									"b5191cee-7ca0-6f37-b426-e2ef55afd340",
 									true,
 								},
+								
+								{
+									"4b6ce83e-8d19-040d-805a-07da122c94c5",
+									true,
+								},
 							},
 							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "49338cfd-e8e9-f634-86c8-bf58c23aaf9f",
@@ -10806,6 +11086,11 @@ local tbl =
 								
 								{
 									"b5191cee-7ca0-6f37-b426-e2ef55afd340",
+									true,
+								},
+								
+								{
+									"4b6ce83e-8d19-040d-805a-07da122c94c5",
 									true,
 								},
 							},
@@ -10873,6 +11158,39 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
 							uuid = "ae6e3de9-d37f-4678-8a73-e2a3366220ef",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 5,
+							name = "Reprisal range <=5y",
+							partyTargetType = "Detection Target",
+							uuid = "985bf1cf-a7e8-8da1-a492-2801cd8efc0b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"985bf1cf-a7e8-8da1-a492-2801cd8efc0b",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Enemy in Reprisal range",
+							uuid = "4b6ce83e-8d19-040d-805a-07da122c94c5",
 							version = 3,
 						},
 					},
@@ -11765,6 +12083,11 @@ local tbl =
 									"19bc225b-b2b4-a814-b203-97c6673af08d",
 									true,
 								},
+								
+								{
+									"7b78c8b2-1245-126d-bc92-04b91528fdca",
+									true,
+								},
 							},
 							uuid = "ef23b59d-54f2-47f2-b388-f0084eaefa1f",
 							version = 2.1,
@@ -11786,6 +12109,11 @@ local tbl =
 								
 								{
 									"19bc225b-b2b4-a814-b203-97c6673af08d",
+									true,
+								},
+								
+								{
+									"7b78c8b2-1245-126d-bc92-04b91528fdca",
 									true,
 								},
 							},
@@ -11813,6 +12141,11 @@ local tbl =
 									"19bc225b-b2b4-a814-b203-97c6673af08d",
 									true,
 								},
+								
+								{
+									"7b78c8b2-1245-126d-bc92-04b91528fdca",
+									true,
+								},
 							},
 							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "cac2bde9-c9e2-4ced-b143-e083daf1d7f3",
@@ -11835,6 +12168,11 @@ local tbl =
 								
 								{
 									"19bc225b-b2b4-a814-b203-97c6673af08d",
+									true,
+								},
+								
+								{
+									"7b78c8b2-1245-126d-bc92-04b91528fdca",
 									true,
 								},
 							},
@@ -11902,6 +12240,39 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
 							uuid = "a075f23b-945d-2629-9592-8f62b91d7991",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 5,
+							name = "Reprisal range <=5y",
+							partyTargetType = "Detection Target",
+							uuid = "142f3cf5-26db-bc35-a2e2-954a3cb6f047",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"142f3cf5-26db-bc35-a2e2-954a3cb6f047",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Enemy in Reprisal range",
+							uuid = "7b78c8b2-1245-126d-bc92-04b91528fdca",
 							version = 3,
 						},
 					},
@@ -12433,6 +12804,11 @@ local tbl =
 									"c8dff429-199e-c1ec-87f2-fb3bb4fae08e",
 									true,
 								},
+								
+								{
+									"4d2f0c0c-be16-3ba8-9b3e-b796cb2c0238",
+									true,
+								},
 							},
 							uuid = "c8b02e56-f1f3-fd7c-a753-008b343ee58f",
 							version = 2.1,
@@ -12454,6 +12830,11 @@ local tbl =
 								
 								{
 									"c8dff429-199e-c1ec-87f2-fb3bb4fae08e",
+									true,
+								},
+								
+								{
+									"4d2f0c0c-be16-3ba8-9b3e-b796cb2c0238",
 									true,
 								},
 							},
@@ -12481,6 +12862,11 @@ local tbl =
 									"c8dff429-199e-c1ec-87f2-fb3bb4fae08e",
 									true,
 								},
+								
+								{
+									"4d2f0c0c-be16-3ba8-9b3e-b796cb2c0238",
+									true,
+								},
 							},
 							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "5544971b-3771-5f3e-b511-7c75253f7e4b",
@@ -12503,6 +12889,11 @@ local tbl =
 								
 								{
 									"c8dff429-199e-c1ec-87f2-fb3bb4fae08e",
+									true,
+								},
+								
+								{
+									"4d2f0c0c-be16-3ba8-9b3e-b796cb2c0238",
 									true,
 								},
 							},
@@ -12570,6 +12961,39 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
 							uuid = "123927cb-a01d-e508-8764-4d8887d3d0de",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 5,
+							name = "Reprisal range <=5y",
+							partyTargetType = "Detection Target",
+							uuid = "64bc7cfc-eafb-c2d0-baba-288d3d669f2a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"64bc7cfc-eafb-c2d0-baba-288d3d669f2a",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Enemy in Reprisal range",
+							uuid = "4d2f0c0c-be16-3ba8-9b3e-b796cb2c0238",
 							version = 3,
 						},
 					},
@@ -13129,6 +13553,11 @@ local tbl =
 									"f69d5890-a826-22bc-b13b-06b061fa54b1",
 									true,
 								},
+								
+								{
+									"5e693ab3-1903-8c93-a9aa-f11762bee9d2",
+									true,
+								},
 							},
 							uuid = "8abc50f5-eb31-b880-8e9d-f18c62c76fa2",
 							version = 2.1,
@@ -13150,6 +13579,11 @@ local tbl =
 								
 								{
 									"f69d5890-a826-22bc-b13b-06b061fa54b1",
+									true,
+								},
+								
+								{
+									"5e693ab3-1903-8c93-a9aa-f11762bee9d2",
 									true,
 								},
 							},
@@ -13177,6 +13611,11 @@ local tbl =
 									"f69d5890-a826-22bc-b13b-06b061fa54b1",
 									true,
 								},
+								
+								{
+									"5e693ab3-1903-8c93-a9aa-f11762bee9d2",
+									true,
+								},
 							},
 							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "d957b45b-631a-ca9c-b750-c90c481c4ac0",
@@ -13199,6 +13638,11 @@ local tbl =
 								
 								{
 									"f69d5890-a826-22bc-b13b-06b061fa54b1",
+									true,
+								},
+								
+								{
+									"5e693ab3-1903-8c93-a9aa-f11762bee9d2",
 									true,
 								},
 							},
@@ -13266,6 +13710,39 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
 							uuid = "a10f7098-8e6c-2227-9031-f1213fe2daf9",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 5,
+							name = "Reprisal range <=5y",
+							partyTargetType = "Detection Target",
+							uuid = "7c31bf76-cad3-cdc3-a007-8e1c172c1ef5",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"7c31bf76-cad3-cdc3-a007-8e1c172c1ef5",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Enemy in Reprisal range",
+							uuid = "5e693ab3-1903-8c93-a9aa-f11762bee9d2",
 							version = 3,
 						},
 					},
@@ -14371,6 +14848,11 @@ local tbl =
 									"f979abed-f807-f674-ae94-cfdf64709484",
 									true,
 								},
+								
+								{
+									"07bd3a00-96e0-c28c-a90e-0d4d70d8a4fa",
+									true,
+								},
 							},
 							uuid = "864413b3-32f7-5b3d-956e-40b65133279b",
 							version = 2.1,
@@ -14392,6 +14874,11 @@ local tbl =
 								
 								{
 									"f979abed-f807-f674-ae94-cfdf64709484",
+									true,
+								},
+								
+								{
+									"07bd3a00-96e0-c28c-a90e-0d4d70d8a4fa",
 									true,
 								},
 							},
@@ -14419,6 +14906,11 @@ local tbl =
 									"f979abed-f807-f674-ae94-cfdf64709484",
 									true,
 								},
+								
+								{
+									"07bd3a00-96e0-c28c-a90e-0d4d70d8a4fa",
+									true,
+								},
 							},
 							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "7ee8c66d-70bf-846a-91fb-76e5791365a3",
@@ -14441,6 +14933,11 @@ local tbl =
 								
 								{
 									"f979abed-f807-f674-ae94-cfdf64709484",
+									true,
+								},
+								
+								{
+									"07bd3a00-96e0-c28c-a90e-0d4d70d8a4fa",
 									true,
 								},
 							},
@@ -14508,6 +15005,39 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
 							uuid = "6c1496f6-28df-abd4-9de9-7576f191a72e",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 5,
+							name = "Reprisal range <=5y",
+							partyTargetType = "Detection Target",
+							uuid = "5764d339-c574-7a50-adc1-43487b2c1d0d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"5764d339-c574-7a50-adc1-43487b2c1d0d",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Enemy in Reprisal range",
+							uuid = "07bd3a00-96e0-c28c-a90e-0d4d70d8a4fa",
 							version = 3,
 						},
 					},
@@ -14978,6 +15508,11 @@ local tbl =
 									"be12eaff-8528-0078-b4a2-2e168372068c",
 									true,
 								},
+								
+								{
+									"99f0274d-ccc7-46f7-b81e-a3989361d5e1",
+									true,
+								},
 							},
 							uuid = "4f888165-65f7-5704-976f-233a21c4bd9e",
 							version = 2.1,
@@ -14999,6 +15534,11 @@ local tbl =
 								
 								{
 									"be12eaff-8528-0078-b4a2-2e168372068c",
+									true,
+								},
+								
+								{
+									"99f0274d-ccc7-46f7-b81e-a3989361d5e1",
 									true,
 								},
 							},
@@ -15026,6 +15566,11 @@ local tbl =
 									"be12eaff-8528-0078-b4a2-2e168372068c",
 									true,
 								},
+								
+								{
+									"99f0274d-ccc7-46f7-b81e-a3989361d5e1",
+									true,
+								},
 							},
 							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "d7f94e36-66c1-5a6b-9d9f-90bec662a1b5",
@@ -15048,6 +15593,11 @@ local tbl =
 								
 								{
 									"be12eaff-8528-0078-b4a2-2e168372068c",
+									true,
+								},
+								
+								{
+									"99f0274d-ccc7-46f7-b81e-a3989361d5e1",
 									true,
 								},
 							},
@@ -15115,6 +15665,39 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
 							uuid = "4e4a259a-1af2-12fa-9907-ca6d93149b44",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 5,
+							name = "Reprisal range <=5y",
+							partyTargetType = "Detection Target",
+							uuid = "c1895380-c378-d07d-9811-8d1e1a4d853b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"c1895380-c378-d07d-9811-8d1e1a4d853b",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Enemy in Reprisal range",
+							uuid = "99f0274d-ccc7-46f7-b81e-a3989361d5e1",
 							version = 3,
 						},
 					},
@@ -16817,6 +17400,11 @@ local tbl =
 									"6edfaeca-5acc-6e12-abc5-03b95f5656b9",
 									true,
 								},
+								
+								{
+									"94699f24-d482-bd53-b700-c046e8b105b5",
+									true,
+								},
 							},
 							uuid = "b72941c7-6af4-4fc9-831a-9eb4dfb15146",
 							version = 2.1,
@@ -16838,6 +17426,11 @@ local tbl =
 								
 								{
 									"6edfaeca-5acc-6e12-abc5-03b95f5656b9",
+									true,
+								},
+								
+								{
+									"94699f24-d482-bd53-b700-c046e8b105b5",
 									true,
 								},
 							},
@@ -16865,6 +17458,11 @@ local tbl =
 									"6edfaeca-5acc-6e12-abc5-03b95f5656b9",
 									true,
 								},
+								
+								{
+									"94699f24-d482-bd53-b700-c046e8b105b5",
+									true,
+								},
 							},
 							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "ad4f2995-3138-655f-ad67-8c4d0e48e668",
@@ -16887,6 +17485,11 @@ local tbl =
 								
 								{
 									"6edfaeca-5acc-6e12-abc5-03b95f5656b9",
+									true,
+								},
+								
+								{
+									"94699f24-d482-bd53-b700-c046e8b105b5",
 									true,
 								},
 							},
@@ -16954,6 +17557,39 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
 							uuid = "105e5a35-966c-b793-b70d-d4bc9dccc76c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 5,
+							name = "Reprisal range <=5y",
+							partyTargetType = "Detection Target",
+							uuid = "4cae76f3-98d5-af0d-a6c4-d5f8114cbfae",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"4cae76f3-98d5-af0d-a6c4-d5f8114cbfae",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Enemy in Reprisal range",
+							uuid = "94699f24-d482-bd53-b700-c046e8b105b5",
 							version = 3,
 						},
 					},
@@ -18697,6 +19333,11 @@ local tbl =
 									"8b4243e2-d1a2-7ccf-b2f8-9710729096b2",
 									true,
 								},
+								
+								{
+									"223439c5-b4bc-5f70-a365-ec3b80ba3895",
+									true,
+								},
 							},
 							uuid = "bbfb92c0-c56d-f629-b4e3-7e2319695cfd",
 							version = 2.1,
@@ -18718,6 +19359,11 @@ local tbl =
 								
 								{
 									"8b4243e2-d1a2-7ccf-b2f8-9710729096b2",
+									true,
+								},
+								
+								{
+									"223439c5-b4bc-5f70-a365-ec3b80ba3895",
 									true,
 								},
 							},
@@ -18745,6 +19391,11 @@ local tbl =
 									"8b4243e2-d1a2-7ccf-b2f8-9710729096b2",
 									true,
 								},
+								
+								{
+									"223439c5-b4bc-5f70-a365-ec3b80ba3895",
+									true,
+								},
 							},
 							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "20aeb385-e92e-6a83-9ebc-79e7e3e1f8b5",
@@ -18767,6 +19418,11 @@ local tbl =
 								
 								{
 									"8b4243e2-d1a2-7ccf-b2f8-9710729096b2",
+									true,
+								},
+								
+								{
+									"223439c5-b4bc-5f70-a365-ec3b80ba3895",
 									true,
 								},
 							},
@@ -18834,6 +19490,39 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
 							uuid = "464874fd-a955-3d05-8a1e-e5ce8940814f",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 5,
+							name = "Reprisal range <=5y",
+							partyTargetType = "Detection Target",
+							uuid = "a2db4eb9-366d-4c98-aae5-b710fc9a32cc",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"a2db4eb9-366d-4c98-aae5-b710fc9a32cc",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Enemy in Reprisal range",
+							uuid = "223439c5-b4bc-5f70-a365-ec3b80ba3895",
 							version = 3,
 						},
 					},
@@ -20397,6 +21086,11 @@ local tbl =
 									"742f97f5-85dc-a5b4-a19b-f3d1580604fd",
 									true,
 								},
+								
+								{
+									"c5abe79d-1868-1bc1-be43-6981ab6dc122",
+									true,
+								},
 							},
 							uuid = "ad189bf6-c8ba-4e4c-9d8c-4e84769b7864",
 							version = 2.1,
@@ -20418,6 +21112,11 @@ local tbl =
 								
 								{
 									"742f97f5-85dc-a5b4-a19b-f3d1580604fd",
+									true,
+								},
+								
+								{
+									"c5abe79d-1868-1bc1-be43-6981ab6dc122",
 									true,
 								},
 							},
@@ -20445,6 +21144,11 @@ local tbl =
 									"742f97f5-85dc-a5b4-a19b-f3d1580604fd",
 									true,
 								},
+								
+								{
+									"c5abe79d-1868-1bc1-be43-6981ab6dc122",
+									true,
+								},
 							},
 							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "d27dc203-c144-479f-af8f-e352a678729b",
@@ -20467,6 +21171,11 @@ local tbl =
 								
 								{
 									"742f97f5-85dc-a5b4-a19b-f3d1580604fd",
+									true,
+								},
+								
+								{
+									"c5abe79d-1868-1bc1-be43-6981ab6dc122",
 									true,
 								},
 							},
@@ -20534,6 +21243,39 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
 							uuid = "a13b13dd-d258-532d-b824-64dcabc245f8",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 5,
+							name = "Reprisal range <=5y",
+							partyTargetType = "Detection Target",
+							uuid = "76044cfe-2018-7ff7-be98-0266a7c70bbd",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"76044cfe-2018-7ff7-be98-0266a7c70bbd",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Enemy in Reprisal range",
+							uuid = "c5abe79d-1868-1bc1-be43-6981ab6dc122",
 							version = 3,
 						},
 					},
@@ -22455,6 +23197,11 @@ local tbl =
 									"d67332da-096b-61b0-b928-34976f9913f3",
 									true,
 								},
+								
+								{
+									"f0a48872-1043-601f-8352-5d54b53da742",
+									true,
+								},
 							},
 							uuid = "81bec400-1eb0-e815-ad6b-745e5a5a91cf",
 							version = 2.1,
@@ -22476,6 +23223,11 @@ local tbl =
 								
 								{
 									"d67332da-096b-61b0-b928-34976f9913f3",
+									true,
+								},
+								
+								{
+									"f0a48872-1043-601f-8352-5d54b53da742",
 									true,
 								},
 							},
@@ -22503,6 +23255,11 @@ local tbl =
 									"d67332da-096b-61b0-b928-34976f9913f3",
 									true,
 								},
+								
+								{
+									"f0a48872-1043-601f-8352-5d54b53da742",
+									true,
+								},
 							},
 							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "3062d75b-42ca-aabd-a8e1-2e1282fa308f",
@@ -22525,6 +23282,11 @@ local tbl =
 								
 								{
 									"d67332da-096b-61b0-b928-34976f9913f3",
+									true,
+								},
+								
+								{
+									"f0a48872-1043-601f-8352-5d54b53da742",
 									true,
 								},
 							},
@@ -22592,6 +23354,39 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
 							uuid = "cb6bc534-3039-031b-90e1-2e0d9377b825",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 5,
+							name = "Reprisal range <=5y",
+							partyTargetType = "Detection Target",
+							uuid = "239b241d-2395-59b2-a50e-929c18f72355",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"239b241d-2395-59b2-a50e-929c18f72355",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Enemy in Reprisal range",
+							uuid = "f0a48872-1043-601f-8352-5d54b53da742",
 							version = 3,
 						},
 					},
@@ -24315,6 +25110,11 @@ local tbl =
 									"9535c998-83e7-0fdd-b3a1-637ab4bc72ff",
 									true,
 								},
+								
+								{
+									"0081793f-4837-e561-8ac5-d830c1ad5475",
+									true,
+								},
 							},
 							uuid = "8566c097-147d-9cee-9089-cccc1e6b6362",
 							version = 2.1,
@@ -24336,6 +25136,11 @@ local tbl =
 								
 								{
 									"9535c998-83e7-0fdd-b3a1-637ab4bc72ff",
+									true,
+								},
+								
+								{
+									"0081793f-4837-e561-8ac5-d830c1ad5475",
 									true,
 								},
 							},
@@ -24363,6 +25168,11 @@ local tbl =
 									"9535c998-83e7-0fdd-b3a1-637ab4bc72ff",
 									true,
 								},
+								
+								{
+									"0081793f-4837-e561-8ac5-d830c1ad5475",
+									true,
+								},
 							},
 							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "e4353999-4275-6c74-a857-812de9207184",
@@ -24385,6 +25195,11 @@ local tbl =
 								
 								{
 									"9535c998-83e7-0fdd-b3a1-637ab4bc72ff",
+									true,
+								},
+								
+								{
+									"0081793f-4837-e561-8ac5-d830c1ad5475",
 									true,
 								},
 							},
@@ -24452,6 +25267,39 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
 							uuid = "de9c52d5-a565-4209-b8cb-62741b854447",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 5,
+							name = "Reprisal range <=5y",
+							partyTargetType = "Detection Target",
+							uuid = "fcade100-5313-7475-adda-938893d2fd04",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"fcade100-5313-7475-adda-938893d2fd04",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Enemy in Reprisal range",
+							uuid = "0081793f-4837-e561-8ac5-d830c1ad5475",
 							version = 3,
 						},
 					},
@@ -26121,6 +26969,11 @@ local tbl =
 									"a83616ba-a9fa-90a4-8dd5-20c5c60bb085",
 									true,
 								},
+								
+								{
+									"45c8e635-9fb5-cbd5-8de3-e36adf33d0fb",
+									true,
+								},
 							},
 							uuid = "f62a0b6c-ca89-17a4-9390-517662249ec6",
 							version = 2.1,
@@ -26142,6 +26995,11 @@ local tbl =
 								
 								{
 									"a83616ba-a9fa-90a4-8dd5-20c5c60bb085",
+									true,
+								},
+								
+								{
+									"45c8e635-9fb5-cbd5-8de3-e36adf33d0fb",
 									true,
 								},
 							},
@@ -26169,6 +27027,11 @@ local tbl =
 									"a83616ba-a9fa-90a4-8dd5-20c5c60bb085",
 									true,
 								},
+								
+								{
+									"45c8e635-9fb5-cbd5-8de3-e36adf33d0fb",
+									true,
+								},
 							},
 							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "a9f0ec66-9545-3af1-88d2-7cbe10499f32",
@@ -26191,6 +27054,11 @@ local tbl =
 								
 								{
 									"a83616ba-a9fa-90a4-8dd5-20c5c60bb085",
+									true,
+								},
+								
+								{
+									"45c8e635-9fb5-cbd5-8de3-e36adf33d0fb",
 									true,
 								},
 							},
@@ -26261,6 +27129,39 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 5,
+							name = "Reprisal range <=5y",
+							partyTargetType = "Detection Target",
+							uuid = "d8c352c0-b097-b50a-bf3f-ee7d2bdfef4b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"d8c352c0-b097-b50a-bf3f-ee7d2bdfef4b",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Enemy in Reprisal range",
+							uuid = "45c8e635-9fb5-cbd5-8de3-e36adf33d0fb",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "Spreadsheet tank mitigation / P4",
 				mechanicTime = 854.9,
@@ -26295,6 +27196,11 @@ local tbl =
 									"70dd2b10-ffe1-b06e-99cd-6c63f17401d4",
 									true,
 								},
+								
+								{
+									"e3dab00d-3e1c-eb76-be92-a943b411ca60",
+									true,
+								},
 							},
 							uuid = "2c11163a-4a3d-18a0-929e-3319617ee02b",
 							version = 2.1,
@@ -26316,6 +27222,11 @@ local tbl =
 								
 								{
 									"70dd2b10-ffe1-b06e-99cd-6c63f17401d4",
+									true,
+								},
+								
+								{
+									"e3dab00d-3e1c-eb76-be92-a943b411ca60",
 									true,
 								},
 							},
@@ -26343,6 +27254,11 @@ local tbl =
 									"70dd2b10-ffe1-b06e-99cd-6c63f17401d4",
 									true,
 								},
+								
+								{
+									"e3dab00d-3e1c-eb76-be92-a943b411ca60",
+									true,
+								},
 							},
 							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "e618e2ca-133e-cfc6-994d-3819b1144105",
@@ -26365,6 +27281,11 @@ local tbl =
 								
 								{
 									"70dd2b10-ffe1-b06e-99cd-6c63f17401d4",
+									true,
+								},
+								
+								{
+									"e3dab00d-3e1c-eb76-be92-a943b411ca60",
 									true,
 								},
 							},
@@ -26432,6 +27353,39 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
 							uuid = "41a1adbc-59af-d70b-9742-08f03940454f",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 5,
+							name = "Reprisal range <=5y",
+							partyTargetType = "Detection Target",
+							uuid = "165caaf1-c331-4e89-bb72-00476327ab58",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"165caaf1-c331-4e89-bb72-00476327ab58",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Enemy in Reprisal range",
+							uuid = "e3dab00d-3e1c-eb76-be92-a943b411ca60",
 							version = 3,
 						},
 					},
@@ -28022,6 +28976,11 @@ local tbl =
 									"3df0c0fa-85ed-4b54-9069-6468988d35c2",
 									true,
 								},
+								
+								{
+									"2621cba7-059e-7bcf-b569-deb34fe359bc",
+									true,
+								},
 							},
 							uuid = "e780540b-8e73-a028-bad3-9cc50959e5f1",
 							version = 2.1,
@@ -28043,6 +29002,11 @@ local tbl =
 								
 								{
 									"3df0c0fa-85ed-4b54-9069-6468988d35c2",
+									true,
+								},
+								
+								{
+									"2621cba7-059e-7bcf-b569-deb34fe359bc",
 									true,
 								},
 							},
@@ -28070,6 +29034,11 @@ local tbl =
 									"3df0c0fa-85ed-4b54-9069-6468988d35c2",
 									true,
 								},
+								
+								{
+									"2621cba7-059e-7bcf-b569-deb34fe359bc",
+									true,
+								},
 							},
 							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "10dc7f18-0405-3145-b37b-0d7465470cac",
@@ -28092,6 +29061,11 @@ local tbl =
 								
 								{
 									"3df0c0fa-85ed-4b54-9069-6468988d35c2",
+									true,
+								},
+								
+								{
+									"2621cba7-059e-7bcf-b569-deb34fe359bc",
 									true,
 								},
 							},
@@ -28159,6 +29133,39 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
 							uuid = "8109eba6-5176-8606-bd39-ac83089ab506",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 5,
+							name = "Reprisal range <=5y",
+							partyTargetType = "Detection Target",
+							uuid = "a0e5adcf-8678-2763-b5c9-5ce020646122",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"a0e5adcf-8678-2763-b5c9-5ce020646122",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Enemy in Reprisal range",
+							uuid = "2621cba7-059e-7bcf-b569-deb34fe359bc",
 							version = 3,
 						},
 					},
@@ -28961,6 +29968,11 @@ local tbl =
 									"94873b66-9222-7db0-a463-f3da0a728117",
 									true,
 								},
+								
+								{
+									"15a5cf08-dc8e-8161-a591-6afc2f2e8e1a",
+									true,
+								},
 							},
 							uuid = "eef9ed6b-1b8f-44fc-8780-512f0694b426",
 							version = 2.1,
@@ -28982,6 +29994,11 @@ local tbl =
 								
 								{
 									"94873b66-9222-7db0-a463-f3da0a728117",
+									true,
+								},
+								
+								{
+									"15a5cf08-dc8e-8161-a591-6afc2f2e8e1a",
 									true,
 								},
 							},
@@ -29009,6 +30026,11 @@ local tbl =
 									"94873b66-9222-7db0-a463-f3da0a728117",
 									true,
 								},
+								
+								{
+									"15a5cf08-dc8e-8161-a591-6afc2f2e8e1a",
+									true,
+								},
 							},
 							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "5e94b8ac-3227-d1ce-afea-8c7ab8272426",
@@ -29031,6 +30053,11 @@ local tbl =
 								
 								{
 									"94873b66-9222-7db0-a463-f3da0a728117",
+									true,
+								},
+								
+								{
+									"15a5cf08-dc8e-8161-a591-6afc2f2e8e1a",
 									true,
 								},
 							},
@@ -29098,6 +30125,39 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
 							uuid = "ddca6f16-3484-afdb-8573-c8301f4dbdaf",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 5,
+							name = "Reprisal range <=5y",
+							partyTargetType = "Detection Target",
+							uuid = "8c9387e1-9dc7-8c43-adea-2c21d77393f8",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"8c9387e1-9dc7-8c43-adea-2c21d77393f8",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Enemy in Reprisal range",
+							uuid = "15a5cf08-dc8e-8161-a591-6afc2f2e8e1a",
 							version = 3,
 						},
 					},
@@ -31103,6 +32163,11 @@ local tbl =
 									"22b1cf0d-d388-99c6-a1b4-fccf4cce3d70",
 									true,
 								},
+								
+								{
+									"f68435b1-c484-ea1d-8318-da2f0fa2c255",
+									true,
+								},
 							},
 							uuid = "cfd59bc9-bfd7-86f5-aec1-3839f0de369e",
 							version = 2.1,
@@ -31124,6 +32189,11 @@ local tbl =
 								
 								{
 									"22b1cf0d-d388-99c6-a1b4-fccf4cce3d70",
+									true,
+								},
+								
+								{
+									"f68435b1-c484-ea1d-8318-da2f0fa2c255",
 									true,
 								},
 							},
@@ -31151,6 +32221,11 @@ local tbl =
 									"22b1cf0d-d388-99c6-a1b4-fccf4cce3d70",
 									true,
 								},
+								
+								{
+									"f68435b1-c484-ea1d-8318-da2f0fa2c255",
+									true,
+								},
 							},
 							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "f7054c3c-e694-00ed-af44-63d22e367d0d",
@@ -31173,6 +32248,11 @@ local tbl =
 								
 								{
 									"22b1cf0d-d388-99c6-a1b4-fccf4cce3d70",
+									true,
+								},
+								
+								{
+									"f68435b1-c484-ea1d-8318-da2f0fa2c255",
 									true,
 								},
 							},
@@ -31243,6 +32323,39 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 5,
+							name = "Reprisal range <=5y",
+							partyTargetType = "Detection Target",
+							uuid = "a257edd2-23ee-f788-ac25-06fed0aa8134",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"a257edd2-23ee-f788-ac25-06fed0aa8134",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Enemy in Reprisal range",
+							uuid = "f68435b1-c484-ea1d-8318-da2f0fa2c255",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "Spreadsheet tank mitigation / P5",
 				mechanicTime = 1051.2,
@@ -31310,6 +32423,11 @@ local tbl =
 									"573da736-0204-9278-8587-82a79a154b53",
 									true,
 								},
+								
+								{
+									"a31fc1b5-4a64-ab3b-95c6-2343e5bd2223",
+									true,
+								},
 							},
 							uuid = "f6cc197b-8afc-7b04-ab60-d71b78aa1d34",
 							version = 2.1,
@@ -31331,6 +32449,11 @@ local tbl =
 								
 								{
 									"573da736-0204-9278-8587-82a79a154b53",
+									true,
+								},
+								
+								{
+									"a31fc1b5-4a64-ab3b-95c6-2343e5bd2223",
 									true,
 								},
 							},
@@ -31358,6 +32481,11 @@ local tbl =
 									"573da736-0204-9278-8587-82a79a154b53",
 									true,
 								},
+								
+								{
+									"a31fc1b5-4a64-ab3b-95c6-2343e5bd2223",
+									true,
+								},
 							},
 							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "49f6d918-339c-d380-821e-e58a11764968",
@@ -31380,6 +32508,11 @@ local tbl =
 								
 								{
 									"573da736-0204-9278-8587-82a79a154b53",
+									true,
+								},
+								
+								{
+									"a31fc1b5-4a64-ab3b-95c6-2343e5bd2223",
 									true,
 								},
 							},
@@ -31447,6 +32580,39 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
 							uuid = "4d6ba6c7-6457-528d-aeca-1896fe43016d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 5,
+							name = "Reprisal range <=5y",
+							partyTargetType = "Detection Target",
+							uuid = "0396b604-426a-01bb-8198-e960d0714935",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"0396b604-426a-01bb-8198-e960d0714935",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Enemy in Reprisal range",
+							uuid = "a31fc1b5-4a64-ab3b-95c6-2343e5bd2223",
 							version = 3,
 						},
 					},
@@ -32418,6 +33584,11 @@ local tbl =
 									"ec68a34b-af26-fe0c-aa06-d387c2992f12",
 									true,
 								},
+								
+								{
+									"017b0e41-5d22-8280-9b40-9feabc8f98da",
+									true,
+								},
 							},
 							uuid = "b5cae6fe-b33e-3ad3-b94c-48fa0761a60e",
 							version = 2.1,
@@ -32439,6 +33610,11 @@ local tbl =
 								
 								{
 									"ec68a34b-af26-fe0c-aa06-d387c2992f12",
+									true,
+								},
+								
+								{
+									"017b0e41-5d22-8280-9b40-9feabc8f98da",
 									true,
 								},
 							},
@@ -32466,6 +33642,11 @@ local tbl =
 									"ec68a34b-af26-fe0c-aa06-d387c2992f12",
 									true,
 								},
+								
+								{
+									"017b0e41-5d22-8280-9b40-9feabc8f98da",
+									true,
+								},
 							},
 							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "26fd75e2-880a-d1ed-9f06-e4babd9c1163",
@@ -32488,6 +33669,11 @@ local tbl =
 								
 								{
 									"ec68a34b-af26-fe0c-aa06-d387c2992f12",
+									true,
+								},
+								
+								{
+									"017b0e41-5d22-8280-9b40-9feabc8f98da",
 									true,
 								},
 							},
@@ -32555,6 +33741,39 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
 							uuid = "5f54b877-b754-89ac-9193-57921a43f49a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 5,
+							name = "Reprisal range <=5y",
+							partyTargetType = "Detection Target",
+							uuid = "26e16c7d-78eb-9164-a4d7-4dd68987e1dd",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"26e16c7d-78eb-9164-a4d7-4dd68987e1dd",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Enemy in Reprisal range",
+							uuid = "017b0e41-5d22-8280-9b40-9feabc8f98da",
 							version = 3,
 						},
 					},
@@ -34560,6 +35779,11 @@ local tbl =
 									"216a4c48-b914-efdc-adce-3f2244f484ec",
 									true,
 								},
+								
+								{
+									"5a0790c2-664e-a094-a30e-da8f9cba850a",
+									true,
+								},
 							},
 							uuid = "8274e417-88ac-4bc5-b588-d991e759092f",
 							version = 2.1,
@@ -34581,6 +35805,11 @@ local tbl =
 								
 								{
 									"216a4c48-b914-efdc-adce-3f2244f484ec",
+									true,
+								},
+								
+								{
+									"5a0790c2-664e-a094-a30e-da8f9cba850a",
 									true,
 								},
 							},
@@ -34608,6 +35837,11 @@ local tbl =
 									"216a4c48-b914-efdc-adce-3f2244f484ec",
 									true,
 								},
+								
+								{
+									"5a0790c2-664e-a094-a30e-da8f9cba850a",
+									true,
+								},
 							},
 							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "b80b0f3e-7256-c519-a82d-fc5bbdd29983",
@@ -34630,6 +35864,11 @@ local tbl =
 								
 								{
 									"216a4c48-b914-efdc-adce-3f2244f484ec",
+									true,
+								},
+								
+								{
+									"5a0790c2-664e-a094-a30e-da8f9cba850a",
 									true,
 								},
 							},
@@ -34697,6 +35936,39 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
 							uuid = "8133fe45-2ae7-0f8a-be40-f586fb37e553",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 5,
+							name = "Reprisal range <=5y",
+							partyTargetType = "Detection Target",
+							uuid = "31074c71-c34a-ea78-9ac6-1382e79fe00c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"31074c71-c34a-ea78-9ac6-1382e79fe00c",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Enemy in Reprisal range",
+							uuid = "5a0790c2-664e-a094-a30e-da8f9cba850a",
 							version = 3,
 						},
 					},
@@ -35051,6 +36323,11 @@ local tbl =
 									"f7812a71-67da-22cb-836d-1b3299ed9e1e",
 									true,
 								},
+								
+								{
+									"65dba1a9-34bb-085b-ac78-e57a97988d8b",
+									true,
+								},
 							},
 							uuid = "43cbce90-7ce9-bc01-84da-d1e511084cbc",
 							version = 2.1,
@@ -35072,6 +36349,11 @@ local tbl =
 								
 								{
 									"f7812a71-67da-22cb-836d-1b3299ed9e1e",
+									true,
+								},
+								
+								{
+									"65dba1a9-34bb-085b-ac78-e57a97988d8b",
 									true,
 								},
 							},
@@ -35099,6 +36381,11 @@ local tbl =
 									"f7812a71-67da-22cb-836d-1b3299ed9e1e",
 									true,
 								},
+								
+								{
+									"65dba1a9-34bb-085b-ac78-e57a97988d8b",
+									true,
+								},
 							},
 							gVar = "ACR_RikuDRK3_Tankbar_Reprisal",
 							uuid = "2d357982-67a1-4cde-9532-474c39c98cca",
@@ -35121,6 +36408,11 @@ local tbl =
 								
 								{
 									"f7812a71-67da-22cb-836d-1b3299ed9e1e",
+									true,
+								},
+								
+								{
+									"65dba1a9-34bb-085b-ac78-e57a97988d8b",
 									true,
 								},
 							},
@@ -35188,6 +36480,39 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
 							uuid = "f04b5899-38a6-dd28-a709-f2952bf75c67",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 5,
+							name = "Reprisal range <=5y",
+							partyTargetType = "Detection Target",
+							uuid = "53085848-283d-b7dd-afdf-85771c18d3e7",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"53085848-283d-b7dd-afdf-85771c18d3e7",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Enemy in Reprisal range",
+							uuid = "65dba1a9-34bb-085b-ac78-e57a97988d8b",
 							version = 3,
 						},
 					},

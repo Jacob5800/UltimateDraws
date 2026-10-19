@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Added a living/targetable nearby-enemy filter within Reprisal's 5-yalm radius to all 100 tank Reprisal actions. Requests can wait for range within their existing timing window. (19-10-2026)
+
 - GNB - FRU V3 now seeds unset tank GUI values when selected/inherited: MT Halo, OT Apocalypse, MT Somber invuln-both, OT first P5 invuln. Custom values and Akh Morn groupings are preserved; GUI explains the profile defaults and ACR/roster role alignment. (19-10-2026)
 
 - Converted 99 Warrior LPDU mits actions to live ACR Hotbar/Tankbar requests, preserving support and Provoke targets. Kept Holmgang explicitly self-targeted through native actions and named all 106 Warrior-only job conditions Warrior. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - LPDU mits: changed all six PLD Passage of Arms usages to manual-use alerts with voice reminders, and converted 116 DRK-specific actions to catalog-resolved ACR Hotbar/Tankbar requests while preserving timing, role gates, and support targets. (19-10-2026)
 
 - Added boss world-text labels and continuous countdowns for Diamond Dust look-away and both Shiva cleaves; the second cleave timer appears after the first hit. (19-10-2026)
-
-- Added an all-job P5 Fulgent Blade potion window from timeline 1095 to 1100, allowing an early weave before 1097.4. (19-10-2026)
 
 ### UWU: LPDU
 
