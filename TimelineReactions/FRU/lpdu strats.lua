@@ -7021,7 +7021,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local p=TensorCore.mGetPlayer();if p==nil or p.pos==nil then return end\nlocal function guide(x,z,ms,radius)\n local t={x=x,y=p.pos.y,z=z};local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.55),2,1)\n local length=TensorCore.getDistance2d(p.pos,t)\n if length>.25 then local tip=math.min(1.25,length);d:addTimedArrow(ms,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,t),math.max(.15,length-tip),.9,tip,2.2,0,false) end\n d:addTimedCircle(ms,x,p.pos.y+.05,z,radius or 1,0,true)\nend\nlocal x,y,z,active=Argus.getWaymarkInfo(5);if not active then return end\nlocal duration=math.floor((701.5-TensorReactions_CurrentTimer)*1000);if duration<=0 then self.used=true;return end\nguide(x,z,duration,1.5);AnyoneCore.Shotcall(\"Go to one - bait puddles\",true,3,false);self.used=true",
+							actionLua = "local p=TensorCore.mGetPlayer();if p==nil or p.pos==nil then return end\nlocal function remember(id)\n if id then\n  data.frup4_puddle_staging_draws = data.frup4_puddle_staging_draws or {}\n  table.insert(data.frup4_puddle_staging_draws,id)\n end\nend\nlocal function guide(x,z,ms,radius)\n local t={x=x,y=p.pos.y,z=z};local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.55),2,1)\n local length=TensorCore.getDistance2d(p.pos,t)\n if length>.25 then local tip=math.min(1.25,length);remember(d:addTimedArrow(ms,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,t),math.max(.15,length-tip),.9,tip,2.2,0,false)) end\n remember(d:addTimedCircle(ms,x,p.pos.y+.05,z,radius or 1,0,true))\nend\nlocal x,y,z,active=Argus.getWaymarkInfo(5);if not active then return end\nlocal duration=math.floor((701.5-TensorReactions_CurrentTimer)*1000);if duration<=0 then self.used=true;return end\nguide(x,z,duration,1.5);AnyoneCore.Shotcall(\"Go to one - bait puddles\",true,3,false);self.used=true",
 							endIfUsed = true,
 							name = "P3 to P4 - Marker One Puddle Staging",
 							uuid = "80187bf5-05d0-e92d-9b65-a54eaeef9b6d",
@@ -7069,6 +7069,70 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "da98e213-95b5-d9c6-a513-592cba418e4e",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local draws = data.frup4_puddle_staging_draws\nif draws then\n    for _, id in ipairs(draws) do\n        Argus.deleteTimedShape(id)\n    end\n    data.frup4_puddle_staging_draws = nil\nend\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"a507098e-c396-4bf4-8493-44492e2043bd",
+									true,
+								},
+							},
+							name = "Clear owned staging arrow and circle",
+							uuid = "a1556a3f-9e4c-3725-b030-6aabece816e0",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventSpellID = 40237,
+							name = "Akh Rhai move cue",
+							uuid = "a507098e-c396-4bf4-8493-44492e2043bd",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				mechanicTime = 724.1,
+				name = "[LPDU] P4 Puddle Drop - Clear Staging Guidance",
+				timeRange = true,
+				timelineIndex = 158,
+				timerEndOffset = 8,
+				timerStartOffset = -5,
+				uuid = "d7e1ae4d-0898-26f8-8376-16ada4446079",
+				version = 2,
+			},
 		},
 	},
 	[162] = 

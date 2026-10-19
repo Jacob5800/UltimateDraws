@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- **Early P4 puddle guidance:** The marker-one staging arrow and green circle now clear on the Akh Rhai move cue when puddles drop. (19-10-2026)
+
 - **P1 tank tower-side arrow:** The initial tank dodge arrow now points opposite the towers on either layout, fixing the west-tower layout that could point MT/OT toward the tower side. (19-10-2026)
 
 - **LPDU strats cleanup:** Removed 95 empty broken inheritance references that appeared as red leftover reactions. Valid reactions and inheritance modules are preserved. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - **Ninja mitigation:** Added Shade Shift before Diamond Dust and Ultimate Relativity, using Ninja-only Hotbar requests with enough time between uses for its cooldown. (19-10-2026)
 
 - Added conservative Samurai Tengetsu Hotbar windows immediately before P1 Cyclonic Break and second Burnished Glory, matching sampled reference usage without cooldown conditions. The existing mirrors movement Sprint window is now a shared Hotbar request for all jobs; its synced timing is preserved. Combat confirmation pending. (19-10-2026)
-
-- Red Mage Magick Barrier now uses the verified RikuRDM3 Hotbar request for all seven assignments. Existing timings, role/job checks and cooldown conditions are preserved; combat confirmation pending. (19-10-2026)
 
 ### UWU: LPDU
 
