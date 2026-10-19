@@ -9503,6 +9503,68 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "b5bd1446-e229-6c78-81da-bd633f674d41",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster\nif r.current()==nil then return end\nlocal slot=r.mySlot()\nif slot==nil then return end\nlocal mode=Settings.FFXIVMINION.LPDU_FRU_P4AM1Mode or \"4-4\"\nlocal solo=mode==\"7-1 MT solo\" and \"T1\" or (mode==\"7-1 OT solo\" and \"T2\" or nil)\nif solo~=nil and slot==solo then\n AnyoneCore.Shotcall(\"Stack with party - final hit\",true,5,false)\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"f97a0eb4-908a-07c3-825b-62de6e7fcef8",
+									true,
+								},
+							},
+							name = "Solo tank rejoin cue",
+							uuid = "bc90f81f-7715-b687-8cd6-2202736d7fa5",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventSpellID = 40304,
+							name = "Morn Afah starts",
+							uuid = "f97a0eb4-908a-07c3-825b-62de6e7fcef8",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				mechanicTime = 783.4,
+				name = "[LPDU] P4 Akh Morn 1 - Solo Rejoin Party",
+				timelineIndex = 176,
+				timerOffset = -7,
+				uuid = "43c889c1-5dd4-7298-983f-6baf142cd1c8",
+				version = 2,
+			},
+		},
 	},
 	[179] = 
 	{
@@ -11216,6 +11278,68 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "ec8f4b27-3f99-4876-a93a-e63cb4569cfb",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster\nif r.current()==nil then return end\nlocal slot=r.mySlot()\nif slot==nil then return end\nlocal mode=Settings.FFXIVMINION.LPDU_FRU_P4AM2Mode or \"7-1 MT solo\"\nlocal solo=mode==\"7-1 MT solo\" and \"T1\" or (mode==\"7-1 OT solo\" and \"T2\" or nil)\nif solo~=nil and slot==solo then\n AnyoneCore.Shotcall(\"Stack with party - final hit\",true,5,false)\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"4802331c-01fe-581a-8e47-6c285fe4ef53",
+									true,
+								},
+							},
+							name = "Solo tank rejoin cue",
+							uuid = "59e5acb5-e8c8-214d-be0b-8bea5909302a",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventSpellID = 40304,
+							name = "Morn Afah starts",
+							uuid = "4802331c-01fe-581a-8e47-6c285fe4ef53",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 3,
+				mechanicTime = 864.8,
+				name = "[LPDU] P4 Akh Morn 2 - Solo Rejoin Party",
+				timelineIndex = 204,
+				timerOffset = -7,
+				uuid = "3852c30c-b367-b792-b510-c15916a4adc2",
+				version = 2,
+			},
 		},
 	},
 	[207] = 

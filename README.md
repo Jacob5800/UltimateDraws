@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Added a solo-tank rejoin callout for both P4 Akh Morn sets when Morn Afah starts, prompting the selected solo tank to stack with the party for the final hit. (19-10-2026)
+
 - **UR middle guidance:** Removed the small bright-green destination circle from center-return guidance, preserving its arrow and the larger light-green mechanic circle. (19-10-2026)
 
 - **P4 Darklit potion:** The 738.2 reaction now uses the appropriate stat potion for all 21 supported combat jobs, alongside its existing reminder. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - **P5 restriction notice:** PLD explanations now appear only when a Paladin is present in the tank roster; the two-PLD note appears only for two Paladins. Updated the blocked-choice popup opening behavior. (19-10-2026)
 
 - **P5 invuln selection popup:** Choosing an incompatible order now opens an explanation with an OK button, showing the required order and the P4 Tank swap alternative. (19-10-2026)
-
-- **Tank settings clarity:** Explains when the PLD cooldown restriction requires a P5 invuln order, why the choice reverts, and how P4 Tank swap allows changing it. The displayed P5 order now reflects the enforced selection immediately. (19-10-2026)
 
 ### UWU: LPDU
 
