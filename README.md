@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Added an all-job P5 Fulgent Blade potion window from timeline 1095 to 1100, allowing an early weave before 1097.4. (19-10-2026)
+
 - Added a solo-tank rejoin callout for both P4 Akh Morn sets when Morn Afah starts, prompting the selected solo tank to stack with the party for the final hit. (19-10-2026)
 
 - **UR middle guidance:** Removed the small bright-green destination circle from center-return guidance, preserving its arrow and the larger light-green mechanic circle. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - **DRK/PLD defaults:** New unset tank settings use PLD solo for first P4 Akh, DRK solo for second, PLD Halo/P5 first and DRK Apoc/Somber. Existing choices remain editable; a Load DRK/PLD replay defaults button applies the full preset. (19-10-2026)
 
 - **P5 restriction notice:** PLD explanations now appear only when a Paladin is present in the tank roster; the two-PLD note appears only for two Paladins. Updated the blocked-choice popup opening behavior. (19-10-2026)
-
-- **P5 invuln selection popup:** Choosing an incompatible order now opens an explanation with an OK button, showing the required order and the P4 Tank swap alternative. (19-10-2026)
 
 ### UWU: LPDU
 

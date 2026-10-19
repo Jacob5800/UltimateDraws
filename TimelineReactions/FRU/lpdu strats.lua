@@ -13060,6 +13060,728 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 3000,
+							alertPriority = 2,
+							alertText = "[LPDU] Use potion",
+							name = "[LPDU] Use potion",
+							uuid = "2c33ef01-9965-4581-ada9-96509cb00efe",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"6a6fc6be-19a1-f45f-b1be-268aac6c6415",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Potion — BARD",
+							usePot = true,
+							uuid = "b21c07c1-ea9f-598f-87ef-ec36d3462aba",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"710e47b4-66db-7926-b9b1-7a36c4844192",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Potion — MACHINIST",
+							usePot = true,
+							uuid = "9cfaf995-0f13-c6bb-b51a-95bf142a8c38",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"674d9d6a-cf2a-9a8c-a706-70714e22ac10",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Potion — DANCER",
+							usePot = true,
+							uuid = "0529d4f5-3539-13e2-8620-211574c2cabf",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"c8241cd0-c848-c94b-b5e4-66d3cbf50287",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Potion — NINJA",
+							usePot = true,
+							uuid = "6a63aee0-2ebe-2be9-a1df-7bf427d19b2e",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"be7b0a82-c421-6ab9-995f-b3e50d8592a8",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Potion — VIPER",
+							usePot = true,
+							uuid = "216819a0-7e5b-0da3-aff6-cbe50e4eee09",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"b4400fc9-0450-02da-8509-6807165f7e35",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Potion — BLACKMAGE",
+							potType = 2,
+							usePot = true,
+							uuid = "430f86a0-eeba-80d4-9f39-43755807e5dd",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"1e159fad-16fd-c4d9-9e57-70dfab9d7129",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Potion — SUMMONER",
+							potType = 2,
+							usePot = true,
+							uuid = "9bd3e658-45ae-6d8b-85ed-61c26d0dfe46",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"44211a4b-929b-6895-89aa-5d665ab47767",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Potion — REDMAGE",
+							potType = 2,
+							usePot = true,
+							uuid = "3e975d28-5df5-da17-ac8e-1af9f0ed76af",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"f2f33edf-4c5d-4ea4-9ab4-3db415c8ae39",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Potion — PICTOMANCER",
+							potType = 2,
+							usePot = true,
+							uuid = "5f70849c-2465-24ba-92d0-04512be1884f",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"d703781d-cc16-4106-a645-9df4d741c896",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Potion — WHITEMAGE",
+							potType = 3,
+							usePot = true,
+							uuid = "5d4c06df-f2a1-e5b7-bc54-07b218288f78",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"0fd33716-fd3c-86f1-b195-f94d1a839045",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Potion — SCHOLAR",
+							potType = 3,
+							usePot = true,
+							uuid = "c19f2df1-35c4-66d1-91c4-d69559bcd24b",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"59f3d511-9ba4-89fc-bba3-6d6a5dcae15f",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Potion — ASTROLOGIAN",
+							potType = 3,
+							usePot = true,
+							uuid = "c78c481f-5157-4b91-a880-c88f5e9f9134",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"b756730b-7dc6-5d3d-b2fc-6d373bad1e67",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Potion — SAGE",
+							potType = 3,
+							usePot = true,
+							uuid = "e6f3cf07-6063-1927-ab71-ce6100ac475d",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"f808d057-02f0-6f3b-853e-8da688a55258",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Potion — PALADIN",
+							potType = 4,
+							usePot = true,
+							uuid = "da654c63-bdb3-6420-bb0e-67d1f3f44bb9",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"b1fc1bd3-4d95-73b8-a715-55479f8faef4",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Potion — WARRIOR",
+							potType = 4,
+							usePot = true,
+							uuid = "386997f9-d191-fb2f-93b7-4de17d90d9d3",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"d593425f-62db-34eb-9465-c4c0fe6d73fd",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Potion — DARKKNIGHT",
+							potType = 4,
+							usePot = true,
+							uuid = "eea19164-0439-b171-81eb-d561beb7cd3d",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"89bd410a-ba91-350e-b5c4-a1b76a31de83",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Potion — GUNBREAKER",
+							potType = 4,
+							usePot = true,
+							uuid = "27006180-8095-d8d4-b05d-37fe1a361c8f",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"3f4bfaeb-b1d3-1b5e-930c-0e4205efb3fd",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Potion — MONK",
+							potType = 4,
+							usePot = true,
+							uuid = "3ca1ce97-b849-c931-8d86-4bd96b997b77",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"9728bcd0-5a69-65a5-9e07-553eea24c706",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Potion — DRAGOON",
+							potType = 4,
+							usePot = true,
+							uuid = "86a3270c-fcc5-e41e-a90f-5a5f69e42cca",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"6bbd0ddf-0e92-dccc-8e7c-5feaf1fa76b0",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Potion — SAMURAI",
+							potType = 4,
+							usePot = true,
+							uuid = "0c547c99-f67c-6318-991f-859b311a631d",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"3f64036f-9ea5-f031-9fee-99fdf732ebe7",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Potion — REAPER",
+							potType = 4,
+							usePot = true,
+							uuid = "3fc51452-143d-85a2-91d4-606897d8f9af",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "BARD",
+							name = "BARD",
+							uuid = "6a6fc6be-19a1-f45f-b1be-268aac6c6415",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "MACHINIST",
+							name = "MACHINIST",
+							uuid = "710e47b4-66db-7926-b9b1-7a36c4844192",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "DANCER",
+							name = "DANCER",
+							uuid = "674d9d6a-cf2a-9a8c-a706-70714e22ac10",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "NINJA",
+							name = "NINJA",
+							uuid = "c8241cd0-c848-c94b-b5e4-66d3cbf50287",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "VIPER",
+							name = "VIPER",
+							uuid = "be7b0a82-c421-6ab9-995f-b3e50d8592a8",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "BLACKMAGE",
+							name = "BLACKMAGE",
+							uuid = "b4400fc9-0450-02da-8509-6807165f7e35",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "SUMMONER",
+							name = "SUMMONER",
+							uuid = "1e159fad-16fd-c4d9-9e57-70dfab9d7129",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "REDMAGE",
+							name = "REDMAGE",
+							uuid = "44211a4b-929b-6895-89aa-5d665ab47767",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "PICTOMANCER",
+							name = "PICTOMANCER",
+							uuid = "f2f33edf-4c5d-4ea4-9ab4-3db415c8ae39",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "WHITEMAGE",
+							name = "WHITEMAGE",
+							uuid = "d703781d-cc16-4106-a645-9df4d741c896",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "SCHOLAR",
+							name = "SCHOLAR",
+							uuid = "0fd33716-fd3c-86f1-b195-f94d1a839045",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "ASTROLOGIAN",
+							name = "ASTROLOGIAN",
+							uuid = "59f3d511-9ba4-89fc-bba3-6d6a5dcae15f",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "SAGE",
+							name = "SAGE",
+							uuid = "b756730b-7dc6-5d3d-b2fc-6d373bad1e67",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "PALADIN",
+							name = "PALADIN",
+							uuid = "f808d057-02f0-6f3b-853e-8da688a55258",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "WARRIOR",
+							name = "WARRIOR",
+							uuid = "b1fc1bd3-4d95-73b8-a715-55479f8faef4",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "DARKKNIGHT",
+							name = "DARKKNIGHT",
+							uuid = "d593425f-62db-34eb-9465-c4c0fe6d73fd",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "GUNBREAKER",
+							name = "GUNBREAKER",
+							uuid = "89bd410a-ba91-350e-b5c4-a1b76a31de83",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "MONK",
+							name = "MONK",
+							uuid = "3f4bfaeb-b1d3-1b5e-930c-0e4205efb3fd",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "DRAGOON",
+							name = "DRAGOON",
+							uuid = "9728bcd0-5a69-65a5-9e07-553eea24c706",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "SAMURAI",
+							name = "SAMURAI",
+							uuid = "6bbd0ddf-0e92-dccc-8e7c-5feaf1fa76b0",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "REAPER",
+							name = "REAPER",
+							uuid = "3f64036f-9ea5-f031-9fee-99fdf732ebe7",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Potion",
+				mechanicTime = 1097.4,
+				name = "[LPDU] Use potion - P5 Fulgent Blade",
+				timeRange = true,
+				timelineIndex = 237,
+				timerEndOffset = 2.6,
+				timerStartOffset = -2.4,
+				uuid = "dcfe49e5-a98e-df48-bc43-30bc489cd1b9",
+				version = 2,
+			},
+		},
 	},
 	[243] = 
 	{
