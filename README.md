@@ -46,6 +46,8 @@ TEA: Coming soon by Ton.
 
 ### UCOB: LPDU
 
+- Published [GNB - UCOB 1.5](TimelineReactions/UCOB/GNB%20-%20UCOB%201.5.lua), the original GNB profile used as the reference for the shared tank mitigation draft. Its existing mitigation schedule is included; avoid combining it with the shared tank profile without disabling duplicate requests. (20-10-2026)
+
 - Added a shared UCOB tank mitigation draft derived from GNB 1.5, with Party Roster assignments and catalog-confirmed requests for all four tanks. Passage of Arms is an advance manual alert; Holmgang remains manual for safe self-targeting. See [tank mitigation notes](TimelineReactions/UCOB/TANK-MITS-NOTES.md) for excluded cooldown conflicts and pending replay checks. (20-10-2026)
 
 - Grand Octet towers now show continuous cast countdowns. Both adds quote sets show a personal spread countdown from the preceding hit; IN-first stacks read actual marker 4 and other stacks marker 1. (19-10-2026)
@@ -63,8 +65,6 @@ TEA: Coming soon by Ton.
 - Tenstrike spread guidance now starts at 735.5, uses the same 12y Quickmarch spread radius, and remains until your Hatch assignment takes over or your own Meteor Stream hits. This removes the premature cutoff before the spread. (19-10-2026)
 
 - Nael lightning now shows a following 5y personal spread circle directly while Thunderstruck is present, with one Lightning on you—spread call per application. Other-player circles and the existing countdown remain; the previous duplicate call is removed. (19-10-2026)
-
-- Nael transition stack guidance defaults to A and follows a clear five-player majority gathered within 6y of B or C for 0.5 seconds. It retains the selection through brief movement gaps. (19-10-2026)
 
 
 ### FRU: LPDU
