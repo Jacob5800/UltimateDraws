@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- **Ninja mitigation:** Added Shade Shift before Diamond Dust and Ultimate Relativity, using Ninja-only Hotbar requests with enough time between uses for its cooldown. (19-10-2026)
+
 - Added conservative Samurai Tengetsu Hotbar windows immediately before P1 Cyclonic Break and second Burnished Glory, matching sampled reference usage without cooldown conditions. The existing mirrors movement Sprint window is now a shared Hotbar request for all jobs; its synced timing is preserved. Combat confirmation pending. (19-10-2026)
 
 - Red Mage Magick Barrier now uses the verified RikuRDM3 Hotbar request for all seven assignments. Existing timings, role/job checks and cooldown conditions are preserved; combat confirmation pending. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - P1-P2 M1/M2 Feint now requests the ACR Hotbar Feint control, verified against RikuMNK3, instead of casting directly. Role/cooldown gates and timings remain unchanged; combat testing pending. (19-10-2026)
 
 - Fixed the final six P1 Addle and physical-ranged mitigation role checks to use AnyoneCore Party Roster. Full 243-reaction audit found no remaining legacy role helpers; combat confirmation pending. (19-10-2026)
-
-- Fixed 32 P2-P5 Addle and physical-ranged mitigation role checks to use AnyoneCore Party Roster. Existing enabled/disabled choices and timings are preserved; combat confirmation pending. (19-10-2026)
 
 ### UWU: LPDU
 

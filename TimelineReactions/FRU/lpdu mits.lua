@@ -8264,6 +8264,72 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Ninja personal mitigation",
+				uuid = "22b7bf78-a574-f937-aa2b-5842fc58370a",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"71f2b0ed-75b7-42d4-8aaa-c0b583f64907",
+									true,
+								},
+							},
+							gVar = "ACR_RikuNIN3_Hotbar_ShadeShift",
+							uuid = "d262497b-08ab-a1ac-862b-8f8acb2af07e",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								30,
+							},
+							name = "Ninja",
+							uuid = "71f2b0ed-75b7-42d4-8aaa-c0b583f64907",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Ninja personal mitigation",
+				mechanicTime = 235.3,
+				name = "[LPDU NIN] Shade Shift - Diamond Dust",
+				timeRange = true,
+				timelineIndex = 44,
+				timerEndOffset = -2,
+				timerStartOffset = -5,
+				uuid = "fa70da99-9057-a93a-ac25-a32700f8a45f",
+				version = 2,
+			},
+		},
 	},
 	[48] = 
 	{
@@ -13736,6 +13802,72 @@ local tbl =
 				timerEndOffset = -1.5,
 				timerStartOffset = -11,
 				uuid = "833165a7-1858-65c6-8e3f-2f79f328d9cf",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Ninja personal mitigation",
+				uuid = "da5ac2c0-fe72-4269-9605-072d63a64410",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"6f34a124-ba62-bef1-bf2c-72159a99b7eb",
+									true,
+								},
+							},
+							gVar = "ACR_RikuNIN3_Hotbar_ShadeShift",
+							uuid = "a831b780-c5ee-9361-8df8-de05799e55c7",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								30,
+							},
+							name = "Ninja",
+							uuid = "6f34a124-ba62-bef1-bf2c-72159a99b7eb",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Ninja personal mitigation",
+				mechanicTime = 532.4,
+				name = "[LPDU NIN] Shade Shift - Ultimate Relativity",
+				timeRange = true,
+				timelineIndex = 123,
+				timerEndOffset = -2,
+				timerStartOffset = -5,
+				uuid = "9a1717ac-6cda-791b-b58d-c82bfc2306fb",
 				version = 2,
 			},
 		},
