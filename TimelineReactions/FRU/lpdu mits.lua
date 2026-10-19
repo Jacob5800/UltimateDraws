@@ -609,6 +609,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16160,
 							conditions = 
 							{
@@ -623,8 +624,10 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfLight",
 							ignoreWeaveRules = true,
 							uuid = "3b9ca6c5-564d-972e-8a11-2e66a5aefb9f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -687,6 +690,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "051e83f9-bfd0-3696-9b2d-b9484a37e515",
 							version = 3,
 						},
@@ -800,6 +804,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -819,7 +824,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Reprisal",
 							uuid = "72d55b5a-ced0-264e-97f1-6aa2867d95b5",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -882,6 +889,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "6c7a0ef6-9382-6ced-8ad6-37fb9d80c44e",
 							version = 3,
 						},
@@ -1028,6 +1036,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36935,
 							conditions = 
 							{
@@ -1047,7 +1056,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Nebula",
 							uuid = "5933f545-6d03-e0ce-95f9-440afc1b841b",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -1121,6 +1132,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "1941584d-a89e-2513-9a44-1f9173bfdd07",
 							version = 3,
 						},
@@ -1318,6 +1330,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16142,
 							conditions = 
 							{
@@ -1338,8 +1351,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuGNB3_Hotbar_RoyalGuard",
 							ignoreWeaveRules = true,
 							uuid = "77f2aa5b-3d3a-075d-8612-c0ff281695bd",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -1431,6 +1446,7 @@ local tbl =
 							category = "Self",
 							conditionType = 13,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "6d615cee-cf5e-b81b-9c5c-f55576e17b1d",
 							version = 3,
 						},
@@ -1577,6 +1593,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -1596,7 +1613,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Rampart",
 							uuid = "d58d0e04-db0d-cf9a-a8c9-88a9258a07f1",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -1670,6 +1689,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "680ad3b0-2836-af42-8c66-c623f38fe72a",
 							version = 3,
 						},
@@ -1782,6 +1802,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25758,
 							conditions = 
 							{
@@ -1801,7 +1822,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfCorundumSelf",
 							uuid = "dcb95730-01cf-bfaa-8677-b9dff30fa7ce",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -1875,6 +1898,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "690994f6-c5bd-12c5-b267-62e1e48853c4",
 							version = 3,
 						},
@@ -2026,6 +2050,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "da1847ad-5649-9f5d-a002-649c6ca37e52",
 							version = 3,
 						},
@@ -2296,6 +2321,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -2315,7 +2341,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Rampart",
 							uuid = "7ca8b384-4717-8865-8295-485905665b16",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -2389,6 +2417,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "58cb8076-1fc2-8987-b5a0-30336577b3f1",
 							version = 3,
 						},
@@ -2532,6 +2561,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16140,
 							conditions = 
 							{
@@ -2551,7 +2581,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Camouflage",
 							uuid = "a5d9ec12-dccc-e9d7-9b45-6fb191948ee0",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -2625,6 +2657,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "8d2fa31e-1886-7c7e-ba58-84117873f7e0",
 							version = 3,
 						},
@@ -2743,6 +2776,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25758,
 							conditions = 
 							{
@@ -2767,7 +2801,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfCorundumSelf",
 							uuid = "13a92e34-78e9-c15c-86d4-b0b9bb831b02",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -2841,6 +2877,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "95b2daa2-d82f-b1fc-b9f2-130b49e07ba0",
 							version = 3,
 						},
@@ -3176,6 +3213,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16160,
 							conditions = 
 							{
@@ -3190,7 +3228,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfLight",
 							uuid = "2df2959c-c025-5d25-a0df-7e9d2e79c577",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -3253,6 +3293,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "16d46912-3124-94ae-a7cf-39d529b48d91",
 							version = 3,
 						},
@@ -3941,6 +3982,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -3960,7 +4002,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Reprisal",
 							uuid = "2781872d-1c24-706b-bb79-f25ed904f33c",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -4023,6 +4067,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "2aba8285-4f07-2b72-8ccc-c7acb480eb4c",
 							version = 3,
 						},
@@ -4201,6 +4246,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16160,
 							conditions = 
 							{
@@ -4215,7 +4261,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfLight",
 							uuid = "1fa65265-707e-a344-8a06-3498f3fd9347",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -4253,6 +4301,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "8383d845-d64e-6d9d-a515-2ce91dd3b859",
 							version = 3,
 						},
@@ -5176,6 +5225,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -5195,7 +5245,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Reprisal",
 							uuid = "f82e6a3b-a0fd-7f43-8467-5e8435ef1604",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -5258,6 +5310,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "a873bc6c-6938-7325-a151-a2c6aab24f8a",
 							version = 3,
 						},
@@ -5553,6 +5606,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16152,
 							conditions = 
 							{
@@ -5572,7 +5626,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Superbolide",
 							uuid = "6d7fa961-eee2-0b1c-af88-3caa153b01c3",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -5646,6 +5702,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "005d5f55-212f-59a8-856f-08b3cc94b120",
 							version = 3,
 						},
@@ -6061,6 +6118,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -6080,7 +6138,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Rampart",
 							uuid = "64961b15-a8ac-430a-96d8-11d3ec5877c5",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -6154,6 +6214,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "6a305978-ebd0-cb9c-97fe-1f21a3ef3791",
 							version = 3,
 						},
@@ -6267,6 +6328,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36935,
 							conditions = 
 							{
@@ -6286,7 +6348,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Nebula",
 							uuid = "da05d297-fb5f-ca19-8fec-2851aa5a3f3e",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -6360,6 +6424,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "4a2f7a5f-5811-c4b3-bff0-61853a4d4e2d",
 							version = 3,
 						},
@@ -6503,6 +6568,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16140,
 							conditions = 
 							{
@@ -6522,7 +6588,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Camouflage",
 							uuid = "ff30d166-2180-8f9d-bd00-2fa58a3536c3",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -6596,6 +6664,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "141eaa86-a3ac-b901-bbc8-437f50dbec31",
 							version = 3,
 						},
@@ -6709,6 +6778,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25758,
 							conditions = 
 							{
@@ -6728,7 +6798,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfCorundumSelf",
 							uuid = "46cbf89b-ba80-e347-9b34-835fc2e33e1e",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -6802,6 +6874,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "1532b74a-932a-fc13-8a21-b1762e3018be",
 							version = 3,
 						},
@@ -7088,6 +7161,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 32068,
 							conditions = 
 							{
@@ -7108,8 +7182,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuGNB3_Hotbar_ReleaseRoyalGuard",
 							ignoreWeaveRules = true,
 							uuid = "8c5ffed3-1e9c-96ce-a6d1-44e4fe73ecb2",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -7198,6 +7274,7 @@ local tbl =
 							category = "Self",
 							conditionType = 13,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "060a7f79-18cf-20d1-8c8b-4e5f849714a1",
 							version = 3,
 						},
@@ -7494,6 +7571,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16152,
 							conditions = 
 							{
@@ -7513,7 +7591,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Superbolide",
 							uuid = "c9739ea6-e36d-dcc4-9ce2-97e61f952214",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -7587,6 +7667,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "c5874b27-fbc0-50f5-85bd-6ae2385cb349",
 							version = 3,
 						},
@@ -8453,6 +8534,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -8472,7 +8554,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Reprisal",
 							uuid = "88fd61de-2cb5-3968-b20e-2d04da117410",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -8535,6 +8619,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "405a5bc3-785b-69ab-9dfd-84117571b349",
 							version = 3,
 						},
@@ -9059,6 +9144,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16160,
 							conditions = 
 							{
@@ -9073,7 +9159,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfLight",
 							uuid = "286ad62e-a6a7-25a5-bcb3-35ad1ddbfffb",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -9136,6 +9224,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "627794d8-f84c-7012-993a-6a86c2548ad3",
 							version = 3,
 						},
@@ -9340,6 +9429,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36935,
 							conditions = 
 							{
@@ -9359,7 +9449,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Nebula",
 							uuid = "c6974618-fc44-674d-bedf-6513cda804be",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -9433,6 +9525,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "60d03043-2232-f26b-89ae-6d48fe83ad39",
 							version = 3,
 						},
@@ -10012,6 +10105,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -10031,7 +10125,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Reprisal",
 							uuid = "9f658159-e90a-e333-8485-4fafffa9d1fd",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -10094,6 +10190,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "a27e415c-09d5-2b54-917f-3f4919192575",
 							version = 3,
 						},
@@ -10334,6 +10431,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -10353,7 +10451,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Rampart",
 							uuid = "c7e53c3e-89eb-6190-9761-58bf47bfbae7",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -10427,6 +10527,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "7fc875ec-ac82-0fea-b542-93753eb2214c",
 							version = 3,
 						},
@@ -11075,6 +11176,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -11094,7 +11196,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Reprisal",
 							uuid = "e49df7a6-916b-8646-8dd0-581fe29fdbed",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -11157,6 +11261,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "ae6e3de9-d37f-4678-8a73-e2a3366220ef",
 							version = 3,
 						},
@@ -11240,6 +11345,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16160,
 							conditions = 
 							{
@@ -11254,7 +11360,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfLight",
 							uuid = "1ef27a40-0fd7-140d-827b-fd8a0d5249b1",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -11292,6 +11400,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "937b350c-6c0b-910c-a1e7-de8420832c0f",
 							version = 3,
 						},
@@ -11904,6 +12013,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16160,
 							conditions = 
 							{
@@ -11918,7 +12028,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfLight",
 							uuid = "ca975f96-8981-b698-add1-7a1705d8defb",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -11956,6 +12068,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "409997db-4286-82ad-9bfb-752e409d1cc8",
 							version = 3,
 						},
@@ -12157,6 +12270,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -12176,7 +12290,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Reprisal",
 							uuid = "44458303-e895-031f-b2ff-fd67becedeed",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -12239,6 +12355,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "a075f23b-945d-2629-9592-8f62b91d7991",
 							version = 3,
 						},
@@ -12878,6 +12995,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -12897,7 +13015,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Reprisal",
 							uuid = "0a6b1435-6f49-87f6-925a-a27247aa0332",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -12960,6 +13080,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "123927cb-a01d-e508-8764-4d8887d3d0de",
 							version = 3,
 						},
@@ -13226,6 +13347,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16160,
 							conditions = 
 							{
@@ -13255,8 +13377,10 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfLight",
 							ignoreWeaveRules = true,
 							uuid = "1666fb9b-371a-7ae7-8433-44755b316b35",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -13360,6 +13484,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "9bc66d50-38b7-afb8-99c1-282d60ec6102",
 							version = 3,
 						},
@@ -13627,6 +13752,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -13646,7 +13772,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Reprisal",
 							uuid = "a400aeb7-5b6a-8161-b760-b9da4995e0ff",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -13709,6 +13837,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "a10f7098-8e6c-2227-9031-f1213fe2daf9",
 							version = 3,
 						},
@@ -14922,6 +15051,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -14941,7 +15071,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Reprisal",
 							uuid = "fb2f611d-e4d6-b12f-baa3-4647e40f34b5",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -15004,6 +15136,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "6c1496f6-28df-abd4-9de9-7576f191a72e",
 							version = 3,
 						},
@@ -15111,6 +15244,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16160,
 							conditions = 
 							{
@@ -15125,7 +15259,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfLight",
 							uuid = "d4c06039-f488-0dad-9d1b-312be8078329",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -15163,6 +15299,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "7ccefdde-4b50-1056-9981-26dd080e3ed4",
 							version = 3,
 						},
@@ -15582,6 +15719,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -15601,7 +15739,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Reprisal",
 							uuid = "fbe0379e-2825-b16f-bf6a-2c844662639e",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -15664,6 +15804,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "4e4a259a-1af2-12fa-9907-ca6d93149b44",
 							version = 3,
 						},
@@ -15747,6 +15888,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16160,
 							conditions = 
 							{
@@ -15761,7 +15903,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfLight",
 							uuid = "abb2fb6d-77e2-9aae-bae2-9ddeb491ae19",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -15799,6 +15943,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "5f29cf98-d1da-e35c-84de-fc709197fdaf",
 							version = 3,
 						},
@@ -16060,6 +16205,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -16079,7 +16225,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Rampart",
 							uuid = "fd4e09a2-27a2-4c29-9ed6-878d7208491f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -16153,6 +16301,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "d77235e6-8594-cd8a-b7a9-c0ce9c8999a8",
 							version = 3,
 						},
@@ -16266,6 +16415,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36935,
 							conditions = 
 							{
@@ -16285,7 +16435,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Nebula",
 							uuid = "2748f5a4-c697-c948-bb82-6178c32cc08f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -16359,6 +16511,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "735b8bc6-5d36-08fe-84df-879cdc5f75fc",
 							version = 3,
 						},
@@ -16502,6 +16655,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16140,
 							conditions = 
 							{
@@ -16521,7 +16675,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Camouflage",
 							uuid = "d66c16a3-03ea-3188-9863-fcf1d89d7beb",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -16595,6 +16751,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "6f541bd7-403b-5504-a768-ccf9963ad38f",
 							version = 3,
 						},
@@ -16708,6 +16865,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25758,
 							conditions = 
 							{
@@ -16727,7 +16885,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfCorundumSelf",
 							uuid = "48569a51-fde9-bdb8-b033-016e50894e31",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -16801,6 +16961,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "fb276a39-cdb7-11ad-92af-42f8a2abbff4",
 							version = 3,
 						},
@@ -16918,6 +17079,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25758,
 							conditions = 
 							{
@@ -16937,8 +17099,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfCorundumMouse",
 							targetType = "Other Tank",
 							uuid = "2f1dfe2b-aea5-814e-9d2f-0ee8d3133b82",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -17012,6 +17177,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "6f5da329-aa1c-957b-a7bb-3b99c31e8947",
 							version = 3,
 						},
@@ -17474,6 +17640,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -17493,7 +17660,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Reprisal",
 							uuid = "d0cef4ad-e8ad-371c-9954-27f47703410d",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -17556,6 +17725,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "105e5a35-966c-b793-b70d-d4bc9dccc76c",
 							version = 3,
 						},
@@ -17724,6 +17894,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -17743,7 +17914,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Rampart",
 							uuid = "5e7d9746-ec06-9f0c-9d47-8b3f0c5bbbfd",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -17817,6 +17990,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "41881321-f43a-80ab-9a28-134ede43e905",
 							version = 3,
 						},
@@ -17930,6 +18104,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36935,
 							conditions = 
 							{
@@ -17949,7 +18124,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Nebula",
 							uuid = "63aa10fb-d6d4-9c92-b77b-8fa52c4a53be",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -18023,6 +18200,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "d1f9b9ba-937e-f051-a15d-31898327d1da",
 							version = 3,
 						},
@@ -18166,6 +18344,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16140,
 							conditions = 
 							{
@@ -18185,7 +18364,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Camouflage",
 							uuid = "91c6f40c-0e0a-9a23-961b-30c0d5eba700",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -18259,6 +18440,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "3571fa8d-90d0-ca73-ae1d-b4121957c4bb",
 							version = 3,
 						},
@@ -18372,6 +18554,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25758,
 							conditions = 
 							{
@@ -18391,7 +18574,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfCorundumSelf",
 							uuid = "2b3df429-e575-8aac-adbf-09a91106a614",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -18465,6 +18650,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "6cfa93e8-abe3-06e7-b18e-13cb266387d9",
 							version = 3,
 						},
@@ -18582,6 +18768,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25758,
 							conditions = 
 							{
@@ -18601,8 +18788,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfCorundumMouse",
 							targetType = "Other Tank",
 							uuid = "ca58d04a-7e87-fa1a-a1c4-b69769a30d7f",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -18676,6 +18866,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "629845ae-135e-72b3-a725-48943f6ed033",
 							version = 3,
 						},
@@ -19243,6 +19434,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16160,
 							conditions = 
 							{
@@ -19257,7 +19449,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfLight",
 							uuid = "a9560702-45a8-277d-91e1-f0fa471b32f0",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -19295,6 +19489,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "6689ffc7-8cf1-f78e-bc38-c21357273449",
 							version = 3,
 						},
@@ -19407,6 +19602,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -19426,7 +19622,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Reprisal",
 							uuid = "26f4d2b9-25a0-6a9b-920c-e25191d10637",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -19489,6 +19687,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "464874fd-a955-3d05-8a1e-e5ce8940814f",
 							version = 3,
 						},
@@ -19849,6 +20048,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -19863,9 +20063,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Hotbar_ProvokeMouse",
 							targetContentID = 12809,
 							targetType = "ContentID",
 							uuid = "b7ca1607-b07f-e3fd-b4fb-7d8820f30e10",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -19928,6 +20131,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "662ec178-c1fc-bde7-8c60-6d39ff08939b",
 							version = 3,
 						},
@@ -20060,6 +20264,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16142,
 							conditions = 
 							{
@@ -20080,8 +20285,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuGNB3_Hotbar_RoyalGuard",
 							ignoreWeaveRules = true,
 							uuid = "3a558d34-d432-81a0-8983-72d2b084041f",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -20173,6 +20380,7 @@ local tbl =
 							category = "Self",
 							conditionType = 13,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "836982c9-e855-b501-b6fc-51f79d4c0a3e",
 							version = 3,
 						},
@@ -21160,6 +21368,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -21179,7 +21388,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Reprisal",
 							uuid = "29cbc19d-a54b-ecca-b455-379bec6c4258",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -21242,6 +21453,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "a13b13dd-d258-532d-b824-64dcabc245f8",
 							version = 3,
 						},
@@ -21373,6 +21585,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16160,
 							conditions = 
 							{
@@ -21387,7 +21600,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfLight",
 							uuid = "ed6f7199-551b-b52e-bff1-c560877c4a12",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -21450,6 +21665,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "6819f04f-246f-f83b-a0bd-1391bebcba8f",
 							version = 3,
 						},
@@ -21625,6 +21841,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16152,
 							conditions = 
 							{
@@ -21644,7 +21861,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Superbolide",
 							uuid = "58e55d7a-67d4-f4bc-8b40-bbcffe80e06a",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -21718,6 +21937,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "8896c6bb-07e2-dee7-9fae-1b7fcb9bf404",
 							version = 3,
 						},
@@ -21840,6 +22060,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25758,
 							conditions = 
 							{
@@ -21864,8 +22085,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfCorundumMouse",
 							targetType = "Other Tank",
 							uuid = "1d20a94b-cb95-6f97-bcf3-a0d2bfe56338",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -21939,6 +22163,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "e6494a79-a5a6-c3f2-8a40-85b4452506f3",
 							version = 3,
 						},
@@ -22063,6 +22288,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -22082,7 +22308,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Rampart",
 							uuid = "3de27a37-3c0f-04c3-b36f-3d5d7d8a624f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -22156,6 +22384,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "c3641e36-5b3c-7503-8ed4-629613a5496e",
 							version = 3,
 						},
@@ -22298,6 +22527,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16140,
 							conditions = 
 							{
@@ -22317,7 +22547,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Camouflage",
 							uuid = "7359dada-914e-1d4f-940c-25a41a0b204b",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -22391,6 +22623,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "960b2057-bc8f-fce3-8ff0-57b6ae04c271",
 							version = 3,
 						},
@@ -22503,6 +22736,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25758,
 							conditions = 
 							{
@@ -22522,7 +22756,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfCorundumSelf",
 							uuid = "1d484be4-af64-b2bf-895e-5c3891266902",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -22596,6 +22832,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "ba95a13a-abd5-ba10-bd46-678864c6d901",
 							version = 3,
 						},
@@ -23082,6 +23319,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16160,
 							conditions = 
 							{
@@ -23096,7 +23334,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfLight",
 							uuid = "7e6effe3-e0a3-e6f9-8134-90e3952a4571",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -23159,6 +23399,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "2ca07ce2-ba01-795a-947a-4800de35e896",
 							version = 3,
 						},
@@ -23271,6 +23512,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -23290,7 +23532,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Reprisal",
 							uuid = "6926f871-436c-8879-bbf3-cb41a52c7d0e",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -23353,6 +23597,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "cb6bc534-3039-031b-90e1-2e0d9377b825",
 							version = 3,
 						},
@@ -23498,6 +23743,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -23517,7 +23763,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Rampart",
 							uuid = "6dbf19ee-d4d3-821f-9ba9-5801334c5225",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -23591,6 +23839,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "b2311810-1bb0-763e-a3fb-b42b8dfafb61",
 							version = 3,
 						},
@@ -23733,6 +23982,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16140,
 							conditions = 
 							{
@@ -23752,7 +24002,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Camouflage",
 							uuid = "22138510-94f9-228e-9067-f8985802c0da",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -23826,6 +24078,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "db8c8526-e520-8189-b765-3c9365f66bc9",
 							version = 3,
 						},
@@ -23938,6 +24191,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25758,
 							conditions = 
 							{
@@ -23957,7 +24211,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfCorundumSelf",
 							uuid = "d28cad16-4613-562b-bfde-aeacdab7b816",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -24031,6 +24287,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "a54c4db1-3c7d-340e-85c7-1c1c10ecf7be",
 							version = 3,
 						},
@@ -24148,6 +24405,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25758,
 							conditions = 
 							{
@@ -24167,8 +24425,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfCorundumMouse",
 							targetType = "Other Tank",
 							uuid = "442a23e4-f362-7a04-8d3d-dc7a30404f4d",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -24242,6 +24503,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "e2c2f1e8-e43d-404a-9a56-d2c55ddc1a78",
 							version = 3,
 						},
@@ -24348,6 +24610,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -24362,9 +24625,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Hotbar_ProvokeMouse",
 							targetContentID = 12809,
 							targetType = "ContentID",
 							uuid = "94c5c0c4-0cc0-0a00-9591-4641b41a1c96",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -24427,6 +24693,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "74a6348d-e698-2f3e-9763-194548d39ef0",
 							version = 3,
 						},
@@ -24554,6 +24821,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "fb1764dd-d719-6982-a3ab-5a8138b3912a",
 							version = 3,
 						},
@@ -25184,6 +25452,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -25203,7 +25472,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Reprisal",
 							uuid = "28f0c9f7-d581-cc24-8ecc-98d329cbeec8",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -25266,6 +25537,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "de9c52d5-a565-4209-b8cb-62741b854447",
 							version = 3,
 						},
@@ -25487,6 +25759,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16160,
 							conditions = 
 							{
@@ -25501,7 +25774,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfLight",
 							uuid = "344ad568-8c59-a9be-b337-277f6fd95e0a",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -25564,6 +25839,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "151782fd-faea-a2b1-8986-9af74f196f7b",
 							version = 3,
 						},
@@ -25677,6 +25953,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36935,
 							conditions = 
 							{
@@ -25696,7 +25973,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Nebula",
 							uuid = "676343e2-8438-ce64-8fa5-738dc97e9e37",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -25770,6 +26049,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "da26d91d-274f-1e42-a2ab-cb7887a26bfb",
 							version = 3,
 						},
@@ -25898,6 +26178,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -25922,7 +26203,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Rampart",
 							uuid = "a8521924-8de3-b0d7-b42a-92e16ab347a8",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -26007,6 +26290,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "2d2ef7ec-67e5-f66e-9f85-33134696de59",
 							version = 3,
 						},
@@ -26220,6 +26504,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -26234,9 +26519,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Hotbar_ProvokeMouse",
 							targetContentID = 12809,
 							targetType = "ContentID",
 							uuid = "e3b99d18-1c14-9ff0-af0f-2f533b4bf32d",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -26299,6 +26587,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "929d64c4-bb1a-7a98-af31-dc21ae9c4922",
 							version = 3,
 						},
@@ -26405,6 +26694,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -26419,9 +26709,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Hotbar_ProvokeMouse",
 							targetContentID = 9832,
 							targetType = "ContentID",
 							uuid = "28aff691-ccfc-d9bc-a3b9-9483f9933403",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -26484,6 +26777,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "99c71ce7-4229-ae6e-b77a-1875d7952e9c",
 							version = 3,
 						},
@@ -27043,6 +27337,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -27062,7 +27357,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Reprisal",
 							uuid = "bae92cab-454b-cf37-804c-a6145d647b1e",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -27125,6 +27422,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "0e00b604-f03f-28ea-affc-92e80febbb56",
 							version = 3,
 						},
@@ -27270,6 +27568,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -27289,7 +27588,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Reprisal",
 							uuid = "814e80e1-699b-b536-916b-150ab4ea53ac",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -27352,6 +27653,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "41a1adbc-59af-d70b-9742-08f03940454f",
 							version = 3,
 						},
@@ -27497,6 +27799,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -27516,7 +27819,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Rampart",
 							uuid = "cd18d908-d311-af52-a8e3-3d43c241b89d",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -27590,6 +27895,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "a3416b50-62fa-728e-9e88-94159df19284",
 							version = 3,
 						},
@@ -27703,6 +28009,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16140,
 							conditions = 
 							{
@@ -27722,7 +28029,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Camouflage",
 							uuid = "18a2f1f6-33f4-524d-a0fa-4465276bbc75",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -27796,6 +28105,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "93f2649f-9e06-c994-ae34-e6bad44ce916",
 							version = 3,
 						},
@@ -27909,6 +28219,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25758,
 							conditions = 
 							{
@@ -27928,7 +28239,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfCorundumSelf",
 							uuid = "d4ae419b-5cb6-f8cb-ac23-7cd173d82ae5",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -28002,6 +28315,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "879bc886-ca8d-3ba1-a0f4-485341194c3e",
 							version = 3,
 						},
@@ -28120,6 +28434,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25758,
 							conditions = 
 							{
@@ -28139,8 +28454,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfCorundumMouse",
 							targetType = "Other Tank",
 							uuid = "ba6280f2-4179-5475-9e8d-94d9282acb97",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -28214,6 +28532,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "fc54c300-a0e3-ea09-a477-376eeb174bf9",
 							version = 3,
 						},
@@ -28288,6 +28607,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16160,
 							conditions = 
 							{
@@ -28302,7 +28622,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfLight",
 							uuid = "1fc6582a-d6dd-5be7-ab57-3e0cb545950c",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -28340,6 +28662,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "b7339814-9767-bc2d-bbea-30c822afc092",
 							version = 3,
 						},
@@ -28541,6 +28864,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -28555,9 +28879,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Hotbar_ProvokeMouse",
 							targetContentID = 13561,
 							targetType = "ContentID",
 							uuid = "b73b57ac-2598-a58f-a0f0-248919792226",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -28620,6 +28947,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "4c8f08dd-f1a6-b828-a3c0-2a29df41516a",
 							version = 3,
 						},
@@ -29050,6 +29378,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -29069,7 +29398,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Reprisal",
 							uuid = "7038806f-80ca-8e70-b763-df8eb3c88b00",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -29132,6 +29463,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "8109eba6-5176-8606-bd39-ac83089ab506",
 							version = 3,
 						},
@@ -29852,6 +30184,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16160,
 							conditions = 
 							{
@@ -29866,7 +30199,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfLight",
 							uuid = "54b6c758-2d31-e505-bf2b-efc8bda50174",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -29929,6 +30264,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "75e6a757-74f1-dcae-ac18-0bc8dd5c1ef3",
 							version = 3,
 						},
@@ -30042,6 +30378,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -30061,7 +30398,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Reprisal",
 							uuid = "752ed16e-e6d7-79ec-a606-986ae03a24b3",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -30124,6 +30463,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "ddca6f16-3484-afdb-8573-c8301f4dbdaf",
 							version = 3,
 						},
@@ -30289,6 +30629,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16152,
 							conditions = 
 							{
@@ -30308,7 +30649,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Superbolide",
 							uuid = "c32ff055-d394-c696-9217-28fab2ca854e",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -30382,6 +30725,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "bc4d5ae7-e84d-369e-ab98-6281d76d92c3",
 							version = 3,
 						},
@@ -30499,6 +30843,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25758,
 							conditions = 
 							{
@@ -30518,8 +30863,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfCorundumMouse",
 							targetType = "Other Tank",
 							uuid = "54f0ccb7-f6ac-f0a7-95be-0745709149e7",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -30593,6 +30941,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "63af333f-f12d-b52a-af8c-f2fbdb020ed0",
 							version = 3,
 						},
@@ -30705,6 +31054,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -30724,7 +31074,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Rampart",
 							uuid = "b6ac25c1-67e7-20e2-b0a2-30d0f2ee8f7f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -30798,6 +31150,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "8c69bc2a-ae64-8085-88e7-5f826aeee7c5",
 							version = 3,
 						},
@@ -30911,6 +31264,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36935,
 							conditions = 
 							{
@@ -30930,7 +31284,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Nebula",
 							uuid = "d6467347-6575-a100-b5d1-6a2bcecc351a",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -31004,6 +31360,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "d14f99df-acef-5340-b19e-1075b46aa261",
 							version = 3,
 						},
@@ -31147,6 +31504,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16140,
 							conditions = 
 							{
@@ -31166,7 +31524,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Camouflage",
 							uuid = "6461fb15-c5b5-fbbe-9730-83c69c8c126d",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -31240,6 +31600,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "5e5704b4-9874-5342-9751-83c672c0795a",
 							version = 3,
 						},
@@ -31353,6 +31714,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25758,
 							conditions = 
 							{
@@ -31372,7 +31734,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfCorundumSelf",
 							uuid = "c290daaa-63ca-b96c-ba06-1f7f9179cc8f",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -31446,6 +31810,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "4aec45fc-49a9-acd5-8fca-4e7850d4f9ae",
 							version = 3,
 						},
@@ -31551,6 +31916,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -31565,9 +31931,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Hotbar_ProvokeMouse",
 							targetContentID = 13561,
 							targetType = "ContentID",
 							uuid = "b60138b0-2394-ddb6-a082-9e991ca7b31e",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -31630,6 +31999,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "0224fce8-205b-18ff-adaf-89e0345ea52c",
 							version = 3,
 						},
@@ -31751,6 +32121,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -31770,9 +32141,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Hotbar_ProvokeMouse",
 							targetContentID = 13561,
 							targetType = "ContentID",
 							uuid = "7b8e2e3d-99a4-1aa3-93ac-7aa0b883ac6d",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -31852,6 +32226,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "f8d27df0-c9de-4e8e-a2b9-1a33d901cd18",
 							version = 3,
 						},
@@ -32237,6 +32612,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -32256,7 +32632,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Reprisal",
 							uuid = "fa159b96-3e24-2f32-b2bb-5c5c41aebdf2",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -32319,6 +32697,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "be9618d6-07c5-3495-8faf-3b92bdeb60b7",
 							version = 3,
 						},
@@ -32497,6 +32876,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -32516,7 +32896,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Reprisal",
 							uuid = "53845642-723c-a167-ad9a-0ebd8ea48496",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -32579,6 +32961,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "4d6ba6c7-6457-528d-aeca-1896fe43016d",
 							version = 3,
 						},
@@ -33468,6 +33851,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16160,
 							conditions = 
 							{
@@ -33482,7 +33866,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfLight",
 							uuid = "29318354-8f76-6dc7-8742-080c5010b81a",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -33545,6 +33931,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "a09df74c-19da-aa71-ace5-f0472abd377b",
 							version = 3,
 						},
@@ -33658,6 +34045,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -33677,7 +34065,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Reprisal",
 							uuid = "ef00e1f1-74f3-c6ff-8f84-b4d4a4972362",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -33740,6 +34130,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "5f54b877-b754-89ac-9193-57921a43f49a",
 							version = 3,
 						},
@@ -33905,6 +34296,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16152,
 							conditions = 
 							{
@@ -33924,7 +34316,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Superbolide",
 							uuid = "1199c266-6433-65f1-a101-462129f9f5ea",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -33998,6 +34392,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "c302e365-adec-c299-857e-4b5e99f67d8c",
 							version = 3,
 						},
@@ -34115,6 +34510,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25758,
 							conditions = 
 							{
@@ -34134,8 +34530,11 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfCorundumMouse",
 							targetType = "Other Tank",
 							uuid = "2e272af4-8ba3-01b2-8d91-4bb79eeabe13",
+							variableIsHover = true,
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -34209,6 +34608,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "bba3d15d-2f5c-22ba-9987-06060b31d250",
 							version = 3,
 						},
@@ -34321,6 +34721,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7531,
 							conditions = 
 							{
@@ -34340,7 +34741,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Rampart",
 							uuid = "de35b737-6a29-ee62-b8c2-406fbb3f0fd4",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -34414,6 +34817,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "6faae1ad-6891-ff0c-9e23-7987d48f1923",
 							version = 3,
 						},
@@ -34527,6 +34931,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 36935,
 							conditions = 
 							{
@@ -34546,7 +34951,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Nebula",
 							uuid = "553274db-756d-6431-b744-62e32af16593",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -34620,6 +35027,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "713b8cde-655e-0089-a41b-e1762fdc7645",
 							version = 3,
 						},
@@ -34763,6 +35171,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16140,
 							conditions = 
 							{
@@ -34782,7 +35191,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Camouflage",
 							uuid = "c80657f3-78c9-203a-ae9c-d85e5f4335b5",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -34856,6 +35267,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "0a96ab63-6055-08f5-8164-1a965fe7ddc0",
 							version = 3,
 						},
@@ -34969,6 +35381,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 25758,
 							conditions = 
 							{
@@ -34988,7 +35401,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfCorundumSelf",
 							uuid = "542114b5-59b9-a03a-ba5b-805dfba7477e",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -35062,6 +35477,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "b0e0a0f9-3b9b-14b9-9481-fd44498df6b7",
 							version = 3,
 						},
@@ -35167,6 +35583,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -35181,9 +35598,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Hotbar_ProvokeMouse",
 							targetContentID = 13561,
 							targetType = "ContentID",
 							uuid = "d5760efa-eeec-6a44-9324-9f6ef06d7fb5",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -35246,6 +35666,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "ccced3fe-589a-99d8-9b38-e038aff02b50",
 							version = 3,
 						},
@@ -35367,6 +35788,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7533,
 							conditions = 
 							{
@@ -35386,9 +35808,12 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Hotbar_ProvokeMouse",
 							targetContentID = 13561,
 							targetType = "ContentID",
 							uuid = "5ace0b48-98d1-aa96-94f4-a7044f900c7b",
+							variableIsHover = true,
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -35468,6 +35893,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "2b07b094-6bf7-e6ac-bcf7-90607d6fcdcf",
 							version = 3,
 						},
@@ -35853,6 +36279,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -35872,7 +36299,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Reprisal",
 							uuid = "69576c8e-5810-4c4e-b263-74d43f6ab01a",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -35935,6 +36364,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "8133fe45-2ae7-0f8a-be40-f586fb37e553",
 							version = 3,
 						},
@@ -36397,6 +36827,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7535,
 							conditions = 
 							{
@@ -36416,7 +36847,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_Reprisal",
 							uuid = "699994fd-91a9-aea2-b2e5-947b93318f19",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -36479,6 +36912,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "f04b5899-38a6-dd28-a709-f2952bf75c67",
 							version = 3,
 						},
@@ -37272,6 +37706,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 16160,
 							conditions = 
 							{
@@ -37286,7 +37721,9 @@ local tbl =
 									true,
 								},
 							},
+							gVar = "ACR_RikuGNB3_Tankbar_HeartOfLight",
 							uuid = "7ac38f53-5723-b0ed-8d71-5ca5fbfe6eeb",
+							variableTogglesType = 3,
 							version = 2.1,
 						},
 					},
@@ -37349,6 +37786,7 @@ local tbl =
 							conditionType = 13,
 							dequeueIfLuaFalse = true,
 							jobValue = "GUNBREAKER",
+							name = "Gunbreaker",
 							uuid = "a80262ee-4d84-57dc-8941-ae43ef96f945",
 							version = 3,
 						},

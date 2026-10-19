@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Converted 105 Gunbreaker LPDU mits actions to catalog-resolved Hotbar/Tankbar requests and named all 107 GNB-only job conditions Gunbreaker. Preserved Corundum/Provoke targets, timing and Reprisal range gates. (19-10-2026)
+
 - Added a living/targetable nearby-enemy filter within Reprisal's 5-yalm radius to all 100 tank Reprisal actions. Requests can wait for range within their existing timing window. (19-10-2026)
 
 - GNB - FRU V3 now seeds unset tank GUI values when selected/inherited: MT Halo, OT Apocalypse, MT Somber invuln-both, OT first P5 invuln. Custom values and Akh Morn groupings are preserved; GUI explains the profile defaults and ACR/roster role alignment. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - Tank settings now retain all selected groupings and an independent P5 invuln order. Active/inherited LPDU mits adds an OK-acknowledged cooldown-plan warning popup and copyable details; users without LPDU mits receive no mitigation-plan popup. Checks estimate recovery across the selected tank schedule rather than adding combat cooldown conditions. (19-10-2026)
 
 - LPDU mits: changed all six PLD Passage of Arms usages to manual-use alerts with voice reminders, and converted 116 DRK-specific actions to catalog-resolved ACR Hotbar/Tankbar requests while preserving timing, role gates, and support targets. (19-10-2026)
-
-- Added boss world-text labels and continuous countdowns for Diamond Dust look-away and both Shiva cleaves; the second cleave timer appears after the first hit. (19-10-2026)
 
 ### UWU: LPDU
 
