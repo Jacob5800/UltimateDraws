@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Renamed Restore saved settings to Load saved settings and added hover explanations for saved-plan loading and all seven tank settings, including which guidance/mitigation assignments change. (19-10-2026)
+
 - Fixed P4 tank-swap restriction to reject a solo first Akh Morn from either tank's GUI; the plan conflict is shared, while ordinary cooldown checks remain personal. (19-10-2026)
 
 - Active/inherited LPDU mits now rejects same-tank double-solo P4 Akh Morn and incompatible personal cooldown/PLD plans, restoring compatible settings with an OK explanation. Removing LPDU mits allows custom plans and bypasses these restrictions. (19-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - Added a solo-tank rejoin callout for both P4 Akh Morn sets when Morn Afah starts, prompting the selected solo tank to stack with the party for the final hit. (19-10-2026)
 
 - **UR middle guidance:** Removed the small bright-green destination circle from center-return guidance, preserving its arrow and the larger light-green mechanic circle. (19-10-2026)
-
-- **P4 Darklit potion:** The 738.2 reaction now uses the appropriate stat potion for all 21 supported combat jobs, alongside its existing reminder. (19-10-2026)
 
 ### UWU: LPDU
 
