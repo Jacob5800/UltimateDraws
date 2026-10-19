@@ -68,6 +68,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Fixed all 19 M1/M2 Feint assignments to read AnyoneCore Party Roster instead of legacy toolbox roles, including P1 Cyclonic Break and both Burnished Glory assignments. Combat confirmation pending. (19-10-2026)
+
 - WAR/GNB now reserve Nascent Flash/Heart of Corundum during Somber whenever the first Akh uses 7–1, including when supporting the other solo tank. First 4–4 and PLD/DRK support remain unchanged. Expanded cooldown checks pass all 864 grouping, role, job and partner inputs after GUI normalization; replay survival checks remain pending. (18-10-2026)
 
 - MT Darklit Reprisal now uses 731.2–732.2 and CT Reprisal 792.9–793.9, preserving recovery for second Akh Morn. Removed WAR’s unavailable second-Morn Shake request while retaining its late first-Morn shield; second-Morn coverage uses the agreed party plan. (18-10-2026)
@@ -85,8 +87,6 @@ TEA: Coming soon by Ton.
 - WAR/GNB reserve their P1 OT short for the first explosion instead of spending it on Powder support; MT avoids an unavailable repeated short and uses Rampart plus explosion extras. WAR/GNB also reserve their short when solo first Akh instead of giving Somber support. Removed redundant Dark Mind from the DRK second-Akh extras while retaining Oblation. (18-10-2026)
 
 - Moved the P2 120s personal window to 314.1-318.1 after accounting for the P1 sync. Split first P4 Akh Morn party mitigation: DRK/GNB stay early, PLD/WAR shields wait until 778.5-783.0 for Morn Afah; preceding Memory shields now use 658.1-661.1 to preserve cooldown margin. Wings reserves OT Rampart when either Akh set selects OT solo. Somber invuln automatically excludes PLD and updates linked P4/P5 ownership; two PLDs use Tank swap. (18-10-2026)
-
-- Added WAR FRU with selected WarNeverChange rotation controls, assigned MT/OT gates and inherited LPDU spreadsheet mitigation. Shared tanks receive four Sprint windows and three Shirk reactions triggered by the assigned OT Provoke. Added jump-hold releases for skipped P1 windows and after Apocalypse; source alternative WAR mitigations remain excluded. (18-10-2026)
 
 ### UWU: LPDU
 

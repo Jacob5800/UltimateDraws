@@ -181,6 +181,7 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_RikuSGE3_CD",
 							name = "[LPDU] M1 Feint Cyclonic Break",
 							targetType = "Enemy",
 							uuid = "73c57bc1-cf09-64aa-b3d8-4d0595943c83",
@@ -195,7 +196,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local p = TensorCore.mGetPlayer()\nlocal r = GetRole(\"M1\")\nreturn p ~= nil and r ~= nil and p.id == r.id",
+							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
 							dequeueIfLuaFalse = true,
 							name = "M1 roster",
 							uuid = "50ec78ac-fcd6-376d-8665-9a799f9eb2d0",
@@ -3626,7 +3627,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local p = TensorCore.mGetPlayer()\nlocal r = GetRole(\"M2\")\nreturn p ~= nil and r ~= nil and p.id == r.id",
+							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
 							dequeueIfLuaFalse = true,
 							name = "M2 roster",
 							uuid = "5395384b-522c-8468-afe0-cf17a07bbc8c",
@@ -4403,7 +4404,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local p = TensorCore.mGetPlayer()\nlocal r = GetRole(\"M1\")\nreturn p ~= nil and r ~= nil and p.id == r.id",
+							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
 							dequeueIfLuaFalse = true,
 							name = "M1 roster",
 							uuid = "2ecbf629-45ca-c9cd-b8e4-9ee4ab98ff3c",
@@ -7435,7 +7436,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local p = TensorCore.mGetPlayer()\nlocal r = GetRole(\"M2\")\nreturn p ~= nil and r ~= nil and p.id == r.id",
+							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
 							dequeueIfLuaFalse = true,
 							name = "M2 roster",
 							uuid = "2399ddf4-9bfa-5766-861b-33b17778dab7",
@@ -8905,7 +8906,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local p = TensorCore.mGetPlayer()\nlocal r = GetRole(\"M1\")\nreturn p ~= nil and r ~= nil and p.id == r.id",
+							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
 							dequeueIfLuaFalse = true,
 							name = "M1 roster",
 							uuid = "9bdb2d7d-a821-8c96-9005-cb3955374c0a",
@@ -10204,7 +10205,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local p = TensorCore.mGetPlayer()\nlocal r = GetRole(\"M2\")\nreturn p ~= nil and r ~= nil and p.id == r.id",
+							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
 							dequeueIfLuaFalse = true,
 							name = "M2 roster",
 							uuid = "cc77a7c8-359b-8aa8-a382-42b269bc50c9",
@@ -11680,7 +11681,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local p = TensorCore.mGetPlayer()\nlocal r = GetRole(\"M1\")\nreturn p ~= nil and r ~= nil and p.id == r.id",
+							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
 							dequeueIfLuaFalse = true,
 							name = "M1 roster",
 							uuid = "dda7d4ad-fbbc-d316-89d9-3331eb587f86",
@@ -12920,7 +12921,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local p = TensorCore.mGetPlayer()\nlocal r = GetRole(\"M1\")\nreturn p ~= nil and r ~= nil and p.id == r.id",
+							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
 							dequeueIfLuaFalse = true,
 							name = "M1 roster",
 							uuid = "a284b425-c4cc-715b-bca9-0b280b1ccb52",
@@ -14284,7 +14285,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local p = TensorCore.mGetPlayer()\nlocal r = GetRole(\"M2\")\nreturn p ~= nil and r ~= nil and p.id == r.id",
+							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
 							dequeueIfLuaFalse = true,
 							name = "M2 roster",
 							uuid = "0d2104f7-a71e-7346-9c43-80f52e8af953",
@@ -17413,7 +17414,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local p = TensorCore.mGetPlayer()\nlocal r = GetRole(\"M1\")\nreturn p ~= nil and r ~= nil and p.id == r.id",
+							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
 							dequeueIfLuaFalse = true,
 							name = "M1 roster",
 							uuid = "9a49c8cf-33e6-73eb-a006-fb21a5611817",
@@ -19498,7 +19499,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local p = TensorCore.mGetPlayer()\nlocal r = GetRole(\"M2\")\nreturn p ~= nil and r ~= nil and p.id == r.id",
+							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
 							dequeueIfLuaFalse = true,
 							name = "M2 roster",
 							uuid = "724a3e8c-7a68-ab9f-bc05-d07837a9aea4",
@@ -22890,7 +22891,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local p = TensorCore.mGetPlayer()\nlocal r = GetRole(\"M1\")\nreturn p ~= nil and r ~= nil and p.id == r.id",
+							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
 							dequeueIfLuaFalse = true,
 							name = "M1 roster",
 							uuid = "e4f19d36-8f7a-4359-b2ff-843e8bc6d5f6",
@@ -24944,7 +24945,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local p = TensorCore.mGetPlayer()\nlocal r = GetRole(\"M2\")\nreturn p ~= nil and r ~= nil and p.id == r.id",
+							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
 							dequeueIfLuaFalse = true,
 							name = "M2 roster",
 							uuid = "af303233-021a-8a3a-b182-e716811be83f",
@@ -26772,7 +26773,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local p = TensorCore.mGetPlayer()\nlocal r = GetRole(\"M1\")\nreturn p ~= nil and r ~= nil and p.id == r.id",
+							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
 							dequeueIfLuaFalse = true,
 							name = "M1 roster",
 							uuid = "f5c82fd6-245c-7994-9de5-44bbff77f5a1",
@@ -27518,7 +27519,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local p = TensorCore.mGetPlayer()\nlocal r = GetRole(\"M2\")\nreturn p ~= nil and r ~= nil and p.id == r.id",
+							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
 							dequeueIfLuaFalse = true,
 							name = "M2 roster",
 							uuid = "9b985e35-4754-cb45-9270-293bd476cb11",
@@ -30497,7 +30498,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local p = TensorCore.mGetPlayer()\nlocal r = GetRole(\"M1\")\nreturn p ~= nil and r ~= nil and p.id == r.id",
+							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
 							dequeueIfLuaFalse = true,
 							name = "M1 roster",
 							uuid = "88ded3d5-c27e-dcc5-9759-23ae0e893c6c",
@@ -31128,7 +31129,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local p = TensorCore.mGetPlayer()\nlocal r = GetRole(\"M2\")\nreturn p ~= nil and r ~= nil and p.id == r.id",
+							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
 							dequeueIfLuaFalse = true,
 							name = "M2 roster",
 							uuid = "f12a8ccb-b3bb-86d5-801d-76e8374d8a6b",
@@ -33691,7 +33692,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local p = TensorCore.mGetPlayer()\nlocal r = GetRole(\"M1\")\nreturn p ~= nil and r ~= nil and p.id == r.id",
+							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
 							dequeueIfLuaFalse = true,
 							name = "M1 roster",
 							uuid = "1922dbd6-fb92-0cee-8e02-a8302228bf17",
@@ -34647,7 +34648,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local p = TensorCore.mGetPlayer()\nlocal r = GetRole(\"M2\")\nreturn p ~= nil and r ~= nil and p.id == r.id",
+							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
 							dequeueIfLuaFalse = true,
 							name = "M2 roster",
 							uuid = "06a0a777-8a69-8b81-9e55-0b5fb5fdf97d",
