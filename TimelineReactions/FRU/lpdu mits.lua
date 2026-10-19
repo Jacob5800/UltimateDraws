@@ -385,6 +385,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7405,
 							conditions = 
 							{
@@ -405,8 +406,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
 							name = "[LPDU] R2 Troubadour - Cyclonic Break",
 							uuid = "d21a39e3-84b5-0889-96ff-150f0d457261",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -587,6 +590,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7408,
 							conditions = 
 							{
@@ -602,8 +606,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
 							name = "[LPDU] Nature's Minne Cyclonic Break",
 							uuid = "9dac7927-0950-4263-af69-ed93a53ae8d4",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -3255,6 +3261,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7405,
 							conditions = 
 							{
@@ -3275,8 +3282,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
 							name = "[LPDU] R1 Troubadour - Burnished Glory 1",
 							uuid = "fadc4d80-baa2-8483-9fbe-06e4f0a0e254",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -4528,6 +4537,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7405,
 							conditions = 
 							{
@@ -4548,8 +4558,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
 							name = "[LPDU] R1 Troubadour - Burnished Glory 2",
 							uuid = "28a16f0b-dcf3-a870-9d04-0cdef97695e3",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -7490,6 +7502,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7408,
 							conditions = 
 							{
@@ -7505,8 +7518,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
 							name = "[LPDU] Nature's Minne Diamond Dust",
 							uuid = "3334c4f0-b8f4-cfef-a91a-d9e4a134f1c8",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -7706,6 +7721,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7405,
 							conditions = 
 							{
@@ -7726,8 +7742,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
 							name = "[LPDU] R2 Troubadour - Diamond Dust",
 							uuid = "7ecdf836-c9cb-65b2-922e-88bd30aa3dc5",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -8192,6 +8210,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7405,
 							conditions = 
 							{
@@ -8212,8 +8231,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
 							name = "[LPDU] R1 Troubadour - Diamond Dust Knockback",
 							uuid = "cc86e535-4a83-e5d5-bade-78e2e31fc349",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -9108,6 +9129,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7405,
 							conditions = 
 							{
@@ -9128,8 +9150,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
 							name = "[LPDU] R2 Troubadour - Hallowed Ray",
 							uuid = "5e4c9693-8769-5a5a-939d-f3bdf8ae1d88",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -10708,6 +10732,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7405,
 							conditions = 
 							{
@@ -10728,8 +10753,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
 							name = "[LPDU] R1 Troubadour - Light Rampant",
 							uuid = "82792e75-fd04-cb66-92b0-923f84f7f8bc",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -10981,6 +11008,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7408,
 							conditions = 
 							{
@@ -10996,8 +11024,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
 							name = "[LPDU] Nature's Minne Light Rampant",
 							uuid = "d6d9dc27-4ad5-91d9-871d-b0edb2f836d7",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -11744,6 +11774,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7405,
 							conditions = 
 							{
@@ -11764,8 +11795,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
 							name = "[LPDU] R2 Troubadour - Absolute Zero",
 							uuid = "94eb74ca-534c-5af0-8912-9d7e6ec4f2e1",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -12987,6 +13020,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7408,
 							conditions = 
 							{
@@ -13002,8 +13036,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
 							name = "[LPDU] Nature's Minne Ultimate Relativity",
 							uuid = "25d12872-8cd1-bc55-bd9e-f09394d6b260",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -13203,6 +13239,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7405,
 							conditions = 
 							{
@@ -13223,8 +13260,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
 							name = "[LPDU] R2 Troubadour - Ultimate Relativity",
 							uuid = "5c171d25-e527-5572-a3f9-66077d29d400",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -13633,6 +13672,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7405,
 							conditions = 
 							{
@@ -13653,8 +13693,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
 							name = "[LPDU] R1 Troubadour - Dark Fire III",
 							uuid = "2234002b-af5f-9ed6-b78f-968799a6a985",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -17339,6 +17381,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7408,
 							conditions = 
 							{
@@ -17354,8 +17397,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
 							name = "[LPDU] Nature's Minne Shockwave Pulsar + Memory's End",
 							uuid = "e936dc79-1ac0-d52e-8305-1169f60c0bbc",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -17702,6 +17747,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7405,
 							conditions = 
 							{
@@ -17722,8 +17768,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
 							name = "[LPDU] R2 Troubadour - Shockwave Pulsar + Memory's End",
 							uuid = "0a97c854-d8e9-4a07-a4eb-2ebf0538be43",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -19298,6 +19346,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7405,
 							conditions = 
 							{
@@ -19318,8 +19367,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
 							name = "[LPDU] R1 Troubadour - Darklit Dragonsong",
 							uuid = "c9bac720-1c1b-aea6-9044-9f3d0ecb4d65",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -21164,6 +21215,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7405,
 							conditions = 
 							{
@@ -21184,8 +21236,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
 							name = "[LPDU] R2 Troubadour - P4 Akh Morn 1",
 							uuid = "5d233b34-4390-b9f4-8474-f5abe240f0a0",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -23185,6 +23239,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7405,
 							conditions = 
 							{
@@ -23205,8 +23260,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
 							name = "[LPDU] R1 Troubadour - Crystallize Time Rewind",
 							uuid = "0961687b-f1e0-5063-8c71-6a09b308106a",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -23458,6 +23515,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7408,
 							conditions = 
 							{
@@ -23473,8 +23531,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
 							name = "[LPDU] Nature's Minne Crystallize Time",
 							uuid = "3d277800-6774-1130-bf8d-ddb42fa03cce",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -25026,6 +25086,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7405,
 							conditions = 
 							{
@@ -25046,8 +25107,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
 							name = "[LPDU] R2 Troubadour - P4 Akh Morn 2 + Morn Afah",
 							uuid = "368d356a-84fe-5e3f-8044-08556eea0a40",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -26857,6 +26920,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7405,
 							conditions = 
 							{
@@ -26877,8 +26941,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
 							name = "[LPDU] R1 Troubadour - Fulgent Blade 1",
 							uuid = "fc720ea6-0097-5d27-8285-d0a5d44539b8",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -27330,6 +27396,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7405,
 							conditions = 
 							{
@@ -27350,8 +27417,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
 							name = "[LPDU] R2 Troubadour - P5 Akh Morn 1",
 							uuid = "4e887d22-410e-5c6c-b7e6-8df72e5011e3",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -29896,6 +29965,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7408,
 							conditions = 
 							{
@@ -29911,8 +29981,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
 							name = "[LPDU] Nature's Minne Polarizing Strikes 1",
 							uuid = "6a1c1be2-3ccf-c312-a448-e555e40b00c2",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -30588,6 +30660,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7405,
 							conditions = 
 							{
@@ -30608,8 +30681,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
 							name = "[LPDU] R1 Troubadour - Fulgent Blade 2",
 							uuid = "60268de7-656d-b847-a5a9-68864775e0aa",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -30874,6 +30949,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7405,
 							conditions = 
 							{
@@ -30894,8 +30970,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
 							name = "[LPDU] R2 Troubadour - P5 Akh Morn 2",
 							uuid = "87beaf15-b1bb-7c18-920b-e830ed4256d5",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -33441,6 +33519,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7408,
 							conditions = 
 							{
@@ -33456,8 +33535,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
 							name = "[LPDU] Nature's Minne Polarizing Strikes 2",
 							uuid = "09a9a3dc-7035-d9e6-b815-58130be7ec4e",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -33788,6 +33869,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7405,
 							conditions = 
 							{
@@ -33808,8 +33890,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
 							name = "[LPDU] R1 Troubadour - Fulgent Blade 3",
 							uuid = "4b7ceb08-3136-7477-9108-d3d743f287ef",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -34471,6 +34555,7 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "ACR",
 							actionID = 7405,
 							conditions = 
 							{
@@ -34491,8 +34576,10 @@ local tbl =
 								},
 							},
 							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
 							name = "[LPDU] R2 Troubadour - P5 Akh Morn 3",
 							uuid = "6583cbe8-4ac7-5d6e-a05d-21a061a6b899",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
