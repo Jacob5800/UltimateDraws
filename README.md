@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Fixed Fall of Faith lightning-tether handoffs that clear with a changed tether ID, restoring the third/fourth player's personal blue circle and swap guidance. (21-10-2026)
+
 - Added spoken Diamond Dust Scythe Kick calls: In, then spread on cast start, followed by Spread when the kick resolves. (20-10-2026)
 
 - The large P1 left/right stack-side arrow now clears when the move-in step begins; the inward movement arrow remains. (20-10-2026)
@@ -94,8 +96,6 @@ TEA: Coming soon by Ton.
 - Removed the bright green personal conga destination circle to reduce confusion; the conga arrow remains. (20-10-2026)
 
 - P2 crystals now offer ACR default, focused crystal damage, or early AoE followed by focus after the first Blizzard. Previous AoE settings are restored afterward. Opening Diamond Dust calls and their assignment draw no longer depend on the inherited settings gate. (20-10-2026)
-
-- Converted 106 Paladin LPDU mits actions to catalog-resolved Hotbar/Tankbar requests and named all 122 PLD-only job conditions Paladin. Preserved targeted Intervention/Provoke, Reprisal range gates and all six manual Passage of Arms alerts. (19-10-2026)
 
 
 ### UWU: LPDU
