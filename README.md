@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Red-mirror tank/melee positions now flip with the ranged mirror's side, keeping the TDDT MT solo spot toward ranged and OT/M2 away from them. (21-10-2026)
+
 - Fixed Fall of Faith lightning-tether handoffs that clear with a changed tether ID, restoring the third/fourth player's personal blue circle and swap guidance. (21-10-2026)
 
 - Added spoken Diamond Dust Scythe Kick calls: In, then spread on cast start, followed by Spread when the kick resolves. (20-10-2026)
@@ -94,8 +96,6 @@ TEA: Coming soon by Ton.
 - Added an earlier personal Diamond Dust knockback call around 246.5s: left/right toward the assigned arrow while facing Shiva, or the landing compass side if already lined up. (20-10-2026)
 
 - Removed the bright green personal conga destination circle to reduce confusion; the conga arrow remains. (20-10-2026)
-
-- P2 crystals now offer ACR default, focused crystal damage, or early AoE followed by focus after the first Blizzard. Previous AoE settings are restored afterward. Opening Diamond Dust calls and their assignment draw no longer depend on the inherited settings gate. (20-10-2026)
 
 
 ### UWU: LPDU
