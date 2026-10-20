@@ -3082,7 +3082,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "if data.lpdu_p2_inout == nil then data.lpdu_p2_inout = 0 end --in\nself.used = true",
+							actionLua = "if data.lpdu_p2_inout == nil then data.lpdu_p2_inout = 0 end --in\nAnyoneCore.Shotcall(\"In, then spread\",true,3,true)\nself.used = true",
 							conditions = 
 							{
 								
@@ -3268,6 +3268,65 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "[TTS] Move In",
+				uuid = "5abd791e-3158-9f23-a5f7-12b0f7fda71d",
+				version = 2,
+			},
+			inheritedObjectUUID = "e9d15a2b-36f8-11e0-8eea-6a750547fed9",
+			inheritedOverwrites = 
+			{
+				actions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								aType = "Lua",
+								actionLua = "AnyoneCore.Shotcall(\"Spread\",true,2.5,true)\nself.used=true",
+								conditions = 
+								{
+									
+									{
+										"6c7ef435-ebb9-286b-8cfe-aa5a4db80ec3",
+										true,
+									},
+								},
+								name = "Scythe follow-up spread call",
+								uuid = "687645a4-66f1-4285-b7a4-74048b5c2135",
+								version = 2.1,
+							},
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								category = "Event",
+								dequeueIfLuaFalse = true,
+								eventArgType = 2,
+								eventSpellID = 40203,
+								name = "Scythe Kick resolved",
+								uuid = "6c7ef435-ebb9-286b-8cfe-aa5a4db80ec3",
+								version = 3,
+							},
+						},
+					},
+				},
+			},
 		},
 	},
 	[47] = 
