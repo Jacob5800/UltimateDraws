@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Added personal Fall of Faith helper steps anchored to the active tether player: red fire-stack markers or blue lightning left/middle/right markers, with movement arrows and personal calls as the bait changes. (21-10-2026)
+
 - Extended the P1 Burnt Strike move-in arrow by 0.3 seconds for clearer follow-through. (21-10-2026)
 
 - Scythe Diamond Dust calls now distinguish marked players (In, then spread / Spread) from unmarked players (In, then stay in / Stay in), with the duplicate inherited opening call suppressed for this pattern. (21-10-2026)
@@ -94,8 +96,6 @@ TEA: Coming soon by Ton.
 - Added P2 mirror spread order: TDDT remains the LPDU default; DTTD swaps same-group tank/melee positions for both blue and red mirrors. The phase sections now use simple P2/P3/P4/P5 headings. (20-10-2026)
 
 - Fall of Faith red/blue bait circles now appear only for your own active tether turn; other players' circles and waiting-turn circles are hidden. (20-10-2026)
-
-- Combined crystal and tank settings into one phase-organized window. Collapse P2/P3/P4/P5 independently; tank sections only appear on tank jobs, with each phase's relevant explanations alongside its controls. (20-10-2026)
 
 
 ### UWU: LPDU
