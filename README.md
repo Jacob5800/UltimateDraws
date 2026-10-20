@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Combined crystal and tank settings into one phase-organized window. Collapse P2/P3/P4/P5 independently; tank sections only appear on tank jobs, with each phase's relevant explanations alongside its controls. (20-10-2026)
+
 - Adjusted personal Fall of Faith conga arrows to the west-side lineup observed in debug logs, preserving H1 > H2 > MT > OT > M1 > M2 > R1 > R2 order. (20-10-2026)
 
 - Added an earlier personal Diamond Dust knockback call around 246.5s: left/right toward the assigned arrow while facing Shiva, or the landing compass side if already lined up. (20-10-2026)
@@ -95,7 +97,6 @@ TEA: Coming soon by Ton.
 
 - Converted 99 Warrior LPDU mits actions to live ACR Hotbar/Tankbar requests, preserving support and Provoke targets. Kept Holmgang explicitly self-targeted through native actions and named all 106 Warrior-only job conditions Warrior. (19-10-2026)
 
-- Renamed Restore saved settings to Load saved settings and added hover explanations for saved-plan loading and all seven tank settings, including which guidance/mitigation assignments change. (19-10-2026)
 
 ### UWU: LPDU
 
