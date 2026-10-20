@@ -2810,7 +2810,35 @@ local tbl =
 											true,
 										},
 									},
+									
+									{
+										position = 4,
+										type = "add",
+										value = 
+										{
+											"4b65143e-1895-7422-ae28-7df5cced6873",
+											true,
+										},
+									},
 								},
+							},
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								category = "Lua",
+								conditionLua = "return data.lpdu_p2_inout ~= nil and data.lpdu_p2_inout ~= 0",
+								name = "Not Scythe pattern",
+								uuid = "4b65143e-1895-7422-ae28-7df5cced6873",
+								version = 3,
 							},
 						},
 					},
@@ -3082,7 +3110,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "if data.lpdu_p2_inout == nil then data.lpdu_p2_inout = 0 end --in\nAnyoneCore.Shotcall(\"In, then spread\",true,3,true)\nself.used = true",
+							actionLua = "if data.lpdu_p2_inout == nil then data.lpdu_p2_inout = 0 end --in\nself.used = true",
 							conditions = 
 							{
 								
@@ -3145,7 +3173,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local p = TensorCore.mGetPlayer()\nlocal center = {x = 100, y = 0, z = 100}\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .25), 2)\nlocal index\nlocal heading2North = TensorCore.getHeadingToTarget(center, {x = 100, y = 0, z = 70})\n\n-- Resolve the player's LPDU party slot.\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current() == nil or not roster.isReady() or p == nil then\n    self.used = true\n    return\nend\nlocal mySlot = roster.mySlot()\nlocal myRole = (mySlot == \"T1\" and \"MT\") or (mySlot == \"T2\" and \"OT\") or mySlot\nif myRole == \"MT\" then index = 1\nelseif myRole == \"OT\" then index = 2\nelseif myRole == \"H1\" then index = 3\nelseif myRole == \"H2\" then index = 4\nelseif myRole == \"M1\" then index = 5\nelseif myRole == \"M2\" then index = 6\nelseif myRole == \"R1\" then index = 7\nelseif myRole == \"R2\" then index = 8\nelse\n    self.used = true\n    return\nend\n\n-- LPDU groups: G1 = T1/H1/M1/R1 (red/purple); G2 = T2/H2/M2/R2 (yellow/blue).\nlocal isMarked = false\nfor i = 1, #data.lpdu_p2_DD_marked do\n    if p.id == data.lpdu_p2_DD_marked[i] then\n        isMarked = true\n        break\n    end\nend\n\nlocal ent1 = TensorCore.mGetEntity(data.lpdu_p2_DD_icicle[1])\nif ent1 == nil or ent1.pos == nil then\n    self.used = true\n    return\nend\nlocal inout = data.lpdu_p2_inout -- 1: out, 0: in\nlocal intercard = math.abs(ent1.pos.x - 100) > 10 and math.abs(ent1.pos.z - 100) > 10\n\nlocal function getHeading(index, baseHeading, intercard)\n    local angleOffsetsCardinal = {0, -math.pi/2, math.pi/2, math.pi, math.pi/2, math.pi, 0, -math.pi/2}\n    local angleOffsetsIntercard = {math.pi/4, -math.pi/4, 3*math.pi/4, -3*math.pi/4, 3*math.pi/4, -3*math.pi/4, math.pi/4, -math.pi/4}\n    local offsets = intercard and angleOffsetsIntercard or angleOffsetsCardinal\n    return baseHeading + (offsets[index] or 0)\nend\n\nlocal heading\nif isMarked then\n    if intercard then\n        -- Marked and intercard: use the role's cardinal lane.\n        heading = getHeading(index, heading2North, false)\n    else\n        -- Marked and cardinal: use the role's intercardinal lane.\n        heading = getHeading(index, heading2North, true)\n    end\nelse\n    if intercard then\n        heading = getHeading(index, heading2North, true)\n    else\n        heading = getHeading(index, heading2North, false)\n    end\nend\n\n-- Keep the first role-selected arrow. The delayed return/opposing arrow is removed.\nlocal targetDistance\nif inout == 0 then\n    targetDistance = isMarked and 3 or 2\nelse\n    targetDistance = isMarked and 19 or 16\nend\nlocal targetPos = TensorCore.getPosInDirection(center, heading, targetDistance)\nlocal arrowLength = TensorCore.getDistance2d(center, targetPos) - 1\nif arrowLength > 0.1 then\n    green:addTimedArrow(5000, center.x, center.y, center.z, heading, arrowLength, 1, 1, 1, 0, true)\nend\n\nself.used = true",
+							actionLua = "local p = TensorCore.mGetPlayer()\nlocal center = {x = 100, y = 0, z = 100}\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .25), 2)\nlocal index\nlocal heading2North = TensorCore.getHeadingToTarget(center, {x = 100, y = 0, z = 70})\n\n-- Resolve the player's LPDU party slot.\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current() == nil or not roster.isReady() or p == nil then\n    self.used = true\n    return\nend\nlocal mySlot = roster.mySlot()\nlocal myRole = (mySlot == \"T1\" and \"MT\") or (mySlot == \"T2\" and \"OT\") or mySlot\nif myRole == \"MT\" then index = 1\nelseif myRole == \"OT\" then index = 2\nelseif myRole == \"H1\" then index = 3\nelseif myRole == \"H2\" then index = 4\nelseif myRole == \"M1\" then index = 5\nelseif myRole == \"M2\" then index = 6\nelseif myRole == \"R1\" then index = 7\nelseif myRole == \"R2\" then index = 8\nelse\n    self.used = true\n    return\nend\n\n-- LPDU groups: G1 = T1/H1/M1/R1 (red/purple); G2 = T2/H2/M2/R2 (yellow/blue).\nlocal isMarked = false\nfor i = 1, #data.lpdu_p2_DD_marked do\n    if p.id == data.lpdu_p2_DD_marked[i] then\n        isMarked = true\n        break\n    end\nend\n\nlocal ent1 = TensorCore.mGetEntity(data.lpdu_p2_DD_icicle[1])\nif ent1 == nil or ent1.pos == nil then\n    self.used = true\n    return\nend\nlocal inout = data.lpdu_p2_inout -- 1: out, 0: in\nif inout==0 then\n AnyoneCore.Shotcall(isMarked and \"In, then spread\" or \"In, then stay in\",true,3,true)\nend\nlocal intercard = math.abs(ent1.pos.x - 100) > 10 and math.abs(ent1.pos.z - 100) > 10\n\nlocal function getHeading(index, baseHeading, intercard)\n    local angleOffsetsCardinal = {0, -math.pi/2, math.pi/2, math.pi, math.pi/2, math.pi, 0, -math.pi/2}\n    local angleOffsetsIntercard = {math.pi/4, -math.pi/4, 3*math.pi/4, -3*math.pi/4, 3*math.pi/4, -3*math.pi/4, math.pi/4, -math.pi/4}\n    local offsets = intercard and angleOffsetsIntercard or angleOffsetsCardinal\n    return baseHeading + (offsets[index] or 0)\nend\n\nlocal heading\nif isMarked then\n    if intercard then\n        -- Marked and intercard: use the role's cardinal lane.\n        heading = getHeading(index, heading2North, false)\n    else\n        -- Marked and cardinal: use the role's intercardinal lane.\n        heading = getHeading(index, heading2North, true)\n    end\nelse\n    if intercard then\n        heading = getHeading(index, heading2North, true)\n    else\n        heading = getHeading(index, heading2North, false)\n    end\nend\n\n-- Keep the first role-selected arrow. The delayed return/opposing arrow is removed.\nlocal targetDistance\nif inout == 0 then\n    targetDistance = isMarked and 3 or 2\nelse\n    targetDistance = isMarked and 19 or 16\nend\nlocal targetPos = TensorCore.getPosInDirection(center, heading, targetDistance)\nlocal arrowLength = TensorCore.getDistance2d(center, targetPos) - 1\nif arrowLength > 0.1 then\n    green:addTimedArrow(5000, center.x, center.y, center.z, heading, arrowLength, 1, 1, 1, 0, true)\nend\n\nself.used = true",
 							conditions = 
 							{
 								
@@ -3290,7 +3318,7 @@ local tbl =
 							data = 
 							{
 								aType = "Lua",
-								actionLua = "AnyoneCore.Shotcall(\"Spread\",true,2.5,true)\nself.used=true",
+								actionLua = "local p=TensorCore.mGetPlayer()\nlocal marked=data.lpdu_p2_DD_marked\nif not p or not marked or #marked~=4 then return end\nlocal isMarked=false\nfor _,id in ipairs(marked) do if id==p.id then isMarked=true;break end end\nAnyoneCore.Shotcall(isMarked and \"Spread\" or \"Stay in\",true,2.5,true)\nself.used=true",
 								conditions = 
 								{
 									
@@ -3299,7 +3327,7 @@ local tbl =
 										true,
 									},
 								},
-								name = "Scythe follow-up spread call",
+								name = "Scythe personal follow-up call",
 								uuid = "687645a4-66f1-4285-b7a4-74048b5c2135",
 								version = 2.1,
 							},
