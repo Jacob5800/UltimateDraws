@@ -77,6 +77,10 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Adjusted personal Fall of Faith conga arrows to the west-side lineup observed in debug logs, preserving H1 > H2 > MT > OT > M1 > M2 > R1 > R2 order. (20-10-2026)
+
+- Added an earlier personal Diamond Dust knockback call around 246.5s: left/right toward the assigned arrow while facing Shiva, or the landing compass side if already lined up. (20-10-2026)
+
 - Removed the bright green personal conga destination circle to reduce confusion; the conga arrow remains. (20-10-2026)
 
 - P2 crystals now offer ACR default, focused crystal damage, or early AoE followed by focus after the first Blizzard. Previous AoE settings are restored afterward. Opening Diamond Dust calls and their assignment draw no longer depend on the inherited settings gate. (20-10-2026)
@@ -92,14 +96,6 @@ TEA: Coming soon by Ton.
 - Converted 99 Warrior LPDU mits actions to live ACR Hotbar/Tankbar requests, preserving support and Provoke targets. Kept Holmgang explicitly self-targeted through native actions and named all 106 Warrior-only job conditions Warrior. (19-10-2026)
 
 - Renamed Restore saved settings to Load saved settings and added hover explanations for saved-plan loading and all seven tank settings, including which guidance/mitigation assignments change. (19-10-2026)
-
-- Fixed P4 tank-swap restriction to reject a solo first Akh Morn from either tank's GUI; the plan conflict is shared, while ordinary cooldown checks remain personal. (19-10-2026)
-
-- Active/inherited LPDU mits now rejects same-tank double-solo P4 Akh Morn and incompatible personal cooldown/PLD plans, restoring compatible settings with an OK explanation. Removing LPDU mits allows custom plans and bypasses these restrictions. (19-10-2026)
-
-- Limited LPDU mits cooldown warnings to the player's own tank assignments, while retaining the party-level PLD/Hallowed restriction for the shared P4/P5 plan. (19-10-2026)
-
-- Tank settings now retain all selected groupings and an independent P5 invuln order. Active/inherited LPDU mits adds an OK-acknowledged cooldown-plan warning popup and copyable details; users without LPDU mits receive no mitigation-plan popup. Checks estimate recovery across the selected tank schedule rather than adding combat cooldown conditions. (19-10-2026)
 
 ### UWU: LPDU
 
