@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Extended the P1 Burnt Strike move-in arrow by 0.3 seconds for clearer follow-through. (21-10-2026)
+
 - Scythe Diamond Dust calls now distinguish marked players (In, then spread / Spread) from unmarked players (In, then stay in / Stay in), with the duplicate inherited opening call suppressed for this pattern. (21-10-2026)
 
 - Added a personal spoken Go out call alongside each Ultimate Relativity out-arrow step, including delayed steps. (21-10-2026)
@@ -94,8 +96,6 @@ TEA: Coming soon by Ton.
 - Fall of Faith red/blue bait circles now appear only for your own active tether turn; other players' circles and waiting-turn circles are hidden. (20-10-2026)
 
 - Combined crystal and tank settings into one phase-organized window. Collapse P2/P3/P4/P5 independently; tank sections only appear on tank jobs, with each phase's relevant explanations alongside its controls. (20-10-2026)
-
-- Adjusted personal Fall of Faith conga arrows to the west-side lineup observed in debug logs, preserving H1 > H2 > MT > OT > M1 > M2 > R1 > R2 order. (20-10-2026)
 
 
 ### UWU: LPDU

@@ -1965,7 +1965,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "-- The side-selection step ends here; preserve the separate inward arrow below.\nif data.lpduP1LargeSideArrow then\n Argus.deleteTimedShape(data.lpduP1LargeSideArrow)\n data.lpduP1LargeSideArrow=nil\nend\nlocal p=TensorCore.mGetPlayer();if not p or not p.pos then return end\nlocal point={x=100,y=p.pos.y,z=p.pos.z<100 and 95 or 105}\nlocal length=TensorCore.getDistance2d(p.pos,point)\nif length>.25 then\n local tip=math.min(1,length)\n local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.95),2)\n d:addTimedArrow(1000,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,point),math.max(.15,length-tip),.8,tip,1.7,0,false)\nend\nself.used=true",
+							actionLua = "-- The side-selection step ends here; preserve the separate inward arrow below.\nif data.lpduP1LargeSideArrow then\n Argus.deleteTimedShape(data.lpduP1LargeSideArrow)\n data.lpduP1LargeSideArrow=nil\nend\nlocal p=TensorCore.mGetPlayer();if not p or not p.pos then return end\nlocal point={x=100,y=p.pos.y,z=p.pos.z<100 and 95 or 105}\nlocal length=TensorCore.getDistance2d(p.pos,point)\nif length>.25 then\n local tip=math.min(1,length)\n local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.95),2)\n d:addTimedArrow(1300,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,point),math.max(.15,length-tip),.8,tip,1.7,0,false)\nend\nself.used=true",
 							conditions = 
 							{
 								
