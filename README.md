@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Fall of Faith red/blue bait circles now appear only for your own active tether turn; other players' circles and waiting-turn circles are hidden. (20-10-2026)
+
 - Combined crystal and tank settings into one phase-organized window. Collapse P2/P3/P4/P5 independently; tank sections only appear on tank jobs, with each phase's relevant explanations alongside its controls. (20-10-2026)
 
 - Adjusted personal Fall of Faith conga arrows to the west-side lineup observed in debug logs, preserving H1 > H2 > MT > OT > M1 > M2 > R1 > R2 order. (20-10-2026)
@@ -94,8 +96,6 @@ TEA: Coming soon by Ton.
 - Added a living/targetable nearby-enemy filter within Reprisal's 5-yalm radius to all 100 tank Reprisal actions. Requests can wait for range within their existing timing window. (19-10-2026)
 
 - GNB - FRU V3 now seeds unset tank GUI values when selected/inherited: MT Halo, OT Apocalypse, MT Somber invuln-both, OT first P5 invuln. Custom values and Akh Morn groupings are preserved; GUI explains the profile defaults and ACR/roster role alignment. (19-10-2026)
-
-- Converted 99 Warrior LPDU mits actions to live ACR Hotbar/Tankbar requests, preserving support and Provoke targets. Kept Holmgang explicitly self-targeted through native actions and named all 106 Warrior-only job conditions Warrior. (19-10-2026)
 
 
 ### UWU: LPDU
