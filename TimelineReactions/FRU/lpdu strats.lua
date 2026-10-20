@@ -2241,7 +2241,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local function finish()\n    self.used = true\nend\n\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current == nil or roster.mySlot == nil\n    or roster.isReady == nil or roster.current() == nil or not roster.isReady() then\n    finish()\n    return\nend\n\nlocal roleOrder = {\"H1\", \"H2\", \"T1\", \"T2\", \"M1\", \"M2\", \"R1\", \"R2\"}\nlocal mySlot = roster.mySlot()\nlocal slotIndex = nil\nfor index, slot in ipairs(roleOrder) do\n    if slot == mySlot then\n        slotIndex = index\n        break\n    end\nend\nif slotIndex == nil then\n    finish()\n    return\nend\n\nlocal player = TensorCore.mGetPlayer()\nif player == nil or player.pos == nil then\n    finish()\n    return\nend\n\n-- LPDU conga order runs north to south, with a compact line west of center.\nlocal target = {\n    x = 96,\n    y = player.pos.y or 0,\n    z = 91 + (slotIndex - 1) * 2.2\n}\nlocal start = {\n    x = player.pos.x,\n    y = player.pos.y or 0,\n    z = player.pos.z\n}\nlocal circleDrawer = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.35),2)\ncircleDrawer:addTimedCircle(18000,target.x,target.y+.03,target.z,.6,0,false,true)\nlocal distance = TensorCore.getDistance2d(start, target)\nif distance > 0.5 then\n    local drawer = TensorCore.getStaticDrawer(\n        GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .25), 2)\n    local heading = TensorCore.getHeadingToTarget(start, target)\n    local uuid = drawer:addTimedArrow(\n        18000, start.x, start.y, start.z, heading,\n        distance, 1, 1, 1, 0, true)\n    if uuid ~= nil then\n        data.frup1_lpdu_conga_setup = data.frup1_lpdu_conga_setup or {}\n        data.frup1_lpdu_conga_setup.arrowUUID = uuid\n    end\nend\n\nfinish()",
+							actionLua = "local function finish()\n    self.used = true\nend\n\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current == nil or roster.mySlot == nil\n    or roster.isReady == nil or roster.current() == nil or not roster.isReady() then\n    finish()\n    return\nend\n\nlocal roleOrder = {\"H1\", \"H2\", \"T1\", \"T2\", \"M1\", \"M2\", \"R1\", \"R2\"}\nlocal mySlot = roster.mySlot()\nlocal slotIndex = nil\nfor index, slot in ipairs(roleOrder) do\n    if slot == mySlot then\n        slotIndex = index\n        break\n    end\nend\nif slotIndex == nil then\n    finish()\n    return\nend\n\nlocal player = TensorCore.mGetPlayer()\nif player == nil or player.pos == nil then\n    finish()\n    return\nend\n\n-- LPDU conga order runs north to south, with a compact line west of center.\nlocal target = {\n    x = 96,\n    y = player.pos.y or 0,\n    z = 91 + (slotIndex - 1) * 2.2\n}\nlocal start = {\n    x = player.pos.x,\n    y = player.pos.y or 0,\n    z = player.pos.z\n}\nlocal distance = TensorCore.getDistance2d(start, target)\nif distance > 0.5 then\n    local drawer = TensorCore.getStaticDrawer(\n        GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .25), 2)\n    local heading = TensorCore.getHeadingToTarget(start, target)\n    local uuid = drawer:addTimedArrow(\n        18000, start.x, start.y, start.z, heading,\n        distance, 1, 1, 1, 0, true)\n    if uuid ~= nil then\n        data.frup1_lpdu_conga_setup = data.frup1_lpdu_conga_setup or {}\n        data.frup1_lpdu_conga_setup.arrowUUID = uuid\n    end\nend\n\nfinish()",
 							name = "[LPDU] Personal Conga Spot Arrow",
 							uuid = "07246596-8754-2c53-8245-da50c4d6aec5",
 							version = 2.1,
@@ -2719,6 +2719,108 @@ local tbl =
 		{
 			data = 
 			{
+				name = "[TTS] Echo DD",
+				uuid = "aa6d2d57-2e6c-4ea3-bbe7-eefbc1adc8aa",
+				version = 2,
+			},
+			inheritedObjectUUID = "246561ce-8481-b9a6-8102-4daf1e5999cd",
+			inheritedOverwrites = 
+			{
+				actions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								name = "Call Echo DD",
+								uuid = "42729676-34b4-bb1a-8c37-714765751594",
+								version = 2.1,
+							},
+							inheritedObjectUUID = "4754e4f4-8059-be92-ab5c-cf0cfc009430",
+							inheritedOverwrites = 
+							{
+								conditions = 
+								{
+									
+									{
+										type = "remove",
+										value = 
+										{
+											"f12ae74d-9c9e-015b-b190-93c2bf6906bd",
+											true,
+										},
+									},
+									
+									{
+										type = "remove",
+										value = 
+										{
+											"d8dda0ac-27ed-3353-9e5a-2728fb4cc0a2",
+											true,
+										},
+									},
+									
+									{
+										type = "remove",
+										value = 
+										{
+											"28f779b6-c801-b06b-93c2-17e2ec2c080c",
+											true,
+										},
+									},
+									
+									{
+										type = "remove",
+										value = 
+										{
+											"67525455-7005-96d9-9a6a-3eea7bc5d45a",
+											true,
+										},
+									},
+									
+									{
+										position = 1,
+										type = "add",
+										value = 
+										{
+											"d8dda0ac-27ed-3353-9e5a-2728fb4cc0a2",
+											true,
+										},
+									},
+									
+									{
+										position = 2,
+										type = "add",
+										value = 
+										{
+											"28f779b6-c801-b06b-93c2-17e2ec2c080c",
+											true,
+										},
+									},
+									
+									{
+										position = 3,
+										type = "add",
+										value = 
+										{
+											"67525455-7005-96d9-9a6a-3eea7bc5d45a",
+											true,
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		
+		{
+			data = 
+			{
 				name = "[Draw] Echo DD",
 				uuid = "fddc0885-4e93-a9c1-a4d2-5ae2c5ad77f3",
 				version = 2,
@@ -2726,6 +2828,95 @@ local tbl =
 			inheritedObjectUUID = "e5bf26cb-6d89-052c-9f8f-833c4311c96e",
 			inheritedOverwrites = 
 			{
+				actions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								name = "Draw Echo DD",
+								uuid = "846daf7e-396a-c4c3-88df-42e65b07631f",
+								version = 2.1,
+							},
+							inheritedObjectUUID = "4754e4f4-8059-be92-ab5c-cf0cfc009430",
+							inheritedOverwrites = 
+							{
+								conditions = 
+								{
+									
+									{
+										type = "remove",
+										value = 
+										{
+											"f12ae74d-9c9e-015b-b190-93c2bf6906bd",
+											true,
+										},
+									},
+									
+									{
+										type = "remove",
+										value = 
+										{
+											"d8dda0ac-27ed-3353-9e5a-2728fb4cc0a2",
+											true,
+										},
+									},
+									
+									{
+										type = "remove",
+										value = 
+										{
+											"28f779b6-c801-b06b-93c2-17e2ec2c080c",
+											true,
+										},
+									},
+									
+									{
+										type = "remove",
+										value = 
+										{
+											"67525455-7005-96d9-9a6a-3eea7bc5d45a",
+											true,
+										},
+									},
+									
+									{
+										position = 1,
+										type = "add",
+										value = 
+										{
+											"d8dda0ac-27ed-3353-9e5a-2728fb4cc0a2",
+											true,
+										},
+									},
+									
+									{
+										position = 2,
+										type = "add",
+										value = 
+										{
+											"28f779b6-c801-b06b-93c2-17e2ec2c080c",
+											true,
+										},
+									},
+									
+									{
+										position = 3,
+										type = "add",
+										value = 
+										{
+											"67525455-7005-96d9-9a6a-3eea7bc5d45a",
+											true,
+										},
+									},
+								},
+							},
+						},
+					},
+				},
 				enabled = false,
 			},
 		},
@@ -6037,6 +6228,126 @@ local tbl =
 				name = "[LPDU] Use potion - P2 adds",
 				timelineIndex = 102,
 				uuid = "ee06e3cc-2b15-ecb6-9737-164ffda79f2c",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "cac5044e-d9e5-c316-9665-ceac0038a178",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Crystal Damage",
+				uuid = "24540385-e12e-8765-b5e8-2ad3e32efa3c",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local timer=TensorReactions_CurrentTimer\nlocal settingsRoot=Settings or (_G and _G.Settings)\nlocal settings=settingsRoot and settingsRoot.FFXIVMINION\nif not settings then return end\nlocal mode=settings.LPDU_FRU_CrystalDamageMode or \"AoE then focus\"\nlocal target=TensorCore.mGetTarget()\nlocal side=target and target.contentid==13555\nlocal focus=side and timer>=418.8 and timer<466.4 and (mode==\"Focus assigned crystal\" or (mode==\"AoE then focus\" and timer>=423.6))\nif not focus then\nlocal s=data.lpduCrystalAOE\nif s then\n if _G[s.var]==false then _G[s.var]=s.previous end\n data.lpduCrystalAOE=nil\nend\n self.used=true return\nend\nif not data.lpduCrystalAOE then\n local toggles=TensorCore.API.TensorACR.getQuickToggles()\n if not toggles then return end\n for _,toggle in ipairs(toggles) do\n  if string.match(toggle.var,\"_AOE$\") and type(_G[toggle.var])==\"boolean\" then\n   data.lpduCrystalAOE={var=toggle.var,previous=_G[toggle.var]}\n   break\n  end\n end\nend\nlocal s=data.lpduCrystalAOE\nif s then _G[s.var]=false end\nself.used=true\n",
+							name = "[LPDU] P2 Crystals - Side Crystal AoE Control",
+							uuid = "f9c574c8-c43e-ab58-a1ce-5183d7300029",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU / Crystal Damage",
+				loop = true,
+				mechanicTime = 418.8,
+				name = "[LPDU] P2 Crystals - Side Crystal AoE Control",
+				timeRange = true,
+				timelineIndex = 102,
+				timerEndOffset = 81.2,
+				uuid = "811a4fd9-403c-9585-9880-8e58f6232c03",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.lpduCrystalAOE\nif s then\n if _G[s.var]==false then _G[s.var]=s.previous end\n data.lpduCrystalAOE=nil\nend\nself.used=true",
+							name = "[LPDU] Crystals - Restore AoE on Wipe",
+							uuid = "9724022f-0f9d-8f47-956f-663e86064faa",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU / Crystal Damage",
+				eventType = 9,
+				loop = true,
+				mechanicTime = 418.8,
+				name = "[LPDU] Crystals - Restore AoE on Wipe",
+				timeRange = true,
+				timelineIndex = 102,
+				timerEndOffset = 2000,
+				timerStartOffset = -1000,
+				uuid = "bbb6508b-af75-d3bd-8135-d643f61984e5",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.lpduCrystalAOE\nif s then\n if _G[s.var]==false then _G[s.var]=s.previous end\n data.lpduCrystalAOE=nil\nend\nself.used=true",
+							name = "[LPDU] Crystals - Restore AoE on Map Change",
+							uuid = "41c2e843-2c6a-ad10-b686-0562ca86249a",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU / Crystal Damage",
+				eventType = 11,
+				loop = true,
+				mechanicTime = 418.8,
+				name = "[LPDU] Crystals - Restore AoE on Map Change",
+				timeRange = true,
+				timelineIndex = 102,
+				timerEndOffset = 2000,
+				timerStartOffset = -1000,
+				uuid = "110a733d-3ed2-5f8a-b84c-2c313eea8951",
 				version = 2,
 			},
 		},
@@ -9364,6 +9675,60 @@ local tbl =
 				timerEndOffset = 30,
 				timerStartOffset = 23,
 				uuid = "4386a063-209c-9ef8-a195-7d99b61f5ec1",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "36c1b5e6-9deb-d5cc-8bd4-758f2b66a3d7",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Crystal Damage",
+				uuid = "eaa7af62-e79e-0336-9cfe-dec2c76a145d",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local rootSettings=Settings or (_G and _G.Settings)\nlocal settings=rootSettings and rootSettings.FFXIVMINION\nif not settings then return end\nlocal visible=GUI:Begin(\"[LPDU] FRU - Crystal Damage\",true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n local modes={\"ACR default\",\"Focus assigned crystal\",\"AoE then focus\"}\n local selected=settings.LPDU_FRU_CrystalDamageMode or \"AoE then focus\"\n local index=3\n for i,value in ipairs(modes) do if value==selected then index=i break end end\n local nextIndex=GUI:Combo(\"P2 crystal damage\",index,modes)\n if modes[nextIndex] then settings.LPDU_FRU_CrystalDamageMode=modes[nextIndex] end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"ACR default: no rotation override.\\nFocus assigned crystal: suppress AoE while a side Crystal of Light is targeted.\\nAoE then focus: allow early cleave; suppress AoE after the first Blizzard at synced timeline 423.6s (~4.8s after targetable).\\nYour target is never changed. Previous AoE setting is restored when leaving side crystals, at phase end, or after a wipe.\\nThe cutoff is a conservative strategy choice, not a measured per-job DPS optimum.\") end\nend\nGUI:End()\nself.used=true\n",
+							name = "[LPDU] P2 Crystals - Damage Mode Settings",
+							uuid = "3f21c767-8fba-7bc7-a89f-d96a240030ea",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU / Crystal Damage",
+				eventType = 13,
+				loop = true,
+				mechanicTime = 738.2,
+				name = "[LPDU] P2 Crystals - Damage Mode Settings",
+				timeRange = true,
+				timelineIndex = 166,
+				timerEndOffset = -723.2,
+				timerStartOffset = -800,
+				uuid = "ea50f665-77a9-57d4-bab5-e18f8556c356",
 				version = 2,
 			},
 		},
