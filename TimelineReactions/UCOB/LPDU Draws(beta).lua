@@ -1281,8 +1281,8 @@ local tbl =
 				name = "[LPDU] UCOB - Personal Assignment Settings",
 				timeRange = true,
 				timelineIndex = 4,
-				timerEndOffset = -1.3,
-				timerStartOffset = -16.299999237061,
+				timerEndOffset = -1.2999999523163,
+				timerStartOffset = -17,
 				uuid = "2d4a308e-6ea4-77d9-9d6c-934086d7a583",
 				version = 2,
 			},
@@ -2017,6 +2017,7 @@ local tbl =
 							aType = "Alert",
 							alertDuration = 4500,
 							alertPriority = 2,
+							alertTTS = true,
 							alertText = "Step into Neurolink",
 							conditions = 
 							{
@@ -2090,6 +2091,7 @@ local tbl =
 							aType = "Alert",
 							alertDuration = 4500,
 							alertPriority = 2,
+							alertTTS = true,
 							alertText = "Step into Neurolink",
 							conditions = 
 							{
@@ -2621,6 +2623,7 @@ local tbl =
 							aType = "Alert",
 							alertDuration = 4500,
 							alertPriority = 2,
+							alertTTS = true,
 							alertText = "Step into Neurolink",
 							conditions = 
 							{
@@ -2694,6 +2697,7 @@ local tbl =
 							aType = "Alert",
 							alertDuration = 4500,
 							alertPriority = 2,
+							alertTTS = true,
 							alertText = "Step into Neurolink",
 							conditions = 
 							{
@@ -3085,6 +3089,7 @@ local tbl =
 							aType = "Alert",
 							alertDuration = 4500,
 							alertPriority = 2,
+							alertTTS = true,
 							alertText = "Step into Neurolink",
 							conditions = 
 							{
@@ -3431,6 +3436,7 @@ local tbl =
 							aType = "Alert",
 							alertDuration = 4500,
 							alertPriority = 2,
+							alertTTS = true,
 							alertText = "Step into Neurolink",
 							conditions = 
 							{
@@ -3763,6 +3769,7 @@ local tbl =
 							aType = "Alert",
 							alertDuration = 4500,
 							alertPriority = 2,
+							alertTTS = true,
 							alertText = "Step into Neurolink",
 							conditions = 
 							{
@@ -4109,6 +4116,7 @@ local tbl =
 							aType = "Alert",
 							alertDuration = 4500,
 							alertPriority = 2,
+							alertTTS = true,
 							alertText = "Step into Neurolink",
 							conditions = 
 							{
@@ -5690,6 +5698,7 @@ local tbl =
 							aType = "Alert",
 							alertDuration = 2500,
 							alertPriority = 2,
+							alertTTS = true,
 							alertText = "Cleanse doom",
 							conditions = 
 							{
@@ -17002,6 +17011,7 @@ local tbl =
 							aType = "Alert",
 							alertDuration = 4500,
 							alertPriority = 2,
+							alertTTS = true,
 							alertText = "Step into Neurolink",
 							conditions = 
 							{
@@ -18126,6 +18136,7 @@ local tbl =
 							aType = "Alert",
 							alertDuration = 4500,
 							alertPriority = 2,
+							alertTTS = true,
 							alertText = "Step into Neurolink",
 							conditions = 
 							{
