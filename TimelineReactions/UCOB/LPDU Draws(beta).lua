@@ -779,7 +779,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return Settings.FFXIVMINION.LPDU_UCOB_PotionsEnabled ~= false",
+							conditionLua = "local rootSettings=Settings or (_G and _G.Settings)\nlocal ucobSettings=rootSettings and rootSettings.FFXIVMINION\nif not ucobSettings then return false end\nreturn ucobSettings.LPDU_UCOB_PotionsEnabled ~= false",
 							name = "LPDU potions enabled",
 							uuid = "3e99cdbc-a612-8fe5-9bbf-c8677bd386d3",
 							version = 3,
@@ -801,7 +801,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return Settings.FFXIVMINION.LPDU_UCOB_PotionOpener ~= false",
+							conditionLua = "local rootSettings=Settings or (_G and _G.Settings)\nlocal ucobSettings=rootSettings and rootSettings.FFXIVMINION\nif not ucobSettings then return false end\nreturn ucobSettings.LPDU_UCOB_PotionOpener ~= false",
 							name = "Opener potion enabled",
 							uuid = "619686bb-3385-b662-a561-13fbaf90924c",
 							version = 3,
@@ -1184,7 +1184,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local R=AnyoneCore and AnyoneCore.Roster\nif not R or not R.current() then return false end\nlocal slot=R.mySlot()\nlocal choice=Settings.FFXIVMINION.LPDU_UCOB_FirstFireballHealer or \"Unassigned\"\nif choice~=\"Unassigned\" then return false end\nreturn slot==\"H1\" or slot==\"H2\"",
+							conditionLua = "local rootSettings=Settings or (_G and _G.Settings)\nlocal ucobSettings=rootSettings and rootSettings.FFXIVMINION\nif not ucobSettings then return false end\nlocal R=AnyoneCore and AnyoneCore.Roster\nif not R or not R.current() then return false end\nlocal slot=R.mySlot()\nlocal choice=ucobSettings.LPDU_UCOB_FirstFireballHealer or \"Unassigned\"\nif choice~=\"Unassigned\" then return false end\nreturn slot==\"H1\" or slot==\"H2\"",
 							name = "healer roster slots",
 							uuid = "bb84d004-e7a2-0e85-b112-9b97cfcf38b4",
 							version = 3,
@@ -1264,7 +1264,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local settings=Settings.FFXIVMINION\nif not data.ucobAssignmentGuiOptions then\n data.ucobAssignmentGuiOptions={healer={\"Unassigned\",\"In\",\"Out\"},tower={\"Unassigned\",\"Close\",\"Far\"}}\nend\nlocal options=data.ucobAssignmentGuiOptions\nlocal healer=settings.LPDU_UCOB_FirstFireballHealer or \"Unassigned\"\nlocal R=AnyoneCore and AnyoneCore.Roster\nlocal slot=R and R.current() and R.mySlot() or nil\nlocal defaultTower=(slot==\"M1\" or slot==\"M2\") and \"Close\" or (slot==\"R1\" or slot==\"R2\") and \"Far\" or nil\noptions.tower[1]=defaultTower and (\"Auto: \"..defaultTower) or \"Auto (role)\"\nlocal tower=settings.LPDU_UCOB_BlackfireTower or \"Unassigned\"\nlocal hi=healer==\"In\" and 2 or healer==\"Out\" and 3 or 1\nlocal ti=tower==\"Close\" and 2 or tower==\"Far\" and 3 or 1\nlocal visible=GUI:Begin(\"[LPDU] UCOB - Assignments\",true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n GUI:PushItemWidth(150)\n GUI:Text(\"P1 Healer Fireball - DPS targeted\")\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"First Fireball only.\\nDPS targeted: use your chosen In/Out assignment.\\nHealer targeted: that healer goes in; the other stays out automatically.\\nUnassigned: agree which healer stays out.\\nBoth tanks stay out.\")\n end\n GUI:SameLine(255)\n local newH,changedH=GUI:Combo(\"##LPDUFirstFireballHealer\",hi,options.healer)\n if newH~=hi and options.healer[newH] then settings.LPDU_UCOB_FirstFireballHealer=options.healer[newH] end\n GUI:Text(\"P3 Blackfire DPS Tower\")\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Default: melee Close to Nael; ranged Far from Nael.\\nChoose Close/Far to override, or Auto to follow your roster role.\") end\n GUI:SameLine(255)\n local newT,changedT=GUI:Combo(\"##LPDUBlackfireTower\",ti,options.tower)\n if newT~=ti and options.tower[newT] then settings.LPDU_UCOB_BlackfireTower=newT==1 and \"Unassigned\" or options.tower[newT] end\n GUI:Text(\"Potions\")\n settings.LPDU_UCOB_PotionsEnabled=GUI:Checkbox(\"Enable LPDU potion schedule##UCOBPots\",settings.LPDU_UCOB_PotionsEnabled~=false)\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Uses your job's main-stat potion and normal weave rules.\\nWindows expire after 3 seconds; unavailable potions are skipped.\\nDisable duplicate potion automation in your job profile.\") end\n settings.LPDU_UCOB_PotionOpener=GUI:Checkbox(\"Opener potion##UCOBPotOpener\",settings.LPDU_UCOB_PotionOpener~=false)\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Disable for a three-potion route. Default opener: timeline 3.3s.\") end\n if not data.ucobPotionSecondOptions then data.ucobPotionSecondOptions={\"Late Nael\",\"Delayed Nael\",\"Bahamut opener\",\"After Blackfire\",\"Disabled / manual\"} end\n local potOptions=data.ucobPotionSecondOptions\n local second=settings.LPDU_UCOB_PotionSecond or \"Late Nael\"\n local secondIndex=1\n for i=1,#potOptions do if potOptions[i]==second then secondIndex=i break end end\n GUI:Text(\"Second potion window\")\n GUI:SameLine(255)\n local newSecond=GUI:Combo(\"##UCOBSecondPotion\",secondIndex,potOptions)\n if newSecond~=secondIndex and potOptions[newSecond] then settings.LPDU_UCOB_PotionSecond=potOptions[newSecond] end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Alternatives, not extra potions.\\nLate Nael 340.3 / Delayed Nael 368.9 / Bahamut opener 512.0 / After Blackfire 591.3.\\nAdds opener 845.8 and Late Golden 1366.6 remain enabled.\\nTimes are synced timeline coordinates, not seconds since pull.\\nReal cooldown or missing items can cause a window to be skipped.\") end\n GUI:PopItemWidth()\nend\nGUI:End()\nself.used=true",
+							actionLua = "local rootSettings=Settings or (_G and _G.Settings)\nlocal settings=rootSettings and rootSettings.FFXIVMINION\nif not settings then return end\nif not data.ucobAssignmentGuiOptions then\n data.ucobAssignmentGuiOptions={healer={\"Unassigned\",\"In\",\"Out\"},tower={\"Unassigned\",\"Close\",\"Far\"}}\nend\nlocal options=data.ucobAssignmentGuiOptions\nlocal healer=settings.LPDU_UCOB_FirstFireballHealer or \"Unassigned\"\nlocal R=AnyoneCore and AnyoneCore.Roster\nlocal slot=R and R.current() and R.mySlot() or nil\nlocal defaultTower=(slot==\"M1\" or slot==\"M2\") and \"Close\" or (slot==\"R1\" or slot==\"R2\") and \"Far\" or nil\noptions.tower[1]=defaultTower and (\"Auto: \"..defaultTower) or \"Auto (role)\"\nlocal tower=settings.LPDU_UCOB_BlackfireTower or \"Unassigned\"\nlocal hi=healer==\"In\" and 2 or healer==\"Out\" and 3 or 1\nlocal ti=tower==\"Close\" and 2 or tower==\"Far\" and 3 or 1\nlocal visible=GUI:Begin(\"[LPDU] UCOB - Assignments\",true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n GUI:PushItemWidth(150)\n GUI:Text(\"P1 Healer Fireball - DPS targeted\")\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"First Fireball only.\\nDPS targeted: use your chosen In/Out assignment.\\nHealer targeted: that healer goes in; the other stays out automatically.\\nUnassigned: agree which healer stays out.\\nBoth tanks stay out.\")\n end\n GUI:SameLine(255)\n local newH,changedH=GUI:Combo(\"##LPDUFirstFireballHealer\",hi,options.healer)\n if newH~=hi and options.healer[newH] then settings.LPDU_UCOB_FirstFireballHealer=options.healer[newH] end\n GUI:Text(\"P3 Blackfire DPS Tower\")\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Default: melee Close to Nael; ranged Far from Nael.\\nChoose Close/Far to override, or Auto to follow your roster role.\") end\n GUI:SameLine(255)\n local newT,changedT=GUI:Combo(\"##LPDUBlackfireTower\",ti,options.tower)\n if newT~=ti and options.tower[newT] then settings.LPDU_UCOB_BlackfireTower=newT==1 and \"Unassigned\" or options.tower[newT] end\n GUI:Text(\"Potions\")\n settings.LPDU_UCOB_PotionsEnabled=GUI:Checkbox(\"Enable LPDU potion schedule##UCOBPots\",settings.LPDU_UCOB_PotionsEnabled~=false)\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Uses your job's main-stat potion and normal weave rules.\\nWindows expire after 3 seconds; unavailable potions are skipped.\\nDisable duplicate potion automation in your job profile.\") end\n settings.LPDU_UCOB_PotionOpener=GUI:Checkbox(\"Opener potion##UCOBPotOpener\",settings.LPDU_UCOB_PotionOpener~=false)\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Disable for a three-potion route. Default opener: timeline 3.3s.\") end\n if not data.ucobPotionSecondOptions then data.ucobPotionSecondOptions={\"Late Nael\",\"Delayed Nael\",\"Bahamut opener\",\"After Blackfire\",\"Disabled / manual\"} end\n local potOptions=data.ucobPotionSecondOptions\n local second=settings.LPDU_UCOB_PotionSecond or \"Late Nael\"\n local secondIndex=1\n for i=1,#potOptions do if potOptions[i]==second then secondIndex=i break end end\n GUI:Text(\"Second potion window\")\n GUI:SameLine(255)\n local newSecond=GUI:Combo(\"##UCOBSecondPotion\",secondIndex,potOptions)\n if newSecond~=secondIndex and potOptions[newSecond] then settings.LPDU_UCOB_PotionSecond=potOptions[newSecond] end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Alternatives, not extra potions.\\nLate Nael 340.3 / Delayed Nael 368.9 / Bahamut opener 512.0 / After Blackfire 591.3.\\nAdds opener 845.8 and Late Golden 1366.6 remain enabled.\\nTimes are synced timeline coordinates, not seconds since pull.\\nReal cooldown or missing items can cause a window to be skipped.\") end\n GUI:PopItemWidth()\nend\nGUI:End()\nself.used=true",
 							name = "Assignment and potion settings",
 							uuid = "a7689b1f-29f6-541f-a839-c69ff7957246",
 							version = 2.1,
@@ -1282,7 +1282,7 @@ local tbl =
 				timeRange = true,
 				timelineIndex = 4,
 				timerEndOffset = -6,
-				timerStartOffset = -16.3,
+				timerStartOffset = -16.299999237061,
 				uuid = "2d4a308e-6ea4-77d9-9d6c-934086d7a583",
 				version = 2,
 			},
@@ -1321,7 +1321,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal s=data.ucobFirstFireball\nif not R or not R.current() or not s or Now()>=s.expires then return false end\nlocal slot=R.mySlot()\nif slot~=\"H1\" and slot~=\"H2\" then return false end\nlocal choice=Settings.FFXIVMINION.LPDU_UCOB_FirstFireballHealer or \"Unassigned\"\nlocal targetSlot=R.slotOf(s.target)\nlocal goIn=choice==\"In\"\nif targetSlot==\"H1\" or targetSlot==\"H2\" then goIn=targetSlot==slot end\nif choice==\"Unassigned\" and targetSlot~=\"H1\" and targetSlot~=\"H2\" then return false end\nreturn goIn==true",
+							conditionLua = "local rootSettings=Settings or (_G and _G.Settings)\nlocal ucobSettings=rootSettings and rootSettings.FFXIVMINION\nif not ucobSettings then return false end\nlocal R=AnyoneCore and AnyoneCore.Roster\nlocal s=data.ucobFirstFireball\nif not R or not R.current() or not s or Now()>=s.expires then return false end\nlocal slot=R.mySlot()\nif slot~=\"H1\" and slot~=\"H2\" then return false end\nlocal choice=ucobSettings.LPDU_UCOB_FirstFireballHealer or \"Unassigned\"\nlocal targetSlot=R.slotOf(s.target)\nlocal goIn=choice==\"In\"\nif targetSlot==\"H1\" or targetSlot==\"H2\" then goIn=targetSlot==slot end\nif choice==\"Unassigned\" and targetSlot~=\"H1\" and targetSlot~=\"H2\" then return false end\nreturn goIn==true",
 							name = "Resolved Healer Assignment",
 							uuid = "56c3e3d1-f56b-9e68-80e6-717940280ad8",
 							version = 3,
@@ -1372,7 +1372,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal s=data.ucobFirstFireball\nif not R or not R.current() or not s or Now()>=s.expires then return false end\nlocal slot=R.mySlot()\nif slot~=\"H1\" and slot~=\"H2\" then return false end\nlocal choice=Settings.FFXIVMINION.LPDU_UCOB_FirstFireballHealer or \"Unassigned\"\nlocal targetSlot=R.slotOf(s.target)\nlocal goIn=choice==\"In\"\nif targetSlot==\"H1\" or targetSlot==\"H2\" then goIn=targetSlot==slot end\nif choice==\"Unassigned\" and targetSlot~=\"H1\" and targetSlot~=\"H2\" then return false end\nreturn goIn==false",
+							conditionLua = "local rootSettings=Settings or (_G and _G.Settings)\nlocal ucobSettings=rootSettings and rootSettings.FFXIVMINION\nif not ucobSettings then return false end\nlocal R=AnyoneCore and AnyoneCore.Roster\nlocal s=data.ucobFirstFireball\nif not R or not R.current() or not s or Now()>=s.expires then return false end\nlocal slot=R.mySlot()\nif slot~=\"H1\" and slot~=\"H2\" then return false end\nlocal choice=ucobSettings.LPDU_UCOB_FirstFireballHealer or \"Unassigned\"\nlocal targetSlot=R.slotOf(s.target)\nlocal goIn=choice==\"In\"\nif targetSlot==\"H1\" or targetSlot==\"H2\" then goIn=targetSlot==slot end\nif choice==\"Unassigned\" and targetSlot~=\"H1\" and targetSlot~=\"H2\" then return false end\nreturn goIn==false",
 							name = "Resolved Healer Assignment",
 							uuid = "f42143cc-6f7b-c045-8913-020744b18d15",
 							version = 3,
@@ -1400,7 +1400,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal s=data.ucobFirstFireball\nif not R or not R.current() or not s or Now()>=s.expires then self.used=true return end\nlocal slot=R.mySlot()\nif slot~=\"H1\" and slot~=\"H2\" then self.used=true return end\nlocal choice=Settings.FFXIVMINION.LPDU_UCOB_FirstFireballHealer or \"Unassigned\"\nlocal targetSlot=R.slotOf(s.target)\nlocal goIn=choice==\"In\"\nif targetSlot==\"H1\" or targetSlot==\"H2\" then goIn=targetSlot==slot end\nif not goIn or not R.isReady() then self.used=true return end\nlocal target=TensorCore.mGetEntity(s.target)\nif not target then self.used=true return end\nlocal dest=target.pos\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
+							actionLua = "local rootSettings=Settings or (_G and _G.Settings)\nlocal ucobSettings=rootSettings and rootSettings.FFXIVMINION\nif not ucobSettings then return end\nlocal R=AnyoneCore and AnyoneCore.Roster\nlocal s=data.ucobFirstFireball\nif not R or not R.current() or not s or Now()>=s.expires then self.used=true return end\nlocal slot=R.mySlot()\nif slot~=\"H1\" and slot~=\"H2\" then self.used=true return end\nlocal choice=ucobSettings.LPDU_UCOB_FirstFireballHealer or \"Unassigned\"\nlocal targetSlot=R.slotOf(s.target)\nlocal goIn=choice==\"In\"\nif targetSlot==\"H1\" or targetSlot==\"H2\" then goIn=targetSlot==slot end\nif not goIn or not R.isReady() then self.used=true return end\nlocal target=TensorCore.mGetEntity(s.target)\nif not target then self.used=true return end\nlocal dest=target.pos\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
 							name = "Healer Stack Arrow",
 							uuid = "4b005849-f8c8-a4d5-a8bc-30e8406cf7ac",
 							version = 2.1,
@@ -9192,7 +9192,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return Settings.FFXIVMINION.LPDU_UCOB_PotionsEnabled ~= false",
+							conditionLua = "local rootSettings=Settings or (_G and _G.Settings)\nlocal ucobSettings=rootSettings and rootSettings.FFXIVMINION\nif not ucobSettings then return false end\nreturn ucobSettings.LPDU_UCOB_PotionsEnabled ~= false",
 							name = "LPDU potions enabled",
 							uuid = "4b28d722-ae32-898b-8082-dc546a368fa3",
 							version = 3,
@@ -9214,7 +9214,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return (Settings.FFXIVMINION.LPDU_UCOB_PotionSecond or \"Late Nael\") == \"Late Nael\"",
+							conditionLua = "local rootSettings=Settings or (_G and _G.Settings)\nlocal ucobSettings=rootSettings and rootSettings.FFXIVMINION\nif not ucobSettings then return false end\nreturn (ucobSettings.LPDU_UCOB_PotionSecond or \"Late Nael\") == \"Late Nael\"",
 							name = "Second potion - Late Nael",
 							uuid = "e3a65fcc-697c-5bba-af96-334589dcabe8",
 							version = 3,
@@ -9507,7 +9507,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return Settings.FFXIVMINION.LPDU_UCOB_PotionsEnabled ~= false",
+							conditionLua = "local rootSettings=Settings or (_G and _G.Settings)\nlocal ucobSettings=rootSettings and rootSettings.FFXIVMINION\nif not ucobSettings then return false end\nreturn ucobSettings.LPDU_UCOB_PotionsEnabled ~= false",
 							name = "LPDU potions enabled",
 							uuid = "a9ded257-ea61-1b09-95b1-faa0498eff63",
 							version = 3,
@@ -9529,7 +9529,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return (Settings.FFXIVMINION.LPDU_UCOB_PotionSecond or \"Late Nael\") == \"Delayed Nael\"",
+							conditionLua = "local rootSettings=Settings or (_G and _G.Settings)\nlocal ucobSettings=rootSettings and rootSettings.FFXIVMINION\nif not ucobSettings then return false end\nreturn (ucobSettings.LPDU_UCOB_PotionSecond or \"Late Nael\") == \"Delayed Nael\"",
 							name = "Second potion - Delayed Nael",
 							uuid = "a02945b9-7075-fbb3-b548-99d615879aba",
 							version = 3,
@@ -10050,7 +10050,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return Settings.FFXIVMINION.LPDU_UCOB_PotionsEnabled ~= false",
+							conditionLua = "local rootSettings=Settings or (_G and _G.Settings)\nlocal ucobSettings=rootSettings and rootSettings.FFXIVMINION\nif not ucobSettings then return false end\nreturn ucobSettings.LPDU_UCOB_PotionsEnabled ~= false",
 							name = "LPDU potions enabled",
 							uuid = "42815904-24fc-305d-abb9-7df2af77c2e1",
 							version = 3,
@@ -10072,7 +10072,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return (Settings.FFXIVMINION.LPDU_UCOB_PotionSecond or \"Late Nael\") == \"Bahamut opener\"",
+							conditionLua = "local rootSettings=Settings or (_G and _G.Settings)\nlocal ucobSettings=rootSettings and rootSettings.FFXIVMINION\nif not ucobSettings then return false end\nreturn (ucobSettings.LPDU_UCOB_PotionSecond or \"Late Nael\") == \"Bahamut opener\"",
 							name = "Second potion - Bahamut opener",
 							uuid = "02f9d7c2-db1b-343c-a964-2a1b0c7b8c77",
 							version = 3,
@@ -11808,7 +11808,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.ucobBlackfireTowerChoice\nlocal R=AnyoneCore and AnyoneCore.Roster\nif not s or Now()>=s.expires or not s.nx or s.markerCount~=4 or not R or not R.current() or not R.isReady() then self.used=true return end\nlocal slot=R.mySlot()\nif slot~=\"M1\" and slot~=\"M2\" and slot~=\"R1\" and slot~=\"R2\" then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal choice=Settings.FFXIVMINION.LPDU_UCOB_BlackfireTower\nif choice~=\"Close\" and choice~=\"Far\" then\n choice=(slot==\"M1\" or slot==\"M2\") and \"Close\" or \"Far\"\nend\nlocal dest=nil\nif s.marked[p.id] then\n if s.stackDone and not s.stackRetreat then self.used=true return end\n s.stackDest=s.stackDest or {x=-s.nx*8,y=0,z=-s.nz*8}\n dest=s.stackDest\nelse\n if choice~=\"Close\" and choice~=\"Far\" then self.used=true return end\n if s.choice~=choice then\n  local selected=nil local score=nil local count=0\n  -- Facing Nael: LPDU DPS left, supports right.\n  for _,t in pairs(s.towers) do\n   if t.x*s.nz-t.z*s.nx>0 then\n    count=count+1\n    local n=t.x*s.nx+t.z*s.nz\n    if not score or (choice==\"Close\" and n>score) or (choice==\"Far\" and n<score) then selected=t score=n end\n   end\n  end\n  if count~=2 or not selected then self.used=true return end\n  s.choice=choice s.selected=selected\n  local r=math.sqrt(selected.x^2+selected.z^2)\n  s.stage={x=selected.x/r*(r+4),y=selected.y,z=selected.z/r*(r+4)}\n end\n dest=s.hyper>=2 and s.selected or s.stage\n local phase=s.hyper>=2 and 'Soak tower' or 'Wait outside'\n if s.stageLabel~=phase then\n  AnyoneCore.addTimedWorldText(math.max(1,s.expires-Now()),phase,{x=dest.x,y=dest.y+1,z=dest.z},0xFFFFFFFF,true,1)\n  AnyoneCore.Shotcall(phase,true,2,false)\n  s.stageLabel=phase\n end\nend\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
+							actionLua = "local rootSettings=Settings or (_G and _G.Settings)\nlocal ucobSettings=rootSettings and rootSettings.FFXIVMINION\nif not ucobSettings then return end\nlocal s=data.ucobBlackfireTowerChoice\nlocal R=AnyoneCore and AnyoneCore.Roster\nif not s or Now()>=s.expires or not s.nx or s.markerCount~=4 or not R or not R.current() or not R.isReady() then self.used=true return end\nlocal slot=R.mySlot()\nif slot~=\"M1\" and slot~=\"M2\" and slot~=\"R1\" and slot~=\"R2\" then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal choice=ucobSettings.LPDU_UCOB_BlackfireTower\nif choice~=\"Close\" and choice~=\"Far\" then\n choice=(slot==\"M1\" or slot==\"M2\") and \"Close\" or \"Far\"\nend\nlocal dest=nil\nif s.marked[p.id] then\n if s.stackDone and not s.stackRetreat then self.used=true return end\n s.stackDest=s.stackDest or {x=-s.nx*8,y=0,z=-s.nz*8}\n dest=s.stackDest\nelse\n if choice~=\"Close\" and choice~=\"Far\" then self.used=true return end\n if s.choice~=choice then\n  local selected=nil local score=nil local count=0\n  -- Facing Nael: LPDU DPS left, supports right.\n  for _,t in pairs(s.towers) do\n   if t.x*s.nz-t.z*s.nx>0 then\n    count=count+1\n    local n=t.x*s.nx+t.z*s.nz\n    if not score or (choice==\"Close\" and n>score) or (choice==\"Far\" and n<score) then selected=t score=n end\n   end\n  end\n  if count~=2 or not selected then self.used=true return end\n  s.choice=choice s.selected=selected\n  local r=math.sqrt(selected.x^2+selected.z^2)\n  s.stage={x=selected.x/r*(r+4),y=selected.y,z=selected.z/r*(r+4)}\n end\n dest=s.hyper>=2 and s.selected or s.stage\n local phase=s.hyper>=2 and 'Soak tower' or 'Wait outside'\n if s.stageLabel~=phase then\n  AnyoneCore.addTimedWorldText(math.max(1,s.expires-Now()),phase,{x=dest.x,y=dest.y+1,z=dest.z},0xFFFFFFFF,true,1)\n  AnyoneCore.Shotcall(phase,true,2,false)\n  s.stageLabel=phase\n end\nend\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
 							name = "Close-Far Personal Arrow",
 							uuid = "6d1dfcec-1baa-eedf-97ef-c38a75752e92",
 							version = 2.1,
@@ -12042,7 +12042,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return Settings.FFXIVMINION.LPDU_UCOB_PotionsEnabled ~= false",
+							conditionLua = "local rootSettings=Settings or (_G and _G.Settings)\nlocal ucobSettings=rootSettings and rootSettings.FFXIVMINION\nif not ucobSettings then return false end\nreturn ucobSettings.LPDU_UCOB_PotionsEnabled ~= false",
 							name = "LPDU potions enabled",
 							uuid = "616ad61b-8e1d-2566-87f2-7917fd2c2dc6",
 							version = 3,
@@ -12064,7 +12064,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return (Settings.FFXIVMINION.LPDU_UCOB_PotionSecond or \"Late Nael\") == \"After Blackfire\"",
+							conditionLua = "local rootSettings=Settings or (_G and _G.Settings)\nlocal ucobSettings=rootSettings and rootSettings.FFXIVMINION\nif not ucobSettings then return false end\nreturn (ucobSettings.LPDU_UCOB_PotionSecond or \"Late Nael\") == \"After Blackfire\"",
 							name = "Second potion - After Blackfire",
 							uuid = "6ddc2792-6dc8-2a27-a0cb-e00c8c0f2771",
 							version = 3,
@@ -16413,7 +16413,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return Settings.FFXIVMINION.LPDU_UCOB_PotionsEnabled ~= false",
+							conditionLua = "local rootSettings=Settings or (_G and _G.Settings)\nlocal ucobSettings=rootSettings and rootSettings.FFXIVMINION\nif not ucobSettings then return false end\nreturn ucobSettings.LPDU_UCOB_PotionsEnabled ~= false",
 							name = "LPDU potions enabled",
 							uuid = "00aca765-f160-fbe4-a8b0-9d3812390b8b",
 							version = 3,
@@ -20348,7 +20348,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return Settings.FFXIVMINION.LPDU_UCOB_PotionsEnabled ~= false",
+							conditionLua = "local rootSettings=Settings or (_G and _G.Settings)\nlocal ucobSettings=rootSettings and rootSettings.FFXIVMINION\nif not ucobSettings then return false end\nreturn ucobSettings.LPDU_UCOB_PotionsEnabled ~= false",
 							name = "LPDU potions enabled",
 							uuid = "3ce6e432-50a1-f954-b24d-04c4097749a7",
 							version = 3,
