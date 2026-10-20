@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- The large P1 left/right stack-side arrow now clears when the move-in step begins; the inward movement arrow remains. (20-10-2026)
+
 - Added P2 mirror spread order: TDDT remains the LPDU default; DTTD swaps same-group tank/melee positions for both blue and red mirrors. The phase sections now use simple P2/P3/P4/P5 headings. (20-10-2026)
 
 - Fall of Faith red/blue bait circles now appear only for your own active tether turn; other players' circles and waiting-turn circles are hidden. (20-10-2026)
@@ -94,8 +96,6 @@ TEA: Coming soon by Ton.
 - Converted 106 Paladin LPDU mits actions to catalog-resolved Hotbar/Tankbar requests and named all 122 PLD-only job conditions Paladin. Preserved targeted Intervention/Provoke, Reprisal range gates and all six manual Passage of Arms alerts. (19-10-2026)
 
 - Converted 105 Gunbreaker LPDU mits actions to catalog-resolved Hotbar/Tankbar requests and named all 107 GNB-only job conditions Gunbreaker. Preserved Corundum/Provoke targets, timing and Reprisal range gates. (19-10-2026)
-
-- Added a living/targetable nearby-enemy filter within Reprisal's 5-yalm radius to all 100 tank Reprisal actions. Requests can wait for range within their existing timing window. (19-10-2026)
 
 
 ### UWU: LPDU
