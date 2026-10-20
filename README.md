@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Added a personal spoken Go out call alongside each Ultimate Relativity out-arrow step, including delayed steps. (21-10-2026)
+
 - Red-mirror tank/melee positions now flip with the ranged mirror's side, keeping the TDDT MT solo spot toward ranged and OT/M2 away from them. (21-10-2026)
 
 - Fixed Fall of Faith lightning-tether handoffs that clear with a changed tether ID, restoring the third/fourth player's personal blue circle and swap guidance. (21-10-2026)
@@ -94,8 +96,6 @@ TEA: Coming soon by Ton.
 - Adjusted personal Fall of Faith conga arrows to the west-side lineup observed in debug logs, preserving H1 > H2 > MT > OT > M1 > M2 > R1 > R2 order. (20-10-2026)
 
 - Added an earlier personal Diamond Dust knockback call around 246.5s: left/right toward the assigned arrow while facing Shiva, or the landing compass side if already lined up. (20-10-2026)
-
-- Removed the bright green personal conga destination circle to reduce confusion; the conga arrow remains. (20-10-2026)
 
 
 ### UWU: LPDU
