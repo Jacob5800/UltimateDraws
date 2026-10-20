@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Fall of Faith helper stack calls now say Next: stack behind tether to distinguish the upcoming position from an immediate movement instruction. (21-10-2026)
+
 - P1 clock-position arrows now clear as the post-buster spread/stack guidance appears. Extended the later move-in arrow to 1.6 seconds. (21-10-2026)
 
 - Added personal Fall of Faith helper steps anchored to the active tether player: red fire-stack markers or blue lightning left/middle/right markers, with movement arrows and personal calls as the bait changes. (21-10-2026)
@@ -94,8 +96,6 @@ TEA: Coming soon by Ton.
 - Added spoken Diamond Dust Scythe Kick calls: In, then spread on cast start, followed by Spread when the kick resolves. (20-10-2026)
 
 - The large P1 left/right stack-side arrow now clears when the move-in step begins; the inward movement arrow remains. (20-10-2026)
-
-- Added P2 mirror spread order: TDDT remains the LPDU default; DTTD swaps same-group tank/melee positions for both blue and red mirrors. The phase sections now use simple P2/P3/P4/P5 headings. (20-10-2026)
 
 
 ### UWU: LPDU
