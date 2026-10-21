@@ -5175,6 +5175,71 @@ local tbl =
 		{
 			data = 
 			{
+				name = "[Draw] Searing Wind Buff Cleanup",
+				uuid = "a46fd5de-c699-3895-aa70-b3dec57aad5f",
+				version = 2,
+			},
+			inheritedObjectUUID = "0a423572-d7fc-9f36-8e8f-413b3e091b93",
+			inheritedOverwrites = 
+			{
+				actions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								name = "[Draw] Searing Wind Buff Cleanup",
+								uuid = "f908731a-3746-d60a-955d-e22cde9eb93e",
+								version = 2.1,
+							},
+							inheritedObjectUUID = "f0c4445f-dd00-df84-a96d-035fcd38aa56",
+							inheritedOverwrites = 
+							{
+								conditions = 
+								{
+									
+									{
+										position = 1,
+										type = "add",
+										value = 
+										{
+											"e1c76292-1f79-b96f-9b72-0b0063281c09",
+											true,
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								category = "Lua",
+								conditionLua = "local t = TensorReactions_CurrentTimer\nreturn (t >= 325 and t <= 460) or (t >= 1100 and t <= 1185)",
+								dequeueIfLuaFalse = true,
+								name = "Ifrit or Ultima Searing Wind window",
+								uuid = "e1c76292-1f79-b96f-9b72-0b0063281c09",
+								version = 3,
+							},
+						},
+					},
+				},
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "Draws - Ifrit",
 				uuid = "f5daecfb-636d-4792-9a22-3aae9dc0b4ea",
