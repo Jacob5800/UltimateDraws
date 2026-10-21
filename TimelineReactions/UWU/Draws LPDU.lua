@@ -16822,6 +16822,7 @@ local tbl =
 						data = 
 						{
 							aType = "Alert",
+							alertTTS = true,
 							alertText = "Bait eruptions then move",
 							uuid = "ea15e3a5-556b-c9d3-a895-9d8ca071e664",
 							version = 2.1,
