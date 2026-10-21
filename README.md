@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Personal Fall of Faith helper calls now repeat at each relevant bait stage, even when the assigned position stays the same. (21-10-2026)
+
 - Save/load and import/export now include crystal damage mode and TDDT/DTTD mirror order alongside tank settings, and are available to every job. Older tank-only imports/saves remain compatible. (21-10-2026)
 
 - Fall of Faith helper stack calls now say Next: stack behind tether to distinguish the upcoming position from an immediate movement instruction. (21-10-2026)
@@ -94,8 +96,6 @@ TEA: Coming soon by Ton.
 - Red-mirror tank/melee positions now flip with the ranged mirror's side, keeping the TDDT MT solo spot toward ranged and OT/M2 away from them. (21-10-2026)
 
 - Fixed Fall of Faith lightning-tether handoffs that clear with a changed tether ID, restoring the third/fourth player's personal blue circle and swap guidance. (21-10-2026)
-
-- Added spoken Diamond Dust Scythe Kick calls: In, then spread on cast start, followed by Spread when the kick resolves. (20-10-2026)
 
 
 ### UWU: LPDU
