@@ -9210,6 +9210,7 @@ local tbl =
 						data = 
 						{
 							aType = "Alert",
+							alertTTS = true,
 							alertText = "Dodge Landslide",
 							uuid = "f7d833fc-fcdb-359b-9dbb-71c19250ac73",
 							version = 2.1,
@@ -10835,6 +10836,7 @@ local tbl =
 							aType = "Alert",
 							alertDuration = 6000,
 							alertPriority = 2,
+							alertTTS = true,
 							alertText = "Move south for eruption baits",
 							conditions = 
 							{
