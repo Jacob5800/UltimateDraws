@@ -608,6 +608,7 @@ local tbl =
 						},
 					},
 				},
+				enabled = false,
 				eventType = 12,
 				mechanicTime = 9,
 				name = "[Draw][LPDU] Garuda Downburst target cone",
@@ -823,6 +824,60 @@ local tbl =
 				timerEndOffset = 4,
 				timerStartOffset = -1,
 				uuid = "806bbd81-eb3d-c6fb-9b32-9b718947cb12",
+				version = 2,
+			},
+		},
+	},
+	[6] = 
+	{
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local boss = TensorCore.mGetEntity(eventArgs.detectionTargetID)\nif not boss or not boss.targetable then return end\n-- Cast cones have their own fixed-direction draw.\nif boss.channelingid == 11091 then return end\nlocal target = TensorCore.mGetEntity(boss.targetid)\nif not target then return end\nlocal heading = TensorCore.getHeadingToTarget(boss.pos, target.pos)\nlocal drawer = TensorCore.getMoogleDrawer()\ndrawer:addCone(boss.pos.x,boss.pos.y,boss.pos.z,11.7,math.rad(90),heading)\n",
+							conditions = 
+							{
+								
+								{
+									"8efb5bdd-7307-e373-a1ec-87da4152938d",
+									true,
+								},
+							},
+							name = "Short cleave warning",
+							uuid = "13aeccb0-cafd-6c80-9b03-b5b0fa280edf",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Garuda Downburst",
+							partyTargetContentID = 1644,
+							uuid = "8efb5bdd-7307-e373-a1ec-87da4152938d",
+							version = 3,
+						},
+					},
+				},
+				eventType = 12,
+				mechanicTime = 27,
+				name = "[Draw][LPDU] Downburst cone - 27",
+				timeRange = true,
+				timelineIndex = 6,
+				timerStartOffset = -3,
+				uuid = "da872827-a713-fc42-8174-77586f3c2c17",
 				version = 2,
 			},
 		},
@@ -2961,6 +3016,57 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local boss = TensorCore.mGetEntity(eventArgs.detectionTargetID)\nif not boss or not boss.targetable then return end\n-- Cast cones have their own fixed-direction draw.\nif boss.channelingid == 11091 then return end\nlocal target = TensorCore.mGetEntity(boss.targetid)\nif not target then return end\nlocal heading = TensorCore.getHeadingToTarget(boss.pos, target.pos)\nlocal drawer = TensorCore.getMoogleDrawer()\ndrawer:addCone(boss.pos.x,boss.pos.y,boss.pos.z,11.7,math.rad(90),heading)\n",
+							conditions = 
+							{
+								
+								{
+									"58509288-9d10-94d8-94ab-52de8e211afe",
+									true,
+								},
+							},
+							name = "Short cleave warning",
+							uuid = "4da0798f-f34e-45c5-b11a-91ece69470b0",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Garuda Downburst",
+							partyTargetContentID = 1644,
+							uuid = "58509288-9d10-94d8-94ab-52de8e211afe",
+							version = 3,
+						},
+					},
+				},
+				eventType = 12,
+				mechanicTime = 124,
+				name = "[Draw][LPDU] Downburst cone - 124",
+				timeRange = true,
+				timelineIndex = 27,
+				timerStartOffset = -3,
+				uuid = "4cfe1915-01ef-b69e-80fa-06bcbeccc0ea",
+				version = 2,
+			},
+		},
 	},
 	[28] = 
 	{
@@ -3192,6 +3298,60 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
+		},
+	},
+	[32] = 
+	{
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local boss = TensorCore.mGetEntity(eventArgs.detectionTargetID)\nif not boss or not boss.targetable then return end\n-- Cast cones have their own fixed-direction draw.\nif boss.channelingid == 11091 then return end\nlocal target = TensorCore.mGetEntity(boss.targetid)\nif not target then return end\nlocal heading = TensorCore.getHeadingToTarget(boss.pos, target.pos)\nlocal drawer = TensorCore.getMoogleDrawer()\ndrawer:addCone(boss.pos.x,boss.pos.y,boss.pos.z,11.7,math.rad(90),heading)\n",
+							conditions = 
+							{
+								
+								{
+									"1fd23b42-2228-1ef3-b225-37944ade6d35",
+									true,
+								},
+							},
+							name = "Short cleave warning",
+							uuid = "f41afaf3-a41d-ed90-998f-0f805609301f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Garuda Downburst",
+							partyTargetContentID = 1644,
+							uuid = "1fd23b42-2228-1ef3-b225-37944ade6d35",
+							version = 3,
+						},
+					},
+				},
+				eventType = 12,
+				mechanicTime = 156,
+				name = "[Draw][LPDU] Downburst cone - 156",
+				timeRange = true,
+				timelineIndex = 32,
+				timerStartOffset = -3,
+				uuid = "fd206647-093b-d5b8-82b6-6571403fb062",
+				version = 2,
+			},
 		},
 	},
 	[36] = 
@@ -3448,6 +3608,7 @@ local tbl =
 						},
 					},
 				},
+				enabled = false,
 				eventType = 12,
 				mechanicTime = 300,
 				name = "[Draw][LPDU] Ifrit Incinerate target cone",
@@ -3671,6 +3832,111 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local boss = TensorCore.mGetEntity(eventArgs.detectionTargetID)\nif not boss or not boss.targetable then return end\n-- Cast cones have their own fixed-direction draw.\nif boss.channelingid == 11091 then return end\nlocal target = TensorCore.mGetEntity(boss.targetid)\nif not target then return end\nlocal heading = TensorCore.getHeadingToTarget(boss.pos, target.pos)\nlocal drawer = TensorCore.getMoogleDrawer()\ndrawer:addCone(boss.pos.x,boss.pos.y,boss.pos.z,15,math.rad(120),heading)\n",
+							conditions = 
+							{
+								
+								{
+									"cb9ff6ef-2cb0-e8c9-b862-bcc8b77f574d",
+									true,
+								},
+							},
+							name = "Short cleave warning",
+							uuid = "3295d41d-26a4-fd8e-a475-fe53b2b430cc",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Ifrit Incinerate",
+							partyTargetContentID = 1185,
+							uuid = "cb9ff6ef-2cb0-e8c9-b862-bcc8b77f574d",
+							version = 3,
+						},
+					},
+				},
+				eventType = 12,
+				mechanicTime = 318,
+				name = "[Draw][LPDU] Incinerate cone - 318",
+				timeRange = true,
+				timelineIndex = 40,
+				timerStartOffset = -3,
+				uuid = "d86c1c53-9606-9395-8f74-cf2850430731",
+				version = 2,
+			},
+		},
+	},
+	[41] = 
+	{
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local boss = TensorCore.mGetEntity(eventArgs.detectionTargetID)\nif not boss or not boss.targetable then return end\n-- Cast cones have their own fixed-direction draw.\nif boss.channelingid == 11091 then return end\nlocal target = TensorCore.mGetEntity(boss.targetid)\nif not target then return end\nlocal heading = TensorCore.getHeadingToTarget(boss.pos, target.pos)\nlocal drawer = TensorCore.getMoogleDrawer()\ndrawer:addCone(boss.pos.x,boss.pos.y,boss.pos.z,15,math.rad(120),heading)\n",
+							conditions = 
+							{
+								
+								{
+									"3fdcbe80-273d-6705-9a90-86810677c64e",
+									true,
+								},
+							},
+							name = "Short cleave warning",
+							uuid = "edc0da88-2828-480f-ae6b-a19583a72c75",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Ifrit Incinerate",
+							partyTargetContentID = 1185,
+							uuid = "3fdcbe80-273d-6705-9a90-86810677c64e",
+							version = 3,
+						},
+					},
+				},
+				eventType = 12,
+				mechanicTime = 321,
+				name = "[Draw][LPDU] Incinerate cone - 321",
+				timeRange = true,
+				timelineIndex = 41,
+				timerStartOffset = -3,
+				uuid = "547da2f2-679d-b35b-ad5e-cbf2adf339ef",
+				version = 2,
+			},
+		},
 	},
 	[42] = 
 	{
@@ -3758,6 +4024,57 @@ local tbl =
 				timelineIndex = 42,
 				timerEndOffset = 3,
 				uuid = "1c110363-9b68-6178-9d98-421e55f4fa09",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local boss = TensorCore.mGetEntity(eventArgs.detectionTargetID)\nif not boss or not boss.targetable then return end\n-- Cast cones have their own fixed-direction draw.\nif boss.channelingid == 11091 then return end\nlocal target = TensorCore.mGetEntity(boss.targetid)\nif not target then return end\nlocal heading = TensorCore.getHeadingToTarget(boss.pos, target.pos)\nlocal drawer = TensorCore.getMoogleDrawer()\ndrawer:addCone(boss.pos.x,boss.pos.y,boss.pos.z,15,math.rad(120),heading)\n",
+							conditions = 
+							{
+								
+								{
+									"353abb17-f530-28db-a36f-8326a6142210",
+									true,
+								},
+							},
+							name = "Short cleave warning",
+							uuid = "a03dce94-1f45-cda5-9077-788c2a206e87",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Ifrit Incinerate",
+							partyTargetContentID = 1185,
+							uuid = "353abb17-f530-28db-a36f-8326a6142210",
+							version = 3,
+						},
+					},
+				},
+				eventType = 12,
+				mechanicTime = 325,
+				name = "[Draw][LPDU] Incinerate cone - 325",
+				timeRange = true,
+				timelineIndex = 42,
+				timerStartOffset = -3,
+				uuid = "50d501c3-473d-b356-a11d-e584b784395e",
 				version = 2,
 			},
 		},
@@ -6614,6 +6931,114 @@ local tbl =
 			objectType = "folder",
 		},
 	},
+	[69] = 
+	{
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local boss = TensorCore.mGetEntity(eventArgs.detectionTargetID)\nif not boss or not boss.targetable then return end\n-- Cast cones have their own fixed-direction draw.\nif boss.channelingid == 11091 then return end\nlocal target = TensorCore.mGetEntity(boss.targetid)\nif not target then return end\nlocal heading = TensorCore.getHeadingToTarget(boss.pos, target.pos)\nlocal drawer = TensorCore.getMoogleDrawer()\ndrawer:addCone(boss.pos.x,boss.pos.y,boss.pos.z,15,math.rad(120),heading)\n",
+							conditions = 
+							{
+								
+								{
+									"a674d1d1-9694-ba0f-8d96-3db023cbf517",
+									true,
+								},
+							},
+							name = "Short cleave warning",
+							uuid = "796e5432-3286-8059-a0fb-0e86415afa2d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Ifrit Incinerate",
+							partyTargetContentID = 1185,
+							uuid = "a674d1d1-9694-ba0f-8d96-3db023cbf517",
+							version = 3,
+						},
+					},
+				},
+				eventType = 12,
+				mechanicTime = 428,
+				name = "[Draw][LPDU] Incinerate cone - 428",
+				timeRange = true,
+				timelineIndex = 69,
+				timerStartOffset = -3,
+				uuid = "2dc50cce-228a-cf40-88ed-4a87dbee110d",
+				version = 2,
+			},
+		},
+	},
+	[70] = 
+	{
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local boss = TensorCore.mGetEntity(eventArgs.detectionTargetID)\nif not boss or not boss.targetable then return end\n-- Cast cones have their own fixed-direction draw.\nif boss.channelingid == 11091 then return end\nlocal target = TensorCore.mGetEntity(boss.targetid)\nif not target then return end\nlocal heading = TensorCore.getHeadingToTarget(boss.pos, target.pos)\nlocal drawer = TensorCore.getMoogleDrawer()\ndrawer:addCone(boss.pos.x,boss.pos.y,boss.pos.z,15,math.rad(120),heading)\n",
+							conditions = 
+							{
+								
+								{
+									"ee9a2c51-d4d2-732f-ac02-16cf284ea6b4",
+									true,
+								},
+							},
+							name = "Short cleave warning",
+							uuid = "a64829b6-4ab6-0402-ba43-e695b0a073a9",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Ifrit Incinerate",
+							partyTargetContentID = 1185,
+							uuid = "ee9a2c51-d4d2-732f-ac02-16cf284ea6b4",
+							version = 3,
+						},
+					},
+				},
+				eventType = 12,
+				mechanicTime = 431,
+				name = "[Draw][LPDU] Incinerate cone - 431",
+				timeRange = true,
+				timelineIndex = 70,
+				timerStartOffset = -3,
+				uuid = "167d431e-557b-4cf3-971a-9dfefc83e6a1",
+				version = 2,
+			},
+		},
+	},
 	[71] = 
 	{
 		
@@ -6674,6 +7099,57 @@ local tbl =
 				timelineIndex = 71,
 				timerEndOffset = 8,
 				uuid = "103ae72e-07b2-cfa0-8e89-b2bec4670226",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local boss = TensorCore.mGetEntity(eventArgs.detectionTargetID)\nif not boss or not boss.targetable then return end\n-- Cast cones have their own fixed-direction draw.\nif boss.channelingid == 11091 then return end\nlocal target = TensorCore.mGetEntity(boss.targetid)\nif not target then return end\nlocal heading = TensorCore.getHeadingToTarget(boss.pos, target.pos)\nlocal drawer = TensorCore.getMoogleDrawer()\ndrawer:addCone(boss.pos.x,boss.pos.y,boss.pos.z,15,math.rad(120),heading)\n",
+							conditions = 
+							{
+								
+								{
+									"9c724185-4280-deab-910f-84c7ad806733",
+									true,
+								},
+							},
+							name = "Short cleave warning",
+							uuid = "c7ead8f6-4694-29ee-92f8-0b0d36b1ed7d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Ifrit Incinerate",
+							partyTargetContentID = 1185,
+							uuid = "9c724185-4280-deab-910f-84c7ad806733",
+							version = 3,
+						},
+					},
+				},
+				eventType = 12,
+				mechanicTime = 435,
+				name = "[Draw][LPDU] Incinerate cone - 435",
+				timeRange = true,
+				timelineIndex = 71,
+				timerStartOffset = -3,
+				uuid = "be44f8f3-efd7-4adb-8dfd-8cc69f769aa6",
 				version = 2,
 			},
 		},
@@ -7150,6 +7626,7 @@ local tbl =
 						},
 					},
 				},
+				enabled = false,
 				eventType = 12,
 				mechanicTime = 600,
 				name = "[Draw][LPDU] Titan cleaves target cone",
@@ -7319,6 +7796,111 @@ local tbl =
 				timerEndOffset = 5,
 				timerStartOffset = -4,
 				uuid = "5610e57a-0734-3355-943f-850247f18b31",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local boss = TensorCore.mGetEntity(eventArgs.detectionTargetID)\nif not boss or not boss.targetable then return end\n-- Cast cones have their own fixed-direction draw.\nif boss.channelingid == 11091 then return end\nlocal target = TensorCore.mGetEntity(boss.targetid)\nif not target then return end\nlocal heading = TensorCore.getHeadingToTarget(boss.pos, target.pos)\nlocal drawer = TensorCore.getMoogleDrawer()\ndrawer:addCone(boss.pos.x,boss.pos.y,boss.pos.z,10.55,math.rad(120),heading)",
+							conditions = 
+							{
+								
+								{
+									"5e8ee93c-50cc-9606-b2ac-9767729d97a8",
+									true,
+								},
+							},
+							name = "Short cleave warning",
+							uuid = "ccdd0493-4cd4-1081-98d7-e37c19dfbd7f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Titan cleaves",
+							partyTargetContentID = 1801,
+							uuid = "5e8ee93c-50cc-9606-b2ac-9767729d97a8",
+							version = 3,
+						},
+					},
+				},
+				eventType = 12,
+				mechanicTime = 613,
+				name = "[Draw][LPDU] Rock Buster cone - 613",
+				timeRange = true,
+				timelineIndex = 76,
+				timerStartOffset = -3,
+				uuid = "b0cfc463-68bd-35a4-80c9-7873b15f16d9",
+				version = 2,
+			},
+		},
+	},
+	[77] = 
+	{
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local boss = TensorCore.mGetEntity(eventArgs.detectionTargetID)\nif not boss or not boss.targetable then return end\n-- Cast cones have their own fixed-direction draw.\nif boss.channelingid == 11091 then return end\nlocal target = TensorCore.mGetEntity(boss.targetid)\nif not target then return end\nlocal heading = TensorCore.getHeadingToTarget(boss.pos, target.pos)\nlocal drawer = TensorCore.getMoogleDrawer()\ndrawer:addCone(boss.pos.x,boss.pos.y,boss.pos.z,15.55,math.rad(90),heading)",
+							conditions = 
+							{
+								
+								{
+									"b1258d81-200b-61e9-bf47-ef536e89611d",
+									true,
+								},
+							},
+							name = "Short cleave warning",
+							uuid = "aec81ff5-8fa9-b55c-8681-73ccfb309f4b",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Titan cleaves",
+							partyTargetContentID = 1801,
+							uuid = "b1258d81-200b-61e9-bf47-ef536e89611d",
+							version = 3,
+						},
+					},
+				},
+				eventType = 12,
+				mechanicTime = 616,
+				name = "[Draw][LPDU] Mountain Buster cone - 616",
+				timeRange = true,
+				timelineIndex = 77,
+				timerStartOffset = -3,
+				uuid = "36bd5bd5-18ff-bdbd-b9e1-c38381f9ea0b",
 				version = 2,
 			},
 		},
