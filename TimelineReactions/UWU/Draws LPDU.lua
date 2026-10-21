@@ -444,20 +444,73 @@ local tbl =
 			{
 				actions = 
 				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "Argus.deleteTimedShape(data.lpdu_mistral_ot_circle)\ndata.lpdu_mistral_ot_circle=nil\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"0ec04be4-d174-ebf0-8e1a-06b33642f675",
+									true,
+								},
+								
+								{
+									"e965b2b6-3f36-a541-9bc8-3d4f369cb8bf",
+									true,
+								},
+							},
+							name = "Clear active OT circle",
+							uuid = "b708d444-45cb-0635-85b0-c13ff5ef41f5",
+							version = 2.1,
+						},
+					},
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Mistral damage only",
+							spellIDList = 
+							{
+								11074,
+								11083,
+							},
+							uuid = "0ec04be4-d174-ebf0-8e1a-06b33642f675",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return data.lpdu_mistral_ot_circle ~= nil",
+							dequeueIfLuaFalse = true,
+							name = "Owned OT circle exists",
+							uuid = "e965b2b6-3f36-a541-9bc8-3d4f369cb8bf",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Guidance",
 				eventType = 2,
 				execute = "if eventArgs.spellID~=11074 and eventArgs.spellID~=11083 then self.used=true;return end\nif data.lpdu_mistral_ot_circle then\n Argus.deleteTimedShape(data.lpdu_mistral_ot_circle);data.lpdu_mistral_ot_circle=nil\nend\nself.used=true",
-				executeType = 2,
 				loop = true,
 				mechanicTime = 9,
 				name = "[LPDU] Mistral Song - OT Marker Cleanup",
 				timeRange = true,
 				timelineIndex = 2,
-				timerEndOffset = 1591,
+				timerEndOffset = 161,
 				timerStartOffset = -9,
 				uuid = "f0bd2877-5dd3-61c2-b57d-6d1f34026658",
 				version = 2,
@@ -14940,6 +14993,82 @@ local tbl =
 				timerEndOffset = 5,
 				timerStartOffset = -1,
 				uuid = "f9368301-3ca4-ce8e-a6c2-60106ed2083f",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "Argus.deleteTimedShape(data.lpdu_mistral_ot_circle)\ndata.lpdu_mistral_ot_circle=nil\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"3ed769bf-35ea-6ac0-a298-3979b5cdbafb",
+									true,
+								},
+								
+								{
+									"de2e01fd-ce06-6b14-a4d2-98b26416176c",
+									true,
+								},
+							},
+							name = "Clear active OT circle",
+							uuid = "367abc2c-f7b0-c1b4-be62-1ef76c8fad5d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Mistral damage only",
+							spellIDList = 
+							{
+								11074,
+								11083,
+							},
+							uuid = "3ed769bf-35ea-6ac0-a298-3979b5cdbafb",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return data.lpdu_mistral_ot_circle ~= nil",
+							dequeueIfLuaFalse = true,
+							name = "Owned OT circle exists",
+							uuid = "de2e01fd-ce06-6b14-a4d2-98b26416176c",
+							version = 3,
+						},
+					},
+				},
+				eventType = 2,
+				loop = true,
+				mechanicTime = 1210,
+				name = "[LPDU] Mistral Song - Ultima OT Marker Cleanup",
+				timeRange = true,
+				timelineIndex = 192,
+				timerEndOffset = 15,
+				timerStartOffset = -10,
+				uuid = "f63b697e-e892-bfda-80a4-fa68f32b56c2",
 				version = 2,
 			},
 		},
