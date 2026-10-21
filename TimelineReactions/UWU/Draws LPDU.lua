@@ -674,6 +674,37 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "data.lpdu_nail_eruption_count = 0\nself.used = true",
+							name = "Initialize owned eruption counter",
+							uuid = "9e48e03e-fd0e-c5f0-ba7c-76cc2655afe2",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				mechanicTime = 9,
+				name = "[State][LPDU] Initialize nail eruption count",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = -4,
+				timerStartOffset = -9,
+				uuid = "4d2a774f-8dbb-e19c-86cc-0c1390f93662",
+				version = 2,
+			},
+		},
 	},
 	[3] = 
 	{
@@ -4791,6 +4822,128 @@ local tbl =
 				timelineIndex = 43,
 				timerEndOffset = 65,
 				uuid = "d394afa9-032d-f512-a07f-abe0091a8e4c",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "data.lpdu_nail_eruption_count = 0\nself.used = true",
+							name = "Reset owned eruption counter",
+							uuid = "eae36938-0d9e-1739-bf5c-f1ecbb3d81cb",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				eventType = 9,
+				mechanicTime = 328,
+				name = "[State][LPDU] Reset nail eruption count",
+				timeRange = true,
+				timelineIndex = 43,
+				timerEndOffset = 1000,
+				timerStartOffset = -328,
+				uuid = "548a0a7b-8f4a-ab16-831f-5a6e55a763ba",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "data.lpdu_nail_eruption_count = (data.lpdu_nail_eruption_count or 0) + 1\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"01321d7c-b3dc-e1d4-b850-9ab184f6aaaf",
+									true,
+								},
+							},
+							name = "Count bait cast start",
+							uuid = "bffc9fc6-07e1-619b-83e0-d660c0620fc4",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 4000,
+							alertTTS = true,
+							alertText = "Kill nail order",
+							conditions = 
+							{
+								
+								{
+									"01321d7c-b3dc-e1d4-b850-9ab184f6aaaf",
+									true,
+								},
+								
+								{
+									"45696666-1428-fcaf-a2bc-6545ec9ba81f",
+									true,
+								},
+							},
+							uuid = "8e2c2f4b-59e1-1bc4-bb21-350fdbf634c9",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventSpellID = 11098,
+							name = "Bait eruption start",
+							uuid = "01321d7c-b3dc-e1d4-b850-9ab184f6aaaf",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return data.lpdu_nail_eruption_count == 7",
+							dequeueIfLuaFalse = true,
+							name = "Seventh cast = fourth paired drop",
+							uuid = "45696666-1428-fcaf-a2bc-6545ec9ba81f",
+							version = 3,
+						},
+					},
+				},
+				eventType = 3,
+				loop = true,
+				mechanicTime = 328,
+				name = "[Call][LPDU] Kill nail order on fourth eruption drop",
+				timeRange = true,
+				timelineIndex = 43,
+				timerEndOffset = 32,
+				uuid = "4972a617-c863-4feb-a32d-57013c5004ec",
 				version = 2,
 			},
 		},
