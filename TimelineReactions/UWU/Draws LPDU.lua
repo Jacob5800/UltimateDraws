@@ -567,6 +567,112 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local boss = TensorCore.mGetEntity(eventArgs.detectionTargetID)\nif not boss or not boss.targetable then return end\n-- Cast cones have their own fixed-direction draw.\nif boss.channelingid == 11091 then return end\nlocal target = TensorCore.mGetEntity(boss.targetid)\nif not target then return end\nlocal heading = TensorCore.getHeadingToTarget(boss.pos, target.pos)\nlocal drawer = TensorCore.getMoogleDrawer()\ndrawer:addCone(boss.pos.x,boss.pos.y,boss.pos.z,11.7,math.rad(90),heading)\n",
+							conditions = 
+							{
+								
+								{
+									"ec92f723-9f07-fce9-9ca5-f7e308cb93ce",
+									true,
+								},
+							},
+							name = "Mechanic geometry",
+							uuid = "61d72b85-666b-c273-9616-1e5ce3b7b10b",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Garuda Downburst",
+							partyTargetContentID = 1644,
+							uuid = "ec92f723-9f07-fce9-9ca5-f7e308cb93ce",
+							version = 3,
+						},
+					},
+				},
+				eventType = 12,
+				mechanicTime = 9,
+				name = "[Draw][LPDU] Garuda Downburst target cone",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 161,
+				timerStartOffset = -9,
+				uuid = "5a7f4e41-c2d7-5170-a7ef-16dcc65be765",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local boss = TensorCore.mGetEntity(eventArgs.entityID)\nif not boss then return end\n-- Slipstream locks its heading at cast start; no moving target attachment.\nTensorCore.getMoogleDrawer():addTimedCone(eventArgs.channelTimeMax*1000,boss.pos.x,boss.pos.y,boss.pos.z,11.7,math.rad(90),boss.pos.h)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"a09b89d6-f7e9-607c-b72d-41f7dae223ea",
+									true,
+								},
+							},
+							name = "Mechanic geometry",
+							uuid = "50f4565d-ba72-969d-934a-f14124abb3b6",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventSpellID = 11091,
+							name = "Attack ID",
+							uuid = "a09b89d6-f7e9-607c-b72d-41f7dae223ea",
+							version = 3,
+						},
+					},
+				},
+				eventType = 3,
+				loop = true,
+				mechanicTime = 9,
+				name = "[Draw][LPDU] Slipstream fixed cast cone",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 161,
+				timerStartOffset = -9,
+				uuid = "3c78b7c5-4624-0463-80f8-73f8e2e1a764",
+				version = 2,
+			},
+		},
 	},
 	[3] = 
 	{
@@ -3301,6 +3407,58 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local boss = TensorCore.mGetEntity(eventArgs.detectionTargetID)\nif not boss or not boss.targetable then return end\n-- Cast cones have their own fixed-direction draw.\nif boss.channelingid == 11091 then return end\nlocal target = TensorCore.mGetEntity(boss.targetid)\nif not target then return end\nlocal heading = TensorCore.getHeadingToTarget(boss.pos, target.pos)\nlocal drawer = TensorCore.getMoogleDrawer()\ndrawer:addCone(boss.pos.x,boss.pos.y,boss.pos.z,15,math.rad(120),heading)\n",
+							conditions = 
+							{
+								
+								{
+									"238a3303-ef7f-c9b6-8f4e-1523be2142f6",
+									true,
+								},
+							},
+							name = "Mechanic geometry",
+							uuid = "201a6fe0-eec9-09d3-8acf-443096b82656",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Ifrit Incinerate",
+							partyTargetContentID = 1185,
+							uuid = "238a3303-ef7f-c9b6-8f4e-1523be2142f6",
+							version = 3,
+						},
+					},
+				},
+				eventType = 12,
+				mechanicTime = 300,
+				name = "[Draw][LPDU] Ifrit Incinerate target cone",
+				timeRange = true,
+				timelineIndex = 36,
+				timerEndOffset = 110,
+				timerStartOffset = -120,
+				uuid = "92c5bc24-a22d-b671-9749-1cdf80c69c0a",
+				version = 2,
+			},
+		},
 	},
 	[38] = 
 	{
@@ -3616,6 +3774,20 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "[Draw] Relative-North Nail Route",
+				uuid = "dea524b2-de4b-4b51-bbbf-8014217bd70a",
+				version = 2,
+			},
+			inheritedObjectUUID = "0f797491-7d62-dc30-bc77-91200709d939",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
 		},
 		
 		{
@@ -4293,7 +4465,7 @@ local tbl =
 				{
 				},
 				displayPath = "LPDU Guidance",
-				execute = "local labels=data.uwu_relative_nails\nif not labels or not labels.drawn then return end\nlocal r=AnyoneCore.Roster\nif r.current()==nil or not r.isReady() then return end\nlocal slot=r.mySlot()\nif slot~=\"M1\" and slot~=\"M2\" and slot~=\"R1\" and slot~=\"R2\" then self.used=true;return end\nlocal s=data.lpdu_nail_40\nif not s then\n s={list={}};data.lpdu_nail_40=s\n for _,n in pairs(labels.nails) do s.list[#s.list+1]=n end\n if #s.list~=4 then data.lpdu_nail_40=nil;return end\n local list=s.list;local ai,bi,q=1,2,math.huge\n for i=1,3 do for j=i+1,4 do\n  local dx,dz=list[i].x-list[j].x,list[i].z-list[j].z;local d=dx*dx+dz*dz\n  if d<q then ai,bi,q=i,j,d end\n end end\n s.northA=list[ai].id;s.northB=list[bi].id\n local south={};for i=1,4 do if i~=ai and i~=bi then south[#south+1]=list[i] end end\n s.southA=south[1].id;s.southB=south[2].id\n local nx=(list[ai].x+list[bi].x-south[1].x-south[2].x)*.5\n local nz=(list[ai].z+list[bi].z-south[1].z-south[2].z)*.5\n local ex,ez=-nz,nx\n local side=(south[1].x-south[2].x)*ex+(south[1].z-south[2].z)*ez\n s.first=side>=0 and south[1].id or south[2].id\nend\nif s.done then self.used=true;return end\nlocal a,b=TensorCore.mGetEntity(s.northA),TensorCore.mGetEntity(s.northB)\nlocal c,d=TensorCore.mGetEntity(s.southA),TensorCore.mGetEntity(s.southB)\nif not a or not b or not c or not d then return end\nif c.hp.current<=0 or d.hp.current<=0 then self.used=true;return end\nif not (a.hp.current>0 and a.hp.percent<40 or b.hp.current>0 and b.hp.percent<40) then return end\nlocal target=TensorCore.mGetEntity(s.first)\nif not target then return end\nlocal p=TensorCore.mGetPlayer()\nlocal drawer=TensorCore.getStaticDrawer(0xFF66FF99,2)\ndrawer:addTimedCircleOnEnt(6000,target.id,1,0,false,true)\nif p then\n local dist=TensorCore.getDistance2d(p.pos,target.pos)\n if dist>1 then drawer:addTimedArrow(6000,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,target.pos),math.max(.1,dist-1),1,1,1.5,0,false) end\nend\nAnyoneCore.addTimedWorldTextOnEnt(6000,\"KILL ORDER: 1 SE â†’ 2 SW â†’ 3 NE â†’ 4 NW\",target.id,0xFFFFFFFF,true,1.3,3)\ns.done=true;self.used=true",
+				execute = "local labels=data.uwu_relative_nails\nif not labels or not labels.drawn then return end\nlocal r=AnyoneCore.Roster\nif r.current()==nil or not r.isReady() then return end\nlocal slot=r.mySlot()\nif slot~=\"M1\" and slot~=\"M2\" and slot~=\"R1\" and slot~=\"R2\" then self.used=true;return end\nlocal s=data.lpdu_nail_40\nif not s then\n s={list={}};data.lpdu_nail_40=s\n for _,n in pairs(labels.nails) do s.list[#s.list+1]=n end\n if #s.list~=4 then data.lpdu_nail_40=nil;return end\n local list=s.list;local ai,bi,q=1,2,math.huge\n for i=1,3 do for j=i+1,4 do\n  local dx,dz=list[i].x-list[j].x,list[i].z-list[j].z;local d=dx*dx+dz*dz\n  if d<q then ai,bi,q=i,j,d end\n end end\n s.northA=list[ai].id;s.northB=list[bi].id\n local south={};for i=1,4 do if i~=ai and i~=bi then south[#south+1]=list[i] end end\n s.southA=south[1].id;s.southB=south[2].id\n local nx=(list[ai].x+list[bi].x-south[1].x-south[2].x)*.5\n local nz=(list[ai].z+list[bi].z-south[1].z-south[2].z)*.5\n local ex,ez=-nz,nx\n local side=(south[1].x-south[2].x)*ex+(south[1].z-south[2].z)*ez\n s.first=side>=0 and south[1].id or south[2].id\nend\nif s.done then self.used=true;return end\nlocal a,b=TensorCore.mGetEntity(s.northA),TensorCore.mGetEntity(s.northB)\nlocal c,d=TensorCore.mGetEntity(s.southA),TensorCore.mGetEntity(s.southB)\nif not a or not b or not c or not d then return end\nif c.hp.current<=0 or d.hp.current<=0 then self.used=true;return end\nif not (a.hp.current>0 and a.hp.percent<40 or b.hp.current>0 and b.hp.percent<40) then return end\nlocal target=TensorCore.mGetEntity(s.first)\nif not target then return end\nlocal p=TensorCore.mGetPlayer()\nlocal drawer=TensorCore.getStaticDrawer(0xFF66FF99,2)\ndrawer:addTimedCircleOnEnt(6000,target.id,1,0,false,true)\nif p then\n local dist=TensorCore.getDistance2d(p.pos,target.pos)\n if dist>1 then drawer:addTimedArrow(6000,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,target.pos),math.max(.1,dist-1),1,1,1.5,0,false) end\nend\nAnyoneCore.addTimedWorldTextOnEnt(6000,\"KILL ORDER: 1 SE > 2 SW > 3 NE > 4 NW\",target.id,0xFFFFFFFF,true,1.3,3)\ns.done=true;self.used=true",
 				executeType = 2,
 				loop = true,
 				mechanicTime = 328,
@@ -5707,6 +5879,59 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\uwu\\main",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 3000,
+							alertTTS = true,
+							alertText = "Stack",
+							conditions = 
+							{
+								
+								{
+									"f8861ae0-27f0-80ae-b8e5-caf0d514d9c8",
+									true,
+								},
+							},
+							uuid = "e8df8c0e-2310-bd7d-8c36-0b2625272f70",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							buffCheckType = 2,
+							buffID = 1578,
+							category = "Self",
+							dequeueIfLuaFalse = true,
+							name = "No Searing Wind",
+							uuid = "f8861ae0-27f0-80ae-b8e5-caf0d514d9c8",
+							version = 3,
+						},
+					},
+				},
+				mechanicTime = 405,
+				name = "[Call][LPDU] Stack except Searing Wind",
+				timeRange = true,
+				timelineIndex = 61,
+				timerEndOffset = -2,
+				timerStartOffset = -3,
+				uuid = "6baf5f94-462f-3cb9-b02f-bee1551989ae",
+				version = 2,
+			},
+		},
 	},
 	[63] = 
 	{
@@ -6884,6 +7109,110 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local boss = TensorCore.mGetEntity(eventArgs.detectionTargetID)\nif not boss or not boss.targetable then return end\n-- Cast cones have their own fixed-direction draw.\nif boss.channelingid == 11091 then return end\nlocal target = TensorCore.mGetEntity(boss.targetid)\nif not target then return end\nlocal heading = TensorCore.getHeadingToTarget(boss.pos, target.pos)\nlocal drawer = TensorCore.getMoogleDrawer()\ndrawer:addCone(boss.pos.x,boss.pos.y,boss.pos.z,10.55,math.rad(120),heading)\ndrawer:addCone(boss.pos.x,boss.pos.y,boss.pos.z,15.55,math.rad(90),heading)\n",
+							conditions = 
+							{
+								
+								{
+									"89c114fb-292a-75dc-a10f-0aad954b5590",
+									true,
+								},
+							},
+							name = "Mechanic geometry",
+							uuid = "ae4ce833-d673-1423-8b4b-f873ba007840",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Titan cleaves",
+							partyTargetContentID = 1801,
+							uuid = "89c114fb-292a-75dc-a10f-0aad954b5590",
+							version = 3,
+						},
+					},
+				},
+				eventType = 12,
+				mechanicTime = 600,
+				name = "[Draw][LPDU] Titan cleaves target cone",
+				timeRange = true,
+				timelineIndex = 74,
+				timerEndOffset = 31,
+				uuid = "a2819d95-ac84-8106-aef3-94df40af4828",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local boss = TensorCore.mGetEntity(eventArgs.entityID)\nif not boss then return end\nlocal ms=eventArgs.channelTimeMax*1000\nTensorCore.getMoogleDrawer():addTimedCircle(ms,boss.pos.x,boss.pos.y,boss.pos.z,18)\n-- First Geocrush is central: the arena's outer 18-20y band is the safe edge.\nTensorCore.getStaticDrawer(0x6630E080,2):addTimedDonut(ms,100,boss.pos.y,100,18,20,0,false,true)\nAnyoneCore.addWorldTextCountdown(ms,{x=100,y=boss.pos.y+1.5,z=100},0xFFFFFFFF,true,1.4)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"27f21cdb-823d-925a-a977-9212dccf5f9b",
+									true,
+								},
+							},
+							name = "Mechanic geometry",
+							uuid = "d13ef56b-a97f-f6c7-957e-b191aafe09aa",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventSpellID = 11517,
+							name = "Attack ID",
+							uuid = "27f21cdb-823d-925a-a977-9212dccf5f9b",
+							version = 3,
+						},
+					},
+				},
+				eventType = 3,
+				mechanicTime = 600,
+				name = "[Draw][LPDU] Titan arrival danger and safe edge",
+				timeRange = true,
+				timelineIndex = 74,
+				timerEndOffset = 5,
+				timerStartOffset = -20,
+				uuid = "24180c47-6e12-8c36-bbec-4b885b6b22fa",
+				version = 2,
+			},
+		},
 	},
 	[75] = 
 	{
@@ -7221,7 +7550,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then\n    self.used = true\n    return\nend\n\n-- Successful pulls place the safe knockback setup at the north side, around x=100, z=110.\nlocal center = { x = 100, y = player.pos.y, z = 110 }\nlocal drawer = TensorCore.getCachedDrawer(\n    0x5530E080, 0x5530E080, 0x5530E080, 0xFF30E080, 2.0\n)\ndrawer:addTimedCircle(\n    3000, center.x, center.y, center.z, 1.25,\n    0, false, true, Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n)\nAnyoneCore.addTimedWorldText(\n    3000,\n    \"UPHEAVAL: STAND IN GREEN\",\n    { x = center.x, y = center.y + 1.2, z = center.z },\n    0xFF30E080,\n    true,\n    0.9\n)\nself.used = true",
+							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then\n    self.used = true\n    return\nend\n\n-- Successful pulls place the safe knockback setup at the north side, around x=100, z=110.\nlocal center = { x = 100, y = player.pos.y, z = 110 }\nlocal drawer = TensorCore.getCachedDrawer(\n    0x5530E080, 0x5530E080, 0x5530E080, 0xFF30E080, 2.0\n)\ndrawer:addTimedCircle(\n    3000, center.x, center.y, center.z, 0.625,\n    0, false, true, Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n)\nAnyoneCore.addTimedWorldText(\n    3000,\n    \"UPHEAVAL: STAND IN GREEN\",\n    { x = center.x, y = center.y + 1.2, z = center.z },\n    0xFF30E080,\n    true,\n    0.9\n)\nself.used = true",
 							displayPath = "Draws - Titan LPDU",
 							name = "Green safe starting circle",
 							uuid = "8fed7728-1ef2-1479-b126-a5ae87b33953",
