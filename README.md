@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Reduced both green mirror destination circles by another 15%. (22-10-2026)
+
 - Reduced the P2 intermission knockback destination circle by 10%. (22-10-2026)
 
 - Reduced both mirror destination circles by another 10% for a smaller marker. (22-10-2026)
@@ -95,7 +97,6 @@ TEA: Coming soon by Ton.
 
 - Reduced blue and red mirror destination circles by 5%, with positions and arrows unchanged. (22-10-2026)
 
-- Improved P1 conga visibility: a fixed arrow and small green circle mark your lineup spot from the conga reminder until tether guidance takes over, including when you are already near the spot. (22-10-2026)
 
 
 
