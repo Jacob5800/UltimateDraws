@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Reduced the P2 intermission knockback destination circle by 10%. (22-10-2026)
+
 - Reduced both mirror destination circles by another 10% for a smaller marker. (22-10-2026)
 
 - Added AnyoneCore countdowns to your nearest first-wave Light Rampant orb circle and to the middle tower when you are assigned to soak it. Second-wave orb circles have no added timer. (22-10-2026)
@@ -95,7 +97,6 @@ TEA: Coming soon by Ton.
 
 - Improved P1 conga visibility: a fixed arrow and small green circle mark your lineup spot from the conga reminder until tether guidance takes over, including when you are already near the spot. (22-10-2026)
 
-- Fixed Diamond Dust In then spread guidance: the green In arrow clears when Scythe Kick resolves, and spreading players no longer receive the later center arrow. (22-10-2026)
 
 
 
