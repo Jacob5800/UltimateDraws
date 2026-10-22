@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Added a personal Drop puddles call for Hiemal Ray markers during P2 crystals. (22-10-2026)
+
 - Diamond Dust now calls Wait/Move based on personal safe-side position; Light Rampant calls Regroup after the player's tower soak or final puddle resolves. (22-10-2026)
 
 - Fixed P2 crystal AoE then focus: disables AoE after 4.8 seconds, keeps it off after the assigned crystal breaks or targets change, and re-enables at P3 start. (22-10-2026)

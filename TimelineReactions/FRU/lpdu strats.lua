@@ -6506,6 +6506,81 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "73119008-5087-27c4-b57f-22c564299f8e",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Crystal Damage",
+				uuid = "a073b172-3dea-4e62-b0c9-5cc745f574ee",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local p=TensorCore.mGetPlayer()\nif p and eventArgs.entityID==p.id then\n local now=Now()\n if not data.lpduHiemalCallAt or now-data.lpduHiemalCallAt>3000 then\n  AnyoneCore.Shotcall(\"Drop puddles\",true,3,true)\n  data.lpduHiemalCallAt=now\n end\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"cb34a7dc-f0b3-54db-b599-65f9df7c8f44",
+									true,
+								},
+							},
+							name = "Drop puddles if marked",
+							uuid = "1ca5841b-154a-ac5d-945a-6490962a7c8e",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventMarkerID = 84,
+							name = "Hiemal Ray marker",
+							uuid = "cb34a7dc-f0b3-54db-b599-65f9df7c8f44",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Crystal Damage",
+				eventType = 4,
+				loop = true,
+				mechanicTime = 431.1,
+				name = "[LPDU] P2 Crystals - Personal Puddle Call",
+				timeRange = true,
+				timelineIndex = 108,
+				timerEndOffset = 25,
+				timerStartOffset = -5,
+				uuid = "5a44f84d-c1cd-a53a-904b-529ab77f0e99",
+				version = 2,
+			},
+		},
 	},
 	[117] = 
 	{
