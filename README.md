@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Reduced both mirror destination circles by another 10% for a smaller marker. (22-10-2026)
+
 - Added AnyoneCore countdowns to your nearest first-wave Light Rampant orb circle and to the middle tower when you are assigned to soak it. Second-wave orb circles have no added timer. (22-10-2026)
 
 - Reduced mirror destination circles by a further 10%, keeping their positions, arrows and timing unchanged. (22-10-2026)
@@ -95,7 +97,6 @@ TEA: Coming soon by Ton.
 
 - Fixed Diamond Dust In then spread guidance: the green In arrow clears when Scythe Kick resolves, and spreading players no longer receive the later center arrow. (22-10-2026)
 
-- UR now marks your personal rewind-recording destination with a green circle and existing arrow, with a Place rewind callout. Enabled by default under P3; the existing countdown stays unchanged. (22-10-2026)
 
 
 
