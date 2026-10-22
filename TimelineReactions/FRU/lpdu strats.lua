@@ -5417,6 +5417,84 @@ local tbl =
 			},
 		},
 	},
+	[89] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "b0087da2-6083-b014-b0f6-bf5d8c8dd2be",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Light Rampant timers",
+				uuid = "cfb0be4f-2c03-4608-9ab5-52b1b25c8c4e",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.lpduLRFirstOrbTimer\nif s and s.shown then self.used=true;return end\nlocal p=TensorCore.mGetPlayer()\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not p or not p.pos or not e or not e.pos then return end\nif not s then s={orbs={}};data.lpduLRFirstOrbTimer=s end\ns.orbs[eventArgs.entityID]={x=e.pos.x,y=e.pos.y,z=e.pos.z,deadline=Now()+eventArgs.channelTimeMax*1000}\nlocal count=0;local best;local nearest\nfor _,orb in pairs(s.orbs) do\n count=count+1\n local distance=TensorCore.getDistance2d(p.pos,orb)\n if not nearest or distance<nearest then nearest=distance;best=orb end\nend\nif count<3 then self.used=true;return end\nlocal remaining=best.deadline-Now()\nif remaining>0 then\n AnyoneCore.addWorldTextCountdown(remaining,{x=best.x,y=best.y+2,z=best.z},0xFFFFFFFF,true,1.5)\nend\ns.shown=true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"508c12ab-cf83-60f0-84f5-98915654b176",
+									true,
+								},
+							},
+							name = "Nearest first circle countdown only",
+							uuid = "4772b043-edb8-a299-afaa-162cdd9008a5",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventSpellID = 40219,
+							name = "First-wave Burst",
+							uuid = "508c12ab-cf83-60f0-84f5-98915654b176",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Light Rampant timers",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 352,
+				name = "[LPDU] LR - First orb circle countdown",
+				timeRange = true,
+				timelineIndex = 89,
+				timerEndOffset = -4,
+				timerStartOffset = -7,
+				uuid = "31830576-7706-9474-b34b-6e29b1a07c56",
+				version = 2,
+			},
+		},
+	},
 	[90] = 
 	{
 		
@@ -5451,7 +5529,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local p=TensorCore.mGetPlayer()\nlocal s=data.lpdu_fru_lr_personal\nif s and s.centerShown then self.used=true;return end\nif p==nil then return end\nif TensorCore.getBuff(p,2257,nil,2)==nil then self.used=true;return end\nif s then s.centerShown=true;s.guide(100,100,2400) end\nAnyoneCore.Shotcall(\"Middle tower\",true,2.4,false)\nself.used=true",
+							actionLua = "local p=TensorCore.mGetPlayer()\nlocal s=data.lpdu_fru_lr_personal\nif s and s.centerShown then self.used=true;return end\nif p==nil then return end\nif TensorCore.getBuff(p,2257,nil,2)==nil then self.used=true;return end\nif s then s.centerShown=true;s.guide(100,100,2400) end\nlocal remaining=math.max(0,(357.7-TensorReactions_CurrentTimer)*1000)\nif remaining>0 then\n AnyoneCore.addWorldTextCountdown(remaining,{x=100,y=2,z=100},0xFFFFFFFF,true,1.5)\nend\nAnyoneCore.Shotcall(\"Middle tower\",true,2.4,false)\nself.used=true",
 							conditions = 
 							{
 								

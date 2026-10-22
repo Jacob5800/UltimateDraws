@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Added AnyoneCore countdowns to your nearest first-wave Light Rampant orb circle and to the middle tower when you are assigned to soak it. Second-wave orb circles have no added timer. (22-10-2026)
+
 - Reduced mirror destination circles by a further 10%, keeping their positions, arrows and timing unchanged. (22-10-2026)
 
 - Restricted Swap DPS spreads to the specific P1 safe-side spread after the clones. Clock spots and other Protean guidance now keep their original orientation. (22-10-2026)
@@ -95,7 +97,6 @@ TEA: Coming soon by Ton.
 
 - UR now marks your personal rewind-recording destination with a green circle and existing arrow, with a Place rewind callout. Enabled by default under P3; the existing countdown stays unchanged. (22-10-2026)
 
-- Added optional P2 crystal auto-targeting (off by default): your color pair's crystal, remaining outer light crystals, then middle. Added personal spread countdowns around 632/835 and moved the post-knockback last-Water regroup spot 2 yalms closer. (22-10-2026)
 
 
 
