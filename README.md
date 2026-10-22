@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Fixed P2 crystal AoE then focus: disables AoE after 4.8 seconds, keeps it off after the assigned crystal breaks or targets change, and re-enables at P3 start. (22-10-2026)
+
 - Fixed Fall of Faith callout sequence tracking, extended the P1 inward arrow by 0.2s, and added personal Light Rampant Take tower/Bait puddles calls. (22-10-2026)
 
 - Fixed repeated P1 Fall of Faith fire/lightning helper calls when the opposite side resolves; calls now track your own tether sequence and formation. (22-10-2026)
