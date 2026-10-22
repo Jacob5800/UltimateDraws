@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Fixed personal DD return and crystal puddle calls, added UR next-step instructions, and delayed Fall of Faith helper formation changes until that side's hit resolves. (22-10-2026)
+
 - Added a personal Drop puddles call for Hiemal Ray markers during P2 crystals. (22-10-2026)
 
 - Diamond Dust now calls Wait/Move based on personal safe-side position; Light Rampant calls Regroup after the player's tower soak or final puddle resolves. (22-10-2026)

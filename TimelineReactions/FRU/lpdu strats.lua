@@ -2292,7 +2292,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local state=data.frup1_lpdu_four_tether\nif not state or not state.records or #state.records<4 then self.used=true;return end\nlocal own=data.lpduFruFofHelperGuide\nif not own then own={};data.lpduFruFofHelperGuide=own end\nlocal function clear()\n if own.circle then Argus.deleteTimedShape(own.circle);own.circle=nil end\n if own.arrow then Argus.deleteTimedShape(own.arrow);own.arrow=nil end\nend\nlocal roster=AnyoneCore and AnyoneCore.Roster\nif not roster or roster.current()==nil or not roster.isReady() then clear();self.used=true;return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then clear();self.used=true;return end\nlocal records=state.records\nlocal myOrder\nlocal tethered={}\nfor order,record in ipairs(records) do\n tethered[record.id]=true\n if record.id==p.id then myOrder=order end\nend\nlocal slotOrder={\"H1\",\"H2\",\"T1\",\"T2\",\"M1\",\"M2\",\"R1\",\"R2\"}\nlocal fillers={}\nfor _,slot in ipairs(slotOrder) do\n local id=roster.idOf(slot)\n if not id then clear();self.used=true;return end\n if not tethered[id] then fillers[#fillers+1]=id end\nend\nif #fillers~=4 then clear();self.used=true;return end\nlocal side,helper\nif myOrder then\n side=(myOrder==1 or myOrder==3) and 1 or 2\n helper=\"middle\"\nelse\n for index,id in ipairs(fillers) do\n  if id==p.id then\n   side=index<=2 and 1 or 2\n   helper=(index==1 or index==3) and \"left\" or \"right\"\n   break\n  end\n end\nend\nif not side then clear();self.used=true;return end\nlocal first=side\nlocal second=side+2\nlocal active=not records[first].resolved and first or (not records[second].resolved and second or nil)\n-- Active bait keeps the existing tether-pass arrow and its personal circle.\nif not active or myOrder==active then clear();self.used=true;return end\nlocal record=records[active]\nlocal anchor=TensorCore.mGetEntity(record.id)\nif not anchor or not anchor.pos then clear();self.used=true;return end\nlocal fx,fz=100-anchor.pos.x,100-anchor.pos.z\nlocal length=math.sqrt(fx*fx+fz*fz)\nif length<2 then clear();self.used=true;return end\nfx,fz=fx/length,fz/length\n-- Looking from the tether player toward arena-center boss: left is (fz,-fx).\nlocal leftX,leftZ=fz,-fx\nlocal lateral=helper==\"left\" and 1 or (helper==\"right\" and -1 or 0)\nlocal fire=record.tether==249\nlocal back,across\nif fire then\n back=2.2;across=lateral*.65\nelseif helper==\"middle\" then\n back=3;across=0\nelse\n back=0;across=lateral*3\nend\nlocal target={x=anchor.pos.x-fx*back+leftX*across,y=p.pos.y,z=anchor.pos.z-fz*back+leftZ*across}\n-- Call once per personal side sequence, independent of opposite-side resolution.\nlocal key=tostring(active)..\":\"..tostring(record.tether)..\":\"..helper\nif own.key~=key then\n clear();own.key=key\n local text=fire and \"Next: stack behind tether\" or (\"Lightning \"..helper)\n AnyoneCore.Shotcall(text,true,2.5,true)\nend\n-- Replace only this helper's previous generic local guidance; pass assignments are untouched.\nif state.localArrowUUID then Argus.deleteTimedShape(state.localArrowUUID);state.localArrowUUID=nil end\nlocal color=fire and GUI:ColorConvertFloat4ToU32(1,.16,.12,.55) or GUI:ColorConvertFloat4ToU32(.10,.52,1,.55)\nlocal drawer=TensorCore.getStaticDrawer(color,2)\nif own.circle and not drawer:updateTimedCircle(own.circle,500,target.x,target.y+.05,target.z,.65,0,true,true) then own.circle=nil end\nif not own.circle then own.circle=drawer:addTimedCircle(500,target.x,target.y+.05,target.z,.65,0,true,true) end\nlocal distance=TensorCore.getDistance2d(p.pos,target)\nif distance>.5 then\n local green=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.75),2)\n local heading=TensorCore.getHeadingToTarget(p.pos,target)\n local tip=math.min(.8,distance)\n if own.arrow and not green:updateTimedArrow(own.arrow,500,p.pos.x,p.pos.y+.05,p.pos.z,heading,math.max(.1,distance-tip),.55,tip,1.2,0,false) then own.arrow=nil end\n if not own.arrow then own.arrow=green:addTimedArrow(500,p.pos.x,p.pos.y+.05,p.pos.z,heading,math.max(.1,distance-tip),.55,tip,1.2,0,false) end\nelseif own.arrow then\n Argus.deleteTimedShape(own.arrow);own.arrow=nil\nend\nself.used=true\n",
+							actionLua = "local state=data.frup1_lpdu_four_tether\nif not state or not state.records or #state.records<4 then self.used=true;return end\nlocal own=data.lpduFruFofHelperGuide\nif not own then own={};data.lpduFruFofHelperGuide=own end\nlocal function clear()\n if own.circle then Argus.deleteTimedShape(own.circle);own.circle=nil end\n if own.arrow then Argus.deleteTimedShape(own.arrow);own.arrow=nil end\nend\nlocal roster=AnyoneCore and AnyoneCore.Roster\nif not roster or roster.current()==nil or not roster.isReady() then clear();self.used=true;return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then clear();self.used=true;return end\nlocal records=state.records\nlocal myOrder\nlocal tethered={}\nfor order,record in ipairs(records) do\n tethered[record.id]=true\n if record.id==p.id then myOrder=order end\nend\nlocal slotOrder={\"H1\",\"H2\",\"T1\",\"T2\",\"M1\",\"M2\",\"R1\",\"R2\"}\nlocal fillers={}\nfor _,slot in ipairs(slotOrder) do\n local id=roster.idOf(slot)\n if not id then clear();self.used=true;return end\n if not tethered[id] then fillers[#fillers+1]=id end\nend\nif #fillers~=4 then clear();self.used=true;return end\nlocal side,helper\nif myOrder then\n side=(myOrder==1 or myOrder==3) and 1 or 2\n helper=\"middle\"\nelse\n for index,id in ipairs(fillers) do\n  if id==p.id then\n   side=index<=2 and 1 or 2\n   helper=(index==1 or index==3) and \"left\" or \"right\"\n   break\n  end\n end\nend\nif not side then clear();self.used=true;return end\nlocal first=side\nlocal second=side+2\nlocal active=not records[first].helperResolved and first or (not records[second].helperResolved and second or nil)\n-- Active bait keeps the existing tether-pass arrow and its personal circle.\nif not active or myOrder==active then clear();self.used=true;return end\nlocal record=records[active]\nlocal anchor=TensorCore.mGetEntity(record.id)\nif not anchor or not anchor.pos then clear();self.used=true;return end\nlocal fx,fz=100-anchor.pos.x,100-anchor.pos.z\nlocal length=math.sqrt(fx*fx+fz*fz)\nif length<2 then clear();self.used=true;return end\nfx,fz=fx/length,fz/length\n-- Looking from the tether player toward arena-center boss: left is (fz,-fx).\nlocal leftX,leftZ=fz,-fx\nlocal lateral=helper==\"left\" and 1 or (helper==\"right\" and -1 or 0)\nlocal fire=record.tether==249\nlocal back,across\nif fire then\n back=2.2;across=lateral*.65\nelseif helper==\"middle\" then\n back=3;across=0\nelse\n back=0;across=lateral*3\nend\nlocal target={x=anchor.pos.x-fx*back+leftX*across,y=p.pos.y,z=anchor.pos.z-fz*back+leftZ*across}\n-- Call once per personal side sequence, independent of opposite-side resolution.\nlocal key=tostring(active)..\":\"..tostring(record.tether)..\":\"..helper\nif own.key~=key then\n clear();own.key=key\n local text=fire and \"Next: stack behind tether\" or (\"Lightning \"..helper)\n AnyoneCore.Shotcall(text,true,2.5,true)\nend\n-- Replace only this helper's previous generic local guidance; pass assignments are untouched.\nif state.localArrowUUID then Argus.deleteTimedShape(state.localArrowUUID);state.localArrowUUID=nil end\nlocal color=fire and GUI:ColorConvertFloat4ToU32(1,.16,.12,.55) or GUI:ColorConvertFloat4ToU32(.10,.52,1,.55)\nlocal drawer=TensorCore.getStaticDrawer(color,2)\nif own.circle and not drawer:updateTimedCircle(own.circle,500,target.x,target.y+.05,target.z,.65,0,true,true) then own.circle=nil end\nif not own.circle then own.circle=drawer:addTimedCircle(500,target.x,target.y+.05,target.z,.65,0,true,true) end\nlocal distance=TensorCore.getDistance2d(p.pos,target)\nif distance>.5 then\n local green=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.75),2)\n local heading=TensorCore.getHeadingToTarget(p.pos,target)\n local tip=math.min(.8,distance)\n if own.arrow and not green:updateTimedArrow(own.arrow,500,p.pos.x,p.pos.y+.05,p.pos.z,heading,math.max(.1,distance-tip),.55,tip,1.2,0,false) then own.arrow=nil end\n if not own.arrow then own.arrow=green:addTimedArrow(500,p.pos.x,p.pos.y+.05,p.pos.z,heading,math.max(.1,distance-tip),.55,tip,1.2,0,false) end\nelseif own.arrow then\n Argus.deleteTimedShape(own.arrow);own.arrow=nil\nend\nself.used=true\n",
 							name = "Personal fire/lightning formation",
 							uuid = "c63be04a-1a82-18b0-9d8f-299f51a30123",
 							version = 2.1,
@@ -2312,6 +2312,75 @@ local tbl =
 				timerEndOffset = 32.1,
 				timerStartOffset = 6.1,
 				uuid = "39f263a6-ddb3-7aa9-b912-761c6537d150",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Personal Calls",
+				uuid = "9ada652a-9d33-bab7-89aa-ae0d05d05fe8",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.frup1_lpdu_four_tether\nif not s or not s.records then self.used=true;return end\nlocal source=TensorCore.mGetEntity(eventArgs.entityID)\nif not source or not source.pos then self.used=true;return end\nlocal side=source.pos.z<100 and 1 or 2\ns.helperHitAt=s.helperHitAt or {}\nlocal now=Now()\nif s.helperHitAt[side] and now-s.helperHitAt[side]<1000 then self.used=true;return end\nfor _,order in ipairs({side,side+2}) do\n local record=s.records[order]\n if record and not record.helperResolved then\n  local matches=(record.tether==249 and eventArgs.spellID==40156) or (record.tether==287 and eventArgs.spellID==40143)\n  if matches then record.helperResolved=true;s.helperHitAt[side]=now end\n  break\n end\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"5da27382-54de-c760-a2dc-34957004e99b",
+									true,
+								},
+							},
+							name = "[LPDU] Fall of Faith - Resolve helper formation on hit",
+							uuid = "0f9446f2-3b2e-f9b4-b1c9-b068f4f57872",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							spellIDList = 
+							{
+								40156,
+								40143,
+							},
+							uuid = "5da27382-54de-c760-a2dc-34957004e99b",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Personal Calls",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 85.9,
+				name = "[LPDU] Fall of Faith - Resolve helper formation on hit",
+				timeRange = true,
+				timelineIndex = 22,
+				timerEndOffset = 33,
+				timerStartOffset = 12,
+				uuid = "475b7550-d02d-6798-b8cb-6a95a6f1b13a",
 				version = 2,
 			},
 		},
@@ -3472,6 +3541,84 @@ local tbl =
 				timelineIndex = 47,
 				timerOffset = -0.5,
 				uuid = "bbe2e59f-ef58-842e-a99b-534932dc44b1",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "838667c3-57ff-52c9-a9cd-e8405b5dc51a",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Personal Calls",
+				uuid = "f935bba9-7e78-632a-91ae-1422f5d29bfd",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local p=TensorCore.mGetPlayer()\nlocal marked=data.lpdu_p2_DD_marked\nif not p or not marked or data.lpduDDReturnCalled then self.used=true;return end\nlocal mine=false\nfor _,id in ipairs(marked) do if id==p.id then mine=true;break end end\nif mine then\n for _,id in ipairs(eventArgs.hitTargets) do\n  if id==p.id then\n   data.lpduDDReturnCalled=true\n   AnyoneCore.Shotcall(\"Return middle\",true,2.5,true)\n   break\n  end\n end\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"3966c339-13ff-e702-8653-ecbb714c3eb0",
+									true,
+								},
+							},
+							name = "[LPDU] Diamond Dust - Return after marked hit",
+							uuid = "1e3e1e2a-66f0-af8d-93b5-86b6eaec91b7",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							spellIDList = 
+							{
+								40199,
+							},
+							uuid = "3966c339-13ff-e702-8653-ecbb714c3eb0",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Personal Calls",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 245.1,
+				name = "[LPDU] Diamond Dust - Return after marked hit",
+				timeRange = true,
+				timelineIndex = 47,
+				timerEndOffset = 6,
+				timerStartOffset = -4,
+				uuid = "00c33af0-caf0-f0c6-8b5c-6be2d16bddef",
 				version = 2,
 			},
 		},
@@ -6581,6 +6728,50 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Personal Calls",
+				uuid = "5af8c25f-f023-a1ed-acb4-0fa765766d73",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "if eventArgs.newTetherID~=84 then self.used=true;return end\nlocal p=TensorCore.mGetPlayer()\nif p and eventArgs.newTargetID==p.id then AnyoneCore.Shotcall(\"Drop puddles\",true,3,true) end\nself.used=true",
+							name = "[LPDU] Crystals - Personal Hiemal tether call",
+							uuid = "54964976-b04e-c780-85e3-76fe015b8fc9",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU / Personal Calls",
+				eventType = 15,
+				loop = true,
+				mechanicTime = 431.1,
+				name = "[LPDU] Crystals - Personal Hiemal tether call",
+				timeRange = true,
+				timelineIndex = 108,
+				timerEndOffset = 25,
+				timerStartOffset = -5,
+				uuid = "529277fb-b2fc-2308-ab2d-18abc1b85838",
+				version = 2,
+			},
+		},
 	},
 	[117] = 
 	{
@@ -6862,7 +7053,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local index\nlocal p = TensorCore.mGetPlayer()\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current() == nil then\n    self.used = true\n    return\nend\nlocal mySlot = roster.mySlot()\nlocal myRole = (mySlot == \"T1\" and \"MT\") or (mySlot == \"T2\" and \"OT\") or mySlot\nif not roster.isReady() then\n    self.used = true\n    return\nend\nif p == nil then self.used = true; return end\nif myRole == \"MT\" then index = 1\nelseif myRole == \"OT\" then index = 2\nelseif myRole == \"H1\" then index = 3\nelseif myRole == \"H2\" then index = 4\nelseif myRole == \"M1\" then index = 5\nelseif myRole == \"M2\" then index = 6\nelseif myRole == \"R1\" then index = 7\nelseif myRole == \"R2\" then index = 8\nelse self.used = true; return end\nlocal partyIDs = {\n    roster.idOf(\"T1\"),\n    roster.idOf(\"T2\"),\n    roster.idOf(\"H1\"),\n    roster.idOf(\"H2\"),\n    roster.idOf(\"M1\"),\n    roster.idOf(\"M2\"),\n    roster.idOf(\"R1\"),\n    roster.idOf(\"R2\")\n}local p = TensorCore.mGetEntity(partyIDs[index])\nlocal buffs = {}\nlocal fireBuff = TensorCore.getBuff(p, 2455)\nlocal iceBuff = TensorCore.getBuff(p, 2462)\nif fireBuff then buffs[2455] = fireBuff.duration end\nif iceBuff then buffs[2462] = iceBuff.duration end\n\nlocal function checkDebuff(index, startRange, endRange, buffid)\n    local playerEnt  = TensorCore.mGetEntity(partyIDs[index])\n    local playerBuff = TensorCore.getBuff(playerEnt, buffid)\n    --d(playerBuff)\n    local customOrder\n    if startRange == 1 and endRange == 4 then\n        customOrder = {3, 1, 2, 4}\n    else\n        customOrder = {7, 5, 6, 8}\n    end\n    local idxPos = 999 \n    for pos, val in ipairs(customOrder) do\n        if val == index then\n            idxPos = pos\n            break\n        end\n    end\n\n    for i = startRange, endRange do\n        if i == index then\n            continue\n        end\n\n        local ent  = TensorCore.mGetEntity(partyIDs[i])\n        local buff = TensorCore.getBuff(ent, buffid)\n        --d(buff)\n\n        if playerBuff and buff then\n            if math.abs(buff.duration - playerBuff.duration) < 1 then\n                local iPos = 999\n                for pos, val in ipairs(customOrder) do\n                    if val == i then\n                        iPos = pos\n                        break\n                    end\n                end\n                if idxPos < iPos then\n                    return true\n                else\n                    return false\n                end\n            end\n        end\n    end\n\n    return false\nend\n\n\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .25),2)\ndata.lpdu_fru_ur_centers={}\ndata.lpdu_fru_ur_outs={}\nlocal function personalArrow(timeout,x,y,z,heading,length,width,tip,tipWidth,delay,progressive)\n if length>=17 then\n  local start=TensorReactions_CurrentTimer+(delay or 0)/1000\n  table.insert(data.lpdu_fru_ur_outs,{start=start,finish=start+timeout/1000})\n end\n return green:addTimedArrow(timeout,x,y,z,heading,length,width,tip,tipWidth,delay,progressive)\nend\nlocal function centerCircle(timeout,x,y,z,radius,delay,progressive)\n local start=TensorReactions_CurrentTimer+(delay or 0)/1000\n table.insert(data.lpdu_fru_ur_centers,{start=start,finish=start+timeout/1000})\n return green:addTimedCircle(timeout,x,y,z,radius,delay,progressive)\nend\nlocal center = {x = 100, y = 0,z = 100}\nlocal fire = 2455\nlocal ice = 2462\nlocal yellow = 2454\nlocal water = 2461\nlocal dark = 2460\nlocal heading2North = data.megaminx_p3_ur_north\nif TensorCore.isTank(p) or TensorCore.isHealer(p) then --support\n    if TensorCore.hasBuff(p,fire,nil,nil,20) then --long fire\n        --center, ne nw bait, center ice, center(rewind), out, center\n\n        local result = checkDebuff(index, 1, 4, fire)\n        if (result == true) then\n            AnyoneCore.Shotcall(\"left\", true, 40, false)\n        else\n            AnyoneCore.Shotcall(\"right\", true, 40, false)\n        end\n\n        local sideHeading = heading2North + (result and math.pi/4 or -math.pi/4)\n        local duration = buffs[2455] * 1000\n\n\n        centerCircle(duration  - 20000,center.x,0,center.z,5,0,true) --center\n\n        personalArrow(5000, 100, 0, 100, sideHeading, 8.5, 1, 1, 1,duration  - 20000,true) --\n\n        centerCircle(5000,center.x,0,center.z,3,duration  - 20000 + 5000,true) --center ice\n\n        personalArrow(5000, 100, 0, 100, sideHeading, 2, 1, 1, 1,duration  - 20000 + 5000 + 5000,true) --\n\n        personalArrow(5000, 100, 0, 100, sideHeading, 18, 1, 1, 1,duration  - 20000 + 5000 + 5000 + 5000,true) --\n\n        centerCircle(5000,center.x,0,center.z,5,duration  - 20000 + 5000 + 5000 + 5000 + 5000,true) --center\n    elseif TensorCore.hasBuff(p,fire,nil,nil,10) then --medium fire\n        --center, rewind(dark out water in), out(west (9east)), center, center, bait(west (9east))\n        local duration = buffs[2455] * 1000\n\n\n        centerCircle(duration  - 10000,center.x,0,center.z,5,0,true) --center\n\n        if TensorCore.hasBuff(p,water) then\n            personalArrow(5000, 100, 0, 100, heading2North + math.pi/2, 2, 1, 1, 1,duration  - 10000,true) --rewind\n        end\n        if TensorCore.hasBuff(p,dark) then\n            personalArrow(5000, 100, 0, 100, heading2North + math.pi/2, 7.5, 1, 1, 1,duration  - 10000,true) --rewind\n        end--\n\n        personalArrow(5000, 100, 0, 100, heading2North + math.pi/2, 18, 1, 1, 1,duration  - 10000 + 5000,true) --out\n        \n\n        centerCircle(5000,center.x,0,center.z,5,duration  - 10000 + 5000 + 5000,true) --center\n\n        centerCircle(5000,center.x,0,center.z,5,duration  - 10000 + 5000 + 5000 + 5000,true) --center\n\n        personalArrow(5000, 100, 0, 100, heading2North + math.pi/2, 8.5, 1, 1, 1,duration  - 10000 + 5000 + 5000 + 5000 + 5000,true) --bait hourglass\n    else -- short fire or ice\n        --(ice center, fire out), rewind(dark out water in), center ice, n bait, center, center\n        local duration\n        local isIce = TensorCore.hasBuff(p,ice)\n        local isFire = TensorCore.hasBuff(p,fire)\n        if isIce then\n            duration = buffs[2462] * 1000 - 10000\n            centerCircle(duration,center.x,0,center.z,5,0,true) --center if ice\n        end\n        if isFire then\n            duration = buffs[2455] * 1000\n            personalArrow(duration, 100, 0, 100, heading2North , 18, 1, 1, 1,0,true) --out if fire\n        end\n\n        if TensorCore.hasBuff(p,water) then\n            personalArrow(5000, 100, 0, 100, heading2North, 2, 1, 1, 1,duration,true) --rewind\n        end\n        if TensorCore.hasBuff(p,dark) then\n            personalArrow(5000, 100, 0, 100, heading2North, 7.5, 1, 1, 1,duration,true) --rewind\n        end\n\n        centerCircle(5000,center.x,0,center.z,3,duration + 5000,true) --center ice\n\n        personalArrow(5000, 100, 0, 100, heading2North, 8.5, 1, 1, 1,duration + 5000 + 5000,true) --bait hourglass\n\n        centerCircle(5000,center.x,0,center.z,5,duration + 5000 + 5000 + 5000,true) --center\n\n        centerCircle(5000,center.x,0,center.z,5,duration + 5000 + 5000 + 5000 + 5000,true) --center\n    end\nelse --dps\n\n    if TensorCore.hasBuff(p,fire,nil,nil,20) or TensorCore.hasBuff(p,ice) then --long fire\n        --center, s bait, center ice, center(rewind), out, center\n        local duration\n        local isIce = TensorCore.hasBuff(p,ice)\n        local isFire = TensorCore.hasBuff(p,fire)\n        if isIce then\n            duration = buffs[2462] * 1000 + 10000\n        end\n        if isFire then\n            duration = buffs[2455] * 1000\n        end\n\n\n        centerCircle(duration  - 20000,center.x,0,center.z,5,0,true) --center\n\n        personalArrow(5000, 100, 0, 100, heading2North + math.pi, 8.5, 1, 1, 1,duration  - 20000,true) --bait hourglass\n\n        centerCircle(5000,center.x,0,center.z,3,duration  - 20000 + 5000,true) --center ice\n\n        personalArrow(5000, 100, 0, 100, heading2North + math.pi, 2, 1, 1, 1,duration  - 20000 + 5000 + 5000,true) --rewind\n\n        personalArrow(5000, 100, 0, 100, heading2North + math.pi, 18, 1, 1, 1,duration  - 20000 + 5000 + 5000 + 5000,true) --out\n\n        centerCircle(5000,center.x,0,center.z,5,duration  - 20000 + 5000 + 5000 + 5000 + 5000,true) --center\n    elseif TensorCore.hasBuff(p,fire,nil,nil,10) then --medium fire\n        --center, rewind(dark out water in), out(east (9west)), center, center, bait(east (9west))\n        --center, rewind(dark out water in), out(west (9east)), center, center, bait(west (9east))\n        local duration = buffs[2455] * 1000\n\n\n        centerCircle(duration  - 10000,center.x,0,center.z,5,0,true) --center\n\n        if TensorCore.hasBuff(p,water) then\n            personalArrow(5000, 100, 0, 100, heading2North - math.pi/2, 2, 1, 1, 1,duration  - 10000,true) --rewind\n        end\n        if TensorCore.hasBuff(p,dark) then\n            personalArrow(5000, 100, 0, 100, heading2North - math.pi/2, 7.5, 1, 1, 1,duration  - 10000,true) --rewind\n        end--\n\n        personalArrow(5000, 100, 0, 100, heading2North - math.pi/2, 18, 1, 1, 1,duration  - 10000 + 5000,true) --out\n        \n\n        centerCircle(5000,center.x,0,center.z,5,duration  - 10000 + 5000 + 5000,true) --center\n\n        centerCircle(5000,center.x,0,center.z,5,duration  - 10000 + 5000 + 5000 + 5000,true) --center\n\n        personalArrow(5000, 100, 0, 100, heading2North - math.pi/2, 8.5, 1, 1, 1,duration  - 10000 + 5000 + 5000 + 5000 + 5000,true) --bait hourglass\n    else -- short fire or ice\n        --fire out se sw, rewind(dark out water in), center, sw se bait, center, center\n        --(ice center, fire out), rewind(dark out water in), center ice, n bait, center, center\n        local duration = buffs[2455] * 1000\n\n        local result = checkDebuff(index, 5, 8, fire)\n        if (result == true) then\n            AnyoneCore.Shotcall(\"left\", true, 40, false)\n        else\n            AnyoneCore.Shotcall(\"right\", true, 40, false)\n        end\n\n        local sideHeading = heading2North + (result and 3*math.pi/4 or -3*math.pi/4)\n\n        personalArrow(duration, 100, 0, 100, sideHeading , 18, 1, 1, 1,0,true) --out if fire\n\n        if TensorCore.hasBuff(p,water) then\n            personalArrow(5000, 100, 0, 100, sideHeading, 2, 1, 1, 1,duration,true) --rewind\n        end\n        if TensorCore.hasBuff(p,dark) then\n            personalArrow(5000, 100, 0, 100, sideHeading, 7.5, 1, 1, 1,duration,true) --rewind\n        end\n\n        centerCircle(5000,center.x,0,center.z,3,duration + 5000,true) --center ice\n\n        personalArrow(5000, 100, 0, 100, sideHeading, 8.5, 1, 1, 1,duration + 5000 + 5000,true) --bait hourglass\n\n        centerCircle(5000,center.x,0,center.z,5,duration + 5000 + 5000 + 5000,true) --center\n\n        centerCircle(5000,center.x,0,center.z,5,duration + 5000 + 5000 + 5000 + 5000,true) --center\n    end\nend\nself.used = true",
+							actionLua = "local index\nlocal p = TensorCore.mGetPlayer()\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif roster == nil or roster.current() == nil then\n    self.used = true\n    return\nend\nlocal mySlot = roster.mySlot()\nlocal myRole = (mySlot == \"T1\" and \"MT\") or (mySlot == \"T2\" and \"OT\") or mySlot\nif not roster.isReady() then\n    self.used = true\n    return\nend\nif p == nil then self.used = true; return end\nif myRole == \"MT\" then index = 1\nelseif myRole == \"OT\" then index = 2\nelseif myRole == \"H1\" then index = 3\nelseif myRole == \"H2\" then index = 4\nelseif myRole == \"M1\" then index = 5\nelseif myRole == \"M2\" then index = 6\nelseif myRole == \"R1\" then index = 7\nelseif myRole == \"R2\" then index = 8\nelse self.used = true; return end\nlocal partyIDs = {\n    roster.idOf(\"T1\"),\n    roster.idOf(\"T2\"),\n    roster.idOf(\"H1\"),\n    roster.idOf(\"H2\"),\n    roster.idOf(\"M1\"),\n    roster.idOf(\"M2\"),\n    roster.idOf(\"R1\"),\n    roster.idOf(\"R2\")\n}local p = TensorCore.mGetEntity(partyIDs[index])\nlocal buffs = {}\nlocal fireBuff = TensorCore.getBuff(p, 2455)\nlocal iceBuff = TensorCore.getBuff(p, 2462)\nif fireBuff then buffs[2455] = fireBuff.duration end\nif iceBuff then buffs[2462] = iceBuff.duration end\n\nlocal function checkDebuff(index, startRange, endRange, buffid)\n    local playerEnt  = TensorCore.mGetEntity(partyIDs[index])\n    local playerBuff = TensorCore.getBuff(playerEnt, buffid)\n    --d(playerBuff)\n    local customOrder\n    if startRange == 1 and endRange == 4 then\n        customOrder = {3, 1, 2, 4}\n    else\n        customOrder = {7, 5, 6, 8}\n    end\n    local idxPos = 999 \n    for pos, val in ipairs(customOrder) do\n        if val == index then\n            idxPos = pos\n            break\n        end\n    end\n\n    for i = startRange, endRange do\n        if i == index then\n            continue\n        end\n\n        local ent  = TensorCore.mGetEntity(partyIDs[i])\n        local buff = TensorCore.getBuff(ent, buffid)\n        --d(buff)\n\n        if playerBuff and buff then\n            if math.abs(buff.duration - playerBuff.duration) < 1 then\n                local iPos = 999\n                for pos, val in ipairs(customOrder) do\n                    if val == i then\n                        iPos = pos\n                        break\n                    end\n                end\n                if idxPos < iPos then\n                    return true\n                else\n                    return false\n                end\n            end\n        end\n    end\n\n    return false\nend\n\n\nlocal green = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0/255, 255/255, 0/255, .25),2)\ndata.lpdu_fru_ur_centers={}\ndata.lpdu_fru_ur_outs={}\nlocal function personalArrow(timeout,x,y,z,heading,length,width,tip,tipWidth,delay,progressive)\n if length<17 then\n  local start=TensorReactions_CurrentTimer+(delay or 0)/1000\n  local text=length<=3 and \"Stack middle\" or (length<8 and \"Spread\" or \"Bait laser\")\n  table.insert(data.lpdu_fru_ur_outs,{start=start,finish=start+timeout/1000,text=text})\n end\n if length>=17 then\n  local start=TensorReactions_CurrentTimer+(delay or 0)/1000\n  table.insert(data.lpdu_fru_ur_outs,{start=start,finish=start+timeout/1000})\n end\n return green:addTimedArrow(timeout,x,y,z,heading,length,width,tip,tipWidth,delay,progressive)\nend\nlocal function centerCircle(timeout,x,y,z,radius,delay,progressive)\n local start=TensorReactions_CurrentTimer+(delay or 0)/1000\n table.insert(data.lpdu_fru_ur_centers,{start=start,finish=start+timeout/1000})\n return green:addTimedCircle(timeout,x,y,z,radius,delay,progressive)\nend\nlocal center = {x = 100, y = 0,z = 100}\nlocal fire = 2455\nlocal ice = 2462\nlocal yellow = 2454\nlocal water = 2461\nlocal dark = 2460\nlocal heading2North = data.megaminx_p3_ur_north\nif TensorCore.isTank(p) or TensorCore.isHealer(p) then --support\n    if TensorCore.hasBuff(p,fire,nil,nil,20) then --long fire\n        --center, ne nw bait, center ice, center(rewind), out, center\n\n        local result = checkDebuff(index, 1, 4, fire)\n        if (result == true) then\n            AnyoneCore.Shotcall(\"left\", true, 40, false)\n        else\n            AnyoneCore.Shotcall(\"right\", true, 40, false)\n        end\n\n        local sideHeading = heading2North + (result and math.pi/4 or -math.pi/4)\n        local duration = buffs[2455] * 1000\n\n\n        centerCircle(duration  - 20000,center.x,0,center.z,5,0,true) --center\n\n        personalArrow(5000, 100, 0, 100, sideHeading, 8.5, 1, 1, 1,duration  - 20000,true) --\n\n        centerCircle(5000,center.x,0,center.z,3,duration  - 20000 + 5000,true) --center ice\n\n        personalArrow(5000, 100, 0, 100, sideHeading, 2, 1, 1, 1,duration  - 20000 + 5000 + 5000,true) --\n\n        personalArrow(5000, 100, 0, 100, sideHeading, 18, 1, 1, 1,duration  - 20000 + 5000 + 5000 + 5000,true) --\n\n        centerCircle(5000,center.x,0,center.z,5,duration  - 20000 + 5000 + 5000 + 5000 + 5000,true) --center\n    elseif TensorCore.hasBuff(p,fire,nil,nil,10) then --medium fire\n        --center, rewind(dark out water in), out(west (9east)), center, center, bait(west (9east))\n        local duration = buffs[2455] * 1000\n\n\n        centerCircle(duration  - 10000,center.x,0,center.z,5,0,true) --center\n\n        if TensorCore.hasBuff(p,water) then\n            personalArrow(5000, 100, 0, 100, heading2North + math.pi/2, 2, 1, 1, 1,duration  - 10000,true) --rewind\n        end\n        if TensorCore.hasBuff(p,dark) then\n            personalArrow(5000, 100, 0, 100, heading2North + math.pi/2, 7.5, 1, 1, 1,duration  - 10000,true) --rewind\n        end--\n\n        personalArrow(5000, 100, 0, 100, heading2North + math.pi/2, 18, 1, 1, 1,duration  - 10000 + 5000,true) --out\n        \n\n        centerCircle(5000,center.x,0,center.z,5,duration  - 10000 + 5000 + 5000,true) --center\n\n        centerCircle(5000,center.x,0,center.z,5,duration  - 10000 + 5000 + 5000 + 5000,true) --center\n\n        personalArrow(5000, 100, 0, 100, heading2North + math.pi/2, 8.5, 1, 1, 1,duration  - 10000 + 5000 + 5000 + 5000 + 5000,true) --bait hourglass\n    else -- short fire or ice\n        --(ice center, fire out), rewind(dark out water in), center ice, n bait, center, center\n        local duration\n        local isIce = TensorCore.hasBuff(p,ice)\n        local isFire = TensorCore.hasBuff(p,fire)\n        if isIce then\n            duration = buffs[2462] * 1000 - 10000\n            centerCircle(duration,center.x,0,center.z,5,0,true) --center if ice\n        end\n        if isFire then\n            duration = buffs[2455] * 1000\n            personalArrow(duration, 100, 0, 100, heading2North , 18, 1, 1, 1,0,true) --out if fire\n        end\n\n        if TensorCore.hasBuff(p,water) then\n            personalArrow(5000, 100, 0, 100, heading2North, 2, 1, 1, 1,duration,true) --rewind\n        end\n        if TensorCore.hasBuff(p,dark) then\n            personalArrow(5000, 100, 0, 100, heading2North, 7.5, 1, 1, 1,duration,true) --rewind\n        end\n\n        centerCircle(5000,center.x,0,center.z,3,duration + 5000,true) --center ice\n\n        personalArrow(5000, 100, 0, 100, heading2North, 8.5, 1, 1, 1,duration + 5000 + 5000,true) --bait hourglass\n\n        centerCircle(5000,center.x,0,center.z,5,duration + 5000 + 5000 + 5000,true) --center\n\n        centerCircle(5000,center.x,0,center.z,5,duration + 5000 + 5000 + 5000 + 5000,true) --center\n    end\nelse --dps\n\n    if TensorCore.hasBuff(p,fire,nil,nil,20) or TensorCore.hasBuff(p,ice) then --long fire\n        --center, s bait, center ice, center(rewind), out, center\n        local duration\n        local isIce = TensorCore.hasBuff(p,ice)\n        local isFire = TensorCore.hasBuff(p,fire)\n        if isIce then\n            duration = buffs[2462] * 1000 + 10000\n        end\n        if isFire then\n            duration = buffs[2455] * 1000\n        end\n\n\n        centerCircle(duration  - 20000,center.x,0,center.z,5,0,true) --center\n\n        personalArrow(5000, 100, 0, 100, heading2North + math.pi, 8.5, 1, 1, 1,duration  - 20000,true) --bait hourglass\n\n        centerCircle(5000,center.x,0,center.z,3,duration  - 20000 + 5000,true) --center ice\n\n        personalArrow(5000, 100, 0, 100, heading2North + math.pi, 2, 1, 1, 1,duration  - 20000 + 5000 + 5000,true) --rewind\n\n        personalArrow(5000, 100, 0, 100, heading2North + math.pi, 18, 1, 1, 1,duration  - 20000 + 5000 + 5000 + 5000,true) --out\n\n        centerCircle(5000,center.x,0,center.z,5,duration  - 20000 + 5000 + 5000 + 5000 + 5000,true) --center\n    elseif TensorCore.hasBuff(p,fire,nil,nil,10) then --medium fire\n        --center, rewind(dark out water in), out(east (9west)), center, center, bait(east (9west))\n        --center, rewind(dark out water in), out(west (9east)), center, center, bait(west (9east))\n        local duration = buffs[2455] * 1000\n\n\n        centerCircle(duration  - 10000,center.x,0,center.z,5,0,true) --center\n\n        if TensorCore.hasBuff(p,water) then\n            personalArrow(5000, 100, 0, 100, heading2North - math.pi/2, 2, 1, 1, 1,duration  - 10000,true) --rewind\n        end\n        if TensorCore.hasBuff(p,dark) then\n            personalArrow(5000, 100, 0, 100, heading2North - math.pi/2, 7.5, 1, 1, 1,duration  - 10000,true) --rewind\n        end--\n\n        personalArrow(5000, 100, 0, 100, heading2North - math.pi/2, 18, 1, 1, 1,duration  - 10000 + 5000,true) --out\n        \n\n        centerCircle(5000,center.x,0,center.z,5,duration  - 10000 + 5000 + 5000,true) --center\n\n        centerCircle(5000,center.x,0,center.z,5,duration  - 10000 + 5000 + 5000 + 5000,true) --center\n\n        personalArrow(5000, 100, 0, 100, heading2North - math.pi/2, 8.5, 1, 1, 1,duration  - 10000 + 5000 + 5000 + 5000 + 5000,true) --bait hourglass\n    else -- short fire or ice\n        --fire out se sw, rewind(dark out water in), center, sw se bait, center, center\n        --(ice center, fire out), rewind(dark out water in), center ice, n bait, center, center\n        local duration = buffs[2455] * 1000\n\n        local result = checkDebuff(index, 5, 8, fire)\n        if (result == true) then\n            AnyoneCore.Shotcall(\"left\", true, 40, false)\n        else\n            AnyoneCore.Shotcall(\"right\", true, 40, false)\n        end\n\n        local sideHeading = heading2North + (result and 3*math.pi/4 or -3*math.pi/4)\n\n        personalArrow(duration, 100, 0, 100, sideHeading , 18, 1, 1, 1,0,true) --out if fire\n\n        if TensorCore.hasBuff(p,water) then\n            personalArrow(5000, 100, 0, 100, sideHeading, 2, 1, 1, 1,duration,true) --rewind\n        end\n        if TensorCore.hasBuff(p,dark) then\n            personalArrow(5000, 100, 0, 100, sideHeading, 7.5, 1, 1, 1,duration,true) --rewind\n        end\n\n        centerCircle(5000,center.x,0,center.z,3,duration + 5000,true) --center ice\n\n        personalArrow(5000, 100, 0, 100, sideHeading, 8.5, 1, 1, 1,duration + 5000 + 5000,true) --bait hourglass\n\n        centerCircle(5000,center.x,0,center.z,5,duration + 5000 + 5000 + 5000,true) --center\n\n        centerCircle(5000,center.x,0,center.z,5,duration + 5000 + 5000 + 5000 + 5000,true) --center\n    end\nend\nself.used = true",
 							conditions = 
 							{
 								
@@ -6982,7 +7173,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local p=TensorCore.mGetPlayer();if p==nil or p.pos==nil then return end\nlocal function guide(x,z,ms,radius)\n local t={x=x,y=p.pos.y,z=z};local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.55),2,1)\n local length=TensorCore.getDistance2d(p.pos,t)\n if length>.25 then local tip=math.min(1.25,length);d:addTimedArrow(ms,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,t),math.max(.15,length-tip),.9,tip,2.2,0,false) end\nend\nlocal now=TensorReactions_CurrentTimer\nlocal outs=data.lpdu_fru_ur_outs\nif outs then\n for _,s in ipairs(outs) do\n  if not s.shown and now>=s.start and now<s.finish then\n   s.shown=true\n   AnyoneCore.Shotcall(\"Go out\",true,2.5,true)\n  end\n end\nend\nlocal stages=data.lpdu_fru_ur_centers;if stages==nil then self.used=true;return end\nfor _,s in ipairs(stages) do\n if not s.shown and now>=s.start and now<s.finish then\n  s.shown=true;guide(100,100,math.floor((s.finish-now)*1000),1)\n  AnyoneCore.Shotcall(\"Return middle\",true,2,false)\n end\nend\nself.used=true",
+							actionLua = "local p=TensorCore.mGetPlayer();if p==nil or p.pos==nil then return end\nlocal function guide(x,z,ms,radius)\n local t={x=x,y=p.pos.y,z=z};local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.55),2,1)\n local length=TensorCore.getDistance2d(p.pos,t)\n if length>.25 then local tip=math.min(1.25,length);d:addTimedArrow(ms,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,t),math.max(.15,length-tip),.9,tip,2.2,0,false) end\nend\nlocal now=TensorReactions_CurrentTimer\nlocal outs=data.lpdu_fru_ur_outs\nif outs then\n for _,s in ipairs(outs) do\n  if not s.shown and now>=s.start and now<s.finish then\n   s.shown=true\n   AnyoneCore.Shotcall(s.text or \"Go out\",true,2.5,true)\n  end\n end\nend\nlocal stages=data.lpdu_fru_ur_centers;if stages==nil then self.used=true;return end\nfor _,s in ipairs(stages) do\n if not s.shown and now>=s.start and now<s.finish then\n  s.shown=true;guide(100,100,math.floor((s.finish-now)*1000),1)\n  AnyoneCore.Shotcall((p.pos.x-100)^2+(p.pos.z-100)^2<=9 and \"Stay middle\" or \"Return middle\",true,2,true)\n end\nend\nself.used=true",
 							name = "P3 Ultimate Relativity - Return to Center",
 							uuid = "04b03b3f-3d3b-7bb0-ab42-391825879f9b",
 							version = 2.1,
