@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- UR now marks your personal rewind-recording destination with a green circle and existing arrow, with a Place rewind callout. Enabled by default under P3; the existing countdown stays unchanged. (22-10-2026)
+
 - Added optional P2 crystal auto-targeting (off by default): your color pair's crystal, remaining outer light crystals, then middle. Added personal spread countdowns around 632/835 and moved the post-knockback last-Water regroup spot 2 yalms closer. (22-10-2026)
 
 - Fall of Faith helper arrows and circles now stay fixed for each personal step, without repeated refresh flicker or movement with the tether player. Each side still advances on its own mechanic hit. (22-10-2026)
@@ -95,7 +97,6 @@ TEA: Coming soon by Ton.
 
 - Personal Fall of Faith helper calls now repeat at each relevant bait stage, even when the assigned position stays the same. (21-10-2026)
 
-- Save/load and import/export now include crystal damage mode and TDDT/DTTD mirror order alongside tank settings, and are available to every job. Older tank-only imports/saves remain compatible. (21-10-2026)
 
 
 
