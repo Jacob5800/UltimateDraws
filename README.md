@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Renamed the P1 option to Swap DPS spreads; its default and behavior are unchanged. (22-10-2026)
+
 - Added a single player-following countdown for your Diamond Dust Holy lane, plus optional P1 Swap ranged spreads (off by default). Fixed yellow puddle guidance so either party reverses when Shiva is one marker clockwise from its landing side. (22-10-2026)
 
 - Reduced blue and red mirror destination circles by 5%, with positions and arrows unchanged. (22-10-2026)
@@ -95,7 +97,6 @@ TEA: Coming soon by Ton.
 
 - Added a personal Drop puddles call for Hiemal Ray markers during P2 crystals. (22-10-2026)
 
-- Diamond Dust now calls Wait/Move based on personal safe-side position; Light Rampant calls Regroup after the player's tower soak or final puddle resolves. (22-10-2026)
 
 
 
