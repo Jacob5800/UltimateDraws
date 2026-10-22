@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Restricted Swap DPS spreads to the specific P1 safe-side spread after the clones. Clock spots and other Protean guidance now keep their original orientation. (22-10-2026)
+
 - Made the puddle countdown 50% larger and fixed per-drop rearming, including recovery when the first setup is missed. Only the assigned lane updates the single timer. (22-10-2026)
 
 - Renamed the P1 option to Swap DPS spreads; its default and behavior are unchanged. (22-10-2026)
@@ -95,7 +97,6 @@ TEA: Coming soon by Ton.
 
 - Fall of Faith helper arrows and circles now stay fixed for each personal step, without repeated refresh flicker or movement with the tether player. Each side still advances on its own mechanic hit. (22-10-2026)
 
-- Fixed personal DD return and crystal puddle calls, added UR next-step instructions, and delayed Fall of Faith helper formation changes until that side's hit resolves. (22-10-2026)
 
 
 
