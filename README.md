@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Fall of Faith helper arrows and circles now stay fixed for each personal step, without repeated refresh flicker or movement with the tether player. Each side still advances on its own mechanic hit. (22-10-2026)
+
 - Fixed personal DD return and crystal puddle calls, added UR next-step instructions, and delayed Fall of Faith helper formation changes until that side's hit resolves. (22-10-2026)
 
 - Added a personal Drop puddles call for Hiemal Ray markers during P2 crystals. (22-10-2026)
@@ -95,19 +97,12 @@ TEA: Coming soon by Ton.
 
 - Fall of Faith helper stack calls now say Next: stack behind tether to distinguish the upcoming position from an immediate movement instruction. (21-10-2026)
 
-- P1 clock-position arrows now clear as the post-buster spread/stack guidance appears. Extended the later move-in arrow to 1.6 seconds. (21-10-2026)
 
-- Added personal Fall of Faith helper steps anchored to the active tether player: red fire-stack markers or blue lightning left/middle/right markers, with movement arrows and personal calls as the bait changes. (21-10-2026)
 
-- Extended the P1 Burnt Strike move-in arrow by 0.3 seconds for clearer follow-through. (21-10-2026)
 
-- Scythe Diamond Dust calls now distinguish marked players (In, then spread / Spread) from unmarked players (In, then stay in / Stay in), with the duplicate inherited opening call suppressed for this pattern. (21-10-2026)
 
-- Added a personal spoken Go out call alongside each Ultimate Relativity out-arrow step, including delayed steps. (21-10-2026)
 
-- Red-mirror tank/melee positions now flip with the ranged mirror's side, keeping the TDDT MT solo spot toward ranged and OT/M2 away from them. (21-10-2026)
 
-- Fixed Fall of Faith lightning-tether handoffs that clear with a changed tether ID, restoring the third/fourth player's personal blue circle and swap guidance. (21-10-2026)
 
 
 ### UWU: LPDU
