@@ -3968,7 +3968,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "if data.lpduDDLaneTimer then self.used=true;return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not JacobWorldText then return end\nlocal ms=(eventArgs.channelTimeMax+1)*1000\nif ms<=0 then self.used=true;return end\ndata.lpduDDLaneTimer={count=0,last=0}\nJacobWorldText.cancelEntityCountdown(\"fru-dd-lane\")\nJacobWorldText.addEntityCountdown(ms,p.id,0xFFFFFFFF,true,1.25,2,\"fru-dd-lane\")\nself.used=true",
+							actionLua = "if data.lpduDDLaneTimer then self.used=true;return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not JacobWorldText then return end\nlocal ms=(255.2-TensorReactions_CurrentTimer)*1000\nif ms<=0 then self.used=true;return end\ndata.lpduDDLaneTimer={count=0,last=0}\nJacobWorldText.cancelEntityCountdown(\"fru-dd-lane\")\nJacobWorldText.addEntityCountdown(ms,p.id,0xFFFFFFFF,true,1.875,2,\"fru-dd-lane\")\nself.used=true",
 							conditions = 
 							{
 								
@@ -3989,23 +3989,25 @@ local tbl =
 					{
 						data = 
 						{
-							category = "Event",
-							dequeueIfLuaFalse = true,
+							category = "Lua",
+							conditionLua = "return JacobWorldText~=nil",
 							eventArgType = 2,
 							eventSpellID = 40208,
-							name = "Holy event",
+							name = "Countdown helper ready",
 							uuid = "9e0935b6-1469-2155-88b6-c96f7d7c5b7b",
 							version = 3,
 						},
 					},
 				},
 				displayPath = "LPDU / Diamond Dust lane timer",
-				eventType = 3,
+				loop = true,
 				mechanicTime = 255.1,
 				name = "[LPDU] DD - First lane drop countdown",
+				throttleTime = 100,
 				timeRange = true,
 				timelineIndex = 53,
-				timerStartOffset = -7,
+				timerEndOffset = 0.1,
+				timerStartOffset = -5.6,
 				uuid = "f66282fe-7ba0-fc1e-9b33-170a50490b56",
 				version = 2,
 			},
@@ -4021,7 +4023,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.lpduDDLaneTimer\nif not s or s.done then self.used=true;return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not JacobWorldText then return end\nif not s.source then\n local hit=false\n for _,id in ipairs(eventArgs.hitTargets or {}) do if id==p.id then hit=true;break end end\n if not hit then self.used=true;return end\n s.source=eventArgs.entityID\nend\nif eventArgs.entityID~=s.source then self.used=true;return end\nlocal now=Now()\nif now-s.last<700 then self.used=true;return end\ns.last=now;s.count=s.count+1\nJacobWorldText.cancelEntityCountdown(\"fru-dd-lane\")\nif s.count>=4 then s.done=true\nelse\n -- Subsequent own-lane Holy drops are spaced about 1.5s in both compared pulls.\n local remaining=1500\n if remaining>0 then JacobWorldText.addEntityCountdown(remaining,p.id,0xFFFFFFFF,true,1.25,2,\"fru-dd-lane\") end\nend\nself.used=true",
+							actionLua = "local s=data.lpduDDLaneTimer\nif s and s.done then self.used=true;return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not JacobWorldText then return end\nif not s then s={count=0,last=0};data.lpduDDLaneTimer=s end\nif not s.source then\n -- Bind to the assigned landing lane, without requiring a replay hit-target match.\n local landing=data.lpdu_p2_DD_knockback_tether\n landing=landing and landing.impactPos\n local source=TensorCore.mGetEntity(eventArgs.entityID)\n if not landing or not source or not source.pos then self.used=true;return end\n if TensorCore.getDistance2d(landing,source.pos)>2 then self.used=true;return end\n s.source=eventArgs.entityID\nend\nif eventArgs.entityID~=s.source then self.used=true;return end\nlocal now=Now()\nif now-s.last<700 then self.used=true;return end\ns.last=now\n-- Recover the ordinal if setup or the first native drop was missed.\nlocal wave=math.max(1,math.min(4,math.floor((TensorReactions_CurrentTimer-255.2)/1.5+.5)+1))\ns.count=math.max(s.count+1,wave)\nJacobWorldText.cancelEntityCountdown(\"fru-dd-lane\")\nif s.count>=4 then s.done=true\nelse JacobWorldText.addEntityCountdown(1500,p.id,0xFFFFFFFF,true,1.875,2,\"fru-dd-lane\") end\nself.used=true",
 							conditions = 
 							{
 								
@@ -4060,7 +4062,7 @@ local tbl =
 				timeRange = true,
 				timelineIndex = 53,
 				timerEndOffset = 7,
-				timerStartOffset = -1,
+				timerStartOffset = -2,
 				uuid = "10fe226a-8146-399c-8813-6db01816f492",
 				version = 2,
 			},

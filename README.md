@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Made the puddle countdown 50% larger and fixed per-drop rearming, including recovery when the first setup is missed. Only the assigned lane updates the single timer. (22-10-2026)
+
 - Renamed the P1 option to Swap DPS spreads; its default and behavior are unchanged. (22-10-2026)
 
 - Added a single player-following countdown for your Diamond Dust Holy lane, plus optional P1 Swap ranged spreads (off by default). Fixed yellow puddle guidance so either party reverses when Shiva is one marker clockwise from its landing side. (22-10-2026)
@@ -95,7 +97,6 @@ TEA: Coming soon by Ton.
 
 - Fixed personal DD return and crystal puddle calls, added UR next-step instructions, and delayed Fall of Faith helper formation changes until that side's hit resolves. (22-10-2026)
 
-- Added a personal Drop puddles call for Hiemal Ray markers during P2 crystals. (22-10-2026)
 
 
 
