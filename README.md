@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Fixed repeated P1 Fall of Faith fire/lightning helper calls when the opposite side resolves; calls now track your own tether sequence and formation. (22-10-2026)
+
 - Personal Fall of Faith helper calls now repeat at each relevant bait stage, even when the assigned position stays the same. (21-10-2026)
 
 - Save/load and import/export now include crystal damage mode and TDDT/DTTD mirror order alongside tank settings, and are available to every job. Older tank-only imports/saves remain compatible. (21-10-2026)
