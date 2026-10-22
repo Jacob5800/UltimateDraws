@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Added optional P2 crystal auto-targeting (off by default): your color pair's crystal, remaining outer light crystals, then middle. Added personal spread countdowns around 632/835 and moved the post-knockback last-Water regroup spot 2 yalms closer. (22-10-2026)
+
 - Fall of Faith helper arrows and circles now stay fixed for each personal step, without repeated refresh flicker or movement with the tether player. Each side still advances on its own mechanic hit. (22-10-2026)
 
 - Fixed personal DD return and crystal puddle calls, added UR next-step instructions, and delayed Fall of Faith helper formation changes until that side's hit resolves. (22-10-2026)
@@ -95,7 +97,6 @@ TEA: Coming soon by Ton.
 
 - Save/load and import/export now include crystal damage mode and TDDT/DTTD mirror order alongside tank settings, and are available to every job. Older tank-only imports/saves remain compatible. (21-10-2026)
 
-- Fall of Faith helper stack calls now say Next: stack behind tether to distinguish the upcoming position from an immediate movement instruction. (21-10-2026)
 
 
 
