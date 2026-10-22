@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Improved P1 conga visibility: a fixed arrow and small green circle mark your lineup spot from the conga reminder until tether guidance takes over, including when you are already near the spot. (22-10-2026)
+
 - Fixed Diamond Dust In then spread guidance: the green In arrow clears when Scythe Kick resolves, and spreading players no longer receive the later center arrow. (22-10-2026)
 
 - UR now marks your personal rewind-recording destination with a green circle and existing arrow, with a Place rewind callout. Enabled by default under P3; the existing countdown stays unchanged. (22-10-2026)
@@ -95,7 +97,6 @@ TEA: Coming soon by Ton.
 
 - Fixed Fall of Faith callout sequence tracking, extended the P1 inward arrow by 0.2s, and added personal Light Rampant Take tower/Bait puddles calls. (22-10-2026)
 
-- Fixed repeated P1 Fall of Faith fire/lightning helper calls when the opposite side resolves; calls now track your own tether sequence and formation. (22-10-2026)
 
 
 
