@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Fixed Diamond Dust In then spread guidance: the green In arrow clears when Scythe Kick resolves, and spreading players no longer receive the later center arrow. (22-10-2026)
+
 - UR now marks your personal rewind-recording destination with a green circle and existing arrow, with a Place rewind callout. Enabled by default under P3; the existing countdown stays unchanged. (22-10-2026)
 
 - Added optional P2 crystal auto-targeting (off by default): your color pair's crystal, remaining outer light crystals, then middle. Added personal spread countdowns around 632/835 and moved the post-knockback last-Water regroup spot 2 yalms closer. (22-10-2026)
@@ -95,7 +97,6 @@ TEA: Coming soon by Ton.
 
 - Fixed repeated P1 Fall of Faith fire/lightning helper calls when the opposite side resolves; calls now track your own tether sequence and formation. (22-10-2026)
 
-- Personal Fall of Faith helper calls now repeat at each relevant bait stage, even when the assigned position stays the same. (21-10-2026)
 
 
 
