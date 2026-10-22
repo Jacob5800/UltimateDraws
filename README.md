@@ -77,6 +77,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Added a single player-following countdown for your Diamond Dust Holy lane, plus optional P1 Swap ranged spreads (off by default). Fixed yellow puddle guidance so either party reverses when Shiva is one marker clockwise from its landing side. (22-10-2026)
+
 - Reduced blue and red mirror destination circles by 5%, with positions and arrows unchanged. (22-10-2026)
 
 - Improved P1 conga visibility: a fixed arrow and small green circle mark your lineup spot from the conga reminder until tether guidance takes over, including when you are already near the spot. (22-10-2026)
@@ -95,7 +97,6 @@ TEA: Coming soon by Ton.
 
 - Diamond Dust now calls Wait/Move based on personal safe-side position; Light Rampant calls Regroup after the player's tower soak or final puddle resolves. (22-10-2026)
 
-- Fixed P2 crystal AoE then focus: disables AoE after 4.8 seconds, keeps it off after the assigned crystal breaks or targets change, and re-enables at P3 start. (22-10-2026)
 
 
 
