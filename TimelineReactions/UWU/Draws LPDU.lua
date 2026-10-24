@@ -7,10 +7,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "ae65a351-f417-42dd-7034-929f1f5a0401",
+				name = "store\\anyone\\uwu\\modules\\core",
+				uuid = "91efc798-a2f7-246c-c624-54d640d96608",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\core",
 			objectType = "folder",
 		},
 		
@@ -779,17 +779,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "094fd00f-7280-2743-9f44-9f215769ad7f",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "Draws - Garuda",
 				uuid = "72aaf4fb-be72-3db4-8943-92aa990e1e93",
 			},
@@ -972,17 +961,6 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "3ed518fb-eeaf-4de7-5c36-740596c6df6b",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				actions = 
 				{
 					
@@ -1028,10 +1006,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "fcdd508c-fc6a-f658-1e68-7abe91e121bc",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "cca67461-ab8e-55fd-e2cc-6ac7b6c62371",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -1098,33 +1076,8 @@ local tbl =
 			},
 		},
 	},
-	[10] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "6af50a72-25f2-6d26-1927-3928fc4a0062",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
-	},
 	[11] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "948d8869-83fe-4b8d-1ffd-5b774e5fda99",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -1241,17 +1194,6 @@ local tbl =
 	},
 	[12] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "105db5cc-5f1f-97d0-e752-0c9e997c143c",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -1385,17 +1327,6 @@ local tbl =
 	},
 	[13] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "14dc7e3b-9c4a-819f-5975-8de59e61d1eb",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -1948,10 +1879,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "78fc6e35-cb5a-8e21-6361-6aeb9475f4e5",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "8854a9ea-b0c6-1726-1e17-d5a410c2e7ba",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -1962,10 +1893,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "ad7ae207-a9fd-3c73-135f-73995afdc277",
+				name = "store\\anyone\\uwu\\modules\\core",
+				uuid = "97a8b81e-6e3e-cc52-4dda-5980e5ff7a4e",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\core",
 			objectType = "folder",
 		},
 	},
@@ -1976,10 +1907,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "fba042da-4a7e-69be-488b-54309c55b40a",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "3ae49a33-66de-47c7-a390-13b56d510f03",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -2332,10 +2263,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "3bf2cd4d-cc68-1171-03d5-1e3f34b3cfbd",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "6a834902-bd2f-f096-2483-3ef82cf4aa12",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -2647,10 +2578,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "2bb3ab5f-948d-0643-3914-f12ddf64158f",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "50076158-738f-dbfc-ce0c-1ba20d1db668",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -2887,10 +2818,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "eafe3333-e3be-5f2f-90d4-57c1aff34523",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "cfe0448c-afa1-64c8-31a6-b086a2857f1c",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -3159,10 +3090,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "65cdcfc5-7d83-0349-3e2f-7eb7ba90cd75",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "b97d14da-5fbe-c2ae-b904-9990ce2e3d2a",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -3377,10 +3308,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "f645c2f4-d6bf-9c78-9dc6-8496c6d978a4",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "c2b20e29-ce5c-1a5d-4cfe-3d7f795b73b9",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -3440,17 +3371,6 @@ local tbl =
 	},
 	[36] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "d210d9b6-0536-7c72-09bb-28543eff1526",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -3712,17 +3632,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "d6af55ec-7b34-ed40-e1bc-a3ee177a145c",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "Draws - Ifrit",
 				uuid = "9bd384a7-44a0-ddb8-b7f2-e6b7eba2228b",
 			},
@@ -3774,17 +3683,6 @@ local tbl =
 	},
 	[39] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "1fd243db-78b2-f64f-7b21-b0b55f50c60b",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -4173,10 +4071,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "754dd0b6-3d6d-0b42-6c07-45a0e23c0c26",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "4d93aadf-ddfa-78fb-2989-1305b0c39faf",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -4192,6 +4090,17 @@ local tbl =
 			{
 				enabled = false,
 			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\modules\\core",
+				uuid = "b86142a3-0c2d-65e7-752c-244d01f39913",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\core",
+			objectType = "folder",
 		},
 		
 		{
@@ -5165,10 +5074,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "f4f4ba31-000f-41c5-7299-474387a42d21",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "cbf0f556-4b1c-4ada-b1f1-8efc59e80426",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -5400,10 +5309,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "83c40e7a-3eaa-7f7e-879e-553492668a2a",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "f6de5293-ace0-0887-f55d-9169ea981ce3",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -5611,26 +5520,15 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "3f6310a7-853f-a533-90ec-11154f1b5697",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "b25ee1a0-617f-7a8c-5a2f-3b8aefe34eb0",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 	},
 	[52] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "d03da130-70f0-c7ec-f805-fb4a4a44a3a0",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -6075,10 +5973,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "73a6dc81-b3c4-b5d5-6098-273f88b1b071",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "0991de46-96e7-f64a-0064-c9f86651dd96",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -6170,10 +6068,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "a87b8853-3667-8ba7-95d7-fa2d50d6a543",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "2f7b846c-1fdf-a2a0-a9ed-a6a21cb1c8fc",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -6464,10 +6362,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "6acdfe1a-7bb6-3386-97f1-2f0cd643594a",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "95ae1473-9f91-9bcf-fb62-a7e1391b7643",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -7198,10 +7096,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "2c15fb8f-9f80-0353-7f90-66753ed5853f",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "f67b0868-9cfc-456c-878c-782a6b2503f8",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -7435,10 +7333,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "82aee2ce-61d2-791a-dc79-ad5cfaf41e7e",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "67f9ac77-032e-d573-316d-dad15601f587",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -7525,17 +7423,6 @@ local tbl =
 	},
 	[74] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "5f1e03ac-8ad8-2c80-288a-aabe8b2f211c",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -7965,33 +7852,8 @@ local tbl =
 			},
 		},
 	},
-	[75] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "a4ef9b9b-231a-768f-6658-a405856931cb",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
-	},
 	[76] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "4c71fed2-1dc6-f856-1328-b548f9b6aa42",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -8186,10 +8048,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "0d1efa20-16a7-f70c-b429-2c2a84bf2190",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "1e696885-98e2-7fe1-7fd7-e2e35acfd155",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -8231,10 +8093,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "62e254af-589f-bf7b-a966-cf21823ebc5f",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "e2e36d48-ef25-9394-ef27-ca268ac88458",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -8369,10 +8231,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "a546069f-2892-20eb-1e5e-a7b5bed424cf",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "28124c98-03d4-97a4-dbb1-3e6adc4ce3a8",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -8435,10 +8297,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "681b1cd0-23ac-633c-84f9-9aeec1561bc0",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "667d9c95-77d5-4ff1-45b9-7ad706081165",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\modules\\core",
+				uuid = "72acc53d-9516-4091-aa63-069b969c112d",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\core",
 			objectType = "folder",
 		},
 		
@@ -8696,26 +8569,15 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "2eedf226-867a-4f62-e1e0-63f87c03e296",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "9a20f1af-b5fa-d6db-9019-78ddb7be777f",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 	},
 	[89] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "0768f15c-0dbc-0a30-a102-7c5af0c0564c",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -8854,20 +8716,6 @@ local tbl =
 			},
 		},
 	},
-	[92] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "b28d9934-d902-0db8-6d23-936691d7aae4",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
-	},
 	[94] = 
 	{
 		
@@ -8875,10 +8723,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "eaeaf7f6-d14f-c2b2-56d7-43e4a823fa66",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "c1ad671f-4b49-7a8b-aae8-d8f9d05f02ef",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -8889,10 +8737,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "1f1fa6dd-3c64-b4a9-9060-6cb31c556dcd",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "f38211f2-72e0-1cce-233c-d90c0481a282",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -9237,17 +9085,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "d6498e52-6440-e656-47b6-1b88838e39c2",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "Draws - Titan LPDU",
 				uuid = "db0b1aea-7d58-f185-b445-52cb914581db",
 			},
@@ -9347,20 +9184,6 @@ local tbl =
 			},
 		},
 	},
-	[99] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "867e8849-bee4-1ebd-6781-9fd741bf6379",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
-	},
 	[100] = 
 	{
 		
@@ -9368,10 +9191,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "c14830dc-7fae-7628-414e-9a3eef1a4c8c",
+				name = "store\\anyone\\uwu\\modules\\core",
+				uuid = "d7eefe71-dfbd-52b5-825b-b6ebbdbb0de1",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\core",
 			objectType = "folder",
 		},
 		
@@ -9531,20 +9354,6 @@ local tbl =
 			},
 		},
 	},
-	[101] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "091ee28b-8684-9877-7f1c-9385311214fb",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
-	},
 	[102] = 
 	{
 		
@@ -9675,10 +9484,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "5c028229-a49f-4ccd-f2ac-e6fb6a889119",
+				name = "store\\anyone\\uwu\\modules\\core",
+				uuid = "2c114910-4407-0f5c-c2e7-045a7999a700",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\core",
 			objectType = "folder",
 		},
 		
@@ -9870,10 +9679,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "f0ed9032-306d-d966-b0b5-1e8c1872b6e2",
+				name = "store\\anyone\\uwu\\modules\\core",
+				uuid = "3d824997-a326-d953-b89e-1fe136492bc7",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\core",
 			objectType = "folder",
 		},
 		
@@ -9926,10 +9735,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "beb77afb-9460-2adf-8ff7-ee29ba8a886b",
+				name = "store\\anyone\\uwu\\modules\\core",
+				uuid = "1130185a-0edf-c416-ddc8-35108f894e8a",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\core",
 			objectType = "folder",
 		},
 		
@@ -10234,26 +10043,15 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "7cbfb28c-96e0-9010-24e2-fc32b5a4cabc",
+				name = "store\\anyone\\uwu\\modules\\core",
+				uuid = "06e733e1-3844-e07d-ef39-35974c041811",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\core",
 			objectType = "folder",
 		},
 	},
 	[118] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "de81ec3d-ca09-4279-bd27-9e0f533bf06d",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -10298,17 +10096,6 @@ local tbl =
 	},
 	[119] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "83deb3d6-0bd8-18c2-24e5-540054288906",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -10501,20 +10288,6 @@ local tbl =
 			},
 		},
 	},
-	[121] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "38ab8931-5626-7ffd-795c-16bf7c143ee1",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
-	},
 	[123] = 
 	{
 		
@@ -10594,17 +10367,6 @@ local tbl =
 	},
 	[125] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "b739669d-4655-9611-3243-521395412d4d",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -10697,10 +10459,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "8e0ef3ef-ff28-b363-065b-504185020b5f",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "23104b88-c716-cf5c-5f24-9206dd6c8158",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -10711,10 +10473,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "d1f1f933-6a5c-5b3f-7453-33c9efca93e3",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "8dc5368c-0ca2-25f8-efbc-cc2e3d1ee8dc",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -10765,10 +10527,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "09b9a4e1-9f9c-2e2d-1c9b-d69b36f77691",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "d53bbae6-b62b-02a2-91e3-8d74f775d2f6",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -11030,10 +10792,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "22e6934d-f75b-94c1-078c-5d6746c8607d",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "28683b02-19c5-9786-de1f-26601f9b2ad2",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -11213,17 +10975,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "c7e74140-3583-97c4-9cef-fdea06588af0",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "[Raid calls]",
 				uuid = "fb66c9c8-b9e7-bd3e-a6b3-f522a33470b9",
 			},
@@ -11394,17 +11145,6 @@ local tbl =
 	},
 	[141] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "c5654a4f-8006-9f93-9a72-19e15afe3bbf",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -12182,10 +11922,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "ee89abd4-7279-b370-3f6d-94e6c9626f44",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "747dd449-1f41-12f5-931c-aa6f06a3d099",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -12335,17 +12075,6 @@ local tbl =
 	},
 	[146] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "e29408da-273e-dec6-a5e0-4b90f26c0fca",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -12507,10 +12236,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "c49cdc91-fc5f-372d-a35f-e65fe7fd7541",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "27f5a4f6-920c-8da2-acc3-62588fcdb106",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -12945,10 +12674,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "ad735322-2682-f0f6-7f42-20d4a5c05ed2",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "ef4a359b-55ae-c21f-1354-e349c5a2a36b",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -13060,10 +12789,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "a80a62ab-2851-dd2f-5555-5191fe3dfb9b",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "f2d94f64-d621-fec8-c6cc-b3f6c28cac74",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -13205,10 +12934,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "22fe0237-d920-8443-6526-3b7de92e8267",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "47ab6c10-9a10-75fc-eef2-0bd20ec84560",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -13312,10 +13041,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "75a2db41-f773-4e15-8c88-b93ba4da66f1",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "c04d8306-424e-228a-4fae-d6547dd71916",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -13326,10 +13055,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "801175ca-481e-6b4e-8809-f0cc569e193a",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "812083c3-5b38-3df7-d7b0-8fa1cea30d53",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -13576,10 +13305,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "848f90d8-4300-ea5c-81a6-05320d8ec9c8",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "4e2cfd7d-198c-c1d1-930a-9a0b5e77528d",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\modules\\core",
+				uuid = "977c9225-e715-67f1-adb4-5e97141fa315",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\core",
 			objectType = "folder",
 		},
 		
@@ -13600,10 +13340,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "3365c4d2-8f11-e7be-8958-50387faf1602",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "f622756b-8d5e-e1c7-8f8e-721dc6c402bb",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -13840,10 +13580,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "7c3bdd5d-0fee-0c21-ea79-d6a35c70a10d",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "5229cd72-d746-b126-8961-9b9cebebcec2",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -13982,20 +13722,6 @@ local tbl =
 			},
 		},
 	},
-	[172] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "ee641e85-ddbb-3ba9-9584-53f779f67af5",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
-	},
 	[173] = 
 	{
 		
@@ -14003,10 +13729,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "b096253e-72a6-49b2-8eae-31a89feffa2e",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "58054247-4dab-9f8b-8d11-612d0e413d17",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -14306,26 +14032,15 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "02623d1f-db7a-1b23-7199-cb6d9ec9c30f",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "86ba0818-4402-a11c-bff3-2de248c166e8",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 	},
 	[179] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "c5375350-bfe2-e814-7286-640606877900",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -14392,48 +14107,6 @@ local tbl =
 				uuid = "2a36eb70-d0af-469a-abdb-6c88fe2d0ce8",
 				version = 2,
 			},
-		},
-	},
-	[183] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "ec05def1-47dc-43cd-3751-98af5d52f5a1",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
-	},
-	[185] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "035c2caf-f6e7-a9b3-1ffb-4af12e42e91f",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
-	},
-	[186] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "018d4076-312d-396a-fd25-4db4b7ead4a6",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
 		},
 	},
 	[188] = 
@@ -14520,10 +14193,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "4569739b-ce08-dcd7-0673-0995d83c858b",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "aacf9474-dafd-bdf0-87ad-1d0a438ac704",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -14606,10 +14279,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "a39c190d-a076-fee9-efdd-bb1fad9f8f3d",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "d42eb6c2-45b1-ae0e-0172-a218205b7092",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\modules\\core",
+				uuid = "17ee259c-3bf4-d3d0-d97a-0d56e0e13b8c",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\core",
 			objectType = "folder",
 		},
 		
@@ -15224,10 +14908,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "eaf85ba1-84e5-e4b5-fd90-75f3fd65a851",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "59b027a6-c3d0-256a-e7c2-7b4c62c17db6",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -15344,10 +15028,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "c99b09f3-b964-5887-1eed-c7a128df04a3",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "24ccf74c-c18e-34c0-1ca5-aba695ec459c",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -15624,10 +15308,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "1f4a98f3-3cfe-0dff-adde-b3cd7e8e93a3",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "5db1b44c-f326-b5b8-ce4f-1482ced1029c",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 	},
@@ -15695,10 +15379,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "f94ba80d-04ee-6481-5cea-19b3034f1e3d",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "0d1373c2-d677-f646-33ac-100c59402d92",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -15810,17 +15494,6 @@ local tbl =
 	},
 	[206] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "1197de1f-39c3-1053-94b1-c561adff640f",
-			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -15945,10 +15618,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "d46cf450-dab3-1984-972f-a96a15bd1a00",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "b5cd2b15-515c-59d9-4777-742354b76ba5",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -16412,10 +16085,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "4b990ab7-8dec-b323-4231-871d11c98ae7",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "fd347d90-58c8-e91c-9f50-5532c45156e0",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\modules\\core",
+				uuid = "4b8f2e8e-db06-a2c2-3d62-28acfda3f33e",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\core",
 			objectType = "folder",
 		},
 		
@@ -16603,10 +16287,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "d60e5ba2-b80a-0556-6831-a974ce5b6752",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "a4d3471b-d281-753f-267d-d9a97b2bb4eb",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
 		
@@ -16706,10 +16390,10 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "bc98f970-b0eb-040c-8cec-448e8f0862a0",
+				name = "store\\anyone\\uwu\\modules\\core",
+				uuid = "edf7641d-353b-3561-e486-787b5f13e14d",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\core",
 			objectType = "folder",
 		},
 		
@@ -16954,10 +16638,21 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "store\\anyone\\uwu\\main",
-				uuid = "b80a56d3-f6a3-e557-5274-0f6d46b9b183",
+				name = "store\\anyone\\uwu\\modules\\draws",
+				uuid = "a2e987ec-9086-cf70-0221-b9e2fdd81b3c",
 			},
-			inheritanceRoot = "store\\anyone\\uwu\\main",
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "store\\anyone\\uwu\\modules\\core",
+				uuid = "a407aff2-a0a4-adee-e517-423c0284e562",
+			},
+			inheritanceRoot = "store\\anyone\\uwu\\modules\\core",
 			objectType = "folder",
 		},
 		
@@ -17216,7 +16911,8 @@ local tbl =
 	},
 	inheritedProfiles = 
 	{
-		"store\\anyone\\uwu\\main",
+		"store\\anyone\\uwu\\modules\\draws",
+		"store\\anyone\\uwu\\modules\\core",
 	},
 	timelineName = "uwu",
 	version = "1.0.2",

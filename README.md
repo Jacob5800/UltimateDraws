@@ -66,15 +66,6 @@ TEA: Coming soon by Ton.
 
 - P1 Fireball regroup and late Hatch arrows now yield while the Twintania-to-Nael transition regroup is active, preventing competing destinations after Twintania disappears. (19-10-2026)
 
-- Tenstrike highlights only your assigned Neurolink: amber while waiting as backup, green when it is your turn, clearing after completion. Personal Hatch phase calls now check immediately alongside guidance rather than waiting in the update queue. (19-10-2026)
-
-- Tenstrike calls now explicitly progress from Spread - wait for Hatch markers to Hatch on you - into your link or No Hatch - stay spread, then Your turn - soak your link for backups. Removed the redundant backup-wait call; middle remains the regroup instruction. (19-10-2026)
-
-- Tenstrike initial spread arrows now stop one second before the DPS or tank/healer spread window. Once all three Hatch targets are confirmed, only non-Hatch players receive a single Spread—keep clear of the Hatch players call. (19-10-2026)
-
-- Tenstrike spread guidance now starts at 735.5, uses the same 12y Quickmarch spread radius, and remains until your Hatch assignment takes over or your own Meteor Stream hits. This removes the premature cutoff before the spread. (19-10-2026)
-
-
 ### FRU: LPDU
 
 - Reduced both green mirror destination circles by another 15%. (22-10-2026)
@@ -97,29 +88,9 @@ TEA: Coming soon by Ton.
 
 - Reduced blue and red mirror destination circles by 5%, with positions and arrows unchanged. (22-10-2026)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### UWU: LPDU
+
+- Updated dependencies to AnyoneCore’s separate UWU draws and core modules in place of the combined main profile. (24-10-2026)
 
 - Enabled TTS for the 1048s ranged eruption-bait positioning call and 697s Landslide warning. (21-10-2026)
 
@@ -139,4 +110,3 @@ TEA: Coming soon by Ton.
 
 - Added target-facing Garuda, Ifrit and opening Titan cleave warnings, fixed-direction Slipstream, and Titan arrival danger/safe-edge markers. Added the 402s stack call excluding Searing Wind, repaired nail kill-order text, and halved the editable Upheaval position marker. Replay checks remain pending. (21-10-2026)
 
-- Attack 1–3 markers now queue for cleanup on wipe and clear once the player is alive at the next pull, with a fight-start fallback. Other target markers are preserved. (17-10-2026)
