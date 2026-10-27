@@ -5892,8 +5892,8 @@ local tbl =
 				name = "[LPDU] House of Light - Extra Brightness On",
 				timeRange = true,
 				timelineIndex = 95,
-				timerEndOffset = -4.2,
-				timerStartOffset = -4.8,
+				timerEndOffset = -4.1999998092651,
+				timerStartOffset = -4.8000001907349,
 				uuid = "69f3d068-d46d-55b1-a2a2-5df5da624922",
 				version = 2,
 			},
@@ -6867,7 +6867,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local timer=TensorReactions_CurrentTimer\nlocal settingsRoot=Settings or (_G and _G.Settings)\nlocal settings=settingsRoot and settingsRoot.FFXIVMINION\nif not settings then return end\nlocal mode=settings.LPDU_FRU_CrystalDamageMode or \"AoE then focus\"\nlocal outer=TensorCore.getEntityGroupList(\"ContentID\",13555) or {}\nlocal side=false\nfor _,e in pairs(outer) do\n if e.alive and e.targetable then side=true;break end\nend\nlocal focus=timer>=418.8 and timer<500 and ((mode==\"Focus assigned crystal\" and side) or (mode==\"AoE then focus\" and timer>=423.6 and side))\nif not focus then\nlocal s=data.lpduCrystalAOE\nif s then\n if _G[s.var]==false then _G[s.var]=s.previous end\n data.lpduCrystalAOE=nil\nend\n self.used=true return\nend\nif not data.lpduCrystalAOE then\n local toggles=TensorCore.API.TensorACR.getQuickToggles()\n if not toggles then return end\n for _,toggle in ipairs(toggles) do\n  if string.match(toggle.var,\"_AOE$\") and type(_G[toggle.var])==\"boolean\" then\n   data.lpduCrystalAOE={var=toggle.var,previous=_G[toggle.var],mode=mode}\n   break\n  end\n end\nend\nlocal s=data.lpduCrystalAOE\nif s then _G[s.var]=false end\nself.used=true\n",
+							actionLua = "local timer=TensorReactions_CurrentTimer\nlocal settingsRoot=Settings or (_G and _G.Settings)\nlocal settings=settingsRoot and settingsRoot.FFXIVMINION\nif not settings then return end\nlocal mode=settings.LPDU_FRU_CrystalDamageMode or \"AoE then focus\"\nlocal outer=TensorCore.getEntityGroupList(\"ContentID\",13555) or {}\nlocal side=false\nfor _,e in pairs(outer) do\n if e.alive and e.targetable then side=true;break end\nend\nlocal middle=TensorCore.getEntityGroupList(\"ContentID\",9358) or {}\nlocal big=false\nfor _,e in pairs(middle) do\n if e.alive and e.targetable then big=true;break end\nend\nlocal owned=data.lpduCrystalAOE\nlocal focusActive=side or big or (owned and owned.mode==\"Focus assigned crystal\" and not owned.bigSeen)\nlocal focus=timer>=418.8 and timer<500 and ((mode==\"Focus assigned crystal\" and focusActive) or (mode==\"AoE then focus\" and timer>=423.6 and side))\nif not focus then\nlocal s=data.lpduCrystalAOE\nif s then\n if _G[s.var]==false then _G[s.var]=s.previous end\n data.lpduCrystalAOE=nil\nend\n self.used=true return\nend\nif not data.lpduCrystalAOE then\n local toggles=TensorCore.API.TensorACR.getQuickToggles()\n if not toggles then return end\n for _,toggle in ipairs(toggles) do\n  if string.match(toggle.var,\"_AOE$\") and type(_G[toggle.var])==\"boolean\" then\n   data.lpduCrystalAOE={var=toggle.var,previous=_G[toggle.var],mode=mode}\n   break\n  end\n end\nend\nlocal s=data.lpduCrystalAOE\nif s then\n if big then s.bigSeen=true end\n _G[s.var]=false\nend\nself.used=true\n",
 							name = "[LPDU] P2 Crystals - Side Crystal AoE Control",
 							uuid = "f9c574c8-c43e-ab58-a1ce-5183d7300029",
 							version = 2.1,
@@ -7004,7 +7004,7 @@ local tbl =
 				throttleTime = 250,
 				timeRange = true,
 				timelineIndex = 102,
-				timerEndOffset = 45.2,
+				timerEndOffset = 45.200000762939,
 				uuid = "254d778d-fbd0-eddd-b227-373fdecda503",
 				version = 2,
 			},
