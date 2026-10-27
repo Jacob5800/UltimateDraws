@@ -109,7 +109,7 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
-- Fixed crystal targeting to skip dead or untargetable crystals. Focus mode targets your light crystal, then other light crystals, then the big crystal, keeping AoE off through the whole intermission and enabling it when P3 begins. (27-10-2026)
+- Fixed crystal targeting to select the actual crystal nearest your assigned colour marker and hold it until it dies, then skip dead or untargetable crystals. Focus mode also disables Smart AOE target switching, including ACR3. Focus mode targets your light crystal, then other light crystals, then the big crystal, keeping AoE off through the whole intermission and enabling it when P3 begins. (27-10-2026)
 
 - Reduced both green mirror destination circles by another 15%. (22-10-2026)
 
