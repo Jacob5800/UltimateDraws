@@ -10,6 +10,8 @@ UCOB: LPDU (Beta) Supports ranged/melee
 
 FRU: LPDU
 
+DSR: [Lpdu draws(beta)](TimelineReactions/DSR/Lpdu%20draws%28beta%29.lua) — LPDU guidance with saved phase settings. Replay checks are ongoing.
+
 TOP: LPDU 
 
 TEA: Coming soon by Ton.
@@ -21,6 +23,10 @@ TEA: Coming soon by Ton.
 - Discord now posts only new changelog entries, grouped by fight, including UCOB. Unchanged history and pruning are not reposted; the full changelog remains here. (18-10-2026)
 
 - Changelog sections now keep their 10 newest entries each. Discord shows every fight in separate sections and splits long updates across messages instead of cutting off later fights. (18-10-2026)
+
+### DSR: LPDU (Beta)
+
+- Added Lpdu draws(beta), with personal mechanic guidance, tower countdowns, phase settings and optional gaze/knockback assistance. Includes the latest P2 positioning, P3 draw cleanup and optional P4 south regroup (off by default). Replay checks remain ongoing. (27-10-2026)
 
 ### TOP: LPDU
 

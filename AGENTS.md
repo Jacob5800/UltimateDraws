@@ -19,6 +19,11 @@
 - For mitigation work requested in `TOPReactions\lpdu mits`, author in that live profile on the same `top` timeline/version. Apply the same copy/hash/changelog/commit/push workflow using authoritative source `C:\Users\matth\Documents\Bots\FFXIVMinion64\LuaMods\TensorReactions\TimelineReactions\TOPReactions\lpdu mits.lua` and destination `C:\Users\matth\OneDrive\Documenten\GitHub\UltimateDraws\TimelineReactions\TOP\lpdu mits.lua`. Track implementation and replay observations in `TOP-LPDU-MITS-TODO.md`.
 - Verify saved reactions through TensorCore and update `TOP-LPDU-DRAWS-TODO.md` after each change, separating completed implementation from pending replay observations. Use trailing `(DD-MM-YYYY)` changelog dates and the repository's 10-day retention rule.
 
+## DSR profile publishing
+
+- Author DSR through TensorCore in `dsrreactions\lpdu strats`, timeline `dsw`, version `1.0.5`. Keep the authoritative source `C:\Users\matth\Documents\Bots\FFXIVMinion64\LuaMods\TensorReactions\TimelineReactions\dsrreactions\lpdu strats.lua` in place.
+- After each successful update, copy (never move) the source to `TimelineReactions\DSR\Lpdu draws(beta).lua`, overwriting that copy. Verify matching hashes, update the DSR README changelog, commit both together and push to the configured origin branch. Confirm branch/origin, ensure the intended commit is the only outgoing commit, and verify push success. Preserve the beta name and keep unobserved replay checks separate from implementation. Report missing paths instead of creating another checkout.
+
 ## Discord changelog updater
 
 - `.github/workflows/discord-changelog.yml` posts only new/updated README changelog entries on pushes to `main`, compared with the push's before revision. Formatting-only whitespace and removals do not post. Keep checkout history available for that baseline; fail rather than silently reposting history if it cannot be read.
