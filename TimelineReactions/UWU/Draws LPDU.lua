@@ -3505,8 +3505,8 @@ local tbl =
 				name = "[Dash] Wicked Wheel - BLM Aetherial Manipulation",
 				timeRange = true,
 				timelineIndex = 21,
-				timerEndOffset = -0.35,
-				timerStartOffset = -0.45,
+				timerEndOffset = -0.34999999403954,
+				timerStartOffset = -0.44999998807907,
 				uuid = "fdb4de3f-c90f-6c63-a320-dc2588c729d4",
 				version = 2,
 			},
@@ -6047,6 +6047,50 @@ local tbl =
 				timelineIndex = 43,
 				timerEndOffset = 32,
 				uuid = "4972a617-c863-4feb-a32d-57013c5004ec",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "2787e3c9-4bf3-9eff-a0cb-bf9a44f4877f",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Automation",
+				uuid = "4c256265-277a-3604-925c-6864f4040111",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU / Automation",
+				execute = "local acr=TensorCore.API.TensorACR\nif type(acr.addBlacklistEntry)~=\"function\" then self.used=true;return end\nlocal entry=acr.addBlacklistEntry(1186,\"Infernal Nail\")\nif entry then\n entry.enabled=true\n entry.allowIfTarget=false\n entry.allowSmartDoT=false\nend\nself.used=true",
+				executeType = 2,
+				mechanicTime = 328,
+				name = "[LPDU] Nails - Shared DoT blacklist",
+				throttleTime = 1000,
+				timeRange = true,
+				timelineIndex = 43,
+				timerEndOffset = 47,
+				timerStartOffset = -38,
+				uuid = "7b7d3b62-3a30-34e4-9f02-987df2feca42",
 				version = 2,
 			},
 		},
@@ -19842,6 +19886,31 @@ local tbl =
 							version = 2.1,
 						},
 					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"5e0c0d5c-a944-b6cc-983f-55f6c4b3e9ed",
+									true,
+								},
+								
+								{
+									"70daa0b3-7303-4e8b-82b4-df8198ed57ad",
+									true,
+								},
+							},
+							gVar = "ACR_TensorRequiem3_Hotbar_ArmsLength",
+							name = "Arm's Length if shield low",
+							uuid = "18e557cf-06d3-3e9a-a140-cee07a34a90b",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
 				},
 				conditions = 
 				{
@@ -19970,6 +20039,31 @@ local tbl =
 							gVar = "ACR_TensorNuke4_Hotbar_Surecast",
 							name = "Use Surecast",
 							uuid = "894acd4f-e2af-0345-8f91-5ded9739444e",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"e87c4df9-a93a-9fd2-9865-5c5351832fe8",
+									true,
+								},
+								
+								{
+									"d3e79f4f-7600-b63e-a7d1-128f5e78c9b3",
+									true,
+								},
+							},
+							gVar = "ACR_TensorRequiem3_Hotbar_ArmsLength",
+							name = "Arm's Length if shield low",
+							uuid = "58a5c70e-8fc3-ef0d-aa7a-99540e58bcf0",
 							variableTogglesType = 2,
 							version = 2.1,
 						},
