@@ -758,6 +758,50 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "231eeede-3c1a-3feb-a5ed-964746f9b592",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Automation",
+				uuid = "b0d1e1d3-e0ab-4060-8f3a-2aa5ad2b2fc1",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU / Automation",
+				eventType = 13,
+				execute = "local s=Settings.FFXIVMINION\nlocal visible=GUI:Begin(\"LPDU UWU - Automation\",true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n s.LPDU_UWU_AutoTarget=GUI:Checkbox(\"Automatic targeting\",s.LPDU_UWU_AutoTarget~=false)\n GUI:Text(\"Targets bosses, gaols, Magitek Bits and Lahabrea. Disable to select targets manually.\")\nend\nGUI:End()",
+				executeType = 2,
+				mechanicTime = 9,
+				name = "[LPDU] Automatic targeting settings",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 2000,
+				timerStartOffset = -1000,
+				uuid = "5612dc36-ede8-4158-8aeb-61e48e2a9717",
+				version = 2,
+			},
+		},
 	},
 	[3] = 
 	{
@@ -998,6 +1042,114 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "404f57c8-b5fc-8a05-a4d2-359bc33b32c8",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Automation",
+				uuid = "e5fcf15a-fb59-7e81-9a4c-181966f0d139",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"b6183223-d80f-2360-9aaf-c7a958387329",
+									true,
+								},
+								
+								{
+									"6543f9e7-1b05-b181-b38e-5f01b8563362",
+									true,
+								},
+								
+								{
+									"414b8428-bd53-0fb9-804e-29e9a38428da",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Target - Garuda",
+							setTarget = true,
+							targetContentID = 1644,
+							targetType = "ContentID",
+							uuid = "0fdd3b48-f527-169c-9e4b-b27e2a08d2e8",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Auto targeting enabled",
+							uuid = "b6183223-d80f-2360-9aaf-c7a958387329",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local t=TensorCore.mGetTarget()\nreturn t==nil or not t.alive or not t.targetable",
+							name = "No living hostile target",
+							uuid = "6543f9e7-1b05-b181-b38e-5f01b8563362",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Garuda",
+							partyTargetContentID = 1644,
+							uuid = "414b8428-bd53-0fb9-804e-29e9a38428da",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Automation",
+				loop = true,
+				mechanicTime = 34,
+				name = "[LPDU] [Target] Garuda Reacquire",
+				throttleTime = 250,
+				timeRange = true,
+				timelineIndex = 8,
+				timerEndOffset = 147,
+				uuid = "e60f0b4c-26b5-8be4-a820-72a54685e17f",
+				version = 2,
+			},
+		},
 	},
 	[9] = 
 	{
@@ -1072,6 +1224,795 @@ local tbl =
 				timerEndOffset = 4,
 				timerStartOffset = -2,
 				uuid = "74a9997c-fcb8-4902-bc76-abd631161ffa",
+				version = 2,
+			},
+		},
+	},
+	[10] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "334beeaa-1ad3-8b96-b3b8-fa0c3b0af552",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Automation",
+				uuid = "df50a2b8-b16b-b400-b678-169b6d06c690",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0657dd7f-da01-f211-a197-703641ce4629",
+									true,
+								},
+								
+								{
+									"44bfb3ed-85b6-28bc-86b7-53a5d8b22389",
+									true,
+								},
+								
+								{
+									"0e4c45db-54fc-c22d-a99e-69a7b9fd2890",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - RPR",
+							uuid = "27f0f00e-d361-8210-bee1-28be6c85ac04",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0657dd7f-da01-f211-a197-703641ce4629",
+									true,
+								},
+								
+								{
+									"44bfb3ed-85b6-28bc-86b7-53a5d8b22389",
+									true,
+								},
+								
+								{
+									"8de83077-ea50-c7de-9e01-a700f9452ac3",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - BRD",
+							uuid = "c946e857-20f9-1bd1-b7b4-5ac3b901a888",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0657dd7f-da01-f211-a197-703641ce4629",
+									true,
+								},
+								
+								{
+									"44bfb3ed-85b6-28bc-86b7-53a5d8b22389",
+									true,
+								},
+								
+								{
+									"41ce443c-a4f3-cf4f-9995-73958046634d",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - DRG",
+							uuid = "ae6959a5-71ed-4d80-812b-df1f9f243b1d",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0657dd7f-da01-f211-a197-703641ce4629",
+									true,
+								},
+								
+								{
+									"44bfb3ed-85b6-28bc-86b7-53a5d8b22389",
+									true,
+								},
+								
+								{
+									"30b03133-b8ed-8999-8f1d-2af6a8afbaa9",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - MNK",
+							uuid = "de2ad52e-540b-1107-8c6a-e02b33bfd997",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0657dd7f-da01-f211-a197-703641ce4629",
+									true,
+								},
+								
+								{
+									"44bfb3ed-85b6-28bc-86b7-53a5d8b22389",
+									true,
+								},
+								
+								{
+									"a723f603-ff14-d859-83ad-94b6450efc06",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - NIN",
+							uuid = "09ba3881-0657-ce0c-81a0-8f1f1224ac08",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0657dd7f-da01-f211-a197-703641ce4629",
+									true,
+								},
+								
+								{
+									"44bfb3ed-85b6-28bc-86b7-53a5d8b22389",
+									true,
+								},
+								
+								{
+									"c3f955b4-d666-cefb-a40e-c1b904afeb25",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - SAM",
+							uuid = "f6048454-52d9-95b0-b24c-e86e4aaad7bf",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0657dd7f-da01-f211-a197-703641ce4629",
+									true,
+								},
+								
+								{
+									"44bfb3ed-85b6-28bc-86b7-53a5d8b22389",
+									true,
+								},
+								
+								{
+									"7d8a3bd4-2ced-1a04-a31c-40dbb81ea35e",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - MCH",
+							uuid = "91dbe39a-a4e9-b2cf-a6b4-136744500aa4",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0657dd7f-da01-f211-a197-703641ce4629",
+									true,
+								},
+								
+								{
+									"44bfb3ed-85b6-28bc-86b7-53a5d8b22389",
+									true,
+								},
+								
+								{
+									"d91bc7c4-1f9a-533a-9f34-5e0e00d68c58",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - DNC",
+							uuid = "c7e7f3f2-4a5e-f69d-a0d1-e3be62d488e6",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0657dd7f-da01-f211-a197-703641ce4629",
+									true,
+								},
+								
+								{
+									"44bfb3ed-85b6-28bc-86b7-53a5d8b22389",
+									true,
+								},
+								
+								{
+									"d7aaa2ea-19fa-564b-b257-0a0cb2cd2091",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - SMN",
+							uuid = "8a1191dd-75cf-8518-8cbf-3234bddf1df0",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0657dd7f-da01-f211-a197-703641ce4629",
+									true,
+								},
+								
+								{
+									"44bfb3ed-85b6-28bc-86b7-53a5d8b22389",
+									true,
+								},
+								
+								{
+									"61f0f283-ef2e-e3f5-ae34-dde942a1028d",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - RDM",
+							uuid = "44012ea0-c62f-4973-ab4b-4f15eb65b73a",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0657dd7f-da01-f211-a197-703641ce4629",
+									true,
+								},
+								
+								{
+									"44bfb3ed-85b6-28bc-86b7-53a5d8b22389",
+									true,
+								},
+								
+								{
+									"f47f2050-f3ff-2057-998f-3a89b7f2a1d0",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - PCT",
+							uuid = "0a1e2a23-137a-31f0-8e99-603d191abd5c",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0657dd7f-da01-f211-a197-703641ce4629",
+									true,
+								},
+								
+								{
+									"44bfb3ed-85b6-28bc-86b7-53a5d8b22389",
+									true,
+								},
+								
+								{
+									"22ab58a5-04a1-e895-a5e6-bc2e0dfc6f7b",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - PLD",
+							uuid = "0565d025-58e7-afbd-9c2a-79f354ec0b63",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0657dd7f-da01-f211-a197-703641ce4629",
+									true,
+								},
+								
+								{
+									"44bfb3ed-85b6-28bc-86b7-53a5d8b22389",
+									true,
+								},
+								
+								{
+									"c99d6388-1fe0-c88d-82c7-6afa4a674c4d",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - WAR",
+							uuid = "42475af5-832b-cbfa-beb3-2739f3bafb00",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0657dd7f-da01-f211-a197-703641ce4629",
+									true,
+								},
+								
+								{
+									"44bfb3ed-85b6-28bc-86b7-53a5d8b22389",
+									true,
+								},
+								
+								{
+									"cd26ce69-81b9-b4e7-af17-88e27faa617c",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - DRK",
+							uuid = "d79cc6e6-68db-e036-94c0-7be50b681d38",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0657dd7f-da01-f211-a197-703641ce4629",
+									true,
+								},
+								
+								{
+									"44bfb3ed-85b6-28bc-86b7-53a5d8b22389",
+									true,
+								},
+								
+								{
+									"9d403fa9-9315-edff-8667-094280b021dc",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - GNB",
+							uuid = "7c015977-138e-359c-8241-90809d900565",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "BRD",
+							uuid = "8de83077-ea50-c7de-9e01-a700f9452ac3",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DRAGOON",
+							name = "DRG",
+							uuid = "41ce443c-a4f3-cf4f-9995-73958046634d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MONK",
+							name = "MNK",
+							uuid = "30b03133-b8ed-8999-8f1d-2af6a8afbaa9",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "NINJA",
+							name = "NIN",
+							uuid = "a723f603-ff14-d859-83ad-94b6450efc06",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "SAMURAI",
+							name = "SAM",
+							uuid = "c3f955b4-d666-cefb-a40e-c1b904afeb25",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MACHINIST",
+							name = "MCH",
+							uuid = "7d8a3bd4-2ced-1a04-a31c-40dbb81ea35e",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DANCER",
+							name = "DNC",
+							uuid = "d91bc7c4-1f9a-533a-9f34-5e0e00d68c58",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "SUMMONER",
+							name = "SMN",
+							uuid = "d7aaa2ea-19fa-564b-b257-0a0cb2cd2091",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REDMAGE",
+							name = "RDM",
+							uuid = "61f0f283-ef2e-e3f5-ae34-dde942a1028d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "PICTOMANCER",
+							name = "PCT",
+							uuid = "f47f2050-f3ff-2057-998f-3a89b7f2a1d0",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "PALADIN",
+							name = "PLD",
+							uuid = "22ab58a5-04a1-e895-a5e6-bc2e0dfc6f7b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "WARRIOR",
+							name = "WAR",
+							uuid = "c99d6388-1fe0-c88d-82c7-6afa4a674c4d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DARKKNIGHT",
+							name = "DRK",
+							uuid = "cd26ce69-81b9-b4e7-af17-88e27faa617c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "GUNBREAKER",
+							name = "GNB",
+							uuid = "9d403fa9-9315-edff-8667-094280b021dc",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1644,
+							name = "Boss target",
+							uuid = "0657dd7f-da01-f211-a197-703641ce4629",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Became targetable",
+							uuid = "44bfb3ed-85b6-28bc-86b7-53a5d8b22389",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REAPER",
+							name = "RPR",
+							uuid = "0e4c45db-54fc-c22d-a99e-69a7b9fd2890",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Automation",
+				eventType = 26,
+				mechanicTime = 39,
+				name = "[LPDU] [Opt] Resume Cooldowns on Garuda",
+				timeRange = true,
+				timelineIndex = 10,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "9ce88ea3-3c23-fad4-ad8e-de7d24451b2f",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"98631e39-88b5-190d-a164-f394d88a2d9f",
+									true,
+								},
+								
+								{
+									"6a1df749-f1c5-c282-8f38-d1df0bd0bdc9",
+									true,
+								},
+								
+								{
+									"7dc0d398-ca3c-da9c-a2cb-61c3d1334c6a",
+									true,
+								},
+							},
+							name = "Target Garuda",
+							setTarget = true,
+							targetType = "Event Entity",
+							uuid = "6afd6ec1-aaa6-7920-969d-126ec25a574c",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Auto targeting enabled",
+							uuid = "98631e39-88b5-190d-a164-f394d88a2d9f",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Became targetable",
+							uuid = "7dc0d398-ca3c-da9c-a2cb-61c3d1334c6a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1644,
+							name = "Garuda",
+							uuid = "6a1df749-f1c5-c282-8f38-d1df0bd0bdc9",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Automation",
+				eventType = 26,
+				loop = true,
+				mechanicTime = 39,
+				name = "[LPDU] [Target] Garuda - Acquire",
+				timeRange = true,
+				timelineIndex = 10,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "797f2250-7029-7397-a053-5d78b82558c7",
 				version = 2,
 			},
 		},
@@ -3621,6 +4562,203 @@ local tbl =
 				timerEndOffset = 110,
 				timerStartOffset = -120,
 				uuid = "92c5bc24-a22d-b671-9749-1cdf80c69c0a",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "47ea1d6c-ba76-c145-97ac-1531840dada0",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Automation",
+				uuid = "a06c7f6f-7b7d-fa8b-9771-55c111545cbe",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"d19a4980-34d7-c84f-8790-e853a6bc27df",
+									true,
+								},
+								
+								{
+									"ad88e8d3-732e-0c0c-ab1a-d80f2a89cf32",
+									true,
+								},
+								
+								{
+									"58983914-1bbe-ae66-830b-d674513f9ee8",
+									true,
+								},
+							},
+							name = "Target Ifrit",
+							setTarget = true,
+							targetType = "Event Entity",
+							uuid = "a91c7afb-d488-68a5-b790-6ea9da906ea6",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Auto targeting enabled",
+							uuid = "d19a4980-34d7-c84f-8790-e853a6bc27df",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Became targetable",
+							uuid = "58983914-1bbe-ae66-830b-d674513f9ee8",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1185,
+							name = "Ifrit",
+							uuid = "ad88e8d3-732e-0c0c-ab1a-d80f2a89cf32",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Automation",
+				eventType = 26,
+				loop = true,
+				mechanicTime = 300,
+				name = "[LPDU] [Target] Ifrit - Acquire",
+				timeRange = true,
+				timelineIndex = 36,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "99916c62-fe6b-16cf-bc20-9c1b4644b3b6",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"3c0743a2-614b-235d-977e-58aa025d0483",
+									true,
+								},
+								
+								{
+									"4eaef795-bbcd-3c92-85e3-8c95d49ea364",
+									true,
+								},
+								
+								{
+									"40ef1d13-59c7-ccdd-b103-43edd07915cb",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Target - Ifrit",
+							setTarget = true,
+							targetContentID = 1185,
+							targetType = "ContentID",
+							uuid = "579974b0-375e-03ec-9279-a65965a2dd7a",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Auto targeting enabled",
+							uuid = "3c0743a2-614b-235d-977e-58aa025d0483",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local t=TensorCore.mGetTarget()\nreturn t==nil or not t.alive or not t.targetable",
+							name = "No living hostile target",
+							uuid = "4eaef795-bbcd-3c92-85e3-8c95d49ea364",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Ifrit",
+							partyTargetContentID = 1185,
+							uuid = "40ef1d13-59c7-ccdd-b103-43edd07915cb",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Automation",
+				loop = true,
+				mechanicTime = 300,
+				name = "[LPDU] [Target] Ifrit Reacquire",
+				throttleTime = 250,
+				timeRange = true,
+				timelineIndex = 36,
+				timerEndOffset = 153,
+				uuid = "9ad811e0-df68-45c2-a4d2-f57b2bcf0583",
 				version = 2,
 			},
 		},
@@ -7851,6 +8989,203 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "f357ce7f-05fc-a21b-939d-99638baea398",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Automation",
+				uuid = "23b830fb-d5fd-af1c-99cc-9346d0b71fb9",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"89b150c8-a844-8e7f-89c8-d59b55d5e261",
+									true,
+								},
+								
+								{
+									"88c2a763-0516-c3ad-b6bf-af4cb3122805",
+									true,
+								},
+								
+								{
+									"bc3e5222-8b2c-0fd1-9266-c3e2d224fef3",
+									true,
+								},
+							},
+							name = "Target Titan",
+							setTarget = true,
+							targetType = "Event Entity",
+							uuid = "8ca1bf4d-7860-740d-b512-7326754b0aca",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Auto targeting enabled",
+							uuid = "89b150c8-a844-8e7f-89c8-d59b55d5e261",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Became targetable",
+							uuid = "bc3e5222-8b2c-0fd1-9266-c3e2d224fef3",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1801,
+							name = "Titan",
+							uuid = "88c2a763-0516-c3ad-b6bf-af4cb3122805",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Automation",
+				eventType = 26,
+				loop = true,
+				mechanicTime = 600,
+				name = "[LPDU] [Target] Titan - Acquire",
+				timeRange = true,
+				timelineIndex = 74,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "b28bd491-da37-6fc1-8963-0121757cb1e9",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"c255bc11-558b-3074-b96d-4c3aa08a8ae6",
+									true,
+								},
+								
+								{
+									"ce459769-ca5c-cbcd-8244-aacd680d5f38",
+									true,
+								},
+								
+								{
+									"77cd1ec3-ea1d-8608-950c-23ed56a640e0",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Target - Titan",
+							setTarget = true,
+							targetContentID = 1801,
+							targetType = "ContentID",
+							uuid = "7ec81312-9e7e-9f00-b51a-9fc6c1d19cd7",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Auto targeting enabled",
+							uuid = "c255bc11-558b-3074-b96d-4c3aa08a8ae6",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local t=TensorCore.mGetTarget()\nreturn t==nil or not t.alive or not t.targetable",
+							name = "No living hostile target",
+							uuid = "ce459769-ca5c-cbcd-8244-aacd680d5f38",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Titan",
+							partyTargetContentID = 1801,
+							uuid = "77cd1ec3-ea1d-8608-950c-23ed56a640e0",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Automation",
+				loop = true,
+				mechanicTime = 600,
+				name = "[LPDU] [Target] Titan Reacquire",
+				throttleTime = 250,
+				timeRange = true,
+				timelineIndex = 74,
+				timerEndOffset = 168,
+				uuid = "22c03763-a6e0-5bfe-b8fd-0936ea14324a",
+				version = 2,
+			},
+		},
 	},
 	[76] = 
 	{
@@ -8474,6 +9809,953 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "bb5b14eb-f9d9-b961-988c-5a63435491fa",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Automation",
+				uuid = "30031b5f-cebd-eb78-9e70-cd338db119c4",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"7329f44e-2b16-407d-b4e3-0fe526965077",
+									true,
+								},
+								
+								{
+									"6067a43b-1d6d-51d0-9462-d7aff72dc26a",
+									true,
+								},
+								
+								{
+									"1505053e-8439-0230-bd9b-f5ea365fc59d",
+									true,
+								},
+							},
+							name = "Target nearest Granite Gaol",
+							setTarget = true,
+							targetContentID = 1804,
+							targetType = "ContentID",
+							uuid = "c5d1adb0-4034-4966-b06e-95f91a377fe4",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Auto targeting enabled",
+							uuid = "7329f44e-2b16-407d-b4e3-0fe526965077",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Became targetable",
+							uuid = "1505053e-8439-0230-bd9b-f5ea365fc59d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1804,
+							name = "Event entity",
+							uuid = "6067a43b-1d6d-51d0-9462-d7aff72dc26a",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Automation",
+				enabled = false,
+				eventType = 26,
+				loop = true,
+				mechanicTime = 639,
+				name = "[LPDU] [Target] Titan Gaols - Acquire",
+				timeRange = true,
+				timelineIndex = 85,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "3c458cae-15bf-61f5-8f04-330964005df9",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"97db59c6-83ea-ad19-8116-ef08e2e950c9",
+									true,
+								},
+								
+								{
+									"2bbf9e56-54b6-d79e-a806-a019b3369446",
+									true,
+								},
+								
+								{
+									"a96b705f-1c76-116f-a4ff-d2ce3610e2f0",
+									true,
+								},
+								
+								{
+									"b658f0bd-33d5-fae1-b21a-5af44236df1d",
+									true,
+								},
+							},
+							name = "Target next Granite Gaol",
+							setTarget = true,
+							targetType = "Detection Target",
+							uuid = "45308629-f3ea-1e82-9e30-5c7c85e32a55",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"97db59c6-83ea-ad19-8116-ef08e2e950c9",
+									true,
+								},
+								
+								{
+									"2bbf9e56-54b6-d79e-a806-a019b3369446",
+									true,
+								},
+								
+								{
+									"a96b705f-1c76-116f-a4ff-d2ce3610e2f0",
+									true,
+								},
+								
+								{
+									"b658f0bd-33d5-fae1-b21a-5af44236df1d",
+									false,
+								},
+							},
+							name = "Restore Titan target",
+							setTarget = true,
+							targetContentID = 1801,
+							targetType = "ContentID",
+							uuid = "148d1653-11e9-e5dd-9775-216de29e088d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Auto targeting enabled",
+							uuid = "97db59c6-83ea-ad19-8116-ef08e2e950c9",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Targetable gaol remains",
+							partyTargetContentID = 1804,
+							uuid = "b658f0bd-33d5-fae1-b21a-5af44236df1d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1804,
+							name = "Event entity",
+							uuid = "2bbf9e56-54b6-d79e-a806-a019b3369446",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							eventBoolValue = 2,
+							name = "Became untargetable",
+							uuid = "a96b705f-1c76-116f-a4ff-d2ce3610e2f0",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Automation",
+				enabled = false,
+				eventType = 26,
+				loop = true,
+				mechanicTime = 639,
+				name = "[LPDU] [Target] Titan Gaols - Advance",
+				timeRange = true,
+				timelineIndex = 85,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "bd640c69-5bcd-75c9-a5c4-1e0d08898cda",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0234550e-5991-7a30-a866-e5d982212710",
+									true,
+								},
+								
+								{
+									"2b65e9f1-231c-e7e9-91d0-f055c8a6121c",
+									true,
+								},
+								
+								{
+									"d7d37a6f-fbd5-5826-94eb-eac352e66c63",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - RPR",
+							uuid = "91d21354-6de8-b249-aa19-596e87a44d4c",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0234550e-5991-7a30-a866-e5d982212710",
+									true,
+								},
+								
+								{
+									"2b65e9f1-231c-e7e9-91d0-f055c8a6121c",
+									true,
+								},
+								
+								{
+									"7b36b231-ecc1-9701-a816-a816a4fdc2bc",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - BRD",
+							uuid = "6ece8a2f-43f3-7594-a5fd-affc6cf38d2c",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0234550e-5991-7a30-a866-e5d982212710",
+									true,
+								},
+								
+								{
+									"2b65e9f1-231c-e7e9-91d0-f055c8a6121c",
+									true,
+								},
+								
+								{
+									"d62a4479-b0d2-fa38-b852-631642379c86",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - DRG",
+							uuid = "0d9de608-8736-3fb3-8ec0-fbee308baf30",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0234550e-5991-7a30-a866-e5d982212710",
+									true,
+								},
+								
+								{
+									"2b65e9f1-231c-e7e9-91d0-f055c8a6121c",
+									true,
+								},
+								
+								{
+									"b3c61916-bf76-fc40-b923-ed81bf4fa04a",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - MNK",
+							uuid = "185253c9-be7c-f137-997e-9afcc0edeea2",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0234550e-5991-7a30-a866-e5d982212710",
+									true,
+								},
+								
+								{
+									"2b65e9f1-231c-e7e9-91d0-f055c8a6121c",
+									true,
+								},
+								
+								{
+									"ed9641d2-e0d6-e3cb-bddd-1b71f606b833",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - NIN",
+							uuid = "4236f947-01a1-f074-9ff0-6a2fea3c66ca",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0234550e-5991-7a30-a866-e5d982212710",
+									true,
+								},
+								
+								{
+									"2b65e9f1-231c-e7e9-91d0-f055c8a6121c",
+									true,
+								},
+								
+								{
+									"6119010f-7012-6a93-82d5-cf77f785b81e",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - SAM",
+							uuid = "1fb6a541-3a15-7382-9148-ce94704eda6a",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0234550e-5991-7a30-a866-e5d982212710",
+									true,
+								},
+								
+								{
+									"2b65e9f1-231c-e7e9-91d0-f055c8a6121c",
+									true,
+								},
+								
+								{
+									"67d789ae-55b9-cc1d-b481-17c74d3a62ca",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - MCH",
+							uuid = "66ad8430-f7ac-35ec-8f39-826b994fad11",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0234550e-5991-7a30-a866-e5d982212710",
+									true,
+								},
+								
+								{
+									"2b65e9f1-231c-e7e9-91d0-f055c8a6121c",
+									true,
+								},
+								
+								{
+									"70f2cb3b-9cb2-7a02-b871-51c44ad967b6",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - DNC",
+							uuid = "8bc0ff69-1c16-6fd3-8ab0-de593f0f5183",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0234550e-5991-7a30-a866-e5d982212710",
+									true,
+								},
+								
+								{
+									"2b65e9f1-231c-e7e9-91d0-f055c8a6121c",
+									true,
+								},
+								
+								{
+									"3df5d6d0-71cf-eced-9d3e-e56247043fb0",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - SMN",
+							uuid = "db8759bd-2b65-f36b-8d30-78e621068218",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0234550e-5991-7a30-a866-e5d982212710",
+									true,
+								},
+								
+								{
+									"2b65e9f1-231c-e7e9-91d0-f055c8a6121c",
+									true,
+								},
+								
+								{
+									"67ecb43a-09d5-8850-a3b0-e6bc0731b790",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - RDM",
+							uuid = "4f77ffbc-63eb-1bbe-a7f9-0510f25b9af1",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0234550e-5991-7a30-a866-e5d982212710",
+									true,
+								},
+								
+								{
+									"2b65e9f1-231c-e7e9-91d0-f055c8a6121c",
+									true,
+								},
+								
+								{
+									"4f737941-d2f4-296a-af8c-3a6d207ef68f",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - PCT",
+							uuid = "60c74c07-d865-0268-98e4-b8bebd7143b5",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0234550e-5991-7a30-a866-e5d982212710",
+									true,
+								},
+								
+								{
+									"2b65e9f1-231c-e7e9-91d0-f055c8a6121c",
+									true,
+								},
+								
+								{
+									"d48578cf-633f-fd14-b037-ee4308ec54d4",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - PLD",
+							uuid = "63e33746-6d9d-bf24-ac74-57f4e5f0eae2",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0234550e-5991-7a30-a866-e5d982212710",
+									true,
+								},
+								
+								{
+									"2b65e9f1-231c-e7e9-91d0-f055c8a6121c",
+									true,
+								},
+								
+								{
+									"9d8e0886-598b-7ece-94af-8dfca07a6ad9",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - WAR",
+							uuid = "f066170e-c588-c6fb-9a2b-4c9971ae15d4",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0234550e-5991-7a30-a866-e5d982212710",
+									true,
+								},
+								
+								{
+									"2b65e9f1-231c-e7e9-91d0-f055c8a6121c",
+									true,
+								},
+								
+								{
+									"1fd3e721-05f7-c09c-ad34-2213bdd0f56d",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - DRK",
+							uuid = "44e37e17-c1c8-bb86-8068-ef5cc3144842",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0234550e-5991-7a30-a866-e5d982212710",
+									true,
+								},
+								
+								{
+									"2b65e9f1-231c-e7e9-91d0-f055c8a6121c",
+									true,
+								},
+								
+								{
+									"a76af364-1dfa-70db-a2ee-6e943f28bd15",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - GNB",
+							uuid = "0da62ab2-16d8-cb13-aa69-221e6612cdb2",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "PALADIN",
+							name = "PLD",
+							uuid = "d48578cf-633f-fd14-b037-ee4308ec54d4",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "WARRIOR",
+							name = "WAR",
+							uuid = "9d8e0886-598b-7ece-94af-8dfca07a6ad9",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DARKKNIGHT",
+							name = "DRK",
+							uuid = "1fd3e721-05f7-c09c-ad34-2213bdd0f56d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "GUNBREAKER",
+							name = "GNB",
+							uuid = "a76af364-1dfa-70db-a2ee-6e943f28bd15",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1804,
+							name = "Disposable target",
+							uuid = "0234550e-5991-7a30-a866-e5d982212710",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Became targetable",
+							uuid = "2b65e9f1-231c-e7e9-91d0-f055c8a6121c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REAPER",
+							name = "RPR",
+							uuid = "d7d37a6f-fbd5-5826-94eb-eac352e66c63",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "BRD",
+							uuid = "7b36b231-ecc1-9701-a816-a816a4fdc2bc",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DRAGOON",
+							name = "DRG",
+							uuid = "d62a4479-b0d2-fa38-b852-631642379c86",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MONK",
+							name = "MNK",
+							uuid = "b3c61916-bf76-fc40-b923-ed81bf4fa04a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "NINJA",
+							name = "NIN",
+							uuid = "ed9641d2-e0d6-e3cb-bddd-1b71f606b833",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "SAMURAI",
+							name = "SAM",
+							uuid = "6119010f-7012-6a93-82d5-cf77f785b81e",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MACHINIST",
+							name = "MCH",
+							uuid = "67d789ae-55b9-cc1d-b481-17c74d3a62ca",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DANCER",
+							name = "DNC",
+							uuid = "70f2cb3b-9cb2-7a02-b871-51c44ad967b6",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "SUMMONER",
+							name = "SMN",
+							uuid = "3df5d6d0-71cf-eced-9d3e-e56247043fb0",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REDMAGE",
+							name = "RDM",
+							uuid = "67ecb43a-09d5-8850-a3b0-e6bc0731b790",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "PICTOMANCER",
+							name = "PCT",
+							uuid = "4f737941-d2f4-296a-af8c-3a6d207ef68f",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Automation",
+				eventType = 26,
+				mechanicTime = 639,
+				name = "[LPDU] [Opt] Hold Cooldowns on Titan Gaols",
+				timeRange = true,
+				timelineIndex = 85,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "caa68fc2-fafe-c54f-a89f-8f94bce21868",
+				version = 2,
+			},
+		},
 	},
 	[86] = 
 	{
@@ -8663,6 +10945,527 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "00633a2d-e0dd-9a2c-a0ee-41efc3795449",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Automation",
+				uuid = "b92df741-05c7-668b-8bed-979bcd392723",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"12573da1-ed4e-c181-bd34-8cef8b0ed9b1",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - RPR",
+							uuid = "7ccbfd3c-a805-7e77-a218-874666a7d35e",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"54b4e24b-b5e7-cd0d-872f-d949c6aa96e8",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - BRD",
+							uuid = "974ba179-06d6-6fc7-b3b6-2ec4ccc9621e",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"bcf05284-c365-3fbf-970a-b9e609d9987d",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - DRG",
+							uuid = "da9b14b5-6d35-8952-86eb-17e224b735f8",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"55fae9f5-c4b3-417d-9e53-b9f4f8e85aca",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - MNK",
+							uuid = "d3261ad5-fd69-a30e-a02d-b540ce85953e",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0c39c3e0-281a-0de3-8dca-7cfe744892fa",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - NIN",
+							uuid = "c191fe43-fc55-84bb-a7ba-4cb0c5c06c10",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0ab3a78a-9b8d-aba8-a3b4-0a9dd995c8bf",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - SAM",
+							uuid = "06310795-36c4-c8fb-a5ef-7a4e6a75c869",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"75628c6b-5a2d-13d8-9803-87410ae2effa",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - MCH",
+							uuid = "980ae331-7e04-aa9a-a65c-027f69d7da4f",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"311f659d-deaa-790b-94a6-e15257afbdfe",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - DNC",
+							uuid = "03a9e4ed-3634-443b-a47f-1ab3aae79e91",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"6e01b09b-c5e7-857c-ae7f-009b58a16a98",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - SMN",
+							uuid = "346bd60f-cced-57cf-b42a-2ffbf5dab8de",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"f36de1d0-8cd8-1082-800b-e35870cdc238",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - RDM",
+							uuid = "e900a27b-923f-fd06-996e-2f3166c7f4ff",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"d632245f-fe8b-e29f-bc68-4ab074faaaeb",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - PCT",
+							uuid = "a641a9b4-c6fb-817d-b1a6-5474b9f0e760",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"f911dab5-a799-9990-8360-480ab0c9dcea",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - PLD",
+							uuid = "7085e1f3-2d24-12a5-8178-cbb7c086209c",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"7e12dc14-9f42-5d9f-af9b-cc4f8b9500cb",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - WAR",
+							uuid = "acc06151-92ae-902d-8197-447a1f257398",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"2ec4d19f-1dfa-8d48-9efd-29c060e5c7df",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - DRK",
+							uuid = "c31e2e85-d4f7-c1ad-b63e-b5d703fb342e",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0b886514-d529-a2d0-9c50-75da52f36621",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - GNB",
+							uuid = "db90c987-76f0-266d-a834-e85977db4c28",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "PALADIN",
+							name = "PLD",
+							uuid = "f911dab5-a799-9990-8360-480ab0c9dcea",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "WARRIOR",
+							name = "WAR",
+							uuid = "7e12dc14-9f42-5d9f-af9b-cc4f8b9500cb",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DARKKNIGHT",
+							name = "DRK",
+							uuid = "2ec4d19f-1dfa-8d48-9efd-29c060e5c7df",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "GUNBREAKER",
+							name = "GNB",
+							uuid = "0b886514-d529-a2d0-9c50-75da52f36621",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REAPER",
+							name = "RPR",
+							uuid = "12573da1-ed4e-c181-bd34-8cef8b0ed9b1",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "BRD",
+							uuid = "54b4e24b-b5e7-cd0d-872f-d949c6aa96e8",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DRAGOON",
+							name = "DRG",
+							uuid = "bcf05284-c365-3fbf-970a-b9e609d9987d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MONK",
+							name = "MNK",
+							uuid = "55fae9f5-c4b3-417d-9e53-b9f4f8e85aca",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "NINJA",
+							name = "NIN",
+							uuid = "0c39c3e0-281a-0de3-8dca-7cfe744892fa",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "SAMURAI",
+							name = "SAM",
+							uuid = "0ab3a78a-9b8d-aba8-a3b4-0a9dd995c8bf",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MACHINIST",
+							name = "MCH",
+							uuid = "75628c6b-5a2d-13d8-9803-87410ae2effa",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DANCER",
+							name = "DNC",
+							uuid = "311f659d-deaa-790b-94a6-e15257afbdfe",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "SUMMONER",
+							name = "SMN",
+							uuid = "6e01b09b-c5e7-857c-ae7f-009b58a16a98",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REDMAGE",
+							name = "RDM",
+							uuid = "f36de1d0-8cd8-1082-800b-e35870cdc238",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "PICTOMANCER",
+							name = "PCT",
+							uuid = "d632245f-fe8b-e29f-bc68-4ab074faaaeb",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Automation",
+				mechanicTime = 651,
+				name = "[LPDU] [Opt] Resume Cooldowns after Titan Gaols",
+				timeRange = true,
+				timelineIndex = 89,
+				timerEndOffset = -1,
+				timerStartOffset = -5,
+				uuid = "8fd00e7e-5843-1bce-96c5-4e1c450ced8f",
+				version = 2,
+			},
+		},
 	},
 	[90] = 
 	{
@@ -8712,6 +11515,61 @@ local tbl =
 				timelineIndex = 90,
 				timerOffset = -2,
 				uuid = "b95ec6d9-9d3a-4ce1-895a-7651729fcbb9",
+				version = 2,
+			},
+		},
+	},
+	[92] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "54436faa-ced2-c2ff-84b0-fb80a7634adf",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Automation",
+				uuid = "31c686cb-1e8e-2399-b8d7-78e3e0bfd6ab",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							gVar = "ACR_TensorNuke4_Hotbar_Sprint",
+							name = "Use Sprint",
+							uuid = "5c39e41e-f02f-f6a6-9726-0540b6ce97db",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU / Automation",
+				mechanicTime = 671,
+				name = "[LPDU] [Utility][Titan] Sprint - Mario Kart",
+				timeRange = true,
+				timelineIndex = 92,
+				timerStartOffset = -11,
+				uuid = "d8d2db34-ef79-222a-8ff1-f42ad5cf68e1",
 				version = 2,
 			},
 		},
@@ -8959,6 +11817,11 @@ local tbl =
 							{
 								
 								{
+									"5fc49abd-7d08-ac8c-8569-f521a7f26ed9",
+									true,
+								},
+								
+								{
 									"93e40f5b-071f-4197-b829-1455210e1f8f",
 									true,
 								},
@@ -9021,6 +11884,17 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Auto targeting enabled",
+							uuid = "5fc49abd-7d08-ac8c-8569-f521a7f26ed9",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "Targeting - Titan",
 				eventType = 26,
@@ -9031,6 +11905,861 @@ local tbl =
 				timerEndOffset = 13,
 				timerStartOffset = 3,
 				uuid = "f3a58d6e-49a7-0bae-ab1f-4017bc7aa453",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "b7dfd436-38ab-5c77-9ac1-b1e4344fefcc",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Automation",
+				uuid = "612e7379-6251-2438-bd8e-fc4da4821d3a",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"9451ac98-4d56-5bbd-8001-4c04dcc2f715",
+									true,
+								},
+								
+								{
+									"43ee7ce4-b9c4-66b8-977c-f5d237b18af3",
+									true,
+								},
+								
+								{
+									"ccdb24d4-b73b-337e-887f-06eb55676cf6",
+									true,
+								},
+								
+								{
+									"efc659d9-9b4a-6615-a70b-643566805fcc",
+									true,
+								},
+							},
+							name = "Target next Granite Gaol",
+							setTarget = true,
+							targetType = "Detection Target",
+							uuid = "79ae567b-188a-8ffa-9e24-3c4d55bd601e",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"9451ac98-4d56-5bbd-8001-4c04dcc2f715",
+									true,
+								},
+								
+								{
+									"43ee7ce4-b9c4-66b8-977c-f5d237b18af3",
+									true,
+								},
+								
+								{
+									"ccdb24d4-b73b-337e-887f-06eb55676cf6",
+									true,
+								},
+								
+								{
+									"efc659d9-9b4a-6615-a70b-643566805fcc",
+									false,
+								},
+							},
+							name = "Restore Titan target",
+							setTarget = true,
+							targetContentID = 1801,
+							targetType = "ContentID",
+							uuid = "2b8b4a2f-87e9-37c6-8335-be0b23e05302",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Auto targeting enabled",
+							uuid = "9451ac98-4d56-5bbd-8001-4c04dcc2f715",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1804,
+							name = "Event entity",
+							uuid = "43ee7ce4-b9c4-66b8-977c-f5d237b18af3",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							eventBoolValue = 2,
+							name = "Became untargetable",
+							uuid = "ccdb24d4-b73b-337e-887f-06eb55676cf6",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Targetable gaol remains",
+							partyTargetContentID = 1804,
+							uuid = "efc659d9-9b4a-6615-a70b-643566805fcc",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Automation",
+				eventType = 26,
+				loop = true,
+				mechanicTime = 684,
+				name = "[LPDU] [Target] Healer Gaol - Advance",
+				timeRange = true,
+				timelineIndex = 95,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "f52aa7a9-b2f8-6d6b-a0e8-309e24fe209c",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"5e17cb98-9358-3b89-a31b-51c2a438ebc9",
+									true,
+								},
+								
+								{
+									"38c62164-1318-10ef-b1c3-2daa051be0f7",
+									true,
+								},
+								
+								{
+									"60bc6c5d-631a-5e9e-a4cc-01c33da1a14d",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - RPR",
+							uuid = "14953ee7-b471-5cb7-a89f-40f640e75417",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"5e17cb98-9358-3b89-a31b-51c2a438ebc9",
+									true,
+								},
+								
+								{
+									"38c62164-1318-10ef-b1c3-2daa051be0f7",
+									true,
+								},
+								
+								{
+									"9f1d695a-eb97-05f8-9f54-a9caddce3e57",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - BRD",
+							uuid = "a02e4faf-8678-a252-9414-63d35e6e03ac",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"5e17cb98-9358-3b89-a31b-51c2a438ebc9",
+									true,
+								},
+								
+								{
+									"38c62164-1318-10ef-b1c3-2daa051be0f7",
+									true,
+								},
+								
+								{
+									"e9099b4f-4b9c-bfd1-ab20-f2759b2cac46",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - DRG",
+							uuid = "0323849e-9483-5b4f-8ca4-54d94f67ff44",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"5e17cb98-9358-3b89-a31b-51c2a438ebc9",
+									true,
+								},
+								
+								{
+									"38c62164-1318-10ef-b1c3-2daa051be0f7",
+									true,
+								},
+								
+								{
+									"2cb8d7b4-2ee7-f53c-bdaa-8e78bd6ae552",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - MNK",
+							uuid = "2fdc6e03-c9e0-db1c-8147-89e86a4494d5",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"5e17cb98-9358-3b89-a31b-51c2a438ebc9",
+									true,
+								},
+								
+								{
+									"38c62164-1318-10ef-b1c3-2daa051be0f7",
+									true,
+								},
+								
+								{
+									"9ec3ebb5-6080-f1e7-bf41-d5b14aace86e",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - NIN",
+							uuid = "cf7861db-8f92-7deb-a181-6ec7fb42dc59",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"5e17cb98-9358-3b89-a31b-51c2a438ebc9",
+									true,
+								},
+								
+								{
+									"38c62164-1318-10ef-b1c3-2daa051be0f7",
+									true,
+								},
+								
+								{
+									"74128a74-7d64-7e3d-bed2-c5f86d6ff8d1",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - SAM",
+							uuid = "db58648a-9ee5-83ea-b4dd-697f44f9ba99",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"5e17cb98-9358-3b89-a31b-51c2a438ebc9",
+									true,
+								},
+								
+								{
+									"38c62164-1318-10ef-b1c3-2daa051be0f7",
+									true,
+								},
+								
+								{
+									"9c544d0a-113f-b4f5-af08-2d02ffca323b",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - MCH",
+							uuid = "920acc5b-a828-1030-8678-2c0d471ec1fd",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"5e17cb98-9358-3b89-a31b-51c2a438ebc9",
+									true,
+								},
+								
+								{
+									"38c62164-1318-10ef-b1c3-2daa051be0f7",
+									true,
+								},
+								
+								{
+									"f91dd81e-b4a3-8459-b5c4-ff395b3ff2af",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - DNC",
+							uuid = "09b880d9-5a01-f6ac-8d6f-62a260ffdbee",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"5e17cb98-9358-3b89-a31b-51c2a438ebc9",
+									true,
+								},
+								
+								{
+									"38c62164-1318-10ef-b1c3-2daa051be0f7",
+									true,
+								},
+								
+								{
+									"435c3ecb-d2ec-e2f5-b734-2477aa8f4368",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - SMN",
+							uuid = "22f7aa9d-639d-ab2b-bf78-f49319952919",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"5e17cb98-9358-3b89-a31b-51c2a438ebc9",
+									true,
+								},
+								
+								{
+									"38c62164-1318-10ef-b1c3-2daa051be0f7",
+									true,
+								},
+								
+								{
+									"e9299ab5-bf38-f395-910d-240ef0c2c191",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - RDM",
+							uuid = "2f50a9e3-35c3-6615-8e1d-be32576c0a63",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"5e17cb98-9358-3b89-a31b-51c2a438ebc9",
+									true,
+								},
+								
+								{
+									"38c62164-1318-10ef-b1c3-2daa051be0f7",
+									true,
+								},
+								
+								{
+									"b319c3ed-1af4-62b2-b6b5-1b1a599d90a2",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - PCT",
+							uuid = "f9f20e25-5bb2-0ba1-9e62-eef68f5cf714",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"5e17cb98-9358-3b89-a31b-51c2a438ebc9",
+									true,
+								},
+								
+								{
+									"38c62164-1318-10ef-b1c3-2daa051be0f7",
+									true,
+								},
+								
+								{
+									"413a7714-59bb-964d-b60c-3dcde67716d0",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - PLD",
+							uuid = "e231e966-bda8-a922-bd8a-d999fe2d73d1",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"5e17cb98-9358-3b89-a31b-51c2a438ebc9",
+									true,
+								},
+								
+								{
+									"38c62164-1318-10ef-b1c3-2daa051be0f7",
+									true,
+								},
+								
+								{
+									"2426e434-91bf-602a-8631-843fc3014192",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - WAR",
+							uuid = "90d5bd86-77e7-146e-a686-17da3e37ac91",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"5e17cb98-9358-3b89-a31b-51c2a438ebc9",
+									true,
+								},
+								
+								{
+									"38c62164-1318-10ef-b1c3-2daa051be0f7",
+									true,
+								},
+								
+								{
+									"d7394b30-0a0e-3795-9e93-481767446d49",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - DRK",
+							uuid = "63b26a5f-47b0-e48f-bbe4-77cd0166a6b2",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"5e17cb98-9358-3b89-a31b-51c2a438ebc9",
+									true,
+								},
+								
+								{
+									"38c62164-1318-10ef-b1c3-2daa051be0f7",
+									true,
+								},
+								
+								{
+									"90a684c1-2e29-9c09-a4f9-b2c135bc985d",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - GNB",
+							uuid = "0fb52f17-0060-0a05-a4fa-b6f8d39f7312",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1804,
+							name = "Disposable target",
+							uuid = "5e17cb98-9358-3b89-a31b-51c2a438ebc9",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Became targetable",
+							uuid = "38c62164-1318-10ef-b1c3-2daa051be0f7",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REAPER",
+							name = "RPR",
+							uuid = "60bc6c5d-631a-5e9e-a4cc-01c33da1a14d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "BRD",
+							uuid = "9f1d695a-eb97-05f8-9f54-a9caddce3e57",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DRAGOON",
+							name = "DRG",
+							uuid = "e9099b4f-4b9c-bfd1-ab20-f2759b2cac46",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MONK",
+							name = "MNK",
+							uuid = "2cb8d7b4-2ee7-f53c-bdaa-8e78bd6ae552",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "NINJA",
+							name = "NIN",
+							uuid = "9ec3ebb5-6080-f1e7-bf41-d5b14aace86e",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "SAMURAI",
+							name = "SAM",
+							uuid = "74128a74-7d64-7e3d-bed2-c5f86d6ff8d1",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MACHINIST",
+							name = "MCH",
+							uuid = "9c544d0a-113f-b4f5-af08-2d02ffca323b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DANCER",
+							name = "DNC",
+							uuid = "f91dd81e-b4a3-8459-b5c4-ff395b3ff2af",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "SUMMONER",
+							name = "SMN",
+							uuid = "435c3ecb-d2ec-e2f5-b734-2477aa8f4368",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REDMAGE",
+							name = "RDM",
+							uuid = "e9299ab5-bf38-f395-910d-240ef0c2c191",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "PICTOMANCER",
+							name = "PCT",
+							uuid = "b319c3ed-1af4-62b2-b6b5-1b1a599d90a2",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "PALADIN",
+							name = "PLD",
+							uuid = "413a7714-59bb-964d-b60c-3dcde67716d0",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "WARRIOR",
+							name = "WAR",
+							uuid = "2426e434-91bf-602a-8631-843fc3014192",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DARKKNIGHT",
+							name = "DRK",
+							uuid = "d7394b30-0a0e-3795-9e93-481767446d49",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "GUNBREAKER",
+							name = "GNB",
+							uuid = "90a684c1-2e29-9c09-a4f9-b2c135bc985d",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Automation",
+				eventType = 26,
+				mechanicTime = 684,
+				name = "[LPDU] [Opt] Hold Cooldowns on Healer Gaol",
+				timeRange = true,
+				timelineIndex = 95,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "1832f9e7-acc6-f640-bf32-73e132a4cfcf",
 				version = 2,
 			},
 		},
@@ -9180,6 +12909,527 @@ local tbl =
 				timelineIndex = 98,
 				timerOffset = -1,
 				uuid = "f526509c-ce0f-c60f-aa87-1a319a794337",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "03c6567a-2f88-fd0a-bfab-ebd26a99d591",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Automation",
+				uuid = "63552195-6d66-b278-8fd2-a02d829f2db8",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"e37577d4-50de-9292-ab3a-a8f22bfc18ba",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - RPR",
+							uuid = "b9e06902-b326-af2f-a5ff-730e004f28f9",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"b194c142-88a2-8820-be13-4cd2bfda728a",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - BRD",
+							uuid = "492a6917-62e5-bc31-928c-cf21dea4dacd",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"04e34686-e701-6ce5-913f-bdf29b497e00",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - DRG",
+							uuid = "818ac004-cb42-2559-b48a-6e67afcbc24a",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"9c8da725-d2fb-c687-90fc-7036876341ca",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - MNK",
+							uuid = "c1d37f4d-b0db-0880-874a-103ef8923f37",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"b8f56598-6110-0d52-a4c2-53e615b1bfbe",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - NIN",
+							uuid = "ba1ce3e4-006f-17e0-b9b1-c892a9863b37",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"f27a0bb2-3433-a5ec-9ec1-923c7ca9274d",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - SAM",
+							uuid = "4619f068-59ce-7846-83c7-37835b850575",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"84680924-d2cf-7103-9ea5-a707b62425c9",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - MCH",
+							uuid = "ffe9e6b9-bd3c-155c-88b9-b6af9a016ce6",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"f81398e7-6fd5-0922-bf86-487a27c32a72",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - DNC",
+							uuid = "6ce22b89-1bb1-aac1-bb93-7b8b98674770",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"a9632a43-8865-8f64-b7dc-743738a42f83",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - SMN",
+							uuid = "6d27ed53-1593-2ad9-89cd-895ab4b17213",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"ab99e505-6e21-f8a6-aaa2-1ea7429be012",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - RDM",
+							uuid = "b479b552-25d7-ac67-b169-0a300ca8a61a",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"1f2ecbd6-134c-b618-a92b-a4f64f68fe85",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - PCT",
+							uuid = "abb3678b-b9f7-5192-aac0-6a037547dd90",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0bce49ba-6d5d-794e-bf7d-fb08662c398a",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - PLD",
+							uuid = "73ae1f7c-4cb1-e585-8c70-cd76f3cbfd6d",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"980aa0a4-b0f8-a63a-bac7-510bd9fe3c90",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - WAR",
+							uuid = "76a35b90-25d6-b132-be21-de51ff64f801",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"49e3a609-ffda-9f09-af81-9e0658adeb92",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - DRK",
+							uuid = "8f8a43f3-3a67-823c-9010-babc8d032093",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"3419fc40-aeae-60e7-b248-2f2167a1c2bf",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - GNB",
+							uuid = "d5e240df-aeb1-d080-b3d0-f2f026403190",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "WARRIOR",
+							name = "WAR",
+							uuid = "980aa0a4-b0f8-a63a-bac7-510bd9fe3c90",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DARKKNIGHT",
+							name = "DRK",
+							uuid = "49e3a609-ffda-9f09-af81-9e0658adeb92",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "GUNBREAKER",
+							name = "GNB",
+							uuid = "3419fc40-aeae-60e7-b248-2f2167a1c2bf",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REAPER",
+							name = "RPR",
+							uuid = "e37577d4-50de-9292-ab3a-a8f22bfc18ba",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "BRD",
+							uuid = "b194c142-88a2-8820-be13-4cd2bfda728a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DRAGOON",
+							name = "DRG",
+							uuid = "04e34686-e701-6ce5-913f-bdf29b497e00",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MONK",
+							name = "MNK",
+							uuid = "9c8da725-d2fb-c687-90fc-7036876341ca",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "NINJA",
+							name = "NIN",
+							uuid = "b8f56598-6110-0d52-a4c2-53e615b1bfbe",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "SAMURAI",
+							name = "SAM",
+							uuid = "f27a0bb2-3433-a5ec-9ec1-923c7ca9274d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MACHINIST",
+							name = "MCH",
+							uuid = "84680924-d2cf-7103-9ea5-a707b62425c9",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DANCER",
+							name = "DNC",
+							uuid = "f81398e7-6fd5-0922-bf86-487a27c32a72",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "SUMMONER",
+							name = "SMN",
+							uuid = "a9632a43-8865-8f64-b7dc-743738a42f83",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REDMAGE",
+							name = "RDM",
+							uuid = "ab99e505-6e21-f8a6-aaa2-1ea7429be012",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "PICTOMANCER",
+							name = "PCT",
+							uuid = "1f2ecbd6-134c-b618-a92b-a4f64f68fe85",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "PALADIN",
+							name = "PLD",
+							uuid = "0bce49ba-6d5d-794e-bf7d-fb08662c398a",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Automation",
+				mechanicTime = 704,
+				name = "[LPDU] [Opt] Resume Cooldowns after Healer Gaol",
+				timeRange = true,
+				timelineIndex = 98,
+				timerEndOffset = -1,
+				timerStartOffset = -5,
+				uuid = "72b90517-d91a-ffe6-b254-bbe70ae81500",
 				version = 2,
 			},
 		},
@@ -9350,6 +13600,62 @@ local tbl =
 				timerEndOffset = 2,
 				timerStartOffset = -1,
 				uuid = "d5caf2b3-e6ac-bae4-bcf2-9bf71ea79eb1",
+				version = 2,
+			},
+		},
+	},
+	[101] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "c12b753b-ff97-ae2e-8d8f-04755a00a3b1",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Automation",
+				uuid = "0aa42ec1-7109-e926-880d-e09f28c6b93b",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							gVar = "ACR_TensorNuke4_Hotbar_Sprint",
+							name = "Use Sprint",
+							uuid = "ddf7bbed-4bad-ad0d-8db1-e0efcfa09ddf",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU / Automation",
+				mechanicTime = 720,
+				name = "[LPDU] [Utility][Titan] Sprint - Bury",
+				timeRange = true,
+				timelineIndex = 101,
+				timerEndOffset = 6,
+				timerStartOffset = 1,
+				uuid = "6bb4aedc-9b83-93c0-a94c-28d2832f8e95",
 				version = 2,
 			},
 		},
@@ -9671,6 +13977,593 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "952ff35e-497a-761f-958f-e2cc707b1511",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Automation",
+				uuid = "a978cb30-579f-8cb8-a71d-54ac74ef572b",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"c2f4123d-7496-0c77-81f6-c09613300e63",
+									true,
+								},
+								
+								{
+									"7bf0edb1-db9f-da77-9431-1ffa75a39349",
+									true,
+								},
+								
+								{
+									"8bec617a-7caf-9879-9e07-72a58d47ab7b",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold RPR cooldowns",
+							uuid = "6b23eb87-03ee-3278-a769-f756525c8049",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"c2f4123d-7496-0c77-81f6-c09613300e63",
+									true,
+								},
+								
+								{
+									"7bf0edb1-db9f-da77-9431-1ffa75a39349",
+									true,
+								},
+								
+								{
+									"2f3ba02b-5b35-ac14-a725-dc5f68589b14",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold BRD cooldowns",
+							uuid = "ca75e9f6-2db4-8621-9d5a-fef2423d2d59",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"c2f4123d-7496-0c77-81f6-c09613300e63",
+									true,
+								},
+								
+								{
+									"7bf0edb1-db9f-da77-9431-1ffa75a39349",
+									true,
+								},
+								
+								{
+									"915ef67e-2d01-7a8d-bf16-05468c4054c7",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold DRG cooldowns",
+							uuid = "2c329173-2b43-00dc-8617-3c0e6ed50989",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"c2f4123d-7496-0c77-81f6-c09613300e63",
+									true,
+								},
+								
+								{
+									"7bf0edb1-db9f-da77-9431-1ffa75a39349",
+									true,
+								},
+								
+								{
+									"4fd5b7da-464f-2627-a378-d406d4bea656",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold MNK cooldowns",
+							uuid = "2300b957-1c69-3b8a-8221-f685cfde03c7",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"c2f4123d-7496-0c77-81f6-c09613300e63",
+									true,
+								},
+								
+								{
+									"7bf0edb1-db9f-da77-9431-1ffa75a39349",
+									true,
+								},
+								
+								{
+									"05e81dbb-1b03-e727-a65b-16e3e1653ed0",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold NIN cooldowns",
+							uuid = "1149bca2-9ec7-44d4-831b-549130a19ef3",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"c2f4123d-7496-0c77-81f6-c09613300e63",
+									true,
+								},
+								
+								{
+									"7bf0edb1-db9f-da77-9431-1ffa75a39349",
+									true,
+								},
+								
+								{
+									"c8bf1258-536e-392b-a1c9-9f489edba0e5",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold SAM cooldowns",
+							uuid = "f937b789-c4c0-09ec-8fe1-9375f94c88f2",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"c2f4123d-7496-0c77-81f6-c09613300e63",
+									true,
+								},
+								
+								{
+									"7bf0edb1-db9f-da77-9431-1ffa75a39349",
+									true,
+								},
+								
+								{
+									"c1901480-980f-df25-9d68-86b695f7d89b",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold MCH cooldowns",
+							uuid = "090d4014-cddc-0d9e-a30c-8e4757c40c52",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"c2f4123d-7496-0c77-81f6-c09613300e63",
+									true,
+								},
+								
+								{
+									"7bf0edb1-db9f-da77-9431-1ffa75a39349",
+									true,
+								},
+								
+								{
+									"b1360476-1634-b144-bb14-4108cec68697",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold DNC cooldowns",
+							uuid = "01a7fc06-2cbc-ad5f-92c4-882002ad3d0e",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"c2f4123d-7496-0c77-81f6-c09613300e63",
+									true,
+								},
+								
+								{
+									"7bf0edb1-db9f-da77-9431-1ffa75a39349",
+									true,
+								},
+								
+								{
+									"ca5d284a-295e-42b2-95fc-928d2906a0f4",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold SMN cooldowns",
+							uuid = "7ce3f672-6d95-6c3e-8ec5-a7c3f3e77744",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"c2f4123d-7496-0c77-81f6-c09613300e63",
+									true,
+								},
+								
+								{
+									"7bf0edb1-db9f-da77-9431-1ffa75a39349",
+									true,
+								},
+								
+								{
+									"da59da7f-46b0-4c46-8868-ef1d171ff25d",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold GNB cooldowns",
+							uuid = "ba0d35b8-db1e-68dd-87ed-570c8f2ae019",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Became targetable",
+							uuid = "7bf0edb1-db9f-da77-9431-1ffa75a39349",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REAPER",
+							name = "RPR",
+							uuid = "8bec617a-7caf-9879-9e07-72a58d47ab7b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "BRD",
+							uuid = "2f3ba02b-5b35-ac14-a725-dc5f68589b14",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DRAGOON",
+							name = "DRG",
+							uuid = "915ef67e-2d01-7a8d-bf16-05468c4054c7",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MONK",
+							name = "MNK",
+							uuid = "4fd5b7da-464f-2627-a378-d406d4bea656",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "NINJA",
+							name = "NIN",
+							uuid = "05e81dbb-1b03-e727-a65b-16e3e1653ed0",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "SAMURAI",
+							name = "SAM",
+							uuid = "c8bf1258-536e-392b-a1c9-9f489edba0e5",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MACHINIST",
+							name = "MCH",
+							uuid = "c1901480-980f-df25-9d68-86b695f7d89b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DANCER",
+							name = "DNC",
+							uuid = "b1360476-1634-b144-bb14-4108cec68697",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "SUMMONER",
+							name = "SMN",
+							uuid = "ca5d284a-295e-42b2-95fc-928d2906a0f4",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "GUNBREAKER",
+							name = "GNB",
+							uuid = "da59da7f-46b0-4c46-8868-ef1d171ff25d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 5563,
+							name = "Magitek Bit",
+							uuid = "c2f4123d-7496-0c77-81f6-c09613300e63",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Automation",
+				eventType = 26,
+				mechanicTime = 800,
+				name = "[LPDU] [Opt] Hold Cooldowns for Magitek Bits",
+				timeRange = true,
+				timelineIndex = 114,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "1b1dbe3b-faa3-4012-b47e-577ffdeff1dc",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"419da3bb-0690-538a-be47-6017bb3a41ab",
+									true,
+								},
+								
+								{
+									"51133d18-67b2-1e3b-bb25-933be6c698f6",
+									true,
+								},
+								
+								{
+									"1b2059fb-cac0-510d-b0ba-4c6ede3b2203",
+									true,
+								},
+							},
+							name = "Target nearest Magitek Bit",
+							setTarget = true,
+							targetContentID = 5563,
+							targetType = "ContentID",
+							uuid = "6d461126-e2aa-7593-8cec-49e6a9aac019",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Auto targeting enabled",
+							uuid = "419da3bb-0690-538a-be47-6017bb3a41ab",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 5563,
+							name = "Event entity",
+							uuid = "51133d18-67b2-1e3b-bb25-933be6c698f6",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Became targetable",
+							uuid = "1b2059fb-cac0-510d-b0ba-4c6ede3b2203",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Automation",
+				eventType = 26,
+				loop = true,
+				mechanicTime = 800,
+				name = "[LPDU] [Target] Magitek Bits",
+				timeRange = true,
+				timelineIndex = 114,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "04c63c85-f0de-c91d-8623-e4122ac6470c",
+				version = 2,
+			},
+		},
 	},
 	[115] = 
 	{
@@ -9851,6 +14744,11 @@ local tbl =
 							{
 								
 								{
+									"37d9aab2-6722-6835-a0a8-e2934bba0abf",
+									true,
+								},
+								
+								{
 									"0d880dca-e2e9-10ce-a28e-b38548457d93",
 									true,
 								},
@@ -9874,6 +14772,17 @@ local tbl =
 							conditionLua = "local e = TensorCore.getEntityByGroup(\"ContentID\", {contentid=2143, subgroup=\"Nearest\"})\nreturn e ~= nil and e.targetable == true",
 							name = "Lahabrea targetable",
 							uuid = "0d880dca-e2e9-10ce-a28e-b38548457d93",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Auto targeting enabled",
+							uuid = "37d9aab2-6722-6835-a0a8-e2934bba0abf",
 							version = 3,
 						},
 					},
@@ -10090,6 +14999,670 @@ local tbl =
 				timelineIndex = 118,
 				timerEndOffset = 5,
 				uuid = "6f1eb624-f581-b3d4-9c61-f59c7fe16e61",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "a20fb686-3eb5-ecaf-b89d-6f9802bcac46",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Automation",
+				uuid = "bc50e4a0-9a9e-885d-aaf1-449e85b23f4e",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"f3e03633-da8f-1ba0-8d07-5f505e7e99fe",
+									true,
+								},
+								
+								{
+									"d0ad9a66-22cf-938a-b80c-3d492b8b463c",
+									true,
+								},
+								
+								{
+									"539f2683-ff6f-d9f9-9d17-103cfb7fba53",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume RPR cooldowns",
+							uuid = "4a620339-1f2e-7ab0-a9d1-f5e3b2fd8d04",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"f3e03633-da8f-1ba0-8d07-5f505e7e99fe",
+									true,
+								},
+								
+								{
+									"d0ad9a66-22cf-938a-b80c-3d492b8b463c",
+									true,
+								},
+								
+								{
+									"76d9afbe-476f-d542-82ed-28498c0604c8",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume BRD cooldowns",
+							uuid = "66ea338b-2ad9-8225-8056-e22e81077822",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"f3e03633-da8f-1ba0-8d07-5f505e7e99fe",
+									true,
+								},
+								
+								{
+									"d0ad9a66-22cf-938a-b80c-3d492b8b463c",
+									true,
+								},
+								
+								{
+									"51e14b70-4aae-5b27-a557-6c558ab2379b",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume DRG cooldowns",
+							uuid = "1db99890-01b1-faa5-a044-3a6a0955fdbb",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"f3e03633-da8f-1ba0-8d07-5f505e7e99fe",
+									true,
+								},
+								
+								{
+									"d0ad9a66-22cf-938a-b80c-3d492b8b463c",
+									true,
+								},
+								
+								{
+									"bd270018-d354-c20b-86af-f8e90541ffa5",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume MNK cooldowns",
+							uuid = "f020f340-6104-1182-b3d6-8e59238ae4fe",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"f3e03633-da8f-1ba0-8d07-5f505e7e99fe",
+									true,
+								},
+								
+								{
+									"d0ad9a66-22cf-938a-b80c-3d492b8b463c",
+									true,
+								},
+								
+								{
+									"fc7a61eb-5f67-7865-ac3b-67265d0648a6",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume NIN cooldowns",
+							uuid = "01c3f862-328a-9fe6-8cc5-0ffe0895ea2e",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"f3e03633-da8f-1ba0-8d07-5f505e7e99fe",
+									true,
+								},
+								
+								{
+									"d0ad9a66-22cf-938a-b80c-3d492b8b463c",
+									true,
+								},
+								
+								{
+									"8f041451-16e0-c49e-9a77-e7b26ab3e709",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume SAM cooldowns",
+							uuid = "8afd513a-8b8d-1db5-ab37-3f2733acc869",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"f3e03633-da8f-1ba0-8d07-5f505e7e99fe",
+									true,
+								},
+								
+								{
+									"d0ad9a66-22cf-938a-b80c-3d492b8b463c",
+									true,
+								},
+								
+								{
+									"b10e6acc-a73d-7eb2-99d9-a2446731f611",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume MCH cooldowns",
+							uuid = "e61df19f-a10a-7253-83c0-6a9767f3a6d8",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"f3e03633-da8f-1ba0-8d07-5f505e7e99fe",
+									true,
+								},
+								
+								{
+									"d0ad9a66-22cf-938a-b80c-3d492b8b463c",
+									true,
+								},
+								
+								{
+									"f4fe521d-dbc9-154f-9c5b-b8faf3e01e5a",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume DNC cooldowns",
+							uuid = "709f7d5b-209b-04c4-a55a-8430521d7c37",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"f3e03633-da8f-1ba0-8d07-5f505e7e99fe",
+									true,
+								},
+								
+								{
+									"d0ad9a66-22cf-938a-b80c-3d492b8b463c",
+									true,
+								},
+								
+								{
+									"a43f6649-d1cc-da20-ab4a-56dfeb2a9e57",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume SMN cooldowns",
+							uuid = "ba1c7a59-9d0c-dfcc-9bda-2f4260fd501a",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"f3e03633-da8f-1ba0-8d07-5f505e7e99fe",
+									true,
+								},
+								
+								{
+									"d0ad9a66-22cf-938a-b80c-3d492b8b463c",
+									true,
+								},
+								
+								{
+									"94fba4c0-4dfd-554c-b0ce-e237c35674eb",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume GNB cooldowns",
+							uuid = "4834c0e8-c537-8d86-bf3d-6dd0f904aacd",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Became targetable",
+							uuid = "d0ad9a66-22cf-938a-b80c-3d492b8b463c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MACHINIST",
+							name = "MCH",
+							uuid = "b10e6acc-a73d-7eb2-99d9-a2446731f611",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 2137,
+							name = "Ultima",
+							uuid = "f3e03633-da8f-1ba0-8d07-5f505e7e99fe",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MONK",
+							name = "MNK",
+							uuid = "bd270018-d354-c20b-86af-f8e90541ffa5",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REAPER",
+							name = "RPR",
+							uuid = "539f2683-ff6f-d9f9-9d17-103cfb7fba53",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "BRD",
+							uuid = "76d9afbe-476f-d542-82ed-28498c0604c8",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DRAGOON",
+							name = "DRG",
+							uuid = "51e14b70-4aae-5b27-a557-6c558ab2379b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DANCER",
+							name = "DNC",
+							uuid = "f4fe521d-dbc9-154f-9c5b-b8faf3e01e5a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "SUMMONER",
+							name = "SMN",
+							uuid = "a43f6649-d1cc-da20-ab4a-56dfeb2a9e57",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "GUNBREAKER",
+							name = "GNB",
+							uuid = "94fba4c0-4dfd-554c-b0ce-e237c35674eb",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "NINJA",
+							name = "NIN",
+							uuid = "fc7a61eb-5f67-7865-ac3b-67265d0648a6",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "SAMURAI",
+							name = "SAM",
+							uuid = "8f041451-16e0-c49e-9a77-e7b26ab3e709",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Automation",
+				eventType = 26,
+				mechanicTime = 1000,
+				name = "[LPDU] [Opt] Resume Cooldowns on Ultima",
+				timeRange = true,
+				timelineIndex = 118,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "699820e3-daae-f509-9264-c0977678ff50",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"9330a02b-c77b-7a09-a85c-5996987e8dee",
+									true,
+								},
+								
+								{
+									"0591a422-4503-24b5-9ded-6ebfce548ffe",
+									true,
+								},
+								
+								{
+									"cce06260-746a-0014-ba3c-242b6b05ab33",
+									true,
+								},
+							},
+							name = "Target Ultima",
+							setTarget = true,
+							targetType = "Event Entity",
+							uuid = "383b2ebe-2516-61b4-b156-99d3531cc4b6",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Auto targeting enabled",
+							uuid = "9330a02b-c77b-7a09-a85c-5996987e8dee",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 2137,
+							name = "Ultima",
+							uuid = "0591a422-4503-24b5-9ded-6ebfce548ffe",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Became targetable",
+							uuid = "cce06260-746a-0014-ba3c-242b6b05ab33",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Automation",
+				eventType = 26,
+				loop = true,
+				mechanicTime = 1000,
+				name = "[LPDU] [Target] Ultima - Acquire",
+				timeRange = true,
+				timelineIndex = 118,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "5876feae-5cb1-80a6-ba03-d90f72c61f8f",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"e277ff04-382d-c17f-8c26-49b747c0c707",
+									true,
+								},
+								
+								{
+									"d7dca45e-4856-824b-907a-113e46fffcdb",
+									true,
+								},
+								
+								{
+									"54a07148-ba58-2415-8c54-264930bcf0e2",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Target - Ultima",
+							setTarget = true,
+							targetContentID = 2137,
+							targetType = "ContentID",
+							uuid = "a9b4aac2-55c8-291c-8380-d0ea86c53060",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Auto targeting enabled",
+							uuid = "e277ff04-382d-c17f-8c26-49b747c0c707",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Ultima",
+							partyTargetContentID = 2137,
+							uuid = "54a07148-ba58-2415-8c54-264930bcf0e2",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local t=TensorCore.mGetTarget()\nreturn t==nil or not t.alive or not t.targetable",
+							name = "No living hostile target",
+							uuid = "d7dca45e-4856-824b-907a-113e46fffcdb",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Automation",
+				loop = true,
+				mechanicTime = 1000,
+				name = "[LPDU] [Target] Ultima Reacquire",
+				throttleTime = 250,
+				timeRange = true,
+				timelineIndex = 118,
+				timerEndOffset = 650,
+				uuid = "4712a5b6-62cb-dc8f-910b-4db48be39bbb",
 				version = 2,
 			},
 		},
@@ -10448,6 +16021,59 @@ local tbl =
 				timerEndOffset = 2,
 				timerStartOffset = -2,
 				uuid = "5506deed-8a61-1692-b3ad-53cff37e55b9",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "b5baf06b-8fda-0d03-9bde-b9da1ad8b49d",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Automation",
+				uuid = "4cd4cb7d-13da-674a-87df-be33c921f9d5",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							gVar = "ACR_TensorNuke4_Hotbar_Sprint",
+							name = "Use Sprint",
+							uuid = "473c15cb-0cb8-ad82-a37e-78e5b1b87bdb",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU / Automation",
+				mechanicTime = 1038,
+				name = "[LPDU] [Utility][Predation] Sprint",
+				timeRange = true,
+				timelineIndex = 125,
+				timerEndOffset = 1,
+				timerStartOffset = -4,
+				uuid = "e7f13d4d-91dd-6329-9620-de5bd83b8d0c",
 				version = 2,
 			},
 		},
@@ -13356,6 +18982,60 @@ local tbl =
 			},
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "a0915422-ac0a-fd5b-8444-aaf3c7949ce6",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Automation",
+				uuid = "2d0f5d04-c9c8-42f9-8789-a4d11ca84b61",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							gVar = "ACR_TensorNuke4_Hotbar_Sprint",
+							name = "Use Sprint",
+							uuid = "adf58238-d1a5-0228-83f3-341d45337f91",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU / Automation",
+				mechanicTime = 1128,
+				name = "[LPDU] [Utility][Annihilation] Sprint",
+				timeRandomRange = true,
+				timeRange = true,
+				timelineIndex = 164,
+				timerEndOffset = -3,
+				timerStartOffset = -6,
+				uuid = "5ff93388-35d4-3094-8eab-f251a3ba628e",
+				version = 2,
+			},
+		},
 	},
 	[166] = 
 	{
@@ -14109,6 +19789,270 @@ local tbl =
 			},
 		},
 	},
+	[183] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "bc3e2e48-7f6e-9d64-ad59-43a9d5d59ea9",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Automation",
+				uuid = "8cf01c2f-4e4f-14cb-ae1f-5fae946fff39",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"70daa0b3-7303-4e8b-82b4-df8198ed57ad",
+									true,
+								},
+								
+								{
+									"c41c0711-1bd8-1a32-9f7f-e8884a55db30",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_Hotbar_Surecast",
+							name = "Use Surecast",
+							uuid = "23648414-5022-75a9-b7ff-87f39b9cc461",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							comparator = 2,
+							conditionType = 11,
+							hpValue = 5,
+							name = "Shield <=5%",
+							uuid = "70daa0b3-7303-4e8b-82b4-df8198ed57ad",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								19,
+								20,
+								21,
+								22,
+								23,
+								30,
+								31,
+								32,
+								34,
+								37,
+								38,
+								39,
+								41,
+							},
+							name = "Arm's Length jobs",
+							uuid = "5e0c0d5c-a944-b6cc-983f-55f6c4b3e9ed",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								24,
+								25,
+								27,
+								28,
+								33,
+								35,
+								40,
+								42,
+							},
+							name = "Surecast jobs",
+							uuid = "c41c0711-1bd8-1a32-9f7f-e8884a55db30",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Automation",
+				mechanicTime = 1173,
+				name = "[LPDU] [Utility][Annihilation] Vulcan Burst Anti-Knockback 1",
+				timeRange = true,
+				timelineIndex = 183,
+				timerStartOffset = -2.5,
+				uuid = "9b12d2ff-583a-b51f-b27c-2c7a6f4f1baa",
+				version = 2,
+			},
+		},
+	},
+	[186] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "1c5a3f09-6978-49e8-9e4a-572e6c96cbff",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Automation",
+				uuid = "ab436502-ebfe-a812-828d-ec87a4debff4",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"e87c4df9-a93a-9fd2-9865-5c5351832fe8",
+									true,
+								},
+								
+								{
+									"418452f4-ee6c-99ef-966d-f48b36b409be",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_Hotbar_Surecast",
+							name = "Use Surecast",
+							uuid = "894acd4f-e2af-0345-8f91-5ded9739444e",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								19,
+								20,
+								21,
+								22,
+								23,
+								30,
+								31,
+								32,
+								34,
+								37,
+								38,
+								39,
+								41,
+							},
+							name = "Arm's Length jobs",
+							uuid = "d3e79f4f-7600-b63e-a7d1-128f5e78c9b3",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								24,
+								25,
+								27,
+								28,
+								33,
+								35,
+								40,
+								42,
+							},
+							name = "Surecast jobs",
+							uuid = "418452f4-ee6c-99ef-966d-f48b36b409be",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							comparator = 2,
+							conditionType = 11,
+							hpValue = 5,
+							name = "Shield <=5%",
+							uuid = "e87c4df9-a93a-9fd2-9865-5c5351832fe8",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Automation",
+				mechanicTime = 1186,
+				name = "[LPDU] [Utility][Annihilation] Vulcan Burst Anti-Knockback 2",
+				timeRange = true,
+				timelineIndex = 186,
+				timerStartOffset = -2.5,
+				uuid = "c956f92a-d511-e0d0-b130-48632f25e42b",
+				version = 2,
+			},
+		},
+	},
 	[188] = 
 	{
 		
@@ -14499,6 +20443,951 @@ local tbl =
 				timerEndOffset = 7,
 				timerStartOffset = -6,
 				uuid = "3cb81888-ca79-b686-9da1-17dda5a531b1",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "4679d595-d22c-7704-968f-c79e52714ae9",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Automation",
+				uuid = "a91f9d92-cf87-16ac-aaf3-1d90ea218830",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"599f01d2-38fd-ef6c-8dda-419d3577debb",
+									true,
+								},
+								
+								{
+									"69d94b68-1ab7-e2e4-8518-e9d7d4776b69",
+									true,
+								},
+								
+								{
+									"ea4282ca-c457-8021-a63f-3c5e686896fb",
+									true,
+								},
+							},
+							name = "Target nearest Granite Gaol",
+							setTarget = true,
+							targetContentID = 1804,
+							targetType = "ContentID",
+							uuid = "9fa4269c-10f9-4c4a-93e3-1854431dec16",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Auto targeting enabled",
+							uuid = "599f01d2-38fd-ef6c-8dda-419d3577debb",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Became targetable",
+							uuid = "ea4282ca-c457-8021-a63f-3c5e686896fb",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1804,
+							name = "Event entity",
+							uuid = "69d94b68-1ab7-e2e4-8518-e9d7d4776b69",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Automation",
+				eventType = 26,
+				loop = true,
+				mechanicTime = 1206,
+				name = "[LPDU] [Target] Suppression Gaol - Acquire",
+				timeRange = true,
+				timelineIndex = 190,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "940b1d94-73b7-3bf2-8339-ecba912ce133",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"a77328a8-05c5-7cc4-b7e0-00ae72ae092d",
+									true,
+								},
+								
+								{
+									"0c15cd42-ffe2-9e7c-b06d-5931a48435ee",
+									true,
+								},
+								
+								{
+									"2ad84284-f006-016f-bdad-3c1beb779ed8",
+									true,
+								},
+								
+								{
+									"b5a69d5e-c38c-0601-8c38-740633568da2",
+									true,
+								},
+							},
+							name = "Target next Granite Gaol",
+							setTarget = true,
+							targetType = "Detection Target",
+							uuid = "8324e059-a451-a813-9ec8-2b48aefffe7e",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"a77328a8-05c5-7cc4-b7e0-00ae72ae092d",
+									true,
+								},
+								
+								{
+									"0c15cd42-ffe2-9e7c-b06d-5931a48435ee",
+									true,
+								},
+								
+								{
+									"2ad84284-f006-016f-bdad-3c1beb779ed8",
+									true,
+								},
+								
+								{
+									"b5a69d5e-c38c-0601-8c38-740633568da2",
+									false,
+								},
+							},
+							name = "Restore Ultima target",
+							setTarget = true,
+							targetContentID = 2137,
+							targetType = "ContentID",
+							uuid = "4ccef651-60c2-d402-bd0c-113eaf71cfc2",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Auto targeting enabled",
+							uuid = "a77328a8-05c5-7cc4-b7e0-00ae72ae092d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1804,
+							name = "Event entity",
+							uuid = "0c15cd42-ffe2-9e7c-b06d-5931a48435ee",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							eventBoolValue = 2,
+							name = "Became untargetable",
+							uuid = "2ad84284-f006-016f-bdad-3c1beb779ed8",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Targetable gaol remains",
+							partyTargetContentID = 1804,
+							uuid = "b5a69d5e-c38c-0601-8c38-740633568da2",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Automation",
+				eventType = 26,
+				loop = true,
+				mechanicTime = 1206,
+				name = "[LPDU] [Target] Suppression Gaol - Advance",
+				timeRange = true,
+				timelineIndex = 190,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "3917bccb-213e-6d50-95ad-ab1f4649066f",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"58d5de5d-4860-4f90-afad-ff665d162c10",
+									true,
+								},
+								
+								{
+									"f3eb4dbf-8105-b42e-887a-39f79197607c",
+									true,
+								},
+								
+								{
+									"59e20b70-6680-4281-9a77-9d112fd95789",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - RPR",
+							uuid = "62a4d079-6ca5-b6c2-8218-38a5b3b35321",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"58d5de5d-4860-4f90-afad-ff665d162c10",
+									true,
+								},
+								
+								{
+									"f3eb4dbf-8105-b42e-887a-39f79197607c",
+									true,
+								},
+								
+								{
+									"63db60de-3ded-cfec-8c2d-b3dd06bc97a3",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - BRD",
+							uuid = "8fc4ccfd-d1dd-fc04-8b5a-566855ab93ff",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"58d5de5d-4860-4f90-afad-ff665d162c10",
+									true,
+								},
+								
+								{
+									"f3eb4dbf-8105-b42e-887a-39f79197607c",
+									true,
+								},
+								
+								{
+									"780fe100-9bf7-6b77-9de2-3b80bb08fa29",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - DRG",
+							uuid = "72248b2d-e719-8ddd-81bd-9b2bc5462cdc",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"58d5de5d-4860-4f90-afad-ff665d162c10",
+									true,
+								},
+								
+								{
+									"f3eb4dbf-8105-b42e-887a-39f79197607c",
+									true,
+								},
+								
+								{
+									"1c824a7d-cdbf-88a3-98fe-d7173054c79c",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - MNK",
+							uuid = "563a6870-6678-5053-965f-a9168bd0b23a",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"58d5de5d-4860-4f90-afad-ff665d162c10",
+									true,
+								},
+								
+								{
+									"f3eb4dbf-8105-b42e-887a-39f79197607c",
+									true,
+								},
+								
+								{
+									"44796af9-f9f2-c82d-a978-4ed5b5ce70d4",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - NIN",
+							uuid = "4ce54acb-2980-ef7b-9e21-708181ce6591",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"58d5de5d-4860-4f90-afad-ff665d162c10",
+									true,
+								},
+								
+								{
+									"f3eb4dbf-8105-b42e-887a-39f79197607c",
+									true,
+								},
+								
+								{
+									"db76ab6d-1d14-c54e-9a48-6eaa5222fce6",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - SAM",
+							uuid = "7e74d25f-d17d-d00e-8a01-ba8acde0e01a",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"58d5de5d-4860-4f90-afad-ff665d162c10",
+									true,
+								},
+								
+								{
+									"f3eb4dbf-8105-b42e-887a-39f79197607c",
+									true,
+								},
+								
+								{
+									"445c5bce-4ca3-c1b8-a2f3-d3283a142caf",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - MCH",
+							uuid = "001925d8-9f60-bdaa-9081-dcb613763647",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"58d5de5d-4860-4f90-afad-ff665d162c10",
+									true,
+								},
+								
+								{
+									"f3eb4dbf-8105-b42e-887a-39f79197607c",
+									true,
+								},
+								
+								{
+									"d4e137f4-cccd-617a-a6cd-e955542c51dc",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - DNC",
+							uuid = "21e146d2-e5ae-ae71-aee9-98ee5d58219f",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"58d5de5d-4860-4f90-afad-ff665d162c10",
+									true,
+								},
+								
+								{
+									"f3eb4dbf-8105-b42e-887a-39f79197607c",
+									true,
+								},
+								
+								{
+									"1537d4a3-0724-27fa-a30b-28e385248750",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - SMN",
+							uuid = "a8f24544-b49b-238d-97f3-3e0a403f01e8",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"58d5de5d-4860-4f90-afad-ff665d162c10",
+									true,
+								},
+								
+								{
+									"f3eb4dbf-8105-b42e-887a-39f79197607c",
+									true,
+								},
+								
+								{
+									"300d7160-41f4-c36b-ab8e-4e8c8cb38b38",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - RDM",
+							uuid = "efa436d6-4f7a-d5ef-886f-c1043196798c",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"58d5de5d-4860-4f90-afad-ff665d162c10",
+									true,
+								},
+								
+								{
+									"f3eb4dbf-8105-b42e-887a-39f79197607c",
+									true,
+								},
+								
+								{
+									"39bf0897-1ccc-c805-bec7-09280eef27bb",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - PCT",
+							uuid = "6db74019-91d1-bcba-abcd-3c636f175f7c",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"58d5de5d-4860-4f90-afad-ff665d162c10",
+									true,
+								},
+								
+								{
+									"f3eb4dbf-8105-b42e-887a-39f79197607c",
+									true,
+								},
+								
+								{
+									"c8209bc4-61b8-dc73-8ea4-f8a89c0a880f",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - PLD",
+							uuid = "1901a97f-aa76-35ca-873e-35fb3c5d5531",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"58d5de5d-4860-4f90-afad-ff665d162c10",
+									true,
+								},
+								
+								{
+									"f3eb4dbf-8105-b42e-887a-39f79197607c",
+									true,
+								},
+								
+								{
+									"e0dda5e5-365f-85fd-a5bd-2c20eb929414",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - WAR",
+							uuid = "6a7eb938-9464-9b3d-9637-f8c4f38963bb",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"58d5de5d-4860-4f90-afad-ff665d162c10",
+									true,
+								},
+								
+								{
+									"f3eb4dbf-8105-b42e-887a-39f79197607c",
+									true,
+								},
+								
+								{
+									"2108b04a-7686-7a53-9c6f-b5e9096fb007",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - DRK",
+							uuid = "13342708-83e1-aafb-8bad-90e9c308a5c2",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"58d5de5d-4860-4f90-afad-ff665d162c10",
+									true,
+								},
+								
+								{
+									"f3eb4dbf-8105-b42e-887a-39f79197607c",
+									true,
+								},
+								
+								{
+									"402edf2a-4a02-f9ab-8a7b-02791d28435e",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							gVarValue = 2,
+							name = "Hold cooldowns - GNB",
+							uuid = "ed905096-9dfd-c77d-ac85-d655ef0f8d9b",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REDMAGE",
+							name = "RDM",
+							uuid = "300d7160-41f4-c36b-ab8e-4e8c8cb38b38",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "PICTOMANCER",
+							name = "PCT",
+							uuid = "39bf0897-1ccc-c805-bec7-09280eef27bb",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "PALADIN",
+							name = "PLD",
+							uuid = "c8209bc4-61b8-dc73-8ea4-f8a89c0a880f",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "WARRIOR",
+							name = "WAR",
+							uuid = "e0dda5e5-365f-85fd-a5bd-2c20eb929414",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DARKKNIGHT",
+							name = "DRK",
+							uuid = "2108b04a-7686-7a53-9c6f-b5e9096fb007",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "GUNBREAKER",
+							name = "GNB",
+							uuid = "402edf2a-4a02-f9ab-8a7b-02791d28435e",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1804,
+							name = "Disposable target",
+							uuid = "58d5de5d-4860-4f90-afad-ff665d162c10",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Became targetable",
+							uuid = "f3eb4dbf-8105-b42e-887a-39f79197607c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REAPER",
+							name = "RPR",
+							uuid = "59e20b70-6680-4281-9a77-9d112fd95789",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "BRD",
+							uuid = "63db60de-3ded-cfec-8c2d-b3dd06bc97a3",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DRAGOON",
+							name = "DRG",
+							uuid = "780fe100-9bf7-6b77-9de2-3b80bb08fa29",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MONK",
+							name = "MNK",
+							uuid = "1c824a7d-cdbf-88a3-98fe-d7173054c79c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "NINJA",
+							name = "NIN",
+							uuid = "44796af9-f9f2-c82d-a978-4ed5b5ce70d4",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "SAMURAI",
+							name = "SAM",
+							uuid = "db76ab6d-1d14-c54e-9a48-6eaa5222fce6",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MACHINIST",
+							name = "MCH",
+							uuid = "445c5bce-4ca3-c1b8-a2f3-d3283a142caf",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DANCER",
+							name = "DNC",
+							uuid = "d4e137f4-cccd-617a-a6cd-e955542c51dc",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "SUMMONER",
+							name = "SMN",
+							uuid = "1537d4a3-0724-27fa-a30b-28e385248750",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Automation",
+				eventType = 26,
+				mechanicTime = 1206,
+				name = "[LPDU] [Opt] Hold Cooldowns on Suppression Gaol",
+				timeRange = true,
+				timelineIndex = 190,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "f0f65633-6922-7fc5-96b0-877b093c9d4e",
 				version = 2,
 			},
 		},
@@ -15607,6 +22496,704 @@ local tbl =
 				timerEndOffset = -2,
 				timerStartOffset = -3,
 				uuid = "2a6481bd-bb4f-75a9-8219-a7a31c53b604",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "72cdc4de-0562-34ce-b433-c4e553a76128",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Automation",
+				uuid = "b13a2c82-d9c8-9ced-a695-59d8a3c2c9d3",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"447c1044-8f9b-de94-bb9d-afef6965d55e",
+									true,
+								},
+								
+								{
+									"e6d1a84d-07cd-cfe7-a7a2-701052472baf",
+									true,
+								},
+								
+								{
+									"fe020782-dc82-2457-bfd4-79d14c3a3ba7",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - RPR",
+							uuid = "bc3237ea-5d08-852d-858f-42e7f5738e69",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"447c1044-8f9b-de94-bb9d-afef6965d55e",
+									true,
+								},
+								
+								{
+									"e6d1a84d-07cd-cfe7-a7a2-701052472baf",
+									true,
+								},
+								
+								{
+									"376de76c-d116-039f-8bd9-d81ba9366b7f",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - BRD",
+							uuid = "3d21c7d2-a889-95a0-a2d6-f56473d16e6b",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"447c1044-8f9b-de94-bb9d-afef6965d55e",
+									true,
+								},
+								
+								{
+									"e6d1a84d-07cd-cfe7-a7a2-701052472baf",
+									true,
+								},
+								
+								{
+									"097ed379-9b47-d222-9f85-0ecbeefba196",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - DRG",
+							uuid = "6dd96488-777c-351a-a277-a0e888d1c935",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"447c1044-8f9b-de94-bb9d-afef6965d55e",
+									true,
+								},
+								
+								{
+									"e6d1a84d-07cd-cfe7-a7a2-701052472baf",
+									true,
+								},
+								
+								{
+									"94dc7e1d-b367-377e-8e83-58f668018875",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - MNK",
+							uuid = "a01ba111-32dc-5f59-a95c-29821f92cd37",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"447c1044-8f9b-de94-bb9d-afef6965d55e",
+									true,
+								},
+								
+								{
+									"e6d1a84d-07cd-cfe7-a7a2-701052472baf",
+									true,
+								},
+								
+								{
+									"c61904ce-897f-cc77-95ef-df9f6ad1e1c8",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - NIN",
+							uuid = "a38fda82-d5f9-1d57-a6c4-d676e0b94bd8",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"447c1044-8f9b-de94-bb9d-afef6965d55e",
+									true,
+								},
+								
+								{
+									"e6d1a84d-07cd-cfe7-a7a2-701052472baf",
+									true,
+								},
+								
+								{
+									"276b4840-05de-02d8-8773-2768f40b7ead",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - SAM",
+							uuid = "ad569d66-399b-e31e-86eb-4575427a46f6",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"447c1044-8f9b-de94-bb9d-afef6965d55e",
+									true,
+								},
+								
+								{
+									"e6d1a84d-07cd-cfe7-a7a2-701052472baf",
+									true,
+								},
+								
+								{
+									"3333892c-cc44-9a6f-8b78-f503acf86d10",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - MCH",
+							uuid = "a1bfe9e1-3245-ad33-8d5b-ce0b595b9f53",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"447c1044-8f9b-de94-bb9d-afef6965d55e",
+									true,
+								},
+								
+								{
+									"e6d1a84d-07cd-cfe7-a7a2-701052472baf",
+									true,
+								},
+								
+								{
+									"cf6d7c25-09a6-6589-925f-ceee26ef3836",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - DNC",
+							uuid = "a0ff7a38-913b-d6db-853c-7220f8e26830",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"447c1044-8f9b-de94-bb9d-afef6965d55e",
+									true,
+								},
+								
+								{
+									"e6d1a84d-07cd-cfe7-a7a2-701052472baf",
+									true,
+								},
+								
+								{
+									"9573e304-87d5-ed5d-9a46-d30f47f1d350",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - SMN",
+							uuid = "2adf3a6e-2642-b80c-bf8b-09cbf1556400",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"447c1044-8f9b-de94-bb9d-afef6965d55e",
+									true,
+								},
+								
+								{
+									"e6d1a84d-07cd-cfe7-a7a2-701052472baf",
+									true,
+								},
+								
+								{
+									"88dcbee8-b3e8-63f1-9813-5c00c11297c2",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - RDM",
+							uuid = "2373a2cb-c2ec-bcae-9906-bef72f35869f",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"447c1044-8f9b-de94-bb9d-afef6965d55e",
+									true,
+								},
+								
+								{
+									"e6d1a84d-07cd-cfe7-a7a2-701052472baf",
+									true,
+								},
+								
+								{
+									"1cb6f7b7-cc1b-3d19-8816-242cdbe6a736",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - PCT",
+							uuid = "3257c3bc-e341-cfd8-b139-9f55bd967672",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"447c1044-8f9b-de94-bb9d-afef6965d55e",
+									true,
+								},
+								
+								{
+									"e6d1a84d-07cd-cfe7-a7a2-701052472baf",
+									true,
+								},
+								
+								{
+									"3ac3a0ce-5177-07f1-a948-cbf74576470e",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - PLD",
+							uuid = "dedb6dbd-4f13-69dd-95bd-2674bee11763",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"447c1044-8f9b-de94-bb9d-afef6965d55e",
+									true,
+								},
+								
+								{
+									"e6d1a84d-07cd-cfe7-a7a2-701052472baf",
+									true,
+								},
+								
+								{
+									"34dcb929-b589-0480-908b-ae8a2847e006",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - WAR",
+							uuid = "e8086962-fd88-18e1-8829-00da67f07b28",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"447c1044-8f9b-de94-bb9d-afef6965d55e",
+									true,
+								},
+								
+								{
+									"e6d1a84d-07cd-cfe7-a7a2-701052472baf",
+									true,
+								},
+								
+								{
+									"82f3d7f8-0207-d5c1-bee7-55b1da8009bb",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - DRK",
+							uuid = "197b5161-d89a-af8f-b511-f6199dc5b40d",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"447c1044-8f9b-de94-bb9d-afef6965d55e",
+									true,
+								},
+								
+								{
+									"e6d1a84d-07cd-cfe7-a7a2-701052472baf",
+									true,
+								},
+								
+								{
+									"947c16de-70bd-e700-8614-18d64455f495",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_CD",
+							name = "Resume cooldowns - GNB",
+							uuid = "096f4788-065d-7991-9ed3-511f52927158",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventSpellID = 11147,
+							name = "Recovery mechanic",
+							uuid = "447c1044-8f9b-de94-bb9d-afef6965d55e",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 2137,
+							name = "Expected source",
+							uuid = "e6d1a84d-07cd-cfe7-a7a2-701052472baf",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REAPER",
+							name = "RPR",
+							uuid = "fe020782-dc82-2457-bfd4-79d14c3a3ba7",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "BRD",
+							uuid = "376de76c-d116-039f-8bd9-d81ba9366b7f",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DRAGOON",
+							name = "DRG",
+							uuid = "097ed379-9b47-d222-9f85-0ecbeefba196",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MONK",
+							name = "MNK",
+							uuid = "94dc7e1d-b367-377e-8e83-58f668018875",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "NINJA",
+							name = "NIN",
+							uuid = "c61904ce-897f-cc77-95ef-df9f6ad1e1c8",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "SAMURAI",
+							name = "SAM",
+							uuid = "276b4840-05de-02d8-8773-2768f40b7ead",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MACHINIST",
+							name = "MCH",
+							uuid = "3333892c-cc44-9a6f-8b78-f503acf86d10",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DANCER",
+							name = "DNC",
+							uuid = "cf6d7c25-09a6-6589-925f-ceee26ef3836",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "SUMMONER",
+							name = "SMN",
+							uuid = "9573e304-87d5-ed5d-9a46-d30f47f1d350",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REDMAGE",
+							name = "RDM",
+							uuid = "88dcbee8-b3e8-63f1-9813-5c00c11297c2",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "PICTOMANCER",
+							name = "PCT",
+							uuid = "1cb6f7b7-cc1b-3d19-8816-242cdbe6a736",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "PALADIN",
+							name = "PLD",
+							uuid = "3ac3a0ce-5177-07f1-a948-cbf74576470e",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "WARRIOR",
+							name = "WAR",
+							uuid = "34dcb929-b589-0480-908b-ae8a2847e006",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DARKKNIGHT",
+							name = "DRK",
+							uuid = "82f3d7f8-0207-d5c1-bee7-55b1da8009bb",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "GUNBREAKER",
+							name = "GNB",
+							uuid = "947c16de-70bd-e700-8614-18d64455f495",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Automation",
+				eventType = 3,
+				mechanicTime = 1243,
+				name = "[LPDU] [Opt] Resume Cooldowns after Suppression",
+				timeRange = true,
+				timelineIndex = 206,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "a8ddd7cf-18b0-9fd4-9d93-a3e90d1b12df",
 				version = 2,
 			},
 		},

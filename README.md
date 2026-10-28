@@ -132,6 +132,8 @@ TEA: Coming soon by Ton.
 
 ### UWU: LPDU
 
+- Added optional boss, gaol and Magitek Bit targeting with a shared auto-target toggle, plus source-aligned cooldown holds, Sprint requests and shield-checked Surecast attempts. (28-10-2026)
+
 - Updated dependencies to AnyoneCore’s separate UWU draws and core modules in place of the combined main profile. (24-10-2026)
 
 - Enabled TTS for the 1048s ranged eruption-bait positioning call and 697s Landslide warning. (21-10-2026)
