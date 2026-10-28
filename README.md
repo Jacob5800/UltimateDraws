@@ -132,6 +132,8 @@ TEA: Coming soon by Ton.
 
 ### UWU: LPDU
 
+- Updated standalone BRD/BLM AutoSim profiles with built-in targeting, DoT blacklists and BRD primal DoT forecasts. BLM R2 Meteor forecasts include cast/animation lock and cancellation cleanup. Runtime replay checks remain pending. (28-10-2026)
+
 - Shared automatic targeting now yields to the standalone uwubrd/blmuwu AutoSim profiles, letting a parent profile combine LPDU Draws, LPDU Mits and one AutoSim profile without competing target controllers. (28-10-2026)
 
 - Added shared role-based nail targeting for non-AutoSim profiles (the BLM AutoSim controller stays independent): R2 starts SE, R1 SW, and melee soften the close pair to 40%, wait on Ifrit for awakening, then follow SE > SW > NE > NW. Uses the existing auto-target toggle. Ranged stay single-target until the final close pair; melee can cleave while softening, then follow single-target kill order. AoE is enabled after all nails die. (28-10-2026)
@@ -149,5 +151,3 @@ TEA: Coming soon by Ton.
 - Fixed Mistral OT-marker cleanup repeatedly executing through Ifrit. Cleanup now filters Mistral damage IDs, requires an active marker, and runs only in Garuda/Ultima Mistral windows. (21-10-2026)
 
 - Ifrit’s opening Incinerate cone now stays visible through the back-to-back hits until timeline 330, following his current target. Later Incinerates retain their short warning windows. (21-10-2026)
-
-- Added “Kill nail order” when the fourth paired ranged Eruption drop starts during nails: the seventh bait-cast start triggers it once, before the explosions resolve. (21-10-2026)

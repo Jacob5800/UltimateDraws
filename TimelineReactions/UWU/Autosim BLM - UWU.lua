@@ -5048,7 +5048,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local roster=AnyoneCore.Roster\nif not roster or not roster.current() or roster.mySlot()~=\"R2\" then return end\nlocal S=data.uwuBLMAutoSim\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nS.lbObserved=true;S.lbStarted=now\nS.dynamic.meteorLock={\"Stun\",now,now+12.6,1}\nS.publish();self.used=true",
+							actionLua = "local roster=AnyoneCore.Roster\nif not roster or not roster.current() or roster.mySlot()~=\"R2\" then return end\nlocal S=data.uwuBLMAutoSim\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nS.lbObserved=true;S.lbStarted=now;S.lbCompleted=nil;S.lbCancelled=nil;S.lbCastingSeen=nil\nS.dynamic.meteorLock={\"Stun\",now,now+12.6,1}\nS.publish();self.used=true",
 							conditions = 
 							{
 								
@@ -5160,7 +5160,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local roster=AnyoneCore.Roster\nif not roster or not roster.current() or roster.mySlot()~=\"R2\" then return end\nlocal S=data.uwuBLMAutoSim\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nS.lbObserved=true\nS.dynamic.meteorLock={\"Stun\",S.lbStarted or now-4.5,now+8.1,1}\nS.publish();self.used=true",
+							actionLua = "local roster=AnyoneCore.Roster\nif not roster or not roster.current() or roster.mySlot()~=\"R2\" then return end\nlocal S=data.uwuBLMAutoSim\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nS.lbObserved=true;S.lbCompleted=true\nS.dynamic.meteorLock={\"Stun\",S.lbStarted or now-4.5,now+8.1,1}\nS.publish();self.used=true",
 							conditions = 
 							{
 								
@@ -5258,6 +5258,95 @@ local tbl =
 				timerEndOffset = 35,
 				timerStartOffset = -20,
 				uuid = "097ae68c-0c6f-8e8d-ab78-9a2bf0fd040a",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.uwuBLMAutoSim\nlocal p=TensorCore.mGetPlayer()\nif not p then return end\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nlocal elapsed=now-S.lbStarted\nlocal cast=p.castinginfo\nif cast.castingid==205 or cast.channelingid==205 then\n S.lbCastingSeen=true\n return\nend\n-- Allow queued cast-completion events to arrive before interpreting a stopped cast.\nif elapsed<0.5 then return end\nif elapsed>=4.25 and elapsed<5.25 and p.alive then return end\nif elapsed>=4.25 and p.alive and cast.lastcastid==205 then\n S.lbCompleted=true\n S.dynamic.meteorLock={\"Stun\",S.lbStarted,S.lbStarted+12.6,1}\nelse\n S.lbCancelled=true\n S.dynamic.meteorLock=nil\nend\nS.publish();self.used=true",
+							conditions = 
+							{
+								
+								{
+									"301fcce3-7198-6d1c-a85c-15f6b67602c7",
+									true,
+								},
+								
+								{
+									"f609e616-5ce9-0812-aa8d-59f17e8578b1",
+									true,
+								},
+								
+								{
+									"c540cd6c-3a55-bfbe-9da9-794e286dd6fe",
+									true,
+								},
+							},
+							name = "Resolve Meteor completion or cancellation",
+							uuid = "0fcbb072-1dd0-3344-badf-c55fc608c37a",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU only",
+							uuid = "301fcce3-7198-6d1c-a85c-15f6b67602c7",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "f609e616-5ce9-0812-aa8d-59f17e8578b1",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.uwuBLMAutoSim\nreturn S~=nil and S.lbStarted~=nil and not S.lbCompleted and not S.lbCancelled",
+							name = "Personal Meteor pending",
+							uuid = "c540cd6c-3a55-bfbe-9da9-794e286dd6fe",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/P4 Bits",
+				loop = true,
+				mechanicTime = 800,
+				name = "[BLM UWU] Clear cancelled Meteor lock",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 114,
+				timerEndOffset = 40,
+				timerStartOffset = -20,
+				uuid = "85573043-c7e4-e2a8-a825-aa5b6e839d93",
 				version = 2,
 			},
 		},
