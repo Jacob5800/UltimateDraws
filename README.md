@@ -109,6 +109,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- AA AutoSim now tracks all four light-crystal deaths before the Ice Veil damage window, resyncs on crystal targetability changes, and values the protected Ice Veil at zero damage before its 0.5 damage window. (28-10-2026)
+
 - Fixed crystal targeting to select the actual crystal nearest your assigned colour marker and hold it until it dies, then skip dead or untargetable crystals. Focus mode also disables Smart AOE target switching, including ACR3. Focus mode targets your light crystal, then other light crystals, then the big crystal, keeping AoE off through the whole intermission and enabling it when P3 begins. (27-10-2026)
 
 - Reduced both green mirror destination circles by another 15%. (22-10-2026)
@@ -127,7 +129,6 @@ TEA: Coming soon by Ton.
 
 - Renamed the P1 option to Swap DPS spreads; its default and behavior are unchanged. (22-10-2026)
 
-- Added a single player-following countdown for your Diamond Dust Holy lane, plus optional P1 Swap ranged spreads (off by default). Fixed yellow puddle guidance so either party reverses when Shiva is one marker clockwise from its landing side. (22-10-2026)
 
 ### UWU: LPDU
 
