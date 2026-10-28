@@ -109,6 +109,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Fixed P1 tower spare-player priority to M1, M2, then R1. In a north-to-south 3-2-1 pattern, M2 now receives the north tower instead of middle. (28-10-2026)
+
 - AA AutoSim now tracks all four light-crystal deaths before the Ice Veil damage window, resyncs on crystal targetability changes, and values the protected Ice Veil at zero damage before its 0.5 damage window. (28-10-2026)
 
 - Fixed crystal targeting to select the actual crystal nearest your assigned colour marker and hold it until it dies, then skip dead or untargetable crystals. Focus mode also disables Smart AOE target switching, including ACR3. Focus mode targets your light crystal, then other light crystals, then the big crystal, keeping AoE off through the whole intermission and enabling it when P3 begins. (27-10-2026)
@@ -126,8 +128,6 @@ TEA: Coming soon by Ton.
 - Restricted Swap DPS spreads to the specific P1 safe-side spread after the clones. Clock spots and other Protean guidance now keep their original orientation. (22-10-2026)
 
 - Made the puddle countdown 50% larger and fixed per-drop rearming, including recovery when the first setup is missed. Only the assigned lane updates the single timer. (22-10-2026)
-
-- Renamed the P1 option to Swap DPS spreads; its default and behavior are unchanged. (22-10-2026)
 
 
 ### UWU: LPDU
