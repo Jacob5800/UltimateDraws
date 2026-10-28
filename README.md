@@ -132,6 +132,8 @@ TEA: Coming soon by Ton.
 
 ### UWU: LPDU
 
+- Shared automatic targeting now yields to the standalone uwubrd/blmuwu AutoSim profiles, letting a parent profile combine LPDU Draws, LPDU Mits and one AutoSim profile without competing target controllers. (28-10-2026)
+
 - Added shared role-based nail targeting for non-AutoSim profiles (the BLM AutoSim controller stays independent): R2 starts SE, R1 SW, and melee soften the close pair to 40%, wait on Ifrit for awakening, then follow SE > SW > NE > NW. Uses the existing auto-target toggle. Ranged stay single-target until the final close pair; melee can cleave while softening, then follow single-target kill order. AoE is enabled after all nails die. (28-10-2026)
 
 - Added optional boss, gaol and Magitek Bit targeting with a shared auto-target toggle, plus source-aligned cooldown holds, Sprint requests and shield-checked Surecast/Arm's Length attempts. Nails are DoT-blacklisted for supported ACRs, including non-AutoSim users. (28-10-2026)
@@ -149,10 +151,3 @@ TEA: Coming soon by Ton.
 - Ifrit’s opening Incinerate cone now stays visible through the back-to-back hits until timeline 330, following his current target. Later Incinerates retain their short warning windows. (21-10-2026)
 
 - Added “Kill nail order” when the fourth paired ranged Eruption drop starts during nails: the seventh bait-cast start triggers it once, before the explosions resolve. (21-10-2026)
-
-- Fixed the first Titan arrival warning missing after Ifrit: the Geocrush cast can start before the Titan timeline jump. The danger circle and green safe edge now accept that exact cast before the jump. (21-10-2026)
-
-- Cleave warnings now appear only during the three seconds before each scheduled attack and clear at resolution. Slipstream stays fixed to its cast-start direction; Titan Rock Buster and Mountain Buster use separate warning windows. (21-10-2026)
-
-- Added target-facing Garuda, Ifrit and opening Titan cleave warnings, fixed-direction Slipstream, and Titan arrival danger/safe-edge markers. Added the 402s stack call excluding Searing Wind, repaired nail kill-order text, and halved the editable Upheaval position marker. Replay checks remain pending. (21-10-2026)
-

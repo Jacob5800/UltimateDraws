@@ -1108,8 +1108,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
-							name = "Auto targeting enabled",
+							conditionLua = "if data.uwuBRDAutoSim or data.uwuBLMAutoSim then return false end\nreturn Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "b6183223-d80f-2360-9aaf-c7a958387329",
 							version = 3,
 						},
@@ -1971,8 +1971,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
-							name = "Auto targeting enabled",
+							conditionLua = "if data.uwuBRDAutoSim or data.uwuBLMAutoSim then return false end\nreturn Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "98631e39-88b5-190d-a164-f394d88a2d9f",
 							version = 3,
 						},
@@ -4629,8 +4629,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
-							name = "Auto targeting enabled",
+							conditionLua = "if data.uwuBRDAutoSim or data.uwuBLMAutoSim then return false end\nreturn Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "d19a4980-34d7-c84f-8790-e853a6bc27df",
 							version = 3,
 						},
@@ -4720,8 +4720,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
-							name = "Auto targeting enabled",
+							conditionLua = "if data.uwuBRDAutoSim or data.uwuBLMAutoSim then return false end\nreturn Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "3c0743a2-614b-235d-977e-58aa025d0483",
 							version = 3,
 						},
@@ -6105,7 +6105,7 @@ local tbl =
 				{
 				},
 				displayPath = "LPDU / Automation",
-				execute = "-- The BLM AutoSim profile retains its own independent nail controller.\nif data.uwuBLMAutoSim then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.alive then return end\nlocal roster=AnyoneCore.Roster\nif not roster or not roster.current() or not roster.isReady() then return end\nlocal role=roster.mySlot()\nif role~=\"R1\" and role~=\"R2\" and role~=\"M1\" and role~=\"M2\" then return end\nlocal N=data.uwuGenericNails\nlocal api=TensorCore.API.TensorACR\nlocal function restore()\n if N and N.options then for k,v in pairs(N.options) do _G[k]=v end;N.options=nil end\nend\nif Settings.FFXIVMINION.LPDU_UWU_AutoTarget==false then restore();return end\nif not N then N={ids={},awake={}};data.uwuGenericNails=N end\nif N.done then return end\nlocal entities,count,alive={},0,0\nfor _,e in pairs(TensorCore.getEntityGroupList(\"ContentID\",1186) or {}) do\n if e.alive and e.targetable then N.ids[e.id]=true;entities[e.id]=e;alive=alive+1 end\nend\nfor id in pairs(N.ids) do\n count=count+1\n local buff=TensorCore.getBuff(id,1544)\n if buff and buff.stacks>=2 then N.awake[id]=true end\nend\nif count<4 then return end\nif alive==0 then\n if N.options then for k in pairs(N.options) do _G[k]=true end;N.options=nil end\n N.done=true;return\nend\nif not N.options then\n N.options={}\n for _,toggle in ipairs(api.getQuickToggles() or {}) do\n  if string.match(toggle.var,\"_AOE$\") or string.match(toggle.var,\"_SmartAOE$\") then\n   if type(_G[toggle.var])==\"boolean\" then N.options[toggle.var]=_G[toggle.var] end\n  end\n end\nend\nif not N.order then\n if alive~=4 then return end\n local list={};for id,e in pairs(entities) do list[#list+1]=e end\n local best=math.huge;local ni,nj\n for i=1,3 do for j=i+1,4 do\n  local a,b=list[i].pos,list[j].pos\n  local d=(a.x-b.x)^2+(a.z-b.z)^2\n  if d<best then best=d;ni=i;nj=j end\n end end\n local north,south={},{}\n for i,e in ipairs(list) do\n  if i==ni or i==nj then north[#north+1]=e else south[#south+1]=e end\n end\n local nx=(north[1].pos.x+north[2].pos.x-south[1].pos.x-south[2].pos.x)/2\n local nz=(north[1].pos.z+north[2].pos.z-south[1].pos.z-south[2].pos.z)/2\n local len=math.sqrt(nx*nx+nz*nz)\n if len<1 then return end\n local ex,ez=-nz/len,nx/len\n local function eastFirst(pair)\n  local a,b=pair[1].pos,pair[2].pos\n  if (a.x-b.x)*ex+(a.z-b.z)*ez<0 then pair[1],pair[2]=pair[2],pair[1] end\n end\n eastFirst(north);eastFirst(south)\n N.order={south[1].id,south[2].id,north[1].id,north[2].id}\n local slot=roster.mySlot()\n if slot==\"R2\" then N.softenID=N.order[1]\n elseif slot==\"R1\" then N.softenID=N.order[2]\n else\n  local a,b=entities[N.order[3]],entities[N.order[4]]\n  N.softenID=TensorCore.getDistance2d(p.pos,a.pos)<=TensorCore.getDistance2d(p.pos,b.pos) and a.id or b.id\n end\nend\nlocal nail=entities[N.softenID]\nlocal reached=nail and nail.hp.percent<=40\nif role==\"M1\" or role==\"M2\" then\n for i=3,4 do local e=entities[N.order[i]];if e and e.hp.percent<=40 then reached=true end end\nend\nif not N.softened and (reached or not nail) then\n N.softened=true\n local cast=p.castinginfo\n if cast.castingid>0 or cast.channelingid>0 then\n  for _,id in ipairs(cast.castingtargets) do\n   if id==N.softenID then ActionList:StopCasting();break end\n  end\n end\nend\nlocal awakened=0\nfor id in pairs(N.ids) do if N.awake[id] then awakened=awakened+1 end end\nlocal kill=N.softened and awakened==4\nlocal desired\nif not N.softened then desired=N.softenID\nelseif kill then for _,id in ipairs(N.order) do if entities[id] then desired=id;break end end\nelse for _,e in pairs(TensorCore.getEntityGroupList(\"ContentID\",1185) or {}) do desired=e.id;break end end\nlocal close=kill and not entities[N.order[1]] and not entities[N.order[2]]\nlocal meleeSoftening=(role==\"M1\" or role==\"M2\") and not N.softened\nlocal aoe=meleeSoftening or close\nfor k in pairs(N.options) do _G[k]=aoe end\nif desired then\n local target=TensorCore.mGetTarget()\n if not target or target.id~=desired then Player:SetTarget(desired) end\nend\n",
+				execute = "-- The BLM AutoSim profile retains its own independent nail controller.\nif data.uwuBLMAutoSim or data.uwuBRDAutoSim then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.alive then return end\nlocal roster=AnyoneCore.Roster\nif not roster or not roster.current() or not roster.isReady() then return end\nlocal role=roster.mySlot()\nif role~=\"R1\" and role~=\"R2\" and role~=\"M1\" and role~=\"M2\" then return end\nlocal N=data.uwuGenericNails\nlocal api=TensorCore.API.TensorACR\nlocal function restore()\n if N and N.options then for k,v in pairs(N.options) do _G[k]=v end;N.options=nil end\nend\nif Settings.FFXIVMINION.LPDU_UWU_AutoTarget==false then restore();return end\nif not N then N={ids={},awake={}};data.uwuGenericNails=N end\nif N.done then return end\nlocal entities,count,alive={},0,0\nfor _,e in pairs(TensorCore.getEntityGroupList(\"ContentID\",1186) or {}) do\n if e.alive and e.targetable then N.ids[e.id]=true;entities[e.id]=e;alive=alive+1 end\nend\nfor id in pairs(N.ids) do\n count=count+1\n local buff=TensorCore.getBuff(id,1544)\n if buff and buff.stacks>=2 then N.awake[id]=true end\nend\nif count<4 then return end\nif alive==0 then\n if N.options then for k in pairs(N.options) do _G[k]=true end;N.options=nil end\n N.done=true;return\nend\nif not N.options then\n N.options={}\n for _,toggle in ipairs(api.getQuickToggles() or {}) do\n  if string.match(toggle.var,\"_AOE$\") or string.match(toggle.var,\"_SmartAOE$\") then\n   if type(_G[toggle.var])==\"boolean\" then N.options[toggle.var]=_G[toggle.var] end\n  end\n end\nend\nif not N.order then\n if alive~=4 then return end\n local list={};for id,e in pairs(entities) do list[#list+1]=e end\n local best=math.huge;local ni,nj\n for i=1,3 do for j=i+1,4 do\n  local a,b=list[i].pos,list[j].pos\n  local d=(a.x-b.x)^2+(a.z-b.z)^2\n  if d<best then best=d;ni=i;nj=j end\n end end\n local north,south={},{}\n for i,e in ipairs(list) do\n  if i==ni or i==nj then north[#north+1]=e else south[#south+1]=e end\n end\n local nx=(north[1].pos.x+north[2].pos.x-south[1].pos.x-south[2].pos.x)/2\n local nz=(north[1].pos.z+north[2].pos.z-south[1].pos.z-south[2].pos.z)/2\n local len=math.sqrt(nx*nx+nz*nz)\n if len<1 then return end\n local ex,ez=-nz/len,nx/len\n local function eastFirst(pair)\n  local a,b=pair[1].pos,pair[2].pos\n  if (a.x-b.x)*ex+(a.z-b.z)*ez<0 then pair[1],pair[2]=pair[2],pair[1] end\n end\n eastFirst(north);eastFirst(south)\n N.order={south[1].id,south[2].id,north[1].id,north[2].id}\n local slot=roster.mySlot()\n if slot==\"R2\" then N.softenID=N.order[1]\n elseif slot==\"R1\" then N.softenID=N.order[2]\n else\n  local a,b=entities[N.order[3]],entities[N.order[4]]\n  N.softenID=TensorCore.getDistance2d(p.pos,a.pos)<=TensorCore.getDistance2d(p.pos,b.pos) and a.id or b.id\n end\nend\nlocal nail=entities[N.softenID]\nlocal reached=nail and nail.hp.percent<=40\nif role==\"M1\" or role==\"M2\" then\n for i=3,4 do local e=entities[N.order[i]];if e and e.hp.percent<=40 then reached=true end end\nend\nif not N.softened and (reached or not nail) then\n N.softened=true\n local cast=p.castinginfo\n if cast.castingid>0 or cast.channelingid>0 then\n  for _,id in ipairs(cast.castingtargets) do\n   if id==N.softenID then ActionList:StopCasting();break end\n  end\n end\nend\nlocal awakened=0\nfor id in pairs(N.ids) do if N.awake[id] then awakened=awakened+1 end end\nlocal kill=N.softened and awakened==4\nlocal desired\nif not N.softened then desired=N.softenID\nelseif kill then for _,id in ipairs(N.order) do if entities[id] then desired=id;break end end\nelse for _,e in pairs(TensorCore.getEntityGroupList(\"ContentID\",1185) or {}) do desired=e.id;break end end\nlocal close=kill and not entities[N.order[1]] and not entities[N.order[2]]\nlocal meleeSoftening=(role==\"M1\" or role==\"M2\") and not N.softened\nlocal aoe=meleeSoftening or close\nfor k in pairs(N.options) do _G[k]=aoe end\nif desired then\n local target=TensorCore.mGetTarget()\n if not target or target.id~=desired then Player:SetTarget(desired) end\nend\n",
 				executeType = 2,
 				loop = true,
 				mechanicTime = 328,
@@ -9194,8 +9194,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
-							name = "Auto targeting enabled",
+							conditionLua = "if data.uwuBRDAutoSim or data.uwuBLMAutoSim then return false end\nreturn Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "89b150c8-a844-8e7f-89c8-d59b55d5e261",
 							version = 3,
 						},
@@ -9285,8 +9285,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
-							name = "Auto targeting enabled",
+							conditionLua = "if data.uwuBRDAutoSim or data.uwuBLMAutoSim then return false end\nreturn Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "c255bc11-558b-3074-b96d-4c3aa08a8ae6",
 							version = 3,
 						},
@@ -10015,8 +10015,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
-							name = "Auto targeting enabled",
+							conditionLua = "if data.uwuBRDAutoSim or data.uwuBLMAutoSim then return false end\nreturn Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "7329f44e-2b16-407d-b4e3-0fe526965077",
 							version = 3,
 						},
@@ -10146,8 +10146,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
-							name = "Auto targeting enabled",
+							conditionLua = "if data.uwuBRDAutoSim or data.uwuBLMAutoSim then return false end\nreturn Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "97db59c6-83ea-ad19-8116-ef08e2e950c9",
 							version = 3,
 						},
@@ -12030,8 +12030,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
-							name = "Auto targeting enabled",
+							conditionLua = "if data.uwuBRDAutoSim or data.uwuBLMAutoSim then return false end\nreturn Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "5fc49abd-7d08-ac8c-8569-f521a7f26ed9",
 							version = 3,
 						},
@@ -12154,8 +12154,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
-							name = "Auto targeting enabled",
+							conditionLua = "if data.uwuBRDAutoSim or data.uwuBLMAutoSim then return false end\nreturn Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "9451ac98-4d56-5bbd-8001-4c04dcc2f715",
 							version = 3,
 						},
@@ -14660,8 +14660,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
-							name = "Auto targeting enabled",
+							conditionLua = "if data.uwuBRDAutoSim or data.uwuBLMAutoSim then return false end\nreturn Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "419da3bb-0690-538a-be47-6017bb3a41ab",
 							version = 3,
 						},
@@ -14921,8 +14921,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
-							name = "Auto targeting enabled",
+							conditionLua = "if data.uwuBRDAutoSim or data.uwuBLMAutoSim then return false end\nreturn Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "37d9aab2-6722-6835-a0a8-e2934bba0abf",
 							version = 3,
 						},
@@ -15674,8 +15674,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
-							name = "Auto targeting enabled",
+							conditionLua = "if data.uwuBRDAutoSim or data.uwuBLMAutoSim then return false end\nreturn Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "9330a02b-c77b-7a09-a85c-5996987e8dee",
 							version = 3,
 						},
@@ -15765,8 +15765,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
-							name = "Auto targeting enabled",
+							conditionLua = "if data.uwuBRDAutoSim or data.uwuBLMAutoSim then return false end\nreturn Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "e277ff04-382d-c17f-8c26-49b747c0c707",
 							version = 3,
 						},
@@ -20702,8 +20702,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
-							name = "Auto targeting enabled",
+							conditionLua = "if data.uwuBRDAutoSim or data.uwuBLMAutoSim then return false end\nreturn Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "599f01d2-38fd-ef6c-8dda-419d3577debb",
 							version = 3,
 						},
@@ -20832,8 +20832,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
-							name = "Auto targeting enabled",
+							conditionLua = "if data.uwuBRDAutoSim or data.uwuBLMAutoSim then return false end\nreturn Settings.FFXIVMINION.LPDU_UWU_AutoTarget~=false",
+							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "a77328a8-05c5-7cc4-b7e0-00ae72ae092d",
 							version = 3,
 						},
