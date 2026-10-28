@@ -7,28 +7,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "98f46664-8085-1200-9bb0-e6267535d114",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "aa528e88-55a0-4bdc-dff0-ab0644cdfbf8",
-			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "BLM AutoSim",
 				uuid = "83599a91-8abe-7fb5-803d-249017916d43",
 			},
@@ -98,7 +76,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local dotAPI=TensorCore.API.TensorACR\nlocal dotEntry=dotAPI.addBlacklistEntry(1186,\"UWU Infernal Nail\")\nif not dotEntry.enabled or dotEntry.allowIfTarget then\n dotEntry.enabled=true\n dotEntry.allowIfTarget=false\n dotAPI.saveDotBlacklist()\nend\n-- Generated encounter inputs are inserted by the MCP authoring script.\n-- Five EU BLM clears supply the phase-relative medians. Native events resync them.\nlocal A=TensorCore.API.TensorACR\n_G.UWU_BLM_TemporaryState=_G.UWU_BLM_TemporaryState or {}\nlocal cfg=_G.UWU_BLM_AutoSimConfig\nif not cfg then\n cfg={poolLaha=true,priorityGaols=true,roulette=true,raidBuffs=true,buffGain=16.87,nails=true,closePair=true,surecast=true,manaward=true}\n _G.UWU_BLM_AutoSimConfig=cfg\nend\nlocal S={[\"anchors\"]={[\"p1end\"]={[\"after\"]=\"pull\",[\"offset\"]=134.629,[\"spread\"]=10},[\"ifrit1\"]={[\"after\"]=\"p1end\",[\"offset\"]=72.217,[\"spread\"]=0.75},[\"p2end\"]={[\"after\"]=\"ifrit1\",[\"offset\"]=38.162,[\"spread\"]=10},[\"ifrit2Back\"]={[\"after\"]=\"p2end\",[\"offset\"]=7.422,[\"spread\"]=0.75},[\"titan1\"]={[\"after\"]=\"ifrit2Back\",[\"offset\"]=22.062,[\"spread\"]=0.75},[\"p3end\"]={[\"after\"]=\"titan1\",[\"offset\"]=97.279,[\"spread\"]=15},[\"titan3Back\"]={[\"after\"]=\"p3end\",[\"offset\"]=12.283,[\"spread\"]=0.75},[\"magitekBit1\"]={[\"after\"]=\"titan3Back\",[\"offset\"]=7.018,[\"spread\"]=0.75},[\"p4end\"]={[\"after\"]=\"magitekBit1\",[\"offset\"]=25.99,[\"spread\"]=0.75},[\"graniteGaol1\"]={[\"after\"]=\"p4end\",[\"offset\"]=233.053,[\"spread\"]=0.75}},[\"kill\"]={[\"after\"]=\"graniteGaol1\",[\"offset\"]=134.648,[\"spread\"]=7.881},[\"phases\"]={{\"FullDowntime\",\"pull\",70.532,\"pull\",74.238,1},{\"FullDowntime\",\"p1end\",0.1,\"p1end\",13.303,1},{\"FullDowntime\",\"ifrit1\",0.1,\"ifrit1\",3.812,1},{\"FullDowntime\",\"p2end\",0.1,\"ifrit2Back\",-0.3,1},{\"FullDowntime\",\"titan1\",0.1,\"titan1\",8.158,1},{\"FullDowntime\",\"titan1\",54.272,\"titan1\",62.508,1},{\"FullDowntime\",\"p3end\",0.1,\"titan3Back\",-0.3,1},{\"FullDowntime\",\"magitekBit1\",0.1,\"magitekBit1\",13.741,1},{\"FullDowntime\",\"p4end\",0.1,\"p4end\",50.191,1},{\"FullDowntime\",\"p4end\",77.992,\"p4end\",98.072,1},{\"FullDowntime\",\"p4end\",156.499,\"p4end\",161.092,1},{\"FullDowntime\",\"p4end\",193.502,\"p4end\",198.14,1},{\"FullDowntime\",\"p4end\",214.525,\"p4end\",229.087,1},{\"FullDowntime\",\"graniteGaol1\",0.1,\"p4end\",255.307,1},{\"FullDowntime\",\"p4end\",353.6,\"p4end\",357.89,1}},[\"windows\"]={{\"CasterDowntime\",\"pull\",35.0,\"pull\",37.5,1},{\"CasterDowntime\",\"pull\",38.5,\"pull\",41.0,1},{\"CasterDowntime\",\"pull\",43.0,\"pull\",44.0,1},{\"CasterDowntime\",\"pull\",91.0,\"pull\",92.5,1},{\"CasterDowntime\",\"pull\",102.5,\"pull\",104.0,1},{\"CasterDowntime\",\"pull\",105.5,\"pull\",106.5,1},{\"CasterDowntime\",\"pull\",127.5,\"pull\",128.5,1},{\"CasterDowntime\",\"p1end\",44.5,\"p1end\",47.0,1},{\"CasterDowntime\",\"p1end\",91.5,\"p1end\",98.0,1},{\"CasterDowntime\",\"titan1\",8.5,\"titan1\",11.0,1},{\"CasterDowntime\",\"titan1\",14.0,\"titan1\",21.5,1},{\"CasterDowntime\",\"titan1\",27.5,\"titan1\",29.0,1},{\"CasterDowntime\",\"titan1\",41.0,\"titan1\",42.5,1},{\"CasterDowntime\",\"titan1\",74.5,\"titan1\",76.0,1},{\"CasterDowntime\",\"p4end\",99.5,\"p4end\",100.5,1},{\"CasterDowntime\",\"p4end\",109.0,\"p4end\",115.0,1},{\"CasterDowntime\",\"p4end\",121.0,\"p4end\",124.0,1},{\"CasterDowntime\",\"p4end\",125.0,\"p4end\",129.0,1},{\"CasterDowntime\",\"p4end\",144.5,\"p4end\",145.5,1},{\"CasterDowntime\",\"p4end\",161.5,\"p4end\",169.0,1},{\"CasterDowntime\",\"p4end\",170.0,\"p4end\",172.5,1},{\"CasterDowntime\",\"p4end\",173.5,\"p4end\",174.5,1},{\"CasterDowntime\",\"p4end\",178.5,\"p4end\",182.0,1},{\"CasterDowntime\",\"p4end\",229.5,\"p4end\",231.0,1},{\"CasterDowntime\",\"p4end\",274.0,\"p4end\",280.0,1},{\"CasterDowntime\",\"p4end\",281.0,\"p4end\",282.5,1}},[\"returns\"]={},[\"buffwindows\"]={{\"pull\",8.069},{\"p1end\",16.081},{\"ifrit2Back\",52.467},{\"p4end\",52.628},{\"p4end\",175.979},{\"p4end\",317.846}},[\"sample_count\"]=5,[\"kill_samples\"]={782.098,751.692,783.165,838.291,794.832},[\"roulette\"]={[\"first\"]=293.478,[\"step\"]=20.123,[\"templates\"]={[\"Garuda\"]={{9.5,10.0}},[\"Ifrit\"]={{7.0,9.5},{11.0,11.5}},[\"Titan\"]={{5.0,13.0}}}},[\"anchorOrder\"]={\"p1end\",\"ifrit1\",\"p2end\",\"ifrit2Back\",\"titan1\",\"p3end\",\"titan3Back\",\"magitekBit1\",\"p4end\",\"graniteGaol1\"},[\"ifritArrival\"]=13.603,[\"lahaDelay\"]=14.041}\n-- Separate Ifrit's second dash from his actual phase death.\nS.anchors.ifritDash={after=\"ifrit1\",offset=47.95,spread=2}\nS.anchors.ifritDashBack={after=\"ifritDash\",offset=15.79,spread=1}\nS.anchors.p2end={after=\"ifritDashBack\",offset=17.31,spread=12}\nS.anchors.ifrit2Back={after=\"p2end\",offset=7.55,spread=.75}\nS.anchorOrder={\"p1end\",\"ifrit1\",\"ifritDash\",\"ifritDashBack\",\"p2end\",\"ifrit2Back\",\"titan1\",\"p3end\",\"titan3Back\",\"magitekBit1\",\"p4end\",\"graniteGaol1\"}\nS.phases[#S.phases+1]={\"FullDowntime\",\"ifritDash\",0.1,\"ifritDashBack\",-0.1,1}\nfor _,phase in ipairs(S.phases) do\n if phase[1]==\"FullDowntime\" and phase[2]==\"ifrit1\" and phase[4]==\"ifrit1\" then phase[5]=4.25 end\nend\n-- First Garuda disappearance: corroborated in three recent native logs.\nS.phases[#S.phases+1]={\"FullDowntime\",\"pull\",33.96,\"pull\",38.25,1}\n-- Tonight's native phase-end samples: 16 Garuda ends and 7 final Ifrit returns.\nS.anchors.p1end.offset=145.61\nS.anchors.p1end.spread=27\nS.anchors.p2end.offset=22.312\nS.anchors.p2end.spread=17\nS.cfg={}\nfor k,v in pairs(cfg) do S.cfg[k]=v end\nS.observed={pull=0}\nS.dynamic={}\nS.rouletteWindows={}\nfunction S.time(name)\n if S.observed[name] then return S.observed[name] end\n local a=S.anchors[name]\n return S.time(a.after)+a.offset\nend\nfunction S.union(list)\n table.sort(list,function(a,b)return a[1]<b[1] end)\n local out={}\n for _,w in ipairs(list) do\n  local last=out[#out]\n  if last and w[1]<=last[2] and w[3]==last[3] then last[2]=math.max(last[2],w[2])\n  else out[#out+1]={w[1],w[2],w[3]} end\n end\n return out\nend\nfunction S.rouletteForecast(kind,now)\n if not S.cfg.roulette then return end\n local orders={Garuda={\"Garuda\",\"Ifrit\",\"Titan\"},Ifrit={\"Ifrit\",\"Garuda\",\"Titan\"},Titan={\"Titan\",\"Ifrit\",\"Garuda\"}}\n if kind then\n  if not S.rouletteOrder then S.rouletteOrder=orders[kind];S.rouletteTimes={} end\n  local step=#S.rouletteTimes+1\n  if S.rouletteOrder[step]~=kind then return end\n  S.rouletteTimes[step]=now\n end\n S.rouletteWindows={}\n local function addOrder(order,base,times)\n  local offsets={0,S.roulette.step,S.roulette.step*2}\n  if times and #times>0 then base=times[#times]-S.time(\"p4end\")-offsets[#times] end\n  for i,k in ipairs(order) do\n   local t=times and times[i] or S.time(\"p4end\")+base+offsets[i]\n   for _,w in ipairs(S.roulette.templates[k]) do\n    S.rouletteWindows[#S.rouletteWindows+1]={t+w[1],t+w[2],1}\n   end\n  end\n end\n if S.rouletteOrder then addOrder(S.rouletteOrder,0,S.rouletteTimes)\n else\n  -- Initial estimates use the reference's three possible orders. Prepare events narrow them.\n  for _,order in pairs(orders) do addOrder(order,S.roulette.first) end\n end\nend\nfunction S.publish()\n local now=A.getAutoSimTime()\n local finish=math.max(now+5,S.time(S.kill.after)+S.kill.offset)\n A.setAutoSimKillTime(math.min(finish,1259))\n local grouped={FullDowntime={},CasterDowntime={},Stun={},BossModifier={},RaidBuff={},GroundFieldMovement={}}\n local function add(kind,a,b,value)\n  if b>a then grouped[kind][#grouped[kind]+1]={a,b,value or 1} end\n end\n for _,p in ipairs(S.phases) do\n  -- HP-driven deaths are variable. Do not declare the still-live boss unavailable.\n  local hpDeath=p[1]==\"FullDowntime\" and (p[2]==\"p1end\" or p[2]==\"p2end\")\n  if not hpDeath or S.observed[p[2]]~=nil then\n   add(p[1],S.time(p[2])+p[3],S.time(p[4])+p[5],p[6])\n  end\n end\n for _,p in ipairs(S.windows) do\n  local a,b=S.time(p[2])+p[3],S.time(p[4])+p[5]\n  if p[2]==\"titan1\" and S.observed.p3end then b=math.min(b,S.observed.p3end) end\n  add(p[1],a,b,p[6])\n end\n if S.cfg.poolLaha then\n  add(\"BossModifier\",S.time(\"magitekBit1\")+S.lahaDelay,S.time(\"p4end\"),.01)\n end\n if S.cfg.priorityGaols then\n  add(\"BossModifier\",S.time(\"titan1\")+68.966,S.time(\"titan1\")+73.966,1.10)\n  add(\"BossModifier\",S.time(\"p4end\")+227.75,S.time(\"p4end\")+232.75,1.10)\n end\n if S.cfg.raidBuffs then\n  local prev\n  for _,w in ipairs(S.buffwindows) do\n   local t=S.time(w[1])+w[2]\n   if prev then t=math.max(t,prev+120) end\n   add(\"RaidBuff\",t,t+20,1+S.cfg.buffGain/100)\n   prev=t\n  end\n end\n for _,w in ipairs(S.rouletteWindows) do add(\"CasterDowntime\",w[1],w[2],1) end\n for _,w in pairs(S.dynamic) do add(w[1],w[2],w[3],w[4]) end\n for kind,list in pairs(grouped) do\n  A.clearAutoSimPhases(kind)\n  -- All absolute same-type overlaps are merged before submission.\n  if kind==\"BossModifier\" or kind==\"RaidBuff\" then\n   local cuts,seen={},{}\n   for _,w in ipairs(list) do for i=1,2 do if not seen[w[i]] then cuts[#cuts+1]=w[i];seen[w[i]]=true end end end\n   table.sort(cuts)\n   for i=1,#cuts-1 do\n    local value,active=1,false\n    for _,w in ipairs(list) do if w[1]<=cuts[i] and w[2]>=cuts[i+1] then value=value*w[3];active=true end end\n    if active then A.addAutoSimPhase(kind,cuts[i],cuts[i+1],value) end\n   end\n  else\n   for _,w in ipairs(S.union(list)) do A.addAutoSimPhase(kind,w[1],w[2],w[3]) end\n  end\n end\n A.clearAutoSimUncertainty()\n A.addAutoSimUncertainty(0,2)\n local uncertainty=2\n for _,name in ipairs(S.anchorOrder) do\n  if not S.observed[name] then\n   local anchor=S.anchors[name]\n   uncertainty=math.max(uncertainty,anchor.spread)\n   A.addAutoSimUncertainty(S.time(name)-25,uncertainty)\n  end\n end\n A.addAutoSimUncertainty(math.max(0,finish-30),math.max(uncertainty,S.kill.spread))\nend\nfunction S.resync(name,now)\n if S.observed[name] then return end\n S.observed[name]=now\n S.rouletteForecast()\n S.publish()\n if not S.ifritStarted then\n  local untilIfrit=S.time(\"p1end\")+S.ifritArrival\n  A.holdActionUntil(846,Now()+math.max(0,untilIfrit-now)*1000)\n end\nend\nS.rouletteForecast()\nA.setAutoSimUnexpectedMovementPct(.05)\nS.publish()\nA.holdActionUntil(846,Now()+math.max(0,S.time(\"p1end\")+S.ifritArrival-A.getAutoSimTime())*1000)\ndata.uwuBLMAutoSim=S\nself.used=true\n",
+							actionLua = "local feather=TensorCore.API.TensorACR.addBlacklistEntry(1648,\"UWU Satin Plume\")\nif not feather.enabled or feather.allowIfTarget or feather.allowSmartDoT then\n feather.enabled=true;feather.allowIfTarget=false;feather.allowSmartDoT=false\n TensorCore.API.TensorACR.saveDotBlacklist()\nend\nlocal dotAPI=TensorCore.API.TensorACR\nlocal dotEntry=dotAPI.addBlacklistEntry(1186,\"UWU Infernal Nail\")\nif not dotEntry.enabled or dotEntry.allowIfTarget then\n dotEntry.enabled=true\n dotEntry.allowIfTarget=false\n dotAPI.saveDotBlacklist()\nend\n-- Generated encounter inputs are inserted by the MCP authoring script.\n-- Five EU BLM clears supply the phase-relative medians. Native events resync them.\nlocal A=TensorCore.API.TensorACR\n_G.UWU_BLM_TemporaryState=_G.UWU_BLM_TemporaryState or {}\nlocal cfg=_G.UWU_BLM_AutoSimConfig\nif not cfg then\n cfg={poolLaha=true,priorityGaols=true,roulette=true,raidBuffs=true,buffGain=16.87,nails=true,closePair=true,surecast=true,manaward=true}\n _G.UWU_BLM_AutoSimConfig=cfg\nend\nlocal S={[\"anchors\"]={[\"p1end\"]={[\"after\"]=\"pull\",[\"offset\"]=134.629,[\"spread\"]=10},[\"ifrit1\"]={[\"after\"]=\"p1end\",[\"offset\"]=72.217,[\"spread\"]=0.75},[\"p2end\"]={[\"after\"]=\"ifrit1\",[\"offset\"]=38.162,[\"spread\"]=10},[\"ifrit2Back\"]={[\"after\"]=\"p2end\",[\"offset\"]=7.422,[\"spread\"]=0.75},[\"titan1\"]={[\"after\"]=\"ifrit2Back\",[\"offset\"]=22.062,[\"spread\"]=0.75},[\"p3end\"]={[\"after\"]=\"titan1\",[\"offset\"]=97.279,[\"spread\"]=15},[\"titan3Back\"]={[\"after\"]=\"p3end\",[\"offset\"]=12.283,[\"spread\"]=0.75},[\"magitekBit1\"]={[\"after\"]=\"titan3Back\",[\"offset\"]=7.018,[\"spread\"]=0.75},[\"p4end\"]={[\"after\"]=\"magitekBit1\",[\"offset\"]=25.99,[\"spread\"]=0.75},[\"graniteGaol1\"]={[\"after\"]=\"p4end\",[\"offset\"]=233.053,[\"spread\"]=0.75}},[\"kill\"]={[\"after\"]=\"graniteGaol1\",[\"offset\"]=134.648,[\"spread\"]=7.881},[\"phases\"]={{\"FullDowntime\",\"pull\",70.532,\"pull\",74.238,1},{\"FullDowntime\",\"p1end\",0.1,\"p1end\",13.303,1},{\"FullDowntime\",\"ifrit1\",0.1,\"ifrit1\",3.812,1},{\"FullDowntime\",\"p2end\",0.1,\"ifrit2Back\",-0.3,1},{\"FullDowntime\",\"titan1\",0.1,\"titan1\",8.158,1},{\"FullDowntime\",\"titan1\",54.272,\"titan1\",62.508,1},{\"FullDowntime\",\"p3end\",0.1,\"titan3Back\",-0.3,1},{\"FullDowntime\",\"magitekBit1\",0.1,\"magitekBit1\",13.741,1},{\"FullDowntime\",\"p4end\",0.1,\"p4end\",50.191,1},{\"FullDowntime\",\"p4end\",77.992,\"p4end\",98.072,1},{\"FullDowntime\",\"p4end\",156.499,\"p4end\",161.092,1},{\"FullDowntime\",\"p4end\",193.502,\"p4end\",198.14,1},{\"FullDowntime\",\"p4end\",214.525,\"p4end\",229.087,1},{\"FullDowntime\",\"graniteGaol1\",0.1,\"p4end\",255.307,1},{\"FullDowntime\",\"p4end\",353.6,\"p4end\",357.89,1}},[\"windows\"]={{\"CasterDowntime\",\"pull\",35.0,\"pull\",37.5,1},{\"CasterDowntime\",\"pull\",38.5,\"pull\",41.0,1},{\"CasterDowntime\",\"pull\",43.0,\"pull\",44.0,1},{\"CasterDowntime\",\"pull\",91.0,\"pull\",92.5,1},{\"CasterDowntime\",\"pull\",102.5,\"pull\",104.0,1},{\"CasterDowntime\",\"pull\",105.5,\"pull\",106.5,1},{\"CasterDowntime\",\"pull\",127.5,\"pull\",128.5,1},{\"CasterDowntime\",\"p1end\",44.5,\"p1end\",47.0,1},{\"CasterDowntime\",\"p1end\",91.5,\"p1end\",98.0,1},{\"CasterDowntime\",\"titan1\",8.5,\"titan1\",11.0,1},{\"CasterDowntime\",\"titan1\",14.0,\"titan1\",21.5,1},{\"CasterDowntime\",\"titan1\",27.5,\"titan1\",29.0,1},{\"CasterDowntime\",\"titan1\",41.0,\"titan1\",42.5,1},{\"CasterDowntime\",\"titan1\",74.5,\"titan1\",76.0,1},{\"CasterDowntime\",\"p4end\",99.5,\"p4end\",100.5,1},{\"CasterDowntime\",\"p4end\",109.0,\"p4end\",115.0,1},{\"CasterDowntime\",\"p4end\",121.0,\"p4end\",124.0,1},{\"CasterDowntime\",\"p4end\",125.0,\"p4end\",129.0,1},{\"CasterDowntime\",\"p4end\",144.5,\"p4end\",145.5,1},{\"CasterDowntime\",\"p4end\",161.5,\"p4end\",169.0,1},{\"CasterDowntime\",\"p4end\",170.0,\"p4end\",172.5,1},{\"CasterDowntime\",\"p4end\",173.5,\"p4end\",174.5,1},{\"CasterDowntime\",\"p4end\",178.5,\"p4end\",182.0,1},{\"CasterDowntime\",\"p4end\",229.5,\"p4end\",231.0,1},{\"CasterDowntime\",\"p4end\",274.0,\"p4end\",280.0,1},{\"CasterDowntime\",\"p4end\",281.0,\"p4end\",282.5,1}},[\"returns\"]={},[\"buffwindows\"]={{\"pull\",8.069},{\"p1end\",16.081},{\"ifrit2Back\",52.467},{\"p4end\",52.628},{\"p4end\",175.979},{\"p4end\",317.846}},[\"sample_count\"]=5,[\"kill_samples\"]={782.098,751.692,783.165,838.291,794.832},[\"roulette\"]={[\"first\"]=293.478,[\"step\"]=20.123,[\"templates\"]={[\"Garuda\"]={{9.5,10.0}},[\"Ifrit\"]={{7.0,9.5},{11.0,11.5}},[\"Titan\"]={{5.0,13.0}}}},[\"anchorOrder\"]={\"p1end\",\"ifrit1\",\"p2end\",\"ifrit2Back\",\"titan1\",\"p3end\",\"titan3Back\",\"magitekBit1\",\"p4end\",\"graniteGaol1\"},[\"ifritArrival\"]=13.603,[\"lahaDelay\"]=14.041}\n-- Separate Ifrit's second dash from his actual phase death.\nS.anchors.ifritDash={after=\"ifrit1\",offset=47.95,spread=2}\nS.anchors.ifritDashBack={after=\"ifritDash\",offset=15.79,spread=1}\nS.anchors.p2end={after=\"ifritDashBack\",offset=17.31,spread=12}\nS.anchors.ifrit2Back={after=\"p2end\",offset=7.55,spread=.75}\nS.anchorOrder={\"p1end\",\"ifrit1\",\"ifritDash\",\"ifritDashBack\",\"p2end\",\"ifrit2Back\",\"titan1\",\"p3end\",\"titan3Back\",\"magitekBit1\",\"p4end\",\"graniteGaol1\"}\nS.phases[#S.phases+1]={\"FullDowntime\",\"ifritDash\",0.1,\"ifritDashBack\",-0.1,1}\nfor _,phase in ipairs(S.phases) do\n if phase[1]==\"FullDowntime\" and phase[2]==\"ifrit1\" and phase[4]==\"ifrit1\" then phase[5]=4.25 end\nend\n-- First Garuda disappearance: corroborated in three recent native logs.\nS.phases[#S.phases+1]={\"FullDowntime\",\"pull\",33.96,\"pull\",38.25,1}\n-- Tonight's native phase-end samples: 16 Garuda ends and 7 final Ifrit returns.\nS.anchors.p1end.offset=145.61\nS.anchors.p1end.spread=27\nS.anchors.p2end.offset=22.312\nS.anchors.p2end.spread=17\nS.cfg={}\nfor k,v in pairs(cfg) do S.cfg[k]=v end\nS.observed={pull=0}\nS.dynamic={}\nS.rouletteWindows={}\nfunction S.time(name)\n if S.observed[name] then return S.observed[name] end\n local a=S.anchors[name]\n return S.time(a.after)+a.offset\nend\nfunction S.union(list)\n table.sort(list,function(a,b)return a[1]<b[1] end)\n local out={}\n for _,w in ipairs(list) do\n  local last=out[#out]\n  if last and w[1]<=last[2] and w[3]==last[3] then last[2]=math.max(last[2],w[2])\n  else out[#out+1]={w[1],w[2],w[3]} end\n end\n return out\nend\nfunction S.rouletteForecast(kind,now)\n if not S.cfg.roulette then return end\n local orders={Garuda={\"Garuda\",\"Ifrit\",\"Titan\"},Ifrit={\"Ifrit\",\"Garuda\",\"Titan\"},Titan={\"Titan\",\"Ifrit\",\"Garuda\"}}\n if kind then\n  if not S.rouletteOrder then S.rouletteOrder=orders[kind];S.rouletteTimes={} end\n  local step=#S.rouletteTimes+1\n  if S.rouletteOrder[step]~=kind then return end\n  S.rouletteTimes[step]=now\n end\n S.rouletteWindows={}\n local function addOrder(order,base,times)\n  local offsets={0,S.roulette.step,S.roulette.step*2}\n  if times and #times>0 then base=times[#times]-S.time(\"p4end\")-offsets[#times] end\n  for i,k in ipairs(order) do\n   local t=times and times[i] or S.time(\"p4end\")+base+offsets[i]\n   for _,w in ipairs(S.roulette.templates[k]) do\n    S.rouletteWindows[#S.rouletteWindows+1]={t+w[1],t+w[2],1}\n   end\n  end\n end\n if S.rouletteOrder then addOrder(S.rouletteOrder,0,S.rouletteTimes)\n else\n  -- Initial estimates use the reference's three possible orders. Prepare events narrow them.\n  for _,order in pairs(orders) do addOrder(order,S.roulette.first) end\n end\nend\nfunction S.publish()\n local now=A.getAutoSimTime()\n local finish=math.max(now+5,S.time(S.kill.after)+S.kill.offset)\n A.setAutoSimKillTime(math.min(finish,1259))\n local grouped={FullDowntime={},CasterDowntime={},Stun={},BossModifier={},RaidBuff={},GroundFieldMovement={}}\n local function add(kind,a,b,value)\n  if b>a then grouped[kind][#grouped[kind]+1]={a,b,value or 1} end\n end\n for _,p in ipairs(S.phases) do\n  -- HP-driven deaths are variable. Do not declare the still-live boss unavailable.\n  local hpDeath=p[1]==\"FullDowntime\" and (p[2]==\"p1end\" or p[2]==\"p2end\")\n  if not hpDeath or S.observed[p[2]]~=nil then\n   add(p[1],S.time(p[2])+p[3],S.time(p[4])+p[5],p[6])\n  end\n end\n for _,p in ipairs(S.windows) do\n  local a,b=S.time(p[2])+p[3],S.time(p[4])+p[5]\n  if p[2]==\"titan1\" and S.observed.p3end then b=math.min(b,S.observed.p3end) end\n  add(p[1],a,b,p[6])\n end\n if S.cfg.poolLaha then\n  add(\"BossModifier\",S.time(\"magitekBit1\")+S.lahaDelay,S.time(\"p4end\"),.01)\n end\n if S.cfg.priorityGaols then\n  add(\"BossModifier\",S.time(\"titan1\")+68.966,S.time(\"titan1\")+73.966,1.10)\n  add(\"BossModifier\",S.time(\"p4end\")+227.75,S.time(\"p4end\")+232.75,1.10)\n end\n if S.cfg.raidBuffs then\n  local prev\n  for _,w in ipairs(S.buffwindows) do\n   local t=S.time(w[1])+w[2]\n   if prev then t=math.max(t,prev+120) end\n   add(\"RaidBuff\",t,t+20,1+S.cfg.buffGain/100)\n   prev=t\n  end\n end\n for _,w in ipairs(S.rouletteWindows) do add(\"CasterDowntime\",w[1],w[2],1) end\n local roster=AnyoneCore.Roster\n local isR2=roster and roster.current() and roster.mySlot()==\"R2\"\n if isR2 and not S.lbObserved then\n  local lb=S.time(\"titan3Back\")+4\n  add(\"Stun\",lb,lb+12.6,1)\n end\n for _,w in pairs(S.dynamic) do add(w[1],w[2],w[3],w[4]) end\n for kind,list in pairs(grouped) do\n  A.clearAutoSimPhases(kind)\n  -- All absolute same-type overlaps are merged before submission.\n  if kind==\"BossModifier\" or kind==\"RaidBuff\" then\n   local cuts,seen={},{}\n   for _,w in ipairs(list) do for i=1,2 do if not seen[w[i]] then cuts[#cuts+1]=w[i];seen[w[i]]=true end end end\n   table.sort(cuts)\n   for i=1,#cuts-1 do\n    local value,active=1,false\n    for _,w in ipairs(list) do if w[1]<=cuts[i] and w[2]>=cuts[i+1] then value=value*w[3];active=true end end\n    if active then A.addAutoSimPhase(kind,cuts[i],cuts[i+1],value) end\n   end\n  else\n   for _,w in ipairs(S.union(list)) do A.addAutoSimPhase(kind,w[1],w[2],w[3]) end\n  end\n end\n A.clearAutoSimUncertainty()\n A.addAutoSimUncertainty(0,2)\n local uncertainty=2\n for _,name in ipairs(S.anchorOrder) do\n  if not S.observed[name] then\n   local anchor=S.anchors[name]\n   uncertainty=math.max(uncertainty,anchor.spread)\n   A.addAutoSimUncertainty(S.time(name)-25,uncertainty)\n  end\n end\n A.addAutoSimUncertainty(math.max(0,finish-30),math.max(uncertainty,S.kill.spread))\nend\nfunction S.resync(name,now)\n if S.observed[name] then return end\n S.observed[name]=now\n S.rouletteForecast()\n S.publish()\n if not S.ifritStarted then\n  local untilIfrit=S.time(\"p1end\")+S.ifritArrival\n  A.holdActionUntil(846,Now()+math.max(0,untilIfrit-now)*1000)\n end\nend\nS.rouletteForecast()\nA.setAutoSimUnexpectedMovementPct(.05)\nS.publish()\nA.holdActionUntil(846,Now()+math.max(0,S.time(\"p1end\")+S.ifritArrival-A.getAutoSimTime())*1000)\ndata.uwuBLMAutoSim=S\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -477,7 +455,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local dotAPI=TensorCore.API.TensorACR\nlocal dotEntry=dotAPI.addBlacklistEntry(1186,\"UWU Infernal Nail\")\nif not dotEntry.enabled or dotEntry.allowIfTarget then\n dotEntry.enabled=true\n dotEntry.allowIfTarget=false\n dotAPI.saveDotBlacklist()\nend\n-- Generated encounter inputs are inserted by the MCP authoring script.\n-- Five EU BLM clears supply the phase-relative medians. Native events resync them.\nlocal A=TensorCore.API.TensorACR\n_G.UWU_BLM_TemporaryState=_G.UWU_BLM_TemporaryState or {}\nlocal cfg=_G.UWU_BLM_AutoSimConfig\nif not cfg then\n cfg={poolLaha=true,priorityGaols=true,roulette=true,raidBuffs=true,buffGain=16.87,nails=true,closePair=true,surecast=true,manaward=true}\n _G.UWU_BLM_AutoSimConfig=cfg\nend\nlocal S={[\"anchors\"]={[\"p1end\"]={[\"after\"]=\"pull\",[\"offset\"]=134.629,[\"spread\"]=10},[\"ifrit1\"]={[\"after\"]=\"p1end\",[\"offset\"]=72.217,[\"spread\"]=0.75},[\"p2end\"]={[\"after\"]=\"ifrit1\",[\"offset\"]=38.162,[\"spread\"]=10},[\"ifrit2Back\"]={[\"after\"]=\"p2end\",[\"offset\"]=7.422,[\"spread\"]=0.75},[\"titan1\"]={[\"after\"]=\"ifrit2Back\",[\"offset\"]=22.062,[\"spread\"]=0.75},[\"p3end\"]={[\"after\"]=\"titan1\",[\"offset\"]=97.279,[\"spread\"]=15},[\"titan3Back\"]={[\"after\"]=\"p3end\",[\"offset\"]=12.283,[\"spread\"]=0.75},[\"magitekBit1\"]={[\"after\"]=\"titan3Back\",[\"offset\"]=7.018,[\"spread\"]=0.75},[\"p4end\"]={[\"after\"]=\"magitekBit1\",[\"offset\"]=25.99,[\"spread\"]=0.75},[\"graniteGaol1\"]={[\"after\"]=\"p4end\",[\"offset\"]=233.053,[\"spread\"]=0.75}},[\"kill\"]={[\"after\"]=\"graniteGaol1\",[\"offset\"]=134.648,[\"spread\"]=7.881},[\"phases\"]={{\"FullDowntime\",\"pull\",70.532,\"pull\",74.238,1},{\"FullDowntime\",\"p1end\",0.1,\"p1end\",13.303,1},{\"FullDowntime\",\"ifrit1\",0.1,\"ifrit1\",3.812,1},{\"FullDowntime\",\"p2end\",0.1,\"ifrit2Back\",-0.3,1},{\"FullDowntime\",\"titan1\",0.1,\"titan1\",8.158,1},{\"FullDowntime\",\"titan1\",54.272,\"titan1\",62.508,1},{\"FullDowntime\",\"p3end\",0.1,\"titan3Back\",-0.3,1},{\"FullDowntime\",\"magitekBit1\",0.1,\"magitekBit1\",13.741,1},{\"FullDowntime\",\"p4end\",0.1,\"p4end\",50.191,1},{\"FullDowntime\",\"p4end\",77.992,\"p4end\",98.072,1},{\"FullDowntime\",\"p4end\",156.499,\"p4end\",161.092,1},{\"FullDowntime\",\"p4end\",193.502,\"p4end\",198.14,1},{\"FullDowntime\",\"p4end\",214.525,\"p4end\",229.087,1},{\"FullDowntime\",\"graniteGaol1\",0.1,\"p4end\",255.307,1},{\"FullDowntime\",\"p4end\",353.6,\"p4end\",357.89,1}},[\"windows\"]={{\"CasterDowntime\",\"pull\",35.0,\"pull\",37.5,1},{\"CasterDowntime\",\"pull\",38.5,\"pull\",41.0,1},{\"CasterDowntime\",\"pull\",43.0,\"pull\",44.0,1},{\"CasterDowntime\",\"pull\",91.0,\"pull\",92.5,1},{\"CasterDowntime\",\"pull\",102.5,\"pull\",104.0,1},{\"CasterDowntime\",\"pull\",105.5,\"pull\",106.5,1},{\"CasterDowntime\",\"pull\",127.5,\"pull\",128.5,1},{\"CasterDowntime\",\"p1end\",44.5,\"p1end\",47.0,1},{\"CasterDowntime\",\"p1end\",91.5,\"p1end\",98.0,1},{\"CasterDowntime\",\"titan1\",8.5,\"titan1\",11.0,1},{\"CasterDowntime\",\"titan1\",14.0,\"titan1\",21.5,1},{\"CasterDowntime\",\"titan1\",27.5,\"titan1\",29.0,1},{\"CasterDowntime\",\"titan1\",41.0,\"titan1\",42.5,1},{\"CasterDowntime\",\"titan1\",74.5,\"titan1\",76.0,1},{\"CasterDowntime\",\"p4end\",99.5,\"p4end\",100.5,1},{\"CasterDowntime\",\"p4end\",109.0,\"p4end\",115.0,1},{\"CasterDowntime\",\"p4end\",121.0,\"p4end\",124.0,1},{\"CasterDowntime\",\"p4end\",125.0,\"p4end\",129.0,1},{\"CasterDowntime\",\"p4end\",144.5,\"p4end\",145.5,1},{\"CasterDowntime\",\"p4end\",161.5,\"p4end\",169.0,1},{\"CasterDowntime\",\"p4end\",170.0,\"p4end\",172.5,1},{\"CasterDowntime\",\"p4end\",173.5,\"p4end\",174.5,1},{\"CasterDowntime\",\"p4end\",178.5,\"p4end\",182.0,1},{\"CasterDowntime\",\"p4end\",229.5,\"p4end\",231.0,1},{\"CasterDowntime\",\"p4end\",274.0,\"p4end\",280.0,1},{\"CasterDowntime\",\"p4end\",281.0,\"p4end\",282.5,1}},[\"returns\"]={},[\"buffwindows\"]={{\"pull\",8.069},{\"p1end\",16.081},{\"ifrit2Back\",52.467},{\"p4end\",52.628},{\"p4end\",175.979},{\"p4end\",317.846}},[\"sample_count\"]=5,[\"kill_samples\"]={782.098,751.692,783.165,838.291,794.832},[\"roulette\"]={[\"first\"]=293.478,[\"step\"]=20.123,[\"templates\"]={[\"Garuda\"]={{9.5,10.0}},[\"Ifrit\"]={{7.0,9.5},{11.0,11.5}},[\"Titan\"]={{5.0,13.0}}}},[\"anchorOrder\"]={\"p1end\",\"ifrit1\",\"p2end\",\"ifrit2Back\",\"titan1\",\"p3end\",\"titan3Back\",\"magitekBit1\",\"p4end\",\"graniteGaol1\"},[\"ifritArrival\"]=13.603,[\"lahaDelay\"]=14.041}\n-- Separate Ifrit's second dash from his actual phase death.\nS.anchors.ifritDash={after=\"ifrit1\",offset=47.95,spread=2}\nS.anchors.ifritDashBack={after=\"ifritDash\",offset=15.79,spread=1}\nS.anchors.p2end={after=\"ifritDashBack\",offset=17.31,spread=12}\nS.anchors.ifrit2Back={after=\"p2end\",offset=7.55,spread=.75}\nS.anchorOrder={\"p1end\",\"ifrit1\",\"ifritDash\",\"ifritDashBack\",\"p2end\",\"ifrit2Back\",\"titan1\",\"p3end\",\"titan3Back\",\"magitekBit1\",\"p4end\",\"graniteGaol1\"}\nS.phases[#S.phases+1]={\"FullDowntime\",\"ifritDash\",0.1,\"ifritDashBack\",-0.1,1}\nfor _,phase in ipairs(S.phases) do\n if phase[1]==\"FullDowntime\" and phase[2]==\"ifrit1\" and phase[4]==\"ifrit1\" then phase[5]=4.25 end\nend\n-- First Garuda disappearance: corroborated in three recent native logs.\nS.phases[#S.phases+1]={\"FullDowntime\",\"pull\",33.96,\"pull\",38.25,1}\n-- Tonight's native phase-end samples: 16 Garuda ends and 7 final Ifrit returns.\nS.anchors.p1end.offset=145.61\nS.anchors.p1end.spread=27\nS.anchors.p2end.offset=22.312\nS.anchors.p2end.spread=17\nS.cfg={}\nfor k,v in pairs(cfg) do S.cfg[k]=v end\nS.observed={pull=0}\nS.dynamic={}\nS.rouletteWindows={}\nfunction S.time(name)\n if S.observed[name] then return S.observed[name] end\n local a=S.anchors[name]\n return S.time(a.after)+a.offset\nend\nfunction S.union(list)\n table.sort(list,function(a,b)return a[1]<b[1] end)\n local out={}\n for _,w in ipairs(list) do\n  local last=out[#out]\n  if last and w[1]<=last[2] and w[3]==last[3] then last[2]=math.max(last[2],w[2])\n  else out[#out+1]={w[1],w[2],w[3]} end\n end\n return out\nend\nfunction S.rouletteForecast(kind,now)\n if not S.cfg.roulette then return end\n local orders={Garuda={\"Garuda\",\"Ifrit\",\"Titan\"},Ifrit={\"Ifrit\",\"Garuda\",\"Titan\"},Titan={\"Titan\",\"Ifrit\",\"Garuda\"}}\n if kind then\n  if not S.rouletteOrder then S.rouletteOrder=orders[kind];S.rouletteTimes={} end\n  local step=#S.rouletteTimes+1\n  if S.rouletteOrder[step]~=kind then return end\n  S.rouletteTimes[step]=now\n end\n S.rouletteWindows={}\n local function addOrder(order,base,times)\n  local offsets={0,S.roulette.step,S.roulette.step*2}\n  if times and #times>0 then base=times[#times]-S.time(\"p4end\")-offsets[#times] end\n  for i,k in ipairs(order) do\n   local t=times and times[i] or S.time(\"p4end\")+base+offsets[i]\n   for _,w in ipairs(S.roulette.templates[k]) do\n    S.rouletteWindows[#S.rouletteWindows+1]={t+w[1],t+w[2],1}\n   end\n  end\n end\n if S.rouletteOrder then addOrder(S.rouletteOrder,0,S.rouletteTimes)\n else\n  -- Initial estimates use the reference's three possible orders. Prepare events narrow them.\n  for _,order in pairs(orders) do addOrder(order,S.roulette.first) end\n end\nend\nfunction S.publish()\n local now=A.getAutoSimTime()\n local finish=math.max(now+5,S.time(S.kill.after)+S.kill.offset)\n A.setAutoSimKillTime(math.min(finish,1259))\n local grouped={FullDowntime={},CasterDowntime={},Stun={},BossModifier={},RaidBuff={},GroundFieldMovement={}}\n local function add(kind,a,b,value)\n  if b>a then grouped[kind][#grouped[kind]+1]={a,b,value or 1} end\n end\n for _,p in ipairs(S.phases) do\n  -- HP-driven deaths are variable. Do not declare the still-live boss unavailable.\n  local hpDeath=p[1]==\"FullDowntime\" and (p[2]==\"p1end\" or p[2]==\"p2end\")\n  if not hpDeath or S.observed[p[2]]~=nil then\n   add(p[1],S.time(p[2])+p[3],S.time(p[4])+p[5],p[6])\n  end\n end\n for _,p in ipairs(S.windows) do\n  local a,b=S.time(p[2])+p[3],S.time(p[4])+p[5]\n  if p[2]==\"titan1\" and S.observed.p3end then b=math.min(b,S.observed.p3end) end\n  add(p[1],a,b,p[6])\n end\n if S.cfg.poolLaha then\n  add(\"BossModifier\",S.time(\"magitekBit1\")+S.lahaDelay,S.time(\"p4end\"),.01)\n end\n if S.cfg.priorityGaols then\n  add(\"BossModifier\",S.time(\"titan1\")+68.966,S.time(\"titan1\")+73.966,1.10)\n  add(\"BossModifier\",S.time(\"p4end\")+227.75,S.time(\"p4end\")+232.75,1.10)\n end\n if S.cfg.raidBuffs then\n  local prev\n  for _,w in ipairs(S.buffwindows) do\n   local t=S.time(w[1])+w[2]\n   if prev then t=math.max(t,prev+120) end\n   add(\"RaidBuff\",t,t+20,1+S.cfg.buffGain/100)\n   prev=t\n  end\n end\n for _,w in ipairs(S.rouletteWindows) do add(\"CasterDowntime\",w[1],w[2],1) end\n for _,w in pairs(S.dynamic) do add(w[1],w[2],w[3],w[4]) end\n for kind,list in pairs(grouped) do\n  A.clearAutoSimPhases(kind)\n  -- All absolute same-type overlaps are merged before submission.\n  if kind==\"BossModifier\" or kind==\"RaidBuff\" then\n   local cuts,seen={},{}\n   for _,w in ipairs(list) do for i=1,2 do if not seen[w[i]] then cuts[#cuts+1]=w[i];seen[w[i]]=true end end end\n   table.sort(cuts)\n   for i=1,#cuts-1 do\n    local value,active=1,false\n    for _,w in ipairs(list) do if w[1]<=cuts[i] and w[2]>=cuts[i+1] then value=value*w[3];active=true end end\n    if active then A.addAutoSimPhase(kind,cuts[i],cuts[i+1],value) end\n   end\n  else\n   for _,w in ipairs(S.union(list)) do A.addAutoSimPhase(kind,w[1],w[2],w[3]) end\n  end\n end\n A.clearAutoSimUncertainty()\n A.addAutoSimUncertainty(0,2)\n local uncertainty=2\n for _,name in ipairs(S.anchorOrder) do\n  if not S.observed[name] then\n   local anchor=S.anchors[name]\n   uncertainty=math.max(uncertainty,anchor.spread)\n   A.addAutoSimUncertainty(S.time(name)-25,uncertainty)\n  end\n end\n A.addAutoSimUncertainty(math.max(0,finish-30),math.max(uncertainty,S.kill.spread))\nend\nfunction S.resync(name,now)\n if S.observed[name] then return end\n S.observed[name]=now\n S.rouletteForecast()\n S.publish()\n if not S.ifritStarted then\n  local untilIfrit=S.time(\"p1end\")+S.ifritArrival\n  A.holdActionUntil(846,Now()+math.max(0,untilIfrit-now)*1000)\n end\nend\nS.rouletteForecast()\nA.setAutoSimUnexpectedMovementPct(.05)\nS.publish()\nA.holdActionUntil(846,Now()+math.max(0,S.time(\"p1end\")+S.ifritArrival-A.getAutoSimTime())*1000)\ndata.uwuBLMAutoSim=S\nself.used=true\n",
+							actionLua = "local feather=TensorCore.API.TensorACR.addBlacklistEntry(1648,\"UWU Satin Plume\")\nif not feather.enabled or feather.allowIfTarget or feather.allowSmartDoT then\n feather.enabled=true;feather.allowIfTarget=false;feather.allowSmartDoT=false\n TensorCore.API.TensorACR.saveDotBlacklist()\nend\nlocal dotAPI=TensorCore.API.TensorACR\nlocal dotEntry=dotAPI.addBlacklistEntry(1186,\"UWU Infernal Nail\")\nif not dotEntry.enabled or dotEntry.allowIfTarget then\n dotEntry.enabled=true\n dotEntry.allowIfTarget=false\n dotAPI.saveDotBlacklist()\nend\n-- Generated encounter inputs are inserted by the MCP authoring script.\n-- Five EU BLM clears supply the phase-relative medians. Native events resync them.\nlocal A=TensorCore.API.TensorACR\n_G.UWU_BLM_TemporaryState=_G.UWU_BLM_TemporaryState or {}\nlocal cfg=_G.UWU_BLM_AutoSimConfig\nif not cfg then\n cfg={poolLaha=true,priorityGaols=true,roulette=true,raidBuffs=true,buffGain=16.87,nails=true,closePair=true,surecast=true,manaward=true}\n _G.UWU_BLM_AutoSimConfig=cfg\nend\nlocal S={[\"anchors\"]={[\"p1end\"]={[\"after\"]=\"pull\",[\"offset\"]=134.629,[\"spread\"]=10},[\"ifrit1\"]={[\"after\"]=\"p1end\",[\"offset\"]=72.217,[\"spread\"]=0.75},[\"p2end\"]={[\"after\"]=\"ifrit1\",[\"offset\"]=38.162,[\"spread\"]=10},[\"ifrit2Back\"]={[\"after\"]=\"p2end\",[\"offset\"]=7.422,[\"spread\"]=0.75},[\"titan1\"]={[\"after\"]=\"ifrit2Back\",[\"offset\"]=22.062,[\"spread\"]=0.75},[\"p3end\"]={[\"after\"]=\"titan1\",[\"offset\"]=97.279,[\"spread\"]=15},[\"titan3Back\"]={[\"after\"]=\"p3end\",[\"offset\"]=12.283,[\"spread\"]=0.75},[\"magitekBit1\"]={[\"after\"]=\"titan3Back\",[\"offset\"]=7.018,[\"spread\"]=0.75},[\"p4end\"]={[\"after\"]=\"magitekBit1\",[\"offset\"]=25.99,[\"spread\"]=0.75},[\"graniteGaol1\"]={[\"after\"]=\"p4end\",[\"offset\"]=233.053,[\"spread\"]=0.75}},[\"kill\"]={[\"after\"]=\"graniteGaol1\",[\"offset\"]=134.648,[\"spread\"]=7.881},[\"phases\"]={{\"FullDowntime\",\"pull\",70.532,\"pull\",74.238,1},{\"FullDowntime\",\"p1end\",0.1,\"p1end\",13.303,1},{\"FullDowntime\",\"ifrit1\",0.1,\"ifrit1\",3.812,1},{\"FullDowntime\",\"p2end\",0.1,\"ifrit2Back\",-0.3,1},{\"FullDowntime\",\"titan1\",0.1,\"titan1\",8.158,1},{\"FullDowntime\",\"titan1\",54.272,\"titan1\",62.508,1},{\"FullDowntime\",\"p3end\",0.1,\"titan3Back\",-0.3,1},{\"FullDowntime\",\"magitekBit1\",0.1,\"magitekBit1\",13.741,1},{\"FullDowntime\",\"p4end\",0.1,\"p4end\",50.191,1},{\"FullDowntime\",\"p4end\",77.992,\"p4end\",98.072,1},{\"FullDowntime\",\"p4end\",156.499,\"p4end\",161.092,1},{\"FullDowntime\",\"p4end\",193.502,\"p4end\",198.14,1},{\"FullDowntime\",\"p4end\",214.525,\"p4end\",229.087,1},{\"FullDowntime\",\"graniteGaol1\",0.1,\"p4end\",255.307,1},{\"FullDowntime\",\"p4end\",353.6,\"p4end\",357.89,1}},[\"windows\"]={{\"CasterDowntime\",\"pull\",35.0,\"pull\",37.5,1},{\"CasterDowntime\",\"pull\",38.5,\"pull\",41.0,1},{\"CasterDowntime\",\"pull\",43.0,\"pull\",44.0,1},{\"CasterDowntime\",\"pull\",91.0,\"pull\",92.5,1},{\"CasterDowntime\",\"pull\",102.5,\"pull\",104.0,1},{\"CasterDowntime\",\"pull\",105.5,\"pull\",106.5,1},{\"CasterDowntime\",\"pull\",127.5,\"pull\",128.5,1},{\"CasterDowntime\",\"p1end\",44.5,\"p1end\",47.0,1},{\"CasterDowntime\",\"p1end\",91.5,\"p1end\",98.0,1},{\"CasterDowntime\",\"titan1\",8.5,\"titan1\",11.0,1},{\"CasterDowntime\",\"titan1\",14.0,\"titan1\",21.5,1},{\"CasterDowntime\",\"titan1\",27.5,\"titan1\",29.0,1},{\"CasterDowntime\",\"titan1\",41.0,\"titan1\",42.5,1},{\"CasterDowntime\",\"titan1\",74.5,\"titan1\",76.0,1},{\"CasterDowntime\",\"p4end\",99.5,\"p4end\",100.5,1},{\"CasterDowntime\",\"p4end\",109.0,\"p4end\",115.0,1},{\"CasterDowntime\",\"p4end\",121.0,\"p4end\",124.0,1},{\"CasterDowntime\",\"p4end\",125.0,\"p4end\",129.0,1},{\"CasterDowntime\",\"p4end\",144.5,\"p4end\",145.5,1},{\"CasterDowntime\",\"p4end\",161.5,\"p4end\",169.0,1},{\"CasterDowntime\",\"p4end\",170.0,\"p4end\",172.5,1},{\"CasterDowntime\",\"p4end\",173.5,\"p4end\",174.5,1},{\"CasterDowntime\",\"p4end\",178.5,\"p4end\",182.0,1},{\"CasterDowntime\",\"p4end\",229.5,\"p4end\",231.0,1},{\"CasterDowntime\",\"p4end\",274.0,\"p4end\",280.0,1},{\"CasterDowntime\",\"p4end\",281.0,\"p4end\",282.5,1}},[\"returns\"]={},[\"buffwindows\"]={{\"pull\",8.069},{\"p1end\",16.081},{\"ifrit2Back\",52.467},{\"p4end\",52.628},{\"p4end\",175.979},{\"p4end\",317.846}},[\"sample_count\"]=5,[\"kill_samples\"]={782.098,751.692,783.165,838.291,794.832},[\"roulette\"]={[\"first\"]=293.478,[\"step\"]=20.123,[\"templates\"]={[\"Garuda\"]={{9.5,10.0}},[\"Ifrit\"]={{7.0,9.5},{11.0,11.5}},[\"Titan\"]={{5.0,13.0}}}},[\"anchorOrder\"]={\"p1end\",\"ifrit1\",\"p2end\",\"ifrit2Back\",\"titan1\",\"p3end\",\"titan3Back\",\"magitekBit1\",\"p4end\",\"graniteGaol1\"},[\"ifritArrival\"]=13.603,[\"lahaDelay\"]=14.041}\n-- Separate Ifrit's second dash from his actual phase death.\nS.anchors.ifritDash={after=\"ifrit1\",offset=47.95,spread=2}\nS.anchors.ifritDashBack={after=\"ifritDash\",offset=15.79,spread=1}\nS.anchors.p2end={after=\"ifritDashBack\",offset=17.31,spread=12}\nS.anchors.ifrit2Back={after=\"p2end\",offset=7.55,spread=.75}\nS.anchorOrder={\"p1end\",\"ifrit1\",\"ifritDash\",\"ifritDashBack\",\"p2end\",\"ifrit2Back\",\"titan1\",\"p3end\",\"titan3Back\",\"magitekBit1\",\"p4end\",\"graniteGaol1\"}\nS.phases[#S.phases+1]={\"FullDowntime\",\"ifritDash\",0.1,\"ifritDashBack\",-0.1,1}\nfor _,phase in ipairs(S.phases) do\n if phase[1]==\"FullDowntime\" and phase[2]==\"ifrit1\" and phase[4]==\"ifrit1\" then phase[5]=4.25 end\nend\n-- First Garuda disappearance: corroborated in three recent native logs.\nS.phases[#S.phases+1]={\"FullDowntime\",\"pull\",33.96,\"pull\",38.25,1}\n-- Tonight's native phase-end samples: 16 Garuda ends and 7 final Ifrit returns.\nS.anchors.p1end.offset=145.61\nS.anchors.p1end.spread=27\nS.anchors.p2end.offset=22.312\nS.anchors.p2end.spread=17\nS.cfg={}\nfor k,v in pairs(cfg) do S.cfg[k]=v end\nS.observed={pull=0}\nS.dynamic={}\nS.rouletteWindows={}\nfunction S.time(name)\n if S.observed[name] then return S.observed[name] end\n local a=S.anchors[name]\n return S.time(a.after)+a.offset\nend\nfunction S.union(list)\n table.sort(list,function(a,b)return a[1]<b[1] end)\n local out={}\n for _,w in ipairs(list) do\n  local last=out[#out]\n  if last and w[1]<=last[2] and w[3]==last[3] then last[2]=math.max(last[2],w[2])\n  else out[#out+1]={w[1],w[2],w[3]} end\n end\n return out\nend\nfunction S.rouletteForecast(kind,now)\n if not S.cfg.roulette then return end\n local orders={Garuda={\"Garuda\",\"Ifrit\",\"Titan\"},Ifrit={\"Ifrit\",\"Garuda\",\"Titan\"},Titan={\"Titan\",\"Ifrit\",\"Garuda\"}}\n if kind then\n  if not S.rouletteOrder then S.rouletteOrder=orders[kind];S.rouletteTimes={} end\n  local step=#S.rouletteTimes+1\n  if S.rouletteOrder[step]~=kind then return end\n  S.rouletteTimes[step]=now\n end\n S.rouletteWindows={}\n local function addOrder(order,base,times)\n  local offsets={0,S.roulette.step,S.roulette.step*2}\n  if times and #times>0 then base=times[#times]-S.time(\"p4end\")-offsets[#times] end\n  for i,k in ipairs(order) do\n   local t=times and times[i] or S.time(\"p4end\")+base+offsets[i]\n   for _,w in ipairs(S.roulette.templates[k]) do\n    S.rouletteWindows[#S.rouletteWindows+1]={t+w[1],t+w[2],1}\n   end\n  end\n end\n if S.rouletteOrder then addOrder(S.rouletteOrder,0,S.rouletteTimes)\n else\n  -- Initial estimates use the reference's three possible orders. Prepare events narrow them.\n  for _,order in pairs(orders) do addOrder(order,S.roulette.first) end\n end\nend\nfunction S.publish()\n local now=A.getAutoSimTime()\n local finish=math.max(now+5,S.time(S.kill.after)+S.kill.offset)\n A.setAutoSimKillTime(math.min(finish,1259))\n local grouped={FullDowntime={},CasterDowntime={},Stun={},BossModifier={},RaidBuff={},GroundFieldMovement={}}\n local function add(kind,a,b,value)\n  if b>a then grouped[kind][#grouped[kind]+1]={a,b,value or 1} end\n end\n for _,p in ipairs(S.phases) do\n  -- HP-driven deaths are variable. Do not declare the still-live boss unavailable.\n  local hpDeath=p[1]==\"FullDowntime\" and (p[2]==\"p1end\" or p[2]==\"p2end\")\n  if not hpDeath or S.observed[p[2]]~=nil then\n   add(p[1],S.time(p[2])+p[3],S.time(p[4])+p[5],p[6])\n  end\n end\n for _,p in ipairs(S.windows) do\n  local a,b=S.time(p[2])+p[3],S.time(p[4])+p[5]\n  if p[2]==\"titan1\" and S.observed.p3end then b=math.min(b,S.observed.p3end) end\n  add(p[1],a,b,p[6])\n end\n if S.cfg.poolLaha then\n  add(\"BossModifier\",S.time(\"magitekBit1\")+S.lahaDelay,S.time(\"p4end\"),.01)\n end\n if S.cfg.priorityGaols then\n  add(\"BossModifier\",S.time(\"titan1\")+68.966,S.time(\"titan1\")+73.966,1.10)\n  add(\"BossModifier\",S.time(\"p4end\")+227.75,S.time(\"p4end\")+232.75,1.10)\n end\n if S.cfg.raidBuffs then\n  local prev\n  for _,w in ipairs(S.buffwindows) do\n   local t=S.time(w[1])+w[2]\n   if prev then t=math.max(t,prev+120) end\n   add(\"RaidBuff\",t,t+20,1+S.cfg.buffGain/100)\n   prev=t\n  end\n end\n for _,w in ipairs(S.rouletteWindows) do add(\"CasterDowntime\",w[1],w[2],1) end\n local roster=AnyoneCore.Roster\n local isR2=roster and roster.current() and roster.mySlot()==\"R2\"\n if isR2 and not S.lbObserved then\n  local lb=S.time(\"titan3Back\")+4\n  add(\"Stun\",lb,lb+12.6,1)\n end\n for _,w in pairs(S.dynamic) do add(w[1],w[2],w[3],w[4]) end\n for kind,list in pairs(grouped) do\n  A.clearAutoSimPhases(kind)\n  -- All absolute same-type overlaps are merged before submission.\n  if kind==\"BossModifier\" or kind==\"RaidBuff\" then\n   local cuts,seen={},{}\n   for _,w in ipairs(list) do for i=1,2 do if not seen[w[i]] then cuts[#cuts+1]=w[i];seen[w[i]]=true end end end\n   table.sort(cuts)\n   for i=1,#cuts-1 do\n    local value,active=1,false\n    for _,w in ipairs(list) do if w[1]<=cuts[i] and w[2]>=cuts[i+1] then value=value*w[3];active=true end end\n    if active then A.addAutoSimPhase(kind,cuts[i],cuts[i+1],value) end\n   end\n  else\n   for _,w in ipairs(S.union(list)) do A.addAutoSimPhase(kind,w[1],w[2],w[3]) end\n  end\n end\n A.clearAutoSimUncertainty()\n A.addAutoSimUncertainty(0,2)\n local uncertainty=2\n for _,name in ipairs(S.anchorOrder) do\n  if not S.observed[name] then\n   local anchor=S.anchors[name]\n   uncertainty=math.max(uncertainty,anchor.spread)\n   A.addAutoSimUncertainty(S.time(name)-25,uncertainty)\n  end\n end\n A.addAutoSimUncertainty(math.max(0,finish-30),math.max(uncertainty,S.kill.spread))\nend\nfunction S.resync(name,now)\n if S.observed[name] then return end\n S.observed[name]=now\n S.rouletteForecast()\n S.publish()\n if not S.ifritStarted then\n  local untilIfrit=S.time(\"p1end\")+S.ifritArrival\n  A.holdActionUntil(846,Now()+math.max(0,untilIfrit-now)*1000)\n end\nend\nS.rouletteForecast()\nA.setAutoSimUnexpectedMovementPct(.05)\nS.publish()\nA.holdActionUntil(846,Now()+math.max(0,S.time(\"p1end\")+S.ifritArrival-A.getAutoSimTime())*1000)\ndata.uwuBLMAutoSim=S\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -674,59 +652,6 @@ local tbl =
 			},
 		},
 	},
-	[3] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "df51ecd5-245c-cf81-1f90-b56f1288d805",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "7a1e5593-990f-4b37-be33-24816922e603",
-			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
-		},
-	},
-	[4] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "7003e9ce-7675-9c72-a276-259c68fb1d7e",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[6] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "10bf8be0-0b68-e284-5c91-9faa7d9c8fd0",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
 	[8] = 
 	{
 		
@@ -734,25 +659,126 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "818306fa-8e15-1cd6-5e78-bf10e720016a",
+				name = "BLM AutoSim",
+				uuid = "c2b0cc48-912e-0a34-8e2a-a7f24a60cbc7",
 			},
-			inheritanceRoot = "UWU\\Draws LPDU",
 			objectType = "folder",
 		},
-	},
-	[9] = 
-	{
 		
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "b1e2fc23-91b6-9f9f-906e-f6d1d7b47d93",
+				displayPath = "BLM AutoSim",
+				name = "Targeting",
+				uuid = "7f45f5b3-b087-baa1-b179-56feb74bd099",
 			},
-			inheritanceRoot = "UWU\\Draws LPDU",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"227ab398-b416-294e-a0af-7af8c970653c",
+									true,
+								},
+								
+								{
+									"0a8db094-5dc7-b640-8ce8-c251537148a8",
+									true,
+								},
+								
+								{
+									"d1a9165f-52a1-3476-a398-8fbf7efb6ba8",
+									true,
+								},
+								
+								{
+									"03ceddb8-f817-89cc-a6a4-1219d3046321",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Target - Garuda",
+							setTarget = true,
+							targetContentID = 1644,
+							targetType = "ContentID",
+							uuid = "a0a145b2-dae4-2307-b2a8-17eee6464094",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return true",
+							name = "Built-in AutoSim targeting",
+							uuid = "0a8db094-5dc7-b640-8ce8-c251537148a8",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local t=TensorCore.mGetTarget()\nreturn t==nil or not t.alive or not t.targetable",
+							name = "No living hostile target",
+							uuid = "d1a9165f-52a1-3476-a398-8fbf7efb6ba8",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Garuda",
+							partyTargetContentID = 1644,
+							uuid = "03ceddb8-f817-89cc-a6a4-1219d3046321",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "227ab398-b416-294e-a0af-7af8c970653c",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/Targeting",
+				loop = true,
+				mechanicTime = 34,
+				name = "[BLM UWU] [Target] Garuda Reacquire",
+				throttleTime = 250,
+				timeRange = true,
+				timelineIndex = 8,
+				timerEndOffset = 147,
+				uuid = "a19f4c35-2b95-43e6-911e-1848903ab4e8",
+				version = 2,
+			},
 		},
 	},
 	[10] = 
@@ -762,118 +788,131 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "2301804b-bbad-412f-b377-6fdddba2937b",
+				name = "BLM AutoSim",
+				uuid = "44297600-1d78-0b3d-a2ff-6077cbe2e40b",
 			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[11] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "f06b3862-d277-c4e6-907a-11ec41a44212",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[12] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "40bfd425-d364-d099-def5-9e23a089f815",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
 			objectType = "folder",
 		},
 		
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "6e42aa63-3a9f-b39f-02dd-d2cd0e29c0d3",
+				displayPath = "BLM AutoSim",
+				name = "Targeting",
+				uuid = "c520d02c-26ea-914a-ae31-6ae47e9c7715",
 			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
-		},
-	},
-	[13] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "f8b607b4-507a-3e38-ae95-a8faca484fa4",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
 			objectType = "folder",
 		},
 		
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "9b012358-ca96-de04-5035-63f275f562c8",
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"2b8c616c-ac7a-2853-ba20-1f2462ca6705",
+									true,
+								},
+								
+								{
+									"3cd9b6c3-153e-b8aa-bf1b-af5e9dc9f691",
+									true,
+								},
+								
+								{
+									"8da24022-5c29-5fbc-b24a-9cf2a7c0e65d",
+									true,
+								},
+								
+								{
+									"ae125f9a-478f-692c-a65b-f6574d1e3c3c",
+									true,
+								},
+							},
+							name = "Target Garuda",
+							setTarget = true,
+							targetType = "Event Entity",
+							uuid = "558c7f01-bd23-3cc4-a316-1e9bdcbeca52",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return true",
+							name = "Built-in AutoSim targeting",
+							uuid = "3cd9b6c3-153e-b8aa-bf1b-af5e9dc9f691",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Became targetable",
+							uuid = "ae125f9a-478f-692c-a65b-f6574d1e3c3c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1644,
+							name = "Garuda",
+							uuid = "8da24022-5c29-5fbc-b24a-9cf2a7c0e65d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "2b8c616c-ac7a-2853-ba20-1f2462ca6705",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/Targeting",
+				eventType = 26,
+				loop = true,
+				mechanicTime = 39,
+				name = "[BLM UWU] [Target] Garuda - Acquire",
+				timeRange = true,
+				timelineIndex = 10,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "3abba45f-a5bf-0632-9dbe-6c9612c6eab2",
+				version = 2,
 			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
-		},
-	},
-	[14] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "259d0027-88b9-8d93-95a7-3669b2621f97",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[15] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "9215b39e-9825-116a-c44d-8f4840a2510e",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
 		},
 	},
 	[17] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "720369f0-efe2-8e5c-717c-70361e7d0a20",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -980,193 +1019,6 @@ local tbl =
 				uuid = "df638cb9-c70a-924b-9d3d-5e77c1a4e110",
 				version = 2,
 			},
-		},
-	},
-	[18] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "96137eb3-c41a-8387-0c64-8ed577b62563",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[19] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "fbc6060a-1a00-2d7e-c607-08644c92063a",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "34ac4c02-b93a-904e-9fa2-a488f215dc32",
-			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
-		},
-	},
-	[20] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "99b07b7a-6ade-28be-af79-0e90e889fb2a",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[21] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "ca1070a3-58e3-ecc7-e16f-465182f6f053",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[22] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "7b94e46c-2555-2110-f502-163e2e6e811c",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[23] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "9e92425d-574b-58d1-e307-da476691aacd",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[26] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "af6861c8-aa80-a454-e891-cb021d8189f8",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "e42b8954-f71a-3738-6a95-7f8ae8ddf6c4",
-			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
-		},
-	},
-	[27] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "80c208e9-3f4a-3845-a16c-9c6b51e5d059",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "334f5d6f-a50a-5e43-ea51-38e51cc8385f",
-			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
-		},
-	},
-	[28] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "21a9db52-628d-4826-e289-7df82389d702",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[30] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "cc8a18d1-9d46-86b5-a386-9db7e0066a41",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[32] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "ce22acc7-5b3b-c99b-a50e-5e41de7ea9b7",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
 		},
 	},
 	[34] = 
@@ -1314,17 +1166,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "8c876eeb-1962-b037-276a-74352057c31b",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "BLM AutoSim",
 				uuid = "6fca8a58-ffc4-70e2-8721-450a793a6f8a",
 			},
@@ -1453,56 +1294,232 @@ local tbl =
 				version = 2,
 			},
 		},
-	},
-	[38] = 
-	{
 		
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "020896d9-1ca5-3ebd-493a-475fabf77dc9",
+				displayPath = "BLM AutoSim",
+				name = "Targeting",
+				uuid = "b964c606-26dd-ff57-9ae3-8ec7054dd214",
 			},
-			inheritanceRoot = "UWU\\Draws LPDU",
 			objectType = "folder",
 		},
 		
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "749067df-06c7-f30b-f0ea-1e71f7a8ed0f",
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"4f0d5d61-b875-5ea6-868d-d68fe1539eee",
+									true,
+								},
+								
+								{
+									"ac6a3617-83be-0fdb-a187-7eed807bbbaa",
+									true,
+								},
+								
+								{
+									"93bdafcf-1c0a-a3f9-a1f7-8b0d5c28dfed",
+									true,
+								},
+								
+								{
+									"d840dcb4-4889-c10d-bcfa-b355e81fd0f3",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Target - Ifrit",
+							setTarget = true,
+							targetContentID = 1185,
+							targetType = "ContentID",
+							uuid = "87667bd1-b230-4b0e-8cf0-39a7d36b4a5a",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return true",
+							name = "Built-in AutoSim targeting",
+							uuid = "ac6a3617-83be-0fdb-a187-7eed807bbbaa",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local t=TensorCore.mGetTarget()\nreturn t==nil or not t.alive or not t.targetable",
+							name = "No living hostile target",
+							uuid = "93bdafcf-1c0a-a3f9-a1f7-8b0d5c28dfed",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Ifrit",
+							partyTargetContentID = 1185,
+							uuid = "d840dcb4-4889-c10d-bcfa-b355e81fd0f3",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "4f0d5d61-b875-5ea6-868d-d68fe1539eee",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/Targeting",
+				loop = true,
+				mechanicTime = 300,
+				name = "[BLM UWU] [Target] Ifrit Reacquire",
+				throttleTime = 250,
+				timeRange = true,
+				timelineIndex = 36,
+				timerEndOffset = 153,
+				uuid = "1d1792fd-cc4d-e2fa-9926-370d0d3a41dc",
+				version = 2,
 			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"d6862bb1-152e-000c-818c-5c7648084b71",
+									true,
+								},
+								
+								{
+									"fb85a5e0-c156-7331-b162-69cff5db85ad",
+									true,
+								},
+								
+								{
+									"929032dd-e4e1-32ac-9df1-298596804004",
+									true,
+								},
+								
+								{
+									"36a7e917-0753-cabe-9cd2-d83c4f38320d",
+									true,
+								},
+							},
+							name = "Target Ifrit",
+							setTarget = true,
+							targetType = "Event Entity",
+							uuid = "f82a6210-9f67-7e48-8b83-c17a765d7f03",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return true",
+							name = "Built-in AutoSim targeting",
+							uuid = "fb85a5e0-c156-7331-b162-69cff5db85ad",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Became targetable",
+							uuid = "36a7e917-0753-cabe-9cd2-d83c4f38320d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1185,
+							name = "Ifrit",
+							uuid = "929032dd-e4e1-32ac-9df1-298596804004",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "d6862bb1-152e-000c-818c-5c7648084b71",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/Targeting",
+				eventType = 26,
+				loop = true,
+				mechanicTime = 300,
+				name = "[BLM UWU] [Target] Ifrit - Acquire",
+				timeRange = true,
+				timelineIndex = 36,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "c48abb93-80c9-9349-9b67-b78a24233551",
+				version = 2,
+			},
 		},
 	},
 	[39] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "cda45078-ad87-ce4c-70c8-8396596a3da8",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "40a62644-a3ba-6620-ab7c-98f64aa0edf4",
-			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -1611,61 +1628,8 @@ local tbl =
 			},
 		},
 	},
-	[40] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "708c75e8-864a-4fe4-0550-65e2fd6a8f98",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[41] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "80be3209-cca7-d655-37e6-adcb045a42f9",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[42] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "33bdf8d6-f6d2-5052-0d9b-3534f1ed7cc6",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
 	[43] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "375f7b9f-6c58-e6bb-55a5-01a5b52c4f0f",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -1680,17 +1644,6 @@ local tbl =
 				loop = false,
 				throttleTime = 250,
 			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "313298b1-aa35-3cb5-2f1b-36e3d140ebe1",
-			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
 		},
 		
 		{
@@ -1893,58 +1846,8 @@ local tbl =
 			},
 		},
 	},
-	[44] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "2de6a50c-fe15-7560-a6fa-e11e11b7f8bc",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[45] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "e453407d-56b1-6be1-3a82-2da72907166d",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "6822bbcb-0340-9fd7-00a1-41e9eb64bc7b",
-			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
-		},
-	},
 	[46] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "28b98a1a-5d59-d34e-86e8-97704c59d94a",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -1958,34 +1861,6 @@ local tbl =
 			{
 				throttleTime = 1000,
 			},
-		},
-	},
-	[47] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "ce47bcc3-a015-3dd7-a628-c5b1411b02f3",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[48] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "262dee00-50bd-596c-10ab-338aab3ef030",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
 		},
 	},
 	[50] = 
@@ -2126,114 +2001,8 @@ local tbl =
 			},
 		},
 	},
-	[52] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "b47d0979-89b1-6d45-45d1-2eafd09f4269",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[53] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "ad8d5618-f4e7-d954-5c9b-b266ff459b48",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[55] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "fc7c9fca-b545-5dbe-7a06-7bdce98db4fa",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[57] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "c1dabf3c-6fbc-5610-2248-feeacb721dec",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[58] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "e2c138e7-0842-2bd3-9975-f9111aca0257",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[61] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "db35cb27-a370-31c3-439f-a2fd67faea97",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "7d379e69-6259-7a2d-eb8c-5f4b82d0bfd9",
-			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
-		},
-	},
 	[63] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "46dc6331-b97b-b57d-2d94-1f43cad04aa1",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -2597,125 +2366,8 @@ local tbl =
 			},
 		},
 	},
-	[65] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "d89a4b4b-0c87-f09f-e00a-9489913b5e7b",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[66] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "ae4ed2b4-45b4-eae8-930a-5b567fe11aa4",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[69] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "7be1c4cf-916a-405b-a566-89f5ca1c863f",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "18c1cda1-85aa-d995-d4a8-cff30d64ef91",
-			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
-		},
-	},
-	[70] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "06458995-95e2-09f1-508a-2bf373ff4b05",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[71] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "3003e124-308a-2bb0-5bc9-024ad6ac4414",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[72] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "415e24fb-b7e9-ade7-3876-3f6d6eda2cab",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
 	[74] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "7af31121-72a9-3fe5-c49b-780fbfc36e91",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "710b6017-afb4-6023-ac72-bee1bfa72907",
-			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -2957,6 +2609,229 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "BLM AutoSim",
+				name = "Targeting",
+				uuid = "b690bbec-3727-6d3d-aeb6-109534d0259e",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"7d079e74-1092-62ee-a558-49c1a8b1e57c",
+									true,
+								},
+								
+								{
+									"409aca1e-54c5-b8a1-b1ad-39bdb80b1095",
+									true,
+								},
+								
+								{
+									"d52a3bb3-f97c-c294-95e5-624074967c68",
+									true,
+								},
+								
+								{
+									"022e4314-bdea-7de3-8d32-81080e74c1e8",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Target - Titan",
+							setTarget = true,
+							targetContentID = 1801,
+							targetType = "ContentID",
+							uuid = "09f3bb1c-62e0-5119-856e-052db4df2dfa",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return true",
+							name = "Built-in AutoSim targeting",
+							uuid = "409aca1e-54c5-b8a1-b1ad-39bdb80b1095",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local t=TensorCore.mGetTarget()\nreturn t==nil or not t.alive or not t.targetable",
+							name = "No living hostile target",
+							uuid = "d52a3bb3-f97c-c294-95e5-624074967c68",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Titan",
+							partyTargetContentID = 1801,
+							uuid = "022e4314-bdea-7de3-8d32-81080e74c1e8",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "7d079e74-1092-62ee-a558-49c1a8b1e57c",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/Targeting",
+				loop = true,
+				mechanicTime = 600,
+				name = "[BLM UWU] [Target] Titan Reacquire",
+				throttleTime = 250,
+				timeRange = true,
+				timelineIndex = 74,
+				timerEndOffset = 168,
+				uuid = "daef54a7-625d-959e-89cb-8ef6c8f82d27",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"bb038b93-7932-51ee-9561-74acb38aadfb",
+									true,
+								},
+								
+								{
+									"b707b3f2-4a09-4634-a0df-157f82c844d3",
+									true,
+								},
+								
+								{
+									"ecb82bf5-7e8f-c410-bc70-c6f2204a4225",
+									true,
+								},
+								
+								{
+									"a0a16347-3ac1-3027-9cd4-3b8f82e32086",
+									true,
+								},
+							},
+							name = "Target Titan",
+							setTarget = true,
+							targetType = "Event Entity",
+							uuid = "df922900-9e50-cdc0-ba3a-9d2f630226c5",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return true",
+							name = "Built-in AutoSim targeting",
+							uuid = "b707b3f2-4a09-4634-a0df-157f82c844d3",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Became targetable",
+							uuid = "a0a16347-3ac1-3027-9cd4-3b8f82e32086",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1801,
+							name = "Titan",
+							uuid = "ecb82bf5-7e8f-c410-bc70-c6f2204a4225",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "bb038b93-7932-51ee-9561-74acb38aadfb",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/Targeting",
+				eventType = 26,
+				loop = true,
+				mechanicTime = 600,
+				name = "[BLM UWU] [Target] Titan - Acquire",
+				timeRange = true,
+				timelineIndex = 74,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "14762ebd-1b3a-8be8-b58b-879ee566defa",
+				version = 2,
+			},
+		},
 	},
 	[75] = 
 	{
@@ -3068,61 +2943,8 @@ local tbl =
 			},
 		},
 	},
-	[76] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "181db117-b920-d80b-13c9-6bf9748be687",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[77] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "a65de28e-5cce-3e22-0cd9-b898ca71907e",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[78] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "1810169d-89a5-7e79-4344-c58b1a053a0d",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
 	[79] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "30e1daac-82b5-cb18-e6f2-2ba2a053f15c",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -3259,69 +3081,8 @@ local tbl =
 			},
 		},
 	},
-	[82] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "4e458caa-7351-35ae-8839-62e0d85829da",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "dd99f662-b6ce-617e-7b6d-987cf70d7912",
-			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
-		},
-	},
-	[84] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "833d1b78-1409-7ec4-80f6-3dd20f0308a8",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
 	[85] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "b7a161d9-52df-51b5-f67c-d43b619048c9",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "b1ff50df-fe55-13b3-130c-09353517d60f",
-			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -3878,84 +3639,295 @@ local tbl =
 				version = 2,
 			},
 		},
-	},
-	[86] = 
-	{
 		
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "8d64d326-f23f-d8b2-106e-3d6461595a96",
+				displayPath = "BLM AutoSim",
+				name = "Targeting",
+				uuid = "0d6e79a3-6c1d-f5eb-9cf7-20f676acdb70",
 			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[87] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "1144a26f-10d4-949b-56cb-c3d539cb1e5f",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[89] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "6a21c345-9c74-4f49-9488-06ff17fb4b35",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
 			objectType = "folder",
 		},
 		
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "8a778743-e4e1-c58f-d442-73514e8b2433",
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"de8000c8-ca86-9991-882a-2575aba36a0b",
+									true,
+								},
+								
+								{
+									"83bfbc47-df09-c3f7-8397-e11322773118",
+									true,
+								},
+								
+								{
+									"90f06ac1-7d64-654e-918e-d95174d468ba",
+									true,
+								},
+								
+								{
+									"5c023a64-b92a-60bb-b097-b01ebc8ae3dc",
+									true,
+								},
+							},
+							name = "Target nearest Granite Gaol",
+							setTarget = true,
+							targetContentID = 1804,
+							targetType = "ContentID",
+							uuid = "baf380a3-3f87-2455-9c5d-0cc70b089e38",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return true",
+							name = "Built-in AutoSim targeting",
+							uuid = "83bfbc47-df09-c3f7-8397-e11322773118",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Became targetable",
+							uuid = "5c023a64-b92a-60bb-b097-b01ebc8ae3dc",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1804,
+							name = "Event entity",
+							uuid = "90f06ac1-7d64-654e-918e-d95174d468ba",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "de8000c8-ca86-9991-882a-2575aba36a0b",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/Targeting",
+				enabled = false,
+				eventType = 26,
+				loop = true,
+				mechanicTime = 639,
+				name = "[BLM UWU] [Target] Titan Gaols - Acquire",
+				timeRange = true,
+				timelineIndex = 85,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "27e7e348-4606-1f85-8fda-caa60efeba6d",
+				version = 2,
 			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"00e70d09-7805-8bc0-a82d-61a899eb98f3",
+									true,
+								},
+								
+								{
+									"18913bd3-e7ec-8d90-8a0f-fea71aa58224",
+									true,
+								},
+								
+								{
+									"19f4269f-df56-b406-88d1-b814da84398f",
+									true,
+								},
+								
+								{
+									"ec3928ef-dfd9-7ed0-a342-c380d7266613",
+									true,
+								},
+								
+								{
+									"0935be8d-508d-7747-aa9b-955340556cc4",
+									true,
+								},
+							},
+							name = "Target next Granite Gaol",
+							setTarget = true,
+							targetType = "Detection Target",
+							uuid = "63263ccb-0826-249b-a0b0-0b6ed3d884f3",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"00e70d09-7805-8bc0-a82d-61a899eb98f3",
+									true,
+								},
+								
+								{
+									"18913bd3-e7ec-8d90-8a0f-fea71aa58224",
+									true,
+								},
+								
+								{
+									"19f4269f-df56-b406-88d1-b814da84398f",
+									true,
+								},
+								
+								{
+									"ec3928ef-dfd9-7ed0-a342-c380d7266613",
+									true,
+								},
+								
+								{
+									"0935be8d-508d-7747-aa9b-955340556cc4",
+									false,
+								},
+							},
+							name = "Restore Titan target",
+							setTarget = true,
+							targetContentID = 1801,
+							targetType = "ContentID",
+							uuid = "b0cd5394-3b7b-637b-9a38-353212b1fd99",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return true",
+							name = "Built-in AutoSim targeting",
+							uuid = "18913bd3-e7ec-8d90-8a0f-fea71aa58224",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Targetable gaol remains",
+							partyTargetContentID = 1804,
+							uuid = "0935be8d-508d-7747-aa9b-955340556cc4",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1804,
+							name = "Event entity",
+							uuid = "19f4269f-df56-b406-88d1-b814da84398f",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							eventBoolValue = 2,
+							name = "Became untargetable",
+							uuid = "ec3928ef-dfd9-7ed0-a342-c380d7266613",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "00e70d09-7805-8bc0-a82d-61a899eb98f3",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/Targeting",
+				enabled = false,
+				eventType = 26,
+				loop = true,
+				mechanicTime = 639,
+				name = "[BLM UWU] [Target] Titan Gaols - Advance",
+				timeRange = true,
+				timelineIndex = 85,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "02719e5b-f264-eacb-b906-535d1640a0aa",
+				version = 2,
+			},
 		},
 	},
 	[90] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "8866a503-65f7-0b27-13d5-5ac59b898333",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "dc17ea6d-d539-5e69-d072-41c34a5f531d",
-			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -4053,58 +4025,8 @@ local tbl =
 			},
 		},
 	},
-	[92] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "477cc9bd-d19d-a331-ebd3-d16bb15f0dad",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[94] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "e9ede4df-635b-8b4b-2bd6-7b51cbbefe4f",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
 	[95] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "117c2116-30c5-4362-f9e0-4390bc7c3306",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "2812f576-7f89-1f2a-cbf4-1f2cf0229126",
-			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -4312,150 +4234,303 @@ local tbl =
 				version = 2,
 			},
 		},
-	},
-	[96] = 
-	{
 		
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "11b30f49-8119-df25-2d6f-0f47468f7239",
+				displayPath = "BLM AutoSim",
+				name = "Targeting",
+				uuid = "19bf0ee3-b8fd-5242-a34d-cdec6b240014",
 			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[98] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "8613549b-06a3-04cf-7600-d3cd287784cb",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
 			objectType = "folder",
 		},
 		
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "e315b3d5-70c3-8da1-09a3-699b1a7eb985",
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"69fbf354-fd74-3d65-a1e5-65a156d3bf46",
+									true,
+								},
+								
+								{
+									"d31e7e61-ca34-f294-96e1-73233a894fb3",
+									true,
+								},
+								
+								{
+									"16b1fc8c-db89-db87-b8f7-de601471e725",
+									true,
+								},
+								
+								{
+									"ccdda4f1-62b6-b81e-ae33-c912387ca376",
+									true,
+								},
+								
+								{
+									"f6a8966d-f0e9-3a73-a407-73780bbc1ef3",
+									true,
+								},
+							},
+							name = "Target newly targetable gaol",
+							setTarget = true,
+							targetType = "Event Entity",
+							uuid = "4f3a3fb4-595e-73d0-8a42-d46fe7843b79",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1804,
+							name = "Granite Gaol 1804",
+							uuid = "16b1fc8c-db89-db87-b8f7-de601471e725",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Became targetable",
+							uuid = "ccdda4f1-62b6-b81e-ae33-c912387ca376",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local Roster = AnyoneCore.Roster\nif not Roster or not Roster.current() then return false end\nlocal slot = Roster.mySlot()\nif not slot then return false end\nreturn slot == \"H1\" or slot == \"H2\" or slot == \"M1\" or slot == \"M2\" or slot == \"R1\" or slot == \"R2\"",
+							name = "Roster: DPS/healers",
+							uuid = "f6a8966d-f0e9-3a73-a407-73780bbc1ef3",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return true",
+							name = "Built-in AutoSim targeting",
+							uuid = "d31e7e61-ca34-f294-96e1-73233a894fb3",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "69fbf354-fd74-3d65-a1e5-65a156d3bf46",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/Targeting",
+				eventType = 26,
+				mechanicTime = 684,
+				name = "[BLM UWU] [Target][Titan] Granite Gaol - Non-Tanks",
+				timeRange = true,
+				timelineIndex = 95,
+				timerEndOffset = 13,
+				timerStartOffset = 3,
+				uuid = "70185f3d-db42-526a-bc8e-5bb486dd6e2b",
+				version = 2,
 			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
 		},
-	},
-	[99] = 
-	{
 		
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "09197a7a-9fec-80a6-6a37-d170cfbf2faa",
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"6e799f92-0629-333d-9243-9d21e628bec0",
+									true,
+								},
+								
+								{
+									"251f84e1-fd09-9063-9d12-59cb4e801a8e",
+									true,
+								},
+								
+								{
+									"2cb11c8f-ab48-9039-bf78-e33d1f023ed8",
+									true,
+								},
+								
+								{
+									"cf276701-59c1-65b5-a933-993cd9bbe256",
+									true,
+								},
+								
+								{
+									"119df58b-6e90-65e1-abee-e98a5f158e4c",
+									true,
+								},
+							},
+							name = "Target next Granite Gaol",
+							setTarget = true,
+							targetType = "Detection Target",
+							uuid = "bdcabef7-8bec-76c1-867f-19c25c735770",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"6e799f92-0629-333d-9243-9d21e628bec0",
+									true,
+								},
+								
+								{
+									"251f84e1-fd09-9063-9d12-59cb4e801a8e",
+									true,
+								},
+								
+								{
+									"2cb11c8f-ab48-9039-bf78-e33d1f023ed8",
+									true,
+								},
+								
+								{
+									"cf276701-59c1-65b5-a933-993cd9bbe256",
+									true,
+								},
+								
+								{
+									"119df58b-6e90-65e1-abee-e98a5f158e4c",
+									false,
+								},
+							},
+							name = "Restore Titan target",
+							setTarget = true,
+							targetContentID = 1801,
+							targetType = "ContentID",
+							uuid = "ba07b2f8-44c9-e956-b97e-98210092f11c",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return true",
+							name = "Built-in AutoSim targeting",
+							uuid = "251f84e1-fd09-9063-9d12-59cb4e801a8e",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1804,
+							name = "Event entity",
+							uuid = "2cb11c8f-ab48-9039-bf78-e33d1f023ed8",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							eventBoolValue = 2,
+							name = "Became untargetable",
+							uuid = "cf276701-59c1-65b5-a933-993cd9bbe256",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Targetable gaol remains",
+							partyTargetContentID = 1804,
+							uuid = "119df58b-6e90-65e1-abee-e98a5f158e4c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "6e799f92-0629-333d-9243-9d21e628bec0",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/Targeting",
+				eventType = 26,
+				loop = true,
+				mechanicTime = 684,
+				name = "[BLM UWU] [Target] Healer Gaol - Advance",
+				timeRange = true,
+				timelineIndex = 95,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "5d73c5a6-05f7-f951-b606-06dd401478bf",
+				version = 2,
 			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
-		},
-	},
-	[100] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "83721a1b-deca-50f7-2aaf-d9e9890d300b",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[101] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "64dd5e32-9295-656e-5956-32c82cba9622",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[102] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "c57cd735-b030-7e81-df29-757f429597e5",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "152ae833-20b6-4037-bb5a-5ad1fb2da823",
-			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
-		},
-	},
-	[107] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "4379f7c0-973c-9184-439e-4c7a007683b0",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[109] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "85d9b5da-19e8-cbd6-d2da-d160a1916cca",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "bdad3d12-b12d-d536-6285-7ffc9a01fbc2",
-			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
 		},
 	},
 	[113] = 
@@ -4722,17 +4797,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "4d8b7190-373d-3f14-8c15-01eecb42bb00",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "BLM AutoSim",
 				uuid = "0e0401d1-1205-c2a2-8c2a-4db041b802e5",
 			},
@@ -4845,34 +4909,361 @@ local tbl =
 				version = 2,
 			},
 		},
-	},
-	[115] = 
-	{
 		
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "7f81a951-d490-4605-d849-ed776f1a7881",
+				displayPath = "BLM AutoSim",
+				name = "Targeting",
+				uuid = "9f286d33-35b4-eded-b731-2ffda9a66c94",
 			},
-			inheritanceRoot = "UWU\\Draws LPDU",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"a6213eaf-b5c9-1590-b374-3b459ae79819",
+									true,
+								},
+								
+								{
+									"d3a681c8-450d-6037-ad6e-65f3444e939b",
+									true,
+								},
+								
+								{
+									"e718fc55-10a7-3591-8779-6e767f9b8e18",
+									true,
+								},
+								
+								{
+									"7367b1ca-fc53-ce2c-873a-302c1fda5ea9",
+									true,
+								},
+							},
+							name = "Target nearest Magitek Bit",
+							setTarget = true,
+							targetContentID = 5563,
+							targetType = "ContentID",
+							uuid = "16daf560-0a84-f74b-b751-1bad91d5c53d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return true",
+							name = "Built-in AutoSim targeting",
+							uuid = "d3a681c8-450d-6037-ad6e-65f3444e939b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 5563,
+							name = "Event entity",
+							uuid = "e718fc55-10a7-3591-8779-6e767f9b8e18",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Became targetable",
+							uuid = "7367b1ca-fc53-ce2c-873a-302c1fda5ea9",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "a6213eaf-b5c9-1590-b374-3b459ae79819",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/Targeting",
+				eventType = 26,
+				loop = true,
+				mechanicTime = 800,
+				name = "[BLM UWU] [Target] Magitek Bits",
+				timeRange = true,
+				timelineIndex = 114,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "13a1c497-4c76-cf45-9bcf-948295a77f5b",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "BLM AutoSim",
+				name = "P4 Bits",
+				uuid = "4604dc80-ff4e-4166-a644-31d6ff3d998d",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local roster=AnyoneCore.Roster\nif not roster or not roster.current() or roster.mySlot()~=\"R2\" then return end\nlocal S=data.uwuBLMAutoSim\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nS.lbObserved=true;S.lbStarted=now\nS.dynamic.meteorLock={\"Stun\",now,now+12.6,1}\nS.publish();self.used=true",
+							conditions = 
+							{
+								
+								{
+									"d3779085-4377-62c6-99aa-87b52d079642",
+									true,
+								},
+								
+								{
+									"6deb0774-aa45-3bc0-b4d6-501923a3809d",
+									true,
+								},
+								
+								{
+									"82916ddc-dca3-b91e-8626-630be10ba70b",
+									true,
+								},
+								
+								{
+									"898ed3d9-a4aa-1e6f-9cc1-e5abeca403ed",
+									true,
+								},
+							},
+							name = "Correct personal Meteor stun",
+							uuid = "0e40f824-a3d4-b87a-8302-cb1dc3fe7277",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU only",
+							uuid = "d3779085-4377-62c6-99aa-87b52d079642",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "6deb0774-aa45-3bc0-b4d6-501923a3809d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Meteor",
+							spellIDList = 
+							{
+								205,
+							},
+							uuid = "82916ddc-dca3-b91e-8626-630be10ba70b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityID==Player.id and data.uwuBLMAutoSim~=nil",
+							dequeueIfLuaFalse = true,
+							name = "Personal Meteor",
+							uuid = "898ed3d9-a4aa-1e6f-9cc1-e5abeca403ed",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/P4 Bits",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 800,
+				name = "[BLM UWU] Meteor start animation-lock forecast",
+				timeRange = true,
+				timelineIndex = 114,
+				timerEndOffset = 35,
+				timerStartOffset = -20,
+				uuid = "c7310f9a-9d92-dfcb-9134-74097dd99936",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local roster=AnyoneCore.Roster\nif not roster or not roster.current() or roster.mySlot()~=\"R2\" then return end\nlocal S=data.uwuBLMAutoSim\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nS.lbObserved=true\nS.dynamic.meteorLock={\"Stun\",S.lbStarted or now-4.5,now+8.1,1}\nS.publish();self.used=true",
+							conditions = 
+							{
+								
+								{
+									"f6b92227-46f4-c3df-983b-79006624293c",
+									true,
+								},
+								
+								{
+									"01b098d1-7e70-b3e7-94a3-0df036ed4f0b",
+									true,
+								},
+								
+								{
+									"ea4a7c13-9bc6-d67d-943c-b5d0fa2af869",
+									true,
+								},
+								
+								{
+									"7305e222-74df-1b8b-8a7f-66c2ee957c20",
+									true,
+								},
+							},
+							name = "Correct personal Meteor stun",
+							uuid = "5f6e010a-c2ca-645a-8248-c356551f641c",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU only",
+							uuid = "f6b92227-46f4-c3df-983b-79006624293c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "01b098d1-7e70-b3e7-94a3-0df036ed4f0b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Meteor",
+							spellIDList = 
+							{
+								205,
+							},
+							uuid = "ea4a7c13-9bc6-d67d-943c-b5d0fa2af869",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityID==Player.id and data.uwuBLMAutoSim~=nil",
+							dequeueIfLuaFalse = true,
+							name = "Personal Meteor",
+							uuid = "7305e222-74df-1b8b-8a7f-66c2ee957c20",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/P4 Bits",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 800,
+				name = "[BLM UWU] Meteor finish animation-lock forecast",
+				timeRange = true,
+				timelineIndex = 114,
+				timerEndOffset = 35,
+				timerStartOffset = -20,
+				uuid = "097ae68c-0c6f-8e8d-ab78-9a2bf0fd040a",
+				version = 2,
+			},
 		},
 	},
 	[116] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "9314793e-f69c-d342-05d8-5d80517f5f6e",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -5008,20 +5399,106 @@ local tbl =
 				version = 2,
 			},
 		},
-	},
-	[117] = 
-	{
 		
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "811a3d47-cf6b-27ab-a9b0-1b019db44af7",
+				displayPath = "BLM AutoSim",
+				name = "Targeting",
+				uuid = "f5b39593-e680-624d-a87e-165d1db944fb",
 			},
-			inheritanceRoot = "UWU\\Draws LPDU",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"ca39464a-c04a-3077-96a5-fa0f23fa13f1",
+									true,
+								},
+								
+								{
+									"f913211b-5d54-e321-8029-f4046ccb7115",
+									true,
+								},
+								
+								{
+									"ce591b5f-5fe0-2031-8db7-15ba7b996337",
+									true,
+								},
+							},
+							name = "Target Lahabrea",
+							setTarget = true,
+							targetContentID = 2143,
+							targetType = "ContentID",
+							uuid = "df71be55-2fcd-b70e-af19-10e1bc2bb874",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local e = TensorCore.getEntityByGroup(\"ContentID\", {contentid=2143, subgroup=\"Nearest\"})\nreturn e ~= nil and e.targetable == true",
+							name = "Lahabrea targetable",
+							uuid = "ce591b5f-5fe0-2031-8db7-15ba7b996337",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return true",
+							name = "Built-in AutoSim targeting",
+							uuid = "f913211b-5d54-e321-8029-f4046ccb7115",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "ca39464a-c04a-3077-96a5-fa0f23fa13f1",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/Targeting",
+				mechanicTime = 840,
+				name = "[BLM UWU] [Target] Lahabrea on Targetable",
+				timeRange = true,
+				timelineIndex = 116,
+				timerEndOffset = -10,
+				timerStartOffset = -19,
+				uuid = "f9547a8a-8a00-c15e-9929-67dce0cf6365",
+				version = 2,
+			},
+		},
+	},
+	[117] = 
+	{
 		
 		{
 			data = 
@@ -5161,17 +5638,6 @@ local tbl =
 			data = 
 			{
 				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "9188d81c-617c-9c38-0863-f99ad2fb720c",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
 				name = "BLM AutoSim",
 				uuid = "702fa37f-c277-7c9e-8ded-c1d2cb68f825",
 			},
@@ -5273,756 +5739,232 @@ local tbl =
 				version = 2,
 			},
 		},
-	},
-	[119] = 
-	{
 		
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "c9ac01cd-e467-2e99-adf2-2c4389680d7d",
+				displayPath = "BLM AutoSim",
+				name = "Targeting",
+				uuid = "32225081-305f-566e-8db7-9159f06b96df",
 			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[120] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "34808761-c87e-4b1d-7cbb-ab03df3e6391",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[121] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "a44a727c-559b-61c0-7be8-4a923cd7ec6c",
-			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
-		},
-	},
-	[123] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "3b28eece-62bb-cc3a-ccb4-5f4ce9ec857e",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[125] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "64196b64-7e30-9b88-05d1-2716f6273914",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[127] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "d4a16bd2-852a-6e76-b37a-d528b586cd42",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[130] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "af74304a-1d0d-2e06-887f-189c21a5c63a",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[132] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "74d24fbc-f6c1-47d8-429a-92aaa03a092c",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[133] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "8c216d6d-a720-6d39-dd07-87d38768451d",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[134] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "5507d3c6-61cd-058a-7792-217844146876",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[136] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "6084e698-2e26-cffc-81b9-d9263d1a9588",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[137] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "677499f9-11f0-08ad-0599-a86f2477e3a9",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[138] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "3a9d59a2-f81c-b31e-c9ad-355416b80212",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[140] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "ea570c1f-4681-b333-0b6f-a52deb39f34f",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
 			objectType = "folder",
 		},
 		
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "dd791631-fb64-631d-dc4e-a43bc57ff521",
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"79eba2e6-fcb3-c67a-bcc3-e27d1dd7ef84",
+									true,
+								},
+								
+								{
+									"9c10c039-c70d-ce62-8c66-98d2673e9140",
+									true,
+								},
+								
+								{
+									"ab0a9c6b-8955-7d9c-ad9c-86a3d0cd9d7a",
+									true,
+								},
+								
+								{
+									"3de2361b-7617-75f3-8c02-65a3797e237d",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Target - Ultima",
+							setTarget = true,
+							targetContentID = 2137,
+							targetType = "ContentID",
+							uuid = "a3ca0550-b8f2-410b-8d70-ea951bf9f64d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return true",
+							name = "Built-in AutoSim targeting",
+							uuid = "9c10c039-c70d-ce62-8c66-98d2673e9140",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Ultima",
+							partyTargetContentID = 2137,
+							uuid = "3de2361b-7617-75f3-8c02-65a3797e237d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local t=TensorCore.mGetTarget()\nreturn t==nil or not t.alive or not t.targetable",
+							name = "No living hostile target",
+							uuid = "ab0a9c6b-8955-7d9c-ad9c-86a3d0cd9d7a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "79eba2e6-fcb3-c67a-bcc3-e27d1dd7ef84",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/Targeting",
+				loop = true,
+				mechanicTime = 1000,
+				name = "[BLM UWU] [Target] Ultima Reacquire",
+				throttleTime = 250,
+				timeRange = true,
+				timelineIndex = 118,
+				timerEndOffset = 650,
+				uuid = "4420d42e-d366-712e-a5ee-5c0a245416d9",
+				version = 2,
 			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
 		},
-	},
-	[141] = 
-	{
 		
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "e6b58956-ac34-3a8a-27a6-6c7cdbf72806",
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"b79e4c13-cb1c-8773-b856-9aae84531f44",
+									true,
+								},
+								
+								{
+									"2a1e7bee-9b49-1fde-9b93-e144c3982a02",
+									true,
+								},
+								
+								{
+									"d278b874-baac-959e-b2f1-cbcafeca733e",
+									true,
+								},
+								
+								{
+									"cd383311-f28d-7f57-9707-fb6d3c9f7ec6",
+									true,
+								},
+							},
+							name = "Target Ultima",
+							setTarget = true,
+							targetType = "Event Entity",
+							uuid = "d78cb6a2-8845-d3d4-97e1-cdf8038fa623",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return true",
+							name = "Built-in AutoSim targeting",
+							uuid = "2a1e7bee-9b49-1fde-9b93-e144c3982a02",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 2137,
+							name = "Ultima",
+							uuid = "d278b874-baac-959e-b2f1-cbcafeca733e",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Became targetable",
+							uuid = "cd383311-f28d-7f57-9707-fb6d3c9f7ec6",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "b79e4c13-cb1c-8773-b856-9aae84531f44",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/Targeting",
+				eventType = 26,
+				loop = true,
+				mechanicTime = 1000,
+				name = "[BLM UWU] [Target] Ultima - Acquire",
+				timeRange = true,
+				timelineIndex = 118,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "5a0eadf4-5d99-80a0-8017-6d8ea3319c3f",
+				version = 2,
 			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[142] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "33b5c289-5c57-3dad-f59a-1ab3660a6739",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[144] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "813f4d43-76b7-2e4f-a0a0-09b9bb047833",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[146] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "974ad0fd-f187-a239-25cf-95cfd0da02ad",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[147] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "e0de358c-4128-7cd8-168c-ca86ed10c9fc",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[148] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "ab970e77-d36f-b4cb-a046-70254a8df9a7",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "3ff3fbf9-cb83-c985-1633-1e6329f5c5e9",
-			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
-		},
-	},
-	[149] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "5f6222ee-a0d9-6ce2-583c-a3b4b706ad1e",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[150] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "2e4959b8-d334-c2cc-bb69-f2162e7dfda8",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[151] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "b133ec19-4252-333d-93db-b5df810b3dc9",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[152] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "b046e066-8350-59da-6913-a02880d44f96",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[153] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "997c5caf-833c-0e83-bba0-e0495946135f",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[155] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "4762f28d-0c88-78c9-3254-7603b6d4f83d",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[156] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "75f42cea-0c51-8a96-824d-2a4cf7d31eda",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[157] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "6688a913-e4c3-4e5f-f16a-9abdf7bed383",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[158] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "0c70bb50-841d-a844-927d-c6aeb57360c0",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[159] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "ed212711-c2f3-7b35-ee28-0c37b51a2a41",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[160] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "a9502fa5-b276-cb59-ce9c-7e07522cf955",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[161] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "61466334-7e12-84f8-2482-27fe0bcf72e4",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[162] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "8b91dbcb-0c1a-0bef-19d4-0611f1de09bb",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[164] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "f9d3f3b1-c722-a5cd-c8ea-c42bdc368ee1",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[166] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "8e2d5ba7-e387-eb53-ce0f-e285259a60d7",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[167] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "faa60f1e-491a-f62a-30bc-db94e2def64e",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[169] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "30b02bfc-4b02-1590-dcf9-bf66d6427c6c",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[170] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "9b87862e-6dd0-9c22-2e26-6ca02b9efd5e",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[171] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "f731cbb7-ca23-360b-24e0-e2213d6ed0e7",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[172] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "47273e9c-845a-3018-cd09-429e4ba3a28c",
-			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
-		},
-	},
-	[173] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "f8b98c41-83ab-9de5-c20b-82171b672cf1",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[175] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "390ae51b-c8ec-0be7-b033-5a953ea5fb0b",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[177] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "7b15a235-a6e4-67f1-eb4b-f5fbf82e62e5",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[178] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "c473b196-e2a7-72ca-77b0-3808fcbddb46",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[179] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "9ce5755f-d768-9c73-5f0d-8629bffcad8f",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[182] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "7f44cccd-7b97-7269-c277-b2c73f00d87d",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[183] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "4721a31c-aa3d-cb48-d471-eebe88943d0c",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[185] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "1b1ba786-e899-b7f2-cc2b-193804af1c36",
-			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
-		},
-	},
-	[186] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "6a98f259-9967-abdd-80dc-74ebdb6bca09",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[188] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "f517ca6b-c5c2-3257-f65d-9cd916ef635b",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[189] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "3c3cf902-8306-c7ce-c1f9-567876cc1072",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
 		},
 	},
 	[190] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "e4253fec-a862-bf98-8e05-817a7567b15c",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -6230,90 +6172,293 @@ local tbl =
 				version = 2,
 			},
 		},
-	},
-	[191] = 
-	{
 		
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "07229ddd-af52-72f9-be65-76a3ef18fa0d",
+				displayPath = "BLM AutoSim",
+				name = "Targeting",
+				uuid = "9b05408a-6055-db30-a64f-bf4f9ee4b360",
 			},
-			inheritanceRoot = "UWU\\Draws LPDU",
 			objectType = "folder",
 		},
-	},
-	[192] = 
-	{
 		
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "0240d6fa-9ce5-acc6-6fe9-ea6c1daa346a",
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"a7309300-d228-0eb9-a013-9872382775cb",
+									true,
+								},
+								
+								{
+									"71348faf-7f17-619c-8da6-a9b47c297361",
+									true,
+								},
+								
+								{
+									"6aec5a63-4f4e-e510-9bc3-cc01fda720ed",
+									true,
+								},
+								
+								{
+									"5d953661-808a-1298-9143-e02a2c872ba4",
+									true,
+								},
+							},
+							name = "Target nearest Granite Gaol",
+							setTarget = true,
+							targetContentID = 1804,
+							targetType = "ContentID",
+							uuid = "52a69b86-2dab-5a7b-bade-b8451897d18a",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return true",
+							name = "Built-in AutoSim targeting",
+							uuid = "71348faf-7f17-619c-8da6-a9b47c297361",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Became targetable",
+							uuid = "5d953661-808a-1298-9143-e02a2c872ba4",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1804,
+							name = "Event entity",
+							uuid = "6aec5a63-4f4e-e510-9bc3-cc01fda720ed",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "a7309300-d228-0eb9-a013-9872382775cb",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/Targeting",
+				eventType = 26,
+				loop = true,
+				mechanicTime = 1206,
+				name = "[BLM UWU] [Target] Suppression Gaol - Acquire",
+				timeRange = true,
+				timelineIndex = 190,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "d994f8fa-07bb-3851-9b0b-0a87a7ff91a1",
+				version = 2,
 			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
 		},
-	},
-	[193] = 
-	{
 		
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "32a0cc23-6024-7f0f-92e7-485d0e3eb093",
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"ed6289f5-0513-716a-b90c-6a18db00135b",
+									true,
+								},
+								
+								{
+									"2284cc1e-52db-e83c-aeb1-3078c7d1fc60",
+									true,
+								},
+								
+								{
+									"4589da47-9882-771a-85e0-2030fa287726",
+									true,
+								},
+								
+								{
+									"5ecfde3b-fbe3-e42e-820c-1684aa9c4d32",
+									true,
+								},
+								
+								{
+									"5e02cde6-e31d-e982-b524-ad040f69c5d5",
+									true,
+								},
+							},
+							name = "Target next Granite Gaol",
+							setTarget = true,
+							targetType = "Detection Target",
+							uuid = "16ca592e-0762-1330-85a6-b36249d906d9",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"ed6289f5-0513-716a-b90c-6a18db00135b",
+									true,
+								},
+								
+								{
+									"2284cc1e-52db-e83c-aeb1-3078c7d1fc60",
+									true,
+								},
+								
+								{
+									"4589da47-9882-771a-85e0-2030fa287726",
+									true,
+								},
+								
+								{
+									"5ecfde3b-fbe3-e42e-820c-1684aa9c4d32",
+									true,
+								},
+								
+								{
+									"5e02cde6-e31d-e982-b524-ad040f69c5d5",
+									false,
+								},
+							},
+							name = "Restore Ultima target",
+							setTarget = true,
+							targetContentID = 2137,
+							targetType = "ContentID",
+							uuid = "7184447d-446c-4399-8ea7-34f0a83dce00",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return true",
+							name = "Built-in AutoSim targeting",
+							uuid = "2284cc1e-52db-e83c-aeb1-3078c7d1fc60",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1804,
+							name = "Event entity",
+							uuid = "4589da47-9882-771a-85e0-2030fa287726",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							eventBoolValue = 2,
+							name = "Became untargetable",
+							uuid = "5ecfde3b-fbe3-e42e-820c-1684aa9c4d32",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Targetable gaol remains",
+							partyTargetContentID = 1804,
+							uuid = "5e02cde6-e31d-e982-b524-ad040f69c5d5",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "ed6289f5-0513-716a-b90c-6a18db00135b",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/Targeting",
+				eventType = 26,
+				loop = true,
+				mechanicTime = 1206,
+				name = "[BLM UWU] [Target] Suppression Gaol - Advance",
+				timeRange = true,
+				timelineIndex = 190,
+				timerEndOffset = 12,
+				timerStartOffset = -8,
+				uuid = "aa7df587-d5bf-fb95-b10c-d28d16fe4515",
+				version = 2,
 			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[194] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "17f8bd48-bcb0-28bc-50ec-48b6d5ff6138",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[196] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "c5279e36-f752-094a-a3bd-67c857fce7e6",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
 		},
 	},
 	[199] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "600fbcd5-bb8e-fe71-8b85-77bb49130b05",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -6450,114 +6595,8 @@ local tbl =
 			},
 		},
 	},
-	[201] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "5bdba1cd-7797-77b9-2db6-51d71b97ad7d",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[202] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "ddd3f22a-ed84-3886-8bb6-89605ffdf71a",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[203] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "7840e753-fcc7-03cf-e452-7fe1058c29c3",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[204] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "12cb80f8-fe9d-da7c-8473-6452a7d0e2e8",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[206] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "1cf338a6-3244-100a-13eb-63e46b0265d6",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "87029e86-c5a4-5a02-b334-0b0870961336",
-			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
-		},
-	},
-	[207] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "a0d307ef-cc91-88b3-5a48-ea556ea3e89f",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
 	[211] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "180955da-55a1-78f6-8288-ed5433c10cca",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -6700,203 +6739,8 @@ local tbl =
 			},
 		},
 	},
-	[212] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "d70b2f3d-3604-f429-ef50-f7eb106e49ed",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[213] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "67edbecc-4ea7-a608-3676-2682f91f2c3c",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[214] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "797c4a5f-5e56-f5e3-2f53-a1d19c93828f",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[215] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "404069f6-dad6-19b2-1cf4-6eace2c46766",
-			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
-		},
-	},
-	[216] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "a14174c9-98f5-559d-30ec-35c7ebc17679",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[218] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "15a1ba1b-9902-f017-797d-fa4d1b3cd00b",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[219] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "f70cfe32-2743-218e-415a-d09cbeea3622",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[220] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "97024772-f46c-06ce-bdc7-32d8dd487062",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[221] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "37259a5b-3727-7157-6e26-58390fdeb84b",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[224] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "274e616e-8de4-83d2-f52c-bafc7ef2eb9e",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[225] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "73834cf7-036b-1a3b-d8f5-f3ad127a3827",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\LPDU mits",
-				uuid = "a297d379-d9e8-6b35-4f7a-2bbb8c999d69",
-			},
-			inheritanceRoot = "UWU\\LPDU mits",
-			objectType = "folder",
-		},
-	},
-	[226] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "a111bd00-1d5c-8364-28d2-f08a5ee0a1f0",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
-	[227] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "UWU\\Draws LPDU",
-				uuid = "44e97a81-63ba-09d5-c320-69337e20d031",
-			},
-			inheritanceRoot = "UWU\\Draws LPDU",
-			objectType = "folder",
-		},
-	},
 	inheritedProfiles = 
 	{
-		"UWU\\Draws LPDU",
-		"UWU\\LPDU mits",
 	},
 	timelineName = "uwu",
 	version = "1.0.2",
