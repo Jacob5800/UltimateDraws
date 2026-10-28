@@ -132,6 +132,8 @@ TEA: Coming soon by Ton.
 
 ### UWU: LPDU
 
+- Reaper AutoSim now uses Monk-log boss-event timings for Garuda’s second disappearance and Titan’s first jump return, reducing incorrect forecast availability. Personal Monk dash timings were not imposed on Reaper. (29-10-2026)
+
 - Added standalone Autosim RPR - UWU with built-in targeting, melee nail softening, phase/mark forecasts, gaol blacklists and personal stun tracking. Lahabrea has a Me / Other melee LB forecast with event corrections and cancellation cleanup. No forced Ingress/Egress; level-70 skill restrictions respected. Shared targeting yields to the RPR profile. Replay checks remain pending. (28-10-2026)
 
 - Updated standalone BRD/BLM AutoSim profiles with built-in targeting, DoT blacklists and BRD primal DoT forecasts. BLM R2 Meteor forecasts include cast/animation lock and cancellation cleanup. Runtime replay checks remain pending. (28-10-2026)
@@ -149,5 +151,3 @@ TEA: Coming soon by Ton.
 - Enabled TTS for Ultima’s “Bait eruptions then move” call. (21-10-2026)
 
 - Searing Wind cleanup now skips the Titan phase, retaining cleanup in the Ifrit and Ultima Searing Wind windows. (21-10-2026)
-
-- Fixed Mistral OT-marker cleanup repeatedly executing through Ifrit. Cleanup now filters Mistral damage IDs, requires an active marker, and runs only in Garuda/Ultima Mistral windows. (21-10-2026)
