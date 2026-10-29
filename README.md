@@ -64,6 +64,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- AA AutoSim now forecasts BLM returning to Ley Lines when existing movement windows end, preserving that return plan through phase resyncs. This predicts movement only; it does not move the player or force abilities. (29-10-2026)
+
 - Fixed P1 tower spare-player priority to M1, M2, then R1. In a north-to-south 3-2-1 pattern, M2 now receives the north tower instead of middle. (28-10-2026)
 
 - AA AutoSim now tracks all four light-crystal deaths before the Ice Veil damage window, resyncs on crystal targetability changes, and values the protected Ice Veil at zero damage before its 0.5 damage window. (28-10-2026)
