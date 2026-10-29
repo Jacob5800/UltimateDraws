@@ -24,6 +24,8 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- P1 Pantokrator now shows short sidestep arrows after flamethrowers resolve, checking current puddles and cones while preserving personal missile spreads and return routes. (29-10-2026)
+
 - Added optional debug labels identifying TOP-owned draws throughout the fight (off by default). P1 missile footprints are red with a small green personal marker; final beam markers preserve your assigned destination and call to hold your line spot. (29-10-2026)
 
 - P1 Program Loop holds an already-safe waiting position. Pantokrator now guides you back to your live group after your missile, and missile circles/callouts work even when the countdown helper is unavailable. (29-10-2026)
