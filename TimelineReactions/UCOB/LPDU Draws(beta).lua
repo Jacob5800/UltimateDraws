@@ -1264,7 +1264,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local rootSettings=Settings or (_G and _G.Settings)\nlocal settings=rootSettings and rootSettings.FFXIVMINION\nif not settings then return end\nif not data.ucobAssignmentGuiOptions then\n data.ucobAssignmentGuiOptions={healer={\"Unassigned\",\"In\",\"Out\"},tower={\"Unassigned\",\"Close\",\"Far\"}}\nend\nlocal options=data.ucobAssignmentGuiOptions\nlocal healer=settings.LPDU_UCOB_FirstFireballHealer or \"Unassigned\"\nlocal R=AnyoneCore and AnyoneCore.Roster\nlocal slot=R and R.current() and R.mySlot() or nil\nlocal defaultTower=(slot==\"M1\" or slot==\"M2\") and \"Close\" or (slot==\"R1\" or slot==\"R2\") and \"Far\" or nil\noptions.tower[1]=defaultTower and (\"Auto: \"..defaultTower) or \"Auto (role)\"\nlocal tower=settings.LPDU_UCOB_BlackfireTower or \"Unassigned\"\nlocal hi=healer==\"In\" and 2 or healer==\"Out\" and 3 or 1\nlocal ti=tower==\"Close\" and 2 or tower==\"Far\" and 3 or 1\nlocal visible=GUI:Begin(\"[LPDU] UCOB - Assignments\",true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n GUI:PushItemWidth(150)\n GUI:Text(\"P1 Healer Fireball - DPS targeted\")\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"First Fireball only.\\nDPS targeted: use your chosen In/Out assignment.\\nHealer targeted: that healer goes in; the other stays out automatically.\\nUnassigned: agree which healer stays out.\\nBoth tanks stay out.\")\n end\n GUI:SameLine(255)\n local newH,changedH=GUI:Combo(\"##LPDUFirstFireballHealer\",hi,options.healer)\n if newH~=hi and options.healer[newH] then settings.LPDU_UCOB_FirstFireballHealer=options.healer[newH] end\n GUI:Text(\"P3 Blackfire DPS Tower\")\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Default: melee Close to Nael; ranged Far from Nael.\\nChoose Close/Far to override, or Auto to follow your roster role.\") end\n GUI:SameLine(255)\n local newT,changedT=GUI:Combo(\"##LPDUBlackfireTower\",ti,options.tower)\n if newT~=ti and options.tower[newT] then settings.LPDU_UCOB_BlackfireTower=newT==1 and \"Unassigned\" or options.tower[newT] end\n if GUI:CollapsingHeader(\"Potions##UCOBPotionsSection\") then\n settings.LPDU_UCOB_PotionsEnabled=GUI:Checkbox(\"Enable LPDU potion schedule##UCOBPots\",settings.LPDU_UCOB_PotionsEnabled~=false)\n if GUI:IsItemHovered() then local route=settings.LPDU_UCOB_PotionSecond or \"Late Nael\"\n local secondTimes={['Late Nael']='5:40.3 (340.3s)', ['Delayed Nael']='6:08.9 (368.9s)', ['Bahamut opener']='8:32.0 (512.0s)', ['After Blackfire']='9:51.3 (591.3s)'}\n local opener=settings.LPDU_UCOB_PotionOpener~=false and \"Opener: 0:03.3 (3.3s)\" or \"Opener: disabled\"\n local secondText=secondTimes[route] and (\"Second: \"..route..\" - \"..secondTimes[route]) or \"Second: disabled / manual\"\n GUI:SetTooltip(opener..\"\\n\"..secondText..\"\\nAdds opener: 14:05.8 (845.8s)\\nLate Golden: 22:46.6 (1366.6s)\\nSynced timeline times, not elapsed pull/replay time.\\nEach window lasts 3 seconds; normal weave rules apply.\\nUnavailable items or potion cooldown can skip a window.\\nDisable duplicate potion automation in your job profile.\") end\n settings.LPDU_UCOB_PotionOpener=GUI:Checkbox(\"Opener potion##UCOBPotOpener\",settings.LPDU_UCOB_PotionOpener~=false)\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Disable for a three-potion route. Default opener: timeline 3.3s.\") end\n if not data.ucobPotionSecondOptions then data.ucobPotionSecondOptions={\"Late Nael\",\"Delayed Nael\",\"Bahamut opener\",\"After Blackfire\",\"Disabled / manual\"} end\n local potOptions=data.ucobPotionSecondOptions\n local second=settings.LPDU_UCOB_PotionSecond or \"Late Nael\"\n local secondIndex=1\n for i=1,#potOptions do if potOptions[i]==second then secondIndex=i break end end\n GUI:Text(\"Second potion window\")\n GUI:SameLine(255)\n local newSecond=GUI:Combo(\"##UCOBSecondPotion\",secondIndex,potOptions)\n if newSecond~=secondIndex and potOptions[newSecond] then settings.LPDU_UCOB_PotionSecond=potOptions[newSecond] end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Alternatives, not extra potions.\\nLate Nael 340.3 / Delayed Nael 368.9 / Bahamut opener 512.0 / After Blackfire 591.3.\\nAdds opener 845.8 and Late Golden 1366.6 remain enabled.\\nTimes are synced timeline coordinates, not seconds since pull.\\nReal cooldown or missing items can cause a window to be skipped.\") end\n end\n GUI:PopItemWidth()\nend\nGUI:End()\nself.used=true",
+							actionLua = "local rootSettings=Settings or (_G and _G.Settings)\nlocal settings=rootSettings and rootSettings.FFXIVMINION\nif not settings then return end\nif not data.ucobAssignmentGuiOptions then\n data.ucobAssignmentGuiOptions={healer={\"Unassigned\",\"In\",\"Out\"},tower={\"Unassigned\",\"Close\",\"Far\"}}\nend\nlocal options=data.ucobAssignmentGuiOptions\nlocal healer=settings.LPDU_UCOB_FirstFireballHealer or \"Unassigned\"\nlocal R=AnyoneCore and AnyoneCore.Roster\nlocal slot=R and R.current() and R.mySlot() or nil\nlocal defaultTower=(slot==\"M1\" or slot==\"M2\") and \"Close\" or (slot==\"R1\" or slot==\"R2\") and \"Far\" or nil\noptions.tower[1]=defaultTower and (\"Auto: \"..defaultTower) or \"Auto (role)\"\nlocal tower=settings.LPDU_UCOB_BlackfireTower or \"Unassigned\"\nlocal hi=healer==\"In\" and 2 or healer==\"Out\" and 3 or 1\nlocal ti=tower==\"Close\" and 2 or tower==\"Far\" and 3 or 1\nlocal visible=GUI:Begin(\"[LPDU] UCOB - Assignments\",true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n settings.LPDU_UCOB_AutoTarget=GUI:Checkbox(\"Automatic targeting##UCOBAutoTarget\",settings.LPDU_UCOB_AutoTarget~=false)\n if GUI:IsItemHovered()then GUI:SetTooltip(\"Target attackable enemies at the existing phase/return windows. Automatically yields when the UCOB AutoSim profile owns targeting. This does not disable draws, assignments, potions or mitigation.\")end\n if data.ucobRPRAutoSim then GUI:Text(\"Targeting managed by AutoSim\")end\n GUI:PushItemWidth(150)\n GUI:Text(\"P1 Healer Fireball - DPS targeted\")\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"First Fireball only.\\nDPS targeted: use your chosen In/Out assignment.\\nHealer targeted: that healer goes in; the other stays out automatically.\\nUnassigned: agree which healer stays out.\\nBoth tanks stay out.\")\n end\n GUI:SameLine(255)\n local newH,changedH=GUI:Combo(\"##LPDUFirstFireballHealer\",hi,options.healer)\n if newH~=hi and options.healer[newH] then settings.LPDU_UCOB_FirstFireballHealer=options.healer[newH] end\n GUI:Text(\"P3 Blackfire DPS Tower\")\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Default: melee Close to Nael; ranged Far from Nael.\\nChoose Close/Far to override, or Auto to follow your roster role.\") end\n GUI:SameLine(255)\n local newT,changedT=GUI:Combo(\"##LPDUBlackfireTower\",ti,options.tower)\n if newT~=ti and options.tower[newT] then settings.LPDU_UCOB_BlackfireTower=newT==1 and \"Unassigned\" or options.tower[newT] end\n if GUI:CollapsingHeader(\"Potions##UCOBPotionsSection\") then\n settings.LPDU_UCOB_PotionsEnabled=GUI:Checkbox(\"Enable LPDU potion schedule##UCOBPots\",settings.LPDU_UCOB_PotionsEnabled~=false)\n if GUI:IsItemHovered() then local route=settings.LPDU_UCOB_PotionSecond or \"Late Nael\"\n local secondTimes={['Late Nael']='5:40.3 (340.3s)', ['Delayed Nael']='6:08.9 (368.9s)', ['Bahamut opener']='8:32.0 (512.0s)', ['After Blackfire']='9:51.3 (591.3s)'}\n local opener=settings.LPDU_UCOB_PotionOpener~=false and \"Opener: 0:03.3 (3.3s)\" or \"Opener: disabled\"\n local secondText=secondTimes[route] and (\"Second: \"..route..\" - \"..secondTimes[route]) or \"Second: disabled / manual\"\n GUI:SetTooltip(opener..\"\\n\"..secondText..\"\\nAdds opener: 14:05.8 (845.8s)\\nLate Golden: 22:46.6 (1366.6s)\\nSynced timeline times, not elapsed pull/replay time.\\nEach window lasts 3 seconds; normal weave rules apply.\\nUnavailable items or potion cooldown can skip a window.\\nDisable duplicate potion automation in your job profile.\") end\n settings.LPDU_UCOB_PotionOpener=GUI:Checkbox(\"Opener potion##UCOBPotOpener\",settings.LPDU_UCOB_PotionOpener~=false)\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Disable for a three-potion route. Default opener: timeline 3.3s.\") end\n if not data.ucobPotionSecondOptions then data.ucobPotionSecondOptions={\"Late Nael\",\"Delayed Nael\",\"Bahamut opener\",\"After Blackfire\",\"Disabled / manual\"} end\n local potOptions=data.ucobPotionSecondOptions\n local second=settings.LPDU_UCOB_PotionSecond or \"Late Nael\"\n local secondIndex=1\n for i=1,#potOptions do if potOptions[i]==second then secondIndex=i break end end\n GUI:Text(\"Second potion window\")\n GUI:SameLine(255)\n local newSecond=GUI:Combo(\"##UCOBSecondPotion\",secondIndex,potOptions)\n if newSecond~=secondIndex and potOptions[newSecond] then settings.LPDU_UCOB_PotionSecond=potOptions[newSecond] end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Alternatives, not extra potions.\\nLate Nael 340.3 / Delayed Nael 368.9 / Bahamut opener 512.0 / After Blackfire 591.3.\\nAdds opener 845.8 and Late Golden 1366.6 remain enabled.\\nTimes are synced timeline coordinates, not seconds since pull.\\nReal cooldown or missing items can cause a window to be skipped.\") end\n end\n GUI:PopItemWidth()\nend\nGUI:End()\nself.used=true",
 							name = "Assignment and potion settings",
 							uuid = "a7689b1f-29f6-541f-a839-c69ff7957246",
 							version = 2.1,
@@ -5165,6 +5165,90 @@ local tbl =
 			inheritedOverwrites = 
 			{
 				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
+				name = "Find Target",
+				uuid = "b90758c2-c24e-3d73-9f5f-fbc398d2f1ab",
+				version = 2,
+			},
+			inheritedObjectUUID = "c4b01397-183e-c938-8e5e-6aece58a26ef",
+			inheritedOverwrites = 
+			{
+				actions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								name = "",
+								uuid = "8b4dab66-41b2-4668-8f2d-19ba9af27896",
+								version = 2.1,
+							},
+							inheritedObjectUUID = "f81c3671-7e28-feaf-b18a-c93a8a609852",
+							inheritedOverwrites = 
+							{
+								conditions = 
+								{
+									
+									{
+										type = "remove",
+										value = 
+										{
+											"635bfcd1-217c-260a-87c9-64c06cbddb4e",
+											true,
+										},
+									},
+									
+									{
+										position = 1,
+										type = "add",
+										value = 
+										{
+											"b846c20a-319d-cb2a-98a2-8e9ac808d0fa",
+											true,
+										},
+									},
+									
+									{
+										position = 2,
+										type = "add",
+										value = 
+										{
+											"635bfcd1-217c-260a-87c9-64c06cbddb4e",
+											true,
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								category = "Lua",
+								conditionLua = "if data.ucobRPRAutoSim then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
+								dequeueIfLuaFalse = true,
+								name = "LPDU targeting enabled; no AutoSim owner",
+								uuid = "b846c20a-319d-cb2a-98a2-8e9ac808d0fa",
+								version = 3,
+							},
+						},
+					},
+				},
 			},
 		},
 		
@@ -9350,6 +9434,90 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\ucob\\universal",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				name = "Find Target",
+				uuid = "5cd1c24a-791c-738e-923c-a5e3a42b61e2",
+				version = 2,
+			},
+			inheritedObjectUUID = "b172ccd3-9a42-f2a0-b17f-b83924f08504",
+			inheritedOverwrites = 
+			{
+				actions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								name = "",
+								uuid = "45aa5b8d-7859-f9cb-81bf-b6f56f823671",
+								version = 2.1,
+							},
+							inheritedObjectUUID = "f81c3671-7e28-feaf-b18a-c93a8a609852",
+							inheritedOverwrites = 
+							{
+								conditions = 
+								{
+									
+									{
+										type = "remove",
+										value = 
+										{
+											"635bfcd1-217c-260a-87c9-64c06cbddb4e",
+											true,
+										},
+									},
+									
+									{
+										position = 1,
+										type = "add",
+										value = 
+										{
+											"0505c93f-79e5-0561-afe4-6f1087db4f31",
+											true,
+										},
+									},
+									
+									{
+										position = 2,
+										type = "add",
+										value = 
+										{
+											"635bfcd1-217c-260a-87c9-64c06cbddb4e",
+											true,
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								category = "Lua",
+								conditionLua = "if data.ucobRPRAutoSim then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
+								dequeueIfLuaFalse = true,
+								name = "LPDU targeting enabled; no AutoSim owner",
+								uuid = "0505c93f-79e5-0561-afe4-6f1087db4f31",
+								version = 3,
+							},
+						},
+					},
+				},
+			},
+		},
 	},
 	[79] = 
 	{
@@ -9894,6 +10062,90 @@ local tbl =
 			inheritedOverwrites = 
 			{
 				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
+				name = "Find Target",
+				uuid = "e1a4fd91-b3ea-8835-99d2-d47856b8140f",
+				version = 2,
+			},
+			inheritedObjectUUID = "d78624dd-6720-cb87-b49c-6e3a466bc5ff",
+			inheritedOverwrites = 
+			{
+				actions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								name = "",
+								uuid = "7b5adf1c-0d6d-30f6-a24f-ba78b588e1d7",
+								version = 2.1,
+							},
+							inheritedObjectUUID = "f81c3671-7e28-feaf-b18a-c93a8a609852",
+							inheritedOverwrites = 
+							{
+								conditions = 
+								{
+									
+									{
+										type = "remove",
+										value = 
+										{
+											"635bfcd1-217c-260a-87c9-64c06cbddb4e",
+											true,
+										},
+									},
+									
+									{
+										position = 1,
+										type = "add",
+										value = 
+										{
+											"f0edbbcc-85cc-e087-9a9c-782c56f955b4",
+											true,
+										},
+									},
+									
+									{
+										position = 2,
+										type = "add",
+										value = 
+										{
+											"635bfcd1-217c-260a-87c9-64c06cbddb4e",
+											true,
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								category = "Lua",
+								conditionLua = "if data.ucobRPRAutoSim then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
+								dequeueIfLuaFalse = true,
+								name = "LPDU targeting enabled; no AutoSim owner",
+								uuid = "f0edbbcc-85cc-e087-9a9c-782c56f955b4",
+								version = 3,
+							},
+						},
+					},
+				},
 			},
 		},
 		
@@ -10668,6 +10920,90 @@ local tbl =
 			inheritedOverwrites = 
 			{
 				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
+				name = "Find Target",
+				uuid = "1c595662-a68f-9486-a67a-a66f1d98412a",
+				version = 2,
+			},
+			inheritedObjectUUID = "26a0a302-7661-24cf-9df7-04027f187e06",
+			inheritedOverwrites = 
+			{
+				actions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								name = "",
+								uuid = "a1b0382a-28d6-dfaf-8c63-ad3ef8290a31",
+								version = 2.1,
+							},
+							inheritedObjectUUID = "f81c3671-7e28-feaf-b18a-c93a8a609852",
+							inheritedOverwrites = 
+							{
+								conditions = 
+								{
+									
+									{
+										type = "remove",
+										value = 
+										{
+											"635bfcd1-217c-260a-87c9-64c06cbddb4e",
+											true,
+										},
+									},
+									
+									{
+										position = 1,
+										type = "add",
+										value = 
+										{
+											"31502bb7-d0b7-a854-be61-f1462c496ec4",
+											true,
+										},
+									},
+									
+									{
+										position = 2,
+										type = "add",
+										value = 
+										{
+											"635bfcd1-217c-260a-87c9-64c06cbddb4e",
+											true,
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								category = "Lua",
+								conditionLua = "if data.ucobRPRAutoSim then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
+								dequeueIfLuaFalse = true,
+								name = "LPDU targeting enabled; no AutoSim owner",
+								uuid = "31502bb7-d0b7-a854-be61-f1462c496ec4",
+								version = 3,
+							},
+						},
+					},
+				},
 			},
 		},
 	},
@@ -11892,6 +12228,90 @@ local tbl =
 		{
 			data = 
 			{
+				name = "Find Target",
+				uuid = "49fd5678-0868-e77a-a348-68aedff2d24b",
+				version = 2,
+			},
+			inheritedObjectUUID = "56c70533-9ff8-f87c-b0b8-0d9f9a4ebc46",
+			inheritedOverwrites = 
+			{
+				actions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								name = "",
+								uuid = "45796b21-2f7d-bab1-8068-98df7b56bbe8",
+								version = 2.1,
+							},
+							inheritedObjectUUID = "f81c3671-7e28-feaf-b18a-c93a8a609852",
+							inheritedOverwrites = 
+							{
+								conditions = 
+								{
+									
+									{
+										type = "remove",
+										value = 
+										{
+											"635bfcd1-217c-260a-87c9-64c06cbddb4e",
+											true,
+										},
+									},
+									
+									{
+										position = 1,
+										type = "add",
+										value = 
+										{
+											"4dda8b40-2be5-2657-ba1f-16e2ee0eebde",
+											true,
+										},
+									},
+									
+									{
+										position = 2,
+										type = "add",
+										value = 
+										{
+											"635bfcd1-217c-260a-87c9-64c06cbddb4e",
+											true,
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								category = "Lua",
+								conditionLua = "if data.ucobRPRAutoSim then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
+								dequeueIfLuaFalse = true,
+								name = "LPDU targeting enabled; no AutoSim owner",
+								uuid = "4dda8b40-2be5-2657-ba1f-16e2ee0eebde",
+								version = 3,
+							},
+						},
+					},
+				},
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "LPDU Potions",
 				uuid = "58827aa1-b549-be9c-9c8f-85f9fd8df432",
@@ -12880,6 +13300,90 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\ucob\\universal",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "Find Target",
+				uuid = "dc41270d-227f-92ad-811f-605e630912f2",
+				version = 2,
+			},
+			inheritedObjectUUID = "ff90a052-b497-2513-a77d-0cedb1ebd6c5",
+			inheritedOverwrites = 
+			{
+				actions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								name = "",
+								uuid = "80611a27-37c8-a609-a731-a41911035d7c",
+								version = 2.1,
+							},
+							inheritedObjectUUID = "f81c3671-7e28-feaf-b18a-c93a8a609852",
+							inheritedOverwrites = 
+							{
+								conditions = 
+								{
+									
+									{
+										type = "remove",
+										value = 
+										{
+											"635bfcd1-217c-260a-87c9-64c06cbddb4e",
+											true,
+										},
+									},
+									
+									{
+										position = 1,
+										type = "add",
+										value = 
+										{
+											"7e2b5853-277a-dd09-bd64-0a22414d857a",
+											true,
+										},
+									},
+									
+									{
+										position = 2,
+										type = "add",
+										value = 
+										{
+											"635bfcd1-217c-260a-87c9-64c06cbddb4e",
+											true,
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								category = "Lua",
+								conditionLua = "if data.ucobRPRAutoSim then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
+								dequeueIfLuaFalse = true,
+								name = "LPDU targeting enabled; no AutoSim owner",
+								uuid = "7e2b5853-277a-dd09-bd64-0a22414d857a",
+								version = 3,
+							},
+						},
+					},
+				},
+			},
 		},
 	},
 	[122] = 
@@ -14071,6 +14575,90 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\ucob\\universal",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				name = "Find Target",
+				uuid = "841df22b-e3f7-41d3-ba53-68c3416fe310",
+				version = 2,
+			},
+			inheritedObjectUUID = "8d217235-1bd9-8e17-94b4-50534c8acb37",
+			inheritedOverwrites = 
+			{
+				actions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								name = "",
+								uuid = "cad35291-df1a-7346-8670-9c5eca33a453",
+								version = 2.1,
+							},
+							inheritedObjectUUID = "f81c3671-7e28-feaf-b18a-c93a8a609852",
+							inheritedOverwrites = 
+							{
+								conditions = 
+								{
+									
+									{
+										type = "remove",
+										value = 
+										{
+											"635bfcd1-217c-260a-87c9-64c06cbddb4e",
+											true,
+										},
+									},
+									
+									{
+										position = 1,
+										type = "add",
+										value = 
+										{
+											"7f44f7e3-efe8-2637-9660-cb1d3f27fa90",
+											true,
+										},
+									},
+									
+									{
+										position = 2,
+										type = "add",
+										value = 
+										{
+											"635bfcd1-217c-260a-87c9-64c06cbddb4e",
+											true,
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								category = "Lua",
+								conditionLua = "if data.ucobRPRAutoSim then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
+								dequeueIfLuaFalse = true,
+								name = "LPDU targeting enabled; no AutoSim owner",
+								uuid = "7f44f7e3-efe8-2637-9660-cb1d3f27fa90",
+								version = 3,
+							},
+						},
+					},
+				},
+			},
+		},
 	},
 	[135] = 
 	{
@@ -15165,6 +15753,90 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\ucob\\universal",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "Find Target",
+				uuid = "2f7ae31a-ef7d-4190-ad06-0fee66f65a69",
+				version = 2,
+			},
+			inheritedObjectUUID = "9577098a-fcae-23dd-b90e-f051028212a3",
+			inheritedOverwrites = 
+			{
+				actions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								name = "",
+								uuid = "dddd2b88-3177-1cf7-850d-de3c6150f4d2",
+								version = 2.1,
+							},
+							inheritedObjectUUID = "f81c3671-7e28-feaf-b18a-c93a8a609852",
+							inheritedOverwrites = 
+							{
+								conditions = 
+								{
+									
+									{
+										type = "remove",
+										value = 
+										{
+											"635bfcd1-217c-260a-87c9-64c06cbddb4e",
+											true,
+										},
+									},
+									
+									{
+										position = 1,
+										type = "add",
+										value = 
+										{
+											"fe855d60-292c-5bd9-be06-eddf6bbfedbd",
+											true,
+										},
+									},
+									
+									{
+										position = 2,
+										type = "add",
+										value = 
+										{
+											"635bfcd1-217c-260a-87c9-64c06cbddb4e",
+											true,
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								category = "Lua",
+								conditionLua = "if data.ucobRPRAutoSim then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
+								dequeueIfLuaFalse = true,
+								name = "LPDU targeting enabled; no AutoSim owner",
+								uuid = "fe855d60-292c-5bd9-be06-eddf6bbfedbd",
+								version = 3,
+							},
+						},
+					},
+				},
+			},
 		},
 		
 		{
@@ -16278,6 +16950,90 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\ucob\\universal",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "Find Target",
+				uuid = "84180838-c2b8-ace1-8b97-3b33b961e807",
+				version = 2,
+			},
+			inheritedObjectUUID = "33e8393e-adc7-ce56-9a9d-7d6e36869a96",
+			inheritedOverwrites = 
+			{
+				actions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								name = "",
+								uuid = "717ed79c-a6a7-5aab-9127-b31cd84d0081",
+								version = 2.1,
+							},
+							inheritedObjectUUID = "f81c3671-7e28-feaf-b18a-c93a8a609852",
+							inheritedOverwrites = 
+							{
+								conditions = 
+								{
+									
+									{
+										type = "remove",
+										value = 
+										{
+											"635bfcd1-217c-260a-87c9-64c06cbddb4e",
+											true,
+										},
+									},
+									
+									{
+										position = 1,
+										type = "add",
+										value = 
+										{
+											"2746059d-664a-a06b-b320-c0d88f59cfbd",
+											true,
+										},
+									},
+									
+									{
+										position = 2,
+										type = "add",
+										value = 
+										{
+											"635bfcd1-217c-260a-87c9-64c06cbddb4e",
+											true,
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								category = "Lua",
+								conditionLua = "if data.ucobRPRAutoSim then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
+								dequeueIfLuaFalse = true,
+								name = "LPDU targeting enabled; no AutoSim owner",
+								uuid = "2746059d-664a-a06b-b320-c0d88f59cfbd",
+								version = 3,
+							},
+						},
+					},
+				},
+			},
 		},
 		
 		{
@@ -18738,6 +19494,90 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\ucob\\universal",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "Find Target",
+				uuid = "1681c877-d92e-b38a-8a6d-eae5f41afd6a",
+				version = 2,
+			},
+			inheritedObjectUUID = "7820619a-34c4-888f-8f5a-f5e95e1da9d7",
+			inheritedOverwrites = 
+			{
+				actions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								name = "",
+								uuid = "3ea2bb4b-0f07-3972-88ad-81cb06f4bdd0",
+								version = 2.1,
+							},
+							inheritedObjectUUID = "f81c3671-7e28-feaf-b18a-c93a8a609852",
+							inheritedOverwrites = 
+							{
+								conditions = 
+								{
+									
+									{
+										type = "remove",
+										value = 
+										{
+											"635bfcd1-217c-260a-87c9-64c06cbddb4e",
+											true,
+										},
+									},
+									
+									{
+										position = 1,
+										type = "add",
+										value = 
+										{
+											"e38605e6-db29-e44f-a6b0-f9883be0bfe5",
+											true,
+										},
+									},
+									
+									{
+										position = 2,
+										type = "add",
+										value = 
+										{
+											"635bfcd1-217c-260a-87c9-64c06cbddb4e",
+											true,
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								category = "Lua",
+								conditionLua = "if data.ucobRPRAutoSim then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
+								dequeueIfLuaFalse = true,
+								name = "LPDU targeting enabled; no AutoSim owner",
+								uuid = "e38605e6-db29-e44f-a6b0-f9883be0bfe5",
+								version = 3,
+							},
+						},
+					},
+				},
+			},
 		},
 		
 		{
