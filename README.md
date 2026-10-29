@@ -87,7 +87,7 @@ TEA: Coming soon by Ton.
 
 ### UCOB: LPDU
 
-- Added standalone AutosimRPRUCOB for level-70 Reaper: native phase/targetability resyncs, boss and balanced higher-HP adds targeting, two-boss mark tracking, current melee separation and personal stun forecasts. Golden LB assignment/timing and fight-length estimates are adjustable; no forced dashes or LB casts. Calibrated with native logs and 49 EU FFLogs clears; replay checks remain pending. (29-10-2026)
+- Added standalone AutosimRPRUCOB for level-70 Reaper: native phase/targetability resyncs, boss and balanced higher-HP adds targeting, two-boss mark tracking, current melee separation and personal stun forecasts. Golden LB assignment/timing and fight-length estimates are adjustable. Phoenix-buffed Golden damage receives twice the relative planning priority, with personal buff-loss correction; no forced dashes or LB casts. Calibrated with native logs and 49 EU FFLogs clears; replay checks remain pending. (29-10-2026)
 
 - Fixed pre-pull assignment-window visibility at timeline zero. Enabled spoken alerts for Step into Neurolink and Cleanse doom. (20-10-2026)
 
