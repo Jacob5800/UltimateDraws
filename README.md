@@ -64,6 +64,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- AA AutoSim uses a 1.3 burst-priority weight instead of 1.4 for non-Viper jobs, reducing the incentive to hold for those windows. Viper and the special P4 window retain their existing weights. (29-10-2026)
+
 - AA AutoSim now forecasts BLM returning to Ley Lines when existing movement windows end, preserving that return plan through phase resyncs. This predicts movement only; it does not move the player or force abilities. (29-10-2026)
 
 - Fixed P1 tower spare-player priority to M1, M2, then R1. In a north-to-south 3-2-1 pattern, M2 now receives the north tower instead of middle. (28-10-2026)
