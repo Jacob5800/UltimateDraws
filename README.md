@@ -87,6 +87,8 @@ TEA: Coming soon by Ton.
 
 ### UCOB: LPDU
 
+- UCOB AutoSim now plans through the adds deaths, then rebuilds for Golden after the scripted Phoenix transition. Golden uptime and fight length anchor to Bahamut becoming targetable; resurrection-to-targetability remains downtime. This lets AutoSim spend gauge before the forced loss without a separate forced Burn timer. Ordinary deaths cannot trigger the split; actual cooldown/potion timers carry over. Applied to BLM, BRD and RPR; replay checks remain pending. (29-10-2026)
+
 - All three UCOB AutoSim profiles now use neutral 1x Phoenix planning weight by default. The new Phoenix planning priority: 2x GUI option restores extra relative priority for surviving Phoenix-buffed Golden damage; losing the buff removes that preference. Actual in-game buff handling remains with the ACR. (29-10-2026)
 
 - BLM AutoSim now forecasts Nael quote transitions from recognized English quotes and corrects remaining steps on actual casts. Same-zone steps are skipped; the first In/Out step checks current distance. Travel time is adjustable. Corroborated with three native caster pulls and BossMod sequencing; no forced movement or new polling loop. Replay checks remain pending. (29-10-2026)
@@ -105,7 +107,6 @@ TEA: Coming soon by Ton.
 
 - Potion schedule hover text now lists the enabled opener, selected second window, adds opener and late Golden timings, with synced-timeline and skipped-window explanations. (20-10-2026)
 
-- Fixed missing Settings errors in the assignment menu, potion toggles and healer/tower assignment options. Settings reads now use the live global settings table when needed and wait safely if settings are unavailable. (20-10-2026)
 
 
 
