@@ -48,7 +48,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local A=TensorCore.API.TensorACR\nlocal C=_G.UCOB_BLM_Config\nif not C then C={goldLength=162.14,addsLength=100.222,buffForecast=false,buffGain=0,twisterLead=1.0,twisterAfter=1.0,exaDuration=8,assignmentMove=2,returnMove=1.5};_G.UCOB_BLM_Config=C end\nlocal S={version=1,phase=1,seen={},ids={},up={},dynamic={},cfg={},dotStart={},ends={}}\nfor k,v in pairs(C)do S.cfg[k]=v end\nS.anchors={\n twinEnd={\"pull\",128.352},nael={\"twinEnd\",21.968},naelEnd={\"nael\",115.307},baha={\"naelEnd\",16.333},\n off1={\"baha\",23.449},on1={\"off1\",11.534},off2={\"on1\",29.533},on2={\"off2\",16.557},\n off3={\"on2\",34.636},on3={\"off3\",16.517},off4={\"on3\",35.834},on4={\"off4\",27.560},\n off5={\"on4\",33.712},on5={\"off5\",19.376},off6={\"on5\",37.626},adds={\"off6\",53.754},\n addsEnd={\"adds\",S.cfg.addsLength},gold={\"addsEnd\",62.323}}\nfunction S.at(k)\n if k==\"pull\"then return 0 end\n if S.seen[k]then return S.seen[k]end\n local a=S.anchors[k];return S.at(a[1])+a[2]\nend\nfunction S.union(xs)\n table.sort(xs,function(a,b)return a[1]<b[1]end)\n local out={}\n for _,v in ipairs(xs)do\n  local last=out[#out]\n  if last and v[1]<=last[2]then last[2]=math.max(last[2],v[2])else out[#out+1]={v[1],v[2]}end\n end\n return out\nend\nfunction S.alive(e)return e and e.alive and e.targetable and e.hp.current>1 end\nfunction S.ent(cid)return S.ids[cid]and TensorCore.mGetEntity(S.ids[cid])end\n\nS.movePred={{\"firstTwister\",\"pull\",12.99,\"twister\"},{\"addsTwister1\",\"adds\",24.34,\"twister\"},{\"addsTwister2\",\"adds\",41.487,\"twister\"},{\"addsTwister3\",\"adds\",87.071,\"twister\"},{\"addsTwister4\",\"adds\",104.096,\"twister\"},{\"exa1\",\"gold\",24.549,\"exa\"},{\"exa2\",\"gold\",73.276,\"exa\"},{\"exa3\",\"gold\",123.05,\"exa\"},{\"exa4\",\"gold\",174.689,\"exa\"}}\nS.moveActual={};S.personalMoves={}\nfunction S.movementWindows()\n local out={}\n for _,p in ipairs(S.movePred)do\n  local center=S.moveActual[p[1]]or S.at(p[2])+p[3]\n  local a,b\n  if p[4]==\"twister\"then a,b=center-S.cfg.twisterLead,center+S.cfg.twisterAfter\n  else a,b=center-.5,center+S.cfg.exaDuration end\n  if p[2]==\"adds\"then b=math.min(b,S.at(\"addsEnd\"))end\n  if p[2]~=\"pull\"or not S.seen.twinEnd or center<S.seen.twinEnd then\n   if b>a then out[#out+1]={a,b}end\n  end\n end\n for _,v in pairs(S.personalMoves)do if v[2]>v[1]then out[#out+1]={v[1],v[2]}end end\n return S.union(out)\nend\nfunction S.correctMovement(kind,finish)\n local best,delta\n for _,p in ipairs(S.movePred)do\n  if p[4]==kind and not S.moveActual[p[1]]and ((p[2]==\"pull\"and S.phase==1)or(p[2]==\"adds\"and S.phase==4)or(p[2]==\"gold\"and S.phase==5))then\n   local d=math.abs(finish-S.at(p[2])-p[3]);if not delta or d<delta then best,delta=p[1],d end\n  end\n end\n if best and delta<8 then S.moveActual[best]=finish\n else S.personalMoves[kind..\"Extra\"]={finish-(kind==\"twister\"and S.cfg.twisterLead or .5),finish+(kind==\"twister\"and S.cfg.twisterAfter or S.cfg.exaDuration)}end\n S.publish()\nend\nfunction S.publish()\n local now=A.getAutoSimTime()\n local live=_G.UCOB_BLM_Config\n if live then for k,v in pairs(live)do S.cfg[k]=v end end\n local kill=math.min(1259,math.max(now+10,S.at(\"gold\")+S.cfg.goldLength))\n S.killAt=kill;A.setAutoSimKillTime(kill)\n local gaps={{S.at(\"twinEnd\"),S.at(\"nael\")},{S.at(\"naelEnd\"),S.at(\"baha\")},{S.at(\"off6\"),S.at(\"adds\")},{S.at(\"addsEnd\"),S.at(\"gold\")}}\n for i=1,5 do\n  local a,b=S.at(\"off\"..i),S.at(\"on\"..i)\n  if S.seen.adds then b=math.min(b,S.seen.adds)end\n  if b>a then gaps[#gaps+1]={a,b}end\n end\n local valid={};for _,g in ipairs(gaps)do if g[2]>g[1]then valid[#valid+1]=g end end;gaps=valid\n if S.naelGap then gaps[#gaps+1]={S.naelGap[1],S.naelGap[2]or now+6}end\n A.clearAutoSimPhases(\"FullDowntime\")\n for _,g in ipairs(S.union(gaps))do if g[2]>g[1]then A.addAutoSimPhase(\"FullDowntime\",g[1],g[2])end end\n local stun={}\n for _,g in pairs(S.dynamic)do if g[1]==\"Stun\"then stun[#stun+1]={g[2],g[3]}end end\n A.clearAutoSimPhases(\"Stun\")\n for _,g in ipairs(S.union(stun))do if g[2]>g[1]then A.addAutoSimPhase(\"Stun\",g[1],g[2])end end\n A.clearAutoSimPhases(\"CasterDowntime\")\n for _,g in ipairs(S.movementWindows())do A.addAutoSimPhase(\"CasterDowntime\",g[1],g[2])end\n -- Phoenix1436 is +100% real personal damage. Normalize planning weights\n -- so current actual buffs are not multiplied by another authored x2.\n A.clearAutoSimPhases(\"BossModifier\")\n local gold=S.at(\"gold\")\n if gold>0 then A.addAutoSimPhase(\"BossModifier\",0,gold,.5)end\n if S.phase==5 and S.phoenixSeen and not S.phoenixActive then\n  A.addAutoSimPhase(\"BossModifier\",gold,kill,.5)\n end\n A.clearAutoSimPhases(\"RaidBuff\")\n if S.cfg.buffForecast then\n  local prev=-120\n  for _,t in ipairs({5,S.at(\"nael\")+2,S.at(\"baha\")+2,S.at(\"on3\")+2,S.at(\"adds\")+2,S.at(\"gold\")+2,S.at(\"gold\")+122})do\n   t=math.max(t,prev+120);A.addAutoSimPhase(\"RaidBuff\",t,t+20,1+S.cfg.buffGain/100);prev=t\n  end\n end\n -- Slot 0 tracks the selected main boss; slot 1 tracks the other adds boss.\n -- Lifetimes survive temporary untargetability. Golden starts a fresh target-state lifetime.\n local start,finish=0,S.at(\"twinEnd\")\n if S.phase==2 then start,finish=S.at(\"nael\"),S.at(\"naelEnd\")\n elseif S.phase==3 then start,finish=S.at(\"baha\"),S.at(\"adds\")\n elseif S.phase==4 then start,finish=S.at(\"adds\"),S.at(\"addsEnd\")\n elseif S.phase==5 then start,finish=S.at(\"gold\"),kill end\n finish=math.max(finish,now+5)\n for slot=0,1 do\n  A.clearAutoSimPhases(\"DotAvailability\",slot);A.clearAutoSimPhases(\"DotAvailability\",slot,1);A.clearAutoSimPhases(\"TargetLifetime\",slot)\n  if slot==0 or S.phase==4 then\n   local id=slot==0 and S.mainID or S.otherID\n   local death=id and S.ends[id]\n   local ending=death or finish\n   if ending>start then\n    A.addAutoSimPhase(\"TargetLifetime\",start,ending,1,slot)\n    local cursor=start\n    for _,g in ipairs(S.union(gaps))do\n     local a,b=math.max(start,g[1]),math.min(ending-.5,g[2])\n     if b>a then if a>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,a,1,slot);if slot==0 then A.addAutoSimPhase(\"DotAvailability\",cursor,a,1,slot,1)end end;cursor=math.max(cursor,b)end\n    end\n    if ending-.5>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,ending-.5,1,slot);if slot==0 then A.addAutoSimPhase(\"DotAvailability\",cursor,ending-.5,1,slot,1)end end\n   end\n  end\n end\n A.clearAutoSimUncertainty()\n A.addAutoSimUncertainty(0,S.phase>=3 and 3 or 20)\n if not S.seen.addsEnd then A.addAutoSimUncertainty(math.max(1,S.at(\"addsEnd\")-25),20)end\n A.addAutoSimUncertainty(math.max(2,S.at(\"gold\")+S.cfg.goldLength-30),15)\n S.lastPublish=now\nend\nfunction S.sync(k,t)\n if S.seen[k]then return end\n S.seen[k]=t;S.publish()\nend\nfor _,cid in ipairs({1482,2612,3210})do\n for _,e in pairs(TensorCore.getEntityGroupList(\"ContentID\",cid)or{})do\n  if e.alive then S.ids[cid]=e.id;S.up[cid]=e.targetable;break end\n end\nend\nS.publish()\ndata.ucobBLMAutoSim=S\nself.used=true\n",
+							actionLua = "local A=TensorCore.API.TensorACR\nlocal C=_G.UCOB_BLM_Config\nif not C then C={goldLength=162.14,addsLength=100.222,buffForecast=false,buffGain=0,twisterLead=1.0,twisterAfter=1.0,exaDuration=8,assignmentMove=2,returnMove=1.5};_G.UCOB_BLM_Config=C end\nif C.quoteMove==nil then C.quoteMove=2 end\nlocal S={version=1,phase=1,seen={},ids={},up={},dynamic={},cfg={},dotStart={},ends={}}\nfor k,v in pairs(C)do S.cfg[k]=v end\nS.anchors={\n twinEnd={\"pull\",128.352},nael={\"twinEnd\",21.968},naelEnd={\"nael\",115.307},baha={\"naelEnd\",16.333},\n off1={\"baha\",23.449},on1={\"off1\",11.534},off2={\"on1\",29.533},on2={\"off2\",16.557},\n off3={\"on2\",34.636},on3={\"off3\",16.517},off4={\"on3\",35.834},on4={\"off4\",27.560},\n off5={\"on4\",33.712},on5={\"off5\",19.376},off6={\"on5\",37.626},adds={\"off6\",53.754},\n addsEnd={\"adds\",S.cfg.addsLength},gold={\"addsEnd\",62.323}}\nfunction S.at(k)\n if k==\"pull\"then return 0 end\n if S.seen[k]then return S.seen[k]end\n local a=S.anchors[k];return S.at(a[1])+a[2]\nend\nfunction S.union(xs)\n table.sort(xs,function(a,b)return a[1]<b[1]end)\n local out={}\n for _,v in ipairs(xs)do\n  local last=out[#out]\n  if last and v[1]<=last[2]then last[2]=math.max(last[2],v[2])else out[#out+1]={v[1],v[2]}end\n end\n return out\nend\nfunction S.alive(e)return e and e.alive and e.targetable and e.hp.current>1 end\nfunction S.ent(cid)return S.ids[cid]and TensorCore.mGetEntity(S.ids[cid])end\n\nS.movePred={{\"firstTwister\",\"pull\",12.99,\"twister\"},{\"addsTwister1\",\"adds\",24.34,\"twister\"},{\"addsTwister2\",\"adds\",41.487,\"twister\"},{\"addsTwister3\",\"adds\",87.071,\"twister\"},{\"addsTwister4\",\"adds\",104.096,\"twister\"},{\"exa1\",\"gold\",24.549,\"exa\"},{\"exa2\",\"gold\",73.276,\"exa\"},{\"exa3\",\"gold\",123.05,\"exa\"},{\"exa4\",\"gold\",174.689,\"exa\"}}\nS.moveActual={};S.personalMoves={}\nfunction S.movementWindows()\n local out={}\n for _,p in ipairs(S.movePred)do\n  local center=S.moveActual[p[1]]or S.at(p[2])+p[3]\n  local a,b\n  if p[4]==\"twister\"then a,b=center-S.cfg.twisterLead,center+S.cfg.twisterAfter\n  else a,b=center-.5,center+S.cfg.exaDuration end\n  if p[2]==\"adds\"then b=math.min(b,S.at(\"addsEnd\"))end\n  if p[2]~=\"pull\"or not S.seen.twinEnd or center<S.seen.twinEnd then\n   if b>a then out[#out+1]={a,b}end\n  end\n end\n for _,v in pairs(S.personalMoves)do if v[2]>v[1]then out[#out+1]={v[1],v[2]}end end\n return S.union(out)\nend\nfunction S.correctMovement(kind,finish)\n local best,delta\n for _,p in ipairs(S.movePred)do\n  if p[4]==kind and not S.moveActual[p[1]]and ((p[2]==\"pull\"and S.phase==1)or(p[2]==\"adds\"and S.phase==4)or(p[2]==\"gold\"and S.phase==5))then\n   local d=math.abs(finish-S.at(p[2])-p[3]);if not delta or d<delta then best,delta=p[1],d end\n  end\n end\n if best and delta<8 then S.moveActual[best]=finish\n else S.personalMoves[kind..\"Extra\"]={finish-(kind==\"twister\"and S.cfg.twisterLead or .5),finish+(kind==\"twister\"and S.cfg.twisterAfter or S.cfg.exaDuration)}end\n S.publish()\nend\n\nfunction S.quoteSequence(text)\nlocal t=text:gsub(\"%s+\",\" \")\nlocal seq=nil\nif t:find(\"O hallowed moon, shine you the iron path\",1,true) then seq={9916,9915}\nelseif t:find(\"O hallowed moon, take fire and scorch my foes\",1,true) then seq={9916,9917}\nelseif t:find(\"Take fire, O hallowed moon\",1,true) then seq={9917,9916}\nelseif t:find(\"Blazing path, lead me to iron rule\",1,true) then seq={9917,9915}\nelseif t:find(\"From on high I descend, the hallowed moon to call\",1,true) then seq={9918,9916}\nelseif t:find(\"From on high I descend, the iron path to walk\",1,true) then seq={9918,9915}\nelseif t:find(\"From on high I descend, the iron path to call\",1,true) then seq={9918,9915}\nelseif t:find(\"From on high I descend, the moon and stars to bring\",1,true) then seq={9918,9916,9920}\nelseif t:find(\"From hallowed moon I descend, a rain of stars to bring\",1,true) then seq={9916,9918,9920}\nelseif t:find(\"From hallowed moon I descend, upon burning earth to tread\",1,true) then seq={9916,9918,9917}\nelseif t:find(\"From hallowed moon I bare iron, in my descent to wield\",1,true) then seq={9916,9915,9918}\nelseif t:find(\"Unbending iron, take fire and descend\",1,true) then seq={9915,9917,9918}\nelseif t:find(\"Unbending iron, descend with fiery edge\",1,true) then seq={9915,9918,9917}\nend\n return seq\nend\nfunction S.quoteCategory(id)\n if id==9916 or id==9917 then return \"in\"elseif id==9915 then return \"out\"else return \"spread\"end\nend\nfunction S.planQuote()\n local q=S.quote\n if not q then return end\n for i=1,3 do S.personalMoves[\"quote\"..i]=nil end\n local previous=q.previous\n local p=TensorCore.mGetPlayer();local n=S.ent(2612)\n for i=q.step,#q.seq do\n  local cat=S.quoteCategory(q.seq[i]);local hit=q.nextHit+(i-q.step)*3.1\n  local move=previous~=cat\n  if not previous and p and n then\n   local distance=TensorCore.getDistance2d(p.pos,n.pos)\n   if(cat==\"in\"and distance<=4)or(cat==\"out\"and distance>=10)then move=false end\n  end\n  if move then\n   local duration=S.cfg.quoteMove\n   local a=previous and hit-3.0 or hit-duration-.2\n   S.personalMoves[\"quote\"..i]={a,math.min(a+duration,hit-.1)}\n  end\n  previous=cat\n end\n S.publish()\nend\n\nfunction S.publish()\n local now=A.getAutoSimTime()\n local live=_G.UCOB_BLM_Config\n if live then for k,v in pairs(live)do S.cfg[k]=v end end\n local kill=math.min(1259,math.max(now+10,S.at(\"gold\")+S.cfg.goldLength))\n S.killAt=kill;A.setAutoSimKillTime(kill)\n local gaps={{S.at(\"twinEnd\"),S.at(\"nael\")},{S.at(\"naelEnd\"),S.at(\"baha\")},{S.at(\"off6\"),S.at(\"adds\")},{S.at(\"addsEnd\"),S.at(\"gold\")}}\n for i=1,5 do\n  local a,b=S.at(\"off\"..i),S.at(\"on\"..i)\n  if S.seen.adds then b=math.min(b,S.seen.adds)end\n  if b>a then gaps[#gaps+1]={a,b}end\n end\n local valid={};for _,g in ipairs(gaps)do if g[2]>g[1]then valid[#valid+1]=g end end;gaps=valid\n if S.naelGap then gaps[#gaps+1]={S.naelGap[1],S.naelGap[2]or now+6}end\n A.clearAutoSimPhases(\"FullDowntime\")\n for _,g in ipairs(S.union(gaps))do if g[2]>g[1]then A.addAutoSimPhase(\"FullDowntime\",g[1],g[2])end end\n local stun={}\n for _,g in pairs(S.dynamic)do if g[1]==\"Stun\"then stun[#stun+1]={g[2],g[3]}end end\n A.clearAutoSimPhases(\"Stun\")\n for _,g in ipairs(S.union(stun))do if g[2]>g[1]then A.addAutoSimPhase(\"Stun\",g[1],g[2])end end\n A.clearAutoSimPhases(\"CasterDowntime\")\n for _,g in ipairs(S.movementWindows())do A.addAutoSimPhase(\"CasterDowntime\",g[1],g[2])end\n -- Phoenix1436 is +100% real personal damage. Normalize planning weights\n -- so current actual buffs are not multiplied by another authored x2.\n A.clearAutoSimPhases(\"BossModifier\")\n local gold=S.at(\"gold\")\n if gold>0 then A.addAutoSimPhase(\"BossModifier\",0,gold,.5)end\n if S.phase==5 and S.phoenixSeen and not S.phoenixActive then\n  A.addAutoSimPhase(\"BossModifier\",gold,kill,.5)\n end\n A.clearAutoSimPhases(\"RaidBuff\")\n if S.cfg.buffForecast then\n  local prev=-120\n  for _,t in ipairs({5,S.at(\"nael\")+2,S.at(\"baha\")+2,S.at(\"on3\")+2,S.at(\"adds\")+2,S.at(\"gold\")+2,S.at(\"gold\")+122})do\n   t=math.max(t,prev+120);A.addAutoSimPhase(\"RaidBuff\",t,t+20,1+S.cfg.buffGain/100);prev=t\n  end\n end\n -- Slot 0 tracks the selected main boss; slot 1 tracks the other adds boss.\n -- Lifetimes survive temporary untargetability. Golden starts a fresh target-state lifetime.\n local start,finish=0,S.at(\"twinEnd\")\n if S.phase==2 then start,finish=S.at(\"nael\"),S.at(\"naelEnd\")\n elseif S.phase==3 then start,finish=S.at(\"baha\"),S.at(\"adds\")\n elseif S.phase==4 then start,finish=S.at(\"adds\"),S.at(\"addsEnd\")\n elseif S.phase==5 then start,finish=S.at(\"gold\"),kill end\n finish=math.max(finish,now+5)\n for slot=0,1 do\n  A.clearAutoSimPhases(\"DotAvailability\",slot);A.clearAutoSimPhases(\"DotAvailability\",slot,1);A.clearAutoSimPhases(\"TargetLifetime\",slot)\n  if slot==0 or S.phase==4 then\n   local id=slot==0 and S.mainID or S.otherID\n   local death=id and S.ends[id]\n   local ending=death or finish\n   if ending>start then\n    A.addAutoSimPhase(\"TargetLifetime\",start,ending,1,slot)\n    local cursor=start\n    for _,g in ipairs(S.union(gaps))do\n     local a,b=math.max(start,g[1]),math.min(ending-.5,g[2])\n     if b>a then if a>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,a,1,slot);if slot==0 then A.addAutoSimPhase(\"DotAvailability\",cursor,a,1,slot,1)end end;cursor=math.max(cursor,b)end\n    end\n    if ending-.5>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,ending-.5,1,slot);if slot==0 then A.addAutoSimPhase(\"DotAvailability\",cursor,ending-.5,1,slot,1)end end\n   end\n  end\n end\n A.clearAutoSimUncertainty()\n A.addAutoSimUncertainty(0,S.phase>=3 and 3 or 20)\n if not S.seen.addsEnd then A.addAutoSimUncertainty(math.max(1,S.at(\"addsEnd\")-25),20)end\n A.addAutoSimUncertainty(math.max(2,S.at(\"gold\")+S.cfg.goldLength-30),15)\n S.lastPublish=now\nend\nfunction S.sync(k,t)\n if S.seen[k]then return end\n S.seen[k]=t;S.publish()\nend\nfor _,cid in ipairs({1482,2612,3210})do\n for _,e in pairs(TensorCore.getEntityGroupList(\"ContentID\",cid)or{})do\n  if e.alive then S.ids[cid]=e.id;S.up[cid]=e.targetable;break end\n end\nend\nS.publish()\ndata.ucobBLMAutoSim=S\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -578,7 +578,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local C=_G.UCOB_BLM_Config\nif not C then C={goldLength=162.14,addsLength=100.222,buffForecast=false,buffGain=0,twisterLead=1.0,twisterAfter=1.0,exaDuration=8,assignmentMove=2,returnMove=1.5};_G.UCOB_BLM_Config=C end\nlocal visible=GUI:Begin('UCOB Black Mage AutoSim',true)\nif visible then\n GUI:Text('Built-in targeting. Normal LPDU; manual AM/Between the Lines. Session settings.')\n C.goldLength=GUI:SliderFloat('Expected Golden duration (s)',C.goldLength,100,215,'%.1f',1)\n if GUI:IsItemHovered()then GUI:SetTooltip('Initial estimate162.14s from49 EU clears. Corrected by actual phase starts; adjustable for your group. All schedule times use the real combat clock.')end\n if GUI:TreeNode('P4 - Adds')then\n  GUI:Text('Targets higher-HP boss when separated by at least3 percentage points.')\n  GUI:Text('Tracks target lifetimes and Thunder availability. ACR decides cleave from actual geometry.')\n  C.addsLength=GUI:SliderFloat('Expected adds duration (s)',C.addsLength,60,125,'%.1f',1)\n  if GUI:IsItemHovered()then GUI:SetTooltip('Forecast only; both actual boss departures correct the transition. New pulls use this estimate.')end\n  GUI:TreePop()\n end\n if GUI:TreeNode('Movement forecasts')then\n  C.twisterLead=GUI:SliderFloat('Twister: seconds before resolution',C.twisterLead,.3,2,'%.1f',1)\n  C.twisterAfter=GUI:SliderFloat('Twister: recovery seconds',C.twisterAfter,.3,2,'%.1f',1)\n  C.exaDuration=GUI:SliderFloat('Exaflare: movement seconds',C.exaDuration,2,10,'%.1f',1)\n  if GUI:IsItemHovered()then GUI:SetTooltip('Conservative eight-second forecast across the six explosions. Cast events correct timing. Adjust for your dodge path; this does not move you.')end\n  C.assignmentMove=GUI:SliderFloat('Personal marker: move out seconds',C.assignmentMove,.5,5,'%.1f',1)\n  C.returnMove=GUI:SliderFloat('Personal hit: return movement seconds',C.returnMove,0,5,'%.1f',1)\n  GUI:Text('Movement predicts leaving Ley Lines. No automatic field return is assumed.')\n  GUI:Text('P2 quote positioning and unplanned movement retain the ACR allowance.')\n  GUI:TreePop()\n end\n C.buffForecast=GUI:Checkbox('Forecast future party buffs',C.buffForecast)\n C.buffGain=GUI:SliderFloat('Combined future buff gain (%)',C.buffGain,0,40,'%.2f',1)\n if GUI:IsItemHovered()then GUI:SetTooltip('Optional composition-specific estimate; initially disabled/0%. Active buffs are handled by ACR. No UWU priority weights copied.')end\n GUI:Text('Phoenix phase priority: twice pre-Golden damage value; blessing loss removes the bonus.')\n if GUI:IsItemHovered()then GUI:SetTooltip('Normalized planning weight0.5 beforeGolden and1 during blessedGolden. Real Phoenix damage buff is not authored as another x2. UnblessedGolden returns to0.5.')end\n GUI:Text('Cooldowns stay with AutoSim. No forced teleports, LB or Ley Lines return.')\nend\nGUI:End()\n",
+							actionLua = "local C=_G.UCOB_BLM_Config\nif not C then C={goldLength=162.14,addsLength=100.222,buffForecast=false,buffGain=0,twisterLead=1.0,twisterAfter=1.0,exaDuration=8,assignmentMove=2,returnMove=1.5};_G.UCOB_BLM_Config=C end\nif C.quoteMove==nil then C.quoteMove=2 end\nlocal visible=GUI:Begin('UCOB Black Mage AutoSim',true)\nif visible then\n GUI:Text('Built-in targeting. Normal LPDU; manual AM/Between the Lines. Session settings.')\n C.goldLength=GUI:SliderFloat('Expected Golden duration (s)',C.goldLength,100,215,'%.1f',1)\n if GUI:IsItemHovered()then GUI:SetTooltip('Initial estimate162.14s from49 EU clears. Corrected by actual phase starts; adjustable for your group. All schedule times use the real combat clock.')end\n if GUI:TreeNode('P4 - Adds')then\n  GUI:Text('Targets higher-HP boss when separated by at least3 percentage points.')\n  GUI:Text('Tracks target lifetimes and Thunder availability. ACR decides cleave from actual geometry.')\n  C.addsLength=GUI:SliderFloat('Expected adds duration (s)',C.addsLength,60,125,'%.1f',1)\n  if GUI:IsItemHovered()then GUI:SetTooltip('Forecast only; both actual boss departures correct the transition. New pulls use this estimate.')end\n  GUI:TreePop()\n end\n if GUI:TreeNode('Movement forecasts')then\n  C.twisterLead=GUI:SliderFloat('Twister: seconds before resolution',C.twisterLead,.3,2,'%.1f',1)\n  C.twisterAfter=GUI:SliderFloat('Twister: recovery seconds',C.twisterAfter,.3,2,'%.1f',1)\n  C.exaDuration=GUI:SliderFloat('Exaflare: movement seconds',C.exaDuration,2,10,'%.1f',1)\n  if GUI:IsItemHovered()then GUI:SetTooltip('Conservative eight-second forecast across the six explosions. Cast events correct timing. Adjust for your dodge path; this does not move you.')end\n  C.assignmentMove=GUI:SliderFloat('Personal marker: move out seconds',C.assignmentMove,.5,5,'%.1f',1)\n  C.returnMove=GUI:SliderFloat('Personal hit: return movement seconds',C.returnMove,0,5,'%.1f',1)\n  GUI:Text('Movement predicts leaving Ley Lines. No automatic field return is assumed.')\n  GUI:Text('Unplanned movement retains the ACR allowance.')\n  GUI:TreePop()\n end\n if GUI:TreeNode('P2 - Nael quotes')then\n  C.quoteMove=GUI:SliderFloat('Quote transition movement (s)',C.quoteMove,.5,3,'%.1f',1)\n  if GUI:IsItemHovered()then GUI:SetTooltip('English quote text forecasts In/Out/Spread changes, then actual casts correct remaining steps. Two seconds is a tunable travel estimate, not a forced move. Same-zone steps do not add movement.')end\n  GUI:TreePop()\n end\n C.buffForecast=GUI:Checkbox('Forecast future party buffs',C.buffForecast)\n C.buffGain=GUI:SliderFloat('Combined future buff gain (%)',C.buffGain,0,40,'%.2f',1)\n if GUI:IsItemHovered()then GUI:SetTooltip('Optional composition-specific estimate; initially disabled/0%. Active buffs are handled by ACR. No UWU priority weights copied.')end\n GUI:Text('Phoenix phase priority: twice pre-Golden damage value; blessing loss removes the bonus.')\n if GUI:IsItemHovered()then GUI:SetTooltip('Normalized planning weight0.5 beforeGolden and1 during blessedGolden. Real Phoenix damage buff is not authored as another x2. UnblessedGolden returns to0.5.')end\n GUI:Text('Cooldowns stay with AutoSim. No forced teleports, LB or Ley Lines return.')\nend\nGUI:End()\n",
 							conditions = 
 							{
 								
@@ -832,7 +832,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local A=TensorCore.API.TensorACR\nlocal C=_G.UCOB_BLM_Config\nif not C then C={goldLength=162.14,addsLength=100.222,buffForecast=false,buffGain=0,twisterLead=1.0,twisterAfter=1.0,exaDuration=8,assignmentMove=2,returnMove=1.5};_G.UCOB_BLM_Config=C end\nlocal S={version=1,phase=1,seen={},ids={},up={},dynamic={},cfg={},dotStart={},ends={}}\nfor k,v in pairs(C)do S.cfg[k]=v end\nS.anchors={\n twinEnd={\"pull\",128.352},nael={\"twinEnd\",21.968},naelEnd={\"nael\",115.307},baha={\"naelEnd\",16.333},\n off1={\"baha\",23.449},on1={\"off1\",11.534},off2={\"on1\",29.533},on2={\"off2\",16.557},\n off3={\"on2\",34.636},on3={\"off3\",16.517},off4={\"on3\",35.834},on4={\"off4\",27.560},\n off5={\"on4\",33.712},on5={\"off5\",19.376},off6={\"on5\",37.626},adds={\"off6\",53.754},\n addsEnd={\"adds\",S.cfg.addsLength},gold={\"addsEnd\",62.323}}\nfunction S.at(k)\n if k==\"pull\"then return 0 end\n if S.seen[k]then return S.seen[k]end\n local a=S.anchors[k];return S.at(a[1])+a[2]\nend\nfunction S.union(xs)\n table.sort(xs,function(a,b)return a[1]<b[1]end)\n local out={}\n for _,v in ipairs(xs)do\n  local last=out[#out]\n  if last and v[1]<=last[2]then last[2]=math.max(last[2],v[2])else out[#out+1]={v[1],v[2]}end\n end\n return out\nend\nfunction S.alive(e)return e and e.alive and e.targetable and e.hp.current>1 end\nfunction S.ent(cid)return S.ids[cid]and TensorCore.mGetEntity(S.ids[cid])end\n\nS.movePred={{\"firstTwister\",\"pull\",12.99,\"twister\"},{\"addsTwister1\",\"adds\",24.34,\"twister\"},{\"addsTwister2\",\"adds\",41.487,\"twister\"},{\"addsTwister3\",\"adds\",87.071,\"twister\"},{\"addsTwister4\",\"adds\",104.096,\"twister\"},{\"exa1\",\"gold\",24.549,\"exa\"},{\"exa2\",\"gold\",73.276,\"exa\"},{\"exa3\",\"gold\",123.05,\"exa\"},{\"exa4\",\"gold\",174.689,\"exa\"}}\nS.moveActual={};S.personalMoves={}\nfunction S.movementWindows()\n local out={}\n for _,p in ipairs(S.movePred)do\n  local center=S.moveActual[p[1]]or S.at(p[2])+p[3]\n  local a,b\n  if p[4]==\"twister\"then a,b=center-S.cfg.twisterLead,center+S.cfg.twisterAfter\n  else a,b=center-.5,center+S.cfg.exaDuration end\n  if p[2]==\"adds\"then b=math.min(b,S.at(\"addsEnd\"))end\n  if p[2]~=\"pull\"or not S.seen.twinEnd or center<S.seen.twinEnd then\n   if b>a then out[#out+1]={a,b}end\n  end\n end\n for _,v in pairs(S.personalMoves)do if v[2]>v[1]then out[#out+1]={v[1],v[2]}end end\n return S.union(out)\nend\nfunction S.correctMovement(kind,finish)\n local best,delta\n for _,p in ipairs(S.movePred)do\n  if p[4]==kind and not S.moveActual[p[1]]and ((p[2]==\"pull\"and S.phase==1)or(p[2]==\"adds\"and S.phase==4)or(p[2]==\"gold\"and S.phase==5))then\n   local d=math.abs(finish-S.at(p[2])-p[3]);if not delta or d<delta then best,delta=p[1],d end\n  end\n end\n if best and delta<8 then S.moveActual[best]=finish\n else S.personalMoves[kind..\"Extra\"]={finish-(kind==\"twister\"and S.cfg.twisterLead or .5),finish+(kind==\"twister\"and S.cfg.twisterAfter or S.cfg.exaDuration)}end\n S.publish()\nend\nfunction S.publish()\n local now=A.getAutoSimTime()\n local live=_G.UCOB_BLM_Config\n if live then for k,v in pairs(live)do S.cfg[k]=v end end\n local kill=math.min(1259,math.max(now+10,S.at(\"gold\")+S.cfg.goldLength))\n S.killAt=kill;A.setAutoSimKillTime(kill)\n local gaps={{S.at(\"twinEnd\"),S.at(\"nael\")},{S.at(\"naelEnd\"),S.at(\"baha\")},{S.at(\"off6\"),S.at(\"adds\")},{S.at(\"addsEnd\"),S.at(\"gold\")}}\n for i=1,5 do\n  local a,b=S.at(\"off\"..i),S.at(\"on\"..i)\n  if S.seen.adds then b=math.min(b,S.seen.adds)end\n  if b>a then gaps[#gaps+1]={a,b}end\n end\n local valid={};for _,g in ipairs(gaps)do if g[2]>g[1]then valid[#valid+1]=g end end;gaps=valid\n if S.naelGap then gaps[#gaps+1]={S.naelGap[1],S.naelGap[2]or now+6}end\n A.clearAutoSimPhases(\"FullDowntime\")\n for _,g in ipairs(S.union(gaps))do if g[2]>g[1]then A.addAutoSimPhase(\"FullDowntime\",g[1],g[2])end end\n local stun={}\n for _,g in pairs(S.dynamic)do if g[1]==\"Stun\"then stun[#stun+1]={g[2],g[3]}end end\n A.clearAutoSimPhases(\"Stun\")\n for _,g in ipairs(S.union(stun))do if g[2]>g[1]then A.addAutoSimPhase(\"Stun\",g[1],g[2])end end\n A.clearAutoSimPhases(\"CasterDowntime\")\n for _,g in ipairs(S.movementWindows())do A.addAutoSimPhase(\"CasterDowntime\",g[1],g[2])end\n -- Phoenix1436 is +100% real personal damage. Normalize planning weights\n -- so current actual buffs are not multiplied by another authored x2.\n A.clearAutoSimPhases(\"BossModifier\")\n local gold=S.at(\"gold\")\n if gold>0 then A.addAutoSimPhase(\"BossModifier\",0,gold,.5)end\n if S.phase==5 and S.phoenixSeen and not S.phoenixActive then\n  A.addAutoSimPhase(\"BossModifier\",gold,kill,.5)\n end\n A.clearAutoSimPhases(\"RaidBuff\")\n if S.cfg.buffForecast then\n  local prev=-120\n  for _,t in ipairs({5,S.at(\"nael\")+2,S.at(\"baha\")+2,S.at(\"on3\")+2,S.at(\"adds\")+2,S.at(\"gold\")+2,S.at(\"gold\")+122})do\n   t=math.max(t,prev+120);A.addAutoSimPhase(\"RaidBuff\",t,t+20,1+S.cfg.buffGain/100);prev=t\n  end\n end\n -- Slot 0 tracks the selected main boss; slot 1 tracks the other adds boss.\n -- Lifetimes survive temporary untargetability. Golden starts a fresh target-state lifetime.\n local start,finish=0,S.at(\"twinEnd\")\n if S.phase==2 then start,finish=S.at(\"nael\"),S.at(\"naelEnd\")\n elseif S.phase==3 then start,finish=S.at(\"baha\"),S.at(\"adds\")\n elseif S.phase==4 then start,finish=S.at(\"adds\"),S.at(\"addsEnd\")\n elseif S.phase==5 then start,finish=S.at(\"gold\"),kill end\n finish=math.max(finish,now+5)\n for slot=0,1 do\n  A.clearAutoSimPhases(\"DotAvailability\",slot);A.clearAutoSimPhases(\"DotAvailability\",slot,1);A.clearAutoSimPhases(\"TargetLifetime\",slot)\n  if slot==0 or S.phase==4 then\n   local id=slot==0 and S.mainID or S.otherID\n   local death=id and S.ends[id]\n   local ending=death or finish\n   if ending>start then\n    A.addAutoSimPhase(\"TargetLifetime\",start,ending,1,slot)\n    local cursor=start\n    for _,g in ipairs(S.union(gaps))do\n     local a,b=math.max(start,g[1]),math.min(ending-.5,g[2])\n     if b>a then if a>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,a,1,slot);if slot==0 then A.addAutoSimPhase(\"DotAvailability\",cursor,a,1,slot,1)end end;cursor=math.max(cursor,b)end\n    end\n    if ending-.5>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,ending-.5,1,slot);if slot==0 then A.addAutoSimPhase(\"DotAvailability\",cursor,ending-.5,1,slot,1)end end\n   end\n  end\n end\n A.clearAutoSimUncertainty()\n A.addAutoSimUncertainty(0,S.phase>=3 and 3 or 20)\n if not S.seen.addsEnd then A.addAutoSimUncertainty(math.max(1,S.at(\"addsEnd\")-25),20)end\n A.addAutoSimUncertainty(math.max(2,S.at(\"gold\")+S.cfg.goldLength-30),15)\n S.lastPublish=now\nend\nfunction S.sync(k,t)\n if S.seen[k]then return end\n S.seen[k]=t;S.publish()\nend\nfor _,cid in ipairs({1482,2612,3210})do\n for _,e in pairs(TensorCore.getEntityGroupList(\"ContentID\",cid)or{})do\n  if e.alive then S.ids[cid]=e.id;S.up[cid]=e.targetable;break end\n end\nend\nS.publish()\ndata.ucobBLMAutoSim=S\nself.used=true\n",
+							actionLua = "local A=TensorCore.API.TensorACR\nlocal C=_G.UCOB_BLM_Config\nif not C then C={goldLength=162.14,addsLength=100.222,buffForecast=false,buffGain=0,twisterLead=1.0,twisterAfter=1.0,exaDuration=8,assignmentMove=2,returnMove=1.5};_G.UCOB_BLM_Config=C end\nif C.quoteMove==nil then C.quoteMove=2 end\nlocal S={version=1,phase=1,seen={},ids={},up={},dynamic={},cfg={},dotStart={},ends={}}\nfor k,v in pairs(C)do S.cfg[k]=v end\nS.anchors={\n twinEnd={\"pull\",128.352},nael={\"twinEnd\",21.968},naelEnd={\"nael\",115.307},baha={\"naelEnd\",16.333},\n off1={\"baha\",23.449},on1={\"off1\",11.534},off2={\"on1\",29.533},on2={\"off2\",16.557},\n off3={\"on2\",34.636},on3={\"off3\",16.517},off4={\"on3\",35.834},on4={\"off4\",27.560},\n off5={\"on4\",33.712},on5={\"off5\",19.376},off6={\"on5\",37.626},adds={\"off6\",53.754},\n addsEnd={\"adds\",S.cfg.addsLength},gold={\"addsEnd\",62.323}}\nfunction S.at(k)\n if k==\"pull\"then return 0 end\n if S.seen[k]then return S.seen[k]end\n local a=S.anchors[k];return S.at(a[1])+a[2]\nend\nfunction S.union(xs)\n table.sort(xs,function(a,b)return a[1]<b[1]end)\n local out={}\n for _,v in ipairs(xs)do\n  local last=out[#out]\n  if last and v[1]<=last[2]then last[2]=math.max(last[2],v[2])else out[#out+1]={v[1],v[2]}end\n end\n return out\nend\nfunction S.alive(e)return e and e.alive and e.targetable and e.hp.current>1 end\nfunction S.ent(cid)return S.ids[cid]and TensorCore.mGetEntity(S.ids[cid])end\n\nS.movePred={{\"firstTwister\",\"pull\",12.99,\"twister\"},{\"addsTwister1\",\"adds\",24.34,\"twister\"},{\"addsTwister2\",\"adds\",41.487,\"twister\"},{\"addsTwister3\",\"adds\",87.071,\"twister\"},{\"addsTwister4\",\"adds\",104.096,\"twister\"},{\"exa1\",\"gold\",24.549,\"exa\"},{\"exa2\",\"gold\",73.276,\"exa\"},{\"exa3\",\"gold\",123.05,\"exa\"},{\"exa4\",\"gold\",174.689,\"exa\"}}\nS.moveActual={};S.personalMoves={}\nfunction S.movementWindows()\n local out={}\n for _,p in ipairs(S.movePred)do\n  local center=S.moveActual[p[1]]or S.at(p[2])+p[3]\n  local a,b\n  if p[4]==\"twister\"then a,b=center-S.cfg.twisterLead,center+S.cfg.twisterAfter\n  else a,b=center-.5,center+S.cfg.exaDuration end\n  if p[2]==\"adds\"then b=math.min(b,S.at(\"addsEnd\"))end\n  if p[2]~=\"pull\"or not S.seen.twinEnd or center<S.seen.twinEnd then\n   if b>a then out[#out+1]={a,b}end\n  end\n end\n for _,v in pairs(S.personalMoves)do if v[2]>v[1]then out[#out+1]={v[1],v[2]}end end\n return S.union(out)\nend\nfunction S.correctMovement(kind,finish)\n local best,delta\n for _,p in ipairs(S.movePred)do\n  if p[4]==kind and not S.moveActual[p[1]]and ((p[2]==\"pull\"and S.phase==1)or(p[2]==\"adds\"and S.phase==4)or(p[2]==\"gold\"and S.phase==5))then\n   local d=math.abs(finish-S.at(p[2])-p[3]);if not delta or d<delta then best,delta=p[1],d end\n  end\n end\n if best and delta<8 then S.moveActual[best]=finish\n else S.personalMoves[kind..\"Extra\"]={finish-(kind==\"twister\"and S.cfg.twisterLead or .5),finish+(kind==\"twister\"and S.cfg.twisterAfter or S.cfg.exaDuration)}end\n S.publish()\nend\n\nfunction S.quoteSequence(text)\nlocal t=text:gsub(\"%s+\",\" \")\nlocal seq=nil\nif t:find(\"O hallowed moon, shine you the iron path\",1,true) then seq={9916,9915}\nelseif t:find(\"O hallowed moon, take fire and scorch my foes\",1,true) then seq={9916,9917}\nelseif t:find(\"Take fire, O hallowed moon\",1,true) then seq={9917,9916}\nelseif t:find(\"Blazing path, lead me to iron rule\",1,true) then seq={9917,9915}\nelseif t:find(\"From on high I descend, the hallowed moon to call\",1,true) then seq={9918,9916}\nelseif t:find(\"From on high I descend, the iron path to walk\",1,true) then seq={9918,9915}\nelseif t:find(\"From on high I descend, the iron path to call\",1,true) then seq={9918,9915}\nelseif t:find(\"From on high I descend, the moon and stars to bring\",1,true) then seq={9918,9916,9920}\nelseif t:find(\"From hallowed moon I descend, a rain of stars to bring\",1,true) then seq={9916,9918,9920}\nelseif t:find(\"From hallowed moon I descend, upon burning earth to tread\",1,true) then seq={9916,9918,9917}\nelseif t:find(\"From hallowed moon I bare iron, in my descent to wield\",1,true) then seq={9916,9915,9918}\nelseif t:find(\"Unbending iron, take fire and descend\",1,true) then seq={9915,9917,9918}\nelseif t:find(\"Unbending iron, descend with fiery edge\",1,true) then seq={9915,9918,9917}\nend\n return seq\nend\nfunction S.quoteCategory(id)\n if id==9916 or id==9917 then return \"in\"elseif id==9915 then return \"out\"else return \"spread\"end\nend\nfunction S.planQuote()\n local q=S.quote\n if not q then return end\n for i=1,3 do S.personalMoves[\"quote\"..i]=nil end\n local previous=q.previous\n local p=TensorCore.mGetPlayer();local n=S.ent(2612)\n for i=q.step,#q.seq do\n  local cat=S.quoteCategory(q.seq[i]);local hit=q.nextHit+(i-q.step)*3.1\n  local move=previous~=cat\n  if not previous and p and n then\n   local distance=TensorCore.getDistance2d(p.pos,n.pos)\n   if(cat==\"in\"and distance<=4)or(cat==\"out\"and distance>=10)then move=false end\n  end\n  if move then\n   local duration=S.cfg.quoteMove\n   local a=previous and hit-3.0 or hit-duration-.2\n   S.personalMoves[\"quote\"..i]={a,math.min(a+duration,hit-.1)}\n  end\n  previous=cat\n end\n S.publish()\nend\n\nfunction S.publish()\n local now=A.getAutoSimTime()\n local live=_G.UCOB_BLM_Config\n if live then for k,v in pairs(live)do S.cfg[k]=v end end\n local kill=math.min(1259,math.max(now+10,S.at(\"gold\")+S.cfg.goldLength))\n S.killAt=kill;A.setAutoSimKillTime(kill)\n local gaps={{S.at(\"twinEnd\"),S.at(\"nael\")},{S.at(\"naelEnd\"),S.at(\"baha\")},{S.at(\"off6\"),S.at(\"adds\")},{S.at(\"addsEnd\"),S.at(\"gold\")}}\n for i=1,5 do\n  local a,b=S.at(\"off\"..i),S.at(\"on\"..i)\n  if S.seen.adds then b=math.min(b,S.seen.adds)end\n  if b>a then gaps[#gaps+1]={a,b}end\n end\n local valid={};for _,g in ipairs(gaps)do if g[2]>g[1]then valid[#valid+1]=g end end;gaps=valid\n if S.naelGap then gaps[#gaps+1]={S.naelGap[1],S.naelGap[2]or now+6}end\n A.clearAutoSimPhases(\"FullDowntime\")\n for _,g in ipairs(S.union(gaps))do if g[2]>g[1]then A.addAutoSimPhase(\"FullDowntime\",g[1],g[2])end end\n local stun={}\n for _,g in pairs(S.dynamic)do if g[1]==\"Stun\"then stun[#stun+1]={g[2],g[3]}end end\n A.clearAutoSimPhases(\"Stun\")\n for _,g in ipairs(S.union(stun))do if g[2]>g[1]then A.addAutoSimPhase(\"Stun\",g[1],g[2])end end\n A.clearAutoSimPhases(\"CasterDowntime\")\n for _,g in ipairs(S.movementWindows())do A.addAutoSimPhase(\"CasterDowntime\",g[1],g[2])end\n -- Phoenix1436 is +100% real personal damage. Normalize planning weights\n -- so current actual buffs are not multiplied by another authored x2.\n A.clearAutoSimPhases(\"BossModifier\")\n local gold=S.at(\"gold\")\n if gold>0 then A.addAutoSimPhase(\"BossModifier\",0,gold,.5)end\n if S.phase==5 and S.phoenixSeen and not S.phoenixActive then\n  A.addAutoSimPhase(\"BossModifier\",gold,kill,.5)\n end\n A.clearAutoSimPhases(\"RaidBuff\")\n if S.cfg.buffForecast then\n  local prev=-120\n  for _,t in ipairs({5,S.at(\"nael\")+2,S.at(\"baha\")+2,S.at(\"on3\")+2,S.at(\"adds\")+2,S.at(\"gold\")+2,S.at(\"gold\")+122})do\n   t=math.max(t,prev+120);A.addAutoSimPhase(\"RaidBuff\",t,t+20,1+S.cfg.buffGain/100);prev=t\n  end\n end\n -- Slot 0 tracks the selected main boss; slot 1 tracks the other adds boss.\n -- Lifetimes survive temporary untargetability. Golden starts a fresh target-state lifetime.\n local start,finish=0,S.at(\"twinEnd\")\n if S.phase==2 then start,finish=S.at(\"nael\"),S.at(\"naelEnd\")\n elseif S.phase==3 then start,finish=S.at(\"baha\"),S.at(\"adds\")\n elseif S.phase==4 then start,finish=S.at(\"adds\"),S.at(\"addsEnd\")\n elseif S.phase==5 then start,finish=S.at(\"gold\"),kill end\n finish=math.max(finish,now+5)\n for slot=0,1 do\n  A.clearAutoSimPhases(\"DotAvailability\",slot);A.clearAutoSimPhases(\"DotAvailability\",slot,1);A.clearAutoSimPhases(\"TargetLifetime\",slot)\n  if slot==0 or S.phase==4 then\n   local id=slot==0 and S.mainID or S.otherID\n   local death=id and S.ends[id]\n   local ending=death or finish\n   if ending>start then\n    A.addAutoSimPhase(\"TargetLifetime\",start,ending,1,slot)\n    local cursor=start\n    for _,g in ipairs(S.union(gaps))do\n     local a,b=math.max(start,g[1]),math.min(ending-.5,g[2])\n     if b>a then if a>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,a,1,slot);if slot==0 then A.addAutoSimPhase(\"DotAvailability\",cursor,a,1,slot,1)end end;cursor=math.max(cursor,b)end\n    end\n    if ending-.5>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,ending-.5,1,slot);if slot==0 then A.addAutoSimPhase(\"DotAvailability\",cursor,ending-.5,1,slot,1)end end\n   end\n  end\n end\n A.clearAutoSimUncertainty()\n A.addAutoSimUncertainty(0,S.phase>=3 and 3 or 20)\n if not S.seen.addsEnd then A.addAutoSimUncertainty(math.max(1,S.at(\"addsEnd\")-25),20)end\n A.addAutoSimUncertainty(math.max(2,S.at(\"gold\")+S.cfg.goldLength-30),15)\n S.lastPublish=now\nend\nfunction S.sync(k,t)\n if S.seen[k]then return end\n S.seen[k]=t;S.publish()\nend\nfor _,cid in ipairs({1482,2612,3210})do\n for _,e in pairs(TensorCore.getEntityGroupList(\"ContentID\",cid)or{})do\n  if e.alive then S.ids[cid]=e.id;S.up[cid]=e.targetable;break end\n end\nend\nS.publish()\ndata.ucobBLMAutoSim=S\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -2170,6 +2170,256 @@ local tbl =
 			},
 			inheritanceRoot = "UCOB\\LPDU Draws",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "BLM AutoSim",
+				uuid = "f4985638-1439-57a0-a8f8-004c364817b5",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.ucobBLMAutoSim\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nlocal text=eventArgs.line.line\nS.quote={text=text,seq=S.quoteSequence(text),step=1,nextHit=now+5.1,expires=now+20}\nS.planQuote();self.used=true",
+							conditions = 
+							{
+								
+								{
+									"1912076a-6c23-b470-8805-687eeba7534d",
+									true,
+								},
+								
+								{
+									"15e57a1a-387f-aa0b-8c10-3af9c0b59ffc",
+									true,
+								},
+								
+								{
+									"a64102cc-c54b-9bac-93a7-3211679dd3fd",
+									true,
+								},
+								
+								{
+									"016fb9ee-eeae-7f70-a8a6-badbac84f841",
+									true,
+								},
+							},
+							name = "Forecast personal quote movement",
+							uuid = "a27ad64a-e04c-b78c-89e2-bb138a84e9cd",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 733,
+							name = "UCOB",
+							uuid = "1912076a-6c23-b470-8805-687eeba7534d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "Black Mage",
+							uuid = "15e57a1a-387f-aa0b-8c10-3af9c0b59ffc",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.ucobBLMAutoSim\nreturn S~=nil and S.phase==2",
+							dequeueIfLuaFalse = true,
+							name = "P2 configured",
+							uuid = "a64102cc-c54b-9bac-93a7-3211679dd3fd",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.ucobBLMAutoSim\nlocal text=eventArgs.line.line\nlocal q=S.quote\nreturn S.quoteSequence(text)~=nil and(not q or q.text~=text or TensorCore.API.TensorACR.getAutoSimTime()>=q.expires)",
+							dequeueIfLuaFalse = true,
+							name = "New recognized quote",
+							uuid = "016fb9ee-eeae-7f70-a8a6-badbac84f841",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim",
+				eventType = 7,
+				loop = true,
+				mechanicTime = 230.6,
+				name = "[BLM UCOB] Forecast personal quote movement",
+				timeRange = true,
+				timelineIndex = 48,
+				timerEndOffset = 220,
+				timerStartOffset = -35,
+				uuid = "2ab6a813-21a7-b544-a3ec-f5115dda2e14",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.ucobBLMAutoSim\nlocal q=S.quote\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nq.previous=S.quoteCategory(q.seq[q.step]);q.step=q.step+1;q.nextHit=now+3.1\nS.planQuote();self.used=true",
+							conditions = 
+							{
+								
+								{
+									"cf7fcc5d-c359-e99a-82f8-ed1a3e1488df",
+									true,
+								},
+								
+								{
+									"08eea732-ff7c-83a1-9496-4b83aa6b6609",
+									true,
+								},
+								
+								{
+									"a602de03-eb67-b1f5-b66f-8e7ee1698f4b",
+									true,
+								},
+								
+								{
+									"bd572458-e1e8-5a86-9b76-5a4d9d4c1e35",
+									true,
+								},
+								
+								{
+									"cafd33ce-32d8-bb7e-9a73-7d3f6fa9124e",
+									true,
+								},
+							},
+							name = "Correct remaining quote movement",
+							uuid = "5b367d0c-3398-34f4-82a5-cae77cd28022",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 733,
+							name = "UCOB",
+							uuid = "cf7fcc5d-c359-e99a-82f8-ed1a3e1488df",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "Black Mage",
+							uuid = "08eea732-ff7c-83a1-9496-4b83aa6b6609",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.ucobBLMAutoSim\nreturn S~=nil and S.phase==2",
+							dequeueIfLuaFalse = true,
+							name = "P2 configured",
+							uuid = "a602de03-eb67-b1f5-b66f-8e7ee1698f4b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Quote resolution",
+							spellIDList = 
+							{
+								9915,
+								9916,
+								9917,
+								9918,
+								9920,
+							},
+							uuid = "bd572458-e1e8-5a86-9b76-5a4d9d4c1e35",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.ucobBLMAutoSim\nlocal q=S.quote\nreturn q~=nil and TensorCore.API.TensorACR.getAutoSimTime()<q.expires and q.seq[q.step]==eventArgs.spellID",
+							dequeueIfLuaFalse = true,
+							name = "Expected quote step",
+							uuid = "cafd33ce-32d8-bb7e-9a73-7d3f6fa9124e",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 230.6,
+				name = "[BLM UCOB] Correct remaining quote movement",
+				timeRange = true,
+				timelineIndex = 48,
+				timerEndOffset = 220,
+				timerStartOffset = -35,
+				uuid = "36e0dd30-ba73-bb6e-9067-6159dd0ce0a0",
+				version = 2,
+			},
 		},
 	},
 	[49] = 
