@@ -1264,7 +1264,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local rootSettings=Settings or (_G and _G.Settings)\nlocal settings=rootSettings and rootSettings.FFXIVMINION\nif not settings then return end\nif not data.ucobAssignmentGuiOptions then\n data.ucobAssignmentGuiOptions={healer={\"Unassigned\",\"In\",\"Out\"},tower={\"Unassigned\",\"Close\",\"Far\"}}\nend\nlocal options=data.ucobAssignmentGuiOptions\nlocal healer=settings.LPDU_UCOB_FirstFireballHealer or \"Unassigned\"\nlocal R=AnyoneCore and AnyoneCore.Roster\nlocal slot=R and R.current() and R.mySlot() or nil\nlocal defaultTower=(slot==\"M1\" or slot==\"M2\") and \"Close\" or (slot==\"R1\" or slot==\"R2\") and \"Far\" or nil\noptions.tower[1]=defaultTower and (\"Auto: \"..defaultTower) or \"Auto (role)\"\nlocal tower=settings.LPDU_UCOB_BlackfireTower or \"Unassigned\"\nlocal hi=healer==\"In\" and 2 or healer==\"Out\" and 3 or 1\nlocal ti=tower==\"Close\" and 2 or tower==\"Far\" and 3 or 1\nlocal visible=GUI:Begin(\"[LPDU] UCOB - Assignments\",true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n settings.LPDU_UCOB_AutoTarget=GUI:Checkbox(\"Automatic targeting##UCOBAutoTarget\",settings.LPDU_UCOB_AutoTarget~=false)\n if GUI:IsItemHovered()then GUI:SetTooltip(\"Target attackable enemies at the existing phase/return windows. Automatically yields when the UCOB AutoSim profile owns targeting. This does not disable draws, assignments, potions or mitigation.\")end\n if data.ucobRPRAutoSim then GUI:Text(\"Targeting managed by AutoSim\")end\n GUI:PushItemWidth(150)\n GUI:Text(\"P1 Healer Fireball - DPS targeted\")\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"First Fireball only.\\nDPS targeted: use your chosen In/Out assignment.\\nHealer targeted: that healer goes in; the other stays out automatically.\\nUnassigned: agree which healer stays out.\\nBoth tanks stay out.\")\n end\n GUI:SameLine(255)\n local newH,changedH=GUI:Combo(\"##LPDUFirstFireballHealer\",hi,options.healer)\n if newH~=hi and options.healer[newH] then settings.LPDU_UCOB_FirstFireballHealer=options.healer[newH] end\n GUI:Text(\"P3 Blackfire DPS Tower\")\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Default: melee Close to Nael; ranged Far from Nael.\\nChoose Close/Far to override, or Auto to follow your roster role.\") end\n GUI:SameLine(255)\n local newT,changedT=GUI:Combo(\"##LPDUBlackfireTower\",ti,options.tower)\n if newT~=ti and options.tower[newT] then settings.LPDU_UCOB_BlackfireTower=newT==1 and \"Unassigned\" or options.tower[newT] end\n if GUI:CollapsingHeader(\"Potions##UCOBPotionsSection\") then\n settings.LPDU_UCOB_PotionsEnabled=GUI:Checkbox(\"Enable LPDU potion schedule##UCOBPots\",settings.LPDU_UCOB_PotionsEnabled~=false)\n if GUI:IsItemHovered() then local route=settings.LPDU_UCOB_PotionSecond or \"Late Nael\"\n local secondTimes={['Late Nael']='5:40.3 (340.3s)', ['Delayed Nael']='6:08.9 (368.9s)', ['Bahamut opener']='8:32.0 (512.0s)', ['After Blackfire']='9:51.3 (591.3s)'}\n local opener=settings.LPDU_UCOB_PotionOpener~=false and \"Opener: 0:03.3 (3.3s)\" or \"Opener: disabled\"\n local secondText=secondTimes[route] and (\"Second: \"..route..\" - \"..secondTimes[route]) or \"Second: disabled / manual\"\n GUI:SetTooltip(opener..\"\\n\"..secondText..\"\\nAdds opener: 14:05.8 (845.8s)\\nLate Golden: 22:46.6 (1366.6s)\\nSynced timeline times, not elapsed pull/replay time.\\nEach window lasts 3 seconds; normal weave rules apply.\\nUnavailable items or potion cooldown can skip a window.\\nDisable duplicate potion automation in your job profile.\") end\n settings.LPDU_UCOB_PotionOpener=GUI:Checkbox(\"Opener potion##UCOBPotOpener\",settings.LPDU_UCOB_PotionOpener~=false)\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Disable for a three-potion route. Default opener: timeline 3.3s.\") end\n if not data.ucobPotionSecondOptions then data.ucobPotionSecondOptions={\"Late Nael\",\"Delayed Nael\",\"Bahamut opener\",\"After Blackfire\",\"Disabled / manual\"} end\n local potOptions=data.ucobPotionSecondOptions\n local second=settings.LPDU_UCOB_PotionSecond or \"Late Nael\"\n local secondIndex=1\n for i=1,#potOptions do if potOptions[i]==second then secondIndex=i break end end\n GUI:Text(\"Second potion window\")\n GUI:SameLine(255)\n local newSecond=GUI:Combo(\"##UCOBSecondPotion\",secondIndex,potOptions)\n if newSecond~=secondIndex and potOptions[newSecond] then settings.LPDU_UCOB_PotionSecond=potOptions[newSecond] end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Alternatives, not extra potions.\\nLate Nael 340.3 / Delayed Nael 368.9 / Bahamut opener 512.0 / After Blackfire 591.3.\\nAdds opener 845.8 and Late Golden 1366.6 remain enabled.\\nTimes are synced timeline coordinates, not seconds since pull.\\nReal cooldown or missing items can cause a window to be skipped.\") end\n end\n GUI:PopItemWidth()\nend\nGUI:End()\nself.used=true",
+							actionLua = "local rootSettings=Settings or (_G and _G.Settings)\nlocal settings=rootSettings and rootSettings.FFXIVMINION\nif not settings then return end\nif not data.ucobAssignmentGuiOptions then\n data.ucobAssignmentGuiOptions={healer={\"Unassigned\",\"In\",\"Out\"},tower={\"Unassigned\",\"Close\",\"Far\"}}\nend\nlocal options=data.ucobAssignmentGuiOptions\nlocal healer=settings.LPDU_UCOB_FirstFireballHealer or \"Unassigned\"\nlocal R=AnyoneCore and AnyoneCore.Roster\nlocal slot=R and R.current() and R.mySlot() or nil\nlocal defaultTower=(slot==\"M1\" or slot==\"M2\") and \"Close\" or (slot==\"R1\" or slot==\"R2\") and \"Far\" or nil\noptions.tower[1]=defaultTower and (\"Auto: \"..defaultTower) or \"Auto (role)\"\nlocal tower=settings.LPDU_UCOB_BlackfireTower or \"Unassigned\"\nlocal hi=healer==\"In\" and 2 or healer==\"Out\" and 3 or 1\nlocal ti=tower==\"Close\" and 2 or tower==\"Far\" and 3 or 1\nlocal visible=GUI:Begin(\"[LPDU] UCOB - Assignments\",true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n settings.LPDU_UCOB_AutoTarget=GUI:Checkbox(\"Automatic targeting##UCOBAutoTarget\",settings.LPDU_UCOB_AutoTarget~=false)\n if GUI:IsItemHovered()then GUI:SetTooltip(\"Target attackable enemies at the existing phase/return windows. Automatically yields when the UCOB AutoSim profile owns targeting. This does not disable draws, assignments, potions or mitigation.\")end\n if (data.ucobRPRAutoSim or data.ucobBRDAutoSim) then GUI:Text(\"Targeting managed by AutoSim\")end\n GUI:PushItemWidth(150)\n GUI:Text(\"P1 Healer Fireball - DPS targeted\")\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"First Fireball only.\\nDPS targeted: use your chosen In/Out assignment.\\nHealer targeted: that healer goes in; the other stays out automatically.\\nUnassigned: agree which healer stays out.\\nBoth tanks stay out.\")\n end\n GUI:SameLine(255)\n local newH,changedH=GUI:Combo(\"##LPDUFirstFireballHealer\",hi,options.healer)\n if newH~=hi and options.healer[newH] then settings.LPDU_UCOB_FirstFireballHealer=options.healer[newH] end\n GUI:Text(\"P3 Blackfire DPS Tower\")\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Default: melee Close to Nael; ranged Far from Nael.\\nChoose Close/Far to override, or Auto to follow your roster role.\") end\n GUI:SameLine(255)\n local newT,changedT=GUI:Combo(\"##LPDUBlackfireTower\",ti,options.tower)\n if newT~=ti and options.tower[newT] then settings.LPDU_UCOB_BlackfireTower=newT==1 and \"Unassigned\" or options.tower[newT] end\n if GUI:CollapsingHeader(\"Potions##UCOBPotionsSection\") then\n settings.LPDU_UCOB_PotionsEnabled=GUI:Checkbox(\"Enable LPDU potion schedule##UCOBPots\",settings.LPDU_UCOB_PotionsEnabled~=false)\n if GUI:IsItemHovered() then local route=settings.LPDU_UCOB_PotionSecond or \"Late Nael\"\n local secondTimes={['Late Nael']='5:40.3 (340.3s)', ['Delayed Nael']='6:08.9 (368.9s)', ['Bahamut opener']='8:32.0 (512.0s)', ['After Blackfire']='9:51.3 (591.3s)'}\n local opener=settings.LPDU_UCOB_PotionOpener~=false and \"Opener: 0:03.3 (3.3s)\" or \"Opener: disabled\"\n local secondText=secondTimes[route] and (\"Second: \"..route..\" - \"..secondTimes[route]) or \"Second: disabled / manual\"\n GUI:SetTooltip(opener..\"\\n\"..secondText..\"\\nAdds opener: 14:05.8 (845.8s)\\nLate Golden: 22:46.6 (1366.6s)\\nSynced timeline times, not elapsed pull/replay time.\\nEach window lasts 3 seconds; normal weave rules apply.\\nUnavailable items or potion cooldown can skip a window.\\nDisable duplicate potion automation in your job profile.\") end\n settings.LPDU_UCOB_PotionOpener=GUI:Checkbox(\"Opener potion##UCOBPotOpener\",settings.LPDU_UCOB_PotionOpener~=false)\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Disable for a three-potion route. Default opener: timeline 3.3s.\") end\n if not data.ucobPotionSecondOptions then data.ucobPotionSecondOptions={\"Late Nael\",\"Delayed Nael\",\"Bahamut opener\",\"After Blackfire\",\"Disabled / manual\"} end\n local potOptions=data.ucobPotionSecondOptions\n local second=settings.LPDU_UCOB_PotionSecond or \"Late Nael\"\n local secondIndex=1\n for i=1,#potOptions do if potOptions[i]==second then secondIndex=i break end end\n GUI:Text(\"Second potion window\")\n GUI:SameLine(255)\n local newSecond=GUI:Combo(\"##UCOBSecondPotion\",secondIndex,potOptions)\n if newSecond~=secondIndex and potOptions[newSecond] then settings.LPDU_UCOB_PotionSecond=potOptions[newSecond] end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Alternatives, not extra potions.\\nLate Nael 340.3 / Delayed Nael 368.9 / Bahamut opener 512.0 / After Blackfire 591.3.\\nAdds opener 845.8 and Late Golden 1366.6 remain enabled.\\nTimes are synced timeline coordinates, not seconds since pull.\\nReal cooldown or missing items can cause a window to be skipped.\") end\n end\n GUI:PopItemWidth()\nend\nGUI:End()\nself.used=true",
 							name = "Assignment and potion settings",
 							uuid = "a7689b1f-29f6-541f-a839-c69ff7957246",
 							version = 2.1,
@@ -5240,7 +5240,7 @@ local tbl =
 							data = 
 							{
 								category = "Lua",
-								conditionLua = "if data.ucobRPRAutoSim then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
+								conditionLua = "if (data.ucobRPRAutoSim or data.ucobBRDAutoSim) then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
 								dequeueIfLuaFalse = true,
 								name = "LPDU targeting enabled; no AutoSim owner",
 								uuid = "b846c20a-319d-cb2a-98a2-8e9ac808d0fa",
@@ -9507,7 +9507,7 @@ local tbl =
 							data = 
 							{
 								category = "Lua",
-								conditionLua = "if data.ucobRPRAutoSim then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
+								conditionLua = "if (data.ucobRPRAutoSim or data.ucobBRDAutoSim) then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
 								dequeueIfLuaFalse = true,
 								name = "LPDU targeting enabled; no AutoSim owner",
 								uuid = "0505c93f-79e5-0561-afe4-6f1087db4f31",
@@ -10137,7 +10137,7 @@ local tbl =
 							data = 
 							{
 								category = "Lua",
-								conditionLua = "if data.ucobRPRAutoSim then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
+								conditionLua = "if (data.ucobRPRAutoSim or data.ucobBRDAutoSim) then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
 								dequeueIfLuaFalse = true,
 								name = "LPDU targeting enabled; no AutoSim owner",
 								uuid = "f0edbbcc-85cc-e087-9a9c-782c56f955b4",
@@ -10995,7 +10995,7 @@ local tbl =
 							data = 
 							{
 								category = "Lua",
-								conditionLua = "if data.ucobRPRAutoSim then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
+								conditionLua = "if (data.ucobRPRAutoSim or data.ucobBRDAutoSim) then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
 								dequeueIfLuaFalse = true,
 								name = "LPDU targeting enabled; no AutoSim owner",
 								uuid = "31502bb7-d0b7-a854-be61-f1462c496ec4",
@@ -12297,7 +12297,7 @@ local tbl =
 							data = 
 							{
 								category = "Lua",
-								conditionLua = "if data.ucobRPRAutoSim then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
+								conditionLua = "if (data.ucobRPRAutoSim or data.ucobBRDAutoSim) then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
 								dequeueIfLuaFalse = true,
 								name = "LPDU targeting enabled; no AutoSim owner",
 								uuid = "4dda8b40-2be5-2657-ba1f-16e2ee0eebde",
@@ -13374,7 +13374,7 @@ local tbl =
 							data = 
 							{
 								category = "Lua",
-								conditionLua = "if data.ucobRPRAutoSim then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
+								conditionLua = "if (data.ucobRPRAutoSim or data.ucobBRDAutoSim) then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
 								dequeueIfLuaFalse = true,
 								name = "LPDU targeting enabled; no AutoSim owner",
 								uuid = "7e2b5853-277a-dd09-bd64-0a22414d857a",
@@ -14648,7 +14648,7 @@ local tbl =
 							data = 
 							{
 								category = "Lua",
-								conditionLua = "if data.ucobRPRAutoSim then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
+								conditionLua = "if (data.ucobRPRAutoSim or data.ucobBRDAutoSim) then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
 								dequeueIfLuaFalse = true,
 								name = "LPDU targeting enabled; no AutoSim owner",
 								uuid = "7f44f7e3-efe8-2637-9660-cb1d3f27fa90",
@@ -15827,7 +15827,7 @@ local tbl =
 							data = 
 							{
 								category = "Lua",
-								conditionLua = "if data.ucobRPRAutoSim then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
+								conditionLua = "if (data.ucobRPRAutoSim or data.ucobBRDAutoSim) then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
 								dequeueIfLuaFalse = true,
 								name = "LPDU targeting enabled; no AutoSim owner",
 								uuid = "fe855d60-292c-5bd9-be06-eddf6bbfedbd",
@@ -17024,7 +17024,7 @@ local tbl =
 							data = 
 							{
 								category = "Lua",
-								conditionLua = "if data.ucobRPRAutoSim then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
+								conditionLua = "if (data.ucobRPRAutoSim or data.ucobBRDAutoSim) then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
 								dequeueIfLuaFalse = true,
 								name = "LPDU targeting enabled; no AutoSim owner",
 								uuid = "2746059d-664a-a06b-b320-c0d88f59cfbd",
@@ -19568,7 +19568,7 @@ local tbl =
 							data = 
 							{
 								category = "Lua",
-								conditionLua = "if data.ucobRPRAutoSim then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
+								conditionLua = "if (data.ucobRPRAutoSim or data.ucobBRDAutoSim) then return false end\nlocal root=Settings or (_G and _G.Settings)\nlocal settings=root and root.FFXIVMINION\nreturn settings~=nil and settings.LPDU_UCOB_AutoTarget~=false",
 								dequeueIfLuaFalse = true,
 								name = "LPDU targeting enabled; no AutoSim owner",
 								uuid = "e38605e6-db29-e44f-a6b0-f9883be0bfe5",
