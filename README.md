@@ -64,6 +64,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- AA AutoSim now uses BLM-specific burst-priority weights: 1.17 through P4, including intermission, and 1.19 for all three P5 bursts. Other jobs retain their existing weights. (29-10-2026)
+
 - AA AutoSim uses a 1.3 burst-priority weight instead of 1.4 for non-Viper jobs, reducing the incentive to hold for those windows. Viper and the special P4 window retain their existing weights. (29-10-2026)
 
 - AA AutoSim now forecasts BLM returning to Ley Lines when existing movement windows end, preserving that return plan through phase resyncs. This predicts movement only; it does not move the player or force abilities. (29-10-2026)
@@ -82,11 +84,6 @@ TEA: Coming soon by Ton.
 
 - Added AnyoneCore countdowns to your nearest first-wave Light Rampant orb circle and to the middle tower when you are assigned to soak it. Second-wave orb circles have no added timer. (22-10-2026)
 
-- Reduced mirror destination circles by a further 10%, keeping their positions, arrows and timing unchanged. (22-10-2026)
-
-- Restricted Swap DPS spreads to the specific P1 safe-side spread after the clones. Clock spots and other Protean guidance now keep their original orientation. (22-10-2026)
-
-- Made the puddle countdown 50% larger and fixed per-drop rearming, including recovery when the first setup is missed. Only the assigned lane updates the single timer. (22-10-2026)
 
 ### UWU: LPDU
 
