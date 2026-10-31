@@ -67,6 +67,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Added an Ice gone - move normally text and voice callout after P2 Twin Silence/Stillness, triggered by the frozen floor clearing rather than a fixed timer. (31-10-2026)
+
 - Potion reactions and the Viper Reawaken cooldown-control reaction are now disabled by default in lpdu strats. Enable the desired reactions manually to opt in; mechanic draws and assignments remain enabled. (31-10-2026)
 
 - Corrected P1 Burnt Blast towers to LPDU/Tessan plant-and-adjust: H1 north, R2 middle and H2 south stay fixed. M1/R1/M2 stay in their home towers unless theirs needs one player, then join the three- or four-player tower. Personal arrows and countdowns use the same assignment. (31-10-2026)
@@ -84,8 +86,6 @@ TEA: Coming soon by Ton.
 - Fixed crystal targeting to select the actual crystal nearest your assigned colour marker and hold it until it dies, then skip dead or untargetable crystals. Focus mode also disables Smart AOE target switching, including ACR3. Focus mode targets your light crystal, then other light crystals, then the big crystal, keeping AoE off through the whole intermission and enabling it when P3 begins. (27-10-2026)
 
 - Reduced both green mirror destination circles by another 15%. (22-10-2026)
-
-- Reduced the P2 intermission knockback destination circle by 10%. (22-10-2026)
 
 
 ### UWU: LPDU

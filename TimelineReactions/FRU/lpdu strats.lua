@@ -4548,6 +4548,193 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "8eee2356-0f43-407c-8858-6377e83fa314",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Diamond Dust",
+				uuid = "6004f3b5-e06a-8eab-84b2-fe5e2182d22a",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 3000,
+							alertTTS = true,
+							alertText = "Ice gone - move normally",
+							conditions = 
+							{
+								
+								{
+									"26c34aad-65c2-7183-a52b-d34f424f052f",
+									true,
+								},
+								
+								{
+									"59124ece-82ec-99cf-9ed3-4429249a82c4",
+									true,
+								},
+								
+								{
+									"fe51e815-7345-58c5-ab72-81980edb115d",
+									true,
+								},
+								
+								{
+									"3f3da306-26e9-ffb3-8f2d-afb63215b675",
+									true,
+								},
+								
+								{
+									"b7f63f08-5556-ef6b-8580-8fcd9b984efb",
+									true,
+								},
+							},
+							name = "Ice gone - move normally",
+							uuid = "1971841c-0325-f683-9565-98d183ab4ae6",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "data.frup2_ice_clear_called=true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"26c34aad-65c2-7183-a52b-d34f424f052f",
+									true,
+								},
+								
+								{
+									"59124ece-82ec-99cf-9ed3-4429249a82c4",
+									true,
+								},
+								
+								{
+									"fe51e815-7345-58c5-ab72-81980edb115d",
+									true,
+								},
+								
+								{
+									"3f3da306-26e9-ffb3-8f2d-afb63215b675",
+									true,
+								},
+								
+								{
+									"b7f63f08-5556-ef6b-8580-8fcd9b984efb",
+									true,
+								},
+							},
+							name = "Finish ice-clear callout",
+							uuid = "84a45967-1017-1e8b-9b3d-13616903bbe0",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							localmapid = 1238,
+							name = "FRU",
+							uuid = "26c34aad-65c2-7183-a52b-d34f424f052f",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							comparator = 3,
+							dequeueIfLuaFalse = true,
+							eventIntValue = 23,
+							name = "Floor clear a1",
+							uuid = "59124ece-82ec-99cf-9ed3-4429249a82c4",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							comparator = 3,
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventIntValue = 1,
+							name = "Floor clear a2",
+							uuid = "fe51e815-7345-58c5-ab72-81980edb115d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							comparator = 3,
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							eventIntValue = 64,
+							name = "Floor clear a3",
+							uuid = "3f3da306-26e9-ffb3-8f2d-afb63215b675",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return not data.frup2_ice_clear_called",
+							name = "Not already announced",
+							uuid = "b7f63f08-5556-ef6b-8580-8fcd9b984efb",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Diamond Dust",
+				eventType = 14,
+				loop = true,
+				mechanicTime = 272.3,
+				name = "[LPDU] P2 Diamond Dust - Ice Gone",
+				timeRange = true,
+				timelineIndex = 61,
+				timerEndOffset = 15,
+				timerStartOffset = -12,
+				uuid = "5766a941-3527-c2df-9e8c-14196f8afba1",
+				version = 2,
+			},
+		},
 	},
 	[62] = 
 	{
