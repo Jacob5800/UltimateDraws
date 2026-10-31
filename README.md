@@ -89,6 +89,8 @@ TEA: Coming soon by Ton.
 
 ### UWU: LPDU
 
+- Added BRD/RPR nail-targeting diagnostics for roster readiness, assigned slot, collected nails, softening and awakening/kill transitions. Messages are logged only when state changes; targeting rules remain unchanged while live failures are investigated. (31-10-2026)
+
 - Fixed the shared targeting settings error and BLM’s return to Ifrit after nail softening. BLM/BRD/RPR now blacklist Spiny Plume DoTs, including its enlarged form, and stop the artificial 1.4 opener weight before nails. Both startup paths use the same opener weight. Runtime targeting checks remain pending. (31-10-2026)
 
 - BLM/RPR AutoSim burst-strength defaults are now 1.17. The Ifrit-opening burst uses 1.4 for BLM, RPR and BRD. Existing burst forecast on/off choices, window timing and target-priority weights are preserved. (29-10-2026)
@@ -106,6 +108,4 @@ TEA: Coming soon by Ton.
 - Added shared role-based nail targeting for non-AutoSim profiles (the BLM AutoSim controller stays independent): R2 starts SE, R1 SW, and melee soften the close pair to 40%, wait on Ifrit for awakening, then follow SE > SW > NE > NW. Uses the existing auto-target toggle. Ranged stay single-target until the final close pair; melee can cleave while softening, then follow single-target kill order. AoE is enabled after all nails die. (28-10-2026)
 
 - Added optional boss, gaol and Magitek Bit targeting with a shared auto-target toggle, plus source-aligned cooldown holds, Sprint requests and shield-checked Surecast/Arm's Length attempts. Nails are DoT-blacklisted for supported ACRs, including non-AutoSim users. (28-10-2026)
-
-- Updated dependencies to AnyoneCore’s separate UWU draws and core modules in place of the combined main profile. (24-10-2026)
 
