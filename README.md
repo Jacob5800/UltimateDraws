@@ -109,6 +109,8 @@ TEA: Coming soon by Ton.
 
 ### UWU: LPDU
 
+- RPR AutoSim keeps the same boss’s DoT availability continuous across FullDowntime, removing redundant schedule-split warnings while preserving boss lifetimes and downtime. (31-10-2026)
+
 - BLM AutoSim no longer applies the fixed post-gaol recovery movement to everyone. Recovery movement now comes from the personal gaol handlers; earlier Landslide movement remains unchanged. (31-10-2026)
 
 - Shared draws now call “Melee: take the light orb” when Titan’s Beyond Limits orb appears, only for melee still missing the buff. (31-10-2026)
@@ -126,6 +128,4 @@ TEA: Coming soon by Ton.
 - Removed shared CD hold/resume controllers and MNK/NIN transition holds so they no longer override AutoSim. CD is explicitly enabled on wipe. Potion is disabled before/at pull and enabled when Ifrit becomes targetable; no forced potion-use actions are added. LPDU Mits had no matching controls. (31-10-2026)
 
 - Added an optional BLM Triplecast hold for the last eight forecast seconds of Garuda, enabled by default. It blocks the whole action, releases when Ifrit becomes targetable, and clears on wipe, map change or countdown cancellation. AutoSim cannot reserve just one charge through this API. (31-10-2026)
-
-- Added BRD/RPR nail-targeting diagnostics for roster readiness, assigned slot, collected nails, softening and awakening/kill transitions. Messages are logged only when state changes; targeting rules remain unchanged while live failures are investigated. (31-10-2026)
 
