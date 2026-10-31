@@ -89,6 +89,8 @@ TEA: Coming soon by Ton.
 
 ### UWU: LPDU
 
+- Disabled the remaining 105-second CD/Flourish-off reaction in Draws LPDU so it cannot interfere with AutoSim. (31-10-2026)
+
 - Combined UWU AutoSim, targeting and relevant orb-assignment panels into one UWU LPDU Settings window. BLM now has adjustable Garuda end, Ifrit end-after-disappearance and Triplecast hold lead times, with explanations and next-pull application. Settings remain session-only. (31-10-2026)
 
 - BLM AutoSim now forecasts phase-specific Thunder lifetimes and availability for single-target and AoE Thunder, with native disappear/return corrections and extension when bosses outlive estimates. Updated Garuda/Ifrit end estimates from recent logs and stopped treating Ifrit’s confirmed final departure as a dash into Titan. (31-10-2026)
@@ -106,6 +108,4 @@ TEA: Coming soon by Ton.
 - BLM/RPR AutoSim burst-strength defaults are now 1.17. The Ifrit-opening burst uses 1.4 for BLM, RPR and BRD. Existing burst forecast on/off choices, window timing and target-priority weights are preserved. (29-10-2026)
 
 - Corrected the BLM AutoSim nail tooltip to describe the existing 40% softening threshold and one-time cancellation of a cast targeting that nail. Combat behavior is unchanged. (29-10-2026)
-
-- BRD, BLM and Reaper AutoSim now use Monk-log boss-event timings for Garuda’s second disappearance and Titan’s first jump return, reducing incorrect forecast availability. Personal movement forecasts remain job-specific. (29-10-2026)
 

@@ -3162,8 +3162,9 @@ local tbl =
 				{
 				},
 				displayPath = "Cooldown Holds",
+				enabled = false,
 				mechanicTime = 105,
-				name = "[CD] Disable at 105",
+				name = "[CD] Disable (105) - disabled for AutoSim",
 				timelineIndex = 23,
 				uuid = "015ac8e1-e188-72b4-923e-58b2da24bca5",
 				version = 2,
