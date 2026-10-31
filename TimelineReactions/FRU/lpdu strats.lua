@@ -754,6 +754,7 @@ local tbl =
 					},
 				},
 				displayPath = "LPDU Potion",
+				enabled = false,
 				mechanicTime = 13.7,
 				name = "[LPDU] Use potion - P1 opener",
 				throttleTime = 100,
@@ -5267,6 +5268,20 @@ local tbl =
 		{
 			data = 
 			{
+				name = "[VPR] Toggle Reawaken",
+				uuid = "0e441390-4300-3584-a826-be42a244f88c",
+				version = 2,
+			},
+			inheritedObjectUUID = "75bdf4b8-e92a-bdc8-af91-d9ecd6fc9d9b",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "LPDU Potion",
 				uuid = "e754c082-281d-3f97-b49e-49d33934f303",
@@ -6829,6 +6844,7 @@ local tbl =
 					},
 				},
 				displayPath = "LPDU Potion",
+				enabled = false,
 				mechanicTime = 418.8,
 				name = "[LPDU] Use potion - P2 adds",
 				timelineIndex = 102,
@@ -9914,6 +9930,7 @@ local tbl =
 					},
 				},
 				displayPath = "LPDU Potion",
+				enabled = false,
 				mechanicTime = 738.2,
 				name = "[LPDU] Use potion - P4 Darklit",
 				timeRange = true,
@@ -14391,6 +14408,7 @@ local tbl =
 				{
 				},
 				displayPath = "LPDU Potion",
+				enabled = false,
 				mechanicTime = 1097.4,
 				name = "[LPDU] Use potion - P5 second Fulgent",
 				throttleTime = 3000,
@@ -15114,6 +15132,7 @@ local tbl =
 					},
 				},
 				displayPath = "LPDU Potion",
+				enabled = false,
 				mechanicTime = 1097.4,
 				name = "[LPDU] Use potion - P5 Fulgent Blade",
 				timeRange = true,

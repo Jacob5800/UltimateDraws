@@ -67,6 +67,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Potion reactions and the Viper Reawaken cooldown-control reaction are now disabled by default in lpdu strats. Enable the desired reactions manually to opt in; mechanic draws and assignments remain enabled. (31-10-2026)
+
 - Corrected P1 Burnt Blast towers to LPDU/Tessan plant-and-adjust: H1 north, R2 middle and H2 south stay fixed. M1/R1/M2 stay in their home towers unless theirs needs one player, then join the three- or four-player tower. Personal arrows and countdowns use the same assignment. (31-10-2026)
 
 - AA AutoSim now uses BLM-specific burst-priority weights: 1.17 through P4, including intermission, and 1.19 for all three P5 bursts. Other jobs retain their existing weights. (29-10-2026)
@@ -84,8 +86,6 @@ TEA: Coming soon by Ton.
 - Reduced both green mirror destination circles by another 15%. (22-10-2026)
 
 - Reduced the P2 intermission knockback destination circle by 10%. (22-10-2026)
-
-- Reduced both mirror destination circles by another 10% for a smaller marker. (22-10-2026)
 
 
 ### UWU: LPDU
