@@ -3721,6 +3721,60 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "if data.lpdu_p2_inout~=0 then self.used=true;return end\nlocal s=data.frup2_four_icicle_timers\nif not s then s={first=Now(),initial=0,count=0,seen={}};data.frup2_four_icicle_timers=s end\nif s.count>=4 or s.seen[eventArgs.entityID] then self.used=true;return end\nlocal elapsed=Now()-s.first\nif elapsed<1000 then s.seen[eventArgs.entityID]=true;s.initial=s.initial+1;self.used=true;return end\nif elapsed<2500 or elapsed>6000 or s.initial~=2 then self.used=true;return end\nlocal ent=TensorCore.mGetEntity(eventArgs.entityID)\nif not ent or not ent.pos then return end\ns.seen[eventArgs.entityID]=true;s.count=s.count+1\nAnyoneCore.addWorldTextCountdown(eventArgs.channelTimeMax*1000,{x=ent.pos.x,y=ent.pos.y+2,z=ent.pos.z},GUI:ColorConvertFloat4ToU32(1,1,1,1),true,1.5)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"0424f147-492f-fcaa-9b22-9bd2e8d84b49",
+									true,
+								},
+							},
+							name = "P2 DD - Four icicle circle countdowns",
+							uuid = "85ebd381-e69c-988d-8d43-bf3f410a9b82",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventSpellID = 40198,
+							uuid = "0424f147-492f-fcaa-9b22-9bd2e8d84b49",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Diamond Dust",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 244.5,
+				name = "[LPDU] P2 DD - Four icicle circle countdowns",
+				timeRange = true,
+				timelineIndex = 46,
+				timerEndOffset = 13,
+				timerStartOffset = -9,
+				uuid = "3b5dfae9-0440-2e28-879c-48e0a0ad24d3",
+				version = 2,
+			},
+		},
 	},
 	[47] = 
 	{
@@ -4898,6 +4952,67 @@ local tbl =
 				timerEndOffset = 15,
 				timerStartOffset = -12,
 				uuid = "5766a941-3527-c2df-9e8c-14196f8afba1",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 2500,
+							alertTTS = true,
+							alertText = "Don't move - wait for debuff",
+							conditions = 
+							{
+								
+								{
+									"e9b56f69-24f0-0a1d-afa4-900c95b4af19",
+									true,
+								},
+							},
+							name = "P2 DD - Wait for ice to clear",
+							uuid = "6abd52c9-02de-03b6-812f-22c9ea916875",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							spellIDList = 
+							{
+								40195,
+								40196,
+							},
+							uuid = "e9b56f69-24f0-0a1d-afa4-900c95b4af19",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Diamond Dust",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 272.3,
+				name = "[LPDU] P2 DD - Wait for ice to clear",
+				timeRange = true,
+				timelineIndex = 61,
+				timerEndOffset = 5,
+				timerStartOffset = -5,
+				uuid = "d2ed3fb7-1709-af62-b1cf-76655ff3de9e",
 				version = 2,
 			},
 		},
