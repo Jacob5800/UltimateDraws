@@ -89,6 +89,8 @@ TEA: Coming soon by Ton.
 
 ### UWU: LPDU
 
+- Removed shared CD hold/resume controllers and MNK/NIN transition holds so they no longer override AutoSim. CD is explicitly enabled on wipe. Potion is disabled before/at pull and enabled when Ifrit becomes targetable; no forced potion-use actions are added. LPDU Mits had no matching controls. (31-10-2026)
+
 - Added an optional BLM Triplecast hold for the last eight forecast seconds of Garuda, enabled by default. It blocks the whole action, releases when Ifrit becomes targetable, and clears on wipe, map change or countdown cancellation. AutoSim cannot reserve just one charge through this API. (31-10-2026)
 
 - Added BRD/RPR nail-targeting diagnostics for roster readiness, assigned slot, collected nails, softening and awakening/kill transitions. Messages are logged only when state changes; targeting rules remain unchanged while live failures are investigated. (31-10-2026)
@@ -106,6 +108,4 @@ TEA: Coming soon by Ton.
 - Updated standalone BRD/BLM AutoSim profiles with built-in targeting, DoT blacklists and BRD primal DoT forecasts. BLM R2 Meteor forecasts include cast/animation lock and cancellation cleanup. Runtime replay checks remain pending. (28-10-2026)
 
 - Shared automatic targeting now yields to the standalone uwubrd/blmuwu AutoSim profiles, letting a parent profile combine LPDU Draws, LPDU Mits and one AutoSim profile without competing target controllers. (28-10-2026)
-
-- Added shared role-based nail targeting for non-AutoSim profiles (the BLM AutoSim controller stays independent): R2 starts SE, R1 SW, and melee soften the close pair to 40%, wait on Ifrit for awakening, then follow SE > SW > NE > NW. Uses the existing auto-target toggle. Ranged stay single-target until the final close pair; melee can cleave while softening, then follow single-target kill order. AoE is enabled after all nails die. (28-10-2026)
 
