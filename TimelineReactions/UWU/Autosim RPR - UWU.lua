@@ -23,7 +23,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local T=_G.UWU_RPR_TemporaryState\nif T and T.gaols then\n TensorCore.API.TensorACR.deleteAOEBlacklistEntry(1804)\n TensorCore.API.TensorACR.deleteBlacklistEntry(1804)\n TensorCore.API.TensorACR.saveDotBlacklist()\nend\n_G.UWU_RPR_TemporaryState=nil\nlocal N=data.uwuRPROwnNails\nif N and N.options then for k,v in pairs(N.options) do _G[k]=v end;N.options=nil end\ndata.uwuRPRAutoSim=nil\nself.used=true",
+							actionLua = "local T=_G.UWU_RPR_TemporaryState\nif T and T.gaolPriorityOptions then\n for k,v in pairs(T.gaolPriorityOptions) do _G[k]=v end\n T.gaolPriorityOptions=nil\nend\nlocal T=_G.UWU_RPR_TemporaryState\nif T and T.gaols then\n TensorCore.API.TensorACR.deleteAOEBlacklistEntry(1804)\n TensorCore.API.TensorACR.deleteBlacklistEntry(1804)\n TensorCore.API.TensorACR.saveDotBlacklist()\nend\n_G.UWU_RPR_TemporaryState=nil\nlocal N=data.uwuRPROwnNails\nif N and N.options then for k,v in pairs(N.options) do _G[k]=v end;N.options=nil end\ndata.uwuRPRAutoSim=nil\nself.used=true",
 							conditions = 
 							{
 								
@@ -112,7 +112,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local T=_G.UWU_RPR_TemporaryState\nif T and T.gaols then\n TensorCore.API.TensorACR.deleteAOEBlacklistEntry(1804)\n TensorCore.API.TensorACR.deleteBlacklistEntry(1804)\n TensorCore.API.TensorACR.saveDotBlacklist()\nend\n_G.UWU_RPR_TemporaryState=nil\nlocal N=data.uwuRPROwnNails\nif N and N.options then for k,v in pairs(N.options) do _G[k]=v end;N.options=nil end\ndata.uwuRPRAutoSim=nil\nself.used=true",
+							actionLua = "local T=_G.UWU_RPR_TemporaryState\nif T and T.gaolPriorityOptions then\n for k,v in pairs(T.gaolPriorityOptions) do _G[k]=v end\n T.gaolPriorityOptions=nil\nend\nlocal T=_G.UWU_RPR_TemporaryState\nif T and T.gaols then\n TensorCore.API.TensorACR.deleteAOEBlacklistEntry(1804)\n TensorCore.API.TensorACR.deleteBlacklistEntry(1804)\n TensorCore.API.TensorACR.saveDotBlacklist()\nend\n_G.UWU_RPR_TemporaryState=nil\nlocal N=data.uwuRPROwnNails\nif N and N.options then for k,v in pairs(N.options) do _G[k]=v end;N.options=nil end\ndata.uwuRPRAutoSim=nil\nself.used=true",
 							conditions = 
 							{
 								
@@ -326,7 +326,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local T=_G.UWU_RPR_TemporaryState\nif T and T.gaols then\n TensorCore.API.TensorACR.deleteAOEBlacklistEntry(1804)\n TensorCore.API.TensorACR.deleteBlacklistEntry(1804)\n TensorCore.API.TensorACR.saveDotBlacklist()\nend\n_G.UWU_RPR_TemporaryState=nil\nlocal N=data.uwuRPROwnNails\nif N and N.options then for k,v in pairs(N.options) do _G[k]=v end;N.options=nil end\ndata.uwuRPRAutoSim=nil\nself.used=true",
+							actionLua = "local T=_G.UWU_RPR_TemporaryState\nif T and T.gaolPriorityOptions then\n for k,v in pairs(T.gaolPriorityOptions) do _G[k]=v end\n T.gaolPriorityOptions=nil\nend\nlocal T=_G.UWU_RPR_TemporaryState\nif T and T.gaols then\n TensorCore.API.TensorACR.deleteAOEBlacklistEntry(1804)\n TensorCore.API.TensorACR.deleteBlacklistEntry(1804)\n TensorCore.API.TensorACR.saveDotBlacklist()\nend\n_G.UWU_RPR_TemporaryState=nil\nlocal N=data.uwuRPROwnNails\nif N and N.options then for k,v in pairs(N.options) do _G[k]=v end;N.options=nil end\ndata.uwuRPRAutoSim=nil\nself.used=true",
 							conditions = 
 							{
 								
@@ -3487,6 +3487,46 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "Lua",
+							actionLua = "local T=_G.UWU_RPR_TemporaryState or {}\n_G.UWU_RPR_TemporaryState=T\nif not T.gaolPriorityOptions then\n local toggles=TensorCore.API.TensorACR.getQuickToggles()\n if not toggles then return end\n T.gaolPriorityOptions={}\n for _,toggle in ipairs(toggles) do\n  local k=toggle.var\n  if string.match(k,\"_AOE$\") or string.match(k,\"_SmartAOE$\") then\n   if type(_G[k])==\"boolean\" then T.gaolPriorityOptions[k]=_G[k] end\n  end\n end\nend\nfor k in pairs(T.gaolPriorityOptions) do _G[k]=false end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"70c9f596-17c8-eed3-a11d-30a97babebc2",
+									true,
+								},
+								
+								{
+									"2091876c-fcc6-0aeb-a134-8a463ef4fa03",
+									true,
+								},
+								
+								{
+									"62b90450-4241-32f3-a908-1f01b63889c0",
+									true,
+								},
+								
+								{
+									"f86caeed-e809-357b-873d-3fe2e65b372a",
+									true,
+								},
+								
+								{
+									"d566b24a-fd8f-d05c-af9d-d16f486e5557",
+									true,
+								},
+							},
+							name = "Gaol single-target only",
+							uuid = "86b66196-c435-aac8-a529-48320934f17b",
+							version = 2.1,
+						},
+						inheritedIndex = 1,
+					},
+					
+					{
+						data = 
+						{
 							aType = "Misc",
 							conditions = 
 							{
@@ -3605,6 +3645,46 @@ local tbl =
 			{
 				actions = 
 				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local T=_G.UWU_RPR_TemporaryState\nif T and T.gaolPriorityOptions then\n for k,v in pairs(T.gaolPriorityOptions) do _G[k]=v end\n T.gaolPriorityOptions=nil\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"992ddd6b-311a-4b14-9aa6-93c3c6bba83b",
+									true,
+								},
+								
+								{
+									"93289ab1-d2be-94f5-965c-020c20b0abb2",
+									true,
+								},
+								
+								{
+									"18cc2e4d-69ec-03a5-b854-c7fb8868c17d",
+									true,
+								},
+								
+								{
+									"19564033-ae90-7fc9-a1ab-0b439c0c7034",
+									true,
+								},
+								
+								{
+									"7d4fbacd-bf54-28dd-bdda-4fe3196814bc",
+									false,
+								},
+							},
+							name = "Restore pre-gaol AoE settings",
+							uuid = "361a59cf-e812-3d7f-85a9-bbe6916f4af5",
+							version = 2.1,
+						},
+						inheritedIndex = 1,
+					},
 					
 					{
 						data = 
@@ -4968,6 +5048,41 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "Lua",
+							actionLua = "local T=_G.UWU_RPR_TemporaryState or {}\n_G.UWU_RPR_TemporaryState=T\nif not T.gaolPriorityOptions then\n local toggles=TensorCore.API.TensorACR.getQuickToggles()\n if not toggles then return end\n T.gaolPriorityOptions={}\n for _,toggle in ipairs(toggles) do\n  local k=toggle.var\n  if string.match(k,\"_AOE$\") or string.match(k,\"_SmartAOE$\") then\n   if type(_G[k])==\"boolean\" then T.gaolPriorityOptions[k]=_G[k] end\n  end\n end\nend\nfor k in pairs(T.gaolPriorityOptions) do _G[k]=false end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"7c9f4767-0755-d743-8580-4c15b454edd1",
+									true,
+								},
+								
+								{
+									"94d699d8-a036-5f43-ab93-ba7c66fe1c7f",
+									true,
+								},
+								
+								{
+									"caf71ac6-bf78-e115-a4b0-31b56e72dfd6",
+									true,
+								},
+								
+								{
+									"fc12e1f7-0108-dadc-b321-0bd8ae6d257c",
+									true,
+								},
+							},
+							name = "Gaol single-target only",
+							uuid = "115d70bb-6093-8669-827b-f6416ba28c1f",
+							version = 2.1,
+						},
+						inheritedIndex = 1,
+					},
+					
+					{
+						data = 
+						{
 							aType = "Misc",
 							conditions = 
 							{
@@ -4995,7 +5110,7 @@ local tbl =
 							name = "Target nearest Granite Gaol",
 							setTarget = true,
 							targetContentID = 1804,
-							targetType = "ContentID",
+							targetType = "Event Entity",
 							uuid = "418f5183-f7f2-adb5-8b69-6c3b2038a816",
 							version = 2.1,
 						},
@@ -5072,6 +5187,46 @@ local tbl =
 			{
 				actions = 
 				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local T=_G.UWU_RPR_TemporaryState\nif T and T.gaolPriorityOptions then\n for k,v in pairs(T.gaolPriorityOptions) do _G[k]=v end\n T.gaolPriorityOptions=nil\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"039abb86-4a15-866f-9524-9a7fe67d3a4e",
+									true,
+								},
+								
+								{
+									"028a28b0-d21a-bc61-9d4f-fa59330e0ab7",
+									true,
+								},
+								
+								{
+									"e6a70fe1-cbce-b194-aa27-f5464faf97d1",
+									true,
+								},
+								
+								{
+									"4e70f276-b169-65bf-967f-28010ef8e97f",
+									true,
+								},
+								
+								{
+									"779c32f6-5bd3-8baf-94a5-b1ff2d8dccd3",
+									false,
+								},
+							},
+							name = "Restore pre-gaol AoE settings",
+							uuid = "530b07a7-15e1-28ec-8bd8-cbdae341e533",
+							version = 2.1,
+						},
+						inheritedIndex = 1,
+					},
 					
 					{
 						data = 

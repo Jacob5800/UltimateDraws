@@ -23,7 +23,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local ownedTriple=_G.UWU_BLM_TemporaryState\nif ownedTriple and ownedTriple.tripleHold then\n TensorCore.API.TensorACR.holdActionUntil(7421,Now())\n ownedTriple.tripleHold=nil\nend\nlocal ownedLey=_G.UWU_BLM_TemporaryState\nif ownedLey and ownedLey.leyHold then\n TensorCore.API.TensorACR.holdActionUntil(3573,Now())\n ownedLey.leyHold=nil\nend\nlocal T=_G.UWU_BLM_TemporaryState\nif T then\n if T.options then for k,v in pairs(T.options) do _G[k]=v end end\n if T.gaols then TensorCore.API.TensorACR.deleteAOEBlacklistEntry(1804) end\n _G.UWU_BLM_TemporaryState=nil\nend\nTensorCore.API.TensorACR.holdActionUntil(846,Now())\nself.used=true",
+							actionLua = "local T=_G.UWU_BLM_TemporaryState\nif T and T.gaolPriorityOptions then\n for k,v in pairs(T.gaolPriorityOptions) do _G[k]=v end\n T.gaolPriorityOptions=nil\nend\nlocal ownedTriple=_G.UWU_BLM_TemporaryState\nif ownedTriple and ownedTriple.tripleHold then\n TensorCore.API.TensorACR.holdActionUntil(7421,Now())\n ownedTriple.tripleHold=nil\nend\nlocal ownedLey=_G.UWU_BLM_TemporaryState\nif ownedLey and ownedLey.leyHold then\n TensorCore.API.TensorACR.holdActionUntil(3573,Now())\n ownedLey.leyHold=nil\nend\nlocal T=_G.UWU_BLM_TemporaryState\nif T then\n if T.options then for k,v in pairs(T.options) do _G[k]=v end end\n if T.gaols then TensorCore.API.TensorACR.deleteAOEBlacklistEntry(1804) end\n _G.UWU_BLM_TemporaryState=nil\nend\nTensorCore.API.TensorACR.holdActionUntil(846,Now())\nself.used=true",
 							conditions = 
 							{
 								
@@ -277,7 +277,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local ownedTriple=_G.UWU_BLM_TemporaryState\nif ownedTriple and ownedTriple.tripleHold then\n TensorCore.API.TensorACR.holdActionUntil(7421,Now())\n ownedTriple.tripleHold=nil\nend\nlocal ownedLey=_G.UWU_BLM_TemporaryState\nif ownedLey and ownedLey.leyHold then\n TensorCore.API.TensorACR.holdActionUntil(3573,Now())\n ownedLey.leyHold=nil\nend\nlocal T=_G.UWU_BLM_TemporaryState\nif T then\n if T.options then for k,v in pairs(T.options) do _G[k]=v end end\n if T.gaols then TensorCore.API.TensorACR.deleteAOEBlacklistEntry(1804) end\n _G.UWU_BLM_TemporaryState=nil\nend\nTensorCore.API.TensorACR.holdActionUntil(846,Now())\nself.used=true",
+							actionLua = "local T=_G.UWU_BLM_TemporaryState\nif T and T.gaolPriorityOptions then\n for k,v in pairs(T.gaolPriorityOptions) do _G[k]=v end\n T.gaolPriorityOptions=nil\nend\nlocal ownedTriple=_G.UWU_BLM_TemporaryState\nif ownedTriple and ownedTriple.tripleHold then\n TensorCore.API.TensorACR.holdActionUntil(7421,Now())\n ownedTriple.tripleHold=nil\nend\nlocal ownedLey=_G.UWU_BLM_TemporaryState\nif ownedLey and ownedLey.leyHold then\n TensorCore.API.TensorACR.holdActionUntil(3573,Now())\n ownedLey.leyHold=nil\nend\nlocal T=_G.UWU_BLM_TemporaryState\nif T then\n if T.options then for k,v in pairs(T.options) do _G[k]=v end end\n if T.gaols then TensorCore.API.TensorACR.deleteAOEBlacklistEntry(1804) end\n _G.UWU_BLM_TemporaryState=nil\nend\nTensorCore.API.TensorACR.holdActionUntil(846,Now())\nself.used=true",
 							conditions = 
 							{
 								
@@ -366,7 +366,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local ownedTriple=_G.UWU_BLM_TemporaryState\nif ownedTriple and ownedTriple.tripleHold then\n TensorCore.API.TensorACR.holdActionUntil(7421,Now())\n ownedTriple.tripleHold=nil\nend\nlocal ownedLey=_G.UWU_BLM_TemporaryState\nif ownedLey and ownedLey.leyHold then\n TensorCore.API.TensorACR.holdActionUntil(3573,Now())\n ownedLey.leyHold=nil\nend\nlocal T=_G.UWU_BLM_TemporaryState\nif T then\n if T.options then for k,v in pairs(T.options) do _G[k]=v end end\n if T.gaols then TensorCore.API.TensorACR.deleteAOEBlacklistEntry(1804) end\n _G.UWU_BLM_TemporaryState=nil\nend\nTensorCore.API.TensorACR.holdActionUntil(846,Now())\nself.used=true",
+							actionLua = "local T=_G.UWU_BLM_TemporaryState\nif T and T.gaolPriorityOptions then\n for k,v in pairs(T.gaolPriorityOptions) do _G[k]=v end\n T.gaolPriorityOptions=nil\nend\nlocal ownedTriple=_G.UWU_BLM_TemporaryState\nif ownedTriple and ownedTriple.tripleHold then\n TensorCore.API.TensorACR.holdActionUntil(7421,Now())\n ownedTriple.tripleHold=nil\nend\nlocal ownedLey=_G.UWU_BLM_TemporaryState\nif ownedLey and ownedLey.leyHold then\n TensorCore.API.TensorACR.holdActionUntil(3573,Now())\n ownedLey.leyHold=nil\nend\nlocal T=_G.UWU_BLM_TemporaryState\nif T then\n if T.options then for k,v in pairs(T.options) do _G[k]=v end end\n if T.gaols then TensorCore.API.TensorACR.deleteAOEBlacklistEntry(1804) end\n _G.UWU_BLM_TemporaryState=nil\nend\nTensorCore.API.TensorACR.holdActionUntil(846,Now())\nself.used=true",
 							conditions = 
 							{
 								
@@ -4468,6 +4468,46 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "Lua",
+							actionLua = "local T=_G.UWU_BLM_TemporaryState or {}\n_G.UWU_BLM_TemporaryState=T\nif not T.gaolPriorityOptions then\n local toggles=TensorCore.API.TensorACR.getQuickToggles()\n if not toggles then return end\n T.gaolPriorityOptions={}\n for _,toggle in ipairs(toggles) do\n  local k=toggle.var\n  if string.match(k,\"_AOE$\") or string.match(k,\"_SmartAOE$\") then\n   if type(_G[k])==\"boolean\" then T.gaolPriorityOptions[k]=_G[k] end\n  end\n end\nend\nfor k in pairs(T.gaolPriorityOptions) do _G[k]=false end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"69fbf354-fd74-3d65-a1e5-65a156d3bf46",
+									true,
+								},
+								
+								{
+									"d31e7e61-ca34-f294-96e1-73233a894fb3",
+									true,
+								},
+								
+								{
+									"16b1fc8c-db89-db87-b8f7-de601471e725",
+									true,
+								},
+								
+								{
+									"ccdda4f1-62b6-b81e-ae33-c912387ca376",
+									true,
+								},
+								
+								{
+									"f6a8966d-f0e9-3a73-a407-73780bbc1ef3",
+									true,
+								},
+							},
+							name = "Gaol single-target only",
+							uuid = "d8b7e7a7-395f-c831-b5a1-24172d53b448",
+							version = 2.1,
+						},
+						inheritedIndex = 1,
+					},
+					
+					{
+						data = 
+						{
 							aType = "Misc",
 							conditions = 
 							{
@@ -4586,6 +4626,46 @@ local tbl =
 			{
 				actions = 
 				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local T=_G.UWU_BLM_TemporaryState\nif T and T.gaolPriorityOptions then\n for k,v in pairs(T.gaolPriorityOptions) do _G[k]=v end\n T.gaolPriorityOptions=nil\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"6e799f92-0629-333d-9243-9d21e628bec0",
+									true,
+								},
+								
+								{
+									"251f84e1-fd09-9063-9d12-59cb4e801a8e",
+									true,
+								},
+								
+								{
+									"2cb11c8f-ab48-9039-bf78-e33d1f023ed8",
+									true,
+								},
+								
+								{
+									"cf276701-59c1-65b5-a933-993cd9bbe256",
+									true,
+								},
+								
+								{
+									"119df58b-6e90-65e1-abee-e98a5f158e4c",
+									false,
+								},
+							},
+							name = "Restore pre-gaol AoE settings",
+							uuid = "b1886d07-be82-793e-ac95-fb17dbefdd47",
+							version = 2.1,
+						},
+						inheritedIndex = 1,
+					},
 					
 					{
 						data = 
@@ -6495,6 +6575,41 @@ local tbl =
 					{
 						data = 
 						{
+							aType = "Lua",
+							actionLua = "local T=_G.UWU_BLM_TemporaryState or {}\n_G.UWU_BLM_TemporaryState=T\nif not T.gaolPriorityOptions then\n local toggles=TensorCore.API.TensorACR.getQuickToggles()\n if not toggles then return end\n T.gaolPriorityOptions={}\n for _,toggle in ipairs(toggles) do\n  local k=toggle.var\n  if string.match(k,\"_AOE$\") or string.match(k,\"_SmartAOE$\") then\n   if type(_G[k])==\"boolean\" then T.gaolPriorityOptions[k]=_G[k] end\n  end\n end\nend\nfor k in pairs(T.gaolPriorityOptions) do _G[k]=false end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"a7309300-d228-0eb9-a013-9872382775cb",
+									true,
+								},
+								
+								{
+									"71348faf-7f17-619c-8da6-a9b47c297361",
+									true,
+								},
+								
+								{
+									"6aec5a63-4f4e-e510-9bc3-cc01fda720ed",
+									true,
+								},
+								
+								{
+									"5d953661-808a-1298-9143-e02a2c872ba4",
+									true,
+								},
+							},
+							name = "Gaol single-target only",
+							uuid = "8d0cc313-cf62-6400-85a2-c28ed51cda7b",
+							version = 2.1,
+						},
+						inheritedIndex = 1,
+					},
+					
+					{
+						data = 
+						{
 							aType = "Misc",
 							conditions = 
 							{
@@ -6522,7 +6637,7 @@ local tbl =
 							name = "Target nearest Granite Gaol",
 							setTarget = true,
 							targetContentID = 1804,
-							targetType = "ContentID",
+							targetType = "Event Entity",
 							uuid = "52a69b86-2dab-5a7b-bade-b8451897d18a",
 							version = 2.1,
 						},
@@ -6599,6 +6714,46 @@ local tbl =
 			{
 				actions = 
 				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local T=_G.UWU_BLM_TemporaryState\nif T and T.gaolPriorityOptions then\n for k,v in pairs(T.gaolPriorityOptions) do _G[k]=v end\n T.gaolPriorityOptions=nil\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"ed6289f5-0513-716a-b90c-6a18db00135b",
+									true,
+								},
+								
+								{
+									"2284cc1e-52db-e83c-aeb1-3078c7d1fc60",
+									true,
+								},
+								
+								{
+									"4589da47-9882-771a-85e0-2030fa287726",
+									true,
+								},
+								
+								{
+									"5ecfde3b-fbe3-e42e-820c-1684aa9c4d32",
+									true,
+								},
+								
+								{
+									"5e02cde6-e31d-e982-b524-ad040f69c5d5",
+									false,
+								},
+							},
+							name = "Restore pre-gaol AoE settings",
+							uuid = "4c6b893d-247e-7257-bb85-f6e205612e9b",
+							version = 2.1,
+						},
+						inheritedIndex = 1,
+					},
 					
 					{
 						data = 
