@@ -24,6 +24,8 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- P1 missile spread timers now follow the player using AnyoneCore's native entity countdown. Disabled the unused custom countdown overlay. (31-10-2026)
+
 - TOP now stores its own settings in TOP-LPDU.settings.tsv, shared across characters. Existing Minion choices migrate when available; GUI and guidance no longer require Minion's settings table. Optifine replay confirmation remains pending. (31-10-2026)
 
 - Fixed settings-table lookup errors affecting the settings window, personal guidance, monitor facing and optional automarkers. Replay confirmation on affected clients remains pending. (31-10-2026)
