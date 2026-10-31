@@ -76,7 +76,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "-- Spiny Plume: applies regardless of model scale, including the enlarged plume.\nlocal spiny=TensorCore.API.TensorACR.addBlacklistEntry(2091,\"UWU Spiny Plume\")\nif not spiny.enabled or spiny.allowIfTarget or spiny.allowSmartDoT then\n spiny.enabled=true;spiny.allowIfTarget=false;spiny.allowSmartDoT=false\n TensorCore.API.TensorACR.saveDotBlacklist()\nend\nlocal feather=TensorCore.API.TensorACR.addBlacklistEntry(1648,\"UWU Satin Plume\")\nif not feather.enabled or feather.allowIfTarget or feather.allowSmartDoT then\n feather.enabled=true;feather.allowIfTarget=false;feather.allowSmartDoT=false\n TensorCore.API.TensorACR.saveDotBlacklist()\nend\nlocal dotAPI=TensorCore.API.TensorACR\nlocal dotEntry=dotAPI.addBlacklistEntry(1186,\"UWU Infernal Nail\")\nif not dotEntry.enabled or dotEntry.allowIfTarget then\n dotEntry.enabled=true\n dotEntry.allowIfTarget=false\n dotAPI.saveDotBlacklist()\nend\n-- Generated encounter inputs are inserted by the MCP authoring script.\n-- Five EU BLM clears supply the phase-relative medians. Native events resync them.\nlocal A=TensorCore.API.TensorACR\n_G.UWU_BLM_TemporaryState=_G.UWU_BLM_TemporaryState or {}\nlocal cfg=_G.UWU_BLM_AutoSimConfig\nif not cfg then\n cfg={poolLaha=true,priorityGaols=true,roulette=true,raidBuffs=true,buffGain=16.87,nails=true,closePair=true,surecast=true,manaward=true}\n _G.UWU_BLM_AutoSimConfig=cfg\nend\nlocal S={[\"anchors\"]={[\"p1end\"]={[\"after\"]=\"pull\",[\"offset\"]=134.629,[\"spread\"]=10},[\"ifrit1\"]={[\"after\"]=\"p1end\",[\"offset\"]=72.217,[\"spread\"]=0.75},[\"p2end\"]={[\"after\"]=\"ifrit1\",[\"offset\"]=38.162,[\"spread\"]=10},[\"ifrit2Back\"]={[\"after\"]=\"p2end\",[\"offset\"]=7.422,[\"spread\"]=0.75},[\"titan1\"]={[\"after\"]=\"ifrit2Back\",[\"offset\"]=22.062,[\"spread\"]=0.75},[\"p3end\"]={[\"after\"]=\"titan1\",[\"offset\"]=97.279,[\"spread\"]=15},[\"titan3Back\"]={[\"after\"]=\"p3end\",[\"offset\"]=12.283,[\"spread\"]=0.75},[\"magitekBit1\"]={[\"after\"]=\"titan3Back\",[\"offset\"]=7.018,[\"spread\"]=0.75},[\"p4end\"]={[\"after\"]=\"magitekBit1\",[\"offset\"]=25.99,[\"spread\"]=0.75},[\"graniteGaol1\"]={[\"after\"]=\"p4end\",[\"offset\"]=233.053,[\"spread\"]=0.75}},[\"kill\"]={[\"after\"]=\"graniteGaol1\",[\"offset\"]=134.648,[\"spread\"]=7.881},[\"phases\"]={{\"FullDowntime\",\"pull\",70.532,\"pull\",74.238,1},{\"FullDowntime\",\"p1end\",0.1,\"p1end\",13.303,1},{\"FullDowntime\",\"ifrit1\",0.1,\"ifrit1\",3.812,1},{\"FullDowntime\",\"p2end\",0.1,\"ifrit2Back\",-0.3,1},{\"FullDowntime\",\"titan1\",0.1,\"titan1\",8.158,1},{\"FullDowntime\",\"titan1\",54.272,\"titan1\",62.508,1},{\"FullDowntime\",\"p3end\",0.1,\"titan3Back\",-0.3,1},{\"FullDowntime\",\"magitekBit1\",0.1,\"magitekBit1\",13.741,1},{\"FullDowntime\",\"p4end\",0.1,\"p4end\",50.191,1},{\"FullDowntime\",\"p4end\",77.992,\"p4end\",98.072,1},{\"FullDowntime\",\"p4end\",156.499,\"p4end\",161.092,1},{\"FullDowntime\",\"p4end\",193.502,\"p4end\",198.14,1},{\"FullDowntime\",\"p4end\",214.525,\"p4end\",229.087,1},{\"FullDowntime\",\"graniteGaol1\",0.1,\"p4end\",255.307,1},{\"FullDowntime\",\"p4end\",353.6,\"p4end\",357.89,1}},[\"windows\"]={{\"CasterDowntime\",\"pull\",35.0,\"pull\",37.5,1},{\"CasterDowntime\",\"pull\",38.5,\"pull\",41.0,1},{\"CasterDowntime\",\"pull\",43.0,\"pull\",44.0,1},{\"CasterDowntime\",\"pull\",91.0,\"pull\",92.5,1},{\"CasterDowntime\",\"pull\",102.5,\"pull\",104.0,1},{\"CasterDowntime\",\"pull\",105.5,\"pull\",106.5,1},{\"CasterDowntime\",\"pull\",127.5,\"pull\",128.5,1},{\"CasterDowntime\",\"p1end\",44.5,\"p1end\",47.0,1},{\"CasterDowntime\",\"p1end\",91.5,\"p1end\",98.0,1},{\"CasterDowntime\",\"titan1\",8.5,\"titan1\",11.0,1},{\"CasterDowntime\",\"titan1\",14.0,\"titan1\",21.5,1},{\"CasterDowntime\",\"titan1\",27.5,\"titan1\",29.0,1},{\"CasterDowntime\",\"titan1\",41.0,\"titan1\",42.5,1},{\"CasterDowntime\",\"titan1\",74.5,\"titan1\",76.0,1},{\"CasterDowntime\",\"p4end\",99.5,\"p4end\",100.5,1},{\"CasterDowntime\",\"p4end\",109.0,\"p4end\",115.0,1},{\"CasterDowntime\",\"p4end\",121.0,\"p4end\",124.0,1},{\"CasterDowntime\",\"p4end\",125.0,\"p4end\",129.0,1},{\"CasterDowntime\",\"p4end\",144.5,\"p4end\",145.5,1},{\"CasterDowntime\",\"p4end\",161.5,\"p4end\",169.0,1},{\"CasterDowntime\",\"p4end\",170.0,\"p4end\",172.5,1},{\"CasterDowntime\",\"p4end\",173.5,\"p4end\",174.5,1},{\"CasterDowntime\",\"p4end\",178.5,\"p4end\",182.0,1},{\"CasterDowntime\",\"p4end\",229.5,\"p4end\",231.0,1},{\"CasterDowntime\",\"p4end\",274.0,\"p4end\",280.0,1},{\"CasterDowntime\",\"p4end\",281.0,\"p4end\",282.5,1}},[\"returns\"]={},[\"buffwindows\"]={{\"pull\",8.069},{\"p1end\",16.081},{\"ifrit2Back\",52.467},{\"p4end\",52.628},{\"p4end\",175.979},{\"p4end\",317.846}},[\"sample_count\"]=5,[\"kill_samples\"]={782.098,751.692,783.165,838.291,794.832},[\"roulette\"]={[\"first\"]=293.478,[\"step\"]=20.123,[\"templates\"]={[\"Garuda\"]={{9.5,10.0}},[\"Ifrit\"]={{7.0,9.5},{11.0,11.5}},[\"Titan\"]={{5.0,13.0}}}},[\"anchorOrder\"]={\"p1end\",\"ifrit1\",\"p2end\",\"ifrit2Back\",\"titan1\",\"p3end\",\"titan3Back\",\"magitekBit1\",\"p4end\",\"graniteGaol1\"},[\"ifritArrival\"]=13.603,[\"lahaDelay\"]=14.041}\n-- Separate Ifrit's second dash from his actual phase death.\nS.anchors.ifritDash={after=\"ifrit1\",offset=47.95,spread=2}\nS.anchors.ifritDashBack={after=\"ifritDash\",offset=15.79,spread=1}\nS.anchors.p2end={after=\"ifritDashBack\",offset=17.31,spread=12}\nS.anchors.ifrit2Back={after=\"p2end\",offset=7.55,spread=.75}\nS.anchorOrder={\"p1end\",\"ifrit1\",\"ifritDash\",\"ifritDashBack\",\"p2end\",\"ifrit2Back\",\"titan1\",\"p3end\",\"titan3Back\",\"magitekBit1\",\"p4end\",\"graniteGaol1\"}\nS.phases[#S.phases+1]={\"FullDowntime\",\"ifritDash\",0.1,\"ifritDashBack\",-0.1,1}\nfor _,phase in ipairs(S.phases) do\n if phase[1]==\"FullDowntime\" and phase[2]==\"ifrit1\" and phase[4]==\"ifrit1\" then phase[5]=4.25 end\nend\n-- First Garuda disappearance: corroborated in three recent native logs.\nS.phases[#S.phases+1]={\"FullDowntime\",\"pull\",33.96,\"pull\",38.25,1}\n-- Tonight's native phase-end samples: 16 Garuda ends and 7 final Ifrit returns.\nS.anchors.p1end.offset=145.61\nS.anchors.p1end.spread=27\nS.anchors.p2end.offset=22.312\nS.anchors.p2end.spread=17\n-- Three native Monk-pull boss-event samples; shared boss timing, independent of job movement.\nfor _,phase in ipairs(S.phases) do\n if phase[1]==\"FullDowntime\" and phase[2]==\"pull\" and math.abs(phase[3]-70.532)<.001 then\n  phase[3]=68.865;phase[5]=73.150\n elseif phase[1]==\"FullDowntime\" and phase[2]==\"titan1\" and phase[3]==.1 then\n  phase[5]=7.544\n end\nend\nS.cfg={}\nfor k,v in pairs(cfg) do S.cfg[k]=v end\nS.observed={pull=0}\nS.dynamic={}\nS.rouletteWindows={}\nfunction S.time(name)\n if S.observed[name] then return S.observed[name] end\n local a=S.anchors[name]\n return S.time(a.after)+a.offset\nend\nfunction S.union(list)\n table.sort(list,function(a,b)return a[1]<b[1] end)\n local out={}\n for _,w in ipairs(list) do\n  local last=out[#out]\n  if last and w[1]<=last[2] and w[3]==last[3] then last[2]=math.max(last[2],w[2])\n  else out[#out+1]={w[1],w[2],w[3]} end\n end\n return out\nend\nfunction S.rouletteForecast(kind,now)\n if not S.cfg.roulette then return end\n local orders={Garuda={\"Garuda\",\"Ifrit\",\"Titan\"},Ifrit={\"Ifrit\",\"Garuda\",\"Titan\"},Titan={\"Titan\",\"Ifrit\",\"Garuda\"}}\n if kind then\n  if not S.rouletteOrder then S.rouletteOrder=orders[kind];S.rouletteTimes={} end\n  local step=#S.rouletteTimes+1\n  if S.rouletteOrder[step]~=kind then return end\n  S.rouletteTimes[step]=now\n end\n S.rouletteWindows={}\n local function addOrder(order,base,times)\n  local offsets={0,S.roulette.step,S.roulette.step*2}\n  if times and #times>0 then base=times[#times]-S.time(\"p4end\")-offsets[#times] end\n  for i,k in ipairs(order) do\n   local t=times and times[i] or S.time(\"p4end\")+base+offsets[i]\n   for _,w in ipairs(S.roulette.templates[k]) do\n    S.rouletteWindows[#S.rouletteWindows+1]={t+w[1],t+w[2],1}\n   end\n  end\n end\n if S.rouletteOrder then addOrder(S.rouletteOrder,0,S.rouletteTimes)\n else\n  -- Initial estimates use the reference's three possible orders. Prepare events narrow them.\n  for _,order in pairs(orders) do addOrder(order,S.roulette.first) end\n end\nend\nfunction S.publish()\n local now=A.getAutoSimTime()\n local finish=math.max(now+5,S.time(S.kill.after)+S.kill.offset)\n A.setAutoSimKillTime(math.min(finish,1259))\n local grouped={FullDowntime={},CasterDowntime={},Stun={},BossModifier={},RaidBuff={},GroundFieldMovement={}}\n local function add(kind,a,b,value)\n  if b>a then grouped[kind][#grouped[kind]+1]={a,b,value or 1} end\n end\n for _,p in ipairs(S.phases) do\n  -- HP-driven deaths are variable. Do not declare the still-live boss unavailable.\n  local hpDeath=p[1]==\"FullDowntime\" and (p[2]==\"p1end\" or p[2]==\"p2end\")\n  if not hpDeath or S.observed[p[2]]~=nil then\n   add(p[1],S.time(p[2])+p[3],S.time(p[4])+p[5],p[6])\n  end\n end\n for _,p in ipairs(S.windows) do\n  local a,b=S.time(p[2])+p[3],S.time(p[4])+p[5]\n  if p[2]==\"titan1\" and S.observed.p3end then b=math.min(b,S.observed.p3end) end\n  add(p[1],a,b,p[6])\n end\n if S.cfg.poolLaha then\n  add(\"BossModifier\",S.time(\"magitekBit1\")+S.lahaDelay,S.time(\"p4end\"),.01)\n end\n if S.cfg.priorityGaols then\n  add(\"BossModifier\",S.time(\"titan1\")+68.966,S.time(\"titan1\")+73.966,1.10)\n  add(\"BossModifier\",S.time(\"p4end\")+227.75,S.time(\"p4end\")+232.75,1.10)\n end\n if S.cfg.raidBuffs then\n  local prev\n  for _,w in ipairs(S.buffwindows) do\n   local t=S.time(w[1])+w[2]\n   if prev then t=math.max(t,prev+120) end\n   local burstWeight=w[1]==\"p1end\" and 1.4 or (1+S.cfg.buffGain/100)\n   local burstEnd=t+20\n   if w[1]==\"p1end\" then\n    -- Never extend the artificial 1.4 opener into nail softening.\n    burstEnd=math.min(burstEnd,S.time(\"p1end\")+39,S.nailsStartedAt or math.huge)\n   end\n   add(\"RaidBuff\",t,burstEnd,burstWeight)\n   prev=t\n  end\n end\n for _,w in ipairs(S.rouletteWindows) do add(\"CasterDowntime\",w[1],w[2],1) end\n local roster=AnyoneCore.Roster\n local isR2=roster and roster.current() and roster.mySlot()==\"R2\"\n if isR2 and not S.lbObserved then\n  local lb=S.time(\"titan3Back\")+4\n  add(\"Stun\",lb,lb+12.6,1)\n end\n for _,w in pairs(S.dynamic) do add(w[1],w[2],w[3],w[4]) end\n for kind,list in pairs(grouped) do\n  A.clearAutoSimPhases(kind)\n  -- All absolute same-type overlaps are merged before submission.\n  if kind==\"BossModifier\" or kind==\"RaidBuff\" then\n   local cuts,seen={},{}\n   for _,w in ipairs(list) do for i=1,2 do if not seen[w[i]] then cuts[#cuts+1]=w[i];seen[w[i]]=true end end end\n   table.sort(cuts)\n   for i=1,#cuts-1 do\n    local value,active=1,false\n    for _,w in ipairs(list) do if w[1]<=cuts[i] and w[2]>=cuts[i+1] then value=value*w[3];active=true end end\n    if active then A.addAutoSimPhase(kind,cuts[i],cuts[i+1],value) end\n   end\n  else\n   for _,w in ipairs(S.union(list)) do A.addAutoSimPhase(kind,w[1],w[2],w[3]) end\n  end\n end\n A.clearAutoSimUncertainty()\n A.addAutoSimUncertainty(0,2)\n local uncertainty=2\n for _,name in ipairs(S.anchorOrder) do\n  if not S.observed[name] then\n   local anchor=S.anchors[name]\n   uncertainty=math.max(uncertainty,anchor.spread)\n   A.addAutoSimUncertainty(S.time(name)-25,uncertainty)\n  end\n end\n A.addAutoSimUncertainty(math.max(0,finish-30),math.max(uncertainty,S.kill.spread))\nend\nfunction S.resync(name,now)\n if S.observed[name] then return end\n S.observed[name]=now\n S.rouletteForecast()\n S.publish()\n if not S.ifritStarted then\n  local untilIfrit=S.time(\"p1end\")+S.ifritArrival\n  A.holdActionUntil(846,Now()+math.max(0,untilIfrit-now)*1000)\n end\nend\nS.rouletteForecast()\nA.setAutoSimUnexpectedMovementPct(.05)\nS.publish()\nA.holdActionUntil(846,Now()+math.max(0,S.time(\"p1end\")+S.ifritArrival-A.getAutoSimTime())*1000)\ndata.uwuBLMAutoSim=S\nself.used=true\n",
+							actionLua = "-- Spiny Plume: applies regardless of model scale, including the enlarged plume.\nlocal spiny=TensorCore.API.TensorACR.addBlacklistEntry(2091,\"UWU Spiny Plume\")\nif not spiny.enabled or spiny.allowIfTarget or spiny.allowSmartDoT then\n spiny.enabled=true;spiny.allowIfTarget=false;spiny.allowSmartDoT=false\n TensorCore.API.TensorACR.saveDotBlacklist()\nend\nlocal feather=TensorCore.API.TensorACR.addBlacklistEntry(1648,\"UWU Satin Plume\")\nif not feather.enabled or feather.allowIfTarget or feather.allowSmartDoT then\n feather.enabled=true;feather.allowIfTarget=false;feather.allowSmartDoT=false\n TensorCore.API.TensorACR.saveDotBlacklist()\nend\nlocal dotAPI=TensorCore.API.TensorACR\nlocal dotEntry=dotAPI.addBlacklistEntry(1186,\"UWU Infernal Nail\")\nif not dotEntry.enabled or dotEntry.allowIfTarget then\n dotEntry.enabled=true\n dotEntry.allowIfTarget=false\n dotAPI.saveDotBlacklist()\nend\n-- Generated encounter inputs are inserted by the MCP authoring script.\n-- Five EU BLM clears supply the phase-relative medians. Native events resync them.\nlocal A=TensorCore.API.TensorACR\n_G.UWU_BLM_TemporaryState=_G.UWU_BLM_TemporaryState or {}\nlocal cfg=_G.UWU_BLM_AutoSimConfig\nif not cfg then\n cfg={poolLaha=true,priorityGaols=true,roulette=true,raidBuffs=true,buffGain=16.87,nails=true,closePair=true,surecast=true,manaward=true}\n _G.UWU_BLM_AutoSimConfig=cfg\nend\nlocal S={[\"anchors\"]={[\"p1end\"]={[\"after\"]=\"pull\",[\"offset\"]=134.629,[\"spread\"]=10},[\"ifrit1\"]={[\"after\"]=\"p1end\",[\"offset\"]=72.217,[\"spread\"]=0.75},[\"p2end\"]={[\"after\"]=\"ifrit1\",[\"offset\"]=38.162,[\"spread\"]=10},[\"ifrit2Back\"]={[\"after\"]=\"p2end\",[\"offset\"]=7.422,[\"spread\"]=0.75},[\"titan1\"]={[\"after\"]=\"ifrit2Back\",[\"offset\"]=22.062,[\"spread\"]=0.75},[\"p3end\"]={[\"after\"]=\"titan1\",[\"offset\"]=97.279,[\"spread\"]=15},[\"titan3Back\"]={[\"after\"]=\"p3end\",[\"offset\"]=12.283,[\"spread\"]=0.75},[\"magitekBit1\"]={[\"after\"]=\"titan3Back\",[\"offset\"]=7.018,[\"spread\"]=0.75},[\"p4end\"]={[\"after\"]=\"magitekBit1\",[\"offset\"]=25.99,[\"spread\"]=0.75},[\"graniteGaol1\"]={[\"after\"]=\"p4end\",[\"offset\"]=233.053,[\"spread\"]=0.75}},[\"kill\"]={[\"after\"]=\"graniteGaol1\",[\"offset\"]=134.648,[\"spread\"]=7.881},[\"phases\"]={{\"FullDowntime\",\"pull\",70.532,\"pull\",74.238,1},{\"FullDowntime\",\"p1end\",0.1,\"p1end\",13.303,1},{\"FullDowntime\",\"ifrit1\",0.1,\"ifrit1\",3.812,1},{\"FullDowntime\",\"p2end\",0.1,\"ifrit2Back\",-0.3,1},{\"FullDowntime\",\"titan1\",0.1,\"titan1\",8.158,1},{\"FullDowntime\",\"titan1\",54.272,\"titan1\",62.508,1},{\"FullDowntime\",\"p3end\",0.1,\"titan3Back\",-0.3,1},{\"FullDowntime\",\"magitekBit1\",0.1,\"magitekBit1\",13.741,1},{\"FullDowntime\",\"p4end\",0.1,\"p4end\",50.191,1},{\"FullDowntime\",\"p4end\",77.992,\"p4end\",98.072,1},{\"FullDowntime\",\"p4end\",156.499,\"p4end\",161.092,1},{\"FullDowntime\",\"p4end\",193.502,\"p4end\",198.14,1},{\"FullDowntime\",\"p4end\",214.525,\"p4end\",229.087,1},{\"FullDowntime\",\"graniteGaol1\",0.1,\"p4end\",255.307,1},{\"FullDowntime\",\"p4end\",353.6,\"p4end\",357.89,1}},[\"windows\"]={{\"CasterDowntime\",\"pull\",35.0,\"pull\",37.5,1},{\"CasterDowntime\",\"pull\",38.5,\"pull\",41.0,1},{\"CasterDowntime\",\"pull\",43.0,\"pull\",44.0,1},{\"CasterDowntime\",\"pull\",91.0,\"pull\",92.5,1},{\"CasterDowntime\",\"pull\",102.5,\"pull\",104.0,1},{\"CasterDowntime\",\"pull\",105.5,\"pull\",106.5,1},{\"CasterDowntime\",\"pull\",127.5,\"pull\",128.5,1},{\"CasterDowntime\",\"p1end\",44.5,\"p1end\",47.0,1},{\"CasterDowntime\",\"p1end\",91.5,\"p1end\",98.0,1},{\"CasterDowntime\",\"titan1\",8.5,\"titan1\",11.0,1},{\"CasterDowntime\",\"titan1\",14.0,\"titan1\",21.5,1},{\"CasterDowntime\",\"titan1\",27.5,\"titan1\",29.0,1},{\"CasterDowntime\",\"titan1\",41.0,\"titan1\",42.5,1},{\"CasterDowntime\",\"titan1\",74.5,\"titan1\",76.0,1},{\"CasterDowntime\",\"p4end\",99.5,\"p4end\",100.5,1},{\"CasterDowntime\",\"p4end\",109.0,\"p4end\",115.0,1},{\"CasterDowntime\",\"p4end\",121.0,\"p4end\",124.0,1},{\"CasterDowntime\",\"p4end\",125.0,\"p4end\",129.0,1},{\"CasterDowntime\",\"p4end\",144.5,\"p4end\",145.5,1},{\"CasterDowntime\",\"p4end\",161.5,\"p4end\",169.0,1},{\"CasterDowntime\",\"p4end\",170.0,\"p4end\",172.5,1},{\"CasterDowntime\",\"p4end\",173.5,\"p4end\",174.5,1},{\"CasterDowntime\",\"p4end\",178.5,\"p4end\",182.0,1},{\"CasterDowntime\",\"p4end\",229.5,\"p4end\",231.0,1},{\"CasterDowntime\",\"p4end\",274.0,\"p4end\",280.0,1},{\"CasterDowntime\",\"p4end\",281.0,\"p4end\",282.5,1}},[\"returns\"]={},[\"buffwindows\"]={{\"pull\",8.069},{\"p1end\",16.081},{\"ifrit2Back\",52.467},{\"p4end\",52.628},{\"p4end\",175.979},{\"p4end\",317.846}},[\"sample_count\"]=5,[\"kill_samples\"]={782.098,751.692,783.165,838.291,794.832},[\"roulette\"]={[\"first\"]=293.478,[\"step\"]=20.123,[\"templates\"]={[\"Garuda\"]={{9.5,10.0}},[\"Ifrit\"]={{7.0,9.5},{11.0,11.5}},[\"Titan\"]={{5.0,13.0}}}},[\"anchorOrder\"]={\"p1end\",\"ifrit1\",\"p2end\",\"ifrit2Back\",\"titan1\",\"p3end\",\"titan3Back\",\"magitekBit1\",\"p4end\",\"graniteGaol1\"},[\"ifritArrival\"]=13.603,[\"lahaDelay\"]=14.041}\n-- Separate Ifrit's second dash from his actual phase death.\nS.anchors.ifritDash={after=\"ifrit1\",offset=47.95,spread=2}\nS.anchors.ifritDashBack={after=\"ifritDash\",offset=15.79,spread=1}\nS.anchors.p2end={after=\"ifrit1\",offset=40.328,spread=12}\nS.anchors.ifrit2Back={after=\"p2end\",offset=7.55,spread=.75}\nS.anchorOrder={\"p1end\",\"ifrit1\",\"ifritDash\",\"ifritDashBack\",\"p2end\",\"ifrit2Back\",\"titan1\",\"p3end\",\"titan3Back\",\"magitekBit1\",\"p4end\",\"graniteGaol1\"}\nS.phases[#S.phases+1]={\"FullDowntime\",\"ifritDash\",0.1,\"ifritDashBack\",-0.1,1}\nfor _,phase in ipairs(S.phases) do\n if phase[1]==\"FullDowntime\" and phase[2]==\"ifrit1\" and phase[4]==\"ifrit1\" then phase[5]=4.25 end\nend\n-- First Garuda disappearance: corroborated in three recent native logs.\nS.phases[#S.phases+1]={\"FullDowntime\",\"pull\",33.96,\"pull\",38.25,1}\n-- Tonight's native phase-end samples: 16 Garuda ends and 7 final Ifrit returns.\nS.anchors.p1end.offset=145.61\nS.anchors.p1end.spread=27\nS.anchors.p2end.offset=22.312\nS.anchors.p2end.spread=17\n-- Three native Monk-pull boss-event samples; shared boss timing, independent of job movement.\nfor _,phase in ipairs(S.phases) do\n if phase[1]==\"FullDowntime\" and phase[2]==\"pull\" and math.abs(phase[3]-70.532)<.001 then\n  phase[3]=68.865;phase[5]=73.150\n elseif phase[1]==\"FullDowntime\" and phase[2]==\"titan1\" and phase[3]==.1 then\n  phase[5]=7.544\n end\nend\nS.cfg={}\nfor k,v in pairs(cfg) do S.cfg[k]=v end\n-- Recent native records: six BLM Garuda ends; five distinct party Ifrit ends.\nS.anchors.p1end.offset=133.235\nS.observed={pull=0}\nS.dynamic={}\nS.rouletteWindows={}\nfunction S.time(name)\n if S.observed[name] then return S.observed[name] end\n local a=S.anchors[name]\n return S.time(a.after)+a.offset\nend\nfunction S.union(list)\n table.sort(list,function(a,b)return a[1]<b[1] end)\n local out={}\n for _,w in ipairs(list) do\n  local last=out[#out]\n  if last and w[1]<=last[2] and w[3]==last[3] then last[2]=math.max(last[2],w[2])\n  else out[#out+1]={w[1],w[2],w[3]} end\n end\n return out\nend\nfunction S.rouletteForecast(kind,now)\n if not S.cfg.roulette then return end\n local orders={Garuda={\"Garuda\",\"Ifrit\",\"Titan\"},Ifrit={\"Ifrit\",\"Garuda\",\"Titan\"},Titan={\"Titan\",\"Ifrit\",\"Garuda\"}}\n if kind then\n  if not S.rouletteOrder then S.rouletteOrder=orders[kind];S.rouletteTimes={} end\n  local step=#S.rouletteTimes+1\n  if S.rouletteOrder[step]~=kind then return end\n  S.rouletteTimes[step]=now\n end\n S.rouletteWindows={}\n local function addOrder(order,base,times)\n  local offsets={0,S.roulette.step,S.roulette.step*2}\n  if times and #times>0 then base=times[#times]-S.time(\"p4end\")-offsets[#times] end\n  for i,k in ipairs(order) do\n   local t=times and times[i] or S.time(\"p4end\")+base+offsets[i]\n   for _,w in ipairs(S.roulette.templates[k]) do\n    S.rouletteWindows[#S.rouletteWindows+1]={t+w[1],t+w[2],1}\n   end\n  end\n end\n if S.rouletteOrder then addOrder(S.rouletteOrder,0,S.rouletteTimes)\n else\n  -- Initial estimates use the reference's three possible orders. Prepare events narrow them.\n  for _,order in pairs(orders) do addOrder(order,S.roulette.first) end\n end\nend\nS.dotStarts={}\nS.dotGaps={}\nS.dotEnds={ [1644]=\"p1end\",[1185]=\"p2end\",[1801]=\"p3end\" }\nfunction S.publishDots()\n local target=TensorCore.mGetTarget()\n local now=A.getAutoSimTime()\n if target and target.alive and target.targetable then\n  S.dotEntityID=target.id;S.dotContentID=target.contentid\n end\n if not S.dotEntityID then return end\n local cid=S.dotContentID\n local endAnchor=S.dotEnds[cid]\n local finish=math.min(1259,math.max(now+5,S.time(S.kill.after)+S.kill.offset))\n local start=0\n if endAnchor then\n  if not S.dotStarts[S.dotEntityID] then\n   local predicted=cid==1644 and 0 or (cid==1185 and S.time(\"p1end\")+S.ifritArrival or S.time(\"ifrit2Back\"))\n   S.dotStarts[S.dotEntityID]=math.max(0,math.min(predicted,now))\n  end\n  start=S.dotStarts[S.dotEntityID]\n  finish=math.min(1259,S.observed[endAnchor] or math.max(S.time(endAnchor),now+5))\n end\n -- Thunder and AoE Thunder have independent availability groups.\n A.clearAutoSimPhases(\"DotAvailability\",0,0)\n A.clearAutoSimPhases(\"DotAvailability\",0,1)\n A.clearAutoSimPhases(\"TargetLifetime\",0)\n if finish<=start then return end\n A.addAutoSimPhase(\"TargetLifetime\",start,finish,1,0)\n local stop=endAnchor and math.max(start,finish-.5) or finish\n -- Respect existing excluded adds even when selected manually.\n if cid==1186 or cid==1648 or cid==2091 then stop=start end\n local gaps={}\n local observed=S.dotGaps[S.dotEntityID] or {}\n for _,phase in ipairs(S.phases) do\n  if phase[1]==\"FullDowntime\" and not (phase[2]==\"ifritDash\" and (S.ifritDashWasFinal or (not S.observed.ifritDash and S.time(\"p2end\")<=S.time(\"ifritDash\")))) then\n   local a,b=S.time(phase[2])+phase[3],S.time(phase[4])+phase[5]\n   local replaced=false\n   for _,gap in ipairs(observed) do if math.abs(gap[1]-a)<10 then replaced=true;break end end\n   if not replaced and b>start and a<stop then gaps[#gaps+1]={math.max(start,a),math.min(stop,b),1} end\n  end\n end\n for _,gap in ipairs(observed) do\n  local a,b=math.max(start,gap[1]),math.min(stop,gap[2] or stop)\n  if b>a then gaps[#gaps+1]={a,b,1} end\n end\n local cursor=start\n local available={}\n for _,gap in ipairs(S.union(gaps)) do\n  if gap[1]>cursor then available[#available+1]={cursor,gap[1]} end\n  cursor=math.max(cursor,gap[2])\n end\n if stop>cursor then available[#available+1]={cursor,stop} end\n for group=0,1 do\n  for _,window in ipairs(available) do A.addAutoSimPhase(\"DotAvailability\",window[1],window[2],1,0,group) end\n end\n S.dotPublishedEnd=finish;S.dotPublishedTarget=S.dotEntityID\n S.dotAnchorSignature=tostring(S.observed.p1end)..\":\"..tostring(S.observed.p2end)..\":\"..tostring(S.observed.p3end)\nend\n\nfunction S.publish()\n local now=A.getAutoSimTime()\n local finish=math.max(now+5,S.time(S.kill.after)+S.kill.offset)\n A.setAutoSimKillTime(math.min(finish,1259))\n local grouped={FullDowntime={},CasterDowntime={},Stun={},BossModifier={},RaidBuff={},GroundFieldMovement={}}\n local function add(kind,a,b,value)\n  if b>a then grouped[kind][#grouped[kind]+1]={a,b,value or 1} end\n end\n for _,p in ipairs(S.phases) do\n  -- HP-driven deaths are variable. Do not declare the still-live boss unavailable.\n  local hpDeath=p[1]==\"FullDowntime\" and (p[2]==\"p1end\" or p[2]==\"p2end\")\n  if (not hpDeath or S.observed[p[2]]~=nil) and not (p[2]==\"ifritDash\" and (S.ifritDashWasFinal or (not S.observed.ifritDash and S.time(\"p2end\")<=S.time(\"ifritDash\")))) then\n   add(p[1],S.time(p[2])+p[3],S.time(p[4])+p[5],p[6])\n  end\n end\n for _,p in ipairs(S.windows) do\n  local a,b=S.time(p[2])+p[3],S.time(p[4])+p[5]\n  if p[2]==\"titan1\" and S.observed.p3end then b=math.min(b,S.observed.p3end) end\n  add(p[1],a,b,p[6])\n end\n if S.cfg.poolLaha then\n  add(\"BossModifier\",S.time(\"magitekBit1\")+S.lahaDelay,S.time(\"p4end\"),.01)\n end\n if S.cfg.priorityGaols then\n  add(\"BossModifier\",S.time(\"titan1\")+68.966,S.time(\"titan1\")+73.966,1.10)\n  add(\"BossModifier\",S.time(\"p4end\")+227.75,S.time(\"p4end\")+232.75,1.10)\n end\n if S.cfg.raidBuffs then\n  local prev\n  for _,w in ipairs(S.buffwindows) do\n   local t=S.time(w[1])+w[2]\n   if prev then t=math.max(t,prev+120) end\n   local burstWeight=w[1]==\"p1end\" and 1.4 or (1+S.cfg.buffGain/100)\n   local burstEnd=t+20\n   if w[1]==\"p1end\" then\n    -- Never extend the artificial 1.4 opener into nail softening.\n    burstEnd=math.min(burstEnd,S.time(\"p1end\")+39,S.nailsStartedAt or math.huge)\n   end\n   add(\"RaidBuff\",t,burstEnd,burstWeight)\n   prev=t\n  end\n end\n for _,w in ipairs(S.rouletteWindows) do add(\"CasterDowntime\",w[1],w[2],1) end\n local roster=AnyoneCore.Roster\n local isR2=roster and roster.current() and roster.mySlot()==\"R2\"\n if isR2 and not S.lbObserved then\n  local lb=S.time(\"titan3Back\")+4\n  add(\"Stun\",lb,lb+12.6,1)\n end\n for _,w in pairs(S.dynamic) do add(w[1],w[2],w[3],w[4]) end\n for kind,list in pairs(grouped) do\n  A.clearAutoSimPhases(kind)\n  -- All absolute same-type overlaps are merged before submission.\n  if kind==\"BossModifier\" or kind==\"RaidBuff\" then\n   local cuts,seen={},{}\n   for _,w in ipairs(list) do for i=1,2 do if not seen[w[i]] then cuts[#cuts+1]=w[i];seen[w[i]]=true end end end\n   table.sort(cuts)\n   for i=1,#cuts-1 do\n    local value,active=1,false\n    for _,w in ipairs(list) do if w[1]<=cuts[i] and w[2]>=cuts[i+1] then value=value*w[3];active=true end end\n    if active then A.addAutoSimPhase(kind,cuts[i],cuts[i+1],value) end\n   end\n  else\n   for _,w in ipairs(S.union(list)) do A.addAutoSimPhase(kind,w[1],w[2],w[3]) end\n  end\n end\n A.clearAutoSimUncertainty()\n A.addAutoSimUncertainty(0,2)\n local uncertainty=2\n for _,name in ipairs(S.anchorOrder) do\n  if not S.observed[name] and not (name==\"ifritDashBack\" and S.ifritDashWasFinal) then\n   local anchor=S.anchors[name]\n   uncertainty=math.max(uncertainty,anchor.spread)\n   A.addAutoSimUncertainty(S.time(name)-25,uncertainty)\n  end\n end\n A.addAutoSimUncertainty(math.max(0,finish-30),math.max(uncertainty,S.kill.spread))\n S.publishDots()\nend\nfunction S.resync(name,now)\n if S.observed[name] then return end\n S.observed[name]=now\n S.rouletteForecast()\n S.publish()\n if not S.ifritStarted then\n  local untilIfrit=S.time(\"p1end\")+S.ifritArrival\n  A.holdActionUntil(846,Now()+math.max(0,untilIfrit-now)*1000)\n end\nend\nS.rouletteForecast()\nA.setAutoSimUnexpectedMovementPct(.05)\nS.publish()\nA.holdActionUntil(846,Now()+math.max(0,S.time(\"p1end\")+S.ifritArrival-A.getAutoSimTime())*1000)\ndata.uwuBLMAutoSim=S\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -455,7 +455,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "-- Spiny Plume: applies regardless of model scale, including the enlarged plume.\nlocal spiny=TensorCore.API.TensorACR.addBlacklistEntry(2091,\"UWU Spiny Plume\")\nif not spiny.enabled or spiny.allowIfTarget or spiny.allowSmartDoT then\n spiny.enabled=true;spiny.allowIfTarget=false;spiny.allowSmartDoT=false\n TensorCore.API.TensorACR.saveDotBlacklist()\nend\nlocal feather=TensorCore.API.TensorACR.addBlacklistEntry(1648,\"UWU Satin Plume\")\nif not feather.enabled or feather.allowIfTarget or feather.allowSmartDoT then\n feather.enabled=true;feather.allowIfTarget=false;feather.allowSmartDoT=false\n TensorCore.API.TensorACR.saveDotBlacklist()\nend\nlocal dotAPI=TensorCore.API.TensorACR\nlocal dotEntry=dotAPI.addBlacklistEntry(1186,\"UWU Infernal Nail\")\nif not dotEntry.enabled or dotEntry.allowIfTarget then\n dotEntry.enabled=true\n dotEntry.allowIfTarget=false\n dotAPI.saveDotBlacklist()\nend\n-- Generated encounter inputs are inserted by the MCP authoring script.\n-- Five EU BLM clears supply the phase-relative medians. Native events resync them.\nlocal A=TensorCore.API.TensorACR\n_G.UWU_BLM_TemporaryState=_G.UWU_BLM_TemporaryState or {}\nlocal cfg=_G.UWU_BLM_AutoSimConfig\nif not cfg then\n cfg={poolLaha=true,priorityGaols=true,roulette=true,raidBuffs=true,buffGain=17,nails=true,closePair=true,surecast=true,manaward=true}\n _G.UWU_BLM_AutoSimConfig=cfg\nend\n-- Burst weight update: preserve forecast enablement and other options.\nif not cfg.burstWeight20261029 then cfg.buffGain=17;cfg.burstWeight20261029=true end\nlocal S={[\"anchors\"]={[\"p1end\"]={[\"after\"]=\"pull\",[\"offset\"]=134.629,[\"spread\"]=10},[\"ifrit1\"]={[\"after\"]=\"p1end\",[\"offset\"]=72.217,[\"spread\"]=0.75},[\"p2end\"]={[\"after\"]=\"ifrit1\",[\"offset\"]=38.162,[\"spread\"]=10},[\"ifrit2Back\"]={[\"after\"]=\"p2end\",[\"offset\"]=7.422,[\"spread\"]=0.75},[\"titan1\"]={[\"after\"]=\"ifrit2Back\",[\"offset\"]=22.062,[\"spread\"]=0.75},[\"p3end\"]={[\"after\"]=\"titan1\",[\"offset\"]=97.279,[\"spread\"]=15},[\"titan3Back\"]={[\"after\"]=\"p3end\",[\"offset\"]=12.283,[\"spread\"]=0.75},[\"magitekBit1\"]={[\"after\"]=\"titan3Back\",[\"offset\"]=7.018,[\"spread\"]=0.75},[\"p4end\"]={[\"after\"]=\"magitekBit1\",[\"offset\"]=25.99,[\"spread\"]=0.75},[\"graniteGaol1\"]={[\"after\"]=\"p4end\",[\"offset\"]=233.053,[\"spread\"]=0.75}},[\"kill\"]={[\"after\"]=\"graniteGaol1\",[\"offset\"]=134.648,[\"spread\"]=7.881},[\"phases\"]={{\"FullDowntime\",\"pull\",70.532,\"pull\",74.238,1},{\"FullDowntime\",\"p1end\",0.1,\"p1end\",13.303,1},{\"FullDowntime\",\"ifrit1\",0.1,\"ifrit1\",3.812,1},{\"FullDowntime\",\"p2end\",0.1,\"ifrit2Back\",-0.3,1},{\"FullDowntime\",\"titan1\",0.1,\"titan1\",8.158,1},{\"FullDowntime\",\"titan1\",54.272,\"titan1\",62.508,1},{\"FullDowntime\",\"p3end\",0.1,\"titan3Back\",-0.3,1},{\"FullDowntime\",\"magitekBit1\",0.1,\"magitekBit1\",13.741,1},{\"FullDowntime\",\"p4end\",0.1,\"p4end\",50.191,1},{\"FullDowntime\",\"p4end\",77.992,\"p4end\",98.072,1},{\"FullDowntime\",\"p4end\",156.499,\"p4end\",161.092,1},{\"FullDowntime\",\"p4end\",193.502,\"p4end\",198.14,1},{\"FullDowntime\",\"p4end\",214.525,\"p4end\",229.087,1},{\"FullDowntime\",\"graniteGaol1\",0.1,\"p4end\",255.307,1},{\"FullDowntime\",\"p4end\",353.6,\"p4end\",357.89,1}},[\"windows\"]={{\"CasterDowntime\",\"pull\",35.0,\"pull\",37.5,1},{\"CasterDowntime\",\"pull\",38.5,\"pull\",41.0,1},{\"CasterDowntime\",\"pull\",43.0,\"pull\",44.0,1},{\"CasterDowntime\",\"pull\",91.0,\"pull\",92.5,1},{\"CasterDowntime\",\"pull\",102.5,\"pull\",104.0,1},{\"CasterDowntime\",\"pull\",105.5,\"pull\",106.5,1},{\"CasterDowntime\",\"pull\",127.5,\"pull\",128.5,1},{\"CasterDowntime\",\"p1end\",44.5,\"p1end\",47.0,1},{\"CasterDowntime\",\"p1end\",91.5,\"p1end\",98.0,1},{\"CasterDowntime\",\"titan1\",8.5,\"titan1\",11.0,1},{\"CasterDowntime\",\"titan1\",14.0,\"titan1\",21.5,1},{\"CasterDowntime\",\"titan1\",27.5,\"titan1\",29.0,1},{\"CasterDowntime\",\"titan1\",41.0,\"titan1\",42.5,1},{\"CasterDowntime\",\"titan1\",74.5,\"titan1\",76.0,1},{\"CasterDowntime\",\"p4end\",99.5,\"p4end\",100.5,1},{\"CasterDowntime\",\"p4end\",109.0,\"p4end\",115.0,1},{\"CasterDowntime\",\"p4end\",121.0,\"p4end\",124.0,1},{\"CasterDowntime\",\"p4end\",125.0,\"p4end\",129.0,1},{\"CasterDowntime\",\"p4end\",144.5,\"p4end\",145.5,1},{\"CasterDowntime\",\"p4end\",161.5,\"p4end\",169.0,1},{\"CasterDowntime\",\"p4end\",170.0,\"p4end\",172.5,1},{\"CasterDowntime\",\"p4end\",173.5,\"p4end\",174.5,1},{\"CasterDowntime\",\"p4end\",178.5,\"p4end\",182.0,1},{\"CasterDowntime\",\"p4end\",229.5,\"p4end\",231.0,1},{\"CasterDowntime\",\"p4end\",274.0,\"p4end\",280.0,1},{\"CasterDowntime\",\"p4end\",281.0,\"p4end\",282.5,1}},[\"returns\"]={},[\"buffwindows\"]={{\"pull\",8.069},{\"p1end\",16.081},{\"ifrit2Back\",52.467},{\"p4end\",52.628},{\"p4end\",175.979},{\"p4end\",317.846}},[\"sample_count\"]=5,[\"kill_samples\"]={782.098,751.692,783.165,838.291,794.832},[\"roulette\"]={[\"first\"]=293.478,[\"step\"]=20.123,[\"templates\"]={[\"Garuda\"]={{9.5,10.0}},[\"Ifrit\"]={{7.0,9.5},{11.0,11.5}},[\"Titan\"]={{5.0,13.0}}}},[\"anchorOrder\"]={\"p1end\",\"ifrit1\",\"p2end\",\"ifrit2Back\",\"titan1\",\"p3end\",\"titan3Back\",\"magitekBit1\",\"p4end\",\"graniteGaol1\"},[\"ifritArrival\"]=13.603,[\"lahaDelay\"]=14.041}\n-- Separate Ifrit's second dash from his actual phase death.\nS.anchors.ifritDash={after=\"ifrit1\",offset=47.95,spread=2}\nS.anchors.ifritDashBack={after=\"ifritDash\",offset=15.79,spread=1}\nS.anchors.p2end={after=\"ifritDashBack\",offset=17.31,spread=12}\nS.anchors.ifrit2Back={after=\"p2end\",offset=7.55,spread=.75}\nS.anchorOrder={\"p1end\",\"ifrit1\",\"ifritDash\",\"ifritDashBack\",\"p2end\",\"ifrit2Back\",\"titan1\",\"p3end\",\"titan3Back\",\"magitekBit1\",\"p4end\",\"graniteGaol1\"}\nS.phases[#S.phases+1]={\"FullDowntime\",\"ifritDash\",0.1,\"ifritDashBack\",-0.1,1}\nfor _,phase in ipairs(S.phases) do\n if phase[1]==\"FullDowntime\" and phase[2]==\"ifrit1\" and phase[4]==\"ifrit1\" then phase[5]=4.25 end\nend\n-- First Garuda disappearance: corroborated in three recent native logs.\nS.phases[#S.phases+1]={\"FullDowntime\",\"pull\",33.96,\"pull\",38.25,1}\n-- Tonight's native phase-end samples: 16 Garuda ends and 7 final Ifrit returns.\nS.anchors.p1end.offset=145.61\nS.anchors.p1end.spread=27\nS.anchors.p2end.offset=22.312\nS.anchors.p2end.spread=17\n-- Three native Monk-pull boss-event samples; shared boss timing, independent of job movement.\nfor _,phase in ipairs(S.phases) do\n if phase[1]==\"FullDowntime\" and phase[2]==\"pull\" and math.abs(phase[3]-70.532)<.001 then\n  phase[3]=68.865;phase[5]=73.150\n elseif phase[1]==\"FullDowntime\" and phase[2]==\"titan1\" and phase[3]==.1 then\n  phase[5]=7.544\n end\nend\nS.cfg={}\nfor k,v in pairs(cfg) do S.cfg[k]=v end\nS.observed={pull=0}\nS.dynamic={}\nS.rouletteWindows={}\nfunction S.time(name)\n if S.observed[name] then return S.observed[name] end\n local a=S.anchors[name]\n return S.time(a.after)+a.offset\nend\nfunction S.union(list)\n table.sort(list,function(a,b)return a[1]<b[1] end)\n local out={}\n for _,w in ipairs(list) do\n  local last=out[#out]\n  if last and w[1]<=last[2] and w[3]==last[3] then last[2]=math.max(last[2],w[2])\n  else out[#out+1]={w[1],w[2],w[3]} end\n end\n return out\nend\nfunction S.rouletteForecast(kind,now)\n if not S.cfg.roulette then return end\n local orders={Garuda={\"Garuda\",\"Ifrit\",\"Titan\"},Ifrit={\"Ifrit\",\"Garuda\",\"Titan\"},Titan={\"Titan\",\"Ifrit\",\"Garuda\"}}\n if kind then\n  if not S.rouletteOrder then S.rouletteOrder=orders[kind];S.rouletteTimes={} end\n  local step=#S.rouletteTimes+1\n  if S.rouletteOrder[step]~=kind then return end\n  S.rouletteTimes[step]=now\n end\n S.rouletteWindows={}\n local function addOrder(order,base,times)\n  local offsets={0,S.roulette.step,S.roulette.step*2}\n  if times and #times>0 then base=times[#times]-S.time(\"p4end\")-offsets[#times] end\n  for i,k in ipairs(order) do\n   local t=times and times[i] or S.time(\"p4end\")+base+offsets[i]\n   for _,w in ipairs(S.roulette.templates[k]) do\n    S.rouletteWindows[#S.rouletteWindows+1]={t+w[1],t+w[2],1}\n   end\n  end\n end\n if S.rouletteOrder then addOrder(S.rouletteOrder,0,S.rouletteTimes)\n else\n  -- Initial estimates use the reference's three possible orders. Prepare events narrow them.\n  for _,order in pairs(orders) do addOrder(order,S.roulette.first) end\n end\nend\nfunction S.publish()\n local now=A.getAutoSimTime()\n local finish=math.max(now+5,S.time(S.kill.after)+S.kill.offset)\n A.setAutoSimKillTime(math.min(finish,1259))\n local grouped={FullDowntime={},CasterDowntime={},Stun={},BossModifier={},RaidBuff={},GroundFieldMovement={}}\n local function add(kind,a,b,value)\n  if b>a then grouped[kind][#grouped[kind]+1]={a,b,value or 1} end\n end\n for _,p in ipairs(S.phases) do\n  -- HP-driven deaths are variable. Do not declare the still-live boss unavailable.\n  local hpDeath=p[1]==\"FullDowntime\" and (p[2]==\"p1end\" or p[2]==\"p2end\")\n  if not hpDeath or S.observed[p[2]]~=nil then\n   add(p[1],S.time(p[2])+p[3],S.time(p[4])+p[5],p[6])\n  end\n end\n for _,p in ipairs(S.windows) do\n  local a,b=S.time(p[2])+p[3],S.time(p[4])+p[5]\n  if p[2]==\"titan1\" and S.observed.p3end then b=math.min(b,S.observed.p3end) end\n  add(p[1],a,b,p[6])\n end\n if S.cfg.poolLaha then\n  add(\"BossModifier\",S.time(\"magitekBit1\")+S.lahaDelay,S.time(\"p4end\"),.01)\n end\n if S.cfg.priorityGaols then\n  add(\"BossModifier\",S.time(\"titan1\")+68.966,S.time(\"titan1\")+73.966,1.10)\n  add(\"BossModifier\",S.time(\"p4end\")+227.75,S.time(\"p4end\")+232.75,1.10)\n end\n if S.cfg.raidBuffs then\n  local prev\n  for _,w in ipairs(S.buffwindows) do\n   local t=S.time(w[1])+w[2]\n   if prev then t=math.max(t,prev+120) end\n   -- The p1end-anchored burst is the Ifrit opener; preserve its timing/resync.\n   local burstWeight=w[1]==\"p1end\" and 1.4 or (1+S.cfg.buffGain/100)\n   local burstEnd=t+20\n   if w[1]==\"p1end\" then\n    -- Never extend the artificial 1.4 opener into nail softening.\n    burstEnd=math.min(burstEnd,S.time(\"p1end\")+39,S.nailsStartedAt or math.huge)\n   end\n   add(\"RaidBuff\",t,burstEnd,burstWeight)\n   prev=t\n  end\n end\n for _,w in ipairs(S.rouletteWindows) do add(\"CasterDowntime\",w[1],w[2],1) end\n local roster=AnyoneCore.Roster\n local isR2=roster and roster.current() and roster.mySlot()==\"R2\"\n if isR2 and not S.lbObserved then\n  local lb=S.time(\"titan3Back\")+4\n  add(\"Stun\",lb,lb+12.6,1)\n end\n for _,w in pairs(S.dynamic) do add(w[1],w[2],w[3],w[4]) end\n for kind,list in pairs(grouped) do\n  A.clearAutoSimPhases(kind)\n  -- All absolute same-type overlaps are merged before submission.\n  if kind==\"BossModifier\" or kind==\"RaidBuff\" then\n   local cuts,seen={},{}\n   for _,w in ipairs(list) do for i=1,2 do if not seen[w[i]] then cuts[#cuts+1]=w[i];seen[w[i]]=true end end end\n   table.sort(cuts)\n   for i=1,#cuts-1 do\n    local value,active=1,false\n    for _,w in ipairs(list) do if w[1]<=cuts[i] and w[2]>=cuts[i+1] then value=value*w[3];active=true end end\n    if active then A.addAutoSimPhase(kind,cuts[i],cuts[i+1],value) end\n   end\n  else\n   for _,w in ipairs(S.union(list)) do A.addAutoSimPhase(kind,w[1],w[2],w[3]) end\n  end\n end\n A.clearAutoSimUncertainty()\n A.addAutoSimUncertainty(0,2)\n local uncertainty=2\n for _,name in ipairs(S.anchorOrder) do\n  if not S.observed[name] then\n   local anchor=S.anchors[name]\n   uncertainty=math.max(uncertainty,anchor.spread)\n   A.addAutoSimUncertainty(S.time(name)-25,uncertainty)\n  end\n end\n A.addAutoSimUncertainty(math.max(0,finish-30),math.max(uncertainty,S.kill.spread))\nend\nfunction S.resync(name,now)\n if S.observed[name] then return end\n S.observed[name]=now\n S.rouletteForecast()\n S.publish()\n if not S.ifritStarted then\n  local untilIfrit=S.time(\"p1end\")+S.ifritArrival\n  A.holdActionUntil(846,Now()+math.max(0,untilIfrit-now)*1000)\n end\nend\nS.rouletteForecast()\nA.setAutoSimUnexpectedMovementPct(.05)\nS.publish()\nA.holdActionUntil(846,Now()+math.max(0,S.time(\"p1end\")+S.ifritArrival-A.getAutoSimTime())*1000)\ndata.uwuBLMAutoSim=S\nself.used=true\n",
+							actionLua = "-- Spiny Plume: applies regardless of model scale, including the enlarged plume.\nlocal spiny=TensorCore.API.TensorACR.addBlacklistEntry(2091,\"UWU Spiny Plume\")\nif not spiny.enabled or spiny.allowIfTarget or spiny.allowSmartDoT then\n spiny.enabled=true;spiny.allowIfTarget=false;spiny.allowSmartDoT=false\n TensorCore.API.TensorACR.saveDotBlacklist()\nend\nlocal feather=TensorCore.API.TensorACR.addBlacklistEntry(1648,\"UWU Satin Plume\")\nif not feather.enabled or feather.allowIfTarget or feather.allowSmartDoT then\n feather.enabled=true;feather.allowIfTarget=false;feather.allowSmartDoT=false\n TensorCore.API.TensorACR.saveDotBlacklist()\nend\nlocal dotAPI=TensorCore.API.TensorACR\nlocal dotEntry=dotAPI.addBlacklistEntry(1186,\"UWU Infernal Nail\")\nif not dotEntry.enabled or dotEntry.allowIfTarget then\n dotEntry.enabled=true\n dotEntry.allowIfTarget=false\n dotAPI.saveDotBlacklist()\nend\n-- Generated encounter inputs are inserted by the MCP authoring script.\n-- Five EU BLM clears supply the phase-relative medians. Native events resync them.\nlocal A=TensorCore.API.TensorACR\n_G.UWU_BLM_TemporaryState=_G.UWU_BLM_TemporaryState or {}\nlocal cfg=_G.UWU_BLM_AutoSimConfig\nif not cfg then\n cfg={poolLaha=true,priorityGaols=true,roulette=true,raidBuffs=true,buffGain=17,nails=true,closePair=true,surecast=true,manaward=true}\n _G.UWU_BLM_AutoSimConfig=cfg\nend\n-- Burst weight update: preserve forecast enablement and other options.\nif not cfg.burstWeight20261029 then cfg.buffGain=17;cfg.burstWeight20261029=true end\nlocal S={[\"anchors\"]={[\"p1end\"]={[\"after\"]=\"pull\",[\"offset\"]=134.629,[\"spread\"]=10},[\"ifrit1\"]={[\"after\"]=\"p1end\",[\"offset\"]=72.217,[\"spread\"]=0.75},[\"p2end\"]={[\"after\"]=\"ifrit1\",[\"offset\"]=38.162,[\"spread\"]=10},[\"ifrit2Back\"]={[\"after\"]=\"p2end\",[\"offset\"]=7.422,[\"spread\"]=0.75},[\"titan1\"]={[\"after\"]=\"ifrit2Back\",[\"offset\"]=22.062,[\"spread\"]=0.75},[\"p3end\"]={[\"after\"]=\"titan1\",[\"offset\"]=97.279,[\"spread\"]=15},[\"titan3Back\"]={[\"after\"]=\"p3end\",[\"offset\"]=12.283,[\"spread\"]=0.75},[\"magitekBit1\"]={[\"after\"]=\"titan3Back\",[\"offset\"]=7.018,[\"spread\"]=0.75},[\"p4end\"]={[\"after\"]=\"magitekBit1\",[\"offset\"]=25.99,[\"spread\"]=0.75},[\"graniteGaol1\"]={[\"after\"]=\"p4end\",[\"offset\"]=233.053,[\"spread\"]=0.75}},[\"kill\"]={[\"after\"]=\"graniteGaol1\",[\"offset\"]=134.648,[\"spread\"]=7.881},[\"phases\"]={{\"FullDowntime\",\"pull\",70.532,\"pull\",74.238,1},{\"FullDowntime\",\"p1end\",0.1,\"p1end\",13.303,1},{\"FullDowntime\",\"ifrit1\",0.1,\"ifrit1\",3.812,1},{\"FullDowntime\",\"p2end\",0.1,\"ifrit2Back\",-0.3,1},{\"FullDowntime\",\"titan1\",0.1,\"titan1\",8.158,1},{\"FullDowntime\",\"titan1\",54.272,\"titan1\",62.508,1},{\"FullDowntime\",\"p3end\",0.1,\"titan3Back\",-0.3,1},{\"FullDowntime\",\"magitekBit1\",0.1,\"magitekBit1\",13.741,1},{\"FullDowntime\",\"p4end\",0.1,\"p4end\",50.191,1},{\"FullDowntime\",\"p4end\",77.992,\"p4end\",98.072,1},{\"FullDowntime\",\"p4end\",156.499,\"p4end\",161.092,1},{\"FullDowntime\",\"p4end\",193.502,\"p4end\",198.14,1},{\"FullDowntime\",\"p4end\",214.525,\"p4end\",229.087,1},{\"FullDowntime\",\"graniteGaol1\",0.1,\"p4end\",255.307,1},{\"FullDowntime\",\"p4end\",353.6,\"p4end\",357.89,1}},[\"windows\"]={{\"CasterDowntime\",\"pull\",35.0,\"pull\",37.5,1},{\"CasterDowntime\",\"pull\",38.5,\"pull\",41.0,1},{\"CasterDowntime\",\"pull\",43.0,\"pull\",44.0,1},{\"CasterDowntime\",\"pull\",91.0,\"pull\",92.5,1},{\"CasterDowntime\",\"pull\",102.5,\"pull\",104.0,1},{\"CasterDowntime\",\"pull\",105.5,\"pull\",106.5,1},{\"CasterDowntime\",\"pull\",127.5,\"pull\",128.5,1},{\"CasterDowntime\",\"p1end\",44.5,\"p1end\",47.0,1},{\"CasterDowntime\",\"p1end\",91.5,\"p1end\",98.0,1},{\"CasterDowntime\",\"titan1\",8.5,\"titan1\",11.0,1},{\"CasterDowntime\",\"titan1\",14.0,\"titan1\",21.5,1},{\"CasterDowntime\",\"titan1\",27.5,\"titan1\",29.0,1},{\"CasterDowntime\",\"titan1\",41.0,\"titan1\",42.5,1},{\"CasterDowntime\",\"titan1\",74.5,\"titan1\",76.0,1},{\"CasterDowntime\",\"p4end\",99.5,\"p4end\",100.5,1},{\"CasterDowntime\",\"p4end\",109.0,\"p4end\",115.0,1},{\"CasterDowntime\",\"p4end\",121.0,\"p4end\",124.0,1},{\"CasterDowntime\",\"p4end\",125.0,\"p4end\",129.0,1},{\"CasterDowntime\",\"p4end\",144.5,\"p4end\",145.5,1},{\"CasterDowntime\",\"p4end\",161.5,\"p4end\",169.0,1},{\"CasterDowntime\",\"p4end\",170.0,\"p4end\",172.5,1},{\"CasterDowntime\",\"p4end\",173.5,\"p4end\",174.5,1},{\"CasterDowntime\",\"p4end\",178.5,\"p4end\",182.0,1},{\"CasterDowntime\",\"p4end\",229.5,\"p4end\",231.0,1},{\"CasterDowntime\",\"p4end\",274.0,\"p4end\",280.0,1},{\"CasterDowntime\",\"p4end\",281.0,\"p4end\",282.5,1}},[\"returns\"]={},[\"buffwindows\"]={{\"pull\",8.069},{\"p1end\",16.081},{\"ifrit2Back\",52.467},{\"p4end\",52.628},{\"p4end\",175.979},{\"p4end\",317.846}},[\"sample_count\"]=5,[\"kill_samples\"]={782.098,751.692,783.165,838.291,794.832},[\"roulette\"]={[\"first\"]=293.478,[\"step\"]=20.123,[\"templates\"]={[\"Garuda\"]={{9.5,10.0}},[\"Ifrit\"]={{7.0,9.5},{11.0,11.5}},[\"Titan\"]={{5.0,13.0}}}},[\"anchorOrder\"]={\"p1end\",\"ifrit1\",\"p2end\",\"ifrit2Back\",\"titan1\",\"p3end\",\"titan3Back\",\"magitekBit1\",\"p4end\",\"graniteGaol1\"},[\"ifritArrival\"]=13.603,[\"lahaDelay\"]=14.041}\n-- Separate Ifrit's second dash from his actual phase death.\nS.anchors.ifritDash={after=\"ifrit1\",offset=47.95,spread=2}\nS.anchors.ifritDashBack={after=\"ifritDash\",offset=15.79,spread=1}\nS.anchors.p2end={after=\"ifrit1\",offset=40.328,spread=12}\nS.anchors.ifrit2Back={after=\"p2end\",offset=7.55,spread=.75}\nS.anchorOrder={\"p1end\",\"ifrit1\",\"ifritDash\",\"ifritDashBack\",\"p2end\",\"ifrit2Back\",\"titan1\",\"p3end\",\"titan3Back\",\"magitekBit1\",\"p4end\",\"graniteGaol1\"}\nS.phases[#S.phases+1]={\"FullDowntime\",\"ifritDash\",0.1,\"ifritDashBack\",-0.1,1}\nfor _,phase in ipairs(S.phases) do\n if phase[1]==\"FullDowntime\" and phase[2]==\"ifrit1\" and phase[4]==\"ifrit1\" then phase[5]=4.25 end\nend\n-- First Garuda disappearance: corroborated in three recent native logs.\nS.phases[#S.phases+1]={\"FullDowntime\",\"pull\",33.96,\"pull\",38.25,1}\n-- Tonight's native phase-end samples: 16 Garuda ends and 7 final Ifrit returns.\nS.anchors.p1end.offset=145.61\nS.anchors.p1end.spread=27\nS.anchors.p2end.offset=22.312\nS.anchors.p2end.spread=17\n-- Three native Monk-pull boss-event samples; shared boss timing, independent of job movement.\nfor _,phase in ipairs(S.phases) do\n if phase[1]==\"FullDowntime\" and phase[2]==\"pull\" and math.abs(phase[3]-70.532)<.001 then\n  phase[3]=68.865;phase[5]=73.150\n elseif phase[1]==\"FullDowntime\" and phase[2]==\"titan1\" and phase[3]==.1 then\n  phase[5]=7.544\n end\nend\nS.cfg={}\nfor k,v in pairs(cfg) do S.cfg[k]=v end\n-- Recent native records: six BLM Garuda ends; five distinct party Ifrit ends.\nS.anchors.p1end.offset=133.235\nS.observed={pull=0}\nS.dynamic={}\nS.rouletteWindows={}\nfunction S.time(name)\n if S.observed[name] then return S.observed[name] end\n local a=S.anchors[name]\n return S.time(a.after)+a.offset\nend\nfunction S.union(list)\n table.sort(list,function(a,b)return a[1]<b[1] end)\n local out={}\n for _,w in ipairs(list) do\n  local last=out[#out]\n  if last and w[1]<=last[2] and w[3]==last[3] then last[2]=math.max(last[2],w[2])\n  else out[#out+1]={w[1],w[2],w[3]} end\n end\n return out\nend\nfunction S.rouletteForecast(kind,now)\n if not S.cfg.roulette then return end\n local orders={Garuda={\"Garuda\",\"Ifrit\",\"Titan\"},Ifrit={\"Ifrit\",\"Garuda\",\"Titan\"},Titan={\"Titan\",\"Ifrit\",\"Garuda\"}}\n if kind then\n  if not S.rouletteOrder then S.rouletteOrder=orders[kind];S.rouletteTimes={} end\n  local step=#S.rouletteTimes+1\n  if S.rouletteOrder[step]~=kind then return end\n  S.rouletteTimes[step]=now\n end\n S.rouletteWindows={}\n local function addOrder(order,base,times)\n  local offsets={0,S.roulette.step,S.roulette.step*2}\n  if times and #times>0 then base=times[#times]-S.time(\"p4end\")-offsets[#times] end\n  for i,k in ipairs(order) do\n   local t=times and times[i] or S.time(\"p4end\")+base+offsets[i]\n   for _,w in ipairs(S.roulette.templates[k]) do\n    S.rouletteWindows[#S.rouletteWindows+1]={t+w[1],t+w[2],1}\n   end\n  end\n end\n if S.rouletteOrder then addOrder(S.rouletteOrder,0,S.rouletteTimes)\n else\n  -- Initial estimates use the reference's three possible orders. Prepare events narrow them.\n  for _,order in pairs(orders) do addOrder(order,S.roulette.first) end\n end\nend\nS.dotStarts={}\nS.dotGaps={}\nS.dotEnds={ [1644]=\"p1end\",[1185]=\"p2end\",[1801]=\"p3end\" }\nfunction S.publishDots()\n local target=TensorCore.mGetTarget()\n local now=A.getAutoSimTime()\n if target and target.alive and target.targetable then\n  S.dotEntityID=target.id;S.dotContentID=target.contentid\n end\n if not S.dotEntityID then return end\n local cid=S.dotContentID\n local endAnchor=S.dotEnds[cid]\n local finish=math.min(1259,math.max(now+5,S.time(S.kill.after)+S.kill.offset))\n local start=0\n if endAnchor then\n  if not S.dotStarts[S.dotEntityID] then\n   local predicted=cid==1644 and 0 or (cid==1185 and S.time(\"p1end\")+S.ifritArrival or S.time(\"ifrit2Back\"))\n   S.dotStarts[S.dotEntityID]=math.max(0,math.min(predicted,now))\n  end\n  start=S.dotStarts[S.dotEntityID]\n  finish=math.min(1259,S.observed[endAnchor] or math.max(S.time(endAnchor),now+5))\n end\n -- Thunder and AoE Thunder have independent availability groups.\n A.clearAutoSimPhases(\"DotAvailability\",0,0)\n A.clearAutoSimPhases(\"DotAvailability\",0,1)\n A.clearAutoSimPhases(\"TargetLifetime\",0)\n if finish<=start then return end\n A.addAutoSimPhase(\"TargetLifetime\",start,finish,1,0)\n local stop=endAnchor and math.max(start,finish-.5) or finish\n -- Respect existing excluded adds even when selected manually.\n if cid==1186 or cid==1648 or cid==2091 then stop=start end\n local gaps={}\n local observed=S.dotGaps[S.dotEntityID] or {}\n for _,phase in ipairs(S.phases) do\n  if phase[1]==\"FullDowntime\" and not (phase[2]==\"ifritDash\" and (S.ifritDashWasFinal or (not S.observed.ifritDash and S.time(\"p2end\")<=S.time(\"ifritDash\")))) then\n   local a,b=S.time(phase[2])+phase[3],S.time(phase[4])+phase[5]\n   local replaced=false\n   for _,gap in ipairs(observed) do if math.abs(gap[1]-a)<10 then replaced=true;break end end\n   if not replaced and b>start and a<stop then gaps[#gaps+1]={math.max(start,a),math.min(stop,b),1} end\n  end\n end\n for _,gap in ipairs(observed) do\n  local a,b=math.max(start,gap[1]),math.min(stop,gap[2] or stop)\n  if b>a then gaps[#gaps+1]={a,b,1} end\n end\n local cursor=start\n local available={}\n for _,gap in ipairs(S.union(gaps)) do\n  if gap[1]>cursor then available[#available+1]={cursor,gap[1]} end\n  cursor=math.max(cursor,gap[2])\n end\n if stop>cursor then available[#available+1]={cursor,stop} end\n for group=0,1 do\n  for _,window in ipairs(available) do A.addAutoSimPhase(\"DotAvailability\",window[1],window[2],1,0,group) end\n end\n S.dotPublishedEnd=finish;S.dotPublishedTarget=S.dotEntityID\n S.dotAnchorSignature=tostring(S.observed.p1end)..\":\"..tostring(S.observed.p2end)..\":\"..tostring(S.observed.p3end)\nend\n\nfunction S.publish()\n local now=A.getAutoSimTime()\n local finish=math.max(now+5,S.time(S.kill.after)+S.kill.offset)\n A.setAutoSimKillTime(math.min(finish,1259))\n local grouped={FullDowntime={},CasterDowntime={},Stun={},BossModifier={},RaidBuff={},GroundFieldMovement={}}\n local function add(kind,a,b,value)\n  if b>a then grouped[kind][#grouped[kind]+1]={a,b,value or 1} end\n end\n for _,p in ipairs(S.phases) do\n  -- HP-driven deaths are variable. Do not declare the still-live boss unavailable.\n  local hpDeath=p[1]==\"FullDowntime\" and (p[2]==\"p1end\" or p[2]==\"p2end\")\n  if (not hpDeath or S.observed[p[2]]~=nil) and not (p[2]==\"ifritDash\" and (S.ifritDashWasFinal or (not S.observed.ifritDash and S.time(\"p2end\")<=S.time(\"ifritDash\")))) then\n   add(p[1],S.time(p[2])+p[3],S.time(p[4])+p[5],p[6])\n  end\n end\n for _,p in ipairs(S.windows) do\n  local a,b=S.time(p[2])+p[3],S.time(p[4])+p[5]\n  if p[2]==\"titan1\" and S.observed.p3end then b=math.min(b,S.observed.p3end) end\n  add(p[1],a,b,p[6])\n end\n if S.cfg.poolLaha then\n  add(\"BossModifier\",S.time(\"magitekBit1\")+S.lahaDelay,S.time(\"p4end\"),.01)\n end\n if S.cfg.priorityGaols then\n  add(\"BossModifier\",S.time(\"titan1\")+68.966,S.time(\"titan1\")+73.966,1.10)\n  add(\"BossModifier\",S.time(\"p4end\")+227.75,S.time(\"p4end\")+232.75,1.10)\n end\n if S.cfg.raidBuffs then\n  local prev\n  for _,w in ipairs(S.buffwindows) do\n   local t=S.time(w[1])+w[2]\n   if prev then t=math.max(t,prev+120) end\n   -- The p1end-anchored burst is the Ifrit opener; preserve its timing/resync.\n   local burstWeight=w[1]==\"p1end\" and 1.4 or (1+S.cfg.buffGain/100)\n   local burstEnd=t+20\n   if w[1]==\"p1end\" then\n    -- Never extend the artificial 1.4 opener into nail softening.\n    burstEnd=math.min(burstEnd,S.time(\"p1end\")+39,S.nailsStartedAt or math.huge)\n   end\n   add(\"RaidBuff\",t,burstEnd,burstWeight)\n   prev=t\n  end\n end\n for _,w in ipairs(S.rouletteWindows) do add(\"CasterDowntime\",w[1],w[2],1) end\n local roster=AnyoneCore.Roster\n local isR2=roster and roster.current() and roster.mySlot()==\"R2\"\n if isR2 and not S.lbObserved then\n  local lb=S.time(\"titan3Back\")+4\n  add(\"Stun\",lb,lb+12.6,1)\n end\n for _,w in pairs(S.dynamic) do add(w[1],w[2],w[3],w[4]) end\n for kind,list in pairs(grouped) do\n  A.clearAutoSimPhases(kind)\n  -- All absolute same-type overlaps are merged before submission.\n  if kind==\"BossModifier\" or kind==\"RaidBuff\" then\n   local cuts,seen={},{}\n   for _,w in ipairs(list) do for i=1,2 do if not seen[w[i]] then cuts[#cuts+1]=w[i];seen[w[i]]=true end end end\n   table.sort(cuts)\n   for i=1,#cuts-1 do\n    local value,active=1,false\n    for _,w in ipairs(list) do if w[1]<=cuts[i] and w[2]>=cuts[i+1] then value=value*w[3];active=true end end\n    if active then A.addAutoSimPhase(kind,cuts[i],cuts[i+1],value) end\n   end\n  else\n   for _,w in ipairs(S.union(list)) do A.addAutoSimPhase(kind,w[1],w[2],w[3]) end\n  end\n end\n A.clearAutoSimUncertainty()\n A.addAutoSimUncertainty(0,2)\n local uncertainty=2\n for _,name in ipairs(S.anchorOrder) do\n  if not S.observed[name] and not (name==\"ifritDashBack\" and S.ifritDashWasFinal) then\n   local anchor=S.anchors[name]\n   uncertainty=math.max(uncertainty,anchor.spread)\n   A.addAutoSimUncertainty(S.time(name)-25,uncertainty)\n  end\n end\n A.addAutoSimUncertainty(math.max(0,finish-30),math.max(uncertainty,S.kill.spread))\n S.publishDots()\nend\nfunction S.resync(name,now)\n if S.observed[name] then return end\n S.observed[name]=now\n S.rouletteForecast()\n S.publish()\n if not S.ifritStarted then\n  local untilIfrit=S.time(\"p1end\")+S.ifritArrival\n  A.holdActionUntil(846,Now()+math.max(0,untilIfrit-now)*1000)\n end\nend\nS.rouletteForecast()\nA.setAutoSimUnexpectedMovementPct(.05)\nS.publish()\nA.holdActionUntil(846,Now()+math.max(0,S.time(\"p1end\")+S.ifritArrival-A.getAutoSimTime())*1000)\ndata.uwuBLMAutoSim=S\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -648,6 +648,196 @@ local tbl =
 				timerEndOffset = 205,
 				timerStartOffset = -9,
 				uuid = "581767f8-8e1d-77ba-829a-7a4698a55932",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "BLM AutoSim",
+				name = "DoT forecasts",
+				uuid = "b7da6423-3a7e-95fe-9b16-34e5da8938bd",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.uwuBLMAutoSim\nif not S or not S.publishDots then return end\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nlocal id=eventArgs.entityID\nlocal gaps=S.dotGaps[id] or {};S.dotGaps[id]=gaps\nlocal last=gaps[#gaps]\nif eventArgs.isTargetable then\n if last and not last[2] then last[2]=now end\nelse\n if eventArgs.entityContentID==1185 then S.ifritLastUntargetable=now end\n if not last or last[2] then gaps[#gaps+1]={now} end\nend\nif id==S.dotEntityID then S.publishDots() end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"8127a150-841c-432e-b665-f742af1aa00a",
+									true,
+								},
+								
+								{
+									"fadb2dc2-58fb-5a3d-9d78-fd7ec574e74e",
+									true,
+								},
+								
+								{
+									"fbfd5f54-0134-f278-9166-9f8b17f533a5",
+									true,
+								},
+							},
+							name = "Record native DoT gap",
+							uuid = "3e44b526-fccd-878c-a724-21369e7f522d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU only",
+							uuid = "8127a150-841c-432e-b665-f742af1aa00a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "fadb2dc2-58fb-5a3d-9d78-fd7ec574e74e",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1644,
+							name = "Garuda",
+							uuid = "fbfd5f54-0134-f278-9166-9f8b17f533a5",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/DoT forecasts",
+				eventType = 26,
+				loop = true,
+				mechanicTime = 9,
+				name = "[BLM UWU] Garuda Thunder availability",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 167,
+				timerStartOffset = -9,
+				uuid = "cdf641aa-79c7-7fd4-9a42-bc188ce3eb41",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "data.uwuBLMAutoSim.publishDots()\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"f0da3a2e-5108-f43e-86f9-08fc14d8687d",
+									true,
+								},
+								
+								{
+									"c26baa1a-a573-ef5a-9358-3ea5072e5a1a",
+									true,
+								},
+								
+								{
+									"a9eb0f58-1a24-4d49-880e-2074b39a7aba",
+									true,
+								},
+							},
+							name = "Publish Thunder lifetimes",
+							uuid = "9d58aa16-5df1-8360-be44-78fb76becd4a",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU only",
+							uuid = "f0da3a2e-5108-f43e-86f9-08fc14d8687d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "c26baa1a-a573-ef5a-9358-3ea5072e5a1a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.uwuBLMAutoSim\nif not S or not S.publishDots then return false end\nlocal target=TensorCore.mGetTarget()\nif target and target.alive and target.targetable and target.id~=S.dotPublishedTarget then return true end\nlocal anchor=S.dotEnds[S.dotContentID]\nreturn anchor~=nil and not S.observed[anchor] and S.dotPublishedEnd~=nil and TensorCore.API.TensorACR.getAutoSimTime()>=S.dotPublishedEnd-2",
+							name = "Target changed or lifetime expiring",
+							uuid = "a9eb0f58-1a24-4d49-880e-2074b39a7aba",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/DoT forecasts",
+				loop = true,
+				mechanicTime = 9,
+				name = "[BLM UWU] Thunder forecast follows target",
+				throttleTime = 500,
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 1331,
+				timerStartOffset = -9,
+				uuid = "0638c9ae-4e08-8fd9-87b9-6edbd1e807f0",
 				version = 2,
 			},
 		},
@@ -1731,6 +1921,107 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "BLM AutoSim",
+				name = "DoT forecasts",
+				uuid = "db232271-72ac-b808-b12b-10c6ee195941",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.uwuBLMAutoSim\nif not S or not S.publishDots then return end\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nlocal id=eventArgs.entityID\nlocal gaps=S.dotGaps[id] or {};S.dotGaps[id]=gaps\nlocal last=gaps[#gaps]\nif eventArgs.isTargetable then\n if last and not last[2] then last[2]=now end\nelse\n if eventArgs.entityContentID==1185 then S.ifritLastUntargetable=now end\n if not last or last[2] then gaps[#gaps+1]={now} end\nend\nif id==S.dotEntityID then S.publishDots() end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"da3a7473-e8c2-9bf4-9e36-f33ecbd1574c",
+									true,
+								},
+								
+								{
+									"be9b4301-1938-49f5-9d2d-d743cc78bd2c",
+									true,
+								},
+								
+								{
+									"4fbef18e-33ce-0056-bd8a-973ef185a423",
+									true,
+								},
+							},
+							name = "Record native DoT gap",
+							uuid = "e77884be-229f-30ea-9b98-7fa960fe9415",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU only",
+							uuid = "da3a7473-e8c2-9bf4-9e36-f33ecbd1574c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "be9b4301-1938-49f5-9d2d-d743cc78bd2c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1185,
+							name = "Ifrit",
+							uuid = "4fbef18e-33ce-0056-bd8a-973ef185a423",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/DoT forecasts",
+				eventType = 26,
+				loop = true,
+				mechanicTime = 300,
+				name = "[BLM UWU] Ifrit Thunder availability",
+				timeRange = true,
+				timelineIndex = 36,
+				timerEndOffset = 270,
+				timerStartOffset = -20,
+				uuid = "19f0402b-000e-4b03-8e4d-0f1062aa2891",
+				version = 2,
+			},
+		},
 	},
 	[39] = 
 	{
@@ -2710,7 +3001,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local T=_G.UWU_BLM_TemporaryState\nif T and T.leyHold then\n TensorCore.API.TensorACR.holdActionUntil(3573,Now())\n T.leyHold=nil\nend\nlocal S=data.uwuBLMAutoSim\nS.resync(\"ifrit2Back\",TensorCore.API.TensorACR.getAutoSimTime())\nself.used=true",
+							actionLua = "local T=_G.UWU_BLM_TemporaryState\nif T and T.leyHold then\n TensorCore.API.TensorACR.holdActionUntil(3573,Now())\n T.leyHold=nil\nend\nlocal S=data.uwuBLMAutoSim\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nlocal departure=S.ifritLastUntargetable\nif departure and now-departure>=5 and now-departure<=12 and not S.observed.p2end then\n -- Titan's arrival confirms the preceding disappearance was Ifrit's death.\n S.ifritDashWasFinal=S.observed.ifritDash and math.abs(S.observed.ifritDash-departure)<1 or false\n S.resync(\"p2end\",departure)\nend\nS.resync(\"ifrit2Back\",now)\nself.used=true",
 							conditions = 
 							{
 								
@@ -3043,6 +3334,107 @@ local tbl =
 				timerEndOffset = 12,
 				timerStartOffset = -8,
 				uuid = "14762ebd-1b3a-8be8-b58b-879ee566defa",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "BLM AutoSim",
+				name = "DoT forecasts",
+				uuid = "3a75e396-c692-3c6c-962b-a912bb41778f",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.uwuBLMAutoSim\nif not S or not S.publishDots then return end\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nlocal id=eventArgs.entityID\nlocal gaps=S.dotGaps[id] or {};S.dotGaps[id]=gaps\nlocal last=gaps[#gaps]\nif eventArgs.isTargetable then\n if last and not last[2] then last[2]=now end\nelse\n if eventArgs.entityContentID==1185 then S.ifritLastUntargetable=now end\n if not last or last[2] then gaps[#gaps+1]={now} end\nend\nif id==S.dotEntityID then S.publishDots() end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"55a7572c-a713-90b0-869a-32e33ccf0f50",
+									true,
+								},
+								
+								{
+									"79aa439e-2751-3765-8cff-985f79cac38a",
+									true,
+								},
+								
+								{
+									"ae29425f-0967-bd38-bd70-9965ff808fea",
+									true,
+								},
+							},
+							name = "Record native DoT gap",
+							uuid = "28700a5b-6a28-6fc9-b52d-bf491cf0efd0",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU only",
+							uuid = "55a7572c-a713-90b0-869a-32e33ccf0f50",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "79aa439e-2751-3765-8cff-985f79cac38a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1801,
+							name = "Titan",
+							uuid = "ae29425f-0967-bd38-bd70-9965ff808fea",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/DoT forecasts",
+				eventType = 26,
+				loop = true,
+				mechanicTime = 600,
+				name = "[BLM UWU] Titan Thunder availability",
+				timeRange = true,
+				timelineIndex = 74,
+				timerEndOffset = 200,
+				timerStartOffset = -20,
+				uuid = "d0674c03-6f83-1b13-85cb-1f4df191ec12",
 				version = 2,
 			},
 		},
@@ -5876,6 +6268,107 @@ local tbl =
 				timerEndOffset = -10,
 				timerStartOffset = -19,
 				uuid = "f9547a8a-8a00-c15e-9929-67dce0cf6365",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "BLM AutoSim",
+				name = "DoT forecasts",
+				uuid = "e65dac1f-88cb-5efb-ab5d-7f7c48adf1a4",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.uwuBLMAutoSim\nif not S or not S.publishDots then return end\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nlocal id=eventArgs.entityID\nlocal gaps=S.dotGaps[id] or {};S.dotGaps[id]=gaps\nlocal last=gaps[#gaps]\nif eventArgs.isTargetable then\n if last and not last[2] then last[2]=now end\nelse\n if eventArgs.entityContentID==1185 then S.ifritLastUntargetable=now end\n if not last or last[2] then gaps[#gaps+1]={now} end\nend\nif id==S.dotEntityID then S.publishDots() end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"1c2117d4-503c-21cb-ad0e-e8bcf6dfaa76",
+									true,
+								},
+								
+								{
+									"6c85341f-958f-f20b-8055-ed020e6a531c",
+									true,
+								},
+								
+								{
+									"38ddb4f0-db58-c563-9018-680f49ebd6b6",
+									true,
+								},
+							},
+							name = "Record native DoT gap",
+							uuid = "96b363b6-944a-6790-b1f4-1424ecbcf8df",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU only",
+							uuid = "1c2117d4-503c-21cb-ad0e-e8bcf6dfaa76",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "6c85341f-958f-f20b-8055-ed020e6a531c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 2137,
+							name = "Ultima",
+							uuid = "38ddb4f0-db58-c563-9018-680f49ebd6b6",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/DoT forecasts",
+				eventType = 26,
+				loop = true,
+				mechanicTime = 840,
+				name = "[BLM UWU] Ultima Thunder availability",
+				timeRange = true,
+				timelineIndex = 116,
+				timerEndOffset = 500,
+				timerStartOffset = -20,
+				uuid = "acdf90da-511b-38cb-b53a-e0f2d7553962",
 				version = 2,
 			},
 		},
