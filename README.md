@@ -89,6 +89,8 @@ TEA: Coming soon by Ton.
 
 ### UWU: LPDU
 
+- Fixed the shared targeting settings error and BLM’s return to Ifrit after nail softening. BLM/BRD/RPR now blacklist Spiny Plume DoTs, including its enlarged form, and stop the artificial 1.4 opener weight before nails. Both startup paths use the same opener weight. Runtime targeting checks remain pending. (31-10-2026)
+
 - BLM/RPR AutoSim burst-strength defaults are now 1.17. The Ifrit-opening burst uses 1.4 for BLM, RPR and BRD. Existing burst forecast on/off choices, window timing and target-priority weights are preserved. (29-10-2026)
 
 - Corrected the BLM AutoSim nail tooltip to describe the existing 40% softening threshold and one-time cancellation of a cast targeting that nail. Combat behavior is unchanged. (29-10-2026)
@@ -106,6 +108,4 @@ TEA: Coming soon by Ton.
 - Added optional boss, gaol and Magitek Bit targeting with a shared auto-target toggle, plus source-aligned cooldown holds, Sprint requests and shield-checked Surecast/Arm's Length attempts. Nails are DoT-blacklisted for supported ACRs, including non-AutoSim users. (28-10-2026)
 
 - Updated dependencies to AnyoneCore’s separate UWU draws and core modules in place of the combined main profile. (24-10-2026)
-
-- Enabled TTS for the 1048s ranged eruption-bait positioning call and 697s Landslide warning. (21-10-2026)
 
