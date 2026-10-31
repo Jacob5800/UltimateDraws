@@ -6146,7 +6146,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.lpduLRFirstOrbTimer\nif s and s.shown then self.used=true;return end\nlocal p=TensorCore.mGetPlayer()\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not p or not p.pos or not e or not e.pos then return end\nif not s then s={orbs={}};data.lpduLRFirstOrbTimer=s end\ns.orbs[eventArgs.entityID]={x=e.pos.x,y=e.pos.y,z=e.pos.z,deadline=Now()+eventArgs.channelTimeMax*1000}\nlocal count=0;local best;local nearest\nfor _,orb in pairs(s.orbs) do\n count=count+1\n local distance=TensorCore.getDistance2d(p.pos,orb)\n if not nearest or distance<nearest then nearest=distance;best=orb end\nend\nif count<3 then self.used=true;return end\nlocal remaining=best.deadline-Now()\nif remaining>0 then\n AnyoneCore.addWorldTextCountdown(remaining,{x=best.x,y=best.y+2,z=best.z},0xFFFFFFFF,true,1.5)\nend\ns.shown=true\nself.used=true",
+							actionLua = "local s=data.lpduLRFirstOrbTimer\nif s and s.shown then self.used=true;return end\nif not s then s={orbs={}};data.lpduLRFirstOrbTimer=s end\nif s.orbs[eventArgs.entityID] then self.used=true;return end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e or not e.pos then return end\ns.orbs[eventArgs.entityID]={x=e.pos.x,y=e.pos.y,z=e.pos.z,deadline=Now()+eventArgs.channelTimeMax*1000}\nlocal count=0\nfor _ in pairs(s.orbs) do count=count+1 end\nif count<3 then self.used=true;return end\nfor _,orb in pairs(s.orbs) do\n local remaining=orb.deadline-Now()\n if remaining>0 then\n  AnyoneCore.addWorldTextCountdown(remaining,{x=orb.x,y=orb.y+2,z=orb.z},0xFFFFFFFF,true,1.5)\n end\nend\ns.shown=true\nself.used=true",
 							conditions = 
 							{
 								
@@ -6155,7 +6155,7 @@ local tbl =
 									true,
 								},
 							},
-							name = "Nearest first circle countdown only",
+							name = "All three first-set circle countdowns",
 							uuid = "4772b043-edb8-a299-afaa-162cdd9008a5",
 							version = 2.1,
 						},

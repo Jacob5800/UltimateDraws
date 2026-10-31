@@ -67,6 +67,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Light Rampant now shows countdowns on all three first-set large orb circles instead of only your nearest one. The second set remains untimed. (31-10-2026)
+
 - Added countdowns to the four-circle Icicle Impact wave on Diamond Dust's In pattern, excluding the earlier and later pairs. Added a Don't move - wait for debuff voice/text alert after the second ice cleave, before the existing ice-clear call. (31-10-2026)
 
 - Added a continuous personal countdown on your own Banish III spread circle for both P2 casts. It follows you and clears when Banish resolves; stack versions are unchanged. (31-10-2026)
@@ -84,8 +86,6 @@ TEA: Coming soon by Ton.
 - AA AutoSim uses a 1.3 burst-priority weight instead of 1.4 for non-Viper jobs, reducing the incentive to hold for those windows. Viper and the special P4 window retain their existing weights. (29-10-2026)
 
 - AA AutoSim now forecasts BLM returning to Ley Lines when existing movement windows end, preserving that return plan through phase resyncs. This predicts movement only; it does not move the player or force abilities. (29-10-2026)
-
-- Fixed P1 tower spare-player priority to M1, M2, then R1. In a north-to-south 3-2-1 pattern, M2 now receives the north tower instead of middle. (28-10-2026)
 
 
 ### UWU: LPDU
