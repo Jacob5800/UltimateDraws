@@ -5480,6 +5480,219 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU ",
+				uuid = "0a022211-c389-d123-a983-3630b1498beb",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU ",
+				name = " Personal timers",
+				uuid = "20b228f7-ff87-9c16-bfff-707409f67642",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "-- Reusable entity-following countdown; identical installer may exist in multiple profiles.\n-- RenderManager:WorldToScreen documented at wiki.mmominion.com/doku.php?id=gui_api.\nif not JacobWorldText or (JacobWorldText.version or 0)<1 then\n local H={version=1,entries={},serial=0}\n JacobWorldText=H\n function H.addEntityCountdown(timeoutMs,entityID,color,background,sizeMultiplier,heightAddition,key)\n  local e=TensorCore.mGetEntity(entityID)\n  local p=TensorCore.mGetPlayer()\n  if not e or not e.pos or timeoutMs<=0 then return nil end\n  if key and H.entries[key] and H.entries[key].deadline>Now() then return key end\n  H.serial=H.serial+1;key=key or ('entity-countdown-'..H.serial)\n  H.entries[key]={entityID=entityID,deadline=Now()+timeoutMs,color=color or 0xFFFFFFFF,background=background~=false,scale=sizeMultiplier or 1,height=heightAddition or 1,map=p and p.localmapid}\n  return key\n end\n function H.cancelEntityCountdown(key) H.entries[key]=nil end\nend\nlocal H=JacobWorldText\nlocal frame=GUI:GetFrameCount()\nif H.lastFrame==frame then self.used=true return end\nH.lastFrame=frame\nif not next(H.entries) then self.used=true return end\nlocal now=Now();local p=TensorCore.mGetPlayer()\nlocal active={}\nfor key,entry in pairs(H.entries) do\n local e=TensorCore.mGetEntity(entry.entityID)\n if now>=entry.deadline or not p or p.localmapid~=entry.map or not e or not e.pos or not e.alive then H.entries[key]=nil\n else active[#active+1]={entry=entry,entity=e} end\nend\nif #active==0 then self.used=true return end\nlocal width,height=GUI:GetScreenSize()\nGUI:SetNextWindowPos(0,0,GUI.SetCond_Always)\nGUI:SetNextWindowSize(width,height,GUI.SetCond_Always)\nGUI:PushStyleColor(GUI.Col_WindowBg,0,0,0,0)\nlocal flags=GUI.WindowFlags_NoTitleBar+GUI.WindowFlags_NoResize+GUI.WindowFlags_NoMove+GUI.WindowFlags_NoScrollbar+GUI.WindowFlags_NoSavedSettings+GUI.WindowFlags_NoInputs+GUI.WindowFlags_NoFocusOnAppearing\nlocal visible=GUI:Begin('##JacobEntityCountdownOverlay',true,flags)\nif visible then\n for _,item in ipairs(active) do\n  local entry,e=item.entry,item.entity\n  local x,y=RenderManager:WorldToScreen({x=e.pos.x,y=e.pos.y+entry.height,z=e.pos.z},true)\n  if x and y then\n   GUI:SetWindowFontScale(entry.scale)\n   local text=string.format('%.1f',math.max(0,(entry.deadline-now)/1000))\n   local w,h=GUI:CalcTextSize(text)\n   x,y=x-w/2,y-h/2\n   if entry.background then GUI:AddRectFilled(x-4,y-2,x+w+4,y+h+2,0xA0000000,4) end\n   GUI:AddText(x,y,entry.color,text)\n  end\n end\n GUI:SetWindowFontScale(1)\nend\nGUI:End();GUI:PopStyleColor()\nself.used=true\n",
+							name = "Own spread timer renderer",
+							uuid = "fe394ea2-b8a2-d589-9d48-641db40fae9a",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU / Personal timers",
+				eventType = 13,
+				loop = true,
+				mechanicTime = 322.5,
+				name = "[LPDU] P2 Banish III - Own spread timer renderer",
+				timeRange = true,
+				timelineIndex = 77,
+				timerEndOffset = 44,
+				timerStartOffset = -12,
+				uuid = "b3c71390-165d-2080-afeb-ea6073ba2161",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "data.frup2_banish_timer={deadline=Now()+eventArgs.channelTimeMax*1000+300}\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"96a18b41-08c7-6cfb-9a3b-bb887560c233",
+									true,
+								},
+							},
+							name = "Capture spread deadline",
+							uuid = "3601d3f6-8462-a4bd-83e7-a933c52fd7ec",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventSpellID = 40221,
+							uuid = "96a18b41-08c7-6cfb-9a3b-bb887560c233",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Personal timers",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 322.5,
+				name = "[LPDU] P2 Banish III - Capture spread deadline",
+				timeRange = true,
+				timelineIndex = 77,
+				timerEndOffset = 44,
+				timerStartOffset = -12,
+				uuid = "68a150b1-808e-917c-9add-c786d6f14d9f",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.frup2_banish_timer\nif not s or s.started then self.used=true;return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not JacobWorldText then return end\nlocal remaining=s.deadline-Now()\nif remaining<=0 then data.frup2_banish_timer=nil;self.used=true;return end\nJacobWorldText.cancelEntityCountdown(\"fru-banish-spread\")\nJacobWorldText.addEntityCountdown(remaining,p.id,0xFFFFFFFF,true,1.5,2,\"fru-banish-spread\")\ns.started=true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"47d1bc74-b0bf-32e3-b2c6-98f03cad17d6",
+									true,
+								},
+							},
+							name = "Own spread countdown",
+							uuid = "3ebd8481-0417-42c7-a5ca-d7869e173fe0",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.frup2_banish_timer\nreturn s~=nil and not s.started",
+							uuid = "47d1bc74-b0bf-32e3-b2c6-98f03cad17d6",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Personal timers",
+				loop = true,
+				mechanicTime = 322.5,
+				name = "[LPDU] P2 Banish III - Own spread countdown",
+				timeRange = true,
+				timelineIndex = 77,
+				timerEndOffset = 44,
+				timerStartOffset = -12,
+				uuid = "82e73ff5-56da-d752-bbb8-f57bae5120c9",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "if JacobWorldText then JacobWorldText.cancelEntityCountdown(\"fru-banish-spread\") end\ndata.frup2_banish_timer=nil\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"f5e05899-c394-1373-9056-91abe1974d07",
+									true,
+								},
+							},
+							name = "Clear resolved spread countdown",
+							uuid = "e6caab2a-c567-5f3a-ac75-2614b68fcbcd",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventSpellID = 40221,
+							uuid = "f5e05899-c394-1373-9056-91abe1974d07",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU / Personal timers",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 322.5,
+				name = "[LPDU] P2 Banish III - Clear resolved spread countdown",
+				timeRange = true,
+				timelineIndex = 77,
+				timerEndOffset = 44,
+				timerStartOffset = -12,
+				uuid = "4ec866b4-ce76-d103-a965-f5ebd2b3d9f8",
+				version = 2,
+			},
+		},
 	},
 	[80] = 
 	{

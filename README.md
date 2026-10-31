@@ -67,6 +67,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Added a continuous personal countdown on your own Banish III spread circle for both P2 casts. It follows you and clears when Banish resolves; stack versions are unchanged. (31-10-2026)
+
 - Added fire-only P1 tower knockback guidance: after the initial cleave, a personal launch circle and arrows align the knockback with your assigned tower, with a continuous knockback countdown. Lightning towers are unchanged. (31-10-2026)
 
 - Added an Ice gone - move normally text and voice callout after P2 Twin Silence/Stillness, triggered by the frozen floor clearing rather than a fixed timer. (31-10-2026)
@@ -84,8 +86,6 @@ TEA: Coming soon by Ton.
 - Fixed P1 tower spare-player priority to M1, M2, then R1. In a north-to-south 3-2-1 pattern, M2 now receives the north tower instead of middle. (28-10-2026)
 
 - AA AutoSim now tracks all four light-crystal deaths before the Ice Veil damage window, resyncs on crystal targetability changes, and values the protected Ice Veil at zero damage before its 0.5 damage window. (28-10-2026)
-
-- Fixed crystal targeting to select the actual crystal nearest your assigned colour marker and hold it until it dies, then skip dead or untargetable crystals. Focus mode also disables Smart AOE target switching, including ACR3. Focus mode targets your light crystal, then other light crystals, then the big crystal, keeping AoE off through the whole intermission and enabling it when P3 begins. (27-10-2026)
 
 
 ### UWU: LPDU
