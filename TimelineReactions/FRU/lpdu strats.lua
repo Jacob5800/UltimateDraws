@@ -6403,6 +6403,178 @@ local tbl =
 		{
 			data = 
 			{
+				name = "[Draw] Partners/Spread",
+				uuid = "c97f2237-a5b3-c1ca-9c42-b8a69016ffc6",
+				version = 2,
+			},
+			inheritedObjectUUID = "7168327f-0bfa-0b10-a4e9-96be9d247910",
+			inheritedOverwrites = 
+			{
+				actions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								name = "Draw Spreads",
+								uuid = "df91814f-102f-0bad-a2c8-db9eeccdf9c5",
+								version = 2.1,
+							},
+							inheritedObjectUUID = "e12859fc-56e6-fc7c-9c7c-aeea1c48081c",
+							inheritedOverwrites = 
+							{
+								conditions = 
+								{
+									
+									{
+										type = "remove",
+										value = 
+										{
+											"0ebf85aa-8b6b-c4f0-9b1f-c6453d287e32",
+											true,
+										},
+									},
+									
+									{
+										position = 1,
+										type = "add",
+										value = 
+										{
+											"0ebf85aa-8b6b-c4f0-9b1f-c6453d287e32",
+											true,
+										},
+									},
+									
+									{
+										position = 2,
+										type = "add",
+										value = 
+										{
+											"9c68e77d-27c0-73c3-bf2b-74a384567560",
+											false,
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								buffCheckType = 4,
+								buffID = 2257,
+								buffStacks = 2,
+								category = "Self",
+								comparator = 3,
+								name = "Middle tower pending (2 Lightsteeped)",
+								uuid = "9c68e77d-27c0-73c3-bf2b-74a384567560",
+								version = 3,
+							},
+						},
+					},
+				},
+			},
+		},
+		
+		{
+			data = 
+			{
+				name = "[TTS] Partners/Spread",
+				uuid = "0a91ccd0-bee3-6fd9-a598-1711945a05f1",
+				version = 2,
+			},
+			inheritedObjectUUID = "d02a75cd-6ab5-8496-8973-815004db4180",
+			inheritedOverwrites = 
+			{
+				actions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								name = "TTS Spread",
+								uuid = "27504442-4b7e-881e-a000-fb26873e5bcf",
+								version = 2.1,
+							},
+							inheritedObjectUUID = "e12859fc-56e6-fc7c-9c7c-aeea1c48081c",
+							inheritedOverwrites = 
+							{
+								conditions = 
+								{
+									
+									{
+										type = "remove",
+										value = 
+										{
+											"0ebf85aa-8b6b-c4f0-9b1f-c6453d287e32",
+											true,
+										},
+									},
+									
+									{
+										position = 1,
+										type = "add",
+										value = 
+										{
+											"0ebf85aa-8b6b-c4f0-9b1f-c6453d287e32",
+											true,
+										},
+									},
+									
+									{
+										position = 2,
+										type = "add",
+										value = 
+										{
+											"34b3ccd7-e502-004a-a57a-a35b908df8ee",
+											false,
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						type = "add",
+						value = 
+						{
+							data = 
+							{
+								buffCheckType = 4,
+								buffID = 2257,
+								buffStacks = 2,
+								category = "Self",
+								comparator = 3,
+								name = "Middle tower pending (2 Lightsteeped)",
+								uuid = "34b3ccd7-e502-004a-a57a-a35b908df8ee",
+								version = 3,
+							},
+						},
+					},
+				},
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "LPDU Draws",
 				uuid = "f3700a07-324b-724a-9fd6-9d3f09fd72ea",
@@ -6480,6 +6652,11 @@ local tbl =
 									"b36c16e5-7d5a-9d5e-baaf-c461b6d3710e",
 									true,
 								},
+								
+								{
+									"4a59fcd7-cc5f-0528-97d0-17d6fb2b21c1",
+									false,
+								},
 							},
 							endIfUsed = true,
 							name = "Guide role spread spot",
@@ -6498,6 +6675,20 @@ local tbl =
 							conditionLua = "return eventArgs ~= nil and eventArgs.spellID == 40221",
 							name = "Banish III spread cast",
 							uuid = "b36c16e5-7d5a-9d5e-baaf-c461b6d3710e",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							buffCheckType = 4,
+							buffID = 2257,
+							buffStacks = 2,
+							category = "Self",
+							comparator = 3,
+							name = "Middle tower pending (2 Lightsteeped)",
+							uuid = "4a59fcd7-cc5f-0528-97d0-17d6fb2b21c1",
 							version = 3,
 						},
 					},
