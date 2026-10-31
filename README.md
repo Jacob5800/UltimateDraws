@@ -22,6 +22,10 @@ TEA: Coming soon by Ton.
 
 - Added Lpdu draws(beta), with personal mechanic guidance, tower countdowns, phase settings and optional gaze/knockback assistance. Includes the latest P2 positioning, P3 draw cleanup and optional P4 south regroup (off by default). Replay checks remain ongoing. (27-10-2026)
 
+### TOP: AutoSim
+
+- Added [AA] Autosim - TOP (5). P6 add blacklisting handles both Cosmo Meteors and Comets, once per content ID per pull. This profile forecasts LB downtime but does not automatically use LB. (31-10-2026)
+
 ### TOP: LPDU
 
 - Delta preserves valid initial tether staging until fists establish assignments. Sigma avoids unnecessary safe-position sidesteps, and Omega stops personal guidance after the player's World hit. Non-tanks see Cosmo Dive tank circles only in the final four seconds; other players' meteor flares are dimmer. Replay confirmation remains pending. (31-10-2026)
