@@ -20,6 +20,8 @@ TEA: Coming soon by Ton.
 
 ### UWU: Shared AutoSim
 
+- Added optional slower-group timing adjustments for Garuda, Ifrit, Titan and the final kill estimate. Extra seconds are captured at pull setup; mid-fight edits apply next pull, while observed phase transitions still correct forecasts. (01-11-2026)
+
 - Added [AA] Autosim - UWU with shared encounter tracking and role-specific plans, buff-owned caster/melee Limit Breaks, role-appropriate Vulcan knockback protection and nail-targeting diagnostics. Personal gaols remain conditional on being selected/trapped. Original job profiles remain available separately; cross-job replay checks are pending. (31-10-2026)
 
 ### DSR: LPDU (Beta)
