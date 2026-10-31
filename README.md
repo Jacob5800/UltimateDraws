@@ -67,6 +67,8 @@ TEA: Coming soon by Ton.
 
 ### FRU: LPDU
 
+- Corrected P1 Burnt Blast towers to LPDU/Tessan plant-and-adjust: H1 north, R2 middle and H2 south stay fixed. M1/R1/M2 stay in their home towers unless theirs needs one player, then join the three- or four-player tower. Personal arrows and countdowns use the same assignment. (31-10-2026)
+
 - AA AutoSim now uses BLM-specific burst-priority weights: 1.17 through P4, including intermission, and 1.19 for all three P5 bursts. Other jobs retain their existing weights. (29-10-2026)
 
 - AA AutoSim uses a 1.3 burst-priority weight instead of 1.4 for non-Viper jobs, reducing the incentive to hold for those windows. Viper and the special P4 window retain their existing weights. (29-10-2026)
@@ -84,8 +86,6 @@ TEA: Coming soon by Ton.
 - Reduced the P2 intermission knockback destination circle by 10%. (22-10-2026)
 
 - Reduced both mirror destination circles by another 10% for a smaller marker. (22-10-2026)
-
-- Added AnyoneCore countdowns to your nearest first-wave Light Rampant orb circle and to the middle tower when you are assigned to soak it. Second-wave orb circles have no added timer. (22-10-2026)
 
 
 ### UWU: LPDU
