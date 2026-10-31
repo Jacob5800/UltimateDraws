@@ -18,6 +18,10 @@ TEA: Coming soon by Ton.
 
 ## Changelog
 
+### UWU: Shared AutoSim
+
+- Added [AA] Autosim - UWU with shared encounter tracking and role-specific plans, buff-owned caster/melee Limit Breaks, role-appropriate Vulcan knockback protection and nail-targeting diagnostics. Personal gaols remain conditional on being selected/trapped. Original job profiles remain available separately; cross-job replay checks are pending. (31-10-2026)
+
 ### DSR: LPDU (Beta)
 
 - Added Lpdu draws(beta), with personal mechanic guidance, tower countdowns, phase settings and optional gaze/knockback assistance. Includes the latest P2 positioning, P3 draw cleanup and optional P4 south regroup (off by default). Replay checks remain ongoing. (27-10-2026)
