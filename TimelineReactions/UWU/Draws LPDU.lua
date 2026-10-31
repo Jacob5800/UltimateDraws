@@ -10888,6 +10888,144 @@ local tbl =
 			objectType = "folder",
 		},
 	},
+	[113] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "a968d5cd-3fe1-1626-8eb8-0d748e0fa5ff",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU",
+				name = "Titan",
+				uuid = "8c1e01f3-ea26-b2ad-98d8-339489052bb1",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 6000,
+							alertTTS = true,
+							alertText = "Melee: take the light orb",
+							conditions = 
+							{
+								
+								{
+									"99d9d46b-eb29-f92c-9810-0c6dc83523b2",
+									true,
+								},
+								
+								{
+									"c7d800ae-adbe-9523-b256-2e22676059e6",
+									true,
+								},
+								
+								{
+									"bf9cbfe8-a136-6067-9b62-9d6d1f499216",
+									true,
+								},
+								
+								{
+									"bd30ba5b-7c56-1785-81cc-de10c23da385",
+									true,
+								},
+							},
+							name = "Melee light orb pickup",
+							uuid = "3bd2fa0d-7619-e3dc-9688-c2b41eb1247c",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							localmapid = 777,
+							name = "UWU only",
+							uuid = "99d9d46b-eb29-f92c-9810-0c6dc83523b2",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 2009481,
+							name = "Beyond Limits orb",
+							uuid = "c7d800ae-adbe-9523-b256-2e22676059e6",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								20,
+								22,
+								30,
+								34,
+								39,
+								41,
+							},
+							name = "Melee DPS",
+							uuid = "bf9cbfe8-a136-6067-9b62-9d6d1f499216",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							buffCheckType = 2,
+							buffID = 1530,
+							category = "Self",
+							name = "Still needs orb",
+							uuid = "bd30ba5b-7c56-1785-81cc-de10c23da385",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU/Titan",
+				eventType = 29,
+				mechanicTime = 768,
+				name = "[LPDU] Titan light orb - Melee pickup",
+				timeRange = true,
+				timelineIndex = 113,
+				timerEndOffset = 25,
+				timerStartOffset = -170,
+				uuid = "d5311e93-dfa9-7910-8cc7-540b62e15909",
+				version = 2,
+			},
+		},
+	},
 	[114] = 
 	{
 		

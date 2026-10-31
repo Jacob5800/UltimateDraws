@@ -6036,6 +6036,211 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 205,
+							castPosX = 100,
+							castPosZ = 100,
+							conditions = 
+							{
+								
+								{
+									"dd6f423d-bacd-712d-ae7b-9e6add1ba15b",
+									true,
+								},
+								
+								{
+									"1b967670-d1a2-4aa0-b7ea-41b1e6720474",
+									true,
+								},
+								
+								{
+									"53b2f668-5d08-9728-b447-8bd32ed565f5",
+									true,
+								},
+								
+								{
+									"89f68024-8d41-0f9c-b9a6-3ede31f86800",
+									true,
+								},
+							},
+							isAreaTarget = true,
+							uuid = "5375cc1f-6e64-d3ba-b1e6-3bacaababfd6",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							localmapid = 777,
+							name = "UWU only",
+							uuid = "dd6f423d-bacd-712d-ae7b-9e6add1ba15b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "1b967670-d1a2-4aa0-b7ea-41b1e6720474",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							buffID = 1530,
+							category = "Self",
+							name = "Beyond Limits",
+							uuid = "53b2f668-5d08-9728-b447-8bd32ed565f5",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local current,maximum=TensorCore.getLBGauge()\nif maximum<=0 or current<maximum then return false end\nlocal n=0\nfor _,e in pairs(TensorCore.entityList(\"contentid=5563\")) do\n if e.alive and e.targetable then\n  if (e.pos.x-100)^2+(e.pos.z-100)^2>196 then return false end\n  n=n+1\n end\nend\nreturn n==6",
+							name = "Six live bits inside centre LB",
+							uuid = "89f68024-8d41-0f9c-b9a6-3ede31f86800",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/P4 Bits",
+				mechanicTime = 800,
+				name = "[BLM UWU] Buff-owned caster LB3 centre",
+				timeRange = true,
+				timelineIndex = 114,
+				timerEndOffset = 10,
+				timerStartOffset = -3,
+				uuid = "49da89b9-e679-1f5f-a0f4-a905e581e1b3",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local p=Player.pos\nlocal c=Player.castinginfo\nif c.castingid==205 or c.channelingid==205 then return end\nArgus.addCircleFilled(100,0,100,1.2,40,0x4000FF00,0xFF00FF00,2)\nlocal dx,dz=100-p.x,100-p.z\nlocal dist=math.sqrt(dx*dx+dz*dz)\nif dist>1.5 then\n Argus.addArrowFilled(p.x,p.y,p.z,math.max(0,dist-1),0.5,1,1,math.atan2(dx,dz),0x5000FF00,0xFF00FF00,1)\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"764ab860-8764-14f8-9462-39a1e7c50e38",
+									true,
+								},
+								
+								{
+									"fdff799a-a022-1466-a3ac-ed54024998c1",
+									true,
+								},
+								
+								{
+									"9d0f812b-6df6-3aeb-b1ac-b16a1962674c",
+									true,
+								},
+								
+								{
+									"3aa83977-7c64-d568-bb9a-7a62d1fdd745",
+									true,
+								},
+							},
+							name = "Green centre circle and personal arrow",
+							uuid = "9154535d-67a0-de17-b60d-b697b0fa8e2b",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							localmapid = 777,
+							name = "UWU only",
+							uuid = "764ab860-8764-14f8-9462-39a1e7c50e38",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "fdff799a-a022-1466-a3ac-ed54024998c1",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							buffID = 1530,
+							category = "Self",
+							name = "Beyond Limits",
+							uuid = "9d0f812b-6df6-3aeb-b1ac-b16a1962674c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return next(TensorCore.entityList(\"contentid=2143\"))~=nil",
+							name = "Lahabrea intermission actor present",
+							uuid = "3aa83977-7c64-d568-bb9a-7a62d1fdd745",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/P4 Bits",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 800,
+				name = "[BLM UWU] Caster LB centre guidance",
+				timeRange = true,
+				timelineIndex = 114,
+				timerEndOffset = 10,
+				timerStartOffset = -65,
+				uuid = "85831f5b-1cbe-cf07-a37f-bcd7c5151533",
+				version = 2,
+			},
+		},
 	},
 	[116] = 
 	{

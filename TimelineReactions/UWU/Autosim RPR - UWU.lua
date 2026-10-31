@@ -4779,6 +4779,195 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "RPR AutoSim",
+				name = "P4 LB",
+				uuid = "7553e557-7eae-d545-aa99-39e3ec541a2d",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"64ed93c5-74e4-5d7a-906d-e96443631ffb",
+									true,
+								},
+								
+								{
+									"26b2e8ef-49d1-8a73-94db-d08f488feb38",
+									true,
+								},
+								
+								{
+									"7d00f96c-699f-1709-86ca-dc003f6a53cb",
+									true,
+								},
+								
+								{
+									"f9bebfe3-bceb-a897-b647-8592fa6fe0df",
+									true,
+								},
+								
+								{
+									"5242e36e-3854-182d-9747-845145bc1d04",
+									true,
+								},
+							},
+							name = "Target Lahabrea",
+							setTarget = true,
+							targetType = "Event Entity",
+							uuid = "ddb856f7-7ce0-a1b5-a80a-1b4aadd7eb26",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"64ed93c5-74e4-5d7a-906d-e96443631ffb",
+									true,
+								},
+								
+								{
+									"26b2e8ef-49d1-8a73-94db-d08f488feb38",
+									true,
+								},
+								
+								{
+									"7d00f96c-699f-1709-86ca-dc003f6a53cb",
+									true,
+								},
+								
+								{
+									"f9bebfe3-bceb-a897-b647-8592fa6fe0df",
+									true,
+								},
+								
+								{
+									"5242e36e-3854-182d-9747-845145bc1d04",
+									true,
+								},
+								
+								{
+									"ca20be82-520e-2242-b11a-9bd63944d6b2",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_Hotbar_LimitBreak",
+							uuid = "f49cccc4-cf97-a690-893c-f8777b877697",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU only",
+							uuid = "64ed93c5-74e4-5d7a-906d-e96443631ffb",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "REAPER",
+							name = "RPR only",
+							uuid = "26b2e8ef-49d1-8a73-94db-d08f488feb38",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							buffID = 1530,
+							category = "Self",
+							name = "Beyond Limits",
+							uuid = "5242e36e-3854-182d-9747-845145bc1d04",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 2143,
+							name = "Lahabrea",
+							uuid = "7d00f96c-699f-1709-86ca-dc003f6a53cb",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Became targetable",
+							uuid = "f9bebfe3-bceb-a897-b647-8592fa6fe0df",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local cur,max=TensorCore.getLBGauge()\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nreturn max>0 and cur>=max and e~=nil and e.alive and e.targetable and Player.targetid==e.id",
+							name = "Full LB and live Lahabrea target",
+							uuid = "ca20be82-520e-2242-b11a-9bd63944d6b2",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "RPR AutoSim/P4 LB",
+				eventType = 26,
+				mechanicTime = 840,
+				name = "[RPR UWU] Buff-owned melee LB3 Lahabrea",
+				timeRange = true,
+				timelineIndex = 116,
+				timerEndOffset = 1,
+				timerStartOffset = -25,
+				uuid = "694643b1-ef56-28cb-9f04-ec6dbdd351f2",
+				version = 2,
+			},
+		},
 	},
 	[118] = 
 	{
