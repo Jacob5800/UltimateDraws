@@ -24,6 +24,8 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- Moved R2's P3 monitor conga spot 0.5 yalms farther south and 0.5 yalms inward. (31-10-2026)
+
 - Simplified the P3 rot-expiry callout to 'Spread' so it does not imply extra movement when already positioned. (31-10-2026)
 
 - P2 weapon dodges preserve an already-safe position instead of forcing a group-side crossing. Unsafe positions use the nearest sampled safe destination with a route check; later BPOG spread assignments remain separate. (31-10-2026)

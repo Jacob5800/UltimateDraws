@@ -5573,7 +5573,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif S then S.debugContext=\"[P3] LPDU monitor conga\"end\nif not S then self.used=true return end\n\nif not S.ready() then self.used=true return end\nlocal slot=AnyoneCore.Roster.mySlot()\nlocal order={R1=1,M1=2,T1=3,H1=4,H2=5,T2=6,M2=7,R2=8}\nlocal rank=order[slot]\nif rank then S.go('monitor-conga',{x=88,z=100+(rank-4.5)*2},'Line up west',math.max(1,562.4-TensorReactions_CurrentTimer),0.7) end\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif S then S.debugContext=\"[P3] LPDU monitor conga\"end\nif not S then self.used=true return end\n\nif not S.ready() then self.used=true return end\nlocal slot=AnyoneCore.Roster.mySlot()\nlocal order={R1=1,M1=2,T1=3,H1=4,H2=5,T2=6,M2=7,R2=8}\nlocal rank=order[slot]\nif rank then\n local pos={x=88,z=100+(rank-4.5)*2}\n if slot=='R2' then pos.x=pos.x+.5;pos.z=pos.z+.5 end\n S.go('monitor-conga',pos,'Line up west',math.max(1,562.4-TensorReactions_CurrentTimer),0.7)\nend\nself.used=true\n",
 							conditions = 
 							{
 								
