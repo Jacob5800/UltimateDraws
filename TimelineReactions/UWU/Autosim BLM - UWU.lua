@@ -23,7 +23,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local ownedLey=_G.UWU_BLM_TemporaryState\nif ownedLey and ownedLey.leyHold then\n TensorCore.API.TensorACR.holdActionUntil(3573,Now())\n ownedLey.leyHold=nil\nend\nlocal T=_G.UWU_BLM_TemporaryState\nif T then\n if T.options then for k,v in pairs(T.options) do _G[k]=v end end\n if T.gaols then TensorCore.API.TensorACR.deleteAOEBlacklistEntry(1804) end\n _G.UWU_BLM_TemporaryState=nil\nend\nTensorCore.API.TensorACR.holdActionUntil(846,Now())\nself.used=true",
+							actionLua = "local ownedTriple=_G.UWU_BLM_TemporaryState\nif ownedTriple and ownedTriple.tripleHold then\n TensorCore.API.TensorACR.holdActionUntil(7421,Now())\n ownedTriple.tripleHold=nil\nend\nlocal ownedLey=_G.UWU_BLM_TemporaryState\nif ownedLey and ownedLey.leyHold then\n TensorCore.API.TensorACR.holdActionUntil(3573,Now())\n ownedLey.leyHold=nil\nend\nlocal T=_G.UWU_BLM_TemporaryState\nif T then\n if T.options then for k,v in pairs(T.options) do _G[k]=v end end\n if T.gaols then TensorCore.API.TensorACR.deleteAOEBlacklistEntry(1804) end\n _G.UWU_BLM_TemporaryState=nil\nend\nTensorCore.API.TensorACR.holdActionUntil(846,Now())\nself.used=true",
 							conditions = 
 							{
 								
@@ -204,7 +204,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local C=_G.UWU_BLM_AutoSimConfig\nif not C then\n C={poolLaha=true,priorityGaols=true,roulette=true,raidBuffs=true,buffGain=17,nails=true,closePair=true,surecast=true,manaward=true}\n _G.UWU_BLM_AutoSimConfig=C\nend\n-- Burst weight update: preserve forecast enablement and other options.\nif not C.burstWeight20261029 then C.buffGain=17;C.burstWeight20261029=true end\nlocal visible=GUI:Begin('UWU BLM AutoSim',true)\nif visible then\n GUI:Text('Forecast options apply on the next pull. Session settings.')\n local function check(label,key,help)\n  C[key]=GUI:Checkbox(label,C[key])\n  if GUI:IsItemHovered() then GUI:SetTooltip(help) end\n end\n check('Forecast raid buffs','raidBuffs','Predict party burst windows. The ACR handles actual active buffs separately.')\n C.buffGain=GUI:SliderFloat('Forecast damage gain (%)',C.buffGain,0,40,'%.2f',1)\n if GUI:IsItemHovered() then GUI:SetTooltip('Combined expected party damage gain, not a measured boss buff. Default burst weight 1.17; Ifrit opener uses 1.4.') end\n check('Automatic Manaward','manaward','Aerial Blast, Titan opening Earthen Fury, and Ultima opening. Uses are more than 120 real seconds apart in sampled clears.')\n if GUI:TreeNode('P2 - Ifrit') then\n  check('Nail targeting','nails','Soften the nearest nail to 40%. At that threshold, cancel an ongoing cast targeting that nail once and switch away. Target Ifrit with AoE off until all four awaken, then kill relative SE, SW, NE, NW. Ordered-kill casts are not cancelled by this threshold.')\n  check('Allow final close-pair AoE','closePair','AoE remains off for the first two kills. On the final close pair, normal ACR gain and geometry checks decide whether to AoE.')\n  check('Surecast Vulcan Burst','surecast','Requests Surecast before the Ifrit opening knockback. Does not immune Titan Upheaval or Aetheric Boom.')\n  GUI:TreePop()\n end\n if GUI:TreeNode('P3 - Titan') then\n  GUI:Text('Triple gaols are temporarily AoE-blacklisted. Ride Upheaval for placement.')\n  GUI:TreePop()\n end\n if GUI:TreeNode('P4 - Ultima') then\n  check('Pool cooldowns on Lahabrea','poolLaha','Artificial 0.01 damage-priority weight while Lahabrea is attackable. Keep normal damage and gauge building; this is not a real damage debuff.')\n  check('Prioritize healer / Suppression gaols','priorityGaols','Artificial 1.10 damage-priority forecast for the first five seconds of these gaols.')\n  check('Adapt final primal movement','roulette','Initially forecasts all three possible orders, then narrows movement as Prepare casts reveal the actual sequence.')\n  GUI:TreePop()\n end\nend\nGUI:End()\n-- Rendering is continuous; do not finish/requeue an action each frame.\n",
+							actionLua = "local C=_G.UWU_BLM_AutoSimConfig\nif not C then\n C={poolLaha=true,priorityGaols=true,roulette=true,raidBuffs=true,buffGain=17,nails=true,closePair=true,surecast=true,manaward=true}\n _G.UWU_BLM_AutoSimConfig=C\nend\n-- Burst weight update: preserve forecast enablement and other options.\nif not C.burstWeight20261029 then C.buffGain=17;C.burstWeight20261029=true end\nif C.holdTripleLateGaruda==nil then C.holdTripleLateGaruda=true end\nlocal visible=GUI:Begin('UWU BLM AutoSim',true)\nif visible then\n GUI:Text('Forecast options apply on the next pull. Session settings.')\n local function check(label,key,help)\n  C[key]=GUI:Checkbox(label,C[key])\n  if GUI:IsItemHovered() then GUI:SetTooltip(help) end\n end\n check('Hold Triplecast near Garuda end','holdTripleLateGaruda','Blocks ALL Triplecast uses during the last 8 forecast seconds of Garuda and releases when Ifrit becomes targetable. AutoSim cannot reserve only one charge. Enabled by default; session setting.')\n check('Forecast raid buffs','raidBuffs','Predict party burst windows. The ACR handles actual active buffs separately.')\n C.buffGain=GUI:SliderFloat('Forecast damage gain (%)',C.buffGain,0,40,'%.2f',1)\n if GUI:IsItemHovered() then GUI:SetTooltip('Combined expected party damage gain, not a measured boss buff. Default burst weight 1.17; Ifrit opener uses 1.4.') end\n check('Automatic Manaward','manaward','Aerial Blast, Titan opening Earthen Fury, and Ultima opening. Uses are more than 120 real seconds apart in sampled clears.')\n if GUI:TreeNode('P2 - Ifrit') then\n  check('Nail targeting','nails','Soften the nearest nail to 40%. At that threshold, cancel an ongoing cast targeting that nail once and switch away. Target Ifrit with AoE off until all four awaken, then kill relative SE, SW, NE, NW. Ordered-kill casts are not cancelled by this threshold.')\n  check('Allow final close-pair AoE','closePair','AoE remains off for the first two kills. On the final close pair, normal ACR gain and geometry checks decide whether to AoE.')\n  check('Surecast Vulcan Burst','surecast','Requests Surecast before the Ifrit opening knockback. Does not immune Titan Upheaval or Aetheric Boom.')\n  GUI:TreePop()\n end\n if GUI:TreeNode('P3 - Titan') then\n  GUI:Text('Triple gaols are temporarily AoE-blacklisted. Ride Upheaval for placement.')\n  GUI:TreePop()\n end\n if GUI:TreeNode('P4 - Ultima') then\n  check('Pool cooldowns on Lahabrea','poolLaha','Artificial 0.01 damage-priority weight while Lahabrea is attackable. Keep normal damage and gauge building; this is not a real damage debuff.')\n  check('Prioritize healer / Suppression gaols','priorityGaols','Artificial 1.10 damage-priority forecast for the first five seconds of these gaols.')\n  check('Adapt final primal movement','roulette','Initially forecasts all three possible orders, then narrows movement as Prepare casts reveal the actual sequence.')\n  GUI:TreePop()\n end\nend\nGUI:End()\n-- Rendering is continuous; do not finish/requeue an action each frame.\n",
 							conditions = 
 							{
 								
@@ -277,7 +277,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local ownedLey=_G.UWU_BLM_TemporaryState\nif ownedLey and ownedLey.leyHold then\n TensorCore.API.TensorACR.holdActionUntil(3573,Now())\n ownedLey.leyHold=nil\nend\nlocal T=_G.UWU_BLM_TemporaryState\nif T then\n if T.options then for k,v in pairs(T.options) do _G[k]=v end end\n if T.gaols then TensorCore.API.TensorACR.deleteAOEBlacklistEntry(1804) end\n _G.UWU_BLM_TemporaryState=nil\nend\nTensorCore.API.TensorACR.holdActionUntil(846,Now())\nself.used=true",
+							actionLua = "local ownedTriple=_G.UWU_BLM_TemporaryState\nif ownedTriple and ownedTriple.tripleHold then\n TensorCore.API.TensorACR.holdActionUntil(7421,Now())\n ownedTriple.tripleHold=nil\nend\nlocal ownedLey=_G.UWU_BLM_TemporaryState\nif ownedLey and ownedLey.leyHold then\n TensorCore.API.TensorACR.holdActionUntil(3573,Now())\n ownedLey.leyHold=nil\nend\nlocal T=_G.UWU_BLM_TemporaryState\nif T then\n if T.options then for k,v in pairs(T.options) do _G[k]=v end end\n if T.gaols then TensorCore.API.TensorACR.deleteAOEBlacklistEntry(1804) end\n _G.UWU_BLM_TemporaryState=nil\nend\nTensorCore.API.TensorACR.holdActionUntil(846,Now())\nself.used=true",
 							conditions = 
 							{
 								
@@ -366,7 +366,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local ownedLey=_G.UWU_BLM_TemporaryState\nif ownedLey and ownedLey.leyHold then\n TensorCore.API.TensorACR.holdActionUntil(3573,Now())\n ownedLey.leyHold=nil\nend\nlocal T=_G.UWU_BLM_TemporaryState\nif T then\n if T.options then for k,v in pairs(T.options) do _G[k]=v end end\n if T.gaols then TensorCore.API.TensorACR.deleteAOEBlacklistEntry(1804) end\n _G.UWU_BLM_TemporaryState=nil\nend\nTensorCore.API.TensorACR.holdActionUntil(846,Now())\nself.used=true",
+							actionLua = "local ownedTriple=_G.UWU_BLM_TemporaryState\nif ownedTriple and ownedTriple.tripleHold then\n TensorCore.API.TensorACR.holdActionUntil(7421,Now())\n ownedTriple.tripleHold=nil\nend\nlocal ownedLey=_G.UWU_BLM_TemporaryState\nif ownedLey and ownedLey.leyHold then\n TensorCore.API.TensorACR.holdActionUntil(3573,Now())\n ownedLey.leyHold=nil\nend\nlocal T=_G.UWU_BLM_TemporaryState\nif T then\n if T.options then for k,v in pairs(T.options) do _G[k]=v end end\n if T.gaols then TensorCore.API.TensorACR.deleteAOEBlacklistEntry(1804) end\n _G.UWU_BLM_TemporaryState=nil\nend\nTensorCore.API.TensorACR.holdActionUntil(846,Now())\nself.used=true",
 							conditions = 
 							{
 								
@@ -1021,6 +1021,102 @@ local tbl =
 			},
 		},
 	},
+	[25] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "BLM AutoSim",
+				uuid = "7f6c1249-aaa2-0426-b615-4997ae7d7a1b",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "BLM AutoSim",
+				name = "P1 Garuda",
+				uuid = "ce37e13f-e377-b153-9f87-bdc30e01ecb6",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.uwuBLMAutoSim\nif not S then return end\nlocal C=_G.UWU_BLM_AutoSimConfig\nlocal enabled=not C or C.holdTripleLateGaruda~=false\nlocal T=_G.UWU_BLM_TemporaryState\nif T and T.tripleHold then\n if not enabled then\n  TensorCore.API.TensorACR.holdActionUntil(7421,Now())\n  T.tripleHold=nil\n  S.tripleHoldFinished=true\n  self.used=true\n end\n return\nend\nif not enabled or S.tripleHoldFinished then return end\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nif not S.observed.p1end and now<S.time(\"p1end\")-8 then return end\n-- Do not acquire a late hold if Ifrit is already targetable.\nfor _,boss in pairs(TensorCore.getEntityGroupList(\"ContentID\",1185) or {}) do\n if boss.alive and boss.targetable then S.tripleHoldFinished=true;return end\nend\nT=T or {};_G.UWU_BLM_TemporaryState=T\n-- Bounded fail-safe; the native targetability event releases earlier.\nif TensorCore.API.TensorACR.holdActionUntil(7421,Now()+90000) then\n T.tripleHold=true\n self.used=true\nend",
+							conditions = 
+							{
+								
+								{
+									"6c16b522-2db8-128f-8f8f-c8974d0384b0",
+									true,
+								},
+								
+								{
+									"a4430373-a74f-d2cc-ac51-9e457a656a1e",
+									true,
+								},
+							},
+							name = "[BLM UWU] Hold Triplecast for Ifrit opener",
+							uuid = "aa9ad5e4-d2c2-dab7-8fe6-a5c0b5ee4ed5",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU only",
+							uuid = "6c16b522-2db8-128f-8f8f-c8974d0384b0",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "a4430373-a74f-d2cc-ac51-9e457a656a1e",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/P1 Garuda",
+				loop = true,
+				mechanicTime = 122,
+				name = "[BLM UWU] Hold Triplecast for Ifrit opener",
+				throttleTime = 250,
+				timeRange = true,
+				timelineIndex = 25,
+				timerEndOffset = 190,
+				timerStartOffset = -2,
+				uuid = "ed34883f-b240-2b73-9ea3-8183105a4502",
+				version = 2,
+			},
+		},
+	},
 	[34] = 
 	{
 		
@@ -1514,6 +1610,124 @@ local tbl =
 				timerEndOffset = 12,
 				timerStartOffset = -8,
 				uuid = "c48abb93-80c9-9349-9b67-b78a24233551",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "BLM AutoSim",
+				name = "P1 Garuda",
+				uuid = "1688478c-7c47-5b71-bb30-58e4d2256d06",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local T=_G.UWU_BLM_TemporaryState\nif T and T.tripleHold then\n TensorCore.API.TensorACR.holdActionUntil(7421,Now())\n T.tripleHold=nil\nend\nlocal S=data.uwuBLMAutoSim\nif S then S.tripleHoldFinished=true end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"0f33bd13-ce8f-3a29-b682-d098b13813ff",
+									true,
+								},
+								
+								{
+									"2e57b985-8f3b-03d1-91df-0bf89246b7a3",
+									true,
+								},
+								
+								{
+									"5c7eb162-3565-83a2-bc79-11be0534b60a",
+									true,
+								},
+								
+								{
+									"02ba4f5a-5bdb-d665-8711-c3b0ef24275f",
+									true,
+								},
+							},
+							name = "[BLM UWU] Release Triplecast at Ifrit",
+							uuid = "d030543c-99b9-9cd6-b7d9-acfc32ad7e4f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU only",
+							uuid = "0f33bd13-ce8f-3a29-b682-d098b13813ff",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BLACKMAGE",
+							name = "BLM only",
+							uuid = "2e57b985-8f3b-03d1-91df-0bf89246b7a3",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1185,
+							name = "Ifrit",
+							uuid = "5c7eb162-3565-83a2-bc79-11be0534b60a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Became targetable",
+							uuid = "02ba4f5a-5bdb-d665-8711-c3b0ef24275f",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "BLM AutoSim/P1 Garuda",
+				eventType = 26,
+				loop = true,
+				mechanicTime = 300,
+				name = "[BLM UWU] Release Triplecast at Ifrit",
+				timeRange = true,
+				timelineIndex = 36,
+				timerEndOffset = 15,
+				timerStartOffset = -15,
+				uuid = "905cbf8e-8576-e887-8889-65018404f0f2",
 				version = 2,
 			},
 		},
