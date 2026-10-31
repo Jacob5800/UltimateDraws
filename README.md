@@ -109,6 +109,8 @@ TEA: Coming soon by Ton.
 
 ### UWU: LPDU
 
+- BLM, BRD and RPR nail targeting now log diagnostic state changes: roster/assignment, collected nails, HP bands, awakening stacks, locked kill order, desired versus actual target and active casts. BLM also reports missing capture state. Targeting rules are unchanged. (31-10-2026)
+
 - RPR AutoSim keeps the same boss’s DoT availability continuous across FullDowntime, removing redundant schedule-split warnings while preserving boss lifetimes and downtime. (31-10-2026)
 
 - BLM AutoSim no longer applies the fixed post-gaol recovery movement to everyone. Recovery movement now comes from the personal gaol handlers; earlier Landslide movement remains unchanged. (31-10-2026)
@@ -126,6 +128,4 @@ TEA: Coming soon by Ton.
 - BLM/BRD/RPR AutoSim now disable AoE and Smart AoE for Titan’s healer gaol and Ultima’s Suppression gaol, restoring prior settings after the final gaol or on cleanup. Auto-targeting is retained; Suppression selects the exact newly targetable gaol. The earlier Titan triple-gaol sequence is unchanged. (31-10-2026)
 
 - Removed shared CD hold/resume controllers and MNK/NIN transition holds so they no longer override AutoSim. CD is explicitly enabled on wipe. Potion is disabled before/at pull and enabled when Ifrit becomes targetable; no forced potion-use actions are added. LPDU Mits had no matching controls. (31-10-2026)
-
-- Added an optional BLM Triplecast hold for the last eight forecast seconds of Garuda, enabled by default. It blocks the whole action, releases when Ifrit becomes targetable, and clears on wipe, map change or countdown cancellation. AutoSim cannot reserve just one charge through this API. (31-10-2026)
 
