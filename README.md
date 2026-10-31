@@ -109,6 +109,8 @@ TEA: Coming soon by Ton.
 
 ### UWU: LPDU
 
+- BLM AutoSim no longer applies the fixed post-gaol recovery movement to everyone. Recovery movement now comes from the personal gaol handlers; earlier Landslide movement remains unchanged. (31-10-2026)
+
 - Shared draws now call “Melee: take the light orb” when Titan’s Beyond Limits orb appears, only for melee still missing the buff. (31-10-2026)
 
 - Added buff-owned caster LB3 at arena centre and melee LB3 on Lahabrea to BLM/RPR AutoSim. Caster gets advance green centre guidance; full-gauge checks keep waiting for delayed refills. Existing personal LB animation-lock forecasts remain active. Replay confirmation is pending. (31-10-2026)
@@ -126,6 +128,4 @@ TEA: Coming soon by Ton.
 - Added an optional BLM Triplecast hold for the last eight forecast seconds of Garuda, enabled by default. It blocks the whole action, releases when Ifrit becomes targetable, and clears on wipe, map change or countdown cancellation. AutoSim cannot reserve just one charge through this API. (31-10-2026)
 
 - Added BRD/RPR nail-targeting diagnostics for roster readiness, assigned slot, collected nails, softening and awakening/kill transitions. Messages are logged only when state changes; targeting rules remain unchanged while live failures are investigated. (31-10-2026)
-
-- Fixed the shared targeting settings error and BLM’s return to Ifrit after nail softening. BLM/BRD/RPR now blacklist Spiny Plume DoTs, including its enlarged form, and stop the artificial 1.4 opener weight before nails. Both startup paths use the same opener weight. Runtime targeting checks remain pending. (31-10-2026)
 
