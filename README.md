@@ -24,6 +24,8 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- TOP now stores its own settings in TOP-LPDU.settings.tsv, shared across characters. Existing Minion choices migrate when available; GUI and guidance no longer require Minion's settings table. Optifine replay confirmation remains pending. (31-10-2026)
+
 - Fixed settings-table lookup errors affecting the settings window, personal guidance, monitor facing and optional automarkers. Replay confirmation on affected clients remains pending. (31-10-2026)
 
 - P1 Pantokrator now preserves an already-safe starting position, checks the opening route against live cones, and avoids forced outward or clockwise fallback arrows. Program Loop waiting retains the tether-path callout without a movement draw. (30-10-2026)
