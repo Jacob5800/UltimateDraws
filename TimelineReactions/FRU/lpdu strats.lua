@@ -2694,6 +2694,172 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "if data.frup1_tower_kb then self.used=true;return end\n data.frup1_tower_kb={deadline=Now()+eventArgs.channelTimeMax*1000+300,cleared=false,done=false,draws={}}\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"9ec4aa9c-ce4b-7b75-a242-1247815b5293",
+									true,
+								},
+							},
+							name = "Capture fire knockback",
+							uuid = "51554d5e-1341-33af-b8d2-76dd4bcda425",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventSpellID = 40130,
+							name = "P1 Blastburn",
+							uuid = "9ec4aa9c-ce4b-7b75-a242-1247815b5293",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Draws",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 140.9,
+				name = "[LPDU] P1 Towers - Capture fire knockback",
+				timeRange = true,
+				timelineIndex = 32,
+				timerEndOffset = 7,
+				timerStartOffset = -11,
+				uuid = "08855636-f84d-f5a9-9b5c-4f6ac203b4f6",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.frup1_tower_kb\nif not s or s.done then self.used=true;return end\nif eventArgs.spellID==40129 then s.cleared=true\nelseif eventArgs.spellID==40130 then\n s.done=true\n for _,id in ipairs(s.draws) do Argus.deleteTimedShape(id) end\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"ce28bad6-95f0-b32b-a4e1-c2d63e58e4aa",
+									true,
+								},
+							},
+							name = "Track initial cleave and knockback",
+							uuid = "fe2804f7-83a7-7a43-9c2f-c625acaf6544",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							spellIDList = 
+							{
+								40129,
+								40130,
+							},
+							uuid = "ce28bad6-95f0-b32b-a4e1-c2d63e58e4aa",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Draws",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 140.9,
+				name = "[LPDU] P1 Towers - Track initial cleave and knockback",
+				timeRange = true,
+				timelineIndex = 32,
+				timerEndOffset = 7,
+				timerStartOffset = -11,
+				uuid = "639e63db-2a1e-c1cc-b061-189c7b697208",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.frup1_tower_kb\nif not s or s.done or s.drawn or not s.cleared then self.used=true;return end\nlocal timer=data.frup1_lpdu_tower_countdown\nlocal roster=AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() or not roster.isReady() then return end\nlocal slot=roster.mySlot()\nif slot==\"T1\" or slot==\"T2\" then self.used=true;return end\nif not timer then return end\nlocal tower=TensorCore.mGetEntity(timer.entityID)\nlocal p=TensorCore.mGetPlayer()\nif not tower or not tower.pos or not p or not p.pos then return end\nlocal remaining=s.deadline-Now()\nif remaining<=0 then s.done=true;self.used=true;return end\nlocal east=tower.pos.x>100\nlocal launch={x=east and 101 or 99,y=0,z=tower.pos.z}\nlocal green=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,0.8),2)\nlocal id=green:addTimedCircle(remaining,launch.x,0,launch.z,0.6,0,true,true)\nif id then s.draws[#s.draws+1]=id end\nlocal distance=TensorCore.getDistance2d(p.pos,launch)\nif distance>0.5 then\n id=green:addTimedArrow(remaining,p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,launch),distance-0.3,0.7,0.7,1.4,0,true)\n if id then s.draws[#s.draws+1]=id end\nend\n-- The actual tower is within 4 yalms of this 15-yalm sideways landing.\nid=green:addTimedArrow(remaining,launch.x,0,launch.z,TensorCore.getHeadingToTarget(launch,tower.pos),15,0.5,0.8,1,0,true)\nif id then s.draws[#s.draws+1]=id end\nAnyoneCore.addWorldTextCountdown(remaining,{x=launch.x,y=2,z=launch.z},GUI:ColorConvertFloat4ToU32(0,1,0,1),true,1.5)\ns.drawn=true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"49b2d9bf-9031-6a5a-b1b9-6227632a1483",
+									true,
+								},
+							},
+							name = "Assigned knockback launch and timer",
+							uuid = "fd45e90b-7900-b655-948b-248a139cb27f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.frup1_tower_kb\nreturn s~=nil and s.cleared and not s.done and not s.drawn",
+							name = "Fire cleave cleared; guidance pending",
+							uuid = "49b2d9bf-9031-6a5a-b1b9-6227632a1483",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Draws",
+				loop = true,
+				mechanicTime = 140.9,
+				name = "[LPDU] P1 Towers - Assigned knockback launch and timer",
+				timeRange = true,
+				timelineIndex = 32,
+				timerEndOffset = 7,
+				timerStartOffset = -11,
+				uuid = "65df9304-83c7-bf2d-9834-6b36c084a44b",
+				version = 2,
+			},
+		},
 	},
 	[33] = 
 	{
