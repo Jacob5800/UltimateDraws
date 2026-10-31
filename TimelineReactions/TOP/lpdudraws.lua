@@ -5405,7 +5405,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif S then S.debugContext=\"[P3] Rot expiry spread\"end\nif not S then self.used=true return end\n\nlocal hw=S.hw\nif not hw or not S.ready() then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nlocal b=TensorCore.getBuff(p,3429) or TensorCore.getBuff(p,3526)\nif b and b.duration<=3 then\n local key='hw-rot-'..hw.wave\n if not S.issued[key] then\n  S.issued[key]=true; S.clearGoal(); S.say('Spread away',3)\n  S.keep(S.red:addTimedCircleOnEnt(b.duration*1000,p.id,5,0,false,true,S.flags))\n end\nend\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif S then S.debugContext=\"[P3] Rot expiry spread\"end\nif not S then self.used=true return end\n\nlocal hw=S.hw\nif not hw or not S.ready() then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nlocal b=TensorCore.getBuff(p,3429) or TensorCore.getBuff(p,3526)\nif b and b.duration<=3 then\n local key='hw-rot-'..hw.wave\n if not S.issued[key] then\n  S.issued[key]=true; S.clearGoal(); S.say('Spread',3)\n  S.keep(S.red:addTimedCircleOnEnt(b.duration*1000,p.id,5,0,false,true,S.flags))\n end\nend\nself.used=true\n",
 							conditions = 
 							{
 								

@@ -24,6 +24,8 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- Simplified the P3 rot-expiry callout to 'Spread' so it does not imply extra movement when already positioned. (31-10-2026)
+
 - P2 weapon dodges preserve an already-safe position instead of forcing a group-side crossing. Unsafe positions use the nearest sampled safe destination with a route check; later BPOG spread assignments remain separate. (31-10-2026)
 
 - P1 post-missile returns now follow a nearby agreeing cluster from the assigned group, using its live radius rather than a stale arrow heading. Final rear line positions move 0.5 yalms outward while keeping tanks farther out. Replay checks remain pending. (31-10-2026)
