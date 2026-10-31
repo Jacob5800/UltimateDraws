@@ -89,6 +89,8 @@ TEA: Coming soon by Ton.
 
 ### UWU: LPDU
 
+- Combined UWU AutoSim, targeting and relevant orb-assignment panels into one UWU LPDU Settings window. BLM now has adjustable Garuda end, Ifrit end-after-disappearance and Triplecast hold lead times, with explanations and next-pull application. Settings remain session-only. (31-10-2026)
+
 - BLM AutoSim now forecasts phase-specific Thunder lifetimes and availability for single-target and AoE Thunder, with native disappear/return corrections and extension when bosses outlive estimates. Updated Garuda/Ifrit end estimates from recent logs and stopped treating Ifrit’s confirmed final departure as a dash into Titan. (31-10-2026)
 
 - BLM/BRD/RPR AutoSim now disable AoE and Smart AoE for Titan’s healer gaol and Ultima’s Suppression gaol, restoring prior settings after the final gaol or on cleanup. Auto-targeting is retained; Suppression selects the exact newly targetable gaol. The earlier Titan triple-gaol sequence is unchanged. (31-10-2026)
@@ -106,6 +108,4 @@ TEA: Coming soon by Ton.
 - Corrected the BLM AutoSim nail tooltip to describe the existing 40% softening threshold and one-time cancellation of a cast targeting that nail. Combat behavior is unchanged. (29-10-2026)
 
 - BRD, BLM and Reaper AutoSim now use Monk-log boss-event timings for Garuda’s second disappearance and Titan’s first jump return, reducing incorrect forecast availability. Personal movement forecasts remain job-specific. (29-10-2026)
-
-- Added standalone Autosim RPR - UWU with built-in targeting, melee nail softening, phase/mark forecasts, gaol blacklists and personal stun tracking. Lahabrea has a Me / Other melee LB forecast with event corrections and cancellation cleanup. No forced Ingress/Egress; level-70 skill restrictions respected. Shared targeting yields to the RPR profile. Replay checks remain pending. (28-10-2026)
 
