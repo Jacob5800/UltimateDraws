@@ -18,6 +18,10 @@ TEA: Coming soon by Ton.
 
 ## Changelog
 
+### FRU: AutoSim
+
+- Shared FRU AutoSim now disables AnyoneCore’s Prepull Helper during its precombat setup. The setting remains off until manually re-enabled. (01-11-2026)
+
 ### Q40: AutoSim
 
 - Added shared AutoSim support to q40, with countdown/early-pull setup, boss-cast timing corrections, conservative caster movement forecasts and saved settings. Automatic kill estimation stays enabled by default; optional kill-time and party-buff forecasts are configurable. Existing targeting and cooldown usage remain unchanged. Replay checks are pending. (01-11-2026)
