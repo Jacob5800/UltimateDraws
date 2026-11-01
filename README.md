@@ -74,6 +74,8 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- P2 moves non-tanks onto the live male boss after Sagittarius Arrow is baited, avoiding the old south-edge destination and tank tether conflicts. Delta arm previews show only the first four yellow lines; later locked shots retain their immediate danger indicator. (01-11-2026)
+
 - Delta preserves valid initial tether staging until fists establish assignments. Sigma avoids unnecessary safe-position sidesteps, and Omega stops personal guidance after the player's World hit. Non-tanks see Cosmo Dive tank circles only in the final four seconds; other players' meteor flares are dimmer. Replay confirmation remains pending. (31-10-2026)
 
 - Moved R2's P3 monitor conga spot 0.5 yalms farther south and 0.5 yalms inward. (31-10-2026)
@@ -91,22 +93,6 @@ TEA: Coming soon by Ton.
 - Fixed settings-table lookup errors affecting the settings window, personal guidance, monitor facing and optional automarkers. Replay confirmation on affected clients remains pending. (31-10-2026)
 
 - P1 Pantokrator now preserves an already-safe starting position, checks the opening route against live cones, and avoids forced outward or clockwise fallback arrows. Program Loop waiting retains the tether-path callout without a movement draw. (30-10-2026)
-
-- P1 Pantokrator now shows short sidestep arrows after flamethrowers resolve, checking current puddles and cones while preserving personal missile spreads and return routes. (29-10-2026)
-
-- Added optional debug labels identifying TOP-owned draws throughout the fight (off by default). P1 missile footprints are red with a small green personal marker; final beam markers preserve your assigned destination and call to hold your line spot. (29-10-2026)
-
-- P1 Program Loop holds an already-safe waiting position. Pantokrator now guides you back to your live group after your missile, and missile circles/callouts work even when the countdown helper is unavailable. (29-10-2026)
-
-- P5 Omega near-bounce guidance now accepts correctly spaced live pair positions even after caching an earlier destination, avoiding unnecessary repositioning. (27-10-2026)
-
-- Removed technical predicted-versus-assigned world-path callouts in P5 Delta, Sigma and Omega; personal instructions and draws remain. (27-10-2026)
-
-- P3 Hello World RG tether sides now follow the players’ separate defamation-tower approaches and lock once both sides are clear, retaining that split through the rot transfer. (27-10-2026)
-
-- P3 second hand AoEs and their countdowns stay hidden until the first hand set has 0.5 seconds remaining. (27-10-2026)
-
-- P1 Program Loop now preserves the announced numbered tether direction after pickup, keeping the follow-up call and arrow consistent. (27-10-2026)
 
 ### UCOB: LPDU
 
