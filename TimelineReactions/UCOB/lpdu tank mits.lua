@@ -43161,6 +43161,69 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Bard",
+				uuid = "70bc7894-c863-3356-8db7-e0266104525c",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"82895bb7-9a8a-340b-82a2-ae23e0d0b6b2",
+									true,
+								},
+							},
+							gVar = "ACR_TensorRequiem4_Hotbar_NaturesMinne",
+							uuid = "de3d9be7-82c9-a358-9ecb-47c6f1bd7487",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "BRD only",
+							uuid = "82895bb7-9a8a-340b-82a2-ae23e0d0b6b2",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Bard",
+				mechanicTime = 1306.9,
+				name = "[LPDU BRD] Minne - Golden Morn Afah 2",
+				timeRange = true,
+				timelineIndex = 198,
+				timerEndOffset = -0.5,
+				timerStartOffset = -3,
+				uuid = "28da73fe-69f2-7c0a-a37a-bc6f06f30e5c",
+				version = 2,
+			},
+		},
 	},
 	[200] = 
 	{

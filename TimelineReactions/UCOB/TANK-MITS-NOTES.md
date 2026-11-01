@@ -70,3 +70,8 @@ Native timing corroboration: 26-10-08 organized logs 02-59 and 02-31 (1), same u
 
 Completed: validate_many, create_many and full get_reactions readback of all six attachments, job gates, categories, windows and links; source copied and hash matched.
 Pending replay: all six requests on the active inherited Bard profile, sync timing, first Troubadour expiry on Gigaflare #1, cooldown recovery for #3, Minne #4 arrival before healing, party range and Golden coverage. No replay cast or measured performance claim.
+
+
+## Golden Minne addition — 01-11-2026
+Completed: added [LPDU BRD] Minne - Golden Morn Afah 2 in live Ucobreactions\lpdu tank mits, timeline ucob1.0.3, row198 at1306.9s. Bard-only ACR Hotbar NaturesMinne request from -3 to -0.5s; non-looping, End Reaction if Used/Fallthrough off; no Action CD condition. Last Minne on Gigaflare4 leaves comfortably over120s in the referenced debug recording. Validated and full persisted readback verified; source copied/hash matched. Total555 reactions.
+Pending replay: inherited BRD execution, party range, timing relative to Afah damage/recovery healing and cooldown availability.

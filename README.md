@@ -24,6 +24,8 @@ TEA: Coming soon by Ton.
 
 ### UCOB: LPDU mitigation
 
+- Added Bard Nature’s Minne before Golden Morn Afah #2 to support recovery healing. Replay confirmation remains pending. (01-11-2026)
+
 - Added Bard Troubadour for Gigaflares #1/#3 and Golden Morn Afah #1/#4, plus Nature’s Minne healing support for Gigaflares #2/#4. Requests are Bard-only and timed around observed hits; replay confirmation remains pending. (01-11-2026)
 
 ### UCOB: Shared AutoSim
