@@ -541,7 +541,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "-- Shared UCOB encounters; role-specific forecast, using the real combat clock.\nlocal A=TensorCore.API.TensorACR\nlocal C=_G.UCOB_BLM_Config\nif not C then C={goldLength=162.14,addsLength=100.222,buffForecast=false,buffGain=17,twisterLead=1.0,twisterAfter=1.0,exaDuration=8,assignmentMove=2,returnMove=1.5};_G.UCOB_BLM_Config=C end\nif C.quoteMove==nil then C.quoteMove=2 end\n-- Burst weight update: preserve forecast enablement and other options.\nif not C.burstWeight20261029 then C.buffGain=17;C.burstWeight20261029=true end\nlocal S={version=2,planningStage=1,phase=1,seen={},ids={},up={},dynamic={},cfg={},dotStart={},ends={}}\nif C.phoenixPriority==nil then C.phoenixPriority=false end\nfor k,v in pairs(C)do S.cfg[k]=v end\nS.anchors={\n twinEnd={\"pull\",128.352},nael={\"twinEnd\",21.968},naelEnd={\"nael\",115.307},baha={\"naelEnd\",16.333},\n off1={\"baha\",23.449},on1={\"off1\",11.534},off2={\"on1\",29.533},on2={\"off2\",16.557},\n off3={\"on2\",34.636},on3={\"off3\",16.517},off4={\"on3\",35.834},on4={\"off4\",27.560},\n off5={\"on4\",33.712},on5={\"off5\",19.376},off6={\"on5\",37.626},adds={\"off6\",53.754},\n addsEnd={\"adds\",S.cfg.addsLength},gold={\"addsEnd\",62.323}}\n-- Slower-group estimates are copied at pull setup; actual event anchors still win.\nlocal G=_G.UCOB_AutoSimTiming or {}\nlocal old=data.ucobAutoSim\nlocal T=old and old.groupTiming\nif not T then\n T={enabled=G.enabled==true}\n for _,key in ipairs({\"twinExtra\",\"naelExtra\",\"addsExtra\",\"goldExtra\"}) do T[key]=math.max(0,math.min(90,tonumber(G[key]) or 0)) end\nend\nS.groupTiming=T\nif T.enabled then\n S.anchors.twinEnd[2]=S.anchors.twinEnd[2]+T.twinExtra\n S.anchors.naelEnd[2]=S.anchors.naelEnd[2]+T.naelExtra\n S.anchors.addsEnd[2]=S.anchors.addsEnd[2]+T.addsExtra\n S.cfg.goldLength=S.cfg.goldLength+T.goldExtra\nend\nfunction S.at(k)\n if k==\"pull\"then return 0 end\n if S.seen[k]then return S.seen[k]end\n local a=S.anchors[k];return S.at(a[1])+a[2]\nend\nfunction S.union(xs)\n table.sort(xs,function(a,b)return a[1]<b[1]end)\n local out={}\n for _,v in ipairs(xs)do\n  local last=out[#out]\n  if last and v[1]<=last[2]then last[2]=math.max(last[2],v[2])else out[#out+1]={v[1],v[2]}end\n end\n return out\nend\nfunction S.alive(e)return e and e.alive and e.targetable and e.hp.current>1 end\nfunction S.ent(cid)return S.ids[cid]and TensorCore.mGetEntity(S.ids[cid])end\n\nS.movePred={{\"firstTwister\",\"pull\",12.99,\"twister\"},{\"addsTwister1\",\"adds\",24.34,\"twister\"},{\"addsTwister2\",\"adds\",41.487,\"twister\"},{\"addsTwister3\",\"adds\",87.071,\"twister\"},{\"addsTwister4\",\"adds\",104.096,\"twister\"},{\"exa1\",\"gold\",24.549,\"exa\"},{\"exa2\",\"gold\",73.276,\"exa\"},{\"exa3\",\"gold\",123.05,\"exa\"},{\"exa4\",\"gold\",174.689,\"exa\"}}\nS.moveActual={};S.personalMoves={}\nfunction S.movementWindows()\n local out={}\n for _,p in ipairs(S.movePred)do\n  if S.planningStage~=2 or p[2]==\"gold\"then\n  local center=S.moveActual[p[1]]or S.at(p[2])+p[3]\n  local a,b\n  if p[4]==\"twister\"then a,b=center-S.cfg.twisterLead,center+S.cfg.twisterAfter\n  else a,b=center-.5,center+S.cfg.exaDuration end\n  if p[2]==\"adds\"then b=math.min(b,S.at(\"addsEnd\"))end\n  if p[2]~=\"pull\"or not S.seen.twinEnd or center<S.seen.twinEnd then\n   if b>a then out[#out+1]={a,b}end\n  end\n end\n end\n for _,v in pairs(S.personalMoves)do if v[2]>v[1]then out[#out+1]={v[1],v[2]}end end\n return S.union(out)\nend\nfunction S.correctMovement(kind,finish)\n local best,delta\n for _,p in ipairs(S.movePred)do\n  if p[4]==kind and not S.moveActual[p[1]]and ((p[2]==\"pull\"and S.phase==1)or(p[2]==\"adds\"and S.phase==4)or(p[2]==\"gold\"and S.phase==5))then\n   local d=math.abs(finish-S.at(p[2])-p[3]);if not delta or d<delta then best,delta=p[1],d end\n  end\n end\n if best and delta<8 then S.moveActual[best]=finish\n else S.personalMoves[kind..\"Extra\"]={finish-(kind==\"twister\"and S.cfg.twisterLead or .5),finish+(kind==\"twister\"and S.cfg.twisterAfter or S.cfg.exaDuration)}end\n S.publish()\nend\n\nfunction S.quoteSequence(text)\nlocal t=text:gsub(\"%s+\",\" \")\nlocal seq=nil\nif t:find(\"O hallowed moon, shine you the iron path\",1,true) then seq={9916,9915}\nelseif t:find(\"O hallowed moon, take fire and scorch my foes\",1,true) then seq={9916,9917}\nelseif t:find(\"Take fire, O hallowed moon\",1,true) then seq={9917,9916}\nelseif t:find(\"Blazing path, lead me to iron rule\",1,true) then seq={9917,9915}\nelseif t:find(\"From on high I descend, the hallowed moon to call\",1,true) then seq={9918,9916}\nelseif t:find(\"From on high I descend, the iron path to walk\",1,true) then seq={9918,9915}\nelseif t:find(\"From on high I descend, the iron path to call\",1,true) then seq={9918,9915}\nelseif t:find(\"From on high I descend, the moon and stars to bring\",1,true) then seq={9918,9916,9920}\nelseif t:find(\"From hallowed moon I descend, a rain of stars to bring\",1,true) then seq={9916,9918,9920}\nelseif t:find(\"From hallowed moon I descend, upon burning earth to tread\",1,true) then seq={9916,9918,9917}\nelseif t:find(\"From hallowed moon I bare iron, in my descent to wield\",1,true) then seq={9916,9915,9918}\nelseif t:find(\"Unbending iron, take fire and descend\",1,true) then seq={9915,9917,9918}\nelseif t:find(\"Unbending iron, descend with fiery edge\",1,true) then seq={9915,9918,9917}\nend\n return seq\nend\nfunction S.quoteCategory(id)\n if id==9916 or id==9917 then return \"in\"elseif id==9915 then return \"out\"else return \"spread\"end\nend\nfunction S.planQuote()\n local q=S.quote\n if not q then return end\n for i=1,3 do S.personalMoves[\"quote\"..i]=nil end\n local previous=q.previous\n local p=TensorCore.mGetPlayer();local n=S.ent(2612)\n for i=q.step,#q.seq do\n  local cat=S.quoteCategory(q.seq[i]);local hit=q.nextHit+(i-q.step)*3.1\n  local move=previous~=cat\n  if not previous and p and n then\n   local distance=TensorCore.getDistance2d(p.pos,n.pos)\n   if(cat==\"in\"and distance<=4)or(cat==\"out\"and distance>=10)then move=false end\n  end\n  if move then\n   local duration=S.cfg.quoteMove\n   local a=previous and hit-3.0 or hit-duration-.2\n   S.personalMoves[\"quote\"..i]={a,math.min(a+duration,hit-.1)}\n  end\n  previous=cat\n end\n S.publish()\nend\n\n\nfunction S.beginGolden(now)\n if S.planningStage==2 then return end\n S.planningStage=2;S.planStart=now\n S.dynamic={};S.ends={};S.dotStart={}\n S.personalMoves={};S.quote=nil\n S.mainID=nil;S.otherID=nil\n S.lbObserved=nil;S.lbStarted=nil;S.lbCompleted=nil;S.lbCancelled=nil\n A.clearAutoSimTarget(0);A.clearAutoSimTarget(1)\nend\n\nfunction S.publish()\n local now=A.getAutoSimTime()\n -- Let the first plan finish at adds death. No ordinary player death changes plans.\n if S.planningStage~=2 and S.seen.addsEnd and now>S.seen.addsEnd+.5 then return end\n local live=_G.UCOB_BLM_Config\n \n S.cfg.phoenixPriority=live and live.phoenixPriority==true or false\n local horizon=S.planningStage==2 and S.at(\"gold\")+S.cfg.goldLength or S.at(\"addsEnd\")\n local kill=math.max(now+.5,horizon)\n S.killAt=kill;A.setAutoSimKillTime(kill)\n local gaps={{S.at(\"twinEnd\"),S.at(\"nael\")},{S.at(\"naelEnd\"),S.at(\"baha\")},{S.at(\"off6\"),S.at(\"adds\")},{S.at(\"addsEnd\"),S.at(\"gold\")}}\n for i=1,5 do\n  local a,b=S.at(\"off\"..i),S.at(\"on\"..i)\n  if S.seen.adds then b=math.min(b,S.seen.adds)end\n  if b>a then gaps[#gaps+1]={a,b}end\n end\n if S.planningStage==2 then gaps={{S.planStart,S.at(\"gold\")}}end\n local valid={};for _,g in ipairs(gaps)do if g[2]>g[1]then valid[#valid+1]=g end end;gaps=valid\n if S.planningStage~=2 and S.naelGap then gaps[#gaps+1]={S.naelGap[1],S.naelGap[2]or now+6}end\n A.clearAutoSimPhases(\"FullDowntime\")\n for _,g in ipairs(S.union(gaps))do if g[2]>g[1]then A.addAutoSimPhase(\"FullDowntime\",g[1],g[2])end end\n local stun={}\n for _,g in pairs(S.dynamic)do if g[1]==\"Stun\"then stun[#stun+1]={g[2],g[3]}end end\n A.clearAutoSimPhases(\"Stun\")\n for _,g in ipairs(S.union(stun))do if g[2]>g[1]then A.addAutoSimPhase(\"Stun\",g[1],g[2])end end\n A.clearAutoSimPhases(\"CasterDowntime\")\n for _,g in ipairs(S.movementWindows())do A.addAutoSimPhase(\"CasterDowntime\",g[1],g[2])end\n -- Optional relative Phoenix planning preference. Default is 1x throughout.\n -- Actual active status handling remains with the ACR.\n A.clearAutoSimPhases(\"BossModifier\")\n if S.cfg.phoenixPriority then\n local gold=S.at(\"gold\")\n if gold>0 then A.addAutoSimPhase(\"BossModifier\",0,gold,.5)end\n if S.phase==5 and S.phoenixSeen and not S.phoenixActive then\n  A.addAutoSimPhase(\"BossModifier\",gold,kill,.5)\n end\n end\n A.clearAutoSimPhases(\"RaidBuff\")\n if S.cfg.buffForecast then\n  local prev=-120\n  local buffTimes=S.planningStage==2 and {S.at(\"gold\")+2,S.at(\"gold\")+122}or {5,S.at(\"nael\")+2,S.at(\"baha\")+2,S.at(\"on3\")+2,S.at(\"adds\")+2}\n  for burstIndex,t in ipairs(buffTimes)do\n   t=math.max(t,prev+120)\n   -- P4 adds opening: extra pooling preference; cleave remains independently modeled.\n   local weight=S.planningStage~=2 and burstIndex==5 and 1.4 or (1+S.cfg.buffGain/100)\n   A.addAutoSimPhase(\"RaidBuff\",t,t+20,weight);prev=t\n  end\n end\n -- Slot 0 tracks the selected main boss; slot 1 tracks the other adds boss.\n -- Lifetimes survive temporary untargetability. Golden starts a fresh target-state lifetime.\n local start,finish=0,S.at(\"twinEnd\")\n if S.planningStage==2 then start,finish=S.at(\"gold\"),kill\n elseif S.phase==2 then start,finish=S.at(\"nael\"),S.at(\"naelEnd\")\n elseif S.phase==3 then start,finish=S.at(\"baha\"),S.at(\"adds\")\n elseif S.phase==4 then start,finish=S.at(\"adds\"),S.at(\"addsEnd\")\n elseif S.phase==5 then start,finish=S.at(\"gold\"),kill end\n finish=math.max(finish,now+5)\n for slot=0,1 do\n  A.clearAutoSimPhases(\"DotAvailability\",slot);A.clearAutoSimPhases(\"DotAvailability\",slot,1);A.clearAutoSimPhases(\"TargetLifetime\",slot)\n  if slot==0 or(S.phase==4 and S.planningStage~=2)then\n   local id=slot==0 and S.mainID or S.otherID\n   local death=id and S.ends[id]\n   local ending=death or finish\n   if ending>start then\n    A.addAutoSimPhase(\"TargetLifetime\",start,ending,1,slot)\n    local cursor=start\n    for _,g in ipairs(S.union(gaps))do\n     local a,b=math.max(start,g[1]),math.min(ending-.5,g[2])\n     if b>a then if a>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,a,1,slot);if slot==0 and Player.job==25 then A.addAutoSimPhase(\"DotAvailability\",cursor,a,1,slot,1)end end;cursor=math.max(cursor,b)end\n    end\n    if ending-.5>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,ending-.5,1,slot);if slot==0 and Player.job==25 then A.addAutoSimPhase(\"DotAvailability\",cursor,ending-.5,1,slot,1)end end\n   end\n  end\n end\n A.clearAutoSimUncertainty()\n A.addAutoSimUncertainty(0,S.phase>=3 and 3 or 20)\n if S.planningStage~=2 and not S.seen.addsEnd then A.addAutoSimUncertainty(math.max(1,S.at(\"addsEnd\")-25),20)end\n if S.planningStage==2 then A.addAutoSimUncertainty(math.max(2,S.at(\"gold\")+S.cfg.goldLength-30),15)end\n S.lastPublish=now\nend\nfunction S.sync(k,t)\n if S.seen[k]then return end\n S.seen[k]=t;S.publish()\nend\nfor _,cid in ipairs({1482,2612,3210})do\n for _,e in pairs(TensorCore.getEntityGroupList(\"ContentID\",cid)or{})do\n  if e.alive then S.ids[cid]=e.id;S.up[cid]=e.targetable;break end\n end\nend\nS.publish()\nS.planRole=\"caster\";S.planJob=Player.job\ndata.ucobAutoSim=S\nself.used=true\n",
+							actionLua = "-- Shared UCOB encounters; role-specific forecast, using the real combat clock.\nlocal A=TensorCore.API.TensorACR\nlocal C=_G.UCOB_BLM_Config\nif not C then C={goldLength=162.14,addsLength=100.222,buffForecast=false,buffGain=17,twisterLead=1.0,twisterAfter=1.0,exaDuration=8,assignmentMove=2,returnMove=1.5};_G.UCOB_BLM_Config=C end\nif C.quoteMove==nil then C.quoteMove=2 end\n-- Burst weight update: preserve forecast enablement and other options.\nif not C.burstWeight20261029 then C.buffGain=17;C.burstWeight20261029=true end\n-- Per-phase base estimates; copied to this pull before publication.\nif C.twinLength==nil then C.twinLength=132 end\nif C.naelLength==nil then C.naelLength=129 end\nfor key,value in pairs({twisterLead=1,twisterAfter=1,exaDuration=8,assignmentMove=2,returnMove=1.5,quoteMove=2}) do\n if C[key]==nil then C[key]=value end\nend\nlocal S={version=2,planningStage=1,phase=1,seen={},ids={},up={},dynamic={},cfg={},dotStart={},ends={}}\nif C.phoenixPriority==nil then C.phoenixPriority=false end\nfor k,v in pairs(C)do S.cfg[k]=v end\nS.anchors={\n twinEnd={\"pull\",C.twinLength},nael={\"twinEnd\",21.968},naelEnd={\"nael\",C.naelLength},baha={\"naelEnd\",16.333},\n off1={\"baha\",23.449},on1={\"off1\",11.534},off2={\"on1\",29.533},on2={\"off2\",16.557},\n off3={\"on2\",34.636},on3={\"off3\",16.517},off4={\"on3\",35.834},on4={\"off4\",27.560},\n off5={\"on4\",33.712},on5={\"off5\",19.376},off6={\"on5\",37.626},adds={\"off6\",53.754},\n addsEnd={\"adds\",S.cfg.addsLength},gold={\"addsEnd\",62.323}}\n-- Slower-group estimates are copied at pull setup; actual event anchors still win.\nlocal G=_G.UCOB_AutoSimTiming or {}\nlocal old=data.ucobAutoSim\nlocal T=old and old.groupTiming\nif not T then\n T={enabled=G.enabled==true}\n for _,key in ipairs({\"twinExtra\",\"naelExtra\",\"addsExtra\",\"goldExtra\"}) do T[key]=math.max(0,math.min(90,tonumber(G[key]) or 0)) end\nend\nS.groupTiming=T\nif T.enabled then\n S.anchors.twinEnd[2]=S.anchors.twinEnd[2]+T.twinExtra\n S.anchors.naelEnd[2]=S.anchors.naelEnd[2]+T.naelExtra\n S.anchors.addsEnd[2]=S.anchors.addsEnd[2]+T.addsExtra\n S.cfg.goldLength=S.cfg.goldLength+T.goldExtra\nend\nfunction S.at(k)\n if k==\"pull\"then return 0 end\n if S.seen[k]then return S.seen[k]end\n local a=S.anchors[k];return S.at(a[1])+a[2]\nend\nfunction S.union(xs)\n table.sort(xs,function(a,b)return a[1]<b[1]end)\n local out={}\n for _,v in ipairs(xs)do\n  local last=out[#out]\n  if last and v[1]<=last[2]then last[2]=math.max(last[2],v[2])else out[#out+1]={v[1],v[2]}end\n end\n return out\nend\nfunction S.alive(e)return e and e.alive and e.targetable and e.hp.current>1 end\nfunction S.ent(cid)return S.ids[cid]and TensorCore.mGetEntity(S.ids[cid])end\n\nS.movePred={{\"firstTwister\",\"pull\",12.3,\"twister\"},{\"secondTwister\",\"pull\",69.5,\"twister\"},{\"thirdTwister\",\"pull\",121.7,\"twister\"},{\"addsTwister1\",\"adds\",24.34,\"twister\"},{\"addsTwister2\",\"adds\",41.487,\"twister\"},{\"addsTwister3\",\"adds\",87.071,\"twister\"},{\"addsTwister4\",\"adds\",104.096,\"twister\"},{\"exa1\",\"gold\",24.549,\"exa\"},{\"exa2\",\"gold\",73.276,\"exa\"},{\"exa3\",\"gold\",123.05,\"exa\"},{\"exa4\",\"gold\",174.689,\"exa\"}}\nS.moveActual={};S.personalMoves={}\nfunction S.movementWindows()\n local out={}\n for _,p in ipairs(S.movePred)do\n  if S.planningStage~=2 or p[2]==\"gold\"then\n  local center=S.moveActual[p[1]]or S.at(p[2])+p[3]\n  local a,b\n  if p[4]==\"twister\"then a,b=center-S.cfg.twisterLead,center+S.cfg.twisterAfter\n  else a,b=center-.5,center+S.cfg.exaDuration end\n  if p[2]==\"adds\"then b=math.min(b,S.at(\"addsEnd\"))end\n  if p[2]~=\"pull\"or not S.seen.twinEnd or center<S.seen.twinEnd then\n   if b>a then out[#out+1]={a,b}end\n  end\n end\n end\n for _,v in pairs(S.personalMoves)do if v[2]>v[1]then out[#out+1]={v[1],v[2]}end end\n return S.union(out)\nend\nfunction S.correctMovement(kind,finish)\n local best,delta\n for _,p in ipairs(S.movePred)do\n  if p[4]==kind and not S.moveActual[p[1]]and ((p[2]==\"pull\"and S.phase==1)or(p[2]==\"adds\"and S.phase==4)or(p[2]==\"gold\"and S.phase==5))then\n   local d=math.abs(finish-S.at(p[2])-p[3]);if not delta or d<delta then best,delta=p[1],d end\n  end\n end\n if best and delta<8 then S.moveActual[best]=finish\n else S.personalMoves[kind..\"Extra\"]={finish-(kind==\"twister\"and S.cfg.twisterLead or .5),finish+(kind==\"twister\"and S.cfg.twisterAfter or S.cfg.exaDuration)}end\n S.publish()\nend\n\nfunction S.quoteSequence(text)\nlocal t=text:gsub(\"%s+\",\" \")\nlocal seq=nil\nif t:find(\"O hallowed moon, shine you the iron path\",1,true) then seq={9916,9915}\nelseif t:find(\"O hallowed moon, take fire and scorch my foes\",1,true) then seq={9916,9917}\nelseif t:find(\"Take fire, O hallowed moon\",1,true) then seq={9917,9916}\nelseif t:find(\"Blazing path, lead me to iron rule\",1,true) then seq={9917,9915}\nelseif t:find(\"From on high I descend, the hallowed moon to call\",1,true) then seq={9918,9916}\nelseif t:find(\"From on high I descend, the iron path to walk\",1,true) then seq={9918,9915}\nelseif t:find(\"From on high I descend, the iron path to call\",1,true) then seq={9918,9915}\nelseif t:find(\"From on high I descend, the moon and stars to bring\",1,true) then seq={9918,9916,9920}\nelseif t:find(\"From hallowed moon I descend, a rain of stars to bring\",1,true) then seq={9916,9918,9920}\nelseif t:find(\"From hallowed moon I descend, upon burning earth to tread\",1,true) then seq={9916,9918,9917}\nelseif t:find(\"From hallowed moon I bare iron, in my descent to wield\",1,true) then seq={9916,9915,9918}\nelseif t:find(\"Unbending iron, take fire and descend\",1,true) then seq={9915,9917,9918}\nelseif t:find(\"Unbending iron, descend with fiery edge\",1,true) then seq={9915,9918,9917}\nend\n return seq\nend\nfunction S.quoteCategory(id)\n if id==9916 or id==9917 then return \"in\"elseif id==9915 then return \"out\"else return \"spread\"end\nend\nfunction S.planQuote()\n local q=S.quote\n if not q then return end\n for i=1,3 do S.personalMoves[\"quote\"..i]=nil end\n local previous=q.previous\n local p=TensorCore.mGetPlayer();local n=S.ent(2612)\n for i=q.step,#q.seq do\n  local cat=S.quoteCategory(q.seq[i]);local hit=q.nextHit+(i-q.step)*3.1\n  local move=previous~=cat\n  if not previous and p and n then\n   local distance=TensorCore.getDistance2d(p.pos,n.pos)\n   if(cat==\"in\"and distance<=4)or(cat==\"out\"and distance>=10)then move=false end\n  end\n  if move then\n   local duration=S.cfg.quoteMove\n   local a=previous and hit-3.0 or hit-duration-.2\n   S.personalMoves[\"quote\"..i]={a,math.min(a+duration,hit-.1)}\n  end\n  previous=cat\n end\n S.publish()\nend\n\n\nfunction S.beginGolden(now)\n if S.planningStage==2 then return end\n S.planningStage=2;S.planStart=now\n S.dynamic={};S.ends={};S.dotStart={}\n S.personalMoves={};S.quote=nil\n S.mainID=nil;S.otherID=nil\n S.lbObserved=nil;S.lbStarted=nil;S.lbCompleted=nil;S.lbCancelled=nil\n A.clearAutoSimTarget(0);A.clearAutoSimTarget(1)\nend\n\nfunction S.publish()\n local now=A.getAutoSimTime()\n -- Let the first plan finish at adds death. No ordinary player death changes plans.\n if S.planningStage~=2 and S.seen.addsEnd and now>S.seen.addsEnd+.5 then return end\n local live=_G.UCOB_BLM_Config\n \n S.cfg.phoenixPriority=live and live.phoenixPriority==true or false\n local horizon=S.planningStage==2 and S.at(\"gold\")+S.cfg.goldLength or S.at(\"addsEnd\")\n local kill=math.max(now+.5,horizon)\n S.killAt=kill;A.setAutoSimKillTime(kill)\n local gaps={{S.at(\"twinEnd\"),S.at(\"nael\")},{S.at(\"naelEnd\"),S.at(\"baha\")},{S.at(\"off6\"),S.at(\"adds\")},{S.at(\"addsEnd\"),S.at(\"gold\")}}\n for i=1,5 do\n  local a,b=S.at(\"off\"..i),S.at(\"on\"..i)\n  if S.seen.adds then b=math.min(b,S.seen.adds)end\n  if b>a then gaps[#gaps+1]={a,b}end\n end\n if S.planningStage==2 then gaps={{S.planStart,S.at(\"gold\")}}end\n local valid={};for _,g in ipairs(gaps)do if g[2]>g[1]then valid[#valid+1]=g end end;gaps=valid\n if S.planningStage~=2 and S.naelGap then gaps[#gaps+1]={S.naelGap[1],S.naelGap[2]or now+6}end\n A.clearAutoSimPhases(\"FullDowntime\")\n for _,g in ipairs(S.union(gaps))do if g[2]>g[1]then A.addAutoSimPhase(\"FullDowntime\",g[1],g[2])end end\n local stun={}\n for _,g in pairs(S.dynamic)do if g[1]==\"Stun\"then stun[#stun+1]={g[2],g[3]}end end\n A.clearAutoSimPhases(\"Stun\")\n for _,g in ipairs(S.union(stun))do if g[2]>g[1]then A.addAutoSimPhase(\"Stun\",g[1],g[2])end end\n A.clearAutoSimPhases(\"CasterDowntime\")\n for _,g in ipairs(S.movementWindows())do A.addAutoSimPhase(\"CasterDowntime\",g[1],g[2])end\n -- Optional relative Phoenix planning preference. Default is 1x throughout.\n -- Actual active status handling remains with the ACR.\n A.clearAutoSimPhases(\"BossModifier\")\n if S.cfg.phoenixPriority then\n local gold=S.at(\"gold\")\n if gold>0 then A.addAutoSimPhase(\"BossModifier\",0,gold,.5)end\n if S.phase==5 and S.phoenixSeen and not S.phoenixActive then\n  A.addAutoSimPhase(\"BossModifier\",gold,kill,.5)\n end\n end\n A.clearAutoSimPhases(\"RaidBuff\")\n if S.cfg.buffForecast then\n  local prev=-120\n  local buffTimes=S.planningStage==2 and {S.at(\"gold\")+2,S.at(\"gold\")+122}or {5,S.at(\"nael\")+2,S.at(\"baha\")+2,S.at(\"on3\")+2,S.at(\"adds\")+2}\n  for burstIndex,t in ipairs(buffTimes)do\n   t=math.max(t,prev+120)\n   -- P4 adds opening: extra pooling preference; cleave remains independently modeled.\n   local weight=S.planningStage~=2 and burstIndex==5 and 1.4 or (1+S.cfg.buffGain/100)\n   A.addAutoSimPhase(\"RaidBuff\",t,t+20,weight);prev=t\n  end\n end\n -- Slot 0 tracks the selected main boss; slot 1 tracks the other adds boss.\n -- Lifetimes survive temporary untargetability. Golden starts a fresh target-state lifetime.\n local start,finish=0,S.at(\"twinEnd\")\n if S.planningStage==2 then start,finish=S.at(\"gold\"),kill\n elseif S.phase==2 then start,finish=S.at(\"nael\"),S.at(\"naelEnd\")\n elseif S.phase==3 then start,finish=S.at(\"baha\"),S.at(\"adds\")\n elseif S.phase==4 then start,finish=S.at(\"adds\"),S.at(\"addsEnd\")\n elseif S.phase==5 then start,finish=S.at(\"gold\"),kill end\n finish=math.max(finish,now+5)\n for slot=0,1 do\n  A.clearAutoSimPhases(\"DotAvailability\",slot);A.clearAutoSimPhases(\"DotAvailability\",slot,1);A.clearAutoSimPhases(\"TargetLifetime\",slot)\n  if slot==0 or(S.phase==4 and S.planningStage~=2)then\n   local id=slot==0 and S.mainID or S.otherID\n   local death=id and S.ends[id]\n   local ending=death or finish\n   if ending>start then\n    A.addAutoSimPhase(\"TargetLifetime\",start,ending,1,slot)\n    local cursor=start\n    for _,g in ipairs(S.union(gaps))do\n     local a,b=math.max(start,g[1]),math.min(ending-.5,g[2])\n     if b>a then if a>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,a,1,slot);if slot==0 and Player.job==25 then A.addAutoSimPhase(\"DotAvailability\",cursor,a,1,slot,1)end end;cursor=math.max(cursor,b)end\n    end\n    if ending-.5>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,ending-.5,1,slot);if slot==0 and Player.job==25 then A.addAutoSimPhase(\"DotAvailability\",cursor,ending-.5,1,slot,1)end end\n   end\n  end\n end\n A.clearAutoSimUncertainty()\n A.addAutoSimUncertainty(0,S.phase>=3 and 3 or 20)\n if S.planningStage~=2 and not S.seen.addsEnd then A.addAutoSimUncertainty(math.max(1,S.at(\"addsEnd\")-25),20)end\n if S.planningStage==2 then A.addAutoSimUncertainty(math.max(2,S.at(\"gold\")+S.cfg.goldLength-30),15)end\n S.lastPublish=now\nend\nfunction S.sync(k,t)\n if S.seen[k]then return end\n S.seen[k]=t;S.publish()\nend\nfor _,cid in ipairs({1482,2612,3210})do\n for _,e in pairs(TensorCore.getEntityGroupList(\"ContentID\",cid)or{})do\n  if e.alive then S.ids[cid]=e.id;S.up[cid]=e.targetable;break end\n end\nend\nS.publish()\nS.planRole=\"caster\";S.planJob=Player.job\ndata.ucobAutoSim=S\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -570,7 +570,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "-- Shared UCOB encounters; role-specific forecast, using the real combat clock.\nlocal A=TensorCore.API.TensorACR\nlocal C=_G.UCOB_RPR_Config\nif not C then C={lbWho=1,lbAt=150,goldLength=162.14,addsLength=100.222,cleave=true,buffForecast=false,buffGain=17};_G.UCOB_RPR_Config=C end\n-- Burst weight update: preserve forecast enablement and other options.\nif not C.burstWeight20261029 then C.buffGain=17;C.burstWeight20261029=true end\nlocal S={version=2,planningStage=1,phase=1,seen={},ids={},up={},dynamic={},cfg={},dotStart={},ends={}}\nif C.phoenixPriority==nil then C.phoenixPriority=false end\nfor k,v in pairs(C)do S.cfg[k]=v end\nS.anchors={\n twinEnd={\"pull\",128.352},nael={\"twinEnd\",21.968},naelEnd={\"nael\",115.307},baha={\"naelEnd\",16.333},\n off1={\"baha\",23.449},on1={\"off1\",11.534},off2={\"on1\",29.533},on2={\"off2\",16.557},\n off3={\"on2\",34.636},on3={\"off3\",16.517},off4={\"on3\",35.834},on4={\"off4\",27.560},\n off5={\"on4\",33.712},on5={\"off5\",19.376},off6={\"on5\",37.626},adds={\"off6\",53.754},\n addsEnd={\"adds\",S.cfg.addsLength},gold={\"addsEnd\",62.323}}\n-- Slower-group estimates are copied at pull setup; actual event anchors still win.\nlocal G=_G.UCOB_AutoSimTiming or {}\nlocal old=data.ucobAutoSim\nlocal T=old and old.groupTiming\nif not T then\n T={enabled=G.enabled==true}\n for _,key in ipairs({\"twinExtra\",\"naelExtra\",\"addsExtra\",\"goldExtra\"}) do T[key]=math.max(0,math.min(90,tonumber(G[key]) or 0)) end\nend\nS.groupTiming=T\nif T.enabled then\n S.anchors.twinEnd[2]=S.anchors.twinEnd[2]+T.twinExtra\n S.anchors.naelEnd[2]=S.anchors.naelEnd[2]+T.naelExtra\n S.anchors.addsEnd[2]=S.anchors.addsEnd[2]+T.addsExtra\n S.cfg.goldLength=S.cfg.goldLength+T.goldExtra\nend\nfunction S.at(k)\n if k==\"pull\"then return 0 end\n if S.seen[k]then return S.seen[k]end\n local a=S.anchors[k];return S.at(a[1])+a[2]\nend\nfunction S.union(xs)\n table.sort(xs,function(a,b)return a[1]<b[1]end)\n local out={}\n for _,v in ipairs(xs)do\n  local last=out[#out]\n  if last and v[1]<=last[2]then last[2]=math.max(last[2],v[2])else out[#out+1]={v[1],v[2]}end\n end\n return out\nend\nfunction S.alive(e)return e and e.alive and e.targetable and e.hp.current>1 end\nfunction S.ent(cid)return S.ids[cid]and TensorCore.mGetEntity(S.ids[cid])end\nfunction S.roleMelee()\n local R=AnyoneCore.Roster\n return R and R.current()and(R.mySlot()==\"M1\"or R.mySlot()==\"M2\")\nend\n\nfunction S.beginGolden(now)\n if S.planningStage==2 then return end\n S.planningStage=2;S.planStart=now\n S.dynamic={};S.ends={};S.dotStart={}\n S.personalMoves={};S.quote=nil\n S.mainID=nil;S.otherID=nil\n S.lbObserved=nil;S.lbStarted=nil;S.lbCompleted=nil;S.lbCancelled=nil\n A.clearAutoSimTarget(0);A.clearAutoSimTarget(1)\nend\n\nfunction S.publish()\n local now=A.getAutoSimTime()\n -- Let the first plan finish at adds death. No ordinary player death changes plans.\n if S.planningStage~=2 and S.seen.addsEnd and now>S.seen.addsEnd+.5 then return end\n local live=_G.UCOB_RPR_Config\n if live then S.cfg.lbWho=live.lbWho;S.cfg.lbAt=live.lbAt end\n S.cfg.phoenixPriority=live and live.phoenixPriority==true or false\n local horizon=S.planningStage==2 and S.at(\"gold\")+S.cfg.goldLength or S.at(\"addsEnd\")\n local kill=math.max(now+.5,horizon)\n S.killAt=kill;A.setAutoSimKillTime(kill)\n local gaps={{S.at(\"twinEnd\"),S.at(\"nael\")},{S.at(\"naelEnd\"),S.at(\"baha\")},{S.at(\"off6\"),S.at(\"adds\")},{S.at(\"addsEnd\"),S.at(\"gold\")}}\n for i=1,5 do\n  local a,b=S.at(\"off\"..i),S.at(\"on\"..i)\n  if S.seen.adds then b=math.min(b,S.seen.adds)end\n  if b>a then gaps[#gaps+1]={a,b}end\n end\n if S.planningStage==2 then gaps={{S.planStart,S.at(\"gold\")}}end\n local valid={};for _,g in ipairs(gaps)do if g[2]>g[1]then valid[#valid+1]=g end end;gaps=valid\n if S.planningStage~=2 and S.naelGap then gaps[#gaps+1]={S.naelGap[1],S.naelGap[2]or now+6}end\n A.clearAutoSimPhases(\"FullDowntime\")\n for _,g in ipairs(S.union(gaps))do if g[2]>g[1]then A.addAutoSimPhase(\"FullDowntime\",g[1],g[2])end end\n local stun={}\n if S.cfg.lbWho==1 and S.roleMelee()and not S.lbObserved then\n  local t=S.at(\"gold\")+S.cfg.lbAt;stun[#stun+1]={t,t+8.2}\n end\n for _,g in pairs(S.dynamic)do if g[1]==\"Stun\"then stun[#stun+1]={g[2],g[3]}end end\n A.clearAutoSimPhases(\"Stun\")\n for _,g in ipairs(S.union(stun))do if g[2]>g[1]then A.addAutoSimPhase(\"Stun\",g[1],g[2])end end\n A.clearAutoSimPhases(\"MeleeDowntime\")\n for _,g in pairs(S.dynamic)do if g[1]==\"MeleeDowntime\"and g[3]>g[2]then A.addAutoSimPhase(\"MeleeDowntime\",g[2],g[3])end end\n -- Optional relative Phoenix planning preference. Default is 1x throughout.\n -- Actual active status handling remains with the ACR.\n A.clearAutoSimPhases(\"BossModifier\")\n if S.cfg.phoenixPriority then\n local gold=S.at(\"gold\")\n if gold>0 then A.addAutoSimPhase(\"BossModifier\",0,gold,.5)end\n if S.phase==5 and S.phoenixSeen and not S.phoenixActive then\n  A.addAutoSimPhase(\"BossModifier\",gold,kill,.5)\n end\n end\n A.clearAutoSimPhases(\"RaidBuff\")\n if S.cfg.buffForecast then\n  local prev=-120\n  local buffTimes=S.planningStage==2 and {S.at(\"gold\")+2,S.at(\"gold\")+122}or {5,S.at(\"nael\")+2,S.at(\"baha\")+2,S.at(\"on3\")+2,S.at(\"adds\")+2}\n  for burstIndex,t in ipairs(buffTimes)do\n   t=math.max(t,prev+120)\n   -- P4 adds opening: extra pooling preference; cleave remains independently modeled.\n   local weight=S.planningStage~=2 and burstIndex==5 and 1.4 or (1+S.cfg.buffGain/100)\n   A.addAutoSimPhase(\"RaidBuff\",t,t+20,weight);prev=t\n  end\n end\n -- Slot 0 tracks the selected main boss; slot 1 tracks the other adds boss.\n -- Lifetimes survive temporary untargetability. Golden starts a fresh target-state lifetime.\n local start,finish=0,S.at(\"twinEnd\")\n if S.planningStage==2 then start,finish=S.at(\"gold\"),kill\n elseif S.phase==2 then start,finish=S.at(\"nael\"),S.at(\"naelEnd\")\n elseif S.phase==3 then start,finish=S.at(\"baha\"),S.at(\"adds\")\n elseif S.phase==4 then start,finish=S.at(\"adds\"),S.at(\"addsEnd\")\n elseif S.phase==5 then start,finish=S.at(\"gold\"),kill end\n finish=math.max(finish,now+5)\n for slot=0,1 do\n  A.clearAutoSimPhases(\"DotAvailability\",slot);A.clearAutoSimPhases(\"TargetLifetime\",slot)\n  if slot==0 or(S.phase==4 and S.planningStage~=2)then\n   local id=slot==0 and S.mainID or S.otherID\n   local death=id and S.ends[id]\n   local ending=death or finish\n   if ending>start then\n    A.addAutoSimPhase(\"TargetLifetime\",start,ending,1,slot)\n    local cursor=start\n    for _,g in ipairs(S.union(gaps))do\n     local a,b=math.max(start,g[1]),math.min(ending-.5,g[2])\n     if b>a then if a>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,a,1,slot)end;cursor=math.max(cursor,b)end\n    end\n    if ending-.5>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,ending-.5,1,slot)end\n   end\n  end\n end\n A.clearAutoSimUncertainty()\n A.addAutoSimUncertainty(0,S.phase>=3 and 3 or 20)\n if S.planningStage~=2 and not S.seen.addsEnd then A.addAutoSimUncertainty(math.max(1,S.at(\"addsEnd\")-25),20)end\n if S.planningStage==2 then A.addAutoSimUncertainty(math.max(2,S.at(\"gold\")+S.cfg.goldLength-30),15)end\n S.lastPublish=now\nend\nfunction S.sync(k,t)\n if S.seen[k]then return end\n S.seen[k]=t;S.publish()\nend\nfor _,cid in ipairs({1482,2612,3210})do\n for _,e in pairs(TensorCore.getEntityGroupList(\"ContentID\",cid)or{})do\n  if e.alive then S.ids[cid]=e.id;S.up[cid]=e.targetable;break end\n end\nend\nS.publish()\nS.planRole=\"melee\";S.planJob=Player.job\ndata.ucobAutoSim=S\nself.used=true\n",
+							actionLua = "-- Shared UCOB encounters; role-specific forecast, using the real combat clock.\nlocal A=TensorCore.API.TensorACR\nlocal C=_G.UCOB_RPR_Config\nif not C then C={lbWho=1,lbAt=150,goldLength=162.14,addsLength=100.222,cleave=true,buffForecast=false,buffGain=17};_G.UCOB_RPR_Config=C end\n-- Burst weight update: preserve forecast enablement and other options.\nif not C.burstWeight20261029 then C.buffGain=17;C.burstWeight20261029=true end\n-- Per-phase base estimates; copied to this pull before publication.\nif C.twinLength==nil then C.twinLength=132 end\nif C.naelLength==nil then C.naelLength=129 end\nlocal S={version=2,planningStage=1,phase=1,seen={},ids={},up={},dynamic={},cfg={},dotStart={},ends={}}\nif C.phoenixPriority==nil then C.phoenixPriority=false end\nfor k,v in pairs(C)do S.cfg[k]=v end\nS.anchors={\n twinEnd={\"pull\",C.twinLength},nael={\"twinEnd\",21.968},naelEnd={\"nael\",C.naelLength},baha={\"naelEnd\",16.333},\n off1={\"baha\",23.449},on1={\"off1\",11.534},off2={\"on1\",29.533},on2={\"off2\",16.557},\n off3={\"on2\",34.636},on3={\"off3\",16.517},off4={\"on3\",35.834},on4={\"off4\",27.560},\n off5={\"on4\",33.712},on5={\"off5\",19.376},off6={\"on5\",37.626},adds={\"off6\",53.754},\n addsEnd={\"adds\",S.cfg.addsLength},gold={\"addsEnd\",62.323}}\n-- Slower-group estimates are copied at pull setup; actual event anchors still win.\nlocal G=_G.UCOB_AutoSimTiming or {}\nlocal old=data.ucobAutoSim\nlocal T=old and old.groupTiming\nif not T then\n T={enabled=G.enabled==true}\n for _,key in ipairs({\"twinExtra\",\"naelExtra\",\"addsExtra\",\"goldExtra\"}) do T[key]=math.max(0,math.min(90,tonumber(G[key]) or 0)) end\nend\nS.groupTiming=T\nif T.enabled then\n S.anchors.twinEnd[2]=S.anchors.twinEnd[2]+T.twinExtra\n S.anchors.naelEnd[2]=S.anchors.naelEnd[2]+T.naelExtra\n S.anchors.addsEnd[2]=S.anchors.addsEnd[2]+T.addsExtra\n S.cfg.goldLength=S.cfg.goldLength+T.goldExtra\nend\nfunction S.at(k)\n if k==\"pull\"then return 0 end\n if S.seen[k]then return S.seen[k]end\n local a=S.anchors[k];return S.at(a[1])+a[2]\nend\nfunction S.union(xs)\n table.sort(xs,function(a,b)return a[1]<b[1]end)\n local out={}\n for _,v in ipairs(xs)do\n  local last=out[#out]\n  if last and v[1]<=last[2]then last[2]=math.max(last[2],v[2])else out[#out+1]={v[1],v[2]}end\n end\n return out\nend\nfunction S.alive(e)return e and e.alive and e.targetable and e.hp.current>1 end\nfunction S.ent(cid)return S.ids[cid]and TensorCore.mGetEntity(S.ids[cid])end\nfunction S.roleMelee()\n local R=AnyoneCore.Roster\n return R and R.current()and(R.mySlot()==\"M1\"or R.mySlot()==\"M2\")\nend\n\nfunction S.beginGolden(now)\n if S.planningStage==2 then return end\n S.planningStage=2;S.planStart=now\n S.dynamic={};S.ends={};S.dotStart={}\n S.personalMoves={};S.quote=nil\n S.mainID=nil;S.otherID=nil\n S.lbObserved=nil;S.lbStarted=nil;S.lbCompleted=nil;S.lbCancelled=nil\n A.clearAutoSimTarget(0);A.clearAutoSimTarget(1)\nend\n\nfunction S.publish()\n local now=A.getAutoSimTime()\n -- Let the first plan finish at adds death. No ordinary player death changes plans.\n if S.planningStage~=2 and S.seen.addsEnd and now>S.seen.addsEnd+.5 then return end\n local live=_G.UCOB_RPR_Config\n if live then S.cfg.lbWho=live.lbWho;S.cfg.lbAt=live.lbAt end\n S.cfg.phoenixPriority=live and live.phoenixPriority==true or false\n local horizon=S.planningStage==2 and S.at(\"gold\")+S.cfg.goldLength or S.at(\"addsEnd\")\n local kill=math.max(now+.5,horizon)\n S.killAt=kill;A.setAutoSimKillTime(kill)\n local gaps={{S.at(\"twinEnd\"),S.at(\"nael\")},{S.at(\"naelEnd\"),S.at(\"baha\")},{S.at(\"off6\"),S.at(\"adds\")},{S.at(\"addsEnd\"),S.at(\"gold\")}}\n for i=1,5 do\n  local a,b=S.at(\"off\"..i),S.at(\"on\"..i)\n  if S.seen.adds then b=math.min(b,S.seen.adds)end\n  if b>a then gaps[#gaps+1]={a,b}end\n end\n if S.planningStage==2 then gaps={{S.planStart,S.at(\"gold\")}}end\n local valid={};for _,g in ipairs(gaps)do if g[2]>g[1]then valid[#valid+1]=g end end;gaps=valid\n if S.planningStage~=2 and S.naelGap then gaps[#gaps+1]={S.naelGap[1],S.naelGap[2]or now+6}end\n A.clearAutoSimPhases(\"FullDowntime\")\n for _,g in ipairs(S.union(gaps))do if g[2]>g[1]then A.addAutoSimPhase(\"FullDowntime\",g[1],g[2])end end\n local stun={}\n if S.cfg.lbWho==1 and S.roleMelee()and not S.lbObserved then\n  local t=S.at(\"gold\")+S.cfg.lbAt;stun[#stun+1]={t,t+8.2}\n end\n for _,g in pairs(S.dynamic)do if g[1]==\"Stun\"then stun[#stun+1]={g[2],g[3]}end end\n A.clearAutoSimPhases(\"Stun\")\n for _,g in ipairs(S.union(stun))do if g[2]>g[1]then A.addAutoSimPhase(\"Stun\",g[1],g[2])end end\n A.clearAutoSimPhases(\"MeleeDowntime\")\n for _,g in pairs(S.dynamic)do if g[1]==\"MeleeDowntime\"and g[3]>g[2]then A.addAutoSimPhase(\"MeleeDowntime\",g[2],g[3])end end\n -- Optional relative Phoenix planning preference. Default is 1x throughout.\n -- Actual active status handling remains with the ACR.\n A.clearAutoSimPhases(\"BossModifier\")\n if S.cfg.phoenixPriority then\n local gold=S.at(\"gold\")\n if gold>0 then A.addAutoSimPhase(\"BossModifier\",0,gold,.5)end\n if S.phase==5 and S.phoenixSeen and not S.phoenixActive then\n  A.addAutoSimPhase(\"BossModifier\",gold,kill,.5)\n end\n end\n A.clearAutoSimPhases(\"RaidBuff\")\n if S.cfg.buffForecast then\n  local prev=-120\n  local buffTimes=S.planningStage==2 and {S.at(\"gold\")+2,S.at(\"gold\")+122}or {5,S.at(\"nael\")+2,S.at(\"baha\")+2,S.at(\"on3\")+2,S.at(\"adds\")+2}\n  for burstIndex,t in ipairs(buffTimes)do\n   t=math.max(t,prev+120)\n   -- P4 adds opening: extra pooling preference; cleave remains independently modeled.\n   local weight=S.planningStage~=2 and burstIndex==5 and 1.4 or (1+S.cfg.buffGain/100)\n   A.addAutoSimPhase(\"RaidBuff\",t,t+20,weight);prev=t\n  end\n end\n -- Slot 0 tracks the selected main boss; slot 1 tracks the other adds boss.\n -- Lifetimes survive temporary untargetability. Golden starts a fresh target-state lifetime.\n local start,finish=0,S.at(\"twinEnd\")\n if S.planningStage==2 then start,finish=S.at(\"gold\"),kill\n elseif S.phase==2 then start,finish=S.at(\"nael\"),S.at(\"naelEnd\")\n elseif S.phase==3 then start,finish=S.at(\"baha\"),S.at(\"adds\")\n elseif S.phase==4 then start,finish=S.at(\"adds\"),S.at(\"addsEnd\")\n elseif S.phase==5 then start,finish=S.at(\"gold\"),kill end\n finish=math.max(finish,now+5)\n for slot=0,1 do\n  A.clearAutoSimPhases(\"DotAvailability\",slot);A.clearAutoSimPhases(\"TargetLifetime\",slot)\n  if slot==0 or(S.phase==4 and S.planningStage~=2)then\n   local id=slot==0 and S.mainID or S.otherID\n   local death=id and S.ends[id]\n   local ending=death or finish\n   if ending>start then\n    A.addAutoSimPhase(\"TargetLifetime\",start,ending,1,slot)\n    local cursor=start\n    for _,g in ipairs(S.union(gaps))do\n     local a,b=math.max(start,g[1]),math.min(ending-.5,g[2])\n     if b>a then if a>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,a,1,slot)end;cursor=math.max(cursor,b)end\n    end\n    if ending-.5>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,ending-.5,1,slot)end\n   end\n  end\n end\n A.clearAutoSimUncertainty()\n A.addAutoSimUncertainty(0,S.phase>=3 and 3 or 20)\n if S.planningStage~=2 and not S.seen.addsEnd then A.addAutoSimUncertainty(math.max(1,S.at(\"addsEnd\")-25),20)end\n if S.planningStage==2 then A.addAutoSimUncertainty(math.max(2,S.at(\"gold\")+S.cfg.goldLength-30),15)end\n S.lastPublish=now\nend\nfunction S.sync(k,t)\n if S.seen[k]then return end\n S.seen[k]=t;S.publish()\nend\nfor _,cid in ipairs({1482,2612,3210})do\n for _,e in pairs(TensorCore.getEntityGroupList(\"ContentID\",cid)or{})do\n  if e.alive then S.ids[cid]=e.id;S.up[cid]=e.targetable;break end\n end\nend\nS.publish()\nS.planRole=\"melee\";S.planJob=Player.job\ndata.ucobAutoSim=S\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -599,7 +599,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "-- Shared UCOB encounters; role-specific forecast, using the real combat clock.\nlocal A=TensorCore.API.TensorACR\nlocal C=_G.UCOB_BRD_Config\nif not C then C={goldLength=162.14,addsLength=100.222,buffForecast=false,buffGain=0};_G.UCOB_BRD_Config=C end\nlocal S={version=2,planningStage=1,phase=1,seen={},ids={},up={},dynamic={},cfg={},dotStart={},ends={}}\nif C.phoenixPriority==nil then C.phoenixPriority=false end\nif C.reserveGrand==nil then C.reserveGrand=true end\nif C.alignParty==nil then C.alignParty=false end\nif C.burstWait==nil then C.burstWait=30 end\nif C.burstMode==nil then C.burstMode=1 end\nif C.burstTimes==nil then C.burstTimes=\"\"end\nfor k,v in pairs(C)do S.cfg[k]=v end\nS.anchors={\n twinEnd={\"pull\",128.352},nael={\"twinEnd\",21.968},naelEnd={\"nael\",115.307},baha={\"naelEnd\",16.333},\n off1={\"baha\",23.449},on1={\"off1\",11.534},off2={\"on1\",29.533},on2={\"off2\",16.557},\n off3={\"on2\",34.636},on3={\"off3\",16.517},off4={\"on3\",35.834},on4={\"off4\",27.560},\n off5={\"on4\",33.712},on5={\"off5\",19.376},off6={\"on5\",37.626},adds={\"off6\",53.754},\n addsEnd={\"adds\",S.cfg.addsLength},gold={\"addsEnd\",62.323}}\n-- Slower-group estimates are copied at pull setup; actual event anchors still win.\nlocal G=_G.UCOB_AutoSimTiming or {}\nlocal old=data.ucobAutoSim\nlocal T=old and old.groupTiming\nif not T then\n T={enabled=G.enabled==true}\n for _,key in ipairs({\"twinExtra\",\"naelExtra\",\"addsExtra\",\"goldExtra\"}) do T[key]=math.max(0,math.min(90,tonumber(G[key]) or 0)) end\nend\nS.groupTiming=T\nif T.enabled then\n S.anchors.twinEnd[2]=S.anchors.twinEnd[2]+T.twinExtra\n S.anchors.naelEnd[2]=S.anchors.naelEnd[2]+T.naelExtra\n S.anchors.addsEnd[2]=S.anchors.addsEnd[2]+T.addsExtra\n S.cfg.goldLength=S.cfg.goldLength+T.goldExtra\nend\nfunction S.at(k)\n if k==\"pull\"then return 0 end\n if S.seen[k]then return S.seen[k]end\n local a=S.anchors[k];return S.at(a[1])+a[2]\nend\nfunction S.union(xs)\n table.sort(xs,function(a,b)return a[1]<b[1]end)\n local out={}\n for _,v in ipairs(xs)do\n  local last=out[#out]\n  if last and v[1]<=last[2]then last[2]=math.max(last[2],v[2])else out[#out+1]={v[1],v[2]}end\n end\n return out\nend\nfunction S.alive(e)return e and e.alive and e.targetable and e.hp.current>1 end\nfunction S.ent(cid)return S.ids[cid]and TensorCore.mGetEntity(S.ids[cid])end\n\nfunction S.beginGolden(now)\n if S.planningStage==2 then return end\n S.planningStage=2;S.planStart=now\n S.dynamic={};S.ends={};S.dotStart={}\n S.personalMoves={};S.quote=nil\n S.mainID=nil;S.otherID=nil\n S.lbObserved=nil;S.lbStarted=nil;S.lbCompleted=nil;S.lbCancelled=nil\n A.clearAutoSimTarget(0);A.clearAutoSimTarget(1)\nend\n\n\nS.burstActions={118,101,107,3559}\nfunction S.partySchedule()\n local ts={}\n if S.cfg.burstMode==2 then\n  for token in S.cfg.burstTimes:gmatch(\"[^,;]+\")do\n   local n=tonumber(token)\n   if not n or n<0 then return {},\"Use comma-separated seconds since pull.\"end\n   ts[#ts+1]=n\n  end\n  if #ts==0 then return {},\"Enter planned party burst times.\"end\n  table.sort(ts)\n  for i=2,#ts do if ts[i]-ts[i-1]<120 then return {},\"BRD burst windows must be at least 120 seconds apart.\"end end\n else\n  ts=S.planningStage==2 and{S.at(\"gold\")+2,S.at(\"gold\")+122}or{5,S.at(\"nael\")+2,S.at(\"baha\")+2,S.at(\"on3\")+2,S.at(\"adds\")+2}\n  local prev=-120\n  for i,t in ipairs(ts)do ts[i]=math.max(t,prev+120);prev=ts[i]end\n end\n local out={}\n for _,t in ipairs(ts)do\n  if(S.planningStage~=2 or t>=S.planStart)and(S.planningStage==2 or t<=S.at(\"addsEnd\"))then out[#out+1]=t end\n end\n return out,nil\nend\nfunction S.updateBurstHolds(now)\n if Player.job~=23 then return end\n local reserve=S.cfg.reserveGrand and S.phase==3 and S.octetSeen\n local remaining=nil\n if S.cfg.alignParty and S.cfg.burstWait>0 then\n  for _,t in ipairs(S.partyWindows or{})do\n   local left=t-now\n   if left>0 and left<=S.cfg.burstWait then remaining=left;break end\n  end\n end\n if not reserve and not remaining then return end\n local clock=Now()\n if S.nextHoldRefresh and clock<S.nextHoldRefresh then return end\n -- Short, action-specific leases expire automatically when this controller stops.\n local deadline=clock+750\n if remaining and not reserve then deadline=math.min(deadline,clock+remaining*1000)end\n for _,id in ipairs(S.burstActions)do A.holdActionUntil(id,deadline)end\n S.nextHoldRefresh=clock+250\nend\n\nfunction S.publish()\n local now=A.getAutoSimTime()\n -- Let the first plan finish at adds death. No ordinary player death changes plans.\n if S.planningStage~=2 and S.seen.addsEnd and now>S.seen.addsEnd+.5 then return end\n local live=_G.UCOB_BRD_Config\n \n S.cfg.phoenixPriority=live and live.phoenixPriority==true or false\n if live then S.cfg.reserveGrand=live.reserveGrand~=false;S.cfg.alignParty=live.alignParty==true;S.cfg.burstWait=live.burstWait;S.cfg.burstMode=live.burstMode;S.cfg.burstTimes=live.burstTimes end\n local horizon=S.planningStage==2 and S.at(\"gold\")+S.cfg.goldLength or S.at(\"addsEnd\")\n local kill=math.max(now+.5,horizon)\n S.killAt=kill;A.setAutoSimKillTime(kill)\n local gaps={{S.at(\"twinEnd\"),S.at(\"nael\")},{S.at(\"naelEnd\"),S.at(\"baha\")},{S.at(\"off6\"),S.at(\"adds\")},{S.at(\"addsEnd\"),S.at(\"gold\")}}\n for i=1,5 do\n  local a,b=S.at(\"off\"..i),S.at(\"on\"..i)\n  if S.seen.adds then b=math.min(b,S.seen.adds)end\n  if b>a then gaps[#gaps+1]={a,b}end\n end\n if S.planningStage==2 then gaps={{S.planStart,S.at(\"gold\")}}end\n local valid={};for _,g in ipairs(gaps)do if g[2]>g[1]then valid[#valid+1]=g end end;gaps=valid\n if S.planningStage~=2 and S.naelGap then gaps[#gaps+1]={S.naelGap[1],S.naelGap[2]or now+6}end\n A.clearAutoSimPhases(\"FullDowntime\")\n for _,g in ipairs(S.union(gaps))do if g[2]>g[1]then A.addAutoSimPhase(\"FullDowntime\",g[1],g[2])end end\n local stun={}\n for _,g in pairs(S.dynamic)do if g[1]==\"Stun\"then stun[#stun+1]={g[2],g[3]}end end\n A.clearAutoSimPhases(\"Stun\")\n for _,g in ipairs(S.union(stun))do if g[2]>g[1]then A.addAutoSimPhase(\"Stun\",g[1],g[2])end end\n -- Optional relative Phoenix planning preference. Default is 1x throughout.\n -- Actual active status handling remains with the ACR.\n A.clearAutoSimPhases(\"BossModifier\")\n if S.cfg.phoenixPriority then\n local gold=S.at(\"gold\")\n if gold>0 then A.addAutoSimPhase(\"BossModifier\",0,gold,.5)end\n if S.phase==5 and S.phoenixSeen and not S.phoenixActive then\n  A.addAutoSimPhase(\"BossModifier\",gold,kill,.5)\n end\n end\n S.partyWindows,S.partyError=S.partySchedule()\n A.clearAutoSimPhases(\"RaidBuff\")\n if S.cfg.buffForecast then\n  for _,t in ipairs(S.partyWindows)do\n   -- Applies only to an existing burst at the P4 opening, including custom schedules.\n   local addsOpening=S.planningStage~=2 and t>=S.at(\"adds\") and t<S.at(\"adds\")+20\n   A.addAutoSimPhase(\"RaidBuff\",t,t+20,addsOpening and 1.4 or (1+S.cfg.buffGain/100))\n  end\n end\n -- Slot 0 tracks the selected main boss; slot 1 tracks the other adds boss.\n -- Lifetimes survive temporary untargetability. Golden starts a fresh target-state lifetime.\n local start,finish=0,S.at(\"twinEnd\")\n if S.planningStage==2 then start,finish=S.at(\"gold\"),kill\n elseif S.phase==2 then start,finish=S.at(\"nael\"),S.at(\"naelEnd\")\n elseif S.phase==3 then start,finish=S.at(\"baha\"),S.at(\"adds\")\n elseif S.phase==4 then start,finish=S.at(\"adds\"),S.at(\"addsEnd\")\n elseif S.phase==5 then start,finish=S.at(\"gold\"),kill end\n finish=math.max(finish,now+5)\n for slot=0,1 do\n  A.clearAutoSimPhases(\"DotAvailability\",slot);A.clearAutoSimPhases(\"TargetLifetime\",slot)\n  if slot==0 or(S.phase==4 and S.planningStage~=2)then\n   local id=slot==0 and S.mainID or S.otherID\n   local death=id and S.ends[id]\n   local ending=death or finish\n   if ending>start then\n    A.addAutoSimPhase(\"TargetLifetime\",start,ending,1,slot)\n    local cursor=start\n    for _,g in ipairs(S.union(gaps))do\n     local a,b=math.max(start,g[1]),math.min(ending-.5,g[2])\n     if b>a then if a>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,a,1,slot)end;cursor=math.max(cursor,b)end\n    end\n    if ending-.5>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,ending-.5,1,slot)end\n   end\n  end\n end\n A.clearAutoSimUncertainty()\n A.addAutoSimUncertainty(0,S.phase>=3 and 3 or 20)\n if S.planningStage~=2 and not S.seen.addsEnd then A.addAutoSimUncertainty(math.max(1,S.at(\"addsEnd\")-25),20)end\n if S.planningStage==2 then A.addAutoSimUncertainty(math.max(2,S.at(\"gold\")+S.cfg.goldLength-30),15)end\n S.lastPublish=now\nend\nfunction S.sync(k,t)\n if S.seen[k]then return end\n S.seen[k]=t;S.publish()\nend\nfor _,cid in ipairs({1482,2612,3210})do\n for _,e in pairs(TensorCore.getEntityGroupList(\"ContentID\",cid)or{})do\n  if e.alive then S.ids[cid]=e.id;S.up[cid]=e.targetable;break end\n end\nend\nS.publish()\nS.planRole=\"ranged\";S.planJob=Player.job\ndata.ucobAutoSim=S\nself.used=true\n",
+							actionLua = "-- Shared UCOB encounters; role-specific forecast, using the real combat clock.\nlocal A=TensorCore.API.TensorACR\nlocal C=_G.UCOB_BRD_Config\nif not C then C={goldLength=162.14,addsLength=100.222,buffForecast=false,buffGain=0};_G.UCOB_BRD_Config=C end\n-- Per-phase base estimates; copied to this pull before publication.\nif C.twinLength==nil then C.twinLength=132 end\nif C.naelLength==nil then C.naelLength=129 end\nlocal S={version=2,planningStage=1,phase=1,seen={},ids={},up={},dynamic={},cfg={},dotStart={},ends={}}\nif C.phoenixPriority==nil then C.phoenixPriority=false end\nif C.reserveGrand==nil then C.reserveGrand=true end\nif C.alignParty==nil then C.alignParty=false end\nif C.burstWait==nil then C.burstWait=30 end\nif C.burstMode==nil then C.burstMode=1 end\nif C.burstTimes==nil then C.burstTimes=\"\"end\nfor k,v in pairs(C)do S.cfg[k]=v end\nS.anchors={\n twinEnd={\"pull\",C.twinLength},nael={\"twinEnd\",21.968},naelEnd={\"nael\",C.naelLength},baha={\"naelEnd\",16.333},\n off1={\"baha\",23.449},on1={\"off1\",11.534},off2={\"on1\",29.533},on2={\"off2\",16.557},\n off3={\"on2\",34.636},on3={\"off3\",16.517},off4={\"on3\",35.834},on4={\"off4\",27.560},\n off5={\"on4\",33.712},on5={\"off5\",19.376},off6={\"on5\",37.626},adds={\"off6\",53.754},\n addsEnd={\"adds\",S.cfg.addsLength},gold={\"addsEnd\",62.323}}\n-- Slower-group estimates are copied at pull setup; actual event anchors still win.\nlocal G=_G.UCOB_AutoSimTiming or {}\nlocal old=data.ucobAutoSim\nlocal T=old and old.groupTiming\nif not T then\n T={enabled=G.enabled==true}\n for _,key in ipairs({\"twinExtra\",\"naelExtra\",\"addsExtra\",\"goldExtra\"}) do T[key]=math.max(0,math.min(90,tonumber(G[key]) or 0)) end\nend\nS.groupTiming=T\nif T.enabled then\n S.anchors.twinEnd[2]=S.anchors.twinEnd[2]+T.twinExtra\n S.anchors.naelEnd[2]=S.anchors.naelEnd[2]+T.naelExtra\n S.anchors.addsEnd[2]=S.anchors.addsEnd[2]+T.addsExtra\n S.cfg.goldLength=S.cfg.goldLength+T.goldExtra\nend\nfunction S.at(k)\n if k==\"pull\"then return 0 end\n if S.seen[k]then return S.seen[k]end\n local a=S.anchors[k];return S.at(a[1])+a[2]\nend\nfunction S.union(xs)\n table.sort(xs,function(a,b)return a[1]<b[1]end)\n local out={}\n for _,v in ipairs(xs)do\n  local last=out[#out]\n  if last and v[1]<=last[2]then last[2]=math.max(last[2],v[2])else out[#out+1]={v[1],v[2]}end\n end\n return out\nend\nfunction S.alive(e)return e and e.alive and e.targetable and e.hp.current>1 end\nfunction S.ent(cid)return S.ids[cid]and TensorCore.mGetEntity(S.ids[cid])end\n\nfunction S.beginGolden(now)\n if S.planningStage==2 then return end\n S.planningStage=2;S.planStart=now\n S.dynamic={};S.ends={};S.dotStart={}\n S.personalMoves={};S.quote=nil\n S.mainID=nil;S.otherID=nil\n S.lbObserved=nil;S.lbStarted=nil;S.lbCompleted=nil;S.lbCancelled=nil\n A.clearAutoSimTarget(0);A.clearAutoSimTarget(1)\nend\n\n\nS.burstActions={118,101,107,3559}\nfunction S.partySchedule()\n local ts={}\n if S.cfg.burstMode==2 then\n  for token in S.cfg.burstTimes:gmatch(\"[^,;]+\")do\n   local n=tonumber(token)\n   if not n or n<0 then return {},\"Use comma-separated seconds since pull.\"end\n   ts[#ts+1]=n\n  end\n  if #ts==0 then return {},\"Enter planned party burst times.\"end\n  table.sort(ts)\n  for i=2,#ts do if ts[i]-ts[i-1]<120 then return {},\"BRD burst windows must be at least 120 seconds apart.\"end end\n else\n  ts=S.planningStage==2 and{S.at(\"gold\")+2,S.at(\"gold\")+122}or{5,S.at(\"nael\")+2,S.at(\"baha\")+2,S.at(\"on3\")+2,S.at(\"adds\")+2}\n  local prev=-120\n  for i,t in ipairs(ts)do ts[i]=math.max(t,prev+120);prev=ts[i]end\n end\n local out={}\n for _,t in ipairs(ts)do\n  if(S.planningStage~=2 or t>=S.planStart)and(S.planningStage==2 or t<=S.at(\"addsEnd\"))then out[#out+1]=t end\n end\n return out,nil\nend\nfunction S.updateBurstHolds(now)\n if Player.job~=23 then return end\n local reserve=S.cfg.reserveGrand and S.phase==3 and S.octetSeen\n local remaining=nil\n if S.cfg.alignParty and S.cfg.burstWait>0 then\n  for _,t in ipairs(S.partyWindows or{})do\n   local left=t-now\n   if left>0 and left<=S.cfg.burstWait then remaining=left;break end\n  end\n end\n if not reserve and not remaining then return end\n local clock=Now()\n if S.nextHoldRefresh and clock<S.nextHoldRefresh then return end\n -- Short, action-specific leases expire automatically when this controller stops.\n local deadline=clock+750\n if remaining and not reserve then deadline=math.min(deadline,clock+remaining*1000)end\n for _,id in ipairs(S.burstActions)do A.holdActionUntil(id,deadline)end\n S.nextHoldRefresh=clock+250\nend\n\nfunction S.publish()\n local now=A.getAutoSimTime()\n -- Let the first plan finish at adds death. No ordinary player death changes plans.\n if S.planningStage~=2 and S.seen.addsEnd and now>S.seen.addsEnd+.5 then return end\n local live=_G.UCOB_BRD_Config\n \n S.cfg.phoenixPriority=live and live.phoenixPriority==true or false\n if live then S.cfg.reserveGrand=live.reserveGrand~=false;S.cfg.alignParty=live.alignParty==true;S.cfg.burstWait=live.burstWait;S.cfg.burstMode=live.burstMode;S.cfg.burstTimes=live.burstTimes end\n local horizon=S.planningStage==2 and S.at(\"gold\")+S.cfg.goldLength or S.at(\"addsEnd\")\n local kill=math.max(now+.5,horizon)\n S.killAt=kill;A.setAutoSimKillTime(kill)\n local gaps={{S.at(\"twinEnd\"),S.at(\"nael\")},{S.at(\"naelEnd\"),S.at(\"baha\")},{S.at(\"off6\"),S.at(\"adds\")},{S.at(\"addsEnd\"),S.at(\"gold\")}}\n for i=1,5 do\n  local a,b=S.at(\"off\"..i),S.at(\"on\"..i)\n  if S.seen.adds then b=math.min(b,S.seen.adds)end\n  if b>a then gaps[#gaps+1]={a,b}end\n end\n if S.planningStage==2 then gaps={{S.planStart,S.at(\"gold\")}}end\n local valid={};for _,g in ipairs(gaps)do if g[2]>g[1]then valid[#valid+1]=g end end;gaps=valid\n if S.planningStage~=2 and S.naelGap then gaps[#gaps+1]={S.naelGap[1],S.naelGap[2]or now+6}end\n A.clearAutoSimPhases(\"FullDowntime\")\n for _,g in ipairs(S.union(gaps))do if g[2]>g[1]then A.addAutoSimPhase(\"FullDowntime\",g[1],g[2])end end\n local stun={}\n for _,g in pairs(S.dynamic)do if g[1]==\"Stun\"then stun[#stun+1]={g[2],g[3]}end end\n A.clearAutoSimPhases(\"Stun\")\n for _,g in ipairs(S.union(stun))do if g[2]>g[1]then A.addAutoSimPhase(\"Stun\",g[1],g[2])end end\n -- Optional relative Phoenix planning preference. Default is 1x throughout.\n -- Actual active status handling remains with the ACR.\n A.clearAutoSimPhases(\"BossModifier\")\n if S.cfg.phoenixPriority then\n local gold=S.at(\"gold\")\n if gold>0 then A.addAutoSimPhase(\"BossModifier\",0,gold,.5)end\n if S.phase==5 and S.phoenixSeen and not S.phoenixActive then\n  A.addAutoSimPhase(\"BossModifier\",gold,kill,.5)\n end\n end\n S.partyWindows,S.partyError=S.partySchedule()\n A.clearAutoSimPhases(\"RaidBuff\")\n if S.cfg.buffForecast then\n  for _,t in ipairs(S.partyWindows)do\n   -- Applies only to an existing burst at the P4 opening, including custom schedules.\n   local addsOpening=S.planningStage~=2 and t>=S.at(\"adds\") and t<S.at(\"adds\")+20\n   A.addAutoSimPhase(\"RaidBuff\",t,t+20,addsOpening and 1.4 or (1+S.cfg.buffGain/100))\n  end\n end\n -- Slot 0 tracks the selected main boss; slot 1 tracks the other adds boss.\n -- Lifetimes survive temporary untargetability. Golden starts a fresh target-state lifetime.\n local start,finish=0,S.at(\"twinEnd\")\n if S.planningStage==2 then start,finish=S.at(\"gold\"),kill\n elseif S.phase==2 then start,finish=S.at(\"nael\"),S.at(\"naelEnd\")\n elseif S.phase==3 then start,finish=S.at(\"baha\"),S.at(\"adds\")\n elseif S.phase==4 then start,finish=S.at(\"adds\"),S.at(\"addsEnd\")\n elseif S.phase==5 then start,finish=S.at(\"gold\"),kill end\n finish=math.max(finish,now+5)\n for slot=0,1 do\n  A.clearAutoSimPhases(\"DotAvailability\",slot);A.clearAutoSimPhases(\"TargetLifetime\",slot)\n  if slot==0 or(S.phase==4 and S.planningStage~=2)then\n   local id=slot==0 and S.mainID or S.otherID\n   local death=id and S.ends[id]\n   local ending=death or finish\n   if ending>start then\n    A.addAutoSimPhase(\"TargetLifetime\",start,ending,1,slot)\n    local cursor=start\n    for _,g in ipairs(S.union(gaps))do\n     local a,b=math.max(start,g[1]),math.min(ending-.5,g[2])\n     if b>a then if a>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,a,1,slot)end;cursor=math.max(cursor,b)end\n    end\n    if ending-.5>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,ending-.5,1,slot)end\n   end\n  end\n end\n A.clearAutoSimUncertainty()\n A.addAutoSimUncertainty(0,S.phase>=3 and 3 or 20)\n if S.planningStage~=2 and not S.seen.addsEnd then A.addAutoSimUncertainty(math.max(1,S.at(\"addsEnd\")-25),20)end\n if S.planningStage==2 then A.addAutoSimUncertainty(math.max(2,S.at(\"gold\")+S.cfg.goldLength-30),15)end\n S.lastPublish=now\nend\nfunction S.sync(k,t)\n if S.seen[k]then return end\n S.seen[k]=t;S.publish()\nend\nfor _,cid in ipairs({1482,2612,3210})do\n for _,e in pairs(TensorCore.getEntityGroupList(\"ContentID\",cid)or{})do\n  if e.alive then S.ids[cid]=e.id;S.up[cid]=e.targetable;break end\n end\nend\nS.publish()\nS.planRole=\"ranged\";S.planJob=Player.job\ndata.ucobAutoSim=S\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -755,7 +755,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "-- Shared UCOB encounters; role-specific forecast, using the real combat clock.\nlocal A=TensorCore.API.TensorACR\nlocal C=_G.UCOB_BLM_Config\nif not C then C={goldLength=162.14,addsLength=100.222,buffForecast=false,buffGain=17,twisterLead=1.0,twisterAfter=1.0,exaDuration=8,assignmentMove=2,returnMove=1.5};_G.UCOB_BLM_Config=C end\nif C.quoteMove==nil then C.quoteMove=2 end\n-- Burst weight update: preserve forecast enablement and other options.\nif not C.burstWeight20261029 then C.buffGain=17;C.burstWeight20261029=true end\nlocal S={version=2,planningStage=1,phase=1,seen={},ids={},up={},dynamic={},cfg={},dotStart={},ends={}}\nif C.phoenixPriority==nil then C.phoenixPriority=false end\nfor k,v in pairs(C)do S.cfg[k]=v end\nS.anchors={\n twinEnd={\"pull\",128.352},nael={\"twinEnd\",21.968},naelEnd={\"nael\",115.307},baha={\"naelEnd\",16.333},\n off1={\"baha\",23.449},on1={\"off1\",11.534},off2={\"on1\",29.533},on2={\"off2\",16.557},\n off3={\"on2\",34.636},on3={\"off3\",16.517},off4={\"on3\",35.834},on4={\"off4\",27.560},\n off5={\"on4\",33.712},on5={\"off5\",19.376},off6={\"on5\",37.626},adds={\"off6\",53.754},\n addsEnd={\"adds\",S.cfg.addsLength},gold={\"addsEnd\",62.323}}\n-- Slower-group estimates are copied at pull setup; actual event anchors still win.\nlocal G=_G.UCOB_AutoSimTiming or {}\nlocal old=data.ucobAutoSim\nlocal T=old and old.groupTiming\nif not T then\n T={enabled=G.enabled==true}\n for _,key in ipairs({\"twinExtra\",\"naelExtra\",\"addsExtra\",\"goldExtra\"}) do T[key]=math.max(0,math.min(90,tonumber(G[key]) or 0)) end\nend\nS.groupTiming=T\nif T.enabled then\n S.anchors.twinEnd[2]=S.anchors.twinEnd[2]+T.twinExtra\n S.anchors.naelEnd[2]=S.anchors.naelEnd[2]+T.naelExtra\n S.anchors.addsEnd[2]=S.anchors.addsEnd[2]+T.addsExtra\n S.cfg.goldLength=S.cfg.goldLength+T.goldExtra\nend\nfunction S.at(k)\n if k==\"pull\"then return 0 end\n if S.seen[k]then return S.seen[k]end\n local a=S.anchors[k];return S.at(a[1])+a[2]\nend\nfunction S.union(xs)\n table.sort(xs,function(a,b)return a[1]<b[1]end)\n local out={}\n for _,v in ipairs(xs)do\n  local last=out[#out]\n  if last and v[1]<=last[2]then last[2]=math.max(last[2],v[2])else out[#out+1]={v[1],v[2]}end\n end\n return out\nend\nfunction S.alive(e)return e and e.alive and e.targetable and e.hp.current>1 end\nfunction S.ent(cid)return S.ids[cid]and TensorCore.mGetEntity(S.ids[cid])end\n\nS.movePred={{\"firstTwister\",\"pull\",12.99,\"twister\"},{\"addsTwister1\",\"adds\",24.34,\"twister\"},{\"addsTwister2\",\"adds\",41.487,\"twister\"},{\"addsTwister3\",\"adds\",87.071,\"twister\"},{\"addsTwister4\",\"adds\",104.096,\"twister\"},{\"exa1\",\"gold\",24.549,\"exa\"},{\"exa2\",\"gold\",73.276,\"exa\"},{\"exa3\",\"gold\",123.05,\"exa\"},{\"exa4\",\"gold\",174.689,\"exa\"}}\nS.moveActual={};S.personalMoves={}\nfunction S.movementWindows()\n local out={}\n for _,p in ipairs(S.movePred)do\n  if S.planningStage~=2 or p[2]==\"gold\"then\n  local center=S.moveActual[p[1]]or S.at(p[2])+p[3]\n  local a,b\n  if p[4]==\"twister\"then a,b=center-S.cfg.twisterLead,center+S.cfg.twisterAfter\n  else a,b=center-.5,center+S.cfg.exaDuration end\n  if p[2]==\"adds\"then b=math.min(b,S.at(\"addsEnd\"))end\n  if p[2]~=\"pull\"or not S.seen.twinEnd or center<S.seen.twinEnd then\n   if b>a then out[#out+1]={a,b}end\n  end\n end\n end\n for _,v in pairs(S.personalMoves)do if v[2]>v[1]then out[#out+1]={v[1],v[2]}end end\n return S.union(out)\nend\nfunction S.correctMovement(kind,finish)\n local best,delta\n for _,p in ipairs(S.movePred)do\n  if p[4]==kind and not S.moveActual[p[1]]and ((p[2]==\"pull\"and S.phase==1)or(p[2]==\"adds\"and S.phase==4)or(p[2]==\"gold\"and S.phase==5))then\n   local d=math.abs(finish-S.at(p[2])-p[3]);if not delta or d<delta then best,delta=p[1],d end\n  end\n end\n if best and delta<8 then S.moveActual[best]=finish\n else S.personalMoves[kind..\"Extra\"]={finish-(kind==\"twister\"and S.cfg.twisterLead or .5),finish+(kind==\"twister\"and S.cfg.twisterAfter or S.cfg.exaDuration)}end\n S.publish()\nend\n\nfunction S.quoteSequence(text)\nlocal t=text:gsub(\"%s+\",\" \")\nlocal seq=nil\nif t:find(\"O hallowed moon, shine you the iron path\",1,true) then seq={9916,9915}\nelseif t:find(\"O hallowed moon, take fire and scorch my foes\",1,true) then seq={9916,9917}\nelseif t:find(\"Take fire, O hallowed moon\",1,true) then seq={9917,9916}\nelseif t:find(\"Blazing path, lead me to iron rule\",1,true) then seq={9917,9915}\nelseif t:find(\"From on high I descend, the hallowed moon to call\",1,true) then seq={9918,9916}\nelseif t:find(\"From on high I descend, the iron path to walk\",1,true) then seq={9918,9915}\nelseif t:find(\"From on high I descend, the iron path to call\",1,true) then seq={9918,9915}\nelseif t:find(\"From on high I descend, the moon and stars to bring\",1,true) then seq={9918,9916,9920}\nelseif t:find(\"From hallowed moon I descend, a rain of stars to bring\",1,true) then seq={9916,9918,9920}\nelseif t:find(\"From hallowed moon I descend, upon burning earth to tread\",1,true) then seq={9916,9918,9917}\nelseif t:find(\"From hallowed moon I bare iron, in my descent to wield\",1,true) then seq={9916,9915,9918}\nelseif t:find(\"Unbending iron, take fire and descend\",1,true) then seq={9915,9917,9918}\nelseif t:find(\"Unbending iron, descend with fiery edge\",1,true) then seq={9915,9918,9917}\nend\n return seq\nend\nfunction S.quoteCategory(id)\n if id==9916 or id==9917 then return \"in\"elseif id==9915 then return \"out\"else return \"spread\"end\nend\nfunction S.planQuote()\n local q=S.quote\n if not q then return end\n for i=1,3 do S.personalMoves[\"quote\"..i]=nil end\n local previous=q.previous\n local p=TensorCore.mGetPlayer();local n=S.ent(2612)\n for i=q.step,#q.seq do\n  local cat=S.quoteCategory(q.seq[i]);local hit=q.nextHit+(i-q.step)*3.1\n  local move=previous~=cat\n  if not previous and p and n then\n   local distance=TensorCore.getDistance2d(p.pos,n.pos)\n   if(cat==\"in\"and distance<=4)or(cat==\"out\"and distance>=10)then move=false end\n  end\n  if move then\n   local duration=S.cfg.quoteMove\n   local a=previous and hit-3.0 or hit-duration-.2\n   S.personalMoves[\"quote\"..i]={a,math.min(a+duration,hit-.1)}\n  end\n  previous=cat\n end\n S.publish()\nend\n\n\nfunction S.beginGolden(now)\n if S.planningStage==2 then return end\n S.planningStage=2;S.planStart=now\n S.dynamic={};S.ends={};S.dotStart={}\n S.personalMoves={};S.quote=nil\n S.mainID=nil;S.otherID=nil\n S.lbObserved=nil;S.lbStarted=nil;S.lbCompleted=nil;S.lbCancelled=nil\n A.clearAutoSimTarget(0);A.clearAutoSimTarget(1)\nend\n\nfunction S.publish()\n local now=A.getAutoSimTime()\n -- Let the first plan finish at adds death. No ordinary player death changes plans.\n if S.planningStage~=2 and S.seen.addsEnd and now>S.seen.addsEnd+.5 then return end\n local live=_G.UCOB_BLM_Config\n \n S.cfg.phoenixPriority=live and live.phoenixPriority==true or false\n local horizon=S.planningStage==2 and S.at(\"gold\")+S.cfg.goldLength or S.at(\"addsEnd\")\n local kill=math.max(now+.5,horizon)\n S.killAt=kill;A.setAutoSimKillTime(kill)\n local gaps={{S.at(\"twinEnd\"),S.at(\"nael\")},{S.at(\"naelEnd\"),S.at(\"baha\")},{S.at(\"off6\"),S.at(\"adds\")},{S.at(\"addsEnd\"),S.at(\"gold\")}}\n for i=1,5 do\n  local a,b=S.at(\"off\"..i),S.at(\"on\"..i)\n  if S.seen.adds then b=math.min(b,S.seen.adds)end\n  if b>a then gaps[#gaps+1]={a,b}end\n end\n if S.planningStage==2 then gaps={{S.planStart,S.at(\"gold\")}}end\n local valid={};for _,g in ipairs(gaps)do if g[2]>g[1]then valid[#valid+1]=g end end;gaps=valid\n if S.planningStage~=2 and S.naelGap then gaps[#gaps+1]={S.naelGap[1],S.naelGap[2]or now+6}end\n A.clearAutoSimPhases(\"FullDowntime\")\n for _,g in ipairs(S.union(gaps))do if g[2]>g[1]then A.addAutoSimPhase(\"FullDowntime\",g[1],g[2])end end\n local stun={}\n for _,g in pairs(S.dynamic)do if g[1]==\"Stun\"then stun[#stun+1]={g[2],g[3]}end end\n A.clearAutoSimPhases(\"Stun\")\n for _,g in ipairs(S.union(stun))do if g[2]>g[1]then A.addAutoSimPhase(\"Stun\",g[1],g[2])end end\n A.clearAutoSimPhases(\"CasterDowntime\")\n for _,g in ipairs(S.movementWindows())do A.addAutoSimPhase(\"CasterDowntime\",g[1],g[2])end\n -- Optional relative Phoenix planning preference. Default is 1x throughout.\n -- Actual active status handling remains with the ACR.\n A.clearAutoSimPhases(\"BossModifier\")\n if S.cfg.phoenixPriority then\n local gold=S.at(\"gold\")\n if gold>0 then A.addAutoSimPhase(\"BossModifier\",0,gold,.5)end\n if S.phase==5 and S.phoenixSeen and not S.phoenixActive then\n  A.addAutoSimPhase(\"BossModifier\",gold,kill,.5)\n end\n end\n A.clearAutoSimPhases(\"RaidBuff\")\n if S.cfg.buffForecast then\n  local prev=-120\n  local buffTimes=S.planningStage==2 and {S.at(\"gold\")+2,S.at(\"gold\")+122}or {5,S.at(\"nael\")+2,S.at(\"baha\")+2,S.at(\"on3\")+2,S.at(\"adds\")+2}\n  for burstIndex,t in ipairs(buffTimes)do\n   t=math.max(t,prev+120)\n   -- P4 adds opening: extra pooling preference; cleave remains independently modeled.\n   local weight=S.planningStage~=2 and burstIndex==5 and 1.4 or (1+S.cfg.buffGain/100)\n   A.addAutoSimPhase(\"RaidBuff\",t,t+20,weight);prev=t\n  end\n end\n -- Slot 0 tracks the selected main boss; slot 1 tracks the other adds boss.\n -- Lifetimes survive temporary untargetability. Golden starts a fresh target-state lifetime.\n local start,finish=0,S.at(\"twinEnd\")\n if S.planningStage==2 then start,finish=S.at(\"gold\"),kill\n elseif S.phase==2 then start,finish=S.at(\"nael\"),S.at(\"naelEnd\")\n elseif S.phase==3 then start,finish=S.at(\"baha\"),S.at(\"adds\")\n elseif S.phase==4 then start,finish=S.at(\"adds\"),S.at(\"addsEnd\")\n elseif S.phase==5 then start,finish=S.at(\"gold\"),kill end\n finish=math.max(finish,now+5)\n for slot=0,1 do\n  A.clearAutoSimPhases(\"DotAvailability\",slot);A.clearAutoSimPhases(\"DotAvailability\",slot,1);A.clearAutoSimPhases(\"TargetLifetime\",slot)\n  if slot==0 or(S.phase==4 and S.planningStage~=2)then\n   local id=slot==0 and S.mainID or S.otherID\n   local death=id and S.ends[id]\n   local ending=death or finish\n   if ending>start then\n    A.addAutoSimPhase(\"TargetLifetime\",start,ending,1,slot)\n    local cursor=start\n    for _,g in ipairs(S.union(gaps))do\n     local a,b=math.max(start,g[1]),math.min(ending-.5,g[2])\n     if b>a then if a>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,a,1,slot);if slot==0 and Player.job==25 then A.addAutoSimPhase(\"DotAvailability\",cursor,a,1,slot,1)end end;cursor=math.max(cursor,b)end\n    end\n    if ending-.5>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,ending-.5,1,slot);if slot==0 and Player.job==25 then A.addAutoSimPhase(\"DotAvailability\",cursor,ending-.5,1,slot,1)end end\n   end\n  end\n end\n A.clearAutoSimUncertainty()\n A.addAutoSimUncertainty(0,S.phase>=3 and 3 or 20)\n if S.planningStage~=2 and not S.seen.addsEnd then A.addAutoSimUncertainty(math.max(1,S.at(\"addsEnd\")-25),20)end\n if S.planningStage==2 then A.addAutoSimUncertainty(math.max(2,S.at(\"gold\")+S.cfg.goldLength-30),15)end\n S.lastPublish=now\nend\nfunction S.sync(k,t)\n if S.seen[k]then return end\n S.seen[k]=t;S.publish()\nend\nfor _,cid in ipairs({1482,2612,3210})do\n for _,e in pairs(TensorCore.getEntityGroupList(\"ContentID\",cid)or{})do\n  if e.alive then S.ids[cid]=e.id;S.up[cid]=e.targetable;break end\n end\nend\nS.publish()\nS.planRole=\"caster\";S.planJob=Player.job\ndata.ucobAutoSim=S\nself.used=true\n",
+							actionLua = "-- Shared UCOB encounters; role-specific forecast, using the real combat clock.\nlocal A=TensorCore.API.TensorACR\nlocal C=_G.UCOB_BLM_Config\nif not C then C={goldLength=162.14,addsLength=100.222,buffForecast=false,buffGain=17,twisterLead=1.0,twisterAfter=1.0,exaDuration=8,assignmentMove=2,returnMove=1.5};_G.UCOB_BLM_Config=C end\nif C.quoteMove==nil then C.quoteMove=2 end\n-- Burst weight update: preserve forecast enablement and other options.\nif not C.burstWeight20261029 then C.buffGain=17;C.burstWeight20261029=true end\n-- Per-phase base estimates; copied to this pull before publication.\nif C.twinLength==nil then C.twinLength=132 end\nif C.naelLength==nil then C.naelLength=129 end\nfor key,value in pairs({twisterLead=1,twisterAfter=1,exaDuration=8,assignmentMove=2,returnMove=1.5,quoteMove=2}) do\n if C[key]==nil then C[key]=value end\nend\nlocal S={version=2,planningStage=1,phase=1,seen={},ids={},up={},dynamic={},cfg={},dotStart={},ends={}}\nif C.phoenixPriority==nil then C.phoenixPriority=false end\nfor k,v in pairs(C)do S.cfg[k]=v end\nS.anchors={\n twinEnd={\"pull\",C.twinLength},nael={\"twinEnd\",21.968},naelEnd={\"nael\",C.naelLength},baha={\"naelEnd\",16.333},\n off1={\"baha\",23.449},on1={\"off1\",11.534},off2={\"on1\",29.533},on2={\"off2\",16.557},\n off3={\"on2\",34.636},on3={\"off3\",16.517},off4={\"on3\",35.834},on4={\"off4\",27.560},\n off5={\"on4\",33.712},on5={\"off5\",19.376},off6={\"on5\",37.626},adds={\"off6\",53.754},\n addsEnd={\"adds\",S.cfg.addsLength},gold={\"addsEnd\",62.323}}\n-- Slower-group estimates are copied at pull setup; actual event anchors still win.\nlocal G=_G.UCOB_AutoSimTiming or {}\nlocal old=data.ucobAutoSim\nlocal T=old and old.groupTiming\nif not T then\n T={enabled=G.enabled==true}\n for _,key in ipairs({\"twinExtra\",\"naelExtra\",\"addsExtra\",\"goldExtra\"}) do T[key]=math.max(0,math.min(90,tonumber(G[key]) or 0)) end\nend\nS.groupTiming=T\nif T.enabled then\n S.anchors.twinEnd[2]=S.anchors.twinEnd[2]+T.twinExtra\n S.anchors.naelEnd[2]=S.anchors.naelEnd[2]+T.naelExtra\n S.anchors.addsEnd[2]=S.anchors.addsEnd[2]+T.addsExtra\n S.cfg.goldLength=S.cfg.goldLength+T.goldExtra\nend\nfunction S.at(k)\n if k==\"pull\"then return 0 end\n if S.seen[k]then return S.seen[k]end\n local a=S.anchors[k];return S.at(a[1])+a[2]\nend\nfunction S.union(xs)\n table.sort(xs,function(a,b)return a[1]<b[1]end)\n local out={}\n for _,v in ipairs(xs)do\n  local last=out[#out]\n  if last and v[1]<=last[2]then last[2]=math.max(last[2],v[2])else out[#out+1]={v[1],v[2]}end\n end\n return out\nend\nfunction S.alive(e)return e and e.alive and e.targetable and e.hp.current>1 end\nfunction S.ent(cid)return S.ids[cid]and TensorCore.mGetEntity(S.ids[cid])end\n\nS.movePred={{\"firstTwister\",\"pull\",12.3,\"twister\"},{\"secondTwister\",\"pull\",69.5,\"twister\"},{\"thirdTwister\",\"pull\",121.7,\"twister\"},{\"addsTwister1\",\"adds\",24.34,\"twister\"},{\"addsTwister2\",\"adds\",41.487,\"twister\"},{\"addsTwister3\",\"adds\",87.071,\"twister\"},{\"addsTwister4\",\"adds\",104.096,\"twister\"},{\"exa1\",\"gold\",24.549,\"exa\"},{\"exa2\",\"gold\",73.276,\"exa\"},{\"exa3\",\"gold\",123.05,\"exa\"},{\"exa4\",\"gold\",174.689,\"exa\"}}\nS.moveActual={};S.personalMoves={}\nfunction S.movementWindows()\n local out={}\n for _,p in ipairs(S.movePred)do\n  if S.planningStage~=2 or p[2]==\"gold\"then\n  local center=S.moveActual[p[1]]or S.at(p[2])+p[3]\n  local a,b\n  if p[4]==\"twister\"then a,b=center-S.cfg.twisterLead,center+S.cfg.twisterAfter\n  else a,b=center-.5,center+S.cfg.exaDuration end\n  if p[2]==\"adds\"then b=math.min(b,S.at(\"addsEnd\"))end\n  if p[2]~=\"pull\"or not S.seen.twinEnd or center<S.seen.twinEnd then\n   if b>a then out[#out+1]={a,b}end\n  end\n end\n end\n for _,v in pairs(S.personalMoves)do if v[2]>v[1]then out[#out+1]={v[1],v[2]}end end\n return S.union(out)\nend\nfunction S.correctMovement(kind,finish)\n local best,delta\n for _,p in ipairs(S.movePred)do\n  if p[4]==kind and not S.moveActual[p[1]]and ((p[2]==\"pull\"and S.phase==1)or(p[2]==\"adds\"and S.phase==4)or(p[2]==\"gold\"and S.phase==5))then\n   local d=math.abs(finish-S.at(p[2])-p[3]);if not delta or d<delta then best,delta=p[1],d end\n  end\n end\n if best and delta<8 then S.moveActual[best]=finish\n else S.personalMoves[kind..\"Extra\"]={finish-(kind==\"twister\"and S.cfg.twisterLead or .5),finish+(kind==\"twister\"and S.cfg.twisterAfter or S.cfg.exaDuration)}end\n S.publish()\nend\n\nfunction S.quoteSequence(text)\nlocal t=text:gsub(\"%s+\",\" \")\nlocal seq=nil\nif t:find(\"O hallowed moon, shine you the iron path\",1,true) then seq={9916,9915}\nelseif t:find(\"O hallowed moon, take fire and scorch my foes\",1,true) then seq={9916,9917}\nelseif t:find(\"Take fire, O hallowed moon\",1,true) then seq={9917,9916}\nelseif t:find(\"Blazing path, lead me to iron rule\",1,true) then seq={9917,9915}\nelseif t:find(\"From on high I descend, the hallowed moon to call\",1,true) then seq={9918,9916}\nelseif t:find(\"From on high I descend, the iron path to walk\",1,true) then seq={9918,9915}\nelseif t:find(\"From on high I descend, the iron path to call\",1,true) then seq={9918,9915}\nelseif t:find(\"From on high I descend, the moon and stars to bring\",1,true) then seq={9918,9916,9920}\nelseif t:find(\"From hallowed moon I descend, a rain of stars to bring\",1,true) then seq={9916,9918,9920}\nelseif t:find(\"From hallowed moon I descend, upon burning earth to tread\",1,true) then seq={9916,9918,9917}\nelseif t:find(\"From hallowed moon I bare iron, in my descent to wield\",1,true) then seq={9916,9915,9918}\nelseif t:find(\"Unbending iron, take fire and descend\",1,true) then seq={9915,9917,9918}\nelseif t:find(\"Unbending iron, descend with fiery edge\",1,true) then seq={9915,9918,9917}\nend\n return seq\nend\nfunction S.quoteCategory(id)\n if id==9916 or id==9917 then return \"in\"elseif id==9915 then return \"out\"else return \"spread\"end\nend\nfunction S.planQuote()\n local q=S.quote\n if not q then return end\n for i=1,3 do S.personalMoves[\"quote\"..i]=nil end\n local previous=q.previous\n local p=TensorCore.mGetPlayer();local n=S.ent(2612)\n for i=q.step,#q.seq do\n  local cat=S.quoteCategory(q.seq[i]);local hit=q.nextHit+(i-q.step)*3.1\n  local move=previous~=cat\n  if not previous and p and n then\n   local distance=TensorCore.getDistance2d(p.pos,n.pos)\n   if(cat==\"in\"and distance<=4)or(cat==\"out\"and distance>=10)then move=false end\n  end\n  if move then\n   local duration=S.cfg.quoteMove\n   local a=previous and hit-3.0 or hit-duration-.2\n   S.personalMoves[\"quote\"..i]={a,math.min(a+duration,hit-.1)}\n  end\n  previous=cat\n end\n S.publish()\nend\n\n\nfunction S.beginGolden(now)\n if S.planningStage==2 then return end\n S.planningStage=2;S.planStart=now\n S.dynamic={};S.ends={};S.dotStart={}\n S.personalMoves={};S.quote=nil\n S.mainID=nil;S.otherID=nil\n S.lbObserved=nil;S.lbStarted=nil;S.lbCompleted=nil;S.lbCancelled=nil\n A.clearAutoSimTarget(0);A.clearAutoSimTarget(1)\nend\n\nfunction S.publish()\n local now=A.getAutoSimTime()\n -- Let the first plan finish at adds death. No ordinary player death changes plans.\n if S.planningStage~=2 and S.seen.addsEnd and now>S.seen.addsEnd+.5 then return end\n local live=_G.UCOB_BLM_Config\n \n S.cfg.phoenixPriority=live and live.phoenixPriority==true or false\n local horizon=S.planningStage==2 and S.at(\"gold\")+S.cfg.goldLength or S.at(\"addsEnd\")\n local kill=math.max(now+.5,horizon)\n S.killAt=kill;A.setAutoSimKillTime(kill)\n local gaps={{S.at(\"twinEnd\"),S.at(\"nael\")},{S.at(\"naelEnd\"),S.at(\"baha\")},{S.at(\"off6\"),S.at(\"adds\")},{S.at(\"addsEnd\"),S.at(\"gold\")}}\n for i=1,5 do\n  local a,b=S.at(\"off\"..i),S.at(\"on\"..i)\n  if S.seen.adds then b=math.min(b,S.seen.adds)end\n  if b>a then gaps[#gaps+1]={a,b}end\n end\n if S.planningStage==2 then gaps={{S.planStart,S.at(\"gold\")}}end\n local valid={};for _,g in ipairs(gaps)do if g[2]>g[1]then valid[#valid+1]=g end end;gaps=valid\n if S.planningStage~=2 and S.naelGap then gaps[#gaps+1]={S.naelGap[1],S.naelGap[2]or now+6}end\n A.clearAutoSimPhases(\"FullDowntime\")\n for _,g in ipairs(S.union(gaps))do if g[2]>g[1]then A.addAutoSimPhase(\"FullDowntime\",g[1],g[2])end end\n local stun={}\n for _,g in pairs(S.dynamic)do if g[1]==\"Stun\"then stun[#stun+1]={g[2],g[3]}end end\n A.clearAutoSimPhases(\"Stun\")\n for _,g in ipairs(S.union(stun))do if g[2]>g[1]then A.addAutoSimPhase(\"Stun\",g[1],g[2])end end\n A.clearAutoSimPhases(\"CasterDowntime\")\n for _,g in ipairs(S.movementWindows())do A.addAutoSimPhase(\"CasterDowntime\",g[1],g[2])end\n -- Optional relative Phoenix planning preference. Default is 1x throughout.\n -- Actual active status handling remains with the ACR.\n A.clearAutoSimPhases(\"BossModifier\")\n if S.cfg.phoenixPriority then\n local gold=S.at(\"gold\")\n if gold>0 then A.addAutoSimPhase(\"BossModifier\",0,gold,.5)end\n if S.phase==5 and S.phoenixSeen and not S.phoenixActive then\n  A.addAutoSimPhase(\"BossModifier\",gold,kill,.5)\n end\n end\n A.clearAutoSimPhases(\"RaidBuff\")\n if S.cfg.buffForecast then\n  local prev=-120\n  local buffTimes=S.planningStage==2 and {S.at(\"gold\")+2,S.at(\"gold\")+122}or {5,S.at(\"nael\")+2,S.at(\"baha\")+2,S.at(\"on3\")+2,S.at(\"adds\")+2}\n  for burstIndex,t in ipairs(buffTimes)do\n   t=math.max(t,prev+120)\n   -- P4 adds opening: extra pooling preference; cleave remains independently modeled.\n   local weight=S.planningStage~=2 and burstIndex==5 and 1.4 or (1+S.cfg.buffGain/100)\n   A.addAutoSimPhase(\"RaidBuff\",t,t+20,weight);prev=t\n  end\n end\n -- Slot 0 tracks the selected main boss; slot 1 tracks the other adds boss.\n -- Lifetimes survive temporary untargetability. Golden starts a fresh target-state lifetime.\n local start,finish=0,S.at(\"twinEnd\")\n if S.planningStage==2 then start,finish=S.at(\"gold\"),kill\n elseif S.phase==2 then start,finish=S.at(\"nael\"),S.at(\"naelEnd\")\n elseif S.phase==3 then start,finish=S.at(\"baha\"),S.at(\"adds\")\n elseif S.phase==4 then start,finish=S.at(\"adds\"),S.at(\"addsEnd\")\n elseif S.phase==5 then start,finish=S.at(\"gold\"),kill end\n finish=math.max(finish,now+5)\n for slot=0,1 do\n  A.clearAutoSimPhases(\"DotAvailability\",slot);A.clearAutoSimPhases(\"DotAvailability\",slot,1);A.clearAutoSimPhases(\"TargetLifetime\",slot)\n  if slot==0 or(S.phase==4 and S.planningStage~=2)then\n   local id=slot==0 and S.mainID or S.otherID\n   local death=id and S.ends[id]\n   local ending=death or finish\n   if ending>start then\n    A.addAutoSimPhase(\"TargetLifetime\",start,ending,1,slot)\n    local cursor=start\n    for _,g in ipairs(S.union(gaps))do\n     local a,b=math.max(start,g[1]),math.min(ending-.5,g[2])\n     if b>a then if a>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,a,1,slot);if slot==0 and Player.job==25 then A.addAutoSimPhase(\"DotAvailability\",cursor,a,1,slot,1)end end;cursor=math.max(cursor,b)end\n    end\n    if ending-.5>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,ending-.5,1,slot);if slot==0 and Player.job==25 then A.addAutoSimPhase(\"DotAvailability\",cursor,ending-.5,1,slot,1)end end\n   end\n  end\n end\n A.clearAutoSimUncertainty()\n A.addAutoSimUncertainty(0,S.phase>=3 and 3 or 20)\n if S.planningStage~=2 and not S.seen.addsEnd then A.addAutoSimUncertainty(math.max(1,S.at(\"addsEnd\")-25),20)end\n if S.planningStage==2 then A.addAutoSimUncertainty(math.max(2,S.at(\"gold\")+S.cfg.goldLength-30),15)end\n S.lastPublish=now\nend\nfunction S.sync(k,t)\n if S.seen[k]then return end\n S.seen[k]=t;S.publish()\nend\nfor _,cid in ipairs({1482,2612,3210})do\n for _,e in pairs(TensorCore.getEntityGroupList(\"ContentID\",cid)or{})do\n  if e.alive then S.ids[cid]=e.id;S.up[cid]=e.targetable;break end\n end\nend\nS.publish()\nS.planRole=\"caster\";S.planJob=Player.job\ndata.ucobAutoSim=S\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -789,7 +789,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "-- Shared UCOB encounters; role-specific forecast, using the real combat clock.\nlocal A=TensorCore.API.TensorACR\nlocal C=_G.UCOB_RPR_Config\nif not C then C={lbWho=1,lbAt=150,goldLength=162.14,addsLength=100.222,cleave=true,buffForecast=false,buffGain=17};_G.UCOB_RPR_Config=C end\n-- Burst weight update: preserve forecast enablement and other options.\nif not C.burstWeight20261029 then C.buffGain=17;C.burstWeight20261029=true end\nlocal S={version=2,planningStage=1,phase=1,seen={},ids={},up={},dynamic={},cfg={},dotStart={},ends={}}\nif C.phoenixPriority==nil then C.phoenixPriority=false end\nfor k,v in pairs(C)do S.cfg[k]=v end\nS.anchors={\n twinEnd={\"pull\",128.352},nael={\"twinEnd\",21.968},naelEnd={\"nael\",115.307},baha={\"naelEnd\",16.333},\n off1={\"baha\",23.449},on1={\"off1\",11.534},off2={\"on1\",29.533},on2={\"off2\",16.557},\n off3={\"on2\",34.636},on3={\"off3\",16.517},off4={\"on3\",35.834},on4={\"off4\",27.560},\n off5={\"on4\",33.712},on5={\"off5\",19.376},off6={\"on5\",37.626},adds={\"off6\",53.754},\n addsEnd={\"adds\",S.cfg.addsLength},gold={\"addsEnd\",62.323}}\n-- Slower-group estimates are copied at pull setup; actual event anchors still win.\nlocal G=_G.UCOB_AutoSimTiming or {}\nlocal old=data.ucobAutoSim\nlocal T=old and old.groupTiming\nif not T then\n T={enabled=G.enabled==true}\n for _,key in ipairs({\"twinExtra\",\"naelExtra\",\"addsExtra\",\"goldExtra\"}) do T[key]=math.max(0,math.min(90,tonumber(G[key]) or 0)) end\nend\nS.groupTiming=T\nif T.enabled then\n S.anchors.twinEnd[2]=S.anchors.twinEnd[2]+T.twinExtra\n S.anchors.naelEnd[2]=S.anchors.naelEnd[2]+T.naelExtra\n S.anchors.addsEnd[2]=S.anchors.addsEnd[2]+T.addsExtra\n S.cfg.goldLength=S.cfg.goldLength+T.goldExtra\nend\nfunction S.at(k)\n if k==\"pull\"then return 0 end\n if S.seen[k]then return S.seen[k]end\n local a=S.anchors[k];return S.at(a[1])+a[2]\nend\nfunction S.union(xs)\n table.sort(xs,function(a,b)return a[1]<b[1]end)\n local out={}\n for _,v in ipairs(xs)do\n  local last=out[#out]\n  if last and v[1]<=last[2]then last[2]=math.max(last[2],v[2])else out[#out+1]={v[1],v[2]}end\n end\n return out\nend\nfunction S.alive(e)return e and e.alive and e.targetable and e.hp.current>1 end\nfunction S.ent(cid)return S.ids[cid]and TensorCore.mGetEntity(S.ids[cid])end\nfunction S.roleMelee()\n local R=AnyoneCore.Roster\n return R and R.current()and(R.mySlot()==\"M1\"or R.mySlot()==\"M2\")\nend\n\nfunction S.beginGolden(now)\n if S.planningStage==2 then return end\n S.planningStage=2;S.planStart=now\n S.dynamic={};S.ends={};S.dotStart={}\n S.personalMoves={};S.quote=nil\n S.mainID=nil;S.otherID=nil\n S.lbObserved=nil;S.lbStarted=nil;S.lbCompleted=nil;S.lbCancelled=nil\n A.clearAutoSimTarget(0);A.clearAutoSimTarget(1)\nend\n\nfunction S.publish()\n local now=A.getAutoSimTime()\n -- Let the first plan finish at adds death. No ordinary player death changes plans.\n if S.planningStage~=2 and S.seen.addsEnd and now>S.seen.addsEnd+.5 then return end\n local live=_G.UCOB_RPR_Config\n if live then S.cfg.lbWho=live.lbWho;S.cfg.lbAt=live.lbAt end\n S.cfg.phoenixPriority=live and live.phoenixPriority==true or false\n local horizon=S.planningStage==2 and S.at(\"gold\")+S.cfg.goldLength or S.at(\"addsEnd\")\n local kill=math.max(now+.5,horizon)\n S.killAt=kill;A.setAutoSimKillTime(kill)\n local gaps={{S.at(\"twinEnd\"),S.at(\"nael\")},{S.at(\"naelEnd\"),S.at(\"baha\")},{S.at(\"off6\"),S.at(\"adds\")},{S.at(\"addsEnd\"),S.at(\"gold\")}}\n for i=1,5 do\n  local a,b=S.at(\"off\"..i),S.at(\"on\"..i)\n  if S.seen.adds then b=math.min(b,S.seen.adds)end\n  if b>a then gaps[#gaps+1]={a,b}end\n end\n if S.planningStage==2 then gaps={{S.planStart,S.at(\"gold\")}}end\n local valid={};for _,g in ipairs(gaps)do if g[2]>g[1]then valid[#valid+1]=g end end;gaps=valid\n if S.planningStage~=2 and S.naelGap then gaps[#gaps+1]={S.naelGap[1],S.naelGap[2]or now+6}end\n A.clearAutoSimPhases(\"FullDowntime\")\n for _,g in ipairs(S.union(gaps))do if g[2]>g[1]then A.addAutoSimPhase(\"FullDowntime\",g[1],g[2])end end\n local stun={}\n if S.cfg.lbWho==1 and S.roleMelee()and not S.lbObserved then\n  local t=S.at(\"gold\")+S.cfg.lbAt;stun[#stun+1]={t,t+8.2}\n end\n for _,g in pairs(S.dynamic)do if g[1]==\"Stun\"then stun[#stun+1]={g[2],g[3]}end end\n A.clearAutoSimPhases(\"Stun\")\n for _,g in ipairs(S.union(stun))do if g[2]>g[1]then A.addAutoSimPhase(\"Stun\",g[1],g[2])end end\n A.clearAutoSimPhases(\"MeleeDowntime\")\n for _,g in pairs(S.dynamic)do if g[1]==\"MeleeDowntime\"and g[3]>g[2]then A.addAutoSimPhase(\"MeleeDowntime\",g[2],g[3])end end\n -- Optional relative Phoenix planning preference. Default is 1x throughout.\n -- Actual active status handling remains with the ACR.\n A.clearAutoSimPhases(\"BossModifier\")\n if S.cfg.phoenixPriority then\n local gold=S.at(\"gold\")\n if gold>0 then A.addAutoSimPhase(\"BossModifier\",0,gold,.5)end\n if S.phase==5 and S.phoenixSeen and not S.phoenixActive then\n  A.addAutoSimPhase(\"BossModifier\",gold,kill,.5)\n end\n end\n A.clearAutoSimPhases(\"RaidBuff\")\n if S.cfg.buffForecast then\n  local prev=-120\n  local buffTimes=S.planningStage==2 and {S.at(\"gold\")+2,S.at(\"gold\")+122}or {5,S.at(\"nael\")+2,S.at(\"baha\")+2,S.at(\"on3\")+2,S.at(\"adds\")+2}\n  for burstIndex,t in ipairs(buffTimes)do\n   t=math.max(t,prev+120)\n   -- P4 adds opening: extra pooling preference; cleave remains independently modeled.\n   local weight=S.planningStage~=2 and burstIndex==5 and 1.4 or (1+S.cfg.buffGain/100)\n   A.addAutoSimPhase(\"RaidBuff\",t,t+20,weight);prev=t\n  end\n end\n -- Slot 0 tracks the selected main boss; slot 1 tracks the other adds boss.\n -- Lifetimes survive temporary untargetability. Golden starts a fresh target-state lifetime.\n local start,finish=0,S.at(\"twinEnd\")\n if S.planningStage==2 then start,finish=S.at(\"gold\"),kill\n elseif S.phase==2 then start,finish=S.at(\"nael\"),S.at(\"naelEnd\")\n elseif S.phase==3 then start,finish=S.at(\"baha\"),S.at(\"adds\")\n elseif S.phase==4 then start,finish=S.at(\"adds\"),S.at(\"addsEnd\")\n elseif S.phase==5 then start,finish=S.at(\"gold\"),kill end\n finish=math.max(finish,now+5)\n for slot=0,1 do\n  A.clearAutoSimPhases(\"DotAvailability\",slot);A.clearAutoSimPhases(\"TargetLifetime\",slot)\n  if slot==0 or(S.phase==4 and S.planningStage~=2)then\n   local id=slot==0 and S.mainID or S.otherID\n   local death=id and S.ends[id]\n   local ending=death or finish\n   if ending>start then\n    A.addAutoSimPhase(\"TargetLifetime\",start,ending,1,slot)\n    local cursor=start\n    for _,g in ipairs(S.union(gaps))do\n     local a,b=math.max(start,g[1]),math.min(ending-.5,g[2])\n     if b>a then if a>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,a,1,slot)end;cursor=math.max(cursor,b)end\n    end\n    if ending-.5>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,ending-.5,1,slot)end\n   end\n  end\n end\n A.clearAutoSimUncertainty()\n A.addAutoSimUncertainty(0,S.phase>=3 and 3 or 20)\n if S.planningStage~=2 and not S.seen.addsEnd then A.addAutoSimUncertainty(math.max(1,S.at(\"addsEnd\")-25),20)end\n if S.planningStage==2 then A.addAutoSimUncertainty(math.max(2,S.at(\"gold\")+S.cfg.goldLength-30),15)end\n S.lastPublish=now\nend\nfunction S.sync(k,t)\n if S.seen[k]then return end\n S.seen[k]=t;S.publish()\nend\nfor _,cid in ipairs({1482,2612,3210})do\n for _,e in pairs(TensorCore.getEntityGroupList(\"ContentID\",cid)or{})do\n  if e.alive then S.ids[cid]=e.id;S.up[cid]=e.targetable;break end\n end\nend\nS.publish()\nS.planRole=\"melee\";S.planJob=Player.job\ndata.ucobAutoSim=S\nself.used=true\n",
+							actionLua = "-- Shared UCOB encounters; role-specific forecast, using the real combat clock.\nlocal A=TensorCore.API.TensorACR\nlocal C=_G.UCOB_RPR_Config\nif not C then C={lbWho=1,lbAt=150,goldLength=162.14,addsLength=100.222,cleave=true,buffForecast=false,buffGain=17};_G.UCOB_RPR_Config=C end\n-- Burst weight update: preserve forecast enablement and other options.\nif not C.burstWeight20261029 then C.buffGain=17;C.burstWeight20261029=true end\n-- Per-phase base estimates; copied to this pull before publication.\nif C.twinLength==nil then C.twinLength=132 end\nif C.naelLength==nil then C.naelLength=129 end\nlocal S={version=2,planningStage=1,phase=1,seen={},ids={},up={},dynamic={},cfg={},dotStart={},ends={}}\nif C.phoenixPriority==nil then C.phoenixPriority=false end\nfor k,v in pairs(C)do S.cfg[k]=v end\nS.anchors={\n twinEnd={\"pull\",C.twinLength},nael={\"twinEnd\",21.968},naelEnd={\"nael\",C.naelLength},baha={\"naelEnd\",16.333},\n off1={\"baha\",23.449},on1={\"off1\",11.534},off2={\"on1\",29.533},on2={\"off2\",16.557},\n off3={\"on2\",34.636},on3={\"off3\",16.517},off4={\"on3\",35.834},on4={\"off4\",27.560},\n off5={\"on4\",33.712},on5={\"off5\",19.376},off6={\"on5\",37.626},adds={\"off6\",53.754},\n addsEnd={\"adds\",S.cfg.addsLength},gold={\"addsEnd\",62.323}}\n-- Slower-group estimates are copied at pull setup; actual event anchors still win.\nlocal G=_G.UCOB_AutoSimTiming or {}\nlocal old=data.ucobAutoSim\nlocal T=old and old.groupTiming\nif not T then\n T={enabled=G.enabled==true}\n for _,key in ipairs({\"twinExtra\",\"naelExtra\",\"addsExtra\",\"goldExtra\"}) do T[key]=math.max(0,math.min(90,tonumber(G[key]) or 0)) end\nend\nS.groupTiming=T\nif T.enabled then\n S.anchors.twinEnd[2]=S.anchors.twinEnd[2]+T.twinExtra\n S.anchors.naelEnd[2]=S.anchors.naelEnd[2]+T.naelExtra\n S.anchors.addsEnd[2]=S.anchors.addsEnd[2]+T.addsExtra\n S.cfg.goldLength=S.cfg.goldLength+T.goldExtra\nend\nfunction S.at(k)\n if k==\"pull\"then return 0 end\n if S.seen[k]then return S.seen[k]end\n local a=S.anchors[k];return S.at(a[1])+a[2]\nend\nfunction S.union(xs)\n table.sort(xs,function(a,b)return a[1]<b[1]end)\n local out={}\n for _,v in ipairs(xs)do\n  local last=out[#out]\n  if last and v[1]<=last[2]then last[2]=math.max(last[2],v[2])else out[#out+1]={v[1],v[2]}end\n end\n return out\nend\nfunction S.alive(e)return e and e.alive and e.targetable and e.hp.current>1 end\nfunction S.ent(cid)return S.ids[cid]and TensorCore.mGetEntity(S.ids[cid])end\nfunction S.roleMelee()\n local R=AnyoneCore.Roster\n return R and R.current()and(R.mySlot()==\"M1\"or R.mySlot()==\"M2\")\nend\n\nfunction S.beginGolden(now)\n if S.planningStage==2 then return end\n S.planningStage=2;S.planStart=now\n S.dynamic={};S.ends={};S.dotStart={}\n S.personalMoves={};S.quote=nil\n S.mainID=nil;S.otherID=nil\n S.lbObserved=nil;S.lbStarted=nil;S.lbCompleted=nil;S.lbCancelled=nil\n A.clearAutoSimTarget(0);A.clearAutoSimTarget(1)\nend\n\nfunction S.publish()\n local now=A.getAutoSimTime()\n -- Let the first plan finish at adds death. No ordinary player death changes plans.\n if S.planningStage~=2 and S.seen.addsEnd and now>S.seen.addsEnd+.5 then return end\n local live=_G.UCOB_RPR_Config\n if live then S.cfg.lbWho=live.lbWho;S.cfg.lbAt=live.lbAt end\n S.cfg.phoenixPriority=live and live.phoenixPriority==true or false\n local horizon=S.planningStage==2 and S.at(\"gold\")+S.cfg.goldLength or S.at(\"addsEnd\")\n local kill=math.max(now+.5,horizon)\n S.killAt=kill;A.setAutoSimKillTime(kill)\n local gaps={{S.at(\"twinEnd\"),S.at(\"nael\")},{S.at(\"naelEnd\"),S.at(\"baha\")},{S.at(\"off6\"),S.at(\"adds\")},{S.at(\"addsEnd\"),S.at(\"gold\")}}\n for i=1,5 do\n  local a,b=S.at(\"off\"..i),S.at(\"on\"..i)\n  if S.seen.adds then b=math.min(b,S.seen.adds)end\n  if b>a then gaps[#gaps+1]={a,b}end\n end\n if S.planningStage==2 then gaps={{S.planStart,S.at(\"gold\")}}end\n local valid={};for _,g in ipairs(gaps)do if g[2]>g[1]then valid[#valid+1]=g end end;gaps=valid\n if S.planningStage~=2 and S.naelGap then gaps[#gaps+1]={S.naelGap[1],S.naelGap[2]or now+6}end\n A.clearAutoSimPhases(\"FullDowntime\")\n for _,g in ipairs(S.union(gaps))do if g[2]>g[1]then A.addAutoSimPhase(\"FullDowntime\",g[1],g[2])end end\n local stun={}\n if S.cfg.lbWho==1 and S.roleMelee()and not S.lbObserved then\n  local t=S.at(\"gold\")+S.cfg.lbAt;stun[#stun+1]={t,t+8.2}\n end\n for _,g in pairs(S.dynamic)do if g[1]==\"Stun\"then stun[#stun+1]={g[2],g[3]}end end\n A.clearAutoSimPhases(\"Stun\")\n for _,g in ipairs(S.union(stun))do if g[2]>g[1]then A.addAutoSimPhase(\"Stun\",g[1],g[2])end end\n A.clearAutoSimPhases(\"MeleeDowntime\")\n for _,g in pairs(S.dynamic)do if g[1]==\"MeleeDowntime\"and g[3]>g[2]then A.addAutoSimPhase(\"MeleeDowntime\",g[2],g[3])end end\n -- Optional relative Phoenix planning preference. Default is 1x throughout.\n -- Actual active status handling remains with the ACR.\n A.clearAutoSimPhases(\"BossModifier\")\n if S.cfg.phoenixPriority then\n local gold=S.at(\"gold\")\n if gold>0 then A.addAutoSimPhase(\"BossModifier\",0,gold,.5)end\n if S.phase==5 and S.phoenixSeen and not S.phoenixActive then\n  A.addAutoSimPhase(\"BossModifier\",gold,kill,.5)\n end\n end\n A.clearAutoSimPhases(\"RaidBuff\")\n if S.cfg.buffForecast then\n  local prev=-120\n  local buffTimes=S.planningStage==2 and {S.at(\"gold\")+2,S.at(\"gold\")+122}or {5,S.at(\"nael\")+2,S.at(\"baha\")+2,S.at(\"on3\")+2,S.at(\"adds\")+2}\n  for burstIndex,t in ipairs(buffTimes)do\n   t=math.max(t,prev+120)\n   -- P4 adds opening: extra pooling preference; cleave remains independently modeled.\n   local weight=S.planningStage~=2 and burstIndex==5 and 1.4 or (1+S.cfg.buffGain/100)\n   A.addAutoSimPhase(\"RaidBuff\",t,t+20,weight);prev=t\n  end\n end\n -- Slot 0 tracks the selected main boss; slot 1 tracks the other adds boss.\n -- Lifetimes survive temporary untargetability. Golden starts a fresh target-state lifetime.\n local start,finish=0,S.at(\"twinEnd\")\n if S.planningStage==2 then start,finish=S.at(\"gold\"),kill\n elseif S.phase==2 then start,finish=S.at(\"nael\"),S.at(\"naelEnd\")\n elseif S.phase==3 then start,finish=S.at(\"baha\"),S.at(\"adds\")\n elseif S.phase==4 then start,finish=S.at(\"adds\"),S.at(\"addsEnd\")\n elseif S.phase==5 then start,finish=S.at(\"gold\"),kill end\n finish=math.max(finish,now+5)\n for slot=0,1 do\n  A.clearAutoSimPhases(\"DotAvailability\",slot);A.clearAutoSimPhases(\"TargetLifetime\",slot)\n  if slot==0 or(S.phase==4 and S.planningStage~=2)then\n   local id=slot==0 and S.mainID or S.otherID\n   local death=id and S.ends[id]\n   local ending=death or finish\n   if ending>start then\n    A.addAutoSimPhase(\"TargetLifetime\",start,ending,1,slot)\n    local cursor=start\n    for _,g in ipairs(S.union(gaps))do\n     local a,b=math.max(start,g[1]),math.min(ending-.5,g[2])\n     if b>a then if a>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,a,1,slot)end;cursor=math.max(cursor,b)end\n    end\n    if ending-.5>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,ending-.5,1,slot)end\n   end\n  end\n end\n A.clearAutoSimUncertainty()\n A.addAutoSimUncertainty(0,S.phase>=3 and 3 or 20)\n if S.planningStage~=2 and not S.seen.addsEnd then A.addAutoSimUncertainty(math.max(1,S.at(\"addsEnd\")-25),20)end\n if S.planningStage==2 then A.addAutoSimUncertainty(math.max(2,S.at(\"gold\")+S.cfg.goldLength-30),15)end\n S.lastPublish=now\nend\nfunction S.sync(k,t)\n if S.seen[k]then return end\n S.seen[k]=t;S.publish()\nend\nfor _,cid in ipairs({1482,2612,3210})do\n for _,e in pairs(TensorCore.getEntityGroupList(\"ContentID\",cid)or{})do\n  if e.alive then S.ids[cid]=e.id;S.up[cid]=e.targetable;break end\n end\nend\nS.publish()\nS.planRole=\"melee\";S.planJob=Player.job\ndata.ucobAutoSim=S\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -823,7 +823,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "-- Shared UCOB encounters; role-specific forecast, using the real combat clock.\nlocal A=TensorCore.API.TensorACR\nlocal C=_G.UCOB_BRD_Config\nif not C then C={goldLength=162.14,addsLength=100.222,buffForecast=false,buffGain=0};_G.UCOB_BRD_Config=C end\nlocal S={version=2,planningStage=1,phase=1,seen={},ids={},up={},dynamic={},cfg={},dotStart={},ends={}}\nif C.phoenixPriority==nil then C.phoenixPriority=false end\nif C.reserveGrand==nil then C.reserveGrand=true end\nif C.alignParty==nil then C.alignParty=false end\nif C.burstWait==nil then C.burstWait=30 end\nif C.burstMode==nil then C.burstMode=1 end\nif C.burstTimes==nil then C.burstTimes=\"\"end\nfor k,v in pairs(C)do S.cfg[k]=v end\nS.anchors={\n twinEnd={\"pull\",128.352},nael={\"twinEnd\",21.968},naelEnd={\"nael\",115.307},baha={\"naelEnd\",16.333},\n off1={\"baha\",23.449},on1={\"off1\",11.534},off2={\"on1\",29.533},on2={\"off2\",16.557},\n off3={\"on2\",34.636},on3={\"off3\",16.517},off4={\"on3\",35.834},on4={\"off4\",27.560},\n off5={\"on4\",33.712},on5={\"off5\",19.376},off6={\"on5\",37.626},adds={\"off6\",53.754},\n addsEnd={\"adds\",S.cfg.addsLength},gold={\"addsEnd\",62.323}}\n-- Slower-group estimates are copied at pull setup; actual event anchors still win.\nlocal G=_G.UCOB_AutoSimTiming or {}\nlocal old=data.ucobAutoSim\nlocal T=old and old.groupTiming\nif not T then\n T={enabled=G.enabled==true}\n for _,key in ipairs({\"twinExtra\",\"naelExtra\",\"addsExtra\",\"goldExtra\"}) do T[key]=math.max(0,math.min(90,tonumber(G[key]) or 0)) end\nend\nS.groupTiming=T\nif T.enabled then\n S.anchors.twinEnd[2]=S.anchors.twinEnd[2]+T.twinExtra\n S.anchors.naelEnd[2]=S.anchors.naelEnd[2]+T.naelExtra\n S.anchors.addsEnd[2]=S.anchors.addsEnd[2]+T.addsExtra\n S.cfg.goldLength=S.cfg.goldLength+T.goldExtra\nend\nfunction S.at(k)\n if k==\"pull\"then return 0 end\n if S.seen[k]then return S.seen[k]end\n local a=S.anchors[k];return S.at(a[1])+a[2]\nend\nfunction S.union(xs)\n table.sort(xs,function(a,b)return a[1]<b[1]end)\n local out={}\n for _,v in ipairs(xs)do\n  local last=out[#out]\n  if last and v[1]<=last[2]then last[2]=math.max(last[2],v[2])else out[#out+1]={v[1],v[2]}end\n end\n return out\nend\nfunction S.alive(e)return e and e.alive and e.targetable and e.hp.current>1 end\nfunction S.ent(cid)return S.ids[cid]and TensorCore.mGetEntity(S.ids[cid])end\n\nfunction S.beginGolden(now)\n if S.planningStage==2 then return end\n S.planningStage=2;S.planStart=now\n S.dynamic={};S.ends={};S.dotStart={}\n S.personalMoves={};S.quote=nil\n S.mainID=nil;S.otherID=nil\n S.lbObserved=nil;S.lbStarted=nil;S.lbCompleted=nil;S.lbCancelled=nil\n A.clearAutoSimTarget(0);A.clearAutoSimTarget(1)\nend\n\n\nS.burstActions={118,101,107,3559}\nfunction S.partySchedule()\n local ts={}\n if S.cfg.burstMode==2 then\n  for token in S.cfg.burstTimes:gmatch(\"[^,;]+\")do\n   local n=tonumber(token)\n   if not n or n<0 then return {},\"Use comma-separated seconds since pull.\"end\n   ts[#ts+1]=n\n  end\n  if #ts==0 then return {},\"Enter planned party burst times.\"end\n  table.sort(ts)\n  for i=2,#ts do if ts[i]-ts[i-1]<120 then return {},\"BRD burst windows must be at least 120 seconds apart.\"end end\n else\n  ts=S.planningStage==2 and{S.at(\"gold\")+2,S.at(\"gold\")+122}or{5,S.at(\"nael\")+2,S.at(\"baha\")+2,S.at(\"on3\")+2,S.at(\"adds\")+2}\n  local prev=-120\n  for i,t in ipairs(ts)do ts[i]=math.max(t,prev+120);prev=ts[i]end\n end\n local out={}\n for _,t in ipairs(ts)do\n  if(S.planningStage~=2 or t>=S.planStart)and(S.planningStage==2 or t<=S.at(\"addsEnd\"))then out[#out+1]=t end\n end\n return out,nil\nend\nfunction S.updateBurstHolds(now)\n if Player.job~=23 then return end\n local reserve=S.cfg.reserveGrand and S.phase==3 and S.octetSeen\n local remaining=nil\n if S.cfg.alignParty and S.cfg.burstWait>0 then\n  for _,t in ipairs(S.partyWindows or{})do\n   local left=t-now\n   if left>0 and left<=S.cfg.burstWait then remaining=left;break end\n  end\n end\n if not reserve and not remaining then return end\n local clock=Now()\n if S.nextHoldRefresh and clock<S.nextHoldRefresh then return end\n -- Short, action-specific leases expire automatically when this controller stops.\n local deadline=clock+750\n if remaining and not reserve then deadline=math.min(deadline,clock+remaining*1000)end\n for _,id in ipairs(S.burstActions)do A.holdActionUntil(id,deadline)end\n S.nextHoldRefresh=clock+250\nend\n\nfunction S.publish()\n local now=A.getAutoSimTime()\n -- Let the first plan finish at adds death. No ordinary player death changes plans.\n if S.planningStage~=2 and S.seen.addsEnd and now>S.seen.addsEnd+.5 then return end\n local live=_G.UCOB_BRD_Config\n \n S.cfg.phoenixPriority=live and live.phoenixPriority==true or false\n if live then S.cfg.reserveGrand=live.reserveGrand~=false;S.cfg.alignParty=live.alignParty==true;S.cfg.burstWait=live.burstWait;S.cfg.burstMode=live.burstMode;S.cfg.burstTimes=live.burstTimes end\n local horizon=S.planningStage==2 and S.at(\"gold\")+S.cfg.goldLength or S.at(\"addsEnd\")\n local kill=math.max(now+.5,horizon)\n S.killAt=kill;A.setAutoSimKillTime(kill)\n local gaps={{S.at(\"twinEnd\"),S.at(\"nael\")},{S.at(\"naelEnd\"),S.at(\"baha\")},{S.at(\"off6\"),S.at(\"adds\")},{S.at(\"addsEnd\"),S.at(\"gold\")}}\n for i=1,5 do\n  local a,b=S.at(\"off\"..i),S.at(\"on\"..i)\n  if S.seen.adds then b=math.min(b,S.seen.adds)end\n  if b>a then gaps[#gaps+1]={a,b}end\n end\n if S.planningStage==2 then gaps={{S.planStart,S.at(\"gold\")}}end\n local valid={};for _,g in ipairs(gaps)do if g[2]>g[1]then valid[#valid+1]=g end end;gaps=valid\n if S.planningStage~=2 and S.naelGap then gaps[#gaps+1]={S.naelGap[1],S.naelGap[2]or now+6}end\n A.clearAutoSimPhases(\"FullDowntime\")\n for _,g in ipairs(S.union(gaps))do if g[2]>g[1]then A.addAutoSimPhase(\"FullDowntime\",g[1],g[2])end end\n local stun={}\n for _,g in pairs(S.dynamic)do if g[1]==\"Stun\"then stun[#stun+1]={g[2],g[3]}end end\n A.clearAutoSimPhases(\"Stun\")\n for _,g in ipairs(S.union(stun))do if g[2]>g[1]then A.addAutoSimPhase(\"Stun\",g[1],g[2])end end\n -- Optional relative Phoenix planning preference. Default is 1x throughout.\n -- Actual active status handling remains with the ACR.\n A.clearAutoSimPhases(\"BossModifier\")\n if S.cfg.phoenixPriority then\n local gold=S.at(\"gold\")\n if gold>0 then A.addAutoSimPhase(\"BossModifier\",0,gold,.5)end\n if S.phase==5 and S.phoenixSeen and not S.phoenixActive then\n  A.addAutoSimPhase(\"BossModifier\",gold,kill,.5)\n end\n end\n S.partyWindows,S.partyError=S.partySchedule()\n A.clearAutoSimPhases(\"RaidBuff\")\n if S.cfg.buffForecast then\n  for _,t in ipairs(S.partyWindows)do\n   -- Applies only to an existing burst at the P4 opening, including custom schedules.\n   local addsOpening=S.planningStage~=2 and t>=S.at(\"adds\") and t<S.at(\"adds\")+20\n   A.addAutoSimPhase(\"RaidBuff\",t,t+20,addsOpening and 1.4 or (1+S.cfg.buffGain/100))\n  end\n end\n -- Slot 0 tracks the selected main boss; slot 1 tracks the other adds boss.\n -- Lifetimes survive temporary untargetability. Golden starts a fresh target-state lifetime.\n local start,finish=0,S.at(\"twinEnd\")\n if S.planningStage==2 then start,finish=S.at(\"gold\"),kill\n elseif S.phase==2 then start,finish=S.at(\"nael\"),S.at(\"naelEnd\")\n elseif S.phase==3 then start,finish=S.at(\"baha\"),S.at(\"adds\")\n elseif S.phase==4 then start,finish=S.at(\"adds\"),S.at(\"addsEnd\")\n elseif S.phase==5 then start,finish=S.at(\"gold\"),kill end\n finish=math.max(finish,now+5)\n for slot=0,1 do\n  A.clearAutoSimPhases(\"DotAvailability\",slot);A.clearAutoSimPhases(\"TargetLifetime\",slot)\n  if slot==0 or(S.phase==4 and S.planningStage~=2)then\n   local id=slot==0 and S.mainID or S.otherID\n   local death=id and S.ends[id]\n   local ending=death or finish\n   if ending>start then\n    A.addAutoSimPhase(\"TargetLifetime\",start,ending,1,slot)\n    local cursor=start\n    for _,g in ipairs(S.union(gaps))do\n     local a,b=math.max(start,g[1]),math.min(ending-.5,g[2])\n     if b>a then if a>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,a,1,slot)end;cursor=math.max(cursor,b)end\n    end\n    if ending-.5>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,ending-.5,1,slot)end\n   end\n  end\n end\n A.clearAutoSimUncertainty()\n A.addAutoSimUncertainty(0,S.phase>=3 and 3 or 20)\n if S.planningStage~=2 and not S.seen.addsEnd then A.addAutoSimUncertainty(math.max(1,S.at(\"addsEnd\")-25),20)end\n if S.planningStage==2 then A.addAutoSimUncertainty(math.max(2,S.at(\"gold\")+S.cfg.goldLength-30),15)end\n S.lastPublish=now\nend\nfunction S.sync(k,t)\n if S.seen[k]then return end\n S.seen[k]=t;S.publish()\nend\nfor _,cid in ipairs({1482,2612,3210})do\n for _,e in pairs(TensorCore.getEntityGroupList(\"ContentID\",cid)or{})do\n  if e.alive then S.ids[cid]=e.id;S.up[cid]=e.targetable;break end\n end\nend\nS.publish()\nS.planRole=\"ranged\";S.planJob=Player.job\ndata.ucobAutoSim=S\nself.used=true\n",
+							actionLua = "-- Shared UCOB encounters; role-specific forecast, using the real combat clock.\nlocal A=TensorCore.API.TensorACR\nlocal C=_G.UCOB_BRD_Config\nif not C then C={goldLength=162.14,addsLength=100.222,buffForecast=false,buffGain=0};_G.UCOB_BRD_Config=C end\n-- Per-phase base estimates; copied to this pull before publication.\nif C.twinLength==nil then C.twinLength=132 end\nif C.naelLength==nil then C.naelLength=129 end\nlocal S={version=2,planningStage=1,phase=1,seen={},ids={},up={},dynamic={},cfg={},dotStart={},ends={}}\nif C.phoenixPriority==nil then C.phoenixPriority=false end\nif C.reserveGrand==nil then C.reserveGrand=true end\nif C.alignParty==nil then C.alignParty=false end\nif C.burstWait==nil then C.burstWait=30 end\nif C.burstMode==nil then C.burstMode=1 end\nif C.burstTimes==nil then C.burstTimes=\"\"end\nfor k,v in pairs(C)do S.cfg[k]=v end\nS.anchors={\n twinEnd={\"pull\",C.twinLength},nael={\"twinEnd\",21.968},naelEnd={\"nael\",C.naelLength},baha={\"naelEnd\",16.333},\n off1={\"baha\",23.449},on1={\"off1\",11.534},off2={\"on1\",29.533},on2={\"off2\",16.557},\n off3={\"on2\",34.636},on3={\"off3\",16.517},off4={\"on3\",35.834},on4={\"off4\",27.560},\n off5={\"on4\",33.712},on5={\"off5\",19.376},off6={\"on5\",37.626},adds={\"off6\",53.754},\n addsEnd={\"adds\",S.cfg.addsLength},gold={\"addsEnd\",62.323}}\n-- Slower-group estimates are copied at pull setup; actual event anchors still win.\nlocal G=_G.UCOB_AutoSimTiming or {}\nlocal old=data.ucobAutoSim\nlocal T=old and old.groupTiming\nif not T then\n T={enabled=G.enabled==true}\n for _,key in ipairs({\"twinExtra\",\"naelExtra\",\"addsExtra\",\"goldExtra\"}) do T[key]=math.max(0,math.min(90,tonumber(G[key]) or 0)) end\nend\nS.groupTiming=T\nif T.enabled then\n S.anchors.twinEnd[2]=S.anchors.twinEnd[2]+T.twinExtra\n S.anchors.naelEnd[2]=S.anchors.naelEnd[2]+T.naelExtra\n S.anchors.addsEnd[2]=S.anchors.addsEnd[2]+T.addsExtra\n S.cfg.goldLength=S.cfg.goldLength+T.goldExtra\nend\nfunction S.at(k)\n if k==\"pull\"then return 0 end\n if S.seen[k]then return S.seen[k]end\n local a=S.anchors[k];return S.at(a[1])+a[2]\nend\nfunction S.union(xs)\n table.sort(xs,function(a,b)return a[1]<b[1]end)\n local out={}\n for _,v in ipairs(xs)do\n  local last=out[#out]\n  if last and v[1]<=last[2]then last[2]=math.max(last[2],v[2])else out[#out+1]={v[1],v[2]}end\n end\n return out\nend\nfunction S.alive(e)return e and e.alive and e.targetable and e.hp.current>1 end\nfunction S.ent(cid)return S.ids[cid]and TensorCore.mGetEntity(S.ids[cid])end\n\nfunction S.beginGolden(now)\n if S.planningStage==2 then return end\n S.planningStage=2;S.planStart=now\n S.dynamic={};S.ends={};S.dotStart={}\n S.personalMoves={};S.quote=nil\n S.mainID=nil;S.otherID=nil\n S.lbObserved=nil;S.lbStarted=nil;S.lbCompleted=nil;S.lbCancelled=nil\n A.clearAutoSimTarget(0);A.clearAutoSimTarget(1)\nend\n\n\nS.burstActions={118,101,107,3559}\nfunction S.partySchedule()\n local ts={}\n if S.cfg.burstMode==2 then\n  for token in S.cfg.burstTimes:gmatch(\"[^,;]+\")do\n   local n=tonumber(token)\n   if not n or n<0 then return {},\"Use comma-separated seconds since pull.\"end\n   ts[#ts+1]=n\n  end\n  if #ts==0 then return {},\"Enter planned party burst times.\"end\n  table.sort(ts)\n  for i=2,#ts do if ts[i]-ts[i-1]<120 then return {},\"BRD burst windows must be at least 120 seconds apart.\"end end\n else\n  ts=S.planningStage==2 and{S.at(\"gold\")+2,S.at(\"gold\")+122}or{5,S.at(\"nael\")+2,S.at(\"baha\")+2,S.at(\"on3\")+2,S.at(\"adds\")+2}\n  local prev=-120\n  for i,t in ipairs(ts)do ts[i]=math.max(t,prev+120);prev=ts[i]end\n end\n local out={}\n for _,t in ipairs(ts)do\n  if(S.planningStage~=2 or t>=S.planStart)and(S.planningStage==2 or t<=S.at(\"addsEnd\"))then out[#out+1]=t end\n end\n return out,nil\nend\nfunction S.updateBurstHolds(now)\n if Player.job~=23 then return end\n local reserve=S.cfg.reserveGrand and S.phase==3 and S.octetSeen\n local remaining=nil\n if S.cfg.alignParty and S.cfg.burstWait>0 then\n  for _,t in ipairs(S.partyWindows or{})do\n   local left=t-now\n   if left>0 and left<=S.cfg.burstWait then remaining=left;break end\n  end\n end\n if not reserve and not remaining then return end\n local clock=Now()\n if S.nextHoldRefresh and clock<S.nextHoldRefresh then return end\n -- Short, action-specific leases expire automatically when this controller stops.\n local deadline=clock+750\n if remaining and not reserve then deadline=math.min(deadline,clock+remaining*1000)end\n for _,id in ipairs(S.burstActions)do A.holdActionUntil(id,deadline)end\n S.nextHoldRefresh=clock+250\nend\n\nfunction S.publish()\n local now=A.getAutoSimTime()\n -- Let the first plan finish at adds death. No ordinary player death changes plans.\n if S.planningStage~=2 and S.seen.addsEnd and now>S.seen.addsEnd+.5 then return end\n local live=_G.UCOB_BRD_Config\n \n S.cfg.phoenixPriority=live and live.phoenixPriority==true or false\n if live then S.cfg.reserveGrand=live.reserveGrand~=false;S.cfg.alignParty=live.alignParty==true;S.cfg.burstWait=live.burstWait;S.cfg.burstMode=live.burstMode;S.cfg.burstTimes=live.burstTimes end\n local horizon=S.planningStage==2 and S.at(\"gold\")+S.cfg.goldLength or S.at(\"addsEnd\")\n local kill=math.max(now+.5,horizon)\n S.killAt=kill;A.setAutoSimKillTime(kill)\n local gaps={{S.at(\"twinEnd\"),S.at(\"nael\")},{S.at(\"naelEnd\"),S.at(\"baha\")},{S.at(\"off6\"),S.at(\"adds\")},{S.at(\"addsEnd\"),S.at(\"gold\")}}\n for i=1,5 do\n  local a,b=S.at(\"off\"..i),S.at(\"on\"..i)\n  if S.seen.adds then b=math.min(b,S.seen.adds)end\n  if b>a then gaps[#gaps+1]={a,b}end\n end\n if S.planningStage==2 then gaps={{S.planStart,S.at(\"gold\")}}end\n local valid={};for _,g in ipairs(gaps)do if g[2]>g[1]then valid[#valid+1]=g end end;gaps=valid\n if S.planningStage~=2 and S.naelGap then gaps[#gaps+1]={S.naelGap[1],S.naelGap[2]or now+6}end\n A.clearAutoSimPhases(\"FullDowntime\")\n for _,g in ipairs(S.union(gaps))do if g[2]>g[1]then A.addAutoSimPhase(\"FullDowntime\",g[1],g[2])end end\n local stun={}\n for _,g in pairs(S.dynamic)do if g[1]==\"Stun\"then stun[#stun+1]={g[2],g[3]}end end\n A.clearAutoSimPhases(\"Stun\")\n for _,g in ipairs(S.union(stun))do if g[2]>g[1]then A.addAutoSimPhase(\"Stun\",g[1],g[2])end end\n -- Optional relative Phoenix planning preference. Default is 1x throughout.\n -- Actual active status handling remains with the ACR.\n A.clearAutoSimPhases(\"BossModifier\")\n if S.cfg.phoenixPriority then\n local gold=S.at(\"gold\")\n if gold>0 then A.addAutoSimPhase(\"BossModifier\",0,gold,.5)end\n if S.phase==5 and S.phoenixSeen and not S.phoenixActive then\n  A.addAutoSimPhase(\"BossModifier\",gold,kill,.5)\n end\n end\n S.partyWindows,S.partyError=S.partySchedule()\n A.clearAutoSimPhases(\"RaidBuff\")\n if S.cfg.buffForecast then\n  for _,t in ipairs(S.partyWindows)do\n   -- Applies only to an existing burst at the P4 opening, including custom schedules.\n   local addsOpening=S.planningStage~=2 and t>=S.at(\"adds\") and t<S.at(\"adds\")+20\n   A.addAutoSimPhase(\"RaidBuff\",t,t+20,addsOpening and 1.4 or (1+S.cfg.buffGain/100))\n  end\n end\n -- Slot 0 tracks the selected main boss; slot 1 tracks the other adds boss.\n -- Lifetimes survive temporary untargetability. Golden starts a fresh target-state lifetime.\n local start,finish=0,S.at(\"twinEnd\")\n if S.planningStage==2 then start,finish=S.at(\"gold\"),kill\n elseif S.phase==2 then start,finish=S.at(\"nael\"),S.at(\"naelEnd\")\n elseif S.phase==3 then start,finish=S.at(\"baha\"),S.at(\"adds\")\n elseif S.phase==4 then start,finish=S.at(\"adds\"),S.at(\"addsEnd\")\n elseif S.phase==5 then start,finish=S.at(\"gold\"),kill end\n finish=math.max(finish,now+5)\n for slot=0,1 do\n  A.clearAutoSimPhases(\"DotAvailability\",slot);A.clearAutoSimPhases(\"TargetLifetime\",slot)\n  if slot==0 or(S.phase==4 and S.planningStage~=2)then\n   local id=slot==0 and S.mainID or S.otherID\n   local death=id and S.ends[id]\n   local ending=death or finish\n   if ending>start then\n    A.addAutoSimPhase(\"TargetLifetime\",start,ending,1,slot)\n    local cursor=start\n    for _,g in ipairs(S.union(gaps))do\n     local a,b=math.max(start,g[1]),math.min(ending-.5,g[2])\n     if b>a then if a>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,a,1,slot)end;cursor=math.max(cursor,b)end\n    end\n    if ending-.5>cursor then A.addAutoSimPhase(\"DotAvailability\",cursor,ending-.5,1,slot)end\n   end\n  end\n end\n A.clearAutoSimUncertainty()\n A.addAutoSimUncertainty(0,S.phase>=3 and 3 or 20)\n if S.planningStage~=2 and not S.seen.addsEnd then A.addAutoSimUncertainty(math.max(1,S.at(\"addsEnd\")-25),20)end\n if S.planningStage==2 then A.addAutoSimUncertainty(math.max(2,S.at(\"gold\")+S.cfg.goldLength-30),15)end\n S.lastPublish=now\nend\nfunction S.sync(k,t)\n if S.seen[k]then return end\n S.seen[k]=t;S.publish()\nend\nfor _,cid in ipairs({1482,2612,3210})do\n for _,e in pairs(TensorCore.getEntityGroupList(\"ContentID\",cid)or{})do\n  if e.alive then S.ids[cid]=e.id;S.up[cid]=e.targetable;break end\n end\nend\nS.publish()\nS.planRole=\"ranged\";S.planJob=Player.job\ndata.ucobAutoSim=S\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -1011,7 +1011,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local timing=_G.UCOB_AutoSimTiming\nif not timing then timing={enabled=false};_G.UCOB_AutoSimTiming=timing end\nlocal caster=Player.job==25 or Player.job==27 or Player.job==35 or Player.job==42 or Player.job==24 or Player.job==28 or Player.job==33 or Player.job==40\nlocal melee=Player.job==19 or Player.job==21 or Player.job==32 or Player.job==37 or Player.job==20 or Player.job==22 or Player.job==30 or Player.job==34 or Player.job==39 or Player.job==41\nlocal key=caster and \"UCOB_BLM_Config\" or(melee and \"UCOB_RPR_Config\" or \"UCOB_BRD_Config\")\nlocal C=_G[key]\nif not C then C={goldLength=162.14,addsLength=100.222,buffForecast=false,buffGain=17,lbWho=1,lbAt=150,twisterLead=1,twisterAfter=1,exaDuration=8,quoteMove=2};_G[key]=C end\nlocal visible=GUI:Begin(\"UCOB AutoSim Settings\",true)\nif visible then\n GUI:Text(\"Shared encounter tracking. Role forecasts. Session settings.\")\n GUI:Text(\"Timing changes apply next pull, including the early-pull fallback.\")\n if GUI:TreeNode(\"Phase estimates - next pull\") then\n  C.addsLength=GUI:SliderFloat(\"Expected adds duration (s)\",C.addsLength,60,160,\"%.1f\",1)\n  C.goldLength=GUI:SliderFloat(\"Expected Golden duration (s)\",C.goldLength,100,215,\"%.1f\",1)\n  timing.enabled=GUI:Checkbox(\"Use slower-group adjustments\",timing.enabled==true)\n  for _,v in ipairs({{\"twinExtra\",\"Twintania extra seconds\"},{\"naelExtra\",\"Nael extra seconds\"},{\"addsExtra\",\"Adds extra seconds\"},{\"goldExtra\",\"Golden extra seconds\"}}) do\n   timing[v[1]]=GUI:SliderFloat(v[2],timing[v[1]] or 0,0,90,\"%.1f\",1)\n   if GUI:IsItemHovered() then GUI:SetTooltip(\"Extra time added to the existing phase estimate. Zero keeps the normal estimate. Does not stretch individual mechanics. Native phase events override estimates.\") end\n  end\n  local S=data.ucobAutoSim;local T=S and S.groupTiming\n  if T then GUI:Text(T.enabled and string.format(\"Active pull extras: Twin %.1f / Nael %.1f / Adds %.1f / Golden %.1f\",T.twinExtra,T.naelExtra,T.addsExtra,T.goldExtra) or \"Active pull: normal estimates\") end\n  GUI:TreePop()\n end\n if caster and GUI:TreeNode(\"Caster movement\") then\n  C.twisterLead=GUI:SliderFloat(\"Twister movement lead (s)\",C.twisterLead or 1,0,3,\"%.1f\",1)\n  C.twisterAfter=GUI:SliderFloat(\"Twister recovery (s)\",C.twisterAfter or 1,0,3,\"%.1f\",1)\n  C.exaDuration=GUI:SliderFloat(\"Exaflare movement duration (s)\",C.exaDuration or 8,0,12,\"%.1f\",1)\n  GUI:Text(\"Movement estimates apply next pull. These forecasts do not move your character.\")\n  GUI:TreePop()\n end\n if melee and GUI:TreeNode(\"Melee Limit Break forecast\") then\n  C.lbWho=GUI:Combo(\"Who LBs\",C.lbWho or 1,{\"Me\",\"Other melee\"})\n  C.lbAt=GUI:SliderFloat(\"My LB: seconds after Golden\",C.lbAt or 150,5,200,\"%.1f\",1)\n  GUI:Text(\"Forecast only; does not automatically cast LB. Personal melee LB corrects the lock.\")\n  GUI:TreePop()\n end\n if Player.job==23 and GUI:TreeNode(\"Bard burst options\") then\n  C.reserveGrand=GUI:Checkbox(\"Reserve burst after Grand Octet\",C.reserveGrand~=false)\n  C.alignParty=GUI:Checkbox(\"Align with planned party burst\",C.alignParty==true)\n  C.burstWait=GUI:SliderFloat(\"Maximum burst wait (s)\",C.burstWait or 30,0,60,\"%.1f\",1)\n  GUI:TreePop()\n end\n if GUI:TreeNode(\"Planning preferences\") then\n  C.phoenixPriority=GUI:Checkbox(\"Prefer Phoenix-buffed Golden damage\",C.phoenixPriority==true)\n  if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional artificial planning weight, not an additional real damage buff.\") end\n  C.buffForecast=GUI:Checkbox(\"Forecast future party buffs\",C.buffForecast==true)\n  C.buffGain=GUI:SliderFloat(\"Combined future buff gain (%)\",C.buffGain or 17,0,40,\"%.1f\",1)\n  GUI:Text(\"Role configuration is captured at pull setup; original live options retain their behaviour.\")\n  GUI:TreePop()\n end\nend\nGUI:End()",
+							actionLua = "local timing=_G.UCOB_AutoSimTiming\nif not timing then timing={enabled=false};_G.UCOB_AutoSimTiming=timing end\nlocal caster=Player.job==25 or Player.job==27 or Player.job==35 or Player.job==42 or Player.job==24 or Player.job==28 or Player.job==33 or Player.job==40\nlocal melee=Player.job==19 or Player.job==21 or Player.job==32 or Player.job==37 or Player.job==20 or Player.job==22 or Player.job==30 or Player.job==34 or Player.job==39 or Player.job==41\nlocal key=caster and \"UCOB_BLM_Config\" or(melee and \"UCOB_RPR_Config\" or \"UCOB_BRD_Config\")\nlocal C=_G[key]\nif not C then C={goldLength=162.14,addsLength=100.222,buffForecast=false,buffGain=17,lbWho=1,lbAt=150,twisterLead=1,twisterAfter=1,exaDuration=8,quoteMove=2};_G[key]=C end\nlocal visible=GUI:Begin(\"UCOB AutoSim Settings\",true)\nif visible then\n GUI:Text(\"Shared encounter tracking. Role forecasts. Session settings.\")\n GUI:Text(\"Timing changes apply next pull, including the early-pull fallback.\")\n if GUI:TreeNode(\"Phase estimates - next pull\") then\n  C.twinLength=GUI:SliderFloat(\"Expected Twintania duration (s)\",C.twinLength or 132,90,200,\"%.1f\",1)\n  C.naelLength=GUI:SliderFloat(\"Expected Nael duration (s)\",C.naelLength or 129,80,200,\"%.1f\",1)\n  if GUI:IsItemHovered() then GUI:SetTooltip(\"Middle-ground starting estimates: Twintania 132s and Nael 129s. Captured next pull; native phase events correct them.\") end\n  C.addsLength=GUI:SliderFloat(\"Expected adds duration (s)\",C.addsLength,60,160,\"%.1f\",1)\n  C.goldLength=GUI:SliderFloat(\"Expected Golden duration (s)\",C.goldLength,100,215,\"%.1f\",1)\n  timing.enabled=GUI:Checkbox(\"Use slower-group adjustments\",timing.enabled==true)\n  for _,v in ipairs({{\"twinExtra\",\"Twintania extra seconds\"},{\"naelExtra\",\"Nael extra seconds\"},{\"addsExtra\",\"Adds extra seconds\"},{\"goldExtra\",\"Golden extra seconds\"}}) do\n   timing[v[1]]=GUI:SliderFloat(v[2],timing[v[1]] or 0,0,90,\"%.1f\",1)\n   if GUI:IsItemHovered() then GUI:SetTooltip(\"Extra time added to the existing phase estimate. Zero keeps the normal estimate. Does not stretch individual mechanics. Native phase events override estimates.\") end\n  end\n  local S=data.ucobAutoSim;local T=S and S.groupTiming\n  if T then GUI:Text(T.enabled and string.format(\"Active pull extras: Twin %.1f / Nael %.1f / Adds %.1f / Golden %.1f\",T.twinExtra,T.naelExtra,T.addsExtra,T.goldExtra) or \"Active pull: normal estimates\") end\n  GUI:TreePop()\n end\n if caster and GUI:TreeNode(\"Caster movement\") then\n  C.twisterLead=GUI:SliderFloat(\"Twister movement lead (s)\",C.twisterLead or 1,0,3,\"%.1f\",1)\n  C.twisterAfter=GUI:SliderFloat(\"Twister recovery (s)\",C.twisterAfter or 1,0,3,\"%.1f\",1)\n  C.exaDuration=GUI:SliderFloat(\"Exaflare movement duration (s)\",C.exaDuration or 8,0,12,\"%.1f\",1)\n  C.quoteMove=GUI:SliderFloat(\"Quote adjustment movement (s)\",C.quoteMove or 2,0,5,\"%.1f\",1)\n  C.assignmentMove=GUI:SliderFloat(\"Hatch / Earthshaker move (s)\",C.assignmentMove or 2,0,5,\"%.1f\",1)\n  C.returnMove=GUI:SliderFloat(\"Assignment return move (s)\",C.returnMove or 1.5,0,5,\"%.1f\",1)\n  GUI:Text(\"Movement estimates apply next pull. These forecasts do not move your character.\")\n  GUI:TreePop()\n end\n if melee and GUI:TreeNode(\"Melee Limit Break forecast\") then\n  C.lbWho=GUI:Combo(\"Who LBs\",C.lbWho or 1,{\"Me\",\"Other melee\"})\n  C.lbAt=GUI:SliderFloat(\"My LB: seconds after Golden\",C.lbAt or 150,5,200,\"%.1f\",1)\n  GUI:Text(\"Forecast only; does not automatically cast LB. Personal melee LB corrects the lock.\")\n  GUI:TreePop()\n end\n if Player.job==23 and GUI:TreeNode(\"Bard burst options\") then\n  C.reserveGrand=GUI:Checkbox(\"Reserve burst after Grand Octet\",C.reserveGrand~=false)\n  C.alignParty=GUI:Checkbox(\"Align with planned party burst\",C.alignParty==true)\n  C.burstWait=GUI:SliderFloat(\"Maximum burst wait (s)\",C.burstWait or 30,0,60,\"%.1f\",1)\n  GUI:TreePop()\n end\n if GUI:TreeNode(\"Planning preferences\") then\n  C.phoenixPriority=GUI:Checkbox(\"Prefer Phoenix-buffed Golden damage\",C.phoenixPriority==true)\n  if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional artificial planning weight, not an additional real damage buff.\") end\n  C.buffForecast=GUI:Checkbox(\"Forecast future party buffs\",C.buffForecast==true)\n  C.buffGain=GUI:SliderFloat(\"Combined future buff gain (%)\",C.buffGain or 17,0,40,\"%.1f\",1)\n  GUI:Text(\"Role configuration is captured at pull setup; original live options retain their behaviour.\")\n  GUI:TreePop()\n end\nend\nGUI:End()",
 							conditions = 
 							{
 								
@@ -1133,6 +1133,1139 @@ local tbl =
 				timerEndOffset = 1500,
 				timerStartOffset = -7,
 				uuid = "5000f032-ac7e-ca26-bf76-bb46de1fe055",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "AutoSim",
+				name = "Caster movement",
+				uuid = "ac85a0ad-d193-53ea-afd4-9f79fd468539",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.ucobAutoSim\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nS.personalMoves[\"marker118\"]={now,now+S.cfg.assignmentMove}\nS.pending118=true;S.publish();self.used=true",
+							conditions = 
+							{
+								
+								{
+									"287bb189-bf33-863d-ba36-587c0f14e42e",
+									true,
+								},
+								
+								{
+									"4bef50bf-ff11-dc37-b1b2-35b2fe6cd7a9",
+									true,
+								},
+								
+								{
+									"58fd1e31-2f6d-0901-88f0-c21e8fe6a244",
+									true,
+								},
+								
+								{
+									"e2231583-fd6c-41aa-b018-de29c19a141a",
+									true,
+								},
+								
+								{
+									"66343b4a-eb81-5952-834e-d0888e63cf9f",
+									true,
+								},
+							},
+							name = "Personal Hatch movement",
+							uuid = "dfbe6174-60b2-9cb1-9b73-b55430299168",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.ucobAutoSim\nreturn S~=nil and S.planRole==\"caster\"",
+							dequeueIfLuaFalse = true,
+							name = "Caster plan active",
+							uuid = "4bef50bf-ff11-dc37-b1b2-35b2fe6cd7a9",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 733,
+							name = "UCOB",
+							uuid = "287bb189-bf33-863d-ba36-587c0f14e42e",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventMarkerID = 118,
+							name = "Hatch",
+							uuid = "58fd1e31-2f6d-0901-88f0-c21e8fe6a244",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityID==Player.id",
+							dequeueIfLuaFalse = true,
+							name = "Personal marker",
+							uuid = "e2231583-fd6c-41aa-b018-de29c19a141a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return data.ucobAutoSim~=nil",
+							name = "Configured",
+							uuid = "66343b4a-eb81-5952-834e-d0888e63cf9f",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Caster movement",
+				eventType = 4,
+				loop = true,
+				mechanicTime = 7,
+				name = "[UCOB] Personal Hatch movement",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 1500,
+				timerStartOffset = -7,
+				uuid = "53b396a6-36e7-7a1c-8304-d33006afdf27",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.ucobAutoSim\nlocal p=TensorCore.mGetPlayer()\nlocal radius=eventArgs.spellID==9901 and 6 or 5\nlocal dx,dz=p.pos.x-eventArgs.castPosX,p.pos.z-eventArgs.castPosZ\nif dx*dx+dz*dz>(radius+.5)^2 then self.used=true;return end\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nlocal kind=eventArgs.spellID==9901 and\"liquid\"or\"hypernova\"\nlocal old=S.personalMoves[kind]\nS.personalMoves[kind]={old and old[2]>now and old[1]or now,now+1.5};S.publish();self.used=true",
+							conditions = 
+							{
+								
+								{
+									"4fc44fbd-a0fd-52a4-b11d-a292178d3b92",
+									true,
+								},
+								
+								{
+									"4b001579-44bb-4dd0-910b-806c0e26135f",
+									true,
+								},
+								
+								{
+									"67c8f263-de06-f2f7-9c39-53dc7ed0d334",
+									true,
+								},
+								
+								{
+									"48bf969a-147e-1b55-9ab8-eb32d6108661",
+									true,
+								},
+								
+								{
+									"98de2d6b-db95-843e-8f59-9097f3d5a3fc",
+									true,
+								},
+							},
+							name = "Nearby puddle movement",
+							uuid = "fecf51fe-1c3d-d683-b523-0c8595fb125d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.ucobAutoSim\nreturn S~=nil and S.planRole==\"caster\"",
+							dequeueIfLuaFalse = true,
+							name = "Caster plan active",
+							uuid = "4b001579-44bb-4dd0-910b-806c0e26135f",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 733,
+							name = "UCOB",
+							uuid = "4fc44fbd-a0fd-52a4-b11d-a292178d3b92",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Mechanic casts",
+							spellIDList = 
+							{
+								9901,
+								9919,
+							},
+							uuid = "67c8f263-de06-f2f7-9c39-53dc7ed0d334",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.castPosX~=nil and eventArgs.castPosZ~=nil",
+							dequeueIfLuaFalse = true,
+							name = "Ground position available",
+							uuid = "48bf969a-147e-1b55-9ab8-eb32d6108661",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return data.ucobAutoSim~=nil",
+							name = "Configured",
+							uuid = "98de2d6b-db95-843e-8f59-9097f3d5a3fc",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Caster movement",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 7,
+				name = "[UCOB] Nearby puddle movement",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 1500,
+				timerStartOffset = -7,
+				uuid = "7c638020-ca46-9928-85c7-9b6ef92b5188",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.ucobAutoSim\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nS.personalMoves[\"marker40\"]={now,now+S.cfg.assignmentMove}\nS.pending40=true;S.publish();self.used=true",
+							conditions = 
+							{
+								
+								{
+									"cee5b308-ca34-c8af-a2b2-f684367c6034",
+									true,
+								},
+								
+								{
+									"c1ff5de6-5997-ee37-a089-f3a01b201a17",
+									true,
+								},
+								
+								{
+									"98d8a8d9-1c77-def4-bea8-a3ce8be20afe",
+									true,
+								},
+								
+								{
+									"fff92185-080a-2949-a59f-bd3df124a85c",
+									true,
+								},
+								
+								{
+									"bf9b79db-8a99-bf4a-849f-f5e7a084e002",
+									true,
+								},
+							},
+							name = "Personal Earthshaker movement",
+							uuid = "bcab9996-684e-eaca-be60-46d85eacd737",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.ucobAutoSim\nreturn S~=nil and S.planRole==\"caster\"",
+							dequeueIfLuaFalse = true,
+							name = "Caster plan active",
+							uuid = "c1ff5de6-5997-ee37-a089-f3a01b201a17",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 733,
+							name = "UCOB",
+							uuid = "cee5b308-ca34-c8af-a2b2-f684367c6034",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventMarkerID = 40,
+							name = "Earthshaker",
+							uuid = "98d8a8d9-1c77-def4-bea8-a3ce8be20afe",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityID==Player.id",
+							dequeueIfLuaFalse = true,
+							name = "Personal marker",
+							uuid = "fff92185-080a-2949-a59f-bd3df124a85c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return data.ucobAutoSim~=nil",
+							name = "Configured",
+							uuid = "bf9b79db-8a99-bf4a-849f-f5e7a084e002",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Caster movement",
+				eventType = 4,
+				loop = true,
+				mechanicTime = 7,
+				name = "[UCOB] Personal Earthshaker movement",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 1500,
+				timerStartOffset = -7,
+				uuid = "ddd81c05-4deb-8140-a7b3-51b65a5c80d6",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.ucobAutoSim\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nlocal finish=now+eventArgs.channelTimeMax+.3\nS.correctMovement(eventArgs.spellID==9898 and \"twister\"or\"exa\",finish)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"3563589a-932e-c622-9610-a9997179fd3e",
+									true,
+								},
+								
+								{
+									"43854262-be5c-dad6-b37a-20130c937b8a",
+									true,
+								},
+								
+								{
+									"9a9c0e2b-4c08-5b6d-bc9e-39089ba329c9",
+									true,
+								},
+								
+								{
+									"0815b23e-eb94-e29d-b488-a235468de4fa",
+									true,
+								},
+							},
+							name = "Correct Twister and Exaflare movement",
+							uuid = "c90ba189-cc82-e8ce-ac85-df4da6572d53",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.ucobAutoSim\nreturn S~=nil and S.planRole==\"caster\"",
+							dequeueIfLuaFalse = true,
+							name = "Caster plan active",
+							uuid = "43854262-be5c-dad6-b37a-20130c937b8a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 733,
+							name = "UCOB",
+							uuid = "3563589a-932e-c622-9610-a9997179fd3e",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Mechanic casts",
+							spellIDList = 
+							{
+								9898,
+								9967,
+							},
+							uuid = "9a9c0e2b-4c08-5b6d-bc9e-39089ba329c9",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return data.ucobAutoSim~=nil",
+							name = "Configured",
+							uuid = "0815b23e-eb94-e29d-b488-a235468de4fa",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Caster movement",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 7,
+				name = "[UCOB] Correct Twister and Exaflare movement",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 1500,
+				timerStartOffset = -7,
+				uuid = "3dcd7822-0dd4-027a-a0db-ad49b87c1c5f",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.ucobAutoSim\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nlocal kind=eventArgs.spellID==9898 and \"twister\"or\"exa\"\nlocal best,delta\nfor key,t in pairs(S.moveActual)do\n if (kind==\"twister\"and key:find(\"Twister\")or kind==\"exa\"and key:find(\"exa\"))then\n  local d=math.abs(now-t);if not delta or d<delta then best,delta=key,d end\n end\nend\nif best and delta<3 then S.moveActual[best]=now;S.publish()else S.correctMovement(kind,now)end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"4ee96222-1882-e0c9-9365-d86323793536",
+									true,
+								},
+								
+								{
+									"ca80647b-dff8-8634-b66c-332abe0df569",
+									true,
+								},
+								
+								{
+									"8b002d52-4af7-e41a-a77b-ebd48399f02a",
+									true,
+								},
+								
+								{
+									"82868ca2-065d-e9e7-bb57-d98d048589dd",
+									true,
+								},
+							},
+							name = "Confirm movement cast resolution",
+							uuid = "b83b361a-7ea0-9e88-8f1d-9cecacd8351f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.ucobAutoSim\nreturn S~=nil and S.planRole==\"caster\"",
+							dequeueIfLuaFalse = true,
+							name = "Caster plan active",
+							uuid = "ca80647b-dff8-8634-b66c-332abe0df569",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 733,
+							name = "UCOB",
+							uuid = "4ee96222-1882-e0c9-9365-d86323793536",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Mechanic casts",
+							spellIDList = 
+							{
+								9898,
+								9967,
+							},
+							uuid = "8b002d52-4af7-e41a-a77b-ebd48399f02a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return data.ucobAutoSim~=nil",
+							name = "Configured",
+							uuid = "82868ca2-065d-e9e7-bb57-d98d048589dd",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Caster movement",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 7,
+				name = "[UCOB] Confirm movement cast resolution",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 1500,
+				timerStartOffset = -7,
+				uuid = "47a299e5-bf7c-8c32-85c0-78a6576999b6",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.ucobAutoSim\nlocal marker=eventArgs.spellID==9903 and 118 or 40\nlocal key=\"pending\"..marker\nif not S[key]then self.used=true;return end\nS[key]=nil\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nS.personalMoves[\"return\"..marker]={now,now+S.cfg.returnMove};S.publish();self.used=true",
+							conditions = 
+							{
+								
+								{
+									"13445c8c-fb53-0818-b979-b353ae9102fe",
+									true,
+								},
+								
+								{
+									"078d520a-30cd-7299-85d0-c078d5520a8d",
+									true,
+								},
+								
+								{
+									"57695e8d-879d-f85d-a42c-4a4b1afebbce",
+									true,
+								},
+								
+								{
+									"8f38b818-8052-f0c2-aa09-37ddf709bdb5",
+									true,
+								},
+								
+								{
+									"47fc685c-12e3-bb6c-87d7-2fcab759b407",
+									true,
+								},
+							},
+							name = "Personal assignment return movement",
+							uuid = "df73fcc1-4de2-c9a9-a98d-f0c7f438e149",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.ucobAutoSim\nreturn S~=nil and S.planRole==\"caster\"",
+							dequeueIfLuaFalse = true,
+							name = "Caster plan active",
+							uuid = "078d520a-30cd-7299-85d0-c078d5520a8d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 733,
+							name = "UCOB",
+							uuid = "13445c8c-fb53-0818-b979-b353ae9102fe",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Mechanic casts",
+							spellIDList = 
+							{
+								9903,
+								9946,
+							},
+							uuid = "57695e8d-879d-f85d-a42c-4a4b1afebbce",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "for _,id in ipairs(eventArgs.hitTargets)do if id==Player.id then return true end end\nreturn false",
+							dequeueIfLuaFalse = true,
+							name = "Hits player",
+							uuid = "8f38b818-8052-f0c2-aa09-37ddf709bdb5",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return data.ucobAutoSim~=nil",
+							name = "Configured",
+							uuid = "47fc685c-12e3-bb6c-87d7-2fcab759b407",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Caster movement",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 7,
+				name = "[UCOB] Personal assignment return movement",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 1500,
+				timerStartOffset = -7,
+				uuid = "ac928c5c-b8e6-1b0d-94c4-0e347a8e9a94",
+				version = 2,
+			},
+		},
+	},
+	[48] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "AutoSim",
+				uuid = "d77ec2fd-b450-3339-af59-338c2b300b5e",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "AutoSim",
+				name = "Caster movement",
+				uuid = "2e966da6-1054-8d88-be02-8d2112f64fa5",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.ucobAutoSim\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nlocal text=eventArgs.line.line\nS.quote={text=text,seq=S.quoteSequence(text),step=1,nextHit=now+5.1,expires=now+20}\nS.planQuote();self.used=true",
+							conditions = 
+							{
+								
+								{
+									"285f506a-9f96-1960-a1f3-34964af2a461",
+									true,
+								},
+								
+								{
+									"a42a2f9e-0004-3347-9965-ae8ece10ee0a",
+									true,
+								},
+								
+								{
+									"c58257bc-2e6f-6694-bfc6-a62e65a8e781",
+									true,
+								},
+								
+								{
+									"0f73dc85-8dfa-c0ec-a0fe-21b6c888aac7",
+									true,
+								},
+							},
+							name = "Forecast personal quote movement",
+							uuid = "5d6cdc82-2642-f5ee-8878-a19c93cde432",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.ucobAutoSim\nreturn S~=nil and S.planRole==\"caster\"",
+							dequeueIfLuaFalse = true,
+							name = "Caster plan active",
+							uuid = "a42a2f9e-0004-3347-9965-ae8ece10ee0a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 733,
+							name = "UCOB",
+							uuid = "285f506a-9f96-1960-a1f3-34964af2a461",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.ucobAutoSim\nreturn S~=nil and S.phase==2",
+							dequeueIfLuaFalse = true,
+							name = "P2 configured",
+							uuid = "c58257bc-2e6f-6694-bfc6-a62e65a8e781",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.ucobAutoSim\nlocal text=eventArgs.line.line\nlocal q=S.quote\nreturn S.quoteSequence(text)~=nil and(not q or q.text~=text or TensorCore.API.TensorACR.getAutoSimTime()>=q.expires)",
+							dequeueIfLuaFalse = true,
+							name = "New recognized quote",
+							uuid = "0f73dc85-8dfa-c0ec-a0fe-21b6c888aac7",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Caster movement",
+				eventType = 7,
+				loop = true,
+				mechanicTime = 230.6,
+				name = "[UCOB] Forecast personal quote movement",
+				timeRange = true,
+				timelineIndex = 48,
+				timerEndOffset = 220,
+				timerStartOffset = -35,
+				uuid = "f9ebf26a-6461-10a4-a5af-14729f704d36",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.ucobAutoSim\nlocal q=S.quote\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nq.previous=S.quoteCategory(q.seq[q.step]);q.step=q.step+1;q.nextHit=now+3.1\nS.planQuote();self.used=true",
+							conditions = 
+							{
+								
+								{
+									"a5b99935-7503-3760-84ab-24cd05481446",
+									true,
+								},
+								
+								{
+									"0ba9f31b-1d87-06de-824d-bb644c682405",
+									true,
+								},
+								
+								{
+									"d12a77dd-c482-b914-9992-e4f9f2529596",
+									true,
+								},
+								
+								{
+									"7cb2d760-8577-78e2-8c9c-370bf0183057",
+									true,
+								},
+								
+								{
+									"5f48f686-3d1d-f2fc-bb23-fd39b2c5f96a",
+									true,
+								},
+							},
+							name = "Correct remaining quote movement",
+							uuid = "8c7c9e6e-8ac7-5634-a37a-67d76b01729c",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.ucobAutoSim\nreturn S~=nil and S.planRole==\"caster\"",
+							dequeueIfLuaFalse = true,
+							name = "Caster plan active",
+							uuid = "0ba9f31b-1d87-06de-824d-bb644c682405",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 733,
+							name = "UCOB",
+							uuid = "a5b99935-7503-3760-84ab-24cd05481446",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.ucobAutoSim\nreturn S~=nil and S.phase==2",
+							dequeueIfLuaFalse = true,
+							name = "P2 configured",
+							uuid = "d12a77dd-c482-b914-9992-e4f9f2529596",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Quote resolution",
+							spellIDList = 
+							{
+								9915,
+								9916,
+								9917,
+								9918,
+								9920,
+							},
+							uuid = "7cb2d760-8577-78e2-8c9c-370bf0183057",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.ucobAutoSim\nlocal q=S.quote\nreturn q~=nil and TensorCore.API.TensorACR.getAutoSimTime()<q.expires and q.seq[q.step]==eventArgs.spellID",
+							dequeueIfLuaFalse = true,
+							name = "Expected quote step",
+							uuid = "5f48f686-3d1d-f2fc-bb23-fd39b2c5f96a",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Caster movement",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 230.6,
+				name = "[UCOB] Correct remaining quote movement",
+				timeRange = true,
+				timelineIndex = 48,
+				timerEndOffset = 220,
+				timerStartOffset = -35,
+				uuid = "2524d1eb-3764-16e7-89ae-04c00a823818",
+				version = 2,
+			},
+		},
+	},
+	[152] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "AutoSim",
+				uuid = "244eac08-41ef-398d-b05e-f28a054407aa",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "AutoSim",
+				name = "Bard options",
+				uuid = "973642fa-213b-4a91-afc0-f5445474ff1d",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.ucobAutoSim\nS.octetSeen=true\nS.updateBurstHolds(TensorCore.API.TensorACR.getAutoSimTime())\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"32da2904-f2a4-c81b-8ee0-0f4b16ed0d66",
+									true,
+								},
+								
+								{
+									"e97c9e0a-073b-f426-a333-af31b40510e1",
+									true,
+								},
+								
+								{
+									"99173390-483a-fab3-8a4e-38448cb8739e",
+									true,
+								},
+								
+								{
+									"4fdaf691-9459-cb98-b8cc-a17dd494e966",
+									true,
+								},
+							},
+							name = "Start optional reservation",
+							uuid = "832203f0-ac97-bf0a-beff-d6219e4075f0",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								23,
+							},
+							name = "Bard only",
+							uuid = "32da2904-f2a4-c81b-8ee0-0f4b16ed0d66",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 733,
+							name = "UCOB",
+							uuid = "e97c9e0a-073b-f426-a333-af31b40510e1",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Grand Octet",
+							spellIDList = 
+							{
+								9959,
+							},
+							uuid = "99173390-483a-fab3-8a4e-38448cb8739e",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.ucobAutoSim\nreturn S~=nil and S.phase==3",
+							dequeueIfLuaFalse = true,
+							name = "P3 configured",
+							uuid = "4fdaf691-9459-cb98-b8cc-a17dd494e966",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Bard options",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 789.4,
+				name = "[UCOB] Bard Grand Octet burst reservation",
+				timeRange = true,
+				timelineIndex = 152,
+				timerEndOffset = 100,
+				timerStartOffset = -15,
+				uuid = "1f3e4208-281e-d8e0-b1c2-af05e9e7962e",
 				version = 2,
 			},
 		},
