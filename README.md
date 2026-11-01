@@ -18,6 +18,10 @@ TEA: Coming soon by Ton.
 
 ## Changelog
 
+### Q40: AutoSim
+
+- Added shared AutoSim support to q40, with countdown/early-pull setup, boss-cast timing corrections, conservative caster movement forecasts and saved settings. Automatic kill estimation stays enabled by default; optional kill-time and party-buff forecasts are configurable. Existing targeting and cooldown usage remain unchanged. Replay checks are pending. (01-11-2026)
+
 ### Dungeons: AutoSim
 
 - dungeon lol now supports all AutoSim jobs across its nine dungeon plans. Boss timing, targetability, optional kill estimates and raid-buff forecasts are shared; caster movement applies to casting jobs, while Ley Lines returns and Ley Lines/Manafont pooling remain BLM-only. Cross-job replay checks remain pending. (01-11-2026)

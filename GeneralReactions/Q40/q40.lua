@@ -6837,6 +6837,327 @@ local tbl =
 			uuid = "6c62ba33-0283-a347-84cd-61df7a3c4236",
 			version = 2,
 		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "AutoSim",
+			uuid = "bbc4b851-6cda-51be-a983-5401db32f209",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if not Q40AutoSimConfig then\n    local C={enabled=true,movement=true,killOverride=false,killTime=559.5,uncertainty=2,unexpectedPct=5,buffEnabled=false,buffPct=0,buffFirst=5,buffDuration=20,buffPeriod=120,status=\"Ready; changes apply next pull.\"}\n    C.keys={\"enabled\",\"movement\",\"killOverride\",\"killTime\",\"uncertainty\",\"unexpectedPct\",\"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetStartupPath()..[[\\LuaMods\\TensorReactions\\Q40.AutoSim.settings.tsv]]\n    local f=io.open(C.path,\"r\")\n    if f then\n        for line in f:lines() do\n            local k,v=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if k and C[k]~=nil then\n                if type(C[k])==\"boolean\" then C[k]=v==\"1\"\n                elseif type(C[k])==\"number\" then local n=tonumber(v);if n and n==n and n>-math.huge and n<math.huge then C[k]=n end end\n            end\n        end\n        f:close()\n    end\n    C.killTime=math.max(60,math.min(1200,C.killTime));C.uncertainty=math.max(0,math.min(30,C.uncertainty));C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.buffPct=math.max(0,math.min(50,C.buffPct));C.buffFirst=math.max(0,math.min(1200,C.buffFirst));C.buffDuration=math.max(1,math.min(60,C.buffDuration));C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,k in ipairs(C.keys) do local v=C[k];if type(v)==\"boolean\" then v=v and 1 or 0 end;f:write(k,\"\\t\",tostring(v),\"\\n\") end\n        f:close();C.status=\"Saved; changes apply next pull.\"\n    end\n    Q40AutoSimConfig=C\nend\nlocal C=Q40AutoSimConfig\nlocal visible=GUI:Begin(\"Q40 - Shared AutoSim\")\nif visible then\n    local changed,v\n    v,changed=GUI:Checkbox(\"Enable AutoSim encounter forecasts\",C.enabled);if changed then C.enabled=v;C.save() end\n    v,changed=GUI:Checkbox(\"Conservative caster movement forecasts\",C.movement);if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Union of possible mechanic repositioning windows, not measured forced movement for every assignment. Casting jobs only. No automatic movement or ground-field return.\") end\n    v,changed=GUI:SliderInt(\"Extra caster movement allowance (%)\",C.unexpectedPct,0,30);if changed then C.unexpectedPct=v;C.save() end\n    v,changed=GUI:Checkbox(\"Override automatic kill estimate\",C.killOverride);if changed then C.killOverride=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Off uses the ACR's live estimate. The 559.5s default below is the observed final enrage, not an observed clear time.\") end\n    if C.killOverride then\n        v,changed=GUI:SliderInt(\"Expected kill time (s)\",C.killTime,60,1200);if changed then C.killTime=v;C.save() end\n        v,changed=GUI:SliderInt(\"Timing uncertainty (+/- seconds)\",C.uncertainty,0,30);if changed then C.uncertainty=v;C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled);if changed then C.buffEnabled=v;C.save() end\n    if C.buffEnabled then\n        v,changed=GUI:SliderInt(\"Combined buff gain (%)\",C.buffPct,0,50);if changed then C.buffPct=v;C.save() end\n        v,changed=GUI:SliderInt(\"First buff window (s)\",C.buffFirst,0,1200);if changed then C.buffFirst=v;C.save() end\n        v,changed=GUI:SliderInt(\"Buff duration (s)\",C.buffDuration,1,60);if changed then C.buffDuration=v;C.buffPeriod=math.max(v+1,C.buffPeriod);C.save() end\n        v,changed=GUI:SliderInt(\"Buff repeat period (s)\",C.buffPeriod,C.buffDuration+1,600);if changed then C.buffPeriod=v;C.save() end\n    end\n    GUI:Text(\"Existing target selection retained. No cooldown reservations.\")\n    GUI:Text(\"Observed terminal sequence: Unholy Darkness ~541.5s; Hellish Earth ~559.5s.\")\n    GUI:Text(C.status)\nend\nGUI:End()\nself.used=true\n",
+						conditions = 
+						{
+							
+							{
+								"2d707af0-3c51-28af-8f9c-fe35f3fa38d1",
+								true,
+							},
+						},
+						name = "Settings",
+						uuid = "1ee008b9-dcb9-ff34-a527-e9607c68f33d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						name = "Quantum only",
+						uuid = "2d707af0-3c51-28af-8f9c-fe35f3fa38d1",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "AutoSim",
+			eventType = 13,
+			name = "[Q40 AutoSim] Settings",
+			uuid = "afde0b3f-6655-6409-bda3-68e91e4c6bb8",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if not Q40AutoSimConfig then\n    local C={enabled=true,movement=true,killOverride=false,killTime=559.5,uncertainty=2,unexpectedPct=5,buffEnabled=false,buffPct=0,buffFirst=5,buffDuration=20,buffPeriod=120,status=\"Ready; changes apply next pull.\"}\n    C.keys={\"enabled\",\"movement\",\"killOverride\",\"killTime\",\"uncertainty\",\"unexpectedPct\",\"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetStartupPath()..[[\\LuaMods\\TensorReactions\\Q40.AutoSim.settings.tsv]]\n    local f=io.open(C.path,\"r\")\n    if f then\n        for line in f:lines() do\n            local k,v=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if k and C[k]~=nil then\n                if type(C[k])==\"boolean\" then C[k]=v==\"1\"\n                elseif type(C[k])==\"number\" then local n=tonumber(v);if n and n==n and n>-math.huge and n<math.huge then C[k]=n end end\n            end\n        end\n        f:close()\n    end\n    C.killTime=math.max(60,math.min(1200,C.killTime));C.uncertainty=math.max(0,math.min(30,C.uncertainty));C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.buffPct=math.max(0,math.min(50,C.buffPct));C.buffFirst=math.max(0,math.min(1200,C.buffFirst));C.buffDuration=math.max(1,math.min(60,C.buffDuration));C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,k in ipairs(C.keys) do local v=C[k];if type(v)==\"boolean\" then v=v and 1 or 0 end;f:write(k,\"\\t\",tostring(v),\"\\n\") end\n        f:close();C.status=\"Saved; changes apply next pull.\"\n    end\n    Q40AutoSimConfig=C\nend\nlocal C=Q40AutoSimConfig\nif data.q40AutoSim then self.used=true;return end\nif not C.enabled then data.q40AutoSim={disabled=true};self.used=true;return end\nlocal A=TensorCore.API.TensorACR\nlocal ok,t=pcall(A.getAutoSimTime)\nif not ok or type(t)~=\"number\" or t< -120 then return end\nif t>10 then data.q40AutoSim={disabled=true};C.status=\"Opening missed; forecasts start next pull.\";self.used=true;return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1311 then self.used=true;return end\nlocal job=p.job\nlocal caster=job==25 or job==27 or job==35 or job==42 or job==36 or job==24 or job==28 or job==33 or job==40\nlocal S={movement=C.movement and caster,killOverride=C.killOverride,killTime=C.killTime,uncertainty=C.uncertainty,unexpectedPct=C.unexpectedPct,buffEnabled=C.buffEnabled,buffPct=C.buffPct,buffFirst=C.buffFirst,buffDuration=C.buffDuration,buffPeriod=C.buffPeriod,shift=0,phases={},lastAnchor=-999,anchorsSeen=0}\ndata.q40AutoSim=S\nS.anchors={[\"14037:44797\"]={9.136,291.094,368.877},[\"14038:44120\"]={29.172,189.742,281.88,409.063,501.672,504.5},[\"14037:44097\"]={56.046,236.518,395.928},[\"14038:44109\"]={56.046,236.781,395.833},[\"14037:44125\"]={79.193,255.724,418.097},[\"14037:44126\"]={89.238,265.762,428.173},[\"14038:44801\"]={105.421},[\"14037:44151\"]={113.455},[\"14037:44157\"]={122.541,147.578,458.469},[\"14038:44163\"]={138.534,333.931},[\"14037:44798\"]={166.7,290.773,369.281},[\"14038:44165\"]={225.572},[\"14037:44099\"]={56.074,236.719,396.063},[\"14038:44108\"]={56.074,236.459,396.078},[\"14037:44130\"]={312.793},[\"14038:44131\"]={312.793},[\"14037:44170\"]={355.905},[\"14037:44158\"]={122.5,147.661,458.034},[\"14037:44105\"]={56.219,515.485},[\"14038:44102\"]={56.195,515.485},[\"14037:44129\"]={313.125,477.547},[\"14038:44133\"]={313.125,477.547},[\"14037:44174\"]={532.532},[\"14038:44175\"]={532.532},[\"14038:44103\"]={56.219}}\nS.windows={{29.157,45.157},{56.141,68.14099999999999},{79.266,84.266},{89.328,94.328},{105.422,113.422},{113.469,136.5},{147.672,161.672},{189.828,205.828},{236.719,251.719},{255.828,260.828},{265.875,270.875},{282.032,298.032},{312.969,326.969},{355.953,388.953},{396.063,425.157},{428.266,433.266},{458.375,472.375},{477.422,491.422},{504.5,527.485}}\nfunction S.rebuild(now,shift)\n    for i=1,#S.phases do\n        local v=S.phases[i]\n        if v.id and v.a>now then A.removeAutoSimPhase(v.id);v.id=nil end\n    end\n    local activeEnd=now\n    for i=1,#S.phases do local v=S.phases[i];if v.id and v.a<=now and v.b>activeEnd then activeEnd=v.b end end\n    for i=1,#S.windows do\n        local w=S.windows[i];local a,b=math.max(w[1]+shift,now,activeEnd),w[2]+shift\n        if b>a then\n            local id=A.addAutoSimPhase(\"CasterDowntime\",a,b)\n            if id then S.phases[#S.phases+1]={id=id,a=a,b=b};activeEnd=b end\n        end\n    end\nend\nif S.killOverride then A.setAutoSimKillTime(S.killTime);A.addAutoSimUncertainty(math.max(-120,t),S.uncertainty) end\nif caster then A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100) end\nif S.movement then S.rebuild(math.max(0,t),0) end\nif S.buffEnabled and S.buffPct>0 then\n    local at=S.buffFirst\n    while at<1200 do A.addAutoSimPhase(\"RaidBuff\",at,math.min(1200,at+S.buffDuration),1+S.buffPct/100);at=at+S.buffPeriod end\nend\nfunction S.channel(args)\n    local key=tostring(args.entityContentID)..\":\"..tostring(args.spellID)\n    local list=S.anchors[key]\n    if not list then return end\n    local ok,now=pcall(A.getAutoSimTime)\n    if not ok or type(now)~=\"number\" or now<0 or now>1200 then return end\n    if now-S.lastAnchor<0.5 then return end\n    local expected,best=nil,8\n    for i=1,#list do local distance=math.abs(now-(list[i]+S.shift));if distance<best then expected=list[i];best=distance end end\n    if not expected then return end\n    S.lastAnchor=now;S.anchorsSeen=S.anchorsSeen+1\n    local correction=now-expected\n    if math.abs(correction-S.shift)>=0.25 and S.movement then S.rebuild(now,correction) end\n    S.shift=correction\nend\nC.status=\"Active shared Q40 forecast; settings captured for this pull.\"\nself.used=true\n",
+						conditions = 
+						{
+							
+							{
+								"2f72510d-6759-a04e-ae1e-f79fbb00b2f0",
+								true,
+							},
+							
+							{
+								"329fddff-d754-6632-812c-3c15182a1532",
+								true,
+							},
+						},
+						name = "Countdown setup",
+						uuid = "883f02e8-e443-5970-bad5-c8aa1a4bb279",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						name = "Quantum only",
+						uuid = "2f72510d-6759-a04e-ae1e-f79fbb00b2f0",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return data.q40AutoSim == nil",
+						name = "Not initialized this pull",
+						uuid = "329fddff-d754-6632-812c-3c15182a1532",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "AutoSim",
+			eventType = 16,
+			name = "[Q40 AutoSim] Countdown setup",
+			timeout = 30,
+			uuid = "c83ebf12-186a-d88b-aa70-8d3572e14d9f",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if not Q40AutoSimConfig then\n    local C={enabled=true,movement=true,killOverride=false,killTime=559.5,uncertainty=2,unexpectedPct=5,buffEnabled=false,buffPct=0,buffFirst=5,buffDuration=20,buffPeriod=120,status=\"Ready; changes apply next pull.\"}\n    C.keys={\"enabled\",\"movement\",\"killOverride\",\"killTime\",\"uncertainty\",\"unexpectedPct\",\"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetStartupPath()..[[\\LuaMods\\TensorReactions\\Q40.AutoSim.settings.tsv]]\n    local f=io.open(C.path,\"r\")\n    if f then\n        for line in f:lines() do\n            local k,v=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if k and C[k]~=nil then\n                if type(C[k])==\"boolean\" then C[k]=v==\"1\"\n                elseif type(C[k])==\"number\" then local n=tonumber(v);if n and n==n and n>-math.huge and n<math.huge then C[k]=n end end\n            end\n        end\n        f:close()\n    end\n    C.killTime=math.max(60,math.min(1200,C.killTime));C.uncertainty=math.max(0,math.min(30,C.uncertainty));C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.buffPct=math.max(0,math.min(50,C.buffPct));C.buffFirst=math.max(0,math.min(1200,C.buffFirst));C.buffDuration=math.max(1,math.min(60,C.buffDuration));C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,k in ipairs(C.keys) do local v=C[k];if type(v)==\"boolean\" then v=v and 1 or 0 end;f:write(k,\"\\t\",tostring(v),\"\\n\") end\n        f:close();C.status=\"Saved; changes apply next pull.\"\n    end\n    Q40AutoSimConfig=C\nend\nlocal C=Q40AutoSimConfig\nif data.q40AutoSim then self.used=true;return end\nif not C.enabled then data.q40AutoSim={disabled=true};self.used=true;return end\nlocal A=TensorCore.API.TensorACR\nlocal ok,t=pcall(A.getAutoSimTime)\nif not ok or type(t)~=\"number\" or t< -120 then return end\nif t>10 then data.q40AutoSim={disabled=true};C.status=\"Opening missed; forecasts start next pull.\";self.used=true;return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1311 then self.used=true;return end\nlocal job=p.job\nlocal caster=job==25 or job==27 or job==35 or job==42 or job==36 or job==24 or job==28 or job==33 or job==40\nlocal S={movement=C.movement and caster,killOverride=C.killOverride,killTime=C.killTime,uncertainty=C.uncertainty,unexpectedPct=C.unexpectedPct,buffEnabled=C.buffEnabled,buffPct=C.buffPct,buffFirst=C.buffFirst,buffDuration=C.buffDuration,buffPeriod=C.buffPeriod,shift=0,phases={},lastAnchor=-999,anchorsSeen=0}\ndata.q40AutoSim=S\nS.anchors={[\"14037:44797\"]={9.136,291.094,368.877},[\"14038:44120\"]={29.172,189.742,281.88,409.063,501.672,504.5},[\"14037:44097\"]={56.046,236.518,395.928},[\"14038:44109\"]={56.046,236.781,395.833},[\"14037:44125\"]={79.193,255.724,418.097},[\"14037:44126\"]={89.238,265.762,428.173},[\"14038:44801\"]={105.421},[\"14037:44151\"]={113.455},[\"14037:44157\"]={122.541,147.578,458.469},[\"14038:44163\"]={138.534,333.931},[\"14037:44798\"]={166.7,290.773,369.281},[\"14038:44165\"]={225.572},[\"14037:44099\"]={56.074,236.719,396.063},[\"14038:44108\"]={56.074,236.459,396.078},[\"14037:44130\"]={312.793},[\"14038:44131\"]={312.793},[\"14037:44170\"]={355.905},[\"14037:44158\"]={122.5,147.661,458.034},[\"14037:44105\"]={56.219,515.485},[\"14038:44102\"]={56.195,515.485},[\"14037:44129\"]={313.125,477.547},[\"14038:44133\"]={313.125,477.547},[\"14037:44174\"]={532.532},[\"14038:44175\"]={532.532},[\"14038:44103\"]={56.219}}\nS.windows={{29.157,45.157},{56.141,68.14099999999999},{79.266,84.266},{89.328,94.328},{105.422,113.422},{113.469,136.5},{147.672,161.672},{189.828,205.828},{236.719,251.719},{255.828,260.828},{265.875,270.875},{282.032,298.032},{312.969,326.969},{355.953,388.953},{396.063,425.157},{428.266,433.266},{458.375,472.375},{477.422,491.422},{504.5,527.485}}\nfunction S.rebuild(now,shift)\n    for i=1,#S.phases do\n        local v=S.phases[i]\n        if v.id and v.a>now then A.removeAutoSimPhase(v.id);v.id=nil end\n    end\n    local activeEnd=now\n    for i=1,#S.phases do local v=S.phases[i];if v.id and v.a<=now and v.b>activeEnd then activeEnd=v.b end end\n    for i=1,#S.windows do\n        local w=S.windows[i];local a,b=math.max(w[1]+shift,now,activeEnd),w[2]+shift\n        if b>a then\n            local id=A.addAutoSimPhase(\"CasterDowntime\",a,b)\n            if id then S.phases[#S.phases+1]={id=id,a=a,b=b};activeEnd=b end\n        end\n    end\nend\nif S.killOverride then A.setAutoSimKillTime(S.killTime);A.addAutoSimUncertainty(math.max(-120,t),S.uncertainty) end\nif caster then A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100) end\nif S.movement then S.rebuild(math.max(0,t),0) end\nif S.buffEnabled and S.buffPct>0 then\n    local at=S.buffFirst\n    while at<1200 do A.addAutoSimPhase(\"RaidBuff\",at,math.min(1200,at+S.buffDuration),1+S.buffPct/100);at=at+S.buffPeriod end\nend\nfunction S.channel(args)\n    local key=tostring(args.entityContentID)..\":\"..tostring(args.spellID)\n    local list=S.anchors[key]\n    if not list then return end\n    local ok,now=pcall(A.getAutoSimTime)\n    if not ok or type(now)~=\"number\" or now<0 or now>1200 then return end\n    if now-S.lastAnchor<0.5 then return end\n    local expected,best=nil,8\n    for i=1,#list do local distance=math.abs(now-(list[i]+S.shift));if distance<best then expected=list[i];best=distance end end\n    if not expected then return end\n    S.lastAnchor=now;S.anchorsSeen=S.anchorsSeen+1\n    local correction=now-expected\n    if math.abs(correction-S.shift)>=0.25 and S.movement then S.rebuild(now,correction) end\n    S.shift=correction\nend\nC.status=\"Active shared Q40 forecast; settings captured for this pull.\"\nself.used=true\n",
+						conditions = 
+						{
+							
+							{
+								"b2b4b210-b8c9-8e13-8175-c95a82eb0f4b",
+								true,
+							},
+							
+							{
+								"64f33af5-0b89-8e3b-9043-52607f1d2270",
+								true,
+							},
+							
+							{
+								"ae259ab2-5ea0-3409-afbe-a769a60e27ce",
+								true,
+							},
+						},
+						name = "Combat setup fallback",
+						uuid = "373e7584-fe79-9e48-90d6-48dce93d0a6c",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						name = "Quantum only",
+						uuid = "b2b4b210-b8c9-8e13-8175-c95a82eb0f4b",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 7,
+						name = "In combat",
+						uuid = "64f33af5-0b89-8e3b-9043-52607f1d2270",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return data.q40AutoSim == nil",
+						name = "Not initialized this pull",
+						uuid = "ae259ab2-5ea0-3409-afbe-a769a60e27ce",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "AutoSim",
+			name = "[Q40 AutoSim] Combat setup fallback",
+			timeout = 10,
+			uuid = "a0a37e49-6514-2f1b-9b3f-a81e2b0d8f95",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local s=data.q40AutoSim\nif s and not s.disabled then s.channel(eventArgs) end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"adfd786f-8cda-d4c7-8499-568e34bed314",
+								true,
+							},
+							
+							{
+								"5545db0b-94c0-37fe-8fd6-4f8dcd4d93da",
+								true,
+							},
+						},
+						name = "Boss cast corrections",
+						uuid = "d5581434-703b-6171-8368-f2a9ed1bd4ac",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						name = "Quantum only",
+						uuid = "adfd786f-8cda-d4c7-8499-568e34bed314",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return (eventArgs.entityContentID==14037 or eventArgs.entityContentID==14038) and data.q40AutoSim~=nil",
+						dequeueIfLuaFalse = true,
+						name = "Main boss cast identity",
+						uuid = "5545db0b-94c0-37fe-8fd6-4f8dcd4d93da",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "AutoSim",
+			eventType = 3,
+			name = "[Q40 AutoSim] Boss cast corrections",
+			uuid = "71b8b446-bf5f-c59a-aa69-f2eff45eb3fd",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "data.q40AutoSim=nil\nif Q40AutoSimConfig then Q40AutoSimConfig.status=\"Ready; changes apply next pull.\" end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"5c74634a-3e86-0ecd-8d95-7f0f178d6e04",
+								true,
+							},
+						},
+						name = "Reset",
+						uuid = "ad7131e9-757a-8e63-b53e-d2548a459a0d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1311,
+						name = "Quantum only",
+						uuid = "5c74634a-3e86-0ecd-8d95-7f0f178d6e04",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "AutoSim",
+			eventType = 9,
+			name = "[Q40 AutoSim] Reset",
+			uuid = "73928407-08d4-87c8-974c-98d1db39f623",
+			version = 2,
+		},
 	}, 
 	inheritedProfiles = 
 	{
