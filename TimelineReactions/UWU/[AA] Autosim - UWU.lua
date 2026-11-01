@@ -2112,6 +2112,41 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "General",
+				uuid = "f53e0b42-d18f-2853-aa95-05c1f36a6150",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "General",
+				eventType = 13,
+				execute = "if AnyoneCore\n    and AnyoneCore.Settings\n    and AnyoneCore.Settings.PrepullHelper\nthen\n    AnyoneCore.Settings.PrepullHelper.enabled = false\n    self.used = true\nend",
+				executeType = 2,
+				mechanicTime = 9,
+				name = "[AA] Disable Prepull Helper",
+				throttleTime = 1000,
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = -4,
+				timerStartOffset = -9,
+				uuid = "fad04a70-3147-9568-b1aa-a612bba4085f",
+				version = 2,
+			},
+		},
 	},
 	[8] = 
 	{

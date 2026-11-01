@@ -11411,6 +11411,55 @@ local tbl =
 			uuid = "85507c06-95db-ee89-92f8-eed6e91124c5",
 			version = 2,
 		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "General",
+			uuid = "7d7014b0-d9a7-3801-85c4-457684604142",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "General",
+			eventType = 11,
+			execute = "if AnyoneCore and AnyoneCore.Settings and AnyoneCore.Settings.PrepullHelper then\n    if AnyoneCore.Settings.PrepullHelper.enabled then\n        AnyoneCore.Settings.PrepullHelper.enabled = false\n    end\n    self.used = true\nend",
+			executeType = 2,
+			name = "[AA] Disable Prepull Helper - Zone entry",
+			throttleTime = 1000,
+			uuid = "92c251ec-e75f-b58d-9c35-316e38cb8f44",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "General",
+			eventType = 16,
+			execute = "if AnyoneCore and AnyoneCore.Settings and AnyoneCore.Settings.PrepullHelper then\n    if AnyoneCore.Settings.PrepullHelper.enabled then\n        AnyoneCore.Settings.PrepullHelper.enabled = false\n    end\n    self.used = true\nend",
+			executeType = 2,
+			name = "[AA] Disable Prepull Helper - Countdown",
+			uuid = "b9cd9864-ba62-0963-8853-a91d6942a396",
+			version = 2,
+		},
 	}, 
 	inheritedProfiles = 
 	{

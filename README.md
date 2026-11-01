@@ -18,6 +18,10 @@ TEA: Coming soon by Ton.
 
 ## Changelog
 
+### Prepull Helper
+
+- Alliance raid, dungeon lol, and the shared UCOB/UWU AutoSim profiles now disable AnyoneCore’s Prepull Helper on zone entry/countdown for general profiles and during the short precombat setup window for AutoSim. The setting remains off until manually re-enabled. (01-11-2026)
+
 ### Alliance Raid: AutoSim
 
 - Generalized Alliance Raid AutoSim support: caster cleave corrections cover casting roles, Ark Angels preserves the active ACR's AoE options, Fafnir add retargeting is job-neutral, and knockback assistance chooses Surecast or Arm's Length by role. Shared kill/downtime/stun estimates remain unchanged. (01-11-2026)
