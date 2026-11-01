@@ -74,6 +74,8 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- P1 now shows a personal green beam while holding the assigned Blaster tether. Pantokrator gives “Preposition parties” and provisional north/south arrows at 62s, then corrects by numbered assignment. Opening movement and missile setup retry missing assignments; cone/puddle route checks remain. Replay checks are pending. (02-11-2026)
+
 - Pantokrator missile guidance moves ahead of the original assigned stack, waits for the next personal puddle after the missile, then returns to that same party. Live cone/puddle route checks withhold ambiguous or opposite-side arrows. Replay confirmation remains pending. (01-11-2026)
 
 - P1 tether pickup follows LPDU north-clockwise/west-counterclockwise priority instead of shortest travel. Opening Pantokrator guidance takes a clockwise sidestep within the assigned north/south half when cones cover the stack; already-safe players stay with their group. (01-11-2026)
@@ -92,7 +94,6 @@ TEA: Coming soon by Ton.
 
 - P1 post-missile returns now follow a nearby agreeing cluster from the assigned group, using its live radius rather than a stale arrow heading. Final rear line positions move 0.5 yalms outward while keeping tanks farther out. Replay checks remain pending. (31-10-2026)
 
-- P1 missile spread timers now follow the player using AnyoneCore's native entity countdown. Disabled the unused custom countdown overlay. (31-10-2026)
 
 ### UCOB: LPDU
 
