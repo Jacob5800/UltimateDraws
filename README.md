@@ -18,6 +18,10 @@ TEA: Coming soon by Ton.
 
 ## Changelog
 
+### Dungeons: AutoSim
+
+- dungeon lol now supports all AutoSim jobs across its nine dungeon plans. Boss timing, targetability, optional kill estimates and raid-buff forecasts are shared; caster movement applies to casting jobs, while Ley Lines returns and Ley Lines/Manafont pooling remain BLM-only. Cross-job replay checks remain pending. (01-11-2026)
+
 ### Prepull Helper
 
 - Alliance raid, dungeon lol, and the shared UCOB/UWU AutoSim profiles now disable AnyoneCore’s Prepull Helper on zone entry/countdown for general profiles and during the short precombat setup window for AutoSim. The setting remains off until manually re-enabled. (01-11-2026)

@@ -31,17 +31,12 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not LunarSubterraneAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill12500=125.891, kill12484=132.86, kill12584=175.298,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\LunarSubterrane.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill12500\",\"kill12484\",\"kill12584\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill12500=math.max(15,math.min(1200,C.kill12500))\n    C.kill12484=math.max(15,math.min(1200,C.kill12484))\n    C.kill12584=math.max(15,math.min(1200,C.kill12584))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    LunarSubterraneAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif LunarSubterraneAutoSimConfig.poolFinal==nil then\n LunarSubterraneAutoSimConfig.poolFinal=true\n table.insert(LunarSubterraneAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- Runs after native map 1164, BLM and combat gates; no timeline timer is used.\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1164 or p.job~=25 or not p.incombat then self.used=true;return end\nlocal C=LunarSubterraneAutoSimConfig\nlocal A=TensorCore.API.TensorACR\nlocal ok,t=pcall(A.getAutoSimTime)\nif not ok or type(t)~=\"number\" or t<0 then return end -- readiness wait, not completion\nif data.lunar_subterrane_autosim then self.used=true;return end\nlocal S={enabled=C.enabled,movement=C.movement,returnField=C.returnField,trash=C.trash,\n    killOverride=C.killOverride,kill12500=C.kill12500,kill12484=C.kill12484,kill12584=C.kill12584,\n    unexpectedPct=C.unexpectedPct,uncertainty=C.uncertainty,buffEnabled=C.buffEnabled,\n    buffPct=C.buffPct,buffFirst=C.buffFirst,buffDuration=C.buffDuration,buffPeriod=C.buffPeriod,\n    boss=0,origin=0,counts={},phases={},phaseCount=0,anchorsSeen=0,setup=true}\ndata.lunar_subterrane_autosim=S\n-- Filled by the evidence builder; tables are allocated once per combat.\nS.definitions={[12500]={[\"name\"]=\"Dark Elf\",[\"movement\"]={{49.0,50.5},{52.0,53.0}},[\"anchors\"]={[34777]={4.469,29.258,61.828,134.734},[35205]={10.61,53.219,91.844},[34779]={19.117,83.727},[34778]={37.422,69.945,142.953},[34781]={46.586,79.102,152.101},[35204]={102.024},[34782]={113.219,122.368}}},[12484]={[\"name\"]=\"Damcyan Antlion\",[\"movement\"]={{22.5,24.0},{48.5,50.5},{63.5,64.5},{66.5,69.5},{97.0,98.0},{104.5,108.5},{109.5,111.0},{112.5,114.5},{125.5,130.0}},[\"anchors\"]={[34813]={8.188,77.164,137.969},[34818]={15.32,41.446,102.25},[34816]={30.32,91.188,152.0},[34821]={57.875,118.672},[34443]={67.023,127.844}}},[12584]={[\"name\"]=\"Durante\",[\"movement\"]={{22.5,23.5},{38.0,39.0},{59.5,62.0},{104.5,107.5},{138.0,140.0},{157.5,162.0},{165.0,166.0}},[\"anchors\"]={[35011]={6.179,116.812,206.219},[36057]={15.64,50.96,219.859},[35003]={31.367,72.07,95.531,187.031},[35905]={77.148,100.641,192.109},[35007]={129.094},[35009]={136.68},[36055]={147.132},[35001]={156.452},[34995]={173.43}}}}\n\nfunction S.add(kind,a,b,value,relative)\n    if b<=a or a>=1200 then return end\n    b=math.min(b,1200)\n    local id=A.addAutoSimPhase(kind,a,b,value)\n    if id then\n        S.phaseCount=S.phaseCount+1\n        S.phases[S.phaseCount]={id=id,kind=kind,a=a,b=b,value=value,relative=relative}\n    end\nend\n\nfunction S.startBoss(cid,entityID,origin,now)\n    local def=S.definitions[cid]\n    if not def or S.boss~=0 or not S.enabled then return end\n    S.boss=cid;S.entityID=entityID;S.origin=origin\n    A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100)\n    if S.killOverride then\n        A.setAutoSimKillTime(math.min(1200,origin+S[\"kill\"..cid]))\n        A.addAutoSimUncertainty(now,10) -- one normal-party sample: do not claim exact kill timing\n    end\n    -- Keep automatic kill uncertainty by default. Do not invent forced target downtime.\n    -- Only owned movement/field phases are authored; AoE counts and DoT targets stay live.\n    if S.movement then\n        for i=1,#def.movement do\n            local w=def.movement[i]\n            local a,b=origin+w[1],origin+w[2]\n            if b>now then\n                a=math.max(a,now)\n                S.add(\"CasterDowntime\",a,b,1,true)\n                if S.returnField then S.add(\"GroundFieldMovement\",b,b+0.2,2,true) end\n            end\n        end\n    end\n    if S.buffEnabled and S.buffPct>0 then\n        local a=origin+S.buffFirst\n        while a<1200 do\n            if a+S.buffDuration>now then S.add(\"RaidBuff\",math.max(a,now),a+S.buffDuration,1+S.buffPct/100,false) end\n            a=a+S.buffPeriod\n        end\n    end\n    C.status=\"Active: \"..def.name..\". Kill estimate: \"..(S.killOverride and \"manual\" or \"automatic\")\nend\n\nfunction S.channel(args)\n    if not S.enabled then return end\n    local cid=args.entityContentID\n    local def=S.definitions[cid]\n    if not def then return end\n    local aid=args.spellID\n    if aid==34780 then aid=34779 end\n    local anchors=def.anchors[aid]\n    if not anchors then return end -- stable boss cast identity before API work\n    if S.boss~=0 and (S.boss~=cid or S.entityID~=args.entityID) then return end\n    local valid,now=pcall(A.getAutoSimTime)\n    if not valid or type(now)~=\"number\" or now<0 or now>=1200 then return end\n    local n=(S.counts[aid] or 0)+1\n    local expected=anchors[n]\n    if not expected then return end\n    if S.boss==0 and math.abs(now-expected)>2 then return end\n    S.counts[aid]=n\n    if S.boss==0 then S.startBoss(cid,args.entityID,now-expected,now) end\n    if S.boss~=cid then return end\n    local candidate=now-expected\n    -- If enabled mid-boss, do not match a late repeat to the first occurrence.\n    if math.abs(candidate-S.origin)>2 then return end\n    local shift=candidate-S.origin\n    S.anchorsSeen=S.anchorsSeen+1\n    if math.abs(shift)<0.15 then return end\n    -- Remove every future owned phase before reinsertion, avoiding transient overlaps.\n    local movementEnd=now\n    local fieldEnd=now\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.relative and phase.id and phase.a>now+0.05 then\n            A.removeAutoSimPhase(phase.id);phase.id=nil;phase.pending=true\n        elseif phase.id and phase.a<=now+0.05 and phase.b>now then\n            if phase.kind==\"CasterDowntime\" then movementEnd=phase.b end\n            if phase.kind==\"GroundFieldMovement\" then fieldEnd=phase.b end\n        end\n    end\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.pending then\n            phase.pending=false\n            local a,b=phase.a+shift,phase.b+shift\n            local minimum=phase.kind==\"CasterDowntime\" and movementEnd or math.max(fieldEnd,movementEnd)\n            a=math.max(a,minimum,now+0.05)\n            if b>a then\n                phase.id=A.addAutoSimPhase(phase.kind,a,b,phase.value)\n                phase.a=a;phase.b=b\n                if phase.kind==\"CasterDowntime\" then movementEnd=b else fieldEnd=b end\n            end\n        end\n    end\n    S.origin=candidate\nend\n\nif S.enabled then\n    local target=TensorCore.mGetTarget()\n    if target and S.definitions[target.contentid] and target.attackable and target.incombat then\n        -- Near pull start, zero is the combat-clock origin; later setup waits for an anchor.\n        if t<=5 then S.startBoss(target.contentid,target.id,0,t) end\n    end\n    if S.boss==0 and S.trash then A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100) end\nend\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not LunarSubterraneAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill12500=125.891, kill12484=132.86, kill12584=175.298,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\LunarSubterrane.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill12500\",\"kill12484\",\"kill12584\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill12500=math.max(15,math.min(1200,C.kill12500))\n    C.kill12484=math.max(15,math.min(1200,C.kill12484))\n    C.kill12584=math.max(15,math.min(1200,C.kill12584))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    LunarSubterraneAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif LunarSubterraneAutoSimConfig.poolFinal==nil then\n LunarSubterraneAutoSimConfig.poolFinal=true\n table.insert(LunarSubterraneAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- Runs after native map 1164, map and combat gates; no timeline timer is used.\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1164 or not p.incombat then self.used=true;return end\nlocal isCaster=p.job==25 or p.job==27 or p.job==35 or p.job==42 or p.job==36 or p.job==24 or p.job==28 or p.job==33 or p.job==40\nlocal C=LunarSubterraneAutoSimConfig\nlocal A=TensorCore.API.TensorACR\nlocal ok,t=pcall(A.getAutoSimTime)\nif not ok or type(t)~=\"number\" or t<0 then return end -- readiness wait, not completion\nif data.lunar_subterrane_autosim then self.used=true;return end\nlocal S={enabled=C.enabled,movement=C.movement and isCaster,returnField=C.returnField and p.job==25,trash=C.trash,\n    killOverride=C.killOverride,kill12500=C.kill12500,kill12484=C.kill12484,kill12584=C.kill12584,\n    unexpectedPct=C.unexpectedPct,uncertainty=C.uncertainty,buffEnabled=C.buffEnabled,\n    buffPct=C.buffPct,buffFirst=C.buffFirst,buffDuration=C.buffDuration,buffPeriod=C.buffPeriod,\n    boss=0,origin=0,counts={},phases={},phaseCount=0,anchorsSeen=0,setup=true}\ndata.lunar_subterrane_autosim=S\n-- Filled by the evidence builder; tables are allocated once per combat.\nS.definitions={[12500]={[\"name\"]=\"Dark Elf\",[\"movement\"]={{49.0,50.5},{52.0,53.0}},[\"anchors\"]={[34777]={4.469,29.258,61.828,134.734},[35205]={10.61,53.219,91.844},[34779]={19.117,83.727},[34778]={37.422,69.945,142.953},[34781]={46.586,79.102,152.101},[35204]={102.024},[34782]={113.219,122.368}}},[12484]={[\"name\"]=\"Damcyan Antlion\",[\"movement\"]={{22.5,24.0},{48.5,50.5},{63.5,64.5},{66.5,69.5},{97.0,98.0},{104.5,108.5},{109.5,111.0},{112.5,114.5},{125.5,130.0}},[\"anchors\"]={[34813]={8.188,77.164,137.969},[34818]={15.32,41.446,102.25},[34816]={30.32,91.188,152.0},[34821]={57.875,118.672},[34443]={67.023,127.844}}},[12584]={[\"name\"]=\"Durante\",[\"movement\"]={{22.5,23.5},{38.0,39.0},{59.5,62.0},{104.5,107.5},{138.0,140.0},{157.5,162.0},{165.0,166.0}},[\"anchors\"]={[35011]={6.179,116.812,206.219},[36057]={15.64,50.96,219.859},[35003]={31.367,72.07,95.531,187.031},[35905]={77.148,100.641,192.109},[35007]={129.094},[35009]={136.68},[36055]={147.132},[35001]={156.452},[34995]={173.43}}}}\n\nfunction S.add(kind,a,b,value,relative)\n    if b<=a or a>=1200 then return end\n    b=math.min(b,1200)\n    local id=A.addAutoSimPhase(kind,a,b,value)\n    if id then\n        S.phaseCount=S.phaseCount+1\n        S.phases[S.phaseCount]={id=id,kind=kind,a=a,b=b,value=value,relative=relative}\n    end\nend\n\nfunction S.startBoss(cid,entityID,origin,now)\n    local def=S.definitions[cid]\n    if not def or S.boss~=0 or not S.enabled then return end\n    S.boss=cid;S.entityID=entityID;S.origin=origin\n    A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100)\n    if S.killOverride then\n        A.setAutoSimKillTime(math.min(1200,origin+S[\"kill\"..cid]))\n        A.addAutoSimUncertainty(now,10) -- one normal-party sample: do not claim exact kill timing\n    end\n    -- Keep automatic kill uncertainty by default. Do not invent forced target downtime.\n    -- Only owned movement/field phases are authored; AoE counts and DoT targets stay live.\n    if S.movement then\n        for i=1,#def.movement do\n            local w=def.movement[i]\n            local a,b=origin+w[1],origin+w[2]\n            if b>now then\n                a=math.max(a,now)\n                S.add(\"CasterDowntime\",a,b,1,true)\n                if S.returnField then S.add(\"GroundFieldMovement\",b,b+0.2,2,true) end\n            end\n        end\n    end\n    if S.buffEnabled and S.buffPct>0 then\n        local a=origin+S.buffFirst\n        while a<1200 do\n            if a+S.buffDuration>now then S.add(\"RaidBuff\",math.max(a,now),a+S.buffDuration,1+S.buffPct/100,false) end\n            a=a+S.buffPeriod\n        end\n    end\n    C.status=\"Active: \"..def.name..\". Kill estimate: \"..(S.killOverride and \"manual\" or \"automatic\")\nend\n\nfunction S.channel(args)\n    if not S.enabled then return end\n    local cid=args.entityContentID\n    local def=S.definitions[cid]\n    if not def then return end\n    local aid=args.spellID\n    if aid==34780 then aid=34779 end\n    local anchors=def.anchors[aid]\n    if not anchors then return end -- stable boss cast identity before API work\n    if S.boss~=0 and (S.boss~=cid or S.entityID~=args.entityID) then return end\n    local valid,now=pcall(A.getAutoSimTime)\n    if not valid or type(now)~=\"number\" or now<0 or now>=1200 then return end\n    local n=(S.counts[aid] or 0)+1\n    local expected=anchors[n]\n    if not expected then return end\n    if S.boss==0 and math.abs(now-expected)>2 then return end\n    S.counts[aid]=n\n    if S.boss==0 then S.startBoss(cid,args.entityID,now-expected,now) end\n    if S.boss~=cid then return end\n    local candidate=now-expected\n    -- If enabled mid-boss, do not match a late repeat to the first occurrence.\n    if math.abs(candidate-S.origin)>2 then return end\n    local shift=candidate-S.origin\n    S.anchorsSeen=S.anchorsSeen+1\n    if math.abs(shift)<0.15 then return end\n    -- Remove every future owned phase before reinsertion, avoiding transient overlaps.\n    local movementEnd=now\n    local fieldEnd=now\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.relative and phase.id and phase.a>now+0.05 then\n            A.removeAutoSimPhase(phase.id);phase.id=nil;phase.pending=true\n        elseif phase.id and phase.a<=now+0.05 and phase.b>now then\n            if phase.kind==\"CasterDowntime\" then movementEnd=phase.b end\n            if phase.kind==\"GroundFieldMovement\" then fieldEnd=phase.b end\n        end\n    end\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.pending then\n            phase.pending=false\n            local a,b=phase.a+shift,phase.b+shift\n            local minimum=phase.kind==\"CasterDowntime\" and movementEnd or math.max(fieldEnd,movementEnd)\n            a=math.max(a,minimum,now+0.05)\n            if b>a then\n                phase.id=A.addAutoSimPhase(phase.kind,a,b,phase.value)\n                phase.a=a;phase.b=b\n                if phase.kind==\"CasterDowntime\" then movementEnd=b else fieldEnd=b end\n            end\n        end\n    end\n    S.origin=candidate\nend\n\nif S.enabled then\n    local target=TensorCore.mGetTarget()\n    if target and S.definitions[target.contentid] and target.attackable and target.incombat then\n        -- Near pull start, zero is the combat-clock origin; later setup waits for an anchor.\n        if t<=5 then S.startBoss(target.contentid,target.id,0,t) end\n    end\n    if S.boss==0 and S.trash then A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100) end\nend\nself.used=true\n",
 						conditions = 
 						{
 							
 							{
 								"ecf61cc4-c424-0b87-ab8e-4a5d5aed8a6f",
-								true,
-							},
-							
-							{
-								"73e7752f-b502-afbe-9a9d-d2bd29a59e6c",
 								true,
 							},
 							
@@ -72,18 +67,6 @@ local tbl =
 						localmapid = 1164,
 						name = "Lunar Subterrane (1164)",
 						uuid = "ecf61cc4-c424-0b87-ab8e-4a5d5aed8a6f",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "73e7752f-b502-afbe-9a9d-d2bd29a59e6c",
 						version = 3,
 					},
 				},
@@ -138,11 +121,6 @@ local tbl =
 							},
 							
 							{
-								"5c8256cd-c227-175f-b7ca-96e2ef1aedf4",
-								true,
-							},
-							
-							{
 								"9554b7f0-5bfb-7a30-9806-12961165fb02",
 								true,
 							},
@@ -169,18 +147,6 @@ local tbl =
 						localmapid = 1164,
 						name = "Lunar Subterrane (1164)",
 						uuid = "da7e7424-e1c0-3fa7-b547-2807b45c712b",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "5c8256cd-c227-175f-b7ca-96e2ef1aedf4",
 						version = 3,
 					},
 				},
@@ -236,11 +202,6 @@ local tbl =
 							},
 							
 							{
-								"6b33b75e-7bb1-fd63-83a2-7a7ff4a014b4",
-								true,
-							},
-							
-							{
 								"301b1e26-2aa9-2957-aa98-0d852f7faab9",
 								true,
 							},
@@ -272,18 +233,6 @@ local tbl =
 						localmapid = 1164,
 						name = "Lunar Subterrane (1164)",
 						uuid = "512cf679-169c-8bb6-8af8-e47c8df4d9e3",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "6b33b75e-7bb1-fd63-83a2-7a7ff4a014b4",
 						version = 3,
 					},
 				},
@@ -352,11 +301,6 @@ local tbl =
 							},
 							
 							{
-								"fced8f6b-fcec-be3e-9a70-9d39f25f8e46",
-								true,
-							},
-							
-							{
 								"841b5dc8-2987-892a-a8fd-7ce9921ff413",
 								true,
 							},
@@ -388,18 +332,6 @@ local tbl =
 						localmapid = 1164,
 						name = "Lunar Subterrane (1164)",
 						uuid = "ac9215c2-053f-fdd8-a59a-aefb09b5ad94",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "fced8f6b-fcec-be3e-9a70-9d39f25f8e46",
 						version = 3,
 					},
 				},
@@ -468,11 +400,6 @@ local tbl =
 							},
 							
 							{
-								"6d24ce10-e878-0975-ac0c-8913ce2d616e",
-								true,
-							},
-							
-							{
 								"2f3b5820-5033-d457-aa21-89b5595d0786",
 								true,
 							},
@@ -504,18 +431,6 @@ local tbl =
 						localmapid = 1164,
 						name = "Lunar Subterrane (1164)",
 						uuid = "ab76b1a5-0903-53f0-9f85-d80140800c65",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "6d24ce10-e878-0975-ac0c-8913ce2d616e",
 						version = 3,
 					},
 				},
@@ -574,17 +489,12 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not LunarSubterraneAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill12500=125.891, kill12484=132.86, kill12584=175.298,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\LunarSubterrane.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill12500\",\"kill12484\",\"kill12584\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill12500=math.max(15,math.min(1200,C.kill12500))\n    C.kill12484=math.max(15,math.min(1200,C.kill12484))\n    C.kill12584=math.max(15,math.min(1200,C.kill12584))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    LunarSubterraneAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif LunarSubterraneAutoSimConfig.poolFinal==nil then\n LunarSubterraneAutoSimConfig.poolFinal=true\n table.insert(LunarSubterraneAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID and BLM gates precede it.\nlocal C=LunarSubterraneAutoSimConfig\nlocal visible=GUI:Begin(\"Lunar Subterrane - BLM AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from your logged positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. The optional values below come from one four-player run, not the slower Duty Support samples.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Dark Elf (seconds)\",C.kill12500,5,15,\"%.1f\")\n        if changed then C.kill12500=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Damcyan Antlion (seconds)\",C.kill12484,5,15,\"%.1f\")\n        if changed then C.kill12484=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Durante (seconds)\",C.kill12584,5,15,\"%.1f\")\n        if changed then C.kill12584=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold Ley Lines + Manafont on final trash before each boss\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before all three bosses. Holds only these two abilities while that combat continues; short holds expire automatically when combat ends or the profile stops.\") end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not LunarSubterraneAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill12500=125.891, kill12484=132.86, kill12584=175.298,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\LunarSubterrane.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill12500\",\"kill12484\",\"kill12584\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill12500=math.max(15,math.min(1200,C.kill12500))\n    C.kill12484=math.max(15,math.min(1200,C.kill12484))\n    C.kill12584=math.max(15,math.min(1200,C.kill12584))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    LunarSubterraneAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif LunarSubterraneAutoSimConfig.poolFinal==nil then\n LunarSubterraneAutoSimConfig.poolFinal=true\n table.insert(LunarSubterraneAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=LunarSubterraneAutoSimConfig\nlocal visible=GUI:Begin(\"Lunar Subterrane - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from your logged positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. The optional values below come from one four-player run, not the slower Duty Support samples.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Dark Elf (seconds)\",C.kill12500,5,15,\"%.1f\")\n        if changed then C.kill12500=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Damcyan Antlion (seconds)\",C.kill12484,5,15,\"%.1f\")\n        if changed then C.kill12484=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Durante (seconds)\",C.kill12584,5,15,\"%.1f\")\n        if changed then C.kill12584=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold Ley Lines + Manafont on final trash before each boss (BLM only)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before all three bosses. Holds only these two abilities while that combat continues; short holds expire automatically when combat ends or the profile stops.\") end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
 						conditions = 
 						{
 							
 							{
 								"32895e05-b638-ac9e-ab06-506b9ef11f4a",
-								true,
-							},
-							
-							{
-								"47f0e817-88e7-d237-b595-ee9ff8a997d1",
 								true,
 							},
 						},
@@ -605,18 +515,6 @@ local tbl =
 						localmapid = 1164,
 						name = "Lunar Subterrane (1164)",
 						uuid = "32895e05-b638-ac9e-ab06-506b9ef11f4a",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "47f0e817-88e7-d237-b595-ee9ff8a997d1",
 						version = 3,
 					},
 				},
@@ -646,11 +544,6 @@ local tbl =
 							
 							{
 								"54d8196a-628e-5a62-85b8-9ff4fa0165e1",
-								true,
-							},
-							
-							{
-								"b37a6fbf-5e9d-8883-80e6-385a7b0e58f3",
 								true,
 							},
 							
@@ -686,18 +579,6 @@ local tbl =
 						localmapid = 1164,
 						name = "Lunar Subterrane (1164)",
 						uuid = "54d8196a-628e-5a62-85b8-9ff4fa0165e1",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "b37a6fbf-5e9d-8883-80e6-385a7b0e58f3",
 						version = 3,
 					},
 				},
@@ -831,11 +712,6 @@ local tbl =
 							},
 							
 							{
-								"d6416b9f-7302-97af-a83b-4af4c30a6d5d",
-								true,
-							},
-							
-							{
 								"98bed067-ee65-c2bb-a2d6-b7871f078ece",
 								true,
 							},
@@ -867,18 +743,6 @@ local tbl =
 						localmapid = 1164,
 						name = "Lunar Subterrane (1164)",
 						uuid = "30cd4e06-611c-bf0a-8819-bb78422a7db0",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "d6416b9f-7302-97af-a83b-4af4c30a6d5d",
 						version = 3,
 					},
 				},
@@ -1037,11 +901,6 @@ local tbl =
 							},
 							
 							{
-								"707c9da6-e4a2-e820-b47b-9c969c582f50",
-								true,
-							},
-							
-							{
 								"5d0d4ec0-1b21-a398-884b-2559f7d7638a",
 								true,
 							},
@@ -1073,18 +932,6 @@ local tbl =
 						localmapid = 1164,
 						name = "Lunar Subterrane (1164)",
 						uuid = "a92f1aa2-bae3-bfa2-9f0f-8b216a96aafa",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "707c9da6-e4a2-e820-b47b-9c969c582f50",
 						version = 3,
 					},
 				},
@@ -1400,17 +1247,12 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not MistwakeAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill14270=124.141, kill14271=137.749, kill14288=185.438,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Mistwake.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill14270\",\"kill14271\",\"kill14288\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill14270=math.max(15,math.min(1200,C.kill14270))\n    C.kill14271=math.max(15,math.min(1200,C.kill14271))\n    C.kill14288=math.max(15,math.min(1200,C.kill14288))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    MistwakeAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif MistwakeAutoSimConfig.poolFinal==nil then\n MistwakeAutoSimConfig.poolFinal=true\n table.insert(MistwakeAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- Runs after native map 1314, BLM and combat gates; no timeline timer is used.\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1314 or p.job~=25 or not p.incombat then self.used=true;return end\nlocal C=MistwakeAutoSimConfig\nlocal A=TensorCore.API.TensorACR\nlocal ok,t=pcall(A.getAutoSimTime)\nif not ok or type(t)~=\"number\" or t<0 then return end -- readiness wait, not completion\nif data.mistwake_autosim then self.used=true;return end\nlocal S={enabled=C.enabled,movement=C.movement,returnField=C.returnField,trash=C.trash,\n    killOverride=C.killOverride,kill14270=C.kill14270,kill14271=C.kill14271,kill14288=C.kill14288,\n    unexpectedPct=C.unexpectedPct,uncertainty=C.uncertainty,buffEnabled=C.buffEnabled,\n    buffPct=C.buffPct,buffFirst=C.buffFirst,buffDuration=C.buffDuration,buffPeriod=C.buffPeriod,\n    boss=0,origin=0,counts={},phases={},phaseCount=0,anchorsSeen=0,setup=true,activeEnds={}}\ndata.mistwake_autosim=S\n-- Filled by the evidence builder; tables are allocated once per combat.\nS.definitions={[14270]={[\"name\"]=\"Treno Catoblepas\",[\"movement\"]={{19.0,21.5},{28.0,31.0},{35.5,37.5},{56.5,57.5},{60.5,62.0},{63.0,65.0},{72.0,78.0},{79.5,85.0},{90.0,91.0},{94.5,96.0},{97.0,102.0},{103.5,106.5},{113.5,114.5},{115.5,116.5},{118.0,121.0}},[\"anchors\"]={[43327]={6.188,35.195,110.922,119.062},[43331]={17.422,53.5,93.117},[43330]={27.085,63.18,102.773},[43329]={43.375,130.272},[44825]={72.413},[43335]={81.867}},[\"downtime\"]={}},[14271]={[\"name\"]=\"Amdusias\",[\"movement\"]={{38.0,40.0},{49.0,52.0},{53.0,54.5},{67.0,69.0},{70.0,71.0},{74.5,75.5},{76.5,78.0},{88.5,90.0},{92.5,95.0},{98.0,99.0}},[\"anchors\"]={[45341]={8.085,20.477,87.789},[45344]={36.961,122.171},[45346]={44.742,130.078},[45350]={64.461},[45355]={72.484},[45352]={103.493}},[\"downtime\"]={}},[14288]={[\"name\"]=\"Thundergust Griffin\",[\"movement\"]={{19.5,21.5},{29.5,31.0},{37.5,44.0},{45.0,48.0},{66.0,67.0},{68.0,70.0},{79.0,81.5},{86.0,87.5},{119.5,122.0},{130.5,133.0},{140.5,141.5},{154.0,157.0},{174.5,175.5}},[\"anchors\"]={[45291]={6.203,87.82,177.078},[45292]={18.953,108.429,197.711},[45295]={29.172,40.071,78.196,118.906,130.257,167.485,208.117},[45305]={51.719,141.891},[45301]={67.085,156.351},[45299]={102.257,191.547}},[\"downtime\"]={{72.993,76.789},{162.305,166.079}}}}\n\nfunction S.add(kind,a,b,value,relative)\n    if b<=a or a>=1200 then return end\n    b=math.min(b,1200)\n    local id=A.addAutoSimPhase(kind,a,b,value)\n    if id then\n        S.phaseCount=S.phaseCount+1\n        S.phases[S.phaseCount]={id=id,kind=kind,a=a,b=b,value=value,relative=relative}\n    end\nend\n\nfunction S.startBoss(cid,entityID,origin,now)\n    local def=S.definitions[cid]\n    if not def or S.boss~=0 or not S.enabled then return end\n    S.boss=cid;S.entityID=entityID;S.origin=origin\n    C.poolStatus=nil\n    A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100)\n    if S.killOverride then\n        A.setAutoSimKillTime(math.min(1200,origin+S[\"kill\"..cid]))\n        A.addAutoSimUncertainty(now,10) -- three normal-party samples: do not claim exact kill timing\n    end\n    -- Keep automatic kill uncertainty by default. Do not invent forced target downtime.\n    -- Only owned movement/field phases are authored; AoE counts and DoT targets stay live.\n    if S.movement then\n        for i=1,#def.movement do\n            local w=def.movement[i]\n            local a,b=origin+w[1],origin+w[2]\n            if b>now then\n                a=math.max(a,now)\n                S.add(\"CasterDowntime\",a,b,1,true)\n                if S.returnField then S.add(\"GroundFieldMovement\",b,b+0.2,2,true) end\n            end\n        end\n    end\n    -- Native targetability transitions corroborate these short Griffin jumps.\n    -- Attackability forecasting is independent of the optional movement forecast.\n    for i=1,#def.downtime do\n        local w=def.downtime[i]\n        if origin+w[2]>now then S.add(\"FullDowntime\",math.max(origin+w[1],now),origin+w[2],1,true) end\n    end\n    if S.buffEnabled and S.buffPct>0 then\n        local a=origin+S.buffFirst\n        while a<1200 do\n            if a+S.buffDuration>now then S.add(\"RaidBuff\",math.max(a,now),a+S.buffDuration,1+S.buffPct/100,false) end\n            a=a+S.buffPeriod\n        end\n    end\n    C.status=\"Active: \"..def.name..\". Kill estimate: \"..(S.killOverride and \"manual\" or \"automatic\")\nend\n\nfunction S.channel(args)\n    if not S.enabled then return end\n    local cid=args.entityContentID\n    local def=S.definitions[cid]\n    if not def then return end\n    local aid=args.spellID\n    if aid==45336 then aid=45341 end -- the cone order varies, its timing sequence does not\n    local anchors=def.anchors[aid]\n    if not anchors then return end -- stable boss cast identity before API work\n    if S.boss~=0 and (S.boss~=cid or S.entityID~=args.entityID) then return end\n    local valid,now=pcall(A.getAutoSimTime)\n    if not valid or type(now)~=\"number\" or now<0 or now>=1200 then return end\n    local n=(S.counts[aid] or 0)+1\n    local expected=anchors[n]\n    if not expected then return end\n    if S.boss==0 and math.abs(now-expected)>2 then return end\n    S.counts[aid]=n\n    if S.boss==0 then S.startBoss(cid,args.entityID,now-expected,now) end\n    if S.boss~=cid then return end\n    local candidate=now-expected\n    -- If enabled mid-boss, do not match a late repeat to the first occurrence.\n    if math.abs(candidate-S.origin)>2 then return end\n    local shift=candidate-S.origin\n    S.anchorsSeen=S.anchorsSeen+1\n    if math.abs(shift)<0.15 then return end\n    -- Remove every future owned phase before reinsertion, avoiding transient overlaps.\n    local ends=S.activeEnds\n    ends.CasterDowntime=now;ends.GroundFieldMovement=now;ends.FullDowntime=now\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.relative and phase.id and phase.a>now+0.05 then\n            A.removeAutoSimPhase(phase.id);phase.id=nil;phase.pending=true\n        elseif phase.id and phase.a<=now+0.05 and phase.b>now and phase.relative then\n            ends[phase.kind]=math.max(ends[phase.kind],phase.b)\n        end\n    end\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.pending then\n            phase.pending=false\n            local a,b=phase.a+shift,phase.b+shift\n            local minimum=ends[phase.kind]\n            if phase.kind==\"GroundFieldMovement\" then minimum=math.max(minimum,ends.CasterDowntime) end\n            a=math.max(a,minimum,now+0.05)\n            if b>a then\n                phase.id=A.addAutoSimPhase(phase.kind,a,b,phase.value)\n                phase.a=a;phase.b=b;ends[phase.kind]=b\n            end\n        end\n    end\n    S.origin=candidate\nend\n\nif S.enabled then\n    local target=TensorCore.mGetTarget()\n    if target and S.definitions[target.contentid] and target.attackable and target.incombat then\n        -- Near pull start, zero is the combat-clock origin; later setup waits for an anchor.\n        if t<=5 then S.startBoss(target.contentid,target.id,0,t) end\n    end\n    if S.boss==0 and S.trash then A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100) end\nend\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not MistwakeAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill14270=124.141, kill14271=137.749, kill14288=185.438,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Mistwake.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill14270\",\"kill14271\",\"kill14288\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill14270=math.max(15,math.min(1200,C.kill14270))\n    C.kill14271=math.max(15,math.min(1200,C.kill14271))\n    C.kill14288=math.max(15,math.min(1200,C.kill14288))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    MistwakeAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif MistwakeAutoSimConfig.poolFinal==nil then\n MistwakeAutoSimConfig.poolFinal=true\n table.insert(MistwakeAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- Runs after native map 1314, map and combat gates; no timeline timer is used.\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1314 or not p.incombat then self.used=true;return end\nlocal isCaster=p.job==25 or p.job==27 or p.job==35 or p.job==42 or p.job==36 or p.job==24 or p.job==28 or p.job==33 or p.job==40\nlocal C=MistwakeAutoSimConfig\nlocal A=TensorCore.API.TensorACR\nlocal ok,t=pcall(A.getAutoSimTime)\nif not ok or type(t)~=\"number\" or t<0 then return end -- readiness wait, not completion\nif data.mistwake_autosim then self.used=true;return end\nlocal S={enabled=C.enabled,movement=C.movement and isCaster,returnField=C.returnField and p.job==25,trash=C.trash,\n    killOverride=C.killOverride,kill14270=C.kill14270,kill14271=C.kill14271,kill14288=C.kill14288,\n    unexpectedPct=C.unexpectedPct,uncertainty=C.uncertainty,buffEnabled=C.buffEnabled,\n    buffPct=C.buffPct,buffFirst=C.buffFirst,buffDuration=C.buffDuration,buffPeriod=C.buffPeriod,\n    boss=0,origin=0,counts={},phases={},phaseCount=0,anchorsSeen=0,setup=true,activeEnds={}}\ndata.mistwake_autosim=S\n-- Filled by the evidence builder; tables are allocated once per combat.\nS.definitions={[14270]={[\"name\"]=\"Treno Catoblepas\",[\"movement\"]={{19.0,21.5},{28.0,31.0},{35.5,37.5},{56.5,57.5},{60.5,62.0},{63.0,65.0},{72.0,78.0},{79.5,85.0},{90.0,91.0},{94.5,96.0},{97.0,102.0},{103.5,106.5},{113.5,114.5},{115.5,116.5},{118.0,121.0}},[\"anchors\"]={[43327]={6.188,35.195,110.922,119.062},[43331]={17.422,53.5,93.117},[43330]={27.085,63.18,102.773},[43329]={43.375,130.272},[44825]={72.413},[43335]={81.867}},[\"downtime\"]={}},[14271]={[\"name\"]=\"Amdusias\",[\"movement\"]={{38.0,40.0},{49.0,52.0},{53.0,54.5},{67.0,69.0},{70.0,71.0},{74.5,75.5},{76.5,78.0},{88.5,90.0},{92.5,95.0},{98.0,99.0}},[\"anchors\"]={[45341]={8.085,20.477,87.789},[45344]={36.961,122.171},[45346]={44.742,130.078},[45350]={64.461},[45355]={72.484},[45352]={103.493}},[\"downtime\"]={}},[14288]={[\"name\"]=\"Thundergust Griffin\",[\"movement\"]={{19.5,21.5},{29.5,31.0},{37.5,44.0},{45.0,48.0},{66.0,67.0},{68.0,70.0},{79.0,81.5},{86.0,87.5},{119.5,122.0},{130.5,133.0},{140.5,141.5},{154.0,157.0},{174.5,175.5}},[\"anchors\"]={[45291]={6.203,87.82,177.078},[45292]={18.953,108.429,197.711},[45295]={29.172,40.071,78.196,118.906,130.257,167.485,208.117},[45305]={51.719,141.891},[45301]={67.085,156.351},[45299]={102.257,191.547}},[\"downtime\"]={{72.993,76.789},{162.305,166.079}}}}\n\nfunction S.add(kind,a,b,value,relative)\n    if b<=a or a>=1200 then return end\n    b=math.min(b,1200)\n    local id=A.addAutoSimPhase(kind,a,b,value)\n    if id then\n        S.phaseCount=S.phaseCount+1\n        S.phases[S.phaseCount]={id=id,kind=kind,a=a,b=b,value=value,relative=relative}\n    end\nend\n\nfunction S.startBoss(cid,entityID,origin,now)\n    local def=S.definitions[cid]\n    if not def or S.boss~=0 or not S.enabled then return end\n    S.boss=cid;S.entityID=entityID;S.origin=origin\n    C.poolStatus=nil\n    A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100)\n    if S.killOverride then\n        A.setAutoSimKillTime(math.min(1200,origin+S[\"kill\"..cid]))\n        A.addAutoSimUncertainty(now,10) -- three normal-party samples: do not claim exact kill timing\n    end\n    -- Keep automatic kill uncertainty by default. Do not invent forced target downtime.\n    -- Only owned movement/field phases are authored; AoE counts and DoT targets stay live.\n    if S.movement then\n        for i=1,#def.movement do\n            local w=def.movement[i]\n            local a,b=origin+w[1],origin+w[2]\n            if b>now then\n                a=math.max(a,now)\n                S.add(\"CasterDowntime\",a,b,1,true)\n                if S.returnField then S.add(\"GroundFieldMovement\",b,b+0.2,2,true) end\n            end\n        end\n    end\n    -- Native targetability transitions corroborate these short Griffin jumps.\n    -- Attackability forecasting is independent of the optional movement forecast.\n    for i=1,#def.downtime do\n        local w=def.downtime[i]\n        if origin+w[2]>now then S.add(\"FullDowntime\",math.max(origin+w[1],now),origin+w[2],1,true) end\n    end\n    if S.buffEnabled and S.buffPct>0 then\n        local a=origin+S.buffFirst\n        while a<1200 do\n            if a+S.buffDuration>now then S.add(\"RaidBuff\",math.max(a,now),a+S.buffDuration,1+S.buffPct/100,false) end\n            a=a+S.buffPeriod\n        end\n    end\n    C.status=\"Active: \"..def.name..\". Kill estimate: \"..(S.killOverride and \"manual\" or \"automatic\")\nend\n\nfunction S.channel(args)\n    if not S.enabled then return end\n    local cid=args.entityContentID\n    local def=S.definitions[cid]\n    if not def then return end\n    local aid=args.spellID\n    if aid==45336 then aid=45341 end -- the cone order varies, its timing sequence does not\n    local anchors=def.anchors[aid]\n    if not anchors then return end -- stable boss cast identity before API work\n    if S.boss~=0 and (S.boss~=cid or S.entityID~=args.entityID) then return end\n    local valid,now=pcall(A.getAutoSimTime)\n    if not valid or type(now)~=\"number\" or now<0 or now>=1200 then return end\n    local n=(S.counts[aid] or 0)+1\n    local expected=anchors[n]\n    if not expected then return end\n    if S.boss==0 and math.abs(now-expected)>2 then return end\n    S.counts[aid]=n\n    if S.boss==0 then S.startBoss(cid,args.entityID,now-expected,now) end\n    if S.boss~=cid then return end\n    local candidate=now-expected\n    -- If enabled mid-boss, do not match a late repeat to the first occurrence.\n    if math.abs(candidate-S.origin)>2 then return end\n    local shift=candidate-S.origin\n    S.anchorsSeen=S.anchorsSeen+1\n    if math.abs(shift)<0.15 then return end\n    -- Remove every future owned phase before reinsertion, avoiding transient overlaps.\n    local ends=S.activeEnds\n    ends.CasterDowntime=now;ends.GroundFieldMovement=now;ends.FullDowntime=now\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.relative and phase.id and phase.a>now+0.05 then\n            A.removeAutoSimPhase(phase.id);phase.id=nil;phase.pending=true\n        elseif phase.id and phase.a<=now+0.05 and phase.b>now and phase.relative then\n            ends[phase.kind]=math.max(ends[phase.kind],phase.b)\n        end\n    end\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.pending then\n            phase.pending=false\n            local a,b=phase.a+shift,phase.b+shift\n            local minimum=ends[phase.kind]\n            if phase.kind==\"GroundFieldMovement\" then minimum=math.max(minimum,ends.CasterDowntime) end\n            a=math.max(a,minimum,now+0.05)\n            if b>a then\n                phase.id=A.addAutoSimPhase(phase.kind,a,b,phase.value)\n                phase.a=a;phase.b=b;ends[phase.kind]=b\n            end\n        end\n    end\n    S.origin=candidate\nend\n\nif S.enabled then\n    local target=TensorCore.mGetTarget()\n    if target and S.definitions[target.contentid] and target.attackable and target.incombat then\n        -- Near pull start, zero is the combat-clock origin; later setup waits for an anchor.\n        if t<=5 then S.startBoss(target.contentid,target.id,0,t) end\n    end\n    if S.boss==0 and S.trash then A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100) end\nend\nself.used=true\n",
 						conditions = 
 						{
 							
 							{
 								"9b27bb6d-eb86-1f8f-9d76-c2f236db1541",
-								true,
-							},
-							
-							{
-								"f11f7fc0-50c3-c2cb-954e-9433aa5c7664",
 								true,
 							},
 							
@@ -1441,18 +1283,6 @@ local tbl =
 						localmapid = 1314,
 						name = "Mistwake (1314)",
 						uuid = "9b27bb6d-eb86-1f8f-9d76-c2f236db1541",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "f11f7fc0-50c3-c2cb-954e-9433aa5c7664",
 						version = 3,
 					},
 				},
@@ -1507,11 +1337,6 @@ local tbl =
 							},
 							
 							{
-								"7ea588ce-f7c7-e800-8c84-f3bd8bf2e0a2",
-								true,
-							},
-							
-							{
 								"e25e3993-683e-77ca-8eef-89f3df77167d",
 								true,
 							},
@@ -1538,18 +1363,6 @@ local tbl =
 						localmapid = 1314,
 						name = "Mistwake (1314)",
 						uuid = "4d6637e4-2dd6-727c-bba9-c9aaecef6720",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "7ea588ce-f7c7-e800-8c84-f3bd8bf2e0a2",
 						version = 3,
 					},
 				},
@@ -1605,11 +1418,6 @@ local tbl =
 							},
 							
 							{
-								"30ffd668-7e65-0369-8cbd-38c324a4294f",
-								true,
-							},
-							
-							{
 								"6e101be9-26e5-ce07-8ba3-03ff0b931e51",
 								true,
 							},
@@ -1641,18 +1449,6 @@ local tbl =
 						localmapid = 1314,
 						name = "Mistwake (1314)",
 						uuid = "f3d8c851-0302-3afd-82c7-107e57973de4",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "30ffd668-7e65-0369-8cbd-38c324a4294f",
 						version = 3,
 					},
 				},
@@ -1721,11 +1517,6 @@ local tbl =
 							},
 							
 							{
-								"21b99eb1-b5f0-bbdd-b3ca-7491e7078aad",
-								true,
-							},
-							
-							{
 								"9dfdb3a0-2178-1d80-8c48-8921fa1bc00a",
 								true,
 							},
@@ -1757,18 +1548,6 @@ local tbl =
 						localmapid = 1314,
 						name = "Mistwake (1314)",
 						uuid = "7237835f-469a-3032-88da-a36afe19af3f",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "21b99eb1-b5f0-bbdd-b3ca-7491e7078aad",
 						version = 3,
 					},
 				},
@@ -1837,11 +1616,6 @@ local tbl =
 							},
 							
 							{
-								"ca26fe4e-d654-07e6-933d-6e6d4e173110",
-								true,
-							},
-							
-							{
 								"82e42e95-345b-2797-ab1f-479b648f915c",
 								true,
 							},
@@ -1873,18 +1647,6 @@ local tbl =
 						localmapid = 1314,
 						name = "Mistwake (1314)",
 						uuid = "b6b97e44-5f16-13f5-9179-01a962dccd75",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "ca26fe4e-d654-07e6-933d-6e6d4e173110",
 						version = 3,
 					},
 				},
@@ -1943,17 +1705,12 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not MistwakeAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill14270=124.141, kill14271=137.749, kill14288=185.438,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Mistwake.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill14270\",\"kill14271\",\"kill14288\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill14270=math.max(15,math.min(1200,C.kill14270))\n    C.kill14271=math.max(15,math.min(1200,C.kill14271))\n    C.kill14288=math.max(15,math.min(1200,C.kill14288))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    MistwakeAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif MistwakeAutoSimConfig.poolFinal==nil then\n MistwakeAutoSimConfig.poolFinal=true\n table.insert(MistwakeAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID and BLM gates precede it.\nlocal C=MistwakeAutoSimConfig\nlocal visible=GUI:Begin(\"Mistwake - BLM AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. The optional values below come from three four-player runs, not the slower Duty Support samples.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Treno Catoblepas (seconds)\",C.kill14270,5,15,\"%.1f\")\n        if changed then C.kill14270=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Amdusias (seconds)\",C.kill14271,5,15,\"%.1f\")\n        if changed then C.kill14271=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Thundergust Griffin (seconds)\",C.kill14288,5,15,\"%.1f\")\n        if changed then C.kill14288=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold Ley Lines + Manafont on final trash before each boss\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before all three bosses. Holds only these two abilities while that combat continues; short holds expire automatically when combat ends or the profile stops.\") end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not MistwakeAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill14270=124.141, kill14271=137.749, kill14288=185.438,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Mistwake.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill14270\",\"kill14271\",\"kill14288\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill14270=math.max(15,math.min(1200,C.kill14270))\n    C.kill14271=math.max(15,math.min(1200,C.kill14271))\n    C.kill14288=math.max(15,math.min(1200,C.kill14288))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    MistwakeAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif MistwakeAutoSimConfig.poolFinal==nil then\n MistwakeAutoSimConfig.poolFinal=true\n table.insert(MistwakeAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=MistwakeAutoSimConfig\nlocal visible=GUI:Begin(\"Mistwake - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. The optional values below come from three four-player runs, not the slower Duty Support samples.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Treno Catoblepas (seconds)\",C.kill14270,5,15,\"%.1f\")\n        if changed then C.kill14270=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Amdusias (seconds)\",C.kill14271,5,15,\"%.1f\")\n        if changed then C.kill14271=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Thundergust Griffin (seconds)\",C.kill14288,5,15,\"%.1f\")\n        if changed then C.kill14288=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold Ley Lines + Manafont on final trash before each boss (BLM only)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before all three bosses. Holds only these two abilities while that combat continues; short holds expire automatically when combat ends or the profile stops.\") end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
 						conditions = 
 						{
 							
 							{
 								"58c5131a-e9e8-574a-865e-66a6d37250b6",
-								true,
-							},
-							
-							{
-								"4b2fe35e-addf-07b0-857b-4351ef7228b7",
 								true,
 							},
 						},
@@ -1974,18 +1731,6 @@ local tbl =
 						localmapid = 1314,
 						name = "Mistwake (1314)",
 						uuid = "58c5131a-e9e8-574a-865e-66a6d37250b6",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "4b2fe35e-addf-07b0-857b-4351ef7228b7",
 						version = 3,
 					},
 				},
@@ -2015,11 +1760,6 @@ local tbl =
 							
 							{
 								"15b53c01-f8e5-c2a8-843f-110c1102ea8f",
-								true,
-							},
-							
-							{
-								"3551ee10-43a1-b59d-8005-f7107a5a6377",
 								true,
 							},
 							
@@ -2055,18 +1795,6 @@ local tbl =
 						localmapid = 1314,
 						name = "Mistwake (1314)",
 						uuid = "15b53c01-f8e5-c2a8-843f-110c1102ea8f",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "3551ee10-43a1-b59d-8005-f7107a5a6377",
 						version = 3,
 					},
 				},
@@ -2200,11 +1928,6 @@ local tbl =
 							},
 							
 							{
-								"3f7e44f1-9c1e-8f87-a1bd-aa96c5813cf6",
-								true,
-							},
-							
-							{
 								"d3032058-62c2-c0aa-86af-942f37368811",
 								true,
 							},
@@ -2236,18 +1959,6 @@ local tbl =
 						localmapid = 1314,
 						name = "Mistwake (1314)",
 						uuid = "a08cf136-73c5-06c7-a8ef-1b5061e62984",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "3f7e44f1-9c1e-8f87-a1bd-aa96c5813cf6",
 						version = 3,
 					},
 				},
@@ -2356,11 +2067,6 @@ local tbl =
 							},
 							
 							{
-								"440ce3c3-6d3e-63b8-9a98-97c19fef59f2",
-								true,
-							},
-							
-							{
 								"4a0d3d21-3696-a9d3-9e51-f0253e666072",
 								true,
 							},
@@ -2392,18 +2098,6 @@ local tbl =
 						localmapid = 1314,
 						name = "Mistwake (1314)",
 						uuid = "f0b5e433-8abd-22a3-9b71-fb7de88e82ff",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "440ce3c3-6d3e-63b8-9a98-97c19fef59f2",
 						version = 3,
 					},
 				},
@@ -2644,17 +2338,12 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not ClyteumAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill14716=144.043, kill14734=138.778, kill14758=181.846,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Clyteum.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill14716\",\"kill14734\",\"kill14758\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill14716=math.max(15,math.min(1200,C.kill14716))\n    C.kill14734=math.max(15,math.min(1200,C.kill14734))\n    C.kill14758=math.max(15,math.min(1200,C.kill14758))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    ClyteumAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif ClyteumAutoSimConfig.poolFinal==nil then\n ClyteumAutoSimConfig.poolFinal=true\n table.insert(ClyteumAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- Runs after native map 1345, BLM and combat gates; no timeline timer is used.\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1345 or p.job~=25 or not p.incombat then self.used=true;return end\nlocal C=ClyteumAutoSimConfig\nlocal A=TensorCore.API.TensorACR\nlocal ok,t=pcall(A.getAutoSimTime)\nif not ok or type(t)~=\"number\" or t<0 then return end -- readiness wait, not completion\nif data.clyteum_autosim then self.used=true;return end\nlocal S={enabled=C.enabled,movement=C.movement,returnField=C.returnField,trash=C.trash,\n    killOverride=C.killOverride,kill14716=C.kill14716,kill14734=C.kill14734,kill14758=C.kill14758,\n    unexpectedPct=C.unexpectedPct,uncertainty=C.uncertainty,buffEnabled=C.buffEnabled,\n    buffPct=C.buffPct,buffFirst=C.buffFirst,buffDuration=C.buffDuration,buffPeriod=C.buffPeriod,\n    boss=0,origin=0,counts={},phases={},phaseCount=0,anchorsSeen=0,setup=true,activeEnds={}}\ndata.clyteum_autosim=S\n-- Filled by the evidence builder; tables are allocated once per combat.\nS.definitions={[14716]={[\"name\"]=\"Eye of the Scorpion\",[\"movement\"]={{21.0,26.0},{29.5,31.0},{33.0,35.0},{64.0,65.0},{76.5,79.0},{81.5,83.5},{85.0,87.0},{88.5,89.5},{93.0,94.5},{118.5,120.5},{126.5,127.5},{144.5,145.5},{147.5,149.0},{151.0,152.0}},[\"downtime\"]={},[\"aliases\"]={[50176]=50175},[\"anchors\"]={[48893]={48.492,107.618,166.969},[48896]={4.727,41.087,100.32,133.313,159.61},[50175]={18.0,28.242,86.766,145.883}}},[14734]={[\"name\"]=\"Chort\",[\"movement\"]={{19.5,21.5},{38.0,39.0},{51.0,53.0},{54.5,61.5},{62.5,64.0},{65.0,66.5},{81.5,82.5},{86.5,88.0},{110.5,113.0},{117.5,119.0},{139.0,140.5},{141.5,143.0},{145.5,146.5}},[\"downtime\"]={{21.938,31.07},{88.453,102.867}},[\"aliases\"]={[48868]=48870},[\"anchors\"]={[48870]={17.008},[48879]={48.453,131.804},[48884]={4.351,70.797,154.086},[48886]={108.57},[50361]={36.93,114.328},[50417]={102.867}}},[14758]={[\"name\"]=\"Malphas\",[\"movement\"]={{19.0,20.5},{40.5,42.0},{47.0,48.5},{52.0,53.0},{57.5,59.0},{88.0,91.0},{93.5,96.0},{104.0,105.0},{107.5,108.5},{132.0,133.0},{137.0,138.0},{154.5,156.0},{160.0,161.0},{162.0,163.5}},[\"downtime\"]={},[\"aliases\"]={},[\"anchors\"]={[48920]={6.21,68.867,122.46,195.118},[48921]={29.727,79.257,136.078,208.656},[48922]={37.484,47.016},[48923]={86.007,215.422},[48925]={143.813,166.781},[48929]={58.375},[48931]={102.946},[50313]={17.18,93.882,159.673,187.945,223.305},[50315]={115.203}}}}\n\nfunction S.add(kind,a,b,value,relative)\n    if b<=a or a>=1200 then return end\n    b=math.min(b,1200)\n    local id=A.addAutoSimPhase(kind,a,b,value)\n    if id then\n        S.phaseCount=S.phaseCount+1\n        S.phases[S.phaseCount]={id=id,kind=kind,a=a,b=b,value=value,relative=relative}\n    end\nend\n\nfunction S.startBoss(cid,entityID,origin,now)\n    local def=S.definitions[cid]\n    if not def or S.boss~=0 or not S.enabled then return end\n    S.boss=cid;S.entityID=entityID;S.origin=origin\n    C.poolStatus=nil\n    A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100)\n    if S.killOverride then\n        A.setAutoSimKillTime(math.min(1200,origin+S[\"kill\"..cid]))\n        A.addAutoSimUncertainty(now,10) -- limited four-player samples: estimates remain optional\n    end\n    -- Keep automatic kill uncertainty by default. Do not invent forced target downtime.\n    -- Only owned movement/field phases are authored; AoE counts and DoT targets stay live.\n    if S.movement then\n        for i=1,#def.movement do\n            local w=def.movement[i]\n            local a,b=origin+w[1],origin+w[2]\n            if b>now then\n                a=math.max(a,now)\n                S.add(\"CasterDowntime\",a,b,1,true)\n                if S.returnField then S.add(\"GroundFieldMovement\",b,b+0.2,2,true) end\n            end\n        end\n    end\n    -- Native paired targetability transitions corroborate these downtime windows.\n    -- Attackability forecasting is independent of the optional movement forecast.\n    for i=1,#def.downtime do\n        local w=def.downtime[i]\n        if origin+w[2]>now then S.add(\"FullDowntime\",math.max(origin+w[1],now),origin+w[2],1,true) end\n    end\n    if S.buffEnabled and S.buffPct>0 then\n        local a=origin+S.buffFirst\n        while a<1200 do\n            if a+S.buffDuration>now then S.add(\"RaidBuff\",math.max(a,now),a+S.buffDuration,1+S.buffPct/100,false) end\n            a=a+S.buffPeriod\n        end\n    end\n    C.status=\"Active: \"..def.name..\". Kill estimate: \"..(S.killOverride and \"manual\" or \"automatic\")\nend\n\nfunction S.channel(args)\n    if not S.enabled then return end\n    local cid=args.entityContentID\n    local def=S.definitions[cid]\n    if not def then return end\n    local aid=args.spellID\n    aid=def.aliases[aid] or aid -- documented alternate casts share one occurrence sequence\n    local anchors=def.anchors[aid]\n    if not anchors then return end -- stable boss cast identity before API work\n    if S.boss~=0 and (S.boss~=cid or S.entityID~=args.entityID) then return end\n    local valid,now=pcall(A.getAutoSimTime)\n    if not valid or type(now)~=\"number\" or now<0 or now>=1200 then return end\n    local n=(S.counts[aid] or 0)+1\n    local expected=anchors[n]\n    if not expected then return end\n    if S.boss==0 and math.abs(now-expected)>2 then return end\n    S.counts[aid]=n\n    if S.boss==0 then S.startBoss(cid,args.entityID,now-expected,now) end\n    if S.boss~=cid then return end\n    local candidate=now-expected\n    -- If enabled mid-boss, do not match a late repeat to the first occurrence.\n    if math.abs(candidate-S.origin)>2 then return end\n    local shift=candidate-S.origin\n    S.anchorsSeen=S.anchorsSeen+1\n    if math.abs(shift)<0.15 then return end\n    -- Remove every future owned phase before reinsertion, avoiding transient overlaps.\n    local ends=S.activeEnds\n    ends.CasterDowntime=now;ends.GroundFieldMovement=now;ends.FullDowntime=now\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.relative and phase.id and phase.a>now+0.05 then\n            A.removeAutoSimPhase(phase.id);phase.id=nil;phase.pending=true\n        elseif phase.id and phase.a<=now+0.05 and phase.b>now and phase.relative then\n            ends[phase.kind]=math.max(ends[phase.kind],phase.b)\n        end\n    end\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.pending then\n            phase.pending=false\n            local a,b=phase.a+shift,phase.b+shift\n            local minimum=ends[phase.kind]\n            if phase.kind==\"GroundFieldMovement\" then minimum=math.max(minimum,ends.CasterDowntime) end\n            a=math.max(a,minimum,now+0.05)\n            if b>a then\n                phase.id=A.addAutoSimPhase(phase.kind,a,b,phase.value)\n                phase.a=a;phase.b=b;ends[phase.kind]=b\n            end\n        end\n    end\n    S.origin=candidate\nend\n\nif S.enabled then\n    local target=TensorCore.mGetTarget()\n    if target and S.definitions[target.contentid] and target.attackable and target.incombat then\n        -- Near pull start, zero is the combat-clock origin; later setup waits for an anchor.\n        if t<=5 then S.startBoss(target.contentid,target.id,0,t) end\n    end\n    if S.boss==0 and S.trash then A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100) end\nend\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not ClyteumAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill14716=144.043, kill14734=138.778, kill14758=181.846,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Clyteum.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill14716\",\"kill14734\",\"kill14758\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill14716=math.max(15,math.min(1200,C.kill14716))\n    C.kill14734=math.max(15,math.min(1200,C.kill14734))\n    C.kill14758=math.max(15,math.min(1200,C.kill14758))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    ClyteumAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif ClyteumAutoSimConfig.poolFinal==nil then\n ClyteumAutoSimConfig.poolFinal=true\n table.insert(ClyteumAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- Runs after native map 1345, map and combat gates; no timeline timer is used.\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1345 or not p.incombat then self.used=true;return end\nlocal isCaster=p.job==25 or p.job==27 or p.job==35 or p.job==42 or p.job==36 or p.job==24 or p.job==28 or p.job==33 or p.job==40\nlocal C=ClyteumAutoSimConfig\nlocal A=TensorCore.API.TensorACR\nlocal ok,t=pcall(A.getAutoSimTime)\nif not ok or type(t)~=\"number\" or t<0 then return end -- readiness wait, not completion\nif data.clyteum_autosim then self.used=true;return end\nlocal S={enabled=C.enabled,movement=C.movement and isCaster,returnField=C.returnField and p.job==25,trash=C.trash,\n    killOverride=C.killOverride,kill14716=C.kill14716,kill14734=C.kill14734,kill14758=C.kill14758,\n    unexpectedPct=C.unexpectedPct,uncertainty=C.uncertainty,buffEnabled=C.buffEnabled,\n    buffPct=C.buffPct,buffFirst=C.buffFirst,buffDuration=C.buffDuration,buffPeriod=C.buffPeriod,\n    boss=0,origin=0,counts={},phases={},phaseCount=0,anchorsSeen=0,setup=true,activeEnds={}}\ndata.clyteum_autosim=S\n-- Filled by the evidence builder; tables are allocated once per combat.\nS.definitions={[14716]={[\"name\"]=\"Eye of the Scorpion\",[\"movement\"]={{21.0,26.0},{29.5,31.0},{33.0,35.0},{64.0,65.0},{76.5,79.0},{81.5,83.5},{85.0,87.0},{88.5,89.5},{93.0,94.5},{118.5,120.5},{126.5,127.5},{144.5,145.5},{147.5,149.0},{151.0,152.0}},[\"downtime\"]={},[\"aliases\"]={[50176]=50175},[\"anchors\"]={[48893]={48.492,107.618,166.969},[48896]={4.727,41.087,100.32,133.313,159.61},[50175]={18.0,28.242,86.766,145.883}}},[14734]={[\"name\"]=\"Chort\",[\"movement\"]={{19.5,21.5},{38.0,39.0},{51.0,53.0},{54.5,61.5},{62.5,64.0},{65.0,66.5},{81.5,82.5},{86.5,88.0},{110.5,113.0},{117.5,119.0},{139.0,140.5},{141.5,143.0},{145.5,146.5}},[\"downtime\"]={{21.938,31.07},{88.453,102.867}},[\"aliases\"]={[48868]=48870},[\"anchors\"]={[48870]={17.008},[48879]={48.453,131.804},[48884]={4.351,70.797,154.086},[48886]={108.57},[50361]={36.93,114.328},[50417]={102.867}}},[14758]={[\"name\"]=\"Malphas\",[\"movement\"]={{19.0,20.5},{40.5,42.0},{47.0,48.5},{52.0,53.0},{57.5,59.0},{88.0,91.0},{93.5,96.0},{104.0,105.0},{107.5,108.5},{132.0,133.0},{137.0,138.0},{154.5,156.0},{160.0,161.0},{162.0,163.5}},[\"downtime\"]={},[\"aliases\"]={},[\"anchors\"]={[48920]={6.21,68.867,122.46,195.118},[48921]={29.727,79.257,136.078,208.656},[48922]={37.484,47.016},[48923]={86.007,215.422},[48925]={143.813,166.781},[48929]={58.375},[48931]={102.946},[50313]={17.18,93.882,159.673,187.945,223.305},[50315]={115.203}}}}\n\nfunction S.add(kind,a,b,value,relative)\n    if b<=a or a>=1200 then return end\n    b=math.min(b,1200)\n    local id=A.addAutoSimPhase(kind,a,b,value)\n    if id then\n        S.phaseCount=S.phaseCount+1\n        S.phases[S.phaseCount]={id=id,kind=kind,a=a,b=b,value=value,relative=relative}\n    end\nend\n\nfunction S.startBoss(cid,entityID,origin,now)\n    local def=S.definitions[cid]\n    if not def or S.boss~=0 or not S.enabled then return end\n    S.boss=cid;S.entityID=entityID;S.origin=origin\n    C.poolStatus=nil\n    A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100)\n    if S.killOverride then\n        A.setAutoSimKillTime(math.min(1200,origin+S[\"kill\"..cid]))\n        A.addAutoSimUncertainty(now,10) -- limited four-player samples: estimates remain optional\n    end\n    -- Keep automatic kill uncertainty by default. Do not invent forced target downtime.\n    -- Only owned movement/field phases are authored; AoE counts and DoT targets stay live.\n    if S.movement then\n        for i=1,#def.movement do\n            local w=def.movement[i]\n            local a,b=origin+w[1],origin+w[2]\n            if b>now then\n                a=math.max(a,now)\n                S.add(\"CasterDowntime\",a,b,1,true)\n                if S.returnField then S.add(\"GroundFieldMovement\",b,b+0.2,2,true) end\n            end\n        end\n    end\n    -- Native paired targetability transitions corroborate these downtime windows.\n    -- Attackability forecasting is independent of the optional movement forecast.\n    for i=1,#def.downtime do\n        local w=def.downtime[i]\n        if origin+w[2]>now then S.add(\"FullDowntime\",math.max(origin+w[1],now),origin+w[2],1,true) end\n    end\n    if S.buffEnabled and S.buffPct>0 then\n        local a=origin+S.buffFirst\n        while a<1200 do\n            if a+S.buffDuration>now then S.add(\"RaidBuff\",math.max(a,now),a+S.buffDuration,1+S.buffPct/100,false) end\n            a=a+S.buffPeriod\n        end\n    end\n    C.status=\"Active: \"..def.name..\". Kill estimate: \"..(S.killOverride and \"manual\" or \"automatic\")\nend\n\nfunction S.channel(args)\n    if not S.enabled then return end\n    local cid=args.entityContentID\n    local def=S.definitions[cid]\n    if not def then return end\n    local aid=args.spellID\n    aid=def.aliases[aid] or aid -- documented alternate casts share one occurrence sequence\n    local anchors=def.anchors[aid]\n    if not anchors then return end -- stable boss cast identity before API work\n    if S.boss~=0 and (S.boss~=cid or S.entityID~=args.entityID) then return end\n    local valid,now=pcall(A.getAutoSimTime)\n    if not valid or type(now)~=\"number\" or now<0 or now>=1200 then return end\n    local n=(S.counts[aid] or 0)+1\n    local expected=anchors[n]\n    if not expected then return end\n    if S.boss==0 and math.abs(now-expected)>2 then return end\n    S.counts[aid]=n\n    if S.boss==0 then S.startBoss(cid,args.entityID,now-expected,now) end\n    if S.boss~=cid then return end\n    local candidate=now-expected\n    -- If enabled mid-boss, do not match a late repeat to the first occurrence.\n    if math.abs(candidate-S.origin)>2 then return end\n    local shift=candidate-S.origin\n    S.anchorsSeen=S.anchorsSeen+1\n    if math.abs(shift)<0.15 then return end\n    -- Remove every future owned phase before reinsertion, avoiding transient overlaps.\n    local ends=S.activeEnds\n    ends.CasterDowntime=now;ends.GroundFieldMovement=now;ends.FullDowntime=now\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.relative and phase.id and phase.a>now+0.05 then\n            A.removeAutoSimPhase(phase.id);phase.id=nil;phase.pending=true\n        elseif phase.id and phase.a<=now+0.05 and phase.b>now and phase.relative then\n            ends[phase.kind]=math.max(ends[phase.kind],phase.b)\n        end\n    end\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.pending then\n            phase.pending=false\n            local a,b=phase.a+shift,phase.b+shift\n            local minimum=ends[phase.kind]\n            if phase.kind==\"GroundFieldMovement\" then minimum=math.max(minimum,ends.CasterDowntime) end\n            a=math.max(a,minimum,now+0.05)\n            if b>a then\n                phase.id=A.addAutoSimPhase(phase.kind,a,b,phase.value)\n                phase.a=a;phase.b=b;ends[phase.kind]=b\n            end\n        end\n    end\n    S.origin=candidate\nend\n\nif S.enabled then\n    local target=TensorCore.mGetTarget()\n    if target and S.definitions[target.contentid] and target.attackable and target.incombat then\n        -- Near pull start, zero is the combat-clock origin; later setup waits for an anchor.\n        if t<=5 then S.startBoss(target.contentid,target.id,0,t) end\n    end\n    if S.boss==0 and S.trash then A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100) end\nend\nself.used=true\n",
 						conditions = 
 						{
 							
 							{
 								"5c9c57d2-2a3a-92ef-9d20-5e88a2a70111",
-								true,
-							},
-							
-							{
-								"c8b5ffb7-74df-dffd-ab6d-f7dfec7f685c",
 								true,
 							},
 							
@@ -2685,18 +2374,6 @@ local tbl =
 						localmapid = 1345,
 						name = "Clyteum (1345)",
 						uuid = "5c9c57d2-2a3a-92ef-9d20-5e88a2a70111",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "c8b5ffb7-74df-dffd-ab6d-f7dfec7f685c",
 						version = 3,
 					},
 				},
@@ -2751,11 +2428,6 @@ local tbl =
 							},
 							
 							{
-								"b1f4bf6c-f91e-7dea-ab27-4d1cb15fd998",
-								true,
-							},
-							
-							{
 								"cef2bb9e-8056-8bb4-a021-ada349bc08f5",
 								true,
 							},
@@ -2782,18 +2454,6 @@ local tbl =
 						localmapid = 1345,
 						name = "Clyteum (1345)",
 						uuid = "811735b4-d594-7556-be18-a576d2273d18",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "b1f4bf6c-f91e-7dea-ab27-4d1cb15fd998",
 						version = 3,
 					},
 				},
@@ -2849,11 +2509,6 @@ local tbl =
 							},
 							
 							{
-								"3960d4ad-d57c-722f-bca5-d3ef54ace31b",
-								true,
-							},
-							
-							{
 								"b568b7b9-b46c-6519-aaa7-857cd8efa444",
 								true,
 							},
@@ -2885,18 +2540,6 @@ local tbl =
 						localmapid = 1345,
 						name = "Clyteum (1345)",
 						uuid = "356afd6d-ce07-c9a8-bf68-bd6ae6ed9c15",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "3960d4ad-d57c-722f-bca5-d3ef54ace31b",
 						version = 3,
 					},
 				},
@@ -2965,11 +2608,6 @@ local tbl =
 							},
 							
 							{
-								"84c5a664-cdac-20e5-bec4-428397790690",
-								true,
-							},
-							
-							{
 								"830be338-1048-3370-9ed9-871ad5f29683",
 								true,
 							},
@@ -3001,18 +2639,6 @@ local tbl =
 						localmapid = 1345,
 						name = "Clyteum (1345)",
 						uuid = "1c04ed9f-3727-7834-9576-2796daaf6b2a",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "84c5a664-cdac-20e5-bec4-428397790690",
 						version = 3,
 					},
 				},
@@ -3081,11 +2707,6 @@ local tbl =
 							},
 							
 							{
-								"07bd26a0-f42e-0a6e-b7e1-49c9843d07d0",
-								true,
-							},
-							
-							{
 								"1d3073ca-ac97-5164-8283-93b0b2e9bd51",
 								true,
 							},
@@ -3117,18 +2738,6 @@ local tbl =
 						localmapid = 1345,
 						name = "Clyteum (1345)",
 						uuid = "29a471b2-50c2-04c5-ba95-dedf6f5b104f",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "07bd26a0-f42e-0a6e-b7e1-49c9843d07d0",
 						version = 3,
 					},
 				},
@@ -3187,17 +2796,12 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not ClyteumAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill14716=144.043, kill14734=138.778, kill14758=181.846,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Clyteum.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill14716\",\"kill14734\",\"kill14758\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill14716=math.max(15,math.min(1200,C.kill14716))\n    C.kill14734=math.max(15,math.min(1200,C.kill14734))\n    C.kill14758=math.max(15,math.min(1200,C.kill14758))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    ClyteumAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif ClyteumAutoSimConfig.poolFinal==nil then\n ClyteumAutoSimConfig.poolFinal=true\n table.insert(ClyteumAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID and BLM gates precede it.\nlocal C=ClyteumAutoSimConfig\nlocal visible=GUI:Begin(\"Clyteum - BLM AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Eye of the Scorpion (seconds)\",C.kill14716,5,15,\"%.1f\")\n        if changed then C.kill14716=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Chort (seconds)\",C.kill14734,5,15,\"%.1f\")\n        if changed then C.kill14734=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Malphas (seconds)\",C.kill14758,5,15,\"%.1f\")\n        if changed then C.kill14758=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold Ley Lines + Manafont on final trash before each boss\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before all three bosses. Holds only these two abilities while that combat continues; short holds expire automatically when combat ends or the profile stops.\") end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not ClyteumAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill14716=144.043, kill14734=138.778, kill14758=181.846,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Clyteum.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill14716\",\"kill14734\",\"kill14758\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill14716=math.max(15,math.min(1200,C.kill14716))\n    C.kill14734=math.max(15,math.min(1200,C.kill14734))\n    C.kill14758=math.max(15,math.min(1200,C.kill14758))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    ClyteumAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif ClyteumAutoSimConfig.poolFinal==nil then\n ClyteumAutoSimConfig.poolFinal=true\n table.insert(ClyteumAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=ClyteumAutoSimConfig\nlocal visible=GUI:Begin(\"Clyteum - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Eye of the Scorpion (seconds)\",C.kill14716,5,15,\"%.1f\")\n        if changed then C.kill14716=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Chort (seconds)\",C.kill14734,5,15,\"%.1f\")\n        if changed then C.kill14734=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Malphas (seconds)\",C.kill14758,5,15,\"%.1f\")\n        if changed then C.kill14758=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold Ley Lines + Manafont on final trash before each boss (BLM only)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before all three bosses. Holds only these two abilities while that combat continues; short holds expire automatically when combat ends or the profile stops.\") end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
 						conditions = 
 						{
 							
 							{
 								"2682ac60-40dc-9d15-9bd0-f8bdc47b0f2d",
-								true,
-							},
-							
-							{
-								"63b4f1dc-cb37-7cf2-9b8e-16177ccee0a2",
 								true,
 							},
 						},
@@ -3218,18 +2822,6 @@ local tbl =
 						localmapid = 1345,
 						name = "Clyteum (1345)",
 						uuid = "2682ac60-40dc-9d15-9bd0-f8bdc47b0f2d",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "63b4f1dc-cb37-7cf2-9b8e-16177ccee0a2",
 						version = 3,
 					},
 				},
@@ -3259,11 +2851,6 @@ local tbl =
 							
 							{
 								"55ed5abc-b214-a3c2-a65e-d153849414ae",
-								true,
-							},
-							
-							{
-								"2015623f-5af7-536f-8ea7-f1beabea5271",
 								true,
 							},
 							
@@ -3299,18 +2886,6 @@ local tbl =
 						localmapid = 1345,
 						name = "Clyteum (1345)",
 						uuid = "55ed5abc-b214-a3c2-a65e-d153849414ae",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "2015623f-5af7-536f-8ea7-f1beabea5271",
 						version = 3,
 					},
 				},
@@ -3444,11 +3019,6 @@ local tbl =
 							},
 							
 							{
-								"7975a1ca-00da-868c-9a99-f1b2cf241aa9",
-								true,
-							},
-							
-							{
 								"481b8b0d-c02f-d699-b209-2fb9bbab467e",
 								true,
 							},
@@ -3480,18 +3050,6 @@ local tbl =
 						localmapid = 1345,
 						name = "Clyteum (1345)",
 						uuid = "c9b01f43-327a-aa80-bdfe-43bc04be1ebb",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "7975a1ca-00da-868c-9a99-f1b2cf241aa9",
 						version = 3,
 					},
 				},
@@ -3625,11 +3183,6 @@ local tbl =
 							},
 							
 							{
-								"618ec4ae-cfc7-b211-9f60-ca2aa67d301e",
-								true,
-							},
-							
-							{
 								"bd4cf580-19e4-68e4-83f9-8e64ea1d44a9",
 								true,
 							},
@@ -3661,18 +3214,6 @@ local tbl =
 						localmapid = 1345,
 						name = "Clyteum (1345)",
 						uuid = "e4bdb084-d351-1582-80ad-3dd2b8a3d1eb",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "618ec4ae-cfc7-b211-9f60-ca2aa67d301e",
 						version = 3,
 					},
 				},
@@ -3938,17 +3479,12 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not MesoTerminalAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill13970=130.024, kill14047=136.562, kill13974=205.226,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\MesoTerminal.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill13970\",\"kill14047\",\"kill13974\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill13970=math.max(15,math.min(1200,C.kill13970))\n    C.kill14047=math.max(15,math.min(1200,C.kill14047))\n    C.kill13974=math.max(15,math.min(1200,C.kill13974))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    MesoTerminalAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif MesoTerminalAutoSimConfig.poolFinal==nil then\n MesoTerminalAutoSimConfig.poolFinal=true\n table.insert(MesoTerminalAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- Runs after native map 1292, BLM and combat gates; no timeline timer is used.\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1292 or p.job~=25 or not p.incombat then self.used=true;return end\nlocal C=MesoTerminalAutoSimConfig\nlocal A=TensorCore.API.TensorACR\nlocal ok,t=pcall(A.getAutoSimTime)\nif not ok or type(t)~=\"number\" or t<0 then return end -- readiness wait, not completion\nif data.meso_autosim then self.used=true;return end\nlocal S={enabled=C.enabled,movement=C.movement,returnField=C.returnField,trash=C.trash,\n    killOverride=C.killOverride,kill13970=C.kill13970,kill14047=C.kill14047,kill13974=C.kill13974,\n    unexpectedPct=C.unexpectedPct,uncertainty=C.uncertainty,buffEnabled=C.buffEnabled,\n    buffPct=C.buffPct,buffFirst=C.buffFirst,buffDuration=C.buffDuration,buffPeriod=C.buffPeriod,\n    boss=0,origin=0,counts={},phases={},phaseCount=0,anchorsSeen=0,setup=true,activeEnds={}}\ndata.meso_autosim=S\n-- Filled by the evidence builder; tables are allocated once per combat.\nS.definitions={[13970]={[\"name\"]=\"Chirurgeon General\",[\"movement\"]={},[\"downtime\"]={},[\"aliases\"]={},[\"anchors\"]={[43797]={48.89,74.25,125.953},[43798]={4.156,103.656},[43799]={64.969,113.718},[43802]={36.593,96.593}}},[14047]={[\"name\"]=\"Bloody Headsman\",[\"movement\"]={{36.5,37.5},{41.5,42.5},{46.0,47.5}},[\"downtime\"]={},[\"aliases\"]={},[\"anchors\"]={[43577]={0.281},[43578]={6.484,105.234},[43581]={17.562},[43586]={24.843},[43588]={59.453},[43591]={49.125},[43593]={34.187},[43597]={84.328}}},[13974]={[\"name\"]=\"Immortal Remains\",[\"movement\"]={{67.5,68.5},{75.0,76.0},{77.5,78.5},{90.0,91.5},{95.0,96.0},{97.5,99.5}},[\"downtime\"]={},[\"aliases\"]={},[\"anchors\"]={[43809]={15.875,53.329,111.047},[43821]={43.078,193.531},[43823]={101.812,202.712},[43825]={5.187,211.899}}}}\n\nfunction S.add(kind,a,b,value,relative)\n    if b<=a or a>=1200 then return end\n    b=math.min(b,1200)\n    local id=A.addAutoSimPhase(kind,a,b,value)\n    if id then\n        S.phaseCount=S.phaseCount+1\n        S.phases[S.phaseCount]={id=id,kind=kind,a=a,b=b,value=value,relative=relative}\n    end\nend\n\nfunction S.startBoss(cid,entityID,origin,now)\n    local def=S.definitions[cid]\n    if not def or S.boss~=0 or not S.enabled then return end\n    S.boss=cid;S.entityID=entityID;S.origin=origin\n    C.poolStatus=nil\n    A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100)\n    if S.killOverride then\n        A.setAutoSimKillTime(math.min(1200,origin+S[\"kill\"..cid]))\n        A.addAutoSimUncertainty(now,10) -- limited four-player samples: estimates remain optional\n    end\n    -- Keep automatic kill uncertainty by default. Do not invent forced target downtime.\n    -- Only owned movement/field phases are authored; AoE counts and DoT targets stay live.\n    if S.movement then\n        for i=1,#def.movement do\n            local w=def.movement[i]\n            local a,b=origin+w[1],origin+w[2]\n            if b>now then\n                a=math.max(a,now)\n                S.add(\"CasterDowntime\",a,b,1,true)\n                if S.returnField then S.add(\"GroundFieldMovement\",b,b+0.2,2,true) end\n            end\n        end\n    end\n    -- Native paired targetability transitions corroborate these downtime windows.\n    -- Attackability forecasting is independent of the optional movement forecast.\n    for i=1,#def.downtime do\n        local w=def.downtime[i]\n        if origin+w[2]>now then S.add(\"FullDowntime\",math.max(origin+w[1],now),origin+w[2],1,true) end\n    end\n    if S.buffEnabled and S.buffPct>0 then\n        local a=origin+S.buffFirst\n        while a<1200 do\n            if a+S.buffDuration>now then S.add(\"RaidBuff\",math.max(a,now),a+S.buffDuration,1+S.buffPct/100,false) end\n            a=a+S.buffPeriod\n        end\n    end\n    C.status=\"Active: \"..def.name..\". Kill estimate: \"..(S.killOverride and \"manual\" or \"automatic\")\nend\n\nfunction S.channel(args)\n    if not S.enabled then return end\n    local cid=args.entityContentID\n    local def=S.definitions[cid]\n    if not def then return end\n    local aid=args.spellID\n    aid=def.aliases[aid] or aid -- documented alternate casts share one occurrence sequence\n    local anchors=def.anchors[aid]\n    if not anchors then return end -- stable boss cast identity before API work\n    if S.boss~=0 and (S.boss~=cid or S.entityID~=args.entityID) then return end\n    local valid,now=pcall(A.getAutoSimTime)\n    if not valid or type(now)~=\"number\" or now<0 or now>=1200 then return end\n    local n=(S.counts[aid] or 0)+1\n    local expected=anchors[n]\n    if not expected then return end\n    if S.boss==0 and math.abs(now-expected)>2 then return end\n    S.counts[aid]=n\n    if S.boss==0 then S.startBoss(cid,args.entityID,now-expected,now) end\n    if S.boss~=cid then return end\n    local candidate=now-expected\n    -- If enabled mid-boss, do not match a late repeat to the first occurrence.\n    if math.abs(candidate-S.origin)>2 then return end\n    local shift=candidate-S.origin\n    S.anchorsSeen=S.anchorsSeen+1\n    if math.abs(shift)<0.15 then return end\n    -- Remove every future owned phase before reinsertion, avoiding transient overlaps.\n    local ends=S.activeEnds\n    ends.CasterDowntime=now;ends.GroundFieldMovement=now;ends.FullDowntime=now\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.relative and phase.id and phase.a>now+0.05 then\n            A.removeAutoSimPhase(phase.id);phase.id=nil;phase.pending=true\n        elseif phase.id and phase.a<=now+0.05 and phase.b>now and phase.relative then\n            ends[phase.kind]=math.max(ends[phase.kind],phase.b)\n        end\n    end\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.pending then\n            phase.pending=false\n            local a,b=phase.a+shift,phase.b+shift\n            local minimum=ends[phase.kind]\n            if phase.kind==\"GroundFieldMovement\" then minimum=math.max(minimum,ends.CasterDowntime) end\n            a=math.max(a,minimum,now+0.05)\n            if b>a then\n                phase.id=A.addAutoSimPhase(phase.kind,a,b,phase.value)\n                phase.a=a;phase.b=b;ends[phase.kind]=b\n            end\n        end\n    end\n    S.origin=candidate\nend\n\nif S.enabled then\n    local target=TensorCore.mGetTarget()\n    if target and S.definitions[target.contentid] and target.attackable and target.incombat then\n        -- Near pull start, zero is the combat-clock origin; later setup waits for an anchor.\n        if t<=5 then S.startBoss(target.contentid,target.id,0,t) end\n    end\n    if S.boss==0 and S.trash then A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100) end\nend\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not MesoTerminalAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill13970=130.024, kill14047=136.562, kill13974=205.226,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\MesoTerminal.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill13970\",\"kill14047\",\"kill13974\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill13970=math.max(15,math.min(1200,C.kill13970))\n    C.kill14047=math.max(15,math.min(1200,C.kill14047))\n    C.kill13974=math.max(15,math.min(1200,C.kill13974))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    MesoTerminalAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif MesoTerminalAutoSimConfig.poolFinal==nil then\n MesoTerminalAutoSimConfig.poolFinal=true\n table.insert(MesoTerminalAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- Runs after native map 1292, map and combat gates; no timeline timer is used.\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1292 or not p.incombat then self.used=true;return end\nlocal isCaster=p.job==25 or p.job==27 or p.job==35 or p.job==42 or p.job==36 or p.job==24 or p.job==28 or p.job==33 or p.job==40\nlocal C=MesoTerminalAutoSimConfig\nlocal A=TensorCore.API.TensorACR\nlocal ok,t=pcall(A.getAutoSimTime)\nif not ok or type(t)~=\"number\" or t<0 then return end -- readiness wait, not completion\nif data.meso_autosim then self.used=true;return end\nlocal S={enabled=C.enabled,movement=C.movement and isCaster,returnField=C.returnField and p.job==25,trash=C.trash,\n    killOverride=C.killOverride,kill13970=C.kill13970,kill14047=C.kill14047,kill13974=C.kill13974,\n    unexpectedPct=C.unexpectedPct,uncertainty=C.uncertainty,buffEnabled=C.buffEnabled,\n    buffPct=C.buffPct,buffFirst=C.buffFirst,buffDuration=C.buffDuration,buffPeriod=C.buffPeriod,\n    boss=0,origin=0,counts={},phases={},phaseCount=0,anchorsSeen=0,setup=true,activeEnds={}}\ndata.meso_autosim=S\n-- Filled by the evidence builder; tables are allocated once per combat.\nS.definitions={[13970]={[\"name\"]=\"Chirurgeon General\",[\"movement\"]={},[\"downtime\"]={},[\"aliases\"]={},[\"anchors\"]={[43797]={48.89,74.25,125.953},[43798]={4.156,103.656},[43799]={64.969,113.718},[43802]={36.593,96.593}}},[14047]={[\"name\"]=\"Bloody Headsman\",[\"movement\"]={{36.5,37.5},{41.5,42.5},{46.0,47.5}},[\"downtime\"]={},[\"aliases\"]={},[\"anchors\"]={[43577]={0.281},[43578]={6.484,105.234},[43581]={17.562},[43586]={24.843},[43588]={59.453},[43591]={49.125},[43593]={34.187},[43597]={84.328}}},[13974]={[\"name\"]=\"Immortal Remains\",[\"movement\"]={{67.5,68.5},{75.0,76.0},{77.5,78.5},{90.0,91.5},{95.0,96.0},{97.5,99.5}},[\"downtime\"]={},[\"aliases\"]={},[\"anchors\"]={[43809]={15.875,53.329,111.047},[43821]={43.078,193.531},[43823]={101.812,202.712},[43825]={5.187,211.899}}}}\n\nfunction S.add(kind,a,b,value,relative)\n    if b<=a or a>=1200 then return end\n    b=math.min(b,1200)\n    local id=A.addAutoSimPhase(kind,a,b,value)\n    if id then\n        S.phaseCount=S.phaseCount+1\n        S.phases[S.phaseCount]={id=id,kind=kind,a=a,b=b,value=value,relative=relative}\n    end\nend\n\nfunction S.startBoss(cid,entityID,origin,now)\n    local def=S.definitions[cid]\n    if not def or S.boss~=0 or not S.enabled then return end\n    S.boss=cid;S.entityID=entityID;S.origin=origin\n    C.poolStatus=nil\n    A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100)\n    if S.killOverride then\n        A.setAutoSimKillTime(math.min(1200,origin+S[\"kill\"..cid]))\n        A.addAutoSimUncertainty(now,10) -- limited four-player samples: estimates remain optional\n    end\n    -- Keep automatic kill uncertainty by default. Do not invent forced target downtime.\n    -- Only owned movement/field phases are authored; AoE counts and DoT targets stay live.\n    if S.movement then\n        for i=1,#def.movement do\n            local w=def.movement[i]\n            local a,b=origin+w[1],origin+w[2]\n            if b>now then\n                a=math.max(a,now)\n                S.add(\"CasterDowntime\",a,b,1,true)\n                if S.returnField then S.add(\"GroundFieldMovement\",b,b+0.2,2,true) end\n            end\n        end\n    end\n    -- Native paired targetability transitions corroborate these downtime windows.\n    -- Attackability forecasting is independent of the optional movement forecast.\n    for i=1,#def.downtime do\n        local w=def.downtime[i]\n        if origin+w[2]>now then S.add(\"FullDowntime\",math.max(origin+w[1],now),origin+w[2],1,true) end\n    end\n    if S.buffEnabled and S.buffPct>0 then\n        local a=origin+S.buffFirst\n        while a<1200 do\n            if a+S.buffDuration>now then S.add(\"RaidBuff\",math.max(a,now),a+S.buffDuration,1+S.buffPct/100,false) end\n            a=a+S.buffPeriod\n        end\n    end\n    C.status=\"Active: \"..def.name..\". Kill estimate: \"..(S.killOverride and \"manual\" or \"automatic\")\nend\n\nfunction S.channel(args)\n    if not S.enabled then return end\n    local cid=args.entityContentID\n    local def=S.definitions[cid]\n    if not def then return end\n    local aid=args.spellID\n    aid=def.aliases[aid] or aid -- documented alternate casts share one occurrence sequence\n    local anchors=def.anchors[aid]\n    if not anchors then return end -- stable boss cast identity before API work\n    if S.boss~=0 and (S.boss~=cid or S.entityID~=args.entityID) then return end\n    local valid,now=pcall(A.getAutoSimTime)\n    if not valid or type(now)~=\"number\" or now<0 or now>=1200 then return end\n    local n=(S.counts[aid] or 0)+1\n    local expected=anchors[n]\n    if not expected then return end\n    if S.boss==0 and math.abs(now-expected)>2 then return end\n    S.counts[aid]=n\n    if S.boss==0 then S.startBoss(cid,args.entityID,now-expected,now) end\n    if S.boss~=cid then return end\n    local candidate=now-expected\n    -- If enabled mid-boss, do not match a late repeat to the first occurrence.\n    if math.abs(candidate-S.origin)>2 then return end\n    local shift=candidate-S.origin\n    S.anchorsSeen=S.anchorsSeen+1\n    if math.abs(shift)<0.15 then return end\n    -- Remove every future owned phase before reinsertion, avoiding transient overlaps.\n    local ends=S.activeEnds\n    ends.CasterDowntime=now;ends.GroundFieldMovement=now;ends.FullDowntime=now\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.relative and phase.id and phase.a>now+0.05 then\n            A.removeAutoSimPhase(phase.id);phase.id=nil;phase.pending=true\n        elseif phase.id and phase.a<=now+0.05 and phase.b>now and phase.relative then\n            ends[phase.kind]=math.max(ends[phase.kind],phase.b)\n        end\n    end\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.pending then\n            phase.pending=false\n            local a,b=phase.a+shift,phase.b+shift\n            local minimum=ends[phase.kind]\n            if phase.kind==\"GroundFieldMovement\" then minimum=math.max(minimum,ends.CasterDowntime) end\n            a=math.max(a,minimum,now+0.05)\n            if b>a then\n                phase.id=A.addAutoSimPhase(phase.kind,a,b,phase.value)\n                phase.a=a;phase.b=b;ends[phase.kind]=b\n            end\n        end\n    end\n    S.origin=candidate\nend\n\nif S.enabled then\n    local target=TensorCore.mGetTarget()\n    if target and S.definitions[target.contentid] and target.attackable and target.incombat then\n        -- Near pull start, zero is the combat-clock origin; later setup waits for an anchor.\n        if t<=5 then S.startBoss(target.contentid,target.id,0,t) end\n    end\n    if S.boss==0 and S.trash then A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100) end\nend\nself.used=true\n",
 						conditions = 
 						{
 							
 							{
 								"8cc2a669-6cb0-6219-b4aa-aec9a0b3f483",
-								true,
-							},
-							
-							{
-								"c9ec547e-ffa5-15c7-90b1-9c7bcbf99933",
 								true,
 							},
 							
@@ -3979,18 +3515,6 @@ local tbl =
 						localmapid = 1292,
 						name = "Meso Terminal (1292)",
 						uuid = "8cc2a669-6cb0-6219-b4aa-aec9a0b3f483",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "c9ec547e-ffa5-15c7-90b1-9c7bcbf99933",
 						version = 3,
 					},
 				},
@@ -4045,11 +3569,6 @@ local tbl =
 							},
 							
 							{
-								"c074f0da-7b73-d095-a5d4-f54ed59b2d87",
-								true,
-							},
-							
-							{
 								"b240b4c9-24cc-35a3-b1d7-07f0215c74fc",
 								true,
 							},
@@ -4076,18 +3595,6 @@ local tbl =
 						localmapid = 1292,
 						name = "Meso Terminal (1292)",
 						uuid = "0227879e-438f-1a60-9752-9ae86de170e1",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "c074f0da-7b73-d095-a5d4-f54ed59b2d87",
 						version = 3,
 					},
 				},
@@ -4143,11 +3650,6 @@ local tbl =
 							},
 							
 							{
-								"89ca4892-6984-67f8-8c43-5496d03c57c0",
-								true,
-							},
-							
-							{
 								"249092fb-294c-5c5f-920b-651bad0ad7db",
 								true,
 							},
@@ -4179,18 +3681,6 @@ local tbl =
 						localmapid = 1292,
 						name = "Meso Terminal (1292)",
 						uuid = "ae5ad0d1-e0a3-2986-b462-4621625c483c",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "89ca4892-6984-67f8-8c43-5496d03c57c0",
 						version = 3,
 					},
 				},
@@ -4259,11 +3749,6 @@ local tbl =
 							},
 							
 							{
-								"737508ca-d837-76bd-a9c7-5842f1fae1b5",
-								true,
-							},
-							
-							{
 								"f856add6-565d-43a7-9a5b-590a4e234b2e",
 								true,
 							},
@@ -4295,18 +3780,6 @@ local tbl =
 						localmapid = 1292,
 						name = "Meso Terminal (1292)",
 						uuid = "b4cf9794-683b-f8c8-9ff8-c35a7a15b90b",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "737508ca-d837-76bd-a9c7-5842f1fae1b5",
 						version = 3,
 					},
 				},
@@ -4375,11 +3848,6 @@ local tbl =
 							},
 							
 							{
-								"cfeb743f-b8d8-a44f-bbf7-2eae1fb07f3f",
-								true,
-							},
-							
-							{
 								"24684702-f223-cf63-855f-67386566994f",
 								true,
 							},
@@ -4411,18 +3879,6 @@ local tbl =
 						localmapid = 1292,
 						name = "Meso Terminal (1292)",
 						uuid = "d68a153f-2168-1b2d-80ae-5f2aff2dc23f",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "cfeb743f-b8d8-a44f-bbf7-2eae1fb07f3f",
 						version = 3,
 					},
 				},
@@ -4481,17 +3937,12 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not MesoTerminalAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill13970=130.024, kill14047=136.562, kill13974=205.226,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\MesoTerminal.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill13970\",\"kill14047\",\"kill13974\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill13970=math.max(15,math.min(1200,C.kill13970))\n    C.kill14047=math.max(15,math.min(1200,C.kill14047))\n    C.kill13974=math.max(15,math.min(1200,C.kill13974))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    MesoTerminalAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif MesoTerminalAutoSimConfig.poolFinal==nil then\n MesoTerminalAutoSimConfig.poolFinal=true\n table.insert(MesoTerminalAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID and BLM gates precede it.\nlocal C=MesoTerminalAutoSimConfig\nlocal visible=GUI:Begin(\"Meso Terminal - BLM AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Chirurgeon General (seconds)\",C.kill13970,5,15,\"%.1f\")\n        if changed then C.kill13970=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Bloody Headsman (seconds)\",C.kill14047,5,15,\"%.1f\")\n        if changed then C.kill14047=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Immortal Remains (seconds)\",C.kill13974,5,15,\"%.1f\")\n        if changed then C.kill13974=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold Ley Lines + Manafont on final trash before each boss\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before all three bosses. Holds only these two abilities while that combat continues; short holds expire automatically when combat ends or the profile stops.\") end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not MesoTerminalAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill13970=130.024, kill14047=136.562, kill13974=205.226,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\MesoTerminal.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill13970\",\"kill14047\",\"kill13974\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill13970=math.max(15,math.min(1200,C.kill13970))\n    C.kill14047=math.max(15,math.min(1200,C.kill14047))\n    C.kill13974=math.max(15,math.min(1200,C.kill13974))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    MesoTerminalAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif MesoTerminalAutoSimConfig.poolFinal==nil then\n MesoTerminalAutoSimConfig.poolFinal=true\n table.insert(MesoTerminalAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=MesoTerminalAutoSimConfig\nlocal visible=GUI:Begin(\"Meso Terminal - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Chirurgeon General (seconds)\",C.kill13970,5,15,\"%.1f\")\n        if changed then C.kill13970=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Bloody Headsman (seconds)\",C.kill14047,5,15,\"%.1f\")\n        if changed then C.kill14047=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Immortal Remains (seconds)\",C.kill13974,5,15,\"%.1f\")\n        if changed then C.kill13974=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold Ley Lines + Manafont on final trash before each boss (BLM only)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before all three bosses. Holds only these two abilities while that combat continues; short holds expire automatically when combat ends or the profile stops.\") end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
 						conditions = 
 						{
 							
 							{
 								"3b7982fb-d211-8679-b361-35eae0034e71",
-								true,
-							},
-							
-							{
-								"e2dab821-54e4-a393-929b-7cb3bc469b4c",
 								true,
 							},
 						},
@@ -4512,18 +3963,6 @@ local tbl =
 						localmapid = 1292,
 						name = "Meso Terminal (1292)",
 						uuid = "3b7982fb-d211-8679-b361-35eae0034e71",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "e2dab821-54e4-a393-929b-7cb3bc469b4c",
 						version = 3,
 					},
 				},
@@ -4553,11 +3992,6 @@ local tbl =
 							
 							{
 								"54d2dfaf-014c-f577-83d6-50671c71ca8e",
-								true,
-							},
-							
-							{
-								"5fa57a13-fad5-0e03-9185-764102d1e638",
 								true,
 							},
 							
@@ -4593,18 +4027,6 @@ local tbl =
 						localmapid = 1292,
 						name = "Meso Terminal (1292)",
 						uuid = "54d2dfaf-014c-f577-83d6-50671c71ca8e",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "5fa57a13-fad5-0e03-9185-764102d1e638",
 						version = 3,
 					},
 				},
@@ -4713,11 +4135,6 @@ local tbl =
 							},
 							
 							{
-								"dc27d35a-480c-75c8-af8c-cb7b65182041",
-								true,
-							},
-							
-							{
 								"b0a96013-fb42-abe3-b261-e3e603f929bf",
 								true,
 							},
@@ -4749,18 +4166,6 @@ local tbl =
 						localmapid = 1292,
 						name = "Meso Terminal (1292)",
 						uuid = "05406304-e3b8-a25d-a7f8-a46d66abd587",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "dc27d35a-480c-75c8-af8c-cb7b65182041",
 						version = 3,
 					},
 				},
@@ -4894,11 +4299,6 @@ local tbl =
 							},
 							
 							{
-								"bd439938-1276-0140-8755-fe465c938280",
-								true,
-							},
-							
-							{
 								"8704af17-c542-ed0f-b6b7-3cceb93a5a61",
 								true,
 							},
@@ -4930,18 +4330,6 @@ local tbl =
 						localmapid = 1292,
 						name = "Meso Terminal (1292)",
 						uuid = "ff25cafd-02a8-1e6b-9687-262dcd64cb38",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "bd439938-1276-0140-8755-fe465c938280",
 						version = 3,
 					},
 				},
@@ -5157,17 +4545,12 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not UnderkeepAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill13753=121.343, kill13757=112.39, kill13749=167.391,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Underkeep.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill13753\",\"kill13757\",\"kill13749\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill13753=math.max(15,math.min(1200,C.kill13753))\n    C.kill13757=math.max(15,math.min(1200,C.kill13757))\n    C.kill13749=math.max(15,math.min(1200,C.kill13749))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    UnderkeepAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif UnderkeepAutoSimConfig.poolFinal==nil then\n UnderkeepAutoSimConfig.poolFinal=true\n table.insert(UnderkeepAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- Runs after native map 1266, BLM and combat gates; no timeline timer is used.\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1266 or p.job~=25 or not p.incombat then self.used=true;return end\nlocal C=UnderkeepAutoSimConfig\nlocal A=TensorCore.API.TensorACR\nlocal ok,t=pcall(A.getAutoSimTime)\nif not ok or type(t)~=\"number\" or t<0 then return end -- readiness wait, not completion\nif data.underkeep_autosim then self.used=true;return end\nlocal S={enabled=C.enabled,movement=C.movement,returnField=C.returnField,trash=C.trash,\n    killOverride=C.killOverride,kill13753=C.kill13753,kill13757=C.kill13757,kill13749=C.kill13749,\n    unexpectedPct=C.unexpectedPct,uncertainty=C.uncertainty,buffEnabled=C.buffEnabled,\n    buffPct=C.buffPct,buffFirst=C.buffFirst,buffDuration=C.buffDuration,buffPeriod=C.buffPeriod,\n    boss=0,origin=0,counts={},phases={},phaseCount=0,anchorsSeen=0,setup=true,activeEnds={}}\ndata.underkeep_autosim=S\n-- Filled by the evidence builder; tables are allocated once per combat.\nS.definitions={[13753]={[\"name\"]=\"Gargant\",[\"movement\"]={{19.0,20.0}},[\"downtime\"]={{27.758,40.124},{79.663,95.101}},[\"aliases\"]={},[\"anchors\"]={[42542]={35.133,90.109},[42544]={69.687},[42546]={15.648,53.851,95.492},[42547]={5.179,45.281},[42548]={109.71}}},[13757]={[\"name\"]=\"Soldier S0\",[\"movement\"]={{44.0,45.0},{71.5,72.5}},[\"downtime\"]={},[\"aliases\"]={[42563]=42562},[\"anchors\"]={[42562]={27.422,46.187,90.359},[42570]={102.75},[42572]={65.906},[42574]={70.031},[42579]={5.133},[43136]={14.258,78.195}}},[13749]={[\"name\"]=\"Valia Pira\",[\"movement\"]={{28.0,29.5},{45.5,46.5}},[\"downtime\"]={},[\"aliases\"]={},[\"anchors\"]={[42513]={17.383,79.618,124.156},[42519]={56.484},[42525]={6.141,112.938},[42540]={102.703,163.656},[42738]={68.391,150.493},[42739]={88.5,136.172}}}}\n\nfunction S.add(kind,a,b,value,relative)\n    if b<=a or a>=1200 then return end\n    b=math.min(b,1200)\n    local id=A.addAutoSimPhase(kind,a,b,value)\n    if id then\n        S.phaseCount=S.phaseCount+1\n        S.phases[S.phaseCount]={id=id,kind=kind,a=a,b=b,value=value,relative=relative}\n    end\nend\n\nfunction S.startBoss(cid,entityID,origin,now)\n    local def=S.definitions[cid]\n    if not def or S.boss~=0 or not S.enabled then return end\n    S.boss=cid;S.entityID=entityID;S.origin=origin\n    C.poolStatus=nil\n    A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100)\n    if S.killOverride then\n        A.setAutoSimKillTime(math.min(1200,origin+S[\"kill\"..cid]))\n        A.addAutoSimUncertainty(now,10) -- limited four-player samples: estimates remain optional\n    end\n    -- Keep automatic kill uncertainty by default. Do not invent forced target downtime.\n    -- Only owned movement/field phases are authored; AoE counts and DoT targets stay live.\n    if S.movement then\n        for i=1,#def.movement do\n            local w=def.movement[i]\n            local a,b=origin+w[1],origin+w[2]\n            if b>now then\n                a=math.max(a,now)\n                S.add(\"CasterDowntime\",a,b,1,true)\n                if S.returnField then S.add(\"GroundFieldMovement\",b,b+0.2,2,true) end\n            end\n        end\n    end\n    -- Native paired targetability transitions corroborate these downtime windows.\n    -- Attackability forecasting is independent of the optional movement forecast.\n    for i=1,#def.downtime do\n        local w=def.downtime[i]\n        if origin+w[2]>now then S.add(\"FullDowntime\",math.max(origin+w[1],now),origin+w[2],1,true) end\n    end\n    if S.buffEnabled and S.buffPct>0 then\n        local a=origin+S.buffFirst\n        while a<1200 do\n            if a+S.buffDuration>now then S.add(\"RaidBuff\",math.max(a,now),a+S.buffDuration,1+S.buffPct/100,false) end\n            a=a+S.buffPeriod\n        end\n    end\n    C.status=\"Active: \"..def.name..\". Kill estimate: \"..(S.killOverride and \"manual\" or \"automatic\")\nend\n\nfunction S.channel(args)\n    if not S.enabled then return end\n    local cid=args.entityContentID\n    local def=S.definitions[cid]\n    if not def then return end\n    local aid=args.spellID\n    aid=def.aliases[aid] or aid -- documented alternate casts share one occurrence sequence\n    local anchors=def.anchors[aid]\n    if not anchors then return end -- stable boss cast identity before API work\n    if S.boss~=0 and (S.boss~=cid or S.entityID~=args.entityID) then return end\n    local valid,now=pcall(A.getAutoSimTime)\n    if not valid or type(now)~=\"number\" or now<0 or now>=1200 then return end\n    local n=(S.counts[aid] or 0)+1\n    local expected=anchors[n]\n    if not expected then return end\n    if S.boss==0 and math.abs(now-expected)>2 then return end\n    S.counts[aid]=n\n    if S.boss==0 then S.startBoss(cid,args.entityID,now-expected,now) end\n    if S.boss~=cid then return end\n    local candidate=now-expected\n    -- If enabled mid-boss, do not match a late repeat to the first occurrence.\n    if math.abs(candidate-S.origin)>2 then return end\n    local shift=candidate-S.origin\n    S.anchorsSeen=S.anchorsSeen+1\n    if math.abs(shift)<0.15 then return end\n    -- Remove every future owned phase before reinsertion, avoiding transient overlaps.\n    local ends=S.activeEnds\n    ends.CasterDowntime=now;ends.GroundFieldMovement=now;ends.FullDowntime=now\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.relative and phase.id and phase.a>now+0.05 then\n            A.removeAutoSimPhase(phase.id);phase.id=nil;phase.pending=true\n        elseif phase.id and phase.a<=now+0.05 and phase.b>now and phase.relative then\n            ends[phase.kind]=math.max(ends[phase.kind],phase.b)\n        end\n    end\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.pending then\n            phase.pending=false\n            local a,b=phase.a+shift,phase.b+shift\n            local minimum=ends[phase.kind]\n            if phase.kind==\"GroundFieldMovement\" then minimum=math.max(minimum,ends.CasterDowntime) end\n            a=math.max(a,minimum,now+0.05)\n            if b>a then\n                phase.id=A.addAutoSimPhase(phase.kind,a,b,phase.value)\n                phase.a=a;phase.b=b;ends[phase.kind]=b\n            end\n        end\n    end\n    S.origin=candidate\nend\n\nif S.enabled then\n    local target=TensorCore.mGetTarget()\n    if target and S.definitions[target.contentid] and target.attackable and target.incombat then\n        -- Near pull start, zero is the combat-clock origin; later setup waits for an anchor.\n        if t<=5 then S.startBoss(target.contentid,target.id,0,t) end\n    end\n    if S.boss==0 and S.trash then A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100) end\nend\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not UnderkeepAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill13753=121.343, kill13757=112.39, kill13749=167.391,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Underkeep.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill13753\",\"kill13757\",\"kill13749\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill13753=math.max(15,math.min(1200,C.kill13753))\n    C.kill13757=math.max(15,math.min(1200,C.kill13757))\n    C.kill13749=math.max(15,math.min(1200,C.kill13749))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    UnderkeepAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif UnderkeepAutoSimConfig.poolFinal==nil then\n UnderkeepAutoSimConfig.poolFinal=true\n table.insert(UnderkeepAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- Runs after native map 1266, map and combat gates; no timeline timer is used.\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1266 or not p.incombat then self.used=true;return end\nlocal isCaster=p.job==25 or p.job==27 or p.job==35 or p.job==42 or p.job==36 or p.job==24 or p.job==28 or p.job==33 or p.job==40\nlocal C=UnderkeepAutoSimConfig\nlocal A=TensorCore.API.TensorACR\nlocal ok,t=pcall(A.getAutoSimTime)\nif not ok or type(t)~=\"number\" or t<0 then return end -- readiness wait, not completion\nif data.underkeep_autosim then self.used=true;return end\nlocal S={enabled=C.enabled,movement=C.movement and isCaster,returnField=C.returnField and p.job==25,trash=C.trash,\n    killOverride=C.killOverride,kill13753=C.kill13753,kill13757=C.kill13757,kill13749=C.kill13749,\n    unexpectedPct=C.unexpectedPct,uncertainty=C.uncertainty,buffEnabled=C.buffEnabled,\n    buffPct=C.buffPct,buffFirst=C.buffFirst,buffDuration=C.buffDuration,buffPeriod=C.buffPeriod,\n    boss=0,origin=0,counts={},phases={},phaseCount=0,anchorsSeen=0,setup=true,activeEnds={}}\ndata.underkeep_autosim=S\n-- Filled by the evidence builder; tables are allocated once per combat.\nS.definitions={[13753]={[\"name\"]=\"Gargant\",[\"movement\"]={{19.0,20.0}},[\"downtime\"]={{27.758,40.124},{79.663,95.101}},[\"aliases\"]={},[\"anchors\"]={[42542]={35.133,90.109},[42544]={69.687},[42546]={15.648,53.851,95.492},[42547]={5.179,45.281},[42548]={109.71}}},[13757]={[\"name\"]=\"Soldier S0\",[\"movement\"]={{44.0,45.0},{71.5,72.5}},[\"downtime\"]={},[\"aliases\"]={[42563]=42562},[\"anchors\"]={[42562]={27.422,46.187,90.359},[42570]={102.75},[42572]={65.906},[42574]={70.031},[42579]={5.133},[43136]={14.258,78.195}}},[13749]={[\"name\"]=\"Valia Pira\",[\"movement\"]={{28.0,29.5},{45.5,46.5}},[\"downtime\"]={},[\"aliases\"]={},[\"anchors\"]={[42513]={17.383,79.618,124.156},[42519]={56.484},[42525]={6.141,112.938},[42540]={102.703,163.656},[42738]={68.391,150.493},[42739]={88.5,136.172}}}}\n\nfunction S.add(kind,a,b,value,relative)\n    if b<=a or a>=1200 then return end\n    b=math.min(b,1200)\n    local id=A.addAutoSimPhase(kind,a,b,value)\n    if id then\n        S.phaseCount=S.phaseCount+1\n        S.phases[S.phaseCount]={id=id,kind=kind,a=a,b=b,value=value,relative=relative}\n    end\nend\n\nfunction S.startBoss(cid,entityID,origin,now)\n    local def=S.definitions[cid]\n    if not def or S.boss~=0 or not S.enabled then return end\n    S.boss=cid;S.entityID=entityID;S.origin=origin\n    C.poolStatus=nil\n    A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100)\n    if S.killOverride then\n        A.setAutoSimKillTime(math.min(1200,origin+S[\"kill\"..cid]))\n        A.addAutoSimUncertainty(now,10) -- limited four-player samples: estimates remain optional\n    end\n    -- Keep automatic kill uncertainty by default. Do not invent forced target downtime.\n    -- Only owned movement/field phases are authored; AoE counts and DoT targets stay live.\n    if S.movement then\n        for i=1,#def.movement do\n            local w=def.movement[i]\n            local a,b=origin+w[1],origin+w[2]\n            if b>now then\n                a=math.max(a,now)\n                S.add(\"CasterDowntime\",a,b,1,true)\n                if S.returnField then S.add(\"GroundFieldMovement\",b,b+0.2,2,true) end\n            end\n        end\n    end\n    -- Native paired targetability transitions corroborate these downtime windows.\n    -- Attackability forecasting is independent of the optional movement forecast.\n    for i=1,#def.downtime do\n        local w=def.downtime[i]\n        if origin+w[2]>now then S.add(\"FullDowntime\",math.max(origin+w[1],now),origin+w[2],1,true) end\n    end\n    if S.buffEnabled and S.buffPct>0 then\n        local a=origin+S.buffFirst\n        while a<1200 do\n            if a+S.buffDuration>now then S.add(\"RaidBuff\",math.max(a,now),a+S.buffDuration,1+S.buffPct/100,false) end\n            a=a+S.buffPeriod\n        end\n    end\n    C.status=\"Active: \"..def.name..\". Kill estimate: \"..(S.killOverride and \"manual\" or \"automatic\")\nend\n\nfunction S.channel(args)\n    if not S.enabled then return end\n    local cid=args.entityContentID\n    local def=S.definitions[cid]\n    if not def then return end\n    local aid=args.spellID\n    aid=def.aliases[aid] or aid -- documented alternate casts share one occurrence sequence\n    local anchors=def.anchors[aid]\n    if not anchors then return end -- stable boss cast identity before API work\n    if S.boss~=0 and (S.boss~=cid or S.entityID~=args.entityID) then return end\n    local valid,now=pcall(A.getAutoSimTime)\n    if not valid or type(now)~=\"number\" or now<0 or now>=1200 then return end\n    local n=(S.counts[aid] or 0)+1\n    local expected=anchors[n]\n    if not expected then return end\n    if S.boss==0 and math.abs(now-expected)>2 then return end\n    S.counts[aid]=n\n    if S.boss==0 then S.startBoss(cid,args.entityID,now-expected,now) end\n    if S.boss~=cid then return end\n    local candidate=now-expected\n    -- If enabled mid-boss, do not match a late repeat to the first occurrence.\n    if math.abs(candidate-S.origin)>2 then return end\n    local shift=candidate-S.origin\n    S.anchorsSeen=S.anchorsSeen+1\n    if math.abs(shift)<0.15 then return end\n    -- Remove every future owned phase before reinsertion, avoiding transient overlaps.\n    local ends=S.activeEnds\n    ends.CasterDowntime=now;ends.GroundFieldMovement=now;ends.FullDowntime=now\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.relative and phase.id and phase.a>now+0.05 then\n            A.removeAutoSimPhase(phase.id);phase.id=nil;phase.pending=true\n        elseif phase.id and phase.a<=now+0.05 and phase.b>now and phase.relative then\n            ends[phase.kind]=math.max(ends[phase.kind],phase.b)\n        end\n    end\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.pending then\n            phase.pending=false\n            local a,b=phase.a+shift,phase.b+shift\n            local minimum=ends[phase.kind]\n            if phase.kind==\"GroundFieldMovement\" then minimum=math.max(minimum,ends.CasterDowntime) end\n            a=math.max(a,minimum,now+0.05)\n            if b>a then\n                phase.id=A.addAutoSimPhase(phase.kind,a,b,phase.value)\n                phase.a=a;phase.b=b;ends[phase.kind]=b\n            end\n        end\n    end\n    S.origin=candidate\nend\n\nif S.enabled then\n    local target=TensorCore.mGetTarget()\n    if target and S.definitions[target.contentid] and target.attackable and target.incombat then\n        -- Near pull start, zero is the combat-clock origin; later setup waits for an anchor.\n        if t<=5 then S.startBoss(target.contentid,target.id,0,t) end\n    end\n    if S.boss==0 and S.trash then A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100) end\nend\nself.used=true\n",
 						conditions = 
 						{
 							
 							{
 								"c5b31458-f034-c944-9339-0f2ffe3bd908",
-								true,
-							},
-							
-							{
-								"fc30ac10-f4bb-e176-8d06-101425715a49",
 								true,
 							},
 							
@@ -5198,18 +4581,6 @@ local tbl =
 						localmapid = 1266,
 						name = "Underkeep (1266)",
 						uuid = "c5b31458-f034-c944-9339-0f2ffe3bd908",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "fc30ac10-f4bb-e176-8d06-101425715a49",
 						version = 3,
 					},
 				},
@@ -5264,11 +4635,6 @@ local tbl =
 							},
 							
 							{
-								"e96d09e9-2a7b-21d4-bc58-cc9ccc1eca23",
-								true,
-							},
-							
-							{
 								"ef59c0d1-129b-34bf-bd64-8239377abfaa",
 								true,
 							},
@@ -5295,18 +4661,6 @@ local tbl =
 						localmapid = 1266,
 						name = "Underkeep (1266)",
 						uuid = "2714dfc2-131b-6da1-bd01-27cc17109dd4",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "e96d09e9-2a7b-21d4-bc58-cc9ccc1eca23",
 						version = 3,
 					},
 				},
@@ -5362,11 +4716,6 @@ local tbl =
 							},
 							
 							{
-								"e8c46cc9-95e8-da75-b57d-73f1b611652e",
-								true,
-							},
-							
-							{
 								"0b7e980d-8156-0e53-be04-30d3d8ab49df",
 								true,
 							},
@@ -5398,18 +4747,6 @@ local tbl =
 						localmapid = 1266,
 						name = "Underkeep (1266)",
 						uuid = "3fa086b4-e6df-599c-9128-a64b1aecfa96",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "e8c46cc9-95e8-da75-b57d-73f1b611652e",
 						version = 3,
 					},
 				},
@@ -5478,11 +4815,6 @@ local tbl =
 							},
 							
 							{
-								"8f184f7f-bf15-7479-ab5d-bc0386f45490",
-								true,
-							},
-							
-							{
 								"0467b974-f020-871d-93a8-a07a7af923d9",
 								true,
 							},
@@ -5514,18 +4846,6 @@ local tbl =
 						localmapid = 1266,
 						name = "Underkeep (1266)",
 						uuid = "bd432a53-3023-e852-80c0-efa059d14bfb",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "8f184f7f-bf15-7479-ab5d-bc0386f45490",
 						version = 3,
 					},
 				},
@@ -5594,11 +4914,6 @@ local tbl =
 							},
 							
 							{
-								"b42ac307-ee42-e367-92f9-641ccfb07a9a",
-								true,
-							},
-							
-							{
 								"8bb1d23b-9f9c-4375-9474-57bfe9e0c416",
 								true,
 							},
@@ -5630,18 +4945,6 @@ local tbl =
 						localmapid = 1266,
 						name = "Underkeep (1266)",
 						uuid = "c8ab1fa3-6639-27d1-8a47-4f17cdbf45ac",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "b42ac307-ee42-e367-92f9-641ccfb07a9a",
 						version = 3,
 					},
 				},
@@ -5700,17 +5003,12 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not UnderkeepAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill13753=121.343, kill13757=112.39, kill13749=167.391,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Underkeep.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill13753\",\"kill13757\",\"kill13749\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill13753=math.max(15,math.min(1200,C.kill13753))\n    C.kill13757=math.max(15,math.min(1200,C.kill13757))\n    C.kill13749=math.max(15,math.min(1200,C.kill13749))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    UnderkeepAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif UnderkeepAutoSimConfig.poolFinal==nil then\n UnderkeepAutoSimConfig.poolFinal=true\n table.insert(UnderkeepAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID and BLM gates precede it.\nlocal C=UnderkeepAutoSimConfig\nlocal visible=GUI:Begin(\"Underkeep - BLM AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Gargant (seconds)\",C.kill13753,5,15,\"%.1f\")\n        if changed then C.kill13753=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Soldier S0 (seconds)\",C.kill13757,5,15,\"%.1f\")\n        if changed then C.kill13757=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Valia Pira (seconds)\",C.kill13749,5,15,\"%.1f\")\n        if changed then C.kill13749=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold Ley Lines + Manafont on final trash before each boss\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before all three bosses. Holds only these two abilities while that combat continues; short holds expire automatically when combat ends or the profile stops.\") end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not UnderkeepAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill13753=121.343, kill13757=112.39, kill13749=167.391,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Underkeep.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill13753\",\"kill13757\",\"kill13749\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill13753=math.max(15,math.min(1200,C.kill13753))\n    C.kill13757=math.max(15,math.min(1200,C.kill13757))\n    C.kill13749=math.max(15,math.min(1200,C.kill13749))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    UnderkeepAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif UnderkeepAutoSimConfig.poolFinal==nil then\n UnderkeepAutoSimConfig.poolFinal=true\n table.insert(UnderkeepAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=UnderkeepAutoSimConfig\nlocal visible=GUI:Begin(\"Underkeep - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Gargant (seconds)\",C.kill13753,5,15,\"%.1f\")\n        if changed then C.kill13753=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Soldier S0 (seconds)\",C.kill13757,5,15,\"%.1f\")\n        if changed then C.kill13757=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Valia Pira (seconds)\",C.kill13749,5,15,\"%.1f\")\n        if changed then C.kill13749=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold Ley Lines + Manafont on final trash before each boss (BLM only)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before all three bosses. Holds only these two abilities while that combat continues; short holds expire automatically when combat ends or the profile stops.\") end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
 						conditions = 
 						{
 							
 							{
 								"74be627c-9063-5f6e-a067-380eae022ba4",
-								true,
-							},
-							
-							{
-								"cd381382-fa51-57d9-a0b7-a7b5cd78becc",
 								true,
 							},
 						},
@@ -5731,18 +5029,6 @@ local tbl =
 						localmapid = 1266,
 						name = "Underkeep (1266)",
 						uuid = "74be627c-9063-5f6e-a067-380eae022ba4",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "cd381382-fa51-57d9-a0b7-a7b5cd78becc",
 						version = 3,
 					},
 				},
@@ -5772,11 +5058,6 @@ local tbl =
 							
 							{
 								"1995223f-2f33-f4a6-b9e4-402bc6d9612a",
-								true,
-							},
-							
-							{
-								"6b6796b7-af2b-47ba-9c51-dc5eab10f1d3",
 								true,
 							},
 							
@@ -5812,18 +5093,6 @@ local tbl =
 						localmapid = 1266,
 						name = "Underkeep (1266)",
 						uuid = "1995223f-2f33-f4a6-b9e4-402bc6d9612a",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "6b6796b7-af2b-47ba-9c51-dc5eab10f1d3",
 						version = 3,
 					},
 				},
@@ -5932,11 +5201,6 @@ local tbl =
 							},
 							
 							{
-								"de2c7b42-0403-67ff-ba9b-e69fcf96da4a",
-								true,
-							},
-							
-							{
 								"561c70a6-8203-7ff6-8ab2-e6c7df8f943b",
 								true,
 							},
@@ -5968,18 +5232,6 @@ local tbl =
 						localmapid = 1266,
 						name = "Underkeep (1266)",
 						uuid = "1bf197fc-46ed-52b2-99d0-1a86db40eb58",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "de2c7b42-0403-67ff-ba9b-e69fcf96da4a",
 						version = 3,
 					},
 				},
@@ -6113,11 +5365,6 @@ local tbl =
 							},
 							
 							{
-								"1a6efe92-e3b6-97e5-a623-cdd43e09fd48",
-								true,
-							},
-							
-							{
 								"8ecc84c0-9f49-3541-93bc-abb681dd799e",
 								true,
 							},
@@ -6149,18 +5396,6 @@ local tbl =
 						localmapid = 1266,
 						name = "Underkeep (1266)",
 						uuid = "0012138b-547a-f30c-8701-a043002dc339",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "1a6efe92-e3b6-97e5-a623-cdd43e09fd48",
 						version = 3,
 					},
 				},
@@ -6376,17 +5611,12 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not YuweyawataFieldStationAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill13623=136.125, kill13634=143.312, kill13610=247.5,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\YuweyawataFieldStation.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill13623\",\"kill13634\",\"kill13610\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill13623=math.max(15,math.min(1200,C.kill13623))\n    C.kill13634=math.max(15,math.min(1200,C.kill13634))\n    C.kill13610=math.max(15,math.min(1200,C.kill13610))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    YuweyawataFieldStationAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif YuweyawataFieldStationAutoSimConfig.poolFinal==nil then\n YuweyawataFieldStationAutoSimConfig.poolFinal=true\n table.insert(YuweyawataFieldStationAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- Runs after native map 1242, BLM and combat gates; no timeline timer is used.\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1242 or p.job~=25 or not p.incombat then self.used=true;return end\nlocal C=YuweyawataFieldStationAutoSimConfig\nlocal A=TensorCore.API.TensorACR\nlocal ok,t=pcall(A.getAutoSimTime)\nif not ok or type(t)~=\"number\" or t<0 then return end -- readiness wait, not completion\nif data.yuweyawata_autosim then self.used=true;return end\nlocal S={enabled=C.enabled,movement=C.movement,returnField=C.returnField,trash=C.trash,\n    killOverride=C.killOverride,kill13623=C.kill13623,kill13634=C.kill13634,kill13610=C.kill13610,\n    unexpectedPct=C.unexpectedPct,uncertainty=C.uncertainty,buffEnabled=C.buffEnabled,\n    buffPct=C.buffPct,buffFirst=C.buffFirst,buffDuration=C.buffDuration,buffPeriod=C.buffPeriod,\n    boss=0,origin=0,counts={},phases={},phaseCount=0,anchorsSeen=0,setup=true,activeEnds={}}\ndata.yuweyawata_autosim=S\n-- Filled by the evidence builder; tables are allocated once per combat.\nS.definitions={[13623]={[\"name\"]=\"Lindblum Zaghnal\",[\"movement\"]={{35.5,36.5},{41.0,44.5},{89.0,90.0}},[\"downtime\"]={},[\"intermission\"]=false,[\"aliases\"]={},[\"anchors\"]={[40624]={24.828},[40630]={66.14},[40632]={96.859},[40635]={5.187},[40636]={53.062},[41266]={19.75,118.468}}},[13634]={[\"name\"]=\"Overseer Kanilokka\",[\"movement\"]={{24.5,25.5},{35.5,36.5},{92.0,93.0},{120.0,122.0}},[\"downtime\"]={{70.437,88.312}},[\"intermission\"]=false,[\"aliases\"]={},[\"anchors\"]={[40639]={14.969,103.265},[40643]={36.719},[40645]={66.719},[40646]={71.812},[40647]={91.969},[40654]={49.062,126.594},[40658]={5.203}}},[13610]={[\"name\"]=\"Lunipyati\",[\"movement\"]={{9.5,10.5},{38.0,39.5},{52.5,53.5},{67.5,68.5},{128.0,130.0},{131.0,134.5},{136.0,139.5},{143.5,145.0}},[\"downtime\"]={},[\"intermission\"]=false,[\"aliases\"]={},[\"anchors\"]={[40603]={22.5},[40604]={100.016},[40610]={117.156},[40612]={6.406,137.016},[40618]={157.656,166.844},[40619]={176.0}}}}\n\nfunction S.add(kind,a,b,value,relative)\n    if b<=a or a>=1200 then return end\n    b=math.min(b,1200)\n    local id=A.addAutoSimPhase(kind,a,b,value)\n    if id then\n        S.phaseCount=S.phaseCount+1\n        S.phases[S.phaseCount]={id=id,kind=kind,a=a,b=b,value=value,relative=relative}\n    end\nend\n\nfunction S.startBoss(cid,entityID,origin,now)\n    local def=S.definitions[cid]\n    if not def or S.boss~=0 or not S.enabled then return end\n    S.boss=cid;S.entityID=entityID;S.origin=origin\n    C.poolStatus=nil\n    A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100)\n    if S.killOverride then\n        A.setAutoSimKillTime(math.min(1200,origin+S[\"kill\"..cid]))\n        A.addAutoSimUncertainty(now,10) -- limited four-player samples: estimates remain optional\n    end\n    -- Keep automatic kill uncertainty by default. Do not invent forced target downtime.\n    -- Only owned movement/field phases are authored; AoE counts and DoT targets stay live.\n    if S.movement then\n        for i=1,#def.movement do\n            local w=def.movement[i]\n            local ceiling=def.intermission and def.intermission.suspendAt or 1200\n            local a,b=origin+w[1],origin+math.min(w[2],ceiling)\n            if b>now then\n                a=math.max(a,now)\n                S.add(\"CasterDowntime\",a,b,1,true)\n                if S.returnField and (not def.intermission or w[2]<def.intermission.suspendAt) then S.add(\"GroundFieldMovement\",b,b+0.2,2,true) end\n            end\n        end\n    end\n    -- Native paired targetability transitions corroborate these downtime windows.\n    -- Attackability forecasting is independent of the optional movement forecast.\n    for i=1,#def.downtime do\n        local w=def.downtime[i]\n        if origin+w[2]>now then S.add(\"FullDowntime\",math.max(origin+w[1],now),origin+w[2],1,true) end\n    end\n    if S.buffEnabled and S.buffPct>0 then\n        local a=origin+S.buffFirst\n        while a<1200 do\n            if a+S.buffDuration>now then S.add(\"RaidBuff\",math.max(a,now),a+S.buffDuration,1+S.buffPct/100,false) end\n            a=a+S.buffPeriod\n        end\n    end\n    C.status=\"Active: \"..def.name..\". Kill estimate: \"..(S.killOverride and \"manual\" or \"automatic\")\nend\n\nfunction S.channel(args)\n    if not S.enabled then return end\n    local cid=args.entityContentID\n    local def=S.definitions[cid]\n    if not def then return end\n    local aid=args.spellID\n    aid=def.aliases[aid] or aid -- documented alternate casts share one occurrence sequence\n    local anchors=def.anchors[aid]\n    if not anchors then return end -- stable boss cast identity before API work\n    if S.boss~=0 and (S.boss~=cid or S.entityID~=args.entityID) then return end\n    local valid,now=pcall(A.getAutoSimTime)\n    if not valid or type(now)~=\"number\" or now<0 or now>=1200 then return end\n    local n=(S.counts[aid] or 0)+1\n    local expected=anchors[n]\n    if not expected then return end\n    if S.boss==0 and math.abs(now-expected)>2 then return end\n    S.counts[aid]=n\n    if S.boss==0 then S.startBoss(cid,args.entityID,now-expected,now) end\n    if S.boss~=cid then return end\n    local candidate=now-expected\n    -- If enabled mid-boss, do not match a late repeat to the first occurrence.\n    if math.abs(candidate-S.origin)>2 then return end\n    local shift=candidate-S.origin\n    S.anchorsSeen=S.anchorsSeen+1\n    if math.abs(shift)<0.15 then return end\n    -- Remove every future owned phase before reinsertion, avoiding transient overlaps.\n    local ends=S.activeEnds\n    ends.CasterDowntime=now;ends.GroundFieldMovement=now;ends.FullDowntime=now\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.relative and phase.id and phase.a>now+0.05 then\n            A.removeAutoSimPhase(phase.id);phase.id=nil;phase.pending=true\n        elseif phase.id and phase.a<=now+0.05 and phase.b>now and phase.relative then\n            ends[phase.kind]=math.max(ends[phase.kind],phase.b)\n        end\n    end\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.pending then\n            phase.pending=false\n            local a,b=phase.a+shift,phase.b+shift\n            local minimum=ends[phase.kind]\n            if phase.kind==\"GroundFieldMovement\" then minimum=math.max(minimum,ends.CasterDowntime) end\n            a=math.max(a,minimum,now+0.05)\n            if b>a then\n                phase.id=A.addAutoSimPhase(phase.kind,a,b,phase.value)\n                phase.a=a;phase.b=b;ends[phase.kind]=b\n            end\n        end\n    end\n    S.origin=candidate\nend\n\nif S.enabled then\n    local target=TensorCore.mGetTarget()\n    if target and S.definitions[target.contentid] and target.attackable and target.incombat then\n        -- Near pull start, zero is the combat-clock origin; later setup waits for an anchor.\n        if t<=5 then S.startBoss(target.contentid,target.id,0,t) end\n    end\n    if S.boss==0 and S.trash then A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100) end\nend\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not YuweyawataFieldStationAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill13623=136.125, kill13634=143.312, kill13610=247.5,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\YuweyawataFieldStation.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill13623\",\"kill13634\",\"kill13610\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill13623=math.max(15,math.min(1200,C.kill13623))\n    C.kill13634=math.max(15,math.min(1200,C.kill13634))\n    C.kill13610=math.max(15,math.min(1200,C.kill13610))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    YuweyawataFieldStationAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif YuweyawataFieldStationAutoSimConfig.poolFinal==nil then\n YuweyawataFieldStationAutoSimConfig.poolFinal=true\n table.insert(YuweyawataFieldStationAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- Runs after native map 1242, map and combat gates; no timeline timer is used.\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1242 or not p.incombat then self.used=true;return end\nlocal isCaster=p.job==25 or p.job==27 or p.job==35 or p.job==42 or p.job==36 or p.job==24 or p.job==28 or p.job==33 or p.job==40\nlocal C=YuweyawataFieldStationAutoSimConfig\nlocal A=TensorCore.API.TensorACR\nlocal ok,t=pcall(A.getAutoSimTime)\nif not ok or type(t)~=\"number\" or t<0 then return end -- readiness wait, not completion\nif data.yuweyawata_autosim then self.used=true;return end\nlocal S={enabled=C.enabled,movement=C.movement and isCaster,returnField=C.returnField and p.job==25,trash=C.trash,\n    killOverride=C.killOverride,kill13623=C.kill13623,kill13634=C.kill13634,kill13610=C.kill13610,\n    unexpectedPct=C.unexpectedPct,uncertainty=C.uncertainty,buffEnabled=C.buffEnabled,\n    buffPct=C.buffPct,buffFirst=C.buffFirst,buffDuration=C.buffDuration,buffPeriod=C.buffPeriod,\n    boss=0,origin=0,counts={},phases={},phaseCount=0,anchorsSeen=0,setup=true,activeEnds={}}\ndata.yuweyawata_autosim=S\n-- Filled by the evidence builder; tables are allocated once per combat.\nS.definitions={[13623]={[\"name\"]=\"Lindblum Zaghnal\",[\"movement\"]={{35.5,36.5},{41.0,44.5},{89.0,90.0}},[\"downtime\"]={},[\"intermission\"]=false,[\"aliases\"]={},[\"anchors\"]={[40624]={24.828},[40630]={66.14},[40632]={96.859},[40635]={5.187},[40636]={53.062},[41266]={19.75,118.468}}},[13634]={[\"name\"]=\"Overseer Kanilokka\",[\"movement\"]={{24.5,25.5},{35.5,36.5},{92.0,93.0},{120.0,122.0}},[\"downtime\"]={{70.437,88.312}},[\"intermission\"]=false,[\"aliases\"]={},[\"anchors\"]={[40639]={14.969,103.265},[40643]={36.719},[40645]={66.719},[40646]={71.812},[40647]={91.969},[40654]={49.062,126.594},[40658]={5.203}}},[13610]={[\"name\"]=\"Lunipyati\",[\"movement\"]={{9.5,10.5},{38.0,39.5},{52.5,53.5},{67.5,68.5},{128.0,130.0},{131.0,134.5},{136.0,139.5},{143.5,145.0}},[\"downtime\"]={},[\"intermission\"]=false,[\"aliases\"]={},[\"anchors\"]={[40603]={22.5},[40604]={100.016},[40610]={117.156},[40612]={6.406,137.016},[40618]={157.656,166.844},[40619]={176.0}}}}\n\nfunction S.add(kind,a,b,value,relative)\n    if b<=a or a>=1200 then return end\n    b=math.min(b,1200)\n    local id=A.addAutoSimPhase(kind,a,b,value)\n    if id then\n        S.phaseCount=S.phaseCount+1\n        S.phases[S.phaseCount]={id=id,kind=kind,a=a,b=b,value=value,relative=relative}\n    end\nend\n\nfunction S.startBoss(cid,entityID,origin,now)\n    local def=S.definitions[cid]\n    if not def or S.boss~=0 or not S.enabled then return end\n    S.boss=cid;S.entityID=entityID;S.origin=origin\n    C.poolStatus=nil\n    A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100)\n    if S.killOverride then\n        A.setAutoSimKillTime(math.min(1200,origin+S[\"kill\"..cid]))\n        A.addAutoSimUncertainty(now,10) -- limited four-player samples: estimates remain optional\n    end\n    -- Keep automatic kill uncertainty by default. Do not invent forced target downtime.\n    -- Only owned movement/field phases are authored; AoE counts and DoT targets stay live.\n    if S.movement then\n        for i=1,#def.movement do\n            local w=def.movement[i]\n            local ceiling=def.intermission and def.intermission.suspendAt or 1200\n            local a,b=origin+w[1],origin+math.min(w[2],ceiling)\n            if b>now then\n                a=math.max(a,now)\n                S.add(\"CasterDowntime\",a,b,1,true)\n                if S.returnField and (not def.intermission or w[2]<def.intermission.suspendAt) then S.add(\"GroundFieldMovement\",b,b+0.2,2,true) end\n            end\n        end\n    end\n    -- Native paired targetability transitions corroborate these downtime windows.\n    -- Attackability forecasting is independent of the optional movement forecast.\n    for i=1,#def.downtime do\n        local w=def.downtime[i]\n        if origin+w[2]>now then S.add(\"FullDowntime\",math.max(origin+w[1],now),origin+w[2],1,true) end\n    end\n    if S.buffEnabled and S.buffPct>0 then\n        local a=origin+S.buffFirst\n        while a<1200 do\n            if a+S.buffDuration>now then S.add(\"RaidBuff\",math.max(a,now),a+S.buffDuration,1+S.buffPct/100,false) end\n            a=a+S.buffPeriod\n        end\n    end\n    C.status=\"Active: \"..def.name..\". Kill estimate: \"..(S.killOverride and \"manual\" or \"automatic\")\nend\n\nfunction S.channel(args)\n    if not S.enabled then return end\n    local cid=args.entityContentID\n    local def=S.definitions[cid]\n    if not def then return end\n    local aid=args.spellID\n    aid=def.aliases[aid] or aid -- documented alternate casts share one occurrence sequence\n    local anchors=def.anchors[aid]\n    if not anchors then return end -- stable boss cast identity before API work\n    if S.boss~=0 and (S.boss~=cid or S.entityID~=args.entityID) then return end\n    local valid,now=pcall(A.getAutoSimTime)\n    if not valid or type(now)~=\"number\" or now<0 or now>=1200 then return end\n    local n=(S.counts[aid] or 0)+1\n    local expected=anchors[n]\n    if not expected then return end\n    if S.boss==0 and math.abs(now-expected)>2 then return end\n    S.counts[aid]=n\n    if S.boss==0 then S.startBoss(cid,args.entityID,now-expected,now) end\n    if S.boss~=cid then return end\n    local candidate=now-expected\n    -- If enabled mid-boss, do not match a late repeat to the first occurrence.\n    if math.abs(candidate-S.origin)>2 then return end\n    local shift=candidate-S.origin\n    S.anchorsSeen=S.anchorsSeen+1\n    if math.abs(shift)<0.15 then return end\n    -- Remove every future owned phase before reinsertion, avoiding transient overlaps.\n    local ends=S.activeEnds\n    ends.CasterDowntime=now;ends.GroundFieldMovement=now;ends.FullDowntime=now\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.relative and phase.id and phase.a>now+0.05 then\n            A.removeAutoSimPhase(phase.id);phase.id=nil;phase.pending=true\n        elseif phase.id and phase.a<=now+0.05 and phase.b>now and phase.relative then\n            ends[phase.kind]=math.max(ends[phase.kind],phase.b)\n        end\n    end\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.pending then\n            phase.pending=false\n            local a,b=phase.a+shift,phase.b+shift\n            local minimum=ends[phase.kind]\n            if phase.kind==\"GroundFieldMovement\" then minimum=math.max(minimum,ends.CasterDowntime) end\n            a=math.max(a,minimum,now+0.05)\n            if b>a then\n                phase.id=A.addAutoSimPhase(phase.kind,a,b,phase.value)\n                phase.a=a;phase.b=b;ends[phase.kind]=b\n            end\n        end\n    end\n    S.origin=candidate\nend\n\nif S.enabled then\n    local target=TensorCore.mGetTarget()\n    if target and S.definitions[target.contentid] and target.attackable and target.incombat then\n        -- Near pull start, zero is the combat-clock origin; later setup waits for an anchor.\n        if t<=5 then S.startBoss(target.contentid,target.id,0,t) end\n    end\n    if S.boss==0 and S.trash then A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100) end\nend\nself.used=true\n",
 						conditions = 
 						{
 							
 							{
 								"c32ae429-71c9-420d-81a3-de8d7d43ab82",
-								true,
-							},
-							
-							{
-								"c3913fd6-d58b-f250-bf48-311f94b083cc",
 								true,
 							},
 							
@@ -6417,18 +5647,6 @@ local tbl =
 						localmapid = 1242,
 						name = "Yuweyawata Field Station (1242)",
 						uuid = "c32ae429-71c9-420d-81a3-de8d7d43ab82",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "c3913fd6-d58b-f250-bf48-311f94b083cc",
 						version = 3,
 					},
 				},
@@ -6483,11 +5701,6 @@ local tbl =
 							},
 							
 							{
-								"8fe39a22-7cb1-b327-8764-0b4363152286",
-								true,
-							},
-							
-							{
 								"bb4aba7d-dc36-8e11-979c-ec5be7fcd3a6",
 								true,
 							},
@@ -6514,18 +5727,6 @@ local tbl =
 						localmapid = 1242,
 						name = "Yuweyawata Field Station (1242)",
 						uuid = "dc79827f-35e2-3ac7-a72d-3bf0ea9cc857",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "8fe39a22-7cb1-b327-8764-0b4363152286",
 						version = 3,
 					},
 				},
@@ -6581,11 +5782,6 @@ local tbl =
 							},
 							
 							{
-								"9e9eb582-3e90-4e72-ad88-85eea915316b",
-								true,
-							},
-							
-							{
 								"762af2e3-94b3-2d54-ba13-2ecc1a37e1df",
 								true,
 							},
@@ -6617,18 +5813,6 @@ local tbl =
 						localmapid = 1242,
 						name = "Yuweyawata Field Station (1242)",
 						uuid = "22a8555c-a447-9b0d-b5ec-edc5f41472d3",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "9e9eb582-3e90-4e72-ad88-85eea915316b",
 						version = 3,
 					},
 				},
@@ -6697,11 +5881,6 @@ local tbl =
 							},
 							
 							{
-								"27281139-d687-3c41-8812-8faf6dc396a4",
-								true,
-							},
-							
-							{
 								"51a083b0-c7e8-d262-990d-913b1f431433",
 								true,
 							},
@@ -6733,18 +5912,6 @@ local tbl =
 						localmapid = 1242,
 						name = "Yuweyawata Field Station (1242)",
 						uuid = "548873e2-7db0-c440-81ec-28fa3a4e4f1e",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "27281139-d687-3c41-8812-8faf6dc396a4",
 						version = 3,
 					},
 				},
@@ -6813,11 +5980,6 @@ local tbl =
 							},
 							
 							{
-								"0a9a71b0-0a3e-6bec-8c91-eff1272cb8be",
-								true,
-							},
-							
-							{
 								"d3ad2672-6d30-f327-8162-8ee13ce257ec",
 								true,
 							},
@@ -6849,18 +6011,6 @@ local tbl =
 						localmapid = 1242,
 						name = "Yuweyawata Field Station (1242)",
 						uuid = "5e56f988-c971-55f4-9b1a-52112178bb51",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "0a9a71b0-0a3e-6bec-8c91-eff1272cb8be",
 						version = 3,
 					},
 				},
@@ -6919,17 +6069,12 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not YuweyawataFieldStationAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill13623=136.125, kill13634=143.312, kill13610=247.5,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\YuweyawataFieldStation.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill13623\",\"kill13634\",\"kill13610\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill13623=math.max(15,math.min(1200,C.kill13623))\n    C.kill13634=math.max(15,math.min(1200,C.kill13634))\n    C.kill13610=math.max(15,math.min(1200,C.kill13610))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    YuweyawataFieldStationAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif YuweyawataFieldStationAutoSimConfig.poolFinal==nil then\n YuweyawataFieldStationAutoSimConfig.poolFinal=true\n table.insert(YuweyawataFieldStationAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID and BLM gates precede it.\nlocal C=YuweyawataFieldStationAutoSimConfig\nlocal visible=GUI:Begin(\"Yuweyawata Field Station - BLM AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Lindblum Zaghnal (seconds)\",C.kill13623,5,15,\"%.1f\")\n        if changed then C.kill13623=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Overseer Kanilokka (seconds)\",C.kill13634,5,15,\"%.1f\")\n        if changed then C.kill13634=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Lunipyati (seconds)\",C.kill13610,5,15,\"%.1f\")\n        if changed then C.kill13610=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold Ley Lines + Manafont on final trash before each boss\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before all three bosses. Holds only these two abilities while that combat continues; short holds expire automatically when combat ends or the profile stops.\") end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not YuweyawataFieldStationAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill13623=136.125, kill13634=143.312, kill13610=247.5,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\YuweyawataFieldStation.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill13623\",\"kill13634\",\"kill13610\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill13623=math.max(15,math.min(1200,C.kill13623))\n    C.kill13634=math.max(15,math.min(1200,C.kill13634))\n    C.kill13610=math.max(15,math.min(1200,C.kill13610))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    YuweyawataFieldStationAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif YuweyawataFieldStationAutoSimConfig.poolFinal==nil then\n YuweyawataFieldStationAutoSimConfig.poolFinal=true\n table.insert(YuweyawataFieldStationAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=YuweyawataFieldStationAutoSimConfig\nlocal visible=GUI:Begin(\"Yuweyawata Field Station - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Lindblum Zaghnal (seconds)\",C.kill13623,5,15,\"%.1f\")\n        if changed then C.kill13623=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Overseer Kanilokka (seconds)\",C.kill13634,5,15,\"%.1f\")\n        if changed then C.kill13634=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Lunipyati (seconds)\",C.kill13610,5,15,\"%.1f\")\n        if changed then C.kill13610=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold Ley Lines + Manafont on final trash before each boss (BLM only)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before all three bosses. Holds only these two abilities while that combat continues; short holds expire automatically when combat ends or the profile stops.\") end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
 						conditions = 
 						{
 							
 							{
 								"75045636-ce37-68b7-b537-667d7b37566b",
-								true,
-							},
-							
-							{
-								"7c33b37d-dae6-0cea-a7d4-0c1e64612588",
 								true,
 							},
 						},
@@ -6950,18 +6095,6 @@ local tbl =
 						localmapid = 1242,
 						name = "Yuweyawata Field Station (1242)",
 						uuid = "75045636-ce37-68b7-b537-667d7b37566b",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "7c33b37d-dae6-0cea-a7d4-0c1e64612588",
 						version = 3,
 					},
 				},
@@ -6991,11 +6124,6 @@ local tbl =
 							
 							{
 								"da67002c-9071-830a-9726-03d93fd82d66",
-								true,
-							},
-							
-							{
-								"6205d282-c8bc-f69f-a991-67756e35f6c4",
 								true,
 							},
 							
@@ -7031,18 +6159,6 @@ local tbl =
 						localmapid = 1242,
 						name = "Yuweyawata Field Station (1242)",
 						uuid = "da67002c-9071-830a-9726-03d93fd82d66",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "6205d282-c8bc-f69f-a991-67756e35f6c4",
 						version = 3,
 					},
 				},
@@ -7151,11 +6267,6 @@ local tbl =
 							},
 							
 							{
-								"6918b911-86c6-783b-9ddf-e8f3732e70ad",
-								true,
-							},
-							
-							{
 								"7c00a138-a5b4-efb7-a1c0-4268c641cf4f",
 								true,
 							},
@@ -7187,18 +6298,6 @@ local tbl =
 						localmapid = 1242,
 						name = "Yuweyawata Field Station (1242)",
 						uuid = "1570748a-671b-1743-a374-efcf953a2478",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "6918b911-86c6-783b-9ddf-e8f3732e70ad",
 						version = 3,
 					},
 				},
@@ -7307,11 +6406,6 @@ local tbl =
 							},
 							
 							{
-								"81f46540-977b-56b9-a480-cea4c362b7de",
-								true,
-							},
-							
-							{
 								"2aa147b0-42a1-750a-9e63-6e8304db0469",
 								true,
 							},
@@ -7343,18 +6437,6 @@ local tbl =
 						localmapid = 1242,
 						name = "Yuweyawata Field Station (1242)",
 						uuid = "125193ed-dfdd-d244-9734-47c1974fc88f",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "81f46540-977b-56b9-a480-cea4c362b7de",
 						version = 3,
 					},
 				},
@@ -7570,17 +6652,12 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not StrayboroughDeadwalkAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill13073=116.39, kill12760=109.413, kill12763=169.383,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\StrayboroughDeadwalk.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill13073\",\"kill12760\",\"kill12763\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill13073=math.max(15,math.min(1200,C.kill13073))\n    C.kill12760=math.max(15,math.min(1200,C.kill12760))\n    C.kill12763=math.max(15,math.min(1200,C.kill12763))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    StrayboroughDeadwalkAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif StrayboroughDeadwalkAutoSimConfig.poolFinal==nil then\n StrayboroughDeadwalkAutoSimConfig.poolFinal=true\n table.insert(StrayboroughDeadwalkAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- Runs after native map 1204, BLM and combat gates; no timeline timer is used.\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1204 or p.job~=25 or not p.incombat then self.used=true;return end\nlocal C=StrayboroughDeadwalkAutoSimConfig\nlocal A=TensorCore.API.TensorACR\nlocal ok,t=pcall(A.getAutoSimTime)\nif not ok or type(t)~=\"number\" or t<0 then return end -- readiness wait, not completion\nif data.strayborough_autosim then self.used=true;return end\nlocal S={enabled=C.enabled,movement=C.movement,returnField=C.returnField,trash=C.trash,\n    killOverride=C.killOverride,kill13073=C.kill13073,kill12760=C.kill12760,kill12763=C.kill12763,\n    unexpectedPct=C.unexpectedPct,uncertainty=C.uncertainty,buffEnabled=C.buffEnabled,\n    buffPct=C.buffPct,buffFirst=C.buffFirst,buffDuration=C.buffDuration,buffPeriod=C.buffPeriod,\n    boss=0,origin=0,counts={},phases={},phaseCount=0,anchorsSeen=0,setup=true,activeEnds={}}\ndata.strayborough_autosim=S\n-- Filled by the evidence builder; tables are allocated once per combat.\nS.definitions={[13073]={[\"name\"]=\"His Royal Headness Leonogg I\",[\"movement\"]={{45.0,46.0},{50.0,51.0},{52.5,53.5},{54.5,56.0},{57.5,59.0},{101.5,103.0}},[\"downtime\"]={},[\"intermission\"]=false,[\"aliases\"]={},[\"anchors\"]={[36526]={15.343},[36527]={32.788,66.999,100.062},[36529]={6.132},[36530]={110.367},[36598]={38.929,72.179,105.195},[39682]={48.226},[39685]={77.398}}},[12760]={[\"name\"]=\"Jack-in-the-Pot\",[\"movement\"]={{32.5,34.0},{68.5,69.5},{87.5,88.5}},[\"downtime\"]={},[\"intermission\"]=false,[\"aliases\"]={},[\"anchors\"]={[36716]={8.172,39.984},[36717]={16.312,47.124,110.5},[36722]={72.398},[36726]={92.57}}},[12763]={[\"name\"]=\"Träumerei\",[\"movement\"]={{11.0,12.0},{40.5,42.5},{124.5,125.5},{127.0,128.0}},[\"downtime\"]={},[\"intermission\"]=false,[\"aliases\"]={},[\"anchors\"]={[37065]={74.289},[37132]={24.555,109.781},[37136]={30.703,117.977,156.516},[37139]={6.204,85.485,169.797},[37140]={16.367,85.391},[37142]={147.32},[37145]={54.984,178.891},[37148]={95.649,136.118},[37168]={66.07}}}}\n\nfunction S.add(kind,a,b,value,relative)\n    if b<=a or a>=1200 then return end\n    b=math.min(b,1200)\n    local id=A.addAutoSimPhase(kind,a,b,value)\n    if id then\n        S.phaseCount=S.phaseCount+1\n        S.phases[S.phaseCount]={id=id,kind=kind,a=a,b=b,value=value,relative=relative}\n    end\nend\n\nfunction S.startBoss(cid,entityID,origin,now)\n    local def=S.definitions[cid]\n    if not def or S.boss~=0 or not S.enabled then return end\n    S.boss=cid;S.entityID=entityID;S.origin=origin\n    C.poolStatus=nil\n    A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100)\n    if S.killOverride then\n        A.setAutoSimKillTime(math.min(1200,origin+S[\"kill\"..cid]))\n        A.addAutoSimUncertainty(now,10) -- limited four-player samples: estimates remain optional\n    end\n    -- Keep automatic kill uncertainty by default. Do not invent forced target downtime.\n    -- Only owned movement/field phases are authored; AoE counts and DoT targets stay live.\n    if S.movement then\n        for i=1,#def.movement do\n            local w=def.movement[i]\n            local ceiling=def.intermission and def.intermission.suspendAt or 1200\n            local a,b=origin+w[1],origin+math.min(w[2],ceiling)\n            if b>now then\n                a=math.max(a,now)\n                S.add(\"CasterDowntime\",a,b,1,true)\n                if S.returnField and (not def.intermission or w[2]<def.intermission.suspendAt) then S.add(\"GroundFieldMovement\",b,b+0.2,2,true) end\n            end\n        end\n    end\n    -- Native paired targetability transitions corroborate these downtime windows.\n    -- Attackability forecasting is independent of the optional movement forecast.\n    for i=1,#def.downtime do\n        local w=def.downtime[i]\n        if origin+w[2]>now then S.add(\"FullDowntime\",math.max(origin+w[1],now),origin+w[2],1,true) end\n    end\n    if S.buffEnabled and S.buffPct>0 then\n        local a=origin+S.buffFirst\n        while a<1200 do\n            if a+S.buffDuration>now then S.add(\"RaidBuff\",math.max(a,now),a+S.buffDuration,1+S.buffPct/100,false) end\n            a=a+S.buffPeriod\n        end\n    end\n    C.status=\"Active: \"..def.name..\". Kill estimate: \"..(S.killOverride and \"manual\" or \"automatic\")\nend\n\nfunction S.channel(args)\n    if not S.enabled then return end\n    local cid=args.entityContentID\n    local def=S.definitions[cid]\n    if not def then return end\n    local aid=args.spellID\n    aid=def.aliases[aid] or aid -- documented alternate casts share one occurrence sequence\n    local anchors=def.anchors[aid]\n    if not anchors then return end -- stable boss cast identity before API work\n    if S.boss~=0 and (S.boss~=cid or S.entityID~=args.entityID) then return end\n    local valid,now=pcall(A.getAutoSimTime)\n    if not valid or type(now)~=\"number\" or now<0 or now>=1200 then return end\n    local n=(S.counts[aid] or 0)+1\n    local expected=anchors[n]\n    if not expected then return end\n    if S.boss==0 and math.abs(now-expected)>2 then return end\n    S.counts[aid]=n\n    if S.boss==0 then S.startBoss(cid,args.entityID,now-expected,now) end\n    if S.boss~=cid then return end\n    local candidate=now-expected\n    -- If enabled mid-boss, do not match a late repeat to the first occurrence.\n    if math.abs(candidate-S.origin)>2 then return end\n    local shift=candidate-S.origin\n    S.anchorsSeen=S.anchorsSeen+1\n    if math.abs(shift)<0.15 then return end\n    -- Remove every future owned phase before reinsertion, avoiding transient overlaps.\n    local ends=S.activeEnds\n    ends.CasterDowntime=now;ends.GroundFieldMovement=now;ends.FullDowntime=now\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.relative and phase.id and phase.a>now+0.05 then\n            A.removeAutoSimPhase(phase.id);phase.id=nil;phase.pending=true\n        elseif phase.id and phase.a<=now+0.05 and phase.b>now and phase.relative then\n            ends[phase.kind]=math.max(ends[phase.kind],phase.b)\n        end\n    end\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.pending then\n            phase.pending=false\n            local a,b=phase.a+shift,phase.b+shift\n            local minimum=ends[phase.kind]\n            if phase.kind==\"GroundFieldMovement\" then minimum=math.max(minimum,ends.CasterDowntime) end\n            a=math.max(a,minimum,now+0.05)\n            if b>a then\n                phase.id=A.addAutoSimPhase(phase.kind,a,b,phase.value)\n                phase.a=a;phase.b=b;ends[phase.kind]=b\n            end\n        end\n    end\n    S.origin=candidate\nend\n\nif S.enabled then\n    local target=TensorCore.mGetTarget()\n    if target and S.definitions[target.contentid] and target.attackable and target.incombat then\n        -- Near pull start, zero is the combat-clock origin; later setup waits for an anchor.\n        if t<=5 then S.startBoss(target.contentid,target.id,0,t) end\n    end\n    if S.boss==0 and S.trash then A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100) end\nend\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not StrayboroughDeadwalkAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill13073=116.39, kill12760=109.413, kill12763=169.383,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\StrayboroughDeadwalk.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill13073\",\"kill12760\",\"kill12763\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill13073=math.max(15,math.min(1200,C.kill13073))\n    C.kill12760=math.max(15,math.min(1200,C.kill12760))\n    C.kill12763=math.max(15,math.min(1200,C.kill12763))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    StrayboroughDeadwalkAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif StrayboroughDeadwalkAutoSimConfig.poolFinal==nil then\n StrayboroughDeadwalkAutoSimConfig.poolFinal=true\n table.insert(StrayboroughDeadwalkAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- Runs after native map 1204, map and combat gates; no timeline timer is used.\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1204 or not p.incombat then self.used=true;return end\nlocal isCaster=p.job==25 or p.job==27 or p.job==35 or p.job==42 or p.job==36 or p.job==24 or p.job==28 or p.job==33 or p.job==40\nlocal C=StrayboroughDeadwalkAutoSimConfig\nlocal A=TensorCore.API.TensorACR\nlocal ok,t=pcall(A.getAutoSimTime)\nif not ok or type(t)~=\"number\" or t<0 then return end -- readiness wait, not completion\nif data.strayborough_autosim then self.used=true;return end\nlocal S={enabled=C.enabled,movement=C.movement and isCaster,returnField=C.returnField and p.job==25,trash=C.trash,\n    killOverride=C.killOverride,kill13073=C.kill13073,kill12760=C.kill12760,kill12763=C.kill12763,\n    unexpectedPct=C.unexpectedPct,uncertainty=C.uncertainty,buffEnabled=C.buffEnabled,\n    buffPct=C.buffPct,buffFirst=C.buffFirst,buffDuration=C.buffDuration,buffPeriod=C.buffPeriod,\n    boss=0,origin=0,counts={},phases={},phaseCount=0,anchorsSeen=0,setup=true,activeEnds={}}\ndata.strayborough_autosim=S\n-- Filled by the evidence builder; tables are allocated once per combat.\nS.definitions={[13073]={[\"name\"]=\"His Royal Headness Leonogg I\",[\"movement\"]={{45.0,46.0},{50.0,51.0},{52.5,53.5},{54.5,56.0},{57.5,59.0},{101.5,103.0}},[\"downtime\"]={},[\"intermission\"]=false,[\"aliases\"]={},[\"anchors\"]={[36526]={15.343},[36527]={32.788,66.999,100.062},[36529]={6.132},[36530]={110.367},[36598]={38.929,72.179,105.195},[39682]={48.226},[39685]={77.398}}},[12760]={[\"name\"]=\"Jack-in-the-Pot\",[\"movement\"]={{32.5,34.0},{68.5,69.5},{87.5,88.5}},[\"downtime\"]={},[\"intermission\"]=false,[\"aliases\"]={},[\"anchors\"]={[36716]={8.172,39.984},[36717]={16.312,47.124,110.5},[36722]={72.398},[36726]={92.57}}},[12763]={[\"name\"]=\"TrÃ¤umerei\",[\"movement\"]={{11.0,12.0},{40.5,42.5},{124.5,125.5},{127.0,128.0}},[\"downtime\"]={},[\"intermission\"]=false,[\"aliases\"]={},[\"anchors\"]={[37065]={74.289},[37132]={24.555,109.781},[37136]={30.703,117.977,156.516},[37139]={6.204,85.485,169.797},[37140]={16.367,85.391},[37142]={147.32},[37145]={54.984,178.891},[37148]={95.649,136.118},[37168]={66.07}}}}\n\nfunction S.add(kind,a,b,value,relative)\n    if b<=a or a>=1200 then return end\n    b=math.min(b,1200)\n    local id=A.addAutoSimPhase(kind,a,b,value)\n    if id then\n        S.phaseCount=S.phaseCount+1\n        S.phases[S.phaseCount]={id=id,kind=kind,a=a,b=b,value=value,relative=relative}\n    end\nend\n\nfunction S.startBoss(cid,entityID,origin,now)\n    local def=S.definitions[cid]\n    if not def or S.boss~=0 or not S.enabled then return end\n    S.boss=cid;S.entityID=entityID;S.origin=origin\n    C.poolStatus=nil\n    A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100)\n    if S.killOverride then\n        A.setAutoSimKillTime(math.min(1200,origin+S[\"kill\"..cid]))\n        A.addAutoSimUncertainty(now,10) -- limited four-player samples: estimates remain optional\n    end\n    -- Keep automatic kill uncertainty by default. Do not invent forced target downtime.\n    -- Only owned movement/field phases are authored; AoE counts and DoT targets stay live.\n    if S.movement then\n        for i=1,#def.movement do\n            local w=def.movement[i]\n            local ceiling=def.intermission and def.intermission.suspendAt or 1200\n            local a,b=origin+w[1],origin+math.min(w[2],ceiling)\n            if b>now then\n                a=math.max(a,now)\n                S.add(\"CasterDowntime\",a,b,1,true)\n                if S.returnField and (not def.intermission or w[2]<def.intermission.suspendAt) then S.add(\"GroundFieldMovement\",b,b+0.2,2,true) end\n            end\n        end\n    end\n    -- Native paired targetability transitions corroborate these downtime windows.\n    -- Attackability forecasting is independent of the optional movement forecast.\n    for i=1,#def.downtime do\n        local w=def.downtime[i]\n        if origin+w[2]>now then S.add(\"FullDowntime\",math.max(origin+w[1],now),origin+w[2],1,true) end\n    end\n    if S.buffEnabled and S.buffPct>0 then\n        local a=origin+S.buffFirst\n        while a<1200 do\n            if a+S.buffDuration>now then S.add(\"RaidBuff\",math.max(a,now),a+S.buffDuration,1+S.buffPct/100,false) end\n            a=a+S.buffPeriod\n        end\n    end\n    C.status=\"Active: \"..def.name..\". Kill estimate: \"..(S.killOverride and \"manual\" or \"automatic\")\nend\n\nfunction S.channel(args)\n    if not S.enabled then return end\n    local cid=args.entityContentID\n    local def=S.definitions[cid]\n    if not def then return end\n    local aid=args.spellID\n    aid=def.aliases[aid] or aid -- documented alternate casts share one occurrence sequence\n    local anchors=def.anchors[aid]\n    if not anchors then return end -- stable boss cast identity before API work\n    if S.boss~=0 and (S.boss~=cid or S.entityID~=args.entityID) then return end\n    local valid,now=pcall(A.getAutoSimTime)\n    if not valid or type(now)~=\"number\" or now<0 or now>=1200 then return end\n    local n=(S.counts[aid] or 0)+1\n    local expected=anchors[n]\n    if not expected then return end\n    if S.boss==0 and math.abs(now-expected)>2 then return end\n    S.counts[aid]=n\n    if S.boss==0 then S.startBoss(cid,args.entityID,now-expected,now) end\n    if S.boss~=cid then return end\n    local candidate=now-expected\n    -- If enabled mid-boss, do not match a late repeat to the first occurrence.\n    if math.abs(candidate-S.origin)>2 then return end\n    local shift=candidate-S.origin\n    S.anchorsSeen=S.anchorsSeen+1\n    if math.abs(shift)<0.15 then return end\n    -- Remove every future owned phase before reinsertion, avoiding transient overlaps.\n    local ends=S.activeEnds\n    ends.CasterDowntime=now;ends.GroundFieldMovement=now;ends.FullDowntime=now\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.relative and phase.id and phase.a>now+0.05 then\n            A.removeAutoSimPhase(phase.id);phase.id=nil;phase.pending=true\n        elseif phase.id and phase.a<=now+0.05 and phase.b>now and phase.relative then\n            ends[phase.kind]=math.max(ends[phase.kind],phase.b)\n        end\n    end\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.pending then\n            phase.pending=false\n            local a,b=phase.a+shift,phase.b+shift\n            local minimum=ends[phase.kind]\n            if phase.kind==\"GroundFieldMovement\" then minimum=math.max(minimum,ends.CasterDowntime) end\n            a=math.max(a,minimum,now+0.05)\n            if b>a then\n                phase.id=A.addAutoSimPhase(phase.kind,a,b,phase.value)\n                phase.a=a;phase.b=b;ends[phase.kind]=b\n            end\n        end\n    end\n    S.origin=candidate\nend\n\nif S.enabled then\n    local target=TensorCore.mGetTarget()\n    if target and S.definitions[target.contentid] and target.attackable and target.incombat then\n        -- Near pull start, zero is the combat-clock origin; later setup waits for an anchor.\n        if t<=5 then S.startBoss(target.contentid,target.id,0,t) end\n    end\n    if S.boss==0 and S.trash then A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100) end\nend\nself.used=true\n",
 						conditions = 
 						{
 							
 							{
 								"80a98775-b6af-d876-83d5-103b67694ff2",
-								true,
-							},
-							
-							{
-								"2fff4404-79ed-018e-ac61-d775aaf998ae",
 								true,
 							},
 							
@@ -7611,18 +6688,6 @@ local tbl =
 						localmapid = 1204,
 						name = "Strayborough Deadwalk (1204)",
 						uuid = "80a98775-b6af-d876-83d5-103b67694ff2",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "2fff4404-79ed-018e-ac61-d775aaf998ae",
 						version = 3,
 					},
 				},
@@ -7677,11 +6742,6 @@ local tbl =
 							},
 							
 							{
-								"ba223c36-0954-4c3a-81ff-3985358e0863",
-								true,
-							},
-							
-							{
 								"1eeebe20-8e3e-7225-bed0-23d64797eeb2",
 								true,
 							},
@@ -7708,18 +6768,6 @@ local tbl =
 						localmapid = 1204,
 						name = "Strayborough Deadwalk (1204)",
 						uuid = "33b37fc8-21fe-44f0-a5c2-580a7ef5ab9c",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "ba223c36-0954-4c3a-81ff-3985358e0863",
 						version = 3,
 					},
 				},
@@ -7775,11 +6823,6 @@ local tbl =
 							},
 							
 							{
-								"12dc85a8-105d-547c-a0c2-cd1b5708e0fc",
-								true,
-							},
-							
-							{
 								"4e9ec2e4-4e96-aab7-8a09-4a6b77d02f6d",
 								true,
 							},
@@ -7811,18 +6854,6 @@ local tbl =
 						localmapid = 1204,
 						name = "Strayborough Deadwalk (1204)",
 						uuid = "dfe11316-4dcf-95ad-ad3a-3869216f8280",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "12dc85a8-105d-547c-a0c2-cd1b5708e0fc",
 						version = 3,
 					},
 				},
@@ -7891,11 +6922,6 @@ local tbl =
 							},
 							
 							{
-								"67f37a9f-6809-4e16-9c60-8ba07aeed977",
-								true,
-							},
-							
-							{
 								"ce79616c-0419-cbe2-b69a-df68bac900ac",
 								true,
 							},
@@ -7927,18 +6953,6 @@ local tbl =
 						localmapid = 1204,
 						name = "Strayborough Deadwalk (1204)",
 						uuid = "26b34ad8-a5ce-85fe-ada6-ae6a32e50733",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "67f37a9f-6809-4e16-9c60-8ba07aeed977",
 						version = 3,
 					},
 				},
@@ -8007,11 +7021,6 @@ local tbl =
 							},
 							
 							{
-								"531b1d1e-e7c6-65e3-8024-9d90d3f8efa0",
-								true,
-							},
-							
-							{
 								"91b37673-af41-3793-a6f8-09d86b08d64e",
 								true,
 							},
@@ -8043,18 +7052,6 @@ local tbl =
 						localmapid = 1204,
 						name = "Strayborough Deadwalk (1204)",
 						uuid = "bafd361b-5609-6a75-8801-90906741f762",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "531b1d1e-e7c6-65e3-8024-9d90d3f8efa0",
 						version = 3,
 					},
 				},
@@ -8113,17 +7110,12 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not StrayboroughDeadwalkAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill13073=116.39, kill12760=109.413, kill12763=169.383,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\StrayboroughDeadwalk.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill13073\",\"kill12760\",\"kill12763\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill13073=math.max(15,math.min(1200,C.kill13073))\n    C.kill12760=math.max(15,math.min(1200,C.kill12760))\n    C.kill12763=math.max(15,math.min(1200,C.kill12763))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    StrayboroughDeadwalkAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif StrayboroughDeadwalkAutoSimConfig.poolFinal==nil then\n StrayboroughDeadwalkAutoSimConfig.poolFinal=true\n table.insert(StrayboroughDeadwalkAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID and BLM gates precede it.\nlocal C=StrayboroughDeadwalkAutoSimConfig\nlocal visible=GUI:Begin(\"Strayborough Deadwalk - BLM AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"His Royal Headness Leonogg I (seconds)\",C.kill13073,5,15,\"%.1f\")\n        if changed then C.kill13073=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Jack-in-the-Pot (seconds)\",C.kill12760,5,15,\"%.1f\")\n        if changed then C.kill12760=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Träumerei (seconds)\",C.kill12763,5,15,\"%.1f\")\n        if changed then C.kill12763=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold Ley Lines + Manafont on final trash before each boss\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before all three bosses. Holds only these two abilities while that combat continues; short holds expire automatically when combat ends or the profile stops.\") end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not StrayboroughDeadwalkAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill13073=116.39, kill12760=109.413, kill12763=169.383,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\StrayboroughDeadwalk.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill13073\",\"kill12760\",\"kill12763\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill13073=math.max(15,math.min(1200,C.kill13073))\n    C.kill12760=math.max(15,math.min(1200,C.kill12760))\n    C.kill12763=math.max(15,math.min(1200,C.kill12763))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    StrayboroughDeadwalkAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif StrayboroughDeadwalkAutoSimConfig.poolFinal==nil then\n StrayboroughDeadwalkAutoSimConfig.poolFinal=true\n table.insert(StrayboroughDeadwalkAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=StrayboroughDeadwalkAutoSimConfig\nlocal visible=GUI:Begin(\"Strayborough Deadwalk - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"His Royal Headness Leonogg I (seconds)\",C.kill13073,5,15,\"%.1f\")\n        if changed then C.kill13073=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Jack-in-the-Pot (seconds)\",C.kill12760,5,15,\"%.1f\")\n        if changed then C.kill12760=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"TrÃ¤umerei (seconds)\",C.kill12763,5,15,\"%.1f\")\n        if changed then C.kill12763=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold Ley Lines + Manafont on final trash before each boss (BLM only)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before all three bosses. Holds only these two abilities while that combat continues; short holds expire automatically when combat ends or the profile stops.\") end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
 						conditions = 
 						{
 							
 							{
 								"ff8be3f1-6009-9111-a2be-69d8a9d689b2",
-								true,
-							},
-							
-							{
-								"ffc06a92-c6d1-6ee8-a5af-576cea54d408",
 								true,
 							},
 						},
@@ -8144,18 +7136,6 @@ local tbl =
 						localmapid = 1204,
 						name = "Strayborough Deadwalk (1204)",
 						uuid = "ff8be3f1-6009-9111-a2be-69d8a9d689b2",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "ffc06a92-c6d1-6ee8-a5af-576cea54d408",
 						version = 3,
 					},
 				},
@@ -8185,11 +7165,6 @@ local tbl =
 							
 							{
 								"f70ce8ae-8e74-3e65-9f26-4da0afd0580b",
-								true,
-							},
-							
-							{
-								"acda53e8-a8f6-fc95-a033-41a6959b3b39",
 								true,
 							},
 							
@@ -8225,18 +7200,6 @@ local tbl =
 						localmapid = 1204,
 						name = "Strayborough Deadwalk (1204)",
 						uuid = "f70ce8ae-8e74-3e65-9f26-4da0afd0580b",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "acda53e8-a8f6-fc95-a033-41a6959b3b39",
 						version = 3,
 					},
 				},
@@ -8370,11 +7333,6 @@ local tbl =
 							},
 							
 							{
-								"d7362ff1-05b1-4a8e-a509-1e2c3216ca0b",
-								true,
-							},
-							
-							{
 								"315aeb6a-d1bb-a56e-b89b-0d6b24eb1bfd",
 								true,
 							},
@@ -8406,18 +7364,6 @@ local tbl =
 						localmapid = 1204,
 						name = "Strayborough Deadwalk (1204)",
 						uuid = "0e460963-5d1b-02c8-929b-a060a5c367f5",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "d7362ff1-05b1-4a8e-a509-1e2c3216ca0b",
 						version = 3,
 					},
 				},
@@ -8576,11 +7522,6 @@ local tbl =
 							},
 							
 							{
-								"eab32cb9-d3b9-d87f-97a0-9bcbe5b5d59e",
-								true,
-							},
-							
-							{
 								"720a0d5e-1741-fb79-99f9-5c0f53d7b61f",
 								true,
 							},
@@ -8612,18 +7553,6 @@ local tbl =
 						localmapid = 1204,
 						name = "Strayborough Deadwalk (1204)",
 						uuid = "e060b22c-afd0-93d5-93a5-d15caff69d49",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "eab32cb9-d3b9-d87f-97a0-9bcbe5b5d59e",
 						version = 3,
 					},
 				},
@@ -8889,17 +7818,12 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not TenderValleyAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill12889=117.344, kill12853=113.781, kill12709=156.758,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\TenderValley.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill12889\",\"kill12853\",\"kill12709\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill12889=math.max(15,math.min(1200,C.kill12889))\n    C.kill12853=math.max(15,math.min(1200,C.kill12853))\n    C.kill12709=math.max(15,math.min(1200,C.kill12709))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    TenderValleyAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif TenderValleyAutoSimConfig.poolFinal==nil then\n TenderValleyAutoSimConfig.poolFinal=true\n table.insert(TenderValleyAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- Runs after native map 1203, BLM and combat gates; no timeline timer is used.\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1203 or p.job~=25 or not p.incombat then self.used=true;return end\nlocal C=TenderValleyAutoSimConfig\nlocal A=TensorCore.API.TensorACR\nlocal ok,t=pcall(A.getAutoSimTime)\nif not ok or type(t)~=\"number\" or t<0 then return end -- readiness wait, not completion\nif data.tender_autosim then self.used=true;return end\nlocal S={enabled=C.enabled,movement=C.movement,returnField=C.returnField,trash=C.trash,\n    killOverride=C.killOverride,kill12889=C.kill12889,kill12853=C.kill12853,kill12709=C.kill12709,\n    unexpectedPct=C.unexpectedPct,uncertainty=C.uncertainty,buffEnabled=C.buffEnabled,\n    buffPct=C.buffPct,buffFirst=C.buffFirst,buffDuration=C.buffDuration,buffPeriod=C.buffPeriod,\n    boss=0,origin=0,counts={},phases={},phaseCount=0,anchorsSeen=0,setup=true,activeEnds={}}\ndata.tender_autosim=S\n-- Filled by the evidence builder; tables are allocated once per combat.\nS.definitions={[12889]={[\"name\"]=\"Barreltender\",[\"movement\"]={{21.0,22.0},{64.0,65.0},{67.0,68.5},{82.0,83.0}},[\"downtime\"]={},[\"intermission\"]=false,[\"aliases\"]={[39154]=39155},[\"anchors\"]={[37384]={17.758,28.898,115.234},[37387]={46.46,107.891},[37390]={54.586},[37391]={68.836},[37392]={4.156},[39155]={82.336},[39242]={94.461}}},[12853]={[\"name\"]=\"Anthracite\",[\"movement\"]={{94.0,95.0}},[\"downtime\"]={},[\"intermission\"]=false,[\"aliases\"]={},[\"anchors\"]={[36542]={7.14,20.547,35.828},[36547]={60.266,116.063},[36548]={70.883,78.453},[36554]={92.07},[36556]={49.477},[38467]={103.727}}},[12709]={[\"name\"]=\"The Greatest Serpent of Tural\",[\"movement\"]={{56.5,58.0},{78.0,79.0},{108.5,109.5},{132.0,134.0},{137.5,139.0}},[\"downtime\"]={},[\"intermission\"]=false,[\"aliases\"]={},[\"anchors\"]={[36744]={37.726},[36745]={72.609},[36746]={16.718,48.82},[36748]={5.156}}}}\n\nfunction S.add(kind,a,b,value,relative)\n    if b<=a or a>=1200 then return end\n    b=math.min(b,1200)\n    local id=A.addAutoSimPhase(kind,a,b,value)\n    if id then\n        S.phaseCount=S.phaseCount+1\n        S.phases[S.phaseCount]={id=id,kind=kind,a=a,b=b,value=value,relative=relative}\n    end\nend\n\nfunction S.startBoss(cid,entityID,origin,now)\n    local def=S.definitions[cid]\n    if not def or S.boss~=0 or not S.enabled then return end\n    S.boss=cid;S.entityID=entityID;S.origin=origin\n    C.poolStatus=nil\n    A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100)\n    if S.killOverride then\n        A.setAutoSimKillTime(math.min(1200,origin+S[\"kill\"..cid]))\n        A.addAutoSimUncertainty(now,10) -- limited four-player samples: estimates remain optional\n    end\n    -- Keep automatic kill uncertainty by default. Do not invent forced target downtime.\n    -- Only owned movement/field phases are authored; AoE counts and DoT targets stay live.\n    if S.movement then\n        for i=1,#def.movement do\n            local w=def.movement[i]\n            local ceiling=def.intermission and def.intermission.suspendAt or 1200\n            local a,b=origin+w[1],origin+math.min(w[2],ceiling)\n            if b>now then\n                a=math.max(a,now)\n                S.add(\"CasterDowntime\",a,b,1,true)\n                if S.returnField and (not def.intermission or w[2]<def.intermission.suspendAt) then S.add(\"GroundFieldMovement\",b,b+0.2,2,true) end\n            end\n        end\n    end\n    -- Native paired targetability transitions corroborate these downtime windows.\n    -- Attackability forecasting is independent of the optional movement forecast.\n    for i=1,#def.downtime do\n        local w=def.downtime[i]\n        if origin+w[2]>now then S.add(\"FullDowntime\",math.max(origin+w[1],now),origin+w[2],1,true) end\n    end\n    if S.buffEnabled and S.buffPct>0 then\n        local a=origin+S.buffFirst\n        while a<1200 do\n            if a+S.buffDuration>now then S.add(\"RaidBuff\",math.max(a,now),a+S.buffDuration,1+S.buffPct/100,false) end\n            a=a+S.buffPeriod\n        end\n    end\n    C.status=\"Active: \"..def.name..\". Kill estimate: \"..(S.killOverride and \"manual\" or \"automatic\")\nend\n\nfunction S.channel(args)\n    if not S.enabled then return end\n    local cid=args.entityContentID\n    local def=S.definitions[cid]\n    if not def then return end\n    local aid=args.spellID\n    aid=def.aliases[aid] or aid -- documented alternate casts share one occurrence sequence\n    local anchors=def.anchors[aid]\n    if not anchors then return end -- stable boss cast identity before API work\n    if S.boss~=0 and (S.boss~=cid or S.entityID~=args.entityID) then return end\n    local valid,now=pcall(A.getAutoSimTime)\n    if not valid or type(now)~=\"number\" or now<0 or now>=1200 then return end\n    local n=(S.counts[aid] or 0)+1\n    local expected=anchors[n]\n    if not expected then return end\n    if S.boss==0 and math.abs(now-expected)>2 then return end\n    S.counts[aid]=n\n    if S.boss==0 then S.startBoss(cid,args.entityID,now-expected,now) end\n    if S.boss~=cid then return end\n    local candidate=now-expected\n    -- If enabled mid-boss, do not match a late repeat to the first occurrence.\n    if math.abs(candidate-S.origin)>2 then return end\n    local shift=candidate-S.origin\n    S.anchorsSeen=S.anchorsSeen+1\n    if math.abs(shift)<0.15 then return end\n    -- Remove every future owned phase before reinsertion, avoiding transient overlaps.\n    local ends=S.activeEnds\n    ends.CasterDowntime=now;ends.GroundFieldMovement=now;ends.FullDowntime=now\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.relative and phase.id and phase.a>now+0.05 then\n            A.removeAutoSimPhase(phase.id);phase.id=nil;phase.pending=true\n        elseif phase.id and phase.a<=now+0.05 and phase.b>now and phase.relative then\n            ends[phase.kind]=math.max(ends[phase.kind],phase.b)\n        end\n    end\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.pending then\n            phase.pending=false\n            local a,b=phase.a+shift,phase.b+shift\n            local minimum=ends[phase.kind]\n            if phase.kind==\"GroundFieldMovement\" then minimum=math.max(minimum,ends.CasterDowntime) end\n            a=math.max(a,minimum,now+0.05)\n            if b>a then\n                phase.id=A.addAutoSimPhase(phase.kind,a,b,phase.value)\n                phase.a=a;phase.b=b;ends[phase.kind]=b\n            end\n        end\n    end\n    S.origin=candidate\nend\n\nif S.enabled then\n    local target=TensorCore.mGetTarget()\n    if target and S.definitions[target.contentid] and target.attackable and target.incombat then\n        -- Near pull start, zero is the combat-clock origin; later setup waits for an anchor.\n        if t<=5 then S.startBoss(target.contentid,target.id,0,t) end\n    end\n    if S.boss==0 and S.trash then A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100) end\nend\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not TenderValleyAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill12889=117.344, kill12853=113.781, kill12709=156.758,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\TenderValley.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill12889\",\"kill12853\",\"kill12709\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill12889=math.max(15,math.min(1200,C.kill12889))\n    C.kill12853=math.max(15,math.min(1200,C.kill12853))\n    C.kill12709=math.max(15,math.min(1200,C.kill12709))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    TenderValleyAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif TenderValleyAutoSimConfig.poolFinal==nil then\n TenderValleyAutoSimConfig.poolFinal=true\n table.insert(TenderValleyAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- Runs after native map 1203, map and combat gates; no timeline timer is used.\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1203 or not p.incombat then self.used=true;return end\nlocal isCaster=p.job==25 or p.job==27 or p.job==35 or p.job==42 or p.job==36 or p.job==24 or p.job==28 or p.job==33 or p.job==40\nlocal C=TenderValleyAutoSimConfig\nlocal A=TensorCore.API.TensorACR\nlocal ok,t=pcall(A.getAutoSimTime)\nif not ok or type(t)~=\"number\" or t<0 then return end -- readiness wait, not completion\nif data.tender_autosim then self.used=true;return end\nlocal S={enabled=C.enabled,movement=C.movement and isCaster,returnField=C.returnField and p.job==25,trash=C.trash,\n    killOverride=C.killOverride,kill12889=C.kill12889,kill12853=C.kill12853,kill12709=C.kill12709,\n    unexpectedPct=C.unexpectedPct,uncertainty=C.uncertainty,buffEnabled=C.buffEnabled,\n    buffPct=C.buffPct,buffFirst=C.buffFirst,buffDuration=C.buffDuration,buffPeriod=C.buffPeriod,\n    boss=0,origin=0,counts={},phases={},phaseCount=0,anchorsSeen=0,setup=true,activeEnds={}}\ndata.tender_autosim=S\n-- Filled by the evidence builder; tables are allocated once per combat.\nS.definitions={[12889]={[\"name\"]=\"Barreltender\",[\"movement\"]={{21.0,22.0},{64.0,65.0},{67.0,68.5},{82.0,83.0}},[\"downtime\"]={},[\"intermission\"]=false,[\"aliases\"]={[39154]=39155},[\"anchors\"]={[37384]={17.758,28.898,115.234},[37387]={46.46,107.891},[37390]={54.586},[37391]={68.836},[37392]={4.156},[39155]={82.336},[39242]={94.461}}},[12853]={[\"name\"]=\"Anthracite\",[\"movement\"]={{94.0,95.0}},[\"downtime\"]={},[\"intermission\"]=false,[\"aliases\"]={},[\"anchors\"]={[36542]={7.14,20.547,35.828},[36547]={60.266,116.063},[36548]={70.883,78.453},[36554]={92.07},[36556]={49.477},[38467]={103.727}}},[12709]={[\"name\"]=\"The Greatest Serpent of Tural\",[\"movement\"]={{56.5,58.0},{78.0,79.0},{108.5,109.5},{132.0,134.0},{137.5,139.0}},[\"downtime\"]={},[\"intermission\"]=false,[\"aliases\"]={},[\"anchors\"]={[36744]={37.726},[36745]={72.609},[36746]={16.718,48.82},[36748]={5.156}}}}\n\nfunction S.add(kind,a,b,value,relative)\n    if b<=a or a>=1200 then return end\n    b=math.min(b,1200)\n    local id=A.addAutoSimPhase(kind,a,b,value)\n    if id then\n        S.phaseCount=S.phaseCount+1\n        S.phases[S.phaseCount]={id=id,kind=kind,a=a,b=b,value=value,relative=relative}\n    end\nend\n\nfunction S.startBoss(cid,entityID,origin,now)\n    local def=S.definitions[cid]\n    if not def or S.boss~=0 or not S.enabled then return end\n    S.boss=cid;S.entityID=entityID;S.origin=origin\n    C.poolStatus=nil\n    A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100)\n    if S.killOverride then\n        A.setAutoSimKillTime(math.min(1200,origin+S[\"kill\"..cid]))\n        A.addAutoSimUncertainty(now,10) -- limited four-player samples: estimates remain optional\n    end\n    -- Keep automatic kill uncertainty by default. Do not invent forced target downtime.\n    -- Only owned movement/field phases are authored; AoE counts and DoT targets stay live.\n    if S.movement then\n        for i=1,#def.movement do\n            local w=def.movement[i]\n            local ceiling=def.intermission and def.intermission.suspendAt or 1200\n            local a,b=origin+w[1],origin+math.min(w[2],ceiling)\n            if b>now then\n                a=math.max(a,now)\n                S.add(\"CasterDowntime\",a,b,1,true)\n                if S.returnField and (not def.intermission or w[2]<def.intermission.suspendAt) then S.add(\"GroundFieldMovement\",b,b+0.2,2,true) end\n            end\n        end\n    end\n    -- Native paired targetability transitions corroborate these downtime windows.\n    -- Attackability forecasting is independent of the optional movement forecast.\n    for i=1,#def.downtime do\n        local w=def.downtime[i]\n        if origin+w[2]>now then S.add(\"FullDowntime\",math.max(origin+w[1],now),origin+w[2],1,true) end\n    end\n    if S.buffEnabled and S.buffPct>0 then\n        local a=origin+S.buffFirst\n        while a<1200 do\n            if a+S.buffDuration>now then S.add(\"RaidBuff\",math.max(a,now),a+S.buffDuration,1+S.buffPct/100,false) end\n            a=a+S.buffPeriod\n        end\n    end\n    C.status=\"Active: \"..def.name..\". Kill estimate: \"..(S.killOverride and \"manual\" or \"automatic\")\nend\n\nfunction S.channel(args)\n    if not S.enabled then return end\n    local cid=args.entityContentID\n    local def=S.definitions[cid]\n    if not def then return end\n    local aid=args.spellID\n    aid=def.aliases[aid] or aid -- documented alternate casts share one occurrence sequence\n    local anchors=def.anchors[aid]\n    if not anchors then return end -- stable boss cast identity before API work\n    if S.boss~=0 and (S.boss~=cid or S.entityID~=args.entityID) then return end\n    local valid,now=pcall(A.getAutoSimTime)\n    if not valid or type(now)~=\"number\" or now<0 or now>=1200 then return end\n    local n=(S.counts[aid] or 0)+1\n    local expected=anchors[n]\n    if not expected then return end\n    if S.boss==0 and math.abs(now-expected)>2 then return end\n    S.counts[aid]=n\n    if S.boss==0 then S.startBoss(cid,args.entityID,now-expected,now) end\n    if S.boss~=cid then return end\n    local candidate=now-expected\n    -- If enabled mid-boss, do not match a late repeat to the first occurrence.\n    if math.abs(candidate-S.origin)>2 then return end\n    local shift=candidate-S.origin\n    S.anchorsSeen=S.anchorsSeen+1\n    if math.abs(shift)<0.15 then return end\n    -- Remove every future owned phase before reinsertion, avoiding transient overlaps.\n    local ends=S.activeEnds\n    ends.CasterDowntime=now;ends.GroundFieldMovement=now;ends.FullDowntime=now\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.relative and phase.id and phase.a>now+0.05 then\n            A.removeAutoSimPhase(phase.id);phase.id=nil;phase.pending=true\n        elseif phase.id and phase.a<=now+0.05 and phase.b>now and phase.relative then\n            ends[phase.kind]=math.max(ends[phase.kind],phase.b)\n        end\n    end\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.pending then\n            phase.pending=false\n            local a,b=phase.a+shift,phase.b+shift\n            local minimum=ends[phase.kind]\n            if phase.kind==\"GroundFieldMovement\" then minimum=math.max(minimum,ends.CasterDowntime) end\n            a=math.max(a,minimum,now+0.05)\n            if b>a then\n                phase.id=A.addAutoSimPhase(phase.kind,a,b,phase.value)\n                phase.a=a;phase.b=b;ends[phase.kind]=b\n            end\n        end\n    end\n    S.origin=candidate\nend\n\nif S.enabled then\n    local target=TensorCore.mGetTarget()\n    if target and S.definitions[target.contentid] and target.attackable and target.incombat then\n        -- Near pull start, zero is the combat-clock origin; later setup waits for an anchor.\n        if t<=5 then S.startBoss(target.contentid,target.id,0,t) end\n    end\n    if S.boss==0 and S.trash then A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100) end\nend\nself.used=true\n",
 						conditions = 
 						{
 							
 							{
 								"0db8c8ff-b987-b99f-96b2-7b4ad155c1aa",
-								true,
-							},
-							
-							{
-								"b7eb03f1-72cd-0d86-8343-c72380aebe1f",
 								true,
 							},
 							
@@ -8930,18 +7854,6 @@ local tbl =
 						localmapid = 1203,
 						name = "Tender Valley (1203)",
 						uuid = "0db8c8ff-b987-b99f-96b2-7b4ad155c1aa",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "b7eb03f1-72cd-0d86-8343-c72380aebe1f",
 						version = 3,
 					},
 				},
@@ -8996,11 +7908,6 @@ local tbl =
 							},
 							
 							{
-								"5b8b0170-6921-8c89-8e41-5e3e1000da87",
-								true,
-							},
-							
-							{
 								"ecf26c1e-4f65-cbed-84c1-720ce4401a56",
 								true,
 							},
@@ -9027,18 +7934,6 @@ local tbl =
 						localmapid = 1203,
 						name = "Tender Valley (1203)",
 						uuid = "f50c390e-3257-c3a1-b713-8b24b1d659da",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "5b8b0170-6921-8c89-8e41-5e3e1000da87",
 						version = 3,
 					},
 				},
@@ -9094,11 +7989,6 @@ local tbl =
 							},
 							
 							{
-								"223bd761-c89b-13b7-8004-edb69c91714e",
-								true,
-							},
-							
-							{
 								"13eccd09-c6e1-f490-be41-d596c229233d",
 								true,
 							},
@@ -9130,18 +8020,6 @@ local tbl =
 						localmapid = 1203,
 						name = "Tender Valley (1203)",
 						uuid = "5754114b-4e01-5d1f-832e-d80dc55410ed",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "223bd761-c89b-13b7-8004-edb69c91714e",
 						version = 3,
 					},
 				},
@@ -9210,11 +8088,6 @@ local tbl =
 							},
 							
 							{
-								"ceb9e081-0c42-d00c-9970-b117b735b789",
-								true,
-							},
-							
-							{
 								"f9148151-6f7c-a44a-8ba6-d9750dc63334",
 								true,
 							},
@@ -9246,18 +8119,6 @@ local tbl =
 						localmapid = 1203,
 						name = "Tender Valley (1203)",
 						uuid = "dce0b200-b3e9-ddd9-8144-b359741bfd97",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "ceb9e081-0c42-d00c-9970-b117b735b789",
 						version = 3,
 					},
 				},
@@ -9326,11 +8187,6 @@ local tbl =
 							},
 							
 							{
-								"c8705ae9-21eb-3aa5-b9f4-9973d75df5f3",
-								true,
-							},
-							
-							{
 								"37a71068-b2f5-0200-a115-576938d37c95",
 								true,
 							},
@@ -9362,18 +8218,6 @@ local tbl =
 						localmapid = 1203,
 						name = "Tender Valley (1203)",
 						uuid = "bfc6d822-58eb-c175-837e-3e4b270bc20e",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "c8705ae9-21eb-3aa5-b9f4-9973d75df5f3",
 						version = 3,
 					},
 				},
@@ -9432,17 +8276,12 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not TenderValleyAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill12889=117.344, kill12853=113.781, kill12709=156.758,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\TenderValley.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill12889\",\"kill12853\",\"kill12709\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill12889=math.max(15,math.min(1200,C.kill12889))\n    C.kill12853=math.max(15,math.min(1200,C.kill12853))\n    C.kill12709=math.max(15,math.min(1200,C.kill12709))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    TenderValleyAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif TenderValleyAutoSimConfig.poolFinal==nil then\n TenderValleyAutoSimConfig.poolFinal=true\n table.insert(TenderValleyAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID and BLM gates precede it.\nlocal C=TenderValleyAutoSimConfig\nlocal visible=GUI:Begin(\"Tender Valley - BLM AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Barreltender (seconds)\",C.kill12889,5,15,\"%.1f\")\n        if changed then C.kill12889=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Anthracite (seconds)\",C.kill12853,5,15,\"%.1f\")\n        if changed then C.kill12853=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"The Greatest Serpent of Tural (seconds)\",C.kill12709,5,15,\"%.1f\")\n        if changed then C.kill12709=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold Ley Lines + Manafont on final trash before each boss\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before all three bosses. Holds only these two abilities while that combat continues; short holds expire automatically when combat ends or the profile stops.\") end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not TenderValleyAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill12889=117.344, kill12853=113.781, kill12709=156.758,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\TenderValley.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill12889\",\"kill12853\",\"kill12709\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill12889=math.max(15,math.min(1200,C.kill12889))\n    C.kill12853=math.max(15,math.min(1200,C.kill12853))\n    C.kill12709=math.max(15,math.min(1200,C.kill12709))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    TenderValleyAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif TenderValleyAutoSimConfig.poolFinal==nil then\n TenderValleyAutoSimConfig.poolFinal=true\n table.insert(TenderValleyAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=TenderValleyAutoSimConfig\nlocal visible=GUI:Begin(\"Tender Valley - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Barreltender (seconds)\",C.kill12889,5,15,\"%.1f\")\n        if changed then C.kill12889=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Anthracite (seconds)\",C.kill12853,5,15,\"%.1f\")\n        if changed then C.kill12853=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"The Greatest Serpent of Tural (seconds)\",C.kill12709,5,15,\"%.1f\")\n        if changed then C.kill12709=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold Ley Lines + Manafont on final trash before each boss (BLM only)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before all three bosses. Holds only these two abilities while that combat continues; short holds expire automatically when combat ends or the profile stops.\") end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
 						conditions = 
 						{
 							
 							{
 								"930bd58a-ad74-1590-bc42-10ba8e8fa915",
-								true,
-							},
-							
-							{
-								"75a0dc5c-2442-e2f6-9c43-ea317335e2a2",
 								true,
 							},
 						},
@@ -9463,18 +8302,6 @@ local tbl =
 						localmapid = 1203,
 						name = "Tender Valley (1203)",
 						uuid = "930bd58a-ad74-1590-bc42-10ba8e8fa915",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "75a0dc5c-2442-e2f6-9c43-ea317335e2a2",
 						version = 3,
 					},
 				},
@@ -9504,11 +8331,6 @@ local tbl =
 							
 							{
 								"5d5bb247-acfa-5624-95b7-fdaf842e8d17",
-								true,
-							},
-							
-							{
-								"9a6af98a-79a4-ba27-8359-ed209e7cb721",
 								true,
 							},
 							
@@ -9544,18 +8366,6 @@ local tbl =
 						localmapid = 1203,
 						name = "Tender Valley (1203)",
 						uuid = "5d5bb247-acfa-5624-95b7-fdaf842e8d17",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "9a6af98a-79a4-ba27-8359-ed209e7cb721",
 						version = 3,
 					},
 				},
@@ -9714,11 +8524,6 @@ local tbl =
 							},
 							
 							{
-								"bd5af679-bc1e-3cfb-9a2e-70148c6608bd",
-								true,
-							},
-							
-							{
 								"9f97ab1a-7614-b7a2-91f1-8c3b866033b5",
 								true,
 							},
@@ -9750,18 +8555,6 @@ local tbl =
 						localmapid = 1203,
 						name = "Tender Valley (1203)",
 						uuid = "82f28afb-ebc9-4d90-a183-5a050d0226be",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "bd5af679-bc1e-3cfb-9a2e-70148c6608bd",
 						version = 3,
 					},
 				},
@@ -9870,11 +8663,6 @@ local tbl =
 							},
 							
 							{
-								"b56eb126-cead-50cf-906b-2d20821823a5",
-								true,
-							},
-							
-							{
 								"09d129fb-554e-8c85-a3e9-70b7a02e42fb",
 								true,
 							},
@@ -9906,18 +8694,6 @@ local tbl =
 						localmapid = 1203,
 						name = "Tender Valley (1203)",
 						uuid = "eeda65ef-0383-01a1-99da-546ea273e117",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "b56eb126-cead-50cf-906b-2d20821823a5",
 						version = 3,
 					},
 				},
@@ -10133,17 +8909,12 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not AlexandriaAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill12844=127.952, kill12864=129.047, kill12729=179.031,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Alexandria.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill12844\",\"kill12864\",\"kill12729\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill12844=math.max(15,math.min(1200,C.kill12844))\n    C.kill12864=math.max(15,math.min(1200,C.kill12864))\n    C.kill12729=math.max(15,math.min(1200,C.kill12729))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    AlexandriaAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif AlexandriaAutoSimConfig.poolFinal==nil then\n AlexandriaAutoSimConfig.poolFinal=true\n table.insert(AlexandriaAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- Runs after native map 1199, BLM and combat gates; no timeline timer is used.\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1199 or p.job~=25 or not p.incombat then self.used=true;return end\nlocal C=AlexandriaAutoSimConfig\nlocal A=TensorCore.API.TensorACR\nlocal ok,t=pcall(A.getAutoSimTime)\nif not ok or type(t)~=\"number\" or t<0 then return end -- readiness wait, not completion\nif data.alexandria_autosim then self.used=true;return end\nlocal S={enabled=C.enabled,movement=C.movement,returnField=C.returnField,trash=C.trash,\n    killOverride=C.killOverride,kill12844=C.kill12844,kill12864=C.kill12864,kill12729=C.kill12729,\n    unexpectedPct=C.unexpectedPct,uncertainty=C.uncertainty,buffEnabled=C.buffEnabled,\n    buffPct=C.buffPct,buffFirst=C.buffFirst,buffDuration=C.buffDuration,buffPeriod=C.buffPeriod,\n    boss=0,origin=0,counts={},phases={},phaseCount=0,anchorsSeen=0,setup=true,activeEnds={}}\ndata.alexandria_autosim=S\n-- Filled by the evidence builder; tables are allocated once per combat.\nS.definitions={[12844]={[\"name\"]=\"Antivirus X\",[\"movement\"]={{33.5,35.0},{44.0,45.5},{49.0,50.5},{84.5,86.0},{88.0,90.0}},[\"downtime\"]={},[\"intermission\"]=false,[\"aliases\"]={[36380]=36378},[\"anchors\"]={[36378]={8.14,18.281,49.578,78.89,89.093},[36384]={60.671,99.249},[36387]={107.39}}},[12864]={[\"name\"]=\"Amalgam\",[\"movement\"]={{42.0,43.0},{49.0,50.0},{111.0,112.0},{113.5,114.5},{116.0,117.0},{118.5,119.5}},[\"downtime\"]={},[\"intermission\"]=false,[\"aliases\"]={},[\"anchors\"]={[36323]={14.578,58.594,104.25},[36327]={40.391,84.25},[36329]={47.609},[36337]={6.141},[36339]={93.312}}},[12729]={[\"name\"]=\"Eliminator\",[\"movement\"]={{71.5,72.5},{157.0,158.5},{183.5,184.5}},[\"downtime\"]={},[\"intermission\"]={[\"suspendAt\"]=92.188,[\"resumeAt\"]=116.781},[\"aliases\"]={[36769]=36768,[39248]=39247,[39600]=39599},[\"anchors\"]={[36765]={5.219},[36768]={15.734},[36772]={39.875},[36775]={57.641},[36779]={75.563},[36781]={87.063},[36795]={},[39247]={23.172,45.125},[39599]={62.891}}}}\n\nfunction S.add(kind,a,b,value,relative)\n    if b<=a or a>=1200 then return end\n    b=math.min(b,1200)\n    local id=A.addAutoSimPhase(kind,a,b,value)\n    if id then\n        S.phaseCount=S.phaseCount+1\n        S.phases[S.phaseCount]={id=id,kind=kind,a=a,b=b,value=value,relative=relative}\n    end\nend\n\nfunction S.startBoss(cid,entityID,origin,now)\n    local def=S.definitions[cid]\n    if not def or S.boss~=0 or not S.enabled then return end\n    S.boss=cid;S.entityID=entityID;S.origin=origin\n    C.poolStatus=nil\n    A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100)\n    if S.killOverride then\n        A.setAutoSimKillTime(math.min(1200,origin+S[\"kill\"..cid]))\n        A.addAutoSimUncertainty(now,10) -- limited four-player samples: estimates remain optional\n    end\n    -- Keep automatic kill uncertainty by default. Do not invent forced target downtime.\n    -- Only owned movement/field phases are authored; AoE counts and DoT targets stay live.\n    if S.movement then\n        for i=1,#def.movement do\n            local w=def.movement[i]\n            local ceiling=def.intermission and def.intermission.suspendAt or 1200\n            local a,b=origin+w[1],origin+math.min(w[2],ceiling)\n            if b>now then\n                a=math.max(a,now)\n                S.add(\"CasterDowntime\",a,b,1,true)\n                if S.returnField and (not def.intermission or w[2]<def.intermission.suspendAt) then S.add(\"GroundFieldMovement\",b,b+0.2,2,true) end\n            end\n        end\n    end\n    -- Native paired targetability transitions corroborate these downtime windows.\n    -- Attackability forecasting is independent of the optional movement forecast.\n    for i=1,#def.downtime do\n        local w=def.downtime[i]\n        if origin+w[2]>now then S.add(\"FullDowntime\",math.max(origin+w[1],now),origin+w[2],1,true) end\n    end\n    if S.buffEnabled and S.buffPct>0 then\n        local a=origin+S.buffFirst\n        while a<1200 do\n            if a+S.buffDuration>now then S.add(\"RaidBuff\",math.max(a,now),a+S.buffDuration,1+S.buffPct/100,false) end\n            a=a+S.buffPeriod\n        end\n    end\n    C.status=\"Active: \"..def.name..\". Kill estimate: \"..(S.killOverride and \"manual\" or \"automatic\")\nend\n\nfunction S.channel(args)\n    if not S.enabled then return end\n    local cid=args.entityContentID\n    local def=S.definitions[cid]\n    if not def then return end\n    local aid=args.spellID\n    aid=def.aliases[aid] or aid -- documented alternate casts share one occurrence sequence\n    local anchors=def.anchors[aid]\n    if not anchors then return end -- stable boss cast identity before API work\n    if S.boss~=0 and (S.boss~=cid or S.entityID~=args.entityID) then return end\n    local valid,now=pcall(A.getAutoSimTime)\n    if not valid or type(now)~=\"number\" or now<0 or now>=1200 then return end\n    local n=(S.counts[aid] or 0)+1\n    local expected=anchors[n]\n    if not expected then return end\n    if S.boss==0 and math.abs(now-expected)>2 then return end\n    S.counts[aid]=n\n    if S.boss==0 then S.startBoss(cid,args.entityID,now-expected,now) end\n    if S.boss~=cid then return end\n    local candidate=now-expected\n    -- If enabled mid-boss, do not match a late repeat to the first occurrence.\n    if math.abs(candidate-S.origin)>2 then return end\n    local shift=candidate-S.origin\n    S.anchorsSeen=S.anchorsSeen+1\n    if math.abs(shift)<0.15 then return end\n    -- Remove every future owned phase before reinsertion, avoiding transient overlaps.\n    local ends=S.activeEnds\n    ends.CasterDowntime=now;ends.GroundFieldMovement=now;ends.FullDowntime=now\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.relative and phase.id and phase.a>now+0.05 then\n            A.removeAutoSimPhase(phase.id);phase.id=nil;phase.pending=true\n        elseif phase.id and phase.a<=now+0.05 and phase.b>now and phase.relative then\n            ends[phase.kind]=math.max(ends[phase.kind],phase.b)\n        end\n    end\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.pending then\n            phase.pending=false\n            local a,b=phase.a+shift,phase.b+shift\n            local minimum=ends[phase.kind]\n            if phase.kind==\"GroundFieldMovement\" then minimum=math.max(minimum,ends.CasterDowntime) end\n            a=math.max(a,minimum,now+0.05)\n            if b>a then\n                phase.id=A.addAutoSimPhase(phase.kind,a,b,phase.value)\n                phase.a=a;phase.b=b;ends[phase.kind]=b\n            end\n        end\n    end\n    S.origin=candidate\nend\n\n\n-- Generator kill time varies. Later movement starts from the observed boss return.\nfunction S.targetability(args)\n    if not S.enabled or S.resumeForecastDone or args.entityID~=S.entityID or args.entityContentID~=S.boss then return true end\n    local def=S.definitions[S.boss]\n    if not def or not def.intermission then return true end\n    local valid,now=pcall(A.getAutoSimTime)\n    if not valid or type(now)~=\"number\" or now<0 then return false end\n    if not args.isTargetable then\n        if now>=S.origin+def.intermission.suspendAt-2 then S.intermissionSeen=true end\n        return true\n    end\n    if not S.intermissionSeen then return true end\n    S.resumeForecastDone=true\n    S.returnOrigin=now-def.intermission.resumeAt\n    if S.movement then\n        for i=1,#def.movement do\n            local w=def.movement[i]\n            if w[2]>def.intermission.resumeAt then\n                local a=S.returnOrigin+math.max(w[1],def.intermission.resumeAt)\n                local b=S.returnOrigin+w[2]\n                if b>now then\n                    S.add(\"CasterDowntime\",math.max(a,now),b,1,false)\n                    if S.returnField then S.add(\"GroundFieldMovement\",b,b+0.2,2,false) end\n                end\n            end\n        end\n    end\n    C.status=\"Eliminator returned. Later movement forecasts follow the observed return.\"\n    return true\nend\n\nif S.enabled then\n    local target=TensorCore.mGetTarget()\n    if target and S.definitions[target.contentid] and target.attackable and target.incombat then\n        -- Near pull start, zero is the combat-clock origin; later setup waits for an anchor.\n        if t<=5 then S.startBoss(target.contentid,target.id,0,t) end\n    end\n    if S.boss==0 and S.trash then A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100) end\nend\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not AlexandriaAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill12844=127.952, kill12864=129.047, kill12729=179.031,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Alexandria.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill12844\",\"kill12864\",\"kill12729\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill12844=math.max(15,math.min(1200,C.kill12844))\n    C.kill12864=math.max(15,math.min(1200,C.kill12864))\n    C.kill12729=math.max(15,math.min(1200,C.kill12729))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    AlexandriaAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif AlexandriaAutoSimConfig.poolFinal==nil then\n AlexandriaAutoSimConfig.poolFinal=true\n table.insert(AlexandriaAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- Runs after native map 1199, map and combat gates; no timeline timer is used.\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1199 or not p.incombat then self.used=true;return end\nlocal isCaster=p.job==25 or p.job==27 or p.job==35 or p.job==42 or p.job==36 or p.job==24 or p.job==28 or p.job==33 or p.job==40\nlocal C=AlexandriaAutoSimConfig\nlocal A=TensorCore.API.TensorACR\nlocal ok,t=pcall(A.getAutoSimTime)\nif not ok or type(t)~=\"number\" or t<0 then return end -- readiness wait, not completion\nif data.alexandria_autosim then self.used=true;return end\nlocal S={enabled=C.enabled,movement=C.movement and isCaster,returnField=C.returnField and p.job==25,trash=C.trash,\n    killOverride=C.killOverride,kill12844=C.kill12844,kill12864=C.kill12864,kill12729=C.kill12729,\n    unexpectedPct=C.unexpectedPct,uncertainty=C.uncertainty,buffEnabled=C.buffEnabled,\n    buffPct=C.buffPct,buffFirst=C.buffFirst,buffDuration=C.buffDuration,buffPeriod=C.buffPeriod,\n    boss=0,origin=0,counts={},phases={},phaseCount=0,anchorsSeen=0,setup=true,activeEnds={}}\ndata.alexandria_autosim=S\n-- Filled by the evidence builder; tables are allocated once per combat.\nS.definitions={[12844]={[\"name\"]=\"Antivirus X\",[\"movement\"]={{33.5,35.0},{44.0,45.5},{49.0,50.5},{84.5,86.0},{88.0,90.0}},[\"downtime\"]={},[\"intermission\"]=false,[\"aliases\"]={[36380]=36378},[\"anchors\"]={[36378]={8.14,18.281,49.578,78.89,89.093},[36384]={60.671,99.249},[36387]={107.39}}},[12864]={[\"name\"]=\"Amalgam\",[\"movement\"]={{42.0,43.0},{49.0,50.0},{111.0,112.0},{113.5,114.5},{116.0,117.0},{118.5,119.5}},[\"downtime\"]={},[\"intermission\"]=false,[\"aliases\"]={},[\"anchors\"]={[36323]={14.578,58.594,104.25},[36327]={40.391,84.25},[36329]={47.609},[36337]={6.141},[36339]={93.312}}},[12729]={[\"name\"]=\"Eliminator\",[\"movement\"]={{71.5,72.5},{157.0,158.5},{183.5,184.5}},[\"downtime\"]={},[\"intermission\"]={[\"suspendAt\"]=92.188,[\"resumeAt\"]=116.781},[\"aliases\"]={[36769]=36768,[39248]=39247,[39600]=39599},[\"anchors\"]={[36765]={5.219},[36768]={15.734},[36772]={39.875},[36775]={57.641},[36779]={75.563},[36781]={87.063},[36795]={},[39247]={23.172,45.125},[39599]={62.891}}}}\n\nfunction S.add(kind,a,b,value,relative)\n    if b<=a or a>=1200 then return end\n    b=math.min(b,1200)\n    local id=A.addAutoSimPhase(kind,a,b,value)\n    if id then\n        S.phaseCount=S.phaseCount+1\n        S.phases[S.phaseCount]={id=id,kind=kind,a=a,b=b,value=value,relative=relative}\n    end\nend\n\nfunction S.startBoss(cid,entityID,origin,now)\n    local def=S.definitions[cid]\n    if not def or S.boss~=0 or not S.enabled then return end\n    S.boss=cid;S.entityID=entityID;S.origin=origin\n    C.poolStatus=nil\n    A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100)\n    if S.killOverride then\n        A.setAutoSimKillTime(math.min(1200,origin+S[\"kill\"..cid]))\n        A.addAutoSimUncertainty(now,10) -- limited four-player samples: estimates remain optional\n    end\n    -- Keep automatic kill uncertainty by default. Do not invent forced target downtime.\n    -- Only owned movement/field phases are authored; AoE counts and DoT targets stay live.\n    if S.movement then\n        for i=1,#def.movement do\n            local w=def.movement[i]\n            local ceiling=def.intermission and def.intermission.suspendAt or 1200\n            local a,b=origin+w[1],origin+math.min(w[2],ceiling)\n            if b>now then\n                a=math.max(a,now)\n                S.add(\"CasterDowntime\",a,b,1,true)\n                if S.returnField and (not def.intermission or w[2]<def.intermission.suspendAt) then S.add(\"GroundFieldMovement\",b,b+0.2,2,true) end\n            end\n        end\n    end\n    -- Native paired targetability transitions corroborate these downtime windows.\n    -- Attackability forecasting is independent of the optional movement forecast.\n    for i=1,#def.downtime do\n        local w=def.downtime[i]\n        if origin+w[2]>now then S.add(\"FullDowntime\",math.max(origin+w[1],now),origin+w[2],1,true) end\n    end\n    if S.buffEnabled and S.buffPct>0 then\n        local a=origin+S.buffFirst\n        while a<1200 do\n            if a+S.buffDuration>now then S.add(\"RaidBuff\",math.max(a,now),a+S.buffDuration,1+S.buffPct/100,false) end\n            a=a+S.buffPeriod\n        end\n    end\n    C.status=\"Active: \"..def.name..\". Kill estimate: \"..(S.killOverride and \"manual\" or \"automatic\")\nend\n\nfunction S.channel(args)\n    if not S.enabled then return end\n    local cid=args.entityContentID\n    local def=S.definitions[cid]\n    if not def then return end\n    local aid=args.spellID\n    aid=def.aliases[aid] or aid -- documented alternate casts share one occurrence sequence\n    local anchors=def.anchors[aid]\n    if not anchors then return end -- stable boss cast identity before API work\n    if S.boss~=0 and (S.boss~=cid or S.entityID~=args.entityID) then return end\n    local valid,now=pcall(A.getAutoSimTime)\n    if not valid or type(now)~=\"number\" or now<0 or now>=1200 then return end\n    local n=(S.counts[aid] or 0)+1\n    local expected=anchors[n]\n    if not expected then return end\n    if S.boss==0 and math.abs(now-expected)>2 then return end\n    S.counts[aid]=n\n    if S.boss==0 then S.startBoss(cid,args.entityID,now-expected,now) end\n    if S.boss~=cid then return end\n    local candidate=now-expected\n    -- If enabled mid-boss, do not match a late repeat to the first occurrence.\n    if math.abs(candidate-S.origin)>2 then return end\n    local shift=candidate-S.origin\n    S.anchorsSeen=S.anchorsSeen+1\n    if math.abs(shift)<0.15 then return end\n    -- Remove every future owned phase before reinsertion, avoiding transient overlaps.\n    local ends=S.activeEnds\n    ends.CasterDowntime=now;ends.GroundFieldMovement=now;ends.FullDowntime=now\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.relative and phase.id and phase.a>now+0.05 then\n            A.removeAutoSimPhase(phase.id);phase.id=nil;phase.pending=true\n        elseif phase.id and phase.a<=now+0.05 and phase.b>now and phase.relative then\n            ends[phase.kind]=math.max(ends[phase.kind],phase.b)\n        end\n    end\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.pending then\n            phase.pending=false\n            local a,b=phase.a+shift,phase.b+shift\n            local minimum=ends[phase.kind]\n            if phase.kind==\"GroundFieldMovement\" then minimum=math.max(minimum,ends.CasterDowntime) end\n            a=math.max(a,minimum,now+0.05)\n            if b>a then\n                phase.id=A.addAutoSimPhase(phase.kind,a,b,phase.value)\n                phase.a=a;phase.b=b;ends[phase.kind]=b\n            end\n        end\n    end\n    S.origin=candidate\nend\n\n\n-- Generator kill time varies. Later movement starts from the observed boss return.\nfunction S.targetability(args)\n    if not S.enabled or S.resumeForecastDone or args.entityID~=S.entityID or args.entityContentID~=S.boss then return true end\n    local def=S.definitions[S.boss]\n    if not def or not def.intermission then return true end\n    local valid,now=pcall(A.getAutoSimTime)\n    if not valid or type(now)~=\"number\" or now<0 then return false end\n    if not args.isTargetable then\n        if now>=S.origin+def.intermission.suspendAt-2 then S.intermissionSeen=true end\n        return true\n    end\n    if not S.intermissionSeen then return true end\n    S.resumeForecastDone=true\n    S.returnOrigin=now-def.intermission.resumeAt\n    if S.movement then\n        for i=1,#def.movement do\n            local w=def.movement[i]\n            if w[2]>def.intermission.resumeAt then\n                local a=S.returnOrigin+math.max(w[1],def.intermission.resumeAt)\n                local b=S.returnOrigin+w[2]\n                if b>now then\n                    S.add(\"CasterDowntime\",math.max(a,now),b,1,false)\n                    if S.returnField then S.add(\"GroundFieldMovement\",b,b+0.2,2,false) end\n                end\n            end\n        end\n    end\n    C.status=\"Eliminator returned. Later movement forecasts follow the observed return.\"\n    return true\nend\n\nif S.enabled then\n    local target=TensorCore.mGetTarget()\n    if target and S.definitions[target.contentid] and target.attackable and target.incombat then\n        -- Near pull start, zero is the combat-clock origin; later setup waits for an anchor.\n        if t<=5 then S.startBoss(target.contentid,target.id,0,t) end\n    end\n    if S.boss==0 and S.trash then A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100) end\nend\nself.used=true\n",
 						conditions = 
 						{
 							
 							{
 								"c928750d-3b9a-ef62-886a-57555c6c7458",
-								true,
-							},
-							
-							{
-								"d918dae3-4d09-f96c-a182-71e1ace8aed1",
 								true,
 							},
 							
@@ -10174,18 +8945,6 @@ local tbl =
 						localmapid = 1199,
 						name = "Alexandria (1199)",
 						uuid = "c928750d-3b9a-ef62-886a-57555c6c7458",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "d918dae3-4d09-f96c-a182-71e1ace8aed1",
 						version = 3,
 					},
 				},
@@ -10240,11 +8999,6 @@ local tbl =
 							},
 							
 							{
-								"a8636c76-5849-21a1-8182-988d709f7759",
-								true,
-							},
-							
-							{
 								"985ae09c-a536-a175-b684-028a49a0c2ed",
 								true,
 							},
@@ -10271,18 +9025,6 @@ local tbl =
 						localmapid = 1199,
 						name = "Alexandria (1199)",
 						uuid = "c1d720b0-360b-d196-933b-220906e1ece1",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "a8636c76-5849-21a1-8182-988d709f7759",
 						version = 3,
 					},
 				},
@@ -10338,11 +9080,6 @@ local tbl =
 							},
 							
 							{
-								"b5cba81e-6791-3882-b027-638b7627bd8c",
-								true,
-							},
-							
-							{
 								"0993b790-ab4d-f743-89a8-70bed0123307",
 								true,
 							},
@@ -10374,18 +9111,6 @@ local tbl =
 						localmapid = 1199,
 						name = "Alexandria (1199)",
 						uuid = "0af42732-0127-f5e3-b4e5-ecf3828974d2",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "b5cba81e-6791-3882-b027-638b7627bd8c",
 						version = 3,
 					},
 				},
@@ -10454,11 +9179,6 @@ local tbl =
 							},
 							
 							{
-								"2901eb72-f553-eb87-83ef-160de6e110c6",
-								true,
-							},
-							
-							{
 								"d1a1ab1d-d817-201a-aec5-3e12e747f77c",
 								true,
 							},
@@ -10490,18 +9210,6 @@ local tbl =
 						localmapid = 1199,
 						name = "Alexandria (1199)",
 						uuid = "383ba488-4a73-4ae2-b012-ad65221c4350",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "2901eb72-f553-eb87-83ef-160de6e110c6",
 						version = 3,
 					},
 				},
@@ -10570,11 +9278,6 @@ local tbl =
 							},
 							
 							{
-								"491771a8-affa-789c-af2d-9876d6126fdd",
-								true,
-							},
-							
-							{
 								"e5688804-8213-1d01-9f1e-eca9331db206",
 								true,
 							},
@@ -10606,18 +9309,6 @@ local tbl =
 						localmapid = 1199,
 						name = "Alexandria (1199)",
 						uuid = "e53c16f7-a0cc-fed7-9e7a-b24cd9d729b9",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "491771a8-affa-789c-af2d-9876d6126fdd",
 						version = 3,
 					},
 				},
@@ -10676,17 +9367,12 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not AlexandriaAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill12844=127.952, kill12864=129.047, kill12729=179.031,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Alexandria.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill12844\",\"kill12864\",\"kill12729\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill12844=math.max(15,math.min(1200,C.kill12844))\n    C.kill12864=math.max(15,math.min(1200,C.kill12864))\n    C.kill12729=math.max(15,math.min(1200,C.kill12729))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    AlexandriaAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif AlexandriaAutoSimConfig.poolFinal==nil then\n AlexandriaAutoSimConfig.poolFinal=true\n table.insert(AlexandriaAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID and BLM gates precede it.\nlocal C=AlexandriaAutoSimConfig\nlocal visible=GUI:Begin(\"Alexandria - BLM AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Antivirus X (seconds)\",C.kill12844,5,15,\"%.1f\")\n        if changed then C.kill12844=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Amalgam (seconds)\",C.kill12864,5,15,\"%.1f\")\n        if changed then C.kill12864=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Eliminator (seconds)\",C.kill12729,5,15,\"%.1f\")\n        if changed then C.kill12729=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold Ley Lines + Manafont on final trash before each boss\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before all three bosses. Holds only these two abilities while that combat continues; short holds expire automatically when combat ends or the profile stops.\") end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not AlexandriaAutoSimConfig then\n    local C = {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=false, kill12844=127.952, kill12864=129.047, kill12729=179.031,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Alexandria.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill12844\",\"kill12864\",\"kill12729\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    local file=io.open(C.path,\"r\")\n    if file then\n        for line in file:lines() do\n            local key,value=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n            if key and C[key]~=nil then\n                if type(C[key])==\"boolean\" then C[key]=value==\"1\"\n                elseif type(C[key])==\"number\" then\n                    local n=tonumber(value)\n                    if n and n==n and n>-math.huge and n<math.huge then C[key]=n end\n                end\n            end\n        end\n        file:close()\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill12844=math.max(15,math.min(1200,C.kill12844))\n    C.kill12864=math.max(15,math.min(1200,C.kill12864))\n    C.kill12729=math.max(15,math.min(1200,C.kill12729))\n    function C.save()\n        local f,err=io.open(C.path,\"w\")\n        if not f then C.status=\"Save failed: \"..tostring(err);return end\n        for _,key in ipairs(C.keys) do\n            local v=C[key]\n            if type(v)==\"boolean\" then v=v and 1 or 0 end\n            f:write(key,\"\\t\",tostring(v),\"\\n\")\n        end\n        f:close()\n        C.status=\"Saved. Changes apply next combat.\"\n    end\n    AlexandriaAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif AlexandriaAutoSimConfig.poolFinal==nil then\n AlexandriaAutoSimConfig.poolFinal=true\n table.insert(AlexandriaAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=AlexandriaAutoSimConfig\nlocal visible=GUI:Begin(\"Alexandria - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Antivirus X (seconds)\",C.kill12844,5,15,\"%.1f\")\n        if changed then C.kill12844=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Amalgam (seconds)\",C.kill12864,5,15,\"%.1f\")\n        if changed then C.kill12864=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Eliminator (seconds)\",C.kill12729,5,15,\"%.1f\")\n        if changed then C.kill12729=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold Ley Lines + Manafont on final trash before each boss (BLM only)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before all three bosses. Holds only these two abilities while that combat continues; short holds expire automatically when combat ends or the profile stops.\") end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
 						conditions = 
 						{
 							
 							{
 								"35e7fdab-97cb-8e1e-83b1-3cfcb7f34e75",
-								true,
-							},
-							
-							{
-								"c81d6f15-17c3-6eca-aa81-0b019074cc10",
 								true,
 							},
 						},
@@ -10707,18 +9393,6 @@ local tbl =
 						localmapid = 1199,
 						name = "Alexandria (1199)",
 						uuid = "35e7fdab-97cb-8e1e-83b1-3cfcb7f34e75",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "c81d6f15-17c3-6eca-aa81-0b019074cc10",
 						version = 3,
 					},
 				},
@@ -10748,11 +9422,6 @@ local tbl =
 							
 							{
 								"ddf4f653-4545-5c84-b498-e48652ec5b02",
-								true,
-							},
-							
-							{
-								"cafbf00b-2eb2-aa35-bfb7-126c032dbfda",
 								true,
 							},
 							
@@ -10788,18 +9457,6 @@ local tbl =
 						localmapid = 1199,
 						name = "Alexandria (1199)",
 						uuid = "ddf4f653-4545-5c84-b498-e48652ec5b02",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "cafbf00b-2eb2-aa35-bfb7-126c032dbfda",
 						version = 3,
 					},
 				},
@@ -10908,11 +9565,6 @@ local tbl =
 							},
 							
 							{
-								"27101f70-47bc-d90d-8591-cf35400f10d7",
-								true,
-							},
-							
-							{
 								"e696ca95-0efe-3d6e-833b-56ed6dc791f6",
 								true,
 							},
@@ -10944,18 +9596,6 @@ local tbl =
 						localmapid = 1199,
 						name = "Alexandria (1199)",
 						uuid = "0bedf423-0749-5c3e-b286-7eac0d231353",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "27101f70-47bc-d90d-8591-cf35400f10d7",
 						version = 3,
 					},
 				},
@@ -11064,11 +9704,6 @@ local tbl =
 							},
 							
 							{
-								"0ef97002-6d33-fb8d-96f6-ab2917531a57",
-								true,
-							},
-							
-							{
 								"af7324f4-317b-0eeb-b651-f47a956f98a5",
 								true,
 							},
@@ -11100,18 +9735,6 @@ local tbl =
 						localmapid = 1199,
 						name = "Alexandria (1199)",
 						uuid = "e61d4382-ab79-1688-b300-14eb09228bdf",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "0ef97002-6d33-fb8d-96f6-ab2917531a57",
 						version = 3,
 					},
 				},
@@ -11317,11 +9940,6 @@ local tbl =
 							},
 							
 							{
-								"7f8acac1-1987-d077-bc99-f9570ca1a05b",
-								true,
-							},
-							
-							{
 								"47f61111-6ff4-cab3-9ddb-7a64f4c17f8a",
 								true,
 							},
@@ -11353,18 +9971,6 @@ local tbl =
 						localmapid = 1199,
 						name = "Alexandria (1199)",
 						uuid = "6fbf37e7-9629-67a6-86bf-afa3811cf086",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "7f8acac1-1987-d077-bc99-f9570ca1a05b",
 						version = 3,
 					},
 				},
