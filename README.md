@@ -18,6 +18,10 @@ TEA: Coming soon by Ton.
 
 ## Changelog
 
+### Shinryu Unreal: AutoSim
+
+- Added [AA] Autosim - Shinryu Unreal, inheriting Shinryumain, with shared phase forecasts and live transition corrections. Optional Ginryu/Tail DoT blacklists preserve existing entries; hearts and wings remain eligible for DoTs. The final wing segment keeps AoE/Smart AoE off until wipe/zone cleanup and uses an adjustable short kill forecast for each selected wing. Caster-movement and optional kill/buff settings are saved. Replay checks remain pending. (01-11-2026)
+
 ### FRU: AutoSim
 
 - Shared FRU AutoSim now disables AnyoneCore’s Prepull Helper during its precombat setup. The setting remains off until manually re-enabled. (01-11-2026)
