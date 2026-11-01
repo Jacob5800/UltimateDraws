@@ -2610,9 +2610,9 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local all=data.allianceAutoSimSchedules\nlocal s=all and all[2067]\nif not s or not s.done then return false end\nlocal t=TensorCore.API.TensorACR.getAutoSimTime()\nlocal p=TensorCore.mGetPlayer()\nreturn p~=nil and p.job==25 and t>=95 and t<112",
+						conditionLua = "local all=data.allianceAutoSimSchedules\nlocal s=all and all[2067]\nif not s or not s.done then return false end\nlocal t=TensorCore.API.TensorACR.getAutoSimTime()\nlocal p=TensorCore.mGetPlayer()\nreturn p~=nil and (p.job==25 or p.job==27 or p.job==35 or p.job==42 or p.job==24 or p.job==28 or p.job==33 or p.job==40) and t>=95 and t<112",
 						dequeueIfLuaFalse = true,
-						name = "Own BLM schedule and relevant window",
+						name = "Casting-role schedule and relevant window",
 						uuid = "0c4773bf-ba53-994b-8c64-5786a5b67e3b",
 						version = 3,
 					},
@@ -2693,9 +2693,9 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local all=data.allianceAutoSimSchedules\nlocal s=all and all[2069]\nif not s or not s.done then return false end\nlocal t=TensorCore.API.TensorACR.getAutoSimTime()\nlocal p=TensorCore.mGetPlayer()\nreturn p~=nil and p.job==25 and t>=85 and t<98",
+						conditionLua = "local all=data.allianceAutoSimSchedules\nlocal s=all and all[2069]\nif not s or not s.done then return false end\nlocal t=TensorCore.API.TensorACR.getAutoSimTime()\nlocal p=TensorCore.mGetPlayer()\nreturn p~=nil and (p.job==25 or p.job==27 or p.job==35 or p.job==42 or p.job==24 or p.job==28 or p.job==33 or p.job==40) and t>=85 and t<98",
 						dequeueIfLuaFalse = true,
-						name = "Own BLM schedule and relevant window",
+						name = "Casting-role schedule and relevant window",
 						uuid = "f6f6d065-de75-6756-bcd9-803facbd6698",
 						version = 3,
 					},
@@ -4061,7 +4061,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Own only these two verified TensorNuke4 options; preserve pre-existing false settings.\nif not jacobArkAoeGuard then\n jacobArkAoeGuard={aoe=ACR_TensorNuke4_AOE,smart=ACR_TensorNuke4_SmartAOE}\nend\nself.used=true\n",
+						actionLua = "-- Capture the active ACR's actual variables, including pre-existing false values.\nif not jacobArkAoeGuard then\n local saved={vars={}}\n for _,toggle in ipairs(TensorCore.API.TensorACR.getQuickToggles() or {}) do\n  if string.match(toggle.var,\"_AOE$\") or string.match(toggle.var,\"_SmartAOE$\") then\n   if type(_G[toggle.var])==\"boolean\" then saved.vars[toggle.var]=_G[toggle.var] end\n  end\n end\n jacobArkAoeGuard=saved\nend\nlocal saved=jacobArkAoeGuard\nif saved.vars then for var in pairs(saved.vars) do _G[var]=false end end\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -4080,66 +4080,8 @@ local tbl =
 								true,
 							},
 						},
-						name = "Remember previous AoE settings once",
+						name = "Capture and suppress active ACR AoE options",
 						uuid = "3c31acaa-dc76-b77c-b0ec-33037beb9a9d",
-						version = 2.1,
-					},
-				},
-				
-				{
-					data = 
-					{
-						aType = "ACR",
-						conditions = 
-						{
-							
-							{
-								"d9a57ebf-fb4d-99df-881d-c06e7c8589ba",
-								true,
-							},
-							
-							{
-								"e8e62511-0dee-fe21-bcde-f7f81067d7dc",
-								true,
-							},
-							
-							{
-								"1dfa0cec-915c-58f7-a6a2-f71d30621697",
-								true,
-							},
-						},
-						gVar = "ACR_TensorNuke4_AOE",
-						gVarValue = 2,
-						uuid = "060f6ce8-a5d6-e0e7-9920-455c68424c40",
-						version = 2.1,
-					},
-				},
-				
-				{
-					data = 
-					{
-						aType = "ACR",
-						conditions = 
-						{
-							
-							{
-								"d9a57ebf-fb4d-99df-881d-c06e7c8589ba",
-								true,
-							},
-							
-							{
-								"e8e62511-0dee-fe21-bcde-f7f81067d7dc",
-								true,
-							},
-							
-							{
-								"1dfa0cec-915c-58f7-a6a2-f71d30621697",
-								true,
-							},
-						},
-						gVar = "ACR_TensorNuke4_SmartAOE",
-						gVarValue = 2,
-						uuid = "5a91861e-0658-5b4a-b7d0-4f9c53533021",
 						version = 2.1,
 					},
 				},
@@ -4181,16 +4123,16 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn p~=nil and p.alive and p.job==25 and type(ACR_TensorNuke4_AOE)==\"boolean\" and type(ACR_TensorNuke4_SmartAOE)==\"boolean\"",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn p~=nil and p.alive",
 						dequeueIfLuaFalse = true,
-						name = "Living BLM with loaded toggles",
+						name = "Living player",
 						uuid = "1dfa0cec-915c-58f7-a6a2-f71d30621697",
 						version = 3,
 					},
 				},
 			},
 			displayPath = "Jeuno/Ark Angels/Assignment targeting",
-			name = "[Ark Angels BLM] Single target during Hero assignment",
+			name = "[Ark Angels] Single target during Hero assignment",
 			throttleTime = 500,
 			timeout = 0.40000000596046,
 			uuid = "8abb5c11-e180-8d7f-8b59-e8ed82bb7e36",
@@ -4218,7 +4160,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local saved=jacobArkAoeGuard\nif saved then\n ACR_TensorNuke4_AOE=saved.aoe\n ACR_TensorNuke4_SmartAOE=saved.smart\n jacobArkAoeGuard=nil\nend\nself.used=true\n",
+						actionLua = "local saved=jacobArkAoeGuard\nif saved then\n if saved.vars then\n  for var,value in pairs(saved.vars) do _G[var]=value end\n else\n  -- Restore an old BLM guard if this update was loaded during an assignment.\n  ACR_TensorNuke4_AOE=saved.aoe\n  ACR_TensorNuke4_SmartAOE=saved.smart\n end\n jacobArkAoeGuard=nil\nend\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -4289,7 +4231,7 @@ local tbl =
 				},
 			},
 			displayPath = "Jeuno/Ark Angels/Assignment targeting/Cleanup",
-			name = "[Ark Angels BLM] Restore AoE - assignment ended",
+			name = "[Ark Angels] Restore AoE - assignment ended",
 			throttleTime = 500,
 			timeout = 0.4,
 			uuid = "f92b9ea0-560e-59ca-9d50-0737cbb6034a",
@@ -4307,7 +4249,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local saved=jacobArkAoeGuard\nif saved then\n ACR_TensorNuke4_AOE=saved.aoe\n ACR_TensorNuke4_SmartAOE=saved.smart\n jacobArkAoeGuard=nil\nend\nself.used=true\n",
+						actionLua = "local saved=jacobArkAoeGuard\nif saved then\n if saved.vars then\n  for var,value in pairs(saved.vars) do _G[var]=value end\n else\n  -- Restore an old BLM guard if this update was loaded during an assignment.\n  ACR_TensorNuke4_AOE=saved.aoe\n  ACR_TensorNuke4_SmartAOE=saved.smart\n end\n jacobArkAoeGuard=nil\nend\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -4357,7 +4299,7 @@ local tbl =
 			},
 			displayPath = "Jeuno/Ark Angels/Assignment targeting/Cleanup",
 			eventType = 9,
-			name = "[Ark Angels BLM] Restore AoE - OnWipe",
+			name = "[Ark Angels] Restore AoE - OnWipe",
 			timeout = 0.4,
 			uuid = "1dff027b-b946-42e4-a898-73a1314c2dc3",
 			version = 2,
@@ -4374,7 +4316,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local saved=jacobArkAoeGuard\nif saved then\n ACR_TensorNuke4_AOE=saved.aoe\n ACR_TensorNuke4_SmartAOE=saved.smart\n jacobArkAoeGuard=nil\nend\nself.used=true\n",
+						actionLua = "local saved=jacobArkAoeGuard\nif saved then\n if saved.vars then\n  for var,value in pairs(saved.vars) do _G[var]=value end\n else\n  -- Restore an old BLM guard if this update was loaded during an assignment.\n  ACR_TensorNuke4_AOE=saved.aoe\n  ACR_TensorNuke4_SmartAOE=saved.smart\n end\n jacobArkAoeGuard=nil\nend\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -4424,7 +4366,7 @@ local tbl =
 			},
 			displayPath = "Jeuno/Ark Angels/Assignment targeting/Cleanup",
 			eventType = 10,
-			name = "[Ark Angels BLM] Restore AoE - OnDeath",
+			name = "[Ark Angels] Restore AoE - OnDeath",
 			timeout = 0.4,
 			uuid = "0666b090-6d4b-5aea-a0e3-e9be412e7a4d",
 			version = 2,
@@ -4441,7 +4383,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local saved=jacobArkAoeGuard\nif saved then\n ACR_TensorNuke4_AOE=saved.aoe\n ACR_TensorNuke4_SmartAOE=saved.smart\n jacobArkAoeGuard=nil\nend\nself.used=true\n",
+						actionLua = "local saved=jacobArkAoeGuard\nif saved then\n if saved.vars then\n  for var,value in pairs(saved.vars) do _G[var]=value end\n else\n  -- Restore an old BLM guard if this update was loaded during an assignment.\n  ACR_TensorNuke4_AOE=saved.aoe\n  ACR_TensorNuke4_SmartAOE=saved.smart\n end\n jacobArkAoeGuard=nil\nend\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -4473,7 +4415,7 @@ local tbl =
 			},
 			displayPath = "Jeuno/Ark Angels/Assignment targeting/Cleanup",
 			eventType = 11,
-			name = "[Ark Angels BLM] Restore AoE - OnMapChange",
+			name = "[Ark Angels] Restore AoE - OnMapChange",
 			timeout = 0.4,
 			uuid = "ccd8f583-5348-c501-9d8a-99def88a31cf",
 			version = 2,
@@ -4522,9 +4464,54 @@ local tbl =
 								"0d6dbb1b-a663-68ad-ac98-5999b59799aa",
 								true,
 							},
+							
+							{
+								"ce94c10a-c30a-3250-b4d9-80ed3ff8c236",
+								true,
+							},
 						},
 						gVar = "ACR_TensorNuke4_Hotbar_Surecast",
 						uuid = "46ccf920-1fd4-f028-96ff-0fd3f5baf3c0",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"a8519243-e151-6efc-a6a2-cf8226f5f919",
+								true,
+							},
+							
+							{
+								"206ed29e-8711-78bf-96ff-c008eaeea165",
+								true,
+							},
+							
+							{
+								"32578f4f-9488-c1e1-b0b6-3947d3543b82",
+								true,
+							},
+							
+							{
+								"0d6dbb1b-a663-68ad-ac98-5999b59799aa",
+								true,
+							},
+							
+							{
+								"ea5d50e9-5ba9-4221-870f-d0d7c30fd921",
+								true,
+							},
+						},
+						gVar = "ACR_TensorReaper4_Hotbar_ArmsLength",
+						name = "Request Arm's Length",
+						uuid = "88314414-2a22-b88a-acbc-08e0f253e32b",
 						variableTogglesType = 2,
 						version = 2.1,
 					},
@@ -4582,10 +4569,61 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 14,
+						dequeueIfLuaFalse = true,
+						jobIDList = 
+						{
+							25,
+							27,
+							35,
+							42,
+							24,
+							28,
+							33,
+							40,
+						},
+						name = "Caster or healer",
+						uuid = "ce94c10a-c30a-3250-b4d9-80ed3ff8c236",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 14,
+						dequeueIfLuaFalse = true,
+						jobIDList = 
+						{
+							19,
+							21,
+							32,
+							37,
+							20,
+							22,
+							30,
+							34,
+							39,
+							41,
+							23,
+							31,
+							38,
+						},
+						name = "Physical role",
+						uuid = "ea5d50e9-5ba9-4221-870f-d0d7c30fd921",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Jeuno/Ark Angels/Knockback",
 			eventType = 3,
-			name = "[Ark Angels] Surecast - Spiral Finish",
+			name = "[Ark Angels] Knockback protection - Spiral Finish",
 			timeout = 12,
 			uuid = "fefc15b7-8ea1-3308-8baf-c69c06ef08a4",
 			version = 2,
@@ -5428,11 +5466,6 @@ local tbl =
 							},
 							
 							{
-								"b923b3cd-9265-cd90-8d30-91960efaba5b",
-								true,
-							},
-							
-							{
 								"e5574a56-0e48-d33a-9fe2-546d9fb34360",
 								true,
 							},
@@ -5470,11 +5503,6 @@ local tbl =
 							
 							{
 								"85c34d2c-2d44-fd5d-83ee-20d511a2f044",
-								true,
-							},
-							
-							{
-								"b923b3cd-9265-cd90-8d30-91960efaba5b",
 								true,
 							},
 							
@@ -5519,18 +5547,6 @@ local tbl =
 						localmapid = 1248,
 						name = "Jeuno only",
 						uuid = "85c34d2c-2d44-fd5d-83ee-20d511a2f044",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "b923b3cd-9265-cd90-8d30-91960efaba5b",
 						version = 3,
 					},
 				},
@@ -5643,7 +5659,7 @@ local tbl =
 				},
 			},
 			displayPath = "Jeuno/Fafnir/Targeting",
-			name = "[Fafnir BLM] Avoid dying Darter targets",
+			name = "[Fafnir] Avoid dying Darter targets",
 			uuid = "c38372af-189f-5897-89e6-757ff068a3d0",
 			version = 2,
 		},
@@ -6415,9 +6431,54 @@ local tbl =
 								"f3ca42fc-f823-1710-a0e0-b9ba97bcde7c",
 								true,
 							},
+							
+							{
+								"65fa2495-0a4a-e256-ae2a-f641ec98c8e6",
+								true,
+							},
 						},
 						gVar = "ACR_TensorNuke4_Hotbar_Surecast",
 						uuid = "45d28459-2cee-b339-91ea-8a036cd9a359",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"a97a3a86-514a-0938-8f90-682060564fad",
+								true,
+							},
+							
+							{
+								"1463f344-9872-a66e-9590-d6973dd0c810",
+								true,
+							},
+							
+							{
+								"d86b05ab-f3c7-9056-9735-4c797d34855b",
+								true,
+							},
+							
+							{
+								"f3ca42fc-f823-1710-a0e0-b9ba97bcde7c",
+								true,
+							},
+							
+							{
+								"83e34fb1-b404-bd77-bfdc-c08667f4164c",
+								true,
+							},
+						},
+						gVar = "ACR_TensorReaper4_Hotbar_ArmsLength",
+						name = "Request Arm's Length",
+						uuid = "2baf725e-60c8-3e1c-a1a4-d8cefdc5b19d",
 						variableTogglesType = 2,
 						version = 2.1,
 					},
@@ -6472,10 +6533,61 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 14,
+						dequeueIfLuaFalse = true,
+						jobIDList = 
+						{
+							25,
+							27,
+							35,
+							42,
+							24,
+							28,
+							33,
+							40,
+						},
+						name = "Caster or healer",
+						uuid = "65fa2495-0a4a-e256-ae2a-f641ec98c8e6",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 14,
+						dequeueIfLuaFalse = true,
+						jobIDList = 
+						{
+							19,
+							21,
+							32,
+							37,
+							20,
+							22,
+							30,
+							34,
+							39,
+							41,
+							23,
+							31,
+							38,
+						},
+						name = "Physical role",
+						uuid = "83e34fb1-b404-bd77-bfdc-c08667f4164c",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "San d’Oria/Knockback safeguards",
 			eventType = 3,
-			name = "[Second Walk] Surecast - Ultima - Tractor Beam",
+			name = "[Second Walk] Knockback protection - Ultima - Tractor Beam",
 			timeout = 12,
 			uuid = "09f1e12c-911a-4d93-b619-b3230c7331aa",
 			version = 2,
@@ -6514,9 +6626,54 @@ local tbl =
 								"7399263a-6534-167e-87b0-75b977234cb1",
 								true,
 							},
+							
+							{
+								"620d06a1-ba8d-9cc4-abab-4b12c3681bfc",
+								true,
+							},
 						},
 						gVar = "ACR_TensorNuke4_Hotbar_Surecast",
 						uuid = "c62401a1-e6ba-903f-a727-5923e4f6bd43",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"fbd0ac91-8ecd-e8b6-aa3e-17fc65c5ac0c",
+								true,
+							},
+							
+							{
+								"b7e79740-c75e-fdd0-b55f-0ca1f8d2069b",
+								true,
+							},
+							
+							{
+								"33aaf97e-4f39-3b1c-bc42-2359e42b3143",
+								true,
+							},
+							
+							{
+								"7399263a-6534-167e-87b0-75b977234cb1",
+								true,
+							},
+							
+							{
+								"0063dc69-ccf9-0005-a459-15e07346601f",
+								true,
+							},
+						},
+						gVar = "ACR_TensorReaper4_Hotbar_ArmsLength",
+						name = "Request Arm's Length",
+						uuid = "8bd555e4-eb36-127c-b060-bb2af13d4cf3",
 						variableTogglesType = 2,
 						version = 2.1,
 					},
@@ -6571,10 +6728,61 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 14,
+						dequeueIfLuaFalse = true,
+						jobIDList = 
+						{
+							25,
+							27,
+							35,
+							42,
+							24,
+							28,
+							33,
+							40,
+						},
+						name = "Caster or healer",
+						uuid = "620d06a1-ba8d-9cc4-abab-4b12c3681bfc",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 14,
+						dequeueIfLuaFalse = true,
+						jobIDList = 
+						{
+							19,
+							21,
+							32,
+							37,
+							20,
+							22,
+							30,
+							34,
+							39,
+							41,
+							23,
+							31,
+							38,
+						},
+						name = "Physical role",
+						uuid = "0063dc69-ccf9-0005-a459-15e07346601f",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "San d’Oria/Knockback safeguards",
 			eventType = 3,
-			name = "[Second Walk] Surecast - Kam'lanaut - Shield Bash",
+			name = "[Second Walk] Knockback protection - Kam'lanaut - Shield Bash",
 			timeout = 8,
 			uuid = "6368b138-33b1-9e45-9c07-008d3c02ab5c",
 			version = 2,
@@ -6613,9 +6821,54 @@ local tbl =
 								"1f354d5b-2f6f-2f15-ae97-72fb894bf747",
 								true,
 							},
+							
+							{
+								"8d55b888-f94d-1cd8-97a4-beaac26e2ab4",
+								true,
+							},
 						},
 						gVar = "ACR_TensorNuke4_Hotbar_Surecast",
 						uuid = "ee48ff09-125c-f8fc-9add-51ab05196c6d",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"fdc49a19-d326-510f-9288-ef3bcc3917da",
+								true,
+							},
+							
+							{
+								"83d49023-48a5-47bf-a67f-4760e8fd6030",
+								true,
+							},
+							
+							{
+								"d9859f88-8130-6e4f-9784-5eb2c8daf24d",
+								true,
+							},
+							
+							{
+								"1f354d5b-2f6f-2f15-ae97-72fb894bf747",
+								true,
+							},
+							
+							{
+								"53c06159-5fe1-6f60-b930-1726392ce430",
+								true,
+							},
+						},
+						gVar = "ACR_TensorReaper4_Hotbar_ArmsLength",
+						name = "Request Arm's Length",
+						uuid = "bf4aeefe-1341-3ca8-94ea-2aee00a2ecb2",
 						variableTogglesType = 2,
 						version = 2.1,
 					},
@@ -6670,10 +6923,61 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 14,
+						dequeueIfLuaFalse = true,
+						jobIDList = 
+						{
+							25,
+							27,
+							35,
+							42,
+							24,
+							28,
+							33,
+							40,
+						},
+						name = "Caster or healer",
+						uuid = "8d55b888-f94d-1cd8-97a4-beaac26e2ab4",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 14,
+						dequeueIfLuaFalse = true,
+						jobIDList = 
+						{
+							19,
+							21,
+							32,
+							37,
+							20,
+							22,
+							30,
+							34,
+							39,
+							41,
+							23,
+							31,
+							38,
+						},
+						name = "Physical role",
+						uuid = "53c06159-5fe1-6f60-b930-1726392ce430",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "San d’Oria/Knockback safeguards",
 			eventType = 3,
-			name = "[Second Walk] Surecast - Eald'narche - Tornado draw-in",
+			name = "[Second Walk] Knockback protection - Eald'narche - Tornado draw-in",
 			timeout = 8,
 			uuid = "64d79e9e-0329-ea6c-8afd-7fe8ec4b2021",
 			version = 2,
