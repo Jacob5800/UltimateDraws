@@ -23562,6 +23562,69 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Bard",
+				uuid = "bcc994b4-9016-34d2-b3d5-0b09ebbaba19",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"4f0d1942-0824-76dc-bd96-b847d4c07da5",
+									true,
+								},
+							},
+							gVar = "ACR_TensorRequiem4_Hotbar_Troubadour",
+							uuid = "73dc08ce-138e-e139-80bf-3794e7512653",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "BRD only",
+							uuid = "4f0d1942-0824-76dc-bd96-b847d4c07da5",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Bard",
+				mechanicTime = 596,
+				name = "[LPDU BRD] Troubadour - Gigaflare 1",
+				timeRange = true,
+				timelineIndex = 110,
+				timerEndOffset = -11.8,
+				timerStartOffset = -13.5,
+				uuid = "9d1db23a-8a72-64d0-b5c3-408f3daf93e0",
+				version = 2,
+			},
+		},
 	},
 	[113] = 
 	{
@@ -26704,6 +26767,72 @@ local tbl =
 				timerEndOffset = -2,
 				timerStartOffset = -5,
 				uuid = "8cdf60c7-6909-1f51-8a91-b3614501bb1b",
+				version = 2,
+			},
+		},
+	},
+	[121] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Bard",
+				uuid = "f2ad7c95-8a8d-42f8-b681-2f6a08c49cf9",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"dbab20c2-67e0-e164-a540-2dd33bd5097d",
+									true,
+								},
+							},
+							gVar = "ACR_TensorRequiem4_Hotbar_NaturesMinne",
+							uuid = "b9f552be-b7be-027d-82b8-484aa769a46b",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "BRD only",
+							uuid = "dbab20c2-67e0-e164-a540-2dd33bd5097d",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Bard",
+				mechanicTime = 646.1,
+				name = "[LPDU BRD] Minne - Gigaflare 2",
+				timeRange = true,
+				timelineIndex = 121,
+				timerEndOffset = -1,
+				timerStartOffset = -3,
+				uuid = "11de25cd-1173-919d-a055-f4e081c6010c",
 				version = 2,
 			},
 		},
@@ -30380,6 +30509,69 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Bard",
+				uuid = "63416544-e3eb-09a1-93e3-e12ffbe66a81",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"2fc88bab-a880-6179-a256-afde2bfde62f",
+									true,
+								},
+							},
+							gVar = "ACR_TensorRequiem4_Hotbar_Troubadour",
+							uuid = "13e7b080-c438-1f5a-9a1e-f55c46248e04",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "BRD only",
+							uuid = "2fc88bab-a880-6179-a256-afde2bfde62f",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Bard",
+				mechanicTime = 708.5,
+				name = "[LPDU BRD] Troubadour - Gigaflare 3",
+				timeRange = true,
+				timelineIndex = 136,
+				timerEndOffset = -0.5,
+				timerStartOffset = -3,
+				uuid = "37ec20d4-25a5-0e6c-8768-26bc7ba0a0f8",
+				version = 2,
+			},
+		},
 	},
 	[139] = 
 	{
@@ -33405,6 +33597,69 @@ local tbl =
 				timerEndOffset = -2,
 				timerStartOffset = -5,
 				uuid = "8a9e3f73-cbb8-3a57-a49f-d3b535b44287",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Bard",
+				uuid = "e3e01cca-5140-ab26-bee0-b02519a76a46",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"f87e795b-02ae-5964-8117-d055c9f1f3e8",
+									true,
+								},
+							},
+							gVar = "ACR_TensorRequiem4_Hotbar_NaturesMinne",
+							uuid = "6016b75f-b92e-4e38-b00e-743a1fcef3f4",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "BRD only",
+							uuid = "f87e795b-02ae-5964-8117-d055c9f1f3e8",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Bard",
+				mechanicTime = 767.4,
+				name = "[LPDU BRD] Minne - Gigaflare 4",
+				timeRange = true,
+				timelineIndex = 149,
+				timerEndOffset = 1,
+				timerStartOffset = -0.5,
+				uuid = "a55701e2-c3f4-bef2-a071-f6635d4ebcb1",
 				version = 2,
 			},
 		},
@@ -39530,6 +39785,72 @@ local tbl =
 			},
 		},
 	},
+	[194] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Bard",
+				uuid = "49e5466c-52ce-f459-a89e-0dac1f7f99c1",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"0a2587a2-426b-f2fa-a4f5-8f67aa0802fe",
+									true,
+								},
+							},
+							gVar = "ACR_TensorRequiem4_Hotbar_Troubadour",
+							uuid = "8658e408-6fe7-5a41-aa56-a4c12a26d910",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "BRD only",
+							uuid = "0a2587a2-426b-f2fa-a4f5-8f67aa0802fe",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Bard",
+				mechanicTime = 1251.1,
+				name = "[LPDU BRD] Troubadour - Golden Morn Afah 1",
+				timeRange = true,
+				timelineIndex = 194,
+				timerEndOffset = -0.5,
+				timerStartOffset = -2,
+				uuid = "aedc407e-c7f9-c512-9141-f7ab8deee3a2",
+				version = 2,
+			},
+		},
+	},
 	[195] = 
 	{
 		
@@ -44273,6 +44594,72 @@ local tbl =
 				timerEndOffset = 10,
 				timerStartOffset = 7,
 				uuid = "4f020a1a-7f95-0e62-a07e-58b80c2c7ebe",
+				version = 2,
+			},
+		},
+	},
+	[203] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Bard",
+				uuid = "953fa977-32c7-1366-aada-c992e77aecb7",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"22df2264-7681-ddcb-b0ef-dd3075a8b104",
+									true,
+								},
+							},
+							gVar = "ACR_TensorRequiem4_Hotbar_Troubadour",
+							uuid = "7550271a-a538-4518-94ca-4651d2aac21b",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "BRD only",
+							uuid = "22df2264-7681-ddcb-b0ef-dd3075a8b104",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Bard",
+				mechanicTime = 1390.6,
+				name = "[LPDU BRD] Troubadour - Golden Morn Afah 4",
+				timeRange = true,
+				timelineIndex = 203,
+				timerEndOffset = -0.5,
+				timerStartOffset = -2,
+				uuid = "107e5faf-0ed5-0603-b54f-cfcb36cd1aac",
 				version = 2,
 			},
 		},

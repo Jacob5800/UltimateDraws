@@ -47,3 +47,26 @@ The source's final-row templates are excluded entirely. Mapped jobs also omit ab
 Completed: live TensorCore validation before each mutation and full persisted readback of all 548 reactions, mechanic attachments, action categories, roster gates, links and bounded windows. Published source and destination hashes match.
 
 Pending: real MT/OT replay observations for every job and partner combination, sync-70 downgrade behavior of upgrade-named ACR controls, ACR weaving and expiry, roster co-tank targeting, Shirk swaps, Reprisal hitbox range, PLD Oath availability, DRK MP availability, manual alert timing and invulnerability duration. Cooldown spacing is a timeline-plan review, not measured live cooldown evidence. Review the gaps above before using this as your full tank plan.
+
+
+## Bard support — 01-11-2026
+
+Six BRD-only ACR Hotbar requests added through TensorCore in Ucobreactions\lpdu tank mits, ucob 1.0.3. No direct Skill actions, Action CD gates, Fallthrough or End Reaction if Used. Existing 548 tank reactions preserved; total 554.
+
+| Mechanic | Ability | Request offset from hit |
+|---|---|---|
+| Gigaflare #1 (596.0) | Troubadour | -13.5 to -11.8s |
+| Gigaflare #2 (646.1) | Nature’s Minne | -3 to -1s |
+| Gigaflare #3 (708.5) | Troubadour | -3 to -0.5s |
+| Gigaflare #4 (767.4) | Nature’s Minne | -0.5 to +1s |
+| Golden Morn Afah #1 (1251.1) | Troubadour | -2 to -0.5s |
+| Golden Morn Afah #4 (1390.6) | Troubadour | -2 to -0.5s |
+
+The first Troubadour is deliberately early: the first and third Gigaflare hits are only about 112.1s apart. With these bounded windows, the observed worst-case cast spacing exceeds 120s; its earliest 15s duration still reaches Gigaflare #1. Minne #2/#4 also exceeds 120s between request windows. Minne increases healing received; it does not reduce damage. Golden #1 covers the first Afah and following Akh Morn sequence; #4 covers Afah and may catch the start of Akh Morn, not its full sequence.
+
+Evidence: twelve EU BRD clears with FFLogs historical estimated rDPS percentile >=80; sampled report damage events and per-hit Troubadour buff metadata, not cast proximity alone. Morn Afah 9964 and Akh Morn 9962/9963 originate from Golden Bahamut; Exaflare damage is separate and was excluded from the unavoidable-damage comparison. Raw/pre-mitigation fields are a comparison proxy, not a measured damage-prevention guarantee or proof of a universal optimal plan. Some existing casts occurred too late to buff Afah. No additional MCH/DNC cohort was analyzed.
+
+Native timing corroboration: 26-10-08 organized logs 02-59 and 02-31 (1), same underlying recording is possible; not claimed independent clears. Gigaflare resolutions first clock: 596.233/645.731/708.331/767.463 and 596.225/645.745/708.336/767.459; cast ID 9942, Bahamut Prime content 3210. Golden Afah #1 1251.033/1251.046 and #4 1390.497/1390.509, cast ID 9964. Live timeline uses 596.0/646.1/708.5/767.4/1251.1/1390.6. Other log clock syncs differ; native inherited timeline execution must be replay checked.
+
+Completed: validate_many, create_many and full get_reactions readback of all six attachments, job gates, categories, windows and links; source copied and hash matched.
+Pending replay: all six requests on the active inherited Bard profile, sync timing, first Troubadour expiry on Gigaflare #1, cooldown recovery for #3, Minne #4 arrival before healing, party range and Golden coverage. No replay cast or measured performance claim.

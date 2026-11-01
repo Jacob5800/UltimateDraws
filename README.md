@@ -22,6 +22,10 @@ TEA: Coming soon by Ton.
 
 - Generalized Alliance Raid AutoSim support: caster cleave corrections cover casting roles, Ark Angels preserves the active ACR's AoE options, Fafnir add retargeting is job-neutral, and knockback assistance chooses Surecast or Arm's Length by role. Shared kill/downtime/stun estimates remain unchanged. (01-11-2026)
 
+### UCOB: LPDU mitigation
+
+- Added Bard Troubadour for Gigaflares #1/#3 and Golden Morn Afah #1/#4, plus Nature’s Minne healing support for Gigaflares #2/#4. Requests are Bard-only and timed around observed hits; replay confirmation remains pending. (01-11-2026)
+
 ### UCOB: Shared AutoSim
 
 - Restored caster mechanic-event corrections for Twisters, Exaflares, Nael quotes, personal assignments and nearby puddles, plus BRD Grand Octet reservation. Added later P1 Twister forecasts and customizable pull-time Twintania/Nael estimates, defaulting to 132s/129s. Replay confirmation remains pending. (01-11-2026)
