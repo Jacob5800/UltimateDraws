@@ -74,6 +74,8 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- Pantokrator missile guidance moves ahead of the original assigned stack, waits for the next personal puddle after the missile, then returns to that same party. Live cone/puddle route checks withhold ambiguous or opposite-side arrows. Replay confirmation remains pending. (01-11-2026)
+
 - P1 tether pickup follows LPDU north-clockwise/west-counterclockwise priority instead of shortest travel. Opening Pantokrator guidance takes a clockwise sidestep within the assigned north/south half when cones cover the stack; already-safe players stay with their group. (01-11-2026)
 
 - Sigma no longer sends players to the middle after towers; assigned hand baiters receive their calculated destination earlier once rotation is known. Omega's second far-bounce west-wall draw now matches the arena-west callout. Replay confirmation remains pending. (01-11-2026)
@@ -91,8 +93,6 @@ TEA: Coming soon by Ton.
 - P1 post-missile returns now follow a nearby agreeing cluster from the assigned group, using its live radius rather than a stale arrow heading. Final rear line positions move 0.5 yalms outward while keeping tanks farther out. Replay checks remain pending. (31-10-2026)
 
 - P1 missile spread timers now follow the player using AnyoneCore's native entity countdown. Disabled the unused custom countdown overlay. (31-10-2026)
-
-- TOP now stores its own settings in TOP-LPDU.settings.tsv, shared across characters. Existing Minion choices migrate when available; GUI and guidance no longer require Minion's settings table. Optifine replay confirmation remains pending. (31-10-2026)
 
 ### UCOB: LPDU
 
