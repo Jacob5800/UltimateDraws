@@ -62,6 +62,8 @@ TEA: Coming soon by Ton.
 
 ### TOP: AutoSim
 
+- Shared TOP AutoSim now disables AnyoneCore’s Prepull Helper during its precombat setup. The setting remains off until manually re-enabled. (01-11-2026)
+
 - Added [AA] Autosim - TOP (5). P6 add blacklisting handles both Cosmo Meteors and Comets, once per content ID per pull. This profile forecasts LB downtime but does not automatically use LB. (31-10-2026)
 
 ### TOP: LPDU

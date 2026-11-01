@@ -30,13 +30,51 @@ local tbl =
 				name = "AutoSim | TOP baseline",
 				timeRange = true,
 				timelineIndex = 1,
-				timerEndOffset = -3.4,
-				timerStartOffset = -63.4,
+				timerEndOffset = -3.4000000953674,
+				timerStartOffset = -63.400001525879,
 				uuid = "e47f5a90-6d52-a036-8ad3-a23441bb9ee0",
 				version = 2,
 			},
 		},
 	}, 
+	[3] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "General",
+				uuid = "ebb7c0ed-d452-8fe6-a819-3dd83f91561d",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "General",
+				eventType = 13,
+				execute = "if AnyoneCore and AnyoneCore.Settings and AnyoneCore.Settings.PrepullHelper then\n    if AnyoneCore.Settings.PrepullHelper.enabled then\n        AnyoneCore.Settings.PrepullHelper.enabled = false\n    end\n    self.used = true\nend\n",
+				executeType = 2,
+				mechanicTime = 15,
+				name = "[AA] Disable Prepull Helper",
+				throttleTime = 1000,
+				timeRange = true,
+				timelineIndex = 3,
+				timerEndOffset = -10,
+				timerStartOffset = -15,
+				uuid = "975b034c-e72f-f404-9361-7735fc6b123e",
+				version = 2,
+			},
+		},
+	},
 	[31] = 
 	{
 		
