@@ -74,6 +74,8 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- All Pantokrator calls use normal visible AnyoneCore text and TTS again. The south-of-male bait marker holds until the actual bait cast or replacement guidance; Sagittarius countdowns sit at the beam midpoint inside the arena. Broken green tethers say only Take bounce; Sigma hand baits wait for laser completion, and Delta previews show three lines. Replay checks remain pending. (02-11-2026)
+
 - Pantokrator clears only its completed instruction on the finishing hit or early boss departure. Removed the text-routing time cutoff; subsequent AnyoneCore text and TTS remain enabled. (02-11-2026)
 
 - Settings remember the main window and expanded sections across reloads. Fixed later callouts playing audio without green text when Pantokrator display state remained active. (02-11-2026)
@@ -90,8 +92,6 @@ TEA: Coming soon by Ton.
 - Pantokrator missile guidance moves ahead of the original assigned stack, waits for the next personal puddle after the missile, then returns to that same party. Live cone/puddle route checks withhold ambiguous or opposite-side arrows. Replay confirmation remains pending. (01-11-2026)
 
 - P1 tether pickup follows LPDU north-clockwise/west-counterclockwise priority instead of shortest travel. Opening Pantokrator guidance takes a clockwise sidestep within the assigned north/south half when cones cover the stack; already-safe players stay with their group. (01-11-2026)
-
-- Sigma no longer sends players to the middle after towers; assigned hand baiters receive their calculated destination earlier once rotation is known. Omega's second far-bounce west-wall draw now matches the arena-west callout. Replay confirmation remains pending. (01-11-2026)
 
 
 ### UCOB: LPDU
