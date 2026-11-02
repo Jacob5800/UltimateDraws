@@ -74,6 +74,9 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- Cosmo Dive hides the non-tank movement arrow inside the safe stack area while retaining its circle and countdown; resolved Cosmo Arrow lanes clear on their matching hit. (02-11-2026)
+- Pantokrator keeps safe spread destinations stable, shows one current instruction, dims unrelated puddles and calls the missile-to-puddle return; non-tanks preposition south of the male for Limitless Arrow, and rot pickup follows the assigned donor until transfer. (02-11-2026)
+
 - Pantokrator missile guidance now follows the tight pair in the original party when one member is spreading, including melee-range stacks. Personal missile plans remain active through the expected hit, and generic rotation arrows cannot override them. Replay confirmation is pending. (02-11-2026)
 
 - P1 now shows a personal green beam while holding the assigned Blaster tether. Pantokrator gives “Preposition parties” and provisional north/south arrows at 62s, then corrects by numbered assignment. Opening movement and missile setup retry missing assignments; cone/puddle route checks remain. Replay checks are pending. (02-11-2026)
@@ -89,10 +92,6 @@ TEA: Coming soon by Ton.
 - Delta preserves valid initial tether staging until fists establish assignments. Sigma avoids unnecessary safe-position sidesteps, and Omega stops personal guidance after the player's World hit. Non-tanks see Cosmo Dive tank circles only in the final four seconds; other players' meteor flares are dimmer. Replay confirmation remains pending. (31-10-2026)
 
 - Moved R2's P3 monitor conga spot 0.5 yalms farther south and 0.5 yalms inward. (31-10-2026)
-
-- Simplified the P3 rot-expiry callout to 'Spread' so it does not imply extra movement when already positioned. (31-10-2026)
-
-- P2 weapon dodges preserve an already-safe position instead of forcing a group-side crossing. Unsafe positions use the nearest sampled safe destination with a route check; later BPOG spread assignments remain separate. (31-10-2026)
 
 
 ### UCOB: LPDU
