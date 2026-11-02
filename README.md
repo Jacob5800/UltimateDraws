@@ -74,6 +74,8 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- P4 previews the next personal stack in pale green, strengthens imminent proteans, and clears resolved bait guidance. P5 shows both Solar Ray target predictions, an early middle-laser preview/countdown, and only personal future arm baits. Sigma hand destinations match the recorded marked sides; Blind Faith guides everyone south of the boss from 996s. Replay confirmation is pending. (02-11-2026)
+
 - Cosmo Dive hides the non-tank movement arrow inside the safe stack area while retaining its circle and countdown; resolved Cosmo Arrow lanes clear on their matching hit. (02-11-2026)
 - Pantokrator keeps safe spread destinations stable, shows one current instruction, dims unrelated puddles and calls the missile-to-puddle return; non-tanks preposition south of the male for Limitless Arrow, and rot pickup follows the assigned donor until transfer. (02-11-2026)
 
@@ -90,8 +92,6 @@ TEA: Coming soon by Ton.
 - P2 moves non-tanks onto the live male boss after Sagittarius Arrow is baited, avoiding the old south-edge destination and tank tether conflicts. Delta arm previews show only the first four yellow lines; later locked shots retain their immediate danger indicator. (01-11-2026)
 
 - Delta preserves valid initial tether staging until fists establish assignments. Sigma avoids unnecessary safe-position sidesteps, and Omega stops personal guidance after the player's World hit. Non-tanks see Cosmo Dive tank circles only in the final four seconds; other players' meteor flares are dimmer. Replay confirmation remains pending. (31-10-2026)
-
-- Moved R2's P3 monitor conga spot 0.5 yalms farther south and 0.5 yalms inward. (31-10-2026)
 
 
 ### UCOB: LPDU
