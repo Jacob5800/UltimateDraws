@@ -23,7 +23,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "-- TOP-owned settings. Shared across characters; loaded once per client session.\nlocal topStore=_G.LPDU_TOP_SettingsStore\nif not topStore then\n topStore={values={},path=GetStartupPath()..[[\\LuaMods\\TensorReactions\\TOP-LPDU.settings.tsv]]}\n local f=io.open(topStore.path,'r')\n if f then\n  for line in f:lines()do\n   local k,v=line:match('^(LPDU_TOP_[%w_]+)\\t(.+)$')\n   if k then\n    if v=='true' then topStore.values[k]=true\n    elseif v=='false' then topStore.values[k]=false\n    elseif tonumber(v) then topStore.values[k]=tonumber(v) end\n   end\n  end\n  f:close()\n else\n  -- Optional one-time migration; normal operation never uses Minion settings.\n  local legacy=_G.Settings\n  legacy=type(legacy)=='table' and legacy.FFXIVMINION\n  if type(legacy)=='table' then\n   for k,v in pairs(legacy)do\n    if type(k)=='string' and k:match('^LPDU_TOP_') and (type(v)=='boolean' or type(v)=='number')then topStore.values[k]=v end\n   end\n  end\n end\n function topStore.encode()\n  local keys,lines={},{}\n  for k in pairs(topStore.values)do keys[#keys+1]=k end\n  table.sort(keys)\n  for _,k in ipairs(keys)do lines[#lines+1]=k..'\\t'..tostring(topStore.values[k]) end\n  return table.concat(lines,'\\n')..'\\n'\n end\n function topStore.save()\n  local text=topStore.encode()\n  if text==topStore.saved then return true end\n  local out,err=io.open(topStore.path,'w')\n  if not out then topStore.error=tostring(err);return false end\n  local ok,why=out:write(text)\n  local closed,closeError=out:close()\n  if not ok or not closed then topStore.error=tostring(why or closeError);return false end\n  topStore.saved=text;topStore.error=nil;return true\n end\n _G.LPDU_TOP_SettingsStore=topStore\nend\nlocal topSettings=topStore.values\n\n\nif data.topLpdu then self.used=true return end\nlocal S={owned={},issued={},line={},towers={},towerSeen={},step=0}\ndata.topLpdu=S\n-- Optional diagnostics for this profile's own timed shapes; never wraps global APIs.\nS.debugShapes={};S.debugProxies=setmetatable({},{__mode='k'})\nfunction S.debugDelete(id)\n S.debugShapes[id]=nil\n return Argus.deleteTimedShape(id)\nend\nfunction S.debugWrap(drawer)\n if S.debugProxies[drawer]then return S.debugProxies[drawer]end\n local proxy={}\n setmetatable(proxy,{__index=function(_,method)\n  local native=drawer[method]\n  if type(native)~='function'then return native end\n  local fn=function(_, ...)\n   local result=native(drawer,...)\n   if topSettings.LPDU_TOP_DebugLabels==true and result and (method:match('^addTimed')or method:match('^updateTimed'))then\n    local args={...};local update=method:match('^update')~=nil;local offset=update and 1 or 0\n    local id=update and args[1]or result\n    local entry={expires=Now()+args[1+offset],label='TOP | '..(S.debugContext or'Owned draw')..' | '..method:gsub('^addTimed',''):gsub('^updateTimed','')}\n    if method:find('OnEnt',1,true)then entry.entity=args[2+offset]\n    else entry.pos={x=args[2+offset],y=args[3+offset],z=args[4+offset]}end\n    if S.goal and (method:find('Arrow',1,true)or id==S.ring) then entry.pos=S.goal.pos;entry.label='TOP | '..S.goal.key..' | '..method:gsub('^addTimed',''):gsub('^updateTimed','')end\n    S.debugShapes[id]=entry\n   end\n   return result\n  end\n  rawset(proxy,method,fn);return fn\n end})\n S.debugProxies[drawer]=proxy;return proxy\nend\nfunction S.debugTick()\n if topSettings.LPDU_TOP_DebugLabels~=true then return end\n local now=Now();if S.debugNext and now<S.debugNext then return end;S.debugNext=now+500\n local seen={}\n for id,e in pairs(S.debugShapes)do\n  if e.expires<=now then S.debugShapes[id]=nil\n  else\n   local pos=e.pos\n   if e.entity then local ent=TensorCore.mGetEntity(e.entity);pos=ent and ent.pos end\n   if pos then\n    local key=e.label..':'..math.floor(pos.x*2)..':'..math.floor(pos.z*2)\n    if not seen[key]then\n     seen[key]=true\n     AnyoneCore.addTimedWorldText(math.min(550,e.expires-now),e.label,{x=pos.x,y=pos.y+1.5,z=pos.z},0xFFFFFFFF,true,.85)\n    end\n   end\n  end\n end\nend\n\nS.green=S.debugWrap(TensorCore.getStaticDrawer(0xB333FF33,2))\nS.red=S.debugWrap(TensorCore.getStaticDrawer(0x803333FF,2))\nS.flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nfunction S.keep(id)\n if id then S.owned[id]=Now()+180000 end\n return id\nend\nfunction S.clearGoal()\n if S.arrow then S.debugDelete(S.arrow); S.owned[S.arrow]=nil; S.arrow=nil end\n if S.ring then S.debugDelete(S.ring); S.owned[S.ring]=nil; S.ring=nil end\n S.goal=nil;S.ringState=nil\nend\nfunction S.ready()\n local R=AnyoneCore.Roster\n return R and R.current() and R.isReady()\nend\nfunction S.say(text,seconds)\n if S.mode=='panto' and TensorReactions_CurrentTimer>=62 and TensorReactions_CurrentTimer<=109.2 then\n  S.pantoInstruction=S.pantoInstruction or {}\n  S.pantoInstruction.text=string.upper(text)\n  S.pantoInstruction.expires=Now()+(seconds or 3)*1000\n  TensorCore.sendTTS(text)\n else AnyoneCore.Shotcall(text,true,seconds or 3,false) end\nend\nS.calloutVersion=2\nfunction S.go(key,pos,text,seconds,radius)\n if not S.ready() then return false end\n local p=TensorCore.mGetPlayer()\n if not p or not p.pos or not pos then return false end\n if S.issued[key] then return true end\n S.clearGoal()\n local dest={x=pos.x,y=0,z=pos.z}\n S.goal={key=key,pos=dest,expires=Now()+(seconds or 4)*1000,radius=radius or 1}\n S.issued[key]=true\n local arrowOnly=string.find(key,'loop-clear-',1,true)==1 or string.find(key,'panto-clockwise-',1,true)==1 or string.find(key,'panto-return-',1,true)==1 or key=='panto-flame-start' or string.find(key,'p6-exa-middle-',1,true)==1 or key=='p6-meteor-middle' or S.p6ArrowOnlyPending\n S.goal.arrowOnly=arrowOnly\n if not arrowOnly then\n S.ring=S.keep(S.green:addTimedCircle((seconds or 4)*1000,dest.x,dest.y,dest.z,radius or 1,0,false,true,S.flags))\n S.ringState={x=dest.x,y=dest.y,z=dest.z,radius=radius or 1,expires=S.goal.expires}\n end\n if text and text~='' then S.say(text,math.min(seconds or 4,4)) end\n return true\nend\nfunction S.polar(angle,radius)\n local p=TensorCore.mGetPlayer()\n return {x=100+math.sin(angle)*radius,y=0,z=100-math.cos(angle)*radius}\nend\nfunction S.dir(pos)\n local a=math.atan2(pos.x-100,100-pos.z)\n return math.floor((a+math.pi/4)/(math.pi/2))%4\nend\nfunction S.lineNumber(e)\n for id,n in pairs({[3004]=1,[3005]=2,[3006]=3,[3451]=4}) do\n  if TensorCore.hasBuff(e,id) then return n end\n end\nend\nfunction S.pair(priority,number)\n if S.mode=='loop' and topSettings.LPDU_TOP_AM_loop==1 then priority='M1 M2 T1 T2 R1 R2 H1 H2' end\n local R=AnyoneCore.Roster\n if not S.ready() then return end\n local found={}\n for slot in string.gmatch(priority,'%S+') do\n  local e=R.entOf(slot)\n  if e and (S.line[e.id] or S.lineNumber(e))==number then found[#found+1]=e.id end\n end\n if #found~=2 then return end\n local p=TensorCore.mGetPlayer()\n if p.id==found[1] then return 1,found[2] end\n if p.id==found[2] then return 2,found[1] end\nend\nfunction S.pantoPair(number)\n local R=AnyoneCore.Roster\n if not S.ready() then return end\n local pair={}\n for _,slot in ipairs({'T1','M1','R1','H1','T2','M2','R2','H2'}) do\n  local e=R.entOf(slot)\n  if e and (S.line[e.id] or S.lineNumber(e))==number then\n   pair[#pair+1]={id=e.id,group=(slot=='T1' or slot=='M1' or slot=='R1' or slot=='H1') and 1 or 2}\n  end\n end\n if #pair~=2 then return end\n if pair[1].group==pair[2].group then pair[1].group=3-pair[1].group end\n local id=TensorCore.mGetPlayer().id\n if id==pair[1].id then return pair[1].group,pair[2].id end\n if id==pair[2].id then return pair[2].group,pair[1].id end\nend\nself.used=true\n",
+							actionLua = "-- TOP-owned settings. Shared across characters; loaded once per client session.\nlocal topStore=_G.LPDU_TOP_SettingsStore\nif not topStore then\n topStore={values={},path=GetStartupPath()..[[\\LuaMods\\TensorReactions\\TOP-LPDU.settings.tsv]]}\n local f=io.open(topStore.path,'r')\n if f then\n  for line in f:lines()do\n   local k,v=line:match('^(LPDU_TOP_[%w_]+)\\t(.+)$')\n   if k then\n    if v=='true' then topStore.values[k]=true\n    elseif v=='false' then topStore.values[k]=false\n    elseif tonumber(v) then topStore.values[k]=tonumber(v) end\n   end\n  end\n  f:close()\n else\n  -- Optional one-time migration; normal operation never uses Minion settings.\n  local legacy=_G.Settings\n  legacy=type(legacy)=='table' and legacy.FFXIVMINION\n  if type(legacy)=='table' then\n   for k,v in pairs(legacy)do\n    if type(k)=='string' and k:match('^LPDU_TOP_') and (type(v)=='boolean' or type(v)=='number')then topStore.values[k]=v end\n   end\n  end\n end\n function topStore.encode()\n  local keys,lines={},{}\n  for k in pairs(topStore.values)do keys[#keys+1]=k end\n  table.sort(keys)\n  for _,k in ipairs(keys)do lines[#lines+1]=k..'\\t'..tostring(topStore.values[k]) end\n  return table.concat(lines,'\\n')..'\\n'\n end\n function topStore.save()\n  local text=topStore.encode()\n  if text==topStore.saved then return true end\n  local out,err=io.open(topStore.path,'w')\n  if not out then topStore.error=tostring(err);return false end\n  local ok,why=out:write(text)\n  local closed,closeError=out:close()\n  if not ok or not closed then topStore.error=tostring(why or closeError);return false end\n  topStore.saved=text;topStore.error=nil;return true\n end\n _G.LPDU_TOP_SettingsStore=topStore\nend\nlocal topSettings=topStore.values\n\n\nif data.topLpdu then self.used=true return end\nlocal S={owned={},issued={},line={},towers={},towerSeen={},step=0}\ndata.topLpdu=S\n-- Optional diagnostics for this profile's own timed shapes; never wraps global APIs.\nS.debugShapes={};S.debugProxies=setmetatable({},{__mode='k'})\nfunction S.debugDelete(id)\n S.debugShapes[id]=nil\n return Argus.deleteTimedShape(id)\nend\nfunction S.debugWrap(drawer)\n if S.debugProxies[drawer]then return S.debugProxies[drawer]end\n local proxy={}\n setmetatable(proxy,{__index=function(_,method)\n  local native=drawer[method]\n  if type(native)~='function'then return native end\n  local fn=function(_, ...)\n   local result=native(drawer,...)\n   if topSettings.LPDU_TOP_DebugLabels==true and result and (method:match('^addTimed')or method:match('^updateTimed'))then\n    local args={...};local update=method:match('^update')~=nil;local offset=update and 1 or 0\n    local id=update and args[1]or result\n    local entry={expires=Now()+args[1+offset],label='TOP | '..(S.debugContext or'Owned draw')..' | '..method:gsub('^addTimed',''):gsub('^updateTimed','')}\n    if method:find('OnEnt',1,true)then entry.entity=args[2+offset]\n    else entry.pos={x=args[2+offset],y=args[3+offset],z=args[4+offset]}end\n    if S.goal and (method:find('Arrow',1,true)or id==S.ring) then entry.pos=S.goal.pos;entry.label='TOP | '..S.goal.key..' | '..method:gsub('^addTimed',''):gsub('^updateTimed','')end\n    S.debugShapes[id]=entry\n   end\n   return result\n  end\n  rawset(proxy,method,fn);return fn\n end})\n S.debugProxies[drawer]=proxy;return proxy\nend\nfunction S.debugTick()\n if topSettings.LPDU_TOP_DebugLabels~=true then return end\n local now=Now();if S.debugNext and now<S.debugNext then return end;S.debugNext=now+500\n local seen={}\n for id,e in pairs(S.debugShapes)do\n  if e.expires<=now then S.debugShapes[id]=nil\n  else\n   local pos=e.pos\n   if e.entity then local ent=TensorCore.mGetEntity(e.entity);pos=ent and ent.pos end\n   if pos then\n    local key=e.label..':'..math.floor(pos.x*2)..':'..math.floor(pos.z*2)\n    if not seen[key]then\n     seen[key]=true\n     AnyoneCore.addTimedWorldText(math.min(550,e.expires-now),e.label,{x=pos.x,y=pos.y+1.5,z=pos.z},0xFFFFFFFF,true,.85)\n    end\n   end\n  end\n end\nend\n\nS.green=S.debugWrap(TensorCore.getStaticDrawer(0xB333FF33,2))\nS.red=S.debugWrap(TensorCore.getStaticDrawer(0x803333FF,2))\nS.flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nfunction S.keep(id)\n if id then S.owned[id]=Now()+180000 end\n return id\nend\nfunction S.clearGoal()\n if S.arrow then S.debugDelete(S.arrow); S.owned[S.arrow]=nil; S.arrow=nil end\n if S.ring then S.debugDelete(S.ring); S.owned[S.ring]=nil; S.ring=nil end\n S.goal=nil;S.ringState=nil\nend\nfunction S.ready()\n local R=AnyoneCore.Roster\n return R and R.current() and R.isReady()\nend\nfunction S.say(text,seconds)\n if S.pantoTextActive==true then\n  S.pantoInstruction=S.pantoInstruction or {}\n  S.pantoInstruction.text=string.upper(text)\n  S.pantoInstruction.expires=Now()+(seconds or 3)*1000\n  TensorCore.sendTTS(text)\n else AnyoneCore.Shotcall(text,true,seconds or 3,false) end\nend\nS.calloutVersion=3\nfunction S.go(key,pos,text,seconds,radius)\n if not S.ready() then return false end\n local p=TensorCore.mGetPlayer()\n if not p or not p.pos or not pos then return false end\n if S.issued[key] then return true end\n S.clearGoal()\n local dest={x=pos.x,y=0,z=pos.z}\n S.goal={key=key,pos=dest,expires=Now()+(seconds or 4)*1000,radius=radius or 1}\n S.issued[key]=true\n local arrowOnly=string.find(key,'loop-clear-',1,true)==1 or string.find(key,'panto-clockwise-',1,true)==1 or string.find(key,'panto-return-',1,true)==1 or key=='panto-flame-start' or string.find(key,'p6-exa-middle-',1,true)==1 or key=='p6-meteor-middle' or S.p6ArrowOnlyPending\n S.goal.arrowOnly=arrowOnly\n if not arrowOnly then\n S.ring=S.keep(S.green:addTimedCircle((seconds or 4)*1000,dest.x,dest.y,dest.z,radius or 1,0,false,true,S.flags))\n S.ringState={x=dest.x,y=dest.y,z=dest.z,radius=radius or 1,expires=S.goal.expires}\n end\n if text and text~='' then S.say(text,math.min(seconds or 4,4)) end\n return true\nend\nfunction S.polar(angle,radius)\n local p=TensorCore.mGetPlayer()\n return {x=100+math.sin(angle)*radius,y=0,z=100-math.cos(angle)*radius}\nend\nfunction S.dir(pos)\n local a=math.atan2(pos.x-100,100-pos.z)\n return math.floor((a+math.pi/4)/(math.pi/2))%4\nend\nfunction S.lineNumber(e)\n for id,n in pairs({[3004]=1,[3005]=2,[3006]=3,[3451]=4}) do\n  if TensorCore.hasBuff(e,id) then return n end\n end\nend\nfunction S.pair(priority,number)\n if S.mode=='loop' and topSettings.LPDU_TOP_AM_loop==1 then priority='M1 M2 T1 T2 R1 R2 H1 H2' end\n local R=AnyoneCore.Roster\n if not S.ready() then return end\n local found={}\n for slot in string.gmatch(priority,'%S+') do\n  local e=R.entOf(slot)\n  if e and (S.line[e.id] or S.lineNumber(e))==number then found[#found+1]=e.id end\n end\n if #found~=2 then return end\n local p=TensorCore.mGetPlayer()\n if p.id==found[1] then return 1,found[2] end\n if p.id==found[2] then return 2,found[1] end\nend\nfunction S.pantoPair(number)\n local R=AnyoneCore.Roster\n if not S.ready() then return end\n local pair={}\n for _,slot in ipairs({'T1','M1','R1','H1','T2','M2','R2','H2'}) do\n  local e=R.entOf(slot)\n  if e and (S.line[e.id] or S.lineNumber(e))==number then\n   pair[#pair+1]={id=e.id,group=(slot=='T1' or slot=='M1' or slot=='R1' or slot=='H1') and 1 or 2}\n  end\n end\n if #pair~=2 then return end\n if pair[1].group==pair[2].group then pair[1].group=3-pair[1].group end\n local id=TensorCore.mGetPlayer().id\n if id==pair[1].id then return pair[1].group,pair[2].id end\n if id==pair[2].id then return pair[2].group,pair[1].id end\nend\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -75,7 +75,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif S then S.debugContext=\"[Core] Follow personal arrow\"end\nif not S then self.used=true return end\n\nif S.calloutVersion~=2 then\nfunction S.say(text,seconds)\n if S.mode=='panto' and TensorReactions_CurrentTimer>=62 and TensorReactions_CurrentTimer<=109.2 then\n  S.pantoInstruction=S.pantoInstruction or {}\n  S.pantoInstruction.text=string.upper(text)\n  S.pantoInstruction.expires=Now()+(seconds or 3)*1000\n  TensorCore.sendTTS(text)\n else AnyoneCore.Shotcall(text,true,seconds or 3,false) end\nend\nS.calloutVersion=2\nend\nS.debugTick()\nif S.mode=='panto' and S.refreshPantoPuddles then S.refreshPantoPuddles() end\nlocal g=S.goal\nif not g or not S.ready() then self.used=true return end\nlocal remaining=g.expires-Now()\nif remaining<=0 then S.clearGoal(); self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then self.used=true return end\nif g.followEntityID then\n local actor=TensorCore.mGetEntity(g.followEntityID)\n if not actor or not actor.alive or not actor.targetable or not actor.pos then S.clearGoal();self.used=true return end\n g.pos.x=actor.pos.x;g.pos.z=actor.pos.z\nend\ng.pos.y=0\nlocal radius=g.radius or 1\nlocal state=S.ringState\nif S.ring and (not state or state.x~=g.pos.x or state.y~=g.pos.y or state.z~=g.pos.z or state.expires~=g.expires or state.radius~=radius) then\n local updated=S.green:updateTimedCircle(S.ring,remaining,g.pos.x,g.pos.y,g.pos.z,radius,0,false,true,S.flags)\n if not updated then\n  S.owned[S.ring]=nil\n  S.ring=S.keep(S.green:addTimedCircle(remaining,g.pos.x,g.pos.y,g.pos.z,radius,0,false,true,S.flags))\n end\n if not state then state={};S.ringState=state end\n state.x=g.pos.x;state.y=g.pos.y;state.z=g.pos.z;state.radius=radius;state.expires=g.expires\nend\nlocal distance=TensorCore.getDistance2d(p.pos,g.pos)\nif g.suppressArrow or distance<0.7 then\n if S.arrow then S.debugDelete(S.arrow); S.owned[S.arrow]=nil; S.arrow=nil end\n self.used=true return\nend\nlocal h=TensorCore.getHeadingToTarget(p.pos,g.pos)\nlocal tip=math.min(1.5,distance*0.4)\nif S.arrow then\n local updated=S.green:updateTimedArrow(S.arrow,remaining,p.pos.x,0,p.pos.z,h,math.max(0.1,distance-tip),0.6,tip,1.4,0,false,S.flags)\n if not updated then\n  S.owned[S.arrow]=nil\n  S.arrow=S.keep(S.green:addTimedArrow(remaining,p.pos.x,0,p.pos.z,h,math.max(0.1,distance-tip),0.6,tip,1.4,0,false,S.flags))\n end\nelse\n S.arrow=S.keep(S.green:addTimedArrow(remaining,p.pos.x,0,p.pos.z,h,math.max(0.1,distance-tip),0.6,tip,1.4,0,false,S.flags))\nend\nfor id,expiry in pairs(S.owned) do if Now()>expiry then S.owned[id]=nil end end\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif S then S.debugContext=\"[Core] Follow personal arrow\"end\nif not S then self.used=true return end\n\nif S.calloutVersion~=3 then\nfunction S.say(text,seconds)\n if S.pantoTextActive==true then\n  S.pantoInstruction=S.pantoInstruction or {}\n  S.pantoInstruction.text=string.upper(text)\n  S.pantoInstruction.expires=Now()+(seconds or 3)*1000\n  TensorCore.sendTTS(text)\n else AnyoneCore.Shotcall(text,true,seconds or 3,false) end\nend\nS.calloutVersion=3\nend\nS.debugTick()\nif S.mode=='panto' and S.refreshPantoPuddles then S.refreshPantoPuddles() end\nlocal g=S.goal\nif not g or not S.ready() then self.used=true return end\nlocal remaining=g.expires-Now()\nif remaining<=0 then S.clearGoal(); self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then self.used=true return end\nif g.followEntityID then\n local actor=TensorCore.mGetEntity(g.followEntityID)\n if not actor or not actor.alive or not actor.targetable or not actor.pos then S.clearGoal();self.used=true return end\n g.pos.x=actor.pos.x;g.pos.z=actor.pos.z\nend\ng.pos.y=0\nlocal radius=g.radius or 1\nlocal state=S.ringState\nif S.ring and (not state or state.x~=g.pos.x or state.y~=g.pos.y or state.z~=g.pos.z or state.expires~=g.expires or state.radius~=radius) then\n local updated=S.green:updateTimedCircle(S.ring,remaining,g.pos.x,g.pos.y,g.pos.z,radius,0,false,true,S.flags)\n if not updated then\n  S.owned[S.ring]=nil\n  S.ring=S.keep(S.green:addTimedCircle(remaining,g.pos.x,g.pos.y,g.pos.z,radius,0,false,true,S.flags))\n end\n if not state then state={};S.ringState=state end\n state.x=g.pos.x;state.y=g.pos.y;state.z=g.pos.z;state.radius=radius;state.expires=g.expires\nend\nlocal distance=TensorCore.getDistance2d(p.pos,g.pos)\nif g.suppressArrow or distance<0.7 then\n if S.arrow then S.debugDelete(S.arrow); S.owned[S.arrow]=nil; S.arrow=nil end\n self.used=true return\nend\nlocal h=TensorCore.getHeadingToTarget(p.pos,g.pos)\nlocal tip=math.min(1.5,distance*0.4)\nif S.arrow then\n local updated=S.green:updateTimedArrow(S.arrow,remaining,p.pos.x,0,p.pos.z,h,math.max(0.1,distance-tip),0.6,tip,1.4,0,false,S.flags)\n if not updated then\n  S.owned[S.arrow]=nil\n  S.arrow=S.keep(S.green:addTimedArrow(remaining,p.pos.x,0,p.pos.z,h,math.max(0.1,distance-tip),0.6,tip,1.4,0,false,S.flags))\n end\nelse\n S.arrow=S.keep(S.green:addTimedArrow(remaining,p.pos.x,0,p.pos.z,h,math.max(0.1,distance-tip),0.6,tip,1.4,0,false,S.flags))\nend\nfor id,expiry in pairs(S.owned) do if Now()>expiry then S.owned[id]=nil end end\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -367,7 +367,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nS.clearGoal()\nS.mode=\"panto\"; S.line={}; S.step=0; S.towers={}; S.towerSeen={}; S.lastAssignment=nil\nS.pantoReturnPending=nil;S.pantoCheckedPlan=nil;S.pantoStarted=Now();S.pantoMovementAnnounced=false\nself.used=true\n\nS.pantoDirectionSample=nil;S.pantoDirectionLabel=nil;S.pantoDirection=nil\n\nS.pantoOpeningHeading=nil\n\n-- Reset only this mechanic's completion keys, including replay re-entry.\nfor key in pairs(S.issued) do if key:find('panto',1,true)==1 then S.issued[key]=nil end end\nS.pantoSetupComplete=nil;S.pantoGroup=nil;S.pantoAngle=nil;S.pantoCasts={};S.pantoPuddles={}\nS.pantoMissilePlan=nil;S.pantoSpreadUntil=nil;S.pantoLastFlame=nil;S.pantoFlame=nil\nS.pantoDiagnosticState={}\nfunction S.pantoDiagnostic(stage,reason)\n local entry=S.pantoDiagnosticState[stage]\n local now=Now()\n if entry and (entry.reason==reason or now-entry.at<1000) then return end\n S.pantoDiagnosticState[stage]={reason=reason,at=now}\n TensorCore.timelineLogToFile('[TOP Panto] '..stage..': '..reason..'\\n')\nend\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nS.clearGoal()\nS.pantoInstruction=nil;S.pantoTextActive=true;S.pantoTextBoss=eventArgs.entityID\nS.mode=\"panto\"; S.line={}; S.step=0; S.towers={}; S.towerSeen={}; S.lastAssignment=nil\nS.pantoReturnPending=nil;S.pantoCheckedPlan=nil;S.pantoStarted=Now();S.pantoMovementAnnounced=false\nself.used=true\n\nS.pantoDirectionSample=nil;S.pantoDirectionLabel=nil;S.pantoDirection=nil\n\nS.pantoOpeningHeading=nil\n\n-- Reset only this mechanic's completion keys, including replay re-entry.\nfor key in pairs(S.issued) do if key:find('panto',1,true)==1 then S.issued[key]=nil end end\nS.pantoSetupComplete=nil;S.pantoGroup=nil;S.pantoAngle=nil;S.pantoCasts={};S.pantoPuddles={}\nS.pantoMissilePlan=nil;S.pantoSpreadUntil=nil;S.pantoLastFlame=nil;S.pantoFlame=nil\nS.pantoDiagnosticState={}\nfunction S.pantoDiagnostic(stage,reason)\n local entry=S.pantoDiagnosticState[stage]\n local now=Now()\n if entry and (entry.reason==reason or now-entry.at<1000) then return end\n S.pantoDiagnosticState[stage]={reason=reason,at=now}\n TensorCore.timelineLogToFile('[TOP Panto] '..stage..': '..reason..'\\n')\nend\n",
 							conditions = 
 							{
 								
@@ -875,6 +875,60 @@ local tbl =
 				timerEndOffset = 50,
 				timerStartOffset = -10,
 				uuid = "62719ad4-e35d-bd49-ad82-0d35c28d564c",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.topLpdu\nif S then S.pantoInstruction=nil;S.pantoTextActive=false end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"ef9e66f6-4a50-94a9-8509-2b1fd63cf71e",
+									true,
+								},
+							},
+							name = "Clear only Pantokrator text",
+							uuid = "cbe10444-5542-d779-bcb9-9083d57dd72e",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.topLpdu\nreturn S~=nil and S.pantoTextActive==true and eventArgs.entityID==S.pantoTextBoss and not eventArgs.isTargetable",
+							dequeueIfLuaFalse = true,
+							name = "Owned P1 boss departure",
+							uuid = "ef9e66f6-4a50-94a9-8509-2b1fd63cf71e",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "P1",
+				eventType = 26,
+				loop = true,
+				mechanicTime = 15,
+				name = "[P1] Clear Pantokrator text on boss departure",
+				timeRange = true,
+				timelineIndex = 3,
+				timerEndOffset = 1420,
+				timerStartOffset = -15,
+				uuid = "585683d0-fbcd-a836-adeb-655e1dcf538a",
 				version = 2,
 			},
 		},
@@ -1946,7 +2000,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nlocal instruction=S and S.pantoInstruction\nif not S or S.mode~='panto' or not instruction or Now()>=instruction.expires then self.used=true return end\nlocal w,h=GUI:GetScreenSize()\nlocal tw=GUI:CalcTextSize(instruction.text)\nlocal x,y=(w-tw)/2,h*.45\nGUI:AddText(x+1,y+1,0xFF000000,instruction.text)\nGUI:AddText(x,y,0xFF33FF33,instruction.text)\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nlocal instruction=S and S.pantoInstruction\nif not S or S.pantoTextActive~=true or not instruction or Now()>=instruction.expires then self.used=true return end\nlocal w,h=GUI:GetScreenSize()\nlocal tw=GUI:CalcTextSize(instruction.text)\nlocal x,y=(w-tw)/2,h*.45\nGUI:AddText(x+1,y+1,0xFF000000,instruction.text)\nGUI:AddText(x,y,0xFF33FF33,instruction.text)\nself.used=true\n",
 							name = "One current movement instruction",
 							uuid = "55d26ef9-7c79-42ff-9282-a788ee1faa0a",
 							version = 2.1,
@@ -2516,6 +2570,61 @@ local tbl =
 				timerEndOffset = 10,
 				timerStartOffset = -1,
 				uuid = "a5c8a028-a9ea-b7dc-bd44-19abd3822886",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.topLpdu\nif S then S.pantoInstruction=nil;S.pantoTextActive=false end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"db12dcf2-0c3b-2243-84b7-d08e50a0e80f",
+									true,
+								},
+							},
+							name = "Clear only Pantokrator text",
+							uuid = "ec9248b2-e805-d6e3-a52b-4e57cff6c9c3",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventSpellID = 31504,
+							name = "Diffuse Wave Cannon hit",
+							uuid = "db12dcf2-0c3b-2243-84b7-d08e50a0e80f",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "P1",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 108,
+				name = "[P1] Clear completed Pantokrator instruction",
+				timeRange = true,
+				timelineIndex = 25,
+				timerEndOffset = 4,
+				timerStartOffset = -4,
+				uuid = "ceb723b5-8c37-7f71-b05d-d7da0f649c41",
 				version = 2,
 			},
 		},

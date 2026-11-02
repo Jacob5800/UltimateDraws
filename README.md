@@ -74,6 +74,8 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- Pantokrator clears only its completed instruction on the finishing hit or early boss departure. Removed the text-routing time cutoff; subsequent AnyoneCore text and TTS remain enabled. (02-11-2026)
+
 - Settings remember the main window and expanded sections across reloads. Fixed later callouts playing audio without green text when Pantokrator display state remained active. (02-11-2026)
 
 - P4 previews the next personal stack in pale green, strengthens imminent proteans, and clears resolved bait guidance. P5 shows both Solar Ray target predictions, an early middle-laser preview/countdown, and only personal future arm baits. Sigma hand destinations match the recorded marked sides; Blind Faith guides everyone south of the boss from 996s. Replay confirmation is pending. (02-11-2026)
@@ -90,8 +92,6 @@ TEA: Coming soon by Ton.
 - P1 tether pickup follows LPDU north-clockwise/west-counterclockwise priority instead of shortest travel. Opening Pantokrator guidance takes a clockwise sidestep within the assigned north/south half when cones cover the stack; already-safe players stay with their group. (01-11-2026)
 
 - Sigma no longer sends players to the middle after towers; assigned hand baiters receive their calculated destination earlier once rotation is known. Omega's second far-bounce west-wall draw now matches the arena-west callout. Replay confirmation remains pending. (01-11-2026)
-
-- P2 moves non-tanks onto the live male boss after Sagittarius Arrow is baited, avoiding the old south-edge destination and tank tether conflicts. Delta arm previews show only the first four yellow lines; later locked shots retain their immediate danger indicator. (01-11-2026)
 
 
 ### UCOB: LPDU
