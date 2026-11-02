@@ -11110,7 +11110,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() or S.blindFaithDone then self.used=true return end\nlocal boss\nfor _,content in ipairs({12257,12258})do\n for _,e in pairs(TensorCore.entityList('contentid='..content))do\n  if e.pos and Argus.getEntityModel(e)==15720 then boss=e;break end\n end\n if boss then break end\nend\nif not boss then self.used=true return end\nS.go('blind-faith-south',{x=boss.pos.x,y=0,z=boss.pos.z+4},'Go directly south of boss, prepare knockback',5,1)\nif S.goal and S.goal.key=='blind-faith-south' then S.goal.pos.x=boss.pos.x;S.goal.pos.z=boss.pos.z+4 end\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nif not S.ready() or S.blindFaithDone then self.used=true return end\nlocal boss\nfor _,content in ipairs({12257,12258})do\n for _,e in pairs(TensorCore.entityList('contentid='..content))do\n  if e.pos and Argus.getEntityModel(e)==15720 then boss=e;break end\n end\n if boss then break end\nend\nif not boss then self.used=true return end\nS.go('blind-faith-south',{x=boss.pos.x,y=0,z=boss.pos.z+4},'Go directly south of boss, prepare knockback',6,1)\nif S.goal and S.goal.key=='blind-faith-south' then S.goal.pos.x=boss.pos.x;S.goal.pos.z=boss.pos.z+4 end\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -11147,7 +11147,7 @@ local tbl =
 				timeRange = true,
 				timelineIndex = 210,
 				timerEndOffset = 1,
-				timerStartOffset = -2.5,
+				timerStartOffset = -3.5,
 				uuid = "70402f05-4aa2-38b5-b6dc-4d14b417fdeb",
 				version = 2,
 			},

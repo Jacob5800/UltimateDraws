@@ -1,4 +1,4 @@
-Hi please add https://github.com/Jacob5800/UltimateDraws this to your AnyoneCore third party sources.
+﻿Hi please add https://github.com/Jacob5800/UltimateDraws this to your AnyoneCore third party sources.
 
 The draws in here are mostly centered around LPDU strats in the Europe region but may work for other regions, feel free to make your own edits.
 
@@ -74,6 +74,8 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- Blind Faith south-position guidance starts one second earlier, while retaining its coverage through the knockback. (02-11-2026)
+
 - All Pantokrator calls use normal visible AnyoneCore text and TTS again. The south-of-male bait marker holds until the actual bait cast or replacement guidance; Sagittarius countdowns sit at the beam midpoint inside the arena. Broken green tethers say only Take bounce; Sigma hand baits wait for laser completion, and Delta previews show three lines. Replay checks remain pending. (02-11-2026)
 
 - Pantokrator clears only its completed instruction on the finishing hit or early boss departure. Removed the text-routing time cutoff; subsequent AnyoneCore text and TTS remain enabled. (02-11-2026)
@@ -91,7 +93,6 @@ TEA: Coming soon by Ton.
 
 - Pantokrator missile guidance moves ahead of the original assigned stack, waits for the next personal puddle after the missile, then returns to that same party. Live cone/puddle route checks withhold ambiguous or opposite-side arrows. Replay confirmation remains pending. (01-11-2026)
 
-- P1 tether pickup follows LPDU north-clockwise/west-counterclockwise priority instead of shortest travel. Opening Pantokrator guidance takes a clockwise sidestep within the assigned north/south half when cones cover the stack; already-safe players stay with their group. (01-11-2026)
 
 
 ### UCOB: LPDU
