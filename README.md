@@ -1,4 +1,4 @@
-﻿Hi please add https://github.com/Jacob5800/UltimateDraws this to your AnyoneCore third party sources.
+Hi please add https://github.com/Jacob5800/UltimateDraws this to your AnyoneCore third party sources.
 
 The draws in here are mostly centered around LPDU strats in the Europe region but may work for other regions, feel free to make your own edits.
 
@@ -74,6 +74,7 @@ TEA: Coming soon by Ton.
 
 ### TOP: LPDU
 
+- P6 keeps safe exaflare escape waypoints stable and releases the middle bait when puddles appear, without adding movement delays. Beam spreads preview faintly before lanes clear, then give movement/hold guidance; Wild Charge gets an explicit stack call, Cosmo dodge markers are blue, and selected tanks receive LB3 voice guidance. P1 returns to the assigned group and previews final positions earlier; final Hello World rots gain expiry outlines, Sigma staging calls are restored, and Omega bounce lines show only local links. Replay checks remain pending. (02-11-2026)
 - Blind Faith south-position guidance starts one second earlier, while retaining its coverage through the knockback. (02-11-2026)
 
 - All Pantokrator calls use normal visible AnyoneCore text and TTS again. The south-of-male bait marker holds until the actual bait cast or replacement guidance; Sagittarius countdowns sit at the beam midpoint inside the arena. Broken green tethers say only Take bounce; Sigma hand baits wait for laser completion, and Delta previews show three lines. Replay checks remain pending. (02-11-2026)
@@ -90,10 +91,6 @@ TEA: Coming soon by Ton.
 - Pantokrator missile guidance now follows the tight pair in the original party when one member is spreading, including melee-range stacks. Personal missile plans remain active through the expected hit, and generic rotation arrows cannot override them. Replay confirmation is pending. (02-11-2026)
 
 - P1 now shows a personal green beam while holding the assigned Blaster tether. Pantokrator gives “Preposition parties” and provisional north/south arrows at 62s, then corrects by numbered assignment. Opening movement and missile setup retry missing assignments; cone/puddle route checks remain. Replay checks are pending. (02-11-2026)
-
-- Pantokrator missile guidance moves ahead of the original assigned stack, waits for the next personal puddle after the missile, then returns to that same party. Live cone/puddle route checks withhold ambiguous or opposite-side arrows. Replay confirmation remains pending. (01-11-2026)
-
-
 
 ### UCOB: LPDU
 
