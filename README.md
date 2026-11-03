@@ -50,6 +50,7 @@ TEA: Coming soon.
 
 ### TOP: LPDU
 
+- Future P4 protean beams use faint outlines without fills, restoring strong red during their final 1.2 seconds. Geometry and hit cleanup are unchanged. Debug draw labels start off each client session and remain manually available. Replay readability checks are pending. (03-11-2026)
 - Sigma confirms your own Hyper Pulse hand hit with Hand bait done, hold for bounces, clearing the completed bait arrow while retaining final-bounce return timing. Replay confirmation remains pending. (03-11-2026)
 - P6 keeps safe exaflare escape waypoints stable and releases the middle bait when puddles appear, without adding movement delays. Beam spreads preview faintly before lanes clear, then give movement/hold guidance; Wild Charge gets an explicit stack call, Cosmo dodge markers are blue, and selected tanks receive LB3 voice guidance. P1 returns to the assigned group and previews final positions earlier; final Hello World rots gain expiry outlines, Sigma staging calls are restored, and Omega bounce lines show only local links. Replay checks remain pending. (02-11-2026)
 - Blind Faith south-position guidance starts one second earlier, while retaining its coverage through the knockback. (02-11-2026)
@@ -64,8 +65,6 @@ TEA: Coming soon.
 
 - Cosmo Dive hides the non-tank movement arrow inside the safe stack area while retaining its circle and countdown; resolved Cosmo Arrow lanes clear on their matching hit. (02-11-2026)
 - Pantokrator keeps safe spread destinations stable, shows one current instruction, dims unrelated puddles and calls the missile-to-puddle return; non-tanks preposition south of the male for Limitless Arrow, and rot pickup follows the assigned donor until transfer. (02-11-2026)
-
-- Pantokrator missile guidance now follows the tight pair in the original party when one member is spreading, including melee-range stacks. Personal missile plans remain active through the expected hit, and generic rotation arrows cannot override them. Replay confirmation is pending. (02-11-2026)
 
 ### UCOB: LPDU
 
