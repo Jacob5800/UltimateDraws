@@ -50,21 +50,16 @@ TEA: Coming soon.
 
 ### TOP: LPDU
 
+- Sigma uses rotation, hand-bait and hold instructions, retaining the hand destination circle on arrival. Omega labels each set and personal assignment, switches between move/hold guidance, and calls the return after bounces. Optional Far World adjustment keeps a valid side and previews alternatives only when live receiver spacing allows. Hello World outlines both eligible towers in normal and caster-uptime modes; only the assigned tower gets an arrow. Replay checks remain pending. (03-11-2026)
 - Future P4 protean beams use faint outlines without fills, restoring strong red during their final 1.2 seconds. Geometry and hit cleanup are unchanged. Debug draw labels start off each client session and remain manually available. Replay readability checks are pending. (03-11-2026)
 - Sigma confirms your own Hyper Pulse hand hit with Hand bait done, hold for bounces, clearing the completed bait arrow while retaining final-bounce return timing. Replay confirmation remains pending. (03-11-2026)
 - P6 keeps safe exaflare escape waypoints stable and releases the middle bait when puddles appear, without adding movement delays. Beam spreads preview faintly before lanes clear, then give movement/hold guidance; Wild Charge gets an explicit stack call, Cosmo dodge markers are blue, and selected tanks receive LB3 voice guidance. P1 returns to the assigned group and previews final positions earlier; final Hello World rots gain expiry outlines, Sigma staging calls are restored, and Omega bounce lines show only local links. Replay checks remain pending. (02-11-2026)
 - Blind Faith south-position guidance starts one second earlier, while retaining its coverage through the knockback. (02-11-2026)
-
 - All Pantokrator calls use normal visible AnyoneCore text and TTS again. The south-of-male bait marker holds until the actual bait cast or replacement guidance; Sagittarius countdowns sit at the beam midpoint inside the arena. Broken green tethers say only Take bounce; Sigma hand baits wait for laser completion, and Delta previews show three lines. Replay checks remain pending. (02-11-2026)
-
 - Pantokrator clears only its completed instruction on the finishing hit or early boss departure. Removed the text-routing time cutoff; subsequent AnyoneCore text and TTS remain enabled. (02-11-2026)
-
 - Settings remember the main window and expanded sections across reloads. Fixed later callouts playing audio without green text when Pantokrator display state remained active. (02-11-2026)
-
 - P4 previews the next personal stack in pale green, strengthens imminent proteans, and clears resolved bait guidance. P5 shows both Solar Ray target predictions, an early middle-laser preview/countdown, and only personal future arm baits. Sigma hand destinations match the recorded marked sides; Blind Faith guides everyone south of the boss from 996s. Replay confirmation is pending. (02-11-2026)
-
 - Cosmo Dive hides the non-tank movement arrow inside the safe stack area while retaining its circle and countdown; resolved Cosmo Arrow lanes clear on their matching hit. (02-11-2026)
-- Pantokrator keeps safe spread destinations stable, shows one current instruction, dims unrelated puddles and calls the missile-to-puddle return; non-tanks preposition south of the male for Limitless Arrow, and rot pickup follows the assigned donor until transfer. (02-11-2026)
 
 ### UCOB: LPDU
 
