@@ -9895,7 +9895,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif S then S.debugContext=\"[P5 Sigma] Final bounce return middle\"end\nif not S then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nlocal ownHit=false\nfor _,id in ipairs(eventArgs.hitTargets) do if p and id==p.id then ownHit=true;break end end\nif ownHit then\n if S.sigma and S.sigma.laser then S.sigma.laser.personalDone=true end\n if S.goal and string.find(S.goal.key,'sigma-laser-',1,true)==1 then S.clearGoal() end\nend\nif eventArgs.spellID~=31625 and eventArgs.spellID~=31626 then self.used=true return end\nlocal s=S.sigma\nif not s or not s.laser or (s.lastWorldHit and Now()-s.lastWorldHit<500) then self.used=true return end\ns.lastWorldHit=Now();s.worldHits=(s.worldHits or 0)+1\nif s.worldHits==3 then\n s.laser=nil\n S.go('sigma-worlds-complete',{x=100,z=100},'Bounces done, go middle',3,1.2)\nend\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif S then S.debugContext=\"[P5 Sigma] Final bounce return middle\"end\nif not S then self.used=true return end\nif not S.sigma or not S.sigma.laser then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nlocal ownHit=false\nfor _,id in ipairs(eventArgs.hitTargets) do if p and id==p.id then ownHit=true;break end end\nif ownHit then\n if S.sigma and S.sigma.laser then\n  local l=S.sigma.laser\n  if eventArgs.spellID==31602 and not l.handHitAnnounced then\n   l.handHitAnnounced=true;S.say('Hand bait done, hold for bounces',3)\n  end\n  l.personalDone=true\n end\n if S.goal and string.find(S.goal.key,'sigma-laser-',1,true)==1 then S.clearGoal() end\nend\nif eventArgs.spellID~=31625 and eventArgs.spellID~=31626 then self.used=true return end\nlocal s=S.sigma\nif not s or not s.laser or (s.lastWorldHit and Now()-s.lastWorldHit<500) then self.used=true return end\ns.lastWorldHit=Now();s.worldHits=(s.worldHits or 0)+1\nif s.worldHits==3 then\n s.laser=nil\n S.go('sigma-worlds-complete',{x=100,z=100},'Bounces done, go middle',3,1.2)\nend\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -9917,7 +9917,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return eventArgs.spellID==31625 or eventArgs.spellID==31626 or eventArgs.spellID==33040 or eventArgs.spellID==33041",
+							conditionLua = "return eventArgs.spellID==31625 or eventArgs.spellID==31626 or eventArgs.spellID==33040 or eventArgs.spellID==33041 or eventArgs.spellID==31602",
 							dequeueIfLuaFalse = true,
 							eventArgType = 2,
 							eventSpellID = 31626,
