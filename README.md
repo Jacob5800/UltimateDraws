@@ -14,35 +14,11 @@ DSR: [Lpdu draws(beta)](TimelineReactions/DSR/Lpdu%20draws%28beta%29.lua) — LP
 
 TOP: LPDU 
 
-TEA: Coming soon by Ton.
+TEA: Coming soon.
 
 ## Changelog
 
-### Shinryu Unreal: AutoSim
 
-- Shared Shinryu Unreal AutoSim now disables AnyoneCore’s Prepull Helper during its precombat setup. The setting stays off until manually re-enabled. (01-11-2026)
-
-- Added [AA] Autosim - Shinryu Unreal, inheriting Shinryumain, with shared phase forecasts and live transition corrections. Optional Ginryu/Tail DoT blacklists preserve existing entries; hearts and wings remain eligible for DoTs. The final wing segment keeps AoE/Smart AoE off until wipe/zone cleanup and uses an adjustable short kill forecast for each selected wing. Caster-movement and optional kill/buff settings are saved. Replay checks remain pending. (01-11-2026)
-
-### FRU: AutoSim
-
-- Shared FRU AutoSim now disables AnyoneCore’s Prepull Helper during its precombat setup. The setting remains off until manually re-enabled. (01-11-2026)
-
-### Q40: AutoSim
-
-- Added shared AutoSim support to q40, with countdown/early-pull setup, boss-cast timing corrections, conservative caster movement forecasts and saved settings. Automatic kill estimation stays enabled by default; optional kill-time and party-buff forecasts are configurable. Existing targeting and cooldown usage remain unchanged. Replay checks are pending. (01-11-2026)
-
-### Dungeons: AutoSim
-
-- dungeon lol now supports all AutoSim jobs across its nine dungeon plans. Boss timing, targetability, optional kill estimates and raid-buff forecasts are shared; caster movement applies to casting jobs, while Ley Lines returns and Ley Lines/Manafont pooling remain BLM-only. Cross-job replay checks remain pending. (01-11-2026)
-
-### Prepull Helper
-
-- Alliance raid, dungeon lol, and the shared UCOB/UWU AutoSim profiles now disable AnyoneCore’s Prepull Helper on zone entry/countdown for general profiles and during the short precombat setup window for AutoSim. The setting remains off until manually re-enabled. (01-11-2026)
-
-### Alliance Raid: AutoSim
-
-- Generalized Alliance Raid AutoSim support: caster cleave corrections cover casting roles, Ark Angels preserves the active ACR's AoE options, Fafnir add retargeting is job-neutral, and knockback assistance chooses Surecast or Arm's Length by role. Shared kill/downtime/stun estimates remain unchanged. (01-11-2026)
 
 ### UCOB: LPDU mitigation
 
