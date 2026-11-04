@@ -24,14 +24,19 @@ TEA: Coming soon.
 
 - Meso Terminal isolates the selected headsman, blocks BRD/BLM DoTs on Hellmakers, and optionally targets the unique Hellmaker in your current cell before returning to your headsman. Covers all four cells and logs targeting decisions. Updated encounter estimate defaults to 140/140/226s. Replay confirmation remains pending. (04-11-2026)
 
+### Shinryu Unreal: Draws
+
+- Added a Surecast Hotbar request in the final five seconds of Tidal Wave, independent of AutoSim. Replay confirmation remains pending. (05-11-2026)
+
 ### Shinryu Unreal: Shared AutoSim
+
+- Added optional automatic targeting for Tail/Heart/Shinryu, highest-HP large dragons before small adds, and the first-casting final wing before the other wing and boss. Includes cast/lifetime checks, melee-range checks, diagnostics, and an optional caster-only two-wing LB with targeting protection, off by default. Settings hide after 15 seconds of combat. (05-11-2026)
+
+- Calibrated untouched P1/adds defaults to 276s/64s against a death-free clear, preserving custom timings and live phase corrections. Updated conservative movement forecasts for adds and late body repositioning. (05-11-2026)
 
 - Updated the P1 transition estimate to 280s and adds estimate to 65s for a slightly faster average pace. Previous default values migrate once; custom timings are preserved. Actual transitions still correct forecasts. (04-11-2026)
 
 - Added a Dark Matter button-mash Stun forecast so AutoSim accounts for being unable to use actions during the transition. Actual Dark Matter casts correct its timing; existing target downtime remains separate. Replay confirmation remains pending. (04-11-2026)
-
-
-
 
 ### UCOB: LPDU mitigation
 

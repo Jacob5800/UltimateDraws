@@ -72,6 +72,184 @@ local tbl =
 		{
 			data = 
 			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "data.shinryuDrawSurecast={deadline=Now()+(eventArgs.channelTimeMax+.3)*1000}\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"ba834932-b166-a96f-8cfb-828c8c51449d",
+									true,
+								},
+								
+								{
+									"d713a18c-e544-d67b-ab05-6e0f3bf47045",
+									true,
+								},
+								
+								{
+									"052d02a5-71ac-dba9-9016-4930de66353d",
+									true,
+								},
+							},
+							name = "Capture native Tidal Wave deadline",
+							uuid = "457ddecd-f8b2-42fd-a923-3c3b42aeb6dc",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "self.used=true",
+							conditions = 
+							{
+								
+								{
+									"ba834932-b166-a96f-8cfb-828c8c51449d",
+									true,
+								},
+								
+								{
+									"d713a18c-e544-d67b-ab05-6e0f3bf47045",
+									true,
+								},
+								
+								{
+									"052d02a5-71ac-dba9-9016-4930de66353d",
+									true,
+								},
+								
+								{
+									"1f19c101-f654-917e-8dbb-be7555d44ca0",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Finish expired cast window",
+							uuid = "adcdef21-8b64-4173-80de-66684345cf5a",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"ba834932-b166-a96f-8cfb-828c8c51449d",
+									true,
+								},
+								
+								{
+									"d713a18c-e544-d67b-ab05-6e0f3bf47045",
+									true,
+								},
+								
+								{
+									"052d02a5-71ac-dba9-9016-4930de66353d",
+									true,
+								},
+								
+								{
+									"22866987-9048-4959-b476-60c9380b67a0",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_Hotbar_Surecast",
+							uuid = "041d3b08-dea5-2294-b712-59f9635b3edb",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							localmapid = 1372,
+							uuid = "ba834932-b166-a96f-8cfb-828c8c51449d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventSpellID = 50261,
+							uuid = "d713a18c-e544-d67b-ab05-6e0f3bf47045",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 5640,
+							uuid = "052d02a5-71ac-dba9-9016-4930de66353d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.shinryuDrawSurecast\nreturn s and Now()>=s.deadline",
+							name = "Tidal cast window expired",
+							uuid = "1f19c101-f654-917e-8dbb-be7555d44ca0",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.shinryuDrawSurecast\nif not s then return false end\nlocal left=s.deadline-Now()\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nreturn left>300 and left<=5000 and e and e.castinginfo and e.castinginfo.channelingid==50261",
+							name = "Tidal Wave final 5 seconds",
+							uuid = "22866987-9048-4959-b476-60c9380b67a0",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Shinryu Unreal",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 21.3,
+				name = "Surecast - Tidal Wave",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 1178.7,
+				timerStartOffset = -21.3,
+				uuid = "daa08d60-8bba-121b-a3b8-4275d72b937b",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "DPS Mitigation",
 				uuid = "5d86b820-4c06-73ac-8833-37b5375f5684",
