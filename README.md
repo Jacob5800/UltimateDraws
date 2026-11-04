@@ -18,6 +18,12 @@ TEA: Coming soon.
 
 ## Changelog
 
+### Dungeons: Shared AutoSim
+
+- All nine dungeons in `dungeon lol` now hold new offensive cooldowns on the final trash pack and at 8% actual-boss HP, with a shared adjustable threshold. Includes Radiant Finale; ordinary damage and songs continue. Previous temporary settings restore after combat/wipe. (04-11-2026)
+
+- Meso Terminal isolates the selected headsman, blocks BRD/BLM DoTs on Hellmakers, and optionally targets the unique Hellmaker in your current cell before returning to your headsman. Covers all four cells and logs targeting decisions. Updated encounter estimate defaults to 140/140/226s. Replay confirmation remains pending. (04-11-2026)
+
 ### Shinryu Unreal: Shared AutoSim
 
 - Updated the P1 transition estimate to 280s and adds estimate to 65s for a slightly faster average pace. Previous default values migrate once; custom timings are preserved. Actual transitions still correct forecasts. (04-11-2026)
