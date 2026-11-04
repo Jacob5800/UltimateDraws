@@ -57,6 +57,7 @@ TEA: Coming soon.
 
 ### TOP: LPDU
 
+- Puddle escape guidance retains one safe waypoint through arrival and hazard updates, replacing it only when invalid; later explosions influence the next choice. Second-hand guidance may start about two seconds earlier when the route is clear, retaining its resolution deadline. Meteor spread guidance starts on puddle placement. R2 receives a role-based limit-break alert at the logged Meteor cast window. Replay checks remain pending. (04-11-2026)
 - Sigma uses rotation, hand-bait and hold instructions, retaining the hand destination circle on arrival. Omega labels each set and personal assignment, switches between move/hold guidance, and calls the return after bounces. Optional Far World adjustment keeps a valid side and previews alternatives only when live receiver spacing allows. Hello World outlines both eligible towers in normal and caster-uptime modes; only the assigned tower gets an arrow. Replay checks remain pending. (03-11-2026)
 - Future P4 protean beams use faint outlines without fills, restoring strong red during their final 1.2 seconds. Geometry and hit cleanup are unchanged. Debug draw labels start off each client session and remain manually available. Replay readability checks are pending. (03-11-2026)
 - Sigma confirms your own Hyper Pulse hand hit with Hand bait done, hold for bounces, clearing the completed bait arrow while retaining final-bounce return timing. Replay confirmation remains pending. (03-11-2026)
@@ -66,7 +67,6 @@ TEA: Coming soon.
 - Pantokrator clears only its completed instruction on the finishing hit or early boss departure. Removed the text-routing time cutoff; subsequent AnyoneCore text and TTS remain enabled. (02-11-2026)
 - Settings remember the main window and expanded sections across reloads. Fixed later callouts playing audio without green text when Pantokrator display state remained active. (02-11-2026)
 - P4 previews the next personal stack in pale green, strengthens imminent proteans, and clears resolved bait guidance. P5 shows both Solar Ray target predictions, an early middle-laser preview/countdown, and only personal future arm baits. Sigma hand destinations match the recorded marked sides; Blind Faith guides everyone south of the boss from 996s. Replay confirmation is pending. (02-11-2026)
-- Cosmo Dive hides the non-tank movement arrow inside the safe stack area while retaining its circle and countdown; resolved Cosmo Arrow lanes clear on their matching hit. (02-11-2026)
 
 ### UCOB: LPDU
 
