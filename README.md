@@ -18,6 +18,11 @@ TEA: Coming soon.
 
 ## Changelog
 
+### Shinryu Unreal: Shared AutoSim
+
+- Added a Dark Matter button-mash Stun forecast so AutoSim accounts for being unable to use actions during the transition. Actual Dark Matter casts correct its timing; existing target downtime remains separate. Replay confirmation remains pending. (04-11-2026)
+
+
 
 
 ### UCOB: LPDU mitigation
