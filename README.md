@@ -20,6 +20,8 @@ TEA: Coming soon.
 
 ### Shinryu Unreal: Shared AutoSim
 
+- Updated the P1 transition estimate to 280s and adds estimate to 65s for a slightly faster average pace. Previous default values migrate once; custom timings are preserved. Actual transitions still correct forecasts. (04-11-2026)
+
 - Added a Dark Matter button-mash Stun forecast so AutoSim accounts for being unable to use actions during the transition. Actual Dark Matter casts correct its timing; existing target downtime remains separate. Replay confirmation remains pending. (04-11-2026)
 
 
