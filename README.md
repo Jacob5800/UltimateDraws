@@ -74,25 +74,16 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### UWU: Shared AutoSim
 
+- Spiny Plume now uses a live target-lifetime estimate, refreshed while targeted. Existing stack gates and DoT exclusions remain; Infernal Nail forecasts are unchanged. (05-11-2026)
 - Corrected entity lookups for Spiny/nail targeting and the Ifrit Triplecast hold. Ready Spiny now counts as attackable during Garuda’s first jump without bypassing its stack gate. Nail diagnostics distinguish capture, target requests and confirmed targets; physical nail cleanup restores saved AoE choices. Replay confirmation remains pending. (05-11-2026)
-
 - Caster LB stun forecasts now require Beyond Limits ownership instead of assuming R2. Countdown cancellation also clears the caster/healer encounter state. Actual LB cast protection remains in place; owner replay confirmation is pending. (05-11-2026)
-
 - Extended Ultima Feather Rain bait forecasts to the observed final primal roulette, respecting its movement toggle. Caster/healer encounter caches now clear on wipe and map departure. Native replay confirmation remains pending. (05-11-2026)
-
 - Added caster/healer movement forecasts through both awakened Landslide waves on Titan. Ultima’s two pre-Annihilation Feather Rain baits and final Annihilation bait now use short departure-animation forecasts to cover the missing steps. Native replay confirmation remains pending. (05-11-2026)
-
 - All Titan Weight of the Land waves now check actual puddle overlap for casters and healers, requesting movement only while threatened and releasing it once clear. Includes nearby players’ puddles and transition diagnostics. Existing fixed movement windows remain unchanged; replay confirmation remains pending. (05-11-2026)
-
 - Updated default phase estimates to Garuda 130s, Ifrit 100s and Titan 125s; Ultima’s late kill forecast now uses 137.5s after the Suppression gaol anchor to match the reviewed clear. Manual estimates, slower-group extras and live resyncs remain available. (05-11-2026)
-
 - BRD/ranged-support DoT forecasts now exclude Ultima disappearance windows in both countdown and early-pull setup, while keeping the boss lifetime continuous. Existing caster forecasts and movement remain unchanged; BRD replay confirmation remains pending. (05-11-2026)
-
 - Added a caster/physical-ranged Fake melee option that removes planned eruption-bait movement for Ifrit and Ultima while preserving other mechanics. Optional phase-time controls stay hidden until enabled and initially show the shared 135/101/130s defaults; settings apply next pull. (05-11-2026)
-
 - Unified Titan's estimate to 130s from becoming targetable for all role plans, including countdown and fallback setup. Live phase resyncs and slower-group adjustments remain active. (05-11-2026)
-
-- Unified all role plans to Garuda 135s from pull and Ifrit 101s from becoming targetable, including countdown and fallback setup. Live resyncs and optional slower-group adjustments remain active. Physical plans skip a predicted Ifrit dash beyond the expected phase end. (05-11-2026)
 
 ### DSR: LPDU (Beta)
 
