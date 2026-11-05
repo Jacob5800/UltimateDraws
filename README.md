@@ -240,3 +240,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 ### TOP: LPDU mitigations
 
 - Made TOPReactions/lpdu mits eligible for Optifine users by removing core Settings access from Solar Ray tank-plan conditions. They now share independent TOP-LPDU.lua preferences with the draw GUI; existing plan defaults, timings and ACR requests are unchanged. (05-11-2026)
+
+### UWU: LPDU mitigations
+
+- Checked OwOReactions/LPDU mits for Optifine users: no owned core Settings, direct file I/O or separate saved preference panel was found. Editor choices remain in the reaction profile file. (05-11-2026)
