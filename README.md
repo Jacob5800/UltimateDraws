@@ -104,6 +104,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### TOP: AutoSim
 
+- Checked [AA] Autosim - TOP (5): already eligible for Optifine users without an owned core Settings or file-I/O dependency. It exposes no separate saved preference panel; reaction-editor choices remain in the profile file. (05-11-2026)
+
 - Shared TOP AutoSim now disables AnyoneCore’s Prepull Helper during its precombat setup. The setting remains off until manually re-enabled. (01-11-2026)
 
 - Added [AA] Autosim - TOP (5). P6 add blacklisting handles both Cosmo Meteors and Comets, once per content ID per pull. This profile forecasts LB downtime but does not automatically use LB. (31-10-2026)
