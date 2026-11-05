@@ -51,6 +51,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### Shinryu Unreal: Draws
 
+- Checked Shinryumain: no owned core Settings or direct file-I/O dependency was found, and no separate settings file is required. Anyone-owned inherited reactions are outside this check. (05-11-2026)
+
 - Added a Surecast Hotbar request in the final five seconds of Tidal Wave, independent of AutoSim. Replay confirmation remains pending. (05-11-2026)
 
 ### Shinryu Unreal: Shared AutoSim
