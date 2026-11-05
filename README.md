@@ -74,6 +74,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### UWU: Shared AutoSim
 
+- Extended Ultima Feather Rain bait forecasts to the observed final primal roulette, respecting its movement toggle. Caster/healer encounter caches now clear on wipe and map departure. Native replay confirmation remains pending. (05-11-2026)
+
 - Added caster/healer movement forecasts through both awakened Landslide waves on Titan. Ultima’s two pre-Annihilation Feather Rain baits and final Annihilation bait now use short departure-animation forecasts to cover the missing steps. Native replay confirmation remains pending. (05-11-2026)
 
 - All Titan Weight of the Land waves now check actual puddle overlap for casters and healers, requesting movement only while threatened and releasing it once clear. Includes nearby players’ puddles and transition diagnostics. Existing fixed movement windows remain unchanged; replay confirmation remains pending. (05-11-2026)
@@ -91,8 +93,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 - Added Spiny Plume focus after two Thermal Low stacks, with cast-safe swaps and return to Garuda. Optional guarded one-stack focus requires a known lifetime estimate above the remaining stack interval plus a margin. Includes GUI controls and decision diagnostics; replay confirmation remains pending. (05-11-2026)
 
 - Optional caster nail lifetime check stays on Ifrit when the next required kill-order nail is predicted to die before the adjustable cast budget (default 2.8s). Preserves kill order, softening and active casts; unknown estimates retain normal targeting. Gaols are unchanged. Replay confirmation remains pending. (05-11-2026)
-
-- Draws LPDU's separate Lua nail controller now also yields to shared AutoSim, closing the remaining duplicate nail-targeting path. Standalone LPDU nail targeting remains available. Replay confirmation remains pending. (05-11-2026)
 
 ### DSR: LPDU (Beta)
 

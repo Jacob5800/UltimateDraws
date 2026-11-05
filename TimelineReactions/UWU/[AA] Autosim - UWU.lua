@@ -1188,7 +1188,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local T=_G.UWU_BLM_TemporaryState\nif T and T.gaolPriorityOptions then\n for k,v in pairs(T.gaolPriorityOptions) do _G[k]=v end\n T.gaolPriorityOptions=nil\nend\nlocal ownedTriple=_G.UWU_BLM_TemporaryState\nif ownedTriple and ownedTriple.tripleHold then\n TensorCore.API.TensorACR.holdActionUntil(7421,Now())\n ownedTriple.tripleHold=nil\nend\nlocal ownedLey=_G.UWU_BLM_TemporaryState\nif ownedLey and ownedLey.leyHold then\n TensorCore.API.TensorACR.holdActionUntil(3573,Now())\n ownedLey.leyHold=nil\nend\nlocal T=_G.UWU_BLM_TemporaryState\nif T then\n if T.options then for k,v in pairs(T.options) do _G[k]=v end end\n if T.gaols then TensorCore.API.TensorACR.deleteAOEBlacklistEntry(1804) end\n _G.UWU_BLM_TemporaryState=nil\nend\nTensorCore.API.TensorACR.holdActionUntil(846,Now())\nself.used=true",
+							actionLua = "local T=_G.UWU_BLM_TemporaryState\nif T and T.gaolPriorityOptions then\n for k,v in pairs(T.gaolPriorityOptions) do _G[k]=v end\n T.gaolPriorityOptions=nil\nend\nlocal ownedTriple=_G.UWU_BLM_TemporaryState\nif ownedTriple and ownedTriple.tripleHold then\n TensorCore.API.TensorACR.holdActionUntil(7421,Now())\n ownedTriple.tripleHold=nil\nend\nlocal ownedLey=_G.UWU_BLM_TemporaryState\nif ownedLey and ownedLey.leyHold then\n TensorCore.API.TensorACR.holdActionUntil(3573,Now())\n ownedLey.leyHold=nil\nend\nlocal T=_G.UWU_BLM_TemporaryState\nif T then\n if T.options then for k,v in pairs(T.options) do _G[k]=v end end\n if T.gaols then TensorCore.API.TensorACR.deleteAOEBlacklistEntry(1804) end\n _G.UWU_BLM_TemporaryState=nil\nend\nTensorCore.API.TensorACR.holdActionUntil(846,Now())\n-- Release this profile's encounter caches on wipe/map departure.\ndata.uwuAutoSim=nil\nself.used=true",
 							conditions = 
 							{
 								
@@ -1301,7 +1301,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local T=_G.UWU_BLM_TemporaryState\nif T and T.gaolPriorityOptions then\n for k,v in pairs(T.gaolPriorityOptions) do _G[k]=v end\n T.gaolPriorityOptions=nil\nend\nlocal ownedTriple=_G.UWU_BLM_TemporaryState\nif ownedTriple and ownedTriple.tripleHold then\n TensorCore.API.TensorACR.holdActionUntil(7421,Now())\n ownedTriple.tripleHold=nil\nend\nlocal ownedLey=_G.UWU_BLM_TemporaryState\nif ownedLey and ownedLey.leyHold then\n TensorCore.API.TensorACR.holdActionUntil(3573,Now())\n ownedLey.leyHold=nil\nend\nlocal T=_G.UWU_BLM_TemporaryState\nif T then\n if T.options then for k,v in pairs(T.options) do _G[k]=v end end\n if T.gaols then TensorCore.API.TensorACR.deleteAOEBlacklistEntry(1804) end\n _G.UWU_BLM_TemporaryState=nil\nend\nTensorCore.API.TensorACR.holdActionUntil(846,Now())\nself.used=true",
+							actionLua = "local T=_G.UWU_BLM_TemporaryState\nif T and T.gaolPriorityOptions then\n for k,v in pairs(T.gaolPriorityOptions) do _G[k]=v end\n T.gaolPriorityOptions=nil\nend\nlocal ownedTriple=_G.UWU_BLM_TemporaryState\nif ownedTriple and ownedTriple.tripleHold then\n TensorCore.API.TensorACR.holdActionUntil(7421,Now())\n ownedTriple.tripleHold=nil\nend\nlocal ownedLey=_G.UWU_BLM_TemporaryState\nif ownedLey and ownedLey.leyHold then\n TensorCore.API.TensorACR.holdActionUntil(3573,Now())\n ownedLey.leyHold=nil\nend\nlocal T=_G.UWU_BLM_TemporaryState\nif T then\n if T.options then for k,v in pairs(T.options) do _G[k]=v end end\n if T.gaols then TensorCore.API.TensorACR.deleteAOEBlacklistEntry(1804) end\n _G.UWU_BLM_TemporaryState=nil\nend\nTensorCore.API.TensorACR.holdActionUntil(846,Now())\n-- Release this profile's encounter caches on wipe/map departure.\ndata.uwuAutoSim=nil\nself.used=true",
 							conditions = 
 							{
 								
@@ -14191,9 +14191,9 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local S=data.uwuAutoSim; if not S or not S.observed.p4end then return false end; local t=TensorCore.API.TensorACR.getAutoSimTime()-S.time(\"p4end\"); return (t>=135 and t<=150) or (t>=183 and t<=195)",
+							conditionLua = "local S=data.uwuAutoSim; if not S or not S.observed.p4end then return false end; local t=TensorCore.API.TensorACR.getAutoSimTime()-S.time(\"p4end\"); return (t>=135 and t<=150) or (t>=183 and t<=195) or (S.cfg.roulette and S.rouletteOrder~=nil and t>=275 and t<=390)",
 							dequeueIfLuaFalse = true,
-							name = "Reviewed Ultima bait waves",
+							name = "Ultima bait or observed roulette",
 							uuid = "21973065-8efe-0244-8812-df03976de101",
 							version = 3,
 						},
@@ -14203,10 +14203,10 @@ local tbl =
 				eventType = 23,
 				loop = true,
 				mechanicTime = 1091,
-				name = "[UWU] Ultima Feather Rain - missing bait steps",
+				name = "[UWU] Ultima Feather Rain - bait steps",
 				timeRange = true,
 				timelineIndex = 144,
-				timerEndOffset = 54,
+				timerEndOffset = 429,
 				timerStartOffset = -10,
 				uuid = "3292ab17-1d25-6d0d-9122-8b0d0709efc8",
 				version = 2,
