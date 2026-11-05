@@ -55,6 +55,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### Shinryu Unreal: Shared AutoSim
 
+- Made [AA] Autosim - Shinryu Unreal eligible for Optifine users with independent FileLoad/FileSave preferences. Targeting diagnostics remain in the native debug log without direct log-file I/O. (05-11-2026)
+
 - Automatic potions are now blocked during the final 30 seconds of the P1 estimate and the button-mash transition, then allowed again when adds become targetable. Includes a saved enable toggle and adjustable buffer; your previous Potion toggle is restored. (05-11-2026)
 
 - Countdown targeting selects Shinryu with FFXIVMinion Start Combat kept off. Added diagnostics across countdown, boss, adds and wing targeting, including skipped targets, melee range, cast/LB protection and disabled settings. (05-11-2026)
