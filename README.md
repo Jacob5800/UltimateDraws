@@ -18,6 +18,10 @@ TEA: Coming soon.
 
 ## Changelog
 
+### TEA: AutoSim
+
+- Countdown targeting selects Living Liquid with FFXIVMinion Start Combat kept off. Cancelling or finishing the countdown stops pending selection. Replay confirmation remains pending. (05-11-2026)
+
 ### Sil'dihn: General profile / AutoSim
 
 - Before Gladiator, offensive cooldowns are allowed on the first two trash enemies, then reserved across the last two Armor/Dullahan enemies. Defensive mitigation is unaffected. Replay confirmation remains pending. (05-11-2026)

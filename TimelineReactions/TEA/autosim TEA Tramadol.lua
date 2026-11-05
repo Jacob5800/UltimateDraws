@@ -23,6 +23,223 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "AutoSim",
+				uuid = "8bd034a9-0adf-78af-b4e0-ecceb231ad47",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "AutoSim",
+				name = "Setup and cleanup",
+				uuid = "cd015373-743b-19c9-bd38-3a58d56837ac",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "gStartCombat=false\ndata.teaPrecast={deadline=eventArgs.timeQueued+eventArgs.time*1000,cancelled=false}\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"b183ee11-4ce8-e7e1-90f2-c00b1c244359",
+									true,
+								},
+								
+								{
+									"634a742a-ae3d-87c7-b9ff-f23a006712cb",
+									false,
+								},
+							},
+							name = "Keep Start Combat off",
+							uuid = "8f39cd83-5438-1c51-b11b-2d4b07721c61",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"b183ee11-4ce8-e7e1-90f2-c00b1c244359",
+									true,
+								},
+								
+								{
+									"634a742a-ae3d-87c7-b9ff-f23a006712cb",
+									false,
+								},
+								
+								{
+									"290e0a04-1fde-ef0b-90a2-66a1861b3354",
+									true,
+								},
+								
+								{
+									"a6dedf7d-ca45-acbf-ba73-a327af627032",
+									true,
+								},
+							},
+							name = "Select boss for precast",
+							setTarget = true,
+							targetType = "Detection Target",
+							uuid = "87b30673-0781-0ce5-86f0-e81e049cdc47",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							localmapid = 887,
+							name = "TEA",
+							uuid = "b183ee11-4ce8-e7e1-90f2-c00b1c244359",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 7,
+							uuid = "634a742a-ae3d-87c7-b9ff-f23a006712cb",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.teaPrecast\nreturn s and not s.cancelled and Now()<s.deadline",
+							name = "Countdown still active",
+							uuid = "290e0a04-1fde-ef0b-90a2-66a1861b3354",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local e=TensorCore.mGetEntity(eventArgs.detectionTargetID)\nlocal p=TensorCore.mGetPlayer()\nreturn e and p and e.contentid==9211 and e.attackable and e.targetable and e.hp.current>0 and TensorCore.getDistance2d(p.pos,e.pos)<=60+e.hitradius",
+							name = "Nearby Living Liquid",
+							uuid = "f5492581-ca44-c416-b4c2-0c2453cef5b2",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"f5492581-ca44-c416-b4c2-0c2453cef5b2",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Nearest eligible boss",
+							uuid = "a6dedf7d-ca45-acbf-ba73-a327af627032",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Setup and cleanup",
+				eventType = 16,
+				loop = true,
+				mechanicTime = 11.4,
+				name = "[TEA] Countdown boss targeting",
+				timeRange = true,
+				timelineIndex = 2,
+				timerStartOffset = -120,
+				uuid = "d267f120-c0c9-d5d1-a8ef-88cfd5f84dd4",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.teaPrecast;if s then s.cancelled=true end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"b8f2ffcd-1c4c-5a09-a52c-1a6619b8cbec",
+									true,
+								},
+							},
+							name = "Cancel countdown selection",
+							uuid = "d4746521-642e-b27c-9d44-28673ebeeb8c",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							localmapid = 887,
+							name = "TEA",
+							uuid = "b8f2ffcd-1c4c-5a09-a52c-1a6619b8cbec",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Setup and cleanup",
+				eventType = 17,
+				loop = true,
+				mechanicTime = 11.4,
+				name = "[TEA] Countdown target cancellation",
+				timeRange = true,
+				timelineIndex = 2,
+				timerStartOffset = -120,
+				uuid = "4ef37e4a-6f83-200f-92b3-4b13ccffa6c1",
+				version = 2,
+			},
+		},
 	},
 	[156] = 
 	{
