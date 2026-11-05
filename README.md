@@ -69,6 +69,8 @@ TEA: Coming soon.
 
 ### UWU: Shared AutoSim
 
+- Unified all role plans to Garuda 135s from pull and Ifrit 101s from becoming targetable, including countdown and fallback setup. Live resyncs and optional slower-group adjustments remain active. Physical plans skip a predicted Ifrit dash beyond the expected phase end. (05-11-2026)
+
 - Added Spiny Plume focus after two Thermal Low stacks, with cast-safe swaps and return to Garuda. Optional guarded one-stack focus requires a known lifetime estimate above the remaining stack interval plus a margin. Includes GUI controls and decision diagnostics; replay confirmation remains pending. (05-11-2026)
 
 - Optional caster nail lifetime check stays on Ifrit when the next required kill-order nail is predicted to die before the adjustable cast budget (default 2.8s). Preserves kill order, softening and active casts; unknown estimates retain normal targeting. Gaols are unchanged. Replay confirmation remains pending. (05-11-2026)
