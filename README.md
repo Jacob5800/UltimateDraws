@@ -236,3 +236,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 ### FRU: LPDU mitigations
 
 - Made Frureactions/lpdu mits eligible for Optifine users by removing core Settings access. Tank-plan conditions and cooldown restrictions now share the independent FRU-LPDU.lua preferences with the draw GUI, including saving restored compatible plans. Mitigation timings and ACR requests are unchanged. (05-11-2026)
+
+### TOP: LPDU mitigations
+
+- Made TOPReactions/lpdu mits eligible for Optifine users by removing core Settings access from Solar Ray tank-plan conditions. They now share independent TOP-LPDU.lua preferences with the draw GUI; existing plan defaults, timings and ACR requests are unchanged. (05-11-2026)
