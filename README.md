@@ -20,6 +20,7 @@ TEA: Coming soon.
 
 ### Sil'dihn: General profile / AutoSim
 
+- Before Gladiator, offensive cooldowns are allowed on the first two trash enemies, then reserved across the last two Armor/Dullahan enemies. Defensive mitigation is unaffected. Replay confirmation remains pending. (05-11-2026)
 - Added Savage support for Silkie/Gladiator forecasts, a configurable 288s Savage Silkie estimate from two local clears, and observed caster movement windows. Gladiator's 285s estimate remains provisional. (05-11-2026)
 - Optional final-trash reserves hold new Ley Lines uses or other jobs' offensive cooldowns through walking gaps, then restore for the boss. Boss countdown targeting keeps Start Combat off; settings and diagnostics are included. (05-11-2026)
 - Corrected Silkie mitigation to physical ranged on the opener and second Total Wash, with caster Addle on the first and third. Addle now uses a Hotbar request, including earlier requests for unavoidable Belladonna/Dullahan trash damage. Replay confirmation remains pending. (05-11-2026)
