@@ -14,7 +14,7 @@ DSR: [Lpdu draws(beta)](TimelineReactions/DSR/Lpdu%20draws%28beta%29.lua) — LP
 
 TOP: LPDU 
 
-TEA: Coming soon.
+TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LPDU doll targeting; replay checks are ongoing.
 
 ## Changelog
 
@@ -24,6 +24,7 @@ TEA: Coming soon.
 
 ### TEA: AutoSim
 
+- Added AA AutoSim with LPDU DPS doll assignments, strict DoT/AoE and burst safeguards, and a latched 24.9% cutoff that stops doll casts and returns to Living Liquid. Includes opener targeting, helper setup and targeting diagnostics. Movement/feeding remain manual; in-flight damage cannot be recalled. Replay confirmation remains pending. (05-11-2026)
 - Countdown targeting selects Living Liquid with FFXIVMinion Start Combat kept off. Cancelling or finishing the countdown stops pending selection. Replay confirmation remains pending. (05-11-2026)
 
 ### Sil'dihn: General profile / AutoSim
