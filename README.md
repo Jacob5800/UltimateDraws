@@ -75,6 +75,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### UCOB: Shared AutoSim
 
+- Made [AA] Autosim - UCOB eligible for Optifine users with independent FileLoad/FileSave preferences for role options and slower-group timing. Choices load before pull setup. (05-11-2026)
+
 - Countdown targeting selects Twintania with FFXIVMinion Start Combat kept off. Cancelling or finishing the countdown stops pending selection. Replay confirmation remains pending. (05-11-2026)
 
 - Restored caster mechanic-event corrections for Twisters, Exaflares, Nael quotes, personal assignments and nearby puddles, plus BRD Grand Octet reservation. Added later P1 Twister forecasts and customizable pull-time Twintania/Nael estimates, defaulting to 132s/129s. Replay confirmation remains pending. (01-11-2026)
