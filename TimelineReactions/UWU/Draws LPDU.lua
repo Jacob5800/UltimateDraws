@@ -1203,7 +1203,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
+							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuAutoSim or data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
 							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "b6183223-d80f-2360-9aaf-c7a958387329",
 							version = 3,
@@ -1389,7 +1389,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
+							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuAutoSim or data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
 							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "98631e39-88b5-190d-a164-f394d88a2d9f",
 							version = 3,
@@ -4048,7 +4048,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
+							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuAutoSim or data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
 							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "d19a4980-34d7-c84f-8790-e853a6bc27df",
 							version = 3,
@@ -4139,7 +4139,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
+							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuAutoSim or data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
 							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "3c0743a2-614b-235d-977e-58aa025d0483",
 							version = 3,
@@ -8544,7 +8544,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
+							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuAutoSim or data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
 							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "89b150c8-a844-8e7f-89c8-d59b55d5e261",
 							version = 3,
@@ -8635,7 +8635,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
+							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuAutoSim or data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
 							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "c255bc11-558b-3074-b96d-4c3aa08a8ae6",
 							version = 3,
@@ -9365,7 +9365,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
+							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuAutoSim or data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
 							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "7329f44e-2b16-407d-b4e3-0fe526965077",
 							version = 3,
@@ -9496,7 +9496,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
+							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuAutoSim or data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
 							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "97db59c6-83ea-ad19-8116-ef08e2e950c9",
 							version = 3,
@@ -10187,7 +10187,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
+							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuAutoSim or data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
 							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "5fc49abd-7d08-ac8c-8569-f521a7f26ed9",
 							version = 3,
@@ -10311,7 +10311,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
+							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuAutoSim or data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
 							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "9451ac98-4d56-5bbd-8001-4c04dcc2f715",
 							version = 3,
@@ -11285,7 +11285,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
+							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuAutoSim or data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
 							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "419da3bb-0690-538a-be47-6017bb3a41ab",
 							version = 3,
@@ -11546,7 +11546,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
+							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuAutoSim or data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
 							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "37d9aab2-6722-6835-a0a8-e2934bba0abf",
 							version = 3,
@@ -11832,7 +11832,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
+							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuAutoSim or data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
 							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "9330a02b-c77b-7a09-a85c-5996987e8dee",
 							version = 3,
@@ -11923,7 +11923,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
+							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuAutoSim or data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
 							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "e277ff04-382d-c17f-8c26-49b747c0c707",
 							version = 3,
@@ -16860,7 +16860,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
+							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuAutoSim or data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
 							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "599f01d2-38fd-ef6c-8dda-419d3577debb",
 							version = 3,
@@ -16990,7 +16990,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
+							conditionLua = "local s\nif type(Settings)==\"table\" then s=Settings.FFXIVMINION end\nif data.uwuAutoSim or data.uwuBRDAutoSim or data.uwuBLMAutoSim or data.uwuRPRAutoSim then return false end\nreturn ((s and s.LPDU_UWU_AutoTarget)~=false and _G.LPDU_UWU_AutoTarget~=false)",
 							name = "Shared targeting enabled / no AutoSim owner",
 							uuid = "a77328a8-05c5-7cc4-b7e0-00ae72ae092d",
 							version = 3,

@@ -69,6 +69,8 @@ TEA: Coming soon.
 
 ### UWU: Shared AutoSim
 
+- Caster nail targeting now waits for initial nail activation instead of ending while freshly spawned nails are still untargetable. Completion requires observed activation and confirmed deaths. Draws LPDU targeting yields to shared AutoSim, preventing duplicate target requests while preserving standalone use. Replay confirmation remains pending. (05-11-2026)
+
 - Countdown targeting selects Garuda with FFXIVMinion Start Combat kept off. Cancelling or finishing the countdown stops pending selection. Replay confirmation remains pending. (05-11-2026)
 
 - Added optional slower-group timing adjustments for Garuda, Ifrit, Titan and the final kill estimate. Extra seconds are captured at pull setup; mid-fight edits apply next pull, while observed phase transitions still correct forecasts. (01-11-2026)
