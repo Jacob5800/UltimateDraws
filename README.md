@@ -232,3 +232,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 ### Enuo EX: JacobMain
 
 - Checked JacobMain for Optifine users: no owned core Settings or direct file-I/O dependency was found. It has no separate saved preference panel; Anyone-owned inherited reactions are outside this check. (05-11-2026)
+
+### FRU: LPDU mitigations
+
+- Made Frureactions/lpdu mits eligible for Optifine users by removing core Settings access. Tank-plan conditions and cooldown restrictions now share the independent FRU-LPDU.lua preferences with the draw GUI, including saving restored compatible plans. Mitigation timings and ACR requests are unchanged. (05-11-2026)
