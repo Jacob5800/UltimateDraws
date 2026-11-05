@@ -121,7 +121,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### UCOB: LPDU
 
-- Assignment, targeting and potion preferences now save independently of Minion settings for Optifine compatibility. Existing Minion preferences are not automatically imported; AutoSim targeting handoff is preserved. Replay confirmation remains pending. (05-11-2026)
+- Made Ucobreactions/LPDU Draws eligible for Optifine users by saving assignments, targeting and potion preferences with FileLoad/FileSave. No Minion core Settings dependency remains. (05-11-2026)
 
 - Disabled inherited Draw Flare Breath reactions that could fail on missing tanks/entities. Our actual-aggro Flare Breath cones and hit cleanup remain enabled. (01-11-2026)
 
