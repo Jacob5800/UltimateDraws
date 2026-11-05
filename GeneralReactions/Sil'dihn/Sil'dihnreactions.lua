@@ -5033,7 +5033,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local e=TensorCore.mGetEntity(eventArgs.targetID)\nif not e then self.used=true;return end\nlocal ms=(eventArgs.channelTimeMax+.3)*1000\nTensorCore.getStaticDrawer(0x503333FF,2):addTimedCircleOnEnt(ms,e.id,8,0,false,true)\nAnyoneCore.addWorldTextCountdown(ms,setmetatable({entityID=e.id},{__index=function(t,k) local e=TensorCore.mGetEntity(t.entityID);if not e then return 0 end;if k=='x' then return e.pos.x elseif k=='y' then return e.pos.y+1 elseif k=='z' then return e.pos.z end end}),0xFFFFFFFF,true,1)\nAnyoneCore.addTimedWorldTextOnEnt(ms,'Spread',e.id,0xFF9999FF,true,.9,2)\nlocal p=TensorCore.mGetPlayer()\nif p and p.id==e.id then AnyoneCore.Shotcall('Spread',true,5,false) end\nself.used=true",
+						actionLua = "local e=TensorCore.mGetEntity(eventArgs.targetID)\nif not e then self.used=true;return end\nlocal ms=(eventArgs.channelTimeMax+.3)*1000\nlocal p=TensorCore.mGetPlayer()\nif p and e.id~=p.id then TensorCore.getStaticDrawer(0x503333FF,2):addTimedCircleOnEnt(ms,e.id,8,0,false,true) end\nAnyoneCore.addWorldTextCountdown(ms,setmetatable({entityID=e.id},{__index=function(t,k) local e=TensorCore.mGetEntity(t.entityID);if not e then return 0 end;if k=='x' then return e.pos.x elseif k=='y' then return e.pos.y+1 elseif k=='z' then return e.pos.z end end}),0xFFFFFFFF,true,1)\nAnyoneCore.addTimedWorldTextOnEnt(ms,'Spread',e.id,0xFF9999FF,true,.9,2)\nif p and p.id==e.id then AnyoneCore.Shotcall('Spread',true,5,false) end\nself.used=true",
 						conditions = 
 						{
 							
@@ -6855,6 +6855,11 @@ local tbl =
 						{
 							
 							{
+								"74539c4c-6cc7-fbac-8e59-6a878fad3db9",
+								true,
+							},
+							
+							{
 								"a821814a-8005-532a-a04b-1eaf39654f34",
 								true,
 							},
@@ -6903,6 +6908,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Zeless Gah",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11393,
@@ -6916,6 +6922,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Zeless Gah",
 						eventArgType = 2,
 						eventSpellID = 29845,
@@ -6929,12 +6936,30 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Zeless Gah",
 						eventArgOptionType = 2,
 						eventArgType = 3,
 						eventTargetContentID = 11394,
 						name = "Red portal wave",
 						uuid = "18406b71-c306-b716-8b57-4fa6aa8bc3d0",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sildihn criterion only",
+						uuid = "74539c4c-6cc7-fbac-8e59-6a878fad3db9",
 						version = 3,
 					},
 				},
@@ -6981,6 +7006,11 @@ local tbl =
 						actionLua = "if data.zeless_cut_mode==5 then self.used=true;return end\nlocal p=TensorCore.mGetPlayer();local assigned=false\nif p then for id=3268,3275 do if TensorCore.getBuff(p,id) then assigned=true;break end end end\nif not assigned then self.used=true;return end\nlocal now=GUI:GetTime()\nlocal previous=_G.JacobZelessFirstCut\nif previous and now<previous.expires then self.used=true;return end\n\nlocal font = TensorCore.mGetEntity(eventArgs.entityID)\nif not font or not font.pos then\n    self.used = true\n    return\nend\n\nlocal centerX = 289.0\nlocal centerZ = -105.0\nlocal dx = font.pos.x - centerX\nlocal dz = font.pos.z - centerZ\n\nlocal firstText\nlocal firstColor\nif math.abs(dx) > math.abs(dz) then\n    firstText = \"CUT BLUE FIRST\"\n    firstColor = GUI:ColorConvertFloat4ToU32(.25,.5,1,1)\nelse\n    firstText = \"CUT RED FIRST\"\n    firstColor = GUI:ColorConvertFloat4ToU32(1,.25,.25,1)\nend\n\nlocal textPosition = {\n    x = centerX,\n    y = font.pos.y + 3.0,\n    z = centerZ\n}\nAnyoneCore.addTimedWorldText(15000, firstText, textPosition, firstColor, true, 1.5)\n_G.JacobZelessFirstCut={started=now,blue=math.abs(dx)>math.abs(dz),color=firstColor,expires=GUI:GetTime()+35}\nself.used = true",
 						conditions = 
 						{
+							
+							{
+								"d2240704-380b-82c7-9bf1-7952e564427e",
+								true,
+							},
 							
 							{
 								"86edd801-4756-38d9-936e-f373f41566bb",
@@ -7030,6 +7060,23 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sildihn criterion only",
+						uuid = "d2240704-380b-82c7-9bf1-7952e564427e",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Sildihn criterion/Zeless Gah",
 			eventType = 5,
@@ -7073,6 +7120,11 @@ local tbl =
 						actionLua = "local state = data.zeless_infern_brand3\nif not state then\n    state = {}\n    data.zeless_infern_brand3 = state\nend\n\nif state.first_drawn then\n    self.used = true\n    return\nend\n\nlocal player = TensorCore.mGetPlayer()\nif not player or not player.pos then\n    self.used = true\n    return\nend\n\nlocal centerX = 289.0\nlocal centerZ = -105.0\nlocal source = {\n    x = player.pos.x,\n    y = player.pos.y,\n    z = player.pos.z\n}\nlocal isNorth = player.pos.z < centerZ\nlocal target = {\n    x = centerX,\n    y = player.pos.y,\n    z = isNorth and -119.0 or -91.0\n}\nlocal distance = TensorCore.getDistance2d(source, target)\nif not distance or distance < 0.5 then\n    state.first_drawn = true\n    state.first_is_north = isNorth\n    self.used = true\n    return\nend\n\nlocal heading = TensorCore.getHeadingToTarget(source, target)\nlocal tipLength = math.min(2.5, math.max(1.5, distance * 0.35))\nlocal baseLength = math.max(0.5, distance - tipLength)\nlocal scale = math.min(1.4, math.max(0.7, distance / 10.0))\nlocal drawer = TensorCore.getCachedDrawer(\n    0xFFFFFFFF,\n    0xFF80FF80,\n    0xFF22AA22,\n    0xFFFFFFFF,\n    2\n)\ndrawer:addTimedArrow(\n    5500,\n    source.x, source.y, source.z,\n    heading,\n    baseLength, 0.65 * scale,\n    tipLength, 1.6 * scale,\n    0, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n)\nAnyoneCore.addTimedWorldText(\n    5500,\n    \"JP BAIT 1\",\n    target,\n    0xFF80FF80,\n    true,\n    1.4\n)\nAnyoneCore.addTimedWorldText(\n    3000,\n    \"HOLD FOR TELEPORT\",\n    source,\n    0xFFFFFFFF,\n    true,\n    1.0\n)\n\nstate.first_drawn = true\nstate.first_is_north = isNorth\nself.used = true",
 						conditions = 
 						{
+							
+							{
+								"f6bf5b3b-433e-93ac-b6be-23d26540da01",
+								true,
+							},
 							
 							{
 								"945141c1-ff03-f8de-9200-5454e359f2ec",
@@ -7123,6 +7175,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Zeless Gah",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11393,
@@ -7136,6 +7189,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Zeless Gah",
 						eventArgType = 2,
 						eventSpellID = 29845,
@@ -7149,12 +7203,30 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Zeless Gah",
 						eventArgOptionType = 2,
 						eventArgType = 3,
 						eventTargetContentID = 11395,
 						name = "Blue portal wave",
 						uuid = "276173f7-3cab-9e10-81e1-05c586322014",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sildihn criterion only",
+						uuid = "f6bf5b3b-433e-93ac-b6be-23d26540da01",
 						version = 3,
 					},
 				},
@@ -7398,6 +7470,11 @@ local tbl =
 						{
 							
 							{
+								"44f94073-ba8f-86f3-b40b-60f4a25ea50a",
+								true,
+							},
+							
+							{
 								"0ec95893-1955-52fa-b161-7e2d315f9395",
 								true,
 							},
@@ -7441,6 +7518,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Zeless Gah",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11393,
@@ -7454,11 +7532,29 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Zeless Gah",
 						eventArgType = 2,
 						eventSpellID = 29872,
 						name = "Firesteel Strike",
 						uuid = "00dc1558-8be7-4308-bc20-c18750ce4f20",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sildihn criterion only",
+						uuid = "44f94073-ba8f-86f3-b40b-60f4a25ea50a",
 						version = 3,
 					},
 				},
@@ -7506,6 +7602,11 @@ local tbl =
 						{
 							
 							{
+								"d579dc6d-dd93-8b32-9632-4340934db70d",
+								true,
+							},
+							
+							{
 								"4c6b8730-f618-3329-be7b-3932a6b8bafb",
 								true,
 							},
@@ -7544,12 +7645,30 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Zeless Gah",
 						eventArgOptionType = 2,
 						eventArgType = 3,
 						eventEntityContentID = 11394,
 						name = "Infern Brand",
 						uuid = "4c6b8730-f618-3329-be7b-3932a6b8bafb",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sildihn criterion only",
+						uuid = "d579dc6d-dd93-8b32-9632-4340934db70d",
 						version = 3,
 					},
 				},
@@ -7602,6 +7721,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -7671,6 +7791,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -7686,6 +7807,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						eventArgOptionType = 3,
 						eventArgType = 2,
 						name = "Firesteel hit",
@@ -7757,6 +7879,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -7772,6 +7895,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						eventArgOptionType = 3,
 						eventArgType = 2,
 						name = "Cast Shadow cones",
@@ -7845,6 +7969,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -7860,6 +7985,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						eventArgOptionType = 3,
 						eventArgType = 2,
 						name = "Cone resolved",
@@ -7927,6 +8053,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -7942,6 +8069,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						eventArgOptionType = 3,
 						eventArgType = 2,
 						name = "Show of Strength",
@@ -8013,6 +8141,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -8077,6 +8206,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -8135,6 +8265,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -8204,6 +8335,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -8219,6 +8351,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						eventArgType = 2,
 						eventSpellID = 29875,
 						name = "Blessed Beacon",
@@ -8274,6 +8407,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -8343,6 +8477,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -8412,6 +8547,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -8481,6 +8617,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -8550,6 +8687,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -8619,6 +8757,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -8634,6 +8773,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						eventArgOptionType = 3,
 						eventArgType = 2,
 						name = "Fracture cast",
@@ -8694,6 +8834,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -8709,6 +8850,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						eventArgOptionType = 2,
 						eventArgType = 2,
 						eventEntityContentID = 11397,
@@ -8771,6 +8913,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -8840,6 +8983,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -8910,6 +9054,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -8925,6 +9070,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						eventArgOptionType = 3,
 						eventArgType = 2,
 						name = "Phase casts",
@@ -8986,6 +9132,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -9001,6 +9148,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						eventArgOptionType = 3,
 						eventArgType = 2,
 						name = "Cut or wave",
@@ -9063,6 +9211,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -9077,9 +9226,12 @@ local tbl =
 				{
 					data = 
 					{
-						category = "Lua",
+						category = "Event",
 						conditionLua = "return eventArgs.buffID==2941",
-						name = "Vulnerability",
+						dequeueIfLuaFalse = true,
+						eventArgType = 2,
+						eventBuffID = 2941,
+						name = "Vulnerability event 2941",
 						uuid = "1dd27493-cc12-3703-9725-5fbfc6eb23a9",
 						version = 3,
 					},
@@ -9132,6 +9284,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -9201,6 +9354,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -9270,6 +9424,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -9285,6 +9440,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						eventArgOptionType = 3,
 						eventArgType = 2,
 						name = "Mirror damage",
@@ -9340,6 +9496,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -9398,6 +9555,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -9467,6 +9625,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -9482,6 +9641,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						eventArgType = 2,
 						eventSpellID = 29875,
 						name = "Blessed Beacon",
@@ -9537,6 +9697,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -9606,6 +9767,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -9621,6 +9783,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						eventArgOptionType = 3,
 						eventArgType = 2,
 						name = "Beacon cleave",
@@ -10881,6 +11044,7 @@ local tbl =
 				{
 					data = 
 					{
+						aType = "ACR",
 						actionID = 7560,
 						conditions = 
 						{
@@ -10911,17 +11075,15 @@ local tbl =
 							},
 							
 							{
-								"4f78dd16-dc18-8d0f-a421-a30b8b748a95",
-								true,
-							},
-							
-							{
 								"fe52465f-da9c-7fd7-a8e5-c3b92ccac4f7",
 								true,
 							},
 						},
+						gVar = "ACR_TensorNuke4_Hotbar_Addle",
+						name = "Request Addle",
 						targetType = "Event Entity",
 						uuid = "643893db-d840-be35-bc80-bf0bf5b8b52b",
+						variableTogglesType = 2,
 						version = 2.1,
 					},
 				},
@@ -10951,13 +11113,13 @@ local tbl =
 						category = "Event",
 						eventArgOptionType = 3,
 						eventArgType = 2,
-						name = "raidwides",
+						name = "Unavoidable trash damage",
 						spellIDList = 
 						{
+							31074,
+							31098,
 							31081,
-							31083,
 							31105,
-							31107,
 						},
 						uuid = "3a1ef755-f931-6cce-ae55-6127596ebba3",
 						version = 3,
@@ -10979,8 +11141,8 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e or e.castinginfo.channelingid~=eventArgs.spellID then return false end\nlocal remain=e.castinginfo.casttime-e.castinginfo.channeltime\nreturn remain>0 and remain<=1.75",
-						name = "window",
+						conditionLua = "local e=TensorCore.mGetEntity(eventArgs.entityID)\nlocal t=TensorCore.mGetTarget()\nif not e or not t or t.id~=e.id or e.castinginfo.channelingid~=eventArgs.spellID then return false end\nlocal remaining=e.castinginfo.casttime-e.castinginfo.channeltime\nreturn remaining>.3 and remaining<=5",
+						name = "Live cast and selected source",
 						uuid = "239d4422-7381-bf03-8502-afb073b20d07",
 						version = 3,
 					},
@@ -11031,6 +11193,7 @@ local tbl =
 			displayPath = "Sildihn criterion/Mitigations/Trash",
 			eventType = 3,
 			name = "[Mit] Trash raidwides - Caster Addle",
+			timeout = 6,
 			uuid = "8f938a0e-fe09-690b-8bd4-71b4ea1936f7",
 			version = 2,
 		},
@@ -12694,9 +12857,15 @@ local tbl =
 				{
 					data = 
 					{
+						aType = "ACR",
 						actionID = 7560,
 						conditions = 
 						{
+							
+							{
+								"6585ac92-066c-5de1-97af-86a22246c95e",
+								true,
+							},
 							
 							{
 								"e22e5542-200c-e8a1-8a25-27ac3d80c5f8",
@@ -12719,24 +12888,16 @@ local tbl =
 							},
 							
 							{
-								"7952f89a-14d6-a5a8-b729-335ceb72448b",
-								true,
-							},
-							
-							{
-								"e15277a0-45fc-9db4-8133-57d7f93785de",
-								true,
-							},
-							
-							{
-								"0904f886-2cda-fed8-a424-7a1a482b668f",
+								"9743ff8d-e512-ff55-a586-7f2e614a9a93",
 								true,
 							},
 						},
 						displayPath = "Sildihn criterion/Mitigations/Silkie",
-						name = "Addle",
+						gVar = "ACR_TensorNuke4_Hotbar_Addle",
+						name = "Request Addle",
 						targetType = "Event Entity",
 						uuid = "3a7ae2b4-d345-a2a2-ab75-0b2c857dba0f",
+						variableTogglesType = 2,
 						version = 2.1,
 					},
 				},
@@ -12795,7 +12956,7 @@ local tbl =
 						eventArgOptionType = 3,
 						eventArgType = 2,
 						eventSpellID = 30544,
-						name = "Total Wash",
+						name = "Assigned Silkie damage",
 						spellIDList = 
 						{
 							30544,
@@ -12873,9 +13034,36 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "return eventArgs.spellID==30544",
-						name = "Savage wash rotation",
+						conditionLua = "local s=data.sildihnControl\nif not s then return false end\nlocal n=s.wash(eventArgs)\nreturn n~=nil and n%2==1",
+						name = "Caster: washes 1 and 3",
 						uuid = "e22e5542-200c-e8a1-8a25-27ac3d80c5f8",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Criterion/Savage",
+						uuid = "6585ac92-066c-5de1-97af-86a22246c95e",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=TensorCore.mGetEntity(eventArgs.entityID)\nlocal t=TensorCore.mGetTarget()\nif not e or not t or t.id~=e.id or e.castinginfo.channelingid~=eventArgs.spellID then return false end\nlocal remaining=e.castinginfo.casttime-e.castinginfo.channeltime\nreturn remaining>.3 and remaining<=5",
+						name = "Live cast and selected source",
+						uuid = "9743ff8d-e512-ff55-a586-7f2e614a9a93",
 						version = 3,
 					},
 				},
@@ -12883,6 +13071,7 @@ local tbl =
 			displayPath = "Sildihn criterion/Mitigations/Silkie",
 			eventType = 3,
 			name = "[Mit] Silkie Total Wash - Caster Addle",
+			timeout = 6,
 			uuid = "68989991-6ae5-68eb-883e-288c55f75cd3",
 			version = 2,
 		},
@@ -13382,12 +13571,12 @@ local tbl =
 						{
 							
 							{
-								"eb4e8f98-bd23-6d2f-b67b-3044ebe5d78b",
+								"397ae6c9-c262-2b2c-b29d-91e0952f1b14",
 								true,
 							},
 							
 							{
-								"6ac94545-725b-05c2-a097-a9dc30ecbda0",
+								"eb4e8f98-bd23-6d2f-b67b-3044ebe5d78b",
 								true,
 							},
 							
@@ -13403,16 +13592,6 @@ local tbl =
 							
 							{
 								"b212e664-5aeb-3521-aa29-3feb1590edc3",
-								true,
-							},
-							
-							{
-								"4539cfce-e8d3-5452-a1b6-74fea98a29de",
-								true,
-							},
-							
-							{
-								"f1f89e79-ccfc-bc5b-a126-a2516b2760e5",
 								true,
 							},
 						},
@@ -13477,11 +13656,13 @@ local tbl =
 						eventArgOptionType = 3,
 						eventArgType = 2,
 						eventSpellID = 30544,
-						name = "Total Wash",
+						name = "Assigned Silkie damage",
 						spellIDList = 
 						{
 							30544,
 							30579,
+							30557,
+							30592,
 						},
 						uuid = "1096d741-7209-5859-b0b6-84a0c1764e9b",
 						version = 3,
@@ -13548,9 +13729,25 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "if eventArgs.spellID==30544 then return true end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e or e.castinginfo.channelingid~=30579 then return false end\nlocal start=GUI:GetTime()-e.castinginfo.channeltime\nlocal s=_G.JacobSilkieWashMit\nif not s or s.boss~=e.id or start<s.start-1 then s={boss=e.id,start=start,count=0};_G.JacobSilkieWashMit=s end\nif s.count==0 or math.abs(start-s.start)>1 then s.start=start;s.count=s.count+1 end\nreturn s.count%2==1",
-						name = "Savage wash rotation",
+						conditionLua = "local s=data.sildihnControl\nif not s then return false end\nlocal n=s.wash(eventArgs)\nreturn n~=nil and (n==0 or n%2==0)",
+						name = "Physical ranged: opener and wash 2",
 						uuid = "eb4e8f98-bd23-6d2f-b67b-3044ebe5d78b",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Criterion/Savage",
+						uuid = "397ae6c9-c262-2b2c-b29d-91e0952f1b14",
 						version = 3,
 					},
 				},
@@ -13558,6 +13755,7 @@ local tbl =
 			displayPath = "Sildihn criterion/Mitigations/Silkie",
 			eventType = 3,
 			name = "[Mit] Silkie Total Wash - DNC Shield Samba",
+			timeout = 6,
 			uuid = "63e2cd90-8707-7d0f-899e-6bdd60cd9eed",
 			version = 2,
 		},
@@ -14739,12 +14937,12 @@ local tbl =
 						{
 							
 							{
-								"afcc2535-a63b-93fd-b37c-8c906376058a",
+								"dff05167-b710-23f7-941e-91ba324b3234",
 								true,
 							},
 							
 							{
-								"16eb8c71-c2c2-caa4-bcf0-d5643398bbb0",
+								"afcc2535-a63b-93fd-b37c-8c906376058a",
 								true,
 							},
 							
@@ -14760,16 +14958,6 @@ local tbl =
 							
 							{
 								"6757232f-88d3-a215-8471-58acda9be291",
-								true,
-							},
-							
-							{
-								"b1dc421d-da1a-383d-ace3-d002f0ea84e5",
-								true,
-							},
-							
-							{
-								"b0a1a1d2-023b-88bb-aa68-088a409685da",
 								true,
 							},
 						},
@@ -14800,10 +14988,13 @@ local tbl =
 						category = "Event",
 						eventArgOptionType = 3,
 						eventArgType = 2,
-						name = "Total Wash",
+						name = "Assigned Silkie damage",
 						spellIDList = 
 						{
+							30544,
 							30579,
+							30557,
+							30592,
 						},
 						uuid = "208ff622-eef7-1587-8228-77eef1876b53",
 						version = 3,
@@ -14864,9 +15055,25 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "if eventArgs.spellID==30544 then return true end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e or e.castinginfo.channelingid~=30579 then return false end\nlocal start=GUI:GetTime()-e.castinginfo.channeltime\nlocal s=_G.JacobSilkieWashMit\nif not s or s.boss~=e.id or start<s.start-1 then s={boss=e.id,start=start,count=0};_G.JacobSilkieWashMit=s end\nif s.count==0 or math.abs(start-s.start)>1 then s.start=start;s.count=s.count+1 end\nreturn s.count%2==1",
-						name = "Odd savage wash",
+						conditionLua = "local s=data.sildihnControl\nif not s then return false end\nlocal n=s.wash(eventArgs)\nreturn n~=nil and (n==0 or n%2==0)",
+						name = "Physical ranged: opener and wash 2",
 						uuid = "afcc2535-a63b-93fd-b37c-8c906376058a",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Criterion/Savage",
+						uuid = "dff05167-b710-23f7-941e-91ba324b3234",
 						version = 3,
 					},
 				},
@@ -14874,6 +15081,7 @@ local tbl =
 			displayPath = "Sildihn criterion/Mitigations/Silkie",
 			eventType = 3,
 			name = "[Mit] Silkie Savage Total Wash - BRD Troubadour",
+			timeout = 6,
 			uuid = "51787364-a88c-e886-91c7-dca5de418a92",
 			version = 2,
 		},
@@ -14893,12 +15101,12 @@ local tbl =
 						{
 							
 							{
-								"7161a923-fbf9-6043-9e3a-7f426f82a532",
+								"5a2a2d31-d97d-cd21-9edf-e27271197330",
 								true,
 							},
 							
 							{
-								"4609b7db-6eab-0dd1-951c-9aeecd76c57a",
+								"7161a923-fbf9-6043-9e3a-7f426f82a532",
 								true,
 							},
 							
@@ -14914,16 +15122,6 @@ local tbl =
 							
 							{
 								"462e516d-adb9-fb85-be51-b0e44352e72e",
-								true,
-							},
-							
-							{
-								"175ba818-1dc1-1b70-bd9d-9fdd2a62997d",
-								true,
-							},
-							
-							{
-								"d98645f7-232b-99e5-94d2-75af6d13ce34",
 								true,
 							},
 						},
@@ -14954,10 +15152,13 @@ local tbl =
 						category = "Event",
 						eventArgOptionType = 3,
 						eventArgType = 2,
-						name = "Total Wash",
+						name = "Assigned Silkie damage",
 						spellIDList = 
 						{
+							30544,
 							30579,
+							30557,
+							30592,
 						},
 						uuid = "102588cf-2f1f-7e98-8b01-b33ca99b80ef",
 						version = 3,
@@ -15018,9 +15219,25 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "if eventArgs.spellID==30544 then return true end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e or e.castinginfo.channelingid~=30579 then return false end\nlocal start=GUI:GetTime()-e.castinginfo.channeltime\nlocal s=_G.JacobSilkieWashMit\nif not s or s.boss~=e.id or start<s.start-1 then s={boss=e.id,start=start,count=0};_G.JacobSilkieWashMit=s end\nif s.count==0 or math.abs(start-s.start)>1 then s.start=start;s.count=s.count+1 end\nreturn s.count%2==1",
-						name = "Odd savage wash",
+						conditionLua = "local s=data.sildihnControl\nif not s then return false end\nlocal n=s.wash(eventArgs)\nreturn n~=nil and (n==0 or n%2==0)",
+						name = "Physical ranged: opener and wash 2",
 						uuid = "7161a923-fbf9-6043-9e3a-7f426f82a532",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Criterion/Savage",
+						uuid = "5a2a2d31-d97d-cd21-9edf-e27271197330",
 						version = 3,
 					},
 				},
@@ -15028,6 +15245,7 @@ local tbl =
 			displayPath = "Sildihn criterion/Mitigations/Silkie",
 			eventType = 3,
 			name = "[Mit] Silkie Savage Total Wash - MCH Tactician",
+			timeout = 6,
 			uuid = "8acd1540-7d69-47be-9d24-11a422c1fd09",
 			version = 2,
 		},
@@ -20211,6 +20429,11 @@ local tbl =
 						{
 							
 							{
+								"f557a14b-70ef-0a15-8859-51b7dbbf085b",
+								true,
+							},
+							
+							{
 								"893eba12-1fc5-c9a5-b4a2-99eceb00f94f",
 								true,
 							},
@@ -20265,6 +20488,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Zeless Gah",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11393,
@@ -20278,6 +20502,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Zeless Gah",
 						eventArgOptionType = 3,
 						eventArgType = 2,
@@ -20337,6 +20562,23 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sildihn criterion only",
+						uuid = "f557a14b-70ef-0a15-8859-51b7dbbf085b",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 			eventType = 3,
@@ -20379,6 +20621,11 @@ local tbl =
 						actionID = 7549,
 						conditions = 
 						{
+							
+							{
+								"cb453673-ff2d-8cdd-bb8a-5ef40d9e1e51",
+								true,
+							},
 							
 							{
 								"1d9955c9-acf7-dd2d-9ea5-deae9a9efed5",
@@ -20435,6 +20682,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Zeless Gah",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11393,
@@ -20448,6 +20696,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Zeless Gah",
 						eventArgType = 2,
 						eventSpellID = 29872,
@@ -20498,6 +20747,23 @@ local tbl =
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						name = "Near cast end",
 						uuid = "be3c559d-56ed-9290-99b6-1be8a121479f",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sildihn criterion only",
+						uuid = "cb453673-ff2d-8cdd-bb8a-5ef40d9e1e51",
 						version = 3,
 					},
 				},
@@ -20553,6 +20819,11 @@ local tbl =
 						actionID = 3540,
 						conditions = 
 						{
+							
+							{
+								"085b4c89-f2fe-e7c8-8de9-a2e846d4dc87",
+								true,
+							},
 							
 							{
 								"39698d88-199c-2aed-9520-a5de155f047c",
@@ -20623,6 +20894,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11393,
@@ -20636,6 +20908,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 3,
 						eventArgType = 2,
@@ -20695,6 +20968,23 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sildihn criterion only",
+						uuid = "085b4c89-f2fe-e7c8-8de9-a2e846d4dc87",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 			eventType = 3,
@@ -20746,6 +21036,11 @@ local tbl =
 						actionID = 16160,
 						conditions = 
 						{
+							
+							{
+								"374b9406-42d1-d396-afcd-c1174824c199",
+								true,
+							},
 							
 							{
 								"8ff1a6c9-f008-add6-9c0d-2ddd26eaecb1",
@@ -20816,6 +21111,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11393,
@@ -20829,6 +21125,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 3,
 						eventArgType = 2,
@@ -20888,6 +21185,23 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sildihn criterion only",
+						uuid = "374b9406-42d1-d396-afcd-c1174824c199",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 			eventType = 3,
@@ -20939,6 +21253,11 @@ local tbl =
 						actionID = 16471,
 						conditions = 
 						{
+							
+							{
+								"1bcd6a25-04f3-ebe2-a55c-a28896f786d7",
+								true,
+							},
 							
 							{
 								"dbe44c4f-6e7a-1e3a-a1a4-2d95ae3c8212",
@@ -21009,6 +21328,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11393,
@@ -21022,6 +21342,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 3,
 						eventArgType = 2,
@@ -21081,6 +21402,23 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sildihn criterion only",
+						uuid = "1bcd6a25-04f3-ebe2-a55c-a28896f786d7",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 			eventType = 3,
@@ -21132,6 +21470,11 @@ local tbl =
 						actionID = 7388,
 						conditions = 
 						{
+							
+							{
+								"b93f58e6-44da-2334-8263-3934d22c823b",
+								true,
+							},
 							
 							{
 								"b16da9f2-8cb8-2f95-bc1b-112bd96c4db1",
@@ -21202,6 +21545,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11393,
@@ -21215,6 +21559,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 3,
 						eventArgType = 2,
@@ -21274,6 +21619,23 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sildihn criterion only",
+						uuid = "b93f58e6-44da-2334-8263-3934d22c823b",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 			eventType = 3,
@@ -21325,6 +21687,11 @@ local tbl =
 						actionID = 44,
 						conditions = 
 						{
+							
+							{
+								"1a1a1a8a-17b3-778f-82e9-85067d4598a7",
+								true,
+							},
 							
 							{
 								"ed641335-d1b2-0d8c-9a52-8f601bd80197",
@@ -21395,6 +21762,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11393,
@@ -21408,6 +21776,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgType = 2,
 						eventSpellID = 29872,
@@ -21458,6 +21827,23 @@ local tbl =
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						name = "Before enrage",
 						uuid = "412f9423-ca06-718c-b44c-534658e7f6d8",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sildihn criterion only",
+						uuid = "1a1a1a8a-17b3-778f-82e9-85067d4598a7",
 						version = 3,
 					},
 				},
@@ -21512,6 +21898,11 @@ local tbl =
 						actionID = 7531,
 						conditions = 
 						{
+							
+							{
+								"253ffa90-51fd-7cda-b88b-4efadb0094d9",
+								true,
+							},
 							
 							{
 								"6664293e-8443-cd35-83c2-010e167b66b7",
@@ -21582,6 +21973,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11393,
@@ -21595,6 +21987,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 3,
 						eventArgType = 2,
@@ -21654,6 +22047,23 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sildihn criterion only",
+						uuid = "253ffa90-51fd-7cda-b88b-4efadb0094d9",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 			eventType = 3,
@@ -21705,6 +22115,11 @@ local tbl =
 						actionID = 7535,
 						conditions = 
 						{
+							
+							{
+								"3e927ecd-0fa5-8b05-9f3d-c5e0487160ff",
+								true,
+							},
 							
 							{
 								"c943339e-9a7d-1950-989f-7beadb8dad96",
@@ -21776,6 +22191,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11393,
@@ -21789,6 +22205,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 3,
 						eventArgType = 2,
@@ -21851,6 +22268,23 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sildihn criterion only",
+						uuid = "3e927ecd-0fa5-8b05-9f3d-c5e0487160ff",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 			eventType = 3,
@@ -21902,6 +22336,11 @@ local tbl =
 						aType = "ACR",
 						conditions = 
 						{
+							
+							{
+								"6fd68e04-388e-7f79-8e3f-c65d07e9317b",
+								true,
+							},
 							
 							{
 								"0c158e2f-7293-ee11-aa0e-fee3a27d7216",
@@ -21974,6 +22413,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11393,
@@ -21987,6 +22427,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 3,
 						eventArgType = 2,
@@ -22047,6 +22488,23 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sildihn criterion only",
+						uuid = "6fd68e04-388e-7f79-8e3f-c65d07e9317b",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 			eventType = 3,
@@ -22098,6 +22556,11 @@ local tbl =
 						actionID = 16538,
 						conditions = 
 						{
+							
+							{
+								"59c4dd0b-db71-5a89-bf75-611f69ee7fe2",
+								true,
+							},
 							
 							{
 								"18f7b607-e804-d2c0-b1c1-fbd7204cee7a",
@@ -22168,6 +22631,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11393,
@@ -22181,6 +22645,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 3,
 						eventArgType = 2,
@@ -22241,6 +22706,23 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sildihn criterion only",
+						uuid = "59c4dd0b-db71-5a89-bf75-611f69ee7fe2",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 			eventType = 3,
@@ -22292,6 +22774,11 @@ local tbl =
 						actionID = 16537,
 						conditions = 
 						{
+							
+							{
+								"426f6327-8f55-ec77-8b41-62dc4b2c6858",
+								true,
+							},
 							
 							{
 								"6f8bcd38-d724-bf4d-97ad-64a00373ca78",
@@ -22362,6 +22849,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11393,
@@ -22375,6 +22863,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 3,
 						eventArgType = 2,
@@ -22435,6 +22924,23 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sildihn criterion only",
+						uuid = "426f6327-8f55-ec77-8b41-62dc4b2c6858",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 			eventType = 3,
@@ -22486,6 +22992,11 @@ local tbl =
 						actionID = 16543,
 						conditions = 
 						{
+							
+							{
+								"15d9940a-382b-df25-b36a-16c88518e451",
+								true,
+							},
 							
 							{
 								"7470af21-810b-b47f-b89d-7877f0d16849",
@@ -22556,6 +23067,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11393,
@@ -22569,6 +23081,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 3,
 						eventArgType = 2,
@@ -22629,6 +23142,23 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sildihn criterion only",
+						uuid = "15d9940a-382b-df25-b36a-16c88518e451",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 			eventType = 3,
@@ -22680,6 +23210,11 @@ local tbl =
 						actionID = 7437,
 						conditions = 
 						{
+							
+							{
+								"09b66f50-f5a0-d24d-8807-c851f0ec28f3",
+								true,
+							},
 							
 							{
 								"40f52c9c-2957-7fe9-8fea-4ce653eda36d",
@@ -22751,6 +23286,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11393,
@@ -22764,6 +23300,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgType = 2,
 						eventSpellID = 29872,
@@ -22818,6 +23355,23 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sildihn criterion only",
+						uuid = "09b66f50-f5a0-d24d-8807-c851f0ec28f3",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 			eventType = 3,
@@ -22869,6 +23423,11 @@ local tbl =
 						actionID = 16012,
 						conditions = 
 						{
+							
+							{
+								"eb75554a-f503-b75b-9eb8-19ae64dfaac5",
+								true,
+							},
 							
 							{
 								"2bbb1693-a33b-382f-bbbc-f8f93ebb44e0",
@@ -22939,6 +23498,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11393,
@@ -22952,6 +23512,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 3,
 						eventArgType = 2,
@@ -23012,6 +23573,23 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sildihn criterion only",
+						uuid = "eb75554a-f503-b75b-9eb8-19ae64dfaac5",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 			eventType = 3,
@@ -23063,6 +23641,11 @@ local tbl =
 						actionID = 16015,
 						conditions = 
 						{
+							
+							{
+								"9aaefcc9-a4c2-4689-9a24-2309032ddf64",
+								true,
+							},
 							
 							{
 								"bf47b0b8-a448-1acc-9643-13881b60d906",
@@ -23133,6 +23716,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11393,
@@ -23146,6 +23730,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 3,
 						eventArgType = 2,
@@ -23206,6 +23791,23 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sildihn criterion only",
+						uuid = "9aaefcc9-a4c2-4689-9a24-2309032ddf64",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 			eventType = 3,
@@ -23257,6 +23859,11 @@ local tbl =
 						actionID = 7549,
 						conditions = 
 						{
+							
+							{
+								"030264b3-13a2-4877-9043-e11c8ddfcdeb",
+								true,
+							},
 							
 							{
 								"0520d847-a236-5953-844b-9d58482ed8c2",
@@ -23333,6 +23940,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11393,
@@ -23346,6 +23954,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 3,
 						eventArgType = 2,
@@ -23413,6 +24022,23 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sildihn criterion only",
+						uuid = "030264b3-13a2-4877-9043-e11c8ddfcdeb",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 			eventType = 3,
@@ -23464,6 +24090,11 @@ local tbl =
 						actionID = 16012,
 						conditions = 
 						{
+							
+							{
+								"8aa8252e-db64-349c-97bb-8163f914db8e",
+								true,
+							},
 							
 							{
 								"2587f52d-3ccb-3d1e-acaa-900431d4032c",
@@ -23534,6 +24165,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11393,
@@ -23547,6 +24179,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						eventArgOptionType = 3,
 						eventArgType = 2,
@@ -23604,6 +24237,23 @@ local tbl =
 						displayPath = "Sildihn criterion/Mitigations/Zeless Gah",
 						name = "Later Show window",
 						uuid = "9d58137e-89d5-fdb6-8098-a783a7783510",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sildihn criterion only",
+						uuid = "8aa8252e-db64-349c-97bb-8163f914db8e",
 						version = 3,
 					},
 				},
@@ -24083,6 +24733,1201 @@ local tbl =
 			uuid = "1b62ea4a-15db-9353-86c5-43e231760544",
 		},
 		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "AutoSim",
+			uuid = "0ade631b-d420-5b84-b475-c075ad8f9aaf",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "AutoSim",
+			name = "Silkie",
+			uuid = "9d9e69f8-f2df-727c-9607-4a2e6d5a752e",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if not SildihnControlConfig then\n local C={reserveLL=true,reserveCD=true,countdownTarget=true,diagnostics=true,silkieNormal=283,silkieSavage=288,gladiator=285}\n C.keys={\"reserveLL\",\"reserveCD\",\"countdownTarget\",\"diagnostics\",\"silkieNormal\",\"silkieSavage\",\"gladiator\"}\n C.path=GetStartupPath()..[[\\LuaMods\\TensorReactions\\Sildihn.AutoSim.settings.tsv]]\n local f=io.open(C.path,\"r\")\n if f then\n  for line in f:lines() do\n   local k,v=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n   if C[k]~=nil then\n    if type(C[k])==\"boolean\" then C[k]=v==\"1\"\n    elseif type(C[k])==\"number\" then local n=tonumber(v);if n and n==n and n>0 and n<1200 then C[k]=n end end\n   end\n  end\n  f:close()\n end\n function C.save()\n  local f=io.open(C.path,\"w\");if not f then return end\n  for _,k in ipairs(C.keys) do local v=C[k];if type(v)==\"boolean\" then v=v and 1 or 0 end;f:write(k,\"\\t\",tostring(v),\"\\n\") end\n  f:close()\n end\n SildihnControlConfig=C\nend\nlocal C=SildihnControlConfig\n-- Criterion/Savage. Normal movement retains public BLM samples; Savage Silkie uses two local death-free clears.\n-- Movement is sampled repositioning, not a claim that every player must move for the full interval.\n-- Shared public API: unsupported phase types are ignored by compatible AutoSim ACRs.\n-- No FFLogs requests or credentials are stored in this reaction.\nlocal A=TensorCore.API.TensorACR\n-- Shared per-pull state prevents countdown and opening cast from applying twice.\ndata.sildihnAutoSim=data.sildihnAutoSim or {}\nlocal all=data.sildihnAutoSim\nall[4231]=all[4231] or {next=1}\nlocal state=all[4231]\nif state.done then self.used=true;return end\nif not state.setup then\n local p=TensorCore.mGetPlayer()\n A.setAutoSimKillTime(p and p.localmapid==1076 and C.silkieSavage or C.silkieNormal)\n -- No confirmed forced full downtime: boss damage continues through these mechanics.\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,2)\n state.setup=true\nend\nlocal movement={{32.0,33.5},{54.0,58.5},{61.5,63.0},{64.0,70.5},{88.0,92.5},{96.5,97.5},{114.0,117.5},{118.5,122.0},{123.5,124.5},{130.0,131.5},{174.5,175.5},{178.5,179.5},{188.5,189.5},{191.0,192.5},{206.0,212.5},{218.5,221.0},{222.5,224.0},{230.5,236.0}}\n-- Observed personal repositioning union, not universal forced movement.\nlocal p=TensorCore.mGetPlayer()\nif p and p.localmapid==1076 then movement={{62.27,69.17},{93.65,94.71},{112.40,116.53},{118.33,120.53},{121.22,123.12},{136.54,138.85},{139.27,142.40},{155.07,156.21},{180.77,183.29},{203.22,211.13},{232.32,236.03},{256.38,261.93},{262.21,265.43},{276.48,277.51},{278.27,279.56}} end\nwhile state.next<=#movement do\n local w=movement[state.next]\n A.addAutoSimPhase(\"CasterDowntime\",w[1],w[2])\n state.next=state.next+1\nend\n-- User remains at the new position; do not forecast automatic ground-field re-entry.\nstate.done=true\nself.used=true\n",
+						conditions = 
+						{
+							
+							{
+								"b389f67d-f13f-7a4b-9638-f394f3de2e13",
+								true,
+							},
+							
+							{
+								"e2d7e1b6-f8a9-0590-bf07-98fc27b776e6",
+								true,
+							},
+							
+							{
+								"3684fc36-6334-8752-a52e-805fd1d436fa",
+								true,
+							},
+						},
+						name = "Apply boss schedule once",
+						uuid = "d820e33f-0209-b247-90bb-b8879dabea9a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						localmapid = 1075,
+						name = "Criterion/Savage",
+						uuid = "b389f67d-f13f-7a4b-9638-f394f3de2e13",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						conditionType = 2,
+						contentid = 11369,
+						name = "Silkie",
+						uuid = "e2d7e1b6-f8a9-0590-bf07-98fc27b776e6",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local ok,t=pcall(TensorCore.API.TensorACR.getAutoSimTime)\nreturn ok and type(t)==\"number\" and t<=0 and t>=-120",
+						name = "AutoSim countdown ready",
+						uuid = "3684fc36-6334-8752-a52e-805fd1d436fa",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "AutoSim/Silkie",
+			eventType = 16,
+			name = "[AutoSim] Silkie",
+			uuid = "1e17c2da-89cc-863a-b3a9-d749c6ff0f16",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if not SildihnControlConfig then\n local C={reserveLL=true,reserveCD=true,countdownTarget=true,diagnostics=true,silkieNormal=283,silkieSavage=288,gladiator=285}\n C.keys={\"reserveLL\",\"reserveCD\",\"countdownTarget\",\"diagnostics\",\"silkieNormal\",\"silkieSavage\",\"gladiator\"}\n C.path=GetStartupPath()..[[\\LuaMods\\TensorReactions\\Sildihn.AutoSim.settings.tsv]]\n local f=io.open(C.path,\"r\")\n if f then\n  for line in f:lines() do\n   local k,v=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n   if C[k]~=nil then\n    if type(C[k])==\"boolean\" then C[k]=v==\"1\"\n    elseif type(C[k])==\"number\" then local n=tonumber(v);if n and n==n and n>0 and n<1200 then C[k]=n end end\n   end\n  end\n  f:close()\n end\n function C.save()\n  local f=io.open(C.path,\"w\");if not f then return end\n  for _,k in ipairs(C.keys) do local v=C[k];if type(v)==\"boolean\" then v=v and 1 or 0 end;f:write(k,\"\\t\",tostring(v),\"\\n\") end\n  f:close()\n end\n SildihnControlConfig=C\nend\nlocal C=SildihnControlConfig\n-- Criterion/Savage. Normal movement retains public BLM samples; Savage Silkie uses two local death-free clears.\n-- Movement is sampled repositioning, not a claim that every player must move for the full interval.\n-- Shared public API: unsupported phase types are ignored by compatible AutoSim ACRs.\n-- No FFLogs requests or credentials are stored in this reaction.\nlocal A=TensorCore.API.TensorACR\n-- Shared per-pull state prevents countdown and opening cast from applying twice.\ndata.sildihnAutoSim=data.sildihnAutoSim or {}\nlocal all=data.sildihnAutoSim\nall[4231]=all[4231] or {next=1}\nlocal state=all[4231]\nif state.done then self.used=true;return end\nif not state.setup then\n local p=TensorCore.mGetPlayer()\n A.setAutoSimKillTime(p and p.localmapid==1076 and C.silkieSavage or C.silkieNormal)\n -- No confirmed forced full downtime: boss damage continues through these mechanics.\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,2)\n state.setup=true\nend\nlocal movement={{32.0,33.5},{54.0,58.5},{61.5,63.0},{64.0,70.5},{88.0,92.5},{96.5,97.5},{114.0,117.5},{118.5,122.0},{123.5,124.5},{130.0,131.5},{174.5,175.5},{178.5,179.5},{188.5,189.5},{191.0,192.5},{206.0,212.5},{218.5,221.0},{222.5,224.0},{230.5,236.0}}\n-- Observed personal repositioning union, not universal forced movement.\nlocal p=TensorCore.mGetPlayer()\nif p and p.localmapid==1076 then movement={{62.27,69.17},{93.65,94.71},{112.40,116.53},{118.33,120.53},{121.22,123.12},{136.54,138.85},{139.27,142.40},{155.07,156.21},{180.77,183.29},{203.22,211.13},{232.32,236.03},{256.38,261.93},{262.21,265.43},{276.48,277.51},{278.27,279.56}} end\nwhile state.next<=#movement do\n local w=movement[state.next]\n A.addAutoSimPhase(\"CasterDowntime\",w[1],w[2])\n state.next=state.next+1\nend\n-- User remains at the new position; do not forecast automatic ground-field re-entry.\nstate.done=true\nself.used=true\n",
+						conditions = 
+						{
+							
+							{
+								"2978a5f8-5d2f-38d1-bd4f-de775835376d",
+								true,
+							},
+							
+							{
+								"6a1ed787-7da8-eec5-83d3-a02c5f6a1939",
+								true,
+							},
+							
+							{
+								"2464d68c-3130-1ae0-8eb3-81ac8a8dd26f",
+								true,
+							},
+							
+							{
+								"01cfe524-dfeb-5634-89b3-b7eeefe8d437",
+								true,
+							},
+							
+							{
+								"9a14863c-3e60-fad0-b504-f283493ea07d",
+								true,
+							},
+						},
+						name = "Apply boss schedule once",
+						uuid = "897c091f-6032-7045-8c9b-63a203c9bebc",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						localmapid = 1075,
+						name = "Criterion/Savage",
+						uuid = "2978a5f8-5d2f-38d1-bd4f-de775835376d",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 3,
+						eventArgType = 2,
+						eventSpellID = 30553,
+						name = "Opening cast",
+						spellIDList = 
+						{
+							30553,
+							30588,
+						},
+						uuid = "6a1ed787-7da8-eec5-83d3-a02c5f6a1939",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 2,
+						eventEntityContentID = 11369,
+						name = "Main boss",
+						uuid = "2464d68c-3130-1ae0-8eb3-81ac8a8dd26f",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local all=data.sildihnAutoSim\nreturn not (all and all[4231] and all[4231].done)",
+						dequeueIfLuaFalse = true,
+						name = "Not applied this pull",
+						uuid = "01cfe524-dfeb-5634-89b3-b7eeefe8d437",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local ok,t=pcall(TensorCore.API.TensorACR.getAutoSimTime)\nreturn ok and type(t)==\"number\" and t>=0 and t<=30",
+						name = "AutoSim opening ready",
+						uuid = "9a14863c-3e60-fad0-b504-f283493ea07d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "AutoSim/Silkie",
+			eventType = 3,
+			name = "[AutoSim fallback] Silkie",
+			timeout = 10,
+			uuid = "98ed28c0-18b1-9e46-96c1-ebd08243fca2",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "AutoSim",
+			name = "Gladiator of Sil'dih",
+			uuid = "0b5bb8a8-13e5-fecf-9ca8-ba037a87a8de",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if not SildihnControlConfig then\n local C={reserveLL=true,reserveCD=true,countdownTarget=true,diagnostics=true,silkieNormal=283,silkieSavage=288,gladiator=285}\n C.keys={\"reserveLL\",\"reserveCD\",\"countdownTarget\",\"diagnostics\",\"silkieNormal\",\"silkieSavage\",\"gladiator\"}\n C.path=GetStartupPath()..[[\\LuaMods\\TensorReactions\\Sildihn.AutoSim.settings.tsv]]\n local f=io.open(C.path,\"r\")\n if f then\n  for line in f:lines() do\n   local k,v=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n   if C[k]~=nil then\n    if type(C[k])==\"boolean\" then C[k]=v==\"1\"\n    elseif type(C[k])==\"number\" then local n=tonumber(v);if n and n==n and n>0 and n<1200 then C[k]=n end end\n   end\n  end\n  f:close()\n end\n function C.save()\n  local f=io.open(C.path,\"w\");if not f then return end\n  for _,k in ipairs(C.keys) do local v=C[k];if type(v)==\"boolean\" then v=v and 1 or 0 end;f:write(k,\"\\t\",tostring(v),\"\\n\") end\n  f:close()\n end\n SildihnControlConfig=C\nend\nlocal C=SildihnControlConfig\n-- Criterion/Savage. Normal movement retains public BLM samples; Savage Silkie uses two local death-free clears.\n-- Movement is sampled repositioning, not a claim that every player must move for the full interval.\n-- Shared public API: unsupported phase types are ignored by compatible AutoSim ACRs.\n-- No FFLogs requests or credentials are stored in this reaction.\nlocal A=TensorCore.API.TensorACR\n-- Shared per-pull state prevents countdown and opening cast from applying twice.\ndata.sildihnAutoSim=data.sildihnAutoSim or {}\nlocal all=data.sildihnAutoSim\nall[4232]=all[4232] or {next=1}\nlocal state=all[4232]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(C.gladiator)\n -- No confirmed forced full downtime: boss damage continues through these mechanics.\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,2)\n state.setup=true\nend\nlocal movement={{32.0,36.5},{39.0,41.0},{51.0,54.5},{56.0,59.5},{105.5,109.0},{111.5,117.0},{134.5,136.0},{148.5,150.0},{152.0,155.5},{165.0,167.5},{177.5,179.5},{180.5,184.0},{186.5,188.5},{189.5,193.5},{196.0,197.0},{215.5,223.5},{228.5,230.0}}\nwhile state.next<=#movement do\n local w=movement[state.next]\n A.addAutoSimPhase(\"CasterDowntime\",w[1],w[2])\n state.next=state.next+1\nend\n-- User remains at the new position; do not forecast automatic ground-field re-entry.\nstate.done=true\nself.used=true\n",
+						conditions = 
+						{
+							
+							{
+								"bc8313c5-dd22-b9d1-a7b0-30e39f87a243",
+								true,
+							},
+							
+							{
+								"41298867-24fe-4d1f-a360-80dd3db7e005",
+								true,
+							},
+							
+							{
+								"fff05307-6ed9-06b0-89e5-ae587e27478d",
+								true,
+							},
+						},
+						name = "Apply boss schedule once",
+						uuid = "60ce75f0-d7ec-cd85-a295-fdeaa242227e",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						localmapid = 1075,
+						name = "Criterion/Savage",
+						uuid = "bc8313c5-dd22-b9d1-a7b0-30e39f87a243",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						conditionType = 2,
+						contentid = 11387,
+						name = "Gladiator of Sil'dih",
+						uuid = "41298867-24fe-4d1f-a360-80dd3db7e005",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local ok,t=pcall(TensorCore.API.TensorACR.getAutoSimTime)\nreturn ok and type(t)==\"number\" and t<=0 and t>=-120",
+						name = "AutoSim countdown ready",
+						uuid = "fff05307-6ed9-06b0-89e5-ae587e27478d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "AutoSim/Gladiator of Sil'dih",
+			eventType = 16,
+			name = "[AutoSim] Gladiator of Sil'dih",
+			uuid = "cf36192a-b81b-b53d-9db7-2441056b5cb7",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if not SildihnControlConfig then\n local C={reserveLL=true,reserveCD=true,countdownTarget=true,diagnostics=true,silkieNormal=283,silkieSavage=288,gladiator=285}\n C.keys={\"reserveLL\",\"reserveCD\",\"countdownTarget\",\"diagnostics\",\"silkieNormal\",\"silkieSavage\",\"gladiator\"}\n C.path=GetStartupPath()..[[\\LuaMods\\TensorReactions\\Sildihn.AutoSim.settings.tsv]]\n local f=io.open(C.path,\"r\")\n if f then\n  for line in f:lines() do\n   local k,v=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n   if C[k]~=nil then\n    if type(C[k])==\"boolean\" then C[k]=v==\"1\"\n    elseif type(C[k])==\"number\" then local n=tonumber(v);if n and n==n and n>0 and n<1200 then C[k]=n end end\n   end\n  end\n  f:close()\n end\n function C.save()\n  local f=io.open(C.path,\"w\");if not f then return end\n  for _,k in ipairs(C.keys) do local v=C[k];if type(v)==\"boolean\" then v=v and 1 or 0 end;f:write(k,\"\\t\",tostring(v),\"\\n\") end\n  f:close()\n end\n SildihnControlConfig=C\nend\nlocal C=SildihnControlConfig\n-- Criterion/Savage. Normal movement retains public BLM samples; Savage Silkie uses two local death-free clears.\n-- Movement is sampled repositioning, not a claim that every player must move for the full interval.\n-- Shared public API: unsupported phase types are ignored by compatible AutoSim ACRs.\n-- No FFLogs requests or credentials are stored in this reaction.\nlocal A=TensorCore.API.TensorACR\n-- Shared per-pull state prevents countdown and opening cast from applying twice.\ndata.sildihnAutoSim=data.sildihnAutoSim or {}\nlocal all=data.sildihnAutoSim\nall[4232]=all[4232] or {next=1}\nlocal state=all[4232]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(C.gladiator)\n -- No confirmed forced full downtime: boss damage continues through these mechanics.\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,2)\n state.setup=true\nend\nlocal movement={{32.0,36.5},{39.0,41.0},{51.0,54.5},{56.0,59.5},{105.5,109.0},{111.5,117.0},{134.5,136.0},{148.5,150.0},{152.0,155.5},{165.0,167.5},{177.5,179.5},{180.5,184.0},{186.5,188.5},{189.5,193.5},{196.0,197.0},{215.5,223.5},{228.5,230.0}}\nwhile state.next<=#movement do\n local w=movement[state.next]\n A.addAutoSimPhase(\"CasterDowntime\",w[1],w[2])\n state.next=state.next+1\nend\n-- User remains at the new position; do not forecast automatic ground-field re-entry.\nstate.done=true\nself.used=true\n",
+						conditions = 
+						{
+							
+							{
+								"ec694e1e-5a3f-925c-9970-c44f6d9454c3",
+								true,
+							},
+							
+							{
+								"af2ab967-c420-4520-8f67-bca5845bc53c",
+								true,
+							},
+							
+							{
+								"d6a7dbc9-3510-d5fd-ab42-4dfc00af76bd",
+								true,
+							},
+							
+							{
+								"45f88baf-3a0a-68e9-957a-66f236be9696",
+								true,
+							},
+							
+							{
+								"85d290f3-cbde-fc5d-bf8c-8fd8846137ef",
+								true,
+							},
+						},
+						name = "Apply boss schedule once",
+						uuid = "335ba04f-debf-e706-aaec-5448345ca322",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						localmapid = 1075,
+						name = "Criterion/Savage",
+						uuid = "ec694e1e-5a3f-925c-9970-c44f6d9454c3",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 3,
+						eventArgType = 2,
+						eventSpellID = 30321,
+						name = "Opening cast",
+						spellIDList = 
+						{
+							30321,
+							30643,
+						},
+						uuid = "af2ab967-c420-4520-8f67-bca5845bc53c",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 2,
+						eventEntityContentID = 11387,
+						name = "Main boss",
+						uuid = "d6a7dbc9-3510-d5fd-ab42-4dfc00af76bd",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local all=data.sildihnAutoSim\nreturn not (all and all[4232] and all[4232].done)",
+						dequeueIfLuaFalse = true,
+						name = "Not applied this pull",
+						uuid = "45f88baf-3a0a-68e9-957a-66f236be9696",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local ok,t=pcall(TensorCore.API.TensorACR.getAutoSimTime)\nreturn ok and type(t)==\"number\" and t>=0 and t<=30",
+						name = "AutoSim opening ready",
+						uuid = "85d290f3-cbde-fc5d-bf8c-8fd8846137ef",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "AutoSim/Gladiator of Sil'dih",
+			eventType = 3,
+			name = "[AutoSim fallback] Gladiator of Sil'dih",
+			timeout = 10,
+			uuid = "f0ed6d2c-960d-a3ea-a046-5c3b6bd1b018",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "AutoSim",
+			name = "Shadowcaster Zeless Gah",
+			uuid = "3084a168-613b-bcdd-a44c-854692efb781",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "-- Criterion only (1075). Local-group kill estimate; movement retains three public BLM samples.\n-- Movement is sampled repositioning, not a claim that every player must move for the full interval.\n-- Shared public API: unsupported phase types are ignored by compatible AutoSim ACRs.\n-- No FFLogs requests or credentials are stored in this reaction.\nlocal A=TensorCore.API.TensorACR\n-- Shared per-pull state prevents countdown and opening cast from applying twice.\ndata.sildihnAutoSim=data.sildihnAutoSim or {}\nlocal all=data.sildihnAutoSim\nall[4233]=all[4233] or {next=1}\nlocal state=all[4233]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(268)\n -- No confirmed forced full downtime: boss damage continues through these mechanics.\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,2)\n state.setup=true\nend\nlocal movement={{38.0,39.0},{49.0,52.0},{97.0,102.0},{105.5,108.5},{111.0,114.0},{121.0,122.0},{130.5,131.5},{134.5,136.0},{142.5,143.5},{162.5,165.0},{171.0,184.0},{187.0,189.5},{209.5,212.0},{213.5,215.5},{227.5,232.5}}\nwhile state.next<=#movement do\n local w=movement[state.next]\n A.addAutoSimPhase(\"CasterDowntime\",w[1],w[2])\n state.next=state.next+1\nend\n-- Plan a safe Between the Lines return after these BLM-supported dodge windows.\n-- Forecast only: this does not request or force the movement ability.\nlocal returns={{134.5,136.0},{142.5,143.5}}\nstate.nextReturn=state.nextReturn or 1\nwhile state.nextReturn<=#returns do\n local w=returns[state.nextReturn]\n A.addAutoSimPhase(\"GroundFieldMovement\",w[1],w[2],2)\n state.nextReturn=state.nextReturn+1\nend\nstate.done=true\nself.used=true\n",
+						conditions = 
+						{
+							
+							{
+								"89815bdd-6852-8ab1-bd26-8819e9af3f81",
+								true,
+							},
+							
+							{
+								"b3ad16f0-cd7a-c488-9db7-91937508e3cd",
+								true,
+							},
+							
+							{
+								"08a61150-29be-87ef-afac-6b3818265c40",
+								true,
+							},
+						},
+						name = "Apply boss schedule once",
+						uuid = "889e7afe-733c-484a-b3ed-89d7cb8418fe",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 1075,
+						name = "Criterion Sil'dihn (1075)",
+						uuid = "89815bdd-6852-8ab1-bd26-8819e9af3f81",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						conditionType = 2,
+						contentid = 11393,
+						name = "Shadowcaster Zeless Gah",
+						uuid = "b3ad16f0-cd7a-c488-9db7-91937508e3cd",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local ok,t=pcall(TensorCore.API.TensorACR.getAutoSimTime)\nreturn ok and type(t)==\"number\" and t<=0 and t>=-120",
+						name = "AutoSim countdown ready",
+						uuid = "08a61150-29be-87ef-afac-6b3818265c40",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "AutoSim/Shadowcaster Zeless Gah",
+			eventType = 16,
+			name = "[AutoSim] Shadowcaster Zeless Gah",
+			uuid = "e389dfac-216e-3748-b7ce-fb2c8af7cbdd",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "-- Criterion only (1075). Local-group kill estimate; movement retains three public BLM samples.\n-- Movement is sampled repositioning, not a claim that every player must move for the full interval.\n-- Shared public API: unsupported phase types are ignored by compatible AutoSim ACRs.\n-- No FFLogs requests or credentials are stored in this reaction.\nlocal A=TensorCore.API.TensorACR\n-- Shared per-pull state prevents countdown and opening cast from applying twice.\ndata.sildihnAutoSim=data.sildihnAutoSim or {}\nlocal all=data.sildihnAutoSim\nall[4233]=all[4233] or {next=1}\nlocal state=all[4233]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(268)\n -- No confirmed forced full downtime: boss damage continues through these mechanics.\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,2)\n state.setup=true\nend\nlocal movement={{38.0,39.0},{49.0,52.0},{97.0,102.0},{105.5,108.5},{111.0,114.0},{121.0,122.0},{130.5,131.5},{134.5,136.0},{142.5,143.5},{162.5,165.0},{171.0,184.0},{187.0,189.5},{209.5,212.0},{213.5,215.5},{227.5,232.5}}\nwhile state.next<=#movement do\n local w=movement[state.next]\n A.addAutoSimPhase(\"CasterDowntime\",w[1],w[2])\n state.next=state.next+1\nend\n-- Plan a safe Between the Lines return after these BLM-supported dodge windows.\n-- Forecast only: this does not request or force the movement ability.\nlocal returns={{134.5,136.0},{142.5,143.5}}\nstate.nextReturn=state.nextReturn or 1\nwhile state.nextReturn<=#returns do\n local w=returns[state.nextReturn]\n A.addAutoSimPhase(\"GroundFieldMovement\",w[1],w[2],2)\n state.nextReturn=state.nextReturn+1\nend\nstate.done=true\nself.used=true\n",
+						conditions = 
+						{
+							
+							{
+								"caa2508b-c479-cdc7-b8de-4fba6eb50b93",
+								true,
+							},
+							
+							{
+								"e9d99d6d-fdc0-d37d-b22f-7280136b6217",
+								true,
+							},
+							
+							{
+								"14e269ea-5d6a-23d5-b60c-beb72b59dead",
+								true,
+							},
+							
+							{
+								"05de6b9b-e210-de93-b953-041cad8fabd7",
+								true,
+							},
+							
+							{
+								"5feae289-e633-29bf-abd5-a548bb448553",
+								true,
+							},
+						},
+						name = "Apply boss schedule once",
+						uuid = "a26a0fc5-82b7-4010-b529-2c1df1e96b26",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1075,
+						name = "Criterion only",
+						uuid = "caa2508b-c479-cdc7-b8de-4fba6eb50b93",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgType = 2,
+						eventSpellID = 29871,
+						name = "Opening cast",
+						uuid = "e9d99d6d-fdc0-d37d-b22f-7280136b6217",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 2,
+						eventEntityContentID = 11393,
+						name = "Main boss",
+						uuid = "14e269ea-5d6a-23d5-b60c-beb72b59dead",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local all=data.sildihnAutoSim\nreturn not (all and all[4233] and all[4233].done)",
+						dequeueIfLuaFalse = true,
+						name = "Not applied this pull",
+						uuid = "05de6b9b-e210-de93-b953-041cad8fabd7",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local ok,t=pcall(TensorCore.API.TensorACR.getAutoSimTime)\nreturn ok and type(t)==\"number\" and t>=0 and t<=30",
+						name = "AutoSim opening ready",
+						uuid = "5feae289-e633-29bf-abd5-a548bb448553",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "AutoSim/Shadowcaster Zeless Gah",
+			eventType = 3,
+			name = "[AutoSim fallback] Shadowcaster Zeless Gah",
+			timeout = 10,
+			uuid = "4899bfa3-e9b3-73a9-892e-7f2f59fb8b55",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "General",
+			uuid = "f813773b-8596-5e14-8a97-028b7b2994b9",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "General",
+			eventType = 11,
+			execute = "if AnyoneCore and AnyoneCore.Settings and AnyoneCore.Settings.PrepullHelper then\n    if AnyoneCore.Settings.PrepullHelper.enabled then\n        AnyoneCore.Settings.PrepullHelper.enabled = false\n    end\n    self.used = true\nend",
+			executeType = 2,
+			name = "[AA] Disable Prepull Helper - Zone entry",
+			throttleTime = 1000,
+			uuid = "937e8d58-45f2-2469-9ec3-938527d548e1",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "General",
+			eventType = 16,
+			execute = "if AnyoneCore and AnyoneCore.Settings and AnyoneCore.Settings.PrepullHelper then\n    if AnyoneCore.Settings.PrepullHelper.enabled then\n        AnyoneCore.Settings.PrepullHelper.enabled = false\n    end\n    self.used = true\nend",
+			executeType = 2,
+			name = "[AA] Disable Prepull Helper - Countdown",
+			uuid = "03b72cd7-0b8a-6290-8d8a-1d9a8fd6efdd",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "AutoSim ",
+			uuid = "26ae482c-6881-3296-98ae-e99f0cdcabbb",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "AutoSim ",
+			name = " encounter settings",
+			uuid = "f35e9d0c-8678-4c0d-b2bb-7c2d246dd675",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if not SildihnControlConfig then\n local C={reserveLL=true,reserveCD=true,countdownTarget=true,diagnostics=true,silkieNormal=283,silkieSavage=288,gladiator=285}\n C.keys={\"reserveLL\",\"reserveCD\",\"countdownTarget\",\"diagnostics\",\"silkieNormal\",\"silkieSavage\",\"gladiator\"}\n C.path=GetStartupPath()..[[\\LuaMods\\TensorReactions\\Sildihn.AutoSim.settings.tsv]]\n local f=io.open(C.path,\"r\")\n if f then\n  for line in f:lines() do\n   local k,v=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n   if C[k]~=nil then\n    if type(C[k])==\"boolean\" then C[k]=v==\"1\"\n    elseif type(C[k])==\"number\" then local n=tonumber(v);if n and n==n and n>0 and n<1200 then C[k]=n end end\n   end\n  end\n  f:close()\n end\n function C.save()\n  local f=io.open(C.path,\"w\");if not f then return end\n  for _,k in ipairs(C.keys) do local v=C[k];if type(v)==\"boolean\" then v=v and 1 or 0 end;f:write(k,\"\\t\",tostring(v),\"\\n\") end\n  f:close()\n end\n SildihnControlConfig=C\nend\nlocal C=SildihnControlConfig\nlocal S=data.sildihnControl\nif not S then\n S={owned={},groups={},washCount=0};data.sildihnControl=S\n S.p1groups={[11514]=1,[11510]=2,[11511]=3,[11512]=3,[11513]=4,[11481]=4}\n S.p2ids={[11515]=true,[11506]=true}\n function S.log(message)\n  if not C.diagnostics then return end\n  local line=\"[Sildihn AutoSim] \"..message;d(line)\n  local f=io.open(GetStartupPath()..[[\\LuaMods\\TensorReactions\\Sildihn.AutoSim.diagnostics.log]],\"a\")\n  if f then f:write(line,\"\\n\");f:close() end\n end\n function S.restore()\n  for var,old in pairs(S.owned) do if _G[var]==false then _G[var]=old end;S.owned[var]=nil end\n  if S.held then S.log(\"final trash reserve released\");S.held=nil end\n end\n function S.wash(args)\n  local e=TensorCore.mGetEntity(args.entityID)\n  if not e or e.castinginfo.channelingid~=args.spellID then return end\n  if args.spellID==30557 or args.spellID==30592 then\n   local ok,t=pcall(TensorCore.API.TensorACR.getAutoSimTime)\n   if ok and type(t)==\"number\" and t>=0 and t<30 then return 0 end\n   return\n  end\n  local start=Now()-e.castinginfo.channeltime*1000\n  if S.washBoss~=e.id then S.washBoss=e.id;S.washCount=0;S.washStart=nil end\n  if not S.washStart or math.abs(start-S.washStart)>1000 then\n   S.washStart=start;S.washCount=S.washCount+1\n   S.log(\"Total Wash=\"..S.washCount..\" assigned=\"..(S.washCount%2==1 and \"caster Addle\" or \"physical ranged\"))\n  end\n  return S.washCount\n end\n function S.tick()\n  local p=TensorCore.mGetPlayer();local target=TensorCore.mGetTarget()\n  if not p then S.restore();return end\n  if not target or not target.hp or target.hp.current<=0 or not target.attackable then\n   if not ((p.job==25 and C.reserveLL) or (p.job~=25 and C.reserveCD)) then S.restore() end\n   return\n  end\n  local stage=S.p1groups[target.contentid] and 1 or (S.p2ids[target.contentid] and 2 or 0)\n  if stage==0 then S.restore();return end\n  for k in pairs(S.groups) do S.groups[k]=nil end\n  local count=0\n  local enemies=TensorCore.getEntityGroupList(\"Enemy\")\n  for _,e in pairs(enemies) do\n   if e.targetable and e.attackable and e.hp and e.hp.current>0 then\n    if stage==1 then local g=S.p1groups[e.contentid];if g and not S.groups[g] then S.groups[g]=true;count=count+1 end\n    elseif S.p2ids[e.contentid] then count=count+1 end\n   end\n  end\n  if count~=1 then S.restore();return end\n  local hold=(p.job==25 and C.reserveLL) or (p.job~=25 and C.reserveCD)\n  if not hold then S.restore();return end\n  local suffix=p.job==25 and \"_LeyLines$\" or \"_CD$\"\n  for _,option in pairs(TensorCore.API.TensorACR.getQuickToggles() or {}) do\n   local var=option.var\n   if var and var:match(suffix) and type(_G[var])==\"boolean\" then\n    if _G[var] and S.owned[var]==nil then S.owned[var]=true end\n    if S.owned[var]~=nil then _G[var]=false end\n   end\n  end\n  if not S.held then S.held=true;S.log(\"final trash before boss \"..stage..\"; holding \"..(p.job==25 and \"new Ley Lines uses\" or \"offensive CD toggle\")) end\n end\nend\nS.tick()\nself.used=true\n",
+						conditions = 
+						{
+							
+							{
+								"73cb3bfc-14dc-ea20-a6bb-933fbd0660c7",
+								true,
+							},
+						},
+						name = "Update final-trash reserves",
+						uuid = "402b408f-70ca-6abf-96a4-0b1d46389d9f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sil'dihn Criterion/Savage",
+						uuid = "73cb3bfc-14dc-ea20-a6bb-933fbd0660c7",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "AutoSim / encounter settings",
+			name = "[AutoSim] Final-trash cooldown reserves",
+			throttleTime = 500,
+			timeout = 1,
+			uuid = "be566fe1-c891-2a07-8613-21b34066f002",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if not SildihnControlConfig then\n local C={reserveLL=true,reserveCD=true,countdownTarget=true,diagnostics=true,silkieNormal=283,silkieSavage=288,gladiator=285}\n C.keys={\"reserveLL\",\"reserveCD\",\"countdownTarget\",\"diagnostics\",\"silkieNormal\",\"silkieSavage\",\"gladiator\"}\n C.path=GetStartupPath()..[[\\LuaMods\\TensorReactions\\Sildihn.AutoSim.settings.tsv]]\n local f=io.open(C.path,\"r\")\n if f then\n  for line in f:lines() do\n   local k,v=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n   if C[k]~=nil then\n    if type(C[k])==\"boolean\" then C[k]=v==\"1\"\n    elseif type(C[k])==\"number\" then local n=tonumber(v);if n and n==n and n>0 and n<1200 then C[k]=n end end\n   end\n  end\n  f:close()\n end\n function C.save()\n  local f=io.open(C.path,\"w\");if not f then return end\n  for _,k in ipairs(C.keys) do local v=C[k];if type(v)==\"boolean\" then v=v and 1 or 0 end;f:write(k,\"\\t\",tostring(v),\"\\n\") end\n  f:close()\n end\n SildihnControlConfig=C\nend\nlocal C=SildihnControlConfig\nlocal p=TensorCore.mGetPlayer()\nif p and p.incombat then self.used=true;return end\nlocal visible=GUI:Begin(\"Sil'dihn - AutoSim settings\")\nif visible then\n local v,changed\n v,changed=GUI:Checkbox(\"Reserve Ley Lines on final trash\",C.reserveLL);if changed then C.reserveLL=v;C.save() end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Stops new Ley Lines uses during the last surviving trash group before bosses. Existing Ley Lines continue. Preserves available charges; cannot create one already spent. No charge-count API is assumed.\") end\n v,changed=GUI:Checkbox(\"Other jobs: reserve offensive CDs on final trash\",C.reserveCD);if changed then C.reserveCD=v;C.save() end\n v,changed=GUI:Checkbox(\"Countdown boss targeting (Start Combat off)\",C.countdownTarget);if changed then C.countdownTarget=v;C.save() end\n v,changed=GUI:Checkbox(\"Write diagnostics\",C.diagnostics);if changed then C.diagnostics=v;C.save() end\n v,changed=GUI:SliderInt(\"Silkie Criterion kill estimate (s)\",C.silkieNormal,180,450);if changed then C.silkieNormal=v;C.save() end\n v,changed=GUI:SliderInt(\"Silkie Savage kill estimate (s)\",C.silkieSavage,180,450);if changed then C.silkieSavage=v;C.save() end\n v,changed=GUI:SliderInt(\"Gladiator provisional kill estimate (s)\",C.gladiator,180,450);if changed then C.gladiator=v;C.save() end\n GUI:Text(\"Opening cones + Total Wash 2: physical ranged.\")\n GUI:Text(\"Total Wash 1 + 3: caster Addle (about 92s / 276s).\")\nend\nGUI:End()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"d00a85c1-65ee-f057-97a5-88be8e45c318",
+								true,
+							},
+						},
+						name = "Show Sil'dihn settings",
+						uuid = "a8507915-696e-a5eb-b909-e6857bc3b170",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sil'dihn Criterion/Savage",
+						uuid = "d00a85c1-65ee-f057-97a5-88be8e45c318",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "AutoSim / encounter settings",
+			eventType = 13,
+			name = "[AutoSim] Sil'dihn settings",
+			timeout = 1,
+			uuid = "51a661b6-2d93-3cd1-9476-d5615ad47109",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local s=data.sildihnControl\nif not s then return end\ns.wash(eventArgs)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"6610ad3d-6757-5ce4-9983-7155c902208e",
+								true,
+							},
+							
+							{
+								"0ad16b94-9585-a905-8a56-88fbbe30e567",
+								true,
+							},
+						},
+						name = "Record every Total Wash",
+						uuid = "90ec8431-885b-b605-ae94-d67a5d9defcf",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sil'dihn Criterion/Savage",
+						uuid = "6610ad3d-6757-5ce4-9983-7155c902208e",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 3,
+						eventArgType = 2,
+						name = "Total Wash cast",
+						spellIDList = 
+						{
+							30544,
+							30579,
+						},
+						uuid = "0ad16b94-9585-a905-8a56-88fbbe30e567",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "AutoSim / encounter settings",
+			eventType = 3,
+			name = "[Mit] Silkie - Capture wash sequence",
+			uuid = "66bba7eb-63a9-bbb2-880e-de69eb8334bf",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if not SildihnControlConfig then\n local C={reserveLL=true,reserveCD=true,countdownTarget=true,diagnostics=true,silkieNormal=283,silkieSavage=288,gladiator=285}\n C.keys={\"reserveLL\",\"reserveCD\",\"countdownTarget\",\"diagnostics\",\"silkieNormal\",\"silkieSavage\",\"gladiator\"}\n C.path=GetStartupPath()..[[\\LuaMods\\TensorReactions\\Sildihn.AutoSim.settings.tsv]]\n local f=io.open(C.path,\"r\")\n if f then\n  for line in f:lines() do\n   local k,v=line:match(\"^([^\\t]+)\\t([^\\t]+)$\")\n   if C[k]~=nil then\n    if type(C[k])==\"boolean\" then C[k]=v==\"1\"\n    elseif type(C[k])==\"number\" then local n=tonumber(v);if n and n==n and n>0 and n<1200 then C[k]=n end end\n   end\n  end\n  f:close()\n end\n function C.save()\n  local f=io.open(C.path,\"w\");if not f then return end\n  for _,k in ipairs(C.keys) do local v=C[k];if type(v)==\"boolean\" then v=v and 1 or 0 end;f:write(k,\"\\t\",tostring(v),\"\\n\") end\n  f:close()\n end\n SildihnControlConfig=C\nend\nlocal C=SildihnControlConfig\ngStartCombat=false\ndata.sildihnPrecast={deadline=eventArgs.timeQueued+eventArgs.time*1000,cancelled=false}\nlocal s=data.sildihnControl;if s then s.log(\"countdown boss selection; Start Combat=false\") end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"f736a04d-c4c2-835d-b258-30de54e9f54b",
+								true,
+							},
+							
+							{
+								"53bd6af5-72bf-9d05-bff0-a7e3a7966c40",
+								false,
+							},
+							
+							{
+								"37bec848-26df-b674-9751-7d9fd9e5a3ea",
+								true,
+							},
+						},
+						name = "Keep Start Combat off",
+						uuid = "ed3fe1d4-ddc9-0e46-9bea-985fe4ba6039",
+						version = 2.1,
+					},
+				},
+				
+				{
+					data = 
+					{
+						aType = "Misc",
+						conditions = 
+						{
+							
+							{
+								"f736a04d-c4c2-835d-b258-30de54e9f54b",
+								true,
+							},
+							
+							{
+								"53bd6af5-72bf-9d05-bff0-a7e3a7966c40",
+								false,
+							},
+							
+							{
+								"37bec848-26df-b674-9751-7d9fd9e5a3ea",
+								true,
+							},
+							
+							{
+								"1bdbb258-42e5-01d0-bc4d-d050bdb3e45c",
+								true,
+							},
+							
+							{
+								"058fe45c-9a1d-00f2-b080-cfc89ca6f910",
+								true,
+							},
+						},
+						name = "Select boss for precast",
+						setTarget = true,
+						targetType = "Detection Target",
+						uuid = "942c1464-08ea-6318-82be-8211ba2a2ad5",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sil'dihn Criterion/Savage",
+						uuid = "f736a04d-c4c2-835d-b258-30de54e9f54b",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 7,
+						uuid = "53bd6af5-72bf-9d05-bff0-a7e3a7966c40",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local c=SildihnControlConfig\nreturn c==nil or c.countdownTarget",
+						name = "Countdown targeting enabled",
+						uuid = "37bec848-26df-b674-9751-7d9fd9e5a3ea",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local s=data.sildihnPrecast\nreturn s and not s.cancelled and Now()<s.deadline",
+						name = "Countdown still active",
+						uuid = "1bdbb258-42e5-01d0-bc4d-d050bdb3e45c",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=TensorCore.mGetEntity(eventArgs.detectionTargetID)\nlocal p=TensorCore.mGetPlayer()\nreturn e and p and (e.contentid==11369 or e.contentid==11387) and e.attackable and e.targetable and e.hp.current>0 and TensorCore.getDistance2d(p.pos,e.pos)<=60+e.hitradius",
+						name = "Nearby main Silkie or Gladiator",
+						uuid = "fc271275-4adc-0de0-9063-f14475b0b073",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Filter",
+						conditions = 
+						{
+							
+							{
+								"fc271275-4adc-0de0-9063-f14475b0b073",
+								true,
+							},
+						},
+						filterTargetType = "Enemy",
+						name = "Nearest eligible boss",
+						uuid = "058fe45c-9a1d-00f2-b080-cfc89ca6f910",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "AutoSim / encounter settings",
+			eventType = 16,
+			name = "[AutoSim] Countdown target boss only",
+			timeout = 30,
+			uuid = "d79466c3-a1f3-2c05-9263-b1cc68ef940d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local s=data.sildihnPrecast;if s then s.cancelled=true end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"85bd1e39-0113-e420-ab65-9df59c9a98f3",
+								true,
+							},
+						},
+						name = "Cancel countdown selection",
+						uuid = "f9d8a907-ac1f-c8d3-833f-257070e4ed08",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						name = "Sil'dihn Criterion/Savage",
+						uuid = "85bd1e39-0113-e420-ab65-9df59c9a98f3",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "AutoSim / encounter settings",
+			eventType = 17,
+			name = "[AutoSim] Countdown target cancellation",
+			timeout = 1,
+			uuid = "9002aada-53ab-7027-a606-9f7a74cfee98",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local old=eventArgs.oldData\nlocal s=old and old.sildihnControl\nif s then s.restore() end\nself.used=true",
+						name = "Restore owned cooldown settings",
+						uuid = "2f1aaed3-8e7f-eafc-9132-534d2c5b50f6",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+			},
+			displayPath = "AutoSim / encounter settings",
+			eventType = 9,
+			name = "[AutoSim] Reserve cleanup - wipe",
+			timeout = 1,
+			uuid = "3ce09e45-a8d3-ce01-9f73-dc014d2c3b1d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local s=data.sildihnControl\nif s then s.restore() end\nself.used=true",
+						name = "Restore owned cooldown settings",
+						uuid = "74bcd932-77be-60b7-b6ce-f795c408e2d5",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+			},
+			displayPath = "AutoSim / encounter settings",
+			eventType = 11,
+			name = "[AutoSim] Reserve cleanup - map",
+			timeout = 1,
+			uuid = "e4629fd2-d8a2-fb64-9d52-bca920c1e4fb",
+			version = 2,
+		},
 	}, 
 	inheritedProfiles = 
 	{
