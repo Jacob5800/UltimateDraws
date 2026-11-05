@@ -18,6 +18,10 @@ TEA: Coming soon.
 
 ## Changelog
 
+### UWU: LPDU settings
+
+- Organized settings into Automatic targeting and Ultima → Annihilation orb assignments. Sections start expanded for new users and remember later expansion choices, targeting preference and orb selections across Lua restarts. Removed the duplicate orb panel and shortened labels/help. (05-11-2026)
+
 ### TEA: AutoSim
 
 - Countdown targeting selects Living Liquid with FFXIVMinion Start Combat kept off. Cancelling or finishing the countdown stops pending selection. Replay confirmation remains pending. (05-11-2026)
