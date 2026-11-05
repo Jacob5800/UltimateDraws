@@ -74,6 +74,10 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### UWU: Shared AutoSim
 
+- Corrected entity lookups for Spiny/nail targeting and the Ifrit Triplecast hold. Ready Spiny now counts as attackable during Garuda’s first jump without bypassing its stack gate. Nail diagnostics distinguish capture, target requests and confirmed targets; physical nail cleanup restores saved AoE choices. Replay confirmation remains pending. (05-11-2026)
+
+- Caster LB stun forecasts now require Beyond Limits ownership instead of assuming R2. Countdown cancellation also clears the caster/healer encounter state. Actual LB cast protection remains in place; owner replay confirmation is pending. (05-11-2026)
+
 - Extended Ultima Feather Rain bait forecasts to the observed final primal roulette, respecting its movement toggle. Caster/healer encounter caches now clear on wipe and map departure. Native replay confirmation remains pending. (05-11-2026)
 
 - Added caster/healer movement forecasts through both awakened Landslide waves on Titan. Ultima’s two pre-Annihilation Feather Rain baits and final Annihilation bait now use short departure-animation forecasts to cover the missing steps. Native replay confirmation remains pending. (05-11-2026)
@@ -89,10 +93,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 - Unified Titan's estimate to 130s from becoming targetable for all role plans, including countdown and fallback setup. Live phase resyncs and slower-group adjustments remain active. (05-11-2026)
 
 - Unified all role plans to Garuda 135s from pull and Ifrit 101s from becoming targetable, including countdown and fallback setup. Live resyncs and optional slower-group adjustments remain active. Physical plans skip a predicted Ifrit dash beyond the expected phase end. (05-11-2026)
-
-- Added Spiny Plume focus after two Thermal Low stacks, with cast-safe swaps and return to Garuda. Optional guarded one-stack focus requires a known lifetime estimate above the remaining stack interval plus a margin. Includes GUI controls and decision diagnostics; replay confirmation remains pending. (05-11-2026)
-
-- Optional caster nail lifetime check stays on Ifrit when the next required kill-order nail is predicted to die before the adjustable cast budget (default 2.8s). Preserves kill order, softening and active casts; unknown estimates retain normal targeting. Gaols are unchanged. Replay confirmation remains pending. (05-11-2026)
 
 ### DSR: LPDU (Beta)
 
