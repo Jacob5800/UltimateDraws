@@ -69,6 +69,8 @@ TEA: Coming soon.
 
 ### UWU: Shared AutoSim
 
+- Added a caster/physical-ranged Fake melee option that removes planned eruption-bait movement for Ifrit and Ultima while preserving other mechanics. Optional phase-time controls stay hidden until enabled and initially show the shared 135/101/130s defaults; settings apply next pull. (05-11-2026)
+
 - Unified Titan's estimate to 130s from becoming targetable for all role plans, including countdown and fallback setup. Live phase resyncs and slower-group adjustments remain active. (05-11-2026)
 
 - Unified all role plans to Garuda 135s from pull and Ifrit 101s from becoming targetable, including countdown and fallback setup. Live resyncs and optional slower-group adjustments remain active. Physical plans skip a predicted Ifrit dash beyond the expected phase end. (05-11-2026)
