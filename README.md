@@ -145,7 +145,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### FRU: LPDU
 
-- Preferences now save independently of Minion settings for Optifine compatibility, including saved presets and import/export. Existing Minion preferences are not automatically imported. Crystal targeting records blocked decisions, intended/current targets, requests and confirmed acquisition without changing its selection rules. Replay confirmation remains pending. (05-11-2026)
+- Made Frureactions/lpdu strats eligible for Optifine users by replacing direct file I/O with FileLoad/FileSave for preferences and presets. No Minion core Settings dependency remains. (05-11-2026)
 
 - Light Rampant middle-tower players now finish their tower before receiving the Banish spread callout, spread circles and personal spread arrow. Other players receive spread guidance immediately. (31-10-2026)
 
