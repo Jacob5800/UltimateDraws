@@ -118,6 +118,8 @@ TEA: Coming soon.
 
 ### UCOB: LPDU
 
+- Assignment, targeting and potion preferences now save independently of Minion settings for Optifine compatibility. Existing Minion preferences are not automatically imported; AutoSim targeting handoff is preserved. Replay confirmation remains pending. (05-11-2026)
+
 - Disabled inherited Draw Flare Breath reactions that could fail on missing tanks/entities. Our actual-aggro Flare Breath cones and hit cleanup remain enabled. (01-11-2026)
 
 - BLM, RPR and BRD AutoSim now give the P4 adds-opening burst a 1.4 planning weight. Existing timing and separate cleave forecasts are preserved. (30-10-2026)
@@ -136,10 +138,9 @@ TEA: Coming soon.
 
 - Added Autosim BRD - UCOB with built-in boss/add targeting, balanced adds HP, two-target DoT windows, phase resyncs and Phoenix priority. BRD keeps attacking while moving; no melee LB forecast. Its LPDU inheritance retains draws, mitigations and potions while legacy holds are disabled. Shared targeting yields to either AutoSim profile. Published both AutoSim profiles and renamed the published draws file to LPDU Draws.lua. Replay checks remain pending. (29-10-2026)
 
-- Added an Automatic targeting toggle to LPDU assignment settings. Shared targeting automatically yields to Autosim RPR - UCOB while draws, assignments, potions and mitigations remain active. Renamed the standalone Reaper AutoSim profile to Autosim RPR - UCOB. (29-10-2026)
-
-
 ### FRU: LPDU
+
+- Preferences now save independently of Minion settings for Optifine compatibility, including saved presets and import/export. Existing Minion preferences are not automatically imported. Crystal targeting records blocked decisions, intended/current targets, requests and confirmed acquisition without changing its selection rules. Replay confirmation remains pending. (05-11-2026)
 
 - Light Rampant middle-tower players now finish their tower before receiving the Banish spread callout, spread circles and personal spread arrow. Other players receive spread guidance immediately. (31-10-2026)
 
@@ -158,8 +159,6 @@ TEA: Coming soon.
 - Corrected P1 Burnt Blast towers to LPDU/Tessan plant-and-adjust: H1 north, R2 middle and H2 south stay fixed. M1/R1/M2 stay in their home towers unless theirs needs one player, then join the three- or four-player tower. Personal arrows and countdowns use the same assignment. (31-10-2026)
 
 - AA AutoSim now uses BLM-specific burst-priority weights: 1.17 through P4, including intermission, and 1.19 for all three P5 bursts. Other jobs retain their existing weights. (29-10-2026)
-
-- AA AutoSim uses a 1.3 burst-priority weight instead of 1.4 for non-Viper jobs, reducing the incentive to hold for those windows. Viper and the special P4 window retain their existing weights. (29-10-2026)
 
 ### UWU: LPDU
 
