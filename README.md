@@ -20,6 +20,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### UWU: LPDU settings
 
+- LPDU settings now save through FileLoad/FileSave in an independent settings file, without relying on Minion core Settings. Active choices are preserved; Optifine restart persistence still needs confirmation. (05-11-2026)
+
 - Organized settings into Automatic targeting and Ultima → Annihilation orb assignments. Sections start expanded for new users and remember later expansion choices, targeting preference and orb selections across Lua restarts. Removed the duplicate orb panel and shortened labels/help. (05-11-2026)
 
 ### TEA: AutoSim
