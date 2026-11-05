@@ -199,3 +199,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 ### Alliance raids: General profile
 
 - Checked Alliance raid for Optifine users: no Minion core Settings or direct file-I/O dependencies were found in its own reactions. It has no saved preference panel, so no settings file was added. Inherited dependencies require their own runtime checks. (05-11-2026)
+
+### FRU: Shared AutoSim
+
+- Checked [AA] Autosim - FRU: already eligible for Optifine users without an owned core Settings or file-I/O dependency. It exposes no separate saved preference panel; reaction-editor choices remain in the profile file. (05-11-2026)
