@@ -69,6 +69,8 @@ TEA: Coming soon.
 
 ### UWU: Shared AutoSim
 
+- Optional caster nail lifetime check stays on Ifrit when the next required kill-order nail is predicted to die before the adjustable cast budget (default 2.8s). Preserves kill order, softening and active casts; unknown estimates retain normal targeting. Gaols are unchanged. Replay confirmation remains pending. (05-11-2026)
+
 - Draws LPDU's separate Lua nail controller now also yields to shared AutoSim, closing the remaining duplicate nail-targeting path. Standalone LPDU nail targeting remains available. Replay confirmation remains pending. (05-11-2026)
 
 - Caster nail targeting now waits for initial nail activation instead of ending while freshly spawned nails are still untargetable. Completion requires observed activation and confirmed deaths. Draws LPDU targeting yields to shared AutoSim, preventing duplicate target requests while preserving standalone use. Replay confirmation remains pending. (05-11-2026)
