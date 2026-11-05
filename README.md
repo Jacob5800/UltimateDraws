@@ -69,6 +69,8 @@ TEA: Coming soon.
 
 ### UWU: Shared AutoSim
 
+- Added Spiny Plume focus after two Thermal Low stacks, with cast-safe swaps and return to Garuda. Optional guarded one-stack focus requires a known lifetime estimate above the remaining stack interval plus a margin. Includes GUI controls and decision diagnostics; replay confirmation remains pending. (05-11-2026)
+
 - Optional caster nail lifetime check stays on Ifrit when the next required kill-order nail is predicted to die before the adjustable cast budget (default 2.8s). Preserves kill order, softening and active casts; unknown estimates retain normal targeting. Gaols are unchanged. Replay confirmation remains pending. (05-11-2026)
 
 - Draws LPDU's separate Lua nail controller now also yields to shared AutoSim, closing the remaining duplicate nail-targeting path. Standalone LPDU nail targeting remains available. Replay confirmation remains pending. (05-11-2026)

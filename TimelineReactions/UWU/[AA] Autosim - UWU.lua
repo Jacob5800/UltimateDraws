@@ -2266,7 +2266,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local C=_G.UWU_AutoSimSettings\nif not C then\n C={autoCasterLB=true,autoMeleeLB=true,vulcanKnockback=true}\n _G.UWU_AutoSimSettings=C\nend\nif C.casterNailLifetime==nil then C.casterNailLifetime=true end\nif C.casterNailCastBudget==nil then C.casterNailCastBudget=2.8 end\nlocal visible=GUI:Begin(\"UWU LPDU Settings\",true)\nif visible and GUI:TreeNode(\"General - all roles\") then\n GUI:Text(\"Shared encounter events use the active role plan. Settings last this Lua session.\")\n C.casterNailLifetime=GUI:Checkbox(\"Caster nails: avoid short-lived kill targets\",C.casterNailLifetime)\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Ordered kills only: stay on Ifrit when the next required nail's live TTK is shorter than your cast budget. Never skips to a later nail, changes the 40% softening step, or interrupts a cast. Unknown TTK keeps normal targeting; gaols are unchanged.\") end\n if C.casterNailLifetime then\n  C.casterNailCastBudget=GUI:SliderFloat(\"Nail cast budget (seconds)\",C.casterNailCastBudget,0.5,5,\"%.1f\",1)\n  if GUI:IsItemHovered() then GUI:SetTooltip(\"Planning estimate for a future cast, not the exact next spell duration. Default 2.8s includes a small margin. Lower it for faster or mostly instant casts; disable for ordinary targeting. Settings last this Lua session.\") end\n end\n C.autoCasterLB=GUI:Checkbox(\"Automatic caster LB3 - Beyond Limits owner\",C.autoCasterLB)\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Caster jobs only. Waits for full LB and all six bits, then aims at arena centre. No R2 restriction.\") end\n C.autoMeleeLB=GUI:Checkbox(\"Automatic melee LB3 - Beyond Limits owner\",C.autoMeleeLB)\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Melee DPS only. Targets Lahabrea when targetable; waits for the buff and full gauge, including delayed refills.\") end\n C.vulcanKnockback=GUI:Checkbox(\"Vulcan Burst - Surecast / Arm's Length\",C.vulcanKnockback)\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Requests Surecast for casters/healers or Arm's Length for physical jobs at Ifrit opening. Titan Upheaval and Aetheric Boom must still be ridden; this toggle does not cover them.\") end\n if GUI:TreeNode(\"Slower group - applies next pull\") then\n  C.slowerGroup=GUI:Checkbox(\"Use slower-group timing adjustments\",C.slowerGroup==true)\n  GUI:Text(\"Extra seconds added to the existing role estimates. Zero keeps the normal estimate.\")\n  for _,entry in ipairs({{\"garudaExtra\",\"Garuda extra seconds\"},{\"ifritExtra\",\"Ifrit extra seconds\"},{\"titanExtra\",\"Titan extra seconds\"},{\"killExtra\",\"Final kill extra seconds\"}}) do\n   C[entry[1]]=GUI:SliderFloat(entry[2],C[entry[1]] or 0,0,90,\"%.1f\",1)\n   if GUI:IsItemHovered() then GUI:SetTooltip(\"Captured on the next pull, including the early-pull setup fallback. Native phase events still correct estimates. Does not stretch individual attacks or movement windows.\") end\n  end\n  GUI:Text(\"Changes during combat apply next pull. Settings last this Lua session.\")\n  local S=data.uwuAutoSim\n  local T=S and S.slowerGroupTiming\n  if T then GUI:Text(T.enabled and string.format(\"Active pull extras: Garuda %.1f / Ifrit %.1f / Titan %.1f / Kill %.1f\",T.garudaExtra,T.ifritExtra,T.titanExtra,T.killExtra) or \"Active pull: normal timing\") end\n  GUI:TreePop()\n end\n GUI:TreePop()\nend\nGUI:End()",
+							actionLua = "local C=_G.UWU_AutoSimSettings\nif not C then\n C={autoCasterLB=true,autoMeleeLB=true,vulcanKnockback=true}\n _G.UWU_AutoSimSettings=C\nend\nif C.casterNailLifetime==nil then C.casterNailLifetime=true end\nif C.casterNailCastBudget==nil then C.casterNailCastBudget=2.8 end\nif C.spinyTarget==nil then C.spinyTarget=true end\nif C.spinyEarly==nil then C.spinyEarly=false end\nlocal visible=GUI:Begin(\"UWU LPDU Settings\",true)\nif visible and GUI:TreeNode(\"General - all roles\") then\n GUI:Text(\"Shared encounter events use the active role plan. Settings last this Lua session.\")\n C.spinyTarget=GUI:Checkbox(\"Target Spiny Plume after required stacks\",C.spinyTarget)\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Focuses the large Spiny Plume once its current tank has two Thermal Low stacks, then returns to Garuda. Leaves DoT blacklists and active casts alone. Decisions are written to the debug log.\") end\n if C.spinyTarget then\n  C.spinyEarly=GUI:Checkbox(\"Spiny: allow guarded one-stack early focus\",C.spinyEarly)\n  if GUI:IsItemHovered() then GUI:SetTooltip(\"Off by default. Allows focus at one stack only with a known live TTK exceeding the estimated time to the second Cyclone plus 2 seconds. The observed gap is about 9 seconds; estimates cannot guarantee survival after party damage changes. Unknown TTK waits for two stacks.\") end\n end\n C.casterNailLifetime=GUI:Checkbox(\"Caster nails: avoid short-lived kill targets\",C.casterNailLifetime)\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Ordered kills only: stay on Ifrit when the next required nail's live TTK is shorter than your cast budget. Never skips to a later nail, changes the 40% softening step, or interrupts a cast. Unknown TTK keeps normal targeting; gaols are unchanged.\") end\n if C.casterNailLifetime then\n  C.casterNailCastBudget=GUI:SliderFloat(\"Nail cast budget (seconds)\",C.casterNailCastBudget,0.5,5,\"%.1f\",1)\n  if GUI:IsItemHovered() then GUI:SetTooltip(\"Planning estimate for a future cast, not the exact next spell duration. Default 2.8s includes a small margin. Lower it for faster or mostly instant casts; disable for ordinary targeting. Settings last this Lua session.\") end\n end\n C.autoCasterLB=GUI:Checkbox(\"Automatic caster LB3 - Beyond Limits owner\",C.autoCasterLB)\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Caster jobs only. Waits for full LB and all six bits, then aims at arena centre. No R2 restriction.\") end\n C.autoMeleeLB=GUI:Checkbox(\"Automatic melee LB3 - Beyond Limits owner\",C.autoMeleeLB)\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Melee DPS only. Targets Lahabrea when targetable; waits for the buff and full gauge, including delayed refills.\") end\n C.vulcanKnockback=GUI:Checkbox(\"Vulcan Burst - Surecast / Arm's Length\",C.vulcanKnockback)\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Requests Surecast for casters/healers or Arm's Length for physical jobs at Ifrit opening. Titan Upheaval and Aetheric Boom must still be ridden; this toggle does not cover them.\") end\n if GUI:TreeNode(\"Slower group - applies next pull\") then\n  C.slowerGroup=GUI:Checkbox(\"Use slower-group timing adjustments\",C.slowerGroup==true)\n  GUI:Text(\"Extra seconds added to the existing role estimates. Zero keeps the normal estimate.\")\n  for _,entry in ipairs({{\"garudaExtra\",\"Garuda extra seconds\"},{\"ifritExtra\",\"Ifrit extra seconds\"},{\"titanExtra\",\"Titan extra seconds\"},{\"killExtra\",\"Final kill extra seconds\"}}) do\n   C[entry[1]]=GUI:SliderFloat(entry[2],C[entry[1]] or 0,0,90,\"%.1f\",1)\n   if GUI:IsItemHovered() then GUI:SetTooltip(\"Captured on the next pull, including the early-pull setup fallback. Native phase events still correct estimates. Does not stretch individual attacks or movement windows.\") end\n  end\n  GUI:Text(\"Changes during combat apply next pull. Settings last this Lua session.\")\n  local S=data.uwuAutoSim\n  local T=S and S.slowerGroupTiming\n  if T then GUI:Text(T.enabled and string.format(\"Active pull extras: Garuda %.1f / Ifrit %.1f / Titan %.1f / Kill %.1f\",T.garudaExtra,T.ifritExtra,T.titanExtra,T.killExtra) or \"Active pull: normal timing\") end\n  GUI:TreePop()\n end\n GUI:TreePop()\nend\nGUI:End()",
 							conditions = 
 							{
 								
@@ -2306,6 +2306,160 @@ local tbl =
 				timerEndOffset = 1400,
 				timerStartOffset = -9,
 				uuid = "524a2bee-8542-0493-b977-046f36db747c",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "AutoSim",
+				name = "Garuda plumes",
+				uuid = "2bafe0a6-0c3f-574d-b66a-ae83c38c7e9b",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local C=_G.UWU_AutoSimSettings or {}\nlocal S=data.uwuSpinyTarget\nif not S then S={};data.uwuSpinyTarget=S end\nlocal function log(reason,desired,stacks,life)\n local current=TensorCore.mGetTarget()\n local key=reason..\":\"..tostring(desired)..\":\"..tostring(stacks)..\":\"..tostring(current and current.id)\n if S.logKey==key then return end\n S.logKey=key\n TensorCore.timelineLogToFile(\"[UWU Spiny target] reason=\"..reason..\" desired=\"..tostring(desired)..\" actual=\"..tostring(current and current.id)..\" stacks=\"..tostring(stacks)..\" ttk=\"..tostring(life)..\" early=\"..tostring(C.spinyEarly==true)..\"\\n\")\nend\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.alive or not data.uwuAutoSim then self.used=true;return end\nlocal target=TensorCore.mGetTarget()\nlocal plume\nfor _,e in pairs(TensorCore.getEntityGroupList(\"ContentID\",2091) or {}) do\n if e.alive and e.targetable and e.attackable and e.hp.current>0 then plume=e;break end\nend\nlocal desired,reason,stacks,life\nif C.spinyTarget~=false and plume then\n local b=TensorCore.getBuff(plume.targetid,1525)\n stacks=b and b.stacks or 0\n local ready=stacks>=2\n life=TensorCore.calcTimeToKill(plume.id)\n if not ready and C.spinyEarly==true and stacks==1 and S.firstHit and S.hitID==plume.id then\n  local untilSecond=math.max(0,9.5-(Now()-S.firstHit)/1000)\n  ready=type(life)==\"number\" and life>untilSecond+2\n end\n if ready then desired=plume;reason=stacks>=2 and \"two stacks ready\" or \"one stack: lifetime margin\"\n else reason=\"waiting stacks / lifetime margin\" end\n if TensorCore.isMelee(p) and desired and TensorCore.getDistance2d(p.pos,desired.pos)>3+p.hitradius+desired.hitradius then desired=nil;reason=\"outside melee range\" end\n if desired then S.plumeID=plume.id end\nelse reason=C.spinyTarget==false and \"disabled\" or \"no live Spiny\" end\n-- Release only a target owned by this controller; never replace a manual target here.\nif not desired and S.plumeID and target and target.id==S.plumeID then\n for _,e in pairs(TensorCore.getEntityGroupList(\"ContentID\",1644) or {}) do\n  if e.alive and e.targetable and e.attackable and e.hp.current>0 then desired=e;break end\n end\nend\nlocal ci=p.castinginfo\nif ci.castingid>0 or ci.channelingid>0 then log(reason..\"; active cast hold\",desired and desired.id,stacks,life);self.used=true;return end\nlog(reason,desired and desired.id,stacks,life)\nif desired and (not target or target.id~=desired.id) then\n Player:SetTarget(desired.id)\n TensorCore.timelineLogToFile(\"[UWU Spiny target] selected=\"..desired.id..\" cid=\"..desired.contentid..\" reason=\"..reason..\"\\n\")\nend\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"fb95e821-9b46-9925-955c-e54551bb7593",
+									true,
+								},
+							},
+							name = "Spiny target",
+							uuid = "aeb8a929-3671-046e-ba08-0f942ef79e8e",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							localmapid = 777,
+							name = "UWU",
+							uuid = "fb95e821-9b46-9925-955c-e54551bb7593",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Garuda plumes",
+				loop = true,
+				mechanicTime = 9,
+				name = "[UWU] Spiny - target",
+				throttleTime = 500,
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 165,
+				uuid = "e4e928de-b984-d875-9642-e1ab68e7156c",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.uwuSpinyTarget or {};data.uwuSpinyTarget=S\nif S.hitID~=eventArgs.entityID then S.hitID=eventArgs.entityID;S.firstHit=Now() end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"caac6e4b-b3e7-d924-a9ef-3cdc7b046455",
+									true,
+								},
+								
+								{
+									"a9da0638-96cc-6b62-91ff-2a5f99f28a9d",
+									true,
+								},
+								
+								{
+									"b50ae656-2b1f-fb94-b420-825a8350639c",
+									true,
+								},
+							},
+							name = "Spiny cyclone",
+							uuid = "300aa283-9a56-54e4-8391-f65a22753cf2",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							localmapid = 777,
+							name = "UWU",
+							uuid = "caac6e4b-b3e7-d924-a9ef-3cdc7b046455",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							eventArgOptionType = 2,
+							eventEntityContentID = 2091,
+							name = "Spiny Plume",
+							uuid = "a9da0638-96cc-6b62-91ff-2a5f99f28a9d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Cyclone",
+							spellIDList = 
+							{
+								11077,
+							},
+							uuid = "b50ae656-2b1f-fb94-b420-825a8350639c",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Garuda plumes",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 9,
+				name = "[UWU] Spiny - cyclone",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 165,
+				uuid = "ced24c23-fb38-8ad5-80f0-a7fdd54ba0a1",
 				version = 2,
 			},
 		},
