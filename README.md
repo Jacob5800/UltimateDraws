@@ -31,12 +31,19 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### Sil'dihn: General profile / AutoSim
 
+- Made Sil'dihn eligible for Optifine users by replacing direct file I/O with independent FileLoad/FileSave preferences. Existing targeting and mechanic logic are preserved; Optifine reload/restart confirmation is pending. (05-11-2026)
+
 - Before Gladiator, offensive cooldowns are allowed on the first two trash enemies, then reserved across the last two Armor/Dullahan enemies. Defensive mitigation is unaffected. Replay confirmation remains pending. (05-11-2026)
+
 - Added Savage support for Silkie/Gladiator forecasts, a configurable 288s Savage Silkie estimate from two local clears, and observed caster movement windows. Gladiator's 285s estimate remains provisional. (05-11-2026)
+
 - Optional final-trash reserves hold new Ley Lines uses or other jobs' offensive cooldowns through walking gaps, then restore for the boss. Boss countdown targeting keeps Start Combat off; settings and diagnostics are included. (05-11-2026)
+
 - Corrected Silkie mitigation to physical ranged on the opener and second Total Wash, with caster Addle on the first and third. Addle now uses a Hotbar request, including earlier requests for unavoidable Belladonna/Dullahan trash damage. Replay confirmation remains pending. (05-11-2026)
 
 ### Dungeons: Shared AutoSim
+
+- Made dungeon lol eligible for Optifine users by replacing direct file I/O with independent FileLoad/FileSave preferences. Existing targeting and mechanic logic are preserved; Optifine reload/restart confirmation is pending. (05-11-2026)
 
 - All nine dungeons in `dungeon lol` now hold new offensive cooldowns on the final trash pack and at 8% actual-boss HP, with a shared adjustable threshold. Includes Radiant Finale; ordinary damage and songs continue. Previous temporary settings restore after combat/wipe. (04-11-2026)
 
@@ -176,3 +183,15 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 - Removed shared CD hold/resume controllers and MNK/NIN transition holds so they no longer override AutoSim. CD is explicitly enabled on wipe. Potion is disabled before/at pull and enabled when Ifrit becomes targetable; no forced potion-use actions are added. LPDU Mits had no matching controls. (31-10-2026)
 
+
+### Q40: Shared AutoSim
+
+- Made q40 eligible for Optifine users by replacing direct file I/O with independent FileLoad/FileSave preferences. Existing targeting and mechanic logic are preserved; Optifine reload/restart confirmation is pending. (05-11-2026)
+
+### Mount Rokkon: General draws
+
+- Made Mountrokkon eligible for Optifine users by replacing direct file I/O with independent FileLoad/FileSave preferences. Existing targeting and mechanic logic are preserved; Optifine reload/restart confirmation is pending. (05-11-2026)
+
+### Alliance raids: General profile
+
+- Checked Alliance raid for Optifine users: no Minion core Settings or direct file-I/O dependencies were found in its own reactions. It has no saved preference panel, so no settings file was added. Inherited dependencies require their own runtime checks. (05-11-2026)
