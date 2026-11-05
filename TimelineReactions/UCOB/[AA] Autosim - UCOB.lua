@@ -994,6 +994,203 @@ local tbl =
 		{
 			data = 
 			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "gStartCombat=false\ndata.ucobPrecast={deadline=eventArgs.timeQueued+eventArgs.time*1000,cancelled=false}\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"aeda65f4-acbc-9121-a4b6-393ca84d2cfb",
+									true,
+								},
+								
+								{
+									"20c11051-dc86-60c6-aee4-6b03cbd9e1d4",
+									false,
+								},
+							},
+							name = "Keep Start Combat off",
+							uuid = "2a0908e8-3ff7-c6bd-bf72-7e23b2bb1269",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"aeda65f4-acbc-9121-a4b6-393ca84d2cfb",
+									true,
+								},
+								
+								{
+									"20c11051-dc86-60c6-aee4-6b03cbd9e1d4",
+									false,
+								},
+								
+								{
+									"30ddf60d-5391-ba7f-87ab-630bd0bd2bef",
+									true,
+								},
+								
+								{
+									"26e26373-2b4e-d070-8878-ba2bcd34181c",
+									true,
+								},
+							},
+							name = "Select boss for precast",
+							setTarget = true,
+							targetType = "Detection Target",
+							uuid = "9adf6c4f-87b4-da6d-aba2-e235da4286c6",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							localmapid = 733,
+							name = "UCOB",
+							uuid = "aeda65f4-acbc-9121-a4b6-393ca84d2cfb",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 7,
+							uuid = "20c11051-dc86-60c6-aee4-6b03cbd9e1d4",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.ucobPrecast\nreturn s and not s.cancelled and Now()<s.deadline",
+							name = "Countdown still active",
+							uuid = "30ddf60d-5391-ba7f-87ab-630bd0bd2bef",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local e=TensorCore.mGetEntity(eventArgs.detectionTargetID)\nlocal p=TensorCore.mGetPlayer()\nreturn e and p and e.contentid==1482 and e.attackable and e.targetable and e.hp.current>0 and TensorCore.getDistance2d(p.pos,e.pos)<=60+e.hitradius",
+							name = "Nearby Twintania",
+							uuid = "cd4624b3-dd74-31a1-bf43-76d0aa447a32",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"cd4624b3-dd74-31a1-bf43-76d0aa447a32",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Nearest eligible boss",
+							uuid = "26e26373-2b4e-d070-8878-ba2bcd34181c",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Setup and cleanup",
+				eventType = 16,
+				loop = true,
+				mechanicTime = 7,
+				name = "[UCOB] Countdown boss targeting",
+				timeRange = true,
+				timelineIndex = 2,
+				timerStartOffset = -120,
+				uuid = "6a4097c5-046a-a84e-b44b-3fbcd8c554af",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.ucobPrecast;if s then s.cancelled=true end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"47dd5a35-192d-b93b-9329-0151932653ff",
+									true,
+								},
+							},
+							name = "Cancel countdown selection",
+							uuid = "44fc9ab4-475c-7dab-a422-5b4489079eaa",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							localmapid = 733,
+							name = "UCOB",
+							uuid = "47dd5a35-192d-b93b-9329-0151932653ff",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Setup and cleanup",
+				eventType = 17,
+				loop = true,
+				mechanicTime = 7,
+				name = "[UCOB] Countdown target cancellation",
+				timeRange = true,
+				timelineIndex = 2,
+				timerStartOffset = -120,
+				uuid = "c6263e26-5f5f-320e-bcc1-609766294b8a",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "AutoSim",
 				name = "Settings",
 				uuid = "34c47e1d-e4ea-2af3-becc-06b3cbfeb6be",
@@ -1867,41 +2064,6 @@ local tbl =
 				timerEndOffset = 1500,
 				timerStartOffset = -7,
 				uuid = "ac928c5c-b8e6-1b0d-94c4-0e347a8e9a94",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "General",
-				uuid = "c66828e6-d18f-447d-85e4-b1c25bdb8fb9",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-				},
-				conditions = 
-				{
-				},
-				displayPath = "General",
-				eventType = 13,
-				execute = "if AnyoneCore\n    and AnyoneCore.Settings\n    and AnyoneCore.Settings.PrepullHelper\nthen\n    AnyoneCore.Settings.PrepullHelper.enabled = false\n    self.used = true\nend",
-				executeType = 2,
-				mechanicTime = 7,
-				name = "[AA] Disable Prepull Helper",
-				throttleTime = 1000,
-				timeRange = true,
-				timelineIndex = 2,
-				timerEndOffset = -2,
-				timerStartOffset = -7,
-				uuid = "0b83c846-4abc-01dc-8970-4cd8c2670b5d",
 				version = 2,
 			},
 		},

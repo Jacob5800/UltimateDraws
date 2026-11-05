@@ -57,11 +57,15 @@ TEA: Coming soon.
 
 ### UCOB: Shared AutoSim
 
+- Countdown targeting selects Twintania with FFXIVMinion Start Combat kept off. Cancelling or finishing the countdown stops pending selection. Replay confirmation remains pending. (05-11-2026)
+
 - Restored caster mechanic-event corrections for Twisters, Exaflares, Nael quotes, personal assignments and nearby puddles, plus BRD Grand Octet reservation. Added later P1 Twister forecasts and customizable pull-time Twintania/Nael estimates, defaulting to 132s/129s. Replay confirmation remains pending. (01-11-2026)
 
 - Added [AA] Autosim - UCOB with shared phase/targetability tracking, caster movement and melee range forecasts, BRD-specific burst controls and personal melee LB lock tracking. Optional slower-group adjustments are captured on pull, with a first-Plummet fallback. LB is forecast and observed, not automatically cast. Cross-job replay checks remain pending. (01-11-2026)
 
 ### UWU: Shared AutoSim
+
+- Countdown targeting selects Garuda with FFXIVMinion Start Combat kept off. Cancelling or finishing the countdown stops pending selection. Replay confirmation remains pending. (05-11-2026)
 
 - Added optional slower-group timing adjustments for Garuda, Ifrit, Titan and the final kill estimate. Extra seconds are captured at pull setup; mid-fight edits apply next pull, while observed phase transitions still correct forecasts. (01-11-2026)
 

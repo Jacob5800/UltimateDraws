@@ -2052,6 +2052,203 @@ local tbl =
 		{
 			data = 
 			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "gStartCombat=false\ndata.uwuPrecast={deadline=eventArgs.timeQueued+eventArgs.time*1000,cancelled=false}\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"295feb24-c5ef-3ce4-b5a4-3fab33ce072a",
+									true,
+								},
+								
+								{
+									"8850e281-ca0d-53b4-834b-f930b9f1b7b6",
+									false,
+								},
+							},
+							name = "Keep Start Combat off",
+							uuid = "dded3962-740f-bf18-b885-ead6466a5ebe",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"295feb24-c5ef-3ce4-b5a4-3fab33ce072a",
+									true,
+								},
+								
+								{
+									"8850e281-ca0d-53b4-834b-f930b9f1b7b6",
+									false,
+								},
+								
+								{
+									"8329024a-3991-e47b-b0f2-a6311f66e3f9",
+									true,
+								},
+								
+								{
+									"d87e938c-2b8a-895d-8801-77dab31080ca",
+									true,
+								},
+							},
+							name = "Select boss for precast",
+							setTarget = true,
+							targetType = "Detection Target",
+							uuid = "93894c05-a61f-f238-bc93-e69e30a3cb80",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							localmapid = 777,
+							name = "UWU",
+							uuid = "295feb24-c5ef-3ce4-b5a4-3fab33ce072a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 7,
+							uuid = "8850e281-ca0d-53b4-834b-f930b9f1b7b6",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.uwuPrecast\nreturn s and not s.cancelled and Now()<s.deadline",
+							name = "Countdown still active",
+							uuid = "8329024a-3991-e47b-b0f2-a6311f66e3f9",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local e=TensorCore.mGetEntity(eventArgs.detectionTargetID)\nlocal p=TensorCore.mGetPlayer()\nreturn e and p and e.contentid==1644 and e.attackable and e.targetable and e.hp.current>0 and TensorCore.getDistance2d(p.pos,e.pos)<=60+e.hitradius",
+							name = "Nearby Garuda",
+							uuid = "c8dbc300-2efa-fce8-842c-655c28a1fc85",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"c8dbc300-2efa-fce8-842c-655c28a1fc85",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Nearest eligible boss",
+							uuid = "d87e938c-2b8a-895d-8801-77dab31080ca",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Setup and cleanup",
+				eventType = 16,
+				loop = true,
+				mechanicTime = 9,
+				name = "[UWU] Countdown boss targeting",
+				timeRange = true,
+				timelineIndex = 2,
+				timerStartOffset = -120,
+				uuid = "ae954bf2-af8a-f107-a51d-b76c2a97a3e4",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.uwuPrecast;if s then s.cancelled=true end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"31a29ac2-4b58-28ff-81c2-dd66ec50f5e2",
+									true,
+								},
+							},
+							name = "Cancel countdown selection",
+							uuid = "1dce1b5d-f85b-2a67-9b47-7c573f874588",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							localmapid = 777,
+							name = "UWU",
+							uuid = "31a29ac2-4b58-28ff-81c2-dd66ec50f5e2",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Setup and cleanup",
+				eventType = 17,
+				loop = true,
+				mechanicTime = 9,
+				name = "[UWU] Countdown target cancellation",
+				timeRange = true,
+				timelineIndex = 2,
+				timerStartOffset = -120,
+				uuid = "ddc0cc11-fb96-af89-8808-03de438f8f5c",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "AutoSim",
 				name = "Settings",
 				uuid = "bd1bf611-c87c-8bd4-b1ff-3978e266ed89",
@@ -2109,41 +2306,6 @@ local tbl =
 				timerEndOffset = 1400,
 				timerStartOffset = -9,
 				uuid = "524a2bee-8542-0493-b977-046f36db747c",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "General",
-				uuid = "f53e0b42-d18f-2853-aa95-05c1f36a6150",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-				},
-				conditions = 
-				{
-				},
-				displayPath = "General",
-				eventType = 13,
-				execute = "if AnyoneCore\n    and AnyoneCore.Settings\n    and AnyoneCore.Settings.PrepullHelper\nthen\n    AnyoneCore.Settings.PrepullHelper.enabled = false\n    self.used = true\nend",
-				executeType = 2,
-				mechanicTime = 9,
-				name = "[AA] Disable Prepull Helper",
-				throttleTime = 1000,
-				timeRange = true,
-				timelineIndex = 2,
-				timerEndOffset = -4,
-				timerStartOffset = -9,
-				uuid = "fad04a70-3147-9568-b1aa-a612bba4085f",
 				version = 2,
 			},
 		},
