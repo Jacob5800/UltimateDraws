@@ -100,6 +100,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### DSR: LPDU (Beta)
 
+- Made dsrreactions/lpdu strats eligible for Optifine users by replacing core Settings access with independent FileLoad/FileSave preferences. Draw and mitigation toggles use the same saved choices. (05-11-2026)
+
 - Added Lpdu draws(beta), with personal mechanic guidance, tower countdowns, phase settings and optional gaze/knockback assistance. Includes the latest P2 positioning, P3 draw cleanup and optional P4 south regroup (off by default). Replay checks remain ongoing. (27-10-2026)
 
 ### TOP: AutoSim
