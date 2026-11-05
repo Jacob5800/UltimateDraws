@@ -9014,6 +9014,152 @@ local tbl =
 			},
 		},
 	},
+	[92] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "AutoSim",
+				uuid = "1cd5aebc-b482-86c9-bb68-dfe58db53a7e",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "AutoSim",
+				name = "Personal movement",
+				uuid = "26f9e92c-632a-ecda-9e40-112847c09474",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.uwuAutoSim\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nlocal old=S.dynamic.awakenedLandslide\n-- Preserve movement across the short gap between first and awakened second wave.\nlocal finish=now+eventArgs.channelTimeMax+0.5\nlocal first=old and old[3]>=now and old[2] or now\nfinish=math.max(finish,old and old[3] or now)\nif not old or finish>old[3]+0.05 then\n S.dynamic.awakenedLandslide={\"CasterDowntime\",first,finish,1}\n S.publish()\n d(string.format(\"[UWU AutoSim] Awakened Landslide: cast=%d; movement through %.3f; cast remaining=%.2f\",eventArgs.spellID,finish,eventArgs.channelTimeMax))\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"ada984de-7b93-705f-9773-cc3d72b97d0a",
+									true,
+								},
+								
+								{
+									"62534f3f-264b-7fe2-ae89-08084b9c2279",
+									true,
+								},
+								
+								{
+									"648512c4-3045-bb07-aec7-44a9d0c8f11f",
+									true,
+								},
+								
+								{
+									"c4d1cac9-faa8-ad04-a14f-0bde334918fb",
+									true,
+								},
+							},
+							name = "Forecast both Landslide waves",
+							uuid = "cc0a67ba-e87a-7980-a08c-e5b654ba83a2",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU only",
+							uuid = "ada984de-7b93-705f-9773-cc3d72b97d0a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								25,
+								27,
+								35,
+								42,
+								24,
+								28,
+								33,
+								40,
+							},
+							name = "Caster or healer",
+							uuid = "62534f3f-264b-7fe2-ae89-08084b9c2279",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Awakened waves",
+							spellIDList = 
+							{
+								11121,
+								11298,
+							},
+							uuid = "648512c4-3045-bb07-aec7-44a9d0c8f11f",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.uwuAutoSim; return S~=nil and not S.observed.p3end and type(eventArgs.channelTimeMax)==\"number\" and eventArgs.channelTimeMax>0",
+							dequeueIfLuaFalse = true,
+							name = "Active Titan forecast",
+							uuid = "c4d1cac9-faa8-ad04-a14f-0bde334918fb",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Personal movement",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 671,
+				name = "[UWU] Awakened Landslide - both waves",
+				timeRange = true,
+				timelineIndex = 92,
+				timerEndOffset = 124,
+				timerStartOffset = -71,
+				uuid = "ec1a5dd4-cddc-8006-b849-5ffc989a3403",
+				version = 2,
+			},
+		},
+	},
 	[95] = 
 	{
 		
@@ -13904,6 +14050,165 @@ local tbl =
 				timerEndOffset = 12,
 				timerStartOffset = -8,
 				uuid = "aefb4e31-8d0d-a8ce-860e-56ac62cdebb5",
+				version = 2,
+			},
+		},
+	},
+	[144] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "AutoSim",
+				uuid = "0e7abf99-4355-eca8-9e17-fb1e676d07ec",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "AutoSim",
+				name = "Personal movement",
+				uuid = "466fe0e3-6aac-ef74-a44c-e0c04f6a524f",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.uwuAutoSim\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\n-- Five pulls: departure animation precedes the ground cast by about 1.5s.\n-- Request a short bait step before the ground cast, including both pre-Annihilation baits.\nlocal first,finish=now+0.1,now+1.9\nlocal old=S.dynamic.ultimaFeatherBait\nif not old or finish>old[3]+0.05 then\n S.dynamic.ultimaFeatherBait={\"CasterDowntime\",first,finish,1}\n S.publish()\n d(string.format(\"[UWU AutoSim] Ultima Feather Rain bait: source=%d; movement %.3f to %.3f\",eventArgs.entityID,first,finish))\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"cfb4eb34-477b-c402-bc9a-982db7f449e5",
+									true,
+								},
+								
+								{
+									"970b6775-0b96-7dd8-a4c8-6071673380af",
+									true,
+								},
+								
+								{
+									"1c79f0e7-65e5-1697-b521-8ad6e800de1c",
+									true,
+								},
+								
+								{
+									"d708a298-48ba-5761-8b9b-3920c9377f54",
+									true,
+								},
+								
+								{
+									"21973065-8efe-0244-8812-df03976de101",
+									true,
+								},
+							},
+							name = "Forecast short feather bait step",
+							uuid = "040491e6-4f4f-b6c6-9b13-7d79aec293e0",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU only",
+							uuid = "cfb4eb34-477b-c402-bc9a-982db7f449e5",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								25,
+								27,
+								35,
+								42,
+								24,
+								28,
+								33,
+								40,
+							},
+							name = "Caster or healer",
+							uuid = "970b6775-0b96-7dd8-a4c8-6071673380af",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							comparator = 3,
+							dequeueIfLuaFalse = true,
+							eventArgType = 4,
+							eventIntValue = 7738,
+							name = "Departure animation",
+							uuid = "1c79f0e7-65e5-1697-b521-8ad6e800de1c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local c=eventArgs.entityContentID; return eventArgs.index==1 and (c==1644 or c==1645 or c==1646)",
+							dequeueIfLuaFalse = true,
+							name = "Garuda or sisters",
+							uuid = "d708a298-48ba-5761-8b9b-3920c9377f54",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.uwuAutoSim; if not S or not S.observed.p4end then return false end; local t=TensorCore.API.TensorACR.getAutoSimTime()-S.time(\"p4end\"); return (t>=135 and t<=150) or (t>=183 and t<=195)",
+							dequeueIfLuaFalse = true,
+							name = "Reviewed Ultima bait waves",
+							uuid = "21973065-8efe-0244-8812-df03976de101",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Personal movement",
+				eventType = 23,
+				loop = true,
+				mechanicTime = 1091,
+				name = "[UWU] Ultima Feather Rain - missing bait steps",
+				timeRange = true,
+				timelineIndex = 144,
+				timerEndOffset = 54,
+				timerStartOffset = -10,
+				uuid = "3292ab17-1d25-6d0d-9122-8b0d0709efc8",
 				version = 2,
 			},
 		},

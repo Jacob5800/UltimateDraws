@@ -74,6 +74,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### UWU: Shared AutoSim
 
+- Added caster/healer movement forecasts through both awakened Landslide waves on Titan. Ultima’s two pre-Annihilation Feather Rain baits and final Annihilation bait now use short departure-animation forecasts to cover the missing steps. Native replay confirmation remains pending. (05-11-2026)
+
 - All Titan Weight of the Land waves now check actual puddle overlap for casters and healers, requesting movement only while threatened and releasing it once clear. Includes nearby players’ puddles and transition diagnostics. Existing fixed movement windows remain unchanged; replay confirmation remains pending. (05-11-2026)
 
 - Updated default phase estimates to Garuda 130s, Ifrit 100s and Titan 125s; Ultima’s late kill forecast now uses 137.5s after the Suppression gaol anchor to match the reviewed clear. Manual estimates, slower-group extras and live resyncs remain available. (05-11-2026)
@@ -91,8 +93,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 - Optional caster nail lifetime check stays on Ifrit when the next required kill-order nail is predicted to die before the adjustable cast budget (default 2.8s). Preserves kill order, softening and active casts; unknown estimates retain normal targeting. Gaols are unchanged. Replay confirmation remains pending. (05-11-2026)
 
 - Draws LPDU's separate Lua nail controller now also yields to shared AutoSim, closing the remaining duplicate nail-targeting path. Standalone LPDU nail targeting remains available. Replay confirmation remains pending. (05-11-2026)
-
-- Caster nail targeting now waits for initial nail activation instead of ending while freshly spawned nails are still untargetable. Completion requires observed activation and confirmed deaths. Draws LPDU targeting yields to shared AutoSim, preventing duplicate target requests while preserving standalone use. Replay confirmation remains pending. (05-11-2026)
 
 ### DSR: LPDU (Beta)
 
