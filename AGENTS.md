@@ -3,26 +3,39 @@
 - Keep this README user-facing. When a change alters behavior users can see, add a concise entry to its `Changelog` under the relevant fight/profile. Append the date as trailing metadata in `(DD-MM-YYYY)` format; keep the description wording separate and unchanged just to add its date.
 - When pruning, delete only Changelog entries whose `(DD-MM-YYYY)` date is more than 10 days before the current date; never prune descriptive README copy or other sections. Remove empty fight/profile headings left behind by pruning.
 - Per user request, also cap each Changelog section at its 10 most recent entries, even within that 10-day window. Sort dated entries newest first, preserve existing order for ties, and keep undated entries after dated entries. This entry cap applies independently to every fight/profile section and the Discord preview.
-- For a verified reaction update, commit the reaction file and matching README changelog entry together. Push the commit to the configured `origin` branch and verify the push succeeded.
 - Keep implementation notes, workflow steps, and agent-only instructions in this file rather than in the README.
 
-## UCOB profile publishing
+## Shared reaction authoring and publishing
 
-- Author UCOB changes through TensorCore in `Ucobreactions\LPDU Draws` on timeline `ucob`, version `1.0.3`.
-- After every successful profile update, copy (never move) `C:\Users\matth\Documents\Bots\FFXIVMinion64\LuaMods\TensorReactions\TimelineReactions\Ucobreactions\LPDU Draws.lua` to this checkout's `TimelineReactions\UCOB\LPDU Draws(beta).lua`, overwriting the existing destination. Verify matching hashes. Update the UCOB README changelog, commit the profile and README together, and push to the configured origin branch. Confirm branch/origin, ensure this is the only outgoing commit, and verify push success. Report unavailable paths instead of creating another checkout.
+This procedure applies to every mapped profile below. Keep one procedure here; profile rows supply only their identities, paths and implementation notes. The Agent workspace's AGENTS.md retains mechanic-specific rules.
 
-## TOP profile publishing
+- If a fight/profile has no established GitHub destination file, ask the user whether to create and publish one before creating the destination or adding a mapping. Suggest a concrete filename in the existing checkout. The user may decline; in that case, keep the authorized changes local and do not publish that profile. Record the choice in its TODO notes, and do not ask again unless the user changes that choice or the publishing scope materially changes. A mapped destination that is unexpectedly missing is not automatic authorization to recreate it; follow step 6.
 
-- Author TOP changes through TensorCore in the live `TOPReactions\lpdudraws` profile on timeline `top`, version `1.0.3`. Confirm the editable profile before mutations.
-- Authoritative source: `C:\Users\matth\Documents\Bots\FFXIVMinion64\LuaMods\TensorReactions\TimelineReactions\TOPReactions\lpdudraws.lua`. Keep this original file in place; do not resolve it beneath the sibling Agent workspace.
-- After every successful TOP profile update, copy (never move or cut) the authoritative source to `C:\Users\matth\OneDrive\Documenten\GitHub\UltimateDraws\TimelineReactions\TOP\lpdudraws.lua`, overwriting the destination copy. Verify matching source/destination hashes, then update the relevant user-facing TOP README changelog entry. Commit the reaction file and README together and push to the configured origin branch. Before pushing, confirm the current branch and origin URL, ensure the intended commit is the only local outgoing commit, and verify the push succeeded. If the source or checkout is unavailable, report that instead of creating another folder or checkout.
-- For mitigation work requested in `TOPReactions\lpdu mits`, author in that live profile on the same `top` timeline/version. Apply the same copy/hash/changelog/commit/push workflow using authoritative source `C:\Users\matth\Documents\Bots\FFXIVMinion64\LuaMods\TensorReactions\TimelineReactions\TOPReactions\lpdu mits.lua` and destination `C:\Users\matth\OneDrive\Documenten\GitHub\UltimateDraws\TimelineReactions\TOP\lpdu mits.lua`. Track implementation and replay observations in `TOP-LPDU-MITS-TODO.md`.
-- Verify saved reactions through TensorCore and update `TOP-LPDU-DRAWS-TODO.md` after each change, separating completed implementation from pending replay observations. Use trailing `(DD-MM-YYYY)` changelog dates and the repository's 10-day retention rule.
+1. Author through TensorCore in the mapped live profile. Confirm the selected editable profile and timeline/version before mutations; do not save overrides in a job profile unless explicitly requested. Use the listed timeline versions where specified; confirm FRU's live timeline/version rather than guessing.
+2. After a successful update, verify the saved reactions through TensorCore and update the mapped TODO file. Separate completed implementation from pending replay observations; syntax/read-back checks do not establish runtime success.
+3. Copy the authoritative source to the mapped destination, replacing that published copy. Never move/cut the original. Verify matching source/destination SHA256 hashes. The Agent workspace is a sibling of TimelineReactions, not its parent.
+4. Update the relevant user-facing README changelog entry, following the date, retention and entry-cap rules above. Keep replay-check and pending-validation status in TODO notes rather than changelog entries.
+5. Commit the intended reaction file(s), matching README entry and applicable instruction changes together. Before pushing, confirm the current branch and origin URL and ensure the intended commit is the only local outgoing commit. Leave unrelated working changes alone; if unrelated outgoing commits exist, report them rather than pushing or rewriting them automatically.
+6. Push to the configured origin branch and verify the remote branch matches the intended commit. If the authoritative source or existing checkout is unavailable, report it and obtain the current path; do not create a replacement checkout or folder.
 
-## DSR profile publishing
+### Canonical profile mapping
 
-- Author DSR through TensorCore in `dsrreactions\lpdu strats`, timeline `dsw`, version `1.0.5`. Keep the authoritative source `C:\Users\matth\Documents\Bots\FFXIVMinion64\LuaMods\TensorReactions\TimelineReactions\dsrreactions\lpdu strats.lua` in place.
-- After each successful update, copy (never move) the source to `TimelineReactions\DSR\Lpdu draws(beta).lua`, overwriting that copy. Verify matching hashes, update the DSR README changelog, commit both together and push to the configured origin branch. Confirm branch/origin, ensure the intended commit is the only outgoing commit, and verify push success. Preserve the beta name and keep unobserved replay checks separate from implementation. Report missing paths instead of creating another checkout.
+- Authoritative-source root: `C:\Users\matth\Documents\Bots\FFXIVMinion64\LuaMods\TensorReactions\TimelineReactions\`.
+- Published-destination root: `C:\Users\matth\OneDrive\Documenten\GitHub\UltimateDraws\TimelineReactions\`.
+- TODO root: `C:\Users\matth\Documents\Bots\FFXIVMinion64\LuaMods\TensorReactions\Agent\`.
+- Source and destination columns below are relative to their respective roots. The live profile name is the source path without `.lua`.
+
+| Fight/profile | Timeline / version | Authoritative source | Published destination | TODO file |
+|---|---|---|---|---|
+| FRU LPDU | Confirm live | `Frureactions\lpdu strats.lua` | `FRU\lpdu strats.lua` | `FRU-REACTIONS-TODO.md` |
+| UWU LPDU | `uwu` / `1.0.2` | `OwOReactions\Draws LPDU.lua` | `UWU\Draws LPDU.lua` | `UWU-REACTIONS-TODO.md` |
+| UCOB LPDU | `ucob` / `1.0.3` | `Ucobreactions\LPDU Draws.lua` | `UCOB\LPDU Draws.lua` | `UCOB-DRAWS-TODO.md` |
+| TOP LPDU draws | `top` / `1.0.3` | `TOPReactions\lpdudraws.lua` | `TOP\lpdudraws.lua` | `TOP-LPDU-DRAWS-TODO.md` |
+| TOP LPDU mitigations | `top` / `1.0.3` | `TOPReactions\lpdu mits.lua` | `TOP\lpdu mits.lua` | `TOP-LPDU-MITS-TODO.md` |
+| DSR LPDU | `dsw` / `1.0.5` | `dsrreactions\lpdu strats.lua` | `DSR\Lpdu draws(beta).lua` | `DSR-LPDU-DRAWS-TODO.md` |
+| TEA AA AutoSim | `tea` / `1.0.2` | `Teareactions\[AA] Autosim - TEA (1) (1).lua` | `TEA\[AA] Autosim - TEA.lua` | `TEA-AUTOSIM-DOLLS-TODO.md` |
+
+UCOB has one canonical published draws file, `LPDU Draws.lua`; do not recreate its removed beta duplicate. Preserve DSR's distinct beta filename. TEA's removed `autosim TEA Tramadol.lua` download is not a substitute for AA AutoSim.
 
 ## Discord changelog updater
 

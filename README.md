@@ -18,42 +18,49 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ## Changelog
 
+### UCOB: Published profile
+
+- Consolidated the latest LPDU draws into `LPDU Draws.lua` and removed the duplicate beta download. (05-11-2026)
+
+
 ### UWU: LPDU settings
 
-- LPDU settings now save through FileLoad/FileSave in an independent settings file, without relying on Minion core Settings. Active choices are preserved; Optifine restart persistence still needs confirmation. (05-11-2026)
+- LPDU settings now save through FileLoad/FileSave in an independent settings file, without relying on Minion core Settings. Active choices are preserved. (05-11-2026)
 
 - Organized settings into Automatic targeting and Ultima → Annihilation orb assignments. Sections start expanded for new users and remember later expansion choices, targeting preference and orb selections across Lua restarts. Removed the duplicate orb panel and shortened labels/help. (05-11-2026)
 
 ### TEA: AutoSim
 
-- Added AA AutoSim with LPDU DPS doll assignments, strict DoT/AoE and burst safeguards, and a latched 24.9% cutoff that stops doll casts and returns to Living Liquid. Includes opener targeting, helper setup and targeting diagnostics. Movement/feeding remain manual; in-flight damage cannot be recalled. Replay confirmation remains pending. (05-11-2026)
-- Countdown targeting selects Living Liquid with FFXIVMinion Start Combat kept off. Cancelling or finishing the countdown stops pending selection. Replay confirmation remains pending. (05-11-2026)
+- Removed the older Tramadol profile download; use `[AA] Autosim - TEA.lua`. (05-11-2026)
+
+- Added AA AutoSim with LPDU DPS doll assignments, strict DoT/AoE and burst safeguards, and a latched 24.9% cutoff that stops doll casts and returns to Living Liquid. Includes opener targeting, helper setup and targeting diagnostics. Movement/feeding remain manual; in-flight damage cannot be recalled. (05-11-2026)
+- Countdown targeting selects Living Liquid with FFXIVMinion Start Combat kept off. Cancelling or finishing the countdown stops pending selection. (05-11-2026)
 
 ### Sil'dihn: General profile / AutoSim
 
-- Made Sil'dihn eligible for Optifine users by replacing direct file I/O with independent FileLoad/FileSave preferences. Existing targeting and mechanic logic are preserved; Optifine reload/restart confirmation is pending. (05-11-2026)
+- Made Sil'dihn eligible for Optifine users by replacing direct file I/O with independent FileLoad/FileSave preferences. Existing targeting and mechanic logic are preserved. (05-11-2026)
 
-- Before Gladiator, offensive cooldowns are allowed on the first two trash enemies, then reserved across the last two Armor/Dullahan enemies. Defensive mitigation is unaffected. Replay confirmation remains pending. (05-11-2026)
+- Before Gladiator, offensive cooldowns are allowed on the first two trash enemies, then reserved across the last two Armor/Dullahan enemies. Defensive mitigation is unaffected. (05-11-2026)
 
 - Added Savage support for Silkie/Gladiator forecasts, a configurable 288s Savage Silkie estimate from two local clears, and observed caster movement windows. Gladiator's 285s estimate remains provisional. (05-11-2026)
 
 - Optional final-trash reserves hold new Ley Lines uses or other jobs' offensive cooldowns through walking gaps, then restore for the boss. Boss countdown targeting keeps Start Combat off; settings and diagnostics are included. (05-11-2026)
 
-- Corrected Silkie mitigation to physical ranged on the opener and second Total Wash, with caster Addle on the first and third. Addle now uses a Hotbar request, including earlier requests for unavoidable Belladonna/Dullahan trash damage. Replay confirmation remains pending. (05-11-2026)
+- Corrected Silkie mitigation to physical ranged on the opener and second Total Wash, with caster Addle on the first and third. Addle now uses a Hotbar request, including earlier requests for unavoidable Belladonna/Dullahan trash damage. (05-11-2026)
 
 ### Dungeons: Shared AutoSim
 
-- Made dungeon lol eligible for Optifine users by replacing direct file I/O with independent FileLoad/FileSave preferences. Existing targeting and mechanic logic are preserved; Optifine reload/restart confirmation is pending. (05-11-2026)
+- Made dungeon lol eligible for Optifine users by replacing direct file I/O with independent FileLoad/FileSave preferences. Existing targeting and mechanic logic are preserved. (05-11-2026)
 
 - All nine dungeons in `dungeon lol` now hold new offensive cooldowns on the final trash pack and at 8% actual-boss HP, with a shared adjustable threshold. Includes Radiant Finale; ordinary damage and songs continue. Previous temporary settings restore after combat/wipe. (04-11-2026)
 
-- Meso Terminal isolates the selected headsman, blocks BRD/BLM DoTs on Hellmakers, and optionally targets the unique Hellmaker in your current cell before returning to your headsman. Covers all four cells and logs targeting decisions. Updated encounter estimate defaults to 140/140/226s. Replay confirmation remains pending. (04-11-2026)
+- Meso Terminal isolates the selected headsman, blocks BRD/BLM DoTs on Hellmakers, and optionally targets the unique Hellmaker in your current cell before returning to your headsman. Covers all four cells and logs targeting decisions. Updated encounter estimate defaults to 140/140/226s. (04-11-2026)
 
 ### Shinryu Unreal: Draws
 
 - Checked Shinryumain: no owned core Settings or direct file-I/O dependency was found, and no separate settings file is required. Anyone-owned inherited reactions are outside this check. (05-11-2026)
 
-- Added a Surecast Hotbar request in the final five seconds of Tidal Wave, independent of AutoSim. Replay confirmation remains pending. (05-11-2026)
+- Added a Surecast Hotbar request in the final five seconds of Tidal Wave, independent of AutoSim. (05-11-2026)
 
 ### Shinryu Unreal: Shared AutoSim
 
@@ -69,7 +76,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 - Updated the P1 transition estimate to 280s and adds estimate to 65s for a slightly faster average pace. Previous default values migrate once; custom timings are preserved. Actual transitions still correct forecasts. (04-11-2026)
 
-- Added a Dark Matter button-mash Stun forecast so AutoSim accounts for being unable to use actions during the transition. Actual Dark Matter casts correct its timing; existing target downtime remains separate. Replay confirmation remains pending. (04-11-2026)
+- Added a Dark Matter button-mash Stun forecast so AutoSim accounts for being unable to use actions during the transition. Actual Dark Matter casts correct its timing; existing target downtime remains separate. (04-11-2026)
 
 ### UCOB: LPDU mitigation
 
@@ -83,22 +90,22 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 - Made [AA] Autosim - UCOB eligible for Optifine users with independent FileLoad/FileSave preferences for role options and slower-group timing. Choices load before pull setup. (05-11-2026)
 
-- Countdown targeting selects Twintania with FFXIVMinion Start Combat kept off. Cancelling or finishing the countdown stops pending selection. Replay confirmation remains pending. (05-11-2026)
+- Countdown targeting selects Twintania with FFXIVMinion Start Combat kept off. Cancelling or finishing the countdown stops pending selection. (05-11-2026)
 
-- Restored caster mechanic-event corrections for Twisters, Exaflares, Nael quotes, personal assignments and nearby puddles, plus BRD Grand Octet reservation. Added later P1 Twister forecasts and customizable pull-time Twintania/Nael estimates, defaulting to 132s/129s. Replay confirmation remains pending. (01-11-2026)
+- Restored caster mechanic-event corrections for Twisters, Exaflares, Nael quotes, personal assignments and nearby puddles, plus BRD Grand Octet reservation. Added later P1 Twister forecasts and customizable pull-time Twintania/Nael estimates, defaulting to 132s/129s. (01-11-2026)
 
-- Added [AA] Autosim - UCOB with shared phase/targetability tracking, caster movement and melee range forecasts, BRD-specific burst controls and personal melee LB lock tracking. Optional slower-group adjustments are captured on pull, with a first-Plummet fallback. LB is forecast and observed, not automatically cast. Cross-job replay checks remain pending. (01-11-2026)
+- Added [AA] Autosim - UCOB with shared phase/targetability tracking, caster movement and melee range forecasts, BRD-specific burst controls and personal melee LB lock tracking. Optional slower-group adjustments are captured on pull, with a first-Plummet fallback. LB is forecast and observed, not automatically cast. (01-11-2026)
 
 ### UWU: Shared AutoSim
 
 - Spiny Plume now uses a live target-lifetime estimate, refreshed while targeted. Existing stack gates and DoT exclusions remain; Infernal Nail forecasts are unchanged. (05-11-2026)
-- Corrected entity lookups for Spiny/nail targeting and the Ifrit Triplecast hold. Ready Spiny now counts as attackable during Garuda’s first jump without bypassing its stack gate. Nail diagnostics distinguish capture, target requests and confirmed targets; physical nail cleanup restores saved AoE choices. Replay confirmation remains pending. (05-11-2026)
-- Caster LB stun forecasts now require Beyond Limits ownership instead of assuming R2. Countdown cancellation also clears the caster/healer encounter state. Actual LB cast protection remains in place; owner replay confirmation is pending. (05-11-2026)
-- Extended Ultima Feather Rain bait forecasts to the observed final primal roulette, respecting its movement toggle. Caster/healer encounter caches now clear on wipe and map departure. Native replay confirmation remains pending. (05-11-2026)
-- Added caster/healer movement forecasts through both awakened Landslide waves on Titan. Ultima’s two pre-Annihilation Feather Rain baits and final Annihilation bait now use short departure-animation forecasts to cover the missing steps. Native replay confirmation remains pending. (05-11-2026)
-- All Titan Weight of the Land waves now check actual puddle overlap for casters and healers, requesting movement only while threatened and releasing it once clear. Includes nearby players’ puddles and transition diagnostics. Existing fixed movement windows remain unchanged; replay confirmation remains pending. (05-11-2026)
+- Corrected entity lookups for Spiny/nail targeting and the Ifrit Triplecast hold. Ready Spiny now counts as attackable during Garuda’s first jump without bypassing its stack gate. Nail diagnostics distinguish capture, target requests and confirmed targets; physical nail cleanup restores saved AoE choices. (05-11-2026)
+- Caster LB stun forecasts now require Beyond Limits ownership instead of assuming R2. Countdown cancellation also clears the caster/healer encounter state. Actual LB cast protection remains in place. (05-11-2026)
+- Extended Ultima Feather Rain bait forecasts to the observed final primal roulette, respecting its movement toggle. Caster/healer encounter caches now clear on wipe and map departure. (05-11-2026)
+- Added caster/healer movement forecasts through both awakened Landslide waves on Titan. Ultima’s two pre-Annihilation Feather Rain baits and final Annihilation bait now use short departure-animation forecasts to cover the missing steps. (05-11-2026)
+- All Titan Weight of the Land waves now check actual puddle overlap for casters and healers, requesting movement only while threatened and releasing it once clear. Includes nearby players’ puddles and transition diagnostics. Existing fixed movement windows remain unchanged. (05-11-2026)
 - Updated default phase estimates to Garuda 130s, Ifrit 100s and Titan 125s; Ultima’s late kill forecast now uses 137.5s after the Suppression gaol anchor to match the reviewed clear. Manual estimates, slower-group extras and live resyncs remain available. (05-11-2026)
-- BRD/ranged-support DoT forecasts now exclude Ultima disappearance windows in both countdown and early-pull setup, while keeping the boss lifetime continuous. Existing caster forecasts and movement remain unchanged; BRD replay confirmation remains pending. (05-11-2026)
+- BRD/ranged-support DoT forecasts now exclude Ultima disappearance windows in both countdown and early-pull setup, while keeping the boss lifetime continuous. Existing caster forecasts and movement remain unchanged. (05-11-2026)
 - Added a caster/physical-ranged Fake melee option that removes planned eruption-bait movement for Ifrit and Ultima while preserving other mechanics. Optional phase-time controls stay hidden until enabled and initially show the shared 135/101/130s defaults; settings apply next pull. (05-11-2026)
 - Unified Titan's estimate to 130s from becoming targetable for all role plans, including countdown and fallback setup. Live phase resyncs and slower-group adjustments remain active. (05-11-2026)
 
@@ -106,7 +113,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 - Made dsrreactions/lpdu strats eligible for Optifine users by replacing core Settings access with independent FileLoad/FileSave preferences. Draw and mitigation toggles use the same saved choices. (05-11-2026)
 
-- Added Lpdu draws(beta), with personal mechanic guidance, tower countdowns, phase settings and optional gaze/knockback assistance. Includes the latest P2 positioning, P3 draw cleanup and optional P4 south regroup (off by default). Replay checks remain ongoing. (27-10-2026)
+- Added Lpdu draws(beta), with personal mechanic guidance, tower countdowns, phase settings and optional gaze/knockback assistance. Includes the latest P2 positioning, P3 draw cleanup and optional P4 south regroup (off by default). (27-10-2026)
 
 ### TOP: AutoSim
 
@@ -120,19 +127,19 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 - Made TOPReactions/lpdudraws eligible for Optifine users with FileLoad/FileSave preferences. Removed its optional Minion core Settings migration dependency; existing session-only debug-label defaults remain unchanged. (05-11-2026)
 
-- Puddle escape guidance retains one safe waypoint through arrival and hazard updates, replacing it only when invalid; later explosions influence the next choice. Second-hand guidance may start about two seconds earlier when the route is clear, retaining its resolution deadline. Meteor spread guidance starts on puddle placement. R2 receives a role-based limit-break alert at the logged Meteor cast window. Replay checks remain pending. (04-11-2026)
+- Puddle escape guidance retains one safe waypoint through arrival and hazard updates, replacing it only when invalid; later explosions influence the next choice. Second-hand guidance may start about two seconds earlier when the route is clear, retaining its resolution deadline. Meteor spread guidance starts on puddle placement. R2 receives a role-based limit-break alert at the logged Meteor cast window. (04-11-2026)
 
-- Sigma uses rotation, hand-bait and hold instructions, retaining the hand destination circle on arrival. Omega labels each set and personal assignment, switches between move/hold guidance, and calls the return after bounces. Optional Far World adjustment keeps a valid side and previews alternatives only when live receiver spacing allows. Hello World outlines both eligible towers in normal and caster-uptime modes; only the assigned tower gets an arrow. Replay checks remain pending. (03-11-2026)
+- Sigma uses rotation, hand-bait and hold instructions, retaining the hand destination circle on arrival. Omega labels each set and personal assignment, switches between move/hold guidance, and calls the return after bounces. Optional Far World adjustment keeps a valid side and previews alternatives only when live receiver spacing allows. Hello World outlines both eligible towers in normal and caster-uptime modes; only the assigned tower gets an arrow. (03-11-2026)
 
-- Future P4 protean beams use faint outlines without fills, restoring strong red during their final 1.2 seconds. Geometry and hit cleanup are unchanged. Debug draw labels start off each client session and remain manually available. Replay readability checks are pending. (03-11-2026)
+- Future P4 protean beams use faint outlines without fills, restoring strong red during their final 1.2 seconds. Geometry and hit cleanup are unchanged. Debug draw labels start off each client session and remain manually available. (03-11-2026)
 
-- Sigma confirms your own Hyper Pulse hand hit with Hand bait done, hold for bounces, clearing the completed bait arrow while retaining final-bounce return timing. Replay confirmation remains pending. (03-11-2026)
+- Sigma confirms your own Hyper Pulse hand hit with Hand bait done, hold for bounces, clearing the completed bait arrow while retaining final-bounce return timing. (03-11-2026)
 
-- P6 keeps safe exaflare escape waypoints stable and releases the middle bait when puddles appear, without adding movement delays. Beam spreads preview faintly before lanes clear, then give movement/hold guidance; Wild Charge gets an explicit stack call, Cosmo dodge markers are blue, and selected tanks receive LB3 voice guidance. P1 returns to the assigned group and previews final positions earlier; final Hello World rots gain expiry outlines, Sigma staging calls are restored, and Omega bounce lines show only local links. Replay checks remain pending. (02-11-2026)
+- P6 keeps safe exaflare escape waypoints stable and releases the middle bait when puddles appear, without adding movement delays. Beam spreads preview faintly before lanes clear, then give movement/hold guidance; Wild Charge gets an explicit stack call, Cosmo dodge markers are blue, and selected tanks receive LB3 voice guidance. P1 returns to the assigned group and previews final positions earlier; final Hello World rots gain expiry outlines, Sigma staging calls are restored, and Omega bounce lines show only local links. (02-11-2026)
 
 - Blind Faith south-position guidance starts one second earlier, while retaining its coverage through the knockback. (02-11-2026)
 
-- All Pantokrator calls use normal visible AnyoneCore text and TTS again. The south-of-male bait marker holds until the actual bait cast or replacement guidance; Sagittarius countdowns sit at the beam midpoint inside the arena. Broken green tethers say only Take bounce; Sigma hand baits wait for laser completion, and Delta previews show three lines. Replay checks remain pending. (02-11-2026)
+- All Pantokrator calls use normal visible AnyoneCore text and TTS again. The south-of-male bait marker holds until the actual bait cast or replacement guidance; Sagittarius countdowns sit at the beam midpoint inside the arena. Broken green tethers say only Take bounce; Sigma hand baits wait for laser completion, and Delta previews show three lines. (02-11-2026)
 
 - Pantokrator clears only its completed instruction on the finishing hit or early boss departure. Removed the text-routing time cutoff; subsequent AnyoneCore text and TTS remain enabled. (02-11-2026)
 
@@ -148,17 +155,17 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 - BLM/RPR AutoSim burst-strength defaults are now 1.17 across their existing burst windows, including Golden. Existing forecast on/off choices and phase/target-priority weights are preserved. (29-10-2026)
 
-- BRD AutoSim now optionally reserves Battle Voice, Raging Strikes, Barrage and Wanderer’s Minuet from Grand Octet until adds appear (enabled by default). Added optional party-burst alignment with a maximum early-hold slider and phase-based or custom pull-time windows, so ready-at-4:00 burst can wait for4:30 and follow6:30. This controls timing; incoming buff strength remains a separate forecast. Other actions remain automatic. BLM/RPR are unchanged; replay checks remain pending. (29-10-2026)
+- BRD AutoSim now optionally reserves Battle Voice, Raging Strikes, Barrage and Wanderer’s Minuet from Grand Octet until adds appear (enabled by default). Added optional party-burst alignment with a maximum early-hold slider and phase-based or custom pull-time windows, so ready-at-4:00 burst can wait for4:30 and follow6:30. This controls timing; incoming buff strength remains a separate forecast. Other actions remain automatic. BLM/RPR are unchanged. (29-10-2026)
 
-- UCOB AutoSim now plans through the adds deaths, then rebuilds for Golden after the scripted Phoenix transition. Golden uptime and fight length anchor to Bahamut becoming targetable; resurrection-to-targetability remains downtime. This lets AutoSim spend gauge before the forced loss without a separate forced Burn timer. Ordinary deaths cannot trigger the split; actual cooldown/potion timers carry over. Applied to BLM, BRD and RPR; replay checks remain pending. (29-10-2026)
+- UCOB AutoSim now plans through the adds deaths, then rebuilds for Golden after the scripted Phoenix transition. Golden uptime and fight length anchor to Bahamut becoming targetable; resurrection-to-targetability remains downtime. This lets AutoSim spend gauge before the forced loss without a separate forced Burn timer. Ordinary deaths cannot trigger the split; actual cooldown/potion timers carry over. Applied to BLM, BRD and RPR. (29-10-2026)
 
 - All three UCOB AutoSim profiles now use neutral 1x Phoenix planning weight by default. The new Phoenix planning priority: 2x GUI option restores extra relative priority for surviving Phoenix-buffed Golden damage; losing the buff removes that preference. Actual in-game buff handling remains with the ACR. (29-10-2026)
 
-- BLM AutoSim now forecasts Nael quote transitions from recognized English quotes and corrects remaining steps on actual casts. Same-zone steps are skipped; the first In/Out step checks current distance. Travel time is adjustable. Corroborated with three native caster pulls and BossMod sequencing; no forced movement or new polling loop. Replay checks remain pending. (29-10-2026)
+- BLM AutoSim now forecasts Nael quote transitions from recognized English quotes and corrects remaining steps on actual casts. Same-zone steps are skipped; the first In/Out step checks current distance. Travel time is adjustable. Corroborated with three native caster pulls and BossMod sequencing; no forced movement or new polling loop. (29-10-2026)
 
-- Added Autosim BLM - UCOB with built-in targeting, Thunder forecasts, phase resyncs, Phoenix tracking and adjustable Twister/Exaflare and personal-assignment movement estimates. Teleports and Ley Lines returns remain manual. LPDU targeting yields to BLM AutoSim; legacy inherited holds are disabled in the BLM profile. All three AutoSim profiles now extend an expired Golden kill estimate while the boss remains alive. Reviewed five EU BLM clears; replay checks and movement tuning remain pending. (29-10-2026)
+- Added Autosim BLM - UCOB with built-in targeting, Thunder forecasts, phase resyncs, Phoenix tracking and adjustable Twister/Exaflare and personal-assignment movement estimates. Teleports and Ley Lines returns remain manual. LPDU targeting yields to BLM AutoSim; legacy inherited holds are disabled in the BLM profile. All three AutoSim profiles now extend an expired Golden kill estimate while the boss remains alive. Reviewed five EU BLM clears. (29-10-2026)
 
-- Added Autosim BRD - UCOB with built-in boss/add targeting, balanced adds HP, two-target DoT windows, phase resyncs and Phoenix priority. BRD keeps attacking while moving; no melee LB forecast. Its LPDU inheritance retains draws, mitigations and potions while legacy holds are disabled. Shared targeting yields to either AutoSim profile. Published both AutoSim profiles and renamed the published draws file to LPDU Draws.lua. Replay checks remain pending. (29-10-2026)
+- Added Autosim BRD - UCOB with built-in boss/add targeting, balanced adds HP, two-target DoT windows, phase resyncs and Phoenix priority. BRD keeps attacking while moving; no melee LB forecast. Its LPDU inheritance retains draws, mitigations and potions while legacy holds are disabled. Shared targeting yields to either AutoSim profile. Published both AutoSim profiles and renamed the published draws file to LPDU Draws.lua. (29-10-2026)
 
 ### FRU: LPDU
 
@@ -192,7 +199,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 - Shared draws now call “Melee: take the light orb” when Titan’s Beyond Limits orb appears, only for melee still missing the buff. (31-10-2026)
 
-- Added buff-owned caster LB3 at arena centre and melee LB3 on Lahabrea to BLM/RPR AutoSim. Caster gets advance green centre guidance; full-gauge checks keep waiting for delayed refills. Existing personal LB animation-lock forecasts remain active. Replay confirmation is pending. (31-10-2026)
+- Added buff-owned caster LB3 at arena centre and melee LB3 on Lahabrea to BLM/RPR AutoSim. Caster gets advance green centre guidance; full-gauge checks keep waiting for delayed refills. Existing personal LB animation-lock forecasts remain active. (31-10-2026)
 
 - Disabled the remaining 105-second CD/Flourish-off reaction in Draws LPDU so it cannot interfere with AutoSim. (31-10-2026)
 
@@ -207,15 +214,19 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### Q40: Shared AutoSim
 
-- Made q40 eligible for Optifine users by replacing direct file I/O with independent FileLoad/FileSave preferences. Existing targeting and mechanic logic are preserved; Optifine reload/restart confirmation is pending. (05-11-2026)
+- Made q40 eligible for Optifine users by replacing direct file I/O with independent FileLoad/FileSave preferences. Existing targeting and mechanic logic are preserved. (05-11-2026)
 
 ### Mount Rokkon: General draws
 
-- Made Mountrokkon eligible for Optifine users by replacing direct file I/O with independent FileLoad/FileSave preferences. Existing targeting and mechanic logic are preserved; Optifine reload/restart confirmation is pending. (05-11-2026)
+- Made Mountrokkon eligible for Optifine users by replacing direct file I/O with independent FileLoad/FileSave preferences. Existing targeting and mechanic logic are preserved. (05-11-2026)
 
 ### Alliance raids: General profile
 
 - Checked Alliance raid for Optifine users: no Minion core Settings or direct file-I/O dependencies were found in its own reactions. It has no saved preference panel, so no settings file was added. Inherited dependencies require their own runtime checks. (05-11-2026)
+
+### R9S: R2 / R1 / M1
+
+- Made R2 eligible for Optifine users with FileLoad/FileSave for its kill-time range and EU guidance toggles. R1 and M1 were checked and have no owned core Settings or direct file-I/O dependency. (05-11-2026)
 
 ### FRU: Shared AutoSim
 
@@ -224,10 +235,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 ### DSR: Shared AutoSim
 
 - Checked [AA] Autosim - DSW: already uses independent FileLoad/FileSave preferences for its caster-LB forecast option. No owned core Settings or direct file-I/O dependency was found. (05-11-2026)
-
-### R9S: R2 / R1 / M1
-
-- Made R2 eligible for Optifine users with FileLoad/FileSave for its kill-time range and EU guidance toggles. R1 and M1 were checked and have no owned core Settings or direct file-I/O dependency. (05-11-2026)
 
 ### Enuo EX: JacobMain
 
