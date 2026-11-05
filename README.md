@@ -74,6 +74,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### UWU: Shared AutoSim
 
+- BRD/ranged-support DoT forecasts now exclude Ultima disappearance windows in both countdown and early-pull setup, while keeping the boss lifetime continuous. Existing caster forecasts and movement remain unchanged; BRD replay confirmation remains pending. (05-11-2026)
+
 - Added a caster/physical-ranged Fake melee option that removes planned eruption-bait movement for Ifrit and Ultima while preserving other mechanics. Optional phase-time controls stay hidden until enabled and initially show the shared 135/101/130s defaults; settings apply next pull. (05-11-2026)
 
 - Unified Titan's estimate to 130s from becoming targetable for all role plans, including countdown and fallback setup. Live phase resyncs and slower-group adjustments remain active. (05-11-2026)
