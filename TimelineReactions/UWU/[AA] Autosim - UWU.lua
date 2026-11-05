@@ -6296,11 +6296,11 @@ local tbl =
 				eventType = 18,
 				loop = true,
 				mechanicTime = 621,
-				name = "[UWU] First Weight - capture puddles",
+				name = "[UWU] Titan Weight - capture puddles",
 				timeRange = true,
 				timelineIndex = 78,
-				timerEndOffset = 8,
-				timerStartOffset = -5,
+				timerEndOffset = 174,
+				timerStartOffset = -21,
 				uuid = "3b0b9c5e-9e8e-1d73-b8f5-9e4dd1db48da",
 				version = 2,
 			},
@@ -6316,7 +6316,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.uwuAutoSim\nif not S then self.used=true;return end\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nlocal p=Player.pos\nlocal count,finish=0,0\nfor id,w in pairs(S.weightPuddles or {}) do\n if now>=w.finish or S.observed.p3end or not Player.alive then\n  S.weightPuddles[id]=nil\n elseif p then\n  local dx,dz=p.x-w.x,p.z-w.z\n  -- Small edge margin avoids flickering at the visible rim.\n  local radius=w.radius+0.2\n  if dx*dx+dz*dz<=radius*radius then count=count+1;finish=math.max(finish,w.finish) end\n end\nend\nlocal old=S.dynamic.firstWeightMove\nif count>0 then\n if not old or math.abs(old[3]-finish)>0.05 then\n  S.dynamic.firstWeightMove={\"CasterDowntime\",now,finish,1}\n  S.publish()\n end\nelseif old then\n S.dynamic.firstWeightMove=nil\n S.publish()\nend\nlocal threatened=count>0\nif S.weightThreatened~=threatened then\n if threatened or S.weightThreatened~=nil then\n  d(string.format(\"[UWU AutoSim] First Weight: %s; overlapping=%d; player=(%.2f,%.2f); remaining=%.2f\",threatened and \"movement needed\" or \"safe - movement released\",count,p and p.x or 0,p and p.z or 0,math.max(0,finish-now)))\n end\n S.weightThreatened=threatened\nend\nself.used=true",
+							actionLua = "local S=data.uwuAutoSim\nif not S then self.used=true;return end\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nlocal p=Player.pos\nlocal count,finish=0,0\nfor id,w in pairs(S.weightPuddles or {}) do\n if now>=w.finish or S.observed.p3end or not Player.alive then\n  S.weightPuddles[id]=nil\n elseif p then\n  local dx,dz=p.x-w.x,p.z-w.z\n  -- Small edge margin avoids flickering at the visible rim.\n  local radius=w.radius+0.2\n  if dx*dx+dz*dz<=radius*radius then count=count+1;finish=math.max(finish,w.finish) end\n end\nend\nif S.weightPuddles and next(S.weightPuddles)==nil then S.weightPuddles=nil end\nlocal old=S.dynamic.weightMove\nif count>0 then\n if not old or math.abs(old[3]-finish)>0.05 then\n  S.dynamic.weightMove={\"CasterDowntime\",now,finish,1}\n  S.publish()\n end\nelseif old then\n S.dynamic.weightMove=nil\n S.publish()\nend\nlocal threatened=count>0\nif S.weightThreatened~=threatened then\n if threatened or S.weightThreatened~=nil then\n  d(string.format(\"[UWU AutoSim] Titan Weight: %s; overlapping=%d; player=(%.2f,%.2f); remaining=%.2f\",threatened and \"movement needed\" or \"safe - movement released\",count,p and p.x or 0,p and p.z or 0,math.max(0,finish-now)))\n end\n S.weightThreatened=threatened\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -6384,7 +6384,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local S=data.uwuAutoSim; return S~=nil and (S.weightPuddles~=nil or S.dynamic.firstWeightMove~=nil)",
+							conditionLua = "local S=data.uwuAutoSim; return S~=nil and (S.weightPuddles~=nil or S.dynamic.weightMove~=nil)",
 							name = "Owned puddles or cleanup",
 							uuid = "fd8562af-f63e-86e8-99cd-51008466fef9",
 							version = 3,
@@ -6394,11 +6394,11 @@ local tbl =
 				displayPath = "AutoSim/Personal movement",
 				loop = true,
 				mechanicTime = 621,
-				name = "[UWU] First Weight - personal caster movement",
+				name = "[UWU] Titan Weight - personal caster movement",
 				timeRange = true,
 				timelineIndex = 78,
-				timerEndOffset = 8,
-				timerStartOffset = -5,
+				timerEndOffset = 174,
+				timerStartOffset = -21,
 				uuid = "6fea7fd3-69f9-7121-a819-2509581deea3",
 				version = 2,
 			},

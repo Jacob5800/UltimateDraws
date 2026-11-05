@@ -74,7 +74,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### UWU: Shared AutoSim
 
-- Titan’s first Weight of the Land now checks actual puddle overlap for casters and healers, requesting movement only while threatened and releasing it once clear. Includes nearby players’ puddles and transition diagnostics; replay confirmation remains pending. (05-11-2026)
+- All Titan Weight of the Land waves now check actual puddle overlap for casters and healers, requesting movement only while threatened and releasing it once clear. Includes nearby players’ puddles and transition diagnostics. Existing fixed movement windows remain unchanged; replay confirmation remains pending. (05-11-2026)
 
 - Updated default phase estimates to Garuda 130s, Ifrit 100s and Titan 125s; Ultima’s late kill forecast now uses 137.5s after the Suppression gaol anchor to match the reviewed clear. Manual estimates, slower-group extras and live resyncs remain available. (05-11-2026)
 
