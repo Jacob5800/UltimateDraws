@@ -576,6 +576,40 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
+							actionLua = "local old=eventArgs.oldData\nif old then\n for _,key in ipairs({\"uwu_geocrush_first\",\"uwu_geocrush_last\",\"uwu_upheaval_guidance\"}) do\n  local s=old[key]\n  if s and s.draws then for _,id in ipairs(s.draws) do Argus.deleteTimedShape(id) end end\n end\n local orbs=old.uwu_annihilation_orbs\n if orbs and orbs.live then\n  for _,entry in pairs(orbs.live) do for _,id in ipairs(entry.draws) do Argus.deleteTimedShape(id) end end\n end\nend\nself.used=true",
+							name = "Clear owned preview shapes",
+							uuid = "0c58c7cf-f6d0-26a5-b325-09e3a7f24a6f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 9,
+				loop = true,
+				mechanicTime = 9,
+				name = "[LPDU] UWU personal previews - Wipe cleanup",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 1591,
+				timerStartOffset = -9,
+				uuid = "fa586cca-538c-2167-be80-9ff5e106b7f8",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
 							actionLua = "local boss = TensorCore.mGetEntity(eventArgs.detectionTargetID)\nif not boss or not boss.targetable then return end\n-- Cast cones have their own fixed-direction draw.\nif boss.channelingid == 11091 then return end\nlocal target = TensorCore.mGetEntity(boss.targetid)\nif not target then return end\nlocal heading = TensorCore.getHeadingToTarget(boss.pos, target.pos)\nlocal drawer = TensorCore.getMoogleDrawer()\ndrawer:addCone(boss.pos.x,boss.pos.y,boss.pos.z,11.7,math.rad(90),heading)\n",
 							conditions = 
 							{
@@ -1108,9 +1142,33 @@ local tbl =
 						data = 
 						{
 							aType = "Alert",
+							alertDuration = 2500,
 							alertPriority = 2,
 							alertTTS = true,
-							alertText = "Move!",
+							alertText = "Move: Feather Rain",
+							conditions = 
+							{
+								
+								{
+									"f9a5c47d-b231-e530-a50d-89623292767b",
+									true,
+								},
+								
+								{
+									"eab4f9ad-bea9-0c31-89a2-a0d27f5ce044",
+									true,
+								},
+								
+								{
+									"fdd90c81-47c3-d851-89d4-6c79b0f4068e",
+									true,
+								},
+								
+								{
+									"406999b5-8006-4761-85d0-200bdae8784d",
+									true,
+								},
+							},
 							uuid = "a985ee6f-3880-d50d-9869-2a7c7ba253a3",
 							version = 2.1,
 						},
@@ -1129,11 +1187,67 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							comparator = 3,
+							dequeueIfLuaFalse = true,
+							eventArgType = 4,
+							eventIntValue = 7738,
+							name = "jump",
+							uuid = "f9a5c47d-b231-e530-a50d-89623292767b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							comparator = 3,
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventIntValue = 1,
+							name = "animationSlot",
+							uuid = "eab4f9ad-bea9-0c31-89a2-a0d27f5ce044",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID == 1644 or eventArgs.entityContentID == 1645 or eventArgs.entityContentID == 1646",
+							dequeueIfLuaFalse = true,
+							name = "Garuda / sisters",
+							uuid = "fdd90c81-47c3-d851-89d4-6c79b0f4068e",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "if self.claimed then return true end\nif data.uwu_p1_feather_called_1 then return false end\ndata.uwu_p1_feather_called_1=true\nself.claimed=true\nreturn true",
+							dequeueIfLuaFalse = true,
+							name = "One call per wave",
+							uuid = "406999b5-8006-4761-85d0-200bdae8784d",
+							version = 3,
+						},
+					},
 				},
+				eventType = 23,
 				mechanicTime = 34,
-				name = "Melee TTS",
+				name = "[LPDU] P1 Feather Rain 1 - Move at jump",
+				timeRange = true,
 				timelineIndex = 8,
+				timerEndOffset = 4,
 				timerOffset = 0.5,
+				timerStartOffset = -1,
 				uuid = "d0ae0670-a75b-b8fe-b2ed-a384ed6acebc",
 				version = 2,
 			},
@@ -2211,10 +2325,34 @@ local tbl =
 						data = 
 						{
 							aType = "Alert",
+							alertDuration = 2500,
 							alertPriority = 3,
 							alertTTS = true,
-							alertText = "MOVE",
+							alertText = "Move: Feather Rain",
 							alertVolume = 81,
+							conditions = 
+							{
+								
+								{
+									"93f9f2a8-6cd6-6077-b474-f05464c25942",
+									true,
+								},
+								
+								{
+									"5d496c80-b3c1-f498-b127-0f2e03ea2a7a",
+									true,
+								},
+								
+								{
+									"618b2f61-eece-c805-b850-98a19531e120",
+									true,
+								},
+								
+								{
+									"f90f4469-2523-e6a4-88a9-df844185f281",
+									true,
+								},
+							},
 							uuid = "44636adf-d8b8-1ae4-92a8-7e5bc28fe41f",
 							version = 2.1,
 						},
@@ -2222,11 +2360,67 @@ local tbl =
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							comparator = 3,
+							dequeueIfLuaFalse = true,
+							eventArgType = 4,
+							eventIntValue = 7738,
+							name = "jump",
+							uuid = "93f9f2a8-6cd6-6077-b474-f05464c25942",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							comparator = 3,
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventIntValue = 1,
+							name = "animationSlot",
+							uuid = "5d496c80-b3c1-f498-b127-0f2e03ea2a7a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID == 1644 or eventArgs.entityContentID == 1645 or eventArgs.entityContentID == 1646",
+							dequeueIfLuaFalse = true,
+							name = "Garuda / sisters",
+							uuid = "618b2f61-eece-c805-b850-98a19531e120",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "if self.claimed then return true end\nif data.uwu_p1_feather_called_2 then return false end\ndata.uwu_p1_feather_called_2=true\nself.claimed=true\nreturn true",
+							dequeueIfLuaFalse = true,
+							name = "One call per wave",
+							uuid = "f90f4469-2523-e6a4-88a9-df844185f281",
+							version = 3,
+						},
+					},
 				},
+				eventType = 23,
 				mechanicTime = 69,
-				name = "MOVE!",
+				name = "[LPDU] P1 Feather Rain 2 - Move at jump",
+				timeRange = true,
 				timelineIndex = 14,
+				timerEndOffset = 4,
 				timerOffset = 0.5,
+				timerStartOffset = -3,
 				uuid = "482b9860-fe7b-97d4-a78c-88771acdf739",
 				version = 2,
 			},
@@ -2324,15 +2518,31 @@ local tbl =
 						data = 
 						{
 							aType = "Alert",
+							alertDuration = 2500,
 							alertPriority = 3,
 							alertTTS = true,
-							alertText = "MOVE",
+							alertText = "Move: Feather Rain",
 							alertVolume = 81,
 							conditions = 
 							{
 								
 								{
-									"69a98f6c-c55b-8ba0-ab80-6aca5e037de8",
+									"b5b40980-49b6-e7fc-89c7-e6ce17482d23",
+									true,
+								},
+								
+								{
+									"1bd103e4-7499-2462-9676-7251e2aa4ab9",
+									true,
+								},
+								
+								{
+									"9606c38f-b29a-4e15-9aaf-400cb06818d0",
+									true,
+								},
+								
+								{
+									"8a841ca8-b729-c545-9f4e-084c028bfebd",
 									true,
 								},
 							},
@@ -2355,10 +2565,62 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							comparator = 3,
+							dequeueIfLuaFalse = true,
+							eventArgType = 4,
+							eventIntValue = 7738,
+							name = "jump",
+							uuid = "b5b40980-49b6-e7fc-89c7-e6ce17482d23",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							comparator = 3,
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventIntValue = 1,
+							name = "animationSlot",
+							uuid = "1bd103e4-7499-2462-9676-7251e2aa4ab9",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID == 1644 or eventArgs.entityContentID == 1645 or eventArgs.entityContentID == 1646",
+							dequeueIfLuaFalse = true,
+							name = "Garuda / sisters",
+							uuid = "9606c38f-b29a-4e15-9aaf-400cb06818d0",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "if self.claimed then return true end\nif data.uwu_p1_feather_called_3 then return false end\ndata.uwu_p1_feather_called_3=true\nself.claimed=true\nreturn true",
+							dequeueIfLuaFalse = true,
+							name = "One call per wave",
+							uuid = "8a841ca8-b729-c545-9f4e-084c028bfebd",
+							version = 3,
+						},
+					},
 				},
-				eventType = 18,
+				eventType = 23,
 				mechanicTime = 93,
-				name = "MOVE!",
+				name = "[LPDU] P1 Feather Rain 3 - Move at jump",
 				timeRange = true,
 				timelineIndex = 18,
 				timerEndOffset = 2,
@@ -3018,15 +3280,31 @@ local tbl =
 						data = 
 						{
 							aType = "Alert",
+							alertDuration = 2500,
 							alertPriority = 3,
 							alertTTS = true,
-							alertText = "Dodge Feather rain",
+							alertText = "Move: Feather Rain",
 							alertVolume = 81,
 							conditions = 
 							{
 								
 								{
-									"55a767d4-275f-73d6-9e5b-c7c8da368709",
+									"9a468bcc-6841-32a2-911e-8bb1f91f1bd4",
+									true,
+								},
+								
+								{
+									"2e362fe9-5504-d260-9de7-305751a2901d",
+									true,
+								},
+								
+								{
+									"512bca74-c5f4-2b9e-bd8d-16e66daf6f63",
+									true,
+								},
+								
+								{
+									"fec4cae0-dae6-1382-9be4-28047a401d5a",
 									true,
 								},
 							},
@@ -3049,10 +3327,62 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							comparator = 3,
+							dequeueIfLuaFalse = true,
+							eventArgType = 4,
+							eventIntValue = 7738,
+							name = "jump",
+							uuid = "9a468bcc-6841-32a2-911e-8bb1f91f1bd4",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							comparator = 3,
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventIntValue = 1,
+							name = "animationSlot",
+							uuid = "2e362fe9-5504-d260-9de7-305751a2901d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID == 1644 or eventArgs.entityContentID == 1645 or eventArgs.entityContentID == 1646",
+							dequeueIfLuaFalse = true,
+							name = "Garuda / sisters",
+							uuid = "512bca74-c5f4-2b9e-bd8d-16e66daf6f63",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "if self.claimed then return true end\nif data.uwu_p1_feather_called_4 then return false end\ndata.uwu_p1_feather_called_4=true\nself.claimed=true\nreturn true",
+							dequeueIfLuaFalse = true,
+							name = "One call per wave",
+							uuid = "fec4cae0-dae6-1382-9be4-28047a401d5a",
+							version = 3,
+						},
+					},
 				},
-				eventType = 18,
+				eventType = 23,
 				mechanicTime = 104,
-				name = "MOVE!",
+				name = "[LPDU] P1 Feather Rain 4 - Move at jump",
 				timeRange = true,
 				timelineIndex = 22,
 				timerEndOffset = 2,
@@ -3716,15 +4046,31 @@ local tbl =
 						data = 
 						{
 							aType = "Alert",
+							alertDuration = 2500,
 							alertPriority = 3,
 							alertTTS = true,
-							alertText = "Dodge Feather Rain",
+							alertText = "Move: Feather Rain",
 							alertVolume = 81,
 							conditions = 
 							{
 								
 								{
-									"b3db334e-b65f-49f5-b24c-6d54d73323e0",
+									"c8274440-a1b5-e948-99db-86ba6ff6ae67",
+									true,
+								},
+								
+								{
+									"3bc25d80-f3e6-6ffb-a011-01cac24825e4",
+									true,
+								},
+								
+								{
+									"53bbc76c-c46b-7b37-9558-b8f4f6d0b526",
+									true,
+								},
+								
+								{
+									"3e3c6059-f0b7-aca5-abdb-6f4f63c969da",
 									true,
 								},
 							},
@@ -3747,10 +4093,62 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							comparator = 3,
+							dequeueIfLuaFalse = true,
+							eventArgType = 4,
+							eventIntValue = 7738,
+							name = "jump",
+							uuid = "c8274440-a1b5-e948-99db-86ba6ff6ae67",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							comparator = 3,
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventIntValue = 1,
+							name = "animationSlot",
+							uuid = "3bc25d80-f3e6-6ffb-a011-01cac24825e4",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID == 1644 or eventArgs.entityContentID == 1645 or eventArgs.entityContentID == 1646",
+							dequeueIfLuaFalse = true,
+							name = "Garuda / sisters",
+							uuid = "53bbc76c-c46b-7b37-9558-b8f4f6d0b526",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "if self.claimed then return true end\nif data.uwu_p1_feather_called_5 then return false end\ndata.uwu_p1_feather_called_5=true\nself.claimed=true\nreturn true",
+							dequeueIfLuaFalse = true,
+							name = "One call per wave",
+							uuid = "3e3c6059-f0b7-aca5-abdb-6f4f63c969da",
+							version = 3,
+						},
+					},
 				},
-				eventType = 18,
+				eventType = 23,
 				mechanicTime = 129,
-				name = "MOVE!",
+				name = "[LPDU] P1 Feather Rain 5 - Move at jump",
 				timeRange = true,
 				timelineIndex = 28,
 				timerEndOffset = 2,
@@ -9081,7 +9479,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos or not eventArgs or not eventArgs.entityID then self.used = true return end\nlocal titan = TensorCore.mGetEntity(eventArgs.entityID)\nif not titan or not titan.pos then self.used = true return end\nlocal center = { x = 100, y = player.pos.y, z = 100 }\nlocal dx = titan.pos.x - center.x\nlocal dz = titan.pos.z - center.z\nlocal distanceFromCenter = math.sqrt(dx * dx + dz * dz)\nif distanceFromCenter < 0.1 then self.used = true return end\nlocal target = { x = center.x - dx / distanceFromCenter * 16.5, y = center.y, z = center.z - dz / distanceFromCenter * 16.5 }\nlocal distance = TensorCore.getDistance2d(player.pos, target)\nif distance > 0.2 then\n    local tipLength = math.min(2.0, distance * 0.35)\n    local drawer = TensorCore.getCachedDrawer(0xFFFFCC66,0xFFFF8800,0xFFAA4400,0xFFFFFFFF,2)\n    drawer:addTimedArrow(5500,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,target),math.max(0.1,distance-tipLength),1.0,tipLength,2.4,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nlocal drawer = TensorCore.getCachedDrawer(0x55FFAA33,0x55FFAA33,0xFFAA6600,0xFFFFFFFF,2)\ndrawer:addTimedCircle(5500,target.x,target.y,target.z,1.4,0,false,true)\nAnyoneCore.addTimedWorldText(5500,\"GEocrush 2: OPPOSITE EDGE\",{x=target.x,y=target.y+1.5,z=target.z},0xFFFFCC66,true,1.0)\nself.used = true",
+							actionLua = "local titan=TensorCore.mGetEntity(eventArgs.entityID)\nif not titan then return end\nlocal state=data.uwu_geocrush_first\nif not state then state={draws={}};data.uwu_geocrush_first=state end\nfor _,id in ipairs(state.draws) do Argus.deleteTimedShape(id) end\nstate.draws={};state.channelled=true\nlocal sourceX,sourceZ=titan.pos.x,titan.pos.z\nlocal duration=math.max(100,eventArgs.channelTimeMax*1000+300)\nlocal hazard=TensorCore.getMoogleDrawer()\nlocal hazardID=hazard:addTimedCircle(duration,sourceX,titan.pos.y,sourceZ,24,0,false,true)\nif hazardID then state.draws[#state.draws+1]=hazardID end\nhazardID=hazard:addTimedDonut(duration,100,titan.pos.y,100,16,19.5,0,false,true)\nif hazardID then state.draws[#state.draws+1]=hazardID end\nlocal player=TensorCore.mGetPlayer()\nif not player then return end\nlocal dx,dz=sourceX-100,sourceZ-100\nlocal length=math.sqrt(dx*dx+dz*dz)\nif length<1 then self.used=true;return end\nlocal target={x=100-dx/length*15,y=player.pos.y,z=100-dz/length*15}\nlocal green=TensorCore.getCachedDrawer(0x5533FF66,0xCC33FF66,0xFF33FF66,0xFF000000,3)\nlocal id=green:addTimedCircle(duration,target.x,target.y,target.z,0.5,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nif id then state.draws[#state.draws+1]=id end\nlocal distance=TensorCore.getDistance2d(player.pos,target)\nif distance>0.5 then\n id=green:addTimedArrow(duration,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,target),math.max(0.1,distance-1),1,1,2.4,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if id then state.draws[#state.draws+1]=id end\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -9095,7 +9493,7 @@ local tbl =
 									true,
 								},
 							},
-							name = "Guide",
+							name = "Confirmed safe opposite edge",
 							uuid = "3524e5b8-2863-ab54-93fa-e740f72b127d",
 							version = 2.1,
 						},
@@ -9108,6 +9506,7 @@ local tbl =
 						data = 
 						{
 							category = "Event",
+							dequeueIfLuaFalse = true,
 							eventArgOptionType = 2,
 							eventEntityContentID = 1801,
 							name = "Titan channel",
@@ -9120,6 +9519,7 @@ local tbl =
 						data = 
 						{
 							category = "Event",
+							dequeueIfLuaFalse = true,
 							eventArgType = 2,
 							eventSpellID = 11110,
 							name = "Geocrush cast",
@@ -9135,7 +9535,7 @@ local tbl =
 				timeRange = true,
 				timelineIndex = 82,
 				timerEndOffset = 3,
-				timerStartOffset = -5,
+				timerStartOffset = -8,
 				uuid = "cd7b21e1-6c6d-29b9-b419-e83b2e73b258",
 				version = 2,
 			},
@@ -9180,6 +9580,212 @@ local tbl =
 				uuid = "69121152-60a8-0f50-9ed2-371d266e94f1",
 			},
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "867096c0-6aae-f662-a67e-8fa2c3d5c854",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local titan=TensorCore.mGetEntity(eventArgs.entityID)\nif not titan then return end\nlocal old=data.uwu_geocrush_first\nif old and old.draws then for _,id in ipairs(old.draws) do Argus.deleteTimedShape(id) end end\ndata.uwu_geocrush_first={id=eventArgs.entityID,x=titan.pos.x,z=titan.pos.z,start=Now(),draws={}}\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"94402d04-eeb5-abd8-9247-986c04caccd5",
+									true,
+								},
+								
+								{
+									"b97c84e7-fbca-4e08-b080-d70e4cdc7463",
+									true,
+								},
+								
+								{
+									"e12a5988-c6c3-30e8-ac53-06cc27b57338",
+									true,
+								},
+							},
+							name = "Remember jump source",
+							uuid = "4bfbc756-646b-446d-a865-4e4158721b38",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							comparator = 3,
+							dequeueIfLuaFalse = true,
+							eventArgType = 4,
+							eventIntValue = 7737,
+							name = "jump",
+							uuid = "94402d04-eeb5-abd8-9247-986c04caccd5",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							comparator = 3,
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventIntValue = 1,
+							name = "animationSlot",
+							uuid = "b97c84e7-fbca-4e08-b080-d70e4cdc7463",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1801,
+							name = "Titan",
+							uuid = "e12a5988-c6c3-30e8-ac53-06cc27b57338",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 23,
+				mechanicTime = 631,
+				name = "[LPDU] Titan first Geocrush - Jump capture",
+				timeRange = true,
+				timelineIndex = 82,
+				timerEndOffset = 3,
+				timerStartOffset = -8,
+				uuid = "f27800fa-032c-d6ba-8ad7-80102fe652fe",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local state=data.uwu_geocrush_first\nif Now()-state.start<650 then return end\nlocal titan=TensorCore.mGetEntity(state.id)\nif not titan then return end\nlocal vx,vz=math.sin(titan.pos.h),math.cos(titan.pos.h)\nlocal ox,oz=state.x-100,state.z-100\nlocal b=ox*vx+oz*vz\nlocal discriminant=b*b+196-ox*ox-oz*oz\nif discriminant<0 then self.used=true;return end\nlocal distance=-b+math.sqrt(discriminant)\nlocal sourceX,sourceZ=state.x+vx*distance,state.z+vz*distance\nlocal duration=math.max(100,5200-(Now()-state.start))\nlocal drawer=TensorCore.getMoogleDrawer()\nlocal id=drawer:addTimedCircle(duration,sourceX,titan.pos.y,sourceZ,24,0,false,true)\nif id then state.draws[#state.draws+1]=id end\nid=drawer:addTimedDonut(duration,100,titan.pos.y,100,16,19.5,0,false,true)\nif id then state.draws[#state.draws+1]=id end\nlocal player=TensorCore.mGetPlayer()\nif not player then return end\nlocal dx,dz=sourceX-100,sourceZ-100\nlocal length=math.sqrt(dx*dx+dz*dz)\nif length<1 then self.used=true;return end\nlocal target={x=100-dx/length*15,y=player.pos.y,z=100-dz/length*15}\nlocal green=TensorCore.getCachedDrawer(0x5533FF66,0xCC33FF66,0xFF33FF66,0xFF000000,3)\nlocal id=green:addTimedCircle(duration,target.x,target.y,target.z,0.5,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nif id then state.draws[#state.draws+1]=id end\nlocal distance=TensorCore.getDistance2d(player.pos,target)\nif distance>0.5 then\n id=green:addTimedArrow(duration,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,target),math.max(0.1,distance-1),1,1,2.4,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if id then state.draws[#state.draws+1]=id end\nend\nstate.predicted=true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"7c6aead1-c7e6-b6d8-b86b-00ee27f7346b",
+									true,
+								},
+							},
+							name = "Preview proximity and safe edge",
+							uuid = "67c2de5c-21c8-8c29-9515-eacc5aa60dc5",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.uwu_geocrush_first\nreturn s ~= nil and not s.predicted and not s.channelled and not s.finished",
+							name = "Pending jump prediction",
+							uuid = "7c6aead1-c7e6-b6d8-b86b-00ee27f7346b",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				mechanicTime = 631,
+				name = "[LPDU] Titan first Geocrush - Early preview",
+				timeRange = true,
+				timelineIndex = 82,
+				timerEndOffset = 3,
+				timerStartOffset = -8,
+				uuid = "ffbeb510-205b-9ac0-a166-1d4ff52409c3",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.uwu_geocrush_first\nif s then\n s.finished=true\n for _,id in ipairs(s.draws) do Argus.deleteTimedShape(id) end\n s.draws={}\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"b56b917c-ac43-5530-aa86-bc0a6b9d2454",
+									true,
+								},
+							},
+							name = "Clear completed Geocrush",
+							uuid = "6836701d-c2b3-9571-b42c-66650e053246",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID == 1801 and eventArgs.spellID == 11110",
+							dequeueIfLuaFalse = true,
+							name = "Geocrush resolved",
+							uuid = "b56b917c-ac43-5530-aa86-bc0a6b9d2454",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 2,
+				mechanicTime = 631,
+				name = "[LPDU] Titan first Geocrush - Resolution cleanup",
+				timeRange = true,
+				timelineIndex = 82,
+				timerEndOffset = 3,
+				timerStartOffset = -8,
+				uuid = "18a286d9-bbb8-2d89-b3f0-0663056d7075",
+				version = 2,
+			},
 		},
 	},
 	[84] = 
@@ -9226,9 +9832,17 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then\n    self.used = true\n    return\nend\n\n-- Successful pulls place the safe knockback setup at the north side, around x=100, z=110.\nlocal center = { x = 100, y = player.pos.y, z = 110 }\nlocal drawer = TensorCore.getCachedDrawer(\n    0x5530E080, 0x5530E080, 0x5530E080, 0xFF30E080, 2.0\n)\ndrawer:addTimedCircle(\n    3000, center.x, center.y, center.z, 0.625,\n    0, false, true, Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n)\nAnyoneCore.addTimedWorldText(\n    3000,\n    \"UPHEAVAL: STAND IN GREEN\",\n    { x = center.x, y = center.y + 1.2, z = center.z },\n    0xFF30E080,\n    true,\n    0.9\n)\nself.used = true",
+							actionLua = "if data.uwu_upheaval_completed then self.used=true;return end\nif not self.waitUntil then self.waitUntil=Now()+350 end\nif Now()<self.waitUntil then return end\nlocal player=TensorCore.mGetPlayer()\nlocal titan=TensorCore.mGetEntity(eventArgs.entityID)\nif not player or not titan then return end\nlocal bombs=TensorCore.getEntityGroupList(\"ContentID\",{contentid=1803,subgroup=\"Number\",noAliveCheck=true})\nlocal count=0\nfor _,bomb in pairs(bombs) do count=count+1 end\nif count<5 then return end\nlocal bestScore,bestX,bestZ=-math.huge,nil,nil\nfor degree=0,359 do\n local angle=degree*math.pi/180\n local ux,uz=math.sin(angle),math.cos(angle)\n local lx,lz=titan.pos.x+ux*28,titan.pos.z+uz*28\n local dx,dz=lx-100,lz-100\n local score=16-math.sqrt(dx*dx+dz*dz)\n if score>0 then\n  for _,bomb in pairs(bombs) do\n   local bx,bz=lx-bomb.pos.x,lz-bomb.pos.z\n   score=math.min(score,math.sqrt(bx*bx+bz*bz)-6.3)\n  end\n  if score>bestScore then bestScore,bestX,bestZ=score,titan.pos.x+ux*4,titan.pos.z+uz*4 end\n end\nend\nif not bestX or bestScore<1.5 then return end\nlocal duration=math.max(100,eventArgs.channelTimeMax*1000+300-(Now()-self.waitUntil+350))\nlocal state={draws={}};data.uwu_upheaval_guidance=state\nlocal target={x=bestX,y=player.pos.y,z=bestZ}\nlocal drawer=TensorCore.getCachedDrawer(0x5530E080,0xCC30E080,0xFF30E080,0xFF30E080,3)\nlocal id=drawer:addTimedCircle(duration,target.x,target.y,target.z,0.18,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nif id then state.draws[#state.draws+1]=id end\nlocal distance=TensorCore.getDistance2d(player.pos,target)\nif distance>0.3 then\n id=drawer:addTimedArrow(duration,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,target),math.max(0.1,distance-0.5),0.6,0.5,1.5,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if id then state.draws[#state.draws+1]=id end\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"fecf388b-1517-1d6b-aa2e-c75136424696",
+									true,
+								},
+							},
 							displayPath = "Draws - Titan LPDU",
-							name = "Green safe starting circle",
+							name = "Bomb-gap knockback setup",
 							uuid = "8fed7728-1ef2-1479-b126-a5ae87b33953",
 							version = 2.1,
 						},
@@ -9236,14 +9850,91 @@ local tbl =
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID == 1801 and eventArgs.spellID == 11111",
+							dequeueIfLuaFalse = true,
+							name = "Upheaval cast",
+							uuid = "fecf388b-1517-1d6b-aa2e-c75136424696",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "Draws - Titan LPDU",
+				eventType = 3,
 				mechanicTime = 637,
 				name = "[Draw][LPDU][Titan] Upheaval Safe Knockback Spot",
 				timeRange = true,
 				timelineIndex = 84,
-				timerStartOffset = -3,
+				timerEndOffset = 2,
+				timerStartOffset = -6,
 				uuid = "9521059d-3b6a-244e-abb6-0129f350e8d2",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "02f33714-e43e-1caf-8349-0b2d0ddbba84",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "data.uwu_upheaval_completed=true\nlocal s=data.uwu_upheaval_guidance\nif s then for _,id in ipairs(s.draws) do Argus.deleteTimedShape(id) end;data.uwu_upheaval_guidance=nil end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"f39dbf60-4086-6bfa-acb7-3021ef6528a3",
+									true,
+								},
+							},
+							name = "Clear completed knockback",
+							uuid = "e5e3c084-865b-cf4f-b438-e474423af667",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID == 1801 and eventArgs.spellID == 11111",
+							dequeueIfLuaFalse = true,
+							name = "Upheaval resolved",
+							uuid = "f39dbf60-4086-6bfa-acb7-3021ef6528a3",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 2,
+				mechanicTime = 637,
+				name = "[LPDU] Titan Upheaval - Resolution cleanup",
+				timeRange = true,
+				timelineIndex = 84,
+				timerEndOffset = 3,
+				timerStartOffset = -6,
+				uuid = "f4100013-001d-80c4-ac11-b3fd0aba10ee",
 				version = 2,
 			},
 		},
@@ -10501,6 +11192,265 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "cc41d637-893e-5d24-960c-ba9507e92982",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local titan=TensorCore.mGetEntity(eventArgs.entityID)\nif not titan then return end\nlocal old=data.uwu_geocrush_last\nif old and old.draws then for _,id in ipairs(old.draws) do Argus.deleteTimedShape(id) end end\ndata.uwu_geocrush_last={id=eventArgs.entityID,x=titan.pos.x,z=titan.pos.z,start=Now(),draws={}}\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"72ce14d0-b5f6-90b7-8918-57593bd2725a",
+									true,
+								},
+								
+								{
+									"14f3f7a3-bfd8-c533-9a04-4d7c7ce418ee",
+									true,
+								},
+								
+								{
+									"e4e6df92-5995-7052-82f0-7a7bf160cddb",
+									true,
+								},
+							},
+							name = "Remember jump source",
+							uuid = "c3983eb8-e3ff-6efe-8700-91843acacee9",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							comparator = 3,
+							dequeueIfLuaFalse = true,
+							eventArgType = 4,
+							eventIntValue = 7737,
+							name = "jump",
+							uuid = "72ce14d0-b5f6-90b7-8918-57593bd2725a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							comparator = 3,
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventIntValue = 1,
+							name = "animationSlot",
+							uuid = "14f3f7a3-bfd8-c533-9a04-4d7c7ce418ee",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1801,
+							name = "Titan",
+							uuid = "e4e6df92-5995-7052-82f0-7a7bf160cddb",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 23,
+				mechanicTime = 684,
+				name = "[LPDU] Titan last Geocrush - Jump capture",
+				timeRange = true,
+				timelineIndex = 95,
+				timerEndOffset = 1,
+				timerStartOffset = -8,
+				uuid = "44e420ae-3d5b-2117-8af3-26ee98440965",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local state=data.uwu_geocrush_last\nif Now()-state.start<650 then return end\nlocal titan=TensorCore.mGetEntity(state.id)\nif not titan then return end\nlocal vx,vz=math.sin(titan.pos.h),math.cos(titan.pos.h)\nlocal ox,oz=state.x-100,state.z-100\nlocal b=ox*vx+oz*vz\nlocal discriminant=b*b+196-ox*ox-oz*oz\nif discriminant<0 then self.used=true;return end\nlocal distance=-b+math.sqrt(discriminant)\nlocal sourceX,sourceZ=state.x+vx*distance,state.z+vz*distance\nlocal duration=math.max(100,5200-(Now()-state.start))\nlocal drawer=TensorCore.getMoogleDrawer()\nlocal id=drawer:addTimedCircle(duration,sourceX,titan.pos.y,sourceZ,24,0,false,true)\nif id then state.draws[#state.draws+1]=id end\nid=drawer:addTimedDonut(duration,100,titan.pos.y,100,12,16,0,false,true)\nif id then state.draws[#state.draws+1]=id end\nlocal player=TensorCore.mGetPlayer()\nif not player then return end\nlocal dx,dz=sourceX-100,sourceZ-100\nlocal length=math.sqrt(dx*dx+dz*dz)\nif length<1 then self.used=true;return end\nlocal target={x=100-dx/length*11.25,y=player.pos.y,z=100-dz/length*11.25}\nlocal green=TensorCore.getCachedDrawer(0x5533FF66,0xCC33FF66,0xFF33FF66,0xFF000000,3)\nlocal id=green:addTimedCircle(duration,target.x,target.y,target.z,0.35,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nif id then state.draws[#state.draws+1]=id end\nlocal distance=TensorCore.getDistance2d(player.pos,target)\nif distance>0.5 then\n id=green:addTimedArrow(duration,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,target),math.max(0.1,distance-1),1,1,2.4,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if id then state.draws[#state.draws+1]=id end\nend\nstate.predicted=true\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"75565fc6-e3f4-18a9-8131-107864c13a23",
+									true,
+								},
+							},
+							name = "Preview proximity and safe edge",
+							uuid = "a9ae73af-2b05-d257-ad5e-7d858acb435f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.uwu_geocrush_last\nreturn s ~= nil and not s.predicted and not s.channelled and not s.finished",
+							name = "Pending jump prediction",
+							uuid = "75565fc6-e3f4-18a9-8131-107864c13a23",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				mechanicTime = 684,
+				name = "[LPDU] Titan last Geocrush - Early preview",
+				timeRange = true,
+				timelineIndex = 95,
+				timerEndOffset = 1,
+				timerStartOffset = -8,
+				uuid = "8c651dae-4c82-3b5b-a270-79bd2c3a63b5",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local titan=TensorCore.mGetEntity(eventArgs.entityID)\nif not titan then return end\nlocal state=data.uwu_geocrush_last\nif not state then state={draws={}};data.uwu_geocrush_last=state end\nfor _,id in ipairs(state.draws) do Argus.deleteTimedShape(id) end\nstate.draws={};state.channelled=true\nlocal sourceX,sourceZ=titan.pos.x,titan.pos.z\nlocal duration=math.max(100,eventArgs.channelTimeMax*1000+300)\nlocal hazard=TensorCore.getMoogleDrawer()\nlocal hazardID=hazard:addTimedCircle(duration,sourceX,titan.pos.y,sourceZ,24,0,false,true)\nif hazardID then state.draws[#state.draws+1]=hazardID end\nhazardID=hazard:addTimedDonut(duration,100,titan.pos.y,100,12,16,0,false,true)\nif hazardID then state.draws[#state.draws+1]=hazardID end\nlocal player=TensorCore.mGetPlayer()\nif not player then return end\nlocal dx,dz=sourceX-100,sourceZ-100\nlocal length=math.sqrt(dx*dx+dz*dz)\nif length<1 then self.used=true;return end\nlocal target={x=100-dx/length*11.25,y=player.pos.y,z=100-dz/length*11.25}\nlocal green=TensorCore.getCachedDrawer(0x5533FF66,0xCC33FF66,0xFF33FF66,0xFF000000,3)\nlocal id=green:addTimedCircle(duration,target.x,target.y,target.z,0.35,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nif id then state.draws[#state.draws+1]=id end\nlocal distance=TensorCore.getDistance2d(player.pos,target)\nif distance>0.5 then\n id=green:addTimedArrow(duration,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,target),math.max(0.1,distance-1),1,1,2.4,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if id then state.draws[#state.draws+1]=id end\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"bacb1cf4-4dde-d42f-b074-2d74407462d9",
+									true,
+								},
+							},
+							name = "Confirmed safe opposite edge",
+							uuid = "175f8dad-c33b-d4d7-ac4d-c7103a52015b",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID == 1801 and eventArgs.spellID == 11110",
+							dequeueIfLuaFalse = true,
+							name = "Geocrush cast",
+							uuid = "bacb1cf4-4dde-d42f-b074-2d74407462d9",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 3,
+				mechanicTime = 684,
+				name = "[LPDU] Titan last Geocrush - Confirm safe edge",
+				timeRange = true,
+				timelineIndex = 95,
+				timerEndOffset = 1,
+				timerStartOffset = -8,
+				uuid = "00ed5b6e-7578-6ce6-bce0-8370a399c95c",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.uwu_geocrush_last\nif s then\n s.finished=true\n for _,id in ipairs(s.draws) do Argus.deleteTimedShape(id) end\n s.draws={}\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"ba525dfc-9098-ca7c-859a-50e4d6bce9af",
+									true,
+								},
+							},
+							name = "Clear completed Geocrush",
+							uuid = "c7d81331-87ba-fd01-a37b-ddb21072cfe5",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID == 1801 and eventArgs.spellID == 11110",
+							dequeueIfLuaFalse = true,
+							name = "Geocrush resolved",
+							uuid = "ba525dfc-9098-ca7c-859a-50e4d6bce9af",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 2,
+				mechanicTime = 684,
+				name = "[LPDU] Titan last Geocrush - Resolution cleanup",
+				timeRange = true,
+				timelineIndex = 95,
+				timerEndOffset = 1,
+				timerStartOffset = -8,
+				uuid = "2ce12d47-599f-5859-8ade-bc862de03c2a",
+				version = 2,
+			},
+		},
 	},
 	[96] = 
 	{
@@ -11116,7 +12066,8 @@ local tbl =
 					{
 						data = 
 						{
-							category = "Self",
+							category = "Lua",
+							conditionLua = "local Roster=AnyoneCore.Roster\nif not Roster or not Roster.current() then return false end\nlocal slot=Roster.mySlot()\nreturn slot == \"M1\" or slot == \"M2\"",
 							conditionType = 14,
 							jobIDList = 
 							{
@@ -11127,7 +12078,7 @@ local tbl =
 								39,
 								41,
 							},
-							name = "Melee DPS",
+							name = "Roster M1 / M2",
 							uuid = "bf9cbfe8-a136-6067-9b62-9d6d1f499216",
 							version = 3,
 						},
@@ -14964,14 +15915,45 @@ local tbl =
 			{
 				actions = 
 				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "-- Independent UWU settings; available before GUI or targeting reads.\nif not _G.UWU_LPDUSettingsIOReady then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..[[UWU-LPDU.lua]]\n local saved={}\n if FileExists(path) then\n  local loaded=FileLoad(path)\n  if type(loaded)==\"table\" then saved=loaded end\n end\n local current=_G.UWU_LPDUGuiState\n local old=_G.UWU_LPDU_AnnihilationAssignments or {}\n local defaults={automaticOpen=true,ultimaOpen=true,orbsOpen=true,autoTarget=_G.LPDU_UWU_AutoTarget~=false,melee=(old.melee==2 and 2 or 1),solo=old.solo or 0}\n local keys={\"automaticOpen\",\"ultimaOpen\",\"orbsOpen\",\"autoTarget\",\"melee\",\"solo\"}\n local C={}\n for _,key in ipairs(keys) do\n  local value=current and current[key]\n  if value==nil then value=saved[key] end\n  if type(defaults[key])==\"boolean\" then\n   C[key]=type(value)==\"boolean\" and value or defaults[key]\n   if value==false then C[key]=false end\n  else\n   C[key]=type(value)==\"number\" and value>=0 and value<=2 and value%1==0 and value or defaults[key]\n  end\n end\n if C.melee==0 then C.melee=1 end\n function C.save()\n  if not FolderExists(folder) then FolderCreate(folder) end\n  local values={}\n  for _,key in ipairs(keys) do values[key]=C[key] end\n  FileSave(path,values)\n end\n _G.UWU_LPDUGuiState=C\n _G.UWU_LPDU_AnnihilationAssignments={melee=C.melee,solo=C.solo}\n _G.LPDU_UWU_AutoTarget=C.autoTarget\n C.save()\n _G.UWU_LPDUSettingsIOReady=true\nend\n-- Upgrade only an unset melee assignment; preserve either explicit role choice.\ndo\n local preferences=_G.UWU_LPDUGuiState\n if preferences and preferences.melee==0 then\n  preferences.melee=1\n  local assignment=_G.UWU_LPDU_AnnihilationAssignments\n  if assignment then assignment.melee=1 end\n  preferences.save()\n end\nend\nlocal state=data.uwu_annihilation_orbs\nif not state then state={seen={},count=0};data.uwu_annihilation_orbs=state end\nstate.live=state.live or {}\nif not self.orb then\n if state.seen[eventArgs.entityID] or state.count>=4 then self.used=true;return end\n state.count=state.count+1\n state.seen[eventArgs.entityID]=true\n self.orb=state.count\n self.entry={number=self.orb,draws={},expires=Now()+10000}\n state.live[eventArgs.entityID]=self.entry\nend\nif self.entry.finished then self.used=true;return end\nlocal duration=self.entry.expires-Now()\nif duration<=0 then self.used=true;return end\nif not TensorCore.mGetEntity(eventArgs.entityID) then return end\nif not self.entry.highlighted then\n local drawer=TensorCore.getCachedDrawer(0x2244FFFF,0x9944FFFF,0xFF44FFFF,0xFF000000,3)\n local id=drawer:addTimedCircleOnEnt(duration,eventArgs.entityID,6,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if id then self.entry.draws[#self.entry.draws+1]=id end\n self.entry.highlighted=true\nend\nlocal Roster=AnyoneCore.Roster\nif not Roster or not Roster.current() then return end\nlocal slot=Roster.mySlot()\nif not slot then return end\nlocal cfg=_G.UWU_LPDU_AnnihilationAssignments\nlocal orb=self.orb\nlocal assigned,missing=false,false\nif orb<=2 then\n if slot==\"T1\" or slot==\"T2\" then assigned=true\n elseif slot==\"M1\" or slot==\"M2\" then\n  missing=not cfg.melee or cfg.melee==0\n  assigned=(cfg.melee==1 and slot==\"M1\") or (cfg.melee==2 and slot==\"M2\")\n end\nelseif slot==\"T1\" or slot==\"T2\" then\n missing=not cfg.solo or cfg.solo==0\n assigned=(cfg.solo==1 and slot==\"T1\") or (cfg.solo==2 and slot==\"T2\")\nend\nif missing then\n TensorCore.addAlertText(3500,\"Orb \"..orb..\": choose your assignment\",1,2,true)\nelseif assigned then\n if not Roster.isReady() then return end\n local player=TensorCore.mGetPlayer()\n if not player then return end\n local drawer=TensorCore.getCachedDrawer(0x4433FF66,0xCC33FF66,0xFF33FF66,0xFF000000,3)\n local id=drawer:addTimedArrowOnEnt(duration,player.id,0,1,1,2.4,eventArgs.entityID,0,false,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if id then self.entry.draws[#self.entry.draws+1]=id end\n TensorCore.addAlertText(3500,\"Orb \"..orb..(orb<=2 and \": soak with tanks\" or \": solo tank soak\"),1,1,true)\nelse\n TensorCore.addAlertText(3000,\"Orb \"..orb..\": stay clear\",0.9,2,false)\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"5a6a3e49-16fd-2294-9951-73ba9a52c693",
+									true,
+								},
+							},
+							name = "Mark assigned live orb",
+							uuid = "d3864155-5705-5aff-bc54-2adec3ceee3f",
+							version = 2.1,
+						},
+					},
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 2138,
+							name = "Annihilation orb",
+							uuid = "5a6a3e49-16fd-2294-9951-73ba9a52c693",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "Draws - Ultima LPDU",
 				eventType = 5,
 				execute = "-- Independent UWU settings; available before GUI or targeting reads.\nif not _G.UWU_LPDUSettingsIOReady then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..[[UWU-LPDU.lua]]\n local saved={}\n if FileExists(path) then\n  local loaded=FileLoad(path)\n  if type(loaded)==\"table\" then saved=loaded end\n end\n local current=_G.UWU_LPDUGuiState\n local old=_G.UWU_LPDU_AnnihilationAssignments or {}\n local defaults={automaticOpen=true,ultimaOpen=true,orbsOpen=true,autoTarget=_G.LPDU_UWU_AutoTarget~=false,melee=(old.melee==2 and 2 or 1),solo=old.solo or 0}\n local keys={\"automaticOpen\",\"ultimaOpen\",\"orbsOpen\",\"autoTarget\",\"melee\",\"solo\"}\n local C={}\n for _,key in ipairs(keys) do\n  local value=current and current[key]\n  if value==nil then value=saved[key] end\n  if type(defaults[key])==\"boolean\" then\n   C[key]=type(value)==\"boolean\" and value or defaults[key]\n   if value==false then C[key]=false end\n  else\n   C[key]=type(value)==\"number\" and value>=0 and value<=2 and value%1==0 and value or defaults[key]\n  end\n end\n if C.melee==0 then C.melee=1 end\n function C.save()\n  if not FolderExists(folder) then FolderCreate(folder) end\n  local values={}\n  for _,key in ipairs(keys) do values[key]=C[key] end\n  FileSave(path,values)\n end\n _G.UWU_LPDUGuiState=C\n _G.UWU_LPDU_AnnihilationAssignments={melee=C.melee,solo=C.solo}\n _G.LPDU_UWU_AutoTarget=C.autoTarget\n C.save()\n _G.UWU_LPDUSettingsIOReady=true\nend\n-- Upgrade only an unset melee assignment; preserve either explicit role choice.\ndo\n local preferences=_G.UWU_LPDUGuiState\n if preferences and preferences.melee==0 then\n  preferences.melee=1\n  local assignment=_G.UWU_LPDU_AnnihilationAssignments\n  if assignment then assignment.melee=1 end\n  preferences.save()\n end\nend\nif not eventArgs or eventArgs.entityContentID ~= 2138 or not eventArgs.entityID then return end\ndata.uwu_annihilation_orbs = data.uwu_annihilation_orbs or {seen = {}, count = 0}\nlocal state = data.uwu_annihilation_orbs\nif state.seen[eventArgs.entityID] then return end\nif state.count >= 4 then return end\nstate.seen[eventArgs.entityID] = true\nstate.count = state.count + 1\nlocal orb = state.count\nlocal Roster = AnyoneCore and AnyoneCore.Roster\nif not Roster or not Roster.current() then self.used = true return end\nlocal slot = Roster.mySlot()\nif not slot then self.used = true return end\nlocal cfg = _G.UWU_LPDU_AnnihilationAssignments or {}\nlocal assigned = false\nlocal missing = false\nif orb <= 2 then\n    if slot == \"T1\" or slot == \"T2\" then\n        assigned = true\n    elseif slot == \"M1\" or slot == \"M2\" then\n        missing = not cfg.melee or cfg.melee == 0\n        assigned = (cfg.melee == 1 and slot == \"M1\") or (cfg.melee == 2 and slot == \"M2\")\n    end\nelseif slot == \"T1\" or slot == \"T2\" then\n    missing = not cfg.solo or cfg.solo == 0\n    assigned = (cfg.solo == 1 and slot == \"T1\") or (cfg.solo == 2 and slot == \"T2\")\nend\nif missing then\n    TensorCore.addAlertText(3500, \"Orb \" .. orb .. \": choose your assignment\", 1.0, 2, true)\nelseif assigned then\n    if Roster.isReady() then\n        local id = Roster.idOf(slot)\n        if id then\n            local drawer = TensorCore.getCachedDrawer(0x6633FF66, 0xCC33FF66, 0xFF33FF66, 0xFF000000, 3)\n            drawer:addTimedCircleOnEnt(4000, id, 1.2, 0, false, true, Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n            AnyoneCore.addTimedWorldTextOnEnt(4000, \"SOAK ORB \" .. orb, id, 0xFF33FF66, true, 1.1, 1.5)\n        end\n    end\n    TensorCore.addAlertText(3500, \"Orb \" .. orb .. (orb <= 2 and \": soak with tanks\" or \": solo tank soak\"), 1.0, 1, true)\nelse\n    TensorCore.addAlertText(3000, \"Orb \" .. orb .. \": stay clear\", 0.9, 2, false)\nend\nself.used = true",
-				executeType = 2,
 				loop = true,
 				mechanicTime = 1116,
 				name = "[Draw][LPDU][Annihilation] Orb spawn role cues",
@@ -14980,6 +15962,124 @@ local tbl =
 				timerEndOffset = 24,
 				timerStartOffset = -3,
 				uuid = "e8276347-36f7-698c-a08c-984954552ebf",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "2fa7c192-c25c-036b-ba6f-9b57a03ad363",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local state=data.uwu_annihilation_orbs\nlocal entry=state and state.live and state.live[eventArgs.entityID]\nif entry then\n entry.finished=true\n for _,id in ipairs(entry.draws) do Argus.deleteTimedShape(id) end\n entry.draws={}\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"15715973-93ea-43e0-b589-c957de6a3974",
+									true,
+								},
+							},
+							name = "Clear resolved orb",
+							uuid = "3017aef2-bb74-df33-80a7-cd70af669d77",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID == 2138 and eventArgs.spellID == 11137",
+							dequeueIfLuaFalse = true,
+							name = "Orb explosion",
+							uuid = "15715973-93ea-43e0-b589-c957de6a3974",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 1116,
+				name = "[LPDU] Annihilation orb - Resolution cleanup",
+				timeRange = true,
+				timelineIndex = 155,
+				timerEndOffset = 28,
+				timerStartOffset = -4,
+				uuid = "9dd20c4d-5e0f-a382-a5b4-cc45ce7f4b46",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local state=data.uwu_annihilation_orbs\nlocal entry=state and state.live and state.live[eventArgs.entityID]\nif entry then\n entry.finished=true\n for _,id in ipairs(entry.draws) do Argus.deleteTimedShape(id) end\n entry.draws={}\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"d1cc3fba-ffdf-152e-b347-6800588c2579",
+									true,
+								},
+							},
+							name = "Clear removed orb",
+							uuid = "eda473d1-8bcb-88b2-a154-18794cdbfff5",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.uwu_annihilation_orbs\nreturn s and s.live and s.live[eventArgs.entityID] ~= nil",
+							dequeueIfLuaFalse = true,
+							name = "Owned orb",
+							uuid = "d1cc3fba-ffdf-152e-b347-6800588c2579",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 6,
+				loop = true,
+				mechanicTime = 1116,
+				name = "[LPDU] Annihilation orb - Removal cleanup",
+				timeRange = true,
+				timelineIndex = 155,
+				timerEndOffset = 28,
+				timerStartOffset = -4,
+				uuid = "4054ad66-2f5b-9fb7-a7da-5399f1570070",
 				version = 2,
 			},
 		},

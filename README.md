@@ -197,6 +197,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### UWU: LPDU
 
+- P1 Feather Rain move calls now follow the jump cue. Added early Titan Geocrush previews, green safe-edge guidance and bomb-pattern-aware Upheaval positioning. Titan light-orb calls use Party Roster M1/M2. All players see Annihilation orb highlights; assigned soakers also get arrows to their orb. (06-11-2026)
+
 - Assigned Mesohigh takers now see their own tether and its source highlighted in green using Party Roster: P1 west R2/east OT, Annihilation R1 then Searing Wind healer, and Suppression MT. Added advance healer/MT tether calls and corrected tank roster checks in tether, Friction and Titan callouts. (06-11-2026)
 
 - BLM, BRD and RPR nail targeting now log diagnostic state changes: roster/assignment, collected nails, HP bands, awakening stacks, locked kill order, desired versus actual target and active casts. BLM also reports missing capture state. Targeting rules are unchanged. (31-10-2026)
@@ -214,8 +216,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 - Combined UWU AutoSim, targeting and relevant orb-assignment panels into one UWU LPDU Settings window. BLM now has adjustable Garuda end, Ifrit end-after-disappearance and Triplecast hold lead times, with explanations and next-pull application. Settings remain session-only. (31-10-2026)
 
 - BLM AutoSim now forecasts phase-specific Thunder lifetimes and availability for single-target and AoE Thunder, with native disappear/return corrections and extension when bosses outlive estimates. Updated Garuda/Ifrit end estimates from recent logs and stopped treating Ifrit’s confirmed final departure as a dash into Titan. (31-10-2026)
-
-- BLM/BRD/RPR AutoSim now disable AoE and Smart AoE for Titan’s healer gaol and Ultima’s Suppression gaol, restoring prior settings after the final gaol or on cleanup. Auto-targeting is retained; Suppression selects the exact newly targetable gaol. The earlier Titan triple-gaol sequence is unchanged. (31-10-2026)
 
 
 ### Q40: Shared AutoSim
