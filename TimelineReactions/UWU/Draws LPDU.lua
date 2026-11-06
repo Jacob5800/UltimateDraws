@@ -1614,9 +1614,9 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local role = GetCurrentRole()\nreturn role == \"OT\" or role == \"M1\" or role == \"M2\"",
+							conditionLua = "local Roster = AnyoneCore.Roster\nif not Roster or not Roster.current() then return false end\nlocal slot = Roster.mySlot()\nreturn slot == \"T2\" or slot == \"M1\" or slot == \"M2\"",
 							dequeueIfLuaFalse = true,
-							name = "Roster: OT / M1 / M2",
+							name = "Roster: T2 / M1 / M2",
 							uuid = "b9a0ce10-6329-3e3c-aac9-6a95ff874d4b",
 							version = 3,
 						},
@@ -1667,9 +1667,9 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local role = AnyoneCore.Roster.mySlot()\nreturn role == \"OT\" or role == \"M1\" or role == \"M2\"",
+							conditionLua = "local Roster = AnyoneCore.Roster\nif not Roster or not Roster.current() then return false end\nlocal slot = Roster.mySlot()\nreturn slot == \"T2\" or slot == \"M1\" or slot == \"M2\"",
 							conditionType = 9,
-							name = "OT, M1, M2",
+							name = "T2 / M1 / M2",
 							partyTargetType = "Melee DPS",
 							uuid = "f356668c-bb3c-8866-a374-433db8366df1",
 							version = 3,
@@ -3230,8 +3230,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return AnyoneCore.Roster.mySlot() == \"R2\"",
-							name = "R2 Only",
+							conditionLua = "local Roster = AnyoneCore.Roster\nif not Roster or not Roster.current() then return false end\nlocal slot = Roster.mySlot()\nreturn slot == \"R2\"",
+							name = "R2 only",
 							uuid = "799dfc4e-c873-f1fd-b00d-f5a73c189eea",
 							version = 3,
 						},
@@ -3281,8 +3281,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return AnyoneCore.Roster.mySlot() == \"OT\"",
-							name = "OT Only",
+							conditionLua = "local Roster = AnyoneCore.Roster\nif not Roster or not Roster.current() then return false end\nlocal slot = Roster.mySlot()\nreturn slot == \"T2\"",
+							name = "T2 only",
 							uuid = "105aa17b-27b9-f298-8c2e-ad12b3d436e1",
 							version = 3,
 						},
@@ -3355,6 +3355,105 @@ local tbl =
 				timerEndOffset = 3,
 				timerStartOffset = -1,
 				uuid = "6ad085ab-a8f3-d89b-9cc6-6e3ad1846cd0",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "713c0511-e976-da45-8efa-e2940a86cbe3",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU Guidance",
+				name = "Mesohigh",
+				uuid = "17d5ed0d-8908-db9e-9d54-82c1dce29ac2",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local a = eventArgs\nlocal state = data.uwu_personal_mesohigh_p1\nif not state then state = {}; data.uwu_personal_mesohigh_p1 = state end\nlocal tether = state[a.sourceEntityID]\nif not tether then tether = {}; state[a.sourceEntityID] = tether end\nif a.newTetherID == 4 and a.newTargetID and a.newTargetID > 0 then\n tether.target = a.newTargetID\n tether.expires = Now() + 10000\nelse\n tether.target = nil\nend\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"0df707ea-7fec-a9e5-9cb7-24a78393b35f",
+									true,
+								},
+							},
+							name = "Track source and current holder",
+							uuid = "f71702bb-db4f-467f-adf0-83adbdbecf13",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return (eventArgs.sourceEntityContentID == 1645 or eventArgs.sourceEntityContentID == 1646) and (eventArgs.newTetherID == 4 or eventArgs.oldTetherID == 4)",
+							dequeueIfLuaFalse = true,
+							name = "Mesohigh source / change",
+							uuid = "0df707ea-7fec-a9e5-9cb7-24a78393b35f",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance/Mesohigh",
+				eventType = 15,
+				loop = true,
+				mechanicTime = 124,
+				name = "[LPDU] Mesohigh P1 - Capture personal tether",
+				timeRange = true,
+				timelineIndex = 26,
+				timerEndOffset = 4,
+				timerStartOffset = -8,
+				uuid = "d997f10d-0f26-81d7-ad78-5159b336f14c",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance/Mesohigh",
+				eventType = 12,
+				execute = "local state = data.uwu_personal_mesohigh_p1\nif not state then return end\nlocal Roster = AnyoneCore.Roster\nif not Roster or not Roster.current() or not Roster.isReady() then return end\nlocal slot = Roster.mySlot()\nlocal player = TensorCore.mGetPlayer()\nif not player then return end\nlocal allowed = slot == \"R2\" or slot == \"T2\"\nif not allowed then return end\nlocal now = Now()\nfor sourceID,tether in pairs(state) do\n if tether.target and not tether.done and now < tether.expires then\n  local source = TensorCore.mGetEntity(sourceID)\n  local holder = TensorCore.mGetEntity(tether.target)\n  if source and holder then\n  local onSide = (slot == \"R2\" and source.pos.x < 100) or (slot == \"T2\" and source.pos.x > 100)\n   if onSide then\n    if holder.id == player.id then\n     tether.done = true\n    else\n     local drawer = TensorCore.getStaticDrawer(0xFF00FF00,3)\n     local p,q = source.pos,holder.pos\n     drawer:addLine(p.x,p.y+0.8,p.z,q.x,q.y+0.8,q.z,4,6)\n     drawer:addCircle(p.x,p.y+0.05,p.z,2,false)\n    end\n   end\n  end\n end\nend\nself.used = true",
+				executeType = 2,
+				loop = true,
+				mechanicTime = 124,
+				name = "[LPDU] Mesohigh P1 - Assigned green tether/source",
+				timeRange = true,
+				timelineIndex = 26,
+				timerEndOffset = 4,
+				timerStartOffset = -8,
+				uuid = "9c6d9d15-ac56-3bb1-b71c-f28e693de39c",
 				version = 2,
 			},
 		},
@@ -10535,8 +10634,8 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local role = AnyoneCore.Roster.mySlot()\nreturn role == \"MT\" or role == \"OT\"",
-							name = "Tanks Only",
+							conditionLua = "local Roster = AnyoneCore.Roster\nif not Roster or not Roster.current() then return false end\nlocal slot = Roster.mySlot()\nreturn slot == \"T1\" or slot == \"T2\"",
+							name = "T1 / T2",
 							uuid = "9de440ae-f6b9-9643-a390-83e59aafc59f",
 							version = 3,
 						},
@@ -14898,6 +14997,105 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "049b6f95-2b95-66a0-93fe-203a0b8c16a1",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU Guidance",
+				name = "Mesohigh",
+				uuid = "30ab2113-69fd-e483-84b1-45d3510b378d",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local a = eventArgs\nlocal state = data.uwu_personal_mesohigh_anni1\nif not state then state = {}; data.uwu_personal_mesohigh_anni1 = state end\nlocal tether = state[a.sourceEntityID]\nif not tether then tether = {}; state[a.sourceEntityID] = tether end\nif a.newTetherID == 4 and a.newTargetID and a.newTargetID > 0 then\n tether.target = a.newTargetID\n tether.expires = Now() + 10000\nelse\n tether.target = nil\nend\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"4838ff48-9d59-0cc3-b198-0cc8b29978fc",
+									true,
+								},
+							},
+							name = "Track source and current holder",
+							uuid = "669800c9-0a73-a1c5-afc1-81dce88a87ac",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.sourceEntityContentID == 1644 and (eventArgs.newTetherID == 4 or eventArgs.oldTetherID == 4)",
+							dequeueIfLuaFalse = true,
+							name = "Mesohigh source / change",
+							uuid = "4838ff48-9d59-0cc3-b198-0cc8b29978fc",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance/Mesohigh",
+				eventType = 15,
+				loop = true,
+				mechanicTime = 1117,
+				name = "[LPDU] Mesohigh Annihilation first - Capture personal tether",
+				timeRange = true,
+				timelineIndex = 156,
+				timerEndOffset = 4,
+				timerStartOffset = -8,
+				uuid = "cd2bf3a6-73c3-7159-8399-2edd4e1d0571",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance/Mesohigh",
+				eventType = 12,
+				execute = "local state = data.uwu_personal_mesohigh_anni1\nif not state then return end\nlocal Roster = AnyoneCore.Roster\nif not Roster or not Roster.current() or not Roster.isReady() then return end\nlocal slot = Roster.mySlot()\nlocal player = TensorCore.mGetPlayer()\nif not player then return end\nlocal allowed = slot == \"R1\"\nif not allowed then return end\nlocal now = Now()\nfor sourceID,tether in pairs(state) do\n if tether.target and not tether.done and now < tether.expires then\n  local source = TensorCore.mGetEntity(sourceID)\n  local holder = TensorCore.mGetEntity(tether.target)\n  if source and holder then\n  local onSide = true\n   if onSide then\n    if holder.id == player.id then\n     tether.done = true\n    else\n     local drawer = TensorCore.getStaticDrawer(0xFF00FF00,3)\n     local p,q = source.pos,holder.pos\n     drawer:addLine(p.x,p.y+0.8,p.z,q.x,q.y+0.8,q.z,4,6)\n     drawer:addCircle(p.x,p.y+0.05,p.z,2,false)\n    end\n   end\n  end\n end\nend\nself.used = true",
+				executeType = 2,
+				loop = true,
+				mechanicTime = 1117,
+				name = "[LPDU] Mesohigh Annihilation first - Assigned green tether/source",
+				timeRange = true,
+				timelineIndex = 156,
+				timerEndOffset = 4,
+				timerStartOffset = -8,
+				uuid = "244cc296-bb99-dd65-8306-aaf6f2c32bd6",
+				version = 2,
+			},
+		},
 	},
 	[157] = 
 	{
@@ -15597,6 +15795,159 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "2aecbfc1-1f42-28a8-90cd-d8e38890e830",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU Guidance",
+				name = "Mesohigh",
+				uuid = "ba76269f-d303-885e-b1ff-7fdac04cb176",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local a = eventArgs\nlocal state = data.uwu_personal_mesohigh_anni2\nif not state then state = {}; data.uwu_personal_mesohigh_anni2 = state end\nlocal tether = state[a.sourceEntityID]\nif not tether then tether = {}; state[a.sourceEntityID] = tether end\nif a.newTetherID == 4 and a.newTargetID and a.newTargetID > 0 then\n tether.target = a.newTargetID\n tether.expires = Now() + 10000\nelse\n tether.target = nil\nend\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"0868ca13-0fcf-ab3c-806e-1775fa2f41e1",
+									true,
+								},
+							},
+							name = "Track source and current holder",
+							uuid = "1bcafbe0-9635-bd5c-bedb-08c3b6f48544",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.sourceEntityContentID == 1644 and (eventArgs.newTetherID == 4 or eventArgs.oldTetherID == 4)",
+							dequeueIfLuaFalse = true,
+							name = "Mesohigh source / change",
+							uuid = "0868ca13-0fcf-ab3c-806e-1775fa2f41e1",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance/Mesohigh",
+				eventType = 15,
+				loop = true,
+				mechanicTime = 1136,
+				name = "[LPDU] Mesohigh Annihilation second - Capture personal tether",
+				timeRange = true,
+				timelineIndex = 169,
+				timerEndOffset = 4,
+				timerStartOffset = -8,
+				uuid = "d3232d57-7c45-d768-bf7d-0ad0f1517a9b",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance/Mesohigh",
+				eventType = 12,
+				execute = "local state = data.uwu_personal_mesohigh_anni2\nif not state then return end\nlocal Roster = AnyoneCore.Roster\nif not Roster or not Roster.current() or not Roster.isReady() then return end\nlocal slot = Roster.mySlot()\nlocal player = TensorCore.mGetPlayer()\nif not player then return end\nlocal allowed = (slot == \"H1\" or slot == \"H2\") and TensorCore.hasBuff(player,1578)\nif not allowed then return end\nlocal now = Now()\nfor sourceID,tether in pairs(state) do\n if tether.target and not tether.done and now < tether.expires then\n  local source = TensorCore.mGetEntity(sourceID)\n  local holder = TensorCore.mGetEntity(tether.target)\n  if source and holder then\n  local onSide = true\n   if onSide then\n    if holder.id == player.id then\n     tether.done = true\n    else\n     local drawer = TensorCore.getStaticDrawer(0xFF00FF00,3)\n     local p,q = source.pos,holder.pos\n     drawer:addLine(p.x,p.y+0.8,p.z,q.x,q.y+0.8,q.z,4,6)\n     drawer:addCircle(p.x,p.y+0.05,p.z,2,false)\n    end\n   end\n  end\n end\nend\nself.used = true",
+				executeType = 2,
+				loop = true,
+				mechanicTime = 1136,
+				name = "[LPDU] Mesohigh Annihilation second - Assigned green tether/source",
+				timeRange = true,
+				timelineIndex = 169,
+				timerEndOffset = 4,
+				timerStartOffset = -8,
+				uuid = "a8dd1f3f-b70a-1473-aaad-1d1be352b3d0",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertPriority = 3,
+							alertScale = 0.85,
+							alertTTS = true,
+							alertText = "Prepare to take the next tether",
+							conditions = 
+							{
+								
+								{
+									"341f1ae4-2043-bade-b0c2-ed40d227e200",
+									true,
+								},
+							},
+							name = "Prepare to take the next tether",
+							uuid = "bea9940e-e5de-5eb0-9de5-57d873423e1c",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local Roster = AnyoneCore.Roster\nif not Roster or not Roster.current() then return false end\nlocal slot = Roster.mySlot()\nlocal player = TensorCore.mGetPlayer()\nreturn player ~= nil and (slot == \"H1\" or slot == \"H2\") and TensorCore.hasBuff(player,1578)",
+							name = "Assigned tether taker",
+							uuid = "341f1ae4-2043-bade-b0c2-ed40d227e200",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance/Mesohigh",
+				mechanicTime = 1136,
+				name = "[LPDU] Mesohigh Annihilation Searing Wind healer - Advance call",
+				timeRange = true,
+				timelineIndex = 169,
+				timerEndOffset = -9,
+				timerStartOffset = -10,
+				uuid = "d014cb14-14f3-1273-8990-f1f612978e55",
+				version = 2,
+			},
 		},
 	},
 	[170] = 
@@ -17892,6 +18243,159 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "6ff41b16-a4d5-caa0-a302-d104d6c497f1",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU Guidance",
+				name = "Mesohigh",
+				uuid = "34ed18d7-09a1-8bde-b13f-4bba67c739c4",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local a = eventArgs\nlocal state = data.uwu_personal_mesohigh_supp\nif not state then state = {}; data.uwu_personal_mesohigh_supp = state end\nlocal tether = state[a.sourceEntityID]\nif not tether then tether = {}; state[a.sourceEntityID] = tether end\nif a.newTetherID == 4 and a.newTargetID and a.newTargetID > 0 then\n tether.target = a.newTargetID\n tether.expires = Now() + 10000\nelse\n tether.target = nil\nend\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"adc53763-dee3-b367-9b53-d7db6b16eea1",
+									true,
+								},
+							},
+							name = "Track source and current holder",
+							uuid = "b0cff171-8f37-9f7a-97f9-c82298eec721",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.sourceEntityContentID == 1644 and (eventArgs.newTetherID == 4 or eventArgs.oldTetherID == 4)",
+							dequeueIfLuaFalse = true,
+							name = "Mesohigh source / change",
+							uuid = "adc53763-dee3-b367-9b53-d7db6b16eea1",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance/Mesohigh",
+				eventType = 15,
+				loop = true,
+				mechanicTime = 1226,
+				name = "[LPDU] Mesohigh Suppression - Capture personal tether",
+				timeRange = true,
+				timelineIndex = 202,
+				timerEndOffset = 4,
+				timerStartOffset = -8,
+				uuid = "64c6927b-fe3c-7098-be74-e3aef073412e",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance/Mesohigh",
+				eventType = 12,
+				execute = "local state = data.uwu_personal_mesohigh_supp\nif not state then return end\nlocal Roster = AnyoneCore.Roster\nif not Roster or not Roster.current() or not Roster.isReady() then return end\nlocal slot = Roster.mySlot()\nlocal player = TensorCore.mGetPlayer()\nif not player then return end\nlocal allowed = slot == \"T1\"\nif not allowed then return end\nlocal now = Now()\nfor sourceID,tether in pairs(state) do\n if tether.target and not tether.done and now < tether.expires then\n  local source = TensorCore.mGetEntity(sourceID)\n  local holder = TensorCore.mGetEntity(tether.target)\n  if source and holder then\n  local onSide = true\n   if onSide then\n    if holder.id == player.id then\n     tether.done = true\n    else\n     local drawer = TensorCore.getStaticDrawer(0xFF00FF00,3)\n     local p,q = source.pos,holder.pos\n     drawer:addLine(p.x,p.y+0.8,p.z,q.x,q.y+0.8,q.z,4,6)\n     drawer:addCircle(p.x,p.y+0.05,p.z,2,false)\n    end\n   end\n  end\n end\nend\nself.used = true",
+				executeType = 2,
+				loop = true,
+				mechanicTime = 1226,
+				name = "[LPDU] Mesohigh Suppression - Assigned green tether/source",
+				timeRange = true,
+				timelineIndex = 202,
+				timerEndOffset = 4,
+				timerStartOffset = -8,
+				uuid = "d7c4cafa-62ba-7c06-9dd6-de9f6b74bda7",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertPriority = 3,
+							alertScale = 0.85,
+							alertTTS = true,
+							alertText = "Prepare to take Garuda tether",
+							conditions = 
+							{
+								
+								{
+									"a9d29ff9-b9b7-c0a4-aeac-b62360157df1",
+									true,
+								},
+							},
+							name = "Prepare to take Garuda tether",
+							uuid = "8ecfcc0c-2a36-9370-9d85-c85b5fd2b8e7",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local Roster = AnyoneCore.Roster\nif not Roster or not Roster.current() then return false end\nlocal slot = Roster.mySlot()\nreturn slot == \"T1\"",
+							name = "Assigned tether taker",
+							uuid = "a9d29ff9-b9b7-c0a4-aeac-b62360157df1",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance/Mesohigh",
+				mechanicTime = 1226,
+				name = "[LPDU] Mesohigh Suppression MT - Advance call",
+				timeRange = true,
+				timelineIndex = 202,
+				timerEndOffset = -5,
+				timerStartOffset = -6,
+				uuid = "8646f15b-22db-def5-b77f-82acb947d145",
+				version = 2,
+			},
 		},
 	},
 	[203] = 
