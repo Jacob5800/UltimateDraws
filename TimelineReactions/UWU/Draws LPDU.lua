@@ -610,6 +610,40 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
+							actionLua = "local old=eventArgs.oldData\nif old then\n local state=old.uwu_lpdu_predation\n if state then for _,id in ipairs(state.shapes) do Argus.deleteTimedShape(id) end end\n state=old.uwu_ultima_middle_bury\n if state then for _,shape in ipairs(state.shapes) do if shape.id then Argus.deleteTimedShape(shape.id) end end end\nend\nself.used=true",
+							name = "Ultima personal previews - Wipe cleanup",
+							uuid = "d8070359-6625-5ee6-824d-ab3fe99019ff",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 9,
+				loop = true,
+				mechanicTime = 9,
+				name = "[LPDU] Ultima personal previews - Wipe cleanup",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 1591,
+				timerStartOffset = -9,
+				uuid = "335c64b2-9363-58ea-97a0-0197a8849177",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
 							actionLua = "local boss = TensorCore.mGetEntity(eventArgs.detectionTargetID)\nif not boss or not boss.targetable then return end\n-- Cast cones have their own fixed-direction draw.\nif boss.channelingid == 11091 then return end\nlocal target = TensorCore.mGetEntity(boss.targetid)\nif not target then return end\nlocal heading = TensorCore.getHeadingToTarget(boss.pos, target.pos)\nlocal drawer = TensorCore.getMoogleDrawer()\ndrawer:addCone(boss.pos.x,boss.pos.y,boss.pos.z,11.7,math.rad(90),heading)\n",
 							conditions = 
 							{
@@ -929,6 +963,50 @@ local tbl =
 				timerEndOffset = 5,
 				timerStartOffset = -9,
 				uuid = "54cfe155-04ac-faa2-9a03-373d495ff301",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Titan LPDU",
+				uuid = "a63fbf75-81dc-093c-895e-593937bec8e6",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local old=eventArgs.oldData\nlocal state=old and old.uwu_titan_late_rocks\nif state then for _,id in pairs(state.draws) do Argus.deleteTimedShape(id) end end\nself.used=true",
+							name = "Titan late rocks - Wipe cleanup",
+							uuid = "d98e2151-a1ab-421f-a0aa-2cc23ed864d0",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Draws - Titan LPDU",
+				eventType = 9,
+				loop = true,
+				mechanicTime = 9,
+				name = "[LPDU] Titan late rocks - Wipe cleanup",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 1591,
+				timerStartOffset = -9,
+				uuid = "95fbbfc4-cebc-ac63-9460-16dc85e1a8c9",
 				version = 2,
 			},
 		},
@@ -9895,7 +9973,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "if data.uwu_upheaval_completed then self.used=true;return end\nif not self.waitUntil then self.waitUntil=Now()+350 end\nif Now()<self.waitUntil then return end\nlocal player=TensorCore.mGetPlayer()\nlocal titan=TensorCore.mGetEntity(eventArgs.entityID)\nif not player or not titan then return end\nlocal bombs=TensorCore.getEntityGroupList(\"ContentID\",{contentid=1803,subgroup=\"Number\",noAliveCheck=true})\nlocal count=0\nfor _,bomb in pairs(bombs) do count=count+1 end\nif count<5 then return end\nlocal bestScore,bestX,bestZ,bestLandingX,bestLandingZ=-math.huge,nil,nil,nil,nil\nfor degree=0,359 do\n local angle=degree*math.pi/180\n local ux,uz=math.sin(angle),math.cos(angle)\n local lx,lz=titan.pos.x+ux*28,titan.pos.z+uz*28\n local dx,dz=lx-100,lz-100\n local score=16-math.sqrt(dx*dx+dz*dz)\n if score>0 then\n  for _,bomb in pairs(bombs) do\n   local bx,bz=lx-bomb.pos.x,lz-bomb.pos.z\n   score=math.min(score,math.sqrt(bx*bx+bz*bz)-6.3)\n  end\n  if score>bestScore then bestScore,bestX,bestZ,bestLandingX,bestLandingZ=score,titan.pos.x+ux*4,titan.pos.z+uz*4,lx,lz end\n end\nend\nif not bestX or bestScore<1.5 then return end\nlocal duration=math.max(100,eventArgs.channelTimeMax*1000+300-(Now()-self.waitUntil+350))\nlocal state={draws={}};data.uwu_upheaval_guidance=state\nlocal target={x=bestX,y=player.pos.y,z=bestZ}\nlocal drawer=TensorCore.getCachedDrawer(0x5530E080,0xCC30E080,0xFF30E080,0xFF30E080,3)\nlocal id=drawer:addTimedCircle(duration,target.x,target.y,target.z,0.18,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nif id then state.draws[#state.draws+1]=id end\nlocal distance=TensorCore.getDistance2d(player.pos,target)\nif distance>0.3 then\n id=drawer:addTimedArrow(duration,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,target),math.max(0.1,distance-0.5),0.6,0.5,1.5,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if id then state.draws[#state.draws+1]=id end\nend\nlocal landing={draws={}};data.uwu_upheaval_landing=landing\nlocal landingID=drawer:addTimedCircle(duration+2500,bestLandingX,player.pos.y,bestLandingZ,1,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nif landingID then landing.draws[#landing.draws+1]=landingID end\nTensorCore.timelineLogToFile(string.format(\"[UWU Upheaval] bombs=%d score=%.3f boss=(%.2f,%.2f) start=(%.2f,%.2f) landing=(%.2f,%.2f)\\n\",count,bestScore,titan.pos.x,titan.pos.z,bestX,bestZ,bestLandingX,bestLandingZ))\nself.used=true",
+							actionLua = "if data.uwu_upheaval_completed then self.used=true;return end\nif not self.waitUntil then self.waitUntil=Now()+350 end\nif Now()<self.waitUntil then return end\nlocal player=TensorCore.mGetPlayer()\nlocal titan=TensorCore.mGetEntity(eventArgs.entityID)\nif not player or not titan then return end\nlocal captured=data.uwu_upheaval_bombs\nlocal count=captured and captured.count or 0\nif count<5 then\n if self.lastBombCount~=count then\n  TensorCore.timelineLogToFile(string.format(\"[UWU Upheaval] waiting for bomb spawns: %d/5\\n\",count))\n  self.lastBombCount=count\n end\n return\nend\nlocal bombs=captured.byID\nlocal bestScore,bestX,bestZ,bestLandingX,bestLandingZ=-math.huge,nil,nil,nil,nil\nfor degree=0,359 do\n local angle=degree*math.pi/180\n local ux,uz=math.sin(angle),math.cos(angle)\n local lx,lz=titan.pos.x+ux*28,titan.pos.z+uz*28\n local dx,dz=lx-100,lz-100\n local score=16-math.sqrt(dx*dx+dz*dz)\n if score>0 then\n  for _,bomb in pairs(bombs) do\n   local bx,bz=lx-bomb.pos.x,lz-bomb.pos.z\n   score=math.min(score,math.sqrt(bx*bx+bz*bz)-6.3)\n  end\n  if score>bestScore then bestScore,bestX,bestZ,bestLandingX,bestLandingZ=score,titan.pos.x+ux*4,titan.pos.z+uz*4,lx,lz end\n end\nend\nif not bestX or bestScore<1.5 then\n if not self.reportedNoGap then\n  TensorCore.timelineLogToFile(string.format(\"[UWU Upheaval] no validated gap: count=%d score=%.3f\\n\",count,bestScore))\n  self.reportedNoGap=true\n end\n return\nend\nlocal duration=math.max(100,eventArgs.channelTimeMax*1000+300-(Now()-self.waitUntil+350))\nlocal state={draws={}};data.uwu_upheaval_guidance=state\nlocal target={x=bestX,y=player.pos.y,z=bestZ}\nlocal drawer=TensorCore.getCachedDrawer(0x5530E080,0xCC30E080,0xFF30E080,0xFF30E080,3)\nlocal id=drawer:addTimedCircle(duration,target.x,target.y,target.z,0.18,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nif id then state.draws[#state.draws+1]=id end\nlocal distance=TensorCore.getDistance2d(player.pos,target)\nif distance>0.3 then\n id=drawer:addTimedArrow(duration,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,target),math.max(0.1,distance-0.5),0.6,0.5,1.5,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if id then state.draws[#state.draws+1]=id end\nend\nlocal landing={draws={}};data.uwu_upheaval_landing=landing\nlocal landingID=drawer:addTimedCircle(duration+2500,bestLandingX,player.pos.y,bestLandingZ,1,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nif landingID then landing.draws[#landing.draws+1]=landingID end\nTensorCore.timelineLogToFile(string.format(\"[UWU Upheaval] bombs=%d score=%.3f boss=(%.2f,%.2f) start=(%.2f,%.2f) landing=(%.2f,%.2f)\\n\",count,bestScore,titan.pos.x,titan.pos.z,bestX,bestZ,bestLandingX,bestLandingZ))\nself.used=true",
 							conditions = 
 							{
 								
@@ -9935,6 +10013,61 @@ local tbl =
 				timerEndOffset = 2,
 				timerStartOffset = -6,
 				uuid = "9521059d-3b6a-244e-abb6-0129f350e8d2",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local state=data.uwu_upheaval_bombs\nif not state then state={byID={},count=0};data.uwu_upheaval_bombs=state end\nif state.byID[eventArgs.entityID] then self.used=true;return end\nlocal bomb=TensorCore.mGetEntity(eventArgs.entityID)\nif not bomb then return end\nstate.byID[eventArgs.entityID]={id=bomb.id,pos={x=bomb.pos.x,y=bomb.pos.y,z=bomb.pos.z}}\nstate.count=state.count+1\nTensorCore.timelineLogToFile(string.format(\"[UWU Upheaval] captured bomb %d id=%d position=(%.2f,%.2f)\\n\",state.count,bomb.id,bomb.pos.x,bomb.pos.z))\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"4689a13a-9b84-f4f6-82f4-3381786a9a3e",
+									true,
+								},
+							},
+							name = "Titan Upheaval - Capture five bomb spawns",
+							uuid = "d9d6b382-4ca8-b4ad-9f4f-0603c27d18d8",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1803,
+							name = "Bomb Boulder",
+							uuid = "4689a13a-9b84-f4f6-82f4-3381786a9a3e",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Titan LPDU",
+				eventType = 5,
+				loop = true,
+				mechanicTime = 637,
+				name = "[LPDU] Titan Upheaval - Capture five bomb spawns",
+				timeRange = true,
+				timelineIndex = 84,
+				timerEndOffset = 1,
+				timerStartOffset = -6,
+				uuid = "0c2156e4-595a-0b58-9529-038f2d832622",
 				version = 2,
 			},
 		},
@@ -11909,6 +12042,125 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Titan LPDU",
+				uuid = "62425e6d-75f9-d497-8c51-6bc4c670eb17",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local state=data.uwu_titan_late_rocks\nif not state then state={seen={},draws={},count=0};data.uwu_titan_late_rocks=state end\nif state.seen[eventArgs.entityID] or state.count>=4 then self.used=true;return end\nlocal bomb=TensorCore.mGetEntity(eventArgs.entityID)\nif not bomb then return end\nlocal id=TensorCore.getMoogleDrawer():addTimedCircle(6500,bomb.pos.x,bomb.pos.y,bomb.pos.z,6.3,0,false,true)\nstate.seen[bomb.id]=true;state.count=state.count+1\nif id then state.draws[bomb.id]=id end\nTensorCore.timelineLogToFile(string.format(\"[UWU Titan late rocks] preview %d id=%d at=(%.2f,%.2f)\\n\",state.count,bomb.id,bomb.pos.x,bomb.pos.z))\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"7762246a-3dc1-2c58-90f4-2614528148fa",
+									true,
+								},
+							},
+							name = "Titan late rocks 720 - Early burst preview",
+							uuid = "58c5e7db-c3b6-063d-9cc0-cc11840605a2",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1803,
+							name = "Bomb Boulder",
+							uuid = "7762246a-3dc1-2c58-90f4-2614528148fa",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Titan LPDU",
+				eventType = 5,
+				loop = true,
+				mechanicTime = 720,
+				name = "[LPDU] Titan late rocks 720 - Early burst preview",
+				timeRange = true,
+				timelineIndex = 101,
+				timerEndOffset = 7,
+				timerStartOffset = -3,
+				uuid = "1f0fa9b4-b11c-abaf-8d0a-e15359b705ee",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local state=data.uwu_titan_late_rocks\nlocal id=state and state.draws[eventArgs.entityID]\nif id then Argus.deleteTimedShape(id);state.draws[eventArgs.entityID]=nil end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"e459a6cc-32f4-1114-b3de-c3b48a4ec639",
+									true,
+								},
+							},
+							name = "Titan late rocks 720 - Native AoE handover",
+							uuid = "f7d89dbc-ccd0-3172-be3a-0b09acb891eb",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID == 1803 and eventArgs.spellID == 11114",
+							dequeueIfLuaFalse = true,
+							name = "Burst cast",
+							uuid = "e459a6cc-32f4-1114-b3de-c3b48a4ec639",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Titan LPDU",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 720,
+				name = "[LPDU] Titan late rocks 720 - Native AoE handover",
+				timeRange = true,
+				timelineIndex = 101,
+				timerEndOffset = 13,
+				timerStartOffset = -3,
+				uuid = "551c375b-2da2-68a8-8304-695f5dfe54df",
+				version = 2,
+			},
+		},
 	},
 	[102] = 
 	{
@@ -13359,9 +13611,9 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then return end\n\nif self.bosses==nil then\n    self.models = {[1644]=8722, [1185]=8730, [1801]=8727, [2137]=8734}\n    self.bosses = {}\nend\nlocal models, bosses = self.models,self.bosses\nbosses[1644],bosses[1185],bosses[1801],bosses[2137] = nil,nil,nil,nil\nfor _, entity in pairs(TensorCore.getEntityGroupList(\"Enemy\") or {}) do\n    local model = models[entity.contentid]\n    if model and entity.pos and Argus.isEntityVisible(entity.id)\n        and Argus.getEntityModel(entity.id) == model then\n        bosses[entity.contentid] = entity\n    end\nend\nlocal garuda, titan, ultima, ifrit = bosses[1644], bosses[1801], bosses[2137], bosses[1185]\nif not garuda or not titan or not ultima or not ifrit then return end\n-- Wait for the trio's teleports, rather than accepting their previous positions.\nlocal gx, gz = garuda.pos.x-100, garuda.pos.z-100\nlocal tx, tz = titan.pos.x-100, titan.pos.z-100\nlocal ux, uz = ultima.pos.x-100, ultima.pos.z-100\nlocal ix, iz = ifrit.pos.x-100, ifrit.pos.z-100\nif math.abs(gx)<1 or math.abs(gz)<1 or gx*gx+gz*gz>64\n    or tx*tx+tz*tz<196 or ux*ux+uz*uz<196 or ix*ix+iz*iz<196 then return end\n\nlocal cardinals = {{x=0,z=-1}, {x=1,z=0}, {x=0,z=1}, {x=-1,z=0}}\nlocal titanCardinal, titanDot = nil, -math.huge\nfor i, direction in ipairs(cardinals) do\n    local dot = direction.x*tx + direction.z*tz\n    if dot>titanDot then titanDot=dot; titanCardinal=i end\nend\nlocal chosen, nearest = nil, math.huge\nfor i, direction in ipairs(cardinals) do\n    -- LPDU: one of the two cardinals away from Garuda; exclude Titan's cardinal.\n    if i~=titanCardinal and direction.x*gx + direction.z*gz < 0 then\n        local x,z = 100+direction.x*19, 100+direction.z*19\n        local dx,dz = x-player.pos.x,z-player.pos.z\n        local distance = dx*dx+dz*dz\n        if distance<nearest then nearest=distance; chosen=direction end\n    end\nend\nif not chosen then self.used=true; return end\n\n-- After the first Landslides, move along this edge to the rune away from Ultima.\nlocal tangentX,tangentZ = -chosen.z,chosen.x\nlocal rune, farthest = nil,-math.huge\nfor _,sign in ipairs({-1,1}) do\n    local x = 100+chosen.x*17.8+tangentX*6.5*sign\n    local z = 100+chosen.z*17.8+tangentZ*6.5*sign\n    local dx,dz = x-ultima.pos.x,z-ultima.pos.z\n    local distance = dx*dx+dz*dz\n    if distance>farthest then farthest=distance; rune={x=x,y=player.pos.y,z=z} end\nend\n\nlocal state = {rune=rune, phase=\"cardinal\", shapes={}}\ndata.uwu_lpdu_predation = state\nstate.arrowDrawer = TensorCore.getCachedDrawer(0xFFB6FFB6,0xFF55FF55,0xFFFFFFFF,0xFF000000,5)\nstate.circleDrawer = TensorCore.getCachedDrawer(0x5533CC66,0x5533CC66,0xAA22FF66,0,0)\nfunction state.guide(destination, timeout)\n    for _,uuid in ipairs(state.shapes) do Argus.deleteTimedShape(uuid) end\n    state.shapes = {}\n    local p = TensorCore.mGetPlayer()\n    if not p or not p.pos then return end\n    local flags = Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    -- This is a destination marker, not a claim that a large area is safe.\n    local uuid = state.circleDrawer:addTimedCircle(timeout,destination.x,p.pos.y,destination.z,0.6,0,false,true,flags)\n    if uuid then state.shapes[#state.shapes+1]=uuid end\n    local distance = TensorCore.getDistance2d(p.pos,destination)\n    if distance>0.2 then\n        local tip = math.min(1.8,distance*0.35)\n        uuid = state.arrowDrawer:addTimedArrow(timeout,p.pos.x,p.pos.y,p.pos.z,\n            TensorCore.getHeadingToTarget(p.pos,destination),math.max(0.1,distance-tip),\n            1.5,tip,3.2,0,false,flags)\n        if uuid then state.shapes[#state.shapes+1]=uuid end\n    end\nend\nstate.guide({x=100+chosen.x*19,y=player.pos.y,z=100+chosen.z*19},8500)\nself.used=true\n",
+							actionLua = "local captured=data.uwu_predation_actors\nif not captured then return end\nlocal garuda,ifrit,titan,ultima=captured[1644],captured[1185],captured[1801],captured[2137]\nif not garuda or not ifrit or not titan or not ultima then return end\nlocal player=TensorCore.mGetPlayer()\nif not player then return end\n-- Analytic safe arcs: BossMod's Predation geometry, radius19 and2.5-degree cushion.\nlocal pi=math.pi\nlocal function normal(a)\n while a < -pi do a=a+2*pi end\n while a > pi do a=a-2*pi end\n return a\nend\nlocal function rect(actor,offset,width)\n return {kind=\"rect\",x=actor.x,z=actor.z,h=actor.h+offset,r=width}\nend\nlocal function circle(actor,r)\n return {kind=\"circle\",x=actor.x,z=actor.z,r=r}\nend\nlocal first={rect(titan,0,3),rect(titan,pi/4,3),rect(titan,-pi/4,3),rect(ifrit,0,9),circle(garuda,20)}\nlocal center={x=100,z=100,h=0}\nlocal second={rect(titan,pi/8,3),rect(titan,-pi/8,3),rect(titan,pi/2,3),rect(center,0,5),rect(center,pi/2,5),circle(garuda,20),circle(ultima,14)}\nlocal function safeArcs(shapes)\n local boundaries={-pi,pi}\n local function boundary(a) boundaries[#boundaries+1]=normal(a) end\n for _,shape in ipairs(shapes) do\n  local ox,oz=shape.x-100,shape.z-100\n  if shape.kind==\"circle\" then\n   local distance=math.sqrt(ox*ox+oz*oz)\n   if distance>0.001 then\n    local cosine=(distance*distance+361-shape.r*shape.r)/(38*distance)\n    if cosine>=-1 and cosine<=1 then\n     local h=math.atan2(ox,oz);local half=math.acos(cosine)\n     boundary(h-half);boundary(h+half)\n    end\n   end\n  else\n   local offset=-ox*math.cos(shape.h)+oz*math.sin(shape.h)\n   for _,edge in ipairs({-shape.r,shape.r}) do\n    local sine=(edge-offset)/19\n    if sine>=-1 and sine<=1 then\n     local a=math.asin(sine)\n     boundary(shape.h+a);boundary(shape.h+pi-a)\n    end\n   end\n  end\n end\n table.sort(boundaries)\n local forbidden={}\n for i=1,#boundaries-1 do\n  local lo,hi=boundaries[i],boundaries[i+1]\n  if hi-lo>0.000001 then\n   local angle=(lo+hi)*0.5\n   local x,z=100+19*math.sin(angle),100+19*math.cos(angle)\n   local hit=false\n   for _,shape in ipairs(shapes) do\n    local dx,dz=x-shape.x,z-shape.z\n    if shape.kind==\"circle\" then hit=dx*dx+dz*dz<shape.r*shape.r\n    else hit=math.abs(dx*math.cos(shape.h)-dz*math.sin(shape.h))<shape.r end\n    if hit then break end\n   end\n   if hit then\n    local last=forbidden[#forbidden]\n    if last and math.abs(last[2]-lo)<0.00001 then last[2]=hi\n    else forbidden[#forbidden+1]={lo,hi} end\n   end\n  end\n end\n if #forbidden==0 then return {{-pi,pi}} end\n local allowed={};local cushion=2.5*pi/180\n local function allow(lo,hi)\n  if lo+cushion<hi-cushion then allowed[#allowed+1]={lo+cushion,hi-cushion} end\n end\n local firstForbidden,lastForbidden=forbidden[1],forbidden[#forbidden]\n if firstForbidden[1]>-pi+0.000001 then allow(lastForbidden[2]-2*pi,firstForbidden[1]) end\n for i=2,#forbidden do allow(forbidden[i-1][2],forbidden[i][1]) end\n if lastForbidden[2]<pi-0.000001 then allow(lastForbidden[2],firstForbidden[1]+2*pi) end\n return allowed\nend\nlocal a,b=safeArcs(first),safeArcs(second)\nlocal bestA,bestB,bestDistance=nil,nil,math.huge\nlocal function consider(x,y)\n x,y=normal(x),normal(y)\n local distance=math.abs(x-y)\n if distance>pi then distance=2*pi-distance end\n if distance<bestDistance-0.0000001 then bestA,bestB,bestDistance=x,y,distance end\nend\nfor _,one in ipairs(a) do\n for _,two in ipairs(b) do\n  local lo,hi=math.max(one[1],two[1]),math.min(one[2],two[2])\n  if lo<hi then consider((lo+hi)/2,(lo+hi)/2)\n  else consider(one[2],two[1]);consider(one[1],two[2]) end\n end\nend\nif not bestA then\n TensorCore.timelineLogToFile(\"[UWU Predation] no safe pair from captured boss geometry\\n\")\n self.used=true;return\nend\nlocal firstSpot={x=100+19*math.sin(bestA),y=player.pos.y,z=100+19*math.cos(bestA)}\nlocal secondSpot={x=100+19*math.sin(bestB),y=player.pos.y,z=100+19*math.cos(bestB)}\nlocal state={rune=secondSpot,phase=\"first\",shapes={}}\ndata.uwu_lpdu_predation=state\nstate.arrowDrawer=TensorCore.getCachedDrawer(0xFFB6FFB6,0xFF55FF55,0xFFFFFFFF,0xFF000000,4)\nstate.circleDrawer=TensorCore.getCachedDrawer(0x5533CC66,0x5533CC66,0xAA22FF66,0xFF33FF66,2)\nfunction state.guide(destination,timeout)\n for _,id in ipairs(state.shapes) do Argus.deleteTimedShape(id) end\n state.shapes={};state.destination=destination;state.deadline=Now()+timeout\n local id=state.circleDrawer:addTimedCircle(timeout,destination.x,destination.y,destination.z,0.6,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if id then state.shapes[#state.shapes+1]=id end\nend\nstate.guide(firstSpot,10000)\nTensorCore.timelineLogToFile(string.format(\"[UWU Predation] safe pair first=(%.3f,%.3f) second=(%.3f,%.3f) move=%.3fdeg\\n\",firstSpot.x,firstSpot.z,secondSpot.x,secondSpot.z,bestDistance*180/pi))\nself.used=true\n",
 							displayPath = "Draws - Ultima",
-							name = "Select LPDU cardinal and rune",
+							name = "Solve BossMod safe edge geometry",
 							uuid = "163f8d28-6c36-3c00-b703-942e9d637d52",
 							version = 2.1,
 						},
@@ -13372,13 +13624,79 @@ local tbl =
 				},
 				displayPath = "Draws - Ultima",
 				mechanicTime = 1023,
-				name = "[LPDU] Ultima Predation - Cardinal and Safe Rune",
+				name = "[LPDU] Ultima Predation - Safe edge pair",
 				throttleTime = 100,
 				timeRange = true,
 				timelineIndex = 123,
 				timerEndOffset = 20,
 				timerStartOffset = 7,
 				uuid = "76680eda-e0c2-a582-b172-0adaa0be5daf",
+				version = 2,
+			},
+		},
+	},
+	[124] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "9c5ed885-d4e0-baa4-aeaf-549b1f22ca4e",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local actor=TensorCore.mGetEntity(eventArgs.entityID)\nif not actor then return end\nlocal models={[1644]=8722,[1185]=8730,[1801]=8727,[2137]=8734}\nif Argus.getEntityModel(actor.id)~=models[eventArgs.entityContentID] then self.used=true;return end\nlocal state=data.uwu_predation_actors\nif not state then state={};data.uwu_predation_actors=state end\nstate[eventArgs.entityContentID]={x=actor.pos.x,z=actor.pos.z,h=actor.pos.h}\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"49d0826e-c333-cf80-8e67-92df12ef46ff",
+									true,
+								},
+							},
+							name = "Predation - Capture appearing bosses",
+							uuid = "b75c659a-a188-e904-8f71-1e20769a5b36",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.index==1 and eventArgs.newAnimID==7747 and (eventArgs.entityContentID==1644 or eventArgs.entityContentID==1185 or eventArgs.entityContentID==1801 or eventArgs.entityContentID==2137)",
+							dequeueIfLuaFalse = true,
+							name = "Predation appearance",
+							uuid = "49d0826e-c333-cf80-8e67-92df12ef46ff",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 23,
+				loop = true,
+				mechanicTime = 1026,
+				name = "[LPDU] Predation - Capture appearing bosses",
+				timeRange = true,
+				timelineIndex = 124,
+				timerEndOffset = 9,
+				uuid = "18f3ff08-7a60-0571-82e1-0aaeaffab5be",
 				version = 2,
 			},
 		},
@@ -13426,7 +13744,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local state = data.uwu_lpdu_predation\nif not state or state.phase~=\"cardinal\" then self.used=true; return end\nstate.phase=\"rune\"\n-- Triggered by the real Titan's first Landslide hit (11121), after its lanes resolve.\nstate.guide(state.rune,6000)\nAnyoneCore.addTimedWorldText(6000,\"SAFE RUNE — WAIT FOR FEATHER RAIN\",\n    {x=state.rune.x,y=state.rune.y+1.2,z=state.rune.z},0xFFB6FFB6,true,1.25)\nself.used=true\n",
+							actionLua = "local state=data.uwu_lpdu_predation\nif not state or state.phase~=\"first\" then self.used=true;return end\nstate.phase=\"second\"\nstate.guide(state.rune,3500)\nAnyoneCore.addTimedWorldText(6000,\"SAFE EDGE - WAIT FOR FEATHER RAIN\",{x=state.rune.x,y=state.rune.y+1.2,z=state.rune.z},0xFFB6FFB6,true,1.25)\nself.used=true",
 							conditions = 
 							{
 								
@@ -13449,9 +13767,10 @@ local tbl =
 						data = 
 						{
 							category = "Event",
+							dequeueIfLuaFalse = true,
 							eventArgType = 2,
-							eventSpellID = 11121,
-							name = "First Landslide hit",
+							eventSpellID = 11103,
+							name = "First Ifrit dash resolves",
 							uuid = "2649963c-f010-c286-b8c1-15071ff49673",
 							version = 3,
 						},
@@ -13460,7 +13779,7 @@ local tbl =
 				displayPath = "Draws - Ultima",
 				eventType = 2,
 				mechanicTime = 1038,
-				name = "[LPDU] Ultima Predation - Advance to Safe Rune",
+				name = "[LPDU] Ultima Predation - Second safe edge",
 				timeRange = true,
 				timelineIndex = 125,
 				timerEndOffset = 2,
@@ -13519,6 +13838,41 @@ local tbl =
 				timerEndOffset = 1,
 				timerStartOffset = -4,
 				uuid = "e7f13d4d-91dd-6329-9620-de5bd83b8d0c",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "01ecf0cc-b292-390c-bb5a-936e76046607",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 12,
+				execute = "local state=data.uwu_lpdu_predation\nif not state or state.phase==\"done\" or not state.destination or Now()>=state.deadline then return end\nlocal player=TensorCore.mGetPlayer()\nif not player then return end\nlocal destination=state.destination\nlocal distance=TensorCore.getDistance2d(player.pos,destination)\nif distance>0.3 then\n local tip=math.min(1.8,distance*0.35)\n state.arrowDrawer:addArrow(player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,destination),math.max(0.1,distance-tip),1.2,tip,2.8,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nself.used=true",
+				executeType = 2,
+				loop = true,
+				mechanicTime = 1038,
+				name = "[LPDU] Predation - Personal safe edge arrow",
+				timeRange = true,
+				timelineIndex = 125,
+				timerEndOffset = 4,
+				timerStartOffset = -9,
+				uuid = "13aa7766-8193-4f31-a443-3b1bb8a548df",
 				version = 2,
 			},
 		},
@@ -13587,6 +13941,69 @@ local tbl =
 				timelineIndex = 130,
 				timerOffset = 1.5,
 				uuid = "dd60ba94-9588-1ecb-ac80-2485505e45ca",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "ba0b91e0-7111-0dba-894a-48f86163e8ca",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local state=data.uwu_lpdu_predation\nif state then state.phase=\"done\";state.destination=nil;for _,id in ipairs(state.shapes) do Argus.deleteTimedShape(id) end;state.shapes={} end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"16b71f78-e121-acb5-b9c3-9a285f404045",
+									true,
+								},
+							},
+							name = "Predation - Completed dash cleanup",
+							uuid = "1c815efb-0ab5-61b6-af43-1b58e1ab1fc5",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.spellID==11104",
+							dequeueIfLuaFalse = true,
+							name = "Last dash",
+							uuid = "16b71f78-e121-acb5-b9c3-9a285f404045",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 2,
+				mechanicTime = 1040,
+				name = "[LPDU] Predation - Completed dash cleanup",
+				timeRange = true,
+				timelineIndex = 130,
+				timerEndOffset = 3,
+				timerStartOffset = -2,
+				uuid = "bf179a3e-a6de-9ab2-8106-8891b409b16a",
 				version = 2,
 			},
 		},
@@ -13868,6 +14285,123 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "625b09f0-6920-530f-8a99-eafeebe94968",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local offsets={{103,105},{97,105},{94,100},{97,95},{103,95},{106,100}}\nlocal state={shapes={}};data.uwu_ultima_middle_bury=state\nlocal player=TensorCore.mGetPlayer()\nif not player then return end\nfor _,pos in ipairs(offsets) do\n local id=TensorCore.getMoogleDrawer():addTimedCircle(20000,pos[1],player.pos.y,pos[2],4.3,0,false,true)\n state.shapes[#state.shapes+1]={id=id,x=pos[1],z=pos[2]}\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"8b091e5b-5f2e-482a-858a-aca1760d90a3",
+									true,
+								},
+							},
+							name = "Ultima 1069 - Early middle rock impacts",
+							uuid = "39ffb7fc-87b2-0201-9747-ad7eaf6d8f4b",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID==2137 and eventArgs.spellID==11133",
+							dequeueIfLuaFalse = true,
+							name = "Outer plume cast",
+							uuid = "8b091e5b-5f2e-482a-858a-aca1760d90a3",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 3,
+				mechanicTime = 1069,
+				name = "[LPDU] Ultima 1069 - Early middle rock impacts",
+				timeRange = true,
+				timelineIndex = 136,
+				timerEndOffset = 1,
+				timerStartOffset = -5,
+				uuid = "ec89c137-4159-9562-aabd-efac52a28bed",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local state=data.uwu_ultima_middle_bury\nif not state then self.used=true;return end\nlocal actor=TensorCore.mGetEntity(eventArgs.entityID)\nif not actor then return end\nfor _,shape in ipairs(state.shapes) do\n local dx,dz=actor.pos.x-shape.x,actor.pos.z-shape.z\n if shape.id and dx*dx+dz*dz<1 then Argus.deleteTimedShape(shape.id);shape.id=nil end\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"645780cb-79cf-ec8d-a2a3-83fa8e7c60d6",
+									true,
+								},
+							},
+							name = "Ultima middle rocks - Clear resolved impacts",
+							uuid = "438a3315-6d9f-32af-8b7b-d8ae84098436",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID==1803 and eventArgs.spellID==11113",
+							dequeueIfLuaFalse = true,
+							name = "Bury impact",
+							uuid = "645780cb-79cf-ec8d-a2a3-83fa8e7c60d6",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 1069,
+				name = "[LPDU] Ultima middle rocks - Clear resolved impacts",
+				timeRange = true,
+				timelineIndex = 136,
+				timerEndOffset = 13,
+				timerStartOffset = -3,
+				uuid = "7c62f68f-182c-cd87-b10c-40e976ff4671",
+				version = 2,
+			},
 		},
 	},
 	[137] = 
@@ -15866,6 +16400,69 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\uwu\\modules\\draws",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "375c4b5d-76ea-34b7-a3e6-8338649f846a",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local target=TensorCore.mGetEntity(eventArgs.entityID)\nif not target then return end\nAnyoneCore.addWorldTextCountdown(5300,{x=target.pos.x,y=target.pos.y+2.5,z=target.pos.z},0xFFFFFFFF,true,1.5)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"66802e53-59fc-9f33-831d-ba6734bc8562",
+									true,
+								},
+							},
+							name = "Annihilation first stack - Continuous countdown",
+							uuid = "156c6c6f-2822-dcda-9015-eda97ba69e7c",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.markerID==117",
+							dequeueIfLuaFalse = true,
+							name = "Flaming Crush marker",
+							uuid = "66802e53-59fc-9f33-831d-ba6734bc8562",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 4,
+				mechanicTime = 1114,
+				name = "[LPDU] Annihilation first stack - Continuous countdown",
+				timeRange = true,
+				timelineIndex = 152,
+				timerEndOffset = 1,
+				timerStartOffset = -8,
+				uuid = "f4926322-b6bc-ca5e-b7c4-3cb46a49b5ad",
+				version = 2,
+			},
+		},
 	},
 	[153] = 
 	{
@@ -15983,7 +16580,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "-- Independent UWU settings; available before GUI or targeting reads.\nif not _G.UWU_LPDUSettingsIOReady then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..[[UWU-LPDU.lua]]\n local saved={}\n if FileExists(path) then\n  local loaded=FileLoad(path)\n  if type(loaded)==\"table\" then saved=loaded end\n end\n local current=_G.UWU_LPDUGuiState\n local old=_G.UWU_LPDU_AnnihilationAssignments or {}\n local defaults={automaticOpen=true,ultimaOpen=true,orbsOpen=true,autoTarget=_G.LPDU_UWU_AutoTarget~=false,melee=(old.melee==2 and 2 or 1),solo=old.solo or 0}\n local keys={\"automaticOpen\",\"ultimaOpen\",\"orbsOpen\",\"autoTarget\",\"melee\",\"solo\"}\n local C={}\n for _,key in ipairs(keys) do\n  local value=current and current[key]\n  if value==nil then value=saved[key] end\n  if type(defaults[key])==\"boolean\" then\n   C[key]=type(value)==\"boolean\" and value or defaults[key]\n   if value==false then C[key]=false end\n  else\n   C[key]=type(value)==\"number\" and value>=0 and value<=2 and value%1==0 and value or defaults[key]\n  end\n end\n if C.melee==0 then C.melee=1 end\n function C.save()\n  if not FolderExists(folder) then FolderCreate(folder) end\n  local values={}\n  for _,key in ipairs(keys) do values[key]=C[key] end\n  FileSave(path,values)\n end\n _G.UWU_LPDUGuiState=C\n _G.UWU_LPDU_AnnihilationAssignments={melee=C.melee,solo=C.solo}\n _G.LPDU_UWU_AutoTarget=C.autoTarget\n C.save()\n _G.UWU_LPDUSettingsIOReady=true\nend\n-- Upgrade only an unset melee assignment; preserve either explicit role choice.\ndo\n local preferences=_G.UWU_LPDUGuiState\n if preferences and preferences.melee==0 then\n  preferences.melee=1\n  local assignment=_G.UWU_LPDU_AnnihilationAssignments\n  if assignment then assignment.melee=1 end\n  preferences.save()\n end\nend\nlocal state=data.uwu_annihilation_orbs\nif not state then state={seen={},count=0};data.uwu_annihilation_orbs=state end\nstate.live=state.live or {}\nif not self.orb then\n if state.seen[eventArgs.entityID] or state.count>=4 then self.used=true;return end\n state.count=state.count+1\n state.seen[eventArgs.entityID]=true\n self.orb=state.count\n self.entry={number=self.orb,draws={},expires=Now()+10000}\n state.live[eventArgs.entityID]=self.entry\nend\nif self.entry.finished then self.used=true;return end\nlocal duration=self.entry.expires-Now()\nif duration<=0 then self.used=true;return end\nif not TensorCore.mGetEntity(eventArgs.entityID) then return end\nif not self.entry.highlighted then\n local drawer=TensorCore.getCachedDrawer(0x2244FFFF,0x9944FFFF,0xFF44FFFF,0xFF000000,3)\n local id=drawer:addTimedCircleOnEnt(duration,eventArgs.entityID,6,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if id then self.entry.draws[#self.entry.draws+1]=id end\n self.entry.highlighted=true\nend\nlocal Roster=AnyoneCore.Roster\nif not Roster or not Roster.current() then return end\nlocal slot=Roster.mySlot()\nif not slot then return end\nlocal cfg=_G.UWU_LPDU_AnnihilationAssignments\nlocal orb=self.orb\nlocal assigned,missing=false,false\nif orb<=2 then\n if slot==\"T1\" or slot==\"T2\" then assigned=true\n elseif slot==\"M1\" or slot==\"M2\" then\n  missing=not cfg.melee or cfg.melee==0\n  assigned=(cfg.melee==1 and slot==\"M1\") or (cfg.melee==2 and slot==\"M2\")\n end\nelseif slot==\"T1\" or slot==\"T2\" then\n missing=not cfg.solo or cfg.solo==0\n assigned=(cfg.solo==1 and slot==\"T1\") or (cfg.solo==2 and slot==\"T2\")\nend\nif missing then\n TensorCore.addAlertText(3500,\"Orb \"..orb..\": choose your assignment\",1,2,true)\nelseif assigned then\n if not Roster.isReady() then return end\n local player=TensorCore.mGetPlayer()\n if not player then return end\n local drawer=TensorCore.getCachedDrawer(0x4433FF66,0xCC33FF66,0xFF33FF66,0xFF000000,3)\n local id=drawer:addTimedArrowOnEnt(duration,player.id,0,1,1,2.4,eventArgs.entityID,0,false,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if id then self.entry.draws[#self.entry.draws+1]=id end\n TensorCore.addAlertText(3500,\"Orb \"..orb..(orb<=2 and \": soak with tanks\" or \": solo tank soak\"),1,1,true)\nelse\n TensorCore.addAlertText(3000,\"Orb \"..orb..\": stay clear\",0.9,2,false)\nend\nself.used=true",
+							actionLua = "-- Independent UWU settings; available before GUI or targeting reads.\nif not _G.UWU_LPDUSettingsIOReady then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..[[UWU-LPDU.lua]]\n local saved={}\n if FileExists(path) then\n  local loaded=FileLoad(path)\n  if type(loaded)==\"table\" then saved=loaded end\n end\n local current=_G.UWU_LPDUGuiState\n local old=_G.UWU_LPDU_AnnihilationAssignments or {}\n local defaults={automaticOpen=true,ultimaOpen=true,orbsOpen=true,autoTarget=_G.LPDU_UWU_AutoTarget~=false,melee=(old.melee==2 and 2 or 1),solo=old.solo or 0}\n local keys={\"automaticOpen\",\"ultimaOpen\",\"orbsOpen\",\"autoTarget\",\"melee\",\"solo\"}\n local C={}\n for _,key in ipairs(keys) do\n  local value=current and current[key]\n  if value==nil then value=saved[key] end\n  if type(defaults[key])==\"boolean\" then\n   C[key]=type(value)==\"boolean\" and value or defaults[key]\n   if value==false then C[key]=false end\n  else\n   C[key]=type(value)==\"number\" and value>=0 and value<=2 and value%1==0 and value or defaults[key]\n  end\n end\n if C.melee==0 then C.melee=1 end\n function C.save()\n  if not FolderExists(folder) then FolderCreate(folder) end\n  local values={}\n  for _,key in ipairs(keys) do values[key]=C[key] end\n  FileSave(path,values)\n end\n _G.UWU_LPDUGuiState=C\n _G.UWU_LPDU_AnnihilationAssignments={melee=C.melee,solo=C.solo}\n _G.LPDU_UWU_AutoTarget=C.autoTarget\n C.save()\n _G.UWU_LPDUSettingsIOReady=true\nend\n-- Upgrade only an unset melee assignment; preserve either explicit role choice.\ndo\n local preferences=_G.UWU_LPDUGuiState\n if preferences and preferences.melee==0 then\n  preferences.melee=1\n  local assignment=_G.UWU_LPDU_AnnihilationAssignments\n  if assignment then assignment.melee=1 end\n  preferences.save()\n end\nend\nlocal state=data.uwu_annihilation_orbs\nif not state then state={seen={},count=0};data.uwu_annihilation_orbs=state end\nstate.live=state.live or {}\nif not self.orb then\n if state.seen[eventArgs.entityID] or state.count>=4 then self.used=true;return end\n state.count=state.count+1\n state.seen[eventArgs.entityID]=true\n self.orb=state.count\n self.entry={number=self.orb,draws={},expires=Now()+10000}\n state.live[eventArgs.entityID]=self.entry\nend\nif self.entry.finished then self.used=true;return end\nlocal duration=self.entry.expires-Now()\nif duration<=0 then self.used=true;return end\nlocal orbEntity=TensorCore.mGetEntity(eventArgs.entityID)\nif not orbEntity then\n if not self.reportedMissingActor then TensorCore.timelineLogToFile(string.format(\"[UWU orb] waiting for actor=%d orb=%d\\n\",eventArgs.entityID,self.orb));self.reportedMissingActor=true end\n return\nend\nif not self.entry.highlighted then\n local drawer=TensorCore.getCachedDrawer(0x2244FFFF,0x9944FFFF,0xFF44FFFF,0xFF000000,3)\n local id=drawer:addTimedCircle(duration,orbEntity.pos.x,orbEntity.pos.y+0.08,orbEntity.pos.z,6,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if not id then\n  if not self.reportedDrawWait then TensorCore.timelineLogToFile(\"[UWU orb] waiting for world-highlight submission\\n\");self.reportedDrawWait=true end\n  return\n end\n self.entry.draws[#self.entry.draws+1]=id\n self.entry.highlighted=true\n TensorCore.timelineLogToFile(string.format(\"[UWU orb] highlight orb=%d actor=%d position=(%.2f,%.2f,%.2f) shape=%s\\n\",self.orb,eventArgs.entityID,orbEntity.pos.x,orbEntity.pos.y,orbEntity.pos.z,tostring(id)))\nend\nlocal Roster=AnyoneCore.Roster\nif not Roster or not Roster.current() then return end\nlocal slot=Roster.mySlot()\nif not slot then return end\nlocal cfg=_G.UWU_LPDU_AnnihilationAssignments\nlocal orb=self.orb\nlocal assigned,missing=false,false\nif orb<=2 then\n if slot==\"T1\" or slot==\"T2\" then assigned=true\n elseif slot==\"M1\" or slot==\"M2\" then\n  missing=not cfg.melee or cfg.melee==0\n  assigned=(cfg.melee==1 and slot==\"M1\") or (cfg.melee==2 and slot==\"M2\")\n end\nelseif slot==\"T1\" or slot==\"T2\" then\n missing=not cfg.solo or cfg.solo==0\n assigned=(cfg.solo==1 and slot==\"T1\") or (cfg.solo==2 and slot==\"T2\")\nend\nif missing then\n TensorCore.addAlertText(3500,\"Orb \"..orb..\": choose your assignment\",1,2,true)\nelseif assigned then\n if not Roster.isReady() then return end\n local player=TensorCore.mGetPlayer()\n if not player then return end\n local drawer=TensorCore.getCachedDrawer(0x4433FF66,0xCC33FF66,0xFF33FF66,0xFF000000,3)\n local id=drawer:addTimedArrowOnEnt(duration,player.id,0,1,1,2.4,eventArgs.entityID,0,false,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if id then self.entry.draws[#self.entry.draws+1]=id end\n TensorCore.addAlertText(3500,\"Orb \"..orb..(orb<=2 and \": soak with tanks\" or \": solo tank soak\"),1,1,true)\nelse\n TensorCore.addAlertText(3000,\"Orb \"..orb..\": stay clear\",0.9,2,false)\nend\nself.used=true",
 							conditions = 
 							{
 								
