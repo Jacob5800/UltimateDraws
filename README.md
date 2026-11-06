@@ -25,6 +25,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### UWU: LPDU settings
 
+- Both General sections now have independent, left-aligned controls clickable across the full row, with saved expansion choices. (06-11-2026)
+
 - Ifrit starting-position callouts now show only the player's Party Roster instruction: R1 sees “Ranged starts SW”; R2 sees “Caster start SE”. (06-11-2026)
 
 - New or unset Annihilation melee assignments default to M1; saved M1/M2 choices remain customizable. The GUI explains the existing 3-3-1-1 soak pattern. AutoSim and LPDU section headings toggle with a single click on the text or arrow and retain saved expansion choices. (06-11-2026)
@@ -34,6 +36,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 - LPDU settings now save through FileLoad/FileSave in an independent settings file, without relying on Minion core Settings. Active choices are preserved. (05-11-2026)
 
 - Organized settings into Automatic targeting and Ultima → Annihilation orb assignments. Sections start expanded for new users and remember later expansion choices, targeting preference and orb selections across Lua restarts. Removed the duplicate orb panel and shortened labels/help. (05-11-2026)
+
 
 ### TEA: AutoSim
 
@@ -197,6 +200,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### UWU: LPDU
 
+- Added a non-tank “Move to A” call at 300 seconds and raised directional nail labels. Disabled the Titan CD-off reaction at 602 seconds. Upheaval now marks the rear knockback landing separately from its starting point near Titan. (06-11-2026)
+
 - P1 Feather Rain move calls now follow the jump cue. Added early Titan Geocrush previews, green safe-edge guidance and bomb-pattern-aware Upheaval positioning. Titan light-orb calls use Party Roster M1/M2. All players see Annihilation orb highlights; assigned soakers also get arrows to their orb. (06-11-2026)
 
 - Assigned Mesohigh takers now see their own tether and its source highlighted in green using Party Roster: P1 west R2/east OT, Annihilation R1 then Searing Wind healer, and Suppression MT. Added advance healer/MT tether calls and corrected tank roster checks in tether, Friction and Titan callouts. (06-11-2026)
@@ -214,8 +219,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 - Disabled the remaining 105-second CD/Flourish-off reaction in Draws LPDU so it cannot interfere with AutoSim. (31-10-2026)
 
 - Combined UWU AutoSim, targeting and relevant orb-assignment panels into one UWU LPDU Settings window. BLM now has adjustable Garuda end, Ifrit end-after-disappearance and Triplecast hold lead times, with explanations and next-pull application. Settings remain session-only. (31-10-2026)
-
-- BLM AutoSim now forecasts phase-specific Thunder lifetimes and availability for single-target and AoE Thunder, with native disappear/return corrections and extension when bosses outlive estimates. Updated Garuda/Ifrit end estimates from recent logs and stopped treating Ifrit’s confirmed final departure as a dash into Titan. (31-10-2026)
 
 
 ### Q40: Shared AutoSim

@@ -576,9 +576,9 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local old=eventArgs.oldData\nif old then\n for _,key in ipairs({\"uwu_geocrush_first\",\"uwu_geocrush_last\",\"uwu_upheaval_guidance\"}) do\n  local s=old[key]\n  if s and s.draws then for _,id in ipairs(s.draws) do Argus.deleteTimedShape(id) end end\n end\n local orbs=old.uwu_annihilation_orbs\n if orbs and orbs.live then\n  for _,entry in pairs(orbs.live) do for _,id in ipairs(entry.draws) do Argus.deleteTimedShape(id) end end\n end\nend\nself.used=true",
+							actionLua = "local old=eventArgs.oldData\nif old then\n for _,key in ipairs({\"uwu_geocrush_first\",\"uwu_geocrush_last\",\"uwu_upheaval_guidance\",\"uwu_upheaval_landing\"}) do\n  local s=old[key]\n  if s and s.draws then for _,id in ipairs(s.draws) do Argus.deleteTimedShape(id) end end\n end\n local orbs=old.uwu_annihilation_orbs\n if orbs and orbs.live then\n  for _,entry in pairs(orbs.live) do for _,id in ipairs(entry.draws) do Argus.deleteTimedShape(id) end end\n end\nend\nself.used=true",
 							name = "Clear owned preview shapes",
-							uuid = "0c58c7cf-f6d0-26a5-b325-09e3a7f24a6f",
+							uuid = "ab86d057-544f-45d9-9901-00d612317831",
 							version = 2.1,
 						},
 					},
@@ -595,7 +595,7 @@ local tbl =
 				timelineIndex = 2,
 				timerEndOffset = 1591,
 				timerStartOffset = -9,
-				uuid = "fa586cca-538c-2167-be80-9ff5e106b7f8",
+				uuid = "f6154fae-d541-f95b-81e2-7f1116b8eb12",
 				version = 2,
 			},
 		},
@@ -813,7 +813,7 @@ local tbl =
 				},
 				displayPath = "LPDU / Automation",
 				eventType = 13,
-				execute = "-- Independent UWU settings; available before GUI or targeting reads.\nif not _G.UWU_LPDUSettingsIOReady then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..[[UWU-LPDU.lua]]\n local saved={}\n if FileExists(path) then\n  local loaded=FileLoad(path)\n  if type(loaded)==\"table\" then saved=loaded end\n end\n local current=_G.UWU_LPDUGuiState\n local old=_G.UWU_LPDU_AnnihilationAssignments or {}\n local defaults={automaticOpen=true,ultimaOpen=true,orbsOpen=true,autoTarget=_G.LPDU_UWU_AutoTarget~=false,melee=(old.melee==2 and 2 or 1),solo=old.solo or 0}\n local keys={\"automaticOpen\",\"ultimaOpen\",\"orbsOpen\",\"autoTarget\",\"melee\",\"solo\"}\n local C={}\n for _,key in ipairs(keys) do\n  local value=current and current[key]\n  if value==nil then value=saved[key] end\n  if type(defaults[key])==\"boolean\" then\n   C[key]=type(value)==\"boolean\" and value or defaults[key]\n   if value==false then C[key]=false end\n  else\n   C[key]=type(value)==\"number\" and value>=0 and value<=2 and value%1==0 and value or defaults[key]\n  end\n end\n if C.melee==0 then C.melee=1 end\n function C.save()\n  if not FolderExists(folder) then FolderCreate(folder) end\n  local values={}\n  for _,key in ipairs(keys) do values[key]=C[key] end\n  FileSave(path,values)\n end\n _G.UWU_LPDUGuiState=C\n _G.UWU_LPDU_AnnihilationAssignments={melee=C.melee,solo=C.solo}\n _G.LPDU_UWU_AutoTarget=C.autoTarget\n C.save()\n _G.UWU_LPDUSettingsIOReady=true\nend\n-- Upgrade only an unset melee assignment; preserve either explicit role choice.\ndo\n local preferences=_G.UWU_LPDUGuiState\n if preferences and preferences.melee==0 then\n  preferences.melee=1\n  local assignment=_G.UWU_LPDU_AnnihilationAssignments\n  if assignment then assignment.melee=1 end\n  preferences.save()\n end\nend\nlocal C=_G.UWU_LPDUGuiState\nlocal function section(key,label)\n GUI:SetNextTreeNodeOpened(C[key],GUI.SetCond_Always)\n local opened=GUI:CollapsingHeader(label,0)\n if opened then GUI:TreePush(label) end\n if opened~=C[key] then C[key]=opened;C.save() end\n return opened\nend\n\n_G.LPDU_UWU_AutoTarget=C.autoTarget\nGUI:SetNextWindowSize(440,0,GUI.SetCond_Always)\nlocal visible=GUI:Begin(\"UWU LPDU Settings\",true,GUI.WindowFlags_NoCollapse+GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n GUI:Text(\"UWU | LPDU Draws\")\n GUI:Text(\"Settings and expanded sections save automatically.\")\n if section(\"automaticOpen\",\"General\") then\n  if data.uwuAutoSim or data.uwuBLMAutoSim or data.uwuBRDAutoSim or data.uwuRPRAutoSim then\n   GUI:Text(\"Managed by AutoSim.\")\n  else\n   local value=GUI:Checkbox(\"Enable automatic targeting\",C.autoTarget)\n   if value~=C.autoTarget then\n    C.autoTarget=value;C.save()\n    _G.LPDU_UWU_AutoTarget=value\n   end\n   if GUI:IsItemHovered() then GUI:SetTooltip(\"Targets bosses, gaols, Magitek Bits and Lahabrea. Turn off to select targets manually. AutoSim uses its own targeting.\") end\n  end\n  GUI:TreePop()\n end\n if section(\"ultimaOpen\",\"P4 - Ultima\") then\n  if section(\"orbsOpen\",\"Annihilation orb assignments\") then\n   GUI:Text(\"3-3-1-1: first two orbs shared, last two solo.\")\n   local Roster=AnyoneCore and AnyoneCore.Roster\n   local slot=Roster and Roster.current() and Roster.mySlot() or nil\n   local cfg=_G.UWU_LPDU_AnnihilationAssignments\n   if slot==\"M1\" or slot==\"M2\" then\n    GUI:Text(\"Melee with tanks\")\n    GUI:PushItemWidth(380)\n    local value=GUI:Combo(\"##UWU_orb_melee\",cfg.melee,{\"Choose melee\",\"M1\",\"M2\"},3)\n    GUI:PopItemWidth()\n    if value~=cfg.melee then cfg.melee=value;C.melee=value;C.save() end\n    GUI:Text(\"Orbs 1-2: MT + OT + selected melee.\")\n   elseif slot==\"T1\" or slot==\"T2\" then\n    GUI:Text(\"Solo tank\")\n    GUI:PushItemWidth(380)\n    local value=GUI:Combo(\"##UWU_orb_solo\",cfg.solo,{\"Choose tank\",\"MT\",\"OT\"},3)\n    GUI:PopItemWidth()\n    if value~=cfg.solo then cfg.solo=value;C.solo=value;C.save() end\n    GUI:Text(\"Orbs 3-4: selected tank alone.\")\n   elseif not slot then\n    GUI:Text(\"Waiting for your party role.\")\n   else\n    GUI:Text(\"No orb assignment needed for your role.\")\n   end\n   GUI:TreePop()\n  end\n  GUI:TreePop()\n end\nend\nGUI:End()\n",
+				execute = "-- Independent UWU settings; available before GUI or targeting reads.\nif not _G.UWU_LPDUSettingsIOReady then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..[[UWU-LPDU.lua]]\n local saved={}\n if FileExists(path) then\n  local loaded=FileLoad(path)\n  if type(loaded)==\"table\" then saved=loaded end\n end\n local current=_G.UWU_LPDUGuiState\n local old=_G.UWU_LPDU_AnnihilationAssignments or {}\n local defaults={automaticOpen=true,ultimaOpen=true,orbsOpen=true,autoTarget=_G.LPDU_UWU_AutoTarget~=false,melee=(old.melee==2 and 2 or 1),solo=old.solo or 0}\n local keys={\"automaticOpen\",\"ultimaOpen\",\"orbsOpen\",\"autoTarget\",\"melee\",\"solo\"}\n local C={}\n for _,key in ipairs(keys) do\n  local value=current and current[key]\n  if value==nil then value=saved[key] end\n  if type(defaults[key])==\"boolean\" then\n   C[key]=type(value)==\"boolean\" and value or defaults[key]\n   if value==false then C[key]=false end\n  else\n   C[key]=type(value)==\"number\" and value>=0 and value<=2 and value%1==0 and value or defaults[key]\n  end\n end\n if C.melee==0 then C.melee=1 end\n function C.save()\n  if not FolderExists(folder) then FolderCreate(folder) end\n  local values={}\n  for _,key in ipairs(keys) do values[key]=C[key] end\n  FileSave(path,values)\n end\n _G.UWU_LPDUGuiState=C\n _G.UWU_LPDU_AnnihilationAssignments={melee=C.melee,solo=C.solo}\n _G.LPDU_UWU_AutoTarget=C.autoTarget\n C.save()\n _G.UWU_LPDUSettingsIOReady=true\nend\n-- Upgrade only an unset melee assignment; preserve either explicit role choice.\ndo\n local preferences=_G.UWU_LPDUGuiState\n if preferences and preferences.melee==0 then\n  preferences.melee=1\n  local assignment=_G.UWU_LPDU_AnnihilationAssignments\n  if assignment then assignment.melee=1 end\n  preferences.save()\n end\nend\nlocal C=_G.UWU_LPDUGuiState\nlocal function section(key,label)\n GUI:SetNextTreeNodeOpened(C[key],GUI.SetCond_Always)\n local opened\n if label==\"General\" then\n  opened=C[key]\n  GUI:PushStyleVar(GUI.StyleVar_ButtonTextAlign,0,0.5)\n  if GUI:Button((opened and \"- \" or \"+ \")..label..\"##UWU_LPDU_Draws_\"..key,GUI:GetContentRegionAvailWidth(),0) then opened=not opened end\n  GUI:PopStyleVar()\n  if opened then GUI:TreePush(\"UWU_LPDU_Draws_\"..key) end\n else\n  opened=GUI:CollapsingHeader(label,0)\n  if opened then GUI:TreePush(label) end\n end\n if opened~=C[key] then C[key]=opened;C.save() end\n return opened\nend\n\n_G.LPDU_UWU_AutoTarget=C.autoTarget\nGUI:SetNextWindowSize(440,0,GUI.SetCond_Always)\nlocal visible=GUI:Begin(\"UWU LPDU Settings\",true,GUI.WindowFlags_NoCollapse+GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n GUI:Text(\"UWU | LPDU Draws\")\n GUI:Text(\"Settings and expanded sections save automatically.\")\n if section(\"automaticOpen\",\"General\") then\n  if data.uwuAutoSim or data.uwuBLMAutoSim or data.uwuBRDAutoSim or data.uwuRPRAutoSim then\n   GUI:Text(\"Managed by AutoSim.\")\n  else\n   local value=GUI:Checkbox(\"Enable automatic targeting\",C.autoTarget)\n   if value~=C.autoTarget then\n    C.autoTarget=value;C.save()\n    _G.LPDU_UWU_AutoTarget=value\n   end\n   if GUI:IsItemHovered() then GUI:SetTooltip(\"Targets bosses, gaols, Magitek Bits and Lahabrea. Turn off to select targets manually. AutoSim uses its own targeting.\") end\n  end\n  GUI:TreePop()\n end\n if section(\"ultimaOpen\",\"P4 - Ultima\") then\n  if section(\"orbsOpen\",\"Annihilation orb assignments\") then\n   GUI:Text(\"3-3-1-1: first two orbs shared, last two solo.\")\n   local Roster=AnyoneCore and AnyoneCore.Roster\n   local slot=Roster and Roster.current() and Roster.mySlot() or nil\n   local cfg=_G.UWU_LPDU_AnnihilationAssignments\n   if slot==\"M1\" or slot==\"M2\" then\n    GUI:Text(\"Melee with tanks\")\n    GUI:PushItemWidth(380)\n    local value=GUI:Combo(\"##UWU_orb_melee\",cfg.melee,{\"Choose melee\",\"M1\",\"M2\"},3)\n    GUI:PopItemWidth()\n    if value~=cfg.melee then cfg.melee=value;C.melee=value;C.save() end\n    GUI:Text(\"Orbs 1-2: MT + OT + selected melee.\")\n   elseif slot==\"T1\" or slot==\"T2\" then\n    GUI:Text(\"Solo tank\")\n    GUI:PushItemWidth(380)\n    local value=GUI:Combo(\"##UWU_orb_solo\",cfg.solo,{\"Choose tank\",\"MT\",\"OT\"},3)\n    GUI:PopItemWidth()\n    if value~=cfg.solo then cfg.solo=value;C.solo=value;C.save() end\n    GUI:Text(\"Orbs 3-4: selected tank alone.\")\n   elseif not slot then\n    GUI:Text(\"Waiting for your party role.\")\n   else\n    GUI:Text(\"No orb assignment needed for your role.\")\n   end\n   GUI:TreePop()\n  end\n  GUI:TreePop()\n end\nend\nGUI:End()\n",
 				executeType = 2,
 				mechanicTime = 9,
 				name = "[GUI][LPDU] Settings",
@@ -1150,22 +1150,22 @@ local tbl =
 							{
 								
 								{
-									"f9a5c47d-b231-e530-a50d-89623292767b",
+									"d4c9f46d-252d-6c14-bdfc-c3bb27d1e2fa",
 									true,
 								},
 								
 								{
-									"eab4f9ad-bea9-0c31-89a2-a0d27f5ce044",
+									"7b778849-c7e4-105c-af4c-bc4920c7c0a4",
 									true,
 								},
 								
 								{
-									"fdd90c81-47c3-d851-89d4-6c79b0f4068e",
+									"9ba70374-e79a-0cf5-b605-e4a9eb44a463",
 									true,
 								},
 								
 								{
-									"406999b5-8006-4761-85d0-200bdae8784d",
+									"66a255f6-a363-9b50-a0ed-589c11f2420d",
 									true,
 								},
 							},
@@ -1197,7 +1197,7 @@ local tbl =
 							eventArgType = 4,
 							eventIntValue = 7738,
 							name = "jump",
-							uuid = "f9a5c47d-b231-e530-a50d-89623292767b",
+							uuid = "d4c9f46d-252d-6c14-bdfc-c3bb27d1e2fa",
 							version = 3,
 						},
 					},
@@ -1211,7 +1211,7 @@ local tbl =
 							eventArgType = 2,
 							eventIntValue = 1,
 							name = "animationSlot",
-							uuid = "eab4f9ad-bea9-0c31-89a2-a0d27f5ce044",
+							uuid = "7b778849-c7e4-105c-af4c-bc4920c7c0a4",
 							version = 3,
 						},
 					},
@@ -1223,7 +1223,7 @@ local tbl =
 							conditionLua = "return eventArgs.entityContentID == 1644 or eventArgs.entityContentID == 1645 or eventArgs.entityContentID == 1646",
 							dequeueIfLuaFalse = true,
 							name = "Garuda / sisters",
-							uuid = "fdd90c81-47c3-d851-89d4-6c79b0f4068e",
+							uuid = "9ba70374-e79a-0cf5-b605-e4a9eb44a463",
 							version = 3,
 						},
 					},
@@ -1235,7 +1235,7 @@ local tbl =
 							conditionLua = "if self.claimed then return true end\nif data.uwu_p1_feather_called_1 then return false end\ndata.uwu_p1_feather_called_1=true\nself.claimed=true\nreturn true",
 							dequeueIfLuaFalse = true,
 							name = "One call per wave",
-							uuid = "406999b5-8006-4761-85d0-200bdae8784d",
+							uuid = "66a255f6-a363-9b50-a0ed-589c11f2420d",
 							version = 3,
 						},
 					},
@@ -2334,22 +2334,22 @@ local tbl =
 							{
 								
 								{
-									"93f9f2a8-6cd6-6077-b474-f05464c25942",
+									"b753994f-bb30-94fe-adb1-208a75849f67",
 									true,
 								},
 								
 								{
-									"5d496c80-b3c1-f498-b127-0f2e03ea2a7a",
+									"dff8309e-b6b7-6580-a66d-089b0578b7c8",
 									true,
 								},
 								
 								{
-									"618b2f61-eece-c805-b850-98a19531e120",
+									"f3a1d886-0bed-a3af-a256-99ccf9ccb2b8",
 									true,
 								},
 								
 								{
-									"f90f4469-2523-e6a4-88a9-df844185f281",
+									"2473cfd8-430f-8b0c-90e4-1af3c97379d0",
 									true,
 								},
 							},
@@ -2370,7 +2370,7 @@ local tbl =
 							eventArgType = 4,
 							eventIntValue = 7738,
 							name = "jump",
-							uuid = "93f9f2a8-6cd6-6077-b474-f05464c25942",
+							uuid = "b753994f-bb30-94fe-adb1-208a75849f67",
 							version = 3,
 						},
 					},
@@ -2384,7 +2384,7 @@ local tbl =
 							eventArgType = 2,
 							eventIntValue = 1,
 							name = "animationSlot",
-							uuid = "5d496c80-b3c1-f498-b127-0f2e03ea2a7a",
+							uuid = "dff8309e-b6b7-6580-a66d-089b0578b7c8",
 							version = 3,
 						},
 					},
@@ -2396,7 +2396,7 @@ local tbl =
 							conditionLua = "return eventArgs.entityContentID == 1644 or eventArgs.entityContentID == 1645 or eventArgs.entityContentID == 1646",
 							dequeueIfLuaFalse = true,
 							name = "Garuda / sisters",
-							uuid = "618b2f61-eece-c805-b850-98a19531e120",
+							uuid = "f3a1d886-0bed-a3af-a256-99ccf9ccb2b8",
 							version = 3,
 						},
 					},
@@ -2408,7 +2408,7 @@ local tbl =
 							conditionLua = "if self.claimed then return true end\nif data.uwu_p1_feather_called_2 then return false end\ndata.uwu_p1_feather_called_2=true\nself.claimed=true\nreturn true",
 							dequeueIfLuaFalse = true,
 							name = "One call per wave",
-							uuid = "f90f4469-2523-e6a4-88a9-df844185f281",
+							uuid = "2473cfd8-430f-8b0c-90e4-1af3c97379d0",
 							version = 3,
 						},
 					},
@@ -2527,22 +2527,22 @@ local tbl =
 							{
 								
 								{
-									"b5b40980-49b6-e7fc-89c7-e6ce17482d23",
+									"dd9ae533-54c1-3948-a6c4-c1f29262d9ac",
 									true,
 								},
 								
 								{
-									"1bd103e4-7499-2462-9676-7251e2aa4ab9",
+									"4812dc8a-6689-a2b6-8e68-38bf90743f30",
 									true,
 								},
 								
 								{
-									"9606c38f-b29a-4e15-9aaf-400cb06818d0",
+									"2bc15e71-1845-fab9-85e2-32df0a887dd6",
 									true,
 								},
 								
 								{
-									"8a841ca8-b729-c545-9f4e-084c028bfebd",
+									"806a009d-d16f-83a6-b960-e4887647cae0",
 									true,
 								},
 							},
@@ -2575,7 +2575,7 @@ local tbl =
 							eventArgType = 4,
 							eventIntValue = 7738,
 							name = "jump",
-							uuid = "b5b40980-49b6-e7fc-89c7-e6ce17482d23",
+							uuid = "dd9ae533-54c1-3948-a6c4-c1f29262d9ac",
 							version = 3,
 						},
 					},
@@ -2589,7 +2589,7 @@ local tbl =
 							eventArgType = 2,
 							eventIntValue = 1,
 							name = "animationSlot",
-							uuid = "1bd103e4-7499-2462-9676-7251e2aa4ab9",
+							uuid = "4812dc8a-6689-a2b6-8e68-38bf90743f30",
 							version = 3,
 						},
 					},
@@ -2601,7 +2601,7 @@ local tbl =
 							conditionLua = "return eventArgs.entityContentID == 1644 or eventArgs.entityContentID == 1645 or eventArgs.entityContentID == 1646",
 							dequeueIfLuaFalse = true,
 							name = "Garuda / sisters",
-							uuid = "9606c38f-b29a-4e15-9aaf-400cb06818d0",
+							uuid = "2bc15e71-1845-fab9-85e2-32df0a887dd6",
 							version = 3,
 						},
 					},
@@ -2613,7 +2613,7 @@ local tbl =
 							conditionLua = "if self.claimed then return true end\nif data.uwu_p1_feather_called_3 then return false end\ndata.uwu_p1_feather_called_3=true\nself.claimed=true\nreturn true",
 							dequeueIfLuaFalse = true,
 							name = "One call per wave",
-							uuid = "8a841ca8-b729-c545-9f4e-084c028bfebd",
+							uuid = "806a009d-d16f-83a6-b960-e4887647cae0",
 							version = 3,
 						},
 					},
@@ -3289,22 +3289,22 @@ local tbl =
 							{
 								
 								{
-									"9a468bcc-6841-32a2-911e-8bb1f91f1bd4",
+									"c12ab2b4-d3fc-a7d9-86a6-dbae1d4085ee",
 									true,
 								},
 								
 								{
-									"2e362fe9-5504-d260-9de7-305751a2901d",
+									"3f30ade1-2a4f-1b39-b1c2-39f0f836ece3",
 									true,
 								},
 								
 								{
-									"512bca74-c5f4-2b9e-bd8d-16e66daf6f63",
+									"e8ed94e4-d731-8c32-8ab7-a2a69fe5c5af",
 									true,
 								},
 								
 								{
-									"fec4cae0-dae6-1382-9be4-28047a401d5a",
+									"8f02c4da-c647-07b1-a2ea-dd6e66a2e734",
 									true,
 								},
 							},
@@ -3337,7 +3337,7 @@ local tbl =
 							eventArgType = 4,
 							eventIntValue = 7738,
 							name = "jump",
-							uuid = "9a468bcc-6841-32a2-911e-8bb1f91f1bd4",
+							uuid = "c12ab2b4-d3fc-a7d9-86a6-dbae1d4085ee",
 							version = 3,
 						},
 					},
@@ -3351,7 +3351,7 @@ local tbl =
 							eventArgType = 2,
 							eventIntValue = 1,
 							name = "animationSlot",
-							uuid = "2e362fe9-5504-d260-9de7-305751a2901d",
+							uuid = "3f30ade1-2a4f-1b39-b1c2-39f0f836ece3",
 							version = 3,
 						},
 					},
@@ -3363,7 +3363,7 @@ local tbl =
 							conditionLua = "return eventArgs.entityContentID == 1644 or eventArgs.entityContentID == 1645 or eventArgs.entityContentID == 1646",
 							dequeueIfLuaFalse = true,
 							name = "Garuda / sisters",
-							uuid = "512bca74-c5f4-2b9e-bd8d-16e66daf6f63",
+							uuid = "e8ed94e4-d731-8c32-8ab7-a2a69fe5c5af",
 							version = 3,
 						},
 					},
@@ -3375,7 +3375,7 @@ local tbl =
 							conditionLua = "if self.claimed then return true end\nif data.uwu_p1_feather_called_4 then return false end\ndata.uwu_p1_feather_called_4=true\nself.claimed=true\nreturn true",
 							dequeueIfLuaFalse = true,
 							name = "One call per wave",
-							uuid = "fec4cae0-dae6-1382-9be4-28047a401d5a",
+							uuid = "8f02c4da-c647-07b1-a2ea-dd6e66a2e734",
 							version = 3,
 						},
 					},
@@ -3694,7 +3694,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "LPDU Guidance",
-				uuid = "713c0511-e976-da45-8efa-e2940a86cbe3",
+				uuid = "fd6c7ad6-be73-54c7-b0f8-b39345c2f695",
 			},
 			objectType = "folder",
 		},
@@ -3704,7 +3704,7 @@ local tbl =
 			{
 				displayPath = "LPDU Guidance",
 				name = "Mesohigh",
-				uuid = "17d5ed0d-8908-db9e-9d54-82c1dce29ac2",
+				uuid = "bd9d9d7b-ab61-1ca9-886f-9ea01d9fa37a",
 			},
 			objectType = "folder",
 		},
@@ -3724,12 +3724,12 @@ local tbl =
 							{
 								
 								{
-									"0df707ea-7fec-a9e5-9cb7-24a78393b35f",
+									"65e3b07a-372e-01f6-802d-a6247bb381d6",
 									true,
 								},
 							},
 							name = "Track source and current holder",
-							uuid = "f71702bb-db4f-467f-adf0-83adbdbecf13",
+							uuid = "cfc5968b-a204-f55e-808e-7b4dbc0ed230",
 							version = 2.1,
 						},
 					},
@@ -3744,7 +3744,7 @@ local tbl =
 							conditionLua = "return (eventArgs.sourceEntityContentID == 1645 or eventArgs.sourceEntityContentID == 1646) and (eventArgs.newTetherID == 4 or eventArgs.oldTetherID == 4)",
 							dequeueIfLuaFalse = true,
 							name = "Mesohigh source / change",
-							uuid = "0df707ea-7fec-a9e5-9cb7-24a78393b35f",
+							uuid = "65e3b07a-372e-01f6-802d-a6247bb381d6",
 							version = 3,
 						},
 					},
@@ -3758,7 +3758,7 @@ local tbl =
 				timelineIndex = 26,
 				timerEndOffset = 4,
 				timerStartOffset = -8,
-				uuid = "d997f10d-0f26-81d7-ad78-5159b336f14c",
+				uuid = "e5a4b346-f075-0386-b2b1-3ac85d602265",
 				version = 2,
 			},
 		},
@@ -3783,7 +3783,7 @@ local tbl =
 				timelineIndex = 26,
 				timerEndOffset = 4,
 				timerStartOffset = -8,
-				uuid = "9c6d9d15-ac56-3bb1-b71c-f28e693de39c",
+				uuid = "def33460-915e-cab1-8c4a-eaa71a7e9ff0",
 				version = 2,
 			},
 		},
@@ -4055,22 +4055,22 @@ local tbl =
 							{
 								
 								{
-									"c8274440-a1b5-e948-99db-86ba6ff6ae67",
+									"24a8b2dc-93f7-35d3-ac94-9f525be45022",
 									true,
 								},
 								
 								{
-									"3bc25d80-f3e6-6ffb-a011-01cac24825e4",
+									"359c6176-1958-8e5a-a78f-2221e9406f50",
 									true,
 								},
 								
 								{
-									"53bbc76c-c46b-7b37-9558-b8f4f6d0b526",
+									"f0e2bd1c-0ae5-e7e1-ae19-323f63bbb383",
 									true,
 								},
 								
 								{
-									"3e3c6059-f0b7-aca5-abdb-6f4f63c969da",
+									"b7d98140-f053-d4b6-9f47-2c830239a2ab",
 									true,
 								},
 							},
@@ -4103,7 +4103,7 @@ local tbl =
 							eventArgType = 4,
 							eventIntValue = 7738,
 							name = "jump",
-							uuid = "c8274440-a1b5-e948-99db-86ba6ff6ae67",
+							uuid = "24a8b2dc-93f7-35d3-ac94-9f525be45022",
 							version = 3,
 						},
 					},
@@ -4117,7 +4117,7 @@ local tbl =
 							eventArgType = 2,
 							eventIntValue = 1,
 							name = "animationSlot",
-							uuid = "3bc25d80-f3e6-6ffb-a011-01cac24825e4",
+							uuid = "359c6176-1958-8e5a-a78f-2221e9406f50",
 							version = 3,
 						},
 					},
@@ -4129,7 +4129,7 @@ local tbl =
 							conditionLua = "return eventArgs.entityContentID == 1644 or eventArgs.entityContentID == 1645 or eventArgs.entityContentID == 1646",
 							dequeueIfLuaFalse = true,
 							name = "Garuda / sisters",
-							uuid = "53bbc76c-c46b-7b37-9558-b8f4f6d0b526",
+							uuid = "f0e2bd1c-0ae5-e7e1-ae19-323f63bbb383",
 							version = 3,
 						},
 					},
@@ -4141,7 +4141,7 @@ local tbl =
 							conditionLua = "if self.claimed then return true end\nif data.uwu_p1_feather_called_5 then return false end\ndata.uwu_p1_feather_called_5=true\nself.claimed=true\nreturn true",
 							dequeueIfLuaFalse = true,
 							name = "One call per wave",
-							uuid = "3e3c6059-f0b7-aca5-abdb-6f4f63c969da",
+							uuid = "b7d98140-f053-d4b6-9f47-2c830239a2ab",
 							version = 3,
 						},
 					},
@@ -4768,6 +4768,68 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "8891db78-980b-1d5d-a6da-b0177f616dda",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertPriority = 3,
+							alertScale = 0.85,
+							alertTTS = true,
+							alertText = "Move to A",
+							conditions = 
+							{
+								
+								{
+									"467e04ec-b666-26f5-ae60-e03cc9f46496",
+									true,
+								},
+							},
+							uuid = "29c3a91d-baf1-4a87-998c-3234d55796f7",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local Roster=AnyoneCore.Roster\nif not Roster or not Roster.current() then return false end\nlocal slot=Roster.mySlot()\nreturn slot==\"H1\" or slot==\"H2\" or slot==\"M1\" or slot==\"M2\" or slot==\"R1\" or slot==\"R2\"",
+							name = "Roster non-tank",
+							uuid = "467e04ec-b666-26f5-ae60-e03cc9f46496",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				mechanicTime = 300,
+				name = "[LPDU] Ifrit 300 - Non-tanks move to A",
+				timeRange = true,
+				timelineIndex = 36,
+				timerEndOffset = 1,
+				uuid = "94e71b80-bf97-9eda-b52a-0f25e8a49d9a",
+				version = 2,
+			},
+		},
 	},
 	[38] = 
 	{
@@ -5322,7 +5384,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local e = TensorCore.mGetEntity(eventArgs.entityID)\nif not e or not e.pos then\n    self.used = true\n    return\nend\n\ndata.uwu_relative_nails = data.uwu_relative_nails or { nails = {}, drawn = false }\nlocal state = data.uwu_relative_nails\nif state.drawn then\n    self.used = true\n    return\nend\n\nif not state.nails[eventArgs.entityID] then\n    state.nails[eventArgs.entityID] = { id = eventArgs.entityID, x = e.pos.x, z = e.pos.z }\nend\n\nlocal count = 0\nfor _ in pairs(state.nails) do\n    count = count + 1\nend\nif count < 4 then\n    self.used = true\n    return\nend\n\nlocal list = {}\nfor _, nail in pairs(state.nails) do\n    list[#list + 1] = nail\nend\n\nlocal northAIndex, northBIndex = 1, 2\nlocal minDistanceSquared = math.huge\nfor i = 1, 3 do\n    for j = i + 1, 4 do\n        local dx = list[i].x - list[j].x\n        local dz = list[i].z - list[j].z\n        local distanceSquared = dx * dx + dz * dz\n        if distanceSquared < minDistanceSquared then\n            minDistanceSquared = distanceSquared\n            northAIndex = i\n            northBIndex = j\n        end\n    end\nend\n\nlocal northA = list[northAIndex]\nlocal northB = list[northBIndex]\nlocal southA\nlocal southB\nfor i = 1, 4 do\n    if i ~= northAIndex and i ~= northBIndex then\n        if not southA then\n            southA = list[i]\n        else\n            southB = list[i]\n        end\n    end\nend\n\nlocal northCenterX = (northA.x + northB.x) * 0.5\nlocal northCenterZ = (northA.z + northB.z) * 0.5\nlocal southCenterX = (southA.x + southB.x) * 0.5\nlocal southCenterZ = (southA.z + southB.z) * 0.5\nlocal northX = northCenterX - southCenterX\nlocal northZ = northCenterZ - southCenterZ\nlocal northLength = math.sqrt(northX * northX + northZ * northZ)\nif northLength < 0.01 then\n    self.used = true\n    return\nend\n\nlocal eastX = -northZ / northLength\nlocal eastZ = northX / northLength\n\nlocal northASide = (northA.x - northCenterX) * eastX + (northA.z - northCenterZ) * eastZ\nlocal northALabel = northASide >= 0 and \"NE\" or \"NW\"\nlocal northANumber = northASide >= 0 and \"3\" or \"4\"\nlocal northBSide = (northB.x - northCenterX) * eastX + (northB.z - northCenterZ) * eastZ\nlocal northBLabel = northBSide >= 0 and \"NE\" or \"NW\"\nlocal northBNumber = northBSide >= 0 and \"3\" or \"4\"\n\nlocal southASide = (southA.x - southCenterX) * eastX + (southA.z - southCenterZ) * eastZ\nlocal southALabel = southASide >= 0 and \"SE\" or \"SW\"\nlocal southANumber = southASide >= 0 and \"1\" or \"2\"\nlocal southBSide = (southB.x - southCenterX) * eastX + (southB.z - southCenterZ) * eastZ\nlocal southBLabel = southBSide >= 0 and \"SE\" or \"SW\"\nlocal southBNumber = southBSide >= 0 and \"1\" or \"2\"\n\nstate.textIDs = state.textIDs or {}\nstate.textIDs[northA.id] = {\n    direction = AnyoneCore.addTimedWorldTextOnEnt(45000, northALabel, northA.id, 0xFFFFFFFF, true, 2.5, 2.5),\n    number = AnyoneCore.addTimedWorldTextOnEnt(45000, northANumber, northA.id, 0xFFFFFFFF, true, 2.5, 5.0)\n}\nstate.textIDs[northB.id] = {\n    direction = AnyoneCore.addTimedWorldTextOnEnt(45000, northBLabel, northB.id, 0xFFFFFFFF, true, 2.5, 2.5),\n    number = AnyoneCore.addTimedWorldTextOnEnt(45000, northBNumber, northB.id, 0xFFFFFFFF, true, 2.5, 5.0)\n}\nstate.textIDs[southA.id] = {\n    direction = AnyoneCore.addTimedWorldTextOnEnt(45000, southALabel, southA.id, 0xFFFFFFFF, true, 2.5, 2.5),\n    number = AnyoneCore.addTimedWorldTextOnEnt(45000, southANumber, southA.id, 0xFFFFFFFF, true, 2.5, 5.0)\n}\nstate.textIDs[southB.id] = {\n    direction = AnyoneCore.addTimedWorldTextOnEnt(45000, southBLabel, southB.id, 0xFFFFFFFF, true, 2.5, 2.5),\n    number = AnyoneCore.addTimedWorldTextOnEnt(45000, southBNumber, southB.id, 0xFFFFFFFF, true, 2.5, 5.0)\n}\n\nstate.drawn = true\nself.used = true",
+							actionLua = "local e = TensorCore.mGetEntity(eventArgs.entityID)\nif not e or not e.pos then\n    self.used = true\n    return\nend\n\ndata.uwu_relative_nails = data.uwu_relative_nails or { nails = {}, drawn = false }\nlocal state = data.uwu_relative_nails\nif state.drawn then\n    self.used = true\n    return\nend\n\nif not state.nails[eventArgs.entityID] then\n    state.nails[eventArgs.entityID] = { id = eventArgs.entityID, x = e.pos.x, z = e.pos.z }\nend\n\nlocal count = 0\nfor _ in pairs(state.nails) do\n    count = count + 1\nend\nif count < 4 then\n    self.used = true\n    return\nend\n\nlocal list = {}\nfor _, nail in pairs(state.nails) do\n    list[#list + 1] = nail\nend\n\nlocal northAIndex, northBIndex = 1, 2\nlocal minDistanceSquared = math.huge\nfor i = 1, 3 do\n    for j = i + 1, 4 do\n        local dx = list[i].x - list[j].x\n        local dz = list[i].z - list[j].z\n        local distanceSquared = dx * dx + dz * dz\n        if distanceSquared < minDistanceSquared then\n            minDistanceSquared = distanceSquared\n            northAIndex = i\n            northBIndex = j\n        end\n    end\nend\n\nlocal northA = list[northAIndex]\nlocal northB = list[northBIndex]\nlocal southA\nlocal southB\nfor i = 1, 4 do\n    if i ~= northAIndex and i ~= northBIndex then\n        if not southA then\n            southA = list[i]\n        else\n            southB = list[i]\n        end\n    end\nend\n\nlocal northCenterX = (northA.x + northB.x) * 0.5\nlocal northCenterZ = (northA.z + northB.z) * 0.5\nlocal southCenterX = (southA.x + southB.x) * 0.5\nlocal southCenterZ = (southA.z + southB.z) * 0.5\nlocal northX = northCenterX - southCenterX\nlocal northZ = northCenterZ - southCenterZ\nlocal northLength = math.sqrt(northX * northX + northZ * northZ)\nif northLength < 0.01 then\n    self.used = true\n    return\nend\n\nlocal eastX = -northZ / northLength\nlocal eastZ = northX / northLength\n\nlocal northASide = (northA.x - northCenterX) * eastX + (northA.z - northCenterZ) * eastZ\nlocal northALabel = northASide >= 0 and \"NE\" or \"NW\"\nlocal northANumber = northASide >= 0 and \"3\" or \"4\"\nlocal northBSide = (northB.x - northCenterX) * eastX + (northB.z - northCenterZ) * eastZ\nlocal northBLabel = northBSide >= 0 and \"NE\" or \"NW\"\nlocal northBNumber = northBSide >= 0 and \"3\" or \"4\"\n\nlocal southASide = (southA.x - southCenterX) * eastX + (southA.z - southCenterZ) * eastZ\nlocal southALabel = southASide >= 0 and \"SE\" or \"SW\"\nlocal southANumber = southASide >= 0 and \"1\" or \"2\"\nlocal southBSide = (southB.x - southCenterX) * eastX + (southB.z - southCenterZ) * eastZ\nlocal southBLabel = southBSide >= 0 and \"SE\" or \"SW\"\nlocal southBNumber = southBSide >= 0 and \"1\" or \"2\"\n\nstate.textIDs = state.textIDs or {}\nstate.textIDs[northA.id] = {\n    direction = AnyoneCore.addTimedWorldTextOnEnt(45000, northALabel, northA.id, 0xFFFFFFFF, true, 2.5, 3.25),\n    number = AnyoneCore.addTimedWorldTextOnEnt(45000, northANumber, northA.id, 0xFFFFFFFF, true, 2.5, 5.0)\n}\nstate.textIDs[northB.id] = {\n    direction = AnyoneCore.addTimedWorldTextOnEnt(45000, northBLabel, northB.id, 0xFFFFFFFF, true, 2.5, 3.25),\n    number = AnyoneCore.addTimedWorldTextOnEnt(45000, northBNumber, northB.id, 0xFFFFFFFF, true, 2.5, 5.0)\n}\nstate.textIDs[southA.id] = {\n    direction = AnyoneCore.addTimedWorldTextOnEnt(45000, southALabel, southA.id, 0xFFFFFFFF, true, 2.5, 3.25),\n    number = AnyoneCore.addTimedWorldTextOnEnt(45000, southANumber, southA.id, 0xFFFFFFFF, true, 2.5, 5.0)\n}\nstate.textIDs[southB.id] = {\n    direction = AnyoneCore.addTimedWorldTextOnEnt(45000, southBLabel, southB.id, 0xFFFFFFFF, true, 2.5, 3.25),\n    number = AnyoneCore.addTimedWorldTextOnEnt(45000, southBNumber, southB.id, 0xFFFFFFFF, true, 2.5, 5.0)\n}\n\nstate.drawn = true\nself.used = true",
 							conditions = 
 							{
 								
@@ -5829,12 +5891,12 @@ local tbl =
 							{
 								
 								{
-									"bcc01be2-c7d7-3346-ad55-c1b37c8309ce",
+									"ad0cb64f-7205-4e7f-89c7-50dd235dcfd0",
 									true,
 								},
 							},
 							name = "R2: Caster start SE",
-							uuid = "f2d6fcc4-1971-2bfd-83f3-0bfb78692ab3",
+							uuid = "e8afcf30-7773-7775-af0a-ec9ad85ca53f",
 							version = 2.1,
 						},
 					},
@@ -5859,7 +5921,7 @@ local tbl =
 							category = "Lua",
 							conditionLua = "local Roster=AnyoneCore.Roster\nif not Roster or not Roster.current() then return false end\nreturn Roster.mySlot()==\"R2\"",
 							name = "Roster R2",
-							uuid = "bcc01be2-c7d7-3346-ad55-c1b37c8309ce",
+							uuid = "ad0cb64f-7205-4e7f-89c7-50dd235dcfd0",
 							version = 3,
 						},
 					},
@@ -8624,8 +8686,9 @@ local tbl =
 				{
 				},
 				displayPath = "Cooldown Holds",
+				enabled = false,
 				mechanicTime = 600,
-				name = "[ACR][UWU] Disable CD Quick Toggle at 602",
+				name = "[ACR][UWU] Disable CD Quick Toggle at 602 - disabled",
 				timelineIndex = 74,
 				timerOffset = 2,
 				uuid = "02bd9099-3567-69f6-84e3-6bd5709902f9",
@@ -9587,7 +9650,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "LPDU Guidance",
-				uuid = "867096c0-6aae-f662-a67e-8fa2c3d5c854",
+				uuid = "edb1aa99-a4e1-8798-a46c-2d73ab18f2af",
 			},
 			objectType = "folder",
 		},
@@ -9602,27 +9665,27 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local titan=TensorCore.mGetEntity(eventArgs.entityID)\nif not titan then return end\nlocal old=data.uwu_geocrush_first\nif old and old.draws then for _,id in ipairs(old.draws) do Argus.deleteTimedShape(id) end end\ndata.uwu_geocrush_first={id=eventArgs.entityID,x=titan.pos.x,z=titan.pos.z,start=Now(),draws={}}\nself.used=true",
+							actionLua = "local titan=TensorCore.mGetEntity(eventArgs.entityID)\nif not titan then return end\nlocal old=data.uwu_geocrush_first\nif old and old.draws then for _,id in ipairs(old.draws) do Argus.deleteTimedShape(id) end end\ndata.uwu_geocrush_first={id=eventArgs.entityID,x=titan.pos.x,z=titan.pos.z,start=Now(),draws={}}\nTensorCore.timelineLogToFile(string.format(\"[UWU Geocrush] jump id=%d source=(%.2f,%.2f) heading=%.3f\\n\",eventArgs.entityID,titan.pos.x,titan.pos.z,titan.pos.h))\nself.used=true",
 							conditions = 
 							{
 								
 								{
-									"94402d04-eeb5-abd8-9247-986c04caccd5",
+									"8b865ded-0ab3-9e79-a961-9eb102209ad7",
 									true,
 								},
 								
 								{
-									"b97c84e7-fbca-4e08-b080-d70e4cdc7463",
+									"e367283f-00e0-b972-9299-d7b499033d34",
 									true,
 								},
 								
 								{
-									"e12a5988-c6c3-30e8-ac53-06cc27b57338",
+									"686174d2-9549-9955-948a-1ba347ecf114",
 									true,
 								},
 							},
 							name = "Remember jump source",
-							uuid = "4bfbc756-646b-446d-a865-4e4158721b38",
+							uuid = "d49e9161-6465-7a9c-b735-a530ab606d11",
 							version = 2.1,
 						},
 					},
@@ -9639,7 +9702,7 @@ local tbl =
 							eventArgType = 4,
 							eventIntValue = 7737,
 							name = "jump",
-							uuid = "94402d04-eeb5-abd8-9247-986c04caccd5",
+							uuid = "8b865ded-0ab3-9e79-a961-9eb102209ad7",
 							version = 3,
 						},
 					},
@@ -9653,7 +9716,7 @@ local tbl =
 							eventArgType = 2,
 							eventIntValue = 1,
 							name = "animationSlot",
-							uuid = "b97c84e7-fbca-4e08-b080-d70e4cdc7463",
+							uuid = "e367283f-00e0-b972-9299-d7b499033d34",
 							version = 3,
 						},
 					},
@@ -9666,7 +9729,7 @@ local tbl =
 							eventArgOptionType = 2,
 							eventEntityContentID = 1801,
 							name = "Titan",
-							uuid = "e12a5988-c6c3-30e8-ac53-06cc27b57338",
+							uuid = "686174d2-9549-9955-948a-1ba347ecf114",
 							version = 3,
 						},
 					},
@@ -9679,7 +9742,7 @@ local tbl =
 				timelineIndex = 82,
 				timerEndOffset = 3,
 				timerStartOffset = -8,
-				uuid = "f27800fa-032c-d6ba-8ad7-80102fe652fe",
+				uuid = "1f486f9c-1058-be73-b6e7-ac6f08e9a116",
 				version = 2,
 			},
 		},
@@ -9694,17 +9757,17 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local state=data.uwu_geocrush_first\nif Now()-state.start<650 then return end\nlocal titan=TensorCore.mGetEntity(state.id)\nif not titan then return end\nlocal vx,vz=math.sin(titan.pos.h),math.cos(titan.pos.h)\nlocal ox,oz=state.x-100,state.z-100\nlocal b=ox*vx+oz*vz\nlocal discriminant=b*b+196-ox*ox-oz*oz\nif discriminant<0 then self.used=true;return end\nlocal distance=-b+math.sqrt(discriminant)\nlocal sourceX,sourceZ=state.x+vx*distance,state.z+vz*distance\nlocal duration=math.max(100,5200-(Now()-state.start))\nlocal drawer=TensorCore.getMoogleDrawer()\nlocal id=drawer:addTimedCircle(duration,sourceX,titan.pos.y,sourceZ,24,0,false,true)\nif id then state.draws[#state.draws+1]=id end\nid=drawer:addTimedDonut(duration,100,titan.pos.y,100,16,19.5,0,false,true)\nif id then state.draws[#state.draws+1]=id end\nlocal player=TensorCore.mGetPlayer()\nif not player then return end\nlocal dx,dz=sourceX-100,sourceZ-100\nlocal length=math.sqrt(dx*dx+dz*dz)\nif length<1 then self.used=true;return end\nlocal target={x=100-dx/length*15,y=player.pos.y,z=100-dz/length*15}\nlocal green=TensorCore.getCachedDrawer(0x5533FF66,0xCC33FF66,0xFF33FF66,0xFF000000,3)\nlocal id=green:addTimedCircle(duration,target.x,target.y,target.z,0.5,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nif id then state.draws[#state.draws+1]=id end\nlocal distance=TensorCore.getDistance2d(player.pos,target)\nif distance>0.5 then\n id=green:addTimedArrow(duration,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,target),math.max(0.1,distance-1),1,1,2.4,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if id then state.draws[#state.draws+1]=id end\nend\nstate.predicted=true\nself.used=true",
+							actionLua = "local state=data.uwu_geocrush_first\nif Now()-state.start<650 then return end\nlocal titan=TensorCore.mGetEntity(state.id)\nif not titan then return end\nlocal vx,vz=math.sin(titan.pos.h),math.cos(titan.pos.h)\nlocal ox,oz=state.x-100,state.z-100\nlocal b=ox*vx+oz*vz\nlocal discriminant=b*b+196-ox*ox-oz*oz\nif discriminant<0 then self.used=true;return end\nlocal distance=-b+math.sqrt(discriminant)\nlocal sourceX,sourceZ=state.x+vx*distance,state.z+vz*distance\nlocal duration=math.max(100,5200-(Now()-state.start))\nlocal drawer=TensorCore.getMoogleDrawer()\nlocal id=drawer:addTimedCircle(duration,sourceX,titan.pos.y,sourceZ,24,0,false,true)\nif id then state.draws[#state.draws+1]=id end\nid=drawer:addTimedDonut(duration,100,titan.pos.y,100,16,19.5,0,false,true)\nif id then state.draws[#state.draws+1]=id end\nlocal player=TensorCore.mGetPlayer()\nif not player then return end\nlocal dx,dz=sourceX-100,sourceZ-100\nlocal length=math.sqrt(dx*dx+dz*dz)\nif length<1 then self.used=true;return end\nlocal target={x=100-dx/length*15,y=player.pos.y,z=100-dz/length*15}\nlocal green=TensorCore.getCachedDrawer(0x5533FF66,0xCC33FF66,0xFF33FF66,0xFF000000,3)\nlocal id=green:addTimedCircle(duration,target.x,target.y,target.z,0.5,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nif id then state.draws[#state.draws+1]=id end\nlocal distance=TensorCore.getDistance2d(player.pos,target)\nif distance>0.5 then\n id=green:addTimedArrow(duration,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,target),math.max(0.1,distance-1),1,1,2.4,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if id then state.draws[#state.draws+1]=id end\nend\nTensorCore.timelineLogToFile(string.format(\"[UWU Geocrush] preview source=(%.2f,%.2f) safe=(%.2f,%.2f) elapsed=%d\\n\",sourceX,sourceZ,target.x,target.z,Now()-state.start))\nstate.predicted=true\nself.used=true",
 							conditions = 
 							{
 								
 								{
-									"7c6aead1-c7e6-b6d8-b86b-00ee27f7346b",
+									"f0cdf789-e59e-ba7d-950a-3615bb84c63d",
 									true,
 								},
 							},
 							name = "Preview proximity and safe edge",
-							uuid = "67c2de5c-21c8-8c29-9515-eacc5aa60dc5",
+							uuid = "d75548e1-963c-e5db-aea9-72b53fd0381e",
 							version = 2.1,
 						},
 					},
@@ -9718,7 +9781,7 @@ local tbl =
 							category = "Lua",
 							conditionLua = "local s=data.uwu_geocrush_first\nreturn s ~= nil and not s.predicted and not s.channelled and not s.finished",
 							name = "Pending jump prediction",
-							uuid = "7c6aead1-c7e6-b6d8-b86b-00ee27f7346b",
+							uuid = "f0cdf789-e59e-ba7d-950a-3615bb84c63d",
 							version = 3,
 						},
 					},
@@ -9730,7 +9793,7 @@ local tbl =
 				timelineIndex = 82,
 				timerEndOffset = 3,
 				timerStartOffset = -8,
-				uuid = "ffbeb510-205b-9ac0-a166-1d4ff52409c3",
+				uuid = "536bd0f7-ed14-76cf-82ca-74cb29403aa8",
 				version = 2,
 			},
 		},
@@ -9750,12 +9813,12 @@ local tbl =
 							{
 								
 								{
-									"b56b917c-ac43-5530-aa86-bc0a6b9d2454",
+									"8dfaa69d-ea2f-81a1-8524-7338b979c643",
 									true,
 								},
 							},
 							name = "Clear completed Geocrush",
-							uuid = "6836701d-c2b3-9571-b42c-66650e053246",
+							uuid = "6d576aa8-49cd-54ae-b13b-d0d4750031b9",
 							version = 2.1,
 						},
 					},
@@ -9770,7 +9833,7 @@ local tbl =
 							conditionLua = "return eventArgs.entityContentID == 1801 and eventArgs.spellID == 11110",
 							dequeueIfLuaFalse = true,
 							name = "Geocrush resolved",
-							uuid = "b56b917c-ac43-5530-aa86-bc0a6b9d2454",
+							uuid = "8dfaa69d-ea2f-81a1-8524-7338b979c643",
 							version = 3,
 						},
 					},
@@ -9783,7 +9846,7 @@ local tbl =
 				timelineIndex = 82,
 				timerEndOffset = 3,
 				timerStartOffset = -8,
-				uuid = "18a286d9-bbb8-2d89-b3f0-0663056d7075",
+				uuid = "db9316ad-6d90-4e87-b6c0-317f93df18b2",
 				version = 2,
 			},
 		},
@@ -9832,12 +9895,12 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "if data.uwu_upheaval_completed then self.used=true;return end\nif not self.waitUntil then self.waitUntil=Now()+350 end\nif Now()<self.waitUntil then return end\nlocal player=TensorCore.mGetPlayer()\nlocal titan=TensorCore.mGetEntity(eventArgs.entityID)\nif not player or not titan then return end\nlocal bombs=TensorCore.getEntityGroupList(\"ContentID\",{contentid=1803,subgroup=\"Number\",noAliveCheck=true})\nlocal count=0\nfor _,bomb in pairs(bombs) do count=count+1 end\nif count<5 then return end\nlocal bestScore,bestX,bestZ=-math.huge,nil,nil\nfor degree=0,359 do\n local angle=degree*math.pi/180\n local ux,uz=math.sin(angle),math.cos(angle)\n local lx,lz=titan.pos.x+ux*28,titan.pos.z+uz*28\n local dx,dz=lx-100,lz-100\n local score=16-math.sqrt(dx*dx+dz*dz)\n if score>0 then\n  for _,bomb in pairs(bombs) do\n   local bx,bz=lx-bomb.pos.x,lz-bomb.pos.z\n   score=math.min(score,math.sqrt(bx*bx+bz*bz)-6.3)\n  end\n  if score>bestScore then bestScore,bestX,bestZ=score,titan.pos.x+ux*4,titan.pos.z+uz*4 end\n end\nend\nif not bestX or bestScore<1.5 then return end\nlocal duration=math.max(100,eventArgs.channelTimeMax*1000+300-(Now()-self.waitUntil+350))\nlocal state={draws={}};data.uwu_upheaval_guidance=state\nlocal target={x=bestX,y=player.pos.y,z=bestZ}\nlocal drawer=TensorCore.getCachedDrawer(0x5530E080,0xCC30E080,0xFF30E080,0xFF30E080,3)\nlocal id=drawer:addTimedCircle(duration,target.x,target.y,target.z,0.18,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nif id then state.draws[#state.draws+1]=id end\nlocal distance=TensorCore.getDistance2d(player.pos,target)\nif distance>0.3 then\n id=drawer:addTimedArrow(duration,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,target),math.max(0.1,distance-0.5),0.6,0.5,1.5,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if id then state.draws[#state.draws+1]=id end\nend\nself.used=true",
+							actionLua = "if data.uwu_upheaval_completed then self.used=true;return end\nif not self.waitUntil then self.waitUntil=Now()+350 end\nif Now()<self.waitUntil then return end\nlocal player=TensorCore.mGetPlayer()\nlocal titan=TensorCore.mGetEntity(eventArgs.entityID)\nif not player or not titan then return end\nlocal bombs=TensorCore.getEntityGroupList(\"ContentID\",{contentid=1803,subgroup=\"Number\",noAliveCheck=true})\nlocal count=0\nfor _,bomb in pairs(bombs) do count=count+1 end\nif count<5 then return end\nlocal bestScore,bestX,bestZ,bestLandingX,bestLandingZ=-math.huge,nil,nil,nil,nil\nfor degree=0,359 do\n local angle=degree*math.pi/180\n local ux,uz=math.sin(angle),math.cos(angle)\n local lx,lz=titan.pos.x+ux*28,titan.pos.z+uz*28\n local dx,dz=lx-100,lz-100\n local score=16-math.sqrt(dx*dx+dz*dz)\n if score>0 then\n  for _,bomb in pairs(bombs) do\n   local bx,bz=lx-bomb.pos.x,lz-bomb.pos.z\n   score=math.min(score,math.sqrt(bx*bx+bz*bz)-6.3)\n  end\n  if score>bestScore then bestScore,bestX,bestZ,bestLandingX,bestLandingZ=score,titan.pos.x+ux*4,titan.pos.z+uz*4,lx,lz end\n end\nend\nif not bestX or bestScore<1.5 then return end\nlocal duration=math.max(100,eventArgs.channelTimeMax*1000+300-(Now()-self.waitUntil+350))\nlocal state={draws={}};data.uwu_upheaval_guidance=state\nlocal target={x=bestX,y=player.pos.y,z=bestZ}\nlocal drawer=TensorCore.getCachedDrawer(0x5530E080,0xCC30E080,0xFF30E080,0xFF30E080,3)\nlocal id=drawer:addTimedCircle(duration,target.x,target.y,target.z,0.18,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nif id then state.draws[#state.draws+1]=id end\nlocal distance=TensorCore.getDistance2d(player.pos,target)\nif distance>0.3 then\n id=drawer:addTimedArrow(duration,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,target),math.max(0.1,distance-0.5),0.6,0.5,1.5,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if id then state.draws[#state.draws+1]=id end\nend\nlocal landing={draws={}};data.uwu_upheaval_landing=landing\nlocal landingID=drawer:addTimedCircle(duration+2500,bestLandingX,player.pos.y,bestLandingZ,1,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nif landingID then landing.draws[#landing.draws+1]=landingID end\nTensorCore.timelineLogToFile(string.format(\"[UWU Upheaval] bombs=%d score=%.3f boss=(%.2f,%.2f) start=(%.2f,%.2f) landing=(%.2f,%.2f)\\n\",count,bestScore,titan.pos.x,titan.pos.z,bestX,bestZ,bestLandingX,bestLandingZ))\nself.used=true",
 							conditions = 
 							{
 								
 								{
-									"fecf388b-1517-1d6b-aa2e-c75136424696",
+									"a9203cba-b267-dc88-a7da-f4e20692c694",
 									true,
 								},
 							},
@@ -9858,7 +9921,7 @@ local tbl =
 							conditionLua = "return eventArgs.entityContentID == 1801 and eventArgs.spellID == 11111",
 							dequeueIfLuaFalse = true,
 							name = "Upheaval cast",
-							uuid = "fecf388b-1517-1d6b-aa2e-c75136424696",
+							uuid = "a9203cba-b267-dc88-a7da-f4e20692c694",
 							version = 3,
 						},
 					},
@@ -9881,7 +9944,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "LPDU Guidance",
-				uuid = "02f33714-e43e-1caf-8349-0b2d0ddbba84",
+				uuid = "d724f989-026b-34ab-929d-4cd401c3c2e5",
 			},
 			objectType = "folder",
 		},
@@ -9901,12 +9964,12 @@ local tbl =
 							{
 								
 								{
-									"f39dbf60-4086-6bfa-acb7-3021ef6528a3",
+									"cd1beff6-db11-4ecc-8111-0311ee6b94c9",
 									true,
 								},
 							},
 							name = "Clear completed knockback",
-							uuid = "e5e3c084-865b-cf4f-b438-e474423af667",
+							uuid = "255d4f18-c449-899c-b728-3ffa442b9b80",
 							version = 2.1,
 						},
 					},
@@ -9921,7 +9984,7 @@ local tbl =
 							conditionLua = "return eventArgs.entityContentID == 1801 and eventArgs.spellID == 11111",
 							dequeueIfLuaFalse = true,
 							name = "Upheaval resolved",
-							uuid = "f39dbf60-4086-6bfa-acb7-3021ef6528a3",
+							uuid = "cd1beff6-db11-4ecc-8111-0311ee6b94c9",
 							version = 3,
 						},
 					},
@@ -9934,7 +9997,7 @@ local tbl =
 				timelineIndex = 84,
 				timerEndOffset = 3,
 				timerStartOffset = -6,
-				uuid = "f4100013-001d-80c4-ac11-b3fd0aba10ee",
+				uuid = "dc2e2c47-720c-184a-8adb-ca1c0b532d21",
 				version = 2,
 			},
 		},
@@ -11198,7 +11261,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "LPDU Guidance",
-				uuid = "cc41d637-893e-5d24-960c-ba9507e92982",
+				uuid = "26684039-0a0b-b97e-a694-be8f87370bb9",
 			},
 			objectType = "folder",
 		},
@@ -11213,27 +11276,27 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local titan=TensorCore.mGetEntity(eventArgs.entityID)\nif not titan then return end\nlocal old=data.uwu_geocrush_last\nif old and old.draws then for _,id in ipairs(old.draws) do Argus.deleteTimedShape(id) end end\ndata.uwu_geocrush_last={id=eventArgs.entityID,x=titan.pos.x,z=titan.pos.z,start=Now(),draws={}}\nself.used=true",
+							actionLua = "local titan=TensorCore.mGetEntity(eventArgs.entityID)\nif not titan then return end\nlocal old=data.uwu_geocrush_last\nif old and old.draws then for _,id in ipairs(old.draws) do Argus.deleteTimedShape(id) end end\ndata.uwu_geocrush_last={id=eventArgs.entityID,x=titan.pos.x,z=titan.pos.z,start=Now(),draws={}}\nTensorCore.timelineLogToFile(string.format(\"[UWU Geocrush] jump id=%d source=(%.2f,%.2f) heading=%.3f\\n\",eventArgs.entityID,titan.pos.x,titan.pos.z,titan.pos.h))\nself.used=true",
 							conditions = 
 							{
 								
 								{
-									"72ce14d0-b5f6-90b7-8918-57593bd2725a",
+									"105c1c22-a4ca-6a7b-ad86-b112e9a22703",
 									true,
 								},
 								
 								{
-									"14f3f7a3-bfd8-c533-9a04-4d7c7ce418ee",
+									"9e57966b-e45b-05f7-a832-5d63eee71a4b",
 									true,
 								},
 								
 								{
-									"e4e6df92-5995-7052-82f0-7a7bf160cddb",
+									"84a59526-0554-07d7-999e-0bd6ea92bb11",
 									true,
 								},
 							},
 							name = "Remember jump source",
-							uuid = "c3983eb8-e3ff-6efe-8700-91843acacee9",
+							uuid = "fb2408ba-ebf7-d901-958c-e3bb80f17ac9",
 							version = 2.1,
 						},
 					},
@@ -11250,7 +11313,7 @@ local tbl =
 							eventArgType = 4,
 							eventIntValue = 7737,
 							name = "jump",
-							uuid = "72ce14d0-b5f6-90b7-8918-57593bd2725a",
+							uuid = "105c1c22-a4ca-6a7b-ad86-b112e9a22703",
 							version = 3,
 						},
 					},
@@ -11264,7 +11327,7 @@ local tbl =
 							eventArgType = 2,
 							eventIntValue = 1,
 							name = "animationSlot",
-							uuid = "14f3f7a3-bfd8-c533-9a04-4d7c7ce418ee",
+							uuid = "9e57966b-e45b-05f7-a832-5d63eee71a4b",
 							version = 3,
 						},
 					},
@@ -11277,7 +11340,7 @@ local tbl =
 							eventArgOptionType = 2,
 							eventEntityContentID = 1801,
 							name = "Titan",
-							uuid = "e4e6df92-5995-7052-82f0-7a7bf160cddb",
+							uuid = "84a59526-0554-07d7-999e-0bd6ea92bb11",
 							version = 3,
 						},
 					},
@@ -11290,7 +11353,7 @@ local tbl =
 				timelineIndex = 95,
 				timerEndOffset = 1,
 				timerStartOffset = -8,
-				uuid = "44e420ae-3d5b-2117-8af3-26ee98440965",
+				uuid = "80ae144c-5ac5-11f8-9dc5-7c0600929306",
 				version = 2,
 			},
 		},
@@ -11305,17 +11368,17 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local state=data.uwu_geocrush_last\nif Now()-state.start<650 then return end\nlocal titan=TensorCore.mGetEntity(state.id)\nif not titan then return end\nlocal vx,vz=math.sin(titan.pos.h),math.cos(titan.pos.h)\nlocal ox,oz=state.x-100,state.z-100\nlocal b=ox*vx+oz*vz\nlocal discriminant=b*b+196-ox*ox-oz*oz\nif discriminant<0 then self.used=true;return end\nlocal distance=-b+math.sqrt(discriminant)\nlocal sourceX,sourceZ=state.x+vx*distance,state.z+vz*distance\nlocal duration=math.max(100,5200-(Now()-state.start))\nlocal drawer=TensorCore.getMoogleDrawer()\nlocal id=drawer:addTimedCircle(duration,sourceX,titan.pos.y,sourceZ,24,0,false,true)\nif id then state.draws[#state.draws+1]=id end\nid=drawer:addTimedDonut(duration,100,titan.pos.y,100,12,16,0,false,true)\nif id then state.draws[#state.draws+1]=id end\nlocal player=TensorCore.mGetPlayer()\nif not player then return end\nlocal dx,dz=sourceX-100,sourceZ-100\nlocal length=math.sqrt(dx*dx+dz*dz)\nif length<1 then self.used=true;return end\nlocal target={x=100-dx/length*11.25,y=player.pos.y,z=100-dz/length*11.25}\nlocal green=TensorCore.getCachedDrawer(0x5533FF66,0xCC33FF66,0xFF33FF66,0xFF000000,3)\nlocal id=green:addTimedCircle(duration,target.x,target.y,target.z,0.35,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nif id then state.draws[#state.draws+1]=id end\nlocal distance=TensorCore.getDistance2d(player.pos,target)\nif distance>0.5 then\n id=green:addTimedArrow(duration,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,target),math.max(0.1,distance-1),1,1,2.4,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if id then state.draws[#state.draws+1]=id end\nend\nstate.predicted=true\nself.used=true",
+							actionLua = "local state=data.uwu_geocrush_last\nif Now()-state.start<650 then return end\nlocal titan=TensorCore.mGetEntity(state.id)\nif not titan then return end\nlocal vx,vz=math.sin(titan.pos.h),math.cos(titan.pos.h)\nlocal ox,oz=state.x-100,state.z-100\nlocal b=ox*vx+oz*vz\nlocal discriminant=b*b+196-ox*ox-oz*oz\nif discriminant<0 then self.used=true;return end\nlocal distance=-b+math.sqrt(discriminant)\nlocal sourceX,sourceZ=state.x+vx*distance,state.z+vz*distance\nlocal duration=math.max(100,5200-(Now()-state.start))\nlocal drawer=TensorCore.getMoogleDrawer()\nlocal id=drawer:addTimedCircle(duration,sourceX,titan.pos.y,sourceZ,24,0,false,true)\nif id then state.draws[#state.draws+1]=id end\nid=drawer:addTimedDonut(duration,100,titan.pos.y,100,12,16,0,false,true)\nif id then state.draws[#state.draws+1]=id end\nlocal player=TensorCore.mGetPlayer()\nif not player then return end\nlocal dx,dz=sourceX-100,sourceZ-100\nlocal length=math.sqrt(dx*dx+dz*dz)\nif length<1 then self.used=true;return end\nlocal target={x=100-dx/length*11.25,y=player.pos.y,z=100-dz/length*11.25}\nlocal green=TensorCore.getCachedDrawer(0x5533FF66,0xCC33FF66,0xFF33FF66,0xFF000000,3)\nlocal id=green:addTimedCircle(duration,target.x,target.y,target.z,0.35,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nif id then state.draws[#state.draws+1]=id end\nlocal distance=TensorCore.getDistance2d(player.pos,target)\nif distance>0.5 then\n id=green:addTimedArrow(duration,player.pos.x,player.pos.y,player.pos.z,TensorCore.getHeadingToTarget(player.pos,target),math.max(0.1,distance-1),1,1,2.4,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if id then state.draws[#state.draws+1]=id end\nend\nTensorCore.timelineLogToFile(string.format(\"[UWU Geocrush] preview source=(%.2f,%.2f) safe=(%.2f,%.2f) elapsed=%d\\n\",sourceX,sourceZ,target.x,target.z,Now()-state.start))\nstate.predicted=true\nself.used=true",
 							conditions = 
 							{
 								
 								{
-									"75565fc6-e3f4-18a9-8131-107864c13a23",
+									"e61154f8-456a-f775-8a0c-199766c727a2",
 									true,
 								},
 							},
 							name = "Preview proximity and safe edge",
-							uuid = "a9ae73af-2b05-d257-ad5e-7d858acb435f",
+							uuid = "3221d55b-12a2-4b00-b816-d976ad6206cd",
 							version = 2.1,
 						},
 					},
@@ -11329,7 +11392,7 @@ local tbl =
 							category = "Lua",
 							conditionLua = "local s=data.uwu_geocrush_last\nreturn s ~= nil and not s.predicted and not s.channelled and not s.finished",
 							name = "Pending jump prediction",
-							uuid = "75565fc6-e3f4-18a9-8131-107864c13a23",
+							uuid = "e61154f8-456a-f775-8a0c-199766c727a2",
 							version = 3,
 						},
 					},
@@ -11341,7 +11404,7 @@ local tbl =
 				timelineIndex = 95,
 				timerEndOffset = 1,
 				timerStartOffset = -8,
-				uuid = "8c651dae-4c82-3b5b-a270-79bd2c3a63b5",
+				uuid = "71c90498-94c6-f285-a777-6c42f7c4db41",
 				version = 2,
 			},
 		},
@@ -11361,12 +11424,12 @@ local tbl =
 							{
 								
 								{
-									"bacb1cf4-4dde-d42f-b074-2d74407462d9",
+									"657f1469-8929-a591-8540-475915045631",
 									true,
 								},
 							},
 							name = "Confirmed safe opposite edge",
-							uuid = "175f8dad-c33b-d4d7-ac4d-c7103a52015b",
+							uuid = "1fa3dcf1-fb92-4b23-9fa2-f4edf1cc1ac3",
 							version = 2.1,
 						},
 					},
@@ -11381,7 +11444,7 @@ local tbl =
 							conditionLua = "return eventArgs.entityContentID == 1801 and eventArgs.spellID == 11110",
 							dequeueIfLuaFalse = true,
 							name = "Geocrush cast",
-							uuid = "bacb1cf4-4dde-d42f-b074-2d74407462d9",
+							uuid = "657f1469-8929-a591-8540-475915045631",
 							version = 3,
 						},
 					},
@@ -11394,7 +11457,7 @@ local tbl =
 				timelineIndex = 95,
 				timerEndOffset = 1,
 				timerStartOffset = -8,
-				uuid = "00ed5b6e-7578-6ce6-bce0-8370a399c95c",
+				uuid = "8623a21f-158c-208f-8368-465967bca6ad",
 				version = 2,
 			},
 		},
@@ -11414,12 +11477,12 @@ local tbl =
 							{
 								
 								{
-									"ba525dfc-9098-ca7c-859a-50e4d6bce9af",
+									"6202581a-fe0a-c811-a520-733c7dc48538",
 									true,
 								},
 							},
 							name = "Clear completed Geocrush",
-							uuid = "c7d81331-87ba-fd01-a37b-ddb21072cfe5",
+							uuid = "18c6f6c1-ae5a-6346-92c8-a62782b92403",
 							version = 2.1,
 						},
 					},
@@ -11434,7 +11497,7 @@ local tbl =
 							conditionLua = "return eventArgs.entityContentID == 1801 and eventArgs.spellID == 11110",
 							dequeueIfLuaFalse = true,
 							name = "Geocrush resolved",
-							uuid = "ba525dfc-9098-ca7c-859a-50e4d6bce9af",
+							uuid = "6202581a-fe0a-c811-a520-733c7dc48538",
 							version = 3,
 						},
 					},
@@ -11447,7 +11510,7 @@ local tbl =
 				timelineIndex = 95,
 				timerEndOffset = 1,
 				timerStartOffset = -8,
-				uuid = "2ce12d47-599f-5859-8ade-bc862de03c2a",
+				uuid = "e3952b79-0f24-9c5c-9b9e-f68306d3eb64",
 				version = 2,
 			},
 		},
@@ -15925,12 +15988,12 @@ local tbl =
 							{
 								
 								{
-									"5a6a3e49-16fd-2294-9951-73ba9a52c693",
+									"035097d1-5b5e-d444-9e32-868138a27b92",
 									true,
 								},
 							},
 							name = "Mark assigned live orb",
-							uuid = "d3864155-5705-5aff-bc54-2adec3ceee3f",
+							uuid = "d9083d4b-c627-5ef8-b16f-8901d8ee6243",
 							version = 2.1,
 						},
 					},
@@ -15946,7 +16009,7 @@ local tbl =
 							eventArgOptionType = 2,
 							eventEntityContentID = 2138,
 							name = "Annihilation orb",
-							uuid = "5a6a3e49-16fd-2294-9951-73ba9a52c693",
+							uuid = "035097d1-5b5e-d444-9e32-868138a27b92",
 							version = 3,
 						},
 					},
@@ -15971,7 +16034,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "LPDU Guidance",
-				uuid = "2fa7c192-c25c-036b-ba6f-9b57a03ad363",
+				uuid = "173658ce-1c1f-4f42-86da-d0e22cee1d52",
 			},
 			objectType = "folder",
 		},
@@ -15991,12 +16054,12 @@ local tbl =
 							{
 								
 								{
-									"15715973-93ea-43e0-b589-c957de6a3974",
+									"41fb1ad1-7917-5510-8b1b-0c2173e395ea",
 									true,
 								},
 							},
 							name = "Clear resolved orb",
-							uuid = "3017aef2-bb74-df33-80a7-cd70af669d77",
+							uuid = "fd50241f-916c-4c0a-b7e4-3c3e7003d01c",
 							version = 2.1,
 						},
 					},
@@ -16011,7 +16074,7 @@ local tbl =
 							conditionLua = "return eventArgs.entityContentID == 2138 and eventArgs.spellID == 11137",
 							dequeueIfLuaFalse = true,
 							name = "Orb explosion",
-							uuid = "15715973-93ea-43e0-b589-c957de6a3974",
+							uuid = "41fb1ad1-7917-5510-8b1b-0c2173e395ea",
 							version = 3,
 						},
 					},
@@ -16025,7 +16088,7 @@ local tbl =
 				timelineIndex = 155,
 				timerEndOffset = 28,
 				timerStartOffset = -4,
-				uuid = "9dd20c4d-5e0f-a382-a5b4-cc45ce7f4b46",
+				uuid = "5f012aed-dc34-9e1d-89c9-0cb421913d2f",
 				version = 2,
 			},
 		},
@@ -16045,12 +16108,12 @@ local tbl =
 							{
 								
 								{
-									"d1cc3fba-ffdf-152e-b347-6800588c2579",
+									"00b7ab2d-2f90-4b52-b8b5-b6e9ef44eeb3",
 									true,
 								},
 							},
 							name = "Clear removed orb",
-							uuid = "eda473d1-8bcb-88b2-a154-18794cdbfff5",
+							uuid = "7eb5f529-a0a8-f5b8-89c9-2cff6adfb59b",
 							version = 2.1,
 						},
 					},
@@ -16065,7 +16128,7 @@ local tbl =
 							conditionLua = "local s=data.uwu_annihilation_orbs\nreturn s and s.live and s.live[eventArgs.entityID] ~= nil",
 							dequeueIfLuaFalse = true,
 							name = "Owned orb",
-							uuid = "d1cc3fba-ffdf-152e-b347-6800588c2579",
+							uuid = "00b7ab2d-2f90-4b52-b8b5-b6e9ef44eeb3",
 							version = 3,
 						},
 					},
@@ -16079,7 +16142,7 @@ local tbl =
 				timelineIndex = 155,
 				timerEndOffset = 28,
 				timerStartOffset = -4,
-				uuid = "4054ad66-2f5b-9fb7-a7da-5399f1570070",
+				uuid = "e6f083dd-b73c-290f-9c93-5e5b4e2bf93e",
 				version = 2,
 			},
 		},
@@ -16103,7 +16166,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "LPDU Guidance",
-				uuid = "049b6f95-2b95-66a0-93fe-203a0b8c16a1",
+				uuid = "4807115d-5bd3-2ac8-bf8a-55124ffbe78c",
 			},
 			objectType = "folder",
 		},
@@ -16113,7 +16176,7 @@ local tbl =
 			{
 				displayPath = "LPDU Guidance",
 				name = "Mesohigh",
-				uuid = "30ab2113-69fd-e483-84b1-45d3510b378d",
+				uuid = "3169ff9c-a48e-cc2b-8ed3-b7ffbdc72138",
 			},
 			objectType = "folder",
 		},
@@ -16133,12 +16196,12 @@ local tbl =
 							{
 								
 								{
-									"4838ff48-9d59-0cc3-b198-0cc8b29978fc",
+									"a5abd7f7-78eb-ae15-8d3b-322b8e2f6ba3",
 									true,
 								},
 							},
 							name = "Track source and current holder",
-							uuid = "669800c9-0a73-a1c5-afc1-81dce88a87ac",
+							uuid = "1977c248-71f5-6738-b171-7c6a3dfaacd0",
 							version = 2.1,
 						},
 					},
@@ -16153,7 +16216,7 @@ local tbl =
 							conditionLua = "return eventArgs.sourceEntityContentID == 1644 and (eventArgs.newTetherID == 4 or eventArgs.oldTetherID == 4)",
 							dequeueIfLuaFalse = true,
 							name = "Mesohigh source / change",
-							uuid = "4838ff48-9d59-0cc3-b198-0cc8b29978fc",
+							uuid = "a5abd7f7-78eb-ae15-8d3b-322b8e2f6ba3",
 							version = 3,
 						},
 					},
@@ -16167,7 +16230,7 @@ local tbl =
 				timelineIndex = 156,
 				timerEndOffset = 4,
 				timerStartOffset = -8,
-				uuid = "cd2bf3a6-73c3-7159-8399-2edd4e1d0571",
+				uuid = "d95f60a8-2ebd-8fed-b757-d7e6bcef5f29",
 				version = 2,
 			},
 		},
@@ -16192,7 +16255,7 @@ local tbl =
 				timelineIndex = 156,
 				timerEndOffset = 4,
 				timerStartOffset = -8,
-				uuid = "244cc296-bb99-dd65-8306-aaf6f2c32bd6",
+				uuid = "530c456f-6bba-f684-a195-a3001c8207b5",
 				version = 2,
 			},
 		},
@@ -16902,7 +16965,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "LPDU Guidance",
-				uuid = "2aecbfc1-1f42-28a8-90cd-d8e38890e830",
+				uuid = "122f984b-91f3-2390-8b1e-6c66688bc87d",
 			},
 			objectType = "folder",
 		},
@@ -16912,7 +16975,7 @@ local tbl =
 			{
 				displayPath = "LPDU Guidance",
 				name = "Mesohigh",
-				uuid = "ba76269f-d303-885e-b1ff-7fdac04cb176",
+				uuid = "baa5d272-bf08-e602-b7e6-5370fbe362de",
 			},
 			objectType = "folder",
 		},
@@ -16932,12 +16995,12 @@ local tbl =
 							{
 								
 								{
-									"0868ca13-0fcf-ab3c-806e-1775fa2f41e1",
+									"2784e2d6-f395-be54-8fd9-e7895faf4310",
 									true,
 								},
 							},
 							name = "Track source and current holder",
-							uuid = "1bcafbe0-9635-bd5c-bedb-08c3b6f48544",
+							uuid = "ba055415-413e-0e69-8723-b2edad6b61bd",
 							version = 2.1,
 						},
 					},
@@ -16952,7 +17015,7 @@ local tbl =
 							conditionLua = "return eventArgs.sourceEntityContentID == 1644 and (eventArgs.newTetherID == 4 or eventArgs.oldTetherID == 4)",
 							dequeueIfLuaFalse = true,
 							name = "Mesohigh source / change",
-							uuid = "0868ca13-0fcf-ab3c-806e-1775fa2f41e1",
+							uuid = "2784e2d6-f395-be54-8fd9-e7895faf4310",
 							version = 3,
 						},
 					},
@@ -16966,7 +17029,7 @@ local tbl =
 				timelineIndex = 169,
 				timerEndOffset = 4,
 				timerStartOffset = -8,
-				uuid = "d3232d57-7c45-d768-bf7d-0ad0f1517a9b",
+				uuid = "abe78394-f446-16e1-8f89-855216067e84",
 				version = 2,
 			},
 		},
@@ -16991,7 +17054,7 @@ local tbl =
 				timelineIndex = 169,
 				timerEndOffset = 4,
 				timerStartOffset = -8,
-				uuid = "a8dd1f3f-b70a-1473-aaad-1d1be352b3d0",
+				uuid = "ea64dc4c-7750-a606-9427-e98b015ed542",
 				version = 2,
 			},
 		},
@@ -17014,12 +17077,12 @@ local tbl =
 							{
 								
 								{
-									"341f1ae4-2043-bade-b0c2-ed40d227e200",
+									"258f5f72-bef2-7eee-a51a-ecdbc04e1465",
 									true,
 								},
 							},
 							name = "Prepare to take the next tether",
-							uuid = "bea9940e-e5de-5eb0-9de5-57d873423e1c",
+							uuid = "72ed9473-7fd4-600c-8a7c-195f46a13d91",
 							version = 2.1,
 						},
 					},
@@ -17033,7 +17096,7 @@ local tbl =
 							category = "Lua",
 							conditionLua = "local Roster = AnyoneCore.Roster\nif not Roster or not Roster.current() then return false end\nlocal slot = Roster.mySlot()\nlocal player = TensorCore.mGetPlayer()\nreturn player ~= nil and (slot == \"H1\" or slot == \"H2\") and TensorCore.hasBuff(player,1578)",
 							name = "Assigned tether taker",
-							uuid = "341f1ae4-2043-bade-b0c2-ed40d227e200",
+							uuid = "258f5f72-bef2-7eee-a51a-ecdbc04e1465",
 							version = 3,
 						},
 					},
@@ -17045,7 +17108,7 @@ local tbl =
 				timelineIndex = 169,
 				timerEndOffset = -9,
 				timerStartOffset = -10,
-				uuid = "d014cb14-14f3-1273-8990-f1f612978e55",
+				uuid = "f47b8592-dcc1-e1c7-9819-4992f4a40941",
 				version = 2,
 			},
 		},
@@ -19350,7 +19413,7 @@ local tbl =
 			{
 				displayPath = "",
 				name = "LPDU Guidance",
-				uuid = "6ff41b16-a4d5-caa0-a302-d104d6c497f1",
+				uuid = "8df09589-e5cc-de5c-991d-f9a118c66576",
 			},
 			objectType = "folder",
 		},
@@ -19360,7 +19423,7 @@ local tbl =
 			{
 				displayPath = "LPDU Guidance",
 				name = "Mesohigh",
-				uuid = "34ed18d7-09a1-8bde-b13f-4bba67c739c4",
+				uuid = "1884d259-c4a3-a81d-b0b5-7ddc8eeaa6a3",
 			},
 			objectType = "folder",
 		},
@@ -19380,12 +19443,12 @@ local tbl =
 							{
 								
 								{
-									"adc53763-dee3-b367-9b53-d7db6b16eea1",
+									"8013c2f6-2f16-b127-8284-3b4dfd5102ea",
 									true,
 								},
 							},
 							name = "Track source and current holder",
-							uuid = "b0cff171-8f37-9f7a-97f9-c82298eec721",
+							uuid = "fcbf49b6-7793-39e2-8e86-2a4ba9a2ef5f",
 							version = 2.1,
 						},
 					},
@@ -19400,7 +19463,7 @@ local tbl =
 							conditionLua = "return eventArgs.sourceEntityContentID == 1644 and (eventArgs.newTetherID == 4 or eventArgs.oldTetherID == 4)",
 							dequeueIfLuaFalse = true,
 							name = "Mesohigh source / change",
-							uuid = "adc53763-dee3-b367-9b53-d7db6b16eea1",
+							uuid = "8013c2f6-2f16-b127-8284-3b4dfd5102ea",
 							version = 3,
 						},
 					},
@@ -19414,7 +19477,7 @@ local tbl =
 				timelineIndex = 202,
 				timerEndOffset = 4,
 				timerStartOffset = -8,
-				uuid = "64c6927b-fe3c-7098-be74-e3aef073412e",
+				uuid = "b7474158-5a2c-be8b-a70f-4b3fa6cab58c",
 				version = 2,
 			},
 		},
@@ -19439,7 +19502,7 @@ local tbl =
 				timelineIndex = 202,
 				timerEndOffset = 4,
 				timerStartOffset = -8,
-				uuid = "d7c4cafa-62ba-7c06-9dd6-de9f6b74bda7",
+				uuid = "ffe583c5-2753-b002-87fe-b252c0aa5abd",
 				version = 2,
 			},
 		},
@@ -19462,12 +19525,12 @@ local tbl =
 							{
 								
 								{
-									"a9d29ff9-b9b7-c0a4-aeac-b62360157df1",
+									"e1db8988-20c1-2560-a5e4-a483f447e56f",
 									true,
 								},
 							},
 							name = "Prepare to take Garuda tether",
-							uuid = "8ecfcc0c-2a36-9370-9d85-c85b5fd2b8e7",
+							uuid = "9bad6ca1-654e-b8c7-aef9-842555389964",
 							version = 2.1,
 						},
 					},
@@ -19481,7 +19544,7 @@ local tbl =
 							category = "Lua",
 							conditionLua = "local Roster = AnyoneCore.Roster\nif not Roster or not Roster.current() then return false end\nlocal slot = Roster.mySlot()\nreturn slot == \"T1\"",
 							name = "Assigned tether taker",
-							uuid = "a9d29ff9-b9b7-c0a4-aeac-b62360157df1",
+							uuid = "e1db8988-20c1-2560-a5e4-a483f447e56f",
 							version = 3,
 						},
 					},
@@ -19493,7 +19556,7 @@ local tbl =
 				timelineIndex = 202,
 				timerEndOffset = -5,
 				timerStartOffset = -6,
-				uuid = "8646f15b-22db-def5-b77f-82acb947d145",
+				uuid = "3eaf97c1-8958-6e6b-a599-8b685a5eef39",
 				version = 2,
 			},
 		},
