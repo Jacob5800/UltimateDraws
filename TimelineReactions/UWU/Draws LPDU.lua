@@ -5306,7 +5306,7 @@ local tbl =
 						{
 							aType = "Alert",
 							alertPriority = 2,
-							alertText = "Ranged start SW. Caster start SE  ",
+							alertText = "Ranged starts SW",
 							conditions = 
 							{
 								
@@ -5316,7 +5316,28 @@ local tbl =
 								},
 							},
 							gVar = "ACR_RikuMNK3_CD",
+							name = "R1: Ranged starts SW",
 							uuid = "2012bfac-34b1-d064-a9a7-c73896519fa0",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertPriority = 2,
+							alertText = "Caster start SE",
+							conditions = 
+							{
+								
+								{
+									"bcc01be2-c7d7-3346-ad55-c1b37c8309ce",
+									true,
+								},
+							},
+							name = "R2: Caster start SE",
+							uuid = "f2d6fcc4-1971-2bfd-83f3-0bfb78692ab3",
 							version = 2.1,
 						},
 					},
@@ -5328,15 +5349,26 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local role = AnyoneCore.Roster.mySlot()\nreturn role == \"R1\" or role == \"R2\"",
-							name = "R1/R2 Only",
+							conditionLua = "local Roster=AnyoneCore.Roster\nif not Roster or not Roster.current() then return false end\nreturn Roster.mySlot()==\"R1\"",
+							name = "Roster R1",
 							uuid = "beef7864-70b8-090a-b0e6-69b657574994",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local Roster=AnyoneCore.Roster\nif not Roster or not Roster.current() then return false end\nreturn Roster.mySlot()==\"R2\"",
+							name = "Roster R2",
+							uuid = "bcc01be2-c7d7-3346-ad55-c1b37c8309ce",
 							version = 3,
 						},
 					},
 				},
 				mechanicTime = 328,
-				name = "[TTS CALLout] ",
+				name = "[Call][Ifrit] R1/R2 starting positions",
 				timelineIndex = 43,
 				timerOffset = 3,
 				uuid = "3f19af91-6517-294d-a6a0-7cad90b71e4d",
