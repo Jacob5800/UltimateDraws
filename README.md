@@ -40,7 +40,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### TEA: LPDU Draws
 
-- Fate Beta marks the west jump bait spot for its assigned player. (07-11-2026)
+- Fate Beta marks the west jump bait spot with a green circle for its assigned player. (07-11-2026)
 
 - Final Word shows march timers only to players who are forced to move. Opening Optical Sight spreads no longer draw fixed-position arrows. Removed the separate Lasers countdown from Fate Alpha. (07-11-2026)
 
