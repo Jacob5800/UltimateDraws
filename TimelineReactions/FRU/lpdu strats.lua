@@ -9694,6 +9694,70 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "32c22cc7-93fa-90a0-a6e8-eb5ce72e7787",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_apoc_movement;local assignment=data.lpdu_p3_apoc_assignment\nif s==nil then return end\nif s.clear==nil then\n function s.clear() for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end;s.shapes={} end\n function s.draw(angle,dist,seconds,text,bx,bz)\n  s.clear();local x=(bx or 100)+math.sin(angle)*dist;local z=(bz or 100)+math.cos(angle)*dist;local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end end\n  AnyoneCore.Shotcall(text,true,seconds,false)\n end\n function s.angle(side)\n  local a=s.first-s.rotation\n  a=(a+math.pi)%(2*math.pi)-math.pi\n  local forDPS=a>=-.1 and a<math.pi-.1\n  if forDPS~=(side==\"dps\") then a=a+math.pi end\n  return a\n end\nend\n-- A destination preview only; active spread/move-in state still starts on Dark Eruption.\nif s.previewShown or s.spreading or s.water2Shown then self.used=true;return end\nif assignment==nil or s.first==nil then return end\nlocal owner=assignment.owner[slot];local side=assignment.side[slot]\nif owner==nil or side==nil then return end\nlocal mid=s.angle(side)\nlocal angle,radius\nif owner==\"H1\" or owner==\"R1\" then angle=mid-math.pi/12;radius=19\nelseif owner==\"H2\" or owner==\"R2\" then angle=mid+math.pi/12;radius=19\nelse\n local pos=(owner==\"T1\" or owner==\"M1\") and 0 or 1\n local alternate=pos==(s.rotation<0 and 1 or 0)\n angle=alternate and mid-s.rotation or mid;radius=10\nend\ns.previewShown=true\ns.draw(angle,radius,8,\"Next safe sector\")\nTensorCore.timelineLogToFile(string.format(\"[FRU Apoc preview] slot=%s owner=%s side=%s angle=%.3f radius=%.1f timer=%.3f\\n\",tostring(slot),tostring(owner),tostring(side),angle,radius,TensorReactions_CurrentTimer))\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"12945158-2284-ccc7-ac78-70756026c980",
+									true,
+								},
+							},
+							name = "Preview next safe sector",
+							uuid = "42b541fe-7b29-de0f-a6cd-56434aff949e",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventSpellID = 40288,
+							name = "Spirit Taker hit",
+							uuid = "12945158-2284-ccc7-ac78-70756026c980",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 2,
+				mechanicTime = 624.7,
+				name = "[LPDU] P3 Apocalypse - Early Safe Sector Preview",
+				timeRange = true,
+				timelineIndex = 146,
+				timerEndOffset = 3,
+				timerStartOffset = -1.7,
+				uuid = "d3668294-42a1-b6c6-9857-a021f9ee3c5c",
+				version = 2,
+			},
+		},
 	},
 	[148] = 
 	{
