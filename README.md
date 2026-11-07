@@ -40,7 +40,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### TEA: LPDU Draws
 
-- LPDU Settings lets you choose visible exaflare circles or subtractive safe zones for both Almighty Judgment sets. (08-11-2026)
+- LPDU Settings lets you choose progressive exaflare circles or subtractive safe zones for both Almighty Judgment sets. Exaflares preview up to three circles per lane and brighten the next wave as impacts resolve. (08-11-2026)
 
 - Fate Alpha countdown labels are optional in LPDU Settings and off by default. (07-11-2026)
 

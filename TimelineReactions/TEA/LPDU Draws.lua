@@ -10473,7 +10473,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.almighty_judgment = data.almighty_judgment or {}\nlocal state = data.almighty_judgment\nlocal now = Now()\n\nif state.revealStart == nil or (state.lastRevealAt ~= nil and TimeSince(state.lastRevealAt) > 10000) then\n    state.revealStart = now\nend\n\nlocal elapsed = TimeSince(state.revealStart)\nlocal timeout\nlocal delay\n\nif elapsed < 1000 then\n    timeout = 6650\n    delay = 0\nelse\n    timeout = 2100\n    delay = 4550\nend\n\nstate.lastRevealAt = now\n\nlocal source = eventArgs.entityID and TensorCore.mGetEntity(eventArgs.entityID)\n\nif source and source.pos then\n    -- Both styles use the same reveal positions and wave timing.\n    local config = TEA_LPDU_Config\n    local showExaflares = config and config.values.judgmentStyle == \"Exaflares\"\n    local terrainFlags = Argus2.RenderFlags.FLAG_WARP_TERRAIN\n    local drawer\n    if showExaflares then\n        drawer = TensorCore.getStaticDrawer(0xD02040FF, 2, 0, terrainFlags)\n    else\n        local occlusionFlags = terrainFlags + Argus2.RenderFlags.FLAG_OCCLUDE\n        drawer = TensorCore.getStaticDrawer(0xFFFFFFFF, 0, 0, occlusionFlags)\n    end\n\n    drawer:addTimedCircle(\n        timeout,\n        source.pos.x,\n        source.pos.y,\n        source.pos.z,\n        6,\n        delay,\n        false,\n        true\n    )\nend\n\nself.used = true",
+							actionLua = "local spell = eventArgs.spellID\nlocal config = TEA_LPDU_Config\nif config and config.values.judgmentStyle == \"Exaflares\" then\n    self.used = true\n    local source = eventArgs.entityID and TensorCore.mGetEntity(eventArgs.entityID)\n    if not source or not source.pos then return end\n\n    -- The arena grid has five east-west lanes. Each set has three reveal\n    -- batches, followed by three matching impact batches.\n    local now = Now()\n    local state = data.teaJudgmentExaflares1\n    if not state then\n        if spell ~= 18575 then return end\n        state = {started = now, wave = 0, resolved = 0, lanes = {}}\n        data.teaJudgmentExaflares1 = state\n    end\n    local remaining = 11500 - (now - state.started)\n    if remaining <= 0 then return end\n\n    local pos = source.pos\n    local row = math.floor((pos.z - 84) / 8 + 0.5)\n    local column = math.floor((pos.x - 84) / 8 + 0.5)\n    if row < 0 or row > 4 or column < 0 or column > 4 then return end\n    local lane = state.lanes[row] or {}\n    state.lanes[row] = lane\n\n    if spell == 18575 then\n        if not state.lastReveal or now - state.lastReveal > 1000 then\n            state.wave = state.wave + 1\n        end\n        state.lastReveal = now\n        for _, circle in ipairs(lane) do\n            if circle.column == column then return end\n        end\n        lane[#lane + 1] = {column = column, wave = state.wave, x = pos.x, y = pos.y, z = pos.z}\n    else\n        -- All circles in an impact batch resolve together.\n        if state.lastImpact and now - state.lastImpact < 1000 then return end\n        state.lastImpact = now\n        state.resolved = state.resolved + 1\n    end\n\n    for _, queued in pairs(state.lanes) do\n        local shown = 0\n        for _, circle in ipairs(queued) do\n            local color\n            if circle.wave > state.resolved and shown < 3 then\n                shown = shown + 1\n                color = circle.wave == state.resolved + 1 and 0xD02040FF or 0x502040FF\n            end\n            if color ~= circle.color then\n                if circle.shape then Argus.deleteTimedShape(circle.shape) end\n                circle.shape = nil\n                circle.color = color\n                if color then\n                    local drawer = TensorCore.getStaticDrawer(color, 2, 0, Argus2.RenderFlags.FLAG_WARP_TERRAIN)\n                    circle.shape = drawer:addTimedCircle(remaining, circle.x, circle.y, circle.z, 6, 0, false, true)\n                end\n            end\n        end\n    end\n    return\nend\n\n-- The subtractive style only consumes reveal events.\nif spell ~= 18575 then\n    self.used = true\n    return\nend\n\ndata.almighty_judgment = data.almighty_judgment or {}\nlocal state = data.almighty_judgment\nlocal now = Now()\n\nif state.revealStart == nil or (state.lastRevealAt ~= nil and TimeSince(state.lastRevealAt) > 10000) then\n    state.revealStart = now\nend\n\nlocal elapsed = TimeSince(state.revealStart)\nlocal timeout\nlocal delay\n\nif elapsed < 1000 then\n    timeout = 6650\n    delay = 0\nelse\n    timeout = 2100\n    delay = 4550\nend\n\nstate.lastRevealAt = now\n\nlocal source = eventArgs.entityID and TensorCore.mGetEntity(eventArgs.entityID)\n\nif source and source.pos then\n    local flags = Argus2.RenderFlags.FLAG_WARP_TERRAIN + Argus2.RenderFlags.FLAG_OCCLUDE\n    local drawer = TensorCore.getStaticDrawer(0xFFFFFFFF, 0, 0, flags)\n\n    drawer:addTimedCircle(\n        timeout,\n        source.pos.x,\n        source.pos.y,\n        source.pos.z,\n        6,\n        delay,\n        false,\n        true\n    )\nend\n\nself.used = true",
 							conditions = 
 							{
 								
@@ -10487,7 +10487,7 @@ local tbl =
 									true,
 								},
 							},
-							name = "Subtract Almighty Judgment sequenced circles",
+							name = "Draw judgment circles by wave",
 							uuid = "b2a467cd-aa95-7c7e-8b8c-3b3e6858e411",
 							version = 2.1,
 						},
@@ -10514,9 +10514,15 @@ local tbl =
 						{
 							category = "Event",
 							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
 							eventArgType = 2,
 							eventSpellID = 18575,
-							name = "Almighty Judgment Reveal",
+							name = "Judgment reveal or impact",
+							spellIDList = 
+							{
+								18575,
+								18576,
+							},
 							uuid = "65ceb04e-1ede-327f-a025-635ba42e5698",
 							version = 3,
 						},
@@ -10711,7 +10717,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.almighty_judgment = data.almighty_judgment or {}\nlocal state = data.almighty_judgment\nlocal now = Now()\n\nif state.revealStart == nil or (state.lastRevealAt ~= nil and TimeSince(state.lastRevealAt) > 10000) then\n    state.revealStart = now\nend\n\nlocal elapsed = TimeSince(state.revealStart)\nlocal timeout\nlocal delay\n\nif elapsed < 1000 then\n    timeout = 6650\n    delay = 0\nelse\n    timeout = 2100\n    delay = 4550\nend\n\nstate.lastRevealAt = now\n\nlocal source = eventArgs.entityID and TensorCore.mGetEntity(eventArgs.entityID)\n\nif source and source.pos then\n    -- Both styles use the same reveal positions and wave timing.\n    local config = TEA_LPDU_Config\n    local showExaflares = config and config.values.judgmentStyle == \"Exaflares\"\n    local terrainFlags = Argus2.RenderFlags.FLAG_WARP_TERRAIN\n    local drawer\n    if showExaflares then\n        drawer = TensorCore.getStaticDrawer(0xD02040FF, 2, 0, terrainFlags)\n    else\n        local occlusionFlags = terrainFlags + Argus2.RenderFlags.FLAG_OCCLUDE\n        drawer = TensorCore.getStaticDrawer(0xFFFFFFFF, 0, 0, occlusionFlags)\n    end\n\n    drawer:addTimedCircle(\n        timeout,\n        source.pos.x,\n        source.pos.y,\n        source.pos.z,\n        6,\n        delay,\n        false,\n        true\n    )\nend\n\nself.used = true",
+							actionLua = "local spell = eventArgs.spellID\nlocal config = TEA_LPDU_Config\nif config and config.values.judgmentStyle == \"Exaflares\" then\n    self.used = true\n    local source = eventArgs.entityID and TensorCore.mGetEntity(eventArgs.entityID)\n    if not source or not source.pos then return end\n\n    -- The arena grid has five east-west lanes. Each set has three reveal\n    -- batches, followed by three matching impact batches.\n    local now = Now()\n    local state = data.teaJudgmentExaflares2\n    if not state then\n        if spell ~= 18575 then return end\n        state = {started = now, wave = 0, resolved = 0, lanes = {}}\n        data.teaJudgmentExaflares2 = state\n    end\n    local remaining = 11500 - (now - state.started)\n    if remaining <= 0 then return end\n\n    local pos = source.pos\n    local row = math.floor((pos.z - 84) / 8 + 0.5)\n    local column = math.floor((pos.x - 84) / 8 + 0.5)\n    if row < 0 or row > 4 or column < 0 or column > 4 then return end\n    local lane = state.lanes[row] or {}\n    state.lanes[row] = lane\n\n    if spell == 18575 then\n        if not state.lastReveal or now - state.lastReveal > 1000 then\n            state.wave = state.wave + 1\n        end\n        state.lastReveal = now\n        for _, circle in ipairs(lane) do\n            if circle.column == column then return end\n        end\n        lane[#lane + 1] = {column = column, wave = state.wave, x = pos.x, y = pos.y, z = pos.z}\n    else\n        -- All circles in an impact batch resolve together.\n        if state.lastImpact and now - state.lastImpact < 1000 then return end\n        state.lastImpact = now\n        state.resolved = state.resolved + 1\n    end\n\n    for _, queued in pairs(state.lanes) do\n        local shown = 0\n        for _, circle in ipairs(queued) do\n            local color\n            if circle.wave > state.resolved and shown < 3 then\n                shown = shown + 1\n                color = circle.wave == state.resolved + 1 and 0xD02040FF or 0x502040FF\n            end\n            if color ~= circle.color then\n                if circle.shape then Argus.deleteTimedShape(circle.shape) end\n                circle.shape = nil\n                circle.color = color\n                if color then\n                    local drawer = TensorCore.getStaticDrawer(color, 2, 0, Argus2.RenderFlags.FLAG_WARP_TERRAIN)\n                    circle.shape = drawer:addTimedCircle(remaining, circle.x, circle.y, circle.z, 6, 0, false, true)\n                end\n            end\n        end\n    end\n    return\nend\n\n-- The subtractive style only consumes reveal events.\nif spell ~= 18575 then\n    self.used = true\n    return\nend\n\ndata.almighty_judgment = data.almighty_judgment or {}\nlocal state = data.almighty_judgment\nlocal now = Now()\n\nif state.revealStart == nil or (state.lastRevealAt ~= nil and TimeSince(state.lastRevealAt) > 10000) then\n    state.revealStart = now\nend\n\nlocal elapsed = TimeSince(state.revealStart)\nlocal timeout\nlocal delay\n\nif elapsed < 1000 then\n    timeout = 6650\n    delay = 0\nelse\n    timeout = 2100\n    delay = 4550\nend\n\nstate.lastRevealAt = now\n\nlocal source = eventArgs.entityID and TensorCore.mGetEntity(eventArgs.entityID)\n\nif source and source.pos then\n    local flags = Argus2.RenderFlags.FLAG_WARP_TERRAIN + Argus2.RenderFlags.FLAG_OCCLUDE\n    local drawer = TensorCore.getStaticDrawer(0xFFFFFFFF, 0, 0, flags)\n\n    drawer:addTimedCircle(\n        timeout,\n        source.pos.x,\n        source.pos.y,\n        source.pos.z,\n        6,\n        delay,\n        false,\n        true\n    )\nend\n\nself.used = true",
 							conditions = 
 							{
 								
@@ -10725,7 +10731,7 @@ local tbl =
 									true,
 								},
 							},
-							name = "Subtract Almighty Judgment sequenced circles",
+							name = "Draw judgment circles by wave",
 							uuid = "acb3a5e1-3aa0-b4cf-a9ac-2b94850f6ce8",
 							version = 2.1,
 						},
@@ -10752,9 +10758,15 @@ local tbl =
 						{
 							category = "Event",
 							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
 							eventArgType = 2,
 							eventSpellID = 18575,
-							name = "Almighty Judgment Reveal",
+							name = "Judgment reveal or impact",
+							spellIDList = 
+							{
+								18575,
+								18576,
+							},
 							uuid = "29f4fe77-9eec-8240-93c6-0e6b8f5651e9",
 							version = 3,
 						},
