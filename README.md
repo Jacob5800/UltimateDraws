@@ -40,7 +40,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### TEA: LPDU Draws
 
-- Fate Beta marks the west jump bait spot with a green circle for its assigned player. Fate Beta also guides players to the donut safe spot after Optical Sight. Inception calls for the party to gather at the Heart one second later. (07-11-2026)
+- Fate Beta marks the west jump bait spot with a green circle for its assigned player. Fate Beta shows a separate arrow to the donut safe spot after your stack or spread resolves. Inception calls for the party to gather at the Heart one second later. (07-11-2026)
 
 - Final Word shows march timers only to players who are forced to move. Opening Optical Sight spreads no longer draw fixed-position arrows. Removed the separate Lasers countdown from Fate Alpha. (07-11-2026)
 

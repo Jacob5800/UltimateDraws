@@ -9881,7 +9881,7 @@ local tbl =
 				name = "[Fate Beta] Position Arrow",
 				timeRange = true,
 				timelineIndex = 179,
-				timerEndOffset = 61.7,
+				timerEndOffset = 43.7,
 				timerStartOffset = -5,
 				uuid = "72b0810f-d804-30ac-a1f4-3ee16a85813a",
 				version = 2,
@@ -9898,7 +9898,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local state = data.fateBeta\nlocal spellID = eventArgs.spellID\n\nif state then\n    if spellID == 18590 then\n        if state.donutPos == nil then\n            local caster = TensorCore.mGetEntity(eventArgs.entityID)\n            if caster and caster.pos then\n                state.donutPos = {\n                    x = caster.pos.x,\n                    y = caster.pos.y,\n                    z = caster.pos.z\n                }\n            end\n        end\n    elseif spellID == 18592 or spellID == 18593 then\n        if spellID == 18592 then\n            state.opticalSight = \"Spread\"\n            state.stackDirection = nil\n        else\n            state.opticalSight = \"Stack\"\n            state.stackDirection = state.color == \"Light\" and \"North\" or \"South\"\n        end\n\n    elseif spellID == 18565 then\n        if state.firstArrowCleared ~= true then\n            state.firstArrowCleared = true\n            state.targetPos = nil\n            state.arrowStage = nil\n        end\n    elseif spellID == 18861 or spellID == 18862 then\n        if state.secondArrowStarted ~= true and state.donutPos then\n            state.secondArrowStarted = true\n            state.targetPos = {\n                x = state.donutPos.x,\n                y = state.donutPos.y,\n                z = state.donutPos.z\n            }\n            state.arrowStage = \"second\"\n\n            local duration = math.max(0.1, 1093.6 - TensorReactions_CurrentTimer)\n            AnyoneCore.Shotcall(\"Under donut\", true, duration, true)\n        end\n    elseif spellID == 18566 then\n        state.targetPos = nil\n        state.arrowStage = nil\n        state.finished = true\n    end\nend\n\nself.used = true",
+							actionLua = "local state = data.fateBeta\nlocal spellID = eventArgs.spellID\n\nif state then\n    if spellID == 18590 then\n        if state.donutPos == nil then\n            local caster = TensorCore.mGetEntity(eventArgs.entityID)\n            if caster and caster.pos then\n                state.donutPos = {\n                    x = caster.pos.x,\n                    y = caster.pos.y,\n                    z = caster.pos.z\n                }\n            end\n        end\n    elseif spellID == 18592 or spellID == 18593 then\n        if spellID == 18592 then\n            state.opticalSight = \"Spread\"\n            state.stackDirection = nil\n        else\n            state.opticalSight = \"Stack\"\n            state.stackDirection = state.color == \"Light\" and \"North\" or \"South\"\n        end\n\n    elseif spellID == 18565 then\n        if state.firstArrowCleared ~= true then\n            state.firstArrowCleared = true\n            state.targetPos = nil\n            state.arrowStage = nil\n        end\n    elseif spellID == 18572 or spellID == 18573 then\n        local player = TensorCore.mGetPlayer()\n        if not player then return end\n        local hit = eventArgs.targetID == player.id\n        for _, id in pairs(eventArgs.hitTargets or {}) do\n            if id == player.id then hit = true; break end\n        end\n        if not hit then self.used = true; return end\n        if state.secondArrowStarted ~= true and state.donutPos then\n            state.secondArrowStarted = true\n            state.targetPos = {\n                x = state.donutPos.x,\n                y = state.donutPos.y,\n                z = state.donutPos.z\n            }\n            state.arrowStage = \"second\"\n\n            local duration = math.max(0.1, 1093.6 - TensorReactions_CurrentTimer)\n            AnyoneCore.Shotcall(\"Under donut\", true, duration, true)\n        end\n    elseif spellID == 18566 then\n        state.targetPos = nil\n        state.arrowStage = nil\n        state.finished = true\n    end\nend\n\nself.used = true",
 							conditions = 
 							{
 								
@@ -9920,7 +9920,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local id = eventArgs.spellID\nreturn id == 18590 or id == 18592 or id == 18593 or id == 18565 or id == 18861 or id == 18862 or id == 18566",
+							conditionLua = "local id = eventArgs.spellID\nreturn id == 18590 or id == 18592 or id == 18593 or id == 18565 or id == 18572 or id == 18573 or id == 18566",
 							dequeueIfLuaFalse = true,
 							name = "Relevant Beta cast",
 							uuid = "6b35243f-2083-9702-b574-6883263a2a42",
@@ -10345,6 +10345,50 @@ local tbl =
 				timelineIndex = 190,
 				timerStartOffset = -5,
 				uuid = "b56d2826-0515-5276-b21b-13c2ac9c5e20",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "8670bbf7-0d52-b40a-a826-9808a2fced55",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local state = data.fateBeta\nlocal player = TensorCore.mGetPlayer()\nlocal sourcePos = player and player.pos\nlocal targetPos = state and state.arrowStage == \"second\" and state.targetPos\n\nif sourcePos and targetPos then\n    local heading = TensorCore.getHeadingToTarget(sourcePos, targetPos)\n    local totalDistance = TensorCore.getDistance2d(sourcePos, targetPos)\n    local scale = math.min(1, totalDistance / 15)\n    local baseWidth = math.max(0.5, scale)\n    local tipWidth = math.max(1.5, 3 * scale)\n    local tipLength = math.max(2, 3 * scale)\n    local baseLength = totalDistance - tipLength\n\n    if baseLength > 1 then\n        local arrowDrawer = TensorCore.getCachedDrawer(\n            0xFF00FFFF,\n            0xFF0088FF,\n            0xFF0000FF,\n            0xFFFFFFFF,\n            2\n        )\n        arrowDrawer:addArrow(\n            sourcePos.x,\n            sourcePos.y,\n            sourcePos.z,\n            heading,\n            baseLength,\n            baseWidth,\n            tipLength,\n            tipWidth,\n            false,\n            Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n        )\n    end\n\n    local spotDrawer = TensorCore.getCachedDrawer(\n        nil,\n        nil,\n        0xFF00FF00,\n        0xFFFFFFFF,\n        2\n    )\n    spotDrawer:addCircle(\n        targetPos.x,\n        targetPos.y,\n        targetPos.z,\n        0.5,\n        false,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\n\nself.used = true",
+							name = "Draw arrow to donut safe spot",
+							uuid = "7c0d2438-7c36-3418-b5f8-b350bd0ab90a",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 1088.6,
+				name = "[Fate Beta] Arrow to donut after stack or spread",
+				timeRange = true,
+				timelineIndex = 190,
+				timerEndOffset = 5.4,
+				timerStartOffset = -1,
+				uuid = "4054bd42-64d5-1356-8732-395019c9ae55",
 				version = 2,
 			},
 		},
