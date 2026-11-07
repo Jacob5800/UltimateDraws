@@ -40,6 +40,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### TEA: LPDU Draws
 
+- The settings window appears at pull start and hides after 20 seconds. (07-11-2026)
+
 - Added True Heart and Perfect Alexander guidance, live Alpha and stack timers, delayed Beta spread cues, prison turn reminders, and optional Ordained and tank LB automation. Improved third Water holder tracking. (07-11-2026)
 
 - Added player-following Water/Lightning countdowns, personal Wormhole soak and ray-bait calls, and Propeller Wind ice-cover reminders; enabled personal Temporal Stasis callouts. (07-11-2026)
