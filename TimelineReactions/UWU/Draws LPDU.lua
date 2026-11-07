@@ -16621,7 +16621,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local target=TensorCore.mGetEntity(eventArgs.entityID)\nif not target then return end\nAnyoneCore.addWorldTextCountdown(5300,{x=target.pos.x,y=target.pos.y+2.5,z=target.pos.z},0xFFFFFFFF,true,1.5)\nself.used=true",
+							actionLua = "AnyoneCore.addWorldTextCountdownOnEnt(5300,eventArgs.entityID,0xFFFFFFFF,true,1.5,2.5,0,\"\")\nself.used=true",
 							conditions = 
 							{
 								
@@ -16780,7 +16780,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "-- Independent UWU settings; available before GUI or targeting reads.\nif not _G.UWU_LPDUSettingsIOReady then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..[[UWU-LPDU.lua]]\n local saved={}\n if FileExists(path) then\n  local loaded=FileLoad(path)\n  if type(loaded)==\"table\" then saved=loaded end\n end\n local current=_G.UWU_LPDUGuiState\n local old=_G.UWU_LPDU_AnnihilationAssignments or {}\n local defaults={automaticOpen=true,ultimaOpen=true,orbsOpen=true,autoTarget=_G.LPDU_UWU_AutoTarget~=false,melee=(old.melee==2 and 2 or 1),solo=old.solo or 0}\n local keys={\"automaticOpen\",\"ultimaOpen\",\"orbsOpen\",\"autoTarget\",\"melee\",\"solo\"}\n local C={}\n for _,key in ipairs(keys) do\n  local value=current and current[key]\n  if value==nil then value=saved[key] end\n  if type(defaults[key])==\"boolean\" then\n   C[key]=type(value)==\"boolean\" and value or defaults[key]\n   if value==false then C[key]=false end\n  else\n   C[key]=type(value)==\"number\" and value>=0 and value<=2 and value%1==0 and value or defaults[key]\n  end\n end\n if C.melee==0 then C.melee=1 end\n function C.save()\n  if not FolderExists(folder) then FolderCreate(folder) end\n  local values={}\n  for _,key in ipairs(keys) do values[key]=C[key] end\n  FileSave(path,values)\n end\n _G.UWU_LPDUGuiState=C\n _G.UWU_LPDU_AnnihilationAssignments={melee=C.melee,solo=C.solo}\n _G.LPDU_UWU_AutoTarget=C.autoTarget\n C.save()\n _G.UWU_LPDUSettingsIOReady=true\nend\n-- Upgrade only an unset melee assignment; preserve either explicit role choice.\ndo\n local preferences=_G.UWU_LPDUGuiState\n if preferences and preferences.melee==0 then\n  preferences.melee=1\n  local assignment=_G.UWU_LPDU_AnnihilationAssignments\n  if assignment then assignment.melee=1 end\n  preferences.save()\n end\nend\nlocal state=data.uwu_annihilation_orbs\nif not state then state={seen={},count=0};data.uwu_annihilation_orbs=state end\nstate.live=state.live or {}\nif not self.orb then\n if state.seen[eventArgs.entityID] or state.count>=4 then self.used=true;return end\n state.count=state.count+1\n state.seen[eventArgs.entityID]=true\n self.orb=state.count\n self.entry={number=self.orb,draws={},expires=Now()+10000}\n state.live[eventArgs.entityID]=self.entry\nend\nif self.entry.finished then self.used=true;return end\nlocal duration=self.entry.expires-Now()\nif duration<=0 then self.used=true;return end\nlocal orbEntity=TensorCore.mGetEntity(eventArgs.entityID)\nif not orbEntity then\n if not self.reportedMissingActor then TensorCore.timelineLogToFile(string.format(\"[UWU orb] waiting for actor=%d orb=%d\\n\",eventArgs.entityID,self.orb));self.reportedMissingActor=true end\n return\nend\nif not self.entry.highlighted then\n local drawer=TensorCore.getCachedDrawer(0x2244FFFF,0x9944FFFF,0xFF44FFFF,0xFF000000,3)\n local id=drawer:addTimedCircle(duration,orbEntity.pos.x,orbEntity.pos.y+0.08,orbEntity.pos.z,6,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if not id then\n  if not self.reportedDrawWait then TensorCore.timelineLogToFile(\"[UWU orb] waiting for world-highlight submission\\n\");self.reportedDrawWait=true end\n  return\n end\n self.entry.draws[#self.entry.draws+1]=id\n self.entry.highlighted=true\n TensorCore.timelineLogToFile(string.format(\"[UWU orb] highlight orb=%d actor=%d position=(%.2f,%.2f,%.2f) shape=%s\\n\",self.orb,eventArgs.entityID,orbEntity.pos.x,orbEntity.pos.y,orbEntity.pos.z,tostring(id)))\nend\nlocal Roster=AnyoneCore.Roster\nif not Roster or not Roster.current() then return end\nlocal slot=Roster.mySlot()\nif not slot then return end\nlocal cfg=_G.UWU_LPDU_AnnihilationAssignments\nlocal orb=self.orb\nlocal assigned,missing=false,false\nif orb<=2 then\n if slot==\"T1\" or slot==\"T2\" then assigned=true\n elseif slot==\"M1\" or slot==\"M2\" then\n  missing=not cfg.melee or cfg.melee==0\n  assigned=(cfg.melee==1 and slot==\"M1\") or (cfg.melee==2 and slot==\"M2\")\n end\nelseif slot==\"T1\" or slot==\"T2\" then\n missing=not cfg.solo or cfg.solo==0\n assigned=(cfg.solo==1 and slot==\"T1\") or (cfg.solo==2 and slot==\"T2\")\nend\nif missing then\n TensorCore.addAlertText(3500,\"Orb \"..orb..\": choose your assignment\",1,2,true)\nelseif assigned then\n if not Roster.isReady() then return end\n local player=TensorCore.mGetPlayer()\n if not player then return end\n local drawer=TensorCore.getCachedDrawer(0x4433FF66,0xCC33FF66,0xFF33FF66,0xFF000000,3)\n local id=drawer:addTimedArrowOnEnt(duration,player.id,0,1,1,2.4,eventArgs.entityID,0,false,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if id then self.entry.draws[#self.entry.draws+1]=id end\n TensorCore.addAlertText(3500,\"Orb \"..orb..(orb<=2 and \": soak with tanks\" or \": solo tank soak\"),1,1,true)\nelse\n TensorCore.addAlertText(3000,\"Orb \"..orb..\": stay clear\",0.9,2,false)\nend\nself.used=true",
+							actionLua = "-- Independent UWU settings; available before GUI or targeting reads.\nif not _G.UWU_LPDUSettingsIOReady then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..[[UWU-LPDU.lua]]\n local saved={}\n if FileExists(path) then\n  local loaded=FileLoad(path)\n  if type(loaded)==\"table\" then saved=loaded end\n end\n local current=_G.UWU_LPDUGuiState\n local old=_G.UWU_LPDU_AnnihilationAssignments or {}\n local defaults={automaticOpen=true,ultimaOpen=true,orbsOpen=true,autoTarget=_G.LPDU_UWU_AutoTarget~=false,melee=(old.melee==2 and 2 or 1),solo=old.solo or 0}\n local keys={\"automaticOpen\",\"ultimaOpen\",\"orbsOpen\",\"autoTarget\",\"melee\",\"solo\"}\n local C={}\n for _,key in ipairs(keys) do\n  local value=current and current[key]\n  if value==nil then value=saved[key] end\n  if type(defaults[key])==\"boolean\" then\n   C[key]=type(value)==\"boolean\" and value or defaults[key]\n   if value==false then C[key]=false end\n  else\n   C[key]=type(value)==\"number\" and value>=0 and value<=2 and value%1==0 and value or defaults[key]\n  end\n end\n if C.melee==0 then C.melee=1 end\n function C.save()\n  if not FolderExists(folder) then FolderCreate(folder) end\n  local values={}\n  for _,key in ipairs(keys) do values[key]=C[key] end\n  FileSave(path,values)\n end\n _G.UWU_LPDUGuiState=C\n _G.UWU_LPDU_AnnihilationAssignments={melee=C.melee,solo=C.solo}\n _G.LPDU_UWU_AutoTarget=C.autoTarget\n C.save()\n _G.UWU_LPDUSettingsIOReady=true\nend\n-- Upgrade only an unset melee assignment; preserve either explicit role choice.\ndo\n local preferences=_G.UWU_LPDUGuiState\n if preferences and preferences.melee==0 then\n  preferences.melee=1\n  local assignment=_G.UWU_LPDU_AnnihilationAssignments\n  if assignment then assignment.melee=1 end\n  preferences.save()\n end\nend\nlocal state=data.uwu_annihilation_orbs\nif not state then state={seen={},count=0};data.uwu_annihilation_orbs=state end\nstate.live=state.live or {}\nif not self.orb then\n if state.seen[eventArgs.entityID] or state.count>=4 then self.used=true;return end\n state.count=state.count+1\n state.seen[eventArgs.entityID]=true\n self.orb=state.count\n self.entry={number=self.orb,draws={},expires=Now()+10000}\n state.live[eventArgs.entityID]=self.entry\nend\nif self.entry.finished then self.used=true;return end\nlocal duration=self.entry.expires-Now()\nif duration<=0 then self.used=true;return end\nlocal orbEntity=TensorCore.mGetEntity(eventArgs.entityID)\nif not orbEntity then\n if not self.reportedMissingActor then TensorCore.timelineLogToFile(string.format(\"[UWU orb] waiting for actor=%d orb=%d\\n\",eventArgs.entityID,self.orb));self.reportedMissingActor=true end\n return\nend\nif not self.entry.highlighted then\n local drawer=TensorCore.getCachedDrawer(0x22FFFF44,0x66FFFF44,0x88FFFF44,0xFF000000,3)\n local id=drawer:addTimedCircleOnEnt(duration,eventArgs.entityID,1,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if not id then\n  if not self.reportedDrawWait then TensorCore.timelineLogToFile(\"[UWU orb] waiting for world-highlight submission\\n\");self.reportedDrawWait=true end\n  return\n end\n self.entry.draws[#self.entry.draws+1]=id\n self.entry.highlighted=true\n TensorCore.timelineLogToFile(string.format(\"[UWU orb] highlight orb=%d actor=%d position=(%.2f,%.2f,%.2f) shape=%s\\n\",self.orb,eventArgs.entityID,orbEntity.pos.x,orbEntity.pos.y,orbEntity.pos.z,tostring(id)))\nend\nlocal Roster=AnyoneCore.Roster\nif not Roster or not Roster.current() then return end\nlocal slot=Roster.mySlot()\nif not slot then return end\nlocal cfg=_G.UWU_LPDU_AnnihilationAssignments\nlocal orb=self.orb\nlocal assigned,missing=false,false\nif orb<=2 then\n if slot==\"T1\" or slot==\"T2\" then assigned=true\n elseif slot==\"M1\" or slot==\"M2\" then\n  missing=not cfg.melee or cfg.melee==0\n  assigned=(cfg.melee==1 and slot==\"M1\") or (cfg.melee==2 and slot==\"M2\")\n end\nelseif slot==\"T1\" or slot==\"T2\" then\n missing=not cfg.solo or cfg.solo==0\n assigned=(cfg.solo==1 and slot==\"T1\") or (cfg.solo==2 and slot==\"T2\")\nend\nif missing then\n TensorCore.addAlertText(3500,\"Orb \"..orb..\": choose your assignment\",1,2,true)\nelseif assigned then\n if not Roster.isReady() then return end\n local player=TensorCore.mGetPlayer()\n if not player then return end\n local drawer=TensorCore.getCachedDrawer(0x4433FF66,0xCC33FF66,0xFF33FF66,0xFF000000,3)\n local id=drawer:addTimedArrowOnEnt(duration,player.id,0,1,1,2.4,eventArgs.entityID,0,false,0,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if id then self.entry.draws[#self.entry.draws+1]=id end\n TensorCore.addAlertText(3500,\"Orb \"..orb..(orb<=2 and \": soak with tanks\" or \": solo tank soak\"),1,1,true)\nelse\n TensorCore.addAlertText(3000,\"Orb \"..orb..\": stay clear\",0.9,2,false)\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -20411,6 +20411,70 @@ local tbl =
 				name = "[Raid Call][UWU] Wait for Feather Rain then Move 1227",
 				timelineIndex = 203,
 				uuid = "0444dc24-ca71-d804-aa25-d7884ee2e1d0",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "aa2743a7-aec0-e738-a26d-6b687e2d22a5",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "AnyoneCore.addWorldTextCountdownOnEnt(5300,eventArgs.entityID,0xFFFFFFFF,true,1.5,2.5,0,\"\")\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"0f732fe3-b247-6ff4-88f3-63621a038409",
+									true,
+								},
+							},
+							name = "Following stack countdown",
+							uuid = "80d03ff3-a412-37bf-ac25-c4b04ac486f5",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventMarkerID = 117,
+							name = "Flaming Crush marker",
+							uuid = "0f732fe3-b247-6ff4-88f3-63621a038409",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 4,
+				mechanicTime = 1227,
+				name = "[LPDU] Suppression stack - Following countdown",
+				timeRange = true,
+				timelineIndex = 203,
+				timerEndOffset = 1,
+				timerStartOffset = -10,
+				uuid = "19b4fd72-d5f7-3af0-8280-5da1a0a6ab82",
 				version = 2,
 			},
 		},

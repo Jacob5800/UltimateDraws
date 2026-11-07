@@ -200,6 +200,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### UWU: LPDU
 
+- Stack countdowns follow their marked player in Annihilation and Suppression. Orb highlights use one small attached cyan circle instead of oversized stationary yellow circles. (07-11-2026)
+
 - Added BossMod-style intermission meteor previews: four surrounding proximity circles leave the centre clear and disappear as each meteor lands. (07-11-2026)
 
 - Raised the NE/NW/SE/SW nail labels slightly further above the nail nameplates, keeping numbered labels in place. (07-11-2026)
@@ -217,8 +219,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 - RPR AutoSim keeps the same boss’s DoT availability continuous across FullDowntime, removing redundant schedule-split warnings while preserving boss lifetimes and downtime. (31-10-2026)
 
 - BLM AutoSim no longer applies the fixed post-gaol recovery movement to everyone. Recovery movement now comes from the personal gaol handlers; earlier Landslide movement remains unchanged. (31-10-2026)
-
-- Shared draws now call “Melee: take the light orb” when Titan’s Beyond Limits orb appears, only for melee still missing the buff. (31-10-2026)
 
 
 ### Q40: Shared AutoSim
