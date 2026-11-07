@@ -5058,7 +5058,7 @@ local tbl =
 				throttleTime = 100,
 				timeRange = true,
 				timelineIndex = 102,
-				timerStartOffset = -3.5,
+				timerStartOffset = -5.4,
 				uuid = "d8bfeb8c-c6a7-3401-9cdf-7af962690898",
 				version = 2,
 			},
