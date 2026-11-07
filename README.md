@@ -40,6 +40,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### TEA: LPDU Draws
 
+- Added personal Lightning handoff arrows, Earth Missile bait spots for OT and R1, live Hidden Mine markers, and a support lineup reminder for third Nisi. (08-11-2026)
+
 - R1 gets an early east-side bait call and green marker for P2 Super Jump. (08-11-2026)
 
 - Third Nisi pass guides DPS to the live Verdict match and clears the arrow after the transfer. (08-11-2026)
@@ -57,8 +59,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 - Double Rocket Punch alerts now only go to tanks and healers. (07-11-2026)
 
 - Added personal crystal and orb placement calls during Inception, available from 547 seconds, and a countdown on the final Wormhole puddle visible only to its assigned soaker. (07-11-2026)
-
-- True Heart callouts now tell players to follow their arrow and whether to join the tank stack. (07-11-2026)
 
 ### TEA: ACR3 Opti
 

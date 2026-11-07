@@ -3245,6 +3245,40 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos or not TensorCore.hasBuff(player, 2143) then return end\nlocal roster = AnyoneCore.Roster\nif not roster or not roster.current() or not roster.isReady() then return end\nlocal receiver = roster.entOf(\"T1\")\nif not receiver or receiver.id == player.id or not receiver.pos then return end\nlocal distance = TensorCore.getDistance2d(player.pos, receiver.pos)\nif distance <= 1.3 then return end\nlocal drawer = TensorCore.getCachedDrawer(0xFFFF99DD, 0xFFFF99DD, 0xFFFFFFFF, 0xFFFFFFFF, 2)\nlocal tip = math.min(1.1, distance * 0.4)\ndrawer:addArrow(player.pos.x, player.pos.y, player.pos.z,\n    TensorCore.getHeadingToTarget(player.pos, receiver.pos),\n    distance - tip, 0.4, tip, 1.1, false, Argus2.RenderFlags.FLAG_WARP_TERRAIN)\nself.used = true\n",
+							name = "Lightning - Pass 1 arrow",
+							uuid = "271889ec-5abc-a86a-a99a-0cbd89119e63",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "P2 - Brute Justice + Cruise Chaser",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 272.7,
+				name = "[LPDU] Lightning - Pass 1 arrow",
+				timeRange = true,
+				timelineIndex = 66,
+				timerEndOffset = 0.2,
+				timerStartOffset = -8,
+				uuid = "f7560aa1-92e4-e71c-bc27-6d28386f4b87",
+				version = 2,
+			},
+		},
 	},
 	[67] = 
 	{
@@ -3428,6 +3462,38 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local roster = AnyoneCore.Roster\nif not roster or not roster.current() then return end\nlocal slot = roster.mySlot()\nif slot ~= \"T2\" and slot ~= \"R1\" then return end\n-- Arena south, with separate west/east spots for the two baiters.\nlocal x = slot == \"T2\" and 96 or 103\nlocal duration = math.floor((285.5 - TensorReactions_CurrentTimer) * 1000)\nif duration <= 0 then return end\nTensorCore.getStaticDrawer(0xA040FF20, 2):addTimedCircle(duration, x, 0, 117.5, 1.2, 0, false, true)\nself.used = true\n",
+							name = "Earth Missile - South bait spots",
+							uuid = "bcf0d0d3-e02a-a490-9343-edbd9b896b78",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "P2 - Brute Justice + Cruise Chaser",
+				mechanicTime = 288.6,
+				name = "[LPDU] Earth Missile - South bait spots",
+				timeRange = true,
+				timelineIndex = 68,
+				timerEndOffset = -3.1,
+				timerStartOffset = -7,
+				uuid = "9a880dca-cf9a-4636-9b0b-20392ad00f5e",
+				version = 2,
+			},
+		},
 	},
 	[69] = 
 	{
@@ -3459,6 +3525,193 @@ local tbl =
 				timelineIndex = 69,
 				timerOffset = -2.7000000476837,
 				uuid = "b4c37956-8244-49de-9b77-98eda02c7868",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local source = eventArgs.entityID and TensorCore.mGetEntity(eventArgs.entityID)\nif not source or not source.pos then return end\nlocal mines = data.teaHiddenMines or {}\ndata.teaHiddenMines = mines\nlocal pos = {x = source.pos.x, y = source.pos.y, z = source.pos.z}\nlocal drawer = TensorCore.getStaticDrawer(0xD020A0FF, 2)\nlocal shape = drawer:addTimedCircle(9000, pos.x, pos.y, pos.z, 1.2, 0, false, true)\nmines[#mines + 1] = {pos = pos, shape = shape}\nself.used = true\n",
+							conditions = 
+							{
+								
+								{
+									"d0ec2887-59eb-525e-b684-e16c150c37b0",
+									true,
+								},
+								
+								{
+									"a5ccbe18-9350-baf5-9325-5c0902d2d5aa",
+									true,
+								},
+							},
+							name = "Hidden Minefield - Mark mine locations",
+							uuid = "4adc9d74-3129-7fb5-a220-45bc744210ea",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 9216,
+							name = "Brute Justice",
+							uuid = "d0ec2887-59eb-525e-b684-e16c150c37b0",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Mine event",
+							spellIDList = 
+							{
+								18513,
+							},
+							uuid = "a5ccbe18-9350-baf5-9325-5c0902d2d5aa",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "P2 - Brute Justice + Cruise Chaser",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 290.6,
+				name = "[LPDU] Hidden Minefield - Mark mine locations",
+				timeRange = true,
+				timelineIndex = 69,
+				timerEndOffset = 1,
+				timerStartOffset = -5,
+				uuid = "711658c4-0741-9d62-b380-9df749811c69",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local mines = data.teaHiddenMines\nlocal source = eventArgs.entityID and TensorCore.mGetEntity(eventArgs.entityID)\nif not mines or not source or not source.pos then return end\n-- Detonation can use a different helper entity at the same location.\nfor index, mine in ipairs(mines) do\n    if TensorCore.getDistance2d(source.pos, mine.pos) < 1 then\n        if mine.shape then Argus.deleteTimedShape(mine.shape) end\n        table.remove(mines, index)\n        break\n    end\nend\nself.used = true\n",
+							conditions = 
+							{
+								
+								{
+									"23b378f7-ab70-2742-a5b8-277e940404d8",
+									true,
+								},
+								
+								{
+									"f980d74c-3b94-333f-b932-ef3d8b1a0f6e",
+									true,
+								},
+							},
+							name = "Hidden Minefield - Clear triggered mine",
+							uuid = "06ac4683-8eaa-86c2-84e7-80d305427f50",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 9216,
+							name = "Brute Justice",
+							uuid = "23b378f7-ab70-2742-a5b8-277e940404d8",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Mine event",
+							spellIDList = 
+							{
+								18514,
+							},
+							uuid = "f980d74c-3b94-333f-b932-ef3d8b1a0f6e",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "P2 - Brute Justice + Cruise Chaser",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 290.6,
+				name = "[LPDU] Hidden Minefield - Clear triggered mine",
+				timeRange = true,
+				timelineIndex = 69,
+				timerEndOffset = 9,
+				timerStartOffset = -1,
+				uuid = "eb123093-8f90-dd47-9eb5-40e5887e2914",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "for _, mine in ipairs(data.teaHiddenMines or {}) do\n    if mine.shape then Argus.deleteTimedShape(mine.shape) end\nend\ndata.teaHiddenMines = nil\nself.used = true\n",
+							name = "Hidden Minefield - Wipe cleanup",
+							uuid = "2072d0dc-a14c-17c9-8f35-d70b9a533a9b",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "P2 - Brute Justice + Cruise Chaser",
+				eventType = 9,
+				mechanicTime = 290.6,
+				name = "[LPDU] Hidden Minefield - Wipe cleanup",
+				timeRange = true,
+				timelineIndex = 69,
+				timerEndOffset = 950,
+				timerStartOffset = -310,
+				uuid = "8e3ace4e-9d8b-0e18-b67f-ea8ad9a805ab",
 				version = 2,
 			},
 		},
@@ -3885,6 +4138,72 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos or not TensorCore.hasBuff(player, 2143) then return end\nlocal roster = AnyoneCore.Roster\nif not roster or not roster.current() or not roster.isReady() then return end\nif roster.mySlot() ~= \"T1\" then return end\nlocal water = data.tea_lpdu_water\nlocal previous = water and water.previous\nlocal h1, h2 = roster.entOf(\"H1\"), roster.entOf(\"H2\")\nlocal receiver\nif h1 and h1.id == previous then receiver = h1 end\nif h2 and h2.id == previous then receiver = h2 end\nif not receiver or receiver.id == player.id or not receiver.pos then return end\nlocal distance = TensorCore.getDistance2d(player.pos, receiver.pos)\nif distance <= 1.3 then return end\nlocal drawer = TensorCore.getCachedDrawer(0xFFFF99DD, 0xFFFF99DD, 0xFFFFFFFF, 0xFFFFFFFF, 2)\nlocal tip = math.min(1.1, distance * 0.4)\ndrawer:addArrow(player.pos.x, player.pos.y, player.pos.z,\n    TensorCore.getHeadingToTarget(player.pos, receiver.pos),\n    distance - tip, 0.4, tip, 1.1, false, Argus2.RenderFlags.FLAG_WARP_TERRAIN)\nself.used = true\n",
+							name = "Lightning - Pass 2 arrow",
+							uuid = "0205dc28-2555-11de-a5d1-4773bd48286f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "P2 - Brute Justice + Cruise Chaser",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 306.7,
+				name = "[LPDU] Lightning - Pass 2 arrow",
+				timeRange = true,
+				timelineIndex = 71,
+				timerEndOffset = 0.2,
+				timerStartOffset = -8,
+				uuid = "20badaa0-ef38-43b9-ab66-5949d0c8d53a",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local roster = AnyoneCore.Roster\nif not roster or not roster.current() then return end\nlocal slot = roster.mySlot()\nif slot ~= \"T1\" and slot ~= \"T2\" and slot ~= \"H1\" and slot ~= \"H2\" then return end\nAnyoneCore.Shotcall(\"Line up north to south: BJ tank, shield healer, regen healer, CC tank. Adjust for lightning.\", true, 6, true)\nself.used = true\n",
+							name = "Third Nisi - Support lineup reminder",
+							uuid = "645109e3-523e-1298-a363-a9d2e71ce45a",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "P2 - Brute Justice + Cruise Chaser",
+				mechanicTime = 306.7,
+				name = "[LPDU] Third Nisi - Support lineup reminder",
+				timeRange = true,
+				timelineIndex = 71,
+				timerEndOffset = 10,
+				timerStartOffset = 6,
+				uuid = "17193a93-abbb-4d7e-a728-2b071f872701",
+				version = 2,
+			},
+		},
 	},
 	[74] = 
 	{
@@ -3966,6 +4285,40 @@ local tbl =
 				timerOffset = -5,
 				timerStartOffset = -5,
 				uuid = "c95211f1-55c5-e811-b361-d74450a6f134",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos or not TensorCore.hasBuff(player, 2143) then return end\nlocal roster = AnyoneCore.Roster\nif not roster or not roster.current() or not roster.isReady() then return end\nif not TensorCore.isHealer(player) then return end\nlocal receiver = roster.entOf(\"T2\")\nif not receiver or receiver.id == player.id or not receiver.pos then return end\nlocal distance = TensorCore.getDistance2d(player.pos, receiver.pos)\nif distance <= 1.3 then return end\nlocal drawer = TensorCore.getCachedDrawer(0xFFFF99DD, 0xFFFF99DD, 0xFFFFFFFF, 0xFFFFFFFF, 2)\nlocal tip = math.min(1.1, distance * 0.4)\ndrawer:addArrow(player.pos.x, player.pos.y, player.pos.z,\n    TensorCore.getHeadingToTarget(player.pos, receiver.pos),\n    distance - tip, 0.4, tip, 1.1, false, Argus2.RenderFlags.FLAG_WARP_TERRAIN)\nself.used = true\n",
+							name = "Lightning - Pass 3 arrow",
+							uuid = "6f2e6290-2b82-5cbd-8bc6-8054b6d2e4f3",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "P2 - Brute Justice + Cruise Chaser",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 336.2,
+				name = "[LPDU] Lightning - Pass 3 arrow",
+				timeRange = true,
+				timelineIndex = 76,
+				timerEndOffset = 0.2,
+				timerStartOffset = -8,
+				uuid = "c4f3dd67-a52b-8884-a365-3d332e6ffd27",
 				version = 2,
 			},
 		},
