@@ -4412,6 +4412,38 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local roster = AnyoneCore.Roster\nif not roster or not roster.current() or not roster.isReady() or roster.mySlot() ~= \"R1\" then return end\nlocal player = TensorCore.mGetPlayer()\nlocal boss = TensorCore.getEntityByGroup(\"ContentID\", {contentid = 9216}, false)\nif not player or not boss or not boss.pos then return end\n\n-- LPDU puts R1 at the east edge, across from the party and Brute Justice.\nlocal bait = {x = 118, y = 0, z = 100}\nlocal radius = 1.2\nlocal baitDistance = TensorCore.getDistance2d(boss.pos, bait)\nlocal party = TensorCore.getEntityGroupList(\"Party\", \"Number\")\nif not party then return end\nlocal checked = 0\nfor _, member in pairs(party) do\n    if member and member.id ~= player.id and member.pos then\n        checked = checked + 1\n        if TensorCore.getDistance2d(boss.pos, member.pos) >= baitDistance - radius - 1 then return end\n    end\nend\nif checked < 7 then return end\n\nlocal remaining = math.floor((382.1 - TensorReactions_CurrentTimer) * 1000)\nif remaining <= 0 then return end\nlocal drawer = TensorCore.getStaticDrawer(0xB040FF20, 2)\ndrawer:addTimedCircle(remaining, bait.x, bait.y, bait.z, radius, 0, false, true)\nAnyoneCore.addTimedWorldText(remaining, \"BAIT JUMP HERE\", {x = bait.x, y = 1.5, z = bait.z}, 0xFF40FF20, true, 1.5)\nAnyoneCore.Shotcall(\"Bait jump east\", true, 3, true)\nself.used = true\n",
+							name = "Mark the east bait spot",
+							uuid = "a320f9d3-6058-362e-bbb8-2ee137d8956e",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "P2 - Brute Justice + Cruise Chaser",
+				mechanicTime = 382.1,
+				name = "[LPDU] P2 - R1 Super Jump bait",
+				timeRange = true,
+				timelineIndex = 81,
+				timerEndOffset = -2,
+				timerStartOffset = -8,
+				uuid = "0a89e1da-caa7-3f8f-80d2-d5ca83b55a53",
+				version = 2,
+			},
+		},
 	},
 	[82] = 
 	{
