@@ -128,8 +128,8 @@ local tbl =
 				throttleTime = 500,
 				timeRange = true,
 				timelineIndex = 2,
-				timerEndOffset = -6.4,
-				timerStartOffset = -11.4,
+				timerEndOffset = -6.4000000953674,
+				timerStartOffset = -11.39999961853,
 				uuid = "408326a1-85a8-a8b8-8cbe-860cb2a4667e",
 				version = 2,
 			},
@@ -474,8 +474,8 @@ local tbl =
 				throttleTime = 100,
 				timeRange = true,
 				timelineIndex = 9,
-				timerEndOffset = 25.3,
-				timerStartOffset = -9.7,
+				timerEndOffset = 25.299999237061,
+				timerStartOffset = -9.6999998092651,
 				uuid = "962f4509-471c-d942-a26c-2cfa3ad4aa9c",
 				version = 2,
 			},
@@ -508,8 +508,8 @@ local tbl =
 				name = "[LPDU] Own doll - Wipe cleanup",
 				timeRange = true,
 				timelineIndex = 9,
-				timerEndOffset = 1460.3,
-				timerStartOffset = -39.7,
+				timerEndOffset = 1460.3000488281,
+				timerStartOffset = -39.700000762939,
 				uuid = "c5b3777d-b636-9899-ab3c-159b7efa9a2f",
 				version = 2,
 			},
@@ -7485,7 +7485,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "-- OnDraw also runs before combat, when the startup update may not have run.\nlocal C=TEA_LPDU_Config\nif not C then\n C={folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]};C.path=C.folder..[[TEA_LPDU_Draws.lua]]\n local values=FileExists(C.path) and FileLoad(C.path) or {};if type(values)~=\"table\" then values={} end\n local changed=false\n for _,key in ipairs({\"autoStillness\",\"autoMotion\",\"autoLB\"}) do if type(values[key])~=\"boolean\" then values[key]=key~=\"autoLB\";changed=true end end\n if values.lbTank~=\"T1\" and values.lbTank~=\"T2\" then values.lbTank=\"T2\";changed=true end\n if type(values.alphaLabels) ~= \"boolean\" then values.alphaLabels = false; changed = true end\n C.values=values\n function C.save() if not FolderExists(C.folder) then FolderCreate(C.folder) end;FileSave(C.path,C.values) end\n TEA_LPDU_Config=C;if changed then C.save() end\nend\n\nlocal visible = GUI:Begin(\"LPDU Settings###TEALPDUSettings\", true, GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n    local options = {\"Enabled\", \"Disabled\"}\n    local motion, motionChanged = GUI:Combo(\"Ordained Motion\", C.values.autoMotion and 1 or 2, options)\n    if motionChanged then\n        C.values.autoMotion = motion == 1\n        C.save()\n    end\n    local stillness, stillnessChanged = GUI:Combo(\"Ordained Stillness\", C.values.autoStillness and 1 or 2, options)\n    if stillnessChanged then\n        C.values.autoStillness = stillness == 1\n        C.save()\n    end\n    local labels, labelsChanged = GUI:Combo(\"Fate Alpha labels\", C.values.alphaLabels and 1 or 2, options)\n    if labelsChanged then\n        C.values.alphaLabels = labels == 1\n        C.save()\n    end\n\n    local player = TensorCore.mGetPlayer()\n    if player and TensorCore.isTank(player) then\n        local lb, lbChanged = GUI:Combo(\"Automatic Tank LB\", C.values.autoLB and 1 or 2, options)\n        if lbChanged then\n            C.values.autoLB = lb == 1\n            C.save()\n        end\n        if C.values.autoLB then\n            local tank, tankChanged = GUI:Combo(\"Tank LB user\", C.values.lbTank == \"T1\" and 1 or 2, {\"T1\", \"T2\"})\n            if tankChanged then\n                C.values.lbTank = tank == 1 and \"T1\" or \"T2\"\n                C.save()\n            end\n        end\n    end\nend\nGUI:End()\nself.used = true",
+							actionLua = "-- OnDraw also runs before combat, when the startup update may not have run.\nlocal C=TEA_LPDU_Config\nif not C then\n C={folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]};C.path=C.folder..[[TEA_LPDU_Draws.lua]]\n local values=FileExists(C.path) and FileLoad(C.path) or {};if type(values)~=\"table\" then values={} end\n local changed=false\n for _,key in ipairs({\"autoStillness\",\"autoMotion\",\"autoLB\"}) do if type(values[key])~=\"boolean\" then values[key]=key~=\"autoLB\";changed=true end end\n if values.lbTank~=\"T1\" and values.lbTank~=\"T2\" then values.lbTank=\"T2\";changed=true end\n if type(values.alphaLabels) ~= \"boolean\" then values.alphaLabels = false; changed = true end\n C.values=values\n function C.save() if not FolderExists(C.folder) then FolderCreate(C.folder) end;FileSave(C.path,C.values) end\n TEA_LPDU_Config=C;if changed then C.save() end\nend\n\nlocal visible = GUI:Begin(\"LPDU Settings###TEALPDUSettings\", true, GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n    local options = {\"Enabled\", \"Disabled\"}\n    local motion, motionChanged = GUI:Combo(\"Ordained Motion\", C.values.autoMotion and 1 or 2, options)\n    if motionChanged then\n        C.values.autoMotion = motion == 1\n        C.save()\n    end\n    local stillness, stillnessChanged = GUI:Combo(\"Ordained Stillness\", C.values.autoStillness and 1 or 2, options)\n    if stillnessChanged then\n        C.values.autoStillness = stillness == 1\n        C.save()\n    end\n    local labels, labelsChanged = GUI:Combo(\"Fate Alpha labels\", C.values.alphaLabels and 1 or 2, options)\n    if labelsChanged then\n        C.values.alphaLabels = labels == 1\n        C.save()\n    end\n\n    local judgmentStyles = {\"Subtractive\", \"Exaflares\"}\n    local currentStyle = C.values.judgmentStyle == \"Exaflares\" and 2 or 1\n    local selectedStyle, styleChanged = GUI:Combo(\"Almighty Judgment draws\", currentStyle, judgmentStyles)\n    if styleChanged then\n        C.values.judgmentStyle = judgmentStyles[selectedStyle]\n        C.save()\n    end\n\n    local player = TensorCore.mGetPlayer()\n    if player and TensorCore.isTank(player) then\n        local lb, lbChanged = GUI:Combo(\"Automatic Tank LB\", C.values.autoLB and 1 or 2, options)\n        if lbChanged then\n            C.values.autoLB = lb == 1\n            C.save()\n        end\n        if C.values.autoLB then\n            local tank, tankChanged = GUI:Combo(\"Tank LB user\", C.values.lbTank == \"T1\" and 1 or 2, {\"T1\", \"T2\"})\n            if tankChanged then\n                C.values.lbTank = tank == 1 and \"T1\" or \"T2\"\n                C.save()\n            end\n        end\n    end\nend\nGUI:End()\nself.used = true",
 							name = "[LPDU] TEA - Optional automation settings",
 							uuid = "f0875a94-0ffe-1944-996f-54c45c3be10b",
 							version = 2.1,
@@ -10441,7 +10441,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local timeout = 17000\nlocal occlusionChannel = 0\nlocal baseFlags =\n    Argus2.RenderFlags.FLAG_WARP_TERRAIN +\n    Argus2.RenderFlags.FLAG_OCCLUSION_BASE\n\nlocal baseDrawer = TensorCore.getStaticDrawer(\n    0x6000FF00,\n    1,\n    occlusionChannel,\n    baseFlags\n)\n\nbaseDrawer:addTimedCenteredRect(\n    timeout,\n    100,\n    0,\n    100,\n    40,\n    40,\n    0,\n    0,\n    false,\n    true\n)\n\nself.used = true",
+							actionLua = "local config = TEA_LPDU_Config\nif config and config.values.judgmentStyle == \"Exaflares\" then\n    self.used = true\n    return\nend\n\nlocal timeout = 17000\nlocal occlusionChannel = 0\nlocal baseFlags =\n    Argus2.RenderFlags.FLAG_WARP_TERRAIN +\n    Argus2.RenderFlags.FLAG_OCCLUSION_BASE\n\nlocal baseDrawer = TensorCore.getStaticDrawer(\n    0x6000FF00,\n    1,\n    occlusionChannel,\n    baseFlags\n)\n\nbaseDrawer:addTimedCenteredRect(\n    timeout,\n    100,\n    0,\n    100,\n    40,\n    40,\n    0,\n    0,\n    false,\n    true\n)\n\nself.used = true",
 							endIfUsed = true,
 							name = "Draw Almighty Judgment green safe base",
 							uuid = "7904c877-6504-c249-8a0d-20cf14992872",
@@ -10473,7 +10473,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.almighty_judgment = data.almighty_judgment or {}\nlocal state = data.almighty_judgment\nlocal now = Now()\n\nif state.revealStart == nil or (state.lastRevealAt ~= nil and TimeSince(state.lastRevealAt) > 10000) then\n    state.revealStart = now\nend\n\nlocal elapsed = TimeSince(state.revealStart)\nlocal timeout\nlocal delay\n\nif elapsed < 1000 then\n    timeout = 6650\n    delay = 0\nelse\n    timeout = 2100\n    delay = 4550\nend\n\nstate.lastRevealAt = now\n\nlocal source = eventArgs.entityID and TensorCore.mGetEntity(eventArgs.entityID)\n\nif source and source.pos then\n    local occlusionChannel = 0\n    local occludeFlags =\n        Argus2.RenderFlags.FLAG_WARP_TERRAIN +\n        Argus2.RenderFlags.FLAG_OCCLUDE\n\n    local occluder = TensorCore.getStaticDrawer(\n        0xFFFFFFFF,\n        0,\n        occlusionChannel,\n        occludeFlags\n    )\n\n    occluder:addTimedCircle(\n        timeout,\n        source.pos.x,\n        source.pos.y,\n        source.pos.z,\n        6,\n        delay,\n        false,\n        true\n    )\nend\n\nself.used = true",
+							actionLua = "data.almighty_judgment = data.almighty_judgment or {}\nlocal state = data.almighty_judgment\nlocal now = Now()\n\nif state.revealStart == nil or (state.lastRevealAt ~= nil and TimeSince(state.lastRevealAt) > 10000) then\n    state.revealStart = now\nend\n\nlocal elapsed = TimeSince(state.revealStart)\nlocal timeout\nlocal delay\n\nif elapsed < 1000 then\n    timeout = 6650\n    delay = 0\nelse\n    timeout = 2100\n    delay = 4550\nend\n\nstate.lastRevealAt = now\n\nlocal source = eventArgs.entityID and TensorCore.mGetEntity(eventArgs.entityID)\n\nif source and source.pos then\n    -- Both styles use the same reveal positions and wave timing.\n    local config = TEA_LPDU_Config\n    local showExaflares = config and config.values.judgmentStyle == \"Exaflares\"\n    local terrainFlags = Argus2.RenderFlags.FLAG_WARP_TERRAIN\n    local drawer\n    if showExaflares then\n        drawer = TensorCore.getStaticDrawer(0xD02040FF, 2, 0, terrainFlags)\n    else\n        local occlusionFlags = terrainFlags + Argus2.RenderFlags.FLAG_OCCLUDE\n        drawer = TensorCore.getStaticDrawer(0xFFFFFFFF, 0, 0, occlusionFlags)\n    end\n\n    drawer:addTimedCircle(\n        timeout,\n        source.pos.x,\n        source.pos.y,\n        source.pos.z,\n        6,\n        delay,\n        false,\n        true\n    )\nend\n\nself.used = true",
 							conditions = 
 							{
 								
@@ -10525,7 +10525,7 @@ local tbl =
 				eventType = 2,
 				loop = true,
 				mechanicTime = 1130.8,
-				name = "[Draw] Almighty Judgment Safe Zones",
+				name = "[Draw] Almighty Judgment Circles",
 				timeRange = true,
 				timelineIndex = 199,
 				timerEndOffset = 12,
@@ -10679,7 +10679,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local timeout = 17000\nlocal occlusionChannel = 0\nlocal baseFlags =\n    Argus2.RenderFlags.FLAG_WARP_TERRAIN +\n    Argus2.RenderFlags.FLAG_OCCLUSION_BASE\n\nlocal baseDrawer = TensorCore.getStaticDrawer(\n    0x6000FF00,\n    1,\n    occlusionChannel,\n    baseFlags\n)\n\nbaseDrawer:addTimedCenteredRect(\n    timeout,\n    100,\n    0,\n    100,\n    40,\n    40,\n    0,\n    0,\n    false,\n    true\n)\n\nself.used = true",
+							actionLua = "local config = TEA_LPDU_Config\nif config and config.values.judgmentStyle == \"Exaflares\" then\n    self.used = true\n    return\nend\n\nlocal timeout = 17000\nlocal occlusionChannel = 0\nlocal baseFlags =\n    Argus2.RenderFlags.FLAG_WARP_TERRAIN +\n    Argus2.RenderFlags.FLAG_OCCLUSION_BASE\n\nlocal baseDrawer = TensorCore.getStaticDrawer(\n    0x6000FF00,\n    1,\n    occlusionChannel,\n    baseFlags\n)\n\nbaseDrawer:addTimedCenteredRect(\n    timeout,\n    100,\n    0,\n    100,\n    40,\n    40,\n    0,\n    0,\n    false,\n    true\n)\n\nself.used = true",
 							endIfUsed = true,
 							name = "Draw Almighty Judgment green safe base",
 							uuid = "7c6b277a-2419-444e-88cc-342a837404f8",
@@ -10711,7 +10711,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.almighty_judgment = data.almighty_judgment or {}\nlocal state = data.almighty_judgment\nlocal now = Now()\n\nif state.revealStart == nil or (state.lastRevealAt ~= nil and TimeSince(state.lastRevealAt) > 10000) then\n    state.revealStart = now\nend\n\nlocal elapsed = TimeSince(state.revealStart)\nlocal timeout\nlocal delay\n\nif elapsed < 1000 then\n    timeout = 6650\n    delay = 0\nelse\n    timeout = 2100\n    delay = 4550\nend\n\nstate.lastRevealAt = now\n\nlocal source = eventArgs.entityID and TensorCore.mGetEntity(eventArgs.entityID)\n\nif source and source.pos then\n    local occlusionChannel = 0\n    local occludeFlags =\n        Argus2.RenderFlags.FLAG_WARP_TERRAIN +\n        Argus2.RenderFlags.FLAG_OCCLUDE\n\n    local occluder = TensorCore.getStaticDrawer(\n        0xFFFFFFFF,\n        0,\n        occlusionChannel,\n        occludeFlags\n    )\n\n    occluder:addTimedCircle(\n        timeout,\n        source.pos.x,\n        source.pos.y,\n        source.pos.z,\n        6,\n        delay,\n        false,\n        true\n    )\nend\n\nself.used = true",
+							actionLua = "data.almighty_judgment = data.almighty_judgment or {}\nlocal state = data.almighty_judgment\nlocal now = Now()\n\nif state.revealStart == nil or (state.lastRevealAt ~= nil and TimeSince(state.lastRevealAt) > 10000) then\n    state.revealStart = now\nend\n\nlocal elapsed = TimeSince(state.revealStart)\nlocal timeout\nlocal delay\n\nif elapsed < 1000 then\n    timeout = 6650\n    delay = 0\nelse\n    timeout = 2100\n    delay = 4550\nend\n\nstate.lastRevealAt = now\n\nlocal source = eventArgs.entityID and TensorCore.mGetEntity(eventArgs.entityID)\n\nif source and source.pos then\n    -- Both styles use the same reveal positions and wave timing.\n    local config = TEA_LPDU_Config\n    local showExaflares = config and config.values.judgmentStyle == \"Exaflares\"\n    local terrainFlags = Argus2.RenderFlags.FLAG_WARP_TERRAIN\n    local drawer\n    if showExaflares then\n        drawer = TensorCore.getStaticDrawer(0xD02040FF, 2, 0, terrainFlags)\n    else\n        local occlusionFlags = terrainFlags + Argus2.RenderFlags.FLAG_OCCLUDE\n        drawer = TensorCore.getStaticDrawer(0xFFFFFFFF, 0, 0, occlusionFlags)\n    end\n\n    drawer:addTimedCircle(\n        timeout,\n        source.pos.x,\n        source.pos.y,\n        source.pos.z,\n        6,\n        delay,\n        false,\n        true\n    )\nend\n\nself.used = true",
 							conditions = 
 							{
 								
@@ -10763,7 +10763,7 @@ local tbl =
 				eventType = 2,
 				loop = true,
 				mechanicTime = 1176.3,
-				name = "[Draw] Almighty Judgment Safe Zones",
+				name = "[Draw] Almighty Judgment Circles",
 				timeRange = true,
 				timelineIndex = 210,
 				timerEndOffset = 12,
