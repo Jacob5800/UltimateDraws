@@ -40,6 +40,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### TEA: LPDU Draws
 
+- Added Throttle countdowns for healers and Bard, moving Embolus markers, and personal inside/outside swap cues for 1256 Limit Cut. (08-11-2026)
+
 - Added personal Lightning handoff arrows, Earth Missile bait spots for OT and R1, live Hidden Mine markers, and a support lineup reminder for third Nisi. (08-11-2026)
 
 - R1 gets an early east-side bait call and green marker for P2 Super Jump. (08-11-2026)
@@ -57,8 +59,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 - Added a muted green ring around the priority boss during J Waves. (07-11-2026)
 
 - Double Rocket Punch alerts now only go to tanks and healers. (07-11-2026)
-
-- Added personal crystal and orb placement calls during Inception, available from 547 seconds, and a countdown on the final Wormhole puddle visible only to its assigned soaker. (07-11-2026)
 
 ### TEA: ACR3 Opti
 

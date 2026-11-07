@@ -584,6 +584,50 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "P1 - Living Liquid",
+				uuid = "8f872ea5-f505-29c4-89f1-f5f31a3baf46",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "-- Mark the orb itself, following its live position until it disappears.\nlocal drawer\nfor _, orb in pairs(TensorCore.entityList(\"contentid=9215\") or {}) do\n    if orb.pos and Argus.isEntityVisible(orb) then\n        drawer = drawer or TensorCore.getStaticDrawer(0xE04090FF, 2)\n        drawer:addCircle(orb.pos.x, orb.pos.y, orb.pos.z, 1.6, false, Argus2.RenderFlags.FLAG_WARP_TERRAIN)\n    end\nend\nself.used = true\n",
+							name = "Embolus - Orb marker (first)",
+							uuid = "c5d9d465-ca43-bbd6-8e16-ecb5bb643d12",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "P1 - Living Liquid",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 42.8,
+				name = "[LPDU] Embolus - Orb marker (first)",
+				timeRange = true,
+				timelineIndex = 11,
+				timerEndOffset = 24,
+				timerStartOffset = -3,
+				uuid = "72ef2d73-db1a-c214-851c-8f1b31fdcc2e",
+				version = 2,
+			},
+		},
 	},
 	[12] = 
 	{
@@ -1084,6 +1128,82 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "P1 - Living Liquid",
+				uuid = "850c163b-02e8-9506-a44f-308c5f9649b6",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player = TensorCore.mGetPlayer()\n-- Healers can Esuna, and Bard can use The Warden's Paean.\nif not player or (not TensorCore.isHealer(player) and player.job ~= 23) then return end\nlocal timers = data.teaThrottleTimers or {}\ndata.teaThrottleTimers = timers\nlocal party = TensorCore.getEntityGroupList(\"Party\", \"Number\") or {}\nparty[player.id] = player\nlocal active = {}\nfor _, member in pairs(party) do\n    if member.id and not active[member.id] and member.hp and member.hp.current > 0 then\n        local buff = TensorCore.getBuff(member, 700)\n        if buff and buff.duration and buff.duration > 0 then\n            active[member.id] = true\n            if not timers[member.id] then\n                timers[member.id] = AnyoneCore.addWorldTextCountdownOnEnt(\n                    math.floor(buff.duration * 1000), member.id,\n                    0xFF40B8FF, true, 1.3, 2.7, 0, \"Throttle \")\n            end\n        end\n    end\nend\nfor id, text in pairs(timers) do\n    if not active[id] then\n        AnyoneCore.removeTimedWorldText(text)\n        timers[id] = nil\n    end\nend\nself.used = true\n",
+							name = "Throttle - Cleanser countdowns",
+							uuid = "962093fd-32c3-f508-a43e-4d97a3f66111",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "P1 - Living Liquid",
+				loop = true,
+				mechanicTime = 95.9,
+				name = "[LPDU] Throttle - Cleanser countdowns",
+				throttleTime = 150,
+				timeRange = true,
+				timelineIndex = 24,
+				timerEndOffset = 23,
+				timerStartOffset = -3,
+				uuid = "34e3ab36-6829-7c9f-8603-dd76b927f25f",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "for _, text in pairs(data.teaThrottleTimers or {}) do\n    AnyoneCore.removeTimedWorldText(text)\nend\ndata.teaThrottleTimers = nil\nself.used = true\n",
+							name = "Throttle - Wipe cleanup",
+							uuid = "6c319ca1-68fe-9358-9dff-8ddee212cb70",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "P1 - Living Liquid",
+				eventType = 9,
+				mechanicTime = 95.9,
+				name = "[LPDU] Throttle - Wipe cleanup",
+				timeRange = true,
+				timelineIndex = 24,
+				timerStartOffset = -110,
+				uuid = "dac5ac06-1b89-c4b8-9719-6b02cd7ca335",
+				version = 2,
+			},
+		},
 	},
 	[25] = 
 	{
@@ -1520,6 +1640,50 @@ local tbl =
 				timerEndOffset = 0.2,
 				timerStartOffset = -1.1,
 				uuid = "661293e5-f15b-53df-8d72-5ce4119206b3",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "P1 - Living Liquid",
+				uuid = "f073c8a2-d289-a682-a1ac-3c7f79998ba1",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "-- Mark the orb itself, following its live position until it disappears.\nlocal drawer\nfor _, orb in pairs(TensorCore.entityList(\"contentid=9215\") or {}) do\n    if orb.pos and Argus.isEntityVisible(orb) then\n        drawer = drawer or TensorCore.getStaticDrawer(0xE04090FF, 2)\n        drawer:addCircle(orb.pos.x, orb.pos.y, orb.pos.z, 1.6, false, Argus2.RenderFlags.FLAG_WARP_TERRAIN)\n    end\nend\nself.used = true\n",
+							name = "Embolus - Orb marker (second)",
+							uuid = "b563e152-4ee7-3df3-84ca-1b8cb9b8c0ce",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "P1 - Living Liquid",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 115.1,
+				name = "[LPDU] Embolus - Orb marker (second)",
+				timeRange = true,
+				timelineIndex = 31,
+				timerEndOffset = 17,
+				timerStartOffset = 1,
+				uuid = "074469fb-8451-2461-81ff-adeac4c38ad9",
 				version = 2,
 			},
 		},
@@ -2193,7 +2357,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.teaLimitCut\nif not s or not s.myNumber or not s.firstExplosion or s.lpduStop then self.used=true;return end\nlocal p=TensorCore.mGetPlayer();if not p or not p.pos then return end\nif s.lpduFinished then\n local center={x=100,y=p.pos.y,z=100};local distance=TensorCore.getDistance2d(p.pos,center)\n if distance>2 then\n  TensorCore.getStaticDrawer(0xFF00FF00,2,1):addArrow(p.pos.x,p.pos.y+.1,p.pos.z,TensorCore.getHeadingToTarget(p.pos,center),math.min(3,distance-1),.25,.7,.65,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n end\n self.used=true;return\nend\nlocal dx,dz=p.pos.x-100,p.pos.z-100\nif dx*dx+dz*dz<64 then self.used=true;return end\nlocal a=TensorCore.getHeadingToTarget({x=100,y=p.pos.y,z=100},p.pos)\nlocal radius=math.sqrt(dx*dx+dz*dz)\nlocal target={x=100+math.sin(a-.2)*radius,y=p.pos.y,z=100+math.cos(a-.2)*radius}\nlocal length=TensorCore.getDistance2d(p.pos,target)\nTensorCore.getStaticDrawer(0xFF00FF00,2,1):addArrow(p.pos.x,p.pos.y+.1,p.pos.z,TensorCore.getHeadingToTarget(p.pos,target),math.max(.1,length-.7),.25,.7,.65,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nself.used=true",
+							actionLua = "local s=data.teaLimitCut\nif not s or not s.myNumber or not s.firstExplosion or s.lpduStop then self.used=true;return end\nlocal p=TensorCore.mGetPlayer();if not p or not p.pos then return end\nif s.lpduFinished then\n local center={x=100,y=p.pos.y,z=100};local distance=TensorCore.getDistance2d(p.pos,center)\n if distance>2 then\n  TensorCore.getStaticDrawer(0xFF00FF00,2,1):addArrow(p.pos.x,p.pos.y+.1,p.pos.z,TensorCore.getHeadingToTarget(p.pos,center),math.min(3,distance-1),.25,.7,.65,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n end\n self.used=true;return\nend\nlocal dx,dz=p.pos.x-100,p.pos.z-100\nif dx*dx+dz*dz<64 then self.used=true;return end\n-- The lane swap briefly takes priority over the clockwise arrow.\nif s.lpduSwapUntil and Now() < s.lpduSwapUntil then\n local direction = s.lpduSwapOutward and 1 or -1\n local radius = math.sqrt(dx * dx + dz * dz)\n local target = {x = p.pos.x + direction * dx / radius * 2.5,\n                 y = p.pos.y, z = p.pos.z + direction * dz / radius * 2.5}\n TensorCore.getStaticDrawer(0xFF00FF00,2,1):addArrow(\n  p.pos.x,p.pos.y+.1,p.pos.z,TensorCore.getHeadingToTarget(p.pos,target),\n  1.8,.25,.7,.65,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n self.used = true\n return\nend\nlocal a=TensorCore.getHeadingToTarget({x=100,y=p.pos.y,z=100},p.pos)\nlocal radius=math.sqrt(dx*dx+dz*dz)\nlocal target={x=100+math.sin(a-.2)*radius,y=p.pos.y,z=100+math.cos(a-.2)*radius}\nlocal length=TensorCore.getDistance2d(p.pos,target)\nTensorCore.getStaticDrawer(0xFF00FF00,2,1):addArrow(p.pos.x,p.pos.y+.1,p.pos.z,TensorCore.getHeadingToTarget(p.pos,target),math.max(.1,length-.7),.25,.7,.65,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nself.used=true",
 							name = "[LPDU] Limit Cut - Small running direction arrow",
 							uuid = "c2032397-38e2-7b57-8c34-d8d43b83a43f",
 							version = 2.1,
@@ -2227,7 +2391,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.teaLimitCut\nif not s or not s.myNumber then self.used=true;return end\nlocal pair=s.baitPairIndex\nif not pair then self.used=true;return end\nif eventArgs.spellID==18484 then\n if math.ceil(s.myNumber/2)==pair and s.myNumber%2==1 then AnyoneCore.Shotcall(\"Wait for the charge\",true,1.8,false) end\nelse\n if s.lpduLastCharge==pair then self.used=true;return end\n s.lpduLastCharge=pair\n if math.ceil(s.myNumber/2)==pair then\n  s.lpduStop=false\n  if s.lpduBaitShapes then for _,id in ipairs(s.lpduBaitShapes) do Argus.deleteTimedShape(id) end;s.lpduBaitShapes=nil end\n  AnyoneCore.Shotcall(pair==4 and \"Move in\" or \"Continue running clockwise\",true,3,false)\n end\n if pair==4 then\n  s.lpduFinished=true\n  if math.ceil(s.myNumber/2)~=4 then AnyoneCore.Shotcall(\"Move in\",true,3,false) end\n end\nend\nself.used=true",
+							actionLua = "local s=data.teaLimitCut\nif not s or not s.myNumber then self.used=true;return end\nlocal pair=s.baitPairIndex\nif not pair then self.used=true;return end\nif eventArgs.spellID==18484 then\n if math.ceil(s.myNumber/2)==pair and s.myNumber%2==1 then AnyoneCore.Shotcall(\"Wait for the charge\",true,1.8,false) end\nelse\n if s.lpduLastCharge==pair then self.used=true;return end\n s.lpduLastCharge=pair\n if math.ceil(s.myNumber/2)==pair then\n  s.lpduStop=false\n  if s.lpduBaitShapes then for _,id in ipairs(s.lpduBaitShapes) do Argus.deleteTimedShape(id) end;s.lpduBaitShapes=nil end\n  if pair > 2 then\n   AnyoneCore.Shotcall(pair==4 and \"Move in\" or \"Continue running clockwise\",true,3,false)\n  end\n end\n -- In 1256, pairs 1 and 3 share a lane, as do pairs 2 and 4.\n -- After the first charge in your lane, the completed pair moves out.\n local myPair = math.ceil(s.myNumber / 2)\n if pair <= 2 and (myPair == pair or myPair == pair + 2) then\n  s.lpduSwapOutward = myPair == pair\n  s.lpduSwapUntil = Now() + 1800\n  AnyoneCore.Shotcall(s.lpduSwapOutward and \"Swap outside\" or \"Swap inside\",true,2,false)\n end\n if pair==4 then\n  s.lpduFinished=true\n  if math.ceil(s.myNumber/2)~=4 then AnyoneCore.Shotcall(\"Move in\",true,3,false) end\n end\nend\nself.used=true",
 							conditions = 
 							{
 								
