@@ -133,6 +133,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### UWU: Shared AutoSim
 
+- The UWU AutoSim settings panel opens 20 seconds before pull and hides 30 seconds into the fight. (07-11-2026)
+
 - Spiny Plume now uses a live target-lifetime estimate, refreshed while targeted. Existing stack gates and DoT exclusions remain; Infernal Nail forecasts are unchanged. (05-11-2026)
 - Corrected entity lookups for Spiny/nail targeting and the Ifrit Triplecast hold. Ready Spiny now counts as attackable during Garuda’s first jump without bypassing its stack gate. Nail diagnostics distinguish capture, target requests and confirmed targets; physical nail cleanup restores saved AoE choices. (05-11-2026)
 - Caster LB stun forecasts now require Beyond Limits ownership instead of assuming R2. Countdown cancellation also clears the caster/healer encounter state. Actual LB cast protection remains in place. (05-11-2026)
