@@ -91,6 +91,49 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "72733db4-4253-4bf5-a31e-2ab35d27f8b7",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "if not AnyoneCore or not AnyoneCore.Settings or not AnyoneCore.Settings.DutyHelper then return end\nAnyoneCore.Settings.DutyHelper.enabled=false\nself.used=true",
+							name = "Disable competing Duty Helper",
+							uuid = "338b2d7c-e1b2-2585-bd41-44dddc97b6c1",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				mechanicTime = 11.4,
+				name = "[LPDU] TEA - Disable Duty Helper",
+				throttleTime = 500,
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = -6.4,
+				timerStartOffset = -11.4,
+				uuid = "408326a1-85a8-a8b8-8cbe-860cb2a4667e",
+				version = 2,
+			},
+		},
 	},
 	[3] = 
 	{
@@ -295,7 +338,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "--AnyoneCore.Shotcall(\"Grab Jagd Doll\", false, 5, false)\nTensorCore.showRaidWarning(\"Grab Jagd Doll\", 0, 3.5)\nself.used = true",
+							actionLua = "--AnyoneCore.Shotcall(\"Grab Jagd Doll\", false, 5, false)\nTensorCore.showRaidWarning(\"Grab Jagd Doll\", 0, 3.5)\nTensorCore.sendTTS(\"Grab Jagd Doll\",75)\nself.used = true",
 							conditions = 
 							{
 								
@@ -393,6 +436,84 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "28cf6746-1a2e-1524-ad97-6a0db5f36f0d",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local p=TensorCore.mGetPlayer();if not p then return end\nlocal s=data.tea_lpdu_doll\nif not s then\n s={};data.tea_lpdu_doll=s\n function s.clear() if s.shape then Argus.deleteTimedShape(s.shape);s.shape=nil end end\n function s.log(reason,hp,intended)\n  local now=Now();local key=reason..\":\"..tostring(intended)\n  if s.logKey~=key or now-(s.logAt or 0)>=1500 then\n   TensorCore.timelineLogToFile(string.format(\"[TEA doll return] decision=%s own=%s hp=%s current=%s intended=%s latched=%s confirmed=%s\\n\",reason,tostring(s.doll),tostring(hp),tostring(TensorCore.mGetPlayer().targetid),tostring(intended),tostring(s.returnReady),tostring(s.confirmed)))\n   s.logKey=key;s.logAt=now\n  end\n end\nend\nif s.done then self.used=true;return end\nif not s.doll then\n local found\n for _,t in pairs(Argus.getTethersOnEnt(p.id)) do\n  local e=t.partnerid and TensorCore.mGetEntity(t.partnerid)\n  if e and e.contentid==9214 then\n   if found and found~=e.id then s.log(\"ambiguous tether\");self.used=true;return end\n   found=e.id\n  end\n end\n if not found then s.log(\"waiting own tether\");self.used=true;return end\n s.doll=found;s.log(\"assigned from personal tether\")\nend\nlocal doll=TensorCore.mGetEntity(s.doll)\nif not doll or not doll.hp or doll.hp.current<=0 then s.clear();s.done=true;s.log(\"own doll departed\");self.used=true;return end\nlocal hp=doll.hp.percent\nif type(hp)~=\"number\" then s.log(\"waiting HP\");return end\nlocal colour=hp>30 and \"green\" or \"red\"\nif s.colour~=colour then\n s.clear()\n local color=colour==\"green\" and 0x8800FF00 or 0x880000FF\n local drawer=TensorCore.getStaticDrawer(color,2,1)\n s.shape=drawer:addTimedCircleOnEnt(math.max(300,(65-TensorReactions_CurrentTimer)*1000),s.doll,1,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n if s.shape then s.colour=colour end\nend\nif hp<29 then s.returnReady=true end\nif s.returnReady and not s.confirmed then\n local boss=s.boss and TensorCore.mGetEntity(s.boss)\n if not boss or not boss.targetable or not boss.hp or boss.hp.current<=0 then\n  boss=nil\n  for _,e in pairs(TensorCore.entityList(\"contentid=9211\")) do\n   if e.id and Argus.getEntityModel(e.id)==11335 and e.targetable and e.attackable and e.hp and e.hp.current>0 then boss=e;s.boss=e.id;break end\n  end\n end\n if not boss then s.log(\"blocked Living Liquid unavailable\",hp);self.used=true;return end\n if p.targetid==boss.id then\n  s.confirmed=true;s.log(s.requestAt and \"confirmed target change\" or \"already on Living Liquid\",hp,boss.id)\n elseif not s.requestAt or Now()-s.requestAt>=300 then\n  Player:SetTarget(boss.id);s.requestAt=Now();s.log(\"target request sent\",hp,boss.id)\n end\nend\nself.used=true",
+							name = "[LPDU] Own tethered doll - Colour and return at 29%",
+							uuid = "7ad5c6cb-c451-db92-9426-cf807c1a7234",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				loop = true,
+				mechanicTime = 39.7,
+				name = "[LPDU] Own tethered doll - Colour and return at 29%",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 9,
+				timerEndOffset = 25.3,
+				timerStartOffset = -9.7,
+				uuid = "962f4509-471c-d942-a26c-2cfa3ad4aa9c",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=eventArgs.oldData and eventArgs.oldData.tea_lpdu_doll\nif s and s.shape then Argus.deleteTimedShape(s.shape) end\nself.used=true",
+							name = "[LPDU] Own doll - Wipe cleanup",
+							uuid = "a3a73b4c-eec7-393a-aec0-43f1d72f5ab5",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 9,
+				loop = true,
+				mechanicTime = 39.7,
+				name = "[LPDU] Own doll - Wipe cleanup",
+				timeRange = true,
+				timelineIndex = 9,
+				timerEndOffset = 1460.3,
+				timerStartOffset = -39.7,
+				uuid = "c5b3777d-b636-9899-ab3c-159b7efa9a2f",
+				version = 2,
+			},
+		},
 	},
 	[11] = 
 	{
@@ -407,7 +528,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "--AnyoneCore.Shotcall(\"Feed Doll to Living Liquid\", false, 5, false)\nTensorCore.showRaidWarning(\"Feed Doll to Living Liquid\", 0, 3.5)\nself.used = true",
+							actionLua = "--AnyoneCore.Shotcall(\"Feed Doll to Living Liquid\", false, 5, false)\nTensorCore.showRaidWarning(\"Feed Doll to Living Liquid\", 0, 3.5)\nTensorCore.sendTTS(\"Feed Doll to Living Liquid\",75)\nself.used = true",
 							conditions = 
 							{
 								
@@ -598,6 +719,70 @@ local tbl =
 				timerEndOffset = -2.9000000953674,
 				timerStartOffset = -9,
 				uuid = "2f9989b5-bb97-2794-91f7-61f7ec927ec6",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "5ef0123f-0503-2813-9da6-e5586f2d3a59",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.tea_lpdu_protean_moves\nif not s then s={};data.tea_lpdu_protean_moves=s end\nif not s[\"move67\"] then\n s[\"move67\"] = true\n AnyoneCore.Shotcall(\"Move\",true,2,false)\n TensorCore.timelineLogToFile(\"[TEA protean] move67 AOE-created, move cue\\n\")\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"c2f0eeda-b192-3769-9193-b559d77cec6d",
+									true,
+								},
+							},
+							name = "[LPDU] Proteans dropped - Move 67",
+							uuid = "d0cb3275-dfe9-507b-b245-5d458cbec355",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.aoeID==18468 and eventArgs.contentID==9211",
+							dequeueIfLuaFalse = true,
+							name = "Baited visible cone created",
+							uuid = "c2f0eeda-b192-3769-9193-b559d77cec6d",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 18,
+				loop = true,
+				mechanicTime = 69.8,
+				name = "[LPDU] Proteans dropped - Move 67",
+				timeRange = true,
+				timelineIndex = 15,
+				timerEndOffset = 1.2,
+				timerStartOffset = -5.8,
+				uuid = "7b77d9d9-2288-ede0-956e-97ff46caa573",
 				version = 2,
 			},
 		},
@@ -970,6 +1155,70 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "ccb4f74a-b5c9-ccfb-8436-cf045751890e",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.tea_lpdu_protean_moves\nif not s then s={};data.tea_lpdu_protean_moves=s end\nif not s[\"move104\"] then\n s[\"move104\"] = true\n AnyoneCore.Shotcall(\"Move\",true,2,false)\n TensorCore.timelineLogToFile(\"[TEA protean] move104 AOE-created, move cue\\n\")\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"b79953a9-4466-acee-a25b-35e154345d06",
+									true,
+								},
+							},
+							name = "[LPDU] Proteans dropped - Move 104",
+							uuid = "37dc9d31-a0a8-bb4c-bd8d-e1dc56f807fe",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.aoeID==18468 and eventArgs.contentID==9211",
+							dequeueIfLuaFalse = true,
+							name = "Baited visible cone created",
+							uuid = "b79953a9-4466-acee-a25b-35e154345d06",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 18,
+				loop = true,
+				mechanicTime = 107,
+				name = "[LPDU] Proteans dropped - Move 104",
+				timeRange = true,
+				timelineIndex = 25,
+				timerEndOffset = 1,
+				timerStartOffset = -6,
+				uuid = "e4b264bf-2c2f-a261-9687-b81f7d7698d6",
+				version = 2,
+			},
+		},
 	},
 	[27] = 
 	{
@@ -1228,6 +1477,49 @@ local tbl =
 				timerEndOffset = -0.5,
 				timerStartOffset = -9.5,
 				uuid = "e1ea8aa2-1ec2-1c80-a95d-61d985d73f13",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "db49ae5d-4aaa-a9ca-b0c8-98d0d56e4748",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local R=AnyoneCore.Roster\nif not R or not R.current() then return end\nlocal slot=R.mySlot()\nif not slot then return end\n-- LPDU second-protean tornado baiters: both melees and off-tank.\nif slot==\"M1\" or slot==\"M2\" or slot==\"T2\" then\n AnyoneCore.Shotcall(\"Bait tornado protean\",true,2,false)\nend\nself.used=true",
+							name = "[LPDU] Tornado protean - Assigned bait reminder",
+							uuid = "f996786f-3795-02d3-bbc6-9e865abec42b",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				mechanicTime = 115.1,
+				name = "[LPDU] Tornado protean - Assigned bait reminder",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 31,
+				timerEndOffset = 0.2,
+				timerStartOffset = -1.1,
+				uuid = "661293e5-f15b-53df-8d72-5ce4119206b3",
 				version = 2,
 			},
 		},
@@ -1762,7 +2054,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local state = data.teaLimitCut\n\nif not state then\n    self.used = true\n    return\nend\n\nstate.baitPairIndex = (state.baitPairIndex or 0) + 1\nlocal pairIndex = state.baitPairIndex\nlocal oddNumber = (pairIndex * 2) - 1\nlocal evenNumber = pairIndex * 2\nlocal myNumber = state.myNumber\n\nif myNumber ~= oddNumber and myNumber ~= evenNumber then\n    self.used = true\n    return\nend\n\nlocal chaser = TensorCore.mGetEntity(eventArgs.entityID)\nlocal player = TensorCore.mGetPlayer()\nlocal chaserPos = chaser and chaser.pos\nlocal playerPos = player and player.pos\n\nif chaserPos and playerPos then\n    local direction = myNumber == oddNumber and 1 or -1\n    local baitDistance = 3\n    local targetPos = {\n        x = chaserPos.x + (math.sin(chaserPos.h) * baitDistance * direction),\n        y = chaserPos.y,\n        z = chaserPos.z + (math.cos(chaserPos.h) * baitDistance * direction)\n    }\n    local duration = myNumber == oddNumber and 1700 or 3300\n    local drawer = TensorCore.getCachedDrawer(\n        0xFF00FF00,\n        0xFF00FF00,\n        0xFF00FF00,\n        0xFF00FF00,\n        2\n    )\n\n    drawer:addTimedCircle(\n        duration,\n        targetPos.x, targetPos.y, targetPos.z,\n        0.5,\n        0,\n        false,\n        true\n    )\n\n    local distance = TensorCore.getDistance2d(playerPos, targetPos)\n    local tipLength = math.min(1.5, distance)\n    local baseLength = distance - tipLength\n\n    if baseLength > 0.25 then\n        local heading = TensorCore.getHeadingToTarget(playerPos, targetPos)\n        drawer:addTimedArrow(\n            duration,\n            playerPos.x, playerPos.y, playerPos.z,\n            heading,\n            baseLength, 0.35,\n            tipLength, 1,\n            0,\n            false,\n            Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n        )\n    end\nend\n\nself.used = true",
+							actionLua = "local state = data.teaLimitCut\n\nif not state then\n    self.used = true\n    return\nend\n\nstate.baitPairIndex = (state.baitPairIndex or 0) + 1\nlocal pairIndex = state.baitPairIndex\nlocal oddNumber = (pairIndex * 2) - 1\nlocal evenNumber = pairIndex * 2\nlocal myNumber = state.myNumber\n\nif myNumber ~= oddNumber and myNumber ~= evenNumber then\n    self.used = true\n    return\nend\n\nstate.lpduStop=true\nstate.lpduBaitShapes={}\nAnyoneCore.Shotcall(\"Stop and bait\",true,3,false)\nlocal chaser = TensorCore.mGetEntity(eventArgs.entityID)\nlocal player = TensorCore.mGetPlayer()\nlocal chaserPos = chaser and chaser.pos\nlocal playerPos = player and player.pos\n\nif chaserPos and playerPos then\n    local direction = myNumber == oddNumber and 1 or -1\n    local baitDistance = 3\n    local targetPos = {\n        x = chaserPos.x + (math.sin(chaserPos.h) * baitDistance * direction),\n        y = chaserPos.y,\n        z = chaserPos.z + (math.cos(chaserPos.h) * baitDistance * direction)\n    }\n    local duration = 3400\n    local drawer = TensorCore.getCachedDrawer(\n        0xFF00FF00,\n        0xFF00FF00,\n        0xFF00FF00,\n        0xFF00FF00,\n        2\n    )\n\n    local circleID=drawer:addTimedCircle(\n        duration,\n        targetPos.x, targetPos.y, targetPos.z,\n        0.5,\n        0,\n        false,\n        true\n    )\n\n    if circleID then state.lpduBaitShapes[#state.lpduBaitShapes+1]=circleID end\n    local distance = TensorCore.getDistance2d(playerPos, targetPos)\n    local tipLength = math.min(1.5, distance)\n    local baseLength = distance - tipLength\n\n    if baseLength > 0.25 then\n        local heading = TensorCore.getHeadingToTarget(playerPos, targetPos)\n        local arrowID=drawer:addTimedArrow(\n            duration,\n            playerPos.x, playerPos.y, playerPos.z,\n            heading,\n            baseLength, 0.35,\n            tipLength, 1,\n            0,\n            false,\n            Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n        )\n        if arrowID then state.lpduBaitShapes[#state.lpduBaitShapes+1]=arrowID end\n    end\nend\n\nself.used = true",
 							conditions = 
 							{
 								
@@ -1835,7 +2127,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local state = data.teaLimitCut\nlocal x = eventArgs.castPosX\nlocal z = eventArgs.castPosZ\n\nif state and not state.firstExplosion and x and z then\n    local centerX = 100\n    local centerZ = 100\n    local epsilon = 0.1\n    local inWestToNorthEast = z < (centerZ - epsilon)\n        or (math.abs(z - centerZ) <= epsilon and x < centerX)\n\n    if inWestToNorthEast then\n        local y = eventArgs.castPosY or 0\n        state.firstExplosion = { x = x, y = y, z = z }\n        state.oppositeExplosion = {\n            x = (2 * centerX) - x,\n            y = y,\n            z = (2 * centerZ) - z\n        }\n\n        local myNumber = state.myNumber\n        if myNumber then\n            local usesFirstExplosion = myNumber == 1\n                or myNumber == 2\n                or myNumber == 5\n                or myNumber == 6\n            local targetPosition = usesFirstExplosion\n                and state.firstExplosion\n                or state.oppositeExplosion\n            local goNorth = targetPosition.z < centerZ\n            AnyoneCore.Shotcall(goNorth and \"Go North\" or \"Go South\", true, 5, false)\n        end\n\n        local drawer = TensorCore.getMoogleDrawer()\n        if drawer then\n            local vx = x - centerX\n            local vz = z - centerZ\n            local radius = 10\n            local cadence = 2200\n            local duration = 2500\n\n            for wave = 2, 10 do\n                local delay = (wave - 2) * cadence\n\n                if wave == 5 or wave == 10 then\n                    drawer:addTimedCircle(\n                        duration,\n                        centerX, y, centerZ,\n                        radius,\n                        delay,\n                        false,\n                        false\n                    )\n                else\n                    local rotationStep\n                    if wave < 5 then\n                        rotationStep = wave - 1\n                    else\n                        rotationStep = wave - 6\n                    end\n\n                    local angle = rotationStep * math.pi / 4\n                    local cosAngle = math.cos(angle)\n                    local sinAngle = math.sin(angle)\n                    local rotatedX = (vx * cosAngle) - (vz * sinAngle)\n                    local rotatedZ = (vx * sinAngle) + (vz * cosAngle)\n\n                    drawer:addTimedCircle(\n                        duration,\n                        centerX + rotatedX, y, centerZ + rotatedZ,\n                        radius,\n                        delay,\n                        false,\n                        false\n                    )\n                    drawer:addTimedCircle(\n                        duration,\n                        centerX - rotatedX, y, centerZ - rotatedZ,\n                        radius,\n                        delay,\n                        false,\n                        false\n                    )\n                end\n            end\n        end\n    end\nend\n\nself.used = true",
+							actionLua = "local state = data.teaLimitCut\nlocal x = eventArgs.castPosX\nlocal z = eventArgs.castPosZ\n\nif state and not state.firstExplosion and x and z then\n    local centerX = 100\n    local centerZ = 100\n    local epsilon = 0.1\n    local inWestToNorthEast = z < (centerZ - epsilon)\n        or (math.abs(z - centerZ) <= epsilon and x < centerX)\n\n    if inWestToNorthEast then\n        local y = eventArgs.castPosY or 0\n        state.firstExplosion = { x = x, y = y, z = z }\n        state.oppositeExplosion = {\n            x = (2 * centerX) - x,\n            y = y,\n            z = (2 * centerZ) - z\n        }\n\n        local myNumber = state.myNumber\n        if myNumber then\n            local usesFirstExplosion = myNumber == 1\n                or myNumber == 2\n                or myNumber == 5\n                or myNumber == 6\n            local targetPosition = usesFirstExplosion\n                and state.firstExplosion\n                or state.oppositeExplosion\n            local goNorth = targetPosition.z < centerZ\n            AnyoneCore.Shotcall(\"Take your start arrow, then run clockwise\", true, 5, false)\n        end\n\n        local drawer = TensorCore.getMoogleDrawer()\n        if drawer then\n            local vx = x - centerX\n            local vz = z - centerZ\n            local radius = 10\n            local cadence = 2200\n            local duration = 2500\n\n            for wave = 2, 10 do\n                local delay = (wave - 2) * cadence\n\n                if wave == 5 or wave == 10 then\n                    drawer:addTimedCircle(\n                        duration,\n                        centerX, y, centerZ,\n                        radius,\n                        delay,\n                        false,\n                        false\n                    )\n                else\n                    local rotationStep\n                    if wave < 5 then\n                        rotationStep = wave - 1\n                    else\n                        rotationStep = wave - 6\n                    end\n\n                    local angle = rotationStep * math.pi / 4\n                    local cosAngle = math.cos(angle)\n                    local sinAngle = math.sin(angle)\n                    local rotatedX = (vx * cosAngle) - (vz * sinAngle)\n                    local rotatedZ = (vx * sinAngle) + (vz * cosAngle)\n\n                    drawer:addTimedCircle(\n                        duration,\n                        centerX + rotatedX, y, centerZ + rotatedZ,\n                        radius,\n                        delay,\n                        false,\n                        false\n                    )\n                    drawer:addTimedCircle(\n                        duration,\n                        centerX - rotatedX, y, centerZ - rotatedZ,\n                        radius,\n                        delay,\n                        false,\n                        false\n                    )\n                end\n            end\n        end\n    end\nend\n\nself.used = true",
 							conditions = 
 							{
 								
@@ -1877,6 +2169,104 @@ local tbl =
 				timerEndOffset = 0.5,
 				timerStartOffset = -120,
 				uuid = "f87e5651-1899-e806-b2dd-95216aca0a87",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "9555ba57-b51f-9b05-9fbf-dcace6a6a795",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.teaLimitCut\nif not s or not s.myNumber or not s.firstExplosion or s.lpduStop then self.used=true;return end\nlocal p=TensorCore.mGetPlayer();if not p or not p.pos then return end\nif s.lpduFinished then\n local center={x=100,y=p.pos.y,z=100};local distance=TensorCore.getDistance2d(p.pos,center)\n if distance>2 then\n  TensorCore.getStaticDrawer(0xFF00FF00,2,1):addArrow(p.pos.x,p.pos.y+.1,p.pos.z,TensorCore.getHeadingToTarget(p.pos,center),math.min(3,distance-1),.25,.7,.65,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\n end\n self.used=true;return\nend\nlocal dx,dz=p.pos.x-100,p.pos.z-100\nif dx*dx+dz*dz<64 then self.used=true;return end\nlocal a=TensorCore.getHeadingToTarget({x=100,y=p.pos.y,z=100},p.pos)\nlocal radius=math.sqrt(dx*dx+dz*dz)\nlocal target={x=100+math.sin(a-.2)*radius,y=p.pos.y,z=100+math.cos(a-.2)*radius}\nlocal length=TensorCore.getDistance2d(p.pos,target)\nTensorCore.getStaticDrawer(0xFF00FF00,2,1):addArrow(p.pos.x,p.pos.y+.1,p.pos.z,TensorCore.getHeadingToTarget(p.pos,target),math.max(.1,length-.7),.25,.7,.65,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nself.used=true",
+							name = "[LPDU] Limit Cut - Small running direction arrow",
+							uuid = "c2032397-38e2-7b57-8c34-d8d43b83a43f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 200,
+				name = "[LPDU] Limit Cut - Small running direction arrow",
+				timeRange = true,
+				timelineIndex = 39,
+				timerEndOffset = 24.5,
+				timerStartOffset = 2,
+				uuid = "3982e1f6-4559-5562-a3eb-5858cf30e8fe",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.teaLimitCut\nif not s or not s.myNumber then self.used=true;return end\nlocal pair=s.baitPairIndex\nif not pair then self.used=true;return end\nif eventArgs.spellID==18484 then\n if math.ceil(s.myNumber/2)==pair and s.myNumber%2==1 then AnyoneCore.Shotcall(\"Wait for the charge\",true,1.8,false) end\nelse\n if s.lpduLastCharge==pair then self.used=true;return end\n s.lpduLastCharge=pair\n if math.ceil(s.myNumber/2)==pair then\n  s.lpduStop=false\n  if s.lpduBaitShapes then for _,id in ipairs(s.lpduBaitShapes) do Argus.deleteTimedShape(id) end;s.lpduBaitShapes=nil end\n  AnyoneCore.Shotcall(pair==4 and \"Move in\" or \"Continue running clockwise\",true,3,false)\n end\n if pair==4 then\n  s.lpduFinished=true\n  if math.ceil(s.myNumber/2)~=4 then AnyoneCore.Shotcall(\"Move in\",true,3,false) end\n end\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"9e19554d-70a1-2284-86b7-d231cb31922e",
+									true,
+								},
+							},
+							name = "[LPDU] Limit Cut - Continue after pair charge",
+							uuid = "0b879715-7d14-957f-80ed-a1d0bced57c9",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID==9218 and (eventArgs.spellID==18484 or eventArgs.spellID==19279)",
+							dequeueIfLuaFalse = true,
+							name = "Own LC cleave or charge",
+							uuid = "9e19554d-70a1-2284-86b7-d231cb31922e",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 200,
+				name = "[LPDU] Limit Cut - Continue after pair charge",
+				timeRange = true,
+				timelineIndex = 39,
+				timerEndOffset = 24.5,
+				timerStartOffset = 5,
+				uuid = "0b6f93e2-8243-cc2f-9198-2dad6e55abbc",
 				version = 2,
 			},
 		},
@@ -2555,7 +2945,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "AnyoneCore.Shotcall(\"Bait AOE outside\", false, 3, false)\nself.used = true",
+							actionLua = "AnyoneCore.Shotcall(\"Bait AOE outside\", true, 3, false)\nself.used = true",
 							endIfUsed = true,
 							name = "Outside Bait Shotcall",
 							uuid = "2f06b0f8-2688-63b6-8260-a2b0b20a34aa",
@@ -3486,13 +3876,77 @@ local tbl =
 				{
 				},
 				displayPath = "P2 - Brute Justice + Cruise Chaser",
-				execute = "local player = TensorCore.mGetPlayer()\nlocal party = TensorCore.getEntityGroupList(\"Party\") or {}\nlocal water\nfor _, member in pairs(party) do\n  if member and TensorCore.hasBuff(member, 2142) then water = member break end\nend\nif not player or not water then self.used = true return end\n\nlocal _, _, _, _, outlineThickness = TensorCore.getMoogleColors()\nlocal drawer = TensorCore.getCachedDrawer(\n  0x30FF0000, 0x60FF0000, 0xA0FF0000, 0xFFFF0000,\n  outlineThickness, 0, flags\n)\ndrawer:addTimedCircleOnEnt(5000, water.id, 8, 0, false, false, flags)\n\nif water.id == player.id then\n  AnyoneCore.Shotcall(\"Water: place west at 86, 100\", true, 5, true)\n  local destination = { x = 86, y = 0, z = 100 }\n  local heading = TensorCore.getHeadingToTarget(player.pos, destination)\n  local length = math.max(1, TensorCore.getDistance2d(player.pos, destination) - 1)\n  drawer:addTimedArrow(5000, player.pos.x, player.pos.y, player.pos.z, heading, length, 0.35, 1, 0.9, 0, false, flags)\nelseif not TensorCore.hasBuff(player, 2143) and\n       (TensorCore.isHealer(player) or TensorCore.isRanged(player, true)) then\n  AnyoneCore.Shotcall(\"Stack with water\", true, 5, false)\n  drawer:addTimedArrowOnEnt(5000, player.id, 1, 0.35, 1, 0.9, water.id, 0, false, 0, false, flags)\nend\nself.used = true",
+				execute = "local flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nlocal player = TensorCore.mGetPlayer()\nlocal party = TensorCore.getEntityGroupList(\"Party\") or {}\nlocal water\nfor _, member in pairs(party) do\n  if member and TensorCore.hasBuff(member, 2142) then water = member break end\nend\nif not player or not water then self.used = true return end\n\nlocal _, _, _, _, outlineThickness = TensorCore.getMoogleColors()\nlocal drawer = TensorCore.getCachedDrawer(\n  0x30FF0000, 0x60FF0000, 0xA0FF0000, 0xFFFF0000,\n  outlineThickness, 0, flags\n)\ndrawer:addTimedCircleOnEnt(5000, water.id, 8, 0, false, false, flags)\n\nif water.id == player.id then\n  AnyoneCore.Shotcall(\"Water: place west at 86, 100\", true, 5, true)\n  local destination = { x = 86, y = 0, z = 100 }\n  local heading = TensorCore.getHeadingToTarget(player.pos, destination)\n  local length = math.max(1, TensorCore.getDistance2d(player.pos, destination) - 1)\n  drawer:addTimedArrow(5000, player.pos.x, player.pos.y, player.pos.z, heading, length, 0.35, 1, 0.9, 0, false, flags)\nelseif not TensorCore.hasBuff(player, 2143) and not TensorCore.isTank(player) and\n       data.tea_lpdu_water and data.tea_lpdu_water.previous and data.tea_lpdu_water.previous~=player.id then\n  AnyoneCore.Shotcall(\"Stack with water\", true, 5, false)\n  drawer:addTimedArrowOnEnt(5000, player.id, 1, 0.35, 1, 0.9, water.id, 0, false, 0, false, flags)\nend\nself.used = true",
 				executeType = 2,
 				mechanicTime = 336.2,
 				name = "P2 - Third Water Stack",
 				timelineIndex = 76,
 				timerOffset = -5,
 				uuid = "c95211f1-55c5-e811-b361-d74450a6f134",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "01780f51-59c5-15a3-a06d-37a32752548e",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.tea_lpdu_water\nif not s then s={};data.tea_lpdu_water=s end\nif s.current~=eventArgs.entityID then s.previous=s.current;s.current=eventArgs.entityID end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"4be0993a-6a39-ec73-8cc3-3bd79821ab30",
+									true,
+								},
+							},
+							name = "[LPDU] BJCC - Track Water bearer handoffs",
+							uuid = "b8164a84-50ca-faa4-b3a3-910966336cc2",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.buffID==2142",
+							dequeueIfLuaFalse = true,
+							name = "Compressed Water applied",
+							uuid = "4be0993a-6a39-ec73-8cc3-3bd79821ab30",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 8,
+				loop = true,
+				mechanicTime = 336.2,
+				name = "[LPDU] BJCC - Track Water bearer handoffs",
+				timeRange = true,
+				timelineIndex = 76,
+				timerEndOffset = 5,
+				timerStartOffset = -105,
+				uuid = "fa44d852-ee5e-b6ec-a814-42b8e134c86c",
 				version = 2,
 			},
 		},
@@ -3689,6 +4143,7 @@ local tbl =
 							alertDuration = 4000,
 							alertPriority = 3,
 							alertScale = 1,
+							alertTTS = true,
 							alertText = "Double Rocket Punch - tanks share",
 							alertVolume = 100,
 							name = "Double Rocket Punch - tanks share",
@@ -4412,7 +4867,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local roster = AnyoneCore.Roster\nlocal mySlot = roster and roster.mySlot()\nlocal currentTime = TensorReactions_CurrentTimer\n\nlocal calls = {\n    T1 = { message = \"Bait 2nd Flarethrower\", startTime = 565.5, endTime = 572.5 },\n    T2 = { message = \"Bait 1st Flarethrower\", startTime = 565.5, endTime = 570.7 },\n    other = { message = \"Bait 3rd Flarethrower\", startTime = 565.5, endTime = 574.6 }\n}\n\nlocal bait = mySlot and (calls[mySlot] or calls.other)\nif not bait or currentTime < bait.startTime or currentTime >= bait.endTime then\n    return\nend\n\nlocal timer = math.max(0, bait.endTime - currentTime)\nAnyoneCore.Shotcall(bait.message, false, timer, true)\nself.used = true",
+							actionLua = "local roster = AnyoneCore.Roster\nlocal mySlot = roster and roster.mySlot()\nlocal currentTime = TensorReactions_CurrentTimer\n\nlocal calls = {\n    T1 = { message = \"Bait 2nd Flarethrower\", startTime = 565.5, endTime = 572.5 },\n    T2 = { message = \"Bait 1st Flarethrower\", startTime = 565.5, endTime = 570.7 },\n    other = { message = \"Bait 3rd Flarethrower\", startTime = 565.5, endTime = 574.6 }\n}\n\nlocal bait = mySlot and (calls[mySlot] or calls.other)\nif not bait or currentTime < bait.startTime or currentTime >= bait.endTime then\n    return\nend\n\nlocal timer = math.max(0, bait.endTime - currentTime)\nAnyoneCore.Shotcall(bait.message, true, timer, true)\nself.used = true",
 							endIfUsed = true,
 							name = "Shotcall Flarethrower role bait",
 							uuid = "c7c979c7-d19e-d192-bc6e-06d5fbbdef96",
@@ -6035,6 +6490,73 @@ local tbl =
 			},
 		},
 	},
+	[140] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "ab1f34b5-bc9b-9f56-aec4-e739659f7c6b",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local p=TensorCore.mGetPlayer()\nif not p then return end\nif eventArgs.entityID==p.id then AnyoneCore.Shotcall(\"Stack: go middle\",true,4,false) end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"45e15b96-81fc-2bfc-83a9-0724d0b7be53",
+									true,
+								},
+							},
+							name = "Own stack to middle",
+							uuid = "50837d33-1237-f6f2-b633-59b7d33916cf",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventMarkerID = 93,
+							name = "Incinerating Heat stack marker",
+							uuid = "45e15b96-81fc-2bfc-83a9-0724d0b7be53",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 4,
+				mechanicTime = 670,
+				name = "[LPDU] Incinerating Heat - Own stack to middle",
+				timeRange = true,
+				timelineIndex = 140,
+				timerEndOffset = 2,
+				timerStartOffset = -6,
+				uuid = "ff03a7c7-0744-1d1e-be88-9e14ddd928cb",
+				version = 2,
+			},
+		},
+	},
 	[142] = 
 	{
 		
@@ -6105,7 +6627,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local player = TensorCore.mGetPlayer()\nlocal state = data.teaP3\nlocal ids = state and state.enumerationIDs\nif not player or not ids then\n  self.used = true\n  return\nend\n\nlocal first\nlocal second\n\nfor entityID in pairs(ids) do\n  local entity = TensorCore.mGetEntity(entityID)\n  if entity and TensorCore.isDPS(entity) and entity.pos then\n    if not first then\n      first = entity\n    elseif not second then\n      second = entity\n    end\n  end\nend\n\nif not first or not second then\n  self.used = true\n  return\nend\n\nlocal eastTarget = first\nlocal westTarget = first\nif second.pos.x > first.pos.x then\n  eastTarget = second\nelseif second.pos.x < first.pos.x then\n  westTarget = second\nend\n\nlocal greenTarget\nif TensorCore.isDPS(player) then\n  if ids[player.id] then\n    greenTarget = player\n  end\nelseif TensorCore.isTank(player) then\n  greenTarget = eastTarget\nelseif TensorCore.isHealer(player) then\n  greenTarget = westTarget\nelse\n  self.used = true\n  return\nend\n\nlocal greenDrawer = TensorCore.getCachedDrawer(\n  0x4400FF00, 0x8800FF00, 0x6600FF00, 0xDD00FF00, 2\n)\nlocal redDrawer = TensorCore.getCachedDrawer(\n  0x440000FF, 0x880000FF, 0x660000FF, 0xDD0000FF, 2\n)\n\nlocal firstDrawer = greenTarget and first.id == greenTarget.id\n    and greenDrawer or redDrawer\nfirstDrawer:addCircle(\n  first.pos.x,\n  first.pos.y,\n  first.pos.z,\n  5,\n  false,\n  0\n)\n\nlocal secondDrawer = greenTarget and second.id == greenTarget.id\n    and greenDrawer or redDrawer\nsecondDrawer:addCircle(\n  second.pos.x,\n  second.pos.y,\n  second.pos.z,\n  5,\n  false,\n  0\n)\n\nif greenTarget and greenTarget.id ~= player.id\n    and player.pos and greenTarget.pos then\n  local heading = TensorCore.getHeadingToTarget(player.pos, greenTarget.pos)\n  local totalDistance = TensorCore.getDistance2d(player.pos, greenTarget.pos)\n  local tipLength = math.min(3, math.max(1.5, totalDistance * 0.2))\n  local baseLength = totalDistance - tipLength\n\n  if baseLength > 0.5 then\n    local arrowDrawer = TensorCore.getCachedDrawer(\n      0xFF00FFFF, 0xFF0088FF, 0xFF0000FF, 0xFFFFFFFF, 2\n    )\n    local scale = math.min(1, totalDistance / 15)\n    arrowDrawer:addArrow(\n      player.pos.x,\n      player.pos.y,\n      player.pos.z,\n      heading,\n      baseLength,\n      math.max(0.5, 1 * scale),\n      tipLength,\n      math.max(1.5, 3 * scale),\n      false,\n      Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\n  end\nend\n\nself.used = true",
+							actionLua = "local player = TensorCore.mGetPlayer()\nlocal state = data.teaP3\nlocal ids = state and state.enumerationIDs\nif not player or not ids then\n  self.used = true\n  return\nend\n\nlocal first\nlocal second\n\nfor entityID in pairs(ids) do\n  local entity = TensorCore.mGetEntity(entityID)\n  if entity and TensorCore.isDPS(entity) and entity.pos then\n    if not first then\n      first = entity\n    elseif not second then\n      second = entity\n    end\n  end\nend\n\nif not first or not second then\n  self.used = true\n  return\nend\n\nlocal eastTarget = first\nlocal westTarget = first\nif second.pos.x > first.pos.x then\n  eastTarget = second\nelseif second.pos.x < first.pos.x then\n  westTarget = second\nend\n\nlocal greenTarget\nif TensorCore.isDPS(player) then\n  if ids[player.id] then\n    greenTarget = player\n  end\nelseif TensorCore.isTank(player) then\n  greenTarget = eastTarget\nelseif TensorCore.isHealer(player) then\n  greenTarget = westTarget\nelse\n  self.used = true\n  return\nend\n\nif not state.lpduEnumCalled then\n state.lpduEnumCalled=true\n local message\n if TensorCore.isDPS(player) then message=ids[player.id] and \"Enumeration: stay with your group\" or \"Stay out of enumerations\"\n else message=\"Join your green enumeration\" end\n AnyoneCore.Shotcall(message,true,3,false)\nend\n\nlocal greenDrawer = TensorCore.getCachedDrawer(\n  0x4400FF00, 0x8800FF00, 0x6600FF00, 0xDD00FF00, 2\n)\nlocal redDrawer = TensorCore.getCachedDrawer(\n  0x440000FF, 0x880000FF, 0x660000FF, 0xDD0000FF, 2\n)\n\nlocal firstDrawer = greenTarget and first.id == greenTarget.id\n    and greenDrawer or redDrawer\nfirstDrawer:addCircle(\n  first.pos.x,\n  first.pos.y,\n  first.pos.z,\n  5,\n  false,\n  0\n)\n\nlocal secondDrawer = greenTarget and second.id == greenTarget.id\n    and greenDrawer or redDrawer\nsecondDrawer:addCircle(\n  second.pos.x,\n  second.pos.y,\n  second.pos.z,\n  5,\n  false,\n  0\n)\n\nif greenTarget and greenTarget.id ~= player.id\n    and player.pos and greenTarget.pos then\n  local heading = TensorCore.getHeadingToTarget(player.pos, greenTarget.pos)\n  local totalDistance = TensorCore.getDistance2d(player.pos, greenTarget.pos)\n  local tipLength = math.min(3, math.max(1.5, totalDistance * 0.2))\n  local baseLength = totalDistance - tipLength\n\n  if baseLength > 0.5 then\n    local arrowDrawer = TensorCore.getCachedDrawer(\n      0xFF00FFFF, 0xFF0088FF, 0xFF0000FF, 0xFFFFFFFF, 2\n    )\n    local scale = math.min(1, totalDistance / 15)\n    arrowDrawer:addArrow(\n      player.pos.x,\n      player.pos.y,\n      player.pos.z,\n      heading,\n      baseLength,\n      math.max(0.5, 1 * scale),\n      tipLength,\n      math.max(1.5, 3 * scale),\n      false,\n      Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\n  end\nend\n\nself.used = true",
 							name = "Draw Enumeration Circles and Arrow",
 							uuid = "28460a18-fc7c-3897-b611-8d5d85e44f94",
 							version = 2.1,
