@@ -40,6 +40,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### TEA: LPDU Draws
 
+- Added a muted green ring around the priority boss during J Waves. (07-11-2026)
+
 - Double Rocket Punch alerts now only go to tanks and healers. (07-11-2026)
 
 - Added personal crystal and orb placement calls during Inception, available from 547 seconds, and a countdown on the final Wormhole puddle visible only to its assigned soaker. (07-11-2026)
@@ -57,10 +59,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 - Your tethered doll is marked green above 30% and red at or below 30%; dropping below 29% requests Living Liquid, with targeting diagnostics. (07-11-2026)
 
 - Added Move cues on protean AoE creation near 67/104, a late tornado bait reminder for M1/M2/OT, and personal Limit Cut running and bait instructions. (07-11-2026)
-
-- Enabled speech for muted callouts and doll warnings, included eligible melee in third-Water guidance, and added personal post-Wormhole stack and enumeration calls. (07-11-2026)
-
-- Published [LPDU Draws](TimelineReactions/TEA/LPDU%20Draws.lua) with the 163 remaining reactions copied from `rpr tea`, including `[RPR] Second Wind`. (07-11-2026)
 
 ### TEA: ACR3 Opti
 

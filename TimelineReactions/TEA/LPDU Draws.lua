@@ -7183,6 +7183,52 @@ local tbl =
 			},
 		},
 	},
+	[147] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "ea2b3ecb-506e-cea1-9c59-0045d4d8a473",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local state = data.teaJWaveFocus\nif not state then\n    state = {}\n    data.teaJWaveFocus = state\nend\n\nlocal now = Now()\nif not state.nextScan or now >= state.nextScan then\n    state.nextScan = now + 150\n    local chaser, justice, alexander\n    for _, enemy in pairs(TensorCore.entityList(\"targetable,attackable,alive\") or {}) do\n        if enemy.contentid == 9218 and enemy.modelid == 11342 then\n            chaser = enemy.id\n        elseif enemy.contentid == 9216 and enemy.modelid == 11340 then\n            justice = enemy.id\n        elseif enemy.contentid == 9220 and enemy.modelid == 11347 then\n            alexander = enemy.id\n        end\n    end\n    state.sawJustice = state.sawJustice or justice ~= nil\n    state.target = chaser or justice\n    if state.sawJustice and not state.target then\n        state.target = alexander\n    end\nend\n\nlocal target = state.target and TensorCore.mGetEntity(state.target)\nif target and target.targetable and target.hp and target.hp.current > 0 and target.pos then\n    local flags = Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    local drawer = TensorCore.getCachedDrawer(nil, nil, 0x40609860, 0xB0609860, 2)\n    drawer:addCircle(target.pos.x, target.pos.y, target.pos.z, 3, false, flags)\nend\nself.used = true",
+							name = "Draw muted green priority ring",
+							uuid = "172a86db-0518-63c3-95de-5320fe16e1e9",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 706.8,
+				name = "[LPDU] J Waves - Highlight priority boss",
+				timeRange = true,
+				timelineIndex = 147,
+				timerEndOffset = 65.1,
+				uuid = "cd88b5b9-58cf-2fcd-a24b-c13ee7e60d4a",
+				version = 2,
+			},
+		},
+	},
 	[151] = 
 	{
 		
