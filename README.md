@@ -40,6 +40,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### TEA: LPDU Draws
 
+- Third Nisi pass guides DPS to the live Verdict match and clears the arrow after the transfer. (08-11-2026)
+
 - LPDU Settings lets you choose progressive exaflare circles or subtractive safe zones for both Almighty Judgment sets. Exaflares preview up to three circles per lane and brighten the next wave as impacts resolve. (08-11-2026)
 
 - Fate Alpha countdown labels are optional in LPDU Settings and off by default. (07-11-2026)
@@ -57,8 +59,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 - True Heart callouts now tell players to follow their arrow and whether to join the tank stack. (07-11-2026)
 
 - Fixed LPDU Settings failing to open before combat when saved settings had not loaded yet. (07-11-2026)
-
-- LPDU Settings runs from 20 seconds before pull to 50 seconds after. Ordained Motion and Stillness use saved dropdowns and default to Enabled for new settings. Tanks also see the Automatic Tank LB dropdown. (07-11-2026)
 
 ### TEA: ACR3 Opti
 
