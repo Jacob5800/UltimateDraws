@@ -4325,6 +4325,14 @@ local tbl =
 							alertTTS = true,
 							alertText = "Double Rocket Punch - tanks share",
 							alertVolume = 100,
+							conditions = 
+							{
+								
+								{
+									"1b22e96f-e646-b38d-bc44-50ef842bb64a",
+									true,
+								},
+							},
 							name = "Double Rocket Punch - tanks share",
 							uuid = "d5904674-8fb8-9c2b-959b-875c5b017898",
 							version = 2.1,
@@ -4333,6 +4341,17 @@ local tbl =
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local player = TensorCore.mGetPlayer()\nreturn TensorCore.isTank(player) or TensorCore.isHealer(player) or false",
+							name = "Tank or healer",
+							uuid = "1b22e96f-e646-b38d-bc44-50ef842bb64a",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "P2 - Brute Justice + Cruise Chaser",
 				mechanicTime = 374.8,

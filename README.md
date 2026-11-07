@@ -40,6 +40,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### TEA: LPDU Draws
 
+- Double Rocket Punch alerts now only go to tanks and healers. (07-11-2026)
+
 - Added personal crystal and orb placement calls during Inception and a countdown for the assigned final Wormhole soaker. (07-11-2026)
 
 - True Heart callouts now tell players to follow their arrow and whether to join the tank stack. (07-11-2026)
