@@ -40,6 +40,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### TEA: LPDU Draws
 
+- Fixed LPDU Settings failing to open before combat when saved settings had not loaded yet. (07-11-2026)
+
 - LPDU Settings runs from 20 seconds before pull to 50 seconds after. Ordained Motion and Stillness use saved dropdowns and default to Enabled for new settings. Tanks also see the Automatic Tank LB dropdown. (07-11-2026)
 
 - Added True Heart and Perfect Alexander guidance, live Alpha and stack timers, delayed Beta spread cues, prison turn reminders, and optional Ordained and tank LB automation. Improved third Water holder tracking. (07-11-2026)
