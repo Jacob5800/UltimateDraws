@@ -38,6 +38,14 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 - Organized settings into Automatic targeting and Ultima → Annihilation orb assignments. Sections start expanded for new users and remember later expansion choices, targeting preference and orb selections across Lua restarts. Removed the duplicate orb panel and shortened labels/help. (05-11-2026)
 
 
+### TEA: LPDU Draws
+
+- Published [LPDU Draws](TimelineReactions/TEA/LPDU%20Draws.lua) with the 163 remaining reactions copied from `rpr tea`, including `[RPR] Second Wind`. (07-11-2026)
+
+### TEA: ACR3 Opti
+
+- Published [ACR3 Opti](TimelineReactions/TEA/ACR3%20Opti.lua) containing 15 Reaper/Pictomancer optimization reactions, separate from LPDU Draws with no inheritance. Uses the saved ACR3 controls. (07-11-2026)
+
 ### TEA: AutoSim
 
 - Removed the older Tramadol profile download; use `[AA] Autosim - TEA.lua`. (05-11-2026)

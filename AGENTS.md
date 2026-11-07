@@ -33,9 +33,11 @@ This procedure applies to every mapped profile below. Keep one procedure here; p
 | TOP LPDU draws | `top` / `1.0.3` | `TOPReactions\lpdudraws.lua` | `TOP\lpdudraws.lua` | `TOP-LPDU-DRAWS-TODO.md` |
 | TOP LPDU mitigations | `top` / `1.0.3` | `TOPReactions\lpdu mits.lua` | `TOP\lpdu mits.lua` | `TOP-LPDU-MITS-TODO.md` |
 | DSR LPDU | `dsw` / `1.0.5` | `dsrreactions\lpdu strats.lua` | `DSR\Lpdu draws(beta).lua` | `DSR-LPDU-DRAWS-TODO.md` |
+| TEA LPDU draws | `tea` / `1.0.2` | `Teareactions\LPDU Draws.lua` | `TEA\LPDU Draws.lua` | `TEA-PROFILE-SPLIT-TODO.md` |
+| TEA ACR3 optimizations | `tea` / `1.0.2` | `Teareactions\ACR3 Opti.lua` | `TEA\ACR3 Opti.lua` | `TEA-PROFILE-SPLIT-TODO.md` |
 | TEA AA AutoSim | `tea` / `1.0.2` | `Teareactions\[AA] Autosim - TEA (1) (1).lua` | `TEA\[AA] Autosim - TEA.lua` | `TEA-AUTOSIM-DOLLS-TODO.md` |
 
-UCOB has one canonical published draws file, `LPDU Draws.lua`; do not recreate its removed beta duplicate. Preserve DSR's distinct beta filename. TEA's removed `autosim TEA Tramadol.lua` download is not a substitute for AA AutoSim.
+UCOB has one canonical published draws file, `LPDU Draws.lua`; do not recreate its removed beta duplicate. Preserve DSR's distinct beta filename. TEA's removed `autosim TEA Tramadol.lua` download is not a substitute for AA AutoSim. TEA `LPDU Draws` and `ACR3 Opti` are separate profiles with no inheritance between them. `ACR3 Opti` contains the moved Reaper/Pictomancer optimizations; `LPDU Draws` contains the copied remaining reactions, including `[RPR] Second Wind`. Do not publish the original `rpr tea` as either profile.
 
 ## Discord changelog updater
 
