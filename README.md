@@ -40,6 +40,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### TEA: LPDU Draws
 
+- Added player-following Water/Lightning countdowns, personal Wormhole soak and ray-bait calls, and Propeller Wind ice-cover reminders; enabled personal Temporal Stasis callouts. (07-11-2026)
+
 - Your tethered doll is marked green above 30% and red at or below 30%; dropping below 29% requests Living Liquid, with targeting diagnostics. (07-11-2026)
 
 - Added Move cues on protean AoE creation near 67/104, a late tornado bait reminder for M1/M2/OT, and personal Limit Cut running and bait instructions. (07-11-2026)

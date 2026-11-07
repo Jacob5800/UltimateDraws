@@ -3279,6 +3279,84 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "def6b448-cdf0-0da9-b900-f0804da15bbb",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.tea_lpdu_buffTimers\nif not s then\n s={entries={},generation=0};data.tea_lpdu_buffTimers=s\n function s.visit(member,id,color,height,prefix)\n  local key=tostring(member.id)..\":\"..tostring(id)\n  local entry=s.entries[key]\n  local buff=TensorCore.getBuff(member,id)\n  if buff and buff.duration and buff.duration>0 and member.hp.current>0 then\n   local deadline=Now()+buff.duration*1000\n   if entry and math.abs(entry.deadline-deadline)>1500 then\n    AnyoneCore.removeTimedWorldText(entry.uuid);s.entries[key]=nil;entry=nil\n   end\n   if not entry then\n    local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(buff.duration*1000),member.id,color,true,1.3,height,0,prefix)\n    if uuid then entry={uuid=uuid,deadline=deadline};s.entries[key]=entry end\n   end\n   if entry then entry.seen=s.generation end\n  end\n end\nend\ns.generation=s.generation+1\nlocal party=TensorCore.getEntityGroupList(\"Party\")\nfor _,member in pairs(party or {}) do\n if member.id and member.hp then\n  s.visit(member,2142,0xFFFFCC66,2.5,\"Water \")\n  s.visit(member,2143,0xFFFF99DD,3.2,\"Lightning \")\n end\nend\nfor key,entry in pairs(s.entries) do\n if entry.seen~=s.generation then AnyoneCore.removeTimedWorldText(entry.uuid);s.entries[key]=nil end\nend\nself.used=true",
+							name = "[LPDU] Water and Lightning - Following countdowns",
+							uuid = "d778102c-f69b-76e8-98f7-c71ad06891ac",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				loop = true,
+				mechanicTime = 277.3,
+				name = "[LPDU] Water and Lightning - Following countdowns",
+				throttleTime = 250,
+				timeRange = true,
+				timelineIndex = 67,
+				timerEndOffset = 66,
+				timerStartOffset = -39,
+				uuid = "ce3c10f0-8f3b-6b10-a1dd-1a8a4e9ad6c9",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local old=eventArgs.oldData\nlocal s=old and old.tea_lpdu_buffTimers\nif s then for _,entry in pairs(s.entries) do AnyoneCore.removeTimedWorldText(entry.uuid) end end\nself.used=true",
+							name = "[LPDU] Water and Lightning - Wipe cleanup",
+							uuid = "95e36a3a-f42d-d4cb-a0b1-6c0e26618718",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 9,
+				loop = true,
+				mechanicTime = 277.3,
+				name = "[LPDU] Water and Lightning - Wipe cleanup",
+				timeRange = true,
+				timelineIndex = 67,
+				timerEndOffset = 1100,
+				timerStartOffset = -277.3,
+				uuid = "cb95301b-7dbb-600e-bc47-7dd54882ac1d",
+				version = 2,
+			},
+		},
 	},
 	[68] = 
 	{
@@ -4082,6 +4160,104 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "c7030ae9-bc16-ef83-a852-79f92cf90882",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s={boss=eventArgs.entityID,deadline=Now()+eventArgs.channelTimeMax*1000,covered=false}\ndata.tea_lpdu_wind=s\nAnyoneCore.Shotcall(\"Get behind ice\",true,4,false)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"1d554ca5-a0f2-54ec-9d7a-2507b6dfa608",
+									true,
+								},
+							},
+							name = "[LPDU] Propeller Wind - Get behind ice",
+							uuid = "90195ebf-6edd-c3b8-81cc-d0431642cb18",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.spellID==18482 and eventArgs.entityContentID==9218",
+							dequeueIfLuaFalse = true,
+							name = "Relevant event",
+							uuid = "1d554ca5-a0f2-54ec-9d7a-2507b6dfa608",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 354.5,
+				name = "[LPDU] Propeller Wind - Get behind ice",
+				timeRange = true,
+				timelineIndex = 77,
+				timerEndOffset = 1,
+				timerStartOffset = -7,
+				uuid = "166a66cd-f7d4-53cb-b59d-314ab9644974",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.tea_lpdu_wind\nif not s or s.covered or Now()>=s.deadline then self.used=true;return end\nlocal p=TensorCore.mGetPlayer();local boss=TensorCore.mGetEntity(s.boss)\nif not p or not p.pos or not boss or not boss.pos then return end\nlocal pillars=TensorCore.entityList(\"contentid=9219\")\nfor _,ice in pairs(pillars or {}) do\n if ice.pos and Argus.isEntityVisible(ice) then\n  local ix,iz=ice.pos.x-boss.pos.x,ice.pos.z-boss.pos.z\n  local px,pz=p.pos.x-boss.pos.x,p.pos.z-boss.pos.z\n  local d2=ix*ix+iz*iz\n  local along=px*ix+pz*iz\n  if d2>0 and along>d2 and math.abs(px*iz-pz*ix)<=2.5*along/math.sqrt(d2) then\n   s.covered=true;AnyoneCore.Shotcall(\"Behind ice. Stay there\",true,2,false);break\n  end\n end\nend\nself.used=true",
+							name = "[LPDU] Propeller Wind - Ice shadow confirmation",
+							uuid = "752b0225-befd-186e-a522-ea025a4a5ada",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				loop = true,
+				mechanicTime = 354.5,
+				name = "[LPDU] Propeller Wind - Ice shadow confirmation",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 77,
+				timerEndOffset = 1,
+				timerStartOffset = -7,
+				uuid = "3992caa6-b567-d985-a877-e1b3d9480695",
+				version = 2,
+			},
+		},
 	},
 	[79] = 
 	{
@@ -4342,7 +4518,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "\n\nlocal function findEntity(contentID, cacheKey)\n    local cachedID = data[cacheKey]\n    if cachedID then\n        local cached = EntityList:Get(cachedID)\n        if cached and cached.contentid == contentID then\n            return cached\n        end\n    end\n\n    local direct = TensorCore.getEntityByGroup(\"ContentID\", { contentid = contentID }, false)\n    if direct and direct.id then\n        data[cacheKey] = direct.id\n        return direct\n    end\n\n    for _, candidate in pairs(EntityList(\"\") or {}) do\n        if candidate and candidate.id and candidate.contentid == contentID then\n            data[cacheKey] = candidate.id\n            return candidate\n        end\n    end\nend\nlocal party = TensorCore.getEntityGroupList(\"Party\") or {}\nlocal player = TensorCore.mGetPlayer()\nlocal cruiseChaser = findEntity(9218, \"teaTemporalCallCC\")\nlocal bruteJustice = findEntity(9216, \"teaTemporalCallBJ\")\n\nif player and player.id and cruiseChaser and cruiseChaser.pos and bruteJustice and bruteJustice.pos then\n    local partyCount, greenCount, blueCount, aggravatedCount, nothingCount = 0, 0, 0, 0, 0\n    local playerMechanic\n\n    for _, member in pairs(party) do\n        if member and member.id then\n            partyCount = partyCount + 1\n            local mechanic = \"nothing\"\n            for _, buff in pairs(TensorCore.getBuffs(member) or {}) do\n                if buff.id == 1123 then\n                    mechanic = \"green\"\n                    break\n                elseif buff.id == 1124 then\n                    mechanic = \"blue\"\n                    break\n                elseif buff.id == 1121 then\n                    mechanic = \"aggravated\"\n                    break\n                end\n            end\n\n            if mechanic == \"green\" then\n                greenCount = greenCount + 1\n            elseif mechanic == \"blue\" then\n                blueCount = blueCount + 1\n            elseif mechanic == \"aggravated\" then\n                aggravatedCount = aggravatedCount + 1\n            else\n                nothingCount = nothingCount + 1\n            end\n\n            if member.id == player.id then\n                playerMechanic = mechanic\n            end\n        end\n    end\n\n    if partyCount == 8 and greenCount == 2 and blueCount == 2 and aggravatedCount == 2 and nothingCount == 2 and playerMechanic then\n        local ccOnWest = cruiseChaser.pos.x < bruteJustice.pos.x\n        local leftRobotName = ccOnWest and \"CRUISE CHASER\" or \"BRUTE JUSTICE\"\n        local rightRobotName = ccOnWest and \"BRUTE JUSTICE\" or \"CRUISE CHASER\"\n        local isDPS = TensorCore.isDPS(player)\n        local message\n\n        if playerMechanic == \"nothing\" then\n            message = \"NOTHING: \" .. leftRobotName .. \" - \" .. (isDPS and \"SOUTH\" or \"NORTH\")\n        elseif playerMechanic == \"green\" then\n            message = \"GREEN: \" .. rightRobotName .. \" - \" .. (isDPS and \"SOUTH\" or \"NORTH\")\n        elseif playerMechanic == \"blue\" then\n            local side = isDPS and \"WEST\" or \"EAST\"\n            local playerOnCCSide = (side == \"WEST\" and ccOnWest) or (side == \"EAST\" and not ccOnWest)\n            message = \"BLUE: \" .. side\n            if playerOnCCSide then\n                message = message .. \" - MOVE IN FOR THIRD CC BAIT\"\n            else\n                message = message .. \" - STAY AT WALL\"\n            end\n        else\n            message = bruteJustice.pos.x < 100 and \"AGGRAVATED: BRUTE JUSTICE WEST WALL\" or \"AGGRAVATED: BRUTE JUSTICE EAST WALL\"\n        end\n\n        AnyoneCore.Shotcall(message, true, 9, false)\n        self.used = true\n    end\nend\n",
+							actionLua = "\n\nlocal function findEntity(contentID, cacheKey)\n    local cachedID=data[cacheKey]\n    local cached=cachedID and TensorCore.mGetEntity(cachedID)\n    if cached and cached.contentid==contentID then return cached end\n    for _,candidate in pairs(TensorCore.entityList(\"contentid=\"..tostring(contentID)) or {}) do\n        if candidate.id then data[cacheKey]=candidate.id;return candidate end\n    end\nend\nlocal party = TensorCore.getEntityGroupList(\"Party\") or {}\nlocal player = TensorCore.mGetPlayer()\nlocal cruiseChaser = findEntity(9218, \"teaTemporalCallCC\")\nlocal bruteJustice = findEntity(9216, \"teaTemporalCallBJ\")\n\nif player and player.id and cruiseChaser and cruiseChaser.pos and bruteJustice and bruteJustice.pos then\n    local partyCount, greenCount, blueCount, aggravatedCount, nothingCount = 0, 0, 0, 0, 0\n    local playerMechanic\n\n    for _, member in pairs(party) do\n        if member and member.id then\n            partyCount = partyCount + 1\n            local mechanic = \"nothing\"\n            for _, buff in pairs(TensorCore.getBuffs(member) or {}) do\n                if buff.id == 1123 then\n                    mechanic = \"green\"\n                    break\n                elseif buff.id == 1124 then\n                    mechanic = \"blue\"\n                    break\n                elseif buff.id == 1121 then\n                    mechanic = \"aggravated\"\n                    break\n                end\n            end\n\n            if mechanic == \"green\" then\n                greenCount = greenCount + 1\n            elseif mechanic == \"blue\" then\n                blueCount = blueCount + 1\n            elseif mechanic == \"aggravated\" then\n                aggravatedCount = aggravatedCount + 1\n            else\n                nothingCount = nothingCount + 1\n            end\n\n            if member.id == player.id then\n                playerMechanic = mechanic\n            end\n        end\n    end\n\n    if partyCount == 8 and greenCount == 2 and blueCount == 2 and aggravatedCount == 2 and nothingCount == 2 and playerMechanic then\n        local ccOnWest = cruiseChaser.pos.x < bruteJustice.pos.x\n        local leftRobotName = ccOnWest and \"CRUISE CHASER\" or \"BRUTE JUSTICE\"\n        local rightRobotName = ccOnWest and \"BRUTE JUSTICE\" or \"CRUISE CHASER\"\n        local isDPS = TensorCore.isDPS(player)\n        local message\n\n        if playerMechanic == \"nothing\" then\n            message = \"NOTHING: \" .. leftRobotName .. \" - \" .. (isDPS and \"SOUTH\" or \"NORTH\")\n        elseif playerMechanic == \"green\" then\n            message = \"GREEN: \" .. rightRobotName .. \" - \" .. (isDPS and \"SOUTH\" or \"NORTH\")\n        elseif playerMechanic == \"blue\" then\n            local side = isDPS and \"WEST\" or \"EAST\"\n            local playerOnCCSide = (side == \"WEST\" and ccOnWest) or (side == \"EAST\" and not ccOnWest)\n            message = \"BLUE: \" .. side\n            if playerOnCCSide then\n                message = message .. \" - MOVE IN FOR THIRD CC BAIT\"\n            else\n                message = message .. \" - STAY AT WALL\"\n            end\n        else\n            message = bruteJustice.pos.x < 100 and \"AGGRAVATED: BRUTE JUSTICE WEST WALL\" or \"AGGRAVATED: BRUTE JUSTICE EAST WALL\"\n        end\n\n        AnyoneCore.Shotcall(message, true, 9, false)\n        self.used = true\n    end\nend\n",
 							endIfUsed = true,
 							name = "Call local assignment",
 							uuid = "3e07af7c-0304-2775-a83f-e2e4f162901f",
@@ -4354,9 +4530,9 @@ local tbl =
 				{
 				},
 				displayPath = "P3 - Alexander Prime/Temporal Stasis",
-				enabled = false,
 				mechanicTime = 500,
 				name = "P3 - Temporal Stasis - Personal Shotcall",
+				throttleTime = 100,
 				timeRange = true,
 				timelineIndex = 88,
 				timerEndOffset = 3.5,
@@ -5570,6 +5746,70 @@ local tbl =
 				timerEndOffset = 16,
 				timerStartOffset = 8,
 				uuid = "fab16fc9-d66e-1277-98c9-29d1dab7f53f",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "da25194b-c43e-1bee-9ded-5bbef576e35d",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local w=data.teaWormhole\nlocal p=TensorCore.mGetPlayer()\nif not w or not w.myNumber or not p then self.used=true;return end\nlocal s=data.tea_lpdu_wormCalls\nif not s or s.assignment~=w.assignmentSequence then\n s={assignment=w.assignmentSequence,soakStage=0};data.tea_lpdu_wormCalls=s\nend\nlocal spell=eventArgs.spellID\nlocal number=w.myNumber\nif spell==18506 then\n if not s.rayHolder and eventArgs.castPosX and eventArgs.castPosX>75 and eventArgs.castPosX<125 and math.abs(eventArgs.castPosX-100)>5 then\n  s.rayHolder=eventArgs.castPosX<100 and 2 or 1\n  if number==s.rayHolder then AnyoneCore.Shotcall(\"Hold. Bait ray\",true,3,false) end\n end\nelseif spell==18507 then\n if number==s.rayHolder and not s.rayDone then\n  s.rayDone=true;AnyoneCore.Shotcall(\"Ray baited. Move\",true,2,false)\n end\nelseif spell==18517 then\n if s.soakStage==0 then\n  s.soakStage=1\n  if number==5 or number==6 then AnyoneCore.Shotcall(\"Soak your puddle\",true,3,false) end\n end\nelse\n local stage=spell==18537 and 1 or (spell==18536 and 2 or 3)\n local expected=(stage==1 and (number==5 or number==6)) or (stage==2 and (number==7 or number==8)) or (stage==3 and (number==1 or number==2))\n if expected and not s.ownSoakDone then\n  for _,id in pairs(eventArgs.hitTargets or {}) do\n   if id==p.id then\n    s.ownSoakDone=true;AnyoneCore.Shotcall(\"Leave puddle\",true,2,false);break\n   end\n  end\n end\n if s.soakStage<=stage then\n  s.soakStage=stage+1\n  if not s.ownSoakDone and ((stage==1 and (number==7 or number==8)) or (stage==2 and (number==1 or number==2))) then\n   AnyoneCore.Shotcall(\"Soak your puddle\",true,3,false)\n  end\n end\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"0d904e55-3ed6-4b47-b278-2f44933356d0",
+									true,
+								},
+							},
+							name = "[LPDU] Wormhole - Personal soaks and Ray bait",
+							uuid = "0651f485-1508-c4f8-b1c0-227328f4fa3f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.spellID==18517 or eventArgs.spellID==18506 or eventArgs.spellID==18507 or eventArgs.spellID==18537 or eventArgs.spellID==18536 or eventArgs.spellID==18535",
+							dequeueIfLuaFalse = true,
+							name = "Relevant event",
+							uuid = "0d904e55-3ed6-4b47-b278-2f44933356d0",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 629.3,
+				name = "[LPDU] Wormhole - Personal soaks and Ray bait",
+				timeRange = true,
+				timelineIndex = 119,
+				timerEndOffset = 37,
+				timerStartOffset = 18,
+				uuid = "018f8cc3-17b5-24da-b0e8-d0ad4b94fc6d",
 				version = 2,
 			},
 		},
