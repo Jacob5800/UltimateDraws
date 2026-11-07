@@ -40,6 +40,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### TEA: LPDU Draws
 
+- Fate Beta marks the west jump bait spot for its assigned player. (07-11-2026)
+
 - Final Word shows march timers only to players who are forced to move. Opening Optical Sight spreads no longer draw fixed-position arrows. Removed the separate Lasers countdown from Fate Alpha. (07-11-2026)
 
 - Added a muted green ring around the priority boss during J Waves. (07-11-2026)
@@ -57,8 +59,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 - Added True Heart and Perfect Alexander guidance, live Alpha and stack timers, delayed Beta spread cues, prison turn reminders, and optional Ordained and tank LB automation. Improved third Water holder tracking. (07-11-2026)
 
 - Added player-following Water/Lightning countdowns, personal Wormhole soak and ray-bait calls, and Propeller Wind ice-cover reminders; enabled personal Temporal Stasis callouts. (07-11-2026)
-
-- Your tethered doll is marked green above 30% and red at or below 30%; dropping below 29% requests Living Liquid, with targeting diagnostics. (07-11-2026)
 
 ### TEA: ACR3 Opti
 
