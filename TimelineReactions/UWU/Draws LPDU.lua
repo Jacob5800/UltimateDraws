@@ -1010,6 +1010,50 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ultima",
+				uuid = "1f2cbe92-1cf6-9308-942f-7cd68a8642ac",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local old=eventArgs.oldData\nlocal state=old and old.uwu_intermission_meteors\nif state then for _,id in pairs(state.shapes) do Argus.deleteTimedShape(id) end end\nself.used=true",
+							name = "Intermission meteors - Wipe cleanup",
+							uuid = "275ecda6-ac5f-c1dd-9942-7ccbc5e76919",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Draws - Ultima",
+				eventType = 9,
+				loop = true,
+				mechanicTime = 9,
+				name = "[LPDU] Intermission meteors - Wipe cleanup",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 1591,
+				timerStartOffset = -9,
+				uuid = "7ea8953e-2a4d-a592-809d-6528ec551131",
+				version = 2,
+			},
+		},
 	},
 	[3] = 
 	{
@@ -12725,6 +12769,162 @@ local tbl =
 				timerEndOffset = 12,
 				timerStartOffset = -8,
 				uuid = "04c63c85-f0de-c91d-8623-e4122ac6470c",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Ultima",
+				uuid = "6547e246-c91b-2911-8ed5-3429216eb45f",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local state=data.uwu_intermission_meteors\nif not state then state={seen={},shapes={},count=0};data.uwu_intermission_meteors=state end\nif state.seen[eventArgs.entityID] or state.count>=4 then self.used=true;return end\nlocal actor=TensorCore.mGetEntity(eventArgs.entityID)\nif not actor then return end\nlocal id=TensorCore.getMoogleDrawer():addTimedCircle(5900,actor.pos.x,actor.pos.y+0.05,actor.pos.z,17,0,false,true)\nif not id then return end\nstate.seen[eventArgs.entityID]=true\nstate.shapes[eventArgs.entityID]=id\nstate.count=state.count+1\nTensorCore.timelineLogToFile(string.format(\"[UWU Freefire] meteor %d id=%d preview=(%.2f,%.2f) radius=17\\n\",state.count,eventArgs.entityID,actor.pos.x,actor.pos.z))\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"4eb3e16b-d021-30f4-b163-0d1940d1be4f",
+									true,
+								},
+								
+								{
+									"72bc7d79-ade4-4371-9221-fef71d874f12",
+									true,
+								},
+								
+								{
+									"01416549-40ff-3b45-96ba-b383e0b66f81",
+									true,
+								},
+							},
+							name = "Intermission meteors - Early proximity circles",
+							uuid = "422ccd0a-8749-421f-b48c-55c781784d53",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							comparator = 3,
+							dequeueIfLuaFalse = true,
+							eventArgType = 4,
+							eventIntValue = 1097,
+							name = "Freefire landing omen",
+							uuid = "4eb3e16b-d021-30f4-b163-0d1940d1be4f",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							comparator = 3,
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventIntValue = 1,
+							name = "Animation slot 1",
+							uuid = "72bc7d79-ade4-4371-9221-fef71d874f12",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID==1801 or eventArgs.entityContentID==2137",
+							dequeueIfLuaFalse = true,
+							name = "Intermission helper",
+							uuid = "01416549-40ff-3b45-96ba-b383e0b66f81",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Ultima",
+				eventType = 23,
+				loop = true,
+				mechanicTime = 800,
+				name = "[LPDU] Intermission meteors - Early proximity circles",
+				timeRange = true,
+				timelineIndex = 114,
+				timerEndOffset = 3,
+				timerStartOffset = -220,
+				uuid = "2c7ff152-9144-9c9d-a528-98ae8f827594",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local state=data.uwu_intermission_meteors\nlocal id=state and state.shapes[eventArgs.entityID]\nif id then Argus.deleteTimedShape(id);state.shapes[eventArgs.entityID]=nil end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"882e3292-7556-71e4-9500-4cf3ae51b7d8",
+									true,
+								},
+							},
+							name = "Intermission meteors - Impact cleanup",
+							uuid = "ea1b8ece-5973-d00d-91eb-ac8a65ebab07",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.spellID==11509",
+							dequeueIfLuaFalse = true,
+							name = "Freefire impact",
+							uuid = "882e3292-7556-71e4-9500-4cf3ae51b7d8",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Draws - Ultima",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 800,
+				name = "[LPDU] Intermission meteors - Impact cleanup",
+				timeRange = true,
+				timelineIndex = 114,
+				timerEndOffset = 3,
+				timerStartOffset = -220,
+				uuid = "6231967f-32af-a092-a12a-df3594616cdd",
 				version = 2,
 			},
 		},
