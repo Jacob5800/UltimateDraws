@@ -5000,6 +5000,51 @@ local tbl =
 			},
 		},
 	},
+	[102] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "4dd53256-08dd-992f-8bfc-234ab86b93a4",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player = TensorCore.mGetPlayer()\nlocal state = data.inception\nif not player or not state or state.personalPlacementCalled then return end\n\nlocal message\nfor _, pair in pairs(state.tetherPairs or {}) do\n    if pair.player == player.id and pair.sphere then\n        message = \"Orb tether. Follow your arrow\"\n        break\n    end\nend\n\nlocal solver = state.puddleArrowSolver\nif not message and solver and solver.byPlayer and solver.byPlayer[player.id] then\n    message = \"Drop your crystal at your arrow\"\nend\nif not message then return end\n\nAnyoneCore.Shotcall(message, true, 3, false)\nstate.personalPlacementCalled = true\nself.used = true",
+							name = "Call crystal or orb assignment",
+							uuid = "301a427f-cce8-8284-a2d6-cfe28a626b92",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				mechanicTime = 552.4,
+				name = "[LPDU] Inception - Personal placement call",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 102,
+				timerStartOffset = -3.5,
+				uuid = "d8bfeb8c-c6a7-3401-9cdf-7af962690898",
+				version = 2,
+			},
+		},
+	},
 	[103] = 
 	{
 		
@@ -5998,7 +6043,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local w=data.teaWormhole\nlocal p=TensorCore.mGetPlayer()\nif not w or not w.myNumber or not p then self.used=true;return end\nlocal s=data.tea_lpdu_wormCalls\nif not s or s.assignment~=w.assignmentSequence then\n s={assignment=w.assignmentSequence,soakStage=0};data.tea_lpdu_wormCalls=s\nend\nlocal spell=eventArgs.spellID\nlocal number=w.myNumber\nif spell==18506 then\n if not s.rayHolder and eventArgs.castPosX and eventArgs.castPosX>75 and eventArgs.castPosX<125 and math.abs(eventArgs.castPosX-100)>5 then\n  s.rayHolder=eventArgs.castPosX<100 and 2 or 1\n  if number==s.rayHolder then AnyoneCore.Shotcall(\"Hold. Bait ray\",true,3,false) end\n end\nelseif spell==18507 then\n if number==s.rayHolder and not s.rayDone then\n  s.rayDone=true;AnyoneCore.Shotcall(\"Ray baited. Move\",true,2,false)\n end\nelseif spell==18517 then\n if s.soakStage==0 then\n  s.soakStage=1\n  if number==5 or number==6 then AnyoneCore.Shotcall(\"Soak your puddle\",true,3,false) end\n end\nelse\n local stage=spell==18537 and 1 or (spell==18536 and 2 or 3)\n local expected=(stage==1 and (number==5 or number==6)) or (stage==2 and (number==7 or number==8)) or (stage==3 and (number==1 or number==2))\n if expected and not s.ownSoakDone then\n  for _,id in pairs(eventArgs.hitTargets or {}) do\n   if id==p.id then\n    s.ownSoakDone=true;AnyoneCore.Shotcall(\"Leave puddle\",true,2,false);break\n   end\n  end\n end\n if s.soakStage<=stage then\n  s.soakStage=stage+1\n  if not s.ownSoakDone and ((stage==1 and (number==7 or number==8)) or (stage==2 and (number==1 or number==2))) then\n   AnyoneCore.Shotcall(\"Soak your puddle\",true,3,false)\n  end\n end\nend\nself.used=true",
+							actionLua = "local w=data.teaWormhole\nlocal p=TensorCore.mGetPlayer()\nif not w or not w.myNumber or not p then self.used=true;return end\nlocal s=data.tea_lpdu_wormCalls\nif not s or s.assignment~=w.assignmentSequence then\n s={assignment=w.assignmentSequence,soakStage=0};data.tea_lpdu_wormCalls=s\nend\nlocal spell=eventArgs.spellID\nlocal number=w.myNumber\nif spell==18506 then\n if not s.rayHolder and eventArgs.castPosX and eventArgs.castPosX>75 and eventArgs.castPosX<125 and math.abs(eventArgs.castPosX-100)>5 then\n  s.rayHolder=eventArgs.castPosX<100 and 2 or 1\n  if number==s.rayHolder then AnyoneCore.Shotcall(\"Hold. Bait ray\",true,3,false) end\n end\nelseif spell==18507 then\n if number==s.rayHolder and not s.rayDone then\n  s.rayDone=true;AnyoneCore.Shotcall(\"Ray baited. Move\",true,2,false)\n end\nelseif spell==18517 then\n if s.soakStage==0 then\n  s.soakStage=1\n  if number==5 or number==6 then AnyoneCore.Shotcall(\"Soak your puddle\",true,3,false) end\n end\nelse\n local stage=spell==18537 and 1 or (spell==18536 and 2 or 3)\n local expected=(stage==1 and (number==5 or number==6)) or (stage==2 and (number==7 or number==8)) or (stage==3 and (number==1 or number==2))\n if expected and not s.ownSoakDone then\n  for _,id in pairs(eventArgs.hitTargets or {}) do\n   if id==p.id then\n    if s.finalSoakTimer then\n     AnyoneCore.removeTimedWorldText(s.finalSoakTimer)\n     s.finalSoakTimer = nil\n    end\n    s.ownSoakDone=true;AnyoneCore.Shotcall(\"Leave puddle\",true,2,false);break\n   end\n  end\n end\n if s.soakStage<=stage then\n  s.soakStage=stage+1\n  if not s.ownSoakDone and ((stage==1 and (number==7 or number==8)) or (stage==2 and (number==1 or number==2))) then\n   AnyoneCore.Shotcall(\"Soak your puddle\",true,3,false)\n   if stage == 2 then\n    -- Repentance 3 resolves at about 664 on the TEA timeline.\n    local remainingMs = math.floor((664 - TensorReactions_CurrentTimer) * 1000)\n    if remainingMs > 0 then\n     s.finalSoakTimer = AnyoneCore.addWorldTextCountdownOnEnt(\n      remainingMs, p.id, 0xFFFFFFFF, true, 1.35, 2.5, 0, \"Soak \"\n     )\n    end\n   end\n  end\n end\nend\nself.used=true",
 							conditions = 
 							{
 								

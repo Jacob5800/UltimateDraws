@@ -40,6 +40,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### TEA: LPDU Draws
 
+- Added personal crystal and orb placement calls during Inception and a countdown for the assigned final Wormhole soaker. (07-11-2026)
+
 - True Heart callouts now tell players to follow their arrow and whether to join the tank stack. (07-11-2026)
 
 - Fixed LPDU Settings failing to open before combat when saved settings had not loaded yet. (07-11-2026)
