@@ -5305,7 +5305,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nif g.heartGathered then self.used=true;return end\nAnyoneCore.Shotcall(\"Gather at the heart\",true,4,false)\ng.heartGathered=true;self.used=true",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nif g.heartGathered then self.used=true;return end\nself.callAt = self.callAt or (Now() + 1000)\nif Now() < self.callAt then return end\n\nAnyoneCore.Shotcall(\"Gather at the heart\",true,4,false)\ng.heartGathered=true;self.used=true",
 							conditions = 
 							{
 								
