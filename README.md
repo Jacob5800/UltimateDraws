@@ -40,7 +40,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### TEA: LPDU Draws
 
-- Final Word shows march timers only to players who are forced to move. Opening Optical Sight spreads no longer draw fixed-position arrows. (07-11-2026)
+- Final Word shows march timers only to players who are forced to move. Opening Optical Sight spreads no longer draw fixed-position arrows. Removed the separate Lasers countdown from Fate Alpha. (07-11-2026)
 
 - Added a muted green ring around the priority boss during J Waves. (07-11-2026)
 

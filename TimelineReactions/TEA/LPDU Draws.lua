@@ -9304,7 +9304,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal s=g.alpha\nif not s then s={preview={},lasers={},commands=0};g.alpha=s end\nlocal spell=eventArgs.spellID\nif s.done then self.used=true;return end\nif spell==18591 then\n if not s.preview[eventArgs.entityID] then\n  s.preview[eventArgs.entityID]=true;s.previewCount=(s.previewCount or 0)+1\n  if s.previewCount==3 then\n   local p=TensorCore.mGetPlayer();if p then s.timer=g.timer(18100,p.id,\"Lasers \",3.1) end\n  end\n end\nelseif spell==18859 or spell==18860 then\n if not s.lastCommand or Now()-s.lastCommand>1000 then\n  s.lastCommand=Now();s.commands=s.commands+1\n  if s.commands==1 then AnyoneCore.Shotcall(\"Stay in your spot\",true,2,false) end\n end\nelseif spell==18569 and not s.lasers[eventArgs.entityID] then\n s.lasers[eventArgs.entityID]=true;s.laserCount=(s.laserCount or 0)+1\nend\nif s.commands>=2 and (s.laserCount or 0)>=3 then\n s.done=true\n if s.timer then AnyoneCore.removeTimedWorldText(s.timer);s.timer=nil end\n if data.fateAlpha then data.fateAlpha.targetPos={x=100,y=0,z=100} end\n AnyoneCore.Shotcall(\"Move in\",true,3,false)\nend\nself.used=true",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal s=g.alpha\nif not s then s={preview={},lasers={},commands=0};g.alpha=s end\nlocal spell=eventArgs.spellID\nif s.done then self.used=true;return end\nif spell==18859 or spell==18860 then\n if not s.lastCommand or Now()-s.lastCommand>1000 then\n  s.lastCommand=Now();s.commands=s.commands+1\n  if s.commands==1 then AnyoneCore.Shotcall(\"Stay in your spot\",true,2,false) end\n end\nelseif spell==18569 and not s.lasers[eventArgs.entityID] then\n s.lasers[eventArgs.entityID]=true;s.laserCount=(s.laserCount or 0)+1\nend\nif s.commands>=2 and (s.laserCount or 0)>=3 then\n s.done=true\n if data.fateAlpha then data.fateAlpha.targetPos={x=100,y=0,z=100} end\n AnyoneCore.Shotcall(\"Move in\",true,3,false)\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -9326,7 +9326,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return eventArgs.spellID==18591 or eventArgs.spellID==18859 or eventArgs.spellID==18860 or eventArgs.spellID==18569",
+							conditionLua = "return eventArgs.spellID==18859 or eventArgs.spellID==18860 or eventArgs.spellID==18569",
 							dequeueIfLuaFalse = true,
 							name = "Relevant event",
 							uuid = "ee6f1dac-dd5e-2684-9ea1-1d90247961f7",
