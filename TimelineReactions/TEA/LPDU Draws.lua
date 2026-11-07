@@ -3300,7 +3300,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.tea_lpdu_buffTimers\nif not s then\n s={entries={},generation=0};data.tea_lpdu_buffTimers=s\n function s.visit(member,id,color,height,prefix)\n  local key=tostring(member.id)..\":\"..tostring(id)\n  local entry=s.entries[key]\n  local buff=TensorCore.getBuff(member,id)\n  if buff and buff.duration and buff.duration>0 and member.hp.current>0 then\n   local deadline=Now()+buff.duration*1000\n   if entry and math.abs(entry.deadline-deadline)>1500 then\n    AnyoneCore.removeTimedWorldText(entry.uuid);s.entries[key]=nil;entry=nil\n   end\n   if not entry then\n    local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(buff.duration*1000),member.id,color,true,1.3,height,0,prefix)\n    if uuid then entry={uuid=uuid,deadline=deadline};s.entries[key]=entry end\n   end\n   if entry then entry.seen=s.generation end\n  end\n end\nend\ns.generation=s.generation+1\nlocal party=TensorCore.getEntityGroupList(\"Party\")\nfor _,member in pairs(party or {}) do\n if member.id and member.hp then\n  s.visit(member,2142,0xFFFFCC66,2.5,\"Water \")\n  s.visit(member,2143,0xFFFF99DD,3.2,\"Lightning \")\n end\nend\nfor key,entry in pairs(s.entries) do\n if entry.seen~=s.generation then AnyoneCore.removeTimedWorldText(entry.uuid);s.entries[key]=nil end\nend\nself.used=true",
+							actionLua = "local s=data.tea_lpdu_buffTimers\nif not s then\n s={entries={},generation=0};data.tea_lpdu_buffTimers=s\n function s.visit(member,id,color,height,prefix)\n  local key=tostring(member.id)..\":\"..tostring(id)\n  local entry=s.entries[key]\n  local buff=TensorCore.getBuff(member,id)\n  if buff and buff.duration and buff.duration>0 and member.hp.current>0 then\n   if id==2142 then\n    local history=data.tea_lpdu_water\n    if not history then history={};data.tea_lpdu_water=history end\n    if history.current~=member.id then history.previous=history.current;history.current=member.id end\n   end\n   local deadline=Now()+buff.duration*1000\n   if entry and math.abs(entry.deadline-deadline)>1500 then\n    AnyoneCore.removeTimedWorldText(entry.uuid);s.entries[key]=nil;entry=nil\n   end\n   if not entry then\n    local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(buff.duration*1000),member.id,color,true,1.3,height,0,prefix)\n    if uuid then entry={uuid=uuid,deadline=deadline};s.entries[key]=entry end\n   end\n   if entry then entry.seen=s.generation end\n  end\n end\nend\ns.generation=s.generation+1\nlocal party=TensorCore.getEntityGroupList(\"Party\")\nfor _,member in pairs(party or {}) do\n if member.id and member.hp then\n  s.visit(member,2142,0xFFFFCC66,2.5,\"Water \")\n  s.visit(member,2143,0xFFFF99DD,3.2,\"Lightning \")\n end\nend\nfor key,entry in pairs(s.entries) do\n if entry.seen~=s.generation then AnyoneCore.removeTimedWorldText(entry.uuid);s.entries[key]=nil end\nend\nself.used=true",
 							name = "[LPDU] Water and Lightning - Following countdowns",
 							uuid = "d778102c-f69b-76e8-98f7-c71ad06891ac",
 							version = 2.1,
@@ -3954,12 +3954,15 @@ local tbl =
 				{
 				},
 				displayPath = "P2 - Brute Justice + Cruise Chaser",
-				execute = "local flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nlocal player = TensorCore.mGetPlayer()\nlocal party = TensorCore.getEntityGroupList(\"Party\") or {}\nlocal water\nfor _, member in pairs(party) do\n  if member and TensorCore.hasBuff(member, 2142) then water = member break end\nend\nif not player or not water then self.used = true return end\n\nlocal _, _, _, _, outlineThickness = TensorCore.getMoogleColors()\nlocal drawer = TensorCore.getCachedDrawer(\n  0x30FF0000, 0x60FF0000, 0xA0FF0000, 0xFFFF0000,\n  outlineThickness, 0, flags\n)\ndrawer:addTimedCircleOnEnt(5000, water.id, 8, 0, false, false, flags)\n\nif water.id == player.id then\n  AnyoneCore.Shotcall(\"Water: place west at 86, 100\", true, 5, true)\n  local destination = { x = 86, y = 0, z = 100 }\n  local heading = TensorCore.getHeadingToTarget(player.pos, destination)\n  local length = math.max(1, TensorCore.getDistance2d(player.pos, destination) - 1)\n  drawer:addTimedArrow(5000, player.pos.x, player.pos.y, player.pos.z, heading, length, 0.35, 1, 0.9, 0, false, flags)\nelseif not TensorCore.hasBuff(player, 2143) and not TensorCore.isTank(player) and\n       data.tea_lpdu_water and data.tea_lpdu_water.previous and data.tea_lpdu_water.previous~=player.id then\n  AnyoneCore.Shotcall(\"Stack with water\", true, 5, false)\n  drawer:addTimedArrowOnEnt(5000, player.id, 1, 0.35, 1, 0.9, water.id, 0, false, 0, false, flags)\nend\nself.used = true",
+				execute = "local flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nlocal player = TensorCore.mGetPlayer()\nlocal party = TensorCore.getEntityGroupList(\"Party\") or {}\nlocal water\nfor _, member in pairs(party) do\n  if member and TensorCore.hasBuff(member, 2142) then water = member break end\nend\nif not player or not water then return end\n\nif water.id~=player.id and not TensorCore.isTank(player) and not TensorCore.hasBuff(player,2143) and\n   (not data.tea_lpdu_water or not data.tea_lpdu_water.previous) then\n if not self.historyDiagnostic then\n  TensorCore.timelineLogToFile(\"[TEA Water3] waiting for previous Water holder; player=\"..tostring(player.id)..\" water=\"..tostring(water.id)..\"\\n\")\n  self.historyDiagnostic=true\n end\n return\nend\nlocal _, _, _, _, outlineThickness = TensorCore.getMoogleColors()\nlocal drawer = TensorCore.getCachedDrawer(\n  0x30FF0000, 0x60FF0000, 0xA0FF0000, 0xFFFF0000,\n  outlineThickness, 0, flags\n)\ndrawer:addTimedCircleOnEnt(5000, water.id, 8, 0, false, false, flags)\n\nif water.id == player.id then\n  AnyoneCore.Shotcall(\"Water: go to B\", true, 5, false)\n  local x,y,z,active=Argus.getWaymarkInfo(2)\n  local destination=active and {x=x,y=y,z=z} or {x=113.7,y=0,z=91.9}\n  local heading = TensorCore.getHeadingToTarget(player.pos, destination)\n  local length = math.max(1, TensorCore.getDistance2d(player.pos, destination) - 1)\n  drawer:addTimedArrow(5000, player.pos.x, player.pos.y, player.pos.z, heading, length, 0.35, 1, 0.9, 0, false, flags)\nelseif not TensorCore.hasBuff(player, 2143) and not TensorCore.isTank(player) and\n       data.tea_lpdu_water and data.tea_lpdu_water.previous and data.tea_lpdu_water.previous~=player.id then\n  AnyoneCore.Shotcall(\"Stack with water\", true, 5, false)\n  drawer:addTimedArrowOnEnt(5000, player.id, 1, 0.35, 1, 0.9, water.id, 0, false, 0, false, flags)\nend\nself.used = true",
 				executeType = 2,
 				mechanicTime = 336.2,
 				name = "P2 - Third Water Stack",
+				throttleTime = 100,
+				timeRange = true,
 				timelineIndex = 76,
 				timerOffset = -5,
+				timerStartOffset = -5,
 				uuid = "c95211f1-55c5-e811-b361-d74450a6f134",
 				version = 2,
 			},
@@ -4997,6 +5000,53 @@ local tbl =
 			},
 		},
 	},
+	[103] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "22faef27-49d6-eea7-8716-c5312d3de04e",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nif g.heartExplained then self.used=true;return end\nAnyoneCore.Shotcall(\"Heart clears crystals. Move away\",true,4,false)\ng.heartExplained=true;self.used=true",
+							name = "[LPDU] Inception - Heart purpose and crystal escape",
+							uuid = "e4b9537a-fc87-1f49-ad69-70d3f84dff84",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				loop = true,
+				mechanicTime = 558.2,
+				name = "[LPDU] Inception - Heart purpose and crystal escape",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 103,
+				timerEndOffset = 3,
+				timerStartOffset = -0.5,
+				uuid = "5188e94d-13a5-8c75-9a28-2fef79b7eaae",
+				version = 2,
+			},
+		},
+	},
 	[104] = 
 	{
 		
@@ -5170,6 +5220,117 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "d19bf1d7-85fd-a193-a77d-04def3531b06",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nif g.heartGathered then self.used=true;return end\nAnyoneCore.Shotcall(\"Gather at the heart\",true,4,false)\ng.heartGathered=true;self.used=true",
+							conditions = 
+							{
+								
+								{
+									"758a2d28-63e6-f869-8534-71125a50a742",
+									true,
+								},
+							},
+							name = "[LPDU] Inception - Gather after third fire bait",
+							uuid = "1d0d5f90-8375-84b0-9846-25a9087d916e",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.spellID==18540",
+							dequeueIfLuaFalse = true,
+							name = "Relevant event",
+							uuid = "758a2d28-63e6-f869-8534-71125a50a742",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 573.8,
+				name = "[LPDU] Inception - Gather after third fire bait",
+				timeRange = true,
+				timelineIndex = 106,
+				timerEndOffset = 3,
+				timerStartOffset = -1,
+				uuid = "2c3d8e56-f4af-1c2c-b33b-a912a3d922c7",
+				version = 2,
+			},
+		},
+	},
+	[107] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "79ddbf56-1e76-dd1e-af2c-04527981f6d9",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nif g.heartSplitCalled then self.used=true;return end\nlocal roster=AnyoneCore.Roster\nif not roster or not roster.current() or not data.trueHeartNewNorth then return end\nlocal p=TensorCore.mGetPlayer();if not p then return end\nlocal slot=roster.mySlot();local stack=TensorCore.hasBuff(p,1122)\nlocal far=TensorCore.hasBuff(p,1124)\nlocal message\nif slot==\"T1\" or slot==\"T2\" or stack then message=\"Heart north: left stack\"\nelse message=\"Heart north: right side\" end\nif far then message=message..\". Tether: go far\" end\nAnyoneCore.Shotcall(message,true,5,false)\ng.heartSplitCalled=true;self.used=true",
+							name = "[LPDU] Inception - Personal Heart split instruction",
+							uuid = "0d06bf7d-e42a-44b9-b54e-0613935e6e5d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				loop = true,
+				mechanicTime = 581,
+				name = "[LPDU] Inception - Personal Heart split instruction",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 107,
+				timerEndOffset = 8.5,
+				timerStartOffset = -1,
+				uuid = "4af06d80-a387-1af1-9d2d-fe03ce9d066b",
+				version = 2,
+			},
+		},
 	},
 	[108] = 
 	{
@@ -5249,7 +5410,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local roster = AnyoneCore.Roster\nlocal player = TensorCore.mGetPlayer()\nlocal mySlot = roster and roster.mySlot\nlocal sourcePos = player and player.pos\nlocal restrainingOrderDpsID = data.trueHeartRestrainingOrderDpsID\n\ndata.trueHeartSwordPositions = data.trueHeartSwordPositions or {\n    center = { x = 100, y = 0, z = 100 },\n    positions = {\n        -- Absolute arena positions, relative to the arena center.\n        H1 = { radian = math.pi, distance = 3 }, -- True north.\n        H2 = { radian = 0, distance = 3 }, -- True south.\n        restrainingOrderDps = { radian = -math.pi / 2, distance = 3 }, -- True west.\n        T2 = { radian = math.pi / 2, distance = 18.25 } -- True east.\n    }\n}\n\nlocal state = data.trueHeartSwordPositions\nlocal position\n\nif mySlot == \"H1\" then\n    position = state.positions.H1\nelseif mySlot == \"H2\" then\n    position = state.positions.H2\nelseif mySlot == \"T2\" then\n    position = state.positions.T2\nelseif player and player.id == restrainingOrderDpsID then\n    position = state.positions.restrainingOrderDps\nend\n\nlocal function drawPosition(targetPos)\n    local heading = TensorCore.getHeadingToTarget(sourcePos, targetPos)\n    local totalDistance = TensorCore.getDistance2d(sourcePos, targetPos)\n    local scale = math.min(1, totalDistance / 15)\n    local baseWidth = math.max(0.5, 1 * scale)\n    local tipWidth = math.max(1.5, 3 * scale)\n    local tipLength = math.max(2, 3 * scale)\n    local baseLength = totalDistance - tipLength\n\n    if baseLength > 1 then\n        local arrowDrawer = TensorCore.getCachedDrawer(\n            0xFF00FFFF,\n            0xFF0088FF,\n            0xFF0000FF,\n            0xFFFFFFFF,\n            2\n        )\n        arrowDrawer:addArrow(\n            sourcePos.x,\n            sourcePos.y,\n            sourcePos.z,\n            heading,\n            baseLength,\n            baseWidth,\n            tipLength,\n            tipWidth,\n            false,\n            Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n        )\n    end\n\n    local blueDrawer = TensorCore.getCachedDrawer(nil, nil, 0xFFFF0000, 0xFFFF0000, 2)\n    blueDrawer:addCircle(\n        targetPos.x,\n        targetPos.y,\n        targetPos.z,\n        0.4,\n        false,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\n\n    Argus.addCircleFilled(\n        targetPos.x,\n        targetPos.y,\n        targetPos.z,\n        0.15,\n        32,\n        0xFF00FF00,\n        nil,\n        0,\n        0,\n        0,\n        0,\n        false,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\n\nlocal targetPos\n\nif sourcePos and position then\n    targetPos = TensorCore.getPosInDirection(\n        state.center,\n        position.radian,\n        position.distance\n    )\nelseif sourcePos and not position then\n    local markerX, markerY, markerZ, markerActive = Argus.getWaymarkInfo(5)\n    if markerActive and markerX and markerY and markerZ then\n        targetPos = {\n            x = markerX,\n            y = markerY,\n            z = markerZ\n        }\n    end\nend\n\nif sourcePos and targetPos then\n    drawPosition(targetPos)\nend\n\nself.used = true",
+							actionLua = "local roster = AnyoneCore.Roster\nlocal player = TensorCore.mGetPlayer()\nlocal mySlot = roster and roster.current() and roster.mySlot()\nlocal sourcePos = player and player.pos\nlocal restrainingOrderDpsID = data.trueHeartRestrainingOrderDpsID\n\ndata.trueHeartSwordPositions = data.trueHeartSwordPositions or {\n    center = { x = 100, y = 0, z = 100 },\n    positions = {\n        -- Absolute arena positions, relative to the arena center.\n        H1 = { radian = math.pi, distance = 3 }, -- True north.\n        H2 = { radian = 0, distance = 3 }, -- True south.\n        restrainingOrderDps = { radian = -math.pi / 2, distance = 3 }, -- True west.\n        T2 = { radian = math.pi / 2, distance = 18.25 } -- True east.\n    }\n}\n\nlocal state = data.trueHeartSwordPositions\nlocal position\n\nif mySlot == \"H1\" then\n    position = state.positions.H1\nelseif mySlot == \"H2\" then\n    position = state.positions.H2\nelseif mySlot == \"T2\" then\n    position = state.positions.T2\nelseif player and player.id == restrainingOrderDpsID then\n    position = state.positions.restrainingOrderDps\nend\n\nlocal function drawPosition(targetPos)\n    local heading = TensorCore.getHeadingToTarget(sourcePos, targetPos)\n    local totalDistance = TensorCore.getDistance2d(sourcePos, targetPos)\n    local scale = math.min(1, totalDistance / 15)\n    local baseWidth = math.max(0.5, 1 * scale)\n    local tipWidth = math.max(1.5, 3 * scale)\n    local tipLength = math.max(2, 3 * scale)\n    local baseLength = totalDistance - tipLength\n\n    if baseLength > 1 then\n        local arrowDrawer = TensorCore.getCachedDrawer(\n            0xFF00FFFF,\n            0xFF0088FF,\n            0xFF0000FF,\n            0xFFFFFFFF,\n            2\n        )\n        arrowDrawer:addArrow(\n            sourcePos.x,\n            sourcePos.y,\n            sourcePos.z,\n            heading,\n            baseLength,\n            baseWidth,\n            tipLength,\n            tipWidth,\n            false,\n            Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n        )\n    end\n\n    local blueDrawer = TensorCore.getCachedDrawer(nil, nil, 0xFFFF0000, 0xFFFF0000, 2)\n    blueDrawer:addCircle(\n        targetPos.x,\n        targetPos.y,\n        targetPos.z,\n        0.4,\n        false,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\n\n    Argus.addCircleFilled(\n        targetPos.x,\n        targetPos.y,\n        targetPos.z,\n        0.15,\n        32,\n        0xFF00FF00,\n        nil,\n        0,\n        0,\n        0,\n        0,\n        false,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\nend\n\nlocal targetPos\n\nif sourcePos and position then\n    targetPos = TensorCore.getPosInDirection(\n        state.center,\n        position.radian,\n        position.distance\n    )\nelseif sourcePos and not position then\n    local markerX, markerY, markerZ, markerActive = Argus.getWaymarkInfo(5)\n    if markerActive and markerX and markerY and markerZ then\n        targetPos = {\n            x = markerX,\n            y = markerY,\n            z = markerZ\n        }\n    end\nend\n\nif sourcePos and targetPos then\n    drawPosition(targetPos)\nend\n\nself.used = true",
 							endIfUsed = true,
 							name = "Draw True Heart Alpha Sword and Super Jump position",
 							uuid = "4cea7230-0ef1-732e-b85a-c3d292e016a7",
@@ -5269,6 +5430,73 @@ local tbl =
 				timerEndOffset = 10.60000038147,
 				timerStartOffset = -0.20000000298023,
 				uuid = "e9266f07-c11e-d4a4-8b39-e392714753a5",
+				version = 2,
+			},
+		},
+	},
+	[109] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "6e452443-37b2-9385-a634-65364cec94f0",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nif g.heartAfterCalled then self.used=true;return end\nlocal roster=AnyoneCore.Roster;if not roster or not roster.current() then return end\nlocal p=TensorCore.mGetPlayer();if not p then return end\nlocal slot=roster.mySlot();local message\nif slot==\"H1\" then message=\"Bait cleave north\"\nelseif slot==\"H2\" then message=\"Bait cleave south\"\nelseif p.id==data.trueHeartRestrainingOrderDpsID then message=\"Bait cleave west\"\nelseif slot==\"T2\" then message=\"Bait jump east\"\nelse message=\"Go to one. Avoid cleaves\" end\nAnyoneCore.Shotcall(message,true,4,false)\ng.heartAfterCalled=true;self.used=true",
+							conditions = 
+							{
+								
+								{
+									"c848b702-8b30-80a9-b017-658aa0b13de7",
+									true,
+								},
+							},
+							name = "[LPDU] Inception - Next bait instructions",
+							uuid = "faeacc3c-a0b8-7bcc-b5d5-7ed3def7c9e4",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.spellID==18527",
+							dequeueIfLuaFalse = true,
+							name = "Relevant event",
+							uuid = "c848b702-8b30-80a9-b017-658aa0b13de7",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 589.4,
+				name = "[LPDU] Inception - Next bait instructions",
+				timeRange = true,
+				timelineIndex = 109,
+				timerEndOffset = 3,
+				timerStartOffset = -0.5,
+				uuid = "c2da0a50-abe5-bb74-8aba-4b99ec706ce5",
 				version = 2,
 			},
 		},
@@ -6891,6 +7119,106 @@ local tbl =
 			},
 		},
 	},
+	[151] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "a5d5d927-100a-26a2-b062-ded794dd370a",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal C=TEA_LPDU_Config\nif not C then\n C={folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]};C.path=C.folder..[[TEA_LPDU_Draws.lua]]\n local values=FileExists(C.path) and FileLoad(C.path) or {};if type(values)~=\"table\" then values={} end\n local changed=false\n for _,key in ipairs({\"autoStillness\",\"autoMotion\",\"autoLB\"}) do if type(values[key])~=\"boolean\" then values[key]=false;changed=true end end\n if values.lbTank~=\"T1\" and values.lbTank~=\"T2\" then values.lbTank=\"T2\";changed=true end\n C.values=values\n function C.save() if not FolderExists(C.folder) then FolderCreate(C.folder) end;FileSave(C.path,C.values) end\n TEA_LPDU_Config=C;if changed then C.save() end\nend\nif g.lbCalled then self.used=true;return end\nlocal roster=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif not roster or not roster.current() or not p or not TensorCore.isTank(p) or roster.mySlot()~=C.values.lbTank then self.used=true;return end\nAnyoneCore.Shotcall(\"Tank LB now\",true,3,false)\ng.lbCalled=true;self.used=true",
+							name = "[LPDU] Transition - Tank LB reminder",
+							uuid = "e40c98ff-9ee6-a480-9485-c530462ea269",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				loop = true,
+				mechanicTime = 787.3,
+				name = "[LPDU] Transition - Tank LB reminder",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 151,
+				timerEndOffset = -0.5,
+				timerStartOffset = -4,
+				uuid = "24926b90-40a3-4f13-a0b2-d97d561e0e29",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"b3f0962a-6943-19e4-a288-965942ce9c1f",
+									true,
+								},
+							},
+							gVar = "ACR_TensorReaper4_Hotbar_LimitBreak",
+							name = "Use tank Limit Break",
+							uuid = "136bb239-6886-36c7-81d0-023a69844e25",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local C=TEA_LPDU_Config\nif not C then\n C={folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]};C.path=C.folder..[[TEA_LPDU_Draws.lua]]\n local values=FileExists(C.path) and FileLoad(C.path) or {};if type(values)~=\"table\" then values={} end\n local changed=false\n for _,key in ipairs({\"autoStillness\",\"autoMotion\",\"autoLB\"}) do if type(values[key])~=\"boolean\" then values[key]=false;changed=true end end\n if values.lbTank~=\"T1\" and values.lbTank~=\"T2\" then values.lbTank=\"T2\";changed=true end\n C.values=values\n function C.save() if not FolderExists(C.folder) then FolderCreate(C.folder) end;FileSave(C.path,C.values) end\n TEA_LPDU_Config=C;if changed then C.save() end\nend\nlocal roster=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif not C.values.autoLB or not p or not TensorCore.isTank(p) or not roster or not roster.current() or roster.mySlot()~=C.values.lbTank then return false end\nlocal current,maximum=TensorCore.getLBGauge()\nreturn maximum>0 and current>=maximum",
+							name = "Enabled assigned tank with full LB",
+							uuid = "b3f0962a-6943-19e4-a288-965942ce9c1f",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				mechanicTime = 787.3,
+				name = "[LPDU] Transition - Optional automatic tank LB",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 151,
+				timerEndOffset = -0.5,
+				timerStartOffset = -4,
+				uuid = "3b14d865-db52-134a-b595-cb6512dc2e0c",
+				version = 2,
+			},
+		},
+	},
 	[155] = 
 	{
 		
@@ -6924,6 +7252,203 @@ local tbl =
 				timerEndOffset = 12,
 				timerStartOffset = -1,
 				uuid = "e451b1c4-bec8-725c-a535-41fe77d4c306",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "25eed8fa-7302-61ae-bfe1-9ebe38e2b686",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nif g.wordDone then self.used=true;return end\nlocal p=TensorCore.mGetPlayer();if not p then return end\nlocal id,buff\nfor status=2152,2155 do local b=TensorCore.getBuff(p,status);if b and b.duration>0 then id=status;buff=b;break end end\nif not buff then return end\nlocal message\nif id==2153 then message=\"Light beacon: north\"\nelseif id==2155 then message=\"Dark beacon: south\"\nelse message=\"In front of dark beacon\" end\nAnyoneCore.Shotcall(message,true,4,false)\ng.timer(buff.duration*1000,p.id,\"March \")\ng.wordDone=true;self.used=true",
+							name = "[LPDU] Final Word - Personal instruction and march timer",
+							uuid = "9ae4d3e9-2ff2-bed2-a760-6db824b5b057",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				loop = true,
+				mechanicTime = 909.1,
+				name = "[LPDU] Final Word - Personal instruction and march timer",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 155,
+				timerEndOffset = 17,
+				timerStartOffset = -2,
+				uuid = "7d0f1788-c56b-d221-89c8-93a49f31dbbf",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal old=eventArgs.oldData;local owned=old and old.tea_lpdu_p4\nif owned then\n for _,uuid in pairs(owned.texts) do AnyoneCore.removeTimedWorldText(uuid) end\n for _,uuid in pairs(owned.shapes) do Argus.deleteTimedShape(uuid) end\nend\nself.used=true",
+							name = "[LPDU] Final guidance - Wipe cleanup",
+							uuid = "91c27ea7-e972-caa6-bb51-cf5f8097a2e3",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"384b6705-9412-3203-b000-16912a85167a",
+									true,
+								},
+							},
+							name = "Release Stillness stop on wipe",
+							resumeAllActions = true,
+							uuid = "2c587400-b865-96f4-91eb-a4a0aa079454",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.oldData and eventArgs.oldData.tea_lpdu_p4 and eventArgs.oldData.tea_lpdu_p4.stillnessHeld==true",
+							dequeueIfLuaFalse = true,
+							name = "Owned Stillness stop",
+							uuid = "384b6705-9412-3203-b000-16912a85167a",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 9,
+				loop = true,
+				mechanicTime = 909.1,
+				name = "[LPDU] Final guidance - Wipe cleanup",
+				timeRange = true,
+				timelineIndex = 155,
+				timerEndOffset = 500,
+				timerStartOffset = -909.1,
+				uuid = "9d911027-b20d-b106-88f2-51321b24d53f",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal C=TEA_LPDU_Config\nif not C then\n C={folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]};C.path=C.folder..[[TEA_LPDU_Draws.lua]]\n local values=FileExists(C.path) and FileLoad(C.path) or {};if type(values)~=\"table\" then values={} end\n local changed=false\n for _,key in ipairs({\"autoStillness\",\"autoMotion\",\"autoLB\"}) do if type(values[key])~=\"boolean\" then values[key]=false;changed=true end end\n if values.lbTank~=\"T1\" and values.lbTank~=\"T2\" then values.lbTank=\"T2\";changed=true end\n C.values=values\n function C.save() if not FolderExists(C.folder) then FolderCreate(C.folder) end;FileSave(C.path,C.values) end\n TEA_LPDU_Config=C;if changed then C.save() end\nend\nlocal visible=GUI:Begin(\"TEA LPDU Settings###TEALPDUSettings\",true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n local value,changed=GUI:Checkbox(\"Auto Stillness\",C.values.autoStillness)\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Stops movement, casts, actions and auto-attacks for Stillness. Off by default.\") end\n if changed then C.values.autoStillness=value;C.save() end\n value,changed=GUI:Checkbox(\"Auto Motion\",C.values.autoMotion)\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Jumps in place during Motion, using Lj's DMU method. Off by default.\") end\n if changed then C.values.autoMotion=value;C.save() end\n value,changed=GUI:Checkbox(\"Automatic tank LB\",C.values.autoLB)\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Uses a full tank LB for the transition. Callouts remain enabled when this is off.\") end\n if changed then C.values.autoLB=value;C.save() end\n local index=C.values.lbTank==\"T1\" and 1 or 2\n local newIndex,slotChanged=GUI:Combo(\"Tank LB user\",index,{\"T1\",\"T2\"})\n if slotChanged then C.values.lbTank=newIndex==1 and \"T1\" or \"T2\";C.save() end\nend\nGUI:End();self.used=true",
+							name = "[LPDU] TEA - Optional automation settings",
+							uuid = "f0875a94-0ffe-1944-996f-54c45c3be10b",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 13,
+				loop = true,
+				mechanicTime = 909.1,
+				name = "[LPDU] TEA - Optional automation settings",
+				timeRange = true,
+				timelineIndex = 155,
+				timerEndOffset = 500,
+				timerStartOffset = -909.1,
+				uuid = "635f712e-df1c-cf5a-a910-01711e7f926b",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal p=TensorCore.mGetPlayer()\nif not p or eventArgs.targetID~=p.id then self.used=true;return end\ng.resolved=g.resolved or {}\nlocal t=TensorReactions_CurrentTimer\nlocal key=t<921 and \"word1\" or (t<950 and \"word2\" or (t<992 and \"alpha1\" or \"alpha2\"))\nif g.resolved[key] then self.used=true;return end\ng.resolved[key]=true\nAnyoneCore.Shotcall(eventArgs.spellID==19039 and \"Ordained Motion resolved\" or \"Ordained Stillness resolved\",true,2,false)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"0e0e017b-a958-29e8-b3c2-9d7fcd27b938",
+									true,
+								},
+							},
+							name = "[LPDU] Ordained - Personal resolved call",
+							uuid = "e4cbd9b5-5b1f-21b1-91e1-74e94b352f5e",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.spellID==19039 or eventArgs.spellID==19040",
+							dequeueIfLuaFalse = true,
+							name = "Relevant event",
+							uuid = "0e0e017b-a958-29e8-b3c2-9d7fcd27b938",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 909.1,
+				name = "[LPDU] Ordained - Personal resolved call",
+				timeRange = true,
+				timelineIndex = 155,
+				timerEndOffset = 88,
+				timerStartOffset = 4,
+				uuid = "c60f7778-4e04-7b69-8dc7-6f79a7dbc837",
 				version = 2,
 			},
 		},
@@ -6961,8 +7486,19 @@ local tbl =
 						data = 
 						{
 							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"0300e2b4-f814-05df-87a3-19d6dbe50b31",
+									true,
+								},
+							},
 							name = "Stop Everything",
 							stopAllActions = true,
+							stopCasting = true,
+							stopMoving = true,
+							untarget = true,
 							uuid = "907667ce-7934-1ea1-ac5e-82e6d7647865",
 							version = 2.1,
 						},
@@ -6972,6 +7508,14 @@ local tbl =
 						data = 
 						{
 							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"35267d79-01fd-37bd-b0e2-c9529010ddb2",
+									true,
+								},
+							},
 							name = "Resume Everything",
 							resumeAllActions = true,
 							uuid = "24091ed2-634a-7aa5-b87c-4e9b77d09a72",
@@ -6981,6 +7525,28 @@ local tbl =
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local C=TEA_LPDU_Config\nif not C then\n C={folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]};C.path=C.folder..[[TEA_LPDU_Draws.lua]]\n local values=FileExists(C.path) and FileLoad(C.path) or {};if type(values)~=\"table\" then values={} end\n local changed=false\n for _,key in ipairs({\"autoStillness\",\"autoMotion\",\"autoLB\"}) do if type(values[key])~=\"boolean\" then values[key]=false;changed=true end end\n if values.lbTank~=\"T1\" and values.lbTank~=\"T2\" then values.lbTank=\"T2\";changed=true end\n C.values=values\n function C.save() if not FolderExists(C.folder) then FolderCreate(C.folder) end;FileSave(C.path,C.values) end\n TEA_LPDU_Config=C;if changed then C.save() end\nend\nlocal g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nif not C.values.autoStillness or data.teaOrdainedCurrent~=\"stillness\" then return false end\ng.stillnessHeld=true\nreturn true",
+							name = "Auto Stillness enabled",
+							uuid = "0300e2b4-f814-05df-87a3-19d6dbe50b31",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionUUID = "907667ce-7934-1ea1-ac5e-82e6d7647865",
+							category = "Action",
+							name = "This reaction stopped actions",
+							uuid = "35267d79-01fd-37bd-b0e2-c9529010ddb2",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "P3 - Alexander Prime/Ordained Motion-Stillness",
 				mechanicTime = 916.1,
@@ -7005,7 +7571,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "if data.teaOrdainedCurrent == \"stillness\" then\n    AnyoneCore.Shotcall(\"stop everything\", true, 3000, true)\nelseif data.teaOrdainedCurrent == \"motion\" then\n    AnyoneCore.Shotcall(\"keep moving\", true, 3000, true)\nend\nself.used = true",
+							actionLua = "if data.teaOrdainedCurrent == \"stillness\" then\n    AnyoneCore.Shotcall(\"Stop. No actions\", true, 3, true)\nelseif data.teaOrdainedCurrent == \"motion\" then\n    AnyoneCore.Shotcall(\"keep moving\", true, 3, true)\nend\nself.used = true",
 							name = "Shotcall Ordained Type",
 							uuid = "74e444cf-363a-336a-8727-b1247a9dd3d9",
 							version = 2.1,
@@ -7078,6 +7644,49 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "46411f81-5e70-2874-b141-938b7030babb",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal C=TEA_LPDU_Config\nif not C then\n C={folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]};C.path=C.folder..[[TEA_LPDU_Draws.lua]]\n local values=FileExists(C.path) and FileLoad(C.path) or {};if type(values)~=\"table\" then values={} end\n local changed=false\n for _,key in ipairs({\"autoStillness\",\"autoMotion\",\"autoLB\"}) do if type(values[key])~=\"boolean\" then values[key]=false;changed=true end end\n if values.lbTank~=\"T1\" and values.lbTank~=\"T2\" then values.lbTank=\"T2\";changed=true end\n C.values=values\n function C.save() if not FolderExists(C.folder) then FolderCreate(C.folder) end;FileSave(C.path,C.values) end\n TEA_LPDU_Config=C;if changed then C.save() end\nend\nif not C.values.autoMotion or data.teaOrdainedCurrent~=\"motion\" or (g.resolved and g.resolved[\"word1\"]) then self.used=true;return end\nlocal p=TensorCore.mGetPlayer();if not p or not p.hp or p.hp.current<=0 then self.used=true;return end\np:Jump()\nself.used=true",
+							name = "[LPDU] Ordained - Auto Motion word1",
+							uuid = "900b849c-bded-e4ff-a9e9-67bf99fcd11a",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				loop = true,
+				mechanicTime = 916.1,
+				name = "[LPDU] Ordained - Auto Motion word1",
+				timeRange = true,
+				timelineIndex = 156,
+				timerEndOffset = 0.7,
+				timerStartOffset = -2,
+				uuid = "dc69e360-2f76-2fff-81c6-d4331c8e2b3b",
+				version = 2,
+			},
+		},
 	},
 	[157] = 
 	{
@@ -7112,7 +7721,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "if data.teaOrdainedCurrent == \"motion\" then\n    AnyoneCore.Shotcall(\"keep moving\", true, 3000, true)\nend\nself.used = true",
+							actionLua = "if data.teaOrdainedCurrent == \"motion\" then\n    AnyoneCore.Shotcall(\"keep moving\", true, 3, true)\nend\nself.used = true",
 							name = "Shotcall Keep Moving if 916 Stillness",
 							uuid = "1f832c7b-9af6-5626-b615-d92745b7d0c6",
 							version = 2.1,
@@ -7151,9 +7760,17 @@ local tbl =
 									"06af1c8a-d86f-8ab0-91ac-7c504899e190",
 									true,
 								},
+								
+								{
+									"72e0b009-2cb9-f87e-a727-415419b0f1c4",
+									true,
+								},
 							},
 							name = "Stop Everything",
 							stopAllActions = true,
+							stopCasting = true,
+							stopMoving = true,
+							untarget = true,
 							uuid = "f6eed7a4-270f-000f-9ef4-38be08ef4c52",
 							version = 2.1,
 						},
@@ -7167,7 +7784,7 @@ local tbl =
 							{
 								
 								{
-									"06af1c8a-d86f-8ab0-91ac-7c504899e190",
+									"38a18690-603e-5e55-8e35-dfd5b137152e",
 									true,
 								},
 							},
@@ -7191,6 +7808,28 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local C=TEA_LPDU_Config\nif not C then\n C={folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]};C.path=C.folder..[[TEA_LPDU_Draws.lua]]\n local values=FileExists(C.path) and FileLoad(C.path) or {};if type(values)~=\"table\" then values={} end\n local changed=false\n for _,key in ipairs({\"autoStillness\",\"autoMotion\",\"autoLB\"}) do if type(values[key])~=\"boolean\" then values[key]=false;changed=true end end\n if values.lbTank~=\"T1\" and values.lbTank~=\"T2\" then values.lbTank=\"T2\";changed=true end\n C.values=values\n function C.save() if not FolderExists(C.folder) then FolderCreate(C.folder) end;FileSave(C.path,C.values) end\n TEA_LPDU_Config=C;if changed then C.save() end\nend\nlocal g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nif not C.values.autoStillness or data.teaOrdainedCurrent~=\"stillness\" then return false end\ng.stillnessHeld=true\nreturn true",
+							name = "Auto Stillness enabled",
+							uuid = "72e0b009-2cb9-f87e-a727-415419b0f1c4",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionUUID = "f6eed7a4-270f-000f-9ef4-38be08ef4c52",
+							category = "Action",
+							name = "This reaction stopped actions",
+							uuid = "38a18690-603e-5e55-8e35-dfd5b137152e",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "P3 - Alexander Prime/Ordained Motion-Stillness",
 				mechanicTime = 926.3,
@@ -7201,6 +7840,204 @@ local tbl =
 				timerEndOffset = 1,
 				timerStartOffset = -2,
 				uuid = "27cb4c37-8db6-93d7-8fbf-da9d915a4730",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "83a45353-5a14-ee66-98b0-86a68227b7b4",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal C=TEA_LPDU_Config\nif not C then\n C={folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]};C.path=C.folder..[[TEA_LPDU_Draws.lua]]\n local values=FileExists(C.path) and FileLoad(C.path) or {};if type(values)~=\"table\" then values={} end\n local changed=false\n for _,key in ipairs({\"autoStillness\",\"autoMotion\",\"autoLB\"}) do if type(values[key])~=\"boolean\" then values[key]=false;changed=true end end\n if values.lbTank~=\"T1\" and values.lbTank~=\"T2\" then values.lbTank=\"T2\";changed=true end\n C.values=values\n function C.save() if not FolderExists(C.folder) then FolderCreate(C.folder) end;FileSave(C.path,C.values) end\n TEA_LPDU_Config=C;if changed then C.save() end\nend\nif not C.values.autoMotion or data.teaOrdainedCurrent~=\"motion\" or (g.resolved and g.resolved[\"word2\"]) then self.used=true;return end\nlocal p=TensorCore.mGetPlayer();if not p or not p.hp or p.hp.current<=0 then self.used=true;return end\np:Jump()\nself.used=true",
+							name = "[LPDU] Ordained - Auto Motion word2",
+							uuid = "303f4e67-1491-ea3e-9072-ae58e770b99f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				loop = true,
+				mechanicTime = 926.3,
+				name = "[LPDU] Ordained - Auto Motion word2",
+				timeRange = true,
+				timelineIndex = 157,
+				timerEndOffset = 0.7,
+				timerStartOffset = -2,
+				uuid = "3d7489ab-a8eb-8083-9c93-5017738fda66",
+				version = 2,
+			},
+		},
+	},
+	[158] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "995c9511-e628-a1bf-8856-0559627fb4a3",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal s=g.optical\nif not s then s={};g.optical=s end\nif s.lastCall and Now()-s.lastCall<1000 then self.used=true;return end\ns.lastCall=Now()\nlocal p=TensorCore.mGetPlayer()\nlocal ownStack=s.stacks and p and s.stacks[p.id] and s.stacks[p.id]>Now()\nAnyoneCore.Shotcall(eventArgs.spellID==18570 and \"Spread\" or (ownStack and \"Stack on you\" or \"Join a stack\"),true,3,false)\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"ef318e1f-b834-5d7a-8484-8d0f4eae5682",
+									true,
+								},
+							},
+							name = "[LPDU] Opening Optical Sight - Stack or spread call",
+							uuid = "af67aa9a-0b13-bc4c-9edd-27d2952a3c02",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID==9042 and (eventArgs.spellID==18570 or eventArgs.spellID==18571)",
+							dequeueIfLuaFalse = true,
+							name = "Relevant event",
+							uuid = "ef318e1f-b834-5d7a-8484-8d0f4eae5682",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 936.5,
+				name = "[LPDU] Opening Optical Sight - Stack or spread call",
+				timeRange = true,
+				timelineIndex = 158,
+				timerEndOffset = 10,
+				timerStartOffset = -2,
+				uuid = "a813491e-6f6d-93ee-8ff9-4366ec717733",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal s=g.optical\nif not s then s={};g.optical=s end\nlocal id=eventArgs.entityID\nlocal entity=TensorCore.mGetEntity(id);if not entity then self.used=true;return end\nlocal party=TensorCore.getEntityGroupList(\"Party\");local inParty=false\nfor _,e in pairs(party or {}) do if e.id==id then inParty=true;break end end\nif not inParty then self.used=true;return end\ns.markers=s.markers or {};local key=tostring(eventArgs.markerID)..\":\"..tostring(id)\nif s.markers[key] and Now()-s.markers[key]<1000 then self.used=true;return end\ns.markers[key]=Now()\nlocal stack=eventArgs.markerID==62\nlocal drawer=TensorCore.getCachedDrawer(nil,nil,stack and 0x5500FF00 or 0x550000FF,stack and 0xFF00FF00 or 0xFF0000FF,2)\nlocal shape=drawer:addTimedCircleOnEnt(5100,id,6,0,false,true)\nif shape then g.shapes[#g.shapes+1]=shape end\nlocal p=TensorCore.mGetPlayer()\nif stack then\n s.stacks=s.stacks or {};s.stacks[id]=Now()+5100\n g.timer(5100,id,\"Stack \")\nelseif p and id==p.id then\n s.spreadUntil=Now()+5100;s.spreadTarget=nil\n g.timer(5100,id,\"Spread \")\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"55c1ea0d-009b-9fc3-9c3a-e8e7f536bd80",
+									true,
+								},
+							},
+							name = "[LPDU] Opening Optical Sight - Following circles and timers",
+							uuid = "cfe00f0d-2736-c25e-ae94-9ff0cf51b133",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.markerID==62 or eventArgs.markerID==139",
+							dequeueIfLuaFalse = true,
+							name = "Relevant event",
+							uuid = "55c1ea0d-009b-9fc3-9c3a-e8e7f536bd80",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 4,
+				loop = true,
+				mechanicTime = 936.5,
+				name = "[LPDU] Opening Optical Sight - Following circles and timers",
+				timeRange = true,
+				timelineIndex = 158,
+				timerEndOffset = 11,
+				timerStartOffset = -3,
+				uuid = "f664762b-0a8b-6b3e-80e4-70e7a30a9d58",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal s=g.optical\nif not s or not s.spreadUntil or Now()>=s.spreadUntil then self.used=true;return end\nlocal roster=AnyoneCore.Roster\nif not roster or not roster.current() or not roster.isReady() then return end\nlocal p=TensorCore.mGetPlayer();if not p or not p.pos then return end\nif not s.spreadTarget then\n s.positions=s.positions or {T1={x=100,y=0,z=88},T2={x=100,y=0,z=112},H1={x=88,y=0,z=100},H2={x=112,y=0,z=100},M1={x=108.485,y=0,z=91.515},M2={x=91.515,y=0,z=91.515},R1={x=91.515,y=0,z=108.485},R2={x=108.485,y=0,z=108.485}}\n s.spreadTarget=s.positions[roster.mySlot()]\nend\nlocal target=s.spreadTarget;if not target then return end\nlocal distance=TensorCore.getDistance2d(p.pos,target)\nif distance>2 then\n TensorCore.getStaticDrawer(0xFF00FF00):addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,target),distance-1,0.35,1,1,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nself.used=true",
+							name = "[LPDU] Opening Optical Sight - Personal spread position",
+							uuid = "62c6552a-7644-757f-8fc3-13f44348eed0",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 936.5,
+				name = "[LPDU] Opening Optical Sight - Personal spread position",
+				timeRange = true,
+				timelineIndex = 158,
+				timerEndOffset = 11,
+				timerStartOffset = -3,
+				uuid = "cc098191-f788-c735-83a2-60c19d4c0897",
 				version = 2,
 			},
 		},
@@ -7333,7 +8170,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.fateAlpha = data.fateAlpha or {}\nlocal state = data.fateAlpha\n\nif state.assignmentShotcallDone ~= true then\n    state.assignmentShotcallDone = true\n    local duration = math.max(0.1, 988 - TensorReactions_CurrentTimer)\n    AnyoneCore.Shotcall(\"2. Nothing\", true, duration, true)\nend\n\nself.used = true",
+							actionLua = "data.fateAlpha = data.fateAlpha or {}\nlocal state = data.fateAlpha\n\nif state.assignmentShotcallDone ~= true then\n    state.assignmentShotcallDone = true\n    local duration = math.max(0.1, 988 - TensorReactions_CurrentTimer)\n    TensorCore.sendTTS(\"2. Nothing\",75)\nend\n\nself.used = true",
 							conditions = 
 							{
 								
@@ -7424,7 +8261,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.fateAlpha = data.fateAlpha or {}\nlocal state = data.fateAlpha\n\nif state.firstShotcallDone ~= true then\n    state.firstShotcallDone = true\n    local duration = math.max(0.1, 988 - TensorReactions_CurrentTimer)\n    AnyoneCore.Shotcall(\"1. Motion\", true, duration, true)\nend\n\nself.used = true",
+							actionLua = "data.fateAlpha = data.fateAlpha or {}\nlocal state = data.fateAlpha\n\nif state.firstShotcallDone ~= true then\n    state.firstShotcallDone = true\n    local duration = math.max(0.1, 988 - TensorReactions_CurrentTimer)\n    TensorCore.sendTTS(\"1. Motion\",75)\nend\n\nself.used = true",
 							conditions = 
 							{
 								
@@ -7515,7 +8352,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.fateAlpha = data.fateAlpha or {}\nlocal state = data.fateAlpha\n\nif state.thirdShotcallDone ~= true then\n    state.thirdShotcallDone = true\n    local duration = math.max(0.1, 988 - TensorReactions_CurrentTimer)\n    AnyoneCore.Shotcall(\"3. Motion\", true, duration, true)\nend\n\nself.used = true",
+							actionLua = "data.fateAlpha = data.fateAlpha or {}\nlocal state = data.fateAlpha\n\nif state.thirdShotcallDone ~= true then\n    state.thirdShotcallDone = true\n    local duration = math.max(0.1, 988 - TensorReactions_CurrentTimer)\n    TensorCore.sendTTS(\"3. Motion\",75)\nend\n\nself.used = true",
 							conditions = 
 							{
 								
@@ -7606,7 +8443,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.fateAlpha = data.fateAlpha or {}\nlocal state = data.fateAlpha\n\nif state.firstShotcallDone ~= true then\n    state.firstShotcallDone = true\n    local duration = math.max(0.1, 988 - TensorReactions_CurrentTimer)\n    AnyoneCore.Shotcall(\"1. Stillness\", true, duration, true)\nend\n\nself.used = true",
+							actionLua = "data.fateAlpha = data.fateAlpha or {}\nlocal state = data.fateAlpha\n\nif state.firstShotcallDone ~= true then\n    state.firstShotcallDone = true\n    local duration = math.max(0.1, 988 - TensorReactions_CurrentTimer)\n    TensorCore.sendTTS(\"1. Stillness\",75)\nend\n\nself.used = true",
 							conditions = 
 							{
 								
@@ -7697,7 +8534,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.fateAlpha = data.fateAlpha or {}\nlocal state = data.fateAlpha\n\nif state.thirdShotcallDone ~= true then\n    state.thirdShotcallDone = true\n    local duration = math.max(0.1, 988 - TensorReactions_CurrentTimer)\n    AnyoneCore.Shotcall(\"3. Stillness\", true, duration, true)\nend\n\nself.used = true",
+							actionLua = "data.fateAlpha = data.fateAlpha or {}\nlocal state = data.fateAlpha\n\nif state.thirdShotcallDone ~= true then\n    state.thirdShotcallDone = true\n    local duration = math.max(0.1, 988 - TensorReactions_CurrentTimer)\n    TensorCore.sendTTS(\"3. Stillness\",75)\nend\n\nself.used = true",
 							conditions = 
 							{
 								
@@ -7788,7 +8625,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.fateAlpha = data.fateAlpha or {}\nlocal state = data.fateAlpha\n\nif state.assignmentShotcallDone ~= true then\n    state.assignmentShotcallDone = true\n    local duration = math.max(0.1, 988 - TensorReactions_CurrentTimer)\n    AnyoneCore.Shotcall(\"2. Defamation\", true, duration, true)\nend\n\nself.used = true",
+							actionLua = "data.fateAlpha = data.fateAlpha or {}\nlocal state = data.fateAlpha\n\nif state.assignmentShotcallDone ~= true then\n    state.assignmentShotcallDone = true\n    local duration = math.max(0.1, 988 - TensorReactions_CurrentTimer)\n    TensorCore.sendTTS(\"2. Defamation\",75)\nend\n\nself.used = true",
 							conditions = 
 							{
 								
@@ -7879,7 +8716,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.fateAlpha = data.fateAlpha or {}\nlocal state = data.fateAlpha\n\nif state.assignmentShotcallDone ~= true then\n    state.assignmentShotcallDone = true\n    local duration = math.max(0.1, 988 - TensorReactions_CurrentTimer)\n    AnyoneCore.Shotcall(\"2. Aggravated Assault\", true, duration, true)\nend\n\nself.used = true",
+							actionLua = "data.fateAlpha = data.fateAlpha or {}\nlocal state = data.fateAlpha\n\nif state.assignmentShotcallDone ~= true then\n    state.assignmentShotcallDone = true\n    local duration = math.max(0.1, 988 - TensorReactions_CurrentTimer)\n    TensorCore.sendTTS(\"2. Aggravated Assault\",75)\nend\n\nself.used = true",
 							conditions = 
 							{
 								
@@ -7970,7 +8807,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.fateAlpha = data.fateAlpha or {}\nlocal state = data.fateAlpha\n\nif state.assignmentShotcallDone ~= true then\n    state.assignmentShotcallDone = true\n    local duration = math.max(0.1, 988 - TensorReactions_CurrentTimer)\n    AnyoneCore.Shotcall(\"2. Shared Sentence\", true, duration, true)\nend\n\nself.used = true",
+							actionLua = "data.fateAlpha = data.fateAlpha or {}\nlocal state = data.fateAlpha\n\nif state.assignmentShotcallDone ~= true then\n    state.assignmentShotcallDone = true\n    local duration = math.max(0.1, 988 - TensorReactions_CurrentTimer)\n    TensorCore.sendTTS(\"2. Shared Sentence\",75)\nend\n\nself.used = true",
 							conditions = 
 							{
 								
@@ -8309,6 +9146,104 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "a289ae7c-63b2-964e-8a0c-f36a0de01766",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal s=g.alpha\nif not s then s={preview={},lasers={},commands=0};g.alpha=s end\nlocal spell=eventArgs.spellID\nif s.done then self.used=true;return end\nif spell==18591 then\n if not s.preview[eventArgs.entityID] then\n  s.preview[eventArgs.entityID]=true;s.previewCount=(s.previewCount or 0)+1\n  if s.previewCount==3 then\n   local p=TensorCore.mGetPlayer();if p then s.timer=g.timer(18100,p.id,\"Lasers \",3.1) end\n  end\n end\nelseif spell==18859 or spell==18860 then\n if not s.lastCommand or Now()-s.lastCommand>1000 then\n  s.lastCommand=Now();s.commands=s.commands+1\n  if s.commands==1 then AnyoneCore.Shotcall(\"Stay in your spot\",true,2,false) end\n end\nelseif spell==18569 and not s.lasers[eventArgs.entityID] then\n s.lasers[eventArgs.entityID]=true;s.laserCount=(s.laserCount or 0)+1\nend\nif s.commands>=2 and (s.laserCount or 0)>=3 then\n s.done=true\n if s.timer then AnyoneCore.removeTimedWorldText(s.timer);s.timer=nil end\n if data.fateAlpha then data.fateAlpha.targetPos={x=100,y=0,z=100} end\n AnyoneCore.Shotcall(\"Move in\",true,3,false)\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"ee6f1dac-dd5e-2684-9ea1-1d90247961f7",
+									true,
+								},
+							},
+							name = "[LPDU] Fate Alpha - Hold and release after lasers",
+							uuid = "7c364b9b-99ae-5746-a188-cdb68afab361",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.spellID==18591 or eventArgs.spellID==18859 or eventArgs.spellID==18860 or eventArgs.spellID==18569",
+							dequeueIfLuaFalse = true,
+							name = "Relevant event",
+							uuid = "ee6f1dac-dd5e-2684-9ea1-1d90247961f7",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 982.6,
+				name = "[LPDU] Fate Alpha - Hold and release after lasers",
+				timeRange = true,
+				timelineIndex = 167,
+				timerEndOffset = 16,
+				timerStartOffset = -9,
+				uuid = "be42c2c2-239a-ee3a-8162-6800451153bc",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal s=g.alphaLabels\nif not s then s={};g.alphaLabels=s end\nlocal p=TensorCore.mGetPlayer();local assignment=data.fateAlpha\nif not p or not assignment then return end\nlocal now=TensorReactions_CurrentTimer\nif not s.first and not s.firstDone and data.teaOrdained989Type and now<989.8 then\n s.first=g.timer((989.8-now)*1000,p.id,\"1. \"..(data.teaOrdained989Type==\"motion\" and \"Motion: \" or \"Stillness: \"),3.4)\nend\nif not s.second and assignment.assignment and now<992.8 then\n s.second=g.timer((992.8-now)*1000,p.id,\"2. \"..assignment.assignment..\": \",2.8)\nend\nif not s.third and not s.thirdDone and data.teaOrdained993Type and now<992.9 then\n s.third=g.timer((992.9-now)*1000,p.id,\"3. \"..(data.teaOrdained993Type==\"motion\" and \"Motion: \" or \"Stillness: \"),2.2)\nend\nif g.resolved and g.resolved.alpha1 and s.first then AnyoneCore.removeTimedWorldText(s.first);s.first=nil;s.firstDone=true end\nif g.resolved and g.resolved.alpha2 and s.third then AnyoneCore.removeTimedWorldText(s.third);s.third=nil;s.thirdDone=true end\nself.used=true",
+							name = "[LPDU] Fate Alpha - Three live countdown labels",
+							uuid = "31e4e277-8417-71e2-8d9b-5845a105f071",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				loop = true,
+				mechanicTime = 982.6,
+				name = "[LPDU] Fate Alpha - Three live countdown labels",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 167,
+				timerEndOffset = 13,
+				timerStartOffset = -25,
+				uuid = "ad29312e-a801-4eff-ae68-0a7013944c66",
+				version = 2,
+			},
+		},
 	},
 	[169] = 
 	{
@@ -8350,9 +9285,17 @@ local tbl =
 									"616f7299-82ec-b155-b85a-dbf02305b655",
 									true,
 								},
+								
+								{
+									"fe33e9f5-29cb-8d62-8328-dd90dd8301e5",
+									true,
+								},
 							},
 							name = "Stop Everything for Stillness",
 							stopAllActions = true,
+							stopCasting = true,
+							stopMoving = true,
+							untarget = true,
 							uuid = "071e9504-bf65-46ac-8bdb-bf7bda711f1c",
 							version = 2.1,
 						},
@@ -8366,7 +9309,7 @@ local tbl =
 							{
 								
 								{
-									"616f7299-82ec-b155-b85a-dbf02305b655",
+									"4d0107ee-2264-8bbc-b81d-8df143d6213b",
 									true,
 								},
 							},
@@ -8381,7 +9324,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "if data.teaOrdained989Type == \"stillness\" then\n    AnyoneCore.Shotcall(\"stop everything\", true, 3000, true)\nelseif data.teaOrdained989Type == \"motion\" then\n    AnyoneCore.Shotcall(\"keep moving\", true, 3000, true)\nend\nself.used = true",
+							actionLua = "if data.teaOrdained989Type == \"stillness\" then\nelseif data.teaOrdained989Type == \"motion\" then\nend\nself.used = true",
 							name = "Shotcall 989 Ordained Type",
 							uuid = "90bde5ee-0c0f-70de-b496-8bbc1c1c2b94",
 							version = 2.1,
@@ -8414,6 +9357,28 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local C=TEA_LPDU_Config\nif not C then\n C={folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]};C.path=C.folder..[[TEA_LPDU_Draws.lua]]\n local values=FileExists(C.path) and FileLoad(C.path) or {};if type(values)~=\"table\" then values={} end\n local changed=false\n for _,key in ipairs({\"autoStillness\",\"autoMotion\",\"autoLB\"}) do if type(values[key])~=\"boolean\" then values[key]=false;changed=true end end\n if values.lbTank~=\"T1\" and values.lbTank~=\"T2\" then values.lbTank=\"T2\";changed=true end\n C.values=values\n function C.save() if not FolderExists(C.folder) then FolderCreate(C.folder) end;FileSave(C.path,C.values) end\n TEA_LPDU_Config=C;if changed then C.save() end\nend\nlocal g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nif not C.values.autoStillness or data.teaOrdained989Type~=\"stillness\" then return false end\ng.stillnessHeld=true\nreturn true",
+							name = "Auto Stillness enabled",
+							uuid = "fe33e9f5-29cb-8d62-8328-dd90dd8301e5",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionUUID = "071e9504-bf65-46ac-8bdb-bf7bda711f1c",
+							category = "Action",
+							name = "This reaction stopped actions",
+							uuid = "4d0107ee-2264-8bbc-b81d-8df143d6213b",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "Fate Calibration Alpha/Ordained",
 				mechanicTime = 989.8,
@@ -8438,7 +9403,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "if data.teaOrdained989Type == \"stillness\" then\n    AnyoneCore.Shotcall(\"stop everything\", true, 3000, true)\nelseif data.teaOrdained989Type == \"motion\" then\n    AnyoneCore.Shotcall(\"keep moving\", true, 3000, true)\nend\nself.used = true",
+							actionLua = "if data.teaOrdained989Type == \"stillness\" then\n    AnyoneCore.Shotcall(\"Stop. No actions\", true, 3, true)\nelseif data.teaOrdained989Type == \"motion\" then\n    AnyoneCore.Shotcall(\"keep moving\", true, 3, true)\nend\nself.used = true",
 							name = "Shotcall 989 Ordained Type",
 							uuid = "29139eda-d06b-0377-9939-f5a9fc885512",
 							version = 2.1,
@@ -8456,6 +9421,49 @@ local tbl =
 				timerEndOffset = -1.8,
 				timerStartOffset = -2,
 				uuid = "6157d078-8d53-5883-a437-67b3e2492c56",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "127cca44-01b9-05f7-8fa3-915c2841d12c",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal C=TEA_LPDU_Config\nif not C then\n C={folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]};C.path=C.folder..[[TEA_LPDU_Draws.lua]]\n local values=FileExists(C.path) and FileLoad(C.path) or {};if type(values)~=\"table\" then values={} end\n local changed=false\n for _,key in ipairs({\"autoStillness\",\"autoMotion\",\"autoLB\"}) do if type(values[key])~=\"boolean\" then values[key]=false;changed=true end end\n if values.lbTank~=\"T1\" and values.lbTank~=\"T2\" then values.lbTank=\"T2\";changed=true end\n C.values=values\n function C.save() if not FolderExists(C.folder) then FolderCreate(C.folder) end;FileSave(C.path,C.values) end\n TEA_LPDU_Config=C;if changed then C.save() end\nend\nif not C.values.autoMotion or data.teaOrdained989Type~=\"motion\" or (g.resolved and g.resolved[\"alpha1\"]) then self.used=true;return end\nlocal p=TensorCore.mGetPlayer();if not p or not p.hp or p.hp.current<=0 then self.used=true;return end\np:Jump()\nself.used=true",
+							name = "[LPDU] Ordained - Auto Motion alpha1",
+							uuid = "6572ec81-20ce-d4c4-b096-d9ac14b932cf",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				loop = true,
+				mechanicTime = 989.8,
+				name = "[LPDU] Ordained - Auto Motion alpha1",
+				timeRange = true,
+				timelineIndex = 169,
+				timerEndOffset = 0.7,
+				timerStartOffset = -1.5,
+				uuid = "6546d992-f2c9-f530-aa93-d9fbac4bce0f",
 				version = 2,
 			},
 		},
@@ -8500,9 +9508,17 @@ local tbl =
 									"67458d77-0a6c-ab70-b318-9ef502ac366f",
 									true,
 								},
+								
+								{
+									"cc9aafac-ead1-1f9e-bb97-159fbe7ed961",
+									true,
+								},
 							},
 							name = "Stop Everything for 993 Stillness",
 							stopAllActions = true,
+							stopCasting = true,
+							stopMoving = true,
+							untarget = true,
 							uuid = "df94b18e-ced4-c126-83c5-d79d1846b124",
 							version = 2.1,
 						},
@@ -8516,7 +9532,7 @@ local tbl =
 							{
 								
 								{
-									"67458d77-0a6c-ab70-b318-9ef502ac366f",
+									"d449e2e8-6b7e-5de0-85c0-f52a09ee3602",
 									true,
 								},
 							},
@@ -8531,7 +9547,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "if data.teaOrdained993Type == \"stillness\" then\n    AnyoneCore.Shotcall(\"stop everything\", true, 3000, true)\nelseif data.teaOrdained993Type == \"motion\" then\n    AnyoneCore.Shotcall(\"keep moving\", true, 3000, true)\nend\nself.used = true",
+							actionLua = "if data.teaOrdained993Type == \"stillness\" then\nelseif data.teaOrdained993Type == \"motion\" then\nend\nself.used = true",
 							name = "Shotcall 993 Ordained Type",
 							uuid = "2a4d7874-1b3b-c72d-8541-c81b42e97b0d",
 							version = 2.1,
@@ -8564,6 +9580,28 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local C=TEA_LPDU_Config\nif not C then\n C={folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]};C.path=C.folder..[[TEA_LPDU_Draws.lua]]\n local values=FileExists(C.path) and FileLoad(C.path) or {};if type(values)~=\"table\" then values={} end\n local changed=false\n for _,key in ipairs({\"autoStillness\",\"autoMotion\",\"autoLB\"}) do if type(values[key])~=\"boolean\" then values[key]=false;changed=true end end\n if values.lbTank~=\"T1\" and values.lbTank~=\"T2\" then values.lbTank=\"T2\";changed=true end\n C.values=values\n function C.save() if not FolderExists(C.folder) then FolderCreate(C.folder) end;FileSave(C.path,C.values) end\n TEA_LPDU_Config=C;if changed then C.save() end\nend\nlocal g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nif not C.values.autoStillness or data.teaOrdained993Type~=\"stillness\" then return false end\ng.stillnessHeld=true\nreturn true",
+							name = "Auto Stillness enabled",
+							uuid = "cc9aafac-ead1-1f9e-bb97-159fbe7ed961",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionUUID = "df94b18e-ced4-c126-83c5-d79d1846b124",
+							category = "Action",
+							name = "This reaction stopped actions",
+							uuid = "d449e2e8-6b7e-5de0-85c0-f52a09ee3602",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "Fate Calibration Alpha/Ordained",
 				mechanicTime = 993.8,
@@ -8588,7 +9626,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "if data.teaOrdained993Type == \"stillness\" then\n    AnyoneCore.Shotcall(\"stop everything\", true, 3000, true)\nelseif data.teaOrdained993Type == \"motion\" then\n    AnyoneCore.Shotcall(\"keep moving\", true, 3000, true)\nend\nself.used = true",
+							actionLua = "if data.teaOrdained993Type == \"stillness\" then\n    AnyoneCore.Shotcall(\"Stop. No actions\", true, 3, true)\nelseif data.teaOrdained993Type == \"motion\" then\n    AnyoneCore.Shotcall(\"keep moving\", true, 3, true)\nend\nself.used = true",
 							name = "Shotcall 993 Ordained Type",
 							uuid = "d6928352-e93c-e937-a0e7-791febcc1492",
 							version = 2.1,
@@ -8606,6 +9644,49 @@ local tbl =
 				timerEndOffset = -1.8,
 				timerStartOffset = -2,
 				uuid = "6e2d6b48-0193-735b-a56d-b1b627a618f7",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "b74acbce-24ef-fe17-a7cd-095cb0f709f0",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal C=TEA_LPDU_Config\nif not C then\n C={folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]};C.path=C.folder..[[TEA_LPDU_Draws.lua]]\n local values=FileExists(C.path) and FileLoad(C.path) or {};if type(values)~=\"table\" then values={} end\n local changed=false\n for _,key in ipairs({\"autoStillness\",\"autoMotion\",\"autoLB\"}) do if type(values[key])~=\"boolean\" then values[key]=false;changed=true end end\n if values.lbTank~=\"T1\" and values.lbTank~=\"T2\" then values.lbTank=\"T2\";changed=true end\n C.values=values\n function C.save() if not FolderExists(C.folder) then FolderCreate(C.folder) end;FileSave(C.path,C.values) end\n TEA_LPDU_Config=C;if changed then C.save() end\nend\nif not C.values.autoMotion or data.teaOrdained993Type~=\"motion\" or (g.resolved and g.resolved[\"alpha2\"]) then self.used=true;return end\nlocal p=TensorCore.mGetPlayer();if not p or not p.hp or p.hp.current<=0 then self.used=true;return end\np:Jump()\nself.used=true",
+							name = "[LPDU] Ordained - Auto Motion alpha2",
+							uuid = "7970ed96-60fa-c090-a6ad-343b35c8081a",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				loop = true,
+				mechanicTime = 993.8,
+				name = "[LPDU] Ordained - Auto Motion alpha2",
+				timeRange = true,
+				timelineIndex = 171,
+				timerEndOffset = 0.7,
+				timerStartOffset = -2.4,
+				uuid = "6f62b6ad-2748-da2d-8f23-757b5dd58e59",
 				version = 2,
 			},
 		},
@@ -8686,7 +9767,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local state = data.fateBeta\nlocal spellID = eventArgs.spellID\n\nif state then\n    if spellID == 18590 then\n        if state.donutPos == nil then\n            local caster = TensorCore.mGetEntity(eventArgs.entityID)\n            if caster and caster.pos then\n                state.donutPos = {\n                    x = caster.pos.x,\n                    y = caster.pos.y,\n                    z = caster.pos.z\n                }\n            end\n        end\n    elseif spellID == 18592 or spellID == 18593 then\n        if spellID == 18592 then\n            state.opticalSight = \"Spread\"\n            state.stackDirection = nil\n        else\n            state.opticalSight = \"Stack\"\n            state.stackDirection = state.color == \"Light\" and \"North\" or \"South\"\n        end\n\n        if state.mechanicShotcallDone ~= true then\n            state.mechanicShotcallDone = true\n            local call\n            if spellID == 18592 then\n                call = \"Spread\"\n            elseif state.color == \"Light\" then\n                call = \"Stack north\"\n            else\n                call = \"Stack south\"\n            end\n\n            local duration = math.max(0.1, 1087 - TensorReactions_CurrentTimer)\n            AnyoneCore.Shotcall(call, true, duration, true)\n        end\n    elseif spellID == 18565 then\n        if state.firstArrowCleared ~= true then\n            state.firstArrowCleared = true\n            state.targetPos = nil\n            state.arrowStage = nil\n        end\n    elseif spellID == 18861 or spellID == 18862 then\n        if state.secondArrowStarted ~= true and state.donutPos then\n            state.secondArrowStarted = true\n            state.targetPos = {\n                x = state.donutPos.x,\n                y = state.donutPos.y,\n                z = state.donutPos.z\n            }\n            state.arrowStage = \"second\"\n\n            local duration = math.max(0.1, 1093.6 - TensorReactions_CurrentTimer)\n            AnyoneCore.Shotcall(\"Under donut\", true, duration, true)\n        end\n    elseif spellID == 18566 then\n        state.targetPos = nil\n        state.arrowStage = nil\n        state.finished = true\n    end\nend\n\nself.used = true",
+							actionLua = "local state = data.fateBeta\nlocal spellID = eventArgs.spellID\n\nif state then\n    if spellID == 18590 then\n        if state.donutPos == nil then\n            local caster = TensorCore.mGetEntity(eventArgs.entityID)\n            if caster and caster.pos then\n                state.donutPos = {\n                    x = caster.pos.x,\n                    y = caster.pos.y,\n                    z = caster.pos.z\n                }\n            end\n        end\n    elseif spellID == 18592 or spellID == 18593 then\n        if spellID == 18592 then\n            state.opticalSight = \"Spread\"\n            state.stackDirection = nil\n        else\n            state.opticalSight = \"Stack\"\n            state.stackDirection = state.color == \"Light\" and \"North\" or \"South\"\n        end\n\n    elseif spellID == 18565 then\n        if state.firstArrowCleared ~= true then\n            state.firstArrowCleared = true\n            state.targetPos = nil\n            state.arrowStage = nil\n        end\n    elseif spellID == 18861 or spellID == 18862 then\n        if state.secondArrowStarted ~= true and state.donutPos then\n            state.secondArrowStarted = true\n            state.targetPos = {\n                x = state.donutPos.x,\n                y = state.donutPos.y,\n                z = state.donutPos.z\n            }\n            state.arrowStage = \"second\"\n\n            local duration = math.max(0.1, 1093.6 - TensorReactions_CurrentTimer)\n            AnyoneCore.Shotcall(\"Under donut\", true, duration, true)\n        end\n    elseif spellID == 18566 then\n        state.targetPos = nil\n        state.arrowStage = nil\n        state.finished = true\n    end\nend\n\nself.used = true",
 							conditions = 
 							{
 								
@@ -8740,7 +9821,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.fateBeta = data.fateBeta or {}\nlocal state = data.fateBeta\nlocal player = TensorCore.mGetPlayer()\nlocal now = TensorReactions_CurrentTimer\n\nif state.lastTetherTimer == nil\n    or now < state.lastTetherTimer\n    or now - state.lastTetherTimer > 2\nthen\n    state = {}\n    data.fateBeta = state\nend\n\nstate.lastTetherTimer = now\nstate.tetherCount = (state.tetherCount or 0) + 1\n\nif player and eventArgs.sourceEntityID == player.id then\n    state.myProjection = eventArgs.newTargetID\n    state.myTetherOrder = state.tetherCount\n\n    local reverseIndex = 8 - state.myTetherOrder\n    local assignments = {\n        [0] = { role = \"Dark Beacon\", color = \"Dark\", x = 114, z = 100, call = \"Dark beacon - 2 marker\" },\n        [1] = { role = \"Light Beacon\", color = \"Light\", x = 92, z = 84, call = \"Light beacon - 3 marker\" },\n        [2] = { role = \"Dark Nothing\", color = \"Dark\", x = 111, z = 100, call = \"Dark nothing - west of 2\" },\n        [3] = { role = \"Light Follow\", color = \"Light\", x = 111, z = 98, call = \"Light follow - northwest of 2\" },\n        [4] = { role = \"Dark House Arrest\", color = \"Dark\", x = 111, z = 98, call = \"Dark House Arrest - northwest of 2\" },\n        [5] = { role = \"Light Follow\", color = \"Light\", x = 111, z = 98, call = \"Light follow - northwest of 2\" },\n        [6] = { role = \"Dark Restraining Order\", color = \"Dark\", x = 111, z = 102, call = \"Dark Restraining Order - southwest of 2\" },\n        [7] = { role = \"Light Follow\", color = \"Light\", x = 111, z = 98, call = \"Light follow - northwest of 2\" }\n    }\n\n    local assignment = assignments[reverseIndex]\n    state.assignment = assignment.role\n    state.color = assignment.color\n\n    if assignment.role == \"Light Beacon\" then\n        local x, y, z, isActive = Argus.getWaymarkInfo(7)\n        if isActive then\n            state.targetPos = { x = x, y = y, z = z }\n        else\n            state.targetPos = { x = assignment.x, y = 0, z = assignment.z }\n        end\n    else\n        local x, y, z, isActive = Argus.getWaymarkInfo(6)\n        if isActive then\n            local diagonal = 1.8 / math.sqrt(2)\n            if assignment.role == \"Dark Beacon\" then\n                state.targetPos = { x = x, y = y, z = z }\n            elseif assignment.role == \"Dark Nothing\" then\n                state.targetPos = { x = x - 1.8, y = y, z = z }\n            elseif assignment.role == \"Dark Restraining Order\" then\n                state.targetPos = { x = x - diagonal, y = y, z = z + diagonal }\n            else\n                state.targetPos = { x = x - diagonal, y = y, z = z - diagonal }\n            end\n        else\n            state.targetPos = { x = assignment.x, y = 0, z = assignment.z }\n        end\n    end\n\n    state.arrowStage = \"first\"\n\n    if state.assignmentShotcallDone ~= true then\n        state.assignmentShotcallDone = true\n        local duration = math.max(0.1, 1082.5 - TensorReactions_CurrentTimer)\n        AnyoneCore.Shotcall(assignment.call, true, duration, true)\n    end\nend\n\nself.used = true",
+							actionLua = "data.fateBeta = data.fateBeta or {}\nlocal state = data.fateBeta\nlocal player = TensorCore.mGetPlayer()\nlocal now = TensorReactions_CurrentTimer\n\nif state.lastTetherTimer == nil\n    or now < state.lastTetherTimer\n    or now - state.lastTetherTimer > 2\nthen\n    state = {}\n    data.fateBeta = state\nend\n\nstate.lastTetherTimer = now\nstate.tetherCount = (state.tetherCount or 0) + 1\n\nif player and eventArgs.sourceEntityID == player.id then\n    state.myProjection = eventArgs.newTargetID\n    state.myTetherOrder = state.tetherCount\n\n    local reverseIndex = 8 - state.myTetherOrder\n    local assignments = {\n        [0] = { role = \"Dark Beacon\", color = \"Dark\", x = 114, z = 100, call = \"Dark beacon - 2 marker\" },\n        [1] = { role = \"Light Beacon\", color = \"Light\", x = 92, z = 84, call = \"Light beacon - 3 marker\" },\n        [2] = { role = \"Dark Nothing\", color = \"Dark\", x = 111, z = 100, call = \"Dark nothing - west of 2\" },\n        [3] = { role = \"Light Follow\", color = \"Light\", x = 111, z = 98, call = \"Light follow - northwest of 2\" },\n        [4] = { role = \"Dark House Arrest\", color = \"Dark\", x = 111, z = 98, call = \"Dark House Arrest - northwest of 2\" },\n        [5] = { role = \"Light Follow\", color = \"Light\", x = 111, z = 98, call = \"Light follow - northwest of 2\" },\n        [6] = { role = \"Dark Restraining Order\", color = \"Dark\", x = 111, z = 102, call = \"Dark Restraining Order - southwest of 2\" },\n        [7] = { role = \"Light Follow\", color = \"Light\", x = 111, z = 98, call = \"Light follow - northwest of 2\" }\n    }\n\n    local assignment = assignments[reverseIndex]\n    state.assignment = assignment.role\n    state.color = assignment.color\n\n    if assignment.role == \"Light Beacon\" then\n        local x, y, z, isActive = Argus.getWaymarkInfo(7)\n        if isActive then\n            state.targetPos = { x = x, y = y, z = z }\n        else\n            state.targetPos = { x = assignment.x, y = 0, z = assignment.z }\n        end\n    else\n        local x, y, z, isActive = Argus.getWaymarkInfo(6)\n        if isActive then\n            local diagonal = 1.8 / math.sqrt(2)\n            if assignment.role == \"Dark Beacon\" then\n                state.targetPos = { x = x, y = y, z = z }\n            elseif assignment.role == \"Dark Nothing\" then\n                state.targetPos = { x = x - 1.8, y = y, z = z }\n            elseif assignment.role == \"Dark Restraining Order\" then\n                state.targetPos = { x = x - diagonal, y = y, z = z + diagonal }\n            else\n                state.targetPos = { x = x - diagonal, y = y, z = z - diagonal }\n            end\n        else\n            state.targetPos = { x = assignment.x, y = 0, z = assignment.z }\n        end\n    end\n\n    state.arrowStage = \"first\"\n\n    if state.assignmentShotcallDone ~= true then\n        state.assignmentShotcallDone = true\n        local duration = 4\n        AnyoneCore.Shotcall(assignment.call, true, duration, true)\n    end\nend\n\nself.used = true",
 							conditions = 
 							{
 								
@@ -9005,6 +10086,103 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "0d2327a4-5694-1777-ad51-f80bb103c6b8",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nif g.betaBaitDone then self.used=true;return end\nlocal s=data.fateBeta;if not s or not s.assignment then return end\nlocal message\nif s.assignment==\"Dark Beacon\" then message=\"Bait jump east\"\nelseif s.assignment==\"Dark Nothing\" then message=\"Bait jump west\"\nelseif s.assignment==\"Dark Restraining Order\" then message=\"Bait jump south\"\nelse message=\"Stack north\" end\nAnyoneCore.Shotcall(message,true,4,false)\ng.betaBaitDone=true;self.used=true",
+							name = "[LPDU] Fate Beta - Personal jump or stack step",
+							uuid = "fb237f1a-96d4-ce11-965b-25c6b852c63e",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				loop = true,
+				mechanicTime = 1082.5,
+				name = "[LPDU] Fate Beta - Personal jump or stack step",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 188,
+				timerStartOffset = -5,
+				uuid = "e94d9189-b397-9ada-a586-b1d68c29b9ee",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal s=data.fateBeta\nif not s or not s.opticalSight or g.betaReleased then self.used=true;return end\ng.betaJumps=g.betaJumps or {}\nif not g.betaJumps[eventArgs.entityID] then\n g.betaJumps[eventArgs.entityID]=true;g.betaJumpCount=(g.betaJumpCount or 0)+1\nend\nif g.betaJumpCount>=3 then\n g.betaReleased=true\n local call\n if s.opticalSight==\"Spread\" then call=\"Spread\";s.targetPos=nil\n elseif s.color==\"Light\" then call=\"Stack north\";s.targetPos={x=100,y=0,z=86}\n else call=\"Stack middle\";s.targetPos={x=100,y=0,z=100} end\n AnyoneCore.Shotcall(call,true,4,false)\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"de323fe8-4658-27b7-a875-062135d1bd12",
+									true,
+								},
+							},
+							name = "[LPDU] Fate Beta - Release after all jumps",
+							uuid = "31f3d06b-6560-7be4-acfd-e58ff427e738",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.spellID==18565",
+							dequeueIfLuaFalse = true,
+							name = "Relevant event",
+							uuid = "de323fe8-4658-27b7-a875-062135d1bd12",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 1082.5,
+				name = "[LPDU] Fate Beta - Release after all jumps",
+				timeRange = true,
+				timelineIndex = 188,
+				timerEndOffset = 8,
+				timerStartOffset = -1,
+				uuid = "eeb66fe3-697e-74a4-a24e-c41a16aee7a3",
+				version = 2,
+			},
+		},
 	},
 	[190] = 
 	{
@@ -9181,6 +10359,137 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "cabc8f1a-3fe4-b943-9b8b-3415643d01d9",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal key=\"judgment1\"\nlocal s=g[key]\nif not s then s={waves=0,hits=0};g[key]=s end\nif s.done then self.used=true;return end\nif eventArgs.spellID==18575 then\n if not s.lastPreview or Now()-s.lastPreview>1000 then\n  s.waves=s.waves+1;s.lastPreview=Now()\n  if s.waves==1 then\n   g.activeJudgment=s\n   local p=TensorCore.mGetPlayer();if p then s.timer=g.timer(6600,p.id,\"Move in \") end\n   AnyoneCore.Shotcall(\"Find your start spot\",true,2,false)\n  elseif s.waves==3 then AnyoneCore.Shotcall(\"Wait\",true,2,false) end\n end\nelse\n if not s.lastHit or Now()-s.lastHit>1000 then\n  s.lastHit=Now();s.hits=s.hits+1\n  if s.hits==1 then\n   if s.timer then AnyoneCore.removeTimedWorldText(s.timer);s.timer=nil end\n   AnyoneCore.Shotcall(\"Move together\",true,2,false)\n  elseif s.hits==3 then\n   s.done=true;g.activeJudgment=nil\n   if g.grace and Now()<g.grace.deadline then AnyoneCore.Shotcall(\"Stack\",true,2,false) end\n  end\n end\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"6199d6d6-ac43-6dca-a137-9e56accdb258",
+									true,
+								},
+							},
+							name = "[LPDU] Judgment - Wait then move 1",
+							uuid = "cf561f8a-0610-beeb-95df-8fcfb1e78d12",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.spellID==18575 or eventArgs.spellID==18576",
+							dequeueIfLuaFalse = true,
+							name = "Relevant event",
+							uuid = "6199d6d6-ac43-6dca-a137-9e56accdb258",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 1130.8,
+				name = "[LPDU] Judgment - Wait then move 1",
+				timeRange = true,
+				timelineIndex = 199,
+				timerEndOffset = 13,
+				timerStartOffset = -1,
+				uuid = "1171b3c0-d3f2-bd51-a673-6f1eaa21cee9",
+				version = 2,
+			},
+		},
+	},
+	[203] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "93a7454c-72af-b0bf-a9ec-395978a72c0f",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal target=TensorCore.mGetEntity(eventArgs.targetID)\nif not target then self.used=true;return end\nlocal ms=math.floor((eventArgs.channelTimeMax+0.3)*1000)\ng.grace={deadline=Now()+ms,target=target.id}\ng.timer(ms,target.id,\"Stack \",2.8)\nif g.activeJudgment and g.activeJudgment.done then AnyoneCore.Shotcall(\"Stack\",true,3,false) end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"b19e384d-4bf6-9588-be5e-390a40e50e2f",
+									true,
+								},
+							},
+							name = "[LPDU] Grace - Following stack countdown 1",
+							uuid = "b9843e69-f39d-8f89-a619-fe1cd3873af2",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.spellID==18580 and eventArgs.entityContentID==9042",
+							dequeueIfLuaFalse = true,
+							name = "Relevant event",
+							uuid = "b19e384d-4bf6-9588-be5e-390a40e50e2f",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 1142.5,
+				name = "[LPDU] Grace - Following stack countdown 1",
+				timeRange = true,
+				timelineIndex = 203,
+				timerEndOffset = 1,
+				timerStartOffset = -6,
+				uuid = "d566e2db-4d5a-e3f8-a8e9-7d2134e47751",
+				version = 2,
+			},
+		},
 	},
 	[210] = 
 	{
@@ -9285,6 +10594,236 @@ local tbl =
 				timerEndOffset = 12,
 				timerStartOffset = -1,
 				uuid = "91801a2f-bf90-7e77-9e21-80977c1c7210",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "925f63ac-1127-056c-bde7-298a80bf8150",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal key=\"judgment2\"\nlocal s=g[key]\nif not s then s={waves=0,hits=0};g[key]=s end\nif s.done then self.used=true;return end\nif eventArgs.spellID==18575 then\n if not s.lastPreview or Now()-s.lastPreview>1000 then\n  s.waves=s.waves+1;s.lastPreview=Now()\n  if s.waves==1 then\n   g.activeJudgment=s\n   local p=TensorCore.mGetPlayer();if p then s.timer=g.timer(6600,p.id,\"Move in \") end\n   AnyoneCore.Shotcall(\"Find your start spot\",true,2,false)\n  elseif s.waves==3 then AnyoneCore.Shotcall(\"Wait\",true,2,false) end\n end\nelse\n if not s.lastHit or Now()-s.lastHit>1000 then\n  s.lastHit=Now();s.hits=s.hits+1\n  if s.hits==1 then\n   if s.timer then AnyoneCore.removeTimedWorldText(s.timer);s.timer=nil end\n   AnyoneCore.Shotcall(\"Move together\",true,2,false)\n  elseif s.hits==3 then\n   s.done=true;g.activeJudgment=nil\n   if g.grace and Now()<g.grace.deadline then AnyoneCore.Shotcall(\"Stack\",true,2,false) end\n  end\n end\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"2b814319-1ab6-bb11-aa2a-1a573dd9dfca",
+									true,
+								},
+							},
+							name = "[LPDU] Judgment - Wait then move 2",
+							uuid = "e30300be-855f-fb49-b0b6-f3898cac32ed",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.spellID==18575 or eventArgs.spellID==18576",
+							dequeueIfLuaFalse = true,
+							name = "Relevant event",
+							uuid = "2b814319-1ab6-bb11-aa2a-1a573dd9dfca",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 1176.3,
+				name = "[LPDU] Judgment - Wait then move 2",
+				timeRange = true,
+				timelineIndex = 210,
+				timerEndOffset = 13,
+				timerStartOffset = -1,
+				uuid = "19a968fb-badf-5d6c-8208-ab9ea29ae3e0",
+				version = 2,
+			},
+		},
+	},
+	[214] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "527f4192-c405-cd4e-86da-6a7ac8a6c579",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal target=TensorCore.mGetEntity(eventArgs.targetID)\nif not target then self.used=true;return end\nlocal ms=math.floor((eventArgs.channelTimeMax+0.3)*1000)\ng.grace={deadline=Now()+ms,target=target.id}\ng.timer(ms,target.id,\"Stack \",2.8)\nif g.activeJudgment and g.activeJudgment.done then AnyoneCore.Shotcall(\"Stack\",true,3,false) end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"b451e155-68b0-6b92-a917-7982d293e112",
+									true,
+								},
+							},
+							name = "[LPDU] Grace - Following stack countdown 2",
+							uuid = "050f61eb-5dbc-3539-8136-1ecfac20699a",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.spellID==18580 and eventArgs.entityContentID==9042",
+							dequeueIfLuaFalse = true,
+							name = "Relevant event",
+							uuid = "b451e155-68b0-6b92-a917-7982d293e112",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 1187.9,
+				name = "[LPDU] Grace - Following stack countdown 2",
+				timeRange = true,
+				timelineIndex = 214,
+				timerEndOffset = 1,
+				timerStartOffset = -6,
+				uuid = "7f998e18-516d-ee3e-9862-2ad7d287160b",
+				version = 2,
+			},
+		},
+	},
+	[215] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "53168746-6014-1090-b70e-199cb0ae5803",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\ng.prison={start=Now()}\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"bb548199-1ba9-718c-bb56-8299d792c8e4",
+									true,
+								},
+							},
+							name = "[LPDU] Prison - Start tracking",
+							uuid = "03df1a27-21cf-48dc-ae63-5ac7e75672bb",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.spellID==18583 and eventArgs.entityContentID==9042",
+							dequeueIfLuaFalse = true,
+							name = "Relevant event",
+							uuid = "bb548199-1ba9-718c-bb56-8299d792c8e4",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 1202.8,
+				name = "[LPDU] Prison - Start tracking",
+				timeRange = true,
+				timelineIndex = 215,
+				timerEndOffset = 6,
+				uuid = "05e15f06-1ad1-a08d-a59c-191bce544133",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal state=g.prison\nif not state then return end\nlocal roster=AnyoneCore.Roster\nlocal player=TensorCore.mGetPlayer()\nif not roster or not roster.current() or not player then return end\nif TensorCore.hasBuff(player,2165) then self.used=true;return end\nlocal slot=roster.mySlot()\nlocal turn=slot==\"H2\" and 1 or slot==\"H1\" and 2 or slot==\"T1\" and 3 or slot==\"T2\" and 4 or nil\nlocal elapsed=(Now()-state.start)/1000\nif turn then\n local remaining=10+(turn-1)*5-elapsed\n if remaining>0 and remaining<=5 and not state.called then\n  state.called=true\n  local direction=turn==1 and \"northeast\" or turn==2 and \"east\" or turn==3 and \"southeast\" or \"south\"\n  AnyoneCore.Shotcall(\"Your prison. \"..direction,true,3,false)\n  g.timer(remaining*1000,player.id,\"Prison \")\n end\nelseif slot and elapsed>=22 and elapsed<30 and not state.called then\n state.called=true\n AnyoneCore.Shotcall(\"DPS prisons next. Check your order\",true,3,false)\nend\nself.used=true",
+							name = "[LPDU] Prison - Personal turn and countdown",
+							uuid = "79a4646f-1b57-eb0b-a1ed-3ca4c4d6dc2a",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				loop = true,
+				mechanicTime = 1202.8,
+				name = "[LPDU] Prison - Personal turn and countdown",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 215,
+				timerEndOffset = 46,
+				uuid = "a7dd981e-de1d-c836-88d1-376ca63ee1fb",
 				version = 2,
 			},
 		},
