@@ -178,7 +178,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### FRU: LPDU
 
-- Apoc now previews your next safe-sector destination after Spirit Taker lands, before the existing Dark Eruption spread cue. Later movement and regroup instructions keep their mechanic-based timing. (07-11-2026)
+- Apoc safe-sector guidance appears after Spirit Taker lands and stays visible through Dark Eruption without a cast-time redraw. Countdown, spread calls and later movement steps retain their mechanic triggers, with fallback guidance if the early preview was missed. (07-11-2026)
 
 - Made Frureactions/lpdu strats eligible for Optifine users by replacing direct file I/O with FileLoad/FileSave for preferences and presets. No Minion core Settings dependency remains. (05-11-2026)
 
