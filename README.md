@@ -40,6 +40,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### TEA: LPDU Draws
 
+- Second Water points to B. Role guidance uses the configured Party Roster, and doll target return triggers at 24.9% HP. (08-11-2026)
+
 - Opening Optical Sight shows clear green circles and countdowns on both stack targets. The callout names the west/east split and the countdowns show each side once the targets separate. (08-11-2026)
 
 - Almighty Judgment Exaflares show the next hit in bright red, the following hit in orange, and later hits in yellow. Colors advance on impact. (08-11-2026)
@@ -57,8 +59,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 - LPDU Settings lets you choose progressive exaflare circles or subtractive safe zones for both Almighty Judgment sets. Exaflares preview up to three circles per lane and brighten the next wave as impacts resolve. (08-11-2026)
 
 - Fate Alpha countdown labels are optional in LPDU Settings and off by default. (07-11-2026)
-
-- Fate Beta marks the west jump bait spot with a green circle for its assigned player. Fate Beta shows a separate arrow to the donut safe spot after your stack or spread resolves. Inception calls for the party to gather at the Heart one second later. (07-11-2026)
 
 ### TEA: ACR3 Opti
 
