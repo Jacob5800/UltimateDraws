@@ -636,7 +636,7 @@ local tbl =
 					{
 						data = 
 						{
-							aType = "Misc",
+							aType = "ACR",
 							conditions = 
 							{
 								
@@ -654,120 +654,11 @@ local tbl =
 									"619686bb-3385-b662-a561-13fbaf90924c",
 									true,
 								},
-								
-								{
-									"ab8d89f8-bf1d-ceaf-84c9-9c26b9c5de4d",
-									true,
-								},
 							},
-							name = "Potion - Strength",
-							potType = 4,
-							usePot = true,
-							uuid = "a2aceb49-7c2c-dc58-9823-b2e7e24253a5",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"3e99cdbc-a612-8fe5-9bbf-c8677bd386d3",
-									true,
-								},
-								
-								{
-									"ff0401fa-e239-95d9-903b-aa2350d137be",
-									true,
-								},
-								
-								{
-									"619686bb-3385-b662-a561-13fbaf90924c",
-									true,
-								},
-								
-								{
-									"3cf70bd5-f86d-5575-9f2f-03cc8cb565e4",
-									true,
-								},
-							},
-							name = "Potion - Dexterity",
-							usePot = true,
-							uuid = "149608ee-7fc2-d1f7-bdb0-9f0ddcffd0bd",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"3e99cdbc-a612-8fe5-9bbf-c8677bd386d3",
-									true,
-								},
-								
-								{
-									"ff0401fa-e239-95d9-903b-aa2350d137be",
-									true,
-								},
-								
-								{
-									"619686bb-3385-b662-a561-13fbaf90924c",
-									true,
-								},
-								
-								{
-									"e8d34ffb-2872-3f9b-801c-4d1d5970efc5",
-									true,
-								},
-							},
-							name = "Potion - Intelligence",
-							potType = 2,
-							usePot = true,
-							uuid = "9940706a-5e33-713e-b9b2-2453b0cd80a2",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"3e99cdbc-a612-8fe5-9bbf-c8677bd386d3",
-									true,
-								},
-								
-								{
-									"ff0401fa-e239-95d9-903b-aa2350d137be",
-									true,
-								},
-								
-								{
-									"619686bb-3385-b662-a561-13fbaf90924c",
-									true,
-								},
-								
-								{
-									"b7f8fc37-d51f-1995-bce8-acb7abd7750a",
-									true,
-								},
-							},
-							name = "Potion - Mind",
-							potType = 3,
-							usePot = true,
-							uuid = "06ce632d-95e3-50e8-8e7f-50feed112572",
+							gVar = "ACR_RikuMNK3_Hotbar_Potion",
+							name = "Potion",
+							uuid = "5bffedb2-cfb2-563c-9b27-151049d2e7a1",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -807,95 +698,14 @@ local tbl =
 							version = 3,
 						},
 					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								19,
-								20,
-								21,
-								22,
-								32,
-								34,
-								37,
-								39,
-							},
-							name = "Strength jobs",
-							uuid = "ab8d89f8-bf1d-ceaf-84c9-9c26b9c5de4d",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								23,
-								30,
-								31,
-								38,
-								41,
-							},
-							name = "Dexterity jobs",
-							uuid = "3cf70bd5-f86d-5575-9f2f-03cc8cb565e4",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								25,
-								27,
-								35,
-								42,
-							},
-							name = "Intelligence jobs",
-							uuid = "e8d34ffb-2872-3f9b-801c-4d1d5970efc5",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								24,
-								28,
-								33,
-								40,
-							},
-							name = "Mind jobs",
-							uuid = "b7f8fc37-d51f-1995-bce8-acb7abd7750a",
-							version = 3,
-						},
-					},
 				},
 				displayPath = "LPDU Potions",
 				mechanicTime = 7,
 				name = "[LPDU Potion] Opener",
 				timeRange = true,
 				timelineIndex = 2,
-				timerEndOffset = -0.7,
-				timerStartOffset = -3.7,
+				timerEndOffset = -0.69999998807907,
+				timerStartOffset = -3.7000000476837,
 				uuid = "40b1ff84-4380-2d1f-b75e-05b5c9070754",
 				version = 2,
 			},
@@ -9142,7 +8952,7 @@ local tbl =
 					{
 						data = 
 						{
-							aType = "Misc",
+							aType = "ACR",
 							conditions = 
 							{
 								
@@ -9160,120 +8970,11 @@ local tbl =
 									"e3a65fcc-697c-5bba-af96-334589dcabe8",
 									true,
 								},
-								
-								{
-									"30c0597e-c48c-e78c-b3fc-37d617a96c76",
-									true,
-								},
 							},
-							name = "Potion - Strength",
-							potType = 4,
-							usePot = true,
-							uuid = "19522baa-233d-2406-b340-ccae3980f86a",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"4b28d722-ae32-898b-8082-dc546a368fa3",
-									true,
-								},
-								
-								{
-									"676b868c-2445-2912-bd29-0b52fbb52082",
-									true,
-								},
-								
-								{
-									"e3a65fcc-697c-5bba-af96-334589dcabe8",
-									true,
-								},
-								
-								{
-									"0e2a0b6b-5edd-e7c6-930e-cda5e5b91b3a",
-									true,
-								},
-							},
-							name = "Potion - Dexterity",
-							usePot = true,
-							uuid = "fb92c6a6-061b-c463-a50a-b03c6c8a3be8",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"4b28d722-ae32-898b-8082-dc546a368fa3",
-									true,
-								},
-								
-								{
-									"676b868c-2445-2912-bd29-0b52fbb52082",
-									true,
-								},
-								
-								{
-									"e3a65fcc-697c-5bba-af96-334589dcabe8",
-									true,
-								},
-								
-								{
-									"38a48d08-963b-4a4e-999e-85211b04ac7b",
-									true,
-								},
-							},
-							name = "Potion - Intelligence",
-							potType = 2,
-							usePot = true,
-							uuid = "8c7005d1-88e5-3326-a31c-d132effb291c",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"4b28d722-ae32-898b-8082-dc546a368fa3",
-									true,
-								},
-								
-								{
-									"676b868c-2445-2912-bd29-0b52fbb52082",
-									true,
-								},
-								
-								{
-									"e3a65fcc-697c-5bba-af96-334589dcabe8",
-									true,
-								},
-								
-								{
-									"bb7b8aec-9ced-fc1b-84fb-b4e49f3c3bea",
-									true,
-								},
-							},
-							name = "Potion - Mind",
-							potType = 3,
-							usePot = true,
-							uuid = "940f1520-cf4c-3c1f-a4fa-d10ca6604a2d",
+							gVar = "ACR_RikuMNK3_Hotbar_Potion",
+							name = "Potion",
+							uuid = "659c358f-d6e6-31de-9813-885c501a73a5",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -9310,87 +9011,6 @@ local tbl =
 							conditionLua = "-- Profile-owned preferences; no dependency on Minion's settings subsystem.\nlocal profileStore=_G.LPDU_UCOB_SettingsStore\nif not profileStore or profileStore.fileApiVersion~=1 then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..[[UCOB-LPDU.lua]]\n local values=profileStore and profileStore.values or {}\n if not profileStore and FileExists(path) then\n  local saved=FileLoad(path)\n  if type(saved)==\"table\" then values=saved end\n end\n profileStore=profileStore or {values=values}\n profileStore.path=path\n function profileStore.encode()\n  local lines={}\n  local function encode(s)return (s:gsub('[%%\\t\\r\\n]',function(c)return string.format('%%%02X',string.byte(c))end))end\n  local function visit(values,path)\n   local keys={};for key in pairs(values)do if type(key)=='string' and key:match('^[%w_]+$')then keys[#keys+1]=key end end;table.sort(keys)\n   for _,key in ipairs(keys)do\n    local value=values[key];local full=path=='' and key or path..'.'..key;local kind=type(value)\n    if kind=='table' then visit(value,full)\n    elseif kind=='string' then lines[#lines+1]=full..'\\ts\\t'..encode(value)\n    elseif kind=='number' then lines[#lines+1]=full..'\\tn\\t'..tostring(value)\n    elseif kind=='boolean' then lines[#lines+1]=full..'\\tb\\t'..tostring(value)end\n   end\n  end\n  visit(profileStore.values,'');return table.concat(lines,'\\n')..'\\n'\n end\n function profileStore.save()\n  local text=profileStore.encode()\n  if text==profileStore.saved then return true end\n  if text==profileStore.failedContent then return false end\n  if not FolderExists(folder) then FolderCreate(folder) end\n  local ok,why=pcall(FileSave,path,profileStore.values)\n  if not ok then profileStore.error=tostring(why);profileStore.failedContent=text;return false end\n  profileStore.saved=text;profileStore.error=nil;profileStore.failedContent=nil;return true\n end\n profileStore.fileApiVersion=1\n _G.LPDU_UCOB_SettingsStore=profileStore\nend\n\nlocal rootSettings=profileStore or (_G and profileStore)\nlocal ucobSettings=rootSettings and rootSettings.values\nif not ucobSettings then return false end\nreturn (ucobSettings.LPDU_UCOB_PotionSecond or \"Late Nael\") == \"Late Nael\"",
 							name = "Second potion - Late Nael",
 							uuid = "e3a65fcc-697c-5bba-af96-334589dcabe8",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								19,
-								20,
-								21,
-								22,
-								32,
-								34,
-								37,
-								39,
-							},
-							name = "Strength jobs",
-							uuid = "30c0597e-c48c-e78c-b3fc-37d617a96c76",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								23,
-								30,
-								31,
-								38,
-								41,
-							},
-							name = "Dexterity jobs",
-							uuid = "0e2a0b6b-5edd-e7c6-930e-cda5e5b91b3a",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								25,
-								27,
-								35,
-								42,
-							},
-							name = "Intelligence jobs",
-							uuid = "38a48d08-963b-4a4e-999e-85211b04ac7b",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								24,
-								28,
-								33,
-								40,
-							},
-							name = "Mind jobs",
-							uuid = "bb7b8aec-9ced-fc1b-84fb-b4e49f3c3bea",
 							version = 3,
 						},
 					},
@@ -9541,7 +9161,7 @@ local tbl =
 					{
 						data = 
 						{
-							aType = "Misc",
+							aType = "ACR",
 							conditions = 
 							{
 								
@@ -9559,120 +9179,11 @@ local tbl =
 									"a02945b9-7075-fbb3-b548-99d615879aba",
 									true,
 								},
-								
-								{
-									"ae164da1-8192-c956-a29e-dfade6889f25",
-									true,
-								},
 							},
-							name = "Potion - Strength",
-							potType = 4,
-							usePot = true,
-							uuid = "16510acd-73d8-c1e6-b5db-02b122c06b4d",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"a9ded257-ea61-1b09-95b1-faa0498eff63",
-									true,
-								},
-								
-								{
-									"434dbd12-4444-db9d-b07e-6b692a915211",
-									true,
-								},
-								
-								{
-									"a02945b9-7075-fbb3-b548-99d615879aba",
-									true,
-								},
-								
-								{
-									"720af418-513c-7aef-b524-45d2f1109c35",
-									true,
-								},
-							},
-							name = "Potion - Dexterity",
-							usePot = true,
-							uuid = "df3f7959-243e-93a3-8b52-5e5b0ffff0bc",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"a9ded257-ea61-1b09-95b1-faa0498eff63",
-									true,
-								},
-								
-								{
-									"434dbd12-4444-db9d-b07e-6b692a915211",
-									true,
-								},
-								
-								{
-									"a02945b9-7075-fbb3-b548-99d615879aba",
-									true,
-								},
-								
-								{
-									"777ef6ea-99e3-2a7d-98ab-50b83b2d9e63",
-									true,
-								},
-							},
-							name = "Potion - Intelligence",
-							potType = 2,
-							usePot = true,
-							uuid = "eedc0936-e6a3-5daa-a3cb-2cb5fd7a06f4",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"a9ded257-ea61-1b09-95b1-faa0498eff63",
-									true,
-								},
-								
-								{
-									"434dbd12-4444-db9d-b07e-6b692a915211",
-									true,
-								},
-								
-								{
-									"a02945b9-7075-fbb3-b548-99d615879aba",
-									true,
-								},
-								
-								{
-									"deb24b42-d13e-9fda-90ca-092689d3eb85",
-									true,
-								},
-							},
-							name = "Potion - Mind",
-							potType = 3,
-							usePot = true,
-							uuid = "2b3a417c-eda4-37b5-bd00-70c7b57cf024",
+							gVar = "ACR_RikuMNK3_Hotbar_Potion",
+							name = "Potion",
+							uuid = "7beb4613-aad4-cc79-b7f1-0c9a5b6461c1",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -9709,87 +9220,6 @@ local tbl =
 							conditionLua = "-- Profile-owned preferences; no dependency on Minion's settings subsystem.\nlocal profileStore=_G.LPDU_UCOB_SettingsStore\nif not profileStore or profileStore.fileApiVersion~=1 then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..[[UCOB-LPDU.lua]]\n local values=profileStore and profileStore.values or {}\n if not profileStore and FileExists(path) then\n  local saved=FileLoad(path)\n  if type(saved)==\"table\" then values=saved end\n end\n profileStore=profileStore or {values=values}\n profileStore.path=path\n function profileStore.encode()\n  local lines={}\n  local function encode(s)return (s:gsub('[%%\\t\\r\\n]',function(c)return string.format('%%%02X',string.byte(c))end))end\n  local function visit(values,path)\n   local keys={};for key in pairs(values)do if type(key)=='string' and key:match('^[%w_]+$')then keys[#keys+1]=key end end;table.sort(keys)\n   for _,key in ipairs(keys)do\n    local value=values[key];local full=path=='' and key or path..'.'..key;local kind=type(value)\n    if kind=='table' then visit(value,full)\n    elseif kind=='string' then lines[#lines+1]=full..'\\ts\\t'..encode(value)\n    elseif kind=='number' then lines[#lines+1]=full..'\\tn\\t'..tostring(value)\n    elseif kind=='boolean' then lines[#lines+1]=full..'\\tb\\t'..tostring(value)end\n   end\n  end\n  visit(profileStore.values,'');return table.concat(lines,'\\n')..'\\n'\n end\n function profileStore.save()\n  local text=profileStore.encode()\n  if text==profileStore.saved then return true end\n  if text==profileStore.failedContent then return false end\n  if not FolderExists(folder) then FolderCreate(folder) end\n  local ok,why=pcall(FileSave,path,profileStore.values)\n  if not ok then profileStore.error=tostring(why);profileStore.failedContent=text;return false end\n  profileStore.saved=text;profileStore.error=nil;profileStore.failedContent=nil;return true\n end\n profileStore.fileApiVersion=1\n _G.LPDU_UCOB_SettingsStore=profileStore\nend\n\nlocal rootSettings=profileStore or (_G and profileStore)\nlocal ucobSettings=rootSettings and rootSettings.values\nif not ucobSettings then return false end\nreturn (ucobSettings.LPDU_UCOB_PotionSecond or \"Late Nael\") == \"Delayed Nael\"",
 							name = "Second potion - Delayed Nael",
 							uuid = "a02945b9-7075-fbb3-b548-99d615879aba",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								19,
-								20,
-								21,
-								22,
-								32,
-								34,
-								37,
-								39,
-							},
-							name = "Strength jobs",
-							uuid = "ae164da1-8192-c956-a29e-dfade6889f25",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								23,
-								30,
-								31,
-								38,
-								41,
-							},
-							name = "Dexterity jobs",
-							uuid = "720af418-513c-7aef-b524-45d2f1109c35",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								25,
-								27,
-								35,
-								42,
-							},
-							name = "Intelligence jobs",
-							uuid = "777ef6ea-99e3-2a7d-98ab-50b83b2d9e63",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								24,
-								28,
-								33,
-								40,
-							},
-							name = "Mind jobs",
-							uuid = "deb24b42-d13e-9fda-90ca-092689d3eb85",
 							version = 3,
 						},
 					},
@@ -10168,7 +9598,7 @@ local tbl =
 					{
 						data = 
 						{
-							aType = "Misc",
+							aType = "ACR",
 							conditions = 
 							{
 								
@@ -10186,120 +9616,11 @@ local tbl =
 									"02f9d7c2-db1b-343c-a964-2a1b0c7b8c77",
 									true,
 								},
-								
-								{
-									"c8067e9c-302a-99eb-90a9-db57552c4ed7",
-									true,
-								},
 							},
-							name = "Potion - Strength",
-							potType = 4,
-							usePot = true,
-							uuid = "41108440-d387-f508-bb26-3fc740a68f02",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"42815904-24fc-305d-abb9-7df2af77c2e1",
-									true,
-								},
-								
-								{
-									"ea7add80-bf25-b4c1-8888-fb1af4912dd6",
-									true,
-								},
-								
-								{
-									"02f9d7c2-db1b-343c-a964-2a1b0c7b8c77",
-									true,
-								},
-								
-								{
-									"95f967d3-134e-c6a3-9624-950d4460a266",
-									true,
-								},
-							},
-							name = "Potion - Dexterity",
-							usePot = true,
-							uuid = "2978dd6e-ad71-2ad8-ba46-4621acb6f518",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"42815904-24fc-305d-abb9-7df2af77c2e1",
-									true,
-								},
-								
-								{
-									"ea7add80-bf25-b4c1-8888-fb1af4912dd6",
-									true,
-								},
-								
-								{
-									"02f9d7c2-db1b-343c-a964-2a1b0c7b8c77",
-									true,
-								},
-								
-								{
-									"ec2c0d81-3541-caa5-8286-881c30b1b882",
-									true,
-								},
-							},
-							name = "Potion - Intelligence",
-							potType = 2,
-							usePot = true,
-							uuid = "2368dfe9-49f9-fa9f-b672-d4ab76e626a9",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"42815904-24fc-305d-abb9-7df2af77c2e1",
-									true,
-								},
-								
-								{
-									"ea7add80-bf25-b4c1-8888-fb1af4912dd6",
-									true,
-								},
-								
-								{
-									"02f9d7c2-db1b-343c-a964-2a1b0c7b8c77",
-									true,
-								},
-								
-								{
-									"8514d708-8aad-2ec3-a074-52feb295d5a2",
-									true,
-								},
-							},
-							name = "Potion - Mind",
-							potType = 3,
-							usePot = true,
-							uuid = "515a7d13-2bb0-e20d-a315-8c9634a6b576",
+							gVar = "ACR_RikuMNK3_Hotbar_Potion",
+							name = "Potion",
+							uuid = "4030bf0e-96ae-bb85-9afc-a15c0bc18d3e",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -10336,87 +9657,6 @@ local tbl =
 							conditionLua = "-- Profile-owned preferences; no dependency on Minion's settings subsystem.\nlocal profileStore=_G.LPDU_UCOB_SettingsStore\nif not profileStore or profileStore.fileApiVersion~=1 then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..[[UCOB-LPDU.lua]]\n local values=profileStore and profileStore.values or {}\n if not profileStore and FileExists(path) then\n  local saved=FileLoad(path)\n  if type(saved)==\"table\" then values=saved end\n end\n profileStore=profileStore or {values=values}\n profileStore.path=path\n function profileStore.encode()\n  local lines={}\n  local function encode(s)return (s:gsub('[%%\\t\\r\\n]',function(c)return string.format('%%%02X',string.byte(c))end))end\n  local function visit(values,path)\n   local keys={};for key in pairs(values)do if type(key)=='string' and key:match('^[%w_]+$')then keys[#keys+1]=key end end;table.sort(keys)\n   for _,key in ipairs(keys)do\n    local value=values[key];local full=path=='' and key or path..'.'..key;local kind=type(value)\n    if kind=='table' then visit(value,full)\n    elseif kind=='string' then lines[#lines+1]=full..'\\ts\\t'..encode(value)\n    elseif kind=='number' then lines[#lines+1]=full..'\\tn\\t'..tostring(value)\n    elseif kind=='boolean' then lines[#lines+1]=full..'\\tb\\t'..tostring(value)end\n   end\n  end\n  visit(profileStore.values,'');return table.concat(lines,'\\n')..'\\n'\n end\n function profileStore.save()\n  local text=profileStore.encode()\n  if text==profileStore.saved then return true end\n  if text==profileStore.failedContent then return false end\n  if not FolderExists(folder) then FolderCreate(folder) end\n  local ok,why=pcall(FileSave,path,profileStore.values)\n  if not ok then profileStore.error=tostring(why);profileStore.failedContent=text;return false end\n  profileStore.saved=text;profileStore.error=nil;profileStore.failedContent=nil;return true\n end\n profileStore.fileApiVersion=1\n _G.LPDU_UCOB_SettingsStore=profileStore\nend\n\nlocal rootSettings=profileStore or (_G and profileStore)\nlocal ucobSettings=rootSettings and rootSettings.values\nif not ucobSettings then return false end\nreturn (ucobSettings.LPDU_UCOB_PotionSecond or \"Late Nael\") == \"Bahamut opener\"",
 							name = "Second potion - Bahamut opener",
 							uuid = "02f9d7c2-db1b-343c-a964-2a1b0c7b8c77",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								19,
-								20,
-								21,
-								22,
-								32,
-								34,
-								37,
-								39,
-							},
-							name = "Strength jobs",
-							uuid = "c8067e9c-302a-99eb-90a9-db57552c4ed7",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								23,
-								30,
-								31,
-								38,
-								41,
-							},
-							name = "Dexterity jobs",
-							uuid = "95f967d3-134e-c6a3-9624-950d4460a266",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								25,
-								27,
-								35,
-								42,
-							},
-							name = "Intelligence jobs",
-							uuid = "ec2c0d81-3541-caa5-8286-881c30b1b882",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								24,
-								28,
-								33,
-								40,
-							},
-							name = "Mind jobs",
-							uuid = "8514d708-8aad-2ec3-a074-52feb295d5a2",
 							version = 3,
 						},
 					},
@@ -12342,7 +11582,7 @@ local tbl =
 					{
 						data = 
 						{
-							aType = "Misc",
+							aType = "ACR",
 							conditions = 
 							{
 								
@@ -12360,120 +11600,11 @@ local tbl =
 									"6ddc2792-6dc8-2a27-a0cb-e00c8c0f2771",
 									true,
 								},
-								
-								{
-									"aaa56135-a9d0-02e9-a19d-bda132106001",
-									true,
-								},
 							},
-							name = "Potion - Strength",
-							potType = 4,
-							usePot = true,
-							uuid = "1e89872c-41d7-51c6-99b8-4f7e62ac4025",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"616ad61b-8e1d-2566-87f2-7917fd2c2dc6",
-									true,
-								},
-								
-								{
-									"b6729920-a74c-1e57-9f6f-8bcda0131b45",
-									true,
-								},
-								
-								{
-									"6ddc2792-6dc8-2a27-a0cb-e00c8c0f2771",
-									true,
-								},
-								
-								{
-									"90dcff04-aaad-7867-b3c8-b1466dc70609",
-									true,
-								},
-							},
-							name = "Potion - Dexterity",
-							usePot = true,
-							uuid = "6a81b398-0f23-a291-95ef-5a8147304d87",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"616ad61b-8e1d-2566-87f2-7917fd2c2dc6",
-									true,
-								},
-								
-								{
-									"b6729920-a74c-1e57-9f6f-8bcda0131b45",
-									true,
-								},
-								
-								{
-									"6ddc2792-6dc8-2a27-a0cb-e00c8c0f2771",
-									true,
-								},
-								
-								{
-									"bbe79368-908b-f83b-9a32-1f8adee995e7",
-									true,
-								},
-							},
-							name = "Potion - Intelligence",
-							potType = 2,
-							usePot = true,
-							uuid = "7187afd5-15ac-677d-9811-93644f656ec0",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"616ad61b-8e1d-2566-87f2-7917fd2c2dc6",
-									true,
-								},
-								
-								{
-									"b6729920-a74c-1e57-9f6f-8bcda0131b45",
-									true,
-								},
-								
-								{
-									"6ddc2792-6dc8-2a27-a0cb-e00c8c0f2771",
-									true,
-								},
-								
-								{
-									"e169ca60-076d-9c65-b71f-2a48522d8ed6",
-									true,
-								},
-							},
-							name = "Potion - Mind",
-							potType = 3,
-							usePot = true,
-							uuid = "68fd609e-1fad-0736-af38-1856c863f50a",
+							gVar = "ACR_RikuMNK3_Hotbar_Potion",
+							name = "Potion",
+							uuid = "82ebac8a-a863-4efd-9fb1-717faf158fa0",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -12510,87 +11641,6 @@ local tbl =
 							conditionLua = "-- Profile-owned preferences; no dependency on Minion's settings subsystem.\nlocal profileStore=_G.LPDU_UCOB_SettingsStore\nif not profileStore or profileStore.fileApiVersion~=1 then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..[[UCOB-LPDU.lua]]\n local values=profileStore and profileStore.values or {}\n if not profileStore and FileExists(path) then\n  local saved=FileLoad(path)\n  if type(saved)==\"table\" then values=saved end\n end\n profileStore=profileStore or {values=values}\n profileStore.path=path\n function profileStore.encode()\n  local lines={}\n  local function encode(s)return (s:gsub('[%%\\t\\r\\n]',function(c)return string.format('%%%02X',string.byte(c))end))end\n  local function visit(values,path)\n   local keys={};for key in pairs(values)do if type(key)=='string' and key:match('^[%w_]+$')then keys[#keys+1]=key end end;table.sort(keys)\n   for _,key in ipairs(keys)do\n    local value=values[key];local full=path=='' and key or path..'.'..key;local kind=type(value)\n    if kind=='table' then visit(value,full)\n    elseif kind=='string' then lines[#lines+1]=full..'\\ts\\t'..encode(value)\n    elseif kind=='number' then lines[#lines+1]=full..'\\tn\\t'..tostring(value)\n    elseif kind=='boolean' then lines[#lines+1]=full..'\\tb\\t'..tostring(value)end\n   end\n  end\n  visit(profileStore.values,'');return table.concat(lines,'\\n')..'\\n'\n end\n function profileStore.save()\n  local text=profileStore.encode()\n  if text==profileStore.saved then return true end\n  if text==profileStore.failedContent then return false end\n  if not FolderExists(folder) then FolderCreate(folder) end\n  local ok,why=pcall(FileSave,path,profileStore.values)\n  if not ok then profileStore.error=tostring(why);profileStore.failedContent=text;return false end\n  profileStore.saved=text;profileStore.error=nil;profileStore.failedContent=nil;return true\n end\n profileStore.fileApiVersion=1\n _G.LPDU_UCOB_SettingsStore=profileStore\nend\n\nlocal rootSettings=profileStore or (_G and profileStore)\nlocal ucobSettings=rootSettings and rootSettings.values\nif not ucobSettings then return false end\nreturn (ucobSettings.LPDU_UCOB_PotionSecond or \"Late Nael\") == \"After Blackfire\"",
 							name = "Second potion - After Blackfire",
 							uuid = "6ddc2792-6dc8-2a27-a0cb-e00c8c0f2771",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								19,
-								20,
-								21,
-								22,
-								32,
-								34,
-								37,
-								39,
-							},
-							name = "Strength jobs",
-							uuid = "aaa56135-a9d0-02e9-a19d-bda132106001",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								23,
-								30,
-								31,
-								38,
-								41,
-							},
-							name = "Dexterity jobs",
-							uuid = "90dcff04-aaad-7867-b3c8-b1466dc70609",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								25,
-								27,
-								35,
-								42,
-							},
-							name = "Intelligence jobs",
-							uuid = "bbe79368-908b-f83b-9a32-1f8adee995e7",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								24,
-								28,
-								33,
-								40,
-							},
-							name = "Mind jobs",
-							uuid = "e169ca60-076d-9c65-b71f-2a48522d8ed6",
 							version = 3,
 						},
 					},
@@ -17139,7 +16189,7 @@ local tbl =
 					{
 						data = 
 						{
-							aType = "Misc",
+							aType = "ACR",
 							conditions = 
 							{
 								
@@ -17152,105 +16202,11 @@ local tbl =
 									"d89960c4-8954-2821-bf56-7308ec8c8939",
 									true,
 								},
-								
-								{
-									"c9c53570-b69d-e5d1-a0e1-4af667f49bb6",
-									true,
-								},
 							},
-							name = "Potion - Strength",
-							potType = 4,
-							usePot = true,
-							uuid = "8581ba44-23a4-598b-9733-c1b9cb3cc3c4",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"00aca765-f160-fbe4-a8b0-9d3812390b8b",
-									true,
-								},
-								
-								{
-									"d89960c4-8954-2821-bf56-7308ec8c8939",
-									true,
-								},
-								
-								{
-									"db40f719-b4d2-02fd-bc77-2dc9ab0c59c2",
-									true,
-								},
-							},
-							name = "Potion - Dexterity",
-							usePot = true,
-							uuid = "d135317a-2eff-fe10-bfb3-d4f9483e416d",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"00aca765-f160-fbe4-a8b0-9d3812390b8b",
-									true,
-								},
-								
-								{
-									"d89960c4-8954-2821-bf56-7308ec8c8939",
-									true,
-								},
-								
-								{
-									"e31ec5da-beca-a12c-8acb-ee5339890a9a",
-									true,
-								},
-							},
-							name = "Potion - Intelligence",
-							potType = 2,
-							usePot = true,
-							uuid = "a1122412-54a4-01ca-bff6-be5e9f4c5288",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"00aca765-f160-fbe4-a8b0-9d3812390b8b",
-									true,
-								},
-								
-								{
-									"d89960c4-8954-2821-bf56-7308ec8c8939",
-									true,
-								},
-								
-								{
-									"b15c4cc7-a16e-2dbb-a6f8-db51ce6d4f92",
-									true,
-								},
-							},
-							name = "Potion - Mind",
-							potType = 3,
-							usePot = true,
-							uuid = "a9c0032b-4170-2caa-a1c7-11f5704f59f2",
+							gVar = "ACR_RikuMNK3_Hotbar_Potion",
+							name = "Potion",
+							uuid = "4e4dcc4a-19ce-0196-b62f-6ffda511a38e",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -17276,87 +16232,6 @@ local tbl =
 							conditionType = 7,
 							name = "In combat",
 							uuid = "d89960c4-8954-2821-bf56-7308ec8c8939",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								19,
-								20,
-								21,
-								22,
-								32,
-								34,
-								37,
-								39,
-							},
-							name = "Strength jobs",
-							uuid = "c9c53570-b69d-e5d1-a0e1-4af667f49bb6",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								23,
-								30,
-								31,
-								38,
-								41,
-							},
-							name = "Dexterity jobs",
-							uuid = "db40f719-b4d2-02fd-bc77-2dc9ab0c59c2",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								25,
-								27,
-								35,
-								42,
-							},
-							name = "Intelligence jobs",
-							uuid = "e31ec5da-beca-a12c-8acb-ee5339890a9a",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								24,
-								28,
-								33,
-								40,
-							},
-							name = "Mind jobs",
-							uuid = "b15c4cc7-a16e-2dbb-a6f8-db51ce6d4f92",
 							version = 3,
 						},
 					},
@@ -21160,7 +20035,7 @@ local tbl =
 					{
 						data = 
 						{
-							aType = "Misc",
+							aType = "ACR",
 							conditions = 
 							{
 								
@@ -21173,105 +20048,11 @@ local tbl =
 									"63b5d56d-57ef-4f5b-9166-646368c3de9a",
 									true,
 								},
-								
-								{
-									"acec0343-9ee3-8c7f-bb11-d0295209235a",
-									true,
-								},
 							},
-							name = "Potion - Strength",
-							potType = 4,
-							usePot = true,
-							uuid = "8cb20cb6-06e4-1bec-82dd-a095d662f5af",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"3ce6e432-50a1-f954-b24d-04c4097749a7",
-									true,
-								},
-								
-								{
-									"63b5d56d-57ef-4f5b-9166-646368c3de9a",
-									true,
-								},
-								
-								{
-									"e4990cda-3fa5-d634-9618-36e266a4cb99",
-									true,
-								},
-							},
-							name = "Potion - Dexterity",
-							usePot = true,
-							uuid = "8ecef29e-9496-874b-8aff-80258a3dc87e",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"3ce6e432-50a1-f954-b24d-04c4097749a7",
-									true,
-								},
-								
-								{
-									"63b5d56d-57ef-4f5b-9166-646368c3de9a",
-									true,
-								},
-								
-								{
-									"6c69c206-1a65-4d7f-b142-51a220cc4ecd",
-									true,
-								},
-							},
-							name = "Potion - Intelligence",
-							potType = 2,
-							usePot = true,
-							uuid = "4f21fb1d-25b2-6927-aa87-4bf188263cfe",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"3ce6e432-50a1-f954-b24d-04c4097749a7",
-									true,
-								},
-								
-								{
-									"63b5d56d-57ef-4f5b-9166-646368c3de9a",
-									true,
-								},
-								
-								{
-									"0b00b061-92c9-6ebd-becb-5bf9ffa2edf6",
-									true,
-								},
-							},
-							name = "Potion - Mind",
-							potType = 3,
-							usePot = true,
-							uuid = "c52fc723-d436-0591-bcc0-82f9f464addd",
+							gVar = "ACR_RikuMNK3_Hotbar_Potion",
+							name = "Potion",
+							uuid = "ddee6908-94af-4407-9828-c019107c966f",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -21297,87 +20078,6 @@ local tbl =
 							conditionType = 7,
 							name = "In combat",
 							uuid = "63b5d56d-57ef-4f5b-9166-646368c3de9a",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								19,
-								20,
-								21,
-								22,
-								32,
-								34,
-								37,
-								39,
-							},
-							name = "Strength jobs",
-							uuid = "acec0343-9ee3-8c7f-bb11-d0295209235a",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								23,
-								30,
-								31,
-								38,
-								41,
-							},
-							name = "Dexterity jobs",
-							uuid = "e4990cda-3fa5-d634-9618-36e266a4cb99",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								25,
-								27,
-								35,
-								42,
-							},
-							name = "Intelligence jobs",
-							uuid = "6c69c206-1a65-4d7f-b142-51a220cc4ecd",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								24,
-								28,
-								33,
-								40,
-							},
-							name = "Mind jobs",
-							uuid = "0b00b061-92c9-6ebd-becb-5bf9ffa2edf6",
 							version = 3,
 						},
 					},
