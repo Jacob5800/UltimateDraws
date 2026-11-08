@@ -1204,6 +1204,62 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"622b0634-5b03-3fea-b051-7546a44e7d0f",
+									true,
+								},
+							},
+							gVar = "ACR_TensorRequiem4_Hotbar_PaeanMouse",
+							name = "Warden's Paean",
+							targetType = "Event Entity",
+							uuid = "9cf439eb-b9f6-99f5-a827-156c592de5e2",
+							variableIsHover = true,
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local config = TEA_LPDU_Config\nif not config or config.values.autoThrottlePaean ~= true or eventArgs.buffID ~= 700 then return false end\nlocal player = TensorCore.mGetPlayer()\nif not player or player.job ~= 23 or not player.pos then return false end\nlocal targetID = eventArgs.entityID\nlocal recipient\nif targetID == player.id then\n    recipient = player\nelse\n    for _, member in pairs(TensorCore.getEntityGroupList(\"Party\", \"Number\") or {}) do\n        if member.id == targetID then\n            recipient = member\n            break\n        end\n    end\nend\nlocal reason\nif not recipient or not recipient.pos or not recipient.hp or recipient.hp.current <= 0 then\n    reason = \"recipient unavailable\"\nelseif TensorCore.getDistance2d(player.pos, recipient.pos) > 30 then\n    reason = \"out of range\"\nelseif not TensorCore.hasBuff(recipient, 700) then\n    reason = \"Throttle absent\"\nelse\n    reason = \"eligible for Paean request\"\nend\n\nlocal decisions = data.teaThrottlePaeanDecisions or {}\ndata.teaThrottlePaeanDecisions = decisions\nif decisions[targetID] ~= reason then\n    decisions[targetID] = reason\n    TensorCore.timelineLogToFile(\"[TEA Paean] Recipient \" .. tostring(targetID) .. \": \" .. reason .. \"\\n\")\nend\nreturn reason == \"eligible for Paean request\"\n",
+							dequeueIfLuaFalse = true,
+							name = "Bard enabled, living party member with Throttle in range",
+							uuid = "622b0634-5b03-3fea-b051-7546a44e7d0f",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "P1 - Living Liquid",
+				eventType = 8,
+				mechanicTime = 95.9,
+				name = "[LPDU] Throttle - Bard Paean",
+				timeRange = true,
+				timelineIndex = 24,
+				timerEndOffset = 20,
+				timerStartOffset = -3,
+				uuid = "4e85e850-a493-4f38-a377-3f0248bcd971",
+				version = 2,
+			},
+		},
 	},
 	[25] = 
 	{
@@ -8036,7 +8092,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "-- OnDraw also runs before combat, when the startup update may not have run.\nlocal C=TEA_LPDU_Config\nif not C then\n C={folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]};C.path=C.folder..[[TEA_LPDU_Draws.lua]]\n local values=FileExists(C.path) and FileLoad(C.path) or {};if type(values)~=\"table\" then values={} end\n local changed=false\n for _,key in ipairs({\"autoStillness\",\"autoMotion\",\"autoLB\"}) do if type(values[key])~=\"boolean\" then values[key]=key~=\"autoLB\";changed=true end end\n if values.lbTank~=\"T1\" and values.lbTank~=\"T2\" then values.lbTank=\"T2\";changed=true end\n if type(values.alphaLabels) ~= \"boolean\" then values.alphaLabels = false; changed = true end\n C.values=values\n function C.save() if not FolderExists(C.folder) then FolderCreate(C.folder) end;FileSave(C.path,C.values) end\n TEA_LPDU_Config=C;if changed then C.save() end\nend\n\nlocal visible = GUI:Begin(\"LPDU Settings###TEALPDUSettings\", true, GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n    local options = {\"Enabled\", \"Disabled\"}\n    local motion, motionChanged = GUI:Combo(\"Ordained Motion\", C.values.autoMotion and 1 or 2, options)\n    if motionChanged then\n        C.values.autoMotion = motion == 1\n        C.save()\n    end\n    local stillness, stillnessChanged = GUI:Combo(\"Ordained Stillness\", C.values.autoStillness and 1 or 2, options)\n    if stillnessChanged then\n        C.values.autoStillness = stillness == 1\n        C.save()\n    end\n    local labels, labelsChanged = GUI:Combo(\"Fate Alpha labels\", C.values.alphaLabels and 1 or 2, options)\n    if labelsChanged then\n        C.values.alphaLabels = labels == 1\n        C.save()\n    end\n\n    local judgmentStyles = {\"Subtractive\", \"Exaflares\"}\n    local currentStyle = C.values.judgmentStyle == \"Exaflares\" and 2 or 1\n    local selectedStyle, styleChanged = GUI:Combo(\"Almighty Judgment draws\", currentStyle, judgmentStyles)\n    if styleChanged then\n        C.values.judgmentStyle = judgmentStyles[selectedStyle]\n        C.save()\n    end\n\n    local player = TensorCore.mGetPlayer()\n    if player and TensorCore.isTank(player) then\n        local lb, lbChanged = GUI:Combo(\"Automatic Tank LB\", C.values.autoLB and 1 or 2, options)\n        if lbChanged then\n            C.values.autoLB = lb == 1\n            C.save()\n        end\n        if C.values.autoLB then\n            local tank, tankChanged = GUI:Combo(\"Tank LB user\", C.values.lbTank == \"T1\" and 1 or 2, {\"T1\", \"T2\"})\n            if tankChanged then\n                C.values.lbTank = tank == 1 and \"T1\" or \"T2\"\n                C.save()\n            end\n        end\n    end\nend\nGUI:End()\nself.used = true",
+							actionLua = "-- OnDraw also runs before combat, when the startup update may not have run.\nlocal C=TEA_LPDU_Config\nif not C then\n C={folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]};C.path=C.folder..[[TEA_LPDU_Draws.lua]]\n local values=FileExists(C.path) and FileLoad(C.path) or {};if type(values)~=\"table\" then values={} end\n local changed=false\n for _,key in ipairs({\"autoStillness\",\"autoMotion\",\"autoLB\"}) do if type(values[key])~=\"boolean\" then values[key]=key~=\"autoLB\";changed=true end end\n if values.lbTank~=\"T1\" and values.lbTank~=\"T2\" then values.lbTank=\"T2\";changed=true end\n if type(values.alphaLabels) ~= \"boolean\" then values.alphaLabels = false; changed = true end\n C.values=values\n function C.save() if not FolderExists(C.folder) then FolderCreate(C.folder) end;FileSave(C.path,C.values) end\n TEA_LPDU_Config=C;if changed then C.save() end\nend\n\nlocal visible = GUI:Begin(\"LPDU Settings###TEALPDUSettings\", true, GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n    local options = {\"Enabled\", \"Disabled\"}\n    local motion, motionChanged = GUI:Combo(\"Ordained Motion\", C.values.autoMotion and 1 or 2, options)\n    if motionChanged then\n        C.values.autoMotion = motion == 1\n        C.save()\n    end\n    local stillness, stillnessChanged = GUI:Combo(\"Ordained Stillness\", C.values.autoStillness and 1 or 2, options)\n    if stillnessChanged then\n        C.values.autoStillness = stillness == 1\n        C.save()\n    end\n    local labels, labelsChanged = GUI:Combo(\"Fate Alpha labels\", C.values.alphaLabels and 1 or 2, options)\n    if labelsChanged then\n        C.values.alphaLabels = labels == 1\n        C.save()\n    end\n\n    local judgmentStyles = {\"Subtractive\", \"Exaflares\"}\n    local currentStyle = C.values.judgmentStyle == \"Exaflares\" and 2 or 1\n    local selectedStyle, styleChanged = GUI:Combo(\"Almighty Judgment draws\", currentStyle, judgmentStyles)\n    if styleChanged then\n        C.values.judgmentStyle = judgmentStyles[selectedStyle]\n        C.save()\n    end\n\n    local player = TensorCore.mGetPlayer()\n    if player and player.job == 23 then\n        local paean, paeanChanged = GUI:Combo(\"Auto-cleanse Throttle (Bard)\", C.values.autoThrottlePaean == true and 1 or 2, options)\n        if paeanChanged then\n            C.values.autoThrottlePaean = paean == 1\n            C.save()\n        end\n    end\n\n    if player and TensorCore.isTank(player) then\n        local lb, lbChanged = GUI:Combo(\"Automatic Tank LB\", C.values.autoLB and 1 or 2, options)\n        if lbChanged then\n            C.values.autoLB = lb == 1\n            C.save()\n        end\n        if C.values.autoLB then\n            local tank, tankChanged = GUI:Combo(\"Tank LB user\", C.values.lbTank == \"T1\" and 1 or 2, {\"T1\", \"T2\"})\n            if tankChanged then\n                C.values.lbTank = tank == 1 and \"T1\" or \"T2\"\n                C.save()\n            end\n        end\n    end\nend\nGUI:End()\nself.used = true",
 							name = "[LPDU] TEA - Optional automation settings",
 							uuid = "f0875a94-0ffe-1944-996f-54c45c3be10b",
 							version = 2.1,
