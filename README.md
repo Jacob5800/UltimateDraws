@@ -40,7 +40,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### TEA: LPDU Draws
 
-- Opening Optical Sight shows clear green circles and countdowns on both stack targets. (08-11-2026)
+- Opening Optical Sight shows clear green circles and countdowns on both stack targets. The callout names the west/east split and the countdowns show each side once the targets separate. (08-11-2026)
 
 - Almighty Judgment Exaflares show the next hit in bright red, the following hit in orange, and later hits in yellow. Colors advance on impact. (08-11-2026)
 

@@ -8653,7 +8653,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal s=g.optical\nif not s then s={};g.optical=s end\nif s.lastCall and Now()-s.lastCall<1000 then self.used=true;return end\ns.lastCall=Now()\nlocal p=TensorCore.mGetPlayer()\nlocal ownStack=s.stacks and p and s.stacks[p.id] and s.stacks[p.id]>Now()\nAnyoneCore.Shotcall(eventArgs.spellID==18570 and \"Spread\" or (ownStack and \"Stack on you\" or \"Join a stack\"),true,3,false)\nself.used=true",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal s=g.optical\nif not s then s={};g.optical=s end\nif s.lastCall and Now()-s.lastCall<1000 then self.used=true;return end\ns.lastCall=Now()\nlocal message = eventArgs.spellID == 18570 and \"Spread\" or \"Split stacks west and east\"\nAnyoneCore.Shotcall(message, true, 3, false)\nself.used=true",
 							conditions = 
 							{
 								
@@ -8707,7 +8707,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal s=g.optical\nif not s then s={};g.optical=s end\nlocal id = eventArgs.entityID\nlocal player = TensorCore.mGetPlayer()\nlocal inParty = player and player.id == id\nif not inParty then\n for _, member in pairs(TensorCore.getEntityGroupList(\"Party\") or {}) do\n  if member.id == id then inParty = true; break end\n end\nend\nif not inParty then self.used = true; return end\ns.markers=s.markers or {};local key=tostring(eventArgs.markerID)..\":\"..tostring(id)\nif s.markers[key] and Now()-s.markers[key]<1000 then self.used=true;return end\ns.markers[key]=Now()\nlocal isStack = eventArgs.markerID == 62\nlocal previewMs = 5100\nlocal drawer\nif isStack then\n -- Each marker event submits its own green circle, including a marker on you.\n local flags = Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n drawer = TensorCore.getCachedDrawer(\n  0x3000FF00, 0x6000FF00, 0xA000FF00, 0xFF00FF00, 2, 0, flags\n )\n local shape = drawer:addTimedCircleOnEnt(previewMs, id, 6, 0, false, true, flags)\n if shape then g.shapes[#g.shapes + 1] = shape end\n s.stacks = s.stacks or {}\n s.stacks[id] = Now() + previewMs\n g.timer(previewMs, id, \"Stack \")\nelse\n drawer = TensorCore.getCachedDrawer(nil, nil, 0x550000FF, 0xFF0000FF, 2)\n local shape = drawer:addTimedCircleOnEnt(previewMs, id, 6, 0, false, true)\n if shape then g.shapes[#g.shapes + 1] = shape end\n if player and id == player.id then\n  s.spreadUntil = Now() + previewMs\n  s.spreadTarget = nil\n  g.timer(previewMs, id, \"Spread \")\n end\nend\nself.used=true",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal s=g.optical\nif not s then s={};g.optical=s end\nlocal id = eventArgs.entityID\nlocal player = TensorCore.mGetPlayer()\nlocal inParty = player and player.id == id\nif not inParty then\n for _, member in pairs(TensorCore.getEntityGroupList(\"Party\") or {}) do\n  if member.id == id then inParty = true; break end\n end\nend\nif not inParty then self.used = true; return end\ns.markers=s.markers or {};local key=tostring(eventArgs.markerID)..\":\"..tostring(id)\nif s.markers[key] and Now()-s.markers[key]<1000 then self.used=true;return end\ns.markers[key]=Now()\nlocal isStack = eventArgs.markerID == 62\nlocal previewMs = 5100\nlocal drawer\nif isStack then\n -- Each marker event submits its own green circle, including a marker on you.\n local flags = Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n drawer = TensorCore.getCachedDrawer(\n  0x3000FF00, 0x6000FF00, 0xA000FF00, 0xFF00FF00, 2, 0, flags\n )\n local shape = drawer:addTimedCircleOnEnt(previewMs, id, 6, 0, false, true, flags)\n if shape then g.shapes[#g.shapes + 1] = shape end\n s.stacks = s.stacks or {}\n s.stacks[id] = Now() + previewMs\n s.stackTimers = s.stackTimers or {}\n s.stackTimers[id] = g.timer(previewMs, id, \"Stack \")\nelse\n drawer = TensorCore.getCachedDrawer(nil, nil, 0x550000FF, 0xFF0000FF, 2)\n local shape = drawer:addTimedCircleOnEnt(previewMs, id, 6, 0, false, true)\n if shape then g.shapes[#g.shapes + 1] = shape end\n if player and id == player.id then\n  s.spreadUntil = Now() + previewMs\n  s.spreadTarget = nil\n  g.timer(previewMs, id, \"Spread \")\n end\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -8782,6 +8782,39 @@ local tbl =
 				timerEndOffset = 11,
 				timerStartOffset = -3,
 				uuid = "cc098191-f788-c735-83a2-60c19d4c0897",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local guidance = data.tea_lpdu_p4\nlocal optical = guidance and guidance.optical\nif not optical or not optical.stacks or optical.stackSidesLabeled then return end\n\nlocal now = Now()\nlocal targets = {}\nfor id, deadline in pairs(optical.stacks) do\n    if deadline - now > 500 then\n        local target = TensorCore.mGetEntity(id)\n        if not target or not target.pos then return end\n        targets[#targets + 1] = {id = id, x = target.pos.x, remaining = deadline - now}\n    end\nend\nif #targets ~= 2 then return end\n\n-- Smaller world X is arena west, independent of the camera.\nlocal west, east = targets[1], targets[2]\nif west.x > east.x then west, east = east, west end\nif east.x - west.x < 4 then return end\n\nlocal function labelStack(target, prefix)\n    local previous = optical.stackTimers and optical.stackTimers[target.id]\n    if guidance.timer(target.remaining, target.id, prefix) and previous then\n        AnyoneCore.removeTimedWorldText(previous)\n    end\nend\nlabelStack(west, \"West Stack \")\nlabelStack(east, \"East Stack \")\noptical.stackSidesLabeled = true\nself.used = true\n",
+							name = "Name the separated stack timers",
+							uuid = "9d036bf3-1699-47d7-bb47-638aebb7b454",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				mechanicTime = 936.5,
+				name = "[LPDU] Opening Optical Sight - West and east stack labels",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 158,
+				timerEndOffset = 11,
+				timerStartOffset = -3,
+				uuid = "22d0c32c-65ac-ed2b-88db-7f4057c53c7a",
 				version = 2,
 			},
 		},
