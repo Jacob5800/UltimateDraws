@@ -206,6 +206,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### FRU: LPDU
 
+- Fixed Ultimate Relativity guidance for the ice DPS to stay middle for the final stack. Diagonal assignments now name their Y-relative directions. (08-11-2026)
+
 - Intermission knockback positioning now includes a countdown attached to your player, ending at Swelling Frost after Absolute Zero. (07-11-2026)
 
 - Apoc safe-sector guidance appears after Spirit Taker lands and stays visible through Dark Eruption without a cast-time redraw. Countdown, spread calls and later movement steps retain their mechanic triggers, with fallback guidance if the early preview was missed. (07-11-2026)
@@ -223,8 +225,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 - Added fire-only P1 tower knockback guidance: after the initial cleave, a personal launch circle and arrows align the knockback with your assigned tower, with a continuous knockback countdown. Lightning towers are unchanged. (31-10-2026)
 
 - Added an Ice gone - move normally text and voice callout after P2 Twin Silence/Stillness, triggered by the frozen floor clearing rather than a fixed timer. (31-10-2026)
-
-- Potion reactions and the Viper Reawaken cooldown-control reaction are now disabled by default in lpdu strats. Enable the desired reactions manually to opt in; mechanic draws and assignments remain enabled. (31-10-2026)
 
 
 ### UWU: LPDU
