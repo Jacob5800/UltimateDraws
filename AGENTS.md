@@ -28,6 +28,7 @@ This procedure applies to every mapped profile below. Keep one procedure here; p
 | Fight/profile | Timeline / version | Authoritative source | Published destination | TODO file |
 |---|---|---|---|---|
 | FRU LPDU | Confirm live | `Frureactions\lpdu strats.lua` | `FRU\lpdu strats.lua` | `FRU-REACTIONS-TODO.md` |
+| FRU ACR3 Opti | `fru` / `1.0.5` | `Frureactions\\ACR3 opti FRU.lua` | `FRU\\ACR3 opti FRU.lua` | `FRU-REACTIONS-TODO.md` |
 | UWU LPDU | `uwu` / `1.0.2` | `OwOReactions\Draws LPDU.lua` | `UWU\Draws LPDU.lua` | `UWU-REACTIONS-TODO.md` |
 | UCOB LPDU | `ucob` / `1.0.3` | `Ucobreactions\LPDU Draws.lua` | `UCOB\LPDU Draws.lua` | `UCOB-DRAWS-TODO.md` |
 | TOP LPDU draws | `top` / `1.0.3` | `TOPReactions\lpdudraws.lua` | `TOP\lpdudraws.lua` | `TOP-LPDU-DRAWS-TODO.md` |
