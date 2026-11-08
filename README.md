@@ -40,6 +40,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### TEA: LPDU Draws
 
+- P2 Compressed Lightning shows a yellow circle on its holder during the final five seconds. (08-11-2026)
+
 - Added Throttle countdowns for healers and Bard, moving Embolus markers, and personal inside/outside swap cues for 1256 Limit Cut. Bard can opt into automatic Warden's Paean for Throttle in LPDU Settings. Limit Cut now calls "Move to middle" after the final center blast and charge. (08-11-2026)
 
 - Added personal Lightning handoff arrows, Earth Missile bait spots for OT and R1, live Hidden Mine markers, and a support lineup reminder for third Nisi. (08-11-2026)
@@ -57,8 +59,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 - Final Word shows march timers only to players who are forced to move. Opening Optical Sight spreads no longer draw fixed-position arrows. Removed the separate Lasers countdown from Fate Alpha. The final Move in cue replaces intermediate Ordained resolution callouts during Alpha. (07-11-2026)
 
 - Added a muted green ring around the priority boss during J Waves. (07-11-2026)
-
-- Double Rocket Punch alerts now only go to tanks and healers. (07-11-2026)
 
 ### TEA: ACR3 Opti
 
