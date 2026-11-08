@@ -22,7 +22,7 @@ local tbl =
 					{
 						data = 
 						{
-							aType = "Misc",
+							aType = "ACR",
 							conditions = 
 							{
 								
@@ -30,90 +30,11 @@ local tbl =
 									"9a4c5e9e-8da1-6838-aa0f-b7e14836b71b",
 									true,
 								},
-								
-								{
-									"62d02255-7365-4879-bc8b-0903a463aa4b",
-									true,
-								},
 							},
-							name = "Potion - Strength",
-							potType = 4,
-							usePot = true,
-							uuid = "64ecbcd0-8d2a-f9a0-88c4-45add6375b4b",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"9a4c5e9e-8da1-6838-aa0f-b7e14836b71b",
-									true,
-								},
-								
-								{
-									"2bf44d78-11e2-0787-86ee-c756120cbc6f",
-									true,
-								},
-							},
-							name = "Potion - Dexterity",
-							usePot = true,
-							uuid = "b0e73037-7dbc-adc9-a3dc-71c841ad4181",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"9a4c5e9e-8da1-6838-aa0f-b7e14836b71b",
-									true,
-								},
-								
-								{
-									"ccf72c65-11f3-5c86-9f87-32592e9f11ce",
-									true,
-								},
-							},
-							name = "Potion - Intelligence",
-							potType = 2,
-							usePot = true,
-							uuid = "ec334dcd-0dc4-cbd6-832a-37766b8f9bcc",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"9a4c5e9e-8da1-6838-aa0f-b7e14836b71b",
-									true,
-								},
-								
-								{
-									"f2712ad9-3c3c-03f1-9ae7-a7cfdd688858",
-									true,
-								},
-							},
-							name = "Potion - Mind",
-							potType = 3,
-							usePot = true,
-							uuid = "f5b174b5-87b8-c8b0-b46b-4e1119062c50",
+							gVar = "ACR_RikuMNK3_Hotbar_Potion",
+							name = "Potion",
+							uuid = "b9259bfe-5867-0b6e-97e5-10d7720b7647",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -128,87 +49,6 @@ local tbl =
 							conditionType = 7,
 							name = "In combat",
 							uuid = "9a4c5e9e-8da1-6838-aa0f-b7e14836b71b",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								19,
-								20,
-								21,
-								22,
-								32,
-								34,
-								37,
-								39,
-							},
-							name = "Strength jobs",
-							uuid = "62d02255-7365-4879-bc8b-0903a463aa4b",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								23,
-								30,
-								31,
-								38,
-								41,
-							},
-							name = "Dexterity jobs",
-							uuid = "2bf44d78-11e2-0787-86ee-c756120cbc6f",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								25,
-								27,
-								35,
-								42,
-							},
-							name = "Intelligence jobs",
-							uuid = "ccf72c65-11f3-5c86-9f87-32592e9f11ce",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								24,
-								28,
-								33,
-								40,
-							},
-							name = "Mind jobs",
-							uuid = "f2712ad9-3c3c-03f1-9ae7-a7cfdd688858",
 							version = 3,
 						},
 					},
@@ -3599,7 +3439,7 @@ local tbl =
 					{
 						data = 
 						{
-							aType = "Misc",
+							aType = "ACR",
 							conditions = 
 							{
 								
@@ -3607,90 +3447,11 @@ local tbl =
 									"9c3f2f53-a9e1-646a-a47a-f2e21cf3a69f",
 									true,
 								},
-								
-								{
-									"72c78ab6-2b72-3f29-aec8-9927b789513c",
-									true,
-								},
 							},
-							name = "Potion - Strength",
-							potType = 4,
-							usePot = true,
-							uuid = "6ad8b816-ef88-2418-9e26-d29f5a1f9330",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"9c3f2f53-a9e1-646a-a47a-f2e21cf3a69f",
-									true,
-								},
-								
-								{
-									"1d05f597-a031-a94d-944d-18576167d694",
-									true,
-								},
-							},
-							name = "Potion - Dexterity",
-							usePot = true,
-							uuid = "2f64ef6d-a81e-098d-8745-009234357d84",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"9c3f2f53-a9e1-646a-a47a-f2e21cf3a69f",
-									true,
-								},
-								
-								{
-									"2ee0ba42-fbc8-5e31-ab55-94b9feddafeb",
-									true,
-								},
-							},
-							name = "Potion - Intelligence",
-							potType = 2,
-							usePot = true,
-							uuid = "990174c5-92e0-0f84-ae59-cff0d1fc03dc",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"9c3f2f53-a9e1-646a-a47a-f2e21cf3a69f",
-									true,
-								},
-								
-								{
-									"8bead6e1-5f89-2335-968f-20cf0545fb7b",
-									true,
-								},
-							},
-							name = "Potion - Mind",
-							potType = 3,
-							usePot = true,
-							uuid = "888887f4-d768-1089-956f-b7e933393006",
+							gVar = "ACR_RikuMNK3_Hotbar_Potion",
+							name = "Potion",
+							uuid = "eff76d71-7caf-ea6f-b2fd-0cec7e8ab5a8",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -3705,87 +3466,6 @@ local tbl =
 							conditionType = 7,
 							name = "In combat",
 							uuid = "9c3f2f53-a9e1-646a-a47a-f2e21cf3a69f",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								19,
-								20,
-								21,
-								22,
-								32,
-								34,
-								37,
-								39,
-							},
-							name = "Strength jobs",
-							uuid = "72c78ab6-2b72-3f29-aec8-9927b789513c",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								23,
-								30,
-								31,
-								38,
-								41,
-							},
-							name = "Dexterity jobs",
-							uuid = "1d05f597-a031-a94d-944d-18576167d694",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								25,
-								27,
-								35,
-								42,
-							},
-							name = "Intelligence jobs",
-							uuid = "2ee0ba42-fbc8-5e31-ab55-94b9feddafeb",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								24,
-								28,
-								33,
-								40,
-							},
-							name = "Mind jobs",
-							uuid = "8bead6e1-5f89-2335-968f-20cf0545fb7b",
 							version = 3,
 						},
 					},
@@ -7844,7 +7524,7 @@ local tbl =
 					{
 						data = 
 						{
-							aType = "Misc",
+							aType = "ACR",
 							conditions = 
 							{
 								
@@ -7852,90 +7532,11 @@ local tbl =
 									"6c3f046b-572c-b27f-9ca8-93851d7b3672",
 									true,
 								},
-								
-								{
-									"d29ff68b-7565-9884-a563-a09ff38a9d3d",
-									true,
-								},
 							},
-							name = "Potion - Strength",
-							potType = 4,
-							usePot = true,
-							uuid = "dd98ac48-cbcd-7dba-ab53-b2fdc666059a",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"6c3f046b-572c-b27f-9ca8-93851d7b3672",
-									true,
-								},
-								
-								{
-									"c601aae0-6d42-d818-84db-ad7cb4a4bb31",
-									true,
-								},
-							},
-							name = "Potion - Dexterity",
-							usePot = true,
-							uuid = "d849d1b4-3af8-2fb6-ba79-32d4826c1329",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"6c3f046b-572c-b27f-9ca8-93851d7b3672",
-									true,
-								},
-								
-								{
-									"73ae623d-5c57-cb13-827f-a830c15bf4fb",
-									true,
-								},
-							},
-							name = "Potion - Intelligence",
-							potType = 2,
-							usePot = true,
-							uuid = "4786c803-ba96-67a7-9cf9-6486d02c0ec9",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"6c3f046b-572c-b27f-9ca8-93851d7b3672",
-									true,
-								},
-								
-								{
-									"96d57cbc-6786-c6a5-9587-7efffe2351aa",
-									true,
-								},
-							},
-							name = "Potion - Mind",
-							potType = 3,
-							usePot = true,
-							uuid = "62b9684a-28e6-6028-babc-dea2e6331558",
+							gVar = "ACR_RikuMNK3_Hotbar_Potion",
+							name = "Potion",
+							uuid = "7bc46905-bbdf-6364-9cfd-59ff140cb131",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -7950,87 +7551,6 @@ local tbl =
 							conditionType = 7,
 							name = "In combat",
 							uuid = "6c3f046b-572c-b27f-9ca8-93851d7b3672",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								19,
-								20,
-								21,
-								22,
-								32,
-								34,
-								37,
-								39,
-							},
-							name = "Strength jobs",
-							uuid = "d29ff68b-7565-9884-a563-a09ff38a9d3d",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								23,
-								30,
-								31,
-								38,
-								41,
-							},
-							name = "Dexterity jobs",
-							uuid = "c601aae0-6d42-d818-84db-ad7cb4a4bb31",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								25,
-								27,
-								35,
-								42,
-							},
-							name = "Intelligence jobs",
-							uuid = "73ae623d-5c57-cb13-827f-a830c15bf4fb",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								24,
-								28,
-								33,
-								40,
-							},
-							name = "Mind jobs",
-							uuid = "96d57cbc-6786-c6a5-9587-7efffe2351aa",
 							version = 3,
 						},
 					},
@@ -11804,7 +11324,7 @@ local tbl =
 					{
 						data = 
 						{
-							aType = "Misc",
+							aType = "ACR",
 							conditions = 
 							{
 								
@@ -11812,90 +11332,11 @@ local tbl =
 									"18f225dd-02e5-cf22-bba1-ef590cb1b8a3",
 									true,
 								},
-								
-								{
-									"889d60c3-3835-4507-ac11-95c7d22367e2",
-									true,
-								},
 							},
-							name = "Potion - Strength",
-							potType = 4,
-							usePot = true,
-							uuid = "15562a12-0d30-b055-a34d-3cc0a3483ac4",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"18f225dd-02e5-cf22-bba1-ef590cb1b8a3",
-									true,
-								},
-								
-								{
-									"49f28aa1-c244-9ce8-a9b4-065461cda7ec",
-									true,
-								},
-							},
-							name = "Potion - Dexterity",
-							usePot = true,
-							uuid = "ecf8254a-161b-e1b5-bcad-cfabee07f1d4",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"18f225dd-02e5-cf22-bba1-ef590cb1b8a3",
-									true,
-								},
-								
-								{
-									"a0cc9ba0-5467-111e-a2a1-1f54368f858c",
-									true,
-								},
-							},
-							name = "Potion - Intelligence",
-							potType = 2,
-							usePot = true,
-							uuid = "d54cf2b1-f6e7-7198-a4a0-286b3defb45e",
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "Misc",
-							conditions = 
-							{
-								
-								{
-									"18f225dd-02e5-cf22-bba1-ef590cb1b8a3",
-									true,
-								},
-								
-								{
-									"4e4020b6-9e3b-a2d6-9b65-0d68f0d1566e",
-									true,
-								},
-							},
-							name = "Potion - Mind",
-							potType = 3,
-							usePot = true,
-							uuid = "90471b0f-2cec-6fee-bf56-8e3a8304af8e",
+							gVar = "ACR_RikuMNK3_Hotbar_Potion",
+							name = "Potion",
+							uuid = "69ccf30c-79f8-c2a0-927f-ef63b33626b0",
+							variableTogglesType = 2,
 							version = 2.1,
 						},
 					},
@@ -11910,87 +11351,6 @@ local tbl =
 							conditionType = 7,
 							name = "In combat",
 							uuid = "18f225dd-02e5-cf22-bba1-ef590cb1b8a3",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								19,
-								20,
-								21,
-								22,
-								32,
-								34,
-								37,
-								39,
-							},
-							name = "Strength jobs",
-							uuid = "889d60c3-3835-4507-ac11-95c7d22367e2",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								23,
-								30,
-								31,
-								38,
-								41,
-							},
-							name = "Dexterity jobs",
-							uuid = "49f28aa1-c244-9ce8-a9b4-065461cda7ec",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								25,
-								27,
-								35,
-								42,
-							},
-							name = "Intelligence jobs",
-							uuid = "a0cc9ba0-5467-111e-a2a1-1f54368f858c",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								24,
-								28,
-								33,
-								40,
-							},
-							name = "Mind jobs",
-							uuid = "4e4020b6-9e3b-a2d6-9b65-0d68f0d1566e",
 							version = 3,
 						},
 					},

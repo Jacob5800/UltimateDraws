@@ -291,6 +291,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### TOP: LPDU mitigations
 
+- TOP potion timings now use the shared ACR Potion Hotbar request. (08-11-2026)
+
 - Made TOPReactions/lpdu mits eligible for Optifine users by removing core Settings access from Solar Ray tank-plan conditions. They now share independent TOP-LPDU.lua preferences with the draw GUI; existing plan defaults, timings and ACR requests are unchanged. (05-11-2026)
 
 ### UWU: LPDU mitigations
