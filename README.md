@@ -166,6 +166,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### TOP: LPDU
 
+- TOP roster-dependent draws wait for a ready Party Roster without logging repeated condition errors. (08-11-2026)
+
 - Made TOPReactions/lpdudraws eligible for Optifine users with FileLoad/FileSave preferences. Removed its optional Minion core Settings migration dependency; existing session-only debug-label defaults remain unchanged. (05-11-2026)
 
 - Puddle escape guidance retains one safe waypoint through arrival and hazard updates, replacing it only when invalid; later explosions influence the next choice. Second-hand guidance may start about two seconds earlier when the route is clear, retaining its resolution deadline. Meteor spread guidance starts on puddle placement. R2 receives a role-based limit-break alert at the logged Meteor cast window. (04-11-2026)
@@ -184,7 +186,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 - Pantokrator clears only its completed instruction on the finishing hit or early boss departure. Removed the text-routing time cutoff; subsequent AnyoneCore text and TTS remain enabled. (02-11-2026)
 
-- Settings remember the main window and expanded sections across reloads. Fixed later callouts playing audio without green text when Pantokrator display state remained active. (02-11-2026)
 
 ### UCOB: LPDU
 
