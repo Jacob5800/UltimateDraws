@@ -189,7 +189,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### UCOB: LPDU
 
-- All seven LPDU potion timings now use the shared ACR Potion Hotbar request. (08-11-2026)
+- Moved all seven potion timings to UCOB ACR3 Optimization. (08-11-2026)
 
 - Made Ucobreactions/LPDU Draws eligible for Optifine users by saving assignments, targeting and potion preferences with FileLoad/FileSave. No Minion core Settings dependency remains. (05-11-2026)
 
@@ -208,6 +208,10 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 - BLM AutoSim now forecasts Nael quote transitions from recognized English quotes and corrects remaining steps on actual casts. Same-zone steps are skipped; the first In/Out step checks current distance. Travel time is adjustable. Corroborated with three native caster pulls and BossMod sequencing; no forced movement or new polling loop. (29-10-2026)
 
 - Added Autosim BLM - UCOB with built-in targeting, Thunder forecasts, phase resyncs, Phoenix tracking and adjustable Twister/Exaflare and personal-assignment movement estimates. Teleports and Ley Lines returns remain manual. LPDU targeting yields to BLM AutoSim; legacy inherited holds are disabled in the BLM profile. All three AutoSim profiles now extend an expired Golden kill estimate while the boss remains alive. Reviewed five EU BLM clears. (29-10-2026)
+
+### UCOB: ACR3 Optimization
+
+- Added the seven LPDU potion timings using the shared ACR Potion Hotbar request. (08-11-2026)
 
 ### FRU: LPDU
 

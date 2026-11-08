@@ -31,6 +31,7 @@ This procedure applies to every mapped profile below. Keep one procedure here; p
 | FRU ACR3 Opti | `fru` / `1.0.5` | `Frureactions\\ACR3 opti FRU.lua` | `FRU\\ACR3 opti FRU.lua` | `FRU-REACTIONS-TODO.md` |
 | UWU LPDU | `uwu` / `1.0.2` | `OwOReactions\Draws LPDU.lua` | `UWU\Draws LPDU.lua` | `UWU-REACTIONS-TODO.md` |
 | UCOB LPDU | `ucob` / `1.0.3` | `Ucobreactions\LPDU Draws.lua` | `UCOB\LPDU Draws.lua` | `UCOB-DRAWS-TODO.md` |
+| UCOB ACR3 Optimization | `ucob` / `1.0.3` | `Ucobreactions\\ACR3 optimization UCOB.lua` | `UCOB\\ACR3 optimization UCOB.lua` | `UCOB-DRAWS-TODO.md` |
 | TOP LPDU draws | `top` / `1.0.3` | `TOPReactions\lpdudraws.lua` | `TOP\lpdudraws.lua` | `TOP-LPDU-DRAWS-TODO.md` |
 | TOP LPDU mitigations | `top` / `1.0.3` | `TOPReactions\lpdu mits.lua` | `TOP\lpdu mits.lua` | `TOP-LPDU-MITS-TODO.md` |
 | DSR LPDU | `dsw` / `1.0.5` | `dsrreactions\lpdu strats.lua` | `DSR\Lpdu draws(beta).lua` | `DSR-LPDU-DRAWS-TODO.md` |
