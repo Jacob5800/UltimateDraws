@@ -60,6 +60,10 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 - Fate Alpha countdown labels are optional in LPDU Settings and off by default. (07-11-2026)
 
+### TEA: LPDU mits
+
+- Added a separate mitigation profile for TEA with Party Roster assignments for both tanks and all four DPS slots, including job-specific defensive and support actions. (08-11-2026)
+
 ### TEA: ACR3 Opti
 
 - Published [ACR3 Opti](TimelineReactions/TEA/ACR3%20Opti.lua) containing 15 Reaper/Pictomancer optimization reactions, separate from LPDU Draws with no inheritance. Uses the saved ACR3 controls. (07-11-2026)

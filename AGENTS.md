@@ -34,6 +34,7 @@ This procedure applies to every mapped profile below. Keep one procedure here; p
 | TOP LPDU mitigations | `top` / `1.0.3` | `TOPReactions\lpdu mits.lua` | `TOP\lpdu mits.lua` | `TOP-LPDU-MITS-TODO.md` |
 | DSR LPDU | `dsw` / `1.0.5` | `dsrreactions\lpdu strats.lua` | `DSR\Lpdu draws(beta).lua` | `DSR-LPDU-DRAWS-TODO.md` |
 | TEA LPDU draws | `tea` / `1.0.2` | `Teareactions\LPDU Draws.lua` | `TEA\LPDU Draws.lua` | `TEA-PROFILE-SPLIT-TODO.md` |
+| TEA LPDU mitigations | `tea` / `1.0.2` | `Teareactions\LPDU mits.lua` | `TEA\LPDU mits.lua` | `TEA-PROFILE-SPLIT-TODO.md` |
 | TEA ACR3 optimizations | `tea` / `1.0.2` | `Teareactions\ACR3 Opti.lua` | `TEA\ACR3 Opti.lua` | `TEA-PROFILE-SPLIT-TODO.md` |
 | TEA AA AutoSim | `tea` / `1.0.2` | `Teareactions\[AA] Autosim - TEA (1) (1).lua` | `TEA\[AA] Autosim - TEA.lua` | `TEA-AUTOSIM-DOLLS-TODO.md` |
 
