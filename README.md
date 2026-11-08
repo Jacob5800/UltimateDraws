@@ -40,7 +40,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### TEA: LPDU Draws
 
-- Almighty Judgment Exaflares show the next hit in red, the following hit in orange, and later hits in yellow. Colors advance on impact. (08-11-2026)
+- Almighty Judgment Exaflares show the next hit in bright red, the following hit in orange, and later hits in yellow. Colors advance on impact. (08-11-2026)
 
 - P2 Compressed Lightning shows a yellow circle on its holder during the final five seconds. (08-11-2026)
 
