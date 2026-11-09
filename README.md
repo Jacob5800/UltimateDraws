@@ -89,6 +89,10 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### Dungeons: Shared AutoSim
 
+- In The Clyteum, pause actions for Motion Tracker and jump near the end of Malphas’s String Up. Default boss estimates are 2:20, 2:15 and 3:00. (09-11-2026)
+
+- Hold Triplecast when three or fewer enemies remain in the final trash pack. In The Clyteum, hold single-target High Thunder on the last dying trash mob while keeping High Thunder II available. (09-11-2026)
+
 - Sampled boss kill estimates and conservative movement forecasts are enabled by default. Saved preferences still take precedence. (09-11-2026)
 
 - Made dungeon lol eligible for Optifine users by replacing direct file I/O with independent FileLoad/FileSave preferences. Existing targeting and mechanic logic are preserved. (05-11-2026)

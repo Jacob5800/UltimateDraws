@@ -2340,7 +2340,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not ClyteumAutoSimConfig or ClyteumAutoSimConfig.fileApiVersion~=1 then\n    local C = ClyteumAutoSimConfig or {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=true, kill14716=144.043, kill14734=138.778, kill14758=181.846,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Clyteum.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill14716\",\"kill14734\",\"kill14758\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\Clyteum.AutoSim.lua]]\n    if not ClyteumAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill14716=math.max(15,math.min(1200,C.kill14716))\n    C.kill14734=math.max(15,math.min(1200,C.kill14734))\n    C.kill14758=math.max(15,math.min(1200,C.kill14758))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    ClyteumAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif ClyteumAutoSimConfig.poolFinal==nil then\n ClyteumAutoSimConfig.poolFinal=true\n table.insert(ClyteumAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- Runs after native map 1345, map and combat gates; no timeline timer is used.\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1345 or not p.incombat then self.used=true;return end\nlocal isCaster=p.job==25 or p.job==27 or p.job==35 or p.job==42 or p.job==36 or p.job==24 or p.job==28 or p.job==33 or p.job==40\nlocal C=ClyteumAutoSimConfig\nlocal A=TensorCore.API.TensorACR\nlocal ok,t=pcall(A.getAutoSimTime)\nif not ok or type(t)~=\"number\" or t<0 then return end -- readiness wait, not completion\nif data.clyteum_autosim then self.used=true;return end\nlocal S={enabled=C.enabled,movement=C.movement and isCaster,returnField=C.returnField and p.job==25,trash=C.trash,\n    killOverride=C.killOverride,kill14716=C.kill14716,kill14734=C.kill14734,kill14758=C.kill14758,\n    unexpectedPct=C.unexpectedPct,uncertainty=C.uncertainty,buffEnabled=C.buffEnabled,\n    buffPct=C.buffPct,buffFirst=C.buffFirst,buffDuration=C.buffDuration,buffPeriod=C.buffPeriod,\n    boss=0,origin=0,counts={},phases={},phaseCount=0,anchorsSeen=0,setup=true,activeEnds={}}\ndata.clyteum_autosim=S\n-- Filled by the evidence builder; tables are allocated once per combat.\nS.definitions={[14716]={[\"name\"]=\"Eye of the Scorpion\",[\"movement\"]={{21.0,26.0},{29.5,31.0},{33.0,35.0},{64.0,65.0},{76.5,79.0},{81.5,83.5},{85.0,87.0},{88.5,89.5},{93.0,94.5},{118.5,120.5},{126.5,127.5},{144.5,145.5},{147.5,149.0},{151.0,152.0}},[\"downtime\"]={},[\"aliases\"]={[50176]=50175},[\"anchors\"]={[48893]={48.492,107.618,166.969},[48896]={4.727,41.087,100.32,133.313,159.61},[50175]={18.0,28.242,86.766,145.883}}},[14734]={[\"name\"]=\"Chort\",[\"movement\"]={{19.5,21.5},{38.0,39.0},{51.0,53.0},{54.5,61.5},{62.5,64.0},{65.0,66.5},{81.5,82.5},{86.5,88.0},{110.5,113.0},{117.5,119.0},{139.0,140.5},{141.5,143.0},{145.5,146.5}},[\"downtime\"]={{21.938,31.07},{88.453,102.867}},[\"aliases\"]={[48868]=48870},[\"anchors\"]={[48870]={17.008},[48879]={48.453,131.804},[48884]={4.351,70.797,154.086},[48886]={108.57},[50361]={36.93,114.328},[50417]={102.867}}},[14758]={[\"name\"]=\"Malphas\",[\"movement\"]={{19.0,20.5},{40.5,42.0},{47.0,48.5},{52.0,53.0},{57.5,59.0},{88.0,91.0},{93.5,96.0},{104.0,105.0},{107.5,108.5},{132.0,133.0},{137.0,138.0},{154.5,156.0},{160.0,161.0},{162.0,163.5}},[\"downtime\"]={},[\"aliases\"]={},[\"anchors\"]={[48920]={6.21,68.867,122.46,195.118},[48921]={29.727,79.257,136.078,208.656},[48922]={37.484,47.016},[48923]={86.007,215.422},[48925]={143.813,166.781},[48929]={58.375},[48931]={102.946},[50313]={17.18,93.882,159.673,187.945,223.305},[50315]={115.203}}}}\n\nfunction S.add(kind,a,b,value,relative)\n    if b<=a or a>=1200 then return end\n    b=math.min(b,1200)\n    local id=A.addAutoSimPhase(kind,a,b,value)\n    if id then\n        S.phaseCount=S.phaseCount+1\n        S.phases[S.phaseCount]={id=id,kind=kind,a=a,b=b,value=value,relative=relative}\n    end\nend\n\nfunction S.startBoss(cid,entityID,origin,now)\n    local def=S.definitions[cid]\n    if not def or S.boss~=0 or not S.enabled then return end\n    S.boss=cid;S.entityID=entityID;S.origin=origin\n    C.poolStatus=nil\n    A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100)\n    if S.killOverride then\n        A.setAutoSimKillTime(math.min(1200,origin+S[\"kill\"..cid]))\n        A.addAutoSimUncertainty(now,10) -- limited four-player samples: estimates remain optional\n    end\n    -- Keep automatic kill uncertainty by default. Do not invent forced target downtime.\n    -- Only owned movement/field phases are authored; AoE counts and DoT targets stay live.\n    if S.movement then\n        for i=1,#def.movement do\n            local w=def.movement[i]\n            local a,b=origin+w[1],origin+w[2]\n            if b>now then\n                a=math.max(a,now)\n                S.add(\"CasterDowntime\",a,b,1,true)\n                if S.returnField then S.add(\"GroundFieldMovement\",b,b+0.2,2,true) end\n            end\n        end\n    end\n    -- Native paired targetability transitions corroborate these downtime windows.\n    -- Attackability forecasting is independent of the optional movement forecast.\n    for i=1,#def.downtime do\n        local w=def.downtime[i]\n        if origin+w[2]>now then S.add(\"FullDowntime\",math.max(origin+w[1],now),origin+w[2],1,true) end\n    end\n    if S.buffEnabled and S.buffPct>0 then\n        local a=origin+S.buffFirst\n        while a<1200 do\n            if a+S.buffDuration>now then S.add(\"RaidBuff\",math.max(a,now),a+S.buffDuration,1+S.buffPct/100,false) end\n            a=a+S.buffPeriod\n        end\n    end\n    C.status=\"Active: \"..def.name..\". Kill estimate: \"..(S.killOverride and \"manual\" or \"automatic\")\nend\n\nfunction S.channel(args)\n    if not S.enabled then return end\n    local cid=args.entityContentID\n    local def=S.definitions[cid]\n    if not def then return end\n    local aid=args.spellID\n    aid=def.aliases[aid] or aid -- documented alternate casts share one occurrence sequence\n    local anchors=def.anchors[aid]\n    if not anchors then return end -- stable boss cast identity before API work\n    if S.boss~=0 and (S.boss~=cid or S.entityID~=args.entityID) then return end\n    local valid,now=pcall(A.getAutoSimTime)\n    if not valid or type(now)~=\"number\" or now<0 or now>=1200 then return end\n    local n=(S.counts[aid] or 0)+1\n    local expected=anchors[n]\n    if not expected then return end\n    if S.boss==0 and math.abs(now-expected)>2 then return end\n    S.counts[aid]=n\n    if S.boss==0 then S.startBoss(cid,args.entityID,now-expected,now) end\n    if S.boss~=cid then return end\n    local candidate=now-expected\n    -- If enabled mid-boss, do not match a late repeat to the first occurrence.\n    if math.abs(candidate-S.origin)>2 then return end\n    local shift=candidate-S.origin\n    S.anchorsSeen=S.anchorsSeen+1\n    if math.abs(shift)<0.15 then return end\n    -- Remove every future owned phase before reinsertion, avoiding transient overlaps.\n    local ends=S.activeEnds\n    ends.CasterDowntime=now;ends.GroundFieldMovement=now;ends.FullDowntime=now\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.relative and phase.id and phase.a>now+0.05 then\n            A.removeAutoSimPhase(phase.id);phase.id=nil;phase.pending=true\n        elseif phase.id and phase.a<=now+0.05 and phase.b>now and phase.relative then\n            ends[phase.kind]=math.max(ends[phase.kind],phase.b)\n        end\n    end\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.pending then\n            phase.pending=false\n            local a,b=phase.a+shift,phase.b+shift\n            local minimum=ends[phase.kind]\n            if phase.kind==\"GroundFieldMovement\" then minimum=math.max(minimum,ends.CasterDowntime) end\n            a=math.max(a,minimum,now+0.05)\n            if b>a then\n                phase.id=A.addAutoSimPhase(phase.kind,a,b,phase.value)\n                phase.a=a;phase.b=b;ends[phase.kind]=b\n            end\n        end\n    end\n    S.origin=candidate\nend\n\nif S.enabled then\n    local target=TensorCore.mGetTarget()\n    if target and S.definitions[target.contentid] and target.attackable and target.incombat then\n        -- Near pull start, zero is the combat-clock origin; later setup waits for an anchor.\n        if t<=5 then S.startBoss(target.contentid,target.id,0,t) end\n    end\n    if S.boss==0 and S.trash then A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100) end\nend\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not ClyteumAutoSimConfig or ClyteumAutoSimConfig.fileApiVersion~=1 then\n    local C = ClyteumAutoSimConfig or {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=true, kill14716=140, kill14734=135, kill14758=180,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Clyteum.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill14716\",\"kill14734\",\"kill14758\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\Clyteum.AutoSim.lua]]\n    if not ClyteumAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill14716=math.max(15,math.min(1200,C.kill14716))\n    C.kill14734=math.max(15,math.min(1200,C.kill14734))\n    C.kill14758=math.max(15,math.min(1200,C.kill14758))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    ClyteumAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif ClyteumAutoSimConfig.poolFinal==nil then\n ClyteumAutoSimConfig.poolFinal=true\n table.insert(ClyteumAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- Runs after native map 1345, map and combat gates; no timeline timer is used.\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1345 or not p.incombat then self.used=true;return end\nlocal isCaster=p.job==25 or p.job==27 or p.job==35 or p.job==42 or p.job==36 or p.job==24 or p.job==28 or p.job==33 or p.job==40\nlocal C=ClyteumAutoSimConfig\nlocal A=TensorCore.API.TensorACR\nlocal ok,t=pcall(A.getAutoSimTime)\nif not ok or type(t)~=\"number\" or t<0 then return end -- readiness wait, not completion\nif data.clyteum_autosim then self.used=true;return end\nlocal S={enabled=C.enabled,movement=C.movement and isCaster,returnField=C.returnField and p.job==25,trash=C.trash,\n    killOverride=C.killOverride,kill14716=C.kill14716,kill14734=C.kill14734,kill14758=C.kill14758,\n    unexpectedPct=C.unexpectedPct,uncertainty=C.uncertainty,buffEnabled=C.buffEnabled,\n    buffPct=C.buffPct,buffFirst=C.buffFirst,buffDuration=C.buffDuration,buffPeriod=C.buffPeriod,\n    boss=0,origin=0,counts={},phases={},phaseCount=0,anchorsSeen=0,setup=true,activeEnds={}}\ndata.clyteum_autosim=S\n-- Filled by the evidence builder; tables are allocated once per combat.\nS.definitions={[14716]={[\"name\"]=\"Eye of the Scorpion\",[\"movement\"]={{21.0,26.0},{29.5,31.0},{33.0,35.0},{64.0,65.0},{76.5,79.0},{81.5,83.5},{85.0,87.0},{88.5,89.5},{93.0,94.5},{118.5,120.5},{126.5,127.5},{144.5,145.5},{147.5,149.0},{151.0,152.0}},[\"downtime\"]={},[\"aliases\"]={[50176]=50175},[\"anchors\"]={[48893]={48.492,107.618,166.969},[48896]={4.727,41.087,100.32,133.313,159.61},[50175]={18.0,28.242,86.766,145.883}}},[14734]={[\"name\"]=\"Chort\",[\"movement\"]={{19.5,21.5},{38.0,39.0},{51.0,53.0},{54.5,61.5},{62.5,64.0},{65.0,66.5},{81.5,82.5},{86.5,88.0},{110.5,113.0},{117.5,119.0},{139.0,140.5},{141.5,143.0},{145.5,146.5}},[\"downtime\"]={{21.938,31.07},{88.453,102.867}},[\"aliases\"]={[48868]=48870},[\"anchors\"]={[48870]={17.008},[48879]={48.453,131.804},[48884]={4.351,70.797,154.086},[48886]={108.57},[50361]={36.93,114.328},[50417]={102.867}}},[14758]={[\"name\"]=\"Malphas\",[\"movement\"]={{19.0,20.5},{40.5,42.0},{47.0,48.5},{52.0,53.0},{57.5,59.0},{88.0,91.0},{93.5,96.0},{104.0,105.0},{107.5,108.5},{132.0,133.0},{137.0,138.0},{154.5,156.0},{160.0,161.0},{162.0,163.5}},[\"downtime\"]={},[\"aliases\"]={},[\"anchors\"]={[48920]={6.21,68.867,122.46,195.118},[48921]={29.727,79.257,136.078,208.656},[48922]={37.484,47.016},[48923]={86.007,215.422},[48925]={143.813,166.781},[48929]={58.375},[48931]={102.946},[50313]={17.18,93.882,159.673,187.945,223.305},[50315]={115.203}}}}\n\nfunction S.add(kind,a,b,value,relative)\n    if b<=a or a>=1200 then return end\n    b=math.min(b,1200)\n    local id=A.addAutoSimPhase(kind,a,b,value)\n    if id then\n        S.phaseCount=S.phaseCount+1\n        S.phases[S.phaseCount]={id=id,kind=kind,a=a,b=b,value=value,relative=relative}\n    end\nend\n\nfunction S.startBoss(cid,entityID,origin,now)\n    local def=S.definitions[cid]\n    if not def or S.boss~=0 or not S.enabled then return end\n    S.boss=cid;S.entityID=entityID;S.origin=origin\n    C.poolStatus=nil\n    A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100)\n    if S.killOverride then\n        A.setAutoSimKillTime(math.min(1200,origin+S[\"kill\"..cid]))\n        A.addAutoSimUncertainty(now,10) -- limited four-player samples: estimates remain optional\n    end\n    -- Keep automatic kill uncertainty by default. Do not invent forced target downtime.\n    -- Only owned movement/field phases are authored; AoE counts and DoT targets stay live.\n    if S.movement then\n        for i=1,#def.movement do\n            local w=def.movement[i]\n            local a,b=origin+w[1],origin+w[2]\n            if b>now then\n                a=math.max(a,now)\n                S.add(\"CasterDowntime\",a,b,1,true)\n                if S.returnField then S.add(\"GroundFieldMovement\",b,b+0.2,2,true) end\n            end\n        end\n    end\n    -- Native paired targetability transitions corroborate these downtime windows.\n    -- Attackability forecasting is independent of the optional movement forecast.\n    for i=1,#def.downtime do\n        local w=def.downtime[i]\n        if origin+w[2]>now then S.add(\"FullDowntime\",math.max(origin+w[1],now),origin+w[2],1,true) end\n    end\n    if S.buffEnabled and S.buffPct>0 then\n        local a=origin+S.buffFirst\n        while a<1200 do\n            if a+S.buffDuration>now then S.add(\"RaidBuff\",math.max(a,now),a+S.buffDuration,1+S.buffPct/100,false) end\n            a=a+S.buffPeriod\n        end\n    end\n    C.status=\"Active: \"..def.name..\". Kill estimate: \"..(S.killOverride and \"manual\" or \"automatic\")\nend\n\nfunction S.channel(args)\n    if not S.enabled then return end\n    local cid=args.entityContentID\n    local def=S.definitions[cid]\n    if not def then return end\n    local aid=args.spellID\n    aid=def.aliases[aid] or aid -- documented alternate casts share one occurrence sequence\n    local anchors=def.anchors[aid]\n    if not anchors then return end -- stable boss cast identity before API work\n    if S.boss~=0 and (S.boss~=cid or S.entityID~=args.entityID) then return end\n    local valid,now=pcall(A.getAutoSimTime)\n    if not valid or type(now)~=\"number\" or now<0 or now>=1200 then return end\n    local n=(S.counts[aid] or 0)+1\n    local expected=anchors[n]\n    if not expected then return end\n    if S.boss==0 and math.abs(now-expected)>2 then return end\n    S.counts[aid]=n\n    if S.boss==0 then S.startBoss(cid,args.entityID,now-expected,now) end\n    if S.boss~=cid then return end\n    local candidate=now-expected\n    -- If enabled mid-boss, do not match a late repeat to the first occurrence.\n    if math.abs(candidate-S.origin)>2 then return end\n    local shift=candidate-S.origin\n    S.anchorsSeen=S.anchorsSeen+1\n    if math.abs(shift)<0.15 then return end\n    -- Remove every future owned phase before reinsertion, avoiding transient overlaps.\n    local ends=S.activeEnds\n    ends.CasterDowntime=now;ends.GroundFieldMovement=now;ends.FullDowntime=now\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.relative and phase.id and phase.a>now+0.05 then\n            A.removeAutoSimPhase(phase.id);phase.id=nil;phase.pending=true\n        elseif phase.id and phase.a<=now+0.05 and phase.b>now and phase.relative then\n            ends[phase.kind]=math.max(ends[phase.kind],phase.b)\n        end\n    end\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.pending then\n            phase.pending=false\n            local a,b=phase.a+shift,phase.b+shift\n            local minimum=ends[phase.kind]\n            if phase.kind==\"GroundFieldMovement\" then minimum=math.max(minimum,ends.CasterDowntime) end\n            a=math.max(a,minimum,now+0.05)\n            if b>a then\n                phase.id=A.addAutoSimPhase(phase.kind,a,b,phase.value)\n                phase.a=a;phase.b=b;ends[phase.kind]=b\n            end\n        end\n    end\n    S.origin=candidate\nend\n\nif S.enabled then\n    local target=TensorCore.mGetTarget()\n    if target and S.definitions[target.contentid] and target.attackable and target.incombat then\n        -- Near pull start, zero is the combat-clock origin; later setup waits for an anchor.\n        if t<=5 then S.startBoss(target.contentid,target.id,0,t) end\n    end\n    if S.boss==0 and S.trash then A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100) end\nend\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -2798,7 +2798,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not ClyteumAutoSimConfig or ClyteumAutoSimConfig.fileApiVersion~=1 then\n    local C = ClyteumAutoSimConfig or {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=true, kill14716=144.043, kill14734=138.778, kill14758=181.846,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Clyteum.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill14716\",\"kill14734\",\"kill14758\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\Clyteum.AutoSim.lua]]\n    if not ClyteumAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill14716=math.max(15,math.min(1200,C.kill14716))\n    C.kill14734=math.max(15,math.min(1200,C.kill14734))\n    C.kill14758=math.max(15,math.min(1200,C.kill14758))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    ClyteumAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif ClyteumAutoSimConfig.poolFinal==nil then\n ClyteumAutoSimConfig.poolFinal=true\n table.insert(ClyteumAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=ClyteumAutoSimConfig\nlocal visible=GUI:Begin(\"Clyteum - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Eye of the Scorpion (seconds)\",C.kill14716,5,15,\"%.1f\")\n        if changed then C.kill14716=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Chort (seconds)\",C.kill14734,5,15,\"%.1f\")\n        if changed then C.kill14734=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Malphas (seconds)\",C.kill14758,5,15,\"%.1f\")\n        if changed then C.kill14758=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold offensive cooldowns on final trash (all jobs)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before each boss and temporarily turns off the current job’s CD switch. Radiant Finale is explicitly held too. Your previous CD setting is restored when pooling ends; songs keep their own control.\") end\n    local shared=DungeonAutoSimShared\n    if shared then\n        v,changed=GUI:SliderInt(\"Hold new boss cooldowns below HP (%) - shared\",shared.lateHP,0,20)\n        if changed then shared.lateHP=v;shared.save() end\n        if GUI:IsItemHovered() then GUI:SetTooltip(\"Shared across these nine dungeons and all jobs. At this boss HP, stop starting offensive cooldowns; normal attacks continue. 0 disables this rule. Default 8%. Defensive controls and songs keep their own settings.\") end\n    end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not ClyteumAutoSimConfig or ClyteumAutoSimConfig.fileApiVersion~=1 then\n    local C = ClyteumAutoSimConfig or {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=true, kill14716=140, kill14734=135, kill14758=180,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Clyteum.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill14716\",\"kill14734\",\"kill14758\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\Clyteum.AutoSim.lua]]\n    if not ClyteumAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill14716=math.max(15,math.min(1200,C.kill14716))\n    C.kill14734=math.max(15,math.min(1200,C.kill14734))\n    C.kill14758=math.max(15,math.min(1200,C.kill14758))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    ClyteumAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif ClyteumAutoSimConfig.poolFinal==nil then\n ClyteumAutoSimConfig.poolFinal=true\n table.insert(ClyteumAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=ClyteumAutoSimConfig\nlocal visible=GUI:Begin(\"Clyteum - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Eye of the Scorpion (seconds)\",C.kill14716,5,15,\"%.1f\")\n        if changed then C.kill14716=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Chort (seconds)\",C.kill14734,5,15,\"%.1f\")\n        if changed then C.kill14734=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Malphas (seconds)\",C.kill14758,5,15,\"%.1f\")\n        if changed then C.kill14758=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold offensive cooldowns on final trash (all jobs)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before each boss and temporarily turns off the current job’s CD switch. Radiant Finale is explicitly held too. Your previous CD setting is restored when pooling ends; songs keep their own control.\") end\n    local shared=DungeonAutoSimShared\n    if shared then\n        v,changed=GUI:SliderInt(\"Hold new boss cooldowns below HP (%) - shared\",shared.lateHP,0,20)\n        if changed then shared.lateHP=v;shared.save() end\n        if GUI:IsItemHovered() then GUI:SetTooltip(\"Shared across these nine dungeons and all jobs. At this boss HP, stop starting offensive cooldowns; normal attacks continue. 0 disables this rule. Default 8%. Defensive controls and songs keep their own settings.\") end\n    end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -10097,7 +10097,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared across the nine dungeon solvers and combat resets; owns only its own temporary switches.\nif DungeonAutoSimShared and DungeonAutoSimShared.version~=2026110403 then DungeonAutoSimShared.cleanup();DungeonAutoSimShared=nil end\nif not DungeonAutoSimShared or DungeonAutoSimShared.fileApiVersion~=1 then\n local H=DungeonAutoSimShared or {version=2026110403,maps={[1164]={config=\"LunarSubterraneAutoSimConfig\",state=\"lunar_subterrane_autosim\",flag=\"lunar_final_trash\",bosses={[12500]=true,[12484]=true,[12584]=true}},[1292]={config=\"MesoTerminalAutoSimConfig\",state=\"meso_autosim\",flag=\"meso_final_trash\",bosses={[13970]=true,[14047]=true,[13974]=true,[14048]=true,[14049]=true,[14050]=true,[14239]=false}},[1204]={config=\"StrayboroughDeadwalkAutoSimConfig\",state=\"strayborough_autosim\",flag=\"strayborough_final_trash\",bosses={[13073]=true,[12760]=true,[12763]=true}},[1242]={config=\"YuweyawataFieldStationAutoSimConfig\",state=\"yuweyawata_autosim\",flag=\"yuweyawata_final_trash\",bosses={[13623]=true,[13634]=true,[13610]=true}},[1199]={config=\"AlexandriaAutoSimConfig\",state=\"alexandria_autosim\",flag=\"alexandria_final_trash\",bosses={[12844]=true,[12864]=true,[12729]=true}},[1266]={config=\"UnderkeepAutoSimConfig\",state=\"underkeep_autosim\",flag=\"underkeep_final_trash\",bosses={[13753]=true,[13757]=true,[13749]=true}},[1345]={config=\"ClyteumAutoSimConfig\",state=\"clyteum_autosim\",flag=\"clyteum_final_trash\",bosses={[14716]=true,[14734]=true,[14758]=true}},[1314]={config=\"MistwakeAutoSimConfig\",state=\"mistwake_autosim\",flag=\"mistwake_final_trash\",bosses={[14270]=true,[14271]=true,[14288]=true}},[1203]={config=\"TenderValleyAutoSimConfig\",state=\"tender_autosim\",flag=\"tender_final_trash\",bosses={[12889]=true,[12853]=true,[12709]=true}}},held={},lists={},checked={},lateHP=8,autoBox=true,settingsLoaded=false}\n H.path=GetLuaModsPath()..[[TensorReactions\\Settings\\DungeonAutoSim.Shared.lua]]\n if not DungeonAutoSimShared and FileExists(H.path) then\n  local saved=FileLoad(H.path)\n  if type(saved)==\"table\" then\n   if type(saved.lateHP)==\"number\" then H.lateHP=math.max(0,math.min(20,saved.lateHP)) end\n   if type(saved.autoBox)==\"boolean\" then H.autoBox=saved.autoBox end\n  end\n end\n function H.save()\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  FileSave(H.path,{lateHP=H.lateHP,autoBox=H.autoBox})\n end\n H.fileApiVersion=1;H.save()\n function H.release()\n  for var,old in pairs(H.held) do if _G[var]==false then _G[var]=old end;H.held[var]=nil end\n  H.reason=nil\n end\n function H.restoreLists()\n  if not H.blacklistMode and next(H.lists)==nil then return end\n  local A=TensorCore.API.TensorACR\n  for key,r in pairs(H.lists) do\n   local e=r.entry\n   if e.enabled==true and (r.kind==\"aoe\" or (e.allowIfTarget==r.target and e.allowSmartDoT==false)) then\n    if r.created then\n     e.enabled=false\n     if H.job==r.job then\n      local exists\n      if r.kind==\"aoe\" then exists=A.getAOEBlacklistEntry(r.cid) else exists=A.getBlacklistEntry(r.cid) end\n      if exists then\n       local current=r.kind==\"aoe\" and A.addAOEBlacklistEntry(r.cid) or A.addBlacklistEntry(r.cid)\n       if current==e then if r.kind==\"aoe\" then A.deleteAOEBlacklistEntry(r.cid) else A.deleteBlacklistEntry(r.cid) end end\n      end\n     end\n    else\n     e.enabled=r.enabled\n     if r.kind==\"dot\" then e.allowIfTarget=r.oldTarget;e.allowSmartDoT=r.oldSmart end\n    end\n   end\n   H.lists[key]=nil\n  end\n  H.checked={};H.blacklistMode=nil\n end\n function H.restoreIsolation()\n  if H.isolation then\n   for var,old in pairs(H.isolation) do if _G[var]==false then _G[var]=old end end\n   H.isolation=nil\n  end\n end\n function H.cleanup() H.release();H.restoreLists();H.restoreIsolation();H.vars=nil;H.job=nil;H.box=nil;H.boxSeen=nil end\n function H.blacklist(kind,cid,target)\n  local key=kind..cid;if H.checked[key] then return end\n  H.checked[key]=true\n  local A=TensorCore.API.TensorACR\n  local existed\n  if kind==\"aoe\" then existed=A.getAOEBlacklistEntry(cid) else existed=A.getBlacklistEntry(cid) end\n  local e=kind==\"aoe\" and A.addAOEBlacklistEntry(cid,\"[Dungeon AutoSim] Meso target isolation\") or A.addBlacklistEntry(cid,\"[Dungeon AutoSim] Meso target isolation\")\n  if not e then return end\n  H.lists[key]={entry=e,created=not existed,kind=kind,cid=cid,job=H.job,enabled=e.enabled,oldTarget=e.allowIfTarget,oldSmart=e.allowSmartDoT,target=target}\n  e.enabled=true\n  if kind==\"dot\" then e.allowIfTarget=target;e.allowSmartDoT=false end\n end\n -- Confirm the same unique arena cell for player and headsman; never choose a box by player distance.\n H.cells={{x=60,z=-268},{x=60,z=-248},{x=42.5,z=-258},{x=77.5,z=-258}}\n function H.boxTrace(key,reason,p,t,cell,id)\n  if H.boxTraceKey==key then return end\n  H.boxTraceKey=key\n  local pos=p and p.pos\n  TensorCore.timelineLogToFile(string.format(\"[Dungeon AutoSim Hellmaker] %s cell=%s player=%.2f,%.2f,%.2f target=%s targetCID=%s box=%s\",reason,tostring(cell),pos and pos.x or 0,pos and pos.y or 0,pos and pos.z or 0,tostring(t and t.id),tostring(t and t.contentid),tostring(id)))\n end\n function H.cellOf(p)\n  local cell\n  if not p.pos or math.abs(p.pos.y+490)>3 then return nil end\n  for i,c in ipairs(H.cells) do\n   if (p.pos.x-c.x)^2+(p.pos.z-c.z)^2<=8.5^2 then if cell then return nil end;cell=i end\n  end\n  return cell\n end\n function H.boxCandidate(id,cell)\n  local e=TensorCore.mGetEntity(id);local c=H.cells[cell]\n  if e and e.contentid==14052 and e.alive and e.targetable and e.attackable and e.pos and math.abs(e.pos.y+490)<=3 and (e.pos.x-c.x)^2+(e.pos.z-c.z)^2<=11^2 then\n   H.boxCount=H.boxCount+1;H.boxCandidateID=id\n  end\n  return true\n end\n function H.updateBox(p,t,enabled)\n  if not enabled then H.box=nil;H.boxSeen=nil;H.boxTraceKey=nil;return end\n  local cell=H.cellOf(p)\n  if not cell then H.boxTrace(\"cell-unknown\",\"SKIP: no unique cell or wrong arena height\",p,t);H.box=nil;return end\n  local B=H.box\n  if B then\n   if B.cell~=cell then H.boxTrace(\"cell-changed:\"..B.id,\"CANCEL: player changed cells\",p,t,cell,B.id);H.box=nil;return end\n   local box=TensorCore.mGetEntity(B.id)\n   if t and t.id==B.id then B.ack=true end\n   if not box or not box.alive or not box.targetable or not box.attackable then\n    if B.ack and (not t or t.id==B.id) then\n     local boss=TensorCore.mGetEntity(B.boss)\n     if boss and boss.alive and boss.targetable and boss.attackable and H.cellOf(boss)==cell then\n      H.boxTrace(\"return:\"..B.id,\"RETURN: box resolved; restore headsman \"..boss.id,p,t,cell,B.id);Player:SetTarget(boss.id)\n     else H.boxTrace(\"return-invalid:\"..B.id,\"SKIP RETURN: saved headsman unavailable or outside cell\",p,t,cell,B.id) end\n    else H.boxTrace(\"return-overridden:\"..B.id,\"SKIP RETURN: no switch acknowledgement or manual target override\",p,t,cell,B.id)\n    end\n    H.box=nil\n   elseif B.ack and (not t or t.id~=B.id) then H.boxTrace(\"manual:\"..B.id,\"CANCEL: manual/other controller target change\",p,t,cell,B.id);H.box=nil\n   elseif not B.ack and Now()-B.at>1000 then H.boxTrace(\"timeout:\"..B.id,\"CANCEL: target switch not acknowledged within 1 second\",p,t,cell,B.id);H.box=nil\n   end\n   return\n  end\n  if not t or not (t.contentid==14047 or t.contentid==14048 or t.contentid==14049 or t.contentid==14050) or not t.alive or not t.attackable or H.cellOf(t)~=cell then H.boxTrace(\"head-invalid\",\"SKIP: selected target is not a living headsman in the same cell\",p,t,cell);return end\n  H.boxSeen=H.boxSeen or {}\n  H.boxCount=0;H.boxCandidateID=nil\n  TensorCore.forEachEntity(\"contentid=14052,alive,targetable,attackable\",H.boxCandidate,cell)\n  local id=H.boxCandidateID\n  if H.boxCount~=1 then H.boxTrace(\"count:\"..cell..\":\"..H.boxCount,\"WAIT: valid cell box count=\"..H.boxCount,p,t,cell);return end\n  if H.boxSeen[id] then return end\n  H.boxSeen[id]=true\n  H.box={id=id,boss=t.id,cell=cell,at=Now()}\n  H.boxTrace(\"switch:\"..id,\"SWITCH: unique cell box; saved headsman=\"..t.id,p,t,cell,id)\n  Player:SetTarget(id)\n end\n\n DungeonAutoSimShared=H\nend\nlocal H=DungeonAutoSimShared\nlocal p=TensorCore.mGetPlayer()\nif not p then H.cleanup();self.used=true;return end\nif H.job~=p.job then H.cleanup();H.job=p.job end\nlocal spec=H.maps[p.localmapid]\nlocal C=spec and _G[spec.config]\nlocal state=spec and data[spec.state]\nlocal target=TensorCore.mGetTarget()\nlocal valid=spec and C and C.enabled and p.incombat\nlocal boss=valid and target and spec.bosses[target.contentid] and target.alive and target.attackable and target.incombat\nlocal final=valid and C.poolFinal and data[spec.flag]==true and (not state or state.boss==0) and not boss\nlocal late=boss and H.lateHP>0 and target.hp and target.hp.max>0 and target.hp.percent>0 and target.hp.percent<=H.lateHP\nif final or late then\n if not H.vars then\n  H.vars={}\n  local toggles=TensorCore.API.TensorACR.getQuickToggles()\n  if toggles then for _,o in pairs(toggles) do\n   if o.var and o.var:match(\"_CD$\") and type(_G[o.var])==\"boolean\" then H.vars[#H.vars+1]=o.var end\n  end end\n end\n for _,var in ipairs(H.vars) do\n  if H.held[var]==nil then H.held[var]=_G[var] end\n  _G[var]=false\n end\n -- Explicit short leases cover these job controls in addition to the shared CD switch.\n local A=TensorCore.API.TensorACR;local untilMs=Now()+750\n if p.job==23 then A.holdActionUntil(25785,untilMs)\n elseif p.job==25 then A.holdActionUntil(3573,untilMs);A.holdActionUntil(158,untilMs) end\n H.reason=final and \"Holding offensive cooldowns for the next boss\" or \"Holding new offensive cooldowns near boss death\"\n C.poolStatus=H.reason\nelse\n H.release();H.vars=nil;if C then C.poolStatus=nil end\nend\n-- Headsmen use separate content IDs. DoTs may hit the selected one, never Smart DoT the others.\nlocal second=valid and p.localmapid==1292 and (H.box or (state and state.boss==14047) or (target and (target.contentid==14047 or target.contentid==14048 or target.contentid==14049 or target.contentid==14050)))\nif second then\n if not H.isolation then\n  H.isolation={}\n  local toggles=TensorCore.API.TensorACR.getQuickToggles()\n  if toggles then for _,o in pairs(toggles) do\n   if o.var and (o.var:match(\"_AOE$\") or o.var:match(\"_SmartAOE$\")) and type(_G[o.var])==\"boolean\" then H.isolation[o.var]=_G[o.var] end\n  end end\n end\n for var in pairs(H.isolation) do _G[var]=false end\n if H.blacklistMode~=\"headsmen\" then\n  H.restoreLists();H.blacklistMode=\"headsmen\"\n  for _,cid in ipairs({14047,14048,14049,14050,14239}) do H.blacklist(\"aoe\",cid,false);H.blacklist(\"dot\",cid,true) end\n  if p.job==23 or p.job==25 then H.blacklist(\"dot\",14052,false) end\n end\nelse H.restoreLists();H.restoreIsolation() end\nH.updateBox(p,target,second and H.autoBox)\nself.used=true\n",
+						actionLua = "-- Shared across the nine dungeon solvers and combat resets; owns only its own temporary switches.\nif DungeonAutoSimShared and DungeonAutoSimShared.version~=2026110403 then DungeonAutoSimShared.cleanup();DungeonAutoSimShared=nil end\nif not DungeonAutoSimShared or DungeonAutoSimShared.fileApiVersion~=1 then\n local H=DungeonAutoSimShared or {version=2026110403,maps={[1164]={config=\"LunarSubterraneAutoSimConfig\",state=\"lunar_subterrane_autosim\",flag=\"lunar_final_trash\",bosses={[12500]=true,[12484]=true,[12584]=true}},[1292]={config=\"MesoTerminalAutoSimConfig\",state=\"meso_autosim\",flag=\"meso_final_trash\",bosses={[13970]=true,[14047]=true,[13974]=true,[14048]=true,[14049]=true,[14050]=true,[14239]=false}},[1204]={config=\"StrayboroughDeadwalkAutoSimConfig\",state=\"strayborough_autosim\",flag=\"strayborough_final_trash\",bosses={[13073]=true,[12760]=true,[12763]=true}},[1242]={config=\"YuweyawataFieldStationAutoSimConfig\",state=\"yuweyawata_autosim\",flag=\"yuweyawata_final_trash\",bosses={[13623]=true,[13634]=true,[13610]=true}},[1199]={config=\"AlexandriaAutoSimConfig\",state=\"alexandria_autosim\",flag=\"alexandria_final_trash\",bosses={[12844]=true,[12864]=true,[12729]=true}},[1266]={config=\"UnderkeepAutoSimConfig\",state=\"underkeep_autosim\",flag=\"underkeep_final_trash\",bosses={[13753]=true,[13757]=true,[13749]=true}},[1345]={config=\"ClyteumAutoSimConfig\",state=\"clyteum_autosim\",flag=\"clyteum_final_trash\",bosses={[14716]=true,[14734]=true,[14758]=true}},[1314]={config=\"MistwakeAutoSimConfig\",state=\"mistwake_autosim\",flag=\"mistwake_final_trash\",bosses={[14270]=true,[14271]=true,[14288]=true}},[1203]={config=\"TenderValleyAutoSimConfig\",state=\"tender_autosim\",flag=\"tender_final_trash\",bosses={[12889]=true,[12853]=true,[12709]=true}}},held={},lists={},checked={},lateHP=8,autoBox=true,settingsLoaded=false}\n H.path=GetLuaModsPath()..[[TensorReactions\\Settings\\DungeonAutoSim.Shared.lua]]\n if not DungeonAutoSimShared and FileExists(H.path) then\n  local saved=FileLoad(H.path)\n  if type(saved)==\"table\" then\n   if type(saved.lateHP)==\"number\" then H.lateHP=math.max(0,math.min(20,saved.lateHP)) end\n   if type(saved.autoBox)==\"boolean\" then H.autoBox=saved.autoBox end\n  end\n end\n function H.save()\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  FileSave(H.path,{lateHP=H.lateHP,autoBox=H.autoBox})\n end\n H.fileApiVersion=1;H.save()\n function H.release()\n  for var,old in pairs(H.held) do if _G[var]==false then _G[var]=old end;H.held[var]=nil end\n  H.reason=nil\n end\n function H.restoreLists()\n  if not H.blacklistMode and next(H.lists)==nil then return end\n  local A=TensorCore.API.TensorACR\n  for key,r in pairs(H.lists) do\n   local e=r.entry\n   if e.enabled==true and (r.kind==\"aoe\" or (e.allowIfTarget==r.target and e.allowSmartDoT==false)) then\n    if r.created then\n     e.enabled=false\n     if H.job==r.job then\n      local exists\n      if r.kind==\"aoe\" then exists=A.getAOEBlacklistEntry(r.cid) else exists=A.getBlacklistEntry(r.cid) end\n      if exists then\n       local current=r.kind==\"aoe\" and A.addAOEBlacklistEntry(r.cid) or A.addBlacklistEntry(r.cid)\n       if current==e then if r.kind==\"aoe\" then A.deleteAOEBlacklistEntry(r.cid) else A.deleteBlacklistEntry(r.cid) end end\n      end\n     end\n    else\n     e.enabled=r.enabled\n     if r.kind==\"dot\" then e.allowIfTarget=r.oldTarget;e.allowSmartDoT=r.oldSmart end\n    end\n   end\n   H.lists[key]=nil\n  end\n  H.checked={};H.blacklistMode=nil\n end\n function H.restoreIsolation()\n  if H.isolation then\n   for var,old in pairs(H.isolation) do if _G[var]==false then _G[var]=old end end\n   H.isolation=nil\n  end\n end\n function H.cleanup() H.release();H.restoreLists();H.restoreIsolation();H.vars=nil;H.job=nil;H.box=nil;H.boxSeen=nil end\n function H.blacklist(kind,cid,target)\n  local key=kind..cid;if H.checked[key] then return end\n  H.checked[key]=true\n  local A=TensorCore.API.TensorACR\n  local existed\n  if kind==\"aoe\" then existed=A.getAOEBlacklistEntry(cid) else existed=A.getBlacklistEntry(cid) end\n  local e=kind==\"aoe\" and A.addAOEBlacklistEntry(cid,\"[Dungeon AutoSim] Meso target isolation\") or A.addBlacklistEntry(cid,\"[Dungeon AutoSim] Meso target isolation\")\n  if not e then return end\n  H.lists[key]={entry=e,created=not existed,kind=kind,cid=cid,job=H.job,enabled=e.enabled,oldTarget=e.allowIfTarget,oldSmart=e.allowSmartDoT,target=target}\n  e.enabled=true\n  if kind==\"dot\" then e.allowIfTarget=target;e.allowSmartDoT=false end\n end\n -- Confirm the same unique arena cell for player and headsman; never choose a box by player distance.\n H.cells={{x=60,z=-268},{x=60,z=-248},{x=42.5,z=-258},{x=77.5,z=-258}}\n function H.boxTrace(key,reason,p,t,cell,id)\n  if H.boxTraceKey==key then return end\n  H.boxTraceKey=key\n  local pos=p and p.pos\n  TensorCore.timelineLogToFile(string.format(\"[Dungeon AutoSim Hellmaker] %s cell=%s player=%.2f,%.2f,%.2f target=%s targetCID=%s box=%s\",reason,tostring(cell),pos and pos.x or 0,pos and pos.y or 0,pos and pos.z or 0,tostring(t and t.id),tostring(t and t.contentid),tostring(id)))\n end\n function H.cellOf(p)\n  local cell\n  if not p.pos or math.abs(p.pos.y+490)>3 then return nil end\n  for i,c in ipairs(H.cells) do\n   if (p.pos.x-c.x)^2+(p.pos.z-c.z)^2<=8.5^2 then if cell then return nil end;cell=i end\n  end\n  return cell\n end\n function H.boxCandidate(id,cell)\n  local e=TensorCore.mGetEntity(id);local c=H.cells[cell]\n  if e and e.contentid==14052 and e.alive and e.targetable and e.attackable and e.pos and math.abs(e.pos.y+490)<=3 and (e.pos.x-c.x)^2+(e.pos.z-c.z)^2<=11^2 then\n   H.boxCount=H.boxCount+1;H.boxCandidateID=id\n  end\n  return true\n end\n function H.updateBox(p,t,enabled)\n  if not enabled then H.box=nil;H.boxSeen=nil;H.boxTraceKey=nil;return end\n  local cell=H.cellOf(p)\n  if not cell then H.boxTrace(\"cell-unknown\",\"SKIP: no unique cell or wrong arena height\",p,t);H.box=nil;return end\n  local B=H.box\n  if B then\n   if B.cell~=cell then H.boxTrace(\"cell-changed:\"..B.id,\"CANCEL: player changed cells\",p,t,cell,B.id);H.box=nil;return end\n   local box=TensorCore.mGetEntity(B.id)\n   if t and t.id==B.id then B.ack=true end\n   if not box or not box.alive or not box.targetable or not box.attackable then\n    if B.ack and (not t or t.id==B.id) then\n     local boss=TensorCore.mGetEntity(B.boss)\n     if boss and boss.alive and boss.targetable and boss.attackable and H.cellOf(boss)==cell then\n      H.boxTrace(\"return:\"..B.id,\"RETURN: box resolved; restore headsman \"..boss.id,p,t,cell,B.id);Player:SetTarget(boss.id)\n     else H.boxTrace(\"return-invalid:\"..B.id,\"SKIP RETURN: saved headsman unavailable or outside cell\",p,t,cell,B.id) end\n    else H.boxTrace(\"return-overridden:\"..B.id,\"SKIP RETURN: no switch acknowledgement or manual target override\",p,t,cell,B.id)\n    end\n    H.box=nil\n   elseif B.ack and (not t or t.id~=B.id) then H.boxTrace(\"manual:\"..B.id,\"CANCEL: manual/other controller target change\",p,t,cell,B.id);H.box=nil\n   elseif not B.ack and Now()-B.at>1000 then H.boxTrace(\"timeout:\"..B.id,\"CANCEL: target switch not acknowledged within 1 second\",p,t,cell,B.id);H.box=nil\n   end\n   return\n  end\n  if not t or not (t.contentid==14047 or t.contentid==14048 or t.contentid==14049 or t.contentid==14050) or not t.alive or not t.attackable or H.cellOf(t)~=cell then H.boxTrace(\"head-invalid\",\"SKIP: selected target is not a living headsman in the same cell\",p,t,cell);return end\n  H.boxSeen=H.boxSeen or {}\n  H.boxCount=0;H.boxCandidateID=nil\n  TensorCore.forEachEntity(\"contentid=14052,alive,targetable,attackable\",H.boxCandidate,cell)\n  local id=H.boxCandidateID\n  if H.boxCount~=1 then H.boxTrace(\"count:\"..cell..\":\"..H.boxCount,\"WAIT: valid cell box count=\"..H.boxCount,p,t,cell);return end\n  if H.boxSeen[id] then return end\n  H.boxSeen[id]=true\n  H.box={id=id,boss=t.id,cell=cell,at=Now()}\n  H.boxTrace(\"switch:\"..id,\"SWITCH: unique cell box; saved headsman=\"..t.id,p,t,cell,id)\n  Player:SetTarget(id)\n end\n\n DungeonAutoSimShared=H\nend\nlocal H=DungeonAutoSimShared\nlocal p=TensorCore.mGetPlayer()\nif not p then H.cleanup();self.used=true;return end\nif H.job~=p.job then H.cleanup();H.job=p.job end\nlocal spec=H.maps[p.localmapid]\nlocal C=spec and _G[spec.config]\nlocal state=spec and data[spec.state]\nlocal target=TensorCore.mGetTarget()\nlocal valid=spec and C and C.enabled and p.incombat\nlocal boss=valid and target and spec.bosses[target.contentid] and target.alive and target.attackable and target.incombat\nlocal final=valid and C.poolFinal and data[spec.flag]==true and (not state or state.boss==0) and not boss\nlocal late=boss and H.lateHP>0 and target.hp and target.hp.max>0 and target.hp.percent>0 and target.hp.percent<=H.lateHP\nif final or late then\n if not H.vars then\n  H.vars={}\n  local toggles=TensorCore.API.TensorACR.getQuickToggles()\n  if toggles then for _,o in pairs(toggles) do\n   if o.var and o.var:match(\"_CD$\") and type(_G[o.var])==\"boolean\" then H.vars[#H.vars+1]=o.var end\n  end end\n end\n for _,var in ipairs(H.vars) do\n  if H.held[var]==nil then H.held[var]=_G[var] end\n  _G[var]=false\n end\n -- Explicit short leases cover these job controls in addition to the shared CD switch.\n local A=TensorCore.API.TensorACR;local untilMs=Now()+750\n if p.job==23 then A.holdActionUntil(25785,untilMs)\n elseif p.job==25 then\n  A.holdActionUntil(3573,untilMs)\n  A.holdActionUntil(158,untilMs)\n  if final and target and target.alive and target.attackable and target.incombat and p.level>=66 then\n   local remaining = 0\n   TensorCore.forEachEntity(\"alive,targetable,attackable\", function(id)\n    local enemy = TensorCore.mGetEntity(id)\n    if enemy and enemy.incombat and not spec.bosses[enemy.contentid] and enemy.pos and p.pos then\n     local dx = enemy.pos.x - p.pos.x\n     local dz = enemy.pos.z - p.pos.z\n     if dx*dx + dz*dz <= 35*35 and math.abs(enemy.pos.y-p.pos.y) <= 10 then\n      remaining = remaining + 1\n     end\n    end\n    return remaining < 4\n   end)\n   if remaining >= 1 and remaining <= 3 then\n    A.holdActionUntil(7421,untilMs)\n   end\n  end\n end\n H.reason=final and \"Holding offensive cooldowns for the next boss\" or \"Holding new offensive cooldowns near boss death\"\n C.poolStatus=H.reason\nelse\n H.release();H.vars=nil;if C then C.poolStatus=nil end\nend\n-- Headsmen use separate content IDs. DoTs may hit the selected one, never Smart DoT the others.\nlocal second=valid and p.localmapid==1292 and (H.box or (state and state.boss==14047) or (target and (target.contentid==14047 or target.contentid==14048 or target.contentid==14049 or target.contentid==14050)))\nif second then\n if not H.isolation then\n  H.isolation={}\n  local toggles=TensorCore.API.TensorACR.getQuickToggles()\n  if toggles then for _,o in pairs(toggles) do\n   if o.var and (o.var:match(\"_AOE$\") or o.var:match(\"_SmartAOE$\")) and type(_G[o.var])==\"boolean\" then H.isolation[o.var]=_G[o.var] end\n  end end\n end\n for var in pairs(H.isolation) do _G[var]=false end\n if H.blacklistMode~=\"headsmen\" then\n  H.restoreLists();H.blacklistMode=\"headsmen\"\n  for _,cid in ipairs({14047,14048,14049,14050,14239}) do H.blacklist(\"aoe\",cid,false);H.blacklist(\"dot\",cid,true) end\n  if p.job==23 or p.job==25 then H.blacklist(\"dot\",14052,false) end\n end\nelse H.restoreLists();H.restoreIsolation() end\nH.updateBox(p,target,second and H.autoBox)\nself.used=true\n",
 						name = "[Dungeon AutoSim] Shared cooldown pooling and Meso target isolation",
 						uuid = "927da91f-2dac-420d-823a-154889d881d2",
 						version = 2.1,
@@ -10170,6 +10170,393 @@ local tbl =
 			name = "[Dungeon AutoSim] Restore shared cooldown and blacklist state on zone change",
 			timeout = 2,
 			uuid = "8a361453-a389-5522-8015-0a3baa81d1da",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "The Clyteum",
+			uuid = "9255549f-6241-66a0-b068-eff2e296a69b",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Clyteum",
+			name = "Eye of the Scorpion",
+			uuid = "0476b451-13ac-5566-ae62-9fe840afb044",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Clyteum/Eye of the Scorpion",
+			name = "AutoSim",
+			uuid = "bd25798a-7641-e678-901d-301e76819ae8",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local event = eventArgs\nlocal scan = ClyteumMotionScanner\nif event.newAnimID == 9355 then\n    local scanner = TensorCore.mGetEntity(event.entityID)\n    if scanner and scanner.pos and (not scan or scan.id ~= event.entityID or scan.finished or scan.passed or Now() >= scan.expires) then\n        -- West-side and east-side scanners start on opposite sides of x=-615.\n        ClyteumMotionScanner = {\n            id = event.entityID,\n            direction = scanner.pos.x > -615 and -1 or 1,\n            expires = Now() + 22000,\n            paused = scan and scan.paused or false,\n        }\n    end\nelseif scan and scan.id == event.entityID then\n    scan.finished = true\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"7b2a94df-e9d7-cb82-bee2-87b73d8e63cd",
+								true,
+							},
+						},
+						name = "Track the moving scanner",
+						uuid = "7b80b92e-1ad1-a6a9-8ee9-e4084b0257e6",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local event = eventArgs\nif event.index ~= 1 or event.entityContentID ~= 108\n    or (event.newAnimID ~= 9355 and event.newAnimID ~= 7740) then\n    return false\nend\nlocal player = TensorCore.mGetPlayer()\nreturn player ~= nil and player.localmapid == 1345\n    and Argus.getEntityModel(event.entityID) == 19501",
+						dequeueIfLuaFalse = true,
+						name = "Clyteum scanner animation",
+						uuid = "7b2a94df-e9d7-cb82-bee2-87b73d8e63cd",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Clyteum/Eye of the Scorpion/AutoSim",
+			eventType = 23,
+			name = "Motion Scanner sweep tracking",
+			uuid = "5db2cbc8-c6af-546a-a4e1-b80def2fdd68",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Misc",
+						conditions = 
+						{
+							
+							{
+								"bd190887-f162-df46-ab1d-c44f3f8f404a",
+								true,
+							},
+						},
+						name = "Stop All Actions",
+						stopAllActions = true,
+						uuid = "e85e93d4-cad0-3d33-888e-bc42af4620a1",
+						version = 2.1,
+					},
+				},
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local scan = ClyteumMotionScanner\nif scan then\n    scan.paused = true\n    d(\"[Clyteum Motion Tracker] actions paused for scanner \" .. tostring(scan.id))\n    if AnyoneCore and AnyoneCore.Shotcall then AnyoneCore.Shotcall(\"Hold still. No actions.\", true, 3, true) end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"a11c7ca8-212d-4b98-aa69-43598b041811",
+								true,
+							},
+						},
+						name = "Record stop and call hold still",
+						uuid = "7bb1a8d1-e366-bb3e-9077-e187d46c0394",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local scan = ClyteumMotionScanner\nif not scan or scan.paused or scan.passed or scan.finished or Now() >= scan.expires then return false end\nlocal player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 1345 or not player.incombat or player.alive == false then return false end\nif TensorCore.hasBuff(player.id, 5191) then return true end\nlocal scanner = TensorCore.mGetEntity(scan.id)\nif not scanner or not scanner.pos or not player.pos then return false end\nlocal ahead = (player.pos.x - scanner.pos.x) * scan.direction\n-- The line is 15 yalms wide along its path. Stop before the leading edge.\nreturn ahead >= -7.5 and ahead <= 11 and math.abs(player.pos.z - scanner.pos.z) <= 20",
+						dequeueIfLuaFalse = true,
+						name = "Scanner about to reach player",
+						uuid = "bd190887-f162-df46-ab1d-c44f3f8f404a",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						actionUUID = "e85e93d4-cad0-3d33-888e-bc42af4620a1",
+						category = "Action",
+						dequeueIfLuaFalse = true,
+						name = "Native control applied",
+						uuid = "a11c7ca8-212d-4b98-aa69-43598b041811",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Clyteum/Eye of the Scorpion/AutoSim",
+			name = "Motion Tracker - stop actions",
+			uuid = "9fe940e6-d855-c5c4-8e5c-f729799274d0",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Misc",
+						conditions = 
+						{
+							
+							{
+								"f85cc287-f28d-f868-bc09-f786480ba2e3",
+								true,
+							},
+						},
+						name = "Resume All Actions",
+						resumeAllActions = true,
+						uuid = "44a5aeea-9736-576b-a8e3-455b7f7e20ad",
+						version = 2.1,
+					},
+				},
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local scan = ClyteumMotionScanner\nif scan then\n    scan.paused = false\n    scan.passed = true\n    d(\"[Clyteum Motion Tracker] actions resumed after scanner \" .. tostring(scan.id))\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"ef2f599d-94a4-6931-8449-7be3aeaf4870",
+								true,
+							},
+						},
+						name = "Release the scanner hold",
+						uuid = "d8cd2201-e524-451c-82a1-6e150b009808",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local scan = ClyteumMotionScanner\nif not scan or not scan.paused then return false end\nlocal player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 1345 or not player.incombat or player.alive == false then return true end\nif TensorCore.hasBuff(player.id, 5191) then return false end\nif scan.finished or Now() >= scan.expires then return true end\nlocal scanner = TensorCore.mGetEntity(scan.id)\nif not scanner or not scanner.pos or not player.pos then return false end\nlocal ahead = (player.pos.x - scanner.pos.x) * scan.direction\nreturn ahead < -8.5",
+						dequeueIfLuaFalse = true,
+						name = "Scanner and Motion Tracker clear",
+						uuid = "f85cc287-f28d-f868-bc09-f786480ba2e3",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						actionUUID = "44a5aeea-9736-576b-a8e3-455b7f7e20ad",
+						category = "Action",
+						dequeueIfLuaFalse = true,
+						name = "Native control applied",
+						uuid = "ef2f599d-94a4-6931-8449-7be3aeaf4870",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Clyteum/Eye of the Scorpion/AutoSim",
+			name = "Motion Tracker - resume actions",
+			uuid = "1c3569d3-e449-edbb-b652-1ad691e8b7c9",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Clyteum",
+			name = "Malphas",
+			uuid = "77d3680a-a7a4-a3c5-95ff-721c5600d160",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Clyteum/Malphas",
+			name = "AutoSim",
+			uuid = "b4dcd1a9-0575-006c-a198-2ef3ba3cb575",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "TensorCore.mGetPlayer():Jump()\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"b4e51e09-0903-a550-9292-19965249d71c",
+								true,
+							},
+							
+							{
+								"f09fbc71-2365-9408-95b8-b7ce6f8fc208",
+								true,
+							},
+						},
+						name = "Jump once",
+						uuid = "7cec4696-7146-68cf-a3d6-adb5e4f523d3",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e = eventArgs\nif e.entityContentID ~= 14758 or e.spellID ~= 48931 then return false end\nlocal p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 1345 and p.incombat and p.alive\n    and Argus.getEntityModel(e.entityID) == 19496",
+						dequeueIfLuaFalse = true,
+						name = "Malphas String Up",
+						uuid = "b4e51e09-0903-a550-9292-19965249d71c",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local boss = TensorCore.mGetEntity(eventArgs.entityID)\nlocal cast = boss and boss.castinginfo\nreturn cast ~= nil and cast.channelingid == 48931\n    and cast.channeltime >= eventArgs.channelTimeMax - 0.35\n    and cast.channeltime <= eventArgs.channelTimeMax",
+						name = "Final 0.35s of the live cast",
+						uuid = "f09fbc71-2365-9408-95b8-b7ce6f8fc208",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Clyteum/Malphas/AutoSim",
+			eventType = 3,
+			name = "String Up - jump before resolution",
+			timeout = 6,
+			uuid = "67b32471-edfe-275b-8810-1ff7d5603d27",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Clyteum",
+			name = "Trash",
+			uuid = "a43f42bc-9176-b67e-bc52-ed5d6a4e56c1",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Clyteum/Trash",
+			name = "AutoSim",
+			uuid = "5fbae6f8-c056-2c55-88c5-d93d3e452e50",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nlocal target = TensorCore.mGetTarget()\nif not target or not target.alive or not target.attackable or not target.incombat or not target.hp\n    or target.contentid == 14716 or target.contentid == 14734 or target.contentid == 14758 then\n    data.clyteumThunderSample = nil\n    self.used = true\n    return\nend\nlocal now = Now()\nlocal hp = target.hp.percent\nlocal sample = data.clyteumThunderSample\nif not sample or sample.id ~= target.id or now - sample.at > 1800 then\n    sample = {id = target.id, hp = hp, at = now}\n    data.clyteumThunderSample = sample\nend\nlocal elapsed = now - sample.at\nlocal loss = sample.hp - hp\nlocal secondsLeft = elapsed >= 500 and loss > 0 and hp * elapsed / loss / 1000 or nil\nif elapsed >= 1000 then\n    sample.hp, sample.at = hp, now\nend\nif hp > 0 and ((secondsLeft and secondsLeft <= 3) or (not secondsLeft and hp <= 5)) then\n    local remaining = 0\n    TensorCore.forEachEntity(\"alive,targetable,attackable\", function(id)\n        local enemy = TensorCore.mGetEntity(id)\n        if enemy and enemy.incombat and enemy.pos and player.pos then\n            local dx, dz = enemy.pos.x - player.pos.x, enemy.pos.z - player.pos.z\n            if dx*dx + dz*dz <= 35*35 and math.abs(enemy.pos.y - player.pos.y) <= 10 then\n                remaining = remaining + 1\n            end\n        end\n        return remaining < 2\n    end)\n    if remaining == 1 then\n        -- Renew only while the last trash target qualifies. Never clear other holds.\n        TensorCore.API.TensorACR.holdActionUntil(36986, now + 650)\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"df13079d-9380-2ff3-a451-14861d7c50ec",
+								true,
+							},
+						},
+						name = "Hold High Thunder briefly",
+						uuid = "27bcf7a9-6dde-fbd3-a047-94b9779d038f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 1345 and p.job == 25 and p.incombat and p.alive",
+						dequeueIfLuaFalse = true,
+						name = "Clyteum BLM in combat",
+						uuid = "df13079d-9380-2ff3-a451-14861d7c50ec",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Clyteum/Trash/AutoSim",
+			name = "Hold single-target Thunder on dying trash",
+			throttleTime = 250,
+			uuid = "8f009733-c3b2-b5ed-ab50-b49a6d886efa",
 			version = 2,
 		},
 	}, 
