@@ -7223,6 +7223,402 @@ local tbl =
 			uuid = "1e3d22b5-6144-c719-aca0-5754c0218386",
 			version = 2,
 		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "Syrcus Tower",
+			uuid = "fbf8e6e8-9491-32eb-b29d-d7de1a43870a",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Syrcus Tower",
+			name = "Scylla",
+			uuid = "af5581a6-8fbe-edfa-8353-1f6d2dc78506",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\n-- Syrcus Tower is level synced to 50. Forecasts use each boss's own combat clock.\nlocal api = TensorCore.API.TensorACR\nlocal ok, elapsed = pcall(api.getAutoSimTime)\ndata.syrcusForecasts = data.syrcusForecasts or {}\nif not data.syrcusForecasts[2809] and ok and type(elapsed) == \"number\" and elapsed >= 0 and elapsed <= 125 then\n    api.setAutoSimKillTime(109)\n    for _, phase in ipairs({\"FullDowntime\", \"Stun\", \"CasterDowntime\", \"GroundFieldMovement\"}) do\n        api.clearAutoSimPhases(phase)\n    end\n    api.clearAutoSimUncertainty()\n    api.addAutoSimUncertainty(0, 10)\n    data.syrcusForecasts[2809] = true\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"15772031-949a-adb7-a04c-d58fa3c2b05b",
+								true,
+							},
+						},
+						name = "[Syrcus AutoSim] Scylla",
+						uuid = "45dfbfc2-842b-b712-ae0e-478562d6a4b8",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 372 and (eventArgs.entityContentID == 2809 and eventArgs.spellID == 2321)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "15772031-949a-adb7-a04c-d58fa3c2b05b",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Syrcus Tower/Scylla",
+			eventType = 3,
+			name = "[Syrcus AutoSim] Scylla",
+			uuid = "f44e28dd-de49-8cf0-a0b6-03b11f7753f7",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Syrcus Tower",
+			name = "Glasya Labolas",
+			uuid = "50bf6d78-51de-d588-a8e0-8dadf27cf0fc",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\n-- Syrcus Tower is level synced to 50. Forecasts use each boss's own combat clock.\nlocal api = TensorCore.API.TensorACR\nlocal ok, elapsed = pcall(api.getAutoSimTime)\ndata.syrcusForecasts = data.syrcusForecasts or {}\nif not data.syrcusForecasts[2815] and ok and type(elapsed) == \"number\" and elapsed >= 0 and elapsed <= 125 then\n    api.setAutoSimKillTime(73)\n    for _, phase in ipairs({\"FullDowntime\", \"Stun\", \"CasterDowntime\", \"GroundFieldMovement\"}) do\n        api.clearAutoSimPhases(phase)\n    end\n    api.clearAutoSimUncertainty()\n    api.addAutoSimUncertainty(0, 10)\n    data.syrcusForecasts[2815] = true\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"fac05bfe-f951-bdf8-95b3-c1682ecd7278",
+								true,
+							},
+						},
+						name = "[Syrcus AutoSim] Glasya Labolas",
+						uuid = "4753d55f-0f9c-f8a8-848a-8e04caf98fda",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 372 and (eventArgs.entityContentID == 2815 and eventArgs.spellID == 2348)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "fac05bfe-f951-bdf8-95b3-c1682ecd7278",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Syrcus Tower/Glasya Labolas",
+			eventType = 3,
+			name = "[Syrcus AutoSim] Glasya Labolas",
+			uuid = "48303a27-0ed0-9213-957e-ed73269d98e6",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Syrcus Tower",
+			name = "Xande",
+			uuid = "b93f84cb-61e0-a1d9-9647-f15370f2864a",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\n-- Syrcus Tower is level synced to 50. Forecasts use each boss's own combat clock.\nlocal api = TensorCore.API.TensorACR\nlocal ok, elapsed = pcall(api.getAutoSimTime)\ndata.syrcusForecasts = data.syrcusForecasts or {}\nif not data.syrcusForecasts[2824] and ok and type(elapsed) == \"number\" and elapsed >= 0 and elapsed <= 125 then\n    api.setAutoSimKillTime(179)\n    for _, phase in ipairs({\"FullDowntime\", \"Stun\", \"CasterDowntime\", \"GroundFieldMovement\"}) do\n        api.clearAutoSimPhases(phase)\n    end\n    -- Meteor circles remain attackable while Xande is absent.\n    for _, gap in ipairs({{46,54},{70,77.3},{111.5,119.1},{141.2,148.6}}) do\n        api.addAutoSimPhase(\"FullDowntime\", gap[1], gap[2], 1)\n    end\n    api.clearAutoSimUncertainty()\n    api.addAutoSimUncertainty(0, 10)\n    data.syrcusForecasts[2824] = true\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"900b00da-6c11-ce9e-8bb3-2aa222a5e56b",
+								true,
+							},
+						},
+						name = "[Syrcus AutoSim] Xande",
+						uuid = "b5f1e63a-6bae-c323-a441-748fc0626ee4",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 372 and (eventArgs.entityContentID == 2824 and eventArgs.spellID == 2356)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "900b00da-6c11-ce9e-8bb3-2aa222a5e56b",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Syrcus Tower/Xande",
+			eventType = 3,
+			name = "[Syrcus AutoSim] Xande",
+			uuid = "f1dc5812-4f25-61ef-8e98-6c99b6e1d0d7",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Syrcus Tower",
+			name = "Setup",
+			uuid = "0d77697f-b8be-421f-a7b6-47e64fded099",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\ngStartCombat = false\nlocal settings = AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled = false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled = false end\nend\nlocal player = TensorCore.mGetPlayer()\nlocal closest, distance\nfor _, cid in ipairs({2809,2815,2821,2824}) do\n    for _, boss in pairs(TensorCore.getEntityGroupList(\"ContentID\", cid) or {}) do\n        if player and player.pos and boss.pos and boss.alive and boss.targetable then\n            local d = TensorCore.getDistance2d(player.pos, boss.pos)\n            if d < 80 and (not distance or d < distance) then closest, distance = boss, d end\n        end\n    end\nend\nif closest then Player:SetTarget(closest.id) end\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"a744230a-45fc-3403-8793-980423c8a1a0",
+								true,
+							},
+						},
+						name = "[Syrcus] Countdown boss target",
+						uuid = "85118a86-311c-ca5b-a853-0bca1e4d5a86",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 372 and (true)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "a744230a-45fc-3403-8793-980423c8a1a0",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Syrcus Tower/Setup",
+			eventType = 16,
+			name = "[Syrcus] Countdown boss target",
+			uuid = "29100b85-e76b-1aab-ab0f-45f533b7a422",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\ngStartCombat = false\nlocal settings = AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled = false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled = false end\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"9ee90dd8-9b45-59ba-87c8-c2021171fd31",
+								true,
+							},
+						},
+						name = "[Syrcus] Helper setup",
+						uuid = "b2ad61a1-fbc7-277e-a6f4-72f986b0ab53",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 372 and (true)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "9ee90dd8-9b45-59ba-87c8-c2021171fd31",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Syrcus Tower/Setup",
+			eventType = 11,
+			name = "[Syrcus] Helper setup",
+			uuid = "018ccbff-389a-4aa1-baa7-019ba26a55be",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Syrcus Tower",
+			name = "Amon",
+			uuid = "7f9a4207-e36c-105e-8ea7-fcec65c3b3b7",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\n-- Syrcus Tower is level synced to 50. Forecasts use each boss's own combat clock.\nlocal api = TensorCore.API.TensorACR\nlocal ok, elapsed = pcall(api.getAutoSimTime)\ndata.syrcusForecasts = data.syrcusForecasts or {}\nif not data.syrcusForecasts[2821] and ok and type(elapsed) == \"number\" and elapsed >= 0 and elapsed <= 125 then\n    api.setAutoSimKillTime(118)\n    for _, phase in ipairs({\"FullDowntime\", \"Stun\", \"CasterDowntime\", \"GroundFieldMovement\"}) do\n        api.clearAutoSimPhases(phase)\n    end\n    api.clearAutoSimUncertainty()\n    api.addAutoSimUncertainty(0, 10)\n    data.syrcusForecasts[2821] = true\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"a66a35fa-a963-6884-8161-a5da8d6881ca",
+								true,
+							},
+						},
+						name = "[Syrcus AutoSim] Amon",
+						uuid = "b00641fd-82b8-d7dc-8a2a-2c329efc2dfe",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 372 and (eventArgs.entityContentID == 2821 and eventArgs.spellID == 2441)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "a66a35fa-a963-6884-8161-a5da8d6881ca",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Syrcus Tower/Amon",
+			eventType = 3,
+			name = "[Syrcus AutoSim] Amon",
+			uuid = "2e5c6026-d3a6-3484-baf0-f2a3da0b67b3",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal actor = TensorCore.mGetEntity(eventArgs.entityID)\nlocal ms = math.floor(eventArgs.channelTimeMax * 1000)\nif actor and actor.pos and ms > 0 then\n    AnyoneCore.addTimedWorldText(ms, \"Hide behind frozen players\", {x=actor.pos.x,y=actor.pos.y+3,z=actor.pos.z}, 0xFFFFFFFF, true, 1.2)\n    AnyoneCore.addWorldTextCountdown(ms, {x=actor.pos.x,y=actor.pos.y+2,z=actor.pos.z}, 0xFFFFFFFF, true, 1.2)\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"cd789b39-8275-c803-b3ed-2db20f65c0f7",
+								true,
+							},
+						},
+						name = "[Syrcus] Curtain Call countdown",
+						uuid = "d345deee-b06c-45a1-a71a-1e13f3b48713",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 372 and (eventArgs.entityContentID == 2821 and eventArgs.spellID == 2441)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "cd789b39-8275-c803-b3ed-2db20f65c0f7",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Syrcus Tower/Amon",
+			eventType = 3,
+			name = "[Syrcus] Curtain Call countdown",
+			uuid = "5ba7bb66-e98d-5307-849e-1815fb22d22b",
+			version = 2,
+		},
 	}, 
 	inheritedProfiles = 
 	{

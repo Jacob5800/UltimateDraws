@@ -271,6 +271,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### Alliance raids: General profile
 
+- Added Syrcus Tower boss forecasts and an Amon Curtain Call countdown, organized by duty and boss. Xande forecasts retain uptime on meteor targets. (09-11-2026)
+
 - Checked Alliance raid for Optifine users: no Minion core Settings or direct file-I/O dependencies were found in its own reactions. It has no saved preference panel, so no settings file was added. Inherited dependencies require their own runtime checks. (05-11-2026)
 
 ### R9S: R2 / R1 / M1
