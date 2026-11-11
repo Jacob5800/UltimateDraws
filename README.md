@@ -133,6 +133,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### UCOB: Shared AutoSim
 
+- AutoSim gives damage zero planning value once Nael reaches her HP floor in P2, so it can save burst for the next phase. (11-11-2026)
+
 - Made [AA] Autosim - UCOB eligible for Optifine users with independent FileLoad/FileSave preferences for role options and slower-group timing. Choices load before pull setup. (05-11-2026)
 
 - Countdown targeting selects Twintania with FFXIVMinion Start Combat kept off. Cancelling or finishing the countdown stops pending selection. (05-11-2026)
