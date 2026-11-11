@@ -77,6 +77,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### Sil'dihn: General profile / AutoSim
 
+- Bard saves Apex Arrow for the next boss when only one or two enemies remain in the final trash pack and each is at 8% HP or lower. (11-11-2026)
+
 - Made Sil'dihn eligible for Optifine users by replacing direct file I/O with independent FileLoad/FileSave preferences. Existing targeting and mechanic logic are preserved. (05-11-2026)
 
 - Before Gladiator, offensive cooldowns are allowed on the first two trash enemies, then reserved across the last two Armor/Dullahan enemies. Defensive mitigation is unaffected. (05-11-2026)
@@ -88,6 +90,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 - Corrected Silkie mitigation to physical ranged on the opener and second Total Wash, with caster Addle on the first and third. Addle now uses a Hotbar request, including earlier requests for unavoidable Belladonna/Dullahan trash damage. (05-11-2026)
 
 ### Dungeons: Shared AutoSim
+
+- Bard saves Apex Arrow for the next boss when only one or two enemies remain in the final trash pack and each is at 8% HP or lower. (11-11-2026)
 
 - In The Clyteum, pause actions for Motion Tracker and jump near the end of Malphas’s String Up. Default boss estimates are 2:20, 2:15 and 3:00. (09-11-2026)
 
