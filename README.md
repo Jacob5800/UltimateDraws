@@ -66,6 +66,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LP
 
 ### TEA: ACR3 Opti
 
+- Added LPDU Jagd Doll targeting for ACR3 users without AA AutoSim. It follows Party Roster assignments and personal tethers, then returns to Living Liquid at 24.9% HP or when the doll window ends. (11-11-2026)
+
 - Published [ACR3 Opti](TimelineReactions/TEA/ACR3%20Opti.lua) containing 15 Reaper/Pictomancer optimization reactions, separate from LPDU Draws with no inheritance. Uses the saved ACR3 controls. (07-11-2026)
 
 ### TEA: AutoSim
