@@ -4,17 +4,15 @@ The draws in here are mostly centered around LPDU strats in the Europe region bu
 
 Currently supported:
 
-UWU: LPDU (Beta) — supports ranged, melee, and tanks.
+UWU: LPDU  
 
-UCOB: LPDU — supports ranged/melee
+UCOB: LPDU 
 
 FRU: LPDU
 
-DSR: [Lpdu draws(beta)](TimelineReactions/DSR/Lpdu%20draws%28beta%29.lua) — LPDU guidance with saved phase settings. Replay checks are ongoing.
-
 TOP: LPDU 
 
-TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) — LPDU doll targeting; replay checks are ongoing.
+TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua) 
 
 ## Changelog
 
