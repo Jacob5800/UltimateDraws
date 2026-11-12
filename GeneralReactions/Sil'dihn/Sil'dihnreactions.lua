@@ -4830,6 +4830,436 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\nlocal boss=TensorCore.mGetEntity(e.entityID)\nlocal model=boss and Argus.getEntityModel(boss)\nif model~=14834 and model~=14837 then self.used=true;return end\nlocal _,tail=Argus.getEntityAuras(boss)\nlocal chilling=e.spellID==30552 or e.spellID==30587\nif not chilling and tail~=1501 then self.used=true;return end\nlocal finish=Now()+(e.channelTimeMax+.3)*1000\nif e.spellID==30558 or e.spellID==30593 then finish=finish+500 end\ndata.silkieBlueJump={start=finish-1400,finish=finish+600}\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"17e306ea-2083-4605-8729-1d39179c7715",
+								true,
+							},
+							
+							{
+								"a0693c99-0140-db3d-ba46-60e43c58a83b",
+								true,
+							},
+						},
+						name = "[Utility] Silkie - Schedule blue-tail movement",
+						uuid = "2d3fc15a-0db2-d230-abde-c820fe7f733a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						uuid = "17e306ea-2083-4605-8729-1d39179c7715",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 3,
+						eventArgType = 2,
+						spellIDList = 
+						{
+							30552,
+							30587,
+							30554,
+							30589,
+							30558,
+							30593,
+						},
+						uuid = "a0693c99-0140-db3d-ba46-60e43c58a83b",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Sildihn criterion/Silkie",
+			eventType = 3,
+			name = "[Utility] Silkie - Schedule blue-tail movement",
+			timeout = 1,
+			uuid = "060729fc-2630-ca7f-91ff-997e93188e5a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local s=data.silkieBlueJump\nlocal now=Now()\nlocal player=TensorCore.mGetPlayer()\nif not player or not player.alive or not player.incombat or now>s.finish then\n if s.ownsDrift then TensorDrift_SlidecastForceHold=false end\n data.silkieBlueJump=nil\n self.used=true;return\nend\nif now<s.start then self.used=true;return end\nif TensorDrift_SlidecastForceHold==false then TensorDrift_SlidecastForceHold=true;s.ownsDrift=true end\nplayer:Jump()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"f079a754-1fe8-f70e-8da9-fd8b06058646",
+								true,
+							},
+							
+							{
+								"1a9e2fa8-0a43-6201-a2d4-38b0c35cff3e",
+								true,
+							},
+						},
+						name = "[Utility] Silkie - Jump through blue-tail check",
+						uuid = "7e5bd335-f4a6-ebbc-a72c-b638a00c24b4",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						uuid = "f079a754-1fe8-f70e-8da9-fd8b06058646",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return data.silkieBlueJump ~= nil",
+						name = "active",
+						uuid = "1a9e2fa8-0a43-6201-a2d4-38b0c35cff3e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Sildihn criterion/Silkie",
+			name = "[Utility] Silkie - Jump through blue-tail check",
+			throttleTime = 200,
+			timeout = 1,
+			uuid = "db59a214-3659-7c8d-9c0d-cfc046ba7f8d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local s=eventArgs.oldData.silkieBlueJump\nif s.ownsDrift then TensorDrift_SlidecastForceHold=false end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"c1472a70-407f-d069-8283-cb6d028104b9",
+								true,
+							},
+						},
+						name = "[Utility] Silkie - Release owned movement hold",
+						uuid = "11e17478-1c6a-c7c1-b9d6-f029959e158f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return eventArgs.oldData ~= nil and eventArgs.oldData.silkieBlueJump ~= nil",
+						name = "active",
+						uuid = "c1472a70-407f-d069-8283-cb6d028104b9",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Sildihn criterion/Silkie",
+			eventType = 9,
+			name = "[Utility] Silkie - Release owned movement hold",
+			timeout = 1,
+			uuid = "650b6426-570f-2341-8fb3-fbb9d8efe32a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local s=data.silkieBlueJump\nif s and s.ownsDrift then TensorDrift_SlidecastForceHold=false end\ndata.silkieBlueJump=nil\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"3c828750-87c9-d20a-8be7-bcca77b57919",
+								true,
+							},
+						},
+						name = "[Utility] Silkie - Release owned movement hold",
+						uuid = "bfcf4162-4e6b-1129-b66a-ff3138726559",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return data.silkieBlueJump ~= nil",
+						name = "active",
+						uuid = "3c828750-87c9-d20a-8be7-bcca77b57919",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Sildihn criterion/Silkie",
+			eventType = 10,
+			name = "[Utility] Silkie - Release owned movement hold",
+			timeout = 1,
+			uuid = "b1614041-30c2-1023-8034-7f5018a8eeff",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local s=data.silkieBlueJump\nif s and s.ownsDrift then TensorDrift_SlidecastForceHold=false end\ndata.silkieBlueJump=nil\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"ba788901-dcf0-b155-ac4d-c7955c947870",
+								true,
+							},
+						},
+						name = "[Utility] Silkie - Release owned movement hold",
+						uuid = "70219ef2-8d41-b7bb-8275-5c09f1ff9daa",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return data.silkieBlueJump ~= nil",
+						name = "active",
+						uuid = "ba788901-dcf0-b155-ac4d-c7955c947870",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Sildihn criterion/Silkie",
+			eventType = 11,
+			name = "[Utility] Silkie - Release owned movement hold",
+			timeout = 1,
+			uuid = "991f75bb-5b17-45bb-aba8-daadd66831df",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local ms=math.ceil(eventArgs.buffDuration*1000)\nif ms>0 and ms<15000 then\n TensorCore.getCachedDrawer(0x222222FF,0x222222FF,0x222222FF,0xFF2222FF,3)\n :addTimedCircleOnEnt(ms,eventArgs.entityID,5,0,false,true,Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"bc544656-cbfa-4289-a201-a49585081e6a",
+								true,
+							},
+							
+							{
+								"be2ee5f9-94fd-9471-8841-fb7e1d628826",
+								true,
+							},
+						},
+						name = "[Draw] Silkie - Forked Lightning spread circles",
+						uuid = "961fd5ef-f938-bd13-8b86-e67464c24495",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						uuid = "bc544656-cbfa-4289-a201-a49585081e6a",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return eventArgs.buffID==587 and (eventArgs.ownerContentID==11366 or eventArgs.ownerContentID==11369)",
+						name = "lightning",
+						uuid = "be2ee5f9-94fd-9471-8841-fb7e1d628826",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Sildihn criterion/Silkie",
+			eventType = 8,
+			name = "[Draw] Silkie - Forked Lightning spread circles",
+			timeout = 1,
+			uuid = "fd86a861-eeb6-4936-8777-c8a38faef395",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local s=_G.JacobSilkieGuide\nlocal now=Now()\nif s.matthewLockTimer and now-s.matthewLockTimer<10000 then self.used=true;return end\ns.matthewLockTimer=now\nlocal player=TensorCore.mGetPlayer()\nAnyoneCore.addWorldTextCountdown(6800,{x=player.pos.x,y=player.pos.y+2.5,z=player.pos.z},0xFFFFFFFF,true,1.5)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"f01cdc36-3bd0-1bea-a60a-713d127cb123",
+								true,
+							},
+							
+							{
+								"d8eb2185-032f-a6ca-9901-8da60012d63d",
+								true,
+							},
+						},
+						name = "[Timer] Silkie - Puff 4 personal bait lock",
+						uuid = "8ae970a0-00a7-fefe-9a68-351cd8afa9a6",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1075,
+							1076,
+						},
+						uuid = "f01cdc36-3bd0-1bea-a60a-713d127cb123",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local s=_G.JacobSilkieGuide\nlocal player=TensorCore.mGetPlayer()\nreturn s~=nil and s.phase==4 and player~=nil\n and (eventArgs.sourceEntityContentID==11367 or eventArgs.sourceEntityContentID==11370)\n and eventArgs.newTetherID==216 and eventArgs.newTargetID==player.id",
+						name = "own",
+						uuid = "d8eb2185-032f-a6ca-9901-8da60012d63d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Sildihn criterion/Silkie",
+			eventType = 15,
+			name = "[Timer] Silkie - Puff 4 personal bait lock",
+			timeout = 1,
+			uuid = "c42745f0-cb1e-9580-86cf-dafe8e4c76eb",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "Sildihn criterion",
 			name = "Gladiator",
 			uuid = "52613516-d862-3b96-9a95-005fba68a5b5",
@@ -5439,7 +5869,7 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or not p.incombat then _G.JacobGladiatorMonumentState=nil;return false end\nlocal now=GUI:GetTime()\nlocal all={}\nfor _,a in ipairs(Argus.getCurrentAOEs()) do\n if a.aoeID==30312 or a.aoeID==30634 then\n  local e=TensorCore.mGetEntity(a.entityID)\n  if e then all[#all+1]={x=a.x,z=a.z,deadline=now+e.castinginfo.casttime-e.castinginfo.channeltime+.3} end\n end\nend\nlocal w=_G.JacobGladiatorMonumentState\nif not w or w.early or now>w.deadline+1 then\n if #all<9 then\n  if #all==0 then return false end\n  if not w then w={deadline=now+15,early=true};_G.JacobGladiatorMonumentState=w end\n  return false\n end\n local latest=0\n for _,a in ipairs(all) do latest=math.max(latest,a.deadline) end\n local last={}\n for _,a in ipairs(all) do if a.deadline>=latest-.35 then last[#last+1]=a end end\n if #last~=2 then return false end\n w={deadline=latest,last=last,draws=w and w.draws or {}};_G.JacobGladiatorMonumentState=w\nend\nif now>w.deadline then return false end\nif not w.readyAt then w.readyAt=now+.25;return false end\nif now<w.readyAt then return false end\nlocal j=p.job\nlocal north=j==19 or j==21 or j==32 or j==37 or j==20 or j==22 or j==30 or j==34 or j==39 or j==41\nlocal late=w.deadline-now<=2.2\nlocal key=late and 'dodge' or 'last'\nif w.shown==key then return false end\nlocal target=w.last[1]\nfor _,a in ipairs(w.last) do if north and a.z<target.z or not north and a.z>target.z then target=a end end\nlocal best,score=nil,math.huge\nfor x=-53,-17,.5 do for z=-289,-253,.5 do\n if north and z<=-273 or not north and z>=-269 then\n  local safe=true\n  for _,a in ipairs(all) do\n   local isLast=a.deadline>=w.deadline-.35\n   if late or not isLast then\n    if (x-a.x)^2+(z-a.z)^2<10.7^2 then safe=false;break end\n   end\n  end\n  if safe then\n   local ref=late and {x=-35,z=-271} or target\n   local value=(x-ref.x)^2+(z-ref.z)^2\n   if not late then value=value+(north and z+289 or -253-z)*20 end\n   if value<score then best={x=x,y=p.pos.y,z=z};score=value end\n  end\n end\nend end\nif not best then return false end\n_G.JacobGladiatorMonumentGoal={state=w,key=key,point=best,ms=math.max(1,(w.deadline-now)*1000),call=late and 'Dodge in' or north and 'North, last AoE' or 'South, last AoE'}\nreturn true",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or not p.incombat then _G.JacobGladiatorMonumentState=nil;return false end\nlocal now=GUI:GetTime()\nlocal all={}\nfor _,a in ipairs(Argus.getCurrentAOEs()) do\n if a.aoeID==30312 or a.aoeID==30634 then\n  local e=TensorCore.mGetEntity(a.entityID)\n  if e then all[#all+1]={x=a.x,z=a.z,deadline=now+e.castinginfo.casttime-e.castinginfo.channeltime+.3} end\n end\nend\nlocal w=_G.JacobGladiatorMonumentState\nif not w or w.early or now>w.deadline+1 then\n if #all<9 then\n  if #all==0 then return false end\n  if not w then w={deadline=now+15,early=true};_G.JacobGladiatorMonumentState=w end\n  return false\n end\n local latest=0\n for _,a in ipairs(all) do latest=math.max(latest,a.deadline) end\n local last={}\n for _,a in ipairs(all) do if a.deadline>=latest-.35 then last[#last+1]=a end end\n if #last~=2 then return false end\n w={deadline=latest,last=last,draws=w and w.draws or {}};_G.JacobGladiatorMonumentState=w\nend\nif now>w.deadline then return false end\nif not w.readyAt then w.readyAt=now+.25;return false end\nif now<w.readyAt then return false end\nlocal j=p.job\nlocal north=j==19 or j==21 or j==32 or j==37 or j==20 or j==22 or j==30 or j==34 or j==39 or j==41\nlocal roleFile = GetLuaModsPath() .. [[TensorReactions\\Settings\\Sildihn.GladiatorRole.lua]]\nif _G.SildihnGladiatorTetherRole == nil then\n local saved = FileExists(roleFile) and FileLoad(roleFile)\n local role = type(saved) == \"table\" and saved.role\n _G.SildihnGladiatorTetherRole = (role == 2 or role == 3) and role or 1\nend\nlocal role = _G.SildihnGladiatorTetherRole\nif role ~= 1 then north = role == 2 end\nlocal late=w.deadline-now<=2.2\nlocal key=late and 'dodge' or 'last'\nif w.shown==key then return false end\nlocal target=w.last[1]\nfor _,a in ipairs(w.last) do if north and a.z<target.z or not north and a.z>target.z then target=a end end\nlocal best,score=nil,math.huge\nfor x=-53,-17,.5 do for z=-289,-253,.5 do\n if north and z<=-273 or not north and z>=-269 then\n  local safe=true\n  for _,a in ipairs(all) do\n   local isLast=a.deadline>=w.deadline-.35\n   if late or not isLast then\n    if (x-a.x)^2+(z-a.z)^2<10.7^2 then safe=false;break end\n   end\n  end\n  if safe then\n   local ref=late and {x=-35,z=-271} or target\n   local value=(x-ref.x)^2+(z-ref.z)^2\n   if not late then value=value+(north and z+289 or -253-z)*20 end\n   if value<score then best={x=x,y=p.pos.y,z=z};score=value end\n  end\n end\nend end\nif not best then return false end\n_G.JacobGladiatorMonumentGoal={state=w,key=key,point=best,ms=math.max(1,(w.deadline-now)*1000),call=late and 'Dodge in' or north and 'North, last AoE' or 'South, last AoE'}\nreturn true",
 						name = "plan",
 						uuid = "ec9e2605-5a02-b3ed-baeb-38e04e8fcb52",
 						version = 3,
@@ -6168,9 +6598,8 @@ local tbl =
 						localMapIDList = 
 						{
 							1075,
-							1076,
 						},
-						name = "maps",
+						name = "Criterion only",
 						uuid = "07973cd7-0176-c837-ae95-952af49c1889",
 						version = 3,
 					},
@@ -6186,7 +6615,6 @@ local tbl =
 						spellIDList = 
 						{
 							30321,
-							30643,
 						},
 						uuid = "0455ffdf-4ef0-1227-88e0-eafcf11d616e",
 						version = 3,
@@ -6806,6 +7234,267 @@ local tbl =
 			name = "[Draw] Gladiator - Tether Partner",
 			timeout = 2,
 			uuid = "9e77f0d1-cc77-16da-a95d-596ec393a5a7",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"eb89ff8a-2a73-16e3-9711-6308b53bcbba",
+								true,
+							},
+							
+							{
+								"24082f7c-2a02-d18f-a0e6-ac2e1721d9fe",
+								true,
+							},
+							
+							{
+								"3e699ee6-7ef0-b5d2-97d2-c93b186a2f97",
+								true,
+							},
+							
+							{
+								"ff305acc-b759-94f3-b00b-431bc7320b67",
+								true,
+							},
+							
+							{
+								"f60a0a71-8394-b4b8-b8d1-d2110e32e278",
+								true,
+							},
+						},
+						gVar = "ACR_TensorNuke4_Hotbar_Addle",
+						name = "Request Addle",
+						uuid = "f1c7158f-ddaa-7085-ad99-1417c3d2355a",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						localMapIDList = 
+						{
+							1076,
+						},
+						name = "Criterion Savage",
+						uuid = "eb89ff8a-2a73-16e3-9711-6308b53bcbba",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						eventArgOptionType = 3,
+						eventArgType = 2,
+						name = "Savage Ring of Might",
+						spellIDList = 
+						{
+							30623,
+							30624,
+							30625,
+						},
+						uuid = "24082f7c-2a02-d18f-a0e6-ac2e1721d9fe",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						eventArgOptionType = 2,
+						eventEntityContentID = 11387,
+						name = "Gladiator",
+						uuid = "3e699ee6-7ef0-b5d2-97d2-c93b186a2f97",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 14,
+						jobIDList = 
+						{
+							25,
+							27,
+							35,
+							42,
+						},
+						name = "Caster jobs",
+						uuid = "ff305acc-b759-94f3-b00b-431bc7320b67",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local boss = TensorCore.mGetEntity(eventArgs.entityID)\nlocal target = TensorCore.mGetTarget()\nif not boss or not target or target.id ~= boss.id\n    or boss.castinginfo.channelingid ~= eventArgs.spellID then return false end\nlocal remaining = boss.castinginfo.casttime - boss.castinginfo.channeltime\nreturn remaining > 0.3 and remaining <= 3",
+						name = "Late Ring cast on selected boss",
+						uuid = "f60a0a71-8394-b4b8-b8d1-d2110e32e278",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Sildihn criterion/Gladiator",
+			eventType = 3,
+			name = "[Mit] Gladiator Savage Thunderous Echo - Caster Addle",
+			timeout = 11,
+			uuid = "aeeb7b14-1a63-6c12-b0e4-fd2e60e701be",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"e26912b2-8c3e-c615-8143-9f0c2115be8f",
+								true,
+							},
+							
+							{
+								"c21a75d8-1775-9d4c-a7ba-f37887a1d10e",
+								true,
+							},
+							
+							{
+								"788e899b-f8ca-f170-8e7c-50801871ba11",
+								true,
+							},
+							
+							{
+								"7d29d011-193f-fbee-8a59-1d3519c85c56",
+								true,
+							},
+							
+							{
+								"b26c0308-3118-0894-92b1-941493e4e7c6",
+								true,
+							},
+						},
+						gVar = "ACR_TensorNuke4_Hotbar_Manaward",
+						name = "Request Manaward",
+						uuid = "23152d86-e54b-d6c8-9d4a-2405f54cf400",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						localMapIDList = 
+						{
+							1076,
+						},
+						name = "Criterion Savage",
+						uuid = "e26912b2-8c3e-c615-8143-9f0c2115be8f",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						eventArgOptionType = 3,
+						eventArgType = 2,
+						name = "Savage Ring of Might",
+						spellIDList = 
+						{
+							30623,
+							30624,
+							30625,
+						},
+						uuid = "c21a75d8-1775-9d4c-a7ba-f37887a1d10e",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						eventArgOptionType = 2,
+						eventEntityContentID = 11387,
+						name = "Gladiator",
+						uuid = "788e899b-f8ca-f170-8e7c-50801871ba11",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 14,
+						jobIDList = 
+						{
+							25,
+						},
+						name = "Black Mage",
+						uuid = "7d29d011-193f-fbee-8a59-1d3519c85c56",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.alive then return false end\nlocal stack = TensorCore.getBuff(player, 3293)\nreturn stack ~= nil and stack.duration > 0.3 and stack.duration <= 6",
+						name = "Your Thunderous Echo expires soon",
+						uuid = "b26c0308-3118-0894-92b1-941493e4e7c6",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Sildihn criterion/Gladiator",
+			eventType = 3,
+			name = "[Mit] Gladiator Savage - Personal Thunderous Echo Manaward",
+			timeout = 13,
+			uuid = "6dbc6631-afd1-7a58-b1f0-920061e87642",
 			version = 2,
 		},
 	},
@@ -13034,8 +13723,8 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local s=data.sildihnControl\nif not s then return false end\nlocal n=s.wash(eventArgs)\nreturn n~=nil and n%2==1",
-						name = "Caster: washes 1 and 3",
+						conditionLua = "local s=data.sildihnControl\nif not s then return false end\nlocal n=s.wash(eventArgs)\nreturn n == 2 or n == 4",
+						name = "Caster: washes 2 and 4",
 						uuid = "e22e5542-200c-e8a1-8a25-27ac3d80c5f8",
 						version = 3,
 					},
@@ -24765,7 +25454,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "if not SildihnControlConfig or SildihnControlConfig.fileApiVersion~=1 then\n local C=SildihnControlConfig or {reserveLL=true,reserveCD=true,countdownTarget=true,diagnostics=true,silkieNormal=283,silkieSavage=288,gladiator=285}\n C.keys={\"reserveLL\",\"reserveCD\",\"countdownTarget\",\"diagnostics\",\"silkieNormal\",\"silkieSavage\",\"gladiator\"}\n C.path=GetStartupPath()..[[\\LuaMods\\TensorReactions\\Sildihn.AutoSim.settings.tsv]]\n C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\Sildihn.AutoSim.lua]]\n if not SildihnControlConfig and FileExists(C.path) then\n  local saved=FileLoad(C.path)\n  if type(saved)==\"table\" then\n   for _,key in ipairs(C.keys) do\n    local v=saved[key]\n    if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n   end\n  end\n end\n function C.save()\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  local values={}\n  for _,key in ipairs(C.keys) do values[key]=C[key] end\n  FileSave(C.path,values)\n  C.status=\"Saved. Changes apply next combat.\"\n end\n C.fileApiVersion=1\n C.save()\n SildihnControlConfig=C\nend\nlocal C=SildihnControlConfig\n-- Criterion/Savage. Normal movement retains public BLM samples; Savage Silkie uses two local death-free clears.\n-- Movement is sampled repositioning, not a claim that every player must move for the full interval.\n-- Shared public API: unsupported phase types are ignored by compatible AutoSim ACRs.\n-- No FFLogs requests or credentials are stored in this reaction.\nlocal A=TensorCore.API.TensorACR\n-- Shared per-pull state prevents countdown and opening cast from applying twice.\ndata.sildihnAutoSim=data.sildihnAutoSim or {}\nlocal all=data.sildihnAutoSim\nall[4231]=all[4231] or {next=1}\nlocal state=all[4231]\nif state.done then self.used=true;return end\nif not state.setup then\n local p=TensorCore.mGetPlayer()\n A.setAutoSimKillTime(p and p.localmapid==1076 and C.silkieSavage or C.silkieNormal)\n -- No confirmed forced full downtime: boss damage continues through these mechanics.\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,2)\n state.setup=true\nend\nlocal movement={{32.0,33.5},{54.0,58.5},{61.5,63.0},{64.0,70.5},{88.0,92.5},{96.5,97.5},{114.0,117.5},{118.5,122.0},{123.5,124.5},{130.0,131.5},{174.5,175.5},{178.5,179.5},{188.5,189.5},{191.0,192.5},{206.0,212.5},{218.5,221.0},{222.5,224.0},{230.5,236.0}}\n-- Observed personal repositioning union, not universal forced movement.\nlocal p=TensorCore.mGetPlayer()\nif p and p.localmapid==1076 then movement={{62.27,69.17},{93.65,94.71},{112.40,116.53},{118.33,120.53},{121.22,123.12},{136.54,138.85},{139.27,142.40},{155.07,156.21},{180.77,183.29},{203.22,211.13},{232.32,236.03},{256.38,261.93},{262.21,265.43},{276.48,277.51},{278.27,279.56}} end\nwhile state.next<=#movement do\n local w=movement[state.next]\n A.addAutoSimPhase(\"CasterDowntime\",w[1],w[2])\n state.next=state.next+1\nend\n-- User remains at the new position; do not forecast automatic ground-field re-entry.\nstate.done=true\nself.used=true\n",
+						actionLua = "if not SildihnControlConfig or SildihnControlConfig.fileApiVersion~=1 then\n local C=SildihnControlConfig or {reserveLL=true,reserveCD=true,countdownTarget=true,diagnostics=true,silkieNormal=283,silkieSavage=288,gladiator=285}\n C.keys={\"reserveLL\",\"reserveCD\",\"countdownTarget\",\"diagnostics\",\"silkieNormal\",\"silkieSavage\",\"gladiator\"}\n C.path=GetStartupPath()..[[\\LuaMods\\TensorReactions\\Sildihn.AutoSim.settings.tsv]]\n C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\Sildihn.AutoSim.lua]]\n if not SildihnControlConfig and FileExists(C.path) then\n  local saved=FileLoad(C.path)\n  if type(saved)==\"table\" then\n   for _,key in ipairs(C.keys) do\n    local v=saved[key]\n    if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n   end\n  end\n end\n function C.save()\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  local values={}\n  for _,key in ipairs(C.keys) do values[key]=C[key] end\n  FileSave(C.path,values)\n  C.status=\"Saved. Changes apply next combat.\"\n end\n C.fileApiVersion=1\n C.save()\n SildihnControlConfig=C\nend\nlocal C=SildihnControlConfig\n-- Criterion/Savage. Normal movement retains public BLM samples; Savage Silkie uses two local death-free clears.\n-- Movement is sampled repositioning, not a claim that every player must move for the full interval.\n-- Shared public API: unsupported phase types are ignored by compatible AutoSim ACRs.\n-- No FFLogs requests or credentials are stored in this reaction.\nlocal A=TensorCore.API.TensorACR\n-- Shared per-pull state prevents countdown and opening cast from applying twice.\ndata.sildihnAutoSim=data.sildihnAutoSim or {}\nlocal all=data.sildihnAutoSim\nall[4231]=all[4231] or {next=1}\nlocal state=all[4231]\nif state.done then self.used=true;return end\nif not state.setup then\n local p=TensorCore.mGetPlayer()\n A.setAutoSimKillTime(p and p.localmapid==1076 and C.silkieSavage or C.silkieNormal)\n -- No confirmed forced full downtime: boss damage continues through these mechanics.\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,2)\n state.setup=true\nend\nlocal movement={{32.0,33.5},{54.0,58.5},{61.5,63.0},{64.0,70.5},{88.0,92.5},{96.5,97.5},{114.0,117.5},{118.5,122.0},{123.5,124.5},{130.0,131.5},{174.5,175.5},{178.5,179.5},{188.5,189.5},{191.0,192.5},{206.0,212.5},{218.5,221.0},{222.5,224.0},{230.5,236.0}}\n-- Observed personal repositioning union, not universal forced movement.\nlocal p=TensorCore.mGetPlayer()\nif p and p.localmapid==1076 then movement={{53.5,56.75},{62.27,69.17},{93.65,94.71},{112.40,116.53},{118.33,120.53},{121.22,123.12},{136.54,138.85},{139.27,142.40},{155.07,156.21},{180.77,183.29},{203.22,211.13},{232.32,236.03},{256.38,261.93},{262.21,265.43},{276.48,277.51},{278.27,279.56}} end\nwhile state.next<=#movement do\n local w=movement[state.next]\n A.addAutoSimPhase(\"CasterDowntime\",w[1],w[2])\n state.next=state.next+1\nend\n-- User remains at the new position; do not forecast automatic ground-field re-entry.\nstate.done=true\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -24850,7 +25539,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "if not SildihnControlConfig or SildihnControlConfig.fileApiVersion~=1 then\n local C=SildihnControlConfig or {reserveLL=true,reserveCD=true,countdownTarget=true,diagnostics=true,silkieNormal=283,silkieSavage=288,gladiator=285}\n C.keys={\"reserveLL\",\"reserveCD\",\"countdownTarget\",\"diagnostics\",\"silkieNormal\",\"silkieSavage\",\"gladiator\"}\n C.path=GetStartupPath()..[[\\LuaMods\\TensorReactions\\Sildihn.AutoSim.settings.tsv]]\n C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\Sildihn.AutoSim.lua]]\n if not SildihnControlConfig and FileExists(C.path) then\n  local saved=FileLoad(C.path)\n  if type(saved)==\"table\" then\n   for _,key in ipairs(C.keys) do\n    local v=saved[key]\n    if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n   end\n  end\n end\n function C.save()\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  local values={}\n  for _,key in ipairs(C.keys) do values[key]=C[key] end\n  FileSave(C.path,values)\n  C.status=\"Saved. Changes apply next combat.\"\n end\n C.fileApiVersion=1\n C.save()\n SildihnControlConfig=C\nend\nlocal C=SildihnControlConfig\n-- Criterion/Savage. Normal movement retains public BLM samples; Savage Silkie uses two local death-free clears.\n-- Movement is sampled repositioning, not a claim that every player must move for the full interval.\n-- Shared public API: unsupported phase types are ignored by compatible AutoSim ACRs.\n-- No FFLogs requests or credentials are stored in this reaction.\nlocal A=TensorCore.API.TensorACR\n-- Shared per-pull state prevents countdown and opening cast from applying twice.\ndata.sildihnAutoSim=data.sildihnAutoSim or {}\nlocal all=data.sildihnAutoSim\nall[4231]=all[4231] or {next=1}\nlocal state=all[4231]\nif state.done then self.used=true;return end\nif not state.setup then\n local p=TensorCore.mGetPlayer()\n A.setAutoSimKillTime(p and p.localmapid==1076 and C.silkieSavage or C.silkieNormal)\n -- No confirmed forced full downtime: boss damage continues through these mechanics.\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,2)\n state.setup=true\nend\nlocal movement={{32.0,33.5},{54.0,58.5},{61.5,63.0},{64.0,70.5},{88.0,92.5},{96.5,97.5},{114.0,117.5},{118.5,122.0},{123.5,124.5},{130.0,131.5},{174.5,175.5},{178.5,179.5},{188.5,189.5},{191.0,192.5},{206.0,212.5},{218.5,221.0},{222.5,224.0},{230.5,236.0}}\n-- Observed personal repositioning union, not universal forced movement.\nlocal p=TensorCore.mGetPlayer()\nif p and p.localmapid==1076 then movement={{62.27,69.17},{93.65,94.71},{112.40,116.53},{118.33,120.53},{121.22,123.12},{136.54,138.85},{139.27,142.40},{155.07,156.21},{180.77,183.29},{203.22,211.13},{232.32,236.03},{256.38,261.93},{262.21,265.43},{276.48,277.51},{278.27,279.56}} end\nwhile state.next<=#movement do\n local w=movement[state.next]\n A.addAutoSimPhase(\"CasterDowntime\",w[1],w[2])\n state.next=state.next+1\nend\n-- User remains at the new position; do not forecast automatic ground-field re-entry.\nstate.done=true\nself.used=true\n",
+						actionLua = "if not SildihnControlConfig or SildihnControlConfig.fileApiVersion~=1 then\n local C=SildihnControlConfig or {reserveLL=true,reserveCD=true,countdownTarget=true,diagnostics=true,silkieNormal=283,silkieSavage=288,gladiator=285}\n C.keys={\"reserveLL\",\"reserveCD\",\"countdownTarget\",\"diagnostics\",\"silkieNormal\",\"silkieSavage\",\"gladiator\"}\n C.path=GetStartupPath()..[[\\LuaMods\\TensorReactions\\Sildihn.AutoSim.settings.tsv]]\n C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\Sildihn.AutoSim.lua]]\n if not SildihnControlConfig and FileExists(C.path) then\n  local saved=FileLoad(C.path)\n  if type(saved)==\"table\" then\n   for _,key in ipairs(C.keys) do\n    local v=saved[key]\n    if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n   end\n  end\n end\n function C.save()\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  local values={}\n  for _,key in ipairs(C.keys) do values[key]=C[key] end\n  FileSave(C.path,values)\n  C.status=\"Saved. Changes apply next combat.\"\n end\n C.fileApiVersion=1\n C.save()\n SildihnControlConfig=C\nend\nlocal C=SildihnControlConfig\n-- Criterion/Savage. Normal movement retains public BLM samples; Savage Silkie uses two local death-free clears.\n-- Movement is sampled repositioning, not a claim that every player must move for the full interval.\n-- Shared public API: unsupported phase types are ignored by compatible AutoSim ACRs.\n-- No FFLogs requests or credentials are stored in this reaction.\nlocal A=TensorCore.API.TensorACR\n-- Shared per-pull state prevents countdown and opening cast from applying twice.\ndata.sildihnAutoSim=data.sildihnAutoSim or {}\nlocal all=data.sildihnAutoSim\nall[4231]=all[4231] or {next=1}\nlocal state=all[4231]\nif state.done then self.used=true;return end\nif not state.setup then\n local p=TensorCore.mGetPlayer()\n A.setAutoSimKillTime(p and p.localmapid==1076 and C.silkieSavage or C.silkieNormal)\n -- No confirmed forced full downtime: boss damage continues through these mechanics.\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,2)\n state.setup=true\nend\nlocal movement={{32.0,33.5},{54.0,58.5},{61.5,63.0},{64.0,70.5},{88.0,92.5},{96.5,97.5},{114.0,117.5},{118.5,122.0},{123.5,124.5},{130.0,131.5},{174.5,175.5},{178.5,179.5},{188.5,189.5},{191.0,192.5},{206.0,212.5},{218.5,221.0},{222.5,224.0},{230.5,236.0}}\n-- Observed personal repositioning union, not universal forced movement.\nlocal p=TensorCore.mGetPlayer()\nif p and p.localmapid==1076 then movement={{53.5,56.75},{62.27,69.17},{93.65,94.71},{112.40,116.53},{118.33,120.53},{121.22,123.12},{136.54,138.85},{139.27,142.40},{155.07,156.21},{180.77,183.29},{203.22,211.13},{232.32,236.03},{256.38,261.93},{262.21,265.43},{276.48,277.51},{278.27,279.56}} end\nwhile state.next<=#movement do\n local w=movement[state.next]\n A.addAutoSimPhase(\"CasterDowntime\",w[1],w[2])\n state.next=state.next+1\nend\n-- User remains at the new position; do not forecast automatic ground-field re-entry.\nstate.done=true\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -24990,7 +25679,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "if not SildihnControlConfig or SildihnControlConfig.fileApiVersion~=1 then\n local C=SildihnControlConfig or {reserveLL=true,reserveCD=true,countdownTarget=true,diagnostics=true,silkieNormal=283,silkieSavage=288,gladiator=285}\n C.keys={\"reserveLL\",\"reserveCD\",\"countdownTarget\",\"diagnostics\",\"silkieNormal\",\"silkieSavage\",\"gladiator\"}\n C.path=GetStartupPath()..[[\\LuaMods\\TensorReactions\\Sildihn.AutoSim.settings.tsv]]\n C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\Sildihn.AutoSim.lua]]\n if not SildihnControlConfig and FileExists(C.path) then\n  local saved=FileLoad(C.path)\n  if type(saved)==\"table\" then\n   for _,key in ipairs(C.keys) do\n    local v=saved[key]\n    if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n   end\n  end\n end\n function C.save()\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  local values={}\n  for _,key in ipairs(C.keys) do values[key]=C[key] end\n  FileSave(C.path,values)\n  C.status=\"Saved. Changes apply next combat.\"\n end\n C.fileApiVersion=1\n C.save()\n SildihnControlConfig=C\nend\nlocal C=SildihnControlConfig\n-- Criterion/Savage. Normal movement retains public BLM samples; Savage Silkie uses two local death-free clears.\n-- Movement is sampled repositioning, not a claim that every player must move for the full interval.\n-- Shared public API: unsupported phase types are ignored by compatible AutoSim ACRs.\n-- No FFLogs requests or credentials are stored in this reaction.\nlocal A=TensorCore.API.TensorACR\n-- Shared per-pull state prevents countdown and opening cast from applying twice.\ndata.sildihnAutoSim=data.sildihnAutoSim or {}\nlocal all=data.sildihnAutoSim\nall[4232]=all[4232] or {next=1}\nlocal state=all[4232]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(C.gladiator)\n -- No confirmed forced full downtime: boss damage continues through these mechanics.\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,2)\n state.setup=true\nend\nlocal movement={{32.0,36.5},{39.0,41.0},{51.0,54.5},{56.0,59.5},{105.5,109.0},{111.5,117.0},{134.5,136.0},{148.5,150.0},{152.0,155.5},{165.0,167.5},{177.5,179.5},{180.5,184.0},{186.5,188.5},{189.5,193.5},{196.0,197.0},{215.5,223.5},{228.5,230.0}}\nwhile state.next<=#movement do\n local w=movement[state.next]\n A.addAutoSimPhase(\"CasterDowntime\",w[1],w[2])\n state.next=state.next+1\nend\n-- User remains at the new position; do not forecast automatic ground-field re-entry.\nstate.done=true\nself.used=true\n",
+						actionLua = "if not SildihnControlConfig or SildihnControlConfig.fileApiVersion~=1 then\n local C=SildihnControlConfig or {reserveLL=true,reserveCD=true,countdownTarget=true,diagnostics=true,silkieNormal=283,silkieSavage=288,gladiator=285}\n C.keys={\"reserveLL\",\"reserveCD\",\"countdownTarget\",\"diagnostics\",\"silkieNormal\",\"silkieSavage\",\"gladiator\"}\n C.path=GetStartupPath()..[[\\LuaMods\\TensorReactions\\Sildihn.AutoSim.settings.tsv]]\n C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\Sildihn.AutoSim.lua]]\n if not SildihnControlConfig and FileExists(C.path) then\n  local saved=FileLoad(C.path)\n  if type(saved)==\"table\" then\n   for _,key in ipairs(C.keys) do\n    local v=saved[key]\n    if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n   end\n  end\n end\n function C.save()\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  local values={}\n  for _,key in ipairs(C.keys) do values[key]=C[key] end\n  FileSave(C.path,values)\n  C.status=\"Saved. Changes apply next combat.\"\n end\n C.fileApiVersion=1\n C.save()\n SildihnControlConfig=C\nend\nlocal C=SildihnControlConfig\n-- Criterion/Savage. Normal movement retains public BLM samples; Savage Silkie uses two local death-free clears.\n-- Movement is sampled repositioning, not a claim that every player must move for the full interval.\n-- Shared public API: unsupported phase types are ignored by compatible AutoSim ACRs.\n-- No FFLogs requests or credentials are stored in this reaction.\nlocal A=TensorCore.API.TensorACR\n-- Shared per-pull state prevents countdown and opening cast from applying twice.\ndata.sildihnAutoSim=data.sildihnAutoSim or {}\nlocal all=data.sildihnAutoSim\nall[4232]=all[4232] or {next=1}\nlocal state=all[4232]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(C.gladiator)\n -- No confirmed forced full downtime: boss damage continues through these mechanics.\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,2)\n state.setup=true\nend\nlocal movement={{32.0,36.5},{39.0,41.0},{51.0,54.5},{56.0,59.5},{105.5,109.0},{111.5,117.0},{134.5,136.0},{148.5,150.0},{152.0,155.5},{165.0,167.5},{177.5,179.5},{180.5,184.0},{186.5,188.5},{189.5,193.5},{196.0,197.0},{215.5,223.5},{228.5,230.0}}\nlocal player = TensorCore.mGetPlayer()\nif player and player.localmapid == 1076 then\n -- West fake melee: preposition for the first ring, then cross back in\n -- between the observed hits at 109.984 and 112.015.\n -- Hold west for the solo stack; no additional caster movement forecast.\n movement[6] = {110.0, 112.5}\n table.remove(movement, 5) -- Savage move-out is added on the actual Ring cast.\nend\nwhile state.next<=#movement do\n local w=movement[state.next]\n A.addAutoSimPhase(\"CasterDowntime\",w[1],w[2])\n state.next=state.next+1\nend\n-- User remains at the new position; do not forecast automatic ground-field re-entry.\nstate.done=true\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -25075,7 +25764,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "if not SildihnControlConfig or SildihnControlConfig.fileApiVersion~=1 then\n local C=SildihnControlConfig or {reserveLL=true,reserveCD=true,countdownTarget=true,diagnostics=true,silkieNormal=283,silkieSavage=288,gladiator=285}\n C.keys={\"reserveLL\",\"reserveCD\",\"countdownTarget\",\"diagnostics\",\"silkieNormal\",\"silkieSavage\",\"gladiator\"}\n C.path=GetStartupPath()..[[\\LuaMods\\TensorReactions\\Sildihn.AutoSim.settings.tsv]]\n C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\Sildihn.AutoSim.lua]]\n if not SildihnControlConfig and FileExists(C.path) then\n  local saved=FileLoad(C.path)\n  if type(saved)==\"table\" then\n   for _,key in ipairs(C.keys) do\n    local v=saved[key]\n    if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n   end\n  end\n end\n function C.save()\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  local values={}\n  for _,key in ipairs(C.keys) do values[key]=C[key] end\n  FileSave(C.path,values)\n  C.status=\"Saved. Changes apply next combat.\"\n end\n C.fileApiVersion=1\n C.save()\n SildihnControlConfig=C\nend\nlocal C=SildihnControlConfig\n-- Criterion/Savage. Normal movement retains public BLM samples; Savage Silkie uses two local death-free clears.\n-- Movement is sampled repositioning, not a claim that every player must move for the full interval.\n-- Shared public API: unsupported phase types are ignored by compatible AutoSim ACRs.\n-- No FFLogs requests or credentials are stored in this reaction.\nlocal A=TensorCore.API.TensorACR\n-- Shared per-pull state prevents countdown and opening cast from applying twice.\ndata.sildihnAutoSim=data.sildihnAutoSim or {}\nlocal all=data.sildihnAutoSim\nall[4232]=all[4232] or {next=1}\nlocal state=all[4232]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(C.gladiator)\n -- No confirmed forced full downtime: boss damage continues through these mechanics.\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,2)\n state.setup=true\nend\nlocal movement={{32.0,36.5},{39.0,41.0},{51.0,54.5},{56.0,59.5},{105.5,109.0},{111.5,117.0},{134.5,136.0},{148.5,150.0},{152.0,155.5},{165.0,167.5},{177.5,179.5},{180.5,184.0},{186.5,188.5},{189.5,193.5},{196.0,197.0},{215.5,223.5},{228.5,230.0}}\nwhile state.next<=#movement do\n local w=movement[state.next]\n A.addAutoSimPhase(\"CasterDowntime\",w[1],w[2])\n state.next=state.next+1\nend\n-- User remains at the new position; do not forecast automatic ground-field re-entry.\nstate.done=true\nself.used=true\n",
+						actionLua = "if not SildihnControlConfig or SildihnControlConfig.fileApiVersion~=1 then\n local C=SildihnControlConfig or {reserveLL=true,reserveCD=true,countdownTarget=true,diagnostics=true,silkieNormal=283,silkieSavage=288,gladiator=285}\n C.keys={\"reserveLL\",\"reserveCD\",\"countdownTarget\",\"diagnostics\",\"silkieNormal\",\"silkieSavage\",\"gladiator\"}\n C.path=GetStartupPath()..[[\\LuaMods\\TensorReactions\\Sildihn.AutoSim.settings.tsv]]\n C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\Sildihn.AutoSim.lua]]\n if not SildihnControlConfig and FileExists(C.path) then\n  local saved=FileLoad(C.path)\n  if type(saved)==\"table\" then\n   for _,key in ipairs(C.keys) do\n    local v=saved[key]\n    if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n   end\n  end\n end\n function C.save()\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  local values={}\n  for _,key in ipairs(C.keys) do values[key]=C[key] end\n  FileSave(C.path,values)\n  C.status=\"Saved. Changes apply next combat.\"\n end\n C.fileApiVersion=1\n C.save()\n SildihnControlConfig=C\nend\nlocal C=SildihnControlConfig\n-- Criterion/Savage. Normal movement retains public BLM samples; Savage Silkie uses two local death-free clears.\n-- Movement is sampled repositioning, not a claim that every player must move for the full interval.\n-- Shared public API: unsupported phase types are ignored by compatible AutoSim ACRs.\n-- No FFLogs requests or credentials are stored in this reaction.\nlocal A=TensorCore.API.TensorACR\n-- Shared per-pull state prevents countdown and opening cast from applying twice.\ndata.sildihnAutoSim=data.sildihnAutoSim or {}\nlocal all=data.sildihnAutoSim\nall[4232]=all[4232] or {next=1}\nlocal state=all[4232]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(C.gladiator)\n -- No confirmed forced full downtime: boss damage continues through these mechanics.\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,2)\n state.setup=true\nend\nlocal movement={{32.0,36.5},{39.0,41.0},{51.0,54.5},{56.0,59.5},{105.5,109.0},{111.5,117.0},{134.5,136.0},{148.5,150.0},{152.0,155.5},{165.0,167.5},{177.5,179.5},{180.5,184.0},{186.5,188.5},{189.5,193.5},{196.0,197.0},{215.5,223.5},{228.5,230.0}}\nlocal player = TensorCore.mGetPlayer()\nif player and player.localmapid == 1076 then\n -- West fake melee: preposition for the first ring, then cross back in\n -- between the observed hits at 109.984 and 112.015.\n -- Hold west for the solo stack; no additional caster movement forecast.\n movement[6] = {110.0, 112.5}\n table.remove(movement, 5) -- Savage move-out is added on the actual Ring cast.\nend\nwhile state.next<=#movement do\n local w=movement[state.next]\n A.addAutoSimPhase(\"CasterDowntime\",w[1],w[2])\n state.next=state.next+1\nend\n-- User remains at the new position; do not forecast automatic ground-field re-entry.\nstate.done=true\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -25407,6 +26096,215 @@ local tbl =
 	{
 		data = 
 		{
+			displayPath = "AutoSim",
+			name = "Potion",
+			uuid = "844e284c-20bb-2d5c-b49d-4b9489e3d426",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"b690e68c-23ed-4aef-a58a-5486cae79107",
+								true,
+							},
+						},
+						gVar = "ACR_TensorNuke4_Potion",
+						uuid = "962b53b4-b64f-ae84-9b56-f8139dc1caee",
+						version = 2.1,
+					},
+				},
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "data.sildihnPotionMode = \"boss\"\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"b690e68c-23ed-4aef-a58a-5486cae79107",
+								true,
+							},
+						},
+						name = "Remember potion mode",
+						uuid = "489cffa3-01c5-8ec1-bc0d-6fdd813c9bfc",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nif not p then return false end\nlocal inDuty = p.localmapid == 1075 or p.localmapid == 1076\nif not inDuty or data.sildihnPotionMode == \"boss\" then return false end\nlocal target = TensorCore.mGetTarget()\nlocal boss = target and target.alive and target.attackable and\n    (target.contentid == 11369 or target.contentid == 11387 or target.contentid == 11393)\nif not boss and p.incombat then\n    for _, id in ipairs({11369,11387,11393}) do\n        for _, entity in pairs(TensorCore.getEntityGroupList(\"ContentID\", id) or {}) do\n            if entity.alive and entity.incombat then boss = true; break end\n        end\n        if boss then break end\n    end\nend\nreturn boss == true",
+						dequeueIfLuaFalse = true,
+						name = "Enable potion for bosses",
+						uuid = "b690e68c-23ed-4aef-a58a-5486cae79107",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "AutoSim/Potion",
+			name = "[Potion] Enable potion for bosses",
+			throttleTime = 250,
+			uuid = "ca0b5309-0885-4e4c-9ff0-9b5e0fa7da00",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"fc90f9e4-8393-bb02-a3e3-465920bf708e",
+								true,
+							},
+						},
+						gVar = "ACR_TensorNuke4_Potion",
+						gVarValue = 2,
+						uuid = "febf7857-a8e1-a957-95f5-9a49128bfa04",
+						version = 2.1,
+					},
+				},
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "data.sildihnPotionMode = \"trash\"\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"fc90f9e4-8393-bb02-a3e3-465920bf708e",
+								true,
+							},
+						},
+						name = "Remember potion mode",
+						uuid = "6953a12e-c639-ac5a-8057-bff22d2b2762",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nif not p then return false end\nlocal inDuty = p.localmapid == 1075 or p.localmapid == 1076\nif not inDuty or data.sildihnPotionMode == \"trash\" then return false end\nlocal target = TensorCore.mGetTarget()\nlocal boss = target and target.alive and target.attackable and\n    (target.contentid == 11369 or target.contentid == 11387 or target.contentid == 11393)\nif not boss and p.incombat then\n    for _, id in ipairs({11369,11387,11393}) do\n        for _, entity in pairs(TensorCore.getEntityGroupList(\"ContentID\", id) or {}) do\n            if entity.alive and entity.incombat then boss = true; break end\n        end\n        if boss then break end\n    end\nend\nreturn not boss",
+						dequeueIfLuaFalse = true,
+						name = "Disable potion on trash",
+						uuid = "fc90f9e4-8393-bb02-a3e3-465920bf708e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "AutoSim/Potion",
+			name = "[Potion] Disable potion on trash",
+			throttleTime = 250,
+			uuid = "642f70a9-0283-325b-b9a6-31e9ea3c209c",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"3efc55d7-6093-7556-b563-de31f59fe168",
+								true,
+							},
+						},
+						gVar = "ACR_TensorNuke4_Potion",
+						uuid = "cd9a940d-12a9-9eb8-85d1-4f9714a1b1c0",
+						version = 2.1,
+					},
+				},
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "data.sildihnPotionMode = nil\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"3efc55d7-6093-7556-b563-de31f59fe168",
+								true,
+							},
+						},
+						name = "Remember potion mode",
+						uuid = "10292ba5-01c9-274d-bb14-cfd995a80150",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nif not p then return false end\nlocal inDuty = p.localmapid == 1075 or p.localmapid == 1076\nreturn not inDuty and data.sildihnPotionMode == \"trash\"",
+						dequeueIfLuaFalse = true,
+						name = "Restore potion when leaving duty",
+						uuid = "3efc55d7-6093-7556-b563-de31f59fe168",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "AutoSim/Potion",
+			name = "[Potion] Restore potion when leaving duty",
+			throttleTime = 250,
+			uuid = "ddd4ae56-d2ce-3eb6-bf92-65b0ca5d9ab3",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "",
 			name = "General",
 			uuid = "f813773b-8596-5e14-8a97-028b7b2994b9",
@@ -25483,7 +26381,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "if not SildihnControlConfig or SildihnControlConfig.fileApiVersion~=1 then\n local C=SildihnControlConfig or {reserveLL=true,reserveCD=true,countdownTarget=true,diagnostics=true,silkieNormal=283,silkieSavage=288,gladiator=285}\n C.keys={\"reserveLL\",\"reserveCD\",\"countdownTarget\",\"diagnostics\",\"silkieNormal\",\"silkieSavage\",\"gladiator\"}\n C.path=GetStartupPath()..[[\\LuaMods\\TensorReactions\\Sildihn.AutoSim.settings.tsv]]\n C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\Sildihn.AutoSim.lua]]\n if not SildihnControlConfig and FileExists(C.path) then\n  local saved=FileLoad(C.path)\n  if type(saved)==\"table\" then\n   for _,key in ipairs(C.keys) do\n    local v=saved[key]\n    if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n   end\n  end\n end\n function C.save()\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  local values={}\n  for _,key in ipairs(C.keys) do values[key]=C[key] end\n  FileSave(C.path,values)\n  C.status=\"Saved. Changes apply next combat.\"\n end\n C.fileApiVersion=1\n C.save()\n SildihnControlConfig=C\nend\nlocal C=SildihnControlConfig\nlocal S=data.sildihnControl\nif not S then\n S={owned={},groups={},washCount=0};data.sildihnControl=S\n S.p1groups={[11514]=1,[11510]=2,[11511]=3,[11512]=3,[11513]=4,[11481]=4}\n S.p2ids={[11515]=true,[11506]=true}\n function S.log(message)\n  if not C.diagnostics then return end\n  local line=\"[Sildihn AutoSim] \"..message;d(line)\n end\n function S.restore()\n  for var,old in pairs(S.owned) do if _G[var]==false then _G[var]=old end;S.owned[var]=nil end\n  if S.held then S.log(\"final trash reserve released\");S.held=nil end\n end\n function S.wash(args)\n  local e=TensorCore.mGetEntity(args.entityID)\n  if not e or e.castinginfo.channelingid~=args.spellID then return end\n  if args.spellID==30557 or args.spellID==30592 then\n   local ok,t=pcall(TensorCore.API.TensorACR.getAutoSimTime)\n   if ok and type(t)==\"number\" and t>=0 and t<30 then return 0 end\n   return\n  end\n  local start=Now()-e.castinginfo.channeltime*1000\n  if S.washBoss~=e.id then S.washBoss=e.id;S.washCount=0;S.washStart=nil end\n  if not S.washStart or math.abs(start-S.washStart)>1000 then\n   S.washStart=start;S.washCount=S.washCount+1\n   S.log(\"Total Wash=\"..S.washCount..\" assigned=\"..(S.washCount%2==1 and \"caster Addle\" or \"physical ranged\"))\n  end\n  return S.washCount\n end\n function S.tick()\n  local p=TensorCore.mGetPlayer();local target=TensorCore.mGetTarget()\n  if not p then S.restore();return end\n  if not target or not target.hp or target.hp.current<=0 or not target.attackable then\n   if not ((p.job==25 and C.reserveLL) or (p.job~=25 and C.reserveCD)) then S.restore() end\n   return\n  end\n  local stage=S.p1groups[target.contentid] and 1 or (S.p2ids[target.contentid] and 2 or 0)\n  if stage==0 then S.restore();return end\n  for k in pairs(S.groups) do S.groups[k]=nil end\n  local count=0\n  local enemies=TensorCore.getEntityGroupList(\"Enemy\")\n  for _,e in pairs(enemies) do\n   if e.targetable and e.attackable and e.hp and e.hp.current>0 then\n    if stage==1 then local g=S.p1groups[e.contentid];if g and not S.groups[g] then S.groups[g]=true;count=count+1 end\n    elseif S.p2ids[e.contentid] then count=count+1 end\n   end\n  end\n  local reserve = (stage==1 and count==1) or (stage==2 and count>=1 and count<=2)\n  if not reserve then S.restore();return end\n  local hold=(p.job==25 and C.reserveLL) or (p.job~=25 and C.reserveCD)\n  if not hold then S.restore();return end\nlocal function shouldHoldApex(player)\n if player.job ~= 23 or not player.incombat or not player.pos then return false end\n local count, healthy = 0, false\n TensorCore.forEachEntity(\"alive,targetable,attackable\", function(id)\n  local enemy = TensorCore.mGetEntity(id)\n  if enemy and enemy.incombat and enemy.pos then\n   local dx, dz = enemy.pos.x - player.pos.x, enemy.pos.z - player.pos.z\n   if dx * dx + dz * dz <= 30 * 30 and math.abs(enemy.pos.y - player.pos.y) <= 8 then\n    count = count + 1\n    if not enemy.hp or not enemy.hp.percent or enemy.hp.percent > 8 then healthy = true end\n   end\n  end\n end)\n return count >= 1 and count <= 2 and not healthy\nend\n\nlocal apex = \"ACR_TensorRequiem4_Apex\"\nif (true) and (_G[apex] == true or S.owned[apex]) and shouldHoldApex(p) then\n S.owned[apex] = true\n _G[apex] = false\nelseif S.owned[apex] then\n if _G[apex] == false then _G[apex] = true end\n S.owned[apex] = nil\nend\n\n  local suffix=p.job==25 and \"_LeyLines$\" or \"_CD$\"\n  for _,option in pairs(TensorCore.API.TensorACR.getQuickToggles() or {}) do\n   local var=option.var\n   if var and var:match(suffix) and type(_G[var])==\"boolean\" then\n    if _G[var] and S.owned[var]==nil then S.owned[var]=true end\n    if S.owned[var]~=nil then _G[var]=false end\n   end\n  end\n  if not S.held then S.held=true;S.log(\"reserve trash before boss \"..stage..\"; holding \"..(p.job==25 and \"new Ley Lines uses\" or \"offensive CD toggle\")) end\n end\nend\nS.tick()\nself.used=true\n",
+						actionLua = "if not SildihnControlConfig or SildihnControlConfig.fileApiVersion~=1 then\n local C=SildihnControlConfig or {reserveLL=true,reserveCD=true,countdownTarget=true,diagnostics=true,silkieNormal=283,silkieSavage=288,gladiator=285}\n C.keys={\"reserveLL\",\"reserveCD\",\"countdownTarget\",\"diagnostics\",\"silkieNormal\",\"silkieSavage\",\"gladiator\"}\n C.path=GetStartupPath()..[[\\LuaMods\\TensorReactions\\Sildihn.AutoSim.settings.tsv]]\n C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\Sildihn.AutoSim.lua]]\n if not SildihnControlConfig and FileExists(C.path) then\n  local saved=FileLoad(C.path)\n  if type(saved)==\"table\" then\n   for _,key in ipairs(C.keys) do\n    local v=saved[key]\n    if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n   end\n  end\n end\n function C.save()\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  local values={}\n  for _,key in ipairs(C.keys) do values[key]=C[key] end\n  FileSave(C.path,values)\n  C.status=\"Saved. Changes apply next combat.\"\n end\n C.fileApiVersion=1\n C.save()\n SildihnControlConfig=C\nend\nlocal C=SildihnControlConfig\nlocal S=data.sildihnControl\nif not S then\n S={owned={},groups={},washCount=0};data.sildihnControl=S\n S.p1groups={[11514]=1,[11510]=2,[11511]=3,[11512]=3,[11513]=4,[11481]=4}\n S.p2ids={[11515]=true,[11506]=true}\n function S.log(message)\n  if not C.diagnostics then return end\n  local line=\"[Sildihn AutoSim] \"..message;d(line)\n end\n function S.restore()\n  for var,old in pairs(S.owned) do if _G[var]==false then _G[var]=old end;S.owned[var]=nil end\n  if S.held then S.log(\"final trash reserve released\");S.held=nil end\n end\n function S.wash(args)\n  local e=TensorCore.mGetEntity(args.entityID)\n  if not e or e.castinginfo.channelingid~=args.spellID then return end\n  if args.spellID==30557 or args.spellID==30592 then\n   local ok,t=pcall(TensorCore.API.TensorACR.getAutoSimTime)\n   if ok and type(t)==\"number\" and t>=0 and t<30 then return 0 end\n   return\n  end\n  local start=Now()-e.castinginfo.channeltime*1000\n  if S.washBoss~=e.id then S.washBoss=e.id;S.washCount=0;S.washStart=nil end\n  if not S.washStart or math.abs(start-S.washStart)>1000 then\n   S.washStart=start;S.washCount=S.washCount+1\n   S.log(\"Total Wash=\"..S.washCount..\" assigned=\"..((S.washCount==2 or S.washCount==4) and \"caster Addle window\" or \"no caster Addle\"))\n  end\n  return S.washCount\n end\n function S.tick()\n  local p=TensorCore.mGetPlayer();local target=TensorCore.mGetTarget()\n  if not p then S.restore();return end\n  if not target or not target.hp or target.hp.current<=0 or not target.attackable then\n   if not ((p.job==25 and C.reserveLL) or (p.job~=25 and C.reserveCD)) then S.restore() end\n   return\n  end\n  local stage=S.p1groups[target.contentid] and 1 or (S.p2ids[target.contentid] and 2 or 0)\n  if stage==0 then S.restore();return end\n  for k in pairs(S.groups) do S.groups[k]=nil end\n  local count=0\n  local enemies=TensorCore.getEntityGroupList(\"Enemy\")\n  for _,e in pairs(enemies) do\n   if e.targetable and e.attackable and e.hp and e.hp.current>0 then\n    if stage==1 then local g=S.p1groups[e.contentid];if g and not S.groups[g] then S.groups[g]=true;count=count+1 end\n    elseif S.p2ids[e.contentid] then count=count+1 end\n   end\n  end\n  local reserve = (stage==1 and count==1) or (stage==2 and count>=1 and count<=2)\n  if not reserve then S.restore();return end\n  local hold=(p.job==25 and C.reserveLL) or (p.job~=25 and C.reserveCD)\n  if not hold then S.restore();return end\nlocal function shouldHoldApex(player)\n if player.job ~= 23 or not player.incombat or not player.pos then return false end\n local count, healthy = 0, false\n TensorCore.forEachEntity(\"alive,targetable,attackable\", function(id)\n  local enemy = TensorCore.mGetEntity(id)\n  if enemy and enemy.incombat and enemy.pos then\n   local dx, dz = enemy.pos.x - player.pos.x, enemy.pos.z - player.pos.z\n   if dx * dx + dz * dz <= 30 * 30 and math.abs(enemy.pos.y - player.pos.y) <= 8 then\n    count = count + 1\n    if not enemy.hp or not enemy.hp.percent or enemy.hp.percent > 8 then healthy = true end\n   end\n  end\n end)\n return count >= 1 and count <= 2 and not healthy\nend\n\nlocal apex = \"ACR_TensorRequiem4_Apex\"\nif (true) and (_G[apex] == true or S.owned[apex]) and shouldHoldApex(p) then\n S.owned[apex] = true\n _G[apex] = false\nelseif S.owned[apex] then\n if _G[apex] == false then _G[apex] = true end\n S.owned[apex] = nil\nend\n\n  local suffix=p.job==25 and \"_LeyLines$\" or \"_CD$\"\n  for _,option in pairs(TensorCore.API.TensorACR.getQuickToggles() or {}) do\n   local var=option.var\n   if var and var:match(suffix) and type(_G[var])==\"boolean\" then\n    if _G[var] and S.owned[var]==nil then S.owned[var]=true end\n    if S.owned[var]~=nil then _G[var]=false end\n   end\n  end\n  if not S.held then S.held=true;S.log(\"reserve trash before boss \"..stage..\"; holding \"..(p.job==25 and \"new Ley Lines uses\" or \"offensive CD toggle\")) end\n end\nend\nS.tick()\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -25536,7 +26434,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "if not SildihnControlConfig or SildihnControlConfig.fileApiVersion~=1 then\n local C=SildihnControlConfig or {reserveLL=true,reserveCD=true,countdownTarget=true,diagnostics=true,silkieNormal=283,silkieSavage=288,gladiator=285}\n C.keys={\"reserveLL\",\"reserveCD\",\"countdownTarget\",\"diagnostics\",\"silkieNormal\",\"silkieSavage\",\"gladiator\"}\n C.path=GetStartupPath()..[[\\LuaMods\\TensorReactions\\Sildihn.AutoSim.settings.tsv]]\n C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\Sildihn.AutoSim.lua]]\n if not SildihnControlConfig and FileExists(C.path) then\n  local saved=FileLoad(C.path)\n  if type(saved)==\"table\" then\n   for _,key in ipairs(C.keys) do\n    local v=saved[key]\n    if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n   end\n  end\n end\n function C.save()\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  local values={}\n  for _,key in ipairs(C.keys) do values[key]=C[key] end\n  FileSave(C.path,values)\n  C.status=\"Saved. Changes apply next combat.\"\n end\n C.fileApiVersion=1\n C.save()\n SildihnControlConfig=C\nend\nlocal C=SildihnControlConfig\nlocal p=TensorCore.mGetPlayer()\nif p and p.incombat then self.used=true;return end\nlocal visible=GUI:Begin(\"Sil'dihn - AutoSim settings\")\nif visible then\n local v,changed\n v,changed=GUI:Checkbox(\"Reserve Ley Lines on final trash\",C.reserveLL);if changed then C.reserveLL=v;C.save() end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Stops new Ley Lines uses on the final trash group before Silkie and the last two Armor/Dullahan enemies before Gladiator. Existing Ley Lines continue. Preserves available charges; cannot create one already spent. No charge-count API is assumed.\") end\n v,changed=GUI:Checkbox(\"Other jobs: reserve offensive CDs on final trash\",C.reserveCD);if changed then C.reserveCD=v;C.save() end\n v,changed=GUI:Checkbox(\"Countdown boss targeting (Start Combat off)\",C.countdownTarget);if changed then C.countdownTarget=v;C.save() end\n v,changed=GUI:Checkbox(\"Write diagnostics\",C.diagnostics);if changed then C.diagnostics=v;C.save() end\n v,changed=GUI:SliderInt(\"Silkie Criterion kill estimate (s)\",C.silkieNormal,180,450);if changed then C.silkieNormal=v;C.save() end\n v,changed=GUI:SliderInt(\"Silkie Savage kill estimate (s)\",C.silkieSavage,180,450);if changed then C.silkieSavage=v;C.save() end\n v,changed=GUI:SliderInt(\"Gladiator provisional kill estimate (s)\",C.gladiator,180,450);if changed then C.gladiator=v;C.save() end\n GUI:Text(\"Opening cones + Total Wash 2: physical ranged.\")\n GUI:Text(\"Total Wash 1 + 3: caster Addle (about 92s / 276s).\")\nend\nGUI:End()\nself.used=true",
+						actionLua = "if not SildihnControlConfig or SildihnControlConfig.fileApiVersion~=1 then\n local C=SildihnControlConfig or {reserveLL=true,reserveCD=true,countdownTarget=true,diagnostics=true,silkieNormal=283,silkieSavage=288,gladiator=285}\n C.keys={\"reserveLL\",\"reserveCD\",\"countdownTarget\",\"diagnostics\",\"silkieNormal\",\"silkieSavage\",\"gladiator\"}\n C.path=GetStartupPath()..[[\\LuaMods\\TensorReactions\\Sildihn.AutoSim.settings.tsv]]\n C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\Sildihn.AutoSim.lua]]\n if not SildihnControlConfig and FileExists(C.path) then\n  local saved=FileLoad(C.path)\n  if type(saved)==\"table\" then\n   for _,key in ipairs(C.keys) do\n    local v=saved[key]\n    if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n   end\n  end\n end\n function C.save()\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  local values={}\n  for _,key in ipairs(C.keys) do values[key]=C[key] end\n  FileSave(C.path,values)\n  C.status=\"Saved. Changes apply next combat.\"\n end\n C.fileApiVersion=1\n C.save()\n SildihnControlConfig=C\nend\nlocal C=SildihnControlConfig\nlocal p=TensorCore.mGetPlayer()\nif p and p.incombat then self.used=true;return end\nlocal visible=GUI:Begin(\"Sil'dihn - AutoSim settings\")\nif visible then\n local v,changed\n v,changed=GUI:Checkbox(\"Reserve Ley Lines on final trash\",C.reserveLL);if changed then C.reserveLL=v;C.save() end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Stops new Ley Lines uses on the final trash group before Silkie and the last two Armor/Dullahan enemies before Gladiator. Existing Ley Lines continue. Preserves available charges; cannot create one already spent. No charge-count API is assumed.\") end\n v,changed=GUI:Checkbox(\"Other jobs: reserve offensive CDs on final trash\",C.reserveCD);if changed then C.reserveCD=v;C.save() end\n v,changed=GUI:Checkbox(\"Countdown boss targeting (Start Combat off)\",C.countdownTarget);if changed then C.countdownTarget=v;C.save() end\n v,changed=GUI:Checkbox(\"Write diagnostics\",C.diagnostics);if changed then C.diagnostics=v;C.save() end\n v,changed=GUI:SliderInt(\"Silkie Criterion kill estimate (s)\",C.silkieNormal,180,450);if changed then C.silkieNormal=v;C.save() end\n v,changed=GUI:SliderInt(\"Silkie Savage kill estimate (s)\",C.silkieSavage,180,450);if changed then C.silkieSavage=v;C.save() end\n v,changed=GUI:SliderInt(\"Gladiator provisional kill estimate (s)\",C.gladiator,180,450);if changed then C.gladiator=v;C.save() end\nlocal roleFile = GetLuaModsPath() .. [[TensorReactions\\Settings\\Sildihn.GladiatorRole.lua]]\nif _G.SildihnGladiatorTetherRole == nil then\n local saved = FileExists(roleFile) and FileLoad(roleFile)\n local role = type(saved) == \"table\" and saved.role\n _G.SildihnGladiatorTetherRole = (role == 2 or role == 3) and role or 1\nend\n local role = GUI:Combo(\"Gladiator tether role\", _G.SildihnGladiatorTetherRole,\n  {\"Auto (job)\", \"Tank / melee - North\", \"Healer / ranged - South\"})\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"Changes the Gladiator Monument tether side. Choose Tank / melee if playing fake melee.\")\n end\n if (role == 1 or role == 2 or role == 3) and role ~= _G.SildihnGladiatorTetherRole then\n  _G.SildihnGladiatorTetherRole = role\n  local folder = GetLuaModsPath() .. [[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  FileSave(roleFile, {role=role})\n end\n GUI:Text(\"Opening cones + Total Wash 2: physical ranged.\")\n GUI:Text(\"Total Wash 2 + 4: caster Addle.\")\nend\nGUI:End()\nself.used=true",
 						conditions = 
 						{
 							
@@ -25926,6 +26824,104 @@ local tbl =
 			name = "[AutoSim] Reserve cleanup - map",
 			timeout = 1,
 			uuid = "e4629fd2-d8a2-fb64-9d52-bca920c1e4fb",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local state = data.sildihnAutoSim[4232]\nlocal p = TensorCore.mGetPlayer()\nlocal boss = TensorCore.mGetEntity(eventArgs.entityID)\nif state.firstRingChecked or not p or not p.pos or not boss or not boss.pos then\n    self.used = true\n    return\nend\nstate.firstRingChecked = true\nlocal radius = (eventArgs.spellID - 30623) * 5 + 8\nlocal distance = TensorCore.getDistance2d(p.pos, boss.pos)\nlocal needed = radius + 0.75 - distance\nif needed > 0 then\n    local api = TensorCore.API.TensorACR\n    local now = api.getAutoSimTime()\n    local start = now + 0.75\n    local finish = math.min(start + math.max(0.5, needed / 5 + 0.25), now + eventArgs.channelTimeMax - 0.45)\n    if finish > start then api.addAutoSimPhase(\"CasterDowntime\", start, finish) end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"1b796738-c3e9-c8c0-83de-c101ad1b5181",
+								true,
+							},
+						},
+						name = "Forecast move only if inside ring",
+						uuid = "26f710b0-c074-3ef7-b974-8b8c30341f8d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e = eventArgs\nif e.entityContentID ~= 11387 or (e.spellID ~= 30623 and e.spellID ~= 30624 and e.spellID ~= 30625) then return false end\nlocal p = TensorCore.mGetPlayer()\nif not p or p.localmapid ~= 1076 or not p.alive or not p.incombat then return false end\nlocal state = data.sildihnAutoSim and data.sildihnAutoSim[4232]\nif not state or not state.done or state.firstRingChecked then return false end\nlocal now = TensorCore.API.TensorACR.getAutoSimTime()\nreturn type(now) == \"number\" and now >= 94 and now <= 106",
+						dequeueIfLuaFalse = true,
+						name = "First Savage Ring and active forecast",
+						uuid = "1b796738-c3e9-c8c0-83de-c101ad1b5181",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "AutoSim / encounter settings",
+			eventType = 3,
+			name = "[AutoSim] Gladiator Savage - Ring move out by radius",
+			timeout = 1,
+			uuid = "243eba25-49e3-e56f-8351-021b685633b3",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e = eventArgs\nlocal player = TensorCore.mGetPlayer()\nlocal api = TensorCore.API.TensorACR\nlocal now = api.getAutoSimTime()\nlocal remaining = (e.startTime - Now()) / 1000 + e.duration\nif not player or not player.pos or type(now) ~= \"number\" or now <= 0 or remaining <= 0.6 then\n    self.used = true\n    return\nend\nlocal start, finish\nif e.aoeID == 31107 then\n    -- Spread during the first part of the cast, then resume casting.\n    start, finish = now + 0.25, now + math.min(1.6, remaining - 0.35)\nelse\n    local origin = {x=e.x,y=player.pos.y,z=e.z}\n    local distance = TensorCore.getDistance2d(origin, player.pos)\n    local angle = TensorCore.getHeadingToTarget(origin, player.pos)\n    if distance <= e.aoeLength and (distance < 0.1 or math.cos(angle-e.heading) >= math.cos(math.pi/4)) then\n        start, finish = now + 0.15, now + math.min(1.5, remaining - 0.2)\n    end\nend\nif start and finish > start then\n    api.addAutoSimPhase(\"CasterDowntime\", start, finish)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"3a83eaaa-b118-4b34-8c6d-429ce021ec6d",
+								true,
+							},
+						},
+						name = "Forecast short Armor movement",
+						uuid = "fda9ffce-9830-bf3d-a78b-3deeb1a8c009",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e = eventArgs\nif e.contentID ~= 11515 or (e.aoeID ~= 31107 and e.aoeID ~= 31106) then return false end\nlocal p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 1076 and p.job == 25 and p.alive == true and p.incombat == true",
+						dequeueIfLuaFalse = true,
+						name = "Savage Armor cast on BLM",
+						uuid = "3a83eaaa-b118-4b34-8c6d-429ce021ec6d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "AutoSim / encounter settings",
+			eventType = 18,
+			name = "[AutoSim] Savage Armor - Spread and personal cone movement",
+			timeout = 1,
+			uuid = "a05e88e7-9d5b-85f0-aea4-169e648b3f63",
 			version = 2,
 		},
 	}, 
