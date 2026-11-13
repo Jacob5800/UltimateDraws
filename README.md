@@ -38,6 +38,10 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### TEA: LPDU Draws
 
+- Fixed both Final Word Motion/Stillness checks and the shared second Fate Alpha reveal. Motion jumps each frame; Stillness stops movement and casting, then resumes after its check. (13-11-2026)
+
+- Added Water vulnerability warnings, five-yalm mine danger circles hidden for OT, and faint previews of other players’ Wormhole slash cones and charge lanes. LPDU assignments and destinations are preserved. (13-11-2026)
+
 - Second Water points to B. Role guidance uses the configured Party Roster, and doll target return triggers at 24.9% HP. (08-11-2026)
 
 - Opening Optical Sight shows clear green circles and countdowns on both stack targets. The callout names the west/east split and the countdowns show each side once the targets separate. (08-11-2026)
@@ -53,10 +57,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - R1 gets an early east-side bait call and green marker for P2 Super Jump. (08-11-2026)
 
 - Third Nisi pass guides DPS to the live Verdict match and clears the arrow after the transfer. (08-11-2026)
-
-- LPDU Settings lets you choose progressive exaflare circles or subtractive safe zones for both Almighty Judgment sets. Exaflares preview up to three circles per lane and brighten the next wave as impacts resolve. (08-11-2026)
-
-- Fate Alpha countdown labels are optional in LPDU Settings and off by default. (07-11-2026)
 
 ### TEA: LPDU mits
 

@@ -3524,7 +3524,7 @@ local tbl =
 				{
 				},
 				displayPath = "P2 - Brute Justice + Cruise Chaser",
-				execute = "local player = TensorCore.mGetPlayer()\nlocal party = TensorCore.getEntityGroupList(\"Party\") or {}\nlocal water\nfor _, member in pairs(party) do\n  if member and TensorCore.hasBuff(member, 2142) then water = member break end\nend\nif not player or not water then self.used = true return end\n\nlocal _, _, _, _, outlineThickness = TensorCore.getMoogleColors()\nlocal drawer = TensorCore.getCachedDrawer(\n  0x30FF0000, 0x60FF0000, 0xA0FF0000, 0xFFFF0000,\n  outlineThickness, 0, flags\n)\ndrawer:addTimedCircleOnEnt(5000, water.id, 8, 0, false, false, flags)\n\nif water.id == player.id then\n  AnyoneCore.Shotcall(\"Water: place west at 86, 100\", true, 5, true)\n  local destination = { x = 86, y = 0, z = 100 }\n  local heading = TensorCore.getHeadingToTarget(player.pos, destination)\n  local length = math.max(1, TensorCore.getDistance2d(player.pos, destination) - 1)\n  drawer:addTimedArrow(5000, player.pos.x, player.pos.y, player.pos.z, heading, length, 0.35, 1, 0.9, 0, false, flags)\nelseif not TensorCore.hasBuff(player, 2143) and\n       (TensorCore.isHealer(player) or TensorCore.isRanged(player, true)) then\n  AnyoneCore.Shotcall(\"Stack with water\", true, 5, false)\n  drawer:addTimedArrowOnEnt(5000, player.id, 1, 0.35, 1, 0.9, water.id, 0, false, 0, false, flags)\nend\nself.used = true",
+				execute = "local player = TensorCore.mGetPlayer()\nlocal party = TensorCore.getEntityGroupList(\"Party\") or {}\nlocal water\nfor _, member in pairs(party) do\n  if member and TensorCore.hasBuff(member, 2142) then water = member break end\nend\nif not player or not water then self.used = true return end\n\nif water.id ~= player.id and TensorCore.hasBuff(player,2144) then\n AnyoneCore.Shotcall(\"Water vuln: don't stack\",true,5,false)\n self.used=true\n return\nend\nlocal _, _, _, _, outlineThickness = TensorCore.getMoogleColors()\nlocal drawer = TensorCore.getCachedDrawer(\n  0x30FF0000, 0x60FF0000, 0xA0FF0000, 0xFFFF0000,\n  outlineThickness, 0, flags\n)\ndrawer:addTimedCircleOnEnt(5000, water.id, 8, 0, false, false, flags)\n\nif water.id == player.id then\n  AnyoneCore.Shotcall(\"Water: place west at 86, 100\", true, 5, true)\n  local destination = { x = 86, y = 0, z = 100 }\n  local heading = TensorCore.getHeadingToTarget(player.pos, destination)\n  local length = math.max(1, TensorCore.getDistance2d(player.pos, destination) - 1)\n  drawer:addTimedArrow(5000, player.pos.x, player.pos.y, player.pos.z, heading, length, 0.35, 1, 0.9, 0, false, flags)\nelseif not TensorCore.hasBuff(player, 2143) and\n       (TensorCore.isHealer(player) or TensorCore.isRanged(player, true)) then\n  AnyoneCore.Shotcall(\"Stack with water\", true, 5, false)\n  drawer:addTimedArrowOnEnt(5000, player.id, 1, 0.35, 1, 0.9, water.id, 0, false, 0, false, flags)\nend\nself.used = true",
 				executeType = 2,
 				mechanicTime = 277.3,
 				name = "P2 - First Water Stack",
@@ -3760,7 +3760,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local source = eventArgs.entityID and TensorCore.mGetEntity(eventArgs.entityID)\nif not source or not source.pos then return end\nlocal mines = data.teaHiddenMines or {}\ndata.teaHiddenMines = mines\nlocal pos = {x = source.pos.x, y = source.pos.y, z = source.pos.z}\nlocal drawer = TensorCore.getStaticDrawer(0xD020A0FF, 2)\nlocal shape = drawer:addTimedCircle(9000, pos.x, pos.y, pos.z, 1.2, 0, false, true)\nmines[#mines + 1] = {pos = pos, shape = shape}\nself.used = true\n",
+							actionLua = "local source = eventArgs.entityID and TensorCore.mGetEntity(eventArgs.entityID)\nif not source or not source.pos then return end\nlocal mines = data.teaHiddenMines or {}\ndata.teaHiddenMines = mines\nlocal pos = {x = source.pos.x, y = source.pos.y, z = source.pos.z}\nlocal drawer = TensorCore.getStaticDrawer(0xD020A0FF, 2)\nlocal shape = drawer:addTimedCircle(9000, pos.x, pos.y, pos.z, 1.2, 0, false, true)\nlocal faint\nlocal R=AnyoneCore and AnyoneCore.Roster\nlocal isOT=R and R.current() and R.mySlot()==\"T2\"\nif not isOT then\n faint=TensorCore.getMoogleDrawer():addTimedCircle(9000,pos.x,pos.y,pos.z,5,0,false,true)\nend\nmines[#mines + 1] = {pos = pos, shape = shape, faint = faint}\nself.used = true\n",
 							conditions = 
 							{
 								
@@ -3837,7 +3837,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local mines = data.teaHiddenMines\nlocal source = eventArgs.entityID and TensorCore.mGetEntity(eventArgs.entityID)\nif not mines or not source or not source.pos then return end\n-- Detonation can use a different helper entity at the same location.\nfor index, mine in ipairs(mines) do\n    if TensorCore.getDistance2d(source.pos, mine.pos) < 1 then\n        if mine.shape then Argus.deleteTimedShape(mine.shape) end\n        table.remove(mines, index)\n        break\n    end\nend\nself.used = true\n",
+							actionLua = "local mines = data.teaHiddenMines\nlocal source = eventArgs.entityID and TensorCore.mGetEntity(eventArgs.entityID)\nif not mines or not source or not source.pos then return end\n-- Detonation can use a different helper entity at the same location.\nfor index, mine in ipairs(mines) do\n    if TensorCore.getDistance2d(source.pos, mine.pos) < 1 then\n        if mine.shape then Argus.deleteTimedShape(mine.shape) end\n        if mine.faint then Argus.deleteTimedShape(mine.faint) end\n        table.remove(mines, index)\n        break\n    end\nend\nself.used = true\n",
 							conditions = 
 							{
 								
@@ -3914,7 +3914,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "for _, mine in ipairs(data.teaHiddenMines or {}) do\n    if mine.shape then Argus.deleteTimedShape(mine.shape) end\nend\ndata.teaHiddenMines = nil\nself.used = true\n",
+							actionLua = "local old=eventArgs.oldData\nfor _,mine in ipairs(old and old.teaHiddenMines or {}) do\n if mine.shape then Argus.deleteTimedShape(mine.shape) end\n if mine.faint then Argus.deleteTimedShape(mine.faint) end\nend\nself.used=true",
 							name = "Hidden Minefield - Wipe cleanup",
 							uuid = "2072d0dc-a14c-17c9-8f35-d70b9a533a9b",
 							version = 2.1,
@@ -4240,7 +4240,7 @@ local tbl =
 				{
 				},
 				displayPath = "P2 - Brute Justice + Cruise Chaser",
-				execute = "local player = TensorCore.mGetPlayer()\nlocal party = TensorCore.getEntityGroupList(\"Party\") or {}\nlocal water\nfor _, member in pairs(party) do\n  if member and TensorCore.hasBuff(member, 2142) then water = member break end\nend\nif not player or not water then self.used = true return end\n\nlocal _, _, _, _, outlineThickness = TensorCore.getMoogleColors()\nlocal drawer = TensorCore.getCachedDrawer(\n  0x30FF0000, 0x60FF0000, 0xA0FF0000, 0xFFFF0000,\n  outlineThickness, 0, flags\n)\ndrawer:addTimedCircleOnEnt(5000, water.id, 8, 0, false, false, flags)\n\nif water.id == player.id then\n  AnyoneCore.Shotcall(\"Water to B\", true, 5, true)\n  local x, y, z, active = Argus.getWaymarkInfo(2)\n  local destination = active and { x = x, y = y, z = z } or { x = 113.7, y = 0, z = 91.9 }\n  local heading = TensorCore.getHeadingToTarget(player.pos, destination)\n  local length = math.max(1, TensorCore.getDistance2d(player.pos, destination) - 1)\n  drawer:addTimedArrow(5000, player.pos.x, player.pos.y, player.pos.z, heading, length, 0.35, 1, 0.9, 0, false, flags)\nelseif not TensorCore.hasBuff(player, 2143) and\n       (TensorCore.isHealer(player) or TensorCore.isRanged(player, true)) then\n  AnyoneCore.Shotcall(\"Stack with water\", true, 5, false)\n  drawer:addTimedArrowOnEnt(5000, player.id, 1, 0.35, 1, 0.9, water.id, 0, false, 0, false, flags)\nend\nself.used = true",
+				execute = "local player = TensorCore.mGetPlayer()\nlocal party = TensorCore.getEntityGroupList(\"Party\") or {}\nlocal water\nfor _, member in pairs(party) do\n  if member and TensorCore.hasBuff(member, 2142) then water = member break end\nend\nif not player or not water then self.used = true return end\n\nif water.id ~= player.id and TensorCore.hasBuff(player,2144) then\n AnyoneCore.Shotcall(\"Water vuln: don't stack\",true,5,false)\n self.used=true\n return\nend\nlocal _, _, _, _, outlineThickness = TensorCore.getMoogleColors()\nlocal drawer = TensorCore.getCachedDrawer(\n  0x30FF0000, 0x60FF0000, 0xA0FF0000, 0xFFFF0000,\n  outlineThickness, 0, flags\n)\ndrawer:addTimedCircleOnEnt(5000, water.id, 8, 0, false, false, flags)\n\nif water.id == player.id then\n  AnyoneCore.Shotcall(\"Water to B\", true, 5, true)\n  local x, y, z, active = Argus.getWaymarkInfo(2)\n  local destination = active and { x = x, y = y, z = z } or { x = 113.7, y = 0, z = 91.9 }\n  local heading = TensorCore.getHeadingToTarget(player.pos, destination)\n  local length = math.max(1, TensorCore.getDistance2d(player.pos, destination) - 1)\n  drawer:addTimedArrow(5000, player.pos.x, player.pos.y, player.pos.z, heading, length, 0.35, 1, 0.9, 0, false, flags)\nelseif not TensorCore.hasBuff(player, 2143) and\n       (TensorCore.isHealer(player) or TensorCore.isRanged(player, true)) then\n  AnyoneCore.Shotcall(\"Stack with water\", true, 5, false)\n  drawer:addTimedArrowOnEnt(5000, player.id, 1, 0.35, 1, 0.9, water.id, 0, false, 0, false, flags)\nend\nself.used = true",
 				executeType = 2,
 				mechanicTime = 306.7,
 				name = "P2 - Second Water Stack",
@@ -4496,7 +4496,7 @@ local tbl =
 				{
 				},
 				displayPath = "P2 - Brute Justice + Cruise Chaser",
-				execute = "local flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nlocal player = TensorCore.mGetPlayer()\nlocal party = TensorCore.getEntityGroupList(\"Party\") or {}\nlocal water\nfor _, member in pairs(party) do\n  if member and TensorCore.hasBuff(member, 2142) then water = member break end\nend\nif not player or not water then return end\n\nif water.id~=player.id and not TensorCore.isTank(player) and not TensorCore.hasBuff(player,2143) and\n   (not data.tea_lpdu_water or not data.tea_lpdu_water.previous) then\n if not self.historyDiagnostic then\n  TensorCore.timelineLogToFile(\"[TEA Water3] waiting for previous Water holder; player=\"..tostring(player.id)..\" water=\"..tostring(water.id)..\"\\n\")\n  self.historyDiagnostic=true\n end\n return\nend\nlocal _, _, _, _, outlineThickness = TensorCore.getMoogleColors()\nlocal drawer = TensorCore.getCachedDrawer(\n  0x30FF0000, 0x60FF0000, 0xA0FF0000, 0xFFFF0000,\n  outlineThickness, 0, flags\n)\ndrawer:addTimedCircleOnEnt(5000, water.id, 8, 0, false, false, flags)\n\nif water.id == player.id then\n  AnyoneCore.Shotcall(\"Water: go to B\", true, 5, false)\n  local x,y,z,active=Argus.getWaymarkInfo(2)\n  local destination=active and {x=x,y=y,z=z} or {x=113.7,y=0,z=91.9}\n  local heading = TensorCore.getHeadingToTarget(player.pos, destination)\n  local length = math.max(1, TensorCore.getDistance2d(player.pos, destination) - 1)\n  drawer:addTimedArrow(5000, player.pos.x, player.pos.y, player.pos.z, heading, length, 0.35, 1, 0.9, 0, false, flags)\nelseif not TensorCore.hasBuff(player, 2143) and not TensorCore.isTank(player) and\n       data.tea_lpdu_water and data.tea_lpdu_water.previous and data.tea_lpdu_water.previous~=player.id then\n  AnyoneCore.Shotcall(\"Stack with water\", true, 5, false)\n  drawer:addTimedArrowOnEnt(5000, player.id, 1, 0.35, 1, 0.9, water.id, 0, false, 0, false, flags)\nend\nself.used = true",
+				execute = "local flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nlocal player = TensorCore.mGetPlayer()\nlocal party = TensorCore.getEntityGroupList(\"Party\") or {}\nlocal water\nfor _, member in pairs(party) do\n  if member and TensorCore.hasBuff(member, 2142) then water = member break end\nend\nif not player or not water then return end\n\nif water.id ~= player.id and TensorCore.hasBuff(player,2144) then\n AnyoneCore.Shotcall(\"Water vuln: don't stack\",true,5,false)\n self.used=true\n return\nend\n\nif water.id~=player.id and not TensorCore.isTank(player) and not TensorCore.hasBuff(player,2143) and\n   (not data.tea_lpdu_water or not data.tea_lpdu_water.previous) then\n if not self.historyDiagnostic then\n  TensorCore.timelineLogToFile(\"[TEA Water3] waiting for previous Water holder; player=\"..tostring(player.id)..\" water=\"..tostring(water.id)..\"\\n\")\n  self.historyDiagnostic=true\n end\n return\nend\nlocal _, _, _, _, outlineThickness = TensorCore.getMoogleColors()\nlocal drawer = TensorCore.getCachedDrawer(\n  0x30FF0000, 0x60FF0000, 0xA0FF0000, 0xFFFF0000,\n  outlineThickness, 0, flags\n)\ndrawer:addTimedCircleOnEnt(5000, water.id, 8, 0, false, false, flags)\n\nif water.id == player.id then\n  AnyoneCore.Shotcall(\"Water: go to B\", true, 5, false)\n  local x,y,z,active=Argus.getWaymarkInfo(2)\n  local destination=active and {x=x,y=y,z=z} or {x=113.7,y=0,z=91.9}\n  local heading = TensorCore.getHeadingToTarget(player.pos, destination)\n  local length = math.max(1, TensorCore.getDistance2d(player.pos, destination) - 1)\n  drawer:addTimedArrow(5000, player.pos.x, player.pos.y, player.pos.z, heading, length, 0.35, 1, 0.9, 0, false, flags)\nelseif not TensorCore.hasBuff(player, 2143) and not TensorCore.isTank(player) and\n       data.tea_lpdu_water and data.tea_lpdu_water.previous and data.tea_lpdu_water.previous~=player.id then\n  AnyoneCore.Shotcall(\"Stack with water\", true, 5, false)\n  drawer:addTimedArrowOnEnt(5000, player.id, 1, 0.35, 1, 0.9, water.id, 0, false, 0, false, flags)\nend\nself.used = true",
 				executeType = 2,
 				mechanicTime = 336.2,
 				name = "P2 - Third Water Stack",
@@ -6773,7 +6773,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local state = data.teaWormhole\nif not state or not state.players then\n  self.used = true\n  return\nend\n\nstate.visibleSequence = (state.visibleSequence or 0) + 1\nif state.visibleSequence == 1 then\n  local firstPairStart = Now()\n  state.firstAlphaResolvedAt = firstPairStart + 1200\n  state.firstChargeResolvedAt = firstPairStart + 2700\n  state.alphaResolvedAt = {}\nend\n\nlocal alphaNumber = state.visibleSequence * 2 - 1\nstate.alphaResolvedAt = state.alphaResolvedAt or {}\nstate.alphaResolvedAt[alphaNumber] = Now() + 1200\nlocal chargeNumber = alphaNumber + 1\nlocal assignmentPlayers = state.players\nlocal player = TensorCore.mGetPlayer()\n\nlocal alphaTargetID = assignmentPlayers[alphaNumber]\nlocal chargeTargetID = assignmentPlayers[chargeNumber]\nlocal drawer = TensorCore.getMoogleDrawer()\nlocal occlusionFlags =\n  Argus2.RenderFlags.FLAG_OCCLUDE |\n  Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nlocal occlusionDrawer = TensorCore.getMoogleDrawer(0, occlusionFlags)\n\n\nif drawer and player and alphaTargetID == player.id then\n  drawer:addTimedConeOnEnt(1200, eventArgs.entityID, 25, math.pi / 2, alphaTargetID, 0, false, false)\n\n  if occlusionDrawer and alphaTargetID then\n    occlusionDrawer:addTimedConeOnEnt(\n      1200,\n      eventArgs.entityID,\n      25,\n      math.pi / 2,\n      alphaTargetID,\n      0,\n      false,\n      false,\n      0,\n      false,\n      occlusionFlags\n    )\n  end\nend\n\nif drawer and player and chargeTargetID == player.id then\n  drawer:addTimedRectOnEnt(2700, eventArgs.entityID, 50, 10, chargeTargetID, 0, true, false, false)\n\n  if occlusionDrawer and chargeTargetID then\n    occlusionDrawer:addTimedRectOnEnt(\n      2700,\n      eventArgs.entityID,\n      50,\n      10,\n      chargeTargetID,\n      0,\n      true,\n      false,\n      false,\n      0,\n      false,\n      occlusionFlags\n    )\n  end\nend\n\nself.used = true",
+							actionLua = "local state = data.teaWormhole\nif not state or not state.players then\n  self.used = true\n  return\nend\n\nstate.visibleSequence = (state.visibleSequence or 0) + 1\nif state.visibleSequence == 1 then\n  local firstPairStart = Now()\n  state.firstAlphaResolvedAt = firstPairStart + 1200\n  state.firstChargeResolvedAt = firstPairStart + 2700\n  state.alphaResolvedAt = {}\nend\n\nlocal alphaNumber = state.visibleSequence * 2 - 1\nstate.alphaResolvedAt = state.alphaResolvedAt or {}\nstate.alphaResolvedAt[alphaNumber] = Now() + 1200\nlocal chargeNumber = alphaNumber + 1\nlocal assignmentPlayers = state.players\nlocal player = TensorCore.mGetPlayer()\n\nlocal alphaTargetID = assignmentPlayers[alphaNumber]\nlocal chargeTargetID = assignmentPlayers[chargeNumber]\nlocal drawer = TensorCore.getMoogleDrawer()\nlocal occlusionFlags =\n  Argus2.RenderFlags.FLAG_OCCLUDE |\n  Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nlocal occlusionDrawer = TensorCore.getMoogleDrawer(0, occlusionFlags)\n\n\nif drawer and player and alphaTargetID == player.id then\n  drawer:addTimedConeOnEnt(1200, eventArgs.entityID, 25, math.pi / 2, alphaTargetID, 0, false, false)\n\n  if occlusionDrawer and alphaTargetID then\n    occlusionDrawer:addTimedConeOnEnt(\n      1200,\n      eventArgs.entityID,\n      25,\n      math.pi / 2,\n      alphaTargetID,\n      0,\n      false,\n      false,\n      0,\n      false,\n      occlusionFlags\n    )\n  end\nend\n\nif drawer and player and chargeTargetID == player.id then\n  drawer:addTimedRectOnEnt(2700, eventArgs.entityID, 50, 10, chargeTargetID, 0, true, false, false)\n\n  if occlusionDrawer and chargeTargetID then\n    occlusionDrawer:addTimedRectOnEnt(\n      2700,\n      eventArgs.entityID,\n      50,\n      10,\n      chargeTargetID,\n      0,\n      true,\n      false,\n      false,\n      0,\n      false,\n      occlusionFlags\n    )\n  end\nend\n\n-- Show other players' attack lanes without changing LPDU assignments.\nlocal faint=TensorCore.getCachedDrawer(0x200066FF,nil,0x580066FF,0xC00066FF,1.5)\nif faint and player then\n if alphaTargetID and alphaTargetID~=player.id then\n  faint:addTimedConeOnEnt(1200,eventArgs.entityID,25,math.pi/2,alphaTargetID,0,false,true)\n end\n if chargeTargetID and chargeTargetID~=player.id then\n  faint:addTimedRectOnEnt(2700,eventArgs.entityID,50,10,chargeTargetID,0,true,false,true)\n end\nend\nself.used = true",
 							conditions = 
 							{
 								
@@ -6801,6 +6801,7 @@ local tbl =
 						data = 
 						{
 							category = "Event",
+							dequeueIfLuaFalse = true,
 							eventArgOptionType = 2,
 							eventEntityContentID = 9218,
 							name = "Cruise Chaser",
@@ -6813,6 +6814,7 @@ local tbl =
 						data = 
 						{
 							category = "Event",
+							dequeueIfLuaFalse = true,
 							eventArgType = 3,
 							name = "Became visible",
 							uuid = "d0dc5f44-abbe-fe04-b19a-30c2ae211787",
@@ -8246,6 +8248,7 @@ local tbl =
 							},
 							name = "Stop Everything",
 							stopAllActions = true,
+							stopCasting = true,
 							uuid = "907667ce-7934-1ea1-ac5e-82e6d7647865",
 							version = 2.1,
 						},
@@ -8260,6 +8263,11 @@ local tbl =
 								
 								{
 									"35267d79-01fd-37bd-b0e2-c9529010ddb2",
+									true,
+								},
+								
+								{
+									"a6de27e4-f1b0-f455-87e8-ca896af8c88e",
 									true,
 								},
 							},
@@ -8277,7 +8285,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local g = data.tea_lpdu_p4\nif not g then\n    g = {texts = {}, shapes = {}};data.tea_lpdu_p4 = g\n    function g.timer(ms, id, prefix, height)\n        if ms <= 0 then\n            return\n        end\n        local uuid = AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms), id, 0xFFFFFFFF, true, 1.35, height or 2.5, 0, prefix)\n        if uuid then\n            g.texts[#g.texts+1] = uuid\n        end\n        return uuid\n    end\nend\nif not (TEA_LPDU_Config and TEA_LPDU_Config.values.autoStillness) or data.teaOrdainedCurrent~=\"stillness\" then\n    return false\nend\ng.stillnessHeld = true\nreturn true",
+							conditionLua = "local g = data.tea_lpdu_p4\nif not g then\n    g = {texts = {}, shapes = {}};data.tea_lpdu_p4 = g\n    function g.timer(ms, id, prefix, height)\n        if ms <= 0 then\n            return\n        end\n        local uuid = AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms), id, 0xFFFFFFFF, true, 1.35, height or 2.5, 0, prefix)\n        if uuid then\n            g.texts[#g.texts+1] = uuid\n        end\n        return uuid\n    end\nend\nif not (TEA_LPDU_Config and TEA_LPDU_Config.values.autoStillness) or data.teaOrdained1~=\"stillness\" then\n    return false\nend\ng.stillnessHeld = true\nreturn true",
 							name = "Auto Stillness enabled",
 							uuid = "0300e2b4-f814-05df-87a3-19d6dbe50b31",
 							version = 3,
@@ -8294,14 +8302,24 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local g=data.tea_lpdu_p4\nreturn (g~=nil and g.resolved~=nil and g.resolved.word1==true) or TensorReactions_CurrentTimer >= 916.7",
+							name = "Check resolved or safe resume time",
+							uuid = "a6de27e4-f1b0-f455-87e8-ca896af8c88e",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "P3 - Alexander Prime/Ordained Motion-Stillness",
 				mechanicTime = 916.1,
 				name = "Ordained 916 - Stop and Resume",
-				throttleTime = 3000,
 				timeRange = true,
 				timelineIndex = 156,
-				timerEndOffset = 1,
+				timerEndOffset = 2,
 				timerStartOffset = -2,
 				uuid = "2097e17b-f083-6eb8-ae85-9cf9eaec9914",
 				version = 2,
@@ -8318,7 +8336,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "if data.teaOrdainedCurrent == \"stillness\" then\n    AnyoneCore.Shotcall(\"Stop. No actions\", true, 3, true)\nelseif data.teaOrdainedCurrent == \"motion\" then\n    AnyoneCore.Shotcall(\"keep moving\", true, 3, true)\nend\nself.used = true",
+							actionLua = "if data.teaOrdained1 == \"stillness\" then\n AnyoneCore.Shotcall(\"Stop. No actions\",true,3,true)\nelseif data.teaOrdained1 == \"motion\" then\n AnyoneCore.Shotcall(\"Keep moving\",true,3,true)\nend\nself.used=true",
 							name = "Shotcall Ordained Type",
 							uuid = "74e444cf-363a-336a-8727-b1247a9dd3d9",
 							version = 2.1,
@@ -8350,7 +8368,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "if eventArgs.spellID == 18559 then\n    data.teaOrdainedCurrent = \"stillness\"\nelseif eventArgs.spellID == 18558 then\n    data.teaOrdainedCurrent = \"motion\"\nend",
+							actionLua = "local word = eventArgs.spellID == 18559 and \"stillness\" or \"motion\"\nif TensorReactions_CurrentTimer < 919.5 then\n data.teaOrdained1 = word\n data.teaOrdained2 = word == \"motion\" and \"stillness\" or \"motion\"\nelse\n data.teaOrdained2 = word\nend\ndata.teaOrdainedCurrent = word\nself.used = true",
 							conditions = 
 							{
 								
@@ -8373,6 +8391,7 @@ local tbl =
 						{
 							category = "Lua",
 							conditionLua = "return eventArgs.entityContentID == 9042 and (eventArgs.spellID == 18559 or eventArgs.spellID == 18558)",
+							dequeueIfLuaFalse = true,
 							name = "BJ Ordained Channel",
 							uuid = "a8a1a703-38f7-936a-b948-b7e0117e8f35",
 							version = 3,
@@ -8381,11 +8400,12 @@ local tbl =
 				},
 				displayPath = "P3 - Alexander Prime/Ordained Motion-Stillness",
 				eventType = 3,
+				loop = true,
 				mechanicTime = 916.1,
 				name = "Ordained - Capture Channel Type",
 				timeRange = true,
 				timelineIndex = 156,
-				timerEndOffset = 8,
+				timerEndOffset = 11,
 				timerStartOffset = -5,
 				uuid = "28d568ad-c391-1c99-b7e5-0070473b3947",
 				version = 2,
@@ -8412,7 +8432,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local g = data.tea_lpdu_p4\nif not g then\n    g = {texts = {}, shapes = {}};data.tea_lpdu_p4 = g\n    function g.timer(ms, id, prefix, height)\n        if ms <= 0 then\n            return\n        end\n        local uuid = AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms), id, 0xFFFFFFFF, true, 1.35, height or 2.5, 0, prefix)\n        if uuid then\n            g.texts[#g.texts+1] = uuid\n        end\n        return uuid\n    end\nend\nif not (TEA_LPDU_Config and TEA_LPDU_Config.values.autoMotion) or data.teaOrdainedCurrent~=\"motion\" or (g.resolved and g.resolved[\"word1\"]) then\n    self.used = true\n    return\nend\nlocal p = TensorCore.mGetPlayer()\nif not p or not p.hp or p.hp.current <= 0 then\n    self.used = true\n    return\nend\np:Jump()\nself.used = true",
+							actionLua = "local C = TEA_LPDU_Config\nlocal g = data.tea_lpdu_p4\nif not (C and C.values.autoMotion) or data.teaOrdained1 ~= \"motion\"\n or (g and g.resolved and g.resolved.word1) then self.used=true;return end\nlocal player = TensorCore.mGetPlayer()\nif player and player.alive then\n if ActionList:IsCasting() then ActionList:StopCasting() end\n player:Jump()\nend\nself.used=true",
 							name = "[LPDU] Ordained - Auto Motion word1",
 							uuid = "900b849c-bded-e4ff-a9e9-67bf99fcd11a",
 							version = 2.1,
@@ -8423,6 +8443,7 @@ local tbl =
 				{
 				},
 				displayPath = "LPDU Guidance",
+				eventType = 12,
 				loop = true,
 				mechanicTime = 916.1,
 				name = "[LPDU] Ordained - Auto Motion word1",
@@ -8431,6 +8452,59 @@ local tbl =
 				timerEndOffset = 0.7,
 				timerStartOffset = -2,
 				uuid = "dc69e360-2f76-2fff-81c6-d4331c8e2b3b",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player=TensorCore.mGetPlayer()\nif player and player.alive and player:IsMoving() then player:Stop() end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"e8a2b4d5-c268-f6b6-b70d-7b04b6405f5d",
+									true,
+								},
+							},
+							name = "Stop movement before Stillness",
+							uuid = "51d69fa7-9205-6b44-b57a-60a1b31b841b",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local C = TEA_LPDU_Config\nlocal g = data.tea_lpdu_p4\nreturn C~=nil and C.values.autoStillness==true and data.teaOrdained1==\"stillness\"\n and not (g~=nil and g.resolved~=nil and g.resolved.word1==true)",
+							name = "Unresolved Stillness and automation enabled",
+							uuid = "e8a2b4d5-c268-f6b6-b70d-7b04b6405f5d",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 916.1,
+				name = "[LPDU] Ordained - Stop movement word1",
+				timeRange = true,
+				timelineIndex = 156,
+				timerEndOffset = 0.8,
+				timerStartOffset = -1,
+				uuid = "e85537e6-fc08-1bcd-9d12-dbda4ecd80ff",
 				version = 2,
 			},
 		},
@@ -8468,7 +8542,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "if data.teaOrdainedCurrent == \"motion\" then\n    AnyoneCore.Shotcall(\"keep moving\", true, 3, true)\nend\nself.used = true",
+							actionLua = "if data.teaOrdained2 == \"stillness\" then\n AnyoneCore.Shotcall(\"Stop. No actions\",true,3,true)\nelseif data.teaOrdained2 == \"motion\" then\n AnyoneCore.Shotcall(\"Keep moving\",true,3,true)\nend\nself.used=true",
 							name = "Shotcall Keep Moving if 916 Stillness",
 							uuid = "1f832c7b-9af6-5626-b615-d92745b7d0c6",
 							version = 2.1,
@@ -8515,6 +8589,7 @@ local tbl =
 							},
 							name = "Stop Everything",
 							stopAllActions = true,
+							stopCasting = true,
 							uuid = "f6eed7a4-270f-000f-9ef4-38be08ef4c52",
 							version = 2.1,
 						},
@@ -8529,6 +8604,11 @@ local tbl =
 								
 								{
 									"38a18690-603e-5e55-8e35-dfd5b137152e",
+									true,
+								},
+								
+								{
+									"9544dd60-e524-3085-9e45-cbefe444dff0",
 									true,
 								},
 							},
@@ -8546,7 +8626,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return data.teaOrdainedCurrent == \"stillness\"",
+							conditionLua = "return data.teaOrdained2 == \"stillness\"",
 							name = "916 was Motion",
 							uuid = "06af1c8a-d86f-8ab0-91ac-7c504899e190",
 							version = 3,
@@ -8557,7 +8637,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local g = data.tea_lpdu_p4\nif not g then\n    g = {texts = {}, shapes = {}};data.tea_lpdu_p4 = g\n    function g.timer(ms, id, prefix, height)\n        if ms <= 0 then\n            return\n        end\n        local uuid = AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms), id, 0xFFFFFFFF, true, 1.35, height or 2.5, 0, prefix)\n        if uuid then\n            g.texts[#g.texts+1] = uuid\n        end\n        return uuid\n    end\nend\nif not (TEA_LPDU_Config and TEA_LPDU_Config.values.autoStillness) or data.teaOrdainedCurrent~=\"stillness\" then\n    return false\nend\ng.stillnessHeld = true\nreturn true",
+							conditionLua = "local g = data.tea_lpdu_p4\nif not g then\n    g = {texts = {}, shapes = {}};data.tea_lpdu_p4 = g\n    function g.timer(ms, id, prefix, height)\n        if ms <= 0 then\n            return\n        end\n        local uuid = AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms), id, 0xFFFFFFFF, true, 1.35, height or 2.5, 0, prefix)\n        if uuid then\n            g.texts[#g.texts+1] = uuid\n        end\n        return uuid\n    end\nend\nif not (TEA_LPDU_Config and TEA_LPDU_Config.values.autoStillness) or data.teaOrdained2~=\"stillness\" then\n    return false\nend\ng.stillnessHeld = true\nreturn true",
 							name = "Auto Stillness enabled",
 							uuid = "72e0b009-2cb9-f87e-a727-415419b0f1c4",
 							version = 3,
@@ -8574,14 +8654,24 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local g=data.tea_lpdu_p4\nreturn (g~=nil and g.resolved~=nil and g.resolved.word2==true) or TensorReactions_CurrentTimer >= 926.9",
+							name = "Check resolved or safe resume time",
+							uuid = "9544dd60-e524-3085-9e45-cbefe444dff0",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "P3 - Alexander Prime/Ordained Motion-Stillness",
 				mechanicTime = 926.3,
 				name = "Ordained 926 - Stop and Resume if 916 Motion",
-				throttleTime = 3000,
 				timeRange = true,
 				timelineIndex = 157,
-				timerEndOffset = 1,
+				timerEndOffset = 2,
 				timerStartOffset = -2,
 				uuid = "27cb4c37-8db6-93d7-8fbf-da9d915a4730",
 				version = 2,
@@ -8608,7 +8698,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local g = data.tea_lpdu_p4\nif not g then\n    g = {texts = {}, shapes = {}};data.tea_lpdu_p4 = g\n    function g.timer(ms, id, prefix, height)\n        if ms <= 0 then\n            return\n        end\n        local uuid = AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms), id, 0xFFFFFFFF, true, 1.35, height or 2.5, 0, prefix)\n        if uuid then\n            g.texts[#g.texts+1] = uuid\n        end\n        return uuid\n    end\nend\nif not (TEA_LPDU_Config and TEA_LPDU_Config.values.autoMotion) or data.teaOrdainedCurrent~=\"motion\" or (g.resolved and g.resolved[\"word2\"]) then\n    self.used = true\n    return\nend\nlocal p = TensorCore.mGetPlayer()\nif not p or not p.hp or p.hp.current <= 0 then\n    self.used = true\n    return\nend\np:Jump()\nself.used = true",
+							actionLua = "local C = TEA_LPDU_Config\nlocal g = data.tea_lpdu_p4\nif not (C and C.values.autoMotion) or data.teaOrdained2 ~= \"motion\"\n or (g and g.resolved and g.resolved.word2) then self.used=true;return end\nlocal player = TensorCore.mGetPlayer()\nif player and player.alive then\n if ActionList:IsCasting() then ActionList:StopCasting() end\n player:Jump()\nend\nself.used=true",
 							name = "[LPDU] Ordained - Auto Motion word2",
 							uuid = "303f4e67-1491-ea3e-9072-ae58e770b99f",
 							version = 2.1,
@@ -8619,6 +8709,7 @@ local tbl =
 				{
 				},
 				displayPath = "LPDU Guidance",
+				eventType = 12,
 				loop = true,
 				mechanicTime = 926.3,
 				name = "[LPDU] Ordained - Auto Motion word2",
@@ -8627,6 +8718,59 @@ local tbl =
 				timerEndOffset = 0.7,
 				timerStartOffset = -2,
 				uuid = "3d7489ab-a8eb-8083-9c93-5017738fda66",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player=TensorCore.mGetPlayer()\nif player and player.alive and player:IsMoving() then player:Stop() end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"e002a998-44ea-611a-8fb7-de5077d7fb59",
+									true,
+								},
+							},
+							name = "Stop movement before Stillness",
+							uuid = "d4b69060-64b6-c058-a0ff-7a245a0a5e42",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local C = TEA_LPDU_Config\nlocal g = data.tea_lpdu_p4\nreturn C~=nil and C.values.autoStillness==true and data.teaOrdained2==\"stillness\"\n and not (g~=nil and g.resolved~=nil and g.resolved.word2==true)",
+							name = "Unresolved Stillness and automation enabled",
+							uuid = "e002a998-44ea-611a-8fb7-de5077d7fb59",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 926.3,
+				name = "[LPDU] Ordained - Stop movement word2",
+				timeRange = true,
+				timelineIndex = 157,
+				timerEndOffset = 0.8,
+				timerStartOffset = -1,
+				uuid = "0bcd2e1e-3044-223e-be04-1fe5e328631d",
 				version = 2,
 			},
 		},
@@ -9797,9 +9941,9 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local s = data.fateAlpha\nreturn s ~= nil and s.myProjection ~= nil and (eventArgs.spellID == 18585 or eventArgs.spellID == 18586) and eventArgs.targetID == s.myProjection",
+							conditionLua = "return eventArgs.spellID == 18585 or eventArgs.spellID == 18586",
 							dequeueIfLuaFalse = true,
-							name = "Our second projection gets Ordained",
+							name = "Shared second Ordained reveal",
 							uuid = "ca4c9c4e-692e-46e2-b012-e429c01eee6d",
 							version = 3,
 						},
@@ -10071,6 +10215,7 @@ local tbl =
 							},
 							name = "Stop Everything for Stillness",
 							stopAllActions = true,
+							stopCasting = true,
 							uuid = "071e9504-bf65-46ac-8bdb-bf7bda711f1c",
 							version = 2.1,
 						},
@@ -10085,6 +10230,11 @@ local tbl =
 								
 								{
 									"4d0107ee-2264-8bbc-b81d-8df143d6213b",
+									true,
+								},
+								
+								{
+									"b2726b7a-e2c8-c995-a563-b7d19d712866",
 									true,
 								},
 							},
@@ -10154,14 +10304,24 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local g=data.tea_lpdu_p4\nreturn (g~=nil and g.resolved~=nil and g.resolved.alpha1==true) or TensorReactions_CurrentTimer >= 990.4",
+							name = "Check resolved or safe resume time",
+							uuid = "b2726b7a-e2c8-c995-a563-b7d19d712866",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "Fate Calibration Alpha/Ordained",
 				mechanicTime = 989.8,
 				name = "Fate Alpha - Ordained 989 Actions",
-				throttleTime = 2900,
 				timeRange = true,
 				timelineIndex = 169,
-				timerEndOffset = 1.2000000476837,
+				timerEndOffset = 2,
 				timerStartOffset = -2,
 				uuid = "1bda8ec1-0bfa-c3d4-b924-116310d96bb6",
 				version = 2,
@@ -10220,7 +10380,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local g = data.tea_lpdu_p4\nif not g then\n    g = {texts = {}, shapes = {}};data.tea_lpdu_p4 = g\n    function g.timer(ms, id, prefix, height)\n        if ms <= 0 then\n            return\n        end\n        local uuid = AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms), id, 0xFFFFFFFF, true, 1.35, height or 2.5, 0, prefix)\n        if uuid then\n            g.texts[#g.texts+1] = uuid\n        end\n        return uuid\n    end\nend\nif not (TEA_LPDU_Config and TEA_LPDU_Config.values.autoMotion) or data.teaOrdained989Type~=\"motion\" or (g.resolved and g.resolved[\"alpha1\"]) then\n    self.used = true\n    return\nend\nlocal p = TensorCore.mGetPlayer()\nif not p or not p.hp or p.hp.current <= 0 then\n    self.used = true\n    return\nend\np:Jump()\nself.used = true",
+							actionLua = "local C = TEA_LPDU_Config\nlocal g = data.tea_lpdu_p4\nif not (C and C.values.autoMotion) or data.teaOrdained989Type ~= \"motion\"\n or (g and g.resolved and g.resolved.alpha1) then self.used=true;return end\nlocal player = TensorCore.mGetPlayer()\nif player and player.alive then\n if ActionList:IsCasting() then ActionList:StopCasting() end\n player:Jump()\nend\nself.used=true",
 							name = "[LPDU] Ordained - Auto Motion alpha1",
 							uuid = "6572ec81-20ce-d4c4-b096-d9ac14b932cf",
 							version = 2.1,
@@ -10231,6 +10391,7 @@ local tbl =
 				{
 				},
 				displayPath = "LPDU Guidance",
+				eventType = 12,
 				loop = true,
 				mechanicTime = 989.8,
 				name = "[LPDU] Ordained - Auto Motion alpha1",
@@ -10239,6 +10400,59 @@ local tbl =
 				timerEndOffset = 0.7,
 				timerStartOffset = -1.5,
 				uuid = "6546d992-f2c9-f530-aa93-d9fbac4bce0f",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player=TensorCore.mGetPlayer()\nif player and player.alive and player:IsMoving() then player:Stop() end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"1a069db7-e4b9-02ba-af1f-22dfb93265b3",
+									true,
+								},
+							},
+							name = "Stop movement before Stillness",
+							uuid = "91562ea3-da2a-9cb3-8b83-dca0bd2a5bc7",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local C = TEA_LPDU_Config\nlocal g = data.tea_lpdu_p4\nreturn C~=nil and C.values.autoStillness==true and data.teaOrdained989Type==\"stillness\"\n and not (g~=nil and g.resolved~=nil and g.resolved.alpha1==true)",
+							name = "Unresolved Stillness and automation enabled",
+							uuid = "1a069db7-e4b9-02ba-af1f-22dfb93265b3",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 989.8,
+				name = "[LPDU] Ordained - Stop movement alpha1",
+				timeRange = true,
+				timelineIndex = 169,
+				timerEndOffset = 0.8,
+				timerStartOffset = -1,
+				uuid = "dabf5c3f-f8a3-545c-8e13-0758088affed",
 				version = 2,
 			},
 		},
@@ -10291,6 +10505,7 @@ local tbl =
 							},
 							name = "Stop Everything for 993 Stillness",
 							stopAllActions = true,
+							stopCasting = true,
 							uuid = "df94b18e-ced4-c126-83c5-d79d1846b124",
 							version = 2.1,
 						},
@@ -10305,6 +10520,11 @@ local tbl =
 								
 								{
 									"d449e2e8-6b7e-5de0-85c0-f52a09ee3602",
+									true,
+								},
+								
+								{
+									"5b38dbcd-1e33-dd70-a45c-941708b2f9f8",
 									true,
 								},
 							},
@@ -10374,14 +10594,24 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local g=data.tea_lpdu_p4\nreturn (g~=nil and g.resolved~=nil and g.resolved.alpha2==true) or TensorReactions_CurrentTimer >= 994.4",
+							name = "Check resolved or safe resume time",
+							uuid = "5b38dbcd-1e33-dd70-a45c-941708b2f9f8",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "Fate Calibration Alpha/Ordained",
 				mechanicTime = 993.8,
 				name = "Fate Alpha - Ordained 993 Actions",
-				throttleTime = 2900,
 				timeRange = true,
 				timelineIndex = 171,
-				timerEndOffset = 1.2,
+				timerEndOffset = 2,
 				timerStartOffset = -2,
 				uuid = "d9abfaf4-0a4a-e08f-b62c-1c4f7da9dbac",
 				version = 2,
@@ -10440,7 +10670,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local g = data.tea_lpdu_p4\nif not g then\n    g = {texts = {}, shapes = {}};data.tea_lpdu_p4 = g\n    function g.timer(ms, id, prefix, height)\n        if ms <= 0 then\n            return\n        end\n        local uuid = AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms), id, 0xFFFFFFFF, true, 1.35, height or 2.5, 0, prefix)\n        if uuid then\n            g.texts[#g.texts+1] = uuid\n        end\n        return uuid\n    end\nend\nif not (TEA_LPDU_Config and TEA_LPDU_Config.values.autoMotion) or data.teaOrdained993Type~=\"motion\" or (g.resolved and g.resolved[\"alpha2\"]) then\n    self.used = true\n    return\nend\nlocal p = TensorCore.mGetPlayer()\nif not p or not p.hp or p.hp.current <= 0 then\n    self.used = true\n    return\nend\np:Jump()\nself.used = true",
+							actionLua = "local C = TEA_LPDU_Config\nlocal g = data.tea_lpdu_p4\nif not (C and C.values.autoMotion) or data.teaOrdained993Type ~= \"motion\"\n or (g and g.resolved and g.resolved.alpha2) then self.used=true;return end\nlocal player = TensorCore.mGetPlayer()\nif player and player.alive then\n if ActionList:IsCasting() then ActionList:StopCasting() end\n player:Jump()\nend\nself.used=true",
 							name = "[LPDU] Ordained - Auto Motion alpha2",
 							uuid = "7970ed96-60fa-c090-a6ad-343b35c8081a",
 							version = 2.1,
@@ -10451,6 +10681,7 @@ local tbl =
 				{
 				},
 				displayPath = "LPDU Guidance",
+				eventType = 12,
 				loop = true,
 				mechanicTime = 993.8,
 				name = "[LPDU] Ordained - Auto Motion alpha2",
@@ -10459,6 +10690,59 @@ local tbl =
 				timerEndOffset = 0.69999998807907,
 				timerStartOffset = -2.4000000953674,
 				uuid = "6f62b6ad-2748-da2d-8f23-757b5dd58e59",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player=TensorCore.mGetPlayer()\nif player and player.alive and player:IsMoving() then player:Stop() end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"7068a866-25c2-1d7a-b2d1-6ff7f3833e7d",
+									true,
+								},
+							},
+							name = "Stop movement before Stillness",
+							uuid = "bf9351a4-5c8b-692b-b157-ae3b77dc9126",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local C = TEA_LPDU_Config\nlocal g = data.tea_lpdu_p4\nreturn C~=nil and C.values.autoStillness==true and data.teaOrdained993Type==\"stillness\"\n and not (g~=nil and g.resolved~=nil and g.resolved.alpha2==true)",
+							name = "Unresolved Stillness and automation enabled",
+							uuid = "7068a866-25c2-1d7a-b2d1-6ff7f3833e7d",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 993.8,
+				name = "[LPDU] Ordained - Stop movement alpha2",
+				timeRange = true,
+				timelineIndex = 171,
+				timerEndOffset = 0.8,
+				timerStartOffset = -1.8,
+				uuid = "eb8c60a6-ab04-a912-b2a4-749164da4021",
 				version = 2,
 			},
 		},
