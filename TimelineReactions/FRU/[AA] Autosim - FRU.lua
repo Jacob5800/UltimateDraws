@@ -13,7 +13,7 @@ local tbl =
 				{
 				},
 				eventType = 16,
-				execute = "-- AutoSim v3: P4 slot 0 is Ryne, then Gaia from Gaia spawn; Ryne is slot 1 from Gaia spawn for\n-- every job. From Gaia spawn \"AutoSim | P4 slots follow target\" keeps slot 0 on the player's\n-- target and slot 1 on the other boss (AS-015, user 2026-10-22; replaces the one-slot P4 setup).\n-- FRU forecast: source pull 20261014-2124-1238-5.txt, seconds since combat start.\n-- Encounter geometry retains the source-pull clock; one-shot returns reanchor remaining windows.\n-- RaidBuff boundaries average per-pull first/last teammate status applications, aligned by phase.\n-- Samples: 20261016-1558, 20261016-1521, 20261015-1800, 20261014-2124 (P5: two pulls).\n-- Each buff is assumed to last 20s; Bard casts and the isolated old Dancer window are excluded.\n-- P4 opener raid buffs: Gaia +3s, 20s duration; BLM weight 1.17, other jobs 1.2.\n-- Ice Veil damage discount starts 2s after the logged first attack.\nlocal acr = TensorCore.API.TensorACR\n-- Burst-priority planning weights, not measured party damage multipliers.\n-- User choice 29-10-2026: BLM uses 1.17 through P4, then 1.19 in P5.\n-- Other jobs retain their existing weights (Viper 1.1, shared 1.3, P4 1.2).\nlocal job = TensorCore.mGetPlayer().job\nlocal reaper = job == 39\nlocal raidBuffWeight = job == 25 and 1.17 or (job == 41 and 1.1 or 1.3)\nlocal p4RaidBuffWeight = job == 25 and 1.17 or 1.2\nlocal p5RaidBuffWeight = job == 25 and 1.19 or raidBuffWeight\n-- End useful post-CT uptime at Morn Afah's damage after the Akh Morns.\n-- Pull 20261016-1558-1238-3.txt: CT return 743.031s, Morn damage 758.187s (ACR clock).\n-- 15.156s is shorter than the assumed 20s raid buffs; preserve source coordinates for reanchors.\nlocal postCTCutoff = 754.093 + 15.156\n-- Median of 16 crystal lifetimes across four pulls; observed death corrects this estimate.\nlocal crystalEnd = 368.015 + 22.0935\n-- P2 Diamond Dust: Shiva untargetable at 196.046 (20261014-2124-1238-5.txt). Start this downtime\n-- 0.5s earlier than the logged untargetable time (user request 2026-10-20); apply() still adds\n-- its usual 0.5s early-start buffer on top.\nlocal diamondDustStart = 196.046 - 0.5\ndata.fru_rpr_forecast = {\n    version = 2,\n    phase = 1,\n    p2_returns = 0,\n    kill_time = 1127.03,\n    schedule = {\n        {\"FullDowntime\", 34.781, 80.015, 1, 0},\n        {\"FullDowntime\", 156.656, 160.968, 1, 0},\n        {\"FullDowntime\", diamondDustStart, 233.109, 1, 0},\n        {\"FullDowntime\", 292.905, 321.905, 1, 0},\n        {\"FullDowntime\", 346.202, 368.015, 1, 0},\n        {\"FullDowntime\", 411.249, 438.796, 1, 0},\n        {\"FullDowntime\", 600.436, 606.015, 1, 0},\n        {\"FullDowntime\", 705.483, 754.093, 1, 0},\n        {\"FullDowntime\", postCTCutoff, 854.296, 1, 0},\n        -- P2-to-intermission: Absolute Zero freeze (status 1150) stuns the party until just\n        -- before the Light crystals become targetable. Source 20261014-2124-1238-5.txt, ACR clock:\n        -- player status 350.077 -> freeze released 365.874 (crystals targetable 368.077).\n        -- Offsets from Absolute Zero (40224) cast: base +3.875 -> +19.672;\n        -- 20261018-0104-1238-4.txt +3.953 -> +19.625; 20261017-0132-1238-3.txt +3.719 -> +19.594.\n        {\"Stun\", 350.077, 365.874, 1, 0},\n        -- Actual P4-to-P5 transition; distinct from the earlier useful-damage cutoff.\n        {\"Stun\", 778.296, 854.296, 1, 0},\n        {\"CasterDowntime\", 34.781, 80.015, 1, 0},\n        {\"CasterDowntime\", 156.656, 160.968, 1, 0},\n        {\"CasterDowntime\", diamondDustStart, 233.109, 1, 0},\n        {\"CasterDowntime\", 292.905, 321.905, 1, 0},\n        {\"CasterDowntime\", 346.202, 368.015, 1, 0},\n        {\"CasterDowntime\", 411.249, 438.796, 1, 0},\n        -- All jobs: P3 Darkest Dance knockback (40183) -> following Dark Water III stack (40271).\n        -- Source 20261014-2124-1238-5.txt, ACR clock: 573.890 -> 577.936.\n        -- Corroborated by 20261018-0104-1238-4.txt (569.968 -> 573.952)\n        -- and 20261017-0132-1238-3.txt (566.235 -> 570.345); phase reanchors shift these bounds.\n        {\"CasterDowntime\", 573.890, 577.936, 1, 0},\n        {\"CasterDowntime\", 600.436, 606.015, 1, 0},\n        {\"CasterDowntime\", 705.483, 754.093, 1, 0},\n        {\"CasterDowntime\", postCTCutoff, 854.296, 1, 0},\n        -- All jobs: P5 Wings cast completion -> first DPS Explosion (second Explosion overall).\n        -- Base clock: 20261014-2124-1238-5.txt Wings completions 910.686 / 1028.202.\n        -- Earliest cast-to-second-Explosion delay among three valid P5 pulls: 3.890s for each.\n        -- 20261016-1558-1238-3.txt: 893.828 -> 897.750 (3.922s), 1011.250 -> 1015.140 (3.890s).\n        -- 20261017-0132-1238-3.txt: 897.939 -> 901.829 (3.890s), 1015.282 -> 1019.173 (3.891s).\n        -- Base pull delays are 3.954s / 3.922s. Retain the earliest aligned delay, not absolute pull time.\n        -- Exact starts honor the requested cast completion; reanchors shift both boundaries.\n        {\"CasterDowntime\", 910.686, 914.576, 1, 0, exactStart = true},\n        {\"CasterDowntime\", 1028.202, 1032.092, 1, 0, exactStart = true},\n        {\"TargetLifetime\", 0, 156.656, 1, 0},\n        {\"TargetLifetime\", 160.968, 346.202, 1, 0},\n        -- Intermission uses slot 0 only, for every job (user 2026-10-22): the player's Light Crystal,\n        -- then whatever they target next (another crystal or the Ice Veil), so the ACR never plans\n        -- around a distant target (\"AutoSim | Intermission slot 0 follows target\").\n        -- Two lifetimes only (user 2026-10-22): target switches don't start new ones. The crystal\n        -- lifetime ends when the slot-0 crystal first dies (\"AutoSim | Correct crystal death\");\n        -- until then the end is a source-pull estimate.\n        {\"TargetLifetime\", 368.015, crystalEnd, 1, 0, tag = \"crystal_lifetime\"},\n        {\"TargetLifetime\", crystalEnd, 411.249, 1, 0, tag = \"ice_lifetime\"},\n        {\"TargetLifetime\", 438.796, 600.436, 1, 0},\n        {\"TargetLifetime\", 854.296, 1127.03, 1, 0},\n        -- Preserve lifetimes through temporary untargetability; split only availability.\n        {\"DotAvailability\", 0, 34.781 - 0.5, 1, 0},\n        {\"DotAvailability\", 80.015, 156.656 - 0.5, 1, 0},\n        {\"DotAvailability\", 160.968, diamondDustStart - 0.5, 1, 0},\n        {\"DotAvailability\", 233.109, 292.905 - 0.5, 1, 0},\n        {\"DotAvailability\", 321.905, 346.202 - 0.5, 1, 0},\n        {\"DotAvailability\", 368.015, crystalEnd - 0.5, 1, 0, tag = \"crystal_availability\"},\n        {\"DotAvailability\", crystalEnd, 411.249 - 0.5, 1, 0, tag = \"ice_availability\"},\n        {\"DotAvailability\", 438.796, 600.436 - 0.5, 1, 0},\n        {\"DotAvailability\", 854.296, 1127.03, 1, 0},\n        -- P4 has one DoT target in slot 0 for every job: Ryne from phase start until Gaia spawns,\n        -- then a fresh lifetime on the same slot, reassigned to Gaia's entity.\n        -- Gaia's lifetime persists across CT; only availability and cleave stop during downtime.\n        {\"TargetLifetime\", 606.015, 631.436, 1, 0},\n        {\"TargetLifetime\", 631.436, 776.358, 1, 0},\n        -- AoE windows keep the two-target cleave; DD availability follows slot 0 only.\n        -- Uptime ends 0.5s early, matching the downtime ghosting buffer.\n        -- Ryne disappears first at 704.374; Gaia remains until 705.483.\n        {\"SelfCircle5Yd\", 631.436, 704.374 - 0.5, 2, 0},\n        {\"SelfCircle5Yd\", 754.093, postCTCutoff - 0.5, 2, 0},\n        {\"DotAvailability\", 606.015, 631.436, 1, 0},\n        {\"DotAvailability\", 631.436, 705.483 - 0.5, 1, 0},\n        {\"DotAvailability\", 754.093, postCTCutoff - 0.5, 1, 0},\n        {\"BossModifier\", 368.015, crystalEnd, 1, 0, tag=\"crystal_modifier\"},\n        {\"BossModifier\", crystalEnd, 411.249, 0.5, 0, tag=\"ice_modifier\"},\n        -- Discount useful post-CT damage through Morn Afah; later HP-capped damage has no value.\n        {\"BossModifier\", 754.093, postCTCutoff, 0.5, 0},\n        {\"BossModifier\", postCTCutoff, 854.296, 0, 0},\n        {\"RaidBuff\", 5.008, 26.781, raidBuffWeight, 0},\n        {\"RaidBuff\", 125.453, 147.308, raidBuffWeight, 0},\n        {\"RaidBuff\", 249.914, 272.344, raidBuffWeight, 0},\n        {\"RaidBuff\", 370.785, 395.05, raidBuffWeight, 0},\n        {\"RaidBuff\", 504.136, 526.675, raidBuffWeight, 0},\n        {\"RaidBuff\", 634.436, 654.436, p4RaidBuffWeight, 0},\n        {\"RaidBuff\", 859.007, 881.312, p5RaidBuffWeight, 0},\n        {\"RaidBuff\", 979.593, 1002.64, p5RaidBuffWeight, 0},\n        {\"RaidBuff\", 1101.171, 1123.023, p5RaidBuffWeight, 0},\n    }\n}\nlocal forecast = data.fru_rpr_forecast\n-- Non-Reaper jobs: late P1 Blastburn (40130) -> Explosion; start at the mechanic itself.\n-- Reaper skips this window: the gap leaves enough time to finish Communio.\n-- 20261017-0132-1238-3.txt: 143.891 -> 145.813, gap 1.922s.\n-- 20261016-1521-1238-3.txt: 143.781 -> 145.734, gap 1.953s.\n-- Align the 1.922s observed gap to base-pull Explosion 145.687\n-- (20261014-2124-1238-5.txt; that pull uses the alternate Burnout pattern).\nif not reaper then\n    forecast.schedule[#forecast.schedule + 1] = {\"CasterDowntime\", 143.765, 145.687, 1, 0, exactStart = true}\nend\n-- Samurai only (user 2026-10-24): the same Blastburn -> Explosion window is melee downtime, with\n-- Tendo Setsugekka / Tendo Kaeshi Setsugekka (6y) and Ogi Namikiri / Kaeshi: Namikiri (8y)\n-- planned from outside melee. Same sources and exact start as the CasterDowntime window above.\nif job == 34 then\n    forecast.schedule[#forecast.schedule + 1] = {\"MeleeDowntime\", 143.765, 145.687, 1, 0, exactStart = true}\n    forecast.schedule[#forecast.schedule + 1] = {\"Range6Yd\", 143.765, 145.687, 1, 0}\n    forecast.schedule[#forecast.schedule + 1] = {\"Range8Yd\", 143.765, 145.687, 1, 0}\nend\n-- Every job except Samurai and Reaper (user 2026-10-23: they can safely get casts off): each\n-- Fulgent Blade (40306) is a movement window from the second exaline detonation (first Path of\n-- Light/Darkness 40308/40309 wave, user-confirmed) to Pandora's Akh Morn (40310) first hit.\n-- Base clock: 20261014-2124-1238-5.txt, Fulgent Blades 865.546 / 978.874 / 1069.671.\n-- 17 pulls 2026-10-04..10-23: detonation +13.11..+13.27s, Akh Morn +26.75..+27.05s after the cast.\n-- Exact starts honor the detonation.\nif job ~= 34 and not reaper then\n    forecast.schedule[#forecast.schedule + 1] = {\"CasterDowntime\", 878.733, 892.390, 1, 0, exactStart = true}\n    forecast.schedule[#forecast.schedule + 1] = {\"CasterDowntime\", 992.108, 1005.733, 1, 0, exactStart = true}\n    forecast.schedule[#forecast.schedule + 1] = {\"CasterDowntime\", 1082.858, 1096.561, 1, 0, exactStart = true}\nend\n-- Additional movement forecasts are BLM-only; extend to other caster jobs as AutoSim supports them.\nif TensorCore.mGetPlayer().job == 25 then\n    -- Movement between the two post-Scythe Kick House of Light volleys.\n    -- Source pull 20261014-2124-1238-5.txt: first volley ends 265.077, second starts 274.921.\n    -- End movement 3s before the second volley; preserve source coordinates for phase reanchoring.\n    forecast.schedule[#forecast.schedule + 1] = {\"CasterDowntime\", 265.077, 271.921, 1, 0}\n    -- P3 after Spirit Taker: timeline Dark Eruption 635.4 -> Dark Water III 642.1.\n    -- Source pull resolves at 561.952 and 568.874; stop movement 2s before Water.\n    forecast.schedule[#forecast.schedule + 1] = {\"CasterDowntime\", 561.952, 566.874, 1, 0}\n    -- P4: timeline Path of Light 749.3 -> Spirit Taker 752.3, source pull cast completions.\n    forecast.schedule[#forecast.schedule + 1] = {\"CasterDowntime\", 650.999, 654.061, 1, 0}\nend\n-- Every job: Ryne becomes DoT slot 1 when Gaia takes slot 0 (new slot, new lifetime), so the\n-- boss the player is not targeting keeps a DoT slot (AS-015, user 2026-10-22; was BLM-only).\n-- Her lifetime persists through Crystallize Time; availability overlaps the two-boss\n-- SelfCircle5Yd windows (AS-003/AS-004).\nforecast.schedule[#forecast.schedule + 1] = {\"TargetLifetime\", 631.436, 778.296, 1, 1}\nforecast.schedule[#forecast.schedule + 1] = {\"DotAvailability\", 631.436, 704.374 - 0.5, 1, 1}\nforecast.schedule[#forecast.schedule + 1] = {\"DotAvailability\", 754.093, postCTCutoff - 0.5, 1, 1}\n-- Incidental two-boss cleave comes from many shapes (e.g. Reaper Gluttony/Communio/Perfectio,\n-- Bard Ladonsbite/Apex Arrow, Samurai cones). P4 is the only multi-target part of the fight.\n-- Mirror the two-boss SelfCircle5Yd windows for BRD, BLM, SAM, RPR and VPR across every other\n-- AoE shape; each ACR ignores shapes it does not use.\nlocal targetAoe = job == 23 or job == 25 or job == 34 or job == 39 or job == 41\nlocal targetAoeTypes = {\n    \"SelfCircle8Yd\", \"Cone8Yd\", \"Cone12Yd\", \"Line10Yd\", \"Line15Yd\", \"Line25Yd\",\n    \"TargetCircle5YdRange3Yd\", \"TargetCircle5YdRange5Yd\", \"TargetCircle5YdRange20Yd\",\n    \"TargetCircle5YdRange25Yd\", \"TargetCircle8YdRange25Yd\",\n}\nif targetAoe then\n    for i = 1, #targetAoeTypes do\n        forecast.schedule[#forecast.schedule + 1] = {targetAoeTypes[i], 631.436, 704.374 - 0.5, 2, 0}\n        forecast.schedule[#forecast.schedule + 1] = {targetAoeTypes[i], 754.093, postCTCutoff - 0.5, 2, 0}\n    end\nend\n-- This helper and template live only for this pull.\nfunction forecast.apply(anchor, actual)\n    local api = TensorCore.API.TensorACR\n    local kill = actual + forecast.kill_time - anchor\n    api.setAutoSimKillTime(kill)\n    api.clearAutoSimPhases(\"FullDowntime\")\n    api.clearAutoSimPhases(\"CasterDowntime\")\n    -- BLM return strategy (user 29-10-2026): return to the field when the\n    -- existing movement window ends. Rebuild with every phase reanchor.\n    if job == 25 then api.clearAutoSimPhases(\"GroundFieldMovement\") end\n    api.clearAutoSimPhases(\"Stun\")\n    api.clearAutoSimPhases(\"SelfCircle5Yd\")\n    -- Samurai only: other jobs keep their automatic melee downtime and range phases.\n    if job == 34 then\n        api.clearAutoSimPhases(\"MeleeDowntime\")\n        api.clearAutoSimPhases(\"Range6Yd\")\n        api.clearAutoSimPhases(\"Range8Yd\")\n    end\n    -- Listed jobs only: other jobs keep their automatic phases for these AoE shapes.\n    if targetAoe then\n        for i = 1, #targetAoeTypes do api.clearAutoSimPhases(targetAoeTypes[i]) end\n    end\n    api.clearAutoSimPhases(\"BossModifier\")\n    api.clearAutoSimPhases(\"RaidBuff\")\n    for slot = 0, 5 do\n        api.clearAutoSimPhases(\"TargetLifetime\", slot)\n        api.clearAutoSimPhases(\"DotAvailability\", slot)\n        if job == 25 then api.clearAutoSimPhases(\"DotAvailability\", slot, 1) end\n    end\n    for i = 1, #forecast.schedule do\n        local window = forecast.schedule[i]\n        if window[3] > anchor then\n            -- Begin downtime 0.5s early to avoid GCDs resolving after uptime ends.\n            -- Preserve canonical source times for reanchors and leave return times unchanged.\n            local sourceStart = window[2]\n            if not window.exactStart and (window[1] == \"FullDowntime\" or window[1] == \"MeleeDowntime\" or\n               window[1] == \"CasterDowntime\" or window[1] == \"Stun\") then\n                sourceStart = sourceStart - 0.5\n            end\n            local start = actual + math.max(0, sourceStart - anchor)\n            -- Reanchoring a surviving target must preserve its original lifetime start.\n            -- A new lifetime would discard its carried Death's Design/DoT state.\n            if window[1] == \"TargetLifetime\" then\n                start = actual + window[2] - anchor\n            end\n            local finish = actual + window[3] - anchor\n            api.addAutoSimPhase(window[1], start, finish, window[4], window[5])\n            -- CasterDowntime already forecasts leaving the field at start.\n            -- Value 2 predicts re-entry at finish; it does not move the player\n            -- or request Between the Lines, Retrace, or Ley Lines.\n            if job == 25 and window[1] == \"CasterDowntime\" then\n                api.addAutoSimPhase(\"GroundFieldMovement\", start, finish, 2)\n            end\n            -- AoE Thunder has independent availability but shares the primary target lifetime.\n            if job == 25 and window[1] == \"DotAvailability\" then\n                api.addAutoSimPhase(window[1], start, finish, window[4], window[5], 1)\n            end\n        end\n    end\n    -- Keep normal damage outside the post-CT discount; phases must not overlap.\n    if anchor >= 438.796 then\n        if anchor < 754.093 then\n            api.addAutoSimPhase(\"BossModifier\", actual, actual + 754.093 - anchor, 1)\n        end\n        local p5Start = actual + math.max(0, 854.296 - anchor)\n        api.addAutoSimPhase(\"BossModifier\", p5Start, kill, 1)\n    end\n    -- Rebuild uncertainty on the same clock as the reanchored schedule.\n    -- Uncertainty is encounter-wide: keep every P4 AoE boundary exact, including CT return/end.\n    -- Restore +/-15s immediately after the final post-CT AoE window, before P5.\n    -- A 1ms separation keeps the closing boundary at zero uncertainty.\n    -- Kill-time uncertainty continues through the transition and P5.\n    api.clearAutoSimUncertainty()\n    if anchor < 606.015 then\n        api.addAutoSimUncertainty(0, 15)\n        api.addAutoSimUncertainty(actual + 606.015 - anchor, 0)\n    end\n    api.addAutoSimUncertainty(actual + math.max(0, postCTCutoff + 0.001 - anchor), 15)\n    forecast.anchor = anchor\n    forecast.actual = actual\nend\n-- Crystal kills depend on party damage, not the fixed spawn timeline.\nfunction forecast.correctCrystalDeath(actual)\n    local sourceDeath = forecast.anchor + actual - forecast.actual\n    for i = 1, #forecast.schedule do\n        local window = forecast.schedule[i]\n        if window.tag == \"crystal_lifetime\" then\n            window[3] = sourceDeath\n        elseif window.tag == \"crystal_availability\" then\n            window[3] = sourceDeath - 0.5\n        elseif window.tag == \"ice_availability\" then\n            window[2] = sourceDeath\n        elseif window.tag == \"ice_lifetime\" then\n            window[2] = sourceDeath\n        end\n    end\n    -- This coordinate change preserves every other predicted mechanic timestamp.\n    forecast.apply(sourceDeath, actual)\n    forecast.crystal_dead = true\nend\n-- BossModifier is global to the current simulated target, not a DoT slot.\nfunction forecast.crystalModifier(target, actual)\n local big = target and target.contentid == 9358\n local value = big and (forecast.crystal_dead and 0.5 or 0) or 1\n if value == forecast.crystal_modifier_value then return end\n forecast.crystal_modifier_value=value\n for _,window in ipairs(forecast.schedule) do\n  if window.tag==\"crystal_modifier\" or window.tag==\"ice_modifier\" then window[4]=value end\n end\n forecast.apply(forecast.anchor+actual-forecast.actual,actual)\nend\nforecast.light_departures={}\nlocal darkCrystal = acr.addAOEBlacklistEntry(13556, \"Crystal of Darkness\")\ndarkCrystal.enabled = true\nforecast.apply(0, 0)\nself.used = true",
+				execute = "-- AutoSim v3: P4 slot 0 is Ryne, then Gaia from Gaia spawn; Ryne is slot 1 from Gaia spawn for\n-- every job. From Gaia spawn \"AutoSim | P4 slots follow target\" keeps slot 0 on the player's\n-- target and slot 1 on the other boss (AS-015, user 2026-10-22; replaces the one-slot P4 setup).\n-- FRU forecast: source pull 20261014-2124-1238-5.txt, seconds since combat start.\n-- Encounter geometry retains the source-pull clock; one-shot returns reanchor remaining windows.\n-- RaidBuff boundaries average per-pull first/last teammate status applications, aligned by phase.\n-- Samples: 20261016-1558, 20261016-1521, 20261015-1800, 20261014-2124 (P5: two pulls).\n-- Each buff is assumed to last 20s; Bard casts and the isolated old Dancer window are excluded.\n-- P4 opener raid buffs: Gaia +3s, 20s duration, weight 1.2.\n-- Ice Veil damage discount starts 2s after the logged first attack.\nlocal acr = TensorCore.API.TensorACR\n-- Viper and Samurai (user 2026-10-31) value raid buff windows at 1.1; other jobs retain 1.4.\nlocal job = TensorCore.mGetPlayer().job\nlocal reaper = job == 39\nlocal raidBuffWeight = (job == 41 or job == 34) and 1.1 or 1.4\n-- Samurai (user 2026-10-31): the intermission window keeps 1.4; other jobs use raidBuffWeight.\nlocal intermissionRaidBuffWeight = job == 34 and 1.4 or raidBuffWeight\n-- End useful post-CT uptime at Morn Afah's damage after the Akh Morns.\n-- Pull 20261016-1558-1238-3.txt: CT return 743.031s, Morn damage 758.187s (ACR clock).\n-- 15.156s is shorter than the assumed 20s raid buffs; preserve source coordinates for reanchors.\nlocal postCTCutoff = 754.093 + 15.156\n-- Post-CT HP lock (user 2026-10-26): Ryne and Gaia are both at 0.1% HP a median 14.31s after CT\n-- return in 75 current-patch FFLogs execution-ranked kills (p25 11.59s, p75 19.53s; kills that\n-- never locked count as late). Data: fflogs stuff\\samples\\1079_futures_rewritten\\\n-- p4_hp_lock_study\\locks.json. Post-CT damage is worth full value until then and nothing after;\n-- \"AutoSim | P4 HP lock cut-off\" moves this earlier if both bosses really reach 0.1% sooner.\nlocal p4Lock = 754.093 + 14.31\n-- Lock uncertainty (AS-017): the sample standard deviation of the user's 3 logged locks (small sample),\n-- measured from the CT return reanchor: \"AutoSim | P4 HP lock cut-off\" fired at +5.781s\n-- (20261031-1650-1238-1), +10.859s (20261030-1355-1238-1) and +15.266s (20261027-1628-1238-5).\n-- 20261027-1651-1238-7 and 20261027-1745-1238-13 reached P5 without locking. p4Lock stays the FFLogs\n-- median (user 2026-10-26).\nlocal p4LockUncertainty = 4.746\nlocal p4EarliestLock = 754.093 + 5.781\n-- Your Light Crystal (AS-017, user 2026-11-02), measured from the Ice Veil reanchor (371.983): in 45 user\n-- pulls with \"AutoSim | Correct crystal death\" the player's crystal died a median 18.921s after the Ice\n-- Veil became targetable (sd 2.314s; fastest 13.781s, 20261019-1227-1238-4; slowest 23.750s,\n-- 20261023-1423-1238-4). Observed death corrects this estimate.\nlocal crystalEnd = 371.983 + 18.921\nlocal crystalUncertainty = 2.314\nlocal crystalEarliest = 371.983 + 13.781\n-- P1 kill (AS-017, user 2026-11-02): 274 user pulls reached the P2 push. Fatebreaker went untargetable\n-- a median 75.594s after his P1 return (sd 4.696s; fastest 63.266s, 20260802-2231-1238-2; slowest\n-- 81.672s, 20261007-2234-1238-3). The source pull took 76.641s (80.015 -> 156.656), so until P1 ends\n-- apply() moves everything from P1's end (its availability end, p1EndCut) onward by p1EndShift;\n-- earlier P1 mechanics stay put. The return itself varies only 79.891-80.469s.\nlocal p1EndShift = 75.594 - 76.641\nlocal p1EndCut = 156.656 - 0.5\nlocal p1Uncertainty = 4.696\nlocal p1Earliest = 80.015 + 63.266\n-- P5 kill (AS-017, user 2026-11-02): the user's 8 P5 kills came a median 265.719s after Pandora became\n-- targetable (sd 2.847s; fastest 260.609s, 20261017-0132-1238-3; slowest 269.611s, 20261013-1508-1238-2).\n-- The source pull's 1127.03 (P5 start + 272.734s) was the Paradise Lost enrage, as were 4 other wipes\n-- (271.890-272.594s).\nlocal p5Kill = 854.296 + 265.719\nlocal p5KillUncertainty = 2.847\nlocal p5Earliest = 854.296 + 260.609\n-- Each uncertainty span starts this long before its kill's earliest logged time (AS-016; rikudou\n-- 2026-11-02: roughly 1-5s before the earliest point the boss can die).\nlocal uncertaintyLead = 3\n-- Ice Veil (user 2026-11-02): targetable at 371.983, dead at 411.249 (39.266s) in the source pull.\n-- 134 kills in the user's logs died 39.09-40.66s after it became targetable, and P3 started\n-- 27.50-27.69s after the death. If it is still targetable at its forecast death, its phase runs to the\n-- Endless Ice Age (40259) enrage: untargetable without dying a median 40.968s after targetable\n-- (40.891-41.047s) in 13 wiped pulls (e.g. 20261023-1452-1238-2, 20261030-2248-1238-3); none reached P3.\nlocal iceVeilEnd = 411.249\nlocal iceVeilEnrage = 371.983 + 40.968\n-- P2 Diamond Dust: Shiva untargetable at 196.046 (20261014-2124-1238-5.txt). Start this downtime\n-- 0.5s earlier than the logged untargetable time (user request 2026-10-20); apply() still adds\n-- its usual 0.5s early-start buffer on top.\nlocal diamondDustStart = 196.046 - 0.5\ndata.fru_rpr_forecast = {\n    version = 2,\n    phase = 1,\n    p2_returns = 0,\n    kill_time = p5Kill,\n    ice_veil_end = iceVeilEnd,\n    ice_veil_enrage = iceVeilEnrage,\n    schedule = {\n        {\"FullDowntime\", 34.781, 80.015, 1, 0},\n        {\"FullDowntime\", 156.656, 160.968, 1, 0},\n        {\"FullDowntime\", diamondDustStart, 233.109, 1, 0},\n        {\"FullDowntime\", 292.905, 321.905, 1, 0},\n        {\"FullDowntime\", 346.202, 368.015, 1, 0},\n        {\"FullDowntime\", iceVeilEnd, 438.796, 1, 0, tag = \"ice_downtime\"},\n        {\"FullDowntime\", 600.436, 606.015, 1, 0},\n        {\"FullDowntime\", 705.483, 754.093, 1, 0},\n        {\"FullDowntime\", postCTCutoff, 854.296, 1, 0},\n        -- P2-to-intermission: Absolute Zero freeze (status 1150) stuns the party until just\n        -- before the Light crystals become targetable. Source 20261014-2124-1238-5.txt, ACR clock:\n        -- player status 350.077 -> freeze released 365.874 (crystals targetable 368.077).\n        -- Offsets from Absolute Zero (40224) cast: base +3.875 -> +19.672;\n        -- 20261018-0104-1238-4.txt +3.953 -> +19.625; 20261017-0132-1238-3.txt +3.719 -> +19.594.\n        {\"Stun\", 350.077, 365.874, 1, 0},\n        -- Actual P4-to-P5 transition; distinct from the earlier useful-damage cutoff.\n        {\"Stun\", 778.296, 854.296, 1, 0},\n        {\"CasterDowntime\", 34.781, 80.015, 1, 0},\n        {\"CasterDowntime\", 156.656, 160.968, 1, 0},\n        {\"CasterDowntime\", diamondDustStart, 233.109, 1, 0},\n        {\"CasterDowntime\", 292.905, 321.905, 1, 0},\n        {\"CasterDowntime\", 346.202, 368.015, 1, 0},\n        {\"CasterDowntime\", iceVeilEnd, 438.796, 1, 0, tag = \"ice_downtime\"},\n        -- All jobs: P3 Darkest Dance knockback (40183) -> following Dark Water III stack (40271).\n        -- Source 20261014-2124-1238-5.txt, ACR clock: 573.890 -> 577.936.\n        -- Corroborated by 20261018-0104-1238-4.txt (569.968 -> 573.952)\n        -- and 20261017-0132-1238-3.txt (566.235 -> 570.345); phase reanchors shift these bounds.\n        {\"CasterDowntime\", 573.890, 577.936, 1, 0},\n        {\"CasterDowntime\", 600.436, 606.015, 1, 0},\n        {\"CasterDowntime\", 705.483, 754.093, 1, 0},\n        {\"CasterDowntime\", postCTCutoff, 854.296, 1, 0},\n        -- All jobs: P5 Wings cast completion -> first DPS Explosion (second Explosion overall).\n        -- Base clock: 20261014-2124-1238-5.txt Wings completions 910.686 / 1028.202.\n        -- Earliest cast-to-second-Explosion delay among three valid P5 pulls: 3.890s for each.\n        -- 20261016-1558-1238-3.txt: 893.828 -> 897.750 (3.922s), 1011.250 -> 1015.140 (3.890s).\n        -- 20261017-0132-1238-3.txt: 897.939 -> 901.829 (3.890s), 1015.282 -> 1019.173 (3.891s).\n        -- Base pull delays are 3.954s / 3.922s. Retain the earliest aligned delay, not absolute pull time.\n        -- Exact starts honor the requested cast completion; reanchors shift both boundaries.\n        {\"CasterDowntime\", 910.686, 914.576, 1, 0, exactStart = true},\n        {\"CasterDowntime\", 1028.202, 1032.092, 1, 0, exactStart = true},\n        {\"TargetLifetime\", 0, 156.656, 1, 0},\n        {\"TargetLifetime\", 160.968, 346.202, 1, 0},\n        -- Intermission uses slot 0 only, for every job (user 2026-10-22): the player's Light Crystal,\n        -- then whatever they target next (another crystal or the Ice Veil), so the ACR never plans\n        -- around a distant target (\"AutoSim | Intermission slot 0 follows target\").\n        -- Two lifetimes only (user 2026-10-22): target switches don't start new ones. The crystal\n        -- lifetime ends when the slot-0 crystal first dies (\"AutoSim | Correct crystal death\");\n        -- until then the end is a source-pull estimate.\n        {\"TargetLifetime\", 368.015, crystalEnd, 1, 0, tag = \"crystal_lifetime\"},\n        {\"TargetLifetime\", crystalEnd, iceVeilEnd, 1, 0, tag = \"ice_lifetime\"},\n        {\"TargetLifetime\", 438.796, 600.436, 1, 0},\n        {\"TargetLifetime\", 854.296, p5Kill, 1, 0},\n        -- Preserve lifetimes through temporary untargetability; split only availability.\n        {\"DotAvailability\", 0, 34.781 - 0.5, 1, 0},\n        {\"DotAvailability\", 80.015, 156.656 - 0.5, 1, 0},\n        {\"DotAvailability\", 160.968, diamondDustStart - 0.5, 1, 0},\n        {\"DotAvailability\", 233.109, 292.905 - 0.5, 1, 0},\n        {\"DotAvailability\", 321.905, 346.202 - 0.5, 1, 0},\n        {\"DotAvailability\", 368.015, crystalEnd - 0.5, 1, 0, tag = \"crystal_availability\"},\n        {\"DotAvailability\", crystalEnd, iceVeilEnd - 0.5, 1, 0, tag = \"ice_availability\"},\n        {\"DotAvailability\", 438.796, 600.436 - 0.5, 1, 0},\n        {\"DotAvailability\", 854.296, p5Kill, 1, 0},\n        -- P4 has one DoT target in slot 0 for every job: Ryne from phase start until Gaia spawns,\n        -- then a fresh lifetime on the same slot, reassigned to Gaia's entity.\n        -- Gaia's lifetime persists across CT; only availability and cleave stop during downtime.\n        {\"TargetLifetime\", 606.015, 631.436, 1, 0},\n        {\"TargetLifetime\", 631.436, 776.358, 1, 0},\n        -- AoE windows keep the two-target cleave; DD availability follows slot 0 only.\n        -- Uptime ends 0.5s early, matching the downtime ghosting buffer.\n        -- Ryne disappears first at 704.374; Gaia remains until 705.483.\n        {\"SelfCircle5Yd\", 631.436, 704.374 - 0.5, 2, 0},\n        {\"SelfCircle5Yd\", 754.093, postCTCutoff - 0.5, 2, 0},\n        {\"DotAvailability\", 606.015, 631.436, 1, 0},\n        {\"DotAvailability\", 631.436, 705.483 - 0.5, 1, 0},\n        {\"DotAvailability\", 754.093, postCTCutoff - 0.5, 1, 0},\n        {\"BossModifier\", 395.155, iceVeilEnd, 0.5, 0, tag = \"ice_discount\"},\n        -- Full value until the post-CT HP lock; damage on bosses at 0.1% has no value.\n        {\"BossModifier\", 754.093, p4Lock, 1, 0},\n        {\"BossModifier\", p4Lock, 854.296, 0, 0},\n        {\"RaidBuff\", 5.008, 26.781, raidBuffWeight, 0},\n        {\"RaidBuff\", 125.453, 147.308, raidBuffWeight, 0},\n        {\"RaidBuff\", 249.914, 272.344, raidBuffWeight, 0},\n        {\"RaidBuff\", 370.785, 395.05, intermissionRaidBuffWeight, 0},\n        {\"RaidBuff\", 504.136, 526.675, raidBuffWeight, 0},\n        {\"RaidBuff\", 634.436, 654.436, 1.2, 0},\n        {\"RaidBuff\", 859.007, 881.312, raidBuffWeight, 0},\n        {\"RaidBuff\", 979.593, 1002.64, raidBuffWeight, 0},\n        {\"RaidBuff\", 1101.171, 1123.023, raidBuffWeight, 0},\n    }\n}\nlocal forecast = data.fru_rpr_forecast\n-- Every job: late P1 Blastburn (40130) -> Explosion; start at the mechanic itself.\n-- Reaper is included again (user 2026-10-27); it was skipped from 2026-10-18 so Communio fit.\n-- 20261017-0132-1238-3.txt: 143.891 -> 145.813, gap 1.922s.\n-- 20261016-1521-1238-3.txt: 143.781 -> 145.734, gap 1.953s.\n-- Align the 1.922s observed gap to base-pull Explosion 145.687\n-- (20261014-2124-1238-5.txt; that pull uses the alternate Burnout pattern).\nforecast.schedule[#forecast.schedule + 1] = {\"CasterDowntime\", 143.765, 145.687, 1, 0, exactStart = true}\n-- Samurai only (user 2026-10-24): the same Blastburn -> Explosion window is melee downtime, with\n-- Tendo Setsugekka / Tendo Kaeshi Setsugekka (6y) and Ogi Namikiri / Kaeshi: Namikiri (8y)\n-- planned from outside melee. Same sources and exact start as the CasterDowntime window above.\nif job == 34 then\n    forecast.schedule[#forecast.schedule + 1] = {\"MeleeDowntime\", 143.765, 145.687, 1, 0, exactStart = true}\n    forecast.schedule[#forecast.schedule + 1] = {\"Range6Yd\", 143.765, 145.687, 1, 0}\n    forecast.schedule[#forecast.schedule + 1] = {\"Range8Yd\", 143.765, 145.687, 1, 0}\nend\n-- Reaper (user 2026-10-27): the same Blastburn -> Explosion window is melee downtime too. Same\n-- sources and exact start as above; Reaper also has the CasterDowntime window above.\nif reaper then\n    forecast.schedule[#forecast.schedule + 1] = {\"MeleeDowntime\", 143.765, 145.687, 1, 0, exactStart = true}\nend\n-- Additional movement forecasts are BLM-only; extend to other caster jobs as AutoSim supports them.\nif TensorCore.mGetPlayer().job == 25 then\n    -- Movement between the two post-Scythe Kick House of Light volleys.\n    -- Source pull 20261014-2124-1238-5.txt: first volley ends 265.077, second starts 274.921.\n    -- End movement 3s before the second volley; preserve source coordinates for phase reanchoring.\n    forecast.schedule[#forecast.schedule + 1] = {\"CasterDowntime\", 265.077, 271.921, 1, 0}\n    -- P3 after Spirit Taker: timeline Dark Eruption 635.4 -> Dark Water III 642.1.\n    -- Source pull resolves at 561.952 and 568.874; stop movement 2s before Water.\n    forecast.schedule[#forecast.schedule + 1] = {\"CasterDowntime\", 561.952, 566.874, 1, 0}\n    -- P4: timeline Path of Light 749.3 -> Spirit Taker 752.3, source pull cast completions.\n    forecast.schedule[#forecast.schedule + 1] = {\"CasterDowntime\", 650.999, 654.061, 1, 0}\n    -- Ley Lines (user 2026-10-29): leave the field before Mirror Mirror's Scythe Kick (40203) and stay out.\n    -- 5 BLM pulls left 2.78-8.12s before the kick, median 4.30s (20261018-1739-1238-4, 20261023-0018-1238-4,\n    -- 20261023-0034-1238-5, 20261023-1503-1238-3, 20261023-2005-1238-11); base Scythe Kick 264.186.\n    -- Ends where the House of Light CasterDowntime above takes over.\n    forecast.schedule[#forecast.schedule + 1] = {\"GroundFieldMovement\", 264.186 - 4.30, 265.077, 1, 0}\n    -- Ley Lines (user 2026-10-29): leave around the first Banish III and stay out until Light Rampant's\n    -- downtime. Weak evidence: 4 BLM pulls left -1.56..+7.82s from the Banish III cast, median +4.03s\n    -- (20261022-1755-1238-8, 20261022-1806-1238-9, 20261023-0008-1238-1, 20261023-1950-1238-8);\n    -- base Banish III (40220) 280.34.\n    forecast.schedule[#forecast.schedule + 1] = {\"GroundFieldMovement\", 280.34 + 4.03, 292.905, 1, 0}\n    -- P5 Polarizing Strikes/Paths (user 2026-10-30): movement from the first party-wide hit to the\n    -- last hit of the same set; two sets. Each set is four Cruel Path of Light/Darkness (40317/40318)\n    -- hits, one after Polarizing Strikes (40316) and one after each of the three Polarizing Paths.\n    -- Base clock 20261014-2124-1238-5.txt: 932.780 -> 946.780 and 1045.015 -> 1058.952.\n    -- 35 complete sets in 21 user pulls (2026-07-04..10-30): first hit +0.47..+0.65s, last hit\n    -- +14.35..+14.61s after the Polarizing Strikes cast. Exact starts honor the first hit.\n    forecast.schedule[#forecast.schedule + 1] = {\"CasterDowntime\", 932.780, 946.780, 1, 0, exactStart = true}\n    forecast.schedule[#forecast.schedule + 1] = {\"CasterDowntime\", 1045.015, 1058.952, 1, 0, exactStart = true}\n    -- P5 Fulgent Blade (user 2026-10-31): movement from 3.5 Pandora auto-attacks after each Fulgent Blade\n    -- (40306) cast, i.e. midway between the 3rd and 4th auto (40114), to halfway through Pandora's\n    -- Akh Morn (40310, 7.7s channel). Base clock 20261014-2124-1238-5.txt: casts 865.546 / 978.874 /\n    -- 1069.671; starts 876.585 / 989.937 / 1080.734 (+11.04..+11.06s); ends channel + 3.85 =\n    -- 888.255 / 1001.677 / 1092.427 (+22.71..+22.80s). 20261031-1650-1238-1.txt matches\n    -- (+11.01..+11.10s, +22.69..+22.88s). Exact starts honor the auto-attack timing.\n    -- Ley Lines (user 2026-10-31): CasterDowntime leaves the field at each window's start, and there is\n    -- deliberately no GroundFieldMovement re-entry, so the sim plans as if Ley Lines is lost afterwards.\n    local fulgentMovement = {\n        {876.585, 888.255},\n        {989.937, 1001.677},\n        {1080.734, 1092.427},\n    }\n    for i = 1, #fulgentMovement do\n        local window = fulgentMovement[i]\n        forecast.schedule[#forecast.schedule + 1] = {\"CasterDowntime\", window[1], window[2], 1, 0, exactStart = true}\n    end\n    -- P1 Cyclonic Break spread (40148) is added at the cast by \"AutoSim | [BLM] Cyclonic Break spread Ley Lines\".\nend\n-- Every job: Ryne becomes DoT slot 1 when Gaia takes slot 0 (new slot, new lifetime), so the\n-- boss the player is not targeting keeps a DoT slot (AS-015, user 2026-10-22; was BLM-only).\n-- Her lifetime persists through Crystallize Time; availability overlaps the two-boss\n-- SelfCircle5Yd windows (AS-003/AS-004).\nforecast.schedule[#forecast.schedule + 1] = {\"TargetLifetime\", 631.436, 778.296, 1, 1}\nforecast.schedule[#forecast.schedule + 1] = {\"DotAvailability\", 631.436, 704.374 - 0.5, 1, 1}\nforecast.schedule[#forecast.schedule + 1] = {\"DotAvailability\", 754.093, postCTCutoff - 0.5, 1, 1}\n-- Incidental two-boss cleave comes from many shapes (e.g. Reaper Gluttony/Communio/Perfectio,\n-- Bard Ladonsbite/Apex Arrow, Samurai cones). P4 is the only multi-target part of the fight.\n-- Mirror the two-boss SelfCircle5Yd windows for BRD, BLM, SAM, RPR and VPR across every other\n-- AoE shape; each ACR ignores shapes it does not use.\nlocal targetAoe = job == 23 or job == 25 or job == 34 or job == 39 or job == 41\nlocal targetAoeTypes = {\n    \"SelfCircle8Yd\", \"Cone8Yd\", \"Cone12Yd\", \"Line10Yd\", \"Line15Yd\", \"Line25Yd\",\n    \"TargetCircle5YdRange3Yd\", \"TargetCircle5YdRange5Yd\", \"TargetCircle5YdRange20Yd\",\n    \"TargetCircle5YdRange25Yd\", \"TargetCircle8YdRange25Yd\",\n}\nif targetAoe then\n    for i = 1, #targetAoeTypes do\n        forecast.schedule[#forecast.schedule + 1] = {targetAoeTypes[i], 631.436, 704.374 - 0.5, 2, 0}\n        forecast.schedule[#forecast.schedule + 1] = {targetAoeTypes[i], 754.093, postCTCutoff - 0.5, 2, 0}\n    end\nend\n-- This helper and template live only for this pull.\nfunction forecast.apply(anchor, actual)\n    local api = TensorCore.API.TensorACR\n    -- Source time -> AutoSim time. Until P1 ends (\"AutoSim | Reanchor P1 end\", anchor 156.656), P1's\n    -- end and everything after it move by p1EndShift, so P1 ends at the median kill and P2 follows it.\n    local function at(t)\n        if anchor < 156.656 and t >= p1EndCut then t = t + p1EndShift end\n        return actual + t - anchor\n    end\n    local kill = at(forecast.kill_time)\n    api.setAutoSimKillTime(kill)\n    api.clearAutoSimPhases(\"FullDowntime\")\n    api.clearAutoSimPhases(\"CasterDowntime\")\n    api.clearAutoSimPhases(\"Stun\")\n    api.clearAutoSimPhases(\"SelfCircle5Yd\")\n    -- Samurai and Reaper only: other jobs keep their automatic melee downtime; only Samurai\n    -- schedules the range phases.\n    if job == 34 or reaper then\n        api.clearAutoSimPhases(\"MeleeDowntime\")\n    end\n    if job == 34 then\n        api.clearAutoSimPhases(\"Range6Yd\")\n        api.clearAutoSimPhases(\"Range8Yd\")\n    end\n    -- Listed jobs only: other jobs keep their automatic phases for these AoE shapes.\n    if targetAoe then\n        for i = 1, #targetAoeTypes do api.clearAutoSimPhases(targetAoeTypes[i]) end\n    end\n    api.clearAutoSimPhases(\"BossModifier\")\n    api.clearAutoSimPhases(\"RaidBuff\")\n    -- BLM only: Ley Lines exits and re-entries; other jobs have no ground field.\n    if job == 25 then api.clearAutoSimPhases(\"GroundFieldMovement\") end\n    for slot = 0, 5 do\n        api.clearAutoSimPhases(\"TargetLifetime\", slot)\n        api.clearAutoSimPhases(\"DotAvailability\", slot)\n        if job == 25 then api.clearAutoSimPhases(\"DotAvailability\", slot, 1) end\n    end\n    for i = 1, #forecast.schedule do\n        local window = forecast.schedule[i]\n        if window[3] > anchor then\n            -- Begin downtime 0.5s early to avoid GCDs resolving after uptime ends.\n            -- Preserve canonical source times for reanchors and leave return times unchanged.\n            local sourceStart = window[2]\n            if not window.exactStart and (window[1] == \"FullDowntime\" or window[1] == \"MeleeDowntime\" or\n               window[1] == \"CasterDowntime\" or window[1] == \"Stun\") then\n                sourceStart = sourceStart - 0.5\n            end\n            local start = math.max(actual, at(sourceStart))\n            -- Reanchoring a surviving target must preserve its original lifetime start.\n            -- A new lifetime would discard its carried Death's Design/DoT state.\n            if window[1] == \"TargetLifetime\" then\n                start = at(window[2])\n            end\n            local finish = at(window[3])\n            api.addAutoSimPhase(window[1], start, finish, window[4], window[5])\n            -- AoE Thunder has independent availability but shares the primary target lifetime.\n            if job == 25 and window[1] == \"DotAvailability\" then\n                api.addAutoSimPhase(window[1], start, finish, window[4], window[5], 1)\n            end\n        end\n    end\n    -- Keep normal damage outside the post-CT discount; phases must not overlap.\n    if anchor >= 438.796 then\n        if anchor < 754.093 then\n            api.addAutoSimPhase(\"BossModifier\", actual, actual + 754.093 - anchor, 1)\n        end\n        local p5Start = actual + math.max(0, 854.296 - anchor)\n        api.addAutoSimPhase(\"BossModifier\", p5Start, kill, 1)\n    end\n    -- Rebuild uncertainty on the same clock as the reanchored schedule (AS-016 to AS-018, user and\n    -- rikudou 2026-11-02). Only kill times get uncertainty. Each span starts uncertaintyLead before its\n    -- kill's earliest logged time and ends 1ms after its estimate; fixed windows outside the spans stay\n    -- exact. Each kill's resync rebuilds from that moment, so its span closes, and later spans move with\n    -- the schedule and keep their amounts:\n    -- P1 kill: starts at 140.281, so the late-P1 Blastburn downtime (143.765-145.687) and the P1 raid buff\n    -- end (147.308) carry +/-p1Uncertainty too (rikudou's placement, user 2026-11-02).\n    -- Resync: \"AutoSim | Reanchor P1 end\".\n    -- Your Light Crystal. Resync: \"AutoSim | Correct crystal death\".\n    -- Post-CT HP lock. Resync: \"AutoSim | P4 HP lock cut-off\", only when the lock comes early.\n    -- P5 kill: the end of the fight.\n    local crystalLifetimeEnd = crystalEnd\n    local p4LockEnd = p4Lock\n    for i = 1, #forecast.schedule do\n        local window = forecast.schedule[i]\n        if window.tag == \"crystal_lifetime\" then crystalLifetimeEnd = window[3] end\n        if window[1] == \"BossModifier\" and window[4] == 0 and window[3] == 854.296 then p4LockEnd = window[2] end\n    end\n    -- A kill seen before its lead point pulls the span start back with it, so changes stay in order.\n    local levels = {\n        {0, 0},\n        {p1Earliest - uncertaintyLead, p1Uncertainty},\n        {156.656 + 0.001, 0},\n        {math.min(crystalEarliest - uncertaintyLead, crystalLifetimeEnd), crystalUncertainty},\n        {crystalLifetimeEnd + 0.001, 0},\n        {math.min(p4EarliestLock - uncertaintyLead, p4LockEnd), p4LockUncertainty},\n        {p4LockEnd + 0.001, 0},\n        {p5Earliest - uncertaintyLead, p5KillUncertainty},\n        {forecast.kill_time + 0.001, 0},\n    }\n    -- The level in effect at the anchor starts now; later changes follow on the same clock.\n    -- Two changes can't share a time, so changes at or before the anchor are skipped.\n    api.clearAutoSimUncertainty()\n    local current = levels[1][2]\n    for i = 2, #levels do\n        if levels[i][1] <= anchor then current = levels[i][2] end\n    end\n    api.addAutoSimUncertainty(actual, current)\n    for i = 2, #levels do\n        if levels[i][1] > anchor then\n            api.addAutoSimUncertainty(at(levels[i][1]), levels[i][2])\n        end\n    end\n    forecast.anchor = anchor\n    forecast.actual = actual\nend\n-- Ice Veil death (user 2026-11-02): its lifetime, availability and damage discount end, and the\n-- transition downtime starts, at sourceEnd. \"AutoSim | Ice Veil enrage extension\" moves this to the\n-- enrage when the Veil outlives its forecast; \"AutoSim | Reanchor Ice Veil death\" restores it.\nfunction forecast.setIceVeilEnd(sourceEnd)\n    for i = 1, #forecast.schedule do\n        local window = forecast.schedule[i]\n        if window.tag == \"ice_lifetime\" or window.tag == \"ice_discount\" then\n            window[3] = sourceEnd\n        elseif window.tag == \"ice_availability\" then\n            window[3] = sourceEnd - 0.5\n        elseif window.tag == \"ice_downtime\" then\n            window[2] = sourceEnd\n        end\n    end\nend\n-- Crystal kills depend on party damage, not the fixed spawn timeline.\nfunction forecast.correctCrystalDeath(actual)\n    local sourceDeath = forecast.anchor + actual - forecast.actual\n    for i = 1, #forecast.schedule do\n        local window = forecast.schedule[i]\n        if window.tag == \"crystal_lifetime\" then\n            window[3] = sourceDeath\n        elseif window.tag == \"crystal_availability\" then\n            window[3] = sourceDeath - 0.5\n        elseif window.tag == \"ice_availability\" then\n            window[2] = sourceDeath\n        elseif window.tag == \"ice_lifetime\" then\n            window[2] = sourceDeath\n        end\n    end\n    -- This coordinate change preserves every other predicted mechanic timestamp.\n    forecast.apply(sourceDeath, actual)\n    forecast.crystal_dead = true\nend\nlocal darkCrystal = acr.addAOEBlacklistEntry(13556, \"Crystal of Darkness\")\ndarkCrystal.enabled = true\nforecast.apply(0, 0)\nself.used = true",
 				executeType = 2,
 				mechanicTime = 13.7,
 				name = "AutoSim | FRU baseline",
@@ -284,34 +284,51 @@ local tbl =
 		{
 			data = 
 			{
-				displayPath = "",
-				name = "General",
-				uuid = "f140ec50-4062-81e8-bedf-119152709637",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
 				actions = 
 				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "-- BLM spread Cyclonic Break (user 2026-10-29): walk out of Ley Lines after the first protean and\n-- back in after the second. Stack (40144) keeps the BLM inside, so it adds nothing.\n-- 19 BLM pulls 2026-10-18..10-23: out at cast +0.80..+2.16s (median +1.53s), back inside at\n-- +2.22..+5.33s (median +3.36s); e.g. 20261023-1935-1238-6, 20261023-1953-1238-9, 20261023-0012-1238-3.\nlocal forecast = data.fru_rpr_forecast\nlocal api = TensorCore.API.TensorACR\nlocal actual = api.getAutoSimTime()\nif actual <= 0 then return end\n-- Keep the window in the schedule on the source clock so later reapplies retain it.\nlocal sourceCast = forecast.anchor + actual - forecast.actual\nforecast.schedule[#forecast.schedule + 1] = {\"GroundFieldMovement\", sourceCast + 1.53, sourceCast + 3.36, 2, 0}\napi.addAutoSimPhase(\"GroundFieldMovement\", actual + 1.53, actual + 3.36, 2)\nforecast.cyclonic_spread = true\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"ebfccb1c-ac0d-2b61-ae55-574a1e470721",
+									true,
+								},
+							},
+							name = "Predict Ley Lines walk-out and return",
+							uuid = "e066c78b-6331-e0d6-ab80-4639f726817a",
+							version = 2.1,
+						},
+					},
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local forecast = data.fru_rpr_forecast\nreturn TensorCore.mGetPlayer().job == 25 and forecast ~= nil and forecast.version == 2 and forecast.phase == 1 and not forecast.cyclonic_spread and eventArgs.spellID == 40148",
+							dequeueIfLuaFalse = true,
+							name = "BLM, spread Cyclonic Break",
+							uuid = "ebfccb1c-ac0d-2b61-ae55-574a1e470721",
+							version = 3,
+						},
+					},
 				},
-				displayPath = "General",
-				eventType = 13,
-				execute = "if AnyoneCore and AnyoneCore.Settings and AnyoneCore.Settings.PrepullHelper then\n    if AnyoneCore.Settings.PrepullHelper.enabled then\n        AnyoneCore.Settings.PrepullHelper.enabled = false\n    end\n    self.used = true\nend\n",
-				executeType = 2,
+				eventType = 2,
 				mechanicTime = 13.7,
-				name = "[AA] Disable Prepull Helper",
-				throttleTime = 1000,
+				name = "AutoSim | [BLM] Cyclonic Break spread Ley Lines",
 				timeRange = true,
 				timelineIndex = 1,
-				timerEndOffset = -8.7,
-				timerStartOffset = -13.7,
-				uuid = "f206d4d8-ed9e-9c96-9f0a-552d3ac8c241",
+				timerEndOffset = 3,
+				timerStartOffset = -5,
+				uuid = "55043696-088d-aa6e-aafd-3f7ef5416dde",
 				version = 2,
 			},
 		},
@@ -449,6 +466,59 @@ local tbl =
 				timelineIndex = 35,
 				timerOffset = -0.5,
 				uuid = "26241946-9687-3fa0-b3ac-a8b74fd49170",
+				version = 2,
+			},
+		},
+		
+		{
+			data =
+			{
+				actions =
+				{
+					
+					{
+						data =
+						{
+							aType = "Lua",
+							actionLua = "-- P1 end (AS-018, user 2026-11-02): Fatebreaker goes untargetable when P1 is killed. Resync there so the\n-- P1 kill's uncertainty ends and P2 follows the real kill (P2 starts 4.31-4.48s later in the user's logs).\nlocal forecast = data.fru_rpr_forecast\nlocal actual = TensorCore.API.TensorACR.getAutoSimTime()\nif actual <= 0 then return end\nforecast.p1_dead = true\nforecast.apply(156.656, actual)\nself.used = true",
+							conditions =
+							{
+								
+								{
+									"9b859925-dfdb-4b2e-b931-622fe35fc3e6",
+									true,
+								},
+							},
+							name = "Apply P1 end",
+							uuid = "bd84fae2-c0c9-49d2-9190-e531585d7a0e",
+							version = 2.1,
+						},
+					},
+				},
+				conditions =
+				{
+					
+					{
+						data =
+						{
+							category = "Lua",
+							conditionLua = "local forecast = data.fru_rpr_forecast\nreturn forecast ~= nil and forecast.version == 2 and forecast.phase == 1 and not forecast.p1_dead and forecast.anchor >= 80.015 and eventArgs.entityContentID == 9707 and eventArgs.isTargetable == false",
+							dequeueIfLuaFalse = true,
+							name = "Fatebreaker lost",
+							uuid = "9b859925-dfdb-4b2e-b931-622fe35fc3e6",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Reanchors",
+				eventType = 26,
+				mechanicTime = 145.6,
+				name = "AutoSim | Reanchor P1 end",
+				timeRange = true,
+				timelineIndex = 35,
+				timerEndOffset = 25,
+				timerStartOffset = -10,
+				uuid = "373d42bc-12e4-47f7-a211-6b7214d7c5ad",
 				version = 2,
 			},
 		},
@@ -799,7 +869,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local forecast = data.fru_rpr_forecast\nif not forecast or forecast.version ~= 2 then return end\nlocal acr = TensorCore.API.TensorACR\nlocal actual = acr.getAutoSimTime()\nif actual <= 0 then return end\nif not forecast.light_resynced then\n forecast.light_resynced=true\n forecast.apply(368.015, actual)\nend\nforecast.phase = 2.5\n-- Pin the assigned Light Crystal; do not let Ice Veil reuse its DD identity.\nforecast.crystal_id = eventArgs.detectionTargetID\nacr.setAutoSimTarget(0, eventArgs.detectionTargetID)\nfor slot = 1, 5 do acr.clearAutoSimTarget(slot) end\nself.used = true",
+							actionLua = "local forecast = data.fru_rpr_forecast\nif not forecast or forecast.version ~= 2 then return end\nlocal acr = TensorCore.API.TensorACR\nlocal actual = acr.getAutoSimTime()\nif actual <= 0 then return end\nforecast.apply(368.015, actual)\nforecast.phase = 2.5\n-- Pin the assigned Light Crystal; do not let Ice Veil reuse its DD identity.\nforecast.crystal_id = eventArgs.detectionTargetID\nacr.setAutoSimTarget(0, eventArgs.detectionTargetID)\nfor slot = 1, 5 do acr.clearAutoSimTarget(slot) end\nself.used = true",
 							conditions = 
 							{
 								
@@ -870,7 +940,7 @@ local tbl =
 				{
 				},
 				displayPath = "AutoSim",
-				execute = "-- Intermission, slot 0 only (user 2026-10-22): slot 0 is the player's current Light Crystal until it\n-- dies, then whatever they target next (another Light Crystal or the Ice Veil). Keeps the ACR from\n-- planning around distant targets. Only the slot identity changes: lifetimes stay as scheduled\n-- (user 2026-10-22: keeps the schedule simple; see AS-002). Stops at P3 (\"AutoSim | Reanchor P3\", phase 3).\nlocal forecast = data.fru_rpr_forecast\nif not forecast or forecast.version ~= 2 or forecast.phase < 2.5 or forecast.phase >= 3 then return end\nlocal t = TensorCore.mGetTarget()\nif not t or not t.targetable or not t.alive then return end\nif t.contentid ~= 13555 and t.contentid ~= 9358 then return end\nforecast.crystalModifier(t, TensorCore.API.TensorACR.getAutoSimTime())\nif t.id == forecast.crystal_id then return end\nlocal acr = TensorCore.API.TensorACR\n-- crystal_id also lets \"AutoSim | Correct crystal death\" end the crystal lifetime when this crystal dies.\nforecast.crystal_id = t.id\nacr.setAutoSimTarget(0, t.id)\nfor slot = 1, 5 do acr.clearAutoSimTarget(slot) end",
+				execute = "-- Intermission, slot 0 only (user 2026-10-22): slot 0 is the player's current Light Crystal until it\n-- dies, then whatever they target next (another Light Crystal or the Ice Veil). Keeps the ACR from\n-- planning around distant targets. Only the slot identity changes: lifetimes stay as scheduled\n-- (user 2026-10-22: keeps the schedule simple; see AS-002). Stops at P3 (\"AutoSim | Reanchor P3\", phase 3).\nlocal forecast = data.fru_rpr_forecast\nif not forecast or forecast.version ~= 2 or forecast.phase < 2.5 or forecast.phase >= 3 then return end\nlocal t = TensorCore.mGetTarget()\nif not t or not t.targetable or not t.alive then return end\nif t.contentid ~= 13555 and t.contentid ~= 9358 then return end\nif t.id == forecast.crystal_id then return end\nlocal acr = TensorCore.API.TensorACR\n-- crystal_id also lets \"AutoSim | Correct crystal death\" end the crystal lifetime when this crystal dies.\nforecast.crystal_id = t.id\nacr.setAutoSimTarget(0, t.id)\nfor slot = 1, 5 do acr.clearAutoSimTarget(slot) end",
 				executeType = 2,
 				mechanicTime = 418.8,
 				name = "AutoSim | Intermission slot 0 follows target",
@@ -927,7 +997,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local f=data.fru_rpr_forecast\nif not f or f.version~=2 then return end\n-- Ice Veil can be targetable while lights still protect it: do not advance the light stage.\nf.ice_id=eventArgs.detectionTargetID\nself.used=true",
+							actionLua = "local forecast = data.fru_rpr_forecast\nif not forecast or forecast.version ~= 2 then return end\nlocal acr = TensorCore.API.TensorACR\nlocal actual = acr.getAutoSimTime()\nif actual <= 0 then return end\nforecast.apply(371.983, actual)\nforecast.phase = 2.75\n-- Slot 0 only: the Ice Veil takes slot 0 once the player targets it\n-- (\"AutoSim | Intermission slot 0 follows target\").\nself.used = true",
 							conditions = 
 							{
 								
@@ -987,6 +1057,131 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data =
+			{
+				actions =
+				{
+					
+					{
+						data =
+						{
+							aType = "Lua",
+							actionLua = "-- Ice Veil still targetable at its forecast death (user 2026-11-02): extend its phase to the\n-- Endless Ice Age enrage. \"AutoSim | Reanchor Ice Veil death\" undoes this if it dies first.\nlocal forecast = data.fru_rpr_forecast\nif not forecast or forecast.version ~= 2 or forecast.phase ~= 2.75 or forecast.ice_dead then return end\nlocal acr = TensorCore.API.TensorACR\nlocal actual = acr.getAutoSimTime()\nif actual <= 0 then return end\nlocal source = forecast.anchor + actual - forecast.actual\nif source < forecast.ice_veil_end then return end\nforecast.setIceVeilEnd(forecast.ice_veil_enrage)\nforecast.ice_extended = true\nforecast.apply(source, actual)\nself.used = true",
+							conditions =
+							{
+								
+								{
+									"dac1e675-7309-4735-8788-8a7c5170210f",
+									true,
+								},
+							},
+							name = "Extend Ice Veil to enrage",
+							uuid = "bb9ffe09-14a7-4df4-9299-613dd80e34d4",
+							version = 2.1,
+						},
+					},
+				},
+				conditions =
+				{
+					
+					{
+						data =
+						{
+							category = "Lua",
+							conditionLua = "local entity = TensorCore.mGetEntity(eventArgs.detectionTargetID)\nreturn entity ~= nil and entity.targetable == true",
+							name = "Targetable",
+							uuid = "f90c971f-abe5-44e3-b5d3-f796b8019ba0",
+							version = 3,
+						},
+					},
+					
+					{
+						data =
+						{
+							category = "Filter",
+							conditions =
+							{
+								
+								{
+									"f90c971f-abe5-44e3-b5d3-f796b8019ba0",
+									true,
+								},
+							},
+							filterTargetType = "ContentID",
+							name = "Ice Veil still targetable",
+							partyTargetContentID = 9358,
+							uuid = "dac1e675-7309-4735-8788-8a7c5170210f",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Reanchors",
+				mechanicTime = 423.6,
+				name = "AutoSim | Ice Veil enrage extension",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 103,
+				timerEndOffset = 50,
+				timerStartOffset = 30,
+				uuid = "13f7cfa7-7b16-4a06-9141-2ad3ab42bfaf",
+				version = 2,
+			},
+		},
+		
+		{
+			data =
+			{
+				actions =
+				{
+					
+					{
+						data =
+						{
+							aType = "Lua",
+							actionLua = "-- Ice Veil death (user 2026-11-02): P3 starts a fixed 27.50-27.69s after it in the user's logs, so\n-- reanchor the transition and P3 on the real death. Restore the forecast death time first, in case\n-- \"AutoSim | Ice Veil enrage extension\" moved it to the enrage.\nlocal forecast = data.fru_rpr_forecast\nlocal actual = TensorCore.API.TensorACR.getAutoSimTime()\nif actual <= 0 then return end\nforecast.setIceVeilEnd(forecast.ice_veil_end)\nforecast.ice_dead = true\nforecast.apply(forecast.ice_veil_end, actual)\nself.used = true",
+							conditions =
+							{
+								
+								{
+									"528077ad-887c-4903-999c-2e496817669b",
+									true,
+								},
+							},
+							name = "Apply Ice Veil death",
+							uuid = "c9bfd295-4728-42df-9279-69dcbdcd3061",
+							version = 2.1,
+						},
+					},
+				},
+				conditions =
+				{
+					
+					{
+						data =
+						{
+							category = "Lua",
+							conditionLua = "local forecast = data.fru_rpr_forecast\nreturn forecast ~= nil and forecast.version == 2 and forecast.phase == 2.75 and not forecast.ice_dead and eventArgs.entityContentID == 9358 and eventArgs.isTargetable == false",
+							dequeueIfLuaFalse = true,
+							name = "Ice Veil lost",
+							uuid = "528077ad-887c-4903-999c-2e496817669b",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Reanchors",
+				eventType = 26,
+				mechanicTime = 423.6,
+				name = "AutoSim | Reanchor Ice Veil death",
+				timeRange = true,
+				timelineIndex = 103,
+				timerEndOffset = 50,
+				timerStartOffset = 30,
+				uuid = "71382ca2-9bbd-4214-95f2-737f64d326d6",
+				version = 2,
+			},
+		},
 	},
 	[120] = 
 	{
@@ -1001,7 +1196,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local f=data.fru_rpr_forecast\nif not f or f.version~=2 or f.phase>=3 then self.used=true;return end\nlocal cid=eventArgs.entityContentID\nif cid~=13555 and cid~=9358 then self.used=true;return end\nlocal acr=TensorCore.API.TensorACR\nlocal now=acr.getAutoSimTime()\nif now<=0 then return end\nif cid==13555 then\n if eventArgs.isTargetable then\n  if not f.light_resynced then f.light_resynced=true;f.apply(368.015,now);f.phase=2.5 end\n else\n  f.light_departures[eventArgs.entityID]=true\n  local count=0\n  for _ in pairs(f.light_departures) do count=count+1 end\n  if count>=4 and not f.crystal_dead then f.correctCrystalDeath(now) end\n end\nelseif eventArgs.isTargetable then\n f.ice_id=eventArgs.entityID\nelseif f.phase>=2.5 and not f.ice_departed then\n f.ice_departed=true;f.apply(411.249,now)\nend\nif f.phase>=2.5 then f.crystalModifier(TensorCore.mGetTarget(),now) end\nself.used=true",
+							actionLua = "local forecast = data.fru_rpr_forecast\nlocal actual = TensorCore.API.TensorACR.getAutoSimTime()\nif actual <= 0 then return end\nforecast.correctCrystalDeath(actual)\nself.used = true",
 							conditions = 
 							{
 								
@@ -1023,22 +1218,21 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local f=data.fru_rpr_forecast\nreturn f~=nil and f.version==2 and f.phase>=2 and f.phase<3 and (eventArgs.entityContentID==13555 or eventArgs.entityContentID==9358)",
+							conditionLua = "local forecast = data.fru_rpr_forecast\nreturn forecast ~= nil and forecast.version == 2 and forecast.phase >= 2.5 and forecast.phase < 3 and not forecast.crystal_dead and eventArgs.entityContentID == 13555 and eventArgs.entityID == forecast.crystal_id and eventArgs.isTargetable == false",
 							dequeueIfLuaFalse = true,
-							name = "Intermission targetability",
+							name = "Assigned crystal lost",
 							uuid = "35c206dc-61c6-5bd2-be02-70ec884ad705",
 							version = 3,
 						},
 					},
 				},
 				eventType = 26,
-				loop = true,
 				mechanicTime = 514,
 				name = "AutoSim | Correct crystal death",
 				timeRange = true,
 				timelineIndex = 120,
-				timerEndOffset = -10,
-				timerStartOffset = -110,
+				timerEndOffset = -14,
+				timerStartOffset = -102,
 				uuid = "9b2527b3-e904-4414-bdea-e7f93372a761",
 				version = 2,
 			},
@@ -1833,6 +2027,16 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "AutoSim",
+				name = "Reanchors",
+				uuid = "bc307d06-0f5e-c37e-8538-0620e322228a",
+			},
+			objectType = "folder",
+		},
 	},
 	[201] = 
 	{
@@ -1989,6 +2193,127 @@ local tbl =
 				timerEndOffset = 12,
 				timerStartOffset = -5,
 				uuid = "4819d5b9-6211-3f62-b1f5-a8ff48c7c7f1",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "-- Both P4 bosses sit at the 0.1% HP floor (user 2026-10-25): any further damage before P5 is\n-- wasted. The baseline ends post-CT damage value at a fixed FFLogs-median lock time (p4Lock); this\n-- moves that boundary to now when both bosses really reach 0.1% sooner, so every job's sim saves\n-- burst and resources for P5. The ACR keeps attacking; downtime, availability and AoE windows are\n-- unchanged. Both bosses must be locked because BossModifier applies to every target (AS-014).\nlocal forecast = data.fru_rpr_forecast\nif not forecast or forecast.version ~= 2 or forecast.p4_hp_lock_cut then return end\nlocal acr = TensorCore.API.TensorACR\nlocal actual = acr.getAutoSimTime()\nif actual <= 0 then return end\n-- Wait for \"AutoSim | Reanchor P4 Crystallize Time return\" to anchor the post-CT clock.\nif forecast.phase ~= 4 or forecast.anchor < 754.093 then return end\nlocal source = forecast.anchor + actual - forecast.actual\nlocal valued, worthless\nfor i = 1, #forecast.schedule do\n    local window = forecast.schedule[i]\n    if window[1] == \"BossModifier\" and window[2] == 754.093 and window[4] > 0 then\n        valued = i\n    elseif window[1] == \"BossModifier\" and window[3] == 854.296 and window[4] == 0 then\n        worthless = i\n    end\nend\nif not worthless then return end\n-- Already past the zero-value boundary: nothing to correct.\nif source >= forecast.schedule[worthless][2] then\n    forecast.p4_hp_lock_cut = true\n    self.used = true\n    return\nend\nsource = math.max(source, 754.093)\nif valued then forecast.schedule[valued][3] = source end\nforecast.schedule[worthless][2] = source\nforecast.p4_hp_lock_cut = true\n-- apply() skips the zero-length valued window when the lock was already in place at CT return.\nforecast.apply(source, actual)\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"fa28db89-dc35-9a03-814f-0ddc9697524e",
+									true,
+								},
+								
+								{
+									"89184cae-27b1-0c40-aa55-6e5206df648b",
+									true,
+								},
+							},
+							name = "End post-CT damage value now",
+							uuid = "7ca9d6ff-2f12-69fd-8862-abd5299bf1c2",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local entity = TensorCore.mGetEntity(eventArgs.detectionTargetID)\nreturn entity ~= nil and entity.targetable == true",
+							name = "Targetable",
+							uuid = "d0305f7f-cd1f-9873-b283-8d5afbb1aeba",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 2,
+							hpValue = 0.15,
+							name = "HP <= 0.15%",
+							partyTargetType = "Detection Target",
+							uuid = "ae203885-bed9-e7bd-b3a1-7b74ec23a72a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"d0305f7f-cd1f-9873-b283-8d5afbb1aeba",
+									true,
+								},
+								
+								{
+									"ae203885-bed9-e7bd-b3a1-7b74ec23a72a",
+									true,
+								},
+							},
+							filterTargetType = "ContentID",
+							name = "Ryne at HP floor",
+							partyTargetContentID = 12809,
+							uuid = "fa28db89-dc35-9a03-814f-0ddc9697524e",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"d0305f7f-cd1f-9873-b283-8d5afbb1aeba",
+									true,
+								},
+								
+								{
+									"ae203885-bed9-e7bd-b3a1-7b74ec23a72a",
+									true,
+								},
+							},
+							filterTargetType = "ContentID",
+							name = "Gaia at HP floor",
+							partyTargetContentID = 9832,
+							uuid = "89184cae-27b1-0c40-aa55-6e5206df648b",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Reanchors",
+				mechanicTime = 850.2,
+				name = "AutoSim | P4 HP lock cut-off",
+				throttleTime = 200,
+				timeRange = true,
+				timelineIndex = 201,
+				timerEndOffset = 20,
+				timerStartOffset = -5,
+				uuid = "0bffa30c-9e3a-3ac9-b835-35e464cf01a8",
 				version = 2,
 			},
 		},
