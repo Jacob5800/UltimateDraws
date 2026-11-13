@@ -26924,6 +26924,194 @@ local tbl =
 			uuid = "a05e88e7-9d5b-85f0-aea4-169e648b3f63",
 			version = 2,
 		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "Silkie",
+			uuid = "91bdcbe8-923f-fc46-96c7-c9209e6159d1",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Silkie",
+			name = "Waymarks",
+			uuid = "9de84502-723e-ee1f-95c4-82350232affd",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "SildihnWaymarkRuntime=SildihnWaymarkRuntime or {}\nlocal runtime=SildihnWaymarkRuntime\nif not runtime.silkie then\n    runtime.silkie={stage=\"inspect\",started=Now(),marks={\n\n        {id=1,x=-335,y=471,z=-160},\n        {id=2,x=-322.436,y=470.999,z=-155.215},\n        {id=3,x=-335.002,y=470.999,z=-142.475},\n        {id=4,x=-347.483,y=470.999,z=-155.007},\n        {id=5,x=-328,y=471,z=-166},\n        {id=6,x=-329.004,y=470.999,z=-148.901},\n        {id=7,x=-340.842,y=470.999,z=-149.009},\n        {id=8,x=-342,y=471,z=-166},\n    }}\nend\nlocal state=runtime.silkie\nlocal now=Now()\nlocal activeCount,correctCount=0,0\nfor _,mark in ipairs(state.marks) do\n    local x,y,z,active=Argus.getWaymarkInfo(mark.id)\n    if active then\n        activeCount=activeCount+1\n        if math.abs(x-mark.x)<0.1 and math.abs(y-mark.y)<0.15 and math.abs(z-mark.z)<0.1 then\n            correctCount=correctCount+1\n        end\n    end\nend\nlocal function submit(removal)\n    state.results={}\n    for _,mark in ipairs(state.marks) do\n        local _,_,_,active=Argus.getWaymarkInfo(mark.id)\n        if not removal or active then\n            local action=ActionList:Get(15,mark.id-1)\n            local accepted=action and action:Cast(mark.x,mark.y,mark.z)\n            state.results[mark.id]={accepted=accepted==true,time=Now()}\n            d(\"[Sil'dihn waymarks] Silkie \"..state.stage..\" marker=\"..mark.id..\" accepted=\"..tostring(accepted))\n        end\n    end\nend\nif correctCount==8 then\n    state.done=true\n    state.confirmed=8\n    d(\"[Sil'dihn waymarks] All eight Silkie waymarks confirmed.\")\nelseif now-state.started>20000 then\n    state.done=true\n    state.confirmed=correctCount\n    d(\"[Sil'dihn waymarks] Timed out at \"..state.stage..\"; active=\"..activeCount..\"; correct=\"..correctCount)\n    TensorCore.addAlertText(4000,\"Silkie waymark placement incomplete\",1.3,2,false)\nelseif state.stage==\"inspect\" then\n    if activeCount==0 then\n        state.stage=\"wait_placed\"\n        state.placedAt=now\n        submit(false)\n    else\n        state.stage=\"wait_removed\"\n        submit(true)\n    end\nelseif state.stage==\"wait_removed\" and activeCount==0 then\n    state.removedAt=now\n    state.stage=\"delay\"\nelseif state.stage==\"delay\" and now-state.removedAt>=1500 then\n    if activeCount~=0 then\n        state.done=true\n        d(\"[Sil'dihn waymarks] Markers changed during removal delay. Stopped.\")\n    else\n        state.stage=\"wait_placed\"\n        state.placedAt=now\n        submit(false)\n    end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"f0cc842b-7ce4-4e1a-b11c-2d50f88a081b",
+								true,
+							},
+						},
+						name = "Silkie - apply waymarks on approach",
+						uuid = "259a6d44-b0a6-716f-a3ff-58b560bf557e",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local state=SildihnWaymarkRuntime\nif state and state.silkie and state.silkie.done then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or (p.localmapid~=1075 and p.localmapid~=1076) or p.incombat or not p.alive or not p.pos then return false end\nif state and state.silkie then return true end\nlocal dx,dy,dz=p.pos.x+335,p.pos.y-471,p.pos.z+165\nreturn dx*dx+dz*dz<=1225 and math.abs(dy)<6",
+						dequeueIfLuaFalse = true,
+						name = "Relevant instance and state",
+						uuid = "f0cc842b-7ce4-4e1a-b11c-2d50f88a081b",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Silkie/Waymarks",
+			name = "Silkie - apply waymarks on approach",
+			throttleTime = 500,
+			timeout = 3,
+			uuid = "e57ffb5d-545e-951b-80aa-a0a0516ad034",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "SildihnWaymarkRuntime=nil\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"e2814639-0f6d-33ba-8d8d-e863066d479f",
+								true,
+							},
+						},
+						name = "Silkie - reset waymark placement on instance exit",
+						uuid = "236e65f4-d979-589b-8ffa-8072c3fe5487",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn SildihnWaymarkRuntime ~= nil and p ~= nil and p.localmapid~=1075 and p.localmapid~=1076",
+						dequeueIfLuaFalse = true,
+						name = "Relevant instance and state",
+						uuid = "e2814639-0f6d-33ba-8d8d-e863066d479f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Silkie/Waymarks",
+			eventType = 11,
+			name = "Silkie - reset waymark placement on instance exit",
+			throttleTime = 500,
+			timeout = 1,
+			uuid = "eeaf8228-a7e3-3869-b3d3-e45b089c3e60",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "Gladiator",
+			uuid = "bc2b74d7-54c7-868e-b856-ecce1a85bd3d",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Gladiator",
+			name = "Waymarks",
+			uuid = "7209f2ca-5baa-6ce1-896e-75490f67029b",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "SildihnWaymarkRuntime=SildihnWaymarkRuntime or {}\nlocal runtime=SildihnWaymarkRuntime\nif not runtime.gladiator then\n    runtime.gladiator={stage=\"inspect\",started=Now(),marks={\n        {id=1,x=-35.021,y=521.004,z=-280.200},\n        {id=2,x=-25.739,y=521.004,z=-270.905},\n        {id=3,x=-34.999,y=521.004,z=-261.825},\n        {id=4,x=-44.364,y=521.004,z=-270.939},\n        {id=5,x=-15.903,y=521.004,z=-289.775},\n        {id=6,x=-16.384,y=521.004,z=-252.264},\n        {id=7,x=-53.594,y=521.004,z=-252.188},\n        {id=8,x=-53.593,y=521.004,z=-288.410},\n    }}\nend\nlocal state=runtime.gladiator\nlocal now=Now()\nlocal activeCount,correctCount=0,0\nfor _,mark in ipairs(state.marks) do\n    local x,y,z,active=Argus.getWaymarkInfo(mark.id)\n    if active then\n        activeCount=activeCount+1\n        if math.abs(x-mark.x)<0.1 and math.abs(y-mark.y)<0.15 and math.abs(z-mark.z)<0.1 then\n            correctCount=correctCount+1\n        end\n    end\nend\nlocal function submit(removal)\n    state.results={}\n    for _,mark in ipairs(state.marks) do\n        local _,_,_,active=Argus.getWaymarkInfo(mark.id)\n        if not removal or active then\n            local action=ActionList:Get(15,mark.id-1)\n            local accepted=action and action:Cast(mark.x,mark.y,mark.z)\n            state.results[mark.id]={accepted=accepted==true,time=Now()}\n            d(\"[Sil'dihn waymarks] Gladiator \"..state.stage..\" marker=\"..mark.id..\" accepted=\"..tostring(accepted))\n        end\n    end\nend\nif correctCount==8 then\n    state.done=true\n    state.confirmed=8\n    d(\"[Sil'dihn waymarks] All eight Gladiator waymarks confirmed.\")\nelseif now-state.started>20000 then\n    state.done=true\n    state.confirmed=correctCount\n    d(\"[Sil'dihn waymarks] Timed out at \"..state.stage..\"; active=\"..activeCount..\"; correct=\"..correctCount)\n    TensorCore.addAlertText(4000,\"Gladiator waymark placement incomplete\",1.3,2,false)\nelseif state.stage==\"inspect\" then\n    if activeCount==0 then\n        state.stage=\"wait_placed\"\n        state.placedAt=now\n        submit(false)\n    else\n        state.stage=\"wait_removed\"\n        submit(true)\n    end\nelseif state.stage==\"wait_removed\" and activeCount==0 then\n    state.removedAt=now\n    state.stage=\"delay\"\nelseif state.stage==\"delay\" and now-state.removedAt>=1500 then\n    if activeCount~=0 then\n        state.done=true\n        d(\"[Sil'dihn waymarks] Markers changed during removal delay. Stopped.\")\n    else\n        state.stage=\"wait_placed\"\n        state.placedAt=now\n        submit(false)\n    end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"4eb39e6c-82c4-109f-91c1-400595008577",
+								true,
+							},
+						},
+						name = "Apply and verify Gladiator waymarks",
+						uuid = "e668c456-163a-e895-aa83-df0041851558",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local state=SildihnWaymarkRuntime\nif state and state.gladiator and state.gladiator.done then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or (p.localmapid~=1075 and p.localmapid~=1076) or p.incombat or not p.alive or not p.pos then return false end\nif state and state.gladiator then return true end\nlocal dx,dy,dz=p.pos.x+35,p.pos.y-521.004,p.pos.z+281\nreturn dx*dx+dz*dz<=1225 and math.abs(dy)<6",
+						dequeueIfLuaFalse = true,
+						name = "Criterion normal or savage, Gladiator approach",
+						uuid = "4eb39e6c-82c4-109f-91c1-400595008577",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Gladiator/Waymarks",
+			name = "Gladiator - apply waymarks on approach",
+			throttleTime = 500,
+			timeout = 3,
+			uuid = "bfa5d58b-938d-0e45-9869-48762737ccdf",
+			version = 2,
+		},
 	}, 
 	inheritedProfiles = 
 	{
