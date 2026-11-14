@@ -47,3 +47,7 @@ UCOB has one canonical published draws file, `LPDU Draws.lua`; do not recreate i
 - `.github/workflows/discord-changelog.yml` posts only new/updated README changelog entries on pushes to `main`, compared with the push's before revision. Formatting-only whitespace and removals do not post. Keep checkout history available for that baseline; fail rather than silently reposting history if it cannot be read.
 - Configure the repository Actions secret `DISCORD_WEBHOOK_URL` with the webhook URL.
 - Discord output must retain every fight/profile section with new entries, capped at 10 entries each. Paginate descriptions and messages within Discord limits; never truncate after the first section. Manual dispatch may explicitly request a full snapshot; otherwise it compares against HEAD^.
+
+## General dungeon profiles
+
+User-approved published copies (14-11-2026): live `GeneralReactions\dungeon lol.lua`, `GeneralReactions\levelling dungeons.lua`, and `GeneralReactions\highleveldungeons.lua` map respectively to `GeneralReactions\Dungeons\dungeon lol.lua`, `GeneralReactions\Dungeons\levelling dungeons.lua`, and `GeneralReactions\Dungeons\highleveldungeons.lua` in this checkout. The live root files are authoritative; similarly named live Dungeons subfolder files are older copies. Apply the shared copy/hash/changelog/commit/push checks. General profiles do not use timeline versions. TODO: `DUNGEON-AUTOSIM-TODO.md` in the Agent workspace.

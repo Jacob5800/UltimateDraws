@@ -97,6 +97,10 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Dungeons: Shared AutoSim
 
+- Published highleveldungeons with Aetherfont boss forecasts and draws, and moved Lunar Subterrane into it. All three dungeon profiles share all-job final-pack pooling, low-HP holds with a final-boss exemption, owned-setting restoration checks, BLM dying-add cast protection, and hold status inside the AutoSim settings UI. (14-11-2026)
+
+- Added Raw Electrope DoT blocking, a separate low-HP Radiant Finale guard, and a location check distinguishing Mistwake’s last trash pull. Party-buff timing fields now display directly with forecast status. (14-11-2026)
+
 - Published the levelling dungeons AutoSim profile. Bard saves Apex Arrow for the next boss when one or two enemies remain in the final trash pack and each is at 8% HP or lower. (11-11-2026)
 
 - Bard saves Apex Arrow for the next boss when only one or two enemies remain in the final trash pack and each is at 8% HP or lower. (11-11-2026)

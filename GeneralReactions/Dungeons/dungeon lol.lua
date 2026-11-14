@@ -5,1223 +5,6 @@ local tbl =
 		data = 
 		{
 			displayPath = "",
-			name = "Lunar Subterrane",
-			uuid = "4417d755-dc6f-a593-b0ef-b4a4e54837a4",
-		},
-		objectType = "folder",
-	},
-	
-	{
-		data = 
-		{
-			displayPath = "Lunar Subterrane",
-			name = "AutoSim",
-			uuid = "015f1b21-c852-f045-b185-07679eb6bae7",
-		},
-		objectType = "folder",
-	},
-	
-	{
-		data = 
-		{
-			actions = 
-			{
-				
-				{
-					data = 
-					{
-						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not LunarSubterraneAutoSimConfig or LunarSubterraneAutoSimConfig.fileApiVersion~=1 then\n    local C = LunarSubterraneAutoSimConfig or {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=true, kill12500=125.891, kill12484=132.86, kill12584=175.298,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\LunarSubterrane.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill12500\",\"kill12484\",\"kill12584\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\LunarSubterrane.AutoSim.lua]]\n    if not LunarSubterraneAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill12500=math.max(15,math.min(1200,C.kill12500))\n    C.kill12484=math.max(15,math.min(1200,C.kill12484))\n    C.kill12584=math.max(15,math.min(1200,C.kill12584))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    LunarSubterraneAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif LunarSubterraneAutoSimConfig.poolFinal==nil then\n LunarSubterraneAutoSimConfig.poolFinal=true\n table.insert(LunarSubterraneAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- Runs after native map 1164, map and combat gates; no timeline timer is used.\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1164 or not p.incombat then self.used=true;return end\nlocal isCaster=p.job==25 or p.job==27 or p.job==35 or p.job==42 or p.job==36 or p.job==24 or p.job==28 or p.job==33 or p.job==40\nlocal C=LunarSubterraneAutoSimConfig\nlocal A=TensorCore.API.TensorACR\nlocal ok,t=pcall(A.getAutoSimTime)\nif not ok or type(t)~=\"number\" or t<0 then return end -- readiness wait, not completion\nif data.lunar_subterrane_autosim then self.used=true;return end\nlocal S={enabled=C.enabled,movement=C.movement and isCaster,returnField=C.returnField and p.job==25,trash=C.trash,\n    killOverride=C.killOverride,kill12500=C.kill12500,kill12484=C.kill12484,kill12584=C.kill12584,\n    unexpectedPct=C.unexpectedPct,uncertainty=C.uncertainty,buffEnabled=C.buffEnabled,\n    buffPct=C.buffPct,buffFirst=C.buffFirst,buffDuration=C.buffDuration,buffPeriod=C.buffPeriod,\n    boss=0,origin=0,counts={},phases={},phaseCount=0,anchorsSeen=0,setup=true}\ndata.lunar_subterrane_autosim=S\n-- Filled by the evidence builder; tables are allocated once per combat.\nS.definitions={[12500]={[\"name\"]=\"Dark Elf\",[\"movement\"]={{49.0,50.5},{52.0,53.0}},[\"anchors\"]={[34777]={4.469,29.258,61.828,134.734},[35205]={10.61,53.219,91.844},[34779]={19.117,83.727},[34778]={37.422,69.945,142.953},[34781]={46.586,79.102,152.101},[35204]={102.024},[34782]={113.219,122.368}}},[12484]={[\"name\"]=\"Damcyan Antlion\",[\"movement\"]={{22.5,24.0},{48.5,50.5},{63.5,64.5},{66.5,69.5},{97.0,98.0},{104.5,108.5},{109.5,111.0},{112.5,114.5},{125.5,130.0}},[\"anchors\"]={[34813]={8.188,77.164,137.969},[34818]={15.32,41.446,102.25},[34816]={30.32,91.188,152.0},[34821]={57.875,118.672},[34443]={67.023,127.844}}},[12584]={[\"name\"]=\"Durante\",[\"movement\"]={{22.5,23.5},{38.0,39.0},{59.5,62.0},{104.5,107.5},{138.0,140.0},{157.5,162.0},{165.0,166.0}},[\"anchors\"]={[35011]={6.179,116.812,206.219},[36057]={15.64,50.96,219.859},[35003]={31.367,72.07,95.531,187.031},[35905]={77.148,100.641,192.109},[35007]={129.094},[35009]={136.68},[36055]={147.132},[35001]={156.452},[34995]={173.43}}}}\n\nfunction S.add(kind,a,b,value,relative)\n    if b<=a or a>=1200 then return end\n    b=math.min(b,1200)\n    local id=A.addAutoSimPhase(kind,a,b,value)\n    if id then\n        S.phaseCount=S.phaseCount+1\n        S.phases[S.phaseCount]={id=id,kind=kind,a=a,b=b,value=value,relative=relative}\n    end\nend\n\nfunction S.startBoss(cid,entityID,origin,now)\n    local def=S.definitions[cid]\n    if not def or S.boss~=0 or not S.enabled then return end\n    S.boss=cid;S.entityID=entityID;S.origin=origin\n    A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100)\n    if S.killOverride then\n        A.setAutoSimKillTime(math.min(1200,origin+S[\"kill\"..cid]))\n        A.addAutoSimUncertainty(now,10) -- one normal-party sample: do not claim exact kill timing\n    end\n    -- Keep automatic kill uncertainty by default. Do not invent forced target downtime.\n    -- Only owned movement/field phases are authored; AoE counts and DoT targets stay live.\n    if S.movement then\n        for i=1,#def.movement do\n            local w=def.movement[i]\n            local a,b=origin+w[1],origin+w[2]\n            if b>now then\n                a=math.max(a,now)\n                S.add(\"CasterDowntime\",a,b,1,true)\n                if S.returnField then S.add(\"GroundFieldMovement\",b,b+0.2,2,true) end\n            end\n        end\n    end\n    if S.buffEnabled and S.buffPct>0 then\n        local a=origin+S.buffFirst\n        while a<1200 do\n            if a+S.buffDuration>now then S.add(\"RaidBuff\",math.max(a,now),a+S.buffDuration,1+S.buffPct/100,false) end\n            a=a+S.buffPeriod\n        end\n    end\n    C.status=\"Active: \"..def.name..\". Kill estimate: \"..(S.killOverride and \"manual\" or \"automatic\")\nend\n\nfunction S.channel(args)\n    if not S.enabled then return end\n    local cid=args.entityContentID\n    local def=S.definitions[cid]\n    if not def then return end\n    local aid=args.spellID\n    if aid==34780 then aid=34779 end\n    local anchors=def.anchors[aid]\n    if not anchors then return end -- stable boss cast identity before API work\n    if S.boss~=0 and (S.boss~=cid or S.entityID~=args.entityID) then return end\n    local valid,now=pcall(A.getAutoSimTime)\n    if not valid or type(now)~=\"number\" or now<0 or now>=1200 then return end\n    local n=(S.counts[aid] or 0)+1\n    local expected=anchors[n]\n    if not expected then return end\n    if S.boss==0 and math.abs(now-expected)>2 then return end\n    S.counts[aid]=n\n    if S.boss==0 then S.startBoss(cid,args.entityID,now-expected,now) end\n    if S.boss~=cid then return end\n    local candidate=now-expected\n    -- If enabled mid-boss, do not match a late repeat to the first occurrence.\n    if math.abs(candidate-S.origin)>2 then return end\n    local shift=candidate-S.origin\n    S.anchorsSeen=S.anchorsSeen+1\n    if math.abs(shift)<0.15 then return end\n    -- Remove every future owned phase before reinsertion, avoiding transient overlaps.\n    local movementEnd=now\n    local fieldEnd=now\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.relative and phase.id and phase.a>now+0.05 then\n            A.removeAutoSimPhase(phase.id);phase.id=nil;phase.pending=true\n        elseif phase.id and phase.a<=now+0.05 and phase.b>now then\n            if phase.kind==\"CasterDowntime\" then movementEnd=phase.b end\n            if phase.kind==\"GroundFieldMovement\" then fieldEnd=phase.b end\n        end\n    end\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.pending then\n            phase.pending=false\n            local a,b=phase.a+shift,phase.b+shift\n            local minimum=phase.kind==\"CasterDowntime\" and movementEnd or math.max(fieldEnd,movementEnd)\n            a=math.max(a,minimum,now+0.05)\n            if b>a then\n                phase.id=A.addAutoSimPhase(phase.kind,a,b,phase.value)\n                phase.a=a;phase.b=b\n                if phase.kind==\"CasterDowntime\" then movementEnd=b else fieldEnd=b end\n            end\n        end\n    end\n    S.origin=candidate\nend\n\nif S.enabled then\n    local target=TensorCore.mGetTarget()\n    if target and S.definitions[target.contentid] and target.attackable and target.incombat then\n        -- Near pull start, zero is the combat-clock origin; later setup waits for an anchor.\n        if t<=5 then S.startBoss(target.contentid,target.id,0,t) end\n    end\n    if S.boss==0 and S.trash then A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100) end\nend\nself.used=true\n",
-						conditions = 
-						{
-							
-							{
-								"ecf61cc4-c424-0b87-ab8e-4a5d5aed8a6f",
-								true,
-							},
-							
-							{
-								"5c00f2a9-7436-2434-8d3a-2bd34c70212f",
-								true,
-							},
-							
-							{
-								"c20f63ac-ab6b-6356-9d52-65a94a1796c5",
-								true,
-							},
-						},
-						name = "Set up this combat",
-						uuid = "76476c79-55d8-1556-8c74-aaea97636e21",
-						version = 2.1,
-					},
-				},
-			},
-			conditions = 
-			{
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 8,
-						localmapid = 1164,
-						name = "Lunar Subterrane (1164)",
-						uuid = "ecf61cc4-c424-0b87-ab8e-4a5d5aed8a6f",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 7,
-						name = "In combat",
-						uuid = "5c00f2a9-7436-2434-8d3a-2bd34c70212f",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Lua",
-						conditionLua = "return data.lunar_subterrane_autosim == nil",
-						name = "Setup not completed",
-						uuid = "c20f63ac-ab6b-6356-9d52-65a94a1796c5",
-						version = 3,
-					},
-				},
-			},
-			displayPath = "Lunar Subterrane/AutoSim",
-			name = "[Lunar AutoSim] Set up this combat",
-			timeout = 2,
-			uuid = "67809e45-cb36-20ee-8bca-8cf731faf45f",
-			version = 2,
-		},
-	},
-	
-	{
-		data = 
-		{
-			actions = 
-			{
-				
-				{
-					data = 
-					{
-						aType = "Lua",
-						actionLua = "data.lunar_subterrane_autosim=nil\ndata.lunar_final_trash=nil\ndata.lunar_pool_next=nil\nself.used=true",
-						conditions = 
-						{
-							
-							{
-								"da7e7424-e1c0-3fa7-b547-2807b45c712b",
-								true,
-							},
-							
-							{
-								"9554b7f0-5bfb-7a30-9806-12961165fb02",
-								true,
-							},
-							
-							{
-								"c80e5724-ac3d-9240-9826-d1fc567df2f6",
-								true,
-							},
-						},
-						name = "Reset between combats",
-						uuid = "da1c600c-7626-c401-94a6-e60aa9c6e948",
-						version = 2.1,
-					},
-				},
-			},
-			conditions = 
-			{
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 8,
-						localmapid = 1164,
-						name = "Lunar Subterrane (1164)",
-						uuid = "da7e7424-e1c0-3fa7-b547-2807b45c712b",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 7,
-						inCombatType = 2,
-						name = "Out of combat",
-						uuid = "9554b7f0-5bfb-7a30-9806-12961165fb02",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Lua",
-						conditionLua = "return data.lunar_subterrane_autosim ~= nil",
-						name = "Has combat state",
-						uuid = "c80e5724-ac3d-9240-9826-d1fc567df2f6",
-						version = 3,
-					},
-				},
-			},
-			displayPath = "Lunar Subterrane/AutoSim",
-			name = "[Lunar AutoSim] Reset between combats",
-			timeout = 2,
-			uuid = "008402e2-9751-183c-9dc8-0afe01b32db5",
-			version = 2,
-		},
-	},
-	
-	{
-		data = 
-		{
-			actions = 
-			{
-				
-				{
-					data = 
-					{
-						aType = "Lua",
-						actionLua = "local s=data.lunar_subterrane_autosim\nif s then s.channel(eventArgs) end\nself.used=true",
-						conditions = 
-						{
-							
-							{
-								"512cf679-169c-8bb6-8af8-e47c8df4d9e3",
-								true,
-							},
-							
-							{
-								"301b1e26-2aa9-2957-aa98-0d852f7faab9",
-								true,
-							},
-							
-							{
-								"833c6375-8817-af3e-956f-f0ad204c658f",
-								true,
-							},
-							
-							{
-								"5e88d868-88ef-48ac-8b17-66c49472362c",
-								true,
-							},
-						},
-						name = "Dark Elf cast anchors",
-						uuid = "f68185e4-147b-3bd8-8a40-d845ef3adbb2",
-						version = 2.1,
-					},
-				},
-			},
-			conditions = 
-			{
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 8,
-						localmapid = 1164,
-						name = "Lunar Subterrane (1164)",
-						uuid = "512cf679-169c-8bb6-8af8-e47c8df4d9e3",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 7,
-						name = "In combat",
-						uuid = "301b1e26-2aa9-2957-aa98-0d852f7faab9",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Event",
-						dequeueIfLuaFalse = true,
-						eventArgOptionType = 2,
-						eventEntityContentID = 12500,
-						name = "Dark Elf",
-						uuid = "833c6375-8817-af3e-956f-f0ad204c658f",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Lua",
-						conditionLua = "local s=data.lunar_subterrane_autosim\nreturn s~=nil and s.enabled",
-						name = "Forecast ready",
-						uuid = "5e88d868-88ef-48ac-8b17-66c49472362c",
-						version = 3,
-					},
-				},
-			},
-			displayPath = "Lunar Subterrane/AutoSim",
-			eventType = 3,
-			name = "[Lunar AutoSim] Dark Elf cast anchors",
-			timeout = 2,
-			uuid = "42afc92c-b8da-cf25-8612-99af83e1cf74",
-			version = 2,
-		},
-	},
-	
-	{
-		data = 
-		{
-			actions = 
-			{
-				
-				{
-					data = 
-					{
-						aType = "Lua",
-						actionLua = "local s=data.lunar_subterrane_autosim\nif s then s.channel(eventArgs) end\nself.used=true",
-						conditions = 
-						{
-							
-							{
-								"ac9215c2-053f-fdd8-a59a-aefb09b5ad94",
-								true,
-							},
-							
-							{
-								"841b5dc8-2987-892a-a8fd-7ce9921ff413",
-								true,
-							},
-							
-							{
-								"52ebe4ac-6761-96bd-9b6c-b48722e5e96d",
-								true,
-							},
-							
-							{
-								"2479bfb9-bb9b-d140-bab9-0117f6f978f6",
-								true,
-							},
-						},
-						name = "Damcyan Antlion cast anchors",
-						uuid = "081bd9d5-068a-5985-8fc3-5ebd5d74d4db",
-						version = 2.1,
-					},
-				},
-			},
-			conditions = 
-			{
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 8,
-						localmapid = 1164,
-						name = "Lunar Subterrane (1164)",
-						uuid = "ac9215c2-053f-fdd8-a59a-aefb09b5ad94",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 7,
-						name = "In combat",
-						uuid = "841b5dc8-2987-892a-a8fd-7ce9921ff413",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Event",
-						dequeueIfLuaFalse = true,
-						eventArgOptionType = 2,
-						eventEntityContentID = 12484,
-						name = "Damcyan Antlion",
-						uuid = "52ebe4ac-6761-96bd-9b6c-b48722e5e96d",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Lua",
-						conditionLua = "local s=data.lunar_subterrane_autosim\nreturn s~=nil and s.enabled",
-						name = "Forecast ready",
-						uuid = "2479bfb9-bb9b-d140-bab9-0117f6f978f6",
-						version = 3,
-					},
-				},
-			},
-			displayPath = "Lunar Subterrane/AutoSim",
-			eventType = 3,
-			name = "[Lunar AutoSim] Damcyan Antlion cast anchors",
-			timeout = 2,
-			uuid = "92af2988-bd9d-d985-8b49-fe83a07991fa",
-			version = 2,
-		},
-	},
-	
-	{
-		data = 
-		{
-			actions = 
-			{
-				
-				{
-					data = 
-					{
-						aType = "Lua",
-						actionLua = "local s=data.lunar_subterrane_autosim\nif s then s.channel(eventArgs) end\nself.used=true",
-						conditions = 
-						{
-							
-							{
-								"ab76b1a5-0903-53f0-9f85-d80140800c65",
-								true,
-							},
-							
-							{
-								"2f3b5820-5033-d457-aa21-89b5595d0786",
-								true,
-							},
-							
-							{
-								"bfbebe9d-adff-e8bf-bfce-60e853eeed39",
-								true,
-							},
-							
-							{
-								"1654f2eb-2c8a-8728-a9e6-47f3ef96ce34",
-								true,
-							},
-						},
-						name = "Durante cast anchors",
-						uuid = "ecbed827-e867-b3c7-b3cd-e65f1527e973",
-						version = 2.1,
-					},
-				},
-			},
-			conditions = 
-			{
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 8,
-						localmapid = 1164,
-						name = "Lunar Subterrane (1164)",
-						uuid = "ab76b1a5-0903-53f0-9f85-d80140800c65",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 7,
-						name = "In combat",
-						uuid = "2f3b5820-5033-d457-aa21-89b5595d0786",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Event",
-						dequeueIfLuaFalse = true,
-						eventArgOptionType = 2,
-						eventEntityContentID = 12584,
-						name = "Durante",
-						uuid = "bfbebe9d-adff-e8bf-bfce-60e853eeed39",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Lua",
-						conditionLua = "local s=data.lunar_subterrane_autosim\nreturn s~=nil and s.enabled",
-						name = "Forecast ready",
-						uuid = "1654f2eb-2c8a-8728-a9e6-47f3ef96ce34",
-						version = 3,
-					},
-				},
-			},
-			displayPath = "Lunar Subterrane/AutoSim",
-			eventType = 3,
-			name = "[Lunar AutoSim] Durante cast anchors",
-			timeout = 2,
-			uuid = "6a1abf12-905c-4aa8-a041-3e9910ca3284",
-			version = 2,
-		},
-	},
-	
-	{
-		data = 
-		{
-			actions = 
-			{
-				
-				{
-					data = 
-					{
-						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not LunarSubterraneAutoSimConfig or LunarSubterraneAutoSimConfig.fileApiVersion~=1 then\n    local C = LunarSubterraneAutoSimConfig or {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=true, kill12500=125.891, kill12484=132.86, kill12584=175.298,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\LunarSubterrane.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill12500\",\"kill12484\",\"kill12584\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\LunarSubterrane.AutoSim.lua]]\n    if not LunarSubterraneAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill12500=math.max(15,math.min(1200,C.kill12500))\n    C.kill12484=math.max(15,math.min(1200,C.kill12484))\n    C.kill12584=math.max(15,math.min(1200,C.kill12584))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    LunarSubterraneAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif LunarSubterraneAutoSimConfig.poolFinal==nil then\n LunarSubterraneAutoSimConfig.poolFinal=true\n table.insert(LunarSubterraneAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=LunarSubterraneAutoSimConfig\nlocal visible=GUI:Begin(\"Lunar Subterrane - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from your logged positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. The optional values below come from one four-player run, not the slower Duty Support samples.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Dark Elf (seconds)\",C.kill12500,5,15,\"%.1f\")\n        if changed then C.kill12500=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Damcyan Antlion (seconds)\",C.kill12484,5,15,\"%.1f\")\n        if changed then C.kill12484=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Durante (seconds)\",C.kill12584,5,15,\"%.1f\")\n        if changed then C.kill12584=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold offensive cooldowns on final trash (all jobs)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before each boss and temporarily turns off the current job’s CD switch. Radiant Finale is explicitly held too. Your previous CD setting is restored when pooling ends; songs keep their own control.\") end\n    local shared=DungeonAutoSimShared\n    if shared then\n        v,changed=GUI:SliderInt(\"Hold new boss cooldowns below HP (%) - shared\",shared.lateHP,0,20)\n        if changed then shared.lateHP=v;shared.save() end\n        if GUI:IsItemHovered() then GUI:SetTooltip(\"Shared across these nine dungeons and all jobs. At this boss HP, stop starting offensive cooldowns; normal attacks continue. 0 disables this rule. Default 8%. Defensive controls and songs keep their own settings.\") end\n    end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
-						conditions = 
-						{
-							
-							{
-								"32895e05-b638-ac9e-ab06-506b9ef11f4a",
-								true,
-							},
-						},
-						name = "Settings",
-						uuid = "b4b30e83-2dc3-4820-83e2-209ef0ae6576",
-						version = 2.1,
-					},
-				},
-			},
-			conditions = 
-			{
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 8,
-						localmapid = 1164,
-						name = "Lunar Subterrane (1164)",
-						uuid = "32895e05-b638-ac9e-ab06-506b9ef11f4a",
-						version = 3,
-					},
-				},
-			},
-			displayPath = "Lunar Subterrane/AutoSim",
-			eventType = 13,
-			name = "[Lunar AutoSim] Settings",
-			timeout = 2,
-			uuid = "bf8ca967-5169-4ad0-842c-709a97328f48",
-			version = 2,
-		},
-	},
-	
-	{
-		data = 
-		{
-			actions = 
-			{
-				
-				{
-					data = 
-					{
-						aType = "Lua",
-						actionLua = "data.lunar_final_trash=true\nself.used=true",
-						conditions = 
-						{
-							
-							{
-								"54d8196a-628e-5a62-85b8-9ff4fa0165e1",
-								true,
-							},
-							
-							{
-								"d78656ad-92ac-2b8c-8b0d-e79e790c4032",
-								true,
-							},
-							
-							{
-								"39db88ad-ebb1-9e80-be65-f005e154d902",
-								true,
-							},
-							
-							{
-								"84f3b18b-184a-b922-aecb-6f1542d7a61e",
-								true,
-							},
-						},
-						name = "Recognize final trash before Dark Elf",
-						uuid = "c77161bf-e079-10a5-87e1-a2c8fe4d70a8",
-						version = 2.1,
-					},
-				},
-			},
-			conditions = 
-			{
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 8,
-						localmapid = 1164,
-						name = "Lunar Subterrane (1164)",
-						uuid = "54d8196a-628e-5a62-85b8-9ff4fa0165e1",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 7,
-						name = "In combat",
-						uuid = "d78656ad-92ac-2b8c-8b0d-e79e790c4032",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Lua",
-						conditionLua = "local c=LunarSubterraneAutoSimConfig\nlocal s=data.lunar_subterrane_autosim\nreturn c~=nil and c.enabled and c.poolFinal and s~=nil and s.boss==0 and not data.lunar_final_trash",
-						name = "Pooling enabled; not yet detected",
-						uuid = "39db88ad-ebb1-9e80-be65-f005e154d902",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Party",
-						comparator = 2,
-						conditionType = 4,
-						inRangeValue = 30,
-						name = "Within 30 yalms",
-						partyTargetType = "Detection Target",
-						uuid = "565413ac-fd1d-f7b5-a29c-e40fae46e1fd",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Filter",
-						conditions = 
-						{
-							
-							{
-								"565413ac-fd1d-f7b5-a29c-e40fae46e1fd",
-								true,
-							},
-						},
-						filterTargetType = "ContentID",
-						name = "Final pack 12652",
-						partyTargetContentID = 12652,
-						uuid = "e69c7292-b8dc-4e30-a53d-63717cca1a0b",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Filter",
-						conditions = 
-						{
-							
-							{
-								"565413ac-fd1d-f7b5-a29c-e40fae46e1fd",
-								true,
-							},
-						},
-						filterTargetType = "ContentID",
-						name = "Final pack 12653",
-						partyTargetContentID = 12653,
-						uuid = "01fb6de8-910e-bd73-b802-6c7dc4bfa91c",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Filter",
-						conditions = 
-						{
-							
-							{
-								"e69c7292-b8dc-4e30-a53d-63717cca1a0b",
-								true,
-							},
-							
-							{
-								"01fb6de8-910e-bd73-b802-6c7dc4bfa91c",
-								true,
-							},
-						},
-						matchAnyBuff = true,
-						name = "Either final-pack enemy",
-						partyTargetNumber = 0,
-						uuid = "84f3b18b-184a-b922-aecb-6f1542d7a61e",
-						version = 3,
-					},
-				},
-			},
-			displayPath = "Lunar Subterrane/AutoSim",
-			name = "[Lunar AutoSim] Recognize final trash before Dark Elf",
-			timeout = 2,
-			uuid = "c5b4036f-2927-a69a-b809-5a89d7d6f4a3",
-			version = 2,
-		},
-	},
-	
-	{
-		data = 
-		{
-			actions = 
-			{
-				
-				{
-					data = 
-					{
-						aType = "Lua",
-						actionLua = "data.lunar_final_trash=true\nself.used=true",
-						conditions = 
-						{
-							
-							{
-								"30cd4e06-611c-bf0a-8819-bb78422a7db0",
-								true,
-							},
-							
-							{
-								"98bed067-ee65-c2bb-a2d6-b7871f078ece",
-								true,
-							},
-							
-							{
-								"418bfcfb-6fd8-636d-9c74-757d872c191c",
-								true,
-							},
-							
-							{
-								"79a056ea-bd7f-9cec-9de4-8078fa4daf48",
-								true,
-							},
-						},
-						name = "Recognize final trash before Damcyan Antlion",
-						uuid = "7fe6bfca-c7ad-e50d-9a0a-0bcc364939b4",
-						version = 2.1,
-					},
-				},
-			},
-			conditions = 
-			{
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 8,
-						localmapid = 1164,
-						name = "Lunar Subterrane (1164)",
-						uuid = "30cd4e06-611c-bf0a-8819-bb78422a7db0",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 7,
-						name = "In combat",
-						uuid = "98bed067-ee65-c2bb-a2d6-b7871f078ece",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Lua",
-						conditionLua = "local c=LunarSubterraneAutoSimConfig\nlocal s=data.lunar_subterrane_autosim\nreturn c~=nil and c.enabled and c.poolFinal and s~=nil and s.boss==0 and not data.lunar_final_trash",
-						name = "Pooling enabled; not yet detected",
-						uuid = "418bfcfb-6fd8-636d-9c74-757d872c191c",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Party",
-						comparator = 2,
-						conditionType = 4,
-						inRangeValue = 30,
-						name = "Within 30 yalms",
-						partyTargetType = "Detection Target",
-						uuid = "4489904e-87b2-6375-8133-47cc749a891c",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Filter",
-						conditions = 
-						{
-							
-							{
-								"4489904e-87b2-6375-8133-47cc749a891c",
-								true,
-							},
-						},
-						filterTargetType = "ContentID",
-						name = "Final pack 12575",
-						partyTargetContentID = 12575,
-						uuid = "1931653e-fd62-613d-91f4-170eee56f6e8",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Filter",
-						conditions = 
-						{
-							
-							{
-								"4489904e-87b2-6375-8133-47cc749a891c",
-								true,
-							},
-						},
-						filterTargetType = "ContentID",
-						name = "Final pack 12655",
-						partyTargetContentID = 12655,
-						uuid = "697d9891-cde9-f3d1-aebd-4953ca2612e6",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Filter",
-						conditions = 
-						{
-							
-							{
-								"4489904e-87b2-6375-8133-47cc749a891c",
-								true,
-							},
-						},
-						filterTargetType = "ContentID",
-						name = "Final pack 12656",
-						partyTargetContentID = 12656,
-						uuid = "06fee9d2-6003-3b00-9b34-3de3a0505e8f",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Filter",
-						conditions = 
-						{
-							
-							{
-								"1931653e-fd62-613d-91f4-170eee56f6e8",
-								true,
-							},
-							
-							{
-								"697d9891-cde9-f3d1-aebd-4953ca2612e6",
-								true,
-							},
-							
-							{
-								"06fee9d2-6003-3b00-9b34-3de3a0505e8f",
-								true,
-							},
-						},
-						matchAnyBuff = true,
-						name = "Either final-pack enemy",
-						partyTargetNumber = 0,
-						uuid = "79a056ea-bd7f-9cec-9de4-8078fa4daf48",
-						version = 3,
-					},
-				},
-			},
-			displayPath = "Lunar Subterrane/AutoSim",
-			name = "[Lunar AutoSim] Recognize final trash before Damcyan Antlion",
-			timeout = 2,
-			uuid = "59578cfb-cfc6-4b7d-8d04-30f195504628",
-			version = 2,
-		},
-	},
-	
-	{
-		data = 
-		{
-			actions = 
-			{
-				
-				{
-					data = 
-					{
-						aType = "Lua",
-						actionLua = "data.lunar_final_trash=true\nself.used=true",
-						conditions = 
-						{
-							
-							{
-								"a92f1aa2-bae3-bfa2-9f0f-8b216a96aafa",
-								true,
-							},
-							
-							{
-								"5d0d4ec0-1b21-a398-884b-2559f7d7638a",
-								true,
-							},
-							
-							{
-								"172b0bf5-c565-2209-a905-fe678779b0af",
-								true,
-							},
-							
-							{
-								"9f3234e7-b126-f95a-aaf7-fdd3986c1fc2",
-								true,
-							},
-						},
-						name = "Recognize final trash before Durante",
-						uuid = "86b55441-0571-5b73-8b48-e8a3cda2e46b",
-						version = 2.1,
-					},
-				},
-			},
-			conditions = 
-			{
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 8,
-						localmapid = 1164,
-						name = "Lunar Subterrane (1164)",
-						uuid = "a92f1aa2-bae3-bfa2-9f0f-8b216a96aafa",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 7,
-						name = "In combat",
-						uuid = "5d0d4ec0-1b21-a398-884b-2559f7d7638a",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Lua",
-						conditionLua = "local c=LunarSubterraneAutoSimConfig\nlocal s=data.lunar_subterrane_autosim\nreturn c~=nil and c.enabled and c.poolFinal and s~=nil and s.boss==0 and not data.lunar_final_trash",
-						name = "Pooling enabled; not yet detected",
-						uuid = "172b0bf5-c565-2209-a905-fe678779b0af",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Party",
-						comparator = 2,
-						conditionType = 4,
-						inRangeValue = 30,
-						name = "Within 30 yalms",
-						partyTargetType = "Detection Target",
-						uuid = "a3484ca4-a30d-7c7a-8d14-f85ac65d8d40",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Filter",
-						conditions = 
-						{
-							
-							{
-								"a3484ca4-a30d-7c7a-8d14-f85ac65d8d40",
-								true,
-							},
-						},
-						filterTargetType = "ContentID",
-						name = "Final pack 12581",
-						partyTargetContentID = 12581,
-						uuid = "5f45e8e9-d3a3-669c-ac32-8c42391eb322",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Filter",
-						conditions = 
-						{
-							
-							{
-								"a3484ca4-a30d-7c7a-8d14-f85ac65d8d40",
-								true,
-							},
-						},
-						filterTargetType = "ContentID",
-						name = "Final pack 12582",
-						partyTargetContentID = 12582,
-						uuid = "c8ec82f2-a70a-ab4b-adf6-a9e37efff626",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Filter",
-						conditions = 
-						{
-							
-							{
-								"a3484ca4-a30d-7c7a-8d14-f85ac65d8d40",
-								true,
-							},
-						},
-						filterTargetType = "ContentID",
-						name = "Final pack 12583",
-						partyTargetContentID = 12583,
-						uuid = "e2ab8bdd-536d-6431-b136-cf9b186d05e2",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Filter",
-						conditions = 
-						{
-							
-							{
-								"a3484ca4-a30d-7c7a-8d14-f85ac65d8d40",
-								true,
-							},
-						},
-						filterTargetType = "ContentID",
-						name = "Final pack 12660",
-						partyTargetContentID = 12660,
-						uuid = "5b749ce5-f610-6077-8812-4871d4b1f9ac",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Filter",
-						conditions = 
-						{
-							
-							{
-								"a3484ca4-a30d-7c7a-8d14-f85ac65d8d40",
-								true,
-							},
-						},
-						filterTargetType = "ContentID",
-						name = "Final pack 12661",
-						partyTargetContentID = 12661,
-						uuid = "40fe84e2-ad8e-c5b3-98f0-275552a617c0",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Filter",
-						conditions = 
-						{
-							
-							{
-								"5f45e8e9-d3a3-669c-ac32-8c42391eb322",
-								true,
-							},
-							
-							{
-								"c8ec82f2-a70a-ab4b-adf6-a9e37efff626",
-								true,
-							},
-							
-							{
-								"e2ab8bdd-536d-6431-b136-cf9b186d05e2",
-								true,
-							},
-							
-							{
-								"5b749ce5-f610-6077-8812-4871d4b1f9ac",
-								true,
-							},
-							
-							{
-								"40fe84e2-ad8e-c5b3-98f0-275552a617c0",
-								true,
-							},
-						},
-						matchAnyBuff = true,
-						name = "Either final-pack enemy",
-						partyTargetNumber = 0,
-						uuid = "9f3234e7-b126-f95a-aaf7-fdd3986c1fc2",
-						version = 3,
-					},
-				},
-			},
-			displayPath = "Lunar Subterrane/AutoSim",
-			name = "[Lunar AutoSim] Recognize final trash before Durante",
-			timeout = 2,
-			uuid = "7851a0cc-03c2-115a-9259-20471c40afeb",
-			version = 2,
-		},
-	},
-	
-	{
-		data = 
-		{
-			actions = 
-			{
-				
-				{
-					data = 
-					{
-						aType = "Lua",
-						actionLua = "local c=LunarSubterraneAutoSimConfig\nlocal s=data.lunar_subterrane_autosim\nif not c or not c.enabled or not c.poolFinal or not s or s.boss~=0 then self.used=true;return end\nlocal target=TensorCore.mGetTarget()\nif target and (target.contentid==12500 or target.contentid==12484 or target.contentid==12584) then data.lunar_final_trash=nil;self.used=true;return end\nlocal now=Now()\nif not data.lunar_pool_next or now>=data.lunar_pool_next then\n local a=TensorCore.API.TensorACR\n local ll=a.holdActionUntil(3573,now+750)\n local mf=a.holdActionUntil(158,now+750)\n data.lunar_pool_next=now+250\n c.poolStatus=(ll and mf) and \"Holding Ley Lines + Manafont for next boss\" or \"Current ACR did not accept both cooldown holds\"\nend\nself.used=true",
-						conditions = 
-						{
-							
-							{
-								"a48ce733-e5cc-bb74-99b7-6ce2fb8786cc",
-								true,
-							},
-							
-							{
-								"b792aee8-2a3e-6dd2-a0d7-2f8a9ae28790",
-								true,
-							},
-							
-							{
-								"24235c62-5ff7-dd0c-98af-a6f33bed12f7",
-								true,
-							},
-							
-							{
-								"8f0f17bf-a64f-ed59-bdcc-92c796c54e68",
-								true,
-							},
-						},
-						name = "Hold Ley Lines + Manafont on final trash",
-						uuid = "c34d7c7e-fa88-f923-bc20-67927ce8e001",
-						version = 2.1,
-					},
-				},
-			},
-			conditions = 
-			{
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 8,
-						localmapid = 1164,
-						name = "Lunar Subterrane (1164)",
-						uuid = "a48ce733-e5cc-bb74-99b7-6ce2fb8786cc",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 13,
-						jobValue = "BLACKMAGE",
-						name = "Black Mage",
-						uuid = "b792aee8-2a3e-6dd2-a0d7-2f8a9ae28790",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Self",
-						conditionType = 7,
-						name = "In combat",
-						uuid = "24235c62-5ff7-dd0c-98af-a6f33bed12f7",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Lua",
-						conditionLua = "return data.lunar_final_trash==true",
-						name = "Final trash detected",
-						uuid = "8f0f17bf-a64f-ed59-bdcc-92c796c54e68",
-						version = 3,
-					},
-				},
-			},
-			displayPath = "Lunar Subterrane/AutoSim",
-			enabled = false,
-			name = "[Lunar AutoSim] Final-trash hold - replaced by shared cooldown control",
-			timeout = 2,
-			uuid = "54676787-b5ee-e8c3-95af-1f2d9f16c919",
-			version = 2,
-		},
-	},
-	
-	{
-		data = 
-		{
-			displayPath = "",
 			name = "Mistwake",
 			uuid = "862c3e8c-4287-83e4-9ec5-ccb18feaa444",
 		},
@@ -1706,7 +489,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not MistwakeAutoSimConfig or MistwakeAutoSimConfig.fileApiVersion~=1 then\n    local C = MistwakeAutoSimConfig or {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=true, kill14270=124.141, kill14271=137.749, kill14288=185.438,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Mistwake.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill14270\",\"kill14271\",\"kill14288\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\Mistwake.AutoSim.lua]]\n    if not MistwakeAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill14270=math.max(15,math.min(1200,C.kill14270))\n    C.kill14271=math.max(15,math.min(1200,C.kill14271))\n    C.kill14288=math.max(15,math.min(1200,C.kill14288))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    MistwakeAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif MistwakeAutoSimConfig.poolFinal==nil then\n MistwakeAutoSimConfig.poolFinal=true\n table.insert(MistwakeAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=MistwakeAutoSimConfig\nlocal visible=GUI:Begin(\"Mistwake - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. The optional values below come from three four-player runs, not the slower Duty Support samples.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Treno Catoblepas (seconds)\",C.kill14270,5,15,\"%.1f\")\n        if changed then C.kill14270=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Amdusias (seconds)\",C.kill14271,5,15,\"%.1f\")\n        if changed then C.kill14271=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Thundergust Griffin (seconds)\",C.kill14288,5,15,\"%.1f\")\n        if changed then C.kill14288=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold offensive cooldowns on final trash (all jobs)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before each boss and temporarily turns off the current job’s CD switch. Radiant Finale is explicitly held too. Your previous CD setting is restored when pooling ends; songs keep their own control.\") end\n    local shared=DungeonAutoSimShared\n    if shared then\n        v,changed=GUI:SliderInt(\"Hold new boss cooldowns below HP (%) - shared\",shared.lateHP,0,20)\n        if changed then shared.lateHP=v;shared.save() end\n        if GUI:IsItemHovered() then GUI:SetTooltip(\"Shared across these nine dungeons and all jobs. At this boss HP, stop starting offensive cooldowns; normal attacks continue. 0 disables this rule. Default 8%. Defensive controls and songs keep their own settings.\") end\n    end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not MistwakeAutoSimConfig or MistwakeAutoSimConfig.fileApiVersion~=1 then\n    local C = MistwakeAutoSimConfig or {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=true, kill14270=124.141, kill14271=137.749, kill14288=185.438,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Mistwake.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill14270\",\"kill14271\",\"kill14288\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\Mistwake.AutoSim.lua]]\n    if not MistwakeAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill14270=math.max(15,math.min(1200,C.kill14270))\n    C.kill14271=math.max(15,math.min(1200,C.kill14271))\n    C.kill14288=math.max(15,math.min(1200,C.kill14288))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    MistwakeAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif MistwakeAutoSimConfig.poolFinal==nil then\n MistwakeAutoSimConfig.poolFinal=true\n table.insert(MistwakeAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=MistwakeAutoSimConfig\nlocal visible=GUI:Begin(\"Mistwake - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. The optional values below come from three four-player runs, not the slower Duty Support samples.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Treno Catoblepas (seconds)\",C.kill14270,5,15,\"%.1f\")\n        if changed then C.kill14270=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Amdusias (seconds)\",C.kill14271,5,15,\"%.1f\")\n        if changed then C.kill14271=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Thundergust Griffin (seconds)\",C.kill14288,5,15,\"%.1f\")\n        if changed then C.kill14288=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold offensive cooldowns on final trash (all jobs)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before each boss and temporarily turns off the current job’s CD switch. Radiant Finale is explicitly held too. Your previous CD setting is restored when pooling ends; songs keep their own control.\") end\n    local shared=DungeonAutoSimShared\n    if shared then\n        v,changed=GUI:SliderInt(\"Hold new boss cooldowns below HP (%) - shared\",shared.lateHP,0,20)\n        if changed then shared.lateHP=v;shared.save() end\n        if GUI:IsItemHovered() then GUI:SetTooltip(\"Shared across these nine dungeons and all jobs. At this boss HP, stop starting offensive cooldowns; normal attacks continue. 0 disables this rule. Default 8%. Defensive controls and songs keep their own settings.\") end\n    end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    GUI:Text(\"Party buff timing\")\n    GUI:TextWrapped(C.buffEnabled and \"Forecast enabled. Times are seconds from boss pull.\" or \"Forecast disabled. These values apply only when the party buff forecast is enabled.\")\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\n do\n local h=DungeonAutoSimShared\n if h then\nlocal key=\"dungeon_lol\"\nDungeonHoldDisplays=DungeonHoldDisplays or {}\nlocal c=DungeonHoldDisplays[key]\nif not c then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..key..[[.Safety.lua]]\n c=FileExists(path) and FileLoad(path) or {}\n if type(c)~=\"table\" then c={} end\n if type(c.showHoldStatus)~=\"boolean\" then c.showHoldStatus=true end\n if type(c.shortLivedAdds)~=\"boolean\" then c.shortLivedAdds=true end\n c.path=path;DungeonHoldDisplays[key]=c\nend\n GUI:Separator()\n GUI:Text(\"Dungeon holds\")\n local value,changed=GUI:Checkbox(\"Show hold reason\",c.showHoldStatus)\n if changed then c.showHoldStatus=value end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Shows only holds owned by this dungeon controller. It does not describe holds from other profiles.\") end\n local v,edit=GUI:Checkbox(\"Avoid long BLM casts on dying adds\",c.shortLivedAdds)\n if edit then c.shortLivedAdds=v end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Uses the target's lifetime estimate; lets an existing cast finish. Does not change targets or block healing.\") end\n if changed or edit then\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  FileSave(c.path,{showHoldStatus=c.showHoldStatus,shortLivedAdds=c.shortLivedAdds})\n end\n if c.showHoldStatus then GUI:TextWrapped(h.status or h.reason or \"No dungeon cooldown hold\") end\n end\n end\n\nend\nGUI:End()\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -2118,7 +901,7 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local c=MistwakeAutoSimConfig\nlocal s=data.mistwake_autosim\nreturn c~=nil and c.enabled and c.poolFinal and s~=nil and s.boss==0 and not data.mistwake_final_trash",
+						conditionLua = "local c=MistwakeAutoSimConfig\nlocal s=data.mistwake_autosim\nlocal p=TensorCore.mGetPlayer()\nlocal t=TensorCore.mGetTarget()\nreturn p~=nil and p.pos.z < -510 and p.pos.y > -125 and p.pos.y < -110 and t~=nil and t.incombat and c~=nil and c.enabled and c.poolFinal and s~=nil and s.boss==0 and not data.mistwake_final_trash\n",
 						name = "Pooling enabled; not yet detected",
 						uuid = "90dc35ae-eafe-4e73-b987-bfebf0df98a8",
 						version = 3,
@@ -2798,7 +1581,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not ClyteumAutoSimConfig or ClyteumAutoSimConfig.fileApiVersion~=1 then\n    local C = ClyteumAutoSimConfig or {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=true, kill14716=140, kill14734=135, kill14758=180,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Clyteum.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill14716\",\"kill14734\",\"kill14758\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\Clyteum.AutoSim.lua]]\n    if not ClyteumAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill14716=math.max(15,math.min(1200,C.kill14716))\n    C.kill14734=math.max(15,math.min(1200,C.kill14734))\n    C.kill14758=math.max(15,math.min(1200,C.kill14758))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    ClyteumAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif ClyteumAutoSimConfig.poolFinal==nil then\n ClyteumAutoSimConfig.poolFinal=true\n table.insert(ClyteumAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=ClyteumAutoSimConfig\nlocal visible=GUI:Begin(\"Clyteum - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Eye of the Scorpion (seconds)\",C.kill14716,5,15,\"%.1f\")\n        if changed then C.kill14716=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Chort (seconds)\",C.kill14734,5,15,\"%.1f\")\n        if changed then C.kill14734=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Malphas (seconds)\",C.kill14758,5,15,\"%.1f\")\n        if changed then C.kill14758=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold offensive cooldowns on final trash (all jobs)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before each boss and temporarily turns off the current job’s CD switch. Radiant Finale is explicitly held too. Your previous CD setting is restored when pooling ends; songs keep their own control.\") end\n    local shared=DungeonAutoSimShared\n    if shared then\n        v,changed=GUI:SliderInt(\"Hold new boss cooldowns below HP (%) - shared\",shared.lateHP,0,20)\n        if changed then shared.lateHP=v;shared.save() end\n        if GUI:IsItemHovered() then GUI:SetTooltip(\"Shared across these nine dungeons and all jobs. At this boss HP, stop starting offensive cooldowns; normal attacks continue. 0 disables this rule. Default 8%. Defensive controls and songs keep their own settings.\") end\n    end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not ClyteumAutoSimConfig or ClyteumAutoSimConfig.fileApiVersion~=1 then\n    local C = ClyteumAutoSimConfig or {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=true, kill14716=140, kill14734=135, kill14758=180,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Clyteum.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill14716\",\"kill14734\",\"kill14758\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\Clyteum.AutoSim.lua]]\n    if not ClyteumAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill14716=math.max(15,math.min(1200,C.kill14716))\n    C.kill14734=math.max(15,math.min(1200,C.kill14734))\n    C.kill14758=math.max(15,math.min(1200,C.kill14758))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    ClyteumAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif ClyteumAutoSimConfig.poolFinal==nil then\n ClyteumAutoSimConfig.poolFinal=true\n table.insert(ClyteumAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=ClyteumAutoSimConfig\nlocal visible=GUI:Begin(\"Clyteum - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Eye of the Scorpion (seconds)\",C.kill14716,5,15,\"%.1f\")\n        if changed then C.kill14716=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Chort (seconds)\",C.kill14734,5,15,\"%.1f\")\n        if changed then C.kill14734=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Malphas (seconds)\",C.kill14758,5,15,\"%.1f\")\n        if changed then C.kill14758=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold offensive cooldowns on final trash (all jobs)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before each boss and temporarily turns off the current job’s CD switch. Radiant Finale is explicitly held too. Your previous CD setting is restored when pooling ends; songs keep their own control.\") end\n    local shared=DungeonAutoSimShared\n    if shared then\n        v,changed=GUI:SliderInt(\"Hold new boss cooldowns below HP (%) - shared\",shared.lateHP,0,20)\n        if changed then shared.lateHP=v;shared.save() end\n        if GUI:IsItemHovered() then GUI:SetTooltip(\"Shared across these nine dungeons and all jobs. At this boss HP, stop starting offensive cooldowns; normal attacks continue. 0 disables this rule. Default 8%. Defensive controls and songs keep their own settings.\") end\n    end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    GUI:Text(\"Party buff timing\")\n    GUI:TextWrapped(C.buffEnabled and \"Forecast enabled. Times are seconds from boss pull.\" or \"Forecast disabled. These values apply only when the party buff forecast is enabled.\")\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\n do\n local h=DungeonAutoSimShared\n if h then\nlocal key=\"dungeon_lol\"\nDungeonHoldDisplays=DungeonHoldDisplays or {}\nlocal c=DungeonHoldDisplays[key]\nif not c then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..key..[[.Safety.lua]]\n c=FileExists(path) and FileLoad(path) or {}\n if type(c)~=\"table\" then c={} end\n if type(c.showHoldStatus)~=\"boolean\" then c.showHoldStatus=true end\n if type(c.shortLivedAdds)~=\"boolean\" then c.shortLivedAdds=true end\n c.path=path;DungeonHoldDisplays[key]=c\nend\n GUI:Separator()\n GUI:Text(\"Dungeon holds\")\n local value,changed=GUI:Checkbox(\"Show hold reason\",c.showHoldStatus)\n if changed then c.showHoldStatus=value end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Shows only holds owned by this dungeon controller. It does not describe holds from other profiles.\") end\n local v,edit=GUI:Checkbox(\"Avoid long BLM casts on dying adds\",c.shortLivedAdds)\n if edit then c.shortLivedAdds=v end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Uses the target's lifetime estimate; lets an existing cast finish. Does not change targets or block healing.\") end\n if changed or edit then\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  FileSave(c.path,{showHoldStatus=c.showHoldStatus,shortLivedAdds=c.shortLivedAdds})\n end\n if c.showHoldStatus then GUI:TextWrapped(h.status or h.reason or \"No dungeon cooldown hold\") end\n end\n end\n\nend\nGUI:End()\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -3940,7 +2723,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not MesoTerminalAutoSimConfig or MesoTerminalAutoSimConfig.fileApiVersion~=1 then\n    local C = MesoTerminalAutoSimConfig or {\n        timingDefaultsVersion=0, enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=true, kill13970=140, kill14047=140, kill13974=226,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\MesoTerminal.AutoSim.settings.tsv]]\n    }\n    C.keys={\"timingDefaultsVersion\",\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill13970\",\"kill14047\",\"kill13974\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\MesoTerminal.AutoSim.lua]]\n    if not MesoTerminalAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill13970=math.max(15,math.min(1200,C.kill13970))\n    C.kill14047=math.max(15,math.min(1200,C.kill14047))\n    C.kill13974=math.max(15,math.min(1200,C.kill13974))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    MesoTerminalAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif MesoTerminalAutoSimConfig.poolFinal==nil then\n MesoTerminalAutoSimConfig.poolFinal=true\n table.insert(MesoTerminalAutoSimConfig.keys,\"poolFinal\")\nend\nlocal timing=MesoTerminalAutoSimConfig\nif timing.timingDefaultsVersion==nil then timing.timingDefaultsVersion=0;table.insert(timing.keys,\"timingDefaultsVersion\") end\nif timing.timingDefaultsVersion<1 then\n if timing.kill13970==130.024 then timing.kill13970=140 end\n if timing.kill14047==136.562 then timing.kill14047=140 end\n if timing.kill13974==205.226 then timing.kill13974=226 end\n timing.timingDefaultsVersion=1;timing.save()\nend\n\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=MesoTerminalAutoSimConfig\nlocal visible=GUI:Begin(\"Meso Terminal - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Chirurgeon General (seconds)\",C.kill13970,5,15,\"%.1f\")\n        if changed then C.kill13970=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Bloody Headsman (seconds)\",C.kill14047,5,15,\"%.1f\")\n        if changed then C.kill14047=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Immortal Remains (seconds)\",C.kill13974,5,15,\"%.1f\")\n        if changed then C.kill13974=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold offensive cooldowns on final trash (all jobs)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before each boss and temporarily turns off the current job’s CD switch. Radiant Finale is explicitly held too. Your previous CD setting is restored when pooling ends; songs keep their own control.\") end\n    local shared=DungeonAutoSimShared\nif shared then\n local box,boxChanged=GUI:Checkbox(\"Target Hellmaker in my cell\",shared.autoBox)\n if boxChanged then shared.autoBox=box;shared.save() end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Switch to the single Hellmaker inside your current cell, then return to your selected headsman. Checks all four cells. Ambiguous positions or manual target changes cancel the switch.\") end\nend\n    if shared then\n        v,changed=GUI:SliderInt(\"Hold new boss cooldowns below HP (%) - shared\",shared.lateHP,0,20)\n        if changed then shared.lateHP=v;shared.save() end\n        if GUI:IsItemHovered() then GUI:SetTooltip(\"Shared across these nine dungeons and all jobs. At this boss HP, stop starting offensive cooldowns; normal attacks continue. 0 disables this rule. Default 8%. Defensive controls and songs keep their own settings.\") end\n    end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not MesoTerminalAutoSimConfig or MesoTerminalAutoSimConfig.fileApiVersion~=1 then\n    local C = MesoTerminalAutoSimConfig or {\n        timingDefaultsVersion=0, enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=true, kill13970=140, kill14047=140, kill13974=226,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\MesoTerminal.AutoSim.settings.tsv]]\n    }\n    C.keys={\"timingDefaultsVersion\",\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill13970\",\"kill14047\",\"kill13974\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\MesoTerminal.AutoSim.lua]]\n    if not MesoTerminalAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill13970=math.max(15,math.min(1200,C.kill13970))\n    C.kill14047=math.max(15,math.min(1200,C.kill14047))\n    C.kill13974=math.max(15,math.min(1200,C.kill13974))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    MesoTerminalAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif MesoTerminalAutoSimConfig.poolFinal==nil then\n MesoTerminalAutoSimConfig.poolFinal=true\n table.insert(MesoTerminalAutoSimConfig.keys,\"poolFinal\")\nend\nlocal timing=MesoTerminalAutoSimConfig\nif timing.timingDefaultsVersion==nil then timing.timingDefaultsVersion=0;table.insert(timing.keys,\"timingDefaultsVersion\") end\nif timing.timingDefaultsVersion<1 then\n if timing.kill13970==130.024 then timing.kill13970=140 end\n if timing.kill14047==136.562 then timing.kill14047=140 end\n if timing.kill13974==205.226 then timing.kill13974=226 end\n timing.timingDefaultsVersion=1;timing.save()\nend\n\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=MesoTerminalAutoSimConfig\nlocal visible=GUI:Begin(\"Meso Terminal - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Chirurgeon General (seconds)\",C.kill13970,5,15,\"%.1f\")\n        if changed then C.kill13970=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Bloody Headsman (seconds)\",C.kill14047,5,15,\"%.1f\")\n        if changed then C.kill14047=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Immortal Remains (seconds)\",C.kill13974,5,15,\"%.1f\")\n        if changed then C.kill13974=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold offensive cooldowns on final trash (all jobs)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before each boss and temporarily turns off the current job’s CD switch. Radiant Finale is explicitly held too. Your previous CD setting is restored when pooling ends; songs keep their own control.\") end\n    local shared=DungeonAutoSimShared\nif shared then\n local box,boxChanged=GUI:Checkbox(\"Target Hellmaker in my cell\",shared.autoBox)\n if boxChanged then shared.autoBox=box;shared.save() end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Switch to the single Hellmaker inside your current cell, then return to your selected headsman. Checks all four cells. Ambiguous positions or manual target changes cancel the switch.\") end\nend\n    if shared then\n        v,changed=GUI:SliderInt(\"Hold new boss cooldowns below HP (%) - shared\",shared.lateHP,0,20)\n        if changed then shared.lateHP=v;shared.save() end\n        if GUI:IsItemHovered() then GUI:SetTooltip(\"Shared across these nine dungeons and all jobs. At this boss HP, stop starting offensive cooldowns; normal attacks continue. 0 disables this rule. Default 8%. Defensive controls and songs keep their own settings.\") end\n    end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    GUI:Text(\"Party buff timing\")\n    GUI:TextWrapped(C.buffEnabled and \"Forecast enabled. Times are seconds from boss pull.\" or \"Forecast disabled. These values apply only when the party buff forecast is enabled.\")\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\n do\n local h=DungeonAutoSimShared\n if h then\nlocal key=\"dungeon_lol\"\nDungeonHoldDisplays=DungeonHoldDisplays or {}\nlocal c=DungeonHoldDisplays[key]\nif not c then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..key..[[.Safety.lua]]\n c=FileExists(path) and FileLoad(path) or {}\n if type(c)~=\"table\" then c={} end\n if type(c.showHoldStatus)~=\"boolean\" then c.showHoldStatus=true end\n if type(c.shortLivedAdds)~=\"boolean\" then c.shortLivedAdds=true end\n c.path=path;DungeonHoldDisplays[key]=c\nend\n GUI:Separator()\n GUI:Text(\"Dungeon holds\")\n local value,changed=GUI:Checkbox(\"Show hold reason\",c.showHoldStatus)\n if changed then c.showHoldStatus=value end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Shows only holds owned by this dungeon controller. It does not describe holds from other profiles.\") end\n local v,edit=GUI:Checkbox(\"Avoid long BLM casts on dying adds\",c.shortLivedAdds)\n if edit then c.shortLivedAdds=v end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Uses the target's lifetime estimate; lets an existing cast finish. Does not change targets or block healing.\") end\n if changed or edit then\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  FileSave(c.path,{showHoldStatus=c.showHoldStatus,shortLivedAdds=c.shortLivedAdds})\n end\n if c.showHoldStatus then GUI:TextWrapped(h.status or h.reason or \"No dungeon cooldown hold\") end\n end\n end\n\nend\nGUI:End()\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -5007,7 +3790,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not UnderkeepAutoSimConfig or UnderkeepAutoSimConfig.fileApiVersion~=1 then\n    local C = UnderkeepAutoSimConfig or {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=true, kill13753=121.343, kill13757=112.39, kill13749=167.391,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Underkeep.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill13753\",\"kill13757\",\"kill13749\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\Underkeep.AutoSim.lua]]\n    if not UnderkeepAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill13753=math.max(15,math.min(1200,C.kill13753))\n    C.kill13757=math.max(15,math.min(1200,C.kill13757))\n    C.kill13749=math.max(15,math.min(1200,C.kill13749))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    UnderkeepAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif UnderkeepAutoSimConfig.poolFinal==nil then\n UnderkeepAutoSimConfig.poolFinal=true\n table.insert(UnderkeepAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=UnderkeepAutoSimConfig\nlocal visible=GUI:Begin(\"Underkeep - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Gargant (seconds)\",C.kill13753,5,15,\"%.1f\")\n        if changed then C.kill13753=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Soldier S0 (seconds)\",C.kill13757,5,15,\"%.1f\")\n        if changed then C.kill13757=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Valia Pira (seconds)\",C.kill13749,5,15,\"%.1f\")\n        if changed then C.kill13749=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold offensive cooldowns on final trash (all jobs)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before each boss and temporarily turns off the current job’s CD switch. Radiant Finale is explicitly held too. Your previous CD setting is restored when pooling ends; songs keep their own control.\") end\n    local shared=DungeonAutoSimShared\n    if shared then\n        v,changed=GUI:SliderInt(\"Hold new boss cooldowns below HP (%) - shared\",shared.lateHP,0,20)\n        if changed then shared.lateHP=v;shared.save() end\n        if GUI:IsItemHovered() then GUI:SetTooltip(\"Shared across these nine dungeons and all jobs. At this boss HP, stop starting offensive cooldowns; normal attacks continue. 0 disables this rule. Default 8%. Defensive controls and songs keep their own settings.\") end\n    end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not UnderkeepAutoSimConfig or UnderkeepAutoSimConfig.fileApiVersion~=1 then\n    local C = UnderkeepAutoSimConfig or {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=true, kill13753=121.343, kill13757=112.39, kill13749=167.391,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Underkeep.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill13753\",\"kill13757\",\"kill13749\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\Underkeep.AutoSim.lua]]\n    if not UnderkeepAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill13753=math.max(15,math.min(1200,C.kill13753))\n    C.kill13757=math.max(15,math.min(1200,C.kill13757))\n    C.kill13749=math.max(15,math.min(1200,C.kill13749))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    UnderkeepAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif UnderkeepAutoSimConfig.poolFinal==nil then\n UnderkeepAutoSimConfig.poolFinal=true\n table.insert(UnderkeepAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=UnderkeepAutoSimConfig\nlocal visible=GUI:Begin(\"Underkeep - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Gargant (seconds)\",C.kill13753,5,15,\"%.1f\")\n        if changed then C.kill13753=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Soldier S0 (seconds)\",C.kill13757,5,15,\"%.1f\")\n        if changed then C.kill13757=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Valia Pira (seconds)\",C.kill13749,5,15,\"%.1f\")\n        if changed then C.kill13749=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold offensive cooldowns on final trash (all jobs)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before each boss and temporarily turns off the current job’s CD switch. Radiant Finale is explicitly held too. Your previous CD setting is restored when pooling ends; songs keep their own control.\") end\n    local shared=DungeonAutoSimShared\n    if shared then\n        v,changed=GUI:SliderInt(\"Hold new boss cooldowns below HP (%) - shared\",shared.lateHP,0,20)\n        if changed then shared.lateHP=v;shared.save() end\n        if GUI:IsItemHovered() then GUI:SetTooltip(\"Shared across these nine dungeons and all jobs. At this boss HP, stop starting offensive cooldowns; normal attacks continue. 0 disables this rule. Default 8%. Defensive controls and songs keep their own settings.\") end\n    end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    GUI:Text(\"Party buff timing\")\n    GUI:TextWrapped(C.buffEnabled and \"Forecast enabled. Times are seconds from boss pull.\" or \"Forecast disabled. These values apply only when the party buff forecast is enabled.\")\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\n do\n local h=DungeonAutoSimShared\n if h then\nlocal key=\"dungeon_lol\"\nDungeonHoldDisplays=DungeonHoldDisplays or {}\nlocal c=DungeonHoldDisplays[key]\nif not c then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..key..[[.Safety.lua]]\n c=FileExists(path) and FileLoad(path) or {}\n if type(c)~=\"table\" then c={} end\n if type(c.showHoldStatus)~=\"boolean\" then c.showHoldStatus=true end\n if type(c.shortLivedAdds)~=\"boolean\" then c.shortLivedAdds=true end\n c.path=path;DungeonHoldDisplays[key]=c\nend\n GUI:Separator()\n GUI:Text(\"Dungeon holds\")\n local value,changed=GUI:Checkbox(\"Show hold reason\",c.showHoldStatus)\n if changed then c.showHoldStatus=value end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Shows only holds owned by this dungeon controller. It does not describe holds from other profiles.\") end\n local v,edit=GUI:Checkbox(\"Avoid long BLM casts on dying adds\",c.shortLivedAdds)\n if edit then c.shortLivedAdds=v end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Uses the target's lifetime estimate; lets an existing cast finish. Does not change targets or block healing.\") end\n if changed or edit then\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  FileSave(c.path,{showHoldStatus=c.showHoldStatus,shortLivedAdds=c.shortLivedAdds})\n end\n if c.showHoldStatus then GUI:TextWrapped(h.status or h.reason or \"No dungeon cooldown hold\") end\n end\n end\n\nend\nGUI:End()\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -6074,7 +4857,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not YuweyawataFieldStationAutoSimConfig or YuweyawataFieldStationAutoSimConfig.fileApiVersion~=1 then\n    local C = YuweyawataFieldStationAutoSimConfig or {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=true, kill13623=136.125, kill13634=143.312, kill13610=247.5,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\YuweyawataFieldStation.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill13623\",\"kill13634\",\"kill13610\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\YuweyawataFieldStation.AutoSim.lua]]\n    if not YuweyawataFieldStationAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill13623=math.max(15,math.min(1200,C.kill13623))\n    C.kill13634=math.max(15,math.min(1200,C.kill13634))\n    C.kill13610=math.max(15,math.min(1200,C.kill13610))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    YuweyawataFieldStationAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif YuweyawataFieldStationAutoSimConfig.poolFinal==nil then\n YuweyawataFieldStationAutoSimConfig.poolFinal=true\n table.insert(YuweyawataFieldStationAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=YuweyawataFieldStationAutoSimConfig\nlocal visible=GUI:Begin(\"Yuweyawata Field Station - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Lindblum Zaghnal (seconds)\",C.kill13623,5,15,\"%.1f\")\n        if changed then C.kill13623=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Overseer Kanilokka (seconds)\",C.kill13634,5,15,\"%.1f\")\n        if changed then C.kill13634=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Lunipyati (seconds)\",C.kill13610,5,15,\"%.1f\")\n        if changed then C.kill13610=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold offensive cooldowns on final trash (all jobs)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before each boss and temporarily turns off the current job’s CD switch. Radiant Finale is explicitly held too. Your previous CD setting is restored when pooling ends; songs keep their own control.\") end\n    local shared=DungeonAutoSimShared\n    if shared then\n        v,changed=GUI:SliderInt(\"Hold new boss cooldowns below HP (%) - shared\",shared.lateHP,0,20)\n        if changed then shared.lateHP=v;shared.save() end\n        if GUI:IsItemHovered() then GUI:SetTooltip(\"Shared across these nine dungeons and all jobs. At this boss HP, stop starting offensive cooldowns; normal attacks continue. 0 disables this rule. Default 8%. Defensive controls and songs keep their own settings.\") end\n    end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not YuweyawataFieldStationAutoSimConfig or YuweyawataFieldStationAutoSimConfig.fileApiVersion~=1 then\n    local C = YuweyawataFieldStationAutoSimConfig or {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=true, kill13623=136.125, kill13634=143.312, kill13610=247.5,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\YuweyawataFieldStation.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill13623\",\"kill13634\",\"kill13610\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\YuweyawataFieldStation.AutoSim.lua]]\n    if not YuweyawataFieldStationAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill13623=math.max(15,math.min(1200,C.kill13623))\n    C.kill13634=math.max(15,math.min(1200,C.kill13634))\n    C.kill13610=math.max(15,math.min(1200,C.kill13610))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    YuweyawataFieldStationAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif YuweyawataFieldStationAutoSimConfig.poolFinal==nil then\n YuweyawataFieldStationAutoSimConfig.poolFinal=true\n table.insert(YuweyawataFieldStationAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=YuweyawataFieldStationAutoSimConfig\nlocal visible=GUI:Begin(\"Yuweyawata Field Station - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Lindblum Zaghnal (seconds)\",C.kill13623,5,15,\"%.1f\")\n        if changed then C.kill13623=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Overseer Kanilokka (seconds)\",C.kill13634,5,15,\"%.1f\")\n        if changed then C.kill13634=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Lunipyati (seconds)\",C.kill13610,5,15,\"%.1f\")\n        if changed then C.kill13610=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold offensive cooldowns on final trash (all jobs)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before each boss and temporarily turns off the current job’s CD switch. Radiant Finale is explicitly held too. Your previous CD setting is restored when pooling ends; songs keep their own control.\") end\n    local shared=DungeonAutoSimShared\n    if shared then\n        v,changed=GUI:SliderInt(\"Hold new boss cooldowns below HP (%) - shared\",shared.lateHP,0,20)\n        if changed then shared.lateHP=v;shared.save() end\n        if GUI:IsItemHovered() then GUI:SetTooltip(\"Shared across these nine dungeons and all jobs. At this boss HP, stop starting offensive cooldowns; normal attacks continue. 0 disables this rule. Default 8%. Defensive controls and songs keep their own settings.\") end\n    end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    GUI:Text(\"Party buff timing\")\n    GUI:TextWrapped(C.buffEnabled and \"Forecast enabled. Times are seconds from boss pull.\" or \"Forecast disabled. These values apply only when the party buff forecast is enabled.\")\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\n do\n local h=DungeonAutoSimShared\n if h then\nlocal key=\"dungeon_lol\"\nDungeonHoldDisplays=DungeonHoldDisplays or {}\nlocal c=DungeonHoldDisplays[key]\nif not c then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..key..[[.Safety.lua]]\n c=FileExists(path) and FileLoad(path) or {}\n if type(c)~=\"table\" then c={} end\n if type(c.showHoldStatus)~=\"boolean\" then c.showHoldStatus=true end\n if type(c.shortLivedAdds)~=\"boolean\" then c.shortLivedAdds=true end\n c.path=path;DungeonHoldDisplays[key]=c\nend\n GUI:Separator()\n GUI:Text(\"Dungeon holds\")\n local value,changed=GUI:Checkbox(\"Show hold reason\",c.showHoldStatus)\n if changed then c.showHoldStatus=value end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Shows only holds owned by this dungeon controller. It does not describe holds from other profiles.\") end\n local v,edit=GUI:Checkbox(\"Avoid long BLM casts on dying adds\",c.shortLivedAdds)\n if edit then c.shortLivedAdds=v end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Uses the target's lifetime estimate; lets an existing cast finish. Does not change targets or block healing.\") end\n if changed or edit then\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  FileSave(c.path,{showHoldStatus=c.showHoldStatus,shortLivedAdds=c.shortLivedAdds})\n end\n if c.showHoldStatus then GUI:TextWrapped(h.status or h.reason or \"No dungeon cooldown hold\") end\n end\n end\n\nend\nGUI:End()\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -7116,7 +5899,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not StrayboroughDeadwalkAutoSimConfig or StrayboroughDeadwalkAutoSimConfig.fileApiVersion~=1 then\n    local C = StrayboroughDeadwalkAutoSimConfig or {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=true, kill13073=116.39, kill12760=109.413, kill12763=169.383,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\StrayboroughDeadwalk.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill13073\",\"kill12760\",\"kill12763\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\StrayboroughDeadwalk.AutoSim.lua]]\n    if not StrayboroughDeadwalkAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill13073=math.max(15,math.min(1200,C.kill13073))\n    C.kill12760=math.max(15,math.min(1200,C.kill12760))\n    C.kill12763=math.max(15,math.min(1200,C.kill12763))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    StrayboroughDeadwalkAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif StrayboroughDeadwalkAutoSimConfig.poolFinal==nil then\n StrayboroughDeadwalkAutoSimConfig.poolFinal=true\n table.insert(StrayboroughDeadwalkAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=StrayboroughDeadwalkAutoSimConfig\nlocal visible=GUI:Begin(\"Strayborough Deadwalk - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"His Royal Headness Leonogg I (seconds)\",C.kill13073,5,15,\"%.1f\")\n        if changed then C.kill13073=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Jack-in-the-Pot (seconds)\",C.kill12760,5,15,\"%.1f\")\n        if changed then C.kill12760=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Träumerei (seconds)\",C.kill12763,5,15,\"%.1f\")\n        if changed then C.kill12763=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold offensive cooldowns on final trash (all jobs)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before each boss and temporarily turns off the current job’s CD switch. Radiant Finale is explicitly held too. Your previous CD setting is restored when pooling ends; songs keep their own control.\") end\n    local shared=DungeonAutoSimShared\n    if shared then\n        v,changed=GUI:SliderInt(\"Hold new boss cooldowns below HP (%) - shared\",shared.lateHP,0,20)\n        if changed then shared.lateHP=v;shared.save() end\n        if GUI:IsItemHovered() then GUI:SetTooltip(\"Shared across these nine dungeons and all jobs. At this boss HP, stop starting offensive cooldowns; normal attacks continue. 0 disables this rule. Default 8%. Defensive controls and songs keep their own settings.\") end\n    end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not StrayboroughDeadwalkAutoSimConfig or StrayboroughDeadwalkAutoSimConfig.fileApiVersion~=1 then\n    local C = StrayboroughDeadwalkAutoSimConfig or {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=true, kill13073=116.39, kill12760=109.413, kill12763=169.383,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\StrayboroughDeadwalk.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill13073\",\"kill12760\",\"kill12763\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\StrayboroughDeadwalk.AutoSim.lua]]\n    if not StrayboroughDeadwalkAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill13073=math.max(15,math.min(1200,C.kill13073))\n    C.kill12760=math.max(15,math.min(1200,C.kill12760))\n    C.kill12763=math.max(15,math.min(1200,C.kill12763))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    StrayboroughDeadwalkAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif StrayboroughDeadwalkAutoSimConfig.poolFinal==nil then\n StrayboroughDeadwalkAutoSimConfig.poolFinal=true\n table.insert(StrayboroughDeadwalkAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=StrayboroughDeadwalkAutoSimConfig\nlocal visible=GUI:Begin(\"Strayborough Deadwalk - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"His Royal Headness Leonogg I (seconds)\",C.kill13073,5,15,\"%.1f\")\n        if changed then C.kill13073=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Jack-in-the-Pot (seconds)\",C.kill12760,5,15,\"%.1f\")\n        if changed then C.kill12760=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Träumerei (seconds)\",C.kill12763,5,15,\"%.1f\")\n        if changed then C.kill12763=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold offensive cooldowns on final trash (all jobs)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before each boss and temporarily turns off the current job’s CD switch. Radiant Finale is explicitly held too. Your previous CD setting is restored when pooling ends; songs keep their own control.\") end\n    local shared=DungeonAutoSimShared\n    if shared then\n        v,changed=GUI:SliderInt(\"Hold new boss cooldowns below HP (%) - shared\",shared.lateHP,0,20)\n        if changed then shared.lateHP=v;shared.save() end\n        if GUI:IsItemHovered() then GUI:SetTooltip(\"Shared across these nine dungeons and all jobs. At this boss HP, stop starting offensive cooldowns; normal attacks continue. 0 disables this rule. Default 8%. Defensive controls and songs keep their own settings.\") end\n    end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    GUI:Text(\"Party buff timing\")\n    GUI:TextWrapped(C.buffEnabled and \"Forecast enabled. Times are seconds from boss pull.\" or \"Forecast disabled. These values apply only when the party buff forecast is enabled.\")\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\n do\n local h=DungeonAutoSimShared\n if h then\nlocal key=\"dungeon_lol\"\nDungeonHoldDisplays=DungeonHoldDisplays or {}\nlocal c=DungeonHoldDisplays[key]\nif not c then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..key..[[.Safety.lua]]\n c=FileExists(path) and FileLoad(path) or {}\n if type(c)~=\"table\" then c={} end\n if type(c.showHoldStatus)~=\"boolean\" then c.showHoldStatus=true end\n if type(c.shortLivedAdds)~=\"boolean\" then c.shortLivedAdds=true end\n c.path=path;DungeonHoldDisplays[key]=c\nend\n GUI:Separator()\n GUI:Text(\"Dungeon holds\")\n local value,changed=GUI:Checkbox(\"Show hold reason\",c.showHoldStatus)\n if changed then c.showHoldStatus=value end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Shows only holds owned by this dungeon controller. It does not describe holds from other profiles.\") end\n local v,edit=GUI:Checkbox(\"Avoid long BLM casts on dying adds\",c.shortLivedAdds)\n if edit then c.shortLivedAdds=v end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Uses the target's lifetime estimate; lets an existing cast finish. Does not change targets or block healing.\") end\n if changed or edit then\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  FileSave(c.path,{showHoldStatus=c.showHoldStatus,shortLivedAdds=c.shortLivedAdds})\n end\n if c.showHoldStatus then GUI:TextWrapped(h.status or h.reason or \"No dungeon cooldown hold\") end\n end\n end\n\nend\nGUI:End()\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -8283,7 +7066,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not TenderValleyAutoSimConfig or TenderValleyAutoSimConfig.fileApiVersion~=1 then\n    local C = TenderValleyAutoSimConfig or {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=true, kill12889=117.344, kill12853=113.781, kill12709=156.758,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\TenderValley.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill12889\",\"kill12853\",\"kill12709\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\TenderValley.AutoSim.lua]]\n    if not TenderValleyAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill12889=math.max(15,math.min(1200,C.kill12889))\n    C.kill12853=math.max(15,math.min(1200,C.kill12853))\n    C.kill12709=math.max(15,math.min(1200,C.kill12709))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    TenderValleyAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif TenderValleyAutoSimConfig.poolFinal==nil then\n TenderValleyAutoSimConfig.poolFinal=true\n table.insert(TenderValleyAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=TenderValleyAutoSimConfig\nlocal visible=GUI:Begin(\"Tender Valley - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Barreltender (seconds)\",C.kill12889,5,15,\"%.1f\")\n        if changed then C.kill12889=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Anthracite (seconds)\",C.kill12853,5,15,\"%.1f\")\n        if changed then C.kill12853=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"The Greatest Serpent of Tural (seconds)\",C.kill12709,5,15,\"%.1f\")\n        if changed then C.kill12709=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold offensive cooldowns on final trash (all jobs)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before each boss and temporarily turns off the current job’s CD switch. Radiant Finale is explicitly held too. Your previous CD setting is restored when pooling ends; songs keep their own control.\") end\n    local shared=DungeonAutoSimShared\n    if shared then\n        v,changed=GUI:SliderInt(\"Hold new boss cooldowns below HP (%) - shared\",shared.lateHP,0,20)\n        if changed then shared.lateHP=v;shared.save() end\n        if GUI:IsItemHovered() then GUI:SetTooltip(\"Shared across these nine dungeons and all jobs. At this boss HP, stop starting offensive cooldowns; normal attacks continue. 0 disables this rule. Default 8%. Defensive controls and songs keep their own settings.\") end\n    end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not TenderValleyAutoSimConfig or TenderValleyAutoSimConfig.fileApiVersion~=1 then\n    local C = TenderValleyAutoSimConfig or {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=true, kill12889=117.344, kill12853=113.781, kill12709=156.758,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\TenderValley.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill12889\",\"kill12853\",\"kill12709\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\TenderValley.AutoSim.lua]]\n    if not TenderValleyAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill12889=math.max(15,math.min(1200,C.kill12889))\n    C.kill12853=math.max(15,math.min(1200,C.kill12853))\n    C.kill12709=math.max(15,math.min(1200,C.kill12709))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    TenderValleyAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif TenderValleyAutoSimConfig.poolFinal==nil then\n TenderValleyAutoSimConfig.poolFinal=true\n table.insert(TenderValleyAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=TenderValleyAutoSimConfig\nlocal visible=GUI:Begin(\"Tender Valley - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Barreltender (seconds)\",C.kill12889,5,15,\"%.1f\")\n        if changed then C.kill12889=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Anthracite (seconds)\",C.kill12853,5,15,\"%.1f\")\n        if changed then C.kill12853=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"The Greatest Serpent of Tural (seconds)\",C.kill12709,5,15,\"%.1f\")\n        if changed then C.kill12709=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold offensive cooldowns on final trash (all jobs)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before each boss and temporarily turns off the current job’s CD switch. Radiant Finale is explicitly held too. Your previous CD setting is restored when pooling ends; songs keep their own control.\") end\n    local shared=DungeonAutoSimShared\n    if shared then\n        v,changed=GUI:SliderInt(\"Hold new boss cooldowns below HP (%) - shared\",shared.lateHP,0,20)\n        if changed then shared.lateHP=v;shared.save() end\n        if GUI:IsItemHovered() then GUI:SetTooltip(\"Shared across these nine dungeons and all jobs. At this boss HP, stop starting offensive cooldowns; normal attacks continue. 0 disables this rule. Default 8%. Defensive controls and songs keep their own settings.\") end\n    end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    GUI:Text(\"Party buff timing\")\n    GUI:TextWrapped(C.buffEnabled and \"Forecast enabled. Times are seconds from boss pull.\" or \"Forecast disabled. These values apply only when the party buff forecast is enabled.\")\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\n do\n local h=DungeonAutoSimShared\n if h then\nlocal key=\"dungeon_lol\"\nDungeonHoldDisplays=DungeonHoldDisplays or {}\nlocal c=DungeonHoldDisplays[key]\nif not c then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..key..[[.Safety.lua]]\n c=FileExists(path) and FileLoad(path) or {}\n if type(c)~=\"table\" then c={} end\n if type(c.showHoldStatus)~=\"boolean\" then c.showHoldStatus=true end\n if type(c.shortLivedAdds)~=\"boolean\" then c.shortLivedAdds=true end\n c.path=path;DungeonHoldDisplays[key]=c\nend\n GUI:Separator()\n GUI:Text(\"Dungeon holds\")\n local value,changed=GUI:Checkbox(\"Show hold reason\",c.showHoldStatus)\n if changed then c.showHoldStatus=value end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Shows only holds owned by this dungeon controller. It does not describe holds from other profiles.\") end\n local v,edit=GUI:Checkbox(\"Avoid long BLM casts on dying adds\",c.shortLivedAdds)\n if edit then c.shortLivedAdds=v end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Uses the target's lifetime estimate; lets an existing cast finish. Does not change targets or block healing.\") end\n if changed or edit then\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  FileSave(c.path,{showHoldStatus=c.showHoldStatus,shortLivedAdds=c.shortLivedAdds})\n end\n if c.showHoldStatus then GUI:TextWrapped(h.status or h.reason or \"No dungeon cooldown hold\") end\n end\n end\n\nend\nGUI:End()\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -9375,7 +8158,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not AlexandriaAutoSimConfig or AlexandriaAutoSimConfig.fileApiVersion~=1 then\n    local C = AlexandriaAutoSimConfig or {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=true, kill12844=127.952, kill12864=129.047, kill12729=179.031,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Alexandria.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill12844\",\"kill12864\",\"kill12729\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\Alexandria.AutoSim.lua]]\n    if not AlexandriaAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill12844=math.max(15,math.min(1200,C.kill12844))\n    C.kill12864=math.max(15,math.min(1200,C.kill12864))\n    C.kill12729=math.max(15,math.min(1200,C.kill12729))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    AlexandriaAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif AlexandriaAutoSimConfig.poolFinal==nil then\n AlexandriaAutoSimConfig.poolFinal=true\n table.insert(AlexandriaAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=AlexandriaAutoSimConfig\nlocal visible=GUI:Begin(\"Alexandria - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Antivirus X (seconds)\",C.kill12844,5,15,\"%.1f\")\n        if changed then C.kill12844=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Amalgam (seconds)\",C.kill12864,5,15,\"%.1f\")\n        if changed then C.kill12864=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Eliminator (seconds)\",C.kill12729,5,15,\"%.1f\")\n        if changed then C.kill12729=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold offensive cooldowns on final trash (all jobs)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before each boss and temporarily turns off the current job’s CD switch. Radiant Finale is explicitly held too. Your previous CD setting is restored when pooling ends; songs keep their own control.\") end\n    local shared=DungeonAutoSimShared\n    if shared then\n        v,changed=GUI:SliderInt(\"Hold new boss cooldowns below HP (%) - shared\",shared.lateHP,0,20)\n        if changed then shared.lateHP=v;shared.save() end\n        if GUI:IsItemHovered() then GUI:SetTooltip(\"Shared across these nine dungeons and all jobs. At this boss HP, stop starting offensive cooldowns; normal attacks continue. 0 disables this rule. Default 8%. Defensive controls and songs keep their own settings.\") end\n    end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\nend\nGUI:End()\nself.used=true\n",
+						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not AlexandriaAutoSimConfig or AlexandriaAutoSimConfig.fileApiVersion~=1 then\n    local C = AlexandriaAutoSimConfig or {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=true, kill12844=127.952, kill12864=129.047, kill12729=179.031,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\",\n        path=GetStartupPath() .. [[\\LuaMods\\TensorReactions\\Alexandria.AutoSim.settings.tsv]]\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill12844\",\"kill12864\",\"kill12729\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\Alexandria.AutoSim.lua]]\n    if not AlexandriaAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill12844=math.max(15,math.min(1200,C.kill12844))\n    C.kill12864=math.max(15,math.min(1200,C.kill12864))\n    C.kill12729=math.max(15,math.min(1200,C.kill12729))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    AlexandriaAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif AlexandriaAutoSimConfig.poolFinal==nil then\n AlexandriaAutoSimConfig.poolFinal=true\n table.insert(AlexandriaAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=AlexandriaAutoSimConfig\nlocal visible=GUI:Begin(\"Alexandria - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Level 100, four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from sampled BLM positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. Manual values are optional estimates from available four-player samples; party pace varies.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Antivirus X (seconds)\",C.kill12844,5,15,\"%.1f\")\n        if changed then C.kill12844=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Amalgam (seconds)\",C.kill12864,5,15,\"%.1f\")\n        if changed then C.kill12864=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Eliminator (seconds)\",C.kill12729,5,15,\"%.1f\")\n        if changed then C.kill12729=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold offensive cooldowns on final trash (all jobs)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before each boss and temporarily turns off the current job’s CD switch. Radiant Finale is explicitly held too. Your previous CD setting is restored when pooling ends; songs keep their own control.\") end\n    local shared=DungeonAutoSimShared\n    if shared then\n        v,changed=GUI:SliderInt(\"Hold new boss cooldowns below HP (%) - shared\",shared.lateHP,0,20)\n        if changed then shared.lateHP=v;shared.save() end\n        if GUI:IsItemHovered() then GUI:SetTooltip(\"Shared across these nine dungeons and all jobs. At this boss HP, stop starting offensive cooldowns; normal attacks continue. 0 disables this rule. Default 8%. Defensive controls and songs keep their own settings.\") end\n    end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    GUI:Text(\"Party buff timing\")\n    GUI:TextWrapped(C.buffEnabled and \"Forecast enabled. Times are seconds from boss pull.\" or \"Forecast disabled. These values apply only when the party buff forecast is enabled.\")\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\n do\n local h=DungeonAutoSimShared\n if h then\nlocal key=\"dungeon_lol\"\nDungeonHoldDisplays=DungeonHoldDisplays or {}\nlocal c=DungeonHoldDisplays[key]\nif not c then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..key..[[.Safety.lua]]\n c=FileExists(path) and FileLoad(path) or {}\n if type(c)~=\"table\" then c={} end\n if type(c.showHoldStatus)~=\"boolean\" then c.showHoldStatus=true end\n if type(c.shortLivedAdds)~=\"boolean\" then c.shortLivedAdds=true end\n c.path=path;DungeonHoldDisplays[key]=c\nend\n GUI:Separator()\n GUI:Text(\"Dungeon holds\")\n local value,changed=GUI:Checkbox(\"Show hold reason\",c.showHoldStatus)\n if changed then c.showHoldStatus=value end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Shows only holds owned by this dungeon controller. It does not describe holds from other profiles.\") end\n local v,edit=GUI:Checkbox(\"Avoid long BLM casts on dying adds\",c.shortLivedAdds)\n if edit then c.shortLivedAdds=v end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Uses the target's lifetime estimate; lets an existing cast finish. Does not change targets or block healing.\") end\n if changed or edit then\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  FileSave(c.path,{showHoldStatus=c.showHoldStatus,shortLivedAdds=c.shortLivedAdds})\n end\n if c.showHoldStatus then GUI:TextWrapped(h.status or h.reason or \"No dungeon cooldown hold\") end\n end\n end\n\nend\nGUI:End()\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -10097,7 +8880,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared across the nine dungeon solvers and combat resets; owns only its own temporary switches.\nif DungeonAutoSimShared and DungeonAutoSimShared.version~=2026110403 then DungeonAutoSimShared.cleanup();DungeonAutoSimShared=nil end\nif not DungeonAutoSimShared or DungeonAutoSimShared.fileApiVersion~=1 then\n local H=DungeonAutoSimShared or {version=2026110403,maps={[1164]={config=\"LunarSubterraneAutoSimConfig\",state=\"lunar_subterrane_autosim\",flag=\"lunar_final_trash\",bosses={[12500]=true,[12484]=true,[12584]=true}},[1292]={config=\"MesoTerminalAutoSimConfig\",state=\"meso_autosim\",flag=\"meso_final_trash\",bosses={[13970]=true,[14047]=true,[13974]=true,[14048]=true,[14049]=true,[14050]=true,[14239]=false}},[1204]={config=\"StrayboroughDeadwalkAutoSimConfig\",state=\"strayborough_autosim\",flag=\"strayborough_final_trash\",bosses={[13073]=true,[12760]=true,[12763]=true}},[1242]={config=\"YuweyawataFieldStationAutoSimConfig\",state=\"yuweyawata_autosim\",flag=\"yuweyawata_final_trash\",bosses={[13623]=true,[13634]=true,[13610]=true}},[1199]={config=\"AlexandriaAutoSimConfig\",state=\"alexandria_autosim\",flag=\"alexandria_final_trash\",bosses={[12844]=true,[12864]=true,[12729]=true}},[1266]={config=\"UnderkeepAutoSimConfig\",state=\"underkeep_autosim\",flag=\"underkeep_final_trash\",bosses={[13753]=true,[13757]=true,[13749]=true}},[1345]={config=\"ClyteumAutoSimConfig\",state=\"clyteum_autosim\",flag=\"clyteum_final_trash\",bosses={[14716]=true,[14734]=true,[14758]=true}},[1314]={config=\"MistwakeAutoSimConfig\",state=\"mistwake_autosim\",flag=\"mistwake_final_trash\",bosses={[14270]=true,[14271]=true,[14288]=true}},[1203]={config=\"TenderValleyAutoSimConfig\",state=\"tender_autosim\",flag=\"tender_final_trash\",bosses={[12889]=true,[12853]=true,[12709]=true}}},held={},lists={},checked={},lateHP=8,autoBox=true,settingsLoaded=false}\n H.path=GetLuaModsPath()..[[TensorReactions\\Settings\\DungeonAutoSim.Shared.lua]]\n if not DungeonAutoSimShared and FileExists(H.path) then\n  local saved=FileLoad(H.path)\n  if type(saved)==\"table\" then\n   if type(saved.lateHP)==\"number\" then H.lateHP=math.max(0,math.min(20,saved.lateHP)) end\n   if type(saved.autoBox)==\"boolean\" then H.autoBox=saved.autoBox end\n  end\n end\n function H.save()\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  FileSave(H.path,{lateHP=H.lateHP,autoBox=H.autoBox})\n end\n H.fileApiVersion=1;H.save()\n function H.release()\n  for var,old in pairs(H.held) do if _G[var]==false then _G[var]=old end;H.held[var]=nil end\n  H.reason=nil\n end\n function H.restoreLists()\n  if not H.blacklistMode and next(H.lists)==nil then return end\n  local A=TensorCore.API.TensorACR\n  for key,r in pairs(H.lists) do\n   local e=r.entry\n   if e.enabled==true and (r.kind==\"aoe\" or (e.allowIfTarget==r.target and e.allowSmartDoT==false)) then\n    if r.created then\n     e.enabled=false\n     if H.job==r.job then\n      local exists\n      if r.kind==\"aoe\" then exists=A.getAOEBlacklistEntry(r.cid) else exists=A.getBlacklistEntry(r.cid) end\n      if exists then\n       local current=r.kind==\"aoe\" and A.addAOEBlacklistEntry(r.cid) or A.addBlacklistEntry(r.cid)\n       if current==e then if r.kind==\"aoe\" then A.deleteAOEBlacklistEntry(r.cid) else A.deleteBlacklistEntry(r.cid) end end\n      end\n     end\n    else\n     e.enabled=r.enabled\n     if r.kind==\"dot\" then e.allowIfTarget=r.oldTarget;e.allowSmartDoT=r.oldSmart end\n    end\n   end\n   H.lists[key]=nil\n  end\n  H.checked={};H.blacklistMode=nil\n end\n function H.restoreIsolation()\n  if H.isolation then\n   for var,old in pairs(H.isolation) do if _G[var]==false then _G[var]=old end end\n   H.isolation=nil\n  end\n end\n function H.cleanup() H.release();H.restoreLists();H.restoreIsolation();H.vars=nil;H.job=nil;H.box=nil;H.boxSeen=nil end\n function H.blacklist(kind,cid,target)\n  local key=kind..cid;if H.checked[key] then return end\n  H.checked[key]=true\n  local A=TensorCore.API.TensorACR\n  local existed\n  if kind==\"aoe\" then existed=A.getAOEBlacklistEntry(cid) else existed=A.getBlacklistEntry(cid) end\n  local e=kind==\"aoe\" and A.addAOEBlacklistEntry(cid,\"[Dungeon AutoSim] Meso target isolation\") or A.addBlacklistEntry(cid,\"[Dungeon AutoSim] Meso target isolation\")\n  if not e then return end\n  H.lists[key]={entry=e,created=not existed,kind=kind,cid=cid,job=H.job,enabled=e.enabled,oldTarget=e.allowIfTarget,oldSmart=e.allowSmartDoT,target=target}\n  e.enabled=true\n  if kind==\"dot\" then e.allowIfTarget=target;e.allowSmartDoT=false end\n end\n -- Confirm the same unique arena cell for player and headsman; never choose a box by player distance.\n H.cells={{x=60,z=-268},{x=60,z=-248},{x=42.5,z=-258},{x=77.5,z=-258}}\n function H.boxTrace(key,reason,p,t,cell,id)\n  if H.boxTraceKey==key then return end\n  H.boxTraceKey=key\n  local pos=p and p.pos\n  TensorCore.timelineLogToFile(string.format(\"[Dungeon AutoSim Hellmaker] %s cell=%s player=%.2f,%.2f,%.2f target=%s targetCID=%s box=%s\",reason,tostring(cell),pos and pos.x or 0,pos and pos.y or 0,pos and pos.z or 0,tostring(t and t.id),tostring(t and t.contentid),tostring(id)))\n end\n function H.cellOf(p)\n  local cell\n  if not p.pos or math.abs(p.pos.y+490)>3 then return nil end\n  for i,c in ipairs(H.cells) do\n   if (p.pos.x-c.x)^2+(p.pos.z-c.z)^2<=8.5^2 then if cell then return nil end;cell=i end\n  end\n  return cell\n end\n function H.boxCandidate(id,cell)\n  local e=TensorCore.mGetEntity(id);local c=H.cells[cell]\n  if e and e.contentid==14052 and e.alive and e.targetable and e.attackable and e.pos and math.abs(e.pos.y+490)<=3 and (e.pos.x-c.x)^2+(e.pos.z-c.z)^2<=11^2 then\n   H.boxCount=H.boxCount+1;H.boxCandidateID=id\n  end\n  return true\n end\n function H.updateBox(p,t,enabled)\n  if not enabled then H.box=nil;H.boxSeen=nil;H.boxTraceKey=nil;return end\n  local cell=H.cellOf(p)\n  if not cell then H.boxTrace(\"cell-unknown\",\"SKIP: no unique cell or wrong arena height\",p,t);H.box=nil;return end\n  local B=H.box\n  if B then\n   if B.cell~=cell then H.boxTrace(\"cell-changed:\"..B.id,\"CANCEL: player changed cells\",p,t,cell,B.id);H.box=nil;return end\n   local box=TensorCore.mGetEntity(B.id)\n   if t and t.id==B.id then B.ack=true end\n   if not box or not box.alive or not box.targetable or not box.attackable then\n    if B.ack and (not t or t.id==B.id) then\n     local boss=TensorCore.mGetEntity(B.boss)\n     if boss and boss.alive and boss.targetable and boss.attackable and H.cellOf(boss)==cell then\n      H.boxTrace(\"return:\"..B.id,\"RETURN: box resolved; restore headsman \"..boss.id,p,t,cell,B.id);Player:SetTarget(boss.id)\n     else H.boxTrace(\"return-invalid:\"..B.id,\"SKIP RETURN: saved headsman unavailable or outside cell\",p,t,cell,B.id) end\n    else H.boxTrace(\"return-overridden:\"..B.id,\"SKIP RETURN: no switch acknowledgement or manual target override\",p,t,cell,B.id)\n    end\n    H.box=nil\n   elseif B.ack and (not t or t.id~=B.id) then H.boxTrace(\"manual:\"..B.id,\"CANCEL: manual/other controller target change\",p,t,cell,B.id);H.box=nil\n   elseif not B.ack and Now()-B.at>1000 then H.boxTrace(\"timeout:\"..B.id,\"CANCEL: target switch not acknowledged within 1 second\",p,t,cell,B.id);H.box=nil\n   end\n   return\n  end\n  if not t or not (t.contentid==14047 or t.contentid==14048 or t.contentid==14049 or t.contentid==14050) or not t.alive or not t.attackable or H.cellOf(t)~=cell then H.boxTrace(\"head-invalid\",\"SKIP: selected target is not a living headsman in the same cell\",p,t,cell);return end\n  H.boxSeen=H.boxSeen or {}\n  H.boxCount=0;H.boxCandidateID=nil\n  TensorCore.forEachEntity(\"contentid=14052,alive,targetable,attackable\",H.boxCandidate,cell)\n  local id=H.boxCandidateID\n  if H.boxCount~=1 then H.boxTrace(\"count:\"..cell..\":\"..H.boxCount,\"WAIT: valid cell box count=\"..H.boxCount,p,t,cell);return end\n  if H.boxSeen[id] then return end\n  H.boxSeen[id]=true\n  H.box={id=id,boss=t.id,cell=cell,at=Now()}\n  H.boxTrace(\"switch:\"..id,\"SWITCH: unique cell box; saved headsman=\"..t.id,p,t,cell,id)\n  Player:SetTarget(id)\n end\n\n DungeonAutoSimShared=H\nend\nlocal H=DungeonAutoSimShared\nlocal p=TensorCore.mGetPlayer()\nif not p then H.cleanup();self.used=true;return end\nif H.job~=p.job then H.cleanup();H.job=p.job end\nlocal spec=H.maps[p.localmapid]\nlocal C=spec and _G[spec.config]\nlocal state=spec and data[spec.state]\nlocal target=TensorCore.mGetTarget()\nlocal valid=spec and C and C.enabled and p.incombat\nlocal boss=valid and target and spec.bosses[target.contentid] and target.alive and target.attackable and target.incombat\nlocal final=valid and C.poolFinal and data[spec.flag]==true and (not state or state.boss==0) and not boss\nlocal late=boss and H.lateHP>0 and target.hp and target.hp.max>0 and target.hp.percent>0 and target.hp.percent<=H.lateHP\nlocal function shouldHoldApex(player)\n if player.job ~= 23 or not player.incombat or not player.pos then return false end\n local count, healthy = 0, false\n TensorCore.forEachEntity(\"alive,targetable,attackable\", function(id)\n  local enemy = TensorCore.mGetEntity(id)\n  if enemy and enemy.incombat and enemy.pos then\n   local dx, dz = enemy.pos.x - player.pos.x, enemy.pos.z - player.pos.z\n   if dx * dx + dz * dz <= 30 * 30 and math.abs(enemy.pos.y - player.pos.y) <= 8 then\n    count = count + 1\n    if not enemy.hp or not enemy.hp.percent or enemy.hp.percent > 8 then healthy = true end\n   end\n  end\n end)\n return count >= 1 and count <= 2 and not healthy\nend\n\nlocal apex = \"ACR_TensorRequiem4_Apex\"\nif (final) and (_G[apex] == true or H.held[apex]) and shouldHoldApex(p) then\n H.held[apex] = true\n _G[apex] = false\nelseif H.held[apex] then\n if _G[apex] == false then _G[apex] = true end\n H.held[apex] = nil\nend\n\nif final or late then\n if not H.vars then\n  H.vars={}\n  local toggles=TensorCore.API.TensorACR.getQuickToggles()\n  if toggles then for _,o in pairs(toggles) do\n   if o.var and o.var:match(\"_CD$\") and type(_G[o.var])==\"boolean\" then H.vars[#H.vars+1]=o.var end\n  end end\n end\n for _,var in ipairs(H.vars) do\n  if H.held[var]==nil then H.held[var]=_G[var] end\n  _G[var]=false\n end\n -- Explicit short leases cover these job controls in addition to the shared CD switch.\n local A=TensorCore.API.TensorACR;local untilMs=Now()+750\n if p.job==23 then A.holdActionUntil(25785,untilMs)\n elseif p.job==25 then\n  A.holdActionUntil(3573,untilMs)\n  A.holdActionUntil(158,untilMs)\n  if final and target and target.alive and target.attackable and target.incombat and p.level>=66 then\n   local remaining = 0\n   TensorCore.forEachEntity(\"alive,targetable,attackable\", function(id)\n    local enemy = TensorCore.mGetEntity(id)\n    if enemy and enemy.incombat and not spec.bosses[enemy.contentid] and enemy.pos and p.pos then\n     local dx = enemy.pos.x - p.pos.x\n     local dz = enemy.pos.z - p.pos.z\n     if dx*dx + dz*dz <= 35*35 and math.abs(enemy.pos.y-p.pos.y) <= 10 then\n      remaining = remaining + 1\n     end\n    end\n    return remaining < 4\n   end)\n   if remaining >= 1 and remaining <= 3 then\n    A.holdActionUntil(7421,untilMs)\n   end\n  end\n end\n H.reason=final and \"Holding offensive cooldowns for the next boss\" or \"Holding new offensive cooldowns near boss death\"\n C.poolStatus=H.reason\nelse\n H.release();H.vars=nil;if C then C.poolStatus=nil end\nend\n-- Headsmen use separate content IDs. DoTs may hit the selected one, never Smart DoT the others.\nlocal second=valid and p.localmapid==1292 and (H.box or (state and state.boss==14047) or (target and (target.contentid==14047 or target.contentid==14048 or target.contentid==14049 or target.contentid==14050)))\nif second then\n if not H.isolation then\n  H.isolation={}\n  local toggles=TensorCore.API.TensorACR.getQuickToggles()\n  if toggles then for _,o in pairs(toggles) do\n   if o.var and (o.var:match(\"_AOE$\") or o.var:match(\"_SmartAOE$\")) and type(_G[o.var])==\"boolean\" then H.isolation[o.var]=_G[o.var] end\n  end end\n end\n for var in pairs(H.isolation) do _G[var]=false end\n if H.blacklistMode~=\"headsmen\" then\n  H.restoreLists();H.blacklistMode=\"headsmen\"\n  for _,cid in ipairs({14047,14048,14049,14050,14239}) do H.blacklist(\"aoe\",cid,false);H.blacklist(\"dot\",cid,true) end\n  if p.job==23 or p.job==25 then H.blacklist(\"dot\",14052,false) end\n end\nelse H.restoreLists();H.restoreIsolation() end\nH.updateBox(p,target,second and H.autoBox)\nself.used=true\n",
+						actionLua = "-- Shared across the nine dungeon solvers and combat resets; owns only its own temporary switches.\nif DungeonAutoSimShared and DungeonAutoSimShared.version~=2026111101 then DungeonAutoSimShared.cleanup();DungeonAutoSimShared=nil end\nif not DungeonAutoSimShared or DungeonAutoSimShared.fileApiVersion~=1 then\n local H=DungeonAutoSimShared or {version=2026111101,maps={[1164]={config=\"LunarSubterraneAutoSimConfig\",state=\"lunar_subterrane_autosim\",flag=\"lunar_final_trash\",bosses={[12500]=true,[12484]=true,[12584]=true}},[1292]={config=\"MesoTerminalAutoSimConfig\",state=\"meso_autosim\",flag=\"meso_final_trash\",bosses={[13970]=true,[14047]=true,[13974]=true,[14048]=true,[14049]=true,[14050]=true,[14239]=false}},[1204]={config=\"StrayboroughDeadwalkAutoSimConfig\",state=\"strayborough_autosim\",flag=\"strayborough_final_trash\",bosses={[13073]=true,[12760]=true,[12763]=true}},[1242]={config=\"YuweyawataFieldStationAutoSimConfig\",state=\"yuweyawata_autosim\",flag=\"yuweyawata_final_trash\",bosses={[13623]=true,[13634]=true,[13610]=true}},[1199]={config=\"AlexandriaAutoSimConfig\",state=\"alexandria_autosim\",flag=\"alexandria_final_trash\",bosses={[12844]=true,[12864]=true,[12729]=true}},[1266]={config=\"UnderkeepAutoSimConfig\",state=\"underkeep_autosim\",flag=\"underkeep_final_trash\",bosses={[13753]=true,[13757]=true,[13749]=true}},[1345]={config=\"ClyteumAutoSimConfig\",state=\"clyteum_autosim\",flag=\"clyteum_final_trash\",bosses={[14716]=true,[14734]=true,[14758]=true}},[1314]={config=\"MistwakeAutoSimConfig\",state=\"mistwake_autosim\",flag=\"mistwake_final_trash\",bosses={[14270]=true,[14271]=true,[14288]=true}},[1203]={config=\"TenderValleyAutoSimConfig\",state=\"tender_autosim\",flag=\"tender_final_trash\",bosses={[12889]=true,[12853]=true,[12709]=true}}},held={},lists={},checked={},lateHP=8,autoBox=true,settingsLoaded=false}\n H.path=GetLuaModsPath()..[[TensorReactions\\Settings\\DungeonAutoSim.Shared.lua]]\n if not DungeonAutoSimShared and FileExists(H.path) then\n  local saved=FileLoad(H.path)\n  if type(saved)==\"table\" then\n   if type(saved.lateHP)==\"number\" then H.lateHP=math.max(0,math.min(20,saved.lateHP)) end\n   if type(saved.autoBox)==\"boolean\" then H.autoBox=saved.autoBox end\n  end\n end\n function H.save()\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  FileSave(H.path,{lateHP=H.lateHP,autoBox=H.autoBox})\n end\n H.fileApiVersion=1;H.save()\n function H.release()\n  for var,old in pairs(H.held) do if _G[var]==false then _G[var]=old end;H.held[var]=nil end\n  H.reason=nil\n end\n function H.restoreLists()\n  if not H.blacklistMode and next(H.lists)==nil then return end\n  local A=TensorCore.API.TensorACR\n  for key,r in pairs(H.lists) do\n   local e=r.entry\n   if e.enabled==true and (r.kind==\"aoe\" or (e.allowIfTarget==r.target and e.allowSmartDoT==false)) then\n    if r.created then\n     e.enabled=false\n     if H.job==r.job then\n      local exists\n      if r.kind==\"aoe\" then exists=A.getAOEBlacklistEntry(r.cid) else exists=A.getBlacklistEntry(r.cid) end\n      if exists then\n       local current=r.kind==\"aoe\" and A.addAOEBlacklistEntry(r.cid) or A.addBlacklistEntry(r.cid)\n       if current==e then if r.kind==\"aoe\" then A.deleteAOEBlacklistEntry(r.cid) else A.deleteBlacklistEntry(r.cid) end end\n      end\n     end\n    else\n     e.enabled=r.enabled\n     if r.kind==\"dot\" then e.allowIfTarget=r.oldTarget;e.allowSmartDoT=r.oldSmart end\n    end\n   end\n   H.lists[key]=nil\n  end\n  H.checked={};H.blacklistMode=nil\n end\n function H.restoreIsolation()\n  if H.isolation then\n   for var,old in pairs(H.isolation) do if _G[var]==false then _G[var]=old end end\n   H.isolation=nil\n  end\n end\n function H.restoreSmartDot()\n  if H.smartDotHeld and ACR_TensorRequiem4_SmartDoT == false then\n   ACR_TensorRequiem4_SmartDoT = true\n  end\n  H.smartDotHeld = nil\n end\n function H.cleanup() H.restoreSmartDot();H.release();H.restoreLists();H.restoreIsolation();H.vars=nil;H.job=nil;H.box=nil;H.boxSeen=nil end\n function H.blacklist(kind,cid,target)\n  local key=kind..cid;if H.checked[key] then return end\n  H.checked[key]=true\n  local A=TensorCore.API.TensorACR\n  local existed\n  if kind==\"aoe\" then existed=A.getAOEBlacklistEntry(cid) else existed=A.getBlacklistEntry(cid) end\n  local e=kind==\"aoe\" and A.addAOEBlacklistEntry(cid,(cid==13622 and \"[Yuweyawata] Raw Electrope\" or \"[Dungeon AutoSim] Meso target isolation\")) or A.addBlacklistEntry(cid,(cid==13622 and \"[Yuweyawata] Raw Electrope\" or \"[Dungeon AutoSim] Meso target isolation\"))\n  if not e then return end\n  H.lists[key]={entry=e,created=not existed,kind=kind,cid=cid,job=H.job,enabled=e.enabled,oldTarget=e.allowIfTarget,oldSmart=e.allowSmartDoT,target=target}\n  e.enabled=true\n  if kind==\"dot\" then e.allowIfTarget=target;e.allowSmartDoT=false end\n end\n -- Confirm the same unique arena cell for player and headsman; never choose a box by player distance.\n H.cells={{x=60,z=-268},{x=60,z=-248},{x=42.5,z=-258},{x=77.5,z=-258}}\n function H.boxTrace(key,reason,p,t,cell,id)\n  if H.boxTraceKey==key then return end\n  H.boxTraceKey=key\n  local pos=p and p.pos\n  TensorCore.timelineLogToFile(string.format(\"[Dungeon AutoSim Hellmaker] %s cell=%s player=%.2f,%.2f,%.2f target=%s targetCID=%s box=%s\",reason,tostring(cell),pos and pos.x or 0,pos and pos.y or 0,pos and pos.z or 0,tostring(t and t.id),tostring(t and t.contentid),tostring(id)))\n end\n function H.cellOf(p)\n  local cell\n  if not p.pos or math.abs(p.pos.y+490)>3 then return nil end\n  for i,c in ipairs(H.cells) do\n   if (p.pos.x-c.x)^2+(p.pos.z-c.z)^2<=8.5^2 then if cell then return nil end;cell=i end\n  end\n  return cell\n end\n function H.boxCandidate(id,cell)\n  local e=TensorCore.mGetEntity(id);local c=H.cells[cell]\n  if e and e.contentid==14052 and e.alive and e.targetable and e.attackable and e.pos and math.abs(e.pos.y+490)<=3 and (e.pos.x-c.x)^2+(e.pos.z-c.z)^2<=11^2 then\n   H.boxCount=H.boxCount+1;H.boxCandidateID=id\n  end\n  return true\n end\n function H.updateBox(p,t,enabled)\n  if not enabled then H.box=nil;H.boxSeen=nil;H.boxTraceKey=nil;return end\n  local cell=H.cellOf(p)\n  if not cell then H.boxTrace(\"cell-unknown\",\"SKIP: no unique cell or wrong arena height\",p,t);H.box=nil;return end\n  local B=H.box\n  if B then\n   if B.cell~=cell then H.boxTrace(\"cell-changed:\"..B.id,\"CANCEL: player changed cells\",p,t,cell,B.id);H.box=nil;return end\n   local box=TensorCore.mGetEntity(B.id)\n   if t and t.id==B.id then B.ack=true end\n   if not box or not box.alive or not box.targetable or not box.attackable then\n    if B.ack and (not t or t.id==B.id) then\n     local boss=TensorCore.mGetEntity(B.boss)\n     if boss and boss.alive and boss.targetable and boss.attackable and H.cellOf(boss)==cell then\n      H.boxTrace(\"return:\"..B.id,\"RETURN: box resolved; restore headsman \"..boss.id,p,t,cell,B.id);Player:SetTarget(boss.id)\n     else H.boxTrace(\"return-invalid:\"..B.id,\"SKIP RETURN: saved headsman unavailable or outside cell\",p,t,cell,B.id) end\n    else H.boxTrace(\"return-overridden:\"..B.id,\"SKIP RETURN: no switch acknowledgement or manual target override\",p,t,cell,B.id)\n    end\n    H.box=nil\n   elseif B.ack and (not t or t.id~=B.id) then H.boxTrace(\"manual:\"..B.id,\"CANCEL: manual/other controller target change\",p,t,cell,B.id);H.box=nil\n   elseif not B.ack and Now()-B.at>1000 then H.boxTrace(\"timeout:\"..B.id,\"CANCEL: target switch not acknowledged within 1 second\",p,t,cell,B.id);H.box=nil\n   end\n   return\n  end\n  if not t or not (t.contentid==14047 or t.contentid==14048 or t.contentid==14049 or t.contentid==14050) or not t.alive or not t.attackable or H.cellOf(t)~=cell then H.boxTrace(\"head-invalid\",\"SKIP: selected target is not a living headsman in the same cell\",p,t,cell);return end\n  H.boxSeen=H.boxSeen or {}\n  H.boxCount=0;H.boxCandidateID=nil\n  TensorCore.forEachEntity(\"contentid=14052,alive,targetable,attackable\",H.boxCandidate,cell)\n  local id=H.boxCandidateID\n  if H.boxCount~=1 then H.boxTrace(\"count:\"..cell..\":\"..H.boxCount,\"WAIT: valid cell box count=\"..H.boxCount,p,t,cell);return end\n  if H.boxSeen[id] then return end\n  H.boxSeen[id]=true\n  H.box={id=id,boss=t.id,cell=cell,at=Now()}\n  H.boxTrace(\"switch:\"..id,\"SWITCH: unique cell box; saved headsman=\"..t.id,p,t,cell,id)\n  Player:SetTarget(id)\n end\n\n DungeonAutoSimShared=H\nend\nlocal H=DungeonAutoSimShared\nlocal p=TensorCore.mGetPlayer()\nif not p then H.cleanup();self.used=true;return end\nif H.job~=p.job then H.cleanup();H.job=p.job end\nlocal spec=H.maps[p.localmapid]\nlocal C=spec and _G[spec.config]\nlocal state=spec and data[spec.state]\nlocal target=TensorCore.mGetTarget()\nlocal valid=spec and C and C.enabled and p.incombat\nlocal boss=valid and target and spec.bosses[target.contentid] and target.alive and target.attackable and target.incombat\n-- Bard's extra single-target DoTs compete with pack AoE. Preserve the player's boss setting.\nlocal bardTrash = valid and p.job == 23 and not boss\n    and (not state or state.boss == 0) and not H.box\n    and target and target.alive and target.attackable and target.incombat\n    and spec.bosses[target.contentid] == nil\nif bardTrash then\n if not H.smartDotHeld and ACR_TensorRequiem4_SmartDoT == true then\n  H.smartDotHeld = true\n  ACR_TensorRequiem4_SmartDoT = false\n end\nelse\n H.restoreSmartDot()\nend\nlocal final=valid and C.poolFinal and data[spec.flag]==true and (not state or state.boss==0) and not boss\nlocal finalBosses={[1164]={[12584]=true},[1292]={[13974]=true},[1204]={[12763]=true},[1242]={[13610]=true},[1199]={[12729]=true},[1266]={[13749]=true},[1345]={[14758]=true},[1314]={[14288]=true},[1203]={[12709]=true},[189]={[3275]=true},[1174]={[7857]=true,[7858]=true},[1126]={[12334]=true},[969]={[10285]=true},[1037]={[73]=true},[1167]={[12711]=true},[1193]={[12705]=true},[1194]={[12728]=true},[1198]={[12752]=true},[1208]={[12695]=true},[974]={[10399]=true},[822]={[8262]=true},[1065]={[3458]=true},[1038]={[101]=true},[1245]={[1197]=true},[1039]={[444]=true},[1040]={[422]=true},[1041]={[1279]=true},[1267]={[1570]=true},[1303]={[1590]=true},[1042]={[1680]=true},[1330]={[1396]=true},[1331]={[1532]=true}}\nlocal isFinalBoss=target and finalBosses[p.localmapid] and finalBosses[p.localmapid][target.contentid] == true\nlocal engagedBoss=state and (state.activeBoss or state.boss)\nif finalBosses[p.localmapid] and engagedBoss and finalBosses[p.localmapid][engagedBoss] then isFinalBoss=true end\nif isFinalBoss then final=false;H.releaseReason=\"final boss engaged\";H.release() end\nlocal late=not isFinalBoss and valid and target and target.alive and target.attackable and target.incombat and H.lateHP>0 and target.hp and target.hp.max>0 and target.hp.percent>0 and target.hp.percent<=H.lateHP\nlocal function shouldHoldApex(player)\n if player.job ~= 23 or not player.incombat or not player.pos then return false end\n local count, healthy = 0, false\n TensorCore.forEachEntity(\"alive,targetable,attackable\", function(id)\n  local enemy = TensorCore.mGetEntity(id)\n  if enemy and enemy.incombat and enemy.pos then\n   local dx, dz = enemy.pos.x - player.pos.x, enemy.pos.z - player.pos.z\n   if dx * dx + dz * dz <= 30 * 30 and math.abs(enemy.pos.y - player.pos.y) <= 8 then\n    count = count + 1\n    if not enemy.hp or not enemy.hp.percent or enemy.hp.percent > 8 then healthy = true end\n   end\n  end\n end)\n return count >= 1 and count <= 2 and not healthy\nend\n\nlocal apex = \"ACR_TensorRequiem4_Apex\"\nif (final) and (_G[apex] == true or H.held[apex]) and shouldHoldApex(p) then\n H.held[apex] = true\n _G[apex] = false\nelseif H.held[apex] then\n if _G[apex] == false then _G[apex] = true end\n H.held[apex] = nil\nend\n\nif final or late then\n if not H.vars then\n  H.vars={}\n  local toggles=TensorCore.API.TensorACR.getQuickToggles()\n  if toggles then for _,o in pairs(toggles) do\n   if o.var and o.var:match(\"_CD$\") and type(_G[o.var])==\"boolean\" then H.vars[#H.vars+1]=o.var end\n  end end\n end\n for _,var in ipairs(H.vars) do\n  if H.held[var]==nil then H.held[var]=_G[var] end\n  _G[var]=false\n end\n -- Explicit short leases cover these job controls in addition to the shared CD switch.\n local A=TensorCore.API.TensorACR;local untilMs=Now()+750\n if p.job==23 then\n  local accepted=A.holdActionUntil(25785,untilMs,1)\n  local key=tostring(target and target.id)..\":\"..tostring(final)..\":\"..tostring(late)..\":\"..tostring(accepted)\n  if H.radiantTrace~=key then\n   d(\"[Dungeon pooling] Radiant Finale hold accepted=\"..tostring(accepted)..\" target=\"..tostring(target and target.contentid)..\" HP=\"..tostring(target and target.hp and target.hp.percent)..\" threshold=\"..tostring(H.lateHP)..\" final=\"..tostring(final)..\" lowHP=\"..tostring(late))\n   H.radiantTrace=key\n  end\n elseif p.job==25 then\n  A.holdActionUntil(3573,untilMs)\n  A.holdActionUntil(158,untilMs)\n  if final and target and target.alive and target.attackable and target.incombat and p.level>=66 then\n   local remaining = 0\n   TensorCore.forEachEntity(\"alive,targetable,attackable\", function(id)\n    local enemy = TensorCore.mGetEntity(id)\n    if enemy and enemy.incombat and not spec.bosses[enemy.contentid] and enemy.pos and p.pos then\n     local dx = enemy.pos.x - p.pos.x\n     local dz = enemy.pos.z - p.pos.z\n     if dx*dx + dz*dz <= 35*35 and math.abs(enemy.pos.y-p.pos.y) <= 10 then\n      remaining = remaining + 1\n     end\n    end\n    return remaining < 4\n   end)\n   if remaining >= 1 and remaining <= 3 then\n    A.holdActionUntil(7421,untilMs)\n   end\n  end\n end\n H.reason=final and \"Holding offensive cooldowns for the next boss\" or \"Holding new offensive cooldowns near boss death\"\n C.poolStatus=H.reason\nelse\n H.release();H.vars=nil;if C then C.poolStatus=nil end\nend\n-- Headsmen use separate content IDs. DoTs may hit the selected one, never Smart DoT the others.\nlocal second=valid and p.localmapid==1292 and (H.box or (state and state.boss==14047) or (target and (target.contentid==14047 or target.contentid==14048 or target.contentid==14049 or target.contentid==14050)))\nif second then\n if not H.isolation then\n  H.isolation={}\n  local toggles=TensorCore.API.TensorACR.getQuickToggles()\n  if toggles then for _,o in pairs(toggles) do\n   if o.var and (o.var:match(\"_AOE$\") or o.var:match(\"_SmartAOE$\")) and type(_G[o.var])==\"boolean\" then H.isolation[o.var]=_G[o.var] end\n  end end\n end\n for var in pairs(H.isolation) do _G[var]=false end\n if H.blacklistMode~=\"headsmen\" then\n  H.restoreLists();H.blacklistMode=\"headsmen\"\n  for _,cid in ipairs({14047,14048,14049,14050,14239}) do H.blacklist(\"aoe\",cid,false);H.blacklist(\"dot\",cid,true) end\n  if p.job==23 or p.job==25 then H.blacklist(\"dot\",14052,false) end\n end\nelseif p.localmapid==1242 and p.incombat then\n H.restoreIsolation()\n if H.blacklistMode~=\"electrope\" then\n  H.restoreLists();H.blacklistMode=\"electrope\"\n  H.blacklist(\"dot\",13622,false)\n end\nelse H.restoreLists();H.restoreIsolation() end\nH.updateBox(p,target,second and H.autoBox)\nself.used=true\n",
 						name = "[Dungeon AutoSim] Shared cooldown pooling and Meso target isolation",
 						uuid = "927da91f-2dac-420d-823a-154889d881d2",
 						version = 2.1,
@@ -10170,6 +8953,247 @@ local tbl =
 			name = "[Dungeon AutoSim] Restore shared cooldown and blacklist state on zone change",
 			timeout = 2,
 			uuid = "8a361453-a389-5522-8015-0a3baa81d1da",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "DungeonHoldDisplays=DungeonHoldDisplays or {}\nif not DungeonHoldDisplays[\"dungeon_lol\"] then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..[[dungeon_lol.Safety.lua]]\n local c=FileExists(path) and FileLoad(path) or {}\n if type(c)~=\"table\" then c={} end\n local changed=false\n if type(c.showHoldStatus)~=\"boolean\" then c.showHoldStatus=true;changed=true end\n if type(c.shortLivedAdds)~=\"boolean\" then c.shortLivedAdds=true;changed=true end\n if changed then\n  if not FolderExists(folder) then FolderCreate(folder) end\n  FileSave(path,{showHoldStatus=c.showHoldStatus,shortLivedAdds=c.shortLivedAdds})\n end\n c.path=path;DungeonHoldDisplays[\"dungeon_lol\"]=c\nend\nlocal p=TensorCore.mGetPlayer()\nlocal h=DungeonAutoSimShared\nif not h then self.used=true;return end\nif not h.restoreAuditVersion then\n local original=h.release\n h.release=function()\n  local expected={}\n  for var,old in pairs(h.held) do if _G[var]==false then expected[var]=old end end\n  if h.apexHeld and ACR_TensorRequiem4_Apex==false then expected.ACR_TensorRequiem4_Apex=true end\n  if h.smartDotHeld and ACR_TensorRequiem4_SmartDoT==false then expected.ACR_TensorRequiem4_SmartDoT=true end\n  original()\n  local count,failed=0,0\n  for var,old in pairs(expected) do\n   count=count+1\n   if _G[var]~=old then failed=failed+1;d(\"[Dungeon restoration] VERIFY FAILED variable=\"..var) end\n  end\n  if count>0 then d(\"[Dungeon restoration] reason=\"..tostring(h.releaseReason or \"hold ended\")..\" restored=\"..count..\" failed=\"..failed) end\n  h.releaseReason=nil;h.status=nil\n end\n h.restoreAuditVersion=1\nend\nlocal finalBosses={[1164]={[12584]=true},[1292]={[13974]=true},[1204]={[12763]=true},[1242]={[13610]=true},[1199]={[12729]=true},[1266]={[13749]=true},[1345]={[14758]=true},[1314]={[14288]=true},[1203]={[12709]=true},[189]={[3275]=true},[1174]={[7857]=true,[7858]=true},[1126]={[12334]=true},[969]={[10285]=true},[1037]={[73]=true},[1167]={[12711]=true},[1193]={[12705]=true},[1194]={[12728]=true},[1198]={[12752]=true},[1208]={[12695]=true},[974]={[10399]=true},[822]={[8262]=true},[1065]={[3458]=true},[1038]={[101]=true},[1245]={[1197]=true},[1039]={[444]=true},[1040]={[422]=true},[1041]={[1279]=true},[1267]={[1570]=true},[1303]={[1590]=true},[1042]={[1680]=true},[1330]={[1396]=true},[1331]={[1532]=true}}\nlocal t=TensorCore.mGetTarget()\nlocal spec=p and h.maps[p.localmapid]\nlocal cfg=spec and _G[spec.config]\nlocal state=spec and data[spec.state]\nlocal supported=spec~=nil\n\nlocal finalId=state and (state.activeBoss or state.boss)\nlocal finalSet=p and finalBosses[p.localmapid]\nlocal finalEngaged=p and p.incombat and finalSet and ((t and t.alive and t.incombat and finalSet[t.contentid]) or (finalId and finalSet[finalId]))\nlocal enabled=cfg and (cfg.enabled==true or cfg.autoSim==true)\nlocal reason\nif not p then reason=\"player unavailable\"\nelseif not supported then reason=\"left supported duty\"\nelseif not p.alive then reason=\"death\"\nelseif h.job and h.job~=p.job then reason=\"job changed\"\nelseif not enabled then reason=\"dungeon automation disabled\"\nelseif not p.incombat then reason=\"combat ended\"\nelseif finalEngaged then reason=\"final boss engaged\" end\nif reason then\n h.releaseReason=reason\n h.cleanup()\n h.status=nil\nelse\n h.status=(h.active or h.reason) and ((t and t.hp and t.hp.percent<=h.lateHP) and \"Low HP: saving cooldowns\" or \"Final trash: saving cooldowns\") or nil\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"488a0549-243d-5a7c-988f-63ea47dd00b9",
+								true,
+							},
+						},
+						name = "[Dungeon safety] Restore and verify owned holds",
+						uuid = "24da1b15-f86c-67c4-ae2f-755f20562740",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local h=DungeonAutoSimShared\nlocal p=TensorCore.mGetPlayer()\nif not h then return false end\nif next(h.held)~=nil or h.active==true or h.smartDotHeld==true or h.apexHeld==true then return true end\nreturn h.restoreAuditVersion==nil and p~=nil and (h.maps[p.localmapid]~=nil)",
+						name = "Owned state or supported duty",
+						uuid = "488a0549-243d-5a7c-988f-63ea47dd00b9",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Shared dungeon controls",
+			name = "[Dungeon safety] Restore and verify owned holds",
+			throttleTime = 250,
+			timeout = 2,
+			uuid = "70a0b1c6-1465-bc01-b3b3-c80af398aca1",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local p=TensorCore.mGetPlayer()\nlocal h=DungeonAutoSimShared\nif not p or not h then self.used=true;return end\nlocal key=\"dungeon_lol\"\nDungeonHoldDisplays=DungeonHoldDisplays or {}\nlocal c=DungeonHoldDisplays[key]\nif not c then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..key..[[.Safety.lua]]\n c=FileExists(path) and FileLoad(path) or {}\n if type(c)~=\"table\" then c={} end\n if type(c.showHoldStatus)~=\"boolean\" then c.showHoldStatus=true end\n if type(c.shortLivedAdds)~=\"boolean\" then c.shortLivedAdds=true end\n c.path=path;DungeonHoldDisplays[key]=c\nend\nlocal visible=GUI:Begin(\"Dungeon hold status\",true)\nif visible then\n local value,changed=GUI:Checkbox(\"Show hold reason\",c.showHoldStatus)\n if changed then c.showHoldStatus=value end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Shows only holds owned by this dungeon controller. It does not describe holds from other profiles.\") end\n local v,edit=GUI:Checkbox(\"Avoid long BLM casts on dying adds\",c.shortLivedAdds)\n if edit then c.shortLivedAdds=v end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Uses the target's lifetime estimate; lets an existing cast finish. Does not change targets or block healing.\") end\n if changed or edit then\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  FileSave(c.path,{showHoldStatus=c.showHoldStatus,shortLivedAdds=c.shortLivedAdds})\n end\n if c.showHoldStatus then GUI:TextWrapped(h.status or h.reason or \"No dungeon cooldown hold\") end\nend\nGUI:End();self.used=true",
+						conditions = 
+						{
+							
+							{
+								"6fd34f80-7bed-caa2-b335-6fde5e961134",
+								true,
+							},
+						},
+						name = "[Dungeon safety] Hold status and safety options",
+						uuid = "4f7876d9-5372-d9ba-8b41-c3143828248c",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local h=DungeonAutoSimShared\nlocal p=TensorCore.mGetPlayer()\nreturn h~=nil and ((next(h.held)~=nil or h.active==true or h.smartDotHeld==true or h.apexHeld==true) or (p~=nil and h.maps[p.localmapid]~=nil))",
+						name = "Owned state or supported duty",
+						uuid = "6fd34f80-7bed-caa2-b335-6fde5e961134",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Shared dungeon controls",
+			enabled = false,
+			eventType = 13,
+			name = "[Dungeon safety] Hold status and safety options",
+			timeout = 2,
+			uuid = "fba37ddc-8422-ec04-9bcc-e009d18cbbc8",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if DungeonAutoSimShared then DungeonAutoSimShared.releaseReason=\"death\";DungeonAutoSimShared.cleanup() end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"14bac3dd-3fd9-974d-aadf-651df32d051a",
+								true,
+							},
+						},
+						name = "[Dungeon safety] Restore on death",
+						uuid = "ac400041-7427-4eed-aca1-5bd742e5c6bd",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return DungeonAutoSimShared~=nil",
+						name = "Owned state or supported duty",
+						uuid = "14bac3dd-3fd9-974d-aadf-651df32d051a",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Shared dungeon controls",
+			eventType = 10,
+			name = "[Dungeon safety] Restore on death",
+			timeout = 2,
+			uuid = "67ca8ba6-ac46-5be2-9180-f2f7e046bae9",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "DungeonHoldDisplays=DungeonHoldDisplays or {}\nif not DungeonHoldDisplays[\"dungeon_lol\"] then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..[[dungeon_lol.Safety.lua]]\n local c=FileExists(path) and FileLoad(path) or {}\n if type(c)~=\"table\" then c={} end\n local changed=false\n if type(c.showHoldStatus)~=\"boolean\" then c.showHoldStatus=true;changed=true end\n if type(c.shortLivedAdds)~=\"boolean\" then c.shortLivedAdds=true;changed=true end\n if changed then\n  if not FolderExists(folder) then FolderCreate(folder) end\n  FileSave(path,{showHoldStatus=c.showHoldStatus,shortLivedAdds=c.shortLivedAdds})\n end\n c.path=path;DungeonHoldDisplays[\"dungeon_lol\"]=c\nend\nlocal p=TensorCore.mGetPlayer()\nlocal t=TensorCore.mGetTarget()\nlocal h=DungeonAutoSimShared\nlocal c=DungeonHoldDisplays and DungeonHoldDisplays[\"dungeon_lol\"]\nif c and c.shortLivedAdds==false then self.used=true;return end\n-- Existing casts are never cancelled or re-targeted.\nif ActionList:IsCasting() then self.used=true;return end\nif TensorCore.hasBuff(p.id,167) or TensorCore.hasBuff(p.id,1211) then self.used=true;return end\nlocal life=TensorCore.calcTimeToKill(t.id)\nif type(life)~=\"number\" or life<=0 or life>4 then self.used=true;return end\nlocal now=Now()\nlocal sample=data.dungeonShortCastSample\nif not sample or sample.id~=t.id then\n data.dungeonShortCastSample={id=t.id,at=now,life=life};self.used=true;return\nend\nif now-sample.at<500 then self.used=true;return end\nlocal count=0\nTensorCore.forEachEntity(\"alive,targetable,attackable\",function(id)\n local e=TensorCore.mGetEntity(id)\n if e and e.incombat and e.pos and math.abs(e.pos.y-p.pos.y)<10 and (e.pos.x-p.pos.x)^2+(e.pos.z-p.pos.z)^2<=35^2 then count=count+1 end\n return count<2\nend)\nlocal held=0\nfor _,id in ipairs({154,142,3576,141,147,152,3577,25794,162,16505,25795,25793}) do\n local a=ActionList:Get(1,id)\n if a and a.level<=p.level and a.casttime>=1.5 and life<a.casttime+0.25 and sample.life<a.casttime+0.25 then\n  local instantFire=id==152 and TensorCore.hasBuff(p.id,165)\n  -- Multi-target damage can still land on surviving pack members.\n  if not instantFire and (a.radius==0 or count==1) then\n   if TensorCore.API.TensorACR.holdActionUntil(id,now+350,1) then held=held+1 end\n  end\n end\nend\nlocal reason=held>0 and \"Dying add: avoiding new long BLM casts\" or nil\nif h then\n local key=reason and tostring(t.id) or \"none\"\n if h.castGuardKey~=key then\n  if reason then d(\"[Dungeon cast guard] target=\"..tostring(t.id)..\" lifetime=\"..string.format(\"%.2f\",life)..\" heldSpells=\"..held..\" existing cast preserved\") end\n  h.castGuardKey=key\n end\n h.castGuardStatus=reason;h.castGuardAt=now\nend\nsample.life=life\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"14c796c2-e129-7e61-8433-b94076ffa86b",
+								true,
+							},
+						},
+						name = "Protect new casts only",
+						uuid = "26cf6855-c854-edcd-818f-0d56f4f82e14",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.job~=25 or not p.alive or not p.incombat then return false end\nlocal h=DungeonAutoSimShared\nif not h then return false end\nlocal spec=h.maps[p.localmapid]\nlocal cfg=spec and _G[spec.config]\nlocal bosses=spec and spec.bosses\n\nif not cfg or not (cfg.enabled==true or cfg.autoSim==true) or not bosses then return false end\nlocal t=TensorCore.mGetTarget()\nreturn t~=nil and t.alive==true and t.attackable==true and t.incombat==true and not bosses[t.contentid]",
+						name = "BLM and live dungeon add",
+						uuid = "14c796c2-e129-7e61-8433-b94076ffa86b",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Shared dungeon controls",
+			name = "[Dungeon safety] Avoid long casts on dying adds",
+			throttleTime = 250,
+			timeout = 0.3,
+			uuid = "c16175a3-a9e9-2baf-b195-20d102801b01",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local h=DungeonAutoSimShared\nlocal t=TensorCore.mGetTarget()\nlocal accepted=TensorCore.API.TensorACR.holdActionUntil(25785,Now()+750,1)\nlocal key=tostring(t.id)..\":\"..tostring(accepted)\nif h.finaleGuardTrace~=key then\n TensorCore.timelineLogToFile(\"[Dungeon Finale guard] accepted=\"..tostring(accepted)..\" target=\"..tostring(t.id)..\" CID=\"..tostring(t.contentid)..\" HP=\"..tostring(t.hp.percent)..\" threshold=\"..tostring(h.lateHP))\n h.finaleGuardTrace=key\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"b98fd45f-e9a1-5d39-ad30-ebb2931fe26c",
+								true,
+							},
+						},
+						name = "Hold Finale and log acceptance",
+						uuid = "983ee789-f0e3-d0f9-ab38-5573667dd4b7",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.job~=23 or not p.incombat or not p.alive then return false end\nlocal h=DungeonAutoSimShared\nif not h then return false end\nlocal spec=h.maps[p.localmapid]\nlocal c=spec and _G[spec.config]\n\nif not c or not (c.enabled==true or c.autoSim==true) then return false end\nlocal t=TensorCore.mGetTarget()\nif not t or not t.alive or not t.attackable or not t.incombat or not t.hp or t.hp.percent<=0 or t.hp.percent>h.lateHP then return false end\nlocal last={[1164]={[12584]=true},[1292]={[13974]=true},[1204]={[12763]=true},[1242]={[13610]=true},[1199]={[12729]=true},[1266]={[13749]=true},[1345]={[14758]=true},[1314]={[14288]=true},[1203]={[12709]=true},[189]={[3275]=true},[1174]={[7857]=true,[7858]=true},[1126]={[12334]=true},[969]={[10285]=true},[1037]={[73]=true},[1167]={[12711]=true},[1193]={[12705]=true},[1194]={[12728]=true},[1198]={[12752]=true},[1208]={[12695]=true},[974]={[10399]=true},[822]={[8262]=true},[1065]={[3458]=true},[1038]={[101]=true},[1245]={[1197]=true},[1039]={[444]=true},[1040]={[422]=true},[1041]={[1279]=true},[1267]={[1570]=true},[1303]={[1590]=true},[1042]={[1680]=true},[1330]={[1396]=true},[1331]={[1532]=true}}\nreturn not (last[p.localmapid] and last[p.localmapid][t.contentid])",
+						name = "BRD supported duty and low HP",
+						uuid = "b98fd45f-e9a1-5d39-ad30-ebb2931fe26c",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Shared dungeon controls",
+			name = "[Dungeon safety] Radiant Finale low-HP guard",
+			throttleTime = 100,
+			timeout = 0.15,
+			uuid = "e4abb992-ab63-3126-816f-8a88677dc0f7",
 			version = 2,
 		},
 	},

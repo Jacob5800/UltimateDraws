@@ -21,7 +21,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shared helpers are initialized before any settings or mechanic consumer.\nif not LevellingDungeons or LevellingDungeons.version~=11 then\n    local previous = LevellingDungeons\n    local L={version=11,definitions={[1167]={[\"name\"]=\"Ihuykatumu\",[\"sync\"]=92,[\"bosses\"]={[12723]={[\"name\"]=\"Prime Punutiy\",[\"anchors\"]={[36492]=5.187},[\"kill\"]=135,[\"movement\"]={{14.76,16.56},{28.75,30.55},{53.93,55.73},{59.26,61.06}},[\"center\"]={35.0,-95.0},[\"downtime\"]={}},[12716]={[\"name\"]=\"Drowsie\",[\"anchors\"]={[39132]=9.218},[\"kill\"]=126.1,[\"movement\"]={{33.5,35.3},{44.5,46.3},{59.37,61.17},{64.81,66.61},{103.64,105.44},{122.74,124.54}},[\"center\"]={80.0,53.0},[\"downtime\"]={}},[12711]={[\"name\"]=\"Apollyon\",[\"anchors\"]={[36340]=5.39},[\"kill\"]=158.8,[\"movement\"]={{60.2,61.6},{67.1,69.9},{140.5,144.0}},[\"center\"]={-107.0,265.0},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[12768]=true},[\"x\"]=-73.106,[\"y\"]=-194.0,[\"z\"]=-32.517},{[\"ids\"]={[12720]=true},[\"x\"]=179.278,[\"y\"]=-159.059,[\"z\"]=112.016},{[\"ids\"]={[12774]=true,[12775]=true},[\"x\"]=-76.127,[\"y\"]=-115.12,[\"z\"]=333.547},{[\"ids\"]={[12720]=true},[\"x\"]=130.173,[\"y\"]=-154.404,[\"z\"]=112.566}}},[1193]={[\"name\"]=\"Worqor Zormor\",[\"sync\"]=94,[\"bosses\"]={[12699]={[\"name\"]=\"Ryoqor Terteh\",[\"anchors\"]={[36279]=9.017},[\"kill\"]=113.8,[\"movement\"]={{35.7,37.5},{38.68,40.48},{69.36,71.16},{72.42,74.22},{95.19,96.99},{97.16,98.96}},[\"center\"]={-108.0,119.0},[\"downtime\"]={}},[12703]={[\"name\"]=\"Kahderyor\",[\"anchors\"]={[36282]=4.179},[\"kill\"]=nil,[\"movement\"]={},[\"center\"]={-53.0,-57.0},[\"downtime\"]={}},[12705]={[\"name\"]=\"Gurfurlur\",[\"anchors\"]={[36269]=5.203},[\"kill\"]=nil,[\"movement\"]={{71.84,73.64}},[\"center\"]={-54.0,-195.0},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[12810]=true,[12811]=true,[12813]=true,[12819]=true},[\"x\"]=-100.633,[\"y\"]=6.964,[\"z\"]=171.649},{[\"ids\"]={[12815]=true},[\"x\"]=-71.367,[\"y\"]=99.967,[\"z\"]=-13.535},{[\"ids\"]={[12821]=true,[12824]=true},[\"x\"]=-77.165,[\"y\"]=358.109,[\"z\"]=-105.821},{[\"ids\"]={[12810]=true,[12811]=true,[12813]=true,[12819]=true},[\"x\"]=-72.068,[\"y\"]=1.552,[\"z\"]=189.715}}},[1194]={[\"name\"]=\"The Skydeep Cenote\",[\"sync\"]=96,[\"bosses\"]={[12755]={[\"name\"]=\"Feather Ray\",[\"anchors\"]={[36739]=6.203},[\"kill\"]=nil,[\"movement\"]={{26.24,28.04},{43.09,44.89},{91.25,93.05}},[\"center\"]={-105.0,-160.0},[\"downtime\"]={}},[12888]={[\"name\"]=\"Firearms\",[\"anchors\"]={[36448]=8.164},[\"kill\"]=132.1,[\"movement\"]={},[\"center\"]={-85.0,-155.0},[\"downtime\"]={}},[12728]={[\"name\"]=\"Maulskull\",[\"anchors\"]={[36669]=5.242},[\"kill\"]=177.0,[\"movement\"]={},[\"center\"]={100.0,-430.0},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[12866]=true},[\"x\"]=-106.676,[\"y\"]=-51.585,[\"z\"]=-97.887},{[\"ids\"]={[12876]=true},[\"x\"]=-79.088,[\"y\"]=-210.0,[\"z\"]=-87.114},{[\"ids\"]={[12876]=true,[13067]=true},[\"x\"]=102.175,[\"y\"]=-194.9,[\"z\"]=-359.023},{[\"ids\"]={[12876]=true,[12877]=true,[13067]=true},[\"x\"]=105.76,[\"y\"]=-194.85,[\"z\"]=-354.574}}},[1198]={[\"name\"]=\"Vanguard\",[\"sync\"]=98,[\"bosses\"]={[12750]={[\"name\"]=\"Vanguard Commander R8\",[\"anchors\"]={[36571]=6.156},[\"kill\"]=132.5,[\"movement\"]={{25.42,27.22}},[\"center\"]={-100.0,207.0},[\"downtime\"]={}},[12757]={[\"name\"]=\"Protector\",[\"anchors\"]={[37161]=6.187},[\"kill\"]=135.6,[\"movement\"]={{24.11,28.19},{28.47,32.53},{32.86,36.89},{84.83,96.62},{106.89,110.91},{111.22,115.23},{115.59,119.48},{126.32,128.12}},[\"center\"]={0.0,-100.0},[\"downtime\"]={}},[12752]={[\"name\"]=\"Zander the Snakeskinner\",[\"anchors\"]={[36594]=6.156},[\"kill\"]=182.5,[\"movement\"]={{19.73,21.53},{45.28,47.08},{50.53,52.33},{55.84,57.64},{61.03,62.83}},[\"center\"]={90.0,-430.0},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[12778]=true},[\"x\"]=-94.317,[\"y\"]=0.08,[\"z\"]=282.127},{[\"ids\"]={[12780]=true},[\"x\"]=-47.166,[\"y\"]=7.0,[\"z\"]=-11.215},{[\"ids\"]={[12777]=true,[12780]=true},[\"x\"]=82.628,[\"y\"]=7.0,[\"z\"]=-327.443},{[\"ids\"]={[12780]=true},[\"x\"]=-10.391,[\"y\"]=7.03,[\"z\"]=-39.201}}},[1208]={[\"name\"]=\"Origenics\",[\"sync\"]=100,[\"bosses\"]={[12741]={[\"name\"]=\"Herpekaris\",[\"anchors\"]={[36519]=6.203},[\"kill\"]=142.2,[\"movement\"]={{118.45,120.25}},[\"center\"]={-88.0,-180.0},[\"downtime\"]={}},[12693]={[\"name\"]=\"Deceiver\",[\"anchors\"]={[36371]=7.156},[\"kill\"]=160.2,[\"movement\"]={{50.2,52.0},{108.92,110.72},{133.28,135.08}},[\"center\"]={-172.0,-142.0},[\"downtime\"]={}},[12695]={[\"name\"]=\"Ambrose the Undeparted\",[\"anchors\"]={[36436]=6.219},[\"kill\"]=201.9,[\"movement\"]={{23.46,25.27},{110.57,112.37}},[\"center\"]={190.0,0.0},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[12894]=true,[12895]=true},[\"x\"]=-165.728,[\"y\"]=-94.0,[\"z\"]=-90.196},{[\"ids\"]={[10792]=true,[12840]=true},[\"x\"]=183.337,[\"y\"]=0.0,[\"z\"]=59.129},{[\"ids\"]={[12834]=true},[\"x\"]=27.633,[\"y\"]=302.0,[\"z\"]=92.586}}},[974]={[\"name\"]=\"Ktisis Hyperboreia\",[\"sync\"]=88,[\"bosses\"]={[10396]={[\"name\"]=\"Lyssa\",[\"anchors\"]={[25182]=5.141},[\"kill\"]=156.6,[\"movement\"]={{48.94,50.74},{58.04,59.84},{121.75,123.55},{130.82,132.62}},[\"center\"]={-144.0,49.0},[\"downtime\"]={{23.35,36.45},{82.9,99.0}}},[10398]={[\"name\"]=\"Ladon Lord\",[\"anchors\"]={[25743]=4.172},[\"kill\"]=138.3,[\"movement\"]={},[\"center\"]={0.0,48.0},[\"downtime\"]={}},[10399]={[\"name\"]=\"Hermes\",[\"anchors\"]={[25886]=7.187},[\"kill\"]=nil,[\"movement\"]={{26.45,28.34},{51.49,53.29},{63.17,65.04},{66.17,68.04},{129.07,130.87},{132.07,133.91},{135.07,136.87},{138.12,140.0}},[\"center\"]={0.0,-50.0},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[10500]=true},[\"x\"]=-92.79,[\"y\"]=488.06,[\"z\"]=87.541},{[\"ids\"]={[10505]=true,[10506]=true,[10507]=true},[\"x\"]=-5.187,[\"y\"]=624.002,[\"z\"]=128.337},{[\"ids\"]={[10511]=true},[\"x\"]=-32.181,[\"y\"]=-140.0,[\"z\"]=8.56},{[\"ids\"]={[10503]=true,[10507]=true},[\"x\"]=6.729,[\"y\"]=624.0,[\"z\"]=175.219}}},[822]={[\"name\"]=\"Mt. Gulg\",[\"sync\"]=80,[\"bosses\"]={[8260]={[\"name\"]=\"Forgiven Cruelty\",[\"anchors\"]={[15611]=9.211},[\"kill\"]=120.9,[\"movement\"]={{18.33,20.13},{68.9,70.7},{111.51,113.31}},[\"center\"]={188.0,-170.0},[\"downtime\"]={}},[8261]={[\"name\"]=\"Forgiven Whimsy\",[\"anchors\"]={[15627]=11.101},[\"kill\"]=135.2,[\"movement\"]={{102.47,104.27},{124.97,126.77}},[\"center\"]={-240.0,-50.0},[\"downtime\"]={}},[8262]={[\"name\"]=\"Forgiven Obscenity\",[\"anchors\"]={[15636]=9.165},[\"kill\"]=181.4,[\"movement\"]={{20.47,22.27},{37.94,39.74},{48.34,50.14},{80.9,82.7},{91.0,92.8},{167.46,169.26}},[\"center\"]={-240.0,237.0},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[8267]=true,[8269]=true},[\"x\"]=-203.994,[\"y\"]=202.0,[\"z\"]=-105.326},{[\"ids\"]={[7864]=true},[\"x\"]=-230.322,[\"y\"]=204.37,[\"z\"]=185.953},{[\"ids\"]={[8262]=true,[8264]=true,[8265]=true},[\"x\"]=317.159,[\"y\"]=-54.458,[\"z\"]=-164.904},{[\"ids\"]={[8262]=true,[8264]=true,[8265]=true},[\"x\"]=317.159,[\"y\"]=-54.458,[\"z\"]=-164.904},{[\"ids\"]={[8262]=true,[8264]=true,[8265]=true},[\"x\"]=312.274,[\"y\"]=-53.627,[\"z\"]=-158.284},{[\"ids\"]={[8262]=true,[8264]=true,[8265]=true},[\"x\"]=312.274,[\"y\"]=-53.627,[\"z\"]=-158.284}}},[1065]={[\"name\"]=\"The Aery\",[\"sync\"]=56,[\"bosses\"]={[3452]={[\"name\"]=\"Rangda\",[\"anchors\"]={[3889]=6.765},[\"kill\"]=nil,[\"movement\"]={},[\"center\"]=nil,[\"downtime\"]={}},[3455]={[\"name\"]=\"Gyascutus\",[\"anchors\"]={[30191]=5.156},[\"kill\"]=94.0,[\"movement\"]={},[\"center\"]=nil,[\"downtime\"]={}},[3458]={[\"name\"]=\"Nidhogg\",[\"anchors\"]={[30206]=6.234},[\"kill\"]=nil,[\"movement\"]={},[\"center\"]=nil,[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[3442]=true,[3443]=true,[4402]=true},[\"x\"]=350.698,[\"y\"]=81.176,[\"z\"]=-107.988},{[\"ids\"]={[11993]=true},[\"x\"]=97.473,[\"y\"]=47.042,[\"z\"]=53.574},{[\"ids\"]={[3438]=true,[3439]=true},[\"x\"]=34.562,[\"y\"]=129.838,[\"z\"]=-151.69}}},[1038]={[\"name\"]=\"Copperbell Mines\",[\"sync\"]=20,[\"bosses\"]={[548]={[\"name\"]=\"Kottos\",[\"anchors\"]={[28545]=5.172},[\"kill\"]=37.4,[\"movement\"]={},[\"center\"]=nil,[\"downtime\"]={}},[554]={[\"name\"]=\"Ichorous Ire\",[\"anchors\"]={[28462]=6.328},[\"kill\"]=32.8,[\"movement\"]={{26.0,27.8}},[\"center\"]=nil,[\"downtime\"]={}},[101]={[\"name\"]=\"Gyges the Great\",[\"anchors\"]={[28762]=8.14},[\"kill\"]=32.6,[\"movement\"]={{12.34,14.14}},[\"center\"]=nil,[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[117]=true,[1342]=true},[\"x\"]=17.344,[\"y\"]=-6.958,[\"z\"]=-198.638},{[\"ids\"]={[631]=true},[\"x\"]=28.642,[\"y\"]=-42.267,[\"z\"]=40.674},{[\"ids\"]={[117]=true,[631]=true,[1342]=true},[\"x\"]=54.459,[\"y\"]=-8.642,[\"z\"]=-141.375},{[\"ids\"]={[117]=true},[\"x\"]=17.044,[\"y\"]=-6.958,[\"z\"]=-208.667},{[\"ids\"]={[986]=true},[\"x\"]=-38.315,[\"y\"]=-41.163,[\"z\"]=131.212}}},[1245]={[\"name\"]=\"Halatali\",[\"sync\"]=23,[\"bosses\"]={[1194]={[\"name\"]=\"Firemane\",[\"anchors\"]={[40592]=6.594},[\"kill\"]=nil,[\"movement\"]={{8.79,10.59}},[\"center\"]=nil,[\"downtime\"]={}},[1196]={[\"name\"]=\"Thunderclap Guivre\",[\"anchors\"]={[40595]=6.195},[\"kill\"]=60.7,[\"movement\"]={{8.39,10.2},{52.26,54.06}},[\"center\"]={-179.0,-133.0},[\"downtime\"]={}},[1197]={[\"name\"]=\"Tangata\",[\"anchors\"]={[40602]=6.149},[\"kill\"]=102.7,[\"movement\"]={{55.84,57.64}},[\"center\"]=nil,[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[117]=true},[\"x\"]=-80.034,[\"y\"]=-11.021,[\"z\"]=-102.495}}},[1039]={[\"name\"]=\"The Thousand Maws of Toto-Rak\",[\"sync\"]=27,[\"bosses\"]={[444]={[\"name\"]=\"Graffias\",[\"anchors\"]={[701]=14.25},[\"kill\"]=40.5,[\"movement\"]={{15.37,17.17},{38.47,40.27}},[\"center\"]={215.0,-145.0},[\"downtime\"]={}}},[\"pools\"]={}},[1040]={[\"name\"]=\"Haukke Manor\",[\"sync\"]=31,[\"bosses\"]={[423]={[\"name\"]=\"Manor Claviger\",[\"anchors\"]={},[\"kill\"]=nil,[\"movement\"]={},[\"center\"]=nil,[\"downtime\"]={}},[427]={[\"name\"]=\"Manor Steward\",[\"anchors\"]={},[\"kill\"]=46.2,[\"movement\"]={},[\"center\"]=nil,[\"downtime\"]={}},[422]={[\"name\"]=\"Lady Amandine\",[\"anchors\"]={[28640]=9.524},[\"kill\"]=nil,[\"movement\"]={},[\"center\"]={0.0,4.0},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[428]=true},[\"x\"]=32.059,[\"y\"]=17.0,[\"z\"]=-4.471}}},[1041]={[\"name\"]=\"Brayflox's Longstop\",[\"sync\"]=34,[\"bosses\"]={[1280]={[\"name\"]=\"Great Yellow Pelican\",[\"anchors\"]={[506]=11.64},[\"kill\"]=nil,[\"movement\"]={{12.84,14.64}},[\"center\"]=nil,[\"downtime\"]={}},[1279]={[\"name\"]=\"Aiatar\",[\"anchors\"]={[28659]=5.164},[\"kill\"]=42.0,[\"movement\"]={{37.54,39.34}},[\"center\"]={-25.0,-235.0},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[1293]=true,[1294]=true},[\"x\"]=-102.892,[\"y\"]=-1.52,[\"z\"]=4.044},{[\"ids\"]={[1294]=true},[\"x\"]=-98.497,[\"y\"]=-2.382,[\"z\"]=19.883}}},[1267]={[\"name\"]=\"The Sunken Temple of Qarn\",[\"sync\"]=37,[\"bosses\"]={[1567]={[\"name\"]=\"Teratotaur\",[\"anchors\"]={[42231]=5.171},[\"kill\"]=81.7,[\"movement\"]={},[\"center\"]={-70.0,-60.0},[\"downtime\"]={}},[1569]={[\"name\"]=\"Temple Guardian\",[\"anchors\"]={[42234]=5.219},[\"kill\"]=31.9,[\"movement\"]={},[\"center\"]={50.0,-10.0},[\"downtime\"]={}},[1570]={[\"name\"]=\"Adjudicator\",[\"anchors\"]={[42245]=5.195},[\"kill\"]=nil,[\"movement\"]={{72.13,74.06},{77.89,79.69},{95.61,97.52}},[\"center\"]={238.0,0.0},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[1573]=true},[\"x\"]=-131.456,[\"y\"]=-17.588,[\"z\"]=-14.603},{[\"ids\"]={[1572]=true},[\"x\"]=8.987,[\"y\"]=-18.678,[\"z\"]=-15.0},{[\"ids\"]={[1580]=true},[\"x\"]=186.816,[\"y\"]=-4.0,[\"z\"]=-0.015}}},[1303]={[\"name\"]=\"Cutter's Cry\",[\"sync\"]=40,[\"bosses\"]={[1585]={[\"name\"]=\"Myrmidon Princess\",[\"anchors\"]={[44226]=6.156},[\"kill\"]=37.0,[\"movement\"]={{24.6,26.4}},[\"center\"]=nil,[\"downtime\"]={}},[1590]={[\"name\"]=\"Chimera\",[\"anchors\"]={[44243]=12.797},[\"kill\"]=59.6,[\"movement\"]={},[\"center\"]={-170.0,-200.0},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[1601]=true},[\"x\"]=-175,[\"y\"]=0,[\"z\"]=-136}}},[1042]={[\"name\"]=\"The Stone Vigil\",[\"sync\"]=43,[\"bosses\"]={[1677]={[\"name\"]=\"Chudo-Yudo\",[\"anchors\"]={[902]=6.453},[\"kill\"]=87.2,[\"movement\"]={},[\"center\"]={0.0,115.0},[\"downtime\"]={}},[1678]={[\"name\"]=\"Koshchei\",[\"anchors\"]={[28732]=5.141},[\"kill\"]=nil,[\"movement\"]={},[\"center\"]={40.0,-80.0},[\"downtime\"]={}},[1680]={[\"name\"]=\"Isgebind\",[\"anchors\"]={[1025]=8.235},[\"kill\"]=123.7,[\"movement\"]={},[\"center\"]={0.0,-248.0},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[114]=true},[\"x\"]=5.203,[\"y\"]=0.0,[\"z\"]=-53.452},{[\"ids\"]={[114]=true,[1675]=true},[\"x\"]=-0.32,[\"y\"]=0.0,[\"z\"]=-187.121}}},[1330]={[\"name\"]=\"Dzemael Darkhold\",[\"sync\"]=46,[\"bosses\"]={[1397]={[\"name\"]=\"All-seeing Eye\",[\"anchors\"]={[45570]=6.328},[\"kill\"]=nil,[\"movement\"]={{109.17,110.97}},[\"center\"]={48.0,78.0},[\"downtime\"]={}},[1415]={[\"name\"]=\"Taulurd\",[\"anchors\"]={[45572]=6.172},[\"kill\"]=103.5,[\"movement\"]={},[\"center\"]={-96.0,-27.0},[\"downtime\"]={}},[1396]={[\"name\"]=\"Batraal\",[\"anchors\"]={[45579]=6.094},[\"kill\"]=143.1,[\"movement\"]={},[\"center\"]={85.0,-175.0},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[1656]=true,[2152]=true},[\"x\"]=119.798,[\"y\"]=-14.0,[\"z\"]=127.214},{[\"ids\"]={[1652]=true,[1654]=true,[1656]=true,[2154]=true},[\"x\"]=-145.647,[\"y\"]=-25.022,[\"z\"]=32.609},{[\"ids\"]={[1652]=true,[2154]=true},[\"x\"]=22.469,[\"y\"]=-21.026,[\"z\"]=-114.238},{[\"ids\"]={[1652]=true,[1654]=true,[2152]=true},[\"x\"]=13.321,[\"y\"]=-16.266,[\"z\"]=-151.293}}},[1331]={[\"name\"]=\"The Aurum Vale\",[\"sync\"]=49,[\"bosses\"]={[1534]={[\"name\"]=\"Locksmith\",[\"anchors\"]={[45742]=6.15},[\"kill\"]=71.9,[\"movement\"]={},[\"center\"]={29,4},[\"downtime\"]={}},[1533]={[\"name\"]=\"Coincounter\",[\"anchors\"]={[45745]=6.195},[\"kill\"]=71.5,[\"movement\"]={},[\"center\"]={-149,-139},[\"downtime\"]={}},[1532]={[\"name\"]=\"Miser's Mistress\",[\"anchors\"]={[45997]=6.562},[\"kill\"]=123.4,[\"movement\"]={{106.24,108.04}},[\"center\"]={-409,-124},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[1544]=true},[\"x\"]=-116,[\"y\"]=-30,[\"z\"]=-129},{[\"ids\"]={[1536]=true,[1538]=true,[1544]=true,[1546]=true},[\"x\"]=-337,[\"y\"]=-33,[\"z\"]=-136}}}}}\n    L.lastState = previous and previous.lastState\n    LevellingDungeons=L\n    local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n    if not FolderExists(folder) then FolderCreate(folder) end\n    L.path=folder..[[LevellingDungeons.lua]]\n    local saved=FileExists(L.path) and FileLoad(L.path) or {}\n    if type(saved)~=\"table\" then saved={} end\n    L.settings={}\n    local defaults={draws=true,autoSim=true,poolFinal=true,targetBoss=true,\n        estimatedKills=true,movement=true,returnField=false}\n    local changed=false\n    for key,value in pairs(defaults) do\n        if type(saved[key])==\"boolean\" then L.settings[key]=saved[key]\n        else L.settings[key]=value;changed=true end\n    end\n    if changed then FileSave(L.path,L.settings) end\n    function L.state()\n        local p=TensorCore.mGetPlayer()\n        if not p then return end\n        local S=data.levelling_dungeons\n        if not S or S.map~=p.localmapid then\n            S={map=p.localmapid,draws={},phases={},done={},lastHold=0}\n            data.levelling_dungeons=S\n        end\n        L.lastState=S\n        return S,p\n    end\n    function L.clearDraws(S)\n        for id in pairs(S.draws) do Argus.deleteTimedShape(id) end\n        S.draws={}\n    end\n    function L.clearPhases(S)\n        -- AutoSim can discard phases at the end of combat before this reaction runs.\n        local phases = S.phases\n        S.phases = {}\n        for _, id in ipairs(phases) do\n            pcall(TensorCore.API.TensorACR.removeAutoSimPhase, id)\n        end\n    end\nlocal function shouldHoldApex(player)\n if player.job ~= 23 or not player.incombat or not player.pos then return false end\n local count, healthy = 0, false\n TensorCore.forEachEntity(\"alive,targetable,attackable\", function(id)\n  local enemy = TensorCore.mGetEntity(id)\n  if enemy and enemy.incombat and enemy.pos then\n   local dx, dz = enemy.pos.x - player.pos.x, enemy.pos.z - player.pos.z\n   if dx * dx + dz * dz <= 30 * 30 and math.abs(enemy.pos.y - player.pos.y) <= 8 then\n    count = count + 1\n    if not enemy.hp or not enemy.hp.percent or enemy.hp.percent > 8 then healthy = true end\n   end\n  end\n end)\n return count >= 1 and count <= 2 and not healthy\nend\n\n    function L.restoreApex()\n        if L.apexHeld and ACR_TensorRequiem4_Apex == false then ACR_TensorRequiem4_Apex = true end\n        L.apexHeld = nil\n    end\n    function L.cleanup()\n        L.restoreApex()\n        local S=data.levelling_dungeons or L.lastState\n        if S then L.clearDraws(S);L.clearPhases(S) end\n        data.levelling_dungeons=nil;L.lastState=nil\n    end\n    function L.phase(S,kind,a,b,value)\n        if b<=a or a>=1200 then return end\n        local id=TensorCore.API.TensorACR.addAutoSimPhase(kind,a,math.min(b,1200),value)\n        if id then S.phases[#S.phases+1]=id end\n    end\n    function L.boss(args,cid)\n        local S,p=L.state()\n        local def=L.definitions[p.localmapid].bosses[cid]\n        local expected=def.anchors[args.spellID]\n        if not expected or not p.incombat then return end\n        if S.activeBoss==cid then return end\n        local A=TensorCore.API.TensorACR\n        local ok,t=pcall(A.getAutoSimTime)\n        if not ok or type(t)~=\"number\" or t<0 then return end\n        -- The initial cast identifies the boss even where trash shares its name ID.\n        -- Later repeats must not restart a completed encounter forecast.\n        if S.done[cid] then return end\n        L.restoreApex();S.done[cid]=true;S.activeBoss=cid;S.bossEntity=args.entityID;S.pool=nil\n        if L.settings.targetBoss then\n            gStartCombat=false\n            local current=TensorCore.mGetTarget()\n            d(string.format('[Levelling targeting] boss=%s intended=%s current=%s toggle=true startCombat=false request=%s reason=%s',\n                def.name,tostring(args.entityID),tostring(current and current.id),tostring(not current or not current.attackable),current and current.attackable and \"preserve attackable target\" or \"no attackable target\"))\n            if not current or not current.attackable then\n                Player:SetTarget(args.entityID)\n                S.targetRequest={id=args.entityID,at=Now()}\n            end\n        end\n        if not L.settings.autoSim then return end\n        L.clearPhases(S)\n        -- A repeated opener or a boss chained into a trash pull does not establish time zero.\n        if math.abs(t - expected) > 3 then return end\n        local origin=math.max(0,t-expected)\n        if L.settings.estimatedKills and def.kill then\n            A.setAutoSimKillTime(math.min(1200,origin+def.kill))\n            A.addAutoSimUncertainty(t,15)\n        end\n        -- Lyssa's paired targetability changes repeat at these pull-relative times.\n        for _, window in ipairs(def.downtime) do\n            L.phase(S, 'FullDowntime', math.max(t, origin + window[1]), origin + window[2], 1)\n        end\n        -- Optional conservative dodge windows, not observed personal movement.\n        if L.settings.movement then\n            for _,w in ipairs(def.movement) do\n                if origin+w[2]>t then\n                    L.phase(S,'CasterDowntime',math.max(t,origin+w[1]),origin+w[2],1)\n                    if L.settings.returnField then L.phase(S,'GroundFieldMovement',origin+w[2],origin+w[2]+0.2,2) end\n                end\n            end\n        end\n    end\n    function L.draw(args,shapes)\n        if not L.settings.draws or args.friendly then return end\n        local shape=shapes[args.aoeID]\n        if not shape then return end\n        local ms=args.startTime+args.duration*1000-Now()\n        if ms<=0 or ms>30000 then return end\n        local S=L.state()\n        local drawer=TensorCore.getStaticDrawer(0x603333FF,2)\n        local v=shape.v\n        local id\n        if shape.kind=='Circle' then id=drawer:addTimedCircle(ms,args.x,args.y,args.z,v[1],0,false,true)\n        elseif shape.kind=='Rect' then id=drawer:addTimedRect(ms,args.x,args.y,args.z,v[1],v[2],args.heading,0,false,true)\n        elseif shape.kind=='Cone' then id=drawer:addTimedCone(ms,args.x,args.y,args.z,v[1],math.rad(v[2]),args.heading,0,false,true)\n        elseif shape.kind=='DonutCone' then id=drawer:addTimedDonutCone(ms,args.x,args.y,args.z,v[1],v[2],math.rad(v[3]),args.heading,0,false,true)\n        elseif shape.kind=='Donut' then id=drawer:addTimedDonut(ms,args.x,args.y,args.z,v[1],v[2],0,false,true) end\n        if id then S.draws[id]=Now()+ms end\n        -- Prune expired ownership without recreating the draw.\n        for owned,expiry in pairs(S.draws) do if expiry<Now() then S.draws[owned]=nil end end\n    end\n    function L.update()\n        local S,p=L.state()\n        local duty=L.definitions[p.localmapid]\n        if not duty then L.restoreApex();return end\n        gStartCombat=false\n        if AnyoneCore and AnyoneCore.Settings then\n            if AnyoneCore.Settings.DutyHelper then AnyoneCore.Settings.DutyHelper.enabled=false end\n            if AnyoneCore.Settings.PrepullHelper then AnyoneCore.Settings.PrepullHelper.enabled=false end\n        end\n        if S.targetRequest then\n            local current=TensorCore.mGetTarget()\n            if current and current.id==S.targetRequest.id then\n                d('[Levelling targeting] confirmed target='..tostring(current.id));S.targetRequest=nil\n            elseif Now()-S.targetRequest.at>1500 then\n                d('[Levelling targeting] target not confirmed; no retry outside initial request');S.targetRequest=nil\n            end\n        end\n        if not p.incombat and S.activeBoss then\n            L.clearPhases(S);S.activeBoss=nil;S.bossEntity=nil\n            -- done is combat-scoped so retries after a non-wipe reset remain possible.\n            S.done={}\n        end\n        local syncedLevel = math.min(p.level, duty.sync)\n        if ((p.job~=25 or syncedLevel < 30) and (p.job~=23 or syncedLevel < 80)) or not L.settings.autoSim or not L.settings.poolFinal or S.activeBoss then L.restoreApex();S.pool=nil;return end\n        local target=TensorCore.mGetTarget()\n        if target then\n            local boss=duty.bosses[target.contentid]\n            if boss and boss.center and (p.pos.x-boss.center[1])^2+(p.pos.z-boss.center[2])^2<30^2 then L.restoreApex();S.pool=nil;return end\n        end\n        -- Apollyon's final pull starts with Pumas up the approach, before the\n        -- party reaches the Maip. Arm the hold before the first enemy is hit.\n        local pos = p.pos\n        local apollyonApproach = p.localmapid == 1167\n            and pos.x >= -116 and pos.x <= -23 and pos.z >= 270 and pos.z <= 350\n            and pos.y > -117 and pos.y < -108\n        if apollyonApproach then\n            S.poolSeenAt = Now()\n        end\n        if target and target.incombat then\n            local region\n            for _,r in ipairs(duty.pools) do\n                if r.ids[target.contentid] and (p.pos.x-r.x)^2+(p.pos.z-r.z)^2<30^2 and math.abs(p.pos.y-r.y)<12 then region=r;break end\n            end\n            if region then S.pool=region;S.poolSeenAt=Now()\n            elseif S.pool and (p.pos.x-S.pool.x)^2+(p.pos.z-S.pool.z)^2>60^2 then S.pool=nil end\n        end\n        -- Keep the reservation during the short walk between the final pack and boss.\n        -- Renew short holds; turning the option off or detecting the boss releases within 750ms.\n        if S.pool and not p.incombat and Now()-S.poolSeenAt>8000 then S.pool=nil end\n        if S.pool and (ACR_TensorRequiem4_Apex == true or L.apexHeld) and shouldHoldApex(p) then\n            L.apexHeld = true\n            ACR_TensorRequiem4_Apex = false\n        else\n            L.restoreApex()\n        end\n        if p.job == 25 and (S.pool or apollyonApproach) and Now()-S.lastHold>=250 then\n            local A=TensorCore.API.TensorACR\n            local now = Now()\n            local leyLines\n            if syncedLevel >= 52 then leyLines = A.holdActionUntil(3573, now + 750, 1) end\n            local manafont = A.holdActionUntil(158, now + 750, 1)\n            if apollyonApproach and not S.apollyonHoldLogged then\n                d(string.format(\"[Ihuykatumu] Apollyon final-pack hold: Ley Lines=%s Manafont=%s\",\n                    tostring(leyLines), tostring(manafont)))\n                S.apollyonHoldLogged = true\n            end\n            S.lastHold = now\n        end\n    end\nend\nself.used=true\n",
+						actionLua = "-- Shared helpers are initialized before any settings or mechanic consumer.\nif not LevellingDungeons or LevellingDungeons.version~=14 then\n    local previous = LevellingDungeons\n    local L={version=14,definitions={[969]={[\"name\"]=\"The Tower of Babil\",[\"sync\"]=84,[\"bosses\"]={[10279]={[\"name\"]=\"Barnabas\",[\"anchors\"]={[25159]=4.281,[25322]=4.281},[\"kill\"]=138,[\"movement\"]={{35,39},{64.6,69},{134,137}},[\"downtime\"]={},[\"center\"]={-300,71}},[10282]={[\"name\"]=\"Lugae\",[\"anchors\"]={[25338]=4.172},[\"kill\"]=142,[\"movement\"]={{35.4,39.4},{101.3,105.3}},[\"downtime\"]={},[\"center\"]={221,306}},[10285]={[\"name\"]=\"Anima\",[\"anchors\"]={[25342]=5.11},[\"kill\"]=257,[\"movement\"]={{23,26},{32.5,34.5},{56.4,60},{190.2,194}},[\"downtime\"]={{80.985,99.11},{151.063,177.157}},[\"center\"]={0,-180}}},[\"pools\"]={{[\"ids\"]={[10872]=true,[10874]=true},[\"x\"]=-294,[\"y\"]=-180,[\"z\"]=134},{[\"ids\"]={[10883]=true},[\"x\"]=396,[\"y\"]=0,[\"z\"]=-169},{[\"ids\"]={[10887]=true,[10891]=true},[\"x\"]=0,[\"y\"]=481,[\"z\"]=-119}}},[1037]={name=\"The Tam-Tara Deepcroft\",sync=19,bosses={[73]={name=\"Galvanth the Dominator\",anchors={[971]=0.094},kill=79,movement={},downtime={},center={-52.765,-12.789}}},pools={}},[1167]={[\"name\"]=\"Ihuykatumu\",[\"sync\"]=92,[\"bosses\"]={[12723]={[\"name\"]=\"Prime Punutiy\",[\"anchors\"]={[36492]=5.187},[\"kill\"]=135,[\"movement\"]={{14.76,16.56},{28.75,30.55},{53.93,55.73},{59.26,61.06}},[\"center\"]={35.0,-95.0},[\"downtime\"]={}},[12716]={[\"name\"]=\"Drowsie\",[\"anchors\"]={[39132]=9.218},[\"kill\"]=126.1,[\"movement\"]={{33.5,35.3},{44.5,46.3},{59.37,61.17},{64.81,66.61},{103.64,105.44},{122.74,124.54}},[\"center\"]={80.0,53.0},[\"downtime\"]={}},[12711]={[\"name\"]=\"Apollyon\",[\"anchors\"]={[36340]=5.39},[\"kill\"]=158.8,[\"movement\"]={{60.2,61.6},{67.1,69.9},{140.5,144.0}},[\"center\"]={-107.0,265.0},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[12768]=true},[\"x\"]=-73.106,[\"y\"]=-194.0,[\"z\"]=-32.517},{[\"ids\"]={[12720]=true},[\"x\"]=179.278,[\"y\"]=-159.059,[\"z\"]=112.016},{[\"ids\"]={[12774]=true,[12775]=true},[\"x\"]=-76.127,[\"y\"]=-115.12,[\"z\"]=333.547},{[\"ids\"]={[12720]=true},[\"x\"]=130.173,[\"y\"]=-154.404,[\"z\"]=112.566}}},[1193]={[\"name\"]=\"Worqor Zormor\",[\"sync\"]=94,[\"bosses\"]={[12699]={[\"name\"]=\"Ryoqor Terteh\",[\"anchors\"]={[36279]=9.017},[\"kill\"]=113.8,[\"movement\"]={{35.7,37.5},{38.68,40.48},{69.36,71.16},{72.42,74.22},{95.19,96.99},{97.16,98.96}},[\"center\"]={-108.0,119.0},[\"downtime\"]={}},[12703]={[\"name\"]=\"Kahderyor\",[\"anchors\"]={[36282]=4.179},[\"kill\"]=nil,[\"movement\"]={},[\"center\"]={-53.0,-57.0},[\"downtime\"]={}},[12705]={[\"name\"]=\"Gurfurlur\",[\"anchors\"]={[36269]=5.203},[\"kill\"]=nil,[\"movement\"]={{71.84,73.64}},[\"center\"]={-54.0,-195.0},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[12810]=true,[12811]=true,[12813]=true,[12819]=true},[\"x\"]=-100.633,[\"y\"]=6.964,[\"z\"]=171.649},{[\"ids\"]={[12815]=true},[\"x\"]=-71.367,[\"y\"]=99.967,[\"z\"]=-13.535},{[\"ids\"]={[12821]=true,[12824]=true},[\"x\"]=-77.165,[\"y\"]=358.109,[\"z\"]=-105.821},{[\"ids\"]={[12810]=true,[12811]=true,[12813]=true,[12819]=true},[\"x\"]=-72.068,[\"y\"]=1.552,[\"z\"]=189.715}}},[1194]={[\"name\"]=\"The Skydeep Cenote\",[\"sync\"]=96,[\"bosses\"]={[12755]={[\"name\"]=\"Feather Ray\",[\"anchors\"]={[36739]=6.203},[\"kill\"]=nil,[\"movement\"]={{26.24,28.04},{43.09,44.89},{91.25,93.05}},[\"center\"]={-105.0,-160.0},[\"downtime\"]={}},[12888]={[\"name\"]=\"Firearms\",[\"anchors\"]={[36448]=8.164},[\"kill\"]=132.1,[\"movement\"]={},[\"center\"]={-85.0,-155.0},[\"downtime\"]={}},[12728]={[\"name\"]=\"Maulskull\",[\"anchors\"]={[36669]=5.242},[\"kill\"]=177.0,[\"movement\"]={},[\"center\"]={100.0,-430.0},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[12866]=true},[\"x\"]=-106.676,[\"y\"]=-51.585,[\"z\"]=-97.887},{[\"ids\"]={[12876]=true},[\"x\"]=-79.088,[\"y\"]=-210.0,[\"z\"]=-87.114},{[\"ids\"]={[12876]=true,[13067]=true},[\"x\"]=102.175,[\"y\"]=-194.9,[\"z\"]=-359.023},{[\"ids\"]={[12876]=true,[12877]=true,[13067]=true},[\"x\"]=105.76,[\"y\"]=-194.85,[\"z\"]=-354.574}}},[1198]={[\"name\"]=\"Vanguard\",[\"sync\"]=98,[\"bosses\"]={[12750]={[\"name\"]=\"Vanguard Commander R8\",[\"anchors\"]={[36571]=6.156},[\"kill\"]=132.5,[\"movement\"]={{25.42,27.22}},[\"center\"]={-100.0,207.0},[\"downtime\"]={}},[12757]={[\"name\"]=\"Protector\",[\"anchors\"]={[37161]=6.187},[\"kill\"]=135.6,[\"movement\"]={{24.11,28.19},{28.47,32.53},{32.86,36.89},{84.83,96.62},{106.89,110.91},{111.22,115.23},{115.59,119.48},{126.32,128.12}},[\"center\"]={0.0,-100.0},[\"downtime\"]={}},[12752]={[\"name\"]=\"Zander the Snakeskinner\",[\"anchors\"]={[36594]=6.156},[\"kill\"]=182.5,[\"movement\"]={{19.73,21.53},{45.28,47.08},{50.53,52.33},{55.84,57.64},{61.03,62.83}},[\"center\"]={90.0,-430.0},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[12778]=true},[\"x\"]=-94.317,[\"y\"]=0.08,[\"z\"]=282.127},{[\"ids\"]={[12780]=true},[\"x\"]=-47.166,[\"y\"]=7.0,[\"z\"]=-11.215},{[\"ids\"]={[12777]=true,[12780]=true},[\"x\"]=82.628,[\"y\"]=7.0,[\"z\"]=-327.443},{[\"ids\"]={[12780]=true},[\"x\"]=-10.391,[\"y\"]=7.03,[\"z\"]=-39.201}}},[1208]={[\"name\"]=\"Origenics\",[\"sync\"]=100,[\"bosses\"]={[12741]={[\"name\"]=\"Herpekaris\",[\"anchors\"]={[36519]=6.203},[\"kill\"]=142.2,[\"movement\"]={{118.45,120.25}},[\"center\"]={-88.0,-180.0},[\"downtime\"]={}},[12693]={[\"name\"]=\"Deceiver\",[\"anchors\"]={[36371]=7.156},[\"kill\"]=160.2,[\"movement\"]={{50.2,52.0},{108.92,110.72},{133.28,135.08}},[\"center\"]={-172.0,-142.0},[\"downtime\"]={}},[12695]={[\"name\"]=\"Ambrose the Undeparted\",[\"anchors\"]={[36436]=6.219},[\"kill\"]=201.9,[\"movement\"]={{23.46,25.27},{110.57,112.37}},[\"center\"]={190.0,0.0},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[12894]=true,[12895]=true},[\"x\"]=-165.728,[\"y\"]=-94.0,[\"z\"]=-90.196},{[\"ids\"]={[10792]=true,[12840]=true},[\"x\"]=183.337,[\"y\"]=0.0,[\"z\"]=59.129},{[\"ids\"]={[12834]=true},[\"x\"]=27.633,[\"y\"]=302.0,[\"z\"]=92.586}}},[974]={[\"name\"]=\"Ktisis Hyperboreia\",[\"sync\"]=88,[\"bosses\"]={[10396]={[\"name\"]=\"Lyssa\",[\"anchors\"]={[25182]=5.141},[\"kill\"]=156.6,[\"movement\"]={{48.94,50.74},{58.04,59.84},{121.75,123.55},{130.82,132.62}},[\"center\"]={-144.0,49.0},[\"downtime\"]={{23.35,36.45},{82.9,99.0}}},[10398]={[\"name\"]=\"Ladon Lord\",[\"anchors\"]={[25743]=4.172},[\"kill\"]=138.3,[\"movement\"]={},[\"center\"]={0.0,48.0},[\"downtime\"]={}},[10399]={[\"name\"]=\"Hermes\",[\"anchors\"]={[25886]=7.187},[\"kill\"]=nil,[\"movement\"]={{26.45,28.34},{51.49,53.29},{63.17,65.04},{66.17,68.04},{129.07,130.87},{132.07,133.91},{135.07,136.87},{138.12,140.0}},[\"center\"]={0.0,-50.0},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[10500]=true},[\"x\"]=-92.79,[\"y\"]=488.06,[\"z\"]=87.541},{[\"ids\"]={[10505]=true,[10506]=true,[10507]=true},[\"x\"]=-5.187,[\"y\"]=624.002,[\"z\"]=128.337},{[\"ids\"]={[10511]=true},[\"x\"]=-32.181,[\"y\"]=-140.0,[\"z\"]=8.56},{[\"ids\"]={[10503]=true,[10507]=true},[\"x\"]=6.729,[\"y\"]=624.0,[\"z\"]=175.219}}},[822]={[\"name\"]=\"Mt. Gulg\",[\"sync\"]=80,[\"bosses\"]={[8260]={[\"name\"]=\"Forgiven Cruelty\",[\"anchors\"]={[15611]=9.211},[\"kill\"]=120.9,[\"movement\"]={{18.33,20.13},{68.9,70.7},{111.51,113.31}},[\"center\"]={188.0,-170.0},[\"downtime\"]={}},[8261]={[\"name\"]=\"Forgiven Whimsy\",[\"anchors\"]={[15627]=11.101},[\"kill\"]=135.2,[\"movement\"]={{102.47,104.27},{124.97,126.77}},[\"center\"]={-240.0,-50.0},[\"downtime\"]={}},[8262]={[\"name\"]=\"Forgiven Obscenity\",[\"anchors\"]={[15636]=9.165},[\"kill\"]=181.4,[\"movement\"]={{20.47,22.27},{37.94,39.74},{48.34,50.14},{80.9,82.7},{91.0,92.8},{167.46,169.26}},[\"center\"]={-240.0,237.0},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[8267]=true,[8269]=true},[\"x\"]=-203.994,[\"y\"]=202.0,[\"z\"]=-105.326},{[\"ids\"]={[7864]=true},[\"x\"]=-230.322,[\"y\"]=204.37,[\"z\"]=185.953},{[\"ids\"]={[8262]=true,[8264]=true,[8265]=true},[\"x\"]=317.159,[\"y\"]=-54.458,[\"z\"]=-164.904},{[\"ids\"]={[8262]=true,[8264]=true,[8265]=true},[\"x\"]=317.159,[\"y\"]=-54.458,[\"z\"]=-164.904},{[\"ids\"]={[8262]=true,[8264]=true,[8265]=true},[\"x\"]=312.274,[\"y\"]=-53.627,[\"z\"]=-158.284},{[\"ids\"]={[8262]=true,[8264]=true,[8265]=true},[\"x\"]=312.274,[\"y\"]=-53.627,[\"z\"]=-158.284}}},[1065]={[\"name\"]=\"The Aery\",[\"sync\"]=56,[\"bosses\"]={[3452]={[\"name\"]=\"Rangda\",[\"anchors\"]={[3889]=6.765},[\"kill\"]=nil,[\"movement\"]={},[\"center\"]=nil,[\"downtime\"]={}},[3455]={[\"name\"]=\"Gyascutus\",[\"anchors\"]={[30191]=5.156},[\"kill\"]=94.0,[\"movement\"]={},[\"center\"]=nil,[\"downtime\"]={}},[3458]={[\"name\"]=\"Nidhogg\",[\"anchors\"]={[30206]=6.234},[\"kill\"]=nil,[\"movement\"]={},[\"center\"]=nil,[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[3442]=true,[3443]=true,[4402]=true},[\"x\"]=350.698,[\"y\"]=81.176,[\"z\"]=-107.988},{[\"ids\"]={[11993]=true},[\"x\"]=97.473,[\"y\"]=47.042,[\"z\"]=53.574},{[\"ids\"]={[3438]=true,[3439]=true},[\"x\"]=34.562,[\"y\"]=129.838,[\"z\"]=-151.69}}},[1038]={[\"name\"]=\"Copperbell Mines\",[\"sync\"]=20,[\"bosses\"]={[548]={[\"name\"]=\"Kottos\",[\"anchors\"]={[28545]=5.172},[\"kill\"]=37.4,[\"movement\"]={},[\"center\"]=nil,[\"downtime\"]={}},[554]={[\"name\"]=\"Ichorous Ire\",[\"anchors\"]={[28462]=6.328},[\"kill\"]=32.8,[\"movement\"]={{26.0,27.8}},[\"center\"]=nil,[\"downtime\"]={}},[101]={[\"name\"]=\"Gyges the Great\",[\"anchors\"]={[28762]=8.14},[\"kill\"]=32.6,[\"movement\"]={{12.34,14.14}},[\"center\"]=nil,[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[117]=true,[1342]=true},[\"x\"]=17.344,[\"y\"]=-6.958,[\"z\"]=-198.638},{[\"ids\"]={[631]=true},[\"x\"]=28.642,[\"y\"]=-42.267,[\"z\"]=40.674},{[\"ids\"]={[117]=true,[631]=true,[1342]=true},[\"x\"]=54.459,[\"y\"]=-8.642,[\"z\"]=-141.375},{[\"ids\"]={[117]=true},[\"x\"]=17.044,[\"y\"]=-6.958,[\"z\"]=-208.667},{[\"ids\"]={[986]=true},[\"x\"]=-38.315,[\"y\"]=-41.163,[\"z\"]=131.212}}},[1245]={[\"name\"]=\"Halatali\",[\"sync\"]=23,[\"bosses\"]={[1194]={[\"name\"]=\"Firemane\",[\"anchors\"]={[40592]=6.594},[\"kill\"]=nil,[\"movement\"]={{8.79,10.59}},[\"center\"]=nil,[\"downtime\"]={}},[1196]={[\"name\"]=\"Thunderclap Guivre\",[\"anchors\"]={[40595]=6.195},[\"kill\"]=60.7,[\"movement\"]={{8.39,10.2},{52.26,54.06}},[\"center\"]={-179.0,-133.0},[\"downtime\"]={}},[1197]={[\"name\"]=\"Tangata\",[\"anchors\"]={[40602]=6.149},[\"kill\"]=102.7,[\"movement\"]={{55.84,57.64}},[\"center\"]=nil,[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[117]=true},[\"x\"]=-80.034,[\"y\"]=-11.021,[\"z\"]=-102.495}}},[1039]={[\"name\"]=\"The Thousand Maws of Toto-Rak\",[\"sync\"]=27,[\"bosses\"]={[444]={[\"name\"]=\"Graffias\",[\"anchors\"]={[701]=14.25},[\"kill\"]=40.5,[\"movement\"]={{15.37,17.17},{38.47,40.27}},[\"center\"]={215.0,-145.0},[\"downtime\"]={}}},[\"pools\"]={}},[1040]={[\"name\"]=\"Haukke Manor\",[\"sync\"]=31,[\"bosses\"]={[423]={[\"name\"]=\"Manor Claviger\",[\"anchors\"]={},[\"kill\"]=nil,[\"movement\"]={},[\"center\"]=nil,[\"downtime\"]={}},[427]={[\"name\"]=\"Manor Steward\",[\"anchors\"]={},[\"kill\"]=46.2,[\"movement\"]={},[\"center\"]=nil,[\"downtime\"]={}},[422]={[\"name\"]=\"Lady Amandine\",[\"anchors\"]={[28640]=9.524},[\"kill\"]=nil,[\"movement\"]={},[\"center\"]={0.0,4.0},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[428]=true},[\"x\"]=32.059,[\"y\"]=17.0,[\"z\"]=-4.471}}},[1041]={[\"name\"]=\"Brayflox's Longstop\",[\"sync\"]=34,[\"bosses\"]={[1280]={[\"name\"]=\"Great Yellow Pelican\",[\"anchors\"]={[506]=11.64},[\"kill\"]=nil,[\"movement\"]={{12.84,14.64}},[\"center\"]=nil,[\"downtime\"]={}},[1279]={[\"name\"]=\"Aiatar\",[\"anchors\"]={[28659]=5.164},[\"kill\"]=42.0,[\"movement\"]={{37.54,39.34}},[\"center\"]={-25.0,-235.0},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[1293]=true,[1294]=true},[\"x\"]=-102.892,[\"y\"]=-1.52,[\"z\"]=4.044},{[\"ids\"]={[1294]=true},[\"x\"]=-98.497,[\"y\"]=-2.382,[\"z\"]=19.883}}},[1267]={[\"name\"]=\"The Sunken Temple of Qarn\",[\"sync\"]=37,[\"bosses\"]={[1567]={[\"name\"]=\"Teratotaur\",[\"anchors\"]={[42231]=5.171},[\"kill\"]=81.7,[\"movement\"]={},[\"center\"]={-70.0,-60.0},[\"downtime\"]={}},[1569]={[\"name\"]=\"Temple Guardian\",[\"anchors\"]={[42234]=5.219},[\"kill\"]=31.9,[\"movement\"]={},[\"center\"]={50.0,-10.0},[\"downtime\"]={}},[1570]={[\"name\"]=\"Adjudicator\",[\"anchors\"]={[42245]=5.195},[\"kill\"]=nil,[\"movement\"]={{72.13,74.06},{77.89,79.69},{95.61,97.52}},[\"center\"]={238.0,0.0},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[1573]=true},[\"x\"]=-131.456,[\"y\"]=-17.588,[\"z\"]=-14.603},{[\"ids\"]={[1572]=true},[\"x\"]=8.987,[\"y\"]=-18.678,[\"z\"]=-15.0},{[\"ids\"]={[1580]=true},[\"x\"]=186.816,[\"y\"]=-4.0,[\"z\"]=-0.015}}},[1303]={[\"name\"]=\"Cutter's Cry\",[\"sync\"]=40,[\"bosses\"]={[1585]={[\"name\"]=\"Myrmidon Princess\",[\"anchors\"]={[44226]=6.156},[\"kill\"]=37.0,[\"movement\"]={{24.6,26.4}},[\"center\"]=nil,[\"downtime\"]={}},[1590]={[\"name\"]=\"Chimera\",[\"anchors\"]={[44243]=12.797},[\"kill\"]=59.6,[\"movement\"]={},[\"center\"]={-170.0,-200.0},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[1601]=true},[\"x\"]=-175,[\"y\"]=0,[\"z\"]=-136}}},[1042]={[\"name\"]=\"The Stone Vigil\",[\"sync\"]=43,[\"bosses\"]={[1677]={[\"name\"]=\"Chudo-Yudo\",[\"anchors\"]={[902]=6.453},[\"kill\"]=87.2,[\"movement\"]={},[\"center\"]={0.0,115.0},[\"downtime\"]={}},[1678]={[\"name\"]=\"Koshchei\",[\"anchors\"]={[28732]=5.141},[\"kill\"]=nil,[\"movement\"]={},[\"center\"]={40.0,-80.0},[\"downtime\"]={}},[1680]={[\"name\"]=\"Isgebind\",[\"anchors\"]={[1025]=8.235},[\"kill\"]=123.7,[\"movement\"]={},[\"center\"]={0.0,-248.0},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[114]=true},[\"x\"]=5.203,[\"y\"]=0.0,[\"z\"]=-53.452},{[\"ids\"]={[114]=true,[1675]=true},[\"x\"]=-0.32,[\"y\"]=0.0,[\"z\"]=-187.121}}},[1330]={[\"name\"]=\"Dzemael Darkhold\",[\"sync\"]=46,[\"bosses\"]={[1397]={[\"name\"]=\"All-seeing Eye\",[\"anchors\"]={[45570]=6.328},[\"kill\"]=nil,[\"movement\"]={{109.17,110.97}},[\"center\"]={48.0,78.0},[\"downtime\"]={}},[1415]={[\"name\"]=\"Taulurd\",[\"anchors\"]={[45572]=6.172},[\"kill\"]=103.5,[\"movement\"]={},[\"center\"]={-96.0,-27.0},[\"downtime\"]={}},[1396]={[\"name\"]=\"Batraal\",[\"anchors\"]={[45579]=6.094},[\"kill\"]=143.1,[\"movement\"]={},[\"center\"]={85.0,-175.0},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[1656]=true,[2152]=true},[\"x\"]=119.798,[\"y\"]=-14.0,[\"z\"]=127.214},{[\"ids\"]={[1652]=true,[1654]=true,[1656]=true,[2154]=true},[\"x\"]=-145.647,[\"y\"]=-25.022,[\"z\"]=32.609},{[\"ids\"]={[1652]=true,[2154]=true},[\"x\"]=22.469,[\"y\"]=-21.026,[\"z\"]=-114.238},{[\"ids\"]={[1652]=true,[1654]=true,[2152]=true},[\"x\"]=13.321,[\"y\"]=-16.266,[\"z\"]=-151.293}}},[1331]={[\"name\"]=\"The Aurum Vale\",[\"sync\"]=49,[\"bosses\"]={[1534]={[\"name\"]=\"Locksmith\",[\"anchors\"]={[45742]=6.15},[\"kill\"]=71.9,[\"movement\"]={},[\"center\"]={29,4},[\"downtime\"]={}},[1533]={[\"name\"]=\"Coincounter\",[\"anchors\"]={[45745]=6.195},[\"kill\"]=71.5,[\"movement\"]={},[\"center\"]={-149,-139},[\"downtime\"]={}},[1532]={[\"name\"]=\"Miser's Mistress\",[\"anchors\"]={[45997]=6.562},[\"kill\"]=123.4,[\"movement\"]={{106.24,108.04}},[\"center\"]={-409,-124},[\"downtime\"]={}}},[\"pools\"]={{[\"ids\"]={[1544]=true},[\"x\"]=-116,[\"y\"]=-30,[\"z\"]=-129},{[\"ids\"]={[1536]=true,[1538]=true,[1544]=true,[1546]=true},[\"x\"]=-337,[\"y\"]=-33,[\"z\"]=-136}}}}}\n    L.lastState = previous and previous.lastState\n    LevellingDungeons=L\n    local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n    if not FolderExists(folder) then FolderCreate(folder) end\n    L.path=folder..[[LevellingDungeons.lua]]\n    local saved=FileExists(L.path) and FileLoad(L.path) or {}\n    if type(saved)~=\"table\" then saved={} end\n    L.settings={}\n    local defaults={draws=true,autoSim=true,poolFinal=true,targetBoss=true,\n        estimatedKills=true,movement=true,returnField=false}\n    local changed=false\n    for key,value in pairs(defaults) do\n        if type(saved[key])==\"boolean\" then L.settings[key]=saved[key]\n        else L.settings[key]=value;changed=true end\n    end\n    if changed then FileSave(L.path,L.settings) end\n    function L.state()\n        local p=TensorCore.mGetPlayer()\n        if not p then return end\n        local S=data.levelling_dungeons\n        if not S or S.map~=p.localmapid then\n            S={map=p.localmapid,draws={},phases={},done={},lastHold=0}\n            data.levelling_dungeons=S\n        end\n        L.lastState=S\n        return S,p\n    end\n    function L.clearDraws(S)\n        for id in pairs(S.draws) do Argus.deleteTimedShape(id) end\n        S.draws={}\n    end\n    function L.clearPhases(S)\n        -- AutoSim can discard phases at the end of combat before this reaction runs.\n        local phases = S.phases\n        S.phases = {}\n        for _, id in ipairs(phases) do\n            pcall(TensorCore.API.TensorACR.removeAutoSimPhase, id)\n        end\n    end\nlocal function shouldHoldApex(player)\n if player.job ~= 23 or not player.incombat or not player.pos then return false end\n local count, healthy = 0, false\n TensorCore.forEachEntity(\"alive,targetable,attackable\", function(id)\n  local enemy = TensorCore.mGetEntity(id)\n  if enemy and enemy.incombat and enemy.pos then\n   local dx, dz = enemy.pos.x - player.pos.x, enemy.pos.z - player.pos.z\n   if dx * dx + dz * dz <= 30 * 30 and math.abs(enemy.pos.y - player.pos.y) <= 8 then\n    count = count + 1\n    if not enemy.hp or not enemy.hp.percent or enemy.hp.percent > 8 then healthy = true end\n   end\n  end\n end)\n return count >= 1 and count <= 2 and not healthy\nend\n\n    function L.restoreApex()\n        if L.apexHeld and ACR_TensorRequiem4_Apex == false then ACR_TensorRequiem4_Apex = true end\n        L.apexHeld = nil\n    end\n    function L.cleanup()\n        L.restoreApex()\n        local S=data.levelling_dungeons or L.lastState\n        if S then L.clearDraws(S);L.clearPhases(S) end\n        data.levelling_dungeons=nil;L.lastState=nil\n    end\n    function L.phase(S,kind,a,b,value)\n        if b<=a or a>=1200 then return end\n        local id=TensorCore.API.TensorACR.addAutoSimPhase(kind,a,math.min(b,1200),value)\n        if id then S.phases[#S.phases+1]=id end\n    end\n    function L.boss(args,cid)\n        local S,p=L.state()\n        local def=L.definitions[p.localmapid].bosses[cid]\n        local expected=def.anchors[args.spellID]\n        if not expected or not p.incombat then return end\n        if S.activeBoss==cid then return end\n        local A=TensorCore.API.TensorACR\n        local ok,t=pcall(A.getAutoSimTime)\n        if not ok or type(t)~=\"number\" or t<0 then return end\n        -- The initial cast identifies the boss even where trash shares its name ID.\n        -- Later repeats must not restart a completed encounter forecast.\n        if S.done[cid] then return end\n        L.restoreApex();S.done[cid]=true;S.activeBoss=cid;S.bossEntity=args.entityID;S.pool=nil\n        if L.settings.targetBoss then\n            gStartCombat=false\n            local current=TensorCore.mGetTarget()\n            d(string.format('[Levelling targeting] boss=%s intended=%s current=%s toggle=true startCombat=false request=%s reason=%s',\n                def.name,tostring(args.entityID),tostring(current and current.id),tostring(not current or not current.attackable),current and current.attackable and \"preserve attackable target\" or \"no attackable target\"))\n            if not current or not current.attackable then\n                Player:SetTarget(args.entityID)\n                S.targetRequest={id=args.entityID,at=Now()}\n            end\n        end\n        if not L.settings.autoSim then return end\n        L.clearPhases(S)\n        -- A repeated opener or a boss chained into a trash pull does not establish time zero.\n        if math.abs(t - expected) > 3 then return end\n        local origin=math.max(0,t-expected)\n        if L.settings.estimatedKills and def.kill then\n            A.setAutoSimKillTime(math.min(1200,origin+def.kill))\n            A.addAutoSimUncertainty(t,15)\n        end\n        -- Lyssa's paired targetability changes repeat at these pull-relative times.\n        for _, window in ipairs(def.downtime) do\n            L.phase(S, 'FullDowntime', math.max(t, origin + window[1]), origin + window[2], 1)\n        end\n        -- Optional conservative dodge windows, not observed personal movement.\n        if L.settings.movement then\n            for _,w in ipairs(def.movement) do\n                if origin+w[2]>t then\n                    L.phase(S,'CasterDowntime',math.max(t,origin+w[1]),origin+w[2],1)\n                    if L.settings.returnField then L.phase(S,'GroundFieldMovement',origin+w[2],origin+w[2]+0.2,2) end\n                end\n            end\n        end\n    end\n    function L.draw(args,shapes)\n        if not L.settings.draws or args.friendly then return end\n        local shape=shapes[args.aoeID]\n        if not shape then return end\n        local ms=args.startTime+args.duration*1000-Now()\n        if ms<=0 or ms>30000 then return end\n        local S=L.state()\n        local drawer=TensorCore.getStaticDrawer(0x603333FF,2)\n        local v=shape.v\n        local id\n        if shape.kind=='Circle' then id=drawer:addTimedCircle(ms,args.x,args.y,args.z,v[1],0,false,true)\n        elseif shape.kind=='Rect' then id=drawer:addTimedRect(ms,args.x,args.y,args.z,v[1],v[2],args.heading,0,false,true)\n        elseif shape.kind=='Cone' then id=drawer:addTimedCone(ms,args.x,args.y,args.z,v[1],math.rad(v[2]),args.heading,0,false,true)\n        elseif shape.kind=='DonutCone' then id=drawer:addTimedDonutCone(ms,args.x,args.y,args.z,v[1],v[2],math.rad(v[3]),args.heading,0,false,true)\n        elseif shape.kind=='Donut' then id=drawer:addTimedDonut(ms,args.x,args.y,args.z,v[1],v[2],0,false,true) end\n        if id then S.draws[id]=Now()+ms end\n        -- Prune expired ownership without recreating the draw.\n        for owned,expiry in pairs(S.draws) do if expiry<Now() then S.draws[owned]=nil end end\n    end\n    function L.update()\n        local S,p=L.state()\n        local duty=L.definitions[p.localmapid]\n        if not duty then L.restoreApex();return end\n        gStartCombat=false\n        if AnyoneCore and AnyoneCore.Settings then\n            if AnyoneCore.Settings.DutyHelper then AnyoneCore.Settings.DutyHelper.enabled=false end\n            if AnyoneCore.Settings.PrepullHelper then AnyoneCore.Settings.PrepullHelper.enabled=false end\n        end\n        if S.targetRequest then\n            local current=TensorCore.mGetTarget()\n            if current and current.id==S.targetRequest.id then\n                d('[Levelling targeting] confirmed target='..tostring(current.id));S.targetRequest=nil\n            elseif Now()-S.targetRequest.at>1500 then\n                d('[Levelling targeting] target not confirmed; no retry outside initial request');S.targetRequest=nil\n            end\n        end\n        if not p.incombat and S.activeBoss then\n            L.clearPhases(S);S.activeBoss=nil;S.bossEntity=nil\n            -- done is combat-scoped so retries after a non-wipe reset remain possible.\n            S.done={}\n        end\n        local syncedLevel = math.min(p.level, duty.sync)\n        if not L.settings.autoSim or not L.settings.poolFinal or S.activeBoss then L.restoreApex();S.pool=nil;return end\n        local target=TensorCore.mGetTarget()\n        if target then\n            local boss=duty.bosses[target.contentid]\n            if boss and boss.center and (p.pos.x-boss.center[1])^2+(p.pos.z-boss.center[2])^2<30^2 then L.restoreApex();S.pool=nil;return end\n        end\n        -- Apollyon's final pull starts with Pumas up the approach, before the\n        -- party reaches the Maip. Arm the hold before the first enemy is hit.\n        local pos = p.pos\n        local apollyonApproach = p.localmapid == 1167\n            and pos.x >= -116 and pos.x <= -23 and pos.z >= 270 and pos.z <= 350\n            and pos.y > -117 and pos.y < -108\n        if apollyonApproach then\n            S.poolSeenAt = Now()\n        end\n        if target and target.incombat then\n            local region\n            for _,r in ipairs(duty.pools) do\n                if r.ids[target.contentid] and (p.pos.x-r.x)^2+(p.pos.z-r.z)^2<30^2 and math.abs(p.pos.y-r.y)<12 then region=r;break end\n            end\n            if region then S.pool=region;S.poolSeenAt=Now()\n            elseif S.pool and (p.pos.x-S.pool.x)^2+(p.pos.z-S.pool.z)^2>60^2 then S.pool=nil end\n        end\n        -- Keep the reservation during the short walk between the final pack and boss.\n        -- Renew short holds; turning the option off or detecting the boss releases within 750ms.\n        if S.pool and not p.incombat and Now()-S.poolSeenAt>8000 then S.pool=nil end\n        if S.pool and (ACR_TensorRequiem4_Apex == true or L.apexHeld) and shouldHoldApex(p) then\n            L.apexHeld = true\n            ACR_TensorRequiem4_Apex = false\n        else\n            L.restoreApex()\n        end\n        if p.job == 25 and (S.pool or apollyonApproach) and Now()-S.lastHold>=250 then\n            local A=TensorCore.API.TensorACR\n            local now = Now()\n            local leyLines\n            if syncedLevel >= 52 then leyLines = A.holdActionUntil(3573, now + 750, 1) end\n            local manafont = A.holdActionUntil(158, now + 750, 1)\n            if apollyonApproach and not S.apollyonHoldLogged then\n                d(string.format(\"[Ihuykatumu] Apollyon final-pack hold: Ley Lines=%s Manafont=%s\",\n                    tostring(leyLines), tostring(manafont)))\n                S.apollyonHoldLogged = true\n            end\n            S.lastHold = now\n        end\n    end\nend\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -43,7 +43,7 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "return LevellingDungeons == nil or LevellingDungeons.version ~= 11",
+						conditionLua = "return LevellingDungeons == nil or LevellingDungeons.version ~= 13",
 						dequeueIfLuaFalse = true,
 						name = "Relevant mechanic",
 						uuid = "44512213-6c6f-b434-9e80-82da2348a964",
@@ -127,7 +127,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local L=LevellingDungeons\nlocal p=TensorCore.mGetPlayer()\nif p.incombat then\n local ok,t=pcall(TensorCore.API.TensorACR.getAutoSimTime)\n if ok and type(t)==\"number\" and t>20 then self.used=true;return end\nend\nlocal visible=GUI:Begin(\"Levelling dungeon settings\",true)\nif visible then\n GUI:Text(L.definitions[p.localmapid].name)\n local changed=false\n local function check(key,label)\n  local value,edit=GUI:Checkbox(label,L.settings[key])\n  if edit then L.settings[key]=value;changed=true end\n end\n check(\"draws\",\"Show mechanic draws\")\n check(\"autoSim\",\"Use AutoSim inputs\")\n check(\"targetBoss\",\"Select initial boss when no attackable target\")\n local syncedLevel = math.min(p.level, L.definitions[p.localmapid].sync)\n if p.job==25 and syncedLevel>=30 then\n  check(\"poolFinal\", syncedLevel>=52 and \"Reserve Ley Lines and Manafont on final trash\" or \"Reserve Manafont on final trash\")\n end\n check(\"estimatedKills\",\"Use sampled boss kill estimates\")\n check(\"movement\",\"Forecast conservative dodge windows\")\n if L.settings.movement then check(\"returnField\",\"Assume return to ground field after each dodge\") end\n GUI:TextWrapped(\"Kill estimates and dodge windows are optional. Forecast changes apply to the next boss. No countdown is required.\")\n if changed then FileSave(L.path,L.settings) end\nend\nGUI:End()\nself.used=true",
+						actionLua = "local L=LevellingDungeons\nlocal p=TensorCore.mGetPlayer()\nif p.incombat then\n local ok,t=pcall(TensorCore.API.TensorACR.getAutoSimTime)\n -- Live hold status remains visible during combat.\nend\nlocal visible=GUI:Begin(\"Levelling dungeon settings\",true)\nif visible then\n GUI:Text(L.definitions[p.localmapid].name)\n local changed=false\n local function check(key,label)\n  local value,edit=GUI:Checkbox(label,L.settings[key])\n  if edit then L.settings[key]=value;changed=true end\n end\n check(\"draws\",\"Show mechanic draws\")\n check(\"autoSim\",\"Use AutoSim inputs\")\n check(\"targetBoss\",\"Select initial boss when no attackable target\")\n local syncedLevel = math.min(p.level, L.definitions[p.localmapid].sync)\n check(\"poolFinal\",\"Reserve offensive cooldowns on final trash (all jobs)\")\n check(\"estimatedKills\",\"Use sampled boss kill estimates\")\n check(\"movement\",\"Forecast conservative dodge windows\")\n if L.settings.movement then check(\"returnField\",\"Assume return to ground field after each dodge\") end\n GUI:TextWrapped(\"Kill estimates and dodge windows are optional. Forecast changes apply to the next boss. No countdown is required.\")\n if changed then FileSave(L.path,L.settings) end\n do\n local h=DungeonProfilePooling\n if h then\nlocal key=\"levelling_dungeons\"\nDungeonHoldDisplays=DungeonHoldDisplays or {}\nlocal c=DungeonHoldDisplays[key]\nif not c then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..key..[[.Safety.lua]]\n c=FileExists(path) and FileLoad(path) or {}\n if type(c)~=\"table\" then c={} end\n if type(c.showHoldStatus)~=\"boolean\" then c.showHoldStatus=true end\n if type(c.shortLivedAdds)~=\"boolean\" then c.shortLivedAdds=true end\n c.path=path;DungeonHoldDisplays[key]=c\nend\n GUI:Separator()\n GUI:Text(\"Dungeon holds\")\n local value,changed=GUI:Checkbox(\"Show hold reason\",c.showHoldStatus)\n if changed then c.showHoldStatus=value end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Shows only holds owned by this dungeon controller. It does not describe holds from other profiles.\") end\n local v,edit=GUI:Checkbox(\"Avoid long BLM casts on dying adds\",c.shortLivedAdds)\n if edit then c.shortLivedAdds=v end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Uses the target's lifetime estimate; lets an existing cast finish. Does not change targets or block healing.\") end\n if changed or edit then\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  FileSave(c.path,{showHoldStatus=c.showHoldStatus,shortLivedAdds=c.shortLivedAdds})\n end\n if c.showHoldStatus then GUI:TextWrapped(h.status or h.reason or \"No dungeon cooldown hold\") end\n end\n end\n\nend\nGUI:End()\nself.used=true",
 						conditions = 
 						{
 							
@@ -8366,6 +8366,1565 @@ local tbl =
 			eventType = 18,
 			name = "Incoming attacks",
 			uuid = "a272e10a-a0d6-120c-87de-5489eb71e93f",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "The Tam-Tara Deepcroft",
+			uuid = "da314856-9973-fc26-a3f2-3cbefadb7d59",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tam-Tara Deepcroft",
+			name = "Galvanth the Dominator",
+			uuid = "83c68736-efff-12e6-b5fb-c20b276bc759",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tam-Tara Deepcroft/Galvanth the Dominator",
+			name = "AutoSim",
+			uuid = "5328580f-80b2-9c7e-9589-9d44eac97005",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "LevellingDungeons.boss(eventArgs,73)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"b04334e1-da12-090e-9ff1-d5ad8ed990ed",
+								true,
+							},
+							
+							{
+								"b204ea7a-4a69-6331-a996-112f48b3b95e",
+								true,
+							},
+						},
+						name = "Boss forecast and initial target",
+						uuid = "6e4da1e7-ea5a-2466-89fb-7f9841954bd6",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 1037,
+						name = "Duty 1037",
+						uuid = "b04334e1-da12-090e-9ff1-d5ad8ed990ed",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return LevellingDungeons ~= nil and LevellingDungeons.definitions[1037] ~= nil and eventArgs.entityContentID == 73 and eventArgs.spellID == 971",
+						dequeueIfLuaFalse = true,
+						name = "Relevant mechanic",
+						uuid = "b204ea7a-4a69-6331-a996-112f48b3b95e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tam-Tara Deepcroft/Galvanth the Dominator/AutoSim",
+			eventType = 3,
+			name = "Boss forecast and initial target",
+			uuid = "9da2efff-fb8c-23aa-81f0-c6456f83e3e1",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tam-Tara Deepcroft/Galvanth the Dominator",
+			name = "Draws",
+			uuid = "be999b26-d766-6178-a47b-0887a43de67c",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "LevellingDungeons.draw(eventArgs,{[987]={kind='Circle',v={9.95}}})\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"afa544ba-cbb3-0b0c-952f-1c460fdcafe5",
+								true,
+							},
+							
+							{
+								"d843c942-0af2-d34c-a17a-42efa42e946e",
+								true,
+							},
+						},
+						name = "Incoming attacks",
+						uuid = "3a3d4bc3-4744-e0b3-8a43-45e70071b79b",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 1037,
+						name = "Duty 1037",
+						uuid = "afa544ba-cbb3-0b0c-952f-1c460fdcafe5",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return LevellingDungeons ~= nil and LevellingDungeons.settings.draws and eventArgs.aoeID == 987",
+						dequeueIfLuaFalse = true,
+						name = "Relevant mechanic",
+						uuid = "d843c942-0af2-d34c-a17a-42efa42e946e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tam-Tara Deepcroft/Galvanth the Dominator/Draws",
+			eventType = 18,
+			name = "Incoming attacks",
+			uuid = "37c35437-88e4-9844-b8c8-19d13fb6f111",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "AnyoneCore.addTimedWorldTextOnEnt(3500,\"Kill imp\",eventArgs.entityID,0xFF66FF66,true,1.2,1.5)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"a2a1fecf-b13a-836e-9603-c9faff362d42",
+								true,
+							},
+							
+							{
+								"6a8e133e-2986-0408-9880-f838fae48e3a",
+								true,
+							},
+						},
+						name = "Mark spawned imps",
+						uuid = "7de65865-09e9-fe4f-b796-926c46d1b5f5",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 1037,
+						name = "Duty 1037",
+						uuid = "a2a1fecf-b13a-836e-9603-c9faff362d42",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return LevellingDungeons ~= nil and LevellingDungeons.settings.draws and AnyoneCore ~= nil and AnyoneCore.addTimedWorldTextOnEnt ~= nil and eventArgs.entityContentID == 456 and eventArgs.isTargetable == true",
+						dequeueIfLuaFalse = true,
+						name = "Relevant mechanic",
+						uuid = "6a8e133e-2986-0408-9880-f838fae48e3a",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tam-Tara Deepcroft/Galvanth the Dominator/Draws",
+			eventType = 26,
+			name = "Mark spawned imps",
+			uuid = "b1c250ac-bbfd-8371-a639-8d149d93f93f",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tam-Tara Deepcroft",
+			name = "Void Soulcounter",
+			uuid = "c3a10143-33e0-50ed-bb98-cef0dd00d59c",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tam-Tara Deepcroft/Void Soulcounter",
+			name = "Draws",
+			uuid = "893003ec-ac7c-d2e4-b223-9cdef2411092",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "LevellingDungeons.draw(eventArgs,{[912]={kind='Cone',v={7,90}}})\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"18f73405-680e-4a32-a97a-a89bbe6f13f8",
+								true,
+							},
+							
+							{
+								"4c069750-a53a-2138-8859-f848fb15ee17",
+								true,
+							},
+						},
+						name = "Incoming attacks",
+						uuid = "c08e7c57-43ca-7362-be5d-eafa5a39c69d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 1037,
+						name = "Duty 1037",
+						uuid = "18f73405-680e-4a32-a97a-a89bbe6f13f8",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return LevellingDungeons ~= nil and LevellingDungeons.settings.draws and eventArgs.aoeID == 912",
+						dequeueIfLuaFalse = true,
+						name = "Relevant mechanic",
+						uuid = "4c069750-a53a-2138-8859-f848fb15ee17",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tam-Tara Deepcroft/Void Soulcounter/Draws",
+			eventType = 18,
+			name = "Incoming attacks",
+			uuid = "e3b884db-1cda-9cfc-9514-49d1b3c8fd00",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "The Tower of Babil",
+			uuid = "c845ab72-89ce-1870-836d-12eb7f15ac41",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower of Babil",
+			name = "Barnabas",
+			uuid = "1b41ccfb-6acd-8101-a172-0c74f2ddb9cf",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower of Babil/Barnabas",
+			name = "AutoSim",
+			uuid = "6041f32b-5e1e-4e01-aa71-c7232372a2a7",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "LevellingDungeons.boss(eventArgs, 10279)\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"1d7fe9a8-8cbe-442e-83d6-bb60761b62d3",
+								true,
+							},
+							
+							{
+								"1d842762-778d-b24c-a944-378f22600330",
+								true,
+							},
+						},
+						name = "Boss forecast and initial target",
+						uuid = "d6f5cba8-a669-acfe-8b78-8b7286564457",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 969,
+						name = "Duty 969",
+						uuid = "1d7fe9a8-8cbe-442e-83d6-bb60761b62d3",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return LevellingDungeons ~= nil and eventArgs.entityContentID == 10279 and (eventArgs.spellID == 25159 or eventArgs.spellID == 25322)",
+						dequeueIfLuaFalse = true,
+						name = "Relevant mechanic",
+						uuid = "1d842762-778d-b24c-a944-378f22600330",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower of Babil/Barnabas/AutoSim",
+			eventType = 3,
+			name = "Boss forecast and initial target",
+			uuid = "f4768331-b569-21eb-ba56-b9a29e2d76a5",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower of Babil/Barnabas",
+			name = "Draws",
+			uuid = "5c6275ed-2468-d4f2-b794-47f888786999",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "LevellingDungeons.draw(eventArgs, {[25159]={[\"kind\"]=\"Rect\",[\"v\"]={40,6}},[25322]={[\"kind\"]=\"Rect\",[\"v\"]={40,6}},[25327]={[\"kind\"]=\"Rect\",[\"v\"]={40,6}},[25329]={[\"kind\"]=\"Circle\",[\"v\"]={8}},[25323]={[\"kind\"]=\"Circle\",[\"v\"]={8}},[25330]={[\"kind\"]=\"Circle\",[\"v\"]={8}}})\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"039936d3-cd0b-56d1-bdc5-d8d8d925bc85",
+								true,
+							},
+							
+							{
+								"77276e0e-f799-614c-8e98-666950a760c9",
+								true,
+							},
+						},
+						name = "Incoming attacks",
+						uuid = "7293daf5-978c-2b2c-8ac7-27f4bd2b1963",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 969,
+						name = "Duty 969",
+						uuid = "039936d3-cd0b-56d1-bdc5-d8d8d925bc85",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return LevellingDungeons ~= nil and LevellingDungeons.settings.draws and (eventArgs.aoeID == 25159 or eventArgs.aoeID == 25322 or eventArgs.aoeID == 25327 or eventArgs.aoeID == 25329 or eventArgs.aoeID == 25323 or eventArgs.aoeID == 25330)",
+						dequeueIfLuaFalse = true,
+						name = "Relevant mechanic",
+						uuid = "77276e0e-f799-614c-8e98-666950a760c9",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower of Babil/Barnabas/Draws",
+			eventType = 18,
+			name = "Incoming attacks",
+			uuid = "39cb8978-7f7c-fd4e-8f77-4c4784314b50",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local state = LevellingDungeons.state()\nstate.babilPole = eventArgs.markerID\nstate.babilPoleAt = Now()\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"92c1ece7-8187-2c61-9e44-d701ac6e870b",
+								true,
+							},
+							
+							{
+								"b04ff055-c48a-d2ae-81a0-60f58a17d0a1",
+								true,
+							},
+						},
+						name = "Read personal polarity",
+						uuid = "5744ba79-7dff-0768-a02e-38f82af00a6f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 969,
+						name = "Duty 969",
+						uuid = "92c1ece7-8187-2c61-9e44-d701ac6e870b",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not LevellingDungeons or not LevellingDungeons.settings.draws then return false end\nlocal p = TensorCore.mGetPlayer()\nreturn p ~= nil and eventArgs.entityID == p.id and (eventArgs.markerID == 162 or eventArgs.markerID == 163)",
+						dequeueIfLuaFalse = true,
+						name = "Relevant mechanic",
+						uuid = "b04ff055-c48a-d2ae-81a0-60f58a17d0a1",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower of Babil/Barnabas/Draws",
+			eventType = 4,
+			name = "Read personal polarity",
+			uuid = "0a73dc54-c3c8-ff42-abe1-3dccab3c3b6f",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e = eventArgs\nlocal state = LevellingDungeons.state()\nlocal plus = e.spellID == 25326 or e.spellID == 25328\nstate.babilMagnet = { pole = plus and 162 or 163, line = e.spellID == 25157 or e.spellID == 25326,\n    started = Now(), boss = e.entityID }\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"b41feb0f-f1db-6073-ac7b-b04a71f2b9e2",
+								true,
+							},
+							
+							{
+								"0c0a8790-1769-2e08-9f10-c808f5103853",
+								true,
+							},
+						},
+						name = "Read Dynamic Pound or Scrapline",
+						uuid = "1bfd68e3-8c4a-246a-8828-92595b21ef3c",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 969,
+						name = "Duty 969",
+						uuid = "b41feb0f-f1db-6073-ac7b-b04a71f2b9e2",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not LevellingDungeons or not LevellingDungeons.settings.draws then return false end\nlocal e = eventArgs\nreturn e.entityContentID == 10279 and (e.spellID == 25157 or e.spellID == 25326 or e.spellID == 25158 or e.spellID == 25328)",
+						dequeueIfLuaFalse = true,
+						name = "Relevant mechanic",
+						uuid = "0c0a8790-1769-2e08-9f10-c808f5103853",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower of Babil/Barnabas/Draws",
+			eventType = 3,
+			name = "Read Dynamic Pound or Scrapline",
+			uuid = "e9db94c7-c982-2ecd-a8c3-8afdaf7b7814",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e = eventArgs\nlocal state = LevellingDungeons.state()\nstate.babilRelease = { x=e.x, y=e.y, z=e.z, heading=e.heading, started=Now(),\n    line=e.aoeID==25327, finish=e.startTime+e.duration*1000 }\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"6ae322f2-9ea3-a5d0-a937-4756faffd821",
+								true,
+							},
+							
+							{
+								"929263ca-98e4-e601-895d-66c2e43b08d4",
+								true,
+							},
+						},
+						name = "Read magnetic hazard origin",
+						uuid = "95dac05b-7257-53ed-b484-aa6bc7876128",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 969,
+						name = "Duty 969",
+						uuid = "6ae322f2-9ea3-a5d0-a937-4756faffd821",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not LevellingDungeons or not LevellingDungeons.settings.draws then return false end\nreturn eventArgs.contentID == 10279 and (eventArgs.aoeID == 25327 or eventArgs.aoeID == 25329)",
+						dequeueIfLuaFalse = true,
+						name = "Relevant mechanic",
+						uuid = "929263ca-98e4-e601-895d-66c2e43b08d4",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower of Babil/Barnabas/Draws",
+			eventType = 18,
+			name = "Read magnetic hazard origin",
+			uuid = "5ff219e2-4042-7250-8734-0277ea8621dc",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local state, p = LevellingDungeons.state()\nlocal m, e = state.babilMagnet, state.babilRelease\nlocal repel = state.babilPole == m.pole\nlocal x, z\nif m.line then\n    -- Keep the landing inside the arena and outside the six-yalm lane.\n    local nx, nz = math.cos(e.heading), -math.sin(e.heading)\n    local side = ((p.pos.x-e.x)*nx + (p.pos.z-e.z)*nz) >= 0 and 1 or -1\n    local offset = (repel and 4.5 or 13.2) * side\n    x, z = e.x + math.sin(e.heading)*19 + nx*offset, e.z + math.cos(e.heading)*19 + nz*offset\nelse\n    local dx, dz = p.pos.x-e.x, p.pos.z-e.z\n    local length = math.sqrt(dx*dx + dz*dz)\n    if length < 0.1 then dx, dz, length = 0, 1, 1 end\n    local radius = repel and 6 or 14\n    x, z = e.x + dx/length*radius, e.z + dz/length*radius\nend\nlocal finish = math.min(m.started+8000,e.finish)\nlocal ms = math.min(260,finish-Now())\nlocal destination = {x=x,y=p.pos.y,z=z}\nif ms > 0 then\n    local drawer = TensorCore.getStaticDrawer(0x9033FF33,2)\n    drawer:addTimedCircle(ms,x,p.pos.y,z,0.9,0,false,true)\n    local distance = TensorCore.getDistance2d(p.pos,destination)\n    if distance > 0.9 then\n        local tip = math.min(1.2,distance*0.4)\n        drawer:addTimedArrow(ms,p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,destination),distance-tip,0.45,tip,1,0,false)\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"d4cb3131-c269-01d7-a900-625628324bf5",
+								true,
+							},
+							
+							{
+								"abb677f6-1b7c-2b8c-9d5e-ccb81b49e4e3",
+								true,
+							},
+						},
+						name = "Guide personal polarity positioning",
+						uuid = "e86d2d56-d31b-8066-b094-b00a33d68765",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 969,
+						name = "Duty 969",
+						uuid = "d4cb3131-c269-01d7-a900-625628324bf5",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not LevellingDungeons or not LevellingDungeons.settings.draws then return false end\nlocal s = data.levelling_dungeons\nlocal p = TensorCore.mGetPlayer()\nif not s or s.map ~= 969 or not p or not p.incombat or not p.alive then return false end\nlocal m, e = s.babilMagnet, s.babilRelease\nreturn m ~= nil and e ~= nil and s.babilPoleAt ~= nil and m.line == e.line\n    and math.abs(s.babilPoleAt-m.started)<1500 and math.abs(e.started-m.started)<1500\n    and Now() < math.min(m.started+8000,e.finish)",
+						dequeueIfLuaFalse = true,
+						name = "Relevant mechanic",
+						uuid = "abb677f6-1b7c-2b8c-9d5e-ccb81b49e4e3",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower of Babil/Barnabas/Draws",
+			name = "Guide personal polarity positioning",
+			throttleTime = 250,
+			uuid = "4db0d720-1aab-d2c2-9f28-2fa8bd78875d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower of Babil",
+			name = "Lugae",
+			uuid = "23ef159b-247a-ee9d-a631-701753d46af6",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower of Babil/Lugae",
+			name = "AutoSim",
+			uuid = "255579a8-81d7-bb21-9ed2-c8f8e3d94cea",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "LevellingDungeons.boss(eventArgs, 10282)\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"ca1462f5-34ad-233f-bc6f-c50fab40b8c9",
+								true,
+							},
+							
+							{
+								"462d9790-9efe-f5a1-8adb-8f38b7684059",
+								true,
+							},
+						},
+						name = "Boss forecast and initial target",
+						uuid = "08e991d4-a658-b262-8197-2aabdf3b265c",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 969,
+						name = "Duty 969",
+						uuid = "ca1462f5-34ad-233f-bc6f-c50fab40b8c9",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return LevellingDungeons ~= nil and eventArgs.entityContentID == 10282 and (eventArgs.spellID == 25338)",
+						dequeueIfLuaFalse = true,
+						name = "Relevant mechanic",
+						uuid = "462d9790-9efe-f5a1-8adb-8f38b7684059",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower of Babil/Lugae/AutoSim",
+			eventType = 3,
+			name = "Boss forecast and initial target",
+			uuid = "120f9d2f-2b04-5293-a2de-dd1f3445614b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower of Babil/Lugae",
+			name = "Draws",
+			uuid = "1b3ffac5-3b5d-4e8d-b5d4-95e6478a9fbb",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "LevellingDungeons.draw(eventArgs, {[25332]={[\"kind\"]=\"Rect\",[\"v\"]={40,8}},[25335]={[\"kind\"]=\"Circle\",[\"v\"]={6}},[25340]={[\"kind\"]=\"Rect\",[\"v\"]={50,6}}})\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"b8cd48b3-0c2d-1602-b46a-19cebffedd5c",
+								true,
+							},
+							
+							{
+								"b9977412-9c32-19e7-9b87-d72e505fca09",
+								true,
+							},
+						},
+						name = "Incoming attacks",
+						uuid = "a93887ce-64de-a583-b1ee-e619ad2104a7",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 969,
+						name = "Duty 969",
+						uuid = "b8cd48b3-0c2d-1602-b46a-19cebffedd5c",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return LevellingDungeons ~= nil and LevellingDungeons.settings.draws and (eventArgs.aoeID == 25332 or eventArgs.aoeID == 25335 or eventArgs.aoeID == 25340)",
+						dequeueIfLuaFalse = true,
+						name = "Relevant mechanic",
+						uuid = "b9977412-9c32-19e7-9b87-d72e505fca09",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower of Babil/Lugae/Draws",
+			eventType = 18,
+			name = "Incoming attacks",
+			uuid = "5c906d6c-53ce-4880-9de6-79598f79586f",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local p = TensorCore.mGetPlayer()\nlocal water = eventArgs.spellID == 25333\nlocal status = water and 2671 or 2504\nif not TensorCore.hasBuff(p.id,status) then\n    local pos = {x=water and 213 or 229,y=1,z=306}\n    local ms = math.min(10000,eventArgs.channelTimeMax*1000+2300)\n    local drawer = TensorCore.getStaticDrawer(0x9033FF33,2)\n    drawer:addTimedCircle(ms,pos.x,pos.y,pos.z,2,0,false,true)\n    local distance = TensorCore.getDistance2d(p.pos,pos)\n    if distance > 2 then\n        drawer:addTimedArrow(ms,p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,pos),distance-1,0.45,1,1,0,false)\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"15374ff0-903c-58e2-90ea-d8a9f4a0204d",
+								true,
+							},
+							
+							{
+								"3af71229-5913-44f1-89e2-6063e8fcf0a7",
+								true,
+							},
+						},
+						name = "Guide Lugae transformation pad",
+						uuid = "f04917ac-87e8-9372-8ee9-d868b1ddb1f5",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 969,
+						name = "Duty 969",
+						uuid = "15374ff0-903c-58e2-90ea-d8a9f4a0204d",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not LevellingDungeons or not LevellingDungeons.settings.draws then return false end\nreturn eventArgs.entityContentID == 10282 and (eventArgs.spellID == 25333 or eventArgs.spellID == 25331)",
+						dequeueIfLuaFalse = true,
+						name = "Relevant mechanic",
+						uuid = "3af71229-5913-44f1-89e2-6063e8fcf0a7",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower of Babil/Lugae/Draws",
+			eventType = 3,
+			name = "Guide Lugae transformation pad",
+			uuid = "977b2346-789a-71b9-807c-91f1b87419c2",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower of Babil",
+			name = "Anima",
+			uuid = "ed80dd38-9815-490f-9f44-05ad4ac15a20",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower of Babil/Anima",
+			name = "AutoSim",
+			uuid = "27c62031-442d-fbea-ba04-5125589941bd",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "LevellingDungeons.boss(eventArgs, 10285)\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"fa686840-b1fa-2e97-8e6e-f0f4dd6047af",
+								true,
+							},
+							
+							{
+								"3f47530e-4715-1845-802c-8b776e9fc43f",
+								true,
+							},
+						},
+						name = "Boss forecast and initial target",
+						uuid = "dd2628a1-639e-0006-863f-fbda8edd67e8",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 969,
+						name = "Duty 969",
+						uuid = "fa686840-b1fa-2e97-8e6e-f0f4dd6047af",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return LevellingDungeons ~= nil and eventArgs.entityContentID == 10285 and (eventArgs.spellID == 25342)",
+						dequeueIfLuaFalse = true,
+						name = "Relevant mechanic",
+						uuid = "3f47530e-4715-1845-802c-8b776e9fc43f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower of Babil/Anima/AutoSim",
+			eventType = 3,
+			name = "Boss forecast and initial target",
+			uuid = "6e5a0a7c-262d-346b-8099-31d0cdfba7ba",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower of Babil/Anima",
+			name = "Draws",
+			uuid = "df098c9e-9269-7952-ab55-533f178f7b1a",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "LevellingDungeons.draw(eventArgs, {[25343]={[\"kind\"]=\"Rect\",[\"v\"]={20,20}},[24168]={[\"kind\"]=\"Rect\",[\"v\"]={60,8}},[25357]={[\"kind\"]=\"Rect\",[\"v\"]={40,5}},[25358]={[\"kind\"]=\"Circle\",[\"v\"]={3}},[25352]={[\"kind\"]=\"Circle\",[\"v\"]={6}},[25356]={[\"kind\"]=\"Circle\",[\"v\"]={3}}})\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"84774c53-06f1-5528-bc65-91888aa52193",
+								true,
+							},
+							
+							{
+								"5980d9e1-a4a6-6efd-a5dd-9def5501a75f",
+								true,
+							},
+						},
+						name = "Incoming attacks",
+						uuid = "803c2026-35d2-25f4-9ab4-76ddf4ccb7e3",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 969,
+						name = "Duty 969",
+						uuid = "84774c53-06f1-5528-bc65-91888aa52193",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return LevellingDungeons ~= nil and LevellingDungeons.settings.draws and (eventArgs.aoeID == 25343 or eventArgs.aoeID == 24168 or eventArgs.aoeID == 25357 or eventArgs.aoeID == 25358 or eventArgs.aoeID == 25352 or eventArgs.aoeID == 25356)",
+						dequeueIfLuaFalse = true,
+						name = "Relevant mechanic",
+						uuid = "5980d9e1-a4a6-6efd-a5dd-9def5501a75f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower of Babil/Anima/Draws",
+			eventType = 18,
+			name = "Incoming attacks",
+			uuid = "3ecc0302-9240-9fe5-9320-3736e6d7e7c4",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "Shared dungeon controls",
+			uuid = "a131f32d-11ce-d456-9c09-de139e7e9045",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "-- Reuses dungeon lol's all-job CD pooling and owned restoration.\nif not DungeonProfilePooling then\n    local pooling = { held = {}, lateHP = 8 }\n    local path = GetLuaModsPath() .. [[TensorReactions\\Settings\\DungeonAutoSim.Shared.lua]]\n    if FileExists(path) then\n        local saved = FileLoad(path)\n        if type(saved) == \"table\" and type(saved.lateHP) == \"number\" then\n            pooling.lateHP = math.max(0, math.min(20, saved.lateHP))\n        end\n    end\n    function pooling.release()\n        for variable, prior in pairs(pooling.held) do\n            if _G[variable] == false then _G[variable] = prior end\n        end\n        pooling.held = {}\n        pooling.variables = nil\n        if pooling.apexHeld and ACR_TensorRequiem4_Apex == false then\n            ACR_TensorRequiem4_Apex = true\n        end\n        pooling.apexHeld = nil\n        if pooling.smartDotHeld and ACR_TensorRequiem4_SmartDoT == false then\n            ACR_TensorRequiem4_SmartDoT = true\n        end\n        pooling.smartDotHeld = nil\n        pooling.active = false\n    end\n    pooling.maps = {\n        [1164] = {config=\"LunarSubterraneAutoSimConfig\", state=\"lunar_subterrane_autosim\", flag=\"lunar_final_trash\", level=90, bosses={[12500]=true,[12484]=true,[12584]=true}},\n        [189] = {config=\"AmdaporHardAutoSimConfig\", state=\"amdaporhard_autosim\", flag=\"amdaporhard_final_trash\", level=50, bosses={[3272]=true,[3274]=true,[3275]=true}},\n        [1174] = {config=\"GhimlytAutoSimConfig\", state=\"ghimlyt_autosim\", flag=\"ghimlyt_final_trash\", level=70, bosses={[7855]=true,[7856]=true,[7857]=true,[7858]=true}},\n        [1126] = {config=\"AetherfontAutoSimConfig\", state=\"aetherfont_autosim\", flag=\"aetherfont_final_trash\", level=90, bosses={[12336]=true,[12337]=true,[12334]=true}}\n    }\n    DungeonProfilePooling = pooling\nend\nlocal mode = \"levelling\"\nlocal pooling = DungeonProfilePooling\nlocal player = TensorCore.mGetPlayer()\nif not player then pooling.release(); self.used = true; return end\nif pooling.job ~= player.job then\n    pooling.release()\n    pooling.job = player.job\nend\nlocal spec = mode == \"high\" and pooling.maps[player.localmapid]\nlocal config = spec and _G[spec.config]\nlocal state = spec and data[spec.state]\nlocal bosses = spec and spec.bosses\nlocal finalDetected = spec and data[spec.flag]\nlocal level = spec and math.min(player.level, spec.level) or player.level\nlocal levelling = LevellingDungeons\nif mode == \"levelling\" and levelling and levelling.definitions[player.localmapid] then\n    local definition = levelling.definitions[player.localmapid]\n    config = levelling.settings\n    state = data.levelling_dungeons\n    bosses = definition.bosses\n    finalDetected = state and state.pool ~= nil\n    level = math.min(player.level, definition.sync)\nend\nlocal target = TensorCore.mGetTarget()\nlocal enabled = config and (config.enabled == true or config.autoSim == true)\nlocal valid = enabled and player.incombat and player.alive and bosses ~= nil\nlocal boss = valid and target and bosses[target.contentid] and target.alive and target.attackable and target.incombat\nlocal activeBoss = state and (state.activeBoss or state.boss)\nlocal final = valid and config.poolFinal and finalDetected and (not activeBoss or activeBoss == 0) and not boss\nif DungeonAutoSimShared then pooling.lateHP = DungeonAutoSimShared.lateHP end\nlocal bardTrash = valid and player.job == 23 and not boss and (not activeBoss or activeBoss == 0)\n    and target and target.alive and target.attackable and target.incombat and not bosses[target.contentid]\nif bardTrash and ACR_TensorRequiem4_SmartDoT == true then\n    pooling.smartDotHeld = true\n    ACR_TensorRequiem4_SmartDoT = false\nelseif not bardTrash and pooling.smartDotHeld then\n    if ACR_TensorRequiem4_SmartDoT == false then ACR_TensorRequiem4_SmartDoT = true end\n    pooling.smartDotHeld = nil\nend\nlocal finalBosses={[1164]={[12584]=true},[1292]={[13974]=true},[1204]={[12763]=true},[1242]={[13610]=true},[1199]={[12729]=true},[1266]={[13749]=true},[1345]={[14758]=true},[1314]={[14288]=true},[1203]={[12709]=true},[189]={[3275]=true},[1174]={[7857]=true,[7858]=true},[1126]={[12334]=true},[969]={[10285]=true},[1037]={[73]=true},[1167]={[12711]=true},[1193]={[12705]=true},[1194]={[12728]=true},[1198]={[12752]=true},[1208]={[12695]=true},[974]={[10399]=true},[822]={[8262]=true},[1065]={[3458]=true},[1038]={[101]=true},[1245]={[1197]=true},[1039]={[444]=true},[1040]={[422]=true},[1041]={[1279]=true},[1267]={[1570]=true},[1303]={[1590]=true},[1042]={[1680]=true},[1330]={[1396]=true},[1331]={[1532]=true}}\nlocal isFinalBoss=target and finalBosses[player.localmapid] and finalBosses[player.localmapid][target.contentid] == true\nlocal engagedBoss=state and (state.activeBoss or state.boss)\nif finalBosses[player.localmapid] and engagedBoss and finalBosses[player.localmapid][engagedBoss] then isFinalBoss=true end\nif isFinalBoss then final=false;pooling.releaseReason=\"final boss engaged\";pooling.release() end\nlocal late = not isFinalBoss and valid and target and target.alive and target.attackable and target.incombat and target.hp and target.hp.max > 0 and target.hp.percent > 0 and target.hp.percent <= pooling.lateHP\nif final or late then\n    if not pooling.variables then\n        pooling.variables = {}\n        for _, option in pairs(TensorCore.API.TensorACR.getQuickToggles() or {}) do\n            if option.var and option.var:match(\"_CD$\") and type(_G[option.var]) == \"boolean\" then\n                pooling.variables[#pooling.variables + 1] = option.var\n            end\n        end\n    end\n    for _, variable in ipairs(pooling.variables) do\n        if pooling.held[variable] == nil then pooling.held[variable] = _G[variable] end\n        _G[variable] = false\n    end\n    local api = TensorCore.API.TensorACR\n    local untilMs = Now() + 750\n    if player.job == 23 and level >= 90 then\n        local accepted = api.holdActionUntil(25785, untilMs, 1)\n        local key = tostring(target and target.id)..\":\"..tostring(final)..\":\"..tostring(late)..\":\"..tostring(accepted)\n        if pooling.radiantTrace ~= key then\n            d(\"[Dungeon pooling] Radiant Finale hold accepted=\"..tostring(accepted)..\" target=\"..tostring(target and target.contentid)..\" HP=\"..tostring(target and target.hp and target.hp.percent)..\" threshold=\"..tostring(pooling.lateHP)..\" final=\"..tostring(final)..\" lowHP=\"..tostring(late))\n            pooling.radiantTrace = key\n        end\n    elseif player.job == 25 then\n        if level >= 52 then api.holdActionUntil(3573, untilMs) end\n        if level >= 30 then api.holdActionUntil(158, untilMs) end\n    end\n    if final and (player.job == 23 or player.job == 25) then\n        local count, healthy = 0, false\n        local range = player.job == 25 and 35 or 30\n        local height = player.job == 25 and 10 or 8\n        TensorCore.forEachEntity(\"alive,targetable,attackable\", function(id)\n            local enemy = TensorCore.mGetEntity(id)\n            if enemy and enemy.incombat and not bosses[enemy.contentid] and enemy.pos then\n                local dx, dz = enemy.pos.x-player.pos.x, enemy.pos.z-player.pos.z\n                if dx*dx+dz*dz <= range*range and math.abs(enemy.pos.y-player.pos.y) <= height then\n                    count = count + 1\n                    if not enemy.hp or not enemy.hp.percent or enemy.hp.percent > 8 then healthy = true end\n                end\n            end\n            return count < 4\n        end)\n        if player.job == 25 and level >= 66 and count >= 1 and count <= 3 then\n            api.holdActionUntil(7421, untilMs)\n        end\n        local apex = player.job == 23 and level >= 80 and count >= 1 and count <= 2 and not healthy\n        if apex and (ACR_TensorRequiem4_Apex == true or pooling.apexHeld) then\n            pooling.apexHeld = true\n            ACR_TensorRequiem4_Apex = false\n        elseif pooling.apexHeld then\n            if ACR_TensorRequiem4_Apex == false then ACR_TensorRequiem4_Apex = true end\n            pooling.apexHeld = nil\n        end\n    end\n    if not final and pooling.apexHeld then\n        if ACR_TensorRequiem4_Apex == false then ACR_TensorRequiem4_Apex = true end\n        pooling.apexHeld=nil\n    end\n    pooling.active = true\nelseif pooling.active then\n    pooling.release()\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"7071152c-b723-5c96-99e4-2016ec26ddf6",
+								true,
+							},
+						},
+						name = "[Dungeon pooling] All-job final trash and boss holds",
+						uuid = "b3206e5c-4d56-63a1-a342-e32fb0e44c56",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local H=DungeonProfilePooling\nif H and (H.active or H.apexHeld or H.smartDotHeld) then return true end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.incombat or not p.alive then return false end\nlocal maps={ [1164]={\"LunarSubterraneAutoSimConfig\",\"lunar_final_trash\",{[12500]=true,[12484]=true,[12584]=true}},[189]={\"AmdaporHardAutoSimConfig\",\"amdaporhard_final_trash\",{[3272]=true,[3274]=true,[3275]=true}},[1174]={\"GhimlytAutoSimConfig\",\"ghimlyt_final_trash\",{[7855]=true,[7856]=true,[7857]=true,[7858]=true}},[1126]={\"AetherfontAutoSimConfig\",\"aetherfont_final_trash\",{[12336]=true,[12337]=true,[12334]=true}} }\nlocal spec=maps[p.localmapid]\nlocal config=spec and _G[spec[1]]\nlocal bosses=spec and spec[3]\nlocal final=spec and data[spec[2]]\nlocal L=LevellingDungeons\nlocal def=L and L.definitions[p.localmapid]\nconfig=def and L.settings\nbosses=def and def.bosses\nlocal S=data.levelling_dungeons\nfinal=S and S.pool~=nil\nif not config or not (config.enabled==true or config.autoSim==true) or not bosses then return false end\nlocal t=TensorCore.mGetTarget()\nif not t or not t.alive or not t.attackable or not t.incombat then return false end\nlocal boss=bosses[t.contentid]\nif p.job==23 and not boss then return true end\nif config.poolFinal and final and not boss then return true end\nlocal finalBosses={[1164]={[12584]=true},[1292]={[13974]=true},[1204]={[12763]=true},[1242]={[13610]=true},[1199]={[12729]=true},[1266]={[13749]=true},[1345]={[14758]=true},[1314]={[14288]=true},[1203]={[12709]=true},[189]={[3275]=true},[1174]={[7857]=true,[7858]=true},[1126]={[12334]=true},[969]={[10285]=true},[1037]={[73]=true},[1167]={[12711]=true},[1193]={[12705]=true},[1194]={[12728]=true},[1198]={[12752]=true},[1208]={[12695]=true},[974]={[10399]=true},[822]={[8262]=true},[1065]={[3458]=true},[1038]={[101]=true},[1245]={[1197]=true},[1039]={[444]=true},[1040]={[422]=true},[1041]={[1279]=true},[1267]={[1570]=true},[1303]={[1590]=true},[1042]={[1680]=true},[1330]={[1396]=true},[1331]={[1532]=true}}\nif finalBosses[p.localmapid] and finalBosses[p.localmapid][t.contentid] then return false end\nreturn t.hp~=nil and t.hp.percent>0 and t.hp.percent <= (H and H.lateHP or 8)",
+						name = "Supported duty and pooling work",
+						uuid = "7071152c-b723-5c96-99e4-2016ec26ddf6",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Shared dungeon controls",
+			name = "[Dungeon pooling] All-job final trash and boss holds",
+			throttleTime = 500,
+			timeout = 2,
+			uuid = "e09f294a-fdd8-c89e-9d72-afb753231f28",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if DungeonProfilePooling then DungeonProfilePooling.release() end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"67a73efb-bead-d9fb-a221-7cb46490d26e",
+								true,
+							},
+						},
+						name = "[Dungeon pooling] Restore owned settings on Wipe",
+						uuid = "37b6d8b0-2530-c900-afc6-b38774ced9e6",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return DungeonProfilePooling ~= nil",
+						name = "Relevant state",
+						uuid = "67a73efb-bead-d9fb-a221-7cb46490d26e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Shared dungeon controls",
+			eventType = 9,
+			name = "[Dungeon pooling] Restore owned settings on Wipe",
+			timeout = 2,
+			uuid = "0df0b372-dec2-d8f9-8f9e-c5f7d7b6bccf",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if DungeonProfilePooling then DungeonProfilePooling.release() end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"0bc72a4b-d1e6-3df7-906f-3c269c9a0ae4",
+								true,
+							},
+						},
+						name = "[Dungeon pooling] Restore owned settings on MapChange",
+						uuid = "3f6ab4c0-abab-43b9-93ed-b77e8d5cb2ef",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return DungeonProfilePooling ~= nil",
+						name = "Relevant state",
+						uuid = "0bc72a4b-d1e6-3df7-906f-3c269c9a0ae4",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Shared dungeon controls",
+			eventType = 11,
+			name = "[Dungeon pooling] Restore owned settings on MapChange",
+			timeout = 2,
+			uuid = "0474ee32-5f27-cbf8-bc43-8f10c4a21126",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if DungeonProfilePooling then DungeonProfilePooling.release() end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"983cf4e7-f9a9-a84c-8d73-48d68467646e",
+								true,
+							},
+						},
+						name = "[Dungeon pooling] Restore owned settings on Death",
+						uuid = "9a873bfd-c4bc-4abb-8cc7-1197088d378a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return DungeonProfilePooling ~= nil",
+						name = "Relevant state",
+						uuid = "983cf4e7-f9a9-a84c-8d73-48d68467646e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Shared dungeon controls",
+			eventType = 10,
+			name = "[Dungeon pooling] Restore owned settings on Death",
+			timeout = 2,
+			uuid = "3b7cf251-5f28-ea2d-ae95-1f8f0a5d38a5",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local pooling = DungeonProfilePooling\nif not pooling then self.used=true;return end\nlocal player=TensorCore.mGetPlayer()\nif not player or not (LevellingDungeons and LevellingDungeons.definitions[player.localmapid]) then self.used=true;return end\nlocal visible=GUI:Begin(\"Dungeon cooldown pooling\",true)\nif visible then\n    local value,changed=GUI:SliderFloat(\"Hold cooldowns below boss HP %\",pooling.lateHP,0,20)\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Save offensive cooldowns for the next encounter. Zero disables the near-death hold. Final-pack holds use each dungeon's setting.\") end\n    if changed then\n        pooling.lateHP=value\n        if DungeonAutoSimShared then DungeonAutoSimShared.lateHP=value end\n        local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n        if not FolderExists(folder) then FolderCreate(folder) end\n        local path=folder..[[DungeonAutoSim.Shared.lua]]\n        local saved=FileExists(path) and FileLoad(path) or {}\n        if type(saved)~=\"table\" then saved={} end\n        saved.lateHP=value\n        FileSave(path,saved)\n    end\nend\nGUI:End()\nself.used=true",
+						name = "[Dungeon pooling] Shared boss HP threshold",
+						uuid = "2940ccb0-c02f-328a-bb44-5251bb21d256",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+			},
+			displayPath = "Shared dungeon controls",
+			eventType = 13,
+			name = "[Dungeon pooling] Shared boss HP threshold",
+			timeout = 2,
+			uuid = "5fb744b6-b284-798d-a8e3-0fdd28921dc9",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "DungeonHoldDisplays=DungeonHoldDisplays or {}\nif not DungeonHoldDisplays[\"levelling_dungeons\"] then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..[[levelling_dungeons.Safety.lua]]\n local c=FileExists(path) and FileLoad(path) or {}\n if type(c)~=\"table\" then c={} end\n local changed=false\n if type(c.showHoldStatus)~=\"boolean\" then c.showHoldStatus=true;changed=true end\n if type(c.shortLivedAdds)~=\"boolean\" then c.shortLivedAdds=true;changed=true end\n if changed then\n  if not FolderExists(folder) then FolderCreate(folder) end\n  FileSave(path,{showHoldStatus=c.showHoldStatus,shortLivedAdds=c.shortLivedAdds})\n end\n c.path=path;DungeonHoldDisplays[\"levelling_dungeons\"]=c\nend\nlocal p=TensorCore.mGetPlayer()\nlocal h=DungeonProfilePooling\nif not h then self.used=true;return end\nif not h.restoreAuditVersion then\n local original=h.release\n h.release=function()\n  local expected={}\n  for var,old in pairs(h.held) do if _G[var]==false then expected[var]=old end end\n  if h.apexHeld and ACR_TensorRequiem4_Apex==false then expected.ACR_TensorRequiem4_Apex=true end\n  if h.smartDotHeld and ACR_TensorRequiem4_SmartDoT==false then expected.ACR_TensorRequiem4_SmartDoT=true end\n  original()\n  local count,failed=0,0\n  for var,old in pairs(expected) do\n   count=count+1\n   if _G[var]~=old then failed=failed+1;d(\"[Dungeon restoration] VERIFY FAILED variable=\"..var) end\n  end\n  if count>0 then d(\"[Dungeon restoration] reason=\"..tostring(h.releaseReason or \"hold ended\")..\" restored=\"..count..\" failed=\"..failed) end\n  h.releaseReason=nil;h.status=nil\n end\n h.restoreAuditVersion=1\nend\nlocal finalBosses={[1164]={[12584]=true},[1292]={[13974]=true},[1204]={[12763]=true},[1242]={[13610]=true},[1199]={[12729]=true},[1266]={[13749]=true},[1345]={[14758]=true},[1314]={[14288]=true},[1203]={[12709]=true},[189]={[3275]=true},[1174]={[7857]=true,[7858]=true},[1126]={[12334]=true},[969]={[10285]=true},[1037]={[73]=true},[1167]={[12711]=true},[1193]={[12705]=true},[1194]={[12728]=true},[1198]={[12752]=true},[1208]={[12695]=true},[974]={[10399]=true},[822]={[8262]=true},[1065]={[3458]=true},[1038]={[101]=true},[1245]={[1197]=true},[1039]={[444]=true},[1040]={[422]=true},[1041]={[1279]=true},[1267]={[1570]=true},[1303]={[1590]=true},[1042]={[1680]=true},[1330]={[1396]=true},[1331]={[1532]=true}}\nlocal t=TensorCore.mGetTarget()\nlocal spec=p and h.maps[p.localmapid]\nlocal cfg=spec and _G[spec.config]\nlocal state=spec and data[spec.state]\nlocal supported=spec~=nil\nlocal L=LevellingDungeons\nif L and p and L.definitions[p.localmapid] then\n supported=true;cfg=L.settings;state=data.levelling_dungeons\nend\nlocal finalId=state and (state.activeBoss or state.boss)\nlocal finalSet=p and finalBosses[p.localmapid]\nlocal finalEngaged=p and p.incombat and finalSet and ((t and t.alive and t.incombat and finalSet[t.contentid]) or (finalId and finalSet[finalId]))\nlocal enabled=cfg and (cfg.enabled==true or cfg.autoSim==true)\nlocal reason\nif not p then reason=\"player unavailable\"\nelseif not supported then reason=\"left supported duty\"\nelseif not p.alive then reason=\"death\"\nelseif h.job and h.job~=p.job then reason=\"job changed\"\nelseif not enabled then reason=\"dungeon automation disabled\"\nelseif not p.incombat then reason=\"combat ended\"\nelseif finalEngaged then reason=\"final boss engaged\" end\nif reason then\n h.releaseReason=reason\n h.release()\n h.status=nil\nelse\n h.status=(h.active or h.reason) and ((t and t.hp and t.hp.percent<=h.lateHP) and \"Low HP: saving cooldowns\" or \"Final trash: saving cooldowns\") or nil\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"d895cbe5-e75b-333c-93dd-58880840a3b0",
+								true,
+							},
+						},
+						name = "[Dungeon safety] Restore and verify owned holds",
+						uuid = "9e90fdeb-10b4-8a6a-83ed-4052d894bac2",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local h=DungeonProfilePooling\nlocal p=TensorCore.mGetPlayer()\nif not h then return false end\nif next(h.held)~=nil or h.active==true or h.smartDotHeld==true or h.apexHeld==true then return true end\nreturn h.restoreAuditVersion==nil and p~=nil and (h.maps[p.localmapid]~=nil or (LevellingDungeons~=nil and LevellingDungeons.definitions[p.localmapid]~=nil))",
+						name = "Owned state or supported duty",
+						uuid = "d895cbe5-e75b-333c-93dd-58880840a3b0",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Shared dungeon controls",
+			name = "[Dungeon safety] Restore and verify owned holds",
+			throttleTime = 250,
+			timeout = 2,
+			uuid = "d4733bc8-f70c-15dc-b6d5-1e39685a3269",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local p=TensorCore.mGetPlayer()\nlocal h=DungeonProfilePooling\nif not p or not h then self.used=true;return end\nlocal key=\"levelling_dungeons\"\nDungeonHoldDisplays=DungeonHoldDisplays or {}\nlocal c=DungeonHoldDisplays[key]\nif not c then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..key..[[.Safety.lua]]\n c=FileExists(path) and FileLoad(path) or {}\n if type(c)~=\"table\" then c={} end\n if type(c.showHoldStatus)~=\"boolean\" then c.showHoldStatus=true end\n if type(c.shortLivedAdds)~=\"boolean\" then c.shortLivedAdds=true end\n c.path=path;DungeonHoldDisplays[key]=c\nend\nlocal visible=GUI:Begin(\"Dungeon hold status\",true)\nif visible then\n local value,changed=GUI:Checkbox(\"Show hold reason\",c.showHoldStatus)\n if changed then c.showHoldStatus=value end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Shows only holds owned by this dungeon controller. It does not describe holds from other profiles.\") end\n local v,edit=GUI:Checkbox(\"Avoid long BLM casts on dying adds\",c.shortLivedAdds)\n if edit then c.shortLivedAdds=v end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Uses the target's lifetime estimate; lets an existing cast finish. Does not change targets or block healing.\") end\n if changed or edit then\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  FileSave(c.path,{showHoldStatus=c.showHoldStatus,shortLivedAdds=c.shortLivedAdds})\n end\n if c.showHoldStatus then GUI:TextWrapped(h.status or h.reason or \"No dungeon cooldown hold\") end\nend\nGUI:End();self.used=true",
+						conditions = 
+						{
+							
+							{
+								"c1404a8c-9e76-8347-8f59-2f15831cd6a4",
+								true,
+							},
+						},
+						name = "[Dungeon safety] Hold status and safety options",
+						uuid = "87a61d34-976a-6793-9582-359c17619030",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local h=DungeonProfilePooling\nlocal p=TensorCore.mGetPlayer()\nreturn h~=nil and ((next(h.held)~=nil or h.active==true or h.smartDotHeld==true or h.apexHeld==true) or (p~=nil and h.maps[p.localmapid]~=nil) or (p~=nil and LevellingDungeons~=nil and LevellingDungeons.definitions[p.localmapid]~=nil))",
+						name = "Owned state or supported duty",
+						uuid = "c1404a8c-9e76-8347-8f59-2f15831cd6a4",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Shared dungeon controls",
+			enabled = false,
+			eventType = 13,
+			name = "[Dungeon safety] Hold status and safety options",
+			timeout = 2,
+			uuid = "59a5cff6-eb54-65fa-bb6b-21346e887bb5",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "DungeonHoldDisplays=DungeonHoldDisplays or {}\nif not DungeonHoldDisplays[\"levelling_dungeons\"] then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..[[levelling_dungeons.Safety.lua]]\n local c=FileExists(path) and FileLoad(path) or {}\n if type(c)~=\"table\" then c={} end\n local changed=false\n if type(c.showHoldStatus)~=\"boolean\" then c.showHoldStatus=true;changed=true end\n if type(c.shortLivedAdds)~=\"boolean\" then c.shortLivedAdds=true;changed=true end\n if changed then\n  if not FolderExists(folder) then FolderCreate(folder) end\n  FileSave(path,{showHoldStatus=c.showHoldStatus,shortLivedAdds=c.shortLivedAdds})\n end\n c.path=path;DungeonHoldDisplays[\"levelling_dungeons\"]=c\nend\nlocal p=TensorCore.mGetPlayer()\nlocal t=TensorCore.mGetTarget()\nlocal h=DungeonProfilePooling\nlocal c=DungeonHoldDisplays and DungeonHoldDisplays[\"levelling_dungeons\"]\nif c and c.shortLivedAdds==false then self.used=true;return end\n-- Existing casts are never cancelled or re-targeted.\nif ActionList:IsCasting() then self.used=true;return end\nif TensorCore.hasBuff(p.id,167) or TensorCore.hasBuff(p.id,1211) then self.used=true;return end\nlocal life=TensorCore.calcTimeToKill(t.id)\nif type(life)~=\"number\" or life<=0 or life>4 then self.used=true;return end\nlocal now=Now()\nlocal sample=data.dungeonShortCastSample\nif not sample or sample.id~=t.id then\n data.dungeonShortCastSample={id=t.id,at=now,life=life};self.used=true;return\nend\nif now-sample.at<500 then self.used=true;return end\nlocal count=0\nTensorCore.forEachEntity(\"alive,targetable,attackable\",function(id)\n local e=TensorCore.mGetEntity(id)\n if e and e.incombat and e.pos and math.abs(e.pos.y-p.pos.y)<10 and (e.pos.x-p.pos.x)^2+(e.pos.z-p.pos.z)^2<=35^2 then count=count+1 end\n return count<2\nend)\nlocal held=0\nfor _,id in ipairs({154,142,3576,141,147,152,3577,25794,162,16505,25795,25793}) do\n local a=ActionList:Get(1,id)\n if a and a.level<=p.level and a.casttime>=1.5 and life<a.casttime+0.25 and sample.life<a.casttime+0.25 then\n  local instantFire=id==152 and TensorCore.hasBuff(p.id,165)\n  -- Multi-target damage can still land on surviving pack members.\n  if not instantFire and (a.radius==0 or count==1) then\n   if TensorCore.API.TensorACR.holdActionUntil(id,now+350,1) then held=held+1 end\n  end\n end\nend\nlocal reason=held>0 and \"Dying add: avoiding new long BLM casts\" or nil\nif h then\n local key=reason and tostring(t.id) or \"none\"\n if h.castGuardKey~=key then\n  if reason then d(\"[Dungeon cast guard] target=\"..tostring(t.id)..\" lifetime=\"..string.format(\"%.2f\",life)..\" heldSpells=\"..held..\" existing cast preserved\") end\n  h.castGuardKey=key\n end\n h.castGuardStatus=reason;h.castGuardAt=now\nend\nsample.life=life\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"ce2e5019-20b1-b71b-bb07-2501629caae4",
+								true,
+							},
+						},
+						name = "Protect new casts only",
+						uuid = "1fcd6c01-e6c7-fcda-a426-92a9fd062e30",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.job~=25 or not p.alive or not p.incombat then return false end\nlocal h=DungeonProfilePooling\nif not h then return false end\nlocal spec=h.maps[p.localmapid]\nlocal cfg=spec and _G[spec.config]\nlocal bosses=spec and spec.bosses\nlocal L=LevellingDungeons\nlocal def=L and L.definitions[p.localmapid]\ncfg=def and L.settings;bosses=def and def.bosses\nif not cfg or not (cfg.enabled==true or cfg.autoSim==true) or not bosses then return false end\nlocal t=TensorCore.mGetTarget()\nreturn t~=nil and t.alive==true and t.attackable==true and t.incombat==true and not bosses[t.contentid]",
+						name = "BLM and live dungeon add",
+						uuid = "ce2e5019-20b1-b71b-bb07-2501629caae4",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Shared dungeon controls",
+			name = "[Dungeon safety] Avoid long casts on dying adds",
+			throttleTime = 250,
+			timeout = 0.3,
+			uuid = "6d829151-2577-8283-9965-d9a3c29c3dc5",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local h=DungeonProfilePooling\nlocal t=TensorCore.mGetTarget()\nlocal accepted=TensorCore.API.TensorACR.holdActionUntil(25785,Now()+750,1)\nlocal key=tostring(t.id)..\":\"..tostring(accepted)\nif h.finaleGuardTrace~=key then\n TensorCore.timelineLogToFile(\"[Dungeon Finale guard] accepted=\"..tostring(accepted)..\" target=\"..tostring(t.id)..\" CID=\"..tostring(t.contentid)..\" HP=\"..tostring(t.hp.percent)..\" threshold=\"..tostring(h.lateHP))\n h.finaleGuardTrace=key\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"445d41c6-937d-bd67-94e5-d6acc4296803",
+								true,
+							},
+						},
+						name = "Hold Finale and log acceptance",
+						uuid = "4950375a-db81-cc55-bda5-3fab0661de38",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.job~=23 or not p.incombat or not p.alive then return false end\nlocal h=DungeonProfilePooling\nif not h then return false end\nlocal spec=h.maps[p.localmapid]\nlocal c=spec and _G[spec.config]\nlocal L=LevellingDungeons;c=L and L.definitions[p.localmapid] and L.settings\nif not c or not (c.enabled==true or c.autoSim==true) then return false end\nlocal t=TensorCore.mGetTarget()\nif not t or not t.alive or not t.attackable or not t.incombat or not t.hp or t.hp.percent<=0 or t.hp.percent>h.lateHP then return false end\nlocal last={[1164]={[12584]=true},[1292]={[13974]=true},[1204]={[12763]=true},[1242]={[13610]=true},[1199]={[12729]=true},[1266]={[13749]=true},[1345]={[14758]=true},[1314]={[14288]=true},[1203]={[12709]=true},[189]={[3275]=true},[1174]={[7857]=true,[7858]=true},[1126]={[12334]=true},[969]={[10285]=true},[1037]={[73]=true},[1167]={[12711]=true},[1193]={[12705]=true},[1194]={[12728]=true},[1198]={[12752]=true},[1208]={[12695]=true},[974]={[10399]=true},[822]={[8262]=true},[1065]={[3458]=true},[1038]={[101]=true},[1245]={[1197]=true},[1039]={[444]=true},[1040]={[422]=true},[1041]={[1279]=true},[1267]={[1570]=true},[1303]={[1590]=true},[1042]={[1680]=true},[1330]={[1396]=true},[1331]={[1532]=true}}\nreturn not (last[p.localmapid] and last[p.localmapid][t.contentid])",
+						name = "BRD supported duty and low HP",
+						uuid = "445d41c6-937d-bd67-94e5-d6acc4296803",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Shared dungeon controls",
+			name = "[Dungeon safety] Radiant Finale low-HP guard",
+			throttleTime = 100,
+			timeout = 0.15,
+			uuid = "d9103630-0f23-8906-b17a-4f3114100687",
 			version = 2,
 		},
 	}, 
