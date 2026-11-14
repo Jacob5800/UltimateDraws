@@ -332,6 +332,76 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"adbd5640-4322-1f0f-9abe-94f1483e5828",
+									true,
+								},
+								
+								{
+									"cace214a-194c-8568-991b-98c9fccb11ed",
+									true,
+								},
+							},
+							name = "Target Fatebreaker",
+							setTarget = true,
+							targetContentID = 9707,
+							targetType = "ContentID",
+							uuid = "4f5009c4-2ba7-7157-8908-6389ae0ef5eb",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							comparator = 2,
+							eventCountdownTime = 3,
+							name = "Countdown <= 3s",
+							uuid = "adbd5640-4322-1f0f-9abe-94f1483e5828",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							eventCountdownTime = 0.05,
+							name = "Countdown > 0",
+							uuid = "cace214a-194c-8568-991b-98c9fccb11ed",
+							version = 3,
+						},
+					},
+				},
+				eventType = 16,
+				mechanicTime = 13.7,
+				name = "Prepull -3s Target Fatebreaker",
+				timeRange = true,
+				timelineIndex = 1,
+				timerEndOffset = -13.7,
+				timerStartOffset = -73.7,
+				uuid = "614d7cb9-5349-656c-ace6-bc5eb5fbc402",
+				version = 2,
+			},
+		},
 	}, 
 	[21] = 
 	{
