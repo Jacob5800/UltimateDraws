@@ -70,6 +70,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### TEA: AutoSim
 
+- Added P2 boss and Plasma Shield targeting diagnostics with observed target confirmation. Missing Cruise Chaser lookup now retries for up to five seconds while preserving active shield targeting. (15-11-2026)
+
 - Doll targeting now prioritizes the player's actual tether before cardinal assignment and the 24.9% HP cutoff, allowing tethered dolls to be selected when geometry assignment is unavailable. (15-11-2026)
 
 - Removed the older Tramadol profile download; use `[AA] Autosim - TEA.lua`. (05-11-2026)
