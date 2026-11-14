@@ -310,6 +310,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### FRU: Shared AutoSim
 
+- Disable AnyoneCore Prepull Helper when the pull countdown starts. (15-11-2026)
+
 - Checked [AA] Autosim - FRU: already eligible for Optifine users without an owned core Settings or file-I/O dependency. It exposes no separate saved preference panel; reaction-editor choices remain in the profile file. (05-11-2026)
 
 ### DSR: Shared AutoSim

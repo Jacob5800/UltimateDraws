@@ -402,6 +402,29 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				eventType = 16,
+				execute = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 1238 then return end\nif AnyoneCore and AnyoneCore.Settings and AnyoneCore.Settings.PrepullHelper then\n    AnyoneCore.Settings.PrepullHelper.enabled = false\n    self.used = true\nend",
+				executeType = 2,
+				mechanicTime = 13.7,
+				name = "[AA] Disable Prepull Helper on countdown",
+				timeRange = true,
+				timelineIndex = 1,
+				timerEndOffset = -8.7,
+				timerStartOffset = -73.7,
+				uuid = "76db605d-fe6d-79c8-b820-6468eaeb87ab",
+				version = 2,
+			},
+		},
 	}, 
 	[21] = 
 	{
@@ -541,17 +564,37 @@ local tbl =
 		},
 		
 		{
-			data =
+			data = 
 			{
-				actions =
+				displayPath = "",
+				name = "AutoSim",
+				uuid = "a1abc3f8-3fe4-0047-8e68-d2b9694ea53e",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "AutoSim",
+				name = "Reanchors",
+				uuid = "48b1b04f-15e9-2e76-b678-d6b395eda2d7",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
 				{
 					
 					{
-						data =
+						data = 
 						{
 							aType = "Lua",
 							actionLua = "-- P1 end (AS-018, user 2026-11-02): Fatebreaker goes untargetable when P1 is killed. Resync there so the\n-- P1 kill's uncertainty ends and P2 follows the real kill (P2 starts 4.31-4.48s later in the user's logs).\nlocal forecast = data.fru_rpr_forecast\nlocal actual = TensorCore.API.TensorACR.getAutoSimTime()\nif actual <= 0 then return end\nforecast.p1_dead = true\nforecast.apply(156.656, actual)\nself.used = true",
-							conditions =
+							conditions = 
 							{
 								
 								{
@@ -565,11 +608,11 @@ local tbl =
 						},
 					},
 				},
-				conditions =
+				conditions = 
 				{
 					
 					{
-						data =
+						data = 
 						{
 							category = "Lua",
 							conditionLua = "local forecast = data.fru_rpr_forecast\nreturn forecast ~= nil and forecast.version == 2 and forecast.phase == 1 and not forecast.p1_dead and forecast.anchor >= 80.015 and eventArgs.entityContentID == 9707 and eventArgs.isTargetable == false",
@@ -1129,17 +1172,17 @@ local tbl =
 		},
 		
 		{
-			data =
+			data = 
 			{
-				actions =
+				actions = 
 				{
 					
 					{
-						data =
+						data = 
 						{
 							aType = "Lua",
 							actionLua = "-- Ice Veil still targetable at its forecast death (user 2026-11-02): extend its phase to the\n-- Endless Ice Age enrage. \"AutoSim | Reanchor Ice Veil death\" undoes this if it dies first.\nlocal forecast = data.fru_rpr_forecast\nif not forecast or forecast.version ~= 2 or forecast.phase ~= 2.75 or forecast.ice_dead then return end\nlocal acr = TensorCore.API.TensorACR\nlocal actual = acr.getAutoSimTime()\nif actual <= 0 then return end\nlocal source = forecast.anchor + actual - forecast.actual\nif source < forecast.ice_veil_end then return end\nforecast.setIceVeilEnd(forecast.ice_veil_enrage)\nforecast.ice_extended = true\nforecast.apply(source, actual)\nself.used = true",
-							conditions =
+							conditions = 
 							{
 								
 								{
@@ -1153,11 +1196,11 @@ local tbl =
 						},
 					},
 				},
-				conditions =
+				conditions = 
 				{
 					
 					{
-						data =
+						data = 
 						{
 							category = "Lua",
 							conditionLua = "local entity = TensorCore.mGetEntity(eventArgs.detectionTargetID)\nreturn entity ~= nil and entity.targetable == true",
@@ -1168,10 +1211,10 @@ local tbl =
 					},
 					
 					{
-						data =
+						data = 
 						{
 							category = "Filter",
-							conditions =
+							conditions = 
 							{
 								
 								{
@@ -1201,17 +1244,17 @@ local tbl =
 		},
 		
 		{
-			data =
+			data = 
 			{
-				actions =
+				actions = 
 				{
 					
 					{
-						data =
+						data = 
 						{
 							aType = "Lua",
 							actionLua = "-- Ice Veil death (user 2026-11-02): P3 starts a fixed 27.50-27.69s after it in the user's logs, so\n-- reanchor the transition and P3 on the real death. Restore the forecast death time first, in case\n-- \"AutoSim | Ice Veil enrage extension\" moved it to the enrage.\nlocal forecast = data.fru_rpr_forecast\nlocal actual = TensorCore.API.TensorACR.getAutoSimTime()\nif actual <= 0 then return end\nforecast.setIceVeilEnd(forecast.ice_veil_end)\nforecast.ice_dead = true\nforecast.apply(forecast.ice_veil_end, actual)\nself.used = true",
-							conditions =
+							conditions = 
 							{
 								
 								{
@@ -1225,11 +1268,11 @@ local tbl =
 						},
 					},
 				},
-				conditions =
+				conditions = 
 				{
 					
 					{
-						data =
+						data = 
 						{
 							category = "Lua",
 							conditionLua = "local forecast = data.fru_rpr_forecast\nreturn forecast ~= nil and forecast.version == 2 and forecast.phase == 2.75 and not forecast.ice_dead and eventArgs.entityContentID == 9358 and eventArgs.isTargetable == false",
