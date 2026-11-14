@@ -242,6 +242,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### FRU: LPDU
 
+- Disable Start Combat when the pull countdown starts. (15-11-2026)
+
 - Moved potion reactions and P2 crystal targeting and AoE controls to FRU ACR3 Opti. Renamed owned draw labels to LPDU. (08-11-2026)
 
 - Fixed Ultimate Relativity guidance for the ice DPS to stay middle for the final stack. Diagonal assignments now name their Y-relative directions. (08-11-2026)

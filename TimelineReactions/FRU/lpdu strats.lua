@@ -133,6 +133,29 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				eventType = 16,
+				execute = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 1238 then return end\ngStartCombat = false\nself.used = true",
+				executeType = 2,
+				mechanicTime = 13.7,
+				name = "[LPDU] Disable Start Combat on countdown",
+				timeRange = true,
+				timelineIndex = 1,
+				timerEndOffset = -8.7,
+				timerStartOffset = -73.7,
+				uuid = "6c25f14d-651c-06e9-8e96-fec5f498b55c",
+				version = 2,
+			},
+		},
 	}, 
 	[7] = 
 	{
