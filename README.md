@@ -246,6 +246,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### FRU: LPDU
 
+- Replaced Paradise Regained tank guidance in both sets with Megaminx live cones, first-tower marking and tank arrows, aligned to the first tower. (15-11-2026)
+
 - Disable Start Combat when the pull countdown starts. (15-11-2026)
 
 - Moved potion reactions and P2 crystal targeting and AoE controls to FRU ACR3 Opti. Renamed owned draw labels to LPDU. (08-11-2026)
@@ -257,16 +259,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Apoc safe-sector guidance appears after Spirit Taker lands and stays visible through Dark Eruption without a cast-time redraw. Countdown, spread calls and later movement steps retain their mechanic triggers, with fallback guidance if the early preview was missed. (07-11-2026)
 
 - Made Frureactions/lpdu strats eligible for Optifine users by replacing direct file I/O with FileLoad/FileSave for preferences and presets. No Minion core Settings dependency remains. (05-11-2026)
-
-- Light Rampant middle-tower players now finish their tower before receiving the Banish spread callout, spread circles and personal spread arrow. Other players receive spread guidance immediately. (31-10-2026)
-
-- Light Rampant now shows countdowns on all three first-set large orb circles instead of only your nearest one. The second set remains untimed. (31-10-2026)
-
-- Added countdowns to the four-circle Icicle Impact wave on Diamond Dust's In pattern, excluding the earlier and later pairs. Added a Don't move - wait for debuff voice/text alert after the second ice cleave, before the existing ice-clear call. (31-10-2026)
-
-- Added a continuous personal countdown on your own Banish III spread circle for both P2 casts. It follows you and clears when Banish resolves; stack versions are unchanged. (31-10-2026)
-
-- Added fire-only P1 tower knockback guidance: after the initial cleave, a personal launch circle and arrows align the knockback with your assigned tower, with a continuous knockback countdown. Lightning towers are unchanged. (31-10-2026)
 
 ### FRU: ACR3 Opti
 
