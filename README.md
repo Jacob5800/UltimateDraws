@@ -300,6 +300,12 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Mount Rokkon: General draws
 
+- Added Moko tether-facing and clone guidance, near/far bait previews, corrected Upwell lanes and a safe handoff to Triple Kasumi-giri. The existing final-clone strategy setting now controls guidance, with Moogle fallback draws off by default. (15-11-2026)
+
+- Added Gorai's second tower sequence, personal limit-cut steps and staged exaflare guidance. (15-11-2026)
+
+- Corrected Shishio cloud previews, Wail safe-square assignments and ghost-to-tower timing; added moving personal countdowns, clearer Noble Pursuit guidance and separate defamation destinations. (15-11-2026)
+
 - Made Mountrokkon eligible for Optifine users by replacing direct file I/O with independent FileLoad/FileSave preferences. Existing targeting and mechanic logic are preserved. (05-11-2026)
 
 ### Alliance raids: General profile
