@@ -11095,6 +11095,49 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "a0f06702-f14f-139e-bc33-ebe99fdb4719",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "-- Crystallize Time: Return expires when the player rewinds.\nlocal player=TensorCore.mGetPlayer()\nif not player then return end\nlocal rewind=TensorCore.getBuff(player,2452)\nif not rewind or rewind.duration<=0 then return end\nlocal remainingMs=math.floor(rewind.duration*1000)\nlocal textID=AnyoneCore.addWorldTextCountdownOnEnt(remainingMs,player.id,0xFFFFFFFF,true,1.5,2.5,0,\"Rewind: \")\nif textID then self.used=true end",
+							name = "Rewind timer on player",
+							uuid = "fe1a3717-82c1-5b81-a4fc-6b0718f20a18",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU",
+				mechanicTime = 835.3,
+				name = "[LPDU] P4 Crystallize Time - Personal rewind countdown",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 194,
+				timerEndOffset = 5.5,
+				timerStartOffset = -1,
+				uuid = "786a7014-9af2-2593-9c18-d029f6242032",
+				version = 2,
+			},
+		},
 	},
 	[201] = 
 	{
@@ -11122,6 +11165,34 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "[Draw] Usurper Akh Morn",
+				uuid = "150100a0-5ace-b12f-81f2-5e6d2816d824",
+				version = 2,
+			},
+			inheritedObjectUUID = "dcc3affa-3129-7ada-8ce1-433a79caa31c",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
+				name = "[Draw] Oracle Akh Morn",
+				uuid = "1115f37a-5680-8353-8fc6-7b4de7c86e24",
+				version = 2,
+			},
+			inheritedObjectUUID = "cf0a81a6-194a-a87a-97b4-578eb6207db7",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
 		},
 		
 		{
