@@ -187,6 +187,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### DSR: LPDU (Beta)
 
+- Number 3 players now transition from their first tower through line bait/dodge into their jump position instead of returning north. Added an optional P4 tank east-eye-until-45% setting, off by default. (16-11-2026)
+
 - Meteor knockback immunity now follows current position: players within 10 yalms of the knockback source ride it, while outer players can use immunity. Earlier tower location no longer decides this; diagnostics show the live distance. (16-11-2026)
 
 - Fixed Strength tower-choice circles to use the current stack/jump layout and clearer rendering. Meteor knockback immunity now rechecks the actual first-tower assignment, with diagnostics for blocked/allowed decisions and observed ability casts. (16-11-2026)
@@ -204,8 +206,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Fixed Death of the Heavens cross-pair knockback guidance. Added conga recovery from the Doom snapshot and stable spread positions, with a warning when observed positions require an assignment update. (16-11-2026)
 
 - Simplified Strength ring and cone-bait callouts to short movement cues, removed the duplicate stack reminder, and stopped repeated announcements when guidance arrows refresh. (16-11-2026)
-
-- Added early Sanctity safe-floor shading that follows actual charges and orb explosions, plus a marker for your role-flex partner. Both options are enabled by default under P2. Fixed Strength spread guidance restarting after its hit. (16-11-2026)
 
 ### TOP: AutoSim
 
