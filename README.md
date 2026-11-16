@@ -197,6 +197,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### DSR: LPDU (Beta)
 
+- Made middle-left-right the default first meteor tower preference, clarified the blue-orb step after Eyes chain swaps, and limited the tank LB3 alert to tanks. (17-11-2026)
+
 - Added a saved P2 first meteor tower preference for middle-right-left or middle-left-right, applied after meteor separation. (17-11-2026)
 
 - P5 clears stale twister guidance and restores confirmed cross knockback positioning. P6 keeps clear breath destinations visible and previews the Wroth Akh Morn corner earlier. (16-11-2026)
