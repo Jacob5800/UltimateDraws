@@ -359,6 +359,56 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 2,
+				execute = "local spell = eventArgs.spellID\nif eventArgs.entityContentID ~= 9213 or (spell ~= 18869 and spell ~= 18870) then return end\nlocal waves = data.teaDollSecondProteans\nif not waves then waves = {}; data.teaDollSecondProteans = waves end\nlocal id = eventArgs.entityID\nif spell == 18870 then\n    waves[id] = false\nelseif waves[id] == nil then\n    waves[id] = Now() + 2300\nend\nself.used = true\n",
+				executeType = 2,
+				loop = true,
+				mechanicTime = 35.8,
+				name = "[LPDU] Track second doll-window tornado Proteans",
+				timeRange = true,
+				timelineIndex = 4,
+				timerEndOffset = 3.5,
+				timerStartOffset = -1.5,
+				uuid = "5d427644-04fc-32e2-bfd7-ac0a0dd78a41",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 12,
+				execute = "local waves = data.teaDollSecondProteans\nif not waves then return end\nlocal now = Now()\nlocal party, drawer\nfor id, expires in pairs(waves) do\n    if expires and now < expires then\n        local rage = TensorCore.mGetEntity(id)\n        if rage and rage.pos then\n            party = party or TensorCore.getEntityGroupList(\"Party\") or {}\n            local nearest, best\n            for _, member in pairs(party) do\n                if member.alive and member.pos then\n                    local distance = TensorCore.getDistance2d(rage.pos, member.pos)\n                    if not best or distance < best then nearest, best = member, distance end\n                end\n            end\n            if nearest then\n                drawer = drawer or TensorCore.getMoogleDrawer()\n                local pos = rage.pos\n                drawer:addCone(pos.x,pos.y,pos.z,40,math.pi/6,TensorCore.getHeadingToTarget(pos,nearest.pos),false)\n            end\n        end\n    end\nend\n",
+				executeType = 2,
+				loop = true,
+				mechanicTime = 35.8,
+				name = "[LPDU] Draw second doll-window tornado Proteans",
+				timeRange = true,
+				timelineIndex = 4,
+				timerEndOffset = 3.5,
+				timerStartOffset = -1.5,
+				uuid = "a37d51a7-667f-3efd-9cdc-a475d3015726",
+				version = 2,
+			},
+		},
 	},
 	[9] = 
 	{

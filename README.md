@@ -50,6 +50,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - First tornado baiters hear “Move” once their cone locks. Doll previews and arrows use the LPDU quadrants, and the ranged arrow waits for the lock. (16-11-2026)
 
+- Added live previews for the second tornado cones during Jagd Dolls. (16-11-2026)
+
 - Fixed both Final Word Motion/Stillness checks and the shared second Fate Alpha reveal. Motion jumps each frame; Stillness stops movement and casting, then resumes after its check. (13-11-2026)
 
 - Added Water vulnerability warnings, five-yalm mine danger circles hidden for OT, and faint previews of other players’ Wormhole slash cones and charge lanes. LPDU assignments and destinations are preserved. (13-11-2026)
@@ -59,8 +61,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Opening Optical Sight shows clear green circles and countdowns on both stack targets. The callout names the west/east split and the countdowns show each side once the targets separate. (08-11-2026)
 
 - Almighty Judgment Exaflares show the next hit in bright red, the following hit in orange, and later hits in yellow. Colors advance on impact. The Almighty Judgment countdown reads "First hit", followed by "Move together" as the first wave resolves. (08-11-2026)
-
-- P2 Compressed Lightning shows a yellow circle on its holder during the final five seconds. (08-11-2026)
 
 
 ### TEA: LPDU mits
