@@ -187,6 +187,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### DSR: LPDU (Beta)
 
+- Wrath donut guidance gives Chain Lightning targets separate spots and keeps the group clear inside the donut. (16-11-2026)
 - P5 announces the Wrath cone bait once per cast. (16-11-2026)
 - Rewind shows Haurchefant’s green marker only to healers. (16-11-2026)
 - P4 shows the assigned chain partner for both players and confirms when chain swaps and orb soaks are complete. (16-11-2026)
@@ -196,7 +197,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Removed the incorrect extra P3 preset, kept EU Easthogg, and tightened physical-side tower matching and directional landing previews. Blue-marked P2 players no longer see tank tether-holder circles. (16-11-2026)
 - Added an optional validated WB1 chosen-anchor mode, off by default, and a P6 dragon-HP window with both percentages, the HP gap and higher-HP dragon highlighted. (16-11-2026)
 - Added personal P7 Trinity warnings six seconds early and move-in guidance from 2.2 seconds before the auto once the preceding mechanic resolves. Vow partners are marked ten seconds early while pass movement keeps its existing timing. (16-11-2026)
-- Hid early Strength tower-choice circles for blue jump-marker players while retaining their assigned tower guidance. (16-11-2026)
 
 
 
