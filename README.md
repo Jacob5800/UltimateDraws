@@ -187,6 +187,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### DSR: LPDU (Beta)
 
+- Personal guidance arrows now use opaque terrain-following overlays so raised arena details and scene objects do not hide their shaft. (16-11-2026)
+
 - Fixed Death of the Heavens cross-pair knockback guidance. Added conga recovery from the Doom snapshot and stable spread positions, with a warning when observed positions require an assignment update. (16-11-2026)
 
 - Simplified Strength ring and cone-bait callouts to short movement cues, removed the duplicate stack reminder, and stopped repeated announcements when guidance arrows refresh. (16-11-2026)
