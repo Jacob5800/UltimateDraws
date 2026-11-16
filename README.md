@@ -187,6 +187,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### DSR: LPDU (Beta)
 
+- P4 shows the assigned chain partner for both players and confirms when chain swaps and orb soaks are complete. (16-11-2026)
 - P3 line dodges after landing now prefer a clear route north whenever the player is free to regroup. (16-11-2026)
 - Added a personal blue jump callout on marker appearance and an optional nearest available jump spot arrow, off by default. (16-11-2026)
 - Anchored Easthogg tower forecasts to arena east and corrected stale local jump assignments using the active debuff. (16-11-2026)
@@ -196,7 +197,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Hid early Strength tower-choice circles for blue jump-marker players while retaining their assigned tower guidance. (16-11-2026)
 - Aligned P6 breath, Wings and final-dive assignments with Frog’s EU setup; clarified breath previews and added your healer’s stack circle. Corrected P2 spread sides, reduced blue-jump callout repeats, and gated P3 in/out arrows around unresolved jumps and baits. (16-11-2026)
 - Added a visible Warrior-facing conga line for Death of the Heavens and reduced repeated cleared-centre ring callouts. (16-11-2026)
-- Number 3 players now transition from their first tower through line bait/dodge into their jump position instead of returning north. Added an optional P4 tank east-eye-until-45% setting, off by default. (16-11-2026)
 
 
 
