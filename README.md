@@ -197,6 +197,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### DSR: LPDU (Beta)
 
+- Strength tower reassignment no longer repeats the initial preposition call after a personal tower was established. (17-11-2026)
+
 - “Behind boss - tank cleaves” now calls once per cleave sequence. (17-11-2026)
 
 - Added an explicit blue-orb reminder after Eyes chain swaps. Removed the finish-eyes, lower-Charibert and finish-spear callouts. (17-11-2026)
