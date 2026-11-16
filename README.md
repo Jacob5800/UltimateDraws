@@ -187,6 +187,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### DSR: LPDU (Beta)
 
+- P5 conga circles hide when occupied. An optional drag-to-swap lineup gives each player a preposition arrow. (16-11-2026)
 - Death of the Heavens shows four open conga spots on each side before Doom. (16-11-2026)
 - Wrath donut guidance gives Chain Lightning targets separate spots and keeps the group clear inside the donut. (16-11-2026)
 - P5 announces the Wrath cone bait once per cast. (16-11-2026)
@@ -196,7 +197,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added a personal blue jump callout on marker appearance and an optional nearest available jump spot arrow, off by default. (16-11-2026)
 - Anchored Easthogg tower forecasts to arena east and corrected stale local jump assignments using the active debuff. (16-11-2026)
 - Removed the incorrect extra P3 preset, kept EU Easthogg, and tightened physical-side tower matching and directional landing previews. Blue-marked P2 players no longer see tank tether-holder circles. (16-11-2026)
-- Added an optional validated WB1 chosen-anchor mode, off by default, and a P6 dragon-HP window with both percentages, the HP gap and higher-HP dragon highlighted. (16-11-2026)
 
 
 
