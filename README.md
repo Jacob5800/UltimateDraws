@@ -79,6 +79,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Fixed initial Jagd Doll targeting to use LPDU quadrants relative to the open tornado side. Actual personal tethers still take priority. (16-11-2026)
 
+- Applied the doll AoE blacklist before spawn and held Bard’s Pitch Perfect and Shadowbite during acquisition to prevent splash from claiming another doll. (16-11-2026)
+
 - Added P2 boss and Plasma Shield targeting diagnostics with observed target confirmation. Missing Cruise Chaser lookup now retries for up to five seconds while preserving active shield targeting. (15-11-2026)
 
 - Doll targeting now prioritizes the player's actual tether before cardinal assignment and the 24.9% HP cutoff, allowing tethered dolls to be selected when geometry assignment is unavailable. (15-11-2026)
