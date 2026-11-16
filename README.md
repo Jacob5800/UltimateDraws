@@ -16,6 +16,10 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ## Changelog
 
+### UWU: AutoSim
+
+- Ifrit nails now check awakening on the next nail in formation-relative SE > SW > NE > NW order, without lifetime-based target switching. Melee cleave stops when either close nail reaches 40%, each role finishes its own assigned nail, and ordered kills stay single-target. Nail checks now use a 50 ms interval; the forced 40% cast stop is preserved. (16-11-2026)
+
 ### UCOB: Published profile
 
 - Consolidated the latest LPDU draws into `LPDU Draws.lua` and removed the duplicate beta download. (05-11-2026)
