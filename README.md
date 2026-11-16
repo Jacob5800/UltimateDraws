@@ -187,6 +187,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### DSR: LPDU (Beta)
 
+- Removed the incorrect extra P3 preset, kept EU Easthogg, and tightened physical-side tower matching and directional landing previews. Blue-marked P2 players no longer see tank tether-holder circles. (16-11-2026)
 - Added an optional validated WB1 chosen-anchor mode, off by default, and a P6 dragon-HP window with both percentages, the HP gap and higher-HP dragon highlighted. (16-11-2026)
 - Added personal P7 Trinity warnings six seconds early and move-in guidance from 2.2 seconds before the auto once the preceding mechanic resolves. Vow partners are marked ten seconds early while pass movement keeps its existing timing. (16-11-2026)
 - Hid early Strength tower-choice circles for blue jump-marker players while retaining their assigned tower guidance. (16-11-2026)
@@ -200,7 +201,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Added early P3 tower prepositioning and visible priority-based line dodges. P2 shows unclaimed tower choices on your side, and Sanctity hands off to ice positioning immediately on the resolving orb. (16-11-2026)
 
-- Strength spread arrows can use the charge knights’ early outer positions while they are untargetable. Fixed a centre-line route check that could hide a valid exit arrow. (16-11-2026)
 
 
 
