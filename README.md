@@ -187,6 +187,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### DSR: LPDU (Beta)
 
+- Fixed Strength tower-choice circles to use the current stack/jump layout and clearer rendering. Meteor knockback immunity now rechecks the actual first-tower assignment, with diagnostics for blocked/allowed decisions and observed ability casts. (16-11-2026)
+
 - Added early P3 tower prepositioning and visible priority-based line dodges. P2 shows unclaimed tower choices on your side, and Sanctity hands off to ice positioning immediately on the resolving orb. (16-11-2026)
 
 - Strength spread arrows can use the charge knights’ early outer positions while they are untargetable. Fixed a centre-line route check that could hide a valid exit arrow. (16-11-2026)
@@ -204,8 +206,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added early Sanctity safe-floor shading that follows actual charges and orb explosions, plus a marker for your role-flex partner. Both options are enabled by default under P2. Fixed Strength spread guidance restarting after its hit. (16-11-2026)
 
 - P1 interrupt reminders now appear only for the assigned role: MT first, physical ranged second, OT third. (16-11-2026)
-
-- Reduced P1 wait callouts: safe-corner and Charibert waiting positions remain visible without repeated reminders; blocked-path warnings occur at most once per bait wave. (16-11-2026)
 
 ### TOP: AutoSim
 
