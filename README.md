@@ -108,6 +108,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Dungeons: Shared AutoSim
 
+- Removed DoT blacklist entries for all four Meso Terminal Headsmen, including Pestilent. Selected-target DoTs remain enabled with Smart DoT off; AoE and helper restrictions are preserved. (16-11-2026)
+
 - BRD holds new DoT applications and Iron Jaws on selected trash below 20% HP using short AutoSim-aware action holds. The threshold is adjustable, bosses are excluded, and the DoTs toggle stays unchanged. Applied to all three dungeon profiles. (16-11-2026)
 
 - BRD gathering holds now use short individual holds for Battle Voice, Radiant Finale, Raging Strikes and Barrage instead of the broad CD toggle. Both party buffs follow the same final-pack and low-HP holds. Boss diagnostics record readiness, cooldowns and owned holds. (16-11-2026)
@@ -125,8 +127,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added Raw Electrope DoT blocking, a separate low-HP Radiant Finale guard, and a location check distinguishing Mistwake’s last trash pull. Party-buff timing fields now display directly with forecast status. (14-11-2026)
 
 - Published the levelling dungeons AutoSim profile. Bard saves Apex Arrow for the next boss when one or two enemies remain in the final trash pack and each is at 8% HP or lower. (11-11-2026)
-
-- Bard saves Apex Arrow for the next boss when only one or two enemies remain in the final trash pack and each is at 8% HP or lower. (11-11-2026)
 
 ### Shinryu Unreal: Draws
 
