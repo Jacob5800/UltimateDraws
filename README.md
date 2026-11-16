@@ -187,6 +187,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### DSR: LPDU (Beta)
 
+- Added a following ice-pair partner circle and line, updated from final prey-swap assignments and cleared when the ice mechanic resolves. Enabled by default under P2. (16-11-2026)
+
 - Added an optional Frog Westhogg preset with frozen full-wave Dive from Grace assignments. Our existing LPDU/Easthogg method remains the default; enumeration priorities are shared. (16-11-2026)
 
 - Personal guidance arrows now use opaque terrain-following overlays so raised arena details and scene objects do not hide their shaft. (16-11-2026)
