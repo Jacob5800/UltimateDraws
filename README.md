@@ -187,6 +187,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### DSR: LPDU (Beta)
 
+- P5 announces the Wrath cone bait once per cast. (16-11-2026)
 - Rewind shows Haurchefant’s green marker only to healers. (16-11-2026)
 - P4 shows the assigned chain partner for both players and confirms when chain swaps and orb soaks are complete. (16-11-2026)
 - P3 line dodges after landing now prefer a clear route north whenever the player is free to regroup. (16-11-2026)
@@ -196,7 +197,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added an optional validated WB1 chosen-anchor mode, off by default, and a P6 dragon-HP window with both percentages, the HP gap and higher-HP dragon highlighted. (16-11-2026)
 - Added personal P7 Trinity warnings six seconds early and move-in guidance from 2.2 seconds before the auto once the preceding mechanic resolves. Vow partners are marked ten seconds early while pass movement keeps its existing timing. (16-11-2026)
 - Hid early Strength tower-choice circles for blue jump-marker players while retaining their assigned tower guidance. (16-11-2026)
-- Aligned P6 breath, Wings and final-dive assignments with Frog’s EU setup; clarified breath previews and added your healer’s stack circle. Corrected P2 spread sides, reduced blue-jump callout repeats, and gated P3 in/out arrows around unresolved jumps and baits. (16-11-2026)
 
 
 
