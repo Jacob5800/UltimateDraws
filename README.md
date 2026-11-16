@@ -42,6 +42,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### TEA: LPDU Draws
 
+- Added a one-time “Nisi passed” confirmation for the Photon partner stack and the Verdict Nisi handoff when the assigned pair shares the expected debuff. (16-11-2026)
+
 - Added early Jagd Doll preposition arrows and circles for R1 east and R2 north, relative to the open tornado side. The cue updates when the dolls spawn, and the ranged Exhaust circles use the same assignments. (16-11-2026)
 
 - Fixed both Final Word Motion/Stillness checks and the shared second Fate Alpha reveal. Motion jumps each frame; Stillness stops movement and casting, then resumes after its check. (13-11-2026)
@@ -59,8 +61,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added Throttle countdowns for healers and Bard, moving Embolus markers, and personal inside/outside swap cues for 1256 Limit Cut. Bard can opt into automatic Warden's Paean for Throttle in LPDU Settings. Limit Cut now calls "Move to middle" after the final center blast and charge. (08-11-2026)
 
 - Added personal Lightning handoff arrows, Earth Missile bait spots for OT and R1, live Hidden Mine markers, and a support lineup reminder for third Nisi. (08-11-2026)
-
-- R1 gets an early east-side bait call and green marker for P2 Super Jump. (08-11-2026)
 
 
 ### TEA: LPDU mits
