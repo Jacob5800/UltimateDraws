@@ -108,6 +108,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Dungeons: Shared AutoSim
 
+- BRD gathering holds now use short individual holds for Battle Voice, Radiant Finale, Raging Strikes and Barrage instead of the broad CD toggle. Both party buffs follow the same final-pack and low-HP holds. Boss diagnostics record readiness, cooldowns and owned holds. (16-11-2026)
+
 - Full-pull detection now counts every engaged enemy instead of stopping after the first. Per-dungeon timings default on in all three profiles, retaining saved values and explicit opt-outs. (16-11-2026)
 
 - Published the existing Castrum Meridianum AutoSim and mechanic draws from highleveldungeons. (16-11-2026)
@@ -125,10 +127,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Bard saves Apex Arrow for the next boss when only one or two enemies remain in the final trash pack and each is at 8% HP or lower. (11-11-2026)
 
 - In The Clyteum, pause actions for Motion Tracker and jump near the end of Malphas’s String Up. Default boss estimates are 2:20, 2:15 and 3:00. (09-11-2026)
-
-- Hold Triplecast when three or fewer enemies remain in the final trash pack. In The Clyteum, hold single-target High Thunder on the last dying trash mob while keeping High Thunder II available. (09-11-2026)
-
-- Sampled boss kill estimates and conservative movement forecasts are enabled by default. Saved preferences still take precedence. (09-11-2026)
 
 ### Shinryu Unreal: Draws
 
