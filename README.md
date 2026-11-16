@@ -187,6 +187,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### DSR: LPDU (Beta)
 
+- P3 line dodges after landing now prefer a clear route north whenever the player is free to regroup. (16-11-2026)
 - Added a personal blue jump callout on marker appearance and an optional nearest available jump spot arrow, off by default. (16-11-2026)
 - Anchored Easthogg tower forecasts to arena east and corrected stale local jump assignments using the active debuff. (16-11-2026)
 - Removed the incorrect extra P3 preset, kept EU Easthogg, and tightened physical-side tower matching and directional landing previews. Blue-marked P2 players no longer see tank tether-holder circles. (16-11-2026)
@@ -197,7 +198,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added a visible Warrior-facing conga line for Death of the Heavens and reduced repeated cleared-centre ring callouts. (16-11-2026)
 - Number 3 players now transition from their first tower through line bait/dodge into their jump position instead of returning north. Added an optional P4 tank east-eye-until-45% setting, off by default. (16-11-2026)
 
-- Meteor knockback immunity now follows current position: players within 10 yalms of the knockback source ride it, while outer players can use immunity. Earlier tower location no longer decides this; diagnostics show the live distance. (16-11-2026)
 
 
 
