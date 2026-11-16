@@ -187,7 +187,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### DSR: LPDU (Beta)
 
-- P5 conga circles hide when occupied. An optional drag-to-swap lineup gives each player a preposition arrow. (16-11-2026)
+- P5 conga circles hide when occupied. An optional drag-to-swap lineup gives each player a preposition arrow and starts with M1, MT, H1, OT, M2, R2, H2, R1. (16-11-2026)
 - Death of the Heavens shows four open conga spots on each side before Doom. (16-11-2026)
 - Wrath donut guidance gives Chain Lightning targets separate spots and keeps the group clear inside the donut. (16-11-2026)
 - P5 announces the Wrath cone bait once per cast. (16-11-2026)
