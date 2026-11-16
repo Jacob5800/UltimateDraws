@@ -187,6 +187,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### DSR: LPDU (Beta)
 
+- P1 interrupt reminders now appear only for the assigned role: MT first, physical ranged second, OT third. (16-11-2026)
+
 - Reduced P1 wait callouts: safe-corner and Charibert waiting positions remain visible without repeated reminders; blocked-path warnings occur at most once per bait wave. (16-11-2026)
 
 ### TOP: AutoSim
