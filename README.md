@@ -108,9 +108,11 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Dungeons: Shared AutoSim
 
+- Full-pull detection now counts every engaged enemy instead of stopping after the first. Per-dungeon timings default on in all three profiles, retaining saved values and explicit opt-outs. (16-11-2026)
+
 - Published the existing Castrum Meridianum AutoSim and mechanic draws from highleveldungeons. (16-11-2026)
 
-- All three dungeon profiles can hold major offensive cooldowns while gathering wall-to-wall pulls. The default is 2.3 seconds of a stopped tank, stable enemy group and gathered enemies, with a 20-second fallback and optional per-dungeon timings. BRD also holds Radiant Finale, Apex and Blast Arrow, with Soul Voice cap and Blast expiry safeguards. Existing final-pack and low-HP holds retain priority; the AutoSim UI shows the gathering status. (16-11-2026)
+- All three dungeon profiles can hold major offensive cooldowns while gathering wall-to-wall pulls. The default is 2.3 seconds of a stopped tank, stable enemy group and gathered enemies, with a 20-second fallback and per-dungeon timings enabled by default. BRD also holds Radiant Finale, Apex and Blast Arrow, with Soul Voice cap and Blast expiry safeguards. Existing final-pack and low-HP holds retain priority; the AutoSim UI shows the gathering status. (16-11-2026)
 
 - Ravenous Headsman no longer receives a DoT blacklist entry in dungeon lol. Headsman combat uses DoTs on and Smart DoT off, restoring previous toggles at phase end, wipe or zone change. (16-11-2026)
 
