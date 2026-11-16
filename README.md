@@ -187,6 +187,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### DSR: LPDU (Beta)
 
+- Fixed Death of the Heavens cross-pair knockback guidance. Added conga recovery from the Doom snapshot and stable spread positions, with a warning when observed positions require an assignment update. (16-11-2026)
+
 - Simplified Strength ring and cone-bait callouts to short movement cues, removed the duplicate stack reminder, and stopped repeated announcements when guidance arrows refresh. (16-11-2026)
 
 - Added early Sanctity safe-floor shading that follows actual charges and orb explosions, plus a marker for your role-flex partner. Both options are enabled by default under P2. Fixed Strength spread guidance restarting after its hit. (16-11-2026)
