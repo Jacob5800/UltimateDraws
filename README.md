@@ -44,11 +44,11 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Added a one-time “Nisi passed” confirmation for the Photon partner stack and the Verdict Nisi handoff when the assigned pair shares the expected debuff. (16-11-2026)
 
-- Added early Jagd Doll preposition arrows and circles for R1 east and R2 north, relative to the open tornado side. The cue updates when the dolls spawn, and the ranged Exhaust circles use the same assignments. (16-11-2026)
-
 - After the third Flarethrower hit, True Heart gets a world label and a call to group up, build gauge or heal, then leave for the personal split. (16-11-2026)
 
 - Both Irresistible Grace stacks during Almighty Judgment now show a green circle on the stack target. (16-11-2026)
+
+- First tornado baiters hear “Move” once their cone locks. Doll previews and arrows use the LPDU quadrants, and the ranged arrow waits for the lock. (16-11-2026)
 
 - Fixed both Final Word Motion/Stillness checks and the shared second Fate Alpha reveal. Motion jumps each frame; Stillness stops movement and casting, then resumes after its check. (13-11-2026)
 
@@ -76,6 +76,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 ### TEA: AutoSim
 
 - Expanded Jagd Doll targeting diagnostics with assignment source, tether conflicts, range and cast blocks, and separate target request and confirmation records. (16-11-2026)
+
+- Fixed initial Jagd Doll targeting to use LPDU quadrants relative to the open tornado side. Actual personal tethers still take priority. (16-11-2026)
 
 - Added P2 boss and Plasma Shield targeting diagnostics with observed target confirmation. Missing Cruise Chaser lookup now retries for up to five seconds while preserving active shield targeting. (15-11-2026)
 
