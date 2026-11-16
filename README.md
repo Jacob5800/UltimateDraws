@@ -187,6 +187,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### DSR: LPDU (Beta)
 
+- Added an optional Frog Westhogg preset with frozen full-wave Dive from Grace assignments. Our existing LPDU/Easthogg method remains the default; enumeration priorities are shared. (16-11-2026)
+
 - Personal guidance arrows now use opaque terrain-following overlays so raised arena details and scene objects do not hide their shaft. (16-11-2026)
 
 - Fixed Death of the Heavens cross-pair knockback guidance. Added conga recovery from the Doom snapshot and stable spread positions, with a warning when observed positions require an assignment update. (16-11-2026)
