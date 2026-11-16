@@ -187,6 +187,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### DSR: LPDU (Beta)
 
+- Added an optional validated WB1 chosen-anchor mode, off by default, and a P6 dragon-HP window with both percentages, the HP gap and higher-HP dragon highlighted. (16-11-2026)
 - Added personal P7 Trinity warnings six seconds early and move-in guidance from 2.2 seconds before the auto once the preceding mechanic resolves. Vow partners are marked ten seconds early while pass movement keeps its existing timing. (16-11-2026)
 - Hid early Strength tower-choice circles for blue jump-marker players while retaining their assigned tower guidance. (16-11-2026)
 - Aligned P6 breath, Wings and final-dive assignments with Frog’s EU setup; clarified breath previews and added your healer’s stack circle. Corrected P2 spread sides, reduced blue-jump callout repeats, and gated P3 in/out arrows around unresolved jumps and baits. (16-11-2026)
@@ -201,7 +202,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Strength spread arrows can use the charge knights’ early outer positions while they are untargetable. Fixed a centre-line route check that could hide a valid exit arrow. (16-11-2026)
 
-- Added a following ice-pair partner circle and line, updated from final prey-swap assignments and cleared when the ice mechanic resolves. Enabled by default under P2. (16-11-2026)
 
 
 
