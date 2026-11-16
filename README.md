@@ -42,6 +42,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### TEA: LPDU Draws
 
+- Added early Jagd Doll preposition arrows and circles for R1 east and R2 north, relative to the open tornado side. The cue updates when the dolls spawn, and the ranged Exhaust circles use the same assignments. (16-11-2026)
+
 - Fixed both Final Word Motion/Stillness checks and the shared second Fate Alpha reveal. Motion jumps each frame; Stillness stops movement and casting, then resumes after its check. (13-11-2026)
 
 - Added Water vulnerability warnings, five-yalm mine danger circles hidden for OT, and faint previews of other players’ Wormhole slash cones and charge lanes. LPDU assignments and destinations are preserved. (13-11-2026)
@@ -60,7 +62,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - R1 gets an early east-side bait call and green marker for P2 Super Jump. (08-11-2026)
 
-- Third Nisi pass guides DPS to the live Verdict match and clears the arrow after the transfer. (08-11-2026)
 
 ### TEA: LPDU mits
 
@@ -74,6 +75,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### TEA: AutoSim
 
+- Expanded Jagd Doll targeting diagnostics with assignment source, tether conflicts, range and cast blocks, and separate target request and confirmation records. (16-11-2026)
+
 - Added P2 boss and Plasma Shield targeting diagnostics with observed target confirmation. Missing Cruise Chaser lookup now retries for up to five seconds while preserving active shield targeting. (15-11-2026)
 
 - Doll targeting now prioritizes the player's actual tether before cardinal assignment and the 24.9% HP cutoff, allowing tethered dolls to be selected when geometry assignment is unavailable. (15-11-2026)
@@ -82,6 +85,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Added AA AutoSim with LPDU DPS doll assignments, strict DoT/AoE and burst safeguards, and a latched 24.9% cutoff that stops doll casts and returns to Living Liquid. Includes opener targeting, helper setup and targeting diagnostics. Movement/feeding remain manual; in-flight damage cannot be recalled. (05-11-2026)
 - Countdown targeting selects Living Liquid with FFXIVMinion Start Combat kept off. Cancelling or finishing the countdown stops pending selection. (05-11-2026)
+
 
 ### Sil'dihn: General profile / AutoSim
 
