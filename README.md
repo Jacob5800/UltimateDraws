@@ -187,6 +187,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### DSR: LPDU (Beta)
 
+- Added early Sanctity safe-floor shading that follows actual charges and orb explosions, plus a marker for your role-flex partner. Both options are enabled by default under P2. Fixed Strength spread guidance restarting after its hit. (16-11-2026)
+
 - P1 interrupt reminders now appear only for the assigned role: MT first, physical ranged second, OT third. (16-11-2026)
 
 - Reduced P1 wait callouts: safe-corner and Charibert waiting positions remain visible without repeated reminders; blocked-path warnings occur at most once per bait wave. (16-11-2026)
