@@ -72,7 +72,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local blacklist = MoogleTelegraphs.Settings.aoeIDUserBlacklist\nif not blacklist then\n  blacklist = {}\n  MoogleTelegraphs.Settings.aoeIDUserBlacklist = blacklist\nend\n\nblacklist[18869] = \"Protean Wave\"\nblacklist[18526] = \"Inception\"\nblacklist[18482] = \"Propeller Wind\"\nblacklist[18492] = \"Gavel\"\nself.used = true",
+							actionLua = "local blacklist = MoogleTelegraphs.Settings.aoeIDUserBlacklist\nif not blacklist then\n  blacklist = {}\n  MoogleTelegraphs.Settings.aoeIDUserBlacklist = blacklist\nend\n\nblacklist[18869] = \"Protean Wave\"\nblacklist[18526] = \"Inception\"\nblacklist[18482] = \"Propeller Wind\"\nblacklist[18492] = \"Gavel\"\nblacklist[18580] = \"Irresistible Grace\"\nself.used = true",
 							endIfUsed = true,
 							name = "Blacklist Moogle AOEs",
 							uuid = "76aa8f5c-716f-b2e9-8f54-cd915ca3f819",
@@ -11553,7 +11553,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal target=TensorCore.mGetEntity(eventArgs.targetID)\nif not target then self.used=true;return end\nlocal ms=math.floor((eventArgs.channelTimeMax+0.3)*1000)\ng.grace={deadline=Now()+ms,target=target.id}\ng.timer(ms,target.id,\"Stack \",2.8)\nif g.activeJudgment and g.activeJudgment.done then AnyoneCore.Shotcall(\"Stack\",true,3,false) end\nself.used=true",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal target=TensorCore.mGetEntity(eventArgs.targetID)\nif not target then self.used=true;return end\nlocal ms=math.floor((eventArgs.channelTimeMax+0.3)*1000)\ng.grace={deadline=Now()+ms,target=target.id}\ng.timer(ms,target.id,\"Stack \",2.8)\nlocal drawer=TensorCore.getStaticDrawer(0x7000FF00,2)\nlocal circle=drawer:addTimedCircleOnEnt(math.max(1,ms-300),target.id,6,0,false,true,0)\nif circle then g.shapes[#g.shapes+1]=circle end\nif g.activeJudgment and g.activeJudgment.done then AnyoneCore.Shotcall(\"Stack\",true,3,false) end\nself.used=true",
 							conditions = 
 							{
 								
@@ -11797,7 +11797,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal target=TensorCore.mGetEntity(eventArgs.targetID)\nif not target then self.used=true;return end\nlocal ms=math.floor((eventArgs.channelTimeMax+0.3)*1000)\ng.grace={deadline=Now()+ms,target=target.id}\ng.timer(ms,target.id,\"Stack \",2.8)\nif g.activeJudgment and g.activeJudgment.done then AnyoneCore.Shotcall(\"Stack\",true,3,false) end\nself.used=true",
+							actionLua = "local g=data.tea_lpdu_p4\nif not g then\n g={texts={},shapes={}};data.tea_lpdu_p4=g\n function g.timer(ms,id,prefix,height)\n  if ms<=0 then return end\n  local uuid=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),id,0xFFFFFFFF,true,1.35,height or 2.5,0,prefix)\n  if uuid then g.texts[#g.texts+1]=uuid end\n  return uuid\n end\nend\nlocal target=TensorCore.mGetEntity(eventArgs.targetID)\nif not target then self.used=true;return end\nlocal ms=math.floor((eventArgs.channelTimeMax+0.3)*1000)\ng.grace={deadline=Now()+ms,target=target.id}\ng.timer(ms,target.id,\"Stack \",2.8)\nlocal drawer=TensorCore.getStaticDrawer(0x7000FF00,2)\nlocal circle=drawer:addTimedCircleOnEnt(math.max(1,ms-300),target.id,6,0,false,true,0)\nif circle then g.shapes[#g.shapes+1]=circle end\nif g.activeJudgment and g.activeJudgment.done then AnyoneCore.Shotcall(\"Stack\",true,3,false) end\nself.used=true",
 							conditions = 
 							{
 								
