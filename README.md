@@ -197,6 +197,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### DSR: LPDU (Beta)
 
+- Added a saved P2 first meteor tower preference for middle-right-left or middle-left-right, applied after meteor separation. (17-11-2026)
+
 - P5 clears stale twister guidance and restores confirmed cross knockback positioning. P6 keeps clear breath destinations visible and previews the Wroth Akh Morn corner earlier. (16-11-2026)
 - P5 conga circles hide when occupied. An optional drag-to-swap lineup gives each player a preposition arrow and starts with M1, MT, H1, OT, M2, R2, H2, R1. (16-11-2026)
 - Death of the Heavens shows four open conga spots on each side before Doom. (16-11-2026)
@@ -207,14 +209,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - P3 line dodges after landing now prefer a clear route north whenever the player is free to regroup. (16-11-2026)
 - Added a personal blue jump callout on marker appearance and an optional nearest available jump spot arrow, off by default. (16-11-2026)
 - Anchored Easthogg tower forecasts to arena east and corrected stale local jump assignments using the active debuff. (16-11-2026)
-
-
-
-
-
-
-
-
 
 
 ### TOP: AutoSim
