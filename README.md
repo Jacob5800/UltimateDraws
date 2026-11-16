@@ -108,6 +108,12 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Dungeons: Shared AutoSim
 
+- Published the existing Castrum Meridianum AutoSim and mechanic draws from highleveldungeons. (16-11-2026)
+
+- All three dungeon profiles can hold major offensive cooldowns while gathering wall-to-wall pulls. The default is 2.3 seconds of a stopped tank, stable enemy group and gathered enemies, with a 20-second fallback and optional per-dungeon timings. BRD also holds Radiant Finale, Apex and Blast Arrow, with Soul Voice cap and Blast expiry safeguards. Existing final-pack and low-HP holds retain priority; the AutoSim UI shows the gathering status. (16-11-2026)
+
+- Ravenous Headsman no longer receives a DoT blacklist entry in dungeon lol. Headsman combat uses DoTs on and Smart DoT off, restoring previous toggles at phase end, wipe or zone change. (16-11-2026)
+
 - Published highleveldungeons with Aetherfont boss forecasts and draws, and moved Lunar Subterrane into it. All three dungeon profiles share all-job final-pack pooling, low-HP holds with a final-boss exemption, owned-setting restoration checks, BLM dying-add cast protection, and hold status inside the AutoSim settings UI. (14-11-2026)
 
 - Added Raw Electrope DoT blocking, a separate low-HP Radiant Finale guard, and a location check distinguishing Mistwake’s last trash pull. Party-buff timing fields now display directly with forecast status. (14-11-2026)
@@ -121,12 +127,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Hold Triplecast when three or fewer enemies remain in the final trash pack. In The Clyteum, hold single-target High Thunder on the last dying trash mob while keeping High Thunder II available. (09-11-2026)
 
 - Sampled boss kill estimates and conservative movement forecasts are enabled by default. Saved preferences still take precedence. (09-11-2026)
-
-- Made dungeon lol eligible for Optifine users by replacing direct file I/O with independent FileLoad/FileSave preferences. Existing targeting and mechanic logic are preserved. (05-11-2026)
-
-- All nine dungeons in `dungeon lol` now hold new offensive cooldowns on the final trash pack and at 8% actual-boss HP, with a shared adjustable threshold. Includes Radiant Finale; ordinary damage and songs continue. Previous temporary settings restore after combat/wipe. (04-11-2026)
-
-- Meso Terminal isolates the selected headsman, blocks BRD/BLM DoTs on Hellmakers, and optionally targets the unique Hellmaker in your current cell before returning to your headsman. Covers all four cells and logs targeting decisions. Updated encounter estimate defaults to 140/140/226s. (04-11-2026)
 
 ### Shinryu Unreal: Draws
 
