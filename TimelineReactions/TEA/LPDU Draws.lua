@@ -1304,13 +1304,23 @@ local tbl =
 							{
 								
 								{
-									"622b0634-5b03-3fea-b051-7546a44e7d0f",
+									"6732c431-4773-ce52-ab85-22b00984cfe9",
+									true,
+								},
+								
+								{
+									"d514952b-fa86-792b-ac1a-501ff1793d0b",
+									true,
+								},
+								
+								{
+									"50da9470-4e9f-e3d8-a7ba-0e99163a1faf",
 									true,
 								},
 							},
 							gVar = "ACR_TensorRequiem4_Hotbar_PaeanMouse",
 							name = "Warden's Paean",
-							targetType = "Event Entity",
+							targetType = "Detection Target",
 							uuid = "9cf439eb-b9f6-99f5-a827-156c592de5e2",
 							variableIsHover = true,
 							variableTogglesType = 2,
@@ -1325,18 +1335,59 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local config = TEA_LPDU_Config\nif not config or config.values.autoThrottlePaean ~= true or eventArgs.buffID ~= 700 then return false end\nlocal player = TensorCore.mGetPlayer()\nif not player or player.job ~= 23 or not player.pos then return false end\nlocal targetID = eventArgs.entityID\nlocal recipient\nif targetID == player.id then\n    recipient = player\nelse\n    for _, member in pairs(TensorCore.getEntityGroupList(\"Party\", \"Number\") or {}) do\n        if member.id == targetID then\n            recipient = member\n            break\n        end\n    end\nend\nlocal reason\nif not recipient or not recipient.pos or not recipient.hp or recipient.hp.current <= 0 then\n    reason = \"recipient unavailable\"\nelseif TensorCore.getDistance2d(player.pos, recipient.pos) > 30 then\n    reason = \"out of range\"\nelseif not TensorCore.hasBuff(recipient, 700) then\n    reason = \"Throttle absent\"\nelse\n    reason = \"eligible for Paean request\"\nend\n\nlocal decisions = data.teaThrottlePaeanDecisions or {}\ndata.teaThrottlePaeanDecisions = decisions\nif decisions[targetID] ~= reason then\n    decisions[targetID] = reason\n    TensorCore.timelineLogToFile(\"[TEA Paean] Recipient \" .. tostring(targetID) .. \": \" .. reason .. \"\\n\")\nend\nreturn reason == \"eligible for Paean request\"\n",
-							dequeueIfLuaFalse = true,
-							name = "Bard enabled, living party member with Throttle in range",
+							conditionLua = "local p=TensorCore.mGetPlayer()\nlocal id=eventArgs.detectionTargetID\nlocal member=id and TensorCore.mGetEntity(id)\nif not p or not p.pos or not member or not member.alive or not member.pos then return false end\nif not TensorCore.hasBuff(member,700) or TensorCore.getDistance2d(p.pos,member.pos)>30 then return false end\nlocal action=ActionList:Get(1,3561)\nreturn action ~= nil and action:IsReady(id)\n",
+							name = "Living Throttle recipient in range",
 							uuid = "622b0634-5b03-3fea-b051-7546a44e7d0f",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local config=TEA_LPDU_Config\nif not config or config.values.autoThrottlePaean ~= true then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn p and p.localmapid==887 and p.job==23 and p.alive and p.incombat\n",
+							name = "Paean enabled on Bard",
+							uuid = "6732c431-4773-ce52-ab85-22b00984cfe9",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"622b0634-5b03-3fea-b051-7546a44e7d0f",
+									true,
+								},
+							},
+							filterTargetType = "Party",
+							name = "Nearest eligible Throttle recipient",
+							uuid = "d514952b-fa86-792b-ac1a-501ff1793d0b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local id=eventArgs.detectionTargetID\nif not id or id==0 or id==-1 then return false end\nlocal now=Now()\nif data.teaThrottlePaeanLogAt == nil or now-data.teaThrottlePaeanLogAt>=1000 then\n    TensorCore.timelineLogToFile(\"[TEA Paean] Hotbar request target=\" .. tostring(id) .. \" with active Throttle\\n\")\n    data.teaThrottlePaeanLogAt=now\nend\nreturn true\n",
+							name = "Log Paean request",
+							uuid = "50da9470-4e9f-e3d8-a7ba-0e99163a1faf",
 							version = 3,
 						},
 					},
 				},
 				displayPath = "P1 - Living Liquid",
-				eventType = 8,
+				loop = true,
 				mechanicTime = 95.9,
 				name = "[LPDU] Throttle - Bard Paean",
+				throttleTime = 350,
 				timeRange = true,
 				timelineIndex = 24,
 				timerEndOffset = 20,
