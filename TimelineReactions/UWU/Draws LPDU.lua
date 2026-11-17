@@ -12861,7 +12861,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local state=data.uwu_intermission_meteors\nif not state then state={seen={},shapes={},count=0};data.uwu_intermission_meteors=state end\nif state.seen[eventArgs.entityID] or state.count>=4 then self.used=true;return end\nlocal actor=TensorCore.mGetEntity(eventArgs.entityID)\nif not actor then return end\nlocal id=TensorCore.getMoogleDrawer():addTimedCircle(5900,actor.pos.x,actor.pos.y+0.05,actor.pos.z,17,0,false,true)\nif not id then return end\nstate.seen[eventArgs.entityID]=true\nstate.shapes[eventArgs.entityID]=id\nstate.count=state.count+1\nTensorCore.timelineLogToFile(string.format(\"[UWU Freefire] meteor %d id=%d preview=(%.2f,%.2f) radius=17\\n\",state.count,eventArgs.entityID,actor.pos.x,actor.pos.z))\nself.used=true",
+							actionLua = "local state=data.uwu_intermission_meteors\nif not state then state={seen={},shapes={},count=0};data.uwu_intermission_meteors=state end\nif state.seen[eventArgs.entityID] or state.count>=4 then self.used=true;return end\nlocal actor=TensorCore.mGetEntity(eventArgs.entityID)\nif not actor then return end\nlocal id=TensorCore.getMoogleDrawer():addTimedCircle(5900,actor.pos.x,actor.pos.y+0.05,actor.pos.z,17,0,false,true)\nif not id then return end\nstate.seen[eventArgs.entityID]=true\nstate.shapes[eventArgs.entityID]=id\nstate.count=state.count+1\nstate.positions=state.positions or {}\nstate.positions[eventArgs.entityID]={x=actor.pos.x,y=actor.pos.y,z=actor.pos.z}\nstate.centerUntil=Now()+5900\nTensorCore.timelineLogToFile(string.format(\"[UWU Freefire] meteor %d id=%d preview=(%.2f,%.2f) radius=17\\n\",state.count,eventArgs.entityID,actor.pos.x,actor.pos.z))\nself.used=true",
 							conditions = 
 							{
 								
@@ -12993,6 +12993,41 @@ local tbl =
 				timerEndOffset = 3,
 				timerStartOffset = -220,
 				uuid = "6231967f-32af-a092-a12a-df3594616cdd",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "0fb10609-10b3-bedb-b9ea-f9d1486741f9",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 12,
+				execute = "local state=data.uwu_intermission_meteors\nif not state or state.count~=4 or not state.centerUntil or Now()>=state.centerUntil then return end\nlocal active=false\nfor _ in pairs(state.shapes) do active=true;break end\nif not active then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.alive or not p.pos then return end\nlocal center={x=100,y=p.pos.y,z=100}\nfor _,point in pairs(state.positions or {}) do\n if TensorCore.getDistance2d(point,center)<18.2 then return end\nend\nlocal green=TensorCore.getCachedDrawer(0x5500FF00,0xAA00FF00,0xFF00FF00,0xFFFFFFFF,2)\ngreen:addCircle(center.x,center.y+.1,center.z,1.2,false)\nlocal distance=TensorCore.getDistance2d(p.pos,center)\nif distance>.5 then\n local tip=math.min(1.2,distance*.35)\n green:addArrow(p.pos.x,p.pos.y+.1,p.pos.z,TensorCore.getHeadingToTarget(p.pos,center),\n  math.max(.1,distance-tip),.7,tip,1.7,false)\nend\n",
+				executeType = 2,
+				loop = true,
+				mechanicTime = 800,
+				name = "[LPDU] Intermission meteors - Green centre and arrow",
+				timeRange = true,
+				timelineIndex = 114,
+				timerEndOffset = 3,
+				timerStartOffset = -220,
+				uuid = "dfc65e61-36d8-a61e-a7bd-5b12aa563fff",
 				version = 2,
 			},
 		},

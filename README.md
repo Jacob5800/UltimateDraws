@@ -300,6 +300,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UWU: LPDU
 
+- Added a green center circle and personal arrow during the four intermission meteor previews. (17-11-2026)
+
 - R1’s first Annihilation Mesohigh now shows a live arrow to the tether pickup segment with a green destination circle. (17-11-2026)
 
 - R1 receives a loud “Take Mesohigh tether” cue and raid warning when the first Annihilation tether appears. (17-11-2026)
@@ -317,8 +319,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Upheaval guidance now collects bomb spawns directly for its starting and rear landing circles. Added early previews for the late Titan rock set and Ultima’s middle impacts, BossMod-style Predation safe-edge arrows, a first-stack countdown and clearer world-position Annihilation orb highlights. (06-11-2026)
 
 - Added a non-tank “Move to A” call at 300 seconds and raised directional nail labels. Disabled the Titan CD-off reaction at 602 seconds. Upheaval now marks the rear knockback landing separately from its starting point near Titan. (06-11-2026)
-
-- P1 Feather Rain move calls now follow the jump cue. Added early Titan Geocrush previews, green safe-edge guidance and bomb-pattern-aware Upheaval positioning. Titan light-orb calls use Party Roster M1/M2. All players see Annihilation orb highlights; assigned soakers also get arrows to their orb. (06-11-2026)
 
 
 ### Q40: Shared AutoSim
