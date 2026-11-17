@@ -300,6 +300,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UWU: LPDU
 
+- R1 receives a loud “Take Mesohigh tether” cue and raid warning when the first Annihilation tether appears. (17-11-2026)
+
 - Added “Bait Eruption” TTS for R1 and R2 at 339 and 376. (17-11-2026)
 
 - UWU LPDU Settings appears from 20 seconds before pull and hides 30 seconds into the fight. (07-11-2026)
@@ -317,8 +319,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - P1 Feather Rain move calls now follow the jump cue. Added early Titan Geocrush previews, green safe-edge guidance and bomb-pattern-aware Upheaval positioning. Titan light-orb calls use Party Roster M1/M2. All players see Annihilation orb highlights; assigned soakers also get arrows to their orb. (06-11-2026)
 
 - Assigned Mesohigh takers now see their own tether and its source highlighted in green using Party Roster: P1 west R2/east OT, Annihilation R1 then Searing Wind healer, and Suppression MT. Added advance healer/MT tether calls and corrected tank roster checks in tether, Friction and Titan callouts. (06-11-2026)
-
-- BLM, BRD and RPR nail targeting now log diagnostic state changes: roster/assignment, collected nails, HP bands, awakening stacks, locked kill order, desired versus actual target and active casts. BLM also reports missing capture state. Targeting rules are unchanged. (31-10-2026)
 
 
 ### Q40: Shared AutoSim
