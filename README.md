@@ -300,6 +300,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UWU: LPDU
 
+- R1’s first Annihilation Mesohigh now shows a live arrow to the tether pickup segment with a green destination circle. (17-11-2026)
+
 - R1 receives a loud “Take Mesohigh tether” cue and raid warning when the first Annihilation tether appears. (17-11-2026)
 
 - Added “Bait Eruption” TTS for R1 and R2 at 339 and 376. (17-11-2026)
@@ -317,8 +319,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added a non-tank “Move to A” call at 300 seconds and raised directional nail labels. Disabled the Titan CD-off reaction at 602 seconds. Upheaval now marks the rear knockback landing separately from its starting point near Titan. (06-11-2026)
 
 - P1 Feather Rain move calls now follow the jump cue. Added early Titan Geocrush previews, green safe-edge guidance and bomb-pattern-aware Upheaval positioning. Titan light-orb calls use Party Roster M1/M2. All players see Annihilation orb highlights; assigned soakers also get arrows to their orb. (06-11-2026)
-
-- Assigned Mesohigh takers now see their own tether and its source highlighted in green using Party Roster: P1 west R2/east OT, Annihilation R1 then Searing Wind healer, and Suppression MT. Added advance healer/MT tether calls and corrected tank roster checks in tether, Friction and Titan callouts. (06-11-2026)
 
 
 ### Q40: Shared AutoSim
