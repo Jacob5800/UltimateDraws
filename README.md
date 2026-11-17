@@ -300,6 +300,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UWU: LPDU
 
+- “Move south for eruption baits” now uses Party Roster to notify R1 and R2 only. (17-11-2026)
+
 - Added a green center circle and personal arrow during the four intermission meteor previews. (17-11-2026)
 
 - R1’s first Annihilation Mesohigh now shows a live arrow to the tether pickup segment with a green destination circle. (17-11-2026)
@@ -317,8 +319,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Raised the NE/NW/SE/SW nail labels slightly further above the nail nameplates, keeping numbered labels in place. (07-11-2026)
 
 - Upheaval guidance now collects bomb spawns directly for its starting and rear landing circles. Added early previews for the late Titan rock set and Ultima’s middle impacts, BossMod-style Predation safe-edge arrows, a first-stack countdown and clearer world-position Annihilation orb highlights. (06-11-2026)
-
-- Added a non-tank “Move to A” call at 300 seconds and raised directional nail labels. Disabled the Titan CD-off reaction at 602 seconds. Upheaval now marks the rear knockback landing separately from its starting point near Titan. (06-11-2026)
 
 
 ### Q40: Shared AutoSim

@@ -14412,7 +14412,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local role = GetCurrentRole()\nreturn role == \"R1\" or role == \"R2\"",
+							conditionLua = "local roster=AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nlocal slot=roster.mySlot()\nreturn slot==\"R1\" or slot==\"R2\"\n",
 							name = "R1/R2 only",
 							uuid = "01c57ae9-4829-752d-a53f-5b2fdd6c8447",
 							version = 3,
