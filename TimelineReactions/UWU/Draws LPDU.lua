@@ -7013,6 +7013,40 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Callouts",
+				uuid = "960499dd-c5c5-75bb-b515-cf2b9f19fc7d",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Callouts",
+				execute = "local roster=AnyoneCore.Roster\nif not roster or not roster.current() then return end\nlocal slot=roster.mySlot()\nif slot==\"R1\" or slot==\"R2\" then\n AnyoneCore.Shotcall(\"Bait Eruption\",true,3,true)\nend\nself.used=true\n",
+				executeType = 2,
+				mechanicTime = 345,
+				name = "[Call][LPDU] Ranged bait Eruption - 339",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 47,
+				timerEndOffset = -4,
+				timerStartOffset = -6,
+				uuid = "789cf34f-9b84-79e2-b5e0-a1d74ad2cde4",
+				version = 2,
+			},
+		},
 	},
 	[48] = 
 	{
@@ -7558,6 +7592,40 @@ local tbl =
 				timerEndOffset = 7,
 				timerStartOffset = -4,
 				uuid = "56da5322-3bb5-7353-8dc5-25c192780130",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Callouts",
+				uuid = "dac152b4-5d45-49e9-91cd-cd07914a65d4",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Callouts",
+				execute = "local roster=AnyoneCore.Roster\nif not roster or not roster.current() then return end\nlocal slot=roster.mySlot()\nif slot==\"R1\" or slot==\"R2\" then\n AnyoneCore.Shotcall(\"Bait Eruption\",true,3,true)\nend\nself.used=true\n",
+				executeType = 2,
+				mechanicTime = 383,
+				name = "[Call][LPDU] Ranged bait Eruption - 376",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 55,
+				timerEndOffset = -5,
+				timerStartOffset = -7,
+				uuid = "f2c00e0a-5d4a-b32f-9de5-c9114596d936",
 				version = 2,
 			},
 		},
