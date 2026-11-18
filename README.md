@@ -170,6 +170,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UCOB: Shared AutoSim
 
+- Added Nael guard debug logs for the HP lock, Bard hold requests, and Potion toggle changes. (18-11-2026)
+
 - Nael’s low-HP guard now catches the 1 HP floor and holds Bard burst cooldowns and enabled potions through dives until Bahamut becomes targetable. (18-11-2026)
 
 - AutoSim gives damage zero planning value once Nael reaches her HP floor in P2, so it can save burst for the next phase. (11-11-2026)
