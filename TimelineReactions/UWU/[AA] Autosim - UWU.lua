@@ -427,80 +427,6 @@ local tbl =
 		{
 			data = 
 			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "local state = data.uwuAutoSim\nif not state or state.bardIfritReady or state.ifritStarted or state.observed.p2end then return end\nlocal api = TensorCore.API.TensorACR\n-- Give the Garuda opener its first 20 seconds before reserving burst.\nif api.getAutoSimTime() < 20 then return end\nlocal player = TensorCore.mGetPlayer()\nif not player or not player.alive then return end\n\nlocal expires = Now() + 750\nlocal raging = api.holdActionUntil(101, expires)\nlocal barrage = api.holdActionUntil(107, expires)\nlocal voice = api.holdActionUntil(118, expires)\nlocal result = string.format(\"Raging Strikes=%s Barrage=%s Battle Voice=%s\",\n tostring(raging), tostring(barrage), tostring(voice))\nif result ~= state.bardIfritHoldResult then\n state.bardIfritHoldResult = result\n TensorCore.timelineLogToFile(\"[UWU Bard Ifrit] Hold requests accepted \" .. result .. \"\\n\")\nend\nself.used = true",
-							conditions = 
-							{
-								
-								{
-									"a837ae60-7096-49b8-a24c-f1d47ad355af",
-									true,
-								},
-								
-								{
-									"bc0bbba5-4330-3cd9-a480-bc3e8d85e7c9",
-									true,
-								},
-							},
-							uuid = "bd71d7f2-e6c5-e18a-aea0-3b31a176b9fd",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 8,
-							dequeueIfLuaFalse = true,
-							localmapid = 777,
-							name = "UWU territory",
-							uuid = "a837ae60-7096-49b8-a24c-f1d47ad355af",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								23,
-							},
-							name = "Bard",
-							uuid = "bc0bbba5-4330-3cd9-a480-bc3e8d85e7c9",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "AutoSim/Job options",
-				loop = true,
-				mechanicTime = 9,
-				name = "[UWU] BRD - Save burst for Ifrit",
-				throttleTime = 300,
-				timeRange = true,
-				timelineIndex = 2,
-				timerEndOffset = 351,
-				uuid = "ec0ce148-ab7d-b81f-828c-bf06d7a74fb6",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
 				displayPath = "AutoSim",
 				name = "DoT forecasts",
 				uuid = "9ce0135c-f6d2-dfaf-aaa4-32a252ee3463",
@@ -3173,6 +3099,155 @@ local tbl =
 			},
 		},
 	},
+	[23] = 
+	{
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "if not _G.BrdUWUIfritHold then\n _G.BrdUWUIfritHold = {\n  cd = ACR_TensorRequiem4_CD,\n  songs = ACR_TensorRequiem4_Songs,\n  potion = ACR_TensorRequiem4_Potion\n }\nend\nACR_TensorRequiem4_CD = false\nACR_TensorRequiem4_Songs = false\nACR_TensorRequiem4_Potion = false\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"052a2ce1-e887-a00c-8ce4-72c22989c6e6",
+									true,
+								},
+								
+								{
+									"c37d76d5-2895-6e67-8259-6457fadd77a4",
+									true,
+								},
+							},
+							uuid = "10d89da7-c3f2-9889-a12d-796db717d231",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU territory",
+							uuid = "052a2ce1-e887-a00c-8ce4-72c22989c6e6",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								23,
+							},
+							name = "Bard",
+							uuid = "c37d76d5-2895-6e67-8259-6457fadd77a4",
+							version = 3,
+						},
+					},
+				},
+				mechanicTime = 105,
+				name = "[BRD UWU] Hold CD, Songs and Potion at 110",
+				timeRange = true,
+				timelineIndex = 23,
+				timerEndOffset = 8,
+				timerStartOffset = 5,
+				uuid = "8ebdce7f-0dc6-d810-b67f-059c8fb1ffb4",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local saved = _G.BrdUWUIfritHold\nif not saved then return end\nACR_TensorRequiem4_CD = saved.cd\nACR_TensorRequiem4_Songs = saved.songs\nACR_TensorRequiem4_Potion = saved.potion\n_G.BrdUWUIfritHold = nil\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"caffbf74-0367-733b-941f-a5ec0e40f7fd",
+									true,
+								},
+								
+								{
+									"fe2dd50c-4749-b620-b04c-0fb3ccc84d33",
+									true,
+								},
+							},
+							uuid = "aa360322-8993-be67-82c4-57baa49d6ff0",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU territory",
+							uuid = "caffbf74-0367-733b-941f-a5ec0e40f7fd",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								23,
+							},
+							name = "Bard",
+							uuid = "fe2dd50c-4749-b620-b04c-0fb3ccc84d33",
+							version = 3,
+						},
+					},
+				},
+				eventType = 9,
+				loop = true,
+				mechanicTime = 105,
+				name = "[BRD UWU] Restore pre-hold toggles on wipe",
+				timeRange = true,
+				timelineIndex = 23,
+				timerEndOffset = 255,
+				timerStartOffset = -105,
+				uuid = "7e0d6b67-c9d1-f177-bcfa-deec2442f2d5",
+				version = 2,
+			},
+		},
+	},
 	[25] = 
 	{
 		
@@ -3753,116 +3828,6 @@ local tbl =
 		{
 			data = 
 			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "local state = data.uwuAutoSim\nif not state or state.bardIfritReady then return end\nstate.bardIfritReady = true\nif state.bardIfritHoldResult then\n TensorCore.timelineLogToFile(\"[UWU Bard Ifrit] Ifrit targetable. Hold renewal stopped.\\n\")\nend\nself.used = true",
-							conditions = 
-							{
-								
-								{
-									"5ab57857-07b8-a130-a3ce-7c433f66ebb4",
-									true,
-								},
-								
-								{
-									"bf6eefda-028e-6c7a-a83c-8ab5b99bf96f",
-									true,
-								},
-								
-								{
-									"c0cd2291-94df-b441-9f0f-f02817ac1e79",
-									true,
-								},
-								
-								{
-									"05816397-845f-b27e-b231-3a81e80f30a9",
-									true,
-								},
-							},
-							uuid = "cf840e8c-72f9-f0c0-acdc-838e3492e080",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 8,
-							dequeueIfLuaFalse = true,
-							localmapid = 777,
-							name = "UWU territory",
-							uuid = "5ab57857-07b8-a130-a3ce-7c433f66ebb4",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 14,
-							dequeueIfLuaFalse = true,
-							jobIDList = 
-							{
-								23,
-							},
-							name = "Bard",
-							uuid = "bf6eefda-028e-6c7a-a83c-8ab5b99bf96f",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Event",
-							dequeueIfLuaFalse = true,
-							eventArgType = 3,
-							name = "Ifrit returns",
-							uuid = "c0cd2291-94df-b441-9f0f-f02817ac1e79",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Event",
-							dequeueIfLuaFalse = true,
-							eventArgOptionType = 2,
-							eventEntityContentID = 1185,
-							name = "Content 1185",
-							uuid = "05816397-845f-b27e-b231-3a81e80f30a9",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "AutoSim/Job options",
-				eventType = 26,
-				loop = true,
-				mechanicTime = 300,
-				name = "[UWU] BRD - Release burst at Ifrit",
-				timeRange = true,
-				timelineIndex = 36,
-				timerEndOffset = 60,
-				timerStartOffset = -130,
-				uuid = "b76f5cfd-28ca-cd45-b870-4669e5211a8b",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
 				displayPath = "AutoSim",
 				name = "Encounter events",
 				uuid = "f18b80fd-fe63-8adc-bfc5-188c7995621e",
@@ -4415,6 +4380,115 @@ local tbl =
 				timerEndOffset = 315,
 				timerStartOffset = -130,
 				uuid = "770369fa-85b4-949e-90f0-0d8306fe10bb",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local saved = _G.BrdUWUIfritHold\nif not saved then return end\nACR_TensorRequiem4_CD = true\nACR_TensorRequiem4_Songs = true\nACR_TensorRequiem4_Potion = true\n_G.BrdUWUIfritHold = nil\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"8a13a9de-6b40-9a62-8120-842653b9bfbb",
+									true,
+								},
+								
+								{
+									"0beabe2b-7bed-550b-8974-ac18740fb7e4",
+									true,
+								},
+								
+								{
+									"54bd1a20-ed56-49af-8f79-eb24b2d88352",
+									true,
+								},
+								
+								{
+									"953a61ad-ca30-01fe-8111-9ec917795246",
+									true,
+								},
+							},
+							uuid = "a7cf13ca-84d0-99c0-a23a-5b1e2a657fbb",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU territory",
+							uuid = "8a13a9de-6b40-9a62-8120-842653b9bfbb",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								23,
+							},
+							name = "Bard",
+							uuid = "0beabe2b-7bed-550b-8974-ac18740fb7e4",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Ifrit returns",
+							uuid = "54bd1a20-ed56-49af-8f79-eb24b2d88352",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1185,
+							name = "Content 1185",
+							uuid = "953a61ad-ca30-01fe-8111-9ec917795246",
+							version = 3,
+						},
+					},
+				},
+				eventType = 26,
+				loop = true,
+				mechanicTime = 300,
+				name = "[BRD UWU] Enable CD, Songs and Potion at Ifrit",
+				timeRange = true,
+				timelineIndex = 36,
+				timerEndOffset = 60,
+				timerStartOffset = -130,
+				uuid = "22a10117-967e-d748-a600-8c1d15f35ab3",
 				version = 2,
 			},
 		},
