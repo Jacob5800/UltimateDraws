@@ -76,14 +76,135 @@ local tbl =
 			{
 				actions = 
 				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "gStartCombat=false\nlocal settings=AnyoneCore and AnyoneCore.Settings\nif settings and settings.PrepullHelper then settings.PrepullHelper.enabled=false end\nif settings and settings.DutyHelper then settings.DutyHelper.enabled=false end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"d004cd86-dca8-3639-8420-af309cd7c70d",
+									true,
+								},
+								
+								{
+									"a9d0c2b5-4cfb-3d4d-9088-0c291b88fb43",
+									false,
+								},
+							},
+							name = "Keep Start Combat off",
+							uuid = "c8ecb071-5316-0eb3-8acb-93a935ac08c4",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"d004cd86-dca8-3639-8420-af309cd7c70d",
+									true,
+								},
+								
+								{
+									"a9d0c2b5-4cfb-3d4d-9088-0c291b88fb43",
+									false,
+								},
+								
+								{
+									"8468671c-e2eb-15c6-9a79-be64a74d10e9",
+									true,
+								},
+								
+								{
+									"c0516a6c-6064-16a1-81f4-554777888885",
+									true,
+								},
+							},
+							name = "Set target to Omega",
+							setTarget = true,
+							targetType = "Detection Target",
+							uuid = "b1e3f5da-9dcd-8715-bab6-e09964cba898",
+							version = 2.1,
+						},
+					},
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							localmapid = 1122,
+							name = "TOP",
+							uuid = "d004cd86-dca8-3639-8420-af309cd7c70d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 7,
+							uuid = "a9d0c2b5-4cfb-3d4d-9088-0c291b88fb43",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return not (data.topCountdownCancelledAt and data.topCountdownCancelledAt >= eventArgs.timeQueued) and Now() < eventArgs.timeQueued + eventArgs.time * 1000",
+							name = "Countdown still active",
+							uuid = "8468671c-e2eb-15c6-9a79-be64a74d10e9",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local e=TensorCore.mGetEntity(eventArgs.detectionTargetID)\nlocal p=TensorCore.mGetPlayer()\nreturn e and p and e.contentid==15708 and e.attackable and e.targetable and e.hp.current>0 and TensorCore.getDistance2d(p.pos,e.pos)<=60+e.hitradius",
+							name = "Nearby Omega",
+							uuid = "240222c7-935c-641d-9ff8-f8e9d2c1cbf9",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							conditions = 
+							{
+								
+								{
+									"240222c7-935c-641d-9ff8-f8e9d2c1cbf9",
+									true,
+								},
+							},
+							filterTargetType = "Enemy",
+							name = "Nearest eligible boss",
+							uuid = "c0516a6c-6064-16a1-81f4-554777888885",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "AutoSim/Setup and cleanup",
 				eventType = 16,
 				execute = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 1122 or player.incombat then self.used=true;return end\nlocal now = Now()\nlocal queued = eventArgs.timeQueued\nif now >= queued + eventArgs.time * 1000 or (data.topCountdownCancelledAt or -1) >= queued then self.used=true;return end\ngStartCombat = false\nif not self.prepared then\n    local settings = AnyoneCore and AnyoneCore.Settings\n    if settings and settings.PrepullHelper then settings.PrepullHelper.enabled = false end\n    if settings and settings.DutyHelper then settings.DutyHelper.enabled = false end\n    self.prepared = true\nend\nif now < (self.nextCheck or 0) then return end\nself.nextCheck = now + 250\nlocal boss, nearest\nfor _, entity in pairs(TensorCore.entityList(\"contentid=15708\") or {}) do\n    if entity.targetable and entity.attackable and entity.hp.current > 0 then\n        local distance = TensorCore.getDistance2d(player.pos, entity.pos)\n        if distance <= 60 + entity.hitradius and (not nearest or distance < nearest) then\n            boss, nearest = entity, distance\n        end\n    end\nend\nif not boss then return end\nif player.targetid == boss.id then\n    TensorCore.timelineLogToFile(\"[TOP Opener] Omega target confirmed with Start Combat off\\n\")\n    self.used = true\n    return\nend\nlocal accepted = Player:SetTarget(boss.id)\nif not self.loggedRequest then\n    TensorCore.timelineLogToFile(string.format(\"[TOP Opener] Omega target request intended=%s current=%s distance=%.1f accepted=%s\\n\",boss.id,player.targetid,nearest,tostring(accepted)))\n    self.loggedRequest = true\nend\n",
-				executeType = 2,
 				loop = true,
 				mechanicTime = 3.4,
 				name = "[AA] Target Omega on countdown",

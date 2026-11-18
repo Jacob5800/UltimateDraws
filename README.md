@@ -221,7 +221,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### TOP: AutoSim
 
-- Selects Omega when the countdown starts, with Start Combat turned off. (18-11-2026)
+- The countdown reaction shows an explicit Set target to Omega action after switching Start Combat off. (18-11-2026)
 
 - Checked [AA] Autosim - TOP (5): already eligible for Optifine users without an owned core Settings or file-I/O dependency. It exposes no separate saved preference panel; reaction-editor choices remain in the profile file. (05-11-2026)
 
