@@ -36,6 +36,64 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "AutoSim",
+				name = "Setup and cleanup",
+				uuid = "94aa31d3-f5e5-f42c-9cf9-2fcfaf1f5325",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "AutoSim/Setup and cleanup",
+				eventType = 17,
+				execute = "data.topCountdownCancelledAt = Now()\nself.used = true\n",
+				executeType = 2,
+				loop = true,
+				mechanicTime = 3.4,
+				name = "[AA] Cancel Omega countdown targeting",
+				timeRange = true,
+				timelineIndex = 1,
+				timerStartOffset = -120,
+				uuid = "33bc3715-9ac8-c355-b5df-93c3d41c9f35",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "AutoSim/Setup and cleanup",
+				eventType = 16,
+				execute = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 1122 or player.incombat then self.used=true;return end\nlocal now = Now()\nlocal queued = eventArgs.timeQueued\nif now >= queued + eventArgs.time * 1000 or (data.topCountdownCancelledAt or -1) >= queued then self.used=true;return end\ngStartCombat = false\nif not self.prepared then\n    local settings = AnyoneCore and AnyoneCore.Settings\n    if settings and settings.PrepullHelper then settings.PrepullHelper.enabled = false end\n    if settings and settings.DutyHelper then settings.DutyHelper.enabled = false end\n    self.prepared = true\nend\nif now < (self.nextCheck or 0) then return end\nself.nextCheck = now + 250\nlocal boss, nearest\nfor _, entity in pairs(TensorCore.entityList(\"contentid=15708\") or {}) do\n    if entity.targetable and entity.attackable and entity.hp.current > 0 then\n        local distance = TensorCore.getDistance2d(player.pos, entity.pos)\n        if distance <= 60 + entity.hitradius and (not nearest or distance < nearest) then\n            boss, nearest = entity, distance\n        end\n    end\nend\nif not boss then return end\nif player.targetid == boss.id then\n    TensorCore.timelineLogToFile(\"[TOP Opener] Omega target confirmed with Start Combat off\\n\")\n    self.used = true\n    return\nend\nlocal accepted = Player:SetTarget(boss.id)\nif not self.loggedRequest then\n    TensorCore.timelineLogToFile(string.format(\"[TOP Opener] Omega target request intended=%s current=%s distance=%.1f accepted=%s\\n\",boss.id,player.targetid,nearest,tostring(accepted)))\n    self.loggedRequest = true\nend\n",
+				executeType = 2,
+				loop = true,
+				mechanicTime = 3.4,
+				name = "[AA] Target Omega on countdown",
+				timeRange = true,
+				timelineIndex = 1,
+				timerStartOffset = -120,
+				uuid = "d81d4a6a-6320-207e-9d21-32f5dfdd2728",
+				version = 2,
+			},
+		},
 	}, 
 	[3] = 
 	{
