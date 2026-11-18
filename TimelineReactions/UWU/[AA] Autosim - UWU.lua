@@ -437,6 +437,80 @@ local tbl =
 		{
 			data = 
 			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local state = data.uwuAutoSim\nif not state or state.bardIfritReady or state.ifritStarted or state.observed.p2end then return end\nlocal api = TensorCore.API.TensorACR\n-- Give the Garuda opener its first 20 seconds before reserving burst.\nif api.getAutoSimTime() < 20 then return end\nlocal player = TensorCore.mGetPlayer()\nif not player or not player.alive then return end\n\nlocal expires = Now() + 750\nlocal raging = api.holdActionUntil(101, expires)\nlocal barrage = api.holdActionUntil(107, expires)\nlocal voice = api.holdActionUntil(118, expires)\nlocal result = string.format(\"Raging Strikes=%s Barrage=%s Battle Voice=%s\",\n tostring(raging), tostring(barrage), tostring(voice))\nif result ~= state.bardIfritHoldResult then\n state.bardIfritHoldResult = result\n TensorCore.timelineLogToFile(\"[UWU Bard Ifrit] Hold requests accepted \" .. result .. \"\\n\")\nend\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"a837ae60-7096-49b8-a24c-f1d47ad355af",
+									true,
+								},
+								
+								{
+									"bc0bbba5-4330-3cd9-a480-bc3e8d85e7c9",
+									true,
+								},
+							},
+							uuid = "bd71d7f2-e6c5-e18a-aea0-3b31a176b9fd",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU territory",
+							uuid = "a837ae60-7096-49b8-a24c-f1d47ad355af",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								23,
+							},
+							name = "Bard",
+							uuid = "bc0bbba5-4330-3cd9-a480-bc3e8d85e7c9",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Job options",
+				loop = true,
+				mechanicTime = 9,
+				name = "[UWU] BRD - Save burst for Ifrit",
+				throttleTime = 300,
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 351,
+				uuid = "ec0ce148-ab7d-b81f-828c-bf06d7a74fb6",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "AutoSim",
 				name = "DoT forecasts",
 				uuid = "9ce0135c-f6d2-dfaf-aaa4-32a252ee3463",
@@ -3461,6 +3535,116 @@ local tbl =
 				timerEndOffset = 15,
 				timerStartOffset = -15,
 				uuid = "5f1e38a7-f8d9-cb76-96d7-bf9b6480bbce",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local state = data.uwuAutoSim\nif not state or state.bardIfritReady then return end\nstate.bardIfritReady = true\nif state.bardIfritHoldResult then\n TensorCore.timelineLogToFile(\"[UWU Bard Ifrit] Ifrit targetable. Hold renewal stopped.\\n\")\nend\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"5ab57857-07b8-a130-a3ce-7c433f66ebb4",
+									true,
+								},
+								
+								{
+									"bf6eefda-028e-6c7a-a83c-8ab5b99bf96f",
+									true,
+								},
+								
+								{
+									"c0cd2291-94df-b441-9f0f-f02817ac1e79",
+									true,
+								},
+								
+								{
+									"05816397-845f-b27e-b231-3a81e80f30a9",
+									true,
+								},
+							},
+							uuid = "cf840e8c-72f9-f0c0-acdc-838e3492e080",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU territory",
+							uuid = "5ab57857-07b8-a130-a3ce-7c433f66ebb4",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								23,
+							},
+							name = "Bard",
+							uuid = "bf6eefda-028e-6c7a-a83c-8ab5b99bf96f",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Ifrit returns",
+							uuid = "c0cd2291-94df-b441-9f0f-f02817ac1e79",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1185,
+							name = "Content 1185",
+							uuid = "05816397-845f-b27e-b231-3a81e80f30a9",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Job options",
+				eventType = 26,
+				loop = true,
+				mechanicTime = 300,
+				name = "[UWU] BRD - Release burst at Ifrit",
+				timeRange = true,
+				timelineIndex = 36,
+				timerEndOffset = 60,
+				timerStartOffset = -130,
+				uuid = "b76f5cfd-28ca-cd45-b870-4669e5211a8b",
 				version = 2,
 			},
 		},
