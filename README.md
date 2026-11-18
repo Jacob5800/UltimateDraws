@@ -229,6 +229,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### TOP: LPDU
 
+- Added an optional outside wait spot for players without a first-wave Program Loop assignment, enabled by default. Enable the separate next-assignment label under P1 to see when your next tower or tether starts. (18-11-2026)
+
 - Added a P1 Pantokrator cone preview toggle. Turn it off to show only the current red cone pair. (18-11-2026)
 
 - TOP roster-dependent draws wait for a ready Party Roster without logging repeated condition errors. (08-11-2026)
