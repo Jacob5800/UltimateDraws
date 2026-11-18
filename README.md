@@ -229,7 +229,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### TOP: LPDU
 
-- Added an optional Testing spread for Pantokrator. The missile arrow aims for the middle of your group's gap between the cones. LPDU remains the default. (18-11-2026)
+- Added an optional Testing spread for Pantokrator. The missile arrow aims for the boss side of your group's gap between the cones. LPDU remains the default. (18-11-2026)
 
 - Program Loop now shows the outside wait spot during the tether-path callout. The optional next-assignment countdown follows your character using the TEA Motion/Stillness style. Pantokrator preposition guidance starts at 61 seconds. (18-11-2026)
 
