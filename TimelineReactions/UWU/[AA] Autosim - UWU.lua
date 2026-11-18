@@ -2538,6 +2538,227 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local boss = TensorCore.mGetTarget()\nif not boss or not boss.alive or not boss.targetable then return end\nlocal id = boss.contentid\nif id ~= 1644 or boss.hp.percent >= 10 then return end\nlocal flags = data.blackmageUWUDoTPhase\nif flags and flags[1] then return end\nlocal api = TensorCore.API.TensorACR\nif api.getBlacklistEntry(id) then return end\nif api.addBlacklistEntry(id) then\n _G.BlackmageUWUOwnedDoT = _G.BlackmageUWUOwnedDoT or {}\n _G.BlackmageUWUOwnedDoT[id] = true\n self.used = true\nend",
+							conditions = 
+							{
+								
+								{
+									"27b9c9d9-b8c2-5438-8455-77bd38bb85d2",
+									true,
+								},
+								
+								{
+									"f91d37a7-7e68-7801-896f-0290656a59d4",
+									true,
+								},
+							},
+							uuid = "8eb2624f-c5a7-5d50-8e67-0fe3b5a6e23b",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU territory",
+							uuid = "27b9c9d9-b8c2-5438-8455-77bd38bb85d2",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								25,
+							},
+							name = "Black Mage",
+							uuid = "f91d37a7-7e68-7801-896f-0290656a59d4",
+							version = 3,
+						},
+					},
+				},
+				loop = true,
+				mechanicTime = 9,
+				name = "[BLM UWU] Blacklist Garuda DoTs below 10%",
+				throttleTime = 300,
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 300,
+				uuid = "f5d7e1fd-0fc3-9a98-8096-50c0657bd772",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local owned = _G.BlackmageUWUOwnedDoT\nif owned then\n for id in pairs(owned) do\n  TensorCore.API.TensorACR.deleteBlacklistEntry(id)\n end\n _G.BlackmageUWUOwnedDoT = nil\nend\ndata.blackmageUWUDoTPhase = nil\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"4d00de9b-ad62-d54b-8484-b23d507010b2",
+									true,
+								},
+								
+								{
+									"77181235-646f-5a30-a8c0-fcf1308c86ac",
+									true,
+								},
+							},
+							uuid = "ff446f6c-8635-c9c1-bfcd-dcd1f9d4183e",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU territory",
+							uuid = "4d00de9b-ad62-d54b-8484-b23d507010b2",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								25,
+							},
+							name = "Black Mage",
+							uuid = "77181235-646f-5a30-a8c0-fcf1308c86ac",
+							version = 3,
+						},
+					},
+				},
+				eventType = 9,
+				loop = true,
+				mechanicTime = 9,
+				name = "[BLM UWU] Clear temporary DoT blacklist OnWipe",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 1250,
+				timerStartOffset = -90,
+				uuid = "8994069e-c1f0-17c8-9834-9ee47d9617aa",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local owned = _G.BlackmageUWUOwnedDoT\nif owned then\n for id in pairs(owned) do\n  TensorCore.API.TensorACR.deleteBlacklistEntry(id)\n end\n _G.BlackmageUWUOwnedDoT = nil\nend\ndata.blackmageUWUDoTPhase = nil\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"9ee59d75-6477-30ab-ad82-e85d8b2ae8ca",
+									true,
+								},
+								
+								{
+									"4a5f9e2b-f094-cfa7-bdbb-d880c136057f",
+									true,
+								},
+							},
+							uuid = "921c2a82-bd16-e909-9200-9acb87e55fec",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU territory",
+							uuid = "9ee59d75-6477-30ab-ad82-e85d8b2ae8ca",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								25,
+							},
+							name = "Black Mage",
+							uuid = "4a5f9e2b-f094-cfa7-bdbb-d880c136057f",
+							version = 3,
+						},
+					},
+				},
+				eventType = 16,
+				loop = true,
+				mechanicTime = 9,
+				name = "[BLM UWU] Clear temporary DoT blacklist OnCountdown",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 1250,
+				timerStartOffset = -90,
+				uuid = "df8f5480-a3f7-c1f5-abad-395506e589a6",
+				version = 2,
+			},
+		},
 	},
 	[8] = 
 	{
@@ -4022,6 +4243,188 @@ local tbl =
 				timerEndOffset = 270,
 				timerStartOffset = -20,
 				uuid = "2c0f002f-e334-c125-86c3-1d68f3e259f5",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local owned = _G.BlackmageUWUOwnedDoT\nif owned and owned[1644] then\n TensorCore.API.TensorACR.deleteBlacklistEntry(1644)\n owned[1644] = nil\nend\ndata.blackmageUWUDoTPhase = data.blackmageUWUDoTPhase or {}\ndata.blackmageUWUDoTPhase[1] = true\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"1060918a-040f-08ba-a0e3-6f647fe023c0",
+									true,
+								},
+								
+								{
+									"78c81d5f-8c68-17ef-8674-c50a5e49b487",
+									true,
+								},
+								
+								{
+									"24287b97-df86-e184-ae3a-9e6a2794d145",
+									true,
+								},
+								
+								{
+									"19015227-af68-4a7c-9d51-a15c5d80d3f8",
+									true,
+								},
+							},
+							uuid = "fe2cf79b-d0a8-f97d-819a-3f664a9e5793",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU territory",
+							uuid = "1060918a-040f-08ba-a0e3-6f647fe023c0",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								25,
+							},
+							name = "Black Mage",
+							uuid = "78c81d5f-8c68-17ef-8674-c50a5e49b487",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Ifrit returns",
+							uuid = "24287b97-df86-e184-ae3a-9e6a2794d145",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1185,
+							name = "Content 1185",
+							uuid = "19015227-af68-4a7c-9d51-a15c5d80d3f8",
+							version = 3,
+						},
+					},
+				},
+				eventType = 26,
+				mechanicTime = 300,
+				name = "[BLM UWU] Clear Garuda DoT blacklist at next phase",
+				timeRange = true,
+				timelineIndex = 36,
+				timerEndOffset = 60,
+				timerStartOffset = -130,
+				uuid = "58b483a6-1bf8-5cab-8754-7021a88ad53a",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local boss = TensorCore.mGetTarget()\nif not boss or not boss.alive or not boss.targetable then return end\nlocal id = boss.contentid\nif id ~= 1185 or boss.hp.percent >= 10 then return end\nlocal flags = data.blackmageUWUDoTPhase\nif flags and flags[2] then return end\nlocal api = TensorCore.API.TensorACR\nif api.getBlacklistEntry(id) then return end\nif api.addBlacklistEntry(id) then\n _G.BlackmageUWUOwnedDoT = _G.BlackmageUWUOwnedDoT or {}\n _G.BlackmageUWUOwnedDoT[id] = true\n self.used = true\nend",
+							conditions = 
+							{
+								
+								{
+									"0b56d4d6-d841-cf86-bd86-e5bbb69f2ab4",
+									true,
+								},
+								
+								{
+									"176a7a61-6ed3-ecdc-9bbd-f2f602226db4",
+									true,
+								},
+							},
+							uuid = "e365e6cd-206c-c47c-baa4-fb192356bb84",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU territory",
+							uuid = "0b56d4d6-d841-cf86-bd86-e5bbb69f2ab4",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								25,
+							},
+							name = "Black Mage",
+							uuid = "176a7a61-6ed3-ecdc-9bbd-f2f602226db4",
+							version = 3,
+						},
+					},
+				},
+				loop = true,
+				mechanicTime = 300,
+				name = "[BLM UWU] Blacklist Ifrit DoTs below 10%",
+				throttleTime = 300,
+				timeRange = true,
+				timelineIndex = 36,
+				timerEndOffset = 315,
+				timerStartOffset = -130,
+				uuid = "770369fa-85b4-949e-90f0-0d8306fe10bb",
 				version = 2,
 			},
 		},
@@ -6232,6 +6635,114 @@ local tbl =
 				timerEndOffset = 200,
 				timerStartOffset = -20,
 				uuid = "a5a85780-5f8b-6948-ba64-bbc838bd509c",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local owned = _G.BlackmageUWUOwnedDoT\nif owned and owned[1185] then\n TensorCore.API.TensorACR.deleteBlacklistEntry(1185)\n owned[1185] = nil\nend\ndata.blackmageUWUDoTPhase = data.blackmageUWUDoTPhase or {}\ndata.blackmageUWUDoTPhase[2] = true\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"50346964-8b39-24ba-9225-9a59f518f363",
+									true,
+								},
+								
+								{
+									"28d0762d-8ad0-0d25-be32-b269aff133b8",
+									true,
+								},
+								
+								{
+									"b29dea5d-739a-7ea5-9880-e55410f0af6c",
+									true,
+								},
+								
+								{
+									"aea283e7-922b-05d6-a7b5-b7c24b10d775",
+									true,
+								},
+							},
+							uuid = "7ec361cc-4b8e-d7f1-a646-a63b10f05dfc",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU territory",
+							uuid = "50346964-8b39-24ba-9225-9a59f518f363",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								25,
+							},
+							name = "Black Mage",
+							uuid = "28d0762d-8ad0-0d25-be32-b269aff133b8",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Ifrit returns",
+							uuid = "b29dea5d-739a-7ea5-9880-e55410f0af6c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1801,
+							name = "Content 1185",
+							uuid = "aea283e7-922b-05d6-a7b5-b7c24b10d775",
+							version = 3,
+						},
+					},
+				},
+				eventType = 26,
+				mechanicTime = 600,
+				name = "[BLM UWU] Clear Ifrit DoT blacklist at next phase",
+				timeRange = true,
+				timelineIndex = 74,
+				timerEndOffset = 60,
+				timerStartOffset = -130,
+				uuid = "2e3e1e19-af6f-3d61-8dce-cd0503c5e4fa",
 				version = 2,
 			},
 		},
@@ -11493,6 +12004,80 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local boss = TensorCore.mGetTarget()\nif not boss or not boss.alive or not boss.targetable then return end\nlocal id = boss.contentid\nif id ~= 1801 or boss.hp.percent >= 10 then return end\nlocal api = TensorCore.API.TensorACR\nif api.getBlacklistEntry(id) then return end\nif api.addBlacklistEntry(id) then\n _G.BlackmageUWUOwnedDoT = _G.BlackmageUWUOwnedDoT or {}\n _G.BlackmageUWUOwnedDoT[id] = true\n self.used = true\nend",
+							conditions = 
+							{
+								
+								{
+									"073f7f70-9b51-cf7c-b70d-112c47c3dff1",
+									true,
+								},
+								
+								{
+									"1ffef588-d7af-b2be-b5e0-dc7ef1f03b5c",
+									true,
+								},
+							},
+							uuid = "f6600cb6-9053-e899-a7d1-77e4a82fbc21",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU territory",
+							uuid = "073f7f70-9b51-cf7c-b70d-112c47c3dff1",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								25,
+							},
+							name = "Black Mage",
+							uuid = "1ffef588-d7af-b2be-b5e0-dc7ef1f03b5c",
+							version = 3,
+						},
+					},
+				},
+				loop = true,
+				mechanicTime = 768,
+				name = "[BLM UWU] Blacklist Titan DoTs below 10%",
+				throttleTime = 300,
+				timeRange = true,
+				timelineIndex = 113,
+				timerEndOffset = 22,
+				timerStartOffset = -165,
+				uuid = "4bd21177-67a1-db24-9f25-c0ce4c3bd052",
+				version = 2,
+			},
+		},
 	},
 	[114] = 
 	{
@@ -14235,6 +14820,114 @@ local tbl =
 				timerEndOffset = 12,
 				timerStartOffset = -8,
 				uuid = "aefb4e31-8d0d-a8ce-860e-56ac62cdebb5",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local owned = _G.BlackmageUWUOwnedDoT\nif owned and owned[1801] then\n TensorCore.API.TensorACR.deleteBlacklistEntry(1801)\n owned[1801] = nil\nend\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"93069ef2-7669-aeec-be21-cc57db1e68c8",
+									true,
+								},
+								
+								{
+									"390fe12e-e67e-6854-8d5d-eb0bc3e8d9ad",
+									true,
+								},
+								
+								{
+									"fb236e44-e8e0-b666-a0ac-1ebde52c9ac4",
+									true,
+								},
+								
+								{
+									"c55607d8-8fbe-fa3b-ab5f-a91840b7a751",
+									true,
+								},
+							},
+							uuid = "c74eb6c0-24bd-d29e-8316-1c9aa960e317",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU territory",
+							uuid = "93069ef2-7669-aeec-be21-cc57db1e68c8",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								25,
+							},
+							name = "Black Mage",
+							uuid = "390fe12e-e67e-6854-8d5d-eb0bc3e8d9ad",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 3,
+							name = "Ifrit returns",
+							uuid = "fb236e44-e8e0-b666-a0ac-1ebde52c9ac4",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 2137,
+							name = "Ultima Weapon",
+							uuid = "c55607d8-8fbe-fa3b-ab5f-a91840b7a751",
+							version = 3,
+						},
+					},
+				},
+				eventType = 26,
+				mechanicTime = 1000,
+				name = "[BLM UWU] Clear Titan DoT blacklist at Ultima",
+				timeRange = true,
+				timelineIndex = 118,
+				timerEndOffset = 25,
+				timerStartOffset = -15,
+				uuid = "3fddd076-2727-083f-a85c-90fb129f7dd3",
 				version = 2,
 			},
 		},

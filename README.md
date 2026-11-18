@@ -180,6 +180,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UWU: Shared AutoSim
 
+- Black Mage skips new DoTs below 10% HP on Garuda, Ifrit, and Titan. Temporary blacklist entries clear at the next boss, on wipe, or at the next countdown. (18-11-2026)
+
 - Bard now saves Raging Strikes, Barrage, and Battle Voice for Ifrit after the Garuda opener. (18-11-2026)
 
 ### DSR: LPDU (Beta)
