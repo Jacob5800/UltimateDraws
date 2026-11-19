@@ -18750,7 +18750,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.ucobAfah194={target=eventArgs.targetID,boss=eventArgs.entityID,expires=Now()+eventArgs.channelTimeMax*1000+500}\nself.used=true",
+							actionLua = "local cast=eventArgs\nlocal duration=cast.channelTimeMax*1000\nlocal state={target=cast.targetID,boss=cast.entityID,expires=Now()+duration+500}\nlocal previous=data.ucobAfah194\nif previous and previous.countdown then AnyoneCore.removeTimedWorldText(previous.countdown) end\ndata.ucobAfah194=state\nlocal target=TensorCore.mGetEntity(cast.targetID)\nif duration>0 and target and target.alive then\n state.countdown=AnyoneCore.addWorldTextCountdownOnEnt(duration,target.id,0xFFFFFFFF,true,1.35,2.3,0,\"Morn Afah \")\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -18841,7 +18841,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.ucobAfah194=nil\nself.used=true",
+							actionLua = "local state=data.ucobAfah194\nif state and state.countdown then AnyoneCore.removeTimedWorldText(state.countdown) end\ndata.ucobAfah194=nil\nself.used=true",
 							conditions = 
 							{
 								
@@ -19676,7 +19676,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.ucobAfah198={target=eventArgs.targetID,boss=eventArgs.entityID,expires=Now()+eventArgs.channelTimeMax*1000+500}\nself.used=true",
+							actionLua = "local cast=eventArgs\nlocal duration=cast.channelTimeMax*1000\nlocal state={target=cast.targetID,boss=cast.entityID,expires=Now()+duration+500}\nlocal previous=data.ucobAfah198\nif previous and previous.countdown then AnyoneCore.removeTimedWorldText(previous.countdown) end\ndata.ucobAfah198=state\nlocal target=TensorCore.mGetEntity(cast.targetID)\nif duration>0 and target and target.alive then\n state.countdown=AnyoneCore.addWorldTextCountdownOnEnt(duration,target.id,0xFFFFFFFF,true,1.35,2.3,0,\"Morn Afah \")\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -19767,7 +19767,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.ucobAfah198=nil\nself.used=true",
+							actionLua = "local state=data.ucobAfah198\nif state and state.countdown then AnyoneCore.removeTimedWorldText(state.countdown) end\ndata.ucobAfah198=nil\nself.used=true",
 							conditions = 
 							{
 								
@@ -19863,7 +19863,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.ucobAfah200={target=eventArgs.targetID,boss=eventArgs.entityID,expires=Now()+eventArgs.channelTimeMax*1000+500}\nself.used=true",
+							actionLua = "local cast=eventArgs\nlocal duration=cast.channelTimeMax*1000\nlocal state={target=cast.targetID,boss=cast.entityID,expires=Now()+duration+500}\nlocal previous=data.ucobAfah200\nif previous and previous.countdown then AnyoneCore.removeTimedWorldText(previous.countdown) end\ndata.ucobAfah200=state\nlocal target=TensorCore.mGetEntity(cast.targetID)\nif duration>0 and target and target.alive then\n state.countdown=AnyoneCore.addWorldTextCountdownOnEnt(duration,target.id,0xFFFFFFFF,true,1.35,2.3,0,\"Morn Afah \")\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -19954,7 +19954,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.ucobAfah200=nil\nself.used=true",
+							actionLua = "local state=data.ucobAfah200\nif state and state.countdown then AnyoneCore.removeTimedWorldText(state.countdown) end\ndata.ucobAfah200=nil\nself.used=true",
 							conditions = 
 							{
 								
@@ -20213,7 +20213,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.ucobAfah203={target=eventArgs.targetID,boss=eventArgs.entityID,expires=Now()+eventArgs.channelTimeMax*1000+500}\nself.used=true",
+							actionLua = "local cast=eventArgs\nlocal duration=cast.channelTimeMax*1000\nlocal state={target=cast.targetID,boss=cast.entityID,expires=Now()+duration+500}\nlocal previous=data.ucobAfah203\nif previous and previous.countdown then AnyoneCore.removeTimedWorldText(previous.countdown) end\ndata.ucobAfah203=state\nlocal target=TensorCore.mGetEntity(cast.targetID)\nif duration>0 and target and target.alive then\n state.countdown=AnyoneCore.addWorldTextCountdownOnEnt(duration,target.id,0xFFFFFFFF,true,1.35,2.3,0,\"Morn Afah \")\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -20304,7 +20304,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.ucobAfah203=nil\nself.used=true",
+							actionLua = "local state=data.ucobAfah203\nif state and state.countdown then AnyoneCore.removeTimedWorldText(state.countdown) end\ndata.ucobAfah203=nil\nself.used=true",
 							conditions = 
 							{
 								
@@ -20713,7 +20713,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.ucobAfah206={target=eventArgs.targetID,boss=eventArgs.entityID,expires=Now()+eventArgs.channelTimeMax*1000+500}\nself.used=true",
+							actionLua = "local cast=eventArgs\nlocal duration=cast.channelTimeMax*1000\nlocal state={target=cast.targetID,boss=cast.entityID,expires=Now()+duration+500}\nlocal previous=data.ucobAfah206\nif previous and previous.countdown then AnyoneCore.removeTimedWorldText(previous.countdown) end\ndata.ucobAfah206=state\nlocal target=TensorCore.mGetEntity(cast.targetID)\nif duration>0 and target and target.alive then\n state.countdown=AnyoneCore.addWorldTextCountdownOnEnt(duration,target.id,0xFFFFFFFF,true,1.35,2.3,0,\"Morn Afah \")\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -20804,7 +20804,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.ucobAfah206=nil\nself.used=true",
+							actionLua = "local state=data.ucobAfah206\nif state and state.countdown then AnyoneCore.removeTimedWorldText(state.countdown) end\ndata.ucobAfah206=nil\nself.used=true",
 							conditions = 
 							{
 								
