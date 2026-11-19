@@ -206,7 +206,13 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UWU: Shared AutoSim
 
-- Turning off automatic nail targeting also disables automatic Ifrit selection in P2. (19-11-2026) - Bard turns off CD, Songs and Potion at timeline 110 and turns them back on when Ifrit becomes targetable. (18-11-2026) - Black Mage can reserve Ley Lines for Ifrit from timeline 110 with a setting under Garuda. Turning it off uses the existing 5% HP trigger. (18-11-2026) - Black Mage skips new DoTs below 10% HP on Garuda, Ifrit, and Titan. Temporary blacklist entries clear at the next boss, on wipe, or at the next countdown. (18-11-2026)
+- Turning off automatic nail targeting also disables automatic Ifrit selection in P2. (19-11-2026)
+
+- Bard turns off CD, Songs and Potion at timeline 110 and turns them back on when Ifrit becomes targetable. (18-11-2026)
+
+- Black Mage can reserve Ley Lines for Ifrit from timeline 110 with a setting under Garuda. Turning it off uses the existing 5% HP trigger. (18-11-2026)
+
+- Black Mage skips new DoTs below 10% HP on Garuda, Ifrit, and Titan. Temporary blacklist entries clear at the next boss, on wipe, or at the next countdown. (18-11-2026)
 
 ### DSR: LPDU (Beta)
 
