@@ -304,6 +304,14 @@ local tbl =
 						data = 
 						{
 							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"d32b2746-f484-f26f-a743-2db00ce06692",
+									true,
+								},
+							},
 							gVar = "ACR_TensorReaper3_SoulGauge",
 							gVarValue = 2,
 							name = "Soul Gauge Off",
@@ -314,11 +322,26 @@ local tbl =
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local p = TensorCore.mGetPlayer()\nif not p or p.job ~= 39 or p.localmapid ~= 887 or not p.alive or not p.incombat then return false end\nlocal doll = TensorCore.mGetTarget()\nif not doll or doll.contentid ~= 9214 or not doll.targetable or not doll.hp or doll.hp.current <= 0 or doll.hp.percent >= 40 then return false end\nlocal personal\nfor _, tether in ipairs(Argus.getTethersOnEnt(p.id)) do\n    local partner = tether.partnerid and TensorCore.mGetEntity(tether.partnerid)\n    if partner and partner.contentid == 9214 then\n        if personal and personal ~= partner.id then return false end\n        personal = partner.id\n    end\nend\nif personal and personal ~= doll.id then return false end\nlocal confirmed = personal == doll.id\nfor _, tether in ipairs(Argus.getTethersOnEnt(doll.id)) do\n    if tether.partnerid then\n        if tether.partnerid ~= p.id then return false end\n        confirmed = true\n    end\nend\nif not confirmed then return false end\ndata.teaAcr3SoulGaugeDoll = doll.id\nreturn true",
+							name = "Your tethered doll below 40%",
+							uuid = "d32b2746-f484-f26f-a743-2db00ce06692",
+							version = 3,
+						},
+					},
 				},
 				mechanicTime = 19.5,
-				name = "[RPR] Disable Soul Gauge",
+				name = "[RPR] Disable Soul Gauge below 40% on your doll",
+				throttleTime = 100,
+				timeRange = true,
 				timelineIndex = 3,
+				timerEndOffset = 46,
 				timerOffset = 10,
+				timerStartOffset = 11,
 				uuid = "38002d8b-3cb8-3768-929e-28c6864660b5",
 				version = 2,
 			},
@@ -511,10 +534,10 @@ local tbl =
 				conditions = 
 				{
 				},
-				execute = "local p = TensorCore.mGetPlayer()\nif not p or p.localmapid ~= 887 or p.job ~= 39 then return end\n\nlocal variable = \"ACR_TensorReaper3_SoulGauge\"\nif type(_G[variable]) ~= \"boolean\" then return end\nif data.teaAcr3SoulGaugeDoll then\n    local doll = TensorCore.mGetEntity(data.teaAcr3SoulGaugeDoll)\n    if not doll or not doll.targetable or (doll.hp and doll.hp.current <= 0) then\n        _G[variable] = true\n        data.teaAcr3SoulGaugeDoll = nil\n        self.used = true\n    end\n    return\nend\n\nif not p.alive or not p.incombat then return end\nlocal doll = TensorCore.mGetTarget()\nif not doll or doll.contentid ~= 9214 or not doll.targetable or not doll.hp or doll.hp.current <= 0 or doll.hp.percent >= 40 then return end\nlocal personal\nfor _, tether in ipairs(Argus.getTethersOnEnt(p.id)) do\n    local partner = tether.partnerid and TensorCore.mGetEntity(tether.partnerid)\n    if partner and partner.contentid == 9214 then\n        if personal and personal ~= partner.id then return end\n        personal = partner.id\n    end\nend\nif personal and personal ~= doll.id then return end\nlocal confirmed = personal == doll.id\nfor _, tether in ipairs(Argus.getTethersOnEnt(doll.id)) do\n    if tether.partnerid then\n        if tether.partnerid ~= p.id then return end\n        confirmed = true\n    end\nend\nif not confirmed then return end\n\n_G[variable] = false\ndata.teaAcr3SoulGaugeDoll = doll.id",
+				execute = "local p = TensorCore.mGetPlayer()\nlocal id = data.teaAcr3SoulGaugeDoll\nif not id or not p or p.localmapid ~= 887 or p.job ~= 39 then return end\n\nlocal doll = TensorCore.mGetEntity(id)\nif doll and doll.targetable and (not doll.hp or doll.hp.current > 0) then return end\nif type(_G.ACR_TensorReaper3_SoulGauge) ~= \"boolean\" then return end\n_G.ACR_TensorReaper3_SoulGauge = true\ndata.teaAcr3SoulGaugeDoll = nil\nself.used = true",
 				executeType = 2,
 				mechanicTime = 36.7,
-				name = "[RPR] Hold Soul Gauge below 40% on assigned doll",
+				name = "[RPR] Restore Soul Gauge after your doll resolves",
 				throttleTime = 100,
 				timeRange = true,
 				timelineIndex = 5,
