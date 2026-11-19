@@ -18,7 +18,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UWU: AutoSim
 
-- Added an optional P4 cast-interrupt checkbox for the Ultima Suppression gaol and automatic targeting for late Garuda Satin Plumes. (19-11-2026)
+- Added an optional P4 cast-interrupt checkbox for the Ultima Suppression gaol and automatic targeting for late Garuda Satin Plumes, prioritizing the one tethered to R2. (19-11-2026)
 
 - Titan healer gaol targeting has a saved Interrupt cast for Titan healer gaol checkbox under P3 in the same AutoSim settings panel used by BlackmageUWU. (19-11-2026)
 
