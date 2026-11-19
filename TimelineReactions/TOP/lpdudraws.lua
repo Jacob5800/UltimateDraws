@@ -422,7 +422,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nlocal n=({[3004]=1,[3005]=2,[3006]=3,[3451]=4})[eventArgs.buffID]\nS.line[eventArgs.entityID]=n\nlocal p=TensorCore.mGetPlayer()\nif p and p.id==eventArgs.entityID then\n S.say('Number '..n,3)\n AnyoneCore.addTimedWorldTextOnEnt(5000,tostring(n),p.id,0xFFFFFFFF,true,1.4,2.5)\nend\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nlocal n=({[3004]=1,[3005]=2,[3006]=3,[3451]=4})[eventArgs.buffID]\nif not n or S.line[eventArgs.entityID]==n then self.used=true return end\nS.line[eventArgs.entityID]=n\nlocal p=TensorCore.mGetPlayer()\nif p and p.id==eventArgs.entityID then\n S.say('Number '..n,3)\n AnyoneCore.addTimedWorldTextOnEnt(5000,tostring(n),p.id,0xFFFFFFFF,true,1.4,2.5)\nend\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -444,7 +444,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return eventArgs.buffID==3004 or eventArgs.buffID==3005 or eventArgs.buffID==3006 or eventArgs.buffID==3451",
+							conditionLua = "local S=data.topLpdu;return S~=nil and S.mode==\"loop\" and (eventArgs.buffID==3004 or eventArgs.buffID==3005 or eventArgs.buffID==3006 or eventArgs.buffID==3451)",
 							dequeueIfLuaFalse = true,
 							name = "Matching mechanic",
 							uuid = "fb7a264d-5d89-28db-86ee-ddf63b196640",
@@ -456,11 +456,11 @@ local tbl =
 				eventType = 8,
 				loop = true,
 				mechanicTime = 15,
-				name = "[P1] Remember numbered partners",
+				name = "[P1] Capture Program Loop numbers",
 				timeRange = true,
 				timelineIndex = 3,
-				timerEndOffset = 100,
-				timerStartOffset = -10,
+				timerEndOffset = 9,
+				timerStartOffset = -3,
 				uuid = "28f0c569-2d3f-7a83-af9a-2d619458a403",
 				version = 2,
 			},
@@ -943,15 +943,15 @@ local tbl =
 				{
 				},
 				displayPath = "P1",
-				execute = "\nlocal S = data.topLpdu\nif not S then self.used = true return end\nlocal store = _G.LPDU_TOP_SettingsStore\nlocal enabled = store and store.values.LPDU_TOP_LoopNextAssignment == 1 and S.mode == 'loop' and S.step >= 0 and S.step <= 4\nlocal player = enabled and TensorCore.mGetPlayer()\nlocal alive = player and (not player.hp or not player.hp.current or player.hp.current > 0)\nlocal now = Now()\nlocal slots = {}\nif alive then\n local number = S.line[player.id] or S.lineNumber(player)\n if number then\n  S.line[player.id] = number\n  for wave = math.max(1,S.step),4 do\n   if number == wave or number == (wave+1)%4+1 then\n    local tower = number == wave\n    local hit = S.loopTowerHit\n    local at = now+(28.3+(wave-1)*9-TensorReactions_CurrentTimer)*1000\n    if tower and hit then\n     at = hit.at+(wave-hit.wave)*9000\n    elseif S.step >= 1 and S.deadline then\n     local afterCast = S.step == 1 and (tower and 350 or 450) or 0\n     at = S.deadline+(wave-S.step)*9000+afterCast\n    end\n    if at > now and not (tower and hit and wave <= hit.wave) then\n     slots[#slots+1] = {wave=wave,kind=number==wave and 'tower' or 'tether',at=at}\n    end\n   end\n  end\n end\nend\n\nS.loopNextLabels = S.loopNextLabels or {}\nfor i = 1,2 do\n local nextAssignment = slots[i]\n local active = S.loopNextLabels[i]\n if active and (not nextAssignment or active.wave ~= nextAssignment.wave or active.kind ~= nextAssignment.kind or math.abs(active.at-nextAssignment.at)>750) then\n  AnyoneCore.removeTimedWorldText(active.id)\n  S.loopNextLabels[i] = nil\n end\n if nextAssignment and not S.loopNextLabels[i] then\n  local prefix = nextAssignment.kind == 'tower' and 'Next tower in ' or 'Next tether in '\n  local id = AnyoneCore.addWorldTextCountdownOnEnt(math.floor(nextAssignment.at-now),player.id,i==1 and 0xFFFFFFFF or 0xAFFFFFFF,true,i==1 and 1.35 or 1.12,i==1 and 1.7 or 1.25,0,prefix)\n  if id then\n   nextAssignment.id = id\n   S.loopNextLabels[i] = nextAssignment\n  end\n end\nend\nself.used = true\n",
+				execute = "\nlocal S = data.topLpdu\nif not S then self.used = true return end\nlocal store = _G.LPDU_TOP_SettingsStore\nlocal enabled = store and store.values.LPDU_TOP_LoopNextAssignment == 1 and S.mode == 'loop' and S.step >= 0 and S.step <= 4\nif not enabled and not S.loopNextLabels then self.used=true return end\nlocal player = enabled and TensorCore.mGetPlayer()\nlocal alive = player and (not player.hp or not player.hp.current or player.hp.current > 0)\nlocal now = Now()\nlocal slots = {}\nif alive then\n local number = S.line[player.id] or S.lineNumber(player)\n if number then\n  S.line[player.id] = number\n  for wave = math.max(1,S.step),4 do\n   if number == wave or number == (wave+1)%4+1 then\n    local tower = number == wave\n    local hit = S.loopTowerHit\n    local at = now+(28.3+(wave-1)*9-TensorReactions_CurrentTimer)*1000\n    if tower and hit then\n     at = hit.at+(wave-hit.wave)*9000\n    elseif S.step >= 1 and S.deadline then\n     local afterCast = S.step == 1 and (tower and 350 or 450) or 0\n     at = S.deadline+(wave-S.step)*9000+afterCast\n    end\n    if at > now and not (tower and hit and wave <= hit.wave) then\n     slots[#slots+1] = {wave=wave,kind=number==wave and 'tower' or 'tether',at=at}\n    end\n   end\n  end\n end\nend\n\nS.loopNextLabels = S.loopNextLabels or {}\nfor i = 1,2 do\n local nextAssignment = slots[i]\n local active = S.loopNextLabels[i]\n if active and (not nextAssignment or active.wave ~= nextAssignment.wave or active.kind ~= nextAssignment.kind or math.abs(active.at-nextAssignment.at)>750) then\n  AnyoneCore.removeTimedWorldText(active.id)\n  S.loopNextLabels[i] = nil\n end\n if nextAssignment and not S.loopNextLabels[i] then\n  local prefix = nextAssignment.kind == 'tower' and 'Next tower in ' or 'Next tether in '\n  local id = AnyoneCore.addWorldTextCountdownOnEnt(math.floor(nextAssignment.at-now),player.id,i==1 and 0xFFFFFFFF or 0xAFFFFFFF,true,i==1 and 1.35 or 1.12,i==1 and 1.7 or 1.25,0,prefix)\n  if id then\n   nextAssignment.id = id\n   S.loopNextLabels[i] = nextAssignment\n  end\n end\nend\nself.used = true\n",
 				executeType = 2,
 				loop = true,
 				mechanicTime = 15,
 				name = "[P1] Program Loop next assignment label",
-				throttleTime = 100,
+				throttleTime = 150,
 				timeRange = true,
 				timelineIndex = 3,
-				timerEndOffset = 44,
+				timerEndOffset = 42,
 				uuid = "ed74e63f-47ad-9882-af30-c73de7e23134",
 				version = 2,
 			},
@@ -1699,7 +1699,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S or S.mode~='panto' then self.used=true return end\nlocal ms=math.floor(eventArgs.duration*1000)\nif ms<=0 then self.used=true return end\nif not S.pantoPuddleVisuals then\n S.pantoPuddleVisuals={}\n S.pantoDimDrawer=TensorCore.getCachedDrawer(0x183333FF,nil,0x183333FF,0xFF3333FF,2,0,S.flags)\n S.pantoStrongDrawer=TensorCore.getCachedDrawer(0x803333FF,nil,0x803333FF,0xFF3333FF,2,0,S.flags)\n function S.pantoPuddleRelevant(v,p,g)\n  if v.own or (p.x-v.x)^2+(p.z-v.z)^2<=49 then return true end\n  if not g then return false end\n  local dx,dz=g.x-p.x,g.z-p.z\n  local length=dx*dx+dz*dz\n  local t=length>0 and math.max(0,math.min(1,((v.x-p.x)*dx+(v.z-p.z)*dz)/length)) or 0\n  return (p.x+t*dx-v.x)^2+(p.z+t*dz-v.z)^2<=36\n end\n function S.refreshPantoPuddles()\n  local p=TensorCore.mGetPlayer()\n  if not p or not p.pos then return end\n  local now=Now();local g=S.goal and S.goal.pos\n  for id,v in pairs(S.pantoPuddleVisuals) do\n   if now>=v.expires then S.pantoPuddleVisuals[id]=nil;S.owned[id]=nil\n   else\n    local strong=S.pantoPuddleRelevant(v,p.pos,g)\n    if strong~=v.strong then\n     local drawer=strong and S.pantoStrongDrawer or S.pantoDimDrawer\n     drawer:updateTimedCircle(id,v.expires-now,v.x,v.y,v.z,5,0,false,true,S.flags)\n     v.strong=strong\n    end\n   end\n  end\n end\nend\nlocal p=TensorCore.mGetPlayer()\nlocal v={x=eventArgs.x,y=eventArgs.y,z=eventArgs.z,expires=Now()+ms,own=p and eventArgs.targetAttach==p.id}\nv.strong=p and p.pos and S.pantoPuddleRelevant(v,p.pos,S.goal and S.goal.pos) or false\nlocal drawer=v.strong and S.pantoStrongDrawer or S.pantoDimDrawer\nlocal id=S.keep(drawer:addTimedCircle(ms,v.x,v.y,v.z,5,0,false,true,S.flags))\nif id then S.pantoPuddleVisuals[id]=v end\nAnyoneCore.addWorldTextCountdown(ms,{x=v.x,y=v.y+1,z=v.z},0xFFFFFFFF,true,1)\nself.used=true\n",
+							actionLua = "local function trackPersonalPlacement()\nlocal S=data.topLpdu\nif not S then self.used=true return end\n\nif S.mode~='panto' or eventArgs.duration<=0 then self.used=true return end\nS.pantoPuddles=S.pantoPuddles or {}\nS.pantoPuddles[#S.pantoPuddles+1]={x=eventArgs.x,z=eventArgs.z,radius=5,deadline=Now()+eventArgs.duration*1000+100}\nlocal plan=S.pantoMissilePlan\nlocal now=Now()\nlocal testing=plan and plan.testingSpread\nlocal first=testing and plan.phase=='out'\nlocal second=testing and plan.phase=='second' and now-plan.first.at>=1200\nif first or second or (plan and plan.phase=='wait' and now>plan.hitAt) then\n local p=TensorCore.mGetPlayer()\n local mine=p and eventArgs.targetAttach==p.id\n if p and not mine and (p.pos.x-eventArgs.x)^2+(p.pos.z-eventArgs.z)^2<=1.25^2 then\n  mine=true\n  for _,slot in ipairs({'T1','T2','H1','H2','M1','M2','R1','R2'})do\n   local e=AnyoneCore.Roster.entOf(slot)\n   if e and e.id~=p.id and e.pos and (e.pos.x-eventArgs.x)^2+(e.pos.z-eventArgs.z)^2<=1.25^2 then mine=false;break end\n  end\n end\n if mine and first then\n  plan.first={x=eventArgs.x,z=eventArgs.z,at=now}\n  plan.phase='second';plan.lockedDestination=nil;plan.expires=now+5500\n  S.pantoSpreadUntil=plan.expires\n  S.clearGoal()\n  S.say('Second puddle: move back, away from your group',2)\n elseif mine then\n  plan.phase='return';plan.expires=Now()+8000;S.pantoSpreadUntil=nil\n  plan.returnAnnounced=true;S.say('Return to your group',3)\n end\nend\nself.used=true\n\nend\ntrackPersonalPlacement()\nlocal S=data.topLpdu\nif not S or S.mode~='panto' then self.used=true return end\nlocal ms=math.floor(eventArgs.duration*1000)\nif ms<=0 then self.used=true return end\nif not S.pantoPuddleVisuals then\n S.pantoPuddleVisuals={}\n S.pantoDimDrawer=TensorCore.getCachedDrawer(0x183333FF,nil,0x183333FF,0xFF3333FF,2,0,S.flags)\n S.pantoStrongDrawer=TensorCore.getCachedDrawer(0x803333FF,nil,0x803333FF,0xFF3333FF,2,0,S.flags)\n function S.pantoPuddleRelevant(v,p,g)\n  if v.own or (p.x-v.x)^2+(p.z-v.z)^2<=49 then return true end\n  if not g then return false end\n  local dx,dz=g.x-p.x,g.z-p.z\n  local length=dx*dx+dz*dz\n  local t=length>0 and math.max(0,math.min(1,((v.x-p.x)*dx+(v.z-p.z)*dz)/length)) or 0\n  return (p.x+t*dx-v.x)^2+(p.z+t*dz-v.z)^2<=36\n end\n function S.refreshPantoPuddles()\n  local p=TensorCore.mGetPlayer()\n  if not p or not p.pos then return end\n  local now=Now();local g=S.goal and S.goal.pos\n  for id,v in pairs(S.pantoPuddleVisuals) do\n   if now>=v.expires then S.pantoPuddleVisuals[id]=nil;S.owned[id]=nil\n   else\n    local strong=S.pantoPuddleRelevant(v,p.pos,g)\n    if strong~=v.strong then\n     local drawer=strong and S.pantoStrongDrawer or S.pantoDimDrawer\n     drawer:updateTimedCircle(id,v.expires-now,v.x,v.y,v.z,5,0,false,true,S.flags)\n     v.strong=strong\n    end\n   end\n  end\n end\nend\nlocal p=TensorCore.mGetPlayer()\nlocal v={x=eventArgs.x,y=eventArgs.y,z=eventArgs.z,expires=Now()+ms,own=p and eventArgs.targetAttach==p.id}\nv.strong=p and p.pos and S.pantoPuddleRelevant(v,p.pos,S.goal and S.goal.pos) or false\nlocal drawer=v.strong and S.pantoStrongDrawer or S.pantoDimDrawer\nlocal id=S.keep(drawer:addTimedCircle(ms,v.x,v.y,v.z,5,0,false,true,S.flags))\nif id then S.pantoPuddleVisuals[id]=v end\nAnyoneCore.addWorldTextCountdown(ms,{x=v.x,y=v.y+1,z=v.z},0xFFFFFFFF,true,1)\nself.used=true\n",
 							conditions = 
 							{
 								
@@ -2002,6 +2002,7 @@ local tbl =
 					},
 				},
 				displayPath = "P1",
+				enabled = false,
 				eventType = 18,
 				loop = true,
 				mechanicTime = 69.2,
@@ -2099,6 +2100,60 @@ local tbl =
 				timerEndOffset = 40,
 				timerStartOffset = -7.1999998092651,
 				uuid = "68694301-3fcd-ff39-a8c2-d68680b9073f",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nlocal n=({[3004]=1,[3005]=2,[3006]=3,[3451]=4})[eventArgs.buffID]\nif not n or S.line[eventArgs.entityID]==n then self.used=true return end\nS.line[eventArgs.entityID]=n\nlocal p=TensorCore.mGetPlayer()\nif p and p.id==eventArgs.entityID then\n S.say('Number '..n,3)\n AnyoneCore.addTimedWorldTextOnEnt(5000,tostring(n),p.id,0xFFFFFFFF,true,1.4,2.5)\nend\nself.used=true\n",
+							conditions = 
+							{
+								
+								{
+									"52d0f722-784c-257a-bd70-e32089eded8d",
+									true,
+								},
+							},
+							name = "Capture Pantokrator number",
+							uuid = "5c522e85-0f22-dc28-bffb-59b2e468734e",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.topLpdu;return S~=nil and S.mode==\"panto\" and (eventArgs.buffID==3004 or eventArgs.buffID==3005 or eventArgs.buffID==3006 or eventArgs.buffID==3451)",
+							dequeueIfLuaFalse = true,
+							name = "Pantokrator number status",
+							uuid = "52d0f722-784c-257a-bd70-e32089eded8d",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "P1",
+				eventType = 8,
+				loop = true,
+				mechanicTime = 69.2,
+				name = "[P1] Capture Pantokrator numbers",
+				timeRange = true,
+				timelineIndex = 15,
+				timerEndOffset = 8,
+				timerStartOffset = -6,
+				uuid = "dbc8d232-74f7-fd24-861a-497666dd6871",
 				version = 2,
 			},
 		},
