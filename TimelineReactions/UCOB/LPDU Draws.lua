@@ -11091,6 +11091,104 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\ucob\\universal",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Personal Guidance",
+				uuid = "80f5b945-af26-7798-aed4-15e635d2c07a",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local event = eventArgs\nif not event.x or not event.y or not event.z then return end\nlocal puddles = data.ucobBlackfirePuddles or {}\ndata.ucobBlackfirePuddles = puddles\npuddles[event.entityID] = {x=event.x, y=event.y, z=event.z}\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"112ad7f1-9a34-1b47-abaa-12a533df9926",
+									true,
+								},
+							},
+							name = "[LPDU] Blackfire - Capture Hypernova puddles",
+							uuid = "3904e7e6-763c-3a3d-8027-3ae3e91f0563",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local e = eventArgs\nreturn e.entityContentID == 2003393 and e.keyID == 2003393 and e.type == 7 and e.flags == 5 and e.state == 0",
+							dequeueIfLuaFalse = true,
+							name = "Actual Hypernova ground effect",
+							uuid = "112ad7f1-9a34-1b47-abaa-12a533df9926",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 29,
+				loop = true,
+				mechanicTime = 586.1,
+				name = "[LPDU] Blackfire - Capture Hypernova puddles",
+				timeRange = true,
+				timelineIndex = 106,
+				timerEndOffset = 9,
+				timerStartOffset = -2,
+				uuid = "f62ffdd6-f2e7-2b9d-be4d-ada2bae6de69",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local puddles = data.ucobBlackfirePuddles\nif not puddles then return end\nlocal drawer = TensorCore.getStaticDrawer(0x604040FF, 2)\nlocal flags = Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nfor _, puddle in pairs(puddles) do\n drawer:addCircle(puddle.x, puddle.y, puddle.z, 5, false, flags)\nend\nself.used = true",
+							name = "[LPDU] Blackfire - Hypernova puddle hazards",
+							uuid = "8e86c18d-057c-9ec9-b8c3-b500b1b51726",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 586.1,
+				name = "[LPDU] Blackfire - Hypernova puddle hazards",
+				timeRange = true,
+				timelineIndex = 106,
+				timerEndOffset = 16,
+				timerStartOffset = -2,
+				uuid = "64533cb8-a2e6-885f-891a-0bc0d0543fbe",
+				version = 2,
+			},
+		},
 	},
 	[108] = 
 	{
@@ -13336,7 +13434,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nif not R or not R.current() or not R.isReady() then self.used=true return end\nlocal slot=R.mySlot()\nif not slot then self.used=true return end\nlocal s=data.ucobHeavensfallTowers\nif not s or not s.reference or Now()-s.started>15000 then self.used=true return end\nlocal towers=s.ordered\nif not towers or #towers~=8 then self.used=true return end\nlocal rank={T2=1,H2=2,M2=3,R2=4,R1=5,M1=6,H1=7,T1=8}\nlocal tower=towers[rank[slot]]\nlocal dest=tower\nif tower and not s.kb then\n local radius=math.sqrt(tower.x^2+tower.z^2)\n if radius<1 then self.used=true return end\n -- Stage along the assigned tower's radial line for the outward knockback.\n dest={x=tower.x/radius*8,y=tower.y,z=tower.z/radius*8,expires=tower.expires}\nend\nif not dest or Now()>=dest.expires then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\nif not s.kb then drawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags) end\nself.used=true",
+							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nif not R or not R.current() or not R.isReady() then self.used=true return end\nlocal slot=R.mySlot()\nif not slot then self.used=true return end\nlocal s=data.ucobHeavensfallTowers\nif not s or not s.reference or Now()-s.started>15000 then self.used=true return end\nlocal towers=s.ordered\nif not towers or #towers~=8 then self.used=true return end\nlocal rank={T2=1,H2=2,M2=3,R2=4,R1=5,M1=6,H1=7,T1=8}\nlocal tower=towers[rank[slot]]\nlocal dest=tower\nif tower and not s.kb then\n local radius=math.sqrt(tower.x^2+tower.z^2)\n if radius<1 then self.used=true return end\n -- Stage along the assigned tower's radial line for the outward knockback.\n dest={x=tower.x/radius*8,y=tower.y,z=tower.z/radius*8,expires=tower.expires}\nend\nif not dest or Now()>=dest.expires then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.alive then self.used=true return end\nif not s.kb and not s.towerKnockbackCalled then\n s.towerKnockbackCalled = true\n AnyoneCore.Shotcall(\"Move to tower knockback\",true,3,false)\nend\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\nif not s.kb then drawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags) end\nself.used=true",
 							name = "Heavensfall personal assigned tower arrow",
 							uuid = "739699fe-2510-c477-b5c4-7049749b1967",
 							version = 2.1,
