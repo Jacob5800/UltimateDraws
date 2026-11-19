@@ -15775,7 +15775,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.ucobOctetGuide\nif not s or Now()>=s.expires then self.used=true return end\nlocal id=eventArgs.markerID\nif not s.marked[eventArgs.entityID] then s.marked[eventArgs.entityID]=true;s.count=s.count+1 end\nif id==39 then\n s.nonTower=s.nonTower or {};s.nonTower[eventArgs.entityID]=true\n self.used=true return\nend\nif id==119 then\n s.naelMarkedAt=Now()\n local baha,nael=nil,nil\n for _,e in pairs(EntityList(\"\")) do\n  if e.pos.x*e.pos.x+e.pos.z*e.pos.z>400 then\n   if e.contentid==3210 and Argus.getEntityModel(e)==8168 then baha=e.pos elseif e.contentid==2612 and Argus.getEntityModel(e)==8161 then nael=e.pos elseif e.contentid==1482 and Argus.getEntityModel(e)==8159 then s.twin={x=e.pos.x,y=e.pos.y,z=e.pos.z} end\n  end\n end\n if baha and nael then\n  local r=math.sqrt(baha.x^2+baha.z^2)\n  if r>20 then\n   local a=math.atan2(baha.x,-baha.z)\n   local oct=math.floor(a/(math.pi/4)+0.5)%8\n   s.cw=oct%2==1\n   local opposite=a+math.pi\n   local nr=math.sqrt(nael.x^2+nael.z^2)\n   if nr>20 and (-baha.x*nael.x-baha.z*nael.z)/(r*nr)>0.9 then opposite=opposite+(s.cw and 1 or -1)*math.pi/4 end\n   s.start={x=math.sin(opposite)*20,y=0,z=-math.cos(opposite)*20}\n   s.startReached=nil;s.routeAngle=nil\n  end\n end\nelseif id==41 then s.center=true\nelseif id==42 then s.baiter=eventArgs.entityID;s.twinLocked=true end\nif s.count==7 and not s.baiter then\n local R=AnyoneCore and AnyoneCore.Roster\n if R and R.current() and R.isReady() then\n  for _,slot in ipairs({\"T1\",\"T2\",\"H1\",\"H2\",\"M1\",\"M2\",\"R1\",\"R2\"}) do local e=R.entOf(slot);if e and not s.marked[e.id] then s.baiter=e.id end end\n end\nend\nself.used=true",
+							actionLua = "local s=data.ucobOctetGuide\nif not s or Now()>=s.expires then self.used=true return end\nlocal id=eventArgs.markerID\nif id==20 then\n s.dragonTargets=s.dragonTargets or {}\n if not s.marked[eventArgs.entityID] then\n  s.dragonTargets[#s.dragonTargets+1]=eventArgs.entityID\n end\nelseif id==119 then s.naelTarget=eventArgs.entityID\nelseif id==41 then s.bahamutTarget=eventArgs.entityID end\nif id==39 then\n s.nonTower=s.nonTower or {};s.nonTower[eventArgs.entityID]=true\n self.used=true return\nend\nif not s.marked[eventArgs.entityID] then s.marked[eventArgs.entityID]=true;s.count=s.count+1 end\nif id==119 then\n s.naelMarkedAt=Now()\n local baha,nael=nil,nil\n for _,e in pairs(EntityList(\"\")) do\n  if e.pos.x*e.pos.x+e.pos.z*e.pos.z>400 then\n   if e.contentid==3210 and Argus.getEntityModel(e)==8168 then baha=e.pos elseif e.contentid==2612 and Argus.getEntityModel(e)==8161 then nael=e.pos elseif e.contentid==1482 and Argus.getEntityModel(e)==8159 then s.twin={x=e.pos.x,y=e.pos.y,z=e.pos.z} end\n  end\n end\n if baha and nael then\n  local r=math.sqrt(baha.x^2+baha.z^2)\n  if r>20 then\n   local a=math.atan2(baha.x,-baha.z)\n   local oct=math.floor(a/(math.pi/4)+0.5)%8\n   s.cw=oct%2==1\n   local opposite=a+math.pi\n   local nr=math.sqrt(nael.x^2+nael.z^2)\n   if nr>20 and (-baha.x*nael.x-baha.z*nael.z)/(r*nr)>0.9 then opposite=opposite+(s.cw and 1 or -1)*math.pi/4 end\n   s.start={x=math.sin(opposite)*20,y=0,z=-math.cos(opposite)*20}\n   s.startReached=nil;s.routeAngle=nil\n  end\n end\nelseif id==41 then s.center=true\nelseif id==42 then s.baiter=eventArgs.entityID;s.twinLocked=true end\nif s.count==7 and not s.baiter then\n local R=AnyoneCore and AnyoneCore.Roster\n if R and R.current() and R.isReady() then\n  for _,slot in ipairs({\"T1\",\"T2\",\"H1\",\"H2\",\"M1\",\"M2\",\"R1\",\"R2\"}) do local e=R.entOf(slot);if e and not s.marked[e.id] then s.baiter=e.id end end\n end\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -15829,7 +15829,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif not R or not R.current() or not R.isReady() or not p then self.used=true return end\nlocal slot=R.mySlot()\nif not slot then self.used=true return end\nlocal s=data.ucobOctetGuide\nif not s or Now()>=s.expires or s.finished then self.used=true return end\n-- Resolve the LPDU starting side as soon as all three bosses reach the rim.\nif not s.running and not s.naelMarkedAt and Now()>=(s.nextSpawnCheck or 0) then\n s.nextSpawnCheck=Now()+200\n local baha,nael,twin=nil,nil,nil\n for _,e in pairs(EntityList(\"\")) do\n  if e.pos.x*e.pos.x+e.pos.z*e.pos.z>400 then\n   local model=Argus.getEntityModel(e)\n   if e.contentid==3210 and model==8168 then baha=e.pos\n   elseif e.contentid==2612 and model==8161 then nael=e.pos\n   elseif e.contentid==1482 and model==8159 then twin=e.pos end\n  end\n end\n if baha and nael and twin then\n  local a=math.atan2(baha.x,-baha.z)\n  local oct=math.floor(a/(math.pi/4)+0.5)%8\n  local cw=oct%2==1\n  local opposite=a+math.pi\n  local br=math.sqrt(baha.x^2+baha.z^2)\n  local nr=math.sqrt(nael.x^2+nael.z^2)\n  if (-baha.x*nael.x-baha.z*nael.z)/(br*nr)>0.9 then opposite=opposite+(cw and 1 or -1)*math.pi/4 end\n  local start={x=math.sin(opposite)*20,y=0,z=-math.cos(opposite)*20}\n  if not s.start or (s.start.x-start.x)^2+(s.start.z-start.z)^2>0.01 then s.startReached=nil end\n  s.cw=cw;s.start=start;s.twin={x=twin.x,y=twin.y,z=twin.z}\n end\nend\n-- Preview the next route point 0.4s before the recorded 4s Nael dive impact.\nif not s.running and s.naelMarkedAt and Now()-s.naelMarkedAt>=3600 then\n s.running=true;s.startReached=nil\n if s.start and s.cw~=nil then s.routeAngle=math.atan2(s.start.x,-s.start.z)+(s.cw and 1 or -1)*math.pi/12 end\nend\nlocal dest=nil\nif s.baiter==p.id and not s.twinLocked and s.twin then\n local t=s.twin;local r=math.sqrt(t.x^2+t.z^2)\n if r>20 then local a=math.atan2(t.x,-t.z)-math.pi/8;dest={x=math.sin(a)*20,y=0,z=-math.cos(a)*20} end\nelseif s.center and not s.towersSpawned then\n if p.pos.x*p.pos.x+p.pos.z*p.pos.z<=4 then self.used=true return end\n dest={x=0,y=0,z=0}\nelseif not s.running then\n if s.startReached then self.used=true return end\n dest=s.start\n if dest and (p.pos.x-dest.x)^2+(p.pos.z-dest.z)^2<=2.25 then\n  s.startReached=true;self.used=true return\n end\nelseif s.cw~=nil and not s.center and not s.towersSpawned then\n if not s.routeAngle then\n  if not s.start then self.used=true return end\n  s.routeAngle=math.atan2(s.start.x,-s.start.z)+(s.cw and 1 or -1)*math.pi/12\n end\n dest={x=math.sin(s.routeAngle)*20,y=0,z=-math.cos(s.routeAngle)*20}\n local direction=s.cw and 1 or -1\n local playerAngle=math.atan2(p.pos.x,-p.pos.z)\n -- Skip waypoints already passed, including a delayed first handoff.\n for step=1,24 do\n  local delta=(playerAngle-s.routeAngle)*direction\n  delta=(delta+math.pi)%(2*math.pi)-math.pi\n  local close=(p.pos.x-dest.x)^2+(p.pos.z-dest.z)^2<=4\n  if not close and delta<0 then break end\n  s.routeAngle=s.routeAngle+direction*math.pi/12\n  dest={x=math.sin(s.routeAngle)*20,y=0,z=-math.cos(s.routeAngle)*20}\n end\nend\nif not dest then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
+							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif not R or not R.current() or not R.isReady() or not p then self.used=true return end\nlocal slot=R.mySlot()\nif not slot then self.used=true return end\nlocal s=data.ucobOctetGuide\nif not s or Now()>=s.expires or s.finished then self.used=true return end\n-- Resolve the LPDU starting side as soon as all three bosses reach the rim.\nif not s.running and not s.naelMarkedAt and Now()>=(s.nextSpawnCheck or 0) then\n s.nextSpawnCheck=Now()+200\n local baha,nael,twin=nil,nil,nil\n for _,e in pairs(EntityList(\"\")) do\n  if e.pos.x*e.pos.x+e.pos.z*e.pos.z>400 then\n   local model=Argus.getEntityModel(e)\n   if e.contentid==3210 and model==8168 then baha=e.pos\n   elseif e.contentid==2612 and model==8161 then nael=e.pos\n   elseif e.contentid==1482 and model==8159 then twin=e.pos end\n  end\n end\n if baha and nael and twin then\n  local a=math.atan2(baha.x,-baha.z)\n  local oct=math.floor(a/(math.pi/4)+0.5)%8\n  local cw=oct%2==1\n  local opposite=a+math.pi\n  local br=math.sqrt(baha.x^2+baha.z^2)\n  local nr=math.sqrt(nael.x^2+nael.z^2)\n  if (-baha.x*nael.x-baha.z*nael.z)/(br*nr)>0.9 then opposite=opposite+(cw and 1 or -1)*math.pi/4 end\n  local start={x=math.sin(opposite)*20,y=0,z=-math.cos(opposite)*20}\n  if not s.start or (s.start.x-start.x)^2+(s.start.z-start.z)^2>0.01 then s.startReached=nil end\n  s.cw=cw;s.start=start;s.twin={x=twin.x,y=twin.y,z=twin.z}\n end\nend\n-- Preview the next route point 0.4s before the recorded 4s Nael dive impact.\nif not s.running and s.naelMarkedAt and Now()-s.naelMarkedAt>=3600 then\n s.running=true;s.startReached=nil\n if s.start and s.cw~=nil then s.routeAngle=math.atan2(s.start.x,-s.start.z)+(s.cw and 1 or -1)*math.pi/12 end\nend\nlocal dest=nil\nif s.baiter==p.id and not s.twinLocked and s.twin then\n local t=s.twin;local r=math.sqrt(t.x^2+t.z^2)\n if r>20 then local a=math.atan2(t.x,-t.z)-math.pi/8;dest={x=math.sin(a)*20,y=0,z=-math.cos(a)*20} end\nelseif not s.towersSpawned and (\n (s.baitLocked and s.baitLocked[p.id] and s.bahamutTarget~=p.id)\n or (s.center and (s.bahamutTarget~=p.id or (s.baitLocked and s.baitLocked[p.id])))\n) then\n if p.pos.x*p.pos.x+p.pos.z*p.pos.z<=4 then self.used=true return end\n dest={x=0,y=0,z=0}\nelseif not s.running then\n if s.startReached then self.used=true return end\n dest=s.start\n if dest and (p.pos.x-dest.x)^2+(p.pos.z-dest.z)^2<=2.25 then\n  s.startReached=true;self.used=true return\n end\nelseif s.cw~=nil and not s.center and not s.towersSpawned then\n if not s.routeAngle then\n  if not s.start then self.used=true return end\n  s.routeAngle=math.atan2(s.start.x,-s.start.z)+(s.cw and 1 or -1)*math.pi/12\n end\n dest={x=math.sin(s.routeAngle)*20,y=0,z=-math.cos(s.routeAngle)*20}\n local direction=s.cw and 1 or -1\n local playerAngle=math.atan2(p.pos.x,-p.pos.z)\n -- Skip waypoints already passed, including a delayed first handoff.\n for step=1,24 do\n  local delta=(playerAngle-s.routeAngle)*direction\n  delta=(delta+math.pi)%(2*math.pi)-math.pi\n  local close=(p.pos.x-dest.x)^2+(p.pos.z-dest.z)^2<=4\n  if not close and delta<0 then break end\n  s.routeAngle=s.routeAngle+direction*math.pi/12\n  dest={x=math.sin(s.routeAngle)*20,y=0,z=-math.cos(s.routeAngle)*20}\n end\nend\nif not dest then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
 							name = "Grand Octet - Start Middle and Twin Bait Arrows",
 							uuid = "2d4602dd-c0a0-5f89-8d75-2ac9b16a7a14",
 							version = 2.1,
@@ -15849,6 +15849,60 @@ local tbl =
 				timerEndOffset = 26,
 				timerStartOffset = -3,
 				uuid = "b6495281-1eb3-f602-9e1e-ec817d0aa919",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.ucobOctetGuide\nif not s then return end\nlocal event=eventArgs\ns.baitLocked=s.baitLocked or {}\ns.seenDiveSources=s.seenDiveSources or {}\nif s.seenDiveSources[event.entityID] then self.used=true;return end\ns.seenDiveSources[event.entityID]=true\nlocal target\nif event.spellID==9923 then target=s.naelTarget\nelseif event.spellID==9953 then target=s.bahamutTarget\nelse\n s.dragonLocks=(s.dragonLocks or 0)+1\n target=s.dragonTargets and s.dragonTargets[s.dragonLocks]\nend\nif target then s.baitLocked[target]=true end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"c265ee54-e473-7571-973b-380fff2c38b5",
+									true,
+								},
+							},
+							name = "Record the player whose bait locked",
+							uuid = "e0d45e7b-3e70-7503-8afe-2651abb43f1d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local e=eventArgs\nreturn e.spellID==9923 or e.spellID==9953 or (e.spellID>=9931 and e.spellID<=9935)",
+							dequeueIfLuaFalse = true,
+							name = "Grand Octet bait cast",
+							uuid = "c265ee54-e473-7571-973b-380fff2c38b5",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 797.4,
+				name = "[LPDU] Grand Octet - Capture dive snapshots",
+				timeRange = true,
+				timelineIndex = 154,
+				timerEndOffset = 22,
+				timerStartOffset = -3,
+				uuid = "b68f184a-b68e-eced-9af6-ce9a5082c1af",
 				version = 2,
 			},
 		},

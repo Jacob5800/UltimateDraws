@@ -274,6 +274,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UCOB: LPDU
 
+- Grand Octet switches the personal route arrow to middle as soon as your dive bait locks. Twintania bait guidance retains priority. (19-11-2026)
+
 - Blackfire marks dropped Hypernova puddles. Heavensfall calls Move to tower knockback when your staging draw appears. (19-11-2026)
 
 - Quickmarch arrows stay steady near their destinations, and stack and Earthshaker guidance clear on the hit. (19-11-2026)
