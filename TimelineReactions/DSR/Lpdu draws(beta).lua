@@ -692,6 +692,77 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU Draws",
+				name = "P3",
+				uuid = "9eb26f4f-1a7a-580a-a636-dd6907e39524",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU Draws/P3",
+				name = "Guidance",
+				uuid = "663a686a-409e-d5ae-ade9-6eee6d559d33",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"2f877451-868d-7b7f-a47d-0d82293eb75e",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Resume All Actions",
+							resumeAllActions = true,
+							uuid = "3bab529c-0988-befd-a443-de5a520db2d3",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=eventArgs.oldData and eventArgs.oldData.dsrLPDU;return not not(s and s.diveActionsHeld)",
+							name = "This profile stopped actions",
+							uuid = "2f877451-868d-7b7f-a47d-0d82293eb75e",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Draws/P3/Guidance",
+				eventType = 9,
+				name = "[LPDU DSR] Release dive action stop on wipe",
+				timeRange = true,
+				timelineIndex = 1,
+				timerEndOffset = 1900,
+				uuid = "75c7245c-0c74-5253-abc3-bf9a1bf77140",
+				version = 2,
+			},
+		},
 	}, 
 	[3] = 
 	{
@@ -3928,6 +3999,153 @@ local tbl =
 				timerEndOffset = 75,
 				timerStartOffset = -8,
 				uuid = "e1c4470f-5afc-8857-a884-07fef9d5fe9f",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"2b33826b-ae1d-799e-ae11-1b17926551fb",
+									true,
+								},
+							},
+							name = "Stop All Actions",
+							stopAllActions = true,
+							stopCasting = true,
+							uuid = "2ce37684-715c-0754-bf3e-a4e486119c28",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.dsrLPDU;if s then s.diveActionsHeld=true end;self.used=true",
+							conditions = 
+							{
+								
+								{
+									"5e03f726-4078-844b-9f8c-32adf1e5809d",
+									true,
+								},
+							},
+							name = "Record the owned action stop",
+							uuid = "f3d009c5-a568-769d-b7a1-6162b1e8f7c9",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Misc",
+							conditions = 
+							{
+								
+								{
+									"5e03f726-4078-844b-9f8c-32adf1e5809d",
+									true,
+								},
+								
+								{
+									"8ff91428-8538-4ae0-aec7-bd1432d598a3",
+									true,
+								},
+							},
+							name = "Resume All Actions",
+							resumeAllActions = true,
+							uuid = "89b3708a-0f34-5b80-92f3-11b6f90d9401",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.dsrLPDU;if s then s.diveActionsHeld=nil end;self.used=true",
+							conditions = 
+							{
+								
+								{
+									"7c4d2cc6-6fd8-5e35-a922-19d2cff6d439",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Clear the owned action stop",
+							uuid = "e6f273cc-969a-ea54-a616-1892d7d53be9",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.dsrLPDU;return not not(s and s.diveFacingLock and not s.diveActionsHeld)",
+							name = "Personal facing lock active",
+							uuid = "2b33826b-ae1d-799e-ae11-1b17926551fb",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionUUID = "2ce37684-715c-0754-bf3e-a4e486119c28",
+							category = "Action",
+							name = "Native action used",
+							uuid = "5e03f726-4078-844b-9f8c-32adf1e5809d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local s=data.dsrLPDU;return not s or not s.diveFacingLock",
+							name = "Personal facing lock released",
+							uuid = "8ff91428-8538-4ae0-aec7-bd1432d598a3",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionUUID = "89b3708a-0f34-5b80-92f3-11b6f90d9401",
+							category = "Action",
+							name = "Native action used",
+							uuid = "7c4d2cc6-6fd8-5e35-a922-19d2cff6d439",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Draws/P3/Guidance",
+				mechanicTime = 620.5,
+				name = "[LPDU DSR] Dive facing - Stop and Resume",
+				timeRange = true,
+				timelineIndex = 99,
+				timerEndOffset = 48,
+				uuid = "50b9ea84-af15-5593-99c4-cbfc9249b5a9",
 				version = 2,
 			},
 		},
