@@ -274,6 +274,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UCOB: LPDU
 
+- Golden Bahamut settings now offer Exaflares or Subtractive draws. Subtractive shades the arena green with the imminent blast circles cut out. (19-11-2026)
+
 - Morn Afah shows a cast countdown over the stack target. (19-11-2026)
 
 - Both Adds quotes show a player-attached countdown when spread is next. (19-11-2026)
@@ -291,8 +293,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Tenstrike Hatch guidance now advances and clears by the neurolink actually soaked, including when another player covers it. (19-11-2026)
 
 - All four Flatten casts mark the targeted tank and show a countdown through the cast. (19-11-2026)
-
-- Added an arrow to the marked player for the second Fireball. It yields to Hatch and Liquid Hell assignments. Twister and Twisting Dive use a countdown attached to the player. (19-11-2026)
 
 ### UCOB: ACR3 Optimization
 
