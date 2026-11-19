@@ -18,6 +18,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UWU: AutoSim
 
+- Added an optional P4 cast-interrupt checkbox for the Ultima Suppression gaol and automatic targeting for late Garuda Satin Plumes. (19-11-2026)
+
 - Titan healer gaol targeting has a saved Interrupt cast for Titan healer gaol checkbox under P3 in the same AutoSim settings panel used by BlackmageUWU. (19-11-2026)
 
 - Ifrit nails now check awakening on the next nail in formation-relative SE > SW > NE > NW order, without lifetime-based target switching. Melee cleave stops when either close nail reaches 40%, each role finishes its own assigned nail, and ordered kills stay single-target. Nail checks now use a 50 ms interval; the forced 40% cast stop is preserved. (16-11-2026)
@@ -319,6 +321,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added shared Potion Hotbar requests, the second Fulgent reminder, and P2 crystal targeting and AoE controls with toggle restoration on wipe or map change. (08-11-2026)
 
 ### UWU: LPDU
+
+- Garuda healers and Titan melee now get arrows to the actual Light Puddle. The Titan Mountain Buster cone previews from 713 and clears on the hit. The Garuda Move to 3 (SE) callout starts one second earlier. (19-11-2026)
 
 - Added a spoken Dodge twice cue at 744s before the last two Weight of the Land hits. (19-11-2026)
 

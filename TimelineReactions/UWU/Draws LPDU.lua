@@ -4039,7 +4039,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.pos then\n    self.used = true\n    return\nend\n\nlocal target = {x = x, y = y, z = z}\nlocal distance = TensorCore.getDistance2d(player.pos, target)\nif distance > 0.25 then\n    local tipLength = math.min(2.0, distance * 0.4)\n    local drawer = TensorCore.getCachedDrawer(\n        0xFFB8FF88,\n        0xFF55FF55,\n        0xFF2A8A2A,\n        0xFFFFFFFF,\n        3\n    )\n    drawer:addTimedArrow(\n        8000,\n        player.pos.x, player.pos.y, player.pos.z,\n        TensorCore.getHeadingToTarget(player.pos, target),\n        math.max(0.1, distance - tipLength),\n        1.4,\n        tipLength,\n        2.6,\n        0,\n        false,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n    )\n    drawer:addTimedCircle(\n        8000,\n        target.x, target.y, target.z,\n        1.7,\n        0,\n        false,\n        true\n    )\nend\n\nTensorCore.addAlertText(5000, \"PICK UP LIGHT PUDDLE\", 1.0, 2, false)\nself.used = true",
+							actionLua = "local e = eventArgs\nlocal target = {x=e.x, y=e.y, z=e.z}\nlocal player = TensorCore.mGetPlayer()\nif not player or not player.pos then return end\nlocal distance = TensorCore.getDistance2d(player.pos, target)\nlocal drawer = TensorCore.getCachedDrawer(0xFFB8FF88, 0xFF55FF55, 0xFF2A8A2A, 0xFFFFFFFF, 3)\ndrawer:addTimedCircle(8000, target.x, target.y, target.z, 1.7, 0, false, true, Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nif distance and distance > 0.25 then\n    local tipLength = math.min(2.0, distance * 0.4)\n    drawer:addTimedArrow(8000, player.pos.x, player.pos.y, player.pos.z,\n        TensorCore.getHeadingToTarget(player.pos, target),\n        math.max(0.1, distance - tipLength), 1.4, tipLength, 2.6, 0, false,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nTensorCore.addAlertText(5000, \"PICK UP LIGHT PUDDLE\", 1.0, 2, false)\nself.used = true",
 							conditions = 
 							{
 								
@@ -4072,7 +4072,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local role = AnyoneCore.Roster.mySlot()\nreturn (role == \"H1\" or role == \"H2\")\n    and entityContentID == 2009481\n    and keyID == 2009481\n    and type == 7\n    and flags == 5\n    and state == 0",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() or not roster.isReady() then return false end\nlocal slot = roster.mySlot()\nlocal e = eventArgs\nreturn (slot == \"H1\" or slot == \"H2\") and e.entityContentID == 2009481 and e.keyID == 2009481 and e.type == 7 and e.flags == 5 and e.state == 0 and type(e.x) == \"number\" and type(e.y) == \"number\" and type(e.z) == \"number\"",
 							dequeueIfLuaFalse = true,
 							displayPath = "Draws - Garuda",
 							name = "Light puddle for H1/H2",
@@ -4087,7 +4087,7 @@ local tbl =
 				name = "[Draw] Garuda Light Puddle - Healer Pickup",
 				timeRange = true,
 				timelineIndex = 28,
-				timerEndOffset = 6,
+				timerEndOffset = 35,
 				timerStartOffset = -1,
 				uuid = "3f231c85-552f-df20-908c-eb28810836f1",
 				version = 2,
@@ -12099,6 +12099,133 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU",
+				uuid = "c073c995-bf4f-7864-92f7-af93d5bb9d0c",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "LPDU",
+				name = "Titan",
+				uuid = "32575c9d-0bd6-c7de-97ce-17203770a136",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "if data.uwuMountainBuster715Landed then return end\nlocal boss = TensorCore.mGetEntity(eventArgs.detectionTargetID)\nif not boss or not boss.targetable then return end\n-- Cast cones have their own fixed-direction draw.\nif boss.channelingid == 11091 then return end\nlocal target = TensorCore.mGetEntity(boss.targetid)\nif not target then return end\nlocal heading = TensorCore.getHeadingToTarget(boss.pos, target.pos)\nlocal drawer = TensorCore.getMoogleDrawer()\ndrawer:addCone(boss.pos.x,boss.pos.y,boss.pos.z,15.55,math.rad(90),heading)",
+							conditions = 
+							{
+								
+								{
+									"73611343-617f-c4e7-9952-1dcd95eef58d",
+									true,
+								},
+							},
+							name = "Short cleave warning",
+							uuid = "ac6bf99b-3ca1-ea94-80ea-bba5244c9afa",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Filter",
+							filterTargetType = "ContentID",
+							name = "Titan cleaves",
+							partyTargetContentID = 1801,
+							uuid = "73611343-617f-c4e7-9952-1dcd95eef58d",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU/Titan",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 715,
+				name = "[LPDU] Titan - Mountain Buster cone preview",
+				timeRange = true,
+				timelineIndex = 100,
+				timerEndOffset = 2,
+				timerStartOffset = -2,
+				uuid = "2232108f-4d6b-e78c-98fb-19c11357fd60",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "data.uwuMountainBuster715Landed = true\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"e1c3b7c7-de6a-3b8a-9b98-866d63d6e0f8",
+									true,
+								},
+							},
+							name = "Clear Mountain Buster preview",
+							uuid = "7e44f160-e4e8-e266-906d-1b1ec6ac1793",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID == 1801 and eventArgs.spellID == 11107",
+							dequeueIfLuaFalse = true,
+							name = "Titan Mountain Buster hit",
+							uuid = "e1c3b7c7-de6a-3b8a-9b98-866d63d6e0f8",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU/Titan",
+				eventType = 2,
+				mechanicTime = 715,
+				name = "[LPDU] Titan - Mountain Buster cone resolution",
+				timeRange = true,
+				timelineIndex = 100,
+				timerEndOffset = 2,
+				timerStartOffset = -2,
+				uuid = "be8f3e24-4129-6bd0-8a39-60b2af81d31b",
+				version = 2,
+			},
+		},
 	},
 	[101] = 
 	{
@@ -12506,6 +12633,45 @@ local tbl =
 							version = 2.1,
 						},
 					},
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local e = eventArgs\nlocal target = {x=e.x, y=e.y, z=e.z}\nlocal player = TensorCore.mGetPlayer()\nif not player or not player.pos then return end\nlocal distance = TensorCore.getDistance2d(player.pos, target)\nlocal drawer = TensorCore.getCachedDrawer(0xFFB8FF88, 0xFF55FF55, 0xFF2A8A2A, 0xFFFFFFFF, 3)\ndrawer:addTimedCircle(8000, target.x, target.y, target.z, 1.7, 0, false, true, Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nif distance and distance > 0.25 then\n    local tipLength = math.min(2.0, distance * 0.4)\n    drawer:addTimedArrow(8000, player.pos.x, player.pos.y, player.pos.z,\n        TensorCore.getHeadingToTarget(player.pos, target),\n        math.max(0.1, distance - tipLength), 1.4, tipLength, 2.6, 0, false,\n        Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nend\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"99d9d46b-eb29-f92c-9810-0c6dc83523b2",
+									true,
+								},
+								
+								{
+									"c7d800ae-adbe-9523-b256-2e22676059e6",
+									true,
+								},
+								
+								{
+									"bf9cbfe8-a136-6067-9b62-9d6d1f499216",
+									true,
+								},
+								
+								{
+									"bd30ba5b-7c56-1785-81cc-de10c23da385",
+									true,
+								},
+								
+								{
+									"355be433-51c8-6c45-9d3d-1498e837f8a1",
+									true,
+								},
+							},
+							name = "Arrow to actual Light Puddle",
+							uuid = "a5dbd265-cd2f-fb2e-85a5-8f83bf1cb2ed",
+							version = 2.1,
+						},
+					},
 				},
 				conditions = 
 				{
@@ -12564,6 +12730,18 @@ local tbl =
 							category = "Self",
 							name = "Still needs orb",
 							uuid = "bd30ba5b-7c56-1785-81cc-de10c23da385",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local e = eventArgs\nreturn e.entityContentID == 2009481 and e.keyID == 2009481 and e.type == 7 and e.flags == 5 and e.state == 0 and type(e.x) == \"number\" and type(e.y) == \"number\" and type(e.z) == \"number\"",
+							dequeueIfLuaFalse = true,
+							name = "Actual Light Puddle spawn",
+							uuid = "355be433-51c8-6c45-9d3d-1498e837f8a1",
 							version = 3,
 						},
 					},

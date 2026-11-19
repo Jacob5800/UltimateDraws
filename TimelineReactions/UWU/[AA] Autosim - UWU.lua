@@ -2257,7 +2257,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local folder = GetLuaModsPath() .. [[TensorReactions\\Settings\\]]\nlocal path = folder .. \"UWU-AutoSim-Gaol.lua\"\nlocal settings = _G.UWU_AutoSimGaolSettings\nif not settings then\n local saved = FileExists(path) and FileLoad(path)\n settings = {interruptCast = type(saved)==\"table\" and saved.interruptCast==true or false}\n _G.UWU_AutoSimGaolSettings = settings\nend\n-- Profile-owned settings, loaded before any GUI or gameplay consumer.\nif not _G.UWU_AutoSimSettingsStore then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..[[UWU-AutoSim.lua]]\n local saved={}\n if FileExists(path) then\n  local loaded=FileLoad(path)\n  if type(loaded)==\"table\" then saved=loaded end\n end\n local specs={\n  UWU_AutoSimSettings={autoCasterLB=true,autoMeleeLB=true,vulcanKnockback=true,casterNailLifetime=true,casterNailCastBudget=2.8,spinyTarget=true,spinyEarly=false,garudaCleanseMovement=false,adjustKillTimes=false,garudaSeconds=130,ifritSeconds=100,titanSeconds=125,fakeMelee=false,slowerGroup=false,garudaExtra=0,ifritExtra=0,titanExtra=0,killExtra=0},\n  UWU_BLM_AutoSimConfig={poolLaha=true,priorityGaols=true,roulette=true,raidBuffs=true,buffGain=17,nails=true,closePair=true,surecast=true,manaward=true,holdTripleLateGaruda=true,garudaEndSeconds=133.235,ifritEndAfterFirstDisappear=40.328,tripleHoldLeadSeconds=8,burstWeight20261029=true},\n  UWU_BRD_AutoSimConfig={poolLaha=true,priorityGaols=true,raidBuffs=false,buffGain=16.87},\n  UWU_RPR_AutoSimConfig={lbWho=2,poolLaha=true,priorityGaols=true,raidBuffs=false,buffGain=17,burstWeight20261029=true},\n  UWU_AutoSimUI={general=true,garuda=false,ifrit=false,titan=false,ultima=false}\n }\n local ranges={buffGain={0,40},lbWho={1,2},casterNailCastBudget={0.5,5},garudaSeconds={90,240},ifritSeconds={70,240},titanSeconds={80,240},garudaExtra={0,90},ifritExtra={0,90},titanExtra={0,90},killExtra={0,90},tripleHoldLeadSeconds={0,20},garudaEndSeconds={110,180},ifritEndAfterFirstDisappear={20,90}}\n for name,defaults in pairs(specs) do\n  local current=_G[name]\n  local disk=type(saved[name])==\"table\" and saved[name] or {}\n  local values={}\n  for key,default in pairs(defaults) do\n   -- Disk wins on a fresh Lua session even if an older initializer already ran.\n   local value=disk[key]\n   if value==nil and current then value=current[key] end\n   if type(value)~=type(default) then value=default end\n   local range=ranges[key]\n   if range and (value~=value or value<range[1] or value>range[2] or (key==\"lbWho\" and value%1~=0)) then value=default end\n   values[key]=value\n  end\n  _G[name]=values\n end\n local store={}\n function store.save()\n  local out={}\n  for name,defaults in pairs(specs) do\n   out[name]={}\n   for key in pairs(defaults) do out[name][key]=_G[name][key] end\n  end\n  if not FolderExists(folder) then FolderCreate(folder) end\n  FileSave(path,out)\n end\n _G.UWU_AutoSimSettingsStore=store\n store.save()\nend\n\nlocal G=_G.UWU_AutoSimSettings\nlocal B=_G.UWU_BLM_AutoSimConfig\nlocal job=Player.job\nlocal caster=job==25 or job==27 or job==35 or job==42 or job==24 or job==28 or job==33 or job==40\nlocal ranged=job==23 or job==31 or job==38\nlocal melee=job==20 or job==22 or job==30 or job==34 or job==39 or job==41\nlocal C=caster and B or ranged and _G.UWU_BRD_AutoSimConfig or _G.UWU_RPR_AutoSimConfig\nlocal U=_G.UWU_AutoSimUI\nlocal changed=false\nlocal function help(text)\n if GUI:IsItemHovered() then GUI:SetTooltip(text) end\nend\nlocal function check(label,t,key,text)\n local value=GUI:Checkbox(label,t[key])\n help(text)\n if value~=t[key] then t[key]=value;changed=true end\nend\nlocal function slider(label,t,key,lo,hi,format,text)\n GUI:Text(label)\n GUI:PushItemWidth(400)\n local value=GUI:SliderFloat(\"##UWU_\"..key,t[key],lo,hi,format or \"%.1f\",1)\n help(text)\n GUI:PopItemWidth()\n if value~=t[key] then t[key]=value;changed=true end\nend\nlocal function section(key,label)\n GUI:SetNextTreeNodeOpened(U[key],GUI.SetCond_Always)\n local opened\n if label==\"General\" then\n  opened=U[key]\n  GUI:PushStyleVar(GUI.StyleVar_ButtonTextAlign,0,0.5)\n  if GUI:Button((opened and \"- \" or \"+ \")..label..\"##UWU_AutoSim_\"..key,GUI:GetContentRegionAvailWidth(),0) then opened=not opened end\n  GUI:PopStyleVar()\n  if opened then GUI:TreePush(\"UWU_AutoSim_\"..key) end\n else\n  opened=GUI:CollapsingHeader(label,0)\n  if opened then GUI:TreePush(label) end\n end\n if opened~=U[key] then U[key]=opened;changed=true end\n return opened\nend\nGUI:PushStyleColor(GUI.Col_WindowBg,0.055,0.07,0.09,0.97)\nGUI:SetNextWindowSize(440,0,GUI.SetCond_Always)\nlocal visible=GUI:Begin(\"UWU LPDU Settings\",true,GUI.WindowFlags_NoCollapse+GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n GUI:Text(\"UWU | AutoSim\")\n GUI:Text(\"Saved automatically. Forecast changes apply next pull.\")\n if section(\"general\",\"General\") then\n  check(\"Forecast party raid buffs\",C,\"raidBuffs\",\"Predict combined party burst strength. Actual active buffs remain handled by the ACR. Applies to your active role plan.\")\n  if C.raidBuffs then slider(\"Expected party damage gain (%)\",C,\"buffGain\",0,40,\"%.2f\",\"A planning estimate for your composition, not a real boss modifier.\") end\n  check(\"Prioritize healer / Suppression gaols\",C,\"priorityGaols\",\"Applies a 1.10 planning weight to the first five seconds of the relevant Titan and Ultima gaols. Applies next pull.\")\n  check(\"Customize phase kill estimates\",G,\"adjustKillTimes\",\"Reveal Garuda, Ifrit and Titan phase estimates below. Native encounter events still correct timing.\")\n  check(\"Add slower-group timing\",G,\"slowerGroup\",\"Reveal extra seconds under each phase. Added to the role plan next pull; mechanic movement windows are not stretched.\")\n  if job==25 or job==27 or job==35 or job==42 or ranged then check(\"Fake melee: skip eruption-bait route\",G,\"fakeMelee\",\"Only use if your assignment does not bait ranged eruptions. Removes those planned movement windows; does not change roster, targeting or draws.\") end\n  if job==25 then check(\"Automatic Manaward (BLM)\",B,\"manaward\",\"Requests Manaward for Aerial Blast, Titan opening and Ultima opening using the existing schedule.\") end\n  GUI:TreePop()\n end\n if section(\"garuda\",\"P1 - Garuda\") then\n  if Player.job == 25 then\n   check(\"Forecast my Garuda cleanse\", G, \"garudaCleanseMovement\", \"Enable when you are assigned the bubble cleanse. Plans a short BLM movement window at 62-65s on the next pull.\")\n  end\n  check(\"Target stack-ready Spiny Plume\",G,\"spinyTarget\",\"All AutoSim roles: focuses Spiny when its tank has two Thermal Low stacks, then returns to Garuda. Preserves the existing DoT restrictions.\")\n  if G.spinyTarget then check(\"Allow guarded one-stack early focus\",G,\"spinyEarly\",\"Optional. Requires a known Spiny time-to-kill exceeding the estimated time to the next Cyclone plus two seconds. Unknown estimates wait for two stacks.\") end\n  if G.adjustKillTimes then slider(\"Garuda phase duration (seconds)\",G,\"garudaSeconds\",90,240,\"%.0f\",\"Seconds from pull; default 130. Applies next pull.\") end\n  if G.slowerGroup then slider(\"Garuda extra seconds\",G,\"garudaExtra\",0,90,\"%.1f\",\"Extra time added to the next pull's Garuda forecast.\") end\n  if job==25 then\n   if B.holdLeyLinesAt110 == nil then B.holdLeyLinesAt110 = true end\n   check(\"Hold Ley Lines at timeline 110 (BLM)\", B, \"holdLeyLinesAt110\", \"Reserves Ley Lines for Ifrit starting at timeline 110. Off uses the existing Garuda 5% cutoff.\")\n   check(\"Hold Triplecast near phase end (BLM)\",B,\"holdTripleLateGaruda\",\"Holds all Triplecast uses near the predicted end, releasing when Ifrit becomes targetable.\")\n   if B.holdTripleLateGaruda then slider(\"Triplecast hold before end (seconds)\",B,\"tripleHoldLeadSeconds\",0,20,\"%.1f\",\"Default eight seconds before the configured Garuda end. Applies next pull.\") end\n  end\n  GUI:TreePop()\n end\n if section(\"ifrit\",\"P2 - Ifrit\") then\n  check(\"Automatic nail targeting (all DPS)\",B,\"nails\",\"Uses each role's established softening and kill-order logic. The same toggle now applies to caster and physical DPS; changes apply next pull.\")\n  if B.nails then\n   check(\"Allow final close-pair AoE\",B,\"closePair\",\"Allows the final close pair after the first two kills. Preserves melee's existing softening cleave. Applies next pull.\")\n   if caster then\n    check(\"Avoid short-lived nails (casters/healers)\",G,\"casterNailLifetime\",\"During ordered kills, stay on Ifrit if the next nail cannot survive the cast budget. Does not skip to a later nail or alter the 40% softening step.\")\n    if G.casterNailLifetime then slider(\"Nail cast budget (seconds)\",G,\"casterNailCastBudget\",0.5,5,\"%.1f\",\"Estimated future cast time including a margin. Default 2.8 seconds; unknown time-to-kill retains normal targeting.\") end\n   end\n  end\n  local immune=G.vulcanKnockback and (not caster or B.surecast)\n  local nextImmune=GUI:Checkbox(\"Vulcan Burst knockback immunity\",immune)\n  help(\"Surecast for casters/healers, Arm's Length for physical jobs. Titan Upheaval and Aetheric Boom must still be ridden.\")\n  if nextImmune~=immune then G.vulcanKnockback=nextImmune;if caster then B.surecast=nextImmune end;changed=true end\n  if G.adjustKillTimes then slider(\"Ifrit phase duration (seconds)\",G,\"ifritSeconds\",70,240,\"%.0f\",\"Shared phase estimate; default 100 seconds. Applies next pull.\") end\n  if G.slowerGroup then slider(\"Ifrit extra seconds\",G,\"ifritExtra\",0,90,\"%.1f\",\"Extra time added to the next pull's Ifrit forecast.\") end\n  GUI:TreePop()\n end\n if section(\"titan\",\"P3 - Titan\") then\n  local oldInterrupt = settings.interruptCast\n  settings.interruptCast = GUI:Checkbox(\"Interrupt cast for Titan healer gaol\",oldInterrupt)\n  help(\"Cancel your active cast to break the healer's gaol immediately. Off preserves the cast.\")\n  if settings.interruptCast~=oldInterrupt then\n   if not FolderExists(folder) then FolderCreate(folder) end\n   FileSave(path,settings)\n  end\n  GUI:Text(\"Ride Upheaval; triple-gaol AoE protection is automatic.\")\n  if G.adjustKillTimes then slider(\"Titan phase duration (seconds)\",G,\"titanSeconds\",80,240,\"%.0f\",\"Shared phase estimate; default 125 seconds. Applies next pull.\") end\n  if G.slowerGroup then slider(\"Titan extra seconds\",G,\"titanExtra\",0,90,\"%.1f\",\"Extra time added to the next pull's Titan forecast.\") end\n  GUI:TreePop()\n end\n if section(\"ultima\",\"P4 - Ultima / Lahabrea\") then\n  check(\"Reserve cooldowns during Lahabrea\",C,\"poolLaha\",\"Uses the existing 0.01 planning weight while continuing ordinary damage and gauge building. Applies next pull.\")\n  if caster then\n   check(\"Adapt final primal movement\",B,\"roulette\",\"Forecast all possible orders, then narrow movement when Prepare casts reveal the actual sequence.\")\n   if job==25 or job==27 or job==35 or job==42 then check(\"Automatic caster LB3\",G,\"autoCasterLB\",\"For caster jobs with Beyond Limits: waits for full gauge and six bits, then aims at arena centre.\") end\n  elseif melee then\n   check(\"Automatic melee LB3\",G,\"autoMeleeLB\",\"For the melee Beyond Limits owner: targets Lahabrea and waits for the buff and full gauge.\")\n   GUI:Text(\"Lahabrea LB forecast\")\n   GUI:PushItemWidth(400)\n   local value=GUI:Combo(\"##UWU_lbWho\",C.lbWho,{\"Me\",\"Other melee\"},2)\n   help(\"Only forecasts the personal LB action lock. The automatic-LB toggle above controls casting.\")\n   GUI:PopItemWidth()\n   if value~=C.lbWho then C.lbWho=value;changed=true end\n  end\n  if G.slowerGroup then slider(\"Final kill extra seconds\",G,\"killExtra\",0,90,\"%.1f\",\"Extra time added to the next pull's final kill forecast.\") end\n  GUI:TreePop()\n end\nend\nGUI:End()\nGUI:PopStyleColor(1)\nif changed then _G.UWU_AutoSimSettingsStore.save() end\n",
+							actionLua = "local folder = GetLuaModsPath() .. [[TensorReactions\\Settings\\]]\nlocal path = folder .. \"UWU-AutoSim-Gaol.lua\"\nlocal settings = _G.UWU_AutoSimGaolSettings\nif not settings or settings.interruptSuppressionCast == nil then\n local saved = FileExists(path) and FileLoad(path)\n settings = settings or {interruptCast = type(saved) == \"table\" and saved.interruptCast == true}\n settings.interruptSuppressionCast = type(saved) == \"table\" and saved.interruptSuppressionCast == true\n _G.UWU_AutoSimGaolSettings = settings\nend\n-- Profile-owned settings, loaded before any GUI or gameplay consumer.\nif not _G.UWU_AutoSimSettingsStore then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..[[UWU-AutoSim.lua]]\n local saved={}\n if FileExists(path) then\n  local loaded=FileLoad(path)\n  if type(loaded)==\"table\" then saved=loaded end\n end\n local specs={\n  UWU_AutoSimSettings={autoCasterLB=true,autoMeleeLB=true,vulcanKnockback=true,casterNailLifetime=true,casterNailCastBudget=2.8,spinyTarget=true,spinyEarly=false,garudaCleanseMovement=false,adjustKillTimes=false,garudaSeconds=130,ifritSeconds=100,titanSeconds=125,fakeMelee=false,slowerGroup=false,garudaExtra=0,ifritExtra=0,titanExtra=0,killExtra=0},\n  UWU_BLM_AutoSimConfig={poolLaha=true,priorityGaols=true,roulette=true,raidBuffs=true,buffGain=17,nails=true,closePair=true,surecast=true,manaward=true,holdTripleLateGaruda=true,garudaEndSeconds=133.235,ifritEndAfterFirstDisappear=40.328,tripleHoldLeadSeconds=8,burstWeight20261029=true},\n  UWU_BRD_AutoSimConfig={poolLaha=true,priorityGaols=true,raidBuffs=false,buffGain=16.87},\n  UWU_RPR_AutoSimConfig={lbWho=2,poolLaha=true,priorityGaols=true,raidBuffs=false,buffGain=17,burstWeight20261029=true},\n  UWU_AutoSimUI={general=true,garuda=false,ifrit=false,titan=false,ultima=false}\n }\n local ranges={buffGain={0,40},lbWho={1,2},casterNailCastBudget={0.5,5},garudaSeconds={90,240},ifritSeconds={70,240},titanSeconds={80,240},garudaExtra={0,90},ifritExtra={0,90},titanExtra={0,90},killExtra={0,90},tripleHoldLeadSeconds={0,20},garudaEndSeconds={110,180},ifritEndAfterFirstDisappear={20,90}}\n for name,defaults in pairs(specs) do\n  local current=_G[name]\n  local disk=type(saved[name])==\"table\" and saved[name] or {}\n  local values={}\n  for key,default in pairs(defaults) do\n   -- Disk wins on a fresh Lua session even if an older initializer already ran.\n   local value=disk[key]\n   if value==nil and current then value=current[key] end\n   if type(value)~=type(default) then value=default end\n   local range=ranges[key]\n   if range and (value~=value or value<range[1] or value>range[2] or (key==\"lbWho\" and value%1~=0)) then value=default end\n   values[key]=value\n  end\n  _G[name]=values\n end\n local store={}\n function store.save()\n  local out={}\n  for name,defaults in pairs(specs) do\n   out[name]={}\n   for key in pairs(defaults) do out[name][key]=_G[name][key] end\n  end\n  if not FolderExists(folder) then FolderCreate(folder) end\n  FileSave(path,out)\n end\n _G.UWU_AutoSimSettingsStore=store\n store.save()\nend\n\nlocal G=_G.UWU_AutoSimSettings\nlocal B=_G.UWU_BLM_AutoSimConfig\nlocal job=Player.job\nlocal caster=job==25 or job==27 or job==35 or job==42 or job==24 or job==28 or job==33 or job==40\nlocal ranged=job==23 or job==31 or job==38\nlocal melee=job==20 or job==22 or job==30 or job==34 or job==39 or job==41\nlocal C=caster and B or ranged and _G.UWU_BRD_AutoSimConfig or _G.UWU_RPR_AutoSimConfig\nlocal U=_G.UWU_AutoSimUI\nlocal changed=false\nlocal function help(text)\n if GUI:IsItemHovered() then GUI:SetTooltip(text) end\nend\nlocal function check(label,t,key,text)\n local value=GUI:Checkbox(label,t[key])\n help(text)\n if value~=t[key] then t[key]=value;changed=true end\nend\nlocal function slider(label,t,key,lo,hi,format,text)\n GUI:Text(label)\n GUI:PushItemWidth(400)\n local value=GUI:SliderFloat(\"##UWU_\"..key,t[key],lo,hi,format or \"%.1f\",1)\n help(text)\n GUI:PopItemWidth()\n if value~=t[key] then t[key]=value;changed=true end\nend\nlocal function section(key,label)\n GUI:SetNextTreeNodeOpened(U[key],GUI.SetCond_Always)\n local opened\n if label==\"General\" then\n  opened=U[key]\n  GUI:PushStyleVar(GUI.StyleVar_ButtonTextAlign,0,0.5)\n  if GUI:Button((opened and \"- \" or \"+ \")..label..\"##UWU_AutoSim_\"..key,GUI:GetContentRegionAvailWidth(),0) then opened=not opened end\n  GUI:PopStyleVar()\n  if opened then GUI:TreePush(\"UWU_AutoSim_\"..key) end\n else\n  opened=GUI:CollapsingHeader(label,0)\n  if opened then GUI:TreePush(label) end\n end\n if opened~=U[key] then U[key]=opened;changed=true end\n return opened\nend\nGUI:PushStyleColor(GUI.Col_WindowBg,0.055,0.07,0.09,0.97)\nGUI:SetNextWindowSize(440,0,GUI.SetCond_Always)\nlocal visible=GUI:Begin(\"UWU LPDU Settings\",true,GUI.WindowFlags_NoCollapse+GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n GUI:Text(\"UWU | AutoSim\")\n GUI:Text(\"Saved automatically. Forecast changes apply next pull.\")\n if section(\"general\",\"General\") then\n  check(\"Forecast party raid buffs\",C,\"raidBuffs\",\"Predict combined party burst strength. Actual active buffs remain handled by the ACR. Applies to your active role plan.\")\n  if C.raidBuffs then slider(\"Expected party damage gain (%)\",C,\"buffGain\",0,40,\"%.2f\",\"A planning estimate for your composition, not a real boss modifier.\") end\n  check(\"Prioritize healer / Suppression gaols\",C,\"priorityGaols\",\"Applies a 1.10 planning weight to the first five seconds of the relevant Titan and Ultima gaols. Applies next pull.\")\n  check(\"Customize phase kill estimates\",G,\"adjustKillTimes\",\"Reveal Garuda, Ifrit and Titan phase estimates below. Native encounter events still correct timing.\")\n  check(\"Add slower-group timing\",G,\"slowerGroup\",\"Reveal extra seconds under each phase. Added to the role plan next pull; mechanic movement windows are not stretched.\")\n  if job==25 or job==27 or job==35 or job==42 or ranged then check(\"Fake melee: skip eruption-bait route\",G,\"fakeMelee\",\"Only use if your assignment does not bait ranged eruptions. Removes those planned movement windows; does not change roster, targeting or draws.\") end\n  if job==25 then check(\"Automatic Manaward (BLM)\",B,\"manaward\",\"Requests Manaward for Aerial Blast, Titan opening and Ultima opening using the existing schedule.\") end\n  GUI:TreePop()\n end\n if section(\"garuda\",\"P1 - Garuda\") then\n  if Player.job == 25 then\n   check(\"Forecast my Garuda cleanse\", G, \"garudaCleanseMovement\", \"Enable when you are assigned the bubble cleanse. Plans a short BLM movement window at 62-65s on the next pull.\")\n  end\n  check(\"Target stack-ready Spiny Plume\",G,\"spinyTarget\",\"All AutoSim roles: focuses Spiny when its tank has two Thermal Low stacks, then returns to Garuda. Preserves the existing DoT restrictions.\")\n  if G.spinyTarget then check(\"Allow guarded one-stack early focus\",G,\"spinyEarly\",\"Optional. Requires a known Spiny time-to-kill exceeding the estimated time to the next Cyclone plus two seconds. Unknown estimates wait for two stacks.\") end\n  if G.adjustKillTimes then slider(\"Garuda phase duration (seconds)\",G,\"garudaSeconds\",90,240,\"%.0f\",\"Seconds from pull; default 130. Applies next pull.\") end\n  if G.slowerGroup then slider(\"Garuda extra seconds\",G,\"garudaExtra\",0,90,\"%.1f\",\"Extra time added to the next pull's Garuda forecast.\") end\n  if job==25 then\n   if B.holdLeyLinesAt110 == nil then B.holdLeyLinesAt110 = true end\n   check(\"Hold Ley Lines at timeline 110 (BLM)\", B, \"holdLeyLinesAt110\", \"Reserves Ley Lines for Ifrit starting at timeline 110. Off uses the existing Garuda 5% cutoff.\")\n   check(\"Hold Triplecast near phase end (BLM)\",B,\"holdTripleLateGaruda\",\"Holds all Triplecast uses near the predicted end, releasing when Ifrit becomes targetable.\")\n   if B.holdTripleLateGaruda then slider(\"Triplecast hold before end (seconds)\",B,\"tripleHoldLeadSeconds\",0,20,\"%.1f\",\"Default eight seconds before the configured Garuda end. Applies next pull.\") end\n  end\n  GUI:TreePop()\n end\n if section(\"ifrit\",\"P2 - Ifrit\") then\n  check(\"Automatic nail targeting (all DPS)\",B,\"nails\",\"Uses each role's established softening and kill-order logic. The same toggle now applies to caster and physical DPS; changes apply next pull.\")\n  if B.nails then\n   check(\"Allow final close-pair AoE\",B,\"closePair\",\"Allows the final close pair after the first two kills. Preserves melee's existing softening cleave. Applies next pull.\")\n   if caster then\n    check(\"Avoid short-lived nails (casters/healers)\",G,\"casterNailLifetime\",\"During ordered kills, stay on Ifrit if the next nail cannot survive the cast budget. Does not skip to a later nail or alter the 40% softening step.\")\n    if G.casterNailLifetime then slider(\"Nail cast budget (seconds)\",G,\"casterNailCastBudget\",0.5,5,\"%.1f\",\"Estimated future cast time including a margin. Default 2.8 seconds; unknown time-to-kill retains normal targeting.\") end\n   end\n  end\n  local immune=G.vulcanKnockback and (not caster or B.surecast)\n  local nextImmune=GUI:Checkbox(\"Vulcan Burst knockback immunity\",immune)\n  help(\"Surecast for casters/healers, Arm's Length for physical jobs. Titan Upheaval and Aetheric Boom must still be ridden.\")\n  if nextImmune~=immune then G.vulcanKnockback=nextImmune;if caster then B.surecast=nextImmune end;changed=true end\n  if G.adjustKillTimes then slider(\"Ifrit phase duration (seconds)\",G,\"ifritSeconds\",70,240,\"%.0f\",\"Shared phase estimate; default 100 seconds. Applies next pull.\") end\n  if G.slowerGroup then slider(\"Ifrit extra seconds\",G,\"ifritExtra\",0,90,\"%.1f\",\"Extra time added to the next pull's Ifrit forecast.\") end\n  GUI:TreePop()\n end\n if section(\"titan\",\"P3 - Titan\") then\n  local oldInterrupt = settings.interruptCast\n  settings.interruptCast = GUI:Checkbox(\"Interrupt cast for Titan healer gaol\",oldInterrupt)\n  help(\"Cancel your active cast to break the healer's gaol immediately. Off preserves the cast.\")\n  if settings.interruptCast~=oldInterrupt then\n   if not FolderExists(folder) then FolderCreate(folder) end\n   FileSave(path,settings)\n  end\n  GUI:Text(\"Ride Upheaval; triple-gaol AoE protection is automatic.\")\n  if G.adjustKillTimes then slider(\"Titan phase duration (seconds)\",G,\"titanSeconds\",80,240,\"%.0f\",\"Shared phase estimate; default 125 seconds. Applies next pull.\") end\n  if G.slowerGroup then slider(\"Titan extra seconds\",G,\"titanExtra\",0,90,\"%.1f\",\"Extra time added to the next pull's Titan forecast.\") end\n  GUI:TreePop()\n end\n if section(\"ultima\",\"P4 - Ultima / Lahabrea\") then\n  local oldInterrupt = settings.interruptSuppressionCast\n  settings.interruptSuppressionCast = GUI:Checkbox(\"Interrupt cast for Ultima Suppression gaol\", oldInterrupt)\n  help(\"Cancel your active cast when switching to the Suppression gaol. Off preserves the cast.\")\n  if settings.interruptSuppressionCast ~= oldInterrupt then\n   if not FolderExists(folder) then FolderCreate(folder) end\n   FileSave(path, settings)\n  end\n  check(\"Reserve cooldowns during Lahabrea\",C,\"poolLaha\",\"Uses the existing 0.01 planning weight while continuing ordinary damage and gauge building. Applies next pull.\")\n  if caster then\n   check(\"Adapt final primal movement\",B,\"roulette\",\"Forecast all possible orders, then narrow movement when Prepare casts reveal the actual sequence.\")\n   if job==25 or job==27 or job==35 or job==42 then check(\"Automatic caster LB3\",G,\"autoCasterLB\",\"For caster jobs with Beyond Limits: waits for full gauge and six bits, then aims at arena centre.\") end\n  elseif melee then\n   check(\"Automatic melee LB3\",G,\"autoMeleeLB\",\"For the melee Beyond Limits owner: targets Lahabrea and waits for the buff and full gauge.\")\n   GUI:Text(\"Lahabrea LB forecast\")\n   GUI:PushItemWidth(400)\n   local value=GUI:Combo(\"##UWU_lbWho\",C.lbWho,{\"Me\",\"Other melee\"},2)\n   help(\"Only forecasts the personal LB action lock. The automatic-LB toggle above controls casting.\")\n   GUI:PopItemWidth()\n   if value~=C.lbWho then C.lbWho=value;changed=true end\n  end\n  if G.slowerGroup then slider(\"Final kill extra seconds\",G,\"killExtra\",0,90,\"%.1f\",\"Extra time added to the next pull's final kill forecast.\") end\n  GUI:TreePop()\n end\nend\nGUI:End()\nGUI:PopStyleColor(1)\nif changed then _G.UWU_AutoSimSettingsStore.save() end\n",
 							conditions = 
 							{
 								
@@ -3244,6 +3244,154 @@ local tbl =
 				timerEndOffset = 255,
 				timerStartOffset = -105,
 				uuid = "8ae86ad0-df48-c5cb-b9cf-830f65dad34d",
+				version = 2,
+			},
+		},
+	},
+	[24] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "AutoSim",
+				uuid = "7c5c6fae-ae79-c2d9-82f1-198906fde9dc",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "AutoSim",
+				name = "Garuda plumes",
+				uuid = "1f8f3454-0523-2485-bcf3-5cbbc9131fe2",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player = TensorCore.mGetPlayer()\nif not player or not player.alive or not data.uwuAutoSim then return end\n\nlocal roster = AnyoneCore and AnyoneCore.Roster\nlocal slot = roster and roster.current() and roster.mySlot()\nlocal own = slot == \"R2\" and data.uwuSatinPersonalTarget\nlocal inMeleeRole = TensorCore.isMelee(player) or slot == \"T1\" or slot == \"T2\"\nlocal current = player.targetid\nlocal state = data.uwuLateSatinTarget or {}\ndata.uwuLateSatinTarget = state\nlocal function log(reason, target)\n local key = reason .. \":\" .. tostring(target) .. \":\" .. tostring(current)\n if state.logKey == key then return end\n state.logKey = key\n TensorCore.timelineLogToFile(string.format(\"[UWU Satin Plume] %s intended=%s current=%s slot=%s personal=%s melee=%s\", reason,tostring(target),tostring(current),tostring(slot),tostring(own),tostring(inMeleeRole)))\nend\n\nlocal target, distance, retain\nfor _, plume in pairs(TensorCore.getEntityGroupList(\"ContentID\", 1648) or {}) do\n if plume.alive and plume.attackable and plume.targetable and plume.hp and plume.hp.current > 0 then\n  local range = TensorCore.getDistance2d(player.pos, plume.pos)\n  if plume.id == own then target = plume; break end\n  if not inMeleeRole or range <= 3 + (player.hitradius or 0) + (plume.hitradius or 0) then\n   if plume.id == current then retain = plume end\n   if not target or range < distance or (range == distance and plume.id < target.id) then\n    target, distance = plume, range\n   end\n  end\n end\nend\nif retain and (not target or target.id ~= own) then target = retain end\nif not target then log(\"waiting for targetable plume in range\", nil); return end\nif target.id == current then log(\"confirmed\", target.id); return end\nlocal cast = player.castinginfo\nif target.id ~= own and cast and ((cast.castingid or 0) > 0 or (cast.channelingid or 0) > 0) then\n log(\"waiting for active cast\", target.id); return\nend\nlocal accepted = Player:SetTarget(target.id)\nlog(\"requested (accepted=\" .. tostring(accepted) .. \")\", target.id)\n",
+							conditions = 
+							{
+								
+								{
+									"a9024cc8-7cdc-2d9f-982e-0daa8ebfc682",
+									true,
+								},
+							},
+							name = "[UWU] Target late Satin Plumes",
+							uuid = "c3673d04-c0c0-e2f5-9c89-37a0c701acbd",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							localmapid = 777,
+							name = "UWU",
+							uuid = "a9024cc8-7cdc-2d9f-982e-0daa8ebfc682",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Garuda plumes",
+				loop = true,
+				mechanicTime = 121,
+				name = "[UWU] Target late Satin Plumes",
+				throttleTime = 150,
+				timeRange = true,
+				timelineIndex = 24,
+				timerEndOffset = 7,
+				timerStartOffset = -12,
+				uuid = "20c324f1-7a2a-3d68-87c3-005ee4d31a94",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local e = eventArgs\nlocal state = data.uwuSatinPersonalTarget\nlocal player = TensorCore.mGetPlayer()\nif player and e.newTetherID ~= 0 and e.newTargetID == player.id then\n data.uwuSatinPersonalTarget = e.sourceEntityID\nelseif state == e.sourceEntityID then\n data.uwuSatinPersonalTarget = nil\nend\nself.used = true\n",
+							conditions = 
+							{
+								
+								{
+									"c1701a6c-a5f8-378b-a917-21a720f4b333",
+									true,
+								},
+								
+								{
+									"f43c18d3-d11b-79c8-bf0a-e30cfda2ce9e",
+									true,
+								},
+							},
+							name = "[UWU] Capture personal Satin Plume tether",
+							uuid = "bba96483-bbee-1f27-99e7-f35d84e35f3f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							localmapid = 777,
+							name = "UWU",
+							uuid = "c1701a6c-a5f8-378b-a917-21a720f4b333",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.sourceEntityContentID == 1648",
+							dequeueIfLuaFalse = true,
+							name = "Satin Plume source",
+							uuid = "f43c18d3-d11b-79c8-bf0a-e30cfda2ce9e",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Garuda plumes",
+				eventType = 15,
+				loop = true,
+				mechanicTime = 121,
+				name = "[UWU] Capture personal Satin Plume tether",
+				timeRange = true,
+				timelineIndex = 24,
+				timerEndOffset = 7,
+				timerStartOffset = -12,
+				uuid = "095a8bae-2f25-9fff-b8f3-c8dca44e29a1",
 				version = 2,
 			},
 		},
@@ -10334,7 +10482,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local folder = GetLuaModsPath() .. [[TensorReactions\\Settings\\]]\nlocal path = folder .. \"UWU-AutoSim-Gaol.lua\"\nlocal settings = _G.UWU_AutoSimGaolSettings\nif not settings then\n local saved = FileExists(path) and FileLoad(path)\n settings = {interruptCast = type(saved)==\"table\" and saved.interruptCast==true or false}\n _G.UWU_AutoSimGaolSettings = settings\nend\nlocal player = TensorCore.mGetPlayer()\nlocal gaol = TensorCore.mGetEntity(eventArgs.entityID)\nif not player or not player.alive or not gaol or not gaol.targetable or not gaol.attackable or not gaol.hp or gaol.hp.current<=0 then return end\n\nlocal state = data.uwuTitanHealerGaolTarget\nif not state or state.id~=gaol.id then\n state={id=gaol.id}\n data.uwuTitanHealerGaolTarget=state\nend\nif player.targetid==gaol.id then\n if state.requested and not state.confirmed then\n  state.confirmed=true\n  TensorCore.timelineLogToFile(\"[UWU Healer Gaol] confirmed target=\"..gaol.id)\n end\n self.used=true\n return\nend\nlocal now=Now()\nif state.requestAt and now-state.requestAt<150 then return end\nlocal cast=player.castinginfo and player.castinginfo.castingid or 0\nif settings.interruptCast and cast~=0 and not state.interrupted then\n ActionList:StopCasting()\n state.interrupted=true\nend\nlocal previous=player.targetid\nlocal accepted=Player:SetTarget(gaol.id)\nstate.requestAt=now\nif not state.requested then\n TensorCore.timelineLogToFile(string.format(\"[UWU Healer Gaol] requested=%s current=%s cast=%s interrupt=%s accepted=%s\",gaol.id,previous,cast,tostring(settings.interruptCast),tostring(accepted)))\nend\nstate.requested=true",
+							actionLua = "local folder = GetLuaModsPath() .. [[TensorReactions\\Settings\\]]\nlocal path = folder .. \"UWU-AutoSim-Gaol.lua\"\nlocal settings = _G.UWU_AutoSimGaolSettings\nif not settings or settings.interruptSuppressionCast == nil then\n local saved = FileExists(path) and FileLoad(path)\n settings = settings or {interruptCast = type(saved) == \"table\" and saved.interruptCast == true}\n settings.interruptSuppressionCast = type(saved) == \"table\" and saved.interruptSuppressionCast == true\n _G.UWU_AutoSimGaolSettings = settings\nend\nlocal player = TensorCore.mGetPlayer()\nlocal gaol = TensorCore.mGetEntity(eventArgs.entityID)\nif not player or not player.alive or not gaol or not gaol.targetable or not gaol.attackable or not gaol.hp or gaol.hp.current<=0 then return end\n\nlocal state = data.uwuTitanHealerGaolTarget\nif not state or state.id~=gaol.id then\n state={id=gaol.id}\n data.uwuTitanHealerGaolTarget=state\nend\nif player.targetid==gaol.id then\n if state.requested and not state.confirmed then\n  state.confirmed=true\n  TensorCore.timelineLogToFile(\"[UWU Healer Gaol] confirmed target=\"..gaol.id)\n end\n self.used=true\n return\nend\nlocal now=Now()\nif state.requestAt and now-state.requestAt<150 then return end\nlocal cast=player.castinginfo and player.castinginfo.castingid or 0\nif settings.interruptCast and cast~=0 and not state.interrupted then\n ActionList:StopCasting()\n state.interrupted=true\nend\nlocal previous=player.targetid\nlocal accepted=Player:SetTarget(gaol.id)\nstate.requestAt=now\nif not state.requested then\n TensorCore.timelineLogToFile(string.format(\"[UWU Healer Gaol] requested=%s current=%s cast=%s interrupt=%s accepted=%s\",gaol.id,previous,cast,tostring(settings.interruptCast),tostring(accepted)))\nend\nstate.requested=true",
 							conditions = 
 							{
 								
@@ -15691,7 +15839,8 @@ local tbl =
 					{
 						data = 
 						{
-							aType = "Misc",
+							aType = "Lua",
+							actionLua = "local folder = GetLuaModsPath() .. [[TensorReactions\\Settings\\]]\nlocal path = folder .. \"UWU-AutoSim-Gaol.lua\"\nlocal settings = _G.UWU_AutoSimGaolSettings\nif not settings or settings.interruptSuppressionCast == nil then\n local saved = FileExists(path) and FileLoad(path)\n settings = settings or {interruptCast = type(saved) == \"table\" and saved.interruptCast == true}\n settings.interruptSuppressionCast = type(saved) == \"table\" and saved.interruptSuppressionCast == true\n _G.UWU_AutoSimGaolSettings = settings\nend\nlocal player = TensorCore.mGetPlayer()\nlocal gaol = TensorCore.mGetEntity(eventArgs.entityID)\nif not player or not player.alive or not gaol or not gaol.targetable or not gaol.attackable or not gaol.hp or gaol.hp.current<=0 then\n if not data.uwuSuppressionGaolBlocked then\n  data.uwuSuppressionGaolBlocked = true\n  TensorCore.timelineLogToFile(\"[UWU Suppression Gaol] blocked: player or gaol unavailable; event target=\"..tostring(eventArgs.entityID))\n end\n return\nend\n\nlocal state = data.uwuSuppressionGaolTarget\nif not state or state.id~=gaol.id then\n state={id=gaol.id}\n data.uwuSuppressionGaolTarget=state\nend\nif player.targetid==gaol.id then\n if state.requested and not state.confirmed then\n  state.confirmed=true\n  TensorCore.timelineLogToFile(\"[UWU Suppression Gaol] confirmed target=\"..gaol.id)\n end\n self.used=true\n return\nend\nlocal now=Now()\nif state.requestAt and now-state.requestAt<150 then return end\nlocal cast=player.castinginfo and player.castinginfo.castingid or 0\nif settings.interruptSuppressionCast and cast~=0 and not state.interrupted then\n ActionList:StopCasting()\n state.interrupted=true\nend\nlocal previous=player.targetid\nlocal accepted=Player:SetTarget(gaol.id)\nstate.requestAt=now\nif not state.requested then\n TensorCore.timelineLogToFile(string.format(\"[UWU Suppression Gaol] requested=%s current=%s cast=%s interrupt=%s accepted=%s\",gaol.id,previous,cast,tostring(settings.interruptSuppressionCast),tostring(accepted)))\nend\nstate.requested=true",
 							conditions = 
 							{
 								
@@ -15770,7 +15919,8 @@ local tbl =
 					{
 						data = 
 						{
-							aType = "Misc",
+							aType = "Lua",
+							actionLua = "local folder = GetLuaModsPath() .. [[TensorReactions\\Settings\\]]\nlocal path = folder .. \"UWU-AutoSim-Gaol.lua\"\nlocal settings = _G.UWU_AutoSimGaolSettings\nif not settings or settings.interruptSuppressionCast == nil then\n local saved = FileExists(path) and FileLoad(path)\n settings = settings or {interruptCast = type(saved) == \"table\" and saved.interruptCast == true}\n settings.interruptSuppressionCast = type(saved) == \"table\" and saved.interruptSuppressionCast == true\n _G.UWU_AutoSimGaolSettings = settings\nend\nlocal player = TensorCore.mGetPlayer()\nlocal gaol = TensorCore.mGetEntity(eventArgs.entityID)\nif not player or not player.alive or not gaol or not gaol.targetable or not gaol.attackable or not gaol.hp or gaol.hp.current<=0 then\n if not data.uwuSuppressionGaolBlocked then\n  data.uwuSuppressionGaolBlocked = true\n  TensorCore.timelineLogToFile(\"[UWU Suppression Gaol] blocked: player or gaol unavailable; event target=\"..tostring(eventArgs.entityID))\n end\n return\nend\n\nlocal state = data.uwuSuppressionGaolTarget\nif not state or state.id~=gaol.id then\n state={id=gaol.id}\n data.uwuSuppressionGaolTarget=state\nend\nif player.targetid==gaol.id then\n if state.requested and not state.confirmed then\n  state.confirmed=true\n  TensorCore.timelineLogToFile(\"[UWU Suppression Gaol] confirmed target=\"..gaol.id)\n end\n self.used=true\n return\nend\nlocal now=Now()\nif state.requestAt and now-state.requestAt<150 then return end\nlocal cast=player.castinginfo and player.castinginfo.castingid or 0\nif settings.interruptSuppressionCast and cast~=0 and not state.interrupted then\n ActionList:StopCasting()\n state.interrupted=true\nend\nlocal previous=player.targetid\nlocal accepted=Player:SetTarget(gaol.id)\nstate.requestAt=now\nif not state.requested then\n TensorCore.timelineLogToFile(string.format(\"[UWU Suppression Gaol] requested=%s current=%s cast=%s interrupt=%s accepted=%s\",gaol.id,previous,cast,tostring(settings.interruptSuppressionCast),tostring(accepted)))\nend\nstate.requested=true",
 							conditions = 
 							{
 								
@@ -15849,7 +15999,8 @@ local tbl =
 					{
 						data = 
 						{
-							aType = "Misc",
+							aType = "Lua",
+							actionLua = "local folder = GetLuaModsPath() .. [[TensorReactions\\Settings\\]]\nlocal path = folder .. \"UWU-AutoSim-Gaol.lua\"\nlocal settings = _G.UWU_AutoSimGaolSettings\nif not settings or settings.interruptSuppressionCast == nil then\n local saved = FileExists(path) and FileLoad(path)\n settings = settings or {interruptCast = type(saved) == \"table\" and saved.interruptCast == true}\n settings.interruptSuppressionCast = type(saved) == \"table\" and saved.interruptSuppressionCast == true\n _G.UWU_AutoSimGaolSettings = settings\nend\nlocal player = TensorCore.mGetPlayer()\nlocal gaol = TensorCore.mGetEntity(eventArgs.entityID)\nif not player or not player.alive or not gaol or not gaol.targetable or not gaol.attackable or not gaol.hp or gaol.hp.current<=0 then\n if not data.uwuSuppressionGaolBlocked then\n  data.uwuSuppressionGaolBlocked = true\n  TensorCore.timelineLogToFile(\"[UWU Suppression Gaol] blocked: player or gaol unavailable; event target=\"..tostring(eventArgs.entityID))\n end\n return\nend\n\nlocal state = data.uwuSuppressionGaolTarget\nif not state or state.id~=gaol.id then\n state={id=gaol.id}\n data.uwuSuppressionGaolTarget=state\nend\nif player.targetid==gaol.id then\n if state.requested and not state.confirmed then\n  state.confirmed=true\n  TensorCore.timelineLogToFile(\"[UWU Suppression Gaol] confirmed target=\"..gaol.id)\n end\n self.used=true\n return\nend\nlocal now=Now()\nif state.requestAt and now-state.requestAt<150 then return end\nlocal cast=player.castinginfo and player.castinginfo.castingid or 0\nif settings.interruptSuppressionCast and cast~=0 and not state.interrupted then\n ActionList:StopCasting()\n state.interrupted=true\nend\nlocal previous=player.targetid\nlocal accepted=Player:SetTarget(gaol.id)\nstate.requestAt=now\nif not state.requested then\n TensorCore.timelineLogToFile(string.format(\"[UWU Suppression Gaol] requested=%s current=%s cast=%s interrupt=%s accepted=%s\",gaol.id,previous,cast,tostring(settings.interruptSuppressionCast),tostring(accepted)))\nend\nstate.requested=true",
 							conditions = 
 							{
 								
