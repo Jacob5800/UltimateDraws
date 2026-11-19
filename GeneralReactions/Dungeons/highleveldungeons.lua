@@ -3540,6 +3540,217 @@ local tbl =
 			uuid = "6f4960a4-d9c4-e9f8-b3a6-fe5d10db5bdf",
 			version = 2,
 		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "The Lost City of Amdapor (Hard)",
+			uuid = "6e38b62f-30fa-4f8a-8168-f2c563dfb8de",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Lost City of Amdapor (Hard)",
+			name = "AutoSim",
+			uuid = "8f4e47db-9905-ddbc-b087-bc6e48c7e658",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "The Lost City of Amdapor (Hard)/AutoSim",
+			eventType = 3,
+			execute = "local e=eventArgs\nlocal cid=e.entityContentID\nlocal anchor=(cid==4744 and e.spellID==5573 and 11.516) or (cid==4745 and e.spellID==5582 and 7.282) or (cid==4747 and e.spellID==5604 and 3.171)\nif not anchor or data.lostAmdaporBoss==e.entityID then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=519 then return end\nlocal A=TensorCore.API.TensorACR\nlocal now=A.getAutoSimTime()\nif type(now)~='number' or now<0 then return end\nlocal origin=math.max(0,now-anchor)\ndata.lostAmdaporBoss=e.entityID\nlocal kill=cid==4744 and 103.156 or cid==4745 and 103.266 or 133.641\nA.setAutoSimKillTime(origin+kill)\nA.addAutoSimUncertainty(now,10)\nlocal caster=p.job==25 or p.job==27 or p.job==35 or p.job==42 or p.job==36 or p.job==24 or p.job==28 or p.job==33 or p.job==40\nlocal movement=cid==4744 and {{16,18},{49.5,51.5},{73.5,75.5}} or cid==4745 and {{9.5,11.3},{49.9,51.7},{98.7,100.5}} or {{4.4,6.2},{61.2,63},{90.3,92.1},{110.7,112.5}}\nif caster then\n for _,w in ipairs(movement) do\n  if origin+w[2]>now then A.addAutoSimPhase('CasterDowntime',math.max(now,origin+w[1]),origin+w[2],1) end\n end\nend\nif cid==4747 then\n for _,w in ipairs({{26.172,34.297},{77.141,81.688}}) do\n  if origin+w[2]>now then A.addAutoSimPhase('FullDowntime',math.max(now,origin+w[1]),origin+w[2],1) end\n end\nend",
+			executeType = 2,
+			name = "Boss anchors and sampled AutoSim forecasts",
+			uuid = "d50c7642-ef3e-3958-a644-4bdcb4927453",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "The Lost City of Amdapor (Hard)/AutoSim",
+			execute = "local player = TensorCore.mGetPlayer()\nif not player then self.used = true; return end\n\nlocal contentID = 4839\nlocal label = \"[High Level Dungeons] Toxic Squama\"\nlocal api = TensorCore.API.TensorACR\nlocal eligible = player.localmapid == 519\nlocal state = LostAmdaporSquamaDoT\n\n-- Restore the previous entry on leaving the duty or changing jobs.\n-- Keep this state outside pull data so a wipe does not lose the original values.\nif state and (not eligible or state.job ~= player.job) then\n    local entry = state.entry\n    if entry.enabled and entry.allowIfTarget == false and entry.allowSmartDoT == false then\n        if state.created then\n            entry.enabled = false\n            if player.job == state.job and api.getBlacklistEntry(contentID) then\n                local current = api.addBlacklistEntry(contentID)\n                if current == entry and current.name == label then\n                    api.deleteBlacklistEntry(contentID)\n                end\n            end\n        else\n            entry.enabled = state.enabled\n            entry.allowIfTarget = state.allowIfTarget\n            entry.allowSmartDoT = state.allowSmartDoT\n        end\n    end\n    LostAmdaporSquamaDoT = nil\n    state = nil\nend\n\nif eligible and not state then\n    local supported, exists = pcall(api.getBlacklistEntry, contentID)\n    if supported then\n        local ok, entry = pcall(api.addBlacklistEntry, contentID, label)\n        if ok and entry then\n            LostAmdaporSquamaDoT = {\n                job = player.job, entry = entry, created = not exists,\n                enabled = entry.enabled, allowIfTarget = entry.allowIfTarget,\n                allowSmartDoT = entry.allowSmartDoT,\n            }\n            entry.enabled = true\n            entry.allowIfTarget = false\n            entry.allowSmartDoT = false\n        end\n    end\nend\nself.used = true",
+			executeType = 2,
+			name = "Toxic Squama - DoT blacklist",
+			throttleTime = 500,
+			uuid = "bc71fac6-b47d-a98e-b833-f41101b60a64",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "The Lost City of Amdapor (Hard)/AutoSim",
+			execute = "local player = TensorCore.mGetPlayer()\nif not player then self.used = true; return end\n\nlocal contentID = 4815\nlocal label = \"[High Level Dungeons] Arcane Sphere\"\nlocal api = TensorCore.API.TensorACR\nlocal eligible = player.localmapid == 519\nlocal state = LostAmdaporSphereDoT\n\n-- Restore the previous entry on leaving the duty or changing jobs.\n-- Keep this state outside pull data so a wipe does not lose the original values.\nif state and (not eligible or state.job ~= player.job) then\n    local entry = state.entry\n    if entry.enabled and entry.allowIfTarget == false and entry.allowSmartDoT == false then\n        if state.created then\n            entry.enabled = false\n            if player.job == state.job and api.getBlacklistEntry(contentID) then\n                local current = api.addBlacklistEntry(contentID)\n                if current == entry and current.name == label then\n                    api.deleteBlacklistEntry(contentID)\n                end\n            end\n        else\n            entry.enabled = state.enabled\n            entry.allowIfTarget = state.allowIfTarget\n            entry.allowSmartDoT = state.allowSmartDoT\n        end\n    end\n    LostAmdaporSphereDoT = nil\n    state = nil\nend\n\nif eligible and not state then\n    local supported, exists = pcall(api.getBlacklistEntry, contentID)\n    if supported then\n        local ok, entry = pcall(api.addBlacklistEntry, contentID, label)\n        if ok and entry then\n            LostAmdaporSphereDoT = {\n                job = player.job, entry = entry, created = not exists,\n                enabled = entry.enabled, allowIfTarget = entry.allowIfTarget,\n                allowSmartDoT = entry.allowSmartDoT,\n            }\n            entry.enabled = true\n            entry.allowIfTarget = false\n            entry.allowSmartDoT = false\n        end\n    end\nend\nself.used = true",
+			executeType = 2,
+			name = "Arcane Sphere - DoT blacklist",
+			throttleTime = 500,
+			uuid = "3f19e849-31a6-1325-a10f-0e461e4b6759",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Lost City of Amdapor (Hard)",
+			name = "Achamoth",
+			uuid = "2b3e545a-dd41-1ec7-a886-ddb3f68ded11",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "The Lost City of Amdapor (Hard)/Achamoth",
+			eventType = 3,
+			execute = "if eventArgs.spellID~=5573 or eventArgs.entityContentID~=4744 or eventArgs.channelTimeMax<=0 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=519 then return end\ndata.lostAmdaporFace={finish=Now()+eventArgs.channelTimeMax*1000,boss=eventArgs.entityID}",
+			executeType = 2,
+			name = "Neuro Squama - schedule outward facing",
+			uuid = "63577bac-d9b5-ee9e-ad16-552b1686a0aa",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "The Lost City of Amdapor (Hard)/Achamoth",
+			execute = "local p=TensorCore.mGetPlayer()\nlocal active=p and p.localmapid==519 and p.alive\nlocal f=data.lostAmdaporFace\nlocal boss=active and f and TensorCore.mGetEntity(f.boss)\nlocal remaining=f and f.finish-Now()\nif active and p.incombat and boss and boss.alive and remaining> -350 and remaining<=1400 then\n local cx,cz=-222,-283\n local dx,dz=p.pos.x-cx,p.pos.z-cz\n if dx*dx+dz*dz<4 then dx,dz=p.pos.x-boss.pos.x,p.pos.z-boss.pos.z end\n if dx*dx+dz*dz>.04 then\n  local api=TensorCore.API.TensorACR\n  api.setLockFaceHeading(TensorCore.getHeadingToTarget(p.pos,{x=p.pos.x+dx,y=p.pos.y,z=p.pos.z+dz}))\n  if not LostAmdaporOwnsFacing then\n   api.setHardLockFace(true)\n   api.toggleLockFace(true)\n   LostAmdaporOwnsFacing=true\n  end\n end\nelse\nif LostAmdaporOwnsFacing then\n local api=TensorCore.API.TensorACR\n api.toggleLockFace(false)\n api.setHardLockFace(false)\n LostAmdaporOwnsFacing=nil\nend\n if f and (not active or not p.incombat or not boss or not boss.alive or remaining<= -350) then data.lostAmdaporFace=nil end\nend\nif not active then return end\ngStartCombat=false\nlocal helpers=AnyoneCore and AnyoneCore.Settings\nif helpers and helpers.DutyHelper then helpers.DutyHelper.enabled=false end\nif helpers and helpers.PrepullHelper then helpers.PrepullHelper.enabled=false end\nif p.incombat or TensorCore.mGetTarget() then return end\nif data.lostAmdaporTargetAt and Now()<data.lostAmdaporTargetAt then return end\ndata.lostAmdaporTargetAt=Now()+750\nfor _,e in pairs(TensorCore.entityList('alive,targetable,attackable,maxdistance=30') or {}) do\n if e.contentid==4744 or e.contentid==4745 or e.contentid==4747 then\n  Player:SetTarget(e.id)\n  break\n end\nend",
+			executeType = 2,
+			name = "Duty setup and Neuro Squama LockFace",
+			throttleTime = 150,
+			uuid = "dbe34f51-5cad-5e4a-bc58-5c97190fc2e0",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "The Lost City of Amdapor (Hard)/Achamoth",
+			eventType = 9,
+			execute = "if LostAmdaporOwnsFacing then\n local api=TensorCore.API.TensorACR\n api.toggleLockFace(false)\n api.setHardLockFace(false)\n LostAmdaporOwnsFacing=nil\nend\ndata.lostAmdaporFace=nil\ndata.lostAmdaporBoss=nil",
+			executeType = 2,
+			name = "Release Neuro Squama LockFace on wipe",
+			uuid = "b5f7a1bc-3388-9038-8051-6c818d0c3d68",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "The Lost City of Amdapor (Hard)/Achamoth",
+			eventType = 11,
+			execute = "if LostAmdaporOwnsFacing then\n local api=TensorCore.API.TensorACR\n api.toggleLockFace(false)\n api.setHardLockFace(false)\n LostAmdaporOwnsFacing=nil\nend\ndata.lostAmdaporFace=nil\ndata.lostAmdaporBoss=nil",
+			executeType = 2,
+			name = "Release Neuro Squama LockFace on mapchange",
+			uuid = "a9f87f92-831b-1860-ac7a-db6f92864e97",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "The Lost City of Amdapor (Hard)/Achamoth",
+			eventType = 10,
+			execute = "if LostAmdaporOwnsFacing then\n local api=TensorCore.API.TensorACR\n api.toggleLockFace(false)\n api.setHardLockFace(false)\n LostAmdaporOwnsFacing=nil\nend\ndata.lostAmdaporFace=nil\ndata.lostAmdaporBoss=nil",
+			executeType = 2,
+			name = "Release Neuro Squama LockFace on death",
+			uuid = "da0f87c1-f573-6c9b-85e5-324bf338a00a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Lost City of Amdapor (Hard)",
+			name = "Draws",
+			uuid = "e8f74e9a-396d-a96b-8860-72350aa52b9c",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "The Lost City of Amdapor (Hard)/Draws",
+			eventType = 18,
+			execute = "local e=eventArgs\nlocal id=e.aoeID\nlocal cone=id==5571 or id==5574 or id==5604\nif not cone and id~=5583 and id~=5587 and id~=5597 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=519 then return end\nif e.friendly or e.duration<=0 then return end\nlocal drawer=TensorCore.getStaticDrawer(0x603333FF,2)\nif cone then\n drawer:addTimedCone(e.duration*1000,e.x,e.y,e.z,e.aoeLength,math.rad(90),e.heading,0,false,true)\nelse\n drawer:addTimedCircle(e.duration*1000,e.x,e.y,e.z,e.aoeLength,0,false,true)\nend",
+			executeType = 2,
+			name = "Telegraph cones and ground AoEs",
+			uuid = "cf53663b-0c05-bb6c-adc7-59ed73939dd8",
+			version = 2,
+		},
 	}, 
 	inheritedProfiles = 
 	{

@@ -132,6 +132,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Dungeons: Shared AutoSim
 
+- Added boss draws, AutoSim forecasts, outward LockFace for Neuro Squama, and short-lived add DoT blacklists for The Lost City of Amdapor (Hard). (20-11-2026)
+
 - Corrected final-pack cooldown pooling after Mistwake boss two and made the hold status show the active reason. (19-11-2026)
 
 - Updated Maulskull's AutoSim kill estimate to 173 seconds. (19-11-2026)
@@ -149,20 +151,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Replaced BRD Apex and DoT GCD action holds with owned rotation toggles. Apex is disabled while gathering and restored on release or near gauge cap; the final-pack rule retains priority. The below-20% trash rule uses the DoTs toggle. Blast Arrow remains automatic. (16-11-2026)
 
 - Removed DoT blacklist entries for all four Meso Terminal Headsmen, including Pestilent. Selected-target DoTs remain enabled with Smart DoT off; AoE and helper restrictions are preserved. (16-11-2026)
-
-- BRD switches DoTs off on selected trash below 20% HP, including Iron Jaws, and restores the previous toggle setting afterward. The threshold is adjustable, bosses are excluded, and the DoTs toggle stays unchanged. Applied to all three dungeon profiles. (16-11-2026)
-
-- BRD gathering holds now use short individual holds for Battle Voice, Radiant Finale, Raging Strikes and Barrage instead of the broad CD toggle. Both party buffs follow the same final-pack and low-HP holds. Boss diagnostics record readiness, cooldowns and owned holds. (16-11-2026)
-
-- Full-pull detection now counts every engaged enemy instead of stopping after the first. Per-dungeon timings default on in all three profiles, retaining saved values and explicit opt-outs. (16-11-2026)
-
-- Published the existing Castrum Meridianum AutoSim and mechanic draws from highleveldungeons. (16-11-2026)
-
-- All three dungeon profiles can hold major offensive cooldowns while gathering wall-to-wall pulls. The default is 3 seconds of a stopped tank, stable enemy group and gathered enemies, with a 20-second fallback and per-dungeon timings enabled by default. BRD also holds Radiant Finale and saves Apex through its toggle, with a Soul Voice cap safeguard. Blast Arrow stays automatic. Existing final-pack and low-HP holds retain priority; the AutoSim UI shows the gathering status. (16-11-2026)
-
-- Ravenous Headsman no longer receives a DoT blacklist entry in dungeon lol. Headsman combat uses DoTs on and Smart DoT off, restoring previous toggles at phase end, wipe or zone change. (16-11-2026)
-
-- Published highleveldungeons with Aetherfont boss forecasts and draws, and moved Lunar Subterrane into it. All three dungeon profiles share all-job final-pack pooling, low-HP holds with a final-boss exemption, owned-setting restoration checks, BLM dying-add cast protection, and hold status inside the AutoSim settings UI. (14-11-2026)
 
 ### Shinryu Unreal: Draws
 
