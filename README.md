@@ -274,6 +274,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UCOB: LPDU
 
+- The opening Twister previews your current bait position, then marks the actual spawned Twisters. (19-11-2026)
+
 - Adds Hatch shows a staging arrow for the south neurolink before Twister. Both Adds spread countdowns can recover from a missed quote using the observed cast sequence. (19-11-2026)
 
 - Heavensfall calls the observed cone rotation and previews one cone pair ahead. (19-11-2026)
@@ -291,8 +293,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Blackfire marks dropped Hypernova puddles. Heavensfall calls Move to tower knockback when your staging draw appears. (19-11-2026)
 
 - Quickmarch arrows stay steady near their destinations, and stack and Earthshaker guidance clear on the hit. (19-11-2026)
-
-- Grand Octet highlights free towers, points eligible players to the nearest free tower, and keeps their claimed tower highlighted. (19-11-2026)
 
 ### UCOB: ACR3 Optimization
 

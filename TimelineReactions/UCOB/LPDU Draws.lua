@@ -689,6 +689,34 @@ local tbl =
 		{
 			data = 
 			{
+				name = "Draw Twister",
+				uuid = "4e57691c-ef54-0d83-a12e-603e8fefc082",
+				version = 2,
+			},
+			inheritedObjectUUID = "aed503d9-8dd9-f590-8042-6285dfbbd4bc",
+			inheritedOverwrites = 
+			{
+				timerStartOffset = 5,
+			},
+		},
+		
+		{
+			data = 
+			{
+				name = "Snapshot Twisters",
+				uuid = "b9439da6-63db-b08a-89a8-6cd9cbd97219",
+				version = 2,
+			},
+			inheritedObjectUUID = "cfe47b0c-5a09-7580-a603-c5e248ecdc5c",
+			inheritedOverwrites = 
+			{
+				timerStartOffset = 5,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "LPDU Personal Guidance",
 				uuid = "cfecc2f6-322c-c4b3-b179-14f075328017",
@@ -752,6 +780,211 @@ local tbl =
 				timerEndOffset = 187,
 				timerStartOffset = -13.10000038147,
 				uuid = "dffcc928-6672-446f-8f15-1b7c0ed97075",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Testing",
+				uuid = "98178bec-c4fc-cd32-ba80-fdd1fb96ef5b",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local duration=(eventArgs.channelTimeMax or 0)*1000\nif duration<=0 then return end\ndata.ucobOpeningTwisterDraw={previewUntil=Now()+duration+1000,spots={}}\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"e7b4191a-3715-3476-9deb-b1ef571d2a33",
+									true,
+								},
+							},
+							name = "[LPDU] Opening Twister - Start bait preview",
+							uuid = "2f8233f5-2952-4cf9-9a24-40031f8a520a",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID == 1482 and eventArgs.spellID == 9898",
+							dequeueIfLuaFalse = true,
+							name = "[LPDU] Opening Twister - Start bait preview",
+							uuid = "e7b4191a-3715-3476-9deb-b1ef571d2a33",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Testing",
+				eventType = 3,
+				mechanicTime = 13.1,
+				name = "[LPDU] Opening Twister - Start bait preview",
+				timeRange = true,
+				timelineIndex = 3,
+				timerEndOffset = 1,
+				timerStartOffset = -4,
+				uuid = "0cb8b195-838c-8a27-bcd4-16cf7bedc0b2",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.ucobOpeningTwisterDraw\nlocal e=eventArgs\nif not s or not e.entityID or type(e.x)~=\"number\" or type(e.y)~=\"number\" or type(e.z)~=\"number\" then return end\ns.previewUntil=nil\ns.spots[e.entityID]={x=e.x,y=e.y,z=e.z,expires=Now()+4500}\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"f0303c6a-9489-81b9-acf0-85c8a52a0b0d",
+									true,
+								},
+							},
+							name = "[LPDU] Opening Twister - Actual ground positions",
+							uuid = "173e22a7-47d9-72c9-93c8-472d25be2fea",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local e=eventArgs\nreturn e.entityContentID==2001168 and e.keyID==2001168 and e.type==7 and e.flags==5 and e.state==4",
+							dequeueIfLuaFalse = true,
+							name = "[LPDU] Opening Twister - Actual ground positions",
+							uuid = "f0303c6a-9489-81b9-acf0-85c8a52a0b0d",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Testing",
+				eventType = 29,
+				loop = true,
+				mechanicTime = 13.1,
+				name = "[LPDU] Opening Twister - Actual ground positions",
+				timeRange = true,
+				timelineIndex = 3,
+				timerEndOffset = 2,
+				timerStartOffset = -2,
+				uuid = "95293fb4-8b64-0ef2-9f81-b644583c5513",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.ucobOpeningTwisterDraw\nif not s then return end\nlocal now=Now()\nlocal flags=Argus2.RenderFlags.FLAG_WARP_TERRAIN\nif s.previewUntil and now<s.previewUntil then\n -- This is the current bait position, before the server confirms a spawn.\n local player=TensorCore.mGetPlayer()\n if player and player.alive and player.pos then\n  local p=player.pos\n  TensorCore.getStaticDrawer(0x507080FF,2):addCircle(p.x,p.y,p.z,1.25,false,flags)\n end\nend\nif next(s.spots) then\n local drawer=TensorCore.getStaticDrawer(0x750000FF,2)\n for id,spot in pairs(s.spots) do\n  if now<spot.expires then\n   drawer:addCircle(spot.x,spot.y,spot.z,1.25,false,flags)\n  else\n   s.spots[id]=nil\n  end\n end\nend\nself.used=true",
+							name = "[LPDU] Opening Twister - Bait and locked circles",
+							uuid = "377b04d6-8378-72a4-8297-e32114daa699",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Testing",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 13.1,
+				name = "[LPDU] Opening Twister - Bait and locked circles",
+				timeRange = true,
+				timelineIndex = 3,
+				timerEndOffset = 6,
+				timerStartOffset = -4,
+				uuid = "ba7db753-59e1-e4eb-af37-bdff39417414",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.ucobOpeningTwisterDraw\nlocal entity=TensorCore.mGetEntity(eventArgs.entityID)\nlocal pos=entity and entity.pos\nif not s or not pos then return end\nfor id,spot in pairs(s.spots) do\n if (spot.x-pos.x)^2+(spot.z-pos.z)^2<=0.25^2 then s.spots[id]=nil; break end\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"240c48ac-2c9c-a133-ace0-bbc559ea3844",
+									true,
+								},
+							},
+							name = "[LPDU] Opening Twister - Remove triggered circle",
+							uuid = "b0cf86b4-e6a0-f288-b782-494d11385e60",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID == 1482 and eventArgs.spellID == 9899",
+							dequeueIfLuaFalse = true,
+							name = "[LPDU] Opening Twister - Remove triggered circle",
+							uuid = "240c48ac-2c9c-a133-ace0-bbc559ea3844",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Testing",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 13.1,
+				name = "[LPDU] Opening Twister - Remove triggered circle",
+				timeRange = true,
+				timelineIndex = 3,
+				timerEndOffset = 6,
+				timerStartOffset = -2,
+				uuid = "2f7e0a1d-09a4-9fa1-82ec-bbe97f1bdd7f",
 				version = 2,
 			},
 		},
