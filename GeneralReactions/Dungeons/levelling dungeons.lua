@@ -3002,9 +3002,124 @@ local tbl =
 				},
 			},
 			displayPath = "Origenics/Deceiver/Draws",
+			enabled = false,
 			eventType = 18,
 			name = "Incoming attacks",
 			uuid = "89c1837d-7e2d-327a-a84b-9a1c05f9c49b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "Origenics/Deceiver/Draws",
+			eventType = 5,
+			execute = "if eventArgs.entityContentID~=12694 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1208 then return end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nlocal model=Argus.getEntityModel(eventArgs.entityID)\nif not e or not e.pos or (model~=16753 and model~=16754) or math.abs(e.pos.z+162)>1 then return end\nlocal lanes=data.deceiverAndroids\nlocal now=Now()\nif not lanes or now>=lanes.finish then lanes={finish=now+20000};data.deceiverAndroids=lanes end\nlanes[eventArgs.entityID]={x=e.pos.x,y=e.pos.y,real=model==16753}",
+			executeType = 2,
+			name = "Initialize Androids - preview live and flickering lanes",
+			uuid = "f856a0fb-2b72-fd7c-ae53-587a938aa606",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "Origenics/Deceiver/Draws",
+			eventType = 18,
+			execute = "local e=eventArgs\nlocal id=e.aoeID\nif id~=36372 and id~=36373 and id~=36365 and id~=36426 and id~=36366 and id~=36367 and id~=38320 and id~=36370 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1208 then return end\nif e.friendly or e.duration<=0 then return end\nlocal now=Now()\nlocal ms=e.duration*1000\nif id==36372 or id==36373 then\n local lanes=data.deceiverAndroids\n if not lanes or now>=lanes.finish then lanes={finish=now+ms+300};data.deceiverAndroids=lanes end\n lanes.finish=now+ms+300\n lanes[e.entityID]={x=e.x,y=e.y,real=id==36372}\nelseif id==36365 or id==36426 then\n local turrets=data.deceiverTurrets\n if not turrets or now>=turrets.expires then turrets={expires=now+45000,lanes={}};data.deceiverTurrets=turrets end\n turrets.lanes[e.entityID]={x=e.x,y=e.y,z=e.z,h=e.heading,real=id==36365}\nelseif id==36367 then\n data.deceiverSurge=now+ms\nelse\n if not LevellingDungeons or not LevellingDungeons.settings.draws then return end\n local red=TensorCore.getStaticDrawer(0x603333FF,2)\n if id==36366 then red:addTimedRect(ms,e.x,e.y,e.z,40,10,e.heading,0,false,true)\n elseif id==36370 then red:addTimedCone(ms,e.x,e.y,e.z,30,math.pi/2,e.heading,0,false,true)\n else red:addTimedCircle(ms,e.x,e.y,e.z,5,0,false,true) end\nend",
+			executeType = 2,
+			name = "Deceiver - confirm lanes, turret layout and Surge",
+			uuid = "7ce47f19-47aa-5585-bda3-6ed6e8ac7d23",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "Origenics/Deceiver/Draws",
+			eventType = 12,
+			execute = "local androids,turrets,impact=data.deceiverAndroids,data.deceiverTurrets,data.deceiverSurge\nif not androids and not (turrets and impact) then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1208 then return end\nif not p.alive or not p.incombat or not LevellingDungeons or not LevellingDungeons.settings.draws then return end\nlocal now=Now()\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_UI\nlocal green=TensorCore.getStaticDrawer(0x6033FF33,2)\nlocal red=TensorCore.getStaticDrawer(0x603333FF,2)\nif androids and now<androids.finish then\n for id,lane in pairs(androids) do\n  if id~='finish' then\n   local drawer=lane.real and red or green\n   drawer:addRect(lane.x,lane.y,-142,40,4,0,false,flags)\n  end\n end\nend\nif turrets and impact and now<impact+250 and now<turrets.expires then\n for _,lane in pairs(turrets.lanes) do\n  local x=lane.x+math.sin(lane.h)*10\n  local z=lane.z+math.cos(lane.h)*10\n  local drawer=lane.real and green or red\n  drawer:addRect(x,lane.y,z,20,10,lane.h,false,flags)\n end\nend",
+			executeType = 2,
+			name = "Deceiver - draw Android and Surge lanes",
+			uuid = "f05bdad2-486c-de58-bd40-ede6bed73467",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "Origenics/Deceiver/Draws",
+			eventType = 2,
+			execute = "local id=eventArgs.spellID\nif id==36372 or id==36373 then data.deceiverAndroids=nil\nelseif id==36367 then data.deceiverTurrets=nil;data.deceiverSurge=nil end",
+			executeType = 2,
+			name = "Deceiver - clear resolved lane draws",
+			uuid = "b2a24912-42cf-60d1-a0d6-13b45cfb79a9",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "Origenics/Deceiver/Draws",
+			execute = "local impact=data.deceiverSurge\nlocal owned=LevellingDeceiverArms\nif not impact and not owned then return end\nlocal p=TensorCore.mGetPlayer()\nlocal now=Now()\nif not p or p.localmapid~=1208 or not p.alive or not p.incombat or not impact or now>impact+450 then\n if owned then _G[owned]=false;LevellingDeceiverArms=nil end\n data.deceiverSurge=nil\n return\nend\nif data.deceiverArmsAt==impact or impact-now>2600 or impact-now<450 then return end\nlocal action=ActionList:Get(1,7548)\nif not action or action.isoncd or TensorCore.hasBuff(p.id,1209) then return end\nfor _,option in ipairs(TensorCore.API.TensorACR.getHotbarToggles() or {}) do\n if option.id==7548 and option.enabled~=false and type(option.var)=='string' then\n  if _G[option.var]~=true then _G[option.var]=true;LevellingDeceiverArms=option.var end\n  data.deceiverArmsAt=impact\n  return\n end\nend",
+			executeType = 2,
+			name = "Surge - request Arm's Length",
+			throttleTime = 100,
+			uuid = "b1b348e1-e62e-c74d-a35d-04aefb15cf6c",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "Origenics/Deceiver/Draws",
+			execute = "local player = TensorCore.mGetPlayer()\nif not player then self.used = true; return end\n\nlocal contentID = 12694\nlocal label = \"[Levelling Dungeons] Origenics boss Sentry G9\"\nlocal api = TensorCore.API.TensorACR\nlocal eligible = player.localmapid == 1208\nlocal state = LevellingDeceiverSentryDoT\n\n-- Restore the previous entry on leaving Origenics or changing jobs.\n-- Keep this state outside pull data so a wipe does not lose the original values.\nif state and (not eligible or state.job ~= player.job) then\n    local entry = state.entry\n    if entry.enabled and entry.allowIfTarget == false and entry.allowSmartDoT == false then\n        if state.created then\n            entry.enabled = false\n            if player.job == state.job and api.getBlacklistEntry(contentID) then\n                local current = api.addBlacklistEntry(contentID)\n                if current == entry and current.name == label then\n                    api.deleteBlacklistEntry(contentID)\n                end\n            end\n        else\n            entry.enabled = state.enabled\n            entry.allowIfTarget = state.allowIfTarget\n            entry.allowSmartDoT = state.allowSmartDoT\n        end\n    end\n    LevellingDeceiverSentryDoT = nil\n    state = nil\nend\n\nif eligible and not state then\n    local supported, exists = pcall(api.getBlacklistEntry, contentID)\n    if supported then\n        local ok, entry = pcall(api.addBlacklistEntry, contentID, label)\n        if ok and entry then\n            LevellingDeceiverSentryDoT = {\n                job = player.job, entry = entry, created = not exists,\n                enabled = entry.enabled, allowIfTarget = entry.allowIfTarget,\n                allowSmartDoT = entry.allowSmartDoT,\n            }\n            entry.enabled = true\n            entry.allowIfTarget = false\n            entry.allowSmartDoT = false\n        end\n    end\nend\nself.used = true",
+			executeType = 2,
+			name = "Deceiver Sentry G9 - DoT blacklist",
+			throttleTime = 500,
+			uuid = "8e5f50e3-9ba9-033e-bfc6-12dda96a6df2",
 			version = 2,
 		},
 	},

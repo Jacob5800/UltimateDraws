@@ -132,6 +132,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Dungeons: Shared AutoSim
 
+- Added Deceiver Android and turret lane guidance, Surge Arm's Length, and a DoT blacklist for the short-lived boss sentries. (20-11-2026)
+
 - Added early Writhing Riot cone previews and poison AoE draws for Herpekaris in Origenics. (20-11-2026)
 
 - Fixed cooldown pooling on the earlier Eyeclopes in Origenics. (20-11-2026)
@@ -149,8 +151,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added automatic party-safe facing for Feather Ray Nuisance and green safe spots for Bubble Bomb Burst in The Skydeep Cenote. (19-11-2026)
 
 - Moved the boss HP threshold for cooldown pooling into Levelling Dungeon Settings under Dungeon holds. (19-11-2026)
-
-- Full-pull settle time now defaults to 3 seconds in all three profiles. Previous auto-filled 2.3-second values migrate to 3 seconds; other custom timings and opt-outs are preserved. Upgrading also restores owned toggle state before replacing the helper. (16-11-2026)
 
 ### Shinryu Unreal: Draws
 
