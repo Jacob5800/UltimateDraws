@@ -548,6 +548,98 @@ local tbl =
 			},
 		},
 	},
+	[5] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "AutoSim",
+				uuid = "812e333c-5cc4-7f30-a52f-554b92ff0982",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "AutoSim",
+				name = "Setup and cleanup",
+				uuid = "1887f631-7dc1-4c71-96af-33cfd145beca",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"2c6839cf-b913-5f17-acad-1ddaa5c1ec2f",
+									true,
+								},
+								
+								{
+									"182129b3-d5ae-28c4-8fe8-c9dace11c758",
+									true,
+								},
+							},
+							gVar = "ACR_TensorReaper4_AOE",
+							name = "Turn AoE back on",
+							uuid = "48f952c7-ea39-9959-8f69-e90c2c74edbe",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							localmapid = 887,
+							name = "TEA only",
+							uuid = "2c6839cf-b913-5f17-acad-1ddaa5c1ec2f",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local seen = data.teaAoeSeenDolls\nif not seen then\n    seen = {count = 0}\n    data.teaAoeSeenDolls = seen\nend\n\nlocal active = false\nfor id, doll in pairs(TensorCore.entityList(\"contentid=9214\")) do\n    if doll.targetable and doll.hp and doll.hp.current > 0 then\n        active = true\n        if not seen[id] then\n            seen[id] = true\n            seen.count = seen.count + 1\n        end\n    end\nend\nreturn seen.count >= 4 and not active",
+							name = "All four dolls spawned and resolved",
+							uuid = "182129b3-d5ae-28c4-8fe8-c9dace11c758",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Setup and cleanup",
+				mechanicTime = 36.7,
+				name = "AutoSim | Enable AoE after all Jagd Dolls",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 5,
+				timerEndOffset = 35,
+				timerStartOffset = -6,
+				uuid = "c0c28ff2-9d95-6a6d-885e-59955ae7ca63",
+				version = 2,
+			},
+		},
+	},
 	[25] = 
 	{
 		
