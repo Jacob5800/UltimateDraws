@@ -18,6 +18,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UWU: AutoSim
 
+- Titan healer gaol targeting now has an optional cast interrupt under P3. (19-11-2026)
+
 - Ifrit nails now check awakening on the next nail in formation-relative SE > SW > NE > NW order, without lifetime-based target switching. Melee cleave stops when either close nail reaches 40%, each role finishes its own assigned nail, and ordered kills stay single-target. Nail checks now use a 50 ms interval; the forced 40% cast stop is preserved. (16-11-2026)
 
 ### UCOB: Published profile
@@ -317,6 +319,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added shared Potion Hotbar requests, the second Fulgent reminder, and P2 crystal targeting and AoE controls with toggle restoration on wipe or map change. (08-11-2026)
 
 ### UWU: LPDU
+
+- Added a spoken Dodge twice cue at 744s before the last two Weight of the Land hits. (19-11-2026)
 
 - Ifrit post-nail Eruption arrows route toward relative east away from Searing Wind. R2 gets a pickup arrow to the actual Light Puddle. (19-11-2026)
 

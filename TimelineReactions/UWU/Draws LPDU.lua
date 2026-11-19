@@ -12391,9 +12391,53 @@ local tbl =
 		{
 			data = 
 			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Alert",
+							alertDuration = 4000,
+							alertPriority = 2,
+							alertTTS = true,
+							alertText = "Dodge twice",
+							uuid = "41020b37-6fe0-182a-99a1-9e103e450efd",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "Draws - Titan LPDU",
+				mechanicTime = 744,
+				name = "[Call][Titan] Dodge twice",
+				timelineIndex = 109,
+				uuid = "e727f009-9390-ef1d-9f37-9a98bc2b186e",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "[Raid calls]",
 				uuid = "e5bcbff2-b320-97e7-a133-fadc0951b215",
+			},
+			objectType = "folder",
+		},
+	},
+	[110] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Draws - Titan LPDU",
+				uuid = "289df677-d969-235c-aca8-e8588284d57c",
 			},
 			objectType = "folder",
 		},
