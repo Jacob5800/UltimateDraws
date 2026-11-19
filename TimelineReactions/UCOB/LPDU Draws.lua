@@ -13226,7 +13226,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif not R or not R.current() or not R.isReady() or not p then self.used=true return end\nlocal slot=R.mySlot()\nif not slot then self.used=true return end\nlocal s=data.ucobHFGuide\nif not s or not s.divesLocked or not s.geometry or s.diveDone or Now()>=s.expires then self.used=true return end\nlocal rank={T1=1,H1=2,M1=3,R1=4,T2=1,H2=2,M2=3,R2=4}\nlocal left=slot==\"T1\" or slot==\"H1\" or slot==\"M1\" or slot==\"R1\"\nlocal a=s.geometry.axis+(left and -1 or 1)*math.rad(s.geometry.angles[rank[slot]])\nlocal dest={x=math.sin(a)*20,y=0,z=-math.cos(a)*20}\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
+							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif not R or not R.current() or not R.isReady() or not p then self.used=true return end\nlocal slot=R.mySlot()\nif not slot then self.used=true return end\nlocal s=data.ucobHFGuide\nif not s or not s.divesLocked or not s.geometry or s.diveDone or Now()>=s.expires then self.used=true return end\nlocal rank={T1=1,H1=2,M1=3,R1=4,T2=1,H2=2,M2=3,R2=4}\nlocal left=slot==\"T1\" or slot==\"H1\" or slot==\"M1\" or slot==\"R1\"\nlocal a=s.geometry.axis+(left and -1 or 1)*math.rad(s.geometry.angles[rank[slot]])\nlocal dest={x=math.sin(a)*20,y=0,z=-math.cos(a)*20}\n-- Draw only after both lanes lock and the straight route clears them.\nlocal lanes=s.diveLanes\nif not lanes or not lanes[9906] or not lanes[9953] then return end\nlocal function crosses(lane)\n local function project(pos)\n  local x,z=pos.x-lane.x,pos.z-lane.z\n  return x*lane.fx+z*lane.fz,x*lane.fz-z*lane.fx\n end\n local ax,ay=project(p.pos)\n local bx,by=project(dest)\n local first,last=0,1\n local function clip(a,b,lo,hi)\n  local delta=b-a\n  if math.abs(delta)<0.001 then return a>=lo and a<=hi end\n  local enter,leave=(lo-a)/delta,(hi-a)/delta\n  first=math.max(first,math.min(enter,leave))\n  last=math.min(last,math.max(enter,leave))\n  return first<=last\n end\n return clip(ax,bx,-1,65) and clip(ay,by,-lane.width,lane.width)\nend\nfor _,lane in pairs(lanes) do\n if crosses(lane) then return end\nend\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
 							name = "Heavensfall - Quickmarch Dive Safespot",
 							uuid = "daa2032a-181e-9752-a1b4-7de53e46f9be",
 							version = 2.1,
@@ -13338,6 +13338,60 @@ local tbl =
 				timelineIndex = 127,
 				timerOffset = -2,
 				uuid = "b1d6da2d-d0fb-905c-9f7e-2718abebe6df",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.ucobHFGuide\nlocal e=eventArgs\nif not s or s.diveDone then return end\nlocal caster=TensorCore.mGetEntity(e.entityID)\nlocal p=caster and caster.pos\nif not p or type(p.h)~=\"number\" then return end\ns.diveLanes=s.diveLanes or {}\ns.diveLanes[e.spellID]={x=p.x,z=p.z,fx=math.sin(p.h),fz=math.cos(p.h),width=e.spellID==9906 and 4.8 or 6.8}\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"dcaef74b-08fc-3154-a69c-d9eb7975eca5",
+									true,
+								},
+							},
+							name = "Record fixed dive heading",
+							uuid = "5501b92e-5d9e-9ddd-a302-67d3889d94e7",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return (eventArgs.entityContentID==1482 and eventArgs.spellID==9906) or (eventArgs.entityContentID==3210 and eventArgs.spellID==9953)",
+							dequeueIfLuaFalse = true,
+							name = "Bahamut or Twintania dive",
+							uuid = "dcaef74b-08fc-3154-a69c-d9eb7975eca5",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 3,
+				loop = true,
+				mechanicTime = 681.4,
+				name = "[LPDU] Heavensfall - Capture live dive lanes",
+				timeRange = true,
+				timelineIndex = 127,
+				timerEndOffset = 1,
+				timerStartOffset = -5,
+				uuid = "26cef942-e18c-1ca6-87ef-16524ddd30af",
 				version = 2,
 			},
 		},
