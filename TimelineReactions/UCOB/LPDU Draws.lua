@@ -16340,6 +16340,211 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\ucob\\universal",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Personal Guidance",
+				uuid = "5eb8a3be-a848-2dff-b74b-12ea0db8669e",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local duration=(eventArgs.channelTimeMax or 0)*1000\nif duration<=0 then return end\ndata.ucobOctetTwisterDraw={previewUntil=Now()+duration+2200,spots={}}\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"1ea18abb-b337-6dbf-b903-1b562db4bc9b",
+									true,
+								},
+							},
+							name = "[LPDU] Grand Octet Twister - Start bait preview",
+							uuid = "c1604860-60f8-9df4-b50e-2c2fda40956d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID == 1482 and eventArgs.spellID == 9906",
+							dequeueIfLuaFalse = true,
+							name = "[LPDU] Grand Octet Twister - Start bait preview",
+							uuid = "1ea18abb-b337-6dbf-b903-1b562db4bc9b",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 3,
+				mechanicTime = 827.6,
+				name = "[LPDU] Grand Octet Twister - Start bait preview",
+				timeRange = true,
+				timelineIndex = 165,
+				timerEndOffset = 1,
+				timerStartOffset = -6,
+				uuid = "22ac94ef-204c-9896-a451-84f6f89c20d8",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.ucobOctetTwisterDraw\nlocal e=eventArgs\nif not s or not e.entityID or type(e.x)~=\"number\" or type(e.y)~=\"number\" or type(e.z)~=\"number\" then return end\ns.previewUntil=nil\ns.spots[e.entityID]={x=e.x,y=e.y,z=e.z,expires=Now()+4500}\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"91e6f2eb-22ee-0241-84f1-79bcb218f8c3",
+									true,
+								},
+							},
+							name = "[LPDU] Grand Octet Twister - Actual ground positions",
+							uuid = "b0b0cf7b-360a-d6d6-a497-d8ce8d322b6d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local e=eventArgs\nreturn e.entityContentID==2001168 and e.keyID==2001168 and e.type==7 and e.flags==5 and e.state==4",
+							dequeueIfLuaFalse = true,
+							name = "[LPDU] Grand Octet Twister - Actual ground positions",
+							uuid = "91e6f2eb-22ee-0241-84f1-79bcb218f8c3",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 29,
+				loop = true,
+				mechanicTime = 827.6,
+				name = "[LPDU] Grand Octet Twister - Actual ground positions",
+				timeRange = true,
+				timelineIndex = 165,
+				timerEndOffset = 3,
+				timerStartOffset = -2,
+				uuid = "6ecc006c-4a7d-7044-b519-04d60d818bdd",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.ucobOctetTwisterDraw\nif not s then return end\nlocal now=Now()\nlocal flags=Argus2.RenderFlags.FLAG_WARP_TERRAIN\nif s.previewUntil and now<s.previewUntil then\n -- This is the current bait position, before the server confirms a spawn.\n local player=TensorCore.mGetPlayer()\n if player and player.alive and player.pos then\n  local p=player.pos\n  TensorCore.getStaticDrawer(0x507080FF,2):addCircle(p.x,p.y,p.z,1.25,false,flags)\n end\nend\nif next(s.spots) then\n local drawer=TensorCore.getStaticDrawer(0x750000FF,2)\n for id,spot in pairs(s.spots) do\n  if now<spot.expires then\n   drawer:addCircle(spot.x,spot.y,spot.z,1.25,false,flags)\n  else\n   s.spots[id]=nil\n  end\n end\nend\nself.used=true",
+							name = "[LPDU] Grand Octet Twister - Bait and locked circles",
+							uuid = "2edd13f6-8570-1304-bd48-1082fe464508",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 827.6,
+				name = "[LPDU] Grand Octet Twister - Bait and locked circles",
+				timeRange = true,
+				timelineIndex = 165,
+				timerEndOffset = 7,
+				timerStartOffset = -6,
+				uuid = "d5b64991-5648-ad84-adcb-a590042cc2f4",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.ucobOctetTwisterDraw\nlocal entity=TensorCore.mGetEntity(eventArgs.entityID)\nlocal pos=entity and entity.pos\nif not s or not pos then return end\nfor id,spot in pairs(s.spots) do\n if (spot.x-pos.x)^2+(spot.z-pos.z)^2<=0.25^2 then s.spots[id]=nil; break end\nend\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"c62a447d-c349-e03b-84f5-e541267830ec",
+									true,
+								},
+							},
+							name = "[LPDU] Grand Octet Twister - Remove triggered circle",
+							uuid = "3587d0a0-7cb8-cebb-97c4-65e75e257433",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID == 1482 and eventArgs.spellID == 9899",
+							dequeueIfLuaFalse = true,
+							name = "[LPDU] Grand Octet Twister - Remove triggered circle",
+							uuid = "c62a447d-c349-e03b-84f5-e541267830ec",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 827.6,
+				name = "[LPDU] Grand Octet Twister - Remove triggered circle",
+				timeRange = true,
+				timelineIndex = 165,
+				timerEndOffset = 7,
+				timerStartOffset = -1,
+				uuid = "1c7a2a02-cbbc-bde7-994f-579e35ffafab",
+				version = 2,
+			},
+		},
 	},
 	[166] = 
 	{

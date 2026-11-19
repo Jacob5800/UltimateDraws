@@ -274,6 +274,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UCOB: LPDU
 
+- Grand Octet now previews your Twister bait near the towers and marks actual Twister spawns. (19-11-2026)
+
 - Tenstrike shows all three neurolinks during Hatch assignment, bases the move-out arrow on the link actually soaked, and shortens the spread callout to Spread away from 4. (19-11-2026)
 
 - Nael shows player-attached Out and In countdowns for the quotes around 266 and 298 once the preceding step resolves. (19-11-2026)
@@ -291,8 +293,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Both Adds quotes show a player-attached countdown when spread is next. (19-11-2026)
 
 - Heavensfall hides the personal arrow when its path crosses a locked dive lane. (19-11-2026)
-
-- Grand Octet starts the rim route as soon as Nael locks Lunar Dive. Later bait locks still guide you back to middle, and Twintania bait guidance retains priority. (19-11-2026)
 
 ### UCOB: ACR3 Optimization
 
