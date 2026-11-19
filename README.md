@@ -274,6 +274,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UCOB: LPDU
 
+- Removed the duplicate first Liquid Hell edge-bait callout. The bait marker and its callout remain. (19-11-2026)
+
 - Moved all seven potion timings to UCOB ACR3 Optimization. (08-11-2026)
 
 - Made Ucobreactions/LPDU Draws eligible for Optifine users by saving assignments, targeting and potion preferences with FileLoad/FileSave. No Minion core Settings dependency remains. (05-11-2026)
