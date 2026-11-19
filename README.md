@@ -75,6 +75,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### TEA: AutoSim
 
+- Reaper AutoSim gives the assigned Jagd Doll a 0.60 planning multiplier while targeting it. (19-11-2026)
+
 - TEA AutoSim turns off the ACR AoE quick toggle at pull start. (19-11-2026)
 
 - Ranged players target Liquid Hand when available and return there after dolls, with HP balancing and boss cast protection. Doll cutoff still cancels active doll casts. (17-11-2026)
