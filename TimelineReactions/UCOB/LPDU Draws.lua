@@ -6769,7 +6769,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.ucobNaelPersonalCallouts\nif s and Now()<s.expires and s.seq[s.step]==eventArgs.spellID then s.step=s.step+1 end\nself.used=true",
+							actionLua = "local quote=data.ucobNaelPersonalCallouts\nif not quote or Now()>=quote.expires or quote.seq[quote.step]~=eventArgs.spellID then\n self.used=true\n return\nend\nif quote.positionCountdown then\n AnyoneCore.removeTimedWorldText(quote.positionCountdown)\n quote.positionCountdown=nil\nend\nquote.step=quote.step+1\nlocal nextSpell=quote.seq[quote.step]\nlocal time=TensorReactions_CurrentTimer\nlocal label\nif time>=261.5 and time<=265.5 and nextSpell==9915 then\n label=\"Out \"\nelseif time>=294 and time<=297.5 and nextSpell==9916 then\n label=\"In \"\nend\nif label then\n local player=TensorCore.mGetPlayer()\n if player and player.alive then\n  quote.positionCountdown=AnyoneCore.addWorldTextCountdownOnEnt(3050,player.id,0xFFFFFFFF,true,1.35,2.1,0,label)\n end\nend\nself.used=true",
 							conditions = 
 							{
 								

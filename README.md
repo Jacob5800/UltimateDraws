@@ -274,6 +274,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UCOB: LPDU
 
+- Nael shows player-attached Out and In countdowns for the quotes around 266 and 298 once the preceding step resolves. (19-11-2026)
+
 - The opening Twister previews your current bait position, then marks the actual spawned Twisters. (19-11-2026)
 
 - Adds Hatch shows a staging arrow for the south neurolink before Twister. Both Adds spread countdowns can recover from a missed quote using the observed cast sequence. (19-11-2026)
@@ -291,8 +293,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Grand Octet starts the rim route as soon as Nael locks Lunar Dive. Later bait locks still guide you back to middle, and Twintania bait guidance retains priority. (19-11-2026)
 
 - Blackfire marks dropped Hypernova puddles. Heavensfall calls Move to tower knockback when your staging draw appears. (19-11-2026)
-
-- Quickmarch arrows stay steady near their destinations, and stack and Earthshaker guidance clear on the hit. (19-11-2026)
 
 ### UCOB: ACR3 Optimization
 
