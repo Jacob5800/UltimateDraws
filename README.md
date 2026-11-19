@@ -118,6 +118,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Dungeons: Shared AutoSim
 
+- Moved the boss HP threshold for cooldown pooling into Levelling Dungeon Settings under Dungeon holds. (19-11-2026)
+
 - Full-pull settle time now defaults to 3 seconds in all three profiles. Previous auto-filled 2.3-second values migrate to 3 seconds; other custom timings and opt-outs are preserved. Upgrading also restores owned toggle state before replacing the helper. (16-11-2026)
 
 - Replaced BRD Apex and DoT GCD action holds with owned rotation toggles. Apex is disabled while gathering and restored on release or near gauge cap; the final-pack rule retains priority. The below-20% trash rule uses the DoTs toggle. Blast Arrow remains automatic. (16-11-2026)
