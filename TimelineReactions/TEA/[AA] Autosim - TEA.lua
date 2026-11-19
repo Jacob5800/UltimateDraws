@@ -313,6 +313,59 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"66b9c867-9b49-78cc-941f-a01dd4caf506",
+									true,
+								},
+							},
+							gVar = "ACR_TensorReaper4_AOE",
+							gVarValue = 2,
+							name = "Turn off AoE",
+							uuid = "31a7e7cf-f8eb-b482-8e5d-1ede786728e6",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							localmapid = 887,
+							name = "TEA only",
+							uuid = "66b9c867-9b49-78cc-941f-a01dd4caf506",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Setup and cleanup",
+				mechanicTime = 11.4,
+				name = "AutoSim | Disable AoE at pull start",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = -5,
+				timerStartOffset = -120,
+				uuid = "6cb73bcb-dcb8-7069-a602-084834afb6e0",
+				version = 2,
+			},
+		},
 	},
 	[3] = 
 	{
