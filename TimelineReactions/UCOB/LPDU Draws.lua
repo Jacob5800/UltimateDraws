@@ -10157,7 +10157,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nif not R or not R.current() or not R.isReady() then self.used=true return end\nlocal slot=R.mySlot()\nif not slot then self.used=true return end\nlocal s=data.ucobQuickmarch\nif not s or Now()-s.started>35000 then self.used=true return end\nif not s.north then\n local boss=TensorCore.mGetEntity(s.boss)\n if boss then\n  local length=math.sqrt(boss.pos.x*boss.pos.x+boss.pos.z*boss.pos.z)\n  if length>20 then s.north={x=boss.pos.x/length,z=boss.pos.z/length} end\n end\nend\nif not s.north then self.used=true return end\nlocal n=s.north\nlocal rx,rz=-n.z,n.x\nlocal order={T1=0,H1=1,M1=2,R1=3,T2=0,H2=1,M2=2,R2=3}\nlocal left=slot==\"T1\" or slot==\"H1\" or slot==\"M1\" or slot==\"R1\"\nlocal p=TensorCore.mGetPlayer()\nif string.sub(slot,1,1)==\"T\" or string.sub(slot,1,1)==\"H\" or s.shakers[p.id] then self.used=true return end\nlocal dest={x=-n.x*8,y=0,z=-n.z*8}\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
+							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nif not R or not R.current() or not R.isReady() then self.used=true return end\nlocal slot=R.mySlot()\nif not slot then self.used=true return end\nlocal s=data.ucobQuickmarch\nif not s or s.stackDone or Now()-s.started>35000 then self.used=true return end\nif not s.north then\n local boss=TensorCore.mGetEntity(s.boss)\n if boss then\n  local length=math.sqrt(boss.pos.x*boss.pos.x+boss.pos.z*boss.pos.z)\n  if length>20 then s.north={x=boss.pos.x/length,z=boss.pos.z/length} end\n end\nend\nif not s.north then self.used=true return end\nlocal n=s.north\nlocal rx,rz=-n.z,n.x\nlocal order={T1=0,H1=1,M1=2,R1=3,T2=0,H2=1,M2=2,R2=3}\nlocal left=slot==\"T1\" or slot==\"H1\" or slot==\"M1\" or slot==\"R1\"\nlocal p=TensorCore.mGetPlayer()\nif not p or string.sub(slot,1,1)==\"T\" or string.sub(slot,1,1)==\"H\" or s.shakers[p.id] then self.used=true return end\nlocal dest={x=-n.x*8,y=0,z=-n.z*8}\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n-- Keep the spot visible; use a wider exit threshold before restoring the arrow.\nif distance <= 0.8 then s.stackArrived = true\nelseif distance >= 1.5 then s.stackArrived = nil end\nif not s.stackArrived then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
 							name = "Quickmarch DPS south stack arrow",
 							uuid = "af32b593-a170-fb12-bc47-2cf15e32b7da",
 							version = 2.1,
@@ -10174,7 +10174,7 @@ local tbl =
 				name = "Quickmarch DPS south stack arrow",
 				timeRange = true,
 				timelineIndex = 96,
-				timerEndOffset = 0.1,
+				timerEndOffset = 1.5,
 				timerStartOffset = -3,
 				uuid = "d670a8df-b85b-174e-a782-088390421662",
 				version = 2,
@@ -10403,7 +10403,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nif not R or not R.current() or not R.isReady() then self.used=true return end\nlocal slot=R.mySlot()\nif not slot then self.used=true return end\nlocal s=data.ucobQuickmarch\nif not s or Now()-s.started>35000 then self.used=true return end\nif not s.north then\n local boss=TensorCore.mGetEntity(s.boss)\n if boss then\n  local length=math.sqrt(boss.pos.x*boss.pos.x+boss.pos.z*boss.pos.z)\n  if length>20 then s.north={x=boss.pos.x/length,z=boss.pos.z/length} end\n end\nend\nif not s.north then self.used=true return end\nlocal n=s.north\nlocal rx,rz=-n.z,n.x\nlocal order={T1=0,H1=1,M1=2,R1=3,T2=0,H2=1,M2=2,R2=3}\nlocal left=slot==\"T1\" or slot==\"H1\" or slot==\"M1\" or slot==\"R1\"\nlocal p=TensorCore.mGetPlayer()\nif not s.shakers[p.id] then self.used=true return end\nlocal dest\nif slot==\"H1\" then dest={x=-rx*8,y=0,z=-rz*8}\nelseif slot==\"H2\" then dest={x=rx*8,y=0,z=rz*8}\nelse dest={x=n.x*8,y=0,z=n.z*8} end\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
+							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nif not R or not R.current() or not R.isReady() then self.used=true return end\nlocal slot=R.mySlot()\nif not slot then self.used=true return end\nlocal s=data.ucobQuickmarch\nif not s or s.shakersDone or Now()-s.started>35000 then self.used=true return end\nif not s.north then\n local boss=TensorCore.mGetEntity(s.boss)\n if boss then\n  local length=math.sqrt(boss.pos.x*boss.pos.x+boss.pos.z*boss.pos.z)\n  if length>20 then s.north={x=boss.pos.x/length,z=boss.pos.z/length} end\n end\nend\nif not s.north then self.used=true return end\nlocal n=s.north\nlocal rx,rz=-n.z,n.x\nlocal order={T1=0,H1=1,M1=2,R1=3,T2=0,H2=1,M2=2,R2=3}\nlocal left=slot==\"T1\" or slot==\"H1\" or slot==\"M1\" or slot==\"R1\"\nlocal p=TensorCore.mGetPlayer()\nif not p or not s.shakers[p.id] then self.used=true return end\nlocal dest\nif slot==\"H1\" then dest={x=-rx*8,y=0,z=-rz*8}\nelseif slot==\"H2\" then dest={x=rx*8,y=0,z=rz*8}\nelse dest={x=n.x*8,y=0,z=n.z*8} end\nlocal p=TensorCore.mGetPlayer()\nif not p then self.used=true return end\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n-- Keep the spot visible; use a wider exit threshold before restoring the arrow.\nif distance <= 0.8 then s.shakerArrived = true\nelseif distance >= 1.5 then s.shakerArrived = nil end\nif not s.shakerArrived then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
 							name = "Quickmarch personal Earthshaker arrow",
 							uuid = "eb391bc5-5ddd-e165-889a-8dd4f3dc1ab4",
 							version = 2.1,
@@ -10420,9 +10420,62 @@ local tbl =
 				name = "Quickmarch personal Earthshaker arrow",
 				timeRange = true,
 				timelineIndex = 97,
-				timerEndOffset = 0.1,
-				timerStartOffset = -3,
+				timerEndOffset = 1.5,
+				timerStartOffset = -5,
 				uuid = "48e8dd46-7cb2-839a-8767-4a07f490fe86",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local s=data.ucobQuickmarch\nif s then s.shakersDone=true end\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"2a6e312a-ebdb-2e01-9ae8-306917225a47",
+									true,
+								},
+							},
+							name = "Clear Earthshaker arrow",
+							uuid = "8efed585-dcef-ecb8-90a2-3f8d6d934648",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID == 3210 and eventArgs.spellID == 9945",
+							dequeueIfLuaFalse = true,
+							name = "Quickmarch Earthshaker execution",
+							uuid = "2a6e312a-ebdb-2e01-9ae8-306917225a47",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 2,
+				mechanicTime = 550,
+				name = "[LPDU] Quickmarch Earthshaker - Hit cleanup",
+				timeRange = true,
+				timelineIndex = 97,
+				timerEndOffset = 1.5,
+				timerStartOffset = -2,
+				uuid = "e049ddb6-a208-d2ec-b307-8d31e2b05cdc",
 				version = 2,
 			},
 		},
@@ -10461,7 +10514,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif not R or not R.current() or not R.isReady() or not p then self.used=true return end\nlocal slot=R.mySlot()\nif not slot then self.used=true return end\nlocal s=data.ucobQuickmarch\nif (slot~=\"T1\" and slot~=\"T2\") or not s or not s.stackDone or not s.north or s.wingsDone then self.used=true return end\nlocal n=s.north\nlocal side=slot==\"T1\" and -1 or 1\nlocal dest={x=-n.z*side*6,y=0,z=n.x*side*6}\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
+							actionLua = "local R=AnyoneCore and AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif not R or not R.current() or not R.isReady() or not p then self.used=true return end\nlocal slot=R.mySlot()\nif not slot then self.used=true return end\nlocal s=data.ucobQuickmarch\nif (slot~=\"T1\" and slot~=\"T2\") or not s or not s.stackDone or not s.north or s.wingsDone then self.used=true return end\nlocal n=s.north\nlocal side=slot==\"T1\" and -1 or 1\nlocal dest={x=-n.z*side*6,y=0,z=n.x*side*6}\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n-- Keep the spot visible; use a wider exit threshold before restoring the arrow.\nif distance <= 0.8 then s.tetherArrived = true\nelseif distance >= 1.5 then s.tetherArrived = nil end\nif not s.tetherArrived then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
 							name = "Quickmarch - Tank Tether Position",
 							uuid = "65a45039-02a2-b1cb-a9bb-377686b685c3",
 							version = 2.1,
