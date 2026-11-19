@@ -206,7 +206,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UWU: Shared AutoSim
 
-- Turning off automatic nail targeting also disables automatic Ifrit selection in P2. (19-11-2026)
+- Turning off automatic nail targeting also disables automatic Ifrit selection in P2. Both nail controllers now start targeting as soon as a nail awakens, then switch only to other awakened nails. (19-11-2026)
 
 - Bard turns off CD, Songs and Potion at timeline 110 and turns them back on when Ifrit becomes targetable. (18-11-2026)
 
