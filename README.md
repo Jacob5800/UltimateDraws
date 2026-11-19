@@ -214,6 +214,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### DSR: LPDU (Beta)
 
+- Removed the generic Raidwide – Mitigate callouts. (19-11-2026)
+
 - Strength tower reassignment no longer repeats the initial preposition call after a personal tower was established. (17-11-2026)
 
 - “Behind boss - tank cleaves” now calls once per cleave sequence. (17-11-2026)
@@ -234,7 +236,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - P3 line dodges after landing now prefer a clear route north whenever the player is free to regroup. (16-11-2026)
 - Added a personal blue jump callout on marker appearance and an optional nearest available jump spot arrow, off by default. (16-11-2026)
 - Anchored Easthogg tower forecasts to arena east and corrected stale local jump assignments using the active debuff. (16-11-2026)
-
 
 ### TOP: AutoSim
 
