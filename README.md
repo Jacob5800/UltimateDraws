@@ -118,6 +118,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Dungeons: Shared AutoSim
 
+- Corrected final-pack cooldown pooling after Mistwake boss two and made the hold status show the active reason. (19-11-2026)
+
 - Updated Maulskull's AutoSim kill estimate to 173 seconds. (19-11-2026)
 
 - Added Arm's Length requests and temporary KB Cancel fallback for Maulskull's knockbacks in The Skydeep Cenote. (19-11-2026)
