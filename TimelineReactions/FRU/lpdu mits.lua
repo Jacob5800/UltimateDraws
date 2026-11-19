@@ -28,6 +28,11 @@ local tbl =
 							{
 								
 								{
+									"98197a78-24a2-77d0-b39f-7eaad126d8c2",
+									true,
+								},
+								
+								{
 									"50ec78ac-fcd6-376d-8665-9a799f9eb2d0",
 									true,
 								},
@@ -53,7 +58,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
 							dequeueIfLuaFalse = true,
 							name = "M1 roster",
 							uuid = "50ec78ac-fcd6-376d-8665-9a799f9eb2d0",
@@ -71,6 +76,26 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							name = "Cyclonic Break CD",
 							uuid = "e216d4c4-e9d7-fed6-b165-e6612c4de7d5",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								20,
+								22,
+								30,
+								34,
+								39,
+								41,
+							},
+							name = "Melee DPS only",
+							uuid = "98197a78-24a2-77d0-b39f-7eaad126d8c2",
 							version = 3,
 						},
 					},
@@ -102,6 +127,11 @@ local tbl =
 							{
 								
 								{
+									"d386df16-9790-cc44-ab26-214dfa5779ca",
+									true,
+								},
+								
+								{
 									"eaeb920f-e316-0edf-9437-1a645af5a159",
 									true,
 								},
@@ -127,7 +157,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
 							name = "R2 roster",
 							uuid = "eaeb920f-e316-0edf-9437-1a645af5a159",
@@ -148,8 +178,27 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								25,
+								27,
+								35,
+								42,
+							},
+							name = "Caster DPS only",
+							uuid = "d386df16-9790-cc44-ab26-214dfa5779ca",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
+				enabled = false,
 				mechanicTime = 13.7,
 				name = "[LPDU] R2 Addle 2 Cyclonic Break",
 				timeRange = true,
@@ -260,6 +309,11 @@ local tbl =
 									"8bc77302-841e-d483-bfbd-a1d1ea924a2a",
 									true,
 								},
+								
+								{
+									"d05d8f76-b233-25a8-a9d1-b9cde9ca67cb",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
@@ -290,6 +344,11 @@ local tbl =
 								
 								{
 									"611fef16-b614-4e2a-b645-c3a0a3ddf00b",
+									true,
+								},
+								
+								{
+									"d05d8f76-b233-25a8-a9d1-b9cde9ca67cb",
 									true,
 								},
 							},
@@ -324,6 +383,11 @@ local tbl =
 									"445e3d35-5ef5-1a02-ad3c-44df85380116",
 									true,
 								},
+								
+								{
+									"d05d8f76-b233-25a8-a9d1-b9cde9ca67cb",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
@@ -341,7 +405,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
 							name = "R2 roster",
 							uuid = "e5bd20a7-d56b-637a-8b08-b835251d632a",
@@ -429,6 +493,22 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 30,
+							minTargetPercent = true,
+							name = "Party within 30 yalms",
+							partyTargetNumber = 100,
+							partyTargetSubType = "Number",
+							uuid = "d05d8f76-b233-25a8-a9d1-b9cde9ca67cb",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
 				enabled = false,
@@ -439,68 +519,6 @@ local tbl =
 				timerEndOffset = -1.5,
 				timerStartOffset = -11,
 				uuid = "689534c5-f2b4-036c-a186-e59c99da32bf",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "AnyoneCore Defaults",
-				uuid = "50b48973-e5e7-32e0-bbd7-89a18e3b2050",
-			},
-			objectType = "folder",
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "local reactions = AnyoneCore.Settings.Reactions\nif not reactions.fru then reactions.fru = {} end\nreactions.fru.mitigation = false\nreactions.fruFMBGTankMits = false\nself.used = true",
-							conditions = 
-							{
-								
-								{
-									"1ffcd2d6-ce7e-baea-83cd-8fb001acb3e9",
-									false,
-								},
-							},
-							endIfUsed = true,
-							name = "Disable FRU DPS/tank automatic mitigation",
-							uuid = "f5c35998-2958-1608-99e9-14b8a8ce3718",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 9,
-							dequeueIfLuaFalse = true,
-							name = "Self is healer",
-							partyTargetType = "Healer",
-							uuid = "1ffcd2d6-ce7e-baea-83cd-8fb001acb3e9",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "AnyoneCore Defaults",
-				mechanicTime = 13.7,
-				name = "Disable AnyoneCore DPS and tank mitigation at start",
-				timelineIndex = 1,
-				timerOffset = -13.60000038147,
-				uuid = "7a54a151-536f-663c-bb67-07f33b18143d",
 				version = 2,
 			},
 		},
@@ -3397,6 +3415,11 @@ local tbl =
 									"673e930f-4ea3-312e-b4bb-ee12a7c59a44",
 									true,
 								},
+								
+								{
+									"dd33e8a2-0752-9d9f-b308-77591b6f8d8d",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
@@ -3427,6 +3450,11 @@ local tbl =
 								
 								{
 									"4e45de68-ee44-5da5-b447-efacf8d64ffa",
+									true,
+								},
+								
+								{
+									"dd33e8a2-0752-9d9f-b308-77591b6f8d8d",
 									true,
 								},
 							},
@@ -3461,6 +3489,11 @@ local tbl =
 									"6cbc0388-1d6e-4ec3-ae50-9c9f00f7a7b3",
 									true,
 								},
+								
+								{
+									"dd33e8a2-0752-9d9f-b308-77591b6f8d8d",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
@@ -3478,7 +3511,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
 							dequeueIfLuaFalse = true,
 							name = "R1 roster",
 							uuid = "55f84571-ace8-b9da-bb02-fc0cb7904bef",
@@ -3566,8 +3599,25 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 30,
+							minTargetPercent = true,
+							name = "Party within 30 yalms",
+							partyTargetNumber = 100,
+							partyTargetSubType = "Number",
+							uuid = "dd33e8a2-0752-9d9f-b308-77591b6f8d8d",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
+				enabled = false,
 				mechanicTime = 85.9,
 				name = "[LPDU] R1 Phys Ranged - Burnished Glory 1",
 				timeRange = true,
@@ -3668,6 +3718,11 @@ local tbl =
 							{
 								
 								{
+									"20cdf4e2-de84-e1de-a75a-cd15632ce63e",
+									true,
+								},
+								
+								{
 									"e68c8998-97c2-e720-9a1d-54126c41c15b",
 									true,
 								},
@@ -3678,7 +3733,7 @@ local tbl =
 								},
 							},
 							gVar = "ACR_RikuPCT3_Hotbar_Addle",
-							name = "[LPDU] R1 Addle Burnished Glory 1",
+							name = "[LPDU] R2 Addle Burnished Glory 1",
 							targetType = "Enemy",
 							uuid = "3c30bef5-7e23-6de3-9973-1e61e061de0a",
 							variableTogglesType = 2,
@@ -3693,9 +3748,9 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
-							name = "R1 roster",
+							name = "R2 roster",
 							uuid = "e68c8998-97c2-e720-9a1d-54126c41c15b",
 							version = 3,
 						},
@@ -3714,10 +3769,28 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								25,
+								27,
+								35,
+								42,
+							},
+							name = "Caster DPS only",
+							uuid = "20cdf4e2-de84-e1de-a75a-cd15632ce63e",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 85.9,
-				name = "[LPDU] R1 Addle Burnished Glory 1",
+				name = "[LPDU] R2 Addle Burnished Glory 1",
 				timeRange = true,
 				timelineIndex = 22,
 				timerEndOffset = -1.5,
@@ -3740,6 +3813,11 @@ local tbl =
 							actionID = 7549,
 							conditions = 
 							{
+								
+								{
+									"4db900f1-cd63-9022-96ee-d535c8789660",
+									true,
+								},
 								
 								{
 									"5395384b-522c-8468-afe0-cf17a07bbc8c",
@@ -3767,7 +3845,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
 							dequeueIfLuaFalse = true,
 							name = "M2 roster",
 							uuid = "5395384b-522c-8468-afe0-cf17a07bbc8c",
@@ -3785,6 +3863,26 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							name = "Burnished Glory 1 CD",
 							uuid = "84dfa777-dfe1-8166-95c7-1ed63c53dc4a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								20,
+								22,
+								30,
+								34,
+								39,
+								41,
+							},
+							name = "Melee DPS only",
+							uuid = "4db900f1-cd63-9022-96ee-d535c8789660",
 							version = 3,
 						},
 					},
@@ -4527,6 +4625,257 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Mitigation",
+				uuid = "021659ad-0329-53b6-bfb6-c0378b30cf05",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							actionID = 7405,
+							conditions = 
+							{
+								
+								{
+									"a3267714-2d8a-18c2-81ef-e9c024ceb2d7",
+									true,
+								},
+								
+								{
+									"a7bc9de8-26e3-74b0-a3e9-7c9ad36716af",
+									true,
+								},
+								
+								{
+									"06277663-9f3d-9f47-bb2f-b44455c26093",
+									true,
+								},
+								
+								{
+									"52529408-3b35-142b-9d8c-4fc75dad7ca8",
+									true,
+								},
+							},
+							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
+							name = "[LPDU] R1 Troubadour - Fall of Faith",
+							uuid = "28a16f0b-dcf3-a870-9d04-0cdef97695e3",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							actionID = 16889,
+							conditions = 
+							{
+								
+								{
+									"a3267714-2d8a-18c2-81ef-e9c024ceb2d7",
+									true,
+								},
+								
+								{
+									"bcf0808f-5482-a048-a11c-8f2636c243ef",
+									true,
+								},
+								
+								{
+									"86d80680-549c-9c22-a979-2dd9caa54737",
+									true,
+								},
+								
+								{
+									"52529408-3b35-142b-9d8c-4fc75dad7ca8",
+									true,
+								},
+							},
+							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
+							name = "[LPDU] R1 Tactician - Fall of Faith",
+							uuid = "122537c7-032f-267b-9ce5-d24ebac8a456",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							actionID = 16012,
+							conditions = 
+							{
+								
+								{
+									"a3267714-2d8a-18c2-81ef-e9c024ceb2d7",
+									true,
+								},
+								
+								{
+									"2182ec0c-7a11-9acf-9a0d-7c9fe5b3d105",
+									true,
+								},
+								
+								{
+									"484ac990-6798-7804-b7c4-d9735ec2f494",
+									true,
+								},
+								
+								{
+									"52529408-3b35-142b-9d8c-4fc75dad7ca8",
+									true,
+								},
+							},
+							endIfUsed = true,
+							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
+							name = "[LPDU] R1 Shield Samba - Fall of Faith",
+							uuid = "5924e541-d8b4-ec95-8e59-0eaeeef3c745",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
+							dequeueIfLuaFalse = true,
+							name = "R1 roster",
+							uuid = "a3267714-2d8a-18c2-81ef-e9c024ceb2d7",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "Troubadour job",
+							uuid = "a7bc9de8-26e3-74b0-a3e9-7c9ad36716af",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 7405,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							dequeueIfLuaFalse = true,
+							name = "Troubadour CD",
+							uuid = "06277663-9f3d-9f47-bb2f-b44455c26093",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MACHINIST",
+							name = "Tactician job",
+							uuid = "bcf0808f-5482-a048-a11c-8f2636c243ef",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 16889,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							dequeueIfLuaFalse = true,
+							name = "Tactician CD",
+							uuid = "86d80680-549c-9c22-a979-2dd9caa54737",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DANCER",
+							name = "Shield Samba job",
+							uuid = "2182ec0c-7a11-9acf-9a0d-7c9fe5b3d105",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 16012,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							dequeueIfLuaFalse = true,
+							name = "Shield Samba CD",
+							uuid = "484ac990-6798-7804-b7c4-d9735ec2f494",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 30,
+							minTargetPercent = true,
+							name = "Party within 30 yalms",
+							partyTargetNumber = 100,
+							partyTargetSubType = "Number",
+							uuid = "52529408-3b35-142b-9d8c-4fc75dad7ca8",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Mitigation",
+				mechanicTime = 105.8,
+				name = "[LPDU] R1 Phys Ranged - After first Fall of Faith hit",
+				timeRange = true,
+				timelineIndex = 25,
+				timerEndOffset = 2.8,
+				timerStartOffset = 0.4,
+				uuid = "9e087778-2368-05ca-bb27-825f765fe85e",
+				version = 2,
+			},
+		},
 	},
 	[28] = 
 	{
@@ -4715,6 +5064,11 @@ local tbl =
 							{
 								
 								{
+									"ce026f12-bdf3-adff-8468-c3d08a2f45ef",
+									true,
+								},
+								
+								{
 									"2ecbf629-45ca-c9cd-b8e4-9ee4ab98ff3c",
 									true,
 								},
@@ -4740,7 +5094,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
 							dequeueIfLuaFalse = true,
 							name = "M1 roster",
 							uuid = "2ecbf629-45ca-c9cd-b8e4-9ee4ab98ff3c",
@@ -4758,6 +5112,26 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							name = "Burnished Glory 2 CD",
 							uuid = "9b2e400e-2470-933d-90d5-25f4de1418fa",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								20,
+								22,
+								30,
+								34,
+								39,
+								41,
+							},
+							name = "Melee DPS only",
+							uuid = "ce026f12-bdf3-adff-8468-c3d08a2f45ef",
 							version = 3,
 						},
 					},
@@ -4789,6 +5163,11 @@ local tbl =
 							{
 								
 								{
+									"2df48653-f82f-8dc6-891c-1bca14645065",
+									true,
+								},
+								
+								{
 									"24153457-b622-5805-8041-d6e8fe6a1008",
 									true,
 								},
@@ -4814,7 +5193,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
 							name = "R2 roster",
 							uuid = "24153457-b622-5805-8041-d6e8fe6a1008",
@@ -4835,8 +5214,27 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								25,
+								27,
+								35,
+								42,
+							},
+							name = "Caster DPS only",
+							uuid = "2df48653-f82f-8dc6-891c-1bca14645065",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
+				enabled = false,
 				mechanicTime = 121.1,
 				name = "[LPDU] R2 Addle 2 Burnished Glory 2",
 				timeRange = true,
@@ -4844,216 +5242,6 @@ local tbl =
 				timerEndOffset = -1.5,
 				timerStartOffset = -11,
 				uuid = "763b8fbb-c99f-7c60-af42-01a20ef8d2a5",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "ACR",
-							actionID = 7405,
-							conditions = 
-							{
-								
-								{
-									"a3267714-2d8a-18c2-81ef-e9c024ceb2d7",
-									true,
-								},
-								
-								{
-									"a7bc9de8-26e3-74b0-a3e9-7c9ad36716af",
-									true,
-								},
-								
-								{
-									"06277663-9f3d-9f47-bb2f-b44455c26093",
-									true,
-								},
-							},
-							endIfUsed = true,
-							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
-							name = "[LPDU] R1 Troubadour - Burnished Glory 2",
-							uuid = "28a16f0b-dcf3-a870-9d04-0cdef97695e3",
-							variableTogglesType = 2,
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "ACR",
-							actionID = 16889,
-							conditions = 
-							{
-								
-								{
-									"a3267714-2d8a-18c2-81ef-e9c024ceb2d7",
-									true,
-								},
-								
-								{
-									"bcf0808f-5482-a048-a11c-8f2636c243ef",
-									true,
-								},
-								
-								{
-									"86d80680-549c-9c22-a979-2dd9caa54737",
-									true,
-								},
-							},
-							endIfUsed = true,
-							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
-							name = "[LPDU] R1 Tactician - Burnished Glory 2",
-							uuid = "122537c7-032f-267b-9ce5-d24ebac8a456",
-							variableTogglesType = 2,
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "ACR",
-							actionID = 16012,
-							conditions = 
-							{
-								
-								{
-									"a3267714-2d8a-18c2-81ef-e9c024ceb2d7",
-									true,
-								},
-								
-								{
-									"2182ec0c-7a11-9acf-9a0d-7c9fe5b3d105",
-									true,
-								},
-								
-								{
-									"484ac990-6798-7804-b7c4-d9735ec2f494",
-									true,
-								},
-							},
-							endIfUsed = true,
-							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
-							name = "[LPDU] R1 Shield Samba - Burnished Glory 2",
-							uuid = "5924e541-d8b4-ec95-8e59-0eaeeef3c745",
-							variableTogglesType = 2,
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
-							dequeueIfLuaFalse = true,
-							name = "R1 roster",
-							uuid = "a3267714-2d8a-18c2-81ef-e9c024ceb2d7",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "BARD",
-							name = "Troubadour job",
-							uuid = "a7bc9de8-26e3-74b0-a3e9-7c9ad36716af",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 7405,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Troubadour CD",
-							uuid = "06277663-9f3d-9f47-bb2f-b44455c26093",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "MACHINIST",
-							name = "Tactician job",
-							uuid = "bcf0808f-5482-a048-a11c-8f2636c243ef",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 16889,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Tactician CD",
-							uuid = "86d80680-549c-9c22-a979-2dd9caa54737",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "DANCER",
-							name = "Shield Samba job",
-							uuid = "2182ec0c-7a11-9acf-9a0d-7c9fe5b3d105",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 16012,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Shield Samba CD",
-							uuid = "484ac990-6798-7804-b7c4-d9735ec2f494",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "LPDU Mitigation",
-				mechanicTime = 121.1,
-				name = "[LPDU] R1 Phys Ranged - Burnished Glory 2",
-				timeRange = true,
-				timelineIndex = 29,
-				timerEndOffset = -1.5,
-				timerStartOffset = -11,
-				uuid = "9e087778-2368-05ca-bb27-825f765fe85e",
 				version = 2,
 			},
 		},
@@ -8061,6 +8249,11 @@ local tbl =
 							{
 								
 								{
+									"4fce327a-c346-a729-9cb7-2a076225a869",
+									true,
+								},
+								
+								{
 									"2399ddf4-9bfa-5766-861b-33b17778dab7",
 									true,
 								},
@@ -8086,7 +8279,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
 							dequeueIfLuaFalse = true,
 							name = "M2 roster",
 							uuid = "2399ddf4-9bfa-5766-861b-33b17778dab7",
@@ -8107,13 +8300,33 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								20,
+								22,
+								30,
+								34,
+								39,
+								41,
+							},
+							name = "Melee DPS only",
+							uuid = "4fce327a-c346-a729-9cb7-2a076225a869",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 235.3,
 				name = "[LPDU] M2 Feint Diamond Dust",
 				timeRange = true,
 				timelineIndex = 44,
-				timerEndOffset = -1.5,
+				timerEndOffset = -4.5,
 				timerStartOffset = -11,
 				uuid = "fd3ebcf5-0fd1-09eb-999d-38375bff4598",
 				version = 2,
@@ -8190,6 +8403,11 @@ local tbl =
 							{
 								
 								{
+									"5f709f87-f689-c5a8-8a90-3b88867f79db",
+									true,
+								},
+								
+								{
 									"3462efac-2e48-6a7f-a540-38f59353cb9f",
 									true,
 								},
@@ -8200,7 +8418,7 @@ local tbl =
 								},
 							},
 							gVar = "ACR_RikuPCT3_Hotbar_Addle",
-							name = "[LPDU] R1 Addle Diamond Dust",
+							name = "[LPDU] R2 Addle Diamond Dust",
 							targetType = "Enemy",
 							uuid = "53886910-b2db-94ac-85ef-80cfd0475853",
 							variableTogglesType = 2,
@@ -8215,9 +8433,9 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
-							name = "R1 roster",
+							name = "R2 roster",
 							uuid = "3462efac-2e48-6a7f-a540-38f59353cb9f",
 							version = 3,
 						},
@@ -8236,13 +8454,31 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								25,
+								27,
+								35,
+								42,
+							},
+							name = "Caster DPS only",
+							uuid = "5f709f87-f689-c5a8-8a90-3b88867f79db",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 235.3,
-				name = "[LPDU] R1 Addle Diamond Dust",
+				name = "[LPDU] R2 Addle Diamond Dust",
 				timeRange = true,
 				timelineIndex = 44,
-				timerEndOffset = -1.5,
+				timerEndOffset = -4.5,
 				timerStartOffset = -11,
 				uuid = "96ed1793-ae49-01bf-b9b8-ea44b49dd91a",
 				version = 2,
@@ -8332,6 +8568,11 @@ local tbl =
 									"8b5820eb-1a28-28d3-b856-ce12be67e3fa",
 									true,
 								},
+								
+								{
+									"c0721fde-b551-d8a4-9cd9-40e986fe6898",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
@@ -8362,6 +8603,11 @@ local tbl =
 								
 								{
 									"a5b76c8a-6da5-0b76-8c99-dbc9e27801ac",
+									true,
+								},
+								
+								{
+									"c0721fde-b551-d8a4-9cd9-40e986fe6898",
 									true,
 								},
 							},
@@ -8396,6 +8642,11 @@ local tbl =
 									"57c2ccff-97ee-312e-80bf-b9c7c16051f3",
 									true,
 								},
+								
+								{
+									"c0721fde-b551-d8a4-9cd9-40e986fe6898",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
@@ -8413,7 +8664,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
 							name = "R2 roster",
 							uuid = "db1b2e42-36e6-f4ca-9d7e-cfe10d79e7d6",
@@ -8501,8 +8752,25 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 30,
+							minTargetPercent = true,
+							name = "Party within 30 yalms",
+							partyTargetNumber = 100,
+							partyTargetSubType = "Number",
+							uuid = "c0721fde-b551-d8a4-9cd9-40e986fe6898",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
+				enabled = false,
 				mechanicTime = 235.3,
 				name = "[LPDU] R2 Phys Ranged - Diamond Dust",
 				timeRange = true,
@@ -8936,216 +9204,6 @@ local tbl =
 		{
 			data = 
 			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "ACR",
-							actionID = 7405,
-							conditions = 
-							{
-								
-								{
-									"bfcb18fd-550a-e828-a394-83dae3c2d1f3",
-									true,
-								},
-								
-								{
-									"bde5383e-deef-78de-acee-1902efe2b9f3",
-									true,
-								},
-								
-								{
-									"0442a4a5-d695-68ac-8543-e0b09c187b3b",
-									true,
-								},
-							},
-							endIfUsed = true,
-							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
-							name = "[LPDU] R1 Troubadour - Diamond Dust Knockback",
-							uuid = "cc86e535-4a83-e5d5-bade-78e2e31fc349",
-							variableTogglesType = 2,
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "ACR",
-							actionID = 16889,
-							conditions = 
-							{
-								
-								{
-									"bfcb18fd-550a-e828-a394-83dae3c2d1f3",
-									true,
-								},
-								
-								{
-									"4aa51b41-3f7c-96c1-b86e-1c1eaa78e235",
-									true,
-								},
-								
-								{
-									"b9d7c9d5-efd0-83b9-8a19-4e91154f2562",
-									true,
-								},
-							},
-							endIfUsed = true,
-							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
-							name = "[LPDU] R1 Tactician - Diamond Dust Knockback",
-							uuid = "6d7dbffe-fb55-1333-b563-d86da5c1b344",
-							variableTogglesType = 2,
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "ACR",
-							actionID = 16012,
-							conditions = 
-							{
-								
-								{
-									"bfcb18fd-550a-e828-a394-83dae3c2d1f3",
-									true,
-								},
-								
-								{
-									"4933cc63-9cc7-fd8b-a5fb-8906f5181d1b",
-									true,
-								},
-								
-								{
-									"c2741d44-47c5-3efe-8490-8b7178844637",
-									true,
-								},
-							},
-							endIfUsed = true,
-							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
-							name = "[LPDU] R1 Shield Samba - Diamond Dust Knockback",
-							uuid = "3c66abac-a50a-5dc0-a64b-d49a8794d38e",
-							variableTogglesType = 2,
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
-							dequeueIfLuaFalse = true,
-							name = "R1 roster",
-							uuid = "bfcb18fd-550a-e828-a394-83dae3c2d1f3",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "BARD",
-							name = "Troubadour job",
-							uuid = "bde5383e-deef-78de-acee-1902efe2b9f3",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 7405,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Troubadour CD",
-							uuid = "0442a4a5-d695-68ac-8543-e0b09c187b3b",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "MACHINIST",
-							name = "Tactician job",
-							uuid = "4aa51b41-3f7c-96c1-b86e-1c1eaa78e235",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 16889,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Tactician CD",
-							uuid = "b9d7c9d5-efd0-83b9-8a19-4e91154f2562",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "DANCER",
-							name = "Shield Samba job",
-							uuid = "4933cc63-9cc7-fd8b-a5fb-8906f5181d1b",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 16012,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Shield Samba CD",
-							uuid = "c2741d44-47c5-3efe-8490-8b7178844637",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "LPDU Mitigation",
-				mechanicTime = 251.1,
-				name = "[LPDU] R1 Phys Ranged - Diamond Dust Knockback",
-				timeRange = true,
-				timelineIndex = 50,
-				timerEndOffset = -1.5,
-				timerStartOffset = -11,
-				uuid = "6123fc3a-4ecf-6a68-b2cc-0fbefad7157b",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
 				displayPath = "",
 				name = "Spreadsheet tank mitigation ",
 				uuid = "95525f21-d663-cc17-8333-f8dcaf406bb5",
@@ -9342,6 +9400,260 @@ local tbl =
 				timerEndOffset = 1,
 				timerStartOffset = -2,
 				uuid = "63201a2e-8d1f-cb0b-b188-203761228f70",
+				version = 2,
+			},
+		},
+	},
+	[53] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Mitigation",
+				uuid = "c55dd65d-4569-6ae1-b9c7-4a54de1b9182",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							actionID = 7405,
+							conditions = 
+							{
+								
+								{
+									"bfcb18fd-550a-e828-a394-83dae3c2d1f3",
+									true,
+								},
+								
+								{
+									"bde5383e-deef-78de-acee-1902efe2b9f3",
+									true,
+								},
+								
+								{
+									"0442a4a5-d695-68ac-8543-e0b09c187b3b",
+									true,
+								},
+								
+								{
+									"3571a7de-796d-79d3-8012-9acb768aa297",
+									true,
+								},
+							},
+							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
+							name = "[LPDU] R1 Troubadour - Sinbound Holy",
+							uuid = "cc86e535-4a83-e5d5-bade-78e2e31fc349",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							actionID = 16889,
+							conditions = 
+							{
+								
+								{
+									"bfcb18fd-550a-e828-a394-83dae3c2d1f3",
+									true,
+								},
+								
+								{
+									"4aa51b41-3f7c-96c1-b86e-1c1eaa78e235",
+									true,
+								},
+								
+								{
+									"b9d7c9d5-efd0-83b9-8a19-4e91154f2562",
+									true,
+								},
+								
+								{
+									"3571a7de-796d-79d3-8012-9acb768aa297",
+									true,
+								},
+							},
+							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
+							name = "[LPDU] R1 Tactician - Sinbound Holy",
+							uuid = "6d7dbffe-fb55-1333-b563-d86da5c1b344",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							actionID = 16012,
+							conditions = 
+							{
+								
+								{
+									"bfcb18fd-550a-e828-a394-83dae3c2d1f3",
+									true,
+								},
+								
+								{
+									"4933cc63-9cc7-fd8b-a5fb-8906f5181d1b",
+									true,
+								},
+								
+								{
+									"c2741d44-47c5-3efe-8490-8b7178844637",
+									true,
+								},
+								
+								{
+									"3571a7de-796d-79d3-8012-9acb768aa297",
+									true,
+								},
+							},
+							endIfUsed = true,
+							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
+							name = "[LPDU] R1 Shield Samba - Sinbound Holy",
+							uuid = "3c66abac-a50a-5dc0-a64b-d49a8794d38e",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
+							dequeueIfLuaFalse = true,
+							name = "R1 roster",
+							uuid = "bfcb18fd-550a-e828-a394-83dae3c2d1f3",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "Troubadour job",
+							uuid = "bde5383e-deef-78de-acee-1902efe2b9f3",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 7405,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							dequeueIfLuaFalse = true,
+							name = "Troubadour CD",
+							uuid = "0442a4a5-d695-68ac-8543-e0b09c187b3b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MACHINIST",
+							name = "Tactician job",
+							uuid = "4aa51b41-3f7c-96c1-b86e-1c1eaa78e235",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 16889,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							dequeueIfLuaFalse = true,
+							name = "Tactician CD",
+							uuid = "b9d7c9d5-efd0-83b9-8a19-4e91154f2562",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DANCER",
+							name = "Shield Samba job",
+							uuid = "4933cc63-9cc7-fd8b-a5fb-8906f5181d1b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 16012,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							dequeueIfLuaFalse = true,
+							name = "Shield Samba CD",
+							uuid = "c2741d44-47c5-3efe-8490-8b7178844637",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 30,
+							minTargetPercent = true,
+							name = "Party within 30 yalms",
+							partyTargetNumber = 100,
+							partyTargetSubType = "Number",
+							uuid = "3571a7de-796d-79d3-8012-9acb768aa297",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Mitigation",
+				mechanicTime = 255.1,
+				name = "[LPDU] R1 Phys Ranged - Sinbound Holy",
+				timeRange = true,
+				timelineIndex = 53,
+				timerEndOffset = -1,
+				timerStartOffset = -4,
+				uuid = "6123fc3a-4ecf-6a68-b2cc-0fbefad7157b",
 				version = 2,
 			},
 		},
@@ -9679,6 +9991,11 @@ local tbl =
 							{
 								
 								{
+									"5981d8cc-7a84-39e9-ad90-a68287510eac",
+									true,
+								},
+								
+								{
 									"9bdb2d7d-a821-8c96-9005-cb3955374c0a",
 									true,
 								},
@@ -9704,7 +10021,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
 							dequeueIfLuaFalse = true,
 							name = "M1 roster",
 							uuid = "9bdb2d7d-a821-8c96-9005-cb3955374c0a",
@@ -9722,6 +10039,26 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							name = "Hallowed Ray CD",
 							uuid = "86f9b4b0-3669-ef27-8f81-2d4aea59ef94",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								20,
+								22,
+								30,
+								34,
+								39,
+								41,
+							},
+							name = "Melee DPS only",
+							uuid = "5981d8cc-7a84-39e9-ad90-a68287510eac",
 							version = 3,
 						},
 					},
@@ -9753,6 +10090,11 @@ local tbl =
 							{
 								
 								{
+									"5fe16310-7cb9-9624-8cbe-17fc8ecee191",
+									true,
+								},
+								
+								{
 									"8896db95-6e98-7de6-834d-905c549d5e42",
 									true,
 								},
@@ -9778,7 +10120,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
 							name = "R2 roster",
 							uuid = "8896db95-6e98-7de6-834d-905c549d5e42",
@@ -9796,6 +10138,24 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							name = "Hallowed Ray CD",
 							uuid = "93eb9fab-b569-c1f3-bfb6-d854295ddc60",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								25,
+								27,
+								35,
+								42,
+							},
+							name = "Caster DPS only",
+							uuid = "5fe16310-7cb9-9624-8cbe-17fc8ecee191",
 							version = 3,
 						},
 					},
@@ -9915,6 +10275,11 @@ local tbl =
 									"562ea1bc-0a76-4d04-b963-f4cfda9a8061",
 									true,
 								},
+								
+								{
+									"d444c740-4967-2c51-8771-471c2be17ff3",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
@@ -9945,6 +10310,11 @@ local tbl =
 								
 								{
 									"2bf31677-8367-7794-832a-dc8c8c1185f0",
+									true,
+								},
+								
+								{
+									"d444c740-4967-2c51-8771-471c2be17ff3",
 									true,
 								},
 							},
@@ -9979,6 +10349,11 @@ local tbl =
 									"f0b7bdd7-9622-224a-8a1b-5e6ff9d64472",
 									true,
 								},
+								
+								{
+									"d444c740-4967-2c51-8771-471c2be17ff3",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
@@ -9996,7 +10371,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
 							name = "R2 roster",
 							uuid = "217f6e3e-1da1-0ed8-8bab-461ca1bb65a9",
@@ -10084,8 +10459,25 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 30,
+							minTargetPercent = true,
+							name = "Party within 30 yalms",
+							partyTargetNumber = 100,
+							partyTargetSubType = "Number",
+							uuid = "d444c740-4967-2c51-8771-471c2be17ff3",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
+				enabled = false,
 				mechanicTime = 283,
 				name = "[LPDU] R2 Phys Ranged - Hallowed Ray",
 				timeRange = true,
@@ -11046,6 +11438,11 @@ local tbl =
 							{
 								
 								{
+									"14133cd5-6e90-a0dd-b043-9deb3cb362b1",
+									true,
+								},
+								
+								{
 									"cc77a7c8-359b-8aa8-a382-42b269bc50c9",
 									true,
 								},
@@ -11071,7 +11468,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
 							dequeueIfLuaFalse = true,
 							name = "M2 roster",
 							uuid = "cc77a7c8-359b-8aa8-a382-42b269bc50c9",
@@ -11089,6 +11486,26 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							name = "Banish III + Light Rampant CD",
 							uuid = "49860175-7e3a-4c00-bdff-f6cc16a63e20",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								20,
+								22,
+								30,
+								34,
+								39,
+								41,
+							},
+							name = "Melee DPS only",
+							uuid = "14133cd5-6e90-a0dd-b043-9deb3cb362b1",
 							version = 3,
 						},
 					},
@@ -11120,6 +11537,11 @@ local tbl =
 							{
 								
 								{
+									"ed6b01d1-bd3c-5974-99a6-83462d064c0a",
+									true,
+								},
+								
+								{
 									"dc5ec06a-00d7-622d-a7d9-5f259562366c",
 									true,
 								},
@@ -11130,7 +11552,7 @@ local tbl =
 								},
 							},
 							gVar = "ACR_RikuPCT3_Hotbar_Addle",
-							name = "[LPDU] R1 Addle Banish III + Light Rampant",
+							name = "[LPDU] R2 Addle Banish III + Light Rampant",
 							targetType = "Enemy",
 							uuid = "237a847a-d974-5335-8776-2259d786d1ec",
 							variableTogglesType = 2,
@@ -11145,9 +11567,9 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
-							name = "R1 roster",
+							name = "R2 roster",
 							uuid = "dc5ec06a-00d7-622d-a7d9-5f259562366c",
 							version = 3,
 						},
@@ -11166,10 +11588,28 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								25,
+								27,
+								35,
+								42,
+							},
+							name = "Caster DPS only",
+							uuid = "ed6b01d1-bd3c-5974-99a6-83462d064c0a",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 322.5,
-				name = "[LPDU] R1 Addle Banish III + Light Rampant",
+				name = "[LPDU] R2 Addle Banish III + Light Rampant",
 				timeRange = true,
 				timelineIndex = 77,
 				timerEndOffset = 1,
@@ -11634,216 +12074,6 @@ local tbl =
 						data = 
 						{
 							aType = "ACR",
-							actionID = 7405,
-							conditions = 
-							{
-								
-								{
-									"5c37cebb-b7f7-df40-b99a-8f3235818424",
-									true,
-								},
-								
-								{
-									"e2341121-dc8b-5047-b7f4-0d400ec90124",
-									true,
-								},
-								
-								{
-									"650d3260-4b78-da53-a9fb-9101d0b8bf4f",
-									true,
-								},
-							},
-							endIfUsed = true,
-							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
-							name = "[LPDU] R1 Troubadour - Light Rampant",
-							uuid = "82792e75-fd04-cb66-92b0-923f84f7f8bc",
-							variableTogglesType = 2,
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "ACR",
-							actionID = 16889,
-							conditions = 
-							{
-								
-								{
-									"5c37cebb-b7f7-df40-b99a-8f3235818424",
-									true,
-								},
-								
-								{
-									"e5a14473-af2a-94c7-a546-2687583a206b",
-									true,
-								},
-								
-								{
-									"c2d830f1-f805-db29-ad23-af0496f80875",
-									true,
-								},
-							},
-							endIfUsed = true,
-							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
-							name = "[LPDU] R1 Tactician - Light Rampant",
-							uuid = "9a548f82-1432-464c-874e-4150b33a7756",
-							variableTogglesType = 2,
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "ACR",
-							actionID = 16012,
-							conditions = 
-							{
-								
-								{
-									"5c37cebb-b7f7-df40-b99a-8f3235818424",
-									true,
-								},
-								
-								{
-									"add25d20-95aa-ed48-b50f-eb6a710b318f",
-									true,
-								},
-								
-								{
-									"cdddb2db-56d9-b449-801e-2949c4e8521e",
-									true,
-								},
-							},
-							endIfUsed = true,
-							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
-							name = "[LPDU] R1 Shield Samba - Light Rampant",
-							uuid = "f9248f19-336b-59b0-a66f-fe6b1563d957",
-							variableTogglesType = 2,
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
-							dequeueIfLuaFalse = true,
-							name = "R1 roster",
-							uuid = "5c37cebb-b7f7-df40-b99a-8f3235818424",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "BARD",
-							name = "Troubadour job",
-							uuid = "e2341121-dc8b-5047-b7f4-0d400ec90124",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 7405,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Troubadour CD",
-							uuid = "650d3260-4b78-da53-a9fb-9101d0b8bf4f",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "MACHINIST",
-							name = "Tactician job",
-							uuid = "e5a14473-af2a-94c7-a546-2687583a206b",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 16889,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Tactician CD",
-							uuid = "c2d830f1-f805-db29-ad23-af0496f80875",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "DANCER",
-							name = "Shield Samba job",
-							uuid = "add25d20-95aa-ed48-b50f-eb6a710b318f",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 16012,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Shield Samba CD",
-							uuid = "cdddb2db-56d9-b449-801e-2949c4e8521e",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "LPDU Mitigation",
-				mechanicTime = 331.8,
-				name = "[LPDU] R1 Phys Ranged - Light Rampant",
-				timeRange = true,
-				timelineIndex = 80,
-				timerEndOffset = -1.5,
-				timerStartOffset = -11,
-				uuid = "70c46645-6b35-308d-bc5b-6ffe8283b983",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "ACR",
 							actionID = 65,
 							conditions = 
 							{
@@ -12012,6 +12242,260 @@ local tbl =
 				timelineIndex = 80,
 				timerStartOffset = -3,
 				uuid = "237c7e5b-fc9c-9121-afa6-9dc7cb3003df",
+				version = 2,
+			},
+		},
+	},
+	[88] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Mitigation",
+				uuid = "1d678fe8-d3fa-96ab-b994-0a407d3c37be",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							actionID = 7405,
+							conditions = 
+							{
+								
+								{
+									"5c37cebb-b7f7-df40-b99a-8f3235818424",
+									true,
+								},
+								
+								{
+									"e2341121-dc8b-5047-b7f4-0d400ec90124",
+									true,
+								},
+								
+								{
+									"650d3260-4b78-da53-a9fb-9101d0b8bf4f",
+									true,
+								},
+								
+								{
+									"b6b1a523-5fdb-d8cf-ac2a-f27995739d0e",
+									true,
+								},
+							},
+							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
+							name = "[LPDU] R1 Troubadour - Powerful Light",
+							uuid = "82792e75-fd04-cb66-92b0-923f84f7f8bc",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							actionID = 16889,
+							conditions = 
+							{
+								
+								{
+									"5c37cebb-b7f7-df40-b99a-8f3235818424",
+									true,
+								},
+								
+								{
+									"e5a14473-af2a-94c7-a546-2687583a206b",
+									true,
+								},
+								
+								{
+									"c2d830f1-f805-db29-ad23-af0496f80875",
+									true,
+								},
+								
+								{
+									"b6b1a523-5fdb-d8cf-ac2a-f27995739d0e",
+									true,
+								},
+							},
+							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
+							name = "[LPDU] R1 Tactician - Powerful Light",
+							uuid = "9a548f82-1432-464c-874e-4150b33a7756",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							actionID = 16012,
+							conditions = 
+							{
+								
+								{
+									"5c37cebb-b7f7-df40-b99a-8f3235818424",
+									true,
+								},
+								
+								{
+									"add25d20-95aa-ed48-b50f-eb6a710b318f",
+									true,
+								},
+								
+								{
+									"cdddb2db-56d9-b449-801e-2949c4e8521e",
+									true,
+								},
+								
+								{
+									"b6b1a523-5fdb-d8cf-ac2a-f27995739d0e",
+									true,
+								},
+							},
+							endIfUsed = true,
+							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
+							name = "[LPDU] R1 Shield Samba - Powerful Light",
+							uuid = "f9248f19-336b-59b0-a66f-fe6b1563d957",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
+							dequeueIfLuaFalse = true,
+							name = "R1 roster",
+							uuid = "5c37cebb-b7f7-df40-b99a-8f3235818424",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "Troubadour job",
+							uuid = "e2341121-dc8b-5047-b7f4-0d400ec90124",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 7405,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							dequeueIfLuaFalse = true,
+							name = "Troubadour CD",
+							uuid = "650d3260-4b78-da53-a9fb-9101d0b8bf4f",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MACHINIST",
+							name = "Tactician job",
+							uuid = "e5a14473-af2a-94c7-a546-2687583a206b",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 16889,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							dequeueIfLuaFalse = true,
+							name = "Tactician CD",
+							uuid = "c2d830f1-f805-db29-ad23-af0496f80875",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DANCER",
+							name = "Shield Samba job",
+							uuid = "add25d20-95aa-ed48-b50f-eb6a710b318f",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 16012,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							dequeueIfLuaFalse = true,
+							name = "Shield Samba CD",
+							uuid = "cdddb2db-56d9-b449-801e-2949c4e8521e",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 30,
+							minTargetPercent = true,
+							name = "Party within 30 yalms",
+							partyTargetNumber = 100,
+							partyTargetSubType = "Number",
+							uuid = "b6b1a523-5fdb-d8cf-ac2a-f27995739d0e",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Mitigation",
+				mechanicTime = 348.7,
+				name = "[LPDU] R1 Phys Ranged - Powerful Light",
+				timeRange = true,
+				timelineIndex = 88,
+				timerEndOffset = -1,
+				timerStartOffset = -4,
+				uuid = "70c46645-6b35-308d-bc5b-6ffe8283b983",
 				version = 2,
 			},
 		},
@@ -12671,6 +13155,11 @@ local tbl =
 							{
 								
 								{
+									"ab1e2910-fa5f-43ae-b059-7e3020c442f2",
+									true,
+								},
+								
+								{
 									"dda7d4ad-fbbc-d316-89d9-3331eb587f86",
 									true,
 								},
@@ -12696,7 +13185,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
 							dequeueIfLuaFalse = true,
 							name = "M1 roster",
 							uuid = "dda7d4ad-fbbc-d316-89d9-3331eb587f86",
@@ -12714,6 +13203,26 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							name = "Absolute Zero CD",
 							uuid = "0cd71c6b-e0d0-a356-b27c-9fad023fc785",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								20,
+								22,
+								30,
+								34,
+								39,
+								41,
+							},
+							name = "Melee DPS only",
+							uuid = "ab1e2910-fa5f-43ae-b059-7e3020c442f2",
 							version = 3,
 						},
 					},
@@ -12758,6 +13267,11 @@ local tbl =
 									"40e0bb11-cd6b-61f5-9252-b119ce705907",
 									true,
 								},
+								
+								{
+									"3f5e544a-9277-67ca-bf47-7443237ed228",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
@@ -12788,6 +13302,11 @@ local tbl =
 								
 								{
 									"e9c549c3-363e-b169-b3cb-bd88f1e706eb",
+									true,
+								},
+								
+								{
+									"3f5e544a-9277-67ca-bf47-7443237ed228",
 									true,
 								},
 							},
@@ -12822,6 +13341,11 @@ local tbl =
 									"53d43c40-646a-b676-aaf4-0a69d24747b3",
 									true,
 								},
+								
+								{
+									"3f5e544a-9277-67ca-bf47-7443237ed228",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
@@ -12839,7 +13363,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
 							name = "R2 roster",
 							uuid = "a6500a8d-d8cb-48fe-8309-b2aa23092ef1",
@@ -12927,8 +13451,25 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 30,
+							minTargetPercent = true,
+							name = "Party within 30 yalms",
+							partyTargetNumber = 100,
+							partyTargetSubType = "Number",
+							uuid = "3f5e544a-9277-67ca-bf47-7443237ed228",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
+				enabled = false,
 				mechanicTime = 387.8,
 				name = "[LPDU] R2 Phys Ranged - Absolute Zero",
 				timeRange = true,
@@ -12953,6 +13494,11 @@ local tbl =
 							actionID = 7560,
 							conditions = 
 							{
+								
+								{
+									"a2044f40-4222-6394-9cce-5f98f2911501",
+									true,
+								},
 								
 								{
 									"56cdfcbf-5616-6065-91cf-5d0fab13680b",
@@ -12980,7 +13526,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
 							name = "R2 roster",
 							uuid = "56cdfcbf-5616-6065-91cf-5d0fab13680b",
@@ -13001,8 +13547,27 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								25,
+								27,
+								35,
+								42,
+							},
+							name = "Caster DPS only",
+							uuid = "a2044f40-4222-6394-9cce-5f98f2911501",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
+				enabled = false,
 				mechanicTime = 387.8,
 				name = "[LPDU] R2 Addle 2 Absolute Zero",
 				timeRange = true,
@@ -14129,6 +14694,11 @@ local tbl =
 							{
 								
 								{
+									"fc2f3a06-cac9-acf1-add2-04331eccf1e2",
+									true,
+								},
+								
+								{
 									"a284b425-c4cc-715b-bca9-0b280b1ccb52",
 									true,
 								},
@@ -14154,7 +14724,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
 							dequeueIfLuaFalse = true,
 							name = "M1 roster",
 							uuid = "a284b425-c4cc-715b-bca9-0b280b1ccb52",
@@ -14172,6 +14742,26 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							name = "Ultimate Relativity CD",
 							uuid = "8f7abf7c-743d-acb4-80e6-8f8b46360d4a",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								20,
+								22,
+								30,
+								34,
+								39,
+								41,
+							},
+							name = "Melee DPS only",
+							uuid = "fc2f3a06-cac9-acf1-add2-04331eccf1e2",
 							version = 3,
 						},
 					},
@@ -14203,6 +14793,11 @@ local tbl =
 							{
 								
 								{
+									"ea4970b6-acea-e7d8-b219-152780d09670",
+									true,
+								},
+								
+								{
 									"3c32d1dd-4956-78f0-a3e7-eb99d95230bd",
 									true,
 								},
@@ -14213,7 +14808,7 @@ local tbl =
 								},
 							},
 							gVar = "ACR_RikuPCT3_Hotbar_Addle",
-							name = "[LPDU] R1 Addle Ultimate Relativity",
+							name = "[LPDU] R2 Addle Ultimate Relativity",
 							targetType = "Enemy",
 							uuid = "c3a44e51-d8ff-d39c-9e82-af94bdd61848",
 							variableTogglesType = 2,
@@ -14228,9 +14823,9 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
-							name = "R1 roster",
+							name = "R2 roster",
 							uuid = "3c32d1dd-4956-78f0-a3e7-eb99d95230bd",
 							version = 3,
 						},
@@ -14249,10 +14844,28 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								25,
+								27,
+								35,
+								42,
+							},
+							name = "Caster DPS only",
+							uuid = "ea4970b6-acea-e7d8-b219-152780d09670",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 532.4,
-				name = "[LPDU] R1 Addle Ultimate Relativity",
+				name = "[LPDU] R2 Addle Ultimate Relativity",
 				timeRange = true,
 				timelineIndex = 123,
 				timerEndOffset = -1.5,
@@ -14345,6 +14958,11 @@ local tbl =
 									"91aa0318-57b2-9a1c-8584-a7a8864ebded",
 									true,
 								},
+								
+								{
+									"3fdf2e62-521d-afb5-a382-bbb455e3114f",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
@@ -14375,6 +14993,11 @@ local tbl =
 								
 								{
 									"553f91c4-2be3-ba84-aca3-0ab285ab8cfe",
+									true,
+								},
+								
+								{
+									"3fdf2e62-521d-afb5-a382-bbb455e3114f",
 									true,
 								},
 							},
@@ -14409,6 +15032,11 @@ local tbl =
 									"a9977b69-fe8f-eb6f-aa03-868a9b1566da",
 									true,
 								},
+								
+								{
+									"3fdf2e62-521d-afb5-a382-bbb455e3114f",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
@@ -14426,7 +15054,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
 							name = "R2 roster",
 							uuid = "60f8f443-cc9d-d6fb-9ad9-5fb32a6a5cf6",
@@ -14514,8 +15142,25 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 30,
+							minTargetPercent = true,
+							name = "Party within 30 yalms",
+							partyTargetNumber = 100,
+							partyTargetSubType = "Number",
+							uuid = "3fdf2e62-521d-afb5-a382-bbb455e3114f",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
+				enabled = false,
 				mechanicTime = 532.4,
 				name = "[LPDU] R2 Phys Ranged - Ultimate Relativity",
 				timeRange = true,
@@ -14901,6 +15546,11 @@ local tbl =
 									"44327278-a21e-e232-bbbd-3a3ad0f6e09a",
 									true,
 								},
+								
+								{
+									"040ad647-4af6-be1e-ac97-632648c94657",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
@@ -14931,6 +15581,11 @@ local tbl =
 								
 								{
 									"970fd802-09b9-02be-b38d-19b9cbbdfaf9",
+									true,
+								},
+								
+								{
+									"040ad647-4af6-be1e-ac97-632648c94657",
 									true,
 								},
 							},
@@ -14965,6 +15620,11 @@ local tbl =
 									"9d07e166-2e9b-662a-b10d-0b44111d9fce",
 									true,
 								},
+								
+								{
+									"040ad647-4af6-be1e-ac97-632648c94657",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
@@ -14982,7 +15642,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
 							dequeueIfLuaFalse = true,
 							name = "R1 roster",
 							uuid = "ca2f28e9-1d7c-d6fb-a0aa-26d576d3d7ec",
@@ -15070,14 +15730,30 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 30,
+							minTargetPercent = true,
+							name = "Party within 30 yalms",
+							partyTargetNumber = 100,
+							partyTargetSubType = "Number",
+							uuid = "040ad647-4af6-be1e-ac97-632648c94657",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 544.2,
 				name = "[LPDU] R1 Phys Ranged - Dark Fire III",
 				timeRange = true,
 				timelineIndex = 126,
-				timerEndOffset = -1.5,
-				timerStartOffset = -11,
+				timerEndOffset = -1,
+				timerStartOffset = -4,
 				uuid = "78bda707-a6ce-5cfe-a884-07298f468afc",
 				version = 2,
 			},
@@ -15626,6 +16302,11 @@ local tbl =
 							{
 								
 								{
+									"1a8a4dbd-b69c-4a6d-a52f-2ecf8094e438",
+									true,
+								},
+								
+								{
 									"0d2104f7-a71e-7346-9c43-80f52e8af953",
 									true,
 								},
@@ -15651,7 +16332,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
 							dequeueIfLuaFalse = true,
 							name = "M2 roster",
 							uuid = "0d2104f7-a71e-7346-9c43-80f52e8af953",
@@ -15669,6 +16350,26 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							name = "Shell Crusher + Shockwave Pulsar CD",
 							uuid = "b7d50553-7667-2144-bb85-91a0c47b2c8d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								20,
+								22,
+								30,
+								34,
+								39,
+								41,
+							},
+							name = "Melee DPS only",
+							uuid = "1a8a4dbd-b69c-4a6d-a52f-2ecf8094e438",
 							version = 3,
 						},
 					},
@@ -15700,6 +16401,11 @@ local tbl =
 							{
 								
 								{
+									"a23f8fb5-13b1-e432-a803-093bb02c6a61",
+									true,
+								},
+								
+								{
 									"8d64ebab-7122-07c3-a002-60cd91960740",
 									true,
 								},
@@ -15725,7 +16431,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
 							name = "R2 roster",
 							uuid = "8d64ebab-7122-07c3-a002-60cd91960740",
@@ -15746,8 +16452,27 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								25,
+								27,
+								35,
+								42,
+							},
+							name = "Caster DPS only",
+							uuid = "a23f8fb5-13b1-e432-a803-093bb02c6a61",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
+				enabled = false,
 				mechanicTime = 578.6,
 				name = "[LPDU] R2 Addle 2 Shell Crusher + Shockwave Pulsar",
 				timeRange = true,
@@ -19121,6 +19846,11 @@ local tbl =
 							{
 								
 								{
+									"f9676044-0c88-a3a5-860f-3199eec7e969",
+									true,
+								},
+								
+								{
 									"9a49c8cf-33e6-73eb-a006-fb21a5611817",
 									true,
 								},
@@ -19146,7 +19876,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
 							dequeueIfLuaFalse = true,
 							name = "M1 roster",
 							uuid = "9a49c8cf-33e6-73eb-a006-fb21a5611817",
@@ -19164,6 +19894,26 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							name = "Shockwave Pulsar + Memory's End CD",
 							uuid = "1de54d1b-3f9f-0f12-a646-bc4627f1745e",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								20,
+								22,
+								30,
+								34,
+								39,
+								41,
+							},
+							name = "Melee DPS only",
+							uuid = "f9676044-0c88-a3a5-860f-3199eec7e969",
 							version = 3,
 						},
 					},
@@ -19195,6 +19945,11 @@ local tbl =
 							{
 								
 								{
+									"57ca1f03-e3af-e888-8429-45f3413fb8e2",
+									true,
+								},
+								
+								{
 									"5026f489-04fb-3ab2-8a18-dfd9734944b9",
 									true,
 								},
@@ -19205,7 +19960,7 @@ local tbl =
 								},
 							},
 							gVar = "ACR_RikuPCT3_Hotbar_Addle",
-							name = "[LPDU] R1 Addle Shockwave Pulsar + Memory's End",
+							name = "[LPDU] R2 Addle Shockwave Pulsar + Memory's End",
 							targetType = "Enemy",
 							uuid = "a248acbc-b611-d0a0-a8f4-190c8ebd06db",
 							variableTogglesType = 2,
@@ -19220,9 +19975,9 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
-							name = "R1 roster",
+							name = "R2 roster",
 							uuid = "5026f489-04fb-3ab2-8a18-dfd9734944b9",
 							version = 3,
 						},
@@ -19241,10 +19996,28 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								25,
+								27,
+								35,
+								42,
+							},
+							name = "Caster DPS only",
+							uuid = "57ca1f03-e3af-e888-8429-45f3413fb8e2",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 656.4,
-				name = "[LPDU] R1 Addle Shockwave Pulsar + Memory's End",
+				name = "[LPDU] R2 Addle Shockwave Pulsar + Memory's End",
 				timeRange = true,
 				timelineIndex = 153,
 				timerEndOffset = 1,
@@ -19337,6 +20110,11 @@ local tbl =
 									"8abe0170-1c1b-5c79-9622-538ef16eb642",
 									true,
 								},
+								
+								{
+									"14e0786a-b819-e46f-aeb7-9e61f6cb8120",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
@@ -19367,6 +20145,11 @@ local tbl =
 								
 								{
 									"c36b4e74-ea35-b758-92ec-71e3bb351cd3",
+									true,
+								},
+								
+								{
+									"14e0786a-b819-e46f-aeb7-9e61f6cb8120",
 									true,
 								},
 							},
@@ -19401,6 +20184,11 @@ local tbl =
 									"2e483019-d08a-35a0-bd20-2a5ef4bf5941",
 									true,
 								},
+								
+								{
+									"14e0786a-b819-e46f-aeb7-9e61f6cb8120",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
@@ -19418,7 +20206,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
 							name = "R2 roster",
 							uuid = "9d7b9392-564a-b96b-9fe8-80af6c1f4227",
@@ -19506,8 +20294,25 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 30,
+							minTargetPercent = true,
+							name = "Party within 30 yalms",
+							partyTargetNumber = 100,
+							partyTargetSubType = "Number",
+							uuid = "14e0786a-b819-e46f-aeb7-9e61f6cb8120",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
+				enabled = false,
 				mechanicTime = 656.4,
 				name = "[LPDU] R2 Phys Ranged - Shockwave Pulsar + Memory's End",
 				timeRange = true,
@@ -21069,6 +21874,11 @@ local tbl =
 									"350cc91b-d3c6-7c4a-bc92-d00cc61c8a12",
 									true,
 								},
+								
+								{
+									"90983e30-736b-b0d1-aa72-e7233e7c798c",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
@@ -21099,6 +21909,11 @@ local tbl =
 								
 								{
 									"25fa646f-ecf4-840d-8b9a-3d5af4b3bcbc",
+									true,
+								},
+								
+								{
+									"90983e30-736b-b0d1-aa72-e7233e7c798c",
 									true,
 								},
 							},
@@ -21133,6 +21948,11 @@ local tbl =
 									"e68520cd-998a-013d-ae31-fa74a2fc508e",
 									true,
 								},
+								
+								{
+									"90983e30-736b-b0d1-aa72-e7233e7c798c",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
@@ -21150,7 +21970,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
 							dequeueIfLuaFalse = true,
 							name = "R1 roster",
 							uuid = "e7433206-23aa-e69c-a45e-0910c9a93a97",
@@ -21238,6 +22058,22 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 30,
+							minTargetPercent = true,
+							name = "Party within 30 yalms",
+							partyTargetNumber = 100,
+							partyTargetSubType = "Number",
+							uuid = "90983e30-736b-b0d1-aa72-e7233e7c798c",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 738.2,
@@ -21266,12 +22102,22 @@ local tbl =
 							{
 								
 								{
+									"8d6f2b84-0a86-a0d2-8237-358eb5f61324",
+									true,
+								},
+								
+								{
 									"724a3e8c-7a68-ab9f-bc05-d07837a9aea4",
 									true,
 								},
 								
 								{
 									"f86f9c4a-a7fa-0078-8625-c7ca506245ac",
+									true,
+								},
+								
+								{
+									"7a21edd1-52fc-a68f-a784-d6ad8f21d51d",
 									true,
 								},
 							},
@@ -21291,7 +22137,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
 							dequeueIfLuaFalse = true,
 							name = "M2 roster",
 							uuid = "724a3e8c-7a68-ab9f-bc05-d07837a9aea4",
@@ -21309,6 +22155,37 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							name = "Darklit Dragonsong (Ryne) CD",
 							uuid = "f86f9c4a-a7fa-0078-8625-c7ca506245ac",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								20,
+								22,
+								30,
+								34,
+								39,
+								41,
+							},
+							name = "Melee DPS only",
+							uuid = "8d6f2b84-0a86-a0d2-8237-358eb5f61324",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local target = TensorCore.mGetTarget()\nreturn target ~= nil and target.contentid == 12809 and target.attackable == true",
+							name = "Current target is Ryne",
+							uuid = "7a21edd1-52fc-a68f-a784-d6ad8f21d51d",
 							version = 3,
 						},
 					},
@@ -21340,6 +22217,11 @@ local tbl =
 							{
 								
 								{
+									"30da9101-026d-f2e5-8325-ea5b89f015e3",
+									true,
+								},
+								
+								{
 									"bbc8a9b1-9cb9-69ac-8a06-6d07e154f1d8",
 									true,
 								},
@@ -21365,7 +22247,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
 							name = "R2 roster",
 							uuid = "bbc8a9b1-9cb9-69ac-8a06-6d07e154f1d8",
@@ -21386,8 +22268,27 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								25,
+								27,
+								35,
+								42,
+							},
+							name = "Caster DPS only",
+							uuid = "30da9101-026d-f2e5-8325-ea5b89f015e3",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
+				enabled = false,
 				mechanicTime = 738.2,
 				name = "[LPDU] R2 Addle 2 Darklit Dragonsong",
 				timeRange = true,
@@ -23149,6 +24050,11 @@ local tbl =
 									"76c337e2-5b9d-1601-a265-c3cbb41a0b3f",
 									true,
 								},
+								
+								{
+									"7a1c7f1e-19fe-6eca-9bef-7cdf96821a98",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
@@ -23179,6 +24085,11 @@ local tbl =
 								
 								{
 									"87e867c8-4cc3-e74f-94c4-e03983e1512c",
+									true,
+								},
+								
+								{
+									"7a1c7f1e-19fe-6eca-9bef-7cdf96821a98",
 									true,
 								},
 							},
@@ -23213,6 +24124,11 @@ local tbl =
 									"cba98b9a-c4b7-df17-818a-924235548a0e",
 									true,
 								},
+								
+								{
+									"7a1c7f1e-19fe-6eca-9bef-7cdf96821a98",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
@@ -23230,7 +24146,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
 							name = "R2 roster",
 							uuid = "c0b7e0ac-19b6-fd77-8862-45da8c0c7bec",
@@ -23318,8 +24234,25 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 30,
+							minTargetPercent = true,
+							name = "Party within 30 yalms",
+							partyTargetNumber = 100,
+							partyTargetSubType = "Number",
+							uuid = "7a1c7f1e-19fe-6eca-9bef-7cdf96821a98",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
+				enabled = false,
 				mechanicTime = 773.5,
 				name = "[LPDU] R2 Phys Ranged - P4 Akh Morn 1",
 				timeRange = true,
@@ -25157,12 +26090,22 @@ local tbl =
 							{
 								
 								{
+									"b59e5039-0a1e-515f-a854-a6fb0c1d5882",
+									true,
+								},
+								
+								{
 									"e4f19d36-8f7a-4359-b2ff-843e8bc6d5f6",
 									true,
 								},
 								
 								{
 									"6122e22b-88c4-301c-a7f3-08b272c9e4a6",
+									true,
+								},
+								
+								{
+									"222d976d-a45b-69f0-bdc4-5fe9b5b7902d",
 									true,
 								},
 							},
@@ -25182,7 +26125,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
 							dequeueIfLuaFalse = true,
 							name = "M1 roster",
 							uuid = "e4f19d36-8f7a-4359-b2ff-843e8bc6d5f6",
@@ -25200,6 +26143,37 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							name = "Crystallize Time (Gaia) CD",
 							uuid = "6122e22b-88c4-301c-a7f3-08b272c9e4a6",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								20,
+								22,
+								30,
+								34,
+								39,
+								41,
+							},
+							name = "Melee DPS only",
+							uuid = "b59e5039-0a1e-515f-a854-a6fb0c1d5882",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local target = TensorCore.mGetTarget()\nreturn target ~= nil and target.contentid == 9832 and target.attackable == true",
+							name = "Current target is Gaia",
+							uuid = "222d976d-a45b-69f0-bdc4-5fe9b5b7902d",
 							version = 3,
 						},
 					},
@@ -25231,6 +26205,11 @@ local tbl =
 							{
 								
 								{
+									"bbb0f2c9-c054-10d2-a1a5-61e3c8e41dbf",
+									true,
+								},
+								
+								{
 									"94e3ba84-d4e0-4494-a8fc-5c291288ea21",
 									true,
 								},
@@ -25239,9 +26218,14 @@ local tbl =
 									"e43dd82c-b6ce-7ea6-b7f4-f442a4106a69",
 									true,
 								},
+								
+								{
+									"52838417-11eb-489d-bf6e-b31133a35429",
+									true,
+								},
 							},
 							gVar = "ACR_RikuPCT3_Hotbar_Addle",
-							name = "[LPDU] R1 Addle Crystallize Time",
+							name = "[LPDU] R2 Addle Crystallize Time",
 							targetType = "Enemy",
 							uuid = "ec4eda11-e6a1-56c1-a850-4cecfc93ac25",
 							variableTogglesType = 2,
@@ -25256,9 +26240,9 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
-							name = "R1 roster",
+							name = "R2 roster",
 							uuid = "94e3ba84-d4e0-4494-a8fc-5c291288ea21",
 							version = 3,
 						},
@@ -25277,225 +26261,44 @@ local tbl =
 							version = 3,
 						},
 					},
-				},
-				displayPath = "LPDU Mitigation",
-				mechanicTime = 798.9,
-				name = "[LPDU] R1 Addle Crystallize Time",
-				timeRange = true,
-				timelineIndex = 179,
-				timerEndOffset = -1.5,
-				timerStartOffset = -11,
-				uuid = "8af95df8-3618-f0f6-95a2-7aa9241eceb6",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
 					
 					{
 						data = 
 						{
-							aType = "ACR",
-							actionID = 7405,
-							conditions = 
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
 							{
-								
-								{
-									"47863a8c-75d7-6565-b926-5d0660ff5e2c",
-									true,
-								},
-								
-								{
-									"1cc6c40f-8e92-05fd-9317-3508a3831b14",
-									true,
-								},
-								
-								{
-									"5279ed87-71aa-f251-96cc-326b1eff950c",
-									true,
-								},
+								25,
+								27,
+								35,
+								42,
 							},
-							endIfUsed = true,
-							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
-							name = "[LPDU] R1 Troubadour - Crystallize Time Rewind",
-							uuid = "0961687b-f1e0-5063-8c71-6a09b308106a",
-							variableTogglesType = 2,
-							version = 2.1,
+							name = "Caster DPS only",
+							uuid = "bbb0f2c9-c054-10d2-a1a5-61e3c8e41dbf",
+							version = 3,
 						},
 					},
-					
-					{
-						data = 
-						{
-							aType = "ACR",
-							actionID = 16889,
-							conditions = 
-							{
-								
-								{
-									"47863a8c-75d7-6565-b926-5d0660ff5e2c",
-									true,
-								},
-								
-								{
-									"e9260165-2acb-331b-8939-84afd10ba610",
-									true,
-								},
-								
-								{
-									"0b600168-66a6-41a4-beb6-9238c1e6d2ee",
-									true,
-								},
-							},
-							endIfUsed = true,
-							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
-							name = "[LPDU] R1 Tactician - Crystallize Time Rewind",
-							uuid = "657905de-13af-e3a6-88ab-99023d165f00",
-							variableTogglesType = 2,
-							version = 2.1,
-						},
-					},
-					
-					{
-						data = 
-						{
-							aType = "ACR",
-							actionID = 16012,
-							conditions = 
-							{
-								
-								{
-									"47863a8c-75d7-6565-b926-5d0660ff5e2c",
-									true,
-								},
-								
-								{
-									"80af7271-d328-db0d-994e-f43232c16ba9",
-									true,
-								},
-								
-								{
-									"06241e47-3c9e-8761-bba9-f93e94b1bb74",
-									true,
-								},
-							},
-							endIfUsed = true,
-							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
-							name = "[LPDU] R1 Shield Samba - Crystallize Time Rewind",
-							uuid = "646c7b4a-1f4f-0ee4-88b0-92850d669c73",
-							variableTogglesType = 2,
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
 					
 					{
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
-							dequeueIfLuaFalse = true,
-							name = "R1 roster",
-							uuid = "47863a8c-75d7-6565-b926-5d0660ff5e2c",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "BARD",
-							name = "Troubadour job",
-							uuid = "1cc6c40f-8e92-05fd-9317-3508a3831b14",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 7405,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Troubadour CD",
-							uuid = "5279ed87-71aa-f251-96cc-326b1eff950c",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "MACHINIST",
-							name = "Tactician job",
-							uuid = "e9260165-2acb-331b-8939-84afd10ba610",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 16889,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Tactician CD",
-							uuid = "0b600168-66a6-41a4-beb6-9238c1e6d2ee",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "DANCER",
-							name = "Shield Samba job",
-							uuid = "80af7271-d328-db0d-994e-f43232c16ba9",
-							version = 3,
-						},
-					},
-					
-					{
-						data = 
-						{
-							actionID = 16012,
-							category = "Self",
-							comparator = 2,
-							conditionType = 4,
-							dequeueIfLuaFalse = true,
-							name = "Shield Samba CD",
-							uuid = "06241e47-3c9e-8761-bba9-f93e94b1bb74",
+							conditionLua = "local target = TensorCore.mGetTarget()\nreturn target ~= nil and target.contentid == 9832 and target.attackable == true",
+							name = "Current target is Gaia",
+							uuid = "52838417-11eb-489d-bf6e-b31133a35429",
 							version = 3,
 						},
 					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 798.9,
-				name = "[LPDU] R1 Phys Ranged - Crystallize Time Rewind",
+				name = "[LPDU] R2 Addle Crystallize Time",
 				timeRange = true,
 				timelineIndex = 179,
 				timerEndOffset = -1.5,
 				timerStartOffset = -11,
-				uuid = "76da8c46-480b-66f8-ba2e-2a1cd6fae0d6",
+				uuid = "8af95df8-3618-f0f6-95a2-7aa9241eceb6",
 				version = 2,
 			},
 		},
@@ -26697,6 +27500,257 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Mitigation",
+				uuid = "cfa825e0-c07a-0515-9f76-e88ac3fdd933",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							actionID = 7405,
+							conditions = 
+							{
+								
+								{
+									"47863a8c-75d7-6565-b926-5d0660ff5e2c",
+									true,
+								},
+								
+								{
+									"1cc6c40f-8e92-05fd-9317-3508a3831b14",
+									true,
+								},
+								
+								{
+									"5279ed87-71aa-f251-96cc-326b1eff950c",
+									true,
+								},
+								
+								{
+									"9723a960-cae5-91f3-83ab-bae96f49ef5b",
+									true,
+								},
+							},
+							endIfUsed = true,
+							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
+							name = "[LPDU] R1 Troubadour - Hallowed Wings after Crystallize Time",
+							uuid = "0961687b-f1e0-5063-8c71-6a09b308106a",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							actionID = 16889,
+							conditions = 
+							{
+								
+								{
+									"47863a8c-75d7-6565-b926-5d0660ff5e2c",
+									true,
+								},
+								
+								{
+									"e9260165-2acb-331b-8939-84afd10ba610",
+									true,
+								},
+								
+								{
+									"0b600168-66a6-41a4-beb6-9238c1e6d2ee",
+									true,
+								},
+								
+								{
+									"9723a960-cae5-91f3-83ab-bae96f49ef5b",
+									true,
+								},
+							},
+							endIfUsed = true,
+							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
+							name = "[LPDU] R1 Tactician - Hallowed Wings after Crystallize Time",
+							uuid = "657905de-13af-e3a6-88ab-99023d165f00",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							actionID = 16012,
+							conditions = 
+							{
+								
+								{
+									"47863a8c-75d7-6565-b926-5d0660ff5e2c",
+									true,
+								},
+								
+								{
+									"80af7271-d328-db0d-994e-f43232c16ba9",
+									true,
+								},
+								
+								{
+									"06241e47-3c9e-8761-bba9-f93e94b1bb74",
+									true,
+								},
+								
+								{
+									"9723a960-cae5-91f3-83ab-bae96f49ef5b",
+									true,
+								},
+							},
+							endIfUsed = true,
+							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
+							name = "[LPDU] R1 Shield Samba - Hallowed Wings after Crystallize Time",
+							uuid = "646c7b4a-1f4f-0ee4-88b0-92850d669c73",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
+							dequeueIfLuaFalse = true,
+							name = "R1 roster",
+							uuid = "47863a8c-75d7-6565-b926-5d0660ff5e2c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "Troubadour job",
+							uuid = "1cc6c40f-8e92-05fd-9317-3508a3831b14",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 7405,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							dequeueIfLuaFalse = true,
+							name = "Troubadour CD",
+							uuid = "5279ed87-71aa-f251-96cc-326b1eff950c",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "MACHINIST",
+							name = "Tactician job",
+							uuid = "e9260165-2acb-331b-8939-84afd10ba610",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 16889,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							dequeueIfLuaFalse = true,
+							name = "Tactician CD",
+							uuid = "0b600168-66a6-41a4-beb6-9238c1e6d2ee",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "DANCER",
+							name = "Shield Samba job",
+							uuid = "80af7271-d328-db0d-994e-f43232c16ba9",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							actionID = 16012,
+							category = "Self",
+							comparator = 2,
+							conditionType = 4,
+							dequeueIfLuaFalse = true,
+							name = "Shield Samba CD",
+							uuid = "06241e47-3c9e-8761-bba9-f93e94b1bb74",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 30,
+							minTargetPercent = true,
+							name = "Party within 30 yalms",
+							partyTargetNumber = 100,
+							partyTargetSubType = "Number",
+							uuid = "9723a960-cae5-91f3-83ab-bae96f49ef5b",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Mitigation",
+				mechanicTime = 839.1,
+				name = "[LPDU] R1 Phys Ranged - Hallowed Wings after Crystallize Time",
+				timeRange = true,
+				timelineIndex = 195,
+				timerEndOffset = -0.5,
+				timerStartOffset = -3,
+				uuid = "76da8c46-480b-66f8-ba2e-2a1cd6fae0d6",
+				version = 2,
+			},
+		},
 	},
 	[201] = 
 	{
@@ -27147,6 +28201,11 @@ local tbl =
 									"425c0c45-6903-f68e-95a1-5278643747b7",
 									true,
 								},
+								
+								{
+									"556ebccd-ef9f-df44-be03-b01e9c50ec02",
+									true,
+								},
 							},
 							gVar = "ACR_TensorMagnum3_Hotbar_Dismantle",
 							name = "[LPDU] Dismantle Akh Morn on Ryne",
@@ -27185,6 +28244,17 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local target = TensorCore.mGetTarget()\nreturn target ~= nil and target.contentid == 12809 and target.attackable == true",
+							name = "Current target is Ryne",
+							uuid = "556ebccd-ef9f-df44-be03-b01e9c50ec02",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 854.9,
@@ -27213,12 +28283,22 @@ local tbl =
 							{
 								
 								{
+									"4884bd45-6300-8a63-a662-038573c78e8d",
+									true,
+								},
+								
+								{
 									"af303233-021a-8a3a-b182-e716811be83f",
 									true,
 								},
 								
 								{
 									"9cad5412-1fd4-04da-ab35-d3acf0dc7b5d",
+									true,
+								},
+								
+								{
+									"55b89a61-c18f-3592-9076-491c116b8904",
 									true,
 								},
 							},
@@ -27238,7 +28318,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
 							dequeueIfLuaFalse = true,
 							name = "M2 roster",
 							uuid = "af303233-021a-8a3a-b182-e716811be83f",
@@ -27256,6 +28336,37 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							name = "Post-CT Akh Morn + Morn Afah CD",
 							uuid = "9cad5412-1fd4-04da-ab35-d3acf0dc7b5d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								20,
+								22,
+								30,
+								34,
+								39,
+								41,
+							},
+							name = "Melee DPS only",
+							uuid = "4884bd45-6300-8a63-a662-038573c78e8d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local target = TensorCore.mGetTarget()\nreturn target ~= nil and target.contentid == 12809 and target.attackable == true",
+							name = "Current target is Ryne",
+							uuid = "55b89a61-c18f-3592-9076-491c116b8904",
 							version = 3,
 						},
 					},
@@ -27300,6 +28411,11 @@ local tbl =
 									"1e7ea252-ec63-a953-bb46-486f0ddaceec",
 									true,
 								},
+								
+								{
+									"79be1391-ff51-6a55-a73e-d93a5368be7c",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
@@ -27330,6 +28446,11 @@ local tbl =
 								
 								{
 									"e78c8ad4-3e1c-69b2-8b10-804f0ad18ec5",
+									true,
+								},
+								
+								{
+									"79be1391-ff51-6a55-a73e-d93a5368be7c",
 									true,
 								},
 							},
@@ -27364,6 +28485,11 @@ local tbl =
 									"11d453a6-a026-8138-82bd-84768059c473",
 									true,
 								},
+								
+								{
+									"79be1391-ff51-6a55-a73e-d93a5368be7c",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
@@ -27381,7 +28507,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
 							name = "R2 roster",
 							uuid = "c8d77df6-ab70-2a45-947c-1e5e0d3a8a40",
@@ -27469,8 +28595,25 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 30,
+							minTargetPercent = true,
+							name = "Party within 30 yalms",
+							partyTargetNumber = 100,
+							partyTargetSubType = "Number",
+							uuid = "79be1391-ff51-6a55-a73e-d93a5368be7c",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
+				enabled = false,
 				mechanicTime = 854.9,
 				name = "[LPDU] R2 Phys Ranged - P4 Akh Morn 2 + Morn Afah",
 				timeRange = true,
@@ -29340,6 +30483,11 @@ local tbl =
 							{
 								
 								{
+									"8033e713-9eed-4fd7-82dc-da1243e8c51c",
+									true,
+								},
+								
+								{
 									"f5c82fd6-245c-7994-9de5-44bbff77f5a1",
 									true,
 								},
@@ -29365,7 +30513,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
 							dequeueIfLuaFalse = true,
 							name = "M1 roster",
 							uuid = "f5c82fd6-245c-7994-9de5-44bbff77f5a1",
@@ -29383,6 +30531,26 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							name = "Fulgent Blade CD",
 							uuid = "9a0a4f0c-3827-cbe6-a319-3521eb8897c7",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								20,
+								22,
+								30,
+								34,
+								39,
+								41,
+							},
+							name = "Melee DPS only",
+							uuid = "8033e713-9eed-4fd7-82dc-da1243e8c51c",
 							version = 3,
 						},
 					},
@@ -29427,6 +30595,11 @@ local tbl =
 									"2993f6f4-dafe-9ca3-9e77-e0dbdb9bd64b",
 									true,
 								},
+								
+								{
+									"bb78a02b-a46a-f5bd-9fce-7ed88ede38f8",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
@@ -29457,6 +30630,11 @@ local tbl =
 								
 								{
 									"7c139fd8-746c-fcb5-a03c-0ae36a88b098",
+									true,
+								},
+								
+								{
+									"bb78a02b-a46a-f5bd-9fce-7ed88ede38f8",
 									true,
 								},
 							},
@@ -29491,6 +30669,11 @@ local tbl =
 									"67fd696b-f383-6803-b069-f62fcf91d52d",
 									true,
 								},
+								
+								{
+									"bb78a02b-a46a-f5bd-9fce-7ed88ede38f8",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
@@ -29508,7 +30691,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
 							dequeueIfLuaFalse = true,
 							name = "R1 roster",
 							uuid = "06675785-757d-eca5-b50a-fdc7b2a6932f",
@@ -29593,6 +30776,22 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							name = "Shield Samba CD",
 							uuid = "67fd696b-f383-6803-b069-f62fcf91d52d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 30,
+							minTargetPercent = true,
+							name = "Party within 30 yalms",
+							partyTargetNumber = 100,
+							partyTargetSubType = "Number",
+							uuid = "bb78a02b-a46a-f5bd-9fce-7ed88ede38f8",
 							version = 3,
 						},
 					},
@@ -29892,6 +31091,11 @@ local tbl =
 							{
 								
 								{
+									"f2f29631-457c-cded-8444-2887729cdf69",
+									true,
+								},
+								
+								{
 									"141f1b6c-93a8-4585-a589-7d0007f43aad",
 									true,
 								},
@@ -29902,7 +31106,7 @@ local tbl =
 								},
 							},
 							gVar = "ACR_RikuPCT3_Hotbar_Addle",
-							name = "[LPDU] R1 Addle P5 Akh Morn 1",
+							name = "[LPDU] R2 Addle P5 Akh Morn 1",
 							targetType = "Enemy",
 							uuid = "8b3d234a-4c44-7101-bb76-06749a2642d5",
 							variableTogglesType = 2,
@@ -29917,9 +31121,9 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
-							name = "R1 roster",
+							name = "R2 roster",
 							uuid = "141f1b6c-93a8-4585-a589-7d0007f43aad",
 							version = 3,
 						},
@@ -29938,10 +31142,28 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								25,
+								27,
+								35,
+								42,
+							},
+							name = "Caster DPS only",
+							uuid = "f2f29631-457c-cded-8444-2887729cdf69",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 1011.4,
-				name = "[LPDU] R1 Addle P5 Akh Morn 1",
+				name = "[LPDU] R2 Addle P5 Akh Morn 1",
 				timeRange = true,
 				timelineIndex = 215,
 				timerEndOffset = -1.5,
@@ -29979,6 +31201,11 @@ local tbl =
 									"d3a84a15-31c5-96c6-919d-5037d9f3fa95",
 									true,
 								},
+								
+								{
+									"dedd397f-0713-94d1-a764-289cfdc24e4c",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
@@ -30009,6 +31236,11 @@ local tbl =
 								
 								{
 									"57dc52fd-a2f1-6cbf-a4b1-43f2acabbfd6",
+									true,
+								},
+								
+								{
+									"dedd397f-0713-94d1-a764-289cfdc24e4c",
 									true,
 								},
 							},
@@ -30043,6 +31275,11 @@ local tbl =
 									"631d609e-c6ca-c392-b607-e1f6db1c9bba",
 									true,
 								},
+								
+								{
+									"dedd397f-0713-94d1-a764-289cfdc24e4c",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
@@ -30060,7 +31297,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
 							name = "R2 roster",
 							uuid = "03df86a7-454b-d15f-8974-bef6f3465abb",
@@ -30148,8 +31385,25 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 30,
+							minTargetPercent = true,
+							name = "Party within 30 yalms",
+							partyTargetNumber = 100,
+							partyTargetSubType = "Number",
+							uuid = "dedd397f-0713-94d1-a764-289cfdc24e4c",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
+				enabled = false,
 				mechanicTime = 1011.4,
 				name = "[LPDU] R2 Phys Ranged - P5 Akh Morn 1",
 				timeRange = true,
@@ -30174,6 +31428,11 @@ local tbl =
 							actionID = 7549,
 							conditions = 
 							{
+								
+								{
+									"10666e40-96f3-e73f-8382-15c6e6cb7799",
+									true,
+								},
 								
 								{
 									"9b985e35-4754-cb45-9270-293bd476cb11",
@@ -30201,7 +31460,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
 							dequeueIfLuaFalse = true,
 							name = "M2 roster",
 							uuid = "9b985e35-4754-cb45-9270-293bd476cb11",
@@ -30219,6 +31478,26 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							name = "P5 Akh Morn 1 CD",
 							uuid = "f826f00c-9c5d-da28-a02b-83cf3a349404",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								20,
+								22,
+								30,
+								34,
+								39,
+								41,
+							},
+							name = "Melee DPS only",
+							uuid = "10666e40-96f3-e73f-8382-15c6e6cb7799",
 							version = 3,
 						},
 					},
@@ -32831,6 +34110,11 @@ local tbl =
 							{
 								
 								{
+									"c04895f5-5c48-5521-bf84-0beb0fb3f750",
+									true,
+								},
+								
+								{
 									"e953ab12-9ef1-27bd-9ace-39cca9e181f2",
 									true,
 								},
@@ -32856,7 +34140,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
 							name = "R2 roster",
 							uuid = "e953ab12-9ef1-27bd-9ace-39cca9e181f2",
@@ -32877,8 +34161,27 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								25,
+								27,
+								35,
+								42,
+							},
+							name = "Caster DPS only",
+							uuid = "c04895f5-5c48-5521-bf84-0beb0fb3f750",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
+				enabled = false,
 				mechanicTime = 1051.2,
 				name = "[LPDU] R2 Addle 2 Polarizing Strikes 1",
 				timeRange = true,
@@ -33412,16 +34715,13 @@ local tbl =
 				version = 2,
 			},
 		},
-	},
-	[237] = 
-	{
 		
 		{
 			data = 
 			{
 				displayPath = "",
 				name = "LPDU Mitigation",
-				uuid = "2afb5c36-28c2-0228-8472-bae7fc63d6af",
+				uuid = "b6a45133-47ef-12f1-913d-f8bd1a03c8f9",
 			},
 			objectType = "folder",
 		},
@@ -33441,6 +34741,11 @@ local tbl =
 							{
 								
 								{
+									"8b6efd00-5f3b-8cc0-9c5a-633c50421071",
+									true,
+								},
+								
+								{
 									"88ded3d5-c27e-dcc5-9759-23ae0e893c6c",
 									true,
 								},
@@ -33449,9 +34754,14 @@ local tbl =
 									"3868c66b-49c5-b96d-b5b8-b861abeb5a72",
 									true,
 								},
+								
+								{
+									"0b236ba5-f818-28e7-a53a-2293d9a625eb",
+									true,
+								},
 							},
 							gVar = "ACR_RikuMNK3_Hotbar_Feint",
-							name = "[LPDU] M1 Feint Fulgent Blade",
+							name = "[LPDU] M1 Feint Pandora's Box + Fulgent Blade 2",
 							targetType = "Enemy",
 							uuid = "e17792fb-fc3e-6e4c-be6a-63a06220b3ac",
 							variableTogglesType = 2,
@@ -33466,7 +34776,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
 							dequeueIfLuaFalse = true,
 							name = "M1 roster",
 							uuid = "88ded3d5-c27e-dcc5-9759-23ae0e893c6c",
@@ -33487,17 +34797,61 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								20,
+								22,
+								30,
+								34,
+								39,
+								41,
+							},
+							name = "Melee DPS only",
+							uuid = "8b6efd00-5f3b-8cc0-9c5a-633c50421071",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local target = TensorCore.mGetTarget()\nreturn target ~= nil and target.contentid == 13561 and target.attackable == true",
+							name = "Current target is Pandora",
+							uuid = "0b236ba5-f818-28e7-a53a-2293d9a625eb",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
-				mechanicTime = 1097.4,
-				name = "[LPDU] M1 Feint Fulgent Blade",
+				mechanicTime = 1085.2,
+				name = "[LPDU] M1 Feint Pandora's Box + Fulgent Blade 2",
 				timeRange = true,
-				timelineIndex = 237,
-				timerEndOffset = -1.5,
-				timerStartOffset = -11,
+				timelineIndex = 236,
+				timerEndOffset = -0.7,
+				timerStartOffset = -2.2,
 				uuid = "1e270d7b-a2f7-83e7-97c8-f485491cb50e",
 				version = 2,
 			},
+		},
+	},
+	[237] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Mitigation",
+				uuid = "2afb5c36-28c2-0228-8472-bae7fc63d6af",
+			},
+			objectType = "folder",
 		},
 		
 		{
@@ -33526,6 +34880,11 @@ local tbl =
 								
 								{
 									"a7de15e4-a51b-1b57-b98f-eff6df4bcb88",
+									true,
+								},
+								
+								{
+									"873b298e-4522-6ccd-bc3e-015157720f24",
 									true,
 								},
 							},
@@ -33560,6 +34919,11 @@ local tbl =
 									"e182ec5a-3ca3-ce8f-985e-7034e0edcabb",
 									true,
 								},
+								
+								{
+									"873b298e-4522-6ccd-bc3e-015157720f24",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_TensorMagnum3_Hotbar_Tactician",
@@ -33592,6 +34956,11 @@ local tbl =
 									"3275f4da-6795-fa27-adf4-9c08c9448b04",
 									true,
 								},
+								
+								{
+									"873b298e-4522-6ccd-bc3e-015157720f24",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
@@ -33609,7 +34978,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
 							dequeueIfLuaFalse = true,
 							name = "R1 roster",
 							uuid = "b8fb1bd6-0c29-1890-b08a-a23f597f49fe",
@@ -33697,13 +35066,29 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 30,
+							minTargetPercent = true,
+							name = "Party within 30 yalms",
+							partyTargetNumber = 100,
+							partyTargetSubType = "Number",
+							uuid = "873b298e-4522-6ccd-bc3e-015157720f24",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 1097.4,
 				name = "[LPDU] R1 Phys Ranged - Fulgent Blade 2",
 				timeRange = true,
 				timelineIndex = 237,
-				timerEndOffset = -1.5,
+				timerEndOffset = -3,
 				timerStartOffset = -11,
 				uuid = "8abfdac6-d816-309a-90b8-00c3704cec34",
 				version = 2,
@@ -33738,6 +35123,11 @@ local tbl =
 							{
 								
 								{
+									"707858db-08c4-a451-a6d2-301a3b2e9dd0",
+									true,
+								},
+								
+								{
 									"323097d1-37e2-697b-88e7-748affacd7ae",
 									true,
 								},
@@ -33748,7 +35138,7 @@ local tbl =
 								},
 							},
 							gVar = "ACR_RikuPCT3_Hotbar_Addle",
-							name = "[LPDU] R1 Addle P5 Akh Morn 2",
+							name = "[LPDU] R2 Addle P5 Akh Morn 2",
 							targetType = "Enemy",
 							uuid = "488e224b-afcc-72d4-8d86-abed7b459098",
 							variableTogglesType = 2,
@@ -33763,9 +35153,9 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
-							name = "R1 roster",
+							name = "R2 roster",
 							uuid = "323097d1-37e2-697b-88e7-748affacd7ae",
 							version = 3,
 						},
@@ -33784,13 +35174,31 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								25,
+								27,
+								35,
+								42,
+							},
+							name = "Caster DPS only",
+							uuid = "707858db-08c4-a451-a6d2-301a3b2e9dd0",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 1124,
-				name = "[LPDU] R1 Addle P5 Akh Morn 2",
+				name = "[LPDU] R2 Addle P5 Akh Morn 2",
 				timeRange = true,
 				timelineIndex = 243,
-				timerEndOffset = -1.5,
+				timerEndOffset = -3,
 				timerStartOffset = -11,
 				uuid = "886ce008-a0b6-c874-877a-14f2e088ed7f",
 				version = 2,
@@ -33825,6 +35233,11 @@ local tbl =
 									"0bdba138-90de-e8d6-926d-d4673a403dff",
 									true,
 								},
+								
+								{
+									"d87aa89f-e439-26e3-b07c-4bd5732ef58a",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
@@ -33855,6 +35268,11 @@ local tbl =
 								
 								{
 									"f0259d91-9e3f-dfb7-a7bf-c55e70d97c8d",
+									true,
+								},
+								
+								{
+									"d87aa89f-e439-26e3-b07c-4bd5732ef58a",
 									true,
 								},
 							},
@@ -33889,6 +35307,11 @@ local tbl =
 									"e9032b5d-032e-34df-9dd9-89448b3303ba",
 									true,
 								},
+								
+								{
+									"d87aa89f-e439-26e3-b07c-4bd5732ef58a",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
@@ -33906,7 +35329,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
 							name = "R2 roster",
 							uuid = "77bb7d86-4881-9ac3-bafe-4483ef0bcf5a",
@@ -33994,8 +35417,25 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 30,
+							minTargetPercent = true,
+							name = "Party within 30 yalms",
+							partyTargetNumber = 100,
+							partyTargetSubType = "Number",
+							uuid = "d87aa89f-e439-26e3-b07c-4bd5732ef58a",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
+				enabled = false,
 				mechanicTime = 1124,
 				name = "[LPDU] R2 Phys Ranged - P5 Akh Morn 2",
 				timeRange = true,
@@ -34093,6 +35533,11 @@ local tbl =
 							{
 								
 								{
+									"e3b52bc4-702d-e447-aedf-fa38b873d726",
+									true,
+								},
+								
+								{
 									"f12a8ccb-b3bb-86d5-801d-76e8374d8a6b",
 									true,
 								},
@@ -34118,7 +35563,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
 							dequeueIfLuaFalse = true,
 							name = "M2 roster",
 							uuid = "f12a8ccb-b3bb-86d5-801d-76e8374d8a6b",
@@ -34139,13 +35584,33 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								20,
+								22,
+								30,
+								34,
+								39,
+								41,
+							},
+							name = "Melee DPS only",
+							uuid = "e3b52bc4-702d-e447-aedf-fa38b873d726",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 1124,
 				name = "[LPDU] M2 Feint P5 Akh Morn 2",
 				timeRange = true,
 				timelineIndex = 243,
-				timerEndOffset = -1.5,
+				timerEndOffset = -3,
 				timerStartOffset = -11,
 				uuid = "290f2403-fa64-a2ff-9174-a847a5feea27",
 				version = 2,
@@ -36384,6 +37849,11 @@ local tbl =
 							{
 								
 								{
+									"438e5ad3-02c9-4cc1-82d5-d79c00e2fc16",
+									true,
+								},
+								
+								{
 									"e4965351-ddc4-ffa2-bfce-5b1017336512",
 									true,
 								},
@@ -36409,7 +37879,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
 							name = "R2 roster",
 							uuid = "e4965351-ddc4-ffa2-bfce-5b1017336512",
@@ -36430,8 +37900,27 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								25,
+								27,
+								35,
+								42,
+							},
+							name = "Caster DPS only",
+							uuid = "438e5ad3-02c9-4cc1-82d5-d79c00e2fc16",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
+				enabled = false,
 				mechanicTime = 1162.6,
 				name = "[LPDU] R2 Addle 2 Polarizing Strikes 2",
 				timeRange = true,
@@ -36891,6 +38380,11 @@ local tbl =
 							{
 								
 								{
+									"5d930e87-a9fc-5f53-9fc3-98d487162829",
+									true,
+								},
+								
+								{
 									"1922dbd6-fb92-0cee-8e02-a8302228bf17",
 									true,
 								},
@@ -36916,7 +38410,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"M1\"",
 							dequeueIfLuaFalse = true,
 							name = "M1 roster",
 							uuid = "1922dbd6-fb92-0cee-8e02-a8302228bf17",
@@ -36934,6 +38428,26 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							name = "Fulgent Blade CD",
 							uuid = "dd83d48e-9c76-a310-9a8f-823e9b25d526",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								20,
+								22,
+								30,
+								34,
+								39,
+								41,
+							},
+							name = "Melee DPS only",
+							uuid = "5d930e87-a9fc-5f53-9fc3-98d487162829",
 							version = 3,
 						},
 					},
@@ -36978,6 +38492,11 @@ local tbl =
 									"08b16faa-be00-802e-b4ae-71473909e84a",
 									true,
 								},
+								
+								{
+									"e810eb6b-2765-f856-94bc-a0fa6fbed018",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
@@ -37008,6 +38527,11 @@ local tbl =
 								
 								{
 									"1d10904c-29d8-0182-89f0-e085d938d297",
+									true,
+								},
+								
+								{
+									"e810eb6b-2765-f856-94bc-a0fa6fbed018",
 									true,
 								},
 							},
@@ -37042,6 +38566,11 @@ local tbl =
 									"c3c49ff2-1753-729c-96e3-dcbcd4b879de",
 									true,
 								},
+								
+								{
+									"e810eb6b-2765-f856-94bc-a0fa6fbed018",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
@@ -37059,7 +38588,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
 							dequeueIfLuaFalse = true,
 							name = "R1 roster",
 							uuid = "e140c3cb-fde2-b573-b264-73d9c2aa106d",
@@ -37144,6 +38673,22 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							name = "Shield Samba CD",
 							uuid = "c3c49ff2-1753-729c-96e3-dcbcd4b879de",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 30,
+							minTargetPercent = true,
+							name = "Party within 30 yalms",
+							partyTargetNumber = 100,
+							partyTargetSubType = "Number",
+							uuid = "e810eb6b-2765-f856-94bc-a0fa6fbed018",
 							version = 3,
 						},
 					},
@@ -37645,6 +39190,11 @@ local tbl =
 							{
 								
 								{
+									"d30e93b3-99e5-ff5f-af61-3b7794edb21c",
+									true,
+								},
+								
+								{
 									"f9770824-0bc5-49a9-bb4b-83ebde86f9f4",
 									true,
 								},
@@ -37655,7 +39205,7 @@ local tbl =
 								},
 							},
 							gVar = "ACR_RikuPCT3_Hotbar_Addle",
-							name = "[LPDU] R1 Addle P5 Akh Morn 3",
+							name = "[LPDU] R2 Addle P5 Akh Morn 3",
 							targetType = "Enemy",
 							uuid = "842b758a-9d7c-02ce-a6e3-8e505e7437cb",
 							variableTogglesType = 2,
@@ -37670,9 +39220,9 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R1\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
-							name = "R1 roster",
+							name = "R2 roster",
 							uuid = "f9770824-0bc5-49a9-bb4b-83ebde86f9f4",
 							version = 3,
 						},
@@ -37691,10 +39241,28 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								25,
+								27,
+								35,
+								42,
+							},
+							name = "Caster DPS only",
+							uuid = "d30e93b3-99e5-ff5f-af61-3b7794edb21c",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
 				mechanicTime = 1214.2,
-				name = "[LPDU] R1 Addle P5 Akh Morn 3",
+				name = "[LPDU] R2 Addle P5 Akh Morn 3",
 				timeRange = true,
 				timelineIndex = 268,
 				timerEndOffset = -1.5,
@@ -37732,6 +39300,11 @@ local tbl =
 									"9185a0d5-a5a6-4b03-b099-42da822539ca",
 									true,
 								},
+								
+								{
+									"789ee338-76c5-9afb-8e83-5467c9b62a79",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_TensorRequiem3_Hotbar_Troubadour",
@@ -37762,6 +39335,11 @@ local tbl =
 								
 								{
 									"e5c01194-bd35-e694-b8ff-5243602ac689",
+									true,
+								},
+								
+								{
+									"789ee338-76c5-9afb-8e83-5467c9b62a79",
 									true,
 								},
 							},
@@ -37796,6 +39374,11 @@ local tbl =
 									"89f13ee0-81bb-d4b3-a9e9-7a988ea32709",
 									true,
 								},
+								
+								{
+									"789ee338-76c5-9afb-8e83-5467c9b62a79",
+									true,
+								},
 							},
 							endIfUsed = true,
 							gVar = "ACR_RikuDNC3_Hotbar_ShieldSamba",
@@ -37813,7 +39396,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"R2\"",
 							dequeueIfLuaFalse = true,
 							name = "R2 roster",
 							uuid = "84980a04-d1b2-b436-832d-8ebfdb9ba415",
@@ -37901,8 +39484,25 @@ local tbl =
 							version = 3,
 						},
 					},
+					
+					{
+						data = 
+						{
+							category = "Party",
+							comparator = 2,
+							conditionType = 4,
+							inRangeValue = 30,
+							minTargetPercent = true,
+							name = "Party within 30 yalms",
+							partyTargetNumber = 100,
+							partyTargetSubType = "Number",
+							uuid = "789ee338-76c5-9afb-8e83-5467c9b62a79",
+							version = 3,
+						},
+					},
 				},
 				displayPath = "LPDU Mitigation",
+				enabled = false,
 				mechanicTime = 1214.2,
 				name = "[LPDU] R2 Phys Ranged - P5 Akh Morn 3",
 				timeRange = true,
@@ -37927,6 +39527,11 @@ local tbl =
 							actionID = 7549,
 							conditions = 
 							{
+								
+								{
+									"27f6b1a1-bafe-9d2d-bb31-4d8e70fba6c0",
+									true,
+								},
 								
 								{
 									"06a0a777-8a69-8b81-9e55-0b5fb5fdf97d",
@@ -37954,7 +39559,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "local roster = AnyoneCore.Roster\nif not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
+							conditionLua = "local roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() then return false end\nreturn roster.mySlot() == \"M2\"",
 							dequeueIfLuaFalse = true,
 							name = "M2 roster",
 							uuid = "06a0a777-8a69-8b81-9e55-0b5fb5fdf97d",
@@ -37972,6 +39577,26 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							name = "P5 Akh Morn 3 CD",
 							uuid = "60825b6c-5eea-623b-9a91-ff9407bccfea",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							jobIDList = 
+							{
+								20,
+								22,
+								30,
+								34,
+								39,
+								41,
+							},
+							name = "Melee DPS only",
+							uuid = "27f6b1a1-bafe-9d2d-bb31-4d8e70fba6c0",
 							version = 3,
 						},
 					},
