@@ -274,6 +274,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UCOB: LPDU
 
+- Quickmarch and both Tenstrike Earthshaker waves show only your cone, green when clear or red when it clips a teammate. (19-11-2026)
+
 - The first Adds quote shows player-attached In and Out countdowns in sequence. (19-11-2026)
 
 - Grand Octet now previews your Twister bait near the towers and marks actual Twister spawns. (19-11-2026)
@@ -291,8 +293,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Golden Bahamut settings now offer Exaflares or Subtractive draws. Subtractive shades the arena green and cuts out only the current blast in each active lane. (19-11-2026)
 
 - Morn Afah calls “Stack” at cast start and shows a countdown over the stack target. (19-11-2026)
-
-- Both Adds quotes show a player-attached countdown when spread is next. (19-11-2026)
 
 ### UCOB: ACR3 Optimization
 

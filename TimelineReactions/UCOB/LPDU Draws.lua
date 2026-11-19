@@ -10565,6 +10565,20 @@ local tbl =
 		{
 			data = 
 			{
+				name = "Draw Earth Shakers",
+				uuid = "eba79dd8-483d-df96-bd3d-58d503576f8b",
+				version = 2,
+			},
+			inheritedObjectUUID = "8c99bca0-cb0d-70de-b2e4-4d978aa25ca0",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "LPDU Personal Guidance",
 				uuid = "35ebc967-99b0-66aa-9b61-58603a1ee89e",
@@ -10709,6 +10723,40 @@ local tbl =
 				timerEndOffset = 1.5,
 				timerStartOffset = -2,
 				uuid = "e049ddb6-a208-d2ec-b307-8d31e2b05cdc",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player=TensorCore.mGetPlayer()\nif not player or not player.alive or not player.pos then return end\nlocal state=data.ucobQuickmarch\nif not state or state.shakersDone or not state.shakers[player.id] then return end\nlocal roster=AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() or not roster.isReady() then return end\nlocal now=Now()\nlocal source=state.coneSource and TensorCore.mGetEntity(state.coneSource)\nif not source and now>=(state.nextConeSourceCheck or 0) then\n state.nextConeSourceCheck=now+150\n for _,entity in pairs(TensorCore.getEntityGroupList(\"ContentID\",3210) or {}) do\n  if entity.pos and Argus.getEntityModel(entity)==8168 then\n   source=entity\n   state.coneSource=entity.id\n   break\n  end\n end\nend\nif not source or not source.pos then return end\nlocal origin=source.pos\nlocal dx,dz=player.pos.x-origin.x,player.pos.z-origin.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nif distance<0.1 then return end\nlocal fx,fz=dx/distance,dz/distance\nlocal clips=false\nfor _,slot in ipairs({\"T1\",\"T2\",\"H1\",\"H2\",\"M1\",\"M2\",\"R1\",\"R2\"}) do\n local member=roster.entOf(slot)\n if member and member.id~=player.id and member.alive and member.pos then\n  local x,z=member.pos.x-origin.x,member.pos.z-origin.z\n  local lengthSquared=x*x+z*z\n  local forward=x*fx+z*fz\n  if lengthSquared<=60^2 and forward>=0 and forward*forward>=lengthSquared*0.5 then\n   clips=true\n   break\n  end\n end\nend\nlocal color=clips and 0x660000FF or 0x6600FF00\nlocal drawer=TensorCore.getStaticDrawer(color,2)\ndrawer:addCone(origin.x,origin.y,origin.z,60,math.pi/2,TensorCore.getHeadingToTarget(origin,player.pos),false,Argus2.RenderFlags.FLAG_WARP_TERRAIN+Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nself.used=true",
+							name = "Color own cone by party overlap",
+							uuid = "7c2aac0d-0833-3a66-b82a-64cc572a177b",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 550,
+				name = "[LPDU] Quickmarch - Personal Earthshaker cone",
+				timeRange = true,
+				timelineIndex = 97,
+				timerEndOffset = 1.5,
+				timerStartOffset = -6,
+				uuid = "43acc10e-b6a5-def4-bb3c-8df22b69a997",
 				version = 2,
 			},
 		},
@@ -15755,6 +15803,40 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local player=TensorCore.mGetPlayer()\nif not player or not player.alive or not player.pos then return end\nlocal state=data.ucobTenShakerAlert\nlocal wave=state and state.waves[state.current]\nif not wave or state.finished or Now()>=state.expires or not wave.targets[player.id] then return end\nlocal roster=AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() or not roster.isReady() then return end\nlocal now=Now()\nlocal source=state.coneSource and TensorCore.mGetEntity(state.coneSource)\nif not source and now>=(state.nextConeSourceCheck or 0) then\n state.nextConeSourceCheck=now+150\n for _,entity in pairs(TensorCore.getEntityGroupList(\"ContentID\",3210) or {}) do\n  if entity.pos and Argus.getEntityModel(entity)==8168 then\n   source=entity\n   state.coneSource=entity.id\n   break\n  end\n end\nend\nif not source or not source.pos then return end\nlocal origin=source.pos\nlocal dx,dz=player.pos.x-origin.x,player.pos.z-origin.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nif distance<0.1 then return end\nlocal fx,fz=dx/distance,dz/distance\nlocal clips=false\nfor _,slot in ipairs({\"T1\",\"T2\",\"H1\",\"H2\",\"M1\",\"M2\",\"R1\",\"R2\"}) do\n local member=roster.entOf(slot)\n if member and member.id~=player.id and member.alive and member.pos then\n  local x,z=member.pos.x-origin.x,member.pos.z-origin.z\n  local lengthSquared=x*x+z*z\n  local forward=x*fx+z*fz\n  if lengthSquared<=60^2 and forward>=0 and forward*forward>=lengthSquared*0.5 then\n   clips=true\n   break\n  end\n end\nend\nlocal color=clips and 0x660000FF or 0x6600FF00\nlocal drawer=TensorCore.getStaticDrawer(color,2)\ndrawer:addCone(origin.x,origin.y,origin.z,60,math.pi/2,TensorCore.getHeadingToTarget(origin,player.pos),false,Argus2.RenderFlags.FLAG_WARP_TERRAIN+Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nself.used=true",
+							name = "Color own cone by party overlap",
+							uuid = "f3dc9dbc-5a04-3559-8516-e83b4375c180",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 754.4,
+				name = "[LPDU] Tenstrike - Personal Earthshaker cone",
+				timeRange = true,
+				timelineIndex = 147,
+				timerEndOffset = 8,
+				timerStartOffset = -7,
+				uuid = "11f13fc7-5f0d-4c96-bd41-73789918c9cb",
+				version = 2,
+			},
+		},
 	},
 	[148] = 
 	{
@@ -15768,6 +15850,20 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\ucob\\universal",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "Draw Earth Shakers",
+				uuid = "99df006f-a758-8415-a896-894a1fb0e2f1",
+				version = 2,
+			},
+			inheritedObjectUUID = "638abeca-3557-dfd9-aaa7-c840755828c1",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
 		},
 	},
 	[150] = 
