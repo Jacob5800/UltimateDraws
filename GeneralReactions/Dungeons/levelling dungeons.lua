@@ -2002,6 +2002,139 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "The Skydeep Cenote/Maulskull",
+			eventType = 3,
+			execute = "if eventArgs.spellID~=36677 or eventArgs.channelTimeMax<=0 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1194 or not p.alive then return end\ndata.maulskullImpact=Now()+eventArgs.channelTimeMax*1000",
+			executeType = 2,
+			name = "Skullcrush - schedule knockback immunity",
+			uuid = "580273fe-25b3-b54b-854e-6ff87ebd6815",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "The Skydeep Cenote/Maulskull",
+			eventType = 3,
+			execute = "if eventArgs.spellID~=36667 or eventArgs.channelTimeMax<=0 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1194 or not p.alive then return end\ndata.maulskullImpact=Now()+eventArgs.channelTimeMax*1000",
+			executeType = 2,
+			name = "Ringing Blows - schedule knockback immunity",
+			uuid = "ad481e17-38e4-4c98-a77b-ec3f398a8d7f",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "The Skydeep Cenote/Maulskull",
+			eventType = 3,
+			execute = "if eventArgs.spellID~=36707 or eventArgs.channelTimeMax<=0 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1194 or not p.alive then return end\ndata.maulskullImpact=Now()+eventArgs.channelTimeMax*1000",
+			executeType = 2,
+			name = "Colossal Impact - schedule knockback immunity",
+			uuid = "9c2b76fb-f615-12f4-8b6a-459f92f94cd1",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "The Skydeep Cenote/Maulskull",
+			execute = "local at=data.maulskullImpact\nlocal owned=LevellingMaulskullKB\nif not at and not owned then return end\nlocal p=TensorCore.mGetPlayer()\nlocal now=Now()\nif not at or now>at+750 or not p or p.localmapid~=1194 or not p.alive or not p.incombat or (owned and owned.job~=p.job) then\nlocal owned=LevellingMaulskullKB\nif owned then\n if owned.hotbar then _G[owned.hotbar]=false end\n if owned.toggle then _G[owned.toggle]=false end\n LevellingMaulskullKB=nil\nend\n data.maulskullImpact=nil\n return\nend\nlocal remaining=at-now\nif remaining>2600 or remaining<=0 then return end\nlocal api=TensorCore.API.TensorACR\nif TensorCore.hasBuff(p.id,1209) or TensorCore.hasBuff(p.id,160) then return end\nif owned and owned.toggle then return end\nlocal hotbar\nfor _,option in ipairs(api.getHotbarToggles() or {}) do\n if option.id==7548 and option.enabled~=false and type(option.var)=='string' then hotbar=option;break end\nend\nlocal action=hotbar and ActionList:Get(1,7548)\nif action and not action.isoncd and remaining>=450 then\n if _G[hotbar.var]~=true then\n  LevellingMaulskullKB={hotbar=hotbar.var,job=p.job}\n  _G[hotbar.var]=true\n end\n return\nend\nlocal cooldown=action and action.isoncd and action.cdmax-action.cd or 0\nif remaining>800 and action and cooldown<=remaining/1000-.45 then return end\nfor _,option in ipairs(api.getQuickToggles() or {}) do\n local var=option.var\n if option.enabled and type(var)=='string' and var:match('_KBCancel$') then\n  if _G[var]==false then\n   owned=LevellingMaulskullKB or {job=p.job}\n   if owned.hotbar then _G[owned.hotbar]=false;owned.hotbar=nil end\n   owned.toggle=var\n   LevellingMaulskullKB=owned\n   _G[var]=true\n  end\n  return\n end\nend",
+			executeType = 2,
+			name = "Maulskull - Arm's Length or KB Cancel",
+			throttleTime = 100,
+			uuid = "c427072b-fab6-8e66-99a7-c7f074e56f8a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "The Skydeep Cenote/Maulskull",
+			eventType = 9,
+			execute = "local owned=LevellingMaulskullKB\nif owned then\n if owned.hotbar then _G[owned.hotbar]=false end\n if owned.toggle then _G[owned.toggle]=false end\n LevellingMaulskullKB=nil\nend\ndata.maulskullImpact=nil",
+			executeType = 2,
+			name = "Maulskull - restore KB controls on wipe",
+			uuid = "03a59919-32cb-4d2f-b489-d69284cefe19",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "The Skydeep Cenote/Maulskull",
+			eventType = 11,
+			execute = "local owned=LevellingMaulskullKB\nif owned then\n if owned.hotbar then _G[owned.hotbar]=false end\n if owned.toggle then _G[owned.toggle]=false end\n LevellingMaulskullKB=nil\nend\ndata.maulskullImpact=nil",
+			executeType = 2,
+			name = "Maulskull - restore KB controls on mapchange",
+			uuid = "523c8f41-15d2-ade1-b98e-bd39c614f16f",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "The Skydeep Cenote/Maulskull",
+			eventType = 10,
+			execute = "local owned=LevellingMaulskullKB\nif owned then\n if owned.hotbar then _G[owned.hotbar]=false end\n if owned.toggle then _G[owned.toggle]=false end\n LevellingMaulskullKB=nil\nend\ndata.maulskullImpact=nil",
+			executeType = 2,
+			name = "Maulskull - restore KB controls on death",
+			uuid = "8799f610-d509-084c-9f16-d4005b8fa58e",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "",
 			name = "Vanguard",
 			uuid = "40575532-fa79-dc43-b4e5-011909b9768b",

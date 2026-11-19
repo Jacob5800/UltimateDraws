@@ -118,6 +118,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Dungeons: Shared AutoSim
 
+- Added Arm's Length requests and temporary KB Cancel fallback for Maulskull's knockbacks in The Skydeep Cenote. (19-11-2026)
+
 - Added a sampled 132.2-second kill estimate and a Bubble Bomb dodge window for Feather Ray. (19-11-2026)
 
 - Added automatic party-safe facing for Feather Ray Nuisance and green safe spots for Bubble Bomb Burst in The Skydeep Cenote. (19-11-2026)
