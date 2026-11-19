@@ -274,6 +274,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UCOB: LPDU
 
+- Both Adds quotes show a player-attached countdown when spread is next. (19-11-2026)
+
 - Heavensfall hides the personal arrow when its path crosses a locked dive lane. (19-11-2026)
 
 - Grand Octet starts the rim route as soon as Nael locks Lunar Dive. Later bait locks still guide you back to middle, and Twintania bait guidance retains priority. (19-11-2026)

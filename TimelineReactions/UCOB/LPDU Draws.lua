@@ -17254,7 +17254,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.ucobAddsQuote174\nif s and s.seq[s.step]==eventArgs.spellID then\n s.step=s.step+1\n if s.seq[s.step]==9918 then\n  local p=TensorCore.mGetPlayer()\n  if p then\n   AnyoneCore.addWorldTextCountdown(3100,setmetatable({entityID=p.id},{__index=function(t,k)\n    local e=TensorCore.mGetEntity(t.entityID)\n    if not e then return 0 end\n    if k=='x' then return e.pos.x elseif k=='y' then return e.pos.y+1 elseif k=='z' then return e.pos.z end\n   end}),0xFFFFFFFF,true,1.2)\n  end\n end\n if s.step>#s.seq then data.ucobAddsQuote174=nil end\nend\nself.used=true",
+							actionLua = "local s=data.ucobAddsQuote174\nif s and s.seq[s.step]==eventArgs.spellID then\n if eventArgs.spellID==9918 and s.spreadCountdown then\n  AnyoneCore.removeTimedWorldText(s.spreadCountdown)\n  s.spreadCountdown=nil\n end\n s.step=s.step+1\n if s.seq[s.step]==9918 then\n  local player=TensorCore.mGetPlayer()\n  if player and player.alive then\n   s.spreadCountdown=AnyoneCore.addWorldTextCountdownOnEnt(3100,player.id,0xFFFFFFFF,true,1.2,1.8,0,\"Spread \")\n  end\n end\n if s.step>#s.seq then data.ucobAddsQuote174=nil end\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -18308,7 +18308,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.ucobAddsQuote184\nif s and s.seq[s.step]==eventArgs.spellID then\n s.step=s.step+1\n if s.seq[s.step]==9918 then\n  local p=TensorCore.mGetPlayer()\n  if p then\n   AnyoneCore.addWorldTextCountdown(3100,setmetatable({entityID=p.id},{__index=function(t,k)\n    local e=TensorCore.mGetEntity(t.entityID)\n    if not e then return 0 end\n    if k=='x' then return e.pos.x elseif k=='y' then return e.pos.y+1 elseif k=='z' then return e.pos.z end\n   end}),0xFFFFFFFF,true,1.2)\n  end\n end\n if s.step>#s.seq then data.ucobAddsQuote184=nil end\nend\nself.used=true",
+							actionLua = "local s=data.ucobAddsQuote184\nif s and s.seq[s.step]==eventArgs.spellID then\n if eventArgs.spellID==9918 and s.spreadCountdown then\n  AnyoneCore.removeTimedWorldText(s.spreadCountdown)\n  s.spreadCountdown=nil\n end\n s.step=s.step+1\n if s.seq[s.step]==9918 then\n  local player=TensorCore.mGetPlayer()\n  if player and player.alive then\n   s.spreadCountdown=AnyoneCore.addWorldTextCountdownOnEnt(3100,player.id,0xFFFFFFFF,true,1.2,1.8,0,\"Spread \")\n  end\n end\n if s.step>#s.seq then data.ucobAddsQuote184=nil end\nend\nself.used=true",
 							conditions = 
 							{
 								
