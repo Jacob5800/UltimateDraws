@@ -234,6 +234,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### TOP: LPDU
 
+- Program Loop tower countdowns track tower hits and refine upcoming timings after each wave. (19-11-2026)
+
 - Pantokrator guides each group to the leading cone edge, then shows the sweep direction. Program Loop shows up to two personal assignment countdowns, with the later one dimmed. (19-11-2026)
 
 - Fixed the repeated “Preposition parties” callout before Pantokrator. (19-11-2026)

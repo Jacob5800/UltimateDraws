@@ -943,7 +943,7 @@ local tbl =
 				{
 				},
 				displayPath = "P1",
-				execute = "\nlocal S = data.topLpdu\nif not S then self.used = true return end\nlocal store = _G.LPDU_TOP_SettingsStore\nlocal enabled = store and store.values.LPDU_TOP_LoopNextAssignment == 1 and S.mode == 'loop' and S.step >= 0 and S.step <= 4\nlocal player = enabled and TensorCore.mGetPlayer()\nlocal alive = player and (not player.hp or not player.hp.current or player.hp.current > 0)\nlocal now = Now()\nlocal slots = {}\nif alive then\n local number = S.line[player.id] or S.lineNumber(player)\n if number then\n  S.line[player.id] = number\n  for wave = math.max(1,S.step),4 do\n   if number == wave or number == (wave+1)%4+1 then\n    -- Count to the actual hit, using the timeline estimate only before Blaster.\n    local at = S.step >= 1 and S.deadline and S.deadline + (wave-S.step)*9000\n      or now + (28.3+(wave-1)*9-TensorReactions_CurrentTimer)*1000\n    if at > now then\n     slots[#slots+1] = {wave=wave,kind=number==wave and 'tower' or 'tether',at=at}\n    end\n   end\n  end\n end\nend\n\nS.loopNextLabels = S.loopNextLabels or {}\nfor i = 1,2 do\n local nextAssignment = slots[i]\n local active = S.loopNextLabels[i]\n if active and (not nextAssignment or active.wave ~= nextAssignment.wave or active.kind ~= nextAssignment.kind or math.abs(active.at-nextAssignment.at)>750) then\n  AnyoneCore.removeTimedWorldText(active.id)\n  S.loopNextLabels[i] = nil\n end\n if nextAssignment and not S.loopNextLabels[i] then\n  local prefix = nextAssignment.kind == 'tower' and 'Next tower in ' or 'Next tether in '\n  local id = AnyoneCore.addWorldTextCountdownOnEnt(math.floor(nextAssignment.at-now),player.id,i==1 and 0xFFFFFFFF or 0xAFFFFFFF,true,i==1 and 1.35 or 1.12,i==1 and 1.7 or 1.25,0,prefix)\n  if id then\n   nextAssignment.id = id\n   S.loopNextLabels[i] = nextAssignment\n  end\n end\nend\nself.used = true\n",
+				execute = "\nlocal S = data.topLpdu\nif not S then self.used = true return end\nlocal store = _G.LPDU_TOP_SettingsStore\nlocal enabled = store and store.values.LPDU_TOP_LoopNextAssignment == 1 and S.mode == 'loop' and S.step >= 0 and S.step <= 4\nlocal player = enabled and TensorCore.mGetPlayer()\nlocal alive = player and (not player.hp or not player.hp.current or player.hp.current > 0)\nlocal now = Now()\nlocal slots = {}\nif alive then\n local number = S.line[player.id] or S.lineNumber(player)\n if number then\n  S.line[player.id] = number\n  for wave = math.max(1,S.step),4 do\n   if number == wave or number == (wave+1)%4+1 then\n    local tower = number == wave\n    local hit = S.loopTowerHit\n    local at = now+(28.3+(wave-1)*9-TensorReactions_CurrentTimer)*1000\n    if tower and hit then\n     at = hit.at+(wave-hit.wave)*9000\n    elseif S.step >= 1 and S.deadline then\n     local afterCast = S.step == 1 and (tower and 350 or 450) or 0\n     at = S.deadline+(wave-S.step)*9000+afterCast\n    end\n    if at > now and not (tower and hit and wave <= hit.wave) then\n     slots[#slots+1] = {wave=wave,kind=number==wave and 'tower' or 'tether',at=at}\n    end\n   end\n  end\n end\nend\n\nS.loopNextLabels = S.loopNextLabels or {}\nfor i = 1,2 do\n local nextAssignment = slots[i]\n local active = S.loopNextLabels[i]\n if active and (not nextAssignment or active.wave ~= nextAssignment.wave or active.kind ~= nextAssignment.kind or math.abs(active.at-nextAssignment.at)>750) then\n  AnyoneCore.removeTimedWorldText(active.id)\n  S.loopNextLabels[i] = nil\n end\n if nextAssignment and not S.loopNextLabels[i] then\n  local prefix = nextAssignment.kind == 'tower' and 'Next tower in ' or 'Next tether in '\n  local id = AnyoneCore.addWorldTextCountdownOnEnt(math.floor(nextAssignment.at-now),player.id,i==1 and 0xFFFFFFFF or 0xAFFFFFFF,true,i==1 and 1.35 or 1.12,i==1 and 1.7 or 1.25,0,prefix)\n  if id then\n   nextAssignment.id = id\n   S.loopNextLabels[i] = nextAssignment\n  end\n end\nend\nself.used = true\n",
 				executeType = 2,
 				loop = true,
 				mechanicTime = 15,
@@ -953,6 +953,60 @@ local tbl =
 				timelineIndex = 3,
 				timerEndOffset = 44,
 				uuid = "ed74e63f-47ad-9882-af30-c73de7e23134",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local S = data.topLpdu\nlocal now = Now()\nlocal last = S.loopTowerHit\n-- Two tower helpers resolve together.\nif not last or (last.wave < 4 and now-last.at > 4000) then\n S.loopTowerHit = {at=now,wave=last and last.wave+1 or math.max(1,S.step)}\nend\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"363477b8-166f-ab93-9923-e36e209a06d4",
+									true,
+								},
+							},
+							name = "[P1] Capture actual tower resolution",
+							uuid = "1b81c5fd-eb1e-a1c6-92b7-6ca62fee13f0",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local S=data.topLpdu; return S~=nil and S.mode=='loop' and (eventArgs.spellID==31492 or eventArgs.spellID==31494)",
+							dequeueIfLuaFalse = true,
+							name = "Program Loop tower hit",
+							uuid = "363477b8-166f-ab93-9923-e36e209a06d4",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "P1",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 15,
+				name = "[P1] Capture actual tower resolution",
+				timeRange = true,
+				timelineIndex = 3,
+				timerEndOffset = 44,
+				timerStartOffset = 8,
+				uuid = "85ad15cb-8545-fe2b-a144-d7c987dacdb2",
 				version = 2,
 			},
 		},
