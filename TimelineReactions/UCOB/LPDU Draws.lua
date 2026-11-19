@@ -15896,7 +15896,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.ucobOctetGuide\nif not s or Now()>=s.expires or s.finished then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nif not p or (s.nonTower and s.nonTower[p.id]) then self.used=true return end\nlocal now=Now()\nif not s.occupants or now>=(s.nextOccupancyCheck or 0) then\n s.nextOccupancyCheck=now+150\n s.occupants={}\n local R=AnyoneCore and AnyoneCore.Roster\n local p=TensorCore.mGetPlayer()\n if R and R.current() and R.isReady() and p then\n  for _,slot in ipairs({\"T1\",\"T2\",\"H1\",\"H2\",\"M1\",\"M2\",\"R1\",\"R2\"}) do\n   local e=R.entOf(slot)\n   if e and e.id~=p.id then\n    s.occupants[#s.occupants+1]={x=e.pos.x,z=e.pos.z}\n   end\n  end\n end\nend\nlocal d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nfor _,t in pairs(s.towers) do\n if now<t.expires then\n  local occupied=false\n  for _,p in ipairs(s.occupants) do\n   if (p.x-t.x)^2+(p.z-t.z)^2<=9 then occupied=true;break end\n  end\n  if not occupied then d:addCircle(t.x,t.y,t.z,3,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY) end\n end\nend\nself.used=true",
+							actionLua = "local s=data.ucobOctetGuide\nif not s or Now()>=s.expires or s.finished then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.alive or (s.nonTower and s.nonTower[p.id]) then self.used=true return end\nlocal now=Now()\n-- Lock the tower the player enters. Teammate occupancy no longer affects it.\nif not s.personalTower then\n local nearest = 9\n for id, tower in pairs(s.towers) do\n  local distance = (p.pos.x-tower.x)^2 + (p.pos.z-tower.z)^2\n  if now < tower.expires and distance <= nearest then\n   if distance < nearest or not s.personalTower or id < s.personalTower then\n    s.personalTower, nearest = id, distance\n   end\n  end\n end\nend\nlocal d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif s.personalTower then\n local tower = s.towers[s.personalTower]\n if tower and now < tower.expires then\n  d:addCircle(tower.x,tower.y,tower.z,3,false,flags)\n end\n self.used=true\n return\nend\nif not s.occupants or now>=(s.nextOccupancyCheck or 0) then\n s.nextOccupancyCheck=now+150\n s.occupants={}\n local R=AnyoneCore and AnyoneCore.Roster\n local p=TensorCore.mGetPlayer()\n if R and R.current() and R.isReady() and p then\n  for _,slot in ipairs({\"T1\",\"T2\",\"H1\",\"H2\",\"M1\",\"M2\",\"R1\",\"R2\"}) do\n   local e=R.entOf(slot)\n   if e and e.id~=p.id then\n    s.occupants[#s.occupants+1]={x=e.pos.x,z=e.pos.z}\n   end\n  end\n end\nend\nfor _,t in pairs(s.towers) do\n if now<t.expires then\n  local occupied=false\n  for _,p in ipairs(s.occupants) do\n   if (p.x-t.x)^2+(p.z-t.z)^2<=9 then occupied=true;break end\n  end\n  if not occupied then d:addCircle(t.x,t.y,t.z,3,false,Argus2.RenderFlags.FLAG_RENDER_OVERLAY) end\n end\nend\nself.used=true",
 							name = "Grand Octet - Green Tower Circles",
 							uuid = "0c64a571-81d9-1fa9-b970-3b134314688a",
 							version = 2.1,
@@ -15930,7 +15930,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.ucobOctetGuide\nif s then s.towers[eventArgs.entityID]=nil;s.finished=true end\nself.used=true",
+							actionLua = "local s=data.ucobOctetGuide\nif s then s.towers[eventArgs.entityID]=nil\n if next(s.towers)==nil then s.finished=true end end\nself.used=true",
 							conditions = 
 							{
 								

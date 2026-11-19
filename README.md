@@ -274,6 +274,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UCOB: LPDU
 
+- Grand Octet keeps only the tower you enter highlighted until it resolves. (19-11-2026)
+
 - Tenstrike Hatch guidance now advances and clears by the neurolink actually soaked, including when another player covers it. (19-11-2026)
 
 - All four Flatten casts mark the targeted tank and show a countdown through the cast. (19-11-2026)
