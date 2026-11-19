@@ -1568,6 +1568,120 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "The Skydeep Cenote/Feather Ray/Draws",
+			eventType = 4,
+			execute = "if eventArgs.markerID~=514 then return end\nlocal p=TensorCore.mGetPlayer()\nif p and p.localmapid==1194 and p.id==eventArgs.entityID then data.frLockUntil=Now()+5400 end",
+			executeType = 2,
+			name = "Nuisance - personal cone",
+			uuid = "5875aaed-ff84-7020-b087-916fafc52eea",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "The Skydeep Cenote/Feather Ray/Draws",
+			eventType = 18,
+			execute = "if eventArgs.aoeID~=36738 or eventArgs.duration<=0 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1194 or not LevellingDungeons or not LevellingDungeons.settings.draws then return end\nlocal now=Now()\nlocal b=data.frBurst\nif not b or b.finish<=now then\n b={ready=now+100,finish=now+eventArgs.duration*1000,points={}}\n data.frBurst=b\nend\nb.points[#b.points+1]={x=eventArgs.x,z=eventArgs.z}",
+			executeType = 2,
+			name = "Bubble Bomb - collect Burst positions",
+			uuid = "22ae22e2-15a9-5391-878c-dccda524195b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "The Skydeep Cenote/Feather Ray/Draws",
+			execute = "local deadline,b=data.frLockUntil,data.frBurst\nif not deadline and not b and not LevellingFeatherRayOwnsLock then return end\nlocal p=TensorCore.mGetPlayer()\nlocal active=p and p.localmapid==1194 and p.alive and p.incombat\nlocal now=Now()\nlocal heading\nif active and deadline and now<deadline then\n local angles={}\n for _,e in pairs(TensorCore.entityList('alive,myparty') or {}) do\n  if e.id~=p.id and e.pos then angles[#angles+1]=TensorCore.getHeadingToTarget(p.pos,e.pos) end\n end\n if #angles>0 then\n  local best=math.cos(math.rad(20))\n  for i=0,71 do\n   local h=i*math.pi/36\n   local worst=-1\n   for _,a in ipairs(angles) do worst=math.max(worst,math.cos(h-a)) end\n   if worst<best then best,heading=worst,h end\n  end\n end\nelse data.frLockUntil=nil end\nif heading then\n local api=TensorCore.API.TensorACR\n api.setLockFaceHeading(heading)\n if not LevellingFeatherRayOwnsLock then\n  api.setHardLockFace(true)\n  api.toggleLockFace(true)\n  LevellingFeatherRayOwnsLock=true\n end\nelse\nif LevellingFeatherRayOwnsLock then\n local api=TensorCore.API.TensorACR\n api.toggleLockFace(false)\n api.setHardLockFace(false)\n LevellingFeatherRayOwnsLock=nil\nend\nend\nif not b then return end\nif not active or now>=b.finish then data.frBurst=nil;return end\nif b.shown or now<b.ready then return end\nb.shown=true\nif not LevellingDungeons or not LevellingDungeons.settings.draws then return end\nlocal spots={}\nfor x=-118,-92,2 do\n for z=-173,-147,2 do\n  local clear=true\n  for _,q in ipairs(b.points) do\n   if (x-q.x)^2+(z-q.z)^2<7.2^2 then clear=false;break end\n  end\n  if clear then spots[#spots+1]={x=x,z=z,d=(x-p.pos.x)^2+(z-p.pos.z)^2} end\n end\nend\ntable.sort(spots,function(a,b)return a.d<b.d end)\nlocal shown={}\nlocal drawer=TensorCore.getStaticDrawer(0x9033FF33,2)\nfor _,q in ipairs(spots) do\n local separate=true\n for _,other in ipairs(shown) do\n  if (q.x-other.x)^2+(q.z-other.z)^2<16 then separate=false;break end\n end\n if separate then\n  drawer:addTimedCircle(b.finish-now,q.x,p.pos.y,q.z,1,0,false,true)\n  shown[#shown+1]=q\n  if #shown==3 then break end\n end\nend",
+			executeType = 2,
+			name = "Feather Ray - facing and green safe spots",
+			throttleTime = 100,
+			uuid = "da510746-08c5-5e83-9a01-f4eefd63d6bc",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "The Skydeep Cenote/Feather Ray/Draws",
+			eventType = 9,
+			execute = "if LevellingFeatherRayOwnsLock then\n local api=TensorCore.API.TensorACR\n api.toggleLockFace(false)\n api.setHardLockFace(false)\n LevellingFeatherRayOwnsLock=nil\nend\ndata.frLockUntil=nil\ndata.frBurst=nil",
+			executeType = 2,
+			name = "Feather Ray - release facing on wipe",
+			uuid = "8ca3808d-2be2-ccb9-a197-502e22397b5b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "The Skydeep Cenote/Feather Ray/Draws",
+			eventType = 11,
+			execute = "if LevellingFeatherRayOwnsLock then\n local api=TensorCore.API.TensorACR\n api.toggleLockFace(false)\n api.setHardLockFace(false)\n LevellingFeatherRayOwnsLock=nil\nend\ndata.frLockUntil=nil\ndata.frBurst=nil",
+			executeType = 2,
+			name = "Feather Ray - release facing on mapchange",
+			uuid = "a390e340-d65c-1a59-a5c8-508adc3905cc",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "The Skydeep Cenote/Feather Ray/Draws",
+			eventType = 10,
+			execute = "if LevellingFeatherRayOwnsLock then\n local api=TensorCore.API.TensorACR\n api.toggleLockFace(false)\n api.setHardLockFace(false)\n LevellingFeatherRayOwnsLock=nil\nend\ndata.frLockUntil=nil\ndata.frBurst=nil",
+			executeType = 2,
+			name = "Feather Ray - release facing on death",
+			uuid = "f477c8a2-128a-9fdb-a5d4-c314d5608336",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "The Skydeep Cenote",
 			name = "Firearms",
 			uuid = "88028dc7-1501-9a65-bee3-057ca5a2bdb4",
