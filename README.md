@@ -274,6 +274,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UCOB: LPDU
 
+- Adds Hatch shows a staging arrow for the south neurolink before Twister. Both Adds spread countdowns can recover from a missed quote using the observed cast sequence. (19-11-2026)
+
 - Heavensfall calls the observed cone rotation and previews one cone pair ahead. (19-11-2026)
 
 - Golden Bahamut settings now offer Exaflares or Subtractive draws. Subtractive shades the arena green with the imminent blast circles cut out. (19-11-2026)
@@ -291,8 +293,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Quickmarch arrows stay steady near their destinations, and stack and Earthshaker guidance clear on the hit. (19-11-2026)
 
 - Grand Octet highlights free towers, points eligible players to the nearest free tower, and keeps their claimed tower highlighted. (19-11-2026)
-
-- Tenstrike Hatch shows available neurolinks and points to the nearest free one. Follow-up guidance tracks the link you enter and the link actually soaked. (19-11-2026)
 
 ### UCOB: ACR3 Optimization
 
