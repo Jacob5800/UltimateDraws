@@ -288,7 +288,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Heavensfall calls the observed cone rotation and shows a brighter preview of the first cone pair beyond the live telegraphs. (19-11-2026)
 
-- Golden Bahamut settings now offer Exaflares or Subtractive draws. Subtractive shades the arena green with the imminent blast circles cut out. (19-11-2026)
+- Golden Bahamut settings now offer Exaflares or Subtractive draws. Subtractive shades the arena green and cuts out only the current blast in each active lane. (19-11-2026)
 
 - Morn Afah shows a cast countdown over the stack target. (19-11-2026)
 
