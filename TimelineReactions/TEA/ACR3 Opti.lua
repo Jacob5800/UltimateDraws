@@ -346,6 +346,11 @@ local tbl =
 									"7f124810-703c-a8df-a1cd-c8597edf01a8",
 									true,
 								},
+								
+								{
+									"be59042a-297b-74c2-810e-ce212466635d",
+									true,
+								},
 							},
 							gVar = "ACR_TensorReaper3_SoulGauge",
 							name = "Soul Gauge On",
@@ -376,6 +381,17 @@ local tbl =
 							dequeueIfLuaFalse = true,
 							name = "Target Has Deaths Design",
 							uuid = "7f124810-703c-a8df-a1cd-c8597edf01a8",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local doll = TensorCore.mGetTarget()\nreturn not data.teaAcr3SoulGaugeDoll and doll ~= nil and doll.hp ~= nil and doll.hp.percent >= 40",
+							name = "Doll HP at least 40%",
+							uuid = "be59042a-297b-74c2-810e-ce212466635d",
 							version = 3,
 						},
 					},
@@ -482,6 +498,53 @@ local tbl =
 				timerEndOffset = 35,
 				timerStartOffset = -6,
 				uuid = "b9f228d9-87a4-ba7b-ad5f-8f2a6770e36e",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				execute = "local p = TensorCore.mGetPlayer()\nif not p or p.localmapid ~= 887 or p.job ~= 39 then return end\n\nlocal variable = \"ACR_TensorReaper3_SoulGauge\"\nif type(_G[variable]) ~= \"boolean\" then return end\nif data.teaAcr3SoulGaugeDoll then\n    local doll = TensorCore.mGetEntity(data.teaAcr3SoulGaugeDoll)\n    if not doll or not doll.targetable or (doll.hp and doll.hp.current <= 0) then\n        _G[variable] = true\n        data.teaAcr3SoulGaugeDoll = nil\n        self.used = true\n    end\n    return\nend\n\nif not p.alive or not p.incombat then return end\nlocal doll = TensorCore.mGetTarget()\nif not doll or doll.contentid ~= 9214 or not doll.targetable or not doll.hp or doll.hp.current <= 0 or doll.hp.percent >= 40 then return end\nlocal personal\nfor _, tether in ipairs(Argus.getTethersOnEnt(p.id)) do\n    local partner = tether.partnerid and TensorCore.mGetEntity(tether.partnerid)\n    if partner and partner.contentid == 9214 then\n        if personal and personal ~= partner.id then return end\n        personal = partner.id\n    end\nend\nif personal and personal ~= doll.id then return end\nlocal confirmed = personal == doll.id\nfor _, tether in ipairs(Argus.getTethersOnEnt(doll.id)) do\n    if tether.partnerid then\n        if tether.partnerid ~= p.id then return end\n        confirmed = true\n    end\nend\nif not confirmed then return end\n\n_G[variable] = false\ndata.teaAcr3SoulGaugeDoll = doll.id",
+				executeType = 2,
+				mechanicTime = 36.7,
+				name = "[RPR] Hold Soul Gauge below 40% on assigned doll",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 5,
+				timerEndOffset = 45,
+				timerStartOffset = -6,
+				uuid = "4c2087c6-9c51-c844-b706-9868ed847d3f",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				eventType = 9,
+				execute = "local old = eventArgs.oldData\nif old and old.teaAcr3SoulGaugeDoll and type(_G.ACR_TensorReaper3_SoulGauge) == \"boolean\" then\n    _G.ACR_TensorReaper3_SoulGauge = true\nend\nself.used = true",
+				executeType = 2,
+				loop = true,
+				mechanicTime = 36.7,
+				name = "[RPR] Restore doll Soul Gauge guard on wipe",
+				timeRange = true,
+				timelineIndex = 5,
+				timerEndOffset = 1400,
+				timerStartOffset = -60,
+				uuid = "80479a13-8969-fee5-8fcd-b6adb34a12ed",
 				version = 2,
 			},
 		},

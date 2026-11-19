@@ -69,6 +69,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### TEA: ACR3 Opti
 
+- Reaper ACR3 turns off Soul Gauge below 40% on your tethered doll and restores it when the doll resolves. (19-11-2026)
+
 - TEA ACR3 Opti enables the AoE quick toggle once all four Jagd Dolls resolve. (19-11-2026)
 
 - TEA ACR3 Opti uses LPDU doll quadrants, prioritizes confirmed personal tethers, and returns to Living Liquid when doll targeting is unsafe. (19-11-2026)
