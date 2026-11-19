@@ -292,7 +292,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Grand Octet keeps only the tower you enter highlighted until it resolves. (19-11-2026)
 
-- Tenstrike Hatch guidance now advances and clears by the neurolink actually soaked, including when another player covers it. (19-11-2026)
+- Tenstrike Hatch shows available neurolinks and points to the nearest free one. Follow-up guidance tracks the link you enter and the link actually soaked. (19-11-2026)
 
 ### UCOB: ACR3 Optimization
 
