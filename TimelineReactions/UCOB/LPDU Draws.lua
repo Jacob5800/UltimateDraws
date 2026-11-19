@@ -536,6 +536,7 @@ local tbl =
 				{
 				},
 				displayPath = "LPDU Personal Guidance",
+				enabled = false,
 				eventType = 13,
 				loop = true,
 				mechanicTime = 7,
@@ -559,7 +560,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.ucobPersonalTwister=nil\ndata.ucobDoomCWSpoken=nil\nself.used=true",
+							actionLua = "local timer = data.ucobPersonalTwister\nif timer and timer.uuid then AnyoneCore.removeTimedWorldText(timer.uuid) end\ndata.ucobPersonalTwister = nil\ndata.ucobDoomCWSpoken=nil\nself.used=true",
 							name = "Personal Twister and first clockwise reset",
 							uuid = "1ed0772c-a9eb-ece7-9ed2-453e31c405bc",
 							version = 2.1,
@@ -593,7 +594,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "data.ucobPersonalTwister=nil\nself.used=true",
+							actionLua = "local timer = data.ucobPersonalTwister\nif timer and timer.uuid then AnyoneCore.removeTimedWorldText(timer.uuid) end\ndata.ucobPersonalTwister = nil\nself.used=true",
 							name = "Personal Twister death cleanup",
 							uuid = "8fb34261-80c3-019e-8805-1d4022e0aab6",
 							version = 2.1,
@@ -613,6 +614,60 @@ local tbl =
 				timerEndOffset = 977,
 				timerStartOffset = -7,
 				uuid = "aa35adcf-e817-9771-a62b-ef174abe85f3",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local timer = data.ucobPersonalTwister\nif timer and timer.uuid then AnyoneCore.removeTimedWorldText(timer.uuid) end\ndata.ucobPersonalTwister = nil\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"4e1978f4-558e-e167-bc57-3d4c8ccc3efe",
+									true,
+								},
+							},
+							name = "Personal Twister - Clear on resolution",
+							uuid = "a3392426-973c-11a4-a653-f16b883f29c5",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local timer=data.ucobPersonalTwister\nreturn timer ~= nil and timer.source == eventArgs.entityID and (eventArgs.spellID == 9898 or eventArgs.spellID == 9906)",
+							dequeueIfLuaFalse = true,
+							name = "Personal Twister - Clear on resolution",
+							uuid = "4e1978f4-558e-e167-bc57-3d4c8ccc3efe",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 7,
+				name = "Personal Twister - Clear on resolution",
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 977,
+				timerStartOffset = -7,
+				uuid = "f4f7978b-7bd4-a6b8-8835-29f001c268fb",
 				version = 2,
 			},
 		},
@@ -651,7 +706,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local now=Now()\nlocal duration=eventArgs.channelTimeMax*1000\nif duration<=0 then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.alive then self.used=true return end\nlocal old=data.ucobPersonalTwister\nif not old or old.source~=eventArgs.entityID or math.abs(old.deadline-(now+duration))>500 then\n data.ucobPersonalTwister={source=eventArgs.entityID,deadline=now+duration}\nend\nself.used=true",
+							actionLua = "local duration = (eventArgs.channelTimeMax or 0) * 1000\nlocal player = TensorCore.mGetPlayer()\nif duration <= 0 or not player or not player.alive then return end\nlocal deadline = Now() + duration\nlocal old = data.ucobPersonalTwister\nif old and old.source == eventArgs.entityID and math.abs(old.deadline - deadline) <= 500 then\n self.used = true\n return\nend\nif old and old.uuid then AnyoneCore.removeTimedWorldText(old.uuid) end\nlocal uuid = AnyoneCore.addWorldTextCountdownOnEnt(duration, player.id, 0xFFFFFFFF, true, 1.8, 2.3, 0, \"Twister \")\nif uuid then data.ucobPersonalTwister = {source=eventArgs.entityID, deadline=deadline, uuid=uuid} end\nself.used = true",
 							conditions = 
 							{
 								
@@ -2880,6 +2935,156 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\ucob\\universal",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Personal Guidance",
+				uuid = "44ab8bb5-606d-aada-bf00-9e9a8cafb143",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "data.ucobFireball124 = {target=eventArgs.entityID, expires=Now()+9000}\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"283acdb2-ac38-5af7-9832-4bdff5623189",
+									true,
+								},
+							},
+							name = "Fireball 124.6 - Capture stack target",
+							uuid = "d4e86696-4ec6-b42f-bd15-e68dfea18fbc",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.markerID == 117",
+							dequeueIfLuaFalse = true,
+							name = "Fireball 124.6 - Capture stack target",
+							uuid = "283acdb2-ac38-5af7-9832-4bdff5623189",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 4,
+				mechanicTime = 124.6,
+				name = "Fireball 124.6 - Capture stack target",
+				timeRange = true,
+				timelineIndex = 24,
+				timerEndOffset = 1,
+				timerStartOffset = -9,
+				uuid = "e6a83664-fc29-4a83-a427-88283e2c57d0",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local stack = data.ucobFireball124\nlocal now = Now()\nif not stack or now >= stack.expires then return end\nlocal player = TensorCore.mGetPlayer()\nif not player or not player.alive or player.id == stack.target then return end\nlocal transition = data.ucobP1Transition\nif transition and now < transition.expires then return end\nif data.ucobOwnHatchPending and now < data.ucobOwnHatchPending then return end\nfor _, index in ipairs({22, 27, 31, 36}) do\n local hatch = data[\"ucobMultiHatch\" .. index]\n local pair = hatch and hatch.assignments and hatch.assignments[player.id]\n if pair and pair.phase == 0 and pair.target == player.id and now - hatch.started < 25000 then return end\nend\nlocal volley = data.ucobLiquidAlert\nif volley and volley.own and volley.count < 5 and now - volley.last < 6500 then return end\nlocal boss = data.ucobLHActualTwin and TensorCore.mGetEntity(data.ucobLHActualTwin)\nif boss and boss.targetid == player.id then return end\nlocal target = TensorCore.mGetEntity(stack.target)\nif not target or not target.alive or not target.pos then return end\nlocal dest = target.pos\nif volley then\n for _, puddle in ipairs(volley.puddles or {}) do\n  if now < puddle.expires and (dest.x-puddle.x)^2+(dest.z-puddle.z)^2 < 36 then return end\n end\nend\nlocal p = player\nlocal dx,dz=dest.x-p.pos.x,dest.z-p.pos.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal drawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.15,1,0.2,0.65),2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nif distance>0.8 then\n local tip=math.min(1.5,distance*0.35)\n drawer:addArrow(p.pos.x,p.pos.y,p.pos.z,TensorCore.getHeadingToTarget(p.pos,dest),math.max(0.1,distance-tip),0.55,tip,1.1,false,flags)\nend\ndrawer:addCircle(dest.x,dest.y,dest.z,0.8,false,flags)\nself.used=true",
+							name = "Fireball 124.6 - Stack player arrow",
+							uuid = "c8caf3f0-1977-57a8-adb9-8a3a8b38ab8d",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 124.6,
+				name = "Fireball 124.6 - Stack player arrow",
+				timeRange = true,
+				timelineIndex = 24,
+				timerEndOffset = 2,
+				timerStartOffset = -4,
+				uuid = "ef04129d-9c95-abfc-b626-99b6e1ad9ebc",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "data.ucobFireball124 = nil\nself.used=true",
+							conditions = 
+							{
+								
+								{
+									"9fdb9cdd-f5b1-681d-b157-6ad9a265458a",
+									true,
+								},
+							},
+							name = "Fireball 124.6 - Clear stack arrow",
+							uuid = "9cfdd6a6-4fc4-5272-85ae-224f6688b819",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID == 1482 and eventArgs.spellID == 9900",
+							dequeueIfLuaFalse = true,
+							name = "Fireball 124.6 - Clear stack arrow",
+							uuid = "9fdb9cdd-f5b1-681d-b157-6ad9a265458a",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 2,
+				mechanicTime = 124.6,
+				name = "Fireball 124.6 - Clear stack arrow",
+				timeRange = true,
+				timelineIndex = 24,
+				timerEndOffset = 3,
+				timerStartOffset = -4,
+				uuid = "53b004bd-bd94-6f4d-9e22-89795bbee4e1",
+				version = 2,
+			},
 		},
 	},
 	[26] = 
@@ -9657,7 +9862,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local now=Now()\nlocal duration=eventArgs.channelTimeMax*1000\nif duration<=0 then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.alive then self.used=true return end\nlocal old=data.ucobPersonalTwister\nif not old or old.source~=eventArgs.entityID or math.abs(old.deadline-(now+duration))>500 then\n data.ucobPersonalTwister={source=eventArgs.entityID,deadline=now+duration}\nend\nself.used=true",
+							actionLua = "local duration = (eventArgs.channelTimeMax or 0) * 1000\nlocal player = TensorCore.mGetPlayer()\nif duration <= 0 or not player or not player.alive then return end\nlocal deadline = Now() + duration\nlocal old = data.ucobPersonalTwister\nif old and old.source == eventArgs.entityID and math.abs(old.deadline - deadline) <= 500 then\n self.used = true\n return\nend\nif old and old.uuid then AnyoneCore.removeTimedWorldText(old.uuid) end\nlocal uuid = AnyoneCore.addWorldTextCountdownOnEnt(duration, player.id, 0xFFFFFFFF, true, 1.8, 2.3, 0, \"Twister \")\nif uuid then data.ucobPersonalTwister = {source=eventArgs.entityID, deadline=deadline, uuid=uuid} end\nself.used = true",
 							conditions = 
 							{
 								
@@ -16420,7 +16625,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local now=Now()\nlocal duration=eventArgs.channelTimeMax*1000\nif duration<=0 then self.used=true return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.alive then self.used=true return end\nlocal old=data.ucobPersonalTwister\nif not old or old.source~=eventArgs.entityID or math.abs(old.deadline-(now+duration))>500 then\n data.ucobPersonalTwister={source=eventArgs.entityID,deadline=now+duration}\nend\nself.used=true",
+							actionLua = "local duration = (eventArgs.channelTimeMax or 0) * 1000\nlocal player = TensorCore.mGetPlayer()\nif duration <= 0 or not player or not player.alive then return end\nlocal deadline = Now() + duration\nlocal old = data.ucobPersonalTwister\nif old and old.source == eventArgs.entityID and math.abs(old.deadline - deadline) <= 500 then\n self.used = true\n return\nend\nif old and old.uuid then AnyoneCore.removeTimedWorldText(old.uuid) end\nlocal uuid = AnyoneCore.addWorldTextCountdownOnEnt(duration, player.id, 0xFFFFFFFF, true, 1.8, 2.3, 0, \"Twister \")\nif uuid then data.ucobPersonalTwister = {source=eventArgs.entityID, deadline=deadline, uuid=uuid} end\nself.used = true",
 							conditions = 
 							{
 								
