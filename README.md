@@ -132,6 +132,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Dungeons: Shared AutoSim
 
+- Improved Origenics final-pack detection, marked safe Laser Lash lanes, and added Ambrose knockback guidance, Arm's Length, and a Superfluity DoT blacklist. (20-11-2026)
+
 - Added Deceiver Android and turret lane guidance, Surge Arm's Length, and a DoT blacklist for the short-lived boss sentries. (20-11-2026)
 
 - Added early Writhing Riot cone previews and poison AoE draws for Herpekaris in Origenics. (20-11-2026)
@@ -149,8 +151,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added a sampled 132.2-second kill estimate and a Bubble Bomb dodge window for Feather Ray. (19-11-2026)
 
 - Added automatic party-safe facing for Feather Ray Nuisance and green safe spots for Bubble Bomb Burst in The Skydeep Cenote. (19-11-2026)
-
-- Moved the boss HP threshold for cooldown pooling into Levelling Dungeon Settings under Dungeon holds. (19-11-2026)
 
 ### Shinryu Unreal: Draws
 
