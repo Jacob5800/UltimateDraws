@@ -214,7 +214,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### DSR: LPDU (Beta)
 
-- Removed the generic Raidwide – Mitigate callouts. (19-11-2026)
+- Removed the generic raidwide mitigation callouts and raidwide countdowns. Strength of the Ward calls “Your tower” once, one second before it resolves. (19-11-2026)
 
 - Strength tower reassignment no longer repeats the initial preposition call after a personal tower was established. (17-11-2026)
 
