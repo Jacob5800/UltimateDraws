@@ -274,6 +274,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UCOB: LPDU
 
+- Heavensfall calls the observed cone rotation and previews one cone pair ahead. (19-11-2026)
+
 - Golden Bahamut settings now offer Exaflares or Subtractive draws. Subtractive shades the arena green with the imminent blast circles cut out. (19-11-2026)
 
 - Morn Afah shows a cast countdown over the stack target. (19-11-2026)
@@ -291,8 +293,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Grand Octet keeps only the tower you enter highlighted until it resolves. (19-11-2026)
 
 - Tenstrike Hatch guidance now advances and clears by the neurolink actually soaked, including when another player covers it. (19-11-2026)
-
-- All four Flatten casts mark the targeted tank and show a countdown through the cast. (19-11-2026)
 
 ### UCOB: ACR3 Optimization
 

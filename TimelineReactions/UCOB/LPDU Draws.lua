@@ -13593,7 +13593,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.ucobHFGuide\nif not s or s.conesDone then self.used=true return end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e then self.used=true return end\nlocal r=s.rotation\nlocal phi=math.pi-e.pos.h\nif not r then\n r={first=phi,active={},puddles={},resolved=-1,expires=Now()+12000}\n s.rotation=r\nelse\n local delta=(phi-r.first+math.pi/2)%math.pi-math.pi/2\n if not r.direction and math.abs(math.abs(delta)-math.pi/8)<0.03 then r.direction=delta>0 and 1 or -1 end\nend\nr.active[eventArgs.entityID]={phi=phi,expires=Now()+eventArgs.channelTimeMax*1000+500}\nself.used=true",
+							actionLua = "local s=data.ucobHFGuide\nif not s or s.conesDone then self.used=true return end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e then self.used=true return end\nlocal r=s.rotation\nlocal phi=math.pi-e.pos.h\nif not r then\n r={first=phi,active={},puddles={},resolved=-1,expires=Now()+12000}\n s.rotation=r\nelse\n local delta=(phi-r.first+math.pi/2)%math.pi-math.pi/2\n if not r.direction and math.abs(math.abs(delta)-math.pi/8)<0.03 then\n  r.direction=delta>0 and 1 or -1\n  AnyoneCore.Shotcall(r.direction==1 and \"Clockwise\" or \"Counterclockwise\",true,3,false)\n end\nend\nr.active[eventArgs.entityID]={phi=phi,expires=Now()+eventArgs.channelTimeMax*1000+500}\nself.used=true",
 							conditions = 
 							{
 								
@@ -13788,6 +13788,40 @@ local tbl =
 				timerEndOffset = 8,
 				timerStartOffset = -6,
 				uuid = "fb95fc3a-27b3-663d-a460-3fb6bbd58cb4",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local guide=data.ucobHFGuide\nlocal rotation=guide and guide.rotation\nif not rotation or not rotation.direction or guide.conesDone or Now()>=rotation.expires then return end\n-- Preview the pair after the current pair. Opposite cones share an index.\nlocal nextPair=rotation.resolved+2\nif nextPair>=8 then return end\nlocal angle=rotation.first+rotation.direction*nextPair*math.pi/8\nlocal heading=math.pi-angle\nlocal flags=Argus2.RenderFlags.FLAG_WARP_TERRAIN\nlocal preview=TensorCore.getStaticDrawer(0x4570B8FF,2)\npreview:addCone(0,0,0,24.5,math.pi/8,heading,false,flags)\npreview:addCone(0,0,0,24.5,math.pi/8,heading+math.pi,false,flags)\nself.used=true",
+							name = "Preview one cone pair ahead",
+							uuid = "daf29fc6-862d-09d7-b8a4-d689750e7edf",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 696,
+				name = "[LPDU] Heavensfall - Preview next cone pair",
+				timeRange = true,
+				timelineIndex = 133,
+				timerEndOffset = 8,
+				timerStartOffset = -5,
+				uuid = "16216963-8c57-3b82-b3e8-5069c8a2cd2c",
 				version = 2,
 			},
 		},
