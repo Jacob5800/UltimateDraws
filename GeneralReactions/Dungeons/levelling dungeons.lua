@@ -2795,6 +2795,63 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "Origenics/Herpekaris/Draws",
+			eventType = 18,
+			execute = "local e=eventArgs\nlocal id=e.aoeID\nlocal sweep=id==36465 or id==36466 or id==36467\nif not sweep and id~=36460 and id~=38518 and id~=38519 and id~=37921 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1208 or e.friendly or e.duration<=0 or not LevellingDungeons or not LevellingDungeons.settings.draws then return end\nif not sweep then\n local drawer=TensorCore.getStaticDrawer(0x603333FF,2)\n drawer:addTimedCircle(e.duration*1000,e.x,e.y,e.z,id==36460 and 2 or id==37921 and 5 or 6,0,false,true)\n return\nend\nlocal now=Now()\nlocal q=data.origenicsRiot\nif not q or now>q.expires then\n q={first=1,last=0}\n data.origenicsRiot=q\nend\nlocal prior=q[q.last]\nlocal impact=prior and prior.impact+2000 or now+(e.duration+7.3)*1000\nq.last=q.last+1\nq[q.last]={x=e.x,y=e.y,z=e.z,heading=e.heading,angle=math.rad(id==36467 and 90 or 210),impact=impact,hit=id+4}\nq.expires=impact+900",
+			executeType = 2,
+			name = "Writhing Riot previews and poison circles",
+			uuid = "5f8294c2-d17a-9f53-8c25-7d44e1f720ed",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "Origenics/Herpekaris/Draws",
+			eventType = 2,
+			execute = "local q=data.origenicsRiot\nlocal head=q and q[q.first]\nif not head or eventArgs.spellID~=head.hit or eventArgs.entityContentID~=12741 then return end\nq.first=q.first+1\nif q.first>q.last then data.origenicsRiot=nil end",
+			executeType = 2,
+			name = "Writhing Riot - advance on sweep hit",
+			uuid = "34f63a75-4847-2360-b2a2-cc63fafde25a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "Origenics/Herpekaris/Draws",
+			eventType = 12,
+			execute = "local q=data.origenicsRiot\nif not q then return end\nlocal p=TensorCore.mGetPlayer()\nlocal now=Now()\nif not p or p.localmapid~=1208 or not p.alive or not p.incombat or now>q.expires then data.origenicsRiot=nil;return end\nif not LevellingDungeons or not LevellingDungeons.settings.draws then return end\nwhile q.first<=q.last and now>q[q.first].impact+700 do q.first=q.first+1 end\nlocal head,nextCone=q[q.first],q[q.first+1]\nif not head then return end\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_UI\nif nextCone then\n local amber=TensorCore.getStaticDrawer(0x6033AAFF,2)\n amber:addCone(nextCone.x,nextCone.y,nextCone.z,25,nextCone.angle,nextCone.heading,false,flags)\nend\nlocal red=TensorCore.getStaticDrawer(0x803333FF,2)\nred:addCone(head.x,head.y,head.z,25,head.angle,head.heading,false,flags)",
+			executeType = 2,
+			name = "Writhing Riot - current and next cone",
+			uuid = "06305abe-3c01-a39e-b4d8-4fa76fde42a3",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "Origenics",
 			name = "Deceiver",
 			uuid = "13817f6a-82b1-20f6-b5c4-ea7d781b505d",
