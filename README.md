@@ -81,7 +81,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### TEA: AutoSim
 
-- Reaper, Viper, and Samurai AutoSim give the assigned Jagd Doll a 0.60 planning multiplier while targeting it. (19-11-2026)
+- Reaper, Viper, and Samurai AutoSim give the assigned Jagd Doll a 0.80 planning multiplier while targeting it. (19-11-2026)
 
 - TEA AutoSim turns off the ACR AoE quick toggle at pull start and turns it back on after all four Jagd Dolls resolve. (19-11-2026)
 
