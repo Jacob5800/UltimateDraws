@@ -318,6 +318,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UWU: LPDU
 
+- Ifrit post-nail Eruption arrows route toward relative east away from Searing Wind. R2 gets a pickup arrow to the actual Light Puddle. (19-11-2026)
+
 - Garuda Mesohigh marks the live assigned tether and shows R2 and OT where to intercept it. (19-11-2026)
 
 - Annihilation orb circles and assigned-soaker arrows now follow live orb state and clear individually on each explosion. Suppression’s move-to-edge arrow also calls out. (17-11-2026)
