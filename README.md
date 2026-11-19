@@ -318,6 +318,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UWU: LPDU
 
+- Garuda Mesohigh marks the live assigned tether and shows R2 and OT where to intercept it. (19-11-2026)
+
 - Annihilation orb circles and assigned-soaker arrows now follow live orb state and clear individually on each explosion. Suppression’s move-to-edge arrow also calls out. (17-11-2026)
 
 - “Move south for eruption baits” now uses Party Roster to notify R1 and R2 only. (17-11-2026)

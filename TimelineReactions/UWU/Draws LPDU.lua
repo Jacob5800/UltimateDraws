@@ -3841,7 +3841,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local a = eventArgs\nlocal state = data.uwu_personal_mesohigh_p1\nif not state then state = {}; data.uwu_personal_mesohigh_p1 = state end\nlocal tether = state[a.sourceEntityID]\nif not tether then tether = {}; state[a.sourceEntityID] = tether end\nif a.newTetherID == 4 and a.newTargetID and a.newTargetID > 0 then\n tether.target = a.newTargetID\n tether.expires = Now() + 10000\nelse\n tether.target = nil\nend\nself.used = true",
+							actionLua = "local a = eventArgs\nlocal state = data.uwu_personal_mesohigh_p1\nif not state then state = {}; data.uwu_personal_mesohigh_p1 = state end\nlocal tether = state[a.sourceEntityID]\nif not tether then tether = {}; state[a.sourceEntityID] = tether end\nif a.newTetherID == 4 and a.newTargetID and a.newTargetID > 0 then\n tether.content = a.sourceEntityContentID\n tether.target = a.newTargetID\n tether.expires = Now() + 10000\nelse\n tether.target = nil\nend\nself.used = true",
 							conditions = 
 							{
 								
@@ -3896,15 +3896,15 @@ local tbl =
 				},
 				displayPath = "LPDU Guidance/Mesohigh",
 				eventType = 12,
-				execute = "local state = data.uwu_personal_mesohigh_p1\nif not state then return end\nlocal Roster = AnyoneCore.Roster\nif not Roster or not Roster.current() or not Roster.isReady() then return end\nlocal slot = Roster.mySlot()\nlocal player = TensorCore.mGetPlayer()\nif not player then return end\nlocal allowed = slot == \"R2\" or slot == \"T2\"\nif not allowed then return end\nlocal now = Now()\nfor sourceID,tether in pairs(state) do\n if tether.target and not tether.done and now < tether.expires then\n  local source = TensorCore.mGetEntity(sourceID)\n  local holder = TensorCore.mGetEntity(tether.target)\n  if source and holder then\n  local onSide = (slot == \"R2\" and source.pos.x < 100) or (slot == \"T2\" and source.pos.x > 100)\n   if onSide then\n    if holder.id == player.id then\n     tether.done = true\n    else\n     local drawer = TensorCore.getStaticDrawer(0xFF00FF00,3)\n     local p,q = source.pos,holder.pos\n     drawer:addLine(p.x,p.y+0.8,p.z,q.x,q.y+0.8,q.z,4,6)\n     drawer:addCircle(p.x,p.y+0.05,p.z,2,false)\n    end\n   end\n  end\n end\nend\nself.used = true",
+				execute = "local state = data.uwu_personal_mesohigh_p1\nif not state then return end\nlocal roster = AnyoneCore.Roster\nif not roster or not roster.current() or not roster.isReady() then return end\nlocal slot = roster.mySlot()\n-- R2 takes Suparna (west); the off-tank takes Chirada (east).\nlocal wanted = slot == \"R2\" and 1645 or slot == \"T2\" and 1646\nif not wanted then return end\n\nlocal player = TensorCore.mGetPlayer()\nif not player or not player.alive or not player.pos then return end\nlocal now = Now()\nfor sourceID, tether in pairs(state) do\n    if tether.content == wanted and tether.target and not tether.done and now < tether.expires then\n        if tether.target == player.id then\n            tether.done = true\n            return\n        end\n        local source = TensorCore.mGetEntity(sourceID)\n        local holder = TensorCore.mGetEntity(tether.target)\n        if source and source.pos and holder and holder.pos then\n            local p, q = source.pos, holder.pos\n            local dx, dz = q.x-p.x, q.z-p.z\n            local lengthSquared = dx*dx+dz*dz\n            if lengthSquared < 0.25 then return end\n\n            local fraction = ((player.pos.x-p.x)*dx+(player.pos.z-p.z)*dz)/lengthSquared\n            fraction = math.max(0.25,math.min(0.75,fraction))\n            local spot = {x=p.x+dx*fraction,y=player.pos.y,z=p.z+dz*fraction}\n            local flags = Argus2.RenderFlags.FLAG_RENDER_OVERLAY\n            local drawer = TensorCore.getCachedDrawer(0xFF66FF99,0xFF00AA66,0xFF006644,0xFFFFFFFF,2,nil,flags)\n            drawer:addLine(p.x,p.y+.8,p.z,q.x,q.y+.8,q.z,4,6)\n            drawer:addCircle(spot.x,spot.y+.05,spot.z,1,false,flags)\n            local distance = TensorCore.getDistance2d(player.pos,spot)\n            if distance > 1 then\n                local tip = math.min(1,distance*.4)\n                drawer:addArrow(player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,spot),distance-tip,1,tip,2.3,false,flags)\n            end\n        end\n        return\n    end\nend",
 				executeType = 2,
 				loop = true,
 				mechanicTime = 124,
-				name = "[LPDU] Mesohigh P1 - Assigned green tether/source",
+				name = "[LPDU] Garuda Mesohigh - Mark assigned live tether",
 				timeRange = true,
 				timelineIndex = 26,
-				timerEndOffset = 4,
-				timerStartOffset = -8,
+				timerEndOffset = 2,
+				timerStartOffset = -3,
 				uuid = "def33460-915e-cab1-8c4a-eaa71a7e9ff0",
 				version = 2,
 			},
