@@ -19222,7 +19222,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local cast=eventArgs\nlocal duration=cast.channelTimeMax*1000\nlocal state={target=cast.targetID,boss=cast.entityID,expires=Now()+duration+500}\nlocal previous=data.ucobAfah194\nif previous and previous.countdown then AnyoneCore.removeTimedWorldText(previous.countdown) end\ndata.ucobAfah194=state\nlocal target=TensorCore.mGetEntity(cast.targetID)\nif duration>0 and target and target.alive then\n state.countdown=AnyoneCore.addWorldTextCountdownOnEnt(duration,target.id,0xFFFFFFFF,true,1.35,2.3,0,\"Morn Afah \")\nend\nself.used=true",
+							actionLua = "local cast=eventArgs\nlocal duration=cast.channelTimeMax*1000\nlocal state={target=cast.targetID,boss=cast.entityID,expires=Now()+duration+500}\nlocal previous=data.ucobAfah194\nif previous and previous.countdown then AnyoneCore.removeTimedWorldText(previous.countdown) end\ndata.ucobAfah194=state\nlocal target=TensorCore.mGetEntity(cast.targetID)\nif duration>0 and target and target.alive then\n state.countdown=AnyoneCore.addWorldTextCountdownOnEnt(duration,target.id,0xFFFFFFFF,true,1.35,2.3,0,\"Morn Afah \")\nend\nif duration>0 and (not previous or Now()>=previous.expires) then\n AnyoneCore.Shotcall(\"Stack\",true,3,false)\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -20148,7 +20148,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local cast=eventArgs\nlocal duration=cast.channelTimeMax*1000\nlocal state={target=cast.targetID,boss=cast.entityID,expires=Now()+duration+500}\nlocal previous=data.ucobAfah198\nif previous and previous.countdown then AnyoneCore.removeTimedWorldText(previous.countdown) end\ndata.ucobAfah198=state\nlocal target=TensorCore.mGetEntity(cast.targetID)\nif duration>0 and target and target.alive then\n state.countdown=AnyoneCore.addWorldTextCountdownOnEnt(duration,target.id,0xFFFFFFFF,true,1.35,2.3,0,\"Morn Afah \")\nend\nself.used=true",
+							actionLua = "local cast=eventArgs\nlocal duration=cast.channelTimeMax*1000\nlocal state={target=cast.targetID,boss=cast.entityID,expires=Now()+duration+500}\nlocal previous=data.ucobAfah198\nif previous and previous.countdown then AnyoneCore.removeTimedWorldText(previous.countdown) end\ndata.ucobAfah198=state\nlocal target=TensorCore.mGetEntity(cast.targetID)\nif duration>0 and target and target.alive then\n state.countdown=AnyoneCore.addWorldTextCountdownOnEnt(duration,target.id,0xFFFFFFFF,true,1.35,2.3,0,\"Morn Afah \")\nend\nif duration>0 and (not previous or Now()>=previous.expires) then\n AnyoneCore.Shotcall(\"Stack\",true,3,false)\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -20335,7 +20335,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local cast=eventArgs\nlocal duration=cast.channelTimeMax*1000\nlocal state={target=cast.targetID,boss=cast.entityID,expires=Now()+duration+500}\nlocal previous=data.ucobAfah200\nif previous and previous.countdown then AnyoneCore.removeTimedWorldText(previous.countdown) end\ndata.ucobAfah200=state\nlocal target=TensorCore.mGetEntity(cast.targetID)\nif duration>0 and target and target.alive then\n state.countdown=AnyoneCore.addWorldTextCountdownOnEnt(duration,target.id,0xFFFFFFFF,true,1.35,2.3,0,\"Morn Afah \")\nend\nself.used=true",
+							actionLua = "local cast=eventArgs\nlocal duration=cast.channelTimeMax*1000\nlocal state={target=cast.targetID,boss=cast.entityID,expires=Now()+duration+500}\nlocal previous=data.ucobAfah200\nif previous and previous.countdown then AnyoneCore.removeTimedWorldText(previous.countdown) end\ndata.ucobAfah200=state\nlocal target=TensorCore.mGetEntity(cast.targetID)\nif duration>0 and target and target.alive then\n state.countdown=AnyoneCore.addWorldTextCountdownOnEnt(duration,target.id,0xFFFFFFFF,true,1.35,2.3,0,\"Morn Afah \")\nend\nif duration>0 and (not previous or Now()>=previous.expires) then\n AnyoneCore.Shotcall(\"Stack\",true,3,false)\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -20685,7 +20685,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local cast=eventArgs\nlocal duration=cast.channelTimeMax*1000\nlocal state={target=cast.targetID,boss=cast.entityID,expires=Now()+duration+500}\nlocal previous=data.ucobAfah203\nif previous and previous.countdown then AnyoneCore.removeTimedWorldText(previous.countdown) end\ndata.ucobAfah203=state\nlocal target=TensorCore.mGetEntity(cast.targetID)\nif duration>0 and target and target.alive then\n state.countdown=AnyoneCore.addWorldTextCountdownOnEnt(duration,target.id,0xFFFFFFFF,true,1.35,2.3,0,\"Morn Afah \")\nend\nself.used=true",
+							actionLua = "local cast=eventArgs\nlocal duration=cast.channelTimeMax*1000\nlocal state={target=cast.targetID,boss=cast.entityID,expires=Now()+duration+500}\nlocal previous=data.ucobAfah203\nif previous and previous.countdown then AnyoneCore.removeTimedWorldText(previous.countdown) end\ndata.ucobAfah203=state\nlocal target=TensorCore.mGetEntity(cast.targetID)\nif duration>0 and target and target.alive then\n state.countdown=AnyoneCore.addWorldTextCountdownOnEnt(duration,target.id,0xFFFFFFFF,true,1.35,2.3,0,\"Morn Afah \")\nend\nif duration>0 and (not previous or Now()>=previous.expires) then\n AnyoneCore.Shotcall(\"Stack\",true,3,false)\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -21185,7 +21185,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local cast=eventArgs\nlocal duration=cast.channelTimeMax*1000\nlocal state={target=cast.targetID,boss=cast.entityID,expires=Now()+duration+500}\nlocal previous=data.ucobAfah206\nif previous and previous.countdown then AnyoneCore.removeTimedWorldText(previous.countdown) end\ndata.ucobAfah206=state\nlocal target=TensorCore.mGetEntity(cast.targetID)\nif duration>0 and target and target.alive then\n state.countdown=AnyoneCore.addWorldTextCountdownOnEnt(duration,target.id,0xFFFFFFFF,true,1.35,2.3,0,\"Morn Afah \")\nend\nself.used=true",
+							actionLua = "local cast=eventArgs\nlocal duration=cast.channelTimeMax*1000\nlocal state={target=cast.targetID,boss=cast.entityID,expires=Now()+duration+500}\nlocal previous=data.ucobAfah206\nif previous and previous.countdown then AnyoneCore.removeTimedWorldText(previous.countdown) end\ndata.ucobAfah206=state\nlocal target=TensorCore.mGetEntity(cast.targetID)\nif duration>0 and target and target.alive then\n state.countdown=AnyoneCore.addWorldTextCountdownOnEnt(duration,target.id,0xFFFFFFFF,true,1.35,2.3,0,\"Morn Afah \")\nend\nif duration>0 and (not previous or Now()>=previous.expires) then\n AnyoneCore.Shotcall(\"Stack\",true,3,false)\nend\nself.used=true",
 							conditions = 
 							{
 								

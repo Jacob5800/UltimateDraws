@@ -290,7 +290,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Golden Bahamut settings now offer Exaflares or Subtractive draws. Subtractive shades the arena green and cuts out only the current blast in each active lane. (19-11-2026)
 
-- Morn Afah shows a cast countdown over the stack target. (19-11-2026)
+- Morn Afah calls “Stack” at cast start and shows a countdown over the stack target. (19-11-2026)
 
 - Both Adds quotes show a player-attached countdown when spread is next. (19-11-2026)
 
