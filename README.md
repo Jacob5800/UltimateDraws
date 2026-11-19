@@ -276,7 +276,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Heavensfall hides the personal arrow when its path crosses a locked dive lane. (19-11-2026)
 
-- Grand Octet switches the personal route arrow to middle as soon as your dive bait locks. Twintania bait guidance retains priority. (19-11-2026)
+- Grand Octet starts the rim route as soon as Nael locks Lunar Dive. Later bait locks still guide you back to middle, and Twintania bait guidance retains priority. (19-11-2026)
 
 - Blackfire marks dropped Hypernova puddles. Heavensfall calls Move to tower knockback when your staging draw appears. (19-11-2026)
 
