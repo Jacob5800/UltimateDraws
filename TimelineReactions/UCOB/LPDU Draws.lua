@@ -9640,6 +9640,69 @@ local tbl =
 			inheritanceRoot = "store\\anyone\\ucob\\universal",
 			objectType = "folder",
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Personal Guidance",
+				uuid = "2c1aecf2-7a02-43c5-833a-f1c81f8b1ee2",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local cast = eventArgs\nlocal target = TensorCore.mGetEntity(cast.targetID)\nlocal duration = math.floor((cast.channelTimeMax or 0) * 1000)\nif duration <= 0 or not target or not target.alive then return end\n\n-- Flatten hits one target. This small ring marks the tank.\nlocal drawer = TensorCore.getStaticDrawer(0xFF4040FF, 3)\ndrawer:addTimedCircleOnEnt(duration, target.id, 1.25, 0, false, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nAnyoneCore.addWorldTextCountdownOnEnt(duration, target.id, 0xFFFFFFFF, true, 1.35, 2.3, 0, \"Flatten \")\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"5098708d-dfa2-1def-84ec-8e9c71da82d1",
+									true,
+								},
+							},
+							name = "Mark the Flatten target",
+							uuid = "576c5938-40d1-07d4-875a-68f7d28a19ce",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID == 3210 and eventArgs.spellID == 9941",
+							dequeueIfLuaFalse = true,
+							name = "Bahamut Prime Flatten cast",
+							uuid = "5098708d-dfa2-1def-84ec-8e9c71da82d1",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 3,
+				mechanicTime = 525,
+				name = "[LPDU] Flatten - Tank target and countdown",
+				timeRange = true,
+				timelineIndex = 89,
+				timerEndOffset = 1,
+				timerStartOffset = -6,
+				uuid = "7374bc4d-6d11-6990-a707-a8326ce2688d",
+				version = 2,
+			},
+		},
 	},
 	[90] = 
 	{
@@ -10622,6 +10685,69 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\ucob\\universal",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Personal Guidance",
+				uuid = "3f52e398-7bce-bfc4-bf58-21a891f5b9e4",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local cast = eventArgs\nlocal target = TensorCore.mGetEntity(cast.targetID)\nlocal duration = math.floor((cast.channelTimeMax or 0) * 1000)\nif duration <= 0 or not target or not target.alive then return end\n\n-- Flatten hits one target. This small ring marks the tank.\nlocal drawer = TensorCore.getStaticDrawer(0xFF4040FF, 3)\ndrawer:addTimedCircleOnEnt(duration, target.id, 1.25, 0, false, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nAnyoneCore.addWorldTextCountdownOnEnt(duration, target.id, 0xFFFFFFFF, true, 1.35, 2.3, 0, \"Flatten \")\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"644cf992-75da-2dcb-a3f8-afbcdc2ef0e7",
+									true,
+								},
+							},
+							name = "Mark the Flatten target",
+							uuid = "2010c145-f03b-7d9d-a765-85139bf9e537",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID == 3210 and eventArgs.spellID == 9941",
+							dequeueIfLuaFalse = true,
+							name = "Bahamut Prime Flatten cast",
+							uuid = "644cf992-75da-2dcb-a3f8-afbcdc2ef0e7",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 3,
+				mechanicTime = 563.9,
+				name = "[LPDU] Flatten - Tank target and countdown",
+				timeRange = true,
+				timelineIndex = 100,
+				timerEndOffset = 1,
+				timerStartOffset = -5,
+				uuid = "d8055acd-7d45-350c-b9df-d9cf04e01dd6",
+				version = 2,
+			},
 		},
 	},
 	[101] = 
@@ -12336,6 +12462,69 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\ucob\\universal",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Personal Guidance",
+				uuid = "2a5d617e-e45b-2815-88da-ed1124b87390",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local cast = eventArgs\nlocal target = TensorCore.mGetEntity(cast.targetID)\nlocal duration = math.floor((cast.channelTimeMax or 0) * 1000)\nif duration <= 0 or not target or not target.alive then return end\n\n-- Flatten hits one target. This small ring marks the tank.\nlocal drawer = TensorCore.getStaticDrawer(0xFF4040FF, 3)\ndrawer:addTimedCircleOnEnt(duration, target.id, 1.25, 0, false, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nAnyoneCore.addWorldTextCountdownOnEnt(duration, target.id, 0xFFFFFFFF, true, 1.35, 2.3, 0, \"Flatten \")\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"dcc75f4f-cf9a-53e4-879f-c515c1da9880",
+									true,
+								},
+							},
+							name = "Mark the Flatten target",
+							uuid = "99c6849f-a81f-4f37-8f7c-147787b187b7",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID == 3210 and eventArgs.spellID == 9941",
+							dequeueIfLuaFalse = true,
+							name = "Bahamut Prime Flatten cast",
+							uuid = "dcc75f4f-cf9a-53e4-879f-c515c1da9880",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 3,
+				mechanicTime = 660.4,
+				name = "[LPDU] Flatten - Tank target and countdown",
+				timeRange = true,
+				timelineIndex = 123,
+				timerEndOffset = 1,
+				timerStartOffset = -5,
+				uuid = "63320d45-b7ef-614f-96ca-a040aefb94f2",
+				version = 2,
+			},
 		},
 	},
 	[124] = 
@@ -15121,6 +15310,69 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\ucob\\universal",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Personal Guidance",
+				uuid = "c55d2302-e728-e31d-b50d-0b35164f6907",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local cast = eventArgs\nlocal target = TensorCore.mGetEntity(cast.targetID)\nlocal duration = math.floor((cast.channelTimeMax or 0) * 1000)\nif duration <= 0 or not target or not target.alive then return end\n\n-- Flatten hits one target. This small ring marks the tank.\nlocal drawer = TensorCore.getStaticDrawer(0xFF4040FF, 3)\ndrawer:addTimedCircleOnEnt(duration, target.id, 1.25, 0, false, false, Argus2.RenderFlags.FLAG_RENDER_OVERLAY)\nAnyoneCore.addWorldTextCountdownOnEnt(duration, target.id, 0xFFFFFFFF, true, 1.35, 2.3, 0, \"Flatten \")\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"ab6da28b-a011-b2f9-8005-aa5b2340bfd6",
+									true,
+								},
+							},
+							name = "Mark the Flatten target",
+							uuid = "be772d59-aaf0-191a-87cd-e3d3da422129",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return eventArgs.entityContentID == 3210 and eventArgs.spellID == 9941",
+							dequeueIfLuaFalse = true,
+							name = "Bahamut Prime Flatten cast",
+							uuid = "ab6da28b-a011-b2f9-8005-aa5b2340bfd6",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Personal Guidance",
+				eventType = 3,
+				mechanicTime = 778.4,
+				name = "[LPDU] Flatten - Tank target and countdown",
+				timeRange = true,
+				timelineIndex = 150,
+				timerEndOffset = 1,
+				timerStartOffset = -5,
+				uuid = "661c7977-eeed-6015-941f-7d0db68cdc19",
+				version = 2,
+			},
 		},
 	},
 	[151] = 

@@ -274,6 +274,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UCOB: LPDU
 
+- All four Flatten casts mark the targeted tank and show a countdown through the cast. (19-11-2026)
+
 - Added an arrow to the marked player for the second Fireball. It yields to Hatch and Liquid Hell assignments. Twister and Twisting Dive use a countdown attached to the player. (19-11-2026)
 
 - Removed the duplicate first Liquid Hell edge-bait callout. The bait marker and its callout remain. (19-11-2026)
