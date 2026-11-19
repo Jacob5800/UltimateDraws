@@ -274,7 +274,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UCOB: LPDU
 
-- Quickmarch and both Tenstrike Earthshaker waves show only your cone, green when clear or red when it clips a teammate. (19-11-2026)
+- Quickmarch and both Tenstrike Earthshaker waves show every cone. Your cone is green when clear or red when it clips a teammate. (19-11-2026)
 
 - The first Adds quote shows player-attached In and Out countdowns in sequence. (19-11-2026)
 
