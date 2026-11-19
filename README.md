@@ -274,6 +274,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UCOB: LPDU
 
+- The first Adds quote shows player-attached In and Out countdowns in sequence. (19-11-2026)
+
 - Grand Octet now previews your Twister bait near the towers and marks actual Twister spawns. (19-11-2026)
 
 - Tenstrike shows all three neurolinks during Hatch assignment, bases the move-out arrow on the link actually soaked, and shortens the spread callout to Spread away from 4. (19-11-2026)
@@ -291,8 +293,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Morn Afah shows a cast countdown over the stack target. (19-11-2026)
 
 - Both Adds quotes show a player-attached countdown when spread is next. (19-11-2026)
-
-- Heavensfall hides the personal arrow when its path crosses a locked dive lane. (19-11-2026)
 
 ### UCOB: ACR3 Optimization
 
