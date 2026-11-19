@@ -290,7 +290,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Quickmarch arrows stay steady near their destinations, and stack and Earthshaker guidance clear on the hit. (19-11-2026)
 
-- Grand Octet keeps only the tower you enter highlighted until it resolves. (19-11-2026)
+- Grand Octet highlights free towers, points eligible players to the nearest free tower, and keeps their claimed tower highlighted. (19-11-2026)
 
 - Tenstrike Hatch shows available neurolinks and points to the nearest free one. Follow-up guidance tracks the link you enter and the link actually soaked. (19-11-2026)
 
