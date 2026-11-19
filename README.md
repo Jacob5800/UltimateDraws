@@ -244,6 +244,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### TOP: LPDU
 
+- Pantokrator holds the opening cone guide longer and routes the second Testing puddle toward the arena edge, away from the group. (19-11-2026)
+
 - Pantokrator Testing spread guides you inward toward the opposite cone, back away from the group, then back to your group. (19-11-2026)
 
 - Program Loop tower countdowns track tower hits and refine upcoming timings after each wave. (19-11-2026)
