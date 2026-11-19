@@ -69,6 +69,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### TEA: ACR3 Opti
 
+- TEA ACR3 Opti enables the AoE quick toggle once all four Jagd Dolls resolve. (19-11-2026)
+
 - TEA ACR3 Opti uses LPDU doll quadrants, prioritizes confirmed personal tethers, and returns to Living Liquid when doll targeting is unsafe. (19-11-2026)
 
 - Added LPDU Jagd Doll targeting for ACR3 users without AA AutoSim. It follows Party Roster assignments and personal tethers, then returns to Living Liquid at 24.9% HP or when the doll window ends. (11-11-2026)

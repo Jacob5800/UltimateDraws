@@ -409,8 +409,79 @@ local tbl =
 				timeRange = true,
 				timelineIndex = 4,
 				timerEndOffset = 40,
-				timerStartOffset = -5.8,
+				timerStartOffset = -5.8000001907349,
 				uuid = "f9726e52-c4fa-5315-ba76-61bb6a743505",
+				version = 2,
+			},
+		},
+	},
+	[5] = 
+	{
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"debde90f-c526-4a35-be44-874a320fe10d",
+									true,
+								},
+								
+								{
+									"c3033626-55fa-bc17-9e8d-e9db1a1a4349",
+									true,
+								},
+							},
+							gVar = "ACR_TensorReaper3_AOE",
+							name = "Turn AoE back on",
+							uuid = "a6e2f640-c38e-5419-a882-e2fdca1d1e71",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							localmapid = 887,
+							name = "TEA only",
+							uuid = "debde90f-c526-4a35-be44-874a320fe10d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "if data.tea_autosim or data.teaDollSafety then return false end\nlocal seen = data.teaAcr3AoeSeenDolls\nif not seen then\n    seen = {count = 0}\n    data.teaAcr3AoeSeenDolls = seen\nend\nlocal active = false\nfor id, doll in pairs(TensorCore.entityList(\"contentid=9214\")) do\n    if doll.targetable and doll.hp and doll.hp.current > 0 then\n        active = true\n        if not seen[id] then\n            seen[id] = true\n            seen.count = seen.count + 1\n        end\n    end\nend\nreturn seen.count >= 4 and not active",
+							name = "All four dolls spawned and resolved",
+							uuid = "c3033626-55fa-bc17-9e8d-e9db1a1a4349",
+							version = 3,
+						},
+					},
+				},
+				mechanicTime = 36.7,
+				name = "[ACR3] Enable AoE after all Jagd Dolls",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 5,
+				timerEndOffset = 35,
+				timerStartOffset = -6,
+				uuid = "b9f228d9-87a4-ba7b-ad5f-8f2a6770e36e",
 				version = 2,
 			},
 		},
