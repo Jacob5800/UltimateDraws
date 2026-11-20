@@ -287,7 +287,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### FRU: LPDU
 
-- Diamond Dust lane drops and Banish III spread use the standard player-attached countdown layout. (20-11-2026)
+- Fall of Faith Conga appears at 86. Added separate Party Roster clockspot previews at pull start and P2 start. Diamond Dust lane drops and Banish III spread use the standard player-attached countdown layout. (20-11-2026)
 
 - Added a player-attached rewind countdown near the end of Crystallize Time, using the remaining Return debuff duration. (15-11-2026)
 
