@@ -287,7 +287,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### FRU: LPDU
 
-- Fall of Faith Conga appears at 82. Utopian Sky has an optional Raised Sword callout for your clockspot. Non-tanks get a Go inside cue when the first cleave clears in the P1 tower knockback pattern. Added separate Party Roster clockspot previews with short green arrows and direction callouts at pull start and P2 start. The P1 preview is near max melee. The P2 preview starts at 204 and uses 40% opacity. Diamond Dust lane drops and Banish III spread use the standard player-attached countdown layout. (20-11-2026)
+- Fall of Faith Conga appears at 82. Utopian Sky has an optional Raised Sword callout for your clockspot. Non-tanks get a Go inside cue when the first cleave clears in the P1 tower knockback pattern. Added separate Party Roster clockspot previews with short green arrows and direction callouts at pull start and P2 start. The P1 preview is near max melee. The P2 preview starts at 204, uses 40% opacity, and points 11.5 yalms from center. Diamond Dust lane drops and Banish III spread use the standard player-attached countdown layout. (20-11-2026)
 
 - Added a player-attached rewind countdown near the end of Crystallize Time, using the remaining Return debuff duration. (15-11-2026)
 
