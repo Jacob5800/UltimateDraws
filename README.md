@@ -204,6 +204,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### DSR: LPDU (Beta)
 
+- Moved P1 Hyperdimensional Slash beam markers from 8.5 to 9.5 yalms and limited the Adelphel knockback preparation callout to once per sequence. (20-11-2026)
+
 - Added debug log details for Dive from Grace facing and action stops. (20-11-2026)
 
 - Removed raidwide mitigation callouts, including Ultimate End, and raidwide countdowns. Removed the Nidhogg enrage callout and countdown. Removed the Heal Haurchefant – Damage Spear callout and Pierce countdown. Removed lingering Liquid Heaven puddle timers after Wrath of the Heavens. Blue jump guidance shows the nearest available spot earlier and redirects when another player claims it. Removed knockback immunity announcements. Removed the Eyes bleed heal callout and consolidated overlapping blue-orb and Mirage Dive instructions. Simplified the Mirage Dive chain-swap callouts. Added explicit P4 gold and blue orb soak callouts with higher draw priority. Moved P1 beam spread guides one yalm farther out. Corrected the second Dive from Grace drop positions and cleared conga guidance when Doom begins. Added an optional personal Brightwing countdown. Physical ranged get one Head Graze attempt on the second Holiest Hallowing while Adelphel is still casting. Meteor route arrows stay silent so spacing warnings are clear. Added Dive from Grace facing and landing previews with optional facing lock and automatic action stop and resume. Post-Strength cleave draws follow Thordan as he turns. Strength of the Ward calls “Your tower” once, one second before it resolves. (19-11-2026)
@@ -220,14 +222,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - P5 clears stale twister guidance and restores confirmed cross knockback positioning. P6 keeps clear breath destinations visible and previews the Wroth Akh Morn corner earlier. (16-11-2026)
 - P5 conga circles hide when occupied. An optional drag-to-swap lineup gives each player a preposition arrow and starts with M1, MT, H1, OT, M2, R2, H2, R1. (16-11-2026)
-- Death of the Heavens shows four open conga spots on each side before Doom. (16-11-2026)
-- Wrath donut guidance gives Chain Lightning targets separate spots and keeps the group clear inside the donut. (16-11-2026)
-- P5 announces the Wrath cone bait once per cast. (16-11-2026)
-- Rewind shows Haurchefant’s green marker only to healers. (16-11-2026)
-- P4 shows the assigned chain partner for both players and confirms when chain swaps and orb soaks are complete. (16-11-2026)
-- P3 line dodges after landing now prefer a clear route north whenever the player is free to regroup. (16-11-2026)
-- Added a personal blue jump callout on marker appearance and an optional nearest available jump spot arrow, off by default. (16-11-2026)
-- Anchored Easthogg tower forecasts to arena east and corrected stale local jump assignments using the active debuff. (16-11-2026)
 
 ### TOP: AutoSim
 
