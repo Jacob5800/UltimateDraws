@@ -3398,6 +3398,87 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Draws",
+				uuid = "c553ba23-a25d-1943-8642-45aae1052867",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "self.used=true\nif data.lpdu_p2_inout~=1 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.alive or not p.pos then return end\nlocal id=eventArgs.spellID\nlocal state=data.lpduDDOutSwapCue\nif id==40198 then\n if not state or not state.blockers[eventArgs.entityID]then return end\n state.blockers[eventArgs.entityID]=nil\n if next(state.blockers)then return end\n state.resumeAt=Now()+1000\n AnyoneCore.Shotcall(\"Swap in\",true,1,false)\n return\nend\nif id==40199 then\n if state and next(state.blockers) and not state.holdShown then\n  state.holdShown=true\n  TensorCore.addAlertText(650,\"Hold for icicle\",1,2,false)\n end\n return\nend\nif state then return end\nlocal marked,icicles=data.lpdu_p2_DD_marked,data.lpdu_p2_DD_icicle\nif not marked or #marked~=4 or not icicles or #icicles~=2 then return end\nfor _,target in ipairs(marked)do if target==p.id then return end end\nlocal ownHit=false\nfor _,target in ipairs(eventArgs.hitTargets or {})do if target==p.id then ownHit=true;break end end\nif not ownHit then return end\nlocal dx,dz=100-p.pos.x,100-p.pos.z\nlocal lengthSq=dx*dx+dz*dz\nif lengthSq<1 then return end\nlocal inside=false\nlocal blockers={}\nfor _,source in ipairs(icicles)do\n local icicle=TensorCore.mGetEntity(source)\n if not icicle or not icicle.pos then return end\n local x,z=icicle.pos.x-p.pos.x,icicle.pos.z-p.pos.z\n if x*x+z*z<=10.5^2 then inside=true end\n local t=math.max(0,math.min(1,(x*dx+z*dz)/lengthSq))\n if (x-t*dx)^2+(z-t*dz)^2<=10.5^2 then blockers[source]=true end\nend\nif inside then blockers={} end\ndata.lpduDDOutSwapCue={blockers=blockers,resumeAt=Now()+1000}\nif not next(blockers)then AnyoneCore.Shotcall(\"Swap in\",true,1,false) end\n",
+							conditions = 
+							{
+								
+								{
+									"9bca7f1c-0316-fb5c-abf2-68356d39fc91",
+									true,
+								},
+								
+								{
+									"1c00f684-156a-11e6-b991-6d281b109e51",
+									true,
+								},
+							},
+							name = "Cue the personal safe return",
+							uuid = "b41d00a0-0002-e7e6-a175-45df7ccedb84",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							localmapid = 1238,
+							name = "FRU only",
+							uuid = "9bca7f1c-0316-fb5c-abf2-68356d39fc91",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local id=eventArgs.spellID;return id==40206 or id==40199 or id==40198",
+							dequeueIfLuaFalse = true,
+							name = "Cone, puddle, or first icicle",
+							uuid = "1c00f684-156a-11e6-b991-6d281b109e51",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Draws",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 245.1,
+				name = "[LPDU] Diamond Dust - Personal Out Swap cue",
+				timeRange = true,
+				timelineIndex = 47,
+				timerEndOffset = 4,
+				timerStartOffset = -1,
+				uuid = "8dcfb1b7-f0fc-278b-9525-7c03ac551ef6",
+				version = 2,
+			},
+		},
 	},
 	[49] = 
 	{
@@ -3450,7 +3531,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local player = TensorCore.mGetPlayer()\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif player == nil or player.pos == nil or roster == nil or roster.current() == nil or not roster.isReady() then\n    self.used = true\n    return\nend\n\nlocal slot = roster.mySlot()\n-- LPDU groups: G1 = T1/H1/M1/R1; G2 = T2/H2/M2/R2.\nlocal group1 = slot == \"T1\" or slot == \"MT\" or slot == \"H1\" or slot == \"M1\" or slot == \"R1\"\nlocal group2 = slot == \"T2\" or slot == \"OT\" or slot == \"H2\" or slot == \"M2\" or slot == \"R2\"\nif not group1 and not group2 then\n    self.used = true\n    return\nend\n\n-- The first two Icicle Impacts identify the opposite LPDU landing sides.\nlocal icicles = data.lpdu_p2_DD_icicle\nif icicles == nil or #icicles < 2 then\n    self.used = true\n    return\nend\n\nlocal state = data.lpdu_p2_DD_knockback_tether\nif state == nil then\n    state = {\n        center = { x = 100, y = 0, z = 100 },\n        impactPos = {},\n        playerPos = {},\n        safeCircleUUID = nil,\n        landingCircleUUID = nil,\n        tetherUUID = nil\n    }\n    data.lpdu_p2_DD_knockback_tether = state\nend\nlocal center = state.center\nlocal impactPos = state.impactPos\n\nlocal safeIcicle\nfor i = 1, 2 do\n    local ent = TensorCore.mGetEntity(icicles[i])\n    if ent ~= nil and ent.pos ~= nil then\n        impactPos.x = ent.pos.x\n        impactPos.y = 0\n        impactPos.z = ent.pos.z\n        local dx = impactPos.x - center.x\n        local dz = impactPos.z - center.z\n        -- LPDU priority: G1 takes north/west; G2 takes east/south.\n        local safeForG1 = (math.abs(dx) <= 4 and dz < 0) or dx < -4\n        if safeForG1 == group1 then\n            safeIcicle = ent\n            break\n        end\n    end\nend\n\nif safeIcicle == nil or safeIcicle.pos == nil then\n    self.used = true\n    return\nend\n\nimpactPos.x = safeIcicle.pos.x\nimpactPos.y = 0\nimpactPos.z = safeIcicle.pos.z\n-- One early cue toward the assigned arrow destination, before moving for knockback.\nif not state.directionCalled and TensorReactions_CurrentTimer>=246.5 then\n local fx,fz=center.x-player.pos.x,center.z-player.pos.z\n local length=math.sqrt(fx*fx+fz*fz)\n local tx,tz=impactPos.x-center.x,impactPos.z-center.z\n local targetLength=math.sqrt(tx*tx+tz*tz)\n if targetLength>1 then\n  local message\n  if length>1 then\n   local lateral=(-fz*tx+fx*tz)/(length*targetLength)\n   if lateral>.15 then message=\"Knockback right\"\n   elseif lateral<-.15 then message=\"Knockback left\" end\n  end\n  -- Already lined up or at center: name the landing side rather than saying hold.\n  if not message then\n   local direction\n   if math.abs(tx)<targetLength*.38 then direction=tz<0 and \"north\" or \"south\"\n   elseif math.abs(tz)<targetLength*.38 then direction=tx<0 and \"west\" or \"east\"\n   elseif tz<0 then direction=tx<0 and \"northwest\" or \"northeast\"\n   else direction=tx<0 and \"southwest\" or \"southeast\" end\n   message=\"Knockback \"..direction\n  end\n  AnyoneCore.Shotcall(message,true,3,true)\n  state.directionCalled=true\n end\nend\nlocal sideHeading = TensorCore.getHeadingToTarget(center, impactPos)\nif sideHeading == nil then\n    self.used = true\n    return\nend\n\nlocal standX, standY, standZ = TensorCore.getPosInDirection(center, sideHeading, 2.5, true)\nif standX == nil or standZ == nil then\n    self.used = true\n    return\nend\n\n-- Bright yellow separates guidance from the blue/red floor.\nlocal safeDrawer = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(1, .9, 0, .55), 3)\nstate.safeDrawer = safeDrawer\n-- Remove previous yellow circles when this window refreshes.\nif state.safeCircleUUID then Argus.deleteTimedShape(state.safeCircleUUID);state.safeCircleUUID=nil end\nif state.landingCircleUUID then Argus.deleteTimedShape(state.landingCircleUUID);state.landingCircleUUID=nil end\n\n-- Short assigned-side arrow, independent of the inherited long arrow.\nlocal arrowDrawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(1,.9,0,.95),3)\nlocal timeout=math.max(100,math.floor((251.2-TensorReactions_CurrentTimer)*1000))\nif state.sideArrowUUID and not arrowDrawer:updateTimedArrow(state.sideArrowUUID,timeout,100,.08,100,sideHeading,1.7,.55,.8,1.2,0,false) then\n Argus.deleteTimedShape(state.sideArrowUUID);state.sideArrowUUID=nil\nend\nif not state.sideArrowUUID then state.sideArrowUUID=arrowDrawer:addTimedArrow(timeout,100,.08,100,sideHeading,1.7,.55,.8,1.2,0,false) end\n\nlocal playerPos = state.playerPos\nplayerPos.x = player.pos.x\nplayerPos.y = player.pos.y or 0\nplayerPos.z = player.pos.z\n\n-- Heavenly Strike knocks outward from its observed arena-center source.\n-- Previous pull positions measured 14.6-16.2 yalms, so the guide uses 15.5.\nlocal knockbackHeading = TensorCore.getHeadingToTarget(center, playerPos)\nif knockbackHeading == nil then\n    self.used = true\n    return\nend\nlocal landingX, landingY, landingZ = TensorCore.getPosInDirection(playerPos, knockbackHeading, 15.5, true)\nif landingX == nil or landingZ == nil then\n    self.used = true\n    return\nend\n\nlocal tetherDrawer = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(1, .9, 0, .98), 3)\nstate.tetherDrawer = tetherDrawer\n\n-- Refresh one player-to-landing tether and endpoint as the player moves.\nif state.tetherUUID ~= nil then\n    if not tetherDrawer:updateTimedLine(\n        state.tetherUUID, 500,\n        playerPos.x, playerPos.y, playerPos.z,\n        landingX, landingY or playerPos.y, landingZ,\n        0.35, 0.9, 0) then\n        Argus.deleteTimedShape(state.tetherUUID)\n        state.tetherUUID = nil\n    end\nend\nif state.tetherUUID == nil then\n    state.tetherUUID = tetherDrawer:addTimedLine(\n        500,\n        playerPos.x, playerPos.y, playerPos.z,\n        landingX, landingY or playerPos.y, landingZ,\n        0.35, 0.9, 0)\nend\n\n-- Mark this update complete; Loop Reaction refreshes until the impact time.\nself.used = true",
+							actionLua = "local player = TensorCore.mGetPlayer()\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif player == nil or player.pos == nil or roster == nil or roster.current() == nil or not roster.isReady() then\n    self.used = true\n    return\nend\n\nlocal slot = roster.mySlot()\n-- LPDU groups: G1 = T1/H1/M1/R1; G2 = T2/H2/M2/R2.\nlocal group1 = slot == \"T1\" or slot == \"MT\" or slot == \"H1\" or slot == \"M1\" or slot == \"R1\"\nlocal group2 = slot == \"T2\" or slot == \"OT\" or slot == \"H2\" or slot == \"M2\" or slot == \"R2\"\nif not group1 and not group2 then\n    self.used = true\n    return\nend\n\n-- The first two Icicle Impacts identify the opposite LPDU landing sides.\nlocal icicles = data.lpdu_p2_DD_icicle\nif icicles == nil or #icicles < 2 then\n    self.used = true\n    return\nend\n\nlocal state = data.lpdu_p2_DD_knockback_tether\nif state == nil then\n    state = {\n        center = { x = 100, y = 0, z = 100 },\n        impactPos = {},\n        playerPos = {},\n        safeCircleUUID = nil,\n        landingCircleUUID = nil,\n        tetherUUID = nil\n    }\n    data.lpdu_p2_DD_knockback_tether = state\nend\nlocal center = state.center\nlocal impactPos = state.impactPos\n\nlocal safeIcicle\nfor i = 1, 2 do\n    local ent = TensorCore.mGetEntity(icicles[i])\n    if ent ~= nil and ent.pos ~= nil then\n        impactPos.x = ent.pos.x\n        impactPos.y = 0\n        impactPos.z = ent.pos.z\n        local dx = impactPos.x - center.x\n        local dz = impactPos.z - center.z\n        -- LPDU priority: G1 takes north/west; G2 takes east/south.\n        local safeForG1 = (math.abs(dx) <= 4 and dz < 0) or dx < -4\n        if safeForG1 == group1 then\n            safeIcicle = ent\n            break\n        end\n    end\nend\n\nif safeIcicle == nil or safeIcicle.pos == nil then\n    self.used = true\n    return\nend\n\nimpactPos.x = safeIcicle.pos.x\nimpactPos.y = 0\nimpactPos.z = safeIcicle.pos.z\n-- One early cue toward the assigned arrow destination, before moving for knockback.\nlocal swapCue=data.lpduDDOutSwapCue\nif not state.directionCalled and TensorReactions_CurrentTimer>=246.5\n and (not swapCue or (not next(swapCue.blockers) and Now()>=swapCue.resumeAt)) then\n local fx,fz=center.x-player.pos.x,center.z-player.pos.z\n local length=math.sqrt(fx*fx+fz*fz)\n local tx,tz=impactPos.x-center.x,impactPos.z-center.z\n local targetLength=math.sqrt(tx*tx+tz*tz)\n if targetLength>1 then\n  local message\n  if length>1 then\n   local lateral=(-fz*tx+fx*tz)/(length*targetLength)\n   if lateral>.15 then message=\"Knockback right\"\n   elseif lateral<-.15 then message=\"Knockback left\" end\n  end\n  -- Already lined up or at center: name the landing side rather than saying hold.\n  if not message then\n   local direction\n   if math.abs(tx)<targetLength*.38 then direction=tz<0 and \"north\" or \"south\"\n   elseif math.abs(tz)<targetLength*.38 then direction=tx<0 and \"west\" or \"east\"\n   elseif tz<0 then direction=tx<0 and \"northwest\" or \"northeast\"\n   else direction=tx<0 and \"southwest\" or \"southeast\" end\n   message=\"Knockback \"..direction\n  end\n  AnyoneCore.Shotcall(message,true,3,true)\n  state.directionCalled=true\n end\nend\nlocal sideHeading = TensorCore.getHeadingToTarget(center, impactPos)\nif sideHeading == nil then\n    self.used = true\n    return\nend\n\nlocal standX, standY, standZ = TensorCore.getPosInDirection(center, sideHeading, 2.5, true)\nif standX == nil or standZ == nil then\n    self.used = true\n    return\nend\n\n-- Bright yellow separates guidance from the blue/red floor.\nlocal safeDrawer = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(1, .9, 0, .55), 3)\nstate.safeDrawer = safeDrawer\n-- Remove previous yellow circles when this window refreshes.\nif state.safeCircleUUID then Argus.deleteTimedShape(state.safeCircleUUID);state.safeCircleUUID=nil end\nif state.landingCircleUUID then Argus.deleteTimedShape(state.landingCircleUUID);state.landingCircleUUID=nil end\n\n-- Short assigned-side arrow, independent of the inherited long arrow.\nlocal arrowDrawer=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(1,.9,0,.95),3)\nlocal timeout=math.max(100,math.floor((251.2-TensorReactions_CurrentTimer)*1000))\nif state.sideArrowUUID and not arrowDrawer:updateTimedArrow(state.sideArrowUUID,timeout,100,.08,100,sideHeading,1.7,.55,.8,1.2,0,false) then\n Argus.deleteTimedShape(state.sideArrowUUID);state.sideArrowUUID=nil\nend\nif not state.sideArrowUUID then state.sideArrowUUID=arrowDrawer:addTimedArrow(timeout,100,.08,100,sideHeading,1.7,.55,.8,1.2,0,false) end\n\nlocal playerPos = state.playerPos\nplayerPos.x = player.pos.x\nplayerPos.y = player.pos.y or 0\nplayerPos.z = player.pos.z\n\n-- Heavenly Strike knocks outward from its observed arena-center source.\n-- Previous pull positions measured 14.6-16.2 yalms, so the guide uses 15.5.\nlocal knockbackHeading = TensorCore.getHeadingToTarget(center, playerPos)\nif knockbackHeading == nil then\n    self.used = true\n    return\nend\nlocal landingX, landingY, landingZ = TensorCore.getPosInDirection(playerPos, knockbackHeading, 15.5, true)\nif landingX == nil or landingZ == nil then\n    self.used = true\n    return\nend\n\nlocal tetherDrawer = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(1, .9, 0, .98), 3)\nstate.tetherDrawer = tetherDrawer\n\n-- Refresh one player-to-landing tether and endpoint as the player moves.\nif state.tetherUUID ~= nil then\n    if not tetherDrawer:updateTimedLine(\n        state.tetherUUID, 500,\n        playerPos.x, playerPos.y, playerPos.z,\n        landingX, landingY or playerPos.y, landingZ,\n        0.35, 0.9, 0) then\n        Argus.deleteTimedShape(state.tetherUUID)\n        state.tetherUUID = nil\n    end\nend\nif state.tetherUUID == nil then\n    state.tetherUUID = tetherDrawer:addTimedLine(\n        500,\n        playerPos.x, playerPos.y, playerPos.z,\n        landingX, landingY or playerPos.y, landingZ,\n        0.35, 0.9, 0)\nend\n\n-- Mark this update complete; Loop Reaction refreshes until the impact time.\nself.used = true",
 							name = "[LPDU] Personal knockback bait circle",
 							uuid = "5a58e4d3-f2b5-5095-945e-1bfb1d650194",
 							version = 2.1,
