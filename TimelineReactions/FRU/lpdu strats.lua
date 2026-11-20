@@ -2740,7 +2740,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "if data.lpdu_p2_DD_marked == nil then data.lpdu_p2_DD_marked = {} end\ntable.insert(data.lpdu_p2_DD_marked,eventArgs.entityID)\nself.used = true",
+							actionLua = "if data.lpdu_p2_DD_marked == nil then data.lpdu_p2_DD_marked = {} end\ntable.insert(data.lpdu_p2_DD_marked,eventArgs.entityID)\nlocal p=TensorCore.mGetPlayer()\nif p and p.id==eventArgs.entityID and not data.lpduDDFrigidStoneCountdown\n and AnyoneCore and AnyoneCore.addWorldTextCountdownOnEnt then\n local remaining=math.floor((246.8-TensorReactions_CurrentTimer)*1000)\n if remaining>0 then\n  data.lpduDDFrigidStoneCountdown=AnyoneCore.addWorldTextCountdownOnEnt(remaining,p.id,0xFFFFFFFF,true,1.5,2,0)\n end\nend\nself.used = true",
 							conditions = 
 							{
 								
@@ -3351,7 +3351,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local p=TensorCore.mGetPlayer()\nlocal marked=data.lpdu_p2_DD_marked\nif not p or not marked or data.lpduDDReturnCalled then self.used=true;return end\nlocal mine=false\nfor _,id in ipairs(marked) do if id==p.id then mine=true;break end end\nif mine then\n for _,id in ipairs(eventArgs.hitTargets) do\n  if id==p.id then\n   data.lpduDDReturnCalled=true\n   AnyoneCore.Shotcall(\"Return middle\",true,2.5,true)\n   break\n  end\n end\nend\nself.used=true",
+							actionLua = "local p=TensorCore.mGetPlayer()\nlocal marked=data.lpdu_p2_DD_marked\nif not p or not marked or data.lpduDDReturnCalled then self.used=true;return end\nlocal mine=false\nfor _,id in ipairs(marked) do if id==p.id then mine=true;break end end\nif mine then\n for _,id in ipairs(eventArgs.hitTargets) do\n  if id==p.id then\n   local countdown=data.lpduDDFrigidStoneCountdown\n   if countdown and AnyoneCore.removeTimedWorldText then AnyoneCore.removeTimedWorldText(countdown) end\n   data.lpduDDFrigidStoneCountdown=nil\n   data.lpduDDReturnCalled=true\n   AnyoneCore.Shotcall(\"Return middle\",true,2.5,true)\n   break\n  end\n end\nend\nself.used=true",
 							conditions = 
 							{
 								
