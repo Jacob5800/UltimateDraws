@@ -3447,6 +3447,7 @@ local tbl =
 				{
 				},
 				displayPath = "LPDU / Diamond Dust lane timer",
+				enabled = false,
 				eventType = 13,
 				loop = true,
 				mechanicTime = 255.1,
@@ -3470,7 +3471,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "if data.lpduDDLaneTimer then self.used=true;return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not JacobWorldText then return end\nlocal ms=(255.2-TensorReactions_CurrentTimer)*1000\nif ms<=0 then self.used=true;return end\ndata.lpduDDLaneTimer={count=0,last=0}\nJacobWorldText.cancelEntityCountdown(\"fru-dd-lane\")\nJacobWorldText.addEntityCountdown(ms,p.id,0xFFFFFFFF,true,1.875,2,\"fru-dd-lane\")\nself.used=true",
+							actionLua = "if data.lpduDDLaneTimer then self.used=true;return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not AnyoneCore or not AnyoneCore.addWorldTextCountdownOnEnt then return end\nlocal ms=(255.2-TensorReactions_CurrentTimer)*1000\nif ms<=0 then self.used=true;return end\nlocal id=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(ms),p.id,0xFFFFFFFF,true,1.5,2,0)\nif not id then return end\ndata.lpduDDLaneTimer={count=0,last=0,textID=id}\nself.used=true",
 							conditions = 
 							{
 								
@@ -3492,7 +3493,7 @@ local tbl =
 						data = 
 						{
 							category = "Lua",
-							conditionLua = "return JacobWorldText~=nil",
+							conditionLua = "return AnyoneCore and AnyoneCore.addWorldTextCountdownOnEnt~=nil",
 							eventArgType = 2,
 							eventSpellID = 40208,
 							name = "Countdown helper ready",
@@ -3525,7 +3526,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.lpduDDLaneTimer\nif s and s.done then self.used=true;return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not JacobWorldText then return end\nif not s then s={count=0,last=0};data.lpduDDLaneTimer=s end\nif not s.source then\n -- Bind to the assigned landing lane, without requiring a replay hit-target match.\n local landing=data.lpdu_p2_DD_knockback_tether\n landing=landing and landing.impactPos\n local source=TensorCore.mGetEntity(eventArgs.entityID)\n if not landing or not source or not source.pos then self.used=true;return end\n if TensorCore.getDistance2d(landing,source.pos)>2 then self.used=true;return end\n s.source=eventArgs.entityID\nend\nif eventArgs.entityID~=s.source then self.used=true;return end\nlocal now=Now()\nif now-s.last<700 then self.used=true;return end\ns.last=now\n-- Recover the ordinal if setup or the first native drop was missed.\nlocal wave=math.max(1,math.min(4,math.floor((TensorReactions_CurrentTimer-255.2)/1.5+.5)+1))\ns.count=math.max(s.count+1,wave)\nJacobWorldText.cancelEntityCountdown(\"fru-dd-lane\")\nif s.count>=4 then s.done=true\nelse JacobWorldText.addEntityCountdown(1500,p.id,0xFFFFFFFF,true,1.875,2,\"fru-dd-lane\") end\nself.used=true",
+							actionLua = "local s=data.lpduDDLaneTimer\nif s and s.done then self.used=true;return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not AnyoneCore or not AnyoneCore.addWorldTextCountdownOnEnt then return end\nif not s then s={count=0,last=0};data.lpduDDLaneTimer=s end\nif not s.source then\n -- Bind to the assigned landing lane, without requiring a replay hit-target match.\n local landing=data.lpdu_p2_DD_knockback_tether\n landing=landing and landing.impactPos\n local source=TensorCore.mGetEntity(eventArgs.entityID)\n if not landing or not source or not source.pos then self.used=true;return end\n if TensorCore.getDistance2d(landing,source.pos)>2 then self.used=true;return end\n s.source=eventArgs.entityID\nend\nif eventArgs.entityID~=s.source then self.used=true;return end\nlocal now=Now()\nif now-s.last<700 then self.used=true;return end\ns.last=now\n-- Recover the ordinal if setup or the first native drop was missed.\nlocal wave=math.max(1,math.min(4,math.floor((TensorReactions_CurrentTimer-255.2)/1.5+.5)+1))\ns.count=math.max(s.count+1,wave)\nif s.textID then AnyoneCore.removeTimedWorldText(s.textID);s.textID=nil end\nif s.count>=4 then s.done=true\nelse s.textID=AnyoneCore.addWorldTextCountdownOnEnt(1500,p.id,0xFFFFFFFF,true,1.5,2,0) end\nself.used=true",
 							conditions = 
 							{
 								
@@ -4918,6 +4919,7 @@ local tbl =
 				{
 				},
 				displayPath = "LPDU / Personal timers",
+				enabled = false,
 				eventType = 13,
 				loop = true,
 				mechanicTime = 322.5,
@@ -4995,7 +4997,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local s=data.frup2_banish_timer\nif not s or s.started then self.used=true;return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not JacobWorldText then return end\nlocal remaining=s.deadline-Now()\nif remaining<=0 then data.frup2_banish_timer=nil;self.used=true;return end\nJacobWorldText.cancelEntityCountdown(\"fru-banish-spread\")\nJacobWorldText.addEntityCountdown(remaining,p.id,0xFFFFFFFF,true,1.5,2,\"fru-banish-spread\")\ns.started=true\nself.used=true",
+							actionLua = "local s=data.frup2_banish_timer\nif not s or s.started then self.used=true;return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not AnyoneCore or not AnyoneCore.addWorldTextCountdownOnEnt then return end\nlocal remaining=s.deadline-Now()\nif remaining<=0 then data.frup2_banish_timer=nil;self.used=true;return end\ns.textID=AnyoneCore.addWorldTextCountdownOnEnt(math.floor(remaining),p.id,0xFFFFFFFF,true,1.5,2,0)\nif not s.textID then return end\ns.started=true\nself.used=true",
 							conditions = 
 							{
 								
@@ -5046,7 +5048,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "if JacobWorldText then JacobWorldText.cancelEntityCountdown(\"fru-banish-spread\") end\ndata.frup2_banish_timer=nil\nself.used=true",
+							actionLua = "local s=data.frup2_banish_timer\nif s and s.textID then AnyoneCore.removeTimedWorldText(s.textID) end\ndata.frup2_banish_timer=nil\nself.used=true",
 							conditions = 
 							{
 								
