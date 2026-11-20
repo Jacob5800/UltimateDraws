@@ -4017,6 +4017,11 @@ local tbl =
 							{
 								
 								{
+									"5e055551-0073-5b44-b44c-b8206c326fdb",
+									true,
+								},
+								
+								{
 									"2b33826b-ae1d-799e-ae11-1b17926551fb",
 									true,
 								},
@@ -4135,6 +4140,18 @@ local tbl =
 							category = "Action",
 							name = "Native action used",
 							uuid = "7c4d2cc6-6fd8-5e35-a922-19d2cff6d439",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							localmapid = 968,
+							name = "DSR only",
+							uuid = "5e055551-0073-5b44-b44c-b8206c326fdb",
 							version = 3,
 						},
 					},
