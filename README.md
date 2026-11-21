@@ -18,6 +18,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UWU: AutoSim
 
+- Late Garuda Satin Plume targeting (around 110) now finds the plumes and switches to them immediately, even mid-cast. (21-11-2026)
+
 - Caster Ifrit nails: after the nearest nail reaches 40%, the caster moves on to any other nail still above 40% instead of returning to Ifrit. Awakened nails are still killed in order as soon as their debuff stacks are up, and Ifrit is only targeted when neither applies. Target switches now happen immediately, even mid-cast, including right after a nail dies. (21-11-2026)
 
 - Added an optional P4 cast-interrupt checkbox for the Ultima Suppression gaol and automatic targeting for late Garuda Satin Plumes, prioritizing the one tethered to R2. (19-11-2026)
