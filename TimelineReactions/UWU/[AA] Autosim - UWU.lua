@@ -4919,6 +4919,121 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							actionID = 7559,
+							conditions = 
+							{
+								
+								{
+									"c2c32eb1-99ad-1bbc-a413-f637e2f24ffa",
+									true,
+								},
+								
+								{
+									"2dd21877-7763-6b32-8f66-8b36b2b18384",
+									true,
+								},
+								
+								{
+									"b195e86b-4506-0cec-96a6-b776853046f1",
+									true,
+								},
+								
+								{
+									"4d630a38-e432-21c8-8bef-ddbb54104fa5",
+									true,
+								},
+							},
+							name = "Surecast (fallback)",
+							uuid = "eef5b621-d810-c0ca-bf16-d55032701983",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU territory",
+							uuid = "c2c32eb1-99ad-1bbc-a413-f637e2f24ffa",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								25,
+								27,
+								35,
+								42,
+								24,
+								28,
+								33,
+								40,
+							},
+							name = "Caster or healer",
+							uuid = "2dd21877-7763-6b32-8f66-8b36b2b18384",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local C=_G.UWU_BLM_AutoSimConfig\nlocal G=_G.UWU_AutoSimSettings\nreturn (C==nil or C.surecast~=false) and (G==nil or G.vulcanKnockback~=false)",
+							dequeueIfLuaFalse = true,
+							name = "Immunity option enabled",
+							uuid = "b195e86b-4506-0cec-96a6-b776853046f1",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local p=TensorCore.mGetPlayer()\nreturn p~=nil and p.alive and not TensorCore.getBuff(p.id,160)",
+							dequeueIfLuaFalse = true,
+							name = "No Surecast buff yet",
+							uuid = "4d630a38-e432-21c8-8bef-ddbb54104fa5",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Abilities",
+				mechanicTime = 315,
+				name = "[UWU] Surecast fallback - Vulcan Burst",
+				throttleTime = 100,
+				timeRange = true,
+				timelineIndex = 39,
+				timerEndOffset = -0.4,
+				timerStartOffset = -2.4,
+				uuid = "cc3f3c40-05a3-22ba-a3fe-567a3900ffa7",
+				version = 2,
+			},
+		},
 	},
 	[43] = 
 	{
