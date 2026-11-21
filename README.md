@@ -18,6 +18,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UWU: AutoSim
 
+- Added a P1 setting, on by default: in the Garuda opening, AutoSim switches to a Satin Plume tethered to you, even mid-cast. The stack-ready Spiny Plume targeting and its settings were removed. (21-11-2026)
+
 - Spiny Plume targeting switches immediately, even mid-cast, and stays quiet when turned off. (21-11-2026)
 
 - Late Garuda Satin Plume targeting (around 110) now finds the plumes and switches to them immediately, even mid-cast. (21-11-2026)
