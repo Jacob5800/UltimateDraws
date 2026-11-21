@@ -5403,6 +5403,144 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "AutoSim",
+				name = "Abilities",
+				uuid = "12230665-3e4c-1763-8965-bb062c8f1f55",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"a0eb3121-d17d-9dbb-9ff6-604647bb673f",
+									true,
+								},
+								
+								{
+									"238067c7-9aa5-284c-8537-3560b5db09c2",
+									true,
+								},
+								
+								{
+									"f91c0f3a-c058-e431-968c-9d04da44d43d",
+									true,
+								},
+								
+								{
+									"41bf6182-a13b-82ed-a6e5-286aeb12f400",
+									true,
+								},
+								
+								{
+									"d99ff1ea-ea7a-4938-a6ef-ae6dbf4675a5",
+									true,
+								},
+							},
+							gVar = "ACR_TensorNuke4_Hotbar_Manaward",
+							name = "BLM - Manaward after nail explosion",
+							uuid = "0f6e60d3-b845-facd-8fae-5e9692900efd",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							dequeueIfLuaFalse = true,
+							localmapid = 777,
+							name = "UWU territory",
+							uuid = "a0eb3121-d17d-9dbb-9ff6-604647bb673f",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 14,
+							dequeueIfLuaFalse = true,
+							jobIDList = 
+							{
+								25,
+							},
+							name = "Supported jobs: BLM",
+							uuid = "238067c7-9aa5-284c-8537-3560b5db09c2",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local C=_G.UWU_BLM_AutoSimConfig\nreturn C==nil or C.manaward~=false",
+							dequeueIfLuaFalse = true,
+							name = "Manaward option enabled",
+							uuid = "f91c0f3a-c058-e431-968c-9d04da44d43d",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 2,
+							eventEntityContentID = 1186,
+							name = "Infernal Nail 1186",
+							uuid = "41bf6182-a13b-82ed-a6e5-286aeb12f400",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgType = 2,
+							eventSpellID = 11096,
+							name = "Infernal Surge 11096",
+							uuid = "d99ff1ea-ea7a-4938-a6ef-ae6dbf4675a5",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Abilities",
+				eventType = 2,
+				mechanicTime = 328,
+				name = "[UWU] Manaward after first nail explosion",
+				timeRange = true,
+				timelineIndex = 43,
+				timerEndOffset = 75,
+				uuid = "f7d36016-e228-9883-86e7-b824cc78619b",
+				version = 2,
+			},
+		},
 	},
 	[50] = 
 	{
