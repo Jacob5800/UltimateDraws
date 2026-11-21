@@ -18,6 +18,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UWU: AutoSim
 
+- Fixed the first Ifrit eruption-bait movement window in the AutoSim forecast: it was planned about 7 seconds too early and too short, and now covers the actual first eruption set. (21-11-2026)
+
 - New General option 'Log forecast timing (diagnostics)', off by default. When enabled it writes the planned eruption-bait movement windows to the fight log; it does not change behaviour. (21-11-2026)
 
 - Black Mage now requests Manaward when the first Infernal Nail explodes (Infernal Surge), whenever that happens, under the existing Automatic Manaward option. (21-11-2026)

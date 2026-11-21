@@ -2294,6 +2294,60 @@ local tbl =
 		{
 			data = 
 			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "-- Native logs (2 pulls): Ifrit's first eruption set casts at Garuda-end +52.2 to +61.4 (bait call +49.1), not +44.5..+47.0.\n-- Corrects only the first eruption-bait movement window, once per pull, before each forecast publish.\nlocal S = data.uwuAutoSim\nif not S or S.eruptionTimingWrapped or not S.publish then return end\nS.eruptionTimingWrapped = true\nlocal publish = S.publish\nS.publish = function(...)\n for _, w in ipairs(S.windows or {}) do\n  if w[7] == \"eruption bait\" and w[1] == \"CasterDowntime\" and w[2] == \"p1end\" and w[4] == \"p1end\" and w[3] == 44.5 then\n   w[3] = 51.0\n   w[5] = 60.0\n  end\n end\n return publish(...)\nend\n",
+							conditions = 
+							{
+								
+								{
+									"2e86d374-004b-386e-8436-aa1f97a67d1d",
+									true,
+								},
+							},
+							name = "Wrap forecast publish with first-bait timing",
+							uuid = "f9d43700-db3d-ec2e-9564-44074df01f32",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							localmapid = 777,
+							name = "UWU territory",
+							uuid = "2e86d374-004b-386e-8436-aa1f97a67d1d",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Setup and cleanup",
+				loop = true,
+				mechanicTime = 9,
+				name = "[UWU] Correct first eruption-bait window timing",
+				throttleTime = 1000,
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 1290,
+				timerStartOffset = -29,
+				uuid = "a73e36fe-eeaa-c269-932b-6cd297fa6b86",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "AutoSim",
 				name = "Settings",
 				uuid = "bd1bf611-c87c-8bd4-b1ff-3978e266ed89",
