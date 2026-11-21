@@ -2301,7 +2301,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "-- Native logs (2 pulls): Ifrit's first eruption set casts at Garuda-end +52.2 to +61.4 (bait call +49.1), not +44.5..+47.0.\n-- Corrects only the first eruption-bait movement window, once per pull, before each forecast publish.\nlocal S = data.uwuAutoSim\nif not S or S.eruptionTimingWrapped or not S.publish then return end\nS.eruptionTimingWrapped = true\nlocal publish = S.publish\nS.publish = function(...)\n for _, w in ipairs(S.windows or {}) do\n  if w[7] == \"eruption bait\" and w[1] == \"CasterDowntime\" and w[2] == \"p1end\" and w[4] == \"p1end\" and w[3] == 44.5 then\n   w[3] = 51.0\n   w[5] = 60.0\n  end\n end\n return publish(...)\nend\n",
+							actionLua = "-- Native logs (pulls 3-9): eruption sets cast at Garuda-end +52.3..+58.3 and +91.0..+97.0; the bait call lands ~3 s (first set) / ~4.5 s (second) before.\n-- Opens each eruption-bait movement window about 3 s before its first cast so the player can reach pre-bait positions; once per pull, before each forecast publish.\nlocal S = data.uwuAutoSim\nif not S or S.eruptionTimingWrapped or not S.publish then return end\nS.eruptionTimingWrapped = true\nlocal publish = S.publish\nS.publish = function(...)\n for _, w in ipairs(S.windows or {}) do\n  if w[7] == \"eruption bait\" and w[1] == \"CasterDowntime\" and w[2] == \"p1end\" and w[4] == \"p1end\" then\n   if w[3] == 44.5 then\n    w[3] = 49.3\n    w[5] = 61.0\n   elseif w[3] == 91.5 then\n    w[3] = 88.0\n    w[5] = 99.0\n   end\n  end\n end\n return publish(...)\nend\n",
 							conditions = 
 							{
 								
@@ -2310,7 +2310,7 @@ local tbl =
 									true,
 								},
 							},
-							name = "Wrap forecast publish with first-bait timing",
+							name = "Wrap forecast publish with eruption-bait timing",
 							uuid = "f9d43700-db3d-ec2e-9564-44074df01f32",
 							version = 2.1,
 						},
@@ -2334,7 +2334,7 @@ local tbl =
 				displayPath = "AutoSim/Setup and cleanup",
 				loop = true,
 				mechanicTime = 9,
-				name = "[UWU] Correct first eruption-bait window timing",
+				name = "[UWU] Correct eruption-bait window timing",
 				throttleTime = 1000,
 				timeRange = true,
 				timelineIndex = 2,
