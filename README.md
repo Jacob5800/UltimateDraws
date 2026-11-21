@@ -316,6 +316,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UWU: LPDU
 
+- Automatic nail targeting (used when no AutoSim is running) now finds the nails and Ifrit correctly. (21-11-2026)
+
 - Garuda healers and Titan melee now get arrows to the actual Light Puddle. The Titan Mountain Buster cone previews from 713 and clears on the hit. The Garuda Move to 3 (SE) callout starts one second earlier. (19-11-2026)
 
 - Added a spoken Dodge twice cue at 744s before the last two Weight of the Land hits. (19-11-2026)
