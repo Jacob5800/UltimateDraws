@@ -2240,60 +2240,6 @@ local tbl =
 		{
 			data = 
 			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "Lua",
-							actionLua = "local S = data.uwuAutoSim\nif not S or not S.cfg or not S.publish then return end\nlocal job = Player.job\nlocal eligible = job == 25 or job == 27 or job == 35 or job == 42 or job == 23 or job == 31 or job == 38\nif not eligible or S.cfg.fakeMelee then self.used = true; return end\n\n-- Eruption baits belong to R1/R2. A melee roster slot never baits, so treat it as fake melee.\nlocal roster = AnyoneCore and AnyoneCore.Roster\nif not roster or not roster.current() or not roster.isReady() then return end\nlocal slot = roster.mySlot()\nif slot == \"M1\" or slot == \"M2\" then\n S.cfg.fakeMelee = true\n S.rouletteForecast()\n S.publish()\n TensorCore.timelineLogToFile(\"[UWU AutoSim] roster slot \" .. tostring(slot) .. \": eruption-bait movement removed from the forecast\\n\")\nend\nself.used = true\n",
-							conditions = 
-							{
-								
-								{
-									"8475111b-a465-e85f-9cf7-08f3effd243a",
-									true,
-								},
-							},
-							name = "Roster M1/M2: skip eruption bait forecast",
-							uuid = "21d44b3b-051c-1bc7-933c-436be116de26",
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 8,
-							dequeueIfLuaFalse = true,
-							localmapid = 777,
-							name = "UWU territory",
-							uuid = "8475111b-a465-e85f-9cf7-08f3effd243a",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "AutoSim/Setup and cleanup",
-				mechanicTime = 9,
-				name = "[UWU] Melee slot skips eruption bait forecast",
-				throttleTime = 500,
-				timeRange = true,
-				timelineIndex = 2,
-				timerEndOffset = 100,
-				timerStartOffset = -29,
-				uuid = "e273db88-eb27-4dcb-83f9-b779d82340ec",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
 				displayPath = "AutoSim",
 				name = "Settings",
 				uuid = "bd1bf611-c87c-8bd4-b1ff-3978e266ed89",
