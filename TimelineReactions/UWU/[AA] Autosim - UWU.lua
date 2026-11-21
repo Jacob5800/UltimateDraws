@@ -2240,6 +2240,60 @@ local tbl =
 		{
 			data = 
 			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "-- Diagnostics only: wraps this pull's forecast publish() once; the forecast itself is unchanged.\nlocal S = data.uwuAutoSim\nif not S or S.eruptionLogWrapped or not S.publish then return end\nS.eruptionLogWrapped = true\nlocal publish = S.publish\nlocal lastKey\nS.publish = function(...)\n local result = publish(...)\n pcall(function()\n  local A = TensorCore.API.TensorACR\n  local windows = {}\n  for _, w in ipairs(S.windows or {}) do\n   if w[7] == \"eruption bait\" then\n    windows[#windows + 1] = string.format(\"%s+%.1f=%.1f-%.1f\", tostring(w[2]), w[3], S.time(w[2]) + w[3], S.time(w[4]) + w[5])\n   end\n  end\n  local observed = {}\n  for _, name in ipairs({\"p1end\", \"ifrit1\", \"ifritDash\", \"p2end\", \"ifrit2Back\", \"titan1\", \"p3end\", \"p4end\"}) do\n   if S.observed and S.observed[name] then observed[#observed + 1] = string.format(\"%s=%.1f\", name, S.observed[name]) end\n  end\n  local slot = \"unavailable\"\n  local roster = AnyoneCore and AnyoneCore.Roster\n  if roster and roster.current() then slot = tostring(roster.mySlot()) end\n  local fake = S.cfg and S.cfg.fakeMelee == true\n  local key = tostring(fake) .. \"|\" .. table.concat(windows, \",\") .. \"|\" .. table.concat(observed, \",\")\n  if key == lastKey then return end\n  lastKey = key\n  TensorCore.timelineLogToFile(string.format(\"[UWU forecast] clock=%.1f job=%s slot=%s fakeMelee=%s eruptionWindows=%s observedAnchors=%s\\n\", A.getAutoSimTime(), tostring(Player.job), slot, tostring(fake), fake and \"skipped\" or table.concat(windows, \" \"), table.concat(observed, \" \")))\n end)\n return result\nend\nTensorCore.timelineLogToFile(\"[UWU forecast] eruption-window logging attached\\n\")\n",
+							conditions = 
+							{
+								
+								{
+									"eaf2e4ea-4f11-4beb-a30d-8d7edcdb7580",
+									true,
+								},
+							},
+							name = "Wrap forecast publish with window logging",
+							uuid = "34e71ae9-626d-6486-84b6-e25c2ac2b632",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 8,
+							localmapid = 777,
+							name = "UWU territory",
+							uuid = "eaf2e4ea-4f11-4beb-a30d-8d7edcdb7580",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "AutoSim/Setup and cleanup",
+				loop = true,
+				mechanicTime = 9,
+				name = "[UWU] Log forecast eruption windows",
+				throttleTime = 1000,
+				timeRange = true,
+				timelineIndex = 2,
+				timerEndOffset = 1290,
+				timerStartOffset = -29,
+				uuid = "7a9d88c6-8622-75a1-af3b-308bd2d2cec3",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "AutoSim",
 				name = "Settings",
 				uuid = "bd1bf611-c87c-8bd4-b1ff-3978e266ed89",
