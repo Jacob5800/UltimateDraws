@@ -5567,6 +5567,49 @@ local tbl =
 							version = 2.1,
 						},
 					},
+					
+					{
+						data = 
+						{
+							actionID = 157,
+							conditions = 
+							{
+								
+								{
+									"a0eb3121-d17d-9dbb-9ff6-604647bb673f",
+									true,
+								},
+								
+								{
+									"238067c7-9aa5-284c-8537-3560b5db09c2",
+									true,
+								},
+								
+								{
+									"f91c0f3a-c058-e431-968c-9d04da44d43d",
+									true,
+								},
+								
+								{
+									"41bf6182-a13b-82ed-a6e5-286aeb12f400",
+									true,
+								},
+								
+								{
+									"d99ff1ea-ea7a-4938-a6ef-ae6dbf4675a5",
+									true,
+								},
+								
+								{
+									"17d7139e-e61c-3207-bc10-54af7b5dd61c",
+									true,
+								},
+							},
+							name = "Manaward (direct fallback)",
+							uuid = "cdef6d50-b598-f9b7-b860-3680fa986637",
+							version = 2.1,
+						},
+					},
 				},
 				conditions = 
 				{
@@ -5634,6 +5677,17 @@ local tbl =
 							eventSpellID = 11096,
 							name = "Infernal Surge 11096",
 							uuid = "d99ff1ea-ea7a-4938-a6ef-ae6dbf4675a5",
+							version = 3,
+						},
+					},
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local p=TensorCore.mGetPlayer()\nreturn p~=nil and p.alive and not TensorCore.getBuff(p.id,168)",
+							name = "Alive, no Manaward yet",
+							uuid = "17d7139e-e61c-3207-bc10-54af7b5dd61c",
 							version = 3,
 						},
 					},

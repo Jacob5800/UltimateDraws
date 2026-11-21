@@ -18,6 +18,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UWU: AutoSim
 
+- Black Mage's Manaward after the first nail explosion now also casts directly if the ACR is slow to use it, so it lands right after the explosion instead of several seconds late. (21-11-2026)
+
 - Vulcan Burst Surecast fallback now starts about 2 seconds earlier, so it can slot into a weave gap instead of landing just before the knockback. (21-11-2026)
 
 - Fixed the Ifrit eruption-bait movement windows in the AutoSim forecast: the first was planned about 7 seconds too early and the second opened too late. Both now open about 2 seconds before the eruptions start, so you can reach your bait position, and cover the whole set. (21-11-2026)
