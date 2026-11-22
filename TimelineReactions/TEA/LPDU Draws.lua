@@ -135,40 +135,6 @@ local tbl =
 			},
 		},
 	},
-	[3] = 
-	{
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "ACR",
-							gVar = "ACR_TensorReaper3_Hotbar_Feint",
-							uuid = "f3263176-85e5-ceb4-94ed-fd2c3c1ef172",
-							variableTogglesType = 2,
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-				},
-				mechanicTime = 19.5,
-				name = "[Mit] Feint",
-				timeRange = true,
-				timelineIndex = 3,
-				timerEndOffset = -0.5,
-				timerStartOffset = -9.5,
-				uuid = "f01987c5-441e-f226-993b-5042fa707ade",
-				version = 2,
-			},
-		},
-	},
 	[4] = 
 	{
 		
@@ -1765,37 +1731,6 @@ local tbl =
 		{
 			data = 
 			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
-							aType = "ACR",
-							gVar = "ACR_TensorReaper3_Hotbar_Feint",
-							uuid = "71807dcc-4b8b-2149-b9e7-0626364e7675",
-							variableTogglesType = 2,
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-				},
-				mechanicTime = 115.1,
-				name = "[Mit] Feint",
-				timeRange = true,
-				timelineIndex = 31,
-				timerEndOffset = -0.5,
-				timerStartOffset = -9.5,
-				uuid = "e1ea8aa2-1ec2-1c80-a95d-61d985d73f13",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
 				displayPath = "",
 				name = "LPDU Guidance",
 				uuid = "db49ae5d-4aaa-a9ca-b0c8-98d0d56e4748",
@@ -2118,7 +2053,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "AnyoneCore.Shotcall(\"5\", true, 5, false)\nself.used = true",
+							actionLua = "AnyoneCore.Shotcall(\"5 - Start outside\", true, 5, false)\nself.used = true",
 							conditions = 
 							{
 								
@@ -2142,7 +2077,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "AnyoneCore.Shotcall(\"6\", true, 5, false)\nself.used = true",
+							actionLua = "AnyoneCore.Shotcall(\"6 - Start outside\", true, 5, false)\nself.used = true",
 							conditions = 
 							{
 								
@@ -2166,7 +2101,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "AnyoneCore.Shotcall(\"7\", true, 5, false)\nself.used = true",
+							actionLua = "AnyoneCore.Shotcall(\"7 - Start outside\", true, 5, false)\nself.used = true",
 							conditions = 
 							{
 								
@@ -2190,7 +2125,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "AnyoneCore.Shotcall(\"8\", true, 5, false)\nself.used = true",
+							actionLua = "AnyoneCore.Shotcall(\"8 - Start outside\", true, 5, false)\nself.used = true",
 							conditions = 
 							{
 								

@@ -62,6 +62,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### TEA
 
+- Limit Cut numbers 5 through 8 now hear “Start outside” with their assignment. (22-11-2026)
+
 - Reaper ACR3 checks for your tethered doll below 40% HP directly in the Disable Soul Gauge reaction and restores the toggle when the doll resolves. (19-11-2026)
 
 - TEA ACR3 Opti enables the AoE quick toggle once all four Jagd Dolls resolve. (19-11-2026)
@@ -79,8 +81,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - After the third Flarethrower hit, True Heart gets a world label and a call to group up, build gauge or heal, then leave for the personal split. (16-11-2026)
 
 - Both Irresistible Grace stacks during Almighty Judgment now show a green circle on the stack target. (16-11-2026)
-
-- First tornado baiters hear “Move” once their cone locks. Doll previews and arrows use the LPDU quadrants, and the ranged arrow waits for the lock. (16-11-2026)
 
 ### Sil'dihn
 
