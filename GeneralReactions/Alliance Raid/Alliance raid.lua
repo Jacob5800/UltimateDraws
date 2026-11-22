@@ -9553,6 +9553,11 @@ local tbl =
 								"7adaaccd-53c9-0a16-8513-3a07f9446add",
 								true,
 							},
+							
+							{
+								"6c632aba-ac19-cb29-b2af-2cf3544ddb9a",
+								true,
+							},
 						},
 						uuid = "3ab71168-ba63-4cf0-9537-715614995b7e",
 						version = 2.1,
@@ -9596,6 +9601,18 @@ local tbl =
 						eventEntityContentID = 3231,
 						name = "Exact source",
 						uuid = "7adaaccd-53c9-0a16-8513-3a07f9446add",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn p~=nil and not TensorCore.hasBuff(p,636) and not TensorCore.hasBuff(p,637)",
+						dequeueIfLuaFalse = true,
+						name = "No Sullen/Ireful stack (fallback)",
+						uuid = "6c632aba-ac19-cb29-b2af-2cf3544ddb9a",
 						version = 3,
 					},
 				},
@@ -9905,6 +9922,297 @@ local tbl =
 			name = "[World of Darkness] Short-lived adds - DoT blacklist",
 			timeout = 2,
 			uuid = "fa1cadd4-99f9-c8e5-8582-ede9c3039615",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Alert",
+						alertDuration = 3300,
+						alertPriority = 2,
+						alertText = "Get behind (red)",
+						conditions = 
+						{
+							
+							{
+								"82708824-e44f-4e27-a465-a5e0ebfe59b8",
+								true,
+							},
+						},
+						uuid = "4ea7d268-2652-bc36-a651-9369ce36533c",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn p~=nil and p.localmapid==151 and eventArgs.spellID==3272 and eventArgs.entityContentID==3231 and TensorCore.hasBuff(p,636)",
+						dequeueIfLuaFalse = true,
+						name = "Double Vision with Sullen stack",
+						uuid = "82708824-e44f-4e27-a465-a5e0ebfe59b8",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The World of Darkness/Draws and callouts",
+			eventType = 3,
+			name = "[World of Darkness] Double Vision - Sullen (red)",
+			uuid = "d3675249-c290-d84d-a7c7-5ddd8d62dfa5",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Alert",
+						alertDuration = 3300,
+						alertPriority = 2,
+						alertText = "Get in front (white)",
+						conditions = 
+						{
+							
+							{
+								"80fa2a1c-50bc-76a4-8862-076f1c2be7ad",
+								true,
+							},
+						},
+						uuid = "5ff3691b-28c9-a6d9-8076-e03a0e588d45",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn p~=nil and p.localmapid==151 and eventArgs.spellID==3272 and eventArgs.entityContentID==3231 and TensorCore.hasBuff(p,637)",
+						dequeueIfLuaFalse = true,
+						name = "Double Vision with Ireful stack",
+						uuid = "80fa2a1c-50bc-76a4-8862-076f1c2be7ad",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The World of Darkness/Draws and callouts",
+			eventType = 3,
+			name = "[World of Darkness] Double Vision - Ireful (white)",
+			uuid = "c7fbad1b-ea75-5f0b-b5c2-10701844fb61",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "-- Cast resolves ~270-290 ms after the channel time max in the log (2.7 s -> 2.99 s, 4.2 s -> 4.47 s).\ndata.wodGazes=data.wodGazes or {}\nlocal n=Now()\ndata.wodGazes[eventArgs.entityID]={spell=eventArgs.spellID,started=n,deadline=n+eventArgs.channelTimeMax*1000+650}\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"e25d5bc5-7abb-d88d-8c78-ac705222ad0d",
+								true,
+							},
+						},
+						name = "Track gaze resolve (channel + 650 ms)",
+						uuid = "89dab4b0-c2e6-59ef-97f5-126cf8756d6e",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal s=eventArgs.spellID\nreturn p~=nil and p.localmapid==151 and eventArgs.entityContentID==3231 and (s==3281 or s==3499)",
+						dequeueIfLuaFalse = true,
+						name = "Mortal Gaze channel",
+						uuid = "e25d5bc5-7abb-d88d-8c78-ac705222ad0d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The World of Darkness/Draws and callouts",
+			eventType = 3,
+			name = "[World of Darkness] Mortal Gaze - track resolve time",
+			timeout = 9,
+			uuid = "8e0ecb43-7dcf-4064-b87f-ad6c1665747f",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local pending=data.wodGazes\nlocal A=TensorCore.API.TensorACR\nlocal p=TensorCore.mGetPlayer()\nlocal now=Now()\nlocal angles={}\nlocal remaining=false\nfor id,g in pairs(pending) do\n local e=TensorCore.mGetEntity(id)\n local interrupted=e and now-g.started>500 and now<g.deadline-900 and e.castinginfo.channelingid~=g.spell and e.castinginfo.castingid~=g.spell\n if not p or p.localmapid~=151 or not p.alive or not e or now>=g.deadline or interrupted then\n  pending[id]=nil\n else\n  remaining=true\n  if g.deadline-now<=2300 then\n   angles[#angles+1]=TensorCore.getHeadingToTarget(p.pos,e.pos)\n  end\n end\nend\nif #angles>0 then\n local heading,best=0,math.huge\n for i=0,63 do\n  local h=i*math.pi/32\n  local worst=-math.huge\n  for j=1,#angles do worst=math.max(worst,math.cos(h-angles[j])) end\n  if worst<best then best=worst;heading=h end\n end\n A.setLockFaceHeading(heading)\n A.setHardLockFace(true)\n A.toggleLockFace(true)\n data.wodGazeOwnsLock=true\nelseif data.wodGazeOwnsLock then\n A.toggleLockFace(false)\n A.setHardLockFace(false)\n data.wodGazeOwnsLock=nil\nend\nif not remaining then data.wodGazes=nil;self.used=true end",
+						conditions = 
+						{
+							
+							{
+								"3afbdf6e-4907-355b-83b8-8df63861fcc3",
+								true,
+							},
+						},
+						name = "Maintain gaze lock; release after resolve",
+						uuid = "0276e92f-796e-5d35-951c-b6262a6d728d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return data.wodGazes~=nil",
+						dequeueIfLuaFalse = true,
+						name = "Only while a captured gaze exists",
+						uuid = "3afbdf6e-4907-355b-83b8-8df63861fcc3",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The World of Darkness/Draws and callouts",
+			name = "[World of Darkness] Mortal Gaze - face away until resolved",
+			timeout = 15,
+			uuid = "81e307f3-ac8c-9a12-9050-47c805184810",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if data.wodGazeOwnsLock then\n TensorCore.API.TensorACR.toggleLockFace(false)\n TensorCore.API.TensorACR.setHardLockFace(false)\nend\ndata.wodGazeOwnsLock=nil\ndata.wodGazes=nil\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"32bbca33-ce6e-ab8c-b90d-5a185a986811",
+								true,
+							},
+						},
+						name = "Release owned gaze state",
+						uuid = "1b5ebe8d-a48e-5fd1-919e-dc3d169aac88",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return data.wodGazeOwnsLock==true or data.wodGazes~=nil",
+						dequeueIfLuaFalse = true,
+						name = "Owned gaze lock only",
+						uuid = "32bbca33-ce6e-ab8c-b90d-5a185a986811",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The World of Darkness/Draws and callouts",
+			eventType = 9,
+			name = "[World of Darkness] Mortal Gaze - release on wipe",
+			uuid = "09925c22-0443-9b9d-9a60-10530293dab0",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if data.wodGazeOwnsLock then\n TensorCore.API.TensorACR.toggleLockFace(false)\n TensorCore.API.TensorACR.setHardLockFace(false)\nend\ndata.wodGazeOwnsLock=nil\ndata.wodGazes=nil\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"cadab3e8-a9d2-b920-91c0-96a6a61f9f5d",
+								true,
+							},
+						},
+						name = "Release owned gaze state",
+						uuid = "d9482d42-1f09-a57a-8d06-1881f99af28d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return data.wodGazeOwnsLock==true or data.wodGazes~=nil",
+						dequeueIfLuaFalse = true,
+						name = "Owned gaze lock only",
+						uuid = "cadab3e8-a9d2-b920-91c0-96a6a61f9f5d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The World of Darkness/Draws and callouts",
+			eventType = 10,
+			name = "[World of Darkness] Mortal Gaze - release on death",
+			uuid = "9a45cbc5-bb6b-f371-a03c-33fc9bccd6eb",
 			version = 2,
 		},
 	},
