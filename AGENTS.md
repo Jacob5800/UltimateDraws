@@ -60,3 +60,7 @@ Live `GeneralReactions\Mountrokkon.lua` publishes to the existing `GeneralReacti
 ## Alliance raid general profile
 
 Live `GeneralReactions\Alliance raid.lua` is authoritative and publishes to `GeneralReactions\Alliance Raid\Alliance raid.lua` in this checkout (note the differently named destination subfolder). The live `GeneralReactions\Alliance Raid\Alliance raid.lua` is an older copy; do not publish it. Apply the shared copy/hash/changelog/commit/push checks; this is a general profile without a timeline version. TODO: `ALLIANCE-RAID-AUTOSIM-TODO.md` in the Agent workspace.
+
+## Trials general profile
+
+Live `GeneralReactions\Trials.lua` publishes to `GeneralReactions\Trials\Trials.lua` in this checkout (created 22-11-2026 with user approval). Apply the shared copy/hash/changelog/commit/push checks; this is a general profile without a timeline version. TODO: `TRIALS-CINDER-DRIFT-TODO.md` in the Agent workspace.

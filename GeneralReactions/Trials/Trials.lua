@@ -1,0 +1,5884 @@
+local tbl = 
+{
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "A Relic Reborn: The Chimera",
+			uuid = "e3e66af7-70e4-5f76-b2ba-f5e69b101bea",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "A Relic Reborn: The Chimera",
+			name = "Chimera",
+			uuid = "9a539814-005f-3ae0-8655-b65d0fc50f8d",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "A Relic Reborn: The Chimera/Chimera",
+			name = "Draws",
+			uuid = "a5f5400e-75ec-c376-b027-62e138da63ec",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal e = eventArgs\nlocal shapes = {[1106]=\"circle\"}\nlocal ms = math.floor(e.startTime + e.duration * 1000 - Now())\nif ms > 0 then\n    local drawer = TensorCore.getStaticDrawer(0x803333FF, 2)\n    if shapes[e.aoeID] == \"circle\" then\n        drawer:addTimedCircle(ms, e.x, e.y, e.z, e.aoeLength, 0, false, true)\n    else\n        drawer:addTimedRect(ms, e.x, e.y, e.z, e.aoeLength, e.aoeWidth, e.heading, 0, false, true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms, {x=e.x,y=e.y+1,z=e.z}, 0xFFFFFFFF, true, 1.1)\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"6e152650-3c16-de28-9264-c0c340413fd3",
+								true,
+							},
+						},
+						name = "Chimera hazard draws",
+						uuid = "4e226710-433d-13a0-b8f7-d4e02b1043f0",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 368 and (eventArgs.aoeID == 1106)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "6e152650-3c16-de28-9264-c0c340413fd3",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "A Relic Reborn: The Chimera/Chimera/Draws",
+			eventType = 18,
+			name = "Chimera hazard draws",
+			uuid = "1bdd8830-082d-c3f6-b1bf-9821f2adca26",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "A Relic Reborn: The Chimera/Chimera",
+			name = "AutoSim",
+			uuid = "9d26afc5-aefa-2fe4-bc77-e8705836493d",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local settings = AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled = false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled = false end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"58bb4a8e-0dd4-8238-8823-1bf8bc5af75c",
+								true,
+							},
+						},
+						name = "Chimera helper setup",
+						uuid = "250a5c3c-0f8d-fe39-99d8-156cf6dec2a3",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 368 and (true)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "58bb4a8e-0dd4-8238-8823-1bf8bc5af75c",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "A Relic Reborn: The Chimera/Chimera/AutoSim",
+			eventType = 11,
+			name = "Chimera helper setup",
+			uuid = "9ef52d8a-ea9c-0487-9d0a-794c44dcbeae",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 368 then self.used = true; return end\ndata.trialsInitialTargets = data.trialsInitialTargets or {}\nlocal states = data.trialsInitialTargets\nlocal state = states[\"368_2162\"] or {}\nstates[\"368_2162\"] = state\nlocal current = TensorCore.mGetTarget()\nlocal label = \"[Trials targeting] Chimera\"\nif state.pending then\n    if current and current.id == state.pending then\n        d(label .. \" confirmed target=\" .. tostring(current.id))\n        state.pending = nil\n    elseif Now() - state.requestedAt >= 1500 then\n        d(label .. \" request not confirmed; intended=\" .. tostring(state.pending) ..\n            \" current=\" .. tostring(current and current.id))\n        state.pending = nil\n    end\n    self.used = true\n    return\nend\nif player.incombat or state.done then self.used = true; return end\nlocal boss, nearest = nil, 35 * 35\nfor _, candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid=2162}) or {}) do\n    if candidate.alive and candidate.targetable and candidate.attackable and candidate.pos then\n        local dx = candidate.pos.x - player.pos.x\n        local dy = candidate.pos.y - player.pos.y\n        local dz = candidate.pos.z - player.pos.z\n        local distance = dx*dx + dy*dy + dz*dz\n        if distance <= nearest then\n            boss, nearest = candidate, distance\n        end\n    end\nend\nif not boss then\n    if not state.waitLogged then\n        d(label .. \" waiting for an attackable boss within 35 yalms; current=\" ..\n            tostring(current and current.id))\n        state.waitLogged = true\n    end\n    self.used = true\n    return\nend\nstate.done = true\nif current and current.alive and current.targetable and current.attackable then\n    d(label .. \" kept existing target; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current.id))\nelse\n    state.pending = boss.id\n    state.requestedAt = Now()\n    d(label .. \" target request; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current and current.id))\n    Player:SetTarget(boss.id)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"81412929-657a-86a0-ace7-1edf7707a284",
+								true,
+							},
+						},
+						name = "Select nearby boss once",
+						uuid = "2d5b950c-68d2-d234-a379-634fa0bf2a46",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 368 then return false end\nlocal states = data.trialsInitialTargets\nlocal state = states and states[\"368_2162\"]\nreturn (state ~= nil and state.pending ~= nil) or (not player.incombat and (not state or not state.done))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and initial target",
+						uuid = "81412929-657a-86a0-ace7-1edf7707a284",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "A Relic Reborn: The Chimera/Chimera/AutoSim",
+			name = "Chimera select boss at encounter start",
+			throttleTime = 500,
+			uuid = "7cc940e0-3221-b60c-be66-e2db607e7972",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal api = TensorCore.API.TensorACR\nlocal ok, elapsed = pcall(api.getAutoSimTime)\nif ok and type(elapsed) == \"number\" and elapsed >= 0 and elapsed <= 60 and not data.normalRaidForecastSet then\n    api.setAutoSimKillTime(57)\n    api.clearAutoSimUncertainty()\n    api.addAutoSimUncertainty(0, 15)\n    api.clearAutoSimPhases(\"FullDowntime\")\n    local downtime = {}\n    for _, window in ipairs(downtime) do\n        api.addAutoSimPhase(\"FullDowntime\", window[1], window[2], 1)\n    end\n    data.normalRaidForecastSet = true\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"62834ff0-0a38-f116-a19b-b35652c7c0fc",
+								true,
+							},
+						},
+						name = "Chimera AutoSim baseline",
+						uuid = "e1f8253f-bb6d-1b7a-8690-b0183b3beb29",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 368 and (eventArgs.spellID == 1282 and not data.normalRaidForecastSet)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "62834ff0-0a38-f116-a19b-b35652c7c0fc",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "A Relic Reborn: The Chimera/Chimera/AutoSim",
+			eventType = 3,
+			name = "Chimera AutoSim baseline",
+			uuid = "e9c8f8da-7ebc-8bab-9769-0fd1a9b5177d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "A Relic Reborn: The Hydra",
+			uuid = "ff2c0c01-a002-6c6b-a214-846cf3153d69",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "A Relic Reborn: The Hydra",
+			name = "Hydra",
+			uuid = "0aa98e77-9dc4-c596-9ba5-16fb052eee46",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "A Relic Reborn: The Hydra/Hydra",
+			name = "Draws",
+			uuid = "997878dc-d80b-4aa2-8369-897857b1b331",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal e = eventArgs\nlocal shapes = {[685]=\"circle\",[687]=\"circle\"}\nlocal ms = math.floor(e.startTime + e.duration * 1000 - Now())\nif ms > 0 then\n    local drawer = TensorCore.getStaticDrawer(0x803333FF, 2)\n    if shapes[e.aoeID] == \"circle\" then\n        drawer:addTimedCircle(ms, e.x, e.y, e.z, e.aoeLength, 0, false, true)\n    else\n        drawer:addTimedRect(ms, e.x, e.y, e.z, e.aoeLength, e.aoeWidth, e.heading, 0, false, true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms, {x=e.x,y=e.y+1,z=e.z}, 0xFFFFFFFF, true, 1.1)\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"0b2a1c8d-a557-bdc5-b2a6-d3f5fde5ce7b",
+								true,
+							},
+						},
+						name = "Hydra hazard draws",
+						uuid = "bfd1f744-2044-6f73-bf6b-00ff30dee555",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 369 and eventArgs.contentID == 2161 and (eventArgs.aoeID == 685 or eventArgs.aoeID == 687)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "0b2a1c8d-a557-bdc5-b2a6-d3f5fde5ce7b",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "A Relic Reborn: The Hydra/Hydra/Draws",
+			eventType = 18,
+			name = "Hydra hazard draws",
+			uuid = "7d3b2502-3916-889e-b94b-f51b16c9f49c",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "data.hydraFear = { id = eventArgs.entityID, finish = Now() + eventArgs.channelTimeMax * 1000 }\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"b557d1fd-b523-d122-bf18-84cac0ba0b65",
+								true,
+							},
+						},
+						name = "Hydra Fear Itself - track cast",
+						uuid = "a494387a-8d64-af9d-ad6a-bd0cc7d5326b",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 369 and eventArgs.entityContentID == 2161 and eventArgs.spellID == 1280",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "b557d1fd-b523-d122-bf18-84cac0ba0b65",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "A Relic Reborn: The Hydra/Hydra/Draws",
+			eventType = 3,
+			name = "Hydra Fear Itself - track cast",
+			timeout = 2,
+			uuid = "0250d95e-e6a4-e50e-8923-7667e4d4d4b5",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local fear = data.hydraFear\nlocal p = TensorCore.mGetPlayer()\nlocal boss = TensorCore.mGetEntity(fear.id)\nif boss and boss.alive and boss.pos then\n    local ms = math.min(260, fear.finish - Now())\n    local drawer = TensorCore.getStaticDrawer(0xA033FF33, 2)\n    drawer:addTimedCircle(ms, boss.pos.x, boss.pos.y, boss.pos.z, 1.5, 0, false, true)\n    local distance = TensorCore.getDistance2d(p.pos, boss.pos)\n    if distance > 1.5 then\n        local tip = math.min(1.3, distance * 0.4)\n        local heading = TensorCore.getHeadingToTarget(p.pos, boss.pos)\n        drawer:addTimedArrow(ms, p.pos.x, p.pos.y, p.pos.z, heading, distance - tip, 0.5, tip, 1.1, 0, false)\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"01d73c41-2388-db59-bb16-b8a4e7cef41e",
+								true,
+							},
+						},
+						name = "Hydra Fear Itself - move under boss",
+						uuid = "77f10aa9-c21d-a262-b662-e3f3a45cd043",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nlocal fear = data.hydraFear\nreturn p ~= nil and p.localmapid == 369 and p.alive and p.incombat and fear ~= nil and Now() < fear.finish",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "01d73c41-2388-db59-bb16-b8a4e7cef41e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "A Relic Reborn: The Hydra/Hydra/Draws",
+			name = "Hydra Fear Itself - move under boss",
+			throttleTime = 250,
+			timeout = 2,
+			uuid = "d6f740c5-43ea-5606-839e-e5862856bdd7",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "A Relic Reborn: The Hydra/Hydra",
+			name = "AutoSim",
+			uuid = "356a9117-3995-9491-b8b3-6ac06b7865fa",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local settings = AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled = false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled = false end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"377c8fc7-f298-aafd-8adc-953bba990a93",
+								true,
+							},
+						},
+						name = "Hydra helper setup",
+						uuid = "5d44ee12-68ce-8d4f-8d29-8d1df27502ff",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 369 and (true)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "377c8fc7-f298-aafd-8adc-953bba990a93",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "A Relic Reborn: The Hydra/Hydra/AutoSim",
+			eventType = 11,
+			name = "Hydra helper setup",
+			uuid = "d385c8b0-dc88-af88-ab5b-5326bd6e9787",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 369 then self.used = true; return end\ndata.trialsInitialTargets = data.trialsInitialTargets or {}\nlocal states = data.trialsInitialTargets\nlocal state = states[\"369_2161\"] or {}\nstates[\"369_2161\"] = state\nlocal current = TensorCore.mGetTarget()\nlocal label = \"[Trials targeting] Hydra\"\nif state.pending then\n    if current and current.id == state.pending then\n        d(label .. \" confirmed target=\" .. tostring(current.id))\n        state.pending = nil\n    elseif Now() - state.requestedAt >= 1500 then\n        d(label .. \" request not confirmed; intended=\" .. tostring(state.pending) ..\n            \" current=\" .. tostring(current and current.id))\n        state.pending = nil\n    end\n    self.used = true\n    return\nend\nif player.incombat or state.done then self.used = true; return end\nlocal boss, nearest = nil, 35 * 35\nfor _, candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid=2161}) or {}) do\n    if candidate.alive and candidate.targetable and candidate.attackable and candidate.pos then\n        local dx = candidate.pos.x - player.pos.x\n        local dy = candidate.pos.y - player.pos.y\n        local dz = candidate.pos.z - player.pos.z\n        local distance = dx*dx + dy*dy + dz*dz\n        if distance <= nearest then\n            boss, nearest = candidate, distance\n        end\n    end\nend\nif not boss then\n    if not state.waitLogged then\n        d(label .. \" waiting for an attackable boss within 35 yalms; current=\" ..\n            tostring(current and current.id))\n        state.waitLogged = true\n    end\n    self.used = true\n    return\nend\nstate.done = true\nif current and current.alive and current.targetable and current.attackable then\n    d(label .. \" kept existing target; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current.id))\nelse\n    state.pending = boss.id\n    state.requestedAt = Now()\n    d(label .. \" target request; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current and current.id))\n    Player:SetTarget(boss.id)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"2cd4b4c9-e99d-3253-8ebb-dc1aa09cafe4",
+								true,
+							},
+						},
+						name = "Select nearby boss once",
+						uuid = "bf80c2ec-6767-f005-9751-df777d8d72cd",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 369 then return false end\nlocal states = data.trialsInitialTargets\nlocal state = states and states[\"369_2161\"]\nreturn (state ~= nil and state.pending ~= nil) or (not player.incombat and (not state or not state.done))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and initial target",
+						uuid = "2cd4b4c9-e99d-3253-8ebb-dc1aa09cafe4",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "A Relic Reborn: The Hydra/Hydra/AutoSim",
+			name = "Hydra select boss at encounter start",
+			throttleTime = 500,
+			uuid = "956bffbc-d6bb-c9e7-abe5-b7fd77763d81",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal api = TensorCore.API.TensorACR\nlocal ok, elapsed = pcall(api.getAutoSimTime)\nif ok and type(elapsed) == \"number\" and elapsed >= 0 and elapsed <= 60 and not data.normalRaidForecastSet then\n    api.setAutoSimKillTime(104)\n    api.clearAutoSimUncertainty()\n    api.addAutoSimUncertainty(0, 20)\n    api.clearAutoSimPhases(\"FullDowntime\")\n    api.clearAutoSimPhases(\"CasterDowntime\")\n    api.addAutoSimPhase(\"CasterDowntime\", 43.2, 46.2, 1)\n    local downtime = {}\n    for _, window in ipairs(downtime) do\n        api.addAutoSimPhase(\"FullDowntime\", window[1], window[2], 1)\n    end\n    data.normalRaidForecastSet = true\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"cb2ffcec-9975-2cf4-91c9-6c1783f7be76",
+								true,
+							},
+						},
+						name = "Hydra AutoSim baseline",
+						uuid = "2c78aabf-345a-78a6-a3c9-3539aaf10a7f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 369 and (eventArgs.spellID == 1279 and not data.normalRaidForecastSet)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "cb2ffcec-9975-2cf4-91c9-6c1783f7be76",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "A Relic Reborn: The Hydra/Hydra/AutoSim",
+			eventType = 3,
+			name = "Hydra AutoSim baseline",
+			uuid = "808c1a1f-04bd-5b7f-a226-730103ec13e9",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "-- The player's previous toggles are kept in a global and in a small file, so a Lua reload mid-fight cannot lose them.\nlocal p = TensorCore.mGetPlayer()\nlocal folder = GetLuaModsPath() .. [[TensorReactions\\Settings\\]]\nlocal path = folder .. \"Trials-HydraBLM.lua\"\nlocal function savedCapture()\n    if not FileExists(path) then return nil end\n    local saved = FileLoad(path)\n    if type(saved) == \"table\" and saved.pending == true then return saved end\n    return nil\nend\nif p and p.localmapid == 369 and p.job == 25 then\n    if not JacobHydraBLMToggles then\n        -- After a reload mid-fight the ACR toggles are already off, so prefer the saved capture.\n        local prior = savedCapture()\n        if prior then\n            JacobHydraBLMToggles = { ley = prior.ley, triple = prior.triple }\n        else\n            JacobHydraBLMToggles = { ley = ACR_TensorNuke4_LeyLines, triple = ACR_TensorNuke4_Triplecast }\n            if not FolderExists(folder) then FolderCreate(folder) end\n            FileSave(path, { pending = true, ley = JacobHydraBLMToggles.ley, triple = JacobHydraBLMToggles.triple })\n        end\n    end\n    ACR_TensorNuke4_LeyLines = false\n    ACR_TensorNuke4_Triplecast = false\nelse\n    local prior = JacobHydraBLMToggles or savedCapture()\n    JacobHydraBLMToggles = nil\n    JacobHydraBLMChecked = true\n    if prior then\n        if ACR_TensorNuke4_LeyLines == false and type(prior.ley) == \"boolean\" then ACR_TensorNuke4_LeyLines = prior.ley end\n        if ACR_TensorNuke4_Triplecast == false and type(prior.triple) == \"boolean\" then ACR_TensorNuke4_Triplecast = prior.triple end\n        FileSave(path, { pending = false })\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"12e9d324-5b6b-334e-b4ba-b3b8a67ff91e",
+								true,
+							},
+						},
+						name = "Hydra BLM synced ability guard",
+						uuid = "90bb9846-2651-2f78-bcc0-56a00a785cb3",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nlocal active = p ~= nil and p.localmapid == 369 and p.job == 25\nif active then\n    return JacobHydraBLMToggles == nil and type(ACR_TensorNuke4_LeyLines) == \"boolean\" and type(ACR_TensorNuke4_Triplecast) == \"boolean\"\nend\n-- Outside the fight: restore owned toggles, and once per Lua session recover a capture lost to a reload.\nreturn JacobHydraBLMToggles ~= nil or not JacobHydraBLMChecked",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "12e9d324-5b6b-334e-b4ba-b3b8a67ff91e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "A Relic Reborn: The Hydra/Hydra/AutoSim",
+			name = "Hydra BLM synced ability guard",
+			throttleTime = 750,
+			timeout = 2,
+			uuid = "0137e3b8-3b39-342b-a9fb-c84e1d9e55c8",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "Containment Bay Z1T9",
+			uuid = "63a4fd6c-5e80-98e8-a11f-e0788c26b5c7",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Containment Bay Z1T9",
+			name = "Zurvan",
+			uuid = "ee8e2004-c7b6-8843-92b8-518408210cd4",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Containment Bay Z1T9/Zurvan",
+			name = "Draws",
+			uuid = "6170c10b-2ae0-a262-a555-cb332fa10a0b",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal e = eventArgs\nlocal shapes = {[7741]=\"rect\",[7732]=\"circle\",[7725]=\"circle\"}\nlocal ms = math.floor(e.startTime + e.duration * 1000 - Now())\nif ms > 0 then\n    local drawer = TensorCore.getStaticDrawer(0x803333FF, 2)\n    if shapes[e.aoeID] == \"circle\" then\n        drawer:addTimedCircle(ms, e.x, e.y, e.z, e.aoeLength, 0, false, true)\n    else\n        drawer:addTimedRect(ms, e.x, e.y, e.z, e.aoeLength, e.aoeWidth, e.heading, 0, false, true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms, {x=e.x,y=e.y+1,z=e.z}, 0xFFFFFFFF, true, 1.1)\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"26847791-e9ea-f911-838e-e1a5bb3c9a27",
+								true,
+							},
+						},
+						name = "Zurvan hazard draws",
+						uuid = "ddfe17bb-c8e7-1ed2-ba5d-2cf1f9032515",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 637 and (eventArgs.aoeID == 7741 or eventArgs.aoeID == 7732 or eventArgs.aoeID == 7725)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "26847791-e9ea-f911-838e-e1a5bb3c9a27",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Containment Bay Z1T9/Zurvan/Draws",
+			eventType = 18,
+			name = "Zurvan hazard draws",
+			uuid = "c405db47-c450-c3ea-9689-8f24f7e6f8d9",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Containment Bay Z1T9/Zurvan",
+			name = "AutoSim",
+			uuid = "badb770e-3cae-f305-a1df-6e90b9300052",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local settings = AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled = false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled = false end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"799f4eeb-311f-7dd7-ac06-7dd1ec23bd4d",
+								true,
+							},
+						},
+						name = "Zurvan helper setup",
+						uuid = "7f2b6a16-8c66-b2f7-8647-5f3e8cb25a85",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 637 and (true)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "799f4eeb-311f-7dd7-ac06-7dd1ec23bd4d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Containment Bay Z1T9/Zurvan/AutoSim",
+			eventType = 11,
+			name = "Zurvan helper setup",
+			uuid = "fbf15a96-13ad-aaf2-94d4-721a5c1e05c4",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 637 then self.used = true; return end\ndata.trialsInitialTargets = data.trialsInitialTargets or {}\nlocal states = data.trialsInitialTargets\nlocal state = states[\"637_5567\"] or {}\nstates[\"637_5567\"] = state\nlocal current = TensorCore.mGetTarget()\nlocal label = \"[Trials targeting] Zurvan\"\nif state.pending then\n    if current and current.id == state.pending then\n        d(label .. \" confirmed target=\" .. tostring(current.id))\n        state.pending = nil\n    elseif Now() - state.requestedAt >= 1500 then\n        d(label .. \" request not confirmed; intended=\" .. tostring(state.pending) ..\n            \" current=\" .. tostring(current and current.id))\n        state.pending = nil\n    end\n    self.used = true\n    return\nend\nif player.incombat or state.done then self.used = true; return end\nlocal boss, nearest = nil, 35 * 35\nfor _, candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid=5567}) or {}) do\n    if candidate.alive and candidate.targetable and candidate.attackable and candidate.pos then\n        local dx = candidate.pos.x - player.pos.x\n        local dy = candidate.pos.y - player.pos.y\n        local dz = candidate.pos.z - player.pos.z\n        local distance = dx*dx + dy*dy + dz*dz\n        if distance <= nearest then\n            boss, nearest = candidate, distance\n        end\n    end\nend\nif not boss then\n    if not state.waitLogged then\n        d(label .. \" waiting for an attackable boss within 35 yalms; current=\" ..\n            tostring(current and current.id))\n        state.waitLogged = true\n    end\n    self.used = true\n    return\nend\nstate.done = true\nif current and current.alive and current.targetable and current.attackable then\n    d(label .. \" kept existing target; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current.id))\nelse\n    state.pending = boss.id\n    state.requestedAt = Now()\n    d(label .. \" target request; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current and current.id))\n    Player:SetTarget(boss.id)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"91c11600-33b3-6549-aa01-0743c75a40f2",
+								true,
+							},
+						},
+						name = "Select nearby boss once",
+						uuid = "44eaf51a-fa14-155a-8d15-a81e224920fe",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 637 then return false end\nlocal states = data.trialsInitialTargets\nlocal state = states and states[\"637_5567\"]\nreturn (state ~= nil and state.pending ~= nil) or (not player.incombat and (not state or not state.done))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and initial target",
+						uuid = "91c11600-33b3-6549-aa01-0743c75a40f2",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Containment Bay Z1T9/Zurvan/AutoSim",
+			name = "Zurvan select boss at encounter start",
+			throttleTime = 500,
+			uuid = "c9f47e72-dc3b-fd49-88d3-31a099c3e47e",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal api = TensorCore.API.TensorACR\nlocal ok, elapsed = pcall(api.getAutoSimTime)\nif ok and type(elapsed) == \"number\" and elapsed >= 0 and elapsed <= 60 and not data.normalRaidForecastSet then\n    api.setAutoSimKillTime(308)\n    api.clearAutoSimUncertainty()\n    api.addAutoSimUncertainty(0, 20)\n    api.clearAutoSimPhases(\"FullDowntime\")\n    local downtime = {{48.2,57.2},{76.8,93.1},{117.9,134.1},{154.9,175.3},{221.2,249.3}}\n    for _, window in ipairs(downtime) do\n        api.addAutoSimPhase(\"FullDowntime\", window[1], window[2], 1)\n    end\n    data.normalRaidForecastSet = true\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"df3ce1a9-55a7-5af4-acb3-3be6082ce439",
+								true,
+							},
+						},
+						name = "Zurvan AutoSim baseline",
+						uuid = "622695a4-0456-3b18-9b9a-0f8839414737",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 637 and (eventArgs.spellID == 7710 and not data.normalRaidForecastSet)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "df3ce1a9-55a7-5af4-acb3-3be6082ce439",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Containment Bay Z1T9/Zurvan/AutoSim",
+			eventType = 3,
+			name = "Zurvan AutoSim baseline",
+			uuid = "1fa28e4a-339d-6c57-af0a-67a7d5b72dcd",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "The Pool of Tribute",
+			uuid = "b79f7a4c-6e07-ed94-837a-12832c4d9689",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Pool of Tribute",
+			name = "Susano",
+			uuid = "ec9e92ac-7a7c-2e90-a47c-666738674745",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Pool of Tribute/Susano",
+			name = "Draws",
+			uuid = "0e3f9725-d4d1-4d41-aa96-b61e96208216",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal e = eventArgs\nlocal shapes = {[9631]=\"rect\",[8227]=\"rect\"}\nlocal ms = math.floor(e.startTime + e.duration * 1000 - Now())\nif ms > 0 then\n    local drawer = TensorCore.getStaticDrawer(0x803333FF, 2)\n    if shapes[e.aoeID] == \"circle\" then\n        drawer:addTimedCircle(ms, e.x, e.y, e.z, e.aoeLength, 0, false, true)\n    else\n        drawer:addTimedRect(ms, e.x, e.y, e.z, e.aoeLength, e.aoeWidth, e.heading, 0, false, true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms, {x=e.x,y=e.y+1,z=e.z}, 0xFFFFFFFF, true, 1.1)\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"9253793a-27e6-2ee2-b141-81ab718a8a1d",
+								true,
+							},
+						},
+						name = "Susano hazard draws",
+						uuid = "4f9bcbcb-7ea1-1913-b974-6b5f646f6468",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 674 and (eventArgs.aoeID == 9631 or eventArgs.aoeID == 8227)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "9253793a-27e6-2ee2-b141-81ab718a8a1d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Pool of Tribute/Susano/Draws",
+			eventType = 18,
+			name = "Susano hazard draws",
+			uuid = "70a6d460-15ad-f349-af19-f849bde2d611",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Pool of Tribute/Susano",
+			name = "AutoSim",
+			uuid = "38bc0803-8449-54b5-9b10-539eb136ea4d",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local settings = AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled = false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled = false end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"ba4b5ff9-3146-6086-a40f-2e37a5062c73",
+								true,
+							},
+						},
+						name = "Susano helper setup",
+						uuid = "ee5c6591-dde3-8896-b74c-fc6d3ae508f5",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 674 and (true)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "ba4b5ff9-3146-6086-a40f-2e37a5062c73",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Pool of Tribute/Susano/AutoSim",
+			eventType = 11,
+			name = "Susano helper setup",
+			uuid = "0a8fa907-d40e-3b99-879f-03c88b7dfbff",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 674 then self.used = true; return end\ndata.trialsInitialTargets = data.trialsInitialTargets or {}\nlocal states = data.trialsInitialTargets\nlocal state = states[\"674_6221\"] or {}\nstates[\"674_6221\"] = state\nlocal current = TensorCore.mGetTarget()\nlocal label = \"[Trials targeting] Susano\"\nif state.pending then\n    if current and current.id == state.pending then\n        d(label .. \" confirmed target=\" .. tostring(current.id))\n        state.pending = nil\n    elseif Now() - state.requestedAt >= 1500 then\n        d(label .. \" request not confirmed; intended=\" .. tostring(state.pending) ..\n            \" current=\" .. tostring(current and current.id))\n        state.pending = nil\n    end\n    self.used = true\n    return\nend\nif player.incombat or state.done then self.used = true; return end\nlocal boss, nearest = nil, 35 * 35\nfor _, candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid=6221}) or {}) do\n    if candidate.alive and candidate.targetable and candidate.attackable and candidate.pos then\n        local dx = candidate.pos.x - player.pos.x\n        local dy = candidate.pos.y - player.pos.y\n        local dz = candidate.pos.z - player.pos.z\n        local distance = dx*dx + dy*dy + dz*dz\n        if distance <= nearest then\n            boss, nearest = candidate, distance\n        end\n    end\nend\nif not boss then\n    if not state.waitLogged then\n        d(label .. \" waiting for an attackable boss within 35 yalms; current=\" ..\n            tostring(current and current.id))\n        state.waitLogged = true\n    end\n    self.used = true\n    return\nend\nstate.done = true\nif current and current.alive and current.targetable and current.attackable then\n    d(label .. \" kept existing target; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current.id))\nelse\n    state.pending = boss.id\n    state.requestedAt = Now()\n    d(label .. \" target request; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current and current.id))\n    Player:SetTarget(boss.id)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"c5aa5aa3-cb81-c18b-b3dc-6e718cb459e6",
+								true,
+							},
+						},
+						name = "Select nearby boss once",
+						uuid = "e4ebc62f-5a15-1a4e-ac7a-f15be3d12489",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 674 then return false end\nlocal states = data.trialsInitialTargets\nlocal state = states and states[\"674_6221\"]\nreturn (state ~= nil and state.pending ~= nil) or (not player.incombat and (not state or not state.done))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and initial target",
+						uuid = "c5aa5aa3-cb81-c18b-b3dc-6e718cb459e6",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Pool of Tribute/Susano/AutoSim",
+			name = "Susano select boss at encounter start",
+			throttleTime = 500,
+			uuid = "eb52863c-fb10-1854-9677-0806dcb67597",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal api = TensorCore.API.TensorACR\nlocal ok, elapsed = pcall(api.getAutoSimTime)\nif ok and type(elapsed) == \"number\" and elapsed >= 0 and elapsed <= 60 and not data.normalRaidForecastSet then\n    api.setAutoSimKillTime(331)\n    api.clearAutoSimUncertainty()\n    api.addAutoSimUncertainty(0, 20)\n    api.clearAutoSimPhases(\"FullDowntime\")\n    local downtime = {{150.5,175.6},{185.0,197.2},{207.4,223.8}}\n    for _, window in ipairs(downtime) do\n        api.addAutoSimPhase(\"FullDowntime\", window[1], window[2], 1)\n    end\n    data.normalRaidForecastSet = true\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"fa7429d0-6fc4-5834-ac8f-8dd6195845ee",
+								true,
+							},
+						},
+						name = "Susano AutoSim baseline",
+						uuid = "470b0c1d-0719-ddcc-951b-fae1397a2237",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 674 and (eventArgs.spellID == 8221 and not data.normalRaidForecastSet)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "fa7429d0-6fc4-5834-ac8f-8dd6195845ee",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Pool of Tribute/Susano/AutoSim",
+			eventType = 3,
+			name = "Susano AutoSim baseline",
+			uuid = "cb2d6081-e117-78aa-96f1-3286dc9bb3af",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "The Jade Stoa",
+			uuid = "4d7e9ec0-31cf-3597-a363-5cf9a5b28d4e",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Jade Stoa",
+			name = "Byakko",
+			uuid = "bc85bb2b-8801-256e-a6fc-ab8e9cdac428",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Jade Stoa/Byakko",
+			name = "Draws",
+			uuid = "599dfe26-59be-2ffe-a6f9-a8d8cffa5713",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal e = eventArgs\nlocal shapes = {[10793]=\"circle\",[10796]=\"rect\"}\nlocal ms = math.floor(e.startTime + e.duration * 1000 - Now())\nif ms > 0 then\n    local drawer = TensorCore.getStaticDrawer(0x803333FF, 2)\n    if shapes[e.aoeID] == \"circle\" then\n        drawer:addTimedCircle(ms, e.x, e.y, e.z, e.aoeLength, 0, false, true)\n    else\n        drawer:addTimedRect(ms, e.x, e.y, e.z, e.aoeLength, e.aoeWidth, e.heading, 0, false, true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms, {x=e.x,y=e.y+1,z=e.z}, 0xFFFFFFFF, true, 1.1)\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"9dc9d066-eeeb-5ae4-b218-9ea3f97794cf",
+								true,
+							},
+						},
+						name = "Byakko hazard draws",
+						uuid = "e9b337bf-881e-b8be-8112-449516e9ab74",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 746 and (eventArgs.aoeID == 10793 or eventArgs.aoeID == 10796)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "9dc9d066-eeeb-5ae4-b218-9ea3f97794cf",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Jade Stoa/Byakko/Draws",
+			eventType = 18,
+			name = "Byakko hazard draws",
+			uuid = "2c6cb9f9-ed17-6459-a509-0d7bba78e50a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Jade Stoa/Byakko",
+			name = "AutoSim",
+			uuid = "21919cb3-f040-e2d5-a201-28a7065322e7",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local settings = AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled = false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled = false end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"9f4753c9-29ad-5c08-ae06-1238ee9dc4cc",
+								true,
+							},
+						},
+						name = "Byakko helper setup",
+						uuid = "48f72f97-22c2-fadb-89bd-67c0a4c574aa",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 746 and (true)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "9f4753c9-29ad-5c08-ae06-1238ee9dc4cc",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Jade Stoa/Byakko/AutoSim",
+			eventType = 11,
+			name = "Byakko helper setup",
+			uuid = "c19a0938-7ac3-f2a3-ba47-57d61e764d39",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 746 then self.used = true; return end\ndata.trialsInitialTargets = data.trialsInitialTargets or {}\nlocal states = data.trialsInitialTargets\nlocal state = states[\"746_7092\"] or {}\nstates[\"746_7092\"] = state\nlocal current = TensorCore.mGetTarget()\nlocal label = \"[Trials targeting] Byakko\"\nif state.pending then\n    if current and current.id == state.pending then\n        d(label .. \" confirmed target=\" .. tostring(current.id))\n        state.pending = nil\n    elseif Now() - state.requestedAt >= 1500 then\n        d(label .. \" request not confirmed; intended=\" .. tostring(state.pending) ..\n            \" current=\" .. tostring(current and current.id))\n        state.pending = nil\n    end\n    self.used = true\n    return\nend\nif player.incombat or state.done then self.used = true; return end\nlocal boss, nearest = nil, 35 * 35\nfor _, candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid=7092}) or {}) do\n    if candidate.alive and candidate.targetable and candidate.attackable and candidate.pos then\n        local dx = candidate.pos.x - player.pos.x\n        local dy = candidate.pos.y - player.pos.y\n        local dz = candidate.pos.z - player.pos.z\n        local distance = dx*dx + dy*dy + dz*dz\n        if distance <= nearest then\n            boss, nearest = candidate, distance\n        end\n    end\nend\nif not boss then\n    if not state.waitLogged then\n        d(label .. \" waiting for an attackable boss within 35 yalms; current=\" ..\n            tostring(current and current.id))\n        state.waitLogged = true\n    end\n    self.used = true\n    return\nend\nstate.done = true\nif current and current.alive and current.targetable and current.attackable then\n    d(label .. \" kept existing target; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current.id))\nelse\n    state.pending = boss.id\n    state.requestedAt = Now()\n    d(label .. \" target request; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current and current.id))\n    Player:SetTarget(boss.id)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"36381d6b-d4df-6787-baaa-b31ba74efc4e",
+								true,
+							},
+						},
+						name = "Select nearby boss once",
+						uuid = "b78fe773-d89a-303a-b88c-54d8b67f3fcc",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 746 then return false end\nlocal states = data.trialsInitialTargets\nlocal state = states and states[\"746_7092\"]\nreturn (state ~= nil and state.pending ~= nil) or (not player.incombat and (not state or not state.done))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and initial target",
+						uuid = "36381d6b-d4df-6787-baaa-b31ba74efc4e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Jade Stoa/Byakko/AutoSim",
+			name = "Byakko select boss at encounter start",
+			throttleTime = 500,
+			uuid = "730d320f-c70c-4905-84ea-6343ccb8e232",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal api = TensorCore.API.TensorACR\nlocal ok, elapsed = pcall(api.getAutoSimTime)\nif ok and type(elapsed) == \"number\" and elapsed >= 0 and elapsed <= 60 and not data.normalRaidForecastSet then\n    api.setAutoSimKillTime(382)\n    api.clearAutoSimUncertainty()\n    api.addAutoSimUncertainty(0, 25)\n    api.clearAutoSimPhases(\"FullDowntime\")\n    local downtime = {{124.7,132.5},{167.5,273.5}}\n    for _, window in ipairs(downtime) do\n        api.addAutoSimPhase(\"FullDowntime\", window[1], window[2], 1)\n    end\n    data.normalRaidForecastSet = true\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"17286af9-84e5-0c6d-9a6f-57d45ab089d3",
+								true,
+							},
+						},
+						name = "Byakko AutoSim baseline",
+						uuid = "f0d7f956-4fcc-1de9-ada8-996737c56e6c",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 746 and (eventArgs.spellID == 10799 and not data.normalRaidForecastSet)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "17286af9-84e5-0c6d-9a6f-57d45ab089d3",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Jade Stoa/Byakko/AutoSim",
+			eventType = 3,
+			name = "Byakko AutoSim baseline",
+			uuid = "ac06e946-d2ae-fccd-ac41-3bbb9c5378b3",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "The Final Day",
+			uuid = "6422a08e-cba7-cfe1-aa25-19b796540f81",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Final Day",
+			name = "Endsinger",
+			uuid = "4d1a8430-62cc-3ca0-a27a-252fe0e816f5",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Final Day/Endsinger",
+			name = "Draws",
+			uuid = "25193f44-754b-3ae5-96bf-f10c82d03a07",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal e = eventArgs\nlocal shapes = {[26158]=\"circle\",[26171]=\"circle\",[26174]=\"rect\",[26179]=\"rect\",[26180]=\"rect\",[26188]=\"circle\",[26182]=\"circle\",[26619]=\"rect\"}\nlocal ms = math.floor(e.startTime + e.duration * 1000 - Now())\nif ms > 0 then\n    local drawer = TensorCore.getStaticDrawer(0x803333FF, 2)\n    if shapes[e.aoeID] == \"circle\" then\n        drawer:addTimedCircle(ms, e.x, e.y, e.z, e.aoeLength, 0, false, true)\n    else\n        drawer:addTimedRect(ms, e.x, e.y, e.z, e.aoeLength, e.aoeWidth, e.heading, 0, false, true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms, {x=e.x,y=e.y+1,z=e.z}, 0xFFFFFFFF, true, 1.1)\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"0162789a-331f-dfbe-946c-9e520128ea45",
+								true,
+							},
+						},
+						name = "Endsinger hazard draws",
+						uuid = "efc27816-b88c-5ded-86a4-c1d7c03364b1",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 997 and (eventArgs.aoeID == 26158 or eventArgs.aoeID == 26171 or eventArgs.aoeID == 26174 or eventArgs.aoeID == 26179 or eventArgs.aoeID == 26180 or eventArgs.aoeID == 26188 or eventArgs.aoeID == 26182 or eventArgs.aoeID == 26619)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "0162789a-331f-dfbe-946c-9e520128ea45",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Final Day/Endsinger/Draws",
+			eventType = 18,
+			name = "Endsinger hazard draws",
+			uuid = "86de063d-e9d4-1446-9837-87c06914fc34",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Final Day/Endsinger",
+			name = "AutoSim",
+			uuid = "829673de-7ca0-9338-a5aa-9ab9511734df",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local settings = AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled = false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled = false end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"28f59896-9db8-98c9-8e29-4f05f65e4d3a",
+								true,
+							},
+						},
+						name = "Endsinger helper setup",
+						uuid = "46889ed7-62e3-e8b1-8d61-9ed7d4c7e91a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 997 and (true)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "28f59896-9db8-98c9-8e29-4f05f65e4d3a",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Final Day/Endsinger/AutoSim",
+			eventType = 11,
+			name = "Endsinger helper setup",
+			uuid = "cd7e60dc-6e5f-7e42-8bcf-e2dcab100703",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 997 then self.used = true; return end\ndata.trialsInitialTargets = data.trialsInitialTargets or {}\nlocal states = data.trialsInitialTargets\nlocal state = states[\"997_10448\"] or {}\nstates[\"997_10448\"] = state\nlocal current = TensorCore.mGetTarget()\nlocal label = \"[Trials targeting] Endsinger\"\nif state.pending then\n    if current and current.id == state.pending then\n        d(label .. \" confirmed target=\" .. tostring(current.id))\n        state.pending = nil\n    elseif Now() - state.requestedAt >= 1500 then\n        d(label .. \" request not confirmed; intended=\" .. tostring(state.pending) ..\n            \" current=\" .. tostring(current and current.id))\n        state.pending = nil\n    end\n    self.used = true\n    return\nend\nif player.incombat or state.done then self.used = true; return end\nlocal boss, nearest = nil, 35 * 35\nfor _, candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid=10448}) or {}) do\n    if candidate.alive and candidate.targetable and candidate.attackable and candidate.pos then\n        local dx = candidate.pos.x - player.pos.x\n        local dy = candidate.pos.y - player.pos.y\n        local dz = candidate.pos.z - player.pos.z\n        local distance = dx*dx + dy*dy + dz*dz\n        if distance <= nearest then\n            boss, nearest = candidate, distance\n        end\n    end\nend\nif not boss then\n    if not state.waitLogged then\n        d(label .. \" waiting for an attackable boss within 35 yalms; current=\" ..\n            tostring(current and current.id))\n        state.waitLogged = true\n    end\n    self.used = true\n    return\nend\nstate.done = true\nif current and current.alive and current.targetable and current.attackable then\n    d(label .. \" kept existing target; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current.id))\nelse\n    state.pending = boss.id\n    state.requestedAt = Now()\n    d(label .. \" target request; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current and current.id))\n    Player:SetTarget(boss.id)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"9a4e87c8-261c-e329-bfdf-3da929918956",
+								true,
+							},
+						},
+						name = "Select nearby boss once",
+						uuid = "aa20fddc-84ce-f543-900f-810c5c4abb22",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 997 then return false end\nlocal states = data.trialsInitialTargets\nlocal state = states and states[\"997_10448\"]\nreturn (state ~= nil and state.pending ~= nil) or (not player.incombat and (not state or not state.done))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and initial target",
+						uuid = "9a4e87c8-261c-e329-bfdf-3da929918956",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Final Day/Endsinger/AutoSim",
+			name = "Endsinger select boss at encounter start",
+			throttleTime = 500,
+			uuid = "856172b3-4e54-d381-9152-b6d690b66824",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal api = TensorCore.API.TensorACR\nlocal ok, elapsed = pcall(api.getAutoSimTime)\nif ok and type(elapsed) == \"number\" and elapsed >= 0 and elapsed <= 60 and not data.normalRaidForecastSet then\n    api.setAutoSimKillTime(632)\n    api.clearAutoSimUncertainty()\n    api.addAutoSimUncertainty(0, 45)\n    api.clearAutoSimPhases(\"FullDowntime\")\n    local downtime = {{264.5,281.9},{356.4,370.6},{415.4,438.3},{489.5,527.4}}\n    for _, window in ipairs(downtime) do\n        api.addAutoSimPhase(\"FullDowntime\", window[1], window[2], 1)\n    end\n    data.normalRaidForecastSet = true\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"a00a9c69-08a9-77db-889d-86d62af46014",
+								true,
+							},
+						},
+						name = "Endsinger AutoSim baseline",
+						uuid = "c2e6471c-1de3-ce41-9a64-ad69b29cfea6",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 997 and (eventArgs.spellID == 26156 and not data.normalRaidForecastSet)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "a00a9c69-08a9-77db-889d-86d62af46014",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Final Day/Endsinger/AutoSim",
+			eventType = 3,
+			name = "Endsinger AutoSim baseline",
+			uuid = "920ff00c-988c-3acd-ae13-c9b27ae4fd43",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "The Dark Inside",
+			uuid = "cb7f6b19-67ed-caea-acda-8f0ca138bb0d",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Dark Inside",
+			name = "Zodiark",
+			uuid = "e2834eb4-19a6-76a5-8ec9-9b00f954021b",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Dark Inside/Zodiark",
+			name = "Draws",
+			uuid = "2e56de55-ea5a-4296-9421-e32e79512c2f",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal e = eventArgs\nlocal shapes = {[26571]=\"rect\"}\nlocal ms = math.floor(e.startTime + e.duration * 1000 - Now())\nif ms > 0 then\n    local drawer = TensorCore.getStaticDrawer(0x803333FF, 2)\n    if shapes[e.aoeID] == \"circle\" then\n        drawer:addTimedCircle(ms, e.x, e.y, e.z, e.aoeLength, 0, false, true)\n    else\n        drawer:addTimedRect(ms, e.x, e.y, e.z, e.aoeLength, e.aoeWidth, e.heading, 0, false, true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms, {x=e.x,y=e.y+1,z=e.z}, 0xFFFFFFFF, true, 1.1)\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"94b3fdc0-883b-fe0e-8056-5f586ad0b151",
+								true,
+							},
+						},
+						name = "Zodiark hazard draws",
+						uuid = "83f4fab6-7ff4-85bf-9774-6698d4e52ac6",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 992 and (eventArgs.aoeID == 26571)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "94b3fdc0-883b-fe0e-8056-5f586ad0b151",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Dark Inside/Zodiark/Draws",
+			eventType = 18,
+			name = "Zodiark hazard draws",
+			uuid = "ae862980-b026-c895-9e94-b93a7cfd7f44",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Dark Inside/Zodiark",
+			name = "AutoSim",
+			uuid = "2156952a-bb0b-fd10-a900-3736aa041923",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local h = AnyoneCore and AnyoneCore.Settings and AnyoneCore.Settings.DutyHelper\nif h then h.enabled = false end\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"ed3e327b-8f66-83dc-baa0-99a101d40459",
+								true,
+							},
+						},
+						name = "Zodiark disable Duty Helper",
+						uuid = "dcf8395d-2a6a-10a4-bf3f-7ee8445d6d02",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 992 and (true)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "ed3e327b-8f66-83dc-baa0-99a101d40459",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Dark Inside/Zodiark/AutoSim",
+			eventType = 11,
+			name = "Zodiark disable Duty Helper",
+			uuid = "14fd4d1e-259b-0bad-87d7-71bad0d49a56",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 992 then self.used = true; return end\ndata.trialsInitialTargets = data.trialsInitialTargets or {}\nlocal states = data.trialsInitialTargets\nlocal state = states[\"992_10456\"] or {}\nstates[\"992_10456\"] = state\nlocal current = TensorCore.mGetTarget()\nlocal label = \"[Trials targeting] Zodiark\"\nif state.pending then\n    if current and current.id == state.pending then\n        d(label .. \" confirmed target=\" .. tostring(current.id))\n        state.pending = nil\n    elseif Now() - state.requestedAt >= 1500 then\n        d(label .. \" request not confirmed; intended=\" .. tostring(state.pending) ..\n            \" current=\" .. tostring(current and current.id))\n        state.pending = nil\n    end\n    self.used = true\n    return\nend\nif player.incombat or state.done then self.used = true; return end\nlocal boss, nearest = nil, 35 * 35\nfor _, candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid=10456}) or {}) do\n    if candidate.alive and candidate.targetable and candidate.attackable and candidate.pos then\n        local dx = candidate.pos.x - player.pos.x\n        local dy = candidate.pos.y - player.pos.y\n        local dz = candidate.pos.z - player.pos.z\n        local distance = dx*dx + dy*dy + dz*dz\n        if distance <= nearest then\n            boss, nearest = candidate, distance\n        end\n    end\nend\nif not boss then\n    if not state.waitLogged then\n        d(label .. \" waiting for an attackable boss within 35 yalms; current=\" ..\n            tostring(current and current.id))\n        state.waitLogged = true\n    end\n    self.used = true\n    return\nend\nstate.done = true\nif current and current.alive and current.targetable and current.attackable then\n    d(label .. \" kept existing target; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current.id))\nelse\n    state.pending = boss.id\n    state.requestedAt = Now()\n    d(label .. \" target request; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current and current.id))\n    Player:SetTarget(boss.id)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"ecc656e9-fe24-2736-814f-10d014e2f8fe",
+								true,
+							},
+						},
+						name = "Select nearby boss once",
+						uuid = "67bb8a50-b114-5ca6-bc82-c0c03ea934c8",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 992 then return false end\nlocal states = data.trialsInitialTargets\nlocal state = states and states[\"992_10456\"]\nreturn (state ~= nil and state.pending ~= nil) or (not player.incombat and (not state or not state.done))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and initial target",
+						uuid = "ecc656e9-fe24-2736-814f-10d014e2f8fe",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Dark Inside/Zodiark/AutoSim",
+			name = "Zodiark select boss at encounter start",
+			throttleTime = 500,
+			uuid = "58b9440d-8304-8fd6-8f8e-5654d882f929",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "Worqor Lar Dor",
+			uuid = "b90341bc-753c-ce8e-9cf9-40b149285a4d",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Worqor Lar Dor",
+			name = "Valigarmanda",
+			uuid = "7478cddc-2845-33ca-ba85-36c03505326e",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Worqor Lar Dor/Valigarmanda",
+			name = "Draws",
+			uuid = "6bb15256-6dcb-5664-9c08-4ecc996df638",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal e = eventArgs\nlocal shapes = {[36169]=\"rect\",[36168]=\"rect\"}\nlocal ms = math.floor(e.startTime + e.duration * 1000 - Now())\nif ms > 0 then\n    local drawer = TensorCore.getStaticDrawer(0x803333FF, 2)\n    if shapes[e.aoeID] == \"circle\" then\n        drawer:addTimedCircle(ms, e.x, e.y, e.z, e.aoeLength, 0, false, true)\n    else\n        drawer:addTimedRect(ms, e.x, e.y, e.z, e.aoeLength, e.aoeWidth, e.heading, 0, false, true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms, {x=e.x,y=e.y+1,z=e.z}, 0xFFFFFFFF, true, 1.1)\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"fdb5f7a7-bfbe-4c70-b0c2-b25fba9c359a",
+								true,
+							},
+						},
+						name = "Valigarmanda hazard draws",
+						uuid = "9fb77021-2c82-58f5-9eae-ba57a37a95f7",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 1195 and (eventArgs.aoeID == 36169 or eventArgs.aoeID == 36168)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "fdb5f7a7-bfbe-4c70-b0c2-b25fba9c359a",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Worqor Lar Dor/Valigarmanda/Draws",
+			eventType = 18,
+			name = "Valigarmanda hazard draws",
+			uuid = "0a3f9eb0-217a-9b27-abd5-5dcd481a2299",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Worqor Lar Dor/Valigarmanda",
+			name = "AutoSim",
+			uuid = "f390d7c2-a409-f7fe-b0ff-2a433e40f067",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local settings = AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled = false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled = false end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"2537f954-1261-202e-9afa-0dc95afbc723",
+								true,
+							},
+						},
+						name = "Valigarmanda helper setup",
+						uuid = "949ba0cb-331c-7f8c-b328-2a3f0eca5e66",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 1195 and (true)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "2537f954-1261-202e-9afa-0dc95afbc723",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Worqor Lar Dor/Valigarmanda/AutoSim",
+			eventType = 11,
+			name = "Valigarmanda helper setup",
+			uuid = "5cf5d7cc-7ee8-aed6-a343-26c12deaf1d2",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 1195 then self.used = true; return end\ndata.trialsInitialTargets = data.trialsInitialTargets or {}\nlocal states = data.trialsInitialTargets\nlocal state = states[\"1195_12854\"] or {}\nstates[\"1195_12854\"] = state\nlocal current = TensorCore.mGetTarget()\nlocal label = \"[Trials targeting] Valigarmanda\"\nif state.pending then\n    if current and current.id == state.pending then\n        d(label .. \" confirmed target=\" .. tostring(current.id))\n        state.pending = nil\n    elseif Now() - state.requestedAt >= 1500 then\n        d(label .. \" request not confirmed; intended=\" .. tostring(state.pending) ..\n            \" current=\" .. tostring(current and current.id))\n        state.pending = nil\n    end\n    self.used = true\n    return\nend\nif player.incombat or state.done then self.used = true; return end\nlocal boss, nearest = nil, 35 * 35\nfor _, candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid=12854}) or {}) do\n    if candidate.alive and candidate.targetable and candidate.attackable and candidate.pos then\n        local dx = candidate.pos.x - player.pos.x\n        local dy = candidate.pos.y - player.pos.y\n        local dz = candidate.pos.z - player.pos.z\n        local distance = dx*dx + dy*dy + dz*dz\n        if distance <= nearest then\n            boss, nearest = candidate, distance\n        end\n    end\nend\nif not boss then\n    if not state.waitLogged then\n        d(label .. \" waiting for an attackable boss within 35 yalms; current=\" ..\n            tostring(current and current.id))\n        state.waitLogged = true\n    end\n    self.used = true\n    return\nend\nstate.done = true\nif current and current.alive and current.targetable and current.attackable then\n    d(label .. \" kept existing target; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current.id))\nelse\n    state.pending = boss.id\n    state.requestedAt = Now()\n    d(label .. \" target request; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current and current.id))\n    Player:SetTarget(boss.id)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"4668cef2-c0ae-f6ee-ac9d-7336f2231a1e",
+								true,
+							},
+						},
+						name = "Select nearby boss once",
+						uuid = "081f9a98-38c6-0edd-a270-2b0806d6013e",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 1195 then return false end\nlocal states = data.trialsInitialTargets\nlocal state = states and states[\"1195_12854\"]\nreturn (state ~= nil and state.pending ~= nil) or (not player.incombat and (not state or not state.done))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and initial target",
+						uuid = "4668cef2-c0ae-f6ee-ac9d-7336f2231a1e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Worqor Lar Dor/Valigarmanda/AutoSim",
+			name = "Valigarmanda select boss at encounter start",
+			throttleTime = 500,
+			uuid = "95ebf8fe-c124-2fd8-8925-2d4f74e38a45",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal api = TensorCore.API.TensorACR\nlocal ok, elapsed = pcall(api.getAutoSimTime)\nif ok and type(elapsed) == \"number\" and elapsed >= 0 and elapsed <= 60 and not data.normalRaidForecastSet then\n    api.setAutoSimKillTime(406)\n    api.clearAutoSimUncertainty()\n    api.addAutoSimUncertainty(0, 18)\n    api.clearAutoSimPhases(\"FullDowntime\")\n    local downtime = {}\n    for _, window in ipairs(downtime) do\n        api.addAutoSimPhase(\"FullDowntime\", window[1], window[2], 1)\n    end\n    data.normalRaidForecastSet = true\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"a86ae267-686d-5011-bfb9-5651056bd136",
+								true,
+							},
+						},
+						name = "Valigarmanda AutoSim baseline",
+						uuid = "afc26c36-a6e7-2a6b-a160-e9f39b274529",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 1195 and (eventArgs.spellID == 36159 and not data.normalRaidForecastSet)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "a86ae267-686d-5011-bfb9-5651056bd136",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Worqor Lar Dor/Valigarmanda/AutoSim",
+			eventType = 3,
+			name = "Valigarmanda AutoSim baseline",
+			uuid = "436f8938-92ec-182e-b1c4-3731b5417115",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "The Interphos",
+			uuid = "2956e46c-2d99-5638-ac36-69357f5632ca",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Interphos",
+			name = "Queen Eternal",
+			uuid = "3d40aad1-0e86-5cd2-b055-dc6f26690eac",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Interphos/Queen Eternal",
+			name = "Draws",
+			uuid = "1be2e56b-7762-53ab-b128-ffe29e9587c0",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal e = eventArgs\nlocal shapes = {[36632]=\"rect\"}\nlocal ms = math.floor(e.startTime + e.duration * 1000 - Now())\nif ms > 0 then\n    local drawer = TensorCore.getStaticDrawer(0x803333FF, 2)\n    if shapes[e.aoeID] == \"circle\" then\n        drawer:addTimedCircle(ms, e.x, e.y, e.z, e.aoeLength, 0, false, true)\n    else\n        drawer:addTimedRect(ms, e.x, e.y, e.z, e.aoeLength, e.aoeWidth, e.heading, 0, false, true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms, {x=e.x,y=e.y+1,z=e.z}, 0xFFFFFFFF, true, 1.1)\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"de0c5ca1-8195-1c22-8510-de34ce9c2507",
+								true,
+							},
+						},
+						name = "Queen Eternal hazard draws",
+						uuid = "be5d627f-5e55-479f-942c-7a065d3a262a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 1202 and (eventArgs.aoeID == 36632)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "de0c5ca1-8195-1c22-8510-de34ce9c2507",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Interphos/Queen Eternal/Draws",
+			eventType = 18,
+			name = "Queen Eternal hazard draws",
+			uuid = "ddb07888-a7d3-8508-a737-d6818929fa9c",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Interphos/Queen Eternal",
+			name = "AutoSim",
+			uuid = "e3af8fd7-a769-9519-a9a9-6de767553893",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local settings = AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled = false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled = false end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"70fda531-3a5e-557f-9288-8091f88e476d",
+								true,
+							},
+						},
+						name = "Queen Eternal helper setup",
+						uuid = "0902db93-0e55-ceda-b9c0-e8a883461ea3",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 1202 and (true)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "70fda531-3a5e-557f-9288-8091f88e476d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Interphos/Queen Eternal/AutoSim",
+			eventType = 11,
+			name = "Queen Eternal helper setup",
+			uuid = "7e7f66ac-8c84-ba37-b64f-0eadc9ec1fd8",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 1202 then self.used = true; return end\ndata.trialsInitialTargets = data.trialsInitialTargets or {}\nlocal states = data.trialsInitialTargets\nlocal state = states[\"1202_13029\"] or {}\nstates[\"1202_13029\"] = state\nlocal current = TensorCore.mGetTarget()\nlocal label = \"[Trials targeting] Queen Eternal\"\nif state.pending then\n    if current and current.id == state.pending then\n        d(label .. \" confirmed target=\" .. tostring(current.id))\n        state.pending = nil\n    elseif Now() - state.requestedAt >= 1500 then\n        d(label .. \" request not confirmed; intended=\" .. tostring(state.pending) ..\n            \" current=\" .. tostring(current and current.id))\n        state.pending = nil\n    end\n    self.used = true\n    return\nend\nif player.incombat or state.done then self.used = true; return end\nlocal boss, nearest = nil, 35 * 35\nfor _, candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid=13029}) or {}) do\n    if candidate.alive and candidate.targetable and candidate.attackable and candidate.pos then\n        local dx = candidate.pos.x - player.pos.x\n        local dy = candidate.pos.y - player.pos.y\n        local dz = candidate.pos.z - player.pos.z\n        local distance = dx*dx + dy*dy + dz*dz\n        if distance <= nearest then\n            boss, nearest = candidate, distance\n        end\n    end\nend\nif not boss then\n    if not state.waitLogged then\n        d(label .. \" waiting for an attackable boss within 35 yalms; current=\" ..\n            tostring(current and current.id))\n        state.waitLogged = true\n    end\n    self.used = true\n    return\nend\nstate.done = true\nif current and current.alive and current.targetable and current.attackable then\n    d(label .. \" kept existing target; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current.id))\nelse\n    state.pending = boss.id\n    state.requestedAt = Now()\n    d(label .. \" target request; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current and current.id))\n    Player:SetTarget(boss.id)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"ece071af-40eb-f124-9b26-9634f00953c0",
+								true,
+							},
+						},
+						name = "Select nearby boss once",
+						uuid = "4e2a01b4-8227-2f26-83c6-b1f38216d508",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 1202 then return false end\nlocal states = data.trialsInitialTargets\nlocal state = states and states[\"1202_13029\"]\nreturn (state ~= nil and state.pending ~= nil) or (not player.incombat and (not state or not state.done))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and initial target",
+						uuid = "ece071af-40eb-f124-9b26-9634f00953c0",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Interphos/Queen Eternal/AutoSim",
+			name = "Queen Eternal select boss at encounter start",
+			throttleTime = 500,
+			uuid = "251c63c1-fc37-4e09-ac90-f24811b2cf8a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal api = TensorCore.API.TensorACR\nlocal ok, elapsed = pcall(api.getAutoSimTime)\nif ok and type(elapsed) == \"number\" and elapsed >= 0 and elapsed <= 60 and not data.normalRaidForecastSet then\n    api.setAutoSimKillTime(643)\n    api.clearAutoSimUncertainty()\n    api.addAutoSimUncertainty(0, 55)\n    api.clearAutoSimPhases(\"FullDowntime\")\n    local downtime = {{479,561}}\n    for _, window in ipairs(downtime) do\n        api.addAutoSimPhase(\"FullDowntime\", window[1], window[2], 1)\n    end\n    data.normalRaidForecastSet = true\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"530306ea-4708-4275-9ef9-92a8baa1becb",
+								true,
+							},
+						},
+						name = "Queen Eternal AutoSim baseline",
+						uuid = "c7e5b9c8-fef7-d732-abc3-3a6bcab9f9e9",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 1202 and (eventArgs.spellID == 36604 and not data.normalRaidForecastSet)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "530306ea-4708-4275-9ef9-92a8baa1becb",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Interphos/Queen Eternal/AutoSim",
+			eventType = 3,
+			name = "Queen Eternal AutoSim baseline",
+			uuid = "7f118283-50bc-9cab-9bc1-eb4acec32098",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "Everkeep",
+			uuid = "1dbe9b6b-ac95-48bb-a9ba-a6830bad0ef6",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Everkeep",
+			name = "Zoraal Ja",
+			uuid = "d5753e2e-ff7c-ae9b-995b-f7c9be4d0add",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Everkeep/Zoraal Ja",
+			name = "Draws",
+			uuid = "fb86c800-b55a-d6c4-9887-67e68ef834d3",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal e = eventArgs\nlocal shapes = {[38184]=\"rect\",[37712]=\"rect\"}\nlocal ms = math.floor(e.startTime + e.duration * 1000 - Now())\nif ms > 0 then\n    local drawer = TensorCore.getStaticDrawer(0x803333FF, 2)\n    if shapes[e.aoeID] == \"circle\" then\n        drawer:addTimedCircle(ms, e.x, e.y, e.z, e.aoeLength, 0, false, true)\n    else\n        drawer:addTimedRect(ms, e.x, e.y, e.z, e.aoeLength, e.aoeWidth, e.heading, 0, false, true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms, {x=e.x,y=e.y+1,z=e.z}, 0xFFFFFFFF, true, 1.1)\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"a6b3887d-224d-ae56-bfb2-c9b73c5c2c66",
+								true,
+							},
+						},
+						name = "Zoraal Ja hazard draws",
+						uuid = "ea35f8b0-4202-e8d7-82ad-95f9ddd58663",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 1200 and (eventArgs.aoeID == 38184 or eventArgs.aoeID == 37712)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "a6b3887d-224d-ae56-bfb2-c9b73c5c2c66",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Everkeep/Zoraal Ja/Draws",
+			eventType = 18,
+			name = "Zoraal Ja hazard draws",
+			uuid = "284d683e-3afd-3897-9fdc-5cbe16f93ecf",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Everkeep/Zoraal Ja",
+			name = "AutoSim",
+			uuid = "fbe616e6-f973-96a0-92cc-8eadadf4350b",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local settings = AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled = false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled = false end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"5d325bb3-3f7c-3f2b-a926-b1631e97439d",
+								true,
+							},
+						},
+						name = "Zoraal Ja helper setup",
+						uuid = "feca72fd-4cc7-2b1f-919d-cb69703bda1f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 1200 and (true)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "5d325bb3-3f7c-3f2b-a926-b1631e97439d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Everkeep/Zoraal Ja/AutoSim",
+			eventType = 11,
+			name = "Zoraal Ja helper setup",
+			uuid = "fb1b1dc2-ec04-b0a0-9b93-1df6f324d867",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 1200 then self.used = true; return end\ndata.trialsInitialTargets = data.trialsInitialTargets or {}\nlocal states = data.trialsInitialTargets\nlocal state = states[\"1200_12881\"] or {}\nstates[\"1200_12881\"] = state\nlocal current = TensorCore.mGetTarget()\nlocal label = \"[Trials targeting] Zoraal Ja\"\nif state.pending then\n    if current and current.id == state.pending then\n        d(label .. \" confirmed target=\" .. tostring(current.id))\n        state.pending = nil\n    elseif Now() - state.requestedAt >= 1500 then\n        d(label .. \" request not confirmed; intended=\" .. tostring(state.pending) ..\n            \" current=\" .. tostring(current and current.id))\n        state.pending = nil\n    end\n    self.used = true\n    return\nend\nif player.incombat or state.done then self.used = true; return end\nlocal boss, nearest = nil, 35 * 35\nfor _, candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid=12881}) or {}) do\n    if candidate.alive and candidate.targetable and candidate.attackable and candidate.pos then\n        local dx = candidate.pos.x - player.pos.x\n        local dy = candidate.pos.y - player.pos.y\n        local dz = candidate.pos.z - player.pos.z\n        local distance = dx*dx + dy*dy + dz*dz\n        if distance <= nearest then\n            boss, nearest = candidate, distance\n        end\n    end\nend\nif not boss then\n    if not state.waitLogged then\n        d(label .. \" waiting for an attackable boss within 35 yalms; current=\" ..\n            tostring(current and current.id))\n        state.waitLogged = true\n    end\n    self.used = true\n    return\nend\nstate.done = true\nif current and current.alive and current.targetable and current.attackable then\n    d(label .. \" kept existing target; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current.id))\nelse\n    state.pending = boss.id\n    state.requestedAt = Now()\n    d(label .. \" target request; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current and current.id))\n    Player:SetTarget(boss.id)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"57a38242-9e85-d645-b69b-5870920645f3",
+								true,
+							},
+						},
+						name = "Select nearby boss once",
+						uuid = "dd68b18c-d0ba-fc4d-915a-b9c77c4256c1",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 1200 then return false end\nlocal states = data.trialsInitialTargets\nlocal state = states and states[\"1200_12881\"]\nreturn (state ~= nil and state.pending ~= nil) or (not player.incombat and (not state or not state.done))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and initial target",
+						uuid = "57a38242-9e85-d645-b69b-5870920645f3",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Everkeep/Zoraal Ja/AutoSim",
+			name = "Zoraal Ja select boss at encounter start",
+			throttleTime = 500,
+			uuid = "e64ce88f-7e7a-1013-9724-bcc690cabd16",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal api = TensorCore.API.TensorACR\nlocal ok, elapsed = pcall(api.getAutoSimTime)\nif ok and type(elapsed) == \"number\" and elapsed >= 0 and elapsed <= 60 and not data.normalRaidForecastSet then\n    api.setAutoSimKillTime(556)\n    api.clearAutoSimUncertainty()\n    api.addAutoSimUncertainty(0, 20)\n    api.clearAutoSimPhases(\"FullDowntime\")\n    local downtime = {{151,233}}\n    for _, window in ipairs(downtime) do\n        api.addAutoSimPhase(\"FullDowntime\", window[1], window[2], 1)\n    end\n    data.normalRaidForecastSet = true\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"ec456fc9-72e2-38ea-ad30-fba887712021",
+								true,
+							},
+						},
+						name = "Zoraal Ja AutoSim baseline",
+						uuid = "2c644ad7-49de-4633-ae3d-7240a84969cd",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 1200 and (eventArgs.spellID == 37707 and not data.normalRaidForecastSet)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "ec456fc9-72e2-38ea-ad30-fba887712021",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Everkeep/Zoraal Ja/AutoSim",
+			eventType = 3,
+			name = "Zoraal Ja AutoSim baseline",
+			uuid = "1d81bcf3-5cf0-da52-bc82-6b69ec2d0626",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "Recollection",
+			uuid = "1398b5e6-fde5-7f77-bec9-949aa8dedb76",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Recollection",
+			name = "Zelenia",
+			uuid = "153866b7-5b58-9078-8eb6-ee215ca1b854",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Recollection/Zelenia",
+			name = "Draws",
+			uuid = "e6a6f087-9a72-30fc-9baa-9dc680e11bec",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal e = eventArgs\nlocal shapes = {[43112]=\"rect\",[43074]=\"rect\"}\nlocal ms = math.floor(e.startTime + e.duration * 1000 - Now())\nif ms > 0 then\n    local drawer = TensorCore.getStaticDrawer(0x803333FF, 2)\n    if shapes[e.aoeID] == \"circle\" then\n        drawer:addTimedCircle(ms, e.x, e.y, e.z, e.aoeLength, 0, false, true)\n    else\n        drawer:addTimedRect(ms, e.x, e.y, e.z, e.aoeLength, e.aoeWidth, e.heading, 0, false, true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms, {x=e.x,y=e.y+1,z=e.z}, 0xFFFFFFFF, true, 1.1)\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"78bcba3d-1b5e-d042-907b-486b802d7282",
+								true,
+							},
+						},
+						name = "Zelenia hazard draws",
+						uuid = "88912cac-b52e-c3cc-8ac2-c00c9ad41a61",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 1270 and (eventArgs.aoeID == 43112 or eventArgs.aoeID == 43074)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "78bcba3d-1b5e-d042-907b-486b802d7282",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Recollection/Zelenia/Draws",
+			eventType = 18,
+			name = "Zelenia hazard draws",
+			uuid = "de809ee2-4f2b-b86f-8eab-b40954e9851a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "Recollection/Zelenia/Draws",
+			eventType = 18,
+			execute = "local e=eventArgs\nlocal id=e.aoeID\nlocal cone=id==43126 and 120 or id==43129 and 45 or id==43083 and 60\nlocal radius=(id==43092 or id==43102 or id==43439) and 4\nlocal thunder=id==43084 or id==43085 or id==43446 or id==43447\nif not cone and not radius and not thunder and id~=43113 and id~=43479 then return end\nif e.friendly or e.duration<=0 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1270 then return end\nlocal ms=e.startTime+e.duration*1000-Now()\nif ms<=0 then return end\nif thunder then\n data.recollectionThunder=data.recollectionThunder or {}\n data.recollectionThunder[e.entityID]={x=e.x,y=e.y,z=e.z,at=Now()+ms,donut=id==43085 or id==43447}\n return\nend\nlocal red=TensorCore.getStaticDrawer(0x803333FF,2)\nif cone then\n red:addTimedCone(ms,e.x,e.y,e.z,id==43129 and 50 or 24,math.rad(cone),e.heading,0,false,true)\nelseif radius then\n if id==43102 or id==43439 then\n  data.recollectionStrikes=data.recollectionStrikes or {}\n  data.recollectionStrikes[e.entityID]={x=e.x-100,z=e.z-100,finish=Now()+ms}\n end\n red:addTimedCircle(ms,e.x,e.y,e.z,radius,0,false,true)\nelseif id==43113 then\n red:addTimedRect(ms,e.x,e.y,e.z,24,64,e.heading,0,false,true)\nelse\n local green=TensorCore.getStaticDrawer(0x6033FF33,2)\n green:addTimedCircle(ms,e.x,e.y,e.z,6,0,false,true)\nend",
+			executeType = 2,
+			name = "Zelenia - cast telegraphs and Bloom knockback setup",
+			uuid = "fac68a58-3cfd-67aa-b882-4723fd5f3563",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "Recollection/Zelenia/Draws",
+			eventType = 12,
+			execute = "local q=data.recollectionThunder\nif not q then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1270 then return end\nif not p.incombat or not p.alive then data.recollectionThunder=nil;return end\nlocal now=Now()\nlocal earliest=math.huge\nfor id,a in pairs(q) do\n if now>=a.at then q[id]=nil else earliest=math.min(earliest,a.at) end\nend\nif earliest==math.huge then data.recollectionThunder=nil;return end\nlocal red=TensorCore.getStaticDrawer(0x803333FF,2)\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_UI\nfor _,a in pairs(q) do\n if a.at<=earliest+1000 then\n  if a.donut then red:addDonut(a.x,a.y,a.z,8,24,false,flags)\n  else red:addCircle(a.x,a.y,a.z,8,false,flags) end\n end\nend",
+			executeType = 2,
+			name = "Alexandrian Thunder IV - show the active wave",
+			uuid = "c2e5ab2e-ab6f-2d70-9e30-6b282a7badc6",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "Recollection/Zelenia/Draws",
+			eventType = 4,
+			execute = "local id=eventArgs.markerID\nif id~=581 and id~=590 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1270 then return end\nif id==581 and eventArgs.entityID~=p.id then return end\nif id==590 then\n data.recollectionStack={id=eventArgs.entityID,finish=Now()+14000}\n return\nend\nlocal red=TensorCore.getStaticDrawer(0x803333FF,2)\nred:addTimedCircleOnEnt(8000,eventArgs.entityID,4,0,false,true)",
+			executeType = 2,
+			name = "Shock spreads and Stock Break stack",
+			uuid = "ed974d73-15ca-dc50-b75f-88a2b912fe81",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "Recollection/Zelenia/Draws",
+			eventType = 14,
+			execute = "local e=eventArgs\nlocal tile=e.a1-4\nif tile<0 or tile>5 then return end\nlocal lit=(e.a2==256 and e.a3==64) or (e.a2==64 and e.a3==128)\nlocal clear=e.a2==32 and e.a3==4\nif not lit and not clear then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1270 then return end\ndata.recollectionTiles=data.recollectionTiles or {}\ndata.recollectionTiles[tile]=lit or nil",
+			executeType = 2,
+			name = "Rose tiles - track confirmed map effects",
+			uuid = "86d0df68-3659-aece-9975-fb192315dd5b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "Recollection/Zelenia/Draws",
+			eventType = 15,
+			execute = "if eventArgs.newTetherID~=197 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1270 then return end\nlocal drop=TensorCore.mGetEntity(eventArgs.newTargetID)\nif not drop or not drop.pos or not drop.pos.h then return end\nlocal q=drop.pos\nlocal dx=q.x+29*math.sin(q.h)-100\nlocal dz=q.z+29*math.cos(q.h)-100\nif dx*dx+dz*dz<1 then return end\nlocal direction=math.atan2(dx,dz)\nlocal tile=math.floor((180-math.deg(direction))/60+.5)%6\ndata.recollectionTiles=data.recollectionTiles or {}\ndata.recollectionTiles[tile]=true",
+			executeType = 2,
+			name = "Roseblood Drop - track connected tile",
+			uuid = "457f51b9-d61a-c490-a3ef-2c415994cf93",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "Recollection/Zelenia/Draws",
+			eventType = 2,
+			execute = "local e=eventArgs\nlocal id=e.spellID\nif id~=43057 and id~=43063 and id~=43090 and id~=43102 and id~=43439 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1270 then return end\nif id==43090 then data.recollectionStack=nil;return end\nif id==43102 or id==43439 then\n if data.recollectionStrikes then data.recollectionStrikes[e.entityID]=nil end\n return\nend\nlocal actor=TensorCore.mGetEntity(e.entityID)\nif not actor or not actor.pos then return end\nlocal q=actor.pos\nlocal puddles=data.recollectionShock\nif id==43057 then\n if not puddles then puddles={};data.recollectionShock=puddles end\n puddles[e.entityID]={x=q.x,y=q.y,z=q.z,cycles=0,expires=Now()+22000}\nelseif puddles then\n local key=puddles[e.entityID] and e.entityID\n if not key then\n  local best=1\n  for k,a in pairs(puddles) do\n   local d=(q.x-a.x)^2+(q.z-a.z)^2\n   if d<best then key,best=k,d end\n  end\n end\n if key then\n  local a=puddles[key]\n  a.cycles=a.cycles+1\n  if a.cycles>=2 then puddles[key]=nil end\n end\nend",
+			executeType = 2,
+			name = "Shock and Stock Break - track resolution",
+			uuid = "c749d704-04ee-c7d4-9789-1a9a574ce780",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "Recollection/Zelenia/Draws",
+			eventType = 12,
+			execute = "local tiles,strikes,puddles,stack=data.recollectionTiles,data.recollectionStrikes,data.recollectionShock,data.recollectionStack\nif not strikes and not puddles and not stack then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1270 then return end\nif not p.incombat then\n data.recollectionTiles=nil;data.recollectionStrikes=nil;data.recollectionShock=nil;data.recollectionStack=nil\n return\nend\nlocal now=Now()\nlocal flags=Argus2.RenderFlags.FLAG_RENDER_UI\nlocal red=TensorCore.getStaticDrawer(0x803333FF,2)\nif strikes then\n local active={}\n for id,s in pairs(strikes) do\n  if now>s.finish then strikes[id]=nil\n  elseif tiles then\n   local length=math.sqrt(s.x*s.x+s.z*s.z)\n   if length<=20 then\n    local h=math.atan2(s.x,s.z)\n    local reach=math.rad(30)+math.asin(math.min(1,4/math.max(length,4)))\n    for tile=0,5 do\n     local bearing=math.rad(180-60*tile)\n     if tiles[tile] and math.cos(bearing-h)>=math.cos(reach) then\n      active[tile]=true\n      for _,step in ipairs({-1,1}) do\n       for offset=1,5 do\n        local nextTile=(tile+step*offset)%6\n        if not tiles[nextTile] then break end\n        active[nextTile]=true\n       end\n      end\n     end\n    end\n   end\n  end\n end\n for tile in pairs(active) do red:addCone(100,0,100,16,math.rad(60),math.rad(180-60*tile),false,flags) end\n if not next(strikes) then data.recollectionStrikes=nil end\nend\nif puddles then\n for id,a in pairs(puddles) do\n  if now>=a.expires then puddles[id]=nil\n  else red:addCircle(a.x,a.y,a.z,4,false,flags) end\n end\n if not next(puddles) then data.recollectionShock=nil end\nend\nif stack then\n if now>=stack.finish then data.recollectionStack=nil\n else\n  local target=TensorCore.mGetEntity(stack.id)\n  if target and target.pos then\n   local green=TensorCore.getStaticDrawer(0x6033FF33,2)\n   green:addCircle(target.pos.x,target.pos.y,target.pos.z,6,false,flags)\n  end\n end\nend",
+			executeType = 2,
+			name = "Draw connected rose tiles, Shock puddles and the stack",
+			uuid = "fb703f73-ca16-dbd3-b7c7-88e7265b4e44",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Recollection/Zelenia",
+			name = "AutoSim",
+			uuid = "833c22e6-f76d-faba-8894-fcb273dfb0a7",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local settings = AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled = false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled = false end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"ac4a2fe4-7b79-48d5-ab69-c3d84aaf1347",
+								true,
+							},
+						},
+						name = "Zelenia helper setup",
+						uuid = "4b5b046b-527a-450a-a8ca-6f600759f002",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 1270 and (true)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "ac4a2fe4-7b79-48d5-ab69-c3d84aaf1347",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Recollection/Zelenia/AutoSim",
+			eventType = 11,
+			name = "Zelenia helper setup",
+			uuid = "2e492e7f-cbf4-ea9a-a872-af752ebf7ed5",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 1270 then self.used = true; return end\ndata.trialsInitialTargets = data.trialsInitialTargets or {}\nlocal states = data.trialsInitialTargets\nlocal state = states[\"1270_13861\"] or {}\nstates[\"1270_13861\"] = state\nlocal current = TensorCore.mGetTarget()\nlocal label = \"[Trials targeting] Zelenia\"\nif state.pending then\n    if current and current.id == state.pending then\n        d(label .. \" confirmed target=\" .. tostring(current.id))\n        state.pending = nil\n    elseif Now() - state.requestedAt >= 1500 then\n        d(label .. \" request not confirmed; intended=\" .. tostring(state.pending) ..\n            \" current=\" .. tostring(current and current.id))\n        state.pending = nil\n    end\n    self.used = true\n    return\nend\nif player.incombat or state.done then self.used = true; return end\nlocal boss, nearest = nil, 35 * 35\nfor _, candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid=13861}) or {}) do\n    if candidate.alive and candidate.targetable and candidate.attackable and candidate.pos then\n        local dx = candidate.pos.x - player.pos.x\n        local dy = candidate.pos.y - player.pos.y\n        local dz = candidate.pos.z - player.pos.z\n        local distance = dx*dx + dy*dy + dz*dz\n        if distance <= nearest then\n            boss, nearest = candidate, distance\n        end\n    end\nend\nif not boss then\n    if not state.waitLogged then\n        d(label .. \" waiting for an attackable boss within 35 yalms; current=\" ..\n            tostring(current and current.id))\n        state.waitLogged = true\n    end\n    self.used = true\n    return\nend\nstate.done = true\nif current and current.alive and current.targetable and current.attackable then\n    d(label .. \" kept existing target; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current.id))\nelse\n    state.pending = boss.id\n    state.requestedAt = Now()\n    d(label .. \" target request; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current and current.id))\n    Player:SetTarget(boss.id)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"4ea4a3e4-a138-5579-9f7e-9105a1e4350c",
+								true,
+							},
+						},
+						name = "Select nearby boss once",
+						uuid = "db9ee24f-1ce8-8787-8505-cf0ca7dd5285",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 1270 then return false end\nlocal states = data.trialsInitialTargets\nlocal state = states and states[\"1270_13861\"]\nreturn (state ~= nil and state.pending ~= nil) or (not player.incombat and (not state or not state.done))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and initial target",
+						uuid = "4ea4a3e4-a138-5579-9f7e-9105a1e4350c",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Recollection/Zelenia/AutoSim",
+			name = "Zelenia select boss at encounter start",
+			throttleTime = 500,
+			uuid = "dcd18b70-f9be-b5ee-b7bb-27e599435421",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal api = TensorCore.API.TensorACR\nlocal ok, elapsed = pcall(api.getAutoSimTime)\nif ok and type(elapsed) == \"number\" and elapsed >= 0 and elapsed <= 60 and not data.normalRaidForecastSet then\n    api.setAutoSimKillTime(351)\n    api.clearAutoSimUncertainty()\n    api.addAutoSimUncertainty(0, 12)\n    api.clearAutoSimPhases(\"FullDowntime\")\n    local downtime = {{123.5,146.6}}\n    for _, window in ipairs(downtime) do\n        api.addAutoSimPhase(\"FullDowntime\", window[1], window[2], 1)\n    end\n    api.addAutoSimPhase(\"Stun\", 123.0, 146.75, 1)\n    data.normalRaidForecastSet = true\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"9094d1d8-b0da-6c0c-b5dd-58086164cb3e",
+								true,
+							},
+						},
+						name = "Zelenia AutoSim baseline",
+						uuid = "920bd6f8-33b0-a23f-babf-7ff961048870",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 1270 and (eventArgs.spellID == 43480 and not data.normalRaidForecastSet)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "9094d1d8-b0da-6c0c-b5dd-58086164cb3e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Recollection/Zelenia/AutoSim",
+			eventType = 3,
+			name = "Zelenia AutoSim baseline",
+			uuid = "2e4dc63e-c24e-bdde-8a92-6ddf20ca8152",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "The Ageless Necropolis",
+			uuid = "93b2afa0-f8bd-a8a0-ae6f-3a09dfd6c9e5",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Ageless Necropolis",
+			name = "Necron",
+			uuid = "19ac24e9-fc77-5bf8-ad4a-eea6032ef037",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Ageless Necropolis/Necron",
+			name = "Draws",
+			uuid = "f8be39d7-963f-de8f-bf93-6c4958652ca9",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal e = eventArgs\nlocal shapes = {[44523]=\"rect\",[44611]=\"rect\",[44526]=\"rect\",[44817]=\"rect\"}\nlocal ms = math.floor(e.startTime + e.duration * 1000 - Now())\nif ms > 0 then\n    local drawer = TensorCore.getStaticDrawer(0x803333FF, 2)\n    if shapes[e.aoeID] == \"circle\" then\n        drawer:addTimedCircle(ms, e.x, e.y, e.z, e.aoeLength, 0, false, true)\n    else\n        drawer:addTimedRect(ms, e.x, e.y, e.z, e.aoeLength, e.aoeWidth, e.heading, 0, false, true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms, {x=e.x,y=e.y+1,z=e.z}, 0xFFFFFFFF, true, 1.1)\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"4dda3ab7-32b3-f831-97ff-2aed9f3cba8d",
+								true,
+							},
+						},
+						name = "Necron hazard draws",
+						uuid = "c6eb9e4d-2f61-c7eb-9d63-f60e58acd533",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 1295 and (eventArgs.aoeID == 44523 or eventArgs.aoeID == 44611 or eventArgs.aoeID == 44526 or eventArgs.aoeID == 44817)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "4dda3ab7-32b3-f831-97ff-2aed9f3cba8d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Ageless Necropolis/Necron/Draws",
+			eventType = 18,
+			name = "Necron hazard draws",
+			uuid = "3a7771e5-6f9a-2b6b-aa75-9b9cf8dd653a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Ageless Necropolis/Necron",
+			name = "AutoSim",
+			uuid = "6e7e1352-2762-aaf0-b364-c4381ae20f49",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local settings = AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled = false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled = false end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"4a98cb22-4813-fb0a-a584-04441b074ee8",
+								true,
+							},
+						},
+						name = "Necron helper setup",
+						uuid = "222f6787-5faa-aa69-b29d-8c102cae146a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 1295 and (true)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "4a98cb22-4813-fb0a-a584-04441b074ee8",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Ageless Necropolis/Necron/AutoSim",
+			eventType = 11,
+			name = "Necron helper setup",
+			uuid = "7f738c52-aed3-6e89-a8b7-0801f3c3b2b4",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 1295 then self.used = true; return end\ndata.trialsInitialTargets = data.trialsInitialTargets or {}\nlocal states = data.trialsInitialTargets\nlocal state = states[\"1295_14093\"] or {}\nstates[\"1295_14093\"] = state\nlocal current = TensorCore.mGetTarget()\nlocal label = \"[Trials targeting] Necron\"\nif state.pending then\n    if current and current.id == state.pending then\n        d(label .. \" confirmed target=\" .. tostring(current.id))\n        state.pending = nil\n    elseif Now() - state.requestedAt >= 1500 then\n        d(label .. \" request not confirmed; intended=\" .. tostring(state.pending) ..\n            \" current=\" .. tostring(current and current.id))\n        state.pending = nil\n    end\n    self.used = true\n    return\nend\nif player.incombat or state.done then self.used = true; return end\nlocal boss, nearest = nil, 35 * 35\nfor _, candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid=14093}) or {}) do\n    if candidate.alive and candidate.targetable and candidate.attackable and candidate.pos then\n        local dx = candidate.pos.x - player.pos.x\n        local dy = candidate.pos.y - player.pos.y\n        local dz = candidate.pos.z - player.pos.z\n        local distance = dx*dx + dy*dy + dz*dz\n        if distance <= nearest then\n            boss, nearest = candidate, distance\n        end\n    end\nend\nif not boss then\n    if not state.waitLogged then\n        d(label .. \" waiting for an attackable boss within 35 yalms; current=\" ..\n            tostring(current and current.id))\n        state.waitLogged = true\n    end\n    self.used = true\n    return\nend\nstate.done = true\nif current and current.alive and current.targetable and current.attackable then\n    d(label .. \" kept existing target; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current.id))\nelse\n    state.pending = boss.id\n    state.requestedAt = Now()\n    d(label .. \" target request; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current and current.id))\n    Player:SetTarget(boss.id)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"0511c8db-19c5-dc1c-8d4f-d9a8dceeefc3",
+								true,
+							},
+						},
+						name = "Select nearby boss once",
+						uuid = "110112db-9f70-6233-95e7-30e1e53d52b0",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 1295 then return false end\nlocal states = data.trialsInitialTargets\nlocal state = states and states[\"1295_14093\"]\nreturn (state ~= nil and state.pending ~= nil) or (not player.incombat and (not state or not state.done))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and initial target",
+						uuid = "0511c8db-19c5-dc1c-8d4f-d9a8dceeefc3",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Ageless Necropolis/Necron/AutoSim",
+			name = "Necron select boss at encounter start",
+			throttleTime = 500,
+			uuid = "b1782358-d0d6-6b1d-8b8c-bf2598a277fe",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal api = TensorCore.API.TensorACR\nlocal ok, elapsed = pcall(api.getAutoSimTime)\nif ok and type(elapsed) == \"number\" and elapsed >= 0 and elapsed <= 60 and not data.normalRaidForecastSet then\n    api.setAutoSimKillTime(375)\n    api.clearAutoSimUncertainty()\n    api.addAutoSimUncertainty(0, 12)\n    -- Add-wave lengths vary, and Icy Hands remain attackable during parts of\n    -- Necron's absence. Leave target availability to the live ACR.\n    local player = TensorCore.mGetPlayer()\n    if player and player.job == 25 then\n        -- Short reposition on the second Memento Mori in two BLM samples.\n        api.addAutoSimPhase(\"CasterDowntime\", 108, 111, 1)\n    end\n    data.normalRaidForecastSet = true\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"e6af52dd-5e66-93af-9a57-5079181bb2b2",
+								true,
+							},
+						},
+						name = "Necron AutoSim baseline",
+						uuid = "1d9b2e7c-4905-31e0-9542-2652a3a179a6",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 1295 and (eventArgs.spellID == 44521 and not data.normalRaidForecastSet)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "e6af52dd-5e66-93af-9a57-5079181bb2b2",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Ageless Necropolis/Necron/AutoSim",
+			eventType = 3,
+			name = "Necron AutoSim baseline",
+			uuid = "19b79fa8-2ee3-2156-a74b-062685371e8e",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player then self.used = true; return end\n\nlocal contentID = 14094\nlocal label = \"[Trials] Icy Hands\"\nlocal api = TensorCore.API.TensorACR\nlocal eligible = player.localmapid == 1295 and (player.job == 23 or player.job == 25)\nlocal state = TrialsNecronIcyHandsDoT\n\n-- Restore the previous entry on leaving Necron or changing jobs.\n-- Keep this state outside pull data so a wipe does not lose the original values.\nif state and (not eligible or state.job ~= player.job) then\n    local entry = state.entry\n    if entry.enabled and entry.allowIfTarget == false and entry.allowSmartDoT == false then\n        if state.created then\n            entry.enabled = false\n            if player.job == state.job and api.getBlacklistEntry(contentID) then\n                local current = api.addBlacklistEntry(contentID)\n                if current == entry and current.name == label then\n                    api.deleteBlacklistEntry(contentID)\n                end\n            end\n        else\n            entry.enabled = state.enabled\n            entry.allowIfTarget = state.allowIfTarget\n            entry.allowSmartDoT = state.allowSmartDoT\n        end\n    end\n    TrialsNecronIcyHandsDoT = nil\n    state = nil\nend\n\nif eligible and not state then\n    local supported, exists = pcall(api.getBlacklistEntry, contentID)\n    if supported then\n        local ok, entry = pcall(api.addBlacklistEntry, contentID, label)\n        if ok and entry then\n            TrialsNecronIcyHandsDoT = {\n                job = player.job, entry = entry, created = not exists,\n                enabled = entry.enabled, allowIfTarget = entry.allowIfTarget,\n                allowSmartDoT = entry.allowSmartDoT,\n            }\n            entry.enabled = true\n            entry.allowIfTarget = false\n            entry.allowSmartDoT = false\n        end\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"5b71e2b4-6923-5c16-8a77-309f4007c613",
+								true,
+							},
+						},
+						name = "Block DoTs on Icy Hands",
+						uuid = "f10be5cd-dfbc-7cf9-8542-8a25fe6036bf",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal state = TrialsNecronIcyHandsDoT\nlocal eligible = player.localmapid == 1295 and (player.job == 23 or player.job == 25)\nif state then\n    return not eligible or player.job ~= state.job\nend\nreturn eligible",
+						dequeueIfLuaFalse = true,
+						name = "Necron BRD or BLM / cleanup",
+						uuid = "5b71e2b4-6923-5c16-8a77-309f4007c613",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Ageless Necropolis/Necron/AutoSim",
+			name = "Icy Hands DoT blacklist (BRD / BLM)",
+			throttleTime = 1000,
+			uuid = "437d63f6-d67a-e35d-ab2a-b3341cf519d8",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "Hell on Rails",
+			uuid = "d44ddfae-4ce2-3d15-a917-c6799ac494ba",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Hell on Rails",
+			name = "Doomtrain",
+			uuid = "610afcf3-5103-a390-bbc2-6ea99b4fe668",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Hell on Rails/Doomtrain",
+			name = "Draws",
+			uuid = "7261f1cd-5443-b7f6-9ad4-d4065df3f1a7",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal e = eventArgs\nlocal shapes = {[45659]=\"circle\",[45654]=\"rect\"}\nlocal ms = math.floor(e.startTime + e.duration * 1000 - Now())\nif ms > 0 then\n    local drawer = TensorCore.getStaticDrawer(0x803333FF, 2)\n    if shapes[e.aoeID] == \"circle\" then\n        drawer:addTimedCircle(ms, e.x, e.y, e.z, e.aoeLength, 0, false, true)\n    else\n        drawer:addTimedRect(ms, e.x, e.y, e.z, e.aoeLength, e.aoeWidth, e.heading, 0, false, true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms, {x=e.x,y=e.y+1,z=e.z}, 0xFFFFFFFF, true, 1.1)\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"d6b1ea3e-4ee9-51aa-bd4f-d8080cfd30a7",
+								true,
+							},
+						},
+						name = "Doomtrain hazard draws",
+						uuid = "e7030f92-d937-ba2b-b389-a50dcd6c390e",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 1307 and (eventArgs.aoeID == 45659 or eventArgs.aoeID == 45654)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "d6b1ea3e-4ee9-51aa-bd4f-d8080cfd30a7",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Hell on Rails/Doomtrain/Draws",
+			eventType = 18,
+			name = "Doomtrain hazard draws",
+			uuid = "916af141-f75e-571d-a0af-a7f1655b7be3",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Hell on Rails/Doomtrain",
+			name = "AutoSim",
+			uuid = "72f77d65-a3b5-0301-80df-327c556b8fa1",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local settings = AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled = false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled = false end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"49f7c198-afbc-6941-ade4-7b4eed8a8170",
+								true,
+							},
+						},
+						name = "Doomtrain helper setup",
+						uuid = "c3c68e81-7318-d189-b8cc-2089ca55afee",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 1307 and (true)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "49f7c198-afbc-6941-ade4-7b4eed8a8170",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Hell on Rails/Doomtrain/AutoSim",
+			eventType = 11,
+			name = "Doomtrain helper setup",
+			uuid = "33fef2b1-7962-0160-af21-63864401ee0a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 1307 then self.used = true; return end\ndata.trialsInitialTargets = data.trialsInitialTargets or {}\nlocal states = data.trialsInitialTargets\nlocal state = states[\"1307_14284\"] or {}\nstates[\"1307_14284\"] = state\nlocal current = TensorCore.mGetTarget()\nlocal label = \"[Trials targeting] Doomtrain\"\nif state.pending then\n    if current and current.id == state.pending then\n        d(label .. \" confirmed target=\" .. tostring(current.id))\n        state.pending = nil\n    elseif Now() - state.requestedAt >= 1500 then\n        d(label .. \" request not confirmed; intended=\" .. tostring(state.pending) ..\n            \" current=\" .. tostring(current and current.id))\n        state.pending = nil\n    end\n    self.used = true\n    return\nend\nif player.incombat or state.done then self.used = true; return end\nlocal boss, nearest = nil, 35 * 35\nfor _, candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid=14284}) or {}) do\n    if candidate.alive and candidate.targetable and candidate.attackable and candidate.pos then\n        local dx = candidate.pos.x - player.pos.x\n        local dy = candidate.pos.y - player.pos.y\n        local dz = candidate.pos.z - player.pos.z\n        local distance = dx*dx + dy*dy + dz*dz\n        if distance <= nearest then\n            boss, nearest = candidate, distance\n        end\n    end\nend\nif not boss then\n    if not state.waitLogged then\n        d(label .. \" waiting for an attackable boss within 35 yalms; current=\" ..\n            tostring(current and current.id))\n        state.waitLogged = true\n    end\n    self.used = true\n    return\nend\nstate.done = true\nif current and current.alive and current.targetable and current.attackable then\n    d(label .. \" kept existing target; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current.id))\nelse\n    state.pending = boss.id\n    state.requestedAt = Now()\n    d(label .. \" target request; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current and current.id))\n    Player:SetTarget(boss.id)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"a52204c9-b873-b2ad-abc6-74bd8e1a00f6",
+								true,
+							},
+						},
+						name = "Select nearby boss once",
+						uuid = "7d84836e-f77a-8f8a-93d1-59df68e9d8df",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 1307 then return false end\nlocal states = data.trialsInitialTargets\nlocal state = states and states[\"1307_14284\"]\nreturn (state ~= nil and state.pending ~= nil) or (not player.incombat and (not state or not state.done))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and initial target",
+						uuid = "a52204c9-b873-b2ad-abc6-74bd8e1a00f6",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Hell on Rails/Doomtrain/AutoSim",
+			name = "Doomtrain select boss at encounter start",
+			throttleTime = 500,
+			uuid = "4ada8c4c-bb4b-b04e-a759-3c5e7aec40a0",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal api = TensorCore.API.TensorACR\nlocal ok, elapsed = pcall(api.getAutoSimTime)\nif ok and type(elapsed) == \"number\" and elapsed >= 0 and elapsed <= 60 and not data.normalRaidForecastSet then\n    api.setAutoSimKillTime(448)\n    api.clearAutoSimUncertainty()\n    api.addAutoSimUncertainty(0, 18)\n    api.clearAutoSimPhases(\"FullDowntime\")\n    local downtime = {{46.5,52.3},{115.9,121.7},{174.3,180.1},{193,200},{235.8,258.2}}\n    for _, window in ipairs(downtime) do\n        api.addAutoSimPhase(\"FullDowntime\", window[1], window[2], 1)\n    end\n    data.normalRaidForecastSet = true\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"c58001c5-ee24-69fd-b91c-8634aa70fa2b",
+								true,
+							},
+						},
+						name = "Doomtrain AutoSim baseline",
+						uuid = "7999f785-2a99-886f-ace4-fe148cf90715",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 1307 and (eventArgs.spellID == 45660 and not data.normalRaidForecastSet)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "c58001c5-ee24-69fd-b91c-8634aa70fa2b",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Hell on Rails/Doomtrain/AutoSim",
+			eventType = 3,
+			name = "Doomtrain AutoSim baseline",
+			uuid = "ed84b109-2dfb-6103-b855-7452874fd7b4",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "The Unmaking",
+			uuid = "eca51a5e-bcbd-94ee-a723-1fcade9409b8",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Unmaking",
+			name = "Enuo",
+			uuid = "fd8bfa26-e665-2edf-9fd4-c515b973180d",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Unmaking/Enuo",
+			name = "Draws",
+			uuid = "9786bfb8-75ab-ce55-8ebd-07f7b741df01",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal e = eventArgs\nlocal shapes = {[49933]=\"circle\",[49949]=\"circle\",[49958]=\"rect\",[49934]=\"circle\"}\nlocal ms = math.floor(e.startTime + e.duration * 1000 - Now())\nif ms > 0 then\n    local drawer = TensorCore.getStaticDrawer(0x803333FF, 2)\n    if shapes[e.aoeID] == \"circle\" then\n        drawer:addTimedCircle(ms, e.x, e.y, e.z, e.aoeLength, 0, false, true)\n    else\n        drawer:addTimedRect(ms, e.x, e.y, e.z, e.aoeLength, e.aoeWidth, e.heading, 0, false, true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms, {x=e.x,y=e.y+1,z=e.z}, 0xFFFFFFFF, true, 1.1)\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"5d5147ba-b276-82b1-8534-d2315d398b62",
+								true,
+							},
+						},
+						name = "Enuo hazard draws",
+						uuid = "a2d818d6-1911-78ae-80c5-0895c1bf622c",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 1361 and (eventArgs.aoeID == 49933 or eventArgs.aoeID == 49949 or eventArgs.aoeID == 49958 or eventArgs.aoeID == 49934)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "5d5147ba-b276-82b1-8534-d2315d398b62",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Unmaking/Enuo/Draws",
+			eventType = 18,
+			name = "Enuo hazard draws",
+			uuid = "00e6a073-e1d5-e20d-b237-ce225411fe57",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Unmaking/Enuo",
+			name = "AutoSim",
+			uuid = "3682a206-a0bc-9d4a-96d5-42c4300b24ca",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local settings = AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled = false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled = false end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"eab12d17-0486-3e20-8b3c-1b0ee2892599",
+								true,
+							},
+						},
+						name = "Enuo helper setup",
+						uuid = "d623ccc5-a728-b5e8-9237-fe6863cb41de",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 1361 and (true)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "eab12d17-0486-3e20-8b3c-1b0ee2892599",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Unmaking/Enuo/AutoSim",
+			eventType = 11,
+			name = "Enuo helper setup",
+			uuid = "714e5b50-cb93-fd84-9a01-7b264f7bfb3d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 1361 then self.used = true; return end\ndata.trialsInitialTargets = data.trialsInitialTargets or {}\nlocal states = data.trialsInitialTargets\nlocal state = states[\"1361_14749\"] or {}\nstates[\"1361_14749\"] = state\nlocal current = TensorCore.mGetTarget()\nlocal label = \"[Trials targeting] Enuo\"\nif state.pending then\n    if current and current.id == state.pending then\n        d(label .. \" confirmed target=\" .. tostring(current.id))\n        state.pending = nil\n    elseif Now() - state.requestedAt >= 1500 then\n        d(label .. \" request not confirmed; intended=\" .. tostring(state.pending) ..\n            \" current=\" .. tostring(current and current.id))\n        state.pending = nil\n    end\n    self.used = true\n    return\nend\nif player.incombat or state.done then self.used = true; return end\nlocal boss, nearest = nil, 35 * 35\nfor _, candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid=14749}) or {}) do\n    if candidate.alive and candidate.targetable and candidate.attackable and candidate.pos then\n        local dx = candidate.pos.x - player.pos.x\n        local dy = candidate.pos.y - player.pos.y\n        local dz = candidate.pos.z - player.pos.z\n        local distance = dx*dx + dy*dy + dz*dz\n        if distance <= nearest then\n            boss, nearest = candidate, distance\n        end\n    end\nend\nif not boss then\n    if not state.waitLogged then\n        d(label .. \" waiting for an attackable boss within 35 yalms; current=\" ..\n            tostring(current and current.id))\n        state.waitLogged = true\n    end\n    self.used = true\n    return\nend\nstate.done = true\nif current and current.alive and current.targetable and current.attackable then\n    d(label .. \" kept existing target; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current.id))\nelse\n    state.pending = boss.id\n    state.requestedAt = Now()\n    d(label .. \" target request; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current and current.id))\n    Player:SetTarget(boss.id)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"d1c29ebc-c214-55c1-befa-eb823357d594",
+								true,
+							},
+						},
+						name = "Select nearby boss once",
+						uuid = "1342c620-5e2b-9b94-a52b-9a2f524874ac",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 1361 then return false end\nlocal states = data.trialsInitialTargets\nlocal state = states and states[\"1361_14749\"]\nreturn (state ~= nil and state.pending ~= nil) or (not player.incombat and (not state or not state.done))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and initial target",
+						uuid = "d1c29ebc-c214-55c1-befa-eb823357d594",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Unmaking/Enuo/AutoSim",
+			name = "Enuo select boss at encounter start",
+			throttleTime = 500,
+			uuid = "d0d068f6-86b9-da27-9d75-57798cf9ba98",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal api = TensorCore.API.TensorACR\nlocal ok, elapsed = pcall(api.getAutoSimTime)\nif ok and type(elapsed) == \"number\" and elapsed >= 0 and elapsed <= 60 and not data.normalRaidForecastSet then\n    api.setAutoSimKillTime(459)\n    api.clearAutoSimUncertainty()\n    api.addAutoSimUncertainty(0, 51)\n    api.clearAutoSimPhases(\"FullDowntime\")\n    local downtime = {{156.9,179.1},{205.9,300.8}}\n    for _, window in ipairs(downtime) do\n        api.addAutoSimPhase(\"FullDowntime\", window[1], window[2], 1)\n    end\n    data.normalRaidForecastSet = true\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"a9ba9c4a-7edd-9105-a409-af212ae13182",
+								true,
+							},
+						},
+						name = "Enuo AutoSim baseline",
+						uuid = "61d9b1e6-ab56-df73-978e-c7ee7a93b18e",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 1361 and (eventArgs.spellID == 49971 and not data.normalRaidForecastSet)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "a9ba9c4a-7edd-9105-a409-af212ae13182",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Unmaking/Enuo/AutoSim",
+			eventType = 3,
+			name = "Enuo AutoSim baseline",
+			uuid = "988b2a10-ccf5-370c-8e70-2566ab1c6821",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "Containment Bay P1T6",
+			uuid = "597edba9-8d95-2f88-8633-eb22d5fdb41b",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Containment Bay P1T6",
+			name = "Sophia",
+			uuid = "027fa5fd-cacd-4c79-96a6-6258dfd053c0",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Containment Bay P1T6/Sophia",
+			name = "Draws",
+			uuid = "83799656-7039-a0ac-97f8-ff335ccc7762",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal e = eventArgs\nlocal shapes = {[6515]=\"circle\",[6524]=\"circle\"}\nlocal ms = math.floor(e.startTime + e.duration * 1000 - Now())\nif ms > 0 then\n    local drawer = TensorCore.getStaticDrawer(0x803333FF, 2)\n    if shapes[e.aoeID] == \"circle\" then\n        drawer:addTimedCircle(ms, e.x, e.y, e.z, e.aoeLength, 0, false, true)\n    else\n        drawer:addTimedRect(ms, e.x, e.y, e.z, e.aoeLength, e.aoeWidth, e.heading, 0, false, true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms, {x=e.x,y=e.y+1,z=e.z}, 0xFFFFFFFF, true, 1.1)\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"c088c15d-e131-0562-84ce-2a3cc44fbce4",
+								true,
+							},
+						},
+						name = "Sophia hazard draws",
+						uuid = "b8379734-8c03-07c1-b2c8-5318a44ef658",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 576 and (eventArgs.aoeID == 6515 or eventArgs.aoeID == 6524)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "c088c15d-e131-0562-84ce-2a3cc44fbce4",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Containment Bay P1T6/Sophia/Draws",
+			eventType = 18,
+			name = "Sophia hazard draws",
+			uuid = "65799dba-f769-7687-bb15-4527afd258f4",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Containment Bay P1T6/Sophia",
+			name = "AutoSim",
+			uuid = "65c82737-955d-e963-936d-da10866ed3de",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local settings = AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled = false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled = false end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"6b9aec6f-117b-0152-9764-953ed3d8f2ea",
+								true,
+							},
+						},
+						name = "Sophia helper setup",
+						uuid = "62490227-b9c9-d01a-8d54-651049019aae",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 576 and (true)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "6b9aec6f-117b-0152-9764-953ed3d8f2ea",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Containment Bay P1T6/Sophia/AutoSim",
+			eventType = 11,
+			name = "Sophia helper setup",
+			uuid = "412c4f5b-f6c1-acc7-a4a8-4b10d37d8d03",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 576 then self.used = true; return end\ndata.trialsInitialTargets = data.trialsInitialTargets or {}\nlocal states = data.trialsInitialTargets\nlocal state = states[\"576_5199\"] or {}\nstates[\"576_5199\"] = state\nlocal current = TensorCore.mGetTarget()\nlocal label = \"[Trials targeting] Sophia\"\nif state.pending then\n    if current and current.id == state.pending then\n        d(label .. \" confirmed target=\" .. tostring(current.id))\n        state.pending = nil\n    elseif Now() - state.requestedAt >= 1500 then\n        d(label .. \" request not confirmed; intended=\" .. tostring(state.pending) ..\n            \" current=\" .. tostring(current and current.id))\n        state.pending = nil\n    end\n    self.used = true\n    return\nend\nif player.incombat or state.done then self.used = true; return end\nlocal boss, nearest = nil, 35 * 35\nfor _, candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid=5199}) or {}) do\n    if candidate.alive and candidate.targetable and candidate.attackable and candidate.pos then\n        local dx = candidate.pos.x - player.pos.x\n        local dy = candidate.pos.y - player.pos.y\n        local dz = candidate.pos.z - player.pos.z\n        local distance = dx*dx + dy*dy + dz*dz\n        if distance <= nearest then\n            boss, nearest = candidate, distance\n        end\n    end\nend\nif not boss then\n    if not state.waitLogged then\n        d(label .. \" waiting for an attackable boss within 35 yalms; current=\" ..\n            tostring(current and current.id))\n        state.waitLogged = true\n    end\n    self.used = true\n    return\nend\nstate.done = true\nif current and current.alive and current.targetable and current.attackable then\n    d(label .. \" kept existing target; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current.id))\nelse\n    state.pending = boss.id\n    state.requestedAt = Now()\n    d(label .. \" target request; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current and current.id))\n    Player:SetTarget(boss.id)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"93e0f240-8680-b958-8386-c331776f621a",
+								true,
+							},
+						},
+						name = "Select nearby boss once",
+						uuid = "a8496887-b6be-a593-8d23-de120ee9f60a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 576 then return false end\nlocal states = data.trialsInitialTargets\nlocal state = states and states[\"576_5199\"]\nreturn (state ~= nil and state.pending ~= nil) or (not player.incombat and (not state or not state.done))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and initial target",
+						uuid = "93e0f240-8680-b958-8386-c331776f621a",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Containment Bay P1T6/Sophia/AutoSim",
+			name = "Sophia select boss at encounter start",
+			throttleTime = 500,
+			uuid = "8850f091-6711-fa44-aa6a-8ebdd0e2664f",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal api = TensorCore.API.TensorACR\nlocal ok, elapsed = pcall(api.getAutoSimTime)\nif ok and type(elapsed) == \"number\" and elapsed >= 0 and elapsed <= 60 and not data.normalRaidForecastSet then\n    api.setAutoSimKillTime(246)\n    api.clearAutoSimUncertainty()\n    api.addAutoSimUncertainty(0, 20)\n    api.clearAutoSimPhases(\"FullDowntime\")\n    local downtime = {{45.6,56.1},{97.9,123.3},{218,228.5}}\n    for _, window in ipairs(downtime) do\n        api.addAutoSimPhase(\"FullDowntime\", window[1], window[2], 1)\n    end\n    data.normalRaidForecastSet = true\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"823eacfb-441c-2b69-aaa1-3cf9238df26c",
+								true,
+							},
+						},
+						name = "Sophia AutoSim baseline",
+						uuid = "8f68fa05-4e2a-40d9-ba49-5217b54e38d9",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 576 and (eventArgs.spellID == 6515 and not data.normalRaidForecastSet)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "823eacfb-441c-2b69-aaa1-3cf9238df26c",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Containment Bay P1T6/Sophia/AutoSim",
+			eventType = 3,
+			name = "Sophia AutoSim baseline",
+			uuid = "d164dd63-19c3-51f4-a5cd-397862662ba9",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "The Royal Menagerie",
+			uuid = "317e746a-09fc-4124-9f83-648faf880f48",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Royal Menagerie",
+			name = "Shinryu",
+			uuid = "b765b218-1224-e2e2-addb-d7a852d57a81",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Royal Menagerie/Shinryu",
+			name = "Draws",
+			uuid = "de67f3da-adfc-e4c9-8a84-f6cb67bdbd60",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal e = eventArgs\nlocal shapes = {[8732]=\"circle\"}\nlocal ms = math.floor(e.startTime + e.duration * 1000 - Now())\nif ms > 0 then\n    local drawer = TensorCore.getStaticDrawer(0x803333FF, 2)\n    if shapes[e.aoeID] == \"circle\" then\n        drawer:addTimedCircle(ms, e.x, e.y, e.z, e.aoeLength, 0, false, true)\n    else\n        drawer:addTimedRect(ms, e.x, e.y, e.z, e.aoeLength, e.aoeWidth, e.heading, 0, false, true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms, {x=e.x,y=e.y+1,z=e.z}, 0xFFFFFFFF, true, 1.1)\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"40fb1358-7094-1905-8f82-bbd7757f365f",
+								true,
+							},
+						},
+						name = "Shinryu hazard draws",
+						uuid = "61f46c32-59cc-0a15-9bb2-d205f8368bad",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 679 and (eventArgs.aoeID == 8732)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "40fb1358-7094-1905-8f82-bbd7757f365f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Royal Menagerie/Shinryu/Draws",
+			eventType = 18,
+			name = "Shinryu hazard draws",
+			uuid = "e65f26b0-6baf-bbb3-95e8-b830eec08fe6",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Royal Menagerie/Shinryu",
+			name = "AutoSim",
+			uuid = "6fce570e-d0d1-bf95-823b-922d4a9af900",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local settings = AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled = false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled = false end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"8e19d172-faa4-89ac-ac27-c7e7434afdef",
+								true,
+							},
+						},
+						name = "Shinryu helper setup",
+						uuid = "70b9760c-4d4e-1d31-bdfc-721edc91f140",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 679 and (true)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "8e19d172-faa4-89ac-ac27-c7e7434afdef",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Royal Menagerie/Shinryu/AutoSim",
+			eventType = 11,
+			name = "Shinryu helper setup",
+			uuid = "922f4c44-0fb8-2b39-bd78-6f98d8c9d676",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 679 then self.used = true; return end\ndata.trialsInitialTargets = data.trialsInitialTargets or {}\nlocal states = data.trialsInitialTargets\nlocal state = states[\"679_5640\"] or {}\nstates[\"679_5640\"] = state\nlocal current = TensorCore.mGetTarget()\nlocal label = \"[Trials targeting] Shinryu\"\nif state.pending then\n    if current and current.id == state.pending then\n        d(label .. \" confirmed target=\" .. tostring(current.id))\n        state.pending = nil\n    elseif Now() - state.requestedAt >= 1500 then\n        d(label .. \" request not confirmed; intended=\" .. tostring(state.pending) ..\n            \" current=\" .. tostring(current and current.id))\n        state.pending = nil\n    end\n    self.used = true\n    return\nend\nif player.incombat or state.done then self.used = true; return end\nlocal boss, nearest = nil, 35 * 35\nfor _, candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid=5640}) or {}) do\n    if candidate.alive and candidate.targetable and candidate.attackable and candidate.pos then\n        local dx = candidate.pos.x - player.pos.x\n        local dy = candidate.pos.y - player.pos.y\n        local dz = candidate.pos.z - player.pos.z\n        local distance = dx*dx + dy*dy + dz*dz\n        if distance <= nearest then\n            boss, nearest = candidate, distance\n        end\n    end\nend\nif not boss then\n    if not state.waitLogged then\n        d(label .. \" waiting for an attackable boss within 35 yalms; current=\" ..\n            tostring(current and current.id))\n        state.waitLogged = true\n    end\n    self.used = true\n    return\nend\nstate.done = true\nif current and current.alive and current.targetable and current.attackable then\n    d(label .. \" kept existing target; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current.id))\nelse\n    state.pending = boss.id\n    state.requestedAt = Now()\n    d(label .. \" target request; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current and current.id))\n    Player:SetTarget(boss.id)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"1f8bf4f1-9834-6314-8885-69a6f73a3568",
+								true,
+							},
+						},
+						name = "Select nearby boss once",
+						uuid = "2877fc4c-14e1-91f9-9dd1-74b1273687d3",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 679 then return false end\nlocal states = data.trialsInitialTargets\nlocal state = states and states[\"679_5640\"]\nreturn (state ~= nil and state.pending ~= nil) or (not player.incombat and (not state or not state.done))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and initial target",
+						uuid = "1f8bf4f1-9834-6314-8885-69a6f73a3568",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Royal Menagerie/Shinryu/AutoSim",
+			name = "Shinryu select boss at encounter start",
+			throttleTime = 500,
+			uuid = "cbf7c094-012a-90de-b22f-14534c45858b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal api = TensorCore.API.TensorACR\nlocal ok, elapsed = pcall(api.getAutoSimTime)\nif ok and type(elapsed) == \"number\" and elapsed >= 0 and elapsed <= 60 and not data.normalRaidForecastSet then\n    api.setAutoSimKillTime(337)\n    api.clearAutoSimUncertainty()\n    api.addAutoSimUncertainty(0, 20)\n    api.clearAutoSimPhases(\"FullDowntime\")\n    local downtime = {{89.9,102.7},{112.5,120.2},{134.2,141.4},{149.8,209.8}}\n    for _, window in ipairs(downtime) do\n        api.addAutoSimPhase(\"FullDowntime\", window[1], window[2], 1)\n    end\n    data.normalRaidForecastSet = true\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"3e0be813-e198-9577-8141-0f61b77c3f71",
+								true,
+							},
+						},
+						name = "Shinryu AutoSim baseline",
+						uuid = "180f4fb2-ede8-182f-b8cc-50c300b7cb94",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 679 and (eventArgs.spellID == 8106 and not data.normalRaidForecastSet)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "3e0be813-e198-9577-8141-0f61b77c3f71",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Royal Menagerie/Shinryu/AutoSim",
+			eventType = 3,
+			name = "Shinryu AutoSim baseline",
+			uuid = "38c21556-3fae-f752-b2c2-428de5aaa01a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "The Crown of the Immaculate",
+			uuid = "7d420cdb-94de-d0f9-8d6e-6f857c6175ac",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Crown of the Immaculate",
+			name = "Innocence",
+			uuid = "ab14f639-cf25-bbb7-a7ed-9be22a439bef",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Crown of the Immaculate/Innocence",
+			name = "Draws",
+			uuid = "cc6cc16e-1a8e-a56f-ab83-3b9463bd94bf",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal e = eventArgs\nlocal shapes = {[16029]=\"circle\",[16051]=\"rect\"}\nlocal ms = math.floor(e.startTime + e.duration * 1000 - Now())\nif ms > 0 then\n    local drawer = TensorCore.getStaticDrawer(0x803333FF, 2)\n    if shapes[e.aoeID] == \"circle\" then\n        drawer:addTimedCircle(ms, e.x, e.y, e.z, e.aoeLength, 0, false, true)\n    else\n        drawer:addTimedRect(ms, e.x, e.y, e.z, e.aoeLength, e.aoeWidth, e.heading, 0, false, true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms, {x=e.x,y=e.y+1,z=e.z}, 0xFFFFFFFF, true, 1.1)\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"a890027a-83a6-3d50-8aa7-7c770158b7bd",
+								true,
+							},
+						},
+						name = "Innocence hazard draws",
+						uuid = "482eec6b-50b8-8d45-b51b-e6dd109b193e",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 846 and (eventArgs.aoeID == 16029 or eventArgs.aoeID == 16051)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "a890027a-83a6-3d50-8aa7-7c770158b7bd",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Crown of the Immaculate/Innocence/Draws",
+			eventType = 18,
+			name = "Innocence hazard draws",
+			uuid = "cb037b99-5954-0868-9e66-a7dc3855613c",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Crown of the Immaculate/Innocence",
+			name = "AutoSim",
+			uuid = "3d6b9da1-bc61-c3c5-8438-277f7a70aff4",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local settings = AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled = false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled = false end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"de874ed3-5e82-b2f1-b927-253ceeae472b",
+								true,
+							},
+						},
+						name = "Innocence helper setup",
+						uuid = "b431f4f5-b98d-f8ab-bcc5-6312e5a8ac57",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 846 and (true)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "de874ed3-5e82-b2f1-b927-253ceeae472b",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Crown of the Immaculate/Innocence/AutoSim",
+			eventType = 11,
+			name = "Innocence helper setup",
+			uuid = "82dd50bb-9c3a-29b3-8819-4294a3528fb3",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 846 then self.used = true; return end\ndata.trialsInitialTargets = data.trialsInitialTargets or {}\nlocal states = data.trialsInitialTargets\nlocal state = states[\"846_8353\"] or {}\nstates[\"846_8353\"] = state\nlocal current = TensorCore.mGetTarget()\nlocal label = \"[Trials targeting] Innocence\"\nif state.pending then\n    if current and current.id == state.pending then\n        d(label .. \" confirmed target=\" .. tostring(current.id))\n        state.pending = nil\n    elseif Now() - state.requestedAt >= 1500 then\n        d(label .. \" request not confirmed; intended=\" .. tostring(state.pending) ..\n            \" current=\" .. tostring(current and current.id))\n        state.pending = nil\n    end\n    self.used = true\n    return\nend\nif player.incombat or state.done then self.used = true; return end\nlocal boss, nearest = nil, 35 * 35\nfor _, candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid=8353}) or {}) do\n    if candidate.alive and candidate.targetable and candidate.attackable and candidate.pos then\n        local dx = candidate.pos.x - player.pos.x\n        local dy = candidate.pos.y - player.pos.y\n        local dz = candidate.pos.z - player.pos.z\n        local distance = dx*dx + dy*dy + dz*dz\n        if distance <= nearest then\n            boss, nearest = candidate, distance\n        end\n    end\nend\nif not boss then\n    if not state.waitLogged then\n        d(label .. \" waiting for an attackable boss within 35 yalms; current=\" ..\n            tostring(current and current.id))\n        state.waitLogged = true\n    end\n    self.used = true\n    return\nend\nstate.done = true\nif current and current.alive and current.targetable and current.attackable then\n    d(label .. \" kept existing target; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current.id))\nelse\n    state.pending = boss.id\n    state.requestedAt = Now()\n    d(label .. \" target request; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current and current.id))\n    Player:SetTarget(boss.id)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"a82b9b56-cf75-4e94-8cfd-0118c1e5756d",
+								true,
+							},
+						},
+						name = "Select nearby boss once",
+						uuid = "fa80735a-917a-583e-a793-dddaf951567c",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 846 then return false end\nlocal states = data.trialsInitialTargets\nlocal state = states and states[\"846_8353\"]\nreturn (state ~= nil and state.pending ~= nil) or (not player.incombat and (not state or not state.done))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and initial target",
+						uuid = "a82b9b56-cf75-4e94-8cfd-0118c1e5756d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Crown of the Immaculate/Innocence/AutoSim",
+			name = "Innocence select boss at encounter start",
+			throttleTime = 500,
+			uuid = "ab9325ec-7816-e6fd-8eb0-f2883093af6a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal api = TensorCore.API.TensorACR\nlocal ok, elapsed = pcall(api.getAutoSimTime)\nif ok and type(elapsed) == \"number\" and elapsed >= 0 and elapsed <= 60 and not data.normalRaidForecastSet then\n    api.setAutoSimKillTime(422)\n    api.clearAutoSimUncertainty()\n    api.addAutoSimUncertainty(0, 20)\n    api.clearAutoSimPhases(\"FullDowntime\")\n    local downtime = {{133.4,171},{276.1,278},{318.5,338.8},{403.6,406.8}}\n    for _, window in ipairs(downtime) do\n        api.addAutoSimPhase(\"FullDowntime\", window[1], window[2], 1)\n    end\n    data.normalRaidForecastSet = true\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"c4c0f7c2-bf9d-fb80-9d99-27c1c32a0cbb",
+								true,
+							},
+						},
+						name = "Innocence AutoSim baseline",
+						uuid = "cc666a0f-ae7b-1eed-820d-a235cf04f411",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 846 and (eventArgs.spellID == 16026 and not data.normalRaidForecastSet)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "c4c0f7c2-bf9d-fb80-9d99-27c1c32a0cbb",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Crown of the Immaculate/Innocence/AutoSim",
+			eventType = 3,
+			name = "Innocence AutoSim baseline",
+			uuid = "24241302-6601-f2a5-bc2e-6ca200941884",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "The Singularity Reactor",
+			uuid = "a3ac6486-ede9-ad15-8fa7-7b733338354f",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Singularity Reactor",
+			name = "King Thordan",
+			uuid = "15f5b109-4462-f5db-a85f-c36b94e20e97",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Singularity Reactor/King Thordan",
+			name = "Mechanics",
+			uuid = "0065ff79-771a-862e-9fa7-7d2e24628060",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e = eventArgs\nlocal finish = Now() + e.channelTimeMax * 1000\ndata.trialsThordanGaze = {caster=e.entityID, start=finish-1000, expiry=finish+650}\nTensorCore.addAlertText(e.channelTimeMax*1000, \"Look away from Thordan\", 1.5, 2, true)\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"fa293c26-0c25-2cc7-a3b8-3d6076d13161",
+								true,
+							},
+						},
+						name = "Dragon’s Gaze - look away alert",
+						uuid = "e41ef024-ffcf-39c3-886e-ba00b7903d53",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 437 and eventArgs ~= nil and eventArgs.spellID == 4201 and eventArgs.entityContentID == 3632",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "fa293c26-0c25-2cc7-a3b8-3d6076d13161",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Singularity Reactor/King Thordan/Mechanics",
+			eventType = 3,
+			name = "Dragon’s Gaze - look away alert",
+			timeout = 3,
+			uuid = "160c74c4-8744-5294-8e49-c835a56e73b1",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local gaze = data.trialsThordanGaze\nlocal p = TensorCore.mGetPlayer()\nlocal api = TensorCore.API.TensorACR\nif not p or p.localmapid ~= 437 or not p.alive or not p.incombat or Now() >= gaze.expiry then\n    if gaze.locked then\n        api.toggleLockFace(false)\n        api.setHardLockFace(false)\n    end\n    data.trialsThordanGaze = nil\nelse\n    local caster = TensorCore.mGetEntity(gaze.caster)\n    if caster and caster.pos and p.pos then\n        api.setLockFaceHeading(TensorCore.getHeadingToTarget2(\n            caster.pos.x, caster.pos.y, caster.pos.z, p.pos.x, p.pos.y, p.pos.z))\n        if not gaze.locked then\n            api.setHardLockFace(true)\n            api.toggleLockFace(true)\n            gaze.locked = true\n        end\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"f26f7ddf-e9e7-3062-a25e-feddf553bd56",
+								true,
+							},
+						},
+						name = "Dragon’s Gaze - temporary Lock Face",
+						uuid = "43ffb119-0582-7981-82eb-186d901215c4",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local gaze = data.trialsThordanGaze\nif not gaze or Now() < gaze.start then return false end\nlocal p = TensorCore.mGetPlayer()\nreturn gaze.locked == true or (p ~= nil and p.localmapid == 437)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "f26f7ddf-e9e7-3062-a25e-feddf553bd56",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Singularity Reactor/King Thordan/Mechanics",
+			name = "Dragon’s Gaze - temporary Lock Face",
+			throttleTime = 100,
+			timeout = 3,
+			uuid = "e6021400-9897-4206-8a3f-8ca754f066f9",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local gaze = data.trialsThordanGaze\nif gaze.locked then\n    local api = TensorCore.API.TensorACR\n    api.toggleLockFace(false)\n    api.setHardLockFace(false)\nend\ndata.trialsThordanGaze = nil\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"f792ee1c-2fb8-27bd-8ff5-6847c3484a5b",
+								true,
+							},
+						},
+						name = "Dragon’s Gaze - release Lock Face",
+						uuid = "4fdc54b3-a1d3-9d06-8454-fc5c65fe475e",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 437 and eventArgs ~= nil and eventArgs.spellID == 4201 and eventArgs.entityContentID == 3632 and data.trialsThordanGaze ~= nil and eventArgs.entityID == data.trialsThordanGaze.caster",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "f792ee1c-2fb8-27bd-8ff5-6847c3484a5b",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Singularity Reactor/King Thordan/Mechanics",
+			eventType = 2,
+			name = "Dragon’s Gaze - release Lock Face",
+			timeout = 3,
+			uuid = "b7ad4b20-b1f1-b9d0-a4fe-e60eff80f98c",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Singularity Reactor/King Thordan",
+			name = "Mitigations",
+			uuid = "3670ae69-f951-11cc-81b1-e69ed883cb9e",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"2c450b9e-a8aa-4ba7-a5e8-f69feee5d512",
+								true,
+							},
+						},
+						gVar = "ACR_TensorReaper4_Hotbar_ArmsLength",
+						uuid = "4d46665b-e543-dd99-a5b7-8e9af311e0d6",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 437 and eventArgs ~= nil and eventArgs.spellID == 4203 and eventArgs.entityContentID == 3645",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "2c450b9e-a8aa-4ba7-a5e8-f69feee5d512",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Singularity Reactor/King Thordan/Mitigations",
+			eventType = 2,
+			name = "Light of Ascalon - Arm's Length",
+			throttleTime = 15000,
+			timeout = 2,
+			uuid = "1d55450c-24a6-8b78-8a6f-e63a212841f3",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Singularity Reactor/King Thordan",
+			name = "Draws",
+			uuid = "ecfdf8d5-8f4a-92ce-ac12-194d9a748fb9",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e = eventArgs\nlocal ms = math.floor(e.startTime + e.duration * 1000 - Now())\nif ms > 0 then\n    local drawer = TensorCore.getStaticDrawer(0x803333FF, 2)\n    if e.aoeID == 4197 then\n        drawer:addTimedCircle(ms, e.x, e.y, e.z, e.aoeLength, 0, false, true)\n    else\n        drawer:addTimedRect(ms, e.x, e.y, e.z, e.aoeLength, e.aoeWidth, e.heading, 0, false, true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms, {x=e.x,y=e.y+1,z=e.z}, 0xFFFFFFFF, true, 1.1)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"cfea4685-40c8-4cbf-9ce9-5d0623aaa32d",
+								true,
+							},
+						},
+						name = "King Thordan - ground and charge telegraphs",
+						uuid = "d0e4dc07-0a55-986e-b993-b5cc57dfdbed",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 437 and eventArgs ~= nil and (eventArgs.aoeID == 4197 or eventArgs.aoeID == 4222 or eventArgs.aoeID == 4223)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "cfea4685-40c8-4cbf-9ce9-5d0623aaa32d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Singularity Reactor/King Thordan/Draws",
+			eventType = 18,
+			name = "King Thordan - ground and charge telegraphs",
+			timeout = 3,
+			uuid = "f588eb5e-c99a-bca9-b133-9f196ab846d9",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Singularity Reactor/King Thordan",
+			name = "AutoSim",
+			uuid = "66709a6f-ca02-ffbe-af83-eb888d64b7dc",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "gStartCombat = false\nlocal settings = AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled = false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled = false end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"4a94bc88-e091-9fea-945a-1b8b168b2463",
+								true,
+							},
+						},
+						name = "Thordan helper setup",
+						uuid = "2e7dfcd5-2950-5783-8fb3-da08c272b21d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 437 and (true)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "4a94bc88-e091-9fea-945a-1b8b168b2463",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Singularity Reactor/King Thordan/AutoSim",
+			eventType = 11,
+			name = "Thordan helper setup",
+			uuid = "51675976-4d4a-48ff-be55-9beb091c0ba2",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 437 then self.used = true; return end\ndata.trialsInitialTargets = data.trialsInitialTargets or {}\nlocal states = data.trialsInitialTargets\nlocal state = states[\"437_3632\"] or {}\nstates[\"437_3632\"] = state\nlocal current = TensorCore.mGetTarget()\nlocal label = \"[Trials targeting] Thordan\"\nif state.pending then\n    if current and current.id == state.pending then\n        d(label .. \" confirmed target=\" .. tostring(current.id))\n        state.pending = nil\n    elseif Now() - state.requestedAt >= 1500 then\n        d(label .. \" request not confirmed; intended=\" .. tostring(state.pending) ..\n            \" current=\" .. tostring(current and current.id))\n        state.pending = nil\n    end\n    self.used = true\n    return\nend\nif player.incombat or state.done then self.used = true; return end\nlocal boss, nearest = nil, 35 * 35\nfor _, candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid=3632}) or {}) do\n    if candidate.alive and candidate.targetable and candidate.attackable and candidate.pos then\n        local dx = candidate.pos.x - player.pos.x\n        local dy = candidate.pos.y - player.pos.y\n        local dz = candidate.pos.z - player.pos.z\n        local distance = dx*dx + dy*dy + dz*dz\n        if distance <= nearest then\n            boss, nearest = candidate, distance\n        end\n    end\nend\nif not boss then\n    if not state.waitLogged then\n        d(label .. \" waiting for an attackable boss within 35 yalms; current=\" ..\n            tostring(current and current.id))\n        state.waitLogged = true\n    end\n    self.used = true\n    return\nend\nstate.done = true\nif current and current.alive and current.targetable and current.attackable then\n    d(label .. \" kept existing target; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current.id))\nelse\n    state.pending = boss.id\n    state.requestedAt = Now()\n    d(label .. \" target request; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current and current.id))\n    gStartCombat = false\n    Player:SetTarget(boss.id)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"58219641-e0c2-4d11-8818-6481a75dfadf",
+								true,
+							},
+						},
+						name = "Thordan select boss at encounter start",
+						uuid = "2887e430-8415-669a-8850-3a77bf707b7b",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 437 then return false end\nlocal states = data.trialsInitialTargets\nlocal state = states and states[\"437_3632\"]\nreturn (state ~= nil and state.pending ~= nil) or (not player.incombat and (not state or not state.done))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and initial target",
+						uuid = "58219641-e0c2-4d11-8818-6481a75dfadf",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Singularity Reactor/King Thordan/AutoSim",
+			name = "Thordan select boss at encounter start",
+			throttleTime = 500,
+			uuid = "298368f2-5880-195d-a1d5-83534c85ca57",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal api = TensorCore.API.TensorACR\nlocal ok, elapsed = pcall(api.getAutoSimTime)\nif ok and type(elapsed) == \"number\" and elapsed >= 0 and elapsed <= 60 and not data.trialsThordanForecastSet then\n    api.setAutoSimKillTime(235)\n    api.clearAutoSimUncertainty()\n    api.addAutoSimUncertainty(0, 12)\n    api.clearAutoSimPhases(\"FullDowntime\")\n    local downtime = {{71.5, 102.5}, {120.7, 127.6}, {144.7, 177.8}, {186.0, 224.6}}\n    for _, window in ipairs(downtime) do\n        api.addAutoSimPhase(\"FullDowntime\", window[1], window[2], 1)\n    end\n    data.trialsThordanForecastSet = true\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"7b6ff604-6b90-6544-9cfe-7e4394cf2f32",
+								true,
+							},
+						},
+						name = "Thordan AutoSim baseline",
+						uuid = "95674856-3c10-69d9-a9f0-f39c064d67af",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 437 and (eventArgs ~= nil and eventArgs.spellID == 4192 and eventArgs.entityContentID == 3632 and not data.trialsThordanForecastSet)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "7b6ff604-6b90-6544-9cfe-7e4394cf2f32",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Singularity Reactor/King Thordan/AutoSim",
+			eventType = 3,
+			name = "Thordan AutoSim baseline",
+			uuid = "decb6df3-675f-f299-afeb-546f21031515",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player then self.used = true; return end\n\nlocal contentID = 4386\nlocal label = \"[Trials] Meteor Circle\"\nlocal api = TensorCore.API.TensorACR\nlocal eligible = player.localmapid == 437 and (player.job == 23 or player.job == 25)\nlocal state = TrialsThordanMeteorDoT\n\n-- Restore the previous entry on leaving The Singularity Reactor or changing jobs.\n-- Keep this state outside pull data so a wipe does not lose the original values.\nif state and (not eligible or state.job ~= player.job) then\n    local entry = state.entry\n    if entry.enabled and entry.allowIfTarget == false and entry.allowSmartDoT == false then\n        if state.created then\n            entry.enabled = false\n            if player.job == state.job and api.getBlacklistEntry(contentID) then\n                local current = api.addBlacklistEntry(contentID)\n                if current == entry and current.name == label then\n                    api.deleteBlacklistEntry(contentID)\n                end\n            end\n        else\n            entry.enabled = state.enabled\n            entry.allowIfTarget = state.allowIfTarget\n            entry.allowSmartDoT = state.allowSmartDoT\n        end\n    end\n    TrialsThordanMeteorDoT = nil\n    state = nil\nend\n\nif eligible and not state then\n    local supported, exists = pcall(api.getBlacklistEntry, contentID)\n    if supported then\n        local ok, entry = pcall(api.addBlacklistEntry, contentID, label)\n        if ok and entry then\n            TrialsThordanMeteorDoT = {\n                job = player.job, entry = entry, created = not exists,\n                enabled = entry.enabled, allowIfTarget = entry.allowIfTarget,\n                allowSmartDoT = entry.allowSmartDoT,\n            }\n            entry.enabled = true\n            entry.allowIfTarget = false\n            entry.allowSmartDoT = false\n        end\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"dedf2802-3f8f-e9d0-b06d-9d5224116bd5",
+								true,
+							},
+						},
+						name = "Meteor Circle DoT blacklist (BRD / BLM)",
+						uuid = "e885ff49-c425-2009-8084-d47ede6b3997",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal state = TrialsThordanMeteorDoT\nlocal eligible = player.localmapid == 437 and (player.job == 23 or player.job == 25)\nif state then\n    return not eligible or player.job ~= state.job\nend\nreturn eligible",
+						dequeueIfLuaFalse = true,
+						name = "Duty and job / restore on exit",
+						uuid = "dedf2802-3f8f-e9d0-b06d-9d5224116bd5",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Singularity Reactor/King Thordan/AutoSim",
+			name = "Meteor Circle DoT blacklist (BRD / BLM)",
+			throttleTime = 500,
+			uuid = "ef53df14-ddf5-f4ab-b100-60ba11a1d63d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player then self.used = true; return end\n\nlocal contentID = 4387\nlocal label = \"[Trials] Comet Circle\"\nlocal api = TensorCore.API.TensorACR\nlocal eligible = player.localmapid == 437 and (player.job == 23 or player.job == 25)\nlocal state = TrialsThordanCometDoT\n\n-- Restore the previous entry on leaving The Singularity Reactor or changing jobs.\n-- Keep this state outside pull data so a wipe does not lose the original values.\nif state and (not eligible or state.job ~= player.job) then\n    local entry = state.entry\n    if entry.enabled and entry.allowIfTarget == false and entry.allowSmartDoT == false then\n        if state.created then\n            entry.enabled = false\n            if player.job == state.job and api.getBlacklistEntry(contentID) then\n                local current = api.addBlacklistEntry(contentID)\n                if current == entry and current.name == label then\n                    api.deleteBlacklistEntry(contentID)\n                end\n            end\n        else\n            entry.enabled = state.enabled\n            entry.allowIfTarget = state.allowIfTarget\n            entry.allowSmartDoT = state.allowSmartDoT\n        end\n    end\n    TrialsThordanCometDoT = nil\n    state = nil\nend\n\nif eligible and not state then\n    local supported, exists = pcall(api.getBlacklistEntry, contentID)\n    if supported then\n        local ok, entry = pcall(api.addBlacklistEntry, contentID, label)\n        if ok and entry then\n            TrialsThordanCometDoT = {\n                job = player.job, entry = entry, created = not exists,\n                enabled = entry.enabled, allowIfTarget = entry.allowIfTarget,\n                allowSmartDoT = entry.allowSmartDoT,\n            }\n            entry.enabled = true\n            entry.allowIfTarget = false\n            entry.allowSmartDoT = false\n        end\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"e28dcb7a-de06-aeb5-8268-7233ed81b20f",
+								true,
+							},
+						},
+						name = "Comet Circle DoT blacklist (BRD / BLM)",
+						uuid = "6c6c9a0d-d1cb-58f5-a1cc-1816d2dba9c8",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal state = TrialsThordanCometDoT\nlocal eligible = player.localmapid == 437 and (player.job == 23 or player.job == 25)\nif state then\n    return not eligible or player.job ~= state.job\nend\nreturn eligible",
+						dequeueIfLuaFalse = true,
+						name = "Duty and job / restore on exit",
+						uuid = "e28dcb7a-de06-aeb5-8268-7233ed81b20f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Singularity Reactor/King Thordan/AutoSim",
+			name = "Comet Circle DoT blacklist (BRD / BLM)",
+			throttleTime = 500,
+			uuid = "85fd58fd-02ea-e05c-9ff0-d5d9137ad9e5",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player then self.used = true; return end\n\nlocal contentID = 3634\nlocal label = \"[Trials] Ser Adelphel\"\nlocal api = TensorCore.API.TensorACR\nlocal eligible = player.localmapid == 437 and (player.job == 23 or player.job == 25)\nlocal state = TrialsThordanSerAdelphelDoT\n\n-- Restore the previous entry on leaving The Singularity Reactor or changing jobs.\n-- Keep this state outside pull data so a wipe does not lose the original values.\nif state and (not eligible or state.job ~= player.job) then\n    local entry = state.entry\n    if entry.enabled and entry.allowIfTarget == false and entry.allowSmartDoT == false then\n        if state.created then\n            entry.enabled = false\n            if player.job == state.job and api.getBlacklistEntry(contentID) then\n                local current = api.addBlacklistEntry(contentID)\n                if current == entry and current.name == label then\n                    api.deleteBlacklistEntry(contentID)\n                end\n            end\n        else\n            entry.enabled = state.enabled\n            entry.allowIfTarget = state.allowIfTarget\n            entry.allowSmartDoT = state.allowSmartDoT\n        end\n    end\n    TrialsThordanSerAdelphelDoT = nil\n    state = nil\nend\n\nif eligible and not state then\n    local supported, exists = pcall(api.getBlacklistEntry, contentID)\n    if supported then\n        local ok, entry = pcall(api.addBlacklistEntry, contentID, label)\n        if ok and entry then\n            TrialsThordanSerAdelphelDoT = {\n                job = player.job, entry = entry, created = not exists,\n                enabled = entry.enabled, allowIfTarget = entry.allowIfTarget,\n                allowSmartDoT = entry.allowSmartDoT,\n            }\n            entry.enabled = true\n            entry.allowIfTarget = false\n            entry.allowSmartDoT = false\n        end\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"b83640c0-b622-26fe-bb54-662e938627f3",
+								true,
+							},
+						},
+						name = "Block short-lived knight DoTs",
+						uuid = "35a95afa-1c74-c07f-bb21-d83ac1ba0dcd",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal state = TrialsThordanSerAdelphelDoT\nlocal eligible = player.localmapid == 437 and (player.job == 23 or player.job == 25)\nif state then\n    return not eligible or player.job ~= state.job\nend\nreturn eligible",
+						name = "Duty and job / owned cleanup",
+						uuid = "b83640c0-b622-26fe-bb54-662e938627f3",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Singularity Reactor/King Thordan/AutoSim",
+			name = "Ser Adelphel DoT blacklist (BRD / BLM)",
+			throttleTime = 500,
+			timeout = 0.5,
+			uuid = "d01a817d-5f25-9d67-9737-75a7a897caa8",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player then self.used = true; return end\n\nlocal contentID = 3635\nlocal label = \"[Trials] Ser Janlenoux\"\nlocal api = TensorCore.API.TensorACR\nlocal eligible = player.localmapid == 437 and (player.job == 23 or player.job == 25)\nlocal state = TrialsThordanSerJanlenouxDoT\n\n-- Restore the previous entry on leaving The Singularity Reactor or changing jobs.\n-- Keep this state outside pull data so a wipe does not lose the original values.\nif state and (not eligible or state.job ~= player.job) then\n    local entry = state.entry\n    if entry.enabled and entry.allowIfTarget == false and entry.allowSmartDoT == false then\n        if state.created then\n            entry.enabled = false\n            if player.job == state.job and api.getBlacklistEntry(contentID) then\n                local current = api.addBlacklistEntry(contentID)\n                if current == entry and current.name == label then\n                    api.deleteBlacklistEntry(contentID)\n                end\n            end\n        else\n            entry.enabled = state.enabled\n            entry.allowIfTarget = state.allowIfTarget\n            entry.allowSmartDoT = state.allowSmartDoT\n        end\n    end\n    TrialsThordanSerJanlenouxDoT = nil\n    state = nil\nend\n\nif eligible and not state then\n    local supported, exists = pcall(api.getBlacklistEntry, contentID)\n    if supported then\n        local ok, entry = pcall(api.addBlacklistEntry, contentID, label)\n        if ok and entry then\n            TrialsThordanSerJanlenouxDoT = {\n                job = player.job, entry = entry, created = not exists,\n                enabled = entry.enabled, allowIfTarget = entry.allowIfTarget,\n                allowSmartDoT = entry.allowSmartDoT,\n            }\n            entry.enabled = true\n            entry.allowIfTarget = false\n            entry.allowSmartDoT = false\n        end\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"0ea07a59-1e6b-4d1a-bb7a-0c87c71055c3",
+								true,
+							},
+						},
+						name = "Block short-lived knight DoTs",
+						uuid = "b9d3377a-d2e0-1ff7-8d53-6afd3c1b7e3e",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal state = TrialsThordanSerJanlenouxDoT\nlocal eligible = player.localmapid == 437 and (player.job == 23 or player.job == 25)\nif state then\n    return not eligible or player.job ~= state.job\nend\nreturn eligible",
+						name = "Duty and job / owned cleanup",
+						uuid = "0ea07a59-1e6b-4d1a-bb7a-0c87c71055c3",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Singularity Reactor/King Thordan/AutoSim",
+			name = "Ser Janlenoux DoT blacklist (BRD / BLM)",
+			throttleTime = 500,
+			timeout = 0.5,
+			uuid = "fce167ce-fd50-948a-bab5-e95bcaf89be8",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player then self.used = true; return end\n\nlocal contentID = 3633\nlocal label = \"[Trials] Ser Zephirin (BRD)\"\nlocal api = TensorCore.API.TensorACR\nlocal eligible = player.localmapid == 437 and player.job == 23\nlocal state = TrialsThordanZephirinDoT\n\n-- Restore the previous entry on leaving The Singularity Reactor or changing jobs.\n-- Keep this state outside pull data so a wipe does not lose the original values.\nif state and (not eligible or state.job ~= player.job) then\n    local entry = state.entry\n    if entry.enabled and entry.allowIfTarget == false and entry.allowSmartDoT == false then\n        if state.created then\n            entry.enabled = false\n            if player.job == state.job and api.getBlacklistEntry(contentID) then\n                local current = api.addBlacklistEntry(contentID)\n                if current == entry and current.name == label then\n                    api.deleteBlacklistEntry(contentID)\n                end\n            end\n        else\n            entry.enabled = state.enabled\n            entry.allowIfTarget = state.allowIfTarget\n            entry.allowSmartDoT = state.allowSmartDoT\n        end\n    end\n    TrialsThordanZephirinDoT = nil\n    state = nil\nend\n\nif eligible and not state then\n    local supported, exists = pcall(api.getBlacklistEntry, contentID)\n    if supported then\n        local ok, entry = pcall(api.addBlacklistEntry, contentID, label)\n        if ok and entry then\n            TrialsThordanZephirinDoT = {\n                job = player.job, entry = entry, created = not exists,\n                enabled = entry.enabled, allowIfTarget = entry.allowIfTarget,\n                allowSmartDoT = entry.allowSmartDoT,\n            }\n            entry.enabled = true\n            entry.allowIfTarget = false\n            entry.allowSmartDoT = false\n        end\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"8f9dfd8e-b02a-f1e0-85ad-cded81ca784c",
+								true,
+							},
+						},
+						name = "Save both DoT GCDs on short-lived Zephirin",
+						uuid = "628a60d8-02d1-a915-8fa3-6c6308290893",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal state = TrialsThordanZephirinDoT\nlocal eligible = player.localmapid == 437 and player.job == 23\nif state then\n    return not eligible or player.job ~= state.job\nend\nreturn eligible",
+						name = "BRD in duty / owned cleanup",
+						uuid = "8f9dfd8e-b02a-f1e0-85ad-cded81ca784c",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Singularity Reactor/King Thordan/AutoSim",
+			name = "Ser Zephirin DoT blacklist (BRD only)",
+			throttleTime = 500,
+			timeout = 0.5,
+			uuid = "31594d24-2d80-7831-82a9-3ca869b449d9",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "Cinder Drift",
+			uuid = "eeef8111-6e26-a8a8-afc5-46aca82addc9",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Cinder Drift",
+			name = "AutoSim",
+			uuid = "b1a9e7ae-4ee8-47c4-992b-4e7f516ecf35",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if not TrialsCinder then\n local C={draws=true,autoSim=true,movement=true,killP1=180,killP2=170,transition=61.6,blockComets=true,blockImages=false}\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n C.path=folder..[[Trials.CinderDrift.lua]]\n local keys={\"draws\",\"autoSim\",\"movement\",\"killP1\",\"killP2\",\"transition\",\"blockComets\",\"blockImages\"}\n if FileExists(C.path) then\n  local saved=FileLoad(C.path)\n  if type(saved)==\"table\" then for _,key in ipairs(keys) do if type(saved[key])==type(C[key]) then C[key]=saved[key] end end end\n end\n C.killP1=math.max(30,math.min(600,C.killP1));C.killP2=math.max(30,math.min(600,C.killP2));C.transition=math.max(1,math.min(120,C.transition))\n function C.save()\n  if not FolderExists(folder) then FolderCreate(folder) end\n  local values={};for _,key in ipairs(keys) do values[key]=C[key] end\n  FileSave(C.path,values)\n end\n C.save();TrialsCinder=C\nend\nlocal settings=AnyoneCore and AnyoneCore.Settings\nif settings then\n if settings.DutyHelper then settings.DutyHelper.enabled=false end\n if settings.PrepullHelper then settings.PrepullHelper.enabled=false end\nend\ngStartCombat=false\ndata.cinderHelpersReady=true\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"ae8644f6-fd11-f010-bec8-a090496c43f6",
+								true,
+							},
+							
+							{
+								"2c0234ad-9981-acc3-b801-3dc3f3e064c0",
+								true,
+							},
+						},
+						name = "Initialize settings and helpers",
+						uuid = "7ceffb96-11c0-d9c2-a5ce-daaf7acecd7f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 897,
+						name = "Cinder Drift (897)",
+						uuid = "ae8644f6-fd11-f010-bec8-a090496c43f6",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return not data.cinderHelpersReady or TrialsCinder==nil",
+						name = "Relevant Cinder state",
+						uuid = "2c0234ad-9981-acc3-b801-3dc3f3e064c0",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Cinder Drift/AutoSim",
+			name = "[Cinder Drift] Initialize settings and helpers",
+			throttleTime = 500,
+			timeout = 0.5,
+			uuid = "0860785d-1eab-ea50-b742-1fdd6ab39277",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "data.cinderPhase=eventArgs.spellID==19114 and 2 or 1\nlocal S=data.cinderForecast\nif S and data.cinderPhase==2 and not S.p2 then S.p2=math.max(0,TensorCore.API.TensorACR.getAutoSimTime()-7.25);S.publish() end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"b2e38c39-e548-9a15-898d-3c104987a3b1",
+								true,
+							},
+							
+							{
+								"49732708-9125-05b9-91f0-459035317cea",
+								true,
+							},
+						},
+						name = "Capture phase",
+						uuid = "fd88701e-edd1-66d2-88e6-d8dcbd52df4b",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 897,
+						uuid = "b2e38c39-e548-9a15-898d-3c104987a3b1",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return eventArgs.entityContentID==9250 and ((eventArgs.spellID==19143 and data.cinderPhase==nil) or (eventArgs.spellID==19114 and data.cinderPhase~=2))",
+						dequeueIfLuaFalse = true,
+						name = "Phase opening cast",
+						uuid = "49732708-9125-05b9-91f0-459035317cea",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Cinder Drift/AutoSim",
+			eventType = 3,
+			name = "[Cinder Drift] Identify native phase casts",
+			timeout = 2,
+			uuid = "bf32e8eb-d6df-12b0-bfef-be03b23f557d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local C=TrialsCinder\nlocal api=TensorCore.API.TensorACR\nlocal S={ids={},p1End=nil,p2=nil,guessEnd=C.killP1}\nfunction S.publish()\n for _,id in ipairs(S.ids) do api.removeAutoSimPhase(id) end\n S.ids={}\n local function add(kind,a,b)\n  if b>a then local id=api.addAutoSimPhase(kind,a,b,1);if id then S.ids[#S.ids+1]=id end end\n end\n local ending=S.p1End or S.guessEnd\n local p2=S.p2 or ending+C.transition\n if not S.checkpoint then\n  local f=S.flight or {130.219,137.469}\n  if ending>f[1] then add(\"FullDowntime\",f[1],math.min(f[2],ending)) end\n  add(\"Stun\",ending,p2)\n end\n api.setAutoSimKillTime(p2+C.killP2)\n if C.movement then\n  if not S.checkpoint then\n   for _,w in ipairs({{44.5,47},{50.5,53},{67,70},{97,103},{129,137.5},{169.5,172},{175.5,178.5}}) do\n    if w[1]<ending then add(\"CasterDowntime\",w[1],math.min(w[2],ending)) end\n   end\n  end\n  for _,w in ipairs({{25.5,27.5},{41.5,43.5},{59.5,61.5},{105,108},{116.5,120}}) do add(\"CasterDowntime\",p2+w[1],p2+w[2]) end\n end\nend\nlocal target=TensorCore.mGetTarget()\nlocal now=api.getAutoSimTime()\nS.p1Entity=target and target.id\nif data.cinderPhase==2 then S.checkpoint=true;S.p2=math.max(0,now-7.25) end\nS.publish()\ndata.cinderForecast=S\nTensorCore.timelineLogToFile(\"[Cinder AutoSim] setup clock=\"..tostring(now)..\" checkpoint=\"..tostring(S.checkpoint)..\" sampled P1=179.594 transition=61.609 P2=169.531; movement estimates optional\")\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"f62a4453-3735-99fa-904d-5dcce86e3c88",
+								true,
+							},
+							
+							{
+								"bdaff4ae-8b92-c35b-813d-822a4914b168",
+								true,
+							},
+						},
+						name = "Build two-phase forecast",
+						uuid = "6f0ebde7-0cf3-1f8c-a892-2f24a2bbb097",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 897,
+						name = "Cinder Drift (897)",
+						uuid = "f62a4453-3735-99fa-904d-5dcce86e3c88",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer();return TrialsCinder~=nil and TrialsCinder.autoSim==true and p~=nil and p.incombat==true and data.cinderForecast==nil and data.cinderPhase~=nil",
+						name = "Relevant Cinder state",
+						uuid = "bdaff4ae-8b92-c35b-813d-822a4914b168",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Cinder Drift/AutoSim",
+			name = "[Cinder Drift] Build two-phase forecast",
+			throttleTime = 500,
+			timeout = 0.5,
+			uuid = "6b78a48b-0c75-e829-afa5-fecbb6fdb06c",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "data.cinderP2Entity=eventArgs.entityID\nlocal S=data.cinderForecast\nif S then\n local now=TensorCore.API.TensorACR.getAutoSimTime()\n S.p1End=now;S.publish()\n TensorCore.timelineLogToFile(\"[Cinder AutoSim] cutscene Stun starts=\"..now)\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"106405f2-2d54-a0e6-95f6-815ffc36c95e",
+								true,
+							},
+							
+							{
+								"43c73269-5364-423f-8a12-cc7034d731ce",
+								true,
+							},
+						},
+						name = "Resync transition Stun",
+						uuid = "50b0ca45-dd10-59e5-b7d4-8f5363d7859c",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 897,
+						name = "Cinder Drift (897)",
+						uuid = "106405f2-2d54-a0e6-95f6-815ffc36c95e",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return eventArgs.spellID==19996 and eventArgs.entityContentID==9250 and not data.cinderP2Entity",
+						dequeueIfLuaFalse = true,
+						name = "Relevant Cinder state",
+						uuid = "43c73269-5364-423f-8a12-cc7034d731ce",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Cinder Drift/AutoSim",
+			eventType = 2,
+			name = "[Cinder Drift] Resync transition Stun",
+			timeout = 2,
+			uuid = "725927a3-b6b4-2978-86ae-46d7ddfc0515",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local S=data.cinderForecast\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif S and e and eventArgs.entityID==data.cinderP2Entity and not S.p2 then\n S.p2=TensorCore.API.TensorACR.getAutoSimTime();S.publish()\n TensorCore.timelineLogToFile(\"[Cinder AutoSim] P2 targetable=\"..S.p2)\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"07090a9b-c696-6fae-9d7a-fc691f9c79d2",
+								true,
+							},
+							
+							{
+								"58c113eb-4209-6c87-bfe8-e4c4d80ac82e",
+								true,
+							},
+						},
+						name = "Resync phase two start",
+						uuid = "97de3228-7ca0-d40b-b938-fdced116e3ad",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 897,
+						name = "Cinder Drift (897)",
+						uuid = "07090a9b-c696-6fae-9d7a-fc691f9c79d2",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return eventArgs.entityContentID==9250 and eventArgs.isTargetable==true and data.cinderForecast~=nil and data.cinderForecast.p2==nil",
+						dequeueIfLuaFalse = true,
+						name = "Relevant Cinder state",
+						uuid = "58c113eb-4209-6c87-bfe8-e4c4d80ac82e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Cinder Drift/AutoSim",
+			eventType = 26,
+			name = "[Cinder Drift] Resync phase two start",
+			timeout = 2,
+			uuid = "3aedfda4-895d-3e8b-bfd5-3eadf666a5d0",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local S=data.cinderForecast\nlocal t=TensorCore.mGetTarget()\nif t and t.contentid==9250 and t.id==S.p1Entity and t.alive and t.attackable then\n local now=TensorCore.API.TensorACR.getAutoSimTime()\n if now>=S.guessEnd-2 then S.guessEnd=now+4;S.publish() end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"7db58c54-ae9f-6fe5-8095-02c1de51b677",
+								true,
+							},
+							
+							{
+								"0a178fe2-9c6b-b59b-9d04-e4d3660be728",
+								true,
+							},
+						},
+						name = "Extend late phase-one estimate",
+						uuid = "d1452f55-ecba-2d82-aa1d-c76888dc46fd",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 897,
+						name = "Cinder Drift (897)",
+						uuid = "7db58c54-ae9f-6fe5-8095-02c1de51b677",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local S=data.cinderForecast;return S~=nil and S.p1End==nil and S.p2==nil and TensorCore.API.TensorACR.getAutoSimTime()>=S.guessEnd-2",
+						name = "Relevant Cinder state",
+						uuid = "0a178fe2-9c6b-b59b-9d04-e4d3660be728",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Cinder Drift/AutoSim",
+			name = "[Cinder Drift] Extend late phase-one estimate",
+			throttleTime = 2000,
+			timeout = 0.5,
+			uuid = "97abf3ca-f6e3-487e-a5fa-4a798754abf9",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "gStartCombat=false\nlocal found\nTensorCore.forEachEntity(\"contentid=9250,alive,targetable,attackable\",function(id)\n local e=TensorCore.mGetEntity(id)\n if e and e.attackable then found=id;return false end\nend)\nif found then\n local prior=TensorCore.mGetTarget()\n TensorCore.timelineLogToFile(\"[Cinder target] initial request=\"..found..\" current=\"..tostring(prior and prior.id)..\" StartCombat=false; cast-protected\")\n Player:SetTarget(found);data.cinderTargetRequest={id=found,at=Now()}\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"c94be8ba-a3f3-f06d-bc0d-6aaeb4497e1d",
+								true,
+							},
+							
+							{
+								"c2cabeff-6fc8-cc58-89ad-fa0e6caf4980",
+								true,
+							},
+						},
+						name = "Select initial boss without pulling",
+						uuid = "c875ef15-a82d-9f43-a310-67aaaaef9f72",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 897,
+						name = "Cinder Drift (897)",
+						uuid = "c94be8ba-a3f3-f06d-bc0d-6aaeb4497e1d",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local t=TensorCore.mGetTarget();return data.cinderHelpersReady==true and data.cinderTargetRequest==nil and not ActionList:IsCasting() and (t==nil or not t.alive or not t.attackable) and not data.cinderTargetConfirmed",
+						name = "Relevant Cinder state",
+						uuid = "c2cabeff-6fc8-cc58-89ad-fa0e6caf4980",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Cinder Drift/AutoSim",
+			name = "[Cinder Drift] Select initial boss without pulling",
+			throttleTime = 500,
+			timeout = 0.5,
+			uuid = "659c5ae7-6485-ffa5-b46b-f63ab8c1ff36",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local R=data.cinderTargetRequest\nlocal t=TensorCore.mGetTarget()\nif t and t.id==R.id then\n TensorCore.timelineLogToFile(\"[Cinder target] confirmed=\"..R.id);data.cinderTargetRequest=nil;data.cinderTargetConfirmed=true\nelseif Now()-R.at>1500 then\n TensorCore.timelineLogToFile(\"[Cinder target] unconfirmed request=\"..R.id..\" no automatic retry\");data.cinderTargetRequest=nil;data.cinderTargetConfirmed=true\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"a5faaad1-21dd-a1dc-a8b0-d55f0a2c0f17",
+								true,
+							},
+							
+							{
+								"49cb7b23-494a-9436-af59-3c2880546533",
+								true,
+							},
+						},
+						name = "Confirm initial targeting",
+						uuid = "6c40c001-08c3-9bab-aff8-ef6bcef61df9",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 897,
+						name = "Cinder Drift (897)",
+						uuid = "a5faaad1-21dd-a1dc-a8b0-d55f0a2c0f17",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return data.cinderTargetRequest~=nil",
+						name = "Relevant Cinder state",
+						uuid = "49cb7b23-494a-9436-af59-3c2880546533",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Cinder Drift/AutoSim",
+			name = "[Cinder Drift] Confirm initial targeting",
+			throttleTime = 250,
+			timeout = 0.5,
+			uuid = "1923355e-d9d2-a088-9ebf-5e392c2d745f",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local C=TrialsCinder\nlocal visible=GUI:Begin(\"Cinder Drift - AutoSim\",true)\nif visible then\n local function check(key,label)\n  local value,changed=GUI:Checkbox(label,C[key]);if changed then C[key]=value;C.save() end\n end\n check(\"autoSim\",\"Enable two-phase AutoSim forecast\")\n check(\"draws\",\"Show critical hazard draws and timers\")\n check(\"movement\",\"Forecast conservative caster movement\")\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Short estimates around dodges from this clear and mechanic casts; not a claim that every player must move for the whole window.\") end\n check(\"blockComets\",\"Block DoTs on comets\")\n check(\"blockImages\",\"Also block DoTs on Raven's Images\")\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Images lasted 20-25 seconds in the sampled clear. Off by default because DoTs can be useful; comets lasted about 7-17 seconds.\") end\n local v,changed=GUI:InputFloat(\"P1 duration (seconds)\",C.killP1,5,15,\"%.1f\");if changed then C.killP1=math.max(30,math.min(600,v));C.save() end\n v,changed=GUI:InputFloat(\"P2 duration (seconds)\",C.killP2,5,15,\"%.1f\");if changed then C.killP2=math.max(30,math.min(600,v));C.save() end\n GUI:TextWrapped(\"No countdown required. Transition is Stun; native phase-two targetability corrects it. Estimates apply next pull. One sampled clear: P1 179.6s, transition 61.6s, P2 169.5s.\")\nend\nGUI:End();self.used=true",
+						conditions = 
+						{
+							
+							{
+								"f56c7148-e685-ead6-acc1-216120f7d638",
+								true,
+							},
+							
+							{
+								"3346e9a0-db76-b831-8fb6-3feb253b8054",
+								true,
+							},
+						},
+						name = "Settings",
+						uuid = "092243dd-d51e-3854-9072-7ef43ad1765e",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 897,
+						name = "Cinder Drift (897)",
+						uuid = "f56c7148-e685-ead6-acc1-216120f7d638",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return TrialsCinder~=nil",
+						name = "Relevant Cinder state",
+						uuid = "3346e9a0-db76-b831-8fb6-3feb253b8054",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Cinder Drift/AutoSim",
+			eventType = 13,
+			name = "[Cinder Drift] Settings",
+			timeout = 2,
+			uuid = "06582f9e-666d-56db-89ae-381b6484bbbf",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local p=TensorCore.mGetPlayer()\nlocal api=TensorCore.API.TensorACR\nTrialsCinderDots=TrialsCinderDots or {entries={}}\nlocal H=TrialsCinderDots\nlocal eligible=p and p.localmapid==897 and TrialsCinder~=nil\nlocal wanted={}\nif eligible then wanted[731]=TrialsCinder.blockComets;wanted[9254]=TrialsCinder.blockImages end\nfor cid,r in pairs(H.entries) do\n if not eligible or p.job~=r.job or not wanted[cid] then\n  local e=r.entry\n  if e.enabled==true and e.allowIfTarget==false and e.allowSmartDoT==false then\n   if r.created then\n    e.enabled=false\n    if p and p.job==r.job and api.getBlacklistEntry(cid) then local current=api.addBlacklistEntry(cid);if current==e then api.deleteBlacklistEntry(cid) end end\n   else e.enabled=r.enabled;e.allowIfTarget=r.target;e.allowSmartDoT=r.smart end\n  end\n  H.entries[cid]=nil\n end\nend\nif eligible then for cid,on in pairs(wanted) do if on and not H.entries[cid] then\n local prior=api.getBlacklistEntry(cid)\n local e=api.addBlacklistEntry(cid,cid==731 and \"[Trials] Cinder Drift comets\" or \"[Trials] Raven's Image\")\n if e then\n  H.entries[cid]={entry=e,created=not prior,enabled=e.enabled,target=e.allowIfTarget,smart=e.allowSmartDoT,job=p.job}\n  e.enabled=true;e.allowIfTarget=false;e.allowSmartDoT=false\n end\nend end end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"05479214-e8fb-ae64-a1c1-9c87ebe176d5",
+								true,
+							},
+						},
+						name = "Owned DoT exclusions and restoration",
+						uuid = "76fb9b76-20da-faab-a74e-f49f43a7e863",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal H=TrialsCinderDots\nif H and next(H.entries)~=nil then\n if not p or p.localmapid~=897 then return true end\n for cid,r in pairs(H.entries) do\n  if p.job~=r.job or not TrialsCinder or (cid==731 and not TrialsCinder.blockComets) or (cid==9254 and not TrialsCinder.blockImages) then return true end\n end\nend\nif not p or p.localmapid~=897 or not TrialsCinder then return false end\nreturn (TrialsCinder.blockComets and (not H or not H.entries[731])) or (TrialsCinder.blockImages and (not H or not H.entries[9254]))",
+						name = "Duty options or owned blacklist cleanup",
+						uuid = "05479214-e8fb-ae64-a1c1-9c87ebe176d5",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Cinder Drift/AutoSim",
+			name = "[Cinder Drift] Owned DoT exclusions and restoration",
+			throttleTime = 500,
+			timeout = 0.5,
+			uuid = "49ede4a5-8f0e-e3dc-b2f9-46dbff3f973c",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local S=data.cinderForecast\nif S then for _,id in ipairs(S.ids) do TensorCore.API.TensorACR.removeAutoSimPhase(id) end end\ndata.cinderForecast=nil;data.cinderHelpersReady=nil;data.cinderTargetRequest=nil;data.cinderTargetConfirmed=nil\nself.used=true\ndata.cinderPhase=nil;data.cinderP2Entity=nil",
+						conditions = 
+						{
+							
+							{
+								"c6bc89b0-6638-4d91-addb-a152abafc47f",
+								true,
+							},
+						},
+						name = "Reset owned forecast on Wipe",
+						uuid = "78532a86-fff8-5e74-92a5-8f961b1fe314",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return data.cinderForecast~=nil or data.cinderHelpersReady==true",
+						dequeueIfLuaFalse = true,
+						name = "Relevant Cinder state",
+						uuid = "c6bc89b0-6638-4d91-addb-a152abafc47f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Cinder Drift/AutoSim",
+			eventType = 9,
+			name = "[Cinder Drift] Reset owned forecast on Wipe",
+			timeout = 2,
+			uuid = "60af6d45-c8d3-ae5c-8ff9-6b26bb8aa506",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local S=data.cinderForecast\nif S then for _,id in ipairs(S.ids) do TensorCore.API.TensorACR.removeAutoSimPhase(id) end end\ndata.cinderForecast=nil;data.cinderHelpersReady=nil;data.cinderTargetRequest=nil;data.cinderTargetConfirmed=nil\nself.used=true\ndata.cinderPhase=nil;data.cinderP2Entity=nil",
+						conditions = 
+						{
+							
+							{
+								"2f8fb530-f069-e1fe-944b-5e54fc61a6db",
+								true,
+							},
+						},
+						name = "Reset owned forecast on MapChange",
+						uuid = "96f79e47-b602-2d6b-97c0-de69684e8a5e",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return data.cinderForecast~=nil or data.cinderHelpersReady==true",
+						dequeueIfLuaFalse = true,
+						name = "Relevant Cinder state",
+						uuid = "2f8fb530-f069-e1fe-944b-5e54fc61a6db",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Cinder Drift/AutoSim",
+			eventType = 11,
+			name = "[Cinder Drift] Reset owned forecast on MapChange",
+			timeout = 2,
+			uuid = "139fd4bf-e641-c967-877c-b86f192097c5",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local S=data.cinderForecast\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nif eventArgs.isTargetable==false then S.flight={now,now+7.25}\nelseif S.flight then S.flight[2]=now end\nS.publish();self.used=true",
+						conditions = 
+						{
+							
+							{
+								"54e19ef8-186b-3f80-bc54-9eedd86e15a5",
+								true,
+							},
+							
+							{
+								"5025ab74-73a9-0bb9-aca0-6c18c2142e59",
+								true,
+							},
+						},
+						name = "Correct flight boundaries",
+						uuid = "b91b3647-f6cc-5b4f-a30b-8d01d4a67c8d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 897,
+						uuid = "54e19ef8-186b-3f80-bc54-9eedd86e15a5",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local S=data.cinderForecast;return S~=nil and S.p1End==nil and S.p2==nil and eventArgs.entityContentID==9250 and eventArgs.entityID==S.p1Entity and (S.flight~=nil or TensorCore.API.TensorACR.getAutoSimTime()<150)",
+						dequeueIfLuaFalse = true,
+						name = "Phase-one boss flight",
+						uuid = "5025ab74-73a9-0bb9-aca0-6c18c2142e59",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Cinder Drift/AutoSim",
+			eventType = 26,
+			name = "[Cinder Drift] Resync Ravensflight downtime",
+			timeout = 2,
+			uuid = "f8e8c831-59be-6a35-8774-90e481b2a4b3",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Cinder Drift",
+			name = "Draws",
+			uuid = "3eb28bc4-f2d8-ba62-8aec-1cbedd2f6a43",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\nlocal shapes={[20071]=\"circle\",[19092]=\"circle\",[19093]=\"circle\",[19714]=\"circle\",[19715]=\"circle\",[19141]=\"stack\",[19139]=\"circle\",[19142]=\"rect\",[19132]=\"rect\"}\nlocal kind=shapes[e.aoeID]\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms>0 and kind then\n local drawer=TensorCore.getStaticDrawer(kind==\"stack\" and 0x4033FF33 or 0x663333FF,2)\n if kind==\"rect\" then drawer:addTimedRect(ms,e.x,e.y,e.z,e.aoeLength,e.aoeWidth,e.heading,0,false,true)\n else drawer:addTimedCircle(ms,e.x,e.y,e.z,e.aoeLength,0,false,kind~=\"stack\") end\n AnyoneCore.addWorldTextCountdown(ms,{x=e.x,y=e.y+1,z=e.z},0xFFFFFFFF,true,1.1)\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"06f73460-2895-24ea-a346-e7b2eaf32309",
+								true,
+							},
+							
+							{
+								"15fe203d-71f3-9404-95b4-65711532f58d",
+								true,
+							},
+						},
+						name = "Native hazard draws and countdowns",
+						uuid = "6bad6e18-e4ce-e276-b8b8-62f3b9724d0f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 897,
+						name = "Cinder Drift (897)",
+						uuid = "06f73460-2895-24ea-a346-e7b2eaf32309",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return TrialsCinder~=nil and TrialsCinder.draws==true and (eventArgs.aoeID==20071 or eventArgs.aoeID==19092 or eventArgs.aoeID==19093 or eventArgs.aoeID==19714 or eventArgs.aoeID==19715 or eventArgs.aoeID==19141 or eventArgs.aoeID==19139 or eventArgs.aoeID==19142 or eventArgs.aoeID==19132)",
+						dequeueIfLuaFalse = true,
+						name = "Relevant Cinder state",
+						uuid = "15fe203d-71f3-9404-95b4-65711532f58d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Cinder Drift/Draws",
+			eventType = 18,
+			name = "[Cinder Drift] Native hazard draws and countdowns",
+			timeout = 2,
+			uuid = "8406425b-3119-b025-8377-a32abe0c2dd2",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=TensorCore.mGetEntity(eventArgs.entityID)\nif e then\n local ms=math.floor((eventArgs.channelTimeMax+11.9)*1000)\n TensorCore.getStaticDrawer(0x663333FF,2):addTimedCircle(ms,e.pos.x,e.pos.y,e.pos.z,8,math.max(0,ms-3000),false,true)\n AnyoneCore.addWorldTextCountdown(ms,{x=e.pos.x,y=e.pos.y+1.5,z=e.pos.z},0xFFFFFFFF,true,1.1)\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"178bd763-a170-5806-b082-018a0313df6c",
+								true,
+							},
+							
+							{
+								"36dfc7b2-6935-0cd1-9479-c1c154161b4f",
+								true,
+							},
+						},
+						name = "Comet burst warning",
+						uuid = "7c08a778-48bf-5f0f-9726-afaf6bd39c73",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 897,
+						name = "Cinder Drift (897)",
+						uuid = "178bd763-a170-5806-b082-018a0313df6c",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return TrialsCinder~=nil and TrialsCinder.draws==true and eventArgs.spellID==20011 and eventArgs.entityContentID==731",
+						dequeueIfLuaFalse = true,
+						name = "Relevant Cinder state",
+						uuid = "36dfc7b2-6935-0cd1-9479-c1c154161b4f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Cinder Drift/Draws",
+			eventType = 3,
+			name = "[Cinder Drift] Comet burst warning",
+			timeout = 2,
+			uuid = "0f9fc24f-f53a-1d89-b0af-22c141a39574",
+			version = 2,
+		},
+	}, 
+	inheritedProfiles = 
+	{
+	},
+}
+
+
+
+return tbl
