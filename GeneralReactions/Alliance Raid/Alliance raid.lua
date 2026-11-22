@@ -5,6 +5,55 @@ local tbl =
 		data = 
 		{
 			displayPath = "",
+			name = "General",
+			uuid = "ec0f2112-934b-dfd3-828e-86c2d9f8c6f2",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "General",
+			eventType = 11,
+			execute = "if AnyoneCore and AnyoneCore.Settings and AnyoneCore.Settings.PrepullHelper then\n    if AnyoneCore.Settings.PrepullHelper.enabled then\n        AnyoneCore.Settings.PrepullHelper.enabled = false\n    end\n    self.used = true\nend",
+			executeType = 2,
+			name = "[AA] Disable Prepull Helper - Zone entry",
+			throttleTime = 1000,
+			uuid = "ed07374b-c4d7-0cc6-b3b5-0612fc74cb2f",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+			},
+			conditions = 
+			{
+			},
+			displayPath = "General",
+			eventType = 16,
+			execute = "if AnyoneCore and AnyoneCore.Settings and AnyoneCore.Settings.PrepullHelper then\n    if AnyoneCore.Settings.PrepullHelper.enabled then\n        AnyoneCore.Settings.PrepullHelper.enabled = false\n    end\n    self.used = true\nend",
+			executeType = 2,
+			name = "[AA] Disable Prepull Helper - Countdown",
+			uuid = "1e3d22b5-6144-c719-aca0-5754c0218386",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
 			name = "AutoSim",
 			uuid = "547f6f75-3f24-8514-a761-1fe91776e908",
 		},
@@ -31,7 +80,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Prishe of the Distant Chains: countdown setup or verified opening-cast fallback.\n-- All times remain relative to the ACR's original combat start; no opening-cast offset is added.\nlocal A=TensorCore.API.TensorACR\ndata.allianceAutoSimSchedules=data.allianceAutoSimSchedules or {}\nlocal all=data.allianceAutoSimSchedules\nall[2057]=all[2057] or {}\nlocal state=all[2057]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(198)\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"Stun\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,3)\n A.addAutoSimUncertainty(168,7.2)\n state.phases={{\"CasterDowntime\",29.5,32.5,1},{\"CasterDowntime\",34.5,36.0,1},{\"CasterDowntime\",87.0,88.0,1},{\"CasterDowntime\",90.0,93.0,1},{\"CasterDowntime\",98.5,101.0,1},{\"CasterDowntime\",125.5,127.5,1},{\"CasterDowntime\",132.0,134.0,1},{\"CasterDowntime\",148.0,151.5,1},{\"GroundFieldMovement\",132.0,134.0,2},{\"GroundFieldMovement\",148.0,151.5,2}}\n state.nextPhase=1\n state.setup=true\nend\nwhile state.nextPhase<=#state.phases do\n local p=state.phases[state.nextPhase]\n p[5]=A.addAutoSimPhase(p[1],p[2],p[3],p[4])\n state.nextPhase=state.nextPhase+1\nend\nstate.done=true\nself.used=true\n",
+						actionLua = "-- Prishe of the Distant Chains: countdown setup or verified opening-cast fallback.\n-- All times remain relative to the ACR's original combat start; no opening-cast offset is added.\nlocal A=TensorCore.API.TensorACR\ndata.allianceAutoSimSchedules=data.allianceAutoSimSchedules or {}\nlocal all=data.allianceAutoSimSchedules\nall[2057]=all[2057] or {}\nlocal state=all[2057]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(195)\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"Stun\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,3)\n A.addAutoSimUncertainty(168,7.2)\n state.phases={{\"CasterDowntime\",29.5,32.5,1},{\"CasterDowntime\",34.5,36.0,1},{\"CasterDowntime\",87.0,88.0,1},{\"CasterDowntime\",90.0,93.0,1},{\"CasterDowntime\",98.5,101.0,1},{\"CasterDowntime\",125.5,127.5,1},{\"CasterDowntime\",132.0,134.0,1},{\"CasterDowntime\",148.0,151.5,1},{\"GroundFieldMovement\",132.0,134.0,2},{\"GroundFieldMovement\",148.0,151.5,2}}\n state.nextPhase=1\n state.setup=true\nend\nwhile state.nextPhase<=#state.phases do\n local p=state.phases[state.nextPhase]\n p[5]=A.addAutoSimPhase(p[1],p[2],p[3],p[4])\n state.nextPhase=state.nextPhase+1\nend\nstate.done=true\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -113,7 +162,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Fafnir the Forgotten: countdown setup or verified opening-cast fallback.\n-- All times remain relative to the ACR's original combat start; no opening-cast offset is added.\nlocal A=TensorCore.API.TensorACR\ndata.allianceAutoSimSchedules=data.allianceAutoSimSchedules or {}\nlocal all=data.allianceAutoSimSchedules\nall[2058]=all[2058] or {}\nlocal state=all[2058]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(185)\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"Stun\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,3)\n A.addAutoSimUncertainty(155,11.67)\n state.phases={{\"CasterDowntime\",21.0,22.0,1},{\"CasterDowntime\",32.0,34.5,1},{\"CasterDowntime\",35.5,37.0,1},{\"CasterDowntime\",39.5,43.0,1},{\"CasterDowntime\",56.5,60.0,1},{\"CasterDowntime\",75.5,77.0,1},{\"CasterDowntime\",105.5,107.5,1},{\"CasterDowntime\",109.0,110.0,1},{\"CasterDowntime\",114.0,115.0,1},{\"CasterDowntime\",129.5,132.0,1},{\"CasterDowntime\",138.5,140.0,1},{\"CasterDowntime\",142.0,143.0,1},{\"CasterDowntime\",150.0,152.5,1},{\"CasterDowntime\",156.0,157.0,1},{\"CasterDowntime\",158.5,160.5,1}}\n state.nextPhase=1\n state.setup=true\nend\nwhile state.nextPhase<=#state.phases do\n local p=state.phases[state.nextPhase]\n p[5]=A.addAutoSimPhase(p[1],p[2],p[3],p[4])\n state.nextPhase=state.nextPhase+1\nend\nstate.done=true\nself.used=true\n",
+						actionLua = "-- Fafnir the Forgotten: countdown setup or verified opening-cast fallback.\n-- All times remain relative to the ACR's original combat start; no opening-cast offset is added.\nlocal A=TensorCore.API.TensorACR\ndata.allianceAutoSimSchedules=data.allianceAutoSimSchedules or {}\nlocal all=data.allianceAutoSimSchedules\nall[2058]=all[2058] or {}\nlocal state=all[2058]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(183)\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"Stun\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,3)\n A.addAutoSimUncertainty(155,11.67)\n state.phases={{\"CasterDowntime\",21.0,22.0,1},{\"CasterDowntime\",32.0,34.5,1},{\"CasterDowntime\",35.5,37.0,1},{\"CasterDowntime\",39.5,43.0,1},{\"CasterDowntime\",56.5,60.0,1},{\"CasterDowntime\",75.5,77.0,1},{\"CasterDowntime\",105.5,107.5,1},{\"CasterDowntime\",109.0,110.0,1},{\"CasterDowntime\",114.0,115.0,1},{\"CasterDowntime\",129.5,132.0,1},{\"CasterDowntime\",138.5,140.0,1},{\"CasterDowntime\",142.0,143.0,1},{\"CasterDowntime\",150.0,152.5,1},{\"CasterDowntime\",156.0,157.0,1},{\"CasterDowntime\",158.5,160.5,1}}\n state.nextPhase=1\n state.setup=true\nend\nwhile state.nextPhase<=#state.phases do\n local p=state.phases[state.nextPhase]\n p[5]=A.addAutoSimPhase(p[1],p[2],p[3],p[4])\n state.nextPhase=state.nextPhase+1\nend\nstate.done=true\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -195,7 +244,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Ark Angels: countdown setup or verified opening-cast fallback.\n-- All times remain relative to the ACR's original combat start; no opening-cast offset is added.\nlocal A=TensorCore.API.TensorACR\ndata.allianceAutoSimSchedules=data.allianceAutoSimSchedules or {}\nlocal all=data.allianceAutoSimSchedules\nall[2059]=all[2059] or {}\nlocal state=all[2059]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(277.846)\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"Stun\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,3)\n A.addAutoSimUncertainty(247.846,5.25)\n state.phases={{\"FullDowntime\",117.03,121.78,1},{\"CasterDowntime\",25.0,31.5,1},{\"CasterDowntime\",32.5,42.5,1},{\"CasterDowntime\",64.5,65.5,1},{\"CasterDowntime\",68.5,73.5,1},{\"CasterDowntime\",74.5,77.0,1},{\"CasterDowntime\",105.0,109.0,1},{\"CasterDowntime\",147.0,150.5,1},{\"CasterDowntime\",221.0,222.0,1},{\"CasterDowntime\",240.5,241.5,1},{\"CasterDowntime\",243.5,246.5,1},{\"CasterDowntime\",247.5,248.5,1},{\"CasterDowntime\",251.0,253.0,1},{\"CasterDowntime\",256.5,263.5,1}}\n state.nextPhase=1\n state.setup=true\nend\nwhile state.nextPhase<=#state.phases do\n local p=state.phases[state.nextPhase]\n p[5]=A.addAutoSimPhase(p[1],p[2],p[3],p[4])\n state.nextPhase=state.nextPhase+1\nend\nstate.done=true\nself.used=true\n",
+						actionLua = "-- Ark Angels: countdown setup or verified opening-cast fallback.\n-- All times remain relative to the ACR's original combat start; no opening-cast offset is added.\nlocal A=TensorCore.API.TensorACR\ndata.allianceAutoSimSchedules=data.allianceAutoSimSchedules or {}\nlocal all=data.allianceAutoSimSchedules\nall[2059]=all[2059] or {}\nlocal state=all[2059]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(273)\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"Stun\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,3)\n A.addAutoSimUncertainty(247.846,5.25)\n state.phases={{\"FullDowntime\",117.03,121.78,1},{\"CasterDowntime\",25.0,31.5,1},{\"CasterDowntime\",32.5,42.5,1},{\"CasterDowntime\",64.5,65.5,1},{\"CasterDowntime\",68.5,73.5,1},{\"CasterDowntime\",74.5,77.0,1},{\"CasterDowntime\",105.0,109.0,1},{\"CasterDowntime\",147.0,150.5,1},{\"CasterDowntime\",221.0,222.0,1},{\"CasterDowntime\",240.5,241.5,1},{\"CasterDowntime\",243.5,246.5,1},{\"CasterDowntime\",247.5,248.5,1},{\"CasterDowntime\",251.0,253.0,1},{\"CasterDowntime\",256.5,263.5,1}}\n state.nextPhase=1\n state.setup=true\nend\nwhile state.nextPhase<=#state.phases do\n local p=state.phases[state.nextPhase]\n p[5]=A.addAutoSimPhase(p[1],p[2],p[3],p[4])\n state.nextPhase=state.nextPhase+1\nend\nstate.done=true\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -225,7 +274,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Ark Angels: countdown setup or verified opening-cast fallback.\n-- All times remain relative to the ACR's original combat start; no opening-cast offset is added.\nlocal A=TensorCore.API.TensorACR\ndata.allianceAutoSimSchedules=data.allianceAutoSimSchedules or {}\nlocal all=data.allianceAutoSimSchedules\nall[2059]=all[2059] or {}\nlocal state=all[2059]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(277.846)\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"Stun\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,3)\n A.addAutoSimUncertainty(247.846,5.25)\n state.phases={{\"FullDowntime\",117.03,121.78,1},{\"CasterDowntime\",25.0,31.5,1},{\"CasterDowntime\",32.5,42.5,1},{\"CasterDowntime\",64.5,65.5,1},{\"CasterDowntime\",68.5,73.5,1},{\"CasterDowntime\",74.5,77.0,1},{\"CasterDowntime\",105.0,109.0,1},{\"CasterDowntime\",147.0,150.5,1},{\"CasterDowntime\",221.0,222.0,1},{\"CasterDowntime\",240.5,241.5,1},{\"CasterDowntime\",243.5,246.5,1},{\"CasterDowntime\",247.5,248.5,1},{\"CasterDowntime\",251.0,253.0,1},{\"CasterDowntime\",256.5,263.5,1}}\n state.nextPhase=1\n state.setup=true\nend\nwhile state.nextPhase<=#state.phases do\n local p=state.phases[state.nextPhase]\n p[5]=A.addAutoSimPhase(p[1],p[2],p[3],p[4])\n state.nextPhase=state.nextPhase+1\nend\nstate.done=true\nself.used=true\n",
+						actionLua = "-- Ark Angels: countdown setup or verified opening-cast fallback.\n-- All times remain relative to the ACR's original combat start; no opening-cast offset is added.\nlocal A=TensorCore.API.TensorACR\ndata.allianceAutoSimSchedules=data.allianceAutoSimSchedules or {}\nlocal all=data.allianceAutoSimSchedules\nall[2059]=all[2059] or {}\nlocal state=all[2059]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(273)\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"Stun\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,3)\n A.addAutoSimUncertainty(247.846,5.25)\n state.phases={{\"FullDowntime\",117.03,121.78,1},{\"CasterDowntime\",25.0,31.5,1},{\"CasterDowntime\",32.5,42.5,1},{\"CasterDowntime\",64.5,65.5,1},{\"CasterDowntime\",68.5,73.5,1},{\"CasterDowntime\",74.5,77.0,1},{\"CasterDowntime\",105.0,109.0,1},{\"CasterDowntime\",147.0,150.5,1},{\"CasterDowntime\",221.0,222.0,1},{\"CasterDowntime\",240.5,241.5,1},{\"CasterDowntime\",243.5,246.5,1},{\"CasterDowntime\",247.5,248.5,1},{\"CasterDowntime\",251.0,253.0,1},{\"CasterDowntime\",256.5,263.5,1}}\n state.nextPhase=1\n state.setup=true\nend\nwhile state.nextPhase<=#state.phases do\n local p=state.phases[state.nextPhase]\n p[5]=A.addAutoSimPhase(p[1],p[2],p[3],p[4])\n state.nextPhase=state.nextPhase+1\nend\nstate.done=true\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -255,7 +304,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Ark Angels: countdown setup or verified opening-cast fallback.\n-- All times remain relative to the ACR's original combat start; no opening-cast offset is added.\nlocal A=TensorCore.API.TensorACR\ndata.allianceAutoSimSchedules=data.allianceAutoSimSchedules or {}\nlocal all=data.allianceAutoSimSchedules\nall[2059]=all[2059] or {}\nlocal state=all[2059]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(277.846)\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"Stun\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,3)\n A.addAutoSimUncertainty(247.846,5.25)\n state.phases={{\"FullDowntime\",117.03,121.78,1},{\"CasterDowntime\",25.0,31.5,1},{\"CasterDowntime\",32.5,42.5,1},{\"CasterDowntime\",64.5,65.5,1},{\"CasterDowntime\",68.5,73.5,1},{\"CasterDowntime\",74.5,77.0,1},{\"CasterDowntime\",105.0,109.0,1},{\"CasterDowntime\",147.0,150.5,1},{\"CasterDowntime\",221.0,222.0,1},{\"CasterDowntime\",240.5,241.5,1},{\"CasterDowntime\",243.5,246.5,1},{\"CasterDowntime\",247.5,248.5,1},{\"CasterDowntime\",251.0,253.0,1},{\"CasterDowntime\",256.5,263.5,1}}\n state.nextPhase=1\n state.setup=true\nend\nwhile state.nextPhase<=#state.phases do\n local p=state.phases[state.nextPhase]\n p[5]=A.addAutoSimPhase(p[1],p[2],p[3],p[4])\n state.nextPhase=state.nextPhase+1\nend\nstate.done=true\nself.used=true\n",
+						actionLua = "-- Ark Angels: countdown setup or verified opening-cast fallback.\n-- All times remain relative to the ACR's original combat start; no opening-cast offset is added.\nlocal A=TensorCore.API.TensorACR\ndata.allianceAutoSimSchedules=data.allianceAutoSimSchedules or {}\nlocal all=data.allianceAutoSimSchedules\nall[2059]=all[2059] or {}\nlocal state=all[2059]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(273)\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"Stun\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,3)\n A.addAutoSimUncertainty(247.846,5.25)\n state.phases={{\"FullDowntime\",117.03,121.78,1},{\"CasterDowntime\",25.0,31.5,1},{\"CasterDowntime\",32.5,42.5,1},{\"CasterDowntime\",64.5,65.5,1},{\"CasterDowntime\",68.5,73.5,1},{\"CasterDowntime\",74.5,77.0,1},{\"CasterDowntime\",105.0,109.0,1},{\"CasterDowntime\",147.0,150.5,1},{\"CasterDowntime\",221.0,222.0,1},{\"CasterDowntime\",240.5,241.5,1},{\"CasterDowntime\",243.5,246.5,1},{\"CasterDowntime\",247.5,248.5,1},{\"CasterDowntime\",251.0,253.0,1},{\"CasterDowntime\",256.5,263.5,1}}\n state.nextPhase=1\n state.setup=true\nend\nwhile state.nextPhase<=#state.phases do\n local p=state.phases[state.nextPhase]\n p[5]=A.addAutoSimPhase(p[1],p[2],p[3],p[4])\n state.nextPhase=state.nextPhase+1\nend\nstate.done=true\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -285,7 +334,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Ark Angels: countdown setup or verified opening-cast fallback.\n-- All times remain relative to the ACR's original combat start; no opening-cast offset is added.\nlocal A=TensorCore.API.TensorACR\ndata.allianceAutoSimSchedules=data.allianceAutoSimSchedules or {}\nlocal all=data.allianceAutoSimSchedules\nall[2059]=all[2059] or {}\nlocal state=all[2059]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(277.846)\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"Stun\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,3)\n A.addAutoSimUncertainty(247.846,5.25)\n state.phases={{\"FullDowntime\",117.03,121.78,1},{\"CasterDowntime\",25.0,31.5,1},{\"CasterDowntime\",32.5,42.5,1},{\"CasterDowntime\",64.5,65.5,1},{\"CasterDowntime\",68.5,73.5,1},{\"CasterDowntime\",74.5,77.0,1},{\"CasterDowntime\",105.0,109.0,1},{\"CasterDowntime\",147.0,150.5,1},{\"CasterDowntime\",221.0,222.0,1},{\"CasterDowntime\",240.5,241.5,1},{\"CasterDowntime\",243.5,246.5,1},{\"CasterDowntime\",247.5,248.5,1},{\"CasterDowntime\",251.0,253.0,1},{\"CasterDowntime\",256.5,263.5,1}}\n state.nextPhase=1\n state.setup=true\nend\nwhile state.nextPhase<=#state.phases do\n local p=state.phases[state.nextPhase]\n p[5]=A.addAutoSimPhase(p[1],p[2],p[3],p[4])\n state.nextPhase=state.nextPhase+1\nend\nstate.done=true\nself.used=true\n",
+						actionLua = "-- Ark Angels: countdown setup or verified opening-cast fallback.\n-- All times remain relative to the ACR's original combat start; no opening-cast offset is added.\nlocal A=TensorCore.API.TensorACR\ndata.allianceAutoSimSchedules=data.allianceAutoSimSchedules or {}\nlocal all=data.allianceAutoSimSchedules\nall[2059]=all[2059] or {}\nlocal state=all[2059]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(273)\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"Stun\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,3)\n A.addAutoSimUncertainty(247.846,5.25)\n state.phases={{\"FullDowntime\",117.03,121.78,1},{\"CasterDowntime\",25.0,31.5,1},{\"CasterDowntime\",32.5,42.5,1},{\"CasterDowntime\",64.5,65.5,1},{\"CasterDowntime\",68.5,73.5,1},{\"CasterDowntime\",74.5,77.0,1},{\"CasterDowntime\",105.0,109.0,1},{\"CasterDowntime\",147.0,150.5,1},{\"CasterDowntime\",221.0,222.0,1},{\"CasterDowntime\",240.5,241.5,1},{\"CasterDowntime\",243.5,246.5,1},{\"CasterDowntime\",247.5,248.5,1},{\"CasterDowntime\",251.0,253.0,1},{\"CasterDowntime\",256.5,263.5,1}}\n state.nextPhase=1\n state.setup=true\nend\nwhile state.nextPhase<=#state.phases do\n local p=state.phases[state.nextPhase]\n p[5]=A.addAutoSimPhase(p[1],p[2],p[3],p[4])\n state.nextPhase=state.nextPhase+1\nend\nstate.done=true\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -315,7 +364,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Ark Angels: countdown setup or verified opening-cast fallback.\n-- All times remain relative to the ACR's original combat start; no opening-cast offset is added.\nlocal A=TensorCore.API.TensorACR\ndata.allianceAutoSimSchedules=data.allianceAutoSimSchedules or {}\nlocal all=data.allianceAutoSimSchedules\nall[2059]=all[2059] or {}\nlocal state=all[2059]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(277.846)\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"Stun\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,3)\n A.addAutoSimUncertainty(247.846,5.25)\n state.phases={{\"FullDowntime\",117.03,121.78,1},{\"CasterDowntime\",25.0,31.5,1},{\"CasterDowntime\",32.5,42.5,1},{\"CasterDowntime\",64.5,65.5,1},{\"CasterDowntime\",68.5,73.5,1},{\"CasterDowntime\",74.5,77.0,1},{\"CasterDowntime\",105.0,109.0,1},{\"CasterDowntime\",147.0,150.5,1},{\"CasterDowntime\",221.0,222.0,1},{\"CasterDowntime\",240.5,241.5,1},{\"CasterDowntime\",243.5,246.5,1},{\"CasterDowntime\",247.5,248.5,1},{\"CasterDowntime\",251.0,253.0,1},{\"CasterDowntime\",256.5,263.5,1}}\n state.nextPhase=1\n state.setup=true\nend\nwhile state.nextPhase<=#state.phases do\n local p=state.phases[state.nextPhase]\n p[5]=A.addAutoSimPhase(p[1],p[2],p[3],p[4])\n state.nextPhase=state.nextPhase+1\nend\nstate.done=true\nself.used=true\n",
+						actionLua = "-- Ark Angels: countdown setup or verified opening-cast fallback.\n-- All times remain relative to the ACR's original combat start; no opening-cast offset is added.\nlocal A=TensorCore.API.TensorACR\ndata.allianceAutoSimSchedules=data.allianceAutoSimSchedules or {}\nlocal all=data.allianceAutoSimSchedules\nall[2059]=all[2059] or {}\nlocal state=all[2059]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(273)\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"Stun\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,3)\n A.addAutoSimUncertainty(247.846,5.25)\n state.phases={{\"FullDowntime\",117.03,121.78,1},{\"CasterDowntime\",25.0,31.5,1},{\"CasterDowntime\",32.5,42.5,1},{\"CasterDowntime\",64.5,65.5,1},{\"CasterDowntime\",68.5,73.5,1},{\"CasterDowntime\",74.5,77.0,1},{\"CasterDowntime\",105.0,109.0,1},{\"CasterDowntime\",147.0,150.5,1},{\"CasterDowntime\",221.0,222.0,1},{\"CasterDowntime\",240.5,241.5,1},{\"CasterDowntime\",243.5,246.5,1},{\"CasterDowntime\",247.5,248.5,1},{\"CasterDowntime\",251.0,253.0,1},{\"CasterDowntime\",256.5,263.5,1}}\n state.nextPhase=1\n state.setup=true\nend\nwhile state.nextPhase<=#state.phases do\n local p=state.phases[state.nextPhase]\n p[5]=A.addAutoSimPhase(p[1],p[2],p[3],p[4])\n state.nextPhase=state.nextPhase+1\nend\nstate.done=true\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -441,7 +490,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shadow Lord: countdown setup or verified opening-cast fallback.\n-- All times remain relative to the ACR's original combat start; no opening-cast offset is added.\nlocal A=TensorCore.API.TensorACR\ndata.allianceAutoSimSchedules=data.allianceAutoSimSchedules or {}\nlocal all=data.allianceAutoSimSchedules\nall[2060]=all[2060] or {}\nlocal state=all[2060]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(310)\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"Stun\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,3)\n A.addAutoSimUncertainty(280,14.37)\n state.phases={{\"CasterDowntime\",14.5,15.5,1},{\"CasterDowntime\",23.5,26.0,1},{\"CasterDowntime\",35.5,38.5,1},{\"CasterDowntime\",56.5,59.5,1},{\"CasterDowntime\",63.5,64.5,1},{\"CasterDowntime\",77.0,80.5,1},{\"CasterDowntime\",99.5,100.5,1},{\"CasterDowntime\",107.5,108.5,1},{\"CasterDowntime\",137.5,138.5,1},{\"CasterDowntime\",239.5,240.5,1},{\"CasterDowntime\",250.5,253.5,1},{\"GroundFieldMovement\",14.5,15.5,2},{\"GroundFieldMovement\",23.5,26.0,2},{\"GroundFieldMovement\",137.5,138.5,2}}\n state.nextPhase=1\n state.setup=true\nend\nwhile state.nextPhase<=#state.phases do\n local p=state.phases[state.nextPhase]\n p[5]=A.addAutoSimPhase(p[1],p[2],p[3],p[4])\n state.nextPhase=state.nextPhase+1\nend\nstate.done=true\nself.used=true\n",
+						actionLua = "-- Shadow Lord: countdown setup or verified opening-cast fallback.\n-- All times remain relative to the ACR's original combat start; no opening-cast offset is added.\nlocal A=TensorCore.API.TensorACR\ndata.allianceAutoSimSchedules=data.allianceAutoSimSchedules or {}\nlocal all=data.allianceAutoSimSchedules\nall[2060]=all[2060] or {}\nlocal state=all[2060]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(305)\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"Stun\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,3)\n A.addAutoSimUncertainty(280,14.37)\n state.phases={{\"CasterDowntime\",14.5,15.5,1},{\"CasterDowntime\",23.5,26.0,1},{\"CasterDowntime\",35.5,38.5,1},{\"CasterDowntime\",56.5,59.5,1},{\"CasterDowntime\",63.5,64.5,1},{\"CasterDowntime\",77.0,80.5,1},{\"CasterDowntime\",99.5,100.5,1},{\"CasterDowntime\",107.5,108.5,1},{\"CasterDowntime\",137.5,138.5,1},{\"CasterDowntime\",239.5,240.5,1},{\"CasterDowntime\",250.5,253.5,1},{\"GroundFieldMovement\",14.5,15.5,2},{\"GroundFieldMovement\",23.5,26.0,2},{\"GroundFieldMovement\",137.5,138.5,2}}\n state.nextPhase=1\n state.setup=true\nend\nwhile state.nextPhase<=#state.phases do\n local p=state.phases[state.nextPhase]\n p[5]=A.addAutoSimPhase(p[1],p[2],p[3],p[4])\n state.nextPhase=state.nextPhase+1\nend\nstate.done=true\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -533,7 +582,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Prishe of the Distant Chains: countdown setup or verified opening-cast fallback.\n-- All times remain relative to the ACR's original combat start; no opening-cast offset is added.\nlocal A=TensorCore.API.TensorACR\ndata.allianceAutoSimSchedules=data.allianceAutoSimSchedules or {}\nlocal all=data.allianceAutoSimSchedules\nall[2057]=all[2057] or {}\nlocal state=all[2057]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(198)\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"Stun\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,3)\n A.addAutoSimUncertainty(168,7.2)\n state.phases={{\"CasterDowntime\",29.5,32.5,1},{\"CasterDowntime\",34.5,36.0,1},{\"CasterDowntime\",87.0,88.0,1},{\"CasterDowntime\",90.0,93.0,1},{\"CasterDowntime\",98.5,101.0,1},{\"CasterDowntime\",125.5,127.5,1},{\"CasterDowntime\",132.0,134.0,1},{\"CasterDowntime\",148.0,151.5,1},{\"GroundFieldMovement\",132.0,134.0,2},{\"GroundFieldMovement\",148.0,151.5,2}}\n state.nextPhase=1\n state.setup=true\nend\nwhile state.nextPhase<=#state.phases do\n local p=state.phases[state.nextPhase]\n p[5]=A.addAutoSimPhase(p[1],p[2],p[3],p[4])\n state.nextPhase=state.nextPhase+1\nend\nstate.done=true\nself.used=true\n",
+						actionLua = "-- Prishe of the Distant Chains: countdown setup or verified opening-cast fallback.\n-- All times remain relative to the ACR's original combat start; no opening-cast offset is added.\nlocal A=TensorCore.API.TensorACR\ndata.allianceAutoSimSchedules=data.allianceAutoSimSchedules or {}\nlocal all=data.allianceAutoSimSchedules\nall[2057]=all[2057] or {}\nlocal state=all[2057]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(195)\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"Stun\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,3)\n A.addAutoSimUncertainty(168,7.2)\n state.phases={{\"CasterDowntime\",29.5,32.5,1},{\"CasterDowntime\",34.5,36.0,1},{\"CasterDowntime\",87.0,88.0,1},{\"CasterDowntime\",90.0,93.0,1},{\"CasterDowntime\",98.5,101.0,1},{\"CasterDowntime\",125.5,127.5,1},{\"CasterDowntime\",132.0,134.0,1},{\"CasterDowntime\",148.0,151.5,1},{\"GroundFieldMovement\",132.0,134.0,2},{\"GroundFieldMovement\",148.0,151.5,2}}\n state.nextPhase=1\n state.setup=true\nend\nwhile state.nextPhase<=#state.phases do\n local p=state.phases[state.nextPhase]\n p[5]=A.addAutoSimPhase(p[1],p[2],p[3],p[4])\n state.nextPhase=state.nextPhase+1\nend\nstate.done=true\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -669,7 +718,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Fafnir the Forgotten: countdown setup or verified opening-cast fallback.\n-- All times remain relative to the ACR's original combat start; no opening-cast offset is added.\nlocal A=TensorCore.API.TensorACR\ndata.allianceAutoSimSchedules=data.allianceAutoSimSchedules or {}\nlocal all=data.allianceAutoSimSchedules\nall[2058]=all[2058] or {}\nlocal state=all[2058]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(185)\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"Stun\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,3)\n A.addAutoSimUncertainty(155,11.67)\n state.phases={{\"CasterDowntime\",21.0,22.0,1},{\"CasterDowntime\",32.0,34.5,1},{\"CasterDowntime\",35.5,37.0,1},{\"CasterDowntime\",39.5,43.0,1},{\"CasterDowntime\",56.5,60.0,1},{\"CasterDowntime\",75.5,77.0,1},{\"CasterDowntime\",105.5,107.5,1},{\"CasterDowntime\",109.0,110.0,1},{\"CasterDowntime\",114.0,115.0,1},{\"CasterDowntime\",129.5,132.0,1},{\"CasterDowntime\",138.5,140.0,1},{\"CasterDowntime\",142.0,143.0,1},{\"CasterDowntime\",150.0,152.5,1},{\"CasterDowntime\",156.0,157.0,1},{\"CasterDowntime\",158.5,160.5,1}}\n state.nextPhase=1\n state.setup=true\nend\nwhile state.nextPhase<=#state.phases do\n local p=state.phases[state.nextPhase]\n p[5]=A.addAutoSimPhase(p[1],p[2],p[3],p[4])\n state.nextPhase=state.nextPhase+1\nend\nstate.done=true\nself.used=true\n",
+						actionLua = "-- Fafnir the Forgotten: countdown setup or verified opening-cast fallback.\n-- All times remain relative to the ACR's original combat start; no opening-cast offset is added.\nlocal A=TensorCore.API.TensorACR\ndata.allianceAutoSimSchedules=data.allianceAutoSimSchedules or {}\nlocal all=data.allianceAutoSimSchedules\nall[2058]=all[2058] or {}\nlocal state=all[2058]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(183)\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"Stun\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,3)\n A.addAutoSimUncertainty(155,11.67)\n state.phases={{\"CasterDowntime\",21.0,22.0,1},{\"CasterDowntime\",32.0,34.5,1},{\"CasterDowntime\",35.5,37.0,1},{\"CasterDowntime\",39.5,43.0,1},{\"CasterDowntime\",56.5,60.0,1},{\"CasterDowntime\",75.5,77.0,1},{\"CasterDowntime\",105.5,107.5,1},{\"CasterDowntime\",109.0,110.0,1},{\"CasterDowntime\",114.0,115.0,1},{\"CasterDowntime\",129.5,132.0,1},{\"CasterDowntime\",138.5,140.0,1},{\"CasterDowntime\",142.0,143.0,1},{\"CasterDowntime\",150.0,152.5,1},{\"CasterDowntime\",156.0,157.0,1},{\"CasterDowntime\",158.5,160.5,1}}\n state.nextPhase=1\n state.setup=true\nend\nwhile state.nextPhase<=#state.phases do\n local p=state.phases[state.nextPhase]\n p[5]=A.addAutoSimPhase(p[1],p[2],p[3],p[4])\n state.nextPhase=state.nextPhase+1\nend\nstate.done=true\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -805,7 +854,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Ark Angels: countdown setup or verified opening-cast fallback.\n-- All times remain relative to the ACR's original combat start; no opening-cast offset is added.\nlocal A=TensorCore.API.TensorACR\ndata.allianceAutoSimSchedules=data.allianceAutoSimSchedules or {}\nlocal all=data.allianceAutoSimSchedules\nall[2059]=all[2059] or {}\nlocal state=all[2059]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(277.846)\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"Stun\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,3)\n A.addAutoSimUncertainty(247.846,5.25)\n state.phases={{\"FullDowntime\",117.03,121.78,1},{\"CasterDowntime\",25.0,31.5,1},{\"CasterDowntime\",32.5,42.5,1},{\"CasterDowntime\",64.5,65.5,1},{\"CasterDowntime\",68.5,73.5,1},{\"CasterDowntime\",74.5,77.0,1},{\"CasterDowntime\",105.0,109.0,1},{\"CasterDowntime\",147.0,150.5,1},{\"CasterDowntime\",221.0,222.0,1},{\"CasterDowntime\",240.5,241.5,1},{\"CasterDowntime\",243.5,246.5,1},{\"CasterDowntime\",247.5,248.5,1},{\"CasterDowntime\",251.0,253.0,1},{\"CasterDowntime\",256.5,263.5,1}}\n state.nextPhase=1\n state.setup=true\nend\nwhile state.nextPhase<=#state.phases do\n local p=state.phases[state.nextPhase]\n p[5]=A.addAutoSimPhase(p[1],p[2],p[3],p[4])\n state.nextPhase=state.nextPhase+1\nend\nstate.done=true\nself.used=true\n",
+						actionLua = "-- Ark Angels: countdown setup or verified opening-cast fallback.\n-- All times remain relative to the ACR's original combat start; no opening-cast offset is added.\nlocal A=TensorCore.API.TensorACR\ndata.allianceAutoSimSchedules=data.allianceAutoSimSchedules or {}\nlocal all=data.allianceAutoSimSchedules\nall[2059]=all[2059] or {}\nlocal state=all[2059]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(273)\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"Stun\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,3)\n A.addAutoSimUncertainty(247.846,5.25)\n state.phases={{\"FullDowntime\",117.03,121.78,1},{\"CasterDowntime\",25.0,31.5,1},{\"CasterDowntime\",32.5,42.5,1},{\"CasterDowntime\",64.5,65.5,1},{\"CasterDowntime\",68.5,73.5,1},{\"CasterDowntime\",74.5,77.0,1},{\"CasterDowntime\",105.0,109.0,1},{\"CasterDowntime\",147.0,150.5,1},{\"CasterDowntime\",221.0,222.0,1},{\"CasterDowntime\",240.5,241.5,1},{\"CasterDowntime\",243.5,246.5,1},{\"CasterDowntime\",247.5,248.5,1},{\"CasterDowntime\",251.0,253.0,1},{\"CasterDowntime\",256.5,263.5,1}}\n state.nextPhase=1\n state.setup=true\nend\nwhile state.nextPhase<=#state.phases do\n local p=state.phases[state.nextPhase]\n p[5]=A.addAutoSimPhase(p[1],p[2],p[3],p[4])\n state.nextPhase=state.nextPhase+1\nend\nstate.done=true\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -941,7 +990,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Shadow Lord: countdown setup or verified opening-cast fallback.\n-- All times remain relative to the ACR's original combat start; no opening-cast offset is added.\nlocal A=TensorCore.API.TensorACR\ndata.allianceAutoSimSchedules=data.allianceAutoSimSchedules or {}\nlocal all=data.allianceAutoSimSchedules\nall[2060]=all[2060] or {}\nlocal state=all[2060]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(310)\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"Stun\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,3)\n A.addAutoSimUncertainty(280,14.37)\n state.phases={{\"CasterDowntime\",14.5,15.5,1},{\"CasterDowntime\",23.5,26.0,1},{\"CasterDowntime\",35.5,38.5,1},{\"CasterDowntime\",56.5,59.5,1},{\"CasterDowntime\",63.5,64.5,1},{\"CasterDowntime\",77.0,80.5,1},{\"CasterDowntime\",99.5,100.5,1},{\"CasterDowntime\",107.5,108.5,1},{\"CasterDowntime\",137.5,138.5,1},{\"CasterDowntime\",239.5,240.5,1},{\"CasterDowntime\",250.5,253.5,1},{\"GroundFieldMovement\",14.5,15.5,2},{\"GroundFieldMovement\",23.5,26.0,2},{\"GroundFieldMovement\",137.5,138.5,2}}\n state.nextPhase=1\n state.setup=true\nend\nwhile state.nextPhase<=#state.phases do\n local p=state.phases[state.nextPhase]\n p[5]=A.addAutoSimPhase(p[1],p[2],p[3],p[4])\n state.nextPhase=state.nextPhase+1\nend\nstate.done=true\nself.used=true\n",
+						actionLua = "-- Shadow Lord: countdown setup or verified opening-cast fallback.\n-- All times remain relative to the ACR's original combat start; no opening-cast offset is added.\nlocal A=TensorCore.API.TensorACR\ndata.allianceAutoSimSchedules=data.allianceAutoSimSchedules or {}\nlocal all=data.allianceAutoSimSchedules\nall[2060]=all[2060] or {}\nlocal state=all[2060]\nif state.done then self.used=true;return end\nif not state.setup then\n A.setAutoSimKillTime(305)\n A.clearAutoSimPhases(\"FullDowntime\")\n A.clearAutoSimPhases(\"Stun\")\n A.clearAutoSimPhases(\"CasterDowntime\")\n A.clearAutoSimPhases(\"GroundFieldMovement\")\n A.clearAutoSimUncertainty()\n A.setAutoSimUnexpectedMovementPct(0.05)\n A.addAutoSimUncertainty(0,3)\n A.addAutoSimUncertainty(280,14.37)\n state.phases={{\"CasterDowntime\",14.5,15.5,1},{\"CasterDowntime\",23.5,26.0,1},{\"CasterDowntime\",35.5,38.5,1},{\"CasterDowntime\",56.5,59.5,1},{\"CasterDowntime\",63.5,64.5,1},{\"CasterDowntime\",77.0,80.5,1},{\"CasterDowntime\",99.5,100.5,1},{\"CasterDowntime\",107.5,108.5,1},{\"CasterDowntime\",137.5,138.5,1},{\"CasterDowntime\",239.5,240.5,1},{\"CasterDowntime\",250.5,253.5,1},{\"GroundFieldMovement\",14.5,15.5,2},{\"GroundFieldMovement\",23.5,26.0,2},{\"GroundFieldMovement\",137.5,138.5,2}}\n state.nextPhase=1\n state.setup=true\nend\nwhile state.nextPhase<=#state.phases do\n local p=state.phases[state.nextPhase]\n p[5]=A.addAutoSimPhase(p[1],p[2],p[3],p[4])\n state.nextPhase=state.nextPhase+1\nend\nstate.done=true\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -2517,7 +2566,7 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local all=data.allianceAutoSimSchedules\nlocal s=all and all[2070]\nlocal p=TensorCore.mGetPlayer()\nreturn s~=nil and s.done and s.ealdStunObserved and not s.ealdStunFinished and p~=nil and eventArgs.entityID==p.id and TensorCore.API.TensorACR.getAutoSimTime()<240",
+						conditionLua = "local schedules = data.allianceAutoSimSchedules\nlocal state = schedules and schedules[2070]\nif not state or state.done ~= true or state.ealdStunObserved ~= true or state.ealdStunFinished then\n    return false\nend\n\nlocal player = TensorCore.mGetPlayer()\nreturn player ~= nil and eventArgs.entityID == player.id and TensorCore.API.TensorACR.getAutoSimTime() < 240",
 						dequeueIfLuaFalse = true,
 						name = "Own captured Ealdnarche stun only",
 						uuid = "c4d22e35-8c9f-95eb-a28a-23198390afbf",
@@ -4963,6 +5012,55 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local api = TensorCore.API.TensorACR\nlocal entry = api.addBlacklistEntry(13719, \"Ark Shield\")\nif entry and (not entry.enabled or entry.allowIfTarget or entry.allowSmartDoT) then\n    entry.enabled = true\n    entry.allowIfTarget = false\n    entry.allowSmartDoT = false\n    api.saveDotBlacklist()\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"12903575-fb43-1f14-8629-479ebd37282a",
+								true,
+							},
+						},
+						name = "Block direct and Smart DoT on Ark Shield",
+						uuid = "76bef289-910f-3259-bcff-9b8155bdfa5d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if eventArgs.entityContentID ~= 13719 then return false end\nlocal player = TensorCore.mGetPlayer()\nreturn player ~= nil and player.localmapid == 1248",
+						dequeueIfLuaFalse = true,
+						name = "Ark Shield spawned in Jeuno",
+						uuid = "12903575-fb43-1f14-8629-479ebd37282a",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Ark Angels",
+			eventType = 5,
+			name = "[Jeuno] Ark Shield - DoT blacklist",
+			timeout = 2,
+			uuid = "34d1460b-88bc-e708-a0fd-ff4d283f602d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "Jeuno",
 			name = "Safeguards",
 			uuid = "074c6781-0bd7-4fb1-bb80-2adaa9cce9b4",
@@ -6382,6 +6480,84 @@ local tbl =
 	{
 		data = 
 		{
+			displayPath = "Jeuno",
+			name = "AutoSim",
+			uuid = "fde2454e-eafe-b95a-96cb-deb7f842b128",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "Echoes of Vana’diel",
+			uuid = "989af0c8-88e5-5e19-8208-581b3a68d395",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Echoes of Vana’diel",
+			name = "AutoSim",
+			uuid = "1af373ec-c5e5-2929-8125-970cba412234",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local p = TensorCore.mGetPlayer()\nlocal api = TensorCore.API.TensorACR\nlocal state = _G.JeunoTrashReserve\nlocal function clearTrashWeight(reserve)\n    local phase = reserve.phase\n    reserve.phase = nil\n    -- The combat reset may already have removed this owned phase.\n    if phase then pcall(api.removeAutoSimPhase, phase) end\nend\nlocal function isTrash(map, id)\n    if not id then return false end\n    if map == 1248 then return id >= 13597 and id <= 13609 end\n    if map == 1304 then return (id >= 14063 and id <= 14072) or (id >= 14075 and id <= 14082) end\n    if map == 1368 then return (id >= 14828 and id <= 14836) or id == 14838 or id == 14839 end\n    return false\nend\nlocal map = p and p.localmapid\nlocal inWalk = map == 1248 or map == 1304 or map == 1368\nlocal target = inWalk and TensorCore.mGetTarget()\nlocal trash = target and target.alive and target.attackable and isTrash(map, target.contentid)\nlocal keep = state and p and p.incombat and not (target and target.alive and target.attackable)\nif not inWalk or not p.alive or not (trash or keep) then\n    if state then\n        for var in pairs(state.held) do\n            if _G[var] == false then _G[var] = true end\n        end\n        clearTrashWeight(state)\n        _G.JeunoTrashReserve = nil\n    end\n    self.used = true\n    return\nend\nif not state then\n    state = {held={}}\n    _G.JeunoTrashReserve = state\n    for _, option in pairs(api.getQuickToggles() or {}) do\n        local var = option.var\n        if var and (var:match(\"_CD$\") or var:match(\"_Potion$\") or (p.job == 25 and (var == \"ACR_TensorNuke4_Triplecast\" or var == \"ACR_TensorNuke4_Xenoglossy\"))) and _G[var] == true then\n            state.held[var] = true\n            _G[var] = false\n        end\n    end\nend\n-- Short renewed hold expires on boss handoff without clearing other holds.\nif p.job == 25 and (not state.amplifierRefresh or Now() >= state.amplifierRefresh) then\n    api.holdActionFor(25796, 1)\n    state.amplifierRefresh = Now() + 500\nend\nif p.incombat then\n    local now = api.getAutoSimTime()\n    if type(now) == \"number\" and now > 0 then\n        if state.lastTime and now < state.lastTime then state.phase = nil; state.attempted = nil end\n        state.lastTime = now\n        if not state.attempted then\n            state.attempted = true\n            state.phase = api.addAutoSimPhase(\"BossModifier\", 0, now + 90, 0.7)\n        end\n    end\nelse\n    clearTrashWeight(state)\n    state.attempted = nil\n    state.lastTime = nil\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"84a7a254-8cbc-d7ce-90c2-f1bafc4e2ea2",
+								true,
+							},
+						},
+						name = "Reserve burst and weight trash at 0.7",
+						uuid = "377a4687-87db-9a90-99ea-a0113e86966d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if _G.JeunoTrashReserve then return true end\nlocal p = TensorCore.mGetPlayer()\nif not p or not p.alive or (p.localmapid ~= 1248 and p.localmapid ~= 1304 and p.localmapid ~= 1368) then return false end\nlocal target = TensorCore.mGetTarget()\nif not target or not target.alive or not target.attackable then return false end\nlocal function isTrash(map, id)\n    if not id then return false end\n    if map == 1248 then return id >= 13597 and id <= 13609 end\n    if map == 1304 then return (id >= 14063 and id <= 14072) or (id >= 14075 and id <= 14082) end\n    if map == 1368 then return (id >= 14828 and id <= 14836) or id == 14838 or id == 14839 end\n    return false\nend\nreturn isTrash(p.localmapid, target.contentid)",
+						dequeueIfLuaFalse = true,
+						name = "Walk trash or owned hold",
+						uuid = "84a7a254-8cbc-d7ce-90c2-f1bafc4e2ea2",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Echoes of Vana’diel/AutoSim",
+			name = "[Echoes of Vana’diel AutoSim] Hold resources on trash",
+			throttleTime = 300,
+			uuid = "cdef9cb9-3dfa-2791-a569-f1f17531a4f5",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "",
 			name = "San d’Oria",
 			uuid = "b12e0a06-0f38-2eec-aaa1-89fcf39f4cd4",
@@ -6987,6 +7163,590 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"c093b6d0-cedd-7d89-8089-c20c082fbcbd",
+								true,
+							},
+							
+							{
+								"7f389b69-a0f5-eb7c-a718-d73e23596b29",
+								true,
+							},
+							
+							{
+								"a3cc2b79-b386-94df-b58e-1484c3dd566b",
+								true,
+							},
+							
+							{
+								"3fb19f3f-f3dc-c82f-91e3-74d0488ddd42",
+								true,
+							},
+							
+							{
+								"55d3a39a-5c18-07b5-b1dd-115d586321c9",
+								true,
+							},
+							
+							{
+								"282af01f-52c1-ad98-80d5-1a26cbc97374",
+								true,
+							},
+						},
+						gVar = "ACR_TensorReaper4_Hotbar_ArmsLength",
+						name = "Request Arm's Length",
+						uuid = "bf639660-681b-a79c-a503-1e87f9e3f32c",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Event",
+						eventArgType = 2,
+						eventSpellID = 44219,
+						name = "Exact mechanic",
+						uuid = "7f389b69-a0f5-eb7c-a718-d73e23596b29",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						eventArgOptionType = 2,
+						eventEntityContentID = 14043,
+						name = "Exact boss",
+						uuid = "a3cc2b79-b386-94df-b58e-1484c3dd566b",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not self.deadline then self.deadline=Now()+eventArgs.channelTimeMax*1000 end\nlocal remaining=self.deadline-Now()\nif remaining>3000 or remaining<1000 then return false end\nlocal caster=TensorCore.mGetEntity(eventArgs.entityID)\nreturn caster~=nil and caster.castinginfo.channelingid==eventArgs.spellID",
+						name = "Request with 3 to 1 seconds remaining",
+						uuid = "282af01f-52c1-ad98-80d5-1a26cbc97374",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 14,
+						dequeueIfLuaFalse = true,
+						jobIDList = 
+						{
+							19,
+							21,
+							32,
+							37,
+						},
+						name = "Tanks only",
+						uuid = "3fb19f3f-f3dc-c82f-91e3-74d0488ddd42",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 1304,
+						name = "Second Walk only",
+						uuid = "c093b6d0-cedd-7d89-8089-c20c082fbcbd",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local elapsed = TensorReactions_CurrentCombatTimer\nreturn elapsed > 0 and elapsed < 115",
+						dequeueIfLuaFalse = true,
+						name = "Before arena transition",
+						uuid = "55d3a39a-5c18-07b5-b1dd-115d586321c9",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "San d’Oria/Knockback safeguards",
+			eventType = 3,
+			name = "[Second Walk] Knockback protection - Kam'lanaut - First Princely Blow",
+			timeout = 8,
+			uuid = "a451d789-0123-0ebe-9ffb-c0ecb7073c8c",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal player = Player\nlocal spell = eventArgs.spellID\nif spell == 44219 and player.job ~= 19 and player.job ~= 21 and player.job ~= 32 and player.job ~= 37 then return end\n\nlocal toggles = TensorCore.API.TensorACR.getQuickToggles()\nfor _, toggle in ipairs(toggles or {}) do\n    local variable = toggle.var\n    if toggle.enabled and variable:match(\"_KBCancel$\") and _G[variable] == false then\n        local immunity\n        for _, hotbar in ipairs(TensorCore.API.TensorACR.getHotbarToggles() or {}) do\n            if hotbar.id == 7548 or hotbar.id == 7559 then\n                immunity = ActionList:Get(1, hotbar.id)\n                break\n            end\n        end\n        if not immunity or not immunity.isoncd then return end\n        if immunity.cdmax - immunity.cd <= 3 then return end\n        if TensorCore.hasBuff(player.id, immunity.id == 7548 and 1209 or 160) then return end\n\n        AllianceSecondWalkKB = { variable = variable, expires = Now() + 5100 }\n        _G[variable] = true\n        return\n    end\nend\n",
+						conditions = 
+						{
+							
+							{
+								"820c4fb9-fdbc-86da-8d7c-45a976b0130d",
+								true,
+							},
+							
+							{
+								"cc5bc2cf-435b-18d1-a796-a3f58d095b59",
+								true,
+							},
+							
+							{
+								"1b3ae26f-a7b8-ca41-ae2c-4f479127b1ca",
+								true,
+							},
+							
+							{
+								"6fcba471-9200-3e48-a608-54a590628f0a",
+								true,
+							},
+						},
+						name = "KB Cancel fallback - Tractor Beam",
+						uuid = "f66c8f0d-67f2-2754-b5bd-5a6043db16a6",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 1304,
+						name = "Second Walk only",
+						uuid = "820c4fb9-fdbc-86da-8d7c-45a976b0130d",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						eventArgType = 2,
+						eventSpellID = 45190,
+						name = "Exact mechanic",
+						uuid = "cc5bc2cf-435b-18d1-a796-a3f58d095b59",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						eventArgOptionType = 2,
+						eventEntityContentID = 14231,
+						name = "Exact boss",
+						uuid = "1b3ae26f-a7b8-ca41-ae2c-4f479127b1ca",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not self.deadline then self.deadline = Now() + eventArgs.channelTimeMax * 1000 end\nlocal remaining = self.deadline - Now()\nif remaining > 3000 or remaining < 1000 then return false end\nlocal caster = TensorCore.mGetEntity(eventArgs.entityID)\nreturn caster ~= nil and caster.castinginfo.channelingid == eventArgs.spellID",
+						name = "Three to one seconds before resolution",
+						uuid = "6fcba471-9200-3e48-a608-54a590628f0a",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "San d’Oria/Knockback safeguards",
+			eventType = 3,
+			name = "KB Cancel fallback - Tractor Beam",
+			timeout = 12,
+			uuid = "cc4a128f-af2d-dc79-9b44-b5c7e9d82c85",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal player = Player\nlocal spell = eventArgs.spellID\nif spell == 44219 and player.job ~= 19 and player.job ~= 21 and player.job ~= 32 and player.job ~= 37 then return end\n\nlocal toggles = TensorCore.API.TensorACR.getQuickToggles()\nfor _, toggle in ipairs(toggles or {}) do\n    local variable = toggle.var\n    if toggle.enabled and variable:match(\"_KBCancel$\") and _G[variable] == false then\n        local immunity\n        for _, hotbar in ipairs(TensorCore.API.TensorACR.getHotbarToggles() or {}) do\n            if hotbar.id == 7548 or hotbar.id == 7559 then\n                immunity = ActionList:Get(1, hotbar.id)\n                break\n            end\n        end\n        if not immunity or not immunity.isoncd then return end\n        if immunity.cdmax - immunity.cd <= 3 then return end\n        if TensorCore.hasBuff(player.id, immunity.id == 7548 and 1209 or 160) then return end\n\n        AllianceSecondWalkKB = { variable = variable, expires = Now() + 5100 }\n        _G[variable] = true\n        return\n    end\nend\n",
+						conditions = 
+						{
+							
+							{
+								"dc7b45bd-235c-939b-9045-501e958269f5",
+								true,
+							},
+							
+							{
+								"07829b01-3c46-b71d-892f-c15144b50f93",
+								true,
+							},
+							
+							{
+								"42ccc1fd-5490-9825-9217-28589d237162",
+								true,
+							},
+							
+							{
+								"e9251bdd-2a90-98b3-971c-b1ede65d765d",
+								true,
+							},
+						},
+						name = "KB Cancel fallback - Shield Bash",
+						uuid = "a81c9668-d181-46ce-903e-2139e792aded",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 1304,
+						name = "Second Walk only",
+						uuid = "dc7b45bd-235c-939b-9045-501e958269f5",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						eventArgType = 2,
+						eventSpellID = 44222,
+						name = "Exact mechanic",
+						uuid = "07829b01-3c46-b71d-892f-c15144b50f93",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						eventArgOptionType = 2,
+						eventEntityContentID = 14043,
+						name = "Exact boss",
+						uuid = "42ccc1fd-5490-9825-9217-28589d237162",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not self.deadline then self.deadline = Now() + eventArgs.channelTimeMax * 1000 end\nlocal remaining = self.deadline - Now()\nif remaining > 3000 or remaining < 1000 then return false end\nlocal caster = TensorCore.mGetEntity(eventArgs.entityID)\nreturn caster ~= nil and caster.castinginfo.channelingid == eventArgs.spellID",
+						name = "Three to one seconds before resolution",
+						uuid = "e9251bdd-2a90-98b3-971c-b1ede65d765d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "San d’Oria/Knockback safeguards",
+			eventType = 3,
+			name = "KB Cancel fallback - Shield Bash",
+			timeout = 12,
+			uuid = "badbdd59-4945-5cec-b019-041b21edc184",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal player = Player\nlocal spell = eventArgs.spellID\nif spell == 44219 and player.job ~= 19 and player.job ~= 21 and player.job ~= 32 and player.job ~= 37 then return end\n\nlocal toggles = TensorCore.API.TensorACR.getQuickToggles()\nfor _, toggle in ipairs(toggles or {}) do\n    local variable = toggle.var\n    if toggle.enabled and variable:match(\"_KBCancel$\") and _G[variable] == false then\n        local immunity\n        for _, hotbar in ipairs(TensorCore.API.TensorACR.getHotbarToggles() or {}) do\n            if hotbar.id == 7548 or hotbar.id == 7559 then\n                immunity = ActionList:Get(1, hotbar.id)\n                break\n            end\n        end\n        if not immunity or not immunity.isoncd then return end\n        if immunity.cdmax - immunity.cd <= 3 then return end\n        if TensorCore.hasBuff(player.id, immunity.id == 7548 and 1209 or 160) then return end\n\n        AllianceSecondWalkKB = { variable = variable, expires = Now() + 5100 }\n        _G[variable] = true\n        return\n    end\nend\n",
+						conditions = 
+						{
+							
+							{
+								"ced704ef-d4f6-0ffa-b93d-5e0e4beeb126",
+								true,
+							},
+							
+							{
+								"afd427d5-b081-1fff-998b-7e63bb0cfc39",
+								true,
+							},
+							
+							{
+								"32c0e496-575b-f366-a9f6-281ee2623cbf",
+								true,
+							},
+							
+							{
+								"be6432a2-3aa9-a197-882c-610a01297409",
+								true,
+							},
+						},
+						name = "KB Cancel fallback - Princely Blow (tanks)",
+						uuid = "52cb682d-2e4f-d7af-be93-b9062edcd94a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 1304,
+						name = "Second Walk only",
+						uuid = "ced704ef-d4f6-0ffa-b93d-5e0e4beeb126",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						eventArgType = 2,
+						eventSpellID = 44219,
+						name = "Exact mechanic",
+						uuid = "afd427d5-b081-1fff-998b-7e63bb0cfc39",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						eventArgOptionType = 2,
+						eventEntityContentID = 14043,
+						name = "Exact boss",
+						uuid = "32c0e496-575b-f366-a9f6-281ee2623cbf",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not self.deadline then self.deadline = Now() + eventArgs.channelTimeMax * 1000 end\nlocal remaining = self.deadline - Now()\nif remaining > 3000 or remaining < 1000 then return false end\nlocal caster = TensorCore.mGetEntity(eventArgs.entityID)\nreturn caster ~= nil and caster.castinginfo.channelingid == eventArgs.spellID",
+						name = "Three to one seconds before resolution",
+						uuid = "be6432a2-3aa9-a197-882c-610a01297409",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "San d’Oria/Knockback safeguards",
+			eventType = 3,
+			name = "KB Cancel fallback - Princely Blow (tanks)",
+			timeout = 12,
+			uuid = "8d14a482-4ee7-2c6e-b83d-56b53f487b88",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal player = Player\nlocal spell = eventArgs.spellID\nif spell == 44219 and player.job ~= 19 and player.job ~= 21 and player.job ~= 32 and player.job ~= 37 then return end\n\nlocal toggles = TensorCore.API.TensorACR.getQuickToggles()\nfor _, toggle in ipairs(toggles or {}) do\n    local variable = toggle.var\n    if toggle.enabled and variable:match(\"_KBCancel$\") and _G[variable] == false then\n        local immunity\n        for _, hotbar in ipairs(TensorCore.API.TensorACR.getHotbarToggles() or {}) do\n            if hotbar.id == 7548 or hotbar.id == 7559 then\n                immunity = ActionList:Get(1, hotbar.id)\n                break\n            end\n        end\n        if not immunity or not immunity.isoncd then return end\n        if immunity.cdmax - immunity.cd <= 3 then return end\n        if TensorCore.hasBuff(player.id, immunity.id == 7548 and 1209 or 160) then return end\n\n        AllianceSecondWalkKB = { variable = variable, expires = Now() + 5100 }\n        _G[variable] = true\n        return\n    end\nend\n",
+						conditions = 
+						{
+							
+							{
+								"f486ab98-06f5-d9ac-a0bc-e255f5e6f5f5",
+								true,
+							},
+							
+							{
+								"6a970c52-ac2b-4f2e-8d87-a4dd87f1a3c1",
+								true,
+							},
+							
+							{
+								"73a0cad0-1e25-172f-9acb-27138e20d613",
+								true,
+							},
+							
+							{
+								"313193bc-bb0c-66da-b2a9-b5e1897415ff",
+								true,
+							},
+						},
+						name = "KB Cancel fallback - Tornado draw-in",
+						uuid = "2b3471c7-8c99-7beb-ae76-c1757363dfe0",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 1304,
+						name = "Second Walk only",
+						uuid = "f486ab98-06f5-d9ac-a0bc-e255f5e6f5f5",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						eventArgType = 2,
+						eventSpellID = 44395,
+						name = "Exact mechanic",
+						uuid = "6a970c52-ac2b-4f2e-8d87-a4dd87f1a3c1",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						eventArgOptionType = 2,
+						eventEntityContentID = 14086,
+						name = "Exact boss",
+						uuid = "73a0cad0-1e25-172f-9acb-27138e20d613",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not self.deadline then self.deadline = Now() + eventArgs.channelTimeMax * 1000 end\nlocal remaining = self.deadline - Now()\nif remaining > 3000 or remaining < 1000 then return false end\nlocal caster = TensorCore.mGetEntity(eventArgs.entityID)\nreturn caster ~= nil and caster.castinginfo.channelingid == eventArgs.spellID",
+						name = "Three to one seconds before resolution",
+						uuid = "313193bc-bb0c-66da-b2a9-b5e1897415ff",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "San d’Oria/Knockback safeguards",
+			eventType = 3,
+			name = "KB Cancel fallback - Tornado draw-in",
+			timeout = 12,
+			uuid = "dca79671-1c76-9be2-ba6b-1c7f7952a41a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local state = AllianceSecondWalkKB\nif not state then return end\nif Now() < state.expires and Player.localmapid == 1304 and TensorReactions_CurrentCombatTimer > 0 then return end\n_G[state.variable] = false\nAllianceSecondWalkKB = nil",
+						conditions = 
+						{
+							
+							{
+								"534a0a2f-64d7-6cef-a191-b12ba6829d42",
+								true,
+							},
+						},
+						name = "Restore KB Cancel after knockback",
+						uuid = "1a63f4a6-fcc0-d3d5-93ac-6ce8a8a77631",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return AllianceSecondWalkKB ~= nil",
+						name = "Owned KB Cancel window",
+						uuid = "534a0a2f-64d7-6cef-a191-b12ba6829d42",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "San d’Oria/Knockback safeguards",
+			name = "Restore KB Cancel after knockback",
+			timeout = 1,
+			uuid = "b47b284e-e21d-fc41-85b1-57b4c3b91015",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "San d’Oria",
 			name = "Eald’narche",
 			uuid = "196e47f0-aa63-14d4-8b7a-4e6343913e9b",
@@ -7179,9 +7939,19 @@ local tbl =
 	{
 		data = 
 		{
-			displayPath = "",
-			name = "General",
-			uuid = "ec0f2112-934b-dfd3-828e-86c2d9f8c6f2",
+			displayPath = "San d’Oria",
+			name = "Ealdnarche",
+			uuid = "5717b34f-17f6-7895-9504-5bfed0b8c111",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "San d’Oria/Ealdnarche",
+			name = "Draws",
+			uuid = "a752e3d2-9b6e-e906-a760-ec21c05e69d6",
 		},
 		objectType = "folder",
 	},
@@ -7191,17 +7961,80 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal caster = TensorCore.mGetEntity(eventArgs.entityID)\nif not caster then return end\nlocal p = caster.pos\nlocal x, z = math.floor(p.x + 0.5), math.floor(p.z + 0.5)\nlocal heading = p.h\nlocal dx = math.floor(math.sin(heading) * 4 + 0.5)\nlocal dz = math.floor(math.cos(heading) * 4 + 0.5)\nif math.abs(dx) + math.abs(dz) ~= 4 then return end\n\ndata.secondWalkGaea = data.secondWalkGaea or {}\nlocal draws = data.secondWalkGaea\nlocal now = Now()\nfor key, entry in pairs(draws) do\n    if entry.expires <= now then draws[key] = nil end\nend\n\nlocal function preview(px, pz, lifetime, color)\n    local key = (\"%d:%d:%d:%d\"):format(px, pz, dx, dz)\n    local previous = draws[key]\n    if previous then Argus.deleteTimedShape(previous.uuid) end\n    local uuid = Argus2.addTimedRectFilled(lifetime, px, p.y, pz, 4, 24, heading, color, color)\n    if uuid then draws[key] = { uuid = uuid, expires = now + lifetime } end\nend\n\nlocal lifetime = math.floor(eventArgs.channelTimeMax * 1000 + 500)\npreview(x, z, lifetime, 0x660000FF)\nlocal nextX, nextZ = x + dx, z + dz\nif math.abs(nextX - 800) <= 20 and math.abs(nextZ + 800) <= 20 then\n    preview(nextX, nextZ, lifetime + 2100, 0x440080FF)\nend\n",
+						conditions = 
+						{
+							
+							{
+								"1576d38c-6264-55be-864b-902bf90a5805",
+								true,
+							},
+							
+							{
+								"3f5633ce-63c6-1cbb-8050-2b947605243d",
+								true,
+							},
+							
+							{
+								"9de75579-159e-3c60-84c0-dfc7f59b2c21",
+								true,
+							},
+						},
+						name = "Gaea Stream - Preview opening lanes",
+						uuid = "d22e437f-66b6-5df5-8aa6-b001df044be6",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 1304,
+						name = "Second Walk only",
+						uuid = "1576d38c-6264-55be-864b-902bf90a5805",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						eventArgType = 2,
+						eventSpellID = 44372,
+						name = "Exact mechanic",
+						uuid = "3f5633ce-63c6-1cbb-8050-2b947605243d",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						eventArgOptionType = 2,
+						eventEntityContentID = 14086,
+						name = "Exact boss",
+						uuid = "9de75579-159e-3c60-84c0-dfc7f59b2c21",
+						version = 3,
+					},
+				},
 			},
-			displayPath = "General",
-			eventType = 11,
-			execute = "if AnyoneCore and AnyoneCore.Settings and AnyoneCore.Settings.PrepullHelper then\n    if AnyoneCore.Settings.PrepullHelper.enabled then\n        AnyoneCore.Settings.PrepullHelper.enabled = false\n    end\n    self.used = true\nend",
-			executeType = 2,
-			name = "[AA] Disable Prepull Helper - Zone entry",
-			throttleTime = 1000,
-			uuid = "ed07374b-c4d7-0cc6-b3b5-0612fc74cb2f",
+			displayPath = "San d’Oria/Ealdnarche/Draws",
+			eventType = 3,
+			name = "Gaea Stream - Preview opening lanes",
+			timeout = 1,
+			uuid = "c8b41e67-6b94-b5d4-a9d6-f412bf51d7a6",
 			version = 2,
 		},
 	},
@@ -7211,16 +8044,246 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal caster = TensorCore.mGetEntity(eventArgs.entityID)\nif not caster then return end\nlocal p = caster.pos\nlocal x, z = math.floor(p.x + 0.5), math.floor(p.z + 0.5)\nlocal heading = p.h\nlocal dx = math.floor(math.sin(heading) * 4 + 0.5)\nlocal dz = math.floor(math.cos(heading) * 4 + 0.5)\nif math.abs(dx) + math.abs(dz) ~= 4 then return end\n\ndata.secondWalkGaea = data.secondWalkGaea or {}\nlocal draws = data.secondWalkGaea\nlocal now = Now()\nfor key, entry in pairs(draws) do\n    if entry.expires <= now then draws[key] = nil end\nend\n\nlocal function preview(px, pz, lifetime, color)\n    local key = (\"%d:%d:%d:%d\"):format(px, pz, dx, dz)\n    local previous = draws[key]\n    if previous then Argus.deleteTimedShape(previous.uuid) end\n    local uuid = Argus2.addTimedRectFilled(lifetime, px, p.y, pz, 4, 24, heading, color, color)\n    if uuid then draws[key] = { uuid = uuid, expires = now + lifetime } end\nend\n\nlocal lifetime = math.floor(eventArgs.channelTimeMax * 1000 + 500)\npreview(x, z, lifetime, 0x660000FF)\nlocal nextX, nextZ = x + dx, z + dz\nif math.abs(nextX - 800) <= 20 and math.abs(nextZ + 800) <= 20 then\n    preview(nextX, nextZ, lifetime + 2100, 0x440080FF)\nend\n",
+						conditions = 
+						{
+							
+							{
+								"6467e4c4-075a-6eb6-8ea5-c7471e774b23",
+								true,
+							},
+							
+							{
+								"516da668-4d41-4c26-a5ca-87a28abf4a86",
+								true,
+							},
+							
+							{
+								"39f907bb-3328-3f45-8d00-3c2710a2e459",
+								true,
+							},
+						},
+						name = "Gaea Stream - Preview advancing lanes",
+						uuid = "7510d9d5-faa5-705c-a1fb-7b4aa2b23d08",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 1304,
+						name = "Second Walk only",
+						uuid = "6467e4c4-075a-6eb6-8ea5-c7471e774b23",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						eventArgType = 2,
+						eventSpellID = 44373,
+						name = "Exact mechanic",
+						uuid = "516da668-4d41-4c26-a5ca-87a28abf4a86",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						eventArgOptionType = 2,
+						eventEntityContentID = 14086,
+						name = "Exact boss",
+						uuid = "39f907bb-3328-3f45-8d00-3c2710a2e459",
+						version = 3,
+					},
+				},
 			},
-			displayPath = "General",
-			eventType = 16,
-			execute = "if AnyoneCore and AnyoneCore.Settings and AnyoneCore.Settings.PrepullHelper then\n    if AnyoneCore.Settings.PrepullHelper.enabled then\n        AnyoneCore.Settings.PrepullHelper.enabled = false\n    end\n    self.used = true\nend",
-			executeType = 2,
-			name = "[AA] Disable Prepull Helper - Countdown",
-			uuid = "1e3d22b5-6144-c719-aca0-5754c0218386",
+			displayPath = "San d’Oria/Ealdnarche/Draws",
+			eventType = 3,
+			name = "Gaea Stream - Preview advancing lanes",
+			timeout = 1,
+			uuid = "9d116faa-8420-b77a-808d-bc85db1d80cf",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal draws = data.secondWalkGaea\nlocal caster = TensorCore.mGetEntity(eventArgs.entityID)\nif not draws or not caster then return end\nlocal p = caster.pos\nlocal dx = math.floor(math.sin(eventArgs.heading) * 4 + 0.5)\nlocal dz = math.floor(math.cos(eventArgs.heading) * 4 + 0.5)\nlocal key = (\"%d:%d:%d:%d\"):format(math.floor(p.x + 0.5), math.floor(p.z + 0.5), dx, dz)\nlocal entry = draws[key]\nif entry then\n    Argus.deleteTimedShape(entry.uuid)\n    draws[key] = nil\nend\n",
+						conditions = 
+						{
+							
+							{
+								"ba92e785-a936-1a91-95c2-0feea7b4021b",
+								true,
+							},
+							
+							{
+								"1caa6717-e865-6041-9a54-137ba43bfbf9",
+								true,
+							},
+							
+							{
+								"876dbc83-32d5-1fe5-8111-a278600a3dbd",
+								true,
+							},
+						},
+						name = "Gaea Stream - Clear executed opening lane",
+						uuid = "cd0d4367-5f4b-0e6b-a839-a79c40c3653e",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 1304,
+						name = "Second Walk only",
+						uuid = "ba92e785-a936-1a91-95c2-0feea7b4021b",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						eventArgType = 2,
+						eventSpellID = 44372,
+						name = "Exact mechanic",
+						uuid = "1caa6717-e865-6041-9a54-137ba43bfbf9",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						eventArgOptionType = 2,
+						eventEntityContentID = 14086,
+						name = "Exact boss",
+						uuid = "876dbc83-32d5-1fe5-8111-a278600a3dbd",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "San d’Oria/Ealdnarche/Draws",
+			eventType = 2,
+			name = "Gaea Stream - Clear executed opening lane",
+			timeout = 1,
+			uuid = "f7bcaa45-0e6c-aa00-8742-10f1959693ec",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal draws = data.secondWalkGaea\nlocal caster = TensorCore.mGetEntity(eventArgs.entityID)\nif not draws or not caster then return end\nlocal p = caster.pos\nlocal dx = math.floor(math.sin(eventArgs.heading) * 4 + 0.5)\nlocal dz = math.floor(math.cos(eventArgs.heading) * 4 + 0.5)\nlocal key = (\"%d:%d:%d:%d\"):format(math.floor(p.x + 0.5), math.floor(p.z + 0.5), dx, dz)\nlocal entry = draws[key]\nif entry then\n    Argus.deleteTimedShape(entry.uuid)\n    draws[key] = nil\nend\n",
+						conditions = 
+						{
+							
+							{
+								"1ee9df09-abf4-154c-ba04-2d425c8c256a",
+								true,
+							},
+							
+							{
+								"57cbcdc3-89f4-7bc1-b5a7-01b634d716f2",
+								true,
+							},
+							
+							{
+								"a0543e6c-4cd7-bbd7-b000-46341066577c",
+								true,
+							},
+						},
+						name = "Gaea Stream - Clear executed advancing lane",
+						uuid = "2e4898d3-bcd8-0145-ae80-318d47509e51",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 1304,
+						name = "Second Walk only",
+						uuid = "1ee9df09-abf4-154c-ba04-2d425c8c256a",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						eventArgType = 2,
+						eventSpellID = 44373,
+						name = "Exact mechanic",
+						uuid = "57cbcdc3-89f4-7bc1-b5a7-01b634d716f2",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						eventArgOptionType = 2,
+						eventEntityContentID = 14086,
+						name = "Exact boss",
+						uuid = "a0543e6c-4cd7-bbd7-b000-46341066577c",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "San d’Oria/Ealdnarche/Draws",
+			eventType = 2,
+			name = "Gaea Stream - Clear executed advancing lane",
+			timeout = 1,
+			uuid = "1cc5c7b4-040f-ca8b-9dea-d8c46f3babe2",
 			version = 2,
 		},
 	},
@@ -7429,7 +8492,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "\ngStartCombat = false\nlocal settings = AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled = false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled = false end\nend\nlocal player = TensorCore.mGetPlayer()\nlocal closest, distance\nfor _, cid in ipairs({2809,2815,2821,2824}) do\n    for _, boss in pairs(TensorCore.getEntityGroupList(\"ContentID\", cid) or {}) do\n        if player and player.pos and boss.pos and boss.alive and boss.targetable then\n            local d = TensorCore.getDistance2d(player.pos, boss.pos)\n            if d < 80 and (not distance or d < distance) then closest, distance = boss, d end\n        end\n    end\nend\nif closest then Player:SetTarget(closest.id) end\nself.used = true\n",
+						actionLua = "\ngStartCombat = false\nlocal settings = AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled = false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled = false end\nend\nlocal player = TensorCore.mGetPlayer()\nlocal closest, distance\nfor _, cid in ipairs({2809,2815,2821,2824}) do\n    for _, boss in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid=cid}) or {}) do\n        if player and player.pos and boss.pos and boss.alive and boss.targetable then\n            local d = TensorCore.getDistance2d(player.pos, boss.pos)\n            if d < 80 and (not distance or d < distance) then closest, distance = boss, d end\n        end\n    end\nend\nif closest then Player:SetTarget(closest.id) end\nself.used = true\n",
 						conditions = 
 						{
 							
@@ -7617,6 +8680,3563 @@ local tbl =
 			eventType = 3,
 			name = "[Syrcus] Curtain Call countdown",
 			uuid = "5ba7bb66-e98d-5307-849e-1815fb22d22b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "The World of Darkness",
+			uuid = "b2f0feab-3279-917f-80d9-f65212b3786c",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The World of Darkness",
+			name = "AutoSim",
+			uuid = "162cc00d-9546-7b2e-bd81-3ee65b8d8ad6",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local api = TensorCore.API.TensorACR\napi.setAutoSimKillTime(158)\napi.clearAutoSimUncertainty()\napi.addAutoSimUncertainty(0, 20)\napi.clearAutoSimPhases(\"FullDowntime\")\napi.clearAutoSimPhases(\"CasterDowntime\")\nfor _, window in ipairs({{15, 17.3}, {30, 34}, {61, 64}, {81, 83.3}, {91, 95}, {119, 122}}) do\n    api.addAutoSimPhase(\"CasterDowntime\", window[1], window[2])\nend\ndata.wodAutoSim = {boss = eventArgs.entityID, content = 3231}\n\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"fc817fd9-b2d4-4ccb-b84f-0bfc3c65634b",
+								true,
+							},
+							
+							{
+								"e0e18917-81c9-44fe-8312-13030ddafb8a",
+								true,
+							},
+							
+							{
+								"84a4b17f-0e42-df4a-a201-83dc634c6e3a",
+								true,
+							},
+							
+							{
+								"f1e564aa-9b23-3e73-9734-bb9accb2c814",
+								true,
+							},
+							
+							{
+								"eca59eb7-06e2-2fb3-a9bf-5f812afc1f28",
+								true,
+							},
+						},
+						name = "Load boss forecast once",
+						uuid = "25f135ae-3d09-55cc-a1a6-f65fda324908",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 151,
+						name = "World of Darkness only",
+						uuid = "fc817fd9-b2d4-4ccb-b84f-0bfc3c65634b",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgType = 2,
+						eventSpellID = 3508,
+						name = "Exact action",
+						uuid = "e0e18917-81c9-44fe-8312-13030ddafb8a",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 2,
+						eventEntityContentID = 3231,
+						name = "Exact source",
+						uuid = "84a4b17f-0e42-df4a-a201-83dc634c6e3a",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return not data.wodAutoSim or data.wodAutoSim.boss ~= eventArgs.entityID",
+						dequeueIfLuaFalse = true,
+						name = "Boss schedule not loaded",
+						uuid = "f1e564aa-9b23-3e73-9734-bb9accb2c814",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local ok, elapsed = pcall(TensorCore.API.TensorACR.getAutoSimTime)\nreturn ok and type(elapsed) == \"number\" and elapsed > 0 and elapsed < 30",
+						name = "AutoSim clock ready",
+						uuid = "eca59eb7-06e2-2fb3-a9bf-5f812afc1f28",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The World of Darkness/AutoSim",
+			eventType = 2,
+			name = "[World of Darkness] Angra Mainyu AutoSim start",
+			uuid = "7e90255f-8b08-7dcb-9b38-fd6a45b2306d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local api = TensorCore.API.TensorACR\napi.setAutoSimKillTime(157)\napi.clearAutoSimUncertainty()\napi.addAutoSimUncertainty(0, 20)\napi.clearAutoSimPhases(\"FullDowntime\")\napi.clearAutoSimPhases(\"CasterDowntime\")\nfor _, window in ipairs({}) do\n    api.addAutoSimPhase(\"CasterDowntime\", window[1], window[2])\nend\ndata.wodAutoSim = {boss = eventArgs.entityID, content = 3227}\n\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"b6210714-44c6-e983-9ea7-c5d91cd0e7bd",
+								true,
+							},
+							
+							{
+								"6c8269d0-d97d-9122-b255-be26487057a0",
+								true,
+							},
+							
+							{
+								"29db47dc-b7c8-6271-a1b8-ea908fe4692c",
+								true,
+							},
+							
+							{
+								"5b5a06ac-2f7b-c202-80ee-1781f208f31a",
+								true,
+							},
+							
+							{
+								"0e392080-0aea-9982-b19d-25284dce8cb8",
+								true,
+							},
+						},
+						name = "Load boss forecast once",
+						uuid = "fdfeb934-9560-e424-b699-c47699ff60ed",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 151,
+						name = "World of Darkness only",
+						uuid = "b6210714-44c6-e983-9ea7-c5d91cd0e7bd",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgType = 2,
+						eventSpellID = 3355,
+						name = "Exact action",
+						uuid = "6c8269d0-d97d-9122-b255-be26487057a0",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 2,
+						eventEntityContentID = 3227,
+						name = "Exact source",
+						uuid = "29db47dc-b7c8-6271-a1b8-ea908fe4692c",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return not data.wodAutoSim or data.wodAutoSim.boss ~= eventArgs.entityID",
+						dequeueIfLuaFalse = true,
+						name = "Boss schedule not loaded",
+						uuid = "5b5a06ac-2f7b-c202-80ee-1781f208f31a",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local ok, elapsed = pcall(TensorCore.API.TensorACR.getAutoSimTime)\nreturn ok and type(elapsed) == \"number\" and elapsed > 0 and elapsed < 30",
+						name = "AutoSim clock ready",
+						uuid = "0e392080-0aea-9982-b19d-25284dce8cb8",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The World of Darkness/AutoSim",
+			eventType = 2,
+			name = "[World of Darkness] Five-headed Dragon AutoSim start",
+			uuid = "702bfa01-d454-0447-af90-7c6139ee9b1b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local api = TensorCore.API.TensorACR\napi.setAutoSimKillTime(174)\napi.clearAutoSimUncertainty()\napi.addAutoSimUncertainty(0, 20)\napi.clearAutoSimPhases(\"FullDowntime\")\napi.clearAutoSimPhases(\"CasterDowntime\")\nfor _, window in ipairs({}) do\n    api.addAutoSimPhase(\"CasterDowntime\", window[1], window[2])\nend\ndata.wodAutoSim = {boss = eventArgs.entityID, content = 3234}\n\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"888bc602-0bff-0907-bf7f-95c771221898",
+								true,
+							},
+							
+							{
+								"0e12b122-8882-c239-8242-c90dccb2b203",
+								true,
+							},
+							
+							{
+								"e21c32f7-441b-7e0c-b37d-75aceac1c257",
+								true,
+							},
+							
+							{
+								"7aef73f8-53fb-696b-b2ec-39a954739667",
+								true,
+							},
+							
+							{
+								"d65e1770-3cff-fd4a-a95a-bd930ad1098f",
+								true,
+							},
+						},
+						name = "Load boss forecast once",
+						uuid = "8aa80631-1c48-ef95-b984-d9bde81f5408",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 151,
+						name = "World of Darkness only",
+						uuid = "888bc602-0bff-0907-bf7f-95c771221898",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgType = 2,
+						eventSpellID = 3509,
+						name = "Exact action",
+						uuid = "0e12b122-8882-c239-8242-c90dccb2b203",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 2,
+						eventEntityContentID = 3234,
+						name = "Exact source",
+						uuid = "e21c32f7-441b-7e0c-b37d-75aceac1c257",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return not data.wodAutoSim or data.wodAutoSim.boss ~= eventArgs.entityID",
+						dequeueIfLuaFalse = true,
+						name = "Boss schedule not loaded",
+						uuid = "7aef73f8-53fb-696b-b2ec-39a954739667",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local ok, elapsed = pcall(TensorCore.API.TensorACR.getAutoSimTime)\nreturn ok and type(elapsed) == \"number\" and elapsed > 0 and elapsed < 30",
+						name = "AutoSim clock ready",
+						uuid = "d65e1770-3cff-fd4a-a95a-bd930ad1098f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The World of Darkness/AutoSim",
+			eventType = 2,
+			name = "[World of Darkness] Cerberus AutoSim start",
+			uuid = "95f517a4-61e7-7419-9abb-b0c6c0c76019",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local api = TensorCore.API.TensorACR\napi.setAutoSimKillTime(154)\napi.clearAutoSimUncertainty()\napi.addAutoSimUncertainty(0, 20)\napi.clearAutoSimPhases(\"FullDowntime\")\napi.clearAutoSimPhases(\"CasterDowntime\")\nfor _, window in ipairs({}) do\n    api.addAutoSimPhase(\"CasterDowntime\", window[1], window[2])\nend\ndata.wodAutoSim = {boss = eventArgs.entityID, content = 3240}\ndata.wodAutoSim.downtime = api.addAutoSimPhase(\"FullDowntime\", 125, 142.2)\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"f6b08656-fb2c-1cbe-a140-8db0f6583115",
+								true,
+							},
+							
+							{
+								"6b8cf71b-cbe7-c9ff-9c28-919e913a1236",
+								true,
+							},
+							
+							{
+								"8198092b-bbf5-a281-b671-5e00e5b94a50",
+								true,
+							},
+							
+							{
+								"cd791ec2-7e03-fb94-9d67-00edac75db2b",
+								true,
+							},
+							
+							{
+								"ade610e0-33f6-f539-a66c-bbb12e0cf0de",
+								true,
+							},
+						},
+						name = "Load boss forecast once",
+						uuid = "16f8ca81-8c1f-f437-b027-27c629d04972",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 151,
+						name = "World of Darkness only",
+						uuid = "f6b08656-fb2c-1cbe-a140-8db0f6583115",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgType = 2,
+						eventSpellID = 3306,
+						name = "Exact action",
+						uuid = "6b8cf71b-cbe7-c9ff-9c28-919e913a1236",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 2,
+						eventEntityContentID = 3240,
+						name = "Exact source",
+						uuid = "8198092b-bbf5-a281-b671-5e00e5b94a50",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return not data.wodAutoSim or data.wodAutoSim.boss ~= eventArgs.entityID",
+						dequeueIfLuaFalse = true,
+						name = "Boss schedule not loaded",
+						uuid = "cd791ec2-7e03-fb94-9d67-00edac75db2b",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local ok, elapsed = pcall(TensorCore.API.TensorACR.getAutoSimTime)\nreturn ok and type(elapsed) == \"number\" and elapsed > 0 and elapsed < 30",
+						name = "AutoSim clock ready",
+						uuid = "ade610e0-33f6-f539-a66c-bbb12e0cf0de",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The World of Darkness/AutoSim",
+			eventType = 2,
+			name = "[World of Darkness] Cloud of Darkness AutoSim start",
+			uuid = "7e5d497f-9d1c-f801-8f02-e5271cf740ae",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local s = data.wodAutoSim\nlocal api = TensorCore.API.TensorACR\nlocal now = api.getAutoSimTime()\nif not eventArgs.isTargetable and not s.departed then\n    s.departed = now\n    api.setAutoSimPhase(s.downtime, now, now + 17.1, 1)\nelseif eventArgs.isTargetable and s.departed then\n    s.returned = true\n    api.setAutoSimPhase(s.downtime, s.departed, now, 1)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"4a539ab2-db75-f0c9-b16d-c874947d408d",
+								true,
+							},
+							
+							{
+								"4192c02e-0833-75c5-b881-3cd793e221cf",
+								true,
+							},
+							
+							{
+								"a3065a79-e6b1-34e6-bc70-b988362840a6",
+								true,
+							},
+						},
+						name = "Correct the downtime boundaries",
+						uuid = "44c307b7-3af4-5eb9-afcc-88055b54e2db",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 151,
+						name = "World of Darkness only",
+						uuid = "4a539ab2-db75-f0c9-b16d-c874947d408d",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 2,
+						eventEntityContentID = 3240,
+						name = "Exact source",
+						uuid = "4192c02e-0833-75c5-b881-3cd793e221cf",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local s = data.wodAutoSim\nreturn s ~= nil and s.boss == eventArgs.entityID and not s.returned",
+						dequeueIfLuaFalse = true,
+						name = "First disappearance and return only",
+						uuid = "a3065a79-e6b1-34e6-bc70-b988362840a6",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The World of Darkness/AutoSim",
+			eventType = 26,
+			name = "[World of Darkness] Cloud of Darkness downtime resync",
+			uuid = "1020b6a7-ad13-4ef7-be8d-3e796a40cffa",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local s = data.wodAutoSim\nlocal p = TensorCore.mGetPlayer()\nlocal api = TensorCore.API.TensorACR\nlocal now = api.getAutoSimTime()\nlocal inside = p.pos.y < -490 and p.pos.y > -510\nlocal current = TensorCore.mGetTarget()\nif s.request and current and current.id == s.request then\n    d(\"[Cerberus] Confirmed target \" .. s.request)\n    s.request = nil\nend\nlocal function target(entity, reason)\n    if not entity or (current and current.id == entity.id) then return end\n    if p.castinginfo.castingid > 0 or p.castinginfo.channelingid > 0 then return end\n    if s.request == entity.id and now < s.retryAt then return end\n    d(string.format(\"[Cerberus] %s. Request %d; current %s\", reason, entity.id, tostring(current and current.id)))\n    s.request, s.retryAt = entity.id, now + 2\n    Player:SetTarget(entity.id)\nend\nlocal function endGap()\n    if not s.gap then return end\n    if now > s.gapStart then\n        api.setAutoSimPhase(s.gap, s.gapStart, now, 1)\n    else\n        api.removeAutoSimPhase(s.gap)\n    end\n    s.gap = nil\nend\nif not inside then\n    local boss = TensorCore.mGetEntity(s.boss)\n    endGap()\n    if boss and boss.targetable and boss.attackable then\n        target(boss, \"Returned from belly\")\n    end\n    s.belly = false\n    self.used = true\n    return\nend\ns.belly = true\nlocal wall, nearest\nfor _, candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid=3238}) or {}) do\n    if candidate.alive and candidate.targetable and candidate.attackable then\n        local dx, dz = candidate.pos.x - p.pos.x, candidate.pos.z - p.pos.z\n        local distance = dx * dx + dz * dz\n        if current and candidate.id == current.id then\n            wall = candidate\n            break\n        end\n        if not nearest or distance < nearest then\n            wall, nearest = candidate, distance\n        end\n    end\nend\nif wall then\n    endGap()\n    target(wall, \"Attack Stomach Wall inside belly\")\nelse\n    local add\n    for _, candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid=3235}) or {}) do\n        if candidate.alive and candidate.targetable and candidate.attackable then\n            add = candidate\n            break\n        end\n    end\n    if add then\n        endGap()\n        target(add, \"Attack remaining belly add\")\n    elseif not s.gap then\n        s.gapStart = now\n        s.gapEnd = now + 8\n        s.gap = api.addAutoSimPhase(\"FullDowntime\", now, s.gapEnd, 1)\n    elseif now > s.gapEnd - 1 then\n        s.gapEnd = now + 8\n        api.setAutoSimPhase(s.gap, s.gapStart, s.gapEnd, 1)\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"caadb089-e890-0995-962a-55dfadc8019c",
+								true,
+							},
+							
+							{
+								"c2770eb6-99e6-3967-95f6-b0d2b49befb5",
+								true,
+							},
+						},
+						name = "Track local targets and recovery",
+						uuid = "ab008a5a-bf9e-c5e7-9631-821695659b39",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 151,
+						name = "World of Darkness only",
+						uuid = "caadb089-e890-0995-962a-55dfadc8019c",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nlocal s = data.wodAutoSim\nreturn p ~= nil and p.alive and s ~= nil and s.content == 3234\n    and p.pos ~= nil and (s.belly == true or (p.pos.y < -490 and p.pos.y > -510))\n    and p.incombat",
+						dequeueIfLuaFalse = true,
+						name = "Cerberus belly or owned recovery",
+						uuid = "c2770eb6-99e6-3967-95f6-b0d2b49befb5",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The World of Darkness/AutoSim",
+			name = "[World of Darkness] Cerberus personal belly targeting and downtime",
+			throttleTime = 750,
+			timeout = 2,
+			uuid = "8d1cfb5a-be09-f2d0-85f7-f38f89266551",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "gStartCombat = false\nif AnyoneCore and AnyoneCore.Settings then\n    AnyoneCore.Settings.DutyHelper = false\n    AnyoneCore.Settings.PrepullHelper = false\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"af3c1437-ff44-e699-ad39-9725c76418c7",
+								true,
+							},
+						},
+						name = "Disable duty and prepull helpers",
+						uuid = "e9785a69-946d-7fc2-9895-2f8cf942fa58",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 151,
+						name = "World of Darkness only",
+						uuid = "af3c1437-ff44-e699-ad39-9725c76418c7",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The World of Darkness/AutoSim",
+			eventType = 11,
+			name = "[World of Darkness] Helper setup",
+			uuid = "a9ac6471-0f02-64ca-847c-aebd8a694c71",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The World of Darkness",
+			name = "Atomos",
+			uuid = "124c1c1a-d005-76ab-afda-92c38a6b6c8b",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"9f3bd1a9-39d9-888b-a5ea-a354fff6dc20",
+								true,
+							},
+							
+							{
+								"8cb60631-90ad-4a1a-8a71-626a3891cf41",
+								true,
+							},
+							
+							{
+								"21ca3ef9-fc79-c7da-88f6-d9ed2b7a407a",
+								true,
+							},
+							
+							{
+								"68500d31-3767-e102-9a5f-8fcb2fc796dd",
+								false,
+							},
+						},
+						gVar = "ACR_TensorReaper4_Hotbar_ArmsLength",
+						uuid = "b9540b9d-61ff-e0e0-946f-6c0247118bdd",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"9f3bd1a9-39d9-888b-a5ea-a354fff6dc20",
+								true,
+							},
+							
+							{
+								"8cb60631-90ad-4a1a-8a71-626a3891cf41",
+								true,
+							},
+							
+							{
+								"21ca3ef9-fc79-c7da-88f6-d9ed2b7a407a",
+								true,
+							},
+							
+							{
+								"68500d31-3767-e102-9a5f-8fcb2fc796dd",
+								true,
+							},
+						},
+						gVar = "ACR_TensorNuke4_Hotbar_Surecast",
+						uuid = "fdbf6b1b-9960-3ca7-bc47-9f5504ff7e9a",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 151,
+						name = "World of Darkness only",
+						uuid = "9f3bd1a9-39d9-888b-a5ea-a354fff6dc20",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgType = 2,
+						eventSpellID = 3416,
+						name = "Exact action",
+						uuid = "8cb60631-90ad-4a1a-8a71-626a3891cf41",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local cid = eventArgs.entityContentID\nif cid ~= 3380 and cid ~= 3381 and cid ~= 3382 then return false end\nlocal p = TensorCore.mGetPlayer()\nlocal caster = TensorCore.mGetEntity(eventArgs.entityID)\nif not p or not p.alive or not caster or math.abs(p.pos.y - caster.pos.y) > 2 then return false end\nlocal dx, dz = p.pos.x - caster.pos.x, p.pos.z - caster.pos.z\nreturn dx * dx + dz * dz <= 19 * 19",
+						dequeueIfLuaFalse = true,
+						name = "Same Atomos platform",
+						uuid = "21ca3ef9-fc79-c7da-88f6-d9ed2b7a407a",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return TensorCore.isCaster(TensorCore.mGetPlayer()) == true",
+						name = "Caster or healer",
+						uuid = "68500d31-3767-e102-9a5f-8fcb2fc796dd",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The World of Darkness/Atomos",
+			eventType = 3,
+			name = "[World of Darkness] Atomos Shockwave knockback immunity",
+			timeout = 3.5,
+			uuid = "34fef285-f17e-7e80-b9a8-ed38af92ac92",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The World of Darkness",
+			name = "Draws and callouts",
+			uuid = "f8b55505-ddb4-c7f6-9ea8-6d27a39b7873",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Alert",
+						alertDuration = 2600,
+						alertPriority = 2,
+						alertText = "Switch colors if you have a stack",
+						conditions = 
+						{
+							
+							{
+								"d124a92e-b2a5-b645-bd19-97988a61a5cf",
+								true,
+							},
+							
+							{
+								"7cf9b6b2-b19e-3eb1-8331-da9dde1db4e0",
+								true,
+							},
+							
+							{
+								"7adaaccd-53c9-0a16-8513-3a07f9446add",
+								true,
+							},
+						},
+						uuid = "3ab71168-ba63-4cf0-9537-715614995b7e",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 151,
+						name = "World of Darkness only",
+						uuid = "d124a92e-b2a5-b645-bd19-97988a61a5cf",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgType = 2,
+						eventSpellID = 3272,
+						name = "Exact action",
+						uuid = "7cf9b6b2-b19e-3eb1-8331-da9dde1db4e0",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 2,
+						eventEntityContentID = 3231,
+						name = "Exact source",
+						uuid = "7adaaccd-53c9-0a16-8513-3a07f9446add",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The World of Darkness/Draws and callouts",
+			eventType = 3,
+			name = "[World of Darkness] Double Vision",
+			uuid = "5525e54c-c66e-9a17-b115-25408add568d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Alert",
+						alertDuration = 2600,
+						alertPriority = 2,
+						alertText = "Look away",
+						conditions = 
+						{
+							
+							{
+								"a8d9273c-b03b-6159-ab1e-d5e6ff21d018",
+								true,
+							},
+							
+							{
+								"cfead275-6140-a618-af63-c7979bc5163d",
+								true,
+							},
+							
+							{
+								"99ddd141-e60d-fcca-b037-30f843642a9f",
+								true,
+							},
+						},
+						uuid = "22c485b6-ecad-ae2e-bd1b-d8dca1d51079",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 151,
+						name = "World of Darkness only",
+						uuid = "a8d9273c-b03b-6159-ab1e-d5e6ff21d018",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgType = 2,
+						eventSpellID = 3281,
+						name = "Exact action",
+						uuid = "cfead275-6140-a618-af63-c7979bc5163d",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 2,
+						eventEntityContentID = 3231,
+						name = "Exact source",
+						uuid = "99ddd141-e60d-fcca-b037-30f843642a9f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The World of Darkness/Draws and callouts",
+			eventType = 3,
+			name = "[World of Darkness] Mortal Gaze",
+			uuid = "a0b5452b-9a70-25ba-a9c6-dad482ae4000",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Alert",
+						alertDuration = 2600,
+						alertPriority = 2,
+						alertText = "Kill the heads",
+						conditions = 
+						{
+							
+							{
+								"d76ac605-f1d1-0d4f-823a-0dbdd22963f4",
+								true,
+							},
+							
+							{
+								"d94be5a2-5089-e998-9b3b-c33a91b1bdfc",
+								true,
+							},
+							
+							{
+								"7f8ac3e4-517c-cdbd-b40e-66e755d15337",
+								true,
+							},
+							
+							{
+								"75edf7f1-31a9-7e9b-9a07-b647091e775b",
+								true,
+							},
+						},
+						uuid = "18b52999-03f9-1c78-99c2-99eebec91218",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 151,
+						name = "World of Darkness only",
+						uuid = "d76ac605-f1d1-0d4f-823a-0dbdd22963f4",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgType = 2,
+						eventSpellID = 3282,
+						name = "Exact action",
+						uuid = "d94be5a2-5089-e998-9b3b-c33a91b1bdfc",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 2,
+						eventEntityContentID = 3227,
+						name = "Exact source",
+						uuid = "7f8ac3e4-517c-cdbd-b40e-66e755d15337",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return eventArgs.channelTimeMax > 24",
+						dequeueIfLuaFalse = true,
+						name = "Original Discordance cast",
+						uuid = "75edf7f1-31a9-7e9b-9a07-b647091e775b",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The World of Darkness/Draws and callouts",
+			eventType = 3,
+			name = "[World of Darkness] Discordance heads",
+			uuid = "55152a70-ac1a-1ebd-b48e-f7559227b813",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e = eventArgs\nlocal ms = math.ceil(e.startTime + e.duration * 1000 - Now())\nif ms > 0 then\n    local drawer = TensorCore.getStaticDrawer(0x603333FF, 2)\n    if e.aoeWidth > 0 then\n        drawer:addTimedRect(ms, e.x, e.y, e.z, e.aoeLength, e.aoeWidth, e.heading, 0, false, true)\n    else\n        drawer:addTimedCircle(ms, e.x, e.y, e.z, e.aoeLength, 0, false, true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms, {x=e.x,y=e.y+1,z=e.z}, 0xFFFFFFFF, true, 1.1)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"7cb9d74f-0935-f66a-bc43-a8f6265eb30e",
+								true,
+							},
+							
+							{
+								"913e77ba-ea9c-c82d-bec5-0cbeaaa7f422",
+								true,
+							},
+						},
+						name = "Draw timed AoE",
+						uuid = "05a536ce-106f-ae3d-827f-bcec99ffe95b",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 151,
+						name = "World of Darkness only",
+						uuid = "7cb9d74f-0935-f66a-bc43-a8f6265eb30e",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e = eventArgs\nreturn (e.contentID == 3234 and (e.aoeID == 3241 or e.aoeID == 3247))\n    or (e.contentID == 3240 and (e.aoeID == 3298 or e.aoeID == 3297))\n    or (e.contentID == 3227 and e.aoeID == 3288)",
+						dequeueIfLuaFalse = true,
+						name = "Verified circle or line",
+						uuid = "913e77ba-ea9c-c82d-bec5-0cbeaaa7f422",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The World of Darkness/Draws and callouts",
+			eventType = 18,
+			name = "[World of Darkness] Ground circles and line countdowns",
+			uuid = "19fc5510-3a5c-5f8b-80fe-4f7744556b1e",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "San dâ€™Oria",
+			uuid = "a33e412b-a9eb-3678-9b86-31a765b2aa17",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "San dâ€™Oria",
+			name = "Knockback safeguards",
+			uuid = "ad7616fa-bfd8-b5e8-b317-b7f268d47f97",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "The Puppets' Bunker",
+			uuid = "66495c8f-5c2d-fab2-9b1b-7da7aaa1cf40",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Puppets' Bunker",
+			name = "813P-operated Aegis Unit",
+			uuid = "8fa94167-d930-603c-8fb8-576de8b701de",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Puppets' Bunker/813P-operated Aegis Unit",
+			name = "AutoSim",
+			uuid = "aae3b63f-e691-9581-8655-9cfefedca63d",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal p=TensorCore.mGetPlayer()\nfor _,b in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=9642}) or {}) do\n if b.alive and b.targetable and b.attackable and b.pos and TensorCore.getDistance2d(p.pos,b.pos)<=35 then\n  gStartCombat=false\n  local s=AnyoneCore and AnyoneCore.Settings\n  if s then\n   if s.DutyHelper then s.DutyHelper.enabled=false end\n   if s.PrepullHelper then s.PrepullHelper.enabled=false end\n  end\n  local t=TensorCore.mGetTarget()\n  if not (t and t.alive and t.attackable and t.targetable) then\n   Player:SetTarget(b.id)\n  else\n   data.a21Target=true\n  end\n  break\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"61251606-f2a7-4c07-8ceb-17c5880cb260",
+								true,
+							},
+						},
+						name = "Aegis Unit initial target and helper setup",
+						uuid = "58477899-a9d1-b5c7-8c11-885d596e0d3b",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 then return false end\nif not p.pos or (p.pos.x+230)^2+(p.pos.z-192)^2>34^2 then return false end\nreturn p.alive and not p.incombat and not data.a21Target",
+						dequeueIfLuaFalse = true,
+						name = "Aegis Unit arena and mechanic",
+						uuid = "61251606-f2a7-4c07-8ceb-17c5880cb260",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/813P-operated Aegis Unit/AutoSim",
+			name = "Aegis Unit initial target and helper setup",
+			throttleTime = 1500,
+			uuid = "18f27833-8af8-b8fe-aec2-851e4d13b4db",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal b=TensorCore.mGetEntity(eventArgs.entityID)\nif b and b.alive then data.a21={boss=b.id,lasers={}} end",
+						conditions = 
+						{
+							
+							{
+								"650195f6-86a9-add4-847e-e71e58022c5e",
+								true,
+							},
+						},
+						name = "Aegis Unit AutoSim pull anchor",
+						uuid = "294782e0-3ffb-ad17-8a03-091df708aca6",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 then return false end\nif not p.pos or (p.pos.x+230)^2+(p.pos.z-192)^2>34^2 then return false end\nreturn eventArgs.entityContentID==9642 and eventArgs.spellID==20621 and not data.a21",
+						dequeueIfLuaFalse = true,
+						name = "Aegis Unit arena and mechanic",
+						uuid = "650195f6-86a9-add4-847e-e71e58022c5e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/813P-operated Aegis Unit/AutoSim",
+			eventType = 3,
+			name = "Aegis Unit AutoSim pull anchor",
+			uuid = "ac372620-4de9-ae4e-a442-9c93224c9fd9",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.a21\nlocal b=TensorCore.mGetEntity(s.boss)\nif not b or not b.hp or not b.alive or b.hp.percent<=0 then\n s.finished=true\n return\nend\nif not b.targetable then s.sample=nil;return end\nlocal api=TensorCore.API.TensorACR\nlocal now=api.getAutoSimTime()\nif type(now)~=\"number\" or now<=0 then return end\nlocal hp=b.hp.percent\nlocal sample=s.sample\nif not sample then s.sample={time=now,hp=hp};return end\nif now-sample.time<12 then return end\ns.sample={time=now,hp=hp}\nlocal rate=(sample.hp-hp)/(now-sample.time)\nif rate<=.05 then return end\nlocal estimate=now+math.max(3,math.min(600,hp/rate))\nif not s.estimate or math.abs(s.estimate-estimate)>=4 or now>=s.estimate-3 then\n api.setAutoSimKillTime(estimate)\n s.estimate=estimate\nend",
+						conditions = 
+						{
+							
+							{
+								"875bb126-b556-6305-9247-bd81f950afda",
+								true,
+							},
+						},
+						name = "Aegis Unit AutoSim live kill estimate",
+						uuid = "cf4d7b6d-239d-1a9a-ac6b-4d6e3599f433",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 then return false end\nif not p.pos or (p.pos.x+230)^2+(p.pos.z-192)^2>34^2 then return false end\nlocal s=data.a21\nreturn p.incombat and s~=nil and not s.finished",
+						dequeueIfLuaFalse = true,
+						name = "Aegis Unit arena and mechanic",
+						uuid = "875bb126-b556-6305-9247-bd81f950afda",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/813P-operated Aegis Unit/AutoSim",
+			name = "Aegis Unit AutoSim live kill estimate",
+			throttleTime = 1500,
+			uuid = "840b12d4-169d-9b30-97a4-094bce3b30fe",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Puppets' Bunker/813P-operated Aegis Unit",
+			name = "Draws",
+			uuid = "4b26125f-c584-7170-9038-f6a37f1850c8",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal b=TensorCore.mGetEntity(e.entityID)\nif not b or not b.pos or not e.channelTimeMax or e.channelTimeMax<=0 then return end\nlocal ms=math.floor((e.channelTimeMax+.65)*1000)\nlocal drawer=TensorCore.getStaticDrawer(0x803333FF,2)\nlocal p=b.pos\nlocal player=TensorCore.mGetPlayer()\nlocal dx,dz=player.pos.x-p.x,player.pos.z-p.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal collider=e.spellID==20604 or e.spellID==20605\nlocal unsafe=false\nlocal cones={}\nlocal angles={0,-72,-144,144,72}\nlocal widths={30,45,15,45,30}\nfor i=1,5 do\n local degrees,half=angles[i],widths[i]\n if e.spellID~=20595 then\n  degrees=(i-1)*72+(e.spellID==20605 and -90 or e.spellID==20607 and -18 or e.spellID==20608 and 18 or 0)\n  half=(e.spellID==20607 or e.spellID==20608) and 18 or 15\n end\n local heading=p.h+math.rad(degrees)\n cones[#cones+1]={heading=heading,half=math.rad(half)}\n if not collider then drawer:addTimedCone(ms,p.x,p.y,p.z,30,math.rad(2*half),heading) end\n if distance<=30 and dx*math.sin(heading)+dz*math.cos(heading)>=distance*math.cos(math.rad(half)) then\n  unsafe=true\n end\nend\nlocal function onFloor(x,z)\n local dx,dz=x+230,z-192\n local r2=dx*dx+dz*dz\n if r2<12^2 then return false end\n if r2<=23.5^2 then return true end\n return (dx+15.155)^2+(dz+8.75)^2<=10.65^2 or\n        (dx-15.155)^2+(dz+8.75)^2<=10.65^2 or\n        dx*dx+(dz-17.5)^2<=10.65^2\nend\nlocal best,bestDist\nfor degrees=0,358,2 do\n local angle=math.rad(degrees)\n for radius=13,28 do\n  local x,z=p.x+radius*math.sin(angle),p.z+radius*math.cos(angle)\n  if onFloor(x,z) then\n   local clear=true\n   for _,cone in ipairs(cones) do\n    if math.cos(angle-cone.heading)>=math.cos(cone.half+math.asin(1.45/radius)) then\n     clear=false\n     break\n    end\n   end\n   if clear then\n    local dist=(x-player.pos.x)^2+(z-player.pos.z)^2\n    if not bestDist or dist<bestDist then best,bestDist={x=x,y=player.pos.y+.05,z=z},dist end\n   end\n  end\n end\nend\nif best then\n data.a21CannonGuide={pos=best,deadline=Now()+ms,boss=e.entityID,collider=collider}\nelse\n data.a21CannonGuide=nil\nend\nlocal s=data.a21\nif s and not s.finished and unsafe then\n local api=TensorCore.API.TensorACR\n local now=api.getAutoSimTime()\n if type(now)==\"number\" and now>0 then\n  local hit=now+e.channelTimeMax\n  api.addAutoSimPhase(\"CasterDowntime\",math.max(now,hit-2),hit,1)\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"39106fb6-c704-65f8-ae50-67b65ca839fd",
+								true,
+							},
+						},
+						name = "Aegis Unit cannon cone previews",
+						uuid = "587dfd47-9f65-57a6-a3e0-65f7d83ddc68",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 then return false end\nif not p.pos or (p.pos.x+230)^2+(p.pos.z-192)^2>34^2 then return false end\nlocal id=eventArgs.spellID\nreturn eventArgs.entityContentID==9642 and (id==20595 or id==20604 or id==20605 or id==20607 or id==20608)",
+						dequeueIfLuaFalse = true,
+						name = "Aegis Unit arena and mechanic",
+						uuid = "39106fb6-c704-65f8-ae50-67b65ca839fd",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/813P-operated Aegis Unit/Draws",
+			eventType = 3,
+			name = "Aegis Unit cannon cone previews",
+			uuid = "19b8d91d-0138-1085-9cbd-186c5f50363d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal drawer=TensorCore.getStaticDrawer(0x803333FF,2)\nif e.aoeID==20620 then\n drawer:addTimedRect(ms,e.x,e.y,e.z,60,10,e.heading,0,false,true)\nelse\n drawer:addTimedCone(ms,e.x,e.y,e.z,30,math.rad(100),e.heading)\nend",
+						conditions = 
+						{
+							
+							{
+								"891dbdb5-4e86-24f4-9e4f-ab1a598fe1f3",
+								true,
+							},
+						},
+						name = "Aegis Unit Flight Path and Life’s Last Song",
+						uuid = "c694ce75-abd2-7f94-9ec7-d5d609b28fd6",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 then return false end\nif not p.pos or (p.pos.x+230)^2+(p.pos.z-192)^2>34^2 then return false end\nlocal s=data.a21\nlocal id=eventArgs.aoeID\nif not (s~=nil and not s.finished and (id==20620 or id==21427)) then return false end\nlocal boss=TensorCore.mGetEntity(s.boss)\nif not boss or not boss.alive or not boss.hp or boss.hp.percent<=0 then return false end\nreturn true",
+						dequeueIfLuaFalse = true,
+						name = "Aegis Unit arena and mechanic",
+						uuid = "891dbdb5-4e86-24f4-9e4f-ab1a598fe1f3",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/813P-operated Aegis Unit/Draws",
+			eventType = 18,
+			name = "Aegis Unit Flight Path and Life’s Last Song",
+			uuid = "c70fad06-7b3d-296c-afcc-94b79be8a63d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal id=e.markerID\nlocal ms=id==198 and 4100 or id==23 and 5100 or 5000\nlocal radius=id==198 and 3 or id==23 and 4 or 6\nlocal color=id==62 and 0xB033FF33 or 0x903333FF\nTensorCore.getStaticDrawer(color,2):addTimedCircleOnEnt(ms,e.entityID,radius,0,false,true)",
+						conditions = 
+						{
+							
+							{
+								"804f1172-8112-604e-beb2-1f451860fb89",
+								true,
+							},
+						},
+						name = "Aegis Unit tankbuster, bait and stack rings",
+						uuid = "d77b7527-892f-e4c1-a5ca-6f0341521805",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 then return false end\nif not p.pos or (p.pos.x+230)^2+(p.pos.z-192)^2>34^2 then return false end\nlocal s=data.a21\nlocal id=eventArgs.markerID\nif not (s~=nil and not s.finished and p.incombat and (id==198 or id==23 or id==62)) then return false end\nlocal boss=TensorCore.mGetEntity(s.boss)\nif not boss or not boss.alive or not boss.hp or boss.hp.percent<=0 then return false end\nreturn true",
+						dequeueIfLuaFalse = true,
+						name = "Aegis Unit arena and mechanic",
+						uuid = "804f1172-8112-604e-beb2-1f451860fb89",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/813P-operated Aegis Unit/Draws",
+			eventType = 4,
+			name = "Aegis Unit tankbuster, bait and stack rings",
+			uuid = "581e95aa-8066-396f-94c6-3e419dc91515",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal lasers=data.a21.lasers\nlocal now=Now()\nlocal x,z=e.castPosX,e.castPosZ\nfor i=#lasers,1,-1 do\n local laser=lasers[i]\n if now>=laser.expires then\n  table.remove(lasers,i)\n elseif (laser.x-x)^2+(laser.z-z)^2<=.04 then\n  if e.spellID==20626 then\n   laser.hits=laser.hits+1\n   if laser.hits>=8 then\n    if laser.draw then Argus.deleteTimedShape(laser.draw) end\n    table.remove(lasers,i)\n   end\n  end\n  return\n end\nend\nif e.spellID==20625 then\n local p=TensorCore.mGetPlayer()\n local ms=12000\n local drawer=TensorCore.getStaticDrawer(0x803333FF,2)\n local draw=drawer:addTimedCircle(ms,x,e.castPosY or p.pos.y,z,4,0,false,true)\n lasers[#lasers+1]={x=x,z=z,expires=now+ms,draw=draw,hits=0}\nend",
+						conditions = 
+						{
+							
+							{
+								"693fc401-dfca-36a9-a92e-e827a7bae301",
+								true,
+							},
+						},
+						name = "Aegis Unit repeating Surface Laser puddles",
+						uuid = "781eeb66-6171-625d-bcb3-e756dcf2af44",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 then return false end\nif not p.pos or (p.pos.x+230)^2+(p.pos.z-192)^2>34^2 then return false end\nlocal s=data.a21\nlocal id=eventArgs.spellID\nif not (s~=nil and not s.finished and eventArgs.entityContentID==9642 and (id==20625 or id==20626) and eventArgs.castPosX~=nil and eventArgs.castPosZ~=nil) then return false end\nlocal boss=TensorCore.mGetEntity(s.boss)\nif not boss or not boss.alive or not boss.hp or boss.hp.percent<=0 then return false end\nreturn true",
+						dequeueIfLuaFalse = true,
+						name = "Aegis Unit arena and mechanic",
+						uuid = "693fc401-dfca-36a9-a92e-e827a7bae301",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/813P-operated Aegis Unit/Draws",
+			eventType = 2,
+			name = "Aegis Unit repeating Surface Laser puddles",
+			uuid = "41b706bf-e53a-2d83-b9e1-0075a830e49b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal g=data.a21CannonGuide\nlocal p=TensorCore.mGetPlayer()\nlocal boss=TensorCore.mGetEntity(g.boss)\nif not boss or not boss.alive then data.a21CannonGuide=nil;return end\nlocal ms=math.min(450,math.floor(g.deadline-Now()))\nif ms<=0 then return end\nlocal spot=g.pos\nlocal drawer=TensorCore.getStaticDrawer(0xB033FF33,2)\nif not g.circle or not drawer:updateTimedCircle(g.circle,ms,spot.x,spot.y,spot.z,1.2,0,false,true) then\n g.circle=drawer:addTimedCircle(ms,spot.x,spot.y,spot.z,1.2,0,false,true)\nend\nlocal distance=TensorCore.getDistance2d(p.pos,spot)\nif distance>1.2 then\n local h=TensorCore.getHeadingToTarget(p.pos,spot)\n local length=math.max(.1,distance-.9)\n if not g.arrow or not drawer:updateTimedArrow(g.arrow,ms,p.pos.x,spot.y,p.pos.z,h,length,.4,.8,1,0,false) then\n  g.arrow=drawer:addTimedArrow(ms,p.pos.x,spot.y,p.pos.z,h,length,.4,.8,1,0,false)\n end\nelseif g.arrow then\n Argus.deleteTimedShape(g.arrow)\n g.arrow=nil\nend",
+						conditions = 
+						{
+							
+							{
+								"72fd910c-8656-6b05-a83c-7cb513c5be5d",
+								true,
+							},
+						},
+						name = "Aegis Unit closest cannon safe spot and arrow",
+						uuid = "59d5f086-dfa9-27ae-b17b-0ed9fa8c5727",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x+230)^2+(p.pos.z-192)^2>34^2 then return false end\nlocal g=data.a21CannonGuide\nreturn p.incombat and p.alive and g~=nil and not g.collider and g.deadline>Now()",
+						name = "813P-operated Aegis Unit arena and mechanic",
+						uuid = "72fd910c-8656-6b05-a83c-7cb513c5be5d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/813P-operated Aegis Unit/Draws",
+			name = "Aegis Unit closest cannon safe spot and arrow",
+			throttleTime = 125,
+			uuid = "5ee64429-f0b6-4593-8b9d-1cb570b8de07",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal g=data.a21CannonGuide\nlocal player=TensorCore.mGetPlayer()\nlocal spot=g.pos\nlocal drawer=TensorCore.getStaticDrawer(0xB033FF33,2)\nlocal flags=Argus2.RenderFlags.FLAG_WARP_TERRAIN\ndrawer:addCircle(spot.x,spot.y,spot.z,1.2,false,flags)\nif g.arrived then return end\nlocal distance=TensorCore.getDistance2d(player.pos,spot)\nif distance<=1.2 then\n g.arrived=true\n return\nend\nlocal h=TensorCore.getHeadingToTarget(player.pos,spot)\ndrawer:addArrow(player.pos.x,spot.y,player.pos.z,h,math.max(.1,distance-.9),.4,.8,1,false,flags)",
+						conditions = 
+						{
+							
+							{
+								"125639d7-c772-a76e-92be-4903169fb538",
+								true,
+							},
+						},
+						name = "Aegis Unit Collider Cannons closest safe arrow",
+						uuid = "23a6188a-4f13-f728-b587-7bff5b9967db",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local g=data.a21CannonGuide\nif not g or not g.collider or g.deadline<=Now() then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x+230)^2+(p.pos.z-192)^2>34^2 then return false end\nreturn p.alive and p.incombat",
+						name = "813P-operated Aegis Unit arena and mechanic",
+						uuid = "125639d7-c772-a76e-92be-4903169fb538",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/813P-operated Aegis Unit/Draws",
+			eventType = 12,
+			name = "Aegis Unit Collider Cannons closest safe arrow",
+			uuid = "e5a96a5a-e04c-7c83-a5b7-ce04f769e704",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Puppets' Bunker",
+			name = "Superior Flight Units",
+			uuid = "092081e4-5308-eb50-a3aa-20421a3de163",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Puppets' Bunker/Superior Flight Units",
+			name = "AutoSim",
+			uuid = "2d727c1f-cd6d-93ac-af84-03184826ced2",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal p=TensorCore.mGetPlayer()\nlocal closest,range=nil,35\nfor id=11792,11794 do\n for _,b in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=id}) or {}) do\n  if b.alive and b.targetable and b.attackable and b.pos then\n   local d=TensorCore.getDistance2d(p.pos,b.pos)\n   if d<range then closest,range=b,d end\n  end\n end\nend\nif not closest then return end\ngStartCombat=false\nlocal settings=AnyoneCore and AnyoneCore.Settings\nif settings then\n if settings.DutyHelper then settings.DutyHelper.enabled=false end\n if settings.PrepullHelper then settings.PrepullHelper.enabled=false end\nend\nlocal t=TensorCore.mGetTarget()\nif not (t and t.alive and t.targetable and t.attackable) then Player:SetTarget(closest.id) end\ndata.a23Setup=true",
+						conditions = 
+						{
+							
+							{
+								"f766f841-1468-c30a-92bb-6226c0207702",
+								true,
+							},
+						},
+						name = "Superior Flight Units pre-pull setup",
+						uuid = "c082a229-df6f-cb0b-9323-a4b9088711a9",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x+230)^2+(p.pos.z+172)^2>46^2 then return false end\nreturn p.alive and not p.incombat and not data.a23Setup",
+						name = "Superior Flight Units arena and mechanic",
+						uuid = "f766f841-1468-c30a-92bb-6226c0207702",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/Superior Flight Units/AutoSim",
+			name = "Superior Flight Units pre-pull setup",
+			throttleTime = 1250,
+			uuid = "74fc47f8-917b-6bf1-93df-020def7baffb",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal api=TensorCore.API.TensorACR\nlocal now=api.getAutoSimTime()\nif type(now)~=\"number\" or now<=0 or now>20 then return end\nlocal estimate=now+321\napi.setAutoSimKillTime(estimate)\napi.addAutoSimUncertainty(0,40)\ndata.a23={estimate=estimate}",
+						conditions = 
+						{
+							
+							{
+								"bae8699a-5c27-8ee9-9770-3aa599f97c4e",
+								true,
+							},
+						},
+						name = "Superior Flight Units AutoSim forecast",
+						uuid = "e0bbb6f5-6d2a-100a-b753-5dfd574d9434",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x+230)^2+(p.pos.z+172)^2>46^2 then return false end\nlocal e=eventArgs\nreturn p.incombat and not data.a23 and e.entityContentID>=11792 and e.entityContentID<=11794 and\n e.spellID==20390+e.entityContentID-11792",
+						name = "Superior Flight Units arena and mechanic",
+						uuid = "bae8699a-5c27-8ee9-9770-3aa599f97c4e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/Superior Flight Units/AutoSim",
+			eventType = 3,
+			name = "Superior Flight Units AutoSim forecast",
+			uuid = "e0a3ed14-5042-c85d-8a8c-080832396263",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Puppets' Bunker/Superior Flight Units",
+			name = "Draws",
+			uuid = "3bc39c64-5095-14de-a326-e72b1e772c6f",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal b=TensorCore.mGetEntity(e.entityID)\nif not b or not b.pos or not e.channelTimeMax or e.channelTimeMax<=0 then return end\nlocal id=e.spellID\nlocal sharp=id==20393 or id==20394 or id>=21777\nlocal right=id==20393 or id==20396 or (id>=21773 and id%2==1)\nlocal p=b.pos\nlocal heading=p.h+(right and -math.pi/2 or math.pi/2)\nlocal duration=e.channelTimeMax+(sharp and 1.5 or .5)\nlocal ms=math.floor(duration*1000)\nlocal draw=TensorCore.getStaticDrawer(0x503333FF,2)\nif sharp then\n draw:addTimedRect(ms,p.x,p.y,p.z,30,200,heading,0,false,true)\nelse\n local now=Now()\n local s=data.a23Swipes\n if not s or now>s.expires then\n  s={queue={},seen={},expires=now}\n  data.a23Swipes=s\n end\n local deadline=now+ms\n if not s.seen[e.entityID] then\n  s.seen[e.entityID]=true\n  s.queue[#s.queue+1]={content=e.entityContentID,hit=right and 20591 or 20592,\n   x=p.x,z=p.z,heading=heading,deadline=deadline}\n  table.sort(s.queue,function(a,b)return a.deadline<b.deadline end)\n  s.expires=math.max(s.expires,deadline+1000)\n end\nend\nlocal player=TensorCore.mGetPlayer()\nlocal dx,dz=player.pos.x-p.x,player.pos.z-p.z\nlocal forward=dx*math.sin(heading)+dz*math.cos(heading)\nlocal s=data.a23\nif s and forward>0 and (not sharp or forward<30) then\n local api=TensorCore.API.TensorACR\n local now=api.getAutoSimTime()\n if type(now)==\"number\" and now>0 then\n  local hit=now+duration\n  if not s.movementAt or math.abs(s.movementAt-hit)>1.5 then\n   s.movementAt=hit\n   api.addAutoSimPhase(\"CasterDowntime\",hit-2,hit,1)\n  end\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"95582a2e-f265-2278-8807-826a4bae559f",
+								true,
+							},
+						},
+						name = "Superior Flight Units Sharp Turn and Sliding Swipe",
+						uuid = "7158554c-8453-c44f-b9b8-83bd5f33291e",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x+230)^2+(p.pos.z+172)^2>46^2 then return false end\nlocal e=eventArgs\nlocal id=e.spellID\nreturn p.incombat and (e.entityContentID==9364 or e.entityContentID==9617 or e.entityContentID==9618) and\n ((id>=20393 and id<=20394) or (id>=20396 and id<=20397) or (id>=21773 and id<=21780))",
+						name = "Superior Flight Units arena and mechanic",
+						uuid = "95582a2e-f265-2278-8807-826a4bae559f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/Superior Flight Units/Draws",
+			eventType = 3,
+			name = "Superior Flight Units Sharp Turn and Sliding Swipe",
+			uuid = "57356f50-9663-5105-9ad1-c5d10c7d8a4b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal id=e.aoeID\nlocal radius=({[20399]=27,[20401]=10,[20402]=10,[20403]=15,[20408]=4,[20409]=8,\n [20410]=6,[20411]=6,[20416]=6,[20421]=6})[id]\nlocal draw=TensorCore.getStaticDrawer(0x703333FF,2)\nif id==20417 then\n for i=0,3 do draw:addTimedRect(ms,e.x,e.y,e.z,20,5,e.heading+i*math.pi/2,0,false,true) end\nelseif (id==20421 or id==20411) and e.targetAttach and e.targetAttach>0 then\n draw:addTimedCircleOnEnt(ms,e.targetAttach,radius,0,false,true)\nelse\n draw:addTimedCircle(ms,e.x,e.y,e.z,radius,0,false,true)\nend",
+						conditions = 
+						{
+							
+							{
+								"7af66d6f-67d4-7d7d-847e-5d8dcf7c456d",
+								true,
+							},
+						},
+						name = "Superior Flight Units missile and blast draws",
+						uuid = "b062df00-627c-b9b7-9af4-70b7e816e655",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x+230)^2+(p.pos.z+172)^2>46^2 then return false end\nlocal id=eventArgs.aoeID\nreturn p.incombat and (id==20399 or id==20401 or id==20402 or id==20403 or id==20408 or\n id==20409 or id==20410 or id==20411 or id==20416 or id==20417 or id==20421)",
+						name = "Superior Flight Units arena and mechanic",
+						uuid = "7af66d6f-67d4-7d7d-847e-5d8dcf7c456d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/Superior Flight Units/Draws",
+			eventType = 18,
+			name = "Superior Flight Units missile and blast draws",
+			uuid = "e7914219-29ee-33c3-80a5-d95003ef08ce",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal b=TensorCore.mGetEntity(e.entityID)\nlocal t=TensorCore.mGetEntity(e.targetID)\nif not b or not b.pos or not t or not t.pos then return end\nTensorCore.getStaticDrawer(0x6033FF33,2):addTimedRectOnEnt(5400,b.id,80,14,t.id,0,true,false,true)",
+						conditions = 
+						{
+							
+							{
+								"b3658d0e-2aae-809d-a118-b7aaf747d9e9",
+								true,
+							},
+						},
+						name = "Superior Flight Units High-Powered Laser stacks",
+						uuid = "17a6b99d-e747-a8b8-bf62-37379660551a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x+230)^2+(p.pos.z+172)^2>46^2 then return false end\nlocal e=eventArgs\nreturn p.incombat and e.spellID==20406 and e.targetID>0",
+						name = "Superior Flight Units arena and mechanic",
+						uuid = "b3658d0e-2aae-809d-a118-b7aaf747d9e9",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/Superior Flight Units/Draws",
+			eventType = 2,
+			name = "Superior Flight Units High-Powered Laser stacks",
+			uuid = "c51f32f0-5b3b-7238-8acf-5e6f20538733",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.a23Swipes\ntable.remove(s.queue,1)\nif #s.queue==0 then data.a23Swipes=nil end",
+						conditions = 
+						{
+							
+							{
+								"88aa9fbd-9dcf-4f3b-b466-e06172abe445",
+								true,
+							},
+						},
+						name = "Superior Flight Units advance Sliding Swipe guide",
+						uuid = "fdd7580c-84ef-f92d-b228-d64125b7765c",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x+230)^2+(p.pos.z+172)^2>46^2 then return false end\nlocal e=eventArgs\nlocal s=data.a23Swipes\nlocal first=s and s.queue[1]\nreturn first~=nil and e.entityContentID==first.content and e.spellID==first.hit",
+						name = "Superior Flight Units arena and mechanic",
+						uuid = "88aa9fbd-9dcf-4f3b-b466-e06172abe445",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/Superior Flight Units/Draws",
+			eventType = 2,
+			name = "Superior Flight Units advance Sliding Swipe guide",
+			uuid = "7fd869b7-b078-9991-9407-4cb0d90b4fce",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal wave=data.a23Swipes.queue[1]\nlocal player=TensorCore.mGetPlayer()\nlocal p=player.pos\nif not wave.solved then\n wave.solved=true\n local best,bestDistance\n local sin,cos=math.sin(wave.heading),math.cos(wave.heading)\n -- Stay inside the central floor and give the swipe edge room.\n for x=-248,-212 do\n  for z=-190,-154 do\n   if (x+230)^2+(z+172)^2<=18^2 and (x-wave.x)*sin+(z-wave.z)*cos<=-2.5 then\n    local distance=(x-p.x)^2+(z-p.z)^2\n    if not bestDistance or distance<bestDistance then\n     best,bestDistance={x=x,y=p.y+.05,z=z},distance\n    end\n   end\n  end\n end\n wave.spot=best\nend\nlocal spot=wave.spot\nif not spot then return end\nlocal drawer=TensorCore.getStaticDrawer(0xB033FF33,2)\nlocal flags=Argus2.RenderFlags.FLAG_WARP_TERRAIN\ndrawer:addCircle(spot.x,spot.y,spot.z,1.2,false,flags)\nif wave.arrived then return end\nlocal distance=TensorCore.getDistance2d(p,spot)\nif distance<=1.2 then wave.arrived=true;return end\nlocal h=TensorCore.getHeadingToTarget(p,spot)\ndrawer:addArrow(p.x,spot.y,p.z,h,math.max(.1,distance-.9),.4,.8,1,false,flags)",
+						conditions = 
+						{
+							
+							{
+								"37244f4a-5f33-bf17-937a-64bb07cc309c",
+								true,
+							},
+						},
+						name = "Superior Flight Units progressive Sliding Swipe arrow",
+						uuid = "aac6ab41-6313-483b-8283-62ecf7081cdd",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local s=data.a23Swipes\nif not s or not s.queue[1] then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x+230)^2+(p.pos.z+172)^2>46^2 then return false end\nlocal s=data.a23Swipes\nlocal wave=s and s.queue[1]\nif not wave then return false end\nlocal remaining=wave.deadline-Now()\nreturn p.incombat and p.alive and remaining<=3050 and remaining>=-700",
+						name = "Superior Flight Units arena and mechanic",
+						uuid = "37244f4a-5f33-bf17-937a-64bb07cc309c",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/Superior Flight Units/Draws",
+			eventType = 12,
+			name = "Superior Flight Units progressive Sliding Swipe arrow",
+			uuid = "99bdbf84-e25d-86bd-ab62-6a5134859ee2",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Puppets' Bunker",
+			name = "Heavy Artillery Unit",
+			uuid = "0bfc51e2-aaaa-bcf5-ba8e-5a0c02bf7a60",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Puppets' Bunker/Heavy Artillery Unit",
+			name = "AutoSim",
+			uuid = "48816f23-0e5c-c7d0-bf80-b15d875dd877",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal p=TensorCore.mGetPlayer()\nfor _,b in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=11882}) or {}) do\n if b.alive and b.targetable and b.attackable and b.pos and TensorCore.getDistance2d(p.pos,b.pos)<=35 then\n  gStartCombat=false\n  local s=AnyoneCore and AnyoneCore.Settings\n  if s then\n   if s.DutyHelper then s.DutyHelper.enabled=false end\n   if s.PrepullHelper then s.PrepullHelper.enabled=false end\n  end\n  local t=TensorCore.mGetTarget()\n  if not (t and t.alive and t.attackable and t.targetable) then Player:SetTarget(b.id) end\n  data.a24Setup=true\n  return\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"dae904f3-869b-a858-b308-2fb3798af9e1",
+								true,
+							},
+						},
+						name = "Heavy Artillery Unit pre-pull setup",
+						uuid = "0042c819-988d-9512-a6c4-cc65686a6228",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x-200)^2+(p.pos.z+100)^2>34^2 then return false end\nreturn p.alive and not p.incombat and not data.a24Setup",
+						name = "Heavy Artillery Unit arena and mechanic",
+						uuid = "dae904f3-869b-a858-b308-2fb3798af9e1",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/Heavy Artillery Unit/AutoSim",
+			name = "Heavy Artillery Unit pre-pull setup",
+			throttleTime = 1250,
+			uuid = "f17614d0-28b3-70e1-ae40-5666c15e3443",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal api=TensorCore.API.TensorACR\nlocal now=api.getAutoSimTime()\nif type(now)~=\"number\" or now<=0 or now>20 then return end\napi.setAutoSimKillTime(now+335)\napi.addAutoSimUncertainty(0,45)\ndata.a24={boss=eventArgs.entityID,moves={},towers={}}",
+						conditions = 
+						{
+							
+							{
+								"39334525-9317-8a15-966e-ec48e42ac053",
+								true,
+							},
+						},
+						name = "Heavy Artillery Unit AutoSim forecast",
+						uuid = "0182273c-8fdd-e9c5-980b-2ad4a57953e5",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x-200)^2+(p.pos.z+100)^2>34^2 then return false end\nreturn p.incombat and not data.a24 and eventArgs.entityContentID==11882 and eventArgs.spellID==20486",
+						name = "Heavy Artillery Unit arena and mechanic",
+						uuid = "39334525-9317-8a15-966e-ec48e42ac053",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/Heavy Artillery Unit/AutoSim",
+			eventType = 3,
+			name = "Heavy Artillery Unit AutoSim forecast",
+			uuid = "e9cb4d4a-b3f5-7c5a-a89c-c05b0d859a7e",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Puppets' Bunker/Heavy Artillery Unit",
+			name = "Draws",
+			uuid = "8ece3d50-8f34-bd79-be8b-c428c1d1fc9c",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal id=e.aoeID\nlocal drawer=TensorCore.getStaticDrawer(0x703333FF,2)\nlocal player=TensorCore.mGetPlayer()\nlocal x,z=e.x,e.z\nlocal dx,dz=player.pos.x-x,player.pos.z-z\nlocal r2=dx*dx+dz*dz\nlocal unsafe=false\nif id>=20614 and id<=20617 then\n x,z=200,-100\n dx,dz=player.pos.x-x,player.pos.z-z\n r2=dx*dx+dz*dz\n local low=({[20616]=14,[20617]=21})[id] or 0\n local high=({[20614]=30,[20615]=16,[20616]=23,[20617]=30})[id]\n -- Outer bands start only once the previous band has fired.\n local delay=id==20616 and math.max(0,ms-2100) or id==20617 and math.max(0,ms-2100) or 0\n local linger=id==20614 and 3700 or 2700\n if low==0 then\n  drawer:addTimedCone(ms+linger,x,e.y,z,high,math.pi/3,e.heading,delay,false,true)\n else\n  drawer:addTimedDonutCone(ms+linger,x,e.y,z,low,high,math.pi/3,e.heading,delay,false,true)\n end\n unsafe=r2>=low*low and r2<=high*high and\n  dx*math.sin(e.heading)+dz*math.cos(e.heading)>=math.sqrt(r2)*math.cos(math.pi/6)\nelseif id==20480 then\n drawer:addTimedDonut(ms,x,e.y,z,12,60,0,false,true)\n unsafe=r2>=144\nelseif id==20464 then\n drawer:addTimedRect(ms,x,e.y,z,60,12,e.heading,0,false,true)\n local forward=dx*math.sin(e.heading)+dz*math.cos(e.heading)\n unsafe=forward>=0 and forward<=60 and math.abs(dx*math.cos(e.heading)-dz*math.sin(e.heading))<=6\nelse\n local radius=id==20465 and 18 or id==20479 and 8 or 4\n drawer:addTimedCircle(ms,x,e.y,z,radius,0,false,true)\n unsafe=r2<=radius*radius\nend\nlocal s=data.a24\nif s and unsafe and (id==20479 or id==20480 or id==20464 or id==20465) then\n local api=TensorCore.API.TensorACR\n local now=api.getAutoSimTime()\n if type(now)==\"number\" and now>0 then\n  local hit=now+ms/1000\n  if not s.moves[id] or math.abs(hit-s.moves[id])>1.5 then\n   s.moves[id]=hit\n   api.addAutoSimPhase(\"CasterDowntime\",math.max(now,hit-2),hit,1)\n  end\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"c891501e-51d2-81d5-aa87-0ed00dbb5e6c",
+								true,
+							},
+						},
+						name = "Heavy Artillery Unit turret and pod hazards",
+						uuid = "bc815f40-690e-b786-80c6-c12704817b30",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x-200)^2+(p.pos.z+100)^2>34^2 then return false end\nlocal id=eventArgs.aoeID\nreturn p.incombat and (id==20614 or id==20615 or id==20616 or id==20617 or id==20476 or\n id==20479 or id==20480 or id==20464 or id==20465)",
+						name = "Heavy Artillery Unit arena and mechanic",
+						uuid = "c891501e-51d2-81d5-aa87-0ed00dbb5e6c",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/Heavy Artillery Unit/Draws",
+			eventType = 18,
+			name = "Heavy Artillery Unit turret and pod hazards",
+			uuid = "e9fdccd4-8734-01b3-bfe3-91087a3fc967",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal shapes=data.a24Voltage or {}\ndata.a24Voltage=shapes\nlocal old=shapes[e.entityID]\nif old then\n Argus.deleteTimedShape(old)\n shapes[e.entityID]=nil\nend\nif e.spellID==20484 then return end\nlocal caster=TensorCore.mGetEntity(e.entityID)\nlocal target=TensorCore.mGetEntity(e.targetID)\nif not caster or not caster.pos or not target or not target.pos then return end\nshapes[e.entityID]=TensorCore.getStaticDrawer(0x603333FF,2):addTimedConeOnEnt(7200,caster.id,60,math.pi/6,target.id,0,false,true)",
+						conditions = 
+						{
+							
+							{
+								"f15eef6e-4579-69ba-96c5-35ae291ff769",
+								true,
+							},
+						},
+						name = "Heavy Artillery Unit Unconventional Voltage cone",
+						uuid = "d2482e9c-a4b0-a860-8f79-d096a0594c62",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x-200)^2+(p.pos.z+100)^2>34^2 then return false end\nlocal e=eventArgs\nreturn e.entityContentID==9650 and ((p.incombat and e.spellID==20485 and e.targetID>0) or\n (e.spellID==20484 and data.a24Voltage and data.a24Voltage[e.entityID]~=nil))",
+						name = "Heavy Artillery Unit arena and mechanic",
+						uuid = "f15eef6e-4579-69ba-96c5-35ae291ff769",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/Heavy Artillery Unit/Draws",
+			eventType = 2,
+			name = "Heavy Artillery Unit Unconventional Voltage cone",
+			uuid = "bc929584-16ab-a3e0-84e2-b7f336c71fce",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal s=data.a24\nif not s then return end\nlocal towers=s.towers\nlocal old=towers[e.entityID]\nif e.a2==4 or e.a2==0x00040100 then\n if old and old.shape then Argus.deleteTimedShape(old.shape) end\n towers[e.entityID]=nil\n return\nend\nif old and old.expires>Now() then return end\nlocal tower=TensorCore.mGetEntity(e.entityID)\nif not tower or not tower.pos then return end\nlocal p=tower.pos\nlocal ms=20000\nlocal shape=TensorCore.getStaticDrawer(0x48FFFFFF,2):addTimedCircle(ms,p.x,p.y,p.z,3,0,false,true)\ntowers[e.entityID]={shape=shape,expires=Now()+ms}\nAnyoneCore.addWorldTextCountdown(ms,{x=p.x,y=p.y+1,z=p.z},0xFFFFFFFF,true,1.1)",
+						conditions = 
+						{
+							
+							{
+								"cfca1d3e-cc83-00ae-83a2-6bd704f01744",
+								true,
+							},
+						},
+						name = "Heavy Artillery Unit neutral Chemical Burn tower timers",
+						uuid = "5e43b37c-9b8a-1d17-825e-3dd3b1d2e2ee",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x-200)^2+(p.pos.z+100)^2>34^2 then return false end\nlocal e=eventArgs\nreturn p.incombat and e.entityContentID==0x1EB055 and\n ((e.a2==1 and e.a3==2) or e.a2==0x00010002 or (e.a2==4 and e.a3==256) or e.a2==0x00040100)",
+						name = "Heavy Artillery Unit arena and mechanic",
+						uuid = "cfca1d3e-cc83-00ae-83a2-6bd704f01744",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/Heavy Artillery Unit/Draws",
+			eventType = 19,
+			name = "Heavy Artillery Unit neutral Chemical Burn tower timers",
+			uuid = "3da758a0-3cf0-4cb3-9ffb-10ded8d440a8",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal target=TensorCore.mGetEntity(eventArgs.entityID)\nif not target or not target.pos then return end\nlocal boss\nfor _,e in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=9650}) or {}) do\n if e.alive and e.attackable and e.targetable and e.pos then boss=e;break end\nend\nif not boss then return end\nlocal queue=data.a24Tankbusters or {}\ndata.a24Tankbusters=queue\nlocal now=Now()\nwhile queue[1] and queue[1].deadline<now do table.remove(queue,1) end\nfor _,entry in ipairs(queue) do if entry.target==target.id then return end end\nlocal ms=6200\nlocal drawer=TensorCore.getStaticDrawer(0x903333FF,2)\nlocal beam=drawer:addTimedRectOnEnt(ms,boss.id,60,8,target.id,0,true,false,true)\nlocal ring=drawer:addTimedCircleOnEnt(ms,target.id,1.5,0,false,true)\nqueue[#queue+1]={beam=beam,ring=ring,target=target.id,deadline=now+ms}",
+						conditions = 
+						{
+							
+							{
+								"8c948750-e3d9-3193-a476-14554d0e8b93",
+								true,
+							},
+						},
+						name = "Heavy Artillery Unit High-Powered Laser tankbuster",
+						uuid = "07e324c2-3a5a-6362-8197-edc6aa234d8c",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x-200)^2+(p.pos.z+100)^2>34^2 then return false end\nreturn p.incombat  and eventArgs.markerID==230",
+						name = "Heavy Artillery Unit arena and mechanic",
+						uuid = "8c948750-e3d9-3193-a476-14554d0e8b93",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/Heavy Artillery Unit/Draws",
+			eventType = 4,
+			name = "Heavy Artillery Unit High-Powered Laser tankbuster",
+			uuid = "1125d9d3-aeda-98a8-996d-2e351c2efbdf",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal drawer=TensorCore.getStaticDrawer(0xC03333FF,2)\nlocal player=TensorCore.mGetPlayer()\nfor id,entry in pairs(data.puppetsEnergyOrbs) do\n if not entry.spent then\n  local orb=TensorCore.mGetEntity(id)\n  if orb and orb.pos then\n   local p=orb.pos\n   if TensorCore.getDistance2d(player.pos,p)<=55 then\n    drawer:addCircle(p.x,p.y+.10,p.z,entry.model==11908 and 1.8 or 2,false,0)\n   end\n  end\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"0badbf09-c20b-ca47-a15f-27a7bd02e05f",
+								true,
+							},
+						},
+						name = "Heavy Artillery Unit moving Energy orb rings",
+						uuid = "a5f1a2a2-b0ac-cc88-88a4-6125305ef3fc",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local orbs=data.puppetsEnergyOrbs\nif not orbs or not next(orbs) then return false end\nlocal player=TensorCore.mGetPlayer()\nif not player or player.localmapid~=917 or not player.pos then return false end\nlocal p=player.pos\nreturn (p.x-200)^2+(p.z+100)^2<=36^2 or\n (math.abs(p.x-200)<=30 and p.z>=-505 and p.z<=-275)",
+						name = "Heavy Artillery Unit arena and mechanic",
+						uuid = "0badbf09-c20b-ca47-a15f-27a7bd02e05f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/Heavy Artillery Unit/Draws",
+			eventType = 12,
+			name = "Puppets Bunker moving Energy orb ground rings",
+			uuid = "4934c340-4584-4146-8fb4-f4ca314225cc",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal entry=data.puppetsEnergyOrbs[eventArgs.entityID]\nif entry then entry.spent=true end",
+						conditions = 
+						{
+							
+							{
+								"4fae989c-9f5e-25ea-a3a4-f841d16eb0b4",
+								true,
+							},
+						},
+						name = "Heavy Artillery Unit Energy Bomb ring cleanup",
+						uuid = "757f0f4d-399b-2328-9696-13b835d39148",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal e=eventArgs\nlocal state=data.puppetsEnergyOrbs\nlocal entry=state and state[e.entityID]\nreturn p~=nil and p.localmapid==917 and e.spellID==20474 and e.entityContentID==9664 and entry~=nil and entry.model==11884",
+						name = "Heavy Artillery Unit arena and mechanic",
+						uuid = "4fae989c-9f5e-25ea-a3a4-f841d16eb0b4",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/Heavy Artillery Unit/Draws",
+			eventType = 2,
+			name = "Heavy Artillery Unit Energy Bomb ring cleanup",
+			uuid = "9f5289e3-b25f-a508-b4df-ed8bd65a1e03",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal queue=data.a24Tankbusters\nlocal now=Now()\nwhile queue[1] and queue[1].deadline<now do table.remove(queue,1) end\nlocal hit=table.remove(queue,1)\nif not hit then return end\nif hit.beam then Argus.deleteTimedShape(hit.beam) end\nif hit.ring then Argus.deleteTimedShape(hit.ring) end",
+						conditions = 
+						{
+							
+							{
+								"1e2fe740-b78b-2f90-b005-3e4e3de8ab61",
+								true,
+							},
+						},
+						name = "Heavy Artillery Unit clear resolved tankbuster indicator",
+						uuid = "bf8448e1-717a-fd22-be7e-8fc3e846a27d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x-200)^2+(p.pos.z+100)^2>34^2 then return false end\nlocal e=eventArgs\nlocal queue=data.a24Tankbusters\nreturn queue~=nil and #queue>0 and e.entityContentID==9650 and e.spellID==20482",
+						name = "Heavy Artillery Unit arena and mechanic",
+						uuid = "1e2fe740-b78b-2f90-b005-3e4e3de8ab61",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/Heavy Artillery Unit/Draws",
+			eventType = 2,
+			name = "Heavy Artillery Unit clear resolved tankbuster indicator",
+			uuid = "f68cf4e3-d202-11c0-8820-07e160c4bc01",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Puppets' Bunker",
+			name = "Trash ",
+			uuid = "d1952a6d-2af4-cca8-ab79-eece4bbef8ab",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Puppets' Bunker/Trash ",
+			name = " Energy orbs",
+			uuid = "dea2bd14-4b3e-a66b-9046-ff7bc9e4984f",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Puppets' Bunker/Trash / Energy orbs",
+			name = "Draws",
+			uuid = "e374e73d-c8b2-5775-85bf-381b481b126e",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal state=data.puppetsEnergyOrbs or {}\ndata.puppetsEnergyOrbs=state\nlocal player=TensorCore.mGetPlayer()\nlocal active={}\nfor _,orb in pairs(EntityList(\"contentid=9664\") or {}) do\n local p=orb.pos\n if p and math.abs(p.y-player.pos.y)<3 and Argus.isEntityVisible(orb) then\n  local model=Argus.getEntityModel(orb)\n  local bossOrb=model==11884 and (p.x-200)^2+(p.z+100)^2<=47^2\n  local trashOrb=model==11908 and p.z>=-505 and p.z<=-275\n  if bossOrb or trashOrb then\n   local entry=state[orb.id] or {}\n   entry.model=model\n   active[orb.id]=entry\n  end\n end\nend\ndata.puppetsEnergyOrbs=active",
+						conditions = 
+						{
+							
+							{
+								"bbd2e9ba-aad8-a208-8789-ce766c699a23",
+								true,
+							},
+						},
+						name = "Puppets Bunker trash moving Energy orb rings",
+						uuid = "e19f1fc2-f7c5-2073-9f20-a640c7078461",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player=TensorCore.mGetPlayer()\nif not player or player.localmapid~=917 or not player.pos then return false end\nlocal p=player.pos\nreturn (p.x-200)^2+(p.z+100)^2<=36^2 or\n (math.abs(p.x-200)<=30 and p.z>=-505 and p.z<=-275)",
+						name = "Puppets Bunker corridor Energy",
+						uuid = "bbd2e9ba-aad8-a208-8789-ce766c699a23",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/Trash / Energy orbs/Draws",
+			name = "Puppets Bunker scan visible Energy orbs",
+			throttleTime = 150,
+			uuid = "5b29b7a3-e20b-6551-9911-3b3572d5c03f",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal entry=data.puppetsEnergyOrbs[eventArgs.entityID]\nif entry then entry.spent=true end",
+						conditions = 
+						{
+							
+							{
+								"7c31f7a6-9882-56c3-832a-3d9356da93ce",
+								true,
+							},
+						},
+						name = "Puppets Bunker trash Energy Bomb cleanup",
+						uuid = "3f54ab8e-7365-aa13-8fd6-ad91ffe08258",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal e=eventArgs\nlocal state=data.puppetsEnergyOrbs\nlocal entry=state and state[e.entityID]\nreturn p~=nil and p.localmapid==917 and e.spellID==20658 and e.entityContentID==9664 and entry~=nil and entry.model==11908",
+						name = "Puppets Bunker corridor Energy",
+						uuid = "7c31f7a6-9882-56c3-832a-3d9356da93ce",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/Trash / Energy orbs/Draws",
+			eventType = 2,
+			name = "Puppets Bunker trash Energy Bomb cleanup",
+			uuid = "fdb2cd76-a04e-9ea1-9404-76ba66af674e",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Puppets' Bunker",
+			name = "The Compound",
+			uuid = "eae03ead-d70a-4f36-b001-eb0cd2c6147f",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Puppets' Bunker/The Compound",
+			name = "Draws",
+			uuid = "1d7ab1f9-684e-f79b-8e8f-aa2d103f1592",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal deadline=e.startTime+e.duration*1000\nif deadline<=Now() then return end\nlocal s=data.compoundSpin\nif not s or s.expires<=Now() then\n s={casts={},seen={},expires=deadline}\n data.compoundSpin=s\nend\nlocal key=string.format(\"%.2f/%.2f/%.3f/%.0f\",e.x,e.z,e.heading,deadline/100)\nif s.seen[key] then return end\ns.seen[key]=true\ns.casts[#s.casts+1]={x=e.x,z=e.z,sin=math.sin(e.heading),cos=math.cos(e.heading),deadline=deadline}\ns.expires=math.max(s.expires,deadline)\ns.dirty=true",
+						conditions = 
+						{
+							
+							{
+								"2ffd7a22-2cc7-f97f-96a7-75a7bd471e76",
+								true,
+							},
+						},
+						name = "The Compound Incongruous Spin capture",
+						uuid = "70c81759-88f2-91a0-a05a-d9ecbaae2c9a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nreturn p.incombat and eventArgs.aoeID==20914",
+						name = "The Compound arena and mechanic",
+						uuid = "2ffd7a22-2cc7-f97f-96a7-75a7bd471e76",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/The Compound/Draws",
+			eventType = 18,
+			name = "The Compound Incongruous Spin capture",
+			uuid = "59d6661a-dea6-98fd-8b0a-fa4f398ea9e2",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.compoundSpin\nlocal p=TensorCore.mGetPlayer()\nlocal now=Now()\nlocal nextHit=s.expires\nfor _,c in ipairs(s.casts) do\n if c.deadline>now then nextHit=math.min(nextHit,c.deadline) end\nend\nif s.dirty or s.nextHit~=nextHit then\n s.dirty=false\n s.nextHit=nextHit\n local x,z,best\n -- Require clearance from all remaining sweeps. If no common spot exists,\n -- solve the first wave on its own and recalculate as soon as it resolves.\n for pass=1,2 do\n  for cx=172,228,2 do\n   for cz=-728,-672,2 do\n    local safe=true\n    for _,c in ipairs(s.casts) do\n     if c.deadline>now and (pass==1 or c.deadline<=nextHit+250) then\n      local dx,dz=cx-c.x,cz-c.z\n      local forward=dx*c.sin+dz*c.cos\n      local across=dx*c.cos-dz*c.sin\n      if forward>=-2 and forward<=82 and math.abs(across)<=77 then\n       safe=false\n       break\n      end\n     end\n    end\n    if safe then\n     local distance=(cx-p.pos.x)^2+(cz-p.pos.z)^2\n     if not best or distance<best then x,z,best=cx,cz,distance end\n    end\n   end\n  end\n  if best then break end\n end\n s.destination=x and {x=x,y=p.pos.y+.05,z=z} or nil\nend\nlocal spot=s.destination\nlocal ms=math.min(450,math.floor(nextHit-now))\nif not spot or ms<=0 then\n if s.circle then Argus.deleteTimedShape(s.circle);s.circle=nil end\n if s.arrow then Argus.deleteTimedShape(s.arrow);s.arrow=nil end\n return\nend\nlocal drawer=TensorCore.getStaticDrawer(0xB033FF33,2)\nif not s.circle or not drawer:updateTimedCircle(s.circle,ms,spot.x,spot.y,spot.z,1.25,0,false,true) then\n s.circle=drawer:addTimedCircle(ms,spot.x,spot.y,spot.z,1.25,0,false,true)\nend\nlocal distance=TensorCore.getDistance2d(p.pos,spot)\nif distance>1.25 then\n local h=TensorCore.getHeadingToTarget(p.pos,spot)\n local length=math.max(.1,distance-.9)\n if not s.arrow or not drawer:updateTimedArrow(s.arrow,ms,p.pos.x,spot.y,p.pos.z,h,length,.4,.8,1,0,false) then\n  s.arrow=drawer:addTimedArrow(ms,p.pos.x,spot.y,p.pos.z,h,length,.4,.8,1,0,false)\n end\nelseif s.arrow then\n Argus.deleteTimedShape(s.arrow)\n s.arrow=nil\nend",
+						conditions = 
+						{
+							
+							{
+								"aa213839-4002-ec06-bd93-43254403487b",
+								true,
+							},
+						},
+						name = "The Compound Incongruous Spin green spot and arrow",
+						uuid = "9a184b31-dd9f-2aab-901e-af1dc8d52660",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nlocal s=data.compoundSpin\nreturn p.alive and p.incombat and s~=nil and #s.casts>=4 and s.expires>Now()",
+						name = "The Compound arena and mechanic",
+						uuid = "aa213839-4002-ec06-bd93-43254403487b",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/The Compound/Draws",
+			name = "The Compound Incongruous Spin green spot and arrow",
+			throttleTime = 125,
+			uuid = "362e5c1b-f63b-a95b-b80f-f0bee5a2cf1a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.compoundBlade\nlocal p=TensorCore.mGetPlayer()\nlocal spot=s.destination\nlocal drawer=TensorCore.getStaticDrawer(0xB033FF33,2)\nlocal flags=Argus2.RenderFlags.FLAG_WARP_TERRAIN\nif not s.prime then drawer:addCircle(spot.x,spot.y,spot.z,1.25,false,flags) end\nlocal distance=TensorCore.getDistance2d(p.pos,spot)\nif distance<=1.15 then\n s.arrived=true\nelseif distance>=1.6 then\n s.arrived=false\nend\nif not s.arrived then\n local heading=TensorCore.getHeadingToTarget(p.pos,spot)\n drawer:addArrow(p.pos.x,spot.y,p.pos.z,heading,math.max(.1,distance-.9),.4,.8,1,false,flags)\nend",
+						conditions = 
+						{
+							
+							{
+								"cc994298-347f-5787-9759-55a3d74b7634",
+								true,
+							},
+						},
+						name = "Compound Mechanical Dissection and Decapitation stable arrow",
+						uuid = "6295507a-7ffa-9155-9244-696ed1e96658",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local s=data.compoundBlade\nif not s or not (s.mechanical or s.prime) or not s.destination or (s.nextHit or 0)<=Now() then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nreturn p.alive and p.incombat",
+						name = "The Compound arena and mechanic",
+						uuid = "cc994298-347f-5787-9759-55a3d74b7634",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/The Compound/Draws",
+			eventType = 12,
+			name = "Compound Mechanical and Prime Blade stable arrows",
+			uuid = "d105771d-1d0d-672a-b5fa-584a3b27eea2",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal destination=TensorCore.mGetEntity(e.sourceEntityID)\nlocal origin=TensorCore.mGetEntity(e.newTargetID)\nif not destination or not destination.pos or not origin or not origin.pos then return end\nlocal p,q=destination.pos,origin.pos\nif math.abs(p.x-200)>28 or math.abs(p.z+700)>28 or (p.x-q.x)^2+(p.z-q.z)^2<16 then return end\ndata.a25BladeTransfer={x=p.x,z=p.z,fromX=q.x,fromZ=q.z,observed=Now()}",
+						conditions = 
+						{
+							
+							{
+								"4ae31310-c5f9-eb4f-8b1e-5881ed9a4745",
+								true,
+							},
+						},
+						name = "Compound 2P Forced Transfer destination",
+						uuid = "5edbb370-ac08-be37-a4a5-576839c93ea9",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nlocal e=eventArgs\nreturn p.incombat and e.newTetherID==116 and e.sourceEntityContentID==9644 and e.newTargetContentID==9644",
+						name = "The Compound arena and mechanic",
+						uuid = "4ae31310-c5f9-eb4f-8b1e-5881ed9a4745",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/The Compound/Draws",
+			eventType = 15,
+			name = "Compound 2P Forced Transfer destination",
+			uuid = "792ab36f-93a2-f2c5-8032-8b6b7a703e5e",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal old=data.compoundFourParts\nif old and old.shape then Argus.deleteTimedShape(old.shape) end\nlocal s={boss=eventArgs.entityID,step=1,targets={},expires=Now()+22000}\ndata.compoundFourParts=s\nfunction s.preview()\n if s.shape then Argus.deleteTimedShape(s.shape);s.shape=nil end\n local target=s.targets[s.step]\n if not target then return end\n local drawer=TensorCore.getStaticDrawer(0x903333FF,2)\n local ms=({8000,3000,5000,3000})[s.step]\n if s.step%2==1 then\n  s.shape=drawer:addTimedCircleOnEnt(ms,target,6,0,false,true)\n else\n  s.shape=drawer:addTimedRectOnEnt(ms,s.boss,85,12,target,0,true,false,true)\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"3193a868-537a-2fe3-a595-ba9932938ede",
+								true,
+							},
+						},
+						name = "Compound 2P Four Parts Resolve opener",
+						uuid = "4be180d0-f42b-5d86-b40e-30044e38fa9b",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nreturn p.incombat and eventArgs.entityContentID==9644 and eventArgs.spellID==20894",
+						name = "The Compound arena and mechanic",
+						uuid = "3193a868-537a-2fe3-a595-ba9932938ede",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/The Compound/Draws",
+			eventType = 3,
+			name = "Compound 2P Four Parts Resolve opener",
+			uuid = "c45936f2-b3a8-8c49-97cd-c8d5fd53544b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.compoundFourParts\nlocal number=eventArgs.markerID-78\nlocal target=eventArgs.entityID\nif target<=0 or s.targets[number]==target then return end\ns.targets[number]=target\nif number==s.step then s.preview() end",
+						conditions = 
+						{
+							
+							{
+								"d00a76cd-f416-cd15-af7e-2254a2287bd1",
+								true,
+							},
+						},
+						name = "Compound 2P Four Parts Resolve numbered targets",
+						uuid = "ddbefcdf-c437-223c-9275-0ed651a68117",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nlocal s=data.compoundFourParts\nlocal id=eventArgs.markerID\nreturn s~=nil and s.expires>Now() and p.incombat and id>=79 and id<=82",
+						name = "The Compound arena and mechanic",
+						uuid = "d00a76cd-f416-cd15-af7e-2254a2287bd1",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/The Compound/Draws",
+			eventType = 4,
+			name = "Compound 2P Four Parts Resolve numbered targets",
+			uuid = "3e21c90e-a786-7d3c-b8ed-688f96668916",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.compoundFourParts\ns.step=s.step+1\ns.preview()\nif s.step>4 then data.compoundFourParts=nil end",
+						conditions = 
+						{
+							
+							{
+								"53115e15-4600-8559-b11e-10d63bf0ae8e",
+								true,
+							},
+						},
+						name = "Compound 2P Four Parts Resolve advance after hit",
+						uuid = "3051a8de-1963-4020-81e1-e2d72882f946",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nlocal s=data.compoundFourParts\nlocal e=eventArgs\nreturn s~=nil and s.expires>Now() and e.entityID==s.boss and e.entityContentID==9644 and\n ((s.step%2==1 and e.spellID==20895) or (s.step%2==0 and e.spellID==20896))",
+						name = "The Compound arena and mechanic",
+						uuid = "53115e15-4600-8559-b11e-10d63bf0ae8e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/The Compound/Draws",
+			eventType = 2,
+			name = "Compound 2P Four Parts Resolve advance after hit",
+			uuid = "0e595b6f-8369-6dfa-91d3-7ef40692031e",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e.x or not e.y or not e.z or math.abs(e.x-200)>27 or math.abs(e.z+700)>27 then return end\nlocal now=Now()\nlocal s=data.a25Towers\nif not s or now>=s.expires or (now-s.spawnedAt>3000 and not s.spots[1].draw) then\n s={spots={},expires=now+17000,spawnedAt=now}\n data.a25Towers=s\nend\nfor _,tower in ipairs(s.spots) do\n if (tower.x-e.x)^2+(tower.z-e.z)^2<=1 or (tower.ox-e.x)^2+(tower.oz-e.z)^2<=1 then return end\nend\ns.spots[#s.spots+1]={x=e.x,y=e.y,z=e.z,ox=e.x,oz=e.z}",
+						conditions = 
+						{
+							
+							{
+								"d37d3e15-c4f5-43e5-8215-c2fd7427f4c1",
+								true,
+							},
+						},
+						name = "Compound 2P Energy Compression tower capture",
+						uuid = "259b96f4-fbee-d9a5-a0d3-55a88c65d756",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nreturn p.incombat and eventArgs.keyID==2011246",
+						name = "The Compound arena and mechanic",
+						uuid = "d37d3e15-c4f5-43e5-8215-c2fd7427f4c1",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/The Compound/Draws",
+			eventType = 29,
+			name = "Compound 2P Energy Compression tower capture",
+			uuid = "a90016f0-e712-0ff2-8782-f6ff777be1e1",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal pod=TensorCore.mGetEntity(e.entityID)\nif not pod or not pod.pos then return end\nlocal now=Now()\nlocal p=pod.pos\nlocal s=data.a25EarlyPods\nif not s or s.deadline<now then\n s={casters={},deadline=now+e.channelTimeMax*1000+1000}\n data.a25EarlyPods=s\nend\ns.casters[e.entityID]={x=p.x,z=p.z,h=p.h}",
+						conditions = 
+						{
+							
+							{
+								"70670fcc-8e60-9d10-9d7c-b8d20e9ce96e",
+								true,
+							},
+						},
+						name = "Compound 2P capture early R011 laser lines",
+						uuid = "ce927299-1f08-5f97-8702-ee0f2af38083",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nreturn p.incombat and eventArgs.entityContentID==9648 and eventArgs.spellID==20901",
+						name = "The Compound arena and mechanic",
+						uuid = "70670fcc-8e60-9d10-9d7c-b8d20e9ce96e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/The Compound/Draws",
+			eventType = 3,
+			name = "Compound 2P capture early R011 laser lines",
+			uuid = "5f5c0563-69c5-94e0-85dc-e864762b7e50",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal source=TensorCore.mGetEntity(e.sourceEntityID)\nlocal target=TensorCore.mGetEntity(e.newTargetID)\nif not source or not source.pos or not target or not target.pos then return end\nlocal dest,origin=source.pos,target.pos\nlocal now=Now()\nlocal towers=data.a25Towers\nif towers and towers.expires>now then\n for _,tower in ipairs(towers.spots) do\n  if (tower.ox-origin.x)^2+(tower.oz-origin.z)^2<=1 then\n   if e.newTetherID==116 then\n    tower.x,tower.y,tower.z=dest.x,dest.y,dest.z\n    towers.drawAt=now+180\n   else\n    TensorCore.getStaticDrawer(0x703333FF,2):addTimedCircle(8500,dest.x,dest.y,dest.z,8,0,false,true)\n   end\n   break\n  end\n end\nend\nlocal pods=data.a25EarlyPods\nif e.newTetherID==116 and pods and now<pods.deadline then\n for _,pod in pairs(pods.casters) do\n  if (pod.x-origin.x)^2+(pod.z-origin.z)^2<=1 then\n   pod.destination={x=dest.x,z=dest.z,h=dest.h}\n   pods.drawAt=now+180\n   break\n  end\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"0b12cfc2-8608-18c5-b259-d1d1ce5f413d",
+								true,
+							},
+						},
+						name = "Compound 2P preview Forced Transfer towers and hazards",
+						uuid = "78a1c55e-c628-c509-a22f-b1d788b88860",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nlocal e=eventArgs\nreturn p.incombat and e.sourceEntityContentID==9644 and e.newTargetContentID==9644 and\n (e.newTetherID==116 or e.newTetherID==117)",
+						name = "The Compound arena and mechanic",
+						uuid = "0b12cfc2-8608-18c5-b259-d1d1ce5f413d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/The Compound/Draws",
+			eventType = 15,
+			name = "Compound 2P preview Forced Transfer towers and hazards",
+			uuid = "df4c9fb2-c8b5-8943-9a77-7351b45a49f6",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal now=Now()\nlocal t,b=data.a25Towers,data.a25EarlyPods\nif t and t.drawAt and now>=t.drawAt and now<t.expires then\n t.drawAt=nil\n local drawer=TensorCore.getStaticDrawer(0x55FFFFFF,2)\n for _,tower in ipairs(t.spots) do\n  if tower.draw then Argus.deleteTimedShape(tower.draw) end\n  tower.draw=drawer:addTimedCircle(math.floor(t.expires-now),tower.x,tower.y,tower.z,5,0,false,true)\n end\nend\nif b and b.drawAt and now>=b.drawAt and now<b.deadline then\n b.drawAt=nil\n local s={casts={},seen={},expires=b.deadline,prime=true,dirty=true}\n for _,caster in pairs(b.casters) do\n  local p=caster.destination or caster\n  s.casts[#s.casts+1]={kind=\"rect\",inner=0,radius=7.5,length=70,x=p.x,z=p.z,\n   sin=math.sin(p.h),cos=math.cos(p.h),deadline=b.deadline}\n end\n if #s.casts>=6 then\n  local old=data.compoundBlade\n  if old and old.primeCircle then Argus.deleteTimedShape(old.primeCircle) end\n  data.compoundBlade=s\n  b.preview=true\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"0703943f-1b6d-a090-9732-eefff4e1383e",
+								true,
+							},
+						},
+						name = "Compound 2P display predicted tower and laser destinations",
+						uuid = "5560a19e-86e8-43f6-bbf2-22398cee0238",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nlocal now=Now()\nlocal t,b=data.a25Towers,data.a25EarlyPods\nreturn p.incombat and ((t and t.drawAt and now>=t.drawAt and now<t.expires) or\n (b and b.drawAt and now>=b.drawAt and now<b.deadline))",
+						name = "The Compound arena and mechanic",
+						uuid = "0703943f-1b6d-a090-9732-eefff4e1383e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/The Compound/Draws",
+			name = "Compound 2P display predicted tower and laser destinations",
+			throttleTime = 100,
+			uuid = "f2e53645-081f-1c83-9fd0-e38d1f836cde",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.a25Towers\nlocal caster=TensorCore.mGetEntity(eventArgs.entityID)\nif not caster or not caster.pos then return end\nlocal p=caster.pos\nfor i=#s.spots,1,-1 do\n local tower=s.spots[i]\n if (tower.x-p.x)^2+(tower.z-p.z)^2<=1 then\n  if tower.draw then Argus.deleteTimedShape(tower.draw) end\n  table.remove(s.spots,i)\n  break\n end\nend\nif #s.spots==0 then data.a25Towers=nil end",
+						conditions = 
+						{
+							
+							{
+								"8611dd4b-7187-e740-b1fe-3511e17804d0",
+								true,
+							},
+						},
+						name = "Compound 2P clear resolved Energy Compression towers",
+						uuid = "e191fda8-9dce-7405-bfc6-1b0bcd8383d6",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nlocal s=data.a25Towers\nlocal e=eventArgs\nreturn s and s.expires>Now() and e.entityContentID==9644 and (e.spellID==20903 or e.spellID==20904)",
+						name = "The Compound arena and mechanic",
+						uuid = "8611dd4b-7187-e740-b1fe-3511e17804d0",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/The Compound/Draws",
+			eventType = 2,
+			name = "Compound 2P clear resolved Energy Compression towers",
+			uuid = "ac47e515-a0fc-b6ef-96a0-88dc9ec32c2d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Puppets' Bunker",
+			name = "The Compound and 2P",
+			uuid = "e5e308e5-982a-d5c6-bb44-0e7af867ce96",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Puppets' Bunker/The Compound and 2P",
+			name = "AutoSim",
+			uuid = "403b0bae-0fb6-842f-823a-155dcbd90569",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal p=TensorCore.mGetPlayer()\nfor _,b in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=11972}) or {}) do\n if b.alive and b.targetable and b.attackable and b.pos and TensorCore.getDistance2d(p.pos,b.pos)<=35 then\n  gStartCombat=false\n  local settings=AnyoneCore and AnyoneCore.Settings\n  if settings then\n   if settings.DutyHelper then settings.DutyHelper.enabled=false end\n   if settings.PrepullHelper then settings.PrepullHelper.enabled=false end\n  end\n  local t=TensorCore.mGetTarget()\n  if not (t and t.alive and t.attackable and t.targetable) then Player:SetTarget(b.id) end\n  data.a25Setup=true\n  return\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"23ec1e5c-383a-9a7f-a71f-c47df0680445",
+								true,
+							},
+						},
+						name = "Compound pre-pull setup",
+						uuid = "a3bd847d-10b9-b246-8da9-6831e638a5e4",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nreturn p.alive and not p.incombat and not data.a25Setup",
+						name = "The Compound and 2P arena and mechanic",
+						uuid = "23ec1e5c-383a-9a7f-a71f-c47df0680445",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/The Compound and 2P/AutoSim",
+			name = "Compound pre-pull setup",
+			throttleTime = 1250,
+			uuid = "ed0b93e9-7206-97d8-9fce-6c8c5b277b1a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal api=TensorCore.API.TensorACR\nlocal now=api.getAutoSimTime()\nif type(now)~=\"number\" or now<=0 or now>25 then return end\nlocal offset=now-6.8\napi.setAutoSimKillTime(439+offset)\napi.addAutoSimUncertainty(0,50)\ndata.a25={down=103.7+offset,resume=160+offset}\nlocal s=data.a25\ns.gap=api.addAutoSimPhase(\"FullDowntime\",s.down,s.resume,1)\ns.stun=api.addAutoSimPhase(\"Stun\",s.down,s.resume,1)",
+						conditions = 
+						{
+							
+							{
+								"19656dc4-d337-5e03-84a4-5b4f35bcb91f",
+								true,
+							},
+						},
+						name = "Compound AutoSim opener and transition forecast",
+						uuid = "ff811909-35e1-6405-91f1-5b4fd3b4f853",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nreturn p.incombat and not data.a25 and eventArgs.entityContentID==11972 and eventArgs.spellID==20920",
+						name = "The Compound and 2P arena and mechanic",
+						uuid = "19656dc4-d337-5e03-84a4-5b4f35bcb91f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/The Compound and 2P/AutoSim",
+			eventType = 3,
+			name = "Compound AutoSim opener and transition forecast",
+			uuid = "c3973cd6-82c1-a495-94d6-de49a0dc667d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.a25\nlocal api=TensorCore.API.TensorACR\nlocal now=api.getAutoSimTime()\nif type(now)~=\"number\" or now<=s.down+10 then return end\ns.returned=true\nif s.gap then api.removeAutoSimPhase(s.gap) end\nif s.stun then api.removeAutoSimPhase(s.stun) end\napi.setAutoSimKillTime(now+279)",
+						conditions = 
+						{
+							
+							{
+								"d472a49d-9708-2917-bd45-cd50541b7d77",
+								true,
+							},
+						},
+						name = "Compound AutoSim resync on 2P return",
+						uuid = "1ae7a688-057b-3ae9-b432-5cd96c257277",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nreturn data.a25~=nil and not data.a25.returned and eventArgs.entityContentID==11974 and eventArgs.isTargetable",
+						name = "The Compound and 2P arena and mechanic",
+						uuid = "d472a49d-9708-2917-bd45-cd50541b7d77",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/The Compound and 2P/AutoSim",
+			eventType = 26,
+			name = "Compound AutoSim resync on 2P return",
+			uuid = "e0108909-c66b-2a78-a8c5-cbba736eaa42",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Puppets' Bunker/The Compound and 2P",
+			name = "Draws",
+			uuid = "a0f70e66-c3d7-1d72-8f6c-2943efe680db",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal id=eventArgs.aoeID\nlocal e=eventArgs\nlocal x,z=e.x,e.z\nif id==20890 then\n local t=data.a25BladeTransfer\n if not t then return end\n x,z=t.x,t.z\n data.a25BladeTransfer=nil\nend\nlocal deadline=e.startTime+e.duration*1000\nif deadline<=Now() then return end\nlocal s=data.compoundBlade\nif not s or s.expires<=Now() then\n s={casts={},seen={},expires=deadline}\n data.compoundBlade=s\nend\nlocal key=string.format(\"%d/%.2f/%.2f/%.3f/%.0f\",id,e.x,e.z,e.heading,deadline/100)\nif s.seen[key] then return end\ns.seen[key]=true\nlocal kind,inner,radius,length=\"rect\",0,5.5,85\nif id==20916 or id==21537 or id==20890 then\n kind,inner,radius=\"donut\",id==20916 and 7.5 or 8,43\nelseif id==21535 then\n kind,radius=\"circle\",20\nelseif id==21536 then\n radius=10\nelseif id==21531 then\n radius,length=7.5,70\nend\ns.casts[#s.casts+1]={kind=kind,inner=inner,radius=radius,length=length,x=x,z=z,sin=math.sin(e.heading),cos=math.cos(e.heading),deadline=deadline}\ns.expires=math.max(s.expires,deadline)\ns.mechanical=(id==20915 or id==20916)\ns.prime=s.prime or id==20890 or (id>=21535 and id<=21537)\nif s.mechanical or s.prime then\n if s.primeCircle then Argus.deleteTimedShape(s.primeCircle);s.primeCircle=nil end\n s.destination=nil\n s.arrived=nil\nend\ns.dirty=true",
+						conditions = 
+						{
+							
+							{
+								"727bec3f-004e-99dc-9762-defc74054d12",
+								true,
+							},
+						},
+						name = "Compound Blade geometry capture",
+						uuid = "4c05864e-bd06-e714-8e0c-c9694b4eeecf",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nlocal id=eventArgs.aoeID\nlocal pods=data.a25EarlyPods\nif id==21531 and pods and pods.preview and pods.deadline>Now() then return false end\nif id==20890 then\n local t=data.a25BladeTransfer\n local e=eventArgs\n return p.incombat and t~=nil and math.abs(t.observed-e.startTime)<=2000 and\n  (t.fromX-e.x)^2+(t.fromZ-e.z)^2<=9\nend\nreturn p.incombat and (id==20915 or id==20916 or id==21535 or id==21536 or id==21537 or id==21531)",
+						name = "The Compound and 2P arena and mechanic",
+						uuid = "727bec3f-004e-99dc-9762-defc74054d12",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/The Compound and 2P/Draws",
+			eventType = 18,
+			name = "Compound Blade geometry capture",
+			uuid = "f118062c-eb21-71f4-beb8-f8b4a1d846a2",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.compoundBlade\nlocal p=TensorCore.mGetPlayer()\nlocal now=Now()\nlocal nextHit=s.expires\nfor _,c in ipairs(s.casts) do\n if c.deadline>now then nextHit=math.min(nextHit,c.deadline) end\nend\nif s.dirty or s.nextHit~=nextHit then\n s.dirty=false\n s.nextHit=nextHit\n local x,z,best\n -- Require clearance from all remaining sweeps. If no common spot exists,\n -- solve the first wave on its own and recalculate as soon as it resolves.\n for pass=1,2 do\n  for cx=172,228,2 do\n   for cz=-728,-672,2 do\n    local safe=true\n    for _,c in ipairs(s.casts) do\n     if c.deadline>now and (pass==1 or c.deadline<=nextHit+250) then\n      local dx,dz=cx-c.x,cz-c.z\n      local forward=dx*c.sin+dz*c.cos\n      local across=dx*c.cos-dz*c.sin\n      local r2=dx*dx+dz*dz\n      if (c.kind==\"rect\" and forward>=-2 and forward<=c.length+2 and math.abs(across)<=c.radius+2)\n        or (c.kind==\"circle\" and r2<=(c.radius+2)^2)\n        or (c.kind==\"donut\" and r2>=(c.inner-2)^2 and r2<=(c.radius+2)^2) then\n       safe=false\n       break\n      end\n     end\n    end\n    if safe then\n     local distance=(cx-p.pos.x)^2+(cz-p.pos.z)^2\n     if not best or distance<best then x,z,best=cx,cz,distance end\n    end\n   end\n  end\n  if best then break end\n end\n s.destination=x and {x=x,y=p.pos.y+.05,z=z} or nil\n if s.prime then\n  if s.primeCircle then Argus.deleteTimedShape(s.primeCircle);s.primeCircle=nil end\n  s.arrived=nil\n  local spot=s.destination\n  local ms=math.floor(nextHit-now)\n  if spot and ms>0 then\n   local drawer=TensorCore.getStaticDrawer(0xB033FF33,2)\n   s.primeCircle=drawer:addTimedCircle(ms,spot.x,spot.y,spot.z,1.25,0,false,true,Argus2.RenderFlags.FLAG_WARP_TERRAIN)\n  end\n end\nend\nif s.mechanical or s.prime then return end\nlocal spot=s.destination\nlocal ms=math.min(450,math.floor(nextHit-now))\nif not spot or ms<=0 then\n if s.circle then Argus.deleteTimedShape(s.circle);s.circle=nil end\n if s.arrow then Argus.deleteTimedShape(s.arrow);s.arrow=nil end\n return\nend\nlocal drawer=TensorCore.getStaticDrawer(0xB033FF33,2)\nif not s.circle or not drawer:updateTimedCircle(s.circle,ms,spot.x,spot.y,spot.z,1.25,0,false,true) then\n s.circle=drawer:addTimedCircle(ms,spot.x,spot.y,spot.z,1.25,0,false,true)\nend\nlocal distance=TensorCore.getDistance2d(p.pos,spot)\nif distance>1.25 then\n local h=TensorCore.getHeadingToTarget(p.pos,spot)\n local length=math.max(.1,distance-.9)\n if not s.arrow or not drawer:updateTimedArrow(s.arrow,ms,p.pos.x,spot.y,p.pos.z,h,length,.4,.8,1,0,false) then\n  s.arrow=drawer:addTimedArrow(ms,p.pos.x,spot.y,p.pos.z,h,length,.4,.8,1,0,false)\n end\nelseif s.arrow then\n Argus.deleteTimedShape(s.arrow)\n s.arrow=nil\nend",
+						conditions = 
+						{
+							
+							{
+								"ae7d2c63-0b48-d26d-aa81-04504e3fc966",
+								true,
+							},
+						},
+						name = "Compound Blade green spot and arrow",
+						uuid = "44d016d1-4bfa-b16f-b254-67c4f3a78388",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nlocal s=data.compoundBlade\nreturn p.alive and p.incombat and s~=nil and #s.casts>0 and s.expires>Now()",
+						name = "The Compound and 2P arena and mechanic",
+						uuid = "ae7d2c63-0b48-d26d-aa81-04504e3fc966",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/The Compound and 2P/Draws",
+			name = "Compound Blade green spot and arrow",
+			throttleTime = 125,
+			uuid = "3baa53e1-aeff-5776-b0dd-5df3b37b8dd3",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal id=e.aoeID\nlocal radius=(id==20906 or id==20939) and 8 or 6\nlocal drawer=TensorCore.getStaticDrawer(id==20891 and 0x8033FF33 or 0x753333FF,2)\nif (id==20918 or id==20909 or id==20910 or id==20891) and e.targetAttach and e.targetAttach>0 then\n drawer:addTimedCircleOnEnt(ms,e.targetAttach,radius,0,false,true)\nelse\n drawer:addTimedCircle(ms,e.x,e.y,e.z,radius,0,false,true)\nend",
+						conditions = 
+						{
+							
+							{
+								"fcdba264-8ebe-7160-962e-70d5b400e8e9",
+								true,
+							},
+						},
+						name = "Compound Contusion, Spiral and R012 draws",
+						uuid = "c6787a0e-0833-e43a-8341-c95410c1ac88",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nlocal id=eventArgs.aoeID\nreturn p.incombat and (id==20918 or id==20919 or id==20906 or id==20939 or id==20909 or id==20910 or id==20911 or id==20891)",
+						name = "The Compound and 2P arena and mechanic",
+						uuid = "fcdba264-8ebe-7160-962e-70d5b400e8e9",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/The Compound and 2P/Draws",
+			eventType = 18,
+			name = "Compound Contusion, Spiral and R012 draws",
+			uuid = "c72bf100-632c-afae-9c29-2af01327b458",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Puppets' Bunker/The Compound and 2P",
+			name = "Mitigation",
+			uuid = "34863c5c-7eab-9bd1-9e2e-6f7a4fe70b8a",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"eabbee07-c5d6-679c-85bf-4817ff45d219",
+								true,
+							},
+						},
+						gVar = "ACR_TensorRequiem4_Hotbar_ArmsLength",
+						name = "Request Arm's Length",
+						uuid = "fdc8badb-140c-479f-a442-fbe6200655ac",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nlocal e=eventArgs\nif not p.incombat or not p.alive or e.entityContentID~=9644 or e.spellID~=20891 then return false end\nif not self.deadline then self.deadline=Now()+e.channelTimeMax*1000 end\nlocal remaining=self.deadline-Now()\nif remaining>2300 or remaining<500 then return false end\nlocal b=TensorCore.mGetEntity(e.entityID)\nreturn b~=nil and b.castinginfo~=nil and b.castinginfo.channelingid==e.spellID",
+						name = "Three Parts Disdain shortly before first hit",
+						uuid = "eabbee07-c5d6-679c-85bf-4817ff45d219",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/The Compound and 2P/Mitigation",
+			eventType = 3,
+			name = "Compound 2P - Arm's Length for Three Parts Disdain",
+			timeout = 8,
+			uuid = "55c24b6e-e667-3960-8fdc-36d29e253215",
 			version = 2,
 		},
 	}, 

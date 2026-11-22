@@ -56,3 +56,7 @@ User-approved published copies (14-11-2026): live `GeneralReactions\dungeon lol.
 ## Mount Rokkon general profile
 
 Live `GeneralReactions\Mountrokkon.lua` publishes to the existing `GeneralReactions\Mountrokkon.lua` in this checkout. User authorized publishing the current local updates on 15-11-2026. Apply the shared copy/hash/changelog/commit/push checks; this is a general profile without a timeline version. TODO: `MOUNT-ROKKON-DRAWS-TODO.md`; detailed reviews: `MOUNT-ROKKON-P1-REVIEW-2026-11-15.md` and `MOUNT-ROKKON-MOKO-REVIEW-2026-11-15.md` in the Agent workspace.
+
+## Alliance raid general profile
+
+Live `GeneralReactions\Alliance raid.lua` is authoritative and publishes to `GeneralReactions\Alliance Raid\Alliance raid.lua` in this checkout (note the differently named destination subfolder). The live `GeneralReactions\Alliance Raid\Alliance raid.lua` is an older copy; do not publish it. Apply the shared copy/hash/changelog/commit/push checks; this is a general profile without a timeline version. TODO: `ALLIANCE-RAID-AUTOSIM-TODO.md` in the Agent workspace.

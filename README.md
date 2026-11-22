@@ -381,6 +381,10 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids: General profile
 
+- Added The Puppets' Bunker coverage (draws and AutoSim forecasts for the 813P-operated Aegis Unit, Heavy Artillery Unit, Superior Flight Units and The Compound), The World of Darkness draws, callouts and AutoSim forecasts, and an Echoes of Vana'diel AutoSim setup. (22-11-2026)
+
+- Fixed the boss lookup used by the pre-pull setup and boss targeting in The Puppets' Bunker and Syrcus Tower, which could not find the boss before. (22-11-2026)
+
 - Added Syrcus Tower boss forecasts and an Amon Curtain Call countdown, organized by duty and boss. Xande forecasts retain uptime on meteor targets. (09-11-2026)
 
 - Checked Alliance raid for Optifine users: no Minion core Settings or direct file-I/O dependencies were found in its own reactions. It has no saved preference panel, so no settings file was added. Inherited dependencies require their own runtime checks. (05-11-2026)
