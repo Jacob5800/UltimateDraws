@@ -69,3 +69,7 @@ Live `GeneralReactions\Trials.lua` publishes to `GeneralReactions\Trials\Trials.
 ## Normal raids general profile
 
 Live GeneralReactions\Normal raids.lua publishes to GeneralReactions\Normal Raids\Normal raids.lua in this checkout (created 22-11-2026 with user approval). Apply the shared copy/hash/changelog/commit/push checks; this is a general profile without a timeline version. TODO: NORMAL-RAIDS-TODO.md in the Agent workspace.
+
+## Q40 general profile
+
+Live GeneralReactions\q40.lua (identical to GeneralReactions\Q40\q40.lua) publishes to the existing GeneralReactions\Q40\q40.lua in this checkout. Apply the shared copy/hash/changelog/commit/push checks; this is a general profile without a timeline version. TODO: Q40-TODO.md in the Agent workspace.
