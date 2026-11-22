@@ -206,6 +206,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UCOB: Shared AutoSim
 
+- Fixed the AutoSim forecast's boss lookup so it can track boss presence and targetability. (22-11-2026)
+
 - The Nael low-HP guard now holds Ley Lines and Triplecast through dives until Bahamut becomes targetable. (18-11-2026)
 
 - Added Nael guard debug logs for the HP lock, Bard hold requests, and Potion toggle changes. (18-11-2026)
@@ -225,6 +227,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Black Mage skips new DoTs below 10% HP on Garuda, Ifrit, and Titan. Temporary blacklist entries clear at the next boss, on wipe, or at the next countdown. (18-11-2026)
 
 ### DSR: LPDU (Beta)
+
+- Fixed a missing render flag on the optional P4 blue-orb outline label. (22-11-2026)
 
 - P1 Holiest Hallowing interrupt cues follow MT, R1, then OT. An optional P2 setting hides Dimensional Collapse cast circles for blue-marked Strength players. The P2 ice-pair partner marker is always enabled. Removed the Wrath of the Heavens opening Middle draw and callout. Added an optional personal P4 Mirage Dive countdown. Pure of Heart keeps the Skyblind drop marker at the assigned spot. Wrath calls out a clearly confirmed Liquid Heaven bait on the first drop. Removed the Check your spread position callout. Removed the overlapping Dodge north callout during P3 Geirskogul. The P4 Go west callout now says Go middle. The personal Mirage Dive countdown follows the observed dive cadence and clears after the fourth wave. Wrath of the Heavens calls Lightning spread for players with Chain Lightning. Faith Unmoving displays the assigned landing independently of the movement arrow and can recover circle partners from recorded Doom positions. Added optional P2 meteor spacing circles showing the 5.5-yalm clearance around landed comets. (21-11-2026)
 
@@ -283,6 +287,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - TOP roster-dependent draws wait for a ready Party Roster without logging repeated condition errors. (08-11-2026)
 
 ### UCOB: LPDU
+
+- Fixed the personal Earthshaker cone during Quickmarch and Tenstrike, which could not find its source. (22-11-2026)
 
 - Quickmarch and both Tenstrike Earthshaker waves show every cone. Your cone is green when clear or red when it clips a teammate. (19-11-2026)
 
