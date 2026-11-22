@@ -3243,6 +3243,256 @@ local tbl =
 			uuid = "0883a098-2fe9-c670-aa10-427066e7ce65",
 			version = 2,
 		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Mount Rokkon",
+			name = "Trash",
+			uuid = "64355708-527b-7e26-8a96-36e906749107",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\nif e.targetID and e.targetID~=0 then\n -- Twister: 8 m stack on the marked player (4 players expected), resolves when the 5 s cast ends.\n local ms=math.floor((e.channelTimeMax+0.3)*1000)\n TensorCore.getStaticDrawer(0xB033FF33,2):addTimedCircleOnEnt(ms,e.targetID,8,0,false,true)\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"e9e1c6c9-7efd-d1e0-ae52-74b537361dfd",
+								true,
+							},
+						},
+						name = "Draw 8 m stack ring on the target",
+						uuid = "ff5ff31b-1098-f518-aa35-1475d6f9a762",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or (p.localmapid~=1155 and p.localmapid~=1156) then return false end\nlocal o=jacobRokkonOptions\nif not o or not o.enabled then return false end\nreturn eventArgs.spellID==34392 or eventArgs.spellID==34410",
+						dequeueIfLuaFalse = true,
+						name = "Rokkon map and Twister",
+						uuid = "e9e1c6c9-7efd-d1e0-ae52-74b537361dfd",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Mount Rokkon/Trash",
+			eventType = 3,
+			name = "[Trash] Fuko Twister stack ring",
+			uuid = "531ec27a-b689-31c4-bf61-2f7fb24af24d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\nlocal ms=math.floor(e.startTime+(e.duration+0.3)*1000-Now())\nif ms>0 then\n TensorCore.getStaticDrawer(0x803333FF,2):addTimedCircle(ms,e.x,e.y,e.z,6,0,false,true)\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"355609d3-d828-15d8-b28e-7a2a1ec5b807",
+								true,
+							},
+						},
+						name = "Draw 6 m Tornado circle",
+						uuid = "d8882c56-aec0-1d79-ae09-a67ccf3458d8",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or (p.localmapid~=1155 and p.localmapid~=1156) then return false end\nlocal o=jacobRokkonOptions\nif not o or not o.enabled then return false end\nreturn eventArgs.aoeID==34395 or eventArgs.aoeID==34413",
+						dequeueIfLuaFalse = true,
+						name = "Rokkon map and Tornado",
+						uuid = "355609d3-d828-15d8-b28e-7a2a1ec5b807",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Mount Rokkon/Trash",
+			eventType = 18,
+			name = "[Trash] Penghou Tornado circle",
+			uuid = "bc280766-9e6b-5e6f-a95b-98d7f9be6f11",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\nlocal boss=TensorCore.mGetEntity(e.entityID)\nif not boss or not boss.pos then self.used=true;return end\nlocal id=e.spellID\nif id>=34414 then id=id-18 end\n-- 34396 backward, 34397 leftward, 34398 rightward: second cleave turns 180, +90, -90 degrees.\nlocal second=id==34396 and math.pi or id==34397 and math.pi/2 or -math.pi/2\nlocal drawer=TensorCore.getStaticDrawer(0x803333FF,2)\nlocal h=boss.pos.h\nlocal ct=e.channelTimeMax*1000\n-- Blade of the Tengu is a 50 m cone (BossMod uses 45 degrees each side, flagged unverified there).\ndrawer:addTimedCone(math.floor(ct+100),boss.pos.x,boss.pos.y,boss.pos.z,50,math.pi/2,h,0,false,true)\ndrawer:addTimedCone(math.floor(ct+1900),boss.pos.x,boss.pos.y,boss.pos.z,50,math.pi/2,h+second,0,false,true)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"d9b97f2a-71a7-f121-834d-95e4c75faadd",
+								true,
+							},
+						},
+						name = "Draw the two Blade of the Tengu cones",
+						uuid = "0f3c01d2-be1e-a61e-babc-88c50241a0d1",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or (p.localmapid~=1155 and p.localmapid~=1156) then return false end\nlocal o=jacobRokkonOptions\nif not o or not o.enabled then return false end\nlocal id=eventArgs.spellID\nreturn (id>=34396 and id<=34398) or (id>=34414 and id<=34416)",
+						dequeueIfLuaFalse = true,
+						name = "Rokkon map and Kotengu blows",
+						uuid = "d9b97f2a-71a7-f121-834d-95e4c75faadd",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Mount Rokkon/Trash",
+			eventType = 3,
+			name = "[Trash] Kotengu Blades of the Tengu cones",
+			uuid = "bb6f0a30-736a-c77c-b32b-06a6e7d4a060",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\ndata.rokkonCharge={boss=e.entityID,target=e.targetID,untilTime=Now()+math.floor((e.channelTimeMax+0.3)*1000),shapes={}}\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"7cdd90c6-e9b7-edbc-80ff-f6af1fa88c21",
+								true,
+							},
+						},
+						name = "Start charge preview window",
+						uuid = "c88f62e5-4356-3d8f-8304-7ab0171c1915",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or (p.localmapid~=1155 and p.localmapid~=1156) then return false end\nlocal o=jacobRokkonOptions\nif not o or not o.enabled then return false end\nreturn eventArgs.spellID==34387 or eventArgs.spellID==34405",
+						dequeueIfLuaFalse = true,
+						name = "Rokkon map and Barreling Smash",
+						uuid = "7cdd90c6-e9b7-edbc-80ff-f6af1fa88c21",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Mount Rokkon/Trash",
+			eventType = 3,
+			name = "[Trash] Raiko Barreling Smash charge - start",
+			uuid = "f882b24e-6ed5-2188-986e-2152849cdad3",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local st=data.rokkonCharge\nif not st then self.used=true;return end\nfor _,u in ipairs(st.shapes) do Argus.deleteTimedShape(u) end\nst.shapes={}\nlocal me=TensorCore.mGetPlayer()\nif Now()>=st.untilTime or not me or (me.localmapid~=1155 and me.localmapid~=1156) then data.rokkonCharge=nil;self.used=true;return end\nlocal boss=TensorCore.mGetEntity(st.boss)\nlocal target=TensorCore.mGetEntity(st.target)\nif boss and boss.pos and target and target.pos then\n local dist=TensorCore.getDistance2d(boss.pos,target.pos)\n -- Barreling Smash: 7 m wide charge from Raiko to its target (BossMod half-width 3.5).\n st.shapes[#st.shapes+1]=TensorCore.getStaticDrawer(0x803333FF,2):addTimedRect(250,boss.pos.x,boss.pos.y,boss.pos.z,math.max(1,dist),7,TensorCore.getHeadingToTarget(boss.pos,target.pos),0,false,true)\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"6c9acf5c-fafe-659e-867b-6533cac3c685",
+								true,
+							},
+						},
+						name = "Redraw the charge line toward the target",
+						uuid = "a0b30f99-c6fe-87d5-a31a-bca0d300f53a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return data.rokkonCharge~=nil",
+						dequeueIfLuaFalse = true,
+						name = "Charge window active",
+						uuid = "6c9acf5c-fafe-659e-867b-6533cac3c685",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Mount Rokkon/Trash",
+			name = "[Trash] Raiko Barreling Smash charge - update",
+			throttleTime = 100,
+			uuid = "939ea978-ba51-712a-b535-f41a62c650a1",
+			version = 2,
+		},
 	}, 
 	inheritedProfiles = 
 	{
