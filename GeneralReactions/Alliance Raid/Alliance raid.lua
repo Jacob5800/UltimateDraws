@@ -9863,6 +9863,55 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local api=TensorCore.API.TensorACR\nlocal names={[3302]='Dark Cloud',[3303]='Dark Storm',[3241]='Hypercharged Cloud',[3230]='Poison Slime',[3222]='Head of Fire',[3223]='Head of Ice',[3224]='Head of Thunder',[3225]='Head of Poison',[3298]='Forbidden Gate',[3252]='Sacrificed Soldier',[3228]='Prominence',[3235]='Unknown',[3236]='Wolfsbane',[3248]='Thor',[3247]='Queen Scylla'}\nlocal id=eventArgs.entityContentID\nlocal entry=api.addBlacklistEntry(id,names[id])\nif entry and (not entry.enabled or entry.allowIfTarget or entry.allowSmartDoT) then\n    entry.enabled=true\n    entry.allowIfTarget=false\n    entry.allowSmartDoT=false\n    api.saveDotBlacklist()\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"7c08618b-ec2e-a017-a6e6-0708900200e1",
+								true,
+							},
+						},
+						name = "Block direct and Smart DoT on short-lived add",
+						uuid = "922102ab-962d-2521-a11e-3ad4c33d50b0",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local c=eventArgs.entityContentID\nif not (c==3302 or c==3303 or c==3241 or c==3230 or c==3222 or c==3223 or c==3224 or c==3225 or c==3298 or c==3252 or c==3228 or c==3235 or c==3236 or c==3248 or c==3247) then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn p~=nil and p.localmapid==151",
+						dequeueIfLuaFalse = true,
+						name = "Short-lived World of Darkness add",
+						uuid = "7c08618b-ec2e-a017-a6e6-0708900200e1",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The World of Darkness/Draws and callouts",
+			eventType = 5,
+			name = "[World of Darkness] Short-lived adds - DoT blacklist",
+			timeout = 2,
+			uuid = "fa1cadd4-99f9-c8e5-8582-ede9c3039615",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "",
 			name = "San dâ€™Oria",
 			uuid = "a33e412b-a9eb-3678-9b86-31a765b2aa17",

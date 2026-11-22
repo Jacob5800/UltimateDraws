@@ -200,6 +200,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Added a DoT blacklist for short-lived adds in The World of Darkness so DoTs are not wasted on them. (22-11-2026)
 - Added The Puppets' Bunker coverage (draws and AutoSim forecasts for the 813P-operated Aegis Unit, Heavy Artillery Unit, Superior Flight Units and The Compound), The World of Darkness draws, callouts and AutoSim forecasts, and an Echoes of Vana'diel AutoSim setup. (22-11-2026)
 
 - Fixed the boss lookup used by the pre-pull setup and boss targeting in The Puppets' Bunker and Syrcus Tower, which could not find the boss before. (22-11-2026)
