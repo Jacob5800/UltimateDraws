@@ -9951,6 +9951,25 @@ local tbl =
 						version = 2.1,
 					},
 				},
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\nlocal boss=TensorCore.mGetEntity(e.entityID)\nif not boss or not boss.pos then return end\nlocal pos=boss.pos\nlocal ms=math.floor(e.channelTimeMax*1000)+1100\n-- Sullen: green behind the boss, red in front\nTensorCore.getStaticDrawer(0x8055FF55,2):addTimedCone(ms,pos.x,pos.y,pos.z,25,math.pi,pos.h+math.pi,0,false,true)\nTensorCore.getStaticDrawer(0x803333FF,2):addTimedCone(ms,pos.x,pos.y,pos.z,25,math.pi,pos.h,0,false,true)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"82708824-e44f-4e27-a465-a5e0ebfe59b8",
+								true,
+							},
+						},
+						name = "Draw green safe side and red bad side",
+						uuid = "2a19d8fc-6454-75b6-b9f0-b745b35f69bd",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
@@ -9997,6 +10016,25 @@ local tbl =
 							},
 						},
 						uuid = "5ff3691b-28c9-a6d9-8076-e03a0e588d45",
+						version = 2.1,
+					},
+				},
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\nlocal boss=TensorCore.mGetEntity(e.entityID)\nif not boss or not boss.pos then return end\nlocal pos=boss.pos\nlocal ms=math.floor(e.channelTimeMax*1000)+1100\n-- Ireful: green in front of the boss, red behind\nTensorCore.getStaticDrawer(0x8055FF55,2):addTimedCone(ms,pos.x,pos.y,pos.z,25,math.pi,pos.h,0,false,true)\nTensorCore.getStaticDrawer(0x803333FF,2):addTimedCone(ms,pos.x,pos.y,pos.z,25,math.pi,pos.h+math.pi,0,false,true)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"80fa2a1c-50bc-76a4-8862-076f1c2be7ad",
+								true,
+							},
+						},
+						name = "Draw green safe side and red bad side",
+						uuid = "cb95aeeb-f88c-c835-aa7c-f3731936cc72",
 						version = 2.1,
 					},
 				},
