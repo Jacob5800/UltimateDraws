@@ -131,6 +131,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Sil'dihn: General profile / AutoSim
 
+- Fixed the Gladiator and Zeless Gah add lookups, made three Silkie and AutoSim checks return a strict true/false, removed leftover settings-path code, and stopped the Silkie guide from scanning entities outside Sil'dihn. (22-11-2026)
+
 - Added saved Matthew/PF Fresh Puff 2 choices in the existing Silkie settings, preserving Matthew destinations by default. (14-11-2026)
 
 - Increased Gladiator’s initial Ring of Might circle opacity by 20 percentage points and added continuous countdowns to both waves of Monument towers. (14-11-2026)
