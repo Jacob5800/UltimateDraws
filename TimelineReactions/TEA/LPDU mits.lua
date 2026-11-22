@@ -1751,6 +1751,38 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							gVar = "ACR_TensorViper4_Hotbar_Feint",
+							uuid = "af2e0610-8487-2550-b34d-09883eb2cf32",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				enabled = false,
+				mechanicTime = 19.5,
+				name = "[Mit] Feint",
+				timeRange = true,
+				timelineIndex = 3,
+				timerEndOffset = -0.5,
+				timerStartOffset = -9.5,
+				uuid = "ae5bd336-df03-5937-bd1c-46aee16d33ef",
+				version = 2,
+			},
+		},
 	},
 	[6] = 
 	{
@@ -8614,6 +8646,41 @@ local tbl =
 				timerEndOffset = 1,
 				timerStartOffset = -0.9,
 				uuid = "67789805-3e34-ead5-a8a3-6511e496b259",
+				version = 2,
+			},
+		},
+	},
+	[31] = 
+	{
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							gVar = "ACR_TensorViper4_Hotbar_Feint",
+							uuid = "3f283454-5aa6-3416-b748-e0b1203d0089",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+				},
+				enabled = false,
+				mechanicTime = 115.1,
+				name = "[Mit] Feint",
+				timeRange = true,
+				timelineIndex = 31,
+				timerEndOffset = -0.5,
+				timerStartOffset = -9.5,
+				uuid = "b006d04c-2dd4-60d1-b5b6-f2ae2c098b20",
 				version = 2,
 			},
 		},
