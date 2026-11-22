@@ -5873,6 +5873,1903 @@ local tbl =
 			uuid = "0f9fc24f-f53a-1d89-b0af-22c141a39574",
 			version = 2,
 		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "The Limitless Blue (Hard)",
+			uuid = "c79e9848-ae74-9696-96ec-f715d0af8f95",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Limitless Blue (Hard)",
+			name = "Draws",
+			uuid = "24e8ddae-2689-9de3-a32b-ec15aa6b38fd",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms>0 then\n    local drawer=TensorCore.getStaticDrawer(0x803333FF,2)\n    if e.aoeID==4928 then\n        drawer:addTimedRect(ms,e.x,e.y,e.z,30,6,e.heading,0,false,true)\n    else\n        local radius=e.aoeID==4936 and 4 or 5\n        drawer:addTimedCircle(ms,e.x,e.y,e.z,radius,0,false,true)\n    end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"05062fe7-0764-fa9d-8abd-3fbeaed28892",
+								true,
+							},
+						},
+						name = "Bismarck - cast hazards",
+						uuid = "cc418541-0387-d5c4-ab14-59051cb87444",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=436 then return false end\nlocal id=eventArgs.aoeID\nreturn id==4928 or id==4929 or id==4932 or id==4935 or id==4936",
+						name = "Limitless Blue and hazards",
+						uuid = "05062fe7-0764-fa9d-8abd-3fbeaed28892",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Limitless Blue (Hard)/Draws",
+			eventType = 18,
+			name = "Bismarck - cast hazards",
+			uuid = "1d2f38ae-f863-8833-9ac2-e882097a847b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "data.bismarckClouds=data.bismarckClouds or {}\ndata.bismarckClouds[eventArgs.entityID]=true\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"50b1760e-6845-02a6-81d5-e471625295cd",
+								true,
+							},
+						},
+						name = "Bismarck - track Funnel Clouds",
+						uuid = "ef19a4ab-cb25-7222-b92d-4267db97a1f9",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=436 then return false end\nreturn eventArgs.entityContentID==3658",
+						name = "Limitless Blue and cloud spawn",
+						uuid = "50b1760e-6845-02a6-81d5-e471625295cd",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Limitless Blue (Hard)/Draws",
+			eventType = 5,
+			name = "Bismarck - track Funnel Clouds",
+			uuid = "68d7266d-97b6-9c41-b3b7-83e5b498e07e",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local clouds=data.bismarckClouds\nif clouds then clouds[eventArgs.entityID]=nil end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"78603b2b-a2f5-753b-adb3-c5afa8a8ea0c",
+								true,
+							},
+						},
+						name = "Bismarck - remove departed Funnel Clouds",
+						uuid = "50e040d7-4446-a13a-8a93-977a25371db8",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=436 then return false end\nreturn data.bismarckClouds~=nil and data.bismarckClouds[eventArgs.entityID]==true",
+						name = "Limitless Blue and cloud departure",
+						uuid = "78603b2b-a2f5-753b-adb3-c5afa8a8ea0c",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Limitless Blue (Hard)/Draws",
+			eventType = 6,
+			name = "Bismarck - remove departed Funnel Clouds",
+			uuid = "3cf5beb4-d303-dd10-8f1a-161294f8a5d1",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local clouds=data.bismarckClouds\nif not clouds then return end\nlocal drawer=TensorCore.getStaticDrawer(0x803333FF,2)\nfor id in pairs(clouds) do\n    local cloud=TensorCore.mGetEntity(id)\n    if cloud and cloud.pos then\n        drawer:addCircle(cloud.pos.x,cloud.pos.y,cloud.pos.z,4.5,false)\n    end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"0b9d1cfc-1173-0122-8ae2-5c956344cc75",
+								true,
+							},
+						},
+						name = "Bismarck - moving Funnel Cloud circles",
+						uuid = "2affd0ec-df4d-e26d-b358-ceeda6bd19ec",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=436 then return false end\nreturn data.bismarckClouds~=nil and next(data.bismarckClouds)~=nil",
+						name = "Limitless Blue and cloud circles",
+						uuid = "0b9d1cfc-1173-0122-8ae2-5c956344cc75",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Limitless Blue (Hard)/Draws",
+			eventType = 12,
+			name = "Bismarck - moving Funnel Cloud circles",
+			uuid = "051d4036-7d43-ce1b-9ead-702fbb69ce88",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\nif e.isTargetable then\n    data.bismarckBoarding=e.entityID\nelseif data.bismarckBoarding==e.entityID then\n    data.bismarckBoarding=nil\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"b7da2d2f-16fe-6173-a9c1-eeed3181cb49",
+								true,
+							},
+						},
+						name = "Bismarck - track boarding windows",
+						uuid = "3923433d-853e-38dd-9f5c-001db0df3a4b",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=436 then return false end\nlocal id=eventArgs.entityContentID\nreturn id==3656 or id==3657",
+						name = "Limitless Blue and boarding capture",
+						uuid = "b7da2d2f-16fe-6173-a9c1-eeed3181cb49",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Limitless Blue (Hard)/Draws",
+			eventType = 26,
+			name = "Bismarck - track boarding windows",
+			uuid = "e240b796-5eb4-52f6-8d23-72e2093b9a76",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local id=data.bismarckBoarding\nif not id then return end\nlocal shell=TensorCore.mGetEntity(id)\nif shell and shell.targetable then\n    local drawer=TensorCore.getStaticDrawer(0x8040FF40,2)\n    drawer:addCircle(5,0.07,-4.5,2,false)\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"39b0daa4-0eed-6e53-a0e9-ef4ab59d2264",
+								true,
+							},
+						},
+						name = "Bismarck - boarding destination",
+						uuid = "45e4ec83-c7bc-08b1-91bc-c075e7cd4fb2",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=436 then return false end\nreturn data.bismarckBoarding~=nil and not TensorCore.hasBuff(p,719)",
+						name = "Limitless Blue and boarding circle",
+						uuid = "39b0daa4-0eed-6e53-a0e9-ef4ab59d2264",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Limitless Blue (Hard)/Draws",
+			eventType = 12,
+			name = "Bismarck - boarding destination",
+			uuid = "f48c451a-66ff-6baa-860e-36d59627fbdf",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Limitless Blue (Hard)",
+			name = "AutoSim",
+			uuid = "c3e1bbf2-30d1-1763-aa37-a2f64e27e934",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local api=TensorCore.API.TensorACR\nlocal t=api.getAutoSimTime()\nif type(t)~=\"number\" or t<0 or t>20 then return end\napi.setAutoSimKillTime(273)\napi.addAutoSimUncertainty(0,40)\n-- One synced pull. Only forecast gaps with no primary attackable target.\nfor _,window in ipairs({{0,13.4},{33.5,60.7},{81.1,87.5},{166.4,188.6},{215.9,254}}) do\n    local start,finish=window[1],window[2]\n    if finish>math.max(t,start) then\n        api.addAutoSimPhase(\"FullDowntime\",math.max(t,start),finish,1)\n    end\nend\ndata.bismarckForecast=true\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"a69a50bb-b350-bea2-a083-7590de82383c",
+								true,
+							},
+						},
+						name = "Bismarck - AutoSim forecast",
+						uuid = "5f820bc3-a7a1-12d0-bc9d-202b77175383",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=436 then return false end\nreturn p.incombat==true and data.bismarckForecast~=true",
+						name = "Limitless Blue and forecast",
+						uuid = "a69a50bb-b350-bea2-a083-7590de82383c",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Limitless Blue (Hard)/AutoSim",
+			name = "Bismarck - AutoSim forecast",
+			throttleTime = 500,
+			uuid = "cb61a99f-b473-22ea-a1ba-0bdfe3b46372",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local settings=AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled=false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled=false end\nend\ngStartCombat=false\ndata.bismarckSetup=true\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"85a0042e-dfc4-755a-ada9-1a430aeac946",
+								true,
+							},
+						},
+						name = "Bismarck - disable helpers and Start Combat",
+						uuid = "a3d01e08-9bb0-8796-8d2e-c385da9b863f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=436 then return false end\nreturn data.bismarckSetup~=true",
+						name = "Limitless Blue and setup",
+						uuid = "85a0042e-dfc4-755a-ada9-1a430aeac946",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Limitless Blue (Hard)/AutoSim",
+			name = "Bismarck - disable helpers and Start Combat",
+			throttleTime = 500,
+			uuid = "dc33186c-b142-ef62-b922-e082931c1f6a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "data.bismarckOpeningSeen=true\ngStartCombat=false\nlocal current=TensorCore.mGetTarget()\nlocal target=TensorCore.mGetEntity(eventArgs.entityID)\nif target and target.alive and target.attackable and target.targetable\n    and not (current and current.alive and current.attackable and current.targetable)\n    and not ActionList:IsCasting() then\n    Player:SetTarget(target.id)\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"376be8f3-0191-c8e0-b2eb-273177b83d24",
+								true,
+							},
+						},
+						name = "Bismarck - target first Vundu",
+						uuid = "978a0f39-90bb-350c-b470-3bc399fdac29",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=436 then return false end\nreturn eventArgs.entityContentID==3652 and eventArgs.isTargetable==true and data.bismarckOpeningSeen~=true",
+						name = "Limitless Blue and opening target",
+						uuid = "376be8f3-0191-c8e0-b2eb-273177b83d24",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Limitless Blue (Hard)/AutoSim",
+			eventType = 26,
+			name = "Bismarck - target first Vundu",
+			uuid = "ec2ef419-7043-69c2-a314-78ac8bfac2ed",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player then self.used = true; return end\n\nlocal contentID = 3650\nlocal label = \"[Trials] Vapor Bubble\"\nlocal api = TensorCore.API.TensorACR\nlocal eligible = player.localmapid == 436 and (player.job == 23 or player.job == 25)\nlocal state = TrialsBismarckVaporBubbleDoT\n\n-- Restore the previous entry on leaving The Limitless Blue or changing jobs.\n-- Keep this state outside pull data so a wipe does not lose the original values.\nif state and (not eligible or state.job ~= player.job) then\n    local entry = state.entry\n    if entry.enabled and entry.allowIfTarget == false and entry.allowSmartDoT == false then\n        if state.created then\n            entry.enabled = false\n            if player.job == state.job and api.getBlacklistEntry(contentID) then\n                local current = api.addBlacklistEntry(contentID)\n                if current == entry and current.name == label then\n                    api.deleteBlacklistEntry(contentID)\n                end\n            end\n        else\n            entry.enabled = state.enabled\n            entry.allowIfTarget = state.allowIfTarget\n            entry.allowSmartDoT = state.allowSmartDoT\n        end\n    end\n    TrialsBismarckVaporBubbleDoT = nil\n    state = nil\nend\n\nif eligible and not state then\n    local supported, exists = pcall(api.getBlacklistEntry, contentID)\n    if supported then\n        local ok, entry = pcall(api.addBlacklistEntry, contentID, label)\n        if ok and entry then\n            TrialsBismarckVaporBubbleDoT = {\n                job = player.job, entry = entry, created = not exists,\n                enabled = entry.enabled, allowIfTarget = entry.allowIfTarget,\n                allowSmartDoT = entry.allowSmartDoT,\n            }\n            entry.enabled = true\n            entry.allowIfTarget = false\n            entry.allowSmartDoT = false\n        end\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"1ccb97c6-ad74-d4a7-99ae-75293265da4c",
+								true,
+							},
+						},
+						name = "Bismarck - Vapor Bubble DoT blacklist",
+						uuid = "00c7c261-092f-979c-ae14-75e8619f7809",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal state = TrialsBismarckVaporBubbleDoT\nlocal eligible = player.localmapid == 436 and (player.job == 23 or player.job == 25)\nif state then\n    return not eligible or player.job ~= state.job\nend\nreturn eligible",
+						name = "Vapor Bubble blacklist setup or cleanup",
+						uuid = "1ccb97c6-ad74-d4a7-99ae-75293265da4c",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Limitless Blue (Hard)/AutoSim",
+			name = "Bismarck - Vapor Bubble DoT blacklist",
+			throttleTime = 1000,
+			uuid = "11561984-b0c6-1269-9ca9-d7b0eb024cec",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "The Seat of Sacrifice",
+			uuid = "c7bc1aac-e00f-4a92-967a-ae5f6521cc5f",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Seat of Sacrifice",
+			name = "AutoSim",
+			uuid = "9cbfa5f5-7f49-c470-8cfb-9f980d50e18d",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return end\nif not data.seatSetup then\n    local config=AnyoneCore and AnyoneCore.Settings\n    if config then\n        if config.DutyHelper then config.DutyHelper.enabled=false end\n        if config.PrepullHelper then config.PrepullHelper.enabled=false end\n    end\n    gStartCombat=false\n    data.seatSetup=true\nend\nif not p.incombat and not data.seatTargeted and not ActionList:IsCasting() then\n    local current=TensorCore.mGetTarget()\n    if current and current.alive and current.targetable and current.attackable then\n        data.seatTargeted=true\n    else\n        for _,boss in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=9462}) or {}) do\n            if boss.alive and boss.targetable and boss.attackable then\n                gStartCombat=false\n                TensorCore.timelineLogToFile(\"[Seat] Warrior of Light target request=\"..boss.id)\n                Player:SetTarget(boss.id)\n                data.seatTargeted=true\n                break\n            end\n        end\n    end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"3ed372a2-f54d-ef60-a520-a9ff20699264",
+								true,
+							},
+						},
+						name = "[Seat] Initial target and helper setup",
+						uuid = "7fb74e5f-67eb-7a0b-9cdb-4e84e3277fde",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nreturn data.seatSetup~=true or (not p.incombat and data.seatTargeted~=true)",
+						name = "[Seat] Initial target and helper setup gate",
+						uuid = "3ed372a2-f54d-ef60-a520-a9ff20699264",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/AutoSim",
+			name = "[Seat] Initial target and helper setup",
+			throttleTime = 750,
+			uuid = "a5e509cc-7b4d-a4c6-8f15-4f1d9ed5ca40",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local api=TensorCore.API.TensorACR\nlocal t=api.getAutoSimTime()\nif type(t)~=\"number\" or t<0 or t>20 then return end\nlocal function publish(leave, cutsceneStart, cutsceneEnd, resume, finish)\n    api.clearAutoSimUncertainty()\n    api.clearAutoSimPhases(\"FullDowntime\")\n    api.clearAutoSimPhases(\"Stun\")\n    api.setAutoSimKillTime(finish)\n    api.addAutoSimUncertainty(0,40)\n    if resume>leave then api.addAutoSimPhase(\"FullDowntime\",leave,resume,1) end\n    if cutsceneEnd>cutsceneStart then api.addAutoSimPhase(\"Stun\",cutsceneStart,cutsceneEnd,1) end\nend\ndata.seatForecast={publish=publish,leave=136.907,cutsceneStart=194.235,cutsceneEnd=230.328,resume=295.688}\npublish(136.907,194.235,230.328,295.688,585)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"42a05778-9af4-9388-9691-80a636233085",
+								true,
+							},
+						},
+						name = "[Seat] AutoSim forecast and cutscene stun",
+						uuid = "67a3b20f-bfaa-2dc9-b444-97f78125735a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nreturn p.incombat==true and data.seatForecast==nil",
+						name = "[Seat] AutoSim forecast and cutscene stun gate",
+						uuid = "42a05778-9af4-9388-9691-80a636233085",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/AutoSim",
+			name = "[Seat] AutoSim forecast and cutscene stun",
+			throttleTime = 500,
+			uuid = "1cf92a20-1a1f-448c-83bd-2a7363512e7a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local f=data.seatForecast\nif not f then return end\nlocal t=TensorCore.API.TensorACR.getAutoSimTime()\nif type(t)~=\"number\" or t<90 or t>210 then return end\nlocal offset=t-145.125\nf.synced=true\nf.leave=f.leave+offset\nf.cutsceneStart=f.cutsceneStart+offset\nf.cutsceneEnd=f.cutsceneEnd+offset\nf.resume=f.resume+offset\nf.publish(f.leave,f.cutsceneStart,f.cutsceneEnd,f.resume,585+offset)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"97beb2e4-eb9d-e835-b19b-e48f7394a8f0",
+								true,
+							},
+						},
+						name = "[Seat] Sync intermission to Absolute Teleport",
+						uuid = "b1f20c53-e384-50a0-930d-f626a133ee0b",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nreturn eventArgs.spellID==21298 and eventArgs.entityContentID==9462\n    and data.seatForecast~=nil and not data.seatForecast.synced",
+						name = "[Seat] Sync intermission to Absolute Teleport gate",
+						uuid = "97beb2e4-eb9d-e835-b19b-e48f7394a8f0",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/AutoSim",
+			eventType = 2,
+			name = "[Seat] Sync intermission to Absolute Teleport",
+			uuid = "058a1f7f-f049-31e5-9405-0a6f7fda866e",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local f=data.seatForecast\nif not f or Argus.getEntityModel(eventArgs.entityID)~=11742 then return end\nlocal t=TensorCore.API.TensorACR.getAutoSimTime()\nif type(t)~=\"number\" or t<=f.cutsceneEnd then return end\nf.returned=true\nf.publish(f.leave,f.cutsceneStart,f.cutsceneEnd,t,t+289)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"98b437a8-84f7-934d-b568-f831a428907c",
+								true,
+							},
+						},
+						name = "[Seat] Sync phase two return",
+						uuid = "1563554f-6b0a-20a3-b693-b850888037ca",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nlocal e=eventArgs\nreturn e.isTargetable==true and e.entityContentID==9462 and data.seatForecast~=nil\n    and data.seatForecast.synced==true and not data.seatForecast.returned",
+						name = "[Seat] Sync phase two return gate",
+						uuid = "98b437a8-84f7-934d-b568-f831a428907c",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/AutoSim",
+			eventType = 26,
+			name = "[Seat] Sync phase two return",
+			uuid = "829c3bd7-5b30-fa5d-8b79-80f126a46918",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "-- Log 22-11: boss untargetable at 136.907 s (model 11741), 8 s before the Absolute Teleport cast ends. An earlier pull left at 115.5 s.\nlocal f=data.seatForecast\nif not f or Argus.getEntityModel(eventArgs.entityID)~=11741 then return end\nlocal t=TensorCore.API.TensorACR.getAutoSimTime()\nif type(t)~=\"number\" or t<60 or t>210 then return end\nlocal offset=t-136.907\nf.synced=true\nf.leave=f.leave+offset\nf.cutsceneStart=f.cutsceneStart+offset\nf.cutsceneEnd=f.cutsceneEnd+offset\nf.resume=f.resume+offset\nf.publish(f.leave,f.cutsceneStart,f.cutsceneEnd,f.resume,585+offset)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"9ee023f6-48ad-32a3-a92e-257a31580b99",
+								true,
+							},
+						},
+						name = "Shift the forecast to the real departure",
+						uuid = "f831cfd4-2dc5-4fbc-af4b-9932d016f6eb",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nlocal e=eventArgs\nreturn e.isTargetable==false and e.entityContentID==9462 and data.seatForecast~=nil and not data.seatForecast.synced",
+						dequeueIfLuaFalse = true,
+						name = "Boss became untargetable before the first sync",
+						uuid = "9ee023f6-48ad-32a3-a92e-257a31580b99",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/AutoSim",
+			eventType = 26,
+			name = "[Seat] Sync intermission to boss leaving",
+			uuid = "98dd491d-f4c9-0900-a2cc-2eaca49c2315",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Seat of Sacrifice",
+			name = "Motion",
+			uuid = "a1ff3ee9-9c2d-3fed-81ef-ac98f7d22fde",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\nlocal id=e.spellID\nif id==20242 or id==20243 then\n    data.seatImbued=id==20242 and \"stop\" or \"move\"\nelse\n    local mode\n    if id==20270 then mode=\"stop\"\n    elseif id==20269 then mode=\"move\"\n    else mode=data.seatImbued;data.seatImbued=nil end\n    if mode then\n        data.seatMotion={mode=mode,finish=Now()+(e.channelTimeMax+0.3)*1000}\n        AnyoneCore.Shotcall(mode==\"stop\" and \"Stop. No actions\" or \"Keep moving\",true,3,true)\n    end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"cdcd79cb-35d0-6155-8310-7b37a40dc654",
+								true,
+							},
+						},
+						name = "[Seat] Prepare stop and move cues",
+						uuid = "55050eb6-ea59-38f7-8e6f-3960c9d56ce3",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nlocal id=eventArgs.spellID\nreturn eventArgs.entityContentID==9462 and (id==20270 or id==20269 or id==20242 or id==20243 or id==20299 or id==20300)",
+						name = "[Seat] Prepare stop and move cues gate",
+						uuid = "cdcd79cb-35d0-6155-8310-7b37a40dc654",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/Motion",
+			eventType = 3,
+			name = "[Seat] Prepare stop and move cues",
+			uuid = "3f775e8d-781b-24eb-a05a-5f1c9491077b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Misc",
+						conditions = 
+						{
+							
+							{
+								"45161235-5482-018a-ab43-48c93603d717",
+								true,
+							},
+						},
+						name = "[Seat] Absolute Fire: stop movement and actions",
+						stopAllActions = true,
+						stopCasting = true,
+						uuid = "5052b431-c0f1-1207-ac24-ce741cb06f8a",
+						version = 2.1,
+					},
+				},
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local m=data.seatMotion\nif not m then return end\nSeatFireHold={releaseAt=m.finish+1400,expires=m.finish+7500}\nlocal p=TensorCore.mGetPlayer()\nif p and p.alive and p:IsMoving() then p:Stop() end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"45161235-5482-018a-ab43-48c93603d717",
+								true,
+							},
+						},
+						name = "[Seat] Absolute Fire: stop movement and actions",
+						uuid = "7559f754-1da1-f971-98c6-5358166fe3d8",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nlocal m=data.seatMotion\nif not m or m.mode~=\"stop\" or not p.alive or not p.incombat or SeatFireHold then return false end\nlocal remaining=m.finish-Now()\nreturn remaining>=-350 and remaining<=1000",
+						name = "[Seat] Absolute Fire: stop movement and actions gate",
+						uuid = "45161235-5482-018a-ab43-48c93603d717",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/Motion",
+			name = "[Seat] Absolute Fire: stop movement and actions",
+			throttleTime = 100,
+			uuid = "bc2b4a9b-6c74-c4b7-8b80-e91f78b48b00",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Misc",
+						conditions = 
+						{
+							
+							{
+								"f91881cc-8fae-b5d7-8089-1dafe7c0c379",
+								true,
+							},
+						},
+						name = "[Seat] Absolute Fire: release owned stop",
+						resumeAllActions = true,
+						uuid = "a91af1ef-6534-2b64-9313-af1b93dc44e5",
+						version = 2.1,
+					},
+				},
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "SeatFireHold=nil\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"f91881cc-8fae-b5d7-8089-1dafe7c0c379",
+								true,
+							},
+						},
+						name = "[Seat] Absolute Fire: release owned stop",
+						uuid = "84b807ae-2d0c-aa87-9836-a482cffae067",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local hold=SeatFireHold\nif not hold then return false end\nlocal p=TensorCore.mGetPlayer()\nlocal now=Now()\nreturn not p or p.localmapid~=922 or not p.alive or not p.incombat\n    or now>=hold.expires or (now>=hold.releaseAt and not TensorCore.hasBuff(p,960))",
+						name = "[Seat] Absolute Fire: release owned stop gate",
+						uuid = "f91881cc-8fae-b5d7-8089-1dafe7c0c379",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/Motion",
+			name = "[Seat] Absolute Fire: release owned stop",
+			throttleTime = 100,
+			uuid = "3860d825-3091-f24c-b398-a14ec0f11df1",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Misc",
+						conditions = 
+						{
+							
+							{
+								"8b7bae7e-cca5-98fc-b82c-9bb1a748e4b9",
+								true,
+							},
+						},
+						name = "[Seat] Absolute Fire: release on OnDeath",
+						resumeAllActions = true,
+						uuid = "0ca780a5-95dd-5caa-b854-bed2d75fce3f",
+						version = 2.1,
+					},
+				},
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "SeatFireHold=nil\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"8b7bae7e-cca5-98fc-b82c-9bb1a748e4b9",
+								true,
+							},
+						},
+						name = "[Seat] Absolute Fire: release on OnDeath",
+						uuid = "fa5bdb7b-f604-cafd-aa89-8b64de8746f0",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return SeatFireHold~=nil",
+						name = "[Seat] Absolute Fire: release on OnDeath gate",
+						uuid = "8b7bae7e-cca5-98fc-b82c-9bb1a748e4b9",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/Motion",
+			eventType = 10,
+			name = "[Seat] Absolute Fire: release on OnDeath",
+			uuid = "e62efa5c-e99b-3a07-88bf-93d17cb856a3",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Misc",
+						conditions = 
+						{
+							
+							{
+								"9ed528b3-f6a3-a8c3-a0a0-44f17ff4cc7f",
+								true,
+							},
+						},
+						name = "[Seat] Absolute Fire: release on OnWipe",
+						resumeAllActions = true,
+						uuid = "57155f44-8c84-b2ed-aea5-b1f7153c64b0",
+						version = 2.1,
+					},
+				},
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "SeatFireHold=nil\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"9ed528b3-f6a3-a8c3-a0a0-44f17ff4cc7f",
+								true,
+							},
+						},
+						name = "[Seat] Absolute Fire: release on OnWipe",
+						uuid = "475d186a-798c-8e6f-a7f5-1fa8971bc8ee",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return SeatFireHold~=nil",
+						name = "[Seat] Absolute Fire: release on OnWipe gate",
+						uuid = "9ed528b3-f6a3-a8c3-a0a0-44f17ff4cc7f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/Motion",
+			eventType = 9,
+			name = "[Seat] Absolute Fire: release on OnWipe",
+			uuid = "b981a415-278e-2695-8e48-e7c6a7c34317",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Misc",
+						conditions = 
+						{
+							
+							{
+								"a74d9ed7-988f-08c7-ab90-b8d52271d305",
+								true,
+							},
+						},
+						name = "[Seat] Absolute Fire: release on OnMapChange",
+						resumeAllActions = true,
+						uuid = "39476c5a-176c-5243-af2d-e99f0f99cde0",
+						version = 2.1,
+					},
+				},
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "SeatFireHold=nil\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"a74d9ed7-988f-08c7-ab90-b8d52271d305",
+								true,
+							},
+						},
+						name = "[Seat] Absolute Fire: release on OnMapChange",
+						uuid = "a0c2c8de-337e-a333-b3ef-01c31e76106f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return SeatFireHold~=nil",
+						name = "[Seat] Absolute Fire: release on OnMapChange gate",
+						uuid = "a74d9ed7-988f-08c7-ab90-b8d52271d305",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/Motion",
+			eventType = 11,
+			name = "[Seat] Absolute Fire: release on OnMapChange",
+			uuid = "35aa7aca-851e-3a36-a3be-26f36a8485fc",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local m=data.seatMotion\nlocal p=TensorCore.mGetPlayer()\nif not m or not p or not p.alive then return end\nm.jumped=true\nif not p:IsMoving() then\n    if ActionList:IsCasting() then ActionList:StopCasting() end\n    p:Jump()\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"0aaf4207-62c6-b066-a4dd-7f1c2cca8898",
+								true,
+							},
+						},
+						name = "[Seat] Absolute Blizzard: one jump near resolution",
+						uuid = "495980c1-da3b-d516-a228-c17f68195f3d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nlocal m=data.seatMotion\nif not m or m.mode~=\"move\" or m.jumped or not p.alive or not p.incombat or SeatFireHold then return false end\nlocal remaining=m.finish-Now()\nreturn remaining>0 and remaining<=475",
+						name = "[Seat] Absolute Blizzard: one jump near resolution gate",
+						uuid = "0aaf4207-62c6-b066-a4dd-7f1c2cca8898",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/Motion",
+			name = "[Seat] Absolute Blizzard: one jump near resolution",
+			throttleTime = 80,
+			uuid = "5344c4ea-54f5-a8d4-b61b-a1406fddd032",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "data.seatMotion=nil\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"b61d76bf-f88d-b122-95d1-77b42e28d773",
+								true,
+							},
+						},
+						name = "[Seat] Clear resolved Fire or Blizzard cue",
+						uuid = "c304a943-150f-d0dc-85d2-ddcc1d457c3b",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nlocal id=eventArgs.spellID\nreturn eventArgs.entityContentID==9462 and (id==20238 or id==20239) and data.seatMotion~=nil",
+						name = "[Seat] Clear resolved Fire or Blizzard cue gate",
+						uuid = "b61d76bf-f88d-b122-95d1-77b42e28d773",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/Motion",
+			eventType = 2,
+			name = "[Seat] Clear resolved Fire or Blizzard cue",
+			uuid = "208bfe9d-14c2-9411-a897-eddfb755e0f2",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Seat of Sacrifice",
+			name = "Mitigations",
+			uuid = "61837165-4ce2-c1e3-a486-7f948ef9a366",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"0e0edb50-076b-96fa-8b46-fac659888e30",
+								true,
+							},
+						},
+						gVar = "ACR_TensorWeeb4_Hotbar_ArmsLength",
+						name = "[Seat] Suiton: San Arm’s Length",
+						uuid = "43e5ca1e-f469-12fc-8b87-7d1f374d2b96",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "data.seatSuiton=nil\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"0e0edb50-076b-96fa-8b46-fac659888e30",
+								true,
+							},
+						},
+						name = "Clear the scheduled Arm's Length request",
+						uuid = "b517beec-4eb1-7bab-af3f-d634d79b915f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 or not p.alive then return false end\nlocal s=data.seatSuiton\nif not s then return false end\nlocal n=Now()\nreturn n>=s.fireAt and n<s.expires",
+						dequeueIfLuaFalse = true,
+						name = "[Seat] Suiton: San Arm’s Length due",
+						uuid = "0e0edb50-076b-96fa-8b46-fac659888e30",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/Mitigations",
+			name = "[Seat] Suiton: San Arm’s Length",
+			throttleTime = 100,
+			uuid = "6696ce57-dea2-d39e-ba70-d22e0ba6dcfa",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "-- Log 22-11: channel 5.7 s, knockback damage 5.985 s after the channel start. Arm's Length lasts 6 s, so requesting it at channel start would end it at the hit.\nlocal n=Now()\nlocal resolve=n+eventArgs.channelTimeMax*1000+285\ndata.seatSuiton={fireAt=resolve-2300,expires=resolve+400}\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"b4adc4e5-6f4d-a043-9dfa-4ec420b9ff60",
+								true,
+							},
+						},
+						name = "Schedule Arm's Length 2.3 s before the knockback",
+						uuid = "a2d3e3b4-3158-3d24-82c5-e5f88666e2e3",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nreturn eventArgs.spellID==20252 and eventArgs.entityContentID==9465",
+						dequeueIfLuaFalse = true,
+						name = "Suiton: San channel",
+						uuid = "b4adc4e5-6f4d-a043-9dfa-4ec420b9ff60",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/Mitigations",
+			eventType = 3,
+			name = "[Seat] Suiton: San schedule Arm’s Length",
+			uuid = "767bb0e7-980d-d0b3-b32c-536688ea065f",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Seat of Sacrifice",
+			name = "Draws",
+			uuid = "d4c15bbb-2271-60fb-ae61-60f94aba02bd",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then self.used=true;return end\nlocal id=e.aoeID\nlocal drawer=TensorCore.getStaticDrawer(id==20253 and 0x8055FF55 or 0x803333FF,2)\nif id==20241 or id==20300 then\n    drawer:addTimedDonut(ms,e.x,e.y,e.z,5,60,0,false,true)\nelseif id==20259 or id==20260 then\n    drawer:addTimedCone(ms,e.x,e.y,e.z,60,math.rad(id==20259 and 45 or 90),e.heading,0,false,true)\nelseif id==20261 then\n    drawer:addTimedRect(ms,e.x,e.y,e.z,40,20,e.heading,0,false,true)\nelseif id==20251 or id==20253 then\n    if e.targetAttach and e.targetAttach>0 then\n        drawer:addTimedCircleOnEnt(ms,e.targetAttach,id==20251 and 20 or 6,0,false,true)\n    end\nelse\n    drawer:addTimedCircle(ms,e.x,e.y,e.z,e.aoeLength,0,false,true)\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"0e10be5b-6352-afc9-9dd9-a6b206c03a1f",
+								true,
+							},
+						},
+						name = "[Seat] Boss and Spectral hazard telegraphs",
+						uuid = "132e9395-fd71-eb41-b82e-2660fb8e187e",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nlocal id=eventArgs.aoeID\nreturn id==20240 or id==20241 or id==20299 or id==20300 or id==20251 or id==20253\n    or id==20254 or id==20259 or id==20260 or id==20261 or id==20266",
+						name = "[Seat] Boss and Spectral hazard telegraphs gate",
+						uuid = "0e10be5b-6352-afc9-9dd9-a6b206c03a1f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/Draws",
+			eventType = 18,
+			name = "[Seat] Boss and Spectral hazard telegraphs",
+			uuid = "001cd65e-244b-37d7-bd0c-2246e3868056",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\nlocal stack=e.markerID==161\nlocal drawer=TensorCore.getStaticDrawer(stack and 0x8055FF55 or 0x803333FF,2)\ndrawer:addTimedCircleOnEnt(5100,e.entityID,stack and 6 or 20,0,false,true)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"bd1bd61c-d5a4-c7cd-8454-bb0585f916d6",
+								true,
+							},
+						},
+						name = "[Seat] Absolute Holy stack and Deluge bait",
+						uuid = "d8d3f6e1-636f-64f7-966a-dc45f7cbdac3",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nreturn eventArgs.markerID==161 or eventArgs.markerID==87",
+						name = "[Seat] Absolute Holy stack and Deluge bait gate",
+						uuid = "bd1bd61c-d5a4-c7cd-8454-bb0585f916d6",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/Draws",
+			eventType = 4,
+			name = "[Seat] Absolute Holy stack and Deluge bait",
+			uuid = "005f60bc-94ce-c00e-9e63-6553e7d817b0",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\nlocal ms=math.floor(e.channelTimeMax*1000)\nif ms>0 then\n    TensorCore.getStaticDrawer(0x803333FF,2):addTimedCircleOnEnt(ms,e.targetID,5,0,false,true)\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"9d2191c9-4984-308e-8865-285bc1c376a7",
+								true,
+							},
+						},
+						name = "[Seat] The Bitter End tankbuster",
+						uuid = "e4dbdf0b-ebc5-cc28-bde8-41a5702d3a3f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nreturn eventArgs.spellID==20264 and eventArgs.entityContentID==9462 and eventArgs.targetID>0",
+						name = "[Seat] The Bitter End tankbuster gate",
+						uuid = "9d2191c9-4984-308e-8865-285bc1c376a7",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/Draws",
+			eventType = 3,
+			name = "[Seat] The Bitter End tankbuster",
+			uuid = "64a204ec-d5fc-03fb-9053-298fcfd900e7",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "AnyoneCore.Shotcall(\"Tank limit break\",true,4,true)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"f0c77a2e-08c2-3cec-b7e8-2dbe2faddd3a",
+								true,
+							},
+						},
+						name = "[Seat] Ultimate Crossover tank LB cue",
+						uuid = "8d5d51e0-7679-7a7f-b456-6fdb2597d0cc",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nreturn eventArgs.spellID==21628 and eventArgs.entityContentID==9462\n    and (p.job==19 or p.job==21 or p.job==32 or p.job==37)",
+						name = "[Seat] Ultimate Crossover tank LB cue gate",
+						uuid = "f0c77a2e-08c2-3cec-b7e8-2dbe2faddd3a",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/Draws",
+			eventType = 3,
+			name = "[Seat] Ultimate Crossover tank LB cue",
+			uuid = "09e3c020-cd9f-ae4d-814b-9496f9c3009e",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "-- Log 22-11: map effect 1/2 appears 10.05 s before the tower hit (Meteor Impact). Indices 0-7 sit on a 10.5 m ring, 8 and 9 beside the centre (BossMod T04WarriorOfLight).\nlocal p=TensorCore.mGetPlayer()\nif not p then return end\nlocal i=eventArgs.a1\nlocal x,z\nif i<=7 then\n    local a=math.rad(45*i)\n    x=100+10.5*math.sin(a)\n    z=100-10.5*math.cos(a)\nelseif i==8 then x,z=104,100\nelse x,z=96,100 end\nlocal y=p.pos.y\nTensorCore.getStaticDrawer(0x8055FF55,2):addTimedCircle(10000,x,y,z,4,0,false,true)\nAnyoneCore.addWorldTextCountdown(10000,{x=x,y=y,z=z},0xFFFFFFFF,true,1.5)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"0fafe383-58b3-e98f-ade8-bd346b10be33",
+								true,
+							},
+						},
+						name = "Draw tower with 10 s countdown",
+						uuid = "59032d94-d5d2-53a7-a375-7c299a867232",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nlocal i=eventArgs.a1\nreturn i>=0 and i<=9 and eventArgs.a2==1 and eventArgs.a3==2",
+						dequeueIfLuaFalse = true,
+						name = "Tower map effect (indices 0-9, state 1/2)",
+						uuid = "0fafe383-58b3-e98f-ade8-bd346b10be33",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/Draws",
+			eventType = 14,
+			name = "[Seat] Twincast towers",
+			uuid = "78c7df06-2809-10ba-ae3c-98ab22888596",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "-- Log 22-11: Shining Wave sources at (120,100) heading -1.57 for index 21 and (80,100) heading 1.57 for index 23; the hit lands 10.1 s after the 2048/256 event. Cone 50 m, 53 degrees (BossMod).\nlocal p=TensorCore.mGetPlayer()\nif not p then return end\nlocal f=math.rad(-90*(eventArgs.a1-20))\nlocal x=100-20*math.sin(f)\nlocal z=100-20*math.cos(f)\nTensorCore.getStaticDrawer(0x803333FF,2):addTimedCone(10000,x,p.pos.y,z,50,math.rad(53),f,0,false,true)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"d70edafb-2f99-7d9b-bba3-2414aada3c78",
+								true,
+							},
+						},
+						name = "Draw Sword of Light cone",
+						uuid = "cd17adef-bef4-8736-bd1e-c182723b6c55",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nlocal i=eventArgs.a1\nreturn i>=20 and i<=23 and eventArgs.a2==2048 and eventArgs.a3==256",
+						dequeueIfLuaFalse = true,
+						name = "Sword of Light charge (indices 20-23, state 2048/256)",
+						uuid = "d70edafb-2f99-7d9b-bba3-2414aada3c78",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/Draws",
+			eventType = 14,
+			name = "[Seat] Sword of Light cones",
+			uuid = "5ee973df-fade-66ac-b53c-2dc963fa8bc8",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "-- Log 22-11: marker 234 on three players 6.2 s before Radiant Braver; each cone is 60 m, 90 degrees from the arena centre toward its marked player.\ndata.seatBaits=data.seatBaits or {}\ndata.seatBaits[#data.seatBaits+1]={kind='cone',id=eventArgs.entityID,finish=Now()+6300}\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"23dbb5e6-ca31-dfa1-8ad2-6ce855696adf",
+								true,
+							},
+						},
+						name = "Track marked player for the cone from the centre",
+						uuid = "1d038ae5-a8e4-fc4b-b3a1-ffd88742cf28",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nreturn eventArgs.markerID==234",
+						dequeueIfLuaFalse = true,
+						name = "Radiant Braver marker",
+						uuid = "23dbb5e6-ca31-dfa1-8ad2-6ce855696adf",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/Draws",
+			eventType = 4,
+			name = "[Seat] Radiant Braver bait cones",
+			uuid = "f85f45ba-f971-e2a3-8f0c-a3cab3653f68",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "-- Log 22-11: two helper casts of 20294 mark players 6.3 s before Radiant Desperado; the line is 60 m by 8 m from the arena centre toward each marked player.\ndata.seatBaits=data.seatBaits or {}\ndata.seatBaits[#data.seatBaits+1]={kind='rect',id=eventArgs.targetID,finish=Now()+6400}\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"74e0a23c-9a93-3ac5-95d2-c495f9c75b58",
+								true,
+							},
+						},
+						name = "Track marked player for the line from the centre",
+						uuid = "1da79b8f-ab31-c23c-a50e-92ab5d649026",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nreturn eventArgs.spellID==20294 and eventArgs.entityContentID==9462 and eventArgs.targetID>0",
+						dequeueIfLuaFalse = true,
+						name = "Radiant Desperado marker cast",
+						uuid = "74e0a23c-9a93-3ac5-95d2-c495f9c75b58",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/Draws",
+			eventType = 2,
+			name = "[Seat] Radiant Desperado bait lines",
+			uuid = "5c261a17-bb42-2cb7-8deb-a0b70ac1f1cf",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "-- Log 22-11: tether 17 from a Spectral Egi to a player appears 13 s before the Flare Breath hit; the 60 m, 90 degree cone follows the tethered player.\nlocal e=eventArgs\ndata.seatBaits=data.seatBaits or {}\nif e.newTetherID==17 and e.newTargetID>0 then\n    data.seatBaits[#data.seatBaits+1]={kind='flare',src=e.sourceEntityID,id=e.newTargetID,finish=Now()+13500}\nelse\n    for i=#data.seatBaits,1,-1 do\n        local b=data.seatBaits[i]\n        if b.kind=='flare' and b.src==e.sourceEntityID then table.remove(data.seatBaits,i) end\n    end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"269d6d71-0e0c-2521-92c2-7cedf1f230b3",
+								true,
+							},
+						},
+						name = "Track or release the tethered player's cone",
+						uuid = "a30f954c-98b1-482a-bef1-deb8ac26caca",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nlocal e=eventArgs\nreturn e.sourceEntityContentID==9473 and (e.newTetherID==17 or (e.oldTetherID==17 and e.newTetherID==0))",
+						dequeueIfLuaFalse = true,
+						name = "Spectral Egi tether 17",
+						uuid = "269d6d71-0e0c-2521-92c2-7cedf1f230b3",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/Draws",
+			eventType = 15,
+			name = "[Seat] Flare Breath tether cone",
+			uuid = "9dbea46d-0345-f714-831d-4d4cbc459bfa",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "-- BossMod T04WarriorOfLight: after the 8 s cast the puddle repeats 12 times, first 2.1 s later then every 1.07 s, growing from 6 m by 0.95 m per hit up to 16.5 m. Only partly confirmed by the log (one repeat hit 14.4 m from the centre).\nlocal e=eventArgs\nlocal remaining=math.floor(e.startTime+e.duration*1000-Now())\nif remaining<=0 then self.used=true;return end\ndata.seatBaits=data.seatBaits or {}\ndata.seatBaits[#data.seatBaits+1]={kind='brim',x=e.x,y=e.y,z=e.z,t0=Now()+remaining}\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"7222a300-d4d2-a39b-9292-74fc2d84064f",
+								true,
+							},
+						},
+						name = "Track puddle growth after the first hit",
+						uuid = "7910f739-6924-e9ee-a06e-4f04e0b5d4dd",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nreturn eventArgs.aoeID==20254",
+						dequeueIfLuaFalse = true,
+						name = "Brimstone Earth",
+						uuid = "7222a300-d4d2-a39b-9292-74fc2d84064f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/Draws",
+			eventType = 18,
+			name = "[Seat] Brimstone Earth growth",
+			uuid = "e6aace66-0f77-b6dc-adae-dfcf967e8602",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local b=data.seatBaits\nif not b or #b==0 then return end\nlocal now=Now()\nlocal drawer=TensorCore.getStaticDrawer(0x803333FF,2)\nfor i=#b,1,-1 do\n    local e=b[i]\n    local keep=true\n    if e.kind=='brim' then\n        local j=1\n        local limit=e.t0+2100\n        while now>=limit and j<=12 do j=j+1; limit=limit+1070 end\n        if j>12 then keep=false\n        elseif now>=e.t0 then drawer:addCircle(e.x,e.y,e.z,math.min(6+0.95*j,16.5),false) end\n    elseif now>e.finish then keep=false\n    else\n        local t=TensorCore.mGetEntity(e.id)\n        if t and t.pos and t.alive then\n            if e.kind=='flare' then\n                local s=TensorCore.mGetEntity(e.src)\n                if s and s.pos then\n                    local h=math.atan2(t.pos.x-s.pos.x,t.pos.z-s.pos.z)\n                    drawer:addCone(s.pos.x,s.pos.y,s.pos.z,60,math.rad(90),h,false)\n                end\n            else\n                local h=math.atan2(t.pos.x-100,t.pos.z-100)\n                if e.kind=='cone' then drawer:addCone(100,t.pos.y,100,60,math.rad(90),h,false)\n                else drawer:addRect(100,t.pos.y,100,60,8,h,false) end\n            end\n        end\n    end\n    if not keep then table.remove(b,i) end\nend",
+						conditions = 
+						{
+							
+							{
+								"41b8c5cd-3594-fd20-9e50-3acddc138c1c",
+								true,
+							},
+						},
+						name = "Draw and expire the tracked shapes",
+						uuid = "f7e1390d-987b-f43c-b72f-d3d239261069",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nlocal b=data.seatBaits\nreturn b~=nil and #b>0",
+						name = "Active bait or puddle",
+						uuid = "41b8c5cd-3594-fd20-9e50-3acddc138c1c",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/Draws",
+			eventType = 12,
+			name = "[Seat] Draw live bait cones, lines and puddle growth",
+			uuid = "d48bd360-d471-1497-904d-ba1f35d13234",
+			version = 2,
+		},
 	}, 
 	inheritedProfiles = 
 	{

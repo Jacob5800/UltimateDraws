@@ -8714,7 +8714,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local api = TensorCore.API.TensorACR\napi.setAutoSimKillTime(158)\napi.clearAutoSimUncertainty()\napi.addAutoSimUncertainty(0, 20)\napi.clearAutoSimPhases(\"FullDowntime\")\napi.clearAutoSimPhases(\"CasterDowntime\")\nfor _, window in ipairs({{15, 17.3}, {30, 34}, {61, 64}, {81, 83.3}, {91, 95}, {119, 122}}) do\n    api.addAutoSimPhase(\"CasterDowntime\", window[1], window[2])\nend\ndata.wodAutoSim = {boss = eventArgs.entityID, content = 3231}\n\nself.used = true",
+						actionLua = "local api = TensorCore.API.TensorACR\napi.setAutoSimKillTime(160)\napi.clearAutoSimUncertainty()\napi.addAutoSimUncertainty(0, 20)\napi.clearAutoSimPhases(\"FullDowntime\")\napi.clearAutoSimPhases(\"CasterDowntime\")\nfor _, window in ipairs({{15, 17.3}, {30, 34}, {61, 64}, {81, 83.3}, {91, 95}, {119, 122}}) do\n    api.addAutoSimPhase(\"CasterDowntime\", window[1], window[2])\nend\ndata.wodAutoSim = {boss = eventArgs.entityID, content = 3231}\n\nself.used = true",
 						conditions = 
 						{
 							
