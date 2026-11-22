@@ -62,6 +62,10 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### TEA
 
+- Limit Cut settings add a player-following bait countdown and a Toolbox-based yellow stop preview four seconds before the estimated cue. (22-11-2026)
+
+- First and second Protean bait markers open earlier. Non-tanks get a tornado-relative north Drainage marker and a dodge callout. (22-11-2026)
+
 - AutoSim prioritizes Living Liquid for all roles when both P1 bosses reach 10% HP or lower. (22-11-2026)
 
 - First Cascade and Protean 2 Feint follow the M1 assignment. Duplicate unrestricted Feint reactions are disabled. (22-11-2026)
@@ -77,10 +81,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Reaper, Viper, and Samurai AutoSim give the assigned Jagd Doll a 0.80 planning multiplier while targeting it. (19-11-2026)
 
 - TEA AutoSim turns off the ACR AoE quick toggle at pull start and turns it back on after all four Jagd Dolls resolve. (19-11-2026)
-
-- Ranged players target Liquid Hand when available and return there after dolls, with HP balancing and boss cast protection. Doll cutoff still cancels active doll casts. (17-11-2026)
-
-- Added a one-time “Nisi passed” confirmation for the Photon partner stack and the Verdict Nisi handoff when the assigned pair shares the expected debuff. (16-11-2026)
 
 ### Sil'dihn
 

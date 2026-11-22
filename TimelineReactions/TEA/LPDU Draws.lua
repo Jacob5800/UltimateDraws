@@ -812,7 +812,7 @@ local tbl =
 				timeRange = true,
 				timelineIndex = 15,
 				timerEndOffset = -2.9000000953674,
-				timerStartOffset = -9,
+				timerStartOffset = -10.8,
 				uuid = "2f9989b5-bb97-2794-91f7-61f7ec927ec6",
 				version = 2,
 			},
@@ -1020,6 +1020,55 @@ local tbl =
 				timerEndOffset = 0.30000001192093,
 				timerStartOffset = -2.7999999523163,
 				uuid = "e3a9c50c-e9da-5545-9993-873d8f477adb",
+				version = 2,
+			},
+		},
+	},
+	[20] = 
+	{
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				execute = "local roster = AnyoneCore.Roster\nlocal north = data.liquidRageNewNorth\nif not north or not roster or not roster.current() or not roster.isReady() then return end\nlocal slot = roster.mySlot()\nif not slot then return end\nif slot ~= \"T1\" and slot ~= \"T2\" then\n    AnyoneCore.Shotcall(\"Dodge tank tethers\", true, 4, false)\nend\nself.used = true",
+				executeType = 2,
+				mechanicTime = 81.1,
+				name = "[LPDU] Drainage - Non-tank callout",
+				timeRange = true,
+				timelineIndex = 20,
+				timerEndOffset = -2.1,
+				timerStartOffset = -3.1,
+				uuid = "8b659d8d-293b-fe15-af55-41fb38bae428",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				eventType = 12,
+				execute = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 887 then return end\nlocal roster = AnyoneCore.Roster\nlocal north = data.liquidRageNewNorth\nif not north or not roster or not roster.current() or not roster.isReady() then return end\nlocal slot = roster.mySlot()\nif not slot or slot == \"T1\" or slot == \"T2\" then return end\n\n-- New North is 18 yalms from center. Place the marker 4 yalms north.\nlocal northOffset = 4 / 18\nlocal x = 100 + (north.x - 100) * northOffset\nlocal z = 100 + (north.z - 100) * northOffset\nlocal flags = Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nlocal blueDrawer = TensorCore.getCachedDrawer(nil, nil, 0xFFFF0000, 0xFFFF0000, 2)\nblueDrawer:addCircle(x, north.y, z, 1.1, false, flags)\nArgus.addCircleFilled(x, north.y, z, 0.15, 32, 0xFF00FF00, nil, 0, 0, 0, 0, false, flags)\nself.used = true",
+				executeType = 2,
+				loop = true,
+				mechanicTime = 81.1,
+				name = "[LPDU] Drainage - North ground marker",
+				timeRange = true,
+				timelineIndex = 20,
+				timerEndOffset = 8.9,
+				timerStartOffset = -3.1,
+				uuid = "d47d03a1-768e-81bf-aebe-59fd0d1a81b4",
 				version = 2,
 			},
 		},
@@ -1428,7 +1477,7 @@ local tbl =
 				timeRange = true,
 				timelineIndex = 25,
 				timerEndOffset = -2.9000000953674,
-				timerStartOffset = -9,
+				timerStartOffset = -11,
 				uuid = "124087d4-d3a9-2031-925d-b3cc0eaaaa24",
 				version = 2,
 			},
@@ -2418,7 +2467,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local state = data.teaLimitCut\nlocal x = eventArgs.castPosX\nlocal z = eventArgs.castPosZ\n\nif state and not state.firstExplosion and x and z then\n    local centerX = 100\n    local centerZ = 100\n    local epsilon = 0.1\n    local inWestToNorthEast = z < (centerZ - epsilon)\n        or (math.abs(z - centerZ) <= epsilon and x < centerX)\n\n    if inWestToNorthEast then\n        local y = eventArgs.castPosY or 0\n        state.firstExplosion = { x = x, y = y, z = z }\n        state.oppositeExplosion = {\n            x = (2 * centerX) - x,\n            y = y,\n            z = (2 * centerZ) - z\n        }\n\n        local myNumber = state.myNumber\n        if myNumber then\n            local usesFirstExplosion = myNumber == 1\n                or myNumber == 2\n                or myNumber == 5\n                or myNumber == 6\n            local targetPosition = usesFirstExplosion\n                and state.firstExplosion\n                or state.oppositeExplosion\n            local goNorth = targetPosition.z < centerZ\n            AnyoneCore.Shotcall(\"Take your start arrow, then run clockwise\", true, 5, false)\n        end\n\n        local drawer = TensorCore.getMoogleDrawer()\n        if drawer then\n            local vx = x - centerX\n            local vz = z - centerZ\n            local radius = 10\n            local cadence = 2200\n            local duration = 2500\n\n            for wave = 2, 10 do\n                local delay = (wave - 2) * cadence\n\n                if wave == 5 or wave == 10 then\n                    drawer:addTimedCircle(\n                        duration,\n                        centerX, y, centerZ,\n                        radius,\n                        delay,\n                        false,\n                        false\n                    )\n                else\n                    local rotationStep\n                    if wave < 5 then\n                        rotationStep = wave - 1\n                    else\n                        rotationStep = wave - 6\n                    end\n\n                    local angle = rotationStep * math.pi / 4\n                    local cosAngle = math.cos(angle)\n                    local sinAngle = math.sin(angle)\n                    local rotatedX = (vx * cosAngle) - (vz * sinAngle)\n                    local rotatedZ = (vx * sinAngle) + (vz * cosAngle)\n\n                    drawer:addTimedCircle(\n                        duration,\n                        centerX + rotatedX, y, centerZ + rotatedZ,\n                        radius,\n                        delay,\n                        false,\n                        false\n                    )\n                    drawer:addTimedCircle(\n                        duration,\n                        centerX - rotatedX, y, centerZ - rotatedZ,\n                        radius,\n                        delay,\n                        false,\n                        false\n                    )\n                end\n            end\n        end\n    end\nend\n\nself.used = true",
+							actionLua = "local state = data.teaLimitCut\nlocal x = eventArgs.castPosX\nlocal z = eventArgs.castPosZ\n\nif state and not state.firstExplosion and x and z then\n    local centerX = 100\n    local centerZ = 100\n    local epsilon = 0.1\n    local inWestToNorthEast = z < (centerZ - epsilon)\n        or (math.abs(z - centerZ) <= epsilon and x < centerX)\n\n    if inWestToNorthEast then\n        local y = eventArgs.castPosY or 0\n        state.firstExplosion = { x = x, y = y, z = z }\n        state.lpduOpeningBlastAt = Now()\n        state.oppositeExplosion = {\n            x = (2 * centerX) - x,\n            y = y,\n            z = (2 * centerZ) - z\n        }\n\n        local myNumber = state.myNumber\n        if myNumber then\n            local usesFirstExplosion = myNumber == 1\n                or myNumber == 2\n                or myNumber == 5\n                or myNumber == 6\n            local targetPosition = usesFirstExplosion\n                and state.firstExplosion\n                or state.oppositeExplosion\n            local goNorth = targetPosition.z < centerZ\n            AnyoneCore.Shotcall(\"Take your start arrow, then run clockwise\", true, 5, false)\n        end\n\n        local drawer = TensorCore.getMoogleDrawer()\n        if drawer then\n            local vx = x - centerX\n            local vz = z - centerZ\n            local radius = 10\n            local cadence = 2200\n            local duration = 2500\n\n            for wave = 2, 10 do\n                local delay = (wave - 2) * cadence\n\n                if wave == 5 or wave == 10 then\n                    drawer:addTimedCircle(\n                        duration,\n                        centerX, y, centerZ,\n                        radius,\n                        delay,\n                        false,\n                        false\n                    )\n                else\n                    local rotationStep\n                    if wave < 5 then\n                        rotationStep = wave - 1\n                    else\n                        rotationStep = wave - 6\n                    end\n\n                    local angle = rotationStep * math.pi / 4\n                    local cosAngle = math.cos(angle)\n                    local sinAngle = math.sin(angle)\n                    local rotatedX = (vx * cosAngle) - (vz * sinAngle)\n                    local rotatedZ = (vx * sinAngle) + (vz * cosAngle)\n\n                    drawer:addTimedCircle(\n                        duration,\n                        centerX + rotatedX, y, centerZ + rotatedZ,\n                        radius,\n                        delay,\n                        false,\n                        false\n                    )\n                    drawer:addTimedCircle(\n                        duration,\n                        centerX - rotatedX, y, centerZ - rotatedZ,\n                        radius,\n                        delay,\n                        false,\n                        false\n                    )\n                end\n            end\n        end\n    end\nend\n\nself.used = true",
 							conditions = 
 							{
 								
@@ -2460,6 +2509,66 @@ local tbl =
 				timerEndOffset = 0.5,
 				timerStartOffset = -120,
 				uuid = "f87e5651-1899-e806-b2dd-95216aca0a87",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "local state = data.teaLimitCut\nlocal number = state and state.myNumber\nif not number or number < 1 or number > 8 or state.lpduBaitCountdown then\n    self.used = true\n    return\nend\n\nlocal config = TEA_LPDU_Config\nlocal values = config and config.values\nif not values then\n    local path = GetLuaModsPath() .. [[TensorReactions\\Settings\\TEA_LPDU_Draws.lua]]\n    values = FileExists(path) and FileLoad(path) or nil\nend\nif type(values) ~= \"table\" or values.limitCutBaitCountdown ~= true then\n    self.used = true\n    return\nend\n\nlocal player = TensorCore.mGetPlayer()\nif player and player.localmapid == 887 then\n    local baitOffsets = {6360, 10980, 15660, 20380}\n    AnyoneCore.addWorldTextCountdownOnEnt(baitOffsets[math.ceil(number / 2)],\n        player.id, 0xFFFFFFFF, true, 2.5, 2)\n    state.lpduBaitCountdown = true\nend\nself.used = true",
+							conditions = 
+							{
+								
+								{
+									"40d85d1b-2f64-f02a-9a30-0424b2f6643e",
+									true,
+								},
+							},
+							endIfUsed = true,
+							name = "Show player bait countdown",
+							uuid = "d0397d35-1b5b-a9fd-a563-28b27310e738",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Event",
+							dequeueIfLuaFalse = true,
+							eventArgOptionType = 3,
+							eventArgType = 2,
+							name = "Opening Hawk Blaster",
+							spellIDList = 
+							{
+								18480,
+							},
+							uuid = "40d85d1b-2f64-f02a-9a30-0424b2f6643e",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Limit Cut",
+				eventType = 2,
+				loop = true,
+				mechanicTime = 200,
+				name = "Limit Cut - Time until your bait",
+				timeRange = true,
+				timelineIndex = 39,
+				timerEndOffset = 0.5,
+				timerStartOffset = -2,
+				uuid = "f9e02da6-3160-0111-98d4-f788afa938f5",
 				version = 2,
 			},
 		},
@@ -2558,6 +2667,30 @@ local tbl =
 				timerEndOffset = 24.5,
 				timerStartOffset = 5,
 				uuid = "0b6f93e2-8243-cc2f-9198-2dad6e55abbc",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				eventType = 12,
+				execute = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 887 or not player.alive then return end\nlocal config = TEA_LPDU_Config\nif not config or config.values.limitCutStopPreview ~= true then return end\nlocal state = data.teaLimitCut\nlocal number = state and state.myNumber\nlocal opening = state and state.firstExplosion\nlocal started = state and state.lpduOpeningBlastAt\nif not number or number < 1 or number > 8 or not opening or not started then return end\n\n-- Rotate the north-opening reference to the observed 1256 starting lane.\nlocal dx, dz = opening.x - 100, opening.z - 100\nlocal length = math.sqrt(dx * dx + dz * dz)\nif length < 13 or length > 15 then return end\nlocal cosAngle, sinAngle = -dz / length, dx / length\nlocal pair = math.ceil(number / 2)\nif (state.baitPairIndex or 0) >= pair then return end\nlocal elapsed = Now() - started\nlocal baitAt = ({6360, 10980, 15660, 20380})[pair]\nif elapsed < baitAt - 4000 or elapsed > baitAt + 500 then return end\n\n-- LPDU Toolbox 729899133478371, bait frames 5, 6, 9 and 11 (zero-based).\n-- Convert the 15-unit board to the 40-yalm arena before rotating its north opening.\nlocal spots = {{10.325, 3.325}, {8.85, 2.225}, {2.35, 7.625}, {3.1, 9.575},\n    {7.725, 11.45}, {9.175, 11.25}, {10.525, 3.2}, {9.125, 2.225}}\nlocal spot = spots[number]\nlocal boardScale = 40 / 15\nlocal x, z = (spot[1] - 7.5) * boardScale, (spot[2] - 7.5) * boardScale\nlocal markerX = 100 + x * cosAngle - z * sinAngle\nlocal markerZ = 100 + x * sinAngle + z * cosAngle\nlocal flags = Argus2.RenderFlags.FLAG_RENDER_OVERLAY\nlocal drawer = TensorCore.getCachedDrawer(nil, nil, 0xFF00FFFF, 0xFF00FFFF, 2)\ndrawer:addCircle(markerX, opening.y, markerZ, 0.65, false, flags)\nself.used = true",
+				executeType = 2,
+				loop = true,
+				mechanicTime = 200,
+				name = "[LPDU] Limit Cut - Optional stop preview",
+				timeRange = true,
+				timelineIndex = 39,
+				timerEndOffset = 21,
+				timerStartOffset = 2,
+				uuid = "961208b6-667e-29d2-ac3d-ba2c54a2ea26",
 				version = 2,
 			},
 		},
@@ -8166,7 +8299,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "-- OnDraw also runs before combat, when the startup update may not have run.\nlocal C=TEA_LPDU_Config\nif not C then\n C={folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]};C.path=C.folder..[[TEA_LPDU_Draws.lua]]\n local values=FileExists(C.path) and FileLoad(C.path) or {};if type(values)~=\"table\" then values={} end\n local changed=false\n for _,key in ipairs({\"autoStillness\",\"autoMotion\",\"autoLB\"}) do if type(values[key])~=\"boolean\" then values[key]=key~=\"autoLB\";changed=true end end\n if values.lbTank~=\"T1\" and values.lbTank~=\"T2\" then values.lbTank=\"T2\";changed=true end\n if type(values.alphaLabels) ~= \"boolean\" then values.alphaLabels = false; changed = true end\n C.values=values\n function C.save() if not FolderExists(C.folder) then FolderCreate(C.folder) end;FileSave(C.path,C.values) end\n TEA_LPDU_Config=C;if changed then C.save() end\nend\n\nlocal visible = GUI:Begin(\"LPDU Settings###TEALPDUSettings\", true, GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n    local options = {\"Enabled\", \"Disabled\"}\n    local motion, motionChanged = GUI:Combo(\"Ordained Motion\", C.values.autoMotion and 1 or 2, options)\n    if motionChanged then\n        C.values.autoMotion = motion == 1\n        C.save()\n    end\n    local stillness, stillnessChanged = GUI:Combo(\"Ordained Stillness\", C.values.autoStillness and 1 or 2, options)\n    if stillnessChanged then\n        C.values.autoStillness = stillness == 1\n        C.save()\n    end\n    local labels, labelsChanged = GUI:Combo(\"Fate Alpha labels\", C.values.alphaLabels and 1 or 2, options)\n    if labelsChanged then\n        C.values.alphaLabels = labels == 1\n        C.save()\n    end\n\n    local judgmentStyles = {\"Subtractive\", \"Exaflares\"}\n    local currentStyle = C.values.judgmentStyle == \"Exaflares\" and 2 or 1\n    local selectedStyle, styleChanged = GUI:Combo(\"Almighty Judgment draws\", currentStyle, judgmentStyles)\n    if styleChanged then\n        C.values.judgmentStyle = judgmentStyles[selectedStyle]\n        C.save()\n    end\n\n    local player = TensorCore.mGetPlayer()\n    if player and player.job == 23 then\n        local paean, paeanChanged = GUI:Combo(\"Auto-cleanse Throttle (Bard)\", C.values.autoThrottlePaean == true and 1 or 2, options)\n        if paeanChanged then\n            C.values.autoThrottlePaean = paean == 1\n            C.save()\n        end\n    end\n\n    if player and TensorCore.isTank(player) then\n        local lb, lbChanged = GUI:Combo(\"Automatic Tank LB\", C.values.autoLB and 1 or 2, options)\n        if lbChanged then\n            C.values.autoLB = lb == 1\n            C.save()\n        end\n        if C.values.autoLB then\n            local tank, tankChanged = GUI:Combo(\"Tank LB user\", C.values.lbTank == \"T1\" and 1 or 2, {\"T1\", \"T2\"})\n            if tankChanged then\n                C.values.lbTank = tank == 1 and \"T1\" or \"T2\"\n                C.save()\n            end\n        end\n    end\nend\nGUI:End()\nself.used = true",
+							actionLua = "-- OnDraw also runs before combat, when the startup update may not have run.\nlocal C=TEA_LPDU_Config\nif not C then\n C={folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]};C.path=C.folder..[[TEA_LPDU_Draws.lua]]\n local values=FileExists(C.path) and FileLoad(C.path) or {};if type(values)~=\"table\" then values={} end\n local changed=false\n for _,key in ipairs({\"autoStillness\",\"autoMotion\",\"autoLB\"}) do if type(values[key])~=\"boolean\" then values[key]=key~=\"autoLB\";changed=true end end\n if values.lbTank~=\"T1\" and values.lbTank~=\"T2\" then values.lbTank=\"T2\";changed=true end\n if type(values.alphaLabels) ~= \"boolean\" then values.alphaLabels = false; changed = true end\n C.values=values\n function C.save() if not FolderExists(C.folder) then FolderCreate(C.folder) end;FileSave(C.path,C.values) end\n TEA_LPDU_Config=C;if changed then C.save() end\nend\n\nlocal visible = GUI:Begin(\"LPDU Settings###TEALPDUSettings\", true, GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n    local options = {\"Enabled\", \"Disabled\"}\n    local preview, previewChanged = GUI:Combo(\"Limit Cut stop preview\",\n        C.values.limitCutStopPreview == true and 1 or 2, options)\n    if previewChanged then\n        C.values.limitCutStopPreview = preview == 1\n        C.save()\n    end\n    local baitTimer, baitTimerChanged = GUI:Combo(\"Limit Cut bait countdown\",\n        C.values.limitCutBaitCountdown == true and 1 or 2, options)\n    if baitTimerChanged then\n        C.values.limitCutBaitCountdown = baitTimer == 1\n        C.save()\n    end\n    local motion, motionChanged = GUI:Combo(\"Ordained Motion\", C.values.autoMotion and 1 or 2, options)\n    if motionChanged then\n        C.values.autoMotion = motion == 1\n        C.save()\n    end\n    local stillness, stillnessChanged = GUI:Combo(\"Ordained Stillness\", C.values.autoStillness and 1 or 2, options)\n    if stillnessChanged then\n        C.values.autoStillness = stillness == 1\n        C.save()\n    end\n    local labels, labelsChanged = GUI:Combo(\"Fate Alpha labels\", C.values.alphaLabels and 1 or 2, options)\n    if labelsChanged then\n        C.values.alphaLabels = labels == 1\n        C.save()\n    end\n\n    local judgmentStyles = {\"Subtractive\", \"Exaflares\"}\n    local currentStyle = C.values.judgmentStyle == \"Exaflares\" and 2 or 1\n    local selectedStyle, styleChanged = GUI:Combo(\"Almighty Judgment draws\", currentStyle, judgmentStyles)\n    if styleChanged then\n        C.values.judgmentStyle = judgmentStyles[selectedStyle]\n        C.save()\n    end\n\n    local player = TensorCore.mGetPlayer()\n    if player and player.job == 23 then\n        local paean, paeanChanged = GUI:Combo(\"Auto-cleanse Throttle (Bard)\", C.values.autoThrottlePaean == true and 1 or 2, options)\n        if paeanChanged then\n            C.values.autoThrottlePaean = paean == 1\n            C.save()\n        end\n    end\n\n    if player and TensorCore.isTank(player) then\n        local lb, lbChanged = GUI:Combo(\"Automatic Tank LB\", C.values.autoLB and 1 or 2, options)\n        if lbChanged then\n            C.values.autoLB = lb == 1\n            C.save()\n        end\n        if C.values.autoLB then\n            local tank, tankChanged = GUI:Combo(\"Tank LB user\", C.values.lbTank == \"T1\" and 1 or 2, {\"T1\", \"T2\"})\n            if tankChanged then\n                C.values.lbTank = tank == 1 and \"T1\" or \"T2\"\n                C.save()\n            end\n        end\n    end\nend\nGUI:End()\nself.used = true",
 							name = "[LPDU] TEA - Optional automation settings",
 							uuid = "f0875a94-0ffe-1944-996f-54c45c3be10b",
 							version = 2.1,
