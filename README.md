@@ -405,6 +405,14 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Hydra: a Black Mage's Ley Lines and Triplecast toggles are now restored even if Lua is reloaded during the fight. (22-11-2026)
 
+### Normal raids: General profile
+
+- Published the Normal raids general profile (Alexander, Deltascape, Sigmascape, Alphascape, Eden's Gate and Verse, Abyssos and AAC raid draws, AutoSim and boss-targeting reactions). (22-11-2026)
+
+- Fixed the boss lookup used by encounter-start boss targeting and pre-pull setup, which could not find the boss before. (22-11-2026)
+
+- Eden's Gate Resurrection: AutoSim no longer errors when Stasis or Eternal Breath arrives earlier than forecast. (22-11-2026)
+
 ### R9S: R2 / R1 / M1
 
 - Made R2 eligible for Optifine users with FileLoad/FileSave for its kill-time range and EU guidance toggles. R1 and M1 were checked and have no owned core Settings or direct file-I/O dependency. (05-11-2026)

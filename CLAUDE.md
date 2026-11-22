@@ -64,3 +64,8 @@ Live `GeneralReactions\Alliance raid.lua` is authoritative and publishes to `Gen
 ## Trials general profile
 
 Live `GeneralReactions\Trials.lua` publishes to `GeneralReactions\Trials\Trials.lua` in this checkout (created 22-11-2026 with user approval). Apply the shared copy/hash/changelog/commit/push checks; this is a general profile without a timeline version. TODO: `TRIALS-CINDER-DRIFT-TODO.md` in the Agent workspace.
+
+
+## Normal raids general profile
+
+Live GeneralReactions\Normal raids.lua publishes to GeneralReactions\Normal Raids\Normal raids.lua in this checkout (created 22-11-2026 with user approval). Apply the shared copy/hash/changelog/commit/push checks; this is a general profile without a timeline version. TODO: NORMAL-RAIDS-TODO.md in the Agent workspace.
