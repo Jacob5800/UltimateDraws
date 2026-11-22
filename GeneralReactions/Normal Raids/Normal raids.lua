@@ -5982,6 +5982,471 @@ local tbl =
 			uuid = "2a7b615a-815e-64cb-b4ee-0c725c50938f",
 			version = 2,
 		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "Eden's Verse Furor",
+			uuid = "9a4faed4-7a32-97bf-b83b-7bd999337740",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Eden's Verse Furor",
+			name = "AutoSim",
+			uuid = "54a51421-edfc-2d0a-b627-63d4e344afa8",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=903 then return end\nif not data.e6nSetup then\n    local config=AnyoneCore and AnyoneCore.Settings\n    if config then\n        if config.DutyHelper then config.DutyHelper.enabled=false end\n        if config.PrepullHelper then config.PrepullHelper.enabled=false end\n    end\n    gStartCombat=false\n    data.e6nSetup=true\nend\nif not p.incombat and not data.e6nTargeted and not ActionList:IsCasting() then\n    local current=TensorCore.mGetTarget()\n    if current and current.alive and current.targetable and current.attackable then\n        data.e6nTargeted=true\n    else\n        for _,boss in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=9287}) or {}) do\n            if boss.alive and boss.targetable and boss.attackable then\n                gStartCombat=false\n                TensorCore.timelineLogToFile(\"[E6N] Garuda target request=\"..boss.id)\n                Player:SetTarget(boss.id)\n                data.e6nTargeted=true\n                break\n            end\n        end\n    end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"19230771-60f0-ab23-a87e-24cf7bf905da",
+								true,
+							},
+						},
+						name = "[E6N] Initial target and helper setup",
+						uuid = "afd89943-787d-7fe1-b5cd-01e76969507d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=903 then return false end\nreturn data.e6nSetup~=true or (not p.incombat and data.e6nTargeted~=true)",
+						name = "[E6N] Initial target and helper setup gate",
+						uuid = "19230771-60f0-ab23-a87e-24cf7bf905da",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Eden's Verse Furor/AutoSim",
+			name = "[E6N] Initial target and helper setup",
+			throttleTime = 750,
+			uuid = "efd6d015-2d68-3074-9248-4c26b1612fe5",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local api=TensorCore.API.TensorACR\nlocal t=api.getAutoSimTime()\nif type(t)~=\"number\" or t<0 or t>20 then return end\napi.clearAutoSimUncertainty()\napi.clearAutoSimPhases(\"FullDowntime\")\napi.setAutoSimKillTime(423)\napi.addAutoSimUncertainty(0,35)\nfor _,gap in ipairs({{111.515,115.015},{196.765,201.109},{251.266,272.516},{325.844,330.063}}) do\n    local start,finish=math.max(t,gap[1]),gap[2]\n    if finish>start then api.addAutoSimPhase(\"FullDowntime\",start,finish,1) end\nend\ndata.e6nForecast=true\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"85becdbf-76a4-0d84-8248-edf7991b1320",
+								true,
+							},
+						},
+						name = "[E6N] AutoSim forecast",
+						uuid = "a80a8a97-8de3-1582-9b8d-382fcd15b823",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=903 then return false end\nreturn p.incombat==true and data.e6nForecast~=true",
+						name = "[E6N] AutoSim forecast gate",
+						uuid = "85becdbf-76a4-0d84-8248-edf7991b1320",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Eden's Verse Furor/AutoSim",
+			name = "[E6N] AutoSim forecast",
+			throttleTime = 500,
+			uuid = "3b47d98c-2513-c6d7-a129-dcd023fdabb6",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Eden's Verse Furor",
+			name = "Draws",
+			uuid = "aa733b75-52df-cca1-96f1-544e1b1752c1",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\nlocal remaining=math.floor(e.startTime+e.duration*1000-Now())\nif remaining<=0 then self.used=true;return end\nlocal id=e.aoeID\nlocal color=id==19417 and 0x8055FF55 or 0x803333FF\nlocal drawer=TensorCore.getStaticDrawer(color,2)\nif id==19438 then\n    data.e6nConflag={x=e.x,y=e.y,z=e.z,heading=e.heading,finish=e.startTime+e.duration*1000}\nelseif id==19413 then\n    drawer:addTimedCenteredRect(remaining,e.x,e.y,e.z,84,8,e.heading,0,false,true)\nelseif id==19436 then\n    drawer:addTimedRect(remaining,e.x,e.y,e.z,e.aoeLength,e.aoeWidth,e.heading,0,false,true)\nelseif id==19417 or id==19437 then\n    if e.targetAttach and e.targetAttach>0 then\n        drawer:addTimedCircleOnEnt(remaining,e.targetAttach,4,0,false,true)\n    end\nelse\n    drawer:addTimedCircle(remaining,e.x,e.y,e.z,e.aoeLength,0,false,true)\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"19571965-14ae-bcf0-ba85-ecc688ed4515",
+								true,
+							},
+						},
+						name = "[E6N] Packet telegraphs and final-five Conflag Strike",
+						uuid = "e8b38c0f-13b1-217a-849e-390738adf107",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=903 then return false end\nlocal id=eventArgs.aoeID\nreturn id==19413 or id==19417 or id==19418 or id==19419 or id==19420 or id==19424 or id==19426\n    or id==19430 or id==19436 or id==19437 or id==19438 or id==19440 or id==19442 or id==19444",
+						name = "[E6N] Packet telegraphs and final-five Conflag Strike gate",
+						uuid = "19571965-14ae-bcf0-ba85-ecc688ed4515",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Eden's Verse Furor/Draws",
+			eventType = 18,
+			name = "[E6N] Packet telegraphs and final-five Conflag Strike",
+			uuid = "b335b09d-1749-6cb2-8cc3-d32c6caa8bb7",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\nlocal caster=TensorCore.mGetEntity(e.entityID)\nif not caster or not caster.pos then return end\nlocal ms=math.floor(e.channelTimeMax*1000)\nif ms<=0 then return end\nlocal pos=caster.pos\nlocal rotated=e.spellID==19423 or e.spellID==19428\nlocal first=pos.h+(rotated and math.pi/4 or -math.pi/4)\nlocal drawer=TensorCore.getStaticDrawer(0x803333FF,2)\ndrawer:addTimedCone(ms,pos.x,pos.y,pos.z,40,math.pi/2,first,0,false,true)\ndrawer:addTimedCone(ms,pos.x,pos.y,pos.z,40,math.pi/2,first+math.pi,0,false,true)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"2251b245-0944-91b1-a3be-c8d52efa0df4",
+								true,
+							},
+						},
+						name = "[E6N] Ferostorm paired cones",
+						uuid = "7218560c-8028-197c-b6b4-5d809235433e",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=903 then return false end\nlocal id=eventArgs.spellID\nreturn id==19422 or id==19423 or id==19427 or id==19428",
+						name = "[E6N] Ferostorm paired cones gate",
+						uuid = "2251b245-0944-91b1-a3be-c8d52efa0df4",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Eden's Verse Furor/Draws",
+			eventType = 3,
+			name = "[E6N] Ferostorm paired cones",
+			uuid = "f0f9dd4b-48f2-9f6e-b9a8-23198a82a97f",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local cast=data.e6nConflag\nif not cast then return end\nlocal remaining=cast.finish-Now()\nif remaining<=0 or remaining>5000 then return end\nlocal drawer=TensorCore.getStaticDrawer(0x803333FF,2)\ndrawer:addCone(cast.x,cast.y,cast.z,40,math.rad(270),cast.heading,false)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"3090bc0a-7e45-486b-8dcf-bff5689346fc",
+								true,
+							},
+						},
+						name = "[E6N] Conflag Strike final-five draw",
+						uuid = "5aaf661b-2520-09a5-9d33-d12eb733e38c",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=903 then return false end\nlocal cast=data.e6nConflag\nif not cast or not p.incombat then return false end\nlocal remaining=cast.finish-Now()\nreturn remaining>0 and remaining<=5000",
+						name = "[E6N] Conflag Strike final-five draw gate",
+						uuid = "3090bc0a-7e45-486b-8dcf-bff5689346fc",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Eden's Verse Furor/Draws",
+			eventType = 12,
+			name = "[E6N] Conflag Strike final-five draw",
+			uuid = "46075197-7475-75cc-b75a-1676fc65123e",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "data.e6nConflag=nil\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"ad81796c-8ecf-5e11-9c47-3b27616064c1",
+								true,
+							},
+						},
+						name = "[E6N] Conflag Strike resolution cleanup",
+						uuid = "358e788c-e9a4-3515-9e44-c5fce53e12d3",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=903 then return false end\nreturn eventArgs.spellID==19438 and data.e6nConflag~=nil",
+						name = "[E6N] Conflag Strike resolution cleanup gate",
+						uuid = "ad81796c-8ecf-5e11-9c47-3b27616064c1",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Eden's Verse Furor/Draws",
+			eventType = 2,
+			name = "[E6N] Conflag Strike resolution cleanup",
+			uuid = "b3b6d493-507b-d13d-a743-7d307f128011",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\nlocal remaining=math.floor(e.startTime+e.duration*1000-Now())\nif remaining<=0 then self.used=true;return end\nlocal drawer=TensorCore.getStaticDrawer(0x803333FF,2)\nif e.aoeID==19432 then\n    -- Touchdown: 15 m radius is unverified (packet reports 40 as an area target)\n    drawer:addTimedCircle(remaining,e.x,e.y,e.z,15,0,false,true)\n    self.used=true\n    return\nend\ndrawer:addTimedRect(remaining,e.x,e.y,e.z,e.aoeLength,e.aoeWidth,e.heading,0,false,true)\n-- Nexus orbs are pulled 5 m toward the centre line, then explode about 3.1 s after the pull resolves.\nif data.e6nNexusStart~=e.startTime then\n    data.e6nNexusStart=e.startTime\n    local list=TensorCore.getEntityGroupList(\"ContentID\",{contentid=9290})\n    if list then\n        local alongX=math.abs(math.sin(e.heading))>0.5\n        for _,n in pairs(list) do\n            if n and n.pos then\n                local x,z=n.pos.x,n.pos.z\n                if alongX then\n                    local d=100-x\n                    x=x+((math.abs(d)<5) and d or (d>0 and 5 or -5))\n                else\n                    local d=100-z\n                    z=z+((math.abs(d)<5) and d or (d>0 and 5 or -5))\n                end\n                drawer:addTimedCircle(remaining+3100,x,n.pos.y,z,8,0,false,true)\n            end\n        end\n    end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"53991be3-f013-0690-816c-16692f0c3179",
+								true,
+							},
+						},
+						name = "[E6N] Pull, Nexus Explosion and Touchdown",
+						uuid = "75380eb8-de54-4fbb-b1ea-0d604a03cda8",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=903 then return false end\nlocal id=eventArgs.aoeID\nreturn id==20025 or id==19432",
+						name = "[E6N] Pull, Nexus Explosion and Touchdown gate",
+						uuid = "53991be3-f013-0690-816c-16692f0c3179",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Eden's Verse Furor/Draws",
+			eventType = 18,
+			name = "[E6N] Pull, Nexus Explosion and Touchdown",
+			uuid = "0ca1402c-487d-d661-9f1b-4e9f31337a8b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\nlocal ifrit=TensorCore.mGetEntity(e.entityID)\nif not ifrit or not ifrit.pos then return end\nlocal ms=math.floor(e.channelTimeMax*1000)+1500\nlocal list=TensorCore.getEntityGroupList(\"ContentID\",{contentid=9291})\nif not list then return end\nlocal drawer=TensorCore.getStaticDrawer(0x803333FF,2)\nlocal best,bd\nfor _,o in pairs(list) do\n    if o and o.pos then\n        local d=(o.pos.x-ifrit.pos.x)^2+(o.pos.z-ifrit.pos.z)^2\n        if not bd or d<bd then bd=d;best=o end\n    end\nend\nfor _,o in pairs(list) do\n    if o and o.pos then\n        if o==best then\n            -- nearest orb is kicked to the arena centre\n            drawer:addTimedCircle(ms,100,o.pos.y,100,10,0,false,true)\n        else\n            drawer:addTimedCircle(ms,o.pos.x,o.pos.y,o.pos.z,10,0,false,true)\n        end\n    end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"876e647a-9a95-1afb-b69f-55a25ce96df5",
+								true,
+							},
+						},
+						name = "[E6N] Hot Foot orb prediction",
+						uuid = "2945226e-0574-81d5-94a8-385a509d005d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=903 then return false end\nreturn eventArgs.spellID==19439",
+						name = "[E6N] Hot Foot orb prediction gate",
+						uuid = "876e647a-9a95-1afb-b69f-55a25ce96df5",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Eden's Verse Furor/Draws",
+			eventType = 3,
+			name = "[E6N] Hot Foot orb prediction",
+			uuid = "9c9708f3-aa87-aff7-acb1-901f5af7e739",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Eden's Verse Furor",
+			name = "Mitigations",
+			uuid = "6cb2f740-baaa-ea69-9ab3-e19bcceab509",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"dacb9476-4dbb-2f10-8563-f531c5846f89",
+								true,
+							},
+						},
+						gVar = "ACR_TensorWeeb4_Hotbar_ArmsLength",
+						name = "[E6N] Downburst Arm’s Length",
+						uuid = "cda86a69-0f97-90e4-ab92-662e0fed3bce",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=903 then return false end\nreturn eventArgs.spellID==19488 and (eventArgs.entityContentID==9287 or eventArgs.entityContentID==9289)",
+						name = "[E6N] Downburst Arm’s Length gate",
+						uuid = "dacb9476-4dbb-2f10-8563-f531c5846f89",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Eden's Verse Furor/Mitigations",
+			eventType = 3,
+			name = "[E6N] Downburst Arm’s Length",
+			throttleTime = 10000,
+			uuid = "56008aef-b045-8da4-9c0b-8003497ce13c",
+			version = 2,
+		},
 	}, 
 	inheritedProfiles = 
 	{

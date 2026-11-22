@@ -421,6 +421,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Normal raids: General profile
 
+- Added Eden's Verse: Furor draws, AutoSim, and Downburst Arm's Length. Conflag Strike's cone appears in the final five seconds. Also draws Irresistible Pull, predicted Tumultuous Nexus explosions, Hot Foot orb circles and Touchdown. (22-11-2026)
+
 - Published the Normal raids general profile (Alexander, Deltascape, Sigmascape, Alphascape, Eden's Gate and Verse, Abyssos and AAC raid draws, AutoSim and boss-targeting reactions). (22-11-2026)
 
 - Fixed the boss lookup used by encounter-start boss targeting and pre-pull setup, which could not find the boss before. (22-11-2026)
