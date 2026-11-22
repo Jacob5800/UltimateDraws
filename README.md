@@ -16,7 +16,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ## Changelog
 
-### UWU: AutoSim
+### UWU
 
 - Black Mage's Manaward after the first nail explosion now also casts directly if the ACR is slow to use it, so it lands right after the explosion instead of several seconds late. (21-11-2026)
 
@@ -38,35 +38,41 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Late Garuda Satin Plume targeting (around 110) now finds the plumes and switches to them immediately, even mid-cast. (21-11-2026)
 
-- Caster Ifrit nails: after the nearest nail reaches 40%, the caster moves on to any other nail still above 40% instead of returning to Ifrit. Awakened nails are still killed in order as soon as their debuff stacks are up, and Ifrit is only targeted when neither applies. Target switches now happen immediately, even mid-cast, including right after a nail dies. (21-11-2026)
+### UCOB
 
-- Added an optional P4 cast-interrupt checkbox for the Ultima Suppression gaol and automatic targeting for late Garuda Satin Plumes, prioritizing the one tethered to R2. (19-11-2026)
+- Fixed the AutoSim forecast's boss lookup so it can track boss presence and targetability. (22-11-2026)
 
-- Titan healer gaol targeting has a saved Interrupt cast for Titan healer gaol checkbox under P3 in the same AutoSim settings panel used by BlackmageUWU. (19-11-2026)
+- Fixed the personal Earthshaker cone during Quickmarch and Tenstrike, which could not find its source. (22-11-2026)
 
-- Ifrit nails now check awakening on the next nail in formation-relative SE > SW > NE > NW order, without lifetime-based target switching. Melee cleave stops when either close nail reaches 40%, each role finishes its own assigned nail, and ordered kills stay single-target. Nail checks now use a 50 ms interval; the forced 40% cast stop is preserved. (16-11-2026)
+- Quickmarch and both Tenstrike Earthshaker waves show every cone. Your cone is green when clear or red when it clips a teammate. (19-11-2026)
 
-### UCOB: Published profile
+- The first Adds quote shows player-attached In and Out countdowns in sequence. (19-11-2026)
 
-- Consolidated the latest LPDU draws into `LPDU Draws.lua` and removed the duplicate beta download. (05-11-2026)
+- Grand Octet now previews your Twister bait near the towers and marks actual Twister spawns. (19-11-2026)
 
+- Tenstrike shows all three neurolinks during Hatch assignment, bases the move-out arrow on the link actually soaked, and shortens the spread callout to Spread away from 4. (19-11-2026)
 
-### UWU: LPDU settings
+- Nael shows player-attached Out and In countdowns for the quotes around 266 and 298 once the preceding step resolves. (19-11-2026)
 
-- Both General sections now have independent, left-aligned controls clickable across the full row, with saved expansion choices. (06-11-2026)
+- The opening Twister previews your current bait position, then marks the actual spawned Twisters. (19-11-2026)
 
-- Ifrit starting-position callouts now show only the player's Party Roster instruction: R1 sees “Ranged starts SW”; R2 sees “Caster start SE”. (06-11-2026)
+- Adds Hatch shows a staging arrow for the south neurolink before Twister. Both Adds spread countdowns can recover from a missed quote using the observed cast sequence. (19-11-2026)
 
-- New or unset Annihilation melee assignments default to M1; saved M1/M2 choices remain customizable. The GUI explains the existing 3-3-1-1 soak pattern. AutoSim and LPDU section headings toggle with a single click on the text or arrow and retain saved expansion choices. (06-11-2026)
+- Heavensfall calls the observed cone rotation and shows a brighter preview of the first cone pair beyond the live telegraphs. (19-11-2026)
 
-- Refined the UWU settings layout with General and phase sections, phase-specific controls, readable slider labels and independent persistent preferences. (06-11-2026)
+### TEA
 
-- LPDU settings now save through FileLoad/FileSave in an independent settings file, without relying on Minion core Settings. Active choices are preserved. (05-11-2026)
+- Reaper ACR3 checks for your tethered doll below 40% HP directly in the Disable Soul Gauge reaction and restores the toggle when the doll resolves. (19-11-2026)
 
-- Organized settings into Automatic targeting and Ultima → Annihilation orb assignments. Sections start expanded for new users and remember later expansion choices, targeting preference and orb selections across Lua restarts. Removed the duplicate orb panel and shortened labels/help. (05-11-2026)
+- TEA ACR3 Opti enables the AoE quick toggle once all four Jagd Dolls resolve. (19-11-2026)
 
+- TEA ACR3 Opti uses LPDU doll quadrants, prioritizes confirmed personal tethers, and returns to Living Liquid when doll targeting is unsafe. (19-11-2026)
 
-### TEA: LPDU Draws
+- Reaper, Viper, and Samurai AutoSim give the assigned Jagd Doll a 0.80 planning multiplier while targeting it. (19-11-2026)
+
+- TEA AutoSim turns off the ACR AoE quick toggle at pull start and turns it back on after all four Jagd Dolls resolve. (19-11-2026)
+
+- Ranged players target Liquid Hand when available and return there after dolls, with HP balancing and boss cast protection. Doll cutoff still cancels active doll casts. (17-11-2026)
 
 - Added a one-time “Nisi passed” confirmation for the Photon partner stack and the Verdict Nisi handoff when the assigned pair shares the expected debuff. (16-11-2026)
 
@@ -76,60 +82,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - First tornado baiters hear “Move” once their cone locks. Doll previews and arrows use the LPDU quadrants, and the ranged arrow waits for the lock. (16-11-2026)
 
-- Added live previews for the second tornado cones during Jagd Dolls. (16-11-2026)
-
-- Fixed automatic Bard Paean for Throttle by selecting a party member with the active debuff. (16-11-2026)
-
-- Fixed both Final Word Motion/Stillness checks and the shared second Fate Alpha reveal. Motion jumps each frame; Stillness stops movement and casting, then resumes after its check. (13-11-2026)
-
-- Added Water vulnerability warnings, five-yalm mine danger circles hidden for OT, and faint previews of other players’ Wormhole slash cones and charge lanes. LPDU assignments and destinations are preserved. (13-11-2026)
-
-- Second Water points to B. Role guidance uses the configured Party Roster, and doll target return triggers at 24.9% HP. (08-11-2026)
-
-- Opening Optical Sight shows clear green circles and countdowns on both stack targets. The callout names the west/east split and the countdowns show each side once the targets separate. (08-11-2026)
-
-
-### TEA: LPDU mits
-
-- Added a separate mitigation profile for TEA with Party Roster assignments for both tanks and all four DPS slots, including job-specific defensive and support actions. (08-11-2026)
-
-### TEA: ACR3 Opti
-
-- Reaper ACR3 checks for your tethered doll below 40% HP directly in the Disable Soul Gauge reaction and restores the toggle when the doll resolves. (19-11-2026)
-
-- TEA ACR3 Opti enables the AoE quick toggle once all four Jagd Dolls resolve. (19-11-2026)
-
-- TEA ACR3 Opti uses LPDU doll quadrants, prioritizes confirmed personal tethers, and returns to Living Liquid when doll targeting is unsafe. (19-11-2026)
-
-- Added LPDU Jagd Doll targeting for ACR3 users without AA AutoSim. It follows Party Roster assignments and personal tethers, then returns to Living Liquid at 24.9% HP or when the doll window ends. (11-11-2026)
-
-- Published [ACR3 Opti](TimelineReactions/TEA/ACR3%20Opti.lua) containing 15 Reaper/Pictomancer optimization reactions, separate from LPDU Draws with no inheritance. Uses the saved ACR3 controls. (07-11-2026)
-
-### TEA: AutoSim
-
-- Reaper, Viper, and Samurai AutoSim give the assigned Jagd Doll a 0.80 planning multiplier while targeting it. (19-11-2026)
-
-- TEA AutoSim turns off the ACR AoE quick toggle at pull start and turns it back on after all four Jagd Dolls resolve. (19-11-2026)
-
-- Ranged players target Liquid Hand when available and return there after dolls, with HP balancing and boss cast protection. Doll cutoff still cancels active doll casts. (17-11-2026)
-
-- Expanded Jagd Doll targeting diagnostics with assignment source, tether conflicts, range and cast blocks, and separate target request and confirmation records. (16-11-2026)
-
-- Fixed initial Jagd Doll targeting to use LPDU quadrants relative to the open tornado side. Actual personal tethers still take priority. (16-11-2026)
-
-- Applied the doll AoE blacklist before spawn and held Bard’s Pitch Perfect and Shadowbite during acquisition to prevent splash from claiming another doll. (16-11-2026)
-
-- Added P2 boss and Plasma Shield targeting diagnostics with observed target confirmation. Missing Cruise Chaser lookup now retries for up to five seconds while preserving active shield targeting. (15-11-2026)
-
-- Doll targeting now prioritizes the player's actual tether before cardinal assignment and the 24.9% HP cutoff, allowing tethered dolls to be selected when geometry assignment is unavailable. (15-11-2026)
-
-- Removed the older Tramadol profile download; use `[AA] Autosim - TEA.lua`. (05-11-2026)
-
-- Added AA AutoSim with LPDU DPS doll assignments, strict DoT/AoE and burst safeguards, and a latched 24.9% cutoff that stops doll casts and returns to Living Liquid. Includes opener targeting, helper setup and targeting diagnostics. Movement/feeding remain manual; in-flight damage cannot be recalled. (05-11-2026)
-- Countdown targeting selects Living Liquid with FFXIVMinion Start Combat kept off. Cancelling or finishing the countdown stops pending selection. (05-11-2026)
-
-
-### Sil'dihn: General profile / AutoSim
+### Sil'dihn
 
 - Fixed the Gladiator and Zeless Gah add lookups, made three Silkie and AutoSim checks return a strict true/false, removed leftover settings-path code, and stopped the Silkie guide from scanning entities outside Sil'dihn. (22-11-2026)
 
@@ -147,14 +100,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Updated the saved criterion profile with recent mitigation assignments, configurable Gladiator tether roles, and caster movement forecasts. (13-11-2026)
 
-- Bard saves Apex Arrow for the next boss when only one or two enemies remain in the final trash pack and each is at 8% HP or lower. (11-11-2026)
-
-- Made Sil'dihn eligible for Optifine users by replacing direct file I/O with independent FileLoad/FileSave preferences. Existing targeting and mechanic logic are preserved. (05-11-2026)
-
-- Before Gladiator, offensive cooldowns are allowed on the first two trash enemies, then reserved across the last two Armor/Dullahan enemies. Defensive mitigation is unaffected. (05-11-2026)
-
-
-### Dungeons: Shared AutoSim
+### Dungeons
 
 - Added Paglth'an: boss and trash telegraphs, Kan Rhai crosses, Amhuluk Levin and Lightning Rod circles, the Magitek Core launchpad, an optional Arm's Length request for Ground-to-ground Ballistic (off by default), and AutoSim forecasts for Amhuluk, Magitek Core (both add waves) and Lunar Bahamut. (22-11-2026)
 
@@ -176,63 +122,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Added Arm's Length requests and temporary KB Cancel fallback for Maulskull's knockbacks in The Skydeep Cenote. (19-11-2026)
 
-- Added a sampled 132.2-second kill estimate and a Bubble Bomb dodge window for Feather Ray. (19-11-2026)
-
-- Added automatic party-safe facing for Feather Ray Nuisance and green safe spots for Bubble Bomb Burst in The Skydeep Cenote. (19-11-2026)
-
-### Shinryu Unreal: Draws
-
-- Checked Shinryumain: no owned core Settings or direct file-I/O dependency was found, and no separate settings file is required. Anyone-owned inherited reactions are outside this check. (05-11-2026)
-
-- Added a Surecast Hotbar request in the final five seconds of Tidal Wave, independent of AutoSim. (05-11-2026)
-
-### Shinryu Unreal: Shared AutoSim
-
-- Made [AA] Autosim - Shinryu Unreal eligible for Optifine users with independent FileLoad/FileSave preferences. Targeting diagnostics remain in the native debug log without direct log-file I/O. (05-11-2026)
-
-- Automatic potions are now blocked during the final 30 seconds of the P1 estimate and the button-mash transition, then allowed again when adds become targetable. Includes a saved enable toggle and adjustable buffer; your previous Potion toggle is restored. (05-11-2026)
-
-- Countdown targeting selects Shinryu with FFXIVMinion Start Combat kept off. Added diagnostics across countdown, boss, adds and wing targeting, including skipped targets, melee range, cast/LB protection and disabled settings. (05-11-2026)
-
-- Added optional automatic targeting for Tail/Heart/Shinryu, highest-HP large dragons before small adds, and the first-casting final wing before the other wing and boss. Includes cast/lifetime checks, melee-range checks, diagnostics, and an optional caster-only two-wing LB with targeting protection, off by default. Settings hide after 15 seconds of combat. (05-11-2026)
-
-- Calibrated untouched P1/adds defaults to 276s/64s against a death-free clear, preserving custom timings and live phase corrections. Updated conservative movement forecasts for adds and late body repositioning. (05-11-2026)
-
-- Updated the P1 transition estimate to 280s and adds estimate to 65s for a slightly faster average pace. Previous default values migrate once; custom timings are preserved. Actual transitions still correct forecasts. (04-11-2026)
-
-- Added a Dark Matter button-mash Stun forecast so AutoSim accounts for being unable to use actions during the transition. Actual Dark Matter casts correct its timing; existing target downtime remains separate. (04-11-2026)
-
-### UCOB: LPDU mitigation
-
-- Checked Ucobreactions/lpdu tank mits for Optifine users: no owned core Settings, direct file I/O or separate saved preference panel was found. Editor choices remain in the reaction profile file. (05-11-2026)
-
-- Added Bard Nature’s Minne before Golden Morn Afah #2 to support recovery healing. Replay confirmation remains pending. (01-11-2026)
-
-- Added Bard Troubadour for Gigaflares #1/#3 and Golden Morn Afah #1/#4, plus Nature’s Minne healing support for Gigaflares #2/#4. Requests are Bard-only and timed around observed hits; replay confirmation remains pending. (01-11-2026)
-
-### UCOB: Shared AutoSim
-
-- Fixed the AutoSim forecast's boss lookup so it can track boss presence and targetability. (22-11-2026)
-
-- The Nael low-HP guard now holds Ley Lines and Triplecast through dives until Bahamut becomes targetable. (18-11-2026)
-
-- Added Nael guard debug logs for the HP lock, Bard hold requests, and Potion toggle changes. (18-11-2026)
-
-- Nael’s low-HP guard now catches the 1 HP floor and holds Bard burst cooldowns and enabled potions through dives until Bahamut becomes targetable. (18-11-2026)
-
-- AutoSim gives damage zero planning value once Nael reaches her HP floor in P2, so it can save burst for the next phase. (11-11-2026)
-
-### UWU: Shared AutoSim
-
-- Turning off automatic nail targeting also disables automatic Ifrit selection in P2. Both nail controllers now start targeting as soon as a nail awakens, then switch only to other awakened nails, even if the full nail layout is missing. (19-11-2026)
-
-- Bard turns off CD, Songs and Potion at timeline 110 and turns them back on when Ifrit becomes targetable. (18-11-2026)
-
-- Black Mage can reserve Ley Lines for Ifrit from timeline 110 with a setting under Garuda. Turning it off uses the existing 5% HP trigger. (18-11-2026)
-
-- Black Mage skips new DoTs below 10% HP on Garuda, Ifrit, and Titan. Temporary blacklist entries clear at the next boss, on wipe, or at the next countdown. (18-11-2026)
-
-### DSR: LPDU (Beta)
+### DSR
 
 - Fixed a missing render flag on the optional P4 blue-orb outline label. (22-11-2026)
 
@@ -254,19 +144,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Added a saved P2 first meteor tower preference for middle-right-left or middle-left-right, applied after meteor separation. (17-11-2026)
 
-- P5 clears stale twister guidance and restores confirmed cross knockback positioning. P6 keeps clear breath destinations visible and previews the Wroth Akh Morn corner earlier. (16-11-2026)
-
-### TOP: AutoSim
-
-- The countdown reaction shows an explicit Set target to Omega action after switching Start Combat off. (18-11-2026)
-
-- Checked [AA] Autosim - TOP (5): already eligible for Optifine users without an owned core Settings or file-I/O dependency. It exposes no separate saved preference panel; reaction-editor choices remain in the profile file. (05-11-2026)
-
-- Shared TOP AutoSim now disables AnyoneCore’s Prepull Helper during its precombat setup. The setting remains off until manually re-enabled. (01-11-2026)
-
-- Added [AA] Autosim - TOP (5). P6 add blacklisting handles both Cosmo Meteors and Comets, once per content ID per pull. This profile forecasts LB downtime but does not automatically use LB. (31-10-2026)
-
-### TOP: LPDU
+### TOP
 
 - Moved the non-tank end-of-P1 bait circles closer to Omega while keeping the spots separated. (19-11-2026)
 
@@ -282,47 +160,17 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Fixed the repeated “Preposition parties” callout before Pantokrator. (19-11-2026)
 
+- The countdown reaction shows an explicit Set target to Omega action after switching Start Combat off. (18-11-2026)
+
 - Added an optional Testing spread for Pantokrator. Place the first puddle on the boss side of your group's gap, move outward for the second, then rejoin your group. LPDU remains the default. (18-11-2026)
 
 - Program Loop now shows the outside wait spot during the tether-path callout. The optional next-assignment countdown follows your character using the TEA Motion/Stillness style. Pantokrator preposition guidance starts at 61 seconds. (18-11-2026)
 
-- Added an optional outside wait spot for players without a first-wave Program Loop assignment, enabled by default. Enable the separate next-assignment label under P1 to see when your next tower or tether starts. (18-11-2026)
-
-- Added a P1 Pantokrator cone preview toggle. Turn it off to show only the current red cone pair. (18-11-2026)
-
-- TOP roster-dependent draws wait for a ready Party Roster without logging repeated condition errors. (08-11-2026)
-
-### UCOB: LPDU
-
-- Fixed the personal Earthshaker cone during Quickmarch and Tenstrike, which could not find its source. (22-11-2026)
-
-- Quickmarch and both Tenstrike Earthshaker waves show every cone. Your cone is green when clear or red when it clips a teammate. (19-11-2026)
-
-- The first Adds quote shows player-attached In and Out countdowns in sequence. (19-11-2026)
-
-- Grand Octet now previews your Twister bait near the towers and marks actual Twister spawns. (19-11-2026)
-
-- Tenstrike shows all three neurolinks during Hatch assignment, bases the move-out arrow on the link actually soaked, and shortens the spread callout to Spread away from 4. (19-11-2026)
-
-- Nael shows player-attached Out and In countdowns for the quotes around 266 and 298 once the preceding step resolves. (19-11-2026)
-
-- The opening Twister previews your current bait position, then marks the actual spawned Twisters. (19-11-2026)
-
-- Adds Hatch shows a staging arrow for the south neurolink before Twister. Both Adds spread countdowns can recover from a missed quote using the observed cast sequence. (19-11-2026)
-
-- Heavensfall calls the observed cone rotation and shows a brighter preview of the first cone pair beyond the live telegraphs. (19-11-2026)
-
-- Golden Bahamut settings now offer Exaflares or Subtractive draws. Subtractive shades the arena green and cuts out only the current blast in each active lane. (19-11-2026)
-
-- Morn Afah calls “Stack” at cast start and shows a countdown over the stack target. (19-11-2026)
-
-### UCOB: ACR3 Optimization
-
-- Added the seven LPDU potion timings using the shared ACR Potion Hotbar request. (08-11-2026)
-
-### FRU: LPDU
+### FRU
 
 - Fall of Faith Conga appears at 82. Utopian Sky has an optional Raised Sword callout for your clockspot. Non-tanks get a Go inside cue when the first cleave clears in the P1 tower knockback pattern. Added separate Party Roster clockspot previews with short green arrows and direction callouts at pull start and P2 start. The P1 preview is near max melee. The P2 preview starts at 204, uses 40% opacity, and points 11.5 yalms from center. Light Rampant opens with the curved LPDU double conga. The optional Testing puddle guide marks each next bait and guides you clear of the final drop before regrouping. Its first movement cue says Keep baiting clockwise. Diamond Dust Out Swap cues react to the personal cone and blocking icicles. One Diamond Dust setting controls the personal Frigid Stone and outward House of Light bait countdowns. The final Diamond Dust slide recalculates from your current position and checks the puddles before marking the landing. Diamond Dust lane drops and Banish III spread use the standard player-attached countdown layout. (20-11-2026)
+
+- Aligned M1/M2 Feint, R1 physical-ranged mitigation, and R2 Addle with the FRU mitigation sheet. Added party-range and boss-target checks and tightened cooldown windows. (19-11-2026)
 
 - Added a player-attached rewind countdown near the end of Crystallize Time, using the remaining Return debuff duration. (15-11-2026)
 
@@ -330,60 +178,13 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Disable Start Combat when the pull countdown starts. (15-11-2026)
 
-- Moved potion reactions and P2 crystal targeting and AoE controls to FRU ACR3 Opti. Renamed owned draw labels to LPDU. (08-11-2026)
+- Disable AnyoneCore Prepull Helper when the pull countdown starts. (15-11-2026)
 
-- Fixed Ultimate Relativity guidance for the ice DPS to stay middle for the final stack. Diagonal assignments now name their Y-relative directions. (08-11-2026)
-
-- Intermission knockback positioning now includes a countdown attached to your player, ending at Swelling Frost after Absolute Zero. (07-11-2026)
-
-- Apoc safe-sector guidance appears after Spirit Taker lands and stays visible through Dark Eruption without a cast-time redraw. Countdown, spread calls and later movement steps retain their mechanic triggers, with fallback guidance if the early preview was missed. (07-11-2026)
-
-- Made Frureactions/lpdu strats eligible for Optifine users by replacing direct file I/O with FileLoad/FileSave for preferences and presets. No Minion core Settings dependency remains. (05-11-2026)
-
-### FRU: ACR3 Opti
-
-- Added shared Potion Hotbar requests, the second Fulgent reminder, and P2 crystal targeting and AoE controls with toggle restoration on wipe or map change. (08-11-2026)
-
-### UWU: LPDU
-
-- Automatic nail targeting (used when no AutoSim is running) now finds the nails and Ifrit correctly. (21-11-2026)
-
-- Garuda healers and Titan melee now get arrows to the actual Light Puddle. The Titan Mountain Buster cone previews from 713 and clears on the hit. The Garuda Move to 3 (SE) callout starts one second earlier. (19-11-2026)
-
-- Added a spoken Dodge twice cue at 744s before the last two Weight of the Land hits. (19-11-2026)
-
-- Ifrit post-nail Eruption arrows route toward relative east away from Searing Wind. R2 gets a pickup arrow to the actual Light Puddle. (19-11-2026)
-
-- Garuda Mesohigh marks the live assigned tether and shows R2 and OT where to intercept it. (19-11-2026)
-
-- Annihilation orb circles and assigned-soaker arrows now follow live orb state and clear individually on each explosion. Suppression’s move-to-edge arrow also calls out. (17-11-2026)
-
-- “Move south for eruption baits” now uses Party Roster to notify R1 and R2 only. (17-11-2026)
-
-- Added a green center circle and personal arrow during the four intermission meteor previews. (17-11-2026)
-
-- R1’s first Annihilation Mesohigh now shows a live arrow to the tether pickup segment with a green destination circle. (17-11-2026)
-
-- R1 receives a loud “Take Mesohigh tether” cue and raid warning when the first Annihilation tether appears. (17-11-2026)
-
-- Added “Bait Eruption” TTS for R1 and R2 at 339 and 376. (17-11-2026)
-
-- UWU LPDU Settings appears from 20 seconds before pull and hides 30 seconds into the fight. (07-11-2026)
-
-- Stack countdowns follow their marked player in Annihilation and Suppression. Orb highlights use one small attached cyan circle instead of oversized stationary yellow circles. (07-11-2026)
-
-- Added BossMod-style intermission meteor previews: four surrounding proximity circles leave the centre clear and disappear as each meteor lands. (07-11-2026)
-
-- Raised the NE/NW/SE/SW nail labels slightly further above the nail nameplates, keeping numbered labels in place. (07-11-2026)
-
-
-### Q40: Shared AutoSim
+### Q40
 
 - Cleaned up leftover settings-path code in the Q40 settings and setup reactions and made the Assist Enabled check return a strict true/false. (22-11-2026)
 
-- Made q40 eligible for Optifine users by replacing direct file I/O with independent FileLoad/FileSave preferences. Existing targeting and mechanic logic are preserved. (05-11-2026)
-
-### Mount Rokkon: General draws
+### Mount Rokkon
 
 - Shishio now highlights gaps between Cloud to Cloud beams with a green floor overlay in place of its red beam overlays. (22-11-2026)
 
@@ -397,9 +198,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Corrected Shishio cloud previews, Wail safe-square assignments and ghost-to-tower timing; added moving personal countdowns, clearer Noble Pursuit guidance and separate defamation destinations. (15-11-2026)
 
-- Made Mountrokkon eligible for Optifine users by replacing direct file I/O with independent FileLoad/FileSave preferences. Existing targeting and mechanic logic are preserved. (05-11-2026)
-
-### Alliance raids: General profile
+### Alliance raids
 
 - Added The Puppets' Bunker coverage (draws and AutoSim forecasts for the 813P-operated Aegis Unit, Heavy Artillery Unit, Superior Flight Units and The Compound), The World of Darkness draws, callouts and AutoSim forecasts, and an Echoes of Vana'diel AutoSim setup. (22-11-2026)
 
@@ -407,11 +206,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Fixed rare Lua errors in the 813P-operated Aegis Unit AutoSim kill estimate and Surface Laser puddle draws when the pull state was reset mid-fight. (22-11-2026)
 
-- Added Syrcus Tower boss forecasts and an Amon Curtain Call countdown, organized by duty and boss. Xande forecasts retain uptime on meteor targets. (09-11-2026)
-
-- Checked Alliance raid for Optifine users: no Minion core Settings or direct file-I/O dependencies were found in its own reactions. It has no saved preference panel, so no settings file was added. Inherited dependencies require their own runtime checks. (05-11-2026)
-
-### Trials: General profile
+### Trials
 
 - Added the Trials general profile with draws, AutoSim and boss-targeting reactions for Chimera, Hydra, Zurvan, Susano, Byakko, Endsinger, Zodiark, Valigarmanda, Queen Eternal, Zoraal Ja, Zelenia, Necron, Doomtrain, Enuo, Sophia, Shinryu, Innocence, King Thordan and Cinder Drift. (22-11-2026)
 
@@ -419,7 +214,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Hydra: a Black Mage's Ley Lines and Triplecast toggles are now restored even if Lua is reloaded during the fight. (22-11-2026)
 
-### Normal raids: General profile
+### Normal raids
 
 - Added Eden's Verse: Furor draws, AutoSim, and Downburst Arm's Length. Conflag Strike's cone appears in the final five seconds. Also draws Irresistible Pull, predicted Tumultuous Nexus explosions, Hot Foot orb circles and Touchdown. (22-11-2026)
 
@@ -428,35 +223,3 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Fixed the boss lookup used by encounter-start boss targeting and pre-pull setup, which could not find the boss before. (22-11-2026)
 
 - Eden's Gate Resurrection: AutoSim no longer errors when Stasis or Eternal Breath arrives earlier than forecast. (22-11-2026)
-
-### R9S: R2 / R1 / M1
-
-- Made R2 eligible for Optifine users with FileLoad/FileSave for its kill-time range and EU guidance toggles. R1 and M1 were checked and have no owned core Settings or direct file-I/O dependency. (05-11-2026)
-
-### FRU: Shared AutoSim
-
-- Disable AnyoneCore Prepull Helper when the pull countdown starts. (15-11-2026)
-
-- Checked [AA] Autosim - FRU: already eligible for Optifine users without an owned core Settings or file-I/O dependency. It exposes no separate saved preference panel; reaction-editor choices remain in the profile file. (05-11-2026)
-
-### DSR: Shared AutoSim
-
-- Checked [AA] Autosim - DSW: already uses independent FileLoad/FileSave preferences for its caster-LB forecast option. No owned core Settings or direct file-I/O dependency was found. (05-11-2026)
-
-### Enuo EX: JacobMain
-
-- Checked JacobMain for Optifine users: no owned core Settings or direct file-I/O dependency was found. It has no separate saved preference panel; Anyone-owned inherited reactions are outside this check. (05-11-2026)
-
-### FRU: LPDU mitigations
-
-- Aligned M1/M2 Feint, R1 physical-ranged mitigation, and R2 Addle with the FRU mitigation sheet. Added party-range and boss-target checks and tightened cooldown windows. (19-11-2026)
-
-### TOP: LPDU mitigations
-
-- TOP potion timings now use the shared ACR Potion Hotbar request. (08-11-2026)
-
-- Made TOPReactions/lpdu mits eligible for Optifine users by removing core Settings access from Solar Ray tank-plan conditions. They now share independent TOP-LPDU.lua preferences with the draw GUI; existing plan defaults, timings and ACR requests are unchanged. (05-11-2026)
-
-### UWU: LPDU mitigations
-
-- Checked OwOReactions/LPDU mits for Optifine users: no owned core Settings, direct file I/O or separate saved preference panel was found. Editor choices remain in the reaction profile file. (05-11-2026)

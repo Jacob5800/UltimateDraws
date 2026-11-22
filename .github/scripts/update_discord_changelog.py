@@ -53,9 +53,14 @@ def changelog_sections(readme: str, *, limit: int | None = ENTRIES_PER_SECTION) 
         sections.append((heading, entries))
     if not sections:
         raise ValueError("The README changelog contains no entries")
-    # Stable sorting preserves newest-first authoring order for same-day entries.
-    return [(title, sorted(items, key=entry_date, reverse=True)[:limit])
-            for title, items in sections]
+    # Group legacy profile headings too, so regrouping does not repost old entries.
+    grouped: dict[str, list[str]] = {}
+    for title, items in sections:
+        fight = title.split(":", 1)[0].strip()
+        grouped.setdefault(fight, []).extend(items)
+    # Stable sorting preserves authoring order for same-day entries.
+    return [(fight, sorted(items, key=entry_date, reverse=True)[:limit])
+            for fight, items in grouped.items()]
 
 
 def new_changelog_sections(readme: str, previous_readme: str) -> list[tuple[str, list[str]]]:

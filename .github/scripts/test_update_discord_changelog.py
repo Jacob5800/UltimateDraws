@@ -61,6 +61,14 @@ class ChangelogTests(unittest.TestCase):
         after = '## Changelog\n### UCOB\n- One long\n  entry (18-10-2026)\n'
         self.assertEqual(changelog_payloads(after, before), [])
 
+    def test_legacy_profile_headings_merge_without_reposting(self):
+        before = ('## Changelog\n### UWU: AutoSim\n- AutoSim fix (18-10-2026)\n'
+                  '### UWU: LPDU settings\n- Settings fix (19-10-2026)\n')
+        after = ('## Changelog\n### UWU\n- Settings fix (19-10-2026)\n'
+                 '- AutoSim fix (18-10-2026)\n')
+        self.assertEqual(changelog_sections(before), changelog_sections(after))
+        self.assertEqual(changelog_payloads(after, before), [])
+
     def test_multiple_changed_sections_all_appear(self):
         before = '## Changelog\n### TOP\n- TOP existing (18-10-2026)\n'
         after = before + '### FRU\n- FRU new (18-10-2026)\n### UCOB\n- UCOB new (18-10-2026)\n'

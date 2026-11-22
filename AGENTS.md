@@ -1,8 +1,8 @@
 # Repository guidance for coding agents
 
-- Keep this README user-facing. When a change alters behavior users can see, add a concise entry to its `Changelog` under the relevant fight/profile. Append the date as trailing metadata in `(DD-MM-YYYY)` format; keep the description wording separate and unchanged just to add its date.
-- When pruning, delete only Changelog entries whose `(DD-MM-YYYY)` date is more than 10 days before the current date; never prune descriptive README copy or other sections. Remove empty fight/profile headings left behind by pruning.
-- Per user request, also cap each Changelog section at its 10 most recent entries, even within that 10-day window. Sort dated entries newest first, preserve existing order for ties, and keep undated entries after dated entries. This entry cap applies independently to every fight/profile section and the Discord preview.
+- Keep this README user-facing. When a change alters behavior users can see, add a concise entry to its `Changelog` under one heading for the fight or general duty category (for example, `### UWU`). Put AutoSim, LPDU, mitigation, and optimization changes under that same heading. Mention the profile in the entry when it helps readers. Append the date as trailing metadata in `(DD-MM-YYYY)` format; keep the description wording separate and unchanged just to add its date.
+- When pruning, delete only Changelog entries whose `(DD-MM-YYYY)` date is more than 10 days before the current date; never prune descriptive README copy or other sections. Remove empty fight or duty-category headings left behind by pruning.
+- Per user request, also cap each Changelog section at its 10 most recent entries, even within that 10-day window. Sort dated entries newest first, preserve existing order for ties, and keep undated entries after dated entries. This entry cap applies independently to every fight or duty-category section and the Discord preview.
 - Keep implementation notes, workflow steps, and agent-only instructions in this file rather than in the README.
 
 ## Shared reaction authoring and publishing
@@ -47,7 +47,7 @@ UCOB has one canonical published draws file, `LPDU Draws.lua`; do not recreate i
 
 - `.github/workflows/discord-changelog.yml` posts only new/updated README changelog entries on pushes to `main`, compared with the push's before revision. Formatting-only whitespace and removals do not post. Keep checkout history available for that baseline; fail rather than silently reposting history if it cannot be read.
 - Configure the repository Actions secret `DISCORD_WEBHOOK_URL` with the webhook URL.
-- Discord output must retain every fight/profile section with new entries, capped at 10 entries each. Paginate descriptions and messages within Discord limits; never truncate after the first section. Manual dispatch may explicitly request a full snapshot; otherwise it compares against HEAD^.
+- Discord output must retain every fight or duty-category section with new entries, capped at 10 entries each. Paginate descriptions and messages within Discord limits; never truncate after the first section. Manual dispatch may explicitly request a full snapshot; otherwise it compares against HEAD^.
 
 ## General dungeon profiles
 
