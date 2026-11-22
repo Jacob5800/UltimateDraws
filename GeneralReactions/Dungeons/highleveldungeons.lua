@@ -3751,6 +3751,945 @@ local tbl =
 			uuid = "cf53663b-0c05-bb6c-adc7-59ed73939dd8",
 			version = 2,
 		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "Paglth'an",
+			uuid = "5e88d9fb-4656-91f7-bdfb-90d8d7ecae76",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Paglth'an",
+			name = "AutoSim",
+			uuid = "664105f8-17d5-a997-88f5-8f9c997426bf",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if not PaglthanConfig then\n    local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n    local path=folder..[[Paglthan.AutoSim.lua]]\n    local values={draws=true,autoSim=true}\n    local saved=FileExists(path) and FileLoad(path)\n    for k in pairs(values) do\n        if type(saved)==\"table\" and type(saved[k])==\"boolean\" then values[k]=saved[k] end\n    end\n    local function save()\n        if not FolderExists(folder) then FolderCreate(folder) end\n        FileSave(path,values)\n    end\n    PaglthanConfig={values=values,save=save}\n    if type(saved)~=\"table\" or type(saved.draws)~=\"boolean\" or type(saved.autoSim)~=\"boolean\" then save() end\nend\nlocal settings=AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled=false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled=false end\nend\ngStartCombat=false\ndata.paglthanHelpers=true\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"d298c461-9cb2-9dea-854f-be0720766a6d",
+								true,
+							},
+						},
+						name = "Initialize settings and helpers",
+						uuid = "b0635c2a-fc84-afbe-9a94-82d06ca4e889",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nreturn PaglthanConfig==nil or data.paglthanHelpers~=true",
+						name = "Initialize settings and helpers gate",
+						uuid = "d298c461-9cb2-9dea-854f-be0720766a6d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Paglth'an/AutoSim",
+			name = "[Paglth’an] Initialize settings and helpers",
+			throttleTime = 500,
+			uuid = "3a8f0062-21af-e8b2-92d6-65592fa39dda",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local c=PaglthanConfig\nif not c then return end\nif GUI:CollapsingHeader(\"Paglth'an settings\") then\n    local value,changed=GUI:Checkbox(\"Enable AutoSim##paglthan\",c.values.autoSim)\n    if changed then c.values.autoSim=value;c.save() end\n    value,changed=GUI:Checkbox(\"Show boss telegraphs##paglthan\",c.values.draws)\n    if changed then c.values.draws=value;c.save() end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"32a20033-e216-cec3-b4a0-2a7a99eafa30",
+								true,
+							},
+						},
+						name = "Draw and AutoSim settings",
+						uuid = "fd1434d7-d3d5-c304-b3a7-f6cb23b9765a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nreturn PaglthanConfig~=nil",
+						name = "Draw and AutoSim settings gate",
+						uuid = "32a20033-e216-cec3-b4a0-2a7a99eafa30",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Paglth'an/AutoSim",
+			eventType = 13,
+			name = "[Paglth’an] Draw and AutoSim settings",
+			uuid = "98d47f09-c1eb-b65e-ba78-7fcbc2ff7900",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if data.paglthanBoss==nil then data.paglthanBoss=eventArgs.entityContentID end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"7f838a2c-e981-f8fd-b0a8-86c7829f36fd",
+								true,
+							},
+						},
+						name = "Boss cast anchors",
+						uuid = "c4d8337a-69ed-d125-ab57-c444ca617231",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nlocal e=eventArgs\nreturn (e.entityContentID==10075 or e.entityContentID==10076 or e.entityContentID==10077)\nand data.paglthanBoss==nil",
+						name = "Boss cast anchors gate",
+						uuid = "7f838a2c-e981-f8fd-b0a8-86c7829f36fd",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Paglth'an/AutoSim",
+			eventType = 3,
+			name = "[Paglth’an] Boss cast anchors",
+			uuid = "c1b87f71-e0d1-49ee-ac33-c47129fc9d78",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local boss=data.paglthanBoss\nif not boss then return end\nlocal api=TensorCore.API.TensorACR\nlocal t=api.getAutoSimTime()\nif type(t)~=\"number\" or t<0 then return end\napi.clearAutoSimUncertainty()\napi.clearAutoSimPhases(\"FullDowntime\")\nif boss==10075 then\n    api.setAutoSimKillTime(133)\n    api.addAutoSimUncertainty(0,20)\nelseif boss==10076 then\n    -- Encounter clock includes both ground waves. The logged pull ends with the Core kill at 132.4 s (one sample).\n    api.setAutoSimKillTime(132.4)\n    api.addAutoSimUncertainty(0,30)\n    for _,window in ipairs({{30.11,34.485},{52.953,59.547},{108.156,112.563}}) do\n        local start,finish=math.max(t,window[1]),window[2]\n        if finish>start then api.addAutoSimPhase(\"FullDowntime\",start,finish,1) end\n    end\nelseif boss==10077 then\n    api.setAutoSimKillTime(161)\n    api.addAutoSimUncertainty(0,25)\n    if t<87.7 then api.addAutoSimPhase(\"FullDowntime\",math.max(t,75.3),87.7,1) end\nend\ndata.paglthanForecast=true\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"9c2386e7-2726-53b3-a099-5d62b3d9ad9e",
+								true,
+							},
+						},
+						name = "Set up this combat",
+						uuid = "64a7b7b4-8d79-323f-940b-ddbd8ece7b26",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nreturn p.incombat==true and data.paglthanBoss~=nil and data.paglthanForecast~=true\nand PaglthanConfig~=nil and PaglthanConfig.values.autoSim==true",
+						name = "Set up this combat gate",
+						uuid = "9c2386e7-2726-53b3-a099-5d62b3d9ad9e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Paglth'an/AutoSim",
+			name = "[Paglth’an] Set up this combat",
+			throttleTime = 250,
+			uuid = "596ccef2-ed27-c4e7-9804-948573e7d0ad",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "data.paglthanForecast=nil\ndata.paglthanBoss=nil\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"9dfefa75-24dd-bd63-b81d-2fbccdaf274a",
+								true,
+							},
+						},
+						name = "Reset between combats",
+						uuid = "0e06cfd9-84ce-c338-bee1-57669cc2714e",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nreturn not p.incombat and data.paglthanForecast==true",
+						name = "Reset between combats gate",
+						uuid = "9dfefa75-24dd-bd63-b81d-2fbccdaf274a",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Paglth'an/AutoSim",
+			name = "[Paglth’an] Reset between combats",
+			throttleTime = 500,
+			uuid = "0ebedea7-1cb8-52de-8670-3f77f37d10e3",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local p=TensorCore.mGetPlayer()\nif not p or not p.pos then return end\nlocal current=TensorCore.mGetTarget()\nlocal pending=data.paglthanTargetPending\nif pending then\n    if current and current.id==pending.id then\n        TensorCore.timelineLogToFile(\"[Paglth'an target] confirmed=\"..pending.id)\n    elseif Now()<pending.expires then\n        return\n    else\n        TensorCore.timelineLogToFile(\"[Paglth'an target] request expired; intended=\"..pending.id..\" current=\"..tostring(current and current.id))\n    end\n    data.paglthanTargetPending=nil\nend\nif p.incombat or (current and current.alive and current.targetable and current.attackable) or ActionList:IsCasting() then return end\nfor _,cid in ipairs({10075,10076,10077}) do\n    if data.paglthanTarget~=cid then\n        for _,boss in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=cid}) or {}) do\n            if boss.alive and boss.attackable and boss.targetable and boss.pos then\n                local dx,dy,dz=boss.pos.x-p.pos.x,boss.pos.y-p.pos.y,boss.pos.z-p.pos.z\n                if dx*dx+dy*dy+dz*dz<=35*35 then\n                    gStartCombat=false\n                    TensorCore.timelineLogToFile(\"[Paglth'an target] request; intended=\"..boss.id..\" current=\"..tostring(current and current.id)..\" within 35y; Start Combat off\")\n                    Player:SetTarget(boss.id)\n                    data.paglthanTargetPending={id=boss.id,expires=Now()+1500}\n                    data.paglthanTarget=cid\n                    self.used=true\n                    return\n                end\n            end\n        end\n    end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"9ee33c4f-be33-0a0a-b38d-ca324052f67e",
+								true,
+							},
+						},
+						name = "Initial boss targeting",
+						uuid = "cd4d3ccc-fdb6-f1f5-abe1-c7327c2c6412",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nreturn data.paglthanTargetPending~=nil or not p.incombat and data.paglthanHelpers==true and PaglthanConfig~=nil and PaglthanConfig.values.autoSim==true",
+						name = "Initial boss targeting gate",
+						uuid = "9ee33c4f-be33-0a0a-b38d-ca324052f67e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Paglth'an/AutoSim",
+			name = "[Paglth’an] Initial boss targeting",
+			throttleTime = 750,
+			uuid = "01f45cc7-c0a4-78f9-a75f-4513a561de6e",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=TensorCore.mGetEntity(eventArgs.entityID)\nif data.paglthanBoss or not e or not e.pos then return end\nlocal pos=e.pos\nif math.abs(pos.x+175)<=15 and math.abs(pos.z-43)<=15 and math.abs(pos.y+25)<=3 then\n    data.paglthanBoss=10076\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"1b5962c1-3ee5-5e08-b436-80ebf743dc3d",
+								true,
+							},
+						},
+						name = "Detect opening Magitek Core wave",
+						uuid = "7d11ee5e-f8c7-b306-b121-2e4810c1a76f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nlocal e=eventArgs\nreturn data.paglthanBoss==nil and e.isTargetable==true\nand (e.entityContentID==10068 or e.entityContentID==10070)\nand p.pos~=nil and math.abs(p.pos.x+175)<=16 and math.abs(p.pos.z-43)<=16",
+						name = "Detect opening Magitek Core wave gate",
+						uuid = "1b5962c1-3ee5-5e08-b436-80ebf743dc3d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Paglth'an/AutoSim",
+			eventType = 26,
+			name = "[Paglth’an] Detect opening Magitek Core wave",
+			uuid = "651ef9fd-8d11-cdb7-a0b7-f33ea35cc329",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Paglth'an",
+			name = "Draws",
+			uuid = "17e380f3-f332-f9dd-bb36-bc474b94f0dd",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then self.used=true;return end\nlocal id=e.aoeID\nlocal drawer=TensorCore.getStaticDrawer(id==23381 and 0x8055FF55 or 0x803333FF,2)\nif id==24773 or id==23631 or id==23385 then\n    local angle=id==24773 and 120 or (id==23631 and 60 or 90)\n    local radius=id==24773 and 26 or (id==23631 and 25 or 30)\n    drawer:addTimedCone(ms,e.x,e.y,e.z,radius,math.rad(angle),e.heading,0,false,true)\nelseif id==23378 or id==23705 then\n    drawer:addTimedRect(ms,e.x,e.y,e.z,e.aoeLength,e.aoeWidth,e.heading,0,false,true)\nelseif id==23373 or id==23381 then\n    if e.targetAttach and e.targetAttach>0 then\n        drawer:addTimedCircleOnEnt(ms,e.targetAttach,id==23373 and 5 or 4,0,false,true)\n    end\nelse\n    drawer:addTimedCircle(ms,e.x,e.y,e.z,e.aoeLength,0,false,true)\nend\nif id~=23373 and id~=23381 then\n    AnyoneCore.addWorldTextCountdown(ms,{x=e.x,y=e.y+1,z=e.z},0xFFFFFFFF,true,1.1)\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"30f6942e-28d2-cf5c-be3b-3051ef44858a",
+								true,
+							},
+						},
+						name = "Selected boss attack telegraphs",
+						uuid = "c9285cb1-af32-ef62-bbb4-0d6b74bcb804",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nif not PaglthanConfig or not PaglthanConfig.values.draws then return false end\nlocal id=eventArgs.aoeID\nreturn id==24773 or id==23631 or id==23385 or id==23378 or id==23705\nor id==24667 or id==23368 or id==23381 or id==23373 or id==23374\nor id==23371 or id==23370 or id==23708",
+						name = "Selected boss attack telegraphs gate",
+						uuid = "30f6942e-28d2-cf5c-be3b-3051ef44858a",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Paglth'an/Draws",
+			eventType = 18,
+			name = "[Paglth’an] Selected boss attack telegraphs",
+			uuid = "51a55941-732a-b5c0-a199-2c7091c030b8",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\nif e.isVisible then\n    data.paglthanLevin=data.paglthanLevin or {}\n    data.paglthanLevin[e.entityID]=e.entityContentID==10066 and 10 or 5\nelseif data.paglthanLevin then\n    data.paglthanLevin[e.entityID]=nil\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"a15973e2-bc87-57ce-b12f-ee566cb88579",
+								true,
+							},
+						},
+						name = "Track Levin visibility",
+						uuid = "a2fd426d-0a8d-bf9a-900a-842cd2dc4464",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nreturn eventArgs.entityContentID==10065 or eventArgs.entityContentID==10066",
+						name = "Track Levin visibility gate",
+						uuid = "a15973e2-bc87-57ce-b12f-ee566cb88579",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Paglth'an/Draws",
+			eventType = 22,
+			name = "[Paglth’an] Track Levin visibility",
+			uuid = "b0356aa7-e9af-81ae-a854-55050519521b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local levin=data.paglthanLevin\nif not levin then return end\nlocal drawer=TensorCore.getStaticDrawer(0x803333FF,2)\nfor id,radius in pairs(levin) do\n    local orb=TensorCore.mGetEntity(id)\n    if orb and orb.pos then drawer:addCircle(orb.pos.x,orb.pos.y,orb.pos.z,radius,false) end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"bb7042b9-18dc-e37d-9dba-13431979142d",
+								true,
+							},
+						},
+						name = "Draw visible Levin circles",
+						uuid = "b6b1d42c-2ee5-f52f-b137-98a6d4982aa4",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nreturn PaglthanConfig~=nil and PaglthanConfig.values.draws==true\nand data.paglthanLevin~=nil and next(data.paglthanLevin)~=nil",
+						name = "Draw visible Levin circles gate",
+						uuid = "bb7042b9-18dc-e37d-9dba-13431979142d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Paglth'an/Draws",
+			eventType = 12,
+			name = "[Paglth’an] Draw visible Levin circles",
+			uuid = "51dcf0bf-6b4f-cc05-89ea-4298313fd1dd",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\ndata.paglthanRods=data.paglthanRods or {}\ndata.paglthanRods[e.entityID]=e.isVisible and true or nil\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"f455fc67-6cc0-4fe3-a0dd-5f57c4e0ce27",
+								true,
+							},
+						},
+						name = "Track Amhuluk Lightning Rods",
+						uuid = "0512d088-4ac9-ca4d-b3e9-192807955664",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nreturn eventArgs.entityContentID==108 and Argus.getEntityModel(eventArgs.entityID)==12726",
+						name = "Track Amhuluk Lightning Rods gate",
+						uuid = "f455fc67-6cc0-4fe3-a0dd-5f57c4e0ce27",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Paglth'an/Draws",
+			eventType = 22,
+			name = "[Paglth’an] Track Amhuluk Lightning Rods",
+			uuid = "19398d77-34a5-c47a-ba3d-543d98cbfacb",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local ms=math.floor(eventArgs.channelTimeMax*1000)\nif ms>0 then data.paglthanRodUntil=Now()+ms end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"364fe7d8-cc01-a034-b0a2-594e7d6dd250",
+								true,
+							},
+						},
+						name = "Draw charged Lightning Rod circles",
+						uuid = "921dde1d-5bc5-1f42-a521-db9de1e5a48e",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nreturn eventArgs.entityContentID==10075 and eventArgs.spellID==23627\nand PaglthanConfig~=nil and PaglthanConfig.values.draws==true and data.paglthanRods~=nil",
+						name = "Draw charged Lightning Rod circles gate",
+						uuid = "364fe7d8-cc01-a034-b0a2-594e7d6dd250",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Paglth'an/Draws",
+			eventType = 3,
+			name = "[Paglth’an] Draw charged Lightning Rod circles",
+			uuid = "5dfe92de-0496-687b-9db8-03573ab710ee",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local rods=data.paglthanRods\nif not rods then return end\nlocal drawer=TensorCore.getStaticDrawer(0x803333FF,2)\nfor id in pairs(rods) do\n    local rod=TensorCore.mGetEntity(id)\n    if rod and rod.pos and TensorCore.hasBuff(id,2574) then\n        drawer:addCircle(rod.pos.x,rod.pos.y,rod.pos.z,10,false)\n    end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"ec4f4f3c-5c6a-4fd7-9d22-bd423d1c5e88",
+								true,
+							},
+						},
+						name = "Draw armed Lightning Rods during the cast",
+						uuid = "02707b77-87c6-b90c-94db-b3933f5f8160",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nreturn PaglthanConfig~=nil and PaglthanConfig.values.draws==true\nand data.paglthanRodUntil~=nil and Now()<data.paglthanRodUntil and data.paglthanRods~=nil",
+						name = "Draw armed Lightning Rods during the cast gate",
+						uuid = "ec4f4f3c-5c6a-4fd7-9d22-bd423d1c5e88",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Paglth'an/Draws",
+			eventType = 12,
+			name = "[Paglth’an] Draw armed Lightning Rods during the cast",
+			uuid = "27699b2a-e451-d597-9ee8-1272f2e1d378",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "data.paglthanLaunchpad=eventArgs.a2==1\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"f26c86fd-075f-b2b7-b116-5fe169e11cfa",
+								true,
+							},
+						},
+						name = "Track Magitek Core launchpad",
+						uuid = "fa71b735-e875-9c51-93ac-e631367e4b01",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nreturn eventArgs.a1==13 and ((eventArgs.a2==1 and eventArgs.a3==2)\nor (eventArgs.a2==4 and eventArgs.a3==8))",
+						name = "Track Magitek Core launchpad gate",
+						uuid = "f26c86fd-075f-b2b7-b116-5fe169e11cfa",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Paglth'an/Draws",
+			eventType = 14,
+			name = "[Paglth’an] Track Magitek Core launchpad",
+			uuid = "ee45489e-b03a-8469-910b-055ab100ab6c",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local drawer=TensorCore.getStaticDrawer(0x8040FF40,2)\ndrawer:addCircle(-175,-25,30,2,false)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"804307bc-0e71-d4a1-b4cb-44ee5aabec48",
+								true,
+							},
+						},
+						name = "Draw active Magitek Core launchpad",
+						uuid = "d81a1c35-94d4-63cf-b57d-e90ea36ef63a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nreturn data.paglthanLaunchpad==true and PaglthanConfig~=nil and PaglthanConfig.values.draws==true\nand p.pos~=nil and p.pos.y< -19 and math.abs(p.pos.x+175)<=16 and math.abs(p.pos.z-43)<=16",
+						name = "Draw active Magitek Core launchpad gate",
+						uuid = "804307bc-0e71-d4a1-b4cb-44ee5aabec48",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Paglth'an/Draws",
+			eventType = 12,
+			name = "[Paglth’an] Draw active Magitek Core launchpad",
+			uuid = "201673ff-a362-f572-8528-99227b1c2894",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then self.used=true;return end\nlocal id=e.aoeID\nlocal drawer=TensorCore.getStaticDrawer(0x803333FF,2)\n-- Shapes come from the log AoE packets (BossMod has no trash modules). Cone angles are not in the packet: 90 degrees is an unverified default.\nif id==24828 or id==24821 or id==24665 or id==24823 or id==24905 then\n    drawer:addTimedCone(ms,e.x,e.y,e.z,e.aoeLength,math.rad(90),e.heading,0,false,true)\nelseif id==24674 or id==24676 then\n    drawer:addTimedRect(ms,e.x,e.y,e.z,e.aoeLength,e.aoeWidth,e.heading,0,false,true)\nelse\n    drawer:addTimedCircle(ms,e.x,e.y,e.z,e.aoeLength,0,false,true)\nend\nAnyoneCore.addWorldTextCountdown(ms,{x=e.x,y=e.y+1,z=e.z},0xFFFFFFFF,true,1.1)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"d6778de7-6371-6027-a476-06a85d1b52d3",
+								true,
+							},
+						},
+						name = "Draw trash telegraphs",
+						uuid = "5a2e4e9c-6b4e-80fc-aeac-f71922ca9a14",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nif not PaglthanConfig or not PaglthanConfig.values or not PaglthanConfig.values.draws then return false end\nif eventArgs.friendly then return false end\nlocal id=eventArgs.aoeID\nreturn id==24828 or id==24821 or id==24665 or id==24823 or id==24905 or id==24904 or id==24865 or id==24824 or id==24907 or id==24674 or id==24676",
+						dequeueIfLuaFalse = true,
+						name = "Paglth'an trash telegraph gate",
+						uuid = "d6778de7-6371-6027-a476-06a85d1b52d3",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Paglth'an/Draws",
+			eventType = 18,
+			name = "[Paglth’an] Trash attack telegraphs",
+			uuid = "46e25304-e439-d60d-b221-b16810df6e0d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local st=data.paglthanKanRhai\nif not st or Now()>st.untilTime then st={targets={},shapes={}};data.paglthanKanRhai=st end\nst.targets[eventArgs.entityID]=true\n-- Kan Rhai resolves about 3.7 s after it starts; keep the preview window short.\nst.untilTime=Now()+7000\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"c7f1e6d5-94c7-0c2e-91b3-c497bc756dc7",
+								true,
+							},
+						},
+						name = "Track Kan Rhai cross holders",
+						uuid = "5c8d458c-b0d4-d25f-9bf8-f185053b5a88",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nif not PaglthanConfig or not PaglthanConfig.values or not PaglthanConfig.values.draws then return false end\nreturn eventArgs.markerID==260",
+						dequeueIfLuaFalse = true,
+						name = "Paglth'an Kan Rhai marker gate",
+						uuid = "c7f1e6d5-94c7-0c2e-91b3-c497bc756dc7",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Paglth'an/Draws",
+			eventType = 4,
+			name = "[Paglth’an] Kan Rhai cross markers",
+			uuid = "4109a77d-64a2-8766-8b62-d64a6907db50",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local st=data.paglthanKanRhai\nif not st then self.used=true;return end\nfor _,u in ipairs(st.shapes) do Argus.deleteTimedShape(u) end\nst.shapes={}\nlocal me=TensorCore.mGetPlayer()\nif Now()>=st.untilTime or not me or me.localmapid~=938 then data.paglthanKanRhai=nil;self.used=true;return end\nlocal drawer=TensorCore.getStaticDrawer(0x803333FF,2)\nfor id in pairs(st.targets) do\n local pl=TensorCore.mGetEntity(id)\n if pl and pl.alive and pl.pos then\n  -- Cross 15 m each way, 6 m wide, not rotated with the boss (BossMod AOEShapeCross(15,3), IgnoreRotation).\n  for _,h in ipairs({0,math.pi/2}) do\n   st.shapes[#st.shapes+1]=drawer:addTimedRect(250,pl.pos.x,pl.pos.y,pl.pos.z,30,6,h,0,false,true)\n  end\n end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"d8278ea4-809d-46a4-9de4-c9f4130d9fd4",
+								true,
+							},
+						},
+						name = "Redraw crosses on marked players",
+						uuid = "1a7b2af1-b5b6-c8f6-8545-48da41d59c28",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return data.paglthanKanRhai~=nil",
+						dequeueIfLuaFalse = true,
+						name = "Kan Rhai window active",
+						uuid = "d8278ea4-809d-46a4-9de4-c9f4130d9fd4",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Paglth'an/Draws",
+			name = "[Paglth’an] Kan Rhai cross update",
+			throttleTime = 100,
+			uuid = "bf403122-065b-5dda-b5b0-13b83700803d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Paglth'an",
+			name = "Mitigations",
+			uuid = "5cd6563a-1f27-73d0-b951-b2c7db856dd6",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"3c650b51-391a-f46b-90d8-e4006837e66f",
+								true,
+							},
+						},
+						gVar = "ACR_TensorWeeb4_Hotbar_ArmsLength",
+						name = "Ground-to-ground Ballistic - Arm’s Length",
+						uuid = "026a5b8e-1346-aa5d-85cb-928656e261e2",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nlocal e=eventArgs\nreturn data.paglthanBoss==10076 and e.entityContentID==10067 and e.spellID==23703",
+						name = "Ground-to-ground Ballistic - Arm’s Length gate",
+						uuid = "3c650b51-391a-f46b-90d8-e4006837e66f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Paglth'an/Mitigations",
+			enabled = false,
+			eventType = 3,
+			name = "[Paglth’an] Ground-to-ground Ballistic - Arm’s Length",
+			throttleTime = 10000,
+			uuid = "66ed07b3-75d4-2f18-b237-73dbf5c67e09",
+			version = 2,
+		},
 	}, 
 	inheritedProfiles = 
 	{
