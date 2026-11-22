@@ -2008,6 +2008,246 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\nlocal hit={}\nfor _,id in ipairs(e.hitTargets or {}) do hit[id]=true end\nlocal target=TensorCore.mGetEntity(e.targetID)\nlocal orbs=TensorCore.entityList(\"contentid=12375\")\nlocal anySmall=false\nfor id,orb in pairs(orbs) do if hit[id] or hit[orb.id] then anySmall=true end end\n-- If the hammer's hit list does not name an orb, the small blast is on the orb the target stands on (nearest to the target).\nlocal nearest,nearestDist\nif not anySmall and target and target.pos then\n for id,orb in pairs(orbs) do\n  if orb.pos then\n   local d=(orb.pos.x-target.pos.x)^2+(orb.pos.z-target.pos.z)^2\n   if not nearestDist or d<nearestDist then nearest=id;nearestDist=d end\n  end\n end\nend\nlocal drawer=TensorCore.getStaticDrawer(0x803333FF,2)\nfor id,orb in pairs(orbs) do\n if orb.pos then\n  local small=hit[id] or hit[orb.id] or (nearest~=nil and id==nearest)\n  -- Orb blasts resolve about 4.2 s after the hammer lands: 8 m on the hit orb, 18 m on the others.\n  drawer:addTimedCircle(4200,orb.pos.x,orb.pos.y,orb.pos.z,small and 8 or 18,0,false,true)\n end\nend\nlocal boss=TensorCore.mGetEntity(e.entityID)\nif boss and boss.pos and target and target.pos then\n -- Flintlock wild charge: 50 x 8 line from Gorai toward the hammer target, about 4.1 s after the hammer.\n drawer:addTimedRect(4100,boss.pos.x,boss.pos.y,boss.pos.z,50,8,TensorCore.getHeadingToTarget(boss.pos,target.pos),0,false,true)\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"a1a0297c-56a8-0c2f-afce-c2a45ac57e4d",
+								true,
+							},
+						},
+						name = "Draw orb AoEs and Flintlock line",
+						uuid = "2db7c096-baa0-1882-a23c-4f2bf4c0cc54",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or (p.localmapid~=1155 and p.localmapid~=1156) then return false end\nlocal o=jacobRokkonOptions\nif not o or not o.enabled then return false end\nreturn eventArgs.spellID==34085 or eventArgs.spellID==34123",
+						dequeueIfLuaFalse = true,
+						name = "Rokkon map and Humble Hammer",
+						uuid = "a1a0297c-56a8-0c2f-afce-c2a45ac57e4d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Mount Rokkon/Gorai",
+			eventType = 2,
+			name = "[Gorai] Humble Hammer orb AoEs and Flintlock line",
+			uuid = "8f787542-7fa9-d314-ba24-6a30590a59c0",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\nif e.targetID and e.targetID~=0 then\n -- Torching Torment lands on its target 0.6 s after the cast ends: 6 m circle.\n local ms=math.floor((e.channelTimeMax+0.65)*1000)\n TensorCore.getStaticDrawer(0x803333FF,2):addTimedCircleOnEnt(ms,e.targetID,6,0,false,true)\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"d84e7083-f1cd-7e6b-9bb3-106536edbf87",
+								true,
+							},
+						},
+						name = "Draw 6 m tankbuster circle on the target",
+						uuid = "6ee51abc-c327-64a1-8406-d589b9f3ea5a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or (p.localmapid~=1155 and p.localmapid~=1156) then return false end\nlocal o=jacobRokkonOptions\nif not o or not o.enabled then return false end\nreturn eventArgs.spellID==34098",
+						dequeueIfLuaFalse = true,
+						name = "Rokkon map and Torching Torment",
+						uuid = "d84e7083-f1cd-7e6b-9bb3-106536edbf87",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Mount Rokkon/Gorai",
+			eventType = 3,
+			name = "[Gorai] Torching Torment tankbuster circle",
+			uuid = "32280449-65ca-d0dc-8f5f-d0c796056d48",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\nlocal st={boss=e.entityID,untilTime=Now()+math.floor((e.channelTimeMax+0.65)*1000),shapes={}}\nif e.spellID==34095 then\n -- Impure Purgation: every player baits a 60 m cone (45 degrees) from the boss.\n st.players={}\n local me=TensorCore.mGetPlayer()\n local seen=false\n for _,m in pairs(TensorCore.getEntityGroupList('Party') or {}) do\n  st.players[#st.players+1]=m.id\n  if me and m.id==me.id then seen=true end\n end\n if me and not seen then st.players[#st.players+1]=me.id end\nelse\n -- Pointed Purgation: only players tethered to the boss (tether 89) bait a cone.\n st.tether=true\nend\ndata.rokkonBaits=st\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"76313bd3-2815-8f90-bd4d-1cf1ef9fd56a",
+								true,
+							},
+						},
+						name = "Start bait cone preview window",
+						uuid = "e87bbdb8-dd90-7f64-9028-6944ad4fa28e",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or (p.localmapid~=1155 and p.localmapid~=1156) then return false end\nlocal o=jacobRokkonOptions\nif not o or not o.enabled then return false end\nreturn eventArgs.spellID==34095 or eventArgs.spellID==34077",
+						dequeueIfLuaFalse = true,
+						name = "Rokkon map and Purgation cast",
+						uuid = "76313bd3-2815-8f90-bd4d-1cf1ef9fd56a",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Mount Rokkon/Gorai",
+			eventType = 3,
+			name = "[Gorai] Purgation bait cones - start",
+			uuid = "a68904a9-fb8f-8b7a-9cc2-2e4a35b1079e",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\ndata.rokkonPointedTethers=data.rokkonPointedTethers or {}\nlocal set=data.rokkonPointedTethers\nif e.newTetherID==89 then\n -- The tether runs between a player and Gorai; record both ends, the boss is skipped when drawing.\n set[e.sourceEntityID]=true\n if e.newTargetID then set[e.newTargetID]=true end\nelseif e.oldTetherID==89 then\n set[e.sourceEntityID]=nil\n if e.oldTargetID then set[e.oldTargetID]=nil end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"9a8aba8a-2b14-399d-80f2-a8c0546fe546",
+								true,
+							},
+						},
+						name = "Track tether 89 holders",
+						uuid = "e45ca8f5-c46d-b45c-8010-7a86ab192668",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or (p.localmapid~=1155 and p.localmapid~=1156) then return false end\nlocal o=jacobRokkonOptions\nif not o or not o.enabled then return false end\nreturn eventArgs.newTetherID==89 or eventArgs.oldTetherID==89",
+						dequeueIfLuaFalse = true,
+						name = "Rokkon map and tether 89",
+						uuid = "9a8aba8a-2b14-399d-80f2-a8c0546fe546",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Mount Rokkon/Gorai",
+			eventType = 15,
+			name = "[Gorai] Pointed Purgation tethers",
+			uuid = "3d91c631-e67b-6fee-8d72-ed96d229a0e6",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local st=data.rokkonBaits\nif not st then self.used=true;return end\nfor _,u in ipairs(st.shapes) do Argus.deleteTimedShape(u) end\nst.shapes={}\nlocal me=TensorCore.mGetPlayer()\nif Now()>=st.untilTime or not me or (me.localmapid~=1155 and me.localmapid~=1156) then data.rokkonBaits=nil;self.used=true;return end\nlocal boss=TensorCore.mGetEntity(st.boss)\nif not boss or not boss.pos then self.used=true;return end\nlocal ids=st.players\nif st.tether then\n ids={}\n for id in pairs(data.rokkonPointedTethers or {}) do ids[#ids+1]=id end\nend\nlocal drawer=TensorCore.getStaticDrawer(0x803333FF,2)\nfor _,id in ipairs(ids or {}) do\n if id~=st.boss then\n  local pl=TensorCore.mGetEntity(id)\n  if pl and pl.alive and pl.pos then\n   st.shapes[#st.shapes+1]=drawer:addTimedCone(250,boss.pos.x,boss.pos.y,boss.pos.z,60,math.pi/4,TensorCore.getHeadingToTarget(boss.pos,pl.pos),0,false,true)\n  end\n end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"2d25a640-f6af-70c4-a252-dfda0157cdaa",
+								true,
+							},
+						},
+						name = "Redraw bait cones toward baiting players",
+						uuid = "624b415e-7db0-7b93-bb5b-bd384d554c97",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return data.rokkonBaits~=nil",
+						dequeueIfLuaFalse = true,
+						name = "Bait window active",
+						uuid = "2d25a640-f6af-70c4-a252-dfda0157cdaa",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Mount Rokkon/Gorai",
+			name = "[Gorai] Purgation bait cones - update",
+			throttleTime = 100,
+			uuid = "3f103a3a-3526-e038-a745-81ed08764e5a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "Mount Rokkon",
 			name = "Moko",
 			uuid = "c3bcfe33-7a24-af13-b799-0324098f7e63",

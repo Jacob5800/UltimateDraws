@@ -381,6 +381,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Mount Rokkon: General draws
 
+- Added Gorai draws for the Humble Hammer orb blasts and Flintlock line, the Torching Torment circle, and the Impure and Pointed Purgation bait cones. (22-11-2026)
+
 - Added Moko tether-facing and clone guidance, near/far bait previews, corrected Upwell lanes and a safe handoff to Triple Kasumi-giri. The existing final-clone strategy setting now controls guidance, with Moogle fallback draws off by default. (15-11-2026)
 
 - Added Gorai's second tower sequence, personal limit-cut steps and staged exaflare guidance. (15-11-2026)
