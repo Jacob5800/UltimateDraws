@@ -8831,7 +8831,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local api = TensorCore.API.TensorACR\napi.setAutoSimKillTime(157)\napi.clearAutoSimUncertainty()\napi.addAutoSimUncertainty(0, 20)\napi.clearAutoSimPhases(\"FullDowntime\")\napi.clearAutoSimPhases(\"CasterDowntime\")\nfor _, window in ipairs({}) do\n    api.addAutoSimPhase(\"CasterDowntime\", window[1], window[2])\nend\ndata.wodAutoSim = {boss = eventArgs.entityID, content = 3227}\n\nself.used = true",
+						actionLua = "local api = TensorCore.API.TensorACR\napi.setAutoSimKillTime(160)\napi.clearAutoSimUncertainty()\napi.addAutoSimUncertainty(0, 20)\napi.clearAutoSimPhases(\"FullDowntime\")\napi.clearAutoSimPhases(\"CasterDowntime\")\nfor _, window in ipairs({}) do\n    api.addAutoSimPhase(\"CasterDowntime\", window[1], window[2])\nend\ndata.wodAutoSim = {boss = eventArgs.entityID, content = 3227}\n\nself.used = true",
 						conditions = 
 						{
 							
@@ -8948,7 +8948,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local api = TensorCore.API.TensorACR\napi.setAutoSimKillTime(174)\napi.clearAutoSimUncertainty()\napi.addAutoSimUncertainty(0, 20)\napi.clearAutoSimPhases(\"FullDowntime\")\napi.clearAutoSimPhases(\"CasterDowntime\")\nfor _, window in ipairs({}) do\n    api.addAutoSimPhase(\"CasterDowntime\", window[1], window[2])\nend\ndata.wodAutoSim = {boss = eventArgs.entityID, content = 3234}\n\nself.used = true",
+						actionLua = "local api = TensorCore.API.TensorACR\napi.setAutoSimKillTime(180)\napi.clearAutoSimUncertainty()\napi.addAutoSimUncertainty(0, 20)\napi.clearAutoSimPhases(\"FullDowntime\")\napi.clearAutoSimPhases(\"CasterDowntime\")\nfor _, window in ipairs({}) do\n    api.addAutoSimPhase(\"CasterDowntime\", window[1], window[2])\nend\ndata.wodAutoSim = {boss = eventArgs.entityID, content = 3234}\n\nself.used = true",
 						conditions = 
 						{
 							
@@ -9065,7 +9065,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local api = TensorCore.API.TensorACR\napi.setAutoSimKillTime(154)\napi.clearAutoSimUncertainty()\napi.addAutoSimUncertainty(0, 20)\napi.clearAutoSimPhases(\"FullDowntime\")\napi.clearAutoSimPhases(\"CasterDowntime\")\nfor _, window in ipairs({}) do\n    api.addAutoSimPhase(\"CasterDowntime\", window[1], window[2])\nend\ndata.wodAutoSim = {boss = eventArgs.entityID, content = 3240}\ndata.wodAutoSim.downtime = api.addAutoSimPhase(\"FullDowntime\", 125, 142.2)\nself.used = true",
+						actionLua = "local api = TensorCore.API.TensorACR\napi.setAutoSimKillTime(163)\napi.clearAutoSimUncertainty()\napi.addAutoSimUncertainty(0, 20)\napi.clearAutoSimPhases(\"FullDowntime\")\napi.clearAutoSimPhases(\"CasterDowntime\")\napi.clearAutoSimPhases(\"MeleeDowntime\")\nfor _, window in ipairs({}) do\n    api.addAutoSimPhase(\"CasterDowntime\", window[1], window[2])\nend\ndata.wodAutoSim = {boss = eventArgs.entityID, content = 3240}\ndata.wodAutoSim.downtime = api.addAutoSimPhase(\"FullDowntime\", 125, 142.2)\n-- After the long disappearance the boss returns away from the melee group: out of melee 2.2 s (first log) and 3.0 s (second log). Two clears.\ndata.wodAutoSim.melee = api.addAutoSimPhase(\"MeleeDowntime\", 142.2, 145.2)\nself.used = true",
 						conditions = 
 						{
 							
@@ -9182,7 +9182,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local s = data.wodAutoSim\nlocal api = TensorCore.API.TensorACR\nlocal now = api.getAutoSimTime()\nif not eventArgs.isTargetable and not s.departed then\n    s.departed = now\n    api.setAutoSimPhase(s.downtime, now, now + 17.1, 1)\nelseif eventArgs.isTargetable and s.departed then\n    s.returned = true\n    api.setAutoSimPhase(s.downtime, s.departed, now, 1)\nend\nself.used = true",
+						actionLua = "local s = data.wodAutoSim\nlocal api = TensorCore.API.TensorACR\nlocal now = api.getAutoSimTime()\n-- Two disappearances were observed (22-11 log): a short one around 26.6-30.9 s and the long one at 125-142 s / 142-159 s.\nif not eventArgs.isTargetable then\n    if now < 60 then\n        s.short = api.addAutoSimPhase(\"FullDowntime\", now, now + 4.5)\n        s.shortStart = now\n    else\n        s.departed = now\n        api.setAutoSimPhase(s.downtime, now, now + 17.1, 1)\n        if s.melee then api.setAutoSimPhase(s.melee, now + 17.1, now + 20.1, 1) end\n    end\nelse\n    if s.shortStart and not s.shortDone then\n        s.shortDone = true\n        if s.short then api.setAutoSimPhase(s.short, s.shortStart, now, 1) end\n        api.addAutoSimPhase(\"MeleeDowntime\", now, now + 4.8)\n    elseif s.departed then\n        s.returned = true\n        api.setAutoSimPhase(s.downtime, s.departed, now, 1)\n        if s.melee then api.setAutoSimPhase(s.melee, now, now + 3.0, 1) end\n    end\nend\nself.used = true",
 						conditions = 
 						{
 							
@@ -10072,55 +10072,6 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Cast resolves ~270-290 ms after the channel time max in the log (2.7 s -> 2.99 s, 4.2 s -> 4.47 s).\ndata.wodGazes=data.wodGazes or {}\nlocal n=Now()\ndata.wodGazes[eventArgs.entityID]={spell=eventArgs.spellID,started=n,deadline=n+eventArgs.channelTimeMax*1000+650}\nself.used=true",
-						conditions = 
-						{
-							
-							{
-								"e25d5bc5-7abb-d88d-8c78-ac705222ad0d",
-								true,
-							},
-						},
-						name = "Track gaze resolve (channel + 650 ms)",
-						uuid = "89dab4b0-c2e6-59ef-97f5-126cf8756d6e",
-						version = 2.1,
-					},
-				},
-			},
-			conditions = 
-			{
-				
-				{
-					data = 
-					{
-						category = "Lua",
-						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal s=eventArgs.spellID\nreturn p~=nil and p.localmapid==151 and eventArgs.entityContentID==3231 and (s==3281 or s==3499)",
-						dequeueIfLuaFalse = true,
-						name = "Mortal Gaze channel",
-						uuid = "e25d5bc5-7abb-d88d-8c78-ac705222ad0d",
-						version = 3,
-					},
-				},
-			},
-			displayPath = "The World of Darkness/Draws and callouts",
-			eventType = 3,
-			name = "[World of Darkness] Mortal Gaze - track resolve time",
-			timeout = 9,
-			uuid = "8e0ecb43-7dcf-4064-b87f-ad6c1665747f",
-			version = 2,
-		},
-	},
-	
-	{
-		data = 
-		{
-			actions = 
-			{
-				
-				{
-					data = 
-					{
-						aType = "Lua",
 						actionLua = "local pending=data.wodGazes\nlocal A=TensorCore.API.TensorACR\nlocal p=TensorCore.mGetPlayer()\nlocal now=Now()\nlocal angles={}\nlocal remaining=false\nfor id,g in pairs(pending) do\n local e=TensorCore.mGetEntity(id)\n local interrupted=e and now-g.started>500 and now<g.deadline-900 and e.castinginfo.channelingid~=g.spell and e.castinginfo.castingid~=g.spell\n if not p or p.localmapid~=151 or not p.alive or not e or now>=g.deadline or interrupted then\n  pending[id]=nil\n else\n  remaining=true\n  if g.deadline-now<=2300 then\n   angles[#angles+1]=TensorCore.getHeadingToTarget(p.pos,e.pos)\n  end\n end\nend\nif #angles>0 then\n local heading,best=0,math.huge\n for i=0,63 do\n  local h=i*math.pi/32\n  local worst=-math.huge\n  for j=1,#angles do worst=math.max(worst,math.cos(h-angles[j])) end\n  if worst<best then best=worst;heading=h end\n end\n A.setLockFaceHeading(heading)\n A.setHardLockFace(true)\n A.toggleLockFace(true)\n data.wodGazeOwnsLock=true\nelseif data.wodGazeOwnsLock then\n A.toggleLockFace(false)\n A.setHardLockFace(false)\n data.wodGazeOwnsLock=nil\nend\nif not remaining then data.wodGazes=nil;self.used=true end",
 						conditions = 
 						{
@@ -10251,6 +10202,176 @@ local tbl =
 			eventType = 10,
 			name = "[World of Darkness] Mortal Gaze - release on death",
 			uuid = "9a45cbc5-bb6b-f371-a03c-33fc9bccd6eb",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "-- Cast resolves about 270-320 ms after the channel time max (2.7 s -> about 2.97-3.02 s).\ndata.wodGazes=data.wodGazes or {}\nlocal n=Now()\ndata.wodGazes[eventArgs.entityID]={spell=eventArgs.spellID,started=n,deadline=n+eventArgs.channelTimeMax*1000+650}\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"2c4aed9f-7eaa-842e-b694-a1ad44a34d9d",
+								true,
+							},
+							
+							{
+								"b8c9ddf4-f085-084a-b397-0783c4103c8e",
+								true,
+							},
+							
+							{
+								"a5868353-e375-3dcc-bff0-447ed1b3fbd9",
+								true,
+							},
+						},
+						name = "Track gaze resolve (channel + 650 ms)",
+						uuid = "b454df22-a9cd-34ca-b833-95f1f6ae0bc8",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 151,
+						name = "World of Darkness only",
+						uuid = "2c4aed9f-7eaa-842e-b694-a1ad44a34d9d",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgType = 2,
+						eventSpellID = 3281,
+						name = "Exact action",
+						uuid = "b8c9ddf4-f085-084a-b397-0783c4103c8e",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 2,
+						eventEntityContentID = 3231,
+						name = "Exact source",
+						uuid = "a5868353-e375-3dcc-bff0-447ed1b3fbd9",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The World of Darkness/Draws and callouts",
+			eventType = 3,
+			name = "[World of Darkness] Mortal Gaze - track resolve time (short)",
+			timeout = 9,
+			uuid = "383ba1f3-502e-0484-bdb5-96c2377162f5",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "-- Cast resolves about 285 ms after the channel time max (4.2 s -> about 4.485 s).\ndata.wodGazes=data.wodGazes or {}\nlocal n=Now()\ndata.wodGazes[eventArgs.entityID]={spell=eventArgs.spellID,started=n,deadline=n+eventArgs.channelTimeMax*1000+650}\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"2bb01290-956f-3d88-a205-49ccd7091578",
+								true,
+							},
+							
+							{
+								"2e3ae0cc-adb1-593f-a4a4-6d7182aeec14",
+								true,
+							},
+							
+							{
+								"68243aed-8443-b1d6-bb88-3e25e6d9ee11",
+								true,
+							},
+						},
+						name = "Track gaze resolve (channel + 650 ms)",
+						uuid = "9bd240f4-0d12-8ab5-9415-7356d9858ff4",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 151,
+						name = "World of Darkness only",
+						uuid = "2bb01290-956f-3d88-a205-49ccd7091578",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgType = 2,
+						eventSpellID = 3499,
+						name = "Exact action",
+						uuid = "2e3ae0cc-adb1-593f-a4a4-6d7182aeec14",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 2,
+						eventEntityContentID = 3231,
+						name = "Exact source",
+						uuid = "68243aed-8443-b1d6-bb88-3e25e6d9ee11",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The World of Darkness/Draws and callouts",
+			eventType = 3,
+			name = "[World of Darkness] Mortal Gaze - track resolve time (long)",
+			timeout = 9,
+			uuid = "9292b4c2-1e4c-06b6-a8f5-cc8c9d578611",
 			version = 2,
 		},
 	},

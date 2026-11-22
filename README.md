@@ -74,13 +74,13 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Ranged players target Liquid Hand when available and return there after dolls, with HP balancing and boss cast protection. Doll cutoff still cancels active doll casts. (17-11-2026)
 
-- Added a one-time Ã¢â‚¬Å“Nisi passedÃ¢â‚¬Â confirmation for the Photon partner stack and the Verdict Nisi handoff when the assigned pair shares the expected debuff. (16-11-2026)
+- Added a one-time ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œNisi passedÃƒÂ¢Ã¢â€šÂ¬Ã‚Â confirmation for the Photon partner stack and the Verdict Nisi handoff when the assigned pair shares the expected debuff. (16-11-2026)
 
 - After the third Flarethrower hit, True Heart gets a world label and a call to group up, build gauge or heal, then leave for the personal split. (16-11-2026)
 
 - Both Irresistible Grace stacks during Almighty Judgment now show a green circle on the stack target. (16-11-2026)
 
-- First tornado baiters hear Ã¢â‚¬Å“MoveÃ¢â‚¬Â once their cone locks. Doll previews and arrows use the LPDU quadrants, and the ranged arrow waits for the lock. (16-11-2026)
+- First tornado baiters hear ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œMoveÃƒÂ¢Ã¢â€šÂ¬Ã‚Â once their cone locks. Doll previews and arrows use the LPDU quadrants, and the ranged arrow waits for the lock. (16-11-2026)
 
 ### Sil'dihn
 
@@ -88,7 +88,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Added saved Matthew/PF Fresh Puff 2 choices in the existing Silkie settings, preserving Matthew destinations by default. (14-11-2026)
 
-- Increased GladiatorÃ¢â‚¬â„¢s initial Ring of Might circle opacity by 20 percentage points and added continuous countdowns to both waves of Monument towers. (14-11-2026)
+- Increased GladiatorÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢s initial Ring of Might circle opacity by 20 percentage points and added continuous countdowns to both waves of Monument towers. (14-11-2026)
 
 - Added Blessed Beacon beam-target countdowns, SW/NE wire staging, and assigned safe-tile guidance for second mirrors with saved quadrant controls in the existing settings. (14-11-2026)
 
@@ -132,11 +132,11 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Added debug log details for Dive from Grace facing and action stops. (20-11-2026)
 
-- Removed raidwide mitigation callouts, including Ultimate End, and raidwide countdowns. Removed the Nidhogg enrage callout and countdown. Removed the Heal Haurchefant Ã¢â‚¬â€œ Damage Spear callout and Pierce countdown. Removed lingering Liquid Heaven puddle timers after Wrath of the Heavens. Blue jump guidance shows the nearest available spot earlier and redirects when another player claims it. Removed knockback immunity announcements. Removed the Eyes bleed heal callout and consolidated overlapping blue-orb and Mirage Dive instructions. Simplified the Mirage Dive chain-swap callouts. Added explicit P4 gold and blue orb soak callouts with higher draw priority. Moved P1 beam spread guides one yalm farther out. Corrected the second Dive from Grace drop positions and cleared conga guidance when Doom begins. Added an optional personal Brightwing countdown. Physical ranged get one Head Graze attempt on the second Holiest Hallowing while Adelphel is still casting. Meteor route arrows stay silent so spacing warnings are clear. Added Dive from Grace facing and landing previews with optional facing lock and automatic action stop and resume. Post-Strength cleave draws follow Thordan as he turns. Strength of the Ward calls Ã¢â‚¬Å“Your towerÃ¢â‚¬Â once, one second before it resolves. (19-11-2026)
+- Removed raidwide mitigation callouts, including Ultimate End, and raidwide countdowns. Removed the Nidhogg enrage callout and countdown. Removed the Heal Haurchefant ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“ Damage Spear callout and Pierce countdown. Removed lingering Liquid Heaven puddle timers after Wrath of the Heavens. Blue jump guidance shows the nearest available spot earlier and redirects when another player claims it. Removed knockback immunity announcements. Removed the Eyes bleed heal callout and consolidated overlapping blue-orb and Mirage Dive instructions. Simplified the Mirage Dive chain-swap callouts. Added explicit P4 gold and blue orb soak callouts with higher draw priority. Moved P1 beam spread guides one yalm farther out. Corrected the second Dive from Grace drop positions and cleared conga guidance when Doom begins. Added an optional personal Brightwing countdown. Physical ranged get one Head Graze attempt on the second Holiest Hallowing while Adelphel is still casting. Meteor route arrows stay silent so spacing warnings are clear. Added Dive from Grace facing and landing previews with optional facing lock and automatic action stop and resume. Post-Strength cleave draws follow Thordan as he turns. Strength of the Ward calls ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œYour towerÃƒÂ¢Ã¢â€šÂ¬Ã‚Â once, one second before it resolves. (19-11-2026)
 
 - Strength tower reassignment no longer repeats the initial preposition call after a personal tower was established. (17-11-2026)
 
-- Ã¢â‚¬Å“Behind boss - tank cleavesÃ¢â‚¬Â now calls once per cleave sequence. (17-11-2026)
+- ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œBehind boss - tank cleavesÃƒÂ¢Ã¢â€šÂ¬Ã‚Â now calls once per cleave sequence. (17-11-2026)
 
 - Added an explicit blue-orb reminder after Eyes chain swaps. Removed the finish-eyes, lower-Charibert and finish-spear callouts. (17-11-2026)
 
@@ -158,7 +158,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Pantokrator guides each group to the leading cone edge, then shows the sweep direction. Program Loop shows up to two personal assignment countdowns, with the later one dimmed. (19-11-2026)
 
-- Fixed the repeated Ã¢â‚¬Å“Preposition partiesÃ¢â‚¬Â callout before Pantokrator. (19-11-2026)
+- Fixed the repeated ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œPreposition partiesÃƒÂ¢Ã¢â€šÂ¬Ã‚Â callout before Pantokrator. (19-11-2026)
 
 - The countdown reaction shows an explicit Set target to Omega action after switching Start Combat off. (18-11-2026)
 
@@ -200,6 +200,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Improved The World of Darkness AutoSim: Cloud of Darkness now handles both of its disappearances and the short melee gap after it returns, and kill-time estimates were updated for all four bosses. (22-11-2026)
 - Improved The World of Darkness first boss: the colour-switch callout now tells you which side to stand on and draws it (green safe, red unsafe), and Mortal Gaze now locks your facing until the gaze resolves. (22-11-2026)
 - Added a DoT blacklist for short-lived adds in The World of Darkness so DoTs are not wasted on them. (22-11-2026)
 - Added The Puppets' Bunker coverage (draws and AutoSim forecasts for the 813P-operated Aegis Unit, Heavy Artillery Unit, Superior Flight Units and The Compound), The World of Darkness draws, callouts and AutoSim forecasts, and an Echoes of Vana'diel AutoSim setup. (22-11-2026)
