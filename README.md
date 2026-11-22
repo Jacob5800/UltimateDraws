@@ -62,7 +62,9 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### TEA
 
-- Limit Cut settings add a player-following bait countdown and a Toolbox-based yellow stop preview four seconds before the estimated cue. (22-11-2026)
+- Limit Cut now shows your full route from the first Hawk Blaster: a green circle and arrow to your spot for each wave, inner circle for active numbers and outer circle for inactive numbers (1256 start West/Northeast, 3478 start East/Southwest). It replaces the yellow stop preview and can be toggled in LPDU Settings. (23-11-2026)
+
+- Limit Cut settings add a player-following bait countdown. (22-11-2026)
 
 - First and second Protean bait markers open earlier. Non-tanks get a tornado-relative north Drainage marker and a dodge callout. (22-11-2026)
 
