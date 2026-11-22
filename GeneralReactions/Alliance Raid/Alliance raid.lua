@@ -10016,7 +10016,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\nlocal s=data.a21\nlocal b=TensorCore.mGetEntity(s.boss)\nif not b or not b.hp or not b.alive or b.hp.percent<=0 then\n s.finished=true\n return\nend\nif not b.targetable then s.sample=nil;return end\nlocal api=TensorCore.API.TensorACR\nlocal now=api.getAutoSimTime()\nif type(now)~=\"number\" or now<=0 then return end\nlocal hp=b.hp.percent\nlocal sample=s.sample\nif not sample then s.sample={time=now,hp=hp};return end\nif now-sample.time<12 then return end\ns.sample={time=now,hp=hp}\nlocal rate=(sample.hp-hp)/(now-sample.time)\nif rate<=.05 then return end\nlocal estimate=now+math.max(3,math.min(600,hp/rate))\nif not s.estimate or math.abs(s.estimate-estimate)>=4 or now>=s.estimate-3 then\n api.setAutoSimKillTime(estimate)\n s.estimate=estimate\nend",
+						actionLua = "self.used=true\nlocal s=data.a21\nif not s or not s.boss then return end\nlocal b=TensorCore.mGetEntity(s.boss)\nif not b or not b.hp or not b.alive or b.hp.percent<=0 then\n s.finished=true\n return\nend\nif not b.targetable then s.sample=nil;return end\nlocal api=TensorCore.API.TensorACR\nlocal now=api.getAutoSimTime()\nif type(now)~=\"number\" or now<=0 then return end\nlocal hp=b.hp.percent\nlocal sample=s.sample\nif not sample then s.sample={time=now,hp=hp};return end\nif now-sample.time<12 then return end\ns.sample={time=now,hp=hp}\nlocal rate=(sample.hp-hp)/(now-sample.time)\nif rate<=.05 then return end\nlocal estimate=now+math.max(3,math.min(600,hp/rate))\nif not s.estimate or math.abs(s.estimate-estimate)>=4 or now>=s.estimate-3 then\n api.setAutoSimKillTime(estimate)\n s.estimate=estimate\nend",
 						conditions = 
 						{
 							
@@ -10218,7 +10218,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\nlocal e=eventArgs\nlocal lasers=data.a21.lasers\nlocal now=Now()\nlocal x,z=e.castPosX,e.castPosZ\nfor i=#lasers,1,-1 do\n local laser=lasers[i]\n if now>=laser.expires then\n  table.remove(lasers,i)\n elseif (laser.x-x)^2+(laser.z-z)^2<=.04 then\n  if e.spellID==20626 then\n   laser.hits=laser.hits+1\n   if laser.hits>=8 then\n    if laser.draw then Argus.deleteTimedShape(laser.draw) end\n    table.remove(lasers,i)\n   end\n  end\n  return\n end\nend\nif e.spellID==20625 then\n local p=TensorCore.mGetPlayer()\n local ms=12000\n local drawer=TensorCore.getStaticDrawer(0x803333FF,2)\n local draw=drawer:addTimedCircle(ms,x,e.castPosY or p.pos.y,z,4,0,false,true)\n lasers[#lasers+1]={x=x,z=z,expires=now+ms,draw=draw,hits=0}\nend",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal state=data.a21\nif not state or not state.lasers then return end\nlocal lasers=state.lasers\nlocal now=Now()\nlocal x,z=e.castPosX,e.castPosZ\nfor i=#lasers,1,-1 do\n local laser=lasers[i]\n if now>=laser.expires then\n  table.remove(lasers,i)\n elseif (laser.x-x)^2+(laser.z-z)^2<=.04 then\n  if e.spellID==20626 then\n   laser.hits=laser.hits+1\n   if laser.hits>=8 then\n    if laser.draw then Argus.deleteTimedShape(laser.draw) end\n    table.remove(lasers,i)\n   end\n  end\n  return\n end\nend\nif e.spellID==20625 then\n local p=TensorCore.mGetPlayer()\n local ms=12000\n local drawer=TensorCore.getStaticDrawer(0x803333FF,2)\n local draw=drawer:addTimedCircle(ms,x,e.castPosY or p.pos.y,z,4,0,false,true)\n lasers[#lasers+1]={x=x,z=z,expires=now+ms,draw=draw,hits=0}\nend",
 						conditions = 
 						{
 							
