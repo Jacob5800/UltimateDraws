@@ -12990,7 +12990,7 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos then return false end\nlocal e=eventArgs\nif not e or e.friendly then return false end\nlocal c=e.contentID\nif not (c==9955 or c==10058) then return false end\nreturn (p.pos.x-(-800))^2+(p.pos.z-(-735))^2<=2500\n",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos then return false end\nlocal e=eventArgs\nif not e or e.friendly then return false end\nlocal c=e.contentID\nif not (c==9955 or c==10058 or c==9956) then return false end\nreturn (p.pos.x-(-800))^2+(p.pos.z-(-735))^2<=2500\n",
 						dequeueIfLuaFalse = true,
 						name = "Knave of Hearts arena and hazard",
 						uuid = "f7e20887-5335-03af-ba38-1222ebfc1c09",
@@ -13098,6 +13098,54 @@ local tbl =
 			eventType = 3,
 			name = "[Paradigm's Breach] Knave Lunge callout",
 			uuid = "04e40e81-c07a-a54c-bf10-bf32f51be41e",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local cfg={cid=9664,rad=3.5}\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then return end\nlocal st=data.pbOrb0\nif not st then st={nextScan=0,ids={}} data.pbOrb0=st end\nlocal now=Now()\nif now>=st.nextScan then\n st.nextScan=now+500\n st.ids={}\n for _,b in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=cfg.cid}) or {}) do\n  if b.alive then st.ids[#st.ids+1]=b.id end\n end\nend\nif #st.ids==0 then return end\nlocal d=TensorCore.getStaticDrawer(0x703333FF,2)\nfor _,id in ipairs(st.ids) do\n local o=TensorCore.mGetEntity(id)\n if o and o.pos and (o.pos.x-p.pos.x)^2+(o.pos.z-p.pos.z)^2<=45*45 then\n  d:addCircle(o.pos.x,o.pos.y+0.1,o.pos.z,cfg.rad,false)\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"daf28094-e2a3-9851-a23c-efbeb7077e34",
+								true,
+							},
+						},
+						name = "Energy orb Burst rings",
+						uuid = "8df9c86f-4aba-5269-b536-a9ff7ac1b17a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos or not p.incombat then return false end\nreturn (p.pos.x-(-800))^2+(p.pos.z-(-735))^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "Knave of Hearts arena in combat",
+						uuid = "daf28094-e2a3-9851-a23c-efbeb7077e34",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Knave of Hearts/Draws",
+			eventType = 12,
+			name = "[Paradigm's Breach] Energy orb Burst rings",
+			uuid = "5edaea6e-a038-6e36-9f9a-25fd0aa3ed2b",
 			version = 2,
 		},
 	},
@@ -13456,6 +13504,54 @@ local tbl =
 			eventType = 12,
 			name = "[Paradigm's Breach] Hansel and Gretel Upgraded Shield reflect sides",
 			uuid = "9972ab06-451e-e636-aaf1-a5a6331a7674",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local cfg={cid=9992,rad=4}\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then return end\nlocal st=data.pbOrb2\nif not st then st={nextScan=0,ids={}} data.pbOrb2=st end\nlocal now=Now()\nif now>=st.nextScan then\n st.nextScan=now+500\n st.ids={}\n for _,b in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=cfg.cid}) or {}) do\n  if b.alive then st.ids[#st.ids+1]=b.id end\n end\nend\nif #st.ids==0 then return end\nlocal d=TensorCore.getStaticDrawer(0x703333FF,2)\nfor _,id in ipairs(st.ids) do\n local o=TensorCore.mGetEntity(id)\n if o and o.pos and (o.pos.x-p.pos.x)^2+(o.pos.z-p.pos.z)^2<=45*45 then\n  d:addCircle(o.pos.x,o.pos.y+0.1,o.pos.z,cfg.rad,false)\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"652ed4f9-a67b-957d-bca5-45235437d328",
+								true,
+							},
+						},
+						name = "Magical Confluence Impact rings",
+						uuid = "8516ba54-7de2-c7c0-a89e-491e950dbf78",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos or not p.incombat then return false end\nreturn (p.pos.x-(-800))^2+(p.pos.z-(-955))^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "Hansel and Gretel arena in combat",
+						uuid = "652ed4f9-a67b-957d-bca5-45235437d328",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Hansel and Gretel/Draws",
+			eventType = 12,
+			name = "[Paradigm's Breach] Magical Confluence Impact rings",
+			uuid = "b387e05f-b7b5-dc64-8861-526209316caf",
 			version = 2,
 		},
 	},
@@ -13938,6 +14034,54 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local cfg={cid=9664,rad=2}\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then return end\nlocal st=data.pbOrb1\nif not st then st={nextScan=0,ids={}} data.pbOrb1=st end\nlocal now=Now()\nif now>=st.nextScan then\n st.nextScan=now+500\n st.ids={}\n for _,b in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=cfg.cid}) or {}) do\n  if b.alive then st.ids[#st.ids+1]=b.id end\n end\nend\nif #st.ids==0 then return end\nlocal d=TensorCore.getStaticDrawer(0x703333FF,2)\nfor _,id in ipairs(st.ids) do\n local o=TensorCore.mGetEntity(id)\n if o and o.pos and (o.pos.x-p.pos.x)^2+(o.pos.z-p.pos.z)^2<=45*45 then\n  d:addCircle(o.pos.x,o.pos.y+0.1,o.pos.z,cfg.rad,false)\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"404e77c4-35dd-8522-900e-26df31cab2b6",
+								true,
+							},
+						},
+						name = "Energy orb Energy Bomb rings",
+						uuid = "0247aa47-df7c-ceb1-b635-d53b1e055ef6",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos or not p.incombat then return false end\nreturn (p.pos.x-(790))^2+(p.pos.z-(790))^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "Xun-Zi and Meng-Zi arena in combat",
+						uuid = "404e77c4-35dd-8522-900e-26df31cab2b6",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Xun-Zi and Meng-Zi/Draws",
+			eventType = 12,
+			name = "[Paradigm's Breach] Energy orb Energy Bomb rings",
+			uuid = "dcdf487c-8835-a42e-8349-cdb34186a452",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "The Tower at Paradigm's Breach/Xun-Zi and Meng-Zi",
 			name = "AutoSim",
 			uuid = "11652774-9ba7-7658-8dac-f14455708742",
@@ -14105,6 +14249,54 @@ local tbl =
 			eventType = 3,
 			name = "[Paradigm's Breach] Her Inflorescence Pillar Impact callout",
 			uuid = "7d5b56b8-d718-4c1f-b8f5-cf1ba39888e0",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local cfg={cid=9951,rad=4}\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then return end\nlocal st=data.pbOrb3\nif not st then st={nextScan=0,ids={}} data.pbOrb3=st end\nlocal now=Now()\nif now>=st.nextScan then\n st.nextScan=now+500\n st.ids={}\n for _,b in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=cfg.cid}) or {}) do\n  if b.alive then st.ids[#st.ids+1]=b.id end\n end\nend\nif #st.ids==0 then return end\nlocal d=TensorCore.getStaticDrawer(0x703333FF,2)\nfor _,id in ipairs(st.ids) do\n local o=TensorCore.mGetEntity(id)\n if o and o.pos and (o.pos.x-p.pos.x)^2+(o.pos.z-p.pos.z)^2<=45*45 then\n  d:addCircle(o.pos.x,o.pos.y+0.1,o.pos.z,cfg.rad,false)\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"cf78453b-1283-6808-b79a-d50f5a0a7024",
+								true,
+							},
+						},
+						name = "Energy orb Scattered Magic rings",
+						uuid = "e195cfa3-c672-c848-aada-5a8a993e5b59",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos or not p.incombat then return false end\nreturn (p.pos.x-(-700))^2+(p.pos.z-(-705))^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "False Idol and Her Inflorescence arena in combat",
+						uuid = "cf78453b-1283-6808-b79a-d50f5a0a7024",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/False Idol and Her Inflorescence/Draws",
+			eventType = 12,
+			name = "[Paradigm's Breach] Energy orb Scattered Magic rings",
+			uuid = "68327d1a-ba21-7310-8658-74b36fd0430b",
 			version = 2,
 		},
 	},

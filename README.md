@@ -216,6 +216,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- The Tower at Paradigm's Breach now draws rings around the dodgeable orbs (Knave of Hearts, Xun-Zi and Meng-Zi, Hansel and Gretel, Her Inflorescence) and the Knave's Spheroid Magic Barrage line. (23-11-2026)
+
 - Added The Tower at Paradigm's Breach: hazard draws for every boss, Hansel and Gretel Upgraded Shield sides (red) with the open front (green), AutoSim forecasts that treat the Red Girl hacking minigame as downtime and stun, and a DoT blacklist for the minigame targets. (23-11-2026)
 
 - Added optional Arm's Length and Surecast requests for the Knave Lunge and Pillar Impact knockbacks in The Tower at Paradigm's Breach. Both are off by default in a new Settings window. (23-11-2026)
