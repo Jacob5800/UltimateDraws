@@ -5570,7 +5570,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nlocal hw=S.hw\nif hw and not hw.resolved then hw.resolved=Now(); hw.countdown=nil; S.clearGoal() end\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nlocal hw=S.hw\nif hw and not hw.resolved then\n hw.resolved=Now(); hw.countdown=nil; S.clearGoal()\n -- Last tower set: the blue tether holder waits 2.6s for the vulnerability before breaking (from Masado1170's TOP Draws).\n local me=TensorCore.mGetPlayer()\n if hw.wave==4 and me and TensorCore.hasBuff(me,3530) then\n  AnyoneCore.Shotcall('Wait for the vuln',true,2.6,false)\n  AnyoneCore.addWorldTextCountdownOnEnt(2600,me.id,0xFFFFFFFF,true,1.3,2.7,0,'Wait for the vuln ')\n end\nend\nself.used=true\n",
 							conditions = 
 							{
 								
