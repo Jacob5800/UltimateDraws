@@ -158,6 +158,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Hello World now calls "Wait for the vuln" for the blue tether holder at the last tower set, with a green circle and label on their spot, before the tether break. (23-11-2026)
 
+- Added a "Masado(LPDU) P5" option in TOP LPDU Settings (on by default). It swaps our P5 draws for Masado1170's Delta, Sigma and Omega guidance, world bounces, monitor facing and boss AoE draws (LPDU preset, used with his permission). Our spoken and text callouts stay on. Switch it off to keep our own P5 draws. (23-11-2026)
+
 - Added a "Masado(LPDU)" option in TOP LPDU Settings (P3 Intermission, on by default). When on, it swaps our Intermission spread/pair and hand slam guidance for Masado1170's: the conga line, named wall spots, an arrow to your spot and the hand dodge. Used with his permission. (23-11-2026)
 
 - Moved the non-tank end-of-P1 bait circles closer to Omega while keeping the spots separated. (19-11-2026)
