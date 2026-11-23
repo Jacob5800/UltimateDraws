@@ -154,6 +154,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### TOP
 
+- Added a "Masado(LPDU)" option in TOP LPDU Settings (P3 Intermission, off by default). When on, it swaps our Intermission spread/pair and hand slam guidance for Masado1170's: the conga line, named wall spots, an arrow to your spot and the hand dodge. Used with his permission. (23-11-2026)
+
 - Moved the non-tank end-of-P1 bait circles closer to Omega while keeping the spots separated. (19-11-2026)
 
 - Reduced P1 reaction activity by limiting number capture to assignment windows and handling each Ballistic Impact in one reaction. (19-11-2026)
