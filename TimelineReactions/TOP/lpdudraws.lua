@@ -7734,6 +7734,31 @@ local tbl =
 		{
 			data = 
 			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "P5\\Delta",
+				execute = "-- Based on Masado1170's TOP Draws [Delta] break alert: never break a live tether while anyone still has a Ruin or vulnerability debuff.\nlocal S=data.topLpdu\nlocal d=S and S.delta\nif not d or not d.active then return end\nlocal me=TensorCore.mGetPlayer()\nif not me or not me.pos or me.hp.current<=0 then return end\nlocal live\nfor _,t in ipairs(Argus.getTethersOnEnt(me.id) or {}) do\n if t.type==224 or t.type==225 then live=t.type break end\nend\nlocal w=data.deltaWaitCall\nif not w then w={} data.deltaWaitCall=w end\nif not live then w.text=nil return end\nlocal function unsafe(e)\n return e and (TensorCore.hasBuff(e,2530) or TensorCore.hasBuff(e,2534) or TensorCore.hasBuff(e,2941))\nend\nlocal blocked=unsafe(me)\nif not blocked then\n for _,member in pairs(TensorCore.getEntityGroupList('Party') or {}) do\n  if unsafe(member) then blocked=true break end\n end\nend\nif blocked then\n local text=live==225 and \"Wait: don't go far\" or \"Wait: don't break\"\n if w.text~=text then\n  w.text=text\n  AnyoneCore.Shotcall(text,true,3,false)\n end\nelse\n w.text=nil\nend",
+				executeType = 2,
+				loop = true,
+				mechanicTime = 740,
+				name = "[P5 Delta] Wait before breaking tether",
+				throttleTime = 250,
+				timeRange = true,
+				timelineIndex = 130,
+				timerEndOffset = 55,
+				timerStartOffset = 5,
+				uuid = "5e2f1f48-9e17-c216-aa4a-8716e63eef0d",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "Automarkers",
 				uuid = "e4d74861-57dc-57fa-8a3b-87016720c297",

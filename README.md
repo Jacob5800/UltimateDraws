@@ -154,6 +154,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### TOP
 
+- P5 Delta now calls "Wait: don't go far" (blue tether) or "Wait: don't break" (green tether) while anyone still has a Ruin or vulnerability debuff, so you hold the tether until it's safe. (23-11-2026)
+
 - Hello World now calls "Wait for the vuln" for the blue tether holder at the last tower set, with a green circle and label on their spot, before the tether break. (23-11-2026)
 
 - Added a "Masado(LPDU)" option in TOP LPDU Settings (P3 Intermission, off by default). When on, it swaps our Intermission spread/pair and hand slam guidance for Masado1170's: the conga line, named wall spots, an arrow to your spot and the hand dodge. Used with his permission. (23-11-2026)
