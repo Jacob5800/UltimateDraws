@@ -110,6 +110,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Dungeons
 
+- Added Surecast for Maulskull, Deceiver and Ambrose, plus a disabled counterpart for Paglth’an’s Ground-to-ground Ballistic. (23-11-2026)
+
 - Added The Antitower boss draws and callouts to highleveldungeons. (23-11-2026)
 
 - Added Paglth'an: boss and trash telegraphs, Kan Rhai crosses, Amhuluk Levin and Lightning Rod circles, the Magitek Core launchpad, an optional Arm's Length request for Ground-to-ground Ballistic (off by default), and AutoSim forecasts for Amhuluk, Magitek Core (both add waves) and Lunar Bahamut. (22-11-2026)
@@ -127,8 +129,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added boss draws, AutoSim forecasts, outward LockFace for Neuro Squama, and short-lived add DoT blacklists for The Lost City of Amdapor (Hard). (20-11-2026)
 
 - Corrected final-pack cooldown pooling after Mistwake boss two and made the hold status show the active reason. (19-11-2026)
-
-- Updated Maulskull's AutoSim kill estimate to 173 seconds. (19-11-2026)
 
 ### DSR
 
@@ -216,6 +216,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Added Surecast for Compound 2P’s Three Parts Disdain. (23-11-2026)
+
 - Improved The World of Darkness AutoSim: Cloud of Darkness now handles both of its disappearances and the short melee gap after it returns, and kill-time estimates were updated for all four bosses. (22-11-2026)
 - Improved The World of Darkness first boss: the colour-switch callout now tells you which side to stand on and draws it (green safe, red unsafe), and Mortal Gaze now locks your facing until the gaze resolves. (22-11-2026)
 - Added a DoT blacklist for short-lived adds in The World of Darkness so DoTs are not wasted on them. (22-11-2026)
@@ -226,6 +228,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Fixed rare Lua errors in the 813P-operated Aegis Unit AutoSim kill estimate and Surface Laser puddle draws when the pull state was reset mid-fight. (22-11-2026)
 
 ### Trials
+
+- Added Surecast for Light of Ascalon and Suiton: San. (23-11-2026)
 
 - Added The Bowl of Embers AutoSim, Eruption draws, and Infernal Nail and Hellfire callouts. (23-11-2026)
 
@@ -238,6 +242,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Hydra: a Black Mage's Ley Lines and Triplecast toggles are now restored even if Lua is reloaded during the fight. (22-11-2026)
 
 ### Normal raids
+
+- Added Arm’s Length for Lindwurm’s Shockwave and Surecast for Furor’s Downburst. (23-11-2026)
 
 - Added Eden’s Promise: Umbra AutoSim, hazard draws, callouts, and Arm’s Length or Surecast for Waste Away. (23-11-2026)
 

@@ -4465,6 +4465,73 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"a93a096b-4913-5324-ba92-a3c33039dd31",
+								true,
+							},
+							
+							{
+								"3ff01430-aae5-d741-823b-81530857fb46",
+								true,
+							},
+						},
+						gVar = "ACR_TensorNuke4_Hotbar_Surecast",
+						uuid = "4a6077a4-1e64-a709-addc-44b3c9bd9f08",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 437 and eventArgs ~= nil and eventArgs.spellID == 4203 and eventArgs.entityContentID == 3645",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "a93a096b-4913-5324-ba92-a3c33039dd31",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn not not (p and (TensorCore.isCaster(p) or TensorCore.isHealer(p)))",
+						dequeueIfLuaFalse = true,
+						name = "Caster or healer",
+						uuid = "3ff01430-aae5-d741-823b-81530857fb46",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Singularity Reactor/King Thordan/Mitigations",
+			eventType = 2,
+			name = "Light of Ascalon - Surecast",
+			throttleTime = 15000,
+			timeout = 2,
+			uuid = "27acfc18-7c99-d0ab-a247-0e9782be78b0",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "The Singularity Reactor/King Thordan",
 			name = "Draws",
 			uuid = "ecfdf8d5-8f4a-92ce-ac12-194d9a748fb9",
@@ -7235,6 +7302,71 @@ local tbl =
 			eventType = 3,
 			name = "[Seat] Suiton: San schedule Arm’s Length",
 			uuid = "767bb0e7-980d-d0b3-b32c-536688ea065f",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"737c69ba-8dc6-a9b7-8c4c-c7a6e8b4b815",
+								true,
+							},
+							
+							{
+								"d15f93c9-9816-8900-846c-5c1e971ff1b1",
+								true,
+							},
+						},
+						gVar = "ACR_TensorNuke4_Hotbar_Surecast",
+						uuid = "95f75803-2c52-928f-a67c-4eb2c866fe19",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 or not p.alive then return false end\nlocal s=data.seatSuiton\nif not s then return false end\nlocal n=Now()\nreturn n>=s.fireAt and n<s.expires",
+						dequeueIfLuaFalse = true,
+						name = "[Seat] Suiton: San Arm’s Length due",
+						uuid = "737c69ba-8dc6-a9b7-8c4c-c7a6e8b4b815",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn not not (p and (TensorCore.isCaster(p) or TensorCore.isHealer(p)))",
+						dequeueIfLuaFalse = true,
+						name = "Caster or healer",
+						uuid = "d15f93c9-9816-8900-846c-5c1e971ff1b1",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Seat of Sacrifice/Mitigations",
+			name = "[Seat] Suiton: San Surecast",
+			throttleTime = 100,
+			uuid = "fa5f1e21-bb8d-949e-a331-654502bb367f",
 			version = 2,
 		},
 	},

@@ -4695,6 +4695,72 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"ad9a3165-fdd2-267c-99a7-e0958c82ca9e",
+								true,
+							},
+							
+							{
+								"01872110-491f-7263-993f-3effe9b2da43",
+								true,
+							},
+						},
+						gVar = "ACR_TensorNuke4_Hotbar_Surecast",
+						uuid = "d072229a-ced0-8a73-9bdb-47673d017b2f",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nlocal e=eventArgs\nreturn data.paglthanBoss==10076 and e.entityContentID==10067 and e.spellID==23703",
+						name = "Ground-to-ground Ballistic - Arm’s Length gate",
+						uuid = "ad9a3165-fdd2-267c-99a7-e0958c82ca9e",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn not not (p and (TensorCore.isCaster(p) or TensorCore.isHealer(p)))",
+						dequeueIfLuaFalse = true,
+						name = "Caster or healer",
+						uuid = "01872110-491f-7263-993f-3effe9b2da43",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Paglth'an/Mitigations",
+			enabled = false,
+			eventType = 3,
+			name = "[Paglth’an] Ground-to-ground Ballistic - Surecast",
+			throttleTime = 10000,
+			uuid = "302ddc7f-28a3-f578-8575-6ac80487919b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "",
 			name = "The Antitower",
 			uuid = "922ce194-8bbb-880d-a8e7-8ec2db76ef46",

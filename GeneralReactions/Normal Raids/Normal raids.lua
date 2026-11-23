@@ -1389,6 +1389,55 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"d5290af2-d3cb-b7b7-b59c-9811cb70a6a5",
+								true,
+							},
+						},
+						gVar = "ACR_TensorViper4_Hotbar_ArmsLength",
+						uuid = "c0b25427-65c6-489b-bfef-26db9f9f5ba3",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nlocal e = eventArgs\nreturn p ~= nil and p.localmapid == 1326 and not (TensorCore.isCaster(p) or TensorCore.isHealer(p)) and e ~= nil and e.entityContentID == 14378 and e.spellID == 46185 and type(data.m12nGrotesquerieAt) == \"number\" and Now() - data.m12nGrotesquerieAt < 12000",
+						dequeueIfLuaFalse = true,
+						name = "Duty and knockback sequence",
+						uuid = "d5290af2-d3cb-b7b7-b59c-9811cb70a6a5",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "AAC Heavyweight M4/Lindwurm/Mitigations",
+			eventType = 3,
+			name = "M12N Shockwave - Arm's Length",
+			timeout = 2,
+			uuid = "1626e028-b9e0-6bde-ad27-f28b16864e2b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "",
 			name = "AAC Light-heavyweight M1",
 			uuid = "0866f7a7-567d-d9ba-8b9e-e45ae459c156",
@@ -6445,6 +6494,71 @@ local tbl =
 			name = "[E6N] Downburst Arm’s Length",
 			throttleTime = 10000,
 			uuid = "56008aef-b045-8da4-9c0b-8003497ce13c",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"bdf89132-6048-fd81-8b81-d1c5f98b6650",
+								true,
+							},
+							
+							{
+								"c00bc511-1f82-c8e5-b9f6-9e299a5ed42c",
+								true,
+							},
+						},
+						gVar = "ACR_TensorNuke4_Hotbar_Surecast",
+						uuid = "85410844-ffd7-d023-9893-7ab9427b7e9f",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=903 then return false end\nreturn eventArgs.spellID==19488 and (eventArgs.entityContentID==9287 or eventArgs.entityContentID==9289)",
+						name = "[E6N] Downburst Arm’s Length gate",
+						uuid = "bdf89132-6048-fd81-8b81-d1c5f98b6650",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn not not (p and (TensorCore.isCaster(p) or TensorCore.isHealer(p)))",
+						dequeueIfLuaFalse = true,
+						name = "Caster or healer",
+						uuid = "c00bc511-1f82-c8e5-b9f6-9e299a5ed42c",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Eden's Verse Furor/Mitigations",
+			eventType = 3,
+			name = "[E6N] Downburst Surecast",
+			throttleTime = 10000,
+			uuid = "0bf2f58b-dd93-f3f8-a67c-6a190ee698ca",
 			version = 2,
 		},
 	},

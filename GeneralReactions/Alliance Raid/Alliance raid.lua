@@ -12755,6 +12755,71 @@ local tbl =
 			uuid = "55c24b6e-e667-3960-8fdc-36d29e253215",
 			version = 2,
 		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"a0d4eaf3-a40a-5665-abad-7068f3e2a786",
+								true,
+							},
+							
+							{
+								"06b8b8b8-f790-7efe-b4a3-7b2fd15ef80f",
+								true,
+							},
+						},
+						gVar = "ACR_TensorNuke4_Hotbar_Surecast",
+						uuid = "645d4319-5844-37b2-8d31-c4a7a7df917d",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nlocal e=eventArgs\nif not p.incombat or not p.alive or e.entityContentID~=9644 or e.spellID~=20891 then return false end\nif not self.deadline then self.deadline=Now()+e.channelTimeMax*1000 end\nlocal remaining=self.deadline-Now()\nif remaining>2300 or remaining<500 then return false end\nlocal b=TensorCore.mGetEntity(e.entityID)\nreturn b~=nil and b.castinginfo~=nil and b.castinginfo.channelingid==e.spellID",
+						name = "Three Parts Disdain shortly before first hit",
+						uuid = "a0d4eaf3-a40a-5665-abad-7068f3e2a786",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn not not (p and (TensorCore.isCaster(p) or TensorCore.isHealer(p)))",
+						dequeueIfLuaFalse = true,
+						name = "Caster or healer",
+						uuid = "06b8b8b8-f790-7efe-b4a3-7b2fd15ef80f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/The Compound and 2P/Mitigation",
+			eventType = 3,
+			name = "Compound 2P - Surecast for Three Parts Disdain",
+			timeout = 8,
+			uuid = "c043d7eb-15b3-87e1-9786-102755744289",
+			version = 2,
+		},
 	}, 
 	inheritedProfiles = 
 	{
