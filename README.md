@@ -184,6 +184,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### FRU
 
+- P5 Paradise Regained: DPS no longer get a "Wait south" circle on the healers' first tower. DPS tower guidance is unchanged: group 1 relative left, group 2 relative right. (23-11-2026)
+
 - Fixed the P5 Exasquares green safe-area triangles sometimes showing two at once. Each triangle now appears once, in order. (23-11-2026)
 
 - In P4 Darklit Dragonsong, the player baiting the protean now gets the cone pre-drawn from the boss toward their bait spot until it resolves. (23-11-2026)
