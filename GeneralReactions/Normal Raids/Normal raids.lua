@@ -6447,6 +6447,391 @@ local tbl =
 			uuid = "56008aef-b045-8da4-9c0b-8003497ce13c",
 			version = 2,
 		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "Eden's Promise: Umbra",
+			uuid = "8862fadf-cc8a-fb55-9a87-eeb25c0ea349",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Eden's Promise: Umbra",
+			name = "AutoSim",
+			uuid = "727be70f-2fb7-2ab1-88c1-169f73fd8ad8",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "gStartCombat = false\nlocal settings = AnyoneCore and AnyoneCore.Settings\nif settings and settings.DutyHelper then settings.DutyHelper.enabled = false end\nif settings and settings.PrepullHelper then settings.PrepullHelper.enabled = false end\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"004c38a1-21bb-9da0-b565-18507cbbc8ff",
+								true,
+							},
+						},
+						endIfUsed = true,
+						name = "Configure Eden's Promise: Umbra",
+						uuid = "040aea5e-655e-8fd7-bffd-ccf0e2729392",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid == 942 and (true))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "004c38a1-21bb-9da0-b565-18507cbbc8ff",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Eden's Promise: Umbra/AutoSim",
+			eventType = 11,
+			name = "Configure Eden's Promise: Umbra",
+			uuid = "c168c071-b357-2b1c-b639-ddc74b783d70",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local p = TensorCore.mGetPlayer()\nif not p or p.incombat or p.localmapid ~= 942 then self.used = true; return end\nfor _, boss in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid=9764}) or {}) do\n    if boss.targetable and boss.attackable and boss.pos and TensorCore.getDistance2d(p.pos,boss.pos) <= 30 then\n        data.localBossTarget942 = true\n        gStartCombat = false\n        if p.targetid ~= boss.id then\n            local accepted = Player:SetTarget(boss.id)\n            TensorCore.timelineLogToFile(string.format(\"[Duty opener] map=942 intended=%s current=%s request=%s\\n\", boss.id, p.targetid, tostring(accepted)))\n        end\n        break\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"9b6cb3de-2896-644f-9b7f-09fd429e0328",
+								true,
+							},
+						},
+						endIfUsed = true,
+						name = "Target Eden's Promise: Umbra boss",
+						uuid = "8e3a0cf9-bfa2-5efb-ab4d-380a4533da36",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid == 942 and (not p.incombat and not data.localBossTarget942))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "9b6cb3de-2896-644f-9b7f-09fd429e0328",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Eden's Promise: Umbra/AutoSim",
+			name = "Target Eden's Promise: Umbra boss",
+			throttleTime = 500,
+			uuid = "e88053d7-f61d-0af9-b25c-f977cc611d27",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local A = TensorCore.API.TensorACR\nlocal t = A.getAutoSimTime()\nif type(t) ~= \"number\" or t < 0 or t > 8 then self.used = true; return end\ndata.localForecast942 = true\nA.clearAutoSimUncertainty()\nA.clearAutoSimPhases(\"FullDowntime\")\nA.setAutoSimKillTime(422)\nA.addAutoSimUncertainty(0, 60)\n\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"2eaeb364-628e-e297-8348-ffe8c14558bb",
+								true,
+							},
+						},
+						endIfUsed = true,
+						name = "Forecast Eden's Promise: Umbra",
+						uuid = "e980d38c-1580-c095-8a77-fe135d156c0a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid == 942 and (p.incombat and not data.localForecast942))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "2eaeb364-628e-e297-8348-ffe8c14558bb",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Eden's Promise: Umbra/AutoSim",
+			name = "Forecast Eden's Promise: Umbra",
+			throttleTime = 250,
+			uuid = "a06cc653-8aba-2569-a11c-72e1887edaf8",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Eden's Promise: Umbra",
+			name = "Draws",
+			uuid = "29765c46-c4e5-4064-a918-cfd8ae65d23e",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e = eventArgs\nlocal shapes = {[21991]={\"circle\",4,0},[21980]={\"circle\",13,0},[21027]={\"cone\",60,90},[21028]={\"cone\",60,90},[23295]={\"cone\",45,65},[21985]={\"cone\",45,65},[21990]={\"cone\",22,90},[21995]={\"rect\",60,4},[21979]={\"rect\",60,4},[21029]={\"rect\",8,4},[23303]={\"rect\",8,4}}\nlocal shape = shapes[e.aoeID]\nlocal ms = math.floor(e.startTime + e.duration * 1000 - Now())\nif ms > 0 then\n    local drawer = TensorCore.getStaticDrawer(0x803333FF, 2)\n    if shape[1] == \"circle\" then\n        drawer:addTimedCircle(ms,e.x,e.y,e.z,shape[2],0,false,true)\n    elseif shape[1] == \"cone\" then\n        drawer:addTimedCone(ms,e.x,e.y,e.z,shape[2],math.rad(shape[3]),e.heading,0,false,true)\n    elseif shape[1] == \"donut\" then\n        drawer:addTimedDonut(ms,e.x,e.y,e.z,shape[2],shape[3],0,false,true)\n    else\n        drawer:addTimedRect(ms,e.x,e.y,e.z,shape[2],shape[3],e.heading,0,false,true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms,{x=e.x,y=e.y+1,z=e.z},0xFFFFFFFF,true,1.1)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"ff3f44ce-2bac-daa4-a906-7c1302397cae",
+								true,
+							},
+						},
+						endIfUsed = true,
+						name = "Eden's Promise: Umbra hazard draws",
+						uuid = "dafe9e95-2e75-45b7-b812-5ff9e954298f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid == 942 and (eventArgs.aoeID == 21991 or eventArgs.aoeID == 21980 or eventArgs.aoeID == 21027 or eventArgs.aoeID == 21028 or eventArgs.aoeID == 23295 or eventArgs.aoeID == 21985 or eventArgs.aoeID == 21990 or eventArgs.aoeID == 21995 or eventArgs.aoeID == 21979 or eventArgs.aoeID == 21029 or eventArgs.aoeID == 23303))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "ff3f44ce-2bac-daa4-a906-7c1302397cae",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Eden's Promise: Umbra/Draws",
+			eventType = 18,
+			name = "Eden's Promise: Umbra hazard draws",
+			timeout = 1,
+			uuid = "6bd71bbc-c81b-f36c-8bdf-f855945312d1",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local cues = {[21997]=\"Raidwide\",[20422]=\"Spread across the tiles\",[20386]=\"Woods phase\",[21982]=\"Knockback\",[20821]=\"Raidwide\",[21992]=\"Soak towers\",[21294]=\"Kill the clouds\",[21296]=\"Watch the clones\",[21986]=\"Watch the wall\"}\nAnyoneCore.Shotcall(cues[eventArgs.spellID],true,3,false)\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"8e0a01ea-79b8-8472-943a-468729535efb",
+								true,
+							},
+						},
+						endIfUsed = true,
+						name = "Eden's Promise: Umbra mechanic cues",
+						uuid = "d79903ae-bb0b-25d8-a3b9-5dbd2434cf97",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid == 942 and (eventArgs.spellID == 21997 or eventArgs.spellID == 20422 or eventArgs.spellID == 20386 or eventArgs.spellID == 21982 or eventArgs.spellID == 20821 or eventArgs.spellID == 21992 or eventArgs.spellID == 21294 or eventArgs.spellID == 21296 or eventArgs.spellID == 21986))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "8e0a01ea-79b8-8472-943a-468729535efb",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Eden's Promise: Umbra/Draws",
+			eventType = 3,
+			name = "Eden's Promise: Umbra mechanic cues",
+			timeout = 1,
+			uuid = "314909df-9add-5f25-bde6-748863246930",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Eden's Promise: Umbra",
+			name = "Mitigations",
+			uuid = "4052cc26-fff2-d03f-a837-82f3b9921bb2",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"fa5a7a29-5fe7-df6d-a15d-7d3acbf4e289",
+								true,
+							},
+						},
+						gVar = "ACR_TensorViper4_Hotbar_ArmsLength",
+						uuid = "3d88e3de-4325-e40d-bc45-267ee55219f0",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid == 942 and eventArgs.spellID == 21982 and eventArgs.entityContentID == 9764 and not (TensorCore.isCaster(p) or TensorCore.isHealer(p)))",
+						dequeueIfLuaFalse = true,
+						name = "Duty, mechanic and role",
+						uuid = "fa5a7a29-5fe7-df6d-a15d-7d3acbf4e289",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Eden's Promise: Umbra/Mitigations",
+			eventType = 3,
+			name = "Waste Away - Arms Length",
+			timeout = 1.5,
+			uuid = "2258bdaf-173b-cc24-9ff7-34957cf943f5",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"3a764865-fccc-c043-bde6-95e3243d8dd8",
+								true,
+							},
+						},
+						gVar = "ACR_TensorNuke4_Hotbar_Surecast",
+						uuid = "6a20d1ac-c31e-78e8-b3c7-46fb92194a77",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid == 942 and eventArgs.spellID == 21982 and eventArgs.entityContentID == 9764 and (TensorCore.isCaster(p) or TensorCore.isHealer(p)))",
+						dequeueIfLuaFalse = true,
+						name = "Duty, mechanic and role",
+						uuid = "3a764865-fccc-c043-bde6-95e3243d8dd8",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Eden's Promise: Umbra/Mitigations",
+			eventType = 3,
+			name = "Waste Away - Surecast",
+			timeout = 1.5,
+			uuid = "d81fbc64-274d-a3a2-8858-cb3dd00bb728",
+			version = 2,
+		},
 	}, 
 	inheritedProfiles = 
 	{

@@ -4690,6 +4690,126 @@ local tbl =
 			uuid = "66ed07b3-75d4-2f18-b237-73dbf5c67e09",
 			version = 2,
 		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "The Antitower",
+			uuid = "922ce194-8bbb-880d-a8e7-8ec2db76ef46",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Antitower",
+			name = "Draws",
+			uuid = "e7673de5-c208-7dd1-8ccc-6b092a817152",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e = eventArgs\nlocal shapes = {[5538]={\"circle\",6,0},[5979]={\"circle\",6,0},[5977]={\"circle\",6,0},[31838]={\"circle\",12,0},[31839]={\"circle\",11,0},[31832]={\"cone\",40,15},[5551]={\"cone\",19.9,30},[5552]={\"donut\",5,10}}\nlocal shape = shapes[e.aoeID]\nlocal ms = math.floor(e.startTime + e.duration * 1000 - Now())\nif ms > 0 then\n    local drawer = TensorCore.getStaticDrawer(0x803333FF, 2)\n    if shape[1] == \"circle\" then\n        drawer:addTimedCircle(ms,e.x,e.y,e.z,shape[2],0,false,true)\n    elseif shape[1] == \"cone\" then\n        drawer:addTimedCone(ms,e.x,e.y,e.z,shape[2],math.rad(shape[3]),e.heading,0,false,true)\n    elseif shape[1] == \"donut\" then\n        drawer:addTimedDonut(ms,e.x,e.y,e.z,shape[2],shape[3],0,false,true)\n    else\n        drawer:addTimedRect(ms,e.x,e.y,e.z,shape[2],shape[3],e.heading,0,false,true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms,{x=e.x,y=e.y+1,z=e.z},0xFFFFFFFF,true,1.1)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"b8e2797f-a88d-888e-a207-d7a48764c7c1",
+								true,
+							},
+						},
+						endIfUsed = true,
+						name = "The Antitower hazard draws",
+						uuid = "97a7a44b-1786-8288-9db7-bd5a83598759",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid == 1111 and (eventArgs.aoeID == 5538 or eventArgs.aoeID == 5979 or eventArgs.aoeID == 5977 or eventArgs.aoeID == 31838 or eventArgs.aoeID == 31839 or eventArgs.aoeID == 31832 or eventArgs.aoeID == 5551 or eventArgs.aoeID == 5552))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "b8e2797f-a88d-888e-a207-d7a48764c7c1",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Antitower/Draws",
+			eventType = 18,
+			name = "The Antitower hazard draws",
+			timeout = 1,
+			uuid = "1945bbb7-52ad-5289-a197-fcba7d2a437d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local cues = {[5537]=\"Dodge water bombs\",[31833]=\"Hide behind stardust\",[31835]=\"Raidwide\",[31837]=\"Tankbuster\",[5556]=\"Tankbuster\",[5557]=\"Avoid the guarded side\",[5561]=\"Dollhouse\"}\nAnyoneCore.Shotcall(cues[eventArgs.spellID],true,3,false)\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"f89921ab-acf0-f948-ab65-0e8b685266d7",
+								true,
+							},
+						},
+						endIfUsed = true,
+						name = "The Antitower mechanic cues",
+						uuid = "0e32d425-b302-f662-a16e-99789cf067c7",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid == 1111 and (eventArgs.spellID == 5537 or eventArgs.spellID == 31833 or eventArgs.spellID == 31835 or eventArgs.spellID == 31837 or eventArgs.spellID == 5556 or eventArgs.spellID == 5557 or eventArgs.spellID == 5561))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "f89921ab-acf0-f948-ab65-0e8b685266d7",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Antitower/Draws",
+			eventType = 3,
+			name = "The Antitower mechanic cues",
+			timeout = 1,
+			uuid = "4748db3b-127e-82fe-a3bb-3f425f25eae0",
+			version = 2,
+		},
 	}, 
 	inheritedProfiles = 
 	{

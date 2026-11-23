@@ -110,6 +110,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Dungeons
 
+- Added The Antitower boss draws and callouts to highleveldungeons. (23-11-2026)
+
 - Added Paglth'an: boss and trash telegraphs, Kan Rhai crosses, Amhuluk Levin and Lightning Rod circles, the Magitek Core launchpad, an optional Arm's Length request for Ground-to-ground Ballistic (off by default), and AutoSim forecasts for Amhuluk, Magitek Core (both add waves) and Lunar Bahamut. (22-11-2026)
 
 - Added Paglth'an boss telegraphs, Levin and Lightning Rod hazard circles, Magitek Core launchpad guidance, and AutoSim forecasts that include both Core add waves. (22-11-2026)
@@ -127,8 +129,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Corrected final-pack cooldown pooling after Mistwake boss two and made the hold status show the active reason. (19-11-2026)
 
 - Updated Maulskull's AutoSim kill estimate to 173 seconds. (19-11-2026)
-
-- Added Arm's Length requests and temporary KB Cancel fallback for Maulskull's knockbacks in The Skydeep Cenote. (19-11-2026)
 
 ### DSR
 
@@ -227,6 +227,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Trials
 
+- Added The Bowl of Embers AutoSim, Eruption draws, and Infernal Nail and Hellfire callouts. (23-11-2026)
+
 - Added The Seat of Sacrifice draws, AutoSim cutscene downtime, Suiton Arm's Length, and Fire/Blizzard stop and move cues. Also draws the Twincast towers, Sword of Light cones, Radiant Braver and Desperado bait lines, Flare Breath tether cone and Brimstone Earth growth. (22-11-2026)
 
 - Added the Trials general profile with draws, AutoSim and boss-targeting reactions for Chimera, Hydra, Zurvan, Susano, Byakko, Endsinger, Zodiark, Valigarmanda, Queen Eternal, Zoraal Ja, Zelenia, Necron, Doomtrain, Enuo, Sophia, Shinryu, Innocence, King Thordan and Cinder Drift. (22-11-2026)
@@ -236,6 +238,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Hydra: a Black Mage's Ley Lines and Triplecast toggles are now restored even if Lua is reloaded during the fight. (22-11-2026)
 
 ### Normal raids
+
+- Added Eden’s Promise: Umbra AutoSim, hazard draws, callouts, and Arm’s Length or Surecast for Waste Away. (23-11-2026)
 
 - Added Eden's Verse: Furor draws, AutoSim, and Downburst Arm's Length. Conflag Strike's cone appears in the final five seconds. Also draws Irresistible Pull, predicted Tumultuous Nexus explosions, Hot Foot orb circles and Touchdown. (22-11-2026)
 

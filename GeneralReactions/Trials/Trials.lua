@@ -7770,6 +7770,333 @@ local tbl =
 			uuid = "d48bd360-d471-1497-904d-ba1f35d13234",
 			version = 2,
 		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "The Bowl of Embers",
+			uuid = "422f204f-58d3-d012-b5d7-b0b50901e851",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Bowl of Embers",
+			name = "AutoSim",
+			uuid = "2455eadb-ccb3-b744-bd9c-489a23fa761d",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "gStartCombat = false\nlocal settings = AnyoneCore and AnyoneCore.Settings\nif settings and settings.DutyHelper then settings.DutyHelper.enabled = false end\nif settings and settings.PrepullHelper then settings.PrepullHelper.enabled = false end\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"cbc4bf1f-ee8d-9aa4-8629-b2e014602a75",
+								true,
+							},
+						},
+						endIfUsed = true,
+						name = "Configure The Bowl of Embers",
+						uuid = "89a0173a-7984-5548-aa34-e52cc9df479d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid == 1045 and (true))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "cbc4bf1f-ee8d-9aa4-8629-b2e014602a75",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Bowl of Embers/AutoSim",
+			eventType = 11,
+			name = "Configure The Bowl of Embers",
+			uuid = "5daf8691-25b0-1704-bb29-912f5afb82f0",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local p = TensorCore.mGetPlayer()\nif not p or p.incombat or p.localmapid ~= 1045 then self.used = true; return end\nfor _, boss in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid=1185}) or {}) do\n    if boss.targetable and boss.attackable and boss.pos and TensorCore.getDistance2d(p.pos,boss.pos) <= 30 then\n        data.localBossTarget1045 = true\n        gStartCombat = false\n        if p.targetid ~= boss.id then\n            local accepted = Player:SetTarget(boss.id)\n            TensorCore.timelineLogToFile(string.format(\"[Duty opener] map=1045 intended=%s current=%s request=%s\\n\", boss.id, p.targetid, tostring(accepted)))\n        end\n        break\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"c65477bf-91b5-1401-b83b-1b29c0a48bd5",
+								true,
+							},
+						},
+						endIfUsed = true,
+						name = "Target The Bowl of Embers boss",
+						uuid = "f8265184-a72a-6dd3-b65b-92696d317d25",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid == 1045 and (not p.incombat and not data.localBossTarget1045))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "c65477bf-91b5-1401-b83b-1b29c0a48bd5",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Bowl of Embers/AutoSim",
+			name = "Target The Bowl of Embers boss",
+			throttleTime = 500,
+			uuid = "d6383817-b8d1-8e0b-bbb5-1f8f4e39a2b7",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local A = TensorCore.API.TensorACR\nlocal t = A.getAutoSimTime()\nif type(t) ~= \"number\" or t < 0 or t > 8 then self.used = true; return end\ndata.localForecast1045 = true\nA.clearAutoSimUncertainty()\nA.clearAutoSimPhases(\"FullDowntime\")\nA.setAutoSimKillTime(83)\nA.addAutoSimUncertainty(0, 15)\nA.addAutoSimPhase(\"FullDowntime\",65.1,67.1,1)\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"a901b126-8cf8-e41f-a50c-37ada76058f6",
+								true,
+							},
+						},
+						endIfUsed = true,
+						name = "Forecast The Bowl of Embers",
+						uuid = "777666a6-a8a2-023e-ae93-c1755ed22f26",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid == 1045 and (p.incombat and not data.localForecast1045))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "a901b126-8cf8-e41f-a50c-37ada76058f6",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Bowl of Embers/AutoSim",
+			name = "Forecast The Bowl of Embers",
+			throttleTime = 250,
+			uuid = "4507f422-ae40-631e-9108-9ca4fa3012a3",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Bowl of Embers",
+			name = "Draws",
+			uuid = "25e887d3-7345-03df-baef-784d5ad90322",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e = eventArgs\nlocal shapes = {[733]={\"circle\",8,0}}\nlocal shape = shapes[e.aoeID]\nlocal ms = math.floor(e.startTime + e.duration * 1000 - Now())\nif ms > 0 then\n    local drawer = TensorCore.getStaticDrawer(0x803333FF, 2)\n    if shape[1] == \"circle\" then\n        drawer:addTimedCircle(ms,e.x,e.y,e.z,shape[2],0,false,true)\n    elseif shape[1] == \"cone\" then\n        drawer:addTimedCone(ms,e.x,e.y,e.z,shape[2],math.rad(shape[3]),e.heading,0,false,true)\n    elseif shape[1] == \"donut\" then\n        drawer:addTimedDonut(ms,e.x,e.y,e.z,shape[2],shape[3],0,false,true)\n    else\n        drawer:addTimedRect(ms,e.x,e.y,e.z,shape[2],shape[3],e.heading,0,false,true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms,{x=e.x,y=e.y+1,z=e.z},0xFFFFFFFF,true,1.1)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"f9395f6e-3af5-50ea-8b91-773155b41fa8",
+								true,
+							},
+						},
+						endIfUsed = true,
+						name = "The Bowl of Embers hazard draws",
+						uuid = "30c14a0e-519a-e15a-9a1c-e76b176f9c77",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid == 1045 and (eventArgs.aoeID == 733))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "f9395f6e-3af5-50ea-8b91-773155b41fa8",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Bowl of Embers/Draws",
+			eventType = 18,
+			name = "The Bowl of Embers hazard draws",
+			timeout = 1,
+			uuid = "b080f39f-29bb-c36e-98fe-fb6fd0952ebd",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local cues = {[458]=\"Hellfire\",[455]=\"Dodge Eruption\"}\nAnyoneCore.Shotcall(cues[eventArgs.spellID],true,3,false)\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"e274e473-cbf7-1ac9-b7bd-31e3a83d92fc",
+								true,
+							},
+						},
+						endIfUsed = true,
+						name = "The Bowl of Embers mechanic cues",
+						uuid = "462626c3-c466-546c-b370-05469e5ad3b7",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid == 1045 and (eventArgs.spellID == 458 or eventArgs.spellID == 455))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "e274e473-cbf7-1ac9-b7bd-31e3a83d92fc",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Bowl of Embers/Draws",
+			eventType = 3,
+			name = "The Bowl of Embers mechanic cues",
+			timeout = 1,
+			uuid = "0252d23d-25a9-3cc9-8df5-c3da2d336bd9",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "AnyoneCore.Shotcall(\"Attack the nail\",true,4,false)\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"577be2cb-953b-df47-9ae0-09df1ba9f177",
+								true,
+							},
+						},
+						endIfUsed = true,
+						name = "Attack the nail",
+						uuid = "031ec346-faf5-9644-ba6c-59f885265588",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid == 1045 and p.incombat and eventArgs.entityContentID == 1186 and eventArgs.isTargetable)",
+						dequeueIfLuaFalse = true,
+						name = "Infernal Nail appeared",
+						uuid = "577be2cb-953b-df47-9ae0-09df1ba9f177",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Bowl of Embers/Draws",
+			eventType = 26,
+			name = "Infernal Nail - Attack the nail",
+			timeout = 1,
+			uuid = "b70d521a-b099-749f-b7c7-ac8dadd14bcc",
+			version = 2,
+		},
 	}, 
 	inheritedProfiles = 
 	{
