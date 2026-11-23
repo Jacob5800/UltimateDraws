@@ -11834,6 +11834,7 @@ local tbl =
 					},
 				},
 				displayPath = "LPDU",
+				enabled = false,
 				eventType = 3,
 				loop = true,
 				mechanicTime = 984.8,
