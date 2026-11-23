@@ -184,6 +184,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### FRU
 
+- In P4 Darklit Dragonsong, the player baiting the protean now gets the cone pre-drawn from the boss toward their bait spot until it resolves. (23-11-2026)
+
 - The end-of-P3 puddle staging marker now follows where the next boss spawns: it guides you to the number marker matching the lettered waymark nearest the spawn (A to 1, B to 2, C to 3, D to 4) instead of always marker 1. (23-11-2026)
 
 - Fixed the first P5 Exasquares set drawing its green safe-area shapes on the wrong side when the real side was left. The left/right callout now comes after all eight Pandora clones are known. (23-11-2026)
