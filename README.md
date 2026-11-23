@@ -62,7 +62,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### TEA
 
-- Limit Cut now shows your full route from the first Hawk Blaster: a green circle and arrow to your spot for each wave, inner circle for active numbers and outer circle for inactive numbers (1256 start West/Northeast, 3478 start East/Southwest). It replaces the yellow stop preview and can be toggled in LPDU Settings. (23-11-2026)
+- Limit Cut now shows your full route from the first Hawk Blaster: a small green circle on your spot for each wave plus a dimmer one for the next, inner circle for active numbers and outer circle for inactive numbers (1256 start West/Northeast, 3478 start East/Southwest). It stops once your own bait has hit. It replaces the yellow stop preview and can be toggled in LPDU Settings. (23-11-2026)
 
 - Limit Cut settings add a player-following bait countdown. (22-11-2026)
 
