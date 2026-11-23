@@ -5570,7 +5570,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nlocal hw=S.hw\nif hw and not hw.resolved then\n hw.resolved=Now(); hw.countdown=nil; S.clearGoal()\n -- Last tower set: the blue tether holder waits 2.6s for the vulnerability before breaking (callout from Masado1170's TOP Draws).\n local me=TensorCore.mGetPlayer()\n if hw.wave==4 and me and TensorCore.hasBuff(me,3530) then\n  AnyoneCore.Shotcall('Wait for the vuln',true,2.6,false)\n end\nend\nself.used=true\n",
+							actionLua = "local S=data.topLpdu\nif not S then self.used=true return end\n\nlocal hw=S.hw\nif hw and not hw.resolved then\n hw.resolved=Now(); hw.countdown=nil; S.clearGoal()\n -- Last tower set: the blue tether holder waits 2.6s for the vulnerability before breaking (callout, label and green spot from Masado1170's TOP Draws).\n local me=TensorCore.mGetPlayer()\n if hw.wave==4 and me and me.pos and TensorCore.hasBuff(me,3530) then\n  AnyoneCore.Shotcall('Wait for the vuln',true,2.6,false)\n  local spot=hw.dest and hw.dest[me.id]\n  local x=spot and spot.x or me.pos.x\n  local z=spot and spot.z or me.pos.z\n  AnyoneCore.addTimedWorldText(2600,'Wait for the vuln',{x=x,y=me.pos.y+1.5,z=z},0xFF66FF66,true,1.3)\n  if S.debugWrap and S.keep then\n   local green=S.debugWrap(TensorCore.getCachedFlatDrawer(0x6600FF00,0x6600FF00,0x6600FF00,0xFF00FF00,3,0,0))\n   local handle=green:addTimedCircle(2600,x,me.pos.y,z,0.8,0,false,true,0)\n   if handle then S.keep(handle) end\n  end\n end\nend\nself.used=true\n",
 							conditions = 
 							{
 								
