@@ -40,6 +40,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UCOB
 
+- Fixed the Golden Exaflare draw: it was one blast late, so the blast about to land was left uncovered. Both draw modes now cover the next blast plus the two after it in every lane, and the Subtractive mode no longer hides itself when a lane update arrives late. (23-11-2026)
+
 - Fixed the AutoSim forecast's boss lookup so it can track boss presence and targetability. (22-11-2026)
 
 - Fixed the personal Earthshaker cone during Quickmarch and Tenstrike, which could not find its source. (22-11-2026)
@@ -57,8 +59,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - The opening Twister previews your current bait position, then marks the actual spawned Twisters. (19-11-2026)
 
 - Adds Hatch shows a staging arrow for the south neurolink before Twister. Both Adds spread countdowns can recover from a missed quote using the observed cast sequence. (19-11-2026)
-
-- Heavensfall calls the observed cone rotation and shows a brighter preview of the first cone pair beyond the live telegraphs. (19-11-2026)
 
 ### TEA
 
