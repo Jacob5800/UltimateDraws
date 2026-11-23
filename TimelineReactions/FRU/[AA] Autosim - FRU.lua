@@ -425,6 +425,40 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "AutoSim",
+				uuid = "4591b938-0c87-4225-ad5d-c5cae3a73b14",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "AutoSim",
+				execute = "-- Before a pull: remove temporary small-crystal DoT blacklist entries left by an earlier wipe, early\n-- departure or reload. Only entries recorded as ours are deleted.\nlocal own = _G.FRU_AutoSimTempDot\nif not own or next(own) == nil then return end\nlocal acr = TensorCore.API.TensorACR\nfor id in pairs(own) do\n  if acr.deleteBlacklistEntry then acr.deleteBlacklistEntry(id) end\n  own[id] = nil\n  TensorCore.timelineLogToFile('[AutoSim DoT blacklist] cleared stale ' .. id .. '\\n')\nend",
+				executeType = 2,
+				mechanicTime = 13.7,
+				name = "AutoSim | Clear stale temp DoT blacklist",
+				throttleTime = 1000,
+				timeRange = true,
+				timelineIndex = 1,
+				timerEndOffset = -13.7,
+				timerStartOffset = -73.7,
+				uuid = "106cab9f-d303-6a3a-bd71-7be6fb2bb313",
+				version = 2,
+			},
+		},
 	}, 
 	[21] = 
 	{
@@ -982,7 +1016,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local forecast = data.fru_rpr_forecast\nif not forecast or forecast.version ~= 2 then return end\nlocal acr = TensorCore.API.TensorACR\nlocal actual = acr.getAutoSimTime()\nif actual <= 0 then return end\nforecast.apply(368.015, actual)\nforecast.phase = 2.5\n-- Pin the assigned Light Crystal; do not let Ice Veil reuse its DD identity.\nforecast.crystal_id = eventArgs.detectionTargetID\nacr.setAutoSimTarget(0, eventArgs.detectionTargetID)\nfor slot = 1, 5 do acr.clearAutoSimTarget(slot) end\nself.used = true",
+							actionLua = "local forecast = data.fru_rpr_forecast\nif not forecast or forecast.version ~= 2 then return end\nlocal acr = TensorCore.API.TensorACR\nlocal actual = acr.getAutoSimTime()\nif actual <= 0 then return end\nforecast.apply(368.015, actual)\nforecast.phase = 2.5\n-- The assigned Light Crystal is resolved by \"AutoSim | Intermission slot 0 follows target\"\n-- (roster slot -> waymark -> nearest crystal). The first crystal event is not the player's crystal.\nforecast.crystal_id = nil\nforecast.crystal_pending = true\nfor slot = 1, 5 do acr.clearAutoSimTarget(slot) end\n-- Temporary DoT blacklist for the small crystals (user 2026-11-23), BLM/BRD/SAM only. The middle Ice\n-- Veil (9358) stays DoT-able. Only entries created here are removed again (\"AutoSim | Release temp DoT\n-- blacklist\" at P3, \"AutoSim | Clear stale temp DoT blacklist\" before the next pull); entries the\n-- user already had are left untouched.\nlocal job = TensorCore.mGetPlayer().job\nif job == 25 or job == 23 or job == 34 then\n  if acr.getBlacklistEntry and acr.addBlacklistEntry then\n    local own = _G.FRU_AutoSimTempDot\n    if not own then own = {}; _G.FRU_AutoSimTempDot = own end\n    for _, id in ipairs({13555, 13556}) do\n      if own[id] then\n        -- already ours\n      elseif acr.getBlacklistEntry(id) then\n        TensorCore.timelineLogToFile('[AutoSim DoT blacklist] ' .. id .. ' already present, left unchanged\\n')\n      else\n        local entry = acr.addBlacklistEntry(id, 'FRU small crystal (AutoSim temp)')\n        entry.enabled = true\n        own[id] = true\n        TensorCore.timelineLogToFile('[AutoSim DoT blacklist] added ' .. id .. '\\n')\n      end\n    end\n  else\n    TensorCore.timelineLogToFile('[AutoSim DoT blacklist] unavailable: current ACR has no DoT blacklist\\n')\n  end\nend\nself.used = true",
 							conditions = 
 							{
 								
@@ -1053,7 +1087,7 @@ local tbl =
 				{
 				},
 				displayPath = "AutoSim",
-				execute = "-- Intermission, slot 0 only (user 2026-10-22): slot 0 is the player's current Light Crystal until it\n-- dies, then whatever they target next (another Light Crystal or the Ice Veil). Keeps the ACR from\n-- planning around distant targets. Only the slot identity changes: lifetimes stay as scheduled\n-- (user 2026-10-22: keeps the schedule simple; see AS-002). Stops at P3 (\"AutoSim | Reanchor P3\", phase 3).\nlocal forecast = data.fru_rpr_forecast\nif not forecast or forecast.version ~= 2 or forecast.phase < 2.5 or forecast.phase >= 3 then return end\nlocal t = TensorCore.mGetTarget()\nif not t or not t.targetable or not t.alive then return end\nif t.contentid ~= 13555 and t.contentid ~= 9358 then return end\nif t.id == forecast.crystal_id then return end\nlocal acr = TensorCore.API.TensorACR\n-- crystal_id also lets \"AutoSim | Correct crystal death\" end the crystal lifetime when this crystal dies.\nforecast.crystal_id = t.id\nacr.setAutoSimTarget(0, t.id)\nfor slot = 1, 5 do acr.clearAutoSimTarget(slot) end",
+				execute = "-- Intermission, slot 0 only (user 2026-10-22): slot 0 is the player's assigned Light Crystal until it\n-- dies, then whatever they target next (another Light Crystal or the Ice Veil). Keeps the ACR from\n-- planning around distant targets. Only the slot identity changes: lifetimes stay as scheduled\n-- (user 2026-10-22: keeps the schedule simple; see AS-002). Stops at P3 (\"AutoSim | Reanchor P3\", phase 3).\n-- Ranged DPS (physical + caster, user 2026-11-23) also advance slot 0 on their own: own crystal ->\n-- nearest other outer Light Crystal -> middle Ice Veil. Melee, tanks and healers only follow their own\n-- target, so a far crystal never makes the ACR plan ranged attacks.\nlocal forecast = data.fru_rpr_forecast\nif not forecast or forecast.version ~= 2 or forecast.phase < 2.5 or forecast.phase >= 3 then return end\nlocal acr = TensorCore.API.TensorACR\n-- Assigned crystal: roster slot -> waymark (same mapping as ACR3 opti crystal targeting) -> nearest\n-- Light Crystal. Resolved once, only while all four crystals are alive and targetable.\nif forecast.crystal_pending and not forecast.crystal_id then\n  local roster = AnyoneCore.Roster\n  if roster and roster.current() ~= nil and roster.isReady() then\n    local markBySlot = {T1=1,R1=1,H1=4,M1=4,T2=2,R2=2,H2=3,M2=3}\n    local mark = markBySlot[roster.mySlot()]\n    if mark then\n      local x, y, z, active = Argus.getWaymarkInfo(mark)\n      if not active then x, y, z, active = Argus.getWaymarkInfo(mark + 4) end\n      if active then\n        local best, bestD, count = nil, nil, 0\n        for _, e in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid = 13555}) or {}) do\n          if e.pos and e.alive and e.targetable then\n            count = count + 1\n            local d = TensorCore.getDistance2d(e.pos, {x = x, y = y, z = z})\n            if not bestD or d < bestD then best, bestD = e, d end\n          end\n        end\n        if best and count >= 4 then\n          forecast.crystal_id = best.id\n          forecast.crystal_pending = nil\n          acr.setAutoSimTarget(0, best.id)\n          for slot = 1, 5 do acr.clearAutoSimTarget(slot) end\n        end\n      end\n    end\n  end\nend\n-- Ranged auto-advance once the current slot-0 target is gone. The short wait lets \"AutoSim | Correct\n-- crystal death\" read the dying crystal's id before it is replaced.\nif forecast.crystal_id and not forecast.crystal_pending then\n  local p = TensorCore.mGetPlayer()\n  -- Role check instead of a job list, so new ranged DPS jobs are covered automatically.\n  if TensorCore.isRanged(p, true) then\n    local cur = TensorCore.mGetEntity(forecast.crystal_id)\n    if cur and cur.alive and cur.targetable then\n      forecast.crystal_gone_at = nil\n    else\n      forecast.crystal_gone_at = forecast.crystal_gone_at or Now()\n      if Now() - forecast.crystal_gone_at >= 300 then\n        local nextTarget, nextD\n        for _, e in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid = 13555}) or {}) do\n          if e.pos and e.alive and e.targetable and e.id ~= forecast.crystal_id then\n            local d = TensorCore.getDistance2d(p.pos, e.pos)\n            if not nextD or d < nextD then nextTarget, nextD = e, d end\n          end\n        end\n        if not nextTarget then\n          for _, e in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid = 9358}) or {}) do\n            if e.alive and e.targetable and e.id ~= forecast.crystal_id then nextTarget = e break end\n          end\n        end\n        if nextTarget then\n          forecast.crystal_id = nextTarget.id\n          forecast.crystal_gone_at = nil\n          acr.setAutoSimTarget(0, nextTarget.id)\n          for slot = 1, 5 do acr.clearAutoSimTarget(slot) end\n        end\n      end\n    end\n  end\nend\nlocal t = TensorCore.mGetTarget()\nif not t or not t.targetable or not t.alive then return end\nif t.contentid ~= 13555 and t.contentid ~= 9358 then return end\nif t.id == forecast.crystal_id then return end\n-- crystal_id also lets \"AutoSim | Correct crystal death\" end the crystal lifetime when this crystal dies.\nforecast.crystal_id = t.id\nforecast.crystal_pending = nil\nforecast.crystal_gone_at = nil\nacr.setAutoSimTarget(0, t.id)\nfor slot = 1, 5 do acr.clearAutoSimTarget(slot) end",
 				executeType = 2,
 				mechanicTime = 418.8,
 				name = "AutoSim | Intermission slot 0 follows target",
@@ -1438,6 +1472,30 @@ local tbl =
 				timerEndOffset = 12,
 				timerStartOffset = -5,
 				uuid = "4740fa6f-8c88-595a-980f-ef3304fb313e",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "AutoSim",
+				execute = "-- Release the temporary small-crystal DoT blacklist entries created by \"AutoSim | Reanchor Light crystals\"\n-- once P3 starts. Only entries recorded as ours are deleted.\nlocal own = _G.FRU_AutoSimTempDot\nif not own or next(own) == nil then return end\nlocal forecast = data.fru_rpr_forecast\nif not forecast or forecast.phase < 3 then return end\nlocal acr = TensorCore.API.TensorACR\nfor id in pairs(own) do\n  if acr.deleteBlacklistEntry then acr.deleteBlacklistEntry(id) end\n  own[id] = nil\n  TensorCore.timelineLogToFile('[AutoSim DoT blacklist] released ' .. id .. '\\n')\nend",
+				executeType = 2,
+				mechanicTime = 514,
+				name = "AutoSim | Release temp DoT blacklist",
+				throttleTime = 500,
+				timeRange = true,
+				timelineIndex = 120,
+				timerEndOffset = 60,
+				timerStartOffset = -5,
+				uuid = "a5c9ec40-d3c1-92ec-b546-17afe4dd04ce",
 				version = 2,
 			},
 		},

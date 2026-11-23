@@ -29,6 +29,7 @@ This procedure applies to every mapped profile below. Keep one procedure here; p
 |---|---|---|---|---|
 | FRU LPDU | Confirm live | `Frureactions\lpdu strats.lua` | `FRU\lpdu strats.lua` | `FRU-REACTIONS-TODO.md` |
 | FRU ACR3 Opti | `fru` / `1.0.5` | `Frureactions\\ACR3 opti FRU.lua` | `FRU\\ACR3 opti FRU.lua` | `FRU-REACTIONS-TODO.md` |
+| FRU AA AutoSim | `fru` / `1.0.5` | `Frureactions\[AA] Autosim - FRU.lua` | `FRU\[AA] Autosim - FRU.lua` | `FRU-REACTIONS-TODO.md` |
 | UWU LPDU | `uwu` / `1.0.2` | `OwOReactions\Draws LPDU.lua` | `UWU\Draws LPDU.lua` | `UWU-REACTIONS-TODO.md` |
 | UWU AA AutoSim | `uwu` / `1.0.2` | `OwOReactions\[AA] Autosim - UWU.lua` | `UWU\[AA] Autosim - UWU.lua` | `UWU-REACTIONS-TODO.md` |
 | UCOB LPDU | `ucob` / `1.0.3` | `Ucobreactions\LPDU Draws.lua` | `UCOB\LPDU Draws.lua` | `UCOB-DRAWS-TODO.md` |
