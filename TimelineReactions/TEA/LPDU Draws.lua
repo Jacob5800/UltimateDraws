@@ -4676,6 +4676,40 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "a507332d-042f-30c9-834a-85ec7bd6a202",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 12,
+				execute = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 887 or not player.alive then return end\nif data.teaShieldDone then return end\n-- Tanks do not hit the shield; everyone else gets the open (front) side.\nif TensorCore.isTank(player) then return end\nlocal shield\nlocal shields = TensorCore.entityList(\"contentid=8658\")\nif shields then\n    for _, e in pairs(shields) do\n        if e and e.id and e.pos and Argus.isEntityVisible(e.id) then shield = e break end\n    end\nend\nif not shield then\n    if data.teaShieldSeen then data.teaShieldDone = true end\n    return\nend\ndata.teaShieldSeen = true\nif not data.teaShieldCalled then\n    data.teaShieldCalled = true\n    AnyoneCore.Shotcall(\"Shield: hit it from the front\", true, 3, false)\nend\n-- The shield parries from its left, right and back, so the front 90 degrees is open.\nlocal drawer = TensorCore.getCachedDrawer(0x4000FF00, 0xFF00FF00, 0xFF00FF00, 0xFF00FF00, 2)\ndrawer:addCone(shield.pos.x, shield.pos.y, shield.pos.z, 30, math.pi / 2, shield.pos.h, false)\nself.used = true",
+				executeType = 2,
+				loop = true,
+				mechanicTime = 315.5,
+				name = "[LPDU] Plasma Shield - attack from the front",
+				timeRange = true,
+				timelineIndex = 74,
+				timerEndOffset = 9,
+				uuid = "2c08847f-a1ec-d85f-97d1-e92b189ae0a4",
+				version = 2,
+			},
+		},
 	},
 	[76] = 
 	{
@@ -10951,6 +10985,44 @@ local tbl =
 			},
 		},
 	},
+	[174] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "912f589c-be40-b3a6-90b8-e5c0864735bd",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 3,
+				execute = "if eventArgs.entityContentID ~= 9042 then return end\nlocal spell = eventArgs.spellID\nif spell ~= 18578 and spell ~= 18577 then return end\nlocal drawer = TensorCore.getMoogleDrawer()\nif not drawer then self.used = true return end\nif spell == 18578 then\n    -- Shared three-hit tankbuster (4 yalm) lands on the boss's current target.\n    local boss = EntityList:Get(eventArgs.entityID)\n    local targetID = boss and boss.targetid\n    if targetID and targetID > 0 then\n        drawer:addTimedCircleOnEnt(6000, targetID, 4, 0, false, false)\n    end\nelse\n    -- Ordained Punishment: 5 yalm circle on its target (spread from them).\n    local targetID = eventArgs.targetID\n    if targetID and targetID > 0 then\n        drawer:addTimedCircleOnEnt(4700, targetID, 5, 0, false, false)\n    end\nend\nself.used = true",
+				executeType = 2,
+				loop = true,
+				mechanicTime = 1008,
+				name = "[LPDU] Ordained Capital Punishment - shared and spread circles",
+				timeRange = true,
+				timelineIndex = 174,
+				timerEndOffset = 14,
+				timerStartOffset = -6,
+				uuid = "7d64930a-9703-69af-aeb7-2cd8f96bcf95",
+				version = 2,
+			},
+		},
+	},
 	[179] = 
 	{
 		
@@ -11557,6 +11629,44 @@ local tbl =
 			},
 		},
 	},
+	[193] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "5fa46c6d-9da8-0a48-898b-e1e904318d3d",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 3,
+				execute = "if eventArgs.entityContentID ~= 9042 then return end\nlocal spell = eventArgs.spellID\nif spell ~= 18578 and spell ~= 18577 then return end\nlocal drawer = TensorCore.getMoogleDrawer()\nif not drawer then self.used = true return end\nif spell == 18578 then\n    local boss = EntityList:Get(eventArgs.entityID)\n    local targetID = boss and boss.targetid\n    if targetID and targetID > 0 then\n        drawer:addTimedCircleOnEnt(6000, targetID, 4, 0, false, false)\n    end\nelse\n    local targetID = eventArgs.targetID\n    if targetID and targetID > 0 then\n        drawer:addTimedCircleOnEnt(4700, targetID, 5, 0, false, false)\n    end\nend\nself.used = true",
+				executeType = 2,
+				loop = true,
+				mechanicTime = 1106.8,
+				name = "[LPDU] Ordained Capital Punishment - shared and spread circles",
+				timeRange = true,
+				timelineIndex = 193,
+				timerEndOffset = 14,
+				timerStartOffset = -6,
+				uuid = "eccf86b6-6875-5013-b653-e77ee0a5fa65",
+				version = 2,
+			},
+		},
+	},
 	[199] = 
 	{
 		
@@ -11797,6 +11907,44 @@ local tbl =
 				timerEndOffset = 1,
 				timerStartOffset = -6,
 				uuid = "d566e2db-4d5a-e3f8-a8e9-7d2134e47751",
+				version = 2,
+			},
+		},
+	},
+	[204] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "LPDU Guidance",
+				uuid = "9cb99d17-6f1d-94c1-866a-36137c6be320",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "LPDU Guidance",
+				eventType = 3,
+				execute = "if eventArgs.entityContentID ~= 9042 then return end\nlocal spell = eventArgs.spellID\nif spell ~= 18578 and spell ~= 18577 then return end\nlocal drawer = TensorCore.getMoogleDrawer()\nif not drawer then self.used = true return end\nif spell == 18578 then\n    local boss = EntityList:Get(eventArgs.entityID)\n    local targetID = boss and boss.targetid\n    if targetID and targetID > 0 then\n        drawer:addTimedCircleOnEnt(6000, targetID, 4, 0, false, false)\n    end\nelse\n    local targetID = eventArgs.targetID\n    if targetID and targetID > 0 then\n        drawer:addTimedCircleOnEnt(4700, targetID, 5, 0, false, false)\n    end\nend\nself.used = true",
+				executeType = 2,
+				loop = true,
+				mechanicTime = 1152.6,
+				name = "[LPDU] Ordained Capital Punishment - shared and spread circles",
+				timeRange = true,
+				timelineIndex = 204,
+				timerEndOffset = 14,
+				timerStartOffset = -6,
+				uuid = "43b56cb5-f4f1-f20b-b627-bfc5fd3d044b",
 				version = 2,
 			},
 		},
