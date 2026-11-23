@@ -154,7 +154,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### TOP
 
-- Hello World now calls "Wait for the vuln" with a short countdown for the blue tether holder at the last tower set, before the tether break. (23-11-2026)
+- Hello World now calls "Wait for the vuln" for the blue tether holder at the last tower set, before the tether break. (23-11-2026)
 
 - Added a "Masado(LPDU)" option in TOP LPDU Settings (P3 Intermission, off by default). When on, it swaps our Intermission spread/pair and hand slam guidance for Masado1170's: the conga line, named wall spots, an arrow to your spot and the hand dodge. Used with his permission. (23-11-2026)
 
