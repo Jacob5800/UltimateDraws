@@ -184,6 +184,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### FRU
 
+- Removed three empty folders from LPDU Mits. The profile also includes Sprint for Diamond Dust outward cone baiters and moves Bard's Nature's Minne to the Hallowed Wings rewind. (23-11-2026)
+
 - Fall of Faith Conga appears at 82. Utopian Sky has an optional Raised Sword callout for your clockspot. Non-tanks get a Go inside cue when the first cleave clears in the P1 tower knockback pattern. Added separate Party Roster clockspot previews with short green arrows and direction callouts at pull start and P2 start. The P1 preview is near max melee. The P2 preview starts at 204, uses 40% opacity, and points 11.5 yalms from center. Light Rampant opens with the curved LPDU double conga. The optional Testing puddle guide marks each next bait and guides you clear of the final drop before regrouping. Its first movement cue says Keep baiting clockwise. Diamond Dust Out Swap cues react to the personal cone and blocking icicles. One Diamond Dust setting controls the personal Frigid Stone and outward House of Light bait countdowns. The final Diamond Dust slide recalculates from your current position and checks the puddles before marking the landing. Diamond Dust lane drops and Banish III spread use the standard player-attached countdown layout. (20-11-2026)
 
 - Aligned M1/M2 Feint, R1 physical-ranged mitigation, and R2 Addle with the FRU mitigation sheet. Added party-range and boss-target checks and tightened cooldown windows. (19-11-2026)

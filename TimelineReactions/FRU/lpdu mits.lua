@@ -2236,19 +2236,6 @@ local tbl =
 			},
 		},
 	},
-	[10] = 
-	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "dee7f529-921b-8018-ba65-6a8ab9eed17d",
-			},
-			objectType = "folder",
-		},
-	},
 	[11] = 
 	{
 		
@@ -9104,6 +9091,70 @@ local tbl =
 			},
 		},
 	},
+	[47] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "Shared tank utility",
+				uuid = "05487c5b-e054-f253-8033-eaa40b368f1e",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"faada2b9-67c0-d6b1-b79e-23ed8e716af4",
+									true,
+								},
+							},
+							gVar = "ACR_TensorRequiem4_Hotbar_Sprint",
+							name = "Use Sprint",
+							uuid = "7b66aaae-f8a9-113e-8d21-64cf13f62f68",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local marked=data.lpdu_p2_DD_marked\nif data.lpdu_p2_inout~=1 or not marked or #marked~=4 then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.alive then return false end\nfor _,id in ipairs(marked) do\n if id==p.id then return false end\nend\nreturn true",
+							name = "Outward cone baiter",
+							uuid = "faada2b9-67c0-d6b1-b79e-23ed8e716af4",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "Shared tank utility",
+				mechanicTime = 245.1,
+				name = "[LPDU] Diamond Dust - Sprint for outward cone",
+				timeRange = true,
+				timelineIndex = 47,
+				timerStartOffset = -1.1,
+				uuid = "ec5efad8-33e7-1400-825a-ff0ea8019123",
+				version = 2,
+			},
+		},
+	},
 	[48] = 
 	{
 		
@@ -9190,16 +9241,6 @@ local tbl =
 	},
 	[50] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "LPDU Mitigation",
-				uuid = "802d6e4d-badb-7992-97b7-8dafb19c32b1",
-			},
-			objectType = "folder",
-		},
 		
 		{
 			data = 
@@ -26312,61 +26353,6 @@ local tbl =
 					{
 						data = 
 						{
-							aType = "ACR",
-							actionID = 7408,
-							conditions = 
-							{
-								
-								{
-									"9ab2b530-3929-0dfd-a8cb-6f278810719f",
-									true,
-								},
-							},
-							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
-							name = "[LPDU] Nature's Minne Crystallize Time",
-							uuid = "3d277800-6774-1130-bf8d-ddb42fa03cce",
-							variableTogglesType = 2,
-							version = 2.1,
-						},
-					},
-				},
-				conditions = 
-				{
-					
-					{
-						data = 
-						{
-							category = "Self",
-							conditionType = 13,
-							dequeueIfLuaFalse = true,
-							jobValue = "BARD",
-							name = "BARD job",
-							uuid = "9ab2b530-3929-0dfd-a8cb-6f278810719f",
-							version = 3,
-						},
-					},
-				},
-				displayPath = "LPDU Mitigation",
-				mechanicTime = 798.9,
-				name = "[LPDU] Nature's Minne Crystallize Time",
-				timeRange = true,
-				timelineIndex = 179,
-				timerEndOffset = -2,
-				timerStartOffset = -5,
-				uuid = "7bb0a7aa-bb93-8e3b-ba07-dbe8f9e76529",
-				version = 2,
-			},
-		},
-		
-		{
-			data = 
-			{
-				actions = 
-				{
-					
-					{
-						data = 
-						{
 							actionID = 34686,
 							conditions = 
 							{
@@ -27748,6 +27734,61 @@ local tbl =
 				timerEndOffset = -0.5,
 				timerStartOffset = -3,
 				uuid = "76da8c46-480b-66f8-ba2e-2a1cd6fae0d6",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							actionID = 7408,
+							conditions = 
+							{
+								
+								{
+									"9ab2b530-3929-0dfd-a8cb-6f278810719f",
+									true,
+								},
+							},
+							gVar = "ACR_TensorRequiem3_Hotbar_NaturesMinne",
+							name = "[LPDU] Nature's Minne - Hallowed Wings rewind",
+							uuid = "3d277800-6774-1130-bf8d-ddb42fa03cce",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							dequeueIfLuaFalse = true,
+							jobValue = "BARD",
+							name = "BARD job",
+							uuid = "9ab2b530-3929-0dfd-a8cb-6f278810719f",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU Mitigation",
+				mechanicTime = 839.1,
+				name = "[LPDU] Nature's Minne - Hallowed Wings rewind",
+				timeRange = true,
+				timelineIndex = 195,
+				timerEndOffset = -1.9,
+				timerStartOffset = -3.1,
+				uuid = "7bb0a7aa-bb93-8e3b-ba07-dbe8f9e76529",
 				version = 2,
 			},
 		},
@@ -34450,16 +34491,6 @@ local tbl =
 	},
 	[236] = 
 	{
-		
-		{
-			data = 
-			{
-				displayPath = "",
-				name = "LPDU",
-				uuid = "7a414668-99b8-0cc5-8d1a-e80d596bf5b8",
-			},
-			objectType = "folder",
-		},
 		
 		{
 			data = 
