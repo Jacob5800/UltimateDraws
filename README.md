@@ -216,6 +216,10 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Added The Tower at Paradigm's Breach: hazard draws for every boss, Hansel and Gretel Upgraded Shield sides (red) with the open front (green), AutoSim forecasts that treat the Red Girl hacking minigame as downtime and stun, and a DoT blacklist for the minigame targets. (23-11-2026)
+
+- Added optional Arm's Length and Surecast requests for the Knave Lunge and Pillar Impact knockbacks in The Tower at Paradigm's Breach. Both are off by default in a new Settings window. (23-11-2026)
+
 - Added Surecast for Compound 2P’s Three Parts Disdain. (23-11-2026)
 
 - Improved The World of Darkness AutoSim: Cloud of Darkness now handles both of its disappearances and the short melee gap after it returns, and kill-time estimates were updated for all four bosses. (22-11-2026)

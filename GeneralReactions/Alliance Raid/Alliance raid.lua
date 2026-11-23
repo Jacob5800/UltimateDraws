@@ -12820,6 +12820,1583 @@ local tbl =
 			uuid = "c043d7eb-15b3-87e1-9786-102755744289",
 			version = 2,
 		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "The Tower at Paradigm's Breach",
+			uuid = "e143fc88-8b12-6e4b-8f87-27884451013d",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower at Paradigm's Breach",
+			name = "Setup",
+			uuid = "3476c1a7-b044-c8fc-bb49-b2b79c24af0f",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "gStartCombat=false\nif AnyoneCore and AnyoneCore.Settings then\n AnyoneCore.Settings.DutyHelper=false\n AnyoneCore.Settings.PrepullHelper=false\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"1dd25f85-324e-f8b5-ba70-19d70a88c884",
+								true,
+							},
+						},
+						name = "Disable duty and prepull helpers",
+						uuid = "669f17f6-55c1-fa35-ba65-e37ae821f075",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn p~=nil and p.localmapid==966\n",
+						dequeueIfLuaFalse = true,
+						name = "Tower at Paradigm's Breach only",
+						uuid = "1dd25f85-324e-f8b5-ba70-19d70a88c884",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Setup",
+			eventType = 11,
+			name = "[Paradigm's Breach] Helper setup",
+			uuid = "11d6ac85-100e-be44-8687-85b26778ba7f",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local S=_G.PB_AllianceSettings\nif not S then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n S={values={},folder=folder,path=folder..'AllianceRaid-ParadigmsBreach.lua'}\n local existed=FileExists(S.path)\n if existed then\n  local ok,t=pcall(FileLoad,S.path)\n  if ok and type(t)=='table' then S.values=t end\n end\n local v=S.values\n local changed=not existed\n if type(v.kbLunge)~='number' or v.kbLunge<0 or v.kbLunge>2 or v.kbLunge~=math.floor(v.kbLunge) then v.kbLunge=0 changed=true end\n if type(v.kbPillar)~='boolean' then v.kbPillar=false changed=true end\n if changed then\n  pcall(function()\n   if not FolderExists(S.folder) then FolderCreate(S.folder) end\n   FileSave(S.path,v)\n  end)\n end\n _G.PB_AllianceSettings=S\nend\nlocal v=S.values\nlocal visible=GUI:Begin(\"[Paradigm's Breach] Settings\",true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n local changed=false\n local modes={\"Off\",\"Knave Lunge\",\"Clone Lunge\"}\n local cur=GUI:Combo(\"Lunge knockback immunity\",v.kbLunge+1,modes)\n if cur and cur-1~=v.kbLunge then v.kbLunge=cur-1 changed=true end\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"Requests Arm's Length (physical jobs) or Surecast (casters and healers) shortly before the chosen Lunge. Off by default: Lunge normally knocks you into the green landing boxes, so immunity keeps you where you stand. The ability is on a 120 second cooldown, so only one of the two Lunges (about 10 seconds apart) can be covered.\")\n end\n local pillar=GUI:Checkbox(\"Pillar Impact knockback immunity##PBPillar\",v.kbPillar)\n if pillar~=v.kbPillar then v.kbPillar=pillar changed=true end\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"Requests Arm's Length or Surecast shortly before the Pillar Impact shockwave. Off by default: the knockback is part of the mechanic, so immunity keeps you beside the pillar.\")\n end\n if changed then\n  pcall(function()\n   if not FolderExists(S.folder) then FolderCreate(S.folder) end\n   FileSave(S.path,v)\n  end)\n end\nend\nGUI:End()",
+						conditions = 
+						{
+							
+							{
+								"9a9e228c-2ecf-40c6-9150-547fadaa29bc",
+								true,
+							},
+						},
+						name = "Settings window",
+						uuid = "59cd9222-db13-f349-a27c-b98548325fad",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn p~=nil and p.localmapid==966\n",
+						dequeueIfLuaFalse = true,
+						name = "Tower at Paradigm's Breach only",
+						uuid = "9a9e228c-2ecf-40c6-9150-547fadaa29bc",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Setup",
+			eventType = 13,
+			name = "[Paradigm's Breach] Settings",
+			uuid = "e5ebf5c0-b40b-6b9b-9e26-49c391b89801",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower at Paradigm's Breach",
+			name = "Knave of Hearts",
+			uuid = "c0956e51-d9e3-0bb2-bcc9-040050353d61",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower at Paradigm's Breach/Knave of Hearts",
+			name = "Draws",
+			uuid = "6a4d7388-dc82-3e31-bf55-77ad566f9c38",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal SPEC={[24240]={k='r',col=0x7033FF33},[24241]={skip=true},[24239]={skip=true},[24245]={skip=true}}\nlocal s=SPEC[e.aoeID]\nlocal ct=e.aoeCastType\nlocal k\nif s then\n if s.skip then return end\n k=s.k\nelse\n if ct==2 and e.aoeLength>0 and e.aoeLength<=30 and e.aoeType~=27 then k='c'\n elseif ct==12 and e.aoeLength>0 and e.aoeWidth>0 and e.aoeLength<=70 and e.aoeWidth<=40 then k='r'\n elseif ct==13 and e.aoeLength>0 and e.aoeLength<=50 then k='cone'\n end\nend\nif not k then return end\nlocal col=(s and s.col) or 0x703333FF\nlocal d=TensorCore.getStaticDrawer(col,2)\nlocal x,y,z=e.x,e.y,e.z\nif k=='c' then\n d:addTimedCircle(ms,x,y,z,e.aoeLength,0,false,true)\nelseif k=='r' then\n d:addTimedRect(ms,x,y,z,e.aoeLength,e.aoeWidth,e.heading,0,false,true)\nelse\n local ang=(s and s.ang) or (e.aoeType==5 and 2*math.pi/3 or math.pi/2)\n d:addTimedCone(ms,x,y,z,e.aoeLength,ang,e.heading,0,false,true)\nend",
+						conditions = 
+						{
+							
+							{
+								"f7e20887-5335-03af-ba38-1222ebfc1c09",
+								true,
+							},
+						},
+						name = "Knave of Hearts hazard draws",
+						uuid = "4b976816-a85b-ecb1-a270-401626d21a87",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos then return false end\nlocal e=eventArgs\nif not e or e.friendly then return false end\nlocal c=e.contentID\nif not (c==9955 or c==10058) then return false end\nreturn (p.pos.x-(-800))^2+(p.pos.z-(-735))^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "Knave of Hearts arena and hazard",
+						uuid = "f7e20887-5335-03af-ba38-1222ebfc1c09",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Knave of Hearts/Draws",
+			eventType = 18,
+			name = "[Paradigm's Breach] Knave of Hearts hazard draws",
+			uuid = "3fbef16d-2b49-90bb-8170-276d628a14b4",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nif AnyoneCore and AnyoneCore.Shotcall then AnyoneCore.Shotcall(\"Leap: stay far from the landings\",true,3,false) end",
+						conditions = 
+						{
+							
+							{
+								"c35b976f-d264-73ae-809f-90797102f6e1",
+								true,
+							},
+						},
+						name = "Light Leap callout",
+						uuid = "18710fe1-18f3-b159-bf70-bbf6246ec4f3",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos or not p.incombat then return false end\nlocal e=eventArgs\nif not e then return false end\nif not (e.entityContentID==9955) then return false end\nlocal ok=false\nfor _,i in ipairs({24239}) do if e.spellID==i then ok=true end end\nreturn ok and (p.pos.x-(-800))^2+(p.pos.z-(-735))^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "Knave Light Leap",
+						uuid = "c35b976f-d264-73ae-809f-90797102f6e1",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Knave of Hearts/Draws",
+			eventType = 3,
+			name = "[Paradigm's Breach] Knave Light Leap callout",
+			uuid = "0ec90296-707c-5a7f-9c54-63d666d56446",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nif AnyoneCore and AnyoneCore.Shotcall then AnyoneCore.Shotcall(\"Lunge knockback: line up with the green boxes\",true,3,false) end",
+						conditions = 
+						{
+							
+							{
+								"b088830e-16d4-2c5f-ae39-2196f0bfcbb7",
+								true,
+							},
+						},
+						name = "Lunge callout",
+						uuid = "c1cf69be-e449-82cb-9853-3a1613b5915f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos or not p.incombat then return false end\nlocal e=eventArgs\nif not e then return false end\nif not (e.entityContentID==9955 or e.entityContentID==10058) then return false end\nlocal ok=false\nfor _,i in ipairs({24241}) do if e.spellID==i then ok=true end end\nreturn ok and (p.pos.x-(-800))^2+(p.pos.z-(-735))^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "Knave Lunge",
+						uuid = "b088830e-16d4-2c5f-ae39-2196f0bfcbb7",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Knave of Hearts/Draws",
+			eventType = 3,
+			name = "[Paradigm's Breach] Knave Lunge callout",
+			uuid = "04e40e81-c07a-a54c-bf10-bf32f51be41e",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower at Paradigm's Breach/Knave of Hearts",
+			name = "AutoSim",
+			uuid = "9915d251-65fb-de57-b30d-67abeca95c06",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal api=TensorCore.API.TensorACR\nlocal ok,now=pcall(api.getAutoSimTime)\nif not ok or type(now)~=\"number\" or now<0 or now>40 then return end\ndata.pbSim=data.pbSim or {}\nif data.pbSim[\"knave\"] then return end\ndata.pbSim[\"knave\"]=true\nlocal o=now-4.3\napi.setAutoSimKillTime(340.9+o)\nfor _,t in ipairs({\"FullDowntime\",\"Stun\"}) do api.clearAutoSimPhases(t) end\napi.clearAutoSimUncertainty()\napi.addAutoSimUncertainty(0,15)\nlocal s={}\ndata.pbSim.knave=s\ns.d1=api.addAutoSimPhase(\"FullDowntime\",112.9+o,116.9+o,1)\ns.d1Start=112.9+o\ns.d2=api.addAutoSimPhase(\"FullDowntime\",235.6+o,239.6+o,1)\ns.d2Start=235.6+o\n",
+						conditions = 
+						{
+							
+							{
+								"63cda0eb-b0f8-a75f-8995-03f106d753db",
+								true,
+							},
+						},
+						name = "Knave of Hearts forecast",
+						uuid = "f7b46330-f06c-0ca9-87cb-cb2d93f51706",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos or not p.incombat then return false end\nlocal e=eventArgs\nif not e then return false end\nif not (e.entityContentID==9955) then return false end\nlocal ok=false\nfor _,i in ipairs({24245}) do if e.spellID==i then ok=true end end\nreturn ok and (p.pos.x-(-800))^2+(p.pos.z-(-735))^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "Knave of Hearts opening cast",
+						uuid = "63cda0eb-b0f8-a75f-8995-03f106d753db",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Knave of Hearts/AutoSim",
+			eventType = 3,
+			name = "[Paradigm's Breach AutoSim] Knave of Hearts",
+			uuid = "9f67e983-86d4-bba5-8335-5802fff10c25",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower at Paradigm's Breach/Knave of Hearts",
+			name = "Knockback",
+			uuid = "60c10162-81ab-0bd0-8495-a4d771675ee4",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"ae832f50-8e86-d6f7-afb9-e751b5fc08fa",
+								true,
+							},
+							
+							{
+								"b5a3109b-41dc-494f-8eb2-cf6f0a57ab86",
+								true,
+							},
+							
+							{
+								"0613156c-a216-bf0f-9ef5-b09aca15aeb3",
+								true,
+							},
+							
+							{
+								"6f366b10-6c88-6dc5-b5f0-ed95bd54240e",
+								true,
+							},
+						},
+						gVar = "ACR_TensorViper4_Hotbar_ArmsLength",
+						name = "Request Arm's Length",
+						uuid = "0a243f10-6879-ee30-b9c7-56f2d288cd7d",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"ae832f50-8e86-d6f7-afb9-e751b5fc08fa",
+								true,
+							},
+							
+							{
+								"b5a3109b-41dc-494f-8eb2-cf6f0a57ab86",
+								true,
+							},
+							
+							{
+								"0613156c-a216-bf0f-9ef5-b09aca15aeb3",
+								true,
+							},
+							
+							{
+								"42065be0-ef51-0f10-a187-da518ad9688f",
+								true,
+							},
+						},
+						gVar = "ACR_TensorNuke4_Hotbar_Surecast",
+						name = "Request Surecast",
+						uuid = "4215ef36-5556-723e-a07c-ba9f144a52be",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 966,
+						name = "Tower at Paradigm's Breach only",
+						uuid = "ae832f50-8e86-d6f7-afb9-e751b5fc08fa",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local S=_G.PB_AllianceSettings\nif not S then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n S={values={},folder=folder,path=folder..'AllianceRaid-ParadigmsBreach.lua'}\n local existed=FileExists(S.path)\n if existed then\n  local ok,t=pcall(FileLoad,S.path)\n  if ok and type(t)=='table' then S.values=t end\n end\n local v=S.values\n local changed=not existed\n if type(v.kbLunge)~='number' or v.kbLunge<0 or v.kbLunge>2 or v.kbLunge~=math.floor(v.kbLunge) then v.kbLunge=0 changed=true end\n if type(v.kbPillar)~='boolean' then v.kbPillar=false changed=true end\n if changed then\n  pcall(function()\n   if not FolderExists(S.folder) then FolderCreate(S.folder) end\n   FileSave(S.path,v)\n  end)\n end\n _G.PB_AllianceSettings=S\nend\nlocal e=eventArgs\nif not e or e.spellID~=24241 then return false end\nlocal m=S.values.kbLunge\nif m==1 then return e.entityContentID==9955 end\nif m==2 then return e.entityContentID==10058 end\nreturn false",
+						dequeueIfLuaFalse = true,
+						name = "Exact mechanic and setting",
+						uuid = "b5a3109b-41dc-494f-8eb2-cf6f0a57ab86",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not self.deadline then self.deadline=Now()+eventArgs.channelTimeMax*1000 end\nlocal remaining=self.deadline-Now()\nif remaining>3000 or remaining<1000 then return false end\nlocal caster=TensorCore.mGetEntity(eventArgs.entityID)\nreturn caster~=nil and caster.castinginfo.channelingid==eventArgs.spellID",
+						name = "Request with 3 to 1 seconds remaining",
+						uuid = "0613156c-a216-bf0f-9ef5-b09aca15aeb3",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 14,
+						dequeueIfLuaFalse = true,
+						jobIDList = 
+						{
+							19,
+							21,
+							32,
+							37,
+							20,
+							22,
+							30,
+							34,
+							39,
+							41,
+							23,
+							31,
+							38,
+						},
+						name = "Physical role",
+						uuid = "6f366b10-6c88-6dc5-b5f0-ed95bd54240e",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 14,
+						dequeueIfLuaFalse = true,
+						jobIDList = 
+						{
+							25,
+							27,
+							35,
+							42,
+							24,
+							28,
+							33,
+							40,
+						},
+						name = "Caster or healer",
+						uuid = "42065be0-ef51-0f10-a187-da518ad9688f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Knave of Hearts/Knockback",
+			eventType = 3,
+			name = "[Paradigm's Breach] Knave Lunge knockback immunity (optional)",
+			timeout = 8,
+			uuid = "1864d847-456b-9cdb-9e26-d6dc08e6245c",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower at Paradigm's Breach",
+			name = "Hansel and Gretel",
+			uuid = "1153e6f2-f062-4797-93e0-3fc4bc9575fd",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower at Paradigm's Breach/Hansel and Gretel",
+			name = "Draws",
+			uuid = "8b11f767-9b85-c2b0-a0bf-4fe6778708f3",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal SPEC={[23651]={k='c',col=0x7033FF33},[23655]={k='r'},[23647]={skip=true},[23645]={skip=true},[23646]={skip=true},[23667]={skip=true}}\nlocal s=SPEC[e.aoeID]\nlocal ct=e.aoeCastType\nlocal k\nif s then\n if s.skip then return end\n k=s.k\nelse\n if ct==2 and e.aoeLength>0 and e.aoeLength<=30 and e.aoeType~=27 then k='c'\n elseif ct==12 and e.aoeLength>0 and e.aoeWidth>0 and e.aoeLength<=70 and e.aoeWidth<=40 then k='r'\n elseif ct==13 and e.aoeLength>0 and e.aoeLength<=50 then k='cone'\n end\nend\nif not k then return end\nlocal col=(s and s.col) or 0x703333FF\nlocal d=TensorCore.getStaticDrawer(col,2)\nlocal x,y,z=e.x,e.y,e.z\nif k=='c' then\n d:addTimedCircle(ms,x,y,z,e.aoeLength,0,false,true)\nelseif k=='r' then\n d:addTimedRect(ms,x,y,z,e.aoeLength,e.aoeWidth,e.heading,0,false,true)\nelse\n local ang=(s and s.ang) or (e.aoeType==5 and 2*math.pi/3 or math.pi/2)\n d:addTimedCone(ms,x,y,z,e.aoeLength,ang,e.heading,0,false,true)\nend",
+						conditions = 
+						{
+							
+							{
+								"16879d93-ed86-6b09-abde-c45c22ab8b81",
+								true,
+							},
+						},
+						name = "Hansel and Gretel hazard draws",
+						uuid = "c729e423-5869-06f4-8d8e-49cab3ae7fdd",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos then return false end\nlocal e=eventArgs\nif not e or e.friendly then return false end\nlocal c=e.contentID\nif not (c==9988 or c==9989 or c==9990 or c==9992 or c==9993) then return false end\nreturn (p.pos.x-(-800))^2+(p.pos.z-(-955))^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "Hansel and Gretel arena and hazard",
+						uuid = "16879d93-ed86-6b09-abde-c45c22ab8b81",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Hansel and Gretel/Draws",
+			eventType = 18,
+			name = "[Paradigm's Breach] Hansel and Gretel hazard draws",
+			uuid = "1c1bc035-0e96-d2e9-88f8-47892c8e092e",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local st=data.pbReflect\nif not st then st={nextScan=0,ids={},called={}} data.pbReflect=st end\nlocal now=Now()\nif now>=st.nextScan then\n st.nextScan=now+500\n st.ids={}\n for _,cid in ipairs({9988,9989}) do\n  for _,b in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=cid}) or {}) do\n   if b.alive then st.ids[#st.ids+1]=b.id end\n  end\n end\nend\nif #st.ids==0 then return end\nlocal red=TensorCore.getStaticDrawer(0x703333FF,2)\nlocal green=TensorCore.getStaticDrawer(0x7033FF33,2)\nlocal ang=math.pi/2\nfor _,id in ipairs(st.ids) do\n local b=TensorCore.mGetEntity(id)\n if b and b.pos and b.alive and TensorCore.hasBuff(b,2538) then\n  local h=b.pos.h\n  red:addCone(b.pos.x,b.pos.y,b.pos.z,9,ang,h+math.pi,false)\n  red:addCone(b.pos.x,b.pos.y,b.pos.z,9,ang,h+math.pi/2,false)\n  red:addCone(b.pos.x,b.pos.y,b.pos.z,9,ang,h-math.pi/2,false)\n  green:addCone(b.pos.x,b.pos.y,b.pos.z,9,ang,h,false)\n  if not st.called[id] then\n   st.called[id]=true\n   if AnyoneCore and AnyoneCore.Shotcall then AnyoneCore.Shotcall(\"Shield: hit from the front\",true,3,false) end\n  end\n elseif st.called[id] then\n  st.called[id]=nil\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"bbebf700-1d0a-e187-82c8-801d45136dff",
+								true,
+							},
+						},
+						name = "Draw shielded sides and open front",
+						uuid = "55094355-dc85-4f6c-8bfa-a3a31b240c29",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos then return false end\nreturn p.incombat and (p.pos.x-(-800))^2+(p.pos.z-(-955))^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "Hansel and Gretel arena in combat",
+						uuid = "bbebf700-1d0a-e187-82c8-801d45136dff",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Hansel and Gretel/Draws",
+			eventType = 12,
+			name = "[Paradigm's Breach] Hansel and Gretel Upgraded Shield reflect sides",
+			uuid = "9972ab06-451e-e636-aaf1-a5a6331a7674",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower at Paradigm's Breach/Hansel and Gretel",
+			name = "AutoSim",
+			uuid = "cb16bd79-b070-dee6-9624-c6b917a1a059",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal api=TensorCore.API.TensorACR\nlocal ok,now=pcall(api.getAutoSimTime)\nif not ok or type(now)~=\"number\" or now<=0 then return end\nlocal anyTargetable,any=false,false\nfor _,cid in ipairs({9988,9989}) do\n for _,b in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=cid}) or {}) do\n  if b.alive then any=true if b.targetable then anyTargetable=true end end\n end\nend\nif not any then return end\nlocal st=data.pbHG\nif not st then st={down=false} data.pbHG=st end\nif (not anyTargetable) and not st.down then\n st.down=true\n st.start=now\n st.id=api.addAutoSimPhase(\"FullDowntime\",now,now+14,1)\nelseif anyTargetable and st.down then\n st.down=false\n if st.id and now>st.start then pcall(api.setAutoSimPhase,st.id,st.start,now,1) end\n st.id=nil\nend",
+						conditions = 
+						{
+							
+							{
+								"b99756b8-ba64-d6f4-bea5-45e4ea279ffb",
+								true,
+							},
+						},
+						name = "Add FullDowntime while both bosses are untargetable",
+						uuid = "d3ff40e9-f4b4-e82d-8169-81a71bb62ac0",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos then return false end\nreturn p.incombat and (p.pos.x-(-800))^2+(p.pos.z-(-955))^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "Hansel and Gretel arena in combat",
+						uuid = "b99756b8-ba64-d6f4-bea5-45e4ea279ffb",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Hansel and Gretel/AutoSim",
+			name = "[Paradigm's Breach AutoSim] Hansel and Gretel untargetable windows",
+			throttleTime = 500,
+			uuid = "25f4b458-a70c-e0dd-a137-60ce7701cc39",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower at Paradigm's Breach",
+			name = "2P",
+			uuid = "b096c933-7f27-a005-9a4c-3302ad058a97",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower at Paradigm's Breach/2P",
+			name = "Draws",
+			uuid = "ff16ab06-7ee8-c0e3-b413-0b09cfeaf7c7",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal SPEC={[23550]={k='cone',ang=math.pi}}\nlocal s=SPEC[e.aoeID]\nlocal ct=e.aoeCastType\nlocal k\nif s then\n if s.skip then return end\n k=s.k\nelse\n if ct==2 and e.aoeLength>0 and e.aoeLength<=30 and e.aoeType~=27 then k='c'\n elseif ct==12 and e.aoeLength>0 and e.aoeWidth>0 and e.aoeLength<=70 and e.aoeWidth<=40 then k='r'\n elseif ct==13 and e.aoeLength>0 and e.aoeLength<=50 then k='cone'\n end\nend\nif not k then return end\nlocal col=(s and s.col) or 0x703333FF\nlocal d=TensorCore.getStaticDrawer(col,2)\nlocal x,y,z=e.x,e.y,e.z\nif k=='c' then\n d:addTimedCircle(ms,x,y,z,e.aoeLength,0,false,true)\nelseif k=='r' then\n d:addTimedRect(ms,x,y,z,e.aoeLength,e.aoeWidth,e.heading,0,false,true)\nelse\n local ang=(s and s.ang) or (e.aoeType==5 and 2*math.pi/3 or math.pi/2)\n d:addTimedCone(ms,x,y,z,e.aoeLength,ang,e.heading,0,false,true)\nend",
+						conditions = 
+						{
+							
+							{
+								"61b16212-dce9-29fe-86d3-f63c6184f0b6",
+								true,
+							},
+						},
+						name = "2P hazard draws",
+						uuid = "6bffd13d-5e29-7040-b93e-e783dea7a193",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos then return false end\nlocal e=eventArgs\nif not e or e.friendly then return false end\nlocal c=e.contentID\nif not (c==9918 or c==9919) then return false end\nreturn (p.pos.x-(752))^2+(p.pos.z-(-745))^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "2P arena and hazard",
+						uuid = "61b16212-dce9-29fe-86d3-f63c6184f0b6",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/2P/Draws",
+			eventType = 18,
+			name = "[Paradigm's Breach] 2P hazard draws",
+			uuid = "4eca2d96-24c3-2103-bbbd-dbfa819fe2f8",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower at Paradigm's Breach/2P",
+			name = "AutoSim",
+			uuid = "7c5a5de0-04e5-69f3-a74e-637501543dda",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal api=TensorCore.API.TensorACR\nlocal ok,now=pcall(api.getAutoSimTime)\nif not ok or type(now)~=\"number\" or now<0 or now>40 then return end\ndata.pbSim=data.pbSim or {}\nif data.pbSim[\"twop\"] then return end\ndata.pbSim[\"twop\"]=true\nlocal o=now-4.6\napi.setAutoSimKillTime(119.0+o)\nfor _,t in ipairs({\"FullDowntime\",\"Stun\"}) do api.clearAutoSimPhases(t) end\napi.clearAutoSimUncertainty()\napi.addAutoSimUncertainty(0,12)\nlocal s={}\ndata.pbSim.twop=s\ns.d1=api.addAutoSimPhase(\"FullDowntime\",70.3+o,84.8+o,1)\ns.d1Start=70.3+o\n",
+						conditions = 
+						{
+							
+							{
+								"62c8125b-a70c-c30e-b672-bfe76d9465e1",
+								true,
+							},
+						},
+						name = "2P forecast",
+						uuid = "26910a67-551f-038a-8323-fe0c62fe13f2",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos or not p.incombat then return false end\nlocal e=eventArgs\nif not e then return false end\nif not (e.entityContentID==9918) then return false end\nlocal ok=false\nfor _,i in ipairs({23547}) do if e.spellID==i then ok=true end end\nreturn ok and (p.pos.x-(752))^2+(p.pos.z-(-745))^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "2P opening cast",
+						uuid = "62c8125b-a70c-c30e-b672-bfe76d9465e1",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/2P/AutoSim",
+			eventType = 3,
+			name = "[Paradigm's Breach AutoSim] 2P",
+			uuid = "ad4621a3-f8d5-1f30-8d8b-bed0cdfaf0bd",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower at Paradigm's Breach",
+			name = "Red Girl",
+			uuid = "f7a46c1d-7177-3bcc-8e8d-b6978a493c38",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower at Paradigm's Breach/Red Girl",
+			name = "Draws",
+			uuid = "ded81e75-d1bb-f65f-b85f-a0fc004be0c8",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal SPEC={[24592]={k='c',col=0x70FFFFFF},[24972]={k='c',col=0x70303030},[24585]={skip=true},[24584]={skip=true},[24583]={skip=true},[24582]={skip=true},[24581]={skip=true},[24588]={skip=true},[24589]={skip=true}}\nlocal s=SPEC[e.aoeID]\nlocal ct=e.aoeCastType\nlocal k\nif s then\n if s.skip then return end\n k=s.k\nelse\n if ct==2 and e.aoeLength>0 and e.aoeLength<=30 and e.aoeType~=27 then k='c'\n elseif ct==12 and e.aoeLength>0 and e.aoeWidth>0 and e.aoeLength<=70 and e.aoeWidth<=40 then k='r'\n elseif ct==13 and e.aoeLength>0 and e.aoeLength<=50 then k='cone'\n end\nend\nif not k then return end\nlocal col=(s and s.col) or 0x703333FF\nlocal d=TensorCore.getStaticDrawer(col,2)\nlocal x,y,z=e.x,e.y,e.z\nif k=='c' then\n d:addTimedCircle(ms,x,y,z,e.aoeLength,0,false,true)\nelseif k=='r' then\n d:addTimedRect(ms,x,y,z,e.aoeLength,e.aoeWidth,e.heading,0,false,true)\nelse\n local ang=(s and s.ang) or (e.aoeType==5 and 2*math.pi/3 or math.pi/2)\n d:addTimedCone(ms,x,y,z,e.aoeLength,ang,e.heading,0,false,true)\nend",
+						conditions = 
+						{
+							
+							{
+								"6f39e8ff-f5d6-8c19-b047-00a8d4f6e004",
+								true,
+							},
+						},
+						name = "Red Girl hazard draws",
+						uuid = "24b696e9-f4e1-a60f-b5f2-677f4f999687",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos then return false end\nlocal e=eventArgs\nif not e or e.friendly then return false end\nlocal c=e.contentID\nif not (c==9950 or c==9920 or c==9981 or c==9982 or c==9983 or c==9984) then return false end\nreturn (p.pos.x-(845))^2+(p.pos.z-(-850))^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "Red Girl arena and hazard",
+						uuid = "6f39e8ff-f5d6-8c19-b047-00a8d4f6e004",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Red Girl/Draws",
+			eventType = 18,
+			name = "[Paradigm's Breach] Red Girl hazard draws",
+			uuid = "6dc7e869-7797-e064-a651-67c04d98b8e7",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower at Paradigm's Breach/Red Girl",
+			name = "AutoSim",
+			uuid = "0a0dca04-c96e-e0a3-9bf1-cc55f2c3df88",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal api=TensorCore.API.TensorACR\nlocal ok,now=pcall(api.getAutoSimTime)\nif not ok or type(now)~=\"number\" or now<0 or now>150 then return end\ndata.pbSim=data.pbSim or {}\nif data.pbSim[\"redgirl\"] then return end\ndata.pbSim[\"redgirl\"]=true\nlocal o=now-183.5\napi.setAutoSimKillTime(434.7+o)\nfor _,t in ipairs({\"FullDowntime\",\"Stun\"}) do api.clearAutoSimPhases(t) end\napi.clearAutoSimUncertainty()\napi.addAutoSimUncertainty(0,15)\nlocal s={}\ndata.pbSim.redgirl=s\ns.down=api.addAutoSimPhase(\"FullDowntime\",192.7+o,257.4+o,1)\ns.downStart=192.7+o\ns.stun=api.addAutoSimPhase(\"Stun\",205.4+o,257.2+o,1)\ns.stunStart=205.4+o\n",
+						conditions = 
+						{
+							
+							{
+								"9d758864-7b85-6cde-9709-4110c980f0fe",
+								true,
+							},
+						},
+						name = "Red Girl intermission forecast",
+						uuid = "f6388b37-5d25-6038-b2ee-a2bb424fec40",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos or not p.incombat then return false end\nlocal e=eventArgs\nif not e then return false end\nif not (e.entityContentID==9950) then return false end\nlocal ok=false\nfor _,i in ipairs({25098}) do if e.spellID==i then ok=true end end\nreturn ok and (p.pos.x-(845))^2+(p.pos.z-(-850))^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "Red Girl intermission opening cast",
+						uuid = "9d758864-7b85-6cde-9709-4110c980f0fe",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Red Girl/AutoSim",
+			eventType = 3,
+			name = "[Paradigm's Breach AutoSim] Red Girl intermission",
+			uuid = "ab0a1a1d-f513-2f8a-a170-03ecb8047527",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then return end\nlocal s=data.pbSim and data.pbSim.redgirl\nif not s or not s.stun then return end\nlocal api=TensorCore.API.TensorACR\nlocal ok,now=pcall(api.getAutoSimTime)\nif not ok or type(now)~=\"number\" or now<=0 then return end\nlocal inside=(p.pos.x)^2+(p.pos.z-400)^2<=45*45\nlocal st=data.pbHack\nif not st then st={inside=false} data.pbHack=st end\nif inside and not st.inside then\n st.inside=true\n st.enter=now\n pcall(api.setAutoSimPhase,s.stun,now,now+52,1)\n pcall(api.setAutoSimPhase,s.down,math.min(s.downStart or now,now),now+52,1)\nelseif (not inside) and st.inside then\n st.inside=false\n if st.enter and now>st.enter then\n  pcall(api.setAutoSimPhase,s.stun,st.enter,now,1)\n  pcall(api.setAutoSimPhase,s.down,math.min(s.downStart or st.enter,st.enter),now,1)\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"cde203d4-681a-e87c-8bb5-4aa7221e0a8b",
+								true,
+							},
+						},
+						name = "Resync Stun to the real minigame entry and exit",
+						uuid = "558a50ec-d9cb-c517-aa77-693963f9462d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn p~=nil and p.localmapid==966 and p.pos~=nil\n",
+						dequeueIfLuaFalse = true,
+						name = "In the duty",
+						uuid = "cde203d4-681a-e87c-8bb5-4aa7221e0a8b",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Red Girl/AutoSim",
+			name = "[Paradigm's Breach AutoSim] Red Girl hacking minigame resync",
+			throttleTime = 500,
+			uuid = "4fc23e56-3450-4743-9722-52cdf25b27c0",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local api=TensorCore.API.TensorACR\nlocal names={[9985]='Red Sphere',[9987]='Black Wall',[9986]='White Wall',[9983]='Black Pylon',[9984]='White Pylon'}\nlocal id=eventArgs.entityContentID\nlocal entry=api.addBlacklistEntry(id,names[id])\nif entry and (not entry.enabled or entry.allowIfTarget or entry.allowSmartDoT) then\n    entry.enabled=true\n    entry.allowIfTarget=false\n    entry.allowSmartDoT=false\n    api.saveDotBlacklist()\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"2087bba3-9df8-0fa5-adbe-f1205ded323d",
+								true,
+							},
+						},
+						name = "Block direct and Smart DoT on minigame targets",
+						uuid = "b7eba0ca-dfcc-1a44-9bd7-6ab1b94ebe1b",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local c=eventArgs.entityContentID\nif not (c==9985 or c==9987 or c==9986 or c==9983 or c==9984) then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn p~=nil and p.localmapid==966\n",
+						dequeueIfLuaFalse = true,
+						name = "Minigame target spawned",
+						uuid = "2087bba3-9df8-0fa5-adbe-f1205ded323d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Red Girl/AutoSim",
+			eventType = 5,
+			name = "[Paradigm's Breach] Red Girl minigame targets - DoT blacklist",
+			timeout = 2,
+			uuid = "dcbd3323-36d8-31ad-ab13-16af8ca92ab6",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower at Paradigm's Breach",
+			name = "Xun-Zi and Meng-Zi",
+			uuid = "6d50360c-f12e-6a9a-bf4d-c1cbf8c5247f",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower at Paradigm's Breach/Xun-Zi and Meng-Zi",
+			name = "Draws",
+			uuid = "12343023-74f2-ddbf-905b-a1ee254dade7",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal SPEC={[23558]={skip=true}}\nlocal s=SPEC[e.aoeID]\nlocal ct=e.aoeCastType\nlocal k\nif s then\n if s.skip then return end\n k=s.k\nelse\n if ct==2 and e.aoeLength>0 and e.aoeLength<=30 and e.aoeType~=27 then k='c'\n elseif ct==12 and e.aoeLength>0 and e.aoeWidth>0 and e.aoeLength<=70 and e.aoeWidth<=40 then k='r'\n elseif ct==13 and e.aoeLength>0 and e.aoeLength<=50 then k='cone'\n end\nend\nif not k then return end\nlocal col=(s and s.col) or 0x703333FF\nlocal d=TensorCore.getStaticDrawer(col,2)\nlocal x,y,z=e.x,e.y,e.z\nif k=='c' then\n d:addTimedCircle(ms,x,y,z,e.aoeLength,0,false,true)\nelseif k=='r' then\n d:addTimedRect(ms,x,y,z,e.aoeLength,e.aoeWidth,e.heading,0,false,true)\nelse\n local ang=(s and s.ang) or (e.aoeType==5 and 2*math.pi/3 or math.pi/2)\n d:addTimedCone(ms,x,y,z,e.aoeLength,ang,e.heading,0,false,true)\nend",
+						conditions = 
+						{
+							
+							{
+								"244f3e2f-debe-f712-9668-1b2047e571b4",
+								true,
+							},
+						},
+						name = "Xun-Zi and Meng-Zi hazard draws",
+						uuid = "8fa2b67e-881b-bbed-9ee2-aa45e0b4486f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos then return false end\nlocal e=eventArgs\nif not e or e.friendly then return false end\nlocal c=e.contentID\nif not (c==9921 or c==9922 or c==9923 or c==9136) then return false end\nreturn (p.pos.x-(790))^2+(p.pos.z-(790))^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "Xun-Zi and Meng-Zi arena and hazard",
+						uuid = "244f3e2f-debe-f712-9668-1b2047e571b4",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Xun-Zi and Meng-Zi/Draws",
+			eventType = 18,
+			name = "[Paradigm's Breach] Xun-Zi and Meng-Zi hazard draws",
+			uuid = "0004502f-51c5-8a9e-9795-58166e77a236",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower at Paradigm's Breach/Xun-Zi and Meng-Zi",
+			name = "AutoSim",
+			uuid = "11652774-9ba7-7658-8dac-f14455708742",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal api=TensorCore.API.TensorACR\nlocal ok,now=pcall(api.getAutoSimTime)\nif not ok or type(now)~=\"number\" or now<0 or now>40 then return end\ndata.pbSim=data.pbSim or {}\nif data.pbSim[\"xun\"] then return end\ndata.pbSim[\"xun\"]=true\nlocal o=now-6.1\napi.setAutoSimKillTime(124.0+o)\nfor _,t in ipairs({\"FullDowntime\",\"Stun\"}) do api.clearAutoSimPhases(t) end\napi.clearAutoSimUncertainty()\napi.addAutoSimUncertainty(0,10)\nlocal s={}\ndata.pbSim.xun=s\ns.d1=api.addAutoSimPhase(\"FullDowntime\",28.2+o,39.0+o,1)\ns.d1Start=28.2+o\n",
+						conditions = 
+						{
+							
+							{
+								"b3c34766-3839-0e8d-8d29-495049efd144",
+								true,
+							},
+						},
+						name = "Xun-Zi and Meng-Zi forecast",
+						uuid = "e13d5b56-fad9-bae3-9dc8-02d1ddca5d08",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos or not p.incombat then return false end\nlocal e=eventArgs\nif not e then return false end\nif not (e.entityContentID==9921) then return false end\nlocal ok=false\nfor _,i in ipairs({23552}) do if e.spellID==i then ok=true end end\nreturn ok and (p.pos.x-(790))^2+(p.pos.z-(790))^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "Xun-Zi and Meng-Zi opening cast",
+						uuid = "b3c34766-3839-0e8d-8d29-495049efd144",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Xun-Zi and Meng-Zi/AutoSim",
+			eventType = 3,
+			name = "[Paradigm's Breach AutoSim] Xun-Zi and Meng-Zi",
+			uuid = "47ca00b5-c78c-b2cc-a2d0-eb8c05773626",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower at Paradigm's Breach",
+			name = "False Idol and Her Inflorescence",
+			uuid = "0a90efb1-1b08-658c-83ff-8ca03742763c",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower at Paradigm's Breach/False Idol and Her Inflorescence",
+			name = "Draws",
+			uuid = "21e05b32-350b-1c2e-afde-e8f32135346f",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal SPEC={[23533]={k='r'},[23535]={skip=true},[23522]={k='r'}}\nlocal s=SPEC[e.aoeID]\nlocal ct=e.aoeCastType\nlocal k\nif s then\n if s.skip then return end\n k=s.k\nelse\n if ct==2 and e.aoeLength>0 and e.aoeLength<=30 and e.aoeType~=27 then k='c'\n elseif ct==12 and e.aoeLength>0 and e.aoeWidth>0 and e.aoeLength<=70 and e.aoeWidth<=40 then k='r'\n elseif ct==13 and e.aoeLength>0 and e.aoeLength<=50 then k='cone'\n end\nend\nif not k then return end\nlocal col=(s and s.col) or 0x703333FF\nlocal d=TensorCore.getStaticDrawer(col,2)\nlocal x,y,z=e.x,e.y,e.z\nif k=='c' then\n d:addTimedCircle(ms,x,y,z,e.aoeLength,0,false,true)\nelseif k=='r' then\n d:addTimedRect(ms,x,y,z,e.aoeLength,e.aoeWidth,e.heading,0,false,true)\nelse\n local ang=(s and s.ang) or (e.aoeType==5 and 2*math.pi/3 or math.pi/2)\n d:addTimedCone(ms,x,y,z,e.aoeLength,ang,e.heading,0,false,true)\nend",
+						conditions = 
+						{
+							
+							{
+								"c78de1a9-b209-bbb2-b2cc-6a8a1e68fa32",
+								true,
+							},
+						},
+						name = "False Idol and Her Inflorescence hazard draws",
+						uuid = "6319ce7a-5359-2737-ba62-6aa61bd5d6f0",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos then return false end\nlocal e=eventArgs\nif not e or e.friendly then return false end\nlocal c=e.contentID\nif not (c==9948 or c==9949 or c==9950) then return false end\nreturn (p.pos.x-(-700))^2+(p.pos.z-(-705))^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "False Idol and Her Inflorescence arena and hazard",
+						uuid = "c78de1a9-b209-bbb2-b2cc-6a8a1e68fa32",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/False Idol and Her Inflorescence/Draws",
+			eventType = 18,
+			name = "[Paradigm's Breach] False Idol and Her Inflorescence hazard draws",
+			uuid = "e9279ffa-f8f8-171f-afa1-1b50fff8f226",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nif AnyoneCore and AnyoneCore.Shotcall then AnyoneCore.Shotcall(\"Pillar Impact: knockback away from the pillar\",true,3,false) end",
+						conditions = 
+						{
+							
+							{
+								"120a0505-e2ca-deb4-96c4-b8b08b370c89",
+								true,
+							},
+						},
+						name = "Pillar Impact callout",
+						uuid = "15f64be4-f939-5599-8a11-5146147e551a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos or not p.incombat then return false end\nlocal e=eventArgs\nif not e then return false end\nif not (e.entityContentID==9949) then return false end\nlocal ok=false\nfor _,i in ipairs({23536}) do if e.spellID==i then ok=true end end\nreturn ok and (p.pos.x-(-700))^2+(p.pos.z-(-705))^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "Pillar Impact",
+						uuid = "120a0505-e2ca-deb4-96c4-b8b08b370c89",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/False Idol and Her Inflorescence/Draws",
+			eventType = 3,
+			name = "[Paradigm's Breach] Her Inflorescence Pillar Impact callout",
+			uuid = "7d5b56b8-d718-4c1f-b8f5-cf1ba39888e0",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower at Paradigm's Breach/False Idol and Her Inflorescence",
+			name = "AutoSim",
+			uuid = "00ec54bb-d368-41e9-acb9-5c168f71fe58",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal api=TensorCore.API.TensorACR\nlocal ok,now=pcall(api.getAutoSimTime)\nif not ok or type(now)~=\"number\" or now<0 or now>40 then return end\ndata.pbSim=data.pbSim or {}\nif data.pbSim[\"idol\"] then return end\ndata.pbSim[\"idol\"]=true\nlocal o=now-5.1\napi.setAutoSimKillTime(198.7+o)\nfor _,t in ipairs({\"FullDowntime\",\"Stun\"}) do api.clearAutoSimPhases(t) end\napi.clearAutoSimUncertainty()\napi.addAutoSimUncertainty(0,10)\nlocal s={}\ndata.pbSim.idol=s\n",
+						conditions = 
+						{
+							
+							{
+								"44dba8b7-b16a-f36c-8a69-98def87325b6",
+								true,
+							},
+						},
+						name = "False Idol forecast",
+						uuid = "ba48664d-c38a-5242-af18-18f69108a465",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos or not p.incombat then return false end\nlocal e=eventArgs\nif not e then return false end\nif not (e.entityContentID==9948) then return false end\nlocal ok=false\nfor _,i in ipairs({23517}) do if e.spellID==i then ok=true end end\nreturn ok and (p.pos.x-(-700))^2+(p.pos.z-(-705))^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "False Idol opening cast",
+						uuid = "44dba8b7-b16a-f36c-8a69-98def87325b6",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/False Idol and Her Inflorescence/AutoSim",
+			eventType = 3,
+			name = "[Paradigm's Breach AutoSim] False Idol",
+			uuid = "28b16481-cdb1-676d-8eb9-e4efa5b9be32",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal api=TensorCore.API.TensorACR\nlocal ok,now=pcall(api.getAutoSimTime)\nif not ok or type(now)~=\"number\" or now<0 or now>40 then return end\ndata.pbSim=data.pbSim or {}\nif data.pbSim[\"her\"] then return end\ndata.pbSim[\"her\"]=true\nlocal o=now-240.6\napi.setAutoSimKillTime(660.0+o)\nfor _,t in ipairs({\"FullDowntime\",\"Stun\"}) do api.clearAutoSimPhases(t) end\napi.clearAutoSimUncertainty()\napi.addAutoSimUncertainty(0,40)\nlocal s={}\ndata.pbSim.her=s\n",
+						conditions = 
+						{
+							
+							{
+								"ebc3ea0e-b146-7191-b166-776e64650729",
+								true,
+							},
+						},
+						name = "Her Inflorescence forecast",
+						uuid = "c5102e97-cdf9-c801-968d-daa63ce81d3d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos or not p.incombat then return false end\nlocal e=eventArgs\nif not e then return false end\nif not (e.entityContentID==9949) then return false end\nlocal ok=false\nfor _,i in ipairs({23520}) do if e.spellID==i then ok=true end end\nreturn ok and (p.pos.x-(-700))^2+(p.pos.z-(-705))^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "Her Inflorescence opening cast",
+						uuid = "ebc3ea0e-b146-7191-b166-776e64650729",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/False Idol and Her Inflorescence/AutoSim",
+			eventType = 3,
+			name = "[Paradigm's Breach AutoSim] Her Inflorescence",
+			uuid = "0581bc0e-baeb-f33c-877a-69ed5d5ca902",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower at Paradigm's Breach/False Idol and Her Inflorescence",
+			name = "Knockback",
+			uuid = "640bd5cc-bf0c-df70-bad5-e168f451c006",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"83699842-f131-62c6-af78-46b948c94aa3",
+								true,
+							},
+							
+							{
+								"5d6f2197-25b7-83e3-b5c2-df5ffb34de73",
+								true,
+							},
+							
+							{
+								"52f5f9cb-4148-411b-9122-ca3336947d1e",
+								true,
+							},
+							
+							{
+								"6e75feca-a2e6-b238-ad1f-c28b33fc3774",
+								true,
+							},
+						},
+						gVar = "ACR_TensorViper4_Hotbar_ArmsLength",
+						name = "Request Arm's Length",
+						uuid = "e756c697-1065-cb86-b363-4c053f7714d9",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"83699842-f131-62c6-af78-46b948c94aa3",
+								true,
+							},
+							
+							{
+								"5d6f2197-25b7-83e3-b5c2-df5ffb34de73",
+								true,
+							},
+							
+							{
+								"52f5f9cb-4148-411b-9122-ca3336947d1e",
+								true,
+							},
+							
+							{
+								"05296538-34f9-e193-9d0c-fcd8547b33eb",
+								true,
+							},
+						},
+						gVar = "ACR_TensorNuke4_Hotbar_Surecast",
+						name = "Request Surecast",
+						uuid = "9ebed431-1476-63ad-b01d-949ddcf7a324",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 966,
+						name = "Tower at Paradigm's Breach only",
+						uuid = "83699842-f131-62c6-af78-46b948c94aa3",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local S=_G.PB_AllianceSettings\nif not S then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n S={values={},folder=folder,path=folder..'AllianceRaid-ParadigmsBreach.lua'}\n local existed=FileExists(S.path)\n if existed then\n  local ok,t=pcall(FileLoad,S.path)\n  if ok and type(t)=='table' then S.values=t end\n end\n local v=S.values\n local changed=not existed\n if type(v.kbLunge)~='number' or v.kbLunge<0 or v.kbLunge>2 or v.kbLunge~=math.floor(v.kbLunge) then v.kbLunge=0 changed=true end\n if type(v.kbPillar)~='boolean' then v.kbPillar=false changed=true end\n if changed then\n  pcall(function()\n   if not FolderExists(S.folder) then FolderCreate(S.folder) end\n   FileSave(S.path,v)\n  end)\n end\n _G.PB_AllianceSettings=S\nend\nlocal e=eventArgs\nif not e or e.spellID~=23538 or e.entityContentID~=9949 then return false end\nreturn S.values.kbPillar==true",
+						dequeueIfLuaFalse = true,
+						name = "Exact mechanic and setting",
+						uuid = "5d6f2197-25b7-83e3-b5c2-df5ffb34de73",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not self.deadline then self.deadline=Now()+eventArgs.channelTimeMax*1000 end\nlocal remaining=self.deadline-Now()\nif remaining>3000 or remaining<1000 then return false end\nlocal caster=TensorCore.mGetEntity(eventArgs.entityID)\nreturn caster~=nil and caster.castinginfo.channelingid==eventArgs.spellID",
+						name = "Request with 3 to 1 seconds remaining",
+						uuid = "52f5f9cb-4148-411b-9122-ca3336947d1e",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 14,
+						dequeueIfLuaFalse = true,
+						jobIDList = 
+						{
+							19,
+							21,
+							32,
+							37,
+							20,
+							22,
+							30,
+							34,
+							39,
+							41,
+							23,
+							31,
+							38,
+						},
+						name = "Physical role",
+						uuid = "6e75feca-a2e6-b238-ad1f-c28b33fc3774",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 14,
+						dequeueIfLuaFalse = true,
+						jobIDList = 
+						{
+							25,
+							27,
+							35,
+							42,
+							24,
+							28,
+							33,
+							40,
+						},
+						name = "Caster or healer",
+						uuid = "05296538-34f9-e193-9d0c-fcd8547b33eb",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/False Idol and Her Inflorescence/Knockback",
+			eventType = 3,
+			name = "[Paradigm's Breach] Her Inflorescence Pillar Impact knockback immunity (optional)",
+			timeout = 10,
+			uuid = "da845d91-7feb-335a-ba94-d9294b97da63",
+			version = 2,
+		},
 	}, 
 	inheritedProfiles = 
 	{
