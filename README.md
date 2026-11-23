@@ -198,7 +198,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Fixed the first P5 Exasquares set drawing its green safe-area shapes on the wrong side when the real side was left. The left/right callout now comes after all eight Pandora clones are known. (23-11-2026)
 
-- AutoSim intermission targeting now starts on your own assigned Light crystal, found from your party slot and waymark. Ranged DPS then move on to the other Light crystals and finally the middle Ice Veil by themselves, while melee keep following their own target. Bard, Black Mage and Samurai temporarily blacklist DoTs on the small crystals; the middle one stays allowed. The optional ACR3 crystal auto-target and side crystal AoE control now find the crystals correctly. (23-11-2026)
+- AutoSim intermission targeting now starts on your own assigned Light crystal, found from your party slot and waymark. Ranged DPS then move on to the other Light crystals and finally the middle Ice Veil by themselves, while melee keep following their own target. Bard, Black Mage, Samurai and Reaper temporarily blacklist DoTs on the small crystals; the middle one stays allowed. The optional ACR3 crystal auto-target and side crystal AoE control now find the crystals correctly. (23-11-2026)
 
 - Removed three empty folders from LPDU Mits. The profile also includes Sprint for Diamond Dust outward cone baiters and moves Bard's Nature's Minne to the Hallowed Wings rewind. (23-11-2026)
 
