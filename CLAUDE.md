@@ -41,6 +41,7 @@ This procedure applies to every mapped profile below. Keep one procedure here; p
 | TEA LPDU mitigations | `tea` / `1.0.2` | `Teareactions\LPDU mits.lua` | `TEA\LPDU mits.lua` | `TEA-PROFILE-SPLIT-TODO.md` |
 | TEA ACR3 optimizations | `tea` / `1.0.2` | `Teareactions\ACR3 Opti.lua` | `TEA\ACR3 Opti.lua` | `TEA-PROFILE-SPLIT-TODO.md` |
 | TEA AA AutoSim | `tea` / `1.0.2` | `Teareactions\[AA] Autosim - TEA (1) (1).lua` | `TEA\[AA] Autosim - TEA.lua` | `TEA-AUTOSIM-DOLLS-TODO.md` |
+| M4S Draws | `r4s` / `1.0.2` | `M4S Draws.lua` | `M4S\M4S Draws.lua` | `M4S-PROFILE-SPLIT-TODO.md` |
 
 UCOB has one canonical published draws file, `LPDU Draws.lua`; do not recreate its removed beta duplicate. Preserve DSR's distinct beta filename. TEA's removed `autosim TEA Tramadol.lua` download is not a substitute for AA AutoSim. TEA `LPDU Draws` and `ACR3 Opti` are separate profiles with no inheritance between them. `ACR3 Opti` contains the moved Reaper/Pictomancer optimizations; `LPDU Draws` contains the copied remaining reactions, including `[RPR] Second Wind`. Do not publish the original `rpr tea` as either profile.
 
@@ -64,13 +65,9 @@ Live `GeneralReactions\Alliance raid.lua` is authoritative and publishes to `Gen
 
 ## Trials general profile
 
-Live `GeneralReactions\Trials.lua` publishes to `GeneralReactions\Trials\Trials.lua` in this checkout (created 22-11-2026 with user approval). Apply the shared copy/hash/changelog/commit/push checks; this is a general profile without a timeline version. TODO: `TRIALS-CINDER-DRIFT-TODO.md` in the Agent workspace.
+Live `GeneralReactions\Trials.lua` publishes to `GeneralReactions\Trials\Trials.lua` in this checkout (created 22-11-2026 with user approval). Apply the shared copy/hash/changelog/commit/push checks; this is a general profile without a timeline version. No TODO file (the Cinder Drift TODO was removed 24-11-2026).
 
 
 ## Normal raids general profile
 
 Live GeneralReactions\Normal raids.lua publishes to GeneralReactions\Normal Raids\Normal raids.lua in this checkout (created 22-11-2026 with user approval). Apply the shared copy/hash/changelog/commit/push checks; this is a general profile without a timeline version. TODO: NORMAL-RAIDS-TODO.md in the Agent workspace.
-
-## Q40 general profile
-
-Live GeneralReactions\q40.lua (identical to GeneralReactions\Q40\q40.lua) publishes to the existing GeneralReactions\Q40\q40.lua in this checkout. Apply the shared copy/hash/changelog/commit/push checks; this is a general profile without a timeline version. TODO: Q40-TODO.md in the Agent workspace.
