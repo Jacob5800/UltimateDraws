@@ -8229,6 +8229,228 @@ local tbl =
 			uuid = "b70d521a-b099-749f-b7c7-ac8dadd14bcc",
 			version = 2,
 		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "The Striking Tree (Hard)",
+			uuid = "66ee2205-72e3-5669-8a0f-4588d087115a",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Striking Tree (Hard)",
+			name = "Draws",
+			uuid = "d73e6519-59d7-95f3-a959-ed851505e8e5",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal e = eventArgs\nlocal shapes = {[2278]=\"circle\",[2277]=\"circle\",[2275]=\"circle\",[2282]=\"rect\"}\nlocal ms = math.floor(e.startTime + e.duration * 1000 - Now())\nif ms > 0 then\n    local drawer = TensorCore.getStaticDrawer(0x803333FF, 2)\n    if shapes[e.aoeID] == \"circle\" then\n        drawer:addTimedCircle(ms, e.x, e.y, e.z, e.aoeLength, 0, false, true)\n    else\n        drawer:addTimedRect(ms, e.x, e.y, e.z, e.aoeLength, e.aoeWidth, e.heading, 0, false, true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms, {x=e.x,y=e.y+1,z=e.z}, 0xFFFFFFFF, true, 1.1)\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"6e554ae3-eac3-7c0a-8f9b-74556c2cbeff",
+								true,
+							},
+						},
+						name = "Ramuh hazard draws",
+						uuid = "b6209ff4-1d7f-a59f-9c0f-d9328d8a019e",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nlocal id = eventArgs.aoeID\nreturn p ~= nil and p.localmapid == 374 and (id == 2278 or id == 2277 or id == 2275 or id == 2282)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "6e554ae3-eac3-7c0a-8f9b-74556c2cbeff",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Striking Tree (Hard)/Draws",
+			eventType = 18,
+			name = "Ramuh hazard draws",
+			uuid = "a7271e87-c9b5-714b-a8e8-6ae3ddabeaf8",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Striking Tree (Hard)",
+			name = "AutoSim",
+			uuid = "693ce8ed-1467-7877-8163-e58d22d67947",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local settings = AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled = false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled = false end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"bac4f9a4-2afb-1312-80a8-626fee74a1e7",
+								true,
+							},
+						},
+						name = "Ramuh helper setup",
+						uuid = "4e0ef1ed-2c27-337b-b8d7-a9cc8fda8176",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 374 and (true)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "bac4f9a4-2afb-1312-80a8-626fee74a1e7",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Striking Tree (Hard)/AutoSim",
+			eventType = 11,
+			name = "Ramuh helper setup",
+			uuid = "2ed61d20-b2ba-20af-9c89-af2f569158f5",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 374 then self.used = true; return end\ndata.trialsInitialTargets = data.trialsInitialTargets or {}\nlocal states = data.trialsInitialTargets\nlocal state = states[\"374_2832\"] or {}\nstates[\"374_2832\"] = state\nlocal current = TensorCore.mGetTarget()\nlocal label = \"[Trials targeting] Ramuh\"\nif state.pending then\n    if current and current.id == state.pending then\n        d(label .. \" confirmed target=\" .. tostring(current.id))\n        state.pending = nil\n    elseif Now() - state.requestedAt >= 1500 then\n        d(label .. \" request not confirmed; intended=\" .. tostring(state.pending) ..\n            \" current=\" .. tostring(current and current.id))\n        state.pending = nil\n    end\n    self.used = true\n    return\nend\nif player.incombat or state.done then self.used = true; return end\nlocal boss, nearest = nil, 35 * 35\nfor _, candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid=2832}) or {}) do\n    if candidate.alive and candidate.targetable and candidate.attackable and candidate.pos then\n        local dx = candidate.pos.x - player.pos.x\n        local dy = candidate.pos.y - player.pos.y\n        local dz = candidate.pos.z - player.pos.z\n        local distance = dx*dx + dy*dy + dz*dz\n        if distance <= nearest then\n            boss, nearest = candidate, distance\n        end\n    end\nend\nif not boss then\n    if not state.waitLogged then\n        d(label .. \" waiting for an attackable boss within 35 yalms; current=\" ..\n            tostring(current and current.id))\n        state.waitLogged = true\n    end\n    self.used = true\n    return\nend\nstate.done = true\nif current and current.alive and current.targetable and current.attackable then\n    d(label .. \" kept existing target; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current.id))\nelse\n    state.pending = boss.id\n    state.requestedAt = Now()\n    d(label .. \" target request; intended=\" .. tostring(boss.id) ..\n        \" current=\" .. tostring(current and current.id))\n    Player:SetTarget(boss.id)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"2f1cb588-0b7c-66f9-8580-670c9695e9a3",
+								true,
+							},
+						},
+						name = "Select nearby boss once",
+						uuid = "7ad200a1-5688-6c4c-9ebb-e1e84b1eb449",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 374 then return false end\nlocal states = data.trialsInitialTargets\nlocal state = states and states[\"374_2832\"]\nreturn (state ~= nil and state.pending ~= nil) or (not player.incombat and (not state or not state.done))",
+						dequeueIfLuaFalse = true,
+						name = "Duty and initial target",
+						uuid = "2f1cb588-0b7c-66f9-8580-670c9695e9a3",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Striking Tree (Hard)/AutoSim",
+			name = "Ramuh select boss at encounter start",
+			throttleTime = 500,
+			uuid = "60a4b489-d849-a367-a64e-06eedf21b9d9",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "\nlocal api = TensorCore.API.TensorACR\nlocal ok, elapsed = pcall(api.getAutoSimTime)\nif ok and type(elapsed) == \"number\" and elapsed >= 0 and elapsed <= 60 and not data.normalRaidForecastSet then\n    api.setAutoSimKillTime(191)\n    api.clearAutoSimUncertainty()\n    api.addAutoSimUncertainty(0, 15)\n    api.clearAutoSimPhases(\"FullDowntime\")\n    data.normalRaidForecastSet = true\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"e8e3a09d-4d17-3fca-b730-a327373ae08e",
+								true,
+							},
+						},
+						name = "Ramuh AutoSim baseline",
+						uuid = "07510363-200e-7602-a895-0d8dd95ab139",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 374 and (eventArgs.spellID == 2276 and not data.normalRaidForecastSet)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "e8e3a09d-4d17-3fca-b730-a327373ae08e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Striking Tree (Hard)/AutoSim",
+			eventType = 3,
+			name = "Ramuh AutoSim baseline",
+			uuid = "89efc66a-ab2f-8b02-9b5e-71dea670cd72",
+			version = 2,
+		},
 	}, 
 	inheritedProfiles = 
 	{

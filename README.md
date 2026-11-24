@@ -270,6 +270,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Trials
 
+- Added The Striking Tree (Hard) with Thunderstorm, Thunderspark and Thunderbolt hazard draws, boss targeting and an AutoSim kill-time estimate. (25-11-2026)
+
 - Added Surecast for Light of Ascalon and Suiton: San. (23-11-2026)
 
 - Added The Bowl of Embers AutoSim, Eruption draws, and Infernal Nail and Hellfire callouts. (23-11-2026)
