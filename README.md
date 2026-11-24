@@ -248,6 +248,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Added Red Girl helpers in The Tower at Paradigm's Breach: red Point lance lanes with green safe areas that account for the barrier colours, green safe areas for the White/Black Wipe meteors (including two at once), a blue spot and arrow to the nearest opposite-colour wall for your Shock marker, red Diffuse Energy cones for the next hit, Wave colour callouts with repeat reminders in the hacking minigame, and blue standing spots with a green landing marker for Child's Play when the chain is on you. (24-11-2026)
+
 - Added Knave of Hearts Lunge guidance in The Tower at Paradigm's Breach: green squares in front of the cubes that will catch your knockback, and yellow squares for the second Lunge that turn green once the first one resolves. Squares that overlap Colossal Impact are hidden. (24-11-2026)
 
 - Improved The Tower at Paradigm's Breach spread circles (Magic Artillery) so they follow the player they are on until they resolve, and drew Light Leap's danger circles in red. (24-11-2026)
@@ -265,7 +267,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added Surecast for Compound 2P’s Three Parts Disdain. (23-11-2026)
 
 - Improved The World of Darkness AutoSim: Cloud of Darkness now handles both of its disappearances and the short melee gap after it returns, and kill-time estimates were updated for all four bosses. (22-11-2026)
-- Improved The World of Darkness first boss: the colour-switch callout now tells you which side to stand on and draws it (green safe, red unsafe), and Mortal Gaze now locks your facing until the gaze resolves. (22-11-2026)
 
 ### Trials
 

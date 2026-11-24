@@ -10966,6 +10966,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x+230)^2+(p.pos.z+172)^2>46^2 then return false end\nlocal e=eventArgs\nreturn p.incombat and not data.a23 and e.entityContentID>=11792 and e.entityContentID<=11794 and\n e.spellID==20390+e.entityContentID-11792",
+						dequeueIfLuaFalse = true,
 						name = "Superior Flight Units arena and mechanic",
 						uuid = "bae8699a-5c27-8ee9-9770-3aa599f97c4e",
 						version = 3,
@@ -11023,6 +11024,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x+230)^2+(p.pos.z+172)^2>46^2 then return false end\nlocal e=eventArgs\nlocal id=e.spellID\nreturn p.incombat and (e.entityContentID==9364 or e.entityContentID==9617 or e.entityContentID==9618) and\n ((id>=20393 and id<=20394) or (id>=20396 and id<=20397) or (id>=21773 and id<=21780))",
+						dequeueIfLuaFalse = true,
 						name = "Superior Flight Units arena and mechanic",
 						uuid = "95582a2e-f265-2278-8807-826a4bae559f",
 						version = 3,
@@ -11117,6 +11119,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x+230)^2+(p.pos.z+172)^2>46^2 then return false end\nlocal e=eventArgs\nreturn p.incombat and e.spellID==20406 and e.targetID>0",
+						dequeueIfLuaFalse = true,
 						name = "Superior Flight Units arena and mechanic",
 						uuid = "b3658d0e-2aae-809d-a118-b7aaf747d9e9",
 						version = 3,
@@ -11325,6 +11328,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x-200)^2+(p.pos.z+100)^2>34^2 then return false end\nreturn p.incombat and not data.a24 and eventArgs.entityContentID==11882 and eventArgs.spellID==20486",
+						dequeueIfLuaFalse = true,
 						name = "Heavy Artillery Unit arena and mechanic",
 						uuid = "39334525-9317-8a15-966e-ec48e42ac053",
 						version = 3,
@@ -11429,6 +11433,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x-200)^2+(p.pos.z+100)^2>34^2 then return false end\nlocal e=eventArgs\nreturn e.entityContentID==9650 and ((p.incombat and e.spellID==20485 and e.targetID>0) or\n (e.spellID==20484 and data.a24Voltage and data.a24Voltage[e.entityID]~=nil))",
+						dequeueIfLuaFalse = true,
 						name = "Heavy Artillery Unit arena and mechanic",
 						uuid = "f15eef6e-4579-69ba-96c5-35ae291ff769",
 						version = 3,
@@ -11617,6 +11622,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal e=eventArgs\nlocal state=data.puppetsEnergyOrbs\nlocal entry=state and state[e.entityID]\nreturn p~=nil and p.localmapid==917 and e.spellID==20474 and e.entityContentID==9664 and entry~=nil and entry.model==11884",
+						dequeueIfLuaFalse = true,
 						name = "Heavy Artillery Unit arena and mechanic",
 						uuid = "4fae989c-9f5e-25ea-a3a4-f841d16eb0b4",
 						version = 3,
@@ -11664,6 +11670,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x-200)^2+(p.pos.z+100)^2>34^2 then return false end\nlocal e=eventArgs\nlocal queue=data.a24Tankbusters\nreturn queue~=nil and #queue>0 and e.entityContentID==9650 and e.spellID==20482",
+						dequeueIfLuaFalse = true,
 						name = "Heavy Artillery Unit arena and mechanic",
 						uuid = "1e2fe740-b78b-2f90-b005-3e4e3de8ab61",
 						version = 3,
@@ -11788,6 +11795,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal e=eventArgs\nlocal state=data.puppetsEnergyOrbs\nlocal entry=state and state[e.entityID]\nreturn p~=nil and p.localmapid==917 and e.spellID==20658 and e.entityContentID==9664 and entry~=nil and entry.model==11908",
+						dequeueIfLuaFalse = true,
 						name = "Puppets Bunker corridor Energy",
 						uuid = "7c31f7a6-9882-56c3-832a-3d9356da93ce",
 						version = 3,
@@ -12043,6 +12051,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nreturn p.incombat and eventArgs.entityContentID==9644 and eventArgs.spellID==20894",
+						dequeueIfLuaFalse = true,
 						name = "The Compound arena and mechanic",
 						uuid = "3193a868-537a-2fe3-a595-ba9932938ede",
 						version = 3,
@@ -12137,6 +12146,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nlocal s=data.compoundFourParts\nlocal e=eventArgs\nreturn s~=nil and s.expires>Now() and e.entityID==s.boss and e.entityContentID==9644 and\n ((s.step%2==1 and e.spellID==20895) or (s.step%2==0 and e.spellID==20896))",
+						dequeueIfLuaFalse = true,
 						name = "The Compound arena and mechanic",
 						uuid = "53115e15-4600-8559-b11e-10d63bf0ae8e",
 						version = 3,
@@ -12231,6 +12241,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nreturn p.incombat and eventArgs.entityContentID==9648 and eventArgs.spellID==20901",
+						dequeueIfLuaFalse = true,
 						name = "The Compound arena and mechanic",
 						uuid = "70670fcc-8e60-9d10-9d7c-b8d20e9ce96e",
 						version = 3,
@@ -12372,6 +12383,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nlocal s=data.a25Towers\nlocal e=eventArgs\nreturn s and s.expires>Now() and e.entityContentID==9644 and (e.spellID==20903 or e.spellID==20904)",
+						dequeueIfLuaFalse = true,
 						name = "The Compound arena and mechanic",
 						uuid = "8611dd4b-7187-e740-b1fe-3511e17804d0",
 						version = 3,
@@ -12486,6 +12498,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nreturn p.incombat and not data.a25 and eventArgs.entityContentID==11972 and eventArgs.spellID==20920",
+						dequeueIfLuaFalse = true,
 						name = "The Compound and 2P arena and mechanic",
 						uuid = "19656dc4-d337-5e03-84a4-5b4f35bcb91f",
 						version = 3,
@@ -13902,7 +13915,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local st=data.pbReflect\nif not st then st={nextScan=0,ids={},called={}} data.pbReflect=st end\nlocal now=Now()\nif now>=st.nextScan then\n st.nextScan=now+500\n st.ids={}\n for _,cid in ipairs({9988,9989}) do\n  for id,b in pairs(TensorCore.entityList(\"contentid=\"..cid) or {}) do\n   if b.alive then st.ids[#st.ids+1]=id end\n  end\n end\nend\nif #st.ids==0 then return end\nlocal red=TensorCore.getStaticDrawer(0x703333FF,2)\nlocal green=TensorCore.getStaticDrawer(0x7033FF33,2)\nlocal ang=math.pi/2\nfor _,id in ipairs(st.ids) do\n local b=TensorCore.mGetEntity(id)\n if b and b.pos and b.alive and (TensorCore.hasBuff(b,2538) or (_G.PB_ShieldPending and _G.PB_ShieldPending[id] and now<_G.PB_ShieldPending[id])) then\n  local h=b.pos.h\n  red:addCone(b.pos.x,b.pos.y,b.pos.z,9,ang,h+math.pi,false)\n  red:addCone(b.pos.x,b.pos.y,b.pos.z,9,ang,h+math.pi/2,false)\n  red:addCone(b.pos.x,b.pos.y,b.pos.z,9,ang,h-math.pi/2,false)\n  green:addCone(b.pos.x,b.pos.y,b.pos.z,9,ang,h,false)\n  if not st.called[id] then\n   st.called[id]=true\n   if AnyoneCore and AnyoneCore.Shotcall then AnyoneCore.Shotcall(\"Shield: hit from the front\",true,3,false) end\n  end\n elseif st.called[id] then\n  st.called[id]=nil\n end\nend",
+						actionLua = "local function parry14(b)\n local p=TensorCore.getBuff(b,680)\n return p~=nil and p.stacks==14\nend\nlocal st=data.pbReflect\nif not st then st={nextScan=0,ids={},called={}} data.pbReflect=st end\nlocal now=Now()\nif now>=st.nextScan then\n st.nextScan=now+500\n st.ids={}\n for _,cid in ipairs({9988,9989}) do\n  for id,b in pairs(TensorCore.entityList(\"contentid=\"..cid) or {}) do\n   if b.alive then st.ids[#st.ids+1]=id end\n  end\n end\nend\nif #st.ids==0 then return end\nlocal red=TensorCore.getStaticDrawer(0x703333FF,2)\nlocal green=TensorCore.getStaticDrawer(0x7033FF33,2)\nlocal ang=math.pi/2\nfor _,id in ipairs(st.ids) do\n local b=TensorCore.mGetEntity(id)\n if b and b.pos and b.alive and (TensorCore.hasBuff(b,2538) or parry14(b) or (_G.PB_ShieldPending and _G.PB_ShieldPending[id] and now<_G.PB_ShieldPending[id])) then\n  local h=b.pos.h\n  red:addCone(b.pos.x,b.pos.y,b.pos.z,9,ang,h+math.pi,false)\n  red:addCone(b.pos.x,b.pos.y,b.pos.z,9,ang,h+math.pi/2,false)\n  red:addCone(b.pos.x,b.pos.y,b.pos.z,9,ang,h-math.pi/2,false)\n  green:addCone(b.pos.x,b.pos.y,b.pos.z,9,ang,h,false)\n  if not st.called[id] then\n   st.called[id]=true\n   if AnyoneCore and AnyoneCore.Shotcall then AnyoneCore.Shotcall(\"Shield: hit from the front\",true,3,false) end\n  end\n elseif st.called[id] then\n  st.called[id]=nil\n end\nend",
 						conditions = 
 						{
 							
@@ -14387,6 +14400,678 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal b=data.rgBarrier\nif not b then b={} data.rgBarrier=b end\nlocal i=e.a1\nif i==28 then\n if e.a2==4 and e.a3==8 then for k in pairs(b) do b[k]=nil end end\n return\nend\nlocal n=i-28\nif e.a2==1 and e.a3==2 then b[n]='B'\nelseif e.a2==64 and e.a3==128 then b[n]='W'\nelse b[n]=nil end\ndata.rgBarrierT=Now()\ndata.rgBarrierPending=nil\n",
+						conditions = 
+						{
+							
+							{
+								"8f802c38-772e-9f31-a8c8-4c48922ebfeb",
+								true,
+							},
+						},
+						name = "Record barrier colour by slot",
+						uuid = "2107b9cb-4113-21ee-80f5-d99512d81512",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 then return false end\nlocal e=eventArgs\nif not e then return false end\nlocal i=e.a1\nreturn (i==28 or (i>=29 and i<=56)) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Red Girl barrier effect",
+						uuid = "8f802c38-772e-9f31-a8c8-4c48922ebfeb",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Red Girl/Draws",
+			eventType = 14,
+			name = "[Paradigm's Breach] Red Girl barrier colours",
+			uuid = "9c080b52-3ea1-9ce7-a715-6314665a3da8",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal C=TensorCore.mGetEntity(e.entityID)\nif not C or not C.pos then return end\nlocal now=Now()\nlocal LS=data.rgLanes\nif not LS or now-LS.t>2500 then LS={t0=now,t=now,list={},done=false} data.rgLanes=LS end\nLS.t=now\nfor _,l in ipairs(LS.list) do\n if l.id==e.entityID then l.x,l.y,l.z,l.h=C.pos.x,C.pos.y,C.pos.z,C.pos.h or 0 return end\nend\nLS.list[#LS.list+1]={id=e.entityID,white=(e.entityContentID==9981),x=C.pos.x,y=C.pos.y,z=C.pos.z,h=C.pos.h or 0}\n",
+						conditions = 
+						{
+							
+							{
+								"6e0bad2f-318c-7def-b7b3-bb26f0138c01",
+								true,
+							},
+						},
+						name = "Record each spawned lance for the volley pass",
+						uuid = "8949aa1a-06a7-5ea0-a0f4-fa9d822ded6a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local c=eventArgs and eventArgs.entityContentID\nif c~=9981 and c~=9982 then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos then return false end\nreturn ((p.pos.x-845)^2+(p.pos.z+850)^2<=2500) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "White or Black Lance spawned",
+						uuid = "6e0bad2f-318c-7def-b7b3-bb26f0138c01",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Red Girl/Draws",
+			eventType = 5,
+			name = "[Paradigm's Breach] Red Girl Point lance spawn record",
+			uuid = "b8943d88-b392-11f4-8b6c-9a7ae08d0b5e",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal C=TensorCore.mGetEntity(e.entityID)\nif not C or not C.pos then return end\nlocal w=data.rgWipe\nif not w then w={} data.rgWipe=w end\nw[e.spellID==24588 and 'W' or 'B']={x=C.pos.x,z=C.pos.z,fin=Now()+(e.channelTimeMax or 13)*1000}\n_G.RG_WIPE=true\n",
+						conditions = 
+						{
+							
+							{
+								"80edd73b-0440-8a59-860f-45708f6eb5ee",
+								true,
+							},
+						},
+						name = "Record meteor position, colour and end time",
+						uuid = "3685220e-c481-9e9f-b8df-9caa6273681d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local s=eventArgs and eventArgs.spellID\nif s~=24588 and s~=24589 then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==966) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Wipe White or Black channel",
+						uuid = "80edd73b-0440-8a59-860f-45708f6eb5ee",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Red Girl/Draws",
+			eventType = 3,
+			name = "[Paradigm's Breach] Red Girl Wipe meteor start",
+			uuid = "bccbe1b2-7829-5026-9b37-36960b32820c",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal w=data and data.rgWipe\nif not e or not w then _G.RG_WIPE=nil return end\nw[e.spellID==24588 and 'W' or 'B']=nil\nif not w.W and not w.B then _G.RG_WIPE=nil end\n",
+						conditions = 
+						{
+							
+							{
+								"16abf757-752a-8cab-abad-33869629a69d",
+								true,
+							},
+						},
+						name = "Clear the resolved meteor",
+						uuid = "8b0c25c9-1d74-65ed-a6f5-9a01e33e00ac",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local s=eventArgs and eventArgs.spellID\nif s~=24588 and s~=24589 then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==966) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Wipe White or Black resolved",
+						uuid = "16abf757-752a-8cab-abad-33869629a69d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Red Girl/Draws",
+			eventType = 2,
+			name = "[Paradigm's Breach] Red Girl Wipe meteor resolved",
+			uuid = "06696981-c98a-ad72-9a1e-b6916e0b3459",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local w=data and data.rgWipe\nif not w then _G.RG_WIPE=nil return end\nlocal now=Now()\nlocal act={}\nfor k,m in pairs(w) do\n if m.fin and now<m.fin+1500 then act[k]=m else w[k]=nil end\nend\nif not act.W and not act.B then _G.RG_WIPE=nil return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos then return end\nif not data.rgSyncT or now-data.rgSyncT>250 then\n data.rgSyncT=now\n local okc,n=pcall(Argus.getNumCurrentMapEffects)\n if okc and n and n>=57 then\n  local out={}\n  for s=1,28 do\n   local r=Argus.getMapEffectResource(28+s)\n   if r then\n    local ok,name,nsub,h=pcall(Argus.getEffectResourceScriptInfo,r,0)\n    if ok and name and h and (nsub or 0)>=2 then\n     local function a(k) local okk,sub=pcall(Argus.getEffectResourceScriptSubresource,h,k) if okk and sub then local _,_,_,x=Argus.getEffectResourceInfo(sub) return x and true or false end return false end\n     if a(0) then out[s]='W' elseif a(1) then out[s]='B' end\n    end\n   end\n  end\n  data.rgSyncBar=out\n end\nend\nlocal bar=data.rgSyncBar or data.rgBarrier or {}\nlocal WL={{845,-873},{845,-867},{845,-861},{845,-855},{845,-847},{845,-841},{845,-835},{845,-829},{823,-851},{829,-851},{835,-851},{841,-851},{849,-851},{855,-851},{861,-851},{867,-851},{838,-860},{844,-860},{850,-860},{854,-858},{854,-852},{854,-846},{852,-842},{846,-842},{840,-842},{836,-844},{836,-850},{836,-856}}\nlocal VERT={}\nfor n=1,8 do VERT[n]=true end\nfor n=20,22 do VERT[n]=true end\nfor n=26,28 do VERT[n]=true end\nlocal cx,cz=845,-851\nlocal function strips(col,m)\n local out={}\n for n=1,28 do\n  if bar[n]==col then\n   local wx,wz=WL[n][1],WL[n][2]\n   local x0,x1,z0,z1\n   if VERT[n] then\n    local dx=(wx-m.x)>0 and 1 or -1\n    local dist=dx>0 and (25-(wx-cx)) or (25+(wx-cx))\n    if dx>0 then x0,x1=wx,wx+dist else x0,x1=wx-dist,wx end\n    z0,z1=wz-3,wz+3\n   else\n    local dz=(wz-m.z)>0 and 1 or -1\n    local dist=dz>0 and (25-(wz-cz)) or (25+(wz-cz))\n    if dz>0 then z0,z1=wz,wz+dist else z0,z1=wz-dist,wz end\n    x0,x1=wx-3,wx+3\n   end\n   out[#out+1]={x0,x1,z0,z1}\n  end\n end\n return out\nend\nlocal d=TensorCore.getStaticDrawer(0x7033FF33,2)\nlocal y=p.pos.y\nlocal function box(x0,x1,z0,z1) d:addRect((x0+x1)/2,y,z0,z1-z0,x1-x0,0,false) end\nif act.W and act.B then\n local sw,sb=strips('W',act.W),strips('B',act.B)\n for _,a in ipairs(sw) do\n  for _,b in ipairs(sb) do\n   local x0,x1=math.max(a[1],b[1]),math.min(a[2],b[2])\n   local z0,z1=math.max(a[3],b[3]),math.min(a[4],b[4])\n   if x1-x0>0.01 and z1-z0>0.01 then box(x0,x1,z0,z1) end\n  end\n end\nelse\n local col=act.W and 'W' or 'B'\n for _,s in ipairs(strips(col,act[col])) do box(s[1],s[2],s[3],s[4]) end\nend\n",
+						conditions = 
+						{
+							
+							{
+								"3e07ddb7-aaea-6382-a4e7-efd9d5b02af1",
+								true,
+							},
+						},
+						name = "Draw safe strips behind same-colour walls",
+						uuid = "1581ce08-df20-91f9-8cb0-b0f7e85e7b16",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return _G.RG_WIPE==true\n",
+						dequeueIfLuaFalse = true,
+						name = "Wipe meteor active",
+						uuid = "3e07ddb7-aaea-6382-a4e7-efd9d5b02af1",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Red Girl/Draws",
+			eventType = 12,
+			name = "[Paradigm's Breach] Red Girl Wipe safe areas (green)",
+			uuid = "49406056-2507-fd69-974b-4bfd4bbafe57",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal col=(e.markerID==263) and 'B' or 'W'\nlocal fin=Now()+((e.markerID==264) and 5100 or 10100)+1000\ndata.rgShock={col=col,fin=fin}\n",
+						conditions = 
+						{
+							
+							{
+								"347f650d-6741-19c4-8fb0-139a83c89be2",
+								true,
+							},
+						},
+						name = "Record my Shock colour and expiry",
+						uuid = "8ca5147c-d5c0-cc6f-948e-42e580d9425d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local m=eventArgs and eventArgs.markerID\nif m~=262 and m~=263 and m~=264 then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 then return false end\nreturn (eventArgs.entityID==p.id) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "My Shock marker",
+						uuid = "347f650d-6741-19c4-8fb0-139a83c89be2",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Red Girl/Draws",
+			eventType = 4,
+			name = "[Paradigm's Breach] Red Girl Shock marker on me",
+			uuid = "230a0a3f-96b2-9646-8508-57e261caf2d7",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data and data.rgShock\nif s then\n if s.circle then pcall(Argus.deleteTimedShape,s.circle) end\n if s.arrow then pcall(Argus.deleteTimedShape,s.arrow) end\nend\nif data then data.rgShock=nil end\n",
+						conditions = 
+						{
+							
+							{
+								"5962b31e-f588-3566-8e61-aec412af1ea9",
+								true,
+							},
+						},
+						name = "Clear my Shock guidance and log wall distances",
+						uuid = "f75600e1-5d96-b83f-9783-11f619536b59",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e then return false end\nlocal s=e.spellID\nif s~=24591 and s~=24593 then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 then return false end\nreturn (e.targetID==p.id) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Shock bait hit on me",
+						uuid = "5962b31e-f588-3566-8e61-aec412af1ea9",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Red Girl/Draws",
+			eventType = 2,
+			name = "[Paradigm's Breach] Red Girl Shock hit on me resolved",
+			uuid = "b0bffcb5-91ab-a706-ac16-a2cd7ca0014c",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.rgShock\nif not s then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then return end\nlocal now=Now()\nlocal bar=data.rgBarrier or {}\nlocal want=(s.col=='W') and 'B' or 'W'\nlocal WL={{845,-873},{845,-867},{845,-861},{845,-855},{845,-847},{845,-841},{845,-835},{845,-829},{823,-851},{829,-851},{835,-851},{841,-851},{849,-851},{855,-851},{861,-851},{867,-851},{838,-860},{844,-860},{850,-860},{854,-858},{854,-852},{854,-846},{852,-842},{846,-842},{840,-842},{836,-844},{836,-850},{836,-856}}\nlocal best,bd\nfor n=1,28 do\n if bar[n]==want then\n  local dx,dz=p.pos.x-WL[n][1],p.pos.z-WL[n][2]\n  local d=math.sqrt(dx*dx+dz*dz)\n  if not bd or d<bd then best,bd=n,d end\n end\nend\nlocal ms=math.min(450,math.floor(s.fin-now))\nlocal function hide()\n if s.circle then pcall(Argus.deleteTimedShape,s.circle) s.circle=nil end\n if s.arrow then pcall(Argus.deleteTimedShape,s.arrow) s.arrow=nil end\nend\nif not best or ms<=0 then hide() return end\nlocal wx,wz=WL[best][1],WL[best][2]\nlocal spot={y=p.pos.y+.05}\nif bd<=4.5 then\n spot.x,spot.z=p.pos.x,p.pos.z\nelse\n local k=3.5/bd\n spot.x,spot.z=wx+(p.pos.x-wx)*k,wz+(p.pos.z-wz)*k\nend\nlocal drawer=TensorCore.getStaticDrawer(0xB0FF7A28,2)\nif not s.circle or not drawer:updateTimedCircle(s.circle,ms,spot.x,spot.y,spot.z,1.25,0,false,true) then\n s.circle=drawer:addTimedCircle(ms,spot.x,spot.y,spot.z,1.25,0,false,true)\nend\nlocal distance=TensorCore.getDistance2d(p.pos,spot)\nif distance>1.25 then\n local h=TensorCore.getHeadingToTarget(p.pos,spot)\n local length=math.max(.1,distance-.9)\n if not s.arrow or not drawer:updateTimedArrow(s.arrow,ms,p.pos.x,spot.y,p.pos.z,h,length,.4,.8,1,0,false) then\n  s.arrow=drawer:addTimedArrow(ms,p.pos.x,spot.y,p.pos.z,h,length,.4,.8,1,0,false)\n end\nelseif s.arrow then\n pcall(Argus.deleteTimedShape,s.arrow)\n s.arrow=nil\nend\n",
+						conditions = 
+						{
+							
+							{
+								"62cac87f-f247-01b1-b389-11fb8041fbee",
+								true,
+							},
+						},
+						name = "Blue spot and arrow to nearest opposite-colour wall",
+						uuid = "9bdc2675-afa4-ae26-9e3a-84eb394b2106",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local s=data.rgShock\nif not s then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos or not p.alive then return false end\nreturn (s.fin>Now()) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Shock marker active on me",
+						uuid = "62cac87f-f247-01b1-b389-11fb8041fbee",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Red Girl/Draws",
+			name = "[Paradigm's Breach] Red Girl Shock guide to opposite-colour wall (blue)",
+			throttleTime = 125,
+			uuid = "880cbf7e-075b-8379-8f48-98d9f37c234e",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal t=data.rgDiffDir\nif not t then t={} data.rgDiffDir=t end\nt[e.entityID]=(e.markerID==167) and -1 or 1\n",
+						conditions = 
+						{
+							
+							{
+								"19c395f0-2b5d-bc4d-b6fa-1d42308ed9aa",
+								true,
+							},
+						},
+						name = "Record clockwise or counter-clockwise per caster",
+						uuid = "c1930798-e346-d034-9c97-617424da97a8",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local m=eventArgs and eventArgs.markerID\nif m~=167 and m~=168 then return false end\nif eventArgs.entityContentID~=9920 then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==966) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Diffuse Energy turn marker",
+						uuid = "19c395f0-2b5d-bc4d-b6fa-1d42308ed9aa",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Red Girl/Draws",
+			eventType = 4,
+			name = "[Paradigm's Breach] Red Girl Diffuse Energy rotation direction",
+			uuid = "94a7a70c-0fae-8aab-932d-1f75e91df5b1",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal n=data.rgDiffN\nif not n then n={} data.rgDiffN=n end\nn[e.entityID]=0\n",
+						conditions = 
+						{
+							
+							{
+								"bda0df02-4cff-ae39-bdf1-f1ea6919af8f",
+								true,
+							},
+						},
+						name = "Start hit counter for this caster",
+						uuid = "a2a33131-e2b6-95c5-965f-d3c9de4c785b",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not eventArgs or eventArgs.spellID~=24611 or eventArgs.entityContentID~=9920 then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==966) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Diffuse Energy channel",
+						uuid = "bda0df02-4cff-ae39-bdf1-f1ea6919af8f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Red Girl/Draws",
+			eventType = 3,
+			name = "[Paradigm's Breach] Red Girl Diffuse Energy start (state only, first cone is the generic draw)",
+			uuid = "ad8cf1f8-d6a5-e1b4-a5d6-505e1e1015b2",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal n=data.rgDiffN\nif not n then return end\nlocal cnt=(n[e.entityID] or 0)+1\nn[e.entityID]=cnt\nlocal dirs=data.rgDiffDir\nlocal d=dirs and dirs[e.entityID]\nif cnt>=6 then\n n[e.entityID]=nil\n if dirs then dirs[e.entityID]=nil end\n return\nend\nif not d then return end\nlocal C=TensorCore.mGetEntity(e.entityID)\nif not C or not C.pos then return end\nlocal h=e.heading or C.pos.h or 0\nlocal red=TensorCore.getStaticDrawer(0x703333FF,2)\nred:addTimedCone(2800,C.pos.x,C.pos.y,C.pos.z,12,2.0944,h+2.0944*d,0,false,true)\n",
+						conditions = 
+						{
+							
+							{
+								"7c20b1a7-b06f-28f4-a5ec-bfa1120c76d3",
+								true,
+							},
+						},
+						name = "Advance: next cone red",
+						uuid = "cdb058a5-baf7-7a30-a58f-0009e44d68f4",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not eventArgs or eventArgs.entityContentID~=9920 then return false end\nlocal s=eventArgs.spellID\nif s~=24611 and s~=24662 then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==966) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Diffuse Energy hit",
+						uuid = "7c20b1a7-b06f-28f4-a5ec-bfa1120c76d3",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Red Girl/Draws",
+			eventType = 2,
+			name = "[Paradigm's Breach] Red Girl Diffuse Energy next hit (red)",
+			uuid = "150ec310-31a9-5aaf-90ca-bd38047163eb",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal LS=data.rgLanes\nif not LS or LS.done then return end\nLS.done=true\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then return end\nlocal now=Now()\nlocal ms=math.floor(LS.t0+7800-now)\nif ms<=300 then return end\nlocal function syncBar()\n local okc,n=pcall(Argus.getNumCurrentMapEffects)\n if not okc or not n or n<57 then return nil end\n local out={}\n for s=1,28 do\n  local r=Argus.getMapEffectResource(28+s)\n  if r then\n   local ok,name,nsub,h=pcall(Argus.getEffectResourceScriptInfo,r,0)\n   if ok and name and h and (nsub or 0)>=2 then\n    local function act(k) local okk,sub=pcall(Argus.getEffectResourceScriptSubresource,h,k) if okk and sub then local _,_,_,a=Argus.getEffectResourceInfo(sub) return a and true or false end return false end\n    if act(0) then out[s]='W' elseif act(1) then out[s]='B' end\n   end\n  end\n end\n return out\nend\nlocal bar=syncBar() or data.rgBarrier or {}\nlocal WL={{845,-873},{845,-867},{845,-861},{845,-855},{845,-847},{845,-841},{845,-835},{845,-829},{823,-851},{829,-851},{835,-851},{841,-851},{849,-851},{855,-851},{861,-851},{867,-851},{838,-860},{844,-860},{850,-860},{854,-858},{854,-852},{854,-846},{852,-842},{846,-842},{840,-842},{836,-844},{836,-850},{836,-856}}\nlocal VERT={}\nfor n=1,8 do VERT[n]=true end\nfor n=20,22 do VERT[n]=true end\nfor n=26,28 do VERT[n]=true end\nlocal act={}\nfor _,l in ipairs(LS.list) do if Argus.isEntityVisible(l.id) then act[#act+1]=l end end\nif #act==0 then act=LS.list end\nlocal lanes={}\nfor _,l in ipairs(act) do\n local sx,cz=math.sin(l.h),math.cos(l.h)\n local short=false\n for n=1,28 do\n  local c=bar[n]\n  if c and ((c=='W')==l.white) then\n   local dx,dz=WL[n][1]-l.x,WL[n][2]-l.z\n   local along=dx*sx+dz*cz\n   local side=dx*cz-dz*sx\n   if along>=0 and along<=30 and math.abs(side)<=3 then short=true break end\n  end\n end\n lanes[#lanes+1]={x=l.x,y=l.y,z=l.z,h=l.h,sx=sx,cz=cz,len=short and 24 or 50}\nend\nlocal red=TensorCore.getStaticDrawer(0x703333FF,2)\nfor _,l in ipairs(lanes) do red:addTimedRect(ms,l.x,l.y,l.z,l.len,6,l.h,0,false,true) end\nlocal function inWall(x,z)\n for n=1,28 do\n  if bar[n] then\n   local hx,hz=3.5,1.5\n   if VERT[n] then hx,hz=1.5,3.5 end\n   if math.abs(x-WL[n][1])<=hx and math.abs(z-WL[n][2])<=hz then return true end\n  end\n end\n return false\nend\nlocal function danger(x,z)\n for _,l in ipairs(lanes) do\n  local dx,dz=x-l.x,z-l.z\n  local along=dx*l.sx+dz*l.cz\n  local side=dx*l.cz-dz*l.sx\n  if along>=0 and along<=l.len and math.abs(side)<=3 then return true end\n end\n return false\nend\nlocal d=TensorCore.getStaticDrawer(0x7033FF33,0)\nlocal y=p.pos.y\nfor iz=0,39 do\n local cz=-870.5+iz\n local a=nil\n for ix=0,40 do\n  local cx=825.5+ix\n  local ok=false\n  if ix<40 then\n   ok=(not (math.abs(cx-845)<=3 and math.abs(cz+851)<=3)) and (not danger(cx,cz)) and (not inWall(cx,cz))\n  end\n  if ok then\n   if not a then a=ix end\n  elseif a then\n   local left,right=825+a,825+ix\n   d:addTimedRect(ms,(left+right)/2,y,cz-0.5,1,right-left,0,0,false,true)\n   a=nil\n  end\n end\nend\n",
+						conditions = 
+						{
+							
+							{
+								"662569e5-3fe3-da54-a418-3775b1da32e5",
+								true,
+							},
+						},
+						name = "Keep visible lances, draw red lanes and green safe cells",
+						uuid = "b5bb35d5-93c8-c191-9c9f-6b06b14ff9ea",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local L=data.rgLanes\nif not L or L.done then return false end\nlocal now=Now()\nif now<L.t+400 or now>L.t0+7400 then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos then return false end\nif now<L.t0+6000 then\n local pend=data.rgBarrierPending\n if pend and now<pend+5200 then return false end\n local bt=data.rgBarrierT\n if bt and now<bt+300 then return false end\nend\nreturn true\n",
+						dequeueIfLuaFalse = true,
+						name = "Volley recorded and barrier colours settled",
+						uuid = "662569e5-3fe3-da54-a418-3775b1da32e5",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Red Girl/Draws",
+			name = "[Paradigm's Breach] Red Girl Point lances volley (red lanes, green safe areas)",
+			throttleTime = 150,
+			uuid = "76832bac-9fdf-eff5-91e9-cc3edcc0e2e7",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal C=TensorCore.mGetEntity(e.entityID)\nif not C or not C.pos then return end\nlocal now=Now()\nlocal LS=data.rgLanes\nif not LS or now-LS.t>2500 then LS={t0=now,t=now,list={},done=false} data.rgLanes=LS end\nLS.t=now\nfor _,l in ipairs(LS.list) do\n if l.id==e.entityID then l.x,l.y,l.z,l.h=C.pos.x,C.pos.y,C.pos.z,C.pos.h or 0 return end\nend\nLS.list[#LS.list+1]={id=e.entityID,white=(e.entityContentID==9981),x=C.pos.x,y=C.pos.y,z=C.pos.z,h=C.pos.h or 0}\n",
+						conditions = 
+						{
+							
+							{
+								"3256e793-8ef0-c20b-9274-e048be51c313",
+								true,
+							},
+						},
+						name = "Record the re-shown lance for the volley pass",
+						uuid = "938adbbf-f299-4fd0-9975-a322ba780beb",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e or not e.isVisible then return false end\nlocal c=e.entityContentID\nif c~=9981 and c~=9982 then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos then return false end\nreturn ((p.pos.x-845)^2+(p.pos.z+850)^2<=2500) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Lance became visible",
+						uuid = "3256e793-8ef0-c20b-9274-e048be51c313",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Red Girl/Draws",
+			eventType = 22,
+			name = "[Paradigm's Breach] Red Girl Point lance shown again record",
+			uuid = "eabd42db-989c-8d00-9ab0-02cd7a01a249",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\ndata.rgBarrierPending=Now()\n",
+						conditions = 
+						{
+							
+							{
+								"76949cdc-5ba5-14d0-b9a5-96b92d0618ca",
+								true,
+							},
+						},
+						name = "Mark barrier colours as pending",
+						uuid = "3d5953dd-f936-d8f0-adc4-4ea9b4b411ee",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e or e.entityContentID~=9950 then return false end\nif e.spellID~=24580 and e.spellID~=24581 then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==966) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Boss Generate: Barrier cast",
+						uuid = "76949cdc-5ba5-14d0-b9a5-96b92d0618ca",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Red Girl/Draws",
+			eventType = 3,
+			name = "[Paradigm's Breach] Red Girl Generate Barrier in progress",
+			uuid = "8b5c311e-96ea-af55-a680-f1c80ccdd36c",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "The Tower at Paradigm's Breach/Red Girl",
 			name = "AutoSim",
 			uuid = "0a0dca04-c96e-e0a3-9bf1-cc55f2c3df88",
@@ -14535,6 +15220,372 @@ local tbl =
 			name = "[Paradigm's Breach] Red Girl minigame targets - DoT blacklist",
 			timeout = 2,
 			uuid = "dcbd3323-36d8-31ad-ab13-16af8ca92ab6",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower at Paradigm's Breach/Red Girl",
+			name = "Diagnostics (temporary)",
+			uuid = "9ab27261-f1b8-64f9-9e99-11b8e9f46675",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower at Paradigm's Breach/Red Girl",
+			name = "Hacking minigame",
+			uuid = "6bba3f79-e273-cb7c-824e-d4f195c6cb4b",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal white=(e.spellID==24973)\nlocal p=TensorCore.mGetPlayer()\nif not p then return end\nlocal haveW=TensorCore.hasBuff(p,2632)\nlocal haveB=TensorCore.hasBuff(p,2633)\nlocal wrong=white and (not haveW) or ((not white) and (not haveB))\nlocal now=Now()\ndata.rgHackWave={col=white and 'W' or 'B',fin=now+8000,t2=now+5000,rem=false,wrong=wrong,last=now}\nif wrong and AnyoneCore and AnyoneCore.Shotcall then AnyoneCore.Shotcall(white and 'Wave: switch to WHITE' or 'Wave: switch to BLACK',true,3,false) end\n",
+						conditions = 
+						{
+							
+							{
+								"1123a79e-8489-c73d-bad3-cfebca11023f",
+								true,
+							},
+						},
+						name = "Record Wave colour and callout if I am the wrong colour",
+						uuid = "65dc7436-d2cb-3243-9777-18969e038e33",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e or e.entityContentID~=9985 then return false end\nlocal s=e.spellID\nif s~=24973 and s~=24974 then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos or not p.alive then return false end\nreturn ((p.pos.x)^2+(p.pos.z-400)^2<=2025) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Wave started in the minigame",
+						uuid = "1123a79e-8489-c73d-bad3-cfebca11023f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Red Girl/Hacking minigame",
+			eventType = 3,
+			name = "[Paradigm's Breach] Red Girl hacking Wave start (state and first callout)",
+			uuid = "fdcb2f35-4711-40ff-8636-86a1ca03b7ff",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal s=data and data.rgHackWave\nif not e or not s then return end\nlocal wrong=(s.col=='W' and e.buffID==2633) or (s.col=='B' and e.buffID==2632)\ns.wrong=wrong\nlocal now=Now()\nif wrong and now-(s.last or 0)>800 then\n s.last=now\n if AnyoneCore and AnyoneCore.Shotcall then AnyoneCore.Shotcall(s.col=='W' and 'Wave: switch to WHITE' or 'Wave: switch to BLACK',true,3,false) end\nend\n",
+						conditions = 
+						{
+							
+							{
+								"7fa5caa6-3cf0-19d5-96b4-dcd25c97c2e3",
+								true,
+							},
+						},
+						name = "Update colour state and re-warn if wrong",
+						uuid = "85719d4e-ba6d-10c4-9dd3-545a1818ec3b",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e or (e.buffID~=2632 and e.buffID~=2633) then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or e.entityID~=p.id then return false end\nlocal s=data.rgHackWave\nreturn (s~=nil and s.fin>Now()) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "My colour buff changed during a Wave",
+						uuid = "7fa5caa6-3cf0-19d5-96b4-dcd25c97c2e3",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Red Girl/Hacking minigame",
+			eventType = 8,
+			name = "[Paradigm's Breach] Red Girl hacking Wave colour change reminder",
+			uuid = "edb0f19b-7cf5-76d8-ade6-5ae44d80f76c",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.rgHackWave\nif not s or s.rem then return end\ns.rem=true\nif AnyoneCore and AnyoneCore.Shotcall then AnyoneCore.Shotcall(s.col=='W' and 'Wave soon: still not WHITE' or 'Wave soon: still not BLACK',true,3,false) end\n",
+						conditions = 
+						{
+							
+							{
+								"06e20eb6-fff2-45b2-9abc-09d3c4c3cb36",
+								true,
+							},
+						},
+						name = "Last callout, once per Wave",
+						uuid = "3705bffc-3acb-e3d6-b538-1f208fb70809",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local s=data.rgHackWave\nif not s or s.rem or not s.wrong then return false end\nlocal now=Now()\nreturn (now>=s.t2 and now<s.fin) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Wave about to hit and I am still wrong",
+						uuid = "06e20eb6-fff2-45b2-9abc-09d3c4c3cb36",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Red Girl/Hacking minigame",
+			name = "[Paradigm's Breach] Red Girl hacking Wave last reminder before the hit",
+			throttleTime = 250,
+			uuid = "8e182f48-a601-9df1-b74d-2b664f8c3c73",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Tower at Paradigm's Breach/Red Girl",
+			name = "Child's Play",
+			uuid = "4e01b09d-b3db-084e-81e2-0dcd3ed74c4b",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal now=Now()\nlocal north=(e.spellID==24612)\nlocal me=(data.rgChain==true)\ndata.rgCP={dir=north and 'N' or 'E',t0=now,march=now+9900,fin=now+16000,pyl={},me=me}\nif me and AnyoneCore and AnyoneCore.Shotcall then AnyoneCore.Shotcall(north and \"Child's Play: pushed NORTH, stand on the blue spot\" or \"Child's Play: pushed EAST, stand on the blue spot\",true,3,false) end\n",
+						conditions = 
+						{
+							
+							{
+								"ba419e57-28e2-ab5b-8605-1bccd6c46703",
+								true,
+							},
+						},
+						name = "Record push direction and timing, callout if tethered",
+						uuid = "072cd8a2-f84e-28e9-8430-341315d7a6de",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e or e.entityContentID~=9950 then return false end\nif e.spellID~=24612 and e.spellID~=24613 then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==966) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Child's Play channel",
+						uuid = "ba419e57-28e2-ab5b-8605-1bccd6c46703",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Red Girl/Child's Play",
+			eventType = 3,
+			name = "[Paradigm's Breach] Red Girl Child's Play push start",
+			uuid = "a46cf908-63f6-9e85-a8ff-dc9d8c0c08cd",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal cp=data and data.rgCP\nif not e or not cp or not cp.pyl then return end\nlocal C=TensorCore.mGetEntity(e.entityID)\nif not C or not C.pos then return end\ncp.pyl[#cp.pyl+1]={x=C.pos.x,z=C.pos.z}\n",
+						conditions = 
+						{
+							
+							{
+								"535b14b9-47f3-9f31-87e0-7f81c8275f56",
+								true,
+							},
+						},
+						name = "Record pylon position",
+						uuid = "22fb2697-3621-3c07-88d2-4159cd719cad",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e or e.spellID~=24614 or e.entityContentID~=9983 then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==966) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Pylon Explosion channel",
+						uuid = "535b14b9-47f3-9f31-87e0-7f81c8275f56",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Red Girl/Child's Play",
+			eventType = 3,
+			name = "[Paradigm's Breach] Red Girl Child's Play pylon record",
+			uuid = "d7409878-6541-cc78-9eef-62fabb9356a3",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal cp=data.rgCP\nif not cp then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then return end\nlocal now=Now()\nlocal dx=(cp.dir=='N') and 0 or 1\nlocal dz=(cp.dir=='N') and -1 or 0\nlocal pyl=cp.pyl\nlocal DS={24,27,30}\nlocal DM=27\nlocal function landD(sx,sz,D) return sx+D*dx,sz+D*dz end\nlocal function landSafe(lx,lz)\n if lx<828 or lx>862 or lz<-868 or lz>-834 then return false end\n if math.abs(lx-845)<=4.5 and math.abs(lz+851)<=4.5 then return false end\n for i=1,#pyl do local q=pyl[i] if (lx-q.x)^2+(lz-q.z)^2<92.16 then return false end end\n return true\nend\nlocal function startOk(sx,sz)\n if math.abs(sx-845)<=3.5 and math.abs(sz+851)<=3.5 then return false end\n for _,D in ipairs(DS) do\n  local lx,lz=landD(sx,sz,D)\n  if not landSafe(lx,lz) then return false end\n end\n for t=0,30,2 do\n  local x,z=sx+t*dx,sz+t*dz\n  if math.abs(x-845)<=3.5 and math.abs(z+851)<=3.5 then return false end\n end\n return true\nend\nif not cp.spots or cp.nsafe~=#pyl then\n local list={}\n for sx=826,864 do\n  for sz=-870,-832 do\n   if startOk(sx,sz) then\n    local lx,lz=landD(sx,sz,DM)\n    list[#list+1]={sx,sz,lx,lz}\n   end\n  end\n end\n local bx,bz=845,-876\n table.sort(list,function(a,b) return ((a[1]-bx)^2+(a[2]-bz)^2)<((b[1]-bx)^2+(b[2]-bz)^2) end)\n local spots={}\n for _,s in ipairs(list) do\n  local ok=true\n  for _,t in ipairs(spots) do if (s[1]-t[1])^2+(s[2]-t[2])^2<36 then ok=false break end end\n  if ok then spots[#spots+1]=s if #spots>=4 then break end end\n end\n cp.spots=spots\n cp.nsafe=#pyl\nend\nlocal px,pz=p.pos.x,p.pos.z\nlocal y=p.pos.y+.05\nlocal ms=math.min(450,math.floor(cp.fin-now))\nlocal BLUE,DIM,GREEN,RED=0xB0FF7A28,0x60FF7A28,0xB033FF33,0xB03333FF\nlocal function show(key,col,x,z)\n local d=TensorCore.getStaticDrawer(col,2)\n if not cp[key] or not d:updateTimedCircle(cp[key],ms,x,y,z,1.25,0,false,true) then cp[key]=d:addTimedCircle(ms,x,y,z,1.25,0,false,true) end\nend\nlocal function hide(key) if cp[key] then pcall(Argus.deleteTimedShape,cp[key]) cp[key]=nil end end\nif now<cp.march then\n local best,bd\n for _,s in ipairs(cp.spots) do\n  local d=(s[1]-px)^2+(s[2]-pz)^2\n  if not bd or d<bd then best,bd=s,d end\n end\n if not best then for i=1,4 do hide('s'..i) end hide('c2') hide('ar') return end\n for i=1,4 do\n  local s=cp.spots[i]\n  if s then show('s'..i,(s==best) and BLUE or DIM,s[1],s[2]) else hide('s'..i) end\n end\n show('c2',GREEN,best[3],best[4])\n local spot={x=best[1],y=y,z=best[2]}\n local distance=TensorCore.getDistance2d(p.pos,spot)\n if distance>1.25 then\n  local h=TensorCore.getHeadingToTarget(p.pos,spot)\n  local length=math.max(.1,distance-.9)\n  local d=TensorCore.getStaticDrawer(BLUE,2)\n  if not cp.ar or not d:updateTimedArrow(cp.ar,ms,px,y,pz,h,length,.4,.8,1,0,false) then cp.ar=d:addTimedArrow(ms,px,y,pz,h,length,.4,.8,1,0,false) end\n elseif cp.ar then\n  pcall(Argus.deleteTimedShape,cp.ar) cp.ar=nil\n end\nelse\n for i=1,4 do hide('s'..i) end\n hide('ar')\n if not cp.s0 then cp.s0={px,pz} end\n local lx,lz=landD(cp.s0[1],cp.s0[2],DM)\n local safe=true\n for _,D in ipairs(DS) do local ax,az=landD(cp.s0[1],cp.s0[2],D) if not landSafe(ax,az) then safe=false end end\n show('c2',safe and GREEN or RED,lx,lz)\nend\n",
+						conditions = 
+						{
+							
+							{
+								"3aadb73f-aec8-1f86-afa9-e3801b95d457",
+								true,
+							},
+						},
+						name = "Blue pre-push spots, green landing, landing check",
+						uuid = "332ec0f1-23c8-0824-b279-a559b1866b62",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local cp=data.rgCP\nif not cp or not cp.me or cp.fin<=Now() or not cp.pyl or #cp.pyl==0 then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==966 and p.alive and p.pos~=nil) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Child's Play push on me with pylons known",
+						uuid = "3aadb73f-aec8-1f86-afa9-e3801b95d457",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Red Girl/Child's Play",
+			name = "[Paradigm's Breach] Red Girl Child's Play safe landing guide",
+			throttleTime = 125,
+			uuid = "d6ab44e7-ea71-f49b-944e-1214494edfab",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nif e.newTetherID==149 then\n data.rgChain=true\nelse\n data.rgChain=nil\nend\n",
+						conditions = 
+						{
+							
+							{
+								"e91a6fa3-b49d-2df2-a42b-d4ecb63697bb",
+								true,
+							},
+						},
+						name = "Remember whether the chain is on me",
+						uuid = "1ba4fdbe-6d70-ca47-97aa-700d81dae1e2",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e then return false end\nif e.newTetherID~=149 and e.oldTetherID~=149 then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 then return false end\nreturn (e.sourceEntityID==p.id) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Chain tether (149) added to or removed from me",
+						uuid = "e91a6fa3-b49d-2df2-a42b-d4ecb63697bb",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Red Girl/Child's Play",
+			eventType = 15,
+			name = "[Paradigm's Breach] Red Girl Child's Play chain tether on me",
+			uuid = "28289eb9-76d3-c835-a5f3-eb5e580344d9",
 			version = 2,
 		},
 	},
