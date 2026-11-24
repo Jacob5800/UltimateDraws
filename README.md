@@ -214,6 +214,14 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Disable AnyoneCore Prepull Helper when the pull countdown starts. (15-11-2026)
 
+### M4S
+
+- Added the M4S Draws profile for Wicked Thunder: side cannons, Witch Hunt baits, Spark rectangles, Witchgleam lines, Electrope Edge positions, Electron Stream and Ion Cluster, intermission cones and Sabertail lanes. (24-11-2026)
+
+- Electrope Edge 2: the spread/partners arrow now shows and follows the boss's Four Star or Eight Star variant. Short/Long hit counts appear above each player during the Witchgleam lines, and the Lightning Cage arrow sends you to your count cell on your wave (shorts first, longs second). (24-11-2026)
+
+- Ion Cluster: the blue tank markers only show while an Electron Stream is being cast and hide during the debuff phase. (24-11-2026)
+
 ### Q40
 
 - Cleaned up leftover settings-path code in the Q40 settings and setup reactions and made the Assist Enabled check return a strict true/false. (22-11-2026)
