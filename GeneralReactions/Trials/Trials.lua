@@ -8451,6 +8451,55 @@ local tbl =
 			uuid = "89efc66a-ab2f-8b02-9b5e-71dea670cd72",
 			version = 2,
 		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player then self.used = true; return end\n\nlocal contentID = 2833\nlocal label = \"[Trials] Grey Arbiter\"\nlocal api = TensorCore.API.TensorACR\nlocal eligible = player.localmapid == 374 and player.job == 23\nlocal state = TrialsStrikingTreeGreyArbiterDoT\n\n-- Restore the previous entry on leaving The Striking Tree (Hard) or changing jobs.\n-- Keep this state outside pull data so a wipe does not lose the original values.\nif state and (not eligible or state.job ~= player.job) then\n    local entry = state.entry\n    if entry.enabled and entry.allowIfTarget == false and entry.allowSmartDoT == false then\n        if state.created then\n            entry.enabled = false\n            if player.job == state.job and api.getBlacklistEntry(contentID) then\n                local current = api.addBlacklistEntry(contentID)\n                if current == entry and current.name == label then\n                    api.deleteBlacklistEntry(contentID)\n                end\n            end\n        else\n            entry.enabled = state.enabled\n            entry.allowIfTarget = state.allowIfTarget\n            entry.allowSmartDoT = state.allowSmartDoT\n        end\n    end\n    TrialsStrikingTreeGreyArbiterDoT = nil\n    state = nil\nend\n\nif eligible and not state then\n    local supported, exists = pcall(api.getBlacklistEntry, contentID)\n    if supported then\n        local ok, entry = pcall(api.addBlacklistEntry, contentID, label)\n        if ok and entry then\n            TrialsStrikingTreeGreyArbiterDoT = {\n                job = player.job, entry = entry, created = not exists,\n                enabled = entry.enabled, allowIfTarget = entry.allowIfTarget,\n                allowSmartDoT = entry.allowSmartDoT,\n            }\n            entry.enabled = true\n            entry.allowIfTarget = false\n            entry.allowSmartDoT = false\n        end\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"e7d7d781-8790-982a-ba76-a23e8a4096d0",
+								true,
+							},
+						},
+						name = "Block short-lived add DoTs",
+						uuid = "b8989dec-b15e-98b7-90e0-15dae2746527",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal state = TrialsStrikingTreeGreyArbiterDoT\nlocal eligible = player.localmapid == 374 and player.job == 23\nif state then\n    return not eligible or player.job ~= state.job\nend\nreturn eligible",
+						dequeueIfLuaFalse = true,
+						name = "Duty and job / owned cleanup",
+						uuid = "e7d7d781-8790-982a-ba76-a23e8a4096d0",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Striking Tree (Hard)/AutoSim",
+			name = "Grey Arbiter DoT blacklist (BRD)",
+			throttleTime = 500,
+			timeout = 0.5,
+			uuid = "87b1ade8-2075-3cab-a9b8-cd307cbba96e",
+			version = 2,
+		},
 	}, 
 	inheritedProfiles = 
 	{
