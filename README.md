@@ -110,6 +110,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Dungeons
 
+- In dungeon lol, Alexandria skips the gather hold on the opening single pack and resumes normal gathering after the first portal. (24-11-2026)
+
 - Added Surecast for Maulskull, Deceiver and Ambrose, plus a disabled counterpart for Paglth’an’s Ground-to-ground Ballistic. (23-11-2026)
 
 - Added The Antitower boss draws and callouts to highleveldungeons. (23-11-2026)
@@ -127,8 +129,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Fixed cooldown pooling on the earlier Eyeclopes in Origenics. (20-11-2026)
 
 - Added boss draws, AutoSim forecasts, outward LockFace for Neuro Squama, and short-lived add DoT blacklists for The Lost City of Amdapor (Hard). (20-11-2026)
-
-- Corrected final-pack cooldown pooling after Mistwake boss two and made the hold status show the active reason. (19-11-2026)
 
 ### DSR
 

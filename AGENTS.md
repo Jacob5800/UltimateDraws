@@ -9,6 +9,7 @@
 
 This procedure applies to every mapped profile below. Keep one procedure here; profile rows supply only their identities, paths and implementation notes. The Agent workspace's AGENTS.md retains mechanic-specific rules.
 
+- After completing and verifying reaction profile work, ask whether to publish the changes or leave them in the live profile. If the user already gave a publishing decision for that work, follow it without asking again. While the decision is pending, keep the updates in the live profile and defer publication.
 - If a fight/profile has no established GitHub destination file, ask the user whether to create and publish one before creating the destination or adding a mapping. Suggest a concrete filename in the existing checkout. The user may decline; in that case, keep the authorized changes local and do not publish that profile. Record the choice in its TODO notes, and do not ask again unless the user changes that choice or the publishing scope materially changes. A mapped destination that is unexpectedly missing is not automatic authorization to recreate it; follow step 6.
 
 1. Author through TensorCore in the mapped live profile. Confirm the selected editable profile and timeline/version before mutations; do not save overrides in a job profile unless explicitly requested. Use the listed timeline versions where specified; confirm FRU's live timeline/version rather than guessing.
