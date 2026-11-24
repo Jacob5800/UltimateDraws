@@ -110,6 +110,10 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Dungeons
 
+- In dungeon lol, shared cooldown pooling and targeting only run in supported dungeons, so the action no longer runs in cities. (24-11-2026)
+
+- In levelling dungeons, Ihuykatumu skips the gather hold on the opening bird pack. (24-11-2026)
+
 - In dungeon lol, Alexandria skips the gather hold on the opening single pack and resumes normal gathering after the first portal. (24-11-2026)
 
 - Added Surecast for Maulskull, Deceiver and Ambrose, plus a disabled counterpart for Paglth’an’s Ground-to-ground Ballistic. (23-11-2026)
@@ -125,10 +129,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added Deceiver Android and turret lane guidance, Surge Arm's Length, and a DoT blacklist for the short-lived boss sentries. (20-11-2026)
 
 - Added early Writhing Riot cone previews and poison AoE draws for Herpekaris in Origenics. (20-11-2026)
-
-- Fixed cooldown pooling on the earlier Eyeclopes in Origenics. (20-11-2026)
-
-- Added boss draws, AutoSim forecasts, outward LockFace for Neuro Squama, and short-lived add DoT blacklists for The Lost City of Amdapor (Hard). (20-11-2026)
 
 ### DSR
 
