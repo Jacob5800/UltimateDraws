@@ -216,6 +216,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### M4S
 
+- Electrope Edge 2: the Witchgleam clock-spot arrow now appears 5 seconds earlier (from 145 seconds). (24-11-2026)
+
 - Added the M4S Draws profile for Wicked Thunder: side cannons, Witch Hunt baits, Spark rectangles, Witchgleam lines, Electrope Edge positions, Electron Stream and Ion Cluster, intermission cones and Sabertail lanes. (24-11-2026)
 
 - Electrope Edge 2: the spread/partners arrow now shows and follows the boss's Four Star or Eight Star variant. Short/Long hit counts appear above each player during the Witchgleam lines, and the Lightning Cage arrow sends you to your count cell on your wave (shorts first, longs second). (24-11-2026)
