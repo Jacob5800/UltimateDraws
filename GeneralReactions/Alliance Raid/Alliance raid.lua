@@ -12852,7 +12852,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "gStartCombat=false\nif AnyoneCore and AnyoneCore.Settings then\n AnyoneCore.Settings.DutyHelper=false\n AnyoneCore.Settings.PrepullHelper=false\nend\nself.used=true",
+						actionLua = "gStartCombat=false\nlocal s=AnyoneCore and AnyoneCore.Settings\nif s then\n if type(s.DutyHelper)=='table' then s.DutyHelper.enabled=false end\n if type(s.PrepullHelper)=='table' then s.PrepullHelper.enabled=false end\nend\nself.used=true",
 						conditions = 
 						{
 							
@@ -12941,6 +12941,54 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal hits=e.hitTargets\nif not hits or #hits==0 then return end\nlocal t=_G.PB_OrbDone\nif not t then t={} _G.PB_OrbDone=t end\nlocal now=Now()\nt[e.entityID]=now\nlocal n=0\nfor k,v in pairs(t) do n=n+1 end\nif n>200 then for k,v in pairs(t) do if now-v>60000 then t[k]=nil end end end",
+						conditions = 
+						{
+							
+							{
+								"c7dd24b7-dd94-0dfb-874a-7abcdbea0079",
+								true,
+							},
+						},
+						name = "Record used orb",
+						uuid = "ae08f44d-849c-6679-b001-4a6c88218947",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 then return false end\nlocal e=eventArgs\nif not e then return false end\nlocal c=e.entityContentID\nreturn c==9664 or c==9992 or c==9951 or c==9956\n",
+						dequeueIfLuaFalse = true,
+						name = "Energy orb cast",
+						uuid = "c7dd24b7-dd94-0dfb-874a-7abcdbea0079",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Setup",
+			eventType = 2,
+			name = "[Paradigm's Breach] Orb hit record",
+			uuid = "58fa9ded-63eb-8801-af4c-b25c0733c6a4",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "The Tower at Paradigm's Breach",
 			name = "Knave of Hearts",
 			uuid = "c0956e51-d9e3-0bb2-bcc9-040050353d61",
@@ -12968,7 +13016,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal SPEC={[24240]={k='r',col=0x7033FF33},[24241]={skip=true},[24239]={skip=true},[24245]={skip=true}}\nlocal s=SPEC[e.aoeID]\nlocal ct=e.aoeCastType\nlocal k\nif s then\n if s.skip then return end\n k=s.k\nelse\n if ct==2 and e.aoeLength>0 and e.aoeLength<=30 and e.aoeType~=27 then k='c'\n elseif ct==12 and e.aoeLength>0 and e.aoeWidth>0 and e.aoeLength<=70 and e.aoeWidth<=40 then k='r'\n elseif ct==13 and e.aoeLength>0 and e.aoeLength<=50 then k='cone'\n end\nend\nif not k then return end\nlocal col=(s and s.col) or 0x703333FF\nlocal d=TensorCore.getStaticDrawer(col,2)\nlocal x,y,z=e.x,e.y,e.z\nif k=='c' then\n d:addTimedCircle(ms,x,y,z,e.aoeLength,0,false,true)\nelseif k=='r' then\n d:addTimedRect(ms,x,y,z,e.aoeLength,e.aoeWidth,e.heading,0,false,true)\nelse\n local ang=(s and s.ang) or (e.aoeType==5 and 2*math.pi/3 or math.pi/2)\n d:addTimedCone(ms,x,y,z,e.aoeLength,ang,e.heading,0,false,true)\nend",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal SPEC={[24240]={skip=true},[24241]={skip=true},[24239]={skip=true},[24245]={skip=true},[24235]={skip=true},[24243]={skip=true}}\nlocal s=SPEC[e.aoeID]\nlocal ct=e.aoeCastType\nlocal k\nif s then\n if s.skip then return end\n k=s.k\nelse\n if ct==2 and e.aoeLength>0 and e.aoeLength<=30 and e.aoeType~=27 then k='c'\n elseif ct==12 and e.aoeLength>0 and e.aoeWidth>0 and e.aoeLength<=70 and e.aoeWidth<=40 then k='r'\n elseif ct==13 and e.aoeLength>0 and e.aoeLength<=50 then k='cone'\n end\nend\nif not k then return end\nlocal delay=0\nlocal a=e.aoeID\nif a==24228 or a==24229 or a==24230 then\n for _,hz in ipairs(_G.PB_Hazards or {}) do\n  if hz.id==24231 or hz.id==24776 then\n   local rem=hz.exp-Now()\n   if rem>0 and rem<4000 and rem>delay then delay=math.floor(rem) end\n  end\n end\n if delay>=ms then return end\nend\nif a==24236 then\n local myexp=e.startTime+e.duration*1000\n for _,o in ipairs(Argus.getCurrentAOEs() or {}) do\n  if o.aoeID==24236 then\n   local oe=o.startTime+o.duration*1000\n   if oe<myexp-500 and oe>Now() then\n    local dd=math.floor(oe-Now())\n    if dd>delay then delay=dd end\n   end\n  end\n end\n end\nlocal col=(s and s.col) or 0x703333FF\nlocal d=TensorCore.getStaticDrawer(col,2)\nlocal x,y,z=e.x,e.y,e.z\nif k=='c' then\n d:addTimedCircle(ms,x,y,z,e.aoeLength,0,false,true)\nelseif k=='r' then\n if a==24236 and delay>0 then\n  local gd=TensorCore.getStaticDrawer(0xB033FF33,2)\n  gd:addTimedRect(math.min(delay,ms),x,y,z,e.aoeLength,e.aoeWidth,e.heading,0,false,true)\n end\n if delay<ms then d:addTimedRect(ms-delay,x,y,z,e.aoeLength,e.aoeWidth,e.heading,delay,false,true) end\nelse\n local ang=(s and s.ang) or (e.aoeType==5 and 2*math.pi/3 or math.pi/2)\n d:addTimedCone(ms,x,y,z,e.aoeLength,ang,e.heading,0,false,true)\nend",
 						conditions = 
 						{
 							
@@ -13112,7 +13160,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local cfg={cid=9664,rad=3.5}\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then return end\nlocal st=data.pbOrb0\nif not st then st={nextScan=0,ids={}} data.pbOrb0=st end\nlocal now=Now()\nif now>=st.nextScan then\n st.nextScan=now+500\n st.ids={}\n for _,b in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=cfg.cid}) or {}) do\n  if b.alive then st.ids[#st.ids+1]=b.id end\n end\nend\nif #st.ids==0 then return end\nlocal d=TensorCore.getStaticDrawer(0x703333FF,2)\nfor _,id in ipairs(st.ids) do\n local o=TensorCore.mGetEntity(id)\n if o and o.pos and (o.pos.x-p.pos.x)^2+(o.pos.z-p.pos.z)^2<=45*45 then\n  d:addCircle(o.pos.x,o.pos.y+0.1,o.pos.z,cfg.rad,false)\n end\nend",
+						actionLua = "local cfgs={{cid=9664,rad=3.5},{cid=9956,rad=1.5}}\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then return end\nlocal st=data.pbOrb0\nif not st then st={nextScan=0,ids={},seen={}} data.pbOrb0=st end\nlocal now=Now()\nif now>=st.nextScan then\n st.nextScan=now+500\n st.ids={}\n for _,cfg in ipairs(cfgs) do\n  for id,b in pairs(TensorCore.entityList(\"contentid=\"..cfg.cid) or {}) do\n   if b.alive then st.ids[#st.ids+1]={id=id,rad=cfg.rad} end\n  end\n end\nend\nif #st.ids==0 then return end\nlocal d=TensorCore.getStaticDrawer(0x703333FF,2)\nfor _,s in ipairs(st.ids) do\n local o=TensorCore.mGetEntity(s.id)\n if o and o.alive and o.pos and not (_G.PB_OrbDone and _G.PB_OrbDone[s.id]) then\n  local r=st.seen[s.id]\n  if not r then r={x=o.pos.x,z=o.pos.z,first=now,moved=now,ever=false} st.seen[s.id]=r end\n  if (o.pos.x-r.x)^2+(o.pos.z-r.z)^2>0.01 then r.x=o.pos.x r.z=o.pos.z r.moved=now r.ever=true end\n  if (now-r.moved<=700 or (not r.ever and now-r.first<=2500)) and (o.pos.x-p.pos.x)^2+(o.pos.z-p.pos.z)^2<=45*45 then\n   d:addCircle(o.pos.x,o.pos.y+0.1,o.pos.z,s.rad,false)\n  end\n end\nend",
 						conditions = 
 						{
 							
@@ -13121,7 +13169,7 @@ local tbl =
 								true,
 							},
 						},
-						name = "Energy orb Burst rings",
+						name = "Energy orb and Spheroid rings",
 						uuid = "8df9c86f-4aba-5269-b536-a9ff7ac1b17a",
 						version = 2.1,
 					},
@@ -13146,6 +13194,390 @@ local tbl =
 			eventType = 12,
 			name = "[Paradigm's Breach] Energy orb Burst rings",
 			uuid = "5edaea6e-a038-6e36-9f9a-25fd0aa3ed2b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local S=_G.PB_Lunge\nif not S then return end\nlocal now=Now()\nif now-S.t>45000 then _G.PB_Lunge=nil return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then return end\nlocal e1=S.ids[1] and TensorCore.mGetEntity(S.ids[1])\nlocal e2=S.ids[2] and TensorCore.mGetEntity(S.ids[2])\nlocal function ch(e) local ci=e and e.castinginfo return ci~=nil and ci.channelingid==24241 end\nif ch(e1) then S.seen1=true end\nif ch(e2) then S.seen2=true end\nif S.exec and S.ids[1] and S.exec[S.ids[1]] then S.done1=true end\nif S.exec and S.ids[2] and S.exec[S.ids[2]] then S.done2=true end\nif S.done2 then _G.PB_Lunge=nil return end\nlocal lt=_G.PB_LeapT\nif not (S.seen1 or S.seen2 or (lt and S.t>lt and S.t-lt<40000)) then return end\nlocal live,nxt\nif not S.done1 then live=e1 nxt=e2 else live=e2 end\nif not live or not live.pos then return end\nlocal st={boxes={}}\nfor _,bx in ipairs(_G.PB_Boxes or {}) do\n if not S.done1 then\n  if bx.t<S.t-500 and now-bx.t>=3800 and now-bx.t<45000 then st.boxes[#st.boxes+1]=bx end\n elseif bx.t>=S.t-500 and now-bx.t<45000 then st.boxes[#st.boxes+1]=bx end\nend\nif #st.boxes==0 then return end\nlocal function dirOf(e)\n local vx,vz=-800-e.pos.x,-735-e.pos.z\n local dx,dz\n if math.abs(vx)>math.abs(vz) then dx=vx>0 and 1 or -1 dz=0 else dx=0 dz=vz>0 and 1 or -1 end\n return dx,dz,math.atan2(dx,dz)\nend\nlocal function ctr(b,dx,dz)\n if dz==1 then return b.x,b.z-3 end\n if dz==-1 then return b.x,b.z+11 end\n if dx==1 then return b.x-7,b.z+4 end\n return b.x+7,b.z+4\nend\nlocal function square(b,dx,dz,h,col)\n local d=TensorCore.getStaticDrawer(col,2)\n local cx,cz=ctr(b,dx,dz)\n d:addRect(cx-dx*1.5,b.y+0.1,cz-dz*1.5,3,3,h,false)\nend\nlocal d1x,d1z,h1=dirOf(live)\nlocal function blocked(px,pz,ox,oz,skip)\n for _,b in ipairs(st.boxes) do\n  if b~=skip then\n   local rx,rz=b.x-px,b.z-pz\n   local along=rx*ox+rz*oz\n   local perp=math.abs(rx*(-oz)+rz*ox)\n   if along>1 and perp<=4.5 then return true end\n  end\n end\n return false\nend\nlocal safe={}\nfor _,b in ipairs(st.boxes) do\n local ok=true\n -- second-push check suppressed for now\n if ok then safe[#safe+1]=b end\nend\nlocal function hit(cx,cz)\n local t=_G.PB_Hazards\n if not t then return false end\n for _,hz in ipairs(t) do\n  if hz.exp>now then\n   local px,pz=cx-hz.x,cz-hz.z\n   local fx,fz=math.sin(hz.h),math.cos(hz.h)\n   local along=px*fx+pz*fz\n   local perp=math.abs(px*fz-pz*fx)\n   if along>=-1.5 and along<=hz.len+1.5 and perp<=hz.w/2+1.5 then return true end\n  end\n end\n return false\nend\nlocal keep={}\nlocal dropped=0\nfor _,b in ipairs(safe) do\n if not hit(ctr(b,d1x,d1z)) then keep[#keep+1]=b else dropped=dropped+1 end\nend\nsafe=keep\nfor _,b in ipairs(safe) do square(b,d1x,d1z,h1,0x7033FF33) end\nif nxt and nxt.pos then\n local d2x,d2z,h2=dirOf(nxt)\n for _,bx in ipairs(_G.PB_Boxes or {}) do\n  if bx.t>=S.t-500 and now-bx.t<45000 then if hit(ctr(bx,d2x,d2z)) then dropped=dropped+1 else square(bx,d2x,d2z,h2,0x7000FFFF) end end\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"246ac6e8-5b24-a201-8eee-449d0ec0b369",
+								true,
+							},
+						},
+						name = "Lunge lanes",
+						uuid = "d050b88b-7758-b91e-971c-8ab93453d92c",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn p~=nil and p.localmapid==966 and _G.PB_Lunge~=nil\n",
+						dequeueIfLuaFalse = true,
+						name = "Knave arena in combat",
+						uuid = "246ac6e8-5b24-a201-8eee-449d0ec0b369",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Knave of Hearts/Draws",
+			eventType = 12,
+			name = "[Paradigm's Breach] Knave Lunge squares (1 green, 2 yellow)",
+			uuid = "38623683-38d0-3448-b3d1-34e056fe1893",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\n_G.PB_LeapT=Now()\nlocal e=eventArgs\nif not e or e.aoeID~=24239 then return end\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal d=TensorCore.getStaticDrawer(0x703333FF,2)\nd:addTimedCircle(ms,e.x,e.y,e.z,e.aoeLength,0,false,true)",
+						conditions = 
+						{
+							
+							{
+								"52548b16-7bc4-2f6b-8da0-8559f2aa5a87",
+								true,
+							},
+						},
+						name = "Danger circles",
+						uuid = "6d53a0f7-f891-09d1-b3b0-a2560395518b",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos then return false end\nlocal e=eventArgs\nif not e or e.friendly or e.aoeID~=24239 then return false end\nreturn (p.pos.x-(-800))^2+(p.pos.z-(-735))^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "Light Leap in Knave arena",
+						uuid = "52548b16-7bc4-2f6b-8da0-8559f2aa5a87",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Knave of Hearts/Draws",
+			eventType = 18,
+			name = "[Paradigm's Breach] Knave Light Leap danger circles",
+			uuid = "f52b8c35-cf40-ff75-90bb-c9af3a86c5fb",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal now=Now()\nlocal S=_G.PB_Lunge\nif not S or now-S.t>45000 or #S.ids>=2 then S={t=now,ids={}} _G.PB_Lunge=S end\nfor _,id in ipairs(S.ids) do if id==e.entityID then return end end\nS.ids[#S.ids+1]=e.entityID",
+						conditions = 
+						{
+							
+							{
+								"90bc19e7-54b7-1aa7-be30-5e23c082d5e8",
+								true,
+							},
+						},
+						name = "Record Lunge order",
+						uuid = "2a078173-53e5-7f5f-b10f-8b47c45290b4",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 then return false end\nlocal e=eventArgs\nreturn e~=nil and (e.markerID==278 or e.markerID==279) and (e.entityContentID==9955 or e.entityContentID==10058)\n",
+						dequeueIfLuaFalse = true,
+						name = "Lunge order marker",
+						uuid = "90bc19e7-54b7-1aa7-be30-5e23c082d5e8",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Knave of Hearts/Draws",
+			eventType = 4,
+			name = "[Paradigm's Breach] Knave Lunge order markers",
+			uuid = "9f258e62-d372-b3ff-8f26-9aef9ab7a3d4",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal t=_G.PB_Hazards\nif not t then t={} _G.PB_Hazards=t end\nlocal now=Now()\nfor i=#t,1,-1 do if t[i].exp<now then table.remove(t,i) end end\nt[#t+1]={id=e.aoeID,x=e.x,z=e.z,h=e.heading,len=e.aoeLength,w=e.aoeWidth,exp=now+ms}",
+						conditions = 
+						{
+							
+							{
+								"524b9bd6-e640-7c3b-8092-539dce6af583",
+								true,
+							},
+						},
+						name = "Record hazard",
+						uuid = "75bb1c0a-9d8b-73e1-a3e0-097fe9602060",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 then return false end\nlocal e=eventArgs\nif not e or e.friendly then return false end\nreturn e.aoeName=='Colossal Impact' and e.aoeCastType==12\n",
+						dequeueIfLuaFalse = true,
+						name = "Colossal Impact lines",
+						uuid = "524b9bd6-e640-7c3b-8092-539dce6af583",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Knave of Hearts/Draws",
+			eventType = 18,
+			name = "[Paradigm's Breach] Knave Colossal Impact hazard record",
+			uuid = "31e73d9f-6d06-33f4-afcb-f7a032ea0304",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal best,bd\nfor id,p in pairs(TensorCore.entityList(\"\") or {}) do\n if p.chartype==4 and p.pos then\n  local dd=(p.pos.x-e.x)^2+(p.pos.z-e.z)^2\n  if not bd or dd<bd then best=id bd=dd end\n end\nend\nif not best or bd>9 then return end\nlocal t=_G.PB_Spread\nif not t then t={} _G.PB_Spread=t end\nlocal now=Now()\nfor i=#t,1,-1 do if t[i].exp<now then table.remove(t,i) end end\nt[#t+1]={id=best,rad=e.aoeLength,exp=now+ms}",
+						conditions = 
+						{
+							
+							{
+								"d3441427-7459-4d91-9e45-23b8a67b69fd",
+								true,
+							},
+						},
+						name = "Attach to player",
+						uuid = "923cad65-26b2-fb26-b693-8d64f73c8ab7",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 then return false end\nlocal e=eventArgs\nif not e or e.friendly then return false end\nlocal a=e.aoeID\nreturn (a==24235 or a==24243) and e.aoeCastType==2 and ((p.pos.x-(-800))^2+(p.pos.z-(-735))^2<=2500)\n",
+						dequeueIfLuaFalse = true,
+						name = "Magic Artillery spread",
+						uuid = "d3441427-7459-4d91-9e45-23b8a67b69fd",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Knave of Hearts/Draws",
+			eventType = 18,
+			name = "[Paradigm's Breach] Knave spread circles record target",
+			uuid = "ba0d0497-f71a-9067-b97e-146a54aa146a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local t=_G.PB_Spread\nif not t or #t==0 then return end\nlocal now=Now()\nlocal d=TensorCore.getStaticDrawer(0x703333FF,2)\nfor i=#t,1,-1 do\n local s=t[i]\n if s.exp<now then table.remove(t,i)\n else\n  local o=TensorCore.mGetEntity(s.id)\n  if o and o.pos then d:addCircle(o.pos.x,o.pos.y+0.1,o.pos.z,s.rad,false) end\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"69b62cf5-a7e4-ba29-8d1b-72275cf42f8a",
+								true,
+							},
+						},
+						name = "Draw following circles",
+						uuid = "1c043575-6e60-f51e-83cb-78ed68c09e8d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn p~=nil and p.localmapid==966 and _G.PB_Spread~=nil and #_G.PB_Spread>0\n",
+						dequeueIfLuaFalse = true,
+						name = "Spread circles active",
+						uuid = "69b62cf5-a7e4-ba29-8d1b-72275cf42f8a",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Knave of Hearts/Draws",
+			eventType = 12,
+			name = "[Paradigm's Breach] Knave spread circles follow players",
+			uuid = "5376d89a-ec05-9c73-b872-421474bc870d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal now=Now()\nlocal t=_G.PB_Boxes\nif not t then t={} _G.PB_Boxes=t end\nfor i=#t,1,-1 do if now-t[i].t>40000 then table.remove(t,i) end end\nt[#t+1]={x=e.x,y=e.y,z=e.z,t=now}",
+						conditions = 
+						{
+							
+							{
+								"0161ae7a-a9b4-0561-9c5a-ab57876f7b39",
+								true,
+							},
+						},
+						name = "Record box",
+						uuid = "8ad4a15b-a96b-4721-8451-93bcb9495537",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 then return false end\nlocal e=eventArgs\nreturn e~=nil and not e.friendly and e.aoeID==24240 and e.aoeCastType==12\n",
+						dequeueIfLuaFalse = true,
+						name = "Lunge box cast",
+						uuid = "0161ae7a-a9b4-0561-9c5a-ab57876f7b39",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Knave of Hearts/Draws",
+			eventType = 18,
+			name = "[Paradigm's Breach] Knave Lunge box positions record",
+			uuid = "4fabe27b-b274-681c-b7fc-866a1aa7b52a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal S=_G.PB_Lunge\nif not e or not S then return end\nS.exec=S.exec or {}\nS.exec[e.entityID]=Now()",
+						conditions = 
+						{
+							
+							{
+								"b427d47d-e620-db06-850e-e90718203402",
+								true,
+							},
+						},
+						name = "Record execution",
+						uuid = "b345154f-46c0-49c4-99e6-0e262ea3643d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 then return false end\nlocal e=eventArgs\nreturn e~=nil and e.spellID==24241 and (e.entityContentID==9955 or e.entityContentID==10058)\n",
+						dequeueIfLuaFalse = true,
+						name = "Lunge resolves",
+						uuid = "b427d47d-e620-db06-850e-e90718203402",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Knave of Hearts/Draws",
+			eventType = 2,
+			name = "[Paradigm's Breach] Knave Lunge executed record",
+			uuid = "1ee1c227-995d-7c0e-90d2-a5cd55438733",
 			version = 2,
 		},
 	},
@@ -13470,7 +13902,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local st=data.pbReflect\nif not st then st={nextScan=0,ids={},called={}} data.pbReflect=st end\nlocal now=Now()\nif now>=st.nextScan then\n st.nextScan=now+500\n st.ids={}\n for _,cid in ipairs({9988,9989}) do\n  for _,b in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=cid}) or {}) do\n   if b.alive then st.ids[#st.ids+1]=b.id end\n  end\n end\nend\nif #st.ids==0 then return end\nlocal red=TensorCore.getStaticDrawer(0x703333FF,2)\nlocal green=TensorCore.getStaticDrawer(0x7033FF33,2)\nlocal ang=math.pi/2\nfor _,id in ipairs(st.ids) do\n local b=TensorCore.mGetEntity(id)\n if b and b.pos and b.alive and TensorCore.hasBuff(b,2538) then\n  local h=b.pos.h\n  red:addCone(b.pos.x,b.pos.y,b.pos.z,9,ang,h+math.pi,false)\n  red:addCone(b.pos.x,b.pos.y,b.pos.z,9,ang,h+math.pi/2,false)\n  red:addCone(b.pos.x,b.pos.y,b.pos.z,9,ang,h-math.pi/2,false)\n  green:addCone(b.pos.x,b.pos.y,b.pos.z,9,ang,h,false)\n  if not st.called[id] then\n   st.called[id]=true\n   if AnyoneCore and AnyoneCore.Shotcall then AnyoneCore.Shotcall(\"Shield: hit from the front\",true,3,false) end\n  end\n elseif st.called[id] then\n  st.called[id]=nil\n end\nend",
+						actionLua = "local st=data.pbReflect\nif not st then st={nextScan=0,ids={},called={}} data.pbReflect=st end\nlocal now=Now()\nif now>=st.nextScan then\n st.nextScan=now+500\n st.ids={}\n for _,cid in ipairs({9988,9989}) do\n  for id,b in pairs(TensorCore.entityList(\"contentid=\"..cid) or {}) do\n   if b.alive then st.ids[#st.ids+1]=id end\n  end\n end\nend\nif #st.ids==0 then return end\nlocal red=TensorCore.getStaticDrawer(0x703333FF,2)\nlocal green=TensorCore.getStaticDrawer(0x7033FF33,2)\nlocal ang=math.pi/2\nfor _,id in ipairs(st.ids) do\n local b=TensorCore.mGetEntity(id)\n if b and b.pos and b.alive and (TensorCore.hasBuff(b,2538) or (_G.PB_ShieldPending and _G.PB_ShieldPending[id] and now<_G.PB_ShieldPending[id])) then\n  local h=b.pos.h\n  red:addCone(b.pos.x,b.pos.y,b.pos.z,9,ang,h+math.pi,false)\n  red:addCone(b.pos.x,b.pos.y,b.pos.z,9,ang,h+math.pi/2,false)\n  red:addCone(b.pos.x,b.pos.y,b.pos.z,9,ang,h-math.pi/2,false)\n  green:addCone(b.pos.x,b.pos.y,b.pos.z,9,ang,h,false)\n  if not st.called[id] then\n   st.called[id]=true\n   if AnyoneCore and AnyoneCore.Shotcall then AnyoneCore.Shotcall(\"Shield: hit from the front\",true,3,false) end\n  end\n elseif st.called[id] then\n  st.called[id]=nil\n end\nend",
 						conditions = 
 						{
 							
@@ -13518,7 +13950,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local cfg={cid=9992,rad=4}\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then return end\nlocal st=data.pbOrb2\nif not st then st={nextScan=0,ids={}} data.pbOrb2=st end\nlocal now=Now()\nif now>=st.nextScan then\n st.nextScan=now+500\n st.ids={}\n for _,b in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=cfg.cid}) or {}) do\n  if b.alive then st.ids[#st.ids+1]=b.id end\n end\nend\nif #st.ids==0 then return end\nlocal d=TensorCore.getStaticDrawer(0x703333FF,2)\nfor _,id in ipairs(st.ids) do\n local o=TensorCore.mGetEntity(id)\n if o and o.pos and (o.pos.x-p.pos.x)^2+(o.pos.z-p.pos.z)^2<=45*45 then\n  d:addCircle(o.pos.x,o.pos.y+0.1,o.pos.z,cfg.rad,false)\n end\nend",
+						actionLua = "local cfgs={{cid=9992,rad=4}}\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then return end\nlocal st=data.pbOrb2\nif not st then st={nextScan=0,ids={},seen={}} data.pbOrb2=st end\nlocal now=Now()\nif now>=st.nextScan then\n st.nextScan=now+500\n st.ids={}\n for _,cfg in ipairs(cfgs) do\n  for id,b in pairs(TensorCore.entityList(\"contentid=\"..cfg.cid) or {}) do\n   if b.alive then st.ids[#st.ids+1]={id=id,rad=cfg.rad} end\n  end\n end\nend\nif #st.ids==0 then return end\nlocal d=TensorCore.getStaticDrawer(0x703333FF,2)\nfor _,s in ipairs(st.ids) do\n local o=TensorCore.mGetEntity(s.id)\n if o and o.alive and o.pos and not (_G.PB_OrbDone and _G.PB_OrbDone[s.id]) then\n  local r=st.seen[s.id]\n  if not r then r={x=o.pos.x,z=o.pos.z,first=now,moved=now,ever=false} st.seen[s.id]=r end\n  if (o.pos.x-r.x)^2+(o.pos.z-r.z)^2>0.01 then r.x=o.pos.x r.z=o.pos.z r.moved=now r.ever=true end\n  if (now-r.moved<=700 or (not r.ever and now-r.first<=2500)) and (o.pos.x-p.pos.x)^2+(o.pos.z-p.pos.z)^2<=45*45 then\n   d:addCircle(o.pos.x,o.pos.y+0.1,o.pos.z,s.rad,false)\n  end\n end\nend",
 						conditions = 
 						{
 							
@@ -13552,6 +13984,150 @@ local tbl =
 			eventType = 12,
 			name = "[Paradigm's Breach] Magical Confluence Impact rings",
 			uuid = "b387e05f-b7b5-dc64-8861-526209316caf",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal t=_G.PB_ShieldPending\nif not t then t={} _G.PB_ShieldPending=t end\nt[e.entityID]=Now()+5200",
+						conditions = 
+						{
+							
+							{
+								"605e20f8-6da0-f320-a2e1-2d8306349fb1",
+								true,
+							},
+						},
+						name = "Mark shield pending",
+						uuid = "1ed40e88-c0ba-40fd-ba53-91c06b8ce625",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 then return false end\nlocal e=eventArgs\nreturn e~=nil and (e.spellID==23657 or e.spellID==23659)\n",
+						dequeueIfLuaFalse = true,
+						name = "Upgraded Shield cast",
+						uuid = "605e20f8-6da0-f320-a2e1-2d8306349fb1",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Hansel and Gretel/Draws",
+			eventType = 3,
+			name = "[Paradigm's Breach] Hansel and Gretel Upgraded Shield cast record",
+			uuid = "f4e7cb8f-af59-5a3d-9fe7-030d8ddab3c5",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal t=_G.PB_BulletDone\nif not t then t={} _G.PB_BulletDone=t end\nlocal now=Now()\nt[e.entityID]=now\nlocal n=0\nfor k,v in pairs(t) do n=n+1 end\nif n>300 then for k,v in pairs(t) do if now-v>60000 then t[k]=nil end end end",
+						conditions = 
+						{
+							
+							{
+								"0974aba5-36fc-a7ff-a0ad-a05402df3693",
+								true,
+							},
+						},
+						name = "Record exploded bullet",
+						uuid = "86fe29eb-068e-836f-a23e-e89defa18898",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 then return false end\nlocal e=eventArgs\nreturn e~=nil and e.spellID==23655\n",
+						dequeueIfLuaFalse = true,
+						name = "Explosion cast",
+						uuid = "0974aba5-36fc-a7ff-a0ad-a05402df3693",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Hansel and Gretel/Draws",
+			eventType = 2,
+			name = "[Paradigm's Breach] Magic Bullet exploded record",
+			uuid = "3feec6ed-f1cf-5640-823f-0c23dab78b70",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local p=TensorCore.mGetPlayer()\nif not p or not p.pos then return end\nlocal st=data.pbBullets\nif not st then st={nextScan=0,ids={}} data.pbBullets=st end\nlocal now=Now()\nif now>=st.nextScan then\n st.nextScan=now+300\n st.ids={}\n for id,b in pairs(TensorCore.entityList(\"contentid=9993\") or {}) do\n  if b.alive then st.ids[#st.ids+1]=id end\n end\nend\nif #st.ids==0 then return end\nlocal done=_G.PB_BulletDone\nlocal d=TensorCore.getStaticDrawer(0x703333FF,2)\nfor _,id in ipairs(st.ids) do\n if not (done and done[id]) then\n  local b=TensorCore.mGetEntity(id)\n  if b and b.alive and b.pos then\n   local h=(b.pos.h or 0)+math.pi/2\n   local dx,dz=math.sin(h),math.cos(h)\n   d:addRect(b.pos.x-dx*25,b.pos.y+0.1,b.pos.z-dz*25,50,4,h,false)\n  end\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"effbb9da-e70f-fba3-990b-03eeddc1f917",
+								true,
+							},
+						},
+						name = "Draw bullet bands",
+						uuid = "527737fd-a904-ca6a-9a3f-5a177abbfd89",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos or not p.incombat then return false end\nreturn (p.pos.x-(-800))^2+(p.pos.z-(-955))^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "Hansel and Gretel arena in combat",
+						uuid = "effbb9da-e70f-fba3-990b-03eeddc1f917",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Hansel and Gretel/Draws",
+			eventType = 12,
+			name = "[Paradigm's Breach] Hansel and Gretel Magic Bullet explosion bands (early)",
+			uuid = "de7f7d02-5c6f-a17c-b93c-466ed372edee",
 			version = 2,
 		},
 	},
@@ -14041,7 +14617,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local cfg={cid=9664,rad=2}\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then return end\nlocal st=data.pbOrb1\nif not st then st={nextScan=0,ids={}} data.pbOrb1=st end\nlocal now=Now()\nif now>=st.nextScan then\n st.nextScan=now+500\n st.ids={}\n for _,b in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=cfg.cid}) or {}) do\n  if b.alive then st.ids[#st.ids+1]=b.id end\n end\nend\nif #st.ids==0 then return end\nlocal d=TensorCore.getStaticDrawer(0x703333FF,2)\nfor _,id in ipairs(st.ids) do\n local o=TensorCore.mGetEntity(id)\n if o and o.pos and (o.pos.x-p.pos.x)^2+(o.pos.z-p.pos.z)^2<=45*45 then\n  d:addCircle(o.pos.x,o.pos.y+0.1,o.pos.z,cfg.rad,false)\n end\nend",
+						actionLua = "local cfgs={{cid=9664,rad=2}}\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then return end\nlocal st=data.pbOrb1\nif not st then st={nextScan=0,ids={},seen={}} data.pbOrb1=st end\nlocal now=Now()\nif now>=st.nextScan then\n st.nextScan=now+500\n st.ids={}\n for _,cfg in ipairs(cfgs) do\n  for id,b in pairs(TensorCore.entityList(\"contentid=\"..cfg.cid) or {}) do\n   if b.alive then st.ids[#st.ids+1]={id=id,rad=cfg.rad} end\n  end\n end\nend\nif #st.ids==0 then return end\nlocal d=TensorCore.getStaticDrawer(0x703333FF,2)\nfor _,s in ipairs(st.ids) do\n local o=TensorCore.mGetEntity(s.id)\n if o and o.alive and o.pos and not (_G.PB_OrbDone and _G.PB_OrbDone[s.id]) then\n  local r=st.seen[s.id]\n  if not r then r={x=o.pos.x,z=o.pos.z,first=now,moved=now,ever=false} st.seen[s.id]=r end\n  if (o.pos.x-r.x)^2+(o.pos.z-r.z)^2>0.01 then r.x=o.pos.x r.z=o.pos.z r.moved=now r.ever=true end\n  if (now-r.moved<=700 or (not r.ever and now-r.first<=2500)) and (o.pos.x-p.pos.x)^2+(o.pos.z-p.pos.z)^2<=45*45 then\n   d:addCircle(o.pos.x,o.pos.y+0.1,o.pos.z,s.rad,false)\n  end\n end\nend",
 						conditions = 
 						{
 							
@@ -14263,7 +14839,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local cfg={cid=9951,rad=4}\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then return end\nlocal st=data.pbOrb3\nif not st then st={nextScan=0,ids={}} data.pbOrb3=st end\nlocal now=Now()\nif now>=st.nextScan then\n st.nextScan=now+500\n st.ids={}\n for _,b in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=cfg.cid}) or {}) do\n  if b.alive then st.ids[#st.ids+1]=b.id end\n end\nend\nif #st.ids==0 then return end\nlocal d=TensorCore.getStaticDrawer(0x703333FF,2)\nfor _,id in ipairs(st.ids) do\n local o=TensorCore.mGetEntity(id)\n if o and o.pos and (o.pos.x-p.pos.x)^2+(o.pos.z-p.pos.z)^2<=45*45 then\n  d:addCircle(o.pos.x,o.pos.y+0.1,o.pos.z,cfg.rad,false)\n end\nend",
+						actionLua = "local cfgs={{cid=9951,rad=4}}\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then return end\nlocal st=data.pbOrb3\nif not st then st={nextScan=0,ids={},seen={}} data.pbOrb3=st end\nlocal now=Now()\nif now>=st.nextScan then\n st.nextScan=now+500\n st.ids={}\n for _,cfg in ipairs(cfgs) do\n  for id,b in pairs(TensorCore.entityList(\"contentid=\"..cfg.cid) or {}) do\n   if b.alive then st.ids[#st.ids+1]={id=id,rad=cfg.rad} end\n  end\n end\nend\nif #st.ids==0 then return end\nlocal d=TensorCore.getStaticDrawer(0x703333FF,2)\nfor _,s in ipairs(st.ids) do\n local o=TensorCore.mGetEntity(s.id)\n if o and o.alive and o.pos and not (_G.PB_OrbDone and _G.PB_OrbDone[s.id]) then\n  local r=st.seen[s.id]\n  if not r then r={x=o.pos.x,z=o.pos.z,first=now,moved=now,ever=false} st.seen[s.id]=r end\n  if (o.pos.x-r.x)^2+(o.pos.z-r.z)^2>0.01 then r.x=o.pos.x r.z=o.pos.z r.moved=now r.ever=true end\n  if (now-r.moved<=700 or (not r.ever and now-r.first<=2500)) and (o.pos.x-p.pos.x)^2+(o.pos.z-p.pos.z)^2<=45*45 then\n   d:addCircle(o.pos.x,o.pos.y+0.1,o.pos.z,s.rad,false)\n  end\n end\nend",
 						conditions = 
 						{
 							

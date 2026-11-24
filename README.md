@@ -248,6 +248,14 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Added Knave of Hearts Lunge guidance in The Tower at Paradigm's Breach: green squares in front of the cubes that will catch your knockback, and yellow squares for the second Lunge that turn green once the first one resolves. Squares that overlap Colossal Impact are hidden. (24-11-2026)
+
+- Improved The Tower at Paradigm's Breach spread circles (Magic Artillery) so they follow the player they are on until they resolve, and drew Light Leap's danger circles in red. (24-11-2026)
+
+- Improved The Tower at Paradigm's Breach timing: Colossal Impact's side lines now appear once the central line has resolved, and the second Magic Barrage set shows green until the first set resolves, then turns red. (24-11-2026)
+
+- Improved Hansel and Gretel in The Tower at Paradigm's Breach: the Upgraded Shield sides now appear as soon as the cast starts and stay up, and the Magic Bullet explosion bands are drawn as soon as the bullets appear. Orb rings now disappear when the orb hits someone, and the helper setup no longer causes Lua errors. (24-11-2026)
+
 - The Tower at Paradigm's Breach now draws rings around the dodgeable orbs (Knave of Hearts, Xun-Zi and Meng-Zi, Hansel and Gretel, Her Inflorescence) and the Knave's Spheroid Magic Barrage line. (23-11-2026)
 
 - Added The Tower at Paradigm's Breach: hazard draws for every boss, Hansel and Gretel Upgraded Shield sides (red) with the open front (green), AutoSim forecasts that treat the Red Girl hacking minigame as downtime and stun, and a DoT blacklist for the minigame targets. (23-11-2026)
@@ -258,12 +266,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Improved The World of Darkness AutoSim: Cloud of Darkness now handles both of its disappearances and the short melee gap after it returns, and kill-time estimates were updated for all four bosses. (22-11-2026)
 - Improved The World of Darkness first boss: the colour-switch callout now tells you which side to stand on and draws it (green safe, red unsafe), and Mortal Gaze now locks your facing until the gaze resolves. (22-11-2026)
-- Added a DoT blacklist for short-lived adds in The World of Darkness so DoTs are not wasted on them. (22-11-2026)
-- Added The Puppets' Bunker coverage (draws and AutoSim forecasts for the 813P-operated Aegis Unit, Heavy Artillery Unit, Superior Flight Units and The Compound), The World of Darkness draws, callouts and AutoSim forecasts, and an Echoes of Vana'diel AutoSim setup. (22-11-2026)
-
-- Fixed the boss lookup used by the pre-pull setup and boss targeting in The Puppets' Bunker and Syrcus Tower, which could not find the boss before. (22-11-2026)
-
-- Fixed rare Lua errors in the 813P-operated Aegis Unit AutoSim kill estimate and Surface Laser puddle draws when the pull state was reset mid-fight. (22-11-2026)
 
 ### Trials
 
