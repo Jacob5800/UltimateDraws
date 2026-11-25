@@ -248,6 +248,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Improved the 813P-operated Aegis Unit cannons in The Puppets' Bunker: Beam Cannons and Collider Cannons now mark every safe lane green instead of showing a safe-spot arrow, and the red Beam Cannons cones are higher contrast. (25-11-2026)
+
 - Added The Orbonne Monastery: hazard draws for all five bosses (including early Compress and Satellite Beam warnings, Holy Sword circles, Ultima's Grand Cross, Plummet, Time Eruption, Embrace and Ray of Light lanes after the March), boss targeting, AutoSim kill-time and downtime estimates, an Acceleration Bomb alert and automatic hold-still for the Cataclysm maze, Redemption callouts, and a DoT blacklist for the short-lived Halidom adds on Bard, Black Mage and Samurai. (25-11-2026)
 
 - Added Red Girl helpers in The Tower at Paradigm's Breach: red Point lance lanes with green safe areas that account for the barrier colours, green safe areas for the White/Black Wipe meteors (including two at once), a blue spot and arrow to the nearest opposite-colour wall for your Shock marker, red Diffuse Energy cones for the next hit, Wave colour callouts with repeat reminders in the hacking minigame, and blue standing spots with a green landing marker for Child's Play when the chain is on you. (24-11-2026)

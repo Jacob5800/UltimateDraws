@@ -10590,7 +10590,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\nlocal e=eventArgs\nlocal b=TensorCore.mGetEntity(e.entityID)\nif not b or not b.pos or not e.channelTimeMax or e.channelTimeMax<=0 then return end\nlocal ms=math.floor((e.channelTimeMax+.65)*1000)\nlocal drawer=TensorCore.getStaticDrawer(0x803333FF,2)\nlocal p=b.pos\nlocal player=TensorCore.mGetPlayer()\nlocal dx,dz=player.pos.x-p.x,player.pos.z-p.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal collider=e.spellID==20604 or e.spellID==20605\nlocal unsafe=false\nlocal cones={}\nlocal angles={0,-72,-144,144,72}\nlocal widths={30,45,15,45,30}\nfor i=1,5 do\n local degrees,half=angles[i],widths[i]\n if e.spellID~=20595 then\n  degrees=(i-1)*72+(e.spellID==20605 and -90 or e.spellID==20607 and -18 or e.spellID==20608 and 18 or 0)\n  half=(e.spellID==20607 or e.spellID==20608) and 18 or 15\n end\n local heading=p.h+math.rad(degrees)\n cones[#cones+1]={heading=heading,half=math.rad(half)}\n if not collider then drawer:addTimedCone(ms,p.x,p.y,p.z,30,math.rad(2*half),heading) end\n if distance<=30 and dx*math.sin(heading)+dz*math.cos(heading)>=distance*math.cos(math.rad(half)) then\n  unsafe=true\n end\nend\nlocal function onFloor(x,z)\n local dx,dz=x+230,z-192\n local r2=dx*dx+dz*dz\n if r2<12^2 then return false end\n if r2<=23.5^2 then return true end\n return (dx+15.155)^2+(dz+8.75)^2<=10.65^2 or\n        (dx-15.155)^2+(dz+8.75)^2<=10.65^2 or\n        dx*dx+(dz-17.5)^2<=10.65^2\nend\nlocal best,bestDist\nfor degrees=0,358,2 do\n local angle=math.rad(degrees)\n for radius=13,28 do\n  local x,z=p.x+radius*math.sin(angle),p.z+radius*math.cos(angle)\n  if onFloor(x,z) then\n   local clear=true\n   for _,cone in ipairs(cones) do\n    if math.cos(angle-cone.heading)>=math.cos(cone.half+math.asin(1.45/radius)) then\n     clear=false\n     break\n    end\n   end\n   if clear then\n    local dist=(x-player.pos.x)^2+(z-player.pos.z)^2\n    if not bestDist or dist<bestDist then best,bestDist={x=x,y=player.pos.y+.05,z=z},dist end\n   end\n  end\n end\nend\nif best then\n data.a21CannonGuide={pos=best,deadline=Now()+ms,boss=e.entityID,collider=collider}\nelse\n data.a21CannonGuide=nil\nend\nlocal s=data.a21\nif s and not s.finished and unsafe then\n local api=TensorCore.API.TensorACR\n local now=api.getAutoSimTime()\n if type(now)==\"number\" and now>0 then\n  local hit=now+e.channelTimeMax\n  api.addAutoSimPhase(\"CasterDowntime\",math.max(now,hit-2),hit,1)\n end\nend",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal b=TensorCore.mGetEntity(e.entityID)\nif not b or not b.pos or not e.channelTimeMax or e.channelTimeMax<=0 then return end\nlocal ms=math.floor((e.channelTimeMax+.65)*1000)\nlocal drawer=TensorCore.getStaticDrawer(0xD02020FF,2)\nlocal p=b.pos\nlocal player=TensorCore.mGetPlayer()\nlocal dx,dz=player.pos.x-p.x,player.pos.z-p.z\nlocal distance=math.sqrt(dx*dx+dz*dz)\nlocal collider=e.spellID==20604 or e.spellID==20605\nlocal unsafe=false\nlocal cones={}\nlocal angles={0,-72,-144,144,72}\nlocal widths={30,45,15,45,30}\nfor i=1,5 do\n local degrees,half=angles[i],widths[i]\n if e.spellID~=20595 then\n  degrees=(i-1)*72+(e.spellID==20605 and -90 or e.spellID==20607 and -18 or e.spellID==20608 and 18 or 0)\n  half=(e.spellID==20607 or e.spellID==20608) and 18 or 15\n end\n local heading=p.h+math.rad(degrees)\n cones[#cones+1]={heading=heading,half=math.rad(half),dDeg=degrees,hDeg=half}\n if not collider then drawer:addTimedCone(ms,p.x,p.y,p.z,30,math.rad(2*half),heading) end\n if distance<=30 and dx*math.sin(heading)+dz*math.cos(heading)>=distance*math.cos(math.rad(half)) then\n  unsafe=true\n end\nend\n-- Mark every safe lane (the gaps between the cones) green, for Beam and Collider Cannons.\ndo\n local iv={}\n for _,c in ipairs(cones) do\n  local s=(c.dDeg-c.hDeg)%360\n  local en=s+2*c.hDeg\n  if en>360 then\n   iv[#iv+1]={s,360}\n   iv[#iv+1]={0,en-360}\n  else\n   iv[#iv+1]={s,en}\n  end\n end\n table.sort(iv,function(a,b) return a[1]<b[1] end)\n local green=TensorCore.getStaticDrawer(0xB033FF33,2)\n local function lane(a,z)\n  green:addTimedCone(ms,p.x,p.y,p.z,30,math.rad(z-a),p.h+math.rad((a+z)/2))\n end\n local cur=0\n for _,v in ipairs(iv) do\n  if v[1]>cur+.5 then lane(cur,v[1]) end\n  if v[2]>cur then cur=v[2] end\n end\n if cur<359.5 then lane(cur,360) end\nend\nlocal function onFloor(x,z)\n local dx,dz=x+230,z-192\n local r2=dx*dx+dz*dz\n if r2<12^2 then return false end\n if r2<=23.5^2 then return true end\n return (dx+15.155)^2+(dz+8.75)^2<=10.65^2 or\n        (dx-15.155)^2+(dz+8.75)^2<=10.65^2 or\n        dx*dx+(dz-17.5)^2<=10.65^2\nend\nlocal best,bestDist\nfor degrees=0,358,2 do\n local angle=math.rad(degrees)\n for radius=13,28 do\n  local x,z=p.x+radius*math.sin(angle),p.z+radius*math.cos(angle)\n  if onFloor(x,z) then\n   local clear=true\n   for _,cone in ipairs(cones) do\n    if math.cos(angle-cone.heading)>=math.cos(cone.half+math.asin(1.45/radius)) then\n     clear=false\n     break\n    end\n   end\n   if clear then\n    local dist=(x-player.pos.x)^2+(z-player.pos.z)^2\n    if not bestDist or dist<bestDist then best,bestDist={x=x,y=player.pos.y+.05,z=z},dist end\n   end\n  end\n end\nend\nif best then\n data.a21CannonGuide={pos=best,deadline=Now()+ms,boss=e.entityID,collider=collider}\nelse\n data.a21CannonGuide=nil\nend\nlocal s=data.a21\nif s and not s.finished and unsafe then\n local api=TensorCore.API.TensorACR\n local now=api.getAutoSimTime()\n if type(now)==\"number\" and now>0 then\n  local hit=now+e.channelTimeMax\n  api.addAutoSimPhase(\"CasterDowntime\",math.max(now,hit-2),hit,1)\n end\nend",
 						conditions = 
 						{
 							
@@ -10768,100 +10768,6 @@ local tbl =
 			eventType = 2,
 			name = "Aegis Unit repeating Surface Laser puddles",
 			uuid = "41b706bf-e53a-2d83-b9e1-0075a830e49b",
-			version = 2,
-		},
-	},
-	
-	{
-		data = 
-		{
-			actions = 
-			{
-				
-				{
-					data = 
-					{
-						aType = "Lua",
-						actionLua = "self.used=true\nlocal g=data.a21CannonGuide\nlocal p=TensorCore.mGetPlayer()\nlocal boss=TensorCore.mGetEntity(g.boss)\nif not boss or not boss.alive then data.a21CannonGuide=nil;return end\nlocal ms=math.min(450,math.floor(g.deadline-Now()))\nif ms<=0 then return end\nlocal spot=g.pos\nlocal drawer=TensorCore.getStaticDrawer(0xB033FF33,2)\nif not g.circle or not drawer:updateTimedCircle(g.circle,ms,spot.x,spot.y,spot.z,1.2,0,false,true) then\n g.circle=drawer:addTimedCircle(ms,spot.x,spot.y,spot.z,1.2,0,false,true)\nend\nlocal distance=TensorCore.getDistance2d(p.pos,spot)\nif distance>1.2 then\n local h=TensorCore.getHeadingToTarget(p.pos,spot)\n local length=math.max(.1,distance-.9)\n if not g.arrow or not drawer:updateTimedArrow(g.arrow,ms,p.pos.x,spot.y,p.pos.z,h,length,.4,.8,1,0,false) then\n  g.arrow=drawer:addTimedArrow(ms,p.pos.x,spot.y,p.pos.z,h,length,.4,.8,1,0,false)\n end\nelseif g.arrow then\n Argus.deleteTimedShape(g.arrow)\n g.arrow=nil\nend",
-						conditions = 
-						{
-							
-							{
-								"72fd910c-8656-6b05-a83c-7cb513c5be5d",
-								true,
-							},
-						},
-						name = "Aegis Unit closest cannon safe spot and arrow",
-						uuid = "59d5f086-dfa9-27ae-b17b-0ed9fa8c5727",
-						version = 2.1,
-					},
-				},
-			},
-			conditions = 
-			{
-				
-				{
-					data = 
-					{
-						category = "Lua",
-						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x+230)^2+(p.pos.z-192)^2>34^2 then return false end\nlocal g=data.a21CannonGuide\nreturn p.incombat and p.alive and g~=nil and not g.collider and g.deadline>Now()",
-						name = "813P-operated Aegis Unit arena and mechanic",
-						uuid = "72fd910c-8656-6b05-a83c-7cb513c5be5d",
-						version = 3,
-					},
-				},
-			},
-			displayPath = "The Puppets' Bunker/813P-operated Aegis Unit/Draws",
-			name = "Aegis Unit closest cannon safe spot and arrow",
-			throttleTime = 125,
-			uuid = "5ee64429-f0b6-4593-8b9d-1cb570b8de07",
-			version = 2,
-		},
-	},
-	
-	{
-		data = 
-		{
-			actions = 
-			{
-				
-				{
-					data = 
-					{
-						aType = "Lua",
-						actionLua = "self.used=true\nlocal g=data.a21CannonGuide\nlocal player=TensorCore.mGetPlayer()\nlocal spot=g.pos\nlocal drawer=TensorCore.getStaticDrawer(0xB033FF33,2)\nlocal flags=Argus2.RenderFlags.FLAG_WARP_TERRAIN\ndrawer:addCircle(spot.x,spot.y,spot.z,1.2,false,flags)\nif g.arrived then return end\nlocal distance=TensorCore.getDistance2d(player.pos,spot)\nif distance<=1.2 then\n g.arrived=true\n return\nend\nlocal h=TensorCore.getHeadingToTarget(player.pos,spot)\ndrawer:addArrow(player.pos.x,spot.y,player.pos.z,h,math.max(.1,distance-.9),.4,.8,1,false,flags)",
-						conditions = 
-						{
-							
-							{
-								"125639d7-c772-a76e-92be-4903169fb538",
-								true,
-							},
-						},
-						name = "Aegis Unit Collider Cannons closest safe arrow",
-						uuid = "23a6188a-4f13-f728-b587-7bff5b9967db",
-						version = 2.1,
-					},
-				},
-			},
-			conditions = 
-			{
-				
-				{
-					data = 
-					{
-						category = "Lua",
-						conditionLua = "local g=data.a21CannonGuide\nif not g or not g.collider or g.deadline<=Now() then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x+230)^2+(p.pos.z-192)^2>34^2 then return false end\nreturn p.alive and p.incombat",
-						name = "813P-operated Aegis Unit arena and mechanic",
-						uuid = "125639d7-c772-a76e-92be-4903169fb538",
-						version = 3,
-					},
-				},
-			},
-			displayPath = "The Puppets' Bunker/813P-operated Aegis Unit/Draws",
-			eventType = 12,
-			name = "Aegis Unit Collider Cannons closest safe arrow",
-			uuid = "e5a96a5a-e04c-7c83-a5b7-ce04f769e704",
 			version = 2,
 		},
 	},
