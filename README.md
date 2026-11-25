@@ -248,6 +248,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Improved the 905P-operated Heavy Artillery Unit's Operation: Activate Laser Turret in The Puppets' Bunker: the lasers are now drawn about 8 seconds earlier, as soon as the turret starts casting, with the lower lasers in red and the safe parts of each upper-laser sector in green, moving inward and outward as the waves fire. (25-11-2026)
+
 - Improved the Superior Flight Units' Sliding Swipe in The Puppets' Bunker: the whole safe side is now shown in green for the next swipe and swaps as the swipes alternate left and right, instead of a safe-spot circle and arrow. (25-11-2026)
 
 - Fixed the Superior Flight Units' Sharp Turn draws in The Puppets' Bunker: the three beams now run along the edges of the unit triangle with the middle left clear, matching where the damage lands. (25-11-2026)
@@ -265,8 +267,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added Knave of Hearts Lunge guidance in The Tower at Paradigm's Breach: green squares in front of the cubes that will catch your knockback, and yellow squares for the second Lunge that turn green once the first one resolves. Squares that overlap Colossal Impact are hidden. (24-11-2026)
 
 - Improved The Tower at Paradigm's Breach spread circles (Magic Artillery) so they follow the player they are on until they resolve, and drew Light Leap's danger circles in red. (24-11-2026)
-
-- Improved The Tower at Paradigm's Breach timing: Colossal Impact's side lines now appear once the central line has resolved, and the second Magic Barrage set shows green until the first set resolves, then turns red. (24-11-2026)
 
 ### Trials
 

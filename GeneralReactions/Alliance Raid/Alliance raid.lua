@@ -11594,6 +11594,102 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal o=TensorCore.mGetEntity(e.entityID)\nif not o or not o.pos then return end\nlocal lower=(e.a2==16 and e.a3==32)\nlocal ang=math.atan2(o.pos.x-200,o.pos.z+100)\nlocal step=math.pi/3\nang=math.floor(ang/step+0.5)*step\nlocal now=Now()\nlocal H=_G.PB_HAU\nif not H or now-H.t>45000 then H={t=now,act=now+9680,lower={},upper={}} _G.PB_HAU=H end\nlocal list=lower and H.lower or H.upper\nfor _,a in ipairs(list) do if math.abs(a-ang)<0.1 then return end end\nlist[#list+1]=ang",
+						conditions = 
+						{
+							
+							{
+								"ada966b8-1096-661b-949c-28d8eaae1670",
+								true,
+							},
+						},
+						name = "Record laser angles",
+						uuid = "4ad020a9-d48d-9671-918e-87033f902bf4",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x-200)^2+(p.pos.z+100)^2>40^2 then return false end\nlocal e=eventArgs\nif not e or e.entityContentID~=2007457 then return false end\nreturn (e.a2==16 and e.a3==32) or (e.a2==128 and e.a3==256)\n",
+						dequeueIfLuaFalse = true,
+						name = "Laser Turret lasers set",
+						uuid = "ada966b8-1096-661b-949c-28d8eaae1670",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/Heavy Artillery Unit/Draws",
+			eventType = 19,
+			name = "Heavy Artillery Unit Laser Turret record",
+			uuid = "ccfc13b6-1bbb-eebc-920a-5b133b3288d3",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local H=_G.PB_HAU\nif not H then return end\nlocal now=Now()\nlocal el=now-H.act\nif el>12000 then _G.PB_HAU=nil return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then return end\nlocal y=p.pos.y\nlocal red=TensorCore.getStaticDrawer(0x703333FF,2)\nlocal green=TensorCore.getStaticDrawer(0x6033FF33,2)\nlocal third=math.pi/3\nlocal R=34\n-- lower lasers: danger from the warning until the repeats finish\nif el<3600 then\n for _,a in ipairs(H.lower) do red:addCone(200,y,-100,40,third,a,false) end\nend\n-- upper laser waves: inner/outer radius and the window each wave is dangerous (ms after activation)\nlocal waves={{6,16,-99999,3000},{14,23,900,5900},{21,30,3900,8900}}\nlocal cur\nfor i,w in ipairs(waves) do\n if el<w[4] then cur=i break end\nend\nfor i,w in ipairs(waves) do\n if el>=w[3] and el<w[4] then\n  for _,a in ipairs(H.upper) do red:addDonutCone(200,y,-100,w[1],w[2],third,a,false) end\n end\nend\nif cur then\n local w=waves[cur]\n for _,a in ipairs(H.upper) do\n  green:addCone(200,y,-100,w[1]-0.5,third,a,false)\n  green:addDonutCone(200,y,-100,w[2]+0.5,R,third,a,false)\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"4d12e9bd-37f3-971b-a069-497dbb793f52",
+								true,
+							},
+						},
+						name = "Draw lasers",
+						uuid = "d6dd7ada-c99c-3092-b518-b97622b4a1ff",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x-200)^2+(p.pos.z+100)^2>40^2 then return false end\nreturn _G.PB_HAU~=nil\n",
+						dequeueIfLuaFalse = true,
+						name = "Laser Turret active",
+						uuid = "4d12e9bd-37f3-971b-a069-497dbb793f52",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/Heavy Artillery Unit/Draws",
+			eventType = 12,
+			name = "Heavy Artillery Unit Laser Turret early red and green",
+			uuid = "c0499402-dd17-1fd5-8b12-5e378eae0dcd",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "The Puppets' Bunker",
 			name = "Trash ",
 			uuid = "d1952a6d-2af4-cca8-ab79-eece4bbef8ab",
