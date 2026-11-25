@@ -18,6 +18,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### UWU
 
+- Caster AutoSim now stops softening Ifrit nails at 45% HP, giving the party more room before awakening. (25-11-2026)
+
 - Black Mage's Manaward after the first nail explosion now also casts directly if the ACR is slow to use it, so it lands right after the explosion instead of several seconds late. (21-11-2026)
 
 - Vulcan Burst Surecast fallback now starts about 2 seconds earlier, so it can slot into a weave gap instead of landing just before the knockback. (21-11-2026)
@@ -35,8 +37,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added a P1 setting, on by default: in the Garuda opening, AutoSim switches to a Satin Plume tethered to you, even mid-cast. The stack-ready Spiny Plume targeting and its settings were removed. (21-11-2026)
 
 - Spiny Plume targeting switches immediately, even mid-cast, and stays quiet when turned off. (21-11-2026)
-
-- Late Garuda Satin Plume targeting (around 110) now finds the plumes and switches to them immediately, even mid-cast. (21-11-2026)
 
 ### UCOB
 
