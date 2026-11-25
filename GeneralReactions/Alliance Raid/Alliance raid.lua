@@ -15228,16 +15228,6 @@ local tbl =
 		data = 
 		{
 			displayPath = "The Tower at Paradigm's Breach/Red Girl",
-			name = "Diagnostics (temporary)",
-			uuid = "9ab27261-f1b8-64f9-9e99-11b8e9f46675",
-		},
-		objectType = "folder",
-	},
-	
-	{
-		data = 
-		{
-			displayPath = "The Tower at Paradigm's Breach/Red Girl",
 			name = "Hacking minigame",
 			uuid = "6bba3f79-e273-cb7c-824e-d4f195c6cb4b",
 		},
@@ -16214,6 +16204,1259 @@ local tbl =
 			name = "[Paradigm's Breach] Her Inflorescence Pillar Impact knockback immunity (optional)",
 			timeout = 10,
 			uuid = "da845d91-7feb-335a-ba94-d9294b97da63",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "The Orbonne Monastery",
+			uuid = "742cf5a0-f6af-c3aa-bad4-be69c09de0cc",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Orbonne Monastery",
+			name = "Mustadio",
+			uuid = "c3010154-f388-d1d6-a165-a4f97c19e802",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Orbonne Monastery/Mustadio",
+			name = "Draws",
+			uuid = "0f5b4b61-3c76-ab83-85c0-41c64f808775",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal d=TensorCore.getStaticDrawer(0x703333FF,2)\nlocal a=e.aoeID\nif a==14147 then\n d:addTimedCircle(ms,e.x,e.y,e.z,e.aoeLength,0,false,true)\nelseif a==14142 or a==14143 then\n d:addTimedCone(ms,e.x,e.y,e.z,e.aoeLength,3.6651914,e.heading,0,false,true)\nelse\n d:addTimedRect(ms,e.x,e.y,e.z,e.aoeLength,e.aoeWidth,e.heading,0,false,true)\nend\n",
+						conditions = 
+						{
+							
+							{
+								"f55b2e74-8781-a7bc-b696-70db1c155842",
+								true,
+							},
+						},
+						name = "Draw Mustadio rectangles and circles",
+						uuid = "3dab8d61-1480-c612-a879-93f2b84275e6",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=826 or not p.pos then return false end\nlocal e=eventArgs\nif not e or e.friendly then return false end\nlocal a=e.aoeID\nif not (a==14144 or a==14135 or a==14145 or a==14147 or a==14142 or a==14143) then return false end\nreturn ((e.x-p.pos.x)^2+(e.z-p.pos.z)^2<=10000) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Mustadio hazard in this arena",
+						uuid = "f55b2e74-8781-a7bc-b696-70db1c155842",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Orbonne Monastery/Mustadio/Draws",
+			eventType = 18,
+			name = "[Orbonne Monastery] Mustadio hazard draws",
+			uuid = "8b4f5eb0-61b2-599c-bc25-4d297d6597ae",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal C=TensorCore.mGetEntity(e.sourceEntityID)\nif not C or not C.pos then return end\nlocal d=TensorCore.getStaticDrawer(0x703333FF,2)\nd:addTimedRect(14300,C.pos.x,C.pos.y,C.pos.z,100,15,C.pos.h or 0,0,false,true)\n",
+						conditions = 
+						{
+							
+							{
+								"964f33bc-98ed-542a-b320-4fe218758b8f",
+								true,
+							},
+						},
+						name = "Draw Compress lane 14.5 s early",
+						uuid = "141bda2d-1826-d39c-bb58-53834622b970",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=826 or not p.pos then return false end\nlocal e=eventArgs\nif not e or e.sourceEntityContentID~=7921 or e.newTetherID~=86 then return false end\nreturn ((p.pos.x-600)^2+(p.pos.z-290)^2<=10000) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Iron Construct tether to Mustadio",
+						uuid = "964f33bc-98ed-542a-b320-4fe218758b8f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Orbonne Monastery/Mustadio/Draws",
+			eventType = 15,
+			name = "[Orbonne Monastery] Mustadio Iron Construct early warning",
+			uuid = "59d88cea-6815-99b0-a4ed-3f14ddd2a747",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal T=TensorCore.mGetEntity(e.sourceEntityID)\nif not T or not T.pos then return end\nlocal h=T.pos.h or 0\nlocal d=TensorCore.getStaticDrawer(0x703333FF,2)\n-- 30x30 square centred on the turret: start 15 behind it\nd:addTimedRect(14300,T.pos.x-15*math.sin(h),T.pos.y,T.pos.z-15*math.cos(h),30,30,h,0,false,true)",
+						conditions = 
+						{
+							
+							{
+								"2b5606a8-359b-7743-9cbf-e0e41bfb1d56",
+								true,
+							},
+						},
+						name = "Draw Satellite Beam square 14.3 s early",
+						uuid = "c56eff1b-8881-3707-a01c-3795c93470a7",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=826 or not p.pos then return false end\nlocal e=eventArgs\nif not e or e.sourceEntityContentID~=7920 or e.newTetherID~=88 then return false end\nreturn ((p.pos.x-600)^2+(p.pos.z-290)^2<=10000) and true or false",
+						dequeueIfLuaFalse = true,
+						name = "Early Turret tether to Mustadio",
+						uuid = "2b5606a8-359b-7743-9cbf-e0e41bfb1d56",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Orbonne Monastery/Mustadio/Draws",
+			eventType = 15,
+			name = "[Orbonne Monastery] Mustadio Early Turret early warning",
+			uuid = "7112cc1e-9dec-aca6-9ed0-662854c254a9",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Orbonne Monastery/Mustadio",
+			name = "AutoSim",
+			uuid = "d86ba8db-e541-c9c8-baa4-a4f08b7e3b10",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal api=TensorCore.API.TensorACR\nlocal ok,now=pcall(api.getAutoSimTime)\nif not ok or type(now)~=\"number\" or now<0 or now>40 then return end\ndata.orbSim=data.orbSim or {}\nif data.orbSim.mustadio then return end\ndata.orbSim.mustadio=true\nlocal o=now-7.7\napi.setAutoSimKillTime(281.3+o)\nfor _,t in ipairs({\"FullDowntime\",\"Stun\"}) do api.clearAutoSimPhases(t) end\napi.clearAutoSimUncertainty()\napi.addAutoSimUncertainty(0,15)\napi.addAutoSimPhase(\"FullDowntime\",99.6+o,130.7+o,1)\n",
+						conditions = 
+						{
+							
+							{
+								"c84c2354-861b-9143-aac0-8d6ec2bc350f",
+								true,
+							},
+						},
+						name = "Mustadio forecast",
+						uuid = "9ca9e9d5-99f4-0767-98d3-05b0f4e380cb",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=826 or not p.pos or not p.incombat then return false end\nlocal e=eventArgs\nif not e then return false end\nreturn (e.entityContentID==7919 and e.spellID==14139 and (p.pos.x-600)^2+(p.pos.z-290)^2<=3600) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Mustadio opening cast",
+						uuid = "c84c2354-861b-9143-aac0-8d6ec2bc350f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Orbonne Monastery/Mustadio/AutoSim",
+			eventType = 3,
+			name = "[Orbonne Monastery AutoSim] Mustadio",
+			uuid = "40ef2712-b60a-13b6-afce-950d65d32368",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player=TensorCore.mGetPlayer()\nif not player or player.localmapid~=826 or not player.pos then self.used=true; return end\ndata.trialsInitialTargets=data.trialsInitialTargets or {}\nlocal states=data.trialsInitialTargets\nlocal state=states[\"826_7919\"] or {}\nstates[\"826_7919\"]=state\nlocal current=TensorCore.mGetTarget()\nlocal label=\"[Orbonne targeting] Mustadio\"\nif state.pending then\n    if current and current.id==state.pending then\n        d(label..\" confirmed target=\"..tostring(current.id))\n        state.pending=nil\n    elseif Now()-state.requestedAt>=1500 then\n        d(label..\" request not confirmed; intended=\"..tostring(state.pending)..\" current=\"..tostring(current and current.id))\n        state.pending=nil\n    end\n    self.used=true\n    return\nend\nif player.incombat or state.done then self.used=true; return end\nlocal boss,nearest=nil,45*45\nfor _,candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=7919}) or {}) do\n    if candidate.alive and candidate.targetable and candidate.attackable and candidate.pos then\n        local dx=candidate.pos.x-player.pos.x\n        local dy=candidate.pos.y-player.pos.y\n        local dz=candidate.pos.z-player.pos.z\n        local distance=dx*dx+dy*dy+dz*dz\n        if distance<=nearest then\n            boss,nearest=candidate,distance\n        end\n    end\nend\nif not boss then\n    if not state.waitLogged then\n        d(label..\" waiting for an attackable boss within 45 yalms; current=\"..tostring(current and current.id))\n        state.waitLogged=true\n    end\n    self.used=true\n    return\nend\nstate.done=true\nif current and current.alive and current.targetable and current.attackable then\n    d(label..\" kept existing target; intended=\"..tostring(boss.id)..\" current=\"..tostring(current.id))\nelse\n    state.pending=boss.id\n    state.requestedAt=Now()\n    d(label..\" target request; intended=\"..tostring(boss.id)..\" current=\"..tostring(current and current.id))\n    Player:SetTarget(boss.id)\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"e531f152-b960-ccae-8610-d62250b5c85f",
+								true,
+							},
+						},
+						name = "Select Mustadio once",
+						uuid = "d9309e1a-0dd1-86d3-a7d2-daf361946c38",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player=TensorCore.mGetPlayer()\nif not player or player.localmapid~=826 or not player.pos then return false end\nif (player.pos.x-600)^2+(player.pos.z-290)^2>6400 then return false end\nlocal states=data.trialsInitialTargets\nlocal state=states and states[\"826_7919\"]\nreturn ((state~=nil and state.pending~=nil) or (not player.incombat and (not state or not state.done))) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Mustadio arena and initial target",
+						uuid = "e531f152-b960-ccae-8610-d62250b5c85f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Orbonne Monastery/Mustadio/AutoSim",
+			name = "Mustadio select boss at encounter start",
+			throttleTime = 500,
+			uuid = "aeb7b195-1418-7bf1-80b0-8aec0cd56082",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Orbonne Monastery",
+			name = "Agrias",
+			uuid = "4dea3b86-060f-54bf-b580-b3762fa47e9e",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Orbonne Monastery/Agrias",
+			name = "Draws",
+			uuid = "636f2fc1-2064-224a-b8c4-ba09f4cb3bb7",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal d=TensorCore.getStaticDrawer(0x703333FF,2)\nlocal a=e.aoeID\nif a==14419 then\n d:addTimedRect(ms,e.x,e.y,e.z,e.aoeLength,e.aoeWidth,e.heading,0,false,true)\nelseif a==14438 then\n d:addTimedCone(ms,e.x,e.y,e.z,e.aoeLength,1.5707963,e.heading,0,false,true)\nelseif a==14428 then\n d:addTimedDonut(ms,e.x,e.y,e.z,15,30,0,false,true)\nelse\n d:addTimedCircle(ms,e.x,e.y,e.z,e.aoeLength,0,false,true)\nend\n",
+						conditions = 
+						{
+							
+							{
+								"96fa59f8-6f4e-a031-9f3e-d265a77ba58e",
+								true,
+							},
+						},
+						name = "Draw Agrias circles and lines",
+						uuid = "d7d21ea5-49ab-3891-93fd-9869d7ed35ab",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=826 or not p.pos then return false end\nlocal e=eventArgs\nif not e or e.friendly then return false end\nlocal a=e.aoeID\nif not (a==14437 or a==14419 or a==14427 or a==14430 or a==14428 or a==14438) then return false end\nreturn ((e.x-p.pos.x)^2+(e.z-p.pos.z)^2<=10000) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Agrias hazard in this arena",
+						uuid = "96fa59f8-6f4e-a031-9f3e-d265a77ba58e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Orbonne Monastery/Agrias/Draws",
+			eventType = 18,
+			name = "[Orbonne Monastery] Agrias hazard draws",
+			uuid = "2e043670-a183-210a-b085-bc181f9f62d2",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Orbonne Monastery/Agrias",
+			name = "AutoSim",
+			uuid = "f17f4480-ecad-d0d4-91da-096f443255bb",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal api=TensorCore.API.TensorACR\nlocal ok,now=pcall(api.getAutoSimTime)\nif not ok or type(now)~=\"number\" or now<0 or now>40 then return end\ndata.orbSim=data.orbSim or {}\nif data.orbSim.agrias then return end\ndata.orbSim.agrias=true\nlocal o=now-8.2\napi.setAutoSimKillTime(282.4+o)\nfor _,t in ipairs({\"FullDowntime\",\"Stun\"}) do api.clearAutoSimPhases(t) end\napi.clearAutoSimUncertainty()\napi.addAutoSimUncertainty(0,15)\napi.addAutoSimPhase(\"FullDowntime\",197.4+o,236.3+o,1)\n",
+						conditions = 
+						{
+							
+							{
+								"7886b7b4-107b-07d6-abfe-d3e3d79a2f13",
+								true,
+							},
+						},
+						name = "Agrias forecast",
+						uuid = "c05b05e2-f43b-aa3b-b8ce-e6b7ae2b0655",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=826 or not p.pos or not p.incombat then return false end\nlocal e=eventArgs\nif not e then return false end\nreturn (e.entityContentID==7931 and e.spellID==14439 and (p.pos.x-600)^2+(p.pos.z+54)^2<=3600) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Agrias opening cast",
+						uuid = "7886b7b4-107b-07d6-abfe-d3e3d79a2f13",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Orbonne Monastery/Agrias/AutoSim",
+			eventType = 3,
+			name = "[Orbonne Monastery AutoSim] Agrias",
+			uuid = "3f7dc29c-bd5d-e9f3-a8f1-4acd789ae07d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player=TensorCore.mGetPlayer()\nif not player or player.localmapid~=826 or not player.pos then self.used=true; return end\ndata.trialsInitialTargets=data.trialsInitialTargets or {}\nlocal states=data.trialsInitialTargets\nlocal state=states[\"826_7931\"] or {}\nstates[\"826_7931\"]=state\nlocal current=TensorCore.mGetTarget()\nlocal label=\"[Orbonne targeting] Agrias\"\nif state.pending then\n    if current and current.id==state.pending then\n        d(label..\" confirmed target=\"..tostring(current.id))\n        state.pending=nil\n    elseif Now()-state.requestedAt>=1500 then\n        d(label..\" request not confirmed; intended=\"..tostring(state.pending)..\" current=\"..tostring(current and current.id))\n        state.pending=nil\n    end\n    self.used=true\n    return\nend\nif player.incombat or state.done then self.used=true; return end\nlocal boss,nearest=nil,45*45\nfor _,candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=7931}) or {}) do\n    if candidate.alive and candidate.targetable and candidate.attackable and candidate.pos then\n        local dx=candidate.pos.x-player.pos.x\n        local dy=candidate.pos.y-player.pos.y\n        local dz=candidate.pos.z-player.pos.z\n        local distance=dx*dx+dy*dy+dz*dz\n        if distance<=nearest then\n            boss,nearest=candidate,distance\n        end\n    end\nend\nif not boss then\n    if not state.waitLogged then\n        d(label..\" waiting for an attackable boss within 45 yalms; current=\"..tostring(current and current.id))\n        state.waitLogged=true\n    end\n    self.used=true\n    return\nend\nstate.done=true\nif current and current.alive and current.targetable and current.attackable then\n    d(label..\" kept existing target; intended=\"..tostring(boss.id)..\" current=\"..tostring(current.id))\nelse\n    state.pending=boss.id\n    state.requestedAt=Now()\n    d(label..\" target request; intended=\"..tostring(boss.id)..\" current=\"..tostring(current and current.id))\n    Player:SetTarget(boss.id)\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"166b8d8c-ca14-f20c-98a4-b360ddbaa861",
+								true,
+							},
+						},
+						name = "Select Agrias once",
+						uuid = "1e2f18d0-2db3-0ce4-8a18-e3df89e4a795",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player=TensorCore.mGetPlayer()\nif not player or player.localmapid~=826 or not player.pos then return false end\nif (player.pos.x-600)^2+(player.pos.z+54)^2>6400 then return false end\nlocal states=data.trialsInitialTargets\nlocal state=states and states[\"826_7931\"]\nreturn ((state~=nil and state.pending~=nil) or (not player.incombat and (not state or not state.done))) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Agrias arena and initial target",
+						uuid = "166b8d8c-ca14-f20c-98a4-b360ddbaa861",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Orbonne Monastery/Agrias/AutoSim",
+			name = "Agrias select boss at encounter start",
+			throttleTime = 500,
+			uuid = "b6660169-aaae-e38f-9f31-2dcef7b5c77d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Orbonne Monastery",
+			name = "The Thunder God",
+			uuid = "d9fdaefa-3908-bdf1-bc3e-524b5e412b66",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Orbonne Monastery/The Thunder God",
+			name = "Draws",
+			uuid = "661dbb38-ef08-9da0-bfef-c90d5e045865",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal d=TensorCore.getStaticDrawer(0x703333FF,2)\nif e.aoeID==14183 then\n d:addTimedDonut(ms,e.x,e.y,e.z,15,30,0,false,true)\nelseif e.aoeID==14182 then\n d:addTimedCircle(ms,e.x,e.y,e.z,15,0,false,true)\nelse\n d:addTimedCircle(ms,e.x,e.y,e.z,e.aoeLength,0,false,true)\nend\n",
+						conditions = 
+						{
+							
+							{
+								"045aeb71-888c-205c-aa87-8523a81b0517",
+								true,
+							},
+						},
+						name = "Draw Thunder God circles and rings",
+						uuid = "c4a3134a-58c7-fae5-bc31-28791e38c959",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=826 or not p.pos then return false end\nlocal e=eventArgs\nif not e or e.friendly then return false end\nlocal a=e.aoeID\nif not (a==14166 or a==14182 or a==14183) then return false end\nreturn ((e.x+600)^2+(e.z+600)^2<=10000) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Thunder God hazard in this arena",
+						uuid = "045aeb71-888c-205c-aa87-8523a81b0517",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Orbonne Monastery/The Thunder God/Draws",
+			eventType = 18,
+			name = "[Orbonne Monastery] Thunder God hazard draws",
+			uuid = "393586da-069b-500f-940c-f3dec2402ec6",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal C=TensorCore.mGetEntity(e.entityID)\nif not C or not C.pos then return end\nlocal base=math.floor((e.channelTimeMax or 0)*1000)\nif base<=0 then return end\nlocal x,y,z=C.pos.x,C.pos.y,C.pos.z\nlocal d=TensorCore.getStaticDrawer(0x703333FF,2)\nlocal s=e.spellID\nif s==14153 or s==14154 then\n local f=(s==14153) and 1 or -1\n local P={{12.5*f,21.7,1000},{-25*f,0,1700},{12.5*f,-21.7,2200}}\n for _,q in ipairs(P) do\n  d:addTimedCircle(base+q[3],x+q[1],y,z+q[2],15,0,false,true)\n end\nelseif s==14159 then\n d:addTimedCircle(base+300,x,y,z,26,0,false,true)\nelseif s==14160 then\n d:addTimedDonut(base+300,x,y,z,20,35,0,false,true)\nend\n",
+						conditions = 
+						{
+							
+							{
+								"981c354b-5cce-80dd-9ff8-642fb9ee3675",
+								true,
+							},
+						},
+						name = "Draw predicted Holy Sword circles, Northswain circle and Judgment Blade ring",
+						uuid = "4c8e66e8-4af1-470a-94dd-ce4bc00d50e9",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=826 or not p.pos then return false end\nlocal e=eventArgs\nif not e or e.entityContentID~=7899 then return false end\nlocal s=e.spellID\nif not (s==14153 or s==14154 or s==14159 or s==14160) then return false end\nreturn ((p.pos.x+600)^2+(p.pos.z+600)^2<=10000) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Holy Sword cast in this arena",
+						uuid = "981c354b-5cce-80dd-9ff8-642fb9ee3675",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Orbonne Monastery/The Thunder God/Draws",
+			eventType = 3,
+			name = "[Orbonne Monastery] Thunder God Holy Sword predicted hazards",
+			uuid = "171470ce-9bdd-d805-b14b-4261e8d549a1",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Orbonne Monastery/The Thunder God",
+			name = "AutoSim",
+			uuid = "6cc4acb4-f1f7-5540-896a-57cf2a3e99c8",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal api=TensorCore.API.TensorACR\nlocal ok,now=pcall(api.getAutoSimTime)\nif not ok or type(now)~=\"number\" or now<0 or now>40 then return end\ndata.orbSim=data.orbSim or {}\nif data.orbSim.thunderGod then return end\ndata.orbSim.thunderGod=true\nlocal o=now-12.1\napi.setAutoSimKillTime(382.5+o)\nfor _,t in ipairs({\"FullDowntime\",\"Stun\"}) do api.clearAutoSimPhases(t) end\napi.clearAutoSimUncertainty()\napi.addAutoSimUncertainty(0,15)\napi.addAutoSimPhase(\"FullDowntime\",138.4+o,219.3+o,1)\n",
+						conditions = 
+						{
+							
+							{
+								"f64d8279-3006-5338-b70d-d9ed4adb4abe",
+								true,
+							},
+						},
+						name = "Thunder God forecast",
+						uuid = "cf42a0f6-e9bf-9eff-82a2-f9e703268683",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=826 or not p.pos or not p.incombat then return false end\nlocal e=eventArgs\nif not e then return false end\nreturn (e.entityContentID==7899 and e.spellID==14161 and (p.pos.x+600)^2+(p.pos.z+600)^2<=3600) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Thunder God opening cast",
+						uuid = "f64d8279-3006-5338-b70d-d9ed4adb4abe",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Orbonne Monastery/The Thunder God/AutoSim",
+			eventType = 3,
+			name = "[Orbonne Monastery AutoSim] The Thunder God",
+			uuid = "c84dab76-ba23-b08d-93b4-475db692855d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player=TensorCore.mGetPlayer()\nif not player or player.localmapid~=826 or not player.pos then self.used=true; return end\ndata.trialsInitialTargets=data.trialsInitialTargets or {}\nlocal states=data.trialsInitialTargets\nlocal state=states[\"826_7899\"] or {}\nstates[\"826_7899\"]=state\nlocal current=TensorCore.mGetTarget()\nlocal label=\"[Orbonne targeting] The Thunder God\"\nif state.pending then\n    if current and current.id==state.pending then\n        d(label..\" confirmed target=\"..tostring(current.id))\n        state.pending=nil\n    elseif Now()-state.requestedAt>=1500 then\n        d(label..\" request not confirmed; intended=\"..tostring(state.pending)..\" current=\"..tostring(current and current.id))\n        state.pending=nil\n    end\n    self.used=true\n    return\nend\nif player.incombat or state.done then self.used=true; return end\nlocal boss,nearest=nil,60*60\nfor _,candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=7899}) or {}) do\n    if candidate.alive and candidate.targetable and candidate.attackable and candidate.pos then\n        local dx=candidate.pos.x-player.pos.x\n        local dy=candidate.pos.y-player.pos.y\n        local dz=candidate.pos.z-player.pos.z\n        local distance=dx*dx+dy*dy+dz*dz\n        if distance<=nearest then\n            boss,nearest=candidate,distance\n        end\n    end\nend\nif not boss then\n    if not state.waitLogged then\n        d(label..\" waiting for an attackable boss within 60 yalms; current=\"..tostring(current and current.id))\n        state.waitLogged=true\n    end\n    self.used=true\n    return\nend\nstate.done=true\nif current and current.alive and current.targetable and current.attackable then\n    d(label..\" kept existing target; intended=\"..tostring(boss.id)..\" current=\"..tostring(current.id))\nelse\n    state.pending=boss.id\n    state.requestedAt=Now()\n    d(label..\" target request; intended=\"..tostring(boss.id)..\" current=\"..tostring(current and current.id))\n    Player:SetTarget(boss.id)\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"78284118-94e7-f7a7-8145-570456c5be1d",
+								true,
+							},
+						},
+						name = "Select The Thunder God once",
+						uuid = "1b8c6e50-1063-db2b-92ee-77edea494eec",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player=TensorCore.mGetPlayer()\nif not player or player.localmapid~=826 or not player.pos then return false end\nif (player.pos.x+600)^2+(player.pos.z+600)^2>6400 then return false end\nlocal states=data.trialsInitialTargets\nlocal state=states and states[\"826_7899\"]\nreturn ((state~=nil and state.pending~=nil) or (not player.incombat and (not state or not state.done))) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Thunder God arena and initial target",
+						uuid = "78284118-94e7-f7a7-8145-570456c5be1d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Orbonne Monastery/The Thunder God/AutoSim",
+			name = "The Thunder God select boss at encounter start",
+			throttleTime = 500,
+			uuid = "3b057be0-a64f-6199-a5cd-a6ce6cdeaf8a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Orbonne Monastery",
+			name = "Dark Crusader",
+			uuid = "903ba36b-bd97-bdb2-8a71-14ce10b5f4bb",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Orbonne Monastery/Dark Crusader",
+			name = "Draws",
+			uuid = "9aed8553-7005-30b0-8f92-59c9d944057a",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal d=TensorCore.getStaticDrawer(0x703333FF,2)\nd:addTimedRect(ms,e.x,e.y,e.z,e.aoeLength,e.aoeWidth,e.heading,0,false,true)\n",
+						conditions = 
+						{
+							
+							{
+								"cc2ac63d-2077-bd47-948a-ac751d530177",
+								true,
+							},
+						},
+						name = "Draw Infernal Wave line",
+						uuid = "76aa68bd-c4b4-0779-96b5-7b6d3823fc6c",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=826 or not p.pos then return false end\nlocal e=eventArgs\nif not e or e.friendly or e.aoeID~=14209 then return false end\nreturn ((e.x+625)^2+(e.z+431)^2<=10000) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Infernal Wave in this arena",
+						uuid = "cc2ac63d-2077-bd47-948a-ac751d530177",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Orbonne Monastery/Dark Crusader/Draws",
+			eventType = 18,
+			name = "[Orbonne Monastery] Dark Crusader Infernal Wave",
+			uuid = "a758f1c1-4c4d-602b-942f-c775490184a5",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Orbonne Monastery/Dark Crusader",
+			name = "AutoSim",
+			uuid = "1db56752-1a8c-10af-bbc2-365cae6449ff",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal api=TensorCore.API.TensorACR\nlocal ok,now=pcall(api.getAutoSimTime)\nif not ok or type(now)~=\"number\" or now<0 or now>60 then return end\ndata.orbSim=data.orbSim or {}\nif data.orbSim.darkCrusader then return end\ndata.orbSim.darkCrusader=true\nlocal o=now-26.2\napi.setAutoSimKillTime(103.3+o)\nfor _,t in ipairs({\"FullDowntime\",\"Stun\"}) do api.clearAutoSimPhases(t) end\napi.clearAutoSimUncertainty()\napi.addAutoSimUncertainty(0,10)\n",
+						conditions = 
+						{
+							
+							{
+								"81ccdbd4-0277-2fc2-99c5-4073a279aef8",
+								true,
+							},
+						},
+						name = "Dark Crusader forecast",
+						uuid = "3a12485b-b032-9b0a-8527-80c95d9ca00d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=826 or not p.pos or not p.incombat then return false end\nlocal e=eventArgs\nif not e then return false end\nreturn (e.entityContentID==7950 and e.spellID==14207 and (p.pos.x+625)^2+(p.pos.z+431)^2<=6400) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Dark Crusader opening cast",
+						uuid = "81ccdbd4-0277-2fc2-99c5-4073a279aef8",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Orbonne Monastery/Dark Crusader/AutoSim",
+			eventType = 3,
+			name = "[Orbonne Monastery AutoSim] Dark Crusader",
+			uuid = "9a1ed89c-8693-af7f-acdd-14baf54ab69d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player=TensorCore.mGetPlayer()\nif not player or player.localmapid~=826 or not player.pos then self.used=true; return end\ndata.trialsInitialTargets=data.trialsInitialTargets or {}\nlocal states=data.trialsInitialTargets\nlocal state=states[\"826_7950\"] or {}\nstates[\"826_7950\"]=state\nlocal current=TensorCore.mGetTarget()\nlocal label=\"[Orbonne targeting] Dark Crusader\"\nif state.pending then\n    if current and current.id==state.pending then\n        d(label..\" confirmed target=\"..tostring(current.id))\n        state.pending=nil\n    elseif Now()-state.requestedAt>=1500 then\n        d(label..\" request not confirmed; intended=\"..tostring(state.pending)..\" current=\"..tostring(current and current.id))\n        state.pending=nil\n    end\n    self.used=true\n    return\nend\nif player.incombat or state.done then self.used=true; return end\nlocal boss,nearest=nil,45*45\nfor _,candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=7950}) or {}) do\n    if candidate.alive and candidate.targetable and candidate.attackable and candidate.pos then\n        local dx=candidate.pos.x-player.pos.x\n        local dy=candidate.pos.y-player.pos.y\n        local dz=candidate.pos.z-player.pos.z\n        local distance=dx*dx+dy*dy+dz*dz\n        if distance<=nearest then\n            boss,nearest=candidate,distance\n        end\n    end\nend\nif not boss then\n    if not state.waitLogged then\n        d(label..\" waiting for an attackable boss within 45 yalms; current=\"..tostring(current and current.id))\n        state.waitLogged=true\n    end\n    self.used=true\n    return\nend\nstate.done=true\nif current and current.alive and current.targetable and current.attackable then\n    d(label..\" kept existing target; intended=\"..tostring(boss.id)..\" current=\"..tostring(current.id))\nelse\n    state.pending=boss.id\n    state.requestedAt=Now()\n    d(label..\" target request; intended=\"..tostring(boss.id)..\" current=\"..tostring(current and current.id))\n    Player:SetTarget(boss.id)\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"b71c4400-f4ea-e914-bf30-1a4d097b23d4",
+								true,
+							},
+						},
+						name = "Select Dark Crusader once",
+						uuid = "e2128e26-b960-1bc2-8045-bdbe18dc453f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player=TensorCore.mGetPlayer()\nif not player or player.localmapid~=826 or not player.pos then return false end\nif (player.pos.x+625)^2+(player.pos.z+431)^2>6400 then return false end\nlocal states=data.trialsInitialTargets\nlocal state=states and states[\"826_7950\"]\nreturn ((state~=nil and state.pending~=nil) or (not player.incombat and (not state or not state.done))) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Dark Crusader arena and initial target",
+						uuid = "b71c4400-f4ea-e914-bf30-1a4d097b23d4",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Orbonne Monastery/Dark Crusader/AutoSim",
+			name = "Dark Crusader select boss at encounter start",
+			throttleTime = 500,
+			uuid = "31c43606-eaf4-f8a1-bd14-bf1d32d3090b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Orbonne Monastery",
+			name = "Ultima, the High Seraph",
+			uuid = "1b5c4e39-98c1-2582-98c6-da6be9d77686",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Orbonne Monastery/Ultima, the High Seraph",
+			name = "Draws",
+			uuid = "dc8746da-4563-459a-84d4-b7cada7f9fd4",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal d=TensorCore.getStaticDrawer(0x703333FF,2)\nlocal a=e.aoeID\nif a==14510 then\n local h=e.heading or 0\n local L=e.aoeLength\n for k=0,1 do\n  local hh=h+k*1.5707963\n  d:addTimedRect(ms,e.x-L*math.sin(hh),e.y,e.z-L*math.cos(hh),L*2,e.aoeWidth,hh,0,false,true)\n end\nelseif a==14487 or a==14504 or a==14505 or a==14555 then\n d:addTimedRect(ms,e.x,e.y,e.z,e.aoeLength,e.aoeWidth,e.heading,0,false,true)\nelse\n d:addTimedCircle(ms,e.x,e.y,e.z,e.aoeLength,0,false,true)\nend\n",
+						conditions = 
+						{
+							
+							{
+								"d6785f3d-3631-0402-b9c8-d0d24d6ff3d7",
+								true,
+							},
+						},
+						name = "Draw Ultima circles, lines and crosses",
+						uuid = "2167ce1e-5f3d-b293-be3d-c79abd58ae78",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=826 or not p.pos then return false end\nlocal e=eventArgs\nif not e or e.friendly then return false end\nlocal a=e.aoeID\nlocal ok=(a==14490 or a==14491 or a==14488 or a==14539 or a==14549 or a==15480 or a==14515 or a==14514 or a==14513 or a==14526 or a==14521 or a==14487 or a==14504 or a==14505 or a==14555 or a==14510)\nif not ok then return false end\nreturn ((e.x-600)^2+(e.z+600)^2<=8100) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Ultima hazard in this arena",
+						uuid = "d6785f3d-3631-0402-b9c8-d0d24d6ff3d7",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Orbonne Monastery/Ultima, the High Seraph/Draws",
+			eventType = 18,
+			name = "[Orbonne Monastery] Ultima hazard draws",
+			uuid = "5074971d-ebbe-e54e-ab1e-4f598e1b7ed6",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\n-- Edge Dominions are pushed 10 east (14494) or west (14503) by the March, then each fires a 60 long line (Ray of Light).\nlocal shift=(e.spellID==14494) and 10 or -10\nlocal list=TensorCore.getEntityGroupList('ContentID',{contentid=7664})\nif not list then return end\nlocal d=TensorCore.getStaticDrawer(0x703333FF,2)\nfor _,ent in pairs(list) do\n local pos=ent and ent.pos\n if pos and ent.visible ~= false and math.abs(pos.z+600)>=28 and math.abs(pos.x-600)<=40 then\n  d:addTimedRect(3900,pos.x+shift,pos.y,pos.z,60,10,pos.h or 0,0,false,true)\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"f6852fd5-cc91-b33c-ab6e-1410f4e2159b",
+								true,
+							},
+						},
+						name = "Draw Ray of Light lanes after the March shift",
+						uuid = "ea86b76e-0cd7-f8a2-bd95-46421e84cb71",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=826 then return false end\nlocal e=eventArgs\nif not e or e.entityContentID~=7909 then return false end\nreturn (e.spellID==14494 or e.spellID==14503) and true or false",
+						dequeueIfLuaFalse = true,
+						name = "Ultima March cast in Orbonne",
+						uuid = "f6852fd5-cc91-b33c-ab6e-1410f4e2159b",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Orbonne Monastery/Ultima, the High Seraph/Draws",
+			eventType = 2,
+			name = "[Orbonne Monastery] Ultima Ray of Light lanes after March",
+			uuid = "ce902f92-c904-7f95-bdcd-6bd132ce939a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Orbonne Monastery/Ultima, the High Seraph",
+			name = "AutoSim",
+			uuid = "4b610262-b164-3b03-84a2-2d9dc4e2a8c5",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal api=TensorCore.API.TensorACR\nlocal ok,now=pcall(api.getAutoSimTime)\nif not ok or type(now)~=\"number\" or now<0 or now>40 then return end\ndata.orbSim=data.orbSim or {}\nif data.orbSim.ultima then return end\ndata.orbSim.ultima=true\nlocal o=now-9.5\napi.setAutoSimKillTime(499.1+o)\nfor _,t in ipairs({\"FullDowntime\",\"Stun\"}) do api.clearAutoSimPhases(t) end\napi.clearAutoSimUncertainty()\napi.addAutoSimUncertainty(0,30)\napi.addAutoSimPhase(\"FullDowntime\",190+o,316.2+o,1)\n",
+						conditions = 
+						{
+							
+							{
+								"31fc2939-1a05-8766-8284-c60b34b8848a",
+								true,
+							},
+						},
+						name = "Ultima forecast",
+						uuid = "9670c90d-cdbd-858d-a932-8ef716f61975",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=826 or not p.pos or not p.incombat then return false end\nlocal e=eventArgs\nif not e then return false end\nreturn (e.entityContentID==7657 and e.spellID==14490 and (p.pos.x-600)^2+(p.pos.z+600)^2<=6400) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Ultima opening cast",
+						uuid = "31fc2939-1a05-8766-8284-c60b34b8848a",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Orbonne Monastery/Ultima, the High Seraph/AutoSim",
+			eventType = 3,
+			name = "[Orbonne Monastery AutoSim] Ultima, the High Seraph",
+			uuid = "39cc6d57-e4d0-b975-bb5f-281f28e18423",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player=TensorCore.mGetPlayer()\nif not player or player.localmapid~=826 or not player.pos then self.used=true; return end\ndata.trialsInitialTargets=data.trialsInitialTargets or {}\nlocal states=data.trialsInitialTargets\nlocal state=states[\"826_7657\"] or {}\nstates[\"826_7657\"]=state\nlocal current=TensorCore.mGetTarget()\nlocal label=\"[Orbonne targeting] Ultima\"\nif state.pending then\n    if current and current.id==state.pending then\n        d(label..\" confirmed target=\"..tostring(current.id))\n        state.pending=nil\n    elseif Now()-state.requestedAt>=1500 then\n        d(label..\" request not confirmed; intended=\"..tostring(state.pending)..\" current=\"..tostring(current and current.id))\n        state.pending=nil\n    end\n    self.used=true\n    return\nend\nif player.incombat or state.done then self.used=true; return end\nlocal boss,nearest=nil,60*60\nfor _,candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=7657}) or {}) do\n    if candidate.alive and candidate.targetable and candidate.attackable and candidate.pos then\n        local dx=candidate.pos.x-player.pos.x\n        local dy=candidate.pos.y-player.pos.y\n        local dz=candidate.pos.z-player.pos.z\n        local distance=dx*dx+dy*dy+dz*dz\n        if distance<=nearest then\n            boss,nearest=candidate,distance\n        end\n    end\nend\nif not boss then\n    if not state.waitLogged then\n        d(label..\" waiting for an attackable boss within 60 yalms; current=\"..tostring(current and current.id))\n        state.waitLogged=true\n    end\n    self.used=true\n    return\nend\nstate.done=true\nif current and current.alive and current.targetable and current.attackable then\n    d(label..\" kept existing target; intended=\"..tostring(boss.id)..\" current=\"..tostring(current.id))\nelse\n    state.pending=boss.id\n    state.requestedAt=Now()\n    d(label..\" target request; intended=\"..tostring(boss.id)..\" current=\"..tostring(current and current.id))\n    Player:SetTarget(boss.id)\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"4542bcfd-45df-b4a0-927b-effb9f46073e",
+								true,
+							},
+						},
+						name = "Select Ultima once",
+						uuid = "394a5e10-c4ba-b316-87ec-2d01b334f8db",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player=TensorCore.mGetPlayer()\nif not player or player.localmapid~=826 or not player.pos then return false end\nif (player.pos.x-600)^2+(player.pos.z+600)^2>6400 then return false end\nlocal states=data.trialsInitialTargets\nlocal state=states and states[\"826_7657\"]\nreturn ((state~=nil and state.pending~=nil) or (not player.incombat and (not state or not state.done))) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Ultima arena and initial target",
+						uuid = "4542bcfd-45df-b4a0-927b-effb9f46073e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Orbonne Monastery/Ultima, the High Seraph/AutoSim",
+			name = "Ultima select boss at encounter start",
+			throttleTime = 500,
+			uuid = "8a6cd8c3-36f5-1430-b4c3-b3bc02bcf6cf",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Alert",
+						alertDuration = 8000,
+						alertPriority = 3,
+						alertTTS = true,
+						alertText = "Acceleration Bomb: stop moving and acting when it expires (9 s)",
+						conditions = 
+						{
+							
+							{
+								"f7304c7c-634c-83d0-ae8f-2f96be767610",
+								true,
+							},
+						},
+						name = "Stop moving when the bomb expires",
+						uuid = "f775c2a0-82d8-ee2d-89c5-a776b7e5ec21",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=826 then return false end\nlocal e=eventArgs\nif not e then return false end\nreturn (e.entityID==p.id and e.newActiveAura1==133 and e.oldActiveAura1~=133) and true or false",
+						dequeueIfLuaFalse = true,
+						name = "Bomb aura 133 on me in Orbonne",
+						uuid = "f7304c7c-634c-83d0-ae8f-2f96be767610",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Orbonne Monastery/Ultima, the High Seraph",
+			eventType = 25,
+			name = "[Orbonne Monastery] Ultima Cataclysm Acceleration Bomb",
+			uuid = "b0bef198-01ed-2211-8d8f-8711554e320b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Alert",
+						alertDuration = 3000,
+						alertPriority = 3,
+						alertText = "Redemption landed on you",
+						conditions = 
+						{
+							
+							{
+								"49e645b0-709e-98f5-bb86-5131e9d9af65",
+								true,
+							},
+						},
+						name = "Redemption on me",
+						uuid = "3f57a6eb-1c03-132f-b779-04761c9d25fa",
+						version = 2.1,
+					},
+				},
+				
+				{
+					data = 
+					{
+						aType = "Alert",
+						alertDuration = 3000,
+						alertPriority = 2,
+						alertText = "Redemption: heal the tank",
+						conditions = 
+						{
+							
+							{
+								"b2577372-36dc-9263-ad2c-9fd0a80fd169",
+								true,
+							},
+						},
+						name = "Redemption on the tank",
+						uuid = "dc6e99fa-8a5f-e7df-9085-23205c69cb1f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=826 then return false end\nlocal e=eventArgs\nif not e or e.entityContentID~=7909 or e.spellID~=14506 then return false end\nreturn (e.targetID==p.id) and true or false",
+						name = "Redemption hit me",
+						uuid = "49e645b0-709e-98f5-bb86-5131e9d9af65",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=826 then return false end\nlocal e=eventArgs\nif not e or e.entityContentID~=7909 or e.spellID~=14506 or e.targetID==p.id then return false end\nlocal j=p.job\nreturn (j==24 or j==28 or j==33 or j==40) and true or false",
+						name = "Healer, Redemption on another player",
+						uuid = "b2577372-36dc-9263-ad2c-9fd0a80fd169",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Orbonne Monastery/Ultima, the High Seraph",
+			eventType = 2,
+			name = "[Orbonne Monastery] Ultima Redemption tank buster",
+			uuid = "677de663-ee0e-d096-b4d7-a2cdaf7351f0",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player then self.used = true; return end\n\nlocal contentID = 8133\nlocal label = \"[Orbonne] Halidom\"\nlocal api = TensorCore.API.TensorACR\nlocal j = player.job\nlocal eligible = player.localmapid == 826 and (j == 23 or j == 25 or j == 34)\nlocal state = AllianceOrbonneHalidomDoT\n\n-- Restore the previous entry on leaving Orbonne Monastery or changing jobs.\nif state and (not eligible or state.job ~= j) then\n    local entry = state.entry\n    if entry.enabled and entry.allowIfTarget == false and entry.allowSmartDoT == false then\n        if state.created then\n            entry.enabled = false\n            if j == state.job and api.getBlacklistEntry(contentID) then\n                local current = api.addBlacklistEntry(contentID)\n                if current == entry and current.name == label then\n                    api.deleteBlacklistEntry(contentID)\n                end\n            end\n        else\n            entry.enabled = state.enabled\n            entry.allowIfTarget = state.allowIfTarget\n            entry.allowSmartDoT = state.allowSmartDoT\n        end\n    end\n    AllianceOrbonneHalidomDoT = nil\n    state = nil\nend\n\nif eligible and not state then\n    local supported, exists = pcall(api.getBlacklistEntry, contentID)\n    if supported then\n        local ok, entry = pcall(api.addBlacklistEntry, contentID, label)\n        if ok and entry then\n            AllianceOrbonneHalidomDoT = {\n                job = j, entry = entry, created = not exists,\n                enabled = entry.enabled, allowIfTarget = entry.allowIfTarget,\n                allowSmartDoT = entry.allowSmartDoT,\n            }\n            entry.enabled = true\n            entry.allowIfTarget = false\n            entry.allowSmartDoT = false\n        end\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"2f444e1e-67cd-7507-b642-9ed7914f607a",
+								true,
+							},
+						},
+						name = "Block short-lived add DoTs",
+						uuid = "f0601d92-7313-098e-82d6-a941f84e7d17",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal state = AllianceOrbonneHalidomDoT\nlocal j = player.job\nlocal eligible = player.localmapid == 826 and (j == 23 or j == 25 or j == 34)\nif state then\n    return not eligible or j ~= state.job\nend\nreturn not not eligible",
+						dequeueIfLuaFalse = true,
+						name = "Duty and job / owned cleanup",
+						uuid = "2f444e1e-67cd-7507-b642-9ed7914f607a",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Orbonne Monastery",
+			name = "Halidom DoT blacklist (BRD/BLM/SAM)",
+			throttleTime = 500,
+			timeout = 0.5,
+			uuid = "2bd43c5a-d29f-f92b-b061-d3aca684f35c",
 			version = 2,
 		},
 	}, 
