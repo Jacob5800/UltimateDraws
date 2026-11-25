@@ -10638,7 +10638,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\nlocal e=eventArgs\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal drawer=TensorCore.getStaticDrawer(0x803333FF,2)\nif e.aoeID==20620 then\n drawer:addTimedRect(ms,e.x,e.y,e.z,60,10,e.heading,0,false,true)\nelse\n drawer:addTimedCone(ms,e.x,e.y,e.z,30,math.rad(100),e.heading)\nend",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal drawer=TensorCore.getStaticDrawer(0x803333FF,2)\nif e.aoeID==20620 then\n drawer:addTimedRect(ms,e.x,e.y,e.z,60,10,e.heading,0,false,true)\nelse\n drawer:addTimedCone(ms,e.x,e.y,e.z,30,math.rad(100),e.heading)\n -- Life's Last Song fires three 100 degree cones 120 degrees apart (every wave): the 20 degree gap after each cone is the safe lane.\n local green=TensorCore.getStaticDrawer(0xB033FF33,2)\n green:addTimedCone(ms,e.x,e.y,e.z,30,math.rad(20),e.heading+math.rad(60))\nend",
 						conditions = 
 						{
 							
@@ -10660,7 +10660,7 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 then return false end\nif not p.pos or (p.pos.x+230)^2+(p.pos.z-192)^2>34^2 then return false end\nlocal s=data.a21\nlocal id=eventArgs.aoeID\nif not (s~=nil and not s.finished and (id==20620 or id==21427)) then return false end\nlocal boss=TensorCore.mGetEntity(s.boss)\nif not boss or not boss.alive or not boss.hp or boss.hp.percent<=0 then return false end\nreturn true",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 then return false end\nif not p.pos or (p.pos.x+230)^2+(p.pos.z-192)^2>34^2 then return false end\nlocal e=eventArgs\nif not e or e.friendly then return false end\nlocal id=e.aoeID\nreturn (id==20620 or id==21427) and true or false",
 						dequeueIfLuaFalse = true,
 						name = "Aegis Unit arena and mechanic",
 						uuid = "891dbdb5-4e86-24f4-9e4f-ab1a598fe1f3",

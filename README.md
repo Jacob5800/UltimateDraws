@@ -248,6 +248,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Added green safe lanes for the 813P-operated Aegis Unit's Life's Last Song beams in The Puppets' Bunker, on every wave. The Flight Path and Life's Last Song draws now also show when the fight was joined mid-pull. (25-11-2026)
+
 - Improved the 813P-operated Aegis Unit cannons in The Puppets' Bunker: Beam Cannons and Collider Cannons now mark every safe lane green instead of showing a safe-spot arrow, and the red Beam Cannons cones are higher contrast. (25-11-2026)
 
 - Added The Orbonne Monastery: hazard draws for all five bosses (including early Compress and Satellite Beam warnings, Holy Sword circles, Ultima's Grand Cross, Plummet, Time Eruption, Embrace and Ray of Light lanes after the March), boss targeting, AutoSim kill-time and downtime estimates, an Acceleration Bomb alert and automatic hold-still for the Cataclysm maze, Redemption callouts, and a DoT blacklist for the short-lived Halidom adds on Bard, Black Mage and Samurai. (25-11-2026)
