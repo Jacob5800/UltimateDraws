@@ -11690,6 +11690,102 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal t=_G.PB_HAUPods\nif not t then t={} _G.PB_HAUPods=t end\nlocal now=Now()\nfor i=#t,1,-1 do if t[i].exp<now then table.remove(t,i) end end\nt[#t+1]={id=e.aoeID,x=e.x,y=e.y,z=e.z,h=e.heading,exp=now+ms}",
+						conditions = 
+						{
+							
+							{
+								"711d5646-8261-41ee-b3c4-504fddfda33d",
+								true,
+							},
+						},
+						name = "Record pod hazard",
+						uuid = "73d263da-4b00-2079-a97a-5303d59c7605",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x-200)^2+(p.pos.z+100)^2>40^2 then return false end\nlocal e=eventArgs\nreturn e~=nil and not e.friendly and (e.aoeID==20464 or e.aoeID==20465)\n",
+						dequeueIfLuaFalse = true,
+						name = "Pod laser or hammer",
+						uuid = "711d5646-8261-41ee-b3c4-504fddfda33d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/Heavy Artillery Unit/Draws",
+			eventType = 18,
+			name = "Heavy Artillery Unit pod hazards record",
+			uuid = "cb1678e6-664f-3fb1-8c4a-6ac71d7496d6",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local t=_G.PB_HAUPods\nif not t or #t==0 then return end\nlocal now=Now()\nlocal live=false\nfor i=#t,1,-1 do\n if t[i].exp<now then table.remove(t,i) else live=true end\nend\nif not live then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then return end\nlocal flags=Argus2.RenderFlags\nlocal channel=Argus2.getNextUnusedChannel(true)\nif not channel or channel==0 then return end\nlocal baseFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUSION_BASE\nlocal maskFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUDE\nlocal mask=TensorCore.getStaticDrawer(0xFFFFFFFF,0,channel,maskFlags)\nlocal safe=TensorCore.getStaticDrawer(0x5000FF00,1,channel,baseFlags)\nsafe:addCircle(200,p.pos.y,-100,31,false,baseFlags)\nfor _,h in ipairs(t) do\n if h.id==20464 then\n  mask:addRect(h.x,h.y,h.z,60,12,h.h,false,maskFlags)\n else\n  mask:addCircle(h.x,h.y,h.z,18,false,maskFlags)\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"769e0c7e-6952-37c8-a06c-432436bc55ea",
+								true,
+							},
+						},
+						name = "Draw safe area",
+						uuid = "048fd00e-6c81-9b85-a389-ea9fb0e65476",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x-200)^2+(p.pos.z+100)^2>40^2 then return false end\nreturn _G.PB_HAUPods~=nil and #_G.PB_HAUPods>0\n",
+						dequeueIfLuaFalse = true,
+						name = "Pod hazards active",
+						uuid = "769e0c7e-6952-37c8-a06c-432436bc55ea",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Puppets' Bunker/Heavy Artillery Unit/Draws",
+			eventType = 12,
+			name = "Heavy Artillery Unit pod safe area (green)",
+			uuid = "6e7283e5-f4ec-8f4c-b357-1a8826c3f3be",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "The Puppets' Bunker",
 			name = "Trash ",
 			uuid = "d1952a6d-2af4-cca8-ab79-eece4bbef8ab",
@@ -11889,7 +11985,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\nlocal s=data.compoundSpin\nlocal p=TensorCore.mGetPlayer()\nlocal now=Now()\nlocal nextHit=s.expires\nfor _,c in ipairs(s.casts) do\n if c.deadline>now then nextHit=math.min(nextHit,c.deadline) end\nend\nif s.dirty or s.nextHit~=nextHit then\n s.dirty=false\n s.nextHit=nextHit\n local x,z,best\n -- Require clearance from all remaining sweeps. If no common spot exists,\n -- solve the first wave on its own and recalculate as soon as it resolves.\n for pass=1,2 do\n  for cx=172,228,2 do\n   for cz=-728,-672,2 do\n    local safe=true\n    for _,c in ipairs(s.casts) do\n     if c.deadline>now and (pass==1 or c.deadline<=nextHit+250) then\n      local dx,dz=cx-c.x,cz-c.z\n      local forward=dx*c.sin+dz*c.cos\n      local across=dx*c.cos-dz*c.sin\n      if forward>=-2 and forward<=82 and math.abs(across)<=77 then\n       safe=false\n       break\n      end\n     end\n    end\n    if safe then\n     local distance=(cx-p.pos.x)^2+(cz-p.pos.z)^2\n     if not best or distance<best then x,z,best=cx,cz,distance end\n    end\n   end\n  end\n  if best then break end\n end\n s.destination=x and {x=x,y=p.pos.y+.05,z=z} or nil\nend\nlocal spot=s.destination\nlocal ms=math.min(450,math.floor(nextHit-now))\nif not spot or ms<=0 then\n if s.circle then Argus.deleteTimedShape(s.circle);s.circle=nil end\n if s.arrow then Argus.deleteTimedShape(s.arrow);s.arrow=nil end\n return\nend\nlocal drawer=TensorCore.getStaticDrawer(0xB033FF33,2)\nif not s.circle or not drawer:updateTimedCircle(s.circle,ms,spot.x,spot.y,spot.z,1.25,0,false,true) then\n s.circle=drawer:addTimedCircle(ms,spot.x,spot.y,spot.z,1.25,0,false,true)\nend\nlocal distance=TensorCore.getDistance2d(p.pos,spot)\nif distance>1.25 then\n local h=TensorCore.getHeadingToTarget(p.pos,spot)\n local length=math.max(.1,distance-.9)\n if not s.arrow or not drawer:updateTimedArrow(s.arrow,ms,p.pos.x,spot.y,p.pos.z,h,length,.4,.8,1,0,false) then\n  s.arrow=drawer:addTimedArrow(ms,p.pos.x,spot.y,p.pos.z,h,length,.4,.8,1,0,false)\n end\nelseif s.arrow then\n Argus.deleteTimedShape(s.arrow)\n s.arrow=nil\nend",
+						actionLua = "self.used=true\nlocal s=data.compoundSpin\nlocal p=TensorCore.mGetPlayer()\nlocal now=Now()\nlocal nextHit=s.expires\nfor _,c in ipairs(s.casts) do\n if c.deadline>now then nextHit=math.min(nextHit,c.deadline) end\nend\nif s.dirty or s.nextHit~=nextHit then\n s.dirty=false\n s.nextHit=nextHit\n local x,z,best\n -- Require clearance from all remaining sweeps. If no common spot exists,\n -- solve the first wave on its own and recalculate as soon as it resolves.\n for pass=1,2 do\n  for cx=172,228,2 do\n   for cz=-728,-672,2 do\n    local safe=true\n    for _,c in ipairs(s.casts) do\n     if c.deadline>now and (pass==1 or c.deadline<=nextHit+250) then\n      local dx,dz=cx-c.x,cz-c.z\n      local forward=dx*c.sin+dz*c.cos\n      local across=dx*c.cos-dz*c.sin\n      if forward>=-2 and forward<=82 and math.abs(across)<=77 then\n       safe=false\n       break\n      end\n     end\n    end\n    if safe then\n     local distance=(cx-p.pos.x)^2+(cz-p.pos.z)^2\n     if not best or distance<best then x,z,best=cx,cz,distance end\n    end\n   end\n  end\n  if best then s.pass=pass break end\n end\n s.destination=x and {x=x,y=p.pos.y+.05,z=z} or nil\n if not x then s.pass=2 end\nend\n-- Safe area in green: the arena minus every live sweep (only the first wave when no spot clears both).\nlocal flags=Argus2.RenderFlags\nlocal channel=Argus2.getNextUnusedChannel(true)\nif not channel or channel==0 then return end\nlocal baseFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUSION_BASE\nlocal maskFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUDE\nlocal mask=TensorCore.getStaticDrawer(0xFFFFFFFF,0,channel,maskFlags)\nlocal safe=TensorCore.getStaticDrawer(0x5000FF00,1,channel,baseFlags)\nlocal y=p.pos.y\nsafe:addRect(200,y,-728,56,56,0,false,baseFlags)\nfor _,c in ipairs(s.casts) do\n if c.deadline>now and (s.pass~=2 or c.deadline<=nextHit+250) then\n  mask:addRect(c.x-2*c.sin,y,c.z-2*c.cos,84,154,math.atan2(c.sin,c.cos),false,maskFlags)\n end\nend",
 						conditions = 
 						{
 							
@@ -11898,7 +11994,7 @@ local tbl =
 								true,
 							},
 						},
-						name = "The Compound Incongruous Spin green spot and arrow",
+						name = "The Compound Incongruous Spin safe area",
 						uuid = "9a184b31-dd9f-2aab-901e-af1dc8d52660",
 						version = 2.1,
 					},
@@ -11919,7 +12015,7 @@ local tbl =
 				},
 			},
 			displayPath = "The Puppets' Bunker/The Compound/Draws",
-			name = "The Compound Incongruous Spin green spot and arrow",
+			name = "The Compound Incongruous Spin safe area",
 			throttleTime = 125,
 			uuid = "362e5c1b-f63b-a95b-b80f-f0bee5a2cf1a",
 			version = 2,
@@ -11936,7 +12032,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\nlocal s=data.compoundBlade\nlocal p=TensorCore.mGetPlayer()\nlocal spot=s.destination\nlocal drawer=TensorCore.getStaticDrawer(0xB033FF33,2)\nlocal flags=Argus2.RenderFlags.FLAG_WARP_TERRAIN\nif not s.prime then drawer:addCircle(spot.x,spot.y,spot.z,1.25,false,flags) end\nlocal distance=TensorCore.getDistance2d(p.pos,spot)\nif distance<=1.15 then\n s.arrived=true\nelseif distance>=1.6 then\n s.arrived=false\nend\nif not s.arrived then\n local heading=TensorCore.getHeadingToTarget(p.pos,spot)\n drawer:addArrow(p.pos.x,spot.y,p.pos.z,heading,math.max(.1,distance-.9),.4,.8,1,false,flags)\nend",
+						actionLua = "self.used=true\nlocal s=data.compoundBlade\nlocal p=TensorCore.mGetPlayer()\nif s.mechanical or s.prime then\n -- Mechanical Dissection / Decapitation: show the whole safe area in green (arena minus every live sweep).\n local now=Now()\n local flags=Argus2.RenderFlags\n local channel=Argus2.getNextUnusedChannel(true)\n if channel and channel~=0 then\n  local baseFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUSION_BASE\n  local maskFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUDE\n  local mask=TensorCore.getStaticDrawer(0xFFFFFFFF,0,channel,maskFlags)\n  local safe=TensorCore.getStaticDrawer(0x5000FF00,1,channel,baseFlags)\n  local y=p.pos.y\n  safe:addRect(200,y,-728,56,56,0,false,baseFlags)\n  for _,c in ipairs(s.casts) do\n   if c.deadline>now then\n    if c.kind==\"rect\" then\n     mask:addRect(c.x,y,c.z,c.length,c.radius*2,math.atan2(c.sin,c.cos),false,maskFlags)\n    elseif c.kind==\"circle\" then\n     mask:addCircle(c.x,y,c.z,c.radius,false,maskFlags)\n    else\n     mask:addDonut(c.x,y,c.z,c.inner,c.radius,false,maskFlags)\n    end\n   end\n  end\n end\n if s.prime and not s.mechanical then\n  -- Prime Blade: dangerous areas red.\n  local redDrawer=TensorCore.getStaticDrawer(0x703333FF,2)\n  local rf=flags.FLAG_WARP_TERRAIN\n  for _,c in ipairs(s.casts) do\n   if c.deadline>now then\n    if c.kind==\"rect\" then\n     redDrawer:addRect(c.x,p.pos.y,c.z,c.length,c.radius*2,math.atan2(c.sin,c.cos),false,rf)\n    elseif c.kind==\"circle\" then\n     redDrawer:addCircle(c.x,p.pos.y,c.z,c.radius,false,rf)\n    else\n     redDrawer:addDonut(c.x,p.pos.y,c.z,c.inner,c.radius,false,rf)\n    end\n   end\n  end\n end\n return\nend\nlocal spot=s.destination\nlocal drawer=TensorCore.getStaticDrawer(0xB033FF33,2)\nlocal flags=Argus2.RenderFlags.FLAG_WARP_TERRAIN\nif not s.prime then drawer:addCircle(spot.x,spot.y,spot.z,1.25,false,flags) end\nlocal distance=TensorCore.getDistance2d(p.pos,spot)\nif distance<=1.15 then\n s.arrived=true\nelseif distance>=1.6 then\n s.arrived=false\nend\nif not s.arrived then\n local heading=TensorCore.getHeadingToTarget(p.pos,spot)\n drawer:addArrow(p.pos.x,spot.y,p.pos.z,heading,math.max(.1,distance-.9),.4,.8,1,false,flags)\nend",
 						conditions = 
 						{
 							
@@ -11945,7 +12041,7 @@ local tbl =
 								true,
 							},
 						},
-						name = "Compound Mechanical Dissection and Decapitation stable arrow",
+						name = "Compound Dissection, Decapitation and Prime Blade safe area",
 						uuid = "6295507a-7ffa-9155-9244-696ed1e96658",
 						version = 2.1,
 					},
@@ -11958,7 +12054,7 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local s=data.compoundBlade\nif not s or not (s.mechanical or s.prime) or not s.destination or (s.nextHit or 0)<=Now() then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nreturn p.alive and p.incombat",
+						conditionLua = "local s=data.compoundBlade\nif not s or not (s.mechanical or s.prime) or (not s.destination and not (s.mechanical or s.prime)) or (s.nextHit or 0)<=Now() then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nreturn p.alive and p.incombat",
 						name = "The Compound arena and mechanic",
 						uuid = "cc994298-347f-5787-9759-55a3d74b7634",
 						version = 3,
@@ -11967,7 +12063,7 @@ local tbl =
 			},
 			displayPath = "The Puppets' Bunker/The Compound/Draws",
 			eventType = 12,
-			name = "Compound Mechanical and Prime Blade stable arrows",
+			name = "Compound Dissection, Decapitation and Prime Blade safe area",
 			uuid = "d105771d-1d0d-672a-b5fa-584a3b27eea2",
 			version = 2,
 		},
@@ -12315,7 +12411,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\nlocal now=Now()\nlocal t,b=data.a25Towers,data.a25EarlyPods\nif t and t.drawAt and now>=t.drawAt and now<t.expires then\n t.drawAt=nil\n local drawer=TensorCore.getStaticDrawer(0x55FFFFFF,2)\n for _,tower in ipairs(t.spots) do\n  if tower.draw then Argus.deleteTimedShape(tower.draw) end\n  tower.draw=drawer:addTimedCircle(math.floor(t.expires-now),tower.x,tower.y,tower.z,5,0,false,true)\n end\nend\nif b and b.drawAt and now>=b.drawAt and now<b.deadline then\n b.drawAt=nil\n local s={casts={},seen={},expires=b.deadline,prime=true,dirty=true}\n for _,caster in pairs(b.casters) do\n  local p=caster.destination or caster\n  s.casts[#s.casts+1]={kind=\"rect\",inner=0,radius=7.5,length=70,x=p.x,z=p.z,\n   sin=math.sin(p.h),cos=math.cos(p.h),deadline=b.deadline}\n end\n if #s.casts>=6 then\n  local old=data.compoundBlade\n  if old and old.primeCircle then Argus.deleteTimedShape(old.primeCircle) end\n  data.compoundBlade=s\n  b.preview=true\n end\nend",
+						actionLua = "self.used=true\nlocal now=Now()\nlocal t,b=data.a25Towers,data.a25EarlyPods\nif t and t.drawAt and now>=t.drawAt and now<t.expires then\n t.drawAt=nil\n local drawer=TensorCore.getStaticDrawer(0x8033FF33,2)\n for _,tower in ipairs(t.spots) do\n  if tower.draw then Argus.deleteTimedShape(tower.draw) end\n  tower.draw=drawer:addTimedCircle(math.floor(t.expires-now),tower.x,tower.y,tower.z,5,0,false,true)\n end\nend\nif b and b.drawAt and now>=b.drawAt and now<b.deadline then\n b.drawAt=nil\n local s={casts={},seen={},expires=b.deadline,prime=true,dirty=true}\n for _,caster in pairs(b.casters) do\n  local p=caster.destination or caster\n  s.casts[#s.casts+1]={kind=\"rect\",inner=0,radius=7.5,length=70,x=p.x,z=p.z,\n   sin=math.sin(p.h),cos=math.cos(p.h),deadline=b.deadline}\n end\n if #s.casts>=6 then\n  local old=data.compoundBlade\n  if old and old.primeCircle then Argus.deleteTimedShape(old.primeCircle) end\n  data.compoundBlade=s\n  b.preview=true\n end\nend",
 						conditions = 
 						{
 							
@@ -12629,7 +12725,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\nlocal s=data.compoundBlade\nlocal p=TensorCore.mGetPlayer()\nlocal now=Now()\nlocal nextHit=s.expires\nfor _,c in ipairs(s.casts) do\n if c.deadline>now then nextHit=math.min(nextHit,c.deadline) end\nend\nif s.dirty or s.nextHit~=nextHit then\n s.dirty=false\n s.nextHit=nextHit\n local x,z,best\n -- Require clearance from all remaining sweeps. If no common spot exists,\n -- solve the first wave on its own and recalculate as soon as it resolves.\n for pass=1,2 do\n  for cx=172,228,2 do\n   for cz=-728,-672,2 do\n    local safe=true\n    for _,c in ipairs(s.casts) do\n     if c.deadline>now and (pass==1 or c.deadline<=nextHit+250) then\n      local dx,dz=cx-c.x,cz-c.z\n      local forward=dx*c.sin+dz*c.cos\n      local across=dx*c.cos-dz*c.sin\n      local r2=dx*dx+dz*dz\n      if (c.kind==\"rect\" and forward>=-2 and forward<=c.length+2 and math.abs(across)<=c.radius+2)\n        or (c.kind==\"circle\" and r2<=(c.radius+2)^2)\n        or (c.kind==\"donut\" and r2>=(c.inner-2)^2 and r2<=(c.radius+2)^2) then\n       safe=false\n       break\n      end\n     end\n    end\n    if safe then\n     local distance=(cx-p.pos.x)^2+(cz-p.pos.z)^2\n     if not best or distance<best then x,z,best=cx,cz,distance end\n    end\n   end\n  end\n  if best then break end\n end\n s.destination=x and {x=x,y=p.pos.y+.05,z=z} or nil\n if s.prime then\n  if s.primeCircle then Argus.deleteTimedShape(s.primeCircle);s.primeCircle=nil end\n  s.arrived=nil\n  local spot=s.destination\n  local ms=math.floor(nextHit-now)\n  if spot and ms>0 then\n   local drawer=TensorCore.getStaticDrawer(0xB033FF33,2)\n   s.primeCircle=drawer:addTimedCircle(ms,spot.x,spot.y,spot.z,1.25,0,false,true,Argus2.RenderFlags.FLAG_WARP_TERRAIN)\n  end\n end\nend\nif s.mechanical or s.prime then return end\nlocal spot=s.destination\nlocal ms=math.min(450,math.floor(nextHit-now))\nif not spot or ms<=0 then\n if s.circle then Argus.deleteTimedShape(s.circle);s.circle=nil end\n if s.arrow then Argus.deleteTimedShape(s.arrow);s.arrow=nil end\n return\nend\nlocal drawer=TensorCore.getStaticDrawer(0xB033FF33,2)\nif not s.circle or not drawer:updateTimedCircle(s.circle,ms,spot.x,spot.y,spot.z,1.25,0,false,true) then\n s.circle=drawer:addTimedCircle(ms,spot.x,spot.y,spot.z,1.25,0,false,true)\nend\nlocal distance=TensorCore.getDistance2d(p.pos,spot)\nif distance>1.25 then\n local h=TensorCore.getHeadingToTarget(p.pos,spot)\n local length=math.max(.1,distance-.9)\n if not s.arrow or not drawer:updateTimedArrow(s.arrow,ms,p.pos.x,spot.y,p.pos.z,h,length,.4,.8,1,0,false) then\n  s.arrow=drawer:addTimedArrow(ms,p.pos.x,spot.y,p.pos.z,h,length,.4,.8,1,0,false)\n end\nelseif s.arrow then\n Argus.deleteTimedShape(s.arrow)\n s.arrow=nil\nend",
+						actionLua = "self.used=true\nlocal s=data.compoundBlade\nlocal p=TensorCore.mGetPlayer()\nlocal now=Now()\nlocal nextHit=s.expires\nfor _,c in ipairs(s.casts) do\n if c.deadline>now then nextHit=math.min(nextHit,c.deadline) end\nend\nif s.dirty or s.nextHit~=nextHit then\n s.dirty=false\n s.nextHit=nextHit\n local x,z,best\n -- Require clearance from all remaining sweeps. If no common spot exists,\n -- solve the first wave on its own and recalculate as soon as it resolves.\n for pass=1,2 do\n  for cx=172,228,2 do\n   for cz=-728,-672,2 do\n    local safe=true\n    for _,c in ipairs(s.casts) do\n     if c.deadline>now and (pass==1 or c.deadline<=nextHit+250) then\n      local dx,dz=cx-c.x,cz-c.z\n      local forward=dx*c.sin+dz*c.cos\n      local across=dx*c.cos-dz*c.sin\n      local r2=dx*dx+dz*dz\n      if (c.kind==\"rect\" and forward>=-2 and forward<=c.length+2 and math.abs(across)<=c.radius+2)\n        or (c.kind==\"circle\" and r2<=(c.radius+2)^2)\n        or (c.kind==\"donut\" and r2>=(c.inner-2)^2 and r2<=(c.radius+2)^2) then\n       safe=false\n       break\n      end\n     end\n    end\n    if safe then\n     local distance=(cx-p.pos.x)^2+(cz-p.pos.z)^2\n     if not best or distance<best then x,z,best=cx,cz,distance end\n    end\n   end\n  end\n  if best then break end\n end\n s.destination=x and {x=x,y=p.pos.y+.05,z=z} or nil\n if s.prime then\n  if s.primeCircle then Argus.deleteTimedShape(s.primeCircle);s.primeCircle=nil end\n  s.arrived=nil\n end\nend\nif s.mechanical or s.prime then return end\nlocal spot=s.destination\nlocal ms=math.min(450,math.floor(nextHit-now))\nif not spot or ms<=0 then\n if s.circle then Argus.deleteTimedShape(s.circle);s.circle=nil end\n if s.arrow then Argus.deleteTimedShape(s.arrow);s.arrow=nil end\n return\nend\nlocal drawer=TensorCore.getStaticDrawer(0xB033FF33,2)\nif not s.circle or not drawer:updateTimedCircle(s.circle,ms,spot.x,spot.y,spot.z,1.25,0,false,true) then\n s.circle=drawer:addTimedCircle(ms,spot.x,spot.y,spot.z,1.25,0,false,true)\nend\nlocal distance=TensorCore.getDistance2d(p.pos,spot)\nif distance>1.25 then\n local h=TensorCore.getHeadingToTarget(p.pos,spot)\n local length=math.max(.1,distance-.9)\n if not s.arrow or not drawer:updateTimedArrow(s.arrow,ms,p.pos.x,spot.y,p.pos.z,h,length,.4,.8,1,0,false) then\n  s.arrow=drawer:addTimedArrow(ms,p.pos.x,spot.y,p.pos.z,h,length,.4,.8,1,0,false)\n end\nelseif s.arrow then\n Argus.deleteTimedShape(s.arrow)\n s.arrow=nil\nend",
 						conditions = 
 						{
 							

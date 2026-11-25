@@ -248,6 +248,10 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Improved The Compound and Compound 2P in The Puppets' Bunker: Mechanical Dissection and Decapitation, Incongruous Spin and Prime Blade now show the whole safe area in green instead of a green circle and arrow (Prime Blade's dangerous areas are red), and the Forced Transfer towers are marked with green circles. (25-11-2026)
+
+- Added a green safe area to the 905P-operated Heavy Artillery Unit's pod attack (R010: Laser and R030: Hammer) in The Puppets' Bunker, next to the existing red areas. (25-11-2026)
+
 - Improved the 905P-operated Heavy Artillery Unit's Operation: Activate Laser Turret in The Puppets' Bunker: the lasers are now drawn about 8 seconds earlier, as soon as the turret starts casting, with the lower lasers in red and the safe parts of each upper-laser sector in green, moving inward and outward as the waves fire. (25-11-2026)
 
 - Improved the Superior Flight Units' Sliding Swipe in The Puppets' Bunker: the whole safe side is now shown in green for the next swipe and swaps as the swipes alternate left and right, instead of a safe-spot circle and arrow. (25-11-2026)
@@ -263,10 +267,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added The Orbonne Monastery: hazard draws for all five bosses (including early Compress and Satellite Beam warnings, Holy Sword circles, Ultima's Grand Cross, Plummet, Time Eruption, Embrace and Ray of Light lanes after the March), boss targeting, AutoSim kill-time and downtime estimates, an Acceleration Bomb alert and automatic hold-still for the Cataclysm maze, Redemption callouts, and a DoT blacklist for the short-lived Halidom adds on Bard, Black Mage and Samurai. (25-11-2026)
 
 - Added Red Girl helpers in The Tower at Paradigm's Breach: red Point lance lanes with green safe areas that account for the barrier colours, green safe areas for the White/Black Wipe meteors (including two at once), a blue spot and arrow to the nearest opposite-colour wall for your Shock marker, red Diffuse Energy cones for the next hit, Wave colour callouts with repeat reminders in the hacking minigame, and blue standing spots with a green landing marker for Child's Play when the chain is on you. (24-11-2026)
-
-- Added Knave of Hearts Lunge guidance in The Tower at Paradigm's Breach: green squares in front of the cubes that will catch your knockback, and yellow squares for the second Lunge that turn green once the first one resolves. Squares that overlap Colossal Impact are hidden. (24-11-2026)
-
-- Improved The Tower at Paradigm's Breach spread circles (Magic Artillery) so they follow the player they are on until they resolve, and drew Light Leap's danger circles in red. (24-11-2026)
 
 ### Trials
 
