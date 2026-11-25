@@ -184,6 +184,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### FRU
 
+- AutoSim: Bard no longer moves on to the next intermission target by itself. It still starts on your assigned Light crystal and then follows the crystal or Ice Veil you target. (26-11-2026)
+
 - Updated the subtractive draw for all three P5 exaflare sets. The green arena now appears only while incoming exaflare lines are being cut out. (26-11-2026)
 
 - Added an optional "Exaflare draw" setting in the P5 section of the FRU settings (Standard or Subtractive). Subtractive shows only the safe area, with the incoming exaflare lines cut out of the green arena, and hides the green triangles. Standard stays the default. (23-11-2026)
@@ -201,8 +203,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Fixed the first P5 Exasquares set drawing its green safe-area shapes on the wrong side when the real side was left. The left/right callout now comes after all eight Pandora clones are known. (23-11-2026)
 
 - AutoSim intermission targeting now starts on your own assigned Light crystal, found from your party slot and waymark. Ranged DPS then move on to the other Light crystals and finally the middle Ice Veil by themselves, while melee keep following their own target. Bard, Black Mage, Samurai and Reaper temporarily blacklist DoTs on the small crystals; the middle one stays allowed. The optional ACR3 crystal auto-target and side crystal AoE control now find the crystals correctly. (23-11-2026)
-
-- Removed three empty folders from LPDU Mits. The profile also includes Sprint for Diamond Dust outward cone baiters and moves Bard's Nature's Minne to the Hallowed Wings rewind. (23-11-2026)
 
 ### M4S
 
