@@ -184,6 +184,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### FRU
 
+- Updated the subtractive draw for all three P5 exaflare sets. The green arena now appears only while incoming exaflare lines are being cut out. (26-11-2026)
+
 - Added an optional "Exaflare draw" setting in the P5 section of the FRU settings (Standard or Subtractive). Subtractive shows only the safe area, with the incoming exaflare lines cut out of the green arena, and hides the green triangles. Standard stays the default. (23-11-2026)
 
 - P5 Polarizing Strikes: the bait rounds are now counted more reliably, so the stack-behind-bait, dodge-line and final move-out calls follow the real round. The next-bait call is also shorter so it no longer overlaps the dodge call. (23-11-2026)
@@ -201,18 +203,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - AutoSim intermission targeting now starts on your own assigned Light crystal, found from your party slot and waymark. Ranged DPS then move on to the other Light crystals and finally the middle Ice Veil by themselves, while melee keep following their own target. Bard, Black Mage, Samurai and Reaper temporarily blacklist DoTs on the small crystals; the middle one stays allowed. The optional ACR3 crystal auto-target and side crystal AoE control now find the crystals correctly. (23-11-2026)
 
 - Removed three empty folders from LPDU Mits. The profile also includes Sprint for Diamond Dust outward cone baiters and moves Bard's Nature's Minne to the Hallowed Wings rewind. (23-11-2026)
-
-- Fall of Faith Conga appears at 82. Utopian Sky has an optional Raised Sword callout for your clockspot. Non-tanks get a Go inside cue when the first cleave clears in the P1 tower knockback pattern. Added separate Party Roster clockspot previews with short green arrows and direction callouts at pull start and P2 start. The P1 preview is near max melee. The P2 preview starts at 204, uses 40% opacity, and points 11.5 yalms from center. Light Rampant opens with the curved LPDU double conga. The optional Testing puddle guide marks each next bait and guides you clear of the final drop before regrouping. Its first movement cue says Keep baiting clockwise. Diamond Dust Out Swap cues react to the personal cone and blocking icicles. One Diamond Dust setting controls the personal Frigid Stone and outward House of Light bait countdowns. The final Diamond Dust slide recalculates from your current position and checks the puddles before marking the landing. Diamond Dust lane drops and Banish III spread use the standard player-attached countdown layout. (20-11-2026)
-
-- Aligned M1/M2 Feint, R1 physical-ranged mitigation, and R2 Addle with the FRU mitigation sheet. Added party-range and boss-target checks and tightened cooldown windows. (19-11-2026)
-
-- Added a player-attached rewind countdown near the end of Crystallize Time, using the remaining Return debuff duration. (15-11-2026)
-
-- Replaced Paradise Regained tank guidance in both sets with Megaminx live cones, first-tower marking and tank arrows, aligned to the first tower. (15-11-2026)
-
-- Disable Start Combat when the pull countdown starts. (15-11-2026)
-
-- Disable AnyoneCore Prepull Helper when the pull countdown starts. (15-11-2026)
 
 ### M4S
 
