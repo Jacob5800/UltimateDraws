@@ -248,6 +248,10 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Fixed the Superior Flight Units' Sharp Turn draws in The Puppets' Bunker: the three beams now run along the edges of the unit triangle with the middle left clear, matching where the damage lands. (25-11-2026)
+
+- Fixed Hansel and Gretel's shield sides in The Tower at Paradigm's Breach disappearing when the two bosses stand too close and share the Directional Parry. (25-11-2026)
+
 - Added green safe lanes for the 813P-operated Aegis Unit's Life's Last Song beams in The Puppets' Bunker, on every wave. The Flight Path and Life's Last Song draws now also show when the fight was joined mid-pull. (25-11-2026)
 
 - Improved the 813P-operated Aegis Unit cannons in The Puppets' Bunker: Beam Cannons and Collider Cannons now mark every safe lane green instead of showing a safe-spot arrow, and the red Beam Cannons cones are higher contrast. (25-11-2026)
@@ -263,16 +267,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Improved The Tower at Paradigm's Breach timing: Colossal Impact's side lines now appear once the central line has resolved, and the second Magic Barrage set shows green until the first set resolves, then turns red. (24-11-2026)
 
 - Improved Hansel and Gretel in The Tower at Paradigm's Breach: the Upgraded Shield sides now appear as soon as the cast starts and stay up, and the Magic Bullet explosion bands are drawn as soon as the bullets appear. Orb rings now disappear when the orb hits someone, and the helper setup no longer causes Lua errors. (24-11-2026)
-
-- The Tower at Paradigm's Breach now draws rings around the dodgeable orbs (Knave of Hearts, Xun-Zi and Meng-Zi, Hansel and Gretel, Her Inflorescence) and the Knave's Spheroid Magic Barrage line. (23-11-2026)
-
-- Added The Tower at Paradigm's Breach: hazard draws for every boss, Hansel and Gretel Upgraded Shield sides (red) with the open front (green), AutoSim forecasts that treat the Red Girl hacking minigame as downtime and stun, and a DoT blacklist for the minigame targets. (23-11-2026)
-
-- Added optional Arm's Length and Surecast requests for the Knave Lunge and Pillar Impact knockbacks in The Tower at Paradigm's Breach. Both are off by default in a new Settings window. (23-11-2026)
-
-- Added Surecast for Compound 2P’s Three Parts Disdain. (23-11-2026)
-
-- Improved The World of Darkness AutoSim: Cloud of Darkness now handles both of its disappearances and the short melee gap after it returns, and kill-time estimates were updated for all four bosses. (22-11-2026)
 
 ### Trials
 
