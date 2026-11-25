@@ -11097,7 +11097,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\nlocal wave=data.a23Swipes.queue[1]\nlocal player=TensorCore.mGetPlayer()\nlocal p=player.pos\nif not wave.solved then\n wave.solved=true\n local best,bestDistance\n local sin,cos=math.sin(wave.heading),math.cos(wave.heading)\n -- Stay inside the central floor and give the swipe edge room.\n for x=-248,-212 do\n  for z=-190,-154 do\n   if (x+230)^2+(z+172)^2<=18^2 and (x-wave.x)*sin+(z-wave.z)*cos<=-2.5 then\n    local distance=(x-p.x)^2+(z-p.z)^2\n    if not bestDistance or distance<bestDistance then\n     best,bestDistance={x=x,y=p.y+.05,z=z},distance\n    end\n   end\n  end\n end\n wave.spot=best\nend\nlocal spot=wave.spot\nif not spot then return end\nlocal drawer=TensorCore.getStaticDrawer(0xB033FF33,2)\nlocal flags=Argus2.RenderFlags.FLAG_WARP_TERRAIN\ndrawer:addCircle(spot.x,spot.y,spot.z,1.2,false,flags)\nif wave.arrived then return end\nlocal distance=TensorCore.getDistance2d(p,spot)\nif distance<=1.2 then wave.arrived=true;return end\nlocal h=TensorCore.getHeadingToTarget(p,spot)\ndrawer:addArrow(p.x,spot.y,p.z,h,math.max(.1,distance-.9),.4,.8,1,false,flags)",
+						actionLua = "self.used=true\nlocal s=data.a23Swipes\nlocal wave=s and s.queue[1]\nif not wave then return end\nlocal player=TensorCore.mGetPlayer()\nif not player or not player.pos then return end\n-- Safe side of the next swipe: everything behind the swipe line (forward <= -2.5), shown as one green area.\nlocal sin,cos=math.sin(wave.heading),math.cos(wave.heading)\nlocal ox,oz=wave.x-2.5*sin,wave.z-2.5*cos\nlocal drawer=TensorCore.getStaticDrawer(0x6033FF33,2)\nlocal flags=Argus2.RenderFlags.FLAG_WARP_TERRAIN\ndrawer:addRect(ox,player.pos.y+0.05,oz,46,100,wave.heading+math.pi,false,flags)",
 						conditions = 
 						{
 							
@@ -11106,7 +11106,7 @@ local tbl =
 								true,
 							},
 						},
-						name = "Superior Flight Units progressive Sliding Swipe arrow",
+						name = "Superior Flight Units Sliding Swipe safe side",
 						uuid = "aac6ab41-6313-483b-8283-62ecf7081cdd",
 						version = 2.1,
 					},
@@ -11128,7 +11128,7 @@ local tbl =
 			},
 			displayPath = "The Puppets' Bunker/Superior Flight Units/Draws",
 			eventType = 12,
-			name = "Superior Flight Units progressive Sliding Swipe arrow",
+			name = "Superior Flight Units Sliding Swipe safe side",
 			uuid = "99bdbf84-e25d-86bd-ab62-6a5134859ee2",
 			version = 2,
 		},

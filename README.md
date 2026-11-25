@@ -248,6 +248,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Improved the Superior Flight Units' Sliding Swipe in The Puppets' Bunker: the whole safe side is now shown in green for the next swipe and swaps as the swipes alternate left and right, instead of a safe-spot circle and arrow. (25-11-2026)
+
 - Fixed the Superior Flight Units' Sharp Turn draws in The Puppets' Bunker: the three beams now run along the edges of the unit triangle with the middle left clear, matching where the damage lands. (25-11-2026)
 
 - Fixed Hansel and Gretel's shield sides in The Tower at Paradigm's Breach disappearing when the two bosses stand too close and share the Directional Parry. (25-11-2026)
@@ -265,8 +267,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Improved The Tower at Paradigm's Breach spread circles (Magic Artillery) so they follow the player they are on until they resolve, and drew Light Leap's danger circles in red. (24-11-2026)
 
 - Improved The Tower at Paradigm's Breach timing: Colossal Impact's side lines now appear once the central line has resolved, and the second Magic Barrage set shows green until the first set resolves, then turns red. (24-11-2026)
-
-- Improved Hansel and Gretel in The Tower at Paradigm's Breach: the Upgraded Shield sides now appear as soon as the cast starts and stay up, and the Magic Bullet explosion bands are drawn as soon as the bullets appear. Orb rings now disappear when the orb hits someone, and the helper setup no longer causes Lua errors. (24-11-2026)
 
 ### Trials
 
