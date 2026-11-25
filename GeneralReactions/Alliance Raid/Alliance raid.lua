@@ -17307,6 +17307,25 @@ local tbl =
 						version = 2.1,
 					},
 				},
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if data then\n    data.orbBombAt = Now()\n    data.orbBombStopped = nil\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"f7304c7c-634c-83d0-ae8f-2f96be767610",
+								true,
+							},
+						},
+						name = "Record bomb time",
+						uuid = "9636d97f-dff0-48e9-83e1-0bc220a59172",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
@@ -17408,6 +17427,207 @@ local tbl =
 			eventType = 2,
 			name = "[Orbonne Monastery] Ultima Redemption tank buster",
 			uuid = "677de663-ee0e-d096-b4d7-a2cdaf7351f0",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Misc",
+						conditions = 
+						{
+							
+							{
+								"1cd33dfc-0723-0b0f-b5d3-711b6ad757e9",
+								true,
+							},
+						},
+						name = "Stop - Hold Still",
+						stopAllActions = true,
+						stopMoving = true,
+						uuid = "2e132fa8-7227-414c-a4d8-369030353f7a",
+						version = 2.1,
+					},
+				},
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if data then data.orbBombStopped = true end\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"1cd33dfc-0723-0b0f-b5d3-711b6ad757e9",
+								true,
+							},
+						},
+						name = "Mark Stopped",
+						uuid = "1e2cbe08-7d1a-4e83-9d97-1e178ebadd9b",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not data or not data.orbBombAt or data.orbBombStopped then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=826 then return false end\nlocal t=Now()-data.orbBombAt\nreturn (t>=7900 and t<10500) and true or false",
+						dequeueIfLuaFalse = true,
+						name = "Bomb about to expire",
+						uuid = "1cd33dfc-0723-0b0f-b5d3-711b6ad757e9",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Orbonne Monastery/Ultima, the High Seraph",
+			name = "[Orbonne Monastery] Ultima Acceleration Bomb hold still",
+			throttleTime = 100,
+			timeout = 1,
+			uuid = "5220fe7a-a60f-760f-b7f8-d0b3156e3608",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Misc",
+						conditions = 
+						{
+							
+							{
+								"ae5a4c72-3e69-3828-a845-afb404f43905",
+								true,
+							},
+							
+							{
+								"20fb445c-05f6-39fd-a590-8c2d75644fd5",
+								true,
+							},
+						},
+						name = "Resume - Bomb Resolved",
+						resumeAllActions = true,
+						uuid = "064f9edf-3fa9-7021-a913-b015a9163eb2",
+						version = 2.1,
+					},
+				},
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if data then\n    data.orbBombAt = nil\n    data.orbBombStopped = nil\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"ae5a4c72-3e69-3828-a845-afb404f43905",
+								true,
+							},
+						},
+						name = "Clear bomb state",
+						uuid = "5a8e3135-7f76-d2d4-901b-2f4003d0f285",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not data or not data.orbBombAt then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=826 then return true end\nreturn (Now()-data.orbBombAt>=9400) and true or false",
+						name = "Bomb resolved or stale",
+						uuid = "ae5a4c72-3e69-3828-a845-afb404f43905",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return (data ~= nil and data.orbBombStopped == true) and true or false",
+						name = "Bomb stop active",
+						uuid = "20fb445c-05f6-39fd-a590-8c2d75644fd5",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Orbonne Monastery/Ultima, the High Seraph",
+			name = "[Orbonne Monastery] Ultima Acceleration Bomb resume",
+			throttleTime = 200,
+			timeout = 1,
+			uuid = "40ac6bd3-0844-195c-80c4-0e6b730cd0c6",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Misc",
+						conditions = 
+						{
+							
+							{
+								"5d1c6008-24bb-90a4-b06c-338308961527",
+								true,
+							},
+						},
+						name = "Release bomb stop on wipe",
+						resumeAllActions = true,
+						uuid = "58e46c0a-bd56-4e71-94ea-1fe85ab858b5",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return (eventArgs ~= nil and eventArgs.oldData ~= nil and eventArgs.oldData.orbBombStopped == true) and true or false",
+						dequeueIfLuaFalse = true,
+						name = "Owned bomb stop",
+						uuid = "5d1c6008-24bb-90a4-b06c-338308961527",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Orbonne Monastery/Ultima, the High Seraph",
+			eventType = 9,
+			name = "[Orbonne Monastery] Ultima Acceleration Bomb wipe cleanup",
+			timeout = 2,
+			uuid = "b3a93f8b-2a2b-7e82-bbd4-52ac58cb7a6f",
 			version = 2,
 		},
 	},
