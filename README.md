@@ -238,6 +238,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Added False Idol draws in The Tower at Paradigm's Breach: a green safe area for Made Magic, red and orange lanes showing the Magical Interference beams in firing order, and Lighter Note explosion circles with the next two steps previewed. The Moogle Telegraphs blacklist entries are now listed under "Ultimate Reactions Pack (Alliance Raid)". (26-11-2026)
+
 - The Tower at Paradigm's Breach now adds the attacks it handles to the Moogle Telegraphs blacklist automatically, so Moogle no longer draws over them. (26-11-2026)
 
 - Fixed Xun-Zi and Meng-Zi's Deploy Armaments in The Tower at Paradigm's Breach marking safe ground red (up to the whole arena): only the lines that deal damage are drawn now. (26-11-2026)
@@ -255,8 +257,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added The Copied Factory: boss mechanic labels and player circles for raidwides, tankbusters, spreads, stacks and Shockwave, boss AutoSim kill-time estimates, and DoT blacklists for the Small Stubby (Bard, Samurai) and Engels' Small Biped (Bard, Black Mage, Samurai). The Superior Flight Units' Sliding Swipe green safe side in The Puppets' Bunker now reaches closer to the middle. (26-11-2026)
 
 - Improved The Compound and Compound 2P in The Puppets' Bunker: Mechanical Dissection and Decapitation, Incongruous Spin and Prime Blade now show the whole safe area in green instead of a green circle and arrow (Prime Blade's dangerous areas are red), and the Forced Transfer towers are marked with green circles. (25-11-2026)
-
-- Added a green safe area to the 905P-operated Heavy Artillery Unit's pod attack (R010: Laser and R030: Hammer) in The Puppets' Bunker, next to the existing red areas. (25-11-2026)
 
 ### Trials
 

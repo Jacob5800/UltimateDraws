@@ -13107,7 +13107,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\nlocal B=MoogleTelegraphs and MoogleTelegraphs.Settings and MoogleTelegraphs.Settings.aoeIDUserBlacklist\nif not B then return end\nlocal wanted={[23552]=\"Deploy Armaments\",[23553]=\"Deploy Armaments\",[23554]=\"Deploy Armaments\",[23555]=\"Deploy Armaments\",[23557]=\"Deploy Armaments\",[23558]=\"Universal Assault\",[23670]=\"Wail\",[23671]=\"Wail\",[24229]=\"Colossal Impact\",[24230]=\"Colossal Impact\",[24231]=\"Colossal Impact\",[24235]=\"Magic Artillery Alpha\",[24239]=\"Light Leap\",[24240]=\"\",[24241]=\"Lunge\",[24245]=\"Roar\",[24611]=\"Diffuse Energy\",[24696]=\"Deploy Armaments\"}\nfor id,label in pairs(wanted) do\n if not B[id] then B[id]={label=label,source=\"The Tower at Paradigm's Breach\"} end\nend\n",
+						actionLua = "self.used=true\nlocal B=MoogleTelegraphs and MoogleTelegraphs.Settings and MoogleTelegraphs.Settings.aoeIDUserBlacklist\nif not B then return end\nlocal wanted={[23552]=\"Deploy Armaments\",[23553]=\"Deploy Armaments\",[23554]=\"Deploy Armaments\",[23555]=\"Deploy Armaments\",[23557]=\"Deploy Armaments\",[23558]=\"Universal Assault\",[23670]=\"Wail\",[23671]=\"Wail\",[24229]=\"Colossal Impact\",[24230]=\"Colossal Impact\",[24231]=\"Colossal Impact\",[24235]=\"Magic Artillery Alpha\",[24239]=\"Light Leap\",[24240]=\"\",[24241]=\"Lunge\",[24245]=\"Roar\",[24611]=\"Diffuse Energy\",[24696]=\"Deploy Armaments\"}\nlocal SOURCE=\"Ultimate Reactions Pack (Alliance Raid)\"\nfor id,label in pairs(wanted) do\n local e=B[id]\n if not e or e.source~=SOURCE then B[id]={label=label,source=SOURCE} end\nend\n",
 						conditions = 
 						{
 							
@@ -13129,7 +13129,7 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 then return false end\nlocal B=MoogleTelegraphs and MoogleTelegraphs.Settings and MoogleTelegraphs.Settings.aoeIDUserBlacklist\nif not B then return false end\nfor _,id in ipairs({23552,23553,23554,23555,23557,23558,23670,23671,24229,24230,24231,24235,24239,24240,24241,24245,24611,24696}) do\n if not B[id] then return true end\nend\nreturn false\n",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 then return false end\nlocal B=MoogleTelegraphs and MoogleTelegraphs.Settings and MoogleTelegraphs.Settings.aoeIDUserBlacklist\nif not B then return false end\nfor _,id in ipairs({23552,23553,23554,23555,23557,23558,23670,23671,24229,24230,24231,24235,24239,24240,24241,24245,24611,24696}) do\n local e=B[id]\n if not e or e.source~=\"Ultimate Reactions Pack (Alliance Raid)\" then return true end\nend\nreturn false\n",
 						dequeueIfLuaFalse = true,
 						name = "Blacklist needs update",
 						uuid = "8e39cc49-73f9-98a3-a1cc-a044eeb858c4",
@@ -16156,6 +16156,294 @@ local tbl =
 			eventType = 12,
 			name = "[Paradigm's Breach] Energy orb Scattered Magic rings",
 			uuid = "68327d1a-ba21-7310-8658-74b36fd0430b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then return end\nlocal now=Now()\nlocal list=Argus.getCurrentDirectionalAOEs() or {}\nlocal magic={}\nfor _,a in pairs(list) do\n if (a.aoeID==23510 or a.aoeID==23511) and a.startTime+a.duration*1000>now then magic[#magic+1]=a end\nend\nif #magic==0 then return end\nlocal channel=Argus2.getNextUnusedChannel(true)\nif channel==1 then channel=Argus2.getNextUnusedChannel(true) end\nif not channel or channel<=1 then return end\nlocal flags=Argus2.RenderFlags\nlocal baseFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUSION_BASE\nlocal maskFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUDE\nlocal safe=TensorCore.getStaticDrawer(0x5000FF00,1,channel,baseFlags)\nlocal mask=TensorCore.getStaticDrawer(0xFFFFFFFF,0,channel,maskFlags)\nlocal y=p.pos.y\n-- arena square centred -700,-700, half width 24.5\nsafe:addRect(-700,y,-724.5,49,49,0,false,baseFlags)\n-- cut out Made Magic and any other circle or rect hazard active at the same time\nlocal function cut(a)\n if a.startTime+a.duration*1000<=now or (a.x+700)^2+(a.z+700)^2>2500 then return end\n local L,W,ct=a.aoeLength,a.aoeWidth,a.aoeCastType\n if ct==12 and L>0 and L<=70 and W>0 and W<=40 then\n  mask:addRect(a.x,y,a.z,L,W,a.heading,false,maskFlags)\n elseif (ct==2 or ct==5 or ct==7) and L>0 and L<=30 and a.aoeType~=27 then\n  mask:addCircle(a.x,y,a.z,L,false,maskFlags)\n end\nend\nfor _,a in pairs(list) do cut(a) end\nfor _,a in pairs(Argus.getCurrentGroundAOEs() or {}) do cut(a) end\n",
+						conditions = 
+						{
+							
+							{
+								"27daf1e9-a943-6d35-b1d7-90ebf7dc7812",
+								true,
+							},
+						},
+						name = "Draw arena minus Made Magic",
+						uuid = "12697d14-4c10-fe4c-85e2-9dac3dbc2f5a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos then return false end\nreturn (p.pos.x+700)^2+(p.pos.z+700)^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "False Idol arena",
+						uuid = "27daf1e9-a943-6d35-b1d7-90ebf7dc7812",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/False Idol and Her Inflorescence/Draws",
+			eventType = 12,
+			name = "[Paradigm's Breach] False Idol Made Magic safe area (green)",
+			uuid = "2ac2dc89-d3a4-c2c7-8f44-c510c8648961",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal now=Now()\nlocal st=data.fiNotes\n-- orbs are recorded by the OnEntityAdd reaction; entity lists do not include them\nif not st then return end\nlocal hit,nxt,later\nfor id,r in pairs(st.orbs) do\n local d=0\n local done=false\n if r.t0 then\n  -- the explosions walk 6 yalms outward from the first hit about once per 1.05s\n  d=6*math.floor((now-r.t0)/1050)\n  if d>42 then done=true end\n elseif now-r.born>12000 then\n  done=true\n else\n  local o=TensorCore.mGetEntity(id)\n  if o and o.pos and Argus.isEntityVisible(id) then r.x,r.y,r.z=o.pos.x,o.pos.y,o.pos.z end\n end\n if done then\n  st.orbs[id]=nil\n else\n  if not hit then\n   hit=TensorCore.getStaticDrawer(0x903333FF,2)\n   nxt=TensorCore.getStaticDrawer(0x6000A5FF,2)\n   later=TensorCore.getStaticDrawer(0x4000FFFF,2)\n  end\n  local c=r.z\n  if r.ew then c=r.x end\n  local lo,hi=-724.5,-675.5\n  -- exaflare circles: red is the next explosion, orange and yellow the two after it\n  local first=0\n  if r.t0 then first=d/6+1 end\n  local function ring(drawer,k)\n   for _,s in ipairs({1,-1}) do\n    if k>0 or s==1 then\n     local p=c+s*6*k\n     if p>=lo and p<=hi then\n      if r.ew then drawer:addCircle(p,r.y,r.z,6,false)\n      else drawer:addCircle(r.x,r.y,p,6,false) end\n     end\n    end\n   end\n  end\n  ring(later,first+2)\n  ring(nxt,first+1)\n  ring(hit,first)\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"7019f4a4-c803-658e-b719-22fb71283b99",
+								true,
+							},
+						},
+						name = "Draw exaflare circles for recorded note orbs",
+						uuid = "b397ff8e-b21d-8b64-9d82-431f273283e3",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos then return false end\nreturn (p.pos.x+700)^2+(p.pos.z+700)^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "False Idol arena",
+						uuid = "7019f4a4-c803-658e-b719-22fb71283b99",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/False Idol and Her Inflorescence/Draws",
+			eventType = 12,
+			name = "[Paradigm's Breach] False Idol Lighter Note exaflare circles",
+			uuid = "1cf0b475-1723-217e-b8d6-cdb60bed68ed",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal st=data.fiNotes\nif not e or not st then return end\nlocal C=TensorCore.mGetEntity(e.entityID)\nif not C or not C.pos then return end\nlocal best,bd\nfor _,r in pairs(st.orbs) do\n if not r.done and not r.t0 then\n  local d=(r.x-C.pos.x)^2+(r.z-C.pos.z)^2\n  if d<64 and (not bd or d<bd) then best,bd=r,d end\n end\nend\nif best then best.x,best.z,best.t0=C.pos.x,C.pos.z,Now() end\n",
+						conditions = 
+						{
+							
+							{
+								"9d87e7b2-04bb-e9d9-9c42-3aaf8206eeba",
+								true,
+							},
+						},
+						name = "Lock the nearest orb lane",
+						uuid = "99390189-32d7-b91a-a2dc-a82509415b2c",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not eventArgs or eventArgs.spellID~=23513 then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==966) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Lighter Note first hit",
+						uuid = "9d87e7b2-04bb-e9d9-9c42-3aaf8206eeba",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/False Idol and Her Inflorescence/Draws",
+			eventType = 2,
+			name = "[Paradigm's Breach] False Idol Lighter Note first hit record",
+			uuid = "c5e48b2d-c28b-a76f-85ce-88e7f7b3998f",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal o=TensorCore.mGetEntity(e.entityID)\nif not o or not o.pos then return end\nlocal st=data.fiBeams\nif not st then st={} data.fiBeams=st end\n-- the beam fires about 8.1s after the orb is armed\nst[e.entityID]={x=o.pos.x,z=o.pos.z,fin=Now()+8100}\n",
+						conditions = 
+						{
+							
+							{
+								"5e768339-31aa-5392-abef-9a556fe9bda2",
+								true,
+							},
+						},
+						name = "Record beam position and fire time",
+						uuid = "019c0971-2e92-494c-bdad-05a02a05abef",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e or e.entityContentID~=2011497 or e.a2~=1 or e.a3~=2 then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==966) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Interference orb armed",
+						uuid = "5e768339-31aa-5392-abef-9a556fe9bda2",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/False Idol and Her Inflorescence/Draws",
+			eventType = 19,
+			name = "[Paradigm's Breach] False Idol Magical Interference orb record",
+			uuid = "46444636-d745-b820-8e91-8731a5134528",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal st=data.fiBeams\nif not st then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then return end\nlocal now=Now()\nlocal first\nfor id,b in pairs(st) do\n if now>b.fin+150 then st[id]=nil\n elseif not first or b.fin<first then first=b.fin end\nend\nif not first then data.fiBeams=nil return end\nlocal red=TensorCore.getStaticDrawer(0x803333FF,2)\nlocal later=TensorCore.getStaticDrawer(0x3000A5FF,1)\nfor _,b in pairs(st) do\n local d=(b.fin<=first+500) and red or later\n d:addRect(b.x,p.pos.y,b.z,50,10,0,false)\nend\n",
+						conditions = 
+						{
+							
+							{
+								"c1a40d9f-5872-9df6-aa3c-22e9ca11ee22",
+								true,
+							},
+						},
+						name = "Draw next beams red and later beams orange",
+						uuid = "452f8437-779f-a4f3-9631-c8d79398601b",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not data.fiBeams then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==966) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Beams pending",
+						uuid = "c1a40d9f-5872-9df6-aa3c-22e9ca11ee22",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/False Idol and Her Inflorescence/Draws",
+			eventType = 12,
+			name = "[Paradigm's Breach] False Idol Magical Interference beam lanes (red)",
+			uuid = "a753c3ff-62d0-3c83-9c0a-1f223fd8a2e6",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal m=Argus.getEntityModel(e.entityID)\nlocal o=TensorCore.mGetEntity(e.entityID)\nif not o or not o.pos then return end\nlocal st=data.fiNotes\nif not st then st={orbs={}} data.fiNotes=st end\n-- model 12686 explodes east-west, model 12687 north-south\nst.orbs[e.entityID]={ew=(m==12686),x=o.pos.x,y=o.pos.y,z=o.pos.z,born=Now()}\n",
+						conditions = 
+						{
+							
+							{
+								"795f1fa0-3f82-e09a-8ed7-b52dc10aae54",
+								true,
+							},
+						},
+						name = "Record the orb and its beam axis",
+						uuid = "804d63c9-d737-d9bd-88ec-021fbb90dba7",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e or e.entityContentID~=108 then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 then return false end\nlocal m=Argus.getEntityModel(e.entityID)\nreturn (m==12686 or m==12687) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Note orb added",
+						uuid = "795f1fa0-3f82-e09a-8ed7-b52dc10aae54",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/False Idol and Her Inflorescence/Draws",
+			eventType = 5,
+			name = "[Paradigm's Breach] False Idol Lighter Note orb record",
+			uuid = "f28ed03e-a2c6-ea7d-9d4a-de00b6bc351a",
 			version = 2,
 		},
 	},
