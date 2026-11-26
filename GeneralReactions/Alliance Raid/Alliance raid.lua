@@ -13011,7 +13011,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local S=_G.PB_AllianceSettings\nif not S then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n S={values={},folder=folder,path=folder..'AllianceRaid-ParadigmsBreach.lua'}\n local existed=FileExists(S.path)\n if existed then\n  local ok,t=pcall(FileLoad,S.path)\n  if ok and type(t)=='table' then S.values=t end\n end\n local v=S.values\n local changed=not existed\n if type(v.kbLunge)~='number' or v.kbLunge<0 or v.kbLunge>2 or v.kbLunge~=math.floor(v.kbLunge) then v.kbLunge=0 changed=true end\n if type(v.kbPillar)~='boolean' then v.kbPillar=false changed=true end\n if changed then\n  pcall(function()\n   if not FolderExists(S.folder) then FolderCreate(S.folder) end\n   FileSave(S.path,v)\n  end)\n end\n _G.PB_AllianceSettings=S\nend\nlocal v=S.values\nlocal visible=GUI:Begin(\"[Paradigm's Breach] Settings\",true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n local changed=false\n local modes={\"Off\",\"Knave Lunge\",\"Clone Lunge\"}\n local cur=GUI:Combo(\"Lunge knockback immunity\",v.kbLunge+1,modes)\n if cur and cur-1~=v.kbLunge then v.kbLunge=cur-1 changed=true end\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"Requests Arm's Length (physical jobs) or Surecast (casters and healers) shortly before the chosen Lunge. Off by default: Lunge normally knocks you into the green landing boxes, so immunity keeps you where you stand. The ability is on a 120 second cooldown, so only one of the two Lunges (about 10 seconds apart) can be covered.\")\n end\n local pillar=GUI:Checkbox(\"Pillar Impact knockback immunity##PBPillar\",v.kbPillar)\n if pillar~=v.kbPillar then v.kbPillar=pillar changed=true end\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"Requests Arm's Length or Surecast shortly before the Pillar Impact shockwave. Off by default: the knockback is part of the mechanic, so immunity keeps you beside the pillar.\")\n end\n if changed then\n  pcall(function()\n   if not FolderExists(S.folder) then FolderCreate(S.folder) end\n   FileSave(S.path,v)\n  end)\n end\nend\nGUI:End()",
+						actionLua = "local S=_G.PB_AllianceSettings\nif not S then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n S={values={},folder=folder,path=folder..'AllianceRaid-ParadigmsBreach.lua'}\n local existed=FileExists(S.path)\n if existed then\n  local ok,t=pcall(FileLoad,S.path)\n  if ok and type(t)=='table' then S.values=t end\n end\n local v=S.values\n local changed=not existed\n if type(v.kbLunge)~='number' or v.kbLunge<0 or v.kbLunge>2 or v.kbLunge~=math.floor(v.kbLunge) then v.kbLunge=0 changed=true end\n if type(v.kbPillar)~='boolean' then v.kbPillar=false changed=true end\n if changed then\n  pcall(function()\n   if not FolderExists(S.folder) then FolderCreate(S.folder) end\n   FileSave(S.path,v)\n  end)\n end\n _G.PB_AllianceSettings=S\nend\nlocal v=S.values\nlocal visible=GUI:Begin(\"[Paradigm's Breach] Settings\",true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n local changed=false\n local modes={\"Off\",\"Knave Lunge\",\"Clone Lunge\"}\n local cur=GUI:Combo(\"Lunge knockback immunity\",v.kbLunge+1,modes)\n if cur and cur-1~=v.kbLunge then v.kbLunge=cur-1 changed=true end\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"Requests Arm's Length (physical jobs) or Surecast (casters and healers) shortly before the chosen Lunge. Off by default: Lunge normally knocks you into the green landing boxes, so immunity keeps you where you stand. The ability is on a 120 second cooldown, so only one of the two Lunges (about 10 seconds apart) can be covered.\")\n end\n local pillar=GUI:Checkbox(\"Pillar Impact knockback immunity##PBPillar\",v.kbPillar)\n if pillar~=v.kbPillar then v.kbPillar=pillar changed=true end\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"Requests Arm's Length or Surecast shortly before the Pillar Impact shockwave. Off by default: the knockback is part of the mechanic, so immunity keeps you beside the pillar.\")\n end\n local coneOld=v.rgConeSafe==true\n local cone=GUI:Checkbox(\"Red Girl cones: green safe area##PBConeSafe\",coneOld)\n if cone~=coneOld then v.rgConeSafe=cone changed=true end\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"During the Diffuse Energy cone sequence, colours the arena green except the cones that fire next. The red cones stay. Only the cones are cut out, not other attacks.\")\n end\n if changed then\n  pcall(function()\n   if not FolderExists(S.folder) then FolderCreate(S.folder) end\n   FileSave(S.path,v)\n  end)\n end\nend\nGUI:End()",
 						conditions = 
 						{
 							
@@ -14985,7 +14985,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal n=data.rgDiffN\nif not n then n={} data.rgDiffN=n end\nn[e.entityID]=0\n",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal n=data.rgDiffN\nif not n then n={} data.rgDiffN=n end\nn[e.entityID]=0\n-- first cone, for the optional green safe area (4.7s cast, hit about 4.9s after the start)\nlocal C=TensorCore.mGetEntity(e.entityID)\nif not C or not C.pos then return end\nlocal cones=data.rgDiffCones\nif not cones then cones={} data.rgDiffCones=cones end\ncones[e.entityID]={x=C.pos.x,y=C.pos.y,z=C.pos.z,h=C.pos.h,fin=Now()+5100}\n",
 						conditions = 
 						{
 							
@@ -15033,7 +15033,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal n=data.rgDiffN\nif not n then return end\nlocal cnt=(n[e.entityID] or 0)+1\nn[e.entityID]=cnt\nlocal dirs=data.rgDiffDir\nlocal d=dirs and dirs[e.entityID]\nif cnt>=6 then\n n[e.entityID]=nil\n if dirs then dirs[e.entityID]=nil end\n return\nend\nif not d then return end\nlocal C=TensorCore.mGetEntity(e.entityID)\nif not C or not C.pos then return end\nlocal h=e.heading or C.pos.h or 0\nlocal red=TensorCore.getStaticDrawer(0x703333FF,2)\nred:addTimedCone(2800,C.pos.x,C.pos.y,C.pos.z,12,2.0944,h+2.0944*d,0,false,true)\n",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal n=data.rgDiffN\nif not n then return end\nlocal cnt=(n[e.entityID] or 0)+1\nn[e.entityID]=cnt\nlocal dirs=data.rgDiffDir\nlocal d=dirs and dirs[e.entityID]\nlocal cones=data.rgDiffCones\nif cnt>=6 then\n n[e.entityID]=nil\n if dirs then dirs[e.entityID]=nil end\n if cones then cones[e.entityID]=nil end\n return\nend\n-- without a known direction the green safe area would be wrong, so drop it entirely\nif not d then data.rgDiffCones=nil return end\nlocal C=TensorCore.mGetEntity(e.entityID)\nif not C or not C.pos then data.rgDiffCones=nil return end\nlocal h=e.heading or C.pos.h or 0\nlocal red=TensorCore.getStaticDrawer(0x703333FF,2)\nred:addTimedCone(2800,C.pos.x,C.pos.y,C.pos.z,12,2.0944,h+2.0944*d,0,false,true)\nif cones and cones[e.entityID] then\n cones[e.entityID]={x=C.pos.x,y=C.pos.y,z=C.pos.z,h=h+2.0944*d,fin=Now()+3000}\nend\n",
 						conditions = 
 						{
 							
@@ -15211,6 +15211,54 @@ local tbl =
 			eventType = 3,
 			name = "[Paradigm's Breach] Red Girl Generate Barrier in progress",
 			uuid = "8b5c311e-96ea-af55-a680-f1c80ccdd36c",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal cones=data.rgDiffCones\nif not cones then return end\nlocal now=Now()\nlocal act={}\nfor id,c in pairs(cones) do\n if now<c.fin then act[#act+1]=c else cones[id]=nil end\nend\nif #act==0 then data.rgDiffCones=nil return end\nlocal channel=Argus2.getNextUnusedChannel(true)\nif channel==1 then channel=Argus2.getNextUnusedChannel(true) end\nif not channel or channel<=1 then return end\nlocal flags=Argus2.RenderFlags\nlocal baseFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUSION_BASE\nlocal maskFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUDE\nlocal safe=TensorCore.getStaticDrawer(0x5000FF00,1,channel,baseFlags)\nlocal mask=TensorCore.getStaticDrawer(0xFFFFFFFF,0,channel,maskFlags)\n-- arena square centred 845,-851, half width 24.5\nsafe:addRect(845,act[1].y,-875.5,49,49,0,false,baseFlags)\nfor _,c in ipairs(act) do\n mask:addCone(c.x,c.y,c.z,12,2.0944,c.h,false,maskFlags)\nend\n",
+						conditions = 
+						{
+							
+							{
+								"4033ce5f-20ec-55e1-9086-4afc0b8f280b",
+								true,
+							},
+						},
+						name = "Draw arena minus next cones",
+						uuid = "c082a23d-4b88-1ac8-a417-4f52ae343246",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not data.rgDiffCones then return false end\nlocal S=_G.PB_AllianceSettings\nif not S or not S.values or S.values.rgConeSafe~=true then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==966) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Option on and cones pending",
+						uuid = "4033ce5f-20ec-55e1-9086-4afc0b8f280b",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Red Girl/Draws",
+			eventType = 12,
+			name = "[Paradigm's Breach] Red Girl Diffuse Energy safe area (green, optional)",
+			uuid = "d3aad8d4-5005-15a7-be3e-349daac46bc3",
 			version = 2,
 		},
 	},
