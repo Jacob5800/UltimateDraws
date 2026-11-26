@@ -14246,6 +14246,54 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then return end\nlocal now=Now()\nlocal meteor\nlocal cleaves={}\nfor _,a in pairs(Argus.getCurrentDirectionalAOEs() or {}) do\n if (a.aoeID==23647 or a.aoeID==21939) and a.startTime+a.duration*1000>now then\n  if a.aoeID==23647 then meteor=a else cleaves[#cleaves+1]=a end\n end\nend\nif not meteor then return end\n-- Uneven Footing falls off with distance: radius 21 chosen by the user (BossMod estimates 22)\nlocal DANGER,ARENA=21,24.5\nlocal x,y,z=meteor.x,p.pos.y,meteor.z\nTensorCore.getStaticDrawer(0x403333FF,2):addCircle(x,y,z,DANGER,false)\nlocal channel=Argus2.getNextUnusedChannel(true)\nif channel==1 then channel=Argus2.getNextUnusedChannel(true) end\nif not channel or channel<=1 then return end\nlocal flags=Argus2.RenderFlags\nlocal baseFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUSION_BASE\nlocal maskFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUDE\nlocal safe=TensorCore.getStaticDrawer(0x6033FF33,2,channel,baseFlags)\nlocal mask=TensorCore.getStaticDrawer(0xFFFFFFFF,0,channel,maskFlags)\nsafe:addCircle(x,y,z,ARENA,false,baseFlags)\nmask:addCircle(x,y,z,DANGER,false,maskFlags)\nfor _,c in ipairs(cleaves) do\n mask:addRect(c.x,y,c.z,c.aoeLength,c.aoeWidth,c.heading,false,maskFlags)\nend\n-- Magical Confluence orbs (radius 4), same live/moving rule as the orb ring reaction\nlocal st=data.pbOrb2\nif not st then return end\nfor _,s in ipairs(st.ids) do\n local r=st.seen[s.id]\n local o=r and TensorCore.mGetEntity(s.id)\n if o and o.alive and o.pos and not (_G.PB_OrbDone and _G.PB_OrbDone[s.id]) and (now-r.moved<=700 or (not r.ever and now-r.first<=2500)) then\n  mask:addCircle(o.pos.x,y,o.pos.z,s.rad,false,maskFlags)\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"d49b82ee-7d1f-ca3f-997f-58ab0bc82953",
+								true,
+							},
+						},
+						name = "Draw meteor and subtractive safe area",
+						uuid = "26c1cefb-acaa-63b9-8893-51a9c963ac58",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos then return false end\nreturn (p.pos.x+800)^2+(p.pos.z+955)^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "Hansel and Gretel arena",
+						uuid = "d49b82ee-7d1f-ca3f-997f-58ab0bc82953",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Hansel and Gretel/Draws",
+			eventType = 12,
+			name = "[Paradigm's Breach] Hansel and Gretel Uneven Footing meteor and safe area (green)",
+			uuid = "d60560eb-f7e9-7274-abd1-1472ac88ca38",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "The Tower at Paradigm's Breach/Hansel and Gretel",
 			name = "AutoSim",
 			uuid = "cb16bd79-b070-dee6-9624-c6b917a1a059",

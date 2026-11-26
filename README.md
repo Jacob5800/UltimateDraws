@@ -238,6 +238,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Added Hansel and Gretel's Uneven Footing meteor in The Tower at Paradigm's Breach: the meteor is shown in red, and the safe area outside it, the Breakthrough side cleave and the orbs is shown in green. (26-11-2026)
+
 - Fixed The Compound's Incongruous Spin green safe area flickering in The Puppets' Bunker, and an error that could repeat during the Compound 2P tower and laser previews. (26-11-2026)
 
 - Improved the 905P-operated Heavy Artillery Unit's Operation: Activate Laser Turret in The Puppets' Bunker: the green safe area now removes ground as soon as the next wave makes it dangerous, returns cleared ground sooner, and covers the lower side once its lasers have finished. (26-11-2026)
@@ -255,8 +257,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Fixed the Superior Flight Units' Sharp Turn draws in The Puppets' Bunker: the three beams now run along the edges of the unit triangle with the middle left clear, matching where the damage lands. (25-11-2026)
 
 - Fixed Hansel and Gretel's shield sides in The Tower at Paradigm's Breach disappearing when the two bosses stand too close and share the Directional Parry. (25-11-2026)
-
-- Added green safe lanes for the 813P-operated Aegis Unit's Life's Last Song beams in The Puppets' Bunker, on every wave. The Flight Path and Life's Last Song draws now also show when the fight was joined mid-pull. (25-11-2026)
 
 ### Trials
 
