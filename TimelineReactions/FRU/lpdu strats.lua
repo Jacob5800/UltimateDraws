@@ -11995,7 +11995,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "self.used=true\nlocal s=data.lpdu_exa_sub\nif not s or not s.bars then return end\nlocal player=TensorCore.mGetPlayer()\nif not player or player.localmapid~=1238 then return end\nlocal store=_G.LPDU_FRU_SettingsStore\nif store and store.values and store.values.LPDU_FRU_ExaflareDraw~=\"Subtractive\" then return end\nlocal now=Now()\nlocal first\nfor i=1,#s.bars do\n local t=s.bars[i].t\n if t>=now-300 and t<=now+4200 then first=i;break end\nend\nif not first then return end\nlocal channel=Argus2.getNextUnusedChannel(true)\nif type(channel)~=\"number\" or channel<0 or channel>31 then return end\nlocal flags=Argus2.RenderFlags\nlocal baseFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUSION_BASE\nlocal maskFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUDE\nlocal base=TensorCore.getStaticDrawer(0x5000FF00,0,channel,baseFlags)\nlocal mask=TensorCore.getStaticDrawer(0xFFFFFFFF,0,channel,maskFlags)\nbase:addCircle(100,0,100,20,false,baseFlags)\nfor i=first,#s.bars do\n local b=s.bars[i]\n if b.t>=now-300 and b.t<=now+4200 then\n  mask:addRect(b.x,0,b.z,5,80,b.h,false,maskFlags)\n end\nend",
+							actionLua = "self.used=true\nlocal s=data.lpdu_exa_sub\nif not s or not s.bars then return end\nlocal player=TensorCore.mGetPlayer()\nif not player or player.localmapid~=1238 then return end\nlocal store=_G.LPDU_FRU_SettingsStore\nif store and store.values and store.values.LPDU_FRU_ExaflareDraw~=\"Subtractive\" then return end\nlocal now=Now()\n-- Cut out only the next hit of each line: its first step 3 s ahead, every later step once the previous\n-- one has gone off (250 ms after the previous time, 2063 ms between steps).\nlocal function isFirst(b)\n if b.isFirst==nil then\n  local px,pz=b.x-5*math.sin(b.h),b.z-5*math.cos(b.h)\n  b.isFirst=true\n  for _,o in ipairs(s.bars) do\n   if math.abs(o.t-(b.t-2063))<50 and math.abs(o.h-b.h)<.01 and (o.x-px)^2+(o.z-pz)^2<.25 then b.isFirst=false break end\n  end\n end\n return b.isFirst\nend\nlocal live={}\nfor _,b in ipairs(s.bars) do\n local dt=b.t-now\n if dt>-250 and dt<=(isFirst(b) and 3000 or 1813) then live[#live+1]=b end\nend\nif #live==0 then return end\n-- Channel 1 is used by the LPDU cleave and stack draws, so the occlusion must never run on it.\nlocal channel=Argus2.getNextUnusedChannel(true)\nif channel==1 then channel=Argus2.getNextUnusedChannel(true) end\nif type(channel)~=\"number\" or channel<2 or channel>31 then return end\nlocal flags=Argus2.RenderFlags\nlocal baseFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUSION_BASE\nlocal maskFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUDE\nlocal base=TensorCore.getStaticDrawer(0x5000FF00,0,channel,baseFlags)\nlocal mask=TensorCore.getStaticDrawer(0xFFFFFFFF,0,channel,maskFlags)\nbase:addCircle(100,0,100,20,false,baseFlags)\nfor _,b in ipairs(live) do mask:addRect(b.x,0,b.z,5,80,b.h,false,maskFlags) end",
 							name = "Subtractive exaflare render",
 							uuid = "b672699f-3afe-904d-a5ce-521ab547233d",
 							version = 2.1,
@@ -12015,6 +12015,60 @@ local tbl =
 				timerEndOffset = 45,
 				timerStartOffset = -5,
 				uuid = "87e1724e-326a-7304-8d9f-3e93cc3c083e",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "self.used=true\nlocal store=_G.LPDU_FRU_SettingsStore\nif not store or not store.values then return end\nlocal hide=store.values.LPDU_FRU_ExaflareDraw==\"Subtractive\"\n-- Path of Darkness (40118) and Path of Light (40307): game omen types 218 and 217, 0 hides them.\nArgus.setActionAOEType(40118,0,hide and 0 or 218)\nArgus.setActionAOEType(40307,0,hide and 0 or 217)",
+							conditions = 
+							{
+								
+								{
+									"c3c8db62-3094-01c1-9fac-653036e50361",
+									true,
+								},
+							},
+							name = "Hide or restore the exaflare omens",
+							uuid = "790a63a6-7652-0a9a-bd4a-fb56c91ade46",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1238 then return false end\nlocal store=_G.LPDU_FRU_SettingsStore\nif not store or not store.values then return false end\nlocal hide=store.values.LPDU_FRU_ExaflareDraw==\"Subtractive\"\nreturn (Argus.getActionAOEType(40118,0)~=(hide and 0 or 218) or Argus.getActionAOEType(40307,0)~=(hide and 0 or 217)) and true or false",
+							dequeueIfLuaFalse = true,
+							name = "Telegraph does not match the exaflare setting",
+							uuid = "c3c8db62-3094-01c1-9fac-653036e50361",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				loop = true,
+				mechanicTime = 984.8,
+				name = "[LPDU] P5 Exaflares - Game telegraph follows draw mode",
+				throttleTime = 1000,
+				timeRange = true,
+				timelineIndex = 209,
+				timerEndOffset = 260,
+				timerStartOffset = -60,
+				uuid = "d36f07a6-607b-dc0a-8a25-f452097dc7be",
 				version = 2,
 			},
 		},
@@ -13516,7 +13570,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "self.used=true\nlocal s=data.lpdu_exa_sub\nif not s or not s.bars then return end\nlocal player=TensorCore.mGetPlayer()\nif not player or player.localmapid~=1238 then return end\nlocal store=_G.LPDU_FRU_SettingsStore\nif store and store.values and store.values.LPDU_FRU_ExaflareDraw~=\"Subtractive\" then return end\nlocal now=Now()\nlocal first\nfor i=1,#s.bars do\n local t=s.bars[i].t\n if t>=now-300 and t<=now+4200 then first=i;break end\nend\nif not first then return end\nlocal channel=Argus2.getNextUnusedChannel(true)\nif type(channel)~=\"number\" or channel<0 or channel>31 then return end\nlocal flags=Argus2.RenderFlags\nlocal baseFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUSION_BASE\nlocal maskFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUDE\nlocal base=TensorCore.getStaticDrawer(0x5000FF00,0,channel,baseFlags)\nlocal mask=TensorCore.getStaticDrawer(0xFFFFFFFF,0,channel,maskFlags)\nbase:addCircle(100,0,100,20,false,baseFlags)\nfor i=first,#s.bars do\n local b=s.bars[i]\n if b.t>=now-300 and b.t<=now+4200 then\n  mask:addRect(b.x,0,b.z,5,80,b.h,false,maskFlags)\n end\nend",
+							actionLua = "self.used=true\nlocal s=data.lpdu_exa_sub\nif not s or not s.bars then return end\nlocal player=TensorCore.mGetPlayer()\nif not player or player.localmapid~=1238 then return end\nlocal store=_G.LPDU_FRU_SettingsStore\nif store and store.values and store.values.LPDU_FRU_ExaflareDraw~=\"Subtractive\" then return end\nlocal now=Now()\n-- Cut out only the next hit of each line: its first step 3 s ahead, every later step once the previous\n-- one has gone off (250 ms after the previous time, 2063 ms between steps).\nlocal function isFirst(b)\n if b.isFirst==nil then\n  local px,pz=b.x-5*math.sin(b.h),b.z-5*math.cos(b.h)\n  b.isFirst=true\n  for _,o in ipairs(s.bars) do\n   if math.abs(o.t-(b.t-2063))<50 and math.abs(o.h-b.h)<.01 and (o.x-px)^2+(o.z-pz)^2<.25 then b.isFirst=false break end\n  end\n end\n return b.isFirst\nend\nlocal live={}\nfor _,b in ipairs(s.bars) do\n local dt=b.t-now\n if dt>-250 and dt<=(isFirst(b) and 3000 or 1813) then live[#live+1]=b end\nend\nif #live==0 then return end\n-- Channel 1 is used by the LPDU cleave and stack draws, so the occlusion must never run on it.\nlocal channel=Argus2.getNextUnusedChannel(true)\nif channel==1 then channel=Argus2.getNextUnusedChannel(true) end\nif type(channel)~=\"number\" or channel<2 or channel>31 then return end\nlocal flags=Argus2.RenderFlags\nlocal baseFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUSION_BASE\nlocal maskFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUDE\nlocal base=TensorCore.getStaticDrawer(0x5000FF00,0,channel,baseFlags)\nlocal mask=TensorCore.getStaticDrawer(0xFFFFFFFF,0,channel,maskFlags)\nbase:addCircle(100,0,100,20,false,baseFlags)\nfor _,b in ipairs(live) do mask:addRect(b.x,0,b.z,5,80,b.h,false,maskFlags) end",
 							name = "Subtractive exaflare render",
 							uuid = "4248e285-0d2e-fdab-822b-d2e2478fdb12",
 							version = 2.1,
@@ -14261,7 +14315,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "self.used=true\nlocal s=data.lpdu_exa_sub\nif not s or not s.bars then return end\nlocal player=TensorCore.mGetPlayer()\nif not player or player.localmapid~=1238 then return end\nlocal store=_G.LPDU_FRU_SettingsStore\nif store and store.values and store.values.LPDU_FRU_ExaflareDraw~=\"Subtractive\" then return end\nlocal now=Now()\nlocal first\nfor i=1,#s.bars do\n local t=s.bars[i].t\n if t>=now-300 and t<=now+4200 then first=i;break end\nend\nif not first then return end\nlocal channel=Argus2.getNextUnusedChannel(true)\nif type(channel)~=\"number\" or channel<0 or channel>31 then return end\nlocal flags=Argus2.RenderFlags\nlocal baseFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUSION_BASE\nlocal maskFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUDE\nlocal base=TensorCore.getStaticDrawer(0x5000FF00,0,channel,baseFlags)\nlocal mask=TensorCore.getStaticDrawer(0xFFFFFFFF,0,channel,maskFlags)\nbase:addCircle(100,0,100,20,false,baseFlags)\nfor i=first,#s.bars do\n local b=s.bars[i]\n if b.t>=now-300 and b.t<=now+4200 then\n  mask:addRect(b.x,0,b.z,5,80,b.h,false,maskFlags)\n end\nend",
+							actionLua = "self.used=true\nlocal s=data.lpdu_exa_sub\nif not s or not s.bars then return end\nlocal player=TensorCore.mGetPlayer()\nif not player or player.localmapid~=1238 then return end\nlocal store=_G.LPDU_FRU_SettingsStore\nif store and store.values and store.values.LPDU_FRU_ExaflareDraw~=\"Subtractive\" then return end\nlocal now=Now()\n-- Cut out only the next hit of each line: its first step 3 s ahead, every later step once the previous\n-- one has gone off (250 ms after the previous time, 2063 ms between steps).\nlocal function isFirst(b)\n if b.isFirst==nil then\n  local px,pz=b.x-5*math.sin(b.h),b.z-5*math.cos(b.h)\n  b.isFirst=true\n  for _,o in ipairs(s.bars) do\n   if math.abs(o.t-(b.t-2063))<50 and math.abs(o.h-b.h)<.01 and (o.x-px)^2+(o.z-pz)^2<.25 then b.isFirst=false break end\n  end\n end\n return b.isFirst\nend\nlocal live={}\nfor _,b in ipairs(s.bars) do\n local dt=b.t-now\n if dt>-250 and dt<=(isFirst(b) and 3000 or 1813) then live[#live+1]=b end\nend\nif #live==0 then return end\n-- Channel 1 is used by the LPDU cleave and stack draws, so the occlusion must never run on it.\nlocal channel=Argus2.getNextUnusedChannel(true)\nif channel==1 then channel=Argus2.getNextUnusedChannel(true) end\nif type(channel)~=\"number\" or channel<2 or channel>31 then return end\nlocal flags=Argus2.RenderFlags\nlocal baseFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUSION_BASE\nlocal maskFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUDE\nlocal base=TensorCore.getStaticDrawer(0x5000FF00,0,channel,baseFlags)\nlocal mask=TensorCore.getStaticDrawer(0xFFFFFFFF,0,channel,maskFlags)\nbase:addCircle(100,0,100,20,false,baseFlags)\nfor _,b in ipairs(live) do mask:addRect(b.x,0,b.z,5,80,b.h,false,maskFlags) end",
 							name = "Subtractive exaflare render",
 							uuid = "488b75a6-89fa-0e4b-bab3-3fe006912c21",
 							version = 2.1,
