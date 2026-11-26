@@ -184,6 +184,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### FRU
 
+- AutoSim: new "Edit estimated killtimes" option in a "FRU AutoSim" window before the pull, to set your own P1, Light crystal, P4 HP lock and P5 timings. The intermission raid buff is now 1.2 for Viper, Samurai and Black Mage, the P4 opener buff counts 1.1, Black Mage's other raid buffs count 1.1, and the damage value after Crystallize Time now stops counting when P4 uptime ends. (27-11-2026)
+
 - AutoSim: the intermission raid buff now counts less (1.1 for Viper, Samurai and Black Mage, 1.3 for other jobs), and the planned Light crystal death and P4 HP lock come slightly earlier. (27-11-2026)
 
 - AutoSim: the forecast now resyncs when P2 ends, and in P4 Ryne and Gaia keep fixed target slots instead of following your target. Reaper's P4 opener buff window starts slightly later, Black Mage plans without Ley Lines during Ultimate Relativity, and Samurai can plan Meditate in two more downtimes, dashes in with Gyoten and holds Kenki in P4. (26-11-2026)
@@ -201,8 +203,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - P5 Polarizing Strikes: the bait rounds are now counted more reliably, so the stack-behind-bait, dodge-line and final move-out calls follow the real round. The next-bait call is also shorter so it no longer overlaps the dodge call. (23-11-2026)
 
 - P5 Paradise Regained: DPS no longer get a "Wait south" circle on the healers' first tower. DPS tower guidance is unchanged: group 1 relative left, group 2 relative right. (23-11-2026)
-
-- Fixed the P5 Exasquares green safe-area triangles sometimes showing two at once. Each triangle now appears once, in order. (23-11-2026)
 
 ### M4S
 
