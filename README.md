@@ -110,6 +110,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Dungeons
 
+- Dungeon LOL only disables the Prepull Helper in supported dungeons and restores it on exit if it was previously enabled. (26-11-2026)
+
 - In dungeon lol, shared cooldown pooling and targeting only run in supported dungeons, so the action no longer runs in cities. (24-11-2026)
 
 - In levelling dungeons, Ihuykatumu skips the gather hold on the opening bird pack. (24-11-2026)
@@ -127,8 +129,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Improved Origenics final-pack detection, marked safe Laser Lash lanes, and added Ambrose knockback guidance, Arm's Length, and a Superfluity DoT blacklist. (20-11-2026)
 
 - Added Deceiver Android and turret lane guidance, Surge Arm's Length, and a DoT blacklist for the short-lived boss sentries. (20-11-2026)
-
-- Added early Writhing Riot cone previews and poison AoE draws for Herpekaris in Origenics. (20-11-2026)
 
 ### DSR
 
