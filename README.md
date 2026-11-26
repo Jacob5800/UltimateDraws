@@ -238,6 +238,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Fixed The Compound's Incongruous Spin green safe area flickering in The Puppets' Bunker, and an error that could repeat during the Compound 2P tower and laser previews. (26-11-2026)
+
 - Improved the 905P-operated Heavy Artillery Unit's Operation: Activate Laser Turret in The Puppets' Bunker: the green safe area now removes ground as soon as the next wave makes it dangerous, returns cleared ground sooner, and covers the lower side once its lasers have finished. (26-11-2026)
 
 - Added The Copied Factory: boss mechanic labels and player circles for raidwides, tankbusters, spreads, stacks and Shockwave, boss AutoSim kill-time estimates, and DoT blacklists for the Small Stubby (Bard, Samurai) and Engels' Small Biped (Bard, Black Mage, Samurai). The Superior Flight Units' Sliding Swipe green safe side in The Puppets' Bunker now reaches closer to the middle. (26-11-2026)
@@ -255,8 +257,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Fixed Hansel and Gretel's shield sides in The Tower at Paradigm's Breach disappearing when the two bosses stand too close and share the Directional Parry. (25-11-2026)
 
 - Added green safe lanes for the 813P-operated Aegis Unit's Life's Last Song beams in The Puppets' Bunker, on every wave. The Flight Path and Life's Last Song draws now also show when the fight was joined mid-pull. (25-11-2026)
-
-- Improved the 813P-operated Aegis Unit cannons in The Puppets' Bunker: Beam Cannons and Collider Cannons now mark every safe lane green instead of showing a safe-spot arrow, and the red Beam Cannons cones are higher contrast. (25-11-2026)
 
 ### Trials
 

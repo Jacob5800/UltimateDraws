@@ -12015,8 +12015,8 @@ local tbl =
 				},
 			},
 			displayPath = "The Puppets' Bunker/The Compound/Draws",
+			eventType = 12,
 			name = "The Compound Incongruous Spin safe area",
-			throttleTime = 125,
 			uuid = "362e5c1b-f63b-a95b-b80f-f0bee5a2cf1a",
 			version = 2,
 		},
@@ -12433,7 +12433,7 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nlocal now=Now()\nlocal t,b=data.a25Towers,data.a25EarlyPods\nreturn p.incombat and ((t and t.drawAt and now>=t.drawAt and now<t.expires) or\n (b and b.drawAt and now>=b.drawAt and now<b.deadline))",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nlocal now=Now()\nlocal t,b=data.a25Towers,data.a25EarlyPods\nreturn not not (p.incombat and ((t and t.drawAt and now>=t.drawAt and now<t.expires) or\n (b and b.drawAt and now>=b.drawAt and now<b.deadline)))",
 						name = "The Compound arena and mechanic",
 						uuid = "0703943f-1b6d-a090-9732-eefff4e1383e",
 						version = 3,
