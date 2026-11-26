@@ -18713,6 +18713,741 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\n-- Energy Bomb orbs: untargetable 'Serial-jointed Service Model' (9142) with model 11365; radius 2 (BossMod A11)\nlocal d\nfor id,orb in pairs(EntityList(\"contentid=9142\") or {}) do\n local p=orb.pos\n if p and Argus.getEntityModel(id)==11365 and Argus.isEntityVisible(id) then\n  d=d or TensorCore.getStaticDrawer(0x703333FF,2)\n  d:addCircle(p.x,p.y,p.z,2)\n end\nend\n",
+						conditions = 
+						{
+							
+							{
+								"ad7ef3bb-a764-caa5-8239-d67769215d53",
+								true,
+							},
+						},
+						name = "Red circle around each visible orb",
+						uuid = "0937ffc4-c3af-f84b-9810-c88f0a616753",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=882 or not p.pos then return false end\nreturn (p.pos.x+500)^2+p.pos.z^2<=60^2 and math.abs(p.pos.y-401)<10\n",
+						dequeueIfLuaFalse = true,
+						name = "Serial-jointed Command Model arena",
+						uuid = "ad7ef3bb-a764-caa5-8239-d67769215d53",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 12,
+			name = "[Copied Factory] Serial-jointed Energy Bomb orb circles",
+			uuid = "a568d7e7-4bb3-1e68-ad92-aea6385fe92f",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nif not eventArgs then return end\n-- 5s cast, then 5 cone hits about 1.1s apart ending ~11.5s after the cast starts\ndata.cfAssault={id=eventArgs.entityID,hits=0,fin=Now()+13000}\n",
+						conditions = 
+						{
+							
+							{
+								"1b604462-cbaa-08ed-84af-a5676d87d5c8",
+								true,
+							},
+						},
+						name = "Remember the caster",
+						uuid = "e78035cb-2ee2-81d6-bd09-df32462aecef",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e or e.spellID~=18613 or e.entityContentID~=9141 then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==882) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Energy Assault cast",
+						uuid = "1b604462-cbaa-08ed-84af-a5676d87d5c8",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 3,
+			name = "[Copied Factory] Energy Assault record",
+			uuid = "1b0292b4-3299-5e52-9494-dbea250aac51",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.cfAssault\nif not s then return end\nif Now()>=s.fin then data.cfAssault=nil return end\nlocal b=TensorCore.mGetEntity(s.id)\n-- the boss turns at the start of the cast: follow its facing while casting, then keep it\nif b and b.pos and (s.h==nil or (b.castinginfo and b.castinginfo.channelingid==18613)) then\n s.x,s.y,s.z,s.h=b.pos.x,b.pos.y,b.pos.z,b.pos.h\nend\nif not s.h then return end\n-- BossMod A11: range 30, 90 degree cone\nTensorCore.getStaticDrawer(0x703333FF,2):addCone(s.x,s.y,s.z,30,math.pi/2,s.h)\n",
+						conditions = 
+						{
+							
+							{
+								"3f590443-c901-e82f-9858-9506988f215c",
+								true,
+							},
+						},
+						name = "Draw the 90 degree cone",
+						uuid = "9b86c9e5-c00e-079d-8fce-15c599295982",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not data.cfAssault then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==882) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Energy Assault pending",
+						uuid = "3f590443-c901-e82f-9858-9506988f215c",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 12,
+			name = "[Copied Factory] Energy Assault cone (red)",
+			uuid = "82a03458-7b64-1ea1-a206-47b46530b350",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.cfAssault\nif not s then return end\nlocal h=TensorCore.mGetEntity(eventArgs.entityID)\nif h and h.pos then s.x,s.y,s.z,s.h=h.pos.x,h.pos.y,h.pos.z,h.pos.h end\ns.hits=s.hits+1\nif s.hits>=5 then data.cfAssault=nil end\n",
+						conditions = 
+						{
+							
+							{
+								"c982281c-c32c-6f5d-81c8-4933cea81f15",
+								true,
+							},
+						},
+						name = "Use the hit heading; clear after the fifth",
+						uuid = "eb9c39f6-2684-08aa-bd85-4f4651e5718f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not eventArgs or eventArgs.spellID~=18614 then return false end\nreturn data.cfAssault~=nil\n",
+						dequeueIfLuaFalse = true,
+						name = "Energy Assault hit",
+						uuid = "c982281c-c32c-6f5d-81c8-4933cea81f15",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 2,
+			name = "[Copied Factory] Energy Assault hits",
+			uuid = "6f32925e-f97b-a18a-8fec-825c3dd219e4",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\n-- only the aiming turrets get the lock-on VFX 787; the orb-dropping turrets share their model but never get it\nlocal s=data.cfLaser\nif not s or Now()>=s.fin then s={fin=Now()+8500,fired={},aim={}} data.cfLaser=s end\ns.aim[eventArgs.primaryEntityID]=true\n",
+						conditions = 
+						{
+							
+							{
+								"b01d14cd-1ed7-90ad-9e72-fa8075d390d4",
+								true,
+							},
+						},
+						name = "Remember the aiming turret",
+						uuid = "5f4a60cf-1e07-b0ce-8109-afe6f91d7be0",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not eventArgs or eventArgs.vfxID~=787 or eventArgs.primaryEntityContentID~=9142 then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==882) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Turret lock-on effect",
+						uuid = "b01d14cd-1ed7-90ad-9e72-fa8075d390d4",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 27,
+			name = "[Copied Factory] High-powered Laser lock-on record",
+			uuid = "a822eef1-b405-688a-88d8-2c0560c52e43",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.cfLaser\nif not s or not s.aim then return end\nif Now()>=s.fin then data.cfLaser=nil return end\n-- aiming turrets turn to follow their player, so their live facing is drawn\n-- 4 wide (BossMod A11), 70 long (action range); a turret's line ends when it fires\nlocal d\nfor id,t in pairs(EntityList(\"contentid=9142\") or {}) do\n local p=t.pos\n if p and s.aim[id] and not s.fired[id] then\n  d=d or TensorCore.getStaticDrawer(0x503333FF,2)\n  d:addRect(p.x,p.y,p.z,70,4,p.h)\n end\nend\n",
+						conditions = 
+						{
+							
+							{
+								"73ac56dc-d6c2-5ee4-874d-8dc3f9fb0c29",
+								true,
+							},
+						},
+						name = "Line along each turret's current facing",
+						uuid = "ce18ee33-c6b3-5eb8-bc7d-ac3a4f230c6a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not data.cfLaser then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==882) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Laser window open",
+						uuid = "73ac56dc-d6c2-5ee4-874d-8dc3f9fb0c29",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 12,
+			name = "[Copied Factory] High-powered Laser turret lines (red)",
+			uuid = "c6ba9c94-c0f5-4070-880c-37e0792f3f98",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.cfLaser\nif s then s.fired[eventArgs.entityID]=true end\n",
+						conditions = 
+						{
+							
+							{
+								"34db89d2-2a22-19e1-a388-26b66675c374",
+								true,
+							},
+						},
+						name = "Remove that turret's line",
+						uuid = "83325c90-1a87-166e-87b5-45eb21559762",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not eventArgs or eventArgs.spellID~=18629 then return false end\nreturn data.cfLaser~=nil\n",
+						dequeueIfLuaFalse = true,
+						name = "Turret fired",
+						uuid = "34db89d2-2a22-19e1-a388-26b66675c374",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 2,
+			name = "[Copied Factory] High-powered Laser fired",
+			uuid = "66481cc2-c9f2-6801-bb76-2385e9e55d98",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e or not e.pos then return end\nlocal s=data.cfAir\nif not s then s={starts=0,list={}} data.cfAir=s end\ns.starts=s.starts+1\n-- pattern from BossMod A11 AirToSurfaceEnergy (all 192 hits of log 11-25 15-53 matched)\nlocal OUT={{10,-4.6},{10,-7.8},{9.1,-10},{5.9,-10},{2.7,-10},{-0.5,-10},{-3.7,-10},{-7,-10},{-10,-10},{-10,-6.8},{-10,-3.6},{-10,-0.4},{-10,2.8},{-10,6},{-10,9.2}}\nlocal IN={{2.4,4},{4,2.5},{4,-0.7},{4,-3.9},{1.2,-4},{-2,-4},{-4,-2.9},{-4,0.3},{-4,3.5},{-1.4,4},{1.7,4},{4,3.2},{4,0},{4,-3.2},{1.9,-4}}\nlocal x,z=e.pos.x,e.pos.z\nlocal cx=x>-500 and -488 or -512\nlocal cz=z>0 and 12 or -12\nlocal dx,dz=x-cx,z-cz\nlocal close=math.abs(dx)<=8 and math.abs(dz)<=8\nlocal a=math.deg(math.atan2(dx,dz))\nlocal r\nif a>90 then r={-90,90} elseif a>0 then r={180,0} elseif a>-90 then r={90,-90} else r={0,180} end\nlocal rot=math.rad(close and r[1] or r[2])\nlocal base=close and IN or OUT\n-- first set of eight turrets drops 10 circles each, the second 14 (log 11-25 15-53).\n-- The second set is also recognised by its turret spots, so joining a replay midway does not cut it short\nlocal second=s.starts>8\nfor _,q in ipairs({{-516,8},{-492,-8},{-498,22},{-508,-8},{-484,8},{-502,22},{-522,-22},{-478,-22}}) do\n if math.abs(x-q[1])<1 and math.abs(z-q[2])<1 then second=true break end\nend\nlocal count=second and 14 or 10\nlocal now=Now()\nfor i=1,count do\n local px,pz=base[i][1],base[i][2]\n s.list[#s.list+1]={t=now+12200+1100*(i-1)-100,x=cx+px*math.cos(rot)+pz*math.sin(rot),z=cz+pz*math.cos(rot)-px*math.sin(rot)}\nend\n",
+						conditions = 
+						{
+							
+							{
+								"28ff16b1-d222-acb3-8d80-cf4684b79748",
+								true,
+							},
+						},
+						name = "Queue this turret's circles",
+						uuid = "d3042dd6-5af6-4daa-b4cd-d93a3bbf4fe3",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not eventArgs or eventArgs.spellID~=19250 then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==882) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Turret appears",
+						uuid = "28ff16b1-d222-acb3-8d80-cf4684b79748",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 2,
+			name = "[Copied Factory] Air-to-surface Energy predict",
+			uuid = "9babd730-9846-60bb-a5af-1ccd33f08e6d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.cfAir\nif not s then return end\nlocal now=Now()\nlocal keep,first={},nil\nfor _,c in ipairs(s.list) do\n if now<c.t+150 then\n  keep[#keep+1]=c\n  if not first or c.t<first then first=c.t end\n end\nend\ns.list=keep\nif not first then return end\nlocal second\nfor _,c in ipairs(keep) do if c.t>first+500 and (not second or c.t<second) then second=c.t end end\nlocal red=TensorCore.getStaticDrawer(0x703333FF,2)\nlocal yellow=TensorCore.getStaticDrawer(0x3800DDFF,1)\nfor _,c in ipairs(keep) do\n if second and c.t>=second and c.t<second+500 then yellow:addCircle(c.x,401,c.z,5) end\nend\nfor _,c in ipairs(keep) do\n if c.t<first+500 then red:addCircle(c.x,401,c.z,5) end\nend\n",
+						conditions = 
+						{
+							
+							{
+								"91aafb5a-629e-e891-ac7b-4e988836e8a8",
+								true,
+							},
+						},
+						name = "Draw this wave and the next",
+						uuid = "8c9e06a9-624e-a950-a46a-497b411857b1",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not data.cfAir then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==882) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Circles pending",
+						uuid = "91aafb5a-629e-e891-ac7b-4e988836e8a8",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 12,
+			name = "[Copied Factory] Air-to-surface Energy circles (red now, yellow next)",
+			uuid = "afbe119e-c6c4-62e0-8b90-d97eb5d138f3",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"4e96c298-d063-e406-aafe-a6c26c8ba32c",
+								true,
+							},
+							
+							{
+								"e9fa7a57-7b12-cc65-8a46-ce885aac40d7",
+								true,
+							},
+							
+							{
+								"b765be72-6f39-5271-b5d7-eb697b059dcb",
+								true,
+							},
+							
+							{
+								"0186777d-ac09-d5f8-9aeb-67d7d009eae3",
+								true,
+							},
+						},
+						gVar = "ACR_RikuSCH3_Hotbar_Surecast",
+						name = "Request Surecast",
+						uuid = "8c14a636-cdb7-8dd5-befe-b8d3121d6eab",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						localmapid = 882,
+						name = "Copied Factory only",
+						uuid = "4e96c298-d063-e406-aafe-a6c26c8ba32c",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nreturn (e~=nil and e.spellID==18627 and e.entityContentID==9141) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Serial-jointed Shockwave",
+						uuid = "e9fa7a57-7b12-cc65-8a46-ce885aac40d7",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not self.deadline then self.deadline=Now()+eventArgs.channelTimeMax*1000 end\nlocal remaining=self.deadline-Now()\nif remaining>3000 or remaining<1000 then return false end\nlocal caster=TensorCore.mGetEntity(eventArgs.entityID)\nreturn (caster~=nil and caster.castinginfo.channelingid==eventArgs.spellID) and true or false\n",
+						name = "Request with 3 to 1 seconds remaining",
+						uuid = "b765be72-6f39-5271-b5d7-eb697b059dcb",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 14,
+						dequeueIfLuaFalse = true,
+						jobIDList = 
+						{
+							25,
+							27,
+							35,
+							42,
+							24,
+							28,
+							33,
+							40,
+						},
+						name = "Caster or healer",
+						uuid = "0186777d-ac09-d5f8-9aeb-67d7d009eae3",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 3,
+			name = "[Copied Factory] Serial-jointed Shockwave knockback immunity",
+			timeout = 10,
+			uuid = "60bdc7e5-f57b-010b-ae4a-2ad18d833d99",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal B=MoogleTelegraphs and MoogleTelegraphs.Settings and MoogleTelegraphs.Settings.aoeIDUserBlacklist\nif not B then return end\nlocal SOURCE=\"Ultimate Reactions Pack (Alliance Raid)\"\nfor _,id in ipairs({18620,18622,18624,18626}) do\n local e=B[id]\n if not e or e.source~=SOURCE then B[id]={label=\"Energy Ring\",source=SOURCE} end\nend\n",
+						conditions = 
+						{
+							
+							{
+								"d48e32d3-d2a8-87f9-9270-95523f763523",
+								true,
+							},
+						},
+						name = "Apply Copied Factory blacklist",
+						uuid = "39e19d98-bd80-8427-9347-e68c9762fd87",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=882 then return false end\nlocal B=MoogleTelegraphs and MoogleTelegraphs.Settings and MoogleTelegraphs.Settings.aoeIDUserBlacklist\nif not B then return false end\nfor _,id in ipairs({18620,18622,18624,18626}) do\n local e=B[id]\n if not e or e.source~=\"Ultimate Reactions Pack (Alliance Raid)\" then return true end\nend\nreturn false\n",
+						dequeueIfLuaFalse = true,
+						name = "Blacklist needs update",
+						uuid = "d48e32d3-d2a8-87f9-9270-95523f763523",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			name = "[Copied Factory] Moogle Telegraphs blacklist",
+			throttleTime = 5000,
+			uuid = "22f19c89-587a-4349-9cb8-f273974f17a0",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal c=TensorCore.mGetEntity(eventArgs.entityID)\nif not c or not c.pos then return end\n-- four rings resolve 2s apart, the first at the end of this cast (about 4.7s)\ndata.cfRing={x=c.pos.x,y=c.pos.y,z=c.pos.z,ring=1,fin=Now()+13000}\n",
+						conditions = 
+						{
+							
+							{
+								"500caf75-ea82-9576-8d8e-8ec32dd93674",
+								true,
+							},
+						},
+						name = "Remember the centre",
+						uuid = "d95f98d0-7be2-5981-991e-d1e8bb147390",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e or e.spellID~=18620 then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==882) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "First ring cast",
+						uuid = "500caf75-ea82-9576-8d8e-8ec32dd93674",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 3,
+			name = "[Copied Factory] Energy Ring record",
+			uuid = "ea90838e-2bec-8e84-b19f-051b687e5719",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.cfRing\nif not s then return end\nif Now()>=s.fin or s.ring>4 then data.cfRing=nil return end\n-- BossMod A11: circle 12, then donuts 12-24, 24-36, 36-48\nlocal function draw(d,i)\n if i==1 then d:addCircle(s.x,s.y,s.z,12) else d:addDonut(s.x,s.y,s.z,12*(i-1),12*i) end\nend\ndraw(TensorCore.getStaticDrawer(0x703333FF,2),s.ring)\nif s.ring<4 then draw(TensorCore.getStaticDrawer(0x3000DDFF,1),s.ring+1) end\n",
+						conditions = 
+						{
+							
+							{
+								"99f1f54b-d28a-54ba-b4d2-04e595436370",
+								true,
+							},
+						},
+						name = "Draw the current and next ring",
+						uuid = "7d48e386-11fe-391c-9575-3d0644a75897",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not data.cfRing then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==882) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Rings pending",
+						uuid = "99f1f54b-d28a-54ba-b4d2-04e595436370",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 12,
+			name = "[Copied Factory] Energy Ring draw (red now, yellow next)",
+			uuid = "1981e7aa-2c14-dbfa-9414-e954c6d37913",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.cfRing\nif not s then return end\nlocal nextRing=({[18620]=2,[18622]=3,[18624]=4,[18626]=5})[eventArgs.spellID]\nif nextRing and nextRing>s.ring then s.ring=nextRing end\n",
+						conditions = 
+						{
+							
+							{
+								"8449c5f0-eef2-65ed-b8cd-3121a2eeecb0",
+								true,
+							},
+						},
+						name = "Move to the next ring",
+						uuid = "cf7ad8fd-099f-2ef4-86a9-bce6baeec5da",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e or not data.cfRing then return false end\nreturn (e.spellID==18620 or e.spellID==18622 or e.spellID==18624 or e.spellID==18626) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Ring hit",
+						uuid = "8449c5f0-eef2-65ed-b8cd-3121a2eeecb0",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 2,
+			name = "[Copied Factory] Energy Ring advance",
+			uuid = "dcfe5e1c-2012-c05e-959d-fb0ead799def",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "The Copied Factory",
 			name = "AutoSim",
 			uuid = "40f1e247-388a-0b27-8e5a-04e3a255b655",

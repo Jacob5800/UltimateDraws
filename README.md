@@ -238,6 +238,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Added Serial-jointed Command Model draws in The Copied Factory: Energy Bomb orbs, the Energy Assault cone, turret laser lines, dropping orb circles with the next wave previewed, Energy Rings (also added to the Moogle Telegraphs blacklist) and automatic Surecast for Shockwave (casters and healers). (26-11-2026)
+
 - Added Her Inflorescence draws in The Tower at Paradigm's Breach (upcoming building strip, train lanes in red and green, pillar fall lines) and an auto lockface for the black and white rings ("Distortion rings: auto lockface" in the Paradigm's Breach settings window, on by default). Fixed that arena's cast draws only showing when looking down, Darker Note circles not following their targets, and a DoT blacklist error on jobs without one. (26-11-2026)
 
 - Added False Idol draws in The Tower at Paradigm's Breach: a green safe area for Made Magic, red and orange lanes showing the Magical Interference beams in firing order, and Lighter Note explosion circles with the next two steps previewed. The Moogle Telegraphs blacklist entries are now listed under "Ultimate Reactions Pack (Alliance Raid)". (26-11-2026)
@@ -255,10 +257,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Fixed The Compound's Incongruous Spin green safe area flickering in The Puppets' Bunker, and an error that could repeat during the Compound 2P tower and laser previews. (26-11-2026)
 
 - Improved the 905P-operated Heavy Artillery Unit's Operation: Activate Laser Turret in The Puppets' Bunker: the green safe area now removes ground as soon as the next wave makes it dangerous, returns cleared ground sooner, and covers the lower side once its lasers have finished. (26-11-2026)
-
-- Added The Copied Factory: boss mechanic labels and player circles for raidwides, tankbusters, spreads, stacks and Shockwave, boss AutoSim kill-time estimates, and DoT blacklists for the Small Stubby (Bard, Samurai) and Engels' Small Biped (Bard, Black Mage, Samurai). The Superior Flight Units' Sliding Swipe green safe side in The Puppets' Bunker now reaches closer to the middle. (26-11-2026)
-
-- Improved The Compound and Compound 2P in The Puppets' Bunker: Mechanical Dissection and Decapitation, Incongruous Spin and Prime Blade now show the whole safe area in green instead of a green circle and arrow (Prime Blade's dangerous areas are red), and the Forced Transfer towers are marked with green circles. (25-11-2026)
 
 ### Trials
 
