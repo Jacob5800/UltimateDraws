@@ -238,6 +238,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- The Tower at Paradigm's Breach now adds the attacks it handles to the Moogle Telegraphs blacklist automatically, so Moogle no longer draws over them. (26-11-2026)
+
 - Fixed Xun-Zi and Meng-Zi's Deploy Armaments in The Tower at Paradigm's Breach marking safe ground red (up to the whole arena): only the lines that deal damage are drawn now. (26-11-2026)
 
 - Added an optional green safe area for the Red Girl's Diffuse Energy cone sequence in The Tower at Paradigm's Breach: tick "Red Girl cones: green safe area" in the Paradigm's Breach settings window (off by default). (26-11-2026)
@@ -255,8 +257,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Improved The Compound and Compound 2P in The Puppets' Bunker: Mechanical Dissection and Decapitation, Incongruous Spin and Prime Blade now show the whole safe area in green instead of a green circle and arrow (Prime Blade's dangerous areas are red), and the Forced Transfer towers are marked with green circles. (25-11-2026)
 
 - Added a green safe area to the 905P-operated Heavy Artillery Unit's pod attack (R010: Laser and R030: Hammer) in The Puppets' Bunker, next to the existing red areas. (25-11-2026)
-
-- Improved the 905P-operated Heavy Artillery Unit's Operation: Activate Laser Turret in The Puppets' Bunker: the lasers are now drawn about 8 seconds earlier, as soon as the turret starts casting, with the lower lasers in red and the safe parts of each upper-laser sector in green, moving inward and outward as the waves fire. (25-11-2026)
 
 ### Trials
 

@@ -13100,6 +13100,54 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal B=MoogleTelegraphs and MoogleTelegraphs.Settings and MoogleTelegraphs.Settings.aoeIDUserBlacklist\nif not B then return end\nlocal wanted={[23552]=\"Deploy Armaments\",[23553]=\"Deploy Armaments\",[23554]=\"Deploy Armaments\",[23555]=\"Deploy Armaments\",[23557]=\"Deploy Armaments\",[23558]=\"Universal Assault\",[23670]=\"Wail\",[23671]=\"Wail\",[24229]=\"Colossal Impact\",[24230]=\"Colossal Impact\",[24231]=\"Colossal Impact\",[24235]=\"Magic Artillery Alpha\",[24239]=\"Light Leap\",[24240]=\"\",[24241]=\"Lunge\",[24245]=\"Roar\",[24611]=\"Diffuse Energy\",[24696]=\"Deploy Armaments\"}\nfor id,label in pairs(wanted) do\n if not B[id] then B[id]={label=label,source=\"The Tower at Paradigm's Breach\"} end\nend\n",
+						conditions = 
+						{
+							
+							{
+								"8e39cc49-73f9-98a3-a1cc-a044eeb858c4",
+								true,
+							},
+						},
+						name = "Apply Paradigm's Breach blacklist",
+						uuid = "9b96cc29-2313-67a6-b0aa-d0cbc216376e",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 then return false end\nlocal B=MoogleTelegraphs and MoogleTelegraphs.Settings and MoogleTelegraphs.Settings.aoeIDUserBlacklist\nif not B then return false end\nfor _,id in ipairs({23552,23553,23554,23555,23557,23558,23670,23671,24229,24230,24231,24235,24239,24240,24241,24245,24611,24696}) do\n if not B[id] then return true end\nend\nreturn false\n",
+						dequeueIfLuaFalse = true,
+						name = "Blacklist needs update",
+						uuid = "8e39cc49-73f9-98a3-a1cc-a044eeb858c4",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/Setup",
+			name = "[Paradigm's Breach] Moogle Telegraphs blacklist",
+			throttleTime = 5000,
+			uuid = "922c82d3-13fc-bea1-82a7-a1d452269d02",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "The Tower at Paradigm's Breach",
 			name = "Knave of Hearts",
 			uuid = "c0956e51-d9e3-0bb2-bcc9-040050353d61",
