@@ -238,6 +238,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Fixed the Red Girl's Point lances green safe areas in The Tower at Paradigm's Breach stopping short of the barrier walls. (26-11-2026)
+
 - Added Hansel and Gretel's Uneven Footing meteor in The Tower at Paradigm's Breach: the meteor is shown in red, and the safe area outside it, the Breakthrough side cleave and the orbs is shown in green. (26-11-2026)
 
 - Fixed The Compound's Incongruous Spin green safe area flickering in The Puppets' Bunker, and an error that could repeat during the Compound 2P tower and laser previews. (26-11-2026)
@@ -255,8 +257,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Improved the Superior Flight Units' Sliding Swipe in The Puppets' Bunker: the whole safe side is now shown in green for the next swipe and swaps as the swipes alternate left and right, instead of a safe-spot circle and arrow. (25-11-2026)
 
 - Fixed the Superior Flight Units' Sharp Turn draws in The Puppets' Bunker: the three beams now run along the edges of the unit triangle with the middle left clear, matching where the damage lands. (25-11-2026)
-
-- Fixed Hansel and Gretel's shield sides in The Tower at Paradigm's Breach disappearing when the two bosses stand too close and share the Directional Parry. (25-11-2026)
 
 ### Trials
 
