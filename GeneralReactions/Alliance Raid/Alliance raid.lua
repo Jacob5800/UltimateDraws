@@ -11097,7 +11097,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\nlocal s=data.a23Swipes\nlocal wave=s and s.queue[1]\nif not wave then return end\nlocal player=TensorCore.mGetPlayer()\nif not player or not player.pos then return end\n-- Safe side of the next swipe: everything behind the swipe line (forward <= -2.5), shown as one green area.\nlocal sin,cos=math.sin(wave.heading),math.cos(wave.heading)\nlocal ox,oz=wave.x-2.5*sin,wave.z-2.5*cos\nlocal drawer=TensorCore.getStaticDrawer(0x6033FF33,2)\nlocal flags=Argus2.RenderFlags.FLAG_WARP_TERRAIN\ndrawer:addRect(ox,player.pos.y+0.05,oz,46,100,wave.heading+math.pi,false,flags)",
+						actionLua = "self.used=true\nlocal s=data.a23Swipes\nlocal wave=s and s.queue[1]\nif not wave then return end\nlocal player=TensorCore.mGetPlayer()\nif not player or not player.pos then return end\n-- Safe side of the next swipe: everything behind the swipe line (forward <= -0.5), shown as one green area.\n-- The line runs through the casting unit; a 2.5 yalm margin left too much of the safe half uncoloured.\nlocal sin,cos=math.sin(wave.heading),math.cos(wave.heading)\nlocal ox,oz=wave.x-0.5*sin,wave.z-0.5*cos\nlocal drawer=TensorCore.getStaticDrawer(0x6033FF33,2)\nlocal flags=Argus2.RenderFlags.FLAG_WARP_TERRAIN\ndrawer:addRect(ox,player.pos.y+0.05,oz,46,100,wave.heading+math.pi,false,flags)",
 						conditions = 
 						{
 							
@@ -17775,6 +17775,227 @@ local tbl =
 			throttleTime = 500,
 			timeout = 0.5,
 			uuid = "2bd43c5a-d29f-f92b-b061-d3aca684f35c",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "The Copied Factory",
+			uuid = "0b9b2515-d039-4f91-b27f-80a1976b730a",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Copied Factory",
+			name = "Draws",
+			uuid = "67687f08-72b4-3d96-98f5-167a39b855b9",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\nlocal id=e.spellID\nlocal ms=math.floor(e.channelTimeMax*1000)\nif ms<=0 then return end\nlocal labels={[18260]=\"Spread\",[18261]=\"Raidwide\",[18437]=\"Raidwide\",[18453]=\"Spread\",[18627]=\"Knockback\",[18638]=\"Tankbuster\",[18639]=\"Raidwide\",[18672]=\"Tankbuster\",[18675]=\"Stack\",[18677]=\"Tankbuster\",[18678]=\"Raidwide\",[18681]=\"Spread\",[18753]=\"Raidwide\"}\nlocal label=labels[id]\nlocal targeted=label==\"Stack\" or label==\"Spread\" or label==\"Tankbuster\"\nlocal actor=TensorCore.mGetEntity(targeted and e.targetID or e.entityID)\nif actor then\n local color=label==\"Stack\" and 0xFF66FF66 or 0xFFFFFFFF\n AnyoneCore.addTimedWorldTextOnEnt(ms,label,actor.id,color,true,1.2,2)\n if label==\"Spread\" or label==\"Stack\" then\n  TensorCore.getStaticDrawer(label==\"Stack\" and 0x5033FF33 or 0x503333FF,2):addTimedCircleOnEnt(ms,actor.id,id==18453 and 8 or 6,0,false,true)\n end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"7325057c-d7a2-9910-b06b-3b89a46aa216",
+								true,
+							},
+						},
+						name = "Mark cast recipients",
+						uuid = "d239b78d-bf52-39c6-8ca7-900e67f7dfec",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=882 then return false end\nlocal id=eventArgs.spellID\nlocal caster=eventArgs.entityContentID\nreturn (caster==9140 and (id==18753))\n or (caster==9141 and (id==18638 or id==18639 or id==18627))\n or (caster==9143 and (id==18437 or id==18453))\n or (caster==9147 and (id==18260 or id==18261))\n or (caster==9153 and (id==18678 or id==18681 or id==18677 or id==18675))\n or (caster==9155 and (id==18672))",
+						dequeueIfLuaFalse = true,
+						name = "Copied Factory mechanic cast",
+						uuid = "7325057c-d7a2-9910-b06b-3b89a46aa216",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 3,
+			name = "Copied Factory - raidwides, tankbusters, spreads, stack and Shockwave",
+			uuid = "9de810a3-a557-5f0a-8eaa-6509a18d4dec",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Copied Factory",
+			name = "AutoSim",
+			uuid = "40f1e247-388a-0b27-8e5a-04e3a255b655",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local t=TensorCore.mGetTarget()\nif not t or not t.incombat or not t.alive or not t.attackable then return end\nlocal duration=({[9141]=255,[9143]=280,[9147]=410,[9153]=368})[t.contentid]\nif not duration then return end\nlocal api=TensorCore.API.TensorACR\nlocal now=api.getAutoSimTime()\nif type(now)~=\"number\" or now<=0 or now>=duration then return end\napi.setAutoSimKillTime(duration)\ndata.factoryForecastBoss=t.id\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"1d570d3f-1614-33be-a19b-b0abeea9d7f2",
+								true,
+							},
+						},
+						name = "Set encounter kill estimate",
+						uuid = "d30b7f3e-4cc1-fefa-95b0-4501d50a4dc5",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=882 or not p.incombat then return false end\nlocal t=TensorCore.mGetTarget()\nif not t or not t.incombat or not t.alive or not t.attackable or data.factoryForecastBoss==t.id then return false end\nlocal id=t.contentid\nreturn id==9141 or id==9143 or id==9147 or id==9153",
+						name = "Engaged Factory boss",
+						uuid = "1d570d3f-1614-33be-a19b-b0abeea9d7f2",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/AutoSim",
+			name = "Copied Factory - boss encounter AutoSim",
+			throttleTime = 500,
+			uuid = "043f4baf-128b-6f8e-b87e-6d610132eee8",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player then self.used = true; return end\n\nlocal contentID = 9149\nlocal label = \"[Copied Factory] Engels Small Biped\"\nlocal api = TensorCore.API.TensorACR\nlocal j = player.job\nlocal eligible = player.localmapid == 882 and (j == 23 or j == 25 or j == 34)\nlocal state = AllianceFactoryBipedDoT\n\n-- Restore the previous entry on leaving the Copied Factory or changing jobs.\nif state and (not eligible or state.job ~= j) then\n    local entry = state.entry\n    if entry.enabled and entry.allowIfTarget == false and entry.allowSmartDoT == false then\n        if state.created then\n            entry.enabled = false\n            if j == state.job and api.getBlacklistEntry(contentID) then\n                local current = api.addBlacklistEntry(contentID)\n                if current == entry and current.name == label then\n                    api.deleteBlacklistEntry(contentID)\n                end\n            end\n        else\n            entry.enabled = state.enabled\n            entry.allowIfTarget = state.allowIfTarget\n            entry.allowSmartDoT = state.allowSmartDoT\n        end\n    end\n    AllianceFactoryBipedDoT = nil\n    state = nil\nend\n\nif eligible and not state then\n    local supported, exists = pcall(api.getBlacklistEntry, contentID)\n    if supported then\n        local ok, entry = pcall(api.addBlacklistEntry, contentID, label)\n        if ok and entry then\n            AllianceFactoryBipedDoT = {\n                job = j, entry = entry, created = not exists,\n                enabled = entry.enabled, allowIfTarget = entry.allowIfTarget,\n                allowSmartDoT = entry.allowSmartDoT,\n            }\n            entry.enabled = true\n            entry.allowIfTarget = false\n            entry.allowSmartDoT = false\n        end\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"33f6bf00-03fd-879f-aec7-8eeddb92388e",
+								true,
+							},
+						},
+						name = "Manage Engels Small Biped blacklist",
+						uuid = "39f6e2b3-cfbb-966a-bc23-07b25f34e660",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal state = AllianceFactoryBipedDoT\nlocal j = player.job\nlocal eligible = player.localmapid == 882 and (j == 23 or j == 25 or j == 34)\nif state then\n    return not eligible or j ~= state.job\nend\nreturn not not eligible",
+						name = "Factory job or owned cleanup",
+						uuid = "33f6bf00-03fd-879f-aec7-8eeddb92388e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory",
+			name = "Engels Small Biped DoT blacklist (BRD/BLM/SAM)",
+			throttleTime = 500,
+			timeout = 0.5,
+			uuid = "1ddd0cce-ec2c-2be1-a605-e1ecf81b79d3",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player then self.used = true; return end\n\nlocal contentID = 9134\nlocal label = \"[Copied Factory] Small Stubby\"\nlocal api = TensorCore.API.TensorACR\nlocal j = player.job\nlocal eligible = player.localmapid == 882 and (j == 23 or j == 34)\nlocal state = AllianceFactoryStubbyDoT\n\n-- Restore the previous entry on leaving the Copied Factory or changing jobs.\nif state and (not eligible or state.job ~= j) then\n    local entry = state.entry\n    if entry.enabled and entry.allowIfTarget == false and entry.allowSmartDoT == false then\n        if state.created then\n            entry.enabled = false\n            if j == state.job and api.getBlacklistEntry(contentID) then\n                local current = api.addBlacklistEntry(contentID)\n                if current == entry and current.name == label then\n                    api.deleteBlacklistEntry(contentID)\n                end\n            end\n        else\n            entry.enabled = state.enabled\n            entry.allowIfTarget = state.allowIfTarget\n            entry.allowSmartDoT = state.allowSmartDoT\n        end\n    end\n    AllianceFactoryStubbyDoT = nil\n    state = nil\nend\n\nif eligible and not state then\n    local supported, exists = pcall(api.getBlacklistEntry, contentID)\n    if supported then\n        local ok, entry = pcall(api.addBlacklistEntry, contentID, label)\n        if ok and entry then\n            AllianceFactoryStubbyDoT = {\n                job = j, entry = entry, created = not exists,\n                enabled = entry.enabled, allowIfTarget = entry.allowIfTarget,\n                allowSmartDoT = entry.allowSmartDoT,\n            }\n            entry.enabled = true\n            entry.allowIfTarget = false\n            entry.allowSmartDoT = false\n        end\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"2ed0a5e7-6cfe-68c7-bc62-72ff72c37b9e",
+								true,
+							},
+						},
+						name = "Manage Small Stubby blacklist",
+						uuid = "7a13a523-22da-359d-8804-011dd22fc573",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal state = AllianceFactoryStubbyDoT\nlocal j = player.job\nlocal eligible = player.localmapid == 882 and (j == 23 or j == 34)\nif state then\n    return not eligible or j ~= state.job\nend\nreturn not not eligible",
+						name = "Factory BRD/SAM or owned cleanup",
+						uuid = "2ed0a5e7-6cfe-68c7-bc62-72ff72c37b9e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory",
+			name = "Small Stubby DoT blacklist (BRD/SAM)",
+			throttleTime = 500,
+			timeout = 0.5,
+			uuid = "72104b5f-7b3d-dbad-8517-82e5e2df3d3a",
 			version = 2,
 		},
 	}, 
