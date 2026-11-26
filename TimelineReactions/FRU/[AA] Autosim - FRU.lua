@@ -459,6 +459,52 @@ local tbl =
 				version = 2,
 			},
 		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				eventType = 16,
+				execute = "-- Merged from AA\\[AA] Autosim - FRU (user 2026-11-26). Adjusts the schedule \"AutoSim | FRU baseline\" just built.\n-- Same countdown event and window as the baseline; until its fresh forecast exists, return without\n-- marking used so the queued reaction checks again.\nlocal forecast = data.fru_rpr_forecast\nif not forecast or forecast.version ~= 2 or forecast.aa_merge then return end\nif forecast.phase ~= 1 or forecast.anchor ~= 0 then return end\nif TensorCore.API.TensorACR.getAutoSimTime() >= 0 then return end\nlocal job = TensorCore.mGetPlayer().job\nlocal postCTCutoff = 754.093 + 15.156\nfor i = #forecast.schedule, 1, -1 do\n    local window = forecast.schedule[i]\n    local slotRow = (window[1] == \"TargetLifetime\" or window[1] == \"DotAvailability\")\n        and window[2] >= 606.015 and window[2] < 854\n    -- Samurai: these downtimes are not movement windows, so Meditate can be planned there.\n    local samRow = job == 34 and window[1] == \"CasterDowntime\"\n        and (window.tag == \"ice_downtime\" or (window[2] == postCTCutoff and window[3] == 854.296))\n    if slotRow or samRow then\n        table.remove(forecast.schedule, i)\n    elseif job == 39 and window[1] == \"RaidBuff\" and window[2] == 634.436 then\n        -- Reaper: P4 opener buff starts after the usual Whorl of Death.\n        window[2] = 631.436 + 3.75\n    end\nend\n-- Fixed P4 slots, every job: Ryne is slot 0 for all of P4, Gaia is slot 1 from Gaia spawn.\nfor _, row in ipairs({\n    {\"TargetLifetime\", 606.015, 778.296, 1, 0},\n    {\"TargetLifetime\", 631.436, 776.358, 1, 1},\n    {\"DotAvailability\", 606.015, 704.374 - 0.5, 1, 0},\n    {\"DotAvailability\", 754.093, postCTCutoff - 0.5, 1, 0},\n    {\"DotAvailability\", 631.436, 705.483 - 0.5, 1, 1},\n    {\"DotAvailability\", 754.093, postCTCutoff - 0.5, 1, 1},\n}) do\n    forecast.schedule[#forecast.schedule + 1] = row\nend\nforecast.aa_merge = true\nforecast.apply(0, 0)\nself.used = true",
+				executeType = 2,
+				mechanicTime = 13.7,
+				name = "AutoSim | Fixed P4 slots, Reaper opener, SAM downtimes",
+				timeRange = true,
+				timelineIndex = 1,
+				timerEndOffset = -13.7,
+				timerStartOffset = -73.7,
+				uuid = "2e2fede2-376e-83c1-a143-d1ccd0bbb088",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				eventType = 16,
+				execute = "-- Black Mage only (user 2026-11-11): Ley Lines can't be used from the start of Ultimate Relativity until\n-- Shell Crusher, so the field is left there and not re-entered. GroundFieldMovement value 1 = outside\n-- from the window's start. Base clock 20261014-2124-1238-5.txt: Ultimate Relativity (40266) channel\n-- start 447.140, Shell Crusher (40287) hit 505.436. Fixed mechanic, no uncertainty.\nif TensorCore.mGetPlayer().job ~= 25 then\n    self.used = true\n    return\nend\nlocal forecast = data.fru_rpr_forecast\nif not forecast or forecast.version ~= 2 or forecast.blm_ur_no_leylines then return end\nif forecast.phase ~= 1 or forecast.anchor ~= 0 then return end\nif TensorCore.API.TensorACR.getAutoSimTime() >= 0 then return end\nforecast.schedule[#forecast.schedule + 1] = {\"GroundFieldMovement\", 447.140, 505.436, 1, 0}\nforecast.blm_ur_no_leylines = true\nforecast.apply(0, 0)\nself.used = true",
+				executeType = 2,
+				mechanicTime = 13.7,
+				name = "AutoSim | [BLM] Ultimate Relativity no Ley Lines",
+				timeRange = true,
+				timelineIndex = 1,
+				timerEndOffset = -13.7,
+				timerStartOffset = -73.7,
+				uuid = "331af4ae-2345-4113-9478-946f47f2397c",
+				version = 2,
+			},
+		},
 	}, 
 	[21] = 
 	{
@@ -584,9 +630,40 @@ local tbl =
 							version = 2.1,
 						},
 					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"63df3dc2-6a1c-d9d3-9bb9-bb4fbcc074cb",
+									true,
+								},
+							},
+							gVar = "ACR_TensorWeeb4_Hotbar_Gyoten",
+							uuid = "8a2ae14a-c6e8-76af-97ef-337ededccedf",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "SAMURAI",
+							name = "Samurai",
+							uuid = "63df3dc2-6a1c-d9d3-9bb9-bb4fbcc074cb",
+							version = 3,
+						},
+					},
 				},
 				mechanicTime = 145.6,
 				name = "dash in",
@@ -874,9 +951,40 @@ local tbl =
 							version = 2.1,
 						},
 					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"7d9a2ee3-be4b-2031-9b8b-91f6354a7d21",
+									true,
+								},
+							},
+							gVar = "ACR_TensorWeeb4_Hotbar_Gyoten",
+							uuid = "b167c58e-2ba3-9e6c-848b-946c199856ba",
+							variableTogglesType = 2,
+							version = 2.1,
+						},
+					},
 				},
 				conditions = 
 				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "SAMURAI",
+							name = "Samurai",
+							uuid = "7d9a2ee3-be4b-2031-9b8b-91f6354a7d21",
+							version = 3,
+						},
+					},
 				},
 				mechanicTime = 276.1,
 				name = "dash in",
@@ -979,6 +1087,53 @@ local tbl =
 				timerEndOffset = 12,
 				timerStartOffset = -5,
 				uuid = "2d7017d0-5310-46d3-bc30-72008b12ef81",
+				version = 2,
+			},
+		},
+	},
+	[99] = 
+	{
+		
+		{
+			data = 
+			{
+				displayPath = "",
+				name = "AutoSim",
+				uuid = "cf90a035-ca71-d873-89f4-70bca303cea1",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				displayPath = "AutoSim",
+				name = "Reanchors",
+				uuid = "eeebcfc5-1215-dda8-85b0-b2fb615120e2",
+			},
+			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+				},
+				conditions = 
+				{
+				},
+				displayPath = "AutoSim/Reanchors",
+				eventType = 26,
+				execute = "-- P2 end (user 2026-11-15): resync when Shiva (Usurper of Frost, 12809) goes untargetable for the\n-- Absolute Zero enrage, source 346.202 (20261014-2124-1238-5), so the intermission and everything after\n-- it line up with the real P2 end. Several Shiva entities can go untargetable; the anchor check makes\n-- only the first one apply.\nif eventArgs.entityContentID ~= 12809 or eventArgs.isTargetable ~= false then return end\nlocal forecast = data.fru_rpr_forecast\nif not forecast or forecast.version ~= 2 or forecast.phase ~= 2 or forecast.anchor >= 346.202 then return end\nlocal actual = TensorCore.API.TensorACR.getAutoSimTime()\nif actual <= 0 then return end\nforecast.apply(346.202, actual)\nself.used = true",
+				executeType = 2,
+				mechanicTime = 387.8,
+				name = "AutoSim | Reanchor P2 end",
+				timeRange = true,
+				timelineIndex = 99,
+				timerEndOffset = 15,
+				timerStartOffset = -10,
+				uuid = "06a2b301-164a-0f9b-9579-97b3cf948fc0",
 				version = 2,
 			},
 		},
@@ -1527,6 +1682,56 @@ local tbl =
 			},
 		},
 	},
+	[149] = 
+	{
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"5863fbff-766e-0b58-afcd-0f74b91b00f0",
+									true,
+								},
+							},
+							gVar = "ACR_TensorWeeb4_Hold10Kenki",
+							uuid = "67783026-5640-91fb-8c41-9eed6faecc7f",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Self",
+							conditionType = 13,
+							jobValue = "SAMURAI",
+							name = "Samurai",
+							uuid = "5863fbff-766e-0b58-afcd-0f74b91b00f0",
+							version = 3,
+						},
+					},
+				},
+				mechanicTime = 642.1,
+				name = "hold10 on",
+				timelineIndex = 149,
+				uuid = "da1ad121-5afb-b3e3-9a47-41f0a54a4ca2",
+				version = 2,
+			},
+		},
+	},
 	[151] = 
 	{
 		
@@ -1727,6 +1932,25 @@ local tbl =
 							gVar = "ACR_TensorWeeb4_KBCancel",
 							gVarValue = 2,
 							uuid = "6045e5f8-7de9-a5a5-96b6-a83eef663a2c",
+							version = 2.1,
+						},
+					},
+					
+					{
+						data = 
+						{
+							aType = "ACR",
+							conditions = 
+							{
+								
+								{
+									"6104c278-2712-7b2b-a625-af86de77b087",
+									true,
+								},
+							},
+							gVar = "ACR_TensorWeeb4_Hold10Kenki",
+							gVarValue = 2,
+							uuid = "634bc5ee-a1c6-6ffd-88eb-4f9dd5856f64",
 							version = 2.1,
 						},
 					},
@@ -1987,7 +2211,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local forecast = data.fru_rpr_forecast\nif not forecast or forecast.version ~= 2 then return end\nlocal acr = TensorCore.API.TensorACR\nlocal actual = acr.getAutoSimTime()\nif actual <= 0 then return end\nforecast.apply(631.436, actual)\nforecast.phase = 4\n-- This action is gated by Gaia's live targetability filter.\n-- Every job: reassign slot 0 from Ryne to Gaia and slot 1 to Ryne, matching the baseline's\n-- new lifetimes at Gaia spawn. \"AutoSim | P4 slots follow target\" then keeps slot 0 on the\n-- player's target and slot 1 on the other boss (AS-015, user 2026-10-22).\nacr.setAutoSimTarget(0, eventArgs.detectionTargetID)\nforecast.p4_gaia_id = eventArgs.detectionTargetID\nforecast.p4_slot0 = eventArgs.detectionTargetID\nif forecast.p4_ryne_id then\n    acr.setAutoSimTarget(1, forecast.p4_ryne_id)\nelse\n    acr.clearAutoSimTarget(1)\nend\nself.used = true",
+							actionLua = "local forecast = data.fru_rpr_forecast\nif not forecast or forecast.version ~= 2 then return end\nlocal acr = TensorCore.API.TensorACR\nlocal actual = acr.getAutoSimTime()\nif actual <= 0 then return end\nforecast.apply(631.436, actual)\nforecast.phase = 4\n-- This action is gated by Gaia's live targetability filter.\n-- Fixed P4 slots, every job (merged from the AA copy, user 2026-11-26): Gaia takes slot 1 when she\n-- becomes targetable and Ryne stays in slot 0 (set at Frost start). \"AutoSim | P4 slots follow\n-- target\" is disabled.\nacr.setAutoSimTarget(1, eventArgs.detectionTargetID)\nforecast.p4_gaia_id = eventArgs.detectionTargetID\nif forecast.p4_ryne_id then\n    acr.setAutoSimTarget(0, forecast.p4_ryne_id)\nend\nself.used = true",
 							conditions = 
 							{
 								
@@ -2078,6 +2302,7 @@ local tbl =
 				{
 				},
 				displayPath = "AutoSim",
+				enabled = false,
 				execute = "-- AS-015 (user 2026-10-22): P4 needs Ryne and Gaia HP-balanced, so slot 0 follows the player's\n-- current target and slot 1 holds the other boss. Without this the ACR chases whichever boss has\n-- the player's DoT (Death's Design) instead of the player's target.\n-- Runs from Gaia spawn (\"AutoSim | Reanchor P4 Gaia start\" records both boss IDs) until P5 start,\n-- which sets phase 5 and puts the scheduled slots back. Other targets (party members, nothing) are\n-- ignored; P4 has no third enemy.\nlocal forecast = data.fru_rpr_forecast\nif not forecast or forecast.version ~= 2 or forecast.phase ~= 4 then return end\nlocal ryne, gaia = forecast.p4_ryne_id, forecast.p4_gaia_id\nif not ryne or not gaia then return end\nlocal tid = TensorCore.mGetPlayer().targetid\nif tid ~= ryne and tid ~= gaia then return end\nif tid == forecast.p4_slot0 then return end\nlocal acr = TensorCore.API.TensorACR\nacr.setAutoSimTarget(0, tid)\nacr.setAutoSimTarget(1, tid == ryne and gaia or ryne)\nforecast.p4_slot0 = tid",
 				executeType = 2,
 				mechanicTime = 729.2,

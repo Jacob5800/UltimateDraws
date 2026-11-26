@@ -184,6 +184,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### FRU
 
+- AutoSim: the forecast now resyncs when P2 ends, and in P4 Ryne and Gaia keep fixed target slots instead of following your target. Reaper's P4 opener buff window starts slightly later, Black Mage plans without Ley Lines during Ultimate Relativity, and Samurai can plan Meditate in two more downtimes, dashes in with Gyoten and holds Kenki in P4. (26-11-2026)
+
 - LPDU P5 Subtractive exaflare mode: shows more of the real safe area (only the next explosion on each line is cut out), hides the game's own exaflare telegraphs while the mode is selected, and no longer shares a drawing channel with the other LPDU guides. (26-11-2026)
 
 - LPDU P4 and P5: the Darklit protean bait cone is now green and follows you; Crystallize Time shows countdowns on the first two exploding hourglasses; the first Akh Morn no longer draws a second set of circles over your group marker. Crystallize Time has fewer callouts (one place-rewind call, "Stand still" for healers, a shorter knockback call and no second-knockback call), and the repeat "Bait in front" in Polarizing Strikes is now on-screen text only. (26-11-2026)
@@ -201,8 +203,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Fixed the P5 Exasquares green safe-area triangles sometimes showing two at once. Each triangle now appears once, in order. (23-11-2026)
 
 - In P4 Darklit Dragonsong, the player baiting the protean now gets the cone pre-drawn from the boss toward their bait spot until it resolves. (23-11-2026)
-
-- The end-of-P3 puddle staging marker now follows where the next boss spawns: it guides you to the number marker matching the lettered waymark nearest the spawn (A to 1, B to 2, C to 3, D to 4) instead of always marker 1. (23-11-2026)
 
 ### M4S
 
