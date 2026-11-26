@@ -238,6 +238,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Added Her Inflorescence draws in The Tower at Paradigm's Breach (upcoming building strip, train lanes in red and green, pillar fall lines) and an auto lockface for the black and white rings ("Distortion rings: auto lockface" in the Paradigm's Breach settings window, on by default). Fixed that arena's cast draws only showing when looking down, Darker Note circles not following their targets, and a DoT blacklist error on jobs without one. (26-11-2026)
+
 - Added False Idol draws in The Tower at Paradigm's Breach: a green safe area for Made Magic, red and orange lanes showing the Magical Interference beams in firing order, and Lighter Note explosion circles with the next two steps previewed. The Moogle Telegraphs blacklist entries are now listed under "Ultimate Reactions Pack (Alliance Raid)". (26-11-2026)
 
 - The Tower at Paradigm's Breach now adds the attacks it handles to the Moogle Telegraphs blacklist automatically, so Moogle no longer draws over them. (26-11-2026)

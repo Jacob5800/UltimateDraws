@@ -5019,7 +5019,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local api = TensorCore.API.TensorACR\nlocal entry = api.addBlacklistEntry(13719, \"Ark Shield\")\nif entry and (not entry.enabled or entry.allowIfTarget or entry.allowSmartDoT) then\n    entry.enabled = true\n    entry.allowIfTarget = false\n    entry.allowSmartDoT = false\n    api.saveDotBlacklist()\nend\nself.used = true",
+						actionLua = "self.used=true\nlocal api = TensorCore.API.TensorACR\n-- only ACRs with a DoT blacklist (for example BLM, BRD, SAM) provide these functions\nif not (api and api.addBlacklistEntry and api.saveDotBlacklist) then return end\nlocal entry = api.addBlacklistEntry(13719, \"Ark Shield\")\nif entry and (not entry.enabled or entry.allowIfTarget or entry.allowSmartDoT) then\n    entry.enabled = true\n    entry.allowIfTarget = false\n    entry.allowSmartDoT = false\n    api.saveDotBlacklist()\nend",
 						conditions = 
 						{
 							
@@ -13011,7 +13011,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local S=_G.PB_AllianceSettings\nif not S then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n S={values={},folder=folder,path=folder..'AllianceRaid-ParadigmsBreach.lua'}\n local existed=FileExists(S.path)\n if existed then\n  local ok,t=pcall(FileLoad,S.path)\n  if ok and type(t)=='table' then S.values=t end\n end\n local v=S.values\n local changed=not existed\n if type(v.kbLunge)~='number' or v.kbLunge<0 or v.kbLunge>2 or v.kbLunge~=math.floor(v.kbLunge) then v.kbLunge=0 changed=true end\n if type(v.kbPillar)~='boolean' then v.kbPillar=false changed=true end\n if changed then\n  pcall(function()\n   if not FolderExists(S.folder) then FolderCreate(S.folder) end\n   FileSave(S.path,v)\n  end)\n end\n _G.PB_AllianceSettings=S\nend\nlocal v=S.values\nlocal visible=GUI:Begin(\"[Paradigm's Breach] Settings\",true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n local changed=false\n local modes={\"Off\",\"Knave Lunge\",\"Clone Lunge\"}\n local cur=GUI:Combo(\"Lunge knockback immunity\",v.kbLunge+1,modes)\n if cur and cur-1~=v.kbLunge then v.kbLunge=cur-1 changed=true end\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"Requests Arm's Length (physical jobs) or Surecast (casters and healers) shortly before the chosen Lunge. Off by default: Lunge normally knocks you into the green landing boxes, so immunity keeps you where you stand. The ability is on a 120 second cooldown, so only one of the two Lunges (about 10 seconds apart) can be covered.\")\n end\n local pillar=GUI:Checkbox(\"Pillar Impact knockback immunity##PBPillar\",v.kbPillar)\n if pillar~=v.kbPillar then v.kbPillar=pillar changed=true end\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"Requests Arm's Length or Surecast shortly before the Pillar Impact shockwave. Off by default: the knockback is part of the mechanic, so immunity keeps you beside the pillar.\")\n end\n local coneOld=v.rgConeSafe==true\n local cone=GUI:Checkbox(\"Red Girl cones: green safe area##PBConeSafe\",coneOld)\n if cone~=coneOld then v.rgConeSafe=cone changed=true end\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"During the Diffuse Energy cone sequence, colours the arena green except the cones that fire next. The red cones stay. Only the cones are cut out, not other attacks.\")\n end\n if changed then\n  pcall(function()\n   if not FolderExists(S.folder) then FolderCreate(S.folder) end\n   FileSave(S.path,v)\n  end)\n end\nend\nGUI:End()",
+						actionLua = "local S=_G.PB_AllianceSettings\nif not S then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n S={values={},folder=folder,path=folder..'AllianceRaid-ParadigmsBreach.lua'}\n local existed=FileExists(S.path)\n if existed then\n  local ok,t=pcall(FileLoad,S.path)\n  if ok and type(t)=='table' then S.values=t end\n end\n local v=S.values\n local changed=not existed\n if type(v.kbLunge)~='number' or v.kbLunge<0 or v.kbLunge>2 or v.kbLunge~=math.floor(v.kbLunge) then v.kbLunge=0 changed=true end\n if type(v.kbPillar)~='boolean' then v.kbPillar=false changed=true end\n if changed then\n  pcall(function()\n   if not FolderExists(S.folder) then FolderCreate(S.folder) end\n   FileSave(S.path,v)\n  end)\n end\n _G.PB_AllianceSettings=S\nend\nlocal v=S.values\nlocal visible=GUI:Begin(\"[Paradigm's Breach] Settings\",true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n local changed=false\n local modes={\"Off\",\"Knave Lunge\",\"Clone Lunge\"}\n local cur=GUI:Combo(\"Lunge knockback immunity\",v.kbLunge+1,modes)\n if cur and cur-1~=v.kbLunge then v.kbLunge=cur-1 changed=true end\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"Requests Arm's Length (physical jobs) or Surecast (casters and healers) shortly before the chosen Lunge. Off by default: Lunge normally knocks you into the green landing boxes, so immunity keeps you where you stand. The ability is on a 120 second cooldown, so only one of the two Lunges (about 10 seconds apart) can be covered.\")\n end\n local pillar=GUI:Checkbox(\"Pillar Impact knockback immunity##PBPillar\",v.kbPillar)\n if pillar~=v.kbPillar then v.kbPillar=pillar changed=true end\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"Requests Arm's Length or Surecast shortly before the Pillar Impact shockwave. Off by default: the knockback is part of the mechanic, so immunity keeps you beside the pillar.\")\n end\n local coneOld=v.rgConeSafe==true\n local cone=GUI:Checkbox(\"Red Girl cones: green safe area##PBConeSafe\",coneOld)\n if cone~=coneOld then v.rgConeSafe=cone changed=true end\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"During the Diffuse Energy cone sequence, colours the arena green except the cones that fire next. The red cones stay. Only the cones are cut out, not other attacks.\")\n end\n local ringOld=v.ringFace~=false\n local ring=GUI:Checkbox(\"Distortion rings: auto lockface##PBRingFace\",ringOld)\n if ring~=ringOld then v.ringFace=ring changed=true end\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"Turns you for each black or white ring shortly before it hits: white faces away from the arena centre, black faces the centre. On by default.\")\n end\n if changed then\n  pcall(function()\n   if not FolderExists(S.folder) then FolderCreate(S.folder) end\n   FileSave(S.path,v)\n  end)\n end\nend\nGUI:End()",
 						conditions = 
 						{
 							
@@ -15427,7 +15427,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local api=TensorCore.API.TensorACR\nlocal names={[9985]='Red Sphere',[9987]='Black Wall',[9986]='White Wall',[9983]='Black Pylon',[9984]='White Pylon'}\nlocal id=eventArgs.entityContentID\nlocal entry=api.addBlacklistEntry(id,names[id])\nif entry and (not entry.enabled or entry.allowIfTarget or entry.allowSmartDoT) then\n    entry.enabled=true\n    entry.allowIfTarget=false\n    entry.allowSmartDoT=false\n    api.saveDotBlacklist()\nend\nself.used=true",
+						actionLua = "self.used=true\nlocal api=TensorCore.API.TensorACR\n-- only ACRs with a DoT blacklist (for example BLM, BRD, SAM) provide these functions\nif not (api and api.addBlacklistEntry and api.saveDotBlacklist) then return end\nlocal names={[9985]='Red Sphere',[9987]='Black Wall',[9986]='White Wall',[9983]='Black Pylon',[9984]='White Pylon'}\nlocal id=eventArgs.entityContentID\nlocal entry=api.addBlacklistEntry(id,names[id])\nif entry and (not entry.enabled or entry.allowIfTarget or entry.allowSmartDoT) then\n    entry.enabled=true\n    entry.allowIfTarget=false\n    entry.allowSmartDoT=false\n    api.saveDotBlacklist()\nend",
 						conditions = 
 						{
 							
@@ -16026,7 +16026,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal SPEC={[23533]={k='r'},[23535]={skip=true},[23522]={k='r'}}\nlocal s=SPEC[e.aoeID]\nlocal ct=e.aoeCastType\nlocal k\nif s then\n if s.skip then return end\n k=s.k\nelse\n if ct==2 and e.aoeLength>0 and e.aoeLength<=30 and e.aoeType~=27 then k='c'\n elseif ct==12 and e.aoeLength>0 and e.aoeWidth>0 and e.aoeLength<=70 and e.aoeWidth<=40 then k='r'\n elseif ct==13 and e.aoeLength>0 and e.aoeLength<=50 then k='cone'\n end\nend\nif not k then return end\nlocal col=(s and s.col) or 0x703333FF\nlocal d=TensorCore.getStaticDrawer(col,2)\nlocal x,y,z=e.x,e.y,e.z\nif k=='c' then\n d:addTimedCircle(ms,x,y,z,e.aoeLength,0,false,true)\nelseif k=='r' then\n d:addTimedRect(ms,x,y,z,e.aoeLength,e.aoeWidth,e.heading,0,false,true)\nelse\n local ang=(s and s.ang) or (e.aoeType==5 and 2*math.pi/3 or math.pi/2)\n d:addTimedCone(ms,x,y,z,e.aoeLength,ang,e.heading,0,false,true)\nend",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal SPEC={[23533]={k='r'},[23535]={skip=true},[23522]={k='r'}}\nlocal s=SPEC[e.aoeID]\nlocal ct=e.aoeCastType\nlocal k\nif s then\n if s.skip then return end\n k=s.k\nelse\n if ct==2 and e.aoeLength>0 and e.aoeLength<=30 and e.aoeType~=27 then k='c'\n elseif ct==12 and e.aoeLength>0 and e.aoeWidth>0 and e.aoeLength<=70 and e.aoeWidth<=40 then k='r'\n elseif ct==13 and e.aoeLength>0 and e.aoeLength<=50 then k='cone'\n end\nend\nif not k then return end\nlocal col=(s and s.col) or 0x703333FF\n-- FLAG_RENDER_UI: flat at floor height and not hidden by the arena's screen effects\nlocal d=TensorCore.getStaticDrawer(col,2,0,Argus2.RenderFlags.FLAG_RENDER_UI)\nlocal p=TensorCore.mGetPlayer()\nlocal x,y,z=e.x,e.y,e.z\nif p and p.pos then y=p.pos.y+0.05 end\nif k=='c' then\n -- Darker Note (23516) lands on its target at the end of the cast, so the circle follows that player\n if e.aoeID==23516 then\n  local c=TensorCore.mGetEntity(e.entityID)\n  local t=c and c.castinginfo and c.castinginfo.channeltargetid\n  if t and t~=0 and t~=e.entityID then\n   d:addTimedCircleOnEnt(ms,t,e.aoeLength,0,false,true)\n   return\n  end\n end\n d:addTimedCircle(ms,x,y,z,e.aoeLength,0,false,true)\nelseif k=='r' then\n d:addTimedRect(ms,x,y,z,e.aoeLength,e.aoeWidth,e.heading,0,false,true)\nelse\n local ang=(s and s.ang) or (e.aoeType==5 and 2*math.pi/3 or math.pi/2)\n d:addTimedCone(ms,x,y,z,e.aoeLength,ang,e.heading,0,false,true)\nend",
 						conditions = 
 						{
 							
@@ -16451,6 +16451,294 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal o=TensorCore.mGetEntity(e.entityID)\nif not o or not o.pos then return end\n-- Uneven Footing hits 9s after the marker is armed; the strip lies a quarter turn from the marker heading.\n-- The game's own 1.6s cast draw takes over at the end, so this one lasts 7.5s.\nlocal h=o.pos.h-math.pi/2\nlocal sx,sz=math.sin(h),math.cos(h)\n-- FLAG_RENDER_UI: this arena's screen effects hide plain flat draws unless you look down\nlocal d=TensorCore.getStaticDrawer(0x703333FF,0,0,Argus2.RenderFlags.FLAG_RENDER_UI)\nfor i=0,7 do\n local off=-35+10*i\n -- marker height is the arena floor, so a jumping player does not raise the strip\n d:addTimedCenteredRect(7500,o.pos.x+off*sx,o.pos.y+0.05,o.pos.z+off*sz,10,30,h,0,false,true)\nend\n",
+						conditions = 
+						{
+							
+							{
+								"73f6a280-8727-35d3-91f5-f4d1e50a8254",
+								true,
+							},
+						},
+						name = "Draw the upcoming building strip",
+						uuid = "840c3689-59cd-95f4-865b-969bb73815e1",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e or e.entityContentID~=2011500 or e.a2~=1 or e.a3~=2 then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==966) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Building armed",
+						uuid = "73f6a280-8727-35d3-91f5-f4d1e50a8254",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/False Idol and Her Inflorescence/Draws",
+			eventType = 19,
+			name = "[Paradigm's Breach] Her Inflorescence upcoming building (red)",
+			uuid = "18e5eaea-16b0-618d-9e25-8ca8b2f86cf6",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal st=data.fiSignal\nif not st then st={} data.fiSignal=st end\n-- lanes 8..12 run north to south at z -720..-680; 16/32 is the lane the train takes, 64/128 is clear\nst[e.a1]={danger=(e.a2==16),fin=Now()+12000}\n",
+						conditions = 
+						{
+							
+							{
+								"08a1212e-832d-e954-8929-6a23156c3c29",
+								true,
+							},
+						},
+						name = "Record the lane colour",
+						uuid = "7ef4a1ef-0820-506a-89ee-0f51fb0dc1df",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e or e.a1<8 or e.a1>12 then return false end\nif not ((e.a2==16 and e.a3==32) or (e.a2==64 and e.a3==128)) then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=966 or not p.pos then return false end\nreturn (p.pos.x+700)^2+(p.pos.z+700)^2<=2500\n",
+						dequeueIfLuaFalse = true,
+						name = "Signal light set",
+						uuid = "08a1212e-832d-e954-8929-6a23156c3c29",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/False Idol and Her Inflorescence/Draws",
+			eventType = 14,
+			name = "[Paradigm's Breach] Her Inflorescence signal lane record",
+			uuid = "18ef3d3c-f5df-46cf-9b02-0f03bc619ca7",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal st=data.fiSignal\nif not st then return end\nlocal now=Now()\nlocal ui=Argus2.RenderFlags.FLAG_RENDER_UI\nlocal red,green\nlocal any=false\nfor i,l in pairs(st) do\n if now>=l.fin then st[i]=nil\n else\n  any=true\n  -- FLAG_RENDER_UI: this arena's screen effects hide plain flat draws unless you look down\n  red=red or TensorCore.getStaticDrawer(0x703333FF,2,0,ui)\n  green=green or TensorCore.getStaticDrawer(0x5000FF00,2,0,ui)\n  local d=l.danger and red or green\n  -- fixed arena floor height (600): following the player's height made the lanes move on jumps\n  d:addRect(-724.5,600.05,-720+10*(i-8),49,10,math.pi/2,false)\n end\nend\nif not any then data.fiSignal=nil end\n",
+						conditions = 
+						{
+							
+							{
+								"e7d33db0-de3b-de8f-80ab-4a9d8ea32f7c",
+								true,
+							},
+						},
+						name = "Draw unsafe lanes red and safe lanes green",
+						uuid = "614244bb-1434-9abc-b697-6fcf46041fce",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not data.fiSignal then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==966) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Signal lanes pending",
+						uuid = "e7d33db0-de3b-de8f-80ab-4a9d8ea32f7c",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/False Idol and Her Inflorescence/Draws",
+			eventType = 12,
+			name = "[Paradigm's Breach] Her Inflorescence signal lanes (red and green)",
+			uuid = "0737656a-c34d-5b76-b8bd-1b9155bac5fd",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\ndata.fiSignal=nil\n",
+						conditions = 
+						{
+							
+							{
+								"2d0fe958-af9a-817e-abb0-5ee9a8cca140",
+								true,
+							},
+						},
+						name = "Clear signal lanes",
+						uuid = "ccf8380b-55ee-a12b-a47d-721632f6741e",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not eventArgs or eventArgs.spellID~=23525 then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==966) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Crash hit",
+						uuid = "2d0fe958-af9a-817e-abb0-5ee9a8cca140",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/False Idol and Her Inflorescence/Draws",
+			eventType = 2,
+			name = "[Paradigm's Breach] Her Inflorescence signal lanes resolved",
+			uuid = "e468da1b-10b0-a659-a663-48ae869424ea",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal o=TensorCore.mGetEntity(e.entityID)\nif not o or not o.pos then return end\nlocal h=o.pos.h\nlocal sx,sz=math.sin(h),math.cos(h)\nlocal ids=data.fiPillar\nif not ids then ids={} data.fiPillar=ids end\n-- Towerfall: 14 wide from the pillar along its heading (Splatoon element: 50 long)\n-- FLAG_RENDER_UI: this arena's screen effects hide plain flat draws unless you look down\nlocal d=TensorCore.getStaticDrawer(0x703333FF,0,0,Argus2.RenderFlags.FLAG_RENDER_UI)\nfor i=0,4 do\n local off=5+10*i\n local id=d:addTimedCenteredRect(14000,o.pos.x+off*sx,o.pos.y+0.05,o.pos.z+off*sz,10,14,h,0,false,true)\n if id then ids[#ids+1]=id end\nend\n",
+						conditions = 
+						{
+							
+							{
+								"9f28cf84-5e52-4a72-a64b-e1d520be8560",
+								true,
+							},
+						},
+						name = "Draw where the pillar will fall",
+						uuid = "27d45f56-8e4d-4214-a869-4f711be38b48",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e or e.entityContentID~=2011501 or e.a2~=16 or e.a3~=32 then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==966) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Pillar landed",
+						uuid = "9f28cf84-5e52-4a72-a64b-e1d520be8560",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/False Idol and Her Inflorescence/Draws",
+			eventType = 19,
+			name = "[Paradigm's Breach] Her Inflorescence pillar fall line (red)",
+			uuid = "a1a520d9-33ab-ea48-92aa-23d5d7129227",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nfor _,id in ipairs(data.fiPillar or {}) do Argus.deleteTimedShape(id) end\ndata.fiPillar=nil\n",
+						conditions = 
+						{
+							
+							{
+								"ea08722a-6756-59e2-8d45-448f31d7e107",
+								true,
+							},
+						},
+						name = "Clear the pillar lines",
+						uuid = "e5142e14-38ff-8864-b2b5-fa2f4757cb35",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not eventArgs or eventArgs.spellID~=23540 then return false end\nreturn data.fiPillar~=nil\n",
+						dequeueIfLuaFalse = true,
+						name = "Towerfall hit",
+						uuid = "ea08722a-6756-59e2-8d45-448f31d7e107",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/False Idol and Her Inflorescence/Draws",
+			eventType = 2,
+			name = "[Paradigm's Breach] Her Inflorescence pillar fall line resolved",
+			uuid = "61e64452-3480-b110-99a5-2c736a78249d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "The Tower at Paradigm's Breach/False Idol and Her Inflorescence",
 			name = "AutoSim",
 			uuid = "00ec54bb-d368-41e9-acb9-5c168f71fe58",
@@ -16734,6 +17022,149 @@ local tbl =
 			name = "[Paradigm's Breach] Her Inflorescence Pillar Impact knockback immunity (optional)",
 			timeout = 10,
 			uuid = "da845d91-7feb-335a-ba94-d9294b97da63",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e then return end\nlocal q=data.fiRings\nif not q then q={} data.fiRings=q end\n-- BossMod A36 Dissonance: resolves 8.1s after arming; 2011498 white (face away), 2011499 black (face the centre)\nq[#q+1]={white=e.entityContentID==2011498,deadline=Now()+8100}\n",
+						conditions = 
+						{
+							
+							{
+								"29780669-223c-f242-bec9-24038596fbc0",
+								true,
+							},
+						},
+						name = "Queue ring colour",
+						uuid = "55017b7e-b2ac-380c-9703-36589f341a53",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e or (e.entityContentID~=2011498 and e.entityContentID~=2011499) or e.a2~=1 or e.a3~=2 then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==966) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Ring armed",
+						uuid = "29780669-223c-f242-bec9-24038596fbc0",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/False Idol and Her Inflorescence",
+			eventType = 19,
+			name = "[Paradigm's Breach] Distortion rings - record",
+			uuid = "eaa4d220-e473-a4fa-adf6-524fa5deb806",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal q=data.fiRings\nif not q then return end\nlocal white=eventArgs.spellID==23531\nfor i,r in ipairs(q) do\n -- only a ring that is about to resolve, so a repeated hit event cannot drop a later one\n if r.white==white and r.deadline-Now()<1500 then table.remove(q,i) break end\nend\nif #q==0 then data.fiRings=nil end\n",
+						conditions = 
+						{
+							
+							{
+								"8a779b84-f544-c693-998e-0607fbbdf2b4",
+								true,
+							},
+						},
+						name = "Drop the resolved ring",
+						uuid = "4d154cca-f39f-1618-92e7-bce47f5b1476",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e or (e.spellID~=23531 and e.spellID~=23532) then return false end\nreturn data.fiRings~=nil\n",
+						dequeueIfLuaFalse = true,
+						name = "Dissonance hit",
+						uuid = "8a779b84-f544-c693-998e-0607fbbdf2b4",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/False Idol and Her Inflorescence",
+			eventType = 2,
+			name = "[Paradigm's Breach] Distortion rings - resolved",
+			uuid = "13236c9a-5246-c9e8-99e3-3c090e3dd46b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal S=_G.PB_AllianceSettings\nif not S then return end\nlocal A=TensorCore.API.TensorACR\nif not A or not A.setLockFaceHeading then return end\nlocal p=TensorCore.mGetPlayer()\nlocal now=Now()\nlocal q=data.fiRings\nif q then\n while q[1] and now>q[1].deadline+700 do table.remove(q,1) end\n if #q==0 then data.fiRings=nil q=nil end\nend\nlocal r=q and q[1]\nif r and S.values.ringFace~=false and p and p.alive and p.localmapid==966 and r.deadline-now<=3000 then\n local dx,dz=-700-p.pos.x,-700-p.pos.z\n -- at the very centre the direction is undefined, so keep the last heading\n if dx*dx+dz*dz>0.25 then\n  local h=TensorCore.getHeadingToTarget(p.pos,{x=-700,y=p.pos.y,z=-700})\n  if r.white then h=(h+math.pi)%(2*math.pi) end\n  A.setLockFaceHeading(h)\n  A.setHardLockFace(true)\n  A.toggleLockFace(true)\n  S.ownsRingLock=true\n end\nelseif S.ownsRingLock then\n A.toggleLockFace(false)\n A.setHardLockFace(false)\n S.ownsRingLock=nil\nend\n",
+						conditions = 
+						{
+							
+							{
+								"60c635bc-fbb6-d9f0-97d1-5ce53b4e9a98",
+								true,
+							},
+						},
+						name = "Face for the next ring; release after",
+						uuid = "fce65e0e-7ea1-6091-b98b-e867584f94ff",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local S=_G.PB_AllianceSettings\nreturn (data.fiRings~=nil or (S~=nil and S.ownsRingLock==true)) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Ring pending or lock owned",
+						uuid = "60c635bc-fbb6-d9f0-97d1-5ce53b4e9a98",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Tower at Paradigm's Breach/False Idol and Her Inflorescence",
+			name = "[Paradigm's Breach] Distortion rings - auto lockface (optional)",
+			uuid = "5c16168a-7b6d-499a-b8a9-d391bde2ec65",
 			version = 2,
 		},
 	},
