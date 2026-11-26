@@ -8876,7 +8876,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local r=AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot()\nlocal function clear()\n if data.lpdu_darklit_shapes then for _,id in ipairs(data.lpdu_darklit_shapes) do Argus.deleteTimedShape(id) end end\n data.lpdu_darklit_shapes={}\nend\nlocal function draw(x,z,seconds)\n clear()\n local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n local t={x=x,y=p.pos.y,z=z};local ms=math.floor(seconds*1000)\n local id=d:addTimedCircle(ms,x,p.pos.y+.05,z,1.2,0,true,true)\n if id then table.insert(data.lpdu_darklit_shapes,id) end\n local distance=TensorCore.getDistance2d(p.pos,t)\n if distance>1 then\n  id=d:addTimedArrow(ms,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,t),math.max(.15,distance-1),1,1,1,0,true)\n  if id then table.insert(data.lpdu_darklit_shapes,id) end\n end\nend\nlocal all={\"T1\",\"T2\",\"H1\",\"H2\",\"M1\",\"M2\",\"R1\",\"R2\"}\nlocal byid,ents,water,links={},{},{},{}\nlocal nw=0\nfor _,s in ipairs(all) do\n local e=r.entOf(s);if not e then return end\n byid[e.id]=s;ents[s]=e\n if TensorCore.getBuff(e,2461) then water[s]=true;nw=nw+1 end\n links[s]={}\nend\nif nw~=2 then return end\nfor id,ts in pairs(Argus.getCurrentTethers()) do\n local a=byid[id]\n if a then for _,t in ipairs(ts) do\n  local b=byid[t.targetid]\n  if t.type==110 and b then links[a][b]=true;links[b][a]=true end\n end end\nend\nlocal tether,nt={},0\nfor _,s in ipairs(all) do local n=0;for _ in pairs(links[s]) do n=n+1 end\n if n>0 then if n~=2 then return end;tether[s]=true;nt=nt+1 end\nend\nif nt~=4 then return end\nlocal anchor=tether.H1 and \"H1\" or (tether.H2 and \"H2\" or nil)\nif not anchor then return end\nlocal south,east={},{}\nlocal neighbors,opposite={},nil\nfor _,s in ipairs(all) do\n if tether[s] then\n  south[s]=links[anchor][s]==true\n  if south[s] then table.insert(neighbors,s) elseif s~=anchor then opposite=s end\n end\nend\nif #neighbors~=2 or opposite==nil then return end\n-- Keep the healer north; connected players south; opposite player north.\n-- E/W is free in Mami: preserve the two southern players' visible order.\ntable.sort(neighbors,function(a,b) return ents[a].pos.x<ents[b].pos.x end)\neast[anchor]=false;east[opposite]=true;east[neighbors[1]]=false;east[neighbors[2]]=true\nlocal west,baits={},{}\nfor _,s in ipairs(all) do\n if not tether[s] then\n  if s==\"T1\" or s==\"T2\" or s==\"H1\" or s==\"H2\" then table.insert(west,s) else table.insert(baits,s) end\n end\nend\nif #west~=2 or #baits~=2 then return end\n-- Mami non-tethers: supports west, DPS east; preserve their N/S order.\nfor _,pair in ipairs({west,baits}) do\n table.sort(pair,function(a,b) return ents[a].pos.z<ents[b].pos.z end)\n south[pair[1]]=false;south[pair[2]]=true\nend\nfor _,s in ipairs(west) do east[s]=false end\nfor _,s in ipairs(baits) do east[s]=true end\nlocal wt,wb\nfor _,s in ipairs(all) do if water[s] then if tether[s] then wt=s else wb=s end end end\nif wt==nil or wb==nil then return end\nif south[wt]==south[wb] then\n local pair=east[wb] and baits or west\n south[pair[1]],south[pair[2]]=south[pair[2]],south[pair[1]]\nend\ndata.lpdu_darklit_assignment={south=south,east=east,tether=tether,water=water}\ndata.lpdu_darklit_stage=1\nlocal sn=south[slot];local en=east[slot]\nif tether[slot] then\n draw(en and 102 or 98,sn and 111 or 89,11)\n AnyoneCore.Shotcall(sn and \"South tower\" or \"North tower\",true,6,false)\nelse\n local bx,bz=en and 105 or 95,sn and 103 or 97\n draw(bx,bz,11)\n -- Protean pre-draw for the baiter only (BossMod P4DarklitDragonsongPathOfLight: 60 degree cone, 30 degree\n -- half-angle, from the boss at the centre onto each of the four closest non-chained players; resolves at\n -- timeline 750.2). Kept outside lpdu_darklit_shapes so the later Spirit Taker guidance does not clear it\n -- before the hit; it expires on its own.\n if data.lpdu_darklit_cone then Argus.deleteTimedShape(data.lpdu_darklit_cone);data.lpdu_darklit_cone=nil end\n local ms=math.max(1000,math.floor((750.3-TensorReactions_CurrentTimer)*1000))\n local cone=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(1,.25,.25,.22),2,1)\n data.lpdu_darklit_cone=cone:addTimedCone(ms,100,p.pos.y+.05,100,30,math.pi/3,TensorCore.getHeadingToTarget({x=100,y=p.pos.y,z=100},{x=bx,y=p.pos.y,z=bz}),0,true,true)\n AnyoneCore.Shotcall(\"Bait protean \"..(sn and \"south\" or \"north\")..(en and \"east\" or \"west\"),true,6,false)\nend\nself.used=true",
+							actionLua = "local r=AnyoneCore.Roster\nlocal p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot()\nlocal function clear()\n if data.lpdu_darklit_shapes then for _,id in ipairs(data.lpdu_darklit_shapes) do Argus.deleteTimedShape(id) end end\n data.lpdu_darklit_shapes={}\nend\nlocal function draw(x,z,seconds)\n clear()\n local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n local t={x=x,y=p.pos.y,z=z};local ms=math.floor(seconds*1000)\n local id=d:addTimedCircle(ms,x,p.pos.y+.05,z,1.2,0,true,true)\n if id then table.insert(data.lpdu_darklit_shapes,id) end\n local distance=TensorCore.getDistance2d(p.pos,t)\n if distance>1 then\n  id=d:addTimedArrow(ms,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,t),math.max(.15,distance-1),1,1,1,0,true)\n  if id then table.insert(data.lpdu_darklit_shapes,id) end\n end\nend\nlocal all={\"T1\",\"T2\",\"H1\",\"H2\",\"M1\",\"M2\",\"R1\",\"R2\"}\nlocal byid,ents,water,links={},{},{},{}\nlocal nw=0\nfor _,s in ipairs(all) do\n local e=r.entOf(s);if not e then return end\n byid[e.id]=s;ents[s]=e\n if TensorCore.getBuff(e,2461) then water[s]=true;nw=nw+1 end\n links[s]={}\nend\nif nw~=2 then return end\nfor id,ts in pairs(Argus.getCurrentTethers()) do\n local a=byid[id]\n if a then for _,t in ipairs(ts) do\n  local b=byid[t.targetid]\n  if t.type==110 and b then links[a][b]=true;links[b][a]=true end\n end end\nend\nlocal tether,nt={},0\nfor _,s in ipairs(all) do local n=0;for _ in pairs(links[s]) do n=n+1 end\n if n>0 then if n~=2 then return end;tether[s]=true;nt=nt+1 end\nend\nif nt~=4 then return end\nlocal anchor=tether.H1 and \"H1\" or (tether.H2 and \"H2\" or nil)\nif not anchor then return end\nlocal south,east={},{}\nlocal neighbors,opposite={},nil\nfor _,s in ipairs(all) do\n if tether[s] then\n  south[s]=links[anchor][s]==true\n  if south[s] then table.insert(neighbors,s) elseif s~=anchor then opposite=s end\n end\nend\nif #neighbors~=2 or opposite==nil then return end\n-- Keep the healer north; connected players south; opposite player north.\n-- E/W is free in Mami: preserve the two southern players' visible order.\ntable.sort(neighbors,function(a,b) return ents[a].pos.x<ents[b].pos.x end)\neast[anchor]=false;east[opposite]=true;east[neighbors[1]]=false;east[neighbors[2]]=true\nlocal west,baits={},{}\nfor _,s in ipairs(all) do\n if not tether[s] then\n  if s==\"T1\" or s==\"T2\" or s==\"H1\" or s==\"H2\" then table.insert(west,s) else table.insert(baits,s) end\n end\nend\nif #west~=2 or #baits~=2 then return end\n-- Mami non-tethers: supports west, DPS east; preserve their N/S order.\nfor _,pair in ipairs({west,baits}) do\n table.sort(pair,function(a,b) return ents[a].pos.z<ents[b].pos.z end)\n south[pair[1]]=false;south[pair[2]]=true\nend\nfor _,s in ipairs(west) do east[s]=false end\nfor _,s in ipairs(baits) do east[s]=true end\nlocal wt,wb\nfor _,s in ipairs(all) do if water[s] then if tether[s] then wt=s else wb=s end end end\nif wt==nil or wb==nil then return end\nif south[wt]==south[wb] then\n local pair=east[wb] and baits or west\n south[pair[1]],south[pair[2]]=south[pair[2]],south[pair[1]]\nend\ndata.lpdu_darklit_assignment={south=south,east=east,tether=tether,water=water}\ndata.lpdu_darklit_stage=1\nlocal sn=south[slot];local en=east[slot]\nif tether[slot] then\n draw(en and 102 or 98,sn and 111 or 89,11)\n AnyoneCore.Shotcall(sn and \"South tower\" or \"North tower\",true,6,false)\nelse\n local bx,bz=en and 105 or 95,sn and 103 or 97\n draw(bx,bz,11)\n -- Protean pre-draw for the baiter only (BossMod P4DarklitDragonsongPathOfLight: 60 degree cone, 30 degree\n -- half-angle, from the boss at the centre onto each of the four closest non-chained players; resolves at\n -- timeline 750.2). Green, and \"[LPDU] P4 Mami Darklit - Protean cone follows player\" keeps it aimed at\n -- the player until then. Kept outside lpdu_darklit_shapes so the later Spirit Taker guidance does not\n -- clear it before the hit; it expires on its own.\n if data.lpdu_darklit_cone then Argus.deleteTimedShape(data.lpdu_darklit_cone);data.lpdu_darklit_cone=nil end\n local ms=math.max(1000,math.floor((750.3-TensorReactions_CurrentTimer)*1000))\n local cone=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.25),2,1)\n data.lpdu_darklit_cone=cone:addTimedCone(ms,100,p.pos.y+.05,100,30,math.pi/3,TensorCore.getHeadingToTarget({x=100,y=p.pos.y,z=100},p.pos),0,true,true)\n data.lpdu_darklit_cone_end=Now()+ms\n AnyoneCore.Shotcall(\"Bait protean \"..(sn and \"south\" or \"north\")..(en and \"east\" or \"west\"),true,6,false)\nend\nself.used=true",
 							name = "Personal Tower or Protean",
 							uuid = "fc8dd570-75ec-bb78-87d5-215492bdadeb",
 							version = 2.1,
@@ -9339,6 +9339,60 @@ local tbl =
 		{
 			data = 
 			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "self.used=true\nif not data or not data.lpdu_darklit_cone then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then return end\nlocal d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.25),2,1)\nlocal heading=TensorCore.getHeadingToTarget({x=100,y=p.pos.y,z=100},p.pos)\n-- Only the heading changes; the cone keeps its own timeout.\nd:updateTimedCone(data.lpdu_darklit_cone,nil,nil,nil,nil,nil,nil,heading)",
+							conditions = 
+							{
+								
+								{
+									"409a8f79-f752-eb13-ae31-596b0df1ac81",
+									true,
+								},
+							},
+							name = "Aim protean cone at player",
+							uuid = "d76f5519-98be-bafe-8882-0a20519c3ba7",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "return (data ~= nil and data.lpdu_darklit_cone ~= nil and data.lpdu_darklit_cone_end ~= nil and Now() < data.lpdu_darklit_cone_end) and true or false",
+							dequeueIfLuaFalse = true,
+							name = "Own protean cone still active",
+							uuid = "409a8f79-f752-eb13-ae31-596b0df1ac81",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 12,
+				loop = true,
+				mechanicTime = 738.2,
+				name = "[LPDU] P4 Mami Darklit - Protean cone follows player",
+				timeRange = true,
+				timelineIndex = 166,
+				timerEndOffset = 13,
+				timerStartOffset = 0.5,
+				uuid = "512887e0-608f-41fc-be90-a95740157888",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
 				displayPath = "",
 				name = "LPDU ",
 				uuid = "36c1b5e6-9deb-d5cc-8bd4-758f2b66a3d7",
@@ -9568,6 +9622,34 @@ local tbl =
 			},
 			inheritanceRoot = "store\\anyone\\fru\\modules\\draws",
 			objectType = "folder",
+		},
+		
+		{
+			data = 
+			{
+				name = "[Draw] Usurper Akh Morn",
+				uuid = "891dbbca-af4a-b1fe-9819-e15c672c2411",
+				version = 2,
+			},
+			inheritedObjectUUID = "dec70965-a82c-c9ca-aae1-54583281672c",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
+		},
+		
+		{
+			data = 
+			{
+				name = "[Draw] Oracle Akh Morn",
+				uuid = "6d03a2d7-0342-695b-b734-79b80cb24c27",
+				version = 2,
+			},
+			inheritedObjectUUID = "b6eb7a96-ff92-01da-90bb-7d9211b71e90",
+			inheritedOverwrites = 
+			{
+				enabled = false,
+			},
 		},
 		
 		{
@@ -10176,7 +10258,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_ct\nif s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end\n  s.shapes={}\n end\n function s.draw(x,z,seconds,text)\n  s.clear();local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then\n   id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end\n  end\n  if text then AnyoneCore.Shotcall(text,true,seconds,false) end\n end\n function s.polar(side,degrees,radius,seconds,text)\n  local angle=side*degrees*math.pi/180\n  s.draw(100+math.sin(angle)*radius,100+math.cos(angle)*radius,seconds,text)\n end\nend\nlocal a=s.mine;if a==nil or not a.blue then self.used=true;return end\nif TensorCore.hasBuff(p,3264) then return end\nif s.cleanseShape then Argus.deleteTimedShape(s.cleanseShape);s.cleanseShape=nil end\ns.clear();s.cleansed=true\nAnyoneCore.Shotcall(\"Cleanse done - place rewind with your light party\",true,3,false)\nself.used=true",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_ct\nif s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end\n  s.shapes={}\n end\n function s.draw(x,z,seconds,text)\n  s.clear();local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then\n   id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end\n  end\n  if text then AnyoneCore.Shotcall(text,true,seconds,false) end\n end\n function s.polar(side,degrees,radius,seconds,text)\n  local angle=side*degrees*math.pi/180\n  s.draw(100+math.sin(angle)*radius,100+math.cos(angle)*radius,seconds,text)\n end\nend\nlocal a=s.mine;if a==nil or not a.blue then self.used=true;return end\nif TensorCore.hasBuff(p,3264) then return end\nif s.cleanseShape then Argus.deleteTimedShape(s.cleanseShape);s.cleanseShape=nil end\n-- No callout here: \"Personal Rewind Position\" gives the single place-rewind call (user 2026-11-26).\ns.clear();s.cleansed=true\nself.used=true",
 							conditions = 
 							{
 								
@@ -10228,7 +10310,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_ct\nif s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end\n  s.shapes={}\n end\n function s.draw(x,z,seconds,text)\n  s.clear();local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then\n   id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end\n  end\n  if text then AnyoneCore.Shotcall(text,true,seconds,false) end\n end\n function s.polar(side,degrees,radius,seconds,text)\n  local angle=side*degrees*math.pi/180\n  s.draw(100+math.sin(angle)*radius,100+math.cos(angle)*radius,seconds,text)\n end\nend\nlocal a=s.mine;if a==nil then self.used=true;return end\ns.clear()\nif a.blue and TensorCore.hasBuff(p,3264) then\n local text={eruption=\"Cleanse west\",stack=\"Cleanse east\",ice=\"Cleanse southwest\",water=\"Cleanse southeast\"}\n AnyoneCore.Shotcall(text[a.kind]..\" - dodge exalines\",true,4.5,false)\nelse AnyoneCore.Shotcall(\"Place rewind - light party behind tank\",true,4.5,false) end\nself.used=true",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_ct\nif s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end\n  s.shapes={}\n end\n function s.draw(x,z,seconds,text)\n  s.clear();local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then\n   id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end\n  end\n  if text then AnyoneCore.Shotcall(text,true,seconds,false) end\n end\n function s.polar(side,degrees,radius,seconds,text)\n  local angle=side*degrees*math.pi/180\n  s.draw(100+math.sin(angle)*radius,100+math.cos(angle)*radius,seconds,text)\n end\nend\nlocal a=s.mine;if a==nil then self.used=true;return end\ns.clear()\n-- Only players still holding the debuff are called here; \"Personal Rewind Position\" gives the place-rewind call.\nif a.blue and TensorCore.hasBuff(p,3264) then\n local text={eruption=\"Cleanse west\",stack=\"Cleanse east\",ice=\"Cleanse southwest\",water=\"Cleanse southeast\"}\n AnyoneCore.Shotcall(text[a.kind]..\" - dodge exalines\",true,4.5,false)\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -10280,7 +10362,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_ct\nif s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end\n  s.shapes={}\n end\n function s.draw(x,z,seconds,text)\n  s.clear();local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then\n   id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end\n  end\n  if text then AnyoneCore.Shotcall(text,true,seconds,false) end\n end\n function s.polar(side,degrees,radius,seconds,text)\n  local angle=side*degrees*math.pi/180\n  s.draw(100+math.sin(angle)*radius,100+math.cos(angle)*radius,seconds,text)\n end\nend\ns.clear();AnyoneCore.Shotcall(\"Spread - let healers stand still\",true,3,false);self.used=true",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_ct\nif s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end\n  s.shapes={}\n end\n function s.draw(x,z,seconds,text)\n  s.clear();local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then\n   id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end\n  end\n  if text then AnyoneCore.Shotcall(text,true,seconds,false) end\n end\n function s.polar(side,degrees,radius,seconds,text)\n  local angle=side*degrees*math.pi/180\n  s.draw(100+math.sin(angle)*radius,100+math.cos(angle)*radius,seconds,text)\n end\nend\ns.clear()\n-- AnyoneCore already says to spread; only the healers get the extra instruction (user 2026-11-26).\nif slot==\"H1\" or slot==\"H2\" then AnyoneCore.Shotcall(\"Stand still\",true,3,false) end\nself.used=true",
 							conditions = 
 							{
 								
@@ -10333,7 +10415,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_ct\nif s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end\n  s.shapes={}\n end\n function s.draw(x,z,seconds,text)\n  s.clear();local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then\n   id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end\n  end\n  if text then AnyoneCore.Shotcall(text,true,seconds,false) end\n end\n function s.polar(side,degrees,radius,seconds,text)\n  local angle=side*degrees*math.pi/180\n  s.draw(100+math.sin(angle)*radius,100+math.cos(angle)*radius,seconds,text)\n end\nend\ns.clear()\nlocal second=eventArgs.spellID==40230\nif not second then\n s.firstWingEnd=TensorReactions_CurrentTimer+eventArgs.channelTimeMax\n s.returnFormationShown=false\nend\nAnyoneCore.Shotcall((slot==\"T1\" or slot==\"T2\") and (second and \"Second knockback - tank in front\" or \"Rewind knockback - tank in front\") or (second and \"Second knockback - stay behind your tank\" or \"Rewind knockback - stay behind your tank\"),true,second and 3 or 7,false)\nself.used=true",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or not r.isReady() or p==nil then return end\nlocal slot=r.mySlot();local s=data.lpdu_ct\nif s==nil then return end\nif s.clear==nil then\n function s.clear()\n  for _,id in ipairs(s.shapes) do Argus.deleteTimedShape(id) end\n  s.shapes={}\n end\n function s.draw(x,z,seconds,text)\n  s.clear();local t={x=x,y=0,z=z}\n  local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n  local id=d:addTimedCircle(seconds*1000,x,.05,z,1,0,true,true)\n  if id then table.insert(s.shapes,id) end\n  local player=TensorCore.mGetPlayer();local length=TensorCore.getDistance2d(player.pos,t)\n  if length>1 then\n   id=d:addTimedArrow(seconds*1000,player.pos.x,player.pos.y+.05,player.pos.z,TensorCore.getHeadingToTarget(player.pos,t),math.max(.15,length-1),1,1,1,0,true)\n   if id then table.insert(s.shapes,id) end\n  end\n  if text then AnyoneCore.Shotcall(text,true,seconds,false) end\n end\n function s.polar(side,degrees,radius,seconds,text)\n  local angle=side*degrees*math.pi/180\n  s.draw(100+math.sin(angle)*radius,100+math.cos(angle)*radius,seconds,text)\n end\nend\ns.clear()\nlocal second=eventArgs.spellID==40230\n-- Only the first knockback is called (user 2026-11-26: the second knockback callout was removed).\nif not second then\n s.firstWingEnd=TensorReactions_CurrentTimer+eventArgs.channelTimeMax\n s.returnFormationShown=false\n AnyoneCore.Shotcall((slot==\"T1\" or slot==\"T2\") and \"Rewind knockback - tank in front\" or \"Rewind knockback - stay behind your tank\",true,3,false)\nend\nself.used=true",
 							conditions = 
 							{
 								
@@ -10568,6 +10650,60 @@ local tbl =
 				timerEndOffset = 43,
 				timerStartOffset = 34,
 				uuid = "60eb0419-3456-69a0-ad64-2e5a6b291c28",
+				version = 2,
+			},
+		},
+		
+		{
+			data = 
+			{
+				actions = 
+				{
+					
+					{
+						data = 
+						{
+							aType = "Lua",
+							actionLua = "self.used=true\nif not data then return end\nlocal id=eventArgs.sourceEntityID\ndata.lpdu_ct_glass_timers=data.lpdu_ct_glass_timers or {}\nif data.lpdu_ct_glass_timers[id] then return end\nlocal e=TensorCore.mGetEntity(id)\nif not e or not e.pos then return end\ndata.lpdu_ct_glass_timers[id]=true\n-- Logged Maelstrom resolve is 7.84 to 7.88 s after the quicken tether appears.\nAnyoneCore.addWorldTextCountdown(7850,{x=e.pos.x,y=e.pos.y+1,z=e.pos.z},0xFFFFFFFF,true,1.5)",
+							conditions = 
+							{
+								
+								{
+									"e6e5201d-6415-566b-8bee-dd6eea8b63ea",
+									true,
+								},
+							},
+							name = "Count down this hourglass explosion",
+							uuid = "17687b53-04a6-dacc-89d5-34652fa7ad1b",
+							version = 2.1,
+						},
+					},
+				},
+				conditions = 
+				{
+					
+					{
+						data = 
+						{
+							category = "Lua",
+							conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1238 then return false end\nlocal e=eventArgs\nreturn (e ~= nil and e.sourceEntityContentID==9823 and e.newTetherID==134) and true or false",
+							dequeueIfLuaFalse = true,
+							name = "Quickened hourglass tether",
+							uuid = "e6e5201d-6415-566b-8bee-dd6eea8b63ea",
+							version = 3,
+						},
+					},
+				},
+				displayPath = "LPDU",
+				eventType = 15,
+				loop = true,
+				mechanicTime = 798.9,
+				name = "[LPDU] P4 Crystallize Time - First hourglass circle timers",
+				timeRange = true,
+				timelineIndex = 179,
+				timerEndOffset = 25,
+				timerStartOffset = -12,
+				uuid = "e5fdc288-81cc-8e31-9ad2-e6d7bedc610d",
 				version = 2,
 			},
 		},
@@ -12924,7 +13060,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or p==nil then return end\nlocal slot=r.mySlot()\nlocal function clear()\n if data.lpdu_polarizing_shapes then for _,id in ipairs(data.lpdu_polarizing_shapes) do Argus.deleteTimedShape(id) end end\n data.lpdu_polarizing_shapes={}\nend\nlocal function draw(b,h,dist,seconds)\n clear();local x,y,z=TensorCore.getPosInDirection(b.pos,h,dist,true);local t={x=x,y=y,z=z}\n local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n local id=d:addTimedCircle(seconds*1000,x,y+.05,z,1,0,true,true)\n if id then table.insert(data.lpdu_polarizing_shapes,id) end\n local length=TensorCore.getDistance2d(p.pos,t)\n if length>1 then id=d:addTimedArrow(seconds*1000,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,t),math.max(.15,length-1),1,1,1,0,true)\n if id then table.insert(data.lpdu_polarizing_shapes,id) end end\nend\nlocal function assigned(b,order,seconds)\n local roles={T1=1,T2=1,M1=2,M2=2,R1=3,R2=3,H1=4,H2=4}\n local role=roles[slot];if not role then return end\n local left=slot==\"T1\" or slot==\"M1\" or slot==\"R1\" or slot==\"H1\"\n if role<order then left=not left end\n draw(b,b.pos.h+(left and 1 or -1)*math.pi*.75,role==order and 5 or 9,seconds)\n AnyoneCore.Shotcall(role==order and \"Bait in front\" or \"Stack behind bait\",true,seconds,false)\nend\n-- Round counting: this event is one line resolving. Dedupe repeats and count before anything that can return early.\nif data.lpdu_polarizing_boss==nil then self.used=true return end\nlocal now=Now()\nif data.lpdu_polarizing_line_at and now-data.lpdu_polarizing_line_at<2000 then self.used=true return end\ndata.lpdu_polarizing_line_at=now\nlocal lines=(data.lpdu_polarizing_lines or 0)+1\ndata.lpdu_polarizing_lines=lines\n-- The hit counter can lag if a hit event was missed; the line count resyncs it.\nlocal done=math.max(data.lpdu_polarizing_done or 0,lines)\ndata.lpdu_polarizing_done=done\nif done>=4 then clear();self.used=true;return end\nlocal b=TensorCore.mGetEntity(data.lpdu_polarizing_boss);if b==nil then self.used=true return end\n-- 2.3 s so this call ends before the next hit's Dodge line / Move out call (about 2.5 s later).\nassigned(b,done+1,2.3)\nself.used=true",
+							actionLua = "local r=AnyoneCore.Roster;local p=TensorCore.mGetPlayer()\nif r.current()==nil or p==nil then return end\nlocal slot=r.mySlot()\nlocal function clear()\n if data.lpdu_polarizing_shapes then for _,id in ipairs(data.lpdu_polarizing_shapes) do Argus.deleteTimedShape(id) end end\n data.lpdu_polarizing_shapes={}\nend\nlocal function draw(b,h,dist,seconds)\n clear();local x,y,z=TensorCore.getPosInDirection(b.pos,h,dist,true);local t={x=x,y=y,z=z}\n local d=TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0,1,0,.45),2,1)\n local id=d:addTimedCircle(seconds*1000,x,y+.05,z,1,0,true,true)\n if id then table.insert(data.lpdu_polarizing_shapes,id) end\n local length=TensorCore.getDistance2d(p.pos,t)\n if length>1 then id=d:addTimedArrow(seconds*1000,p.pos.x,p.pos.y+.05,p.pos.z,TensorCore.getHeadingToTarget(p.pos,t),math.max(.15,length-1),1,1,1,0,true)\n if id then table.insert(data.lpdu_polarizing_shapes,id) end end\nend\nlocal function assigned(b,order,seconds)\n local roles={T1=1,T2=1,M1=2,M2=2,R1=3,R2=3,H1=4,H2=4}\n local role=roles[slot];if not role then return end\n local left=slot==\"T1\" or slot==\"M1\" or slot==\"R1\" or slot==\"H1\"\n if role<order then left=not left end\n draw(b,b.pos.h+(left and 1 or -1)*math.pi*.75,role==order and 5 or 9,seconds)\n -- The baiter's text is silent: AnyoneCore already speaks that call (user 2026-11-26).\n if role==order then TensorCore.addAlertText(seconds*1000,\"Bait in front\",1,1,false)\n else AnyoneCore.Shotcall(\"Stack behind bait\",true,seconds,false) end\nend\n-- Round counting: this event is one line resolving. Dedupe repeats and count before anything that can return early.\nif data.lpdu_polarizing_boss==nil then self.used=true return end\nlocal now=Now()\nif data.lpdu_polarizing_line_at and now-data.lpdu_polarizing_line_at<2000 then self.used=true return end\ndata.lpdu_polarizing_line_at=now\nlocal lines=(data.lpdu_polarizing_lines or 0)+1\ndata.lpdu_polarizing_lines=lines\n-- The hit counter can lag if a hit event was missed; the line count resyncs it.\nlocal done=math.max(data.lpdu_polarizing_done or 0,lines)\ndata.lpdu_polarizing_done=done\nif done>=4 then clear();self.used=true;return end\nlocal b=TensorCore.mGetEntity(data.lpdu_polarizing_boss);if b==nil then self.used=true return end\n-- 2.3 s so this call ends before the next hit's Dodge line / Move out call (about 2.5 s later).\nassigned(b,done+1,2.3)\nself.used=true",
 							conditions = 
 							{
 								

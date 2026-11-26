@@ -184,6 +184,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### FRU
 
+- LPDU P4 and P5: the Darklit protean bait cone is now green and follows you; Crystallize Time shows countdowns on the first two exploding hourglasses; the first Akh Morn no longer draws a second set of circles over your group marker. Crystallize Time has fewer callouts (one place-rewind call, "Stand still" for healers, a shorter knockback call and no second-knockback call), and the repeat "Bait in front" in Polarizing Strikes is now on-screen text only. (26-11-2026)
+
 - AutoSim: Bard no longer moves on to the next intermission target by itself. It still starts on your assigned Light crystal and then follows the crystal or Ice Veil you target. (26-11-2026)
 
 - Updated the subtractive draw for all three P5 exaflare sets. The green arena now appears only while incoming exaflare lines are being cut out. (26-11-2026)
@@ -201,8 +203,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - The end-of-P3 puddle staging marker now follows where the next boss spawns: it guides you to the number marker matching the lettered waymark nearest the spawn (A to 1, B to 2, C to 3, D to 4) instead of always marker 1. (23-11-2026)
 
 - Fixed the first P5 Exasquares set drawing its green safe-area shapes on the wrong side when the real side was left. The left/right callout now comes after all eight Pandora clones are known. (23-11-2026)
-
-- AutoSim intermission targeting now starts on your own assigned Light crystal, found from your party slot and waymark. Ranged DPS then move on to the other Light crystals and finally the middle Ice Veil by themselves, while melee keep following their own target. Bard, Black Mage, Samurai and Reaper temporarily blacklist DoTs on the small crystals; the middle one stays allowed. The optional ACR3 crystal auto-target and side crystal AoE control now find the crystals correctly. (23-11-2026)
 
 ### M4S
 
