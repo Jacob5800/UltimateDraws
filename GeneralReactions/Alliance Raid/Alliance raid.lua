@@ -20236,6 +20236,422 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal expires=e.startTime+e.duration*1000\nif expires<=Now() then return end\nlocal rings=data.cfHobbesRings or {}\ndata.cfHobbesRings=rings\nrings[e.entityID]={x=e.x,y=e.y,z=e.z,id=e.aoeID,expires=expires}",
+						conditions = 
+						{
+							
+							{
+								"0800920a-8da7-b169-abb2-5d87309474bd",
+								true,
+							},
+						},
+						uuid = "5db0caa6-0356-3f3d-926c-c2a890aba21f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==882 and p.pos and (p.pos.x+805)^2+(p.pos.z+240)^2<4900 and (eventArgs.aoeID==18434 or eventArgs.aoeID==18435 or eventArgs.aoeID==18436))",
+						dequeueIfLuaFalse = true,
+						uuid = "0800920a-8da7-b169-abb2-5d87309474bd",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 18,
+			name = "[Copied Factory] Hobbes Ring Laser capture",
+			uuid = "eaecf4d1-267d-9055-a55d-b4a0c48f0d68",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal rings=data.cfHobbesRings\nif not rings then return end\nlocal now=Now()\nlocal first\nfor key,r in pairs(rings) do\n if r.expires<=now then rings[key]=nil\n elseif not first or r.expires<first then first=r.expires end\nend\nif not first then data.cfHobbesRings=nil;return end\nlocal channel=Argus2.getNextUnusedChannel(true)\nif not channel or channel==0 then return end\nlocal f=Argus2.RenderFlags\nlocal common=f.FLAG_WARP_TERRAIN+f.FLAG_RENDER_UI\nlocal base=common+f.FLAG_OCCLUSION_BASE\nlocal cut=common+f.FLAG_OCCLUDE\nlocal safe=TensorCore.getStaticDrawer(0x5000FF00,1,channel,base)\nlocal mask=TensorCore.getStaticDrawer(0xFFFFFFFF,0,channel,cut)\nfor _,r in pairs(rings) do\n if r.expires<first+500 then\n  local inner=15-5*(r.id-18434)\n  safe:addCircle(r.x,r.y,r.z,20,false,base)\n  mask:addDonut(r.x,r.y,r.z,inner,inner+5,false,cut)\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"f3ee05f2-8e75-76f1-bce1-81ffdf6a1ac8",
+								true,
+							},
+						},
+						uuid = "6e397609-7ab3-ca1e-9e60-ccaa8f1ec2f3",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==882 and p.pos and (p.pos.x+805)^2+(p.pos.z+240)^2<4900 and data.cfHobbesRings)",
+						dequeueIfLuaFalse = true,
+						uuid = "f3ee05f2-8e75-76f1-bce1-81ffdf6a1ac8",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 12,
+			name = "[Copied Factory] Hobbes Ring Laser subtractive safe areas",
+			uuid = "79df3198-4c0f-a67f-a77f-f76c13d52039",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nlocal p=e and e.pos\nif not p then return end\nlocal cx,cz\nfor _,c in ipairs({{-831,-225},{-805,-270},{-779,-225}}) do\n local d=(p.x-c[1])^2+(p.z-c[2])^2\n if d>180 and d<215 then cx,cz=c[1],c[2];break end\nend\nif not cx then return end\nlocal now=Now()\nif eventArgs.spellID==18887 then\n data.cfHobbesCombat={x=p.x,z=p.z,cx=cx,cz=cz,at=now}\n AnyoneCore.addWorldTextCountdown(1900,{x=cx,y=p.y+2,z=cz},0xFFFFFFFF,true,1)\n return\nend\nlocal s=data.cfHobbesCombat\nif not s or s.cx~=cx or s.cz~=cz or now-s.at>6500 then return end\nif s.fast then data.cfHobbesCombat=nil;return end\nif (p.x-s.x)^2+(p.z-s.z)^2<100 then return end\ns.fast=true\ns.y=p.y\ns.px=3*cx-s.x-p.x\ns.pz=3*cz-s.z-p.z\ns.untilTime=now+2200",
+						conditions = 
+						{
+							
+							{
+								"e38f81a1-1f3f-757a-9515-1847bc00c734",
+								true,
+							},
+						},
+						uuid = "007c2713-d7a6-4564-9757-0dfbb1ad6a12",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==882 and p.pos and (p.pos.x+805)^2+(p.pos.z+240)^2<4900 and (eventArgs.spellID==18887 or eventArgs.spellID==18449))",
+						dequeueIfLuaFalse = true,
+						uuid = "e38f81a1-1f3f-757a-9515-1847bc00c734",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 2,
+			name = "[Copied Factory] Hobbes Variable Combat Test - prediction setup",
+			uuid = "07b70179-59b0-dff4-90dc-8527d66cd99d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.cfHobbesCombat\nif s and (eventArgs.x-s.cx)^2+(eventArgs.z-s.cz)^2<400 then s.untilTime=nil end",
+						conditions = 
+						{
+							
+							{
+								"0bfc0380-6fc6-2d8d-8817-920686ddd488",
+								true,
+							},
+						},
+						uuid = "e59e724e-2268-0bee-8d03-097d61ae286d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==882 and p.pos and (p.pos.x+805)^2+(p.pos.z+240)^2<4900 and (data.cfHobbesCombat and data.cfHobbesCombat.untilTime and eventArgs.aoeID==18449))",
+						dequeueIfLuaFalse = true,
+						uuid = "0bfc0380-6fc6-2d8d-8817-920686ddd488",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 18,
+			name = "[Copied Factory] Hobbes Variable Combat Test - prediction clear",
+			uuid = "b08ad9f7-fcc6-32c3-98aa-7c4fd660e9f2",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.cfHobbesCombat\nif not s or not s.untilTime then return end\nif Now()>=s.untilTime then s.untilTime=nil;return end\nlocal drawer=TensorCore.getStaticDrawer(0x6040BFFF,2)\ndrawer:addDonut(s.px,s.y,s.pz,7,19,false)\ndrawer:addCircle(s.px,s.y,s.pz,2,false)\nlocal heading=math.atan2(s.px-s.cx,s.pz-s.cz)\ndrawer:addCone(s.cx,s.y,s.cz,20,math.rad(60),heading+2*math.pi/3,false)\ndrawer:addCone(s.cx,s.y,s.cz,20,math.rad(60),heading-2*math.pi/3,false)",
+						conditions = 
+						{
+							
+							{
+								"a947fcac-984e-847e-9cf0-766e9350becd",
+								true,
+							},
+						},
+						uuid = "b83e80ca-43c3-1501-94d3-032110ff9ace",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==882 and p.pos and (p.pos.x+805)^2+(p.pos.z+240)^2<4900 and (data.cfHobbesCombat and data.cfHobbesCombat.untilTime))",
+						dequeueIfLuaFalse = true,
+						uuid = "a947fcac-984e-847e-9cf0-766e9350becd",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 12,
+			name = "[Copied Factory] Hobbes Variable Combat Test - PENDING replay check - final wave prediction",
+			uuid = "8957a2c2-7df5-4e13-b4dd-1b7ef9036d6a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal a,b=eventArgs.a2,eventArgs.a3\nif a==b and (a==32 or a==256 or a==2048 or a==16384) then\n data.cfHobbesCargo={pattern=a,expires=Now()+6150}\nelseif a==4 then data.cfHobbesCargo=nil end",
+						conditions = 
+						{
+							
+							{
+								"a38d971c-73b6-ee83-8ddb-cde59c5aadb5",
+								true,
+							},
+						},
+						uuid = "1aa41fb6-1456-5b07-b7f1-9bf04f341532",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==882 and (eventArgs.a1==5))",
+						dequeueIfLuaFalse = true,
+						uuid = "a38d971c-73b6-ee83-8ddb-cde59c5aadb5",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 14,
+			name = "[Copied Factory] Hobbes Unwilling Cargo - pattern",
+			uuid = "7b619c9d-ab14-c121-80b4-6619ca2ea029",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\ndata.cfHobbesCargo=nil",
+						conditions = 
+						{
+							
+							{
+								"43b57839-e4de-2a03-8b6e-98a3c824cd28",
+								true,
+							},
+						},
+						uuid = "77d10490-7a57-dca5-a5d8-06fa5ad86064",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==882 and (eventArgs.spellID==18458))",
+						dequeueIfLuaFalse = true,
+						uuid = "43b57839-e4de-2a03-8b6e-98a3c824cd28",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 2,
+			name = "[Copied Factory] Hobbes Unwilling Cargo - hit",
+			uuid = "9e2fc3b4-e625-65a7-a2bc-57d1c637e2bf",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.cfHobbesCargo\nif not s then return end\nif Now()>=s.expires then data.cfHobbesCargo=nil;return end\nlocal player=TensorCore.mGetPlayer()\nlocal p=player and player.pos\nif not p then return end\nlocal dz=p.z+270\nif (p.x+805)^2+dz^2>400 or math.abs(dz)>=17.5 then return end\nlocal stripe=math.abs(dz)<3.5 or math.abs(dz)>=10.5\nlocal west=s.pattern==32 or (s.pattern==2048 and stripe) or (s.pattern==16384 and not stripe)\nlocal x=p.x+(west and -15 or 15)\nlocal safe=(x+805)^2+dz^2<17.5^2\nlocal drawer=TensorCore.getStaticDrawer(safe and 0xFF33FF33 or 0xFF3333FF,2)\ndrawer:addLine(p.x,p.y+0.15,p.z,x,p.y+0.15,p.z,3)\ndrawer:addCircle(x,p.y+0.15,p.z,0.65,false)",
+						conditions = 
+						{
+							
+							{
+								"6fcd1876-2489-c549-85b4-40ce2c51b8ac",
+								true,
+							},
+						},
+						uuid = "442537dd-9e5a-e98b-bf7f-bbf984838098",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==882 and (data.cfHobbesCargo))",
+						dequeueIfLuaFalse = true,
+						uuid = "6fcd1876-2489-c549-85b4-40ce2c51b8ac",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 12,
+			name = "[Copied Factory] Hobbes Unwilling Cargo - landing line",
+			uuid = "b63396ce-cdd3-b394-b4ca-7141406c2796",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "ACR",
+						conditions = 
+						{
+							
+							{
+								"513283a9-563a-64a4-aac2-cb4d9963255b",
+								true,
+							},
+						},
+						gVar = "ACR_RikuSCH3_Hotbar_Surecast",
+						uuid = "9adc886d-335b-32a6-a23f-aff23bed67da",
+						variableTogglesType = 2,
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local cargo=data.cfHobbesCargo\nif not cargo then return false end\nlocal remaining=cargo.expires-Now()\nif remaining>1050 or remaining<550 then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=882 or not p.incombat or not p.alive or not p.pos then return false end\nlocal job=p.job\nif job~=24 and job~=25 and job~=26 and job~=27 and job~=28 and job~=33 and job~=35 and job~=36 and job~=40 and job~=42 then return false end\nlocal dx,dz=p.pos.x+805,p.pos.z+270\nreturn math.abs(dz)<17.5 and dx*dx+dz*dz<=400",
+						dequeueIfLuaFalse = true,
+						uuid = "513283a9-563a-64a4-aac2-cb4d9963255b",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			enabled = false,
+			name = "[Copied Factory] Hobbes Unwilling Cargo - Optional Surecast",
+			throttleTime = 1000,
+			uuid = "ad4cfbbe-7b49-3fa4-95f6-5125fa7fed91",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "The Copied Factory",
 			name = "AutoSim",
 			uuid = "40f1e247-388a-0b27-8e5a-04e3a255b655",
@@ -20388,143 +20804,6 @@ local tbl =
 			version = 2,
 		},
 	}, 
-	{
-		data = 
-		{
-			actions = 
-			{
-				
-				{
-					data = 
-					{
-						aType = "Lua",
-						actionLua = "self.used=true\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nlocal p=e and e.pos\nif not p then return end\nlocal cx,cz\nfor _,c in ipairs({{-831,-225},{-805,-270},{-779,-225}}) do\n local d=(p.x-c[1])^2+(p.z-c[2])^2\n if d>180 and d<215 then cx,cz=c[1],c[2];break end\nend\nif not cx then return end\nlocal now=Now()\nif eventArgs.spellID==18887 then\n data.cfHobbesCombat={x=p.x,z=p.z,cx=cx,cz=cz,at=now}\n AnyoneCore.addWorldTextCountdown(1900,{x=cx,y=p.y+2,z=cz},0xFFFFFFFF,true,1)\n return\nend\nlocal s=data.cfHobbesCombat\nif not s or s.cx~=cx or s.cz~=cz or now-s.at>6500 then return end\nif s.fast then data.cfHobbesCombat=nil;return end\nif (p.x-s.x)^2+(p.z-s.z)^2<100 then return end\ns.fast=true\ns.y=p.y\ns.px=3*cx-s.x-p.x\ns.pz=3*cz-s.z-p.z\ns.untilTime=now+2200",
-						conditions = 
-						{
-							
-							{
-								"e38f81a1-1f3f-757a-9515-1847bc00c734",
-								true,
-							},
-						},
-						uuid = "007c2713-d7a6-4564-9757-0dfbb1ad6a12",
-						version = 2.1,
-					},
-				},
-			},
-			conditions = 
-			{
-				
-				{
-					data = 
-					{
-						category = "Lua",
-						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==882 and p.pos and (p.pos.x+805)^2+(p.pos.z+240)^2<4900 and (eventArgs.spellID==18887 or eventArgs.spellID==18449))",
-						dequeueIfLuaFalse = true,
-						uuid = "e38f81a1-1f3f-757a-9515-1847bc00c734",
-						version = 3,
-					},
-				},
-			},
-			displayPath = "The Copied Factory/Draws",
-			eventType = 2,
-			name = "[Copied Factory] Hobbes Variable Combat Test - prediction setup",
-			uuid = "07b70179-59b0-dff4-90dc-8527d66cd99d",
-			version = 2,
-		},
-	},
-	
-	{
-		data = 
-		{
-			actions = 
-			{
-				
-				{
-					data = 
-					{
-						aType = "Lua",
-						actionLua = "self.used=true\nlocal s=data.cfHobbesCombat\nif s and (eventArgs.x-s.cx)^2+(eventArgs.z-s.cz)^2<400 then s.untilTime=nil end",
-						conditions = 
-						{
-							
-							{
-								"0bfc0380-6fc6-2d8d-8817-920686ddd488",
-								true,
-							},
-						},
-						uuid = "e59e724e-2268-0bee-8d03-097d61ae286d",
-						version = 2.1,
-					},
-				},
-			},
-			conditions = 
-			{
-				
-				{
-					data = 
-					{
-						category = "Lua",
-						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==882 and p.pos and (p.pos.x+805)^2+(p.pos.z+240)^2<4900 and (data.cfHobbesCombat and data.cfHobbesCombat.untilTime and eventArgs.aoeID==18449))",
-						dequeueIfLuaFalse = true,
-						uuid = "0bfc0380-6fc6-2d8d-8817-920686ddd488",
-						version = 3,
-					},
-				},
-			},
-			displayPath = "The Copied Factory/Draws",
-			eventType = 18,
-			name = "[Copied Factory] Hobbes Variable Combat Test - prediction clear",
-			uuid = "b08ad9f7-fcc6-32c3-98aa-7c4fd660e9f2",
-			version = 2,
-		},
-	},
-	
-	{
-		data = 
-		{
-			actions = 
-			{
-				
-				{
-					data = 
-					{
-						aType = "Lua",
-						actionLua = "self.used=true\nlocal s=data.cfHobbesCombat\nif not s or not s.untilTime then return end\nif Now()>=s.untilTime then s.untilTime=nil;return end\nlocal drawer=TensorCore.getStaticDrawer(0x6040BFFF,2)\ndrawer:addDonut(s.px,s.y,s.pz,7,19,false)\ndrawer:addCircle(s.px,s.y,s.pz,2,false)\nlocal heading=math.atan2(s.px-s.cx,s.pz-s.cz)\ndrawer:addCone(s.cx,s.y,s.cz,20,math.rad(60),heading+2*math.pi/3,false)\ndrawer:addCone(s.cx,s.y,s.cz,20,math.rad(60),heading-2*math.pi/3,false)",
-						conditions = 
-						{
-							
-							{
-								"a947fcac-984e-847e-9cf0-766e9350becd",
-								true,
-							},
-						},
-						uuid = "b83e80ca-43c3-1501-94d3-032110ff9ace",
-						version = 2.1,
-					},
-				},
-			},
-			conditions = 
-			{
-				
-				{
-					data = 
-					{
-						category = "Lua",
-						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==882 and p.pos and (p.pos.x+805)^2+(p.pos.z+240)^2<4900 and (data.cfHobbesCombat and data.cfHobbesCombat.untilTime))",
-						dequeueIfLuaFalse = true,
-						uuid = "a947fcac-984e-847e-9cf0-766e9350becd",
-						version = 3,
-					},
-				},
-			},
-			displayPath = "The Copied Factory/Draws",
-			eventType = 12,
-			name = "[Copied Factory] Hobbes Variable Combat Test - PENDING replay check - final wave prediction",
-			uuid = "8957a2c2-7df5-4e13-b4dd-1b7ef9036d6a",
-			version = 2,
-		},
-	},
 	inheritedProfiles = 
 	{
 	},
