@@ -242,6 +242,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Added Goliath Tank chase rings that hide when you are chased, plus Flight Unit bait beams and a one-circle preview for each Ballistic Impact trail. (27-11-2026)
+
 - Added green Ring Laser safe areas and a live Unwilling Cargo knockback landing line for Hobbes. Optional Surecast is off by default and checks your platform. (27-11-2026)
 
 - Hobbes now shows a countdown after the opening Variable Combat Test hit and previews the final wave until the confirmed telegraphs arrive. (27-11-2026)
@@ -259,8 +261,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Many alliance raid reactions for other maps or inactive states no longer wait in the queue. Without an AutoSim ACR, AutoSim reactions now skip quietly instead of printing errors, while their draws and targeting keep working. (27-11-2026)
 
 - Added Serial-jointed Command Model draws in The Copied Factory: Energy Bomb orbs, the Energy Assault cone, turret laser lines, dropping orb circles with the next wave previewed, Energy Rings (also added to the Moogle Telegraphs blacklist) and automatic Surecast for Shockwave (casters and healers). (26-11-2026)
-
-- Added Her Inflorescence draws in The Tower at Paradigm's Breach (upcoming building strip, train lanes in red and green, pillar fall lines) and an auto lockface for the black and white rings ("Distortion rings: auto lockface" in the Paradigm's Breach settings window, on by default). Fixed that arena's cast draws only showing when looking down, Darker Note circles not following their targets, and a DoT blacklist error on jobs without one. (26-11-2026)
 
 ### Trials
 

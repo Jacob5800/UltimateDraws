@@ -20652,6 +20652,328 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal chases=data.cfGoliathChases or {}\ndata.cfGoliathChases=chases\nif e.newTetherID==17 and e.newTargetID>0 and e.newTargetID<0xE0000000 then\n chases[e.sourceEntityID]={target=e.newTargetID,expires=Now()+9100}\nelse\n chases[e.sourceEntityID]=nil\nend\nif not next(chases) then data.cfGoliathChases=nil end",
+						conditions = 
+						{
+							
+							{
+								"9068d2a5-0fd6-d983-9307-cf1f744e1ab4",
+								true,
+							},
+						},
+						uuid = "4312fcf9-166c-fdb3-af83-2fa1db3bb6a3",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==882 and p.pos and (p.pos.x+780)^2+(p.pos.z-555)^2<1600 and eventArgs.sourceEntityContentID==9139 and (eventArgs.newTetherID==17 or eventArgs.oldTetherID==17))",
+						dequeueIfLuaFalse = true,
+						uuid = "9068d2a5-0fd6-d983-9307-cf1f744e1ab4",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 15,
+			name = "[Copied Factory] Goliath Tank - chase tether capture",
+			uuid = "21ab02c9-93fe-1a6b-852e-5c87dd9d562f",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal chases=data.cfGoliathChases\nlocal player=TensorCore.mGetPlayer()\nif not chases or not player then return end\nlocal now=Now()\nlocal hide=false\nfor source,chase in pairs(chases) do\n if now>=chase.expires then chases[source]=nil\n elseif chase.target==player.id then hide=true end\nend\nif not next(chases) then data.cfGoliathChases=nil;return end\nif hide then return end\nlocal drawer=TensorCore.getStaticDrawer(0x603333FF,2)\nlocal drawn={}\nfor _,chase in pairs(chases) do\n if not drawn[chase.target] then\n  drawn[chase.target]=true\n  local target=TensorCore.mGetEntity(chase.target)\n  local p=target and target.pos\n  if p and target.alive then drawer:addCircle(p.x,p.y,p.z,10,false) end\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"e49293a5-e40a-54e1-8854-dc8b8fea37e8",
+								true,
+							},
+						},
+						uuid = "7051f233-dc46-10ca-bfe5-d928d6dee6c1",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not data.cfGoliathChases then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==882 and p.pos and (p.pos.x+780)^2+(p.pos.z-555)^2<1600 and data.cfGoliathChases)",
+						dequeueIfLuaFalse = true,
+						uuid = "e49293a5-e40a-54e1-8854-dc8b8fea37e8",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 12,
+			name = "[Copied Factory] Goliath Tank - chased player AoE rings",
+			uuid = "0c058703-8b89-2e7c-ab79-e9de8e772e3f",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal baits=data.cfFlightBombing or {}\ndata.cfFlightBombing=baits\nif e.newTargetContentID==9140 and e.newTetherID==17 then\n baits[e.sourceEntityID]={boss=e.newTargetID,expires=Now()+6000}\nelse\n baits[e.sourceEntityID]=nil\nend\nif not next(baits) then data.cfFlightBombing=nil end",
+						conditions = 
+						{
+							
+							{
+								"61088ed4-35de-dc9e-bd5a-b2a882c51e79",
+								true,
+							},
+						},
+						uuid = "647efb17-cb9b-ca83-ba11-3d4eb77f8851",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==882 and p.pos and (p.pos.x+780)^2+(p.pos.z-555)^2<1600 and ((eventArgs.newTargetContentID==9140 and eventArgs.newTetherID==17) or (eventArgs.oldTargetContentID==9140 and eventArgs.oldTetherID==17)))",
+						dequeueIfLuaFalse = true,
+						uuid = "61088ed4-35de-dc9e-bd5a-b2a882c51e79",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 15,
+			name = "[Copied Factory] Flight Unit - Area Bombing tether capture",
+			uuid = "42a788ab-e5a2-1a3a-a69b-92137444b5bc",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal baits=data.cfFlightBombing\nif not baits then return end\nlocal now=Now()\nlocal drawer\nfor id,bait in pairs(baits) do\n if now>=bait.expires then baits[id]=nil\n else\n  local boss=TensorCore.mGetEntity(bait.boss)\n  local target=TensorCore.mGetEntity(id)\n  local from,to=boss and boss.pos,target and target.pos\n  if from and to and target.alive then\n   local dx,dz=to.x-from.x,to.z-from.z\n   if dx*dx+dz*dz>0.01 then\n    drawer=drawer or TensorCore.getStaticDrawer(0x603333FF,2)\n    drawer:addRect(from.x,from.y,from.z,60,8,math.atan2(dx,dz),false)\n   end\n  end\n end\nend\nif not next(baits) then data.cfFlightBombing=nil end",
+						conditions = 
+						{
+							
+							{
+								"5f5310a7-581b-ed5a-903c-c5dbc21740c2",
+								true,
+							},
+						},
+						uuid = "8127094b-520b-3239-8796-56dfd1ad2f1a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not data.cfFlightBombing then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==882 and p.pos and (p.pos.x+780)^2+(p.pos.z-555)^2<1600 and data.cfFlightBombing)",
+						dequeueIfLuaFalse = true,
+						uuid = "5f5310a7-581b-ed5a-903c-c5dbc21740c2",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 12,
+			name = "[Copied Factory] Flight Unit - Area Bombing bait beams",
+			uuid = "bfae6d1e-6a8c-be9c-a8df-fbeba7f5ef6b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\ndata.cfFlightBombing=nil",
+						conditions = 
+						{
+							
+							{
+								"bbf7a469-7768-28b9-b154-8e223bcd43e3",
+								true,
+							},
+						},
+						uuid = "242292f2-d8ae-ba00-89aa-f11a1e1c0387",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==882 and p.pos and (p.pos.x+780)^2+(p.pos.z-555)^2<1600 and data.cfFlightBombing and eventArgs.spellID==18755)",
+						dequeueIfLuaFalse = true,
+						uuid = "bbf7a469-7768-28b9-b154-8e223bcd43e3",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 3,
+			name = "[Copied Factory] Flight Unit - Area Bombing bait clear",
+			uuid = "53140b05-918e-7cde-94e7-777c7861e300",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal caster=TensorCore.mGetEntity(eventArgs.entityID)\nlocal p=caster and caster.pos\nif not p or not p.h then return end\nlocal now=Now()\nlocal tracks=data.cfFlightImpact or {}\ndata.cfFlightImpact=tracks\nlocal track\nfor id,t in pairs(tracks) do\n if now>=t.expires then tracks[id]=nil\n elseif (p.x-t.x)^2+(p.z-t.z)^2<0.7^2 and math.cos(p.h-t.h)>0.995 then\n  track=t\n end\nend\nif not track then\n if (p.x+780)^2+(p.z-555)^2>25 then return end\n track={count=0}\n tracks[eventArgs.entityID]=track\nend\ntrack.count=track.count+1\ntrack.x=p.x+4*math.sin(p.h)\ntrack.z=p.z+4*math.cos(p.h)\ntrack.y=p.y\ntrack.h=p.h\ntrack.expires=now+1400",
+						conditions = 
+						{
+							
+							{
+								"8b0af3ff-53b3-8db2-b630-90b869d5f629",
+								true,
+							},
+						},
+						uuid = "af8d8fec-e5fb-5957-8dd6-d0e4d8a90b8c",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==882 and p.pos and (p.pos.x+780)^2+(p.pos.z-555)^2<1600 and eventArgs.spellID==18755 and eventArgs.entityContentID==9140)",
+						dequeueIfLuaFalse = true,
+						uuid = "8b0af3ff-53b3-8db2-b630-90b869d5f629",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 3,
+			name = "[Copied Factory] Flight Unit - Ballistic Impact trail capture",
+			uuid = "61e33ee0-7bee-41fb-a4e4-c963f8a6731d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal tracks=data.cfFlightImpact\nif not tracks then return end\nlocal now=Now()\nlocal drawer\nfor id,t in pairs(tracks) do\n if now>=t.expires then tracks[id]=nil\n elseif t.count<7 then\n  drawer=drawer or TensorCore.getStaticDrawer(0x6040BFFF,2)\n  drawer:addCircle(t.x,t.y,t.z,4,false)\n end\nend\nif not next(tracks) then data.cfFlightImpact=nil end",
+						conditions = 
+						{
+							
+							{
+								"2085f7ad-50ad-4552-9d45-a907c7c57537",
+								true,
+							},
+						},
+						uuid = "ab8fe1b1-7c97-227d-b260-b35cfa09fe84",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not data.cfFlightImpact then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==882 and p.pos and (p.pos.x+780)^2+(p.pos.z-555)^2<1600 and data.cfFlightImpact)",
+						dequeueIfLuaFalse = true,
+						uuid = "2085f7ad-50ad-4552-9d45-a907c7c57537",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 12,
+			name = "[Copied Factory] Flight Unit - Ballistic Impact next circle",
+			uuid = "05b69d7b-6a82-94fe-9ace-352aff43b376",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "The Copied Factory",
 			name = "AutoSim",
 			uuid = "40f1e247-388a-0b27-8e5a-04e3a255b655",
