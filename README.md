@@ -242,6 +242,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Fafnir in Jeuno: fixed the Spike Flail cone pointing the wrong way, added green safe areas for Spike Flail and for the Hurricane Wing and Great Whirlwind sequence, and the unsafe ring during Offensive Posture now shows early. (27-11-2026)
+
 - Prishe's green knockback landing line in Jeuno is now slightly thicker. (27-11-2026)
 
 - Fixed the 9S-operated Walking Fortress airstrikes that fire sideways showing the whole platform green instead of their red lanes. (27-11-2026)
@@ -259,8 +261,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added Hobbes draws in The Copied Factory: Variable Combat Test cones, circles and rings, the Impact circle, the Towerfall lanes, and an early warning of the Fire-resistance Test flame area. (27-11-2026)
 
 - The energy orb rings in The Copied Factory (first boss and trash flyers) are now slightly smaller, with a radius of 1.8 instead of 2. (27-11-2026)
-
-- Added red rings around the trash flyers' energy orbs in The Copied Factory. (27-11-2026)
 
 ### Trials
 
