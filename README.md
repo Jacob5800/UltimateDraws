@@ -286,6 +286,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Normal raids
 
+- Added Alexander - The Cuff of the Father: Blitzstrahl circle draws, combat helper setup and an AutoSim kill-time estimate. (27-11-2026)
+
 - M9N targeting and blacklist-restore reactions no longer queue in other duties. (27-11-2026)
 
 - O12N targeting now runs only when needed, and the E6N and Eden's Promise: Umbra forecasts no longer keep running after a late join. (27-11-2026)
@@ -303,5 +305,3 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Published the Normal raids general profile (Alexander, Deltascape, Sigmascape, Alphascape, Eden's Gate and Verse, Abyssos and AAC raid draws, AutoSim and boss-targeting reactions). (22-11-2026)
 
 - Fixed the boss lookup used by encounter-start boss targeting and pre-pull setup, which could not find the boss before. (22-11-2026)
-
-- Eden's Gate Resurrection: AutoSim no longer errors when Stasis or Eternal Breath arrives earlier than forecast. (22-11-2026)

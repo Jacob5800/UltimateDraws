@@ -7277,6 +7277,183 @@ local tbl =
 			uuid = "d81fbc64-274d-a3a2-8858-cb3dd00bb728",
 			version = 2,
 		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "Alexander - The Cuff of the Father",
+			uuid = "11a8df0e-973c-0e44-a4c2-e60828a18492",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Alexander - The Cuff of the Father",
+			name = "Draws",
+			uuid = "2b1554ae-37b0-d3bf-9366-17cda9e42298",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e = eventArgs\nlocal ms = math.floor(e.startTime + e.duration * 1000 - Now())\nif ms > 0 then\n    local drawer = TensorCore.getStaticDrawer(0x803333FF, 2)\n    drawer:addTimedCircle(ms, e.x, e.y, e.z, e.aoeLength, 0, false, true)\n    AnyoneCore.addWorldTextCountdown(ms, {x=e.x,y=e.y+1,z=e.z}, 0xFFFFFFFF, true, 1.1)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"83f40a54-6166-6ac1-a542-7febfa6267aa",
+								true,
+							},
+						},
+						name = "Blitzstrahl circle",
+						uuid = "e2e999ce-8148-c6a4-b5b3-077a733f322f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 443 and eventArgs.aoeID == 4911",
+						dequeueIfLuaFalse = true,
+						name = "Duty and mechanic",
+						uuid = "83f40a54-6166-6ac1-a542-7febfa6267aa",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Alexander - The Cuff of the Father/Draws",
+			eventType = 18,
+			name = "A2N hazard draws",
+			timeout = 1,
+			uuid = "d0e7e53f-1e71-5fd2-9065-28e4391bb985",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Alexander - The Cuff of the Father",
+			name = "AutoSim",
+			uuid = "0b1c10c6-6284-d7d3-b28a-43341c98433d",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local settings = AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled = false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled = false end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"05728ef1-3532-da44-8570-a7d8bc6def77",
+								true,
+							},
+						},
+						name = "Disable combat helpers",
+						uuid = "30b2e7c5-9e53-e74b-a1aa-ef06a7daec1d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 443",
+						dequeueIfLuaFalse = true,
+						name = "Duty",
+						uuid = "05728ef1-3532-da44-8570-a7d8bc6def77",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Alexander - The Cuff of the Father/AutoSim",
+			eventType = 11,
+			name = "A2N helper setup",
+			timeout = 1,
+			uuid = "d0ee42c1-2fca-1e2c-855c-bdb4e06bff2a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "-- one clear (25-11-2026): last enemy gone at about 258 s\nlocal api = TensorCore.API.TensorACR\nlocal ok, elapsed = pcall(api.getAutoSimTime)\nif ok and type(elapsed) == \"number\" and elapsed >= 0 and elapsed <= 60 and not data.normalRaidForecastSet then\n    api.setAutoSimKillTime(258)\n    api.clearAutoSimUncertainty()\n    api.addAutoSimUncertainty(0, 25)\n    data.normalRaidForecastSet = true\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"bac87927-12e8-e710-a72c-9dab5782064e",
+								true,
+							},
+						},
+						name = "Set kill time",
+						uuid = "104d9308-cfe4-32ca-a7eb-799b53fc0dac",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 443 and eventArgs.spellID == 4046 and not data.normalRaidForecastSet",
+						dequeueIfLuaFalse = true,
+						name = "Duty and first wave",
+						uuid = "bac87927-12e8-e710-a72c-9dab5782064e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Alexander - The Cuff of the Father/AutoSim",
+			eventType = 3,
+			name = "A2N AutoSim baseline",
+			timeout = 1,
+			uuid = "bd38ba18-bce2-a347-9544-48a2b54bba6c",
+			version = 2,
+		},
 	}, 
 	inheritedProfiles = 
 	{
