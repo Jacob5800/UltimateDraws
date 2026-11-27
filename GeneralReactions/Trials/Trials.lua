@@ -9466,6 +9466,152 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e or not e.pos then d(\"[Hells' Kier] arrow object not found\") return end\n-- eight spots, 0 = south, counted towards east\nlocal spot=math.floor((math.atan2(e.pos.x-100,e.pos.z-100)+math.pi/8)/(math.pi/4))%8\ndata.kierArrows=data.kierArrows or {}\nif eventArgs.a2==1 then data.kierArrows[spot]=nil return end\n-- the arrow is a compass direction\nlocal headings={[64]=0,[8]=math.pi,[512]=math.pi/2,[4096]=-math.pi/2}\nlocal q=data.kierArrows[spot] or {}\ndata.kierArrows[spot]=q\nq[#q+1]={h=headings[eventArgs.a2],at=Now()}",
+						conditions = 
+						{
+							
+							{
+								"1dc26fe1-376e-dfe5-b058-38faf69c05bd",
+								true,
+							},
+						},
+						name = "Queue arrow",
+						uuid = "e29f5a96-850f-6367-afc0-8684f62c12a7",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal a=eventArgs.a2\nreturn not not (p and p.localmapid==810 and eventArgs.entityContentID==2007457 and (a==1 or a==8 or a==64 or a==512 or a==4096))",
+						dequeueIfLuaFalse = true,
+						name = "Arrow floor object",
+						uuid = "1dc26fe1-376e-dfe5-b058-38faf69c05bd",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Hells' Kier/Draws",
+			eventType = 19,
+			name = "Suzaku arrow record",
+			timeout = 1,
+			uuid = "5e0d0085-9a68-dcbc-9ca9-efed0c359aa1",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e or not e.pos then return end\nlocal spot=math.floor((math.atan2(e.pos.x-100,e.pos.z-100)+math.pi/8)/(math.pi/4))%8\nlocal now=Now()\n-- keep facing until the buff lands, about 0.8 s after the cast\nfor _,a in ipairs(data.kierArrows[spot] or {}) do\n    if not a.done then a.done=now+1100 break end\nend",
+						conditions = 
+						{
+							
+							{
+								"63b6201e-7991-8948-8663-bd855d801885",
+								true,
+							},
+						},
+						name = "Finish arrow",
+						uuid = "1703c15c-3f48-aeb6-954e-02ed3322dc3d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local id=eventArgs.spellID\nreturn not not (data.kierArrows and eventArgs.entityContentID==7705 and (id==12840 or id==12841))",
+						dequeueIfLuaFalse = true,
+						name = "Echo reached a spot",
+						uuid = "63b6201e-7991-8948-8663-bd855d801885",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Hells' Kier/Draws",
+			eventType = 2,
+			name = "Suzaku arrow hit",
+			timeout = 1,
+			uuid = "8db1a68a-cd29-2767-8bc7-7a8b64f1777a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal A=TensorCore.API.TensorACR\nif not A or not A.setLockFaceHeading then return end\nlocal want=data.kierArrowWant\nif want then\n    A.setLockFaceHeading(want)\n    A.setHardLockFace(true)\n    A.toggleLockFace(true)\nelseif TrialsKierArrowLock~=nil then\n    A.toggleLockFace(false)\n    A.setHardLockFace(false)\nend\nTrialsKierArrowLock=want",
+						conditions = 
+						{
+							
+							{
+								"9a465f2e-6551-9776-a8a4-3b2a5c57cb50",
+								true,
+							},
+						},
+						name = "Set or release lockface",
+						uuid = "01c7eae6-b799-fdfc-9889-1164dceeb9c1",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not data.kierArrows and TrialsKierArrowLock==nil then return false end\nlocal want\nlocal p=TensorCore.mGetPlayer()\nif data.kierArrows and p and p.alive and p.localmapid==810 then\n    local dx,dz=p.pos.x-100,p.pos.z-100\n    local r=dx*dx+dz*dz\n    if r>16 and r<144 then\n        local spot=math.floor((math.atan2(dx,dz)+math.pi/8)/(math.pi/4))%8\n        local now=Now()\n        for _,a in ipairs(data.kierArrows[spot] or {}) do\n            if now-a.at<15000 and not (a.done and now>=a.done) then want=a.h break end\n        end\n    end\nend\ndata.kierArrowWant=want\nreturn want~=TrialsKierArrowLock",
+						dequeueIfLuaFalse = true,
+						name = "Lockface change",
+						uuid = "9a465f2e-6551-9776-a8a4-3b2a5c57cb50",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Hells' Kier/Draws",
+			name = "Suzaku arrow auto lockface",
+			timeout = 1,
+			uuid = "0492547e-4fce-aa85-9767-4c2df4db6ecd",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "Hells' Kier",
 			name = "Mitigations",
 			uuid = "677189e6-d862-2827-819a-2f95efb09951",
