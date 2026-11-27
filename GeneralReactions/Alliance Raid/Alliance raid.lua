@@ -21671,7 +21671,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\nlocal b=TensorCore.mGetEntity(eventArgs.entityID)\nif not b or not b.pos then return end\nlocal s=data.cfStrike\nif not s then s={} data.cfStrike=s end\n-- explosions start when the indicator cast ends and run 60 yalms along its heading\ns[#s+1]={x=b.pos.x,y=b.pos.y,z=b.pos.z,at=Now()+eventArgs.channelTimeMax*1000+300,done=0}\n",
+						actionLua = "self.used=true\nlocal b=TensorCore.mGetEntity(eventArgs.entityID)\nif not b or not b.pos then return end\nlocal s=data.cfStrike\nif not s then s={} data.cfStrike=s end\n-- explosions start when the indicator cast ends and run 60 yalms along its heading (south, east, ...)\ns[#s+1]={x=b.pos.x,y=b.pos.y,z=b.pos.z,h=b.pos.h,sx=math.sin(b.pos.h),sz=math.cos(b.pos.h),\n at=Now()+eventArgs.channelTimeMax*1000+300,done=0}\n",
 						conditions = 
 						{
 							
@@ -21719,7 +21719,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\nlocal s=data.cfStrike\nif not s then return end\nlocal c=TensorCore.mGetEntity(eventArgs.entityID)\nif not c or not c.pos then return end\nfor i=#s,1,-1 do\n local l=s[i]\n if math.abs(l.x-c.pos.x)<3 then\n  -- ground behind the next step is safe (steps are 8.67 apart, seven per lane)\n  local passed=(c.pos.z-l.z)+8.67\n  if passed>l.done then l.done=passed end\n  if l.done>=59 then table.remove(s,i) end\n  break\n end\nend\n",
+						actionLua = "self.used=true\nlocal s=data.cfStrike\nif not s then return end\nlocal c=TensorCore.mGetEntity(eventArgs.entityID)\nif not c or not c.pos then return end\n-- the lane this explosion belongs to: same line, earliest start\nlocal best,bi,along\nfor i,l in ipairs(s) do\n if l.sx then\n  local dx,dz=c.pos.x-l.x,c.pos.z-l.z\n  local d=dx*l.sx+dz*l.sz\n  if math.abs(dx*l.sz-dz*l.sx)<3 and d>=-3 and math.abs(c.pos.h-l.h)<0.2 and (not best or l.at<best.at) then best,bi,along=l,i,d end\n end\nend\nif not best then return end\n-- ground behind the next step is safe (steps are 8.67 apart, seven per lane)\nif along+8.67>best.done then best.done=along+8.67 end\nif best.done>=59 then table.remove(s,bi) end\n",
 						conditions = 
 						{
 							
@@ -21767,7 +21767,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\nlocal s=data.cfStrike\nif not s then return end\nlocal now=Now()\nfor i=#s,1,-1 do\n if now>s[i].at+5000 then table.remove(s,i) end\nend\nif #s==0 then data.cfStrike=nil return end\n-- a lane turns red 2.5s before its first explosion; red is cut off at the platform's south edge (z 457)\nlocal live={}\nfor _,l in ipairs(s) do\n local from=l.z+l.done\n local len=math.min(60-l.done,457-from)\n if l.at-now<=2500 and len>0 then live[#live+1]={x=l.x,z=from,len=len} end\nend\nlocal y=s[1].y+0.05\nlocal red=TensorCore.getStaticDrawer(0x703333FF,2)\nfor _,l in ipairs(live) do red:addRect(l.x,y,l.z,l.len,20,0) end\n-- green: subtractive, the 60x60 platform (centre 900,427) minus the red lanes\nlocal channel=Argus2.getNextUnusedChannel(true)\nif channel==1 then channel=Argus2.getNextUnusedChannel(true) end\nif not channel or channel<=1 then return end\nlocal F=Argus2.RenderFlags\nlocal baseFlags=F.FLAG_WARP_TERRAIN+F.FLAG_OCCLUSION_BASE\nlocal maskFlags=F.FLAG_WARP_TERRAIN+F.FLAG_OCCLUDE\nTensorCore.getStaticDrawer(0x5033FF33,2,channel,baseFlags):addRect(900,y,397,60,60,0,false,baseFlags)\nlocal mask=TensorCore.getStaticDrawer(0xFFFFFFFF,0,channel,maskFlags)\nfor _,l in ipairs(live) do mask:addRect(l.x,y,l.z,l.len,20,0,false,maskFlags) end\n",
+						actionLua = "self.used=true\nlocal s=data.cfStrike\nif not s then return end\nlocal now=Now()\nfor i=#s,1,-1 do\n if not s[i].sx or now>s[i].at+5000 then table.remove(s,i) end\nend\nif #s==0 then data.cfStrike=nil return end\n-- a lane turns red 2.5s before its first explosion; if none is that close, the next one is shown,\n-- so the platform is never fully green while an airstrike is pending\nlocal soonest\nfor _,l in ipairs(s) do if not soonest or l.at<soonest then soonest=l.at end end\nlocal limit=math.max(now+2500,soonest+100)\nlocal live={}\nfor _,l in ipairs(s) do\n if l.at<=limit then\n  local x,z=l.x+l.sx*l.done,l.z+l.sz*l.done\n  -- cut off at the platform edge (x 870-930, z 397-457)\n  local edge=l.sx>0.5 and 930-x or l.sx<-0.5 and x-870 or l.sz>0 and 457-z or z-397\n  local len=math.min(60-l.done,edge)\n  if len>0 then live[#live+1]={x=x,z=z,len=len,h=l.h} end\n end\nend\nif #live==0 then return end\nlocal y=s[1].y+0.05\nlocal red=TensorCore.getStaticDrawer(0x703333FF,2)\nfor _,l in ipairs(live) do red:addRect(l.x,y,l.z,l.len,20,l.h) end\n-- green: subtractive, the 60x60 platform (centre 900,427) minus the red lanes\nlocal channel=Argus2.getNextUnusedChannel(true)\nif channel==1 then channel=Argus2.getNextUnusedChannel(true) end\nif not channel or channel<=1 then return end\nlocal F=Argus2.RenderFlags\nlocal baseFlags=F.FLAG_WARP_TERRAIN+F.FLAG_OCCLUSION_BASE\nlocal maskFlags=F.FLAG_WARP_TERRAIN+F.FLAG_OCCLUDE\nTensorCore.getStaticDrawer(0x5033FF33,2,channel,baseFlags):addRect(900,y,397,60,60,0,false,baseFlags)\nlocal mask=TensorCore.getStaticDrawer(0xFFFFFFFF,0,channel,maskFlags)\nfor _,l in ipairs(live) do mask:addRect(l.x,y,l.z,l.len,20,l.h,false,maskFlags) end\n",
 						conditions = 
 						{
 							

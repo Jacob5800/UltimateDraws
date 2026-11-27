@@ -242,6 +242,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Fixed the 9S-operated Walking Fortress airstrikes that fire sideways showing the whole platform green instead of their red lanes. (27-11-2026)
+
 - Added 9S-operated Walking Fortress draws in The Copied Factory: early Marx Impact circles, airstrike lanes and Anti-personnel Missile squares in red with a green safe area, and the safe spot behind the Goliath Tank during Hack Goliath Tank. (27-11-2026)
 
 - Added Engels draws in The Copied Factory: Marx Smash in red with a green safe area (second hit previewed), following circles for Incendiary Bombing and Guided Missile, an arrow to the south edge during Demolish Structure, and targeting of Marx's halves and then Engels. (27-11-2026)
@@ -259,8 +261,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added red rings around the trash flyers' energy orbs in The Copied Factory. (27-11-2026)
 
 - Added an optional green safe area for the airdrop circles in The Copied Factory: tick "Airdrops: green safe area" in the new Copied Factory settings window (off by default). (27-11-2026)
-
-- The alliance raid profile now disables Prepull Helper only inside alliance raids, instead of everywhere. (27-11-2026)
 
 ### Trials
 
