@@ -110,7 +110,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Dungeons
 
-- In dungeon lol, the cooldown pooling, dying-add cast and Thunder holds now run only when there is something to hold or release, reducing console spam. (27-11-2026)
+- In dungeon lol, the cooldown pooling, dying-add cast, Thunder and Radiant Finale holds now run only when a hold is needed or due for renewal, reducing console spam. (27-11-2026)
 
 - dungeon lol and levelling dungeons: reactions for other maps or inactive states no longer wait in the queue. (27-11-2026)
 

@@ -9173,7 +9173,8 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "return DungeonAutoSimShared~=nil",
-						name = "Owned state or supported duty",
+						dequeueIfLuaFalse = true,
+						name = "Dungeon helper loaded",
 						uuid = "14bac3dd-3fd9-974d-aadf-651df32d051a",
 						version = 3,
 					},
@@ -9220,9 +9221,9 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.job~=25 or not p.alive or not p.incombat then return false end\nlocal h=DungeonAutoSimShared\nif not h then return false end\nlocal spec=h.maps[p.localmapid]\nlocal cfg=spec and _G[spec.config]\nlocal bosses=spec and spec.bosses\nif not cfg or not (cfg.enabled==true or cfg.autoSim==true) or not bosses then return false end\nlocal t=TensorCore.mGetTarget()\nif not t or t.alive~=true or t.attackable~=true or t.incombat~=true or bosses[t.contentid] then return false end\nlocal c=DungeonHoldDisplays and DungeonHoldDisplays[\"dungeon_lol\"]\nif c and c.shortLivedAdds==false then return false end\nif ActionList:IsCasting() or TensorCore.hasBuff(p.id,167) or TensorCore.hasBuff(p.id,1211) then return false end\nlocal life=TensorCore.calcTimeToKill(t.id)\nreturn type(life)==\"number\" and life>0 and life<=4",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.job~=25 or not p.alive or not p.incombat then return false end\nlocal h=DungeonAutoSimShared\nif not h then return false end\nlocal spec=h.maps[p.localmapid]\nlocal cfg=spec and _G[spec.config]\nlocal bosses=spec and spec.bosses\nif not cfg or not (cfg.enabled==true or cfg.autoSim==true) or not bosses then return false end\nlocal t=TensorCore.mGetTarget()\nif not t or t.alive~=true or t.attackable~=true or t.incombat~=true or bosses[t.contentid] then return false end\nlocal c=DungeonHoldDisplays and DungeonHoldDisplays[\"dungeon_lol\"]\nif c and c.shortLivedAdds==false then return false end\nif ActionList:IsCasting() or TensorCore.hasBuff(p.id,167) or TensorCore.hasBuff(p.id,1211) then return false end\nlocal life=TensorCore.calcTimeToKill(t.id)\nif type(life)~=\"number\" or life<=0 or life>4 then return false end\nlocal now=Now()\nlocal sample=data.dungeonShortCastSample\nif not sample or sample.id~=t.id then\n data.dungeonShortCastSample={id=t.id,at=now,life=life};return false\nend\nif now-sample.at<500 then return false end\nlocal count\nfor _,id in ipairs({154,142,3576,141,147,152,3577,25794,162,16505,25795,25793}) do\n local a=ActionList:Get(1,id)\n if a and a.level<=p.level and a.casttime>=1.5 and life<a.casttime+0.25 and sample.life<a.casttime+0.25\n  and not (id==152 and TensorCore.hasBuff(p.id,165)) then\n  if a.radius==0 then return true end\n  -- area spells are held only when this is the sole enemy\n  if not count then\n   count=0\n   TensorCore.forEachEntity(\"alive,targetable,attackable\",function(eid)\n    local e=TensorCore.mGetEntity(eid)\n    if e and e.incombat and e.pos and math.abs(e.pos.y-p.pos.y)<10 and (e.pos.x-p.pos.x)^2+(e.pos.z-p.pos.z)^2<=35^2 then count=count+1 end\n    return count<2\n   end)\n  end\n  if count==1 then return true end\n end\nend\n-- nothing to hold yet: keep the previous lifetime current\nsample.life=life\nreturn false",
 						dequeueIfLuaFalse = true,
-						name = "BLM add about to die",
+						name = "BLM spell would finish too late",
 						uuid = "14c796c2-e129-7e61-8433-b94076ffa86b",
 						version = 3,
 					},
@@ -9247,7 +9248,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local h=DungeonAutoSimShared\nlocal t=TensorCore.mGetTarget()\nlocal accepted=TensorCore.API.TensorACR.holdActionUntil(25785,Now()+750,1)\nlocal key=tostring(t.id)..\":\"..tostring(accepted)\nif h.finaleGuardTrace~=key then\n TensorCore.timelineLogToFile(\"[Dungeon Finale guard] accepted=\"..tostring(accepted)..\" target=\"..tostring(t.id)..\" CID=\"..tostring(t.contentid)..\" HP=\"..tostring(t.hp.percent)..\" threshold=\"..tostring(h.lateHP))\n h.finaleGuardTrace=key\nend\nself.used=true",
+						actionLua = "local h=DungeonAutoSimShared\nlocal t=TensorCore.mGetTarget()\nlocal untilMs=Now()+1200\nlocal accepted=TensorCore.API.TensorACR.holdActionUntil(25785,untilMs,1)\nh.finaleGuardUntil,h.finaleGuardTarget=untilMs,t.id\nlocal key=tostring(t.id)..\":\"..tostring(accepted)\nif h.finaleGuardTrace~=key then\n TensorCore.timelineLogToFile(\"[Dungeon Finale guard] accepted=\"..tostring(accepted)..\" target=\"..tostring(t.id)..\" CID=\"..tostring(t.contentid)..\" HP=\"..tostring(t.hp.percent)..\" threshold=\"..tostring(h.lateHP))\n h.finaleGuardTrace=key\nend\nself.used=true",
 						conditions = 
 						{
 							
@@ -9269,9 +9270,9 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.job~=23 or not p.incombat or not p.alive then return false end\nlocal h=DungeonAutoSimShared\nif not h then return false end\nlocal spec=h.maps[p.localmapid]\nlocal c=spec and _G[spec.config]\n\nif not c or not (c.enabled==true or c.autoSim==true) then return false end\nlocal t=TensorCore.mGetTarget()\nif not t or not t.alive or not t.attackable or not t.incombat or not t.hp or t.hp.percent<=0 or t.hp.percent>h.lateHP then return false end\nlocal last={[1164]={[12584]=true},[1292]={[13974]=true},[1204]={[12763]=true},[1242]={[13610]=true},[1199]={[12729]=true},[1266]={[13749]=true},[1345]={[14758]=true},[1314]={[14288]=true},[1203]={[12709]=true},[189]={[3275]=true},[1174]={[7857]=true,[7858]=true},[1126]={[12334]=true},[969]={[10285]=true},[1037]={[73]=true},[1167]={[12711]=true},[1193]={[12705]=true},[1194]={[12728]=true},[1198]={[12752]=true},[1208]={[12695]=true},[974]={[10399]=true},[822]={[8262]=true},[1065]={[3458]=true},[1038]={[101]=true},[1245]={[1197]=true},[1039]={[444]=true},[1040]={[422]=true},[1041]={[1279]=true},[1267]={[1570]=true},[1303]={[1590]=true},[1042]={[1680]=true},[1330]={[1396]=true},[1331]={[1532]=true}}\nreturn not (last[p.localmapid] and last[p.localmapid][t.contentid])",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.job~=23 or not p.incombat or not p.alive then return false end\nlocal h=DungeonAutoSimShared\nif not h then return false end\nlocal spec=h.maps[p.localmapid]\nlocal c=spec and _G[spec.config]\nif not c or not (c.enabled==true or c.autoSim==true) then return false end\nlocal t=TensorCore.mGetTarget()\nif not t or not t.alive or not t.attackable or not t.incombat or not t.hp or t.hp.percent<=0 or t.hp.percent>h.lateHP then return false end\nlocal last={[1164]=12584,[1292]=13974,[1204]=12763,[1242]=13610,[1199]=12729,[1266]=13749,[1345]=14758,[1314]=14288,[1203]=12709}\nif last[p.localmapid]==t.contentid then return false end\n-- renew only a new target's hold or one with 600 ms or less left\nlocal left=h.finaleGuardUntil and h.finaleGuardUntil-Now()\nreturn h.finaleGuardTarget~=t.id or not left or left<=600 or left>1200",
 						dequeueIfLuaFalse = true,
-						name = "BRD supported duty and low HP",
+						name = "BRD low HP hold needs renewal",
 						uuid = "b98fd45f-e9a1-5d39-ad30-ebb2931fe26c",
 						version = 3,
 					},
