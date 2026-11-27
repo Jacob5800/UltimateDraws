@@ -3055,6 +3055,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local H=DungeonProfilePooling\nif DungeonPullGather and (DungeonPullGather.pull or DungeonPullGather.dotActive) then return true end\nif H and (H.active or H.apexHeld or H.smartDotHeld) then return true end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.incombat or not p.alive then return false end\nlocal maps={ [1043]={\"CastrumMeridianumAutoSimConfig\",\"castrummeridianum_final_trash\",{[557]=true,[2116]=true,[2118]=true}}, [1164]={\"LunarSubterraneAutoSimConfig\",\"lunar_final_trash\",{[12500]=true,[12484]=true,[12584]=true}},[189]={\"AmdaporHardAutoSimConfig\",\"amdaporhard_final_trash\",{[3272]=true,[3274]=true,[3275]=true}},[1174]={\"GhimlytAutoSimConfig\",\"ghimlyt_final_trash\",{[7855]=true,[7856]=true,[7857]=true,[7858]=true}},[1126]={\"AetherfontAutoSimConfig\",\"aetherfont_final_trash\",{[12336]=true,[12337]=true,[12334]=true}} }\nlocal spec=maps[p.localmapid]\nlocal config=spec and _G[spec[1]]\nlocal bosses=spec and spec[3]\nlocal final=spec and data[spec[2]]\n\nif not config or not (config.enabled==true or config.autoSim==true) or not bosses then return false end\nlocal t=TensorCore.mGetTarget()\nif not t or not t.alive or not t.attackable or not t.incombat then return false end\nlocal boss=bosses[t.contentid]\nif not boss and (not DungeonPullGather or DungeonPullGather.config.enabled) then return true end\nif p.job==23 and not boss then return true end\nif config.poolFinal and final and not boss then return true end\nlocal finalBosses={[1164]={[12584]=true},[1292]={[13974]=true},[1204]={[12763]=true},[1242]={[13610]=true},[1199]={[12729]=true},[1266]={[13749]=true},[1345]={[14758]=true},[1314]={[14288]=true},[1203]={[12709]=true},[189]={[3275]=true},[1174]={[7857]=true,[7858]=true},[1043]={[2118]=true},[1126]={[12334]=true},[969]={[10285]=true},[1037]={[73]=true},[1167]={[12711]=true},[1193]={[12705]=true},[1194]={[12728]=true},[1198]={[12752]=true},[1208]={[12695]=true},[974]={[10399]=true},[822]={[8262]=true},[1065]={[3458]=true},[1038]={[101]=true},[1245]={[1197]=true},[1039]={[444]=true},[1040]={[422]=true},[1041]={[1279]=true},[1267]={[1570]=true},[1303]={[1590]=true},[1042]={[1680]=true},[1330]={[1396]=true},[1331]={[1532]=true}}\nif finalBosses[p.localmapid] and finalBosses[p.localmapid][t.contentid] then return false end\nreturn t.hp~=nil and t.hp.percent>0 and t.hp.percent <= (H and H.lateHP or 8)",
+						dequeueIfLuaFalse = true,
 						name = "Supported duty and pooling work",
 						uuid = "32720bc2-71e9-0f3b-b51b-c184e17aae83",
 						version = 3,
@@ -3103,6 +3104,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "return DungeonProfilePooling ~= nil",
+						dequeueIfLuaFalse = true,
 						name = "Relevant state",
 						uuid = "d7f68b96-8191-0b56-aaa7-e5a1111648c2",
 						version = 3,
@@ -3151,6 +3153,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "return DungeonProfilePooling ~= nil",
+						dequeueIfLuaFalse = true,
 						name = "Relevant state",
 						uuid = "ce279def-f76a-8d80-acc6-bdb5f19ba8ef",
 						version = 3,
@@ -3199,6 +3202,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "return DungeonProfilePooling ~= nil",
+						dequeueIfLuaFalse = true,
 						name = "Relevant state",
 						uuid = "746f6771-391e-be17-8872-1e2bcc4c3831",
 						version = 3,
@@ -3225,6 +3229,14 @@ local tbl =
 					{
 						aType = "Lua",
 						actionLua = "local pooling = DungeonProfilePooling\nif not pooling then self.used=true;return end\nlocal player=TensorCore.mGetPlayer()\nif not player or not pooling.maps[player.localmapid] then self.used=true;return end\nlocal visible=GUI:Begin(\"Dungeon cooldown pooling\",true)\nif visible then\n    local value,changed=GUI:SliderFloat(\"Hold cooldowns below boss HP %\",pooling.lateHP,0,20)\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Save offensive cooldowns for the next encounter. Zero disables the near-death hold. Final-pack holds use each dungeon's setting.\") end\n    if changed then\n        pooling.lateHP=value\n        if DungeonAutoSimShared then DungeonAutoSimShared.lateHP=value end\n        local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n        if not FolderExists(folder) then FolderCreate(folder) end\n        local path=folder..[[DungeonAutoSim.Shared.lua]]\n        local saved=FileExists(path) and FileLoad(path) or {}\n        if type(saved)~=\"table\" then saved={} end\n        saved.lateHP=value\n        FileSave(path,saved)\n    end\nend\nGUI:End()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"11f9d90e-2c8d-9b26-b762-c5d1d57b50d6",
+								true,
+							},
+						},
 						name = "[Dungeon pooling] Shared boss HP threshold",
 						uuid = "10143ba6-fc7f-face-a623-527629f8611f",
 						version = 2.1,
@@ -3233,6 +3245,17 @@ local tbl =
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local pooling=DungeonProfilePooling\nlocal p=TensorCore.mGetPlayer()\nreturn not not (pooling and p and pooling.maps[p.localmapid])",
+						name = "Supported dungeon",
+						uuid = "11f9d90e-2c8d-9b26-b762-c5d1d57b50d6",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Shared dungeon controls",
 			eventType = 13,
@@ -3276,6 +3299,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local h=DungeonProfilePooling\nlocal p=TensorCore.mGetPlayer()\nif not h then return false end\nif next(h.held)~=nil or h.active==true or h.smartDotHeld==true or h.apexHeld==true then return true end\nreturn h.restoreAuditVersion==nil and p~=nil and (h.maps[p.localmapid]~=nil)",
+						dequeueIfLuaFalse = true,
 						name = "Owned state or supported duty",
 						uuid = "b81180c8-cdd2-eac0-8836-93d36f73f999",
 						version = 3,
@@ -3373,6 +3397,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.job~=25 or not p.alive or not p.incombat then return false end\nlocal h=DungeonProfilePooling\nif not h then return false end\nlocal spec=h.maps[p.localmapid]\nlocal cfg=spec and _G[spec.config]\nlocal bosses=spec and spec.bosses\n\nif not cfg or not (cfg.enabled==true or cfg.autoSim==true) or not bosses then return false end\nlocal t=TensorCore.mGetTarget()\nreturn t~=nil and t.alive==true and t.attackable==true and t.incombat==true and not bosses[t.contentid]",
+						dequeueIfLuaFalse = true,
 						name = "BLM and live dungeon add",
 						uuid = "e96665f5-2805-624a-89a3-2344883ae524",
 						version = 3,
@@ -3421,6 +3446,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.job~=23 or not p.incombat or not p.alive then return false end\nlocal h=DungeonProfilePooling\nif not h then return false end\nlocal spec=h.maps[p.localmapid]\nlocal c=spec and _G[spec.config]\n\nif not c or not (c.enabled==true or c.autoSim==true) then return false end\nlocal t=TensorCore.mGetTarget()\nif not t or not t.alive or not t.attackable or not t.incombat or not t.hp or t.hp.percent<=0 or t.hp.percent>h.lateHP then return false end\nlocal last={[1164]={[12584]=true},[1292]={[13974]=true},[1204]={[12763]=true},[1242]={[13610]=true},[1199]={[12729]=true},[1266]={[13749]=true},[1345]={[14758]=true},[1314]={[14288]=true},[1203]={[12709]=true},[189]={[3275]=true},[1174]={[7857]=true,[7858]=true},[1043]={[2118]=true},[1126]={[12334]=true},[969]={[10285]=true},[1037]={[73]=true},[1167]={[12711]=true},[1193]={[12705]=true},[1194]={[12728]=true},[1198]={[12752]=true},[1208]={[12695]=true},[974]={[10399]=true},[822]={[8262]=true},[1065]={[3458]=true},[1038]={[101]=true},[1245]={[1197]=true},[1039]={[444]=true},[1040]={[422]=true},[1041]={[1279]=true},[1267]={[1570]=true},[1303]={[1590]=true},[1042]={[1680]=true},[1330]={[1396]=true},[1331]={[1532]=true}}\nreturn not (last[p.localmapid] and last[p.localmapid][t.contentid])",
+						dequeueIfLuaFalse = true,
 						name = "BRD supported duty and low HP",
 						uuid = "27559f58-430d-ade3-a75c-11b56912208c",
 						version = 3,
@@ -4344,14 +4370,45 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nlocal e=eventArgs\nlocal cid=e.entityContentID\nlocal anchor=(cid==4744 and e.spellID==5573 and 11.516) or (cid==4745 and e.spellID==5582 and 7.282) or (cid==4747 and e.spellID==5604 and 3.171)\nif not anchor or data.lostAmdaporBoss==e.entityID then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=519 then return end\nlocal A=TensorCore.API.TensorACR\nlocal now=A.getAutoSimTime()\nif type(now)~='number' or now<0 then return end\nlocal origin=math.max(0,now-anchor)\ndata.lostAmdaporBoss=e.entityID\nlocal kill=cid==4744 and 103.156 or cid==4745 and 103.266 or 133.641\nA.setAutoSimKillTime(origin+kill)\nA.addAutoSimUncertainty(now,10)\nlocal caster=p.job==25 or p.job==27 or p.job==35 or p.job==42 or p.job==36 or p.job==24 or p.job==28 or p.job==33 or p.job==40\nlocal movement=cid==4744 and {{16,18},{49.5,51.5},{73.5,75.5}} or cid==4745 and {{9.5,11.3},{49.9,51.7},{98.7,100.5}} or {{4.4,6.2},{61.2,63},{90.3,92.1},{110.7,112.5}}\nif caster then\n for _,w in ipairs(movement) do\n  if origin+w[2]>now then A.addAutoSimPhase('CasterDowntime',math.max(now,origin+w[1]),origin+w[2],1) end\n end\nend\nif cid==4747 then\n for _,w in ipairs({{26.172,34.297},{77.141,81.688}}) do\n  if origin+w[2]>now then A.addAutoSimPhase('FullDowntime',math.max(now,origin+w[1]),origin+w[2],1) end\n end\nend\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"f6889d73-09e7-5529-8f95-4486aee3a419",
+								true,
+							},
+						},
+						name = "Boss anchors and sampled AutoSim forecasts",
+						uuid = "c6c04788-c3d4-dc48-aed6-8a2db225ef72",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 519,
+						name = "Amdapor (Hard)",
+						uuid = "f6889d73-09e7-5529-8f95-4486aee3a419",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Lost City of Amdapor (Hard)/AutoSim",
 			eventType = 3,
 			execute = "local e=eventArgs\nlocal cid=e.entityContentID\nlocal anchor=(cid==4744 and e.spellID==5573 and 11.516) or (cid==4745 and e.spellID==5582 and 7.282) or (cid==4747 and e.spellID==5604 and 3.171)\nif not anchor or data.lostAmdaporBoss==e.entityID then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=519 then return end\nlocal A=TensorCore.API.TensorACR\nlocal now=A.getAutoSimTime()\nif type(now)~='number' or now<0 then return end\nlocal origin=math.max(0,now-anchor)\ndata.lostAmdaporBoss=e.entityID\nlocal kill=cid==4744 and 103.156 or cid==4745 and 103.266 or 133.641\nA.setAutoSimKillTime(origin+kill)\nA.addAutoSimUncertainty(now,10)\nlocal caster=p.job==25 or p.job==27 or p.job==35 or p.job==42 or p.job==36 or p.job==24 or p.job==28 or p.job==33 or p.job==40\nlocal movement=cid==4744 and {{16,18},{49.5,51.5},{73.5,75.5}} or cid==4745 and {{9.5,11.3},{49.9,51.7},{98.7,100.5}} or {{4.4,6.2},{61.2,63},{90.3,92.1},{110.7,112.5}}\nif caster then\n for _,w in ipairs(movement) do\n  if origin+w[2]>now then A.addAutoSimPhase('CasterDowntime',math.max(now,origin+w[1]),origin+w[2],1) end\n end\nend\nif cid==4747 then\n for _,w in ipairs({{26.172,34.297},{77.141,81.688}}) do\n  if origin+w[2]>now then A.addAutoSimPhase('FullDowntime',math.max(now,origin+w[1]),origin+w[2],1) end\n end\nend",
-			executeType = 2,
 			name = "Boss anchors and sampled AutoSim forecasts",
 			uuid = "d50c7642-ef3e-3958-a644-4bdcb4927453",
 			version = 2,
@@ -4471,14 +4528,62 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "data.lostAmdaporFace={finish=Now()+eventArgs.channelTimeMax*1000,boss=eventArgs.entityID}\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"7c67c39e-4887-8466-858b-cfbebe74a881",
+								true,
+							},
+							
+							{
+								"f004b406-3ed5-5160-b155-16782109a910",
+								true,
+							},
+						},
+						name = "Schedule outward facing",
+						uuid = "842cc221-b8e3-1586-a706-df36ccbc7800",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 519,
+						name = "Amdapor (Hard)",
+						uuid = "7c67c39e-4887-8466-858b-cfbebe74a881",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return eventArgs.spellID==5573 and eventArgs.entityContentID==4744 and eventArgs.channelTimeMax>0",
+						dequeueIfLuaFalse = true,
+						name = "Neuro Squama facing cast",
+						uuid = "f004b406-3ed5-5160-b155-16782109a910",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Lost City of Amdapor (Hard)/Achamoth",
 			eventType = 3,
 			execute = "if eventArgs.spellID~=5573 or eventArgs.entityContentID~=4744 or eventArgs.channelTimeMax<=0 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=519 then return end\ndata.lostAmdaporFace={finish=Now()+eventArgs.channelTimeMax*1000,boss=eventArgs.entityID}",
-			executeType = 2,
 			name = "Neuro Squama - schedule outward facing",
 			uuid = "63577bac-d9b5-ee9e-ad16-552b1686a0aa",
 			version = 2,
@@ -4490,13 +4595,43 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nlocal p=TensorCore.mGetPlayer()\nlocal active=p and p.localmapid==519 and p.alive\nlocal f=data.lostAmdaporFace\nlocal boss=active and f and TensorCore.mGetEntity(f.boss)\nlocal remaining=f and f.finish-Now()\nif active and p.incombat and boss and boss.alive and remaining> -350 and remaining<=1400 then\n local cx,cz=-222,-283\n local dx,dz=p.pos.x-cx,p.pos.z-cz\n if dx*dx+dz*dz<4 then dx,dz=p.pos.x-boss.pos.x,p.pos.z-boss.pos.z end\n if dx*dx+dz*dz>.04 then\n  local api=TensorCore.API.TensorACR\n  api.setLockFaceHeading(TensorCore.getHeadingToTarget(p.pos,{x=p.pos.x+dx,y=p.pos.y,z=p.pos.z+dz}))\n  if not LostAmdaporOwnsFacing then\n   api.setHardLockFace(true)\n   api.toggleLockFace(true)\n   LostAmdaporOwnsFacing=true\n  end\n end\nelse\nif LostAmdaporOwnsFacing then\n local api=TensorCore.API.TensorACR\n api.toggleLockFace(false)\n api.setHardLockFace(false)\n LostAmdaporOwnsFacing=nil\nend\n if f and (not active or not p.incombat or not boss or not boss.alive or remaining<= -350) then data.lostAmdaporFace=nil end\nend\nif not active then return end\ngStartCombat=false\nlocal helpers=AnyoneCore and AnyoneCore.Settings\nif helpers and helpers.DutyHelper then helpers.DutyHelper.enabled=false end\nif helpers and helpers.PrepullHelper then helpers.PrepullHelper.enabled=false end\nif p.incombat or TensorCore.mGetTarget() then return end\nif data.lostAmdaporTargetAt and Now()<data.lostAmdaporTargetAt then return end\ndata.lostAmdaporTargetAt=Now()+750\nfor _,e in pairs(TensorCore.entityList('alive,targetable,attackable,maxdistance=30') or {}) do\n if e.contentid==4744 or e.contentid==4745 or e.contentid==4747 then\n  Player:SetTarget(e.id)\n  break\n end\nend\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"e2317251-2aef-bf1c-a627-0f29ec7e33e5",
+								true,
+							},
+						},
+						name = "Duty setup and Neuro Squama LockFace",
+						uuid = "06fb8ccb-1dfa-73e2-bc1b-c297c6966076",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if LostAmdaporOwnsFacing or data.lostAmdaporFace then return true end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=519 or not p.alive then return false end\nlocal helpers=AnyoneCore and AnyoneCore.Settings\nif gStartCombat~=false or (helpers and helpers.DutyHelper and helpers.DutyHelper.enabled~=false) or (helpers and helpers.PrepullHelper and helpers.PrepullHelper.enabled~=false) then return true end\nif p.incombat or TensorCore.mGetTarget() then return false end\nif data.lostAmdaporTargetAt and Now()<data.lostAmdaporTargetAt then return false end\nfor _,e in pairs(TensorCore.entityList('alive,targetable,attackable,maxdistance=30') or {}) do\n if e.contentid==4744 or e.contentid==4745 or e.contentid==4747 then return true end\nend\ndata.lostAmdaporTargetAt=Now()+750\nreturn false",
+						dequeueIfLuaFalse = true,
+						name = "Facing or setup work",
+						uuid = "e2317251-2aef-bf1c-a627-0f29ec7e33e5",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Lost City of Amdapor (Hard)/Achamoth",
 			execute = "local p=TensorCore.mGetPlayer()\nlocal active=p and p.localmapid==519 and p.alive\nlocal f=data.lostAmdaporFace\nlocal boss=active and f and TensorCore.mGetEntity(f.boss)\nlocal remaining=f and f.finish-Now()\nif active and p.incombat and boss and boss.alive and remaining> -350 and remaining<=1400 then\n local cx,cz=-222,-283\n local dx,dz=p.pos.x-cx,p.pos.z-cz\n if dx*dx+dz*dz<4 then dx,dz=p.pos.x-boss.pos.x,p.pos.z-boss.pos.z end\n if dx*dx+dz*dz>.04 then\n  local api=TensorCore.API.TensorACR\n  api.setLockFaceHeading(TensorCore.getHeadingToTarget(p.pos,{x=p.pos.x+dx,y=p.pos.y,z=p.pos.z+dz}))\n  if not LostAmdaporOwnsFacing then\n   api.setHardLockFace(true)\n   api.toggleLockFace(true)\n   LostAmdaporOwnsFacing=true\n  end\n end\nelse\nif LostAmdaporOwnsFacing then\n local api=TensorCore.API.TensorACR\n api.toggleLockFace(false)\n api.setHardLockFace(false)\n LostAmdaporOwnsFacing=nil\nend\n if f and (not active or not p.incombat or not boss or not boss.alive or remaining<= -350) then data.lostAmdaporFace=nil end\nend\nif not active then return end\ngStartCombat=false\nlocal helpers=AnyoneCore and AnyoneCore.Settings\nif helpers and helpers.DutyHelper then helpers.DutyHelper.enabled=false end\nif helpers and helpers.PrepullHelper then helpers.PrepullHelper.enabled=false end\nif p.incombat or TensorCore.mGetTarget() then return end\nif data.lostAmdaporTargetAt and Now()<data.lostAmdaporTargetAt then return end\ndata.lostAmdaporTargetAt=Now()+750\nfor _,e in pairs(TensorCore.entityList('alive,targetable,attackable,maxdistance=30') or {}) do\n if e.contentid==4744 or e.contentid==4745 or e.contentid==4747 then\n  Player:SetTarget(e.id)\n  break\n end\nend",
-			executeType = 2,
 			name = "Duty setup and Neuro Squama LockFace",
 			throttleTime = 150,
 			uuid = "dbe34f51-5cad-5e4a-bc58-5c97190fc2e0",
@@ -4509,14 +4644,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if LostAmdaporOwnsFacing then\n local api=TensorCore.API.TensorACR\n api.toggleLockFace(false)\n api.setHardLockFace(false)\n LostAmdaporOwnsFacing=nil\nend\ndata.lostAmdaporFace=nil\ndata.lostAmdaporBoss=nil\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"fa8a9a6a-70c2-528b-ad7d-784a17837804",
+								true,
+							},
+						},
+						name = "Release LockFace",
+						uuid = "45cb2ae2-d17d-b37f-b5f7-216260793e43",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return not not (LostAmdaporOwnsFacing or data.lostAmdaporFace or data.lostAmdaporBoss)",
+						dequeueIfLuaFalse = true,
+						name = "Owned facing state",
+						uuid = "fa8a9a6a-70c2-528b-ad7d-784a17837804",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Lost City of Amdapor (Hard)/Achamoth",
 			eventType = 9,
 			execute = "if LostAmdaporOwnsFacing then\n local api=TensorCore.API.TensorACR\n api.toggleLockFace(false)\n api.setHardLockFace(false)\n LostAmdaporOwnsFacing=nil\nend\ndata.lostAmdaporFace=nil\ndata.lostAmdaporBoss=nil",
-			executeType = 2,
 			name = "Release Neuro Squama LockFace on wipe",
 			uuid = "b5f7a1bc-3388-9038-8051-6c818d0c3d68",
 			version = 2,
@@ -4528,14 +4693,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if LostAmdaporOwnsFacing then\n local api=TensorCore.API.TensorACR\n api.toggleLockFace(false)\n api.setHardLockFace(false)\n LostAmdaporOwnsFacing=nil\nend\ndata.lostAmdaporFace=nil\ndata.lostAmdaporBoss=nil\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"ecf8b6b2-477c-5dee-b692-698bd274715f",
+								true,
+							},
+						},
+						name = "Release LockFace",
+						uuid = "cd3ce73b-2e30-aa29-b2d2-1907953d1213",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return not not (LostAmdaporOwnsFacing or data.lostAmdaporFace or data.lostAmdaporBoss)",
+						dequeueIfLuaFalse = true,
+						name = "Owned facing state",
+						uuid = "ecf8b6b2-477c-5dee-b692-698bd274715f",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Lost City of Amdapor (Hard)/Achamoth",
 			eventType = 11,
 			execute = "if LostAmdaporOwnsFacing then\n local api=TensorCore.API.TensorACR\n api.toggleLockFace(false)\n api.setHardLockFace(false)\n LostAmdaporOwnsFacing=nil\nend\ndata.lostAmdaporFace=nil\ndata.lostAmdaporBoss=nil",
-			executeType = 2,
 			name = "Release Neuro Squama LockFace on mapchange",
 			uuid = "a9f87f92-831b-1860-ac7a-db6f92864e97",
 			version = 2,
@@ -4547,14 +4742,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "if LostAmdaporOwnsFacing then\n local api=TensorCore.API.TensorACR\n api.toggleLockFace(false)\n api.setHardLockFace(false)\n LostAmdaporOwnsFacing=nil\nend\ndata.lostAmdaporFace=nil\ndata.lostAmdaporBoss=nil\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"9bb15068-4155-8c69-ab39-d12a83503907",
+								true,
+							},
+						},
+						name = "Release LockFace",
+						uuid = "6a6e72e1-1dcd-7989-a4e5-17cfaeec3ba2",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return not not (LostAmdaporOwnsFacing or data.lostAmdaporFace or data.lostAmdaporBoss)",
+						dequeueIfLuaFalse = true,
+						name = "Owned facing state",
+						uuid = "9bb15068-4155-8c69-ab39-d12a83503907",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Lost City of Amdapor (Hard)/Achamoth",
 			eventType = 10,
 			execute = "if LostAmdaporOwnsFacing then\n local api=TensorCore.API.TensorACR\n api.toggleLockFace(false)\n api.setHardLockFace(false)\n LostAmdaporOwnsFacing=nil\nend\ndata.lostAmdaporFace=nil\ndata.lostAmdaporBoss=nil",
-			executeType = 2,
 			name = "Release Neuro Squama LockFace on death",
 			uuid = "da0f87c1-f573-6c9b-85e5-324bf338a00a",
 			version = 2,
@@ -4576,14 +4801,62 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\nlocal id=e.aoeID\nlocal drawer=TensorCore.getStaticDrawer(0x603333FF,2)\nif id==5571 or id==5574 or id==5604 then\n drawer:addTimedCone(e.duration*1000,e.x,e.y,e.z,e.aoeLength,math.rad(90),e.heading,0,false,true)\nelse\n drawer:addTimedCircle(e.duration*1000,e.x,e.y,e.z,e.aoeLength,0,false,true)\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"278fdd26-fad2-048a-b8bb-d4b84573ec95",
+								true,
+							},
+							
+							{
+								"5823a2a7-a516-e13d-816c-44a62b61db18",
+								true,
+							},
+						},
+						name = "Telegraph cones and ground AoEs",
+						uuid = "940da38e-5ef2-3ab8-a2c5-a3f8d5fd54c7",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 519,
+						name = "Amdapor (Hard)",
+						uuid = "278fdd26-fad2-048a-b8bb-d4b84573ec95",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nlocal ids={[5571]=true,[5574]=true,[5604]=true,[5583]=true,[5587]=true,[5597]=true}\nreturn ids[e.aoeID]==true and not e.friendly and e.duration>0",
+						dequeueIfLuaFalse = true,
+						name = "Hostile tracked AoE",
+						uuid = "5823a2a7-a516-e13d-816c-44a62b61db18",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Lost City of Amdapor (Hard)/Draws",
 			eventType = 18,
 			execute = "local e=eventArgs\nlocal id=e.aoeID\nlocal cone=id==5571 or id==5574 or id==5604\nif not cone and id~=5583 and id~=5587 and id~=5597 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=519 then return end\nif e.friendly or e.duration<=0 then return end\nlocal drawer=TensorCore.getStaticDrawer(0x603333FF,2)\nif cone then\n drawer:addTimedCone(e.duration*1000,e.x,e.y,e.z,e.aoeLength,math.rad(90),e.heading,0,false,true)\nelse\n drawer:addTimedCircle(e.duration*1000,e.x,e.y,e.z,e.aoeLength,0,false,true)\nend",
-			executeType = 2,
 			name = "Telegraph cones and ground AoEs",
 			uuid = "cf53663b-0c05-bb6c-adc7-59ed73939dd8",
 			version = 2,

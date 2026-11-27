@@ -110,6 +110,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Dungeons
 
+- More highleveldungeons reactions, including the shared cooldown holds and the Lost City of Amdapor (Hard) draws, no longer wait in the queue when they do not apply. (27-11-2026)
+
 - In levelling dungeons, the saved dungeon settings now load once instead of re-running every second and filling the console. (27-11-2026)
 
 - highleveldungeons reactions no longer sit in the queue outside their own dungeon. (27-11-2026)
@@ -127,8 +129,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - In dungeon lol, Alexandria skips the gather hold on the opening single pack and resumes normal gathering after the first portal. (24-11-2026)
 
 - Added Surecast for Maulskull, Deceiver and Ambrose, plus a disabled counterpart for Paglth’an’s Ground-to-ground Ballistic. (23-11-2026)
-
-- Added The Antitower boss draws and callouts to highleveldungeons. (23-11-2026)
 
 ### DSR
 
