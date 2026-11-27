@@ -3586,13 +3586,42 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player then self.used = true; return end\n\nlocal contentID = 4839\nlocal label = \"[High Level Dungeons] Toxic Squama\"\nlocal api = TensorCore.API.TensorACR\nlocal eligible = player.localmapid == 519\nlocal state = LostAmdaporSquamaDoT\n\n-- Restore the previous entry on leaving the duty or changing jobs.\n-- Keep this state outside pull data so a wipe does not lose the original values.\nif state and (not eligible or state.job ~= player.job) then\n    local entry = state.entry\n    if entry and entry.enabled and entry.allowIfTarget == false and entry.allowSmartDoT == false then\n        if state.created then\n            entry.enabled = false\n            if player.job == state.job and api.getBlacklistEntry(contentID) then\n                local current = api.addBlacklistEntry(contentID)\n                if current == entry and current.name == label then\n                    api.deleteBlacklistEntry(contentID)\n                end\n            end\n        else\n            entry.enabled = state.enabled\n            entry.allowIfTarget = state.allowIfTarget\n            entry.allowSmartDoT = state.allowSmartDoT\n        end\n    end\n    LostAmdaporSquamaDoT = nil\n    state = nil\nend\n\nif eligible and not state then\n    LostAmdaporSquamaDoT = { job = player.job }\n    local supported, exists = pcall(api.getBlacklistEntry, contentID)\n    if supported then\n        local ok, entry = pcall(api.addBlacklistEntry, contentID, label)\n        if ok and entry then\n            LostAmdaporSquamaDoT = {\n                job = player.job, entry = entry, created = not exists,\n                enabled = entry.enabled, allowIfTarget = entry.allowIfTarget,\n                allowSmartDoT = entry.allowSmartDoT,\n            }\n            entry.enabled = true\n            entry.allowIfTarget = false\n            entry.allowSmartDoT = false\n        end\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"fd623bb6-3734-c459-8c50-da6bbecd6d26",
+								true,
+							},
+						},
+						name = "Apply or restore blacklist",
+						uuid = "817d88cf-fb8a-aed1-a977-baa4d1be9b9f",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal eligible = player.localmapid == 519\nlocal state = LostAmdaporSquamaDoT\nif state then return not eligible or state.job ~= player.job end\nreturn eligible",
+						name = "Blacklist needs setup or cleanup",
+						uuid = "fd623bb6-3734-c459-8c50-da6bbecd6d26",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Lost City of Amdapor (Hard)/AutoSim",
 			execute = "local player = TensorCore.mGetPlayer()\nif not player then self.used = true; return end\n\nlocal contentID = 4839\nlocal label = \"[High Level Dungeons] Toxic Squama\"\nlocal api = TensorCore.API.TensorACR\nlocal eligible = player.localmapid == 519\nlocal state = LostAmdaporSquamaDoT\n\n-- Restore the previous entry on leaving the duty or changing jobs.\n-- Keep this state outside pull data so a wipe does not lose the original values.\nif state and (not eligible or state.job ~= player.job) then\n    local entry = state.entry\n    if entry.enabled and entry.allowIfTarget == false and entry.allowSmartDoT == false then\n        if state.created then\n            entry.enabled = false\n            if player.job == state.job and api.getBlacklistEntry(contentID) then\n                local current = api.addBlacklistEntry(contentID)\n                if current == entry and current.name == label then\n                    api.deleteBlacklistEntry(contentID)\n                end\n            end\n        else\n            entry.enabled = state.enabled\n            entry.allowIfTarget = state.allowIfTarget\n            entry.allowSmartDoT = state.allowSmartDoT\n        end\n    end\n    LostAmdaporSquamaDoT = nil\n    state = nil\nend\n\nif eligible and not state then\n    local supported, exists = pcall(api.getBlacklistEntry, contentID)\n    if supported then\n        local ok, entry = pcall(api.addBlacklistEntry, contentID, label)\n        if ok and entry then\n            LostAmdaporSquamaDoT = {\n                job = player.job, entry = entry, created = not exists,\n                enabled = entry.enabled, allowIfTarget = entry.allowIfTarget,\n                allowSmartDoT = entry.allowSmartDoT,\n            }\n            entry.enabled = true\n            entry.allowIfTarget = false\n            entry.allowSmartDoT = false\n        end\n    end\nend\nself.used = true",
-			executeType = 2,
 			name = "Toxic Squama - DoT blacklist",
 			throttleTime = 500,
 			uuid = "bc71fac6-b47d-a98e-b833-f41101b60a64",
@@ -3605,13 +3634,42 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player then self.used = true; return end\n\nlocal contentID = 4815\nlocal label = \"[High Level Dungeons] Arcane Sphere\"\nlocal api = TensorCore.API.TensorACR\nlocal eligible = player.localmapid == 519\nlocal state = LostAmdaporSphereDoT\n\n-- Restore the previous entry on leaving the duty or changing jobs.\n-- Keep this state outside pull data so a wipe does not lose the original values.\nif state and (not eligible or state.job ~= player.job) then\n    local entry = state.entry\n    if entry and entry.enabled and entry.allowIfTarget == false and entry.allowSmartDoT == false then\n        if state.created then\n            entry.enabled = false\n            if player.job == state.job and api.getBlacklistEntry(contentID) then\n                local current = api.addBlacklistEntry(contentID)\n                if current == entry and current.name == label then\n                    api.deleteBlacklistEntry(contentID)\n                end\n            end\n        else\n            entry.enabled = state.enabled\n            entry.allowIfTarget = state.allowIfTarget\n            entry.allowSmartDoT = state.allowSmartDoT\n        end\n    end\n    LostAmdaporSphereDoT = nil\n    state = nil\nend\n\nif eligible and not state then\n    LostAmdaporSphereDoT = { job = player.job }\n    local supported, exists = pcall(api.getBlacklistEntry, contentID)\n    if supported then\n        local ok, entry = pcall(api.addBlacklistEntry, contentID, label)\n        if ok and entry then\n            LostAmdaporSphereDoT = {\n                job = player.job, entry = entry, created = not exists,\n                enabled = entry.enabled, allowIfTarget = entry.allowIfTarget,\n                allowSmartDoT = entry.allowSmartDoT,\n            }\n            entry.enabled = true\n            entry.allowIfTarget = false\n            entry.allowSmartDoT = false\n        end\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"49d45fe5-548b-5b06-8d59-dbab5804c644",
+								true,
+							},
+						},
+						name = "Apply or restore blacklist",
+						uuid = "268b6ea2-e9cd-66a2-b46a-1c5f4b23ac2d",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal eligible = player.localmapid == 519\nlocal state = LostAmdaporSphereDoT\nif state then return not eligible or state.job ~= player.job end\nreturn eligible",
+						name = "Blacklist needs setup or cleanup",
+						uuid = "49d45fe5-548b-5b06-8d59-dbab5804c644",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Lost City of Amdapor (Hard)/AutoSim",
 			execute = "local player = TensorCore.mGetPlayer()\nif not player then self.used = true; return end\n\nlocal contentID = 4815\nlocal label = \"[High Level Dungeons] Arcane Sphere\"\nlocal api = TensorCore.API.TensorACR\nlocal eligible = player.localmapid == 519\nlocal state = LostAmdaporSphereDoT\n\n-- Restore the previous entry on leaving the duty or changing jobs.\n-- Keep this state outside pull data so a wipe does not lose the original values.\nif state and (not eligible or state.job ~= player.job) then\n    local entry = state.entry\n    if entry.enabled and entry.allowIfTarget == false and entry.allowSmartDoT == false then\n        if state.created then\n            entry.enabled = false\n            if player.job == state.job and api.getBlacklistEntry(contentID) then\n                local current = api.addBlacklistEntry(contentID)\n                if current == entry and current.name == label then\n                    api.deleteBlacklistEntry(contentID)\n                end\n            end\n        else\n            entry.enabled = state.enabled\n            entry.allowIfTarget = state.allowIfTarget\n            entry.allowSmartDoT = state.allowSmartDoT\n        end\n    end\n    LostAmdaporSphereDoT = nil\n    state = nil\nend\n\nif eligible and not state then\n    local supported, exists = pcall(api.getBlacklistEntry, contentID)\n    if supported then\n        local ok, entry = pcall(api.addBlacklistEntry, contentID, label)\n        if ok and entry then\n            LostAmdaporSphereDoT = {\n                job = player.job, entry = entry, created = not exists,\n                enabled = entry.enabled, allowIfTarget = entry.allowIfTarget,\n                allowSmartDoT = entry.allowSmartDoT,\n            }\n            entry.enabled = true\n            entry.allowIfTarget = false\n            entry.allowSmartDoT = false\n        end\n    end\nend\nself.used = true",
-			executeType = 2,
 			name = "Arcane Sphere - DoT blacklist",
 			throttleTime = 500,
 			uuid = "3f19e849-31a6-1325-a10f-0e461e4b6759",
@@ -4656,13 +4714,13 @@ local tbl =
 						{
 							
 							{
-								"3c650b51-391a-f46b-90d8-e4006837e66f",
+								"7189e797-ae87-c52c-833f-bc2aade58913",
 								true,
 							},
 						},
-						gVar = "ACR_TensorWeeb4_Hotbar_ArmsLength",
+						gVar = "ACR_TensorMagnum3_Hotbar_ArmsLength",
 						name = "Ground-to-ground Ballistic - Arm’s Length",
-						uuid = "026a5b8e-1346-aa5d-85cb-928656e261e2",
+						uuid = "e5654ae5-6b00-de95-8bba-834d51eb7e98",
 						variableTogglesType = 2,
 						version = 2.1,
 					},
@@ -4677,7 +4735,7 @@ local tbl =
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nlocal e=eventArgs\nreturn data.paglthanBoss==10076 and e.entityContentID==10067 and e.spellID==23703",
 						name = "Ground-to-ground Ballistic - Arm’s Length gate",
-						uuid = "3c650b51-391a-f46b-90d8-e4006837e66f",
+						uuid = "7189e797-ae87-c52c-833f-bc2aade58913",
 						version = 3,
 					},
 				},
@@ -4687,73 +4745,7 @@ local tbl =
 			eventType = 3,
 			name = "[Paglth’an] Ground-to-ground Ballistic - Arm’s Length",
 			throttleTime = 10000,
-			uuid = "66ed07b3-75d4-2f18-b237-73dbf5c67e09",
-			version = 2,
-		},
-	},
-	
-	{
-		data = 
-		{
-			actions = 
-			{
-				
-				{
-					data = 
-					{
-						aType = "ACR",
-						conditions = 
-						{
-							
-							{
-								"ad9a3165-fdd2-267c-99a7-e0958c82ca9e",
-								true,
-							},
-							
-							{
-								"01872110-491f-7263-993f-3effe9b2da43",
-								true,
-							},
-						},
-						gVar = "ACR_TensorNuke4_Hotbar_Surecast",
-						uuid = "d072229a-ced0-8a73-9bdb-47673d017b2f",
-						variableTogglesType = 2,
-						version = 2.1,
-					},
-				},
-			},
-			conditions = 
-			{
-				
-				{
-					data = 
-					{
-						category = "Lua",
-						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nlocal e=eventArgs\nreturn data.paglthanBoss==10076 and e.entityContentID==10067 and e.spellID==23703",
-						name = "Ground-to-ground Ballistic - Arm’s Length gate",
-						uuid = "ad9a3165-fdd2-267c-99a7-e0958c82ca9e",
-						version = 3,
-					},
-				},
-				
-				{
-					data = 
-					{
-						category = "Lua",
-						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn not not (p and (TensorCore.isCaster(p) or TensorCore.isHealer(p)))",
-						dequeueIfLuaFalse = true,
-						name = "Caster or healer",
-						uuid = "01872110-491f-7263-993f-3effe9b2da43",
-						version = 3,
-					},
-				},
-			},
-			displayPath = "Paglth'an/Mitigations",
-			enabled = false,
-			eventType = 3,
-			name = "[Paglth’an] Ground-to-ground Ballistic - Surecast",
-			throttleTime = 10000,
-			uuid = "302ddc7f-28a3-f578-8575-6ac80487919b",
+			uuid = "d3cb12b5-bfad-811e-a830-c8ae2faafb56",
 			version = 2,
 		},
 	},
@@ -4874,6 +4866,366 @@ local tbl =
 			name = "The Antitower mechanic cues",
 			timeout = 1,
 			uuid = "4748db3b-127e-82fe-a3bb-3f425f25eae0",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "The Sunken Temple of Qarn (Hard)",
+			uuid = "90f13e99-e325-0ef2-b044-47965e3bcbe8",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Sunken Temple of Qarn (Hard)",
+			name = "AutoSim",
+			uuid = "806fdc92-b919-b288-957e-7c9fbcebd478",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "gStartCombat=false\nlocal settings=AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled=false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled=false end\nend\ndata.qarnHelpers=true\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"843c8903-5b79-a91a-a686-5af93df4bf8e",
+								true,
+							},
+						},
+						name = "Disable combat helpers",
+						uuid = "fa4f69ca-9d73-2c99-8d3e-1b17b0aa2cf5",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=367 then return false end\nreturn not data.qarnHelpers",
+						name = "Qarn Hard and event state",
+						uuid = "843c8903-5b79-a91a-a686-5af93df4bf8e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Sunken Temple of Qarn (Hard)/AutoSim",
+			name = "[Qarn Hard] Disable combat helpers",
+			throttleTime = 250,
+			uuid = "7c8e5038-3d8e-061f-92f6-fd15bc8dabbe",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local api=TensorCore.API.TensorACR\nlocal t=api.getAutoSimTime()\nif type(t)~=\"number\" or t<0 then return end\nlocal target=TensorCore.mGetTarget()\nif not target or not target.incombat then return end\nlocal cid=target.contentid\nlocal adjudicator=cid>=3065 and cid<=3068 or cid==3070\nlocal kill=adjudicator and 106 or cid==3071 and 54.5 or cid==3075 and 86.4\nif not kill then return end\napi.clearAutoSimUncertainty()\napi.clearAutoSimPhases(\"FullDowntime\")\napi.setAutoSimKillTime(kill)\napi.addAutoSimUncertainty(0,20)\nif adjudicator then\n    for _,window in ipairs({{14.156,14.656},{23.172,26.265},{45.312,45.500},{56.140,59.203},{80.218,80.781},{90.843,93.922}}) do\n        if t<window[2] then api.addAutoSimPhase(\"FullDowntime\",math.max(t,window[1]),window[2],1) end\n    end\nend\ndata.qarnForecast=true\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"742b98d1-c12c-ebfd-b60f-af11e1c1ce57",
+								true,
+							},
+						},
+						name = "Set boss forecast",
+						uuid = "c07b0967-8d55-2b34-b0e5-b28a4eb0a859",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=367 then return false end\nreturn p.incombat and not data.qarnForecast",
+						name = "Qarn Hard and event state",
+						uuid = "742b98d1-c12c-ebfd-b60f-af11e1c1ce57",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Sunken Temple of Qarn (Hard)/AutoSim",
+			name = "[Qarn Hard] Set boss forecast",
+			throttleTime = 250,
+			uuid = "02d17f1e-3297-9b6e-a8f9-703a802f53c9",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "data.qarnForecast=nil\nlocal wave=data.qarnMummies\nif wave and wave.shape then Argus.deleteTimedShape(wave.shape) end\ndata.qarnMummies=nil\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"a8543560-c8a6-445e-88eb-f4ae04cb677c",
+								true,
+							},
+						},
+						name = "Reset after combat",
+						uuid = "7bc4ef3a-8d4d-73f6-8ca0-ddef69a92b4b",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=367 then return false end\nreturn not p.incombat and (data.qarnForecast~=nil or data.qarnMummies~=nil)",
+						name = "Qarn Hard and event state",
+						uuid = "a8543560-c8a6-445e-88eb-f4ae04cb677c",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Sunken Temple of Qarn (Hard)/AutoSim",
+			name = "[Qarn Hard] Reset after combat",
+			throttleTime = 250,
+			uuid = "117c55f7-1639-215f-b3c9-ed729499e024",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local p=TensorCore.mGetPlayer()\nif not p or not p.pos or ActionList:IsCasting() then return end\nlocal current=TensorCore.mGetTarget()\nif current and current.alive and current.targetable and current.attackable then return end\nfor _,cid in ipairs({3071,3075}) do\n    if data.qarnTarget~=cid then\n        for _,boss in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=cid}) or {}) do\n            if boss.alive and boss.attackable and boss.targetable and boss.pos then\n                local dx,dy,dz=boss.pos.x-p.pos.x,boss.pos.y-p.pos.y,boss.pos.z-p.pos.z\n                if dx*dx+dy*dy+dz*dz<=35*35 then\n                    gStartCombat=false\n                    Player:SetTarget(boss.id)\n                    data.qarnTarget=cid\n                    self.used=true\n                    return\n                end\n            end\n        end\n    end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"461373eb-bb47-1d8a-8696-6dbf92d0ed9f",
+								true,
+							},
+						},
+						name = "Target Emperatriz or Vicegerent before pull",
+						uuid = "4a7e6a99-9973-35e8-9986-a0f6895e8b6a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=367 then return false end\nreturn p.alive and not p.incombat",
+						name = "Qarn Hard and event state",
+						uuid = "461373eb-bb47-1d8a-8696-6dbf92d0ed9f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Sunken Temple of Qarn (Hard)/AutoSim",
+			name = "[Qarn Hard] Target Emperatriz or Vicegerent before pull",
+			throttleTime = 750,
+			uuid = "aac72af9-be06-ceed-9226-fba694218e5f",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player then self.used = true; return end\n\nlocal contentID = 3070\nlocal label = \"[High Level Dungeons] Ruins Crawler\"\nlocal api = TensorCore.API.TensorACR\nlocal eligible = player.localmapid == 367 and (player.job == 25 or player.job == 23 or player.job == 34)\nlocal state = QarnHardCrawlerDoT\n\n-- Restore the previous entry on leaving the duty or changing jobs.\n-- Keep this state outside pull data so a wipe does not lose the original values.\nif state and (not eligible or state.job ~= player.job) then\n    local entry = state.entry\n    if entry and entry.enabled and entry.allowIfTarget == false and entry.allowSmartDoT == false then\n        if state.created then\n            entry.enabled = false\n            if player.job == state.job and api.getBlacklistEntry(contentID) then\n                local current = api.addBlacklistEntry(contentID)\n                if current == entry and current.name == label then\n                    api.deleteBlacklistEntry(contentID)\n                end\n            end\n        else\n            entry.enabled = state.enabled\n            entry.allowIfTarget = state.allowIfTarget\n            entry.allowSmartDoT = state.allowSmartDoT\n        end\n    end\n    QarnHardCrawlerDoT = nil\n    state = nil\nend\n\nif eligible and not state then\n    QarnHardCrawlerDoT = { job = player.job }\n    local supported, exists = pcall(api.getBlacklistEntry, contentID)\n    if supported then\n        local ok, entry = pcall(api.addBlacklistEntry, contentID, label)\n        if ok and entry then\n            QarnHardCrawlerDoT = {\n                job = player.job, entry = entry, created = not exists,\n                enabled = entry.enabled, allowIfTarget = entry.allowIfTarget,\n                allowSmartDoT = entry.allowSmartDoT,\n            }\n            entry.enabled = true\n            entry.allowIfTarget = false\n            entry.allowSmartDoT = false\n        end\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"bbfaa4f8-13d1-eef3-9d80-33f40436e0c4",
+								true,
+							},
+						},
+						name = "Apply or restore blacklist",
+						uuid = "011f2628-c438-f57b-95f2-4ad96d5a0411",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal eligible = player.localmapid == 367 and (player.job == 25 or player.job == 23 or player.job == 34)\nlocal state = QarnHardCrawlerDoT\nif state then return not eligible or state.job ~= player.job end\nreturn eligible",
+						name = "Blacklist needs setup or cleanup",
+						uuid = "bbfaa4f8-13d1-eef3-9d80-33f40436e0c4",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Sunken Temple of Qarn (Hard)/AutoSim",
+			execute = "local player = TensorCore.mGetPlayer()\nif not player then self.used = true; return end\n\nlocal contentID = 3070\nlocal label = \"[High Level Dungeons] Ruins Crawler\"\nlocal api = TensorCore.API.TensorACR\nlocal eligible = player.localmapid == 367 and (player.job == 25 or player.job == 23 or player.job == 34)\nlocal state = QarnHardCrawlerDoT\n\n-- Restore the previous entry on leaving the duty or changing jobs.\n-- Keep this state outside pull data so a wipe does not lose the original values.\nif state and (not eligible or state.job ~= player.job) then\n    local entry = state.entry\n    if entry.enabled and entry.allowIfTarget == false and entry.allowSmartDoT == false then\n        if state.created then\n            entry.enabled = false\n            if player.job == state.job and api.getBlacklistEntry(contentID) then\n                local current = api.addBlacklistEntry(contentID)\n                if current == entry and current.name == label then\n                    api.deleteBlacklistEntry(contentID)\n                end\n            end\n        else\n            entry.enabled = state.enabled\n            entry.allowIfTarget = state.allowIfTarget\n            entry.allowSmartDoT = state.allowSmartDoT\n        end\n    end\n    QarnHardCrawlerDoT = nil\n    state = nil\nend\n\nif eligible and not state then\n    local supported, exists = pcall(api.getBlacklistEntry, contentID)\n    if supported then\n        local ok, entry = pcall(api.addBlacklistEntry, contentID, label)\n        if ok and entry then\n            QarnHardCrawlerDoT = {\n                job = player.job, entry = entry, created = not exists,\n                enabled = entry.enabled, allowIfTarget = entry.allowIfTarget,\n                allowSmartDoT = entry.allowSmartDoT,\n            }\n            entry.enabled = true\n            entry.allowIfTarget = false\n            entry.allowSmartDoT = false\n        end\n    end\nend\nself.used = true",
+			name = "[Qarn Hard] Ruins Crawler - DoT blacklist",
+			throttleTime = 500,
+			uuid = "95bf7317-e6b6-df21-ad21-1891ddd18cc3",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Sunken Temple of Qarn (Hard)",
+			name = "Draws",
+			uuid = "04d27e51-7ec1-42f0-a766-47292e389291",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms>0 then\n    local drawer=TensorCore.getStaticDrawer(0x603333FF,2)\n    if e.aoeID==3104 or e.aoeID==3106 then\n        drawer:addTimedCircle(ms,e.x,e.y,e.z,e.aoeLength,0,false,true)\n    else\n        drawer:addTimedRect(ms,e.x,e.y,e.z,e.aoeLength,e.aoeWidth,e.heading,0,false,true)\n    end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"23c81c4e-a688-8719-909c-e4fd3fa8cb96",
+								true,
+							},
+						},
+						name = "Draw damaging boss casts",
+						uuid = "93e4fb83-0bdd-b7eb-9497-49554a81d3ea",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=367 then return false end\nlocal e=eventArgs\nreturn not not (p.incombat and e and (e.aoeID==2898 or e.aoeID==3104 or e.aoeID==3106 or e.aoeID==3110))",
+						name = "Qarn Hard and event state",
+						uuid = "23c81c4e-a688-8719-909c-e4fd3fa8cb96",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Sunken Temple of Qarn (Hard)/Draws",
+			eventType = 18,
+			name = "[Qarn Hard] Draw damaging boss casts",
+			uuid = "13de040b-d68f-8e31-a670-ea75797842fc",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local p=TensorCore.mGetPlayer()\nlocal e=eventArgs\nlocal mummy=TensorCore.mGetEntity(e.entityID)\nif not p or not p.pos or not mummy or not mummy.pos then return end\nlocal now=Now()\nlocal wave=data.qarnMummies\nif not wave or now-wave.start>500 then\n    if wave and wave.shape then Argus.deleteTimedShape(wave.shape) end\n    wave={start=now,lanes={},seen={}}\n    data.qarnMummies=wave\nend\nif wave.seen[e.entityID] then self.used=true;return end\nwave.seen[e.entityID]=true\nlocal pos=mummy.pos\n-- West-edge spawns cross east. The other observed spawns cross along Z.\nlocal axis=math.abs(pos.x-100.392)<0.2 and \"z\" or \"x\"\nwave.lanes[#wave.lanes+1]={axis=axis,value=pos[axis]}\nif #wave.lanes>10 and wave.shape then\n    Argus.deleteTimedShape(wave.shape)\n    wave.shape=nil\nend\nif #wave.lanes==10 then\n    local bestX,bestZ,bestDistance\n    for x=102,130 do\n        for z=-13,13 do\n            local safe=true\n            for _,lane in ipairs(wave.lanes) do\n                local v=lane.axis==\"x\" and x or z\n                if math.abs(v-lane.value)<2.4 then safe=false;break end\n            end\n            if safe then\n                local distance=(x-p.pos.x)^2+(z-p.pos.z)^2\n                if not bestDistance or distance<bestDistance then bestX,bestZ,bestDistance=x,z,distance end\n            end\n        end\n    end\n    if bestX then\n        local drawer=TensorCore.getStaticDrawer(0x8055FF55,2)\n        wave.shape=drawer:addTimedCircle(8000,bestX,-4,bestZ,1,0,false,true)\n    end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"6d47d782-9513-acb2-b4e2-d5b44479f37d",
+								true,
+							},
+						},
+						name = "Mark gap in walking mummy lanes",
+						uuid = "46959849-b054-8875-bccd-73f4cba173c1",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=367 then return false end\nlocal e=eventArgs\nreturn not not (p.incombat and e and e.isVisible and e.entityContentID==3076)",
+						name = "Qarn Hard and event state",
+						uuid = "6d47d782-9513-acb2-b4e2-d5b44479f37d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Sunken Temple of Qarn (Hard)/Draws",
+			eventType = 22,
+			name = "[Qarn Hard] Mark gap in walking mummy lanes",
+			uuid = "17229b9c-c7bb-8de6-8623-1d2d9fc2f1c7",
 			version = 2,
 		},
 	}, 
