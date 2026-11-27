@@ -16,7 +16,7 @@ This procedure applies to every mapped profile below. Keep one procedure here; p
 3. Copy the authoritative source to the mapped destination, replacing that published copy. Never move/cut the original. Verify matching source/destination SHA256 hashes. The Agent workspace is a sibling of TimelineReactions, not its parent.
 4. Update the relevant user-facing README changelog entry, following the date, retention and entry-cap rules above. Keep replay-check and pending-validation status in TODO notes rather than changelog entries.
 5. Commit the intended reaction file(s), matching README entry and applicable instruction changes together. Before pushing, confirm the current branch and origin URL and ensure the intended commit is the only local outgoing commit. Leave unrelated working changes alone; if unrelated outgoing commits exist, report them rather than pushing or rewriting them automatically.
-6. Push to the configured origin branch and verify the remote branch matches the intended commit. If the authoritative source or existing checkout is unavailable, report it and obtain the current path; do not create a replacement checkout or folder.
+6. After any change, offer to push it, but never push automatically: push only after the user says yes for that change; an earlier approval does not carry over to later work. Then push to the configured origin branch and verify the remote branch matches the intended commit. If the authoritative source or existing checkout is unavailable, report it and obtain the current path; do not create a replacement checkout or folder.
 
 ### Canonical profile mapping
 
@@ -58,7 +58,7 @@ User-approved published copies (14-11-2026): live `GeneralReactions\dungeon lol.
 
 ## Mount Rokkon general profile
 
-Live `GeneralReactions\Mountrokkon.lua` publishes to the existing `GeneralReactions\Mountrokkon.lua` in this checkout. User authorized publishing the current local updates on 15-11-2026. Apply the shared copy/hash/changelog/commit/push checks; this is a general profile without a timeline version. TODO: `MOUNT-ROKKON-DRAWS-TODO.md`; detailed reviews: `MOUNT-ROKKON-P1-REVIEW-2026-11-15.md` and `MOUNT-ROKKON-MOKO-REVIEW-2026-11-15.md` in the Agent workspace.
+Live `GeneralReactions\Mountrokkon.lua` publishes to the existing `GeneralReactions\Mountrokkon.lua` in this checkout. Ask before pushing any update (the 15-11-2026 approval covered only the updates of that day). Apply the shared copy/hash/changelog/commit/push checks; this is a general profile without a timeline version. TODO: `MOUNT-ROKKON-DRAWS-TODO.md`; detailed reviews: `MOUNT-ROKKON-P1-REVIEW-2026-11-15.md` and `MOUNT-ROKKON-MOKO-REVIEW-2026-11-15.md` in the Agent workspace.
 
 ## Alliance raid general profile
 
