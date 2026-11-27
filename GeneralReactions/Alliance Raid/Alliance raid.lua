@@ -5431,7 +5431,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\nlocal B=MoogleTelegraphs and MoogleTelegraphs.Settings and MoogleTelegraphs.Settings.aoeIDUserBlacklist\nif not B then return end\nlocal SOURCE=\"Ultimate Reactions Pack (Alliance Raid)\"\nlocal L={[40768]=\"Giga Slash first cleave\",[40769]=\"Giga Slash second cleave\",[40770]=\"Giga Slash first cleave\",[40771]=\"Giga Slash second cleave\",[40774]=\"Implosion large half\",[40775]=\"Implosion small half\",[40776]=\"Implosion large half\",[40777]=\"Implosion small half\",[40780]=\"Burning Court\",[40783]=\"Burning Battlements\",[40937]=\"Knuckle Sandwich\",[40940]=\"Knuckle Sandwich\",[40943]=\"Brittle Impact\",[40944]=\"Brittle Impact\",[41063]=\"Guillotine\",[41073]=\"Rampage dash preview\",[41074]=\"Rampage final preview\",[41077]=\"Rampage final hit\",[41083]=\"Tachi: Kasha\",[41084]=\"Concerted Dissolution\",[42024]=\"Nightfall third cleave\",[42025]=\"Nightfall third cleave\",[42027]=\"Nightfall first cleave\",[42028]=\"Nightfall second cleave\",[42029]=\"Nightfall first cleave\",[42030]=\"Nightfall second cleave\"}\nfor _,i in ipairs({40824,40825,40826,40827,40829,40830,40831,40832,40834,40835,40836,40837,40839,40840,40841,40842}) do L[i]=\"Hurricane Wing\" end\nfor id,label in pairs(L) do B[id]={label=label,source=SOURCE} end",
+						actionLua = "self.used=true\nlocal B=MoogleTelegraphs and MoogleTelegraphs.Settings and MoogleTelegraphs.Settings.aoeIDUserBlacklist\nif not B then return end\nlocal SOURCE=\"Ultimate Reactions Pack (Alliance Raid)\"\nlocal L={[40768]=\"Giga Slash first cleave\",[40769]=\"Giga Slash second cleave\",[40770]=\"Giga Slash first cleave\",[40771]=\"Giga Slash second cleave\",[40774]=\"Implosion large half\",[40775]=\"Implosion small half\",[40776]=\"Implosion large half\",[40777]=\"Implosion small half\",[40780]=\"Burning Court\",[40781]=\"Burning Moat\",[40782]=\"Burning Keep\",[40783]=\"Burning Battlements\",[40937]=\"Knuckle Sandwich\",[40940]=\"Knuckle Sandwich\",[40943]=\"Brittle Impact\",[40944]=\"Brittle Impact\",[41063]=\"Guillotine\",[41073]=\"Rampage dash preview\",[41074]=\"Rampage final preview\",[41077]=\"Rampage final hit\",[41083]=\"Tachi: Kasha\",[41084]=\"Concerted Dissolution\",[42024]=\"Nightfall third cleave\",[42025]=\"Nightfall third cleave\",[42027]=\"Nightfall first cleave\",[42028]=\"Nightfall second cleave\",[42029]=\"Nightfall first cleave\",[42030]=\"Nightfall second cleave\"}\nfor _,i in ipairs({40824,40825,40826,40827,40829,40830,40831,40832,40834,40835,40836,40837,40839,40840,40841,40842}) do L[i]=\"Hurricane Wing\" end\nfor id,label in pairs(L) do B[id]={label=label,source=SOURCE} end",
 						conditions = 
 						{
 							
@@ -5453,7 +5453,7 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1248 then return false end\nlocal B=MoogleTelegraphs and MoogleTelegraphs.Settings and MoogleTelegraphs.Settings.aoeIDUserBlacklist\nif not B then return false end\nlocal L={[40768]=\"Giga Slash first cleave\",[40769]=\"Giga Slash second cleave\",[40770]=\"Giga Slash first cleave\",[40771]=\"Giga Slash second cleave\",[40774]=\"Implosion large half\",[40775]=\"Implosion small half\",[40776]=\"Implosion large half\",[40777]=\"Implosion small half\",[40780]=\"Burning Court\",[40783]=\"Burning Battlements\",[40937]=\"Knuckle Sandwich\",[40940]=\"Knuckle Sandwich\",[40943]=\"Brittle Impact\",[40944]=\"Brittle Impact\",[41063]=\"Guillotine\",[41073]=\"Rampage dash preview\",[41074]=\"Rampage final preview\",[41077]=\"Rampage final hit\",[41083]=\"Tachi: Kasha\",[41084]=\"Concerted Dissolution\",[42024]=\"Nightfall third cleave\",[42025]=\"Nightfall third cleave\",[42027]=\"Nightfall first cleave\",[42028]=\"Nightfall second cleave\",[42029]=\"Nightfall first cleave\",[42030]=\"Nightfall second cleave\"}\nfor _,i in ipairs({40824,40825,40826,40827,40829,40830,40831,40832,40834,40835,40836,40837,40839,40840,40841,40842}) do L[i]=\"Hurricane Wing\" end\nfor id,label in pairs(L) do\n local e=B[id]\n if not e or e.label~=label or e.source~=\"Ultimate Reactions Pack (Alliance Raid)\" then return true end\nend\nreturn false",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1248 then return false end\nlocal B=MoogleTelegraphs and MoogleTelegraphs.Settings and MoogleTelegraphs.Settings.aoeIDUserBlacklist\nif not B then return false end\nlocal L={[40768]=\"Giga Slash first cleave\",[40769]=\"Giga Slash second cleave\",[40770]=\"Giga Slash first cleave\",[40771]=\"Giga Slash second cleave\",[40774]=\"Implosion large half\",[40775]=\"Implosion small half\",[40776]=\"Implosion large half\",[40777]=\"Implosion small half\",[40780]=\"Burning Court\",[40781]=\"Burning Moat\",[40782]=\"Burning Keep\",[40783]=\"Burning Battlements\",[40937]=\"Knuckle Sandwich\",[40940]=\"Knuckle Sandwich\",[40943]=\"Brittle Impact\",[40944]=\"Brittle Impact\",[41063]=\"Guillotine\",[41073]=\"Rampage dash preview\",[41074]=\"Rampage final preview\",[41077]=\"Rampage final hit\",[41083]=\"Tachi: Kasha\",[41084]=\"Concerted Dissolution\",[42024]=\"Nightfall third cleave\",[42025]=\"Nightfall third cleave\",[42027]=\"Nightfall first cleave\",[42028]=\"Nightfall second cleave\",[42029]=\"Nightfall first cleave\",[42030]=\"Nightfall second cleave\"}\nfor _,i in ipairs({40824,40825,40826,40827,40829,40830,40831,40832,40834,40835,40836,40837,40839,40840,40841,40842}) do L[i]=\"Hurricane Wing\" end\nfor id,label in pairs(L) do\n local e=B[id]\n if not e or e.label~=label or e.source~=\"Ultimate Reactions Pack (Alliance Raid)\" then return true end\nend\nreturn false",
 						dequeueIfLuaFalse = true,
 						name = "Blacklist needs update",
 						uuid = "3f5d90a8-56c7-e3bf-a99b-3d8a6d4c7656",
@@ -6078,6 +6078,170 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.pos then return end\nlocal function closest(ids)\n local best,range\n for _,cid in ipairs(ids) do\n  for _,e in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=cid}) or {}) do\n   if e.alive and e.targetable and e.attackable and e.pos then\n    local d=TensorCore.getDistance2d(p.pos,e.pos)\n    if not range or d<range then best,range=e,d end\n   end\n  end\n end\n return best\nend\nlocal target=TensorCore.mGetTarget()\nlocal shield=closest({13719})\nif shield then\n data.jacobShieldSwitch=true\n if not target or target.id~=shield.id then Player:SetTarget(shield.id) end\n return\nend\nif not data.jacobShieldSwitch then return end\n-- shield gone: back to the assigned Ark Angel if there is one, else the closest\nlocal back\nlocal s=data.jacobJeunoDraws\nif s and s.assignmentUntil and Now()<s.assignmentUntil and s.assignmentTarget then\n local e=TensorCore.mGetEntity(s.assignmentTarget)\n if e and e.alive and e.targetable then back=e end\nend\nback=back or closest({13641,13642,13643,13644,13645})\nif back then\n Player:SetTarget(back.id)\n data.jacobShieldSwitch=nil\nend",
+						conditions = 
+						{
+							
+							{
+								"dab88a07-ed8b-2b99-b7e4-1fdc528bef6f",
+								true,
+							},
+						},
+						name = "Target shield, then closest Ark Angel",
+						uuid = "08a9be8f-d8b0-a6fa-8b31-2ba4481d26ce",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1248 or not p.alive or not p.pos then return false end\n-- only around the Ark Angels arena\nif (p.pos.x-865)^2+(p.pos.z+820)^2>60*60 then return false end\nif data.jacobShieldSwitch then return true end\nfor _,e in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=13719}) or {}) do\n if e.alive and e.targetable and e.attackable then return true end\nend\nreturn false",
+						dequeueIfLuaFalse = true,
+						name = "Ark Shield up or return pending",
+						uuid = "dab88a07-ed8b-2b99-b7e4-1fdc528bef6f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Ark Angels",
+			name = "[Ark Angels] Ark Shield - switch target and return",
+			throttleTime = 100,
+			uuid = "d5e2328d-38ba-bce1-9671-c79eb123648a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal castEnd=Now()+(e.duration+0.3)*1000\n-- follow-up hits continue for about 4s after the cast\ndata.jacobGuillotine={x=e.x,y=e.y,z=e.z,h=e.heading,castEnd=castEnd,ends=castEnd+3900}",
+						conditions = 
+						{
+							
+							{
+								"3a23dca2-0b2b-2f02-91a1-ec27ee4af275",
+								true,
+							},
+							
+							{
+								"9a7f0a8c-1f6e-58e9-b3f7-33773331dd08",
+								true,
+							},
+						},
+						name = "Store cone",
+						uuid = "a0ee39b8-4e44-300d-8175-5c1a77e530a7",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1248,
+						name = "Jeuno only",
+						uuid = "3a23dca2-0b2b-2f02-91a1-ec27ee4af275",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return eventArgs.aoeID==41063",
+						dequeueIfLuaFalse = true,
+						name = "Guillotine cast",
+						uuid = "9a7f0a8c-1f6e-58e9-b3f7-33773331dd08",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Ark Angels",
+			eventType = 18,
+			name = "[Ark Angels] Guillotine dash capture",
+			timeout = 2,
+			uuid = "ed5006bc-6e60-8f00-98b9-bb939c751441",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal f=data.jacobGuillotine\nlocal me=TensorCore.mGetPlayer()\nif not f or f.dashDone or not me or not me.pos then return end\n-- angle from the middle of the 240 degree cone: it covers 120 degrees to each side\nlocal function offCone(p)\n local a=math.atan2(p.x-f.x,p.z-f.z)\n return math.abs(((a-f.h+math.pi)%(2*math.pi))-math.pi),math.sqrt((p.x-f.x)^2+(p.z-f.z)^2)\nend\nlocal mine,myDist=offCone(me.pos)\nif myDist>40 or (myDist>0.5 and mine>math.rad(122)) then return end -- already safe\nlocal S=_G.Jeuno_AllianceSettings\nlocal range=25+((S and S.values.dashExtra) or 0)\nlocal best,bestAngle\nfor _,e in pairs(TensorCore.getEntityGroupList(\"Party\") or {}) do\n if e.id~=me.id and e.alive and e.pos then\n  local angle,dist=offCone(e.pos)\n  local arena=(e.pos.x-865)^2+(e.pos.z+820)^2\n  local reach=math.sqrt((e.pos.x-me.pos.x)^2+(e.pos.z-me.pos.z)^2)\n  if angle>=math.rad(126) and dist>=2 and arena<=23.5^2 and reach<=range and (not best or angle>bestAngle) then\n   best,bestAngle=e,angle\n  end\n end\nend\nlocal dash=ActionList:Get(1,155)\nif not best or not dash or dash.isoncd then\n if not f.dashWarned and AnyoneCore and AnyoneCore.Shotcall then\n  f.dashWarned=true\n  AnyoneCore.Shotcall(\"No dash - walk behind the cone\",true,3,false)\n end\n return\nend\nlocal cast=me.castinginfo\nif cast and cast.channelingid and cast.channelingid~=0 then\n ActionList:StopCasting()\nend\nif dash:IsReady(best.id) and dash:Cast(best.id) then\n f.dashDone=true\nend",
+						conditions = 
+						{
+							
+							{
+								"8ace88d2-1d0b-2277-93b5-64b8542831b4",
+								true,
+							},
+						},
+						name = "Aetherial Manipulation to safe ally",
+						uuid = "474d9094-10e8-70bb-8a71-8bd2bd638ef7",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local f=data.jacobGuillotine\nif not f or f.dashDone then return false end\nlocal now=Now()\nif now<f.castEnd-2000 or now>f.ends then return false end\nlocal S=_G.Jeuno_AllianceSettings\nif not S or S.values.guillotineDash~=true then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==1248 and p.job==25 and p.alive)",
+						dequeueIfLuaFalse = true,
+						name = "BLM, option on, Guillotine landing",
+						uuid = "8ace88d2-1d0b-2277-93b5-64b8542831b4",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Ark Angels",
+			name = "[Ark Angels] BLM dash out of Guillotine (optional)",
+			throttleTime = 100,
+			timeout = 1,
+			uuid = "02173b73-c2a4-09d1-8180-c476cd7ce651",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "Jeuno",
 			name = "Safeguards",
 			uuid = "074c6781-0bd7-4fb1-bb80-2adaa9cce9b4",
@@ -6553,7 +6717,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\nlocal S=_G.Jeuno_AllianceSettings\n-- rebuild a table loaded before the extra-range setting existed\nif not S or S.values.dashExtra==nil then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n S={values={},folder=folder,path=folder..'AllianceRaid-Jeuno.lua'}\n if FileExists(S.path) then\n  local ok,t=pcall(FileLoad,S.path)\n  if ok and type(t)=='table' then S.values=t end\n end\n local changed=false\n if type(S.values.fafnirDash)~='boolean' then S.values.fafnirDash=false changed=true end\n if type(S.values.dashExtra)~='number' or S.values.dashExtra<0 or S.values.dashExtra>25 then S.values.dashExtra=0 changed=true end\n if changed then\n  pcall(function()\n   if not FolderExists(S.folder) then FolderCreate(S.folder) end\n   FileSave(S.path,S.values)\n  end)\n end\n _G.Jeuno_AllianceSettings=S\nend\nlocal v=S.values\nlocal visible=GUI:Begin(\"[Jeuno] Settings\",true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n local dash=GUI:Checkbox(\"BLM: dash out of Fafnir's Spike Flail##JeunoFafnirDash\",v.fafnirDash)\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"Black Mage only. About 2 seconds before Spike Flail hits, if you are still in the cone, uses Aetherial Manipulation on a safe party member in range. Stops your cast to do so. Off by default.\")\n end\n local extra=GUI:SliderInt(\"Extra dash range (yalms)##JeunoDashExtra\",v.dashExtra,0,25)\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"Added to the game's 25 yalm dash range. Leave at 0 unless you use a dash range extension.\")\n end\n if dash~=v.fafnirDash or extra~=v.dashExtra then\n  v.fafnirDash=dash\n  v.dashExtra=extra\n  pcall(function()\n   if not FolderExists(S.folder) then FolderCreate(S.folder) end\n   FileSave(S.path,v)\n  end)\n end\nend\nGUI:End()",
+						actionLua = "self.used=true\nlocal S=_G.Jeuno_AllianceSettings\n-- rebuild a table loaded before a newer setting existed\nif not S or S.values.dashExtra==nil or S.values.guillotineDash==nil then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n S={values={},folder=folder,path=folder..'AllianceRaid-Jeuno.lua'}\n if FileExists(S.path) then\n  local ok,t=pcall(FileLoad,S.path)\n  if ok and type(t)=='table' then S.values=t end\n end\n local changed=false\n if type(S.values.fafnirDash)~='boolean' then S.values.fafnirDash=false changed=true end\n if type(S.values.guillotineDash)~='boolean' then S.values.guillotineDash=false changed=true end\n if type(S.values.dashExtra)~='number' or S.values.dashExtra<0 or S.values.dashExtra>25 then S.values.dashExtra=0 changed=true end\n if changed then\n  pcall(function()\n   if not FolderExists(S.folder) then FolderCreate(S.folder) end\n   FileSave(S.path,S.values)\n  end)\n end\n _G.Jeuno_AllianceSettings=S\nend\nlocal v=S.values\nlocal visible=GUI:Begin(\"[Jeuno] Settings\",true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n local dash=GUI:Checkbox(\"BLM: dash out of Fafnir's Spike Flail##JeunoFafnirDash\",v.fafnirDash)\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"Black Mage only. About 2 seconds before Spike Flail hits, if you are still in the cone, uses Aetherial Manipulation on a safe party member in range. Stops your cast to do so. Off by default.\")\n end\n local guillotine=GUI:Checkbox(\"BLM: dash out of Ark Angel Guillotine##JeunoGuillotineDash\",v.guillotineDash)\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"Black Mage only. From 2 seconds before the Guillotine cast ends and during its follow-up hits, if you are in the cone, uses Aetherial Manipulation once on a safe party member in range. Stops your cast to do so. Off by default.\")\n end\n local extra=GUI:SliderInt(\"Extra dash range (yalms)##JeunoDashExtra\",v.dashExtra,0,25)\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"Added to the game's 25 yalm dash range. Leave at 0 unless you use a dash range extension.\")\n end\n if dash~=v.fafnirDash or guillotine~=v.guillotineDash or extra~=v.dashExtra then\n  v.fafnirDash=dash\n  v.guillotineDash=guillotine\n  v.dashExtra=extra\n  pcall(function()\n   if not FolderExists(S.folder) then FolderCreate(S.folder) end\n   FileSave(S.path,v)\n  end)\n end\nend\nGUI:End()",
 						conditions = 
 						{
 							
@@ -7985,7 +8149,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\n-- the game data gives radius 12 for both halves; the large one is far longer (BossMod 90)\nlocal e=eventArgs\nlocal radius=(e.aoeID==40775 or e.aoeID==40777) and 12 or 90\nTensorCore.getMoogleDrawer():addTimedCone((e.duration+0.3)*1000,e.x,e.y,e.z,radius,math.pi,e.heading)",
+						actionLua = "self.used=true\n-- the game data gives radius 12 for both halves; the large one is far longer (BossMod 90)\nlocal e=eventArgs\nlocal radius=(e.aoeID==40775 or e.aoeID==40777) and 12 or 90\n-- solid red from the start (ABGR), no fade-in\nTensorCore.getStaticDrawer(0x8C0000FF,2):addTimedCone((e.duration+0.3)*1000,e.x,e.y,e.z,radius,math.pi,e.heading)",
 						conditions = 
 						{
 							
@@ -8052,7 +8216,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\nlocal id=eventArgs.spellID\nlocal now=Now()\nlocal st=data.jacobGiga\nif not st or now-st.at>3000 then st={at=now} data.jacobGiga=st end\nlocal drawer=TensorCore.getMoogleDrawer()\nif id>=42020 and id<=42023 then\n -- Nightfall visual: third cleave goes front (42020, 42022) or back (42021, 42023)\n st.third=(id==42020 or id==42022) and 0 or math.pi\nelse\n local e=TensorCore.mGetEntity(eventArgs.entityID)\n if not e or not e.pos then return end\n local p=e.pos\n local left=(id==40768 or id==42027)\n local s=left and -1 or 1\n local first=p.h\n local base=first+s*math.rad(67.5)\n local t1=(eventArgs.channelTimeMax+0.3)*1000\n drawer:addTimedCone(t1,p.x,p.y,p.z,60,math.rad(225),first)\n drawer:addTimedCone(2050,p.x,p.y,p.z,60,math.rad(270),base+s*math.pi/2,t1)\n if id==42027 or id==42029 then st.cleave={x=p.x,y=p.y,z=p.z,base=base,at=now,delay=t1+2050} end\nend\nlocal c=st.cleave\nif c and st.third then\n drawer:addTimedCone(2100,c.x,c.y,c.z,60,math.rad(210),c.base+st.third,c.delay-(now-c.at))\n data.jacobGiga=nil\nend",
+						actionLua = "self.used=true\nlocal id=eventArgs.spellID\nlocal now=Now()\nlocal st=data.jacobGiga\nif not st or now-st.at>3000 then st={at=now} data.jacobGiga=st end\n-- solid red from the start (ABGR), no fade-in\nlocal drawer=TensorCore.getStaticDrawer(0x8C0000FF,2)\n-- cones for the subtractive green safe area (rendered by its own OnFrame reaction)\nlocal function safeCone(x,y,z,h,angle,from,length)\n local g=data.jacobGigaSafe\n if not g then g={list={},ends=0} data.jacobGigaSafe=g end\n for i=#g.list,1,-1 do if g.list[i].till<=now then table.remove(g.list,i) end end\n g.list[#g.list+1]={x=x,y=y,z=z,h=h,angle=math.rad(angle),from=from,till=from+length}\n g.ends=math.max(g.ends,from+length)\nend\nif id>=42020 and id<=42023 then\n -- Nightfall visual: third cleave goes front (42020, 42022) or back (42021, 42023)\n st.third=(id==42020 or id==42022) and 0 or math.pi\nelse\n local e=TensorCore.mGetEntity(eventArgs.entityID)\n if not e or not e.pos then return end\n local p=e.pos\n local left=(id==40768 or id==42027)\n local s=left and -1 or 1\n local first=p.h\n local base=first+s*math.rad(67.5)\n local t1=(eventArgs.channelTimeMax+0.3)*1000\n drawer:addTimedCone(t1,p.x,p.y,p.z,60,math.rad(225),first)\n drawer:addTimedCone(2050,p.x,p.y,p.z,60,math.rad(270),base+s*math.pi/2,t1)\n safeCone(p.x,p.y,p.z,first,225,now,t1)\n safeCone(p.x,p.y,p.z,base+s*math.pi/2,270,now+t1,2050)\n if id==42027 or id==42029 then st.cleave={x=p.x,y=p.y,z=p.z,base=base,at=now,delay=t1+2050} end\nend\nlocal c=st.cleave\nif c and st.third then\n drawer:addTimedCone(2100,c.x,c.y,c.z,60,math.rad(210),c.base+st.third,c.delay-(now-c.at))\n safeCone(c.x,c.y,c.z,c.base+st.third,210,c.at+c.delay,2100)\n data.jacobGiga=nil\nend",
 						conditions = 
 						{
 							
@@ -8553,7 +8717,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\nlocal e=eventArgs\nlocal ms=(e.duration+0.3)*1000\nlocal drawer=TensorCore.getMoogleDrawer()\nif e.aoeID==40780 then\n drawer:addTimedCircle(ms,e.x,e.y,e.z,8)\n return\nend\n-- Battlements: only the 23x23 square (turned by the AOE heading) is safe; draw around it\nlocal half,reach=11.5,40\nlocal function edge(h,length,width)\n drawer:addTimedRect(ms,e.x+half*math.sin(h),e.y,e.z+half*math.cos(h),length,width,h)\nend\nedge(e.heading,reach-half,reach*2)\nedge(e.heading+math.pi,reach-half,reach*2)\nedge(e.heading+math.pi/2,reach-half,half*2)\nedge(e.heading-math.pi/2,reach-half,half*2)",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal ms=(e.duration+0.3)*1000\n-- solid red from the start (ABGR), no fade-in\nlocal drawer=TensorCore.getStaticDrawer(0x8C0000FF,2)\nif e.aoeID==40780 then\n drawer:addTimedCircle(ms,e.x,e.y,e.z,8)\n return\nend\nif e.aoeID==40781 then\n drawer:addTimedDonut(ms,e.x,e.y,e.z,5,15)\n return\nend\nif e.aoeID==40782 then\n -- Keep: the AOE position is the middle of the back edge of the 23x23 square\n drawer:addTimedRect(ms,e.x,e.y,e.z,23,23,e.heading)\n return\nend\n-- Battlements: only the 23x23 square (turned by the AOE heading) is safe; draw around it\nlocal half,reach=11.5,40\nlocal function edge(h,length,width)\n drawer:addTimedRect(ms,e.x+half*math.sin(h),e.y,e.z+half*math.cos(h),length,width,h)\nend\nedge(e.heading,reach-half,reach*2)\nedge(e.heading+math.pi,reach-half,reach*2)\nedge(e.heading+math.pi/2,reach-half,half*2)\nedge(e.heading-math.pi/2,reach-half,half*2)",
 						conditions = 
 						{
 							
@@ -8567,7 +8731,7 @@ local tbl =
 								true,
 							},
 						},
-						name = "Draw circle or outside square",
+						name = "Draw circle, donut, square or outside square",
 						uuid = "09f846ce-e81d-fe7b-ba59-0817258556a1",
 						version = 2.1,
 					},
@@ -8593,9 +8757,9 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local id=eventArgs.aoeID\nreturn id==40780 or id==40783",
+						conditionLua = "local id=eventArgs.aoeID\nreturn id==40780 or id==40781 or id==40782 or id==40783",
 						dequeueIfLuaFalse = true,
-						name = "Burning Court or Battlements",
+						name = "Burning Court, Moat, Keep or Battlements",
 						uuid = "b5dfad05-2589-9d1a-aba8-b00acbdebf60",
 						version = 3,
 					},
@@ -8603,9 +8767,76 @@ local tbl =
 			},
 			displayPath = "Jeuno/Shadow Lord/Draws",
 			eventType = 18,
-			name = "[Shadow Lord draws] Burning Battlements and Court",
+			name = "[Shadow Lord draws] Burning Court, Moat, Keep and Battlements",
 			timeout = 2,
 			uuid = "c2afbe44-e8c8-42e6-a667-b7279e600bd4",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal g=data.jacobGigaSafe\nif not g then return end\nlocal player=TensorCore.mGetPlayer()\nif not player or not player.alive or not player.pos then return end\n-- Shadow Lord arena: centre 150,800 radius 30\nif (player.pos.x-150)^2+(player.pos.z-800)^2>45*45 then return end\nlocal now=Now()\nlocal active={}\nfor _,c in ipairs(g.list) do\n if now>=c.from and now<c.till then active[#active+1]=c end\nend\nif #active==0 then return end\nlocal channel=Argus2.getNextUnusedChannel(true)\nif channel==1 then channel=Argus2.getNextUnusedChannel(true) end\nif not channel or channel<=1 then return end\nlocal flags=Argus2.RenderFlags\nlocal baseFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUSION_BASE\nlocal maskFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUDE\nlocal safe=TensorCore.getStaticDrawer(0x5000FF00,1,channel,baseFlags)\nlocal mask=TensorCore.getStaticDrawer(0xFFFFFFFF,0,channel,maskFlags)\nlocal y=active[1].y\nsafe:addCircle(150,y,800,30,false,baseFlags)\nfor _,c in ipairs(active) do mask:addCone(c.x,y,c.z,60,c.angle,c.h,false,maskFlags) end\n-- yellow marker: safe from the NEXT cleave, as close as possible to where it is safe now\nlocal first\nfor _,c in ipairs(g.list) do\n if c.from>now and (not first or c.from<first) then first=c.from end\nend\nif not first then return end\nlocal nextCones={}\nfor _,c in ipairs(g.list) do\n if c.from>now and c.from<first+500 then nextCones[#nextCones+1]=c end\nend\nlocal function clear(cones,x,z)\n for _,c in ipairs(cones) do\n  local a=math.atan2(x-c.x,z-c.z)\n  if math.abs(((a-c.h+math.pi)%(2*math.pi))-math.pi)<=c.angle/2+math.rad(6) then return false end\n end\n return true\nend\nlocal o=nextCones[1]\nlocal nowSafe,nextSafe={},{}\nfor i=0,71 do\n local a=i*math.pi/36\n local x,z=o.x+3*math.sin(a),o.z+3*math.cos(a)\n if clear(active,x,z) then nowSafe[#nowSafe+1]={x=x,z=z} end\n if clear(nextCones,x,z) then nextSafe[#nextSafe+1]={x=x,z=z} end\nend\nlocal best,bestDist\nfor _,n in ipairs(nextSafe) do\n local d=0\n if #nowSafe>0 then\n  d=math.huge\n  for _,s in ipairs(nowSafe) do d=math.min(d,(n.x-s.x)^2+(n.z-s.z)^2) end\n end\n if not best or d<bestDist then best,bestDist=n,d end\nend\nif not best then return end\nlocal marker=TensorCore.getStaticDrawer(0xC000FFFF,2)\nmarker:addCircle(best.x,y+0.1,best.z,1.6)\n-- one label per window; it expires when this cleave becomes the current one\nif g.labelFor~=first and AnyoneCore and AnyoneCore.addTimedWorldText then\n -- \"stay here\" when the marker did not move from the previous step of the same sequence\n local last=g.lastMark\n local stay=last and first>last.first and first-last.first<5000 and (best.x-last.x)^2+(best.z-last.z)^2<1\n g.labelFor=first\n g.lastMark={x=best.x,z=best.z,first=first}\n AnyoneCore.addTimedWorldText(first-now,stay and \"stay here\" or \"next safespot\",{x=best.x,y=y+1,z=best.z},0xFF00FFFF,true,1.4)\nend",
+						conditions = 
+						{
+							
+							{
+								"e1b1fa4c-e7e6-3d53-a6a9-a9828eabc0f5",
+								true,
+							},
+							
+							{
+								"da2a033c-4dde-ab59-8d57-97f7662804df",
+								true,
+							},
+						},
+						name = "Green arena minus current cleave",
+						uuid = "b79f1115-710e-162e-90d7-e199794eb1ac",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1248,
+						name = "Jeuno only",
+						uuid = "e1b1fa4c-e7e6-3d53-a6a9-a9828eabc0f5",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local g=data.jacobGigaSafe\nreturn not not (g and Now()<g.ends)",
+						dequeueIfLuaFalse = true,
+						name = "Giga Slash running",
+						uuid = "da2a033c-4dde-ab59-8d57-97f7662804df",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Shadow Lord/Draws",
+			eventType = 12,
+			name = "[Shadow Lord draws] Giga Slash safe area (green)",
+			timeout = 1,
+			uuid = "c6c860bf-46c0-3de5-b410-435213d21a47",
 			version = 2,
 		},
 	},

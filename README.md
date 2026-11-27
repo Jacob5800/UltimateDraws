@@ -244,6 +244,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Jeuno: new Burning Moat and Burning Keep draws, solid red from cast start for all Burning attacks, Implosion and Giga Slash, a green safe area during Giga Slash with a yellow next-safespot marker, automatic Ark Shield targeting, and an optional Black Mage dash out of Guillotine (off by default). (27-11-2026)
+
 - Big Jeuno update: new Ark Angels and Shadow Lord draws (including Rampage, Havoc Spiral, knockback landing lines, Giga Slash order, Implosion and Umbra Smash waves) that replace some Moogle telegraphs, a run-away callout when a clone chases you, green safe areas for Offensive Posture, an earlier Brittle Impact ring, a Samurai DoT blacklist for Darters, and an optional Black Mage dash out of Spike Flail (off by default, new Jeuno settings window). (27-11-2026)
 
 - Fafnir in Jeuno: fixed the Spike Flail cone pointing the wrong way, added green safe areas for Spike Flail and for the Hurricane Wing and Great Whirlwind sequence, and the unsafe ring during Offensive Posture now shows early. (27-11-2026)
