@@ -3910,7 +3910,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local s=data.castrummeridianum_autosim\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nlocal elapsed=now-s.origin\nif elapsed>30 and elapsed<90 then\n for _,p in ipairs(s.phases) do\n  if p.kind==\"FullDowntime\" and p.id then\n   if not eventArgs.isTargetable and not s.liviaGone then\n    s.liviaGone=now\n    TensorCore.API.TensorACR.setAutoSimPhase(p.id,now,now+12.875,1)\n   elseif eventArgs.isTargetable and s.liviaGone and not s.liviaReturned then\n    TensorCore.API.TensorACR.setAutoSimPhase(p.id,s.liviaGone,now,1)\n    s.liviaReturned=true\n   end\n  end\n end\nend\nself.used=true",
+						actionLua = "if not pcall(TensorCore.API.TensorACR.getAutoSimTime) then self.used=true return end\nlocal s=data.castrummeridianum_autosim\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nlocal elapsed=now-s.origin\nif elapsed>30 and elapsed<90 then\n for _,p in ipairs(s.phases) do\n  if p.kind==\"FullDowntime\" and p.id then\n   if not eventArgs.isTargetable and not s.liviaGone then\n    s.liviaGone=now\n    TensorCore.API.TensorACR.setAutoSimPhase(p.id,now,now+12.875,1)\n   elseif eventArgs.isTargetable and s.liviaGone and not s.liviaReturned then\n    TensorCore.API.TensorACR.setAutoSimPhase(p.id,s.liviaGone,now,1)\n    s.liviaReturned=true\n   end\n  end\n end\nend\nself.used=true",
 						conditions = 
 						{
 							
@@ -4375,7 +4375,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local function run()\nlocal e=eventArgs\nlocal cid=e.entityContentID\nlocal anchor=(cid==4744 and e.spellID==5573 and 11.516) or (cid==4745 and e.spellID==5582 and 7.282) or (cid==4747 and e.spellID==5604 and 3.171)\nif not anchor or data.lostAmdaporBoss==e.entityID then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=519 then return end\nlocal A=TensorCore.API.TensorACR\nlocal now=A.getAutoSimTime()\nif type(now)~='number' or now<0 then return end\nlocal origin=math.max(0,now-anchor)\ndata.lostAmdaporBoss=e.entityID\nlocal kill=cid==4744 and 103.156 or cid==4745 and 103.266 or 133.641\nA.setAutoSimKillTime(origin+kill)\nA.addAutoSimUncertainty(now,10)\nlocal caster=p.job==25 or p.job==27 or p.job==35 or p.job==42 or p.job==36 or p.job==24 or p.job==28 or p.job==33 or p.job==40\nlocal movement=cid==4744 and {{16,18},{49.5,51.5},{73.5,75.5}} or cid==4745 and {{9.5,11.3},{49.9,51.7},{98.7,100.5}} or {{4.4,6.2},{61.2,63},{90.3,92.1},{110.7,112.5}}\nif caster then\n for _,w in ipairs(movement) do\n  if origin+w[2]>now then A.addAutoSimPhase('CasterDowntime',math.max(now,origin+w[1]),origin+w[2],1) end\n end\nend\nif cid==4747 then\n for _,w in ipairs({{26.172,34.297},{77.141,81.688}}) do\n  if origin+w[2]>now then A.addAutoSimPhase('FullDowntime',math.max(now,origin+w[1]),origin+w[2],1) end\n end\nend\nend\nrun()\nself.used=true",
+						actionLua = "if not pcall(TensorCore.API.TensorACR.getAutoSimTime) then self.used=true return end\nlocal function run()\nlocal e=eventArgs\nlocal cid=e.entityContentID\nlocal anchor=(cid==4744 and e.spellID==5573 and 11.516) or (cid==4745 and e.spellID==5582 and 7.282) or (cid==4747 and e.spellID==5604 and 3.171)\nif not anchor or data.lostAmdaporBoss==e.entityID then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=519 then return end\nlocal A=TensorCore.API.TensorACR\nlocal now=A.getAutoSimTime()\nif type(now)~='number' or now<0 then return end\nlocal origin=math.max(0,now-anchor)\ndata.lostAmdaporBoss=e.entityID\nlocal kill=cid==4744 and 103.156 or cid==4745 and 103.266 or 133.641\nA.setAutoSimKillTime(origin+kill)\nA.addAutoSimUncertainty(now,10)\nlocal caster=p.job==25 or p.job==27 or p.job==35 or p.job==42 or p.job==36 or p.job==24 or p.job==28 or p.job==33 or p.job==40\nlocal movement=cid==4744 and {{16,18},{49.5,51.5},{73.5,75.5}} or cid==4745 and {{9.5,11.3},{49.9,51.7},{98.7,100.5}} or {{4.4,6.2},{61.2,63},{90.3,92.1},{110.7,112.5}}\nif caster then\n for _,w in ipairs(movement) do\n  if origin+w[2]>now then A.addAutoSimPhase('CasterDowntime',math.max(now,origin+w[1]),origin+w[2],1) end\n end\nend\nif cid==4747 then\n for _,w in ipairs({{26.172,34.297},{77.141,81.688}}) do\n  if origin+w[2]>now then A.addAutoSimPhase('FullDowntime',math.max(now,origin+w[1]),origin+w[2],1) end\n end\nend\nend\nrun()\nself.used=true",
 						conditions = 
 						{
 							
@@ -5097,7 +5097,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local boss=data.paglthanBoss\nif not boss then return end\nlocal api=TensorCore.API.TensorACR\nlocal t=api.getAutoSimTime()\nif type(t)~=\"number\" or t<0 then return end\napi.clearAutoSimUncertainty()\napi.clearAutoSimPhases(\"FullDowntime\")\nif boss==10075 then\n    api.setAutoSimKillTime(133)\n    api.addAutoSimUncertainty(0,20)\nelseif boss==10076 then\n    -- Encounter clock includes both ground waves. The logged pull ends with the Core kill at 132.4 s (one sample).\n    api.setAutoSimKillTime(132.4)\n    api.addAutoSimUncertainty(0,30)\n    for _,window in ipairs({{30.11,34.485},{52.953,59.547},{108.156,112.563}}) do\n        local start,finish=math.max(t,window[1]),window[2]\n        if finish>start then api.addAutoSimPhase(\"FullDowntime\",start,finish,1) end\n    end\nelseif boss==10077 then\n    api.setAutoSimKillTime(161)\n    api.addAutoSimUncertainty(0,25)\n    if t<87.7 then api.addAutoSimPhase(\"FullDowntime\",math.max(t,75.3),87.7,1) end\nend\ndata.paglthanForecast=true\nself.used=true",
+						actionLua = "if not pcall(TensorCore.API.TensorACR.getAutoSimTime) then self.used=true return end\nlocal boss=data.paglthanBoss\nif not boss then return end\nlocal api=TensorCore.API.TensorACR\nlocal t=api.getAutoSimTime()\nif type(t)~=\"number\" or t<0 then return end\napi.clearAutoSimUncertainty()\napi.clearAutoSimPhases(\"FullDowntime\")\nif boss==10075 then\n    api.setAutoSimKillTime(133)\n    api.addAutoSimUncertainty(0,20)\nelseif boss==10076 then\n    -- Encounter clock includes both ground waves. The logged pull ends with the Core kill at 132.4 s (one sample).\n    api.setAutoSimKillTime(132.4)\n    api.addAutoSimUncertainty(0,30)\n    for _,window in ipairs({{30.11,34.485},{52.953,59.547},{108.156,112.563}}) do\n        local start,finish=math.max(t,window[1]),window[2]\n        if finish>start then api.addAutoSimPhase(\"FullDowntime\",start,finish,1) end\n    end\nelseif boss==10077 then\n    api.setAutoSimKillTime(161)\n    api.addAutoSimUncertainty(0,25)\n    if t<87.7 then api.addAutoSimPhase(\"FullDowntime\",math.max(t,75.3),87.7,1) end\nend\ndata.paglthanForecast=true\nself.used=true",
 						conditions = 
 						{
 							
@@ -5124,7 +5124,8 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nreturn p.incombat==true and data.paglthanBoss~=nil and data.paglthanForecast~=true\nand PaglthanConfig~=nil and PaglthanConfig.values.autoSim==true",
+						conditionLua = "if not pcall(TensorCore.API.TensorACR.getAutoSimTime) then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nreturn p.incombat==true and data.paglthanBoss~=nil and data.paglthanForecast~=true\nand PaglthanConfig~=nil and PaglthanConfig.values.autoSim==true",
+						dequeueIfLuaFalse = true,
 						name = "Set up this combat gate",
 						uuid = "9c2386e7-2726-53b3-a099-5d62b3d9ad9e",
 						version = 3,
@@ -6335,7 +6336,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local api=TensorCore.API.TensorACR\nlocal t=api.getAutoSimTime()\nif type(t)~=\"number\" or t<0 then return end\nlocal target=TensorCore.mGetTarget()\nif not target or not target.incombat then return end\nlocal cid=target.contentid\nlocal adjudicator=cid>=3065 and cid<=3068 or cid==3070\nlocal kill=adjudicator and 106 or cid==3071 and 54.5 or cid==3075 and 86.4\nif not kill then return end\napi.clearAutoSimUncertainty()\napi.clearAutoSimPhases(\"FullDowntime\")\napi.setAutoSimKillTime(kill)\napi.addAutoSimUncertainty(0,20)\nif adjudicator then\n    for _,window in ipairs({{14.156,14.656},{23.172,26.265},{45.312,45.500},{56.140,59.203},{80.218,80.781},{90.843,93.922}}) do\n        if t<window[2] then api.addAutoSimPhase(\"FullDowntime\",math.max(t,window[1]),window[2],1) end\n    end\nend\ndata.qarnForecast=true\nself.used=true",
+						actionLua = "if not pcall(TensorCore.API.TensorACR.getAutoSimTime) then self.used=true return end\nlocal api=TensorCore.API.TensorACR\nlocal t=api.getAutoSimTime()\nif type(t)~=\"number\" or t<0 then return end\nlocal target=TensorCore.mGetTarget()\nif not target or not target.incombat then return end\nlocal cid=target.contentid\nlocal adjudicator=cid>=3065 and cid<=3068 or cid==3070\nlocal kill=adjudicator and 106 or cid==3071 and 54.5 or cid==3075 and 86.4\nif not kill then return end\napi.clearAutoSimUncertainty()\napi.clearAutoSimPhases(\"FullDowntime\")\napi.setAutoSimKillTime(kill)\napi.addAutoSimUncertainty(0,20)\nif adjudicator then\n    for _,window in ipairs({{14.156,14.656},{23.172,26.265},{45.312,45.500},{56.140,59.203},{80.218,80.781},{90.843,93.922}}) do\n        if t<window[2] then api.addAutoSimPhase(\"FullDowntime\",math.max(t,window[1]),window[2],1) end\n    end\nend\ndata.qarnForecast=true\nself.used=true",
 						conditions = 
 						{
 							
@@ -6362,7 +6363,8 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=367 then return false end\nreturn p.incombat and not data.qarnForecast",
+						conditionLua = "if not pcall(TensorCore.API.TensorACR.getAutoSimTime) then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=367 then return false end\nreturn p.incombat and not data.qarnForecast",
+						dequeueIfLuaFalse = true,
 						name = "Qarn Hard and event state",
 						uuid = "742b98d1-c12c-ebfd-b60f-af11e1c1ce57",
 						version = 3,
@@ -6803,7 +6805,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local api=TensorCore.API.TensorACR\nlocal plan=data.pharosPlan\napi.clearAutoSimUncertainty()\napi.clearAutoSimPhases(\"FullDowntime\")\napi.setAutoSimKillTime(plan.kill)\napi.addAutoSimUncertainty(0,20)\ndata.pharosForecast=data.pharosForecast or {}\ndata.pharosForecast[plan.cid]=true\nself.used=true",
+						actionLua = "if not pcall(TensorCore.API.TensorACR.getAutoSimTime) then self.used=true return end\nlocal api=TensorCore.API.TensorACR\nlocal plan=data.pharosPlan\napi.clearAutoSimUncertainty()\napi.clearAutoSimPhases(\"FullDowntime\")\napi.setAutoSimKillTime(plan.kill)\napi.addAutoSimUncertainty(0,20)\ndata.pharosForecast=data.pharosForecast or {}\ndata.pharosForecast[plan.cid]=true\nself.used=true",
 						conditions = 
 						{
 							
@@ -6825,7 +6827,7 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=510 or not p.incombat then return false end\nlocal t=TensorCore.mGetTarget()\nlocal kill={[4567]=85,[4571]=83,[4576]=73}\nif not t or not kill[t.contentid] or (data.pharosForecast and data.pharosForecast[t.contentid]) then return false end\nlocal s=TensorCore.API.TensorACR.getAutoSimTime()\nif type(s)~=\"number\" or s<0 or s>60 then return false end\ndata.pharosPlan={cid=t.contentid,kill=kill[t.contentid]}\nreturn true",
+						conditionLua = "if not pcall(TensorCore.API.TensorACR.getAutoSimTime) then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=510 or not p.incombat then return false end\nlocal t=TensorCore.mGetTarget()\nlocal kill={[4567]=85,[4571]=83,[4576]=73}\nif not t or not kill[t.contentid] or (data.pharosForecast and data.pharosForecast[t.contentid]) then return false end\nlocal s=TensorCore.API.TensorACR.getAutoSimTime()\nif type(s)~=\"number\" or s<0 or s>60 then return false end\ndata.pharosPlan={cid=t.contentid,kill=kill[t.contentid]}\nreturn true",
 						dequeueIfLuaFalse = true,
 						name = "New boss engaged",
 						uuid = "ab8687dd-5fc4-3ec4-800d-b4c6775c0cce",
@@ -7029,7 +7031,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local api=TensorCore.API.TensorACR\nlocal plan=data.halataliPlan\napi.clearAutoSimUncertainty()\napi.clearAutoSimPhases(\"FullDowntime\")\napi.setAutoSimKillTime(plan.kill)\napi.addAutoSimUncertainty(0,20)\ndata.halataliForecast=data.halataliForecast or {}\ndata.halataliForecast[plan.cid]=true\n-- the final pair shares one fight\nif plan.cid==2602 or plan.cid==2603 then data.halataliForecast[2602]=true data.halataliForecast[2603]=true end\nself.used=true",
+						actionLua = "if not pcall(TensorCore.API.TensorACR.getAutoSimTime) then self.used=true return end\nlocal api=TensorCore.API.TensorACR\nlocal plan=data.halataliPlan\napi.clearAutoSimUncertainty()\napi.clearAutoSimPhases(\"FullDowntime\")\napi.setAutoSimKillTime(plan.kill)\napi.addAutoSimUncertainty(0,20)\ndata.halataliForecast=data.halataliForecast or {}\ndata.halataliForecast[plan.cid]=true\n-- the final pair shares one fight\nif plan.cid==2602 or plan.cid==2603 then data.halataliForecast[2602]=true data.halataliForecast[2603]=true end\nself.used=true",
 						conditions = 
 						{
 							
@@ -7051,7 +7053,7 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or (p.localmapid~=360 and p.localmapid~=460) or not p.incombat then return false end\nlocal t=TensorCore.mGetTarget()\nlocal kill={[2597]=50,[2598]=55,[2602]=60,[2603]=60}\nif not t or not kill[t.contentid] or (data.halataliForecast and data.halataliForecast[t.contentid]) then return false end\nlocal s=TensorCore.API.TensorACR.getAutoSimTime()\nif type(s)~=\"number\" or s<0 or s>60 then return false end\ndata.halataliPlan={cid=t.contentid,kill=kill[t.contentid]}\nreturn true",
+						conditionLua = "if not pcall(TensorCore.API.TensorACR.getAutoSimTime) then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or (p.localmapid~=360 and p.localmapid~=460) or not p.incombat then return false end\nlocal t=TensorCore.mGetTarget()\nlocal kill={[2597]=50,[2598]=55,[2602]=60,[2603]=60}\nif not t or not kill[t.contentid] or (data.halataliForecast and data.halataliForecast[t.contentid]) then return false end\nlocal s=TensorCore.API.TensorACR.getAutoSimTime()\nif type(s)~=\"number\" or s<0 or s>60 then return false end\ndata.halataliPlan={cid=t.contentid,kill=kill[t.contentid]}\nreturn true",
 						dequeueIfLuaFalse = true,
 						name = "New boss engaged",
 						uuid = "0e4d40a1-dd30-ac68-b0a3-3dc07ff56769",
@@ -7255,7 +7257,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "local api=TensorCore.API.TensorACR\nlocal plan=data.keeperPlan\napi.clearAutoSimUncertainty()\napi.clearAutoSimPhases(\"FullDowntime\")\napi.setAutoSimKillTime(plan.kill)\napi.addAutoSimUncertainty(0,20)\ndata.keeperForecast=data.keeperForecast or {}\ndata.keeperForecast[plan.cid]=true\nself.used=true",
+						actionLua = "if not pcall(TensorCore.API.TensorACR.getAutoSimTime) then self.used=true return end\nlocal api=TensorCore.API.TensorACR\nlocal plan=data.keeperPlan\napi.clearAutoSimUncertainty()\napi.clearAutoSimPhases(\"FullDowntime\")\napi.setAutoSimKillTime(plan.kill)\napi.addAutoSimUncertainty(0,20)\ndata.keeperForecast=data.keeperForecast or {}\ndata.keeperForecast[plan.cid]=true\nself.used=true",
 						conditions = 
 						{
 							
@@ -7277,7 +7279,7 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1063 or not p.incombat then return false end\nlocal t=TensorCore.mGetTarget()\nlocal kill={[3369]=85,[3373]=78,[3374]=170}\nif not t or not kill[t.contentid] or (data.keeperForecast and data.keeperForecast[t.contentid]) then return false end\nlocal s=TensorCore.API.TensorACR.getAutoSimTime()\nif type(s)~=\"number\" or s<0 or s>60 then return false end\ndata.keeperPlan={cid=t.contentid,kill=kill[t.contentid]}\nreturn true",
+						conditionLua = "if not pcall(TensorCore.API.TensorACR.getAutoSimTime) then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1063 or not p.incombat then return false end\nlocal t=TensorCore.mGetTarget()\nlocal kill={[3369]=85,[3373]=78,[3374]=170}\nif not t or not kill[t.contentid] or (data.keeperForecast and data.keeperForecast[t.contentid]) then return false end\nlocal s=TensorCore.API.TensorACR.getAutoSimTime()\nif type(s)~=\"number\" or s<0 or s>60 then return false end\ndata.keeperPlan={cid=t.contentid,kill=kill[t.contentid]}\nreturn true",
 						dequeueIfLuaFalse = true,
 						name = "New boss engaged",
 						uuid = "3590e302-df10-bfe0-a558-a157742b9f03",

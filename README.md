@@ -122,7 +122,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - dungeon lol and levelling dungeons: reactions for other maps or inactive states no longer wait in the queue. (27-11-2026)
 
-- More highleveldungeons reactions, including the shared cooldown holds and the Lost City of Amdapor (Hard) draws, no longer wait in the queue when they do not apply. (27-11-2026)
+- More highleveldungeons reactions, including the shared cooldown holds and the Lost City of Amdapor (Hard) draws, no longer wait in the queue when they do not apply. Without an AutoSim ACR, highleveldungeons AutoSim reactions now skip quietly instead of printing errors. (27-11-2026)
 
 - In levelling dungeons, the saved dungeon settings now load once instead of re-running every second and filling the console. (27-11-2026)
 
@@ -244,7 +244,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - The alliance raid profile now disables Prepull Helper only inside alliance raids, instead of everywhere. (27-11-2026)
 
-- Many alliance raid reactions for other maps or inactive states no longer wait in the queue. (27-11-2026)
+- Many alliance raid reactions for other maps or inactive states no longer wait in the queue. Without an AutoSim ACR, AutoSim reactions now skip quietly instead of printing errors, while their draws and targeting keep working. (27-11-2026)
 
 - Added Serial-jointed Command Model draws in The Copied Factory: Energy Bomb orbs, the Energy Assault cone, turret laser lines, dropping orb circles with the next wave previewed, Energy Rings (also added to the Moogle Telegraphs blacklist) and automatic Surecast for Shockwave (casters and healers). (26-11-2026)
 
@@ -274,7 +274,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - The Bowl of Embers, Bismarck and Seat of Sacrifice AutoSim forecasts no longer keep running after joining a fight late. (27-11-2026)
 
-- Many trial reactions for other maps or inactive states no longer wait in the queue. (27-11-2026)
+- Many trial reactions for other maps or inactive states no longer wait in the queue. Without an AutoSim ACR, AutoSim reactions now skip quietly instead of printing errors. (27-11-2026)
 
 - Added The Striking Tree (Hard) with Thunderstorm, Thunderspark and Thunderbolt hazard draws, boss targeting, an AutoSim kill-time estimate and a Bard DoT blacklist for the Grey Arbiter adds. (25-11-2026)
 
@@ -292,7 +292,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - O12N targeting now runs only when needed, and the E6N and Eden's Promise: Umbra forecasts no longer keep running after a late join. (27-11-2026)
 
-- Some normal raid reactions that do not currently apply no longer wait in the queue. (27-11-2026)
+- Some normal raid reactions that do not currently apply no longer wait in the queue. Without an AutoSim ACR, AutoSim reactions now skip quietly instead of printing errors. (27-11-2026)
 
 - The Bard Fatal Flail DoT blacklist in M9N now applies once and is also restored when you change job inside the duty. (27-11-2026)
 
