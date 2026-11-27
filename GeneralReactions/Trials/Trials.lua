@@ -8740,6 +8740,54 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player then self.used = true; return end\n\nlocal contentID = 7725\nlocal label = \"[Hells' Kier] Scarlet Lady\"\nlocal api = TensorCore.API.TensorACR\nlocal j = player.job\nlocal eligible = player.localmapid == 810 and (j == 23 or j == 25 or j == 34)\nlocal state = TrialsKierScarletLadyDoT\n\n-- Restore the previous entry on leaving Hells' Kier or changing jobs.\nif state and (not eligible or state.job ~= j) then\n    local entry = state.entry\n    if entry.enabled and entry.allowIfTarget == false and entry.allowSmartDoT == false then\n        if state.created then\n            entry.enabled = false\n            if j == state.job and api.getBlacklistEntry(contentID) then\n                local current = api.addBlacklistEntry(contentID)\n                if current == entry and current.name == label then\n                    api.deleteBlacklistEntry(contentID)\n                end\n            end\n        else\n            entry.enabled = state.enabled\n            entry.allowIfTarget = state.allowIfTarget\n            entry.allowSmartDoT = state.allowSmartDoT\n        end\n    end\n    TrialsKierScarletLadyDoT = nil\n    state = nil\nend\n\nif eligible and not state then\n    local supported, exists = pcall(api.getBlacklistEntry, contentID)\n    if supported then\n        local ok, entry = pcall(api.addBlacklistEntry, contentID, label)\n        if ok and entry then\n            TrialsKierScarletLadyDoT = {\n                job = j, entry = entry, created = not exists,\n                enabled = entry.enabled, allowIfTarget = entry.allowIfTarget,\n                allowSmartDoT = entry.allowSmartDoT,\n            }\n            entry.enabled = true\n            entry.allowIfTarget = false\n            entry.allowSmartDoT = false\n        end\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"6a9edda6-9e0f-a4e0-bc45-37e690921a08",
+								true,
+							},
+						},
+						name = "Apply or restore Scarlet Lady blacklist",
+						uuid = "c3e7969f-fdbf-a503-8688-432dc390ada6",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal state = TrialsKierScarletLadyDoT\nlocal j = player.job\nlocal eligible = player.localmapid == 810 and (j == 23 or j == 25 or j == 34)\nif state then\n    return not eligible or j ~= state.job\nend\nreturn not not eligible",
+						dequeueIfLuaFalse = true,
+						name = "Blacklist needs applying or restoring",
+						uuid = "6a9edda6-9e0f-a4e0-bc45-37e690921a08",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Hells' Kier/AutoSim",
+			name = "Scarlet Lady DoT blacklist (BRD/BLM/SAM)",
+			throttleTime = 500,
+			uuid = "047290ee-e47f-603d-b9f6-fa1828760304",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "Hells' Kier",
 			name = "Draws",
 			uuid = "15533a60-a3aa-c939-8a8a-3a4bc2167a26",
