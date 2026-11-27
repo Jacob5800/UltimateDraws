@@ -4767,7 +4767,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Pull-scoped helpers. BossMod geometry; native 1248 logs corroborate IDs/timing.\nif data.jacobJeunoDraws == nil then\n    local s = { shapes = {}, holy = {}, exa = {}, holyUntil = 0, upperUntil = 0, assignmentUntil = 0 }\n    data.jacobJeunoDraws = s\n    s.green = TensorCore.getCachedDrawer(0x3000FF00, nil, 0x5000FF00, 0xFF00FF00, 2)\n    s.red = TensorCore.getCachedDrawer(0x300000FF, nil, 0x500000FF, 0xFF0000FF, 2)\n    s.line = TensorCore.getStaticDrawer(0xFF00FF00, 2)\n    s.aoe = TensorCore.getMoogleDrawer()\n    function s.own(uuid, deadline, caster, boss)\n        if uuid then s.shapes[uuid] = {deadline = deadline, caster = caster, boss = boss} end\n        return uuid\n    end\n    function s.remove(uuid)\n        if uuid then Argus.deleteTimedShape(uuid); s.shapes[uuid] = nil end\n    end\n    function s.cleanup()\n        for uuid in pairs(s.shapes) do Argus.deleteTimedShape(uuid) end\n        s.shapes = {}; s.holy = {}; s.exa = {}\n        s.holyUntil = 0; s.upperUntil = 0; s.assignmentUntil = 0; s.exaUntil = 0\n    end\n    function s.timer(ms, x, y, z)\n        AnyoneCore.addWorldTextCountdown(ms, {x=x,y=y+1,z=z}, 0xFFFFFFFF, true, 1.3)\n    end\n    function s.drawCircle(ms, p, radius, caster, boss)\n        return s.own(s.aoe:addTimedCircle(ms,p.x,p.y,p.z,radius),Now()+ms,caster,boss)\n    end\n    function s.safePoint(ms, x, y, z, boss)\n        s.own(s.green:addTimedCircle(ms,x,y,z,1,0,false,true),Now()+ms,nil,boss)\n    end\n    function s.inside(poly,dx,dz)\n            local yes=false\n            local j=#poly\n            for i=1,#poly do\n                local a,b=poly[i],poly[j]\n                if (a[2]>dz)~=(b[2]>dz) and dx<(b[1]-a[1])*(dz-a[2])/(b[2]-a[2])+a[1] then yes=not yes end\n                j=i\n            end\n            return yes\n    end\n    function s.upperUnsafe(x,z)\n        local dx,dz=x-800,z-400\n        if math.abs(dx)>35 or math.abs(dz)>35 then return true end\n        if not s.thornsUntil or Now()>s.thornsUntil then return false end\n        if s.thornsRotated then dx,dz=-dz,dx end\n        return s.inside(s.thornOuter,dx,dz) and not s.inside(s.thornHole,dx,dz)\n    end\n    s.thornOuter={{-35,35},{-35,-5},{-25,-5},{-25,-25},{5,-25},{5,-35},{35,-35},{35,5},{25,5},{25,25},{-5,25},{-5,35}}\n    s.thornHole={{-15,15},{-15,-5},{-5,-5},{-5,-15},{15,-15},{15,5},{5,5},{5,15}}\n    -- Pick a safe one-yalm position circle; party proximity only breaks safe-position ties.\n    function s.fafnirSpot(ms, spell, p)\n        local party=TensorCore.getEntityGroupList(\"Party\")\n        local bestScore,bestX,bestZ=-math.huge,nil,nil\n        for i=0,71 do\n            local a=i*math.pi/36\n            local radius=spell==41116 and 27 or 11\n            local x,z=p.x+radius*math.sin(a),p.z+radius*math.cos(a)\n            local safe=(x+500)^2+(z-600)^2<28.5^2\n            if spell==41114 then safe=safe and math.cos(a-p.h)<-math.cos(math.pi/5) end\n            if safe then\n                local score=-(x+500)*0.1\n                for _,e in pairs(party) do\n                    if e.alive and (e.pos.x-x)^2+(e.pos.z-z)^2<36 then score=score+1 end\n                end\n                if score>bestScore then bestScore,bestX,bestZ=score,x,z end\n            end\n        end\n        if bestX then s.safePoint(ms,bestX,p.y,bestZ,2) end\n    end\nend\n\nlocal id=eventArgs.spellID\nlocal cid=eventArgs.entityContentID\nlocal boss\nif cid==13351 or cid==13352 then boss=1\nelseif cid==13662 then boss=2\nelseif cid==13641 or cid==13642 or cid==13643 or cid==13644 or cid==13645 then boss=3\nelse self.used=true; return end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e then return end\nlocal p=e.pos\n-- Argus channelTimeMax in native logs is 0.3s shorter than the actual cast.\nlocal ms=math.max(1,(eventArgs.channelTimeMax+0.3)*1000)\nlocal deadline=Now()+ms\nlocal s=data.jacobJeunoDraws\nif boss==1 then\n    if id==40946 then\n        s.exaUntil=Now()+35000\n    elseif id>=40939 and id<=40941 then\n        local r=(id-40938)*9\n        s.drawCircle(ms,p,r,e.id,1)\n        s.knuckle={x=p.x,y=p.y,z=p.z,radius=r,deadline=deadline}\n        AnyoneCore.addTimedWorldText(ms,\"OUT > IN\",{x=p.x,y=p.y+2,z=p.z},0xFFFFFFFF,true,1.7)\n    elseif id>=40942 and id<=40944 then\n        local r=(id-40941)*9\n        -- Donut starts only after the first hit. Keep the first safe region readable.\n        s.own(s.aoe:addTimedDonut(ms,p.x,p.y,p.z,r,60,math.max(0,ms-1500)),deadline,e.id,1)\n    elseif id==40963 then\n        local t=TensorCore.mGetEntity(eventArgs.targetID)\n        if t then\n            local old=s.holy[t.id]\n            if old then s.remove(old.uuid) end\n            s.holy[t.id]={id=t.id,deadline=deadline,color=true,uuid=s.own(s.red:addTimedCircleOnEnt(ms,t.id,6,0,false,true),deadline,e.id,1)}\n            s.holyUntil=math.max(s.holyUntil,deadline)\n        end\n    elseif id>=40950 and id<=40952 then\n        s.remove(s.upperLine); s.remove(s.upperCircle)\n        s.upperDistance=(id-40949)*12\n        s.upperUntil=deadline+1400\n        s.upperCaster=e.id\n        s.upperLine=nil; s.upperCircle=nil; s.upperColor=nil\n    elseif id==40955 then\n        s.timer(ms,p.x,p.y,p.z)\n    end\nelseif boss==2 then\n    if id==41114 then\n        s.own(s.aoe:addTimedCone(ms,p.x,p.y,p.z,80,math.pi*1.5,p.h),deadline,e.id,2)\n        s.timer(ms,p.x,p.y,p.z)\n        s.fafnirSpot(ms,id,p)\n    elseif id==41116 then\n        s.drawCircle(ms,p,24,e.id,2)\n        s.timer(ms,p.x,p.y,p.z)\n        s.fafnirSpot(ms,id,p)\n    elseif id==40814 then\n        -- The six 60-degree sectors form the initial 16..30 donut.\n        -- Moogle already shows the individual lingering sectors; do not overdraw them.\n        ms=ms+1200\n        s.timer(ms,p.x,p.y,p.z)\n        s.fafnirSpot(ms,id,p)\n    elseif id==40846 or id==40848 then\n        local width=id==40846 and 20 or 25\n        s.own(s.aoe:addTimedRect(ms,p.x,p.y,p.z,70,width,p.h),deadline,e.id,2)\n        s.timer(ms,p.x+18*math.sin(p.h),p.y,p.z+18*math.cos(p.h))\n    elseif id==40850 then\n        s.timer(ms,p.x,p.y,p.z)\n    end\nelseif id==41084 then\n    -- Concerted Dissolution: timer at the helper; existing telegraph keeps its styling.\n    s.timer(ms,p.x,p.y,p.z)\nend\nself.used=true\n",
+						actionLua = "-- Pull-scoped helpers. BossMod geometry; native 1248 logs corroborate IDs/timing.\nif data.jacobJeunoDraws == nil then\n    local s = { shapes = {}, holy = {}, exa = {}, holyUntil = 0, upperUntil = 0, assignmentUntil = 0 }\n    data.jacobJeunoDraws = s\n    s.green = TensorCore.getCachedDrawer(0x3000FF00, nil, 0x5000FF00, 0xFF00FF00, 2)\n    s.red = TensorCore.getCachedDrawer(0x300000FF, nil, 0x500000FF, 0xFF0000FF, 2)\n    s.line = TensorCore.getStaticDrawer(0xFF00FF00, 2)\n    s.aoe = TensorCore.getMoogleDrawer()\n    function s.own(uuid, deadline, caster, boss)\n        if uuid then s.shapes[uuid] = {deadline = deadline, caster = caster, boss = boss} end\n        return uuid\n    end\n    function s.remove(uuid)\n        if uuid then Argus.deleteTimedShape(uuid); s.shapes[uuid] = nil end\n    end\n    function s.cleanup()\n        for uuid in pairs(s.shapes) do Argus.deleteTimedShape(uuid) end\n        s.shapes = {}; s.holy = {}; s.exa = {}\n        s.holyUntil = 0; s.upperUntil = 0; s.assignmentUntil = 0; s.exaUntil = 0\n    end\n    function s.timer(ms, x, y, z)\n        AnyoneCore.addWorldTextCountdown(ms, {x=x,y=y+1,z=z}, 0xFFFFFFFF, true, 1.3)\n    end\n    function s.drawCircle(ms, p, radius, caster, boss)\n        return s.own(s.aoe:addTimedCircle(ms,p.x,p.y,p.z,radius),Now()+ms,caster,boss)\n    end\n    function s.safePoint(ms, x, y, z, boss)\n        s.own(s.green:addTimedCircle(ms,x,y,z,1,0,false,true),Now()+ms,nil,boss)\n    end\n    function s.inside(poly,dx,dz)\n            local yes=false\n            local j=#poly\n            for i=1,#poly do\n                local a,b=poly[i],poly[j]\n                if (a[2]>dz)~=(b[2]>dz) and dx<(b[1]-a[1])*(dz-a[2])/(b[2]-a[2])+a[1] then yes=not yes end\n                j=i\n            end\n            return yes\n    end\n    function s.upperUnsafe(x,z)\n        local dx,dz=x-800,z-400\n        if math.abs(dx)>35 or math.abs(dz)>35 then return true end\n        if not s.thornsUntil or Now()>s.thornsUntil then return false end\n        if s.thornsRotated then dx,dz=-dz,dx end\n        return s.inside(s.thornOuter,dx,dz) and not s.inside(s.thornHole,dx,dz)\n    end\n    s.thornOuter={{-35,35},{-35,-5},{-25,-5},{-25,-25},{5,-25},{5,-35},{35,-35},{35,5},{25,5},{25,25},{-5,25},{-5,35}}\n    s.thornHole={{-15,15},{-15,-5},{-5,-5},{-5,-15},{15,-15},{15,5},{5,5},{5,15}}\n    -- Pick a safe one-yalm position circle; party proximity only breaks safe-position ties.\n    function s.fafnirSpot(ms, spell, p)\n        local party=TensorCore.getEntityGroupList(\"Party\")\n        local bestScore,bestX,bestZ=-math.huge,nil,nil\n        for i=0,71 do\n            local a=i*math.pi/36\n            local radius=spell==41116 and 27 or 11\n            local x,z=p.x+radius*math.sin(a),p.z+radius*math.cos(a)\n            local safe=(x+500)^2+(z-600)^2<28.5^2\n            if spell==41114 then safe=safe and math.cos(a-p.h)<-math.cos(math.pi/5) end\n            if safe then\n                local score=-(x+500)*0.1\n                for _,e in pairs(party) do\n                    if e.alive and (e.pos.x-x)^2+(e.pos.z-z)^2<36 then score=score+1 end\n                end\n                if score>bestScore then bestScore,bestX,bestZ=score,x,z end\n            end\n        end\n        if bestX then s.safePoint(ms,bestX,p.y,bestZ,2) end\n    end\nend\n\nlocal id=eventArgs.spellID\nlocal cid=eventArgs.entityContentID\nlocal boss\nif cid==13351 or cid==13352 then boss=1\nelseif cid==13662 then boss=2\nelseif cid==13641 or cid==13642 or cid==13643 or cid==13644 or cid==13645 then boss=3\nelse self.used=true; return end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e then return end\nlocal p=e.pos\n-- Argus channelTimeMax in native logs is 0.3s shorter than the actual cast.\nlocal ms=math.max(1,(eventArgs.channelTimeMax+0.3)*1000)\nlocal deadline=Now()+ms\nlocal s=data.jacobJeunoDraws\nif boss==1 then\n    if id==40946 then\n        s.exaUntil=Now()+35000\n    elseif id>=40939 and id<=40941 then\n        local r=(id-40938)*9\n        s.drawCircle(ms,p,r,e.id,1)\n        s.knuckle={x=p.x,y=p.y,z=p.z,radius=r,deadline=deadline}\n        AnyoneCore.addTimedWorldText(ms,\"OUT > IN\",{x=p.x,y=p.y+2,z=p.z},0xFFFFFFFF,true,1.7)\n    elseif id>=40942 and id<=40944 then\n        local r=(id-40941)*9\n        -- Moogle's telegraph for this ring is blacklisted: show it for the whole cast.\n        s.own(s.aoe:addTimedDonut(ms,p.x,p.y,p.z,r,60),deadline,e.id,1)\n    elseif id==40963 then\n        local t=TensorCore.mGetEntity(eventArgs.targetID)\n        if t then\n            local old=s.holy[t.id]\n            if old then s.remove(old.uuid) end\n            s.holy[t.id]={id=t.id,deadline=deadline,color=true,uuid=s.own(s.red:addTimedCircleOnEnt(ms,t.id,6,0,false,true),deadline,e.id,1)}\n            s.holyUntil=math.max(s.holyUntil,deadline)\n        end\n    elseif id>=40950 and id<=40952 then\n        s.remove(s.upperLine); s.remove(s.upperCircle)\n        s.upperDistance=(id-40949)*12\n        s.upperUntil=deadline+1400\n        s.upperCaster=e.id\n        s.upperLine=nil; s.upperCircle=nil; s.upperColor=nil\n    elseif id==40955 then\n        s.timer(ms,p.x,p.y,p.z)\n    end\nelseif boss==2 then\n    if id==41114 then\n        s.own(s.aoe:addTimedCone(ms,p.x,p.y,p.z,80,math.pi*1.5,p.h),deadline,e.id,2)\n        s.timer(ms,p.x,p.y,p.z)\n        s.fafnirSpot(ms,id,p)\n    elseif id==41116 then\n        s.drawCircle(ms,p,24,e.id,2)\n        s.timer(ms,p.x,p.y,p.z)\n        -- subtractive green: the arena outside this circle\n        s.fafnirRing={x=p.x,y=p.y,z=p.z,hole=24,deadline=deadline}\n    elseif id==40814 then\n        -- The six 60-degree sectors form the initial 16..30 donut.\n        -- Moogle already shows the individual lingering sectors; do not overdraw them.\n        ms=ms+1200\n        s.timer(ms,p.x,p.y,p.z)\n        s.fafnirSpot(ms,id,p)\n    elseif id==40846 or id==40848 then\n        local width=id==40846 and 20 or 25\n        s.own(s.aoe:addTimedRect(ms,p.x,p.y,p.z,70,width,p.h),deadline,e.id,2)\n        s.timer(ms,p.x+18*math.sin(p.h),p.y,p.z+18*math.cos(p.h))\n    elseif id==40850 then\n        s.timer(ms,p.x,p.y,p.z)\n    end\nelseif id==41084 then\n    -- Concerted Dissolution: timer at the helper; existing telegraph keeps its styling.\n    s.timer(ms,p.x,p.y,p.z)\nend\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -5077,6 +5077,951 @@ local tbl =
 			eventType = 8,
 			name = "[Ark Angels draws] Blue label and focus marker",
 			uuid = "e0cf20d0-3a04-ce03-9f94-c7dda253bde1",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\n-- the game data gives this cast radius 4; logged hits reach 20.4\nlocal ms=(eventArgs.channelTimeMax+0.3)*1000\nTensorCore.getMoogleDrawer():addTimedCircleOnEnt(ms,eventArgs.entityID,20.4)",
+						conditions = 
+						{
+							
+							{
+								"4ed147b5-1518-7452-9bb3-f1bd8332d9ca",
+								true,
+							},
+							
+							{
+								"a1b0ea94-9268-a48a-8c5d-940021908c0f",
+								true,
+							},
+						},
+						name = "Draw Kasha 20.4 circle",
+						uuid = "485ed0cd-2616-b3ee-8065-fa7795a15b7a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1248,
+						name = "Jeuno only",
+						uuid = "4ed147b5-1518-7452-9bb3-f1bd8332d9ca",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 3,
+						eventArgType = 2,
+						name = "Tachi: Kasha",
+						spellIDList = 
+						{
+							41083,
+						},
+						uuid = "a1b0ea94-9268-a48a-8c5d-940021908c0f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Ark Angels/Draws",
+			eventType = 3,
+			name = "[Ark Angels draws] Tachi: Kasha circle",
+			timeout = 2,
+			uuid = "887cfbba-1e5f-64e3-85ab-01fb624a25c4",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal drawer=TensorCore.getMoogleDrawer()\nif e.aoeID==41063 then\n -- 240 degree cone; follow-up hits continue about 4s after the 10.2s cast\n drawer:addTimedCone((e.duration+4.4)*1000,e.x,e.y,e.z,40,math.pi*4/3,e.heading)\nelseif e.aoeID==41074 then\n -- final Rampage circle, hits 6.3s after this preview cast ends\n drawer:addTimedCircle((e.duration+0.3+6.3)*1000,e.x,e.y,e.z,20)\nelse\n -- dash preview: x/z is the destination; dashes land 5.1s after the cast ends, 0.2s later per queued dash\n local st=data.jacobRampage\n local now=Now()\n if not st or now-st.at>5000 then st={n=0} data.jacobRampage=st end\n st.at=now\n local ms=(e.duration+0.3+5.1+0.2*st.n)*1000\n st.n=st.n+1\n local L,h=e.aoeLength,e.heading\n drawer:addTimedRect(ms,e.x-L*math.sin(h),e.y,e.z-L*math.cos(h),L,10,h)\nend",
+						conditions = 
+						{
+							
+							{
+								"bf43f4c5-9d4e-16e8-b3ad-d00cdce33322",
+								true,
+							},
+							
+							{
+								"24a11f9e-197e-3bad-a849-dd9b8ab8a14b",
+								true,
+							},
+						},
+						name = "Draw queued dashes and cone",
+						uuid = "4cdd3e3d-7a36-d005-9037-f4ba23687559",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1248,
+						name = "Jeuno only",
+						uuid = "bf43f4c5-9d4e-16e8-b3ad-d00cdce33322",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local id=eventArgs.aoeID\nreturn id==41073 or id==41074 or id==41063",
+						dequeueIfLuaFalse = true,
+						name = "Rampage preview or Guillotine",
+						uuid = "24a11f9e-197e-3bad-a849-dd9b8ab8a14b",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Ark Angels/Draws",
+			eventType = 18,
+			name = "[Ark Angels draws] Rampage and Guillotine",
+			timeout = 2,
+			uuid = "25324c80-942f-7e14-a46f-d4f0ab557ccc",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nif not e.x or not e.z then return end\nlocal st=data.jacobAAOrbs\nif not st then st={list={},activeUntil=0} data.jacobAAOrbs=st end\n-- activation follows about 5.4s after the spawn\nlocal till=Now()+8000\nst.list[e.entityID]={x=e.x,y=e.y,z=e.z,till=till}\nst.activeUntil=math.max(st.activeUntil,till)",
+						conditions = 
+						{
+							
+							{
+								"3730f41a-3226-75d4-88c7-25123bd2df90",
+								true,
+							},
+							
+							{
+								"d21ba338-c9df-8048-b5f0-6b2319dafaa0",
+								true,
+							},
+						},
+						name = "Store orb",
+						uuid = "4428b6aa-698c-5516-9986-15f134f06ea7",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1248,
+						name = "Jeuno only",
+						uuid = "3730f41a-3226-75d4-88c7-25123bd2df90",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return eventArgs.keyID==2014407",
+						dequeueIfLuaFalse = true,
+						name = "Orb object",
+						uuid = "d21ba338-c9df-8048-b5f0-6b2319dafaa0",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Ark Angels/Draws",
+			eventType = 29,
+			name = "[Ark Angels draws] Orb explosions - spawn",
+			timeout = 2,
+			uuid = "3a8d0ac4-5924-b842-af64-02853fde0e97",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal st=data.jacobAAOrbs\nif not st then st={list={},activeUntil=0} data.jacobAAOrbs=st end\nlocal o=st.list[e.entityID]\nif not o then\n local ent=TensorCore.mGetEntity(e.entityID)\n if not ent or not ent.pos then return end\n o={x=ent.pos.x,y=ent.pos.y,z=ent.pos.z}\n st.list[e.entityID]=o\nend\n-- a2 1 activates (first pulse 6.5s later); a2 4 pulses every 1.6s until the orb is gone\nif e.a2==1 then o.till=Now()+8500\nelseif e.a2==4 then o.till=Now()+1900\nelse return end\nst.activeUntil=math.max(st.activeUntil,o.till)",
+						conditions = 
+						{
+							
+							{
+								"c47a87ca-a724-9d0d-b4b6-a8a298ba2e41",
+								true,
+							},
+							
+							{
+								"62b6d575-1bff-c5c1-8cf6-c4ef3c697f9b",
+								true,
+							},
+						},
+						name = "Refresh orb lifetime",
+						uuid = "d0f60496-aa3c-4167-a87d-bbf6f87246f6",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1248,
+						name = "Jeuno only",
+						uuid = "c47a87ca-a724-9d0d-b4b6-a8a298ba2e41",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return eventArgs.entityContentID==2014407",
+						dequeueIfLuaFalse = true,
+						name = "Orb object",
+						uuid = "62b6d575-1bff-c5c1-8cf6-c4ef3c697f9b",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Ark Angels/Draws",
+			eventType = 19,
+			name = "[Ark Angels draws] Orb explosions - keep alive",
+			timeout = 2,
+			uuid = "4a4e6df7-f090-6ea7-9e37-03194425d33b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal st=data.jacobAAOrbs\nif not st then return end\nlocal now=Now()\nlocal drawer=TensorCore.getMoogleDrawer()\nfor id,o in pairs(st.list) do\n if now<o.till then drawer:addCircle(o.x,o.y+0.05,o.z,5.5)\n else st.list[id]=nil end\nend",
+						conditions = 
+						{
+							
+							{
+								"b4a91c7d-69d1-0c74-88a6-4b43f3396426",
+								true,
+							},
+							
+							{
+								"81f7de2a-43e9-4c41-a018-ea8de9ac957f",
+								true,
+							},
+						},
+						name = "Draw orb radius 5.5",
+						uuid = "99aae6b8-b391-909e-8f8f-54096ab848fc",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1248,
+						name = "Jeuno only",
+						uuid = "b4a91c7d-69d1-0c74-88a6-4b43f3396426",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local st=data.jacobAAOrbs\nreturn not not (st and Now()<st.activeUntil)",
+						dequeueIfLuaFalse = true,
+						name = "Orbs present",
+						uuid = "81f7de2a-43e9-4c41-a018-ea8de9ac957f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Ark Angels/Draws",
+			eventType = 12,
+			name = "[Ark Angels draws] Orb explosions - circles",
+			timeout = 1,
+			uuid = "1964f709-3adc-8d8d-b95b-0450e7e6d79a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal B=MoogleTelegraphs and MoogleTelegraphs.Settings and MoogleTelegraphs.Settings.aoeIDUserBlacklist\nif not B then return end\nlocal SOURCE=\"Ultimate Reactions Pack (Alliance Raid)\"\nlocal L={[40768]=\"Giga Slash first cleave\",[40769]=\"Giga Slash second cleave\",[40770]=\"Giga Slash first cleave\",[40771]=\"Giga Slash second cleave\",[40774]=\"Implosion large half\",[40775]=\"Implosion small half\",[40776]=\"Implosion large half\",[40777]=\"Implosion small half\",[40780]=\"Burning Court\",[40783]=\"Burning Battlements\",[40937]=\"Knuckle Sandwich\",[40940]=\"Knuckle Sandwich\",[40943]=\"Brittle Impact\",[40944]=\"Brittle Impact\",[41063]=\"Guillotine\",[41073]=\"Rampage dash preview\",[41074]=\"Rampage final preview\",[41077]=\"Rampage final hit\",[41083]=\"Tachi: Kasha\",[41084]=\"Concerted Dissolution\",[42024]=\"Nightfall third cleave\",[42025]=\"Nightfall third cleave\",[42027]=\"Nightfall first cleave\",[42028]=\"Nightfall second cleave\",[42029]=\"Nightfall first cleave\",[42030]=\"Nightfall second cleave\"}\nfor _,i in ipairs({40824,40825,40826,40827,40829,40830,40831,40832,40834,40835,40836,40837,40839,40840,40841,40842}) do L[i]=\"Hurricane Wing\" end\nfor id,label in pairs(L) do B[id]={label=label,source=SOURCE} end",
+						conditions = 
+						{
+							
+							{
+								"3f5d90a8-56c7-e3bf-a99b-3d8a6d4c7656",
+								true,
+							},
+						},
+						name = "Apply Jeuno blacklist",
+						uuid = "ecd00363-7a91-e4c5-82f1-d018e26b19f7",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1248 then return false end\nlocal B=MoogleTelegraphs and MoogleTelegraphs.Settings and MoogleTelegraphs.Settings.aoeIDUserBlacklist\nif not B then return false end\nlocal L={[40768]=\"Giga Slash first cleave\",[40769]=\"Giga Slash second cleave\",[40770]=\"Giga Slash first cleave\",[40771]=\"Giga Slash second cleave\",[40774]=\"Implosion large half\",[40775]=\"Implosion small half\",[40776]=\"Implosion large half\",[40777]=\"Implosion small half\",[40780]=\"Burning Court\",[40783]=\"Burning Battlements\",[40937]=\"Knuckle Sandwich\",[40940]=\"Knuckle Sandwich\",[40943]=\"Brittle Impact\",[40944]=\"Brittle Impact\",[41063]=\"Guillotine\",[41073]=\"Rampage dash preview\",[41074]=\"Rampage final preview\",[41077]=\"Rampage final hit\",[41083]=\"Tachi: Kasha\",[41084]=\"Concerted Dissolution\",[42024]=\"Nightfall third cleave\",[42025]=\"Nightfall third cleave\",[42027]=\"Nightfall first cleave\",[42028]=\"Nightfall second cleave\",[42029]=\"Nightfall first cleave\",[42030]=\"Nightfall second cleave\"}\nfor _,i in ipairs({40824,40825,40826,40827,40829,40830,40831,40832,40834,40835,40836,40837,40839,40840,40841,40842}) do L[i]=\"Hurricane Wing\" end\nfor id,label in pairs(L) do\n local e=B[id]\n if not e or e.label~=label or e.source~=\"Ultimate Reactions Pack (Alliance Raid)\" then return true end\nend\nreturn false",
+						dequeueIfLuaFalse = true,
+						name = "Blacklist needs update",
+						uuid = "3f5d90a8-56c7-e3bf-a99b-3d8a6d4c7656",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Ark Angels/Draws",
+			name = "[Jeuno] Moogle Telegraphs blacklist",
+			throttleTime = 5000,
+			uuid = "b99d0d4c-5034-9ead-a945-657adf5f6b3b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e or not e.pos then return end\nlocal p=e.pos\n-- BossMod: radius 40, 15 degrees to each side; all logged hits were within 21 degrees\nlocal ms=(eventArgs.channelTimeMax+0.3)*1000\nTensorCore.getMoogleDrawer():addTimedCone(ms,p.x,p.y,p.z,40,math.rad(30),p.h)",
+						conditions = 
+						{
+							
+							{
+								"2901acdb-60b8-582b-912c-7773c0969c6c",
+								true,
+							},
+							
+							{
+								"d1e5e96f-c9a0-e81f-aa89-20116c63ab05",
+								true,
+							},
+						},
+						name = "Draw 30 degree cone",
+						uuid = "1c6b617c-e19b-fa4e-8dc5-68de4e24563d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1248,
+						name = "Jeuno only",
+						uuid = "2901acdb-60b8-582b-912c-7773c0969c6c",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 3,
+						eventArgType = 2,
+						name = "Concerted Dissolution",
+						spellIDList = 
+						{
+							41084,
+						},
+						uuid = "d1e5e96f-c9a0-e81f-aa89-20116c63ab05",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Ark Angels/Draws",
+			eventType = 3,
+			name = "[Ark Angels draws] Concerted Dissolution cone",
+			timeout = 2,
+			uuid = "bf28c3d4-af56-c8ad-a1a1-43ad4a45b84c",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal st=data.jacobHavoc\nif not st then st={seq={},activeUntil=0} data.jacobHavoc=st end\n-- 167 turns -30 degrees per hit, 168 turns +30\nst.step=math.rad(eventArgs.markerID==167 and -30 or 30)",
+						conditions = 
+						{
+							
+							{
+								"947d93e0-b155-122e-a010-2d623bf0f184",
+								true,
+							},
+							
+							{
+								"9dde59f7-6e0d-2935-88b2-62ec84edb8db",
+								true,
+							},
+						},
+						name = "Store rotation",
+						uuid = "19c78e1a-600c-23a2-9682-b23a329f8cb9",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1248,
+						name = "Jeuno only",
+						uuid = "947d93e0-b155-122e-a010-2d623bf0f184",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local m=eventArgs.markerID\nreturn m==167 or m==168",
+						dequeueIfLuaFalse = true,
+						name = "Rotation marker",
+						uuid = "9dde59f7-6e0d-2935-88b2-62ec84edb8db",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Ark Angels/Draws",
+			eventType = 4,
+			name = "[Ark Angels draws] Havoc Spiral direction",
+			timeout = 2,
+			uuid = "3587f834-e43a-5694-9f96-55da915acae9",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e or not e.pos then return end\nlocal st=data.jacobHavoc\nif not st then st={seq={},activeUntil=0} data.jacobHavoc=st end\nlocal hit=Now()+(eventArgs.channelTimeMax+0.3)*1000\n-- 8 hits per caster, about 1.22s apart\nst.seq[eventArgs.entityID]={x=e.pos.x,y=e.pos.y,z=e.pos.z,h=e.pos.h,k=0,next=hit}\nst.activeUntil=math.max(st.activeUntil,hit+7*1220+500)",
+						conditions = 
+						{
+							
+							{
+								"1e654fe8-2a23-a7ec-b398-8fd0657cabe2",
+								true,
+							},
+							
+							{
+								"b7892329-eebd-abbc-8184-083054fa81c7",
+								true,
+							},
+						},
+						name = "Start cone sequence",
+						uuid = "35dbc611-50b5-15c7-a4df-06fe3f5d4da5",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1248,
+						name = "Jeuno only",
+						uuid = "1e654fe8-2a23-a7ec-b398-8fd0657cabe2",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 3,
+						eventArgType = 2,
+						name = "First spiral cone",
+						spellIDList = 
+						{
+							41070,
+						},
+						uuid = "b7892329-eebd-abbc-8184-083054fa81c7",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Ark Angels/Draws",
+			eventType = 3,
+			name = "[Ark Angels draws] Havoc Spiral start",
+			timeout = 2,
+			uuid = "d50bcbd8-a62f-796b-a402-5c782a0da441",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal st=data.jacobHavoc\nlocal q=st and st.seq[eventArgs.entityID]\nif not q then return end\nq.k=q.k+1\nq.next=Now()+1220\nif q.k>=8 then st.seq[eventArgs.entityID]=nil end",
+						conditions = 
+						{
+							
+							{
+								"880275db-e0e9-4584-82d0-f8c88e29d498",
+								true,
+							},
+							
+							{
+								"3f9f9090-d71f-f111-9fd2-8b3118731ad4",
+								true,
+							},
+						},
+						name = "Advance cone",
+						uuid = "2de1ecfa-2b18-a8f0-a583-f9492d1498d1",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1248,
+						name = "Jeuno only",
+						uuid = "880275db-e0e9-4584-82d0-f8c88e29d498",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 3,
+						eventArgType = 2,
+						name = "Spiral hit",
+						spellIDList = 
+						{
+							41070,
+							41071,
+						},
+						uuid = "3f9f9090-d71f-f111-9fd2-8b3118731ad4",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Ark Angels/Draws",
+			eventType = 2,
+			name = "[Ark Angels draws] Havoc Spiral advance",
+			timeout = 1,
+			uuid = "8814a437-ddb5-223e-b302-b6db73282d48",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal st=data.jacobHavoc\nif not st then return end\nlocal now=Now()\nlocal step=st.step\nlocal current=TensorCore.getMoogleDrawer()\nlocal upcoming=TensorCore.getStaticDrawer(0x2000A5FF,1)\nfor id,q in pairs(st.seq) do\n if now>q.next+1500 then st.seq[id]=nil\n else\n  local h=q.h+(step or 0)*q.k\n  current:addCone(q.x,q.y+0.05,q.z,30,math.rad(30),h)\n  if step and q.k<7 then upcoming:addCone(q.x,q.y+0.04,q.z,30,math.rad(30),h+step) end\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"f7e4b2ae-f916-a95a-9c34-a3b30ae13056",
+								true,
+							},
+							
+							{
+								"30ec1a9a-a617-6cd2-862c-fbc4a9e9432a",
+								true,
+							},
+						},
+						name = "Draw current and next cone",
+						uuid = "214e3290-a6df-b8a4-824a-fb24e5c3542a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1248,
+						name = "Jeuno only",
+						uuid = "f7e4b2ae-f916-a95a-9c34-a3b30ae13056",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local st=data.jacobHavoc\nreturn not not (st and Now()<st.activeUntil)",
+						dequeueIfLuaFalse = true,
+						name = "Spiral running",
+						uuid = "30ec1a9a-a617-6cd2-862c-fbc4a9e9432a",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Ark Angels/Draws",
+			eventType = 12,
+			name = "[Ark Angels draws] Havoc Spiral cones",
+			timeout = 1,
+			uuid = "a743ac14-8e5f-ad7c-8130-e1357db81bee",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e or not e.pos then return end\ndata.jacobSpiralKB={x=e.pos.x,z=e.pos.z,hit=Now()+(eventArgs.channelTimeMax+0.3)*1000+300}",
+						conditions = 
+						{
+							
+							{
+								"20c9b0b7-02e3-7489-af6c-09460c988f93",
+								true,
+							},
+							
+							{
+								"8bf80e1c-3c0c-5e02-98a0-333772daa07f",
+								true,
+							},
+						},
+						name = "Store knockback source",
+						uuid = "6ac89dda-87b4-ef04-9a83-51954722fef0",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1248,
+						name = "Jeuno only",
+						uuid = "20c9b0b7-02e3-7489-af6c-09460c988f93",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 3,
+						eventArgType = 2,
+						name = "Spiral Finish knockback",
+						spellIDList = 
+						{
+							41069,
+						},
+						uuid = "8bf80e1c-3c0c-5e02-98a0-333772daa07f",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Ark Angels/Draws",
+			eventType = 3,
+			name = "[Ark Angels draws] Spiral Finish capture",
+			timeout = 2,
+			uuid = "00b55b90-928c-2c3b-b491-35e101c345a0",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal k=data.jacobSpiralKB\nif not k or Now()>=k.hit then return end\nlocal player=TensorCore.mGetPlayer()\nif not player or not player.alive or not player.pos then return end\nlocal p=player.pos\nlocal dx,dz=p.x-k.x,p.z-k.z\nlocal dist=math.sqrt(dx*dx+dz*dz)\nif dist<0.01 or dist>40 then return end\n-- pushed 16 yalms straight away from the source\nlocal x,z=p.x+dx/dist*16,p.z+dz/dist*16\n-- arena centre 865,-820 radius 25\nlocal safe=(x-865)^2+(z+820)^2<=25^2\nlocal drawer=TensorCore.getStaticDrawer(safe and 0xC000FF00 or 0xC00000FF,2)\ndrawer:addLine(p.x,p.y+0.15,p.z,x,p.y+0.15,z,3,5)\ndrawer:addCircle(x,p.y+0.05,z,0.8)",
+						conditions = 
+						{
+							
+							{
+								"d20039a3-ba27-78c8-ba7e-58b314853a06",
+								true,
+							},
+							
+							{
+								"3db17c2c-34be-48d3-bb0e-855c284bd0de",
+								true,
+							},
+						},
+						name = "Draw 16 yalm landing line",
+						uuid = "c2851974-43bb-4f63-a579-d8d389a6cf43",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1248,
+						name = "Jeuno only",
+						uuid = "d20039a3-ba27-78c8-ba7e-58b314853a06",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local k=data.jacobSpiralKB\nreturn not not (k and Now()<k.hit)",
+						dequeueIfLuaFalse = true,
+						name = "Knockback pending",
+						uuid = "3db17c2c-34be-48d3-bb0e-855c284bd0de",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Ark Angels/Draws",
+			eventType = 12,
+			name = "[Ark Angels draws] Spiral Finish landing",
+			timeout = 1,
+			uuid = "50f6a9d8-3422-5e7e-80cc-6290e03818de",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nif AnyoneCore and AnyoneCore.Shotcall then AnyoneCore.Shotcall(\"Run away - you are being chased\",true,3,false) end\n-- the chase ends 18s after the tether appears\nif AnyoneCore and AnyoneCore.addWorldTextCountdownOnEnt then\n AnyoneCore.addWorldTextCountdownOnEnt(18000,eventArgs.sourceEntityID,0xFF00A5FF,true,1.6,2)\nend",
+						conditions = 
+						{
+							
+							{
+								"9a33f832-6244-9ace-8978-b24f92ae4313",
+								true,
+							},
+							
+							{
+								"0056677a-8aab-0c46-b59b-93ad115255cb",
+								true,
+							},
+						},
+						name = "Run away callout and countdown",
+						uuid = "fb6a54ce-2ab3-0814-8553-78b4ff114f2e",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1248,
+						name = "Jeuno only",
+						uuid = "9a33f832-6244-9ace-8978-b24f92ae4313",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif e.sourceEntityContentID~=13640 and e.sourceEntityContentID~=13645 then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn not not (p and e.newTargetID==p.id and e.oldTargetID~=p.id)",
+						dequeueIfLuaFalse = true,
+						name = "Clone tethered to me",
+						uuid = "0056677a-8aab-0c46-b59b-93ad115255cb",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Ark Angels/Draws",
+			eventType = 15,
+			name = "[Ark Angels] Chasing clone - run away callout and timer",
+			timeout = 2,
+			uuid = "a06316e6-91f1-f688-b8ff-a5751aef185e",
 			version = 2,
 		},
 	},
@@ -5601,6 +6546,55 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal S=_G.Jeuno_AllianceSettings\n-- rebuild a table loaded before the extra-range setting existed\nif not S or S.values.dashExtra==nil then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n S={values={},folder=folder,path=folder..'AllianceRaid-Jeuno.lua'}\n if FileExists(S.path) then\n  local ok,t=pcall(FileLoad,S.path)\n  if ok and type(t)=='table' then S.values=t end\n end\n local changed=false\n if type(S.values.fafnirDash)~='boolean' then S.values.fafnirDash=false changed=true end\n if type(S.values.dashExtra)~='number' or S.values.dashExtra<0 or S.values.dashExtra>25 then S.values.dashExtra=0 changed=true end\n if changed then\n  pcall(function()\n   if not FolderExists(S.folder) then FolderCreate(S.folder) end\n   FileSave(S.path,S.values)\n  end)\n end\n _G.Jeuno_AllianceSettings=S\nend\nlocal v=S.values\nlocal visible=GUI:Begin(\"[Jeuno] Settings\",true,GUI.WindowFlags_AlwaysAutoResize)\nif visible then\n local dash=GUI:Checkbox(\"BLM: dash out of Fafnir's Spike Flail##JeunoFafnirDash\",v.fafnirDash)\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"Black Mage only. About 2 seconds before Spike Flail hits, if you are still in the cone, uses Aetherial Manipulation on a safe party member in range. Stops your cast to do so. Off by default.\")\n end\n local extra=GUI:SliderInt(\"Extra dash range (yalms)##JeunoDashExtra\",v.dashExtra,0,25)\n if GUI:IsItemHovered() then\n  GUI:SetTooltip(\"Added to the game's 25 yalm dash range. Leave at 0 unless you use a dash range extension.\")\n end\n if dash~=v.fafnirDash or extra~=v.dashExtra then\n  v.fafnirDash=dash\n  v.dashExtra=extra\n  pcall(function()\n   if not FolderExists(S.folder) then FolderCreate(S.folder) end\n   FileSave(S.path,v)\n  end)\n end\nend\nGUI:End()",
+						conditions = 
+						{
+							
+							{
+								"d990375a-2b61-7398-86fd-0fbf1e2c4d9a",
+								true,
+							},
+						},
+						name = "Settings window",
+						uuid = "e5c6440b-b7ac-8248-b2fe-6e1a00c7f148",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==1248)",
+						dequeueIfLuaFalse = true,
+						name = "In Jeuno",
+						uuid = "d990375a-2b61-7398-86fd-0fbf1e2c4d9a",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Safeguards",
+			eventType = 13,
+			name = "[Jeuno] Settings",
+			timeout = 1,
+			uuid = "b03d5a88-5369-0700-a48b-6a3893c38181",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "Jeuno",
 			name = "Fafnir",
 			uuid = "0a538c59-40db-89a2-b833-57635d978c73",
@@ -5839,6 +6833,54 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player then self.used = true; return end\n\nlocal contentID = 13665\nlocal label = \"[Jeuno] Darter\"\nlocal api = TensorCore.API.TensorACR\nlocal eligible = player.localmapid == 1248 and player.job == 34\nlocal state = AllianceJeunoDarterDoT\n\n-- Restore the previous entry on leaving Jeuno or changing job.\nif state and not eligible then\n    local entry = state.entry\n    if entry.enabled and entry.allowIfTarget == false and entry.allowSmartDoT == false then\n        if state.created then\n            entry.enabled = false\n            if player.job == 34 and api.getBlacklistEntry(contentID) then\n                local current = api.addBlacklistEntry(contentID)\n                if current == entry and current.name == label then\n                    api.deleteBlacklistEntry(contentID)\n                end\n            end\n        else\n            entry.enabled = state.enabled\n            entry.allowIfTarget = state.allowIfTarget\n            entry.allowSmartDoT = state.allowSmartDoT\n        end\n    end\n    AllianceJeunoDarterDoT = nil\n    state = nil\nend\n\nif eligible and not state then\n    -- record the visit first, so an unsupported ACR is not retried every update\n    AllianceJeunoDarterDoT = { entry = {}, created = false }\n    local supported, exists = pcall(api.getBlacklistEntry, contentID)\n    if supported then\n        local ok, entry = pcall(api.addBlacklistEntry, contentID, label)\n        if ok and entry then\n            AllianceJeunoDarterDoT = {\n                entry = entry, created = not exists,\n                enabled = entry.enabled, allowIfTarget = entry.allowIfTarget,\n                allowSmartDoT = entry.allowSmartDoT,\n            }\n            entry.enabled = true\n            entry.allowIfTarget = false\n            entry.allowSmartDoT = false\n        end\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"3c3d6085-0ff4-53cf-af8a-851aa186cfc1",
+								true,
+							},
+						},
+						name = "Manage Darter blacklist",
+						uuid = "c70258f3-6bca-7997-8b6d-cea9208c2ffb",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal state = AllianceJeunoDarterDoT\nlocal eligible = player.localmapid == 1248 and player.job == 34\nif state then\n    return not eligible\nend\nreturn not not eligible",
+						dequeueIfLuaFalse = true,
+						name = "Jeuno SAM or owned cleanup",
+						uuid = "3c3d6085-0ff4-53cf-af8a-851aa186cfc1",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Fafnir/Targeting",
+			name = "[Fafnir] Darter DoT blacklist (SAM)",
+			throttleTime = 500,
+			uuid = "eb5379c3-ebab-d042-9812-1d951ff69541",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "Jeuno/Fafnir",
 			name = "Draws",
 			uuid = "2fa7d7b0-fdc9-c7b8-b902-ee5299e45efc",
@@ -5856,7 +6898,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Pull-scoped helpers. BossMod geometry; native 1248 logs corroborate IDs/timing.\nif data.jacobJeunoDraws == nil then\n    local s = { shapes = {}, holy = {}, exa = {}, holyUntil = 0, upperUntil = 0, assignmentUntil = 0 }\n    data.jacobJeunoDraws = s\n    s.green = TensorCore.getCachedDrawer(0x3000FF00, nil, 0x5000FF00, 0xFF00FF00, 2)\n    s.red = TensorCore.getCachedDrawer(0x300000FF, nil, 0x500000FF, 0xFF0000FF, 2)\n    s.line = TensorCore.getStaticDrawer(0xFF00FF00, 2)\n    s.aoe = TensorCore.getMoogleDrawer()\n    function s.own(uuid, deadline, caster, boss)\n        if uuid then s.shapes[uuid] = {deadline = deadline, caster = caster, boss = boss} end\n        return uuid\n    end\n    function s.remove(uuid)\n        if uuid then Argus.deleteTimedShape(uuid); s.shapes[uuid] = nil end\n    end\n    function s.cleanup()\n        for uuid in pairs(s.shapes) do Argus.deleteTimedShape(uuid) end\n        s.shapes = {}; s.holy = {}; s.exa = {}\n        s.holyUntil = 0; s.upperUntil = 0; s.assignmentUntil = 0; s.exaUntil = 0\n    end\n    function s.timer(ms, x, y, z)\n        AnyoneCore.addWorldTextCountdown(ms, {x=x,y=y+1,z=z}, 0xFFFFFFFF, true, 1.3)\n    end\n    function s.drawCircle(ms, p, radius, caster, boss)\n        return s.own(s.aoe:addTimedCircle(ms,p.x,p.y,p.z,radius),Now()+ms,caster,boss)\n    end\n    function s.safePoint(ms, x, y, z, boss)\n        s.own(s.green:addTimedCircle(ms,x,y,z,1,0,false,true),Now()+ms,nil,boss)\n    end\n    function s.inside(poly,dx,dz)\n            local yes=false\n            local j=#poly\n            for i=1,#poly do\n                local a,b=poly[i],poly[j]\n                if (a[2]>dz)~=(b[2]>dz) and dx<(b[1]-a[1])*(dz-a[2])/(b[2]-a[2])+a[1] then yes=not yes end\n                j=i\n            end\n            return yes\n    end\n    function s.upperUnsafe(x,z)\n        local dx,dz=x-800,z-400\n        if math.abs(dx)>35 or math.abs(dz)>35 then return true end\n        if not s.thornsUntil or Now()>s.thornsUntil then return false end\n        if s.thornsRotated then dx,dz=-dz,dx end\n        return s.inside(s.thornOuter,dx,dz) and not s.inside(s.thornHole,dx,dz)\n    end\n    s.thornOuter={{-35,35},{-35,-5},{-25,-5},{-25,-25},{5,-25},{5,-35},{35,-35},{35,5},{25,5},{25,25},{-5,25},{-5,35}}\n    s.thornHole={{-15,15},{-15,-5},{-5,-5},{-5,-15},{15,-15},{15,5},{5,5},{5,15}}\n    -- Pick a safe one-yalm position circle; party proximity only breaks safe-position ties.\n    function s.fafnirSpot(ms, spell, p)\n        local party=TensorCore.getEntityGroupList(\"Party\")\n        local bestScore,bestX,bestZ=-math.huge,nil,nil\n        for i=0,71 do\n            local a=i*math.pi/36\n            local radius=spell==41116 and 27 or 11\n            local x,z=p.x+radius*math.sin(a),p.z+radius*math.cos(a)\n            local safe=(x+500)^2+(z-600)^2<28.5^2\n            if spell==41114 then safe=safe and math.cos(a-p.h)<-math.cos(math.pi/5) end\n            if safe then\n                local score=-(x+500)*0.1\n                for _,e in pairs(party) do\n                    if e.alive and (e.pos.x-x)^2+(e.pos.z-z)^2<36 then score=score+1 end\n                end\n                if score>bestScore then bestScore,bestX,bestZ=score,x,z end\n            end\n        end\n        if bestX then s.safePoint(ms,bestX,p.y,bestZ,2) end\n    end\nend\n\nlocal id=eventArgs.spellID\nlocal cid=eventArgs.entityContentID\nlocal boss\nif cid==13351 or cid==13352 then boss=1\nelseif cid==13662 then boss=2\nelseif cid==13641 or cid==13642 or cid==13643 or cid==13644 or cid==13645 then boss=3\nelse self.used=true; return end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e then return end\nlocal p=e.pos\n-- Argus channelTimeMax in native logs is 0.3s shorter than the actual cast.\nlocal ms=math.max(1,(eventArgs.channelTimeMax+0.3)*1000)\nlocal deadline=Now()+ms\nlocal s=data.jacobJeunoDraws\nif boss==1 then\n    if id==40946 then\n        s.exaUntil=Now()+35000\n    elseif id>=40939 and id<=40941 then\n        local r=(id-40938)*9\n        s.drawCircle(ms,p,r,e.id,1)\n        s.knuckle={x=p.x,y=p.y,z=p.z,radius=r,deadline=deadline}\n        AnyoneCore.addTimedWorldText(ms,\"OUT > IN\",{x=p.x,y=p.y+2,z=p.z},0xFFFFFFFF,true,1.7)\n    elseif id>=40942 and id<=40944 then\n        local r=(id-40941)*9\n        -- Donut starts only after the first hit. Keep the first safe region readable.\n        s.own(s.aoe:addTimedDonut(ms,p.x,p.y,p.z,r,60,math.max(0,ms-1500)),deadline,e.id,1)\n    elseif id==40963 then\n        local t=TensorCore.mGetEntity(eventArgs.targetID)\n        if t then\n            local old=s.holy[t.id]\n            if old then s.remove(old.uuid) end\n            s.holy[t.id]={id=t.id,deadline=deadline,color=true,uuid=s.own(s.red:addTimedCircleOnEnt(ms,t.id,6,0,false,true),deadline,e.id,1)}\n            s.holyUntil=math.max(s.holyUntil,deadline)\n        end\n    elseif id>=40950 and id<=40952 then\n        s.remove(s.upperLine); s.remove(s.upperCircle)\n        s.upperDistance=(id-40949)*12\n        s.upperUntil=deadline+1400\n        s.upperCaster=e.id\n        s.upperLine=nil; s.upperCircle=nil; s.upperColor=nil\n    elseif id==40955 then\n        s.timer(ms,p.x,p.y,p.z)\n    end\nelseif boss==2 then\n    if id==41114 then\n        -- Tail attack: the 270 degree cone points opposite Fafnir's facing.\n        s.own(s.aoe:addTimedCone(ms,p.x,p.y,p.z,80,math.pi*1.5,p.h+math.pi),deadline,e.id,2)\n        s.timer(ms,p.x,p.y,p.z)\n        -- The subtractive green safe area is rendered by its own OnFrame reaction.\n        s.fafnirSafe={x=p.x,y=p.y,z=p.z,h=p.h+math.pi,deadline=deadline}\n    elseif id==41116 then\n        s.drawCircle(ms,p,24,e.id,2)\n        s.timer(ms,p.x,p.y,p.z)\n        s.fafnirSpot(ms,id,p)\n    elseif id==40814 then\n        -- The six 60-degree sectors form the initial 16..30 donut. Pre-draw it until they appear;\n        -- Moogle shows the individual lingering sectors afterwards. No caster owner: the cast ends first.\n        ms=ms+1200\n        s.own(s.aoe:addTimedDonut(ms,p.x,p.y,p.z,16,30),Now()+ms,nil,2)\n        s.timer(ms,p.x,p.y,p.z)\n        s.fafnirSpot(ms,id,p)\n    elseif id==40846 or id==40848 then\n        local width=id==40846 and 20 or 25\n        s.own(s.aoe:addTimedRect(ms,p.x,p.y,p.z,70,width,p.h),deadline,e.id,2)\n        s.timer(ms,p.x+18*math.sin(p.h),p.y,p.z+18*math.cos(p.h))\n    elseif id==40850 then\n        s.timer(ms,p.x,p.y,p.z)\n    end\nelseif id==41084 then\n    -- Concerted Dissolution: timer at the helper; existing telegraph keeps its styling.\n    s.timer(ms,p.x,p.y,p.z)\nend\nself.used=true\n",
+						actionLua = "-- Pull-scoped helpers. BossMod geometry; native 1248 logs corroborate IDs/timing.\nif data.jacobJeunoDraws == nil then\n    local s = { shapes = {}, holy = {}, exa = {}, holyUntil = 0, upperUntil = 0, assignmentUntil = 0 }\n    data.jacobJeunoDraws = s\n    s.green = TensorCore.getCachedDrawer(0x3000FF00, nil, 0x5000FF00, 0xFF00FF00, 2)\n    s.red = TensorCore.getCachedDrawer(0x300000FF, nil, 0x500000FF, 0xFF0000FF, 2)\n    s.line = TensorCore.getStaticDrawer(0xFF00FF00, 2)\n    s.aoe = TensorCore.getMoogleDrawer()\n    function s.own(uuid, deadline, caster, boss)\n        if uuid then s.shapes[uuid] = {deadline = deadline, caster = caster, boss = boss} end\n        return uuid\n    end\n    function s.remove(uuid)\n        if uuid then Argus.deleteTimedShape(uuid); s.shapes[uuid] = nil end\n    end\n    function s.cleanup()\n        for uuid in pairs(s.shapes) do Argus.deleteTimedShape(uuid) end\n        s.shapes = {}; s.holy = {}; s.exa = {}\n        s.holyUntil = 0; s.upperUntil = 0; s.assignmentUntil = 0; s.exaUntil = 0\n    end\n    function s.timer(ms, x, y, z)\n        AnyoneCore.addWorldTextCountdown(ms, {x=x,y=y+1,z=z}, 0xFFFFFFFF, true, 1.3)\n    end\n    function s.drawCircle(ms, p, radius, caster, boss)\n        return s.own(s.aoe:addTimedCircle(ms,p.x,p.y,p.z,radius),Now()+ms,caster,boss)\n    end\n    function s.safePoint(ms, x, y, z, boss)\n        s.own(s.green:addTimedCircle(ms,x,y,z,1,0,false,true),Now()+ms,nil,boss)\n    end\n    function s.inside(poly,dx,dz)\n            local yes=false\n            local j=#poly\n            for i=1,#poly do\n                local a,b=poly[i],poly[j]\n                if (a[2]>dz)~=(b[2]>dz) and dx<(b[1]-a[1])*(dz-a[2])/(b[2]-a[2])+a[1] then yes=not yes end\n                j=i\n            end\n            return yes\n    end\n    function s.upperUnsafe(x,z)\n        local dx,dz=x-800,z-400\n        if math.abs(dx)>35 or math.abs(dz)>35 then return true end\n        if not s.thornsUntil or Now()>s.thornsUntil then return false end\n        if s.thornsRotated then dx,dz=-dz,dx end\n        return s.inside(s.thornOuter,dx,dz) and not s.inside(s.thornHole,dx,dz)\n    end\n    s.thornOuter={{-35,35},{-35,-5},{-25,-5},{-25,-25},{5,-25},{5,-35},{35,-35},{35,5},{25,5},{25,25},{-5,25},{-5,35}}\n    s.thornHole={{-15,15},{-15,-5},{-5,-5},{-5,-15},{15,-15},{15,5},{5,5},{5,15}}\n    -- Pick a safe one-yalm position circle; party proximity only breaks safe-position ties.\n    function s.fafnirSpot(ms, spell, p)\n        local party=TensorCore.getEntityGroupList(\"Party\")\n        local bestScore,bestX,bestZ=-math.huge,nil,nil\n        for i=0,71 do\n            local a=i*math.pi/36\n            local radius=spell==41116 and 27 or 11\n            local x,z=p.x+radius*math.sin(a),p.z+radius*math.cos(a)\n            local safe=(x+500)^2+(z-600)^2<28.5^2\n            if spell==41114 then safe=safe and math.cos(a-p.h)<-math.cos(math.pi/5) end\n            if safe then\n                local score=-(x+500)*0.1\n                for _,e in pairs(party) do\n                    if e.alive and (e.pos.x-x)^2+(e.pos.z-z)^2<36 then score=score+1 end\n                end\n                if score>bestScore then bestScore,bestX,bestZ=score,x,z end\n            end\n        end\n        if bestX then s.safePoint(ms,bestX,p.y,bestZ,2) end\n    end\nend\n\nlocal id=eventArgs.spellID\nlocal cid=eventArgs.entityContentID\nlocal boss\nif cid==13351 or cid==13352 then boss=1\nelseif cid==13662 then boss=2\nelseif cid==13641 or cid==13642 or cid==13643 or cid==13644 or cid==13645 then boss=3\nelse self.used=true; return end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e then return end\nlocal p=e.pos\n-- Argus channelTimeMax in native logs is 0.3s shorter than the actual cast.\nlocal ms=math.max(1,(eventArgs.channelTimeMax+0.3)*1000)\nlocal deadline=Now()+ms\nlocal s=data.jacobJeunoDraws\nif boss==1 then\n    if id==40946 then\n        s.exaUntil=Now()+35000\n    elseif id>=40939 and id<=40941 then\n        local r=(id-40938)*9\n        s.drawCircle(ms,p,r,e.id,1)\n        s.knuckle={x=p.x,y=p.y,z=p.z,radius=r,deadline=deadline}\n        AnyoneCore.addTimedWorldText(ms,\"OUT > IN\",{x=p.x,y=p.y+2,z=p.z},0xFFFFFFFF,true,1.7)\n    elseif id>=40942 and id<=40944 then\n        local r=(id-40941)*9\n        -- Moogle's telegraph for this ring is blacklisted: show it for the whole cast.\n        s.own(s.aoe:addTimedDonut(ms,p.x,p.y,p.z,r,60),deadline,e.id,1)\n    elseif id==40963 then\n        local t=TensorCore.mGetEntity(eventArgs.targetID)\n        if t then\n            local old=s.holy[t.id]\n            if old then s.remove(old.uuid) end\n            s.holy[t.id]={id=t.id,deadline=deadline,color=true,uuid=s.own(s.red:addTimedCircleOnEnt(ms,t.id,6,0,false,true),deadline,e.id,1)}\n            s.holyUntil=math.max(s.holyUntil,deadline)\n        end\n    elseif id>=40950 and id<=40952 then\n        s.remove(s.upperLine); s.remove(s.upperCircle)\n        s.upperDistance=(id-40949)*12\n        s.upperUntil=deadline+1400\n        s.upperCaster=e.id\n        s.upperLine=nil; s.upperCircle=nil; s.upperColor=nil\n    elseif id==40955 then\n        s.timer(ms,p.x,p.y,p.z)\n    end\nelseif boss==2 then\n    if id==41114 then\n        -- Tail attack: the 270 degree cone points opposite Fafnir's facing.\n        s.own(s.aoe:addTimedCone(ms,p.x,p.y,p.z,80,math.pi*1.5,p.h+math.pi),deadline,e.id,2)\n        s.timer(ms,p.x,p.y,p.z)\n        -- The subtractive green safe area is rendered by its own OnFrame reaction.\n        s.fafnirSafe={x=p.x,y=p.y,z=p.z,h=p.h+math.pi,deadline=deadline}\n    elseif id==41116 then\n        s.drawCircle(ms,p,24,e.id,2)\n        s.timer(ms,p.x,p.y,p.z)\n        -- subtractive green: the arena outside this circle\n        s.fafnirRing={x=p.x,y=p.y,z=p.z,hole=24,deadline=deadline}\n    elseif id==40814 then\n        -- The six 60-degree sectors form the initial 16..30 donut. Pre-draw it until they appear;\n        -- Moogle shows the individual lingering sectors afterwards. No caster owner: the cast ends first.\n        ms=ms+1200\n        s.own(s.aoe:addTimedDonut(ms,p.x,p.y,p.z,16,30),Now()+ms,nil,2)\n        s.timer(ms,p.x,p.y,p.z)\n        -- subtractive green: inside the ring (rendered by the safe area OnFrame reaction)\n        s.fafnirRing={x=p.x,y=p.y,z=p.z,safe=16,deadline=Now()+ms}\n    elseif id==40846 or id==40848 then\n        local width=id==40846 and 20 or 25\n        s.own(s.aoe:addTimedRect(ms,p.x,p.y,p.z,70,width,p.h),deadline,e.id,2)\n        s.timer(ms,p.x+18*math.sin(p.h),p.y,p.z+18*math.cos(p.h))\n    elseif id==40850 then\n        s.timer(ms,p.x,p.y,p.z)\n    end\nelseif id==41084 then\n    -- Concerted Dissolution: timer at the helper; existing telegraph keeps its styling.\n    s.timer(ms,p.x,p.y,p.z)\nend\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -5932,7 +6974,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Pull-scoped helpers. BossMod geometry; native 1248 logs corroborate IDs/timing.\nif data.jacobJeunoDraws == nil then\n    local s = { shapes = {}, holy = {}, exa = {}, holyUntil = 0, upperUntil = 0, assignmentUntil = 0 }\n    data.jacobJeunoDraws = s\n    s.green = TensorCore.getCachedDrawer(0x3000FF00, nil, 0x5000FF00, 0xFF00FF00, 2)\n    s.red = TensorCore.getCachedDrawer(0x300000FF, nil, 0x500000FF, 0xFF0000FF, 2)\n    s.line = TensorCore.getStaticDrawer(0xFF00FF00, 2)\n    s.aoe = TensorCore.getMoogleDrawer()\n    function s.own(uuid, deadline, caster, boss)\n        if uuid then s.shapes[uuid] = {deadline = deadline, caster = caster, boss = boss} end\n        return uuid\n    end\n    function s.remove(uuid)\n        if uuid then Argus.deleteTimedShape(uuid); s.shapes[uuid] = nil end\n    end\n    function s.cleanup()\n        for uuid in pairs(s.shapes) do Argus.deleteTimedShape(uuid) end\n        s.shapes = {}; s.holy = {}; s.exa = {}\n        s.holyUntil = 0; s.upperUntil = 0; s.assignmentUntil = 0; s.exaUntil = 0\n    end\n    function s.timer(ms, x, y, z)\n        AnyoneCore.addWorldTextCountdown(ms, {x=x,y=y+1,z=z}, 0xFFFFFFFF, true, 1.3)\n    end\n    function s.drawCircle(ms, p, radius, caster, boss)\n        return s.own(s.aoe:addTimedCircle(ms,p.x,p.y,p.z,radius),Now()+ms,caster,boss)\n    end\n    function s.safePoint(ms, x, y, z, boss)\n        s.own(s.green:addTimedCircle(ms,x,y,z,1,0,false,true),Now()+ms,nil,boss)\n    end\n    function s.inside(poly,dx,dz)\n            local yes=false\n            local j=#poly\n            for i=1,#poly do\n                local a,b=poly[i],poly[j]\n                if (a[2]>dz)~=(b[2]>dz) and dx<(b[1]-a[1])*(dz-a[2])/(b[2]-a[2])+a[1] then yes=not yes end\n                j=i\n            end\n            return yes\n    end\n    function s.upperUnsafe(x,z)\n        local dx,dz=x-800,z-400\n        if math.abs(dx)>35 or math.abs(dz)>35 then return true end\n        if not s.thornsUntil or Now()>s.thornsUntil then return false end\n        if s.thornsRotated then dx,dz=-dz,dx end\n        return s.inside(s.thornOuter,dx,dz) and not s.inside(s.thornHole,dx,dz)\n    end\n    s.thornOuter={{-35,35},{-35,-5},{-25,-5},{-25,-25},{5,-25},{5,-35},{35,-35},{35,5},{25,5},{25,25},{-5,25},{-5,35}}\n    s.thornHole={{-15,15},{-15,-5},{-5,-5},{-5,-15},{15,-15},{15,5},{5,5},{5,15}}\n    -- Pick a safe one-yalm position circle; party proximity only breaks safe-position ties.\n    function s.fafnirSpot(ms, spell, p)\n        local party=TensorCore.getEntityGroupList(\"Party\")\n        local bestScore,bestX,bestZ=-math.huge,nil,nil\n        for i=0,71 do\n            local a=i*math.pi/36\n            local radius=spell==41116 and 27 or 11\n            local x,z=p.x+radius*math.sin(a),p.z+radius*math.cos(a)\n            local safe=(x+500)^2+(z-600)^2<28.5^2\n            if spell==41114 then safe=safe and math.cos(a-p.h)<-math.cos(math.pi/5) end\n            if safe then\n                local score=-(x+500)*0.1\n                for _,e in pairs(party) do\n                    if e.alive and (e.pos.x-x)^2+(e.pos.z-z)^2<36 then score=score+1 end\n                end\n                if score>bestScore then bestScore,bestX,bestZ=score,x,z end\n            end\n        end\n        if bestX then s.safePoint(ms,bestX,p.y,bestZ,2) end\n    end\nend\n\nlocal id=eventArgs.spellID\nlocal cid=eventArgs.entityContentID\nlocal boss\nif cid==13351 or cid==13352 then boss=1\nelseif cid==13662 then boss=2\nelseif cid==13641 or cid==13642 or cid==13643 or cid==13644 or cid==13645 then boss=3\nelse self.used=true; return end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e then return end\nlocal p=e.pos\n-- Argus channelTimeMax in native logs is 0.3s shorter than the actual cast.\nlocal ms=math.max(1,(eventArgs.channelTimeMax+0.3)*1000)\nlocal deadline=Now()+ms\nlocal s=data.jacobJeunoDraws\nif boss==1 then\n    if id==40946 then\n        s.exaUntil=Now()+35000\n    elseif id>=40939 and id<=40941 then\n        local r=(id-40938)*9\n        s.drawCircle(ms,p,r,e.id,1)\n        s.knuckle={x=p.x,y=p.y,z=p.z,radius=r,deadline=deadline}\n        AnyoneCore.addTimedWorldText(ms,\"OUT > IN\",{x=p.x,y=p.y+2,z=p.z},0xFFFFFFFF,true,1.7)\n    elseif id>=40942 and id<=40944 then\n        local r=(id-40941)*9\n        -- Donut starts only after the first hit. Keep the first safe region readable.\n        s.own(s.aoe:addTimedDonut(ms,p.x,p.y,p.z,r,60,math.max(0,ms-1500)),deadline,e.id,1)\n    elseif id==40963 then\n        local t=TensorCore.mGetEntity(eventArgs.targetID)\n        if t then\n            local old=s.holy[t.id]\n            if old then s.remove(old.uuid) end\n            s.holy[t.id]={id=t.id,deadline=deadline,color=true,uuid=s.own(s.red:addTimedCircleOnEnt(ms,t.id,6,0,false,true),deadline,e.id,1)}\n            s.holyUntil=math.max(s.holyUntil,deadline)\n        end\n    elseif id>=40950 and id<=40952 then\n        s.remove(s.upperLine); s.remove(s.upperCircle)\n        s.upperDistance=(id-40949)*12\n        s.upperUntil=deadline+1400\n        s.upperCaster=e.id\n        s.upperLine=nil; s.upperCircle=nil; s.upperColor=nil\n    elseif id==40955 then\n        s.timer(ms,p.x,p.y,p.z)\n    end\nelseif boss==2 then\n    if id==41114 then\n        s.own(s.aoe:addTimedCone(ms,p.x,p.y,p.z,80,math.pi*1.5,p.h),deadline,e.id,2)\n        s.timer(ms,p.x,p.y,p.z)\n        s.fafnirSpot(ms,id,p)\n    elseif id==41116 then\n        s.drawCircle(ms,p,24,e.id,2)\n        s.timer(ms,p.x,p.y,p.z)\n        s.fafnirSpot(ms,id,p)\n    elseif id==40814 then\n        -- The six 60-degree sectors form the initial 16..30 donut.\n        -- Moogle already shows the individual lingering sectors; do not overdraw them.\n        ms=ms+1200\n        s.timer(ms,p.x,p.y,p.z)\n        s.fafnirSpot(ms,id,p)\n    elseif id==40846 or id==40848 then\n        local width=id==40846 and 20 or 25\n        s.own(s.aoe:addTimedRect(ms,p.x,p.y,p.z,70,width,p.h),deadline,e.id,2)\n        s.timer(ms,p.x+18*math.sin(p.h),p.y,p.z+18*math.cos(p.h))\n    elseif id==40850 then\n        s.timer(ms,p.x,p.y,p.z)\n    end\nelseif id==41084 then\n    -- Concerted Dissolution: timer at the helper; existing telegraph keeps its styling.\n    s.timer(ms,p.x,p.y,p.z)\nend\nself.used=true\n",
+						actionLua = "-- Pull-scoped helpers. BossMod geometry; native 1248 logs corroborate IDs/timing.\nif data.jacobJeunoDraws == nil then\n    local s = { shapes = {}, holy = {}, exa = {}, holyUntil = 0, upperUntil = 0, assignmentUntil = 0 }\n    data.jacobJeunoDraws = s\n    s.green = TensorCore.getCachedDrawer(0x3000FF00, nil, 0x5000FF00, 0xFF00FF00, 2)\n    s.red = TensorCore.getCachedDrawer(0x300000FF, nil, 0x500000FF, 0xFF0000FF, 2)\n    s.line = TensorCore.getStaticDrawer(0xFF00FF00, 2)\n    s.aoe = TensorCore.getMoogleDrawer()\n    function s.own(uuid, deadline, caster, boss)\n        if uuid then s.shapes[uuid] = {deadline = deadline, caster = caster, boss = boss} end\n        return uuid\n    end\n    function s.remove(uuid)\n        if uuid then Argus.deleteTimedShape(uuid); s.shapes[uuid] = nil end\n    end\n    function s.cleanup()\n        for uuid in pairs(s.shapes) do Argus.deleteTimedShape(uuid) end\n        s.shapes = {}; s.holy = {}; s.exa = {}\n        s.holyUntil = 0; s.upperUntil = 0; s.assignmentUntil = 0; s.exaUntil = 0\n    end\n    function s.timer(ms, x, y, z)\n        AnyoneCore.addWorldTextCountdown(ms, {x=x,y=y+1,z=z}, 0xFFFFFFFF, true, 1.3)\n    end\n    function s.drawCircle(ms, p, radius, caster, boss)\n        return s.own(s.aoe:addTimedCircle(ms,p.x,p.y,p.z,radius),Now()+ms,caster,boss)\n    end\n    function s.safePoint(ms, x, y, z, boss)\n        s.own(s.green:addTimedCircle(ms,x,y,z,1,0,false,true),Now()+ms,nil,boss)\n    end\n    function s.inside(poly,dx,dz)\n            local yes=false\n            local j=#poly\n            for i=1,#poly do\n                local a,b=poly[i],poly[j]\n                if (a[2]>dz)~=(b[2]>dz) and dx<(b[1]-a[1])*(dz-a[2])/(b[2]-a[2])+a[1] then yes=not yes end\n                j=i\n            end\n            return yes\n    end\n    function s.upperUnsafe(x,z)\n        local dx,dz=x-800,z-400\n        if math.abs(dx)>35 or math.abs(dz)>35 then return true end\n        if not s.thornsUntil or Now()>s.thornsUntil then return false end\n        if s.thornsRotated then dx,dz=-dz,dx end\n        return s.inside(s.thornOuter,dx,dz) and not s.inside(s.thornHole,dx,dz)\n    end\n    s.thornOuter={{-35,35},{-35,-5},{-25,-5},{-25,-25},{5,-25},{5,-35},{35,-35},{35,5},{25,5},{25,25},{-5,25},{-5,35}}\n    s.thornHole={{-15,15},{-15,-5},{-5,-5},{-5,-15},{15,-15},{15,5},{5,5},{5,15}}\n    -- Pick a safe one-yalm position circle; party proximity only breaks safe-position ties.\n    function s.fafnirSpot(ms, spell, p)\n        local party=TensorCore.getEntityGroupList(\"Party\")\n        local bestScore,bestX,bestZ=-math.huge,nil,nil\n        for i=0,71 do\n            local a=i*math.pi/36\n            local radius=spell==41116 and 27 or 11\n            local x,z=p.x+radius*math.sin(a),p.z+radius*math.cos(a)\n            local safe=(x+500)^2+(z-600)^2<28.5^2\n            if spell==41114 then safe=safe and math.cos(a-p.h)<-math.cos(math.pi/5) end\n            if safe then\n                local score=-(x+500)*0.1\n                for _,e in pairs(party) do\n                    if e.alive and (e.pos.x-x)^2+(e.pos.z-z)^2<36 then score=score+1 end\n                end\n                if score>bestScore then bestScore,bestX,bestZ=score,x,z end\n            end\n        end\n        if bestX then s.safePoint(ms,bestX,p.y,bestZ,2) end\n    end\nend\n\nlocal id=eventArgs.spellID\nlocal cid=eventArgs.entityContentID\nlocal boss\nif cid==13351 or cid==13352 then boss=1\nelseif cid==13662 then boss=2\nelseif cid==13641 or cid==13642 or cid==13643 or cid==13644 or cid==13645 then boss=3\nelse self.used=true; return end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e then return end\nlocal p=e.pos\n-- Argus channelTimeMax in native logs is 0.3s shorter than the actual cast.\nlocal ms=math.max(1,(eventArgs.channelTimeMax+0.3)*1000)\nlocal deadline=Now()+ms\nlocal s=data.jacobJeunoDraws\nif boss==1 then\n    if id==40946 then\n        s.exaUntil=Now()+35000\n    elseif id>=40939 and id<=40941 then\n        local r=(id-40938)*9\n        s.drawCircle(ms,p,r,e.id,1)\n        s.knuckle={x=p.x,y=p.y,z=p.z,radius=r,deadline=deadline}\n        AnyoneCore.addTimedWorldText(ms,\"OUT > IN\",{x=p.x,y=p.y+2,z=p.z},0xFFFFFFFF,true,1.7)\n    elseif id>=40942 and id<=40944 then\n        local r=(id-40941)*9\n        -- Moogle's telegraph for this ring is blacklisted: show it for the whole cast.\n        s.own(s.aoe:addTimedDonut(ms,p.x,p.y,p.z,r,60),deadline,e.id,1)\n    elseif id==40963 then\n        local t=TensorCore.mGetEntity(eventArgs.targetID)\n        if t then\n            local old=s.holy[t.id]\n            if old then s.remove(old.uuid) end\n            s.holy[t.id]={id=t.id,deadline=deadline,color=true,uuid=s.own(s.red:addTimedCircleOnEnt(ms,t.id,6,0,false,true),deadline,e.id,1)}\n            s.holyUntil=math.max(s.holyUntil,deadline)\n        end\n    elseif id>=40950 and id<=40952 then\n        s.remove(s.upperLine); s.remove(s.upperCircle)\n        s.upperDistance=(id-40949)*12\n        s.upperUntil=deadline+1400\n        s.upperCaster=e.id\n        s.upperLine=nil; s.upperCircle=nil; s.upperColor=nil\n    elseif id==40955 then\n        s.timer(ms,p.x,p.y,p.z)\n    end\nelseif boss==2 then\n    if id==41114 then\n        s.own(s.aoe:addTimedCone(ms,p.x,p.y,p.z,80,math.pi*1.5,p.h),deadline,e.id,2)\n        s.timer(ms,p.x,p.y,p.z)\n        s.fafnirSpot(ms,id,p)\n    elseif id==41116 then\n        s.drawCircle(ms,p,24,e.id,2)\n        s.timer(ms,p.x,p.y,p.z)\n        -- subtractive green: the arena outside this circle\n        s.fafnirRing={x=p.x,y=p.y,z=p.z,hole=24,deadline=deadline}\n    elseif id==40814 then\n        -- The six 60-degree sectors form the initial 16..30 donut.\n        -- Moogle already shows the individual lingering sectors; do not overdraw them.\n        ms=ms+1200\n        s.timer(ms,p.x,p.y,p.z)\n        s.fafnirSpot(ms,id,p)\n    elseif id==40846 or id==40848 then\n        local width=id==40846 and 20 or 25\n        s.own(s.aoe:addTimedRect(ms,p.x,p.y,p.z,70,width,p.h),deadline,e.id,2)\n        s.timer(ms,p.x+18*math.sin(p.h),p.y,p.z+18*math.cos(p.h))\n    elseif id==40850 then\n        s.timer(ms,p.x,p.y,p.z)\n    end\nelseif id==41084 then\n    -- Concerted Dissolution: timer at the helper; existing telegraph keeps its styling.\n    s.timer(ms,p.x,p.y,p.z)\nend\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -6004,7 +7046,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\nlocal s=data.jacobJeunoDraws\nlocal f=s and s.fafnirSafe\nif not f or Now()>=f.deadline then return end\nlocal player=TensorCore.mGetPlayer()\nif not player or not player.alive then return end\nlocal channel=Argus2.getNextUnusedChannel(true)\nif channel==1 then channel=Argus2.getNextUnusedChannel(true) end\nif not channel or channel<=1 then return end\nlocal flags=Argus2.RenderFlags\nlocal baseFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUSION_BASE\nlocal maskFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUDE\nlocal safe=TensorCore.getStaticDrawer(0x5000FF00,1,channel,baseFlags)\nlocal mask=TensorCore.getStaticDrawer(0xFFFFFFFF,0,channel,maskFlags)\n-- Fafnir arena: centre -500,600, radius 30\nsafe:addCircle(-500,f.y,600,30,false,baseFlags)\nmask:addCone(f.x,f.y,f.z,80,math.pi*1.5,f.h,false,maskFlags)",
+						actionLua = "self.used=true\nlocal s=data.jacobJeunoDraws\nif not s then return end\nlocal now=Now()\nlocal f=s.fafnirSafe\nif f and now>=f.deadline then f=nil end\nlocal r=s.fafnirRing\nif r and now>=r.deadline then r=nil end\nif not f and not r then return end\nlocal player=TensorCore.mGetPlayer()\nif not player or not player.alive then return end\nlocal channel=Argus2.getNextUnusedChannel(true)\nif channel==1 then channel=Argus2.getNextUnusedChannel(true) end\nif not channel or channel<=1 then return end\nlocal flags=Argus2.RenderFlags\nlocal baseFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUSION_BASE\nlocal maskFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUDE\nlocal safe=TensorCore.getStaticDrawer(0x5000FF00,1,channel,baseFlags)\nlocal mask=TensorCore.getStaticDrawer(0xFFFFFFFF,0,channel,maskFlags)\n-- Fafnir arena: centre -500,600, radius 30\nif r and r.safe then\n -- Offensive Posture: only the inside of the 16 yalm ring is safe\n safe:addCircle(r.x,r.y,r.z,r.safe,false,baseFlags)\n return\nend\nlocal y=(f or r).y\nsafe:addCircle(-500,y,600,30,false,baseFlags)\nif f then mask:addCone(f.x,f.y,f.z,80,math.pi*1.5,f.h,false,maskFlags) end\nif r and r.hole then mask:addCircle(r.x,r.y,r.z,r.hole,false,maskFlags) end",
 						conditions = 
 						{
 							
@@ -6018,7 +7060,7 @@ local tbl =
 								true,
 							},
 						},
-						name = "Green arena minus tail cone",
+						name = "Subtractive green safe area",
 						uuid = "1f073787-be70-eec3-9938-d78442c6753f",
 						version = 2.1,
 					},
@@ -6044,9 +7086,9 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local s=data.jacobJeunoDraws\nlocal f=s and s.fafnirSafe\nreturn not not (f and Now()<f.deadline)",
+						conditionLua = "local s=data.jacobJeunoDraws\nif not s then return false end\nlocal now=Now()\nlocal f,r=s.fafnirSafe,s.fafnirRing\nreturn not not ((f and now<f.deadline) or (r and now<r.deadline))",
 						dequeueIfLuaFalse = true,
-						name = "Spike Flail casting",
+						name = "Safe area mechanic casting",
 						uuid = "753065b4-ba47-cd50-807a-f1fafa4cbec7",
 						version = 3,
 					},
@@ -6054,7 +7096,7 @@ local tbl =
 			},
 			displayPath = "Jeuno/Fafnir/Draws",
 			eventType = 12,
-			name = "[Fafnir draws] Spike Flail safe area (green)",
+			name = "[Fafnir draws] Spike Flail and Offensive Posture safe area (green)",
 			timeout = 1,
 			uuid = "e515268d-1e93-b7d4-857a-aef223fb4828",
 			version = 2,
@@ -6234,7 +7276,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\nlocal st=data.jacobFafnirWind\nif not st then return end\nlocal player=TensorCore.mGetPlayer()\nif not player or not player.alive or not player.pos then return end\n-- Fafnir arena: centre -500,600, radius 30\nif (player.pos.x+500)^2+(player.pos.z-600)^2>45*45 then return end\nlocal now=Now()\n-- only the next ring to resolve, as BossMod shows it\nlocal ring\nfor _,r in ipairs(st.rings) do\n if now<r.till+100 and (not ring or r.till<ring.till) then ring=r end\nend\nlocal winds={}\nfor id,w in pairs(st.winds) do\n if now>=w.till then st.winds[id]=nil\n elseif w.live then\n  local e=TensorCore.mGetEntity(id)\n  if e and e.pos then winds[#winds+1]={x=e.pos.x,z=e.pos.z,r=w.r} end\n else winds[#winds+1]=w end\nend\nif not ring and #winds==0 then return end\nlocal channel=Argus2.getNextUnusedChannel(true)\nif channel==1 then channel=Argus2.getNextUnusedChannel(true) end\nif not channel or channel<=1 then return end\nlocal flags=Argus2.RenderFlags\nlocal baseFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUSION_BASE\nlocal maskFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUDE\nlocal safe=TensorCore.getStaticDrawer(0x5000FF00,1,channel,baseFlags)\nlocal mask=TensorCore.getStaticDrawer(0xFFFFFFFF,0,channel,maskFlags)\nlocal y=player.pos.y\nsafe:addCircle(-500,y,600,30,false,baseFlags)\nif ring then\n if ring.inner==0 then mask:addCircle(-500,y,600,ring.outer,false,maskFlags)\n else mask:addDonut(-500,y,600,ring.inner,ring.outer,false,maskFlags) end\nend\nfor _,w in ipairs(winds) do mask:addCircle(w.x,y,w.z,w.r,false,maskFlags) end\n-- Horrid Roar puddles\nlocal function cut(a)\n if a.aoeID==40850 and now<a.startTime+a.duration*1000 then mask:addCircle(a.x,y,a.z,4,false,maskFlags) end\nend\nfor _,a in pairs(Argus.getCurrentGroundAOEs() or {}) do cut(a) end\nfor _,a in pairs(Argus.getCurrentDirectionalAOEs() or {}) do cut(a) end\n-- other players' Horrid Roar spreads\nfor id,till in pairs(st.spreads) do\n if now>=till then st.spreads[id]=nil\n elseif id~=player.id then\n  local e=TensorCore.mGetEntity(id)\n  if e and e.pos then mask:addCircle(e.pos.x,y,e.pos.z,8,false,maskFlags) end\n end\nend",
+						actionLua = "self.used=true\nlocal st=data.jacobFafnirWind\nif not st then return end\nlocal player=TensorCore.mGetPlayer()\nif not player or not player.alive or not player.pos then return end\n-- Fafnir arena: centre -500,600, radius 30\nif (player.pos.x+500)^2+(player.pos.z-600)^2>45*45 then return end\nlocal now=Now()\n-- only the next ring to resolve, as BossMod shows it\nlocal ring\nfor _,r in ipairs(st.rings) do\n if now<r.till+100 and (not ring or r.till<ring.till) then ring=r end\nend\nlocal winds={}\nfor id,w in pairs(st.winds) do\n if now>=w.till then st.winds[id]=nil\n elseif w.live then\n  local e=TensorCore.mGetEntity(id)\n  if e and e.pos then winds[#winds+1]={x=e.pos.x,z=e.pos.z,r=w.r} end\n else winds[#winds+1]=w end\nend\nif not ring and #winds==0 then return end\nlocal channel=Argus2.getNextUnusedChannel(true)\nif channel==1 then channel=Argus2.getNextUnusedChannel(true) end\nif not channel or channel<=1 then return end\nlocal flags=Argus2.RenderFlags\nlocal baseFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUSION_BASE\nlocal maskFlags=flags.FLAG_WARP_TERRAIN+flags.FLAG_OCCLUDE\n-- fill 10% brighter than the other safe areas (alpha 0x58 instead of 0x50)\nlocal safe=TensorCore.getStaticDrawer(0x5800FF00,1,channel,baseFlags)\nlocal mask=TensorCore.getStaticDrawer(0xFFFFFFFF,0,channel,maskFlags)\nlocal y=player.pos.y\nsafe:addCircle(-500,y,600,30,false,baseFlags)\nif ring then\n if ring.inner==0 then mask:addCircle(-500,y,600,ring.outer,false,maskFlags)\n else mask:addDonut(-500,y,600,ring.inner,ring.outer,false,maskFlags) end\nend\nfor _,w in ipairs(winds) do mask:addCircle(w.x,y,w.z,w.r,false,maskFlags) end\n-- Horrid Roar puddles\nlocal function cut(a)\n if a.aoeID==40850 and now<a.startTime+a.duration*1000 then mask:addCircle(a.x,y,a.z,4,false,maskFlags) end\nend\nfor _,a in pairs(Argus.getCurrentGroundAOEs() or {}) do cut(a) end\nfor _,a in pairs(Argus.getCurrentDirectionalAOEs() or {}) do cut(a) end\n-- other players' Horrid Roar spreads\nfor id,till in pairs(st.spreads) do\n if now>=till then st.spreads[id]=nil\n elseif id~=player.id then\n  local e=TensorCore.mGetEntity(id)\n  if e and e.pos then mask:addCircle(e.pos.x,y,e.pos.z,8,false,maskFlags) end\n end\nend",
 						conditions = 
 						{
 							
@@ -6294,6 +7336,55 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.jacobJeunoDraws\nlocal f=s and s.fafnirSafe\nlocal me=TensorCore.mGetPlayer()\nif not f or f.dashDone or not me or not me.pos then return end\n-- angle from the middle of the tail cone (f.h); the cone covers 135 degrees to each side\nlocal function offCone(p)\n local a=math.atan2(p.x-f.x,p.z-f.z)\n return math.abs(((a-f.h+math.pi)%(2*math.pi))-math.pi),math.sqrt((p.x-f.x)^2+(p.z-f.z)^2)\nend\nlocal mine,myDist=offCone(me.pos)\nif myDist>0.5 and mine>math.rad(137) then return end -- already safe\n-- the game's 25 yalm dash range, plus any extra set by the user\nlocal S=_G.Jeuno_AllianceSettings\nlocal range=25+((S and S.values.dashExtra) or 0)\nlocal best,bestAngle\nfor _,e in pairs(TensorCore.getEntityGroupList(\"Party\") or {}) do\n if e.id~=me.id and e.alive and e.pos then\n  local angle,dist=offCone(e.pos)\n  local arena=(e.pos.x+500)^2+(e.pos.z-600)^2\n  local reach=math.sqrt((e.pos.x-me.pos.x)^2+(e.pos.z-me.pos.z)^2)\n  if angle>=math.rad(140) and dist>=2 and arena<=28.5^2 and reach<=range and (not best or angle>bestAngle) then\n   best,bestAngle=e,angle\n  end\n end\nend\nlocal dash=ActionList:Get(1,155)\nif not best or not dash or dash.isoncd then\n if not f.dashWarned and AnyoneCore and AnyoneCore.Shotcall then\n  f.dashWarned=true\n  AnyoneCore.Shotcall(\"No dash - walk behind the cone\",true,3,false)\n end\n return\nend\nlocal cast=me.castinginfo\nif cast and cast.channelingid and cast.channelingid~=0 then\n ActionList:StopCasting()\nend\nif dash:IsReady(best.id) and dash:Cast(best.id) then\n f.dashDone=true\nend",
+						conditions = 
+						{
+							
+							{
+								"de1eae8e-627c-fb6c-802d-d08bb50c7048",
+								true,
+							},
+						},
+						name = "Aetherial Manipulation to safe ally",
+						uuid = "a0a65987-de24-3dd1-b635-a044523ae6f9",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local s=data.jacobJeunoDraws\nlocal f=s and s.fafnirSafe\nif not f or f.dashDone then return false end\nlocal left=f.deadline-Now()\nif left>2000 or left<300 then return false end\nlocal S=_G.Jeuno_AllianceSettings\nif not S or S.values.fafnirDash~=true then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==1248 and p.job==25 and p.alive)",
+						dequeueIfLuaFalse = true,
+						name = "BLM, option on, cone landing soon",
+						uuid = "de1eae8e-627c-fb6c-802d-d08bb50c7048",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Fafnir/Draws",
+			name = "[Fafnir] BLM dash out of Spike Flail (optional)",
+			throttleTime = 100,
+			timeout = 1,
+			uuid = "bad4554b-0319-37b9-b099-071d357c24f3",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "Jeuno",
 			name = "Prishe",
 			uuid = "fc744ebc-bb9a-7f70-a456-0938a1bf274d",
@@ -6321,7 +7412,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Pull-scoped helpers. BossMod geometry; native 1248 logs corroborate IDs/timing.\nif data.jacobJeunoDraws == nil then\n    local s = { shapes = {}, holy = {}, exa = {}, holyUntil = 0, upperUntil = 0, assignmentUntil = 0 }\n    data.jacobJeunoDraws = s\n    s.green = TensorCore.getCachedDrawer(0x3000FF00, nil, 0x5000FF00, 0xFF00FF00, 2)\n    s.red = TensorCore.getCachedDrawer(0x300000FF, nil, 0x500000FF, 0xFF0000FF, 2)\n    s.line = TensorCore.getStaticDrawer(0xFF00FF00, 2)\n    s.aoe = TensorCore.getMoogleDrawer()\n    function s.own(uuid, deadline, caster, boss)\n        if uuid then s.shapes[uuid] = {deadline = deadline, caster = caster, boss = boss} end\n        return uuid\n    end\n    function s.remove(uuid)\n        if uuid then Argus.deleteTimedShape(uuid); s.shapes[uuid] = nil end\n    end\n    function s.cleanup()\n        for uuid in pairs(s.shapes) do Argus.deleteTimedShape(uuid) end\n        s.shapes = {}; s.holy = {}; s.exa = {}\n        s.holyUntil = 0; s.upperUntil = 0; s.assignmentUntil = 0; s.exaUntil = 0\n    end\n    function s.timer(ms, x, y, z)\n        AnyoneCore.addWorldTextCountdown(ms, {x=x,y=y+1,z=z}, 0xFFFFFFFF, true, 1.3)\n    end\n    function s.drawCircle(ms, p, radius, caster, boss)\n        return s.own(s.aoe:addTimedCircle(ms,p.x,p.y,p.z,radius),Now()+ms,caster,boss)\n    end\n    function s.safePoint(ms, x, y, z, boss)\n        s.own(s.green:addTimedCircle(ms,x,y,z,1,0,false,true),Now()+ms,nil,boss)\n    end\n    function s.inside(poly,dx,dz)\n            local yes=false\n            local j=#poly\n            for i=1,#poly do\n                local a,b=poly[i],poly[j]\n                if (a[2]>dz)~=(b[2]>dz) and dx<(b[1]-a[1])*(dz-a[2])/(b[2]-a[2])+a[1] then yes=not yes end\n                j=i\n            end\n            return yes\n    end\n    function s.upperUnsafe(x,z)\n        local dx,dz=x-800,z-400\n        if math.abs(dx)>35 or math.abs(dz)>35 then return true end\n        if not s.thornsUntil or Now()>s.thornsUntil then return false end\n        if s.thornsRotated then dx,dz=-dz,dx end\n        return s.inside(s.thornOuter,dx,dz) and not s.inside(s.thornHole,dx,dz)\n    end\n    s.thornOuter={{-35,35},{-35,-5},{-25,-5},{-25,-25},{5,-25},{5,-35},{35,-35},{35,5},{25,5},{25,25},{-5,25},{-5,35}}\n    s.thornHole={{-15,15},{-15,-5},{-5,-5},{-5,-15},{15,-15},{15,5},{5,5},{5,15}}\n    -- Pick a safe one-yalm position circle; party proximity only breaks safe-position ties.\n    function s.fafnirSpot(ms, spell, p)\n        local party=TensorCore.getEntityGroupList(\"Party\")\n        local bestScore,bestX,bestZ=-math.huge,nil,nil\n        for i=0,71 do\n            local a=i*math.pi/36\n            local radius=spell==41116 and 27 or 11\n            local x,z=p.x+radius*math.sin(a),p.z+radius*math.cos(a)\n            local safe=(x+500)^2+(z-600)^2<28.5^2\n            if spell==41114 then safe=safe and math.cos(a-p.h)<-math.cos(math.pi/5) end\n            if safe then\n                local score=-(x+500)*0.1\n                for _,e in pairs(party) do\n                    if e.alive and (e.pos.x-x)^2+(e.pos.z-z)^2<36 then score=score+1 end\n                end\n                if score>bestScore then bestScore,bestX,bestZ=score,x,z end\n            end\n        end\n        if bestX then s.safePoint(ms,bestX,p.y,bestZ,2) end\n    end\nend\n\nlocal id=eventArgs.spellID\nlocal cid=eventArgs.entityContentID\nlocal boss\nif cid==13351 or cid==13352 then boss=1\nelseif cid==13662 then boss=2\nelseif cid==13641 or cid==13642 or cid==13643 or cid==13644 or cid==13645 then boss=3\nelse self.used=true; return end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e then return end\nlocal p=e.pos\n-- Argus channelTimeMax in native logs is 0.3s shorter than the actual cast.\nlocal ms=math.max(1,(eventArgs.channelTimeMax+0.3)*1000)\nlocal deadline=Now()+ms\nlocal s=data.jacobJeunoDraws\nif boss==1 then\n    if id==40946 then\n        s.exaUntil=Now()+35000\n    elseif id>=40939 and id<=40941 then\n        local r=(id-40938)*9\n        s.drawCircle(ms,p,r,e.id,1)\n        s.knuckle={x=p.x,y=p.y,z=p.z,radius=r,deadline=deadline}\n        AnyoneCore.addTimedWorldText(ms,\"OUT > IN\",{x=p.x,y=p.y+2,z=p.z},0xFFFFFFFF,true,1.7)\n    elseif id>=40942 and id<=40944 then\n        local r=(id-40941)*9\n        -- Donut starts only after the first hit. Keep the first safe region readable.\n        s.own(s.aoe:addTimedDonut(ms,p.x,p.y,p.z,r,60,math.max(0,ms-1500)),deadline,e.id,1)\n    elseif id==40963 then\n        local t=TensorCore.mGetEntity(eventArgs.targetID)\n        if t then\n            local old=s.holy[t.id]\n            if old then s.remove(old.uuid) end\n            s.holy[t.id]={id=t.id,deadline=deadline,color=true,uuid=s.own(s.red:addTimedCircleOnEnt(ms,t.id,6,0,false,true),deadline,e.id,1)}\n            s.holyUntil=math.max(s.holyUntil,deadline)\n        end\n    elseif id>=40950 and id<=40952 then\n        s.remove(s.upperLine); s.remove(s.upperCircle)\n        s.upperDistance=(id-40949)*12\n        s.upperUntil=deadline+1400\n        s.upperCaster=e.id\n        s.upperLine=nil; s.upperCircle=nil; s.upperColor=nil\n    elseif id==40955 then\n        s.timer(ms,p.x,p.y,p.z)\n    end\nelseif boss==2 then\n    if id==41114 then\n        s.own(s.aoe:addTimedCone(ms,p.x,p.y,p.z,80,math.pi*1.5,p.h),deadline,e.id,2)\n        s.timer(ms,p.x,p.y,p.z)\n        s.fafnirSpot(ms,id,p)\n    elseif id==41116 then\n        s.drawCircle(ms,p,24,e.id,2)\n        s.timer(ms,p.x,p.y,p.z)\n        s.fafnirSpot(ms,id,p)\n    elseif id==40814 then\n        -- The six 60-degree sectors form the initial 16..30 donut.\n        -- Moogle already shows the individual lingering sectors; do not overdraw them.\n        ms=ms+1200\n        s.timer(ms,p.x,p.y,p.z)\n        s.fafnirSpot(ms,id,p)\n    elseif id==40846 or id==40848 then\n        local width=id==40846 and 20 or 25\n        s.own(s.aoe:addTimedRect(ms,p.x,p.y,p.z,70,width,p.h),deadline,e.id,2)\n        s.timer(ms,p.x+18*math.sin(p.h),p.y,p.z+18*math.cos(p.h))\n    elseif id==40850 then\n        s.timer(ms,p.x,p.y,p.z)\n    end\nelseif id==41084 then\n    -- Concerted Dissolution: timer at the helper; existing telegraph keeps its styling.\n    s.timer(ms,p.x,p.y,p.z)\nend\nself.used=true\n",
+						actionLua = "-- Pull-scoped helpers. BossMod geometry; native 1248 logs corroborate IDs/timing.\nif data.jacobJeunoDraws == nil then\n    local s = { shapes = {}, holy = {}, exa = {}, holyUntil = 0, upperUntil = 0, assignmentUntil = 0 }\n    data.jacobJeunoDraws = s\n    s.green = TensorCore.getCachedDrawer(0x3000FF00, nil, 0x5000FF00, 0xFF00FF00, 2)\n    s.red = TensorCore.getCachedDrawer(0x300000FF, nil, 0x500000FF, 0xFF0000FF, 2)\n    s.line = TensorCore.getStaticDrawer(0xFF00FF00, 2)\n    s.aoe = TensorCore.getMoogleDrawer()\n    function s.own(uuid, deadline, caster, boss)\n        if uuid then s.shapes[uuid] = {deadline = deadline, caster = caster, boss = boss} end\n        return uuid\n    end\n    function s.remove(uuid)\n        if uuid then Argus.deleteTimedShape(uuid); s.shapes[uuid] = nil end\n    end\n    function s.cleanup()\n        for uuid in pairs(s.shapes) do Argus.deleteTimedShape(uuid) end\n        s.shapes = {}; s.holy = {}; s.exa = {}\n        s.holyUntil = 0; s.upperUntil = 0; s.assignmentUntil = 0; s.exaUntil = 0\n    end\n    function s.timer(ms, x, y, z)\n        AnyoneCore.addWorldTextCountdown(ms, {x=x,y=y+1,z=z}, 0xFFFFFFFF, true, 1.3)\n    end\n    function s.drawCircle(ms, p, radius, caster, boss)\n        return s.own(s.aoe:addTimedCircle(ms,p.x,p.y,p.z,radius),Now()+ms,caster,boss)\n    end\n    function s.safePoint(ms, x, y, z, boss)\n        s.own(s.green:addTimedCircle(ms,x,y,z,1,0,false,true),Now()+ms,nil,boss)\n    end\n    function s.inside(poly,dx,dz)\n            local yes=false\n            local j=#poly\n            for i=1,#poly do\n                local a,b=poly[i],poly[j]\n                if (a[2]>dz)~=(b[2]>dz) and dx<(b[1]-a[1])*(dz-a[2])/(b[2]-a[2])+a[1] then yes=not yes end\n                j=i\n            end\n            return yes\n    end\n    function s.upperUnsafe(x,z)\n        local dx,dz=x-800,z-400\n        if math.abs(dx)>35 or math.abs(dz)>35 then return true end\n        if not s.thornsUntil or Now()>s.thornsUntil then return false end\n        if s.thornsRotated then dx,dz=-dz,dx end\n        return s.inside(s.thornOuter,dx,dz) and not s.inside(s.thornHole,dx,dz)\n    end\n    s.thornOuter={{-35,35},{-35,-5},{-25,-5},{-25,-25},{5,-25},{5,-35},{35,-35},{35,5},{25,5},{25,25},{-5,25},{-5,35}}\n    s.thornHole={{-15,15},{-15,-5},{-5,-5},{-5,-15},{15,-15},{15,5},{5,5},{5,15}}\n    -- Pick a safe one-yalm position circle; party proximity only breaks safe-position ties.\n    function s.fafnirSpot(ms, spell, p)\n        local party=TensorCore.getEntityGroupList(\"Party\")\n        local bestScore,bestX,bestZ=-math.huge,nil,nil\n        for i=0,71 do\n            local a=i*math.pi/36\n            local radius=spell==41116 and 27 or 11\n            local x,z=p.x+radius*math.sin(a),p.z+radius*math.cos(a)\n            local safe=(x+500)^2+(z-600)^2<28.5^2\n            if spell==41114 then safe=safe and math.cos(a-p.h)<-math.cos(math.pi/5) end\n            if safe then\n                local score=-(x+500)*0.1\n                for _,e in pairs(party) do\n                    if e.alive and (e.pos.x-x)^2+(e.pos.z-z)^2<36 then score=score+1 end\n                end\n                if score>bestScore then bestScore,bestX,bestZ=score,x,z end\n            end\n        end\n        if bestX then s.safePoint(ms,bestX,p.y,bestZ,2) end\n    end\nend\n\nlocal id=eventArgs.spellID\nlocal cid=eventArgs.entityContentID\nlocal boss\nif cid==13351 or cid==13352 then boss=1\nelseif cid==13662 then boss=2\nelseif cid==13641 or cid==13642 or cid==13643 or cid==13644 or cid==13645 then boss=3\nelse self.used=true; return end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e then return end\nlocal p=e.pos\n-- Argus channelTimeMax in native logs is 0.3s shorter than the actual cast.\nlocal ms=math.max(1,(eventArgs.channelTimeMax+0.3)*1000)\nlocal deadline=Now()+ms\nlocal s=data.jacobJeunoDraws\nif boss==1 then\n    if id==40946 then\n        s.exaUntil=Now()+35000\n    elseif id>=40939 and id<=40941 then\n        local r=(id-40938)*9\n        s.drawCircle(ms,p,r,e.id,1)\n        s.knuckle={x=p.x,y=p.y,z=p.z,radius=r,deadline=deadline}\n        AnyoneCore.addTimedWorldText(ms,\"OUT > IN\",{x=p.x,y=p.y+2,z=p.z},0xFFFFFFFF,true,1.7)\n    elseif id>=40942 and id<=40944 then\n        local r=(id-40941)*9\n        -- Moogle's telegraph for this ring is blacklisted: show it for the whole cast.\n        s.own(s.aoe:addTimedDonut(ms,p.x,p.y,p.z,r,60),deadline,e.id,1)\n    elseif id==40963 then\n        local t=TensorCore.mGetEntity(eventArgs.targetID)\n        if t then\n            local old=s.holy[t.id]\n            if old then s.remove(old.uuid) end\n            s.holy[t.id]={id=t.id,deadline=deadline,color=true,uuid=s.own(s.red:addTimedCircleOnEnt(ms,t.id,6,0,false,true),deadline,e.id,1)}\n            s.holyUntil=math.max(s.holyUntil,deadline)\n        end\n    elseif id>=40950 and id<=40952 then\n        s.remove(s.upperLine); s.remove(s.upperCircle)\n        s.upperDistance=(id-40949)*12\n        s.upperUntil=deadline+1400\n        s.upperCaster=e.id\n        s.upperLine=nil; s.upperCircle=nil; s.upperColor=nil\n    elseif id==40955 then\n        s.timer(ms,p.x,p.y,p.z)\n    end\nelseif boss==2 then\n    if id==41114 then\n        s.own(s.aoe:addTimedCone(ms,p.x,p.y,p.z,80,math.pi*1.5,p.h),deadline,e.id,2)\n        s.timer(ms,p.x,p.y,p.z)\n        s.fafnirSpot(ms,id,p)\n    elseif id==41116 then\n        s.drawCircle(ms,p,24,e.id,2)\n        s.timer(ms,p.x,p.y,p.z)\n        -- subtractive green: the arena outside this circle\n        s.fafnirRing={x=p.x,y=p.y,z=p.z,hole=24,deadline=deadline}\n    elseif id==40814 then\n        -- The six 60-degree sectors form the initial 16..30 donut.\n        -- Moogle already shows the individual lingering sectors; do not overdraw them.\n        ms=ms+1200\n        s.timer(ms,p.x,p.y,p.z)\n        s.fafnirSpot(ms,id,p)\n    elseif id==40846 or id==40848 then\n        local width=id==40846 and 20 or 25\n        s.own(s.aoe:addTimedRect(ms,p.x,p.y,p.z,70,width,p.h),deadline,e.id,2)\n        s.timer(ms,p.x+18*math.sin(p.h),p.y,p.z+18*math.cos(p.h))\n    elseif id==40850 then\n        s.timer(ms,p.x,p.y,p.z)\n    end\nelseif id==41084 then\n    -- Concerted Dissolution: timer at the helper; existing telegraph keeps its styling.\n    s.timer(ms,p.x,p.y,p.z)\nend\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -6398,7 +7489,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "-- Pull-scoped helpers. BossMod geometry; native 1248 logs corroborate IDs/timing.\nif data.jacobJeunoDraws == nil then\n    local s = { shapes = {}, holy = {}, exa = {}, holyUntil = 0, upperUntil = 0, assignmentUntil = 0 }\n    data.jacobJeunoDraws = s\n    s.green = TensorCore.getCachedDrawer(0x3000FF00, nil, 0x5000FF00, 0xFF00FF00, 2)\n    s.red = TensorCore.getCachedDrawer(0x300000FF, nil, 0x500000FF, 0xFF0000FF, 2)\n    s.line = TensorCore.getStaticDrawer(0xFF00FF00, 2)\n    s.aoe = TensorCore.getMoogleDrawer()\n    function s.own(uuid, deadline, caster, boss)\n        if uuid then s.shapes[uuid] = {deadline = deadline, caster = caster, boss = boss} end\n        return uuid\n    end\n    function s.remove(uuid)\n        if uuid then Argus.deleteTimedShape(uuid); s.shapes[uuid] = nil end\n    end\n    function s.cleanup()\n        for uuid in pairs(s.shapes) do Argus.deleteTimedShape(uuid) end\n        s.shapes = {}; s.holy = {}; s.exa = {}\n        s.holyUntil = 0; s.upperUntil = 0; s.assignmentUntil = 0; s.exaUntil = 0\n    end\n    function s.timer(ms, x, y, z)\n        AnyoneCore.addWorldTextCountdown(ms, {x=x,y=y+1,z=z}, 0xFFFFFFFF, true, 1.3)\n    end\n    function s.drawCircle(ms, p, radius, caster, boss)\n        return s.own(s.aoe:addTimedCircle(ms,p.x,p.y,p.z,radius),Now()+ms,caster,boss)\n    end\n    function s.safePoint(ms, x, y, z, boss)\n        s.own(s.green:addTimedCircle(ms,x,y,z,1,0,false,true),Now()+ms,nil,boss)\n    end\n    function s.inside(poly,dx,dz)\n            local yes=false\n            local j=#poly\n            for i=1,#poly do\n                local a,b=poly[i],poly[j]\n                if (a[2]>dz)~=(b[2]>dz) and dx<(b[1]-a[1])*(dz-a[2])/(b[2]-a[2])+a[1] then yes=not yes end\n                j=i\n            end\n            return yes\n    end\n    function s.upperUnsafe(x,z)\n        local dx,dz=x-800,z-400\n        if math.abs(dx)>35 or math.abs(dz)>35 then return true end\n        if not s.thornsUntil or Now()>s.thornsUntil then return false end\n        if s.thornsRotated then dx,dz=-dz,dx end\n        return s.inside(s.thornOuter,dx,dz) and not s.inside(s.thornHole,dx,dz)\n    end\n    s.thornOuter={{-35,35},{-35,-5},{-25,-5},{-25,-25},{5,-25},{5,-35},{35,-35},{35,5},{25,5},{25,25},{-5,25},{-5,35}}\n    s.thornHole={{-15,15},{-15,-5},{-5,-5},{-5,-15},{15,-15},{15,5},{5,5},{5,15}}\n    -- Pick a safe one-yalm position circle; party proximity only breaks safe-position ties.\n    function s.fafnirSpot(ms, spell, p)\n        local party=TensorCore.getEntityGroupList(\"Party\")\n        local bestScore,bestX,bestZ=-math.huge,nil,nil\n        for i=0,71 do\n            local a=i*math.pi/36\n            local radius=spell==41116 and 27 or 11\n            local x,z=p.x+radius*math.sin(a),p.z+radius*math.cos(a)\n            local safe=(x+500)^2+(z-600)^2<28.5^2\n            if spell==41114 then safe=safe and math.cos(a-p.h)<-math.cos(math.pi/5) end\n            if safe then\n                local score=-(x+500)*0.1\n                for _,e in pairs(party) do\n                    if e.alive and (e.pos.x-x)^2+(e.pos.z-z)^2<36 then score=score+1 end\n                end\n                if score>bestScore then bestScore,bestX,bestZ=score,x,z end\n            end\n        end\n        if bestX then s.safePoint(ms,bestX,p.y,bestZ,2) end\n    end\nend\n\nlocal id=eventArgs.spellID\nlocal cid=eventArgs.entityContentID\nlocal boss\nif cid==13351 or cid==13352 then boss=1\nelseif cid==13662 then boss=2\nelseif cid==13641 or cid==13642 or cid==13643 or cid==13644 or cid==13645 then boss=3\nelse self.used=true; return end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e then return end\nlocal p=e.pos\n-- Argus channelTimeMax in native logs is 0.3s shorter than the actual cast.\nlocal ms=math.max(1,(eventArgs.channelTimeMax+0.3)*1000)\nlocal deadline=Now()+ms\nlocal s=data.jacobJeunoDraws\nif boss==1 then\n    if id==40946 then\n        s.exaUntil=Now()+35000\n    elseif id>=40939 and id<=40941 then\n        local r=(id-40938)*9\n        s.drawCircle(ms,p,r,e.id,1)\n        s.knuckle={x=p.x,y=p.y,z=p.z,radius=r,deadline=deadline}\n        AnyoneCore.addTimedWorldText(ms,\"OUT > IN\",{x=p.x,y=p.y+2,z=p.z},0xFFFFFFFF,true,1.7)\n    elseif id>=40942 and id<=40944 then\n        local r=(id-40941)*9\n        -- Donut starts only after the first hit. Keep the first safe region readable.\n        s.own(s.aoe:addTimedDonut(ms,p.x,p.y,p.z,r,60,math.max(0,ms-1500)),deadline,e.id,1)\n    elseif id==40963 then\n        local t=TensorCore.mGetEntity(eventArgs.targetID)\n        if t then\n            local old=s.holy[t.id]\n            if old then s.remove(old.uuid) end\n            s.holy[t.id]={id=t.id,deadline=deadline,color=true,uuid=s.own(s.red:addTimedCircleOnEnt(ms,t.id,6,0,false,true),deadline,e.id,1)}\n            s.holyUntil=math.max(s.holyUntil,deadline)\n        end\n    elseif id>=40950 and id<=40952 then\n        s.remove(s.upperLine); s.remove(s.upperCircle)\n        s.upperDistance=(id-40949)*12\n        s.upperUntil=deadline+1400\n        s.upperCaster=e.id\n        s.upperLine=nil; s.upperCircle=nil; s.upperColor=nil\n    elseif id==40955 then\n        s.timer(ms,p.x,p.y,p.z)\n    end\nelseif boss==2 then\n    if id==41114 then\n        s.own(s.aoe:addTimedCone(ms,p.x,p.y,p.z,80,math.pi*1.5,p.h),deadline,e.id,2)\n        s.timer(ms,p.x,p.y,p.z)\n        s.fafnirSpot(ms,id,p)\n    elseif id==41116 then\n        s.drawCircle(ms,p,24,e.id,2)\n        s.timer(ms,p.x,p.y,p.z)\n        s.fafnirSpot(ms,id,p)\n    elseif id==40814 then\n        -- The six 60-degree sectors form the initial 16..30 donut.\n        -- Moogle already shows the individual lingering sectors; do not overdraw them.\n        ms=ms+1200\n        s.timer(ms,p.x,p.y,p.z)\n        s.fafnirSpot(ms,id,p)\n    elseif id==40846 or id==40848 then\n        local width=id==40846 and 20 or 25\n        s.own(s.aoe:addTimedRect(ms,p.x,p.y,p.z,70,width,p.h),deadline,e.id,2)\n        s.timer(ms,p.x+18*math.sin(p.h),p.y,p.z+18*math.cos(p.h))\n    elseif id==40850 then\n        s.timer(ms,p.x,p.y,p.z)\n    end\nelseif id==41084 then\n    -- Concerted Dissolution: timer at the helper; existing telegraph keeps its styling.\n    s.timer(ms,p.x,p.y,p.z)\nend\nself.used=true\n",
+						actionLua = "-- Pull-scoped helpers. BossMod geometry; native 1248 logs corroborate IDs/timing.\nif data.jacobJeunoDraws == nil then\n    local s = { shapes = {}, holy = {}, exa = {}, holyUntil = 0, upperUntil = 0, assignmentUntil = 0 }\n    data.jacobJeunoDraws = s\n    s.green = TensorCore.getCachedDrawer(0x3000FF00, nil, 0x5000FF00, 0xFF00FF00, 2)\n    s.red = TensorCore.getCachedDrawer(0x300000FF, nil, 0x500000FF, 0xFF0000FF, 2)\n    s.line = TensorCore.getStaticDrawer(0xFF00FF00, 2)\n    s.aoe = TensorCore.getMoogleDrawer()\n    function s.own(uuid, deadline, caster, boss)\n        if uuid then s.shapes[uuid] = {deadline = deadline, caster = caster, boss = boss} end\n        return uuid\n    end\n    function s.remove(uuid)\n        if uuid then Argus.deleteTimedShape(uuid); s.shapes[uuid] = nil end\n    end\n    function s.cleanup()\n        for uuid in pairs(s.shapes) do Argus.deleteTimedShape(uuid) end\n        s.shapes = {}; s.holy = {}; s.exa = {}\n        s.holyUntil = 0; s.upperUntil = 0; s.assignmentUntil = 0; s.exaUntil = 0\n    end\n    function s.timer(ms, x, y, z)\n        AnyoneCore.addWorldTextCountdown(ms, {x=x,y=y+1,z=z}, 0xFFFFFFFF, true, 1.3)\n    end\n    function s.drawCircle(ms, p, radius, caster, boss)\n        return s.own(s.aoe:addTimedCircle(ms,p.x,p.y,p.z,radius),Now()+ms,caster,boss)\n    end\n    function s.safePoint(ms, x, y, z, boss)\n        s.own(s.green:addTimedCircle(ms,x,y,z,1,0,false,true),Now()+ms,nil,boss)\n    end\n    function s.inside(poly,dx,dz)\n            local yes=false\n            local j=#poly\n            for i=1,#poly do\n                local a,b=poly[i],poly[j]\n                if (a[2]>dz)~=(b[2]>dz) and dx<(b[1]-a[1])*(dz-a[2])/(b[2]-a[2])+a[1] then yes=not yes end\n                j=i\n            end\n            return yes\n    end\n    function s.upperUnsafe(x,z)\n        local dx,dz=x-800,z-400\n        if math.abs(dx)>35 or math.abs(dz)>35 then return true end\n        if not s.thornsUntil or Now()>s.thornsUntil then return false end\n        if s.thornsRotated then dx,dz=-dz,dx end\n        return s.inside(s.thornOuter,dx,dz) and not s.inside(s.thornHole,dx,dz)\n    end\n    s.thornOuter={{-35,35},{-35,-5},{-25,-5},{-25,-25},{5,-25},{5,-35},{35,-35},{35,5},{25,5},{25,25},{-5,25},{-5,35}}\n    s.thornHole={{-15,15},{-15,-5},{-5,-5},{-5,-15},{15,-15},{15,5},{5,5},{5,15}}\n    -- Pick a safe one-yalm position circle; party proximity only breaks safe-position ties.\n    function s.fafnirSpot(ms, spell, p)\n        local party=TensorCore.getEntityGroupList(\"Party\")\n        local bestScore,bestX,bestZ=-math.huge,nil,nil\n        for i=0,71 do\n            local a=i*math.pi/36\n            local radius=spell==41116 and 27 or 11\n            local x,z=p.x+radius*math.sin(a),p.z+radius*math.cos(a)\n            local safe=(x+500)^2+(z-600)^2<28.5^2\n            if spell==41114 then safe=safe and math.cos(a-p.h)<-math.cos(math.pi/5) end\n            if safe then\n                local score=-(x+500)*0.1\n                for _,e in pairs(party) do\n                    if e.alive and (e.pos.x-x)^2+(e.pos.z-z)^2<36 then score=score+1 end\n                end\n                if score>bestScore then bestScore,bestX,bestZ=score,x,z end\n            end\n        end\n        if bestX then s.safePoint(ms,bestX,p.y,bestZ,2) end\n    end\nend\n\nlocal id=eventArgs.spellID\nlocal cid=eventArgs.entityContentID\nlocal boss\nif cid==13351 or cid==13352 then boss=1\nelseif cid==13662 then boss=2\nelseif cid==13641 or cid==13642 or cid==13643 or cid==13644 or cid==13645 then boss=3\nelse self.used=true; return end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e then return end\nlocal p=e.pos\n-- Argus channelTimeMax in native logs is 0.3s shorter than the actual cast.\nlocal ms=math.max(1,(eventArgs.channelTimeMax+0.3)*1000)\nlocal deadline=Now()+ms\nlocal s=data.jacobJeunoDraws\nif boss==1 then\n    if id==40946 then\n        s.exaUntil=Now()+35000\n    elseif id>=40939 and id<=40941 then\n        local r=(id-40938)*9\n        s.drawCircle(ms,p,r,e.id,1)\n        s.knuckle={x=p.x,y=p.y,z=p.z,radius=r,deadline=deadline}\n        AnyoneCore.addTimedWorldText(ms,\"OUT > IN\",{x=p.x,y=p.y+2,z=p.z},0xFFFFFFFF,true,1.7)\n    elseif id>=40942 and id<=40944 then\n        local r=(id-40941)*9\n        -- Moogle's telegraph for this ring is blacklisted: show it for the whole cast.\n        s.own(s.aoe:addTimedDonut(ms,p.x,p.y,p.z,r,60),deadline,e.id,1)\n    elseif id==40963 then\n        local t=TensorCore.mGetEntity(eventArgs.targetID)\n        if t then\n            local old=s.holy[t.id]\n            if old then s.remove(old.uuid) end\n            s.holy[t.id]={id=t.id,deadline=deadline,color=true,uuid=s.own(s.red:addTimedCircleOnEnt(ms,t.id,6,0,false,true),deadline,e.id,1)}\n            s.holyUntil=math.max(s.holyUntil,deadline)\n        end\n    elseif id>=40950 and id<=40952 then\n        s.remove(s.upperLine); s.remove(s.upperCircle)\n        s.upperDistance=(id-40949)*12\n        s.upperUntil=deadline+1400\n        s.upperCaster=e.id\n        s.upperLine=nil; s.upperCircle=nil; s.upperColor=nil\n    elseif id==40955 then\n        s.timer(ms,p.x,p.y,p.z)\n    end\nelseif boss==2 then\n    if id==41114 then\n        s.own(s.aoe:addTimedCone(ms,p.x,p.y,p.z,80,math.pi*1.5,p.h),deadline,e.id,2)\n        s.timer(ms,p.x,p.y,p.z)\n        s.fafnirSpot(ms,id,p)\n    elseif id==41116 then\n        s.drawCircle(ms,p,24,e.id,2)\n        s.timer(ms,p.x,p.y,p.z)\n        -- subtractive green: the arena outside this circle\n        s.fafnirRing={x=p.x,y=p.y,z=p.z,hole=24,deadline=deadline}\n    elseif id==40814 then\n        -- The six 60-degree sectors form the initial 16..30 donut.\n        -- Moogle already shows the individual lingering sectors; do not overdraw them.\n        ms=ms+1200\n        s.timer(ms,p.x,p.y,p.z)\n        s.fafnirSpot(ms,id,p)\n    elseif id==40846 or id==40848 then\n        local width=id==40846 and 20 or 25\n        s.own(s.aoe:addTimedRect(ms,p.x,p.y,p.z,70,width,p.h),deadline,e.id,2)\n        s.timer(ms,p.x+18*math.sin(p.h),p.y,p.z+18*math.cos(p.h))\n    elseif id==40850 then\n        s.timer(ms,p.x,p.y,p.z)\n    end\nelseif id==41084 then\n    -- Concerted Dissolution: timer at the helper; existing telegraph keeps its styling.\n    s.timer(ms,p.x,p.y,p.z)\nend\nself.used=true\n",
 						conditions = 
 						{
 							
@@ -6862,6 +7953,661 @@ local tbl =
 			uuid = "fde2454e-eafe-b95a-96cb-deb7f842b128",
 		},
 		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Jeuno",
+			name = "Shadow Lord",
+			uuid = "a2f935f4-6ed6-19b3-9b7a-63dcdfc0d042",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Jeuno/Shadow Lord",
+			name = "Draws",
+			uuid = "a409639a-cb68-e694-902a-6f4a7e0f233c",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\n-- the game data gives radius 12 for both halves; the large one is far longer (BossMod 90)\nlocal e=eventArgs\nlocal radius=(e.aoeID==40775 or e.aoeID==40777) and 12 or 90\nTensorCore.getMoogleDrawer():addTimedCone((e.duration+0.3)*1000,e.x,e.y,e.z,radius,math.pi,e.heading)",
+						conditions = 
+						{
+							
+							{
+								"f0b5d39a-82d2-9648-8fc4-380604b20294",
+								true,
+							},
+							
+							{
+								"265e8d6c-fc53-422f-994c-2f3dc99bb2e8",
+								true,
+							},
+						},
+						name = "Draw half circle",
+						uuid = "9b24553e-be28-a2c2-bfd0-5e64917c5136",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1248,
+						name = "Jeuno only",
+						uuid = "f0b5d39a-82d2-9648-8fc4-380604b20294",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local id=eventArgs.aoeID\nreturn id==40774 or id==40775 or id==40776 or id==40777",
+						dequeueIfLuaFalse = true,
+						name = "Implosion halves",
+						uuid = "265e8d6c-fc53-422f-994c-2f3dc99bb2e8",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Shadow Lord/Draws",
+			eventType = 18,
+			name = "[Shadow Lord draws] Implosion halves",
+			timeout = 2,
+			uuid = "df59de38-045c-5dbc-9626-978b582e33ac",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal id=eventArgs.spellID\nlocal now=Now()\nlocal st=data.jacobGiga\nif not st or now-st.at>3000 then st={at=now} data.jacobGiga=st end\nlocal drawer=TensorCore.getMoogleDrawer()\nif id>=42020 and id<=42023 then\n -- Nightfall visual: third cleave goes front (42020, 42022) or back (42021, 42023)\n st.third=(id==42020 or id==42022) and 0 or math.pi\nelse\n local e=TensorCore.mGetEntity(eventArgs.entityID)\n if not e or not e.pos then return end\n local p=e.pos\n local left=(id==40768 or id==42027)\n local s=left and -1 or 1\n local first=p.h\n local base=first+s*math.rad(67.5)\n local t1=(eventArgs.channelTimeMax+0.3)*1000\n drawer:addTimedCone(t1,p.x,p.y,p.z,60,math.rad(225),first)\n drawer:addTimedCone(2050,p.x,p.y,p.z,60,math.rad(270),base+s*math.pi/2,t1)\n if id==42027 or id==42029 then st.cleave={x=p.x,y=p.y,z=p.z,base=base,at=now,delay=t1+2050} end\nend\nlocal c=st.cleave\nif c and st.third then\n drawer:addTimedCone(2100,c.x,c.y,c.z,60,math.rad(210),c.base+st.third,c.delay-(now-c.at))\n data.jacobGiga=nil\nend",
+						conditions = 
+						{
+							
+							{
+								"09ef025a-2bef-9f65-a5f9-6c545d89a3f5",
+								true,
+							},
+							
+							{
+								"421ea243-8aa5-bf8e-a52e-58e6197feabd",
+								true,
+							},
+						},
+						name = "Draw cleaves one at a time",
+						uuid = "3f9fe747-8b37-f516-aa4b-40f646009c71",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1248,
+						name = "Jeuno only",
+						uuid = "09ef025a-2bef-9f65-a5f9-6c545d89a3f5",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 3,
+						eventArgType = 2,
+						name = "First cleave or Nightfall visual",
+						spellIDList = 
+						{
+							40768,
+							40770,
+							42027,
+							42029,
+							42020,
+							42021,
+							42022,
+							42023,
+						},
+						uuid = "421ea243-8aa5-bf8e-a52e-58e6197feabd",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Shadow Lord/Draws",
+			eventType = 3,
+			name = "[Shadow Lord draws] Giga Slash order",
+			timeout = 2,
+			uuid = "6992d723-d33b-9c93-abe3-86e2889d1b90",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e or not e.pos then return end\nlocal st=data.jacobSigils\nif not st then st={list={},activeUntil=0} data.jacobSigils=st end\n-- BossMod: resolves 9.6s after the preview cast ends\nlocal hit=Now()+(eventArgs.channelTimeMax+0.3+9.6)*1000\nst.list[#st.list+1]={x=e.pos.x,y=e.pos.y,z=e.pos.z,hit=hit}\nst.activeUntil=math.max(st.activeUntil,hit)",
+						conditions = 
+						{
+							
+							{
+								"fcf21cee-6d20-c94a-945c-cff6f437a0c1",
+								true,
+							},
+							
+							{
+								"1e2efcee-8fc5-abcb-a960-ffddf0c380a6",
+								true,
+							},
+						},
+						name = "Store sigil",
+						uuid = "66828f7e-2361-2db4-a900-e8d6d56cfa35",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1248,
+						name = "Jeuno only",
+						uuid = "fcf21cee-6d20-c94a-945c-cff6f437a0c1",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 3,
+						eventArgType = 2,
+						name = "Binding Sigil preview",
+						spellIDList = 
+						{
+							41513,
+						},
+						uuid = "1e2efcee-8fc5-abcb-a960-ffddf0c380a6",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Shadow Lord/Draws",
+			eventType = 3,
+			name = "[Shadow Lord draws] Binding Sigil capture",
+			timeout = 2,
+			uuid = "8826e7ab-b73a-63fa-9232-e69f1940d75b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal st=data.jacobSigils\nif not st then return end\nlocal now=Now()\nlocal first\nfor i=#st.list,1,-1 do\n local s=st.list[i]\n if now>=s.hit then table.remove(st.list,i)\n elseif not first or s.hit<first then first=s.hit end\nend\nif not first then return end\nlocal drawer=TensorCore.getMoogleDrawer()\nfor _,s in ipairs(st.list) do\n if s.hit<first+1000 then drawer:addCircle(s.x,s.y+0.05,s.z,9) end\nend",
+						conditions = 
+						{
+							
+							{
+								"e674529d-b076-b0a8-901d-5ac198a1c3fa",
+								true,
+							},
+							
+							{
+								"61c0d3c9-2089-54d9-9954-3cf182309a34",
+								true,
+							},
+						},
+						name = "Draw next sigils radius 9",
+						uuid = "73e73347-f330-7e1b-9bba-88237eb4a37f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1248,
+						name = "Jeuno only",
+						uuid = "e674529d-b076-b0a8-901d-5ac198a1c3fa",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local st=data.jacobSigils\nreturn not not (st and Now()<st.activeUntil)",
+						dequeueIfLuaFalse = true,
+						name = "Sigils pending",
+						uuid = "61c0d3c9-2089-54d9-9954-3cf182309a34",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Shadow Lord/Draws",
+			eventType = 12,
+			name = "[Shadow Lord draws] Binding Sigil circles",
+			timeout = 1,
+			uuid = "0f6c16cf-68d0-cccf-a7bb-9586b7360af0",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e or not e.pos then return end\nlocal p=e.pos\nlocal st=data.jacobUmbra\nif not st then st={list={},activeUntil=0} data.jacobUmbra=st end\n-- waves start 30 yalms ahead and step 5 yalms to both sides, first hit 2.27s later, then every 1.02s\nlocal ox,oz=p.x+30*math.sin(p.h),p.z+30*math.cos(p.h)\nlocal now=Now()\nfor _,h in ipairs({p.h+math.pi/2,p.h-math.pi/2}) do\n for k=1,5 do\n  local hit=now+2270+(k-1)*1020\n  st.list[#st.list+1]={x=ox+5*k*math.sin(h),y=p.y,z=oz+5*k*math.cos(h),h=h,k=k,line=tostring(now)..tostring(h),hit=hit}\n  st.activeUntil=math.max(st.activeUntil,hit)\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"07f5f3c4-29a7-98a2-acc3-43be66be5c4c",
+								true,
+							},
+							
+							{
+								"b8442116-14dc-1d2e-b8cf-55f37610a76c",
+								true,
+							},
+						},
+						name = "Predict five waves each side",
+						uuid = "f9657934-bbc5-3ab4-8e56-b2d846dedfdd",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1248,
+						name = "Jeuno only",
+						uuid = "07f5f3c4-29a7-98a2-acc3-43be66be5c4c",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 3,
+						eventArgType = 2,
+						name = "Umbra Smash lines",
+						spellIDList = 
+						{
+							40788,
+							40797,
+							40798,
+							40799,
+							40800,
+						},
+						uuid = "b8442116-14dc-1d2e-b8cf-55f37610a76c",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Shadow Lord/Draws",
+			eventType = 2,
+			name = "[Shadow Lord draws] Umbra Smash waves capture",
+			timeout = 2,
+			uuid = "90f1a878-99a1-6284-8440-7c7c1aca9fcf",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal st=data.jacobUmbra\nif not st then return end\nlocal now=Now()\nfor i=#st.list,1,-1 do\n if now>=st.list[i].hit then table.remove(st.list,i) end\nend\n-- lowest pending step of each line, plus the one after it\nlocal low={}\nfor _,w in ipairs(st.list) do\n if not low[w.line] or w.k<low[w.line] then low[w.line]=w.k end\nend\nlocal drawer=TensorCore.getMoogleDrawer()\nfor _,w in ipairs(st.list) do\n if w.k<=low[w.line]+1 then drawer:addRect(w.x,w.y+0.05,w.z,5,60,w.h) end\nend",
+						conditions = 
+						{
+							
+							{
+								"696024ca-2b3d-7331-8d5d-20e06578858f",
+								true,
+							},
+							
+							{
+								"fede9973-cc8f-62af-9cd5-961177f3614b",
+								true,
+							},
+						},
+						name = "Draw next two steps",
+						uuid = "1883f49e-0ac5-9919-8d1a-2f5342e2faf5",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1248,
+						name = "Jeuno only",
+						uuid = "696024ca-2b3d-7331-8d5d-20e06578858f",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local st=data.jacobUmbra\nreturn not not (st and Now()<st.activeUntil)",
+						dequeueIfLuaFalse = true,
+						name = "Waves pending",
+						uuid = "fede9973-cc8f-62af-9cd5-961177f3614b",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Shadow Lord/Draws",
+			eventType = 12,
+			name = "[Shadow Lord draws] Umbra Smash waves",
+			timeout = 1,
+			uuid = "f7e3ed43-0c3d-adbd-bcbc-454fc76bccf7",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nif not e or not e.pos then return end\nlocal st=data.jacobNebula\nif not st then st={list={},activeUntil=0} data.jacobNebula=st end\nlocal hit=Now()+(eventArgs.channelTimeMax+0.3)*1000\nst.list[#st.list+1]={x=e.pos.x,z=e.pos.z,h=e.pos.h,hit=hit}\nst.activeUntil=math.max(st.activeUntil,hit)",
+						conditions = 
+						{
+							
+							{
+								"30c98996-1348-0c5e-a76e-c16382fdbe82",
+								true,
+							},
+							
+							{
+								"6f3d09a8-c234-33de-a5fb-d5ca2d0e77d3",
+								true,
+							},
+						},
+						name = "Store knockback line",
+						uuid = "a7eafbe4-29d6-89c7-9ebf-6435267380ee",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1248,
+						name = "Jeuno only",
+						uuid = "30c98996-1348-0c5e-a76e-c16382fdbe82",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgOptionType = 3,
+						eventArgType = 2,
+						name = "Dark Nebula knockback",
+						spellIDList = 
+						{
+							41532,
+							40785,
+						},
+						uuid = "6f3d09a8-c234-33de-a5fb-d5ca2d0e77d3",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Shadow Lord/Draws",
+			eventType = 3,
+			name = "[Shadow Lord draws] Dark Nebula capture",
+			timeout = 2,
+			uuid = "bac85150-0f3f-1ead-b0ab-86235e715db2",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal st=data.jacobNebula\nif not st then return end\nlocal player=TensorCore.mGetPlayer()\nif not player or not player.alive or not player.pos then return end\nlocal now=Now()\nlocal n\nfor i=#st.list,1,-1 do\n local c=st.list[i]\n if now>=c.hit then table.remove(st.list,i)\n elseif not n or c.hit<n.hit then n=c end\nend\nif not n then return end\nlocal p=player.pos\n-- pushed 20 yalms sideways, away from the caster's facing line\nlocal side=(p.x-n.x)*math.cos(n.h)-(p.z-n.z)*math.sin(n.h)\nlocal dir=n.h+(side>=0 and math.pi/2 or -math.pi/2)\nlocal x,z=p.x+20*math.sin(dir),p.z+20*math.cos(dir)\n-- arena centre 150,800 radius 30\nlocal safe=(x-150)^2+(z-800)^2<=30^2\nlocal drawer=TensorCore.getStaticDrawer(safe and 0xC000FF00 or 0xC00000FF,2)\ndrawer:addLine(p.x,p.y+0.15,p.z,x,p.y+0.15,z,3,5)\ndrawer:addCircle(x,p.y+0.05,z,0.8)",
+						conditions = 
+						{
+							
+							{
+								"a3f2e5b9-101e-ce05-a235-61f870c5332a",
+								true,
+							},
+							
+							{
+								"e79641e9-6260-822b-bf94-f88eb48dbabb",
+								true,
+							},
+						},
+						name = "Draw 20 yalm landing line",
+						uuid = "2ae9a1fd-653c-ab04-b789-fd6946d5d8d0",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1248,
+						name = "Jeuno only",
+						uuid = "a3f2e5b9-101e-ce05-a235-61f870c5332a",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local st=data.jacobNebula\nreturn not not (st and Now()<st.activeUntil)",
+						dequeueIfLuaFalse = true,
+						name = "Knockback pending",
+						uuid = "e79641e9-6260-822b-bf94-f88eb48dbabb",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Shadow Lord/Draws",
+			eventType = 12,
+			name = "[Shadow Lord draws] Dark Nebula landing arrow",
+			timeout = 1,
+			uuid = "2d674f33-b329-11d1-ad09-6dea1f5a0f76",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal ms=(e.duration+0.3)*1000\nlocal drawer=TensorCore.getMoogleDrawer()\nif e.aoeID==40780 then\n drawer:addTimedCircle(ms,e.x,e.y,e.z,8)\n return\nend\n-- Battlements: only the 23x23 square (turned by the AOE heading) is safe; draw around it\nlocal half,reach=11.5,40\nlocal function edge(h,length,width)\n drawer:addTimedRect(ms,e.x+half*math.sin(h),e.y,e.z+half*math.cos(h),length,width,h)\nend\nedge(e.heading,reach-half,reach*2)\nedge(e.heading+math.pi,reach-half,reach*2)\nedge(e.heading+math.pi/2,reach-half,half*2)\nedge(e.heading-math.pi/2,reach-half,half*2)",
+						conditions = 
+						{
+							
+							{
+								"968e58de-b435-77e6-94b4-d7f106ae0b03",
+								true,
+							},
+							
+							{
+								"b5dfad05-2589-9d1a-aba8-b00acbdebf60",
+								true,
+							},
+						},
+						name = "Draw circle or outside square",
+						uuid = "09f846ce-e81d-fe7b-ba59-0817258556a1",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 1248,
+						name = "Jeuno only",
+						uuid = "968e58de-b435-77e6-94b4-d7f106ae0b03",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local id=eventArgs.aoeID\nreturn id==40780 or id==40783",
+						dequeueIfLuaFalse = true,
+						name = "Burning Court or Battlements",
+						uuid = "b5dfad05-2589-9d1a-aba8-b00acbdebf60",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Jeuno/Shadow Lord/Draws",
+			eventType = 18,
+			name = "[Shadow Lord draws] Burning Battlements and Court",
+			timeout = 2,
+			uuid = "c2afbe44-e8c8-42e6-a667-b7279e600bd4",
+			version = 2,
+		},
 	},
 	
 	{

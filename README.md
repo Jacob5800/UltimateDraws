@@ -244,6 +244,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Big Jeuno update: new Ark Angels and Shadow Lord draws (including Rampage, Havoc Spiral, knockback landing lines, Giga Slash order, Implosion and Umbra Smash waves) that replace some Moogle telegraphs, a run-away callout when a clone chases you, green safe areas for Offensive Posture, an earlier Brittle Impact ring, a Samurai DoT blacklist for Darters, and an optional Black Mage dash out of Spike Flail (off by default, new Jeuno settings window). (27-11-2026)
+
 - Fafnir in Jeuno: fixed the Spike Flail cone pointing the wrong way, added green safe areas for Spike Flail and for the Hurricane Wing and Great Whirlwind sequence, and the unsafe ring during Offensive Posture now shows early. (27-11-2026)
 
 - Prishe's green knockback landing line in Jeuno is now slightly thicker. (27-11-2026)
@@ -261,8 +263,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Hobbes now shows a countdown after the opening Variable Combat Test hit and previews the final wave until the confirmed telegraphs arrive. (27-11-2026)
 
 - Added Hobbes draws in The Copied Factory: Variable Combat Test cones, circles and rings, the Impact circle, the Towerfall lanes, and an early warning of the Fire-resistance Test flame area. (27-11-2026)
-
-- The energy orb rings in The Copied Factory (first boss and trash flyers) are now slightly smaller, with a radius of 1.8 instead of 2. (27-11-2026)
 
 ### Trials
 
