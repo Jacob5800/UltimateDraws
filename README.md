@@ -112,6 +112,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Dungeons
 
+- Added Pharos Sirius (Hard), Halatali (Hard) and The Keeper of the Lake to highleveldungeons: attack draws, boss targeting, combat helper setup and AutoSim kill-time estimates per boss. (27-11-2026)
+
 - levelling dungeons reactions for other duties no longer wait in the queue. (27-11-2026)
 
 - levelling dungeons and highleveldungeons: duty setup and cooldown holds now run only when there is something to do, reducing console spam. (27-11-2026)
@@ -129,8 +131,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added The Sunken Temple of Qarn (Hard) to highleveldungeons: boss cast draws, walking mummy lane gaps, boss targeting and a Ruins Crawler DoT blacklist. The optional Paglth'an Surecast reaction was removed. (27-11-2026)
 
 - In levelling dungeons, the Origenics DoT blacklists for the Deceiver sentries and Superfluity now apply once instead of re-running constantly. (27-11-2026)
-
-- Dungeon LOL only disables the Prepull Helper in supported dungeons and restores it on exit if it was previously enabled. (26-11-2026)
 
 ### DSR
 

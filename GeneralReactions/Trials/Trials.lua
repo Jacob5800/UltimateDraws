@@ -9571,7 +9571,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\nlocal A=TensorCore.API.TensorACR\nif not A or not A.setLockFaceHeading then return end\nlocal want=data.kierArrowWant\nif want then\n    A.setLockFaceHeading(want)\n    A.setHardLockFace(true)\n    A.toggleLockFace(true)\nelseif TrialsKierArrowLock~=nil then\n    A.toggleLockFace(false)\n    A.setHardLockFace(false)\nend\nTrialsKierArrowLock=want",
+						actionLua = "self.used=true\nlocal A=TensorCore.API.TensorACR\nlocal want=data.kierArrowWant\n-- record first, so a missing lock face API cannot make this run every update\nlocal owned=TrialsKierArrowLock~=nil\nTrialsKierArrowLock=want\nif not A or not A.setLockFaceHeading then return end\nif want then\n    A.setLockFaceHeading(want)\n    A.setHardLockFace(true)\n    A.toggleLockFace(true)\nelseif owned then\n    A.toggleLockFace(false)\n    A.setHardLockFace(false)\nend",
 						conditions = 
 						{
 							

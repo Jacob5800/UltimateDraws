@@ -6722,6 +6722,684 @@ local tbl =
 			uuid = "17229b9c-c7bb-8de6-8623-1d2d9fc2f1c7",
 			version = 2,
 		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "Pharos Sirius (Hard)",
+			uuid = "04272f84-eb3c-8dfa-8ccf-5a25b4662817",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Pharos Sirius (Hard)",
+			name = "AutoSim",
+			uuid = "08b12623-1e05-e4c3-9808-30c77b5430c7",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "gStartCombat=false\nlocal settings=AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled=false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled=false end\nend\ndata.pharosSetup=true\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"a01bfae5-b2b6-95a5-88dc-8bebf4f52401",
+								true,
+							},
+						},
+						name = "Disable combat helpers",
+						uuid = "9c79f6e6-1613-7aa4-9659-85d249defcfb",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==510 and not data.pharosSetup)",
+						dequeueIfLuaFalse = true,
+						name = "Duty setup due",
+						uuid = "a01bfae5-b2b6-95a5-88dc-8bebf4f52401",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Pharos Sirius (Hard)/AutoSim",
+			name = "[Pharos Hard] Disable combat helpers",
+			throttleTime = 1000,
+			timeout = 1,
+			uuid = "e4aa657d-5c3a-8223-802d-e526b7a08654",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local api=TensorCore.API.TensorACR\nlocal plan=data.pharosPlan\napi.clearAutoSimUncertainty()\napi.clearAutoSimPhases(\"FullDowntime\")\napi.setAutoSimKillTime(plan.kill)\napi.addAutoSimUncertainty(0,20)\ndata.pharosForecast=data.pharosForecast or {}\ndata.pharosForecast[plan.cid]=true\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"ab8687dd-5fc4-3ec4-800d-b4c6775c0cce",
+								true,
+							},
+						},
+						name = "Set kill time",
+						uuid = "589e4208-05d7-1b7d-b100-ab66e3303a3d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=510 or not p.incombat then return false end\nlocal t=TensorCore.mGetTarget()\nlocal kill={[4567]=85,[4571]=83,[4576]=73}\nif not t or not kill[t.contentid] or (data.pharosForecast and data.pharosForecast[t.contentid]) then return false end\nlocal s=TensorCore.API.TensorACR.getAutoSimTime()\nif type(s)~=\"number\" or s<0 or s>60 then return false end\ndata.pharosPlan={cid=t.contentid,kill=kill[t.contentid]}\nreturn true",
+						dequeueIfLuaFalse = true,
+						name = "New boss engaged",
+						uuid = "ab8687dd-5fc4-3ec4-800d-b4c6775c0cce",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Pharos Sirius (Hard)/AutoSim",
+			name = "[Pharos Hard] Set boss forecast",
+			throttleTime = 500,
+			timeout = 1,
+			uuid = "7f19d878-9974-712d-97d4-96a75793a181",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "gStartCombat=false\nPlayer:SetTarget(data.pharosPick)\ndata.pharosTargets=data.pharosTargets or {}\ndata.pharosTargets[data.pharosPick]=true\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"606b4766-bc59-83c6-9e8b-7ebd9c18111e",
+								true,
+							},
+						},
+						name = "Select boss",
+						uuid = "aca26703-33a7-024d-8b14-da4e5e734975",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=510 or not p.alive or p.incombat or not p.pos or ActionList:IsCasting() then return false end\nlocal current=TensorCore.mGetTarget()\nif current and current.alive and current.targetable and current.attackable then return false end\nfor _,cid in ipairs({4567,4571,4576}) do\n    for _,boss in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=cid}) or {}) do\n        if boss.alive and boss.attackable and boss.targetable and boss.pos and not (data.pharosTargets and data.pharosTargets[boss.id]) then\n            local dx,dy,dz=boss.pos.x-p.pos.x,boss.pos.y-p.pos.y,boss.pos.z-p.pos.z\n            if dx*dx+dy*dy+dz*dz<=35*35 then data.pharosPick=boss.id return true end\n        end\n    end\nend\nreturn false",
+						dequeueIfLuaFalse = true,
+						name = "Unselected boss nearby",
+						uuid = "606b4766-bc59-83c6-9e8b-7ebd9c18111e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Pharos Sirius (Hard)/AutoSim",
+			name = "[Pharos Hard] Target boss before pull",
+			throttleTime = 750,
+			timeout = 1,
+			uuid = "7d4755a5-2b68-349d-b571-a2ebd77232ba",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Pharos Sirius (Hard)",
+			name = "Draws",
+			uuid = "f71a31b0-e1c5-202f-8444-72edd68dde78",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\n-- cones: full angle in degrees; rects use the attack width; the rest are circles\nlocal cones={[720]=90,[5312]=120,[5381]=120,[5383]=120}\nlocal rects={[5310]=true,[5380]=true}\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms>0 then\n    local drawer=TensorCore.getStaticDrawer(0x603333FF,2)\n    if cones[e.aoeID] then\n        drawer:addTimedCone(ms,e.x,e.y,e.z,e.aoeLength,math.rad(cones[e.aoeID]),e.heading,0,false,true)\n    elseif rects[e.aoeID] then\n        drawer:addTimedRect(ms,e.x,e.y,e.z,e.aoeLength,e.aoeWidth,e.heading,0,false,true)\n    else\n        drawer:addTimedCircle(ms,e.x,e.y,e.z,e.aoeLength,0,false,true)\n    end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"4448676a-d70c-b3e5-9284-2084123a5fff",
+								true,
+							},
+						},
+						name = "Draw attack",
+						uuid = "f4aa81a2-452f-8d78-a5fd-17363e23dbff",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=510 then return false end\nlocal ids={[5309]=true,[5314]=true,[5323]=true,[5337]=true,[5340]=true,[5376]=true,[5382]=true,[720]=true,[5312]=true,[5381]=true,[5383]=true,[5310]=true,[5380]=true}\nreturn ids[eventArgs.aoeID]==true",
+						dequeueIfLuaFalse = true,
+						name = "Tracked attack",
+						uuid = "4448676a-d70c-b3e5-9284-2084123a5fff",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Pharos Sirius (Hard)/Draws",
+			eventType = 18,
+			name = "[Pharos Hard] Hazard draws",
+			timeout = 1,
+			uuid = "6b883432-5ee9-16d7-899c-15b1770842cf",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "Halatali (Hard)",
+			uuid = "cae9d6ae-0cf8-407e-8a7f-e7569578ec84",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Halatali (Hard)",
+			name = "AutoSim",
+			uuid = "79b65407-ce3f-d637-bed6-66680be43a8e",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "gStartCombat=false\nlocal settings=AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled=false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled=false end\nend\ndata.halataliSetup=true\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"c732852f-5a6e-50bb-9272-7ffb4af61179",
+								true,
+							},
+						},
+						name = "Disable combat helpers",
+						uuid = "51c94b2a-e354-117f-af19-cb0185983e51",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and (p.localmapid==360 or p.localmapid==460) and not data.halataliSetup)",
+						dequeueIfLuaFalse = true,
+						name = "Duty setup due",
+						uuid = "c732852f-5a6e-50bb-9272-7ffb4af61179",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Halatali (Hard)/AutoSim",
+			name = "[Halatali Hard] Disable combat helpers",
+			throttleTime = 1000,
+			timeout = 1,
+			uuid = "bdfcd2a4-8dbf-74a4-bb9e-cdeee80d5c22",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local api=TensorCore.API.TensorACR\nlocal plan=data.halataliPlan\napi.clearAutoSimUncertainty()\napi.clearAutoSimPhases(\"FullDowntime\")\napi.setAutoSimKillTime(plan.kill)\napi.addAutoSimUncertainty(0,20)\ndata.halataliForecast=data.halataliForecast or {}\ndata.halataliForecast[plan.cid]=true\n-- the final pair shares one fight\nif plan.cid==2602 or plan.cid==2603 then data.halataliForecast[2602]=true data.halataliForecast[2603]=true end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"0e4d40a1-dd30-ac68-b0a3-3dc07ff56769",
+								true,
+							},
+						},
+						name = "Set kill time",
+						uuid = "0fd6070e-f7c7-5e80-9196-d00f57e36b2b",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or (p.localmapid~=360 and p.localmapid~=460) or not p.incombat then return false end\nlocal t=TensorCore.mGetTarget()\nlocal kill={[2597]=50,[2598]=55,[2602]=60,[2603]=60}\nif not t or not kill[t.contentid] or (data.halataliForecast and data.halataliForecast[t.contentid]) then return false end\nlocal s=TensorCore.API.TensorACR.getAutoSimTime()\nif type(s)~=\"number\" or s<0 or s>60 then return false end\ndata.halataliPlan={cid=t.contentid,kill=kill[t.contentid]}\nreturn true",
+						dequeueIfLuaFalse = true,
+						name = "New boss engaged",
+						uuid = "0e4d40a1-dd30-ac68-b0a3-3dc07ff56769",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Halatali (Hard)/AutoSim",
+			name = "[Halatali Hard] Set boss forecast",
+			throttleTime = 500,
+			timeout = 1,
+			uuid = "3c9f5b1f-954d-11b5-b93e-a920223f983a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "gStartCombat=false\nPlayer:SetTarget(data.halataliPick)\ndata.halataliTargets=data.halataliTargets or {}\ndata.halataliTargets[data.halataliPick]=true\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"9115f485-c348-8ea3-9688-875ebdb38687",
+								true,
+							},
+						},
+						name = "Select boss",
+						uuid = "351329d5-c7dd-fac4-be23-2df6c6476966",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or (p.localmapid~=360 and p.localmapid~=460) or not p.alive or p.incombat or not p.pos or ActionList:IsCasting() then return false end\nlocal current=TensorCore.mGetTarget()\nif current and current.alive and current.targetable and current.attackable then return false end\nfor _,cid in ipairs({2597,2598,2603,2602}) do\n    for _,boss in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=cid}) or {}) do\n        if boss.alive and boss.attackable and boss.targetable and boss.pos and not (data.halataliTargets and data.halataliTargets[boss.id]) then\n            local dx,dy,dz=boss.pos.x-p.pos.x,boss.pos.y-p.pos.y,boss.pos.z-p.pos.z\n            if dx*dx+dy*dy+dz*dz<=35*35 then data.halataliPick=boss.id return true end\n        end\n    end\nend\nreturn false",
+						dequeueIfLuaFalse = true,
+						name = "Unselected boss nearby",
+						uuid = "9115f485-c348-8ea3-9688-875ebdb38687",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Halatali (Hard)/AutoSim",
+			name = "[Halatali Hard] Target boss before pull",
+			throttleTime = 750,
+			timeout = 1,
+			uuid = "da68ec7a-04be-c136-b03a-70d74488f37b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Halatali (Hard)",
+			name = "Draws",
+			uuid = "98399c39-d628-258a-9998-a6937d872282",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\n-- cones: full angle in degrees; rects use the attack width; the rest are circles\nlocal cones={[331]=60,[498]=90,[720]=90,[2102]=90,[2131]=90,[2132]=90,[2183]=120}\nlocal rects={[975]=true,[1098]=true,[2126]=true}\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms>0 then\n    local drawer=TensorCore.getStaticDrawer(0x603333FF,2)\n    if cones[e.aoeID] then\n        drawer:addTimedCone(ms,e.x,e.y,e.z,e.aoeLength,math.rad(cones[e.aoeID]),e.heading,0,false,true)\n    elseif rects[e.aoeID] then\n        drawer:addTimedRect(ms,e.x,e.y,e.z,e.aoeLength,e.aoeWidth,e.heading,0,false,true)\n    else\n        drawer:addTimedCircle(ms,e.x,e.y,e.z,e.aoeLength,0,false,true)\n    end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"4a3f6c78-48b4-7680-bb5e-3b62ce4bd890",
+								true,
+							},
+						},
+						name = "Draw attack",
+						uuid = "5fd0fb97-d5d0-a63c-9f0e-cbc31d203a1f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or (p.localmapid~=360 and p.localmapid~=460) then return false end\nlocal ids={[497]=true,[1003]=true,[2073]=true,[2074]=true,[2104]=true,[2128]=true,[2130]=true,[331]=true,[498]=true,[720]=true,[2102]=true,[2131]=true,[2132]=true,[2183]=true,[975]=true,[1098]=true,[2126]=true}\nreturn ids[eventArgs.aoeID]==true",
+						dequeueIfLuaFalse = true,
+						name = "Tracked attack",
+						uuid = "4a3f6c78-48b4-7680-bb5e-3b62ce4bd890",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Halatali (Hard)/Draws",
+			eventType = 18,
+			name = "[Halatali Hard] Hazard draws",
+			timeout = 1,
+			uuid = "2e527212-7c1a-aed4-83cc-b1874c76ae81",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "The Keeper of the Lake",
+			uuid = "e11e5226-acd8-b13a-93dc-3d140a68f1b8",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Keeper of the Lake",
+			name = "AutoSim",
+			uuid = "daecc492-3c20-5286-bdde-ae07282e3973",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "gStartCombat=false\nlocal settings=AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled=false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled=false end\nend\ndata.keeperSetup=true\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"272be13f-f6ac-113e-b18c-d34c97fb2246",
+								true,
+							},
+						},
+						name = "Disable combat helpers",
+						uuid = "f6fc111e-4a65-4cb3-a99c-b122b9e05353",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==1063 and not data.keeperSetup)",
+						dequeueIfLuaFalse = true,
+						name = "Duty setup due",
+						uuid = "272be13f-f6ac-113e-b18c-d34c97fb2246",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Keeper of the Lake/AutoSim",
+			name = "[Keeper of the Lake] Disable combat helpers",
+			throttleTime = 1000,
+			timeout = 1,
+			uuid = "fa65d78f-1e48-a4ec-b437-4cb89e411143",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local api=TensorCore.API.TensorACR\nlocal plan=data.keeperPlan\napi.clearAutoSimUncertainty()\napi.clearAutoSimPhases(\"FullDowntime\")\napi.setAutoSimKillTime(plan.kill)\napi.addAutoSimUncertainty(0,20)\ndata.keeperForecast=data.keeperForecast or {}\ndata.keeperForecast[plan.cid]=true\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"3590e302-df10-bfe0-a558-a157742b9f03",
+								true,
+							},
+						},
+						name = "Set kill time",
+						uuid = "09f53ea7-f31c-91fa-a7bd-da26cad21d36",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1063 or not p.incombat then return false end\nlocal t=TensorCore.mGetTarget()\nlocal kill={[3369]=85,[3373]=78,[3374]=170}\nif not t or not kill[t.contentid] or (data.keeperForecast and data.keeperForecast[t.contentid]) then return false end\nlocal s=TensorCore.API.TensorACR.getAutoSimTime()\nif type(s)~=\"number\" or s<0 or s>60 then return false end\ndata.keeperPlan={cid=t.contentid,kill=kill[t.contentid]}\nreturn true",
+						dequeueIfLuaFalse = true,
+						name = "New boss engaged",
+						uuid = "3590e302-df10-bfe0-a558-a157742b9f03",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Keeper of the Lake/AutoSim",
+			name = "[Keeper of the Lake] Set boss forecast",
+			throttleTime = 500,
+			timeout = 1,
+			uuid = "49bb2310-d3ef-3a83-98c6-ca3ca43e6998",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "gStartCombat=false\nPlayer:SetTarget(data.keeperPick)\ndata.keeperTargets=data.keeperTargets or {}\ndata.keeperTargets[data.keeperPick]=true\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"2593cf62-f342-392f-b434-6085a7b87eb0",
+								true,
+							},
+						},
+						name = "Select boss",
+						uuid = "83599294-bafe-33e1-baa3-34132a2c1c3b",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1063 or not p.alive or p.incombat or not p.pos or ActionList:IsCasting() then return false end\nlocal current=TensorCore.mGetTarget()\nif current and current.alive and current.targetable and current.attackable then return false end\nfor _,cid in ipairs({3369,3373,3374}) do\n    for _,boss in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=cid}) or {}) do\n        if boss.alive and boss.attackable and boss.targetable and boss.pos and not (data.keeperTargets and data.keeperTargets[boss.id]) then\n            local dx,dy,dz=boss.pos.x-p.pos.x,boss.pos.y-p.pos.y,boss.pos.z-p.pos.z\n            if dx*dx+dy*dy+dz*dz<=35*35 then data.keeperPick=boss.id return true end\n        end\n    end\nend\nreturn false",
+						dequeueIfLuaFalse = true,
+						name = "Unselected boss nearby",
+						uuid = "2593cf62-f342-392f-b434-6085a7b87eb0",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Keeper of the Lake/AutoSim",
+			name = "[Keeper of the Lake] Target boss before pull",
+			throttleTime = 750,
+			timeout = 1,
+			uuid = "c14aa8cb-d4d4-18d9-adda-9ce5eb212d4b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "The Keeper of the Lake",
+			name = "Draws",
+			uuid = "b70ce5ca-b005-9bb3-9f61-7dce29dc6ee7",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\n-- cones: full angle in degrees; donuts: inner radius; rects use the attack width\nlocal cones={[518]=120,[527]=120,[566]=90,[720]=90,[2475]=90,[3389]=120}\nlocal rects={[526]=true,[1433]=true,[3480]=true,[3481]=true}\nlocal donuts={[29287]=6,[29288]=12}\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms>0 then\n    local drawer=TensorCore.getStaticDrawer(0x603333FF,2)\n    if cones[e.aoeID] then\n        drawer:addTimedCone(ms,e.x,e.y,e.z,e.aoeLength,math.rad(cones[e.aoeID]),e.heading,0,false,true)\n    elseif donuts[e.aoeID] then\n        drawer:addTimedDonut(ms,e.x,e.y,e.z,donuts[e.aoeID],e.aoeLength,0,false,true)\n    elseif rects[e.aoeID] then\n        drawer:addTimedRect(ms,e.x,e.y,e.z,e.aoeLength,e.aoeWidth,e.heading,0,false,true)\n    else\n        drawer:addTimedCircle(ms,e.x,e.y,e.z,e.aoeLength,0,false,true)\n    end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"a293dbfc-0d6c-00c7-bcb2-08bcc30aebe3",
+								true,
+							},
+						},
+						name = "Draw attack",
+						uuid = "beef233a-e375-1b1f-ad14-d64b3deb6ac8",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1063 then return false end\nlocal ids={[516]=true,[1305]=true,[2335]=true,[2476]=true,[3392]=true,[3482]=true,[3515]=true,[29275]=true,[29286]=true,[518]=true,[527]=true,[566]=true,[720]=true,[2475]=true,[3389]=true,[526]=true,[1433]=true,[3480]=true,[3481]=true,[29287]=true,[29288]=true}\nreturn ids[eventArgs.aoeID]==true",
+						dequeueIfLuaFalse = true,
+						name = "Tracked attack",
+						uuid = "a293dbfc-0d6c-00c7-bcb2-08bcc30aebe3",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Keeper of the Lake/Draws",
+			eventType = 18,
+			name = "[Keeper of the Lake] Hazard draws",
+			timeout = 1,
+			uuid = "3d701c77-c682-a8b3-b902-e7e60792ce77",
+			version = 2,
+		},
 	}, 
 	inheritedProfiles = 
 	{
