@@ -110,6 +110,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Dungeons
 
+- In dungeon lol, the cooldown pooling, dying-add cast and Thunder holds now run only when there is something to hold or release, reducing console spam. (27-11-2026)
+
 - dungeon lol and levelling dungeons: reactions for other maps or inactive states no longer wait in the queue. (27-11-2026)
 
 - More highleveldungeons reactions, including the shared cooldown holds and the Lost City of Amdapor (Hard) draws, no longer wait in the queue when they do not apply. (27-11-2026)
@@ -127,8 +129,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - In dungeon lol, shared cooldown pooling and targeting only run in supported dungeons, so the action no longer runs in cities. (24-11-2026)
 
 - In levelling dungeons, Ihuykatumu skips the gather hold on the opening bird pack. (24-11-2026)
-
-- In dungeon lol, Alexandria skips the gather hold on the opening single pack and resumes normal gathering after the first portal. (24-11-2026)
 
 ### DSR
 
