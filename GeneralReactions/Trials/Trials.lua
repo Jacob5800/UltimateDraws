@@ -8523,6 +8523,628 @@ local tbl =
 			uuid = "87b1ade8-2075-3cab-a9b8-cd307cbba96e",
 			version = 2,
 		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "Hells' Kier",
+			uuid = "cebdff0d-3cd0-caca-be0f-2085dc87b61e",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Hells' Kier",
+			name = "AutoSim",
+			uuid = "521f28f4-319f-0983-a985-c6d7a537ff6b",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "gStartCombat=false\nlocal settings=AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled=false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled=false end\nend\ndata.kierSetup=true\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"96294072-0df7-758e-90b6-3f6bad1d6f58",
+								true,
+							},
+						},
+						name = "Disable Duty, Prepull and Start Combat",
+						uuid = "48a39270-acbe-6217-b4c3-ebd7493aee9b",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==810 and not data.kierSetup)",
+						dequeueIfLuaFalse = true,
+						name = "Helpers not yet disabled",
+						uuid = "96294072-0df7-758e-90b6-3f6bad1d6f58",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Hells' Kier/AutoSim",
+			name = "[Hells' Kier] Disable combat helpers",
+			throttleTime = 500,
+			uuid = "3bc0b977-7c9a-8e2a-90f4-a4666ff5a565",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 810 then self.used = true; return end\ndata.trialsInitialTargets = data.trialsInitialTargets or {}\nlocal states = data.trialsInitialTargets\nlocal state = states[\"810_7702\"] or {}\nstates[\"810_7702\"] = state\nlocal current = TensorCore.mGetTarget()\nlocal label = \"[Trials targeting] Suzaku\"\nif state.pending then\n    if current and current.id == state.pending then\n        d(label .. \" confirmed target=\" .. tostring(current.id))\n        state.pending = nil\n    elseif Now() - state.requestedAt >= 1500 then\n        d(label .. \" request not confirmed; intended=\" .. tostring(state.pending) .. \" current=\" .. tostring(current and current.id))\n        state.pending = nil\n    end\n    self.used = true\n    return\nend\nif player.incombat or state.done then self.used = true; return end\nlocal boss, nearest = nil, 35 * 35\nfor _, candidate in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid=7702}) or {}) do\n    if candidate.alive and candidate.targetable and candidate.attackable and candidate.pos then\n        local dx = candidate.pos.x - player.pos.x\n        local dy = candidate.pos.y - player.pos.y\n        local dz = candidate.pos.z - player.pos.z\n        local distance = dx*dx + dy*dy + dz*dz\n        if distance <= nearest then boss, nearest = candidate, distance end\n    end\nend\nif not boss then\n    if not state.waitLogged then\n        d(label .. \" waiting for an attackable boss within 35 yalms; current=\" .. tostring(current and current.id))\n        state.waitLogged = true\n    end\n    self.used = true\n    return\nend\nstate.done = true\ngStartCombat = false\nif current and current.alive and current.targetable and current.attackable then\n    d(label .. \" kept existing target; intended=\" .. tostring(boss.id) .. \" current=\" .. tostring(current.id))\nelse\n    state.pending = boss.id\n    state.requestedAt = Now()\n    d(label .. \" target request; intended=\" .. tostring(boss.id) .. \" current=\" .. tostring(current and current.id))\n    Player:SetTarget(boss.id)\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"b4ce23cd-4aa6-49cf-803a-2ec559224132",
+								true,
+							},
+						},
+						name = "Select Suzaku without pulling",
+						uuid = "6cc2147b-465b-85d5-8824-1e09deada662",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player or player.localmapid ~= 810 then return false end\nlocal states = data.trialsInitialTargets\nlocal state = states and states[\"810_7702\"]\nreturn not not ((state ~= nil and state.pending ~= nil) or (not player.incombat and (not state or not state.done)))",
+						dequeueIfLuaFalse = true,
+						name = "Boss not yet selected",
+						uuid = "b4ce23cd-4aa6-49cf-803a-2ec559224132",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Hells' Kier/AutoSim",
+			name = "Suzaku select boss at encounter start",
+			throttleTime = 500,
+			uuid = "e9f01668-9ba0-713f-b07b-f4e875b8816f",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "-- One clear (25-11-2026): kill 452 s, Suzaku untargetable 102.4 to 187.9 s.\nlocal api=TensorCore.API.TensorACR\napi.clearAutoSimUncertainty()\napi.clearAutoSimPhases(\"FullDowntime\")\napi.setAutoSimKillTime(452)\napi.addAutoSimUncertainty(0,40)\napi.addAutoSimPhase(\"FullDowntime\",102.4,187.9,1)\ndata.kierForecast={}\nTensorCore.timelineLogToFile(\"[Hells' Kier AutoSim] forecast loaded: kill 452, downtime 102.4-187.9\\n\")\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"a07a4bea-ccb7-1914-bb8b-0f3f732b61d9",
+								true,
+							},
+						},
+						name = "Load kill time and intermission",
+						uuid = "e616c023-7e28-c379-8f3b-4472ccc3107b",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=810 then return false end\nif p.incombat~=true or data.kierForecast then return false end\n-- a late join can never load this forecast\nlocal ok,t=pcall(TensorCore.API.TensorACR.getAutoSimTime)\nreturn not not (ok and type(t)==\"number\" and t>=0 and t<=20)",
+						dequeueIfLuaFalse = true,
+						name = "Pull start without forecast",
+						uuid = "a07a4bea-ccb7-1914-bb8b-0f3f732b61d9",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Hells' Kier/AutoSim",
+			name = "Suzaku AutoSim forecast",
+			throttleTime = 250,
+			uuid = "d75c1bc7-435b-5235-a4bd-7f344ccf59f6",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local api=TensorCore.API.TensorACR\nlocal t=api.getAutoSimTime()\nlocal s=data.kierForecast\napi.clearAutoSimPhases(\"FullDowntime\")\nif eventArgs.isTargetable==false then\n    s.left=t\n    api.addAutoSimPhase(\"FullDowntime\",t,t+85.5,1)\n    api.setAutoSimKillTime(452+(t-102.4))\nelse\n    s.back=t\n    api.setAutoSimKillTime(452+(t-187.9))\nend\nTensorCore.timelineLogToFile(\"[Hells' Kier AutoSim] resync t=\"..tostring(t)..\" targetable=\"..tostring(eventArgs.isTargetable)..\"\\n\")\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"30d1bb54-b4a7-c256-b094-de798d17185b",
+								true,
+							},
+						},
+						name = "Move downtime to the observed time",
+						uuid = "e33e4dff-04ef-af04-8d53-4f68f60b0699",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=810 or not data.kierForecast then return false end\nif eventArgs.entityContentID~=7702 then return false end\nlocal t=TensorCore.API.TensorACR.getAutoSimTime()\nif type(t)~=\"number\" then return false end\nlocal s=data.kierForecast\n-- the short disappearance near 95 s is ignored\nif eventArgs.isTargetable==false then return not s.left and t>=98 and t<=150 end\nreturn not not (s.left and not s.back and t>=150)",
+						dequeueIfLuaFalse = true,
+						name = "Suzaku leaves or returns",
+						uuid = "30d1bb54-b4a7-c256-b094-de798d17185b",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Hells' Kier/AutoSim",
+			eventType = 26,
+			name = "Suzaku AutoSim intermission resync",
+			uuid = "65475e76-9878-6c9f-b541-74203b859ebf",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Hells' Kier",
+			name = "Draws",
+			uuid = "15533a60-a3aa-c939-8a8a-3a4bc2167a26",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\n-- shape, length or radius, cone degrees or rectangle full width\nlocal shapes={[12835]={\"cone\",40,90},[12837]={\"circle\",9},[12851]={\"cone\",41,180},[12854]={\"rect\",41,20},[12856]={\"cone\",21,90},[12859]={\"rect\",55,6}}\nlocal shape=shapes[e.aoeID]\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\n-- Hotspot resolves about 0.25 s after its short marker\nif e.aoeID==12856 then ms=ms+300 end\nif ms<=0 then self.used=true;return end\nlocal drawer=TensorCore.getStaticDrawer(0x603333FF,2)\nlocal uuid\nif shape[1]==\"circle\" then\n    uuid=drawer:addTimedCircle(ms,e.x,e.y,e.z,shape[2],0,false,true)\nelseif shape[1]==\"cone\" then\n    uuid=drawer:addTimedCone(ms,e.x,e.y,e.z,shape[2],math.rad(shape[3]),e.heading,0,false,true)\nelse\n    uuid=drawer:addTimedRect(ms,e.x,e.y,e.z,shape[2],shape[3],e.heading,0,false,true)\nend\nif e.aoeID==12837 then\n    -- a plume killed early never explodes: remember its circle\n    data.kierPlumes=data.kierPlumes or {}\n    data.kierPlumes[e.entityID]=uuid\nelseif e.aoeID~=12856 then\n    AnyoneCore.addWorldTextCountdown(ms,{x=e.x,y=e.y+1,z=e.z},0xFFFFFFFF,true,1.1)\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"8e8be34d-8306-3a45-bf41-7c95600318ec",
+								true,
+							},
+						},
+						name = "Draw attack area",
+						uuid = "be3b0e64-0c08-7961-a99f-9bef796c41b3",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=810 then return false end\nlocal ids={[12835]=true,[12837]=true,[12851]=true,[12854]=true,[12856]=true,[12859]=true}\nreturn ids[eventArgs.aoeID]==true",
+						dequeueIfLuaFalse = true,
+						name = "Tracked Suzaku attack",
+						uuid = "8e8be34d-8306-3a45-bf41-7c95600318ec",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Hells' Kier/Draws",
+			eventType = 18,
+			name = "Suzaku hazard draws",
+			timeout = 1,
+			uuid = "27f5fffb-7f1a-04b8-9a87-9e56d4ab4177",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "Argus.deleteTimedShape(data.kierPlumes[eventArgs.entityID])\ndata.kierPlumes[eventArgs.entityID]=nil\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"8bd95f54-f917-b9d9-a792-6588a6ec7fc7",
+								true,
+							},
+						},
+						name = "Delete plume circle",
+						uuid = "504b3a09-c181-a97b-b9e4-a879b2efdfbc",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return not not (data.kierPlumes and eventArgs.isTargetable==false and data.kierPlumes[eventArgs.entityID])",
+						dequeueIfLuaFalse = true,
+						name = "Drawn plume left",
+						uuid = "8bd95f54-f917-b9d9-a792-6588a6ec7fc7",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Hells' Kier/Draws",
+			eventType = 26,
+			name = "Scarlet Plume remove killed circle",
+			timeout = 1,
+			uuid = "ad6bbf93-22fa-f287-9f33-e9e8b35f3ecc",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local p=TensorCore.mGetPlayer()\nlocal id=eventArgs.spellID\nlocal text\nif id==12848 then\n    text=\"Knockback\"\nelseif eventArgs.targetID==p.id then\n    text=id==12849 and \"Tankbuster on you, then half-room cleave\" or \"Tankbuster on you\"\nelse\n    text=\"Tankbuster\"\nend\nAnyoneCore.Shotcall(text,true,3,false)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"33f152e3-ffd2-889e-b1c4-891f36ae867a",
+								true,
+							},
+						},
+						name = "Call knockback or tankbuster",
+						uuid = "2f6147a5-ba3e-0e57-9171-4779f0409091",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=810 or eventArgs.entityContentID~=7702 then return false end\nlocal id=eventArgs.spellID\nif id==12848 then return true end\nif id~=12832 and id~=12849 then return false end\nreturn not not (eventArgs.targetID==p.id or TensorCore.isHealer(p))",
+						dequeueIfLuaFalse = true,
+						name = "Called Suzaku cast",
+						uuid = "33f152e3-ffd2-889e-b1c4-891f36ae867a",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Hells' Kier/Draws",
+			eventType = 3,
+			name = "Suzaku mechanic cues",
+			timeout = 1,
+			uuid = "9a970d21-2fd2-8fcb-913b-fe4e92cc00d6",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "-- Marker to damage: 5.1 s. The 5 yalm radius is an estimate from one clear.\nlocal drawer=TensorCore.getStaticDrawer(0x40FF33CC,2)\ndrawer:addTimedCircleOnEnt(5100,eventArgs.entityID,5,0,false,true)\nlocal p=TensorCore.mGetPlayer()\nif eventArgs.entityID==p.id then AnyoneCore.Shotcall(\"Spread\",true,3,false) end\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"ae360c53-c05c-7e84-9aab-2988ac79ce09",
+								true,
+							},
+						},
+						name = "Draw spread circle",
+						uuid = "77d4bc15-d3b5-7f68-98fe-5e8fd05b36f1",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==810 and eventArgs.markerID==139)",
+						dequeueIfLuaFalse = true,
+						name = "Rekindle marker",
+						uuid = "ae360c53-c05c-7e84-9aab-2988ac79ce09",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Hells' Kier/Draws",
+			eventType = 4,
+			name = "Suzaku Rekindle spread circles",
+			timeout = 1,
+			uuid = "56f21dc8-535f-b10f-9ba2-195dc7d5e07c",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "-- Towers resolve about 10 s after appearing; marker size is for visibility only.\nlocal drawer=TensorCore.getStaticDrawer(0x6033FF33,2)\ndrawer:addTimedCircle(10000,eventArgs.x,eventArgs.y,eventArgs.z,2,0,false,true)\nAnyoneCore.addWorldTextCountdown(10000,{x=eventArgs.x,y=eventArgs.y+1,z=eventArgs.z},0xFFFFFFFF,true,1.1)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"c3c3f7d8-1517-091a-a8f3-1d6c226221c8",
+								true,
+							},
+						},
+						name = "Mark tower",
+						uuid = "78263fe0-81af-297a-bb57-bd5609498d4b",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==810 and eventArgs.entityContentID==2009599)",
+						dequeueIfLuaFalse = true,
+						name = "Tower appeared",
+						uuid = "c3c3f7d8-1517-091a-a8f3-1d6c226221c8",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Hells' Kier/Draws",
+			eventType = 29,
+			name = "Suzaku Incandescent Interlude towers",
+			timeout = 1,
+			uuid = "c591e443-1eca-4649-9ff2-6ef860ce2232",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "AnyoneCore.Shotcall(\"Lady tether on you\",true,3,false)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"476c04ab-4d94-66ca-b037-afc88fb07ab5",
+								true,
+							},
+						},
+						name = "Call tether",
+						uuid = "00253867-76aa-b42a-974d-1b340e53a510",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==810 and eventArgs.sourceEntityContentID==7725 and eventArgs.newTetherID==17 and eventArgs.newTargetID==p.id)",
+						dequeueIfLuaFalse = true,
+						name = "Lady tethered to self",
+						uuid = "476c04ab-4d94-66ca-b037-afc88fb07ab5",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Hells' Kier/Draws",
+			eventType = 15,
+			name = "Scarlet Lady tether on you",
+			timeout = 1,
+			uuid = "13c4bcd8-dd98-dc06-9caf-889396c356c6",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Hells' Kier",
+			name = "Mitigations",
+			uuid = "677189e6-d862-2827-819a-2f95efb09951",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "-- Log: 3.7 s channel, cast resolves about 0.33 s later. Immunity lasts 6 s.\ndata.kierRefrain=Now()+eventArgs.channelTimeMax*1000+330\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"f919a51d-d944-22ea-b0e9-b7aed2f08eed",
+								true,
+							},
+						},
+						name = "Record knockback time",
+						uuid = "2154c25b-5404-f5ce-b677-3e22f12c144d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==810 and eventArgs.spellID==12848 and eventArgs.entityContentID==7702)",
+						dequeueIfLuaFalse = true,
+						name = "Ruthless Refrain channel",
+						uuid = "f919a51d-d944-22ea-b0e9-b7aed2f08eed",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Hells' Kier/Mitigations",
+			eventType = 3,
+			name = "Ruthless Refrain schedule immunity",
+			uuid = "0baa6091-e6d2-9d7f-b950-0eef2cb4a442",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local impact=data.kierRefrain\nlocal p=TensorCore.mGetPlayer()\nlocal now=Now()\nif not impact or not p or p.localmapid~=810 or not p.alive or now>impact+450 then\n    if KierImmunityVar then _G[KierImmunityVar]=false;KierImmunityVar=nil end\n    data.kierRefrain=nil\n    self.used=true\n    return\nend\nlocal magic=TensorCore.isCaster(p) or TensorCore.isHealer(p)\nlocal actionID=magic and 7559 or 7548\nlocal action=ActionList:Get(1,actionID)\nif action and not action.isoncd and not TensorCore.hasBuff(p.id,1209) and not TensorCore.hasBuff(p.id,160) then\n    for _,option in ipairs(TensorCore.API.TensorACR.getHotbarToggles() or {}) do\n        if option.id==actionID and option.enabled~=false and type(option.var)=='string' then\n            if _G[option.var]~=true then _G[option.var]=true;KierImmunityVar=option.var end\n            data.kierImmunityAt=impact\n            TensorCore.timelineLogToFile(\"[Hells' Kier] knockback immunity requested action=\"..actionID..\"\\n\")\n            break\n        end\n    end\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"2c0fe8e5-add9-b567-8c12-ce0158974708",
+								true,
+							},
+						},
+						name = "Request or release immunity hotbar",
+						uuid = "e9e6adc4-b1a1-81f4-a12f-f03c28d863a1",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local impact=data.kierRefrain\nif not impact then return KierImmunityVar~=nil end\nlocal now=Now()\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=810 or not p.alive or now>impact+450 then return true end\n-- request between 2.3 and 0.45 s before the knockback, once\nreturn data.kierImmunityAt~=impact and impact-now<=2300 and impact-now>=450",
+						dequeueIfLuaFalse = true,
+						name = "Request due or owned request to release",
+						uuid = "2c0fe8e5-add9-b567-8c12-ce0158974708",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Hells' Kier/Mitigations",
+			name = "Ruthless Refrain Arm's Length or Surecast",
+			throttleTime = 100,
+			uuid = "d46c3113-0265-3ced-a69c-b30989ca0812",
+			version = 2,
+		},
 	}, 
 	inheritedProfiles = 
 	{

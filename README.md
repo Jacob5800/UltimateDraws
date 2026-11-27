@@ -264,6 +264,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Trials
 
+- Added Hells' Kier: Suzaku attack draws, spread circles and tower markers, knockback, tankbuster and tether callouts, automatic Arm's Length or Surecast for Ruthless Refrain, boss targeting and an AutoSim forecast. (27-11-2026)
+
 - The Bowl of Embers, Bismarck and Seat of Sacrifice AutoSim forecasts no longer keep running after joining a fight late. (27-11-2026)
 
 - Many trial reactions for other maps or inactive states no longer wait in the queue. (27-11-2026)
