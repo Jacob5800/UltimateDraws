@@ -5279,7 +5279,7 @@ local tbl =
 						data = 
 						{
 							aType = "Lua",
-							actionLua = "self.used=true\nlocal s=data.dsrLPDU\nif not s or not s.death then return end\n-- the axe warrior is the visible, untargetable Ser Grinnaux (contentid 3639, model 12602)\nfor id,e in pairs(EntityList(\"contentid=3639\") or {}) do\n if e.pos and Argus.getEntityModel(id)==12602 and Argus.isEntityVisible(id) then\n  TensorCore.getStaticDrawer(0x9033FF33,3):addCircle(e.pos.x,e.pos.y+0.05,e.pos.z,3)\n  if s.death.warriorLabel~=id and AnyoneCore and AnyoneCore.addTimedWorldTextOnEnt then\n   -- drop only this reaction's own earlier labels (they can outlive a replay rewind)\n   local old={}\n   for _,t in pairs(AnyoneCore.Data and AnyoneCore.Data.timedWorldTextDraws or {}) do\n    if t.str==\"WARRIOR - FACE\" then old[#old+1]=t.uuid end\n   end\n   for _,u in ipairs(old) do AnyoneCore.removeTimedWorldText(u) end\n   s.death.warriorLabel=id\n   AnyoneCore.addTimedWorldTextOnEnt(math.max(1000,20000-(Now()-s.death.at)),\"WARRIOR - FACE\",id,0xFF66FF66,true,1.4,2)\n  end\n  break\n end\nend\n",
+							actionLua = "self.used=true\nlocal s=data.dsrLPDU\nif not s or not s.death then return end\n-- Mark the Heavy Impact knight (contentid 3641) only once it has landed: it spawns about 12y\n-- from centre, jumps, and lands about 9y out, which is the spot the conga is based on.\n-- Invisible same-ID helpers are skipped.\nfor id,e in pairs(EntityList(\"contentid=3641\") or {}) do\n local r=e.pos and math.sqrt((e.pos.x-100)^2+(e.pos.z-100)^2)\n if r and r>=8 and r<=10 and Argus.isEntityVisible(id) then\n  TensorCore.getStaticDrawer(0x9033FF33,3):addCircle(e.pos.x,e.pos.y+0.05,e.pos.z,3)\n  if s.death.warriorLabel~=id and AnyoneCore and AnyoneCore.addTimedWorldTextOnEnt then\n   -- drop only this reaction's own earlier labels (they can outlive a replay rewind)\n   local old={}\n   for _,t in pairs(AnyoneCore.Data and AnyoneCore.Data.timedWorldTextDraws or {}) do\n    if t.str==\"WARRIOR - FACE\" then old[#old+1]=t.uuid end\n   end\n   for _,u in ipairs(old) do AnyoneCore.removeTimedWorldText(u) end\n   s.death.warriorLabel=id\n   AnyoneCore.addTimedWorldTextOnEnt(math.max(1000,20000-(Now()-s.death.at)),\"WARRIOR - FACE\",id,0xFF66FF66,true,1.4,2)\n  end\n  break\n end\nend\n",
 							conditions = 
 							{
 								
@@ -5288,7 +5288,7 @@ local tbl =
 									true,
 								},
 							},
-							name = "Mark Ser Grinnaux",
+							name = "Mark landed warrior",
 							uuid = "86aeb261-2e7d-03bb-b022-b7357796ed0b",
 							version = 2.1,
 						},

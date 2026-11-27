@@ -134,6 +134,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### DSR
 
+- Fixed the P5 Death of the Heavens green warrior circle and "WARRIOR - FACE" label pointing the wrong way: they now appear on the knight to face after it lands, matching the conga spots. (27-11-2026)
+
 - Added an optional P6 setting that stops actions and movement for the Pyretic from the fire debuff and resumes afterwards: "Pyretic: stop actions and movement" (off by default). (27-11-2026)
 
 - Fixed line AoEs being drawn half their length too far forward, the P5 conga spots not showing and the Death of the Heavens knockback spot not appearing. Your Wrath of the Heavens bait cone has a white outline. In P6, the first breath shows a fire and ice pair in green and a wrong mix in red, with cones and player rings limited to an adjustable range. P6 line AoEs stay inside the arena and darken until they hit, and Nidhogg's lane shows early on the first Hallowed Wings. Added an optional Akh Morn green safe area (off by default). Debug labels use readable names. (27-11-2026)
