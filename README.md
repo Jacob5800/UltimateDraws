@@ -242,6 +242,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Added an optional green safe area for the airdrop circles in The Copied Factory: tick "Airdrops: green safe area" in the new Copied Factory settings window (off by default). (27-11-2026)
+
 - The alliance raid profile now disables Prepull Helper only inside alliance raids, instead of everywhere. (27-11-2026)
 
 - Many alliance raid reactions for other maps or inactive states no longer wait in the queue. Without an AutoSim ACR, AutoSim reactions now skip quietly instead of printing errors, while their draws and targeting keep working. (27-11-2026)
@@ -259,8 +261,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added an optional green safe area for the Red Girl's Diffuse Energy cone sequence in The Tower at Paradigm's Breach: tick "Red Girl cones: green safe area" in the Paradigm's Breach settings window (off by default). (26-11-2026)
 
 - Fixed the Red Girl's Point lances green safe areas in The Tower at Paradigm's Breach stopping short of the barrier walls. (26-11-2026)
-
-- Added Hansel and Gretel's Uneven Footing meteor in The Tower at Paradigm's Breach: the meteor is shown in red, and the safe area outside it, the Breakthrough side cleave and the orbs is shown in green. (26-11-2026)
 
 ### Trials
 
