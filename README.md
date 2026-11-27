@@ -242,6 +242,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Prishe's green knockback landing line in Jeuno is now slightly thicker. (27-11-2026)
+
 - Fixed the 9S-operated Walking Fortress airstrikes that fire sideways showing the whole platform green instead of their red lanes. (27-11-2026)
 
 - Added 9S-operated Walking Fortress draws in The Copied Factory: early Marx Impact circles, airstrike lanes and Anti-personnel Missile squares in red with a green safe area, and the safe spot behind the Goliath Tank during Hack Goliath Tank. (27-11-2026)
@@ -259,8 +261,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - The energy orb rings in The Copied Factory (first boss and trash flyers) are now slightly smaller, with a radius of 1.8 instead of 2. (27-11-2026)
 
 - Added red rings around the trash flyers' energy orbs in The Copied Factory. (27-11-2026)
-
-- Added an optional green safe area for the airdrop circles in The Copied Factory: tick "Airdrops: green safe area" in the new Copied Factory settings window (off by default). (27-11-2026)
 
 ### Trials
 
