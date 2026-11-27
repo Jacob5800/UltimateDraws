@@ -3296,13 +3296,40 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local p = TensorCore.mGetPlayer()\nif not p then self.used = true; return end\nlocal eligible = p.localmapid == 1320 and p.job == 23\nlocal s = NormalRaidsM9NDotState\nif s and not eligible then\n    -- left the duty or changed job: put the previous entry settings back\n    if s.entry then\n        s.entry.enabled = s.existed and s.enabled or false\n        s.entry.allowIfTarget = s.allowIfTarget\n        s.entry.allowSmartDoT = s.allowSmartDoT\n    end\n    NormalRaidsM9NDotState = nil\n    d(\"[M9N DoTs] Restored prior Flail blacklist settings\")\nelseif eligible and not s then\n    -- recorded before the attempt so an unsupported ACR is not retried every update\n    NormalRaidsM9NDotState = {}\n    local api = TensorCore.API.TensorACR\n    local supported, found = pcall(api.getBlacklistEntry, 14302)\n    if supported then\n        local ok, e = pcall(api.addBlacklistEntry, 14302, \"Fatal Flail\")\n        if ok and e then\n            NormalRaidsM9NDotState = {entry=e, existed=found==true, enabled=e.enabled, allowIfTarget=e.allowIfTarget, allowSmartDoT=e.allowSmartDoT}\n            e.enabled = true\n            e.allowIfTarget = false\n            e.allowSmartDoT = false\n            d(\"[M9N DoTs] Fatal Flail blacklisted for BRD including current target and Smart DoT\")\n        end\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"b28227d2-cc26-44a4-8013-31d8fe443061",
+								true,
+							},
+						},
+						uuid = "41a026fd-7bac-48f7-af62-effbf9992624",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nif not p then return false end\nlocal eligible = p.localmapid == 1320 and p.job == 23\nif NormalRaidsM9NDotState then return not eligible end\nreturn eligible",
+						uuid = "b28227d2-cc26-44a4-8013-31d8fe443061",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "AAC Heavyweight M1/Vamp Fatale/AutoSim",
 			execute = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1320 or p.job~=23 or NormalRaidsM9NDotState then return end\nlocal api=TensorCore.API.TensorACR\nlocal existed=api.getBlacklistEntry(14302)==true\nlocal e=api.addBlacklistEntry(14302,\"Fatal Flail\")\nNormalRaidsM9NDotState={entry=e,existed=existed,enabled=e.enabled,allowIfTarget=e.allowIfTarget,allowSmartDoT=e.allowSmartDoT}\ne.enabled=true; e.allowIfTarget=false; e.allowSmartDoT=false\nd(\"[M9N DoTs] Fatal Flail blacklisted for BRD including current target and Smart DoT\")\nself.used=true",
-			executeType = 2,
 			name = "M9N BRD - blacklist Fatal Flail DoTs",
 			throttleTime = 1000,
 			uuid = "a9b9e0b0-2095-45d9-887c-4b8730d113a8",
@@ -3321,7 +3348,7 @@ local tbl =
 			},
 			displayPath = "AAC Heavyweight M1/Vamp Fatale/AutoSim",
 			eventType = 11,
-			execute = "local s=NormalRaidsM9NDotState\nif not s then return end\nlocal p=TensorCore.mGetPlayer()\nif p and p.localmapid==1320 then return end\ns.entry.enabled=s.existed and s.enabled or false\ns.entry.allowIfTarget=s.allowIfTarget; s.entry.allowSmartDoT=s.allowSmartDoT\nNormalRaidsM9NDotState=nil\nd(\"[M9N DoTs] Restored prior Flail blacklist settings\")\nself.used=true",
+			execute = "local s=NormalRaidsM9NDotState\nif not s then return end\nlocal p=TensorCore.mGetPlayer()\nif p and p.localmapid==1320 then return end\nif s.entry then\n    s.entry.enabled=s.existed and s.enabled or false\n    s.entry.allowIfTarget=s.allowIfTarget; s.entry.allowSmartDoT=s.allowSmartDoT\n    d(\"[M9N DoTs] Restored prior Flail blacklist settings\")\nend\nNormalRaidsM9NDotState=nil\nself.used=true",
 			executeType = 2,
 			name = "M9N BRD - restore Flail blacklist on leaving",
 			uuid = "79f5ee25-51f8-b679-9530-01e051a8f5bd",

@@ -276,6 +276,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Normal raids
 
+- The Bard Fatal Flail DoT blacklist in M9N now applies once and is also restored when you change job inside the duty. (27-11-2026)
+
 - Added Arm’s Length for Lindwurm’s Shockwave and Surecast for Furor’s Downburst. (23-11-2026)
 
 - Added Eden’s Promise: Umbra AutoSim, hazard draws, callouts, and Arm’s Length or Surecast for Waste Away. (23-11-2026)
