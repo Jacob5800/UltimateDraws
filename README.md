@@ -286,6 +286,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Normal raids
 
+- Added Alexander - The Fist of the Son: bird and monkey pool labels, a guide to the purple pool before Gobswing, and a Smartbomb DoT blacklist for BRD, BLM and SAM. (27-11-2026)
+
 - Added Alexander - The Cuff of the Father: Blitzstrahl circle draws, combat helper setup and an AutoSim kill-time estimate. (27-11-2026)
 
 - M9N targeting and blacklist-restore reactions no longer queue in other duties. (27-11-2026)
@@ -303,5 +305,3 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added Eden's Verse: Furor draws, AutoSim, and Downburst Arm's Length. Conflag Strike's cone appears in the final five seconds. Also draws Irresistible Pull, predicted Tumultuous Nexus explosions, Hot Foot orb circles and Touchdown. (22-11-2026)
 
 - Published the Normal raids general profile (Alexander, Deltascape, Sigmascape, Alphascape, Eden's Gate and Verse, Abyssos and AAC raid draws, AutoSim and boss-targeting reactions). (22-11-2026)
-
-- Fixed the boss lookup used by encounter-start boss targeting and pre-pull setup, which could not find the boss before. (22-11-2026)

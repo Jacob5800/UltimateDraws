@@ -82,6 +82,198 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local state = A5NPoolLabelState\nlocal player = TensorCore.mGetPlayer()\nif not state or not player then self.used = true; return end\nif state.uuids then\n    for _, uuid in ipairs(state.uuids) do\n        AnyoneCore.removeTimedWorldText(uuid)\n    end\n    state.uuids = nil\nelseif state.active and player.localmapid == 520 then\n    -- Added once; the long lifetime is only a fallback, removal happens when the encounter ends.\n    state.uuids = {\n        AnyoneCore.addTimedWorldText(1200000, \"bird(AOE)\", { x = -16, y = -9, z = -190 }, 0xFFFFFFFF, true, 1.5),\n        AnyoneCore.addTimedWorldText(1200000, \"monkey(Bomb)\", { x = 16, y = -9, z = -190 }, 0xFFFFFFFF, true, 1.5),\n    }\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"a552a3a8-0d4f-0519-9e4b-65fffe9829f6",
+								true,
+							},
+						},
+						name = "Add or remove pool labels",
+						uuid = "834f8987-53a4-6553-9c90-061138c02e69",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\n-- Kept outside pull data so the labels can still be removed after a wipe resets data.\nlocal state = A5NPoolLabelState\nif player.localmapid ~= 520 then return state ~= nil and state.uuids ~= nil end\nif not state then\n    state = { checkAt = 0, active = false }\n    A5NPoolLabelState = state\nend\nif Now() >= state.checkAt then\n    state.checkAt = Now() + 500\n    local bossUp = false\n    for _, boss in pairs(TensorCore.getEntityGroupList(\"ContentID\", {contentid=4687}) or {}) do\n        if boss.alive and boss.attackable then bossUp = true; break end\n    end\n    -- A dead player may drop out of combat while the encounter continues.\n    state.active = bossUp and (player.incombat == true or (state.uuids ~= nil and not player.alive))\nend\nreturn state.active ~= (state.uuids ~= nil)",
+						dequeueIfLuaFalse = true,
+						name = "Labels need adding or removing",
+						uuid = "a552a3a8-0d4f-0519-9e4b-65fffe9829f6",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Alexander - The Fist of the Son/Ratfinx Twinkledinks/Draws",
+			eventType = 13,
+			name = "A5N pool labels",
+			uuid = "f7372ab8-5c9b-2ba3-8018-0c15914fe3b4",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local p = TensorCore.mGetPlayer()\nif p then\n    -- 5.7 s Boost cast, last Gobswing about 15.5 s after cast start.\n    data.a5nPurpleGuide = {\n        untilAt = Now() + 15500,\n        text = AnyoneCore.addTimedWorldTextOnEnt(6000, \"Gobswing: go purple pool (bird)\", p.id, 0xFFFFFFFF, true, 1.4),\n    }\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"db6ccd86-a97f-6623-a837-43e3c369b5ac",
+								true,
+							},
+						},
+						name = "Start purple pool guide",
+						uuid = "e6652b98-978b-6337-b635-1c0346a51f5d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 520 and eventArgs.spellID == 5522",
+						dequeueIfLuaFalse = true,
+						name = "A5N Boost cast",
+						uuid = "db6ccd86-a97f-6623-a837-43e3c369b5ac",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Alexander - The Fist of the Son/Ratfinx Twinkledinks/Draws",
+			eventType = 3,
+			name = "A5N Boost - go to purple pool",
+			uuid = "9902fe77-adc0-2eff-aba5-b394b7590c78",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local p = TensorCore.mGetPlayer()\nif p and data.a5nPurpleGuide then\n    local pool = { x = -16, y = -10, z = -190 }\n    local drawer = TensorCore.getStaticDrawer(GUI:ColorConvertFloat4ToU32(0.7, 0.1, 1, 0.5), 2)\n    drawer:addCircle(pool.x, pool.y, pool.z, 3)\n    local dx, dz = pool.x - p.pos.x, pool.z - p.pos.z\n    local distance = math.sqrt(dx * dx + dz * dz)\n    if distance > 4 then\n        local tip = 1.5\n        drawer:addArrow(p.pos.x, p.pos.y, p.pos.z, TensorCore.getHeadingToTarget(p.pos, pool),\n            math.max(0.5, distance - 3 - tip), 0.5, tip, 1.5)\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"acdb7b32-b4c0-28e9-ac91-5e3c4fc91158",
+								true,
+							},
+						},
+						name = "Draw arrow and pool",
+						uuid = "91221766-fffc-802c-be66-5d4f57df4f78",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local guide = data.a5nPurpleGuide\nif not guide or Now() >= guide.untilAt then return false end\nlocal p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 520 and p.alive == true",
+						dequeueIfLuaFalse = true,
+						name = "Guide active",
+						uuid = "acdb7b32-b4c0-28e9-ac91-5e3c4fc91158",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Alexander - The Fist of the Son/Ratfinx Twinkledinks/Draws",
+			eventType = 12,
+			name = "A5N purple pool guide draw",
+			uuid = "98e3502d-1c55-4c9f-8ce5-8f3e893bb975",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local guide = data.a5nPurpleGuide\nif guide and guide.text then AnyoneCore.removeTimedWorldText(guide.text) end\ndata.a5nPurpleGuide = nil\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"0f8cebfd-7c38-bd43-904e-7dd0238c1133",
+								true,
+							},
+						},
+						name = "Clear guide",
+						uuid = "39fa6f5b-9f6b-b747-b1c6-8f9712427ccc",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 520 and data.a5nPurpleGuide ~= nil and eventArgs.entityID == p.id and eventArgs.newTransformID ~= 0",
+						dequeueIfLuaFalse = true,
+						name = "Player transformed during guide",
+						uuid = "0f8cebfd-7c38-bd43-904e-7dd0238c1133",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Alexander - The Fist of the Son/Ratfinx Twinkledinks/Draws",
+			eventType = 24,
+			name = "A5N purple pool guide stop on transform",
+			uuid = "5a159387-3377-b953-aab9-126892460586",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "Alexander - The Fist of the Son/Ratfinx Twinkledinks",
 			name = "AutoSim",
 			uuid = "33f23201-07eb-ec47-8c64-d1f6d90f0201",
@@ -229,6 +421,54 @@ local tbl =
 			eventType = 3,
 			name = "A5N AutoSim baseline",
 			uuid = "facf99bc-8f86-4ba6-9edf-8c1be6732378",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local player = TensorCore.mGetPlayer()\nif not player then self.used = true; return end\n\nlocal contentID = 3646\nlocal label = \"[Normal raids] Smartbomb\"\nlocal api = TensorCore.API.TensorACR\nlocal j = player.job\nlocal eligible = player.localmapid == 520 and (j == 23 or j == 25 or j == 34)\nlocal state = NormalA5NSmartbombDoT\n\n-- Restore the previous entry on leaving the raid or changing jobs.\nif state and (not eligible or state.job ~= j) then\n    local entry = state.entry\n    if entry and entry.enabled and entry.allowIfTarget == false and entry.allowSmartDoT == false then\n        if state.created then\n            entry.enabled = false\n            if j == state.job and api.getBlacklistEntry(contentID) then\n                local current = api.addBlacklistEntry(contentID)\n                if current == entry and current.name == label then\n                    api.deleteBlacklistEntry(contentID)\n                end\n            end\n        else\n            entry.enabled = state.enabled\n            entry.allowIfTarget = state.allowIfTarget\n            entry.allowSmartDoT = state.allowSmartDoT\n        end\n    end\n    NormalA5NSmartbombDoT = nil\n    state = nil\nend\n\nif eligible and not state then\n    -- Recorded before the attempt so an unsupported ACR is not retried every update.\n    NormalA5NSmartbombDoT = { job = j }\n    local supported, exists = pcall(api.getBlacklistEntry, contentID)\n    if supported then\n        local ok, entry = pcall(api.addBlacklistEntry, contentID, label)\n        if ok and entry then\n            NormalA5NSmartbombDoT = {\n                job = j, entry = entry, created = not exists,\n                enabled = entry.enabled, allowIfTarget = entry.allowIfTarget,\n                allowSmartDoT = entry.allowSmartDoT,\n            }\n            entry.enabled = true\n            entry.allowIfTarget = false\n            entry.allowSmartDoT = false\n        end\n    end\nend\nself.used = true",
+						conditions = 
+						{
+							
+							{
+								"79d7ca4f-2065-b6de-8273-9b7cab643c64",
+								true,
+							},
+						},
+						name = "Manage Smartbomb blacklist",
+						uuid = "dbfdca0d-1913-428f-9a40-70dd6f8cf4e8",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal state = NormalA5NSmartbombDoT\nlocal j = player.job\nlocal eligible = player.localmapid == 520 and (j == 23 or j == 25 or j == 34)\nif state then return not eligible or j ~= state.job end\nreturn not not eligible",
+						dequeueIfLuaFalse = true,
+						name = "A5N job or owned cleanup",
+						uuid = "79d7ca4f-2065-b6de-8273-9b7cab643c64",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Alexander - The Fist of the Son/Ratfinx Twinkledinks/AutoSim",
+			name = "A5N Smartbomb - DoT blacklist (BRD/BLM/SAM)",
+			throttleTime = 500,
+			uuid = "22200dd4-52e5-4c88-bfdb-ecbc08fda7ab",
 			version = 2,
 		},
 	},
