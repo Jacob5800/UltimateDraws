@@ -134,6 +134,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### DSR
 
+- Removed the P5 behind-boss tank cleave draw and callout. P5 Death of the Heavens marks the warrior to face. With configured conga prepositions on, all eight conga spots show their role labels with your own spot in green. P6 breath cones show fire in green and ice in blue, and your pair partner's cone is now visible; standing in another player's cone turns it and yours red. (27-11-2026)
+
 - AutoSim: in P6, Bard now only plans for two targets at times when ranged AoE can normally reach both dragons. (26-11-2026)
 
 - Fixed a missing render flag on the optional P4 blue-orb outline label. (22-11-2026)
