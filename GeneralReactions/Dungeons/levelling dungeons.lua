@@ -43,9 +43,9 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "return LevellingDungeons == nil or LevellingDungeons.version ~= 13",
+						conditionLua = "return LevellingDungeons == nil or LevellingDungeons.version ~= 14",
 						dequeueIfLuaFalse = true,
-						name = "Relevant mechanic",
+						name = "Helpers not initialized",
 						uuid = "44512213-6c6f-b434-9e80-82da2348a964",
 						version = 3,
 					},

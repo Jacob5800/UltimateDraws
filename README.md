@@ -110,6 +110,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Dungeons
 
+- In levelling dungeons, the saved dungeon settings now load once instead of re-running every second and filling the console. (27-11-2026)
+
 - highleveldungeons reactions no longer sit in the queue outside their own dungeon. (27-11-2026)
 
 - Added The Sunken Temple of Qarn (Hard) to highleveldungeons: boss cast draws, walking mummy lane gaps, boss targeting and a Ruins Crawler DoT blacklist. The optional Paglth'an Surecast reaction was removed. (27-11-2026)
@@ -127,8 +129,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added Surecast for Maulskull, Deceiver and Ambrose, plus a disabled counterpart for Paglth’an’s Ground-to-ground Ballistic. (23-11-2026)
 
 - Added The Antitower boss draws and callouts to highleveldungeons. (23-11-2026)
-
-- Added Paglth'an: boss and trash telegraphs, Kan Rhai crosses, Amhuluk Levin and Lightning Rod circles, the Magitek Core launchpad, an optional Arm's Length request for Ground-to-ground Ballistic (off by default), and AutoSim forecasts for Amhuluk, Magitek Core (both add waves) and Lunar Bahamut. (22-11-2026)
 
 ### DSR
 
