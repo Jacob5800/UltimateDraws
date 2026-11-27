@@ -20388,6 +20388,143 @@ local tbl =
 			version = 2,
 		},
 	}, 
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nlocal p=e and e.pos\nif not p then return end\nlocal cx,cz\nfor _,c in ipairs({{-831,-225},{-805,-270},{-779,-225}}) do\n local d=(p.x-c[1])^2+(p.z-c[2])^2\n if d>180 and d<215 then cx,cz=c[1],c[2];break end\nend\nif not cx then return end\nlocal now=Now()\nif eventArgs.spellID==18887 then\n data.cfHobbesCombat={x=p.x,z=p.z,cx=cx,cz=cz,at=now}\n AnyoneCore.addWorldTextCountdown(1900,{x=cx,y=p.y+2,z=cz},0xFFFFFFFF,true,1)\n return\nend\nlocal s=data.cfHobbesCombat\nif not s or s.cx~=cx or s.cz~=cz or now-s.at>6500 then return end\nif s.fast then data.cfHobbesCombat=nil;return end\nif (p.x-s.x)^2+(p.z-s.z)^2<100 then return end\ns.fast=true\ns.y=p.y\ns.px=3*cx-s.x-p.x\ns.pz=3*cz-s.z-p.z\ns.untilTime=now+2200",
+						conditions = 
+						{
+							
+							{
+								"e38f81a1-1f3f-757a-9515-1847bc00c734",
+								true,
+							},
+						},
+						uuid = "007c2713-d7a6-4564-9757-0dfbb1ad6a12",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==882 and p.pos and (p.pos.x+805)^2+(p.pos.z+240)^2<4900 and (eventArgs.spellID==18887 or eventArgs.spellID==18449))",
+						dequeueIfLuaFalse = true,
+						uuid = "e38f81a1-1f3f-757a-9515-1847bc00c734",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 2,
+			name = "[Copied Factory] Hobbes Variable Combat Test - prediction setup",
+			uuid = "07b70179-59b0-dff4-90dc-8527d66cd99d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.cfHobbesCombat\nif s and (eventArgs.x-s.cx)^2+(eventArgs.z-s.cz)^2<400 then s.untilTime=nil end",
+						conditions = 
+						{
+							
+							{
+								"0bfc0380-6fc6-2d8d-8817-920686ddd488",
+								true,
+							},
+						},
+						uuid = "e59e724e-2268-0bee-8d03-097d61ae286d",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==882 and p.pos and (p.pos.x+805)^2+(p.pos.z+240)^2<4900 and (data.cfHobbesCombat and data.cfHobbesCombat.untilTime and eventArgs.aoeID==18449))",
+						dequeueIfLuaFalse = true,
+						uuid = "0bfc0380-6fc6-2d8d-8817-920686ddd488",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 18,
+			name = "[Copied Factory] Hobbes Variable Combat Test - prediction clear",
+			uuid = "b08ad9f7-fcc6-32c3-98aa-7c4fd660e9f2",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.cfHobbesCombat\nif not s or not s.untilTime then return end\nif Now()>=s.untilTime then s.untilTime=nil;return end\nlocal drawer=TensorCore.getStaticDrawer(0x6040BFFF,2)\ndrawer:addDonut(s.px,s.y,s.pz,7,19,false)\ndrawer:addCircle(s.px,s.y,s.pz,2,false)\nlocal heading=math.atan2(s.px-s.cx,s.pz-s.cz)\ndrawer:addCone(s.cx,s.y,s.cz,20,math.rad(60),heading+2*math.pi/3,false)\ndrawer:addCone(s.cx,s.y,s.cz,20,math.rad(60),heading-2*math.pi/3,false)",
+						conditions = 
+						{
+							
+							{
+								"a947fcac-984e-847e-9cf0-766e9350becd",
+								true,
+							},
+						},
+						uuid = "b83e80ca-43c3-1501-94d3-032110ff9ace",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==882 and p.pos and (p.pos.x+805)^2+(p.pos.z+240)^2<4900 and (data.cfHobbesCombat and data.cfHobbesCombat.untilTime))",
+						dequeueIfLuaFalse = true,
+						uuid = "a947fcac-984e-847e-9cf0-766e9350becd",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 12,
+			name = "[Copied Factory] Hobbes Variable Combat Test - PENDING replay check - final wave prediction",
+			uuid = "8957a2c2-7df5-4e13-b4dd-1b7ef9036d6a",
+			version = 2,
+		},
+	},
 	inheritedProfiles = 
 	{
 	},
