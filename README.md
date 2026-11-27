@@ -92,6 +92,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Sil'dihn
 
+- Sil'dihn reactions that do not apply no longer wait in the queue, the final-trash cooldown reserve runs only when needed, and Prepull Helper is disabled only inside the criterion dungeon. (27-11-2026)
+
 - Fixed the Gladiator and Zeless Gah add lookups, made three Silkie and AutoSim checks return a strict true/false, removed leftover settings-path code, and stopped the Silkie guide from scanning entities outside Sil'dihn. (22-11-2026)
 
 - Added saved Matthew/PF Fresh Puff 2 choices in the existing Silkie settings, preserving Matthew destinations by default. (14-11-2026)

@@ -1326,6 +1326,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -1689,6 +1690,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -3299,14 +3301,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nlocal s=_G.JacobSilkieGuide\nif s then s.clear();s.pullStart=nil;s.phase=0;s.sweepUntil=nil;s.sweepGoal=nil;s.plan1Announced=nil;s.mainBossID=nil;s.registry={[11369]={},[11370]={},[11371]={}};s.tethers={};s.side=nil;s.laneSide=nil;s.rowMid=nil end\nself.used=true\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"1970032a-9a73-4cdf-a248-28dda2836569",
+								true,
+							},
+						},
+						name = "[State] Silkie - Reset after wipe",
+						uuid = "f40fcb6f-e19d-4b63-932a-8befb8ebd79b",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return _G.JacobSilkieGuide~=nil",
+						dequeueIfLuaFalse = true,
+						name = "Silkie guide exists",
+						uuid = "1970032a-9a73-4cdf-a248-28dda2836569",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Sildihn criterion/Silkie",
 			eventType = 9,
 			execute = "local s=_G.JacobSilkieGuide\nif s then s.clear();s.pullStart=nil;s.phase=0;s.sweepUntil=nil;s.sweepGoal=nil;s.plan1Announced=nil;s.mainBossID=nil;s.registry={[11369]={},[11370]={},[11371]={}};s.tethers={};s.side=nil;s.laneSide=nil;s.rowMid=nil end\nself.used=true",
-			executeType = 2,
 			name = "[State] Silkie - Reset after wipe",
 			timeout = 1,
 			uuid = "b03126c8-b53b-0d66-a618-7f87b86c35d1",
@@ -3319,14 +3351,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nlocal s=_G.JacobSilkieGuide\nif s then s.clear();s.pullStart=nil;s.phase=0;s.sweepUntil=nil;s.sweepGoal=nil;s.plan1Announced=nil;s.mainBossID=nil;s.registry={[11369]={},[11370]={},[11371]={}};s.tethers={};s.side=nil;s.laneSide=nil;s.rowMid=nil;s.dead=false;s.seenAlive=false;s.center=nil;s.boss=nil end\nself.used=true\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"0352fd90-e6e8-48d9-8864-947edc254b3f",
+								true,
+							},
+						},
+						name = "[State] Silkie - Reset instance",
+						uuid = "8fb43f8b-6e7d-423c-8d7b-18cb8960ab70",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return _G.JacobSilkieGuide~=nil",
+						dequeueIfLuaFalse = true,
+						name = "Silkie guide exists",
+						uuid = "0352fd90-e6e8-48d9-8864-947edc254b3f",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Sildihn criterion/Silkie",
 			eventType = 11,
 			execute = "local s=_G.JacobSilkieGuide\nif s then s.clear();s.pullStart=nil;s.phase=0;s.sweepUntil=nil;s.sweepGoal=nil;s.plan1Announced=nil;s.mainBossID=nil;s.registry={[11369]={},[11370]={},[11371]={}};s.tethers={};s.side=nil;s.laneSide=nil;s.rowMid=nil;s.dead=false;s.seenAlive=false;s.center=nil;s.boss=nil end\nself.used=true",
-			executeType = 2,
 			name = "[State] Silkie - Reset instance",
 			timeout = 1,
 			uuid = "bd028ea8-7c30-73a9-a3ec-b6a7926d6c65",
@@ -4790,6 +4852,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -5008,6 +5071,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "return eventArgs.oldData ~= nil and eventArgs.oldData.silkieBlueJump ~= nil",
+						dequeueIfLuaFalse = true,
 						name = "active",
 						uuid = "c1472a70-407f-d069-8283-cb6d028104b9",
 						version = 3,
@@ -5056,6 +5120,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "return data.silkieBlueJump ~= nil",
+						dequeueIfLuaFalse = true,
 						name = "active",
 						uuid = "3c828750-87c9-d20a-8be7-bcca77b57919",
 						version = 3,
@@ -5104,6 +5169,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "return data.silkieBlueJump ~= nil",
+						dequeueIfLuaFalse = true,
 						name = "active",
 						uuid = "ba788901-dcf0-b155-ac4d-c7955c947870",
 						version = 3,
@@ -5310,6 +5376,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -5416,6 +5483,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -5491,6 +5559,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -5566,6 +5635,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -5635,6 +5705,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -5704,6 +5775,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -5779,6 +5851,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -5854,6 +5927,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -6008,6 +6082,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -6082,6 +6157,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -6179,6 +6255,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -6254,6 +6331,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -6333,6 +6411,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -6417,6 +6496,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -6502,6 +6582,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -6595,6 +6676,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -6754,6 +6836,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -6912,6 +6995,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -7052,6 +7136,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -7138,6 +7223,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -7292,6 +7378,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1076,
@@ -7424,6 +7511,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1076,
@@ -7537,6 +7625,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -10605,6 +10694,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -10940,6 +11030,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1076,
@@ -11484,6 +11575,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1076,
@@ -11775,6 +11867,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1076,
@@ -11925,6 +12018,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -12089,6 +12183,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -12249,6 +12344,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -12409,6 +12505,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -12572,12 +12669,12 @@ local tbl =
 						{
 							
 							{
-								"0f28bc8d-327f-c821-a36d-98f891c20a7e",
+								"00a2c59e-d02a-0e30-81e9-ac58e4422d6a",
 								true,
 							},
 							
 							{
-								"00a2c59e-d02a-0e30-81e9-ac58e4422d6a",
+								"0f28bc8d-327f-c821-a36d-98f891c20a7e",
 								true,
 							},
 							
@@ -12666,6 +12763,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Silkie",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11369,
@@ -12918,6 +13016,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Silkie",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11369,
@@ -13044,12 +13143,12 @@ local tbl =
 						{
 							
 							{
-								"8e4a0059-b6ca-9d5f-8b8a-18a991536eff",
+								"6bb0467a-24a0-6da7-87e8-adcdb731abb4",
 								true,
 							},
 							
 							{
-								"6bb0467a-24a0-6da7-87e8-adcdb731abb4",
+								"8e4a0059-b6ca-9d5f-8b8a-18a991536eff",
 								true,
 							},
 							
@@ -13122,6 +13221,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Silkie",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11369,
@@ -13268,12 +13368,12 @@ local tbl =
 						{
 							
 							{
-								"ee6e9dbb-92bc-b4fa-a866-9e5698a387b3",
+								"586d395d-f7af-e1d8-b683-150810bb4b3a",
 								true,
 							},
 							
 							{
-								"586d395d-f7af-e1d8-b683-150810bb4b3a",
+								"ee6e9dbb-92bc-b4fa-a866-9e5698a387b3",
 								true,
 							},
 							
@@ -13342,6 +13442,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Silkie",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11369,
@@ -13482,12 +13583,12 @@ local tbl =
 						{
 							
 							{
-								"ceaefc16-f44c-b8b2-b48d-75df59000cf9",
+								"110ec150-54bc-273e-bc9c-286af454aaff",
 								true,
 							},
 							
 							{
-								"110ec150-54bc-273e-bc9c-286af454aaff",
+								"ceaefc16-f44c-b8b2-b48d-75df59000cf9",
 								true,
 							},
 							
@@ -13557,6 +13658,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Silkie",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11369,
@@ -13875,6 +13977,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -13950,12 +14053,12 @@ local tbl =
 						{
 							
 							{
-								"fe62372e-b027-073b-9010-ebf50704754e",
+								"23d45d22-e397-6abc-8019-e8bf3d980a07",
 								true,
 							},
 							
 							{
-								"23d45d22-e397-6abc-8019-e8bf3d980a07",
+								"fe62372e-b027-073b-9010-ebf50704754e",
 								true,
 							},
 							
@@ -14028,6 +14131,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Silkie",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11369,
@@ -14175,12 +14279,12 @@ local tbl =
 						{
 							
 							{
-								"3d214d98-44d6-7680-9dc7-318bf819e7fe",
+								"f350cc5e-6c80-4cfe-9b1e-29f704d66afe",
 								true,
 							},
 							
 							{
-								"f350cc5e-6c80-4cfe-9b1e-29f704d66afe",
+								"3d214d98-44d6-7680-9dc7-318bf819e7fe",
 								true,
 							},
 							
@@ -14253,6 +14357,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Silkie",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11369,
@@ -14570,6 +14675,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -14697,6 +14803,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Silkie",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11369,
@@ -14869,6 +14976,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Silkie",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11369,
@@ -15169,12 +15277,12 @@ local tbl =
 						{
 							
 							{
-								"74a451c1-1400-b1c3-9d2e-66c681cc1f16",
+								"f1ebec50-a6ec-4b57-bc7f-62a8424b8443",
 								true,
 							},
 							
 							{
-								"f1ebec50-a6ec-4b57-bc7f-62a8424b8443",
+								"74a451c1-1400-b1c3-9d2e-66c681cc1f16",
 								true,
 							},
 							
@@ -15242,6 +15350,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Silkie",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11369,
@@ -15378,12 +15487,12 @@ local tbl =
 						{
 							
 							{
-								"c956a019-2caf-9185-8954-9008352e87ee",
+								"7ed0152c-9a0d-d7c8-a9b7-5b880c40b530",
 								true,
 							},
 							
 							{
-								"7ed0152c-9a0d-d7c8-a9b7-5b880c40b530",
+								"c956a019-2caf-9185-8954-9008352e87ee",
 								true,
 							},
 							
@@ -15451,6 +15560,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Silkie",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11369,
@@ -15587,12 +15697,12 @@ local tbl =
 						{
 							
 							{
-								"ea0e4d0f-916f-3893-a049-a1f612e4e0dd",
+								"92e8d5f5-72b2-2d31-8f4c-456f947e5df6",
 								true,
 							},
 							
 							{
-								"92e8d5f5-72b2-2d31-8f4c-456f947e5df6",
+								"ea0e4d0f-916f-3893-a049-a1f612e4e0dd",
 								true,
 							},
 							
@@ -15660,6 +15770,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Silkie",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11369,
@@ -15896,6 +16007,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -16060,6 +16172,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -16085,14 +16198,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\n_G.JacobSilkieWashMit=nil\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"ec9825e0-4fac-4a63-821c-db1c3be08b33",
+								true,
+							},
+						},
+						name = "[State] Silkie - Reset wash mitigation OnWipe",
+						uuid = "86f12b78-038b-496b-a9bb-259b6b931660",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return _G.JacobSilkieWashMit~=nil",
+						dequeueIfLuaFalse = true,
+						name = "Wash state exists",
+						uuid = "ec9825e0-4fac-4a63-821c-db1c3be08b33",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Sildihn criterion/Mitigations/Silkie",
 			eventType = 9,
 			execute = "_G.JacobSilkieWashMit=nil",
-			executeType = 2,
 			name = "[State] Silkie - Reset wash mitigation OnWipe",
 			uuid = "d70656e6-5f8b-d7da-8161-a8062c51e986",
 			version = 2,
@@ -16104,14 +16247,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\n_G.JacobSilkieWashMit=nil\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"06c5f792-6a30-429f-bf9c-44b520bb0e24",
+								true,
+							},
+						},
+						name = "[State] Silkie - Reset wash mitigation OnMapChange",
+						uuid = "259aa1e4-d93b-4e7f-b5f1-589c7b334c10",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return _G.JacobSilkieWashMit~=nil",
+						dequeueIfLuaFalse = true,
+						name = "Wash state exists",
+						uuid = "06c5f792-6a30-429f-bf9c-44b520bb0e24",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Sildihn criterion/Mitigations/Silkie",
 			eventType = 11,
 			execute = "_G.JacobSilkieWashMit=nil",
-			executeType = 2,
 			name = "[State] Silkie - Reset wash mitigation OnMapChange",
 			uuid = "516e81f5-34f0-76a1-9cfb-ebace3d0b933",
 			version = 2,
@@ -16476,6 +16649,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Gladiator of Sil'dih",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11387,
@@ -16686,6 +16860,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Gladiator of Sil'dih",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11387,
@@ -16900,6 +17075,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Gladiator of Sil'dih",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11387,
@@ -17101,6 +17277,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Gladiator of Sil'dih",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11387,
@@ -17301,6 +17478,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Gladiator of Sil'dih",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11387,
@@ -17501,6 +17679,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Gladiator of Sil'dih",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11387,
@@ -17702,6 +17881,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Gladiator of Sil'dih",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11387,
@@ -17896,6 +18076,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Gladiator of Sil'dih",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11387,
@@ -18074,6 +18255,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Gladiator of Sil'dih",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11387,
@@ -18258,6 +18440,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Gladiator of Sil'dih",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11387,
@@ -18459,6 +18642,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Gladiator of Sil'dih",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11387,
@@ -18664,6 +18848,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Gladiator of Sil'dih",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11387,
@@ -18844,6 +19029,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Gladiator of Sil'dih",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11387,
@@ -19039,6 +19225,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Gladiator of Sil'dih",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11387,
@@ -19232,6 +19419,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Gladiator of Sil'dih",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11387,
@@ -19586,6 +19774,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Gladiator of Sil'dih",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11387,
@@ -19760,6 +19949,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Gladiator of Sil'dih",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11387,
@@ -19940,6 +20130,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Gladiator of Sil'dih",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11387,
@@ -20144,6 +20335,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Gladiator of Sil'dih",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11387,
@@ -20330,6 +20522,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Gladiator of Sil'dih",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11387,
@@ -20526,6 +20719,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Gladiator of Sil'dih",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11387,
@@ -20729,6 +20923,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Gladiator of Sil'dih",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11387,
@@ -20928,6 +21123,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Gladiator of Sil'dih",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11387,
@@ -21127,6 +21323,7 @@ local tbl =
 					data = 
 					{
 						category = "Event",
+						dequeueIfLuaFalse = true,
 						displayPath = "Sildihn criterion/Mitigations/Gladiator of Sil'dih",
 						eventArgOptionType = 2,
 						eventEntityContentID = 11387,
@@ -25301,6 +25498,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -25627,6 +25825,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -25852,6 +26051,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -26077,6 +26277,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1075,
 						name = "Criterion Sil'dihn (1075)",
 						uuid = "89815bdd-6852-8ab1-bd26-8819e9af3f81",
@@ -26457,14 +26658,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nif AnyoneCore and AnyoneCore.Settings and AnyoneCore.Settings.PrepullHelper then\n    if AnyoneCore.Settings.PrepullHelper.enabled then\n        AnyoneCore.Settings.PrepullHelper.enabled = false\n    end\n    self.used = true\nend\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"3e4d77a1-da70-4ec3-a375-33c6bc55126a",
+								true,
+							},
+						},
+						name = "[AA] Disable Prepull Helper - Zone entry",
+						uuid = "81692fca-6177-455e-a853-997f5200cca2",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local map=eventArgs.newMapID\nreturn map==1075 or map==1076",
+						dequeueIfLuaFalse = true,
+						name = "Entered Sil'dihn criterion",
+						uuid = "3e4d77a1-da70-4ec3-a375-33c6bc55126a",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "General",
 			eventType = 11,
 			execute = "if AnyoneCore and AnyoneCore.Settings and AnyoneCore.Settings.PrepullHelper then\n    if AnyoneCore.Settings.PrepullHelper.enabled then\n        AnyoneCore.Settings.PrepullHelper.enabled = false\n    end\n    self.used = true\nend",
-			executeType = 2,
 			name = "[AA] Disable Prepull Helper - Zone entry",
 			throttleTime = 1000,
 			uuid = "937e8d58-45f2-2469-9ec3-938527d548e1",
@@ -26477,14 +26708,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nif AnyoneCore and AnyoneCore.Settings and AnyoneCore.Settings.PrepullHelper then\n    if AnyoneCore.Settings.PrepullHelper.enabled then\n        AnyoneCore.Settings.PrepullHelper.enabled = false\n    end\n    self.used = true\nend\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"b6ef6d65-7031-49a2-b8e4-3dccaa185291",
+								true,
+							},
+						},
+						name = "[AA] Disable Prepull Helper - Countdown",
+						uuid = "cfe1a46b-09a5-4629-83f7-6cbeaab4fe10",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal map=p and p.localmapid\nreturn map==1075 or map==1076",
+						dequeueIfLuaFalse = true,
+						name = "In Sil'dihn criterion",
+						uuid = "b6ef6d65-7031-49a2-b8e4-3dccaa185291",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "General",
 			eventType = 16,
 			execute = "if AnyoneCore and AnyoneCore.Settings and AnyoneCore.Settings.PrepullHelper then\n    if AnyoneCore.Settings.PrepullHelper.enabled then\n        AnyoneCore.Settings.PrepullHelper.enabled = false\n    end\n    self.used = true\nend",
-			executeType = 2,
 			name = "[AA] Disable Prepull Helper - Countdown",
 			uuid = "03b72cd7-0b8a-6290-8d8a-1d9a8fd6efdd",
 			version = 2,
@@ -26529,6 +26790,11 @@ local tbl =
 								"73cb3bfc-14dc-ea20-a6bb-933fbd0660c7",
 								true,
 							},
+							
+							{
+								"f3814386-6e59-48cb-b635-4257b420bae2",
+								true,
+							},
 						},
 						name = "Update final-trash reserves",
 						uuid = "402b408f-70ca-6abf-96a4-0b1d46389d9f",
@@ -26544,6 +26810,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -26551,6 +26818,18 @@ local tbl =
 						},
 						name = "Sil'dihn Criterion/Savage",
 						uuid = "73cb3bfc-14dc-ea20-a6bb-933fbd0660c7",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "-- true exactly when the script below would change something\nlocal C,S=SildihnControlConfig,data.sildihnControl\nif not C or C.fileApiVersion~=1 or not S then return true end\nif next(S.owned)~=nil or S.held then return true end\nlocal p=TensorCore.mGetPlayer()\nif not p then return false end\nlocal t=TensorCore.mGetTarget()\nif not t or not t.hp or t.hp.current<=0 or not t.attackable then return false end\nif not (S.p1groups[t.contentid] or S.p2ids[t.contentid]) then return false end\nreturn not not ((p.job==25 and C.reserveLL) or (p.job~=25 and C.reserveCD))",
+						dequeueIfLuaFalse = true,
+						name = "Reserve work to do",
+						uuid = "f3814386-6e59-48cb-b635-4257b420bae2",
 						version = 3,
 					},
 				},
@@ -26655,6 +26934,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -26775,6 +27055,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
@@ -26890,6 +27171,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 12,
+						dequeueIfLuaFalse = true,
 						localMapIDList = 
 						{
 							1075,
