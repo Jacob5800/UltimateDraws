@@ -204,6 +204,10 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - P5 Polarizing Strikes: the bait rounds are now counted more reliably, so the stack-behind-bait, dodge-line and final move-out calls follow the real round. The next-bait call is also shorter so it no longer overlaps the dodge call. (23-11-2026)
 
+### M1S
+
+- Added the M1S draws profile (hectorstratr1s): Quadruple Crossing and One-two Paw pre-draws with bait guidance and swap callouts, Mouser safe tiles, marked-player jump draws, Shockwave knockback line and spread callout, and tank, light party and raid callouts. (27-11-2026)
+
 ### M4S
 
 - Sabertail exaflares: only the next two upcoming explosion circles per lane are shown, and each circle disappears as soon as its explosion goes off. (24-11-2026)

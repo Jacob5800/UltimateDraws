@@ -42,6 +42,7 @@ This procedure applies to every mapped profile below. Keep one procedure here; p
 | TEA ACR3 optimizations | `tea` / `1.0.2` | `Teareactions\ACR3 Opti.lua` | `TEA\ACR3 Opti.lua` | `TEA-PROFILE-SPLIT-TODO.md` |
 | TEA AA AutoSim | `tea` / `1.0.2` | `Teareactions\[AA] Autosim - TEA (1) (1).lua` | `TEA\[AA] Autosim - TEA.lua` | `TEA-AUTOSIM-DOLLS-TODO.md` |
 | M4S Draws | `r4s` / `1.0.2` | `M4S Draws.lua` | `M4S\M4S Draws.lua` | `M4S-PROFILE-SPLIT-TODO.md` |
+| M1S Draws | `r1s` / `1.0.3` | `hectorstratr1s.lua` | `M1S\hectorstratr1s.lua` | `M1S-DRAWS-TODO.md` |
 
 UCOB has one canonical published draws file, `LPDU Draws.lua`; do not recreate its removed beta duplicate. Preserve DSR's distinct beta filename. TEA's removed `autosim TEA Tramadol.lua` download is not a substitute for AA AutoSim. TEA `LPDU Draws` and `ACR3 Opti` are separate profiles with no inheritance between them. `ACR3 Opti` contains the moved Reaper/Pictomancer optimizations; `LPDU Draws` contains the copied remaining reactions, including `[RPR] Second Wind`. Do not publish the original `rpr tea` as either profile.
 
