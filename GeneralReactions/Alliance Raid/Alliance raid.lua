@@ -21472,6 +21472,630 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nif Argus.getEntityModel(eventArgs.entityID)~=11384 then return end\nlocal s=data.cfSaw\nif not s then s={} data.cfSaw=s end\n-- the Marx Impact cast starts about 3s after the crane appears and lasts 5s\nif not s[eventArgs.entityID] then s[eventArgs.entityID]=Now()+10000 end\n",
+						conditions = 
+						{
+							
+							{
+								"bd22ecf1-c9da-db91-aceb-0de10803ec29",
+								true,
+							},
+						},
+						name = "Remember the crane",
+						uuid = "9b3b6045-22b4-73f9-b692-9172ad62e927",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e or e.entityContentID~=9157 or e.isVisible~=true then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==882) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Crane becomes visible",
+						uuid = "bd22ecf1-c9da-db91-aceb-0de10803ec29",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 22,
+			name = "[Copied Factory] Marx Impact crane appears",
+			uuid = "deb39ede-0168-c9ff-bfcb-7b4cd8654c90",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.cfSaw\nif not s then s={} data.cfSaw=s end\n-- also covers a crane whose appearance was not seen\ns[eventArgs.entityID]=Now()+eventArgs.channelTimeMax*1000+800\n",
+						conditions = 
+						{
+							
+							{
+								"0ffd76e3-c58d-5ac9-ad94-4f637c4315d1",
+								true,
+							},
+						},
+						name = "Keep until the hit",
+						uuid = "786559f0-5e95-9dde-b403-e027160963fe",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e or e.spellID~=18644 then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==882) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Marx Impact",
+						uuid = "0ffd76e3-c58d-5ac9-ad94-4f637c4315d1",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 3,
+			name = "[Copied Factory] Marx Impact cast",
+			uuid = "f260352a-ec4c-3085-8440-24bafe67273f",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nif data.cfSaw then data.cfSaw[eventArgs.entityID]=nil end\n",
+						conditions = 
+						{
+							
+							{
+								"c248f3f7-a97b-326e-8d3a-b66782758240",
+								true,
+							},
+						},
+						name = "Remove that circle",
+						uuid = "5244e1e3-fb88-7a80-8c32-74e5e559b3a6",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not eventArgs or eventArgs.spellID~=18644 then return false end\nreturn data.cfSaw~=nil\n",
+						dequeueIfLuaFalse = true,
+						name = "Marx Impact hit",
+						uuid = "c248f3f7-a97b-326e-8d3a-b66782758240",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 2,
+			name = "[Copied Factory] Marx Impact hit",
+			uuid = "16be1e9a-9a0a-6a3a-9797-12926dc4e1f1",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.cfSaw\nif not s then return end\nlocal now=Now()\nlocal red\nlocal any=false\nfor id,fin in pairs(s) do\n local c=TensorCore.mGetEntity(id)\n if now>=fin or not c or not c.pos then s[id]=nil\n else\n  any=true\n  red=red or TensorCore.getStaticDrawer(0x703333FF,2)\n  -- Marx Impact: radius 22 around the crane\n  red:addCircle(c.pos.x,c.pos.y+0.05,c.pos.z,22)\n end\nend\nif not any then data.cfSaw=nil end\n",
+						conditions = 
+						{
+							
+							{
+								"591ae269-fdfd-2521-b8f0-dc2ecee55b86",
+								true,
+							},
+						},
+						name = "Circle around each crane",
+						uuid = "7d698d94-d453-bedf-86c2-14f5570752d6",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not data.cfSaw then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==882) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Cranes pending",
+						uuid = "591ae269-fdfd-2521-b8f0-dc2ecee55b86",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 12,
+			name = "[Copied Factory] Marx Impact circles (red, early)",
+			uuid = "c4921240-66c2-d738-b1fe-c93ccbd44cb2",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal b=TensorCore.mGetEntity(eventArgs.entityID)\nif not b or not b.pos then return end\nlocal s=data.cfStrike\nif not s then s={} data.cfStrike=s end\n-- explosions start when the indicator cast ends and run 60 yalms along its heading\ns[#s+1]={x=b.pos.x,y=b.pos.y,z=b.pos.z,at=Now()+eventArgs.channelTimeMax*1000+300,done=0}\n",
+						conditions = 
+						{
+							
+							{
+								"0edb7704-498c-2916-9c15-fed114e5fae3",
+								true,
+							},
+						},
+						name = "Remember the lane",
+						uuid = "5135e100-9051-9a26-a4e8-1256a5a6c00c",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e or e.spellID<18649 or e.spellID>18651 then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==882) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Lane indicator cast",
+						uuid = "0edb7704-498c-2916-9c15-fed114e5fae3",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 3,
+			name = "[Copied Factory] Airstrike lane record",
+			uuid = "3bc43808-7103-df3e-afd1-17bad4fd3892",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.cfStrike\nif not s then return end\nlocal c=TensorCore.mGetEntity(eventArgs.entityID)\nif not c or not c.pos then return end\nfor i=#s,1,-1 do\n local l=s[i]\n if math.abs(l.x-c.pos.x)<3 then\n  -- ground behind the next step is safe (steps are 8.67 apart, seven per lane)\n  local passed=(c.pos.z-l.z)+8.67\n  if passed>l.done then l.done=passed end\n  if l.done>=59 then table.remove(s,i) end\n  break\n end\nend\n",
+						conditions = 
+						{
+							
+							{
+								"ec134e5a-199a-3e6f-a5f8-d853a85fe759",
+								true,
+							},
+						},
+						name = "Shorten that lane",
+						uuid = "5cd60f01-7f84-383e-9dcc-4057880d8427",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not eventArgs or eventArgs.spellID~=18652 then return false end\nreturn data.cfStrike~=nil\n",
+						dequeueIfLuaFalse = true,
+						name = "Travelling explosion",
+						uuid = "ec134e5a-199a-3e6f-a5f8-d853a85fe759",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 2,
+			name = "[Copied Factory] Airstrike explosion steps",
+			uuid = "c14a74d1-a424-077a-b0be-0f745cece70d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.cfStrike\nif not s then return end\nlocal now=Now()\nfor i=#s,1,-1 do\n if now>s[i].at+5000 then table.remove(s,i) end\nend\nif #s==0 then data.cfStrike=nil return end\n-- a lane turns red 2.5s before its first explosion; red is cut off at the platform's south edge (z 457)\nlocal live={}\nfor _,l in ipairs(s) do\n local from=l.z+l.done\n local len=math.min(60-l.done,457-from)\n if l.at-now<=2500 and len>0 then live[#live+1]={x=l.x,z=from,len=len} end\nend\nlocal y=s[1].y+0.05\nlocal red=TensorCore.getStaticDrawer(0x703333FF,2)\nfor _,l in ipairs(live) do red:addRect(l.x,y,l.z,l.len,20,0) end\n-- green: subtractive, the 60x60 platform (centre 900,427) minus the red lanes\nlocal channel=Argus2.getNextUnusedChannel(true)\nif channel==1 then channel=Argus2.getNextUnusedChannel(true) end\nif not channel or channel<=1 then return end\nlocal F=Argus2.RenderFlags\nlocal baseFlags=F.FLAG_WARP_TERRAIN+F.FLAG_OCCLUSION_BASE\nlocal maskFlags=F.FLAG_WARP_TERRAIN+F.FLAG_OCCLUDE\nTensorCore.getStaticDrawer(0x5033FF33,2,channel,baseFlags):addRect(900,y,397,60,60,0,false,baseFlags)\nlocal mask=TensorCore.getStaticDrawer(0xFFFFFFFF,0,channel,maskFlags)\nfor _,l in ipairs(live) do mask:addRect(l.x,y,l.z,l.len,20,0,false,maskFlags) end\n",
+						conditions = 
+						{
+							
+							{
+								"b702407a-6a53-c5f8-b75c-623cdcfe8454",
+								true,
+							},
+						},
+						name = "Red lanes, subtractive green",
+						uuid = "35e151e6-af61-df9e-9eb3-fea6317546a1",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not data.cfStrike then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==882) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Airstrike pending",
+						uuid = "b702407a-6a53-c5f8-b75c-623cdcfe8454",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 12,
+			name = "[Copied Factory] Airstrike lanes (red) and safe (green)",
+			uuid = "9736224e-a4a1-83cd-a29a-87380f50412c",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\n-- the hack targets the tank that will blow up; that tank then casts the line-of-sight blast\nlocal hacked=eventArgs.spellID==18663 and eventArgs.targetID or eventArgs.entityID\nlocal s=data.cfHack\nif not s or Now()>=s.fin then data.cfHack={tank=hacked,fin=Now()+24000} else s.tank=hacked end\n",
+						conditions = 
+						{
+							
+							{
+								"9abb3ed2-da18-1e34-ae2b-c5bef0fc5a08",
+								true,
+							},
+						},
+						name = "Remember the hacked tank",
+						uuid = "c4c026c6-7f3f-2473-beee-97f8599ca827",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e or (e.spellID~=18663 and e.spellID~=18664) then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==882) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Hack or tank blast cast",
+						uuid = "9abb3ed2-da18-1e34-ae2b-c5bef0fc5a08",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 3,
+			name = "[Copied Factory] Hack Goliath Tank record",
+			uuid = "aaf6be7e-f38c-abe2-8eaa-f8c3cf01cebd",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\ndata.cfHack=nil\n",
+						conditions = 
+						{
+							
+							{
+								"9f9a28b3-94c6-6558-a1cb-8f8f5c9a920b",
+								true,
+							},
+						},
+						name = "Stop showing the safe spot",
+						uuid = "789f2a89-e04c-ba98-abe9-9c401420bbdf",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not eventArgs or eventArgs.spellID~=18664 then return false end\nreturn data.cfHack~=nil\n",
+						dequeueIfLuaFalse = true,
+						name = "Blast resolved",
+						uuid = "9f9a28b3-94c6-6558-a1cb-8f8f5c9a920b",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 2,
+			name = "[Copied Factory] Goliath Tank blast hit",
+			uuid = "da77272b-22da-e44e-a27b-ae55478de96d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.cfHack\nif not s then return end\nif Now()>=s.fin then data.cfHack=nil return end\nlocal bad=TensorCore.mGetEntity(s.tank)\nlocal p=TensorCore.mGetPlayer()\nif not bad or not bad.pos or not p or not p.pos then return end\n-- the tank to hide behind is the other one that is not casting (BossMod A15)\nlocal safe\nfor id,t in pairs(EntityList(\"contentid=9156\") or {}) do\n if id~=s.tank and t.pos and Argus.getEntityModel(id)==11383 and Argus.isEntityVisible(id) then safe=t break end\nend\nif not safe then return end\nlocal ox,oz=bad.pos.x,bad.pos.z\nlocal dx,dz=safe.pos.x-ox,safe.pos.z-oz\nlocal d=math.sqrt(dx*dx+dz*dz)\nif d<8 then return end\nlocal h=math.atan2(dx,dz)\nlocal y=safe.pos.y+0.05\nlocal green=TensorCore.getStaticDrawer(0x6033FF33,2)\n-- shadow of a blocker of radius 6, as seen from the exploding tank\ngreen:addDonutCone(ox,y,oz,d+3,d+14,2*math.asin(5/d),h)\nlocal tx,tz=safe.pos.x+dx/d*8,safe.pos.z+dz/d*8\nlocal spot=TensorCore.getStaticDrawer(0xB033FF33,3)\nspot:addCircle(tx,y,tz,1.5)\nlocal px,pz=tx-p.pos.x,tz-p.pos.z\nlocal len=math.sqrt(px*px+pz*pz)\nif len>2.5 then spot:addArrow(p.pos.x,p.pos.y+0.1,p.pos.z,math.atan2(px,pz),len-1.5,0.5,1.5,1.6) end\n",
+						conditions = 
+						{
+							
+							{
+								"814da6c4-84ed-9dc8-95b8-6e91dda40940",
+								true,
+							},
+						},
+						name = "Green shadow, spot and arrow",
+						uuid = "17a42f7a-586e-ca88-9fc2-a05abd7a9588",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not data.cfHack then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==882) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Hack pending",
+						uuid = "814da6c4-84ed-9dc8-95b8-6e91dda40940",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 12,
+			name = "[Copied Factory] Hack Goliath Tank - safe spot behind the other tank (green)",
+			uuid = "d9906b36-d67b-1a9f-af77-a138d2b34c5d",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal m=TensorCore.mGetEntity(eventArgs.entityID)\nif not m or not m.pos then return end\nlocal now=Now()\nlocal s=data.cfTiles\nif not s then s={waves={},first=now} data.cfTiles=s end\n-- BossMod A15 BallisticFloor: markers within 2s belong to one wave\nlocal w=s.waves[#s.waves]\nif not w or now-w.appear>=2000 then\n w={appear=now,act=now+6100,tiles={}}\n s.waves[#s.waves+1]=w\n local delay=#s.waves==2 and 6100 or #s.waves==3 and 9200\n if delay then\n  for i,v in ipairs(s.waves) do v.act=s.waves[1].appear+delay+2100*(i-1) end\n end\nend\nw.tiles[#w.tiles+1]={x=m.pos.x,y=m.pos.y,z=m.pos.z}\n",
+						conditions = 
+						{
+							
+							{
+								"b59c0282-592a-ad29-88ae-5f78236dbb98",
+								true,
+							},
+						},
+						name = "Add the tile to its wave",
+						uuid = "f0a345f6-376e-958f-afa5-09d0c129b67b",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not eventArgs or eventArgs.markerID~=199 then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==882) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Floor square marker",
+						uuid = "b59c0282-592a-ad29-88ae-5f78236dbb98",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 4,
+			name = "[Copied Factory] Anti-personnel Missile tile record",
+			uuid = "3a5c23b1-36cb-e87f-8ca0-b8b9dbef47b0",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.cfTiles\nlocal c=TensorCore.mGetEntity(eventArgs.entityID)\nif not s or not c or not c.pos then return end\nlocal w=s.waves[1]\nif not w then return end\nfor i=#w.tiles,1,-1 do\n local t=w.tiles[i]\n if (t.x-c.pos.x)^2+(t.z-c.pos.z)^2<=1 then table.remove(w.tiles,i) end\nend\nif #w.tiles==0 then table.remove(s.waves,1) end\n",
+						conditions = 
+						{
+							
+							{
+								"badf56a8-01bb-0bee-a0b5-cc4990c11c33",
+								true,
+							},
+						},
+						name = "Remove the tile that hit",
+						uuid = "dc84b574-c851-5138-92c6-ba79ee23cf5b",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not eventArgs or eventArgs.spellID~=18660 then return false end\nreturn data.cfTiles~=nil\n",
+						dequeueIfLuaFalse = true,
+						name = "Floor impact",
+						uuid = "badf56a8-01bb-0bee-a0b5-cc4990c11c33",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 2,
+			name = "[Copied Factory] Anti-personnel Missile tile hit",
+			uuid = "4f4d0e92-35cb-3797-81b6-8043ac3ebb6f",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.cfTiles\nif not s then return end\nlocal now=Now()\nwhile s.waves[1] and now>s.waves[1].act+1200 do table.remove(s.waves,1) end\nlocal w=s.waves[1]\nif not w then data.cfTiles=nil return end\nlocal y=w.tiles[1] and w.tiles[1].y+0.05\nif not y then return end\n-- 15x15 squares centred on each marker; only the next wave to hit is shown\nlocal red=TensorCore.getStaticDrawer(0x703333FF,2)\nfor _,t in ipairs(w.tiles) do red:addCenteredRect(t.x,y,t.z,15,15,0) end\n-- green: subtractive, the 60x60 platform (centre 900,427) minus those squares\nlocal channel=Argus2.getNextUnusedChannel(true)\nif channel==1 then channel=Argus2.getNextUnusedChannel(true) end\nif not channel or channel<=1 then return end\nlocal F=Argus2.RenderFlags\nlocal baseFlags=F.FLAG_WARP_TERRAIN+F.FLAG_OCCLUSION_BASE\nlocal maskFlags=F.FLAG_WARP_TERRAIN+F.FLAG_OCCLUDE\nTensorCore.getStaticDrawer(0x5033FF33,2,channel,baseFlags):addRect(900,y,397,60,60,0,false,baseFlags)\nlocal mask=TensorCore.getStaticDrawer(0xFFFFFFFF,0,channel,maskFlags)\nfor _,t in ipairs(w.tiles) do mask:addCenteredRect(t.x,y,t.z,15,15,0,false,maskFlags) end\n",
+						conditions = 
+						{
+							
+							{
+								"b0c41151-978a-1fa5-aefb-42a820daae92",
+								true,
+							},
+						},
+						name = "Current wave red, subtractive green",
+						uuid = "181d466b-19eb-e862-9921-08a3679fdcff",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not data.cfTiles then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==882) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Tiles pending",
+						uuid = "b0c41151-978a-1fa5-aefb-42a820daae92",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 12,
+			name = "[Copied Factory] Anti-personnel Missile tiles (red) and safe (green)",
+			uuid = "ad4d3ec9-1f7d-ffc0-8a39-9a79dc6151fd",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "The Copied Factory",
 			name = "AutoSim",
 			uuid = "40f1e247-388a-0b27-8e5a-04e3a255b655",

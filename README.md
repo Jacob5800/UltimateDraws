@@ -242,6 +242,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Added 9S-operated Walking Fortress draws in The Copied Factory: early Marx Impact circles, airstrike lanes and Anti-personnel Missile squares in red with a green safe area, and the safe spot behind the Goliath Tank during Hack Goliath Tank. (27-11-2026)
+
 - Added Engels draws in The Copied Factory: Marx Smash in red with a green safe area (second hit previewed), following circles for Incendiary Bombing and Guided Missile, an arrow to the south edge during Demolish Structure, and targeting of Marx's halves and then Engels. (27-11-2026)
 
 - Added Goliath Tank chase rings that hide when you are chased, plus Flight Unit bait beams and a one-circle preview for each Ballistic Impact trail. (27-11-2026)
@@ -259,8 +261,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added an optional green safe area for the airdrop circles in The Copied Factory: tick "Airdrops: green safe area" in the new Copied Factory settings window (off by default). (27-11-2026)
 
 - The alliance raid profile now disables Prepull Helper only inside alliance raids, instead of everywhere. (27-11-2026)
-
-- Many alliance raid reactions for other maps or inactive states no longer wait in the queue. Without an AutoSim ACR, AutoSim reactions now skip quietly instead of printing errors, while their draws and targeting keep working. (27-11-2026)
 
 ### Trials
 
