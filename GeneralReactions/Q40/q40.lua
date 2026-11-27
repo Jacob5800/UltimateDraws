@@ -2966,6 +2966,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						name = "Quantum map",
 						uuid = "4851bfcb-82d7-6602-b3d5-0f56a3f9651f",
@@ -3037,6 +3038,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						name = "Quantum map",
 						uuid = "9c76365d-ec5d-8106-9631-7cca78d4aa00",
@@ -3103,6 +3105,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						name = "Quantum map",
 						uuid = "5ab47c03-b84b-5742-9b38-fa7653d6d2d2",
@@ -3169,6 +3172,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						name = "Quantum map",
 						uuid = "8c9a3364-8f79-135d-8265-75cd0f80c59a",
@@ -3235,6 +3239,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						name = "Quantum map",
 						uuid = "5bda82f6-cbed-ff00-8cc8-10700d074a0f",
@@ -3306,6 +3311,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						name = "Quantum map",
 						uuid = "f4a534e9-9d62-5a73-bea7-6875adad1fa9",
@@ -3378,6 +3384,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						name = "Quantum map",
 						uuid = "9074db67-b4ee-82ff-8832-5246ddb22949",
@@ -3444,6 +3451,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						name = "Quantum map",
 						uuid = "40242444-380a-7237-9d99-faf80ea77071",
@@ -3510,6 +3518,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						name = "Quantum map",
 						uuid = "3f349861-7889-016f-9431-7a91d8627df8",
@@ -3572,6 +3581,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						name = "Quantum map",
 						uuid = "540b8edf-331c-85cb-afca-531f98ed6a8d",
@@ -3626,6 +3636,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						uuid = "47c8a838-688c-ac92-9a57-05f25b41d8ee",
 						version = 3,
@@ -3691,6 +3702,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						uuid = "ab3bd025-7daa-4a33-8446-b0e1d9dcc554",
 						version = 3,
@@ -3757,6 +3769,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						uuid = "6b722a5a-c304-d36c-8381-ca1b42aed5b7",
 						version = 3,
@@ -3822,6 +3835,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						uuid = "3f7f2b70-93ae-741d-990f-480351a39d74",
 						version = 3,
@@ -3887,6 +3901,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						uuid = "a26f6105-62f5-9e86-9d90-dacd4eb3738f",
 						version = 3,
@@ -3952,6 +3967,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						uuid = "567b4501-405b-76cb-938a-5bd9ab1b25d2",
 						version = 3,
@@ -4022,6 +4038,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						uuid = "499d47a9-5b08-849c-8bde-9d1b5d59c814",
 						version = 3,
@@ -4095,6 +4112,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						uuid = "2d6373ff-6612-81f9-8d66-fe8390586bb3",
 						version = 3,
@@ -5145,6 +5163,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						uuid = "fcac7089-f04f-de2a-836f-3fe3b9df1ca2",
 						version = 3,
@@ -6021,6 +6040,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						uuid = "613d56d5-6b87-8b4b-922b-0580f48a9cf4",
 						version = 3,
@@ -6086,6 +6106,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						uuid = "cc05f4f3-26fa-0b22-8d81-247d0f37f06a",
 						version = 3,
@@ -6151,6 +6172,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						uuid = "baa33146-5d14-2fc0-9d08-4b935130d39e",
 						version = 3,
@@ -6226,6 +6248,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						uuid = "6bb7852e-1123-9bfb-b3a5-af77fb2c2b61",
 						version = 3,
@@ -6296,6 +6319,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						uuid = "36de2b9b-d8a7-e817-9eef-19ce5bd32327",
 						version = 3,
@@ -6361,6 +6385,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						uuid = "cf53f5cb-af8b-7e61-b54b-d4a4be2c4fd7",
 						version = 3,
@@ -6445,6 +6470,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						uuid = "84385414-4bf6-9aae-99e8-2e077ec9a71c",
 						version = 3,
@@ -6573,6 +6599,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						uuid = "611e9d09-86b2-1563-9960-e8d917b9e8a8",
 						version = 3,
@@ -6696,6 +6723,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						uuid = "d4df6abc-6222-e6b5-ba39-0f46530b40f5",
 						version = 3,
@@ -6808,6 +6836,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1311,
 						uuid = "4458ad8e-b9f5-075b-a90e-c3ff1ef8d999",
 						version = 3,

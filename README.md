@@ -224,6 +224,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Q40
 
+- Q40 reactions for other duties no longer wait in the queue. (27-11-2026)
+
 - Cleaned up leftover settings-path code in the Q40 settings and setup reactions and made the Assist Enabled check return a strict true/false. (22-11-2026)
 
 ### Mount Rokkon
