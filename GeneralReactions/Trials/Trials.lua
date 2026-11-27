@@ -4871,6 +4871,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal state = TrialsThordanSerAdelphelDoT\nlocal eligible = player.localmapid == 437 and (player.job == 23 or player.job == 25)\nif state then\n    return not eligible or player.job ~= state.job\nend\nreturn eligible",
+						dequeueIfLuaFalse = true,
 						name = "Duty and job / owned cleanup",
 						uuid = "b83640c0-b622-26fe-bb54-662e938627f3",
 						version = 3,
@@ -4919,6 +4920,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal state = TrialsThordanSerJanlenouxDoT\nlocal eligible = player.localmapid == 437 and (player.job == 23 or player.job == 25)\nif state then\n    return not eligible or player.job ~= state.job\nend\nreturn eligible",
+						dequeueIfLuaFalse = true,
 						name = "Duty and job / owned cleanup",
 						uuid = "0ea07a59-1e6b-4d1a-bb7a-0c87c71055c3",
 						version = 3,
@@ -4967,6 +4969,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal state = TrialsThordanZephirinDoT\nlocal eligible = player.localmapid == 437 and player.job == 23\nif state then\n    return not eligible or player.job ~= state.job\nend\nreturn eligible",
+						dequeueIfLuaFalse = true,
 						name = "BRD in duty / owned cleanup",
 						uuid = "8f9dfd8e-b02a-f1e0-85ad-cded81ca784c",
 						version = 3,
@@ -5040,6 +5043,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 897,
 						name = "Cinder Drift (897)",
 						uuid = "ae8644f6-fd11-f010-bec8-a090496c43f6",
@@ -5105,6 +5109,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 897,
 						uuid = "b2e38c39-e548-9a15-898d-3c104987a3b1",
 						version = 3,
@@ -5170,6 +5175,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 897,
 						name = "Cinder Drift (897)",
 						uuid = "f62a4453-3735-99fa-904d-5dcce86e3c88",
@@ -5235,6 +5241,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 897,
 						name = "Cinder Drift (897)",
 						uuid = "106405f2-2d54-a0e6-95f6-815ffc36c95e",
@@ -5301,6 +5308,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 897,
 						name = "Cinder Drift (897)",
 						uuid = "07090a9b-c696-6fae-9d7a-fc691f9c79d2",
@@ -5367,6 +5375,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 897,
 						name = "Cinder Drift (897)",
 						uuid = "7db58c54-ae9f-6fe5-8095-02c1de51b677",
@@ -5432,6 +5441,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 897,
 						name = "Cinder Drift (897)",
 						uuid = "c94be8ba-a3f3-f06d-bc0d-6aaeb4497e1d",
@@ -5497,6 +5507,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 897,
 						name = "Cinder Drift (897)",
 						uuid = "a5faaad1-21dd-a1dc-a8b0-d55f0a2c0f17",
@@ -5622,6 +5633,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal H=TrialsCinderDots\nif H and next(H.entries)~=nil then\n if not p or p.localmapid~=897 then return true end\n for cid,r in pairs(H.entries) do\n  if p.job~=r.job or not TrialsCinder or (cid==731 and not TrialsCinder.blockComets) or (cid==9254 and not TrialsCinder.blockImages) then return true end\n end\nend\nif not p or p.localmapid~=897 or not TrialsCinder then return false end\nreturn (TrialsCinder.blockComets and (not H or not H.entries[731])) or (TrialsCinder.blockImages and (not H or not H.entries[9254]))",
+						dequeueIfLuaFalse = true,
 						name = "Duty options or owned blacklist cleanup",
 						uuid = "05479214-e8fb-ae64-a1c1-9c87ebe176d5",
 						version = 3,
@@ -5773,6 +5785,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 897,
 						uuid = "54e19ef8-186b-3f80-bc54-9eedd86e15a5",
 						version = 3,
@@ -5848,6 +5861,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 897,
 						name = "Cinder Drift (897)",
 						uuid = "06f73460-2895-24ea-a346-e7b2eaf32309",
@@ -5914,6 +5928,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 897,
 						name = "Cinder Drift (897)",
 						uuid = "178bd763-a170-5806-b082-018a0313df6c",
@@ -6287,6 +6302,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=436 then return false end\nreturn p.incombat==true and data.bismarckForecast~=true",
+						dequeueIfLuaFalse = true,
 						name = "Limitless Blue and forecast",
 						uuid = "a69a50bb-b350-bea2-a083-7590de82383c",
 						version = 3,
@@ -6334,6 +6350,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=436 then return false end\nreturn data.bismarckSetup~=true",
+						dequeueIfLuaFalse = true,
 						name = "Limitless Blue and setup",
 						uuid = "85a0042e-dfc4-755a-ada9-1a430aeac946",
 						version = 3,
@@ -6428,6 +6445,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal state = TrialsBismarckVaporBubbleDoT\nlocal eligible = player.localmapid == 436 and (player.job == 23 or player.job == 25)\nif state then\n    return not eligible or player.job ~= state.job\nend\nreturn eligible",
+						dequeueIfLuaFalse = true,
 						name = "Vapor Bubble blacklist setup or cleanup",
 						uuid = "1ccb97c6-ad74-d4a7-99ae-75293265da4c",
 						version = 3,
@@ -6495,6 +6513,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nreturn data.seatSetup~=true or (not p.incombat and data.seatTargeted~=true)",
+						dequeueIfLuaFalse = true,
 						name = "[Seat] Initial target and helper setup gate",
 						uuid = "3ed372a2-f54d-ef60-a520-a9ff20699264",
 						version = 3,
@@ -6542,6 +6561,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nreturn p.incombat==true and data.seatForecast==nil",
+						dequeueIfLuaFalse = true,
 						name = "[Seat] AutoSim forecast and cutscene stun gate",
 						uuid = "42a05778-9af4-9388-9691-80a636233085",
 						version = 3,
@@ -6808,6 +6828,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nlocal m=data.seatMotion\nif not m or m.mode~=\"stop\" or not p.alive or not p.incombat or SeatFireHold then return false end\nlocal remaining=m.finish-Now()\nreturn remaining>=-350 and remaining<=1000",
+						dequeueIfLuaFalse = true,
 						name = "[Seat] Absolute Fire: stop movement and actions gate",
 						uuid = "45161235-5482-018a-ab43-48c93603d717",
 						version = 3,
@@ -6874,6 +6895,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local hold=SeatFireHold\nif not hold then return false end\nlocal p=TensorCore.mGetPlayer()\nlocal now=Now()\nreturn not p or p.localmapid~=922 or not p.alive or not p.incombat\n    or now>=hold.expires or (now>=hold.releaseAt and not TensorCore.hasBuff(p,960))",
+						dequeueIfLuaFalse = true,
 						name = "[Seat] Absolute Fire: release owned stop gate",
 						uuid = "f91881cc-8fae-b5d7-8089-1dafe7c0c379",
 						version = 3,
@@ -7119,6 +7141,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nlocal m=data.seatMotion\nif not m or m.mode~=\"move\" or m.jumped or not p.alive or not p.incombat or SeatFireHold then return false end\nlocal remaining=m.finish-Now()\nreturn remaining>0 and remaining<=475",
+						dequeueIfLuaFalse = true,
 						name = "[Seat] Absolute Blizzard: one jump near resolution gate",
 						uuid = "0aaf4207-62c6-b066-a4dd-7f1c2cca8898",
 						version = 3,

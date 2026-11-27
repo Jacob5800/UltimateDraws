@@ -2231,6 +2231,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1304,
 						name = "Second Walk only",
 						uuid = "568d7f31-6f53-cfa8-a5a0-388007908d5a",
@@ -2326,6 +2327,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1304,
 						name = "Second Walk only",
 						uuid = "c21a611b-ac98-1e96-ad42-521c8af1d31b",
@@ -2414,6 +2416,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1304,
 						name = "Second Walk only",
 						uuid = "9e7053e9-d570-81d6-95f1-8db32f641397",
@@ -2520,6 +2523,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1304,
 						name = "Second Walk only",
 						uuid = "f3fe585b-b40f-9d15-aa23-227e15c56cc8",
@@ -2636,6 +2640,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1304,
 						name = "Second Walk only",
 						uuid = "de4db9a0-83be-7694-bd34-a3fd66410e3e",
@@ -2719,6 +2724,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1304,
 						name = "Second Walk only",
 						uuid = "a5a0a2c9-1d18-2ac3-a028-3569ab033403",
@@ -2797,6 +2803,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1304,
 						name = "Second Walk only",
 						uuid = "16b22c95-b180-68cb-9591-93a5ba82ecfb",
@@ -4143,6 +4150,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1248,
 						name = "Jeuno only",
 						uuid = "d9a57ebf-fb4d-99df-881d-c06e7c8589ba",
@@ -4727,6 +4735,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1248,
 						name = "Jeuno only",
 						uuid = "ed25a5a0-00a4-1281-b42b-4d1f3a4d860b",
@@ -4803,6 +4812,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1248,
 						name = "Jeuno only",
 						uuid = "80fe5fe5-71c9-f3a2-a195-b83086e10ce8",
@@ -4886,6 +4896,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1248,
 						name = "Jeuno only",
 						uuid = "e8dd0f36-b491-b86f-8058-d955f4a951d1",
@@ -4969,6 +4980,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1248,
 						name = "Jeuno only",
 						uuid = "0ad56755-552d-07d4-bd10-16ed85c12513",
@@ -5365,6 +5377,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "return data.jeunoGazes~=nil",
+						dequeueIfLuaFalse = true,
 						name = "Only while a captured gaze exists",
 						uuid = "5b1eac14-f45e-e06b-8646-d0a1a6281498",
 						version = 3,
@@ -5811,6 +5824,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1248,
 						name = "Jeuno only",
 						uuid = "2f03777a-fba1-91f2-893c-3bd3f583f78d",
@@ -5886,6 +5900,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1248,
 						name = "Jeuno only",
 						uuid = "89f11380-9fd4-66bd-a1ba-7891a403a205",
@@ -5977,6 +5992,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1248,
 						name = "Jeuno only",
 						uuid = "b8088ef7-2268-9177-8015-4ca57da9600e",
@@ -6053,6 +6069,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1248,
 						name = "Jeuno only",
 						uuid = "9a94c76f-407f-ebee-b237-96ba30331f8a",
@@ -6129,6 +6146,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1248,
 						name = "Jeuno only",
 						uuid = "166446fb-16b5-c4bf-baee-4ea906309f4d",
@@ -6205,6 +6223,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1248,
 						name = "Jeuno only",
 						uuid = "04ee8f1a-4eb7-cb76-8c00-aeaa57276363",
@@ -6289,6 +6308,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1248,
 						name = "Jeuno only",
 						uuid = "e188e1d3-090b-0b04-ac44-9eed13b874e2",
@@ -6668,6 +6688,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1304,
 						name = "Second Walk only",
 						uuid = "a97a3a86-514a-0938-8f90-682060564fad",
@@ -6863,6 +6884,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1304,
 						name = "Second Walk only",
 						uuid = "fbd0ac91-8ecd-e8b6-aa3e-17fc65c5ac0c",
@@ -7058,6 +7080,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1304,
 						name = "Second Walk only",
 						uuid = "fdc49a19-d326-510f-9288-ef3bcc3917da",
@@ -7273,6 +7296,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1304,
 						name = "Second Walk only",
 						uuid = "c093b6d0-cedd-7d89-8089-c20c082fbcbd",
@@ -7349,6 +7373,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1304,
 						name = "Second Walk only",
 						uuid = "820c4fb9-fdbc-86da-8d7c-45a976b0130d",
@@ -7448,6 +7473,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1304,
 						name = "Second Walk only",
 						uuid = "dc7b45bd-235c-939b-9045-501e958269f5",
@@ -7547,6 +7573,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1304,
 						name = "Second Walk only",
 						uuid = "ced704ef-d4f6-0ffa-b93d-5e0e4beeb126",
@@ -7646,6 +7673,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1304,
 						name = "Second Walk only",
 						uuid = "f486ab98-06f5-d9ac-a0bc-e255f5e6f5f5",
@@ -7730,6 +7758,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "return AllianceSecondWalkKB ~= nil",
+						dequeueIfLuaFalse = true,
 						name = "Owned KB Cancel window",
 						uuid = "534a0a2f-64d7-6cef-a191-b12ba6829d42",
 						version = 3,
@@ -7810,6 +7839,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1304,
 						name = "Second Walk only",
 						uuid = "eef36ca4-3b10-9751-a10a-183ae9e08489",
@@ -7896,6 +7926,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1304,
 						name = "Second Walk only",
 						uuid = "0e555a7e-f4c1-478d-90ad-3767a0bed669",
@@ -7999,6 +8030,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1304,
 						name = "Second Walk only",
 						uuid = "1576d38c-6264-55be-864b-902bf90a5805",
@@ -8082,6 +8114,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1304,
 						name = "Second Walk only",
 						uuid = "6467e4c4-075a-6eb6-8ea5-c7471e774b23",
@@ -8165,6 +8198,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1304,
 						name = "Second Walk only",
 						uuid = "ba92e785-a936-1a91-95c2-0feea7b4021b",
@@ -8248,6 +8282,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1304,
 						name = "Second Walk only",
 						uuid = "1ee9df09-abf4-154c-ba04-2d425c8c256a",
@@ -8757,6 +8792,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 151,
 						name = "World of Darkness only",
 						uuid = "fc817fd9-b2d4-4ccb-b84f-0bfc3c65634b",
@@ -8874,6 +8910,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 151,
 						name = "World of Darkness only",
 						uuid = "b6210714-44c6-e983-9ea7-c5d91cd0e7bd",
@@ -8991,6 +9028,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 151,
 						name = "World of Darkness only",
 						uuid = "888bc602-0bff-0907-bf7f-95c771221898",
@@ -9108,6 +9146,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 151,
 						name = "World of Darkness only",
 						uuid = "f6b08656-fb2c-1cbe-a140-8db0f6583115",
@@ -9215,6 +9254,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 151,
 						name = "World of Darkness only",
 						uuid = "4a539ab2-db75-f0c9-b16d-c874947d408d",
@@ -9293,6 +9333,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 151,
 						name = "World of Darkness only",
 						uuid = "caadb089-e890-0995-962a-55dfadc8019c",
@@ -9354,6 +9395,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 151,
 						name = "World of Darkness only",
 						uuid = "af3c1437-ff44-e699-ad39-9725c76418c7",
@@ -9461,6 +9503,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 151,
 						name = "World of Darkness only",
 						uuid = "9f3bd1a9-39d9-888b-a5ea-a354fff6dc20",
@@ -9572,6 +9615,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 151,
 						name = "World of Darkness only",
 						uuid = "d124a92e-b2a5-b645-bd19-97988a61a5cf",
@@ -9669,6 +9713,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 151,
 						name = "World of Darkness only",
 						uuid = "a8d9273c-b03b-6159-ab1e-d5e6ff21d018",
@@ -9759,6 +9804,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 151,
 						name = "World of Darkness only",
 						uuid = "d76ac605-f1d1-0d4f-823a-0dbdd22963f4",
@@ -9850,6 +9896,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 151,
 						name = "World of Darkness only",
 						uuid = "7cb9d74f-0935-f66a-bc43-a8f6265eb30e",
@@ -10249,6 +10296,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 151,
 						name = "World of Darkness only",
 						uuid = "2c4aed9f-7eaa-842e-b694-a1ad44a34d9d",
@@ -10334,6 +10382,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 151,
 						name = "World of Darkness only",
 						uuid = "2bb01290-956f-3d88-a205-49ccd7091578",
@@ -10825,6 +10874,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x+230)^2+(p.pos.z+172)^2>46^2 then return false end\nreturn p.alive and not p.incombat and not data.a23Setup",
+						dequeueIfLuaFalse = true,
 						name = "Superior Flight Units arena and mechanic",
 						uuid = "f766f841-1468-c30a-92bb-6226c0207702",
 						version = 3,
@@ -11187,6 +11237,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x-200)^2+(p.pos.z+100)^2>34^2 then return false end\nreturn p.alive and not p.incombat and not data.a24Setup",
+						dequeueIfLuaFalse = true,
 						name = "Heavy Artillery Unit arena and mechanic",
 						uuid = "dae904f3-869b-a858-b308-2fb3798af9e1",
 						version = 3,
@@ -11846,6 +11897,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local player=TensorCore.mGetPlayer()\nif not player or player.localmapid~=917 or not player.pos then return false end\nlocal p=player.pos\nreturn (p.x-200)^2+(p.z+100)^2<=36^2 or\n (math.abs(p.x-200)<=30 and p.z>=-505 and p.z<=-275)",
+						dequeueIfLuaFalse = true,
 						name = "Puppets Bunker corridor Energy",
 						uuid = "bbd2e9ba-aad8-a208-8789-ce766c699a23",
 						version = 3,
@@ -12434,6 +12486,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nlocal now=Now()\nlocal t,b=data.a25Towers,data.a25EarlyPods\nreturn not not (p.incombat and ((t and t.drawAt and now>=t.drawAt and now<t.expires) or\n (b and b.drawAt and now>=b.drawAt and now<b.deadline)))",
+						dequeueIfLuaFalse = true,
 						name = "The Compound arena and mechanic",
 						uuid = "0703943f-1b6d-a090-9732-eefff4e1383e",
 						version = 3,
@@ -12549,6 +12602,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nreturn p.alive and not p.incombat and not data.a25Setup",
+						dequeueIfLuaFalse = true,
 						name = "The Compound and 2P arena and mechanic",
 						uuid = "23ec1e5c-383a-9a7f-a71f-c47df0680445",
 						version = 3,
@@ -12748,6 +12802,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nlocal s=data.compoundBlade\nreturn p.alive and p.incombat and s~=nil and #s.casts>0 and s.expires>Now()",
+						dequeueIfLuaFalse = true,
 						name = "The Compound and 2P arena and mechanic",
 						uuid = "ae7d2c63-0b48-d26d-aa81-04504e3fc966",
 						version = 3,
@@ -13893,6 +13948,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 966,
 						name = "Tower at Paradigm's Breach only",
 						uuid = "ae832f50-8e86-d6f7-afb9-e751b5fc08fa",
@@ -16936,6 +16992,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 966,
 						name = "Tower at Paradigm's Breach only",
 						uuid = "83699842-f131-62c6-af78-46b948c94aa3",
@@ -18518,6 +18575,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "if not data or not data.orbBombAt then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=826 then return true end\nreturn (Now()-data.orbBombAt>=9400) and true or false",
+						dequeueIfLuaFalse = true,
 						name = "Bomb resolved or stale",
 						uuid = "ae5a4c72-3e69-3828-a845-afb404f43905",
 						version = 3,
@@ -19191,6 +19249,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 882,
 						name = "Copied Factory only",
 						uuid = "4e96c298-d063-e406-aafe-a6c26c8ba32c",
@@ -19488,6 +19547,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=882 or not p.incombat then return false end\nlocal t=TensorCore.mGetTarget()\nif not t or not t.incombat or not t.alive or not t.attackable or data.factoryForecastBoss==t.id then return false end\nlocal id=t.contentid\nreturn id==9141 or id==9143 or id==9147 or id==9153",
+						dequeueIfLuaFalse = true,
 						name = "Engaged Factory boss",
 						uuid = "1d570d3f-1614-33be-a19b-b0abeea9d7f2",
 						version = 3,
@@ -19535,6 +19595,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal state = AllianceFactoryBipedDoT\nlocal j = player.job\nlocal eligible = player.localmapid == 882 and (j == 23 or j == 25 or j == 34)\nif state then\n    return not eligible or j ~= state.job\nend\nreturn not not eligible",
+						dequeueIfLuaFalse = true,
 						name = "Factory job or owned cleanup",
 						uuid = "33f6bf00-03fd-879f-aec7-8eeddb92388e",
 						version = 3,
@@ -19583,6 +19644,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal state = AllianceFactoryStubbyDoT\nlocal j = player.job\nlocal eligible = player.localmapid == 882 and (j == 23 or j == 34)\nif state then\n    return not eligible or j ~= state.job\nend\nreturn not not eligible",
+						dequeueIfLuaFalse = true,
 						name = "Factory BRD/SAM or owned cleanup",
 						uuid = "2ed0a5e7-6cfe-68c7-bc62-72ff72c37b9e",
 						version = 3,

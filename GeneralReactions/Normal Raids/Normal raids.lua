@@ -3323,6 +3323,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p = TensorCore.mGetPlayer()\nif not p then return false end\nlocal eligible = p.localmapid == 1320 and p.job == 23\nif NormalRaidsM9NDotState then return not eligible end\nreturn eligible",
+						dequeueIfLuaFalse = true,
 						uuid = "b28227d2-cc26-44a4-8013-31d8fe443061",
 						version = 3,
 					},
@@ -5630,6 +5631,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 801",
+						dequeueIfLuaFalse = true,
 						name = "Alphascape V4.0 and mechanic",
 						uuid = "889bee70-5658-c594-b2fb-adbc83cde644",
 						version = 3,
@@ -5754,6 +5756,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=849 then return false end\nreturn not p.incombat and p.alive and not data.e1nInitialTarget",
+						dequeueIfLuaFalse = true,
 						name = "Resurrection and mechanic",
 						uuid = "9b5b71be-84e3-a556-af2a-852a789dc1ce",
 						version = 3,
@@ -5999,6 +6002,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=849 then return false end\nlocal draw=data.e1nPureLight\nreturn p.alive and draw~=nil and (draw.arrow~=nil or draw.deadline>Now())",
+						dequeueIfLuaFalse = true,
 						name = "Resurrection and mechanic",
 						uuid = "257bd8a8-d32a-ae3e-b2b0-da30cdd8c7ac",
 						version = 3,
@@ -6113,6 +6117,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=903 then return false end\nreturn data.e6nSetup~=true or (not p.incombat and data.e6nTargeted~=true)",
+						dequeueIfLuaFalse = true,
 						name = "[E6N] Initial target and helper setup gate",
 						uuid = "19230771-60f0-ab23-a87e-24cf7bf905da",
 						version = 3,
@@ -6160,6 +6165,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=903 then return false end\nreturn p.incombat==true and data.e6nForecast~=true",
+						dequeueIfLuaFalse = true,
 						name = "[E6N] AutoSim forecast gate",
 						uuid = "85becdbf-76a4-0d84-8248-edf7991b1320",
 						version = 3,

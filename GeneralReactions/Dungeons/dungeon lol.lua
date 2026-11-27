@@ -64,6 +64,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1314,
 						name = "Mistwake (1314)",
 						uuid = "9b27bb6d-eb86-1f8f-9d76-c2f236db1541",
@@ -144,6 +145,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1314,
 						name = "Mistwake (1314)",
 						uuid = "4d6637e4-2dd6-727c-bba9-c9aaecef6720",
@@ -230,6 +232,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1314,
 						name = "Mistwake (1314)",
 						uuid = "f3d8c851-0302-3afd-82c7-107e57973de4",
@@ -329,6 +332,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1314,
 						name = "Mistwake (1314)",
 						uuid = "7237835f-469a-3032-88da-a36afe19af3f",
@@ -428,6 +432,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1314,
 						name = "Mistwake (1314)",
 						uuid = "b6b97e44-5f16-13f5-9179-01a962dccd75",
@@ -576,6 +581,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1314,
 						name = "Mistwake (1314)",
 						uuid = "15b53c01-f8e5-c2a8-843f-110c1102ea8f",
@@ -740,6 +746,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1314,
 						name = "Mistwake (1314)",
 						uuid = "a08cf136-73c5-06c7-a8ef-1b5061e62984",
@@ -879,6 +886,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1314,
 						name = "Mistwake (1314)",
 						uuid = "f0b5e433-8abd-22a3-9b71-fb7de88e82ff",
@@ -1156,6 +1164,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1345,
 						name = "Clyteum (1345)",
 						uuid = "5c9c57d2-2a3a-92ef-9d20-5e88a2a70111",
@@ -1236,6 +1245,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1345,
 						name = "Clyteum (1345)",
 						uuid = "811735b4-d594-7556-be18-a576d2273d18",
@@ -1322,6 +1332,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1345,
 						name = "Clyteum (1345)",
 						uuid = "356afd6d-ce07-c9a8-bf68-bd6ae6ed9c15",
@@ -1421,6 +1432,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1345,
 						name = "Clyteum (1345)",
 						uuid = "1c04ed9f-3727-7834-9576-2796daaf6b2a",
@@ -1520,6 +1532,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1345,
 						name = "Clyteum (1345)",
 						uuid = "29a471b2-50c2-04c5-ba95-dedf6f5b104f",
@@ -1668,6 +1681,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1345,
 						name = "Clyteum (1345)",
 						uuid = "55ed5abc-b214-a3c2-a65e-d153849414ae",
@@ -1832,6 +1846,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1345,
 						name = "Clyteum (1345)",
 						uuid = "c9b01f43-327a-aa80-bdfe-43bc04be1ebb",
@@ -1996,6 +2011,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1345,
 						name = "Clyteum (1345)",
 						uuid = "e4bdb084-d351-1582-80ad-3dd2b8a3d1eb",
@@ -2298,6 +2314,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1292,
 						name = "Meso Terminal (1292)",
 						uuid = "8cc2a669-6cb0-6219-b4aa-aec9a0b3f483",
@@ -2378,6 +2395,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1292,
 						name = "Meso Terminal (1292)",
 						uuid = "0227879e-438f-1a60-9752-9ae86de170e1",
@@ -2464,6 +2482,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1292,
 						name = "Meso Terminal (1292)",
 						uuid = "ae5ad0d1-e0a3-2986-b462-4621625c483c",
@@ -2563,6 +2582,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1292,
 						name = "Meso Terminal (1292)",
 						uuid = "b4cf9794-683b-f8c8-9ff8-c35a7a15b90b",
@@ -2662,6 +2682,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1292,
 						name = "Meso Terminal (1292)",
 						uuid = "d68a153f-2168-1b2d-80ae-5f2aff2dc23f",
@@ -2810,6 +2831,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1292,
 						name = "Meso Terminal (1292)",
 						uuid = "54d2dfaf-014c-f577-83d6-50671c71ca8e",
@@ -2949,6 +2971,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1292,
 						name = "Meso Terminal (1292)",
 						uuid = "05406304-e3b8-a25d-a7f8-a46d66abd587",
@@ -3113,6 +3136,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1292,
 						name = "Meso Terminal (1292)",
 						uuid = "ff25cafd-02a8-1e6b-9687-262dcd64cb38",
@@ -3365,6 +3389,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1266,
 						name = "Underkeep (1266)",
 						uuid = "c5b31458-f034-c944-9339-0f2ffe3bd908",
@@ -3445,6 +3470,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1266,
 						name = "Underkeep (1266)",
 						uuid = "2714dfc2-131b-6da1-bd01-27cc17109dd4",
@@ -3531,6 +3557,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1266,
 						name = "Underkeep (1266)",
 						uuid = "3fa086b4-e6df-599c-9128-a64b1aecfa96",
@@ -3630,6 +3657,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1266,
 						name = "Underkeep (1266)",
 						uuid = "bd432a53-3023-e852-80c0-efa059d14bfb",
@@ -3729,6 +3757,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1266,
 						name = "Underkeep (1266)",
 						uuid = "c8ab1fa3-6639-27d1-8a47-4f17cdbf45ac",
@@ -3877,6 +3906,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1266,
 						name = "Underkeep (1266)",
 						uuid = "1995223f-2f33-f4a6-b9e4-402bc6d9612a",
@@ -4016,6 +4046,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1266,
 						name = "Underkeep (1266)",
 						uuid = "1bf197fc-46ed-52b2-99d0-1a86db40eb58",
@@ -4180,6 +4211,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1266,
 						name = "Underkeep (1266)",
 						uuid = "0012138b-547a-f30c-8701-a043002dc339",
@@ -4432,6 +4464,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1242,
 						name = "Yuweyawata Field Station (1242)",
 						uuid = "c32ae429-71c9-420d-81a3-de8d7d43ab82",
@@ -4512,6 +4545,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1242,
 						name = "Yuweyawata Field Station (1242)",
 						uuid = "dc79827f-35e2-3ac7-a72d-3bf0ea9cc857",
@@ -4598,6 +4632,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1242,
 						name = "Yuweyawata Field Station (1242)",
 						uuid = "22a8555c-a447-9b0d-b5ec-edc5f41472d3",
@@ -4697,6 +4732,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1242,
 						name = "Yuweyawata Field Station (1242)",
 						uuid = "548873e2-7db0-c440-81ec-28fa3a4e4f1e",
@@ -4796,6 +4832,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1242,
 						name = "Yuweyawata Field Station (1242)",
 						uuid = "5e56f988-c971-55f4-9b1a-52112178bb51",
@@ -4944,6 +4981,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1242,
 						name = "Yuweyawata Field Station (1242)",
 						uuid = "da67002c-9071-830a-9726-03d93fd82d66",
@@ -5083,6 +5121,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1242,
 						name = "Yuweyawata Field Station (1242)",
 						uuid = "1570748a-671b-1743-a374-efcf953a2478",
@@ -5222,6 +5261,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1242,
 						name = "Yuweyawata Field Station (1242)",
 						uuid = "125193ed-dfdd-d244-9734-47c1974fc88f",
@@ -5474,6 +5514,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1204,
 						name = "Strayborough Deadwalk (1204)",
 						uuid = "80a98775-b6af-d876-83d5-103b67694ff2",
@@ -5554,6 +5595,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1204,
 						name = "Strayborough Deadwalk (1204)",
 						uuid = "33b37fc8-21fe-44f0-a5c2-580a7ef5ab9c",
@@ -5640,6 +5682,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1204,
 						name = "Strayborough Deadwalk (1204)",
 						uuid = "dfe11316-4dcf-95ad-ad3a-3869216f8280",
@@ -5739,6 +5782,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1204,
 						name = "Strayborough Deadwalk (1204)",
 						uuid = "26b34ad8-a5ce-85fe-ada6-ae6a32e50733",
@@ -5838,6 +5882,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1204,
 						name = "Strayborough Deadwalk (1204)",
 						uuid = "bafd361b-5609-6a75-8801-90906741f762",
@@ -5986,6 +6031,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1204,
 						name = "Strayborough Deadwalk (1204)",
 						uuid = "f70ce8ae-8e74-3e65-9f26-4da0afd0580b",
@@ -6150,6 +6196,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1204,
 						name = "Strayborough Deadwalk (1204)",
 						uuid = "0e460963-5d1b-02c8-929b-a060a5c367f5",
@@ -6339,6 +6386,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1204,
 						name = "Strayborough Deadwalk (1204)",
 						uuid = "e060b22c-afd0-93d5-93a5-d15caff69d49",
@@ -6641,6 +6689,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1203,
 						name = "Tender Valley (1203)",
 						uuid = "0db8c8ff-b987-b99f-96b2-7b4ad155c1aa",
@@ -6721,6 +6770,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1203,
 						name = "Tender Valley (1203)",
 						uuid = "f50c390e-3257-c3a1-b713-8b24b1d659da",
@@ -6807,6 +6857,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1203,
 						name = "Tender Valley (1203)",
 						uuid = "5754114b-4e01-5d1f-832e-d80dc55410ed",
@@ -6906,6 +6957,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1203,
 						name = "Tender Valley (1203)",
 						uuid = "dce0b200-b3e9-ddd9-8144-b359741bfd97",
@@ -7005,6 +7057,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1203,
 						name = "Tender Valley (1203)",
 						uuid = "bfc6d822-58eb-c175-837e-3e4b270bc20e",
@@ -7153,6 +7206,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1203,
 						name = "Tender Valley (1203)",
 						uuid = "5d5bb247-acfa-5624-95b7-fdaf842e8d17",
@@ -7342,6 +7396,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1203,
 						name = "Tender Valley (1203)",
 						uuid = "82f28afb-ebc9-4d90-a183-5a050d0226be",
@@ -7481,6 +7536,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1203,
 						name = "Tender Valley (1203)",
 						uuid = "eeda65ef-0383-01a1-99da-546ea273e117",
@@ -7733,6 +7789,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1199,
 						name = "Alexandria (1199)",
 						uuid = "c928750d-3b9a-ef62-886a-57555c6c7458",
@@ -7813,6 +7870,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1199,
 						name = "Alexandria (1199)",
 						uuid = "c1d720b0-360b-d196-933b-220906e1ece1",
@@ -7899,6 +7957,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1199,
 						name = "Alexandria (1199)",
 						uuid = "0af42732-0127-f5e3-b4e5-ecf3828974d2",
@@ -7998,6 +8057,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1199,
 						name = "Alexandria (1199)",
 						uuid = "383ba488-4a73-4ae2-b012-ad65221c4350",
@@ -8097,6 +8157,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1199,
 						name = "Alexandria (1199)",
 						uuid = "e53c16f7-a0cc-fed7-9e7a-b24cd9d729b9",
@@ -8245,6 +8306,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1199,
 						name = "Alexandria (1199)",
 						uuid = "ddf4f653-4545-5c84-b498-e48652ec5b02",
@@ -8384,6 +8446,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1199,
 						name = "Alexandria (1199)",
 						uuid = "0bedf423-0749-5c3e-b286-7eac0d231353",
@@ -8523,6 +8586,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1199,
 						name = "Alexandria (1199)",
 						uuid = "e61d4382-ab79-1688-b300-14eb09228bdf",
@@ -8760,6 +8824,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1199,
 						name = "Alexandria (1199)",
 						uuid = "6fbf37e7-9629-67a6-86bf-afa3811cf086",
@@ -8903,6 +8968,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal map = player.localmapid\nreturn map == 1164 or map == 1292 or map == 1204 or map == 1242 or map == 1199 or map == 1266 or map == 1345 or map == 1314 or map == 1203",
+						dequeueIfLuaFalse = true,
 						name = "Supported dungeon",
 						uuid = "c7ab7e2e-4ca6-42de-a21d-6296203cbb8a",
 						version = 3,
@@ -9009,6 +9075,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local h=DungeonAutoSimShared\nlocal p=TensorCore.mGetPlayer()\nif not h then return false end\nif next(h.held)~=nil or h.active==true or h.smartDotHeld==true or h.apexHeld==true then return true end\nreturn h.restoreAuditVersion==nil and p~=nil and (h.maps[p.localmapid]~=nil)",
+						dequeueIfLuaFalse = true,
 						name = "Owned state or supported duty",
 						uuid = "488a0549-243d-5a7c-988f-63ea47dd00b9",
 						version = 3,
@@ -9154,6 +9221,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.job~=25 or not p.alive or not p.incombat then return false end\nlocal h=DungeonAutoSimShared\nif not h then return false end\nlocal spec=h.maps[p.localmapid]\nlocal cfg=spec and _G[spec.config]\nlocal bosses=spec and spec.bosses\n\nif not cfg or not (cfg.enabled==true or cfg.autoSim==true) or not bosses then return false end\nlocal t=TensorCore.mGetTarget()\nreturn t~=nil and t.alive==true and t.attackable==true and t.incombat==true and not bosses[t.contentid]",
+						dequeueIfLuaFalse = true,
 						name = "BLM and live dungeon add",
 						uuid = "14c796c2-e129-7e61-8433-b94076ffa86b",
 						version = 3,
@@ -9202,6 +9270,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.job~=23 or not p.incombat or not p.alive then return false end\nlocal h=DungeonAutoSimShared\nif not h then return false end\nlocal spec=h.maps[p.localmapid]\nlocal c=spec and _G[spec.config]\n\nif not c or not (c.enabled==true or c.autoSim==true) then return false end\nlocal t=TensorCore.mGetTarget()\nif not t or not t.alive or not t.attackable or not t.incombat or not t.hp or t.hp.percent<=0 or t.hp.percent>h.lateHP then return false end\nlocal last={[1164]={[12584]=true},[1292]={[13974]=true},[1204]={[12763]=true},[1242]={[13610]=true},[1199]={[12729]=true},[1266]={[13749]=true},[1345]={[14758]=true},[1314]={[14288]=true},[1203]={[12709]=true},[189]={[3275]=true},[1174]={[7857]=true,[7858]=true},[1126]={[12334]=true},[969]={[10285]=true},[1037]={[73]=true},[1167]={[12711]=true},[1193]={[12705]=true},[1194]={[12728]=true},[1198]={[12752]=true},[1208]={[12695]=true},[974]={[10399]=true},[822]={[8262]=true},[1065]={[3458]=true},[1038]={[101]=true},[1245]={[1197]=true},[1039]={[444]=true},[1040]={[422]=true},[1041]={[1279]=true},[1267]={[1570]=true},[1303]={[1590]=true},[1042]={[1680]=true},[1330]={[1396]=true},[1331]={[1532]=true}}\nreturn not (last[p.localmapid] and last[p.localmapid][t.contentid])",
+						dequeueIfLuaFalse = true,
 						name = "BRD supported duty and low HP",
 						uuid = "b98fd45f-e9a1-5d39-ad30-ebb2931fe26c",
 						version = 3,

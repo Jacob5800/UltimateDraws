@@ -387,6 +387,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1167,
 						name = "Duty 1167",
 						uuid = "5eab3d12-604a-11da-99dc-77d704228898",
@@ -510,6 +511,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1167,
 						name = "Duty 1167",
 						uuid = "51a9954f-1906-1f6f-a9b4-dea72b1cb01c",
@@ -595,6 +597,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1167,
 						name = "Duty 1167",
 						uuid = "27325eb3-3ad6-449b-adf1-cbb6db26dfea",
@@ -718,6 +721,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1167,
 						name = "Duty 1167",
 						uuid = "db8e122d-7275-9d2a-8eff-38f71cbdcbbf",
@@ -803,6 +807,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1167,
 						name = "Duty 1167",
 						uuid = "a7e836eb-8e66-74db-906c-130f65521e69",
@@ -878,6 +883,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1167,
 						name = "Duty 1167",
 						uuid = "573fe5f5-dbc9-f155-bc56-be99491a4e24",
@@ -973,6 +979,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1193,
 						name = "Duty 1193",
 						uuid = "ca819805-9d3e-71a6-8b8e-27b1ce6ef364",
@@ -1048,6 +1055,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1193,
 						name = "Duty 1193",
 						uuid = "9ac30434-6b11-9b78-b523-d1c31f3d24cb",
@@ -1133,6 +1141,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1193,
 						name = "Duty 1193",
 						uuid = "9d8b3218-18f4-71c1-886a-f29dd4a2786c",
@@ -1208,6 +1217,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1193,
 						name = "Duty 1193",
 						uuid = "dccb709f-ff8f-72ff-8e86-1e5d5cc60046",
@@ -1293,6 +1303,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1193,
 						name = "Duty 1193",
 						uuid = "e69f7f33-0dc8-103b-b50a-ab4b565c0c4b",
@@ -1368,6 +1379,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1193,
 						name = "Duty 1193",
 						uuid = "b235d99a-4ec2-1709-995e-0b66c1a45ec0",
@@ -1463,6 +1475,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1194,
 						name = "Duty 1194",
 						uuid = "ecf4dace-62b7-30b5-8b30-5d52621ae37d",
@@ -1538,6 +1551,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1194,
 						name = "Duty 1194",
 						uuid = "c5cbe244-6fd6-b26c-8ac3-fdb52c0bf3ea",
@@ -1737,6 +1751,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1194,
 						name = "Duty 1194",
 						uuid = "f18976e7-7a29-c5ed-b772-eecdb6b5d6bf",
@@ -1812,6 +1827,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1194,
 						name = "Duty 1194",
 						uuid = "f6497e72-5503-b662-ba5c-b4e28db05ec8",
@@ -1897,6 +1913,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1194,
 						name = "Duty 1194",
 						uuid = "9c568adb-8460-164e-bf91-cd7b42dcdea7",
@@ -1972,6 +1989,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1194,
 						name = "Duty 1194",
 						uuid = "ff73d2fb-50d6-bd81-8cf8-6a9b90cf5c5f",
@@ -2200,6 +2218,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1198,
 						name = "Duty 1198",
 						uuid = "2875ca3b-ed7e-324f-8a98-71614a0933b6",
@@ -2275,6 +2294,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1198,
 						name = "Duty 1198",
 						uuid = "f05eb44f-bdbb-e42a-a108-3ca16dda377f",
@@ -2360,6 +2380,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1198,
 						name = "Duty 1198",
 						uuid = "5af4e439-6e3c-9d0d-85dc-bdbb79c4a19a",
@@ -2435,6 +2456,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1198,
 						name = "Duty 1198",
 						uuid = "2125721d-b20b-5906-8b0d-d9ff1a8b0d8a",
@@ -2520,6 +2542,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1198,
 						name = "Duty 1198",
 						uuid = "778d4ff0-9cc9-f171-87ee-151d9f23919a",
@@ -2595,6 +2618,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1198,
 						name = "Duty 1198",
 						uuid = "dc6bd1cb-9417-0281-88e7-119ee64915c6",
@@ -2690,6 +2714,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1208,
 						name = "Duty 1208",
 						uuid = "2cc307f2-7a66-d003-bfa7-fb936253fead",
@@ -2765,6 +2790,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1208,
 						name = "Duty 1208",
 						uuid = "7595e226-e148-9a23-9a94-2b08f35dbf7c",
@@ -2907,6 +2933,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1208,
 						name = "Duty 1208",
 						uuid = "3af87194-8563-2f3c-adc6-0596fe38e4e1",
@@ -3137,6 +3164,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal eligible = player.localmapid == 1208\nlocal state = LevellingDeceiverSentryDoT\nif state then return not eligible or state.job ~= player.job end\nreturn eligible",
+						dequeueIfLuaFalse = true,
 						uuid = "b6cf30f6-5879-cd29-a72c-d8aa1725a98e",
 						version = 3,
 					},
@@ -3209,6 +3237,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1208,
 						name = "Duty 1208",
 						uuid = "caf78217-f932-02f0-aa5f-bb1f79da8857",
@@ -3284,6 +3313,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1208,
 						name = "Duty 1208",
 						uuid = "62043c34-d4a1-2946-a395-0decbc34873d",
@@ -3400,6 +3430,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal eligible = player.localmapid == 1208\nlocal state = LevellingAmbroseSuperfluityDoT\nif state then return not eligible or state.job ~= player.job end\nreturn eligible",
+						dequeueIfLuaFalse = true,
 						uuid = "11b57df8-a1fc-eb23-90b4-0407615e7803",
 						version = 3,
 					},
@@ -3482,6 +3513,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 974,
 						name = "Duty 974",
 						uuid = "da8b9320-bdca-d1f3-b3df-59f58221bf85",
@@ -3557,6 +3589,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 974,
 						name = "Duty 974",
 						uuid = "5fbc0012-bd50-898a-ac3b-3072f070efbc",
@@ -3642,6 +3675,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 974,
 						name = "Duty 974",
 						uuid = "8756b4cf-ba9d-73dd-9ca9-8649dd21abef",
@@ -3717,6 +3751,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 974,
 						name = "Duty 974",
 						uuid = "d6ec7f8a-794f-8204-9ab0-f442fd692f8a",
@@ -3802,6 +3837,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 974,
 						name = "Duty 974",
 						uuid = "3a1fa5d0-b486-b352-b88a-3796bdcf46a5",
@@ -3877,6 +3913,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 974,
 						name = "Duty 974",
 						uuid = "d7ebe560-0207-f974-8ea1-f99671a16343",
@@ -3972,6 +4009,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 822,
 						name = "Duty 822",
 						uuid = "a5d5bf3d-0500-53f4-8a1f-dbb21238841a",
@@ -4047,6 +4085,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 822,
 						name = "Duty 822",
 						uuid = "06c6e7e9-4516-fb59-8538-01e1e1f24fc5",
@@ -4132,6 +4171,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 822,
 						name = "Duty 822",
 						uuid = "b6491136-2b6e-a401-b4d3-7850363c73de",
@@ -4207,6 +4247,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 822,
 						name = "Duty 822",
 						uuid = "7247a228-6aa9-9c6e-aea4-8d457063f5be",
@@ -4292,6 +4333,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 822,
 						name = "Duty 822",
 						uuid = "5a23c5fd-95c3-b4c1-84b4-f15a622942a4",
@@ -4367,6 +4409,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 822,
 						name = "Duty 822",
 						uuid = "0ddeb1e7-0eef-3c1b-a951-c09b6edad173",
@@ -4462,6 +4505,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1065,
 						name = "Duty 1065",
 						uuid = "73d8b02f-3369-be1c-a7e1-0d9af42ae466",
@@ -4537,6 +4581,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1065,
 						name = "Duty 1065",
 						uuid = "8b7d94bd-d347-2c10-8649-6da6bef6086d",
@@ -4622,6 +4667,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1065,
 						name = "Duty 1065",
 						uuid = "72c32ccc-1968-48ba-83b2-5c161bf9fe88",
@@ -4697,6 +4743,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1065,
 						name = "Duty 1065",
 						uuid = "d2e59bff-9ae5-c9ea-8b59-b77647909f60",
@@ -4782,6 +4829,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1065,
 						name = "Duty 1065",
 						uuid = "bc8418b0-b45b-1e4d-81bf-86ccbcf34321",
@@ -4857,6 +4905,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1065,
 						name = "Duty 1065",
 						uuid = "fce0a185-4700-207c-a2a9-b6827101d86c",
@@ -4952,6 +5001,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1038,
 						name = "Duty 1038",
 						uuid = "e8b5cd64-49d9-e84b-af71-31f8d529e85d",
@@ -5027,6 +5077,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1038,
 						name = "Duty 1038",
 						uuid = "bd520c3f-46a0-c085-a1bd-96766741e470",
@@ -5112,6 +5163,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1038,
 						name = "Duty 1038",
 						uuid = "4a8a1843-c1b4-eccb-ba40-416c29399020",
@@ -5187,6 +5239,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1038,
 						name = "Duty 1038",
 						uuid = "c4bf9df0-db28-d9ae-8a7d-91d720d5c63c",
@@ -5272,6 +5325,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1038,
 						name = "Duty 1038",
 						uuid = "83ab87b9-e68a-1748-98ff-83ce1041cf66",
@@ -5347,6 +5401,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1038,
 						name = "Duty 1038",
 						uuid = "54d693af-10f6-aa82-a5e5-ad4501a38347",
@@ -5442,6 +5497,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1245,
 						name = "Duty 1245",
 						uuid = "7b7edec6-2b4f-94bd-8a75-860ddda4d604",
@@ -5517,6 +5573,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1245,
 						name = "Duty 1245",
 						uuid = "287fee33-d8ea-7364-9efb-e2aa98d4e261",
@@ -5602,6 +5659,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1245,
 						name = "Duty 1245",
 						uuid = "ffdc807a-27ed-2a00-945d-7de702a77b09",
@@ -5677,6 +5735,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1245,
 						name = "Duty 1245",
 						uuid = "b9ccdf66-f825-dccf-9381-54db52b25aa2",
@@ -5762,6 +5821,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1245,
 						name = "Duty 1245",
 						uuid = "17af95d7-6424-cd29-88e7-5cfd73543fe7",
@@ -5837,6 +5897,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1245,
 						name = "Duty 1245",
 						uuid = "72f2530f-e144-c1a2-a86c-5b728c37c03b",
@@ -5932,6 +5993,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1039,
 						name = "Duty 1039",
 						uuid = "e716c3b1-e08a-1d35-ab2a-347cdfadde12",
@@ -6007,6 +6069,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1039,
 						name = "Duty 1039",
 						uuid = "6f86bc0e-25ed-dd17-88e2-d0634a504c56",
@@ -6102,6 +6165,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1040,
 						name = "Duty 1040",
 						uuid = "dbbe59fb-508c-218e-bf94-e995f74dbe5e",
@@ -6187,6 +6251,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1040,
 						name = "Duty 1040",
 						uuid = "429f2eb4-69b1-14f8-a7b9-18dbbd620600",
@@ -6272,6 +6337,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1040,
 						name = "Duty 1040",
 						uuid = "a4009857-a835-c7b4-9e73-030e54d21231",
@@ -6347,6 +6413,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1040,
 						name = "Duty 1040",
 						uuid = "57697605-7435-2c76-85b6-7f4946bdbda0",
@@ -6442,6 +6509,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1041,
 						name = "Duty 1041",
 						uuid = "022518b8-fbc7-0bbd-aafc-f6279c18994e",
@@ -6517,6 +6585,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1041,
 						name = "Duty 1041",
 						uuid = "101884ee-ecf7-d422-b7cb-9073cab4a74d",
@@ -6602,6 +6671,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1041,
 						name = "Duty 1041",
 						uuid = "0cf1e0ee-af53-07fc-8abd-a4b5915168fb",
@@ -6677,6 +6747,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1041,
 						name = "Duty 1041",
 						uuid = "e707c1ae-6b5f-4074-bc73-2767ab112279",
@@ -6772,6 +6843,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1267,
 						name = "Duty 1267",
 						uuid = "8fc8de5e-4d9c-854f-8c41-250fd87b65e8",
@@ -6847,6 +6919,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1267,
 						name = "Duty 1267",
 						uuid = "c3898ca4-8f98-8454-b87a-9a05f7acc47e",
@@ -6932,6 +7005,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1267,
 						name = "Duty 1267",
 						uuid = "e1f676c2-5a3c-4b4b-bce8-18d957c5566b",
@@ -7007,6 +7081,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1267,
 						name = "Duty 1267",
 						uuid = "521770b6-05b7-b532-893a-e2dae0a63b0f",
@@ -7092,6 +7167,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1267,
 						name = "Duty 1267",
 						uuid = "cb495e35-bd53-87d9-8b86-2645ff5830d0",
@@ -7167,6 +7243,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1267,
 						name = "Duty 1267",
 						uuid = "9b2515ff-8838-d806-a50d-ecfabea7ec42",
@@ -7262,6 +7339,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1042,
 						name = "Duty 1042",
 						uuid = "856b2472-a87e-59e9-9bc6-87ebe9168bd1",
@@ -7337,6 +7415,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1042,
 						name = "Duty 1042",
 						uuid = "f3a4bfb7-3afc-1013-98a3-5a44fa2e4b89",
@@ -7422,6 +7501,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1042,
 						name = "Duty 1042",
 						uuid = "da88e4bb-a54a-4f64-8f33-3873770df372",
@@ -7507,6 +7587,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1042,
 						name = "Duty 1042",
 						uuid = "b642b9bf-f20d-bf7b-8996-b028a95f10ba",
@@ -7582,6 +7663,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1042,
 						name = "Duty 1042",
 						uuid = "b1520dc8-94f2-b444-8618-476176a57174",
@@ -7677,6 +7759,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1330,
 						name = "Duty 1330",
 						uuid = "2da4f621-219c-1ed3-b14f-c018bb07c56d",
@@ -7752,6 +7835,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1330,
 						name = "Duty 1330",
 						uuid = "4580ec6b-4762-b46c-9d4a-5fc970eb439a",
@@ -7837,6 +7921,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1330,
 						name = "Duty 1330",
 						uuid = "99b46204-8d28-efb4-a1fa-2097b67943fd",
@@ -7912,6 +7997,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1330,
 						name = "Duty 1330",
 						uuid = "aaec1b79-e818-b813-8021-99d004226a06",
@@ -7997,6 +8083,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1330,
 						name = "Duty 1330",
 						uuid = "794cfaa6-9f25-674f-8f06-cd503143e104",
@@ -8072,6 +8159,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1330,
 						name = "Duty 1330",
 						uuid = "5030dee6-63bb-e86b-bab9-cb870d81f26d",
@@ -8167,6 +8255,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1303,
 						name = "Duty 1303",
 						uuid = "f29b177d-a502-d315-a7b4-9dac79950b09",
@@ -8242,6 +8331,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1303,
 						name = "Duty 1303",
 						uuid = "79bd7832-39ba-3488-9974-361a4bb365cf",
@@ -8327,6 +8417,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1303,
 						name = "Duty 1303",
 						uuid = "fe2c7d0a-b56b-df17-8361-24dcca59491a",
@@ -8402,6 +8493,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1303,
 						name = "Duty 1303",
 						uuid = "ed5fdd81-70ef-06b5-a47d-03b74ecafd90",
@@ -8497,6 +8589,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1331,
 						name = "Duty 1331",
 						uuid = "129cfc09-f272-76ed-baf5-b245c9ecd9c7",
@@ -8572,6 +8665,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1331,
 						name = "Duty 1331",
 						uuid = "ce82cac9-aaef-4db1-a31e-a76873ff10ac",
@@ -8657,6 +8751,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1331,
 						name = "Duty 1331",
 						uuid = "9c1078c5-05da-6d67-93cc-2a51fc26ec67",
@@ -8732,6 +8827,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1331,
 						name = "Duty 1331",
 						uuid = "fd03a52b-b917-191b-9410-8a00fa909ba9",
@@ -8817,6 +8913,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1331,
 						name = "Duty 1331",
 						uuid = "425f2ee0-1cd7-11a3-ace7-b5359ac2032c",
@@ -8892,6 +8989,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1331,
 						name = "Duty 1331",
 						uuid = "3076cdbd-e536-70d0-8580-ed3b731ce35b",
@@ -8987,6 +9085,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1037,
 						name = "Duty 1037",
 						uuid = "b04334e1-da12-090e-9ff1-d5ad8ed990ed",
@@ -9062,6 +9161,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1037,
 						name = "Duty 1037",
 						uuid = "afa544ba-cbb3-0b0c-952f-1c460fdcafe5",
@@ -9127,6 +9227,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1037,
 						name = "Duty 1037",
 						uuid = "a2a1fecf-b13a-836e-9603-c9faff362d42",
@@ -9212,6 +9313,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 1037,
 						name = "Duty 1037",
 						uuid = "18f73405-680e-4a32-a97a-a89bbe6f13f8",
@@ -9307,6 +9409,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 969,
 						name = "Duty 969",
 						uuid = "1d7fe9a8-8cbe-442e-83d6-bb60761b62d3",
@@ -9382,6 +9485,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 969,
 						name = "Duty 969",
 						uuid = "039936d3-cd0b-56d1-bdc5-d8d8d925bc85",
@@ -9447,6 +9551,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 969,
 						name = "Duty 969",
 						uuid = "92c1ece7-8187-2c61-9e44-d701ac6e870b",
@@ -9512,6 +9617,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 969,
 						name = "Duty 969",
 						uuid = "b41feb0f-f1db-6073-ac7b-b04a71f2b9e2",
@@ -9577,6 +9683,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 969,
 						name = "Duty 969",
 						uuid = "6ae322f2-9ea3-a5d0-a937-4756faffd821",
@@ -9642,6 +9749,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 969,
 						name = "Duty 969",
 						uuid = "d4cb3131-c269-01d7-a900-625628324bf5",
@@ -9727,6 +9835,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 969,
 						name = "Duty 969",
 						uuid = "ca1462f5-34ad-233f-bc6f-c50fab40b8c9",
@@ -9802,6 +9911,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 969,
 						name = "Duty 969",
 						uuid = "b8cd48b3-0c2d-1602-b46a-19cebffedd5c",
@@ -9867,6 +9977,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 969,
 						name = "Duty 969",
 						uuid = "15374ff0-903c-58e2-90ea-d8a9f4a0204d",
@@ -9952,6 +10063,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 969,
 						name = "Duty 969",
 						uuid = "fa686840-b1fa-2e97-8e6e-f0f4dd6047af",
@@ -10027,6 +10139,7 @@ local tbl =
 					{
 						category = "Self",
 						conditionType = 8,
+						dequeueIfLuaFalse = true,
 						localmapid = 969,
 						name = "Duty 969",
 						uuid = "84774c53-06f1-5528-bc65-91888aa52193",
@@ -10097,6 +10210,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local H=DungeonProfilePooling\nif DungeonPullGather and (DungeonPullGather.pull or DungeonPullGather.dotActive) then return true end\nif H and (H.active or H.apexHeld or H.smartDotHeld) then return true end\nlocal p=TensorCore.mGetPlayer()\nif not p or not p.incombat or not p.alive then return false end\nlocal maps={ [1164]={\"LunarSubterraneAutoSimConfig\",\"lunar_final_trash\",{[12500]=true,[12484]=true,[12584]=true}},[189]={\"AmdaporHardAutoSimConfig\",\"amdaporhard_final_trash\",{[3272]=true,[3274]=true,[3275]=true}},[1174]={\"GhimlytAutoSimConfig\",\"ghimlyt_final_trash\",{[7855]=true,[7856]=true,[7857]=true,[7858]=true}},[1126]={\"AetherfontAutoSimConfig\",\"aetherfont_final_trash\",{[12336]=true,[12337]=true,[12334]=true}} }\nlocal spec=maps[p.localmapid]\nlocal config=spec and _G[spec[1]]\nlocal bosses=spec and spec[3]\nlocal final=spec and data[spec[2]]\nlocal L=LevellingDungeons\nlocal def=L and L.definitions[p.localmapid]\nconfig=def and L.settings\nbosses=def and def.bosses\nlocal S=data.levelling_dungeons\nfinal=S and S.pool~=nil\nif not config or not (config.enabled==true or config.autoSim==true) or not bosses then return false end\nlocal t=TensorCore.mGetTarget()\nif not t or not t.alive or not t.attackable or not t.incombat then return false end\nlocal boss=bosses[t.contentid]\nif not boss and (not DungeonPullGather or DungeonPullGather.config.enabled) then return true end\nif p.job==23 and not boss then return true end\nif config.poolFinal and final and not boss then return true end\nlocal finalBosses={[1164]={[12584]=true},[1292]={[13974]=true},[1204]={[12763]=true},[1242]={[13610]=true},[1199]={[12729]=true},[1266]={[13749]=true},[1345]={[14758]=true},[1314]={[14288]=true},[1203]={[12709]=true},[189]={[3275]=true},[1174]={[7857]=true,[7858]=true},[1126]={[12334]=true},[969]={[10285]=true},[1037]={[73]=true},[1167]={[12711]=true},[1193]={[12705]=true},[1194]={[12728]=true},[1198]={[12752]=true},[1208]={[12695]=true},[974]={[10399]=true},[822]={[8262]=true},[1065]={[3458]=true},[1038]={[101]=true},[1245]={[1197]=true},[1039]={[444]=true},[1040]={[422]=true},[1041]={[1279]=true},[1267]={[1570]=true},[1303]={[1590]=true},[1042]={[1680]=true},[1330]={[1396]=true},[1331]={[1532]=true}}\nif finalBosses[p.localmapid] and finalBosses[p.localmapid][t.contentid] then return false end\nreturn t.hp~=nil and t.hp.percent>0 and t.hp.percent <= (H and H.lateHP or 8)",
+						dequeueIfLuaFalse = true,
 						name = "Supported duty and pooling work",
 						uuid = "7071152c-b723-5c96-99e4-2016ec26ddf6",
 						version = 3,
@@ -10319,6 +10433,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local h=DungeonProfilePooling\nlocal p=TensorCore.mGetPlayer()\nif not h then return false end\nif next(h.held)~=nil or h.active==true or h.smartDotHeld==true or h.apexHeld==true then return true end\nreturn h.restoreAuditVersion==nil and p~=nil and (h.maps[p.localmapid]~=nil or (LevellingDungeons~=nil and LevellingDungeons.definitions[p.localmapid]~=nil))",
+						dequeueIfLuaFalse = true,
 						name = "Owned state or supported duty",
 						uuid = "d895cbe5-e75b-333c-93dd-58880840a3b0",
 						version = 3,
@@ -10416,6 +10531,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.job~=25 or not p.alive or not p.incombat then return false end\nlocal h=DungeonProfilePooling\nif not h then return false end\nlocal spec=h.maps[p.localmapid]\nlocal cfg=spec and _G[spec.config]\nlocal bosses=spec and spec.bosses\nlocal L=LevellingDungeons\nlocal def=L and L.definitions[p.localmapid]\ncfg=def and L.settings;bosses=def and def.bosses\nif not cfg or not (cfg.enabled==true or cfg.autoSim==true) or not bosses then return false end\nlocal t=TensorCore.mGetTarget()\nreturn t~=nil and t.alive==true and t.attackable==true and t.incombat==true and not bosses[t.contentid]",
+						dequeueIfLuaFalse = true,
 						name = "BLM and live dungeon add",
 						uuid = "ce2e5019-20b1-b71b-bb07-2501629caae4",
 						version = 3,
@@ -10464,6 +10580,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.job~=23 or not p.incombat or not p.alive then return false end\nlocal h=DungeonProfilePooling\nif not h then return false end\nlocal spec=h.maps[p.localmapid]\nlocal c=spec and _G[spec.config]\nlocal L=LevellingDungeons;c=L and L.definitions[p.localmapid] and L.settings\nif not c or not (c.enabled==true or c.autoSim==true) then return false end\nlocal t=TensorCore.mGetTarget()\nif not t or not t.alive or not t.attackable or not t.incombat or not t.hp or t.hp.percent<=0 or t.hp.percent>h.lateHP then return false end\nlocal last={[1164]={[12584]=true},[1292]={[13974]=true},[1204]={[12763]=true},[1242]={[13610]=true},[1199]={[12729]=true},[1266]={[13749]=true},[1345]={[14758]=true},[1314]={[14288]=true},[1203]={[12709]=true},[189]={[3275]=true},[1174]={[7857]=true,[7858]=true},[1126]={[12334]=true},[969]={[10285]=true},[1037]={[73]=true},[1167]={[12711]=true},[1193]={[12705]=true},[1194]={[12728]=true},[1198]={[12752]=true},[1208]={[12695]=true},[974]={[10399]=true},[822]={[8262]=true},[1065]={[3458]=true},[1038]={[101]=true},[1245]={[1197]=true},[1039]={[444]=true},[1040]={[422]=true},[1041]={[1279]=true},[1267]={[1570]=true},[1303]={[1590]=true},[1042]={[1680]=true},[1330]={[1396]=true},[1331]={[1532]=true}}\nreturn not (last[p.localmapid] and last[p.localmapid][t.contentid])",
+						dequeueIfLuaFalse = true,
 						name = "BRD supported duty and low HP",
 						uuid = "445d41c6-937d-bd67-94e5-d6acc4296803",
 						version = 3,
