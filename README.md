@@ -242,6 +242,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Added Hobbes draws in The Copied Factory: Variable Combat Test cones, circles and rings, the Towerfall lanes, and an early warning of the Fire-resistance Test flame area. (27-11-2026)
+
 - The energy orb rings in The Copied Factory (first boss and trash flyers) are now slightly smaller, with a radius of 1.8 instead of 2. (27-11-2026)
 
 - Added red rings around the trash flyers' energy orbs in The Copied Factory. (27-11-2026)
@@ -259,8 +261,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added False Idol draws in The Tower at Paradigm's Breach: a green safe area for Made Magic, red and orange lanes showing the Magical Interference beams in firing order, and Lighter Note explosion circles with the next two steps previewed. The Moogle Telegraphs blacklist entries are now listed under "Ultimate Reactions Pack (Alliance Raid)". (26-11-2026)
 
 - The Tower at Paradigm's Breach now adds the attacks it handles to the Moogle Telegraphs blacklist automatically, so Moogle no longer draws over them. (26-11-2026)
-
-- Fixed Xun-Zi and Meng-Zi's Deploy Armaments in The Tower at Paradigm's Breach marking safe ground red (up to the whole arena): only the lines that deal damage are drawn now. (26-11-2026)
 
 ### Trials
 

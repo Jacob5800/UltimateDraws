@@ -20040,6 +20040,202 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal drawer=TensorCore.getStaticDrawer(0x603333FF,2)\nlocal id=e.aoeID\nif id==18885 or id==18447 then\n    -- the attack data has no usable heading when it points south, so read the caster\n    local c=TensorCore.mGetEntity(e.entityID)\n    if not c or not c.pos then return end\n    drawer:addTimedCone(ms,e.x,e.y,e.z,20,math.rad(60),c.pos.h,0,false,true)\nelseif id==18886 or id==18448 then\n    drawer:addTimedCircle(ms,e.x,e.y,e.z,2,0,false,true)\nelse\n    drawer:addTimedDonut(ms,e.x,e.y,e.z,7,19,0,false,true)\nend",
+						conditions = 
+						{
+							
+							{
+								"1e92dcdb-47ac-9728-a20d-d3f3e63d2ffa",
+								true,
+							},
+						},
+						name = "Red cone, circle or donut",
+						uuid = "39e83671-dbcb-0915-8885-c9755c7e785f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=882 then return false end\nlocal id=eventArgs.aoeID\nreturn id==18885 or id==18886 or id==18887 or id==18447 or id==18448 or id==18449",
+						dequeueIfLuaFalse = true,
+						name = "Combat Test shape",
+						uuid = "1e92dcdb-47ac-9728-a20d-d3f3e63d2ffa",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 18,
+			name = "[Copied Factory] Hobbes Variable Combat Test draws",
+			timeout = 1,
+			uuid = "5a9bb292-6167-72f0-ab78-6a8e0b84d588",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\n-- pattern from BossMod A12 Towerfall; the lanes hit about 3 s after the rotation\nlocal c=TensorCore.mGetEntity(eventArgs.entityID)\nif not c or not c.pos then return end\nlocal offset=({[18709]=0,[18710]=67.5,[18711]=45,[18712]=22.5})[eventArgs.spellID]\nlocal drawer=TensorCore.getStaticDrawer(0x603333FF,2)\nfor i=0,3 do\n    drawer:addTimedRect(3000,c.pos.x,c.pos.y,c.pos.z,20,8,c.pos.h+math.rad(offset+90*i),0,false,true)\nend",
+						conditions = 
+						{
+							
+							{
+								"174f9004-7d8c-9786-a65d-c5df8545e42c",
+								true,
+							},
+						},
+						name = "Four red lanes",
+						uuid = "70825455-cb3f-2288-8348-2d244ebd8cc4",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=882 then return false end\nlocal id=eventArgs.spellID\nreturn id==18709 or id==18710 or id==18711 or id==18712",
+						dequeueIfLuaFalse = true,
+						name = "Impact rotation",
+						uuid = "174f9004-7d8c-9786-a65d-c5df8545e42c",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 2,
+			name = "[Copied Factory] Hobbes Towerfall lanes",
+			timeout = 1,
+			uuid = "95ceac91-bca1-b4ec-891e-ebecf7b18a62",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\ndata.cfFire=data.cfFire or {}\nif eventArgs.a2==4 then\n    data.cfFire[eventArgs.a1]=nil\nelse\n    data.cfFire[eventArgs.a1]={pattern=eventArgs.a2,at=Now()}\nend\nif next(data.cfFire)==nil then data.cfFire=nil end",
+						conditions = 
+						{
+							
+							{
+								"8fd126cb-8589-80f5-b1ad-bb7413814897",
+								true,
+							},
+						},
+						name = "Remember pattern",
+						uuid = "289d101b-bd52-212c-9df8-75b6c73a7d85",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=882 or not p.pos or (p.pos.x+805)^2+(p.pos.z+240)^2>70^2 then return false end\nlocal i,s=eventArgs.a1,eventArgs.a2\nreturn (i==7 or i==9 or i==10) and (s==4 or s==16 or s==128 or s==1024 or s==8192)",
+						dequeueIfLuaFalse = true,
+						name = "Platform pattern",
+						uuid = "8fd126cb-8589-80f5-b1ad-bb7413814897",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 14,
+			name = "[Copied Factory] Hobbes Fire-resistance Test record",
+			timeout = 1,
+			uuid = "2e36a40f-1bbf-18aa-a3a8-f5089bc4fcd2",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\n-- shapes from BossMod A12 FireResistanceTest; map effect index = platform\nlocal p=TensorCore.mGetPlayer()\nif not data.cfFire then return end\nlocal platforms={[7]={-831,-225},[9]={-805,-270},[10]={-779,-225}}\nlocal ax,az=-805,-240\nlocal now=Now()\nlocal d\nfor index,f in pairs(data.cfFire) do\n    local c=platforms[index]\n    if now-f.at>25000 then\n        data.cfFire[index]=nil\n    elseif c then\n        d=d or TensorCore.getStaticDrawer(0x503333FF,2)\n        local y=p.pos.y\n        local dx,dz=ax-c[1],az-c[2]\n        local len=math.sqrt(dx*dx+dz*dz)\n        local ux,uz=dx/len,dz/len\n        local toCentre=math.atan2(dx,dz)\n        local away=toCentre+math.pi\n        if f.pattern==8192 or f.pattern==1024 then\n            -- half platform, 22 forward and 2 back, 42 wide\n            local h=toCentre+math.rad(f.pattern==8192 and 85 or -85)\n            d:addRect(c[1]-2*math.sin(h),y,c[2]-2*math.cos(h),24,42,h)\n        elseif f.pattern==16 then\n            d:addCone(ax+ux*15,y,az+uz*15,70,math.rad(30),away)\n        elseif f.pattern==128 then\n            local ex,ez=c[1]+ux*20,c[2]+uz*20\n            d:addCone(ex,y,ez,70,math.rad(60),away+math.rad(55))\n            d:addCone(ex,y,ez,70,math.rad(60),away-math.rad(55))\n        end\n    end\nend\nif next(data.cfFire)==nil then data.cfFire=nil end",
+						conditions = 
+						{
+							
+							{
+								"6594461f-5153-fbaf-b60b-ae791ae6bdb1",
+								true,
+							},
+						},
+						name = "Red flame area",
+						uuid = "1f71dfd1-408a-60f5-9600-f1aadef8d055",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not data.cfFire then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==882 and p.pos)",
+						dequeueIfLuaFalse = true,
+						name = "Pattern known",
+						uuid = "6594461f-5153-fbaf-b60b-ae791ae6bdb1",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 12,
+			name = "[Copied Factory] Hobbes Fire-resistance Test early draw",
+			timeout = 1,
+			uuid = "06ec5569-71f2-46c7-9ff9-c1dbce44d4ed",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "The Copied Factory",
 			name = "AutoSim",
 			uuid = "40f1e247-388a-0b27-8e5a-04e3a255b655",
