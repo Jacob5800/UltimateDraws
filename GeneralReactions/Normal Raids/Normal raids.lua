@@ -5630,7 +5630,7 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn p ~= nil and p.localmapid == 801",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=801 then return false end\nlocal state=data.normalRaidsO12N\nif not state then return true end\nlocal current=TensorCore.mGetTarget()\nif state.pending and current and current.id==state.pending then return true end\nlocal filterMale,filterFemale=TensorCore.hasBuff(p,1660),TensorCore.hasBuff(p,1661)\nlocal required=filterMale and 9340 or filterFemale and 9339 or nil\nlocal function usable(e) return e and e.alive and e.targetable and e.attackable end\nlocal function findBoss(model,maxDistance)\n for _,cid in ipairs({7633,7634,7635}) do\n  for _,e in pairs(TensorCore.getEntityGroupList(\"ContentID\",{contentid=cid}) or {}) do\n   local actual=usable(e) and Argus.getEntityModel(e)\n   if (actual==9339 or actual==9340) and (not model or actual==model)\n    and (not maxDistance or (e.pos and TensorCore.getDistance2d(p.pos,e.pos)<=maxDistance)) then return e end\n  end\n end\nend\n-- forecast upkeep while at least one Omega can be forbidden\nif p.incombat and not (filterMale and filterFemale) then\n local elapsed=TensorCore.API.TensorACR.getAutoSimTime()\n if type(elapsed)==\"number\" and elapsed>0 then\n  if not state.forecastSet or elapsed>=(state.killAt or 348.375)-2 then return true end\n  local available=findBoss(required)~=nil\n  if (available and state.downtime) or (not available and (not state.downtime or elapsed>=state.downtime-0.5)) then return true end\n end\nend\nif filterMale and filterFemale then return false end\nlocal wantsInitial=not p.incombat and not state.initial\nif not required and not wantsInitial then return false end\nif usable(current) and Argus.getEntityModel(current)==(required or 9339) then\n return not state.initial\nend\nif not findBoss(required or 9339,35) then return false end\nif p.castinginfo and (p.castinginfo.castingid>0 or p.castinginfo.channelingid>0) then return false end\nreturn not state.requestedAt or Now()-state.requestedAt>=1500",
 						dequeueIfLuaFalse = true,
 						name = "Alphascape V4.0 and mechanic",
 						uuid = "889bee70-5658-c594-b2fb-adbc83cde644",
@@ -6164,7 +6164,7 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=903 then return false end\nreturn p.incombat==true and data.e6nForecast~=true",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=903 then return false end\nif p.incombat~=true or data.e6nForecast==true then return false end\n-- a late join can never load this forecast\nlocal ok,t=pcall(TensorCore.API.TensorACR.getAutoSimTime)\nreturn not not (ok and type(t)==\"number\" and t>=0 and t<=20)",
 						dequeueIfLuaFalse = true,
 						name = "[E6N] AutoSim forecast gate",
 						uuid = "85becdbf-76a4-0d84-8248-edf7991b1320",
@@ -6747,7 +6747,7 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid == 942 and (p.incombat and not data.localForecast942))",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=942 then return false end\nif p.incombat~=true or data.localForecast942 then return false end\n-- a late join can never load this forecast\nlocal ok,t=pcall(TensorCore.API.TensorACR.getAutoSimTime)\nreturn not not (ok and type(t)==\"number\" and t>=0 and t<=8)",
 						dequeueIfLuaFalse = true,
 						name = "Duty and mechanic",
 						uuid = "2eaeb364-628e-e297-8348-ffe8c14558bb",

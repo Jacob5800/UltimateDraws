@@ -110,6 +110,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Dungeons
 
+- levelling dungeons and highleveldungeons: duty setup and cooldown holds now run only when there is something to do, reducing console spam. (27-11-2026)
+
 - In dungeon lol, the cooldown pooling, dying-add cast, Thunder and Radiant Finale holds now run only when a hold is needed or due for renewal, reducing console spam. (27-11-2026)
 
 - dungeon lol and levelling dungeons: reactions for other maps or inactive states no longer wait in the queue. (27-11-2026)
@@ -127,8 +129,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Dungeon LOL only disables the Prepull Helper in supported dungeons and restores it on exit if it was previously enabled. (26-11-2026)
 
 - In dungeon lol, shared cooldown pooling and targeting only run in supported dungeons, so the action no longer runs in cities. (24-11-2026)
-
-- In levelling dungeons, Ihuykatumu skips the gather hold on the opening bird pack. (24-11-2026)
 
 ### DSR
 
@@ -264,6 +264,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Trials
 
+- The Bowl of Embers, Bismarck and Seat of Sacrifice AutoSim forecasts no longer keep running after joining a fight late. (27-11-2026)
+
 - Many trial reactions for other maps or inactive states no longer wait in the queue. (27-11-2026)
 
 - Added The Striking Tree (Hard) with Thunderstorm, Thunderspark and Thunderbolt hazard draws, boss targeting, an AutoSim kill-time estimate and a Bard DoT blacklist for the Grey Arbiter adds. (25-11-2026)
@@ -281,6 +283,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Hydra: a Black Mage's Ley Lines and Triplecast toggles are now restored even if Lua is reloaded during the fight. (22-11-2026)
 
 ### Normal raids
+
+- O12N targeting now runs only when needed, and the E6N and Eden's Promise: Umbra forecasts no longer keep running after a late join. (27-11-2026)
 
 - Some normal raid reactions that do not currently apply no longer wait in the queue. (27-11-2026)
 

@@ -6301,7 +6301,7 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=436 then return false end\nreturn p.incombat==true and data.bismarckForecast~=true",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=436 then return false end\nif p.incombat~=true or data.bismarckForecast==true then return false end\n-- a late join can never load this forecast\nlocal ok,t=pcall(TensorCore.API.TensorACR.getAutoSimTime)\nreturn not not (ok and type(t)==\"number\" and t>=0 and t<=20)",
 						dequeueIfLuaFalse = true,
 						name = "Limitless Blue and forecast",
 						uuid = "a69a50bb-b350-bea2-a083-7590de82383c",
@@ -6560,7 +6560,7 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nreturn p.incombat==true and data.seatForecast==nil",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nif p.incombat~=true or data.seatForecast~=nil then return false end\n-- a late join can never load this forecast\nlocal ok,t=pcall(TensorCore.API.TensorACR.getAutoSimTime)\nreturn not not (ok and type(t)==\"number\" and t>=0 and t<=20)",
 						dequeueIfLuaFalse = true,
 						name = "[Seat] AutoSim forecast and cutscene stun gate",
 						uuid = "42a05778-9af4-9388-9691-80a636233085",
@@ -8078,7 +8078,7 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local p = TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid == 1045 and (p.incombat and not data.localForecast1045))",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1045 then return false end\nif p.incombat~=true or data.localForecast1045 then return false end\n-- a late join can never load this forecast\nlocal ok,t=pcall(TensorCore.API.TensorACR.getAutoSimTime)\nreturn not not (ok and type(t)==\"number\" and t>=0 and t<=8)",
 						dequeueIfLuaFalse = true,
 						name = "Duty and mechanic",
 						uuid = "a901b126-8cf8-e41f-a50c-37ada76058f6",
