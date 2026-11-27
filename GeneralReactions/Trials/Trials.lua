@@ -9713,6 +9713,232 @@ local tbl =
 			uuid = "d46c3113-0265-3ced-a69c-b30989ca0812",
 			version = 2,
 		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "",
+			name = "Thornmarch (Hard)",
+			uuid = "09e902dc-c600-4cea-b849-3cd0166c2d91",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Thornmarch (Hard)",
+			name = "AutoSim",
+			uuid = "4e2828c6-8b67-cb27-87bd-52a7f15e297b",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "gStartCombat=false\nlocal settings=AnyoneCore and AnyoneCore.Settings\nif settings then\n    if settings.DutyHelper then settings.DutyHelper.enabled=false end\n    if settings.PrepullHelper then settings.PrepullHelper.enabled=false end\nend\ndata.thornSetup=true\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"37943254-5217-0ccb-83b5-c1d7f86f29fd",
+								true,
+							},
+						},
+						name = "Disable combat helpers",
+						uuid = "11285da0-91ed-810f-88fe-95583e11c086",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and (p.localmapid==364 or p.localmapid==1067) and not data.thornSetup)",
+						dequeueIfLuaFalse = true,
+						name = "Duty setup due",
+						uuid = "37943254-5217-0ccb-83b5-c1d7f86f29fd",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Thornmarch (Hard)/AutoSim",
+			name = "[Thornmarch] Disable combat helpers",
+			throttleTime = 1000,
+			timeout = 1,
+			uuid = "592b20ba-caed-8d93-a1e0-cfce2058d978",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "-- one clear (25-11-2026): fight ended at about 226 s\nlocal api=TensorCore.API.TensorACR\nlocal ok,elapsed=pcall(api.getAutoSimTime)\nif ok and type(elapsed)==\"number\" and elapsed>=0 and elapsed<=60 then\n    api.setAutoSimKillTime(226)\n    api.clearAutoSimUncertainty()\n    api.addAutoSimUncertainty(0,25)\n    data.thornForecast=true\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"8ddeebed-395d-9094-b76a-31b7194f8e46",
+								true,
+							},
+						},
+						name = "Set kill time",
+						uuid = "669812e8-21ac-601a-8758-fe989a63362a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and (p.localmapid==364 or p.localmapid==1067) and eventArgs.spellID==29216 and not data.thornForecast)",
+						dequeueIfLuaFalse = true,
+						name = "Duty and first cast",
+						uuid = "8ddeebed-395d-9094-b76a-31b7194f8e46",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Thornmarch (Hard)/AutoSim",
+			eventType = 3,
+			name = "Thornmarch AutoSim baseline",
+			timeout = 1,
+			uuid = "a1deeb8d-a08e-1a60-8122-70e2651f2f5a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			displayPath = "Thornmarch (Hard)",
+			name = "Draws",
+			uuid = "4e90b7f8-e80b-06cc-b987-8a016d04c2a6",
+		},
+		objectType = "folder",
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local e=eventArgs\n-- cones use their full angle in degrees, the rest are circles\nlocal cones={[29215]=90,[29213]=120}\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms>0 then\n    local drawer=TensorCore.getStaticDrawer(0x603333FF,2)\n    if cones[e.aoeID] then\n        drawer:addTimedCone(ms,e.x,e.y,e.z,e.aoeLength,math.rad(cones[e.aoeID]),e.heading,0,false,true)\n    else\n        drawer:addTimedCircle(ms,e.x,e.y,e.z,e.aoeLength,0,false,true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms,{x=e.x,y=e.y+1,z=e.z},0xFFFFFFFF,true,1.1)\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"92821842-4c92-6fc5-b76a-89017119b74d",
+								true,
+							},
+						},
+						name = "Draw attack",
+						uuid = "8b08308e-6923-0a90-8bca-022810702f75",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or (p.localmapid~=364 and p.localmapid~=1067) then return false end\nlocal ids={[29216]=true,[29207]=true,[29197]=true,[29196]=true,[29215]=true,[29213]=true}\nreturn ids[eventArgs.aoeID]==true",
+						dequeueIfLuaFalse = true,
+						name = "Tracked moogle attack",
+						uuid = "92821842-4c92-6fc5-b76a-89017119b74d",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Thornmarch (Hard)/Draws",
+			eventType = 18,
+			name = "Thornmarch hazard draws",
+			timeout = 1,
+			uuid = "78c95d74-0c68-9817-b7a0-6b6d88299c93",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "-- marker to damage: 6.3 s; radius 6 from the attack data\nlocal drawer=TensorCore.getStaticDrawer(0x4033FF33,2)\ndrawer:addTimedCircleOnEnt(6300,eventArgs.entityID,6,0,false,true)\nAnyoneCore.Shotcall(\"Stack\",true,3,false)\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"3dc2cc82-f7c0-746a-88e8-b22be3bab9eb",
+								true,
+							},
+						},
+						name = "Draw stack",
+						uuid = "689049cc-d7d2-9c71-95b3-1b80e2728f0a",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and (p.localmapid==364 or p.localmapid==1067) and eventArgs.markerID==93)",
+						dequeueIfLuaFalse = true,
+						name = "Stack marker",
+						uuid = "3dc2cc82-f7c0-746a-88e8-b22be3bab9eb",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Thornmarch (Hard)/Draws",
+			eventType = 4,
+			name = "Thornmarch Mog Stone stack",
+			timeout = 1,
+			uuid = "0a3c7253-3f6b-8ecb-8ae1-3722849faa0a",
+			version = 2,
+		},
 	}, 
 	inheritedProfiles = 
 	{

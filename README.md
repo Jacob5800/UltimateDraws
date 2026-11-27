@@ -264,6 +264,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Trials
 
+- Added Thornmarch (Hard): moogle circle and cone attack draws, the Mog Stone stack circle and callout, combat helper setup and an AutoSim kill-time estimate. (27-11-2026)
+
 - Added an auto lockface for the arrow sequence in Hells' Kier: while you stand on a spot, your character faces the direction its floor arrow shows until the orb arrives. (27-11-2026)
 
 - Zelenia reactions no longer queue in other duties. (27-11-2026)
@@ -281,8 +283,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added The Bowl of Embers AutoSim, Eruption draws, and Infernal Nail and Hellfire callouts. (23-11-2026)
 
 - Added The Seat of Sacrifice draws, AutoSim cutscene downtime, Suiton Arm's Length, and Fire/Blizzard stop and move cues. Also draws the Twincast towers, Sword of Light cones, Radiant Braver and Desperado bait lines, Flare Breath tether cone and Brimstone Earth growth. (22-11-2026)
-
-- Added the Trials general profile with draws, AutoSim and boss-targeting reactions for Chimera, Hydra, Zurvan, Susano, Byakko, Endsinger, Zodiark, Valigarmanda, Queen Eternal, Zoraal Ja, Zelenia, Necron, Doomtrain, Enuo, Sophia, Shinryu, Innocence, King Thordan and Cinder Drift. (22-11-2026)
 
 ### Normal raids
 
