@@ -36,6 +36,11 @@ local tbl =
 						{
 							
 							{
+								"ab58ec1e-1e24-b8c2-b417-6f1e461a676e",
+								true,
+							},
+							
+							{
 								"a4d346f2-227c-4fd3-9587-00908eb71e42",
 								true,
 							},
@@ -93,6 +98,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1164,
+						},
+						name = "Map check",
+						uuid = "ab58ec1e-1e24-b8c2-b417-6f1e461a676e",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Lunar Subterrane/AutoSim",
 			name = "[Lunar AutoSim] Reset between combats",
@@ -115,6 +136,11 @@ local tbl =
 						actionLua = "data.lunar_final_trash=true\nself.used=true",
 						conditions = 
 						{
+							
+							{
+								"b007294b-4e8e-251a-9ded-1964cd93e247",
+								true,
+							},
 							
 							{
 								"90f7b3d5-56f3-232f-b81f-d1026e69c3b6",
@@ -257,6 +283,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1164,
+						},
+						name = "Map check",
+						uuid = "b007294b-4e8e-251a-9ded-1964cd93e247",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Lunar Subterrane/AutoSim",
 			name = "[Lunar AutoSim] Recognize final trash before Dark Elf",
@@ -279,6 +321,11 @@ local tbl =
 						actionLua = "data.lunar_final_trash=true\nself.used=true",
 						conditions = 
 						{
+							
+							{
+								"727826f3-dae6-8a27-913c-259eed3c5f27",
+								true,
+							},
 							
 							{
 								"aae2c4e8-9d69-8252-b2a0-4207270022ee",
@@ -496,6 +543,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1164,
+						},
+						name = "Map check",
+						uuid = "727826f3-dae6-8a27-913c-259eed3c5f27",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Lunar Subterrane/AutoSim",
 			name = "[Lunar AutoSim] Recognize final trash before Durante",
@@ -518,6 +581,11 @@ local tbl =
 						actionLua = "local s=data.lunar_subterrane_autosim\nif s then s.channel(eventArgs) end\nself.used=true",
 						conditions = 
 						{
+							
+							{
+								"53f98fc8-3e31-9dd2-bac6-ae2c5fb08424",
+								true,
+							},
 							
 							{
 								"08a56439-d103-e81d-9058-41ef74be8552",
@@ -594,6 +662,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1164,
+						},
+						name = "Map check",
+						uuid = "53f98fc8-3e31-9dd2-bac6-ae2c5fb08424",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Lunar Subterrane/AutoSim",
 			eventType = 3,
@@ -617,6 +701,11 @@ local tbl =
 						actionLua = "local s=data.lunar_subterrane_autosim\nif s then s.channel(eventArgs) end\nself.used=true",
 						conditions = 
 						{
+							
+							{
+								"cfb69eb3-c6b7-9ce7-b5d4-220814e73cfd",
+								true,
+							},
 							
 							{
 								"7310f06a-d611-098d-a476-70bb1b26376b",
@@ -693,6 +782,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1164,
+						},
+						name = "Map check",
+						uuid = "cfb69eb3-c6b7-9ce7-b5d4-220814e73cfd",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Lunar Subterrane/AutoSim",
 			eventType = 3,
@@ -716,6 +821,11 @@ local tbl =
 						actionLua = "data.lunar_final_trash=true\nself.used=true",
 						conditions = 
 						{
+							
+							{
+								"9a06cc98-7ad5-394c-a155-866470ca4d2e",
+								true,
+							},
 							
 							{
 								"6377ebdf-7228-a111-aae1-168b61ea9de4",
@@ -883,6 +993,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1164,
+						},
+						name = "Map check",
+						uuid = "9a06cc98-7ad5-394c-a155-866470ca4d2e",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Lunar Subterrane/AutoSim",
 			name = "[Lunar AutoSim] Recognize final trash before Damcyan Antlion",
@@ -1005,6 +1131,11 @@ local tbl =
 						{
 							
 							{
+								"69480363-086e-3c0e-9838-7907fd62c35b",
+								true,
+							},
+							
+							{
 								"c65ade39-078b-2d44-b5f4-7ba7c17bb10f",
 								true,
 							},
@@ -1079,6 +1210,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1164,
+						},
+						name = "Map check",
+						uuid = "69480363-086e-3c0e-9838-7907fd62c35b",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Lunar Subterrane/AutoSim",
 			eventType = 3,
@@ -1102,6 +1249,11 @@ local tbl =
 						actionLua = "-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not LunarSubterraneAutoSimConfig or LunarSubterraneAutoSimConfig.fileApiVersion~=1 then\n    local C = LunarSubterraneAutoSimConfig or {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=true, kill12500=125.891, kill12484=132.86, kill12584=175.298,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\"\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill12500\",\"kill12484\",\"kill12584\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\LunarSubterrane.AutoSim.lua]]\n    if not LunarSubterraneAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill12500=math.max(15,math.min(1200,C.kill12500))\n    C.kill12484=math.max(15,math.min(1200,C.kill12484))\n    C.kill12584=math.max(15,math.min(1200,C.kill12584))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    LunarSubterraneAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif LunarSubterraneAutoSimConfig.poolFinal==nil then\n LunarSubterraneAutoSimConfig.poolFinal=true\n table.insert(LunarSubterraneAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- Runs after native map 1164, map and combat gates; no timeline timer is used.\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1164 or not p.incombat then self.used=true;return end\nlocal isCaster=p.job==25 or p.job==27 or p.job==35 or p.job==42 or p.job==36 or p.job==24 or p.job==28 or p.job==33 or p.job==40\nlocal C=LunarSubterraneAutoSimConfig\nlocal A=TensorCore.API.TensorACR\nlocal ok,t=pcall(A.getAutoSimTime)\nif not ok or type(t)~=\"number\" or t<0 then return end -- readiness wait, not completion\nif data.lunar_subterrane_autosim then self.used=true;return end\nlocal S={enabled=C.enabled,movement=C.movement and isCaster,returnField=C.returnField and p.job==25,trash=C.trash,\n    killOverride=C.killOverride,kill12500=C.kill12500,kill12484=C.kill12484,kill12584=C.kill12584,\n    unexpectedPct=C.unexpectedPct,uncertainty=C.uncertainty,buffEnabled=C.buffEnabled,\n    buffPct=C.buffPct,buffFirst=C.buffFirst,buffDuration=C.buffDuration,buffPeriod=C.buffPeriod,\n    boss=0,origin=0,counts={},phases={},phaseCount=0,anchorsSeen=0,setup=true}\ndata.lunar_subterrane_autosim=S\n-- Filled by the evidence builder; tables are allocated once per combat.\nS.definitions={[12500]={[\"name\"]=\"Dark Elf\",[\"movement\"]={{49.0,50.5},{52.0,53.0}},[\"anchors\"]={[34777]={4.469,29.258,61.828,134.734},[35205]={10.61,53.219,91.844},[34779]={19.117,83.727},[34778]={37.422,69.945,142.953},[34781]={46.586,79.102,152.101},[35204]={102.024},[34782]={113.219,122.368}}},[12484]={[\"name\"]=\"Damcyan Antlion\",[\"movement\"]={{22.5,24.0},{48.5,50.5},{63.5,64.5},{66.5,69.5},{97.0,98.0},{104.5,108.5},{109.5,111.0},{112.5,114.5},{125.5,130.0}},[\"anchors\"]={[34813]={8.188,77.164,137.969},[34818]={15.32,41.446,102.25},[34816]={30.32,91.188,152.0},[34821]={57.875,118.672},[34443]={67.023,127.844}}},[12584]={[\"name\"]=\"Durante\",[\"movement\"]={{22.5,23.5},{38.0,39.0},{59.5,62.0},{104.5,107.5},{138.0,140.0},{157.5,162.0},{165.0,166.0}},[\"anchors\"]={[35011]={6.179,116.812,206.219},[36057]={15.64,50.96,219.859},[35003]={31.367,72.07,95.531,187.031},[35905]={77.148,100.641,192.109},[35007]={129.094},[35009]={136.68},[36055]={147.132},[35001]={156.452},[34995]={173.43}}}}\n\nfunction S.add(kind,a,b,value,relative)\n    if b<=a or a>=1200 then return end\n    b=math.min(b,1200)\n    local id=A.addAutoSimPhase(kind,a,b,value)\n    if id then\n        S.phaseCount=S.phaseCount+1\n        S.phases[S.phaseCount]={id=id,kind=kind,a=a,b=b,value=value,relative=relative}\n    end\nend\n\nfunction S.startBoss(cid,entityID,origin,now)\n    local def=S.definitions[cid]\n    if not def or S.boss~=0 or not S.enabled then return end\n    S.boss=cid;S.entityID=entityID;S.origin=origin\n    A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100)\n    if S.killOverride then\n        A.setAutoSimKillTime(math.min(1200,origin+S[\"kill\"..cid]))\n        A.addAutoSimUncertainty(now,10) -- one normal-party sample: do not claim exact kill timing\n    end\n    -- Keep automatic kill uncertainty by default. Do not invent forced target downtime.\n    -- Only owned movement/field phases are authored; AoE counts and DoT targets stay live.\n    if S.movement then\n        for i=1,#def.movement do\n            local w=def.movement[i]\n            local a,b=origin+w[1],origin+w[2]\n            if b>now then\n                a=math.max(a,now)\n                S.add(\"CasterDowntime\",a,b,1,true)\n                if S.returnField then S.add(\"GroundFieldMovement\",b,b+0.2,2,true) end\n            end\n        end\n    end\n    if S.buffEnabled and S.buffPct>0 then\n        local a=origin+S.buffFirst\n        while a<1200 do\n            if a+S.buffDuration>now then S.add(\"RaidBuff\",math.max(a,now),a+S.buffDuration,1+S.buffPct/100,false) end\n            a=a+S.buffPeriod\n        end\n    end\n    C.status=\"Active: \"..def.name..\". Kill estimate: \"..(S.killOverride and \"manual\" or \"automatic\")\nend\n\nfunction S.channel(args)\n    if not S.enabled then return end\n    local cid=args.entityContentID\n    local def=S.definitions[cid]\n    if not def then return end\n    local aid=args.spellID\n    if aid==34780 then aid=34779 end\n    local anchors=def.anchors[aid]\n    if not anchors then return end -- stable boss cast identity before API work\n    if S.boss~=0 and (S.boss~=cid or S.entityID~=args.entityID) then return end\n    local valid,now=pcall(A.getAutoSimTime)\n    if not valid or type(now)~=\"number\" or now<0 or now>=1200 then return end\n    local n=(S.counts[aid] or 0)+1\n    local expected=anchors[n]\n    if not expected then return end\n    if S.boss==0 and math.abs(now-expected)>2 then return end\n    S.counts[aid]=n\n    if S.boss==0 then S.startBoss(cid,args.entityID,now-expected,now) end\n    if S.boss~=cid then return end\n    local candidate=now-expected\n    -- If enabled mid-boss, do not match a late repeat to the first occurrence.\n    if math.abs(candidate-S.origin)>2 then return end\n    local shift=candidate-S.origin\n    S.anchorsSeen=S.anchorsSeen+1\n    if math.abs(shift)<0.15 then return end\n    -- Remove every future owned phase before reinsertion, avoiding transient overlaps.\n    local movementEnd=now\n    local fieldEnd=now\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.relative and phase.id and phase.a>now+0.05 then\n            A.removeAutoSimPhase(phase.id);phase.id=nil;phase.pending=true\n        elseif phase.id and phase.a<=now+0.05 and phase.b>now then\n            if phase.kind==\"CasterDowntime\" then movementEnd=phase.b end\n            if phase.kind==\"GroundFieldMovement\" then fieldEnd=phase.b end\n        end\n    end\n    for i=1,S.phaseCount do\n        local phase=S.phases[i]\n        if phase.pending then\n            phase.pending=false\n            local a,b=phase.a+shift,phase.b+shift\n            local minimum=phase.kind==\"CasterDowntime\" and movementEnd or math.max(fieldEnd,movementEnd)\n            a=math.max(a,minimum,now+0.05)\n            if b>a then\n                phase.id=A.addAutoSimPhase(phase.kind,a,b,phase.value)\n                phase.a=a;phase.b=b\n                if phase.kind==\"CasterDowntime\" then movementEnd=b else fieldEnd=b end\n            end\n        end\n    end\n    S.origin=candidate\nend\n\nif S.enabled then\n    local target=TensorCore.mGetTarget()\n    if target and S.definitions[target.contentid] and target.attackable and target.incombat then\n        -- Near pull start, zero is the combat-clock origin; later setup waits for an anchor.\n        if t<=5 then S.startBoss(target.contentid,target.id,0,t) end\n    end\n    if S.boss==0 and S.trash then A.setAutoSimUnexpectedMovementPct(S.unexpectedPct/100) end\nend\nself.used=true\n",
 						conditions = 
 						{
+							
+							{
+								"e260f69e-8985-13e8-a3f3-fd6aea54864f",
+								true,
+							},
 							
 							{
 								"4b5d3e8d-ed1f-bb3a-ba5f-8d5cc2ca6ca4",
@@ -1160,6 +1312,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1164,
+						},
+						name = "Map check",
+						uuid = "e260f69e-8985-13e8-a3f3-fd6aea54864f",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Lunar Subterrane/AutoSim",
 			name = "[Lunar AutoSim] Set up this combat",
@@ -1184,6 +1352,11 @@ local tbl =
 						{
 							
 							{
+								"bb98852a-48ff-239a-97e0-1666de1351f4",
+								true,
+							},
+							
+							{
 								"e42637da-b0ea-f95a-92db-536598331dad",
 								true,
 							},
@@ -1205,6 +1378,22 @@ local tbl =
 						localmapid = 1164,
 						name = "Lunar Subterrane (1164)",
 						uuid = "e42637da-b0ea-f95a-92db-536598331dad",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1164,
+						},
+						name = "Map check",
+						uuid = "bb98852a-48ff-239a-97e0-1666de1351f4",
 						version = 3,
 					},
 				},
@@ -1253,6 +1442,11 @@ local tbl =
 						{
 							
 							{
+								"36d63027-9150-6be0-a5ca-47756783e6eb",
+								true,
+							},
+							
+							{
 								"dbe530e9-e4c8-8cc4-9020-46d5fc7f65bb",
 								true,
 							},
@@ -1294,6 +1488,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							189,
+						},
+						name = "Map check",
+						uuid = "36d63027-9150-6be0-a5ca-47756783e6eb",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Amdapor Keep (Hard)/AutoSim",
 			name = "Set up this combat",
@@ -1317,6 +1527,11 @@ local tbl =
 						actionLua = "-- Shared pull-gathering helper; settings are independent of Minion core Settings.\nif not DungeonPullGather or DungeonPullGather.version~=2026111607 then\n if DungeonPullGather then DungeonPullGather.reset()end -- restore old owned QTs before replacing its state\n local D={version=2026111607}\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n D.path=folder..[[DungeonAutoSim.Gather.lua]]\n local c=FileExists(D.path)and FileLoad(D.path)or{}\n if type(c)~='table'then c={}end\n if type(c.enabled)~='boolean'then c.enabled=true end\n if type(c.diagnostics)~='boolean'then c.diagnostics=true end\n if type(c.settle)~='number'or c.settle<.5 or c.settle>5 then c.settle=3 end\n if type(c.timeout)~='number'or c.timeout<5 or c.timeout>40 then c.timeout=20 end\n if type(c.brdDotHP)~='number'or c.brdDotHP<0 or c.brdDotHP>30 then c.brdDotHP=20 end\n if type(c.apexCap)~='number'or c.apexCap<80 or c.apexCap>100 then c.apexCap=95 end\n if type(c.overrides)~='table'then c.overrides={}end\n if type(c.disabledOverrides)~='table'then c.disabledOverrides={}end\n for map,v in pairs(c.overrides)do\n  if type(map)~='number'or type(v)~='table'or type(v.settle)~='number'or v.settle<.5 or v.settle>5 or type(v.timeout)~='number'or v.timeout<5 or v.timeout>40 then c.overrides[map]=nil end\n end\n if c.migratedSettle3~=true then\n  if math.abs(c.settle-2.3)<.001 then c.settle=3 end\n  for _,v in pairs(c.overrides)do if math.abs(v.settle-2.3)<.001 then v.settle=3 end end\n  c.defaultSettle=3;c.migratedSettle3=true\n end\n D.config=c\n function D.save()\n  if not FolderExists(folder)then FolderCreate(folder)end\n  FileSave(D.path,{enabled=c.enabled,settle=c.settle,timeout=c.timeout,apexCap=c.apexCap,diagnostics=c.diagnostics,defaultSettle=c.defaultSettle,migratedSettle3=c.migratedSettle3,brdDotHP=c.brdDotHP,overrides=c.overrides,disabledOverrides=c.disabledOverrides})\n end\n function D.timing(map)\n  if not c.overrides[map]and not c.disabledOverrides[map]then\n   c.overrides[map]={settle=c.settle,timeout=c.timeout};D.save()\n  end\n  return c.overrides[map]or c\n end\n function D.restoreDots()\n  local r=D.dotToggle\n  if r and _G[r.var]==false then _G[r.var]=r.previous end\n  D.dotToggle=nil;D.dotActive=nil;D.dotStatus=nil\n end\n function D.reset()D.restoreDots();D.pull=nil;D.active=false;D.reason=nil;D.detail=nil;D.bardStatus=nil;D.dotActive=nil;D.dotStatus=nil end\n function D.trace(text)\n  if D.traceText~=text then D.traceText=text;TensorCore.timelineLogToFile('[Dungeon W2W] '..text..'\\n')end\n end\n function D.update(p,valid,isBoss,bosses)\n  if not c.enabled or not valid or isBoss or not p or not p.alive or not p.incombat then\n   if D.pull then D.trace('released: disabled, boss, death or combat ended')end\n   D.reset();return false\n  end\n  local timing=D.timing(p.localmapid)\n  local now=Now();local tank\n  for _,e in pairs(TensorCore.getEntityGroupList('Tank',nil,true)or{})do\n   if e.alive and e.pos and (e.pos.x-p.pos.x)^2+(e.pos.z-p.pos.z)^2<=60^2 then\n    if not tank or e.id<tank.id then tank=e end\n   end\n  end\n  if not tank then D.reset();D.detail='No nearby engaged party tank';return false end\n  local g=D.pull\n  if not g or g.map~=p.localmapid or g.tank~=tank.id then\n   g={map=p.localmapid,tank=tank.id,start=now,seen={},arrived=now,anchor={x=tank.pos.x,z=tank.pos.z},stationary=now};D.pull=g\n  end\n  if g.released then D.active=false;return false end\n  local count,far,new=0,0,0\n  TensorCore.forEachEntity('alive,targetable,attackable',function(id)\n   local e=TensorCore.mGetEntity(id)\n   if e and e.incombat and e.pos and not bosses[e.contentid] and math.abs(e.pos.y-tank.pos.y)<=10 then\n    local distance=(e.pos.x-tank.pos.x)^2+(e.pos.z-tank.pos.z)^2\n    if distance<=60^2 then\n     count=count+1\n     if not g.seen[id]then g.seen[id]=true;g.arrived=now;new=new+1 end\n     if distance>(12+(e.hitradius or 0))^2 then far=far+1 end\n    end\n   end\n   return true\n  end)\n  if (tank.pos.x-g.anchor.x)^2+(tank.pos.z-g.anchor.z)^2>1^2 then\n   g.anchor={x=tank.pos.x,z=tank.pos.z};g.stationary=now\n  end\n  if count==0 then\n   g.readyAt=nil\n   if now-g.start>=timing.timeout*1000 then g.released=true;D.active=false;D.reason=nil;D.trace('released: gather timeout, no engaged trash');return false end\n  else\n   if far>0 then g.readyAt=nil elseif not g.readyAt then g.readyAt=now end\n  end\n  if count>0 and far==0 and g.readyAt and now-g.readyAt>=timing.settle*1000 and now-g.stationary>=timing.settle*1000 and now-g.arrived>=timing.settle*1000 and now-g.start>=3000 then\n   g.released=true;D.active=false;D.reason=nil;D.trace('released: tank stopped, roster stable and '..count..' enemies gathered');return false\n  end\n  if now-g.start>=timing.timeout*1000 then\n   g.released=true;D.active=false;D.reason=nil;D.trace('released: '..timing.timeout..'s maximum gather wait; far='..far..' engaged='..count);return false\n  end\n  D.active=true;D.reason='Gathering pull'\n  D.detail=string.format('Gathering pull: %d engaged, %d trailing; %.1f / %.0fs',count,far,(now-g.start)/1000,timing.timeout)\n  local stage=far>0 and 'trailing enemies'or now-g.stationary<timing.settle*1000 and 'tank moving'or'waiting for stable pull'\n  D.trace('holding: '..stage..'; tank='..tank.id..'; engaged='..count..'; far='..far)\n  return true\n end\n function D.lease(id,untilMs)\n  if id==16496 or id==25784 or id==100 or id==113 or id==7406 or id==7407 or id==3560 then return false end\n  local accepted=TensorCore.API.TensorACR.holdActionUntil(id,untilMs,1)\n  D.leases=D.leases or{}\n  if accepted then D.leases[id]=untilMs end\n  return accepted\n end\n function D.dotHold(p,valid,target,bosses,encounter,level)\n  local active=valid and p.job==23 and c.brdDotHP>0 and not encounter\n   and target and target.alive and target.targetable and target.attackable and target.incombat\n   and not bosses[target.contentid]and target.hp and target.hp.max>0\n   and target.hp.percent>0 and target.hp.percent<c.brdDotHP\n  if not active then D.restoreDots();D.dotTraceKey=nil;return end\n  -- BRD's global DoTs QT tells the rotation not to plan these GCDs.\n  local variable='ACR_TensorRequiem4_DoTs'\n  if type(_G[variable])~='boolean'then return end\n  if not D.dotToggle then D.dotToggle={var=variable,previous=_G[variable]}end\n  _G[variable]=false;D.dotActive=true\n  D.dotStatus='BRD DoTs off below '..c.brdDotHP..'% trash HP'\n  local key=tostring(target.id)..':'..c.brdDotHP\n  if D.dotTraceKey~=key then\n   D.dotTraceKey=key\n   TensorCore.timelineLogToFile('[Dungeon BRD DoTs] QT off: target='..target.id..' CID='..target.contentid..' HP='..target.hp.percent..' threshold='..c.brdDotHP..'; no GCD action holds\\n')\n  end\n end\n function D.observeBoss(p,encounter,blocked,held)\n  if p.job~=23 or not encounter then D.bossLogAt=nil;D.bossLogKey=nil;return end\n  if not c.diagnostics then return end\n  local now=Now();local target=TensorCore.mGetTarget()\n  local owned=0;for var in pairs(held or{})do if var:match('_CD$')then owned=owned+1 end end\n  local key=tostring(target and target.id)..':'..tostring(blocked)..':'..tostring(ACR_TensorRequiem4_CD)..':'..owned\n  if D.bossLogAt and now-D.bossLogAt<5000 and D.bossLogKey==key then return end\n  D.bossLogAt=now;D.bossLogKey=key\n  local function state(id)\n   local a=ActionList:Get(1,id)\n   if not a then return 'missing action'end\n   local ok,ready=pcall(function()return a:IsReady(p.id)end)\n   return string.format('cd=%.2f onCD=%s ready=%s ownedLeaseRemainingMs=%.0f',math.max(0,a.cdmax-a.cd),tostring(a.isoncd),ok and tostring(ready)or('read error '..tostring(ready)),math.max(0,(D.leases and D.leases[id]or 0)-now))\n  end\n  local bv=TensorCore.getBuff(p,141);local rf=TensorCore.getBuff(p,2964)\n  TensorCore.timelineLogToFile('[Dungeon BRD boss] target='..tostring(target and target.contentid)..' HP='..tostring(target and target.hp and target.hp.percent)..' CDQT='..tostring(ACR_TensorRequiem4_CD)..' ownedCDvars='..owned..' finalOrLowHP='..tostring(blocked)..' gathering='..tostring(D.active)..' BattleVoice{'..state(118)..'} RadiantFinale{'..state(25785)..'} BVbuff='..tostring(bv and bv.duration)..' RFbuff='..tostring(rf and rf.duration)..' BVhotbar='..tostring(ACR_TensorRequiem4_Hotbar_BattleVoice)..'\\n')\n end\n function D.bard(p,gathering,priorityHold)\n  if p.job~=23 or not gathering then return end\n  local untilMs=Now()+450\n  -- BRD gathering owns short burst-action holds, not its broad CD toggle.\n  -- Both party buffs are held and released together; songs/normal damage remain automatic.\n  for _,row in ipairs({{101,4},{107,38},{118,50},{25785,90}})do\n   if p.level>=row[2]then D.lease(row[1],untilMs)end\n  end\n  D.bardStatus='BRD offensive buffs held for gathered targets; Apex uses its toggle'\n end\n function D.gatherApex(p,gathering)\n  return p.job==23 and gathering and not(p.gauge and type(p.gauge[4])=='number'and p.gauge[4]>=c.apexCap)\n end\n function D.gui()\n  local value,changed=GUI:Checkbox('Wait for full pull (W2W)',c.enabled)\n  if changed then c.enabled=value;D.save()end\n  if GUI:IsItemHovered()then GUI:SetTooltip('Hold major offensive cooldowns until the party tank stops and engaged enemies gather. Last-pack and low-HP holds keep priority. Normal damage continues.')end\n  local diag,edit=GUI:Checkbox('BRD boss-buff diagnostics',c.diagnostics)\n  if edit then c.diagnostics=diag;D.save()end\n  value=GUI:SliderInt('Hold BRD DoTs below trash HP (%)',c.brdDotHP,0,30)\n  if value~=c.brdDotHP then c.brdDotHP=value;D.save()end\n  if GUI:IsItemHovered()then GUI:SetTooltip('Temporarily switches the global BRD DoTs toggle off on selected low-HP trash, then restores its previous value. Bosses are excluded; zero disables.')end\n  if D.dotStatus then GUI:TextWrapped(D.dotStatus)end\n  if c.enabled then\n   local p=TensorCore.mGetPlayer();local map=p and p.localmapid\n   if map then D.timing(map)end\n   local custom=map and c.overrides[map]~=nil or false\n   value,changed=GUI:Checkbox('Use timings for this dungeon',custom)\n   if changed and map then\n    c.disabledOverrides[map]=not value or nil\n    c.overrides[map]=value and {settle=c.settle,timeout=c.timeout}or nil;D.save()\n   end\n   local timing=map and c.overrides[map]or c\n   value=GUI:SliderFloat('Full-pull settle time (seconds)',timing.settle,.5,5,'%.1f')\n   if value~=timing.settle then timing.settle=value;D.save()end\n   value=GUI:SliderFloat('Maximum gather wait (seconds)',timing.timeout,5,40,'%.0f')\n   if value~=timing.timeout then timing.timeout=value;D.save()end\n   value=GUI:SliderInt('Release gathering Apex at Soul Voice',c.apexCap,80,100)\n   if value~=c.apexCap then c.apexCap=value;D.save()end\n   if D.active and D.detail then GUI:TextWrapped(D.detail)end\n   if D.active and D.bardStatus then GUI:TextWrapped(D.bardStatus)end\n  end\n end\n D.save();DungeonPullGather=D\nend\n-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not AmdaporHardAutoSimConfig or AmdaporHardAutoSimConfig.fileApiVersion~=1 then\n    local C = AmdaporHardAutoSimConfig or {\n        enabled=true, movement=true, returnField=false, trash=true, poolFinal=true,\n        killOverride=true, kill3272=72.4, kill3274=91.7, kill0=91.7,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\"\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill3272\",\"kill3274\",\"kill0\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\AmdaporHard.AutoSim.lua]]\n    if not AmdaporHardAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill3272=math.max(15,math.min(1200,C.kill3272))\n    C.kill3274=math.max(15,math.min(1200,C.kill3274))\n    C.kill0=math.max(15,math.min(1200,C.kill0))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    AmdaporHardAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif AmdaporHardAutoSimConfig.poolFinal==nil then\n AmdaporHardAutoSimConfig.poolFinal=true\n table.insert(AmdaporHardAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=AmdaporHardAutoSimConfig\nlocal visible=GUI:Begin(\"Amdapor Keep (Hard) - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from your logged positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. The optional values below come from one four-player run, not the slower Duty Support samples.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Anchag (seconds)\",C.kill3272,5,15,\"%.1f\")\n        if changed then C.kill3272=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Boogyman (seconds)\",C.kill3274,5,15,\"%.1f\")\n        if changed then C.kill3274=math.max(15,math.min(1200,v));C.save() end\n        if changed then C.kill0=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold offensive cooldowns on final trash (all jobs)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before each boss and temporarily turns off the current job’s CD switch. Radiant Finale is explicitly held too. Your previous CD setting is restored when pooling ends; songs keep their own control.\") end\n    local shared=DungeonAutoSimShared\n    if shared then\n        v,changed=GUI:SliderInt(\"Hold new boss cooldowns below HP (%) - shared\",shared.lateHP,0,20)\n        if changed then shared.lateHP=v;shared.save() end\n        if GUI:IsItemHovered() then GUI:SetTooltip(\"Shared across these nine dungeons and all jobs. At this boss HP, stop starting offensive cooldowns; normal attacks continue. 0 disables this rule. Default 8%. Defensive controls and songs keep their own settings.\") end\n    end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    GUI:Text(\"Party buff timing\")\n    GUI:TextWrapped(C.buffEnabled and \"Forecast enabled. Times are seconds from boss pull.\" or \"Forecast disabled. These values apply only when the party buff forecast is enabled.\")\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\n do\n local h=DungeonProfilePooling\n if h then\nlocal key=\"highleveldungeons\"\nDungeonHoldDisplays=DungeonHoldDisplays or {}\nlocal c=DungeonHoldDisplays[key]\nif not c then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..key..[[.Safety.lua]]\n c=FileExists(path) and FileLoad(path) or {}\n if type(c)~=\"table\" then c={} end\n if type(c.showHoldStatus)~=\"boolean\" then c.showHoldStatus=true end\n if type(c.shortLivedAdds)~=\"boolean\" then c.shortLivedAdds=true end\n c.path=path;DungeonHoldDisplays[key]=c\nend\n GUI:Separator()\n GUI:Text(\"Dungeon holds\")\n local value,changed=GUI:Checkbox(\"Show hold reason\",c.showHoldStatus)\n if changed then c.showHoldStatus=value end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Shows only holds owned by this dungeon controller. It does not describe holds from other profiles.\") end\n local v,edit=GUI:Checkbox(\"Avoid long BLM casts on dying adds\",c.shortLivedAdds)\n if edit then c.shortLivedAdds=v end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Uses the target's lifetime estimate; lets an existing cast finish. Does not change targets or block healing.\") end\n if changed or edit then\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  FileSave(c.path,{showHoldStatus=c.showHoldStatus,shortLivedAdds=c.shortLivedAdds})\n end\n if c.showHoldStatus then GUI:TextWrapped(h.status or h.reason or \"No dungeon cooldown hold\") end\n DungeonPullGather.gui()\n end\n end\n\nend\nGUI:End()\nself.used=true",
 						conditions = 
 						{
+							
+							{
+								"6d9f7b70-cb50-7ef9-b7b1-c2105649e555",
+								true,
+							},
 							
 							{
 								"ed38e116-6008-61af-a574-112913410be8",
@@ -1343,6 +1558,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							189,
+						},
+						name = "Map check",
+						uuid = "6d9f7b70-cb50-7ef9-b7b1-c2105649e555",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Amdapor Keep (Hard)/AutoSim",
 			eventType = 13,
@@ -1366,6 +1597,11 @@ local tbl =
 						actionLua = "data.amdaporhard_autosim=nil\nself.used=true",
 						conditions = 
 						{
+							
+							{
+								"f1dc618b-5a87-78a1-8835-2ff3f5a3f1ee",
+								true,
+							},
 							
 							{
 								"44745671-5a38-d595-9c9a-779c76a64a8e",
@@ -1409,6 +1645,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							189,
+						},
+						name = "Map check",
+						uuid = "f1dc618b-5a87-78a1-8835-2ff3f5a3f1ee",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Amdapor Keep (Hard)/AutoSim",
 			name = "Reset between combats",
@@ -1432,6 +1684,11 @@ local tbl =
 						actionLua = "data.amdaporhard_autosim.channel(eventArgs)\nself.used=true",
 						conditions = 
 						{
+							
+							{
+								"14f90c56-b11d-d745-84f3-f28e33468b0d",
+								true,
+							},
 							
 							{
 								"a4c6597e-c293-8046-8ab5-9b8851ae28aa",
@@ -1475,6 +1732,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							189,
+						},
+						name = "Map check",
+						uuid = "14f90c56-b11d-d745-84f3-f28e33468b0d",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Amdapor Keep (Hard)/AutoSim",
 			eventType = 3,
@@ -1498,6 +1771,11 @@ local tbl =
 						actionLua = "data.amdaporhard_final_trash = true\nself.used = true",
 						conditions = 
 						{
+							
+							{
+								"dd68fea8-b8d1-43a6-b78e-5032c18bc27c",
+								true,
+							},
 							
 							{
 								"5308f4be-0d64-c047-ba32-daaa60c134fd",
@@ -1541,6 +1819,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							189,
+						},
+						name = "Map check",
+						uuid = "dd68fea8-b8d1-43a6-b78e-5032c18bc27c",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Amdapor Keep (Hard)/AutoSim",
 			name = "Recognize final trash before bosses",
@@ -1574,6 +1868,11 @@ local tbl =
 						actionLua = "local e=eventArgs\nlocal shapes={[3167]={\"Rect\",0}}\nlocal shape=shapes[e.aoeID]\nlocal ms=e.startTime+e.duration*1000-Now()\nif ms>0 and ms<20000 then\n    local drawer=TensorCore.getStaticDrawer(0x603333FF,2)\n    if shape[1]==\"Circle\" then\n        drawer:addTimedCircle(ms,e.x,e.y,e.z,shape[2],0,false,true)\n    elseif e.aoeWidth>0 and e.aoeLength>0 then\n        drawer:addTimedRect(ms,e.x,e.y,e.z,e.aoeLength,e.aoeWidth,e.heading,0,false,true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms,{x=e.x,y=e.y+1,z=e.z},0xFFFFFFFF,true,1.1)\nend\nself.used=true",
 						conditions = 
 						{
+							
+							{
+								"03b5ee01-a082-04c3-88ab-f77df0066d2e",
+								true,
+							},
 							
 							{
 								"397cf419-4f81-4a75-9528-ab1c30d4a44c",
@@ -1614,6 +1913,22 @@ local tbl =
 						dequeueIfLuaFalse = true,
 						name = "Relevant state",
 						uuid = "99fa533f-6d93-4626-8b8c-fbc5a98f297c",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							189,
+						},
+						name = "Map check",
+						uuid = "03b5ee01-a082-04c3-88ab-f77df0066d2e",
 						version = 3,
 					},
 				},
@@ -1662,6 +1977,11 @@ local tbl =
 						{
 							
 							{
+								"fe473581-240b-8418-982a-08c2b548509f",
+								true,
+							},
+							
+							{
 								"76ff4421-f10d-4b5d-96e0-e06fe4dec81e",
 								true,
 							},
@@ -1703,6 +2023,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1174,
+						},
+						name = "Map check",
+						uuid = "fe473581-240b-8418-982a-08c2b548509f",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Ghimlyt Dark/AutoSim",
 			name = "Set up this combat",
@@ -1726,6 +2062,11 @@ local tbl =
 						actionLua = "-- Shared pull-gathering helper; settings are independent of Minion core Settings.\nif not DungeonPullGather or DungeonPullGather.version~=2026111607 then\n if DungeonPullGather then DungeonPullGather.reset()end -- restore old owned QTs before replacing its state\n local D={version=2026111607}\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n D.path=folder..[[DungeonAutoSim.Gather.lua]]\n local c=FileExists(D.path)and FileLoad(D.path)or{}\n if type(c)~='table'then c={}end\n if type(c.enabled)~='boolean'then c.enabled=true end\n if type(c.diagnostics)~='boolean'then c.diagnostics=true end\n if type(c.settle)~='number'or c.settle<.5 or c.settle>5 then c.settle=3 end\n if type(c.timeout)~='number'or c.timeout<5 or c.timeout>40 then c.timeout=20 end\n if type(c.brdDotHP)~='number'or c.brdDotHP<0 or c.brdDotHP>30 then c.brdDotHP=20 end\n if type(c.apexCap)~='number'or c.apexCap<80 or c.apexCap>100 then c.apexCap=95 end\n if type(c.overrides)~='table'then c.overrides={}end\n if type(c.disabledOverrides)~='table'then c.disabledOverrides={}end\n for map,v in pairs(c.overrides)do\n  if type(map)~='number'or type(v)~='table'or type(v.settle)~='number'or v.settle<.5 or v.settle>5 or type(v.timeout)~='number'or v.timeout<5 or v.timeout>40 then c.overrides[map]=nil end\n end\n if c.migratedSettle3~=true then\n  if math.abs(c.settle-2.3)<.001 then c.settle=3 end\n  for _,v in pairs(c.overrides)do if math.abs(v.settle-2.3)<.001 then v.settle=3 end end\n  c.defaultSettle=3;c.migratedSettle3=true\n end\n D.config=c\n function D.save()\n  if not FolderExists(folder)then FolderCreate(folder)end\n  FileSave(D.path,{enabled=c.enabled,settle=c.settle,timeout=c.timeout,apexCap=c.apexCap,diagnostics=c.diagnostics,defaultSettle=c.defaultSettle,migratedSettle3=c.migratedSettle3,brdDotHP=c.brdDotHP,overrides=c.overrides,disabledOverrides=c.disabledOverrides})\n end\n function D.timing(map)\n  if not c.overrides[map]and not c.disabledOverrides[map]then\n   c.overrides[map]={settle=c.settle,timeout=c.timeout};D.save()\n  end\n  return c.overrides[map]or c\n end\n function D.restoreDots()\n  local r=D.dotToggle\n  if r and _G[r.var]==false then _G[r.var]=r.previous end\n  D.dotToggle=nil;D.dotActive=nil;D.dotStatus=nil\n end\n function D.reset()D.restoreDots();D.pull=nil;D.active=false;D.reason=nil;D.detail=nil;D.bardStatus=nil;D.dotActive=nil;D.dotStatus=nil end\n function D.trace(text)\n  if D.traceText~=text then D.traceText=text;TensorCore.timelineLogToFile('[Dungeon W2W] '..text..'\\n')end\n end\n function D.update(p,valid,isBoss,bosses)\n  if not c.enabled or not valid or isBoss or not p or not p.alive or not p.incombat then\n   if D.pull then D.trace('released: disabled, boss, death or combat ended')end\n   D.reset();return false\n  end\n  local timing=D.timing(p.localmapid)\n  local now=Now();local tank\n  for _,e in pairs(TensorCore.getEntityGroupList('Tank',nil,true)or{})do\n   if e.alive and e.pos and (e.pos.x-p.pos.x)^2+(e.pos.z-p.pos.z)^2<=60^2 then\n    if not tank or e.id<tank.id then tank=e end\n   end\n  end\n  if not tank then D.reset();D.detail='No nearby engaged party tank';return false end\n  local g=D.pull\n  if not g or g.map~=p.localmapid or g.tank~=tank.id then\n   g={map=p.localmapid,tank=tank.id,start=now,seen={},arrived=now,anchor={x=tank.pos.x,z=tank.pos.z},stationary=now};D.pull=g\n  end\n  if g.released then D.active=false;return false end\n  local count,far,new=0,0,0\n  TensorCore.forEachEntity('alive,targetable,attackable',function(id)\n   local e=TensorCore.mGetEntity(id)\n   if e and e.incombat and e.pos and not bosses[e.contentid] and math.abs(e.pos.y-tank.pos.y)<=10 then\n    local distance=(e.pos.x-tank.pos.x)^2+(e.pos.z-tank.pos.z)^2\n    if distance<=60^2 then\n     count=count+1\n     if not g.seen[id]then g.seen[id]=true;g.arrived=now;new=new+1 end\n     if distance>(12+(e.hitradius or 0))^2 then far=far+1 end\n    end\n   end\n   return true\n  end)\n  if (tank.pos.x-g.anchor.x)^2+(tank.pos.z-g.anchor.z)^2>1^2 then\n   g.anchor={x=tank.pos.x,z=tank.pos.z};g.stationary=now\n  end\n  if count==0 then\n   g.readyAt=nil\n   if now-g.start>=timing.timeout*1000 then g.released=true;D.active=false;D.reason=nil;D.trace('released: gather timeout, no engaged trash');return false end\n  else\n   if far>0 then g.readyAt=nil elseif not g.readyAt then g.readyAt=now end\n  end\n  if count>0 and far==0 and g.readyAt and now-g.readyAt>=timing.settle*1000 and now-g.stationary>=timing.settle*1000 and now-g.arrived>=timing.settle*1000 and now-g.start>=3000 then\n   g.released=true;D.active=false;D.reason=nil;D.trace('released: tank stopped, roster stable and '..count..' enemies gathered');return false\n  end\n  if now-g.start>=timing.timeout*1000 then\n   g.released=true;D.active=false;D.reason=nil;D.trace('released: '..timing.timeout..'s maximum gather wait; far='..far..' engaged='..count);return false\n  end\n  D.active=true;D.reason='Gathering pull'\n  D.detail=string.format('Gathering pull: %d engaged, %d trailing; %.1f / %.0fs',count,far,(now-g.start)/1000,timing.timeout)\n  local stage=far>0 and 'trailing enemies'or now-g.stationary<timing.settle*1000 and 'tank moving'or'waiting for stable pull'\n  D.trace('holding: '..stage..'; tank='..tank.id..'; engaged='..count..'; far='..far)\n  return true\n end\n function D.lease(id,untilMs)\n  if id==16496 or id==25784 or id==100 or id==113 or id==7406 or id==7407 or id==3560 then return false end\n  local accepted=TensorCore.API.TensorACR.holdActionUntil(id,untilMs,1)\n  D.leases=D.leases or{}\n  if accepted then D.leases[id]=untilMs end\n  return accepted\n end\n function D.dotHold(p,valid,target,bosses,encounter,level)\n  local active=valid and p.job==23 and c.brdDotHP>0 and not encounter\n   and target and target.alive and target.targetable and target.attackable and target.incombat\n   and not bosses[target.contentid]and target.hp and target.hp.max>0\n   and target.hp.percent>0 and target.hp.percent<c.brdDotHP\n  if not active then D.restoreDots();D.dotTraceKey=nil;return end\n  -- BRD's global DoTs QT tells the rotation not to plan these GCDs.\n  local variable='ACR_TensorRequiem4_DoTs'\n  if type(_G[variable])~='boolean'then return end\n  if not D.dotToggle then D.dotToggle={var=variable,previous=_G[variable]}end\n  _G[variable]=false;D.dotActive=true\n  D.dotStatus='BRD DoTs off below '..c.brdDotHP..'% trash HP'\n  local key=tostring(target.id)..':'..c.brdDotHP\n  if D.dotTraceKey~=key then\n   D.dotTraceKey=key\n   TensorCore.timelineLogToFile('[Dungeon BRD DoTs] QT off: target='..target.id..' CID='..target.contentid..' HP='..target.hp.percent..' threshold='..c.brdDotHP..'; no GCD action holds\\n')\n  end\n end\n function D.observeBoss(p,encounter,blocked,held)\n  if p.job~=23 or not encounter then D.bossLogAt=nil;D.bossLogKey=nil;return end\n  if not c.diagnostics then return end\n  local now=Now();local target=TensorCore.mGetTarget()\n  local owned=0;for var in pairs(held or{})do if var:match('_CD$')then owned=owned+1 end end\n  local key=tostring(target and target.id)..':'..tostring(blocked)..':'..tostring(ACR_TensorRequiem4_CD)..':'..owned\n  if D.bossLogAt and now-D.bossLogAt<5000 and D.bossLogKey==key then return end\n  D.bossLogAt=now;D.bossLogKey=key\n  local function state(id)\n   local a=ActionList:Get(1,id)\n   if not a then return 'missing action'end\n   local ok,ready=pcall(function()return a:IsReady(p.id)end)\n   return string.format('cd=%.2f onCD=%s ready=%s ownedLeaseRemainingMs=%.0f',math.max(0,a.cdmax-a.cd),tostring(a.isoncd),ok and tostring(ready)or('read error '..tostring(ready)),math.max(0,(D.leases and D.leases[id]or 0)-now))\n  end\n  local bv=TensorCore.getBuff(p,141);local rf=TensorCore.getBuff(p,2964)\n  TensorCore.timelineLogToFile('[Dungeon BRD boss] target='..tostring(target and target.contentid)..' HP='..tostring(target and target.hp and target.hp.percent)..' CDQT='..tostring(ACR_TensorRequiem4_CD)..' ownedCDvars='..owned..' finalOrLowHP='..tostring(blocked)..' gathering='..tostring(D.active)..' BattleVoice{'..state(118)..'} RadiantFinale{'..state(25785)..'} BVbuff='..tostring(bv and bv.duration)..' RFbuff='..tostring(rf and rf.duration)..' BVhotbar='..tostring(ACR_TensorRequiem4_Hotbar_BattleVoice)..'\\n')\n end\n function D.bard(p,gathering,priorityHold)\n  if p.job~=23 or not gathering then return end\n  local untilMs=Now()+450\n  -- BRD gathering owns short burst-action holds, not its broad CD toggle.\n  -- Both party buffs are held and released together; songs/normal damage remain automatic.\n  for _,row in ipairs({{101,4},{107,38},{118,50},{25785,90}})do\n   if p.level>=row[2]then D.lease(row[1],untilMs)end\n  end\n  D.bardStatus='BRD offensive buffs held for gathered targets; Apex uses its toggle'\n end\n function D.gatherApex(p,gathering)\n  return p.job==23 and gathering and not(p.gauge and type(p.gauge[4])=='number'and p.gauge[4]>=c.apexCap)\n end\n function D.gui()\n  local value,changed=GUI:Checkbox('Wait for full pull (W2W)',c.enabled)\n  if changed then c.enabled=value;D.save()end\n  if GUI:IsItemHovered()then GUI:SetTooltip('Hold major offensive cooldowns until the party tank stops and engaged enemies gather. Last-pack and low-HP holds keep priority. Normal damage continues.')end\n  local diag,edit=GUI:Checkbox('BRD boss-buff diagnostics',c.diagnostics)\n  if edit then c.diagnostics=diag;D.save()end\n  value=GUI:SliderInt('Hold BRD DoTs below trash HP (%)',c.brdDotHP,0,30)\n  if value~=c.brdDotHP then c.brdDotHP=value;D.save()end\n  if GUI:IsItemHovered()then GUI:SetTooltip('Temporarily switches the global BRD DoTs toggle off on selected low-HP trash, then restores its previous value. Bosses are excluded; zero disables.')end\n  if D.dotStatus then GUI:TextWrapped(D.dotStatus)end\n  if c.enabled then\n   local p=TensorCore.mGetPlayer();local map=p and p.localmapid\n   if map then D.timing(map)end\n   local custom=map and c.overrides[map]~=nil or false\n   value,changed=GUI:Checkbox('Use timings for this dungeon',custom)\n   if changed and map then\n    c.disabledOverrides[map]=not value or nil\n    c.overrides[map]=value and {settle=c.settle,timeout=c.timeout}or nil;D.save()\n   end\n   local timing=map and c.overrides[map]or c\n   value=GUI:SliderFloat('Full-pull settle time (seconds)',timing.settle,.5,5,'%.1f')\n   if value~=timing.settle then timing.settle=value;D.save()end\n   value=GUI:SliderFloat('Maximum gather wait (seconds)',timing.timeout,5,40,'%.0f')\n   if value~=timing.timeout then timing.timeout=value;D.save()end\n   value=GUI:SliderInt('Release gathering Apex at Soul Voice',c.apexCap,80,100)\n   if value~=c.apexCap then c.apexCap=value;D.save()end\n   if D.active and D.detail then GUI:TextWrapped(D.detail)end\n   if D.active and D.bardStatus then GUI:TextWrapped(D.bardStatus)end\n  end\n end\n D.save();DungeonPullGather=D\nend\n-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not GhimlytAutoSimConfig or GhimlytAutoSimConfig.fileApiVersion~=1 then\n    local C = GhimlytAutoSimConfig or {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=true, kill7855=13.2, kill7856=32.4, kill7857=83,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\"\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill7855\",\"kill7856\",\"kill7857\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\Ghimlyt.AutoSim.lua]]\n    if not GhimlytAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill7855=math.max(15,math.min(1200,C.kill7855))\n    C.kill7856=math.max(15,math.min(1200,C.kill7856))\n    C.kill7857=math.max(15,math.min(1200,C.kill7857))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    GhimlytAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif GhimlytAutoSimConfig.poolFinal==nil then\n GhimlytAutoSimConfig.poolFinal=true\n table.insert(GhimlytAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=GhimlytAutoSimConfig\nlocal visible=GUI:Begin(\"The Ghimlyt Dark - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from your logged positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. The optional values below come from one four-player run, not the slower Duty Support samples.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Mark III-B Magitek Colossus (seconds)\",C.kill7855,5,15,\"%.1f\")\n        if changed then C.kill7855=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Prometheus (seconds)\",C.kill7856,5,15,\"%.1f\")\n        if changed then C.kill7856=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Soranus sisters (seconds)\",C.kill7857,5,15,\"%.1f\")\n        if changed then C.kill7857=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold offensive cooldowns on final trash (all jobs)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before each boss and temporarily turns off the current job’s CD switch. Radiant Finale is explicitly held too. Your previous CD setting is restored when pooling ends; songs keep their own control.\") end\n    local shared=DungeonAutoSimShared\n    if shared then\n        v,changed=GUI:SliderInt(\"Hold new boss cooldowns below HP (%) - shared\",shared.lateHP,0,20)\n        if changed then shared.lateHP=v;shared.save() end\n        if GUI:IsItemHovered() then GUI:SetTooltip(\"Shared across these nine dungeons and all jobs. At this boss HP, stop starting offensive cooldowns; normal attacks continue. 0 disables this rule. Default 8%. Defensive controls and songs keep their own settings.\") end\n    end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    GUI:Text(\"Party buff timing\")\n    GUI:TextWrapped(C.buffEnabled and \"Forecast enabled. Times are seconds from boss pull.\" or \"Forecast disabled. These values apply only when the party buff forecast is enabled.\")\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\n do\n local h=DungeonProfilePooling\n if h then\nlocal key=\"highleveldungeons\"\nDungeonHoldDisplays=DungeonHoldDisplays or {}\nlocal c=DungeonHoldDisplays[key]\nif not c then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..key..[[.Safety.lua]]\n c=FileExists(path) and FileLoad(path) or {}\n if type(c)~=\"table\" then c={} end\n if type(c.showHoldStatus)~=\"boolean\" then c.showHoldStatus=true end\n if type(c.shortLivedAdds)~=\"boolean\" then c.shortLivedAdds=true end\n c.path=path;DungeonHoldDisplays[key]=c\nend\n GUI:Separator()\n GUI:Text(\"Dungeon holds\")\n local value,changed=GUI:Checkbox(\"Show hold reason\",c.showHoldStatus)\n if changed then c.showHoldStatus=value end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Shows only holds owned by this dungeon controller. It does not describe holds from other profiles.\") end\n local v,edit=GUI:Checkbox(\"Avoid long BLM casts on dying adds\",c.shortLivedAdds)\n if edit then c.shortLivedAdds=v end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Uses the target's lifetime estimate; lets an existing cast finish. Does not change targets or block healing.\") end\n if changed or edit then\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  FileSave(c.path,{showHoldStatus=c.showHoldStatus,shortLivedAdds=c.shortLivedAdds})\n end\n if c.showHoldStatus then GUI:TextWrapped(h.status or h.reason or \"No dungeon cooldown hold\") end\n DungeonPullGather.gui()\n end\n end\n\nend\nGUI:End()\nself.used=true\n",
 						conditions = 
 						{
+							
+							{
+								"112a8a79-7e62-82be-ab59-f4c0ea69dc57",
+								true,
+							},
 							
 							{
 								"b338f553-a1a7-78df-a536-ca615350c796",
@@ -1752,6 +2093,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1174,
+						},
+						name = "Map check",
+						uuid = "112a8a79-7e62-82be-ab59-f4c0ea69dc57",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Ghimlyt Dark/AutoSim",
 			eventType = 13,
@@ -1775,6 +2132,11 @@ local tbl =
 						actionLua = "data.ghimlyt_autosim=nil\nself.used=true",
 						conditions = 
 						{
+							
+							{
+								"c7f7b12c-563c-1b94-b0cb-4b3fb269fae3",
+								true,
+							},
 							
 							{
 								"719d571a-ab65-c1d8-9d5e-123002c371f1",
@@ -1818,6 +2180,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1174,
+						},
+						name = "Map check",
+						uuid = "c7f7b12c-563c-1b94-b0cb-4b3fb269fae3",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Ghimlyt Dark/AutoSim",
 			name = "Reset between combats",
@@ -1841,6 +2219,11 @@ local tbl =
 						actionLua = "data.ghimlyt_autosim.channel(eventArgs)\nself.used=true",
 						conditions = 
 						{
+							
+							{
+								"21402bba-5bf9-c31b-a4f0-c2d67b848158",
+								true,
+							},
 							
 							{
 								"c0582306-cf68-af09-b268-3a746d3aed34",
@@ -1884,6 +2267,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1174,
+						},
+						name = "Map check",
+						uuid = "21402bba-5bf9-c31b-a4f0-c2d67b848158",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Ghimlyt Dark/AutoSim",
 			eventType = 3,
@@ -1907,6 +2306,11 @@ local tbl =
 						actionLua = "data.ghimlyt_final_trash = true\nself.used = true",
 						conditions = 
 						{
+							
+							{
+								"7c005193-53a1-87bf-a8fd-55df8ba35a9f",
+								true,
+							},
 							
 							{
 								"23a76057-9b37-44a0-9067-60064ac634dc",
@@ -1950,6 +2354,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1174,
+						},
+						name = "Map check",
+						uuid = "7c005193-53a1-87bf-a8fd-55df8ba35a9f",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Ghimlyt Dark/AutoSim",
 			name = "Recognize final trash before bosses",
@@ -1983,6 +2403,11 @@ local tbl =
 						actionLua = "local e=eventArgs\nlocal shapes={[14108]={\"Circle\",8},[14124]={\"Rect\",0},[14115]={\"Rect\",0},[14116]={\"Rect\",0},[14411]={\"Rect\",0},[14412]={\"Rect\",0},[14413]={\"Rect\",0},[14697]={\"Rect\",0},[14698]={\"Rect\",0},[14699]={\"Rect\",0}}\nlocal shape=shapes[e.aoeID]\nlocal ms=e.startTime+e.duration*1000-Now()\nif ms>0 and ms<20000 then\n    local drawer=TensorCore.getStaticDrawer(0x603333FF,2)\n    if shape[1]==\"Circle\" then\n        drawer:addTimedCircle(ms,e.x,e.y,e.z,shape[2],0,false,true)\n    elseif e.aoeWidth>0 and e.aoeLength>0 then\n        drawer:addTimedRect(ms,e.x,e.y,e.z,e.aoeLength,e.aoeWidth,e.heading,0,false,true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms,{x=e.x,y=e.y+1,z=e.z},0xFFFFFFFF,true,1.1)\nend\nself.used=true",
 						conditions = 
 						{
+							
+							{
+								"fea44e4e-d2e5-ff97-bd5d-20323c67f1ec",
+								true,
+							},
 							
 							{
 								"441d0d3c-0763-9867-a377-3220c5a0be37",
@@ -2023,6 +2448,22 @@ local tbl =
 						dequeueIfLuaFalse = true,
 						name = "Relevant state",
 						uuid = "cd6c1a55-2344-0124-9c19-b2acc29c92d8",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1174,
+						},
+						name = "Map check",
+						uuid = "fea44e4e-d2e5-ff97-bd5d-20323c67f1ec",
 						version = 3,
 					},
 				},
@@ -2071,6 +2512,11 @@ local tbl =
 						{
 							
 							{
+								"e105041a-ceac-472c-89cc-653019600be0",
+								true,
+							},
+							
+							{
 								"51707762-1002-a94d-939c-fd392cf190ea",
 								true,
 							},
@@ -2112,6 +2558,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1126,
+						},
+						name = "Map check",
+						uuid = "e105041a-ceac-472c-89cc-653019600be0",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Aetherfont/AutoSim",
 			name = "Set up this combat",
@@ -2135,6 +2597,11 @@ local tbl =
 						actionLua = "-- Shared pull-gathering helper; settings are independent of Minion core Settings.\nif not DungeonPullGather or DungeonPullGather.version~=2026111607 then\n if DungeonPullGather then DungeonPullGather.reset()end -- restore old owned QTs before replacing its state\n local D={version=2026111607}\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n D.path=folder..[[DungeonAutoSim.Gather.lua]]\n local c=FileExists(D.path)and FileLoad(D.path)or{}\n if type(c)~='table'then c={}end\n if type(c.enabled)~='boolean'then c.enabled=true end\n if type(c.diagnostics)~='boolean'then c.diagnostics=true end\n if type(c.settle)~='number'or c.settle<.5 or c.settle>5 then c.settle=3 end\n if type(c.timeout)~='number'or c.timeout<5 or c.timeout>40 then c.timeout=20 end\n if type(c.brdDotHP)~='number'or c.brdDotHP<0 or c.brdDotHP>30 then c.brdDotHP=20 end\n if type(c.apexCap)~='number'or c.apexCap<80 or c.apexCap>100 then c.apexCap=95 end\n if type(c.overrides)~='table'then c.overrides={}end\n if type(c.disabledOverrides)~='table'then c.disabledOverrides={}end\n for map,v in pairs(c.overrides)do\n  if type(map)~='number'or type(v)~='table'or type(v.settle)~='number'or v.settle<.5 or v.settle>5 or type(v.timeout)~='number'or v.timeout<5 or v.timeout>40 then c.overrides[map]=nil end\n end\n if c.migratedSettle3~=true then\n  if math.abs(c.settle-2.3)<.001 then c.settle=3 end\n  for _,v in pairs(c.overrides)do if math.abs(v.settle-2.3)<.001 then v.settle=3 end end\n  c.defaultSettle=3;c.migratedSettle3=true\n end\n D.config=c\n function D.save()\n  if not FolderExists(folder)then FolderCreate(folder)end\n  FileSave(D.path,{enabled=c.enabled,settle=c.settle,timeout=c.timeout,apexCap=c.apexCap,diagnostics=c.diagnostics,defaultSettle=c.defaultSettle,migratedSettle3=c.migratedSettle3,brdDotHP=c.brdDotHP,overrides=c.overrides,disabledOverrides=c.disabledOverrides})\n end\n function D.timing(map)\n  if not c.overrides[map]and not c.disabledOverrides[map]then\n   c.overrides[map]={settle=c.settle,timeout=c.timeout};D.save()\n  end\n  return c.overrides[map]or c\n end\n function D.restoreDots()\n  local r=D.dotToggle\n  if r and _G[r.var]==false then _G[r.var]=r.previous end\n  D.dotToggle=nil;D.dotActive=nil;D.dotStatus=nil\n end\n function D.reset()D.restoreDots();D.pull=nil;D.active=false;D.reason=nil;D.detail=nil;D.bardStatus=nil;D.dotActive=nil;D.dotStatus=nil end\n function D.trace(text)\n  if D.traceText~=text then D.traceText=text;TensorCore.timelineLogToFile('[Dungeon W2W] '..text..'\\n')end\n end\n function D.update(p,valid,isBoss,bosses)\n  if not c.enabled or not valid or isBoss or not p or not p.alive or not p.incombat then\n   if D.pull then D.trace('released: disabled, boss, death or combat ended')end\n   D.reset();return false\n  end\n  local timing=D.timing(p.localmapid)\n  local now=Now();local tank\n  for _,e in pairs(TensorCore.getEntityGroupList('Tank',nil,true)or{})do\n   if e.alive and e.pos and (e.pos.x-p.pos.x)^2+(e.pos.z-p.pos.z)^2<=60^2 then\n    if not tank or e.id<tank.id then tank=e end\n   end\n  end\n  if not tank then D.reset();D.detail='No nearby engaged party tank';return false end\n  local g=D.pull\n  if not g or g.map~=p.localmapid or g.tank~=tank.id then\n   g={map=p.localmapid,tank=tank.id,start=now,seen={},arrived=now,anchor={x=tank.pos.x,z=tank.pos.z},stationary=now};D.pull=g\n  end\n  if g.released then D.active=false;return false end\n  local count,far,new=0,0,0\n  TensorCore.forEachEntity('alive,targetable,attackable',function(id)\n   local e=TensorCore.mGetEntity(id)\n   if e and e.incombat and e.pos and not bosses[e.contentid] and math.abs(e.pos.y-tank.pos.y)<=10 then\n    local distance=(e.pos.x-tank.pos.x)^2+(e.pos.z-tank.pos.z)^2\n    if distance<=60^2 then\n     count=count+1\n     if not g.seen[id]then g.seen[id]=true;g.arrived=now;new=new+1 end\n     if distance>(12+(e.hitradius or 0))^2 then far=far+1 end\n    end\n   end\n   return true\n  end)\n  if (tank.pos.x-g.anchor.x)^2+(tank.pos.z-g.anchor.z)^2>1^2 then\n   g.anchor={x=tank.pos.x,z=tank.pos.z};g.stationary=now\n  end\n  if count==0 then\n   g.readyAt=nil\n   if now-g.start>=timing.timeout*1000 then g.released=true;D.active=false;D.reason=nil;D.trace('released: gather timeout, no engaged trash');return false end\n  else\n   if far>0 then g.readyAt=nil elseif not g.readyAt then g.readyAt=now end\n  end\n  if count>0 and far==0 and g.readyAt and now-g.readyAt>=timing.settle*1000 and now-g.stationary>=timing.settle*1000 and now-g.arrived>=timing.settle*1000 and now-g.start>=3000 then\n   g.released=true;D.active=false;D.reason=nil;D.trace('released: tank stopped, roster stable and '..count..' enemies gathered');return false\n  end\n  if now-g.start>=timing.timeout*1000 then\n   g.released=true;D.active=false;D.reason=nil;D.trace('released: '..timing.timeout..'s maximum gather wait; far='..far..' engaged='..count);return false\n  end\n  D.active=true;D.reason='Gathering pull'\n  D.detail=string.format('Gathering pull: %d engaged, %d trailing; %.1f / %.0fs',count,far,(now-g.start)/1000,timing.timeout)\n  local stage=far>0 and 'trailing enemies'or now-g.stationary<timing.settle*1000 and 'tank moving'or'waiting for stable pull'\n  D.trace('holding: '..stage..'; tank='..tank.id..'; engaged='..count..'; far='..far)\n  return true\n end\n function D.lease(id,untilMs)\n  if id==16496 or id==25784 or id==100 or id==113 or id==7406 or id==7407 or id==3560 then return false end\n  local accepted=TensorCore.API.TensorACR.holdActionUntil(id,untilMs,1)\n  D.leases=D.leases or{}\n  if accepted then D.leases[id]=untilMs end\n  return accepted\n end\n function D.dotHold(p,valid,target,bosses,encounter,level)\n  local active=valid and p.job==23 and c.brdDotHP>0 and not encounter\n   and target and target.alive and target.targetable and target.attackable and target.incombat\n   and not bosses[target.contentid]and target.hp and target.hp.max>0\n   and target.hp.percent>0 and target.hp.percent<c.brdDotHP\n  if not active then D.restoreDots();D.dotTraceKey=nil;return end\n  -- BRD's global DoTs QT tells the rotation not to plan these GCDs.\n  local variable='ACR_TensorRequiem4_DoTs'\n  if type(_G[variable])~='boolean'then return end\n  if not D.dotToggle then D.dotToggle={var=variable,previous=_G[variable]}end\n  _G[variable]=false;D.dotActive=true\n  D.dotStatus='BRD DoTs off below '..c.brdDotHP..'% trash HP'\n  local key=tostring(target.id)..':'..c.brdDotHP\n  if D.dotTraceKey~=key then\n   D.dotTraceKey=key\n   TensorCore.timelineLogToFile('[Dungeon BRD DoTs] QT off: target='..target.id..' CID='..target.contentid..' HP='..target.hp.percent..' threshold='..c.brdDotHP..'; no GCD action holds\\n')\n  end\n end\n function D.observeBoss(p,encounter,blocked,held)\n  if p.job~=23 or not encounter then D.bossLogAt=nil;D.bossLogKey=nil;return end\n  if not c.diagnostics then return end\n  local now=Now();local target=TensorCore.mGetTarget()\n  local owned=0;for var in pairs(held or{})do if var:match('_CD$')then owned=owned+1 end end\n  local key=tostring(target and target.id)..':'..tostring(blocked)..':'..tostring(ACR_TensorRequiem4_CD)..':'..owned\n  if D.bossLogAt and now-D.bossLogAt<5000 and D.bossLogKey==key then return end\n  D.bossLogAt=now;D.bossLogKey=key\n  local function state(id)\n   local a=ActionList:Get(1,id)\n   if not a then return 'missing action'end\n   local ok,ready=pcall(function()return a:IsReady(p.id)end)\n   return string.format('cd=%.2f onCD=%s ready=%s ownedLeaseRemainingMs=%.0f',math.max(0,a.cdmax-a.cd),tostring(a.isoncd),ok and tostring(ready)or('read error '..tostring(ready)),math.max(0,(D.leases and D.leases[id]or 0)-now))\n  end\n  local bv=TensorCore.getBuff(p,141);local rf=TensorCore.getBuff(p,2964)\n  TensorCore.timelineLogToFile('[Dungeon BRD boss] target='..tostring(target and target.contentid)..' HP='..tostring(target and target.hp and target.hp.percent)..' CDQT='..tostring(ACR_TensorRequiem4_CD)..' ownedCDvars='..owned..' finalOrLowHP='..tostring(blocked)..' gathering='..tostring(D.active)..' BattleVoice{'..state(118)..'} RadiantFinale{'..state(25785)..'} BVbuff='..tostring(bv and bv.duration)..' RFbuff='..tostring(rf and rf.duration)..' BVhotbar='..tostring(ACR_TensorRequiem4_Hotbar_BattleVoice)..'\\n')\n end\n function D.bard(p,gathering,priorityHold)\n  if p.job~=23 or not gathering then return end\n  local untilMs=Now()+450\n  -- BRD gathering owns short burst-action holds, not its broad CD toggle.\n  -- Both party buffs are held and released together; songs/normal damage remain automatic.\n  for _,row in ipairs({{101,4},{107,38},{118,50},{25785,90}})do\n   if p.level>=row[2]then D.lease(row[1],untilMs)end\n  end\n  D.bardStatus='BRD offensive buffs held for gathered targets; Apex uses its toggle'\n end\n function D.gatherApex(p,gathering)\n  return p.job==23 and gathering and not(p.gauge and type(p.gauge[4])=='number'and p.gauge[4]>=c.apexCap)\n end\n function D.gui()\n  local value,changed=GUI:Checkbox('Wait for full pull (W2W)',c.enabled)\n  if changed then c.enabled=value;D.save()end\n  if GUI:IsItemHovered()then GUI:SetTooltip('Hold major offensive cooldowns until the party tank stops and engaged enemies gather. Last-pack and low-HP holds keep priority. Normal damage continues.')end\n  local diag,edit=GUI:Checkbox('BRD boss-buff diagnostics',c.diagnostics)\n  if edit then c.diagnostics=diag;D.save()end\n  value=GUI:SliderInt('Hold BRD DoTs below trash HP (%)',c.brdDotHP,0,30)\n  if value~=c.brdDotHP then c.brdDotHP=value;D.save()end\n  if GUI:IsItemHovered()then GUI:SetTooltip('Temporarily switches the global BRD DoTs toggle off on selected low-HP trash, then restores its previous value. Bosses are excluded; zero disables.')end\n  if D.dotStatus then GUI:TextWrapped(D.dotStatus)end\n  if c.enabled then\n   local p=TensorCore.mGetPlayer();local map=p and p.localmapid\n   if map then D.timing(map)end\n   local custom=map and c.overrides[map]~=nil or false\n   value,changed=GUI:Checkbox('Use timings for this dungeon',custom)\n   if changed and map then\n    c.disabledOverrides[map]=not value or nil\n    c.overrides[map]=value and {settle=c.settle,timeout=c.timeout}or nil;D.save()\n   end\n   local timing=map and c.overrides[map]or c\n   value=GUI:SliderFloat('Full-pull settle time (seconds)',timing.settle,.5,5,'%.1f')\n   if value~=timing.settle then timing.settle=value;D.save()end\n   value=GUI:SliderFloat('Maximum gather wait (seconds)',timing.timeout,5,40,'%.0f')\n   if value~=timing.timeout then timing.timeout=value;D.save()end\n   value=GUI:SliderInt('Release gathering Apex at Soul Voice',c.apexCap,80,100)\n   if value~=c.apexCap then c.apexCap=value;D.save()end\n   if D.active and D.detail then GUI:TextWrapped(D.detail)end\n   if D.active and D.bardStatus then GUI:TextWrapped(D.bardStatus)end\n  end\n end\n D.save();DungeonPullGather=D\nend\n-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not AetherfontAutoSimConfig or AetherfontAutoSimConfig.fileApiVersion~=1 then\n    local C = AetherfontAutoSimConfig or {\n        enabled=true, movement=true, returnField=true, trash=true, poolFinal=true,\n        killOverride=true, kill12336=103, kill12337=108, kill12334=158,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\"\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill12336\",\"kill12337\",\"kill12334\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\Aetherfont.AutoSim.lua]]\n    if not AetherfontAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill12336=math.max(15,math.min(1200,C.kill12336))\n    C.kill12337=math.max(15,math.min(1200,C.kill12337))\n    C.kill12334=math.max(15,math.min(1200,C.kill12334))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    AetherfontAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif AetherfontAutoSimConfig.poolFinal==nil then\n AetherfontAutoSimConfig.poolFinal=true\n table.insert(AetherfontAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=AetherfontAutoSimConfig\nlocal visible=GUI:Begin(\"The Aetherfont - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from your logged positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Predict return to Ley Lines (BLM only)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Automatic by default. The optional values below come from one four-player run, not the slower Duty Support samples.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"Lyngbakr (seconds)\",C.kill12336,5,15,\"%.1f\")\n        if changed then C.kill12336=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Arkas (seconds)\",C.kill12337,5,15,\"%.1f\")\n        if changed then C.kill12337=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Octomammoth (seconds)\",C.kill12334,5,15,\"%.1f\")\n        if changed then C.kill12334=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold offensive cooldowns on final trash (all jobs)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before each boss and temporarily turns off the current job’s CD switch. Radiant Finale is explicitly held too. Your previous CD setting is restored when pooling ends; songs keep their own control.\") end\n    local shared=DungeonAutoSimShared\n    if shared then\n        v,changed=GUI:SliderInt(\"Hold new boss cooldowns below HP (%) - shared\",shared.lateHP,0,20)\n        if changed then shared.lateHP=v;shared.save() end\n        if GUI:IsItemHovered() then GUI:SetTooltip(\"Shared across these nine dungeons and all jobs. At this boss HP, stop starting offensive cooldowns; normal attacks continue. 0 disables this rule. Default 8%. Defensive controls and songs keep their own settings.\") end\n    end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    GUI:Text(\"Party buff timing\")\n    GUI:TextWrapped(C.buffEnabled and \"Forecast enabled. Times are seconds from boss pull.\" or \"Forecast disabled. These values apply only when the party buff forecast is enabled.\")\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\n do\n local h=DungeonProfilePooling\n if h then\nlocal key=\"highleveldungeons\"\nDungeonHoldDisplays=DungeonHoldDisplays or {}\nlocal c=DungeonHoldDisplays[key]\nif not c then\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n local path=folder..key..[[.Safety.lua]]\n c=FileExists(path) and FileLoad(path) or {}\n if type(c)~=\"table\" then c={} end\n if type(c.showHoldStatus)~=\"boolean\" then c.showHoldStatus=true end\n if type(c.shortLivedAdds)~=\"boolean\" then c.shortLivedAdds=true end\n c.path=path;DungeonHoldDisplays[key]=c\nend\n GUI:Separator()\n GUI:Text(\"Dungeon holds\")\n local value,changed=GUI:Checkbox(\"Show hold reason\",c.showHoldStatus)\n if changed then c.showHoldStatus=value end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Shows only holds owned by this dungeon controller. It does not describe holds from other profiles.\") end\n local v,edit=GUI:Checkbox(\"Avoid long BLM casts on dying adds\",c.shortLivedAdds)\n if edit then c.shortLivedAdds=v end\n if GUI:IsItemHovered() then GUI:SetTooltip(\"Uses the target's lifetime estimate; lets an existing cast finish. Does not change targets or block healing.\") end\n if changed or edit then\n  local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n  if not FolderExists(folder) then FolderCreate(folder) end\n  FileSave(c.path,{showHoldStatus=c.showHoldStatus,shortLivedAdds=c.shortLivedAdds})\n end\n if c.showHoldStatus then GUI:TextWrapped(h.status or h.reason or \"No dungeon cooldown hold\") end\n DungeonPullGather.gui()\n end\n end\n\nend\nGUI:End()\nself.used=true\n",
 						conditions = 
 						{
+							
+							{
+								"54cbb743-a5d7-3a78-b85f-57f78658bf55",
+								true,
+							},
 							
 							{
 								"1967a170-a1ce-ee5f-9a8e-7212a4ca828b",
@@ -2161,6 +2628,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1126,
+						},
+						name = "Map check",
+						uuid = "54cbb743-a5d7-3a78-b85f-57f78658bf55",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Aetherfont/AutoSim",
 			eventType = 13,
@@ -2184,6 +2667,11 @@ local tbl =
 						actionLua = "data.aetherfont_autosim=nil\nself.used=true",
 						conditions = 
 						{
+							
+							{
+								"32a65959-1350-9b7e-b450-412a1580a53f",
+								true,
+							},
 							
 							{
 								"860c156c-1d4a-a459-9d41-66b4784aed4c",
@@ -2227,6 +2715,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1126,
+						},
+						name = "Map check",
+						uuid = "32a65959-1350-9b7e-b450-412a1580a53f",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Aetherfont/AutoSim",
 			name = "Reset between combats",
@@ -2250,6 +2754,11 @@ local tbl =
 						actionLua = "data.aetherfont_autosim.channel(eventArgs)\nself.used=true",
 						conditions = 
 						{
+							
+							{
+								"f8634cf4-2f88-8f6f-938b-13c39ce7c7e3",
+								true,
+							},
 							
 							{
 								"33b36485-f940-3c9c-aade-a1bb3e245d4c",
@@ -2293,6 +2802,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1126,
+						},
+						name = "Map check",
+						uuid = "f8634cf4-2f88-8f6f-938b-13c39ce7c7e3",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Aetherfont/AutoSim",
 			eventType = 3,
@@ -2316,6 +2841,11 @@ local tbl =
 						actionLua = "data.aetherfont_final_trash=true\nself.used=true",
 						conditions = 
 						{
+							
+							{
+								"1022ccbb-f3bf-8109-ae5a-82ebd27b8971",
+								true,
+							},
 							
 							{
 								"df00bb6b-41c2-8fb5-bb9b-366ed3376364",
@@ -2359,6 +2889,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1126,
+						},
+						name = "Map check",
+						uuid = "1022ccbb-f3bf-8109-ae5a-82ebd27b8971",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Aetherfont/AutoSim",
 			name = "Recognize final trash before bosses",
@@ -2392,6 +2938,11 @@ local tbl =
 						actionLua = "local e=eventArgs\nlocal shapes={[33339]={\"Circle\",8},[33340]={\"Circle\",15},[33344]={\"Cone\",40,180},[33342]={\"Circle\",5},[33360]={\"Circle\",10},[34713]={\"Circle\",10},[33367]={\"Circle\",10},[33365]={\"Circle\",6},[33362]={\"Circle\",10},[34321]={\"Circle\",10},[34714]={\"Circle\",10},[33363]={\"Rect\",0},[33346]={\"Rect\",0},[33348]={\"Cone\",16,120},[33354]={\"Cone\",35,180},[34551]={\"Cone\",35,180},[33353]={\"Circle\",8},[33351]={\"Circle\",12},[33355]={\"Donut\",20,26},[34436]={\"Circle\",6}}\nlocal shape=shapes[e.aoeID]\nlocal ms=e.startTime+e.duration*1000-Now()\nif ms>0 and ms<20000 then\n    local drawer=TensorCore.getStaticDrawer(0x603333FF,2)\n    if shape[1]==\"Circle\" then\n        drawer:addTimedCircle(ms,e.x,e.y,e.z,shape[2],0,false,true)\n    elseif shape[1]==\"Cone\" then\n        drawer:addTimedCone(ms,e.x,e.y,e.z,shape[2],math.rad(shape[3]),e.heading,0,false,true)\n    elseif shape[1]==\"Donut\" then\n        drawer:addTimedDonut(ms,e.x,e.y,e.z,shape[2],shape[3],0,false,true)\n    elseif e.aoeWidth>0 and e.aoeLength>0 then\n        drawer:addTimedRect(ms,e.x,e.y,e.z,e.aoeLength,e.aoeWidth,e.heading,0,false,true)\n    end\n    AnyoneCore.addWorldTextCountdown(ms,{x=e.x,y=e.y+1,z=e.z},0xFFFFFFFF,true,1.1)\nend\nself.used=true",
 						conditions = 
 						{
+							
+							{
+								"ce1476fd-4d73-79aa-937d-e249d200e2f6",
+								true,
+							},
 							
 							{
 								"130825e9-ff42-ae2d-a376-591ba1080c32",
@@ -2432,6 +2983,22 @@ local tbl =
 						dequeueIfLuaFalse = true,
 						name = "Relevant state",
 						uuid = "8c04f05f-7242-3f71-b790-aa6e9b468ea4",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1126,
+						},
+						name = "Map check",
+						uuid = "ce1476fd-4d73-79aa-937d-e249d200e2f6",
 						version = 3,
 					},
 				},
@@ -2904,6 +3471,11 @@ local tbl =
 						{
 							
 							{
+								"fc72d5c0-9ea0-ba04-8179-a439075bfc09",
+								true,
+							},
+							
+							{
 								"18f05cd1-d88d-2481-a8d2-01a87edfff0e",
 								true,
 							},
@@ -2945,6 +3517,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1043,
+						},
+						name = "Map check",
+						uuid = "fc72d5c0-9ea0-ba04-8179-a439075bfc09",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Castrum Meridianum/AutoSim",
 			name = "[Castrum] Set up this combat",
@@ -2968,6 +3556,11 @@ local tbl =
 						actionLua = "-- Shared pull-gathering helper; settings are independent of Minion core Settings.\nif not DungeonPullGather or DungeonPullGather.version~=2026111607 then\n if DungeonPullGather then DungeonPullGather.reset()end -- restore old owned QTs before replacing its state\n local D={version=2026111607}\n local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n D.path=folder..[[DungeonAutoSim.Gather.lua]]\n local c=FileExists(D.path)and FileLoad(D.path)or{}\n if type(c)~='table'then c={}end\n if type(c.enabled)~='boolean'then c.enabled=true end\n if type(c.diagnostics)~='boolean'then c.diagnostics=true end\n if type(c.settle)~='number'or c.settle<.5 or c.settle>5 then c.settle=3 end\n if type(c.timeout)~='number'or c.timeout<5 or c.timeout>40 then c.timeout=20 end\n if type(c.brdDotHP)~='number'or c.brdDotHP<0 or c.brdDotHP>30 then c.brdDotHP=20 end\n if type(c.apexCap)~='number'or c.apexCap<80 or c.apexCap>100 then c.apexCap=95 end\n if type(c.overrides)~='table'then c.overrides={}end\n if type(c.disabledOverrides)~='table'then c.disabledOverrides={}end\n for map,v in pairs(c.overrides)do\n  if type(map)~='number'or type(v)~='table'or type(v.settle)~='number'or v.settle<.5 or v.settle>5 or type(v.timeout)~='number'or v.timeout<5 or v.timeout>40 then c.overrides[map]=nil end\n end\n if c.migratedSettle3~=true then\n  if math.abs(c.settle-2.3)<.001 then c.settle=3 end\n  for _,v in pairs(c.overrides)do if math.abs(v.settle-2.3)<.001 then v.settle=3 end end\n  c.defaultSettle=3;c.migratedSettle3=true\n end\n D.config=c\n function D.save()\n  if not FolderExists(folder)then FolderCreate(folder)end\n  FileSave(D.path,{enabled=c.enabled,settle=c.settle,timeout=c.timeout,apexCap=c.apexCap,diagnostics=c.diagnostics,defaultSettle=c.defaultSettle,migratedSettle3=c.migratedSettle3,brdDotHP=c.brdDotHP,overrides=c.overrides,disabledOverrides=c.disabledOverrides})\n end\n function D.timing(map)\n  if not c.overrides[map]and not c.disabledOverrides[map]then\n   c.overrides[map]={settle=c.settle,timeout=c.timeout};D.save()\n  end\n  return c.overrides[map]or c\n end\n function D.restoreDots()\n  local r=D.dotToggle\n  if r and _G[r.var]==false then _G[r.var]=r.previous end\n  D.dotToggle=nil;D.dotActive=nil;D.dotStatus=nil\n end\n function D.reset()D.restoreDots();D.pull=nil;D.active=false;D.reason=nil;D.detail=nil;D.bardStatus=nil;D.dotActive=nil;D.dotStatus=nil end\n function D.trace(text)\n  if D.traceText~=text then D.traceText=text;TensorCore.timelineLogToFile('[Dungeon W2W] '..text..'\\n')end\n end\n function D.update(p,valid,isBoss,bosses)\n  if not c.enabled or not valid or isBoss or not p or not p.alive or not p.incombat then\n   if D.pull then D.trace('released: disabled, boss, death or combat ended')end\n   D.reset();return false\n  end\n  local timing=D.timing(p.localmapid)\n  local now=Now();local tank\n  for _,e in pairs(TensorCore.getEntityGroupList('Tank',nil,true)or{})do\n   if e.alive and e.pos and (e.pos.x-p.pos.x)^2+(e.pos.z-p.pos.z)^2<=60^2 then\n    if not tank or e.id<tank.id then tank=e end\n   end\n  end\n  if not tank then D.reset();D.detail='No nearby engaged party tank';return false end\n  local g=D.pull\n  if not g or g.map~=p.localmapid or g.tank~=tank.id then\n   g={map=p.localmapid,tank=tank.id,start=now,seen={},arrived=now,anchor={x=tank.pos.x,z=tank.pos.z},stationary=now};D.pull=g\n  end\n  if g.released then D.active=false;return false end\n  local count,far,new=0,0,0\n  TensorCore.forEachEntity('alive,targetable,attackable',function(id)\n   local e=TensorCore.mGetEntity(id)\n   if e and e.incombat and e.pos and not bosses[e.contentid] and math.abs(e.pos.y-tank.pos.y)<=10 then\n    local distance=(e.pos.x-tank.pos.x)^2+(e.pos.z-tank.pos.z)^2\n    if distance<=60^2 then\n     count=count+1\n     if not g.seen[id]then g.seen[id]=true;g.arrived=now;new=new+1 end\n     if distance>(12+(e.hitradius or 0))^2 then far=far+1 end\n    end\n   end\n   return true\n  end)\n  if (tank.pos.x-g.anchor.x)^2+(tank.pos.z-g.anchor.z)^2>1^2 then\n   g.anchor={x=tank.pos.x,z=tank.pos.z};g.stationary=now\n  end\n  if count==0 then\n   g.readyAt=nil\n   if now-g.start>=timing.timeout*1000 then g.released=true;D.active=false;D.reason=nil;D.trace('released: gather timeout, no engaged trash');return false end\n  else\n   if far>0 then g.readyAt=nil elseif not g.readyAt then g.readyAt=now end\n  end\n  if count>0 and far==0 and g.readyAt and now-g.readyAt>=timing.settle*1000 and now-g.stationary>=timing.settle*1000 and now-g.arrived>=timing.settle*1000 and now-g.start>=3000 then\n   g.released=true;D.active=false;D.reason=nil;D.trace('released: tank stopped, roster stable and '..count..' enemies gathered');return false\n  end\n  if now-g.start>=timing.timeout*1000 then\n   g.released=true;D.active=false;D.reason=nil;D.trace('released: '..timing.timeout..'s maximum gather wait; far='..far..' engaged='..count);return false\n  end\n  D.active=true;D.reason='Gathering pull'\n  D.detail=string.format('Gathering pull: %d engaged, %d trailing; %.1f / %.0fs',count,far,(now-g.start)/1000,timing.timeout)\n  local stage=far>0 and 'trailing enemies'or now-g.stationary<timing.settle*1000 and 'tank moving'or'waiting for stable pull'\n  D.trace('holding: '..stage..'; tank='..tank.id..'; engaged='..count..'; far='..far)\n  return true\n end\n function D.lease(id,untilMs)\n  if id==16496 or id==25784 or id==100 or id==113 or id==7406 or id==7407 or id==3560 then return false end\n  local accepted=TensorCore.API.TensorACR.holdActionUntil(id,untilMs,1)\n  D.leases=D.leases or{}\n  if accepted then D.leases[id]=untilMs end\n  return accepted\n end\n function D.dotHold(p,valid,target,bosses,encounter,level)\n  local active=valid and p.job==23 and c.brdDotHP>0 and not encounter\n   and target and target.alive and target.targetable and target.attackable and target.incombat\n   and not bosses[target.contentid]and target.hp and target.hp.max>0\n   and target.hp.percent>0 and target.hp.percent<c.brdDotHP\n  if not active then D.restoreDots();D.dotTraceKey=nil;return end\n  -- BRD's global DoTs QT tells the rotation not to plan these GCDs.\n  local variable='ACR_TensorRequiem4_DoTs'\n  if type(_G[variable])~='boolean'then return end\n  if not D.dotToggle then D.dotToggle={var=variable,previous=_G[variable]}end\n  _G[variable]=false;D.dotActive=true\n  D.dotStatus='BRD DoTs off below '..c.brdDotHP..'% trash HP'\n  local key=tostring(target.id)..':'..c.brdDotHP\n  if D.dotTraceKey~=key then\n   D.dotTraceKey=key\n   TensorCore.timelineLogToFile('[Dungeon BRD DoTs] QT off: target='..target.id..' CID='..target.contentid..' HP='..target.hp.percent..' threshold='..c.brdDotHP..'; no GCD action holds\\n')\n  end\n end\n function D.observeBoss(p,encounter,blocked,held)\n  if p.job~=23 or not encounter then D.bossLogAt=nil;D.bossLogKey=nil;return end\n  if not c.diagnostics then return end\n  local now=Now();local target=TensorCore.mGetTarget()\n  local owned=0;for var in pairs(held or{})do if var:match('_CD$')then owned=owned+1 end end\n  local key=tostring(target and target.id)..':'..tostring(blocked)..':'..tostring(ACR_TensorRequiem4_CD)..':'..owned\n  if D.bossLogAt and now-D.bossLogAt<5000 and D.bossLogKey==key then return end\n  D.bossLogAt=now;D.bossLogKey=key\n  local function state(id)\n   local a=ActionList:Get(1,id)\n   if not a then return 'missing action'end\n   local ok,ready=pcall(function()return a:IsReady(p.id)end)\n   return string.format('cd=%.2f onCD=%s ready=%s ownedLeaseRemainingMs=%.0f',math.max(0,a.cdmax-a.cd),tostring(a.isoncd),ok and tostring(ready)or('read error '..tostring(ready)),math.max(0,(D.leases and D.leases[id]or 0)-now))\n  end\n  local bv=TensorCore.getBuff(p,141);local rf=TensorCore.getBuff(p,2964)\n  TensorCore.timelineLogToFile('[Dungeon BRD boss] target='..tostring(target and target.contentid)..' HP='..tostring(target and target.hp and target.hp.percent)..' CDQT='..tostring(ACR_TensorRequiem4_CD)..' ownedCDvars='..owned..' finalOrLowHP='..tostring(blocked)..' gathering='..tostring(D.active)..' BattleVoice{'..state(118)..'} RadiantFinale{'..state(25785)..'} BVbuff='..tostring(bv and bv.duration)..' RFbuff='..tostring(rf and rf.duration)..' BVhotbar='..tostring(ACR_TensorRequiem4_Hotbar_BattleVoice)..'\\n')\n end\n function D.bard(p,gathering,priorityHold)\n  if p.job~=23 or not gathering then return end\n  local untilMs=Now()+450\n  -- BRD gathering owns short burst-action holds, not its broad CD toggle.\n  -- Both party buffs are held and released together; songs/normal damage remain automatic.\n  for _,row in ipairs({{101,4},{107,38},{118,50},{25785,90}})do\n   if p.level>=row[2]then D.lease(row[1],untilMs)end\n  end\n  D.bardStatus='BRD offensive buffs held for gathered targets; Apex uses its toggle'\n end\n function D.gatherApex(p,gathering)\n  return p.job==23 and gathering and not(p.gauge and type(p.gauge[4])=='number'and p.gauge[4]>=c.apexCap)\n end\n function D.gui()\n  local value,changed=GUI:Checkbox('Wait for full pull (W2W)',c.enabled)\n  if changed then c.enabled=value;D.save()end\n  if GUI:IsItemHovered()then GUI:SetTooltip('Hold major offensive cooldowns until the party tank stops and engaged enemies gather. Last-pack and low-HP holds keep priority. Normal damage continues.')end\n  local diag,edit=GUI:Checkbox('BRD boss-buff diagnostics',c.diagnostics)\n  if edit then c.diagnostics=diag;D.save()end\n  value=GUI:SliderInt('Hold BRD DoTs below trash HP (%)',c.brdDotHP,0,30)\n  if value~=c.brdDotHP then c.brdDotHP=value;D.save()end\n  if GUI:IsItemHovered()then GUI:SetTooltip('Temporarily switches the global BRD DoTs toggle off on selected low-HP trash, then restores its previous value. Bosses are excluded; zero disables.')end\n  if D.dotStatus then GUI:TextWrapped(D.dotStatus)end\n  if c.enabled then\n   local p=TensorCore.mGetPlayer();local map=p and p.localmapid\n   if map then D.timing(map)end\n   local custom=map and c.overrides[map]~=nil or false\n   value,changed=GUI:Checkbox('Use timings for this dungeon',custom)\n   if changed and map then\n    c.disabledOverrides[map]=not value or nil\n    c.overrides[map]=value and {settle=c.settle,timeout=c.timeout}or nil;D.save()\n   end\n   local timing=map and c.overrides[map]or c\n   value=GUI:SliderFloat('Full-pull settle time (seconds)',timing.settle,.5,5,'%.1f')\n   if value~=timing.settle then timing.settle=value;D.save()end\n   value=GUI:SliderFloat('Maximum gather wait (seconds)',timing.timeout,5,40,'%.0f')\n   if value~=timing.timeout then timing.timeout=value;D.save()end\n   value=GUI:SliderInt('Release gathering Apex at Soul Voice',c.apexCap,80,100)\n   if value~=c.apexCap then c.apexCap=value;D.save()end\n   if D.active and D.detail then GUI:TextWrapped(D.detail)end\n   if D.active and D.bardStatus then GUI:TextWrapped(D.bardStatus)end\n  end\n end\n D.save();DungeonPullGather=D\nend\n-- Shared, persisted preferences only. Pull-specific solver state lives in data.\nif not CastrumMeridianumAutoSimConfig or CastrumMeridianumAutoSimConfig.fileApiVersion~=1 then\n    local C = CastrumMeridianumAutoSimConfig or {\n        enabled=true, movement=true, returnField=false, trash=true, poolFinal=true,\n        killOverride=true, kill557=121, kill2116=104, kill2118=174,\n        unexpectedPct=5, uncertainty=1, buffEnabled=false, buffPct=0,\n        buffFirst=5, buffDuration=20, buffPeriod=120,\n        status=\"Ready. Saved changes apply next combat.\"\n    }\n    C.keys={\"enabled\",\"movement\",\"returnField\",\"trash\",\"poolFinal\",\"killOverride\",\n        \"kill557\",\"kill2116\",\"kill2118\",\"unexpectedPct\",\"uncertainty\",\n        \"buffEnabled\",\"buffPct\",\"buffFirst\",\"buffDuration\",\"buffPeriod\"}\n    C.path=GetLuaModsPath()..[[TensorReactions\\Settings\\CastrumMeridianum.AutoSim.lua]]\n    if not CastrumMeridianumAutoSimConfig and FileExists(C.path) then\n     local saved=FileLoad(C.path)\n     if type(saved)==\"table\" then\n      for _,key in ipairs(C.keys) do\n       local v=saved[key]\n       if type(v)==type(C[key]) and (type(v)~=\"number\" or (v==v and v>-math.huge and v<math.huge)) then C[key]=v end\n      end\n     end\n    end\n    C.unexpectedPct=math.max(0,math.min(30,C.unexpectedPct))\n    C.uncertainty=math.max(0,math.min(10,C.uncertainty))\n    C.buffPct=math.max(0,math.min(50,C.buffPct))\n    C.buffDuration=math.max(1,math.min(60,C.buffDuration))\n    C.buffPeriod=math.max(C.buffDuration+1,math.min(600,C.buffPeriod))\n    C.buffFirst=math.max(0,math.min(600,C.buffFirst))\n    C.kill557=math.max(15,math.min(1200,C.kill557))\n    C.kill2116=math.max(15,math.min(1200,C.kill2116))\n    C.kill2118=math.max(15,math.min(1200,C.kill2118))\n    function C.save()\n     local folder=GetLuaModsPath()..[[TensorReactions\\Settings\\]]\n     if not FolderExists(folder) then FolderCreate(folder) end\n     local values={}\n     for _,key in ipairs(C.keys) do values[key]=C[key] end\n     FileSave(C.path,values)\n     C.status=\"Saved. Changes apply next combat.\"\n    end\n    C.fileApiVersion=1\n    C.save()\n    CastrumMeridianumAutoSimConfig=C\nend\n\n-- Migrate an already initialized settings table without replacing user choices.\nif CastrumMeridianumAutoSimConfig.poolFinal==nil then\n CastrumMeridianumAutoSimConfig.poolFinal=true\n table.insert(CastrumMeridianumAutoSimConfig.keys,\"poolFinal\")\nend\n\n-- GUI submission belongs only in OnDraw. Native Map ID gates precede it.\nlocal C=CastrumMeridianumAutoSimConfig\nlocal visible=GUI:Begin(\"Castrum Meridianum - AutoSim\")\nif visible then\n    GUI:TextWrapped(\"Four-player dungeon. Changes are saved and apply next combat.\")\n    local v,changed=GUI:Checkbox(\"Enable boss forecasts\",C.enabled)\n    if changed then C.enabled=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Enable the three boss forecasts. Cooldowns and potions remain controlled by your ACR.\") end\n    v,changed=GUI:Checkbox(\"Movement forecasts\",C.movement)\n    if changed then C.movement=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Short repositioning estimates from your logged positions, anchored to boss casts. These are predictions, not automatic movement.\") end\n    v,changed=GUI:Checkbox(\"Ley Lines prediction (unavailable at level 50)\",C.returnField)\n    if changed then C.returnField=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Predict re-entry shortly after each estimated move. Assumes you return when safe; this does not move the character.\") end\n    v,changed=GUI:Checkbox(\"Apply movement reserve to trash\",C.trash)\n    if changed then C.trash=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Use the extra movement allowance on wall-to-wall pulls. Trash lifetime, target count and cooldown use remain automatic.\") end\n    v,changed=GUI:InputFloat(\"Extra movement (%)\",C.unexpectedPct,1,5,\"%.1f\")\n    if changed then C.unexpectedPct=math.max(0,math.min(30,v));C.save() end\n    if GUI:CollapsingHeader(\"Boss kill estimates\") then\n        GUI:TextWrapped(\"Enabled by default: one logged run. Adjust these estimates for your group.\")\n        v,changed=GUI:Checkbox(\"Override automatic kill estimates\",C.killOverride)\n        if changed then C.killOverride=v;C.save() end\n        v,changed=GUI:InputFloat(\"The Black Eft (seconds)\",C.kill557,5,15,\"%.1f\")\n        if changed then C.kill557=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Magitek Vanguard F-1 (seconds)\",C.kill2116,5,15,\"%.1f\")\n        if changed then C.kill2116=math.max(15,math.min(1200,v));C.save() end\n        v,changed=GUI:InputFloat(\"Livia sas Junius (seconds)\",C.kill2118,5,15,\"%.1f\")\n        if changed then C.kill2118=math.max(15,math.min(1200,v));C.save() end\n    end\n    v,changed=GUI:Checkbox(\"Hold offensive cooldowns on final trash (all jobs)\",C.poolFinal)\n    if changed then C.poolFinal=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Recognizes the last pack before Black Eft and Vanguard only; Livia has RP and temporarily turns off the current job’s CD switch. Radiant Finale is explicitly held too. Your previous CD setting is restored when pooling ends; songs keep their own control.\") end\n    local shared=DungeonAutoSimShared\n    if shared then\n        v,changed=GUI:SliderInt(\"Hold new boss cooldowns below HP (%) - shared\",shared.lateHP,0,20)\n        if changed then shared.lateHP=v;shared.save() end\n        if GUI:IsItemHovered() then GUI:SetTooltip(\"Shared across these nine dungeons and all jobs. At this boss HP, stop starting offensive cooldowns; normal attacks continue. 0 disables this rule. Default 8%. Defensive controls and songs keep their own settings.\") end\n    end\n    v,changed=GUI:Checkbox(\"Forecast future party buffs\",C.buffEnabled)\n    if changed then C.buffEnabled=v;C.save() end\n    v,changed=GUI:SliderFloat(\"Combined damage bonus (%)\",C.buffPct,0,50,\"%.1f%%\",1)\n    if changed then C.buffPct=v;C.save() end\n    if GUI:IsItemHovered() then GUI:SetTooltip(\"Optional planning estimate. Zero adds no future buff windows. AST/DNC timing varies; sustained Standard Finish and Devilment should not be treated as a universal periodic damage bonus.\") end\n    if GUI:CollapsingHeader(\"Party buff timing\") then\n        v,changed=GUI:InputFloat(\"First buff (seconds)\",C.buffFirst,1,5,\"%.1f\")\n        if changed then C.buffFirst=math.max(0,math.min(600,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff duration (seconds)\",C.buffDuration,1,5,\"%.1f\")\n        if changed then C.buffDuration=math.max(1,math.min(C.buffPeriod-1,60,v));C.save() end\n        v,changed=GUI:InputFloat(\"Buff interval (seconds)\",C.buffPeriod,5,30,\"%.1f\")\n        if changed then C.buffPeriod=math.max(C.buffDuration+1,math.min(600,v));C.save() end\n    end\n    GUI:Separator()\n    GUI:TextWrapped(C.status)\n    if C.poolStatus then GUI:TextWrapped(C.poolStatus) end\n DungeonPullGather.gui()\nend\nGUI:End()\nself.used=true\n",
 						conditions = 
 						{
+							
+							{
+								"eb4aa9b3-841e-5181-a1f0-f6516fae8805",
+								true,
+							},
 							
 							{
 								"52bfb9c5-7c29-109d-9e33-0d9776c02072",
@@ -2994,6 +3587,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1043,
+						},
+						name = "Map check",
+						uuid = "eb4aa9b3-841e-5181-a1f0-f6516fae8805",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Castrum Meridianum/AutoSim",
 			eventType = 13,
@@ -3017,6 +3626,11 @@ local tbl =
 						actionLua = "data.castrummeridianum_autosim=nil\ndata.castrummeridianum_final_trash=nil\ndata.castrumDrawQueue=nil\nself.used=true",
 						conditions = 
 						{
+							
+							{
+								"559ec8fd-92a7-2dbc-aa5b-138522f94ffd",
+								true,
+							},
 							
 							{
 								"3560bcb4-b15a-78b5-b3ed-322a32c0d4d4",
@@ -3060,6 +3674,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1043,
+						},
+						name = "Map check",
+						uuid = "559ec8fd-92a7-2dbc-aa5b-138522f94ffd",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Castrum Meridianum/AutoSim",
 			name = "[Castrum] Reset between combats",
@@ -3083,6 +3713,11 @@ local tbl =
 						actionLua = "data.castrummeridianum_autosim.channel(eventArgs)\nself.used=true",
 						conditions = 
 						{
+							
+							{
+								"bbec62ab-f228-4922-a7a3-d746c87b2c69",
+								true,
+							},
 							
 							{
 								"d6b6842d-da5d-afe8-b2db-dc9f4c9d6d52",
@@ -3126,6 +3761,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1043,
+						},
+						name = "Map check",
+						uuid = "bbec62ab-f228-4922-a7a3-d746c87b2c69",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Castrum Meridianum/AutoSim",
 			eventType = 3,
@@ -3149,6 +3800,11 @@ local tbl =
 						actionLua = "data.castrummeridianum_final_trash=true\nself.used=true",
 						conditions = 
 						{
+							
+							{
+								"541a3520-a153-5bdd-b037-5a4d9a4f9873",
+								true,
+							},
 							
 							{
 								"c95e351a-d344-86aa-8c9d-de6f19bcea2e",
@@ -3192,6 +3848,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1043,
+						},
+						name = "Map check",
+						uuid = "541a3520-a153-5bdd-b037-5a4d9a4f9873",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Castrum Meridianum/AutoSim",
 			name = "[Castrum] Recognize final trash before bosses",
@@ -3215,6 +3887,11 @@ local tbl =
 						actionLua = "local s=data.castrummeridianum_autosim\nlocal now=TensorCore.API.TensorACR.getAutoSimTime()\nlocal elapsed=now-s.origin\nif elapsed>30 and elapsed<90 then\n for _,p in ipairs(s.phases) do\n  if p.kind==\"FullDowntime\" and p.id then\n   if not eventArgs.isTargetable and not s.liviaGone then\n    s.liviaGone=now\n    TensorCore.API.TensorACR.setAutoSimPhase(p.id,now,now+12.875,1)\n   elseif eventArgs.isTargetable and s.liviaGone and not s.liviaReturned then\n    TensorCore.API.TensorACR.setAutoSimPhase(p.id,s.liviaGone,now,1)\n    s.liviaReturned=true\n   end\n  end\n end\nend\nself.used=true",
 						conditions = 
 						{
+							
+							{
+								"d2fbe94c-b7f7-4378-b00e-89c977db2eab",
+								true,
+							},
 							
 							{
 								"75d0660d-217d-217c-b927-aaefc281b77f",
@@ -3258,6 +3935,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1043,
+						},
+						name = "Map check",
+						uuid = "d2fbe94c-b7f7-4378-b00e-89c977db2eab",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Castrum Meridianum/AutoSim",
 			eventType = 26,
@@ -3281,6 +3974,11 @@ local tbl =
 						actionLua = "gStartCombat=false\nlocal helpers=AnyoneCore and AnyoneCore.Settings\nif helpers and helpers.DutyHelper then helpers.DutyHelper.enabled=false end\nif helpers and helpers.PrepullHelper then helpers.PrepullHelper.enabled=false end\nlocal found\nTensorCore.forEachEntity(\"alive,targetable,attackable\",function(id)\n local e=TensorCore.mGetEntity(id)\n local p=TensorCore.mGetPlayer()\n if e and p and (e.pos.x-p.pos.x)^2+(e.pos.z-p.pos.z)^2<=900 and (e.contentid==557 or e.contentid==2116 or e.contentid==2118) then found=id;return false end\nend)\nif found then\n local prior=TensorCore.mGetTarget()\n TensorCore.timelineLogToFile(\"[Castrum target] request=\"..found..\" current=\"..tostring(prior and prior.id)..\" StartCombat=false; no valid target; cast protected\")\n Player:SetTarget(found);data.castrumTargetRequest={id=found,at=Now()}\nend\nself.used=true",
 						conditions = 
 						{
+							
+							{
+								"50d78698-28f0-ff37-9994-3f4023e7eb91",
+								true,
+							},
 							
 							{
 								"aefb87af-ed2f-d430-9433-087ce7aaaaa6",
@@ -3324,6 +4022,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1043,
+						},
+						name = "Map check",
+						uuid = "50d78698-28f0-ff37-9994-3f4023e7eb91",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Castrum Meridianum/AutoSim",
 			name = "[Castrum] Select nearby boss without pulling",
@@ -3347,6 +4061,11 @@ local tbl =
 						actionLua = "local r=data.castrumTargetRequest\nlocal t=TensorCore.mGetTarget()\nif t and t.id==r.id then\n TensorCore.timelineLogToFile(\"[Castrum target] confirmed=\"..r.id)\n data.castrumTargetRequest=nil;data.castrumTargetDone=true\nelseif Now()-r.at>1500 then\n TensorCore.timelineLogToFile(\"[Castrum target] unconfirmed=\"..r.id..\"; no repeated request\")\n data.castrumTargetRequest=nil;data.castrumTargetDone=true\nend\nself.used=true",
 						conditions = 
 						{
+							
+							{
+								"a1b9ee26-615b-4f39-aa72-fc679440cf23",
+								true,
+							},
 							
 							{
 								"908b3922-73aa-5488-8ca8-45c48807d2b9",
@@ -3390,6 +4109,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1043,
+						},
+						name = "Map check",
+						uuid = "a1b9ee26-615b-4f39-aa72-fc679440cf23",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Castrum Meridianum/AutoSim",
 			name = "[Castrum] Confirm initial target",
@@ -3423,6 +4158,11 @@ local tbl =
 						actionLua = "local e=eventArgs\nlocal shapes={[28773]={\"Rect\",50,4},[28775]={\"Circle\",6},[28779]={\"Circle\",20},[28781]={\"Circle\",10},[28782]={\"Donut\",12.5,30},[28784]={\"Circle\",5},[29146]={\"Cone\",11,120},[29163]={\"Circle\",10},[28787]={\"Circle\",8},[28793]={\"Rect\",40,4},[28794]={\"Circle\",8},[28797]={\"Cross\",20,4},[28790]={\"Circle\",8},[29164]={\"Circle\",8}}\nlocal shape=shapes[e.aoeID]\nlocal finish=e.startTime+e.duration*1000\nif finish>Now() and finish<Now()+20000 then\n data.castrumDrawQueue=data.castrumDrawQueue or {}\n local q=data.castrumDrawQueue\n q[#q+1]={finish=finish,x=e.x,y=e.y,z=e.z,h=e.heading,length=e.aoeLength,width=e.aoeWidth,shape=shape}\nend\nself.used=true",
 						conditions = 
 						{
+							
+							{
+								"8f050db0-61c6-83ac-b568-6c915b669829",
+								true,
+							},
 							
 							{
 								"4053e00b-4618-f695-9945-8d2884d3cba9",
@@ -3466,6 +4206,22 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1043,
+						},
+						name = "Map check",
+						uuid = "8f050db0-61c6-83ac-b568-6c915b669829",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Castrum Meridianum/Draws",
 			eventType = 18,
@@ -3489,6 +4245,11 @@ local tbl =
 						actionLua = "local q=data.castrumDrawQueue\nlocal now=Now()\nlocal earliest=math.huge\nfor i=#q,1,-1 do if q[i].finish<=now then table.remove(q,i) else earliest=math.min(earliest,q[i].finish) end end\nlocal d=TensorCore.getStaticDrawer(0x603333FF,2)\nfor _,e in ipairs(q) do\n if not e.drawn and e.finish<=earliest+600 then\n  local ms=e.finish-now\n  local s=e.shape\n  if s[1]==\"Circle\" then d:addTimedCircle(ms,e.x,e.y,e.z,s[2],0,false,true)\n  elseif s[1]==\"Cone\" then d:addTimedCone(ms,e.x,e.y,e.z,s[2],math.rad(s[3]),e.h,0,false,true)\n  elseif s[1]==\"Donut\" then d:addTimedDonut(ms,e.x,e.y,e.z,s[2],s[3],0,false,true)\n  elseif s[1]==\"Cross\" then\n   d:addTimedRect(ms,e.x,e.y,e.z,s[2]*2,s[3],e.h,0,false,true)\n   d:addTimedRect(ms,e.x,e.y,e.z,s[2]*2,s[3],e.h+math.pi/2,0,false,true)\n  else d:addTimedRect(ms,e.x,e.y,e.z,s[2],s[3],e.h,0,false,true) end\n  AnyoneCore.addWorldTextCountdown(ms,{x=e.x,y=e.y+1,z=e.z},0xFFFFFFFF,true,1.1)\n  e.drawn=true\n end\nend\nif #q==0 then data.castrumDrawQueue=nil end\nself.used=true",
 						conditions = 
 						{
+							
+							{
+								"2e76dc88-825e-9fac-84a4-f9da4b843e8e",
+								true,
+							},
 							
 							{
 								"10558d5c-0dbd-12ba-b499-cd1cc7db627f",
@@ -3529,6 +4290,22 @@ local tbl =
 						dequeueIfLuaFalse = true,
 						name = "Relevant state",
 						uuid = "7569baf8-c2c1-f229-a1db-ca79f25a59ab",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							1043,
+						},
+						name = "Map check",
+						uuid = "2e76dc88-825e-9fac-84a4-f9da4b843e8e",
 						version = 3,
 					},
 				},
@@ -3614,6 +4391,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal eligible = player.localmapid == 519\nlocal state = LostAmdaporSquamaDoT\nif state then return not eligible or state.job ~= player.job end\nreturn eligible",
+						dequeueIfLuaFalse = true,
 						name = "Blacklist needs setup or cleanup",
 						uuid = "fd623bb6-3734-c459-8c50-da6bbecd6d26",
 						version = 3,
@@ -3662,6 +4440,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal eligible = player.localmapid == 519\nlocal state = LostAmdaporSphereDoT\nif state then return not eligible or state.job ~= player.job end\nreturn eligible",
+						dequeueIfLuaFalse = true,
 						name = "Blacklist needs setup or cleanup",
 						uuid = "49d45fe5-548b-5b06-8d59-dbab5804c644",
 						version = 3,
@@ -3846,6 +4625,11 @@ local tbl =
 						{
 							
 							{
+								"fdd0d929-1415-43a8-93b9-b81c7e51e819",
+								true,
+							},
+							
+							{
 								"d298c461-9cb2-9dea-854f-be0720766a6d",
 								true,
 							},
@@ -3866,6 +4650,22 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nreturn PaglthanConfig==nil or data.paglthanHelpers~=true",
 						name = "Initialize settings and helpers gate",
 						uuid = "d298c461-9cb2-9dea-854f-be0720766a6d",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							938,
+						},
+						name = "Map check",
+						uuid = "fdd0d929-1415-43a8-93b9-b81c7e51e819",
 						version = 3,
 					},
 				},
@@ -3893,6 +4693,11 @@ local tbl =
 						{
 							
 							{
+								"54f186b2-402f-d27a-be2c-e3fa26aeda11",
+								true,
+							},
+							
+							{
 								"32a20033-e216-cec3-b4a0-2a7a99eafa30",
 								true,
 							},
@@ -3913,6 +4718,22 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nreturn PaglthanConfig~=nil",
 						name = "Draw and AutoSim settings gate",
 						uuid = "32a20033-e216-cec3-b4a0-2a7a99eafa30",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							938,
+						},
+						name = "Map check",
+						uuid = "54f186b2-402f-d27a-be2c-e3fa26aeda11",
 						version = 3,
 					},
 				},
@@ -3940,6 +4761,11 @@ local tbl =
 						{
 							
 							{
+								"5f1169ba-21f9-af7d-b400-7de705876736",
+								true,
+							},
+							
+							{
 								"7f838a2c-e981-f8fd-b0a8-86c7829f36fd",
 								true,
 							},
@@ -3960,6 +4786,22 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nlocal e=eventArgs\nreturn (e.entityContentID==10075 or e.entityContentID==10076 or e.entityContentID==10077)\nand data.paglthanBoss==nil",
 						name = "Boss cast anchors gate",
 						uuid = "7f838a2c-e981-f8fd-b0a8-86c7829f36fd",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							938,
+						},
+						name = "Map check",
+						uuid = "5f1169ba-21f9-af7d-b400-7de705876736",
 						version = 3,
 					},
 				},
@@ -3987,6 +4829,11 @@ local tbl =
 						{
 							
 							{
+								"fdef1076-d3f5-cb22-83a7-580f59fe9cc8",
+								true,
+							},
+							
+							{
 								"9c2386e7-2726-53b3-a099-5d62b3d9ad9e",
 								true,
 							},
@@ -4007,6 +4854,22 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nreturn p.incombat==true and data.paglthanBoss~=nil and data.paglthanForecast~=true\nand PaglthanConfig~=nil and PaglthanConfig.values.autoSim==true",
 						name = "Set up this combat gate",
 						uuid = "9c2386e7-2726-53b3-a099-5d62b3d9ad9e",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							938,
+						},
+						name = "Map check",
+						uuid = "fdef1076-d3f5-cb22-83a7-580f59fe9cc8",
 						version = 3,
 					},
 				},
@@ -4034,6 +4897,11 @@ local tbl =
 						{
 							
 							{
+								"390152b6-f779-3bbc-8584-1a44cec31a6a",
+								true,
+							},
+							
+							{
 								"9dfefa75-24dd-bd63-b81d-2fbccdaf274a",
 								true,
 							},
@@ -4054,6 +4922,22 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nreturn not p.incombat and data.paglthanForecast==true",
 						name = "Reset between combats gate",
 						uuid = "9dfefa75-24dd-bd63-b81d-2fbccdaf274a",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							938,
+						},
+						name = "Map check",
+						uuid = "390152b6-f779-3bbc-8584-1a44cec31a6a",
 						version = 3,
 					},
 				},
@@ -4081,6 +4965,11 @@ local tbl =
 						{
 							
 							{
+								"d37cbf16-8749-86e9-9c42-626c454080e9",
+								true,
+							},
+							
+							{
 								"9ee33c4f-be33-0a0a-b38d-ca324052f67e",
 								true,
 							},
@@ -4101,6 +4990,22 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nreturn data.paglthanTargetPending~=nil or not p.incombat and data.paglthanHelpers==true and PaglthanConfig~=nil and PaglthanConfig.values.autoSim==true",
 						name = "Initial boss targeting gate",
 						uuid = "9ee33c4f-be33-0a0a-b38d-ca324052f67e",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							938,
+						},
+						name = "Map check",
+						uuid = "d37cbf16-8749-86e9-9c42-626c454080e9",
 						version = 3,
 					},
 				},
@@ -4128,6 +5033,11 @@ local tbl =
 						{
 							
 							{
+								"435c7b88-8619-322c-9cb4-306af6a68d57",
+								true,
+							},
+							
+							{
 								"1b5962c1-3ee5-5e08-b436-80ebf743dc3d",
 								true,
 							},
@@ -4148,6 +5058,22 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nlocal e=eventArgs\nreturn data.paglthanBoss==nil and e.isTargetable==true\nand (e.entityContentID==10068 or e.entityContentID==10070)\nand p.pos~=nil and math.abs(p.pos.x+175)<=16 and math.abs(p.pos.z-43)<=16",
 						name = "Detect opening Magitek Core wave gate",
 						uuid = "1b5962c1-3ee5-5e08-b436-80ebf743dc3d",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							938,
+						},
+						name = "Map check",
+						uuid = "435c7b88-8619-322c-9cb4-306af6a68d57",
 						version = 3,
 					},
 				},
@@ -4185,6 +5111,11 @@ local tbl =
 						{
 							
 							{
+								"a3197e96-a03e-362d-81ad-af16ff3a793c",
+								true,
+							},
+							
+							{
 								"30f6942e-28d2-cf5c-be3b-3051ef44858a",
 								true,
 							},
@@ -4205,6 +5136,22 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nif not PaglthanConfig or not PaglthanConfig.values.draws then return false end\nlocal id=eventArgs.aoeID\nreturn id==24773 or id==23631 or id==23385 or id==23378 or id==23705\nor id==24667 or id==23368 or id==23381 or id==23373 or id==23374\nor id==23371 or id==23370 or id==23708",
 						name = "Selected boss attack telegraphs gate",
 						uuid = "30f6942e-28d2-cf5c-be3b-3051ef44858a",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							938,
+						},
+						name = "Map check",
+						uuid = "a3197e96-a03e-362d-81ad-af16ff3a793c",
 						version = 3,
 					},
 				},
@@ -4232,6 +5179,11 @@ local tbl =
 						{
 							
 							{
+								"63dba8cc-60a1-7d5a-873d-21f3cb997dfb",
+								true,
+							},
+							
+							{
 								"a15973e2-bc87-57ce-b12f-ee566cb88579",
 								true,
 							},
@@ -4252,6 +5204,22 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nreturn eventArgs.entityContentID==10065 or eventArgs.entityContentID==10066",
 						name = "Track Levin visibility gate",
 						uuid = "a15973e2-bc87-57ce-b12f-ee566cb88579",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							938,
+						},
+						name = "Map check",
+						uuid = "63dba8cc-60a1-7d5a-873d-21f3cb997dfb",
 						version = 3,
 					},
 				},
@@ -4279,6 +5247,11 @@ local tbl =
 						{
 							
 							{
+								"c4196aa6-5ccb-a50d-9832-f012fcec52d2",
+								true,
+							},
+							
+							{
 								"bb7042b9-18dc-e37d-9dba-13431979142d",
 								true,
 							},
@@ -4299,6 +5272,22 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nreturn PaglthanConfig~=nil and PaglthanConfig.values.draws==true\nand data.paglthanLevin~=nil and next(data.paglthanLevin)~=nil",
 						name = "Draw visible Levin circles gate",
 						uuid = "bb7042b9-18dc-e37d-9dba-13431979142d",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							938,
+						},
+						name = "Map check",
+						uuid = "c4196aa6-5ccb-a50d-9832-f012fcec52d2",
 						version = 3,
 					},
 				},
@@ -4326,6 +5315,11 @@ local tbl =
 						{
 							
 							{
+								"13e79b23-0bc8-38c6-b3c1-ca10a33fd38e",
+								true,
+							},
+							
+							{
 								"f455fc67-6cc0-4fe3-a0dd-5f57c4e0ce27",
 								true,
 							},
@@ -4346,6 +5340,22 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nreturn eventArgs.entityContentID==108 and Argus.getEntityModel(eventArgs.entityID)==12726",
 						name = "Track Amhuluk Lightning Rods gate",
 						uuid = "f455fc67-6cc0-4fe3-a0dd-5f57c4e0ce27",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							938,
+						},
+						name = "Map check",
+						uuid = "13e79b23-0bc8-38c6-b3c1-ca10a33fd38e",
 						version = 3,
 					},
 				},
@@ -4373,6 +5383,11 @@ local tbl =
 						{
 							
 							{
+								"5b866da7-5b23-fa45-b611-cf15c0636c76",
+								true,
+							},
+							
+							{
 								"364fe7d8-cc01-a034-b0a2-594e7d6dd250",
 								true,
 							},
@@ -4393,6 +5408,22 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nreturn eventArgs.entityContentID==10075 and eventArgs.spellID==23627\nand PaglthanConfig~=nil and PaglthanConfig.values.draws==true and data.paglthanRods~=nil",
 						name = "Draw charged Lightning Rod circles gate",
 						uuid = "364fe7d8-cc01-a034-b0a2-594e7d6dd250",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							938,
+						},
+						name = "Map check",
+						uuid = "5b866da7-5b23-fa45-b611-cf15c0636c76",
 						version = 3,
 					},
 				},
@@ -4420,6 +5451,11 @@ local tbl =
 						{
 							
 							{
+								"7d5e11fd-dff9-9cca-aaa1-264217f311c5",
+								true,
+							},
+							
+							{
 								"ec4f4f3c-5c6a-4fd7-9d22-bd423d1c5e88",
 								true,
 							},
@@ -4440,6 +5476,22 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nreturn PaglthanConfig~=nil and PaglthanConfig.values.draws==true\nand data.paglthanRodUntil~=nil and Now()<data.paglthanRodUntil and data.paglthanRods~=nil",
 						name = "Draw armed Lightning Rods during the cast gate",
 						uuid = "ec4f4f3c-5c6a-4fd7-9d22-bd423d1c5e88",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							938,
+						},
+						name = "Map check",
+						uuid = "7d5e11fd-dff9-9cca-aaa1-264217f311c5",
 						version = 3,
 					},
 				},
@@ -4467,6 +5519,11 @@ local tbl =
 						{
 							
 							{
+								"9621da91-95e5-1af5-9edf-ed5c1f2cb85c",
+								true,
+							},
+							
+							{
 								"f26c86fd-075f-b2b7-b116-5fe169e11cfa",
 								true,
 							},
@@ -4487,6 +5544,22 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nreturn eventArgs.a1==13 and ((eventArgs.a2==1 and eventArgs.a3==2)\nor (eventArgs.a2==4 and eventArgs.a3==8))",
 						name = "Track Magitek Core launchpad gate",
 						uuid = "f26c86fd-075f-b2b7-b116-5fe169e11cfa",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							938,
+						},
+						name = "Map check",
+						uuid = "9621da91-95e5-1af5-9edf-ed5c1f2cb85c",
 						version = 3,
 					},
 				},
@@ -4514,6 +5587,11 @@ local tbl =
 						{
 							
 							{
+								"64d4984e-5406-a600-adbf-1ec320bbce55",
+								true,
+							},
+							
+							{
 								"804307bc-0e71-d4a1-b4cb-44ee5aabec48",
 								true,
 							},
@@ -4534,6 +5612,22 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=938 then return false end\nreturn data.paglthanLaunchpad==true and PaglthanConfig~=nil and PaglthanConfig.values.draws==true\nand p.pos~=nil and p.pos.y< -19 and math.abs(p.pos.x+175)<=16 and math.abs(p.pos.z-43)<=16",
 						name = "Draw active Magitek Core launchpad gate",
 						uuid = "804307bc-0e71-d4a1-b4cb-44ee5aabec48",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							938,
+						},
+						name = "Map check",
+						uuid = "64d4984e-5406-a600-adbf-1ec320bbce55",
 						version = 3,
 					},
 				},
@@ -4905,6 +5999,11 @@ local tbl =
 						{
 							
 							{
+								"ba92acf7-9d47-40b9-a376-d311ea95c04a",
+								true,
+							},
+							
+							{
 								"843c8903-5b79-a91a-a686-5af93df4bf8e",
 								true,
 							},
@@ -4925,6 +6024,22 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=367 then return false end\nreturn not data.qarnHelpers",
 						name = "Qarn Hard and event state",
 						uuid = "843c8903-5b79-a91a-a686-5af93df4bf8e",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							367,
+						},
+						name = "Map check",
+						uuid = "ba92acf7-9d47-40b9-a376-d311ea95c04a",
 						version = 3,
 					},
 				},
@@ -4952,6 +6067,11 @@ local tbl =
 						{
 							
 							{
+								"74483d88-f750-9f0d-895d-7bf75fda9936",
+								true,
+							},
+							
+							{
 								"742b98d1-c12c-ebfd-b60f-af11e1c1ce57",
 								true,
 							},
@@ -4972,6 +6092,22 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=367 then return false end\nreturn p.incombat and not data.qarnForecast",
 						name = "Qarn Hard and event state",
 						uuid = "742b98d1-c12c-ebfd-b60f-af11e1c1ce57",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							367,
+						},
+						name = "Map check",
+						uuid = "74483d88-f750-9f0d-895d-7bf75fda9936",
 						version = 3,
 					},
 				},
@@ -4999,6 +6135,11 @@ local tbl =
 						{
 							
 							{
+								"d7964925-fad1-ff47-92dc-8b1f4006fd85",
+								true,
+							},
+							
+							{
 								"a8543560-c8a6-445e-88eb-f4ae04cb677c",
 								true,
 							},
@@ -5019,6 +6160,22 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=367 then return false end\nreturn not p.incombat and (data.qarnForecast~=nil or data.qarnMummies~=nil)",
 						name = "Qarn Hard and event state",
 						uuid = "a8543560-c8a6-445e-88eb-f4ae04cb677c",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							367,
+						},
+						name = "Map check",
+						uuid = "d7964925-fad1-ff47-92dc-8b1f4006fd85",
 						version = 3,
 					},
 				},
@@ -5046,6 +6203,11 @@ local tbl =
 						{
 							
 							{
+								"e6edcae4-adfc-c138-81e3-392e34cc4b87",
+								true,
+							},
+							
+							{
 								"461373eb-bb47-1d8a-8696-6dbf92d0ed9f",
 								true,
 							},
@@ -5066,6 +6228,22 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=367 then return false end\nreturn p.alive and not p.incombat",
 						name = "Qarn Hard and event state",
 						uuid = "461373eb-bb47-1d8a-8696-6dbf92d0ed9f",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							367,
+						},
+						name = "Map check",
+						uuid = "e6edcae4-adfc-c138-81e3-392e34cc4b87",
 						version = 3,
 					},
 				},
@@ -5111,6 +6289,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "local player = TensorCore.mGetPlayer()\nif not player then return false end\nlocal eligible = player.localmapid == 367 and (player.job == 25 or player.job == 23 or player.job == 34)\nlocal state = QarnHardCrawlerDoT\nif state then return not eligible or state.job ~= player.job end\nreturn eligible",
+						dequeueIfLuaFalse = true,
 						name = "Blacklist needs setup or cleanup",
 						uuid = "bbfaa4f8-13d1-eef3-9d80-33f40436e0c4",
 						version = 3,
@@ -5151,6 +6330,11 @@ local tbl =
 						{
 							
 							{
+								"2b175fbd-3778-9800-9ea8-5f079ee2d9dc",
+								true,
+							},
+							
+							{
 								"23c81c4e-a688-8719-909c-e4fd3fa8cb96",
 								true,
 							},
@@ -5171,6 +6355,22 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=367 then return false end\nlocal e=eventArgs\nreturn not not (p.incombat and e and (e.aoeID==2898 or e.aoeID==3104 or e.aoeID==3106 or e.aoeID==3110))",
 						name = "Qarn Hard and event state",
 						uuid = "23c81c4e-a688-8719-909c-e4fd3fa8cb96",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							367,
+						},
+						name = "Map check",
+						uuid = "2b175fbd-3778-9800-9ea8-5f079ee2d9dc",
 						version = 3,
 					},
 				},
@@ -5198,6 +6398,11 @@ local tbl =
 						{
 							
 							{
+								"63b43b80-a7a6-327f-a5fa-b4f549a4e20f",
+								true,
+							},
+							
+							{
 								"6d47d782-9513-acb2-b4e2-d5b44479f37d",
 								true,
 							},
@@ -5218,6 +6423,22 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=367 then return false end\nlocal e=eventArgs\nreturn not not (p.incombat and e and e.isVisible and e.entityContentID==3076)",
 						name = "Qarn Hard and event state",
 						uuid = "6d47d782-9513-acb2-b4e2-d5b44479f37d",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 12,
+						dequeueIfLuaFalse = true,
+						localMapIDList = 
+						{
+							367,
+						},
+						name = "Map check",
+						uuid = "63b43b80-a7a6-327f-a5fa-b4f549a4e20f",
 						version = 3,
 					},
 				},
