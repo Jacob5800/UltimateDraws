@@ -134,6 +134,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### DSR
 
+- Fixed line AoEs being drawn half their length too far forward, the P5 conga spots not showing and the Death of the Heavens knockback spot not appearing. Your Wrath of the Heavens bait cone has a white outline. In P6, the first breath shows a fire and ice pair in green and a wrong mix in red, with cones and player rings limited to an adjustable range. P6 line AoEs stay inside the arena and darken until they hit, and Nidhogg's lane shows early on the first Hallowed Wings. Added an optional Akh Morn green safe area (off by default). Debug labels use readable names. (27-11-2026)
+
 - Removed the P5 behind-boss tank cleave draw and callout. P5 Death of the Heavens marks the warrior to face. With configured conga prepositions on, all eight conga spots show their role labels with your own spot in green. P6 breath cones show fire in green and ice in blue, and your pair partner's cone is now visible; standing in another player's cone turns it and yours red. (27-11-2026)
 
 - AutoSim: in P6, Bard now only plans for two targets at times when ranged AoE can normally reach both dragons. (26-11-2026)
@@ -151,10 +153,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Strength tower reassignment no longer repeats the initial preposition call after a personal tower was established. (17-11-2026)
 
 - “Behind boss - tank cleaves” now calls once per cleave sequence. (17-11-2026)
-
-- Added an explicit blue-orb reminder after Eyes chain swaps. Removed the finish-eyes, lower-Charibert and finish-spear callouts. (17-11-2026)
-
-- Made middle-left-right the default first meteor tower preference, clarified the blue-orb step after Eyes chain swaps, and limited the tank LB3 alert to tanks. (17-11-2026)
 
 ### TOP
 
