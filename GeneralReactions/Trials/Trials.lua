@@ -6142,6 +6142,11 @@ local tbl =
 						{
 							
 							{
+								"c1dd3f0d-aefc-4775-91f4-575d6cf1441b",
+								true,
+							},
+							
+							{
 								"05062fe7-0764-fa9d-8abd-3fbeaed28892",
 								true,
 							},
@@ -6162,6 +6167,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=436 then return false end\nlocal id=eventArgs.aoeID\nreturn id==4928 or id==4929 or id==4932 or id==4935 or id==4936",
 						name = "Limitless Blue and hazards",
 						uuid = "05062fe7-0764-fa9d-8abd-3fbeaed28892",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[436]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "c1dd3f0d-aefc-4775-91f4-575d6cf1441b",
 						version = 3,
 					},
 				},
@@ -6189,6 +6206,11 @@ local tbl =
 						{
 							
 							{
+								"f7231332-1fbb-40e9-886b-7fb447d8c9a7",
+								true,
+							},
+							
+							{
 								"50b1760e-6845-02a6-81d5-e471625295cd",
 								true,
 							},
@@ -6209,6 +6231,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=436 then return false end\nreturn eventArgs.entityContentID==3658",
 						name = "Limitless Blue and cloud spawn",
 						uuid = "50b1760e-6845-02a6-81d5-e471625295cd",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[436]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "f7231332-1fbb-40e9-886b-7fb447d8c9a7",
 						version = 3,
 					},
 				},
@@ -6236,6 +6270,11 @@ local tbl =
 						{
 							
 							{
+								"79f0aec6-ee2b-4474-99bf-d4c8ab152695",
+								true,
+							},
+							
+							{
 								"78603b2b-a2f5-753b-adb3-c5afa8a8ea0c",
 								true,
 							},
@@ -6256,6 +6295,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=436 then return false end\nreturn data.bismarckClouds~=nil and data.bismarckClouds[eventArgs.entityID]==true",
 						name = "Limitless Blue and cloud departure",
 						uuid = "78603b2b-a2f5-753b-adb3-c5afa8a8ea0c",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[436]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "79f0aec6-ee2b-4474-99bf-d4c8ab152695",
 						version = 3,
 					},
 				},
@@ -6330,6 +6381,11 @@ local tbl =
 						{
 							
 							{
+								"d2201162-2b87-4ed9-9ad9-72b105722679",
+								true,
+							},
+							
+							{
 								"b7da2d2f-16fe-6173-a9c1-eeed3181cb49",
 								true,
 							},
@@ -6350,6 +6406,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=436 then return false end\nlocal id=eventArgs.entityContentID\nreturn id==3656 or id==3657",
 						name = "Limitless Blue and boarding capture",
 						uuid = "b7da2d2f-16fe-6173-a9c1-eeed3181cb49",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[436]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "d2201162-2b87-4ed9-9ad9-72b105722679",
 						version = 3,
 					},
 				},
@@ -6530,6 +6598,11 @@ local tbl =
 						{
 							
 							{
+								"3d09313e-a893-4ab3-83f6-b4b6de94f18a",
+								true,
+							},
+							
+							{
 								"376be8f3-0191-c8e0-b2eb-273177b83d24",
 								true,
 							},
@@ -6550,6 +6623,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=436 then return false end\nreturn eventArgs.entityContentID==3652 and eventArgs.isTargetable==true and data.bismarckOpeningSeen~=true",
 						name = "Limitless Blue and opening target",
 						uuid = "376be8f3-0191-c8e0-b2eb-273177b83d24",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[436]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "3d09313e-a893-4ab3-83f6-b4b6de94f18a",
 						version = 3,
 					},
 				},
@@ -6741,6 +6826,11 @@ local tbl =
 						{
 							
 							{
+								"9cfcb503-4b65-4589-9a7f-80fd52cfdd51",
+								true,
+							},
+							
+							{
 								"97beb2e4-eb9d-e835-b19b-e48f7394a8f0",
 								true,
 							},
@@ -6761,6 +6851,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nreturn eventArgs.spellID==21298 and eventArgs.entityContentID==9462\n    and data.seatForecast~=nil and not data.seatForecast.synced",
 						name = "[Seat] Sync intermission to Absolute Teleport gate",
 						uuid = "97beb2e4-eb9d-e835-b19b-e48f7394a8f0",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[922]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "9cfcb503-4b65-4589-9a7f-80fd52cfdd51",
 						version = 3,
 					},
 				},
@@ -6788,6 +6890,11 @@ local tbl =
 						{
 							
 							{
+								"1e7c2933-b6ca-4b81-9c1d-9ed543c822a5",
+								true,
+							},
+							
+							{
 								"98b437a8-84f7-934d-b568-f831a428907c",
 								true,
 							},
@@ -6808,6 +6915,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nlocal e=eventArgs\nreturn e.isTargetable==true and e.entityContentID==9462 and data.seatForecast~=nil\n    and data.seatForecast.synced==true and not data.seatForecast.returned",
 						name = "[Seat] Sync phase two return gate",
 						uuid = "98b437a8-84f7-934d-b568-f831a428907c",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[922]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "1e7c2933-b6ca-4b81-9c1d-9ed543c822a5",
 						version = 3,
 					},
 				},
@@ -6893,6 +7012,11 @@ local tbl =
 						{
 							
 							{
+								"0ab388c4-2973-4725-abb3-3b4d6fe4eb04",
+								true,
+							},
+							
+							{
 								"cdcd79cb-35d0-6155-8310-7b37a40dc654",
 								true,
 							},
@@ -6913,6 +7037,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nlocal id=eventArgs.spellID\nreturn eventArgs.entityContentID==9462 and (id==20270 or id==20269 or id==20242 or id==20243 or id==20299 or id==20300)",
 						name = "[Seat] Prepare stop and move cues gate",
 						uuid = "cdcd79cb-35d0-6155-8310-7b37a40dc654",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[922]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "0ab388c4-2973-4725-abb3-3b4d6fe4eb04",
 						version = 3,
 					},
 				},
@@ -7112,6 +7248,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "return SeatFireHold~=nil",
+						dequeueIfLuaFalse = true,
 						name = "[Seat] Absolute Fire: release on OnDeath gate",
 						uuid = "8b7bae7e-cca5-98fc-b82c-9bb1a748e4b9",
 						version = 3,
@@ -7178,6 +7315,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "return SeatFireHold~=nil",
+						dequeueIfLuaFalse = true,
 						name = "[Seat] Absolute Fire: release on OnWipe gate",
 						uuid = "9ed528b3-f6a3-a8c3-a0a0-44f17ff4cc7f",
 						version = 3,
@@ -7244,6 +7382,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "return SeatFireHold~=nil",
+						dequeueIfLuaFalse = true,
 						name = "[Seat] Absolute Fire: release on OnMapChange gate",
 						uuid = "a74d9ed7-988f-08c7-ab90-b8d52271d305",
 						version = 3,
@@ -7321,6 +7460,11 @@ local tbl =
 						{
 							
 							{
+								"092e109b-2f60-413f-89c7-54aea660995b",
+								true,
+							},
+							
+							{
 								"b61d76bf-f88d-b122-95d1-77b42e28d773",
 								true,
 							},
@@ -7341,6 +7485,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nlocal id=eventArgs.spellID\nreturn eventArgs.entityContentID==9462 and (id==20238 or id==20239) and data.seatMotion~=nil",
 						name = "[Seat] Clear resolved Fire or Blizzard cue gate",
 						uuid = "b61d76bf-f88d-b122-95d1-77b42e28d773",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[922]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "092e109b-2f60-413f-89c7-54aea660995b",
 						version = 3,
 					},
 				},
@@ -7569,6 +7725,11 @@ local tbl =
 						{
 							
 							{
+								"887c3651-fe25-4795-ac19-420ee4d8592c",
+								true,
+							},
+							
+							{
 								"0e10be5b-6352-afc9-9dd9-a6b206c03a1f",
 								true,
 							},
@@ -7589,6 +7750,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nlocal id=eventArgs.aoeID\nreturn id==20240 or id==20241 or id==20299 or id==20300 or id==20251 or id==20253\n    or id==20254 or id==20259 or id==20260 or id==20261 or id==20266",
 						name = "[Seat] Boss and Spectral hazard telegraphs gate",
 						uuid = "0e10be5b-6352-afc9-9dd9-a6b206c03a1f",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[922]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "887c3651-fe25-4795-ac19-420ee4d8592c",
 						version = 3,
 					},
 				},
@@ -7616,6 +7789,11 @@ local tbl =
 						{
 							
 							{
+								"827cb46b-14d0-4a9f-b3a8-70ff3cc38d34",
+								true,
+							},
+							
+							{
 								"bd1bd61c-d5a4-c7cd-8454-bb0585f916d6",
 								true,
 							},
@@ -7636,6 +7814,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nreturn eventArgs.markerID==161 or eventArgs.markerID==87",
 						name = "[Seat] Absolute Holy stack and Deluge bait gate",
 						uuid = "bd1bd61c-d5a4-c7cd-8454-bb0585f916d6",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[922]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "827cb46b-14d0-4a9f-b3a8-70ff3cc38d34",
 						version = 3,
 					},
 				},
@@ -7663,6 +7853,11 @@ local tbl =
 						{
 							
 							{
+								"85472ab8-3ba0-43ff-af0d-b4066233d236",
+								true,
+							},
+							
+							{
 								"9d2191c9-4984-308e-8865-285bc1c376a7",
 								true,
 							},
@@ -7683,6 +7878,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nreturn eventArgs.spellID==20264 and eventArgs.entityContentID==9462 and eventArgs.targetID>0",
 						name = "[Seat] The Bitter End tankbuster gate",
 						uuid = "9d2191c9-4984-308e-8865-285bc1c376a7",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[922]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "85472ab8-3ba0-43ff-af0d-b4066233d236",
 						version = 3,
 					},
 				},
@@ -7710,6 +7917,11 @@ local tbl =
 						{
 							
 							{
+								"5e69b879-baae-4cbd-9759-47bde939c4d5",
+								true,
+							},
+							
+							{
 								"f0c77a2e-08c2-3cec-b7e8-2dbe2faddd3a",
 								true,
 							},
@@ -7730,6 +7942,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=922 then return false end\nreturn eventArgs.spellID==21628 and eventArgs.entityContentID==9462\n    and (p.job==19 or p.job==21 or p.job==32 or p.job==37)",
 						name = "[Seat] Ultimate Crossover tank LB cue gate",
 						uuid = "f0c77a2e-08c2-3cec-b7e8-2dbe2faddd3a",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[922]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "5e69b879-baae-4cbd-9759-47bde939c4d5",
 						version = 3,
 					},
 				},

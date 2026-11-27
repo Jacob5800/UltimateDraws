@@ -10889,6 +10889,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "return DungeonProfilePooling ~= nil",
+						dequeueIfLuaFalse = true,
 						name = "Relevant state",
 						uuid = "67a73efb-bead-d9fb-a221-7cb46490d26e",
 						version = 3,
@@ -10937,6 +10938,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "return DungeonProfilePooling ~= nil",
+						dequeueIfLuaFalse = true,
 						name = "Relevant state",
 						uuid = "0bc72a4b-d1e6-3df7-906f-3c269c9a0ae4",
 						version = 3,
@@ -10985,6 +10987,7 @@ local tbl =
 					{
 						category = "Lua",
 						conditionLua = "return DungeonProfilePooling ~= nil",
+						dequeueIfLuaFalse = true,
 						name = "Relevant state",
 						uuid = "983cf4e7-f9a9-a84c-8d73-48d68467646e",
 						version = 3,

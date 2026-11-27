@@ -11070,6 +11070,11 @@ local tbl =
 						{
 							
 							{
+								"d24648ff-0016-4b4c-87ff-9735b78edb64",
+								true,
+							},
+							
+							{
 								"7af66d6f-67d4-7d7d-847e-5d8dcf7c456d",
 								true,
 							},
@@ -11090,6 +11095,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x+230)^2+(p.pos.z+172)^2>46^2 then return false end\nlocal id=eventArgs.aoeID\nreturn p.incombat and (id==20399 or id==20401 or id==20402 or id==20403 or id==20408 or\n id==20409 or id==20410 or id==20411 or id==20416 or id==20417 or id==20421)",
 						name = "Superior Flight Units arena and mechanic",
 						uuid = "7af66d6f-67d4-7d7d-847e-5d8dcf7c456d",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[917]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "d24648ff-0016-4b4c-87ff-9735b78edb64",
 						version = 3,
 					},
 				},
@@ -11165,6 +11182,11 @@ local tbl =
 						{
 							
 							{
+								"614b7827-7a4c-4523-805e-d0b3183224a5",
+								true,
+							},
+							
+							{
 								"88aa9fbd-9dcf-4f3b-b466-e06172abe445",
 								true,
 							},
@@ -11185,6 +11207,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x+230)^2+(p.pos.z+172)^2>46^2 then return false end\nlocal e=eventArgs\nlocal s=data.a23Swipes\nlocal first=s and s.queue[1]\nreturn first~=nil and e.entityContentID==first.content and e.spellID==first.hit",
 						name = "Superior Flight Units arena and mechanic",
 						uuid = "88aa9fbd-9dcf-4f3b-b466-e06172abe445",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[917]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "614b7827-7a4c-4523-805e-d0b3183224a5",
 						version = 3,
 					},
 				},
@@ -11385,6 +11419,11 @@ local tbl =
 						{
 							
 							{
+								"40238a60-edaa-4297-81c5-38ca80d014d2",
+								true,
+							},
+							
+							{
 								"c891501e-51d2-81d5-aa87-0ed00dbb5e6c",
 								true,
 							},
@@ -11405,6 +11444,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x-200)^2+(p.pos.z+100)^2>34^2 then return false end\nlocal id=eventArgs.aoeID\nreturn p.incombat and (id==20614 or id==20615 or id==20616 or id==20617 or id==20476 or\n id==20479 or id==20480 or id==20464 or id==20465)",
 						name = "Heavy Artillery Unit arena and mechanic",
 						uuid = "c891501e-51d2-81d5-aa87-0ed00dbb5e6c",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[917]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "40238a60-edaa-4297-81c5-38ca80d014d2",
 						version = 3,
 					},
 				},
@@ -11480,6 +11531,11 @@ local tbl =
 						{
 							
 							{
+								"de886831-b029-43fe-8e92-f0ffc40f3060",
+								true,
+							},
+							
+							{
 								"cfca1d3e-cc83-00ae-83a2-6bd704f01744",
 								true,
 							},
@@ -11500,6 +11556,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x-200)^2+(p.pos.z+100)^2>34^2 then return false end\nlocal e=eventArgs\nreturn p.incombat and e.entityContentID==0x1EB055 and\n ((e.a2==1 and e.a3==2) or e.a2==0x00010002 or (e.a2==4 and e.a3==256) or e.a2==0x00040100)",
 						name = "Heavy Artillery Unit arena and mechanic",
 						uuid = "cfca1d3e-cc83-00ae-83a2-6bd704f01744",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[917]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "de886831-b029-43fe-8e92-f0ffc40f3060",
 						version = 3,
 					},
 				},
@@ -11527,6 +11595,11 @@ local tbl =
 						{
 							
 							{
+								"f4edd8d0-4dbe-4366-9da8-33caf6e61ad0",
+								true,
+							},
+							
+							{
 								"8c948750-e3d9-3193-a476-14554d0e8b93",
 								true,
 							},
@@ -11547,6 +11620,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or (p.pos.x-200)^2+(p.pos.z+100)^2>34^2 then return false end\nreturn p.incombat  and eventArgs.markerID==230",
 						name = "Heavy Artillery Unit arena and mechanic",
 						uuid = "8c948750-e3d9-3193-a476-14554d0e8b93",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[917]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "f4edd8d0-4dbe-4366-9da8-33caf6e61ad0",
 						version = 3,
 					},
 				},
@@ -12055,6 +12140,11 @@ local tbl =
 						{
 							
 							{
+								"06470e7f-bf51-4a8c-aa3f-f1bd82c46d68",
+								true,
+							},
+							
+							{
 								"2ffd7a22-2cc7-f97f-96a7-75a7bd471e76",
 								true,
 							},
@@ -12075,6 +12165,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nreturn p.incombat and eventArgs.aoeID==20914",
 						name = "The Compound arena and mechanic",
 						uuid = "2ffd7a22-2cc7-f97f-96a7-75a7bd471e76",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[917]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "06470e7f-bf51-4a8c-aa3f-f1bd82c46d68",
 						version = 3,
 					},
 				},
@@ -12196,6 +12298,11 @@ local tbl =
 						{
 							
 							{
+								"04e5b715-cec5-49d4-bee2-4c9b680a8873",
+								true,
+							},
+							
+							{
 								"4ae31310-c5f9-eb4f-8b1e-5881ed9a4745",
 								true,
 							},
@@ -12216,6 +12323,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nlocal e=eventArgs\nreturn p.incombat and e.newTetherID==116 and e.sourceEntityContentID==9644 and e.newTargetContentID==9644",
 						name = "The Compound arena and mechanic",
 						uuid = "4ae31310-c5f9-eb4f-8b1e-5881ed9a4745",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[917]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "04e5b715-cec5-49d4-bee2-4c9b680a8873",
 						version = 3,
 					},
 				},
@@ -12291,6 +12410,11 @@ local tbl =
 						{
 							
 							{
+								"04460751-ae2a-4682-9da2-38cb25063a5f",
+								true,
+							},
+							
+							{
 								"d00a76cd-f416-cd15-af7e-2254a2287bd1",
 								true,
 							},
@@ -12311,6 +12435,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nlocal s=data.compoundFourParts\nlocal id=eventArgs.markerID\nreturn s~=nil and s.expires>Now() and p.incombat and id>=79 and id<=82",
 						name = "The Compound arena and mechanic",
 						uuid = "d00a76cd-f416-cd15-af7e-2254a2287bd1",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[917]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "04460751-ae2a-4682-9da2-38cb25063a5f",
 						version = 3,
 					},
 				},
@@ -12386,6 +12522,11 @@ local tbl =
 						{
 							
 							{
+								"4f6e9bbb-0c33-49cb-84ae-75f92b43b879",
+								true,
+							},
+							
+							{
 								"d37d3e15-c4f5-43e5-8215-c2fd7427f4c1",
 								true,
 							},
@@ -12406,6 +12547,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nreturn p.incombat and eventArgs.keyID==2011246",
 						name = "The Compound arena and mechanic",
 						uuid = "d37d3e15-c4f5-43e5-8215-c2fd7427f4c1",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[917]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "4f6e9bbb-0c33-49cb-84ae-75f92b43b879",
 						version = 3,
 					},
 				},
@@ -12481,6 +12634,11 @@ local tbl =
 						{
 							
 							{
+								"dc793a84-20f4-498b-92db-14f57cfb8b8c",
+								true,
+							},
+							
+							{
 								"0b12cfc2-8608-18c5-b259-d1d1ce5f413d",
 								true,
 							},
@@ -12501,6 +12659,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nlocal e=eventArgs\nreturn p.incombat and e.sourceEntityContentID==9644 and e.newTargetContentID==9644 and\n (e.newTetherID==116 or e.newTetherID==117)",
 						name = "The Compound arena and mechanic",
 						uuid = "0b12cfc2-8608-18c5-b259-d1d1ce5f413d",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[917]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "dc793a84-20f4-498b-92db-14f57cfb8b8c",
 						version = 3,
 					},
 				},
@@ -12740,6 +12910,11 @@ local tbl =
 						{
 							
 							{
+								"ca35743d-eba6-42e5-8ebe-ef11a10fd453",
+								true,
+							},
+							
+							{
 								"d472a49d-9708-2917-bd45-cd50541b7d77",
 								true,
 							},
@@ -12760,6 +12935,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nreturn data.a25~=nil and not data.a25.returned and eventArgs.entityContentID==11974 and eventArgs.isTargetable",
 						name = "The Compound and 2P arena and mechanic",
 						uuid = "d472a49d-9708-2917-bd45-cd50541b7d77",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[917]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "ca35743d-eba6-42e5-8ebe-ef11a10fd453",
 						version = 3,
 					},
 				},
@@ -12797,6 +12984,11 @@ local tbl =
 						{
 							
 							{
+								"0d24f1b4-5c26-4704-bf24-a878cc145cd0",
+								true,
+							},
+							
+							{
 								"727bec3f-004e-99dc-9762-defc74054d12",
 								true,
 							},
@@ -12817,6 +13009,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nlocal id=eventArgs.aoeID\nlocal pods=data.a25EarlyPods\nif id==21531 and pods and pods.preview and pods.deadline>Now() then return false end\nif id==20890 then\n local t=data.a25BladeTransfer\n local e=eventArgs\n return p.incombat and t~=nil and math.abs(t.observed-e.startTime)<=2000 and\n  (t.fromX-e.x)^2+(t.fromZ-e.z)^2<=9\nend\nreturn p.incombat and (id==20915 or id==20916 or id==21535 or id==21536 or id==21537 or id==21531)",
 						name = "The Compound and 2P arena and mechanic",
 						uuid = "727bec3f-004e-99dc-9762-defc74054d12",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[917]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "0d24f1b4-5c26-4704-bf24-a878cc145cd0",
 						version = 3,
 					},
 				},
@@ -12892,6 +13096,11 @@ local tbl =
 						{
 							
 							{
+								"1c9d7abc-8710-43f1-aee0-e37a23a2c993",
+								true,
+							},
+							
+							{
 								"fcdba264-8ebe-7160-962e-70d5b400e8e9",
 								true,
 							},
@@ -12912,6 +13121,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=917 or not p.pos or math.abs(p.pos.x-200)>31 or math.abs(p.pos.z+700)>31 then return false end\nlocal id=eventArgs.aoeID\nreturn p.incombat and (id==20918 or id==20919 or id==20906 or id==20939 or id==20909 or id==20910 or id==20911 or id==20891)",
 						name = "The Compound and 2P arena and mechanic",
 						uuid = "fcdba264-8ebe-7160-962e-70d5b400e8e9",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[917]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "1c9d7abc-8710-43f1-aee0-e37a23a2c993",
 						version = 3,
 					},
 				},
@@ -12948,6 +13169,11 @@ local tbl =
 						{
 							
 							{
+								"b4553bd4-69d9-49ca-a9f0-ab2245ac1c23",
+								true,
+							},
+							
+							{
 								"eabbee07-c5d6-679c-85bf-4817ff45d219",
 								true,
 							},
@@ -12973,6 +13199,18 @@ local tbl =
 						version = 3,
 					},
 				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[917]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "b4553bd4-69d9-49ca-a9f0-ab2245ac1c23",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Puppets' Bunker/The Compound and 2P/Mitigation",
 			eventType = 3,
@@ -12995,6 +13233,11 @@ local tbl =
 						aType = "ACR",
 						conditions = 
 						{
+							
+							{
+								"d290ca40-1da4-40c9-90da-b04b284dafd3",
+								true,
+							},
 							
 							{
 								"a0d4eaf3-a40a-5665-abad-7068f3e2a786",
@@ -13035,6 +13278,18 @@ local tbl =
 						dequeueIfLuaFalse = true,
 						name = "Caster or healer",
 						uuid = "06b8b8b8-f790-7efe-b4a3-7b2fd15ef80f",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[917]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "d290ca40-1da4-40c9-90da-b04b284dafd3",
 						version = 3,
 					},
 				},
@@ -18445,6 +18700,11 @@ local tbl =
 						{
 							
 							{
+								"850215f0-596b-4caf-aa6f-f74d57143091",
+								true,
+							},
+							
+							{
 								"49e645b0-709e-98f5-bb86-5131e9d9af65",
 								true,
 							},
@@ -18464,6 +18724,11 @@ local tbl =
 						alertText = "Redemption: heal the tank",
 						conditions = 
 						{
+							
+							{
+								"850215f0-596b-4caf-aa6f-f74d57143091",
+								true,
+							},
 							
 							{
 								"b2577372-36dc-9263-ad2c-9fd0a80fd169",
@@ -18497,6 +18762,18 @@ local tbl =
 						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=826 then return false end\nlocal e=eventArgs\nif not e or e.entityContentID~=7909 or e.spellID~=14506 or e.targetID==p.id then return false end\nlocal j=p.job\nreturn (j==24 or j==28 or j==33 or j==40) and true or false",
 						name = "Healer, Redemption on another player",
 						uuid = "b2577372-36dc-9263-ad2c-9fd0a80fd169",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nlocal maps={[826]=true}\nreturn not not (p and maps[p.localmapid])",
+						dequeueIfLuaFalse = true,
+						name = "Duty map",
+						uuid = "850215f0-596b-4caf-aa6f-f74d57143091",
 						version = 3,
 					},
 				},

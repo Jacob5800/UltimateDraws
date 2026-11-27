@@ -1423,14 +1423,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nlocal s=eventArgs.oldData and eventArgs.oldData.jacobRokkon\nif s then s.cleanup() end\nself.used=true\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"2d592086-b6fe-40a4-984b-c3ee375cfc57",
+								true,
+							},
+						},
+						name = "[Rokkon] Cleanup on wipe",
+						uuid = "ed676fed-d69d-4a82-ad00-b7f527e104df",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return not not (eventArgs.oldData and eventArgs.oldData.jacobRokkon)",
+						dequeueIfLuaFalse = true,
+						name = "Rokkon state before wipe",
+						uuid = "2d592086-b6fe-40a4-984b-c3ee375cfc57",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Mount Rokkon/Safeguards",
 			eventType = 9,
 			execute = "local s=eventArgs.oldData and eventArgs.oldData.jacobRokkon\nif s then s.cleanup() end\nself.used=true",
-			executeType = 2,
 			name = "[Rokkon] Cleanup on wipe",
 			timeout = 1,
 			uuid = "322e4a0e-031d-9396-8a78-2918e272b14d",
@@ -1443,14 +1473,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nlocal s=data.jacobRokkon\nif s then s.cleanup() end\nself.used=true\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"41140361-cddc-45f0-bc32-8043febb8964",
+								true,
+							},
+						},
+						name = "[Rokkon] Cleanup on mapchange",
+						uuid = "5bb2132a-c282-49a4-9511-63833f474231",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return data.jacobRokkon~=nil",
+						dequeueIfLuaFalse = true,
+						name = "Rokkon state exists",
+						uuid = "41140361-cddc-45f0-bc32-8043febb8964",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Mount Rokkon/Safeguards",
 			eventType = 11,
 			execute = "local s=data.jacobRokkon\nif s then s.cleanup() end\nself.used=true",
-			executeType = 2,
 			name = "[Rokkon] Cleanup on mapchange",
 			timeout = 1,
 			uuid = "2e9e7dd9-7c2e-b4d8-9138-db896da1164c",
@@ -1463,14 +1523,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nlocal s=data.jacobRokkon\nif s then s.cleanup() end\nself.used=true\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"33d2a7bc-e000-4f2e-965f-fed9f611c4e6",
+								true,
+							},
+						},
+						name = "[Rokkon] Cleanup on death",
+						uuid = "ec0d219e-68cb-48bc-8dd6-bb0fbe361437",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return data.jacobRokkon~=nil",
+						dequeueIfLuaFalse = true,
+						name = "Rokkon state exists",
+						uuid = "33d2a7bc-e000-4f2e-965f-fed9f611c4e6",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Mount Rokkon/Safeguards",
 			eventType = 10,
 			execute = "local s=data.jacobRokkon\nif s then s.cleanup() end\nself.used=true",
-			executeType = 2,
 			name = "[Rokkon] Cleanup on death",
 			timeout = 1,
 			uuid = "96e5619a-13c7-27f9-9363-7e165e8ee89b",
