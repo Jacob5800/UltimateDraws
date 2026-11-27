@@ -242,6 +242,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Added Engels draws in The Copied Factory: Marx Smash in red with a green safe area (second hit previewed), following circles for Incendiary Bombing and Guided Missile, an arrow to the south edge during Demolish Structure, and targeting of Marx's halves and then Engels. (27-11-2026)
+
 - Added Goliath Tank chase rings that hide when you are chased, plus Flight Unit bait beams and a one-circle preview for each Ballistic Impact trail. (27-11-2026)
 
 - Added green Ring Laser safe areas and a live Unwilling Cargo knockback landing line for Hobbes. Optional Surecast is off by default and checks your platform. (27-11-2026)
@@ -259,8 +261,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - The alliance raid profile now disables Prepull Helper only inside alliance raids, instead of everywhere. (27-11-2026)
 
 - Many alliance raid reactions for other maps or inactive states no longer wait in the queue. Without an AutoSim ACR, AutoSim reactions now skip quietly instead of printing errors, while their draws and targeting keep working. (27-11-2026)
-
-- Added Serial-jointed Command Model draws in The Copied Factory: Energy Bomb orbs, the Energy Assault cone, turret laser lines, dropping orb circles with the next wave previewed, Energy Rings (also added to the Moogle Telegraphs blacklist) and automatic Surecast for Shockwave (casters and healers). (26-11-2026)
 
 ### Trials
 

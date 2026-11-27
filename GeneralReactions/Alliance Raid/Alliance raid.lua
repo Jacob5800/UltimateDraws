@@ -20974,6 +20974,504 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal id=eventArgs.spellID\n-- the boss stands at the north edge of the current platform: (900,640) on the first, (900,755) on the second\nlocal b=TensorCore.mGetEntity(eventArgs.entityID)\nif not b or not b.pos then return end\n-- left/right: one hit about 1.6s after the 6s cast; inside/outside: two hits about 4.7s apart\nlocal two=id==18218 or id==18222\ndata.cfMarx={id=id,stage=1,fin=Now()+(two and 15000 or 10000),x=b.pos.x,y=b.pos.y,z=b.pos.z}\n",
+						conditions = 
+						{
+							
+							{
+								"e39d7dc5-11e9-00c4-aa00-1db315fbfb12",
+								true,
+							},
+						},
+						name = "Remember the pattern",
+						uuid = "53f2aecb-1e36-afa9-b171-ba80f3f4b8f8",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e or e.entityContentID~=9147 then return false end\nif not (e.spellID==18214 or e.spellID==18215 or e.spellID==18218 or e.spellID==18222) then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==882) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Marx Smash cast",
+						uuid = "e39d7dc5-11e9-00c4-aa00-1db315fbfb12",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 3,
+			name = "[Copied Factory] Marx Smash record",
+			uuid = "a0b5026f-8525-59d5-a642-743a57ab2ae7",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.cfMarx\nif not s or not s.z then return end\nif Now()>=s.fin then data.cfMarx=nil return end\n-- BossMod A14 MarxSmash, 60x60 platform south of the boss. Rects are {x, z of the near edge's middle, length, width}\n-- written for the first platform (boss at 900,640) and moved with the boss\nlocal EAST={915,640,60,30}\nlocal WEST={885,640,60,30}\nlocal SHAPES={\n [18214]={{EAST}},\n [18215]={{WEST}},\n [18222]={{{900,665,35,60}},{{885,640,60,20},{915,640,60,20}}},\n [18218]={{{900,640,30,60}},{{900,640,60,30}}},\n}\nlocal parts=SHAPES[s.id]\nlocal set=parts and parts[s.stage]\nif not set then data.cfMarx=nil return end\n-- the second hit is known from the cast, so it is shown at once in yellow\nlocal nextSet=parts[s.stage+1] or {}\nlocal ox,oz=s.x-900,s.z-640\nlocal y=s.y+0.05\nlocal red=TensorCore.getStaticDrawer(0x703333FF,2)\nlocal yellow=TensorCore.getStaticDrawer(0x4000DDFF,2)\nfor _,r in ipairs(nextSet) do yellow:addRect(r[1]+ox,y,r[2]+oz,r[3],r[4],0) end\nfor _,r in ipairs(set) do red:addRect(r[1]+ox,y,r[2]+oz,r[3],r[4],0) end\n-- green: subtractive, whole platform minus the current and next hit, on a channel of its own\nlocal channel=Argus2.getNextUnusedChannel(true)\nif channel==1 then channel=Argus2.getNextUnusedChannel(true) end\nif not channel or channel<=1 then return end\nlocal F=Argus2.RenderFlags\nlocal baseFlags=F.FLAG_WARP_TERRAIN+F.FLAG_OCCLUSION_BASE\nlocal maskFlags=F.FLAG_WARP_TERRAIN+F.FLAG_OCCLUDE\nTensorCore.getStaticDrawer(0x5033FF33,2,channel,baseFlags):addRect(900+ox,y,640+oz,60,60,0,false,baseFlags)\nlocal mask=TensorCore.getStaticDrawer(0xFFFFFFFF,0,channel,maskFlags)\nfor _,list in ipairs({set,nextSet}) do\n for _,r in ipairs(list) do mask:addRect(r[1]+ox,y,r[2]+oz,r[3],r[4],0,false,maskFlags) end\nend\n",
+						conditions = 
+						{
+							
+							{
+								"1dcb9d69-e8ad-42b8-80f3-8bac8e4b82f5",
+								true,
+							},
+						},
+						name = "Red hazard, green rest of the arena",
+						uuid = "1a113d3c-c8dd-ee82-bd46-8c0f29aec044",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not data.cfMarx then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==882) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Marx Smash pending",
+						uuid = "1dcb9d69-e8ad-42b8-80f3-8bac8e4b82f5",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 12,
+			name = "[Copied Factory] Marx Smash unsafe (red) and safe (green)",
+			uuid = "c27fc0e2-a6a6-94c4-aa0a-85c74a5b7470",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.cfMarx\nif not s then return end\nlocal id=eventArgs.spellID\nif id==18219 or id==18223 then s.stage=2\nelse data.cfMarx=nil end\n",
+						conditions = 
+						{
+							
+							{
+								"36880caf-c521-9a3b-88d6-77746e750800",
+								true,
+							},
+						},
+						name = "Advance to the second hit or clear",
+						uuid = "5c0b3b95-beed-49e5-91f5-a07d3d6e1577",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e or not data.cfMarx then return false end\nlocal id=e.spellID\nreturn (id==18216 or id==18217 or id==18219 or id==18221 or id==18223 or id==18225 or id==18226) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Marx Smash hit",
+						uuid = "36880caf-c521-9a3b-88d6-77746e750800",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 2,
+			name = "[Copied Factory] Marx Smash hits",
+			uuid = "db03cfdd-0b73-d688-8417-88fccca4c527",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.cfEng\nif not s then s={bombs={},chains={},fixed={}} data.cfEng=s end\nlocal id=eventArgs.entityID\n-- BossMod A14: marker 23 = Incendiary Bombing (radius 8), 197 = Guided Missile chase (radius 6)\nif eventArgs.markerID==23 then\n s.bombs[id]=Now()+10000\nelse\n s.chains[#s.chains+1]={target=id,hits=0,fin=Now()+12000}\nend\n",
+						conditions = 
+						{
+							
+							{
+								"6393a150-70db-9a3f-b402-c44b887f84a4",
+								true,
+							},
+						},
+						name = "Remember the marked player",
+						uuid = "abaddeb0-e9fe-c26d-9b96-57fc29080337",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e or (e.markerID~=23 and e.markerID~=197) then return false end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=882 or not p.pos then return false end\nreturn (p.pos.y<-690 and p.pos.y>-710 and math.abs(p.pos.x-900)<=45) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Engels marker",
+						uuid = "6393a150-70db-9a3f-b402-c44b887f84a4",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 4,
+			name = "[Copied Factory] Engels bombing and missile markers",
+			uuid = "07cd616e-d391-1579-b485-44557656cbae",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal s=data.cfEng\nif not s then s={bombs={},chains={},fixed={}} data.cfEng=s end\nlocal fin=e.startTime+e.duration*1000\nif e.aoeID==18233 then\n -- the bombs have been placed: stop following, show where they land\n s.bombs={}\n s.fixed[#s.fixed+1]={x=e.x,z=e.z,fin=fin}\n return\nend\n-- first missile: give this spot to the marked player closest to it\nlocal best,bd\nfor _,c in ipairs(s.chains) do\n local t=not c.x and TensorCore.mGetEntity(c.target)\n if t and t.pos then\n  local d=(t.pos.x-e.x)^2+(t.pos.z-e.z)^2\n  if not bd or d<bd then best,bd=c,d end\n end\nend\nif best then best.x,best.z,best.fin=e.x,e.z,fin+2500 end\n",
+						conditions = 
+						{
+							
+							{
+								"64868597-a5d7-8a99-b3e1-ac46bffe71e8",
+								true,
+							},
+						},
+						name = "Lock the spot",
+						uuid = "ef4beb23-17b4-d181-be97-39cbbfb9e6a3",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e or (e.aoeID~=18233 and e.aoeID~=18230) then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==882) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Bomb or first missile cast",
+						uuid = "64868597-a5d7-8a99-b3e1-ac46bffe71e8",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 18,
+			name = "[Copied Factory] Engels bombing and missile drop spots",
+			uuid = "8f206c91-45c2-3023-a5d8-bd1bc86d581b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.cfEng\nif not s then return end\nlocal x,z=eventArgs.castPosX,eventArgs.castPosZ\nif not x then\n local h=TensorCore.mGetEntity(eventArgs.entityID)\n if not h or not h.pos then return end\n x,z=h.pos.x,h.pos.z\nend\nlocal best,bi,bd\nfor i,c in ipairs(s.chains) do\n if c.x then\n  local d=(c.x-x)^2+(c.z-z)^2\n  if d<=100 and (not bd or d<bd) then best,bi,bd=c,i,d end\n end\nend\nif not best then return end\nbest.x,best.z,best.hits,best.fin=x,z,best.hits+1,Now()+2500\n-- four hits in total (BossMod StandardChasingAOEs: step 6, 1s apart)\nif best.hits>=4 then table.remove(s.chains,bi) end\n",
+						conditions = 
+						{
+							
+							{
+								"4c88a3e7-6476-c888-9c0f-1c2aaed3ce88",
+								true,
+							},
+						},
+						name = "Move the chain to the hit",
+						uuid = "eff0a6d9-fbe3-7d3a-b9f7-5d227bfc4544",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e or not data.cfEng then return false end\nreturn (e.spellID==18230 or e.spellID==18231) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Missile hit",
+						uuid = "4c88a3e7-6476-c888-9c0f-1c2aaed3ce88",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 2,
+			name = "[Copied Factory] Engels missile steps",
+			uuid = "14eacc1e-490d-f70d-be2c-37bfdc3ee2aa",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.cfEng\nif not s then return end\nlocal now=Now()\nlocal y=-699.95\nlocal red=TensorCore.getStaticDrawer(0x703333FF,2)\nlocal soft=TensorCore.getStaticDrawer(0x400080FF,2)\nlocal ahead=TensorCore.getStaticDrawer(0x3000DDFF,2)\nlocal arrow=TensorCore.getStaticDrawer(0xE000FFFF,2)\nlocal any=false\nfor id,fin in pairs(s.bombs) do\n local t=TensorCore.mGetEntity(id)\n if now>=fin or not t or not t.pos then s.bombs[id]=nil\n else any=true soft:addCircle(t.pos.x,y,t.pos.z,8) end\nend\nfor i=#s.fixed,1,-1 do\n local f=s.fixed[i]\n if now>=f.fin then table.remove(s.fixed,i)\n else any=true red:addCircle(f.x,y,f.z,8) end\nend\nfor i=#s.chains,1,-1 do\n local c=s.chains[i]\n local t=TensorCore.mGetEntity(c.target)\n if now>=c.fin or not t or not t.pos then table.remove(s.chains,i)\n else\n  any=true\n  if not c.x then\n   -- not dropped yet: the circle follows the chased player\n   soft:addCircle(t.pos.x,y,t.pos.z,6)\n  else\n   local px,pz=t.pos.x,t.pos.z\n   -- one step of up to 6 yalms from (x,z) toward the player\n   local function step(x,z)\n    local dx,dz=px-x,pz-z\n    local d=math.sqrt(dx*dx+dz*dz)\n    if d<=0.01 then return x,z end\n    local m=math.min(6,d)\n    return x+dx/d*m,z+dz/d*m\n   end\n   local x,z=c.x,c.z\n   if c.hits>0 then x,z=step(x,z) end\n   -- one hit in advance, in faint yellow, while the chain still has another hit left\n   if c.hits<3 then\n    local nx,nz=step(x,z)\n    if (nx-x)^2+(nz-z)^2>0.25 then ahead:addCircle(nx,y,nz,6) end\n   end\n   red:addCircle(x,y,z,6)\n   local ax,az=px-x,pz-z\n   local len=math.min(6,math.sqrt(ax*ax+az*az))\n   if len>1.5 then arrow:addArrow(x,y+0.05,z,math.atan2(ax,az),len-1.5,0.6,1.5,1.8) end\n  end\n end\nend\nif not any then data.cfEng=nil end\n",
+						conditions = 
+						{
+							
+							{
+								"2f39382a-fd6a-bb1a-935f-648c543751b0",
+								true,
+							},
+						},
+						name = "Follow circles, drop spots and chase arrow",
+						uuid = "c1191814-6d3b-fa26-9356-f2d2fc699c62",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not data.cfEng then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==882) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Engels circles pending",
+						uuid = "2f39382a-fd6a-bb1a-935f-648c543751b0",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 12,
+			name = "[Copied Factory] Engels bombing and missile circles",
+			uuid = "803b1405-c0ca-d219-8bc1-86411782ef31",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\ndata.cfMeteor={fin=Now()+11000}\n",
+						conditions = 
+						{
+							
+							{
+								"d08f17ec-a4d6-1c0c-a3c9-04e2bd587d03",
+								true,
+							},
+						},
+						name = "Start guiding south",
+						uuid = "4e914694-85f9-ca09-ab70-b6324d3fed3f",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local e=eventArgs\nif not e or e.spellID~=18245 or e.entityContentID~=9147 then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==882) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Demolish Structure cast",
+						uuid = "d08f17ec-a4d6-1c0c-a3c9-04e2bd587d03",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 3,
+			name = "[Copied Factory] Demolish Structure record",
+			uuid = "e5aa76bf-20ae-4b1c-9361-9f5139c935bf",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal s=data.cfMeteor\nif not s then return end\nlocal p=TensorCore.mGetPlayer()\nif Now()>=s.fin or not p or not p.pos then data.cfMeteor=nil return end\n-- only on the first platform; players gather at (900,698) during this cast, toward the next platform\nif p.pos.y>-690 or p.pos.z>702 then return end\nlocal tx,tz,y=900,698,-699.9\nlocal green=TensorCore.getStaticDrawer(0x9033FF33,2)\ngreen:addCircle(tx,y,tz,1.5)\nlocal dx,dz=tx-p.pos.x,tz-p.pos.z\nlocal d=math.sqrt(dx*dx+dz*dz)\nif d>2 then\n green:addArrow(p.pos.x,p.pos.y+0.1,p.pos.z,math.atan2(dx,dz),d-1.5,0.5,1.5,1.6)\nend\n",
+						conditions = 
+						{
+							
+							{
+								"2d1b08f0-0f9d-5681-a7d8-6b8ed6ed6923",
+								true,
+							},
+						},
+						name = "Green arrow and spot",
+						uuid = "e084010c-b2d3-64aa-a39c-86072187bde3",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "if not data.cfMeteor then return false end\nlocal p=TensorCore.mGetPlayer()\nreturn (p~=nil and p.localmapid==882) and true or false\n",
+						dequeueIfLuaFalse = true,
+						name = "Guiding",
+						uuid = "2d1b08f0-0f9d-5681-a7d8-6b8ed6ed6923",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 12,
+			name = "[Copied Factory] Demolish Structure - arrow to the south edge",
+			uuid = "60be7bb8-7583-dfbc-b9cc-686b9cc4ce0a",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\nlocal id=data.cfAimID\nif not id then return end\nPlayer:SetTarget(id)\ndata.cfAimID=nil\n-- the boss is picked once; later manual target changes are left alone\nif data.cfAimBoss then data.cfAimBoss=nil data.cfMarxAim=nil end\n",
+						conditions = 
+						{
+							
+							{
+								"8935c4ef-8ff8-6475-a7ef-33d75b867d8c",
+								true,
+							},
+							
+							{
+								"31fe6033-f328-6cf3-a3ed-dcfc97c49730",
+								true,
+							},
+						},
+						name = "Set the target",
+						uuid = "3358f886-27fa-ea21-b867-b08374e56a70",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 882,
+						name = "Copied Factory only",
+						uuid = "8935c4ef-8ff8-6475-a7ef-33d75b867d8c",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or not p.alive or not p.pos then return false end\n-- Engels platforms only\nif math.abs(p.pos.x-900)>60 or p.pos.z<600 or p.pos.z>860 then return false end\nlocal cur=Player:GetTarget()\nlocal best,bd,onMarx=nil,nil,false\nfor id,e in pairs(EntityList(\"contentid=9152\") or {}) do\n if e.targetable and e.attackable and e.hp and e.hp.percent>0 then\n  if cur and cur.id==id then onMarx=true end\n  if not bd or e.distance2d<bd then best,bd=id,e.distance2d end\n end\nend\nif best then\n -- remember to go back to the boss afterwards\n data.cfMarxAim=true\n if onMarx then return false end\n data.cfAimID=best\n return true\nend\nif not data.cfMarxAim then return false end\nfor id,e in pairs(EntityList(\"contentid=9147\") or {}) do\n if e.targetable and e.attackable and e.hp and e.hp.percent>0 then\n  data.cfAimID=id\n  data.cfAimBoss=true\n  return true\n end\nend\nreturn false\n",
+						dequeueIfLuaFalse = true,
+						name = "A target switch is due",
+						uuid = "31fe6033-f328-6cf3-a3ed-dcfc97c49730",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			name = "[Copied Factory] Engels - target Marx L/R, then back to the boss",
+			throttleTime = 300,
+			uuid = "4ffc0e57-6655-c198-b062-d220a1e5ff75",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "The Copied Factory",
 			name = "AutoSim",
 			uuid = "40f1e247-388a-0b27-8e5a-04e3a255b655",
