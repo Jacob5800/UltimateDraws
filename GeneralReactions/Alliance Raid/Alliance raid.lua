@@ -20047,7 +20047,7 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
-						actionLua = "self.used=true\nlocal e=eventArgs\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal drawer=TensorCore.getStaticDrawer(0x603333FF,2)\nlocal id=e.aoeID\nif id==18885 or id==18447 then\n    -- the attack data has no usable heading when it points south, so read the caster\n    local c=TensorCore.mGetEntity(e.entityID)\n    if not c or not c.pos then return end\n    drawer:addTimedCone(ms,e.x,e.y,e.z,20,math.rad(60),c.pos.h,0,false,true)\nelseif id==18886 or id==18448 then\n    drawer:addTimedCircle(ms,e.x,e.y,e.z,2,0,false,true)\nelse\n    drawer:addTimedDonut(ms,e.x,e.y,e.z,7,19,0,false,true)\nend",
+						actionLua = "self.used=true\nlocal e=eventArgs\nlocal ms=math.floor(e.startTime+e.duration*1000-Now())\nif ms<=0 then return end\nlocal drawer=TensorCore.getStaticDrawer(0x603333FF,2)\nlocal id=e.aoeID\nif id==18885 or id==18447 then\n    -- the attack data has no usable heading when it points south, so read the caster\n    local c=TensorCore.mGetEntity(e.entityID)\n    if not c or not c.pos then return end\n    drawer:addTimedCone(ms,e.x,e.y,e.z,20,math.rad(60),c.pos.h,0,false,true)\nelseif id==18886 or id==18448 then\n    drawer:addTimedCircle(ms,e.x,e.y,e.z,2,0,false,true)\nelseif id==18450 then\n    -- Impact: 15 as BossMod draws it (the attack data says 20)\n    drawer:addTimedCircle(ms,e.x,e.y,e.z,15,0,false,true)\nelse\n    drawer:addTimedDonut(ms,e.x,e.y,e.z,7,19,0,false,true)\nend",
 						conditions = 
 						{
 							
@@ -20069,9 +20069,9 @@ local tbl =
 					data = 
 					{
 						category = "Lua",
-						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=882 then return false end\nlocal id=eventArgs.aoeID\nreturn id==18885 or id==18886 or id==18887 or id==18447 or id==18448 or id==18449",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=882 then return false end\nlocal id=eventArgs.aoeID\nreturn id==18885 or id==18886 or id==18887 or id==18447 or id==18448 or id==18449 or id==18450",
 						dequeueIfLuaFalse = true,
-						name = "Combat Test shape",
+						name = "Combat Test or Impact shape",
 						uuid = "1e92dcdb-47ac-9728-a20d-d3f3e63d2ffa",
 						version = 3,
 					},
@@ -20079,7 +20079,7 @@ local tbl =
 			},
 			displayPath = "The Copied Factory/Draws",
 			eventType = 18,
-			name = "[Copied Factory] Hobbes Variable Combat Test draws",
+			name = "[Copied Factory] Hobbes Variable Combat Test and Impact draws",
 			timeout = 1,
 			uuid = "5a9bb292-6167-72f0-ab78-6a8e0b84d588",
 			version = 2,

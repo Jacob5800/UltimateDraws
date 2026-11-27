@@ -242,7 +242,7 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
-- Added Hobbes draws in The Copied Factory: Variable Combat Test cones, circles and rings, the Towerfall lanes, and an early warning of the Fire-resistance Test flame area. (27-11-2026)
+- Added Hobbes draws in The Copied Factory: Variable Combat Test cones, circles and rings, the Impact circle, the Towerfall lanes, and an early warning of the Fire-resistance Test flame area. (27-11-2026)
 
 - The energy orb rings in The Copied Factory (first boss and trash flyers) are now slightly smaller, with a radius of 1.8 instead of 2. (27-11-2026)
 
