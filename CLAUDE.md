@@ -69,6 +69,10 @@ Live `GeneralReactions\Alliance raid.lua` is authoritative and publishes to `Gen
 Live `GeneralReactions\Trials.lua` publishes to `GeneralReactions\Trials\Trials.lua` in this checkout (created 22-11-2026 with user approval). Apply the shared copy/hash/changelog/commit/push checks; this is a general profile without a timeline version. No TODO file (the Cinder Drift TODO was removed 24-11-2026).
 
 
+## Eureka general profile
+
+Live `GeneralReactions\Eureka.lua` publishes to `GeneralReactions\Field duties\Eureka.lua` in this checkout (created 28-11-2026 at the user's request). Apply the shared copy/hash/changelog/commit/push checks; this is a general profile without a timeline version. TODO: `EUREKA-TODO.md` in the Agent workspace.
+
 ## Normal raids general profile
 
 Live GeneralReactions\Normal raids.lua publishes to GeneralReactions\Normal Raids\Normal raids.lua in this checkout (created 22-11-2026 with user approval). Apply the shared copy/hash/changelog/commit/push checks; this is a general profile without a timeline version. TODO: NORMAL-RAIDS-TODO.md in the Agent workspace.
