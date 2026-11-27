@@ -110,6 +110,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Dungeons
 
+- In levelling dungeons, the Origenics DoT blacklists for the Deceiver sentries and Superfluity now apply once instead of re-running constantly. (27-11-2026)
+
 - Dungeon LOL only disables the Prepull Helper in supported dungeons and restores it on exit if it was previously enabled. (26-11-2026)
 
 - In dungeon lol, shared cooldown pooling and targeting only run in supported dungeons, so the action no longer runs in cities. (24-11-2026)
@@ -127,8 +129,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Added Paglth'an boss telegraphs, Levin and Lightning Rod hazard circles, Magitek Core launchpad guidance, and AutoSim forecasts that include both Core add waves. (22-11-2026)
 
 - Improved Origenics final-pack detection, marked safe Laser Lash lanes, and added Ambrose knockback guidance, Arm's Length, and a Superfluity DoT blacklist. (20-11-2026)
-
-- Added Deceiver Android and turret lane guidance, Surge Arm's Length, and a DoT blacklist for the short-lived boss sentries. (20-11-2026)
 
 ### DSR
 
