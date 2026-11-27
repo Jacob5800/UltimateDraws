@@ -1584,14 +1584,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nif eventArgs.markerID~=514 then return end\nlocal p=TensorCore.mGetPlayer()\nif p and p.localmapid==1194 and p.id==eventArgs.entityID then data.frLockUntil=Now()+5400 end\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"48993f6e-b7aa-4837-9609-302ac7669f0b",
+								true,
+							},
+						},
+						name = "Nuisance - personal cone",
+						uuid = "5f41ccb7-3294-4556-a167-975b416ab381",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1194 then return false end\nreturn eventArgs.markerID==514",
+						dequeueIfLuaFalse = true,
+						name = "Nuisance marker",
+						uuid = "48993f6e-b7aa-4837-9609-302ac7669f0b",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Skydeep Cenote/Feather Ray/Draws",
 			eventType = 4,
 			execute = "if eventArgs.markerID~=514 then return end\nlocal p=TensorCore.mGetPlayer()\nif p and p.localmapid==1194 and p.id==eventArgs.entityID then data.frLockUntil=Now()+5400 end",
-			executeType = 2,
 			name = "Nuisance - personal cone",
 			uuid = "5875aaed-ff84-7020-b087-916fafc52eea",
 			version = 2,
@@ -1603,14 +1633,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nif eventArgs.aoeID~=36738 or eventArgs.duration<=0 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1194 or not LevellingDungeons or not LevellingDungeons.settings.draws then return end\nlocal now=Now()\nlocal b=data.frBurst\nif not b or b.finish<=now then\n b={ready=now+100,finish=now+eventArgs.duration*1000,points={}}\n data.frBurst=b\nend\nb.points[#b.points+1]={x=eventArgs.x,z=eventArgs.z}\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"00f63eee-4aa2-459a-8b09-98ac6274cddd",
+								true,
+							},
+						},
+						name = "Bubble Bomb - collect Burst positions",
+						uuid = "e5442bf8-140c-4a2e-955a-01ffac7e359d",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1194 then return false end\nreturn eventArgs.aoeID==36738",
+						dequeueIfLuaFalse = true,
+						name = "Bubble Bomb",
+						uuid = "00f63eee-4aa2-459a-8b09-98ac6274cddd",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Skydeep Cenote/Feather Ray/Draws",
 			eventType = 18,
 			execute = "if eventArgs.aoeID~=36738 or eventArgs.duration<=0 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1194 or not LevellingDungeons or not LevellingDungeons.settings.draws then return end\nlocal now=Now()\nlocal b=data.frBurst\nif not b or b.finish<=now then\n b={ready=now+100,finish=now+eventArgs.duration*1000,points={}}\n data.frBurst=b\nend\nb.points[#b.points+1]={x=eventArgs.x,z=eventArgs.z}",
-			executeType = 2,
 			name = "Bubble Bomb - collect Burst positions",
 			uuid = "22ae22e2-15a9-5391-878c-dccda524195b",
 			version = 2,
@@ -1622,13 +1682,43 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nlocal deadline,b=data.frLockUntil,data.frBurst\nif not deadline and not b and not LevellingFeatherRayOwnsLock then return end\nlocal p=TensorCore.mGetPlayer()\nlocal active=p and p.localmapid==1194 and p.alive and p.incombat\nlocal now=Now()\nlocal heading\nif active and deadline and now<deadline then\n local angles={}\n for _,e in pairs(TensorCore.entityList('alive,myparty') or {}) do\n  if e.id~=p.id and e.pos then angles[#angles+1]=TensorCore.getHeadingToTarget(p.pos,e.pos) end\n end\n if #angles>0 then\n  local best=math.cos(math.rad(20))\n  for i=0,71 do\n   local h=i*math.pi/36\n   local worst=-1\n   for _,a in ipairs(angles) do worst=math.max(worst,math.cos(h-a)) end\n   if worst<best then best,heading=worst,h end\n  end\n end\nelse data.frLockUntil=nil end\nif heading then\n local api=TensorCore.API.TensorACR\n api.setLockFaceHeading(heading)\n if not LevellingFeatherRayOwnsLock then\n  api.setHardLockFace(true)\n  api.toggleLockFace(true)\n  LevellingFeatherRayOwnsLock=true\n end\nelse\nif LevellingFeatherRayOwnsLock then\n local api=TensorCore.API.TensorACR\n api.toggleLockFace(false)\n api.setHardLockFace(false)\n LevellingFeatherRayOwnsLock=nil\nend\nend\nif not b then return end\nif not active or now>=b.finish then data.frBurst=nil;return end\nif b.shown or now<b.ready then return end\nb.shown=true\nif not LevellingDungeons or not LevellingDungeons.settings.draws then return end\nlocal spots={}\nfor x=-118,-92,2 do\n for z=-173,-147,2 do\n  local clear=true\n  for _,q in ipairs(b.points) do\n   if (x-q.x)^2+(z-q.z)^2<7.2^2 then clear=false;break end\n  end\n  if clear then spots[#spots+1]={x=x,z=z,d=(x-p.pos.x)^2+(z-p.pos.z)^2} end\n end\nend\ntable.sort(spots,function(a,b)return a.d<b.d end)\nlocal shown={}\nlocal drawer=TensorCore.getStaticDrawer(0x9033FF33,2)\nfor _,q in ipairs(spots) do\n local separate=true\n for _,other in ipairs(shown) do\n  if (q.x-other.x)^2+(q.z-other.z)^2<16 then separate=false;break end\n end\n if separate then\n  drawer:addTimedCircle(b.finish-now,q.x,p.pos.y,q.z,1,0,false,true)\n  shown[#shown+1]=q\n  if #shown==3 then break end\n end\nend\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"08442246-27d2-4f2a-a793-4e3461633a4d",
+								true,
+							},
+						},
+						name = "Feather Ray - facing and green safe spots",
+						uuid = "d03bcc9c-3c4d-4b4b-bf4a-22e024d9b7c0",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return not not (data.frLockUntil or data.frBurst or LevellingFeatherRayOwnsLock)",
+						dequeueIfLuaFalse = true,
+						name = "Feather Ray state",
+						uuid = "08442246-27d2-4f2a-a793-4e3461633a4d",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Skydeep Cenote/Feather Ray/Draws",
 			execute = "local deadline,b=data.frLockUntil,data.frBurst\nif not deadline and not b and not LevellingFeatherRayOwnsLock then return end\nlocal p=TensorCore.mGetPlayer()\nlocal active=p and p.localmapid==1194 and p.alive and p.incombat\nlocal now=Now()\nlocal heading\nif active and deadline and now<deadline then\n local angles={}\n for _,e in pairs(TensorCore.entityList('alive,myparty') or {}) do\n  if e.id~=p.id and e.pos then angles[#angles+1]=TensorCore.getHeadingToTarget(p.pos,e.pos) end\n end\n if #angles>0 then\n  local best=math.cos(math.rad(20))\n  for i=0,71 do\n   local h=i*math.pi/36\n   local worst=-1\n   for _,a in ipairs(angles) do worst=math.max(worst,math.cos(h-a)) end\n   if worst<best then best,heading=worst,h end\n  end\n end\nelse data.frLockUntil=nil end\nif heading then\n local api=TensorCore.API.TensorACR\n api.setLockFaceHeading(heading)\n if not LevellingFeatherRayOwnsLock then\n  api.setHardLockFace(true)\n  api.toggleLockFace(true)\n  LevellingFeatherRayOwnsLock=true\n end\nelse\nif LevellingFeatherRayOwnsLock then\n local api=TensorCore.API.TensorACR\n api.toggleLockFace(false)\n api.setHardLockFace(false)\n LevellingFeatherRayOwnsLock=nil\nend\nend\nif not b then return end\nif not active or now>=b.finish then data.frBurst=nil;return end\nif b.shown or now<b.ready then return end\nb.shown=true\nif not LevellingDungeons or not LevellingDungeons.settings.draws then return end\nlocal spots={}\nfor x=-118,-92,2 do\n for z=-173,-147,2 do\n  local clear=true\n  for _,q in ipairs(b.points) do\n   if (x-q.x)^2+(z-q.z)^2<7.2^2 then clear=false;break end\n  end\n  if clear then spots[#spots+1]={x=x,z=z,d=(x-p.pos.x)^2+(z-p.pos.z)^2} end\n end\nend\ntable.sort(spots,function(a,b)return a.d<b.d end)\nlocal shown={}\nlocal drawer=TensorCore.getStaticDrawer(0x9033FF33,2)\nfor _,q in ipairs(spots) do\n local separate=true\n for _,other in ipairs(shown) do\n  if (q.x-other.x)^2+(q.z-other.z)^2<16 then separate=false;break end\n end\n if separate then\n  drawer:addTimedCircle(b.finish-now,q.x,p.pos.y,q.z,1,0,false,true)\n  shown[#shown+1]=q\n  if #shown==3 then break end\n end\nend",
-			executeType = 2,
 			name = "Feather Ray - facing and green safe spots",
 			throttleTime = 100,
 			uuid = "da510746-08c5-5e83-9a01-f4eefd63d6bc",
@@ -1641,14 +1731,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nif LevellingFeatherRayOwnsLock then\n local api=TensorCore.API.TensorACR\n api.toggleLockFace(false)\n api.setHardLockFace(false)\n LevellingFeatherRayOwnsLock=nil\nend\ndata.frLockUntil=nil\ndata.frBurst=nil\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"d75b6aac-5613-4714-87a2-e79c5bc34fe7",
+								true,
+							},
+						},
+						name = "Feather Ray - release facing on wipe",
+						uuid = "ecfbbd5a-f3e5-4d2f-99a3-aeefd031e103",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return not not (LevellingFeatherRayOwnsLock or data.frLockUntil or data.frBurst)",
+						dequeueIfLuaFalse = true,
+						name = "Feather Ray state",
+						uuid = "d75b6aac-5613-4714-87a2-e79c5bc34fe7",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Skydeep Cenote/Feather Ray/Draws",
 			eventType = 9,
 			execute = "if LevellingFeatherRayOwnsLock then\n local api=TensorCore.API.TensorACR\n api.toggleLockFace(false)\n api.setHardLockFace(false)\n LevellingFeatherRayOwnsLock=nil\nend\ndata.frLockUntil=nil\ndata.frBurst=nil",
-			executeType = 2,
 			name = "Feather Ray - release facing on wipe",
 			uuid = "8ca3808d-2be2-ccb9-a197-502e22397b5b",
 			version = 2,
@@ -1660,14 +1780,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nif LevellingFeatherRayOwnsLock then\n local api=TensorCore.API.TensorACR\n api.toggleLockFace(false)\n api.setHardLockFace(false)\n LevellingFeatherRayOwnsLock=nil\nend\ndata.frLockUntil=nil\ndata.frBurst=nil\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"8310fa15-8bb6-44f0-993a-f211d2c5c62c",
+								true,
+							},
+						},
+						name = "Feather Ray - release facing on mapchange",
+						uuid = "2dae7788-28ea-45f5-a1d8-092515000e4e",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return not not (LevellingFeatherRayOwnsLock or data.frLockUntil or data.frBurst)",
+						dequeueIfLuaFalse = true,
+						name = "Feather Ray state",
+						uuid = "8310fa15-8bb6-44f0-993a-f211d2c5c62c",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Skydeep Cenote/Feather Ray/Draws",
 			eventType = 11,
 			execute = "if LevellingFeatherRayOwnsLock then\n local api=TensorCore.API.TensorACR\n api.toggleLockFace(false)\n api.setHardLockFace(false)\n LevellingFeatherRayOwnsLock=nil\nend\ndata.frLockUntil=nil\ndata.frBurst=nil",
-			executeType = 2,
 			name = "Feather Ray - release facing on mapchange",
 			uuid = "a390e340-d65c-1a59-a5c8-508adc3905cc",
 			version = 2,
@@ -1679,14 +1829,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nif LevellingFeatherRayOwnsLock then\n local api=TensorCore.API.TensorACR\n api.toggleLockFace(false)\n api.setHardLockFace(false)\n LevellingFeatherRayOwnsLock=nil\nend\ndata.frLockUntil=nil\ndata.frBurst=nil\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"f48b7f94-e97c-4c1f-9ea6-8553885814fa",
+								true,
+							},
+						},
+						name = "Feather Ray - release facing on death",
+						uuid = "825aa945-9c79-4e70-b157-e804beac9480",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return not not (LevellingFeatherRayOwnsLock or data.frLockUntil or data.frBurst)",
+						dequeueIfLuaFalse = true,
+						name = "Feather Ray state",
+						uuid = "f48b7f94-e97c-4c1f-9ea6-8553885814fa",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Skydeep Cenote/Feather Ray/Draws",
 			eventType = 10,
 			execute = "if LevellingFeatherRayOwnsLock then\n local api=TensorCore.API.TensorACR\n api.toggleLockFace(false)\n api.setHardLockFace(false)\n LevellingFeatherRayOwnsLock=nil\nend\ndata.frLockUntil=nil\ndata.frBurst=nil",
-			executeType = 2,
 			name = "Feather Ray - release facing on death",
 			uuid = "f477c8a2-128a-9fdb-a5d4-c314d5608336",
 			version = 2,
@@ -2022,14 +2202,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nif eventArgs.spellID~=36677 or eventArgs.channelTimeMax<=0 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1194 or not p.alive then return end\ndata.maulskullImpact=Now()+eventArgs.channelTimeMax*1000\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"d0b53977-87ca-441a-9c23-e5772783dac9",
+								true,
+							},
+						},
+						name = "Skullcrush - schedule knockback immunity",
+						uuid = "65792936-2d96-446c-8c33-92388a3da6ec",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1194 then return false end\nreturn eventArgs.spellID==36677 and eventArgs.channelTimeMax>0",
+						dequeueIfLuaFalse = true,
+						name = "Skullcrush cast",
+						uuid = "d0b53977-87ca-441a-9c23-e5772783dac9",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Skydeep Cenote/Maulskull",
 			eventType = 3,
 			execute = "if eventArgs.spellID~=36677 or eventArgs.channelTimeMax<=0 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1194 or not p.alive then return end\ndata.maulskullImpact=Now()+eventArgs.channelTimeMax*1000",
-			executeType = 2,
 			name = "Skullcrush - schedule knockback immunity",
 			uuid = "580273fe-25b3-b54b-854e-6ff87ebd6815",
 			version = 2,
@@ -2041,14 +2251,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nif eventArgs.spellID~=36667 or eventArgs.channelTimeMax<=0 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1194 or not p.alive then return end\ndata.maulskullImpact=Now()+eventArgs.channelTimeMax*1000\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"14e39d93-ea61-48ad-aba6-3fef6b0fcdb6",
+								true,
+							},
+						},
+						name = "Ringing Blows - schedule knockback immunity",
+						uuid = "15c80f5c-d8bc-4638-9123-1f85daa064ed",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1194 then return false end\nreturn eventArgs.spellID==36667 and eventArgs.channelTimeMax>0",
+						dequeueIfLuaFalse = true,
+						name = "Ringing Blows cast",
+						uuid = "14e39d93-ea61-48ad-aba6-3fef6b0fcdb6",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Skydeep Cenote/Maulskull",
 			eventType = 3,
 			execute = "if eventArgs.spellID~=36667 or eventArgs.channelTimeMax<=0 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1194 or not p.alive then return end\ndata.maulskullImpact=Now()+eventArgs.channelTimeMax*1000",
-			executeType = 2,
 			name = "Ringing Blows - schedule knockback immunity",
 			uuid = "ad481e17-38e4-4c98-a77b-ec3f398a8d7f",
 			version = 2,
@@ -2060,14 +2300,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nif eventArgs.spellID~=36707 or eventArgs.channelTimeMax<=0 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1194 or not p.alive then return end\ndata.maulskullImpact=Now()+eventArgs.channelTimeMax*1000\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"1952ae9f-338a-4ee6-a89e-f2eef25c3ffe",
+								true,
+							},
+						},
+						name = "Colossal Impact - schedule knockback immunity",
+						uuid = "e3457d2c-df33-4d44-9b00-c5289ff0e043",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1194 then return false end\nreturn eventArgs.spellID==36707 and eventArgs.channelTimeMax>0",
+						dequeueIfLuaFalse = true,
+						name = "Colossal Impact cast",
+						uuid = "1952ae9f-338a-4ee6-a89e-f2eef25c3ffe",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Skydeep Cenote/Maulskull",
 			eventType = 3,
 			execute = "if eventArgs.spellID~=36707 or eventArgs.channelTimeMax<=0 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1194 or not p.alive then return end\ndata.maulskullImpact=Now()+eventArgs.channelTimeMax*1000",
-			executeType = 2,
 			name = "Colossal Impact - schedule knockback immunity",
 			uuid = "9c2b76fb-f615-12f4-8b6a-459f92f94cd1",
 			version = 2,
@@ -2079,13 +2349,43 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nlocal at=data.maulskullImpact\nlocal owned=LevellingMaulskullKB\nif not at and not owned then return end\nlocal p=TensorCore.mGetPlayer()\nlocal now=Now()\nif not at or now>at+750 or not p or p.localmapid~=1194 or not p.alive or not p.incombat or (owned and owned.job~=p.job) then\nlocal owned=LevellingMaulskullKB\nif owned then\n if owned.hotbar then _G[owned.hotbar]=false end\n if owned.toggle then _G[owned.toggle]=false end\n LevellingMaulskullKB=nil\nend\n data.maulskullImpact=nil\n return\nend\nlocal remaining=at-now\nif remaining>2600 or remaining<=0 then return end\nlocal api=TensorCore.API.TensorACR\nif TensorCore.hasBuff(p.id,1209) or TensorCore.hasBuff(p.id,160) then return end\nif owned and owned.toggle then return end\nlocal magic = TensorCore.isCaster(p) or TensorCore.isHealer(p)\nlocal immunityAction = magic and 7559 or 7548\nlocal hotbar\nfor _,option in ipairs(api.getHotbarToggles() or {}) do\n if option.id==immunityAction and option.enabled~=false and type(option.var)=='string' then hotbar=option;break end\nend\nlocal action=hotbar and ActionList:Get(1,immunityAction)\nif action and not action.isoncd and remaining>=450 then\n if _G[hotbar.var]~=true then\n  LevellingMaulskullKB={hotbar=hotbar.var,job=p.job}\n  _G[hotbar.var]=true\n end\n return\nend\nlocal cooldown=action and action.isoncd and action.cdmax-action.cd or 0\nif remaining>800 and action and cooldown<=remaining/1000-.45 then return end\nfor _,option in ipairs(api.getQuickToggles() or {}) do\n local var=option.var\n if option.enabled and type(var)=='string' and var:match('_KBCancel$') then\n  if _G[var]==false then\n   owned=LevellingMaulskullKB or {job=p.job}\n   if owned.hotbar then _G[owned.hotbar]=false;owned.hotbar=nil end\n   owned.toggle=var\n   LevellingMaulskullKB=owned\n   _G[var]=true\n  end\n  return\n end\nend\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"cbb00fd9-70be-46ff-ad9d-5e3ac9181a0f",
+								true,
+							},
+						},
+						name = "Maulskull - Knockback immunity or KB Cancel",
+						uuid = "325e2c38-aab4-4ee0-9626-5e499c6058de",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return not not (LevellingMaulskullKB or data.maulskullImpact)",
+						dequeueIfLuaFalse = true,
+						name = "Maulskull state",
+						uuid = "cbb00fd9-70be-46ff-ad9d-5e3ac9181a0f",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Skydeep Cenote/Maulskull",
 			execute = "local at=data.maulskullImpact\nlocal owned=LevellingMaulskullKB\nif not at and not owned then return end\nlocal p=TensorCore.mGetPlayer()\nlocal now=Now()\nif not at or now>at+750 or not p or p.localmapid~=1194 or not p.alive or not p.incombat or (owned and owned.job~=p.job) then\nlocal owned=LevellingMaulskullKB\nif owned then\n if owned.hotbar then _G[owned.hotbar]=false end\n if owned.toggle then _G[owned.toggle]=false end\n LevellingMaulskullKB=nil\nend\n data.maulskullImpact=nil\n return\nend\nlocal remaining=at-now\nif remaining>2600 or remaining<=0 then return end\nlocal api=TensorCore.API.TensorACR\nif TensorCore.hasBuff(p.id,1209) or TensorCore.hasBuff(p.id,160) then return end\nif owned and owned.toggle then return end\nlocal magic = TensorCore.isCaster(p) or TensorCore.isHealer(p)\nlocal immunityAction = magic and 7559 or 7548\nlocal hotbar\nfor _,option in ipairs(api.getHotbarToggles() or {}) do\n if option.id==immunityAction and option.enabled~=false and type(option.var)=='string' then hotbar=option;break end\nend\nlocal action=hotbar and ActionList:Get(1,immunityAction)\nif action and not action.isoncd and remaining>=450 then\n if _G[hotbar.var]~=true then\n  LevellingMaulskullKB={hotbar=hotbar.var,job=p.job}\n  _G[hotbar.var]=true\n end\n return\nend\nlocal cooldown=action and action.isoncd and action.cdmax-action.cd or 0\nif remaining>800 and action and cooldown<=remaining/1000-.45 then return end\nfor _,option in ipairs(api.getQuickToggles() or {}) do\n local var=option.var\n if option.enabled and type(var)=='string' and var:match('_KBCancel$') then\n  if _G[var]==false then\n   owned=LevellingMaulskullKB or {job=p.job}\n   if owned.hotbar then _G[owned.hotbar]=false;owned.hotbar=nil end\n   owned.toggle=var\n   LevellingMaulskullKB=owned\n   _G[var]=true\n  end\n  return\n end\nend",
-			executeType = 2,
 			name = "Maulskull - Knockback immunity or KB Cancel",
 			throttleTime = 100,
 			uuid = "c427072b-fab6-8e66-99a7-c7f074e56f8a",
@@ -2098,14 +2398,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nlocal owned=LevellingMaulskullKB\nif owned then\n if owned.hotbar then _G[owned.hotbar]=false end\n if owned.toggle then _G[owned.toggle]=false end\n LevellingMaulskullKB=nil\nend\ndata.maulskullImpact=nil\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"d97ef5f4-7340-4abd-95b5-5ce05346f01d",
+								true,
+							},
+						},
+						name = "Maulskull - restore KB controls on wipe",
+						uuid = "4b9c5a32-b2ac-4658-996d-eb14f63a7b73",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return not not (LevellingMaulskullKB or data.maulskullImpact)",
+						dequeueIfLuaFalse = true,
+						name = "Maulskull state",
+						uuid = "d97ef5f4-7340-4abd-95b5-5ce05346f01d",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Skydeep Cenote/Maulskull",
 			eventType = 9,
 			execute = "local owned=LevellingMaulskullKB\nif owned then\n if owned.hotbar then _G[owned.hotbar]=false end\n if owned.toggle then _G[owned.toggle]=false end\n LevellingMaulskullKB=nil\nend\ndata.maulskullImpact=nil",
-			executeType = 2,
 			name = "Maulskull - restore KB controls on wipe",
 			uuid = "03a59919-32cb-4d2f-b489-d69284cefe19",
 			version = 2,
@@ -2117,14 +2447,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nlocal owned=LevellingMaulskullKB\nif owned then\n if owned.hotbar then _G[owned.hotbar]=false end\n if owned.toggle then _G[owned.toggle]=false end\n LevellingMaulskullKB=nil\nend\ndata.maulskullImpact=nil\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"8b992538-fe92-4b75-bc05-4bd47de80947",
+								true,
+							},
+						},
+						name = "Maulskull - restore KB controls on mapchange",
+						uuid = "cc80ea27-b26b-4b48-87fb-7a7346da9530",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return not not (LevellingMaulskullKB or data.maulskullImpact)",
+						dequeueIfLuaFalse = true,
+						name = "Maulskull state",
+						uuid = "8b992538-fe92-4b75-bc05-4bd47de80947",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Skydeep Cenote/Maulskull",
 			eventType = 11,
 			execute = "local owned=LevellingMaulskullKB\nif owned then\n if owned.hotbar then _G[owned.hotbar]=false end\n if owned.toggle then _G[owned.toggle]=false end\n LevellingMaulskullKB=nil\nend\ndata.maulskullImpact=nil",
-			executeType = 2,
 			name = "Maulskull - restore KB controls on mapchange",
 			uuid = "523c8f41-15d2-ade1-b98e-bd39c614f16f",
 			version = 2,
@@ -2136,14 +2496,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nlocal owned=LevellingMaulskullKB\nif owned then\n if owned.hotbar then _G[owned.hotbar]=false end\n if owned.toggle then _G[owned.toggle]=false end\n LevellingMaulskullKB=nil\nend\ndata.maulskullImpact=nil\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"e1a96119-3421-4770-933a-30fd25ded0e6",
+								true,
+							},
+						},
+						name = "Maulskull - restore KB controls on death",
+						uuid = "2e4578bf-9007-447a-b4fd-cb568e480725",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return not not (LevellingMaulskullKB or data.maulskullImpact)",
+						dequeueIfLuaFalse = true,
+						name = "Maulskull state",
+						uuid = "e1a96119-3421-4770-933a-30fd25ded0e6",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "The Skydeep Cenote/Maulskull",
 			eventType = 10,
 			execute = "local owned=LevellingMaulskullKB\nif owned then\n if owned.hotbar then _G[owned.hotbar]=false end\n if owned.toggle then _G[owned.toggle]=false end\n LevellingMaulskullKB=nil\nend\ndata.maulskullImpact=nil",
-			executeType = 2,
 			name = "Maulskull - restore KB controls on death",
 			uuid = "8799f610-d509-084c-9f16-d4005b8fa58e",
 			version = 2,
@@ -2823,14 +3213,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nlocal e=eventArgs\nlocal id=e.aoeID\nlocal sweep=id==36465 or id==36466 or id==36467\nif not sweep and id~=36460 and id~=38518 and id~=38519 and id~=37921 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1208 or e.friendly or e.duration<=0 or not LevellingDungeons or not LevellingDungeons.settings.draws then return end\nif not sweep then\n local drawer=TensorCore.getStaticDrawer(0x603333FF,2)\n drawer:addTimedCircle(e.duration*1000,e.x,e.y,e.z,id==36460 and 2 or id==37921 and 5 or 6,0,false,true)\n return\nend\nlocal now=Now()\nlocal q=data.origenicsRiot\nif not q or now>q.expires then\n q={first=1,last=0}\n data.origenicsRiot=q\nend\nlocal prior=q[q.last]\nlocal impact=prior and prior.impact+2000 or now+(e.duration+7.3)*1000\nq.last=q.last+1\nq[q.last]={x=e.x,y=e.y,z=e.z,heading=e.heading,angle=math.rad(id==36467 and 90 or 210),impact=impact,hit=id+4}\nq.expires=impact+900\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"3b09e99d-909c-45f9-9f77-163bb4c857e2",
+								true,
+							},
+						},
+						name = "Writhing Riot previews and poison circles",
+						uuid = "47f9cc5e-caed-402f-9287-14298cc0f6e5",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1208 then return false end\nlocal ids={[36465]=true,[36466]=true,[36467]=true,[36460]=true,[38518]=true,[38519]=true,[37921]=true}\nreturn ids[eventArgs.aoeID]==true",
+						dequeueIfLuaFalse = true,
+						name = "Writhing Riot attacks",
+						uuid = "3b09e99d-909c-45f9-9f77-163bb4c857e2",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Origenics/Herpekaris/Draws",
 			eventType = 18,
 			execute = "local e=eventArgs\nlocal id=e.aoeID\nlocal sweep=id==36465 or id==36466 or id==36467\nif not sweep and id~=36460 and id~=38518 and id~=38519 and id~=37921 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1208 or e.friendly or e.duration<=0 or not LevellingDungeons or not LevellingDungeons.settings.draws then return end\nif not sweep then\n local drawer=TensorCore.getStaticDrawer(0x603333FF,2)\n drawer:addTimedCircle(e.duration*1000,e.x,e.y,e.z,id==36460 and 2 or id==37921 and 5 or 6,0,false,true)\n return\nend\nlocal now=Now()\nlocal q=data.origenicsRiot\nif not q or now>q.expires then\n q={first=1,last=0}\n data.origenicsRiot=q\nend\nlocal prior=q[q.last]\nlocal impact=prior and prior.impact+2000 or now+(e.duration+7.3)*1000\nq.last=q.last+1\nq[q.last]={x=e.x,y=e.y,z=e.z,heading=e.heading,angle=math.rad(id==36467 and 90 or 210),impact=impact,hit=id+4}\nq.expires=impact+900",
-			executeType = 2,
 			name = "Writhing Riot previews and poison circles",
 			uuid = "5f8294c2-d17a-9f53-8c25-7d44e1f720ed",
 			version = 2,
@@ -2842,14 +3262,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nlocal q=data.origenicsRiot\nlocal head=q and q[q.first]\nif not head or eventArgs.spellID~=head.hit or eventArgs.entityContentID~=12741 then return end\nq.first=q.first+1\nif q.first>q.last then data.origenicsRiot=nil end\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"03c9020f-ca9d-4cff-abe7-5e7f6f9dcf3f",
+								true,
+							},
+						},
+						name = "Writhing Riot - advance on sweep hit",
+						uuid = "437e8584-c0cb-46c7-9771-f42da0fb0a09",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return not not (data.origenicsRiot and eventArgs.entityContentID==12741)",
+						dequeueIfLuaFalse = true,
+						name = "Writhing Riot queued",
+						uuid = "03c9020f-ca9d-4cff-abe7-5e7f6f9dcf3f",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Origenics/Herpekaris/Draws",
 			eventType = 2,
 			execute = "local q=data.origenicsRiot\nlocal head=q and q[q.first]\nif not head or eventArgs.spellID~=head.hit or eventArgs.entityContentID~=12741 then return end\nq.first=q.first+1\nif q.first>q.last then data.origenicsRiot=nil end",
-			executeType = 2,
 			name = "Writhing Riot - advance on sweep hit",
 			uuid = "34f63a75-4847-2360-b2a2-cc63fafde25a",
 			version = 2,
@@ -3042,14 +3492,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nif eventArgs.entityContentID~=12694 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1208 then return end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nlocal model=Argus.getEntityModel(eventArgs.entityID)\nif not e or not e.pos or (model~=16753 and model~=16754) or math.abs(e.pos.z+162)>1 then return end\nlocal lanes=data.deceiverAndroids\nlocal now=Now()\nif not lanes or now>=lanes.finish then lanes={finish=now+20000};data.deceiverAndroids=lanes end\nlanes[eventArgs.entityID]={x=e.pos.x,y=e.pos.y,real=model==16753}\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"be634fd5-347a-4b31-b745-35218f4eb4ca",
+								true,
+							},
+						},
+						name = "Initialize Androids - preview live and flickering lanes",
+						uuid = "b61f0290-5edd-464b-83ff-069b10d0024e",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1208 then return false end\nreturn eventArgs.entityContentID==12694",
+						dequeueIfLuaFalse = true,
+						name = "Android appeared",
+						uuid = "be634fd5-347a-4b31-b745-35218f4eb4ca",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Origenics/Deceiver/Draws",
 			eventType = 5,
 			execute = "if eventArgs.entityContentID~=12694 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1208 then return end\nlocal e=TensorCore.mGetEntity(eventArgs.entityID)\nlocal model=Argus.getEntityModel(eventArgs.entityID)\nif not e or not e.pos or (model~=16753 and model~=16754) or math.abs(e.pos.z+162)>1 then return end\nlocal lanes=data.deceiverAndroids\nlocal now=Now()\nif not lanes or now>=lanes.finish then lanes={finish=now+20000};data.deceiverAndroids=lanes end\nlanes[eventArgs.entityID]={x=e.pos.x,y=e.pos.y,real=model==16753}",
-			executeType = 2,
 			name = "Initialize Androids - preview live and flickering lanes",
 			uuid = "f856a0fb-2b72-fd7c-ae53-587a938aa606",
 			version = 2,
@@ -3061,14 +3541,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nlocal e=eventArgs\nlocal id=e.aoeID\nif id~=36372 and id~=36373 and id~=36365 and id~=36426 and id~=36366 and id~=38807 and id~=36367 and id~=38320 and id~=36370 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1208 then return end\nif e.friendly or e.duration<=0 then return end\nlocal now=Now()\nlocal ms=e.duration*1000\nif id==36372 or id==36373 then\n local lanes=data.deceiverAndroids\n if not lanes or now>=lanes.finish then lanes={finish=now+ms+300};data.deceiverAndroids=lanes end\n lanes.finish=now+ms+300\n lanes[e.entityID]={x=e.x,y=e.y,real=id==36372}\nelseif id==36365 or id==36426 then\n local turrets=data.deceiverTurrets\n if not turrets or now>=turrets.expires then turrets={expires=now+45000,lanes={}};data.deceiverTurrets=turrets end\n turrets.lanes[e.entityID]={x=e.x,y=e.y,z=e.z,h=e.heading,real=id==36365}\nelseif id==36367 then\n data.deceiverSurge=now+ms\nelse\n if not LevellingDungeons or not LevellingDungeons.settings.draws then return end\n local red=TensorCore.getStaticDrawer(0x603333FF,2)\n if id==36366 or id==38807 then\n  local drawer=id==38807 and TensorCore.getStaticDrawer(0x6033FF33,2) or red\n  drawer:addTimedRect(ms,e.x,e.y,e.z,40,10,e.heading,0,false,true)\n elseif id==36370 then red:addTimedCone(ms,e.x,e.y,e.z,30,math.pi/2,e.heading,0,false,true)\n else red:addTimedCircle(ms,e.x,e.y,e.z,5,0,false,true) end\nend\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"d816777f-c42f-4de3-b8b5-819e3cde7983",
+								true,
+							},
+						},
+						name = "Deceiver - confirm lanes, turret layout and Surge",
+						uuid = "fb7a34a8-af09-4990-bed6-27b16a2116f1",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1208 then return false end\nlocal ids={[36372]=true,[36373]=true,[36365]=true,[36426]=true,[36366]=true,[38807]=true,[36367]=true,[38320]=true,[36370]=true}\nreturn ids[eventArgs.aoeID]==true",
+						dequeueIfLuaFalse = true,
+						name = "Deceiver attacks",
+						uuid = "d816777f-c42f-4de3-b8b5-819e3cde7983",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Origenics/Deceiver/Draws",
 			eventType = 18,
 			execute = "local e=eventArgs\nlocal id=e.aoeID\nif id~=36372 and id~=36373 and id~=36365 and id~=36426 and id~=36366 and id~=38807 and id~=36367 and id~=38320 and id~=36370 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1208 then return end\nif e.friendly or e.duration<=0 then return end\nlocal now=Now()\nlocal ms=e.duration*1000\nif id==36372 or id==36373 then\n local lanes=data.deceiverAndroids\n if not lanes or now>=lanes.finish then lanes={finish=now+ms+300};data.deceiverAndroids=lanes end\n lanes.finish=now+ms+300\n lanes[e.entityID]={x=e.x,y=e.y,real=id==36372}\nelseif id==36365 or id==36426 then\n local turrets=data.deceiverTurrets\n if not turrets or now>=turrets.expires then turrets={expires=now+45000,lanes={}};data.deceiverTurrets=turrets end\n turrets.lanes[e.entityID]={x=e.x,y=e.y,z=e.z,h=e.heading,real=id==36365}\nelseif id==36367 then\n data.deceiverSurge=now+ms\nelse\n if not LevellingDungeons or not LevellingDungeons.settings.draws then return end\n local red=TensorCore.getStaticDrawer(0x603333FF,2)\n if id==36366 or id==38807 then\n  local drawer=id==38807 and TensorCore.getStaticDrawer(0x6033FF33,2) or red\n  drawer:addTimedRect(ms,e.x,e.y,e.z,40,10,e.heading,0,false,true)\n elseif id==36370 then red:addTimedCone(ms,e.x,e.y,e.z,30,math.pi/2,e.heading,0,false,true)\n else red:addTimedCircle(ms,e.x,e.y,e.z,5,0,false,true) end\nend",
-			executeType = 2,
 			name = "Deceiver - confirm lanes, turret layout and Surge",
 			uuid = "7ce47f19-47aa-5585-bda3-6ed6e8ac7d23",
 			version = 2,
@@ -3099,14 +3609,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nlocal id=eventArgs.spellID\nif id==36372 or id==36373 then data.deceiverAndroids=nil\nelseif id==36367 then data.deceiverTurrets=nil;data.deceiverSurge=nil end\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"4c1b6370-d4cd-4af2-8355-70a80fa8a16d",
+								true,
+							},
+						},
+						name = "Deceiver - clear resolved lane draws",
+						uuid = "b052af54-a9af-4471-aaab-e23aa99fe566",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local id=eventArgs.spellID\nif id==36372 or id==36373 then return data.deceiverAndroids~=nil end\nreturn id==36367 and not not (data.deceiverTurrets or data.deceiverSurge)",
+						dequeueIfLuaFalse = true,
+						name = "Deceiver draws to clear",
+						uuid = "4c1b6370-d4cd-4af2-8355-70a80fa8a16d",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Origenics/Deceiver/Draws",
 			eventType = 2,
 			execute = "local id=eventArgs.spellID\nif id==36372 or id==36373 then data.deceiverAndroids=nil\nelseif id==36367 then data.deceiverTurrets=nil;data.deceiverSurge=nil end",
-			executeType = 2,
 			name = "Deceiver - clear resolved lane draws",
 			uuid = "b2a24912-42cf-60d1-a0d6-13b45cfb79a9",
 			version = 2,
@@ -3118,13 +3658,43 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nlocal impact=data.deceiverSurge\nlocal owned=LevellingDeceiverArms\nif not impact and not owned then return end\nlocal p=TensorCore.mGetPlayer()\nlocal now=Now()\nif not p or p.localmapid~=1208 or not p.alive or not p.incombat or not impact or now>impact+450 then\n if owned then _G[owned]=false;LevellingDeceiverArms=nil end\n data.deceiverSurge=nil\n return\nend\nif data.deceiverArmsAt==impact or impact-now>2600 or impact-now<450 then return end\nlocal magic = TensorCore.isCaster(p) or TensorCore.isHealer(p)\nlocal immunityAction = magic and 7559 or 7548\nlocal action=ActionList:Get(1,immunityAction)\nif not action or action.isoncd or TensorCore.hasBuff(p.id,1209) or TensorCore.hasBuff(p.id,160) then return end\nfor _,option in ipairs(TensorCore.API.TensorACR.getHotbarToggles() or {}) do\n if option.id==immunityAction and option.enabled~=false and type(option.var)=='string' then\n  if _G[option.var]~=true then _G[option.var]=true;LevellingDeceiverArms=option.var end\n  data.deceiverArmsAt=impact\n  return\n end\nend\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"0ccba971-88b7-47e8-8531-a3435b8fd5f7",
+								true,
+							},
+						},
+						name = "Surge - request Knockback immunity",
+						uuid = "6594c2be-19d9-4455-8374-1d67f1c906f5",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return not not (data.deceiverSurge or LevellingDeceiverArms)",
+						dequeueIfLuaFalse = true,
+						name = "Surge state",
+						uuid = "0ccba971-88b7-47e8-8531-a3435b8fd5f7",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Origenics/Deceiver/Draws",
 			execute = "local impact=data.deceiverSurge\nlocal owned=LevellingDeceiverArms\nif not impact and not owned then return end\nlocal p=TensorCore.mGetPlayer()\nlocal now=Now()\nif not p or p.localmapid~=1208 or not p.alive or not p.incombat or not impact or now>impact+450 then\n if owned then _G[owned]=false;LevellingDeceiverArms=nil end\n data.deceiverSurge=nil\n return\nend\nif data.deceiverArmsAt==impact or impact-now>2600 or impact-now<450 then return end\nlocal magic = TensorCore.isCaster(p) or TensorCore.isHealer(p)\nlocal immunityAction = magic and 7559 or 7548\nlocal action=ActionList:Get(1,immunityAction)\nif not action or action.isoncd or TensorCore.hasBuff(p.id,1209) or TensorCore.hasBuff(p.id,160) then return end\nfor _,option in ipairs(TensorCore.API.TensorACR.getHotbarToggles() or {}) do\n if option.id==immunityAction and option.enabled~=false and type(option.var)=='string' then\n  if _G[option.var]~=true then _G[option.var]=true;LevellingDeceiverArms=option.var end\n  data.deceiverArmsAt=impact\n  return\n end\nend",
-			executeType = 2,
 			name = "Surge - request Knockback immunity",
 			throttleTime = 100,
 			uuid = "b1b348e1-e62e-c74d-a35d-04aefb15cf6c",
@@ -3346,14 +3916,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nlocal e=eventArgs\nlocal id=e.aoeID\nif id~=36433 and id~=36434 and id~=39072 and id~=36428 and id~=36429 and id~=36438 and id~=39233 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1208 or e.friendly or e.duration<=0 then return end\nlocal now=Now()\nif id==36433 or id==36434 or id==39072 then\n local kb=data.origenicsExpulsion\n if not kb or now>kb.expires then kb={tiles={},expires=now+11000};data.origenicsExpulsion=kb end\n if id==39072 then\n  kb.cleave={x=e.x,y=e.y,z=e.z,h=e.heading,finish=now+e.duration*1000}\n else\n  local x,z=e.x<190 and 180 or 200,e.z<0 and -10 or 10\n  kb.tiles[e.entityID]={x=x,y=e.y,z=z,h=e.heading}\n  kb.impact=now+e.duration*1000\n end\n return\nend\nif not LevellingDungeons or not LevellingDungeons.settings.draws then return end\nlocal red=TensorCore.getStaticDrawer(0x603333FF,2)\nlocal ms=e.duration*1000\nif id==36428 then red:addTimedRect(ms,e.x,e.y,e.z,70,13,e.heading,0,false,true)\nelseif id==39233 then red:addTimedCone(ms,e.x,e.y,e.z,26,math.pi,e.heading,0,false,true)\nelse red:addTimedCircle(ms,e.x,e.y,e.z,id==36429 and 22 or 5,0,false,true) end\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"bd217950-cdfc-486a-9cc6-c93fcd2a57af",
+								true,
+							},
+						},
+						name = "Ambrose - capture knockback tiles and draw live attacks",
+						uuid = "4e30340e-121d-4de3-aca8-e720ba019352",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1208 then return false end\nlocal ids={[36433]=true,[36434]=true,[39072]=true,[36428]=true,[36429]=true,[36438]=true,[39233]=true}\nreturn ids[eventArgs.aoeID]==true",
+						dequeueIfLuaFalse = true,
+						name = "Ambrose attacks",
+						uuid = "bd217950-cdfc-486a-9cc6-c93fcd2a57af",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Origenics/Ambrose the Undeparted/Draws",
 			eventType = 18,
 			execute = "local e=eventArgs\nlocal id=e.aoeID\nif id~=36433 and id~=36434 and id~=39072 and id~=36428 and id~=36429 and id~=36438 and id~=39233 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1208 or e.friendly or e.duration<=0 then return end\nlocal now=Now()\nif id==36433 or id==36434 or id==39072 then\n local kb=data.origenicsExpulsion\n if not kb or now>kb.expires then kb={tiles={},expires=now+11000};data.origenicsExpulsion=kb end\n if id==39072 then\n  kb.cleave={x=e.x,y=e.y,z=e.z,h=e.heading,finish=now+e.duration*1000}\n else\n  local x,z=e.x<190 and 180 or 200,e.z<0 and -10 or 10\n  kb.tiles[e.entityID]={x=x,y=e.y,z=z,h=e.heading}\n  kb.impact=now+e.duration*1000\n end\n return\nend\nif not LevellingDungeons or not LevellingDungeons.settings.draws then return end\nlocal red=TensorCore.getStaticDrawer(0x603333FF,2)\nlocal ms=e.duration*1000\nif id==36428 then red:addTimedRect(ms,e.x,e.y,e.z,70,13,e.heading,0,false,true)\nelseif id==39233 then red:addTimedCone(ms,e.x,e.y,e.z,26,math.pi,e.heading,0,false,true)\nelse red:addTimedCircle(ms,e.x,e.y,e.z,id==36429 and 22 or 5,0,false,true) end",
-			executeType = 2,
 			name = "Ambrose - capture knockback tiles and draw live attacks",
 			uuid = "e4beed09-dcee-74e9-8f9a-3a1ee1944fa7",
 			version = 2,
@@ -3384,13 +3984,43 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nlocal kb=data.origenicsExpulsion\nlocal impact=kb and kb.impact\nlocal owned=LevellingAmbroseArms\nif not impact and not owned then return end\nlocal p=TensorCore.mGetPlayer()\nlocal now=Now()\nif not p or p.localmapid~=1208 or not p.alive or not p.incombat or not impact or now>impact+450 then\n if owned then _G[owned]=false;LevellingAmbroseArms=nil end\n\n return\nend\nif data.ambroseArmsAt==impact or impact-now>2600 or impact-now<450 then return end\nlocal cone=kb.cleave\nif cone and (p.pos.x-190)*math.sin(cone.h)+p.pos.z*math.cos(cone.h)>-1 then return end\nlocal magic = TensorCore.isCaster(p) or TensorCore.isHealer(p)\nlocal immunityAction = magic and 7559 or 7548\nlocal action=ActionList:Get(1,immunityAction)\nif not action or action.isoncd or TensorCore.hasBuff(p.id,1209) or TensorCore.hasBuff(p.id,160) then return end\nfor _,option in ipairs(TensorCore.API.TensorACR.getHotbarToggles() or {}) do\n if option.id==immunityAction and option.enabled~=false and type(option.var)=='string' then\n  if _G[option.var]~=true then _G[option.var]=true;LevellingAmbroseArms=option.var end\n  data.ambroseArmsAt=impact\n  return\n end\nend\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"1de069be-522d-465a-862d-3cc5c618ea1a",
+								true,
+							},
+						},
+						name = "Extrasensory Expulsion - Knockback immunity on the safe side",
+						uuid = "3616e226-4fc0-4d45-b60d-1fc4b5668125",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return not not ((data.origenicsExpulsion and data.origenicsExpulsion.impact) or LevellingAmbroseArms)",
+						dequeueIfLuaFalse = true,
+						name = "Expulsion state",
+						uuid = "1de069be-522d-465a-862d-3cc5c618ea1a",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Origenics/Ambrose the Undeparted/Draws",
 			execute = "local kb=data.origenicsExpulsion\nlocal impact=kb and kb.impact\nlocal owned=LevellingAmbroseArms\nif not impact and not owned then return end\nlocal p=TensorCore.mGetPlayer()\nlocal now=Now()\nif not p or p.localmapid~=1208 or not p.alive or not p.incombat or not impact or now>impact+450 then\n if owned then _G[owned]=false;LevellingAmbroseArms=nil end\n\n return\nend\nif data.ambroseArmsAt==impact or impact-now>2600 or impact-now<450 then return end\nlocal cone=kb.cleave\nif cone and (p.pos.x-190)*math.sin(cone.h)+p.pos.z*math.cos(cone.h)>-1 then return end\nlocal magic = TensorCore.isCaster(p) or TensorCore.isHealer(p)\nlocal immunityAction = magic and 7559 or 7548\nlocal action=ActionList:Get(1,immunityAction)\nif not action or action.isoncd or TensorCore.hasBuff(p.id,1209) or TensorCore.hasBuff(p.id,160) then return end\nfor _,option in ipairs(TensorCore.API.TensorACR.getHotbarToggles() or {}) do\n if option.id==immunityAction and option.enabled~=false and type(option.var)=='string' then\n  if _G[option.var]~=true then _G[option.var]=true;LevellingAmbroseArms=option.var end\n  data.ambroseArmsAt=impact\n  return\n end\nend",
-			executeType = 2,
 			name = "Extrasensory Expulsion - Knockback immunity on the safe side",
 			throttleTime = 100,
 			uuid = "ed198006-b618-6afa-a748-dd98e9a490ba",

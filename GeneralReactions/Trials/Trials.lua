@@ -2503,14 +2503,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nlocal e=eventArgs\nlocal id=e.aoeID\nlocal cone=id==43126 and 120 or id==43129 and 45 or id==43083 and 60\nlocal radius=(id==43092 or id==43102 or id==43439) and 4\nlocal thunder=id==43084 or id==43085 or id==43446 or id==43447\nif not cone and not radius and not thunder and id~=43113 and id~=43479 then return end\nif e.friendly or e.duration<=0 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1270 then return end\nlocal ms=e.startTime+e.duration*1000-Now()\nif ms<=0 then return end\nif thunder then\n data.recollectionThunder=data.recollectionThunder or {}\n data.recollectionThunder[e.entityID]={x=e.x,y=e.y,z=e.z,at=Now()+ms,donut=id==43085 or id==43447}\n return\nend\nlocal red=TensorCore.getStaticDrawer(0x803333FF,2)\nif cone then\n red:addTimedCone(ms,e.x,e.y,e.z,id==43129 and 50 or 24,math.rad(cone),e.heading,0,false,true)\nelseif radius then\n if id==43102 or id==43439 then\n  data.recollectionStrikes=data.recollectionStrikes or {}\n  data.recollectionStrikes[e.entityID]={x=e.x-100,z=e.z-100,finish=Now()+ms}\n end\n red:addTimedCircle(ms,e.x,e.y,e.z,radius,0,false,true)\nelseif id==43113 then\n red:addTimedRect(ms,e.x,e.y,e.z,24,64,e.heading,0,false,true)\nelse\n local green=TensorCore.getStaticDrawer(0x6033FF33,2)\n green:addTimedCircle(ms,e.x,e.y,e.z,6,0,false,true)\nend\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"514830f5-4a56-480b-8652-d67c3765c316",
+								true,
+							},
+						},
+						name = "Zelenia - cast telegraphs and Bloom knockback setup",
+						uuid = "4c543cdc-d96e-4cb1-9be5-0ba98194741a",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1270 then return false end\nreturn true",
+						dequeueIfLuaFalse = true,
+						name = "Zelenia duty",
+						uuid = "514830f5-4a56-480b-8652-d67c3765c316",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Recollection/Zelenia/Draws",
 			eventType = 18,
 			execute = "local e=eventArgs\nlocal id=e.aoeID\nlocal cone=id==43126 and 120 or id==43129 and 45 or id==43083 and 60\nlocal radius=(id==43092 or id==43102 or id==43439) and 4\nlocal thunder=id==43084 or id==43085 or id==43446 or id==43447\nif not cone and not radius and not thunder and id~=43113 and id~=43479 then return end\nif e.friendly or e.duration<=0 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1270 then return end\nlocal ms=e.startTime+e.duration*1000-Now()\nif ms<=0 then return end\nif thunder then\n data.recollectionThunder=data.recollectionThunder or {}\n data.recollectionThunder[e.entityID]={x=e.x,y=e.y,z=e.z,at=Now()+ms,donut=id==43085 or id==43447}\n return\nend\nlocal red=TensorCore.getStaticDrawer(0x803333FF,2)\nif cone then\n red:addTimedCone(ms,e.x,e.y,e.z,id==43129 and 50 or 24,math.rad(cone),e.heading,0,false,true)\nelseif radius then\n if id==43102 or id==43439 then\n  data.recollectionStrikes=data.recollectionStrikes or {}\n  data.recollectionStrikes[e.entityID]={x=e.x-100,z=e.z-100,finish=Now()+ms}\n end\n red:addTimedCircle(ms,e.x,e.y,e.z,radius,0,false,true)\nelseif id==43113 then\n red:addTimedRect(ms,e.x,e.y,e.z,24,64,e.heading,0,false,true)\nelse\n local green=TensorCore.getStaticDrawer(0x6033FF33,2)\n green:addTimedCircle(ms,e.x,e.y,e.z,6,0,false,true)\nend",
-			executeType = 2,
 			name = "Zelenia - cast telegraphs and Bloom knockback setup",
 			uuid = "fac68a58-3cfd-67aa-b882-4723fd5f3563",
 			version = 2,
@@ -2541,14 +2571,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nlocal id=eventArgs.markerID\nif id~=581 and id~=590 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1270 then return end\nif id==581 and eventArgs.entityID~=p.id then return end\nif id==590 then\n data.recollectionStack={id=eventArgs.entityID,finish=Now()+14000}\n return\nend\nlocal red=TensorCore.getStaticDrawer(0x803333FF,2)\nred:addTimedCircleOnEnt(8000,eventArgs.entityID,4,0,false,true)\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"4642c59f-97c3-47bc-8969-75e97aedbcf3",
+								true,
+							},
+						},
+						name = "Shock spreads and Stock Break stack",
+						uuid = "f80c158e-f927-4563-b648-4468c33f5dab",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1270 then return false end\nreturn eventArgs.markerID==581 or eventArgs.markerID==590",
+						dequeueIfLuaFalse = true,
+						name = "Zelenia marker",
+						uuid = "4642c59f-97c3-47bc-8969-75e97aedbcf3",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Recollection/Zelenia/Draws",
 			eventType = 4,
 			execute = "local id=eventArgs.markerID\nif id~=581 and id~=590 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1270 then return end\nif id==581 and eventArgs.entityID~=p.id then return end\nif id==590 then\n data.recollectionStack={id=eventArgs.entityID,finish=Now()+14000}\n return\nend\nlocal red=TensorCore.getStaticDrawer(0x803333FF,2)\nred:addTimedCircleOnEnt(8000,eventArgs.entityID,4,0,false,true)",
-			executeType = 2,
 			name = "Shock spreads and Stock Break stack",
 			uuid = "ed974d73-15ca-dc50-b75f-88a2b912fe81",
 			version = 2,
@@ -2560,14 +2620,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nlocal e=eventArgs\nlocal tile=e.a1-4\nif tile<0 or tile>5 then return end\nlocal lit=(e.a2==256 and e.a3==64) or (e.a2==64 and e.a3==128)\nlocal clear=e.a2==32 and e.a3==4\nif not lit and not clear then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1270 then return end\ndata.recollectionTiles=data.recollectionTiles or {}\ndata.recollectionTiles[tile]=lit or nil\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"42502bd4-0eb7-49f7-9074-0a162c34417f",
+								true,
+							},
+						},
+						name = "Rose tiles - track confirmed map effects",
+						uuid = "4934f4d2-3699-479a-a3ad-f5ba4028d25f",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1270 then return false end\nreturn true",
+						dequeueIfLuaFalse = true,
+						name = "Zelenia duty",
+						uuid = "42502bd4-0eb7-49f7-9074-0a162c34417f",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Recollection/Zelenia/Draws",
 			eventType = 14,
 			execute = "local e=eventArgs\nlocal tile=e.a1-4\nif tile<0 or tile>5 then return end\nlocal lit=(e.a2==256 and e.a3==64) or (e.a2==64 and e.a3==128)\nlocal clear=e.a2==32 and e.a3==4\nif not lit and not clear then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1270 then return end\ndata.recollectionTiles=data.recollectionTiles or {}\ndata.recollectionTiles[tile]=lit or nil",
-			executeType = 2,
 			name = "Rose tiles - track confirmed map effects",
 			uuid = "86d0df68-3659-aece-9975-fb192315dd5b",
 			version = 2,
@@ -2579,14 +2669,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nif eventArgs.newTetherID~=197 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1270 then return end\nlocal drop=TensorCore.mGetEntity(eventArgs.newTargetID)\nif not drop or not drop.pos or not drop.pos.h then return end\nlocal q=drop.pos\nlocal dx=q.x+29*math.sin(q.h)-100\nlocal dz=q.z+29*math.cos(q.h)-100\nif dx*dx+dz*dz<1 then return end\nlocal direction=math.atan2(dx,dz)\nlocal tile=math.floor((180-math.deg(direction))/60+.5)%6\ndata.recollectionTiles=data.recollectionTiles or {}\ndata.recollectionTiles[tile]=true\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"1b865f9b-4c50-4e5a-b736-b0af27eb94de",
+								true,
+							},
+						},
+						name = "Roseblood Drop - track connected tile",
+						uuid = "1d044e7d-0e51-47c4-aada-28fba65db838",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1270 then return false end\nreturn eventArgs.newTetherID==197",
+						dequeueIfLuaFalse = true,
+						name = "Roseblood tether",
+						uuid = "1b865f9b-4c50-4e5a-b736-b0af27eb94de",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Recollection/Zelenia/Draws",
 			eventType = 15,
 			execute = "if eventArgs.newTetherID~=197 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1270 then return end\nlocal drop=TensorCore.mGetEntity(eventArgs.newTargetID)\nif not drop or not drop.pos or not drop.pos.h then return end\nlocal q=drop.pos\nlocal dx=q.x+29*math.sin(q.h)-100\nlocal dz=q.z+29*math.cos(q.h)-100\nif dx*dx+dz*dz<1 then return end\nlocal direction=math.atan2(dx,dz)\nlocal tile=math.floor((180-math.deg(direction))/60+.5)%6\ndata.recollectionTiles=data.recollectionTiles or {}\ndata.recollectionTiles[tile]=true",
-			executeType = 2,
 			name = "Roseblood Drop - track connected tile",
 			uuid = "457f51b9-d61a-c490-a3ef-2c415994cf93",
 			version = 2,
@@ -2598,14 +2718,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nlocal e=eventArgs\nlocal id=e.spellID\nif id~=43057 and id~=43063 and id~=43090 and id~=43102 and id~=43439 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1270 then return end\nif id==43090 then data.recollectionStack=nil;return end\nif id==43102 or id==43439 then\n if data.recollectionStrikes then data.recollectionStrikes[e.entityID]=nil end\n return\nend\nlocal actor=TensorCore.mGetEntity(e.entityID)\nif not actor or not actor.pos then return end\nlocal q=actor.pos\nlocal puddles=data.recollectionShock\nif id==43057 then\n if not puddles then puddles={};data.recollectionShock=puddles end\n puddles[e.entityID]={x=q.x,y=q.y,z=q.z,cycles=0,expires=Now()+22000}\nelseif puddles then\n local key=puddles[e.entityID] and e.entityID\n if not key then\n  local best=1\n  for k,a in pairs(puddles) do\n   local d=(q.x-a.x)^2+(q.z-a.z)^2\n   if d<best then key,best=k,d end\n  end\n end\n if key then\n  local a=puddles[key]\n  a.cycles=a.cycles+1\n  if a.cycles>=2 then puddles[key]=nil end\n end\nend\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"68556221-2a24-4169-af67-84e56b4cf5e9",
+								true,
+							},
+						},
+						name = "Shock and Stock Break - track resolution",
+						uuid = "59ea920f-0e6e-4e4d-885b-d38fe941f598",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1270 then return false end\nlocal ids={[43057]=true,[43063]=true,[43090]=true,[43102]=true,[43439]=true}\nreturn ids[eventArgs.spellID]==true",
+						dequeueIfLuaFalse = true,
+						name = "Shock or Stock cast",
+						uuid = "68556221-2a24-4169-af67-84e56b4cf5e9",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "Recollection/Zelenia/Draws",
 			eventType = 2,
 			execute = "local e=eventArgs\nlocal id=e.spellID\nif id~=43057 and id~=43063 and id~=43090 and id~=43102 and id~=43439 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1270 then return end\nif id==43090 then data.recollectionStack=nil;return end\nif id==43102 or id==43439 then\n if data.recollectionStrikes then data.recollectionStrikes[e.entityID]=nil end\n return\nend\nlocal actor=TensorCore.mGetEntity(e.entityID)\nif not actor or not actor.pos then return end\nlocal q=actor.pos\nlocal puddles=data.recollectionShock\nif id==43057 then\n if not puddles then puddles={};data.recollectionShock=puddles end\n puddles[e.entityID]={x=q.x,y=q.y,z=q.z,cycles=0,expires=Now()+22000}\nelseif puddles then\n local key=puddles[e.entityID] and e.entityID\n if not key then\n  local best=1\n  for k,a in pairs(puddles) do\n   local d=(q.x-a.x)^2+(q.z-a.z)^2\n   if d<best then key,best=k,d end\n  end\n end\n if key then\n  local a=puddles[key]\n  a.cycles=a.cycles+1\n  if a.cycles>=2 then puddles[key]=nil end\n end\nend",
-			executeType = 2,
 			name = "Shock and Stock Break - track resolution",
 			uuid = "c749d704-04ee-c7d4-9789-1a9a574ce780",
 			version = 2,

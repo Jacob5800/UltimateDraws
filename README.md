@@ -110,6 +110,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Dungeons
 
+- levelling dungeons reactions for other duties no longer wait in the queue. (27-11-2026)
+
 - levelling dungeons and highleveldungeons: duty setup and cooldown holds now run only when there is something to do, reducing console spam. (27-11-2026)
 
 - In dungeon lol, the cooldown pooling, dying-add cast, Thunder and Radiant Finale holds now run only when a hold is needed or due for renewal, reducing console spam. (27-11-2026)
@@ -127,8 +129,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - In levelling dungeons, the Origenics DoT blacklists for the Deceiver sentries and Superfluity now apply once instead of re-running constantly. (27-11-2026)
 
 - Dungeon LOL only disables the Prepull Helper in supported dungeons and restores it on exit if it was previously enabled. (26-11-2026)
-
-- In dungeon lol, shared cooldown pooling and targeting only run in supported dungeons, so the action no longer runs in cities. (24-11-2026)
 
 ### DSR
 
@@ -264,6 +264,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Trials
 
+- Zelenia reactions no longer queue in other duties. (27-11-2026)
+
 - Added Hells' Kier: Suzaku attack draws, spread circles and tower markers, knockback, tankbuster and tether callouts, automatic Arm's Length or Surecast for Ruthless Refrain, boss targeting, an AutoSim forecast and a Scarlet Lady DoT blacklist for Bard, Black Mage and Samurai. (27-11-2026)
 
 - The Bowl of Embers, Bismarck and Seat of Sacrifice AutoSim forecasts no longer keep running after joining a fight late. (27-11-2026)
@@ -282,9 +284,9 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 - Fixed the boss lookup used by encounter-start boss targeting, which could not find the boss before. (22-11-2026)
 
-- Hydra: a Black Mage's Ley Lines and Triplecast toggles are now restored even if Lua is reloaded during the fight. (22-11-2026)
-
 ### Normal raids
+
+- M9N targeting and blacklist-restore reactions no longer queue in other duties. (27-11-2026)
 
 - O12N targeting now runs only when needed, and the E6N and Eden's Promise: Umbra forecasts no longer keep running after a late join. (27-11-2026)
 

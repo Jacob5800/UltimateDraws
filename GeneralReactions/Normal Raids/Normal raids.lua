@@ -3343,14 +3343,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nlocal s=NormalRaidsM9NDotState\nif not s then return end\nlocal p=TensorCore.mGetPlayer()\nif p and p.localmapid==1320 then return end\nif s.entry then\n    s.entry.enabled=s.existed and s.enabled or false\n    s.entry.allowIfTarget=s.allowIfTarget; s.entry.allowSmartDoT=s.allowSmartDoT\n    d(\"[M9N DoTs] Restored prior Flail blacklist settings\")\nend\nNormalRaidsM9NDotState=nil\nself.used=true\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"99cee1ac-ba6d-41e8-a760-dc9e829094af",
+								true,
+							},
+						},
+						name = "M9N BRD - restore Flail blacklist on leaving",
+						uuid = "d45af4f0-04b6-4210-a8bc-463fda86e25d",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return NormalRaidsM9NDotState~=nil",
+						dequeueIfLuaFalse = true,
+						name = "Owned Flail blacklist",
+						uuid = "99cee1ac-ba6d-41e8-a760-dc9e829094af",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "AAC Heavyweight M1/Vamp Fatale/AutoSim",
 			eventType = 11,
 			execute = "local s=NormalRaidsM9NDotState\nif not s then return end\nlocal p=TensorCore.mGetPlayer()\nif p and p.localmapid==1320 then return end\nif s.entry then\n    s.entry.enabled=s.existed and s.enabled or false\n    s.entry.allowIfTarget=s.allowIfTarget; s.entry.allowSmartDoT=s.allowSmartDoT\n    d(\"[M9N DoTs] Restored prior Flail blacklist settings\")\nend\nNormalRaidsM9NDotState=nil\nself.used=true",
-			executeType = 2,
 			name = "M9N BRD - restore Flail blacklist on leaving",
 			uuid = "79f5ee25-51f8-b679-9530-01e051a8f5bd",
 			version = 2,
@@ -3362,14 +3392,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local function run()\nlocal cid=eventArgs.entityContentID\nif cid~=14301 and cid~=14300 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1320 then return end\nif cid==14301 and not eventArgs.isTargetable then data.m9nCoffinReturnPending=true; return end\nif not eventArgs.isTargetable or (cid==14300 and not data.m9nCoffinReturnPending) then return end\nlocal intended=TensorCore.mGetEntity(eventArgs.entityID)\nlocal current=TensorCore.mGetTarget()\nlocal prefix=\"[M9N targeting] \"\nif not intended or not intended.alive or not intended.targetable or not intended.attackable then\n d(prefix..\"blocked: unavailable; intended=\"..tostring(eventArgs.entityID)..\" current=\"..tostring(current and current.id)..\" contentID=\"..tostring(cid)); return\nend\nif cid==14301 then data.m9nCoffinReturnPending=true end\nif current and current.id==intended.id then\n d(prefix..\"already selected=\"..tostring(intended.id))\nelse\n d(prefix..\"request intended=\"..tostring(intended.id)..\" current=\"..tostring(current and current.id)..\" contentID=\"..tostring(cid)..\" inCombat=\"..tostring(p.incombat))\n Player:SetTarget(intended.id)\n local after=TensorCore.mGetTarget()\n d(prefix..\"after request intended=\"..tostring(intended.id)..\" current=\"..tostring(after and after.id)..\" confirmed=\"..tostring(after~=nil and after.id==intended.id))\nend\nif cid==14300 then data.m9nCoffinReturnPending=nil end\nself.used=true\nend\nrun()\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"fa5a212b-cd69-416e-8a5b-1da0d96004c1",
+								true,
+							},
+						},
+						name = "M9N target Coffinmaker and returning boss",
+						uuid = "ca8daa66-dc4e-49fb-b7b3-3f02cf2165cd",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1320 then return false end\nreturn eventArgs.entityContentID==14301 or eventArgs.entityContentID==14300",
+						dequeueIfLuaFalse = true,
+						name = "Coffinmaker or boss",
+						uuid = "fa5a212b-cd69-416e-8a5b-1da0d96004c1",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "AAC Heavyweight M1/Vamp Fatale/AutoSim",
 			eventType = 26,
 			execute = "local cid=eventArgs.entityContentID\nif cid~=14301 and cid~=14300 then return end\nlocal p=TensorCore.mGetPlayer()\nif not p or p.localmapid~=1320 then return end\nif cid==14301 and not eventArgs.isTargetable then data.m9nCoffinReturnPending=true; return end\nif not eventArgs.isTargetable or (cid==14300 and not data.m9nCoffinReturnPending) then return end\nlocal intended=TensorCore.mGetEntity(eventArgs.entityID)\nlocal current=TensorCore.mGetTarget()\nlocal prefix=\"[M9N targeting] \"\nif not intended or not intended.alive or not intended.targetable or not intended.attackable then\n d(prefix..\"blocked: unavailable; intended=\"..tostring(eventArgs.entityID)..\" current=\"..tostring(current and current.id)..\" contentID=\"..tostring(cid)); return\nend\nif cid==14301 then data.m9nCoffinReturnPending=true end\nif current and current.id==intended.id then\n d(prefix..\"already selected=\"..tostring(intended.id))\nelse\n d(prefix..\"request intended=\"..tostring(intended.id)..\" current=\"..tostring(current and current.id)..\" contentID=\"..tostring(cid)..\" inCombat=\"..tostring(p.incombat))\n Player:SetTarget(intended.id)\n local after=TensorCore.mGetTarget()\n d(prefix..\"after request intended=\"..tostring(intended.id)..\" current=\"..tostring(after and after.id)..\" confirmed=\"..tostring(after~=nil and after.id==intended.id))\nend\nif cid==14300 then data.m9nCoffinReturnPending=nil end\nself.used=true",
-			executeType = 2,
 			name = "M9N target Coffinmaker and returning boss",
 			uuid = "38cff9bd-a613-fcf2-b94b-2944c35c945e",
 			version = 2,
