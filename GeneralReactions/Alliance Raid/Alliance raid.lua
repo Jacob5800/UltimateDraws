@@ -19942,6 +19942,104 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "self.used=true\n-- Energy Bomb orbs from the trash flyers: 'Small Flyer' (9136) with model 11385.\n-- They burst on contact (hits logged 1.0 to 1.8 away); radius 2 like the first boss orbs\nlocal d\nfor id,orb in pairs(EntityList(\"contentid=9136\") or {}) do\n local p=orb.pos\n if p and not (data.cfOrbDone and data.cfOrbDone[id]) and Argus.getEntityModel(id)==11385 and Argus.isEntityVisible(id) then\n  d=d or TensorCore.getStaticDrawer(0x703333FF,2)\n  d:addCircle(p.x,p.y,p.z,2)\n end\nend",
+						conditions = 
+						{
+							
+							{
+								"13604ca4-c7ba-7951-a6d3-11e17d33fdc9",
+								true,
+							},
+						},
+						name = "Red ring on trash orbs",
+						uuid = "595db992-4e5c-a179-a258-33eaff1b7ccb",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==882)",
+						dequeueIfLuaFalse = true,
+						name = "In the Copied Factory",
+						uuid = "13604ca4-c7ba-7951-a6d3-11e17d33fdc9",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 12,
+			name = "[Copied Factory] Small Flyer Energy Bomb orb circles",
+			timeout = 1,
+			uuid = "eafa1992-3cac-d7dc-acfc-c42ee8a023e2",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "-- the burst orb stays listed as visible, so stop drawing it\ndata.cfOrbDone=data.cfOrbDone or {}\ndata.cfOrbDone[eventArgs.entityID]=true\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"8055eaf6-6d06-30de-b6d3-fc84a8117717",
+								true,
+							},
+						},
+						name = "Forget burst orb",
+						uuid = "1d5939f5-e6c3-a6b7-aefd-957e4cde6465",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nreturn not not (p and p.localmapid==882 and eventArgs.spellID==18717)",
+						dequeueIfLuaFalse = true,
+						name = "Orb burst",
+						uuid = "8055eaf6-6d06-30de-b6d3-fc84a8117717",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "The Copied Factory/Draws",
+			eventType = 2,
+			name = "[Copied Factory] Small Flyer Energy Bomb burst",
+			timeout = 1,
+			uuid = "d59ad57d-5f36-53e9-b30c-64da6ec23a68",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "The Copied Factory",
 			name = "AutoSim",
 			uuid = "40f1e247-388a-0b27-8e5a-04e3a255b655",

@@ -242,6 +242,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- Added red rings around the trash flyers' energy orbs in The Copied Factory. (27-11-2026)
+
 - Added an optional green safe area for the airdrop circles in The Copied Factory: tick "Airdrops: green safe area" in the new Copied Factory settings window (off by default). (27-11-2026)
 
 - The alliance raid profile now disables Prepull Helper only inside alliance raids, instead of everywhere. (27-11-2026)
@@ -259,8 +261,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Fixed Xun-Zi and Meng-Zi's Deploy Armaments in The Tower at Paradigm's Breach marking safe ground red (up to the whole arena): only the lines that deal damage are drawn now. (26-11-2026)
 
 - Added an optional green safe area for the Red Girl's Diffuse Energy cone sequence in The Tower at Paradigm's Breach: tick "Red Girl cones: green safe area" in the Paradigm's Breach settings window (off by default). (26-11-2026)
-
-- Fixed the Red Girl's Point lances green safe areas in The Tower at Paradigm's Breach stopping short of the barrier walls. (26-11-2026)
 
 ### Trials
 
