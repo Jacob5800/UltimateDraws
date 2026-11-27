@@ -134,6 +134,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### DSR
 
+- Added an optional P6 setting that stops actions and movement for the Pyretic from the fire debuff and resumes afterwards: "Pyretic: stop actions and movement" (off by default). (27-11-2026)
+
 - Fixed line AoEs being drawn half their length too far forward, the P5 conga spots not showing and the Death of the Heavens knockback spot not appearing. Your Wrath of the Heavens bait cone has a white outline. In P6, the first breath shows a fire and ice pair in green and a wrong mix in red, with cones and player rings limited to an adjustable range. P6 line AoEs stay inside the arena and darken until they hit, and Nidhogg's lane shows early on the first Hallowed Wings. Added an optional Akh Morn green safe area (off by default). Debug labels use readable names. (27-11-2026)
 
 - Removed the P5 behind-boss tank cleave draw and callout. P5 Death of the Heavens marks the warrior to face. With configured conga prepositions on, all eight conga spots show their role labels with your own spot in green. P6 breath cones show fire in green and ice in blue, and your pair partner's cone is now visible; standing in another player's cone turns it and yours red. (27-11-2026)
@@ -151,8 +153,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Removed raidwide mitigation callouts, including Ultimate End, and raidwide countdowns. Removed the Nidhogg enrage callout and countdown. Removed the Heal Haurchefant – Damage Spear callout and Pierce countdown. Removed lingering Liquid Heaven puddle timers after Wrath of the Heavens. Blue jump guidance shows the nearest available spot earlier and redirects when another player claims it. Removed knockback immunity announcements. Removed the Eyes bleed heal callout and consolidated overlapping blue-orb and Mirage Dive instructions. Simplified the Mirage Dive chain-swap callouts. Added explicit P4 gold and blue orb soak callouts with higher draw priority. Moved P1 beam spread guides one yalm farther out. Corrected the second Dive from Grace drop positions and cleared conga guidance when Doom begins. Added an optional personal Brightwing countdown. Physical ranged get one Head Graze attempt on the second Holiest Hallowing while Adelphel is still casting. Meteor route arrows stay silent so spacing warnings are clear. Added Dive from Grace facing and landing previews with optional facing lock and automatic action stop and resume. Post-Strength cleave draws follow Thordan as he turns. Strength of the Ward calls “Your tower” once, one second before it resolves. (19-11-2026)
 
 - Strength tower reassignment no longer repeats the initial preposition call after a personal tower was established. (17-11-2026)
-
-- “Behind boss - tank cleaves” now calls once per cleave sequence. (17-11-2026)
 
 ### TOP
 
