@@ -16,14 +16,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local settings=AnyoneCore and AnyoneCore.Settings\nif settings and settings.PrepullHelper and settings.PrepullHelper.enabled then\n    settings.PrepullHelper.enabled=false\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"30de5e7e-b3e5-f45b-af12-fc4ce9033efc",
+								true,
+							},
+						},
+						name = "Disable Prepull Helper",
+						uuid = "ebdfff68-6208-852e-9a2c-2a1172c42677",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local map=eventArgs.newMapID\n-- every alliance raid released so far\nlocal released={[174]=true,[372]=true,[151]=true,[508]=true,[556]=true,[627]=true,[734]=true,[776]=true,[826]=true,[882]=true,[917]=true,[966]=true,[1054]=true,[1118]=true,[1178]=true,[1248]=true,[1304]=true,[1368]=true}\nif released[map] then return true end\n-- later raids count once this profile has reactions gated on their map\nif not AllianceRaidProfileMaps then\n    local maps={}\n    local profile=FileLoad(GetLuaModsPath()..[[TensorReactions\\GeneralReactions\\Alliance raid.lua]])\n    for _,r in ipairs(profile or {}) do\n        for _,c in ipairs(r.data and r.data.conditions or {}) do\n            local x=c.data\n            if x.localmapid then maps[x.localmapid]=true end\n            for _,id in ipairs(x.localMapIDList or {}) do maps[id]=true end\n            for id in (x.conditionLua or \"\"):gmatch(\"localmapid%s*[~=]=%s*(%d+)\") do maps[tonumber(id)]=true end\n        end\n    end\n    AllianceRaidProfileMaps=maps\nend\nreturn AllianceRaidProfileMaps[map]==true",
+						dequeueIfLuaFalse = true,
+						name = "Entered an alliance raid",
+						uuid = "30de5e7e-b3e5-f45b-af12-fc4ce9033efc",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "General",
 			eventType = 11,
 			execute = "if AnyoneCore and AnyoneCore.Settings and AnyoneCore.Settings.PrepullHelper then\n    if AnyoneCore.Settings.PrepullHelper.enabled then\n        AnyoneCore.Settings.PrepullHelper.enabled = false\n    end\n    self.used = true\nend",
-			executeType = 2,
 			name = "[AA] Disable Prepull Helper - Zone entry",
 			throttleTime = 1000,
 			uuid = "ed07374b-c4d7-0cc6-b3b5-0612fc74cb2f",
@@ -36,14 +66,44 @@ local tbl =
 		{
 			actions = 
 			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local settings=AnyoneCore and AnyoneCore.Settings\nif settings and settings.PrepullHelper and settings.PrepullHelper.enabled then\n    settings.PrepullHelper.enabled=false\nend\nself.used=true",
+						conditions = 
+						{
+							
+							{
+								"0b9a944f-4e11-0fb4-9968-787aa0a6f346",
+								true,
+							},
+						},
+						name = "Disable Prepull Helper",
+						uuid = "732b4e86-352e-630d-a228-90d1347ea1ad",
+						version = 2.1,
+					},
+				},
 			},
 			conditions = 
 			{
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local p=TensorCore.mGetPlayer()\nif not p then return false end\nlocal map=p.localmapid\n-- every alliance raid released so far\nlocal released={[174]=true,[372]=true,[151]=true,[508]=true,[556]=true,[627]=true,[734]=true,[776]=true,[826]=true,[882]=true,[917]=true,[966]=true,[1054]=true,[1118]=true,[1178]=true,[1248]=true,[1304]=true,[1368]=true}\nif released[map] then return true end\n-- later raids count once this profile has reactions gated on their map\nif not AllianceRaidProfileMaps then\n    local maps={}\n    local profile=FileLoad(GetLuaModsPath()..[[TensorReactions\\GeneralReactions\\Alliance raid.lua]])\n    for _,r in ipairs(profile or {}) do\n        for _,c in ipairs(r.data and r.data.conditions or {}) do\n            local x=c.data\n            if x.localmapid then maps[x.localmapid]=true end\n            for _,id in ipairs(x.localMapIDList or {}) do maps[id]=true end\n            for id in (x.conditionLua or \"\"):gmatch(\"localmapid%s*[~=]=%s*(%d+)\") do maps[tonumber(id)]=true end\n        end\n    end\n    AllianceRaidProfileMaps=maps\nend\nreturn AllianceRaidProfileMaps[map]==true",
+						dequeueIfLuaFalse = true,
+						name = "In an alliance raid",
+						uuid = "0b9a944f-4e11-0fb4-9968-787aa0a6f346",
+						version = 3,
+					},
+				},
 			},
 			displayPath = "General",
 			eventType = 16,
 			execute = "if AnyoneCore and AnyoneCore.Settings and AnyoneCore.Settings.PrepullHelper then\n    if AnyoneCore.Settings.PrepullHelper.enabled then\n        AnyoneCore.Settings.PrepullHelper.enabled = false\n    end\n    self.used = true\nend",
-			executeType = 2,
 			name = "[AA] Disable Prepull Helper - Countdown",
 			uuid = "1e3d22b5-6144-c719-aca0-5754c0218386",
 			version = 2,

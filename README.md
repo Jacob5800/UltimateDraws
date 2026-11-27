@@ -242,6 +242,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Alliance raids
 
+- The alliance raid profile now disables Prepull Helper only inside alliance raids, instead of everywhere. (27-11-2026)
+
 - Many alliance raid reactions for other maps or inactive states no longer wait in the queue. (27-11-2026)
 
 - Added Serial-jointed Command Model draws in The Copied Factory: Energy Bomb orbs, the Energy Assault cone, turret laser lines, dropping orb circles with the next wave previewed, Energy Rings (also added to the Moogle Telegraphs blacklist) and automatic Surecast for Shockwave (casters and healers). (26-11-2026)
@@ -259,8 +261,6 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 - Fixed the Red Girl's Point lances green safe areas in The Tower at Paradigm's Breach stopping short of the barrier walls. (26-11-2026)
 
 - Added Hansel and Gretel's Uneven Footing meteor in The Tower at Paradigm's Breach: the meteor is shown in red, and the safe area outside it, the Breakthrough side cleave and the orbs is shown in green. (26-11-2026)
-
-- Fixed The Compound's Incongruous Spin green safe area flickering in The Puppets' Bunker, and an error that could repeat during the Compound 2P tower and laser previews. (26-11-2026)
 
 ### Trials
 
