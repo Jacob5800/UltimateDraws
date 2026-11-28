@@ -2698,6 +2698,72 @@ local tbl =
 					data = 
 					{
 						aType = "Lua",
+						actionLua = "-- Stronger fill that follows rough ground (ABGR: red, 45% fill).\nEurekaStegodonDrawer = EurekaStegodonDrawer or Argus2.ShapeDrawer:new(nil, nil, 0x730000FF, 0xFF0000FF, 3)\nlocal drawer = EurekaStegodonDrawer\nlocal flags = Argus2.RenderFlags.FLAG_WARP_TERRAIN + Argus2.RenderFlags.FLAG_RENDER_UI\nlocal id = eventArgs.aoeID\nlocal time = (eventArgs.duration + 0.3) * 1000\nlocal x, y, z, h = eventArgs.x, eventArgs.y, eventArgs.z, eventArgs.heading\nif id == 14938 then\n  -- Trunk Tawse: short frontal cone, angle estimated.\n  drawer:addTimedCone(time, x, y, z, 10, math.rad(90), h, 0, false, false, flags)\nelseif id == 14941 then\n  -- Siphon: long narrow cone (angle estimated) that drags you in.\n  drawer:addTimedCone(time, x, y, z, 40, math.rad(45), h, 0, false, false, flags)\n  -- Tusk Butt follows about 2.7s later: 10y, 120 degrees, deadly. Shown early.\n  drawer:addTimedCone((eventArgs.duration + 3) * 1000, x, y, z, 10, math.rad(120), h, 0, false, false, flags)\nelse\n  -- Tusk Charge: the record sits at the destination, so draw back toward the start.\n  drawer:addTimedRect(time, x, y, z, eventArgs.aoeLength, 10, h + math.pi, 0, false, false, flags)\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"290130c1-2147-3503-a25d-93f46bf59a9d",
+								true,
+							},
+							
+							{
+								"20e3e188-ce86-1662-a863-509ad9aeefe7",
+								true,
+							},
+						},
+						name = "Draw Stegodon shape",
+						uuid = "2e088438-8ea8-cbb2-8066-f6aa3eff3cfe",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 827,
+						name = "In Hydatos",
+						uuid = "290130c1-2147-3503-a25d-93f46bf59a9d",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local id = eventArgs.aoeID\nreturn id == 14938 or id == 14939 or id == 14940 or id == 14941 or id == 14945",
+						dequeueIfLuaFalse = true,
+						name = "Stegodon AoE",
+						uuid = "20e3e188-ce86-1662-a863-509ad9aeefe7",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Eureka Hydatos",
+			eventType = 18,
+			name = "[Hydatos] Stegodon - AoE draws",
+			uuid = "7b7a803a-7b50-2697-8996-7a231a22a15e",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
 						actionLua = "local s = EurekaNMEcho\nif s then\n  -- Map sheet row for each Eureka territory, needed to place the map flag.\n  local mapRow = { [732] = 414, [763] = 467, [795] = 484, [827] = 515 }\n  for _, nm in ipairs(s.pending) do\n    local text = nm.text\n    -- <flag> turns into a clickable link to the flag just placed on the NM.\n    if nm.x and nm.z and SetMapFlagPosition(mapRow[s.map], s.map, nm.x, nm.z) then\n      text = text .. ' <flag>'\n    end\n    SendTextCommand('/e ' .. text)\n  end\n  s.pending = {}\nend\nself.used = true\n",
 						conditions = 
 						{

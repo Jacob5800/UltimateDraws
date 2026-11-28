@@ -18,6 +18,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Eureka
 
+- Hydatos Stegodon: added Tusk Charge lines, Trunk Tawse and Siphon cones and an early Tusk Butt warning, with a stronger fill for rough ground. (28-11-2026)
+
 - Penthesilea: added a "Move away from boss" callout for Center of Convection and a circle for the first Rain of Ire. (28-11-2026)
 
 - Ying-Yang: added draws for Sadistic Attack (pointing where it really hits), Ravening Shadow and the Dark circles, and hid Moogle's telegraphs for the first two. (28-11-2026)
