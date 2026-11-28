@@ -2107,6 +2107,137 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "-- The AoE record's heading is the real direction: Sadistic Attack points 75 degrees off the boss's facing.\nlocal id = eventArgs.aoeID\nlocal time = (eventArgs.duration + 0.3) * 1000\nlocal drawer = TensorCore.getMoogleDrawer()\nlocal x, y, z = eventArgs.x, eventArgs.y, eventArgs.z\nif id == 13322 then\n  -- Sadistic Attack: wide cone; logged targets lie within 99 degrees of its centre.\n  drawer:addTimedCone(time, x, y, z, 33, math.rad(210), eventArgs.heading, 0, false)\nelseif id == 13325 then\n  -- Ravening Shadow: donut; nobody closer than 9y was hit.\n  drawer:addTimedDonut(time, x, y, z, 8, 30, 0, false)\nelse\n  -- Dark: ground circles.\n  drawer:addTimedCircle(time, x, y, z, 5, 0, false)\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"fa6dc02a-8c65-b53c-8ca1-b10ea98bec7b",
+								true,
+							},
+							
+							{
+								"f41ba8da-11a7-5307-b376-543b04c04827",
+								true,
+							},
+						},
+						name = "Draw Ying-Yang shape",
+						uuid = "4476c36d-32f3-7f9f-b8ed-743f78a70257",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 795,
+						name = "In Pyros",
+						uuid = "fa6dc02a-8c65-b53c-8ca1-b10ea98bec7b",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local id = eventArgs.aoeID\nreturn id == 13322 or id == 13325 or id == 13350 or id == 13351",
+						dequeueIfLuaFalse = true,
+						name = "Ying-Yang AoE",
+						uuid = "f41ba8da-11a7-5307-b376-543b04c04827",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Eureka Pyros",
+			eventType = 18,
+			name = "[Pyros] Ying-Yang - AoE draws",
+			uuid = "f8795cfe-f2f6-d4a0-a149-d32c06424176",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "local list = MoogleTelegraphs and MoogleTelegraphs.Settings and MoogleTelegraphs.Settings.aoeIDUserBlacklist\nif list then\n  local source = 'Eureka Reactions (EU Ultimate)'\n  for id, label in pairs({ [13322] = 'Sadistic Attack', [13325] = 'Ravening Shadow' }) do\n    list[id] = { label = label, source = source }\n  end\nend\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"05cbd15d-b599-9c20-b74a-ac5041f84c6e",
+								true,
+							},
+							
+							{
+								"54640460-6be4-ac36-aece-46609cac02ab",
+								true,
+							},
+						},
+						name = "Write blacklist entries",
+						uuid = "bad58b72-9081-46b4-9dda-e90c3dbbdbd5",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 795,
+						name = "In Pyros",
+						uuid = "05cbd15d-b599-9c20-b74a-ac5041f84c6e",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "local list = MoogleTelegraphs and MoogleTelegraphs.Settings and MoogleTelegraphs.Settings.aoeIDUserBlacklist\nif not list then return false end\nlocal source = 'Eureka Reactions (EU Ultimate)'\nfor id, label in pairs({ [13322] = 'Sadistic Attack', [13325] = 'Ravening Shadow' }) do\n  local entry = list[id]\n  if not entry or entry.label ~= label or entry.source ~= source then return true end\nend\nreturn false",
+						name = "Entry missing",
+						uuid = "54640460-6be4-ac36-aece-46609cac02ab",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Eureka Pyros",
+			name = "[Utility] Eureka - Moogle Telegraphs blacklist",
+			throttleTime = 5000,
+			uuid = "a92cf52a-4806-9109-83ae-4858b0c15489",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "",
 			name = "Eureka Hydatos",
 			uuid = "07a366ce-6dce-7b43-9a24-bf2fd4aaf496",
