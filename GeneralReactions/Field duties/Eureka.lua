@@ -2238,6 +2238,141 @@ local tbl =
 	{
 		data = 
 		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Alert",
+						alertDuration = 3000,
+						alertPriority = 3,
+						alertTTS = true,
+						alertText = "Move away from boss",
+						conditions = 
+						{
+							
+							{
+								"56be58aa-295f-eaf9-872f-5d484d31f616",
+								true,
+							},
+							
+							{
+								"d4d30fe4-e7eb-b203-93cf-5ce6e894d11e",
+								true,
+							},
+						},
+						uuid = "bad415d5-be40-6519-bbd1-6c789447aef3",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 795,
+						name = "In Pyros",
+						uuid = "56be58aa-295f-eaf9-872f-5d484d31f616",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Event",
+						dequeueIfLuaFalse = true,
+						eventArgType = 2,
+						eventSpellID = 13278,
+						name = "Center of Convection",
+						uuid = "d4d30fe4-e7eb-b203-93cf-5ce6e894d11e",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Eureka Pyros",
+			eventType = 3,
+			name = "[Pyros] Penthesilea - Center of Convection callout",
+			uuid = "8911bd2a-9480-498e-a85a-b6705ad17c14",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
+			actions = 
+			{
+				
+				{
+					data = 
+					{
+						aType = "Lua",
+						actionLua = "-- Untelegraphed 8y circle at the AoE record's position; no logged hits yet.\nTensorCore.getMoogleDrawer():addTimedCircle((eventArgs.duration + 0.3) * 1000, eventArgs.x, eventArgs.y, eventArgs.z, 8, 0, false)\nself.used = true\n",
+						conditions = 
+						{
+							
+							{
+								"634cac99-f5bf-c3a5-9c7e-ae6729fc0617",
+								true,
+							},
+							
+							{
+								"e7f60f93-9e74-705c-93cb-ea1a5077b9f1",
+								true,
+							},
+						},
+						name = "Draw 8y circle",
+						uuid = "b977ff09-2270-2076-ab59-2685c201f20b",
+						version = 2.1,
+					},
+				},
+			},
+			conditions = 
+			{
+				
+				{
+					data = 
+					{
+						category = "Self",
+						conditionType = 8,
+						dequeueIfLuaFalse = true,
+						localmapid = 795,
+						name = "In Pyros",
+						uuid = "634cac99-f5bf-c3a5-9c7e-ae6729fc0617",
+						version = 3,
+					},
+				},
+				
+				{
+					data = 
+					{
+						category = "Lua",
+						conditionLua = "return eventArgs.aoeID == 13280",
+						dequeueIfLuaFalse = true,
+						name = "Rain of Ire opener",
+						uuid = "e7f60f93-9e74-705c-93cb-ea1a5077b9f1",
+						version = 3,
+					},
+				},
+			},
+			displayPath = "Eureka Pyros",
+			eventType = 18,
+			name = "[Pyros] Penthesilea - Rain of Ire circle",
+			uuid = "cbdbdeb9-1204-1d77-944c-4818aac4878b",
+			version = 2,
+		},
+	},
+	
+	{
+		data = 
+		{
 			displayPath = "",
 			name = "Eureka Hydatos",
 			uuid = "07a366ce-6dce-7b43-9a24-bf2fd4aaf496",

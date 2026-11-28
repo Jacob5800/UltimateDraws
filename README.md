@@ -18,6 +18,8 @@ TEA: [AA AutoSim](TimelineReactions/TEA/%5BAA%5D%20Autosim%20-%20TEA.lua)
 
 ### Eureka
 
+- Penthesilea: added a "Move away from boss" callout for Center of Convection and a circle for the first Rain of Ire. (28-11-2026)
+
 - Ying-Yang: added draws for Sadistic Attack (pointing where it really hits), Ravening Shadow and the Dark circles, and hid Moogle's telegraphs for the first two. (28-11-2026)
 
 - Published the Eureka general profile under Field duties: a weather and night forecast window with NM respawn timers (hide it with its button or `/e forecast`), a chat message with a clickable map flag when an NM pops, Pyros draws and knockback immunity for Dux, Penthesilea, Graffiacane and other NMs, a Pyros adds DoT blacklist, and bunny chest, fairy and dragon helpers. (28-11-2026)
